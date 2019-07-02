@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -17,16 +17,17 @@ lastupdated: "2019-04-18"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
-# 관리 Istio 추가 기능 사용(베타)
+# 관리 Istio 추가 기능(베타) 사용
 {: #istio}
 
 Istio on {{site.data.keyword.containerlong}}는 Istio의 완벽한 설치, Istio 제어 플레인 컴포넌트의 자동 업데이트 및 라이프사이클 관리, 플랫폼 로깅 및 모니터링 도구와의 통합을 제공합니다.
 {: shortdesc}
 
-한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. Istio on {{site.data.keyword.containerlong_notm}}는 관리 추가 기능으로 제공되므로 {{site.data.keyword.Bluemix_notm}}는 모든 Istio 컴포넌트를 최신 상태로 유지합니다.
+한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. Istio on {{site.data.keyword.containerlong_notm}}는 관리 추가 기능으로 제공되므로 {{site.data.keyword.Bluemix_notm}}에서 사용자의 모든 Istio 컴포넌트를 최신 상태로 유지합니다. 
 
 ## Istio on {{site.data.keyword.containerlong_notm}} 이해
 {: #istio_ov}
@@ -37,10 +38,10 @@ Istio on {{site.data.keyword.containerlong}}는 Istio의 완벽한 설치, Istio
 [Istio ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud/info/istio)는 {{site.data.keyword.containerlong_notm}}에서 클라우드 플랫폼(예: Kubernetes)의 마이크로서비스를 연결, 보호, 제어 및 관찰하기 위한 개방형 서비스 메시 플랫폼입니다.
 {:shortdesc}
 
-모노리스 애플리케이션을 분산된 마이크로서비스 아키텍처로 전환할 때, 서비스의 트래픽을 제어하고, 서비스의 다크 런치(Dark Launch) 및 Canary 롤아웃을 수행하고, 장애를 처리하고, 서비스 통신을 보호하며, 서비스를 관찰하며 서비스 전체에서 일관된 액세스 정책을 적용하는 방법과 같은 새로운 어려움이 발생합니다. 이러한 어려움을 해결하기 위해 서비스 메시를 활용할 수 있습니다. 서비스 메시는 마이크로서비스 사이의 연결을 연결, 관찰, 보호 및 제어하기 위한 투명하고 언어 독립적인 네트워크를 제공합니다. Istio는 네트워크 트래픽 관리하고, 마이크로서비스에서 로드 밸런싱하고, 액세스 정책을 적용하고, 서비스 ID를 확인할 수 있도록 하여 서비스 메시에 대한 인사이트와 제어 기능을 제공합니다.
+모놀리스(monolith) 애플리케이션을 분산된 마이크로서비스 아키텍처로 전환할 때는 서비스의 트래픽을 제어하고, 서비스의 다크 런치(Dark Launch) 및 Canary 롤아웃을 수행하고, 장애를 처리하고, 서비스 통신을 보호하고, 서비스를 관찰하고, 서비스 전체에서 일관된 액세스 정책을 적용하는 등의 작업을 어떻게 수행해야 하는가와 같은 새로운 어려움이 발생합니다. 이러한 어려움을 해결하기 위해 서비스 메시를 활용할 수 있습니다. 서비스 메시는 마이크로서비스 사이의 연결을 연결, 관찰, 보호 및 제어하기 위한 투명하고 언어 독립적인 네트워크를 제공합니다. Istio는 사용자가 네트워크 트래픽을 관리하고, 마이크로서비스 간에 로드 밸런싱을 수행하고, 액세스 정책을 적용하고, 서비스 ID를 확인하는 등의 작업을 수행할 수 있도록 서비스 메시에 대한 인사이트와 제어 기능을 제공합니다. 
 
-예를 들어, 마이크로서비스 메시에서 Istio를 사용하면 다음과 같은 이점이 있습니다.
-- 클러스터에서 실행 중인 앱에 대한 가시성을 보다 더 확보할 수 있습니다.
+예를 들어, 마이크로서비스 메시에서 Istio를 사용하면 다음과 같은 이점이 있습니다. 
+- 클러스터에서 실행 중인 앱에 대한 가시성을 높일 수 있습니다. 
 - 앱의 Canary 버전을 배치하고 이 앱에 전송되는 트래픽을 제어할 수 있습니다.
 - 마이크로서비스 간에 전송되는 데이터의 자동 암호화를 사용할 수 있습니다.
 - 속도 제한 및 속성 기반 화이트리스트와 블랙리스트 정책을 적용할 수 있습니다.
@@ -57,18 +58,16 @@ Istio on {{site.data.keyword.containerlong_notm}}는 Kubernetes 클러스터와 
 {: note}
 
 **내 클러스터에서 어떻게 보입니까?**</br>
-Istio 추가 기능을 설치하면 Istio 제어 및 데이터 플레인은 클러스터가 이미 연결되어 있는 VLAN을 사용합니다. 구성 트래픽은 클러스터 내 사설 네트워크를 통해 이동되며 방화벽에서 추가 포트 또는 IP 주소를 열 필요가 없습니다. Istio 게이트웨이를 사용하여 Istio 관리 앱을 노출하는 경우에는 앱에 대한 외부 트래픽 요청이 공용 VLAN을 통해 이동합니다.
+Istio 추가 기능을 설치하면 Istio 제어 및 데이터 플레인은 클러스터가 이미 연결되어 있는 VLAN을 사용합니다. 구성 트래픽은 클러스터 내 사설 네트워크를 통해 이동되며 방화벽에서 추가 포트 또는 IP 주소를 열 필요가 없습니다. Istio 게이트웨이를 사용하여 Istio 관리 앱을 노출하는 경우 앱에 대한 외부 트래픽 요청은 공용 VLAN을 통해 플로우됩니다. 
 
 **업데이트 프로세스는 어떻게 작동합니까?**</br>
-관리 추가 기능으로 제공되는 Istio 버전은 {{site.data.keyword.Bluemix_notm}}에 의해 테스트되고 {{site.data.keyword.containerlong_notm}}에서의 사용을 승인받았습니다. Istio 컴포넌트를 {{site.data.keyword.containerlong_notm}}에서 지원되는 최신 Istio 버전으로 업데이트하기 위해 [관리 추가 기능 업데이트](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)의 단계를 따를 수 있습니다.   
+관리 추가 기능으로 제공되는 Istio 버전은 {{site.data.keyword.Bluemix_notm}}에 의해 테스트되고 {{site.data.keyword.containerlong_notm}}에서의 사용을 승인받았습니다. Istio 컴포넌트를 {{site.data.keyword.containerlong_notm}}에서 지원되는 최신 Istio 버전으로 업데이트하기 위해 [관리 추가 기능 업데이트](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)의 단계를 따를 수 있습니다.  
 
 Istio의 최신 버전을 사용하거나 Istio 설치를 사용자 정의해야 하는 경우에는 [{{site.data.keyword.Bluemix_notm}} 튜토리얼로 빠른 시작 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/)의 다음 단계를 수행하여 Istio의 오픈 소스 버전을 설치할 수 있습니다.
 {: tip}
 
 **제한사항이 있습니까?** </br>
-다음과 같은 경우에는 클러스터에서 관리 Istio 추가 기능을 사용할 수 없습니다. 
-* 클러스터가 사설 VLAN에만 연결되어 있습니다. 
-* 클러스터에 [컨테이너 이미지 보안 적용기 허가 제어기](/docs/services/Registry?topic=registry-security_enforce#security_enforce)를 설치했습니다.
+클러스터에 [컨테이너 이미지 보안 적용기 허가 제어기](/docs/services/Registry?topic=registry-security_enforce#security_enforce)를 설치한 경우에는 클러스터에서 관리 Istio 추가 기능을 사용으로 설정할 수 없습니다. 
 
 <br />
 
@@ -104,9 +103,6 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-`istio` 관리 추가 기능을 무료 클러스터에 설치할 수 있습니다. 또한 `istio-extras` 및 `istio-sample-bookinfo` 추가 기능을 설치하려면 두 개 이상의 작업자 노드가 있는 표준 클러스터를 작성하십시오.
-{: note}
-
 <br />
 
 
@@ -117,10 +113,10 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 {: shortdesc}
 
 **시작하기 전에**</br>
-* {{site.data.keyword.containerlong_notm}}에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
-* [코어가 4개이고 메모리가 16GB(`b3c.4x16`) 이상인 작업자 노드가 3개 이상 있는 클러스터를 작성하십시오](/docs/containers?topic=containers-clusters#clusters_cli). 모든 작업자 노드는 Kubernetes 버전 1.11 이상을 실행해야 합니다.
+* {{site.data.keyword.containerlong_notm}}에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있는지 확인하십시오. 
+* [코어가 4개이고 메모리가 16GB 이상인 작업자 노드가 3개 이상 있는 표준 클러스터(`b3c.4x16`)를 작성하거나 그러한 기존 표준 클러스터를 사용](/docs/containers?topic=containers-clusters#clusters_ui)하십시오. 또한 해당 클러스터 및 작업자 노드는 지원되는 최소 Kubernetes 버전 이상을 실행해야 하며, 이는 `ibmcloud ks addon-versions --addon istio`를 실행하여 검토할 수 있습니다. 
 * [CLI를 클러스터에 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
-* 기존 클러스터를 사용 중이거나 이전에 IBM Helm 차트를 사용하거나 다른 방법을 통해 클러스터에 Istio를 설치한 경우, [Istio 설치를 정리](#istio_uninstall_other)하십시오.
+* 기존 클러스터를 사용하며 이전에 IBM Helm 차트를 사용하거나 다른 방법을 통해 클러스터에 Istio를 설치한 경우에는 [해당 Istio 설치를 제거](#istio_uninstall_other)하십시오. 
 
 ### CLI에 관리 Istio 추가 기능 설치
 {: #istio_install_cli}
@@ -152,9 +148,9 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   출력 예:
   ```
   Name                      Version
-  istio                     1.1.2
-  istio-extras              1.1.2
-  istio-sample-bookinfo     1.1.2
+  istio                     1.1.5
+  istio-extras              1.1.5
+  istio-sample-bookinfo     1.1.5
   ```
   {: screen}
 
@@ -277,48 +273,28 @@ BookInfo 추가 기능(`istio-sample-bookinfo`)은 [Istio의 BookInfo 샘플 애
 * `v2`는 `ratings` 마이크로서비스를 호출하고 등급을 1-5개의 검은색 별로 표시합니다.
 * `v3`은 `ratings` 마이크로서비스를 호출하고 등급을 1-5개의 빨간색 별로 표시합니다.
 
-이러한 각 마이크로서비스에 대한 배치 YAML은 Envoy 사이드카 프록시가 배치되기 전에 마이크로서비스의 팟(Pod)에 컨테이너로 사전에 삽입되도록 수정되었습니다. 수동 사이드카 인젝션에 대한 자세한 정보는 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)를 참조하십시오. BookInfo 앱은 Istio 게이트웨이의 공용 IP Ingress 주소에도 이미 노출되어 있습니다. BookInfo 앱이 시작하는 데 도움이 될 수 있지만, 해당 앱은 프로덕션용이 아님을 유의하십시오.
+이러한 각 마이크로서비스에 대한 배치 YAML은 Envoy 사이드카 프록시가 배치되기 전에 마이크로서비스의 팟(Pod)에 컨테이너로 사전에 삽입되도록 수정되었습니다. 수동 사이드카 인젝션에 대한 자세한 정보는 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)를 참조하십시오. BookInfo 앱은 Istio 게이트웨이의 공용 IP Ingress 주소에도 이미 노출되어 있습니다. BookInfo 앱이 시작하는 데 도움을 줄 수는 있지만, 이 앱은 프로덕션용이 아닙니다. 
 
 시작하기 전에 클러스터에 [`istio`, `istio-extras` 및 `istio-sample-bookinfo` 관리 추가 기능을 설치](#istio_install)하십시오.
 
 1. 클러스터에 대한 공용 주소를 가져오십시오.
-  * 표준 클러스터:
-      2. ingress 호스트를 설정하십시오.
-        ```
+  1. ingress 호스트를 설정하십시오.
+    ```
             export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        ```
-        {: pre}
+    ```
+    {: pre}
 
-      3. ingress 포트를 설정하십시오.
-        ```
+  2. ingress 포트를 설정하십시오.
+    ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-        ```
-        {: pre}
+    ```
+    {: pre}
 
-      4. ingress 호스트 및 포트를 사용하는 `GATEWAY_URL` 환경 변수를 작성하십시오.
-         ```
+  3. ingress 호스트 및 포트를 사용하는 `GATEWAY_URL` 환경 변수를 작성하십시오.
+     ```
            export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
-
-  * 무료 클러스터:
-      1. ingress 호스트를 설정하십시오. 이 호스트는 클러스터에 있는 작업자 노드의 공인 IP 주소입니다.
-        ```
-        export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-        ```
-        {: pre}
-
-      2. ingress 포트를 설정하십시오.
-        ```
-        export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-        ```
-        {: pre}
-
-      3. 작업자 노드 및 NodePort의 공인 IP 주소를 사용하는 GATEWAY_URL 환경 변수를 작성하십시오.
-         ```
-           export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
+     ```
+     {: pre}
 
 2. `GATEWAY_URL` 변수의 curl을 수행하여 BookInfo 앱이 실행 중인지 확인하십시오. `200` 응답은 BookInfo 앱이 Istio에서 적절하게 실행 중임을 의미합니다.
    ```
@@ -340,7 +316,7 @@ BookInfo 추가 기능(`istio-sample-bookinfo`)은 [Istio의 BookInfo 샘플 애
     ```
     {: pre}
 
-4. 페이지를 여러 번 새로 고쳐보십시오. 검토 섹션의 다른 버전은 빨간색 별, 검은색 별, 별 없음을 통해 라운드 로빈됩니다.
+4. 페이지를 여러 번 새로 고쳐보십시오. 빨간색 별이 있거나, 검은색 별이 있거나, 별이 없는 등 다양한 버전의 검토 섹션이 표시됩니다. 
 
 ### 작동 방법 이해
 {: #istio_bookinfo_understanding}
@@ -350,7 +326,7 @@ BookInfo 샘플은 Istio의 트래픽 관리 컴포넌트가 함께 작동하여
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>`bookinfo-gateway` [게이트웨이 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)는 BookInfo에 대한 HTTP/TCP 트래픽의 시작점 역할을 하는 로드 밸런서(`istio-system` 네임스페이스의 `istio-ingressgateway` 서비스)에 대해 설명합니다. Istio는 게이트웨이 구성 파일에 정의된 포트에서 Istio 관리 앱에 대한 수신 요청을 청취하도록 로드 밸런서를 구성합니다.
+<dd>`bookinfo-gateway` [게이트웨이 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)는 BookInfo에 대한 HTTP/TCP 트래픽의 Ingress 시작점 역할을 하는 로드 밸런서(`istio-system` 네임스페이스의 `istio-ingressgateway` 서비스)에 대해 설명합니다. Istio는 게이트웨이 구성 파일에 정의된 포트에서 Istio 관리 앱에 대한 수신 요청을 청취하도록 로드 밸런서를 구성합니다.
 </br></br>BookInfo 게이트웨이에 대한 구성 파일을 보려면 다음 명령을 실행하십시오.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -375,7 +351,7 @@ BookInfo 샘플은 Istio의 트래픽 관리 컴포넌트가 함께 작동하여
 ## Istio 로깅, 모니터링, 추적 및 시각화
 {: #istio_health}
 
-Istio on {{site.data.keyword.containerlong_notm}}에서 관리하는 앱을 로그, 모니터, 추적 및 모니터링하려면 `istio-extras` 추가 기능에 설치된 Grafana, Jaeger 및 Kiali 대시보드를 시작하거나 서드파티 서비스로 LogDNA 및 Sysdig를 관리자 노드에 배치할 수 있습니다.
+Istio on {{site.data.keyword.containerlong_notm}}에서 관리하는 앱을 로그하고, 모니터하고, 추적하고 시각화하려는 경우에는 `istio-extras` 추가 기능에 설치된 Grafana, Jaeger 및 Kiali 대시보드를 시작하거나, LogDNA 및 Sysdig를 서드파티 서비스로서 작업자 노드에 배치할 수 있습니다.
 {: shortdesc}
 
 ### Grafana, Jaeger 및 Kiali 대시보드 시작
@@ -396,7 +372,7 @@ Istio extras 추가 기능(`istio-extras`)은 [Grafana ![외부 링크 아이콘
 2. Istio Grafana 대시보드를 열려면 다음 URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard로 이동하십시오. [BookInfo 추가 기능](#istio_bookinfo)을 설치한 경우 Istio 대시보드에는 사용자가 제품 페이지를 몇 번 새로 고칠 때 생성한 트래픽에 대한 메트릭이 표시됩니다. Istio Grafana 대시보드 사용에 대한 자세한 정보는 Istio 오픈 소스 문서에서 [Istio 대시보드 보기 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/)를 참조하십시오.
 
 **Jaeger**</br>
-1. 기본적으로, 100개의 요청마다 1개의 추적 범위를 생성하며, 여기서 샘플링 비율은 1%입니다. 첫 번째 추적이 표시되기 전에 최소 100개의 요청을 전송해야 합니다. 100개의 요청을 [BookInfo 추가 기능](#istio_bookinfo)의 `productpage` 서비스로 전송하려면 다음 명령을 실행하십시오. 
+1. 기본적으로, 100개의 요청마다 1개의 추적 범위를 생성하며, 여기서 샘플링 비율은 1%입니다. 첫 번째 추적이 표시되기 전에 최소 100개의 요청을 전송해야 합니다. 100개의 요청을 [BookInfo 추가 기능](#istio_bookinfo)의 `productpage` 서비스로 전송하려면 다음 명령을 실행하십시오.
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
   ```
@@ -442,7 +418,7 @@ Istio extras 추가 기능(`istio-extras`)은 [Grafana ![외부 링크 아이콘
 메트릭을 {{site.data.keyword.monitoringlong}}에 전달할 수 있도록 Sysdig를 작업자 노드에 배치하여 Istio 관리 앱의 성능 및 상태에 대한 운영상의 가시성을 확보하십시오.
 {: shortdesc}
 
-Istio on {{site.data.keyword.containerlong_notm}}를 사용하면 관리 `istio` 추가 기능에서 Prometheus를 클러스터에 설치합니다. Prometheus가 모든 텔레메트리 데이터를 수집할 수 있도록 클러스터의 `istio-mixer-telemetry` 팟(Pod)은 Prometheus 엔드포인트로 어노테이션이 작성됩니다. SysDig 에이전트를 클러스터의 모든 작업자 노드에 배치하면 SysDig는 이러한 Prometheus 엔드포인트에서 데이터를 발견하고 스크랩하여 {{site.data.keyword.Bluemix_notm}} 모니터링 대시보드에 표시하도록 자동으로 활성화됩니다.
+Istio on {{site.data.keyword.containerlong_notm}}를 사용하면 관리 `istio` 추가 기능에서 Prometheus를 클러스터에 설치합니다. Prometheus가 팟(Pod)에 대한 모든 텔레메트리 데이터를 수집할 수 있도록 클러스터의 `istio-mixer-telemetry` 팟(Pod)에 Prometheus 엔드포인트로 어노테이션이 작성됩니다. SysDig 에이전트를 클러스터의 모든 작업자 노드에 배치하면 SysDig는 이러한 Prometheus 엔드포인트에서 데이터를 발견하고 스크랩하여 {{site.data.keyword.Bluemix_notm}} 모니터링 대시보드에 표시하도록 자동으로 활성화됩니다.
 
 Prometheus 작업이 모두 완료되었으므로 Sysdig를 클러스터에 배치하기만 하면 됩니다.
 
@@ -454,7 +430,7 @@ Prometheus 작업이 모두 완료되었으므로 Sysdig를 클러스터에 배�
 
 4. `Istio`를 검색하고 Sysdig의 사전 정의된 Istio 대시보드 중 하나를 선택하십시오.
 
-메트릭 및 대시보드를 참조하고 Istio 내부 컴포넌트를 모니터링하고 Istio A/B 배치와 canary 배치를 모니터링하는 방법에 대한 자세한 정보는 Sysdig 블로그 게시물 [Istio, Kubernetes 서비스 메시 모니터링 방법 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://sysdig.com/blog/monitor-istio/)을 살펴보십시오. "Istio 모니터링: 참조 메트릭 및 대시보드"라는 섹션을 찾으십시오.
+메트릭 및 대시보드를 참조하고, Istio 내부 컴포넌트를 모니터링하고, Istio A/B 배치 및 Canary 배치를 모니터링하는 데 대한 자세한 정보는 [How to monitor Istio, the Kubernetes service mesh ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://sysdig.com/blog/monitor-istio/)를 참조하십시오. "Monitoring Istio: reference metrics and dashboards"라는 섹션을 찾으십시오. 
 
 <br />
 
@@ -470,7 +446,7 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
 ### 자동 사이드카 인젝션 사용
 {: #istio_sidecar_automatic}
 
-자동 사이드카 인젝션이 사용 가능한 경우, 네임스페이스는 새 배치를 청취하고 앱 팟(Pod)이 Envoy 프록시 사이드카 컨테이너로 작성되도록 팟(Pod) 템플리트 스펙을 자동으로 수정합니다. 해당 네임스페이스에 Istio와 통합할 여러 앱을 배치할 계획이라면 네임스페이스에 대해 자동 사이드카 인젝션을 사용할 수 있습니다. Istio 관리 추가 기능에서는 기본적으로 자동 사이드카 인젝션이 네임스페이스에 대해 활성화되어 있지 않습니다.
+자동 사이드카 인젝션이 사용 가능한 경우, 네임스페이스는 새 배치를 청취하고 앱 팟(Pod)이 Envoy 프록시 사이드카 컨테이너로 작성되도록 팟(Pod) 템플리트 스펙을 자동으로 수정합니다. 해당 네임스페이스에 Istio와 통합할 여러 앱을 배치할 계획이라면 네임스페이스에 대해 자동 사이드카 인젝션을 사용할 수 있습니다. Istio 관리 추가 기능에서는 기본적으로 모든 네임스페이스에 대해 자동 사이드카 삽입이 사용으로 설정되어 있지 않습니다. 
 
 네임스페이스에 대해 자동 사이드카 인젝션을 사용하려면 다음을 수행하십시오.
 
@@ -486,7 +462,7 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
   ```
   {: pre}
 
-3. 레이블 지정된 네임스페이스에 앱을 배치하거나 이미 네임스페이스에 있는 앱을 다시 배치하십시오.
+3. 레이블 지정된 네임스페이스에 앱을 배치하거나 이미 네임스페이스에 있는 앱을 다시 배치하십시오. 
   * 레이블 지정된 네임스페이스에 앱을 배치하려면 다음을 수행하십시오.
     ```
     kubectl apply <myapp>.yaml --namespace <namespace>
@@ -536,7 +512,7 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
     ```
     {: pre}
 
-앱 컨테이너와 함께 Istio 사이드카 컨테이너가 실행되고 있으므로 이제 앱 팟(Pod)이 Istio 서비스 메시에 통합되었습니다.
+앱 컨테이너와 함께 Istio 사이드카 컨테이너가 실행되고 있으므로 이제 앱 팟(Pod)이 Istio 서비스 메시에 통합되었습니다. 
 
 ### 수동으로 사이드카 삽입
 {: #istio_sidecar_manual}
@@ -547,16 +523,16 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
 
 1. `istioctl` 클라이언트를 다운로드하십시오.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.2 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
   ```
 
 2. Istio 패키지 디렉토리로 이동하십시오.
   ```
-  cd istio-1.1.2
+  cd istio-1.1.5
   ```
   {: pre}
 
-3. Envoy 사이드카를 앱 배치 YAML에 삽입하십시오.
+3. Envoy 사이드카를 앱 배치 YAML에 삽입하십시오. 
   ```
   istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
   ```
@@ -606,7 +582,7 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
     ```
     {: pre}
 
-앱 컨테이너와 함께 Istio 사이드카 컨테이너가 실행되고 있으므로 이제 앱 팟(Pod)이 Istio 서비스 메시에 통합되었습니다.
+앱 컨테이너와 함께 Istio 사이드카 컨테이너가 실행되고 있으므로 이제 앱 팟(Pod)이 Istio 서비스 메시에 통합되었습니다. 
 
 <br />
 
@@ -617,7 +593,7 @@ Istio를 사용하여 사용자 고유의 앱을 관리할 준비가 되셨습�
 [Envoy 프록시 사이드카 인젝션을 설정](#istio_sidecar)하고 앱을 Istio 서비스 메시에 배치하면 IBM 제공 호스트 이름을 사용하여 Istio 관리 앱을 공용 요청에 노출시킬 수 있습니다.
 {: shortdesc}
 
-Istio는 [게이트웨이 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 및 [가상 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)를 사용하여 앱으로 라우팅되는 트래픽 방법을 제어합니다. 게이트웨이는 Istio 관리 앱의 시작점 역할을 하는 로드 밸런서 `istio-ingressgateway`를 구성합니다. 표준 클러스터에서는 DNS 항목 및 호스트 이름으로 `istio-ingressgateway` 로드 밸런서의 외부 IP 주소를 등록하여 Istio 관리 앱을 노출할 수 있습니다. 
+Istio는 [게이트웨이 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 및 [가상 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/)를 사용하여 앱으로 라우팅되는 트래픽 방법을 제어합니다. 게이트웨이는 Istio 관리 앱의 시작점 역할을 하는 로드 밸런서 `istio-ingressgateway`를 구성합니다. DNS 항목 및 호스트 이름으로 `istio-ingressgateway` 로드 밸런서의 외부 IP 주소를 등록하여 Istio 관리 앱을 노출할 수 있습니다. 
 
 먼저 [BookInfo를 노출하는 예제](#istio_expose_bookinfo)를 사용해 보거나 [공개적으로 사용자 고유의 앱을 노출](#istio_expose_link)할 수 있습니다.
 
@@ -688,7 +664,7 @@ Istio 게이트웨이, Istio 관리 서비스에 대한 트래픽 관리 규칙�
     ```
   2. Istio 패키지 디렉토리로 이동하십시오.
     ```
-    cd istio-1.1.2
+    cd istio-1.1.5
     ```
     {: pre}
 3. [마이크로서비스에 사이드카 인젝션을 설치하고, 앱 마이크로서비스를 네임스페이스에 배치하고, 앱 마이크로서비스의 Kubernetes 서비스를 작성하여 이 서비스를 Istio 서비스 메시에 포함할 수 있습니다](#istio_sidecar).
@@ -757,7 +733,7 @@ Istio 게이트웨이, Istio 관리 서비스에 대한 트래픽 관리 규칙�
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>게이트웨이가 이러한 가상 서비스 라우팅 규칙을 <code>istio-ingressgateway</code> 로드 밸런서에 적용할 수 있도록 <code>my-gateway</code>가 지정됩니다.<td>
+  <td>게이트웨이가 이러한 가상 서비스 라우팅 규칙을 <code>istio-ingressgateway</code> 로드 밸런서에 적용할 수 있도록 <code>my-gateway</code>가 지정됩니다. <td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -839,10 +815,10 @@ Istio 게이트웨이, Istio 관리 서비스에 대한 트래픽 관리 규칙�
 Istio에 대한 작업을 완료한 경우, Istio 추가 기능을 설치 제거하여 클러스터에서 Istio 리소스를 정리할 수 있습니다.
 {:shortdesc}
 
-`istio` 추가 기능은 `istio-extras`, `istio-sample-bookinfo` 및 [`knative`](/docs/containers?topic=containers-knative_tutorial) 추가 기능에 대한 종속 항목입니다. `istio-extras` 추가 기능은 `istio-sample-bookinfo` 추가 기능에 대한 종속 항목입니다.
+`istio` 추가 기능은 `istio-extras`, `istio-sample-bookinfo` 및 [`knative`](/docs/containers?topic=containers-serverless-apps-knative) 추가 기능에 대한 종속 항목입니다. `istio-extras` 추가 기능은 `istio-sample-bookinfo` 추가 기능에 대한 종속 항목입니다.
 {: important}
 
-**선택사항**: `istio-system` 네임스페이스에서 작성하거나 수정한 모든 리소스와 사용자 정의 리소스 정의(CRD)에서 자동으로 생성된 모든 Kubernetes 리소스가 제거됩니다. 이 리소스를 보관하려면 `istio` 추가 기능을 설치 제거하기 전에 저장하십시오. 
+**선택사항**: `istio-system` 네임스페이스에서 작성하거나 수정한 모든 리소스와 사용자 정의 리소스 정의(CRD)에서 자동으로 생성된 모든 Kubernetes 리소스가 제거됩니다. 이 리소스를 보관하려면 `istio` 추가 기능을 설치 제거하기 전에 저장하십시오.
 1. 네임스페이스에서 작성하거나 수정한 리소스(예: 서비스 또는 앱에 대한 구성 파일)를 저장하십시오.
    명령 예:
    ```
@@ -850,14 +826,14 @@ Istio에 대한 작업을 완료한 경우, Istio 추가 기능을 설치 제거
    ```
    {: pre}
 
-2. `istio-system`의 CRD에서 자동으로 생성된 Kubernetes 리소스를 로컬 머신의 YAML 파일에 저장하십시오. 
+2. `istio-system`의 CRD에서 자동으로 생성된 Kubernetes 리소스를 로컬 머신의 YAML 파일에 저장하십시오.
    1. `istio-system`에서 CRD를 가져오십시오.
       ```
       kubectl get crd -n istio-system
       ```
       {: pre}
 
-   2. 이 CRD에서 작성한 리소스를 저장하십시오. 
+   2. 이 CRD에서 작성한 리소스를 저장하십시오.
 
 ### CLI에서 관리 Istio 추가 기능 설치 제거
 {: #istio_uninstall_cli}
@@ -911,7 +887,7 @@ Istio에 대한 작업을 완료한 경우, Istio 추가 기능을 설치 제거
 ### 클러스터에서 기타 Istio 설치 설치 제거
 {: #istio_uninstall_other}
 
-이전에 IBM Helm 차트를 사용하거나 다른 방법을 통해 클러스터에 Istio를 설치한 경우 클러스터에서 관리 Istio 추가 기능을 사용으로 설정하기 전에 Istio 설치를 정리하십시오. Istio가 이미 클러스터에 있는지 확인하려면 `kubectl get namespaces`을 실행하여 해당 출력에서 `istio-system` 네임스페이스를 찾으십시오.
+이전에 IBM Helm 차트를 사용하거나 다른 방법을 통해 클러스터에 Istio를 설치한 경우에는 클러스터에서 관리 Istio 추가 기능을 사용으로 설정하기 전에 해당 Istio 설치를 제거하십시오. Istio가 이미 클러스터에 있는지 확인하려면 `kubectl get namespaces`을 실행하여 해당 출력에서 `istio-system` 네임스페이스를 찾으십시오.
 {: shortdesc}
 
 - {{site.data.keyword.Bluemix_notm}} Istio Helm 차트를 사용하여 Istio를 설치한 경우:
@@ -931,7 +907,7 @@ Istio에 대한 작업을 완료한 경우, Istio 추가 기능을 설치 제거
 * 이전에 클러스터에 BookInfo를 설치한 경우 해당 리소스를 정리하십시오.
   1. 디렉토리를 Istio 파일 위치로 변경하십시오.
     ```
-    cd <filepath>/istio-1.1.2
+    cd <filepath>/istio-1.1.5
     ```
     {: pre}
 
@@ -944,9 +920,9 @@ Istio에 대한 작업을 완료한 경우, Istio 추가 기능을 설치 제거
 <br />
 
 
-## 다음 단계
+## 다음에 수행할 작업
 {: #istio_next}
 
 * Istio를 추가로 탐색하려면 [Istio 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://istio.io/)에서 더 많은 안내서를 찾을 수 있습니다.
 * [코그너티브 클래스: IBM Cloud Kubernetes 서비스 및 Istio로 마이크로서비스 시작하기![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/)를 수행하십시오. **참고**: 이 과정의 Istio 설치 섹션을 건너뛸 수 있습니다.
-* Istio 서비스 메시를 시각화하려면 [Istio ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) 사용의 이 블로그 포스트를 확인하십시오.
+* Istio 서비스 메시를 시각화하기 위해 [Vistio ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e)를 사용하는 이 블로그 게시물을 참조하십시오. 

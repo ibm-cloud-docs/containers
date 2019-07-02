@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 日志记录和监视 Ingress
@@ -39,7 +40,7 @@ subcollection: containers
 * 在集群中[为 Ingress 服务创建日志记录配置](/docs/containers?topic=containers-health#configuring)。
 * 通过 CLI 检查日志。**注**：您必须至少具有对 `kube-system` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **读取者**服务角色](/docs/containers?topic=containers-users#platform)。
     1. 获取 ALB 的 pod 的标识。
-            ```
+        ```
         kubectl get pods -n kube-system | grep alb
         ```
         {: pre}

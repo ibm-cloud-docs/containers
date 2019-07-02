@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -30,7 +31,7 @@ subcollection: containers
 Ogni cluster Kubernetes è configurato con un plugin di rete chiamato Calico. Le politiche di rete predefinite vengono configurate per proteggere l'interfaccia di rete pubblica di ogni nodo di lavoro in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Se hai dei requisiti di sicurezza univoci o hai un cluster multizona con lo spanning delle VLAN abilitato, puoi utilizzare Calico e Kubernetes per creare le politiche di rete di un cluster. Con le politiche di rete Kubernetes, specifica il traffico di rete che vuoi consentire o bloccare da e verso un pod in un cluster. Per impostare politiche di rete più avanzate come il blocco del traffico in entrata (ingress) ai servizi NLB (network load balancer), utilizza le politiche di rete Calico.
+Se hai dei requisiti di sicurezza univoci o hai un cluster multizona con lo spanning della VLAN abilitato, puoi utilizzare Calico e Kubernetes per creare le politiche di rete di un cluster. Con le politiche di rete Kubernetes, specifica il traffico di rete che vuoi consentire o bloccare da e verso un pod in un cluster. Per impostare politiche di rete più avanzate come il blocco del traffico in entrata (ingress) ai servizi NLB (network load balancer), utilizza le politiche di rete Calico.
 
 <ul>
   <li>
@@ -126,7 +127,7 @@ Viene creata anche una politica Kubernetes predefinita che limita l'accesso al d
 Per visualizzare, gestire e aggiungere le politiche Calico, installare e configurare la CLI Calico.
 {:shortdesc}
 
-1. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
+1. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -214,7 +215,7 @@ Visualizza i dettagli per impostazione predefinita e tutte le politiche di rete 
 
 Prima di iniziare:
 1. [Installa e configura la CLI Calico.](#cli_install)
-2. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
+2. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -276,7 +277,7 @@ Per creare le politiche di rete Kubernetes, vedi la [documentazione della politi
 Per creare le politiche Calico, utilizza la seguente procedura.
 
 1. [Installa e configura la CLI Calico.](#cli_install)
-2. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
+2. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -323,7 +324,7 @@ Per vedere come inserire in whitelist o in blacklist gli indirizzi IP di origine
 
 Prima di iniziare:
 1. [Installa e configura la CLI Calico.](#cli_install)
-2. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
+2. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -444,10 +445,10 @@ perché le modifiche alla politica vengano applicate nel cluster.
 ## Isolamento dei cluster sulla rete privata
 {: #isolate_workers}
 
-Se hai un cluster multizona, più VLAN per un cluster a zona singola o più sottoreti sulla stessa VLAN, devi [abilitare lo spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Tuttavia, quando lo spanning della VLAN è abilitato, qualsiasi sistema connesso a qualsiasi VLAN privata nello stesso account IBM Cloud può comunicare con i nodi di lavoro.
+Se hai un cluster multizona, più VLAN per un cluster a zona singola o più sottoreti sulla stessa VLAN, devi abilitare lo spanning della VLAN o VRF in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Tuttavia, quando lo spanning della VLAN o VRF sono abilitati, qualsiasi sistema connesso a qualsiasi VLAN privata nello stesso account {{site.data.keyword.Bluemix_notm}} può comunicare con i nodi di lavoro.
 {: shortdesc}
 
-Puoi isolare il tuo cluster da altri sistemi sulla rete privata applicando delle [politiche di rete privata Calico![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Questa serie di politiche Calico ed endpoint host isolano il traffico di rete privata di un cluster dalle altre risorse nella rete privata dell'account.
+Puoi isolare il tuo cluster da altri sistemi sulla rete privata applicando delle [politiche di rete privata Calico![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Questa serie di politiche Calico ed endpoint host isola il traffico di rete privata di un cluster dalle altre risorse nella rete privata dell'account.
 
 Le politiche sono mirate all'interfaccia privata del nodo di lavoro (eth0) e alla rete di pod di un cluster.
 
@@ -463,7 +464,7 @@ Le politiche sono mirate all'interfaccia privata del nodo di lavoro (eth0) e all
 
 Prima di iniziare:
 1. [Installa e configura la CLI Calico.](#cli_install)
-2. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
+2. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -488,7 +489,7 @@ Per isolare il tuo cluster sulla rete privata utilizzando le politiche Calico:
     1. Apri la politica `generic-privatehostendpoint.yaml`.
     2. Sostituisci `<worker_name>` con il nome di un nodo di lavoro. **Importante**: alcuni nodi di lavoro devono seguire una struttura di denominazione diversa per le politiche Calico. Devi utilizzare il nome di un nodo di lavoro nel formato restituito dal seguente comando.
       ```
-      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      calicoctl get nodes --config==filepath/calicoctl.cfg
       ```
       {: pre}
     3. Sostituisci `<worker-node-private-ip>` con l'indirizzo IP privato per il nodo di lavoro. Per visualizzare gli IP privati dei nodi di lavoro, esegui `ibmcloud ks workers --cluster <my_cluster>`.

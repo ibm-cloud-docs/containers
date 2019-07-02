@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Débogage d'Ingress
@@ -44,11 +44,11 @@ Avant de commencer, vérifiez que vous disposez des [règles d'accès {{site.dat
 
 ## Etape 1 : Exécution de tests Ingress dans l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}
 
-Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}} pour exécuter des tests Ingress et regrouper des informations pertinentes sur Ingress. Pour utiliser l'outil de débogage, installez la [charte Helm `ibmcloud-iks-debug`![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}} pour exécuter des tests Ingress et regrouper des informations pertinentes sur Ingress. Pour utiliser l'outil de débogage, installez la [charte Helm `ibmcloud-iks-debug` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug) :
 {: shortdesc}
 
 
-1. [Configurez Helm dans votre cluster, créez un compte de service pour Tiller et ajoutez le référentiel `ibm` dans votre instance Helm](/docs/containers?topic=containers-integrations#helm).
+1. [Configurez Helm dans votre cluster, créez un compte de service pour Tiller et ajoutez le référentiel `ibm` dans votre instance Helm](/docs/containers?topic=containers-helm).
 
 2. Installez la charte Helm dans votre cluster.
   ```
@@ -164,15 +164,15 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
     Exemple de sortie d'un cluster à zones multiples avec des noeuds worker dans les zones `dal10` et `dal13` :
 
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone    Build
-    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
-    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
+    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:411/ingress-auth:315   2294021
+    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
+    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238  dal13   ingress:411/ingress-auth:315   2294019
+    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222   dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
 
-    * Si un ALB public n'a pas d'adresse IP, voir [L'ALB Ingress ne se déploie pas dans une zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
+    * Si un ALB public n'a pas d'adresse IP, voir [L'ALB Ingress ne se déploie pas dans une zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 
 2. Vérifiez l'intégrité des adresses IP de votre ALB.
 
@@ -185,7 +185,7 @@ Vérifiez la disponibilité du sous-domaine Ingress et des adresses IP publiques
         * Si l'interface CLI renvoie un dépassement de délai et que vous disposez d'un pare-feu personnalisé pour protéger vos noeuds worker, vérifiez que vous avez autorisé ICMP dans votre [pare-feu](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * S'il n'y a aucun pare-feu bloquant les commandes ping et que ces commandes s'exécutent puis renvoient un dépassement de délai, [vérifiez le statut de vos pods d'ALB](#check_pods).
 
-    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](/docs/containers?topic=containers-ingress#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à une seule zone en un cluster à zones multiples](/docs/containers?topic=containers-clusters#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
+    * Clusters à zones multiples uniquement : vous pouvez utiliser le diagnostic d'intégrité de l'équilibreur de charge MZLB pour déterminer le statut des adresses IP de votre ALB. Pour plus d'informations sur l'équilibreur de charge MZLB, voir [Equilibreur de charge pour zones multiples (MZLB)](/docs/containers?topic=containers-ingress#planning). Le diagnostic d'intégrité de l'équilibreur de charge MZLB est disponible uniquement pour les clusters dont le nouveau sous-domaine Ingress est au format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si votre cluster utilise encore l'ancien format `<cluster_name>.<region>.containers.mybluemix.net`, [convertissez votre cluster à une seule zone en un cluster à zones multiples](/docs/containers?topic=containers-add_workers#add_zone). Un sous-domaine au nouveau format est affecté à votre cluster, mais celui-ci peut continuer à utiliser l'ancien format de sous-domaine. Vous pouvez aussi commander un nouveau cluster auquel le nouveau format de sous-domaine sera automatiquement affecté.
 
     La commande curl HTTP suivante utilise l'hôte `albhealth`, qui est configuré par {{site.data.keyword.containerlong_notm}} de sorte à renvoyer le statut `healthy` ou `unhealthy` pour une adresse IP d'ALB.
         ```
@@ -291,8 +291,8 @@ Par exemple, admettons que vous disposez d'un cluster à zones multiples dans 2 
 
     Par exemple, l'adresse IP `169.62.196.238` qui est inaccessible appartient à l'ALB `public-cr24a9f2caf6554648836337d240064935-alb1` :
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone   Build
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+    public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:411/ingress-auth:315   2294021
     ```
     {: screen}
 
@@ -438,7 +438,7 @@ Vous avez encore des problèmes avec votre cluster ?
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.
--   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support).
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`. Vous pouvez également utiliser l'[outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) pour regrouper et exporter des informations pertinentes de votre cluster à partager avec le support IBM.
 {: tip}
 

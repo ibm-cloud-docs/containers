@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node scaling
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:gif: data-image-type='gif'}
 
 
@@ -44,11 +45,11 @@ subcollection: containers
 {: shortdesc}
 
 *   **スケールアップすべき保留ポッド**: ワーカー・ノードにポッドをスケジュールできるだけの十分なコンピュート・リソースが存在しない場合、そのポッドは保留ポッドと見なされます。 クラスター自動スケーリング機能は保留ポッドを検出すると、ワークロード・リソース要求を満たすために、ゾーン間で均等にワーカー・ノード数を増やします。
-*   **スケールダウンすべき低使用率のワーカー・ノード**: デフォルトでは、ワーカー・ノードが、要求された合計コンピュート・リソースの 50% 未満の状態で 10 分以上実行されていて、ワークロードを他のワーカー・ノードにスケジュールし直せる場合、このワーカー・ノードを、低使用率のワーカー・ノードと見なします。 クラスター自動スケーリング機能は、低使用率のワーカー・ノードを検出すると、必要なコンピュート・リソースだけを使用するように、ワーカー・ノードを 1 つずつ減らしていきます。 必要に応じて、デフォルトのスケールダウン使用率しきい値 (50% が 10 分間) を[カスタマイズ](/docs/containers?topic=containers-ca#ca_chart_values)できます。
+*   **スケールダウンすべき低使用率のワーカー・ノード**: デフォルトでは、ワーカー・ノードが、要求された合計コンピュート・リソースの 50% 未満の状態で 10 分以上実行されていて、ワークロードを他のワーカー・ノードにスケジュール変更できる場合、このワーカー・ノードを、低使用率のワーカー・ノードと見なします。 クラスター自動スケーリング機能は、低使用率のワーカー・ノードを検出すると、必要なコンピュート・リソースだけを使用するように、ワーカー・ノードを 1 つずつ減らしていきます。 必要に応じて、デフォルトのスケールダウン使用率しきい値 (50% が 10 分間) を[カスタマイズ](/docs/containers?topic=containers-ca#ca_chart_values)できます。
 
 スキャンとスケールアップ/スケールダウンは一定の間隔で継続して行われ、ワーカー・ノード数によっては、完了までに長い時間がかかることがあります (30 分など)。
 
-クラスター自動スケーリング機能は、実際のワーカー・ノードの使用状況ではなく、デプロイメントに対してユーザーが定義した [リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) を考慮して、ワーカー・ノード数を調整します。 ポッドとデプロイメントから適切な量のリソースが要求されない場合は、ユーザーがそれらの構成ファイルを調整する必要があります。 クラスター自動スケーリング機能でそれらを自動的に調整することはできません。 また、ワーカー・ノードは、クラスターの基本機能、デフォルトとカスタムの[アドオン](/docs/containers?topic=containers-update#addons)、および[リソース予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)のためにコンピュート・リソースの一部を使用することにも注意してください。
+クラスター自動スケーリング機能は、実際のワーカー・ノードの使用状況ではなく、デプロイメントに対してユーザーが定義した [リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) を考慮して、ワーカー・ノード数を調整します。 ポッドとデプロイメントから適切な量のリソースが要求されない場合は、ユーザーがそれらの構成ファイルを調整する必要があります。 クラスター自動スケーリング機能でそれらを自動的に調整することはできません。 また、ワーカー・ノードは、クラスターの基本機能、デフォルトとカスタムの[アドオン](/docs/containers?topic=containers-update#addons)、および[リソース予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)のためにコンピュート・リソースの一部を使用することにも注意してください。
 {: note}
 
 <br>
@@ -56,7 +57,7 @@ subcollection: containers
 一般的に、クラスター自動スケーリング機能は、クラスターのワークロードを実行するために必要なワーカー・ノード数を計算します。 クラスターのスケールアップ/スケールダウンは、以下のようなさまざまな要因によって決定されます。
 *   ユーザーが設定した 1 ゾーンあたりの最小および最大ワーカー・ノード・サイズ。
 *   保留ポッドのリソース要求、ワークロードにユーザーが関連付けた特定のメタデータ (アンチアフィニティー、特定のマシン・タイプにのみポッドを配置するためのラベル、[PodDisruptionBudget ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) など)。
-*   クラスター自動スケーリング機能が管理するワーカー・プール。[マルチゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)の複数のゾーンにまたがっている場合があります。
+*   クラスター自動スケーリング機能が管理するワーカー・プール。[マルチゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#multizone)の複数のゾーンにまたがっている場合があります。
 *   設定されている[カスタム Helm チャート値](#ca_chart_values) (ワーカー・ノードでローカル・ストレージが使用されている場合は削除をスキップするなど)。
 
 詳しくは、Kubernetes クラスターの自動スケーリング機能 FAQ の [How does scale-up work? ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) および [How does scale-down work? ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work) を参照してください。
@@ -65,12 +66,16 @@ subcollection: containers
 
 **スケールアップ/スケールダウンの仕組みを変更できますか?**<br>
 設定をカスタマイズしたり、スケールアップ/スケールダウンの仕組みに影響を及ぼす他の Kubernetes リソースを使用したりできます。
-*   **スケールアップ**: `scanInterval`、`expander`、`skipNodes`、`maxNodeProvisionTime` などの[クラスター自動スケーリング機能の Helm チャート値をカスタマイズします](#ca_chart_values)。ワーカー・プールのリソースが不足する前にワーカー・ノードをスケールアップできるように、[ワーカー・ノードのオーバープロビジョン](#ca_scaleup)の方法を検討します。また、[Kubernetes のポッド中断の割り当て量とポッド優先度のカットオフを設定して](#scalable-practices-apps)、スケールアップの仕組みに影響を与えることができます。
+*   **スケールアップ**: `scanInterval`、`expander`、`skipNodes`、`maxNodeProvisionTime` などの[クラスター自動スケーリング機能の Helm チャート値をカスタマイズします](#ca_chart_values)。 ワーカー・プールのリソースが不足する前にワーカー・ノードをスケールアップできるように、[ワーカー・ノードのオーバープロビジョン](#ca_scaleup)の方法を検討します。 また、[Kubernetes のポッド中断の割り当て量とポッド優先度のカットオフを設定して](#scalable-practices-apps)、スケールアップの仕組みに影響を与えることができます。
 *   **スケールダウン**: `scaleDownUnneededTime`、`scaleDownDelayAfterAdd`、`scaleDownDelayAfterDelete`、`scaleDownUtilizationThreshold` などの[クラスター自動スケーリング機能の Helm チャート値をカスタマイズします](#ca_chart_values)。
 
 <br>
+**ゾーンあたりの最小サイズを設定することで、クラスターをそのサイズに即時にスケールアップできますか?**<br>
+いいえ。`minSize` を設定しても、自動的にスケールアップはトリガーされません。`minSize` は、クラスター自動スケーリング機能によって、ゾーンあたりのワーカー・ノードが一定数を下回るようにスケーリングされることを防止するためのしきい値です。クラスターで、ゾーンあたりの数がまだこれに達していない場合は、より多くのリソースを必要とするワークロード・リソース要求が発生するまで、クラスター自動スケーリング機能によってスケールアップされることはありません。例えば、3 つのゾーンあたり 1 つのワーカー・ノードが含まれた 1 つのワーカー・プールがある場合に (合計 3 つのワーカー・ノード)、`minSize` をゾーンあたり `4` に設定した場合は、クラスター自動スケーリング機能によって、ゾーンあたりの追加の 3 つのワーカー・ノード (合計 12 個のワーカー・ノード) が即時にプロビジョンされることはありません。代わりに、リソース要求によってスケールアップがトリガーされます。15 個のワーカー・ノードのリソースを要求するワークロードを作成した場合、クラスター自動スケーリング機能はこの要求を満たすようにワーカー・プールをスケールアップします。ここでの `minSize` は、ゾーンあたり 4 つのワーカー・ノードを要求するワークロードを手動で削除した場合でも、クラスター自動スケーリング機能がこのゾーンあたりの数を下回るようにスケールダウンしないことを指定します。
+
+<br>
 **この動作と、クラスター自動スケーリング機能で管理されないワーカー・プールの違いは何ですか?**<br>
-[ワーカー・プールを作成](/docs/containers?topic=containers-clusters#add_pool)するときには、1 ゾーンあたりのワーカー・ノード数を指定します。 ワーカー・プールのワーカー・ノード数は、ユーザーがワーカー・プールの[サイズを変更する](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)か、または[再バランス化](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)するまで変わりません。 ワーカー・プールがワーカー・ノードを自動的に追加/削除することはありません。 スケジュールできる数より多くのポッドがある場合は、ユーザーがワーカー・プールのサイズを変更するまで、余分なポッドは保留状態のままです。
+[ワーカー・プールを作成](/docs/containers?topic=containers-add_workers#add_pool)するときには、1 ゾーンあたりのワーカー・ノード数を指定します。 ワーカー・プールのワーカー・ノード数は、ユーザーがワーカー・プールの[サイズを変更する](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)か、または[再バランス化](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)するまで変わりません。 ワーカー・プールがワーカー・ノードを自動的に追加/削除することはありません。 スケジュールできる数より多くのポッドがある場合は、ユーザーがワーカー・プールのサイズを変更するまで、余分なポッドは保留状態のままです。
 
 ワーカー・プールに対してクラスター自動スケーリング機能を有効にすると、ポッドの仕様の設定とリソース要求に応じてワーカー・ノード数が増減されます。 手動でワーカー・プールをサイズ変更したり再バランス化したりする必要はありません。
 
@@ -81,7 +86,7 @@ subcollection: containers
 _図: クラスターの自動スケールアップ/スケールダウン。_
 ![クラスターの自動スケールアップ/スケールダウンの GIF](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  このクラスターは、2 つのゾーンにまたがる 2 つのワーカー・プール内に 4 つのワーカー・ノードを持っています。 どちらのプールもゾーンごとに 1 つのワーカー・ノードが存在しますが、**ワーカー・プール A** のマシン・タイプは `u2c.2x4`、**ワーカー・プール B** のマシン・タイプは `b2c.4x16` です。 コンピュート・リソースの合計は約 10 コアです (**ワーカー・プール A** は 2 コア x 2 ワーカー・ノード、**ワーカー・プール B** は 4 コア x 2 ワーカー・ノード)。 クラスターが現在実行しているワークロードは、これらの 10 個のコアのうち 6 個を要求しています。 各ワーカー・ノード上で、クラスター、ワーカー・ノード、アドオン (クラスター自動スケーリング機能など) を実行するために必要な[予約済みリソース](/docs/containers?topic=containers-plan_clusters#resource_limit_node)により、他にもコンピューティング・リソースが消費されることに注意してください。
+1.  このクラスターは、2 つのゾーンにまたがる 2 つのワーカー・プール内に 4 つのワーカー・ノードを持っています。 どちらのプールもゾーンごとに 1 つのワーカー・ノードが存在しますが、**ワーカー・プール A** のマシン・タイプは `u2c.2x4`、**ワーカー・プール B** のマシン・タイプは `b2c.4x16` です。 コンピュート・リソースの合計は約 10 コアです (**ワーカー・プール A** は 2 コア x 2 ワーカー・ノード、**ワーカー・プール B** は 4 コア x 2 ワーカー・ノード)。 クラスターが現在実行しているワークロードは、これらの 10 個のコアのうち 6 個を要求しています。 各ワーカー・ノード上で、クラスター、ワーカー・ノード、アドオン (クラスター自動スケーリング機能など) を実行するために必要な[予約済みリソース](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)により、他にもコンピューティング・リソースが消費されます。
 2.  両方のワーカー・プールを管理するために、クラスター自動スケーリング機能には、1 ゾーンあたりの最小サイズと最大サイズが次のように構成されています。
     *  **ワーカー・プール A**: `minSize=1`、`maxSize=5`。
     *  **ワーカー・プール B**: `minSize=1`、`maxSize=2`。
@@ -89,7 +94,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 4.  クラスター自動スケーリング機能は、次の制約の範囲でワーカー・ノード数を増やして、追加の 13 個のポッド・レプリカ・リソース要求をサポートします。
     *  **ワーカー・プール A**: 7 台のワーカー・ノードをゾーン間で可能な限り均等にラウンドロビン方式で追加します。 それらのワーカー・ノードにより、クラスターのコンピュート容量が約 14 コア分 (2 コア x 7 ワーカー・ノード) 増えます。
     *  **ワーカー・プール B**: 2 台のワーカー・ノードをゾーン間で均等に追加します。これにより、1 ゾーンあたりの `maxSize` である 2 ワーカー・ノードに達します。 それらのワーカー・ノードにより、クラスター容量が約 8 コア分 (4 コア x 2 ワーカー・ノード) 増えます。
-5.  1 コアを要求するポッド 20 個が、以下のようにワーカー・ノード間に分散されます。 ワーカー・ノードには、リソースの予約、およびデフォルトのクラスター機能をカバーするために実行されるポッドがあるので、ワークロード用のポッドが、ワーカー・ノードの使用可能なコンピュート・リソースをすべて使用することはできません。 例えば、`b2c.4x16` ワーカー・ノードには 4 つのコアがありますが、それぞれに最低 1 つのコアを要求するポッドを 3 つしかスケジュールできません。
+5.  1 コアを要求するポッド 20 個が、以下のようにワーカー・ノード間に分散されます。 ワーカー・ノードには、リソースの予約、およびデフォルトのクラスター機能をカバーするために実行されるポッドがあるので、ワークロード用のポッドが、ワーカー・ノードの使用可能なコンピュート・リソースをすべて使用することはできません。例えば、`b2c.4x16` ワーカー・ノードには 4 つのコアがありますが、それぞれに最低 1 つのコアを要求するポッドを 3 つしかスケジュールできません。
     <table summary="スケーリングされたクラスター内のワークロードの分散を説明する表。">
     <caption>スケーリングされたクラスター内でのワークロードの分散</caption>
     <thead>
@@ -106,29 +111,29 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
       <td>ア</td>
       <td>dal10</td>
       <td>u2c.2x4</td>
-      <td>4 ノード</td>
-      <td>3 ポッド</td>
+      <td>4 つのノード</td>
+      <td>3 つのポッド</td>
     </tr>
     <tr>
       <td>ア</td>
       <td>dal12</td>
       <td>u2c.2x4</td>
-      <td>5 ノード</td>
-      <td>5 ポッド</td>
+      <td>5 つのノード</td>
+      <td>5 つのポッド</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal10</td>
       <td>b2c.4x16</td>
-      <td>2 ノード</td>
-      <td>6 ポッド</td>
+      <td>2 つのノード</td>
+      <td>6 つのポッド</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal12</td>
       <td>b2c.4x16</td>
-      <td>2 ノード</td>
-      <td>6 ポッド</td>
+      <td>2 つのノード</td>
+      <td>6 つのポッド</td>
     </tr>
     </tbody>
     </table>
@@ -138,26 +143,26 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 ## スケーラブル・デプロイメントの実践の遵守
 {: #scalable-practices}
 
-ワーカー・ノード戦略とワークロード・デプロイメント戦略に従うことによって、クラスター自動スケーリング機能を最大限に活用します。詳しくは、[Kubernetes クラスターの自動スケーリング機能 FAQ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md) を参照してください。
+ワーカー・ノード戦略とワークロード・デプロイメント戦略に従うことによって、クラスター自動スケーリング機能を最大限に活用します。 詳しくは、[Kubernetes クラスターの自動スケーリング機能 FAQ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md) を参照してください。
 {: shortdesc}
 
-少数のテスト・ワークロードを使用して[クラスター自動スケーリング機能を試し](#ca_helm)、[スケールアップ/スケールダウンの仕組み](#ca_about)、構成する[カスタム値](#ca_chart_values)、および必要になりそうなその他の方法 (ワーカー・ノードの[オーバープロビジョン](#ca_scaleup)や[アプリの制限](#ca_limit_pool)など) についての感覚をつかみます。その後、テスト環境をクリーンアップして、クラスター自動スケーリング機能のフレッシュ・インストールでこれらのカスタム値や追加設定を組み込む計画を立てます。
+少数のテスト・ワークロードを使用して[クラスター自動スケーリング機能を試し](#ca_helm)、[スケールアップ/スケールダウンの仕組み](#ca_about)、構成する[カスタム値](#ca_chart_values)、および必要になりそうなその他の方法 (ワーカー・ノードの[オーバープロビジョン](#ca_scaleup)や[アプリの制限](#ca_limit_pool)など) についての感覚をつかみます。 その後、テスト環境をクリーンアップして、クラスター自動スケーリング機能のフレッシュ・インストールでこれらのカスタム値や追加設定を組み込む計画を立てます。
 
 ### 複数のワーカー・プールをすぐに自動スケーリングできますか?
 {: #scalable-practices-multiple}
-はい。Helm チャートをインストールした後、[構成マップで](#ca_cm)クラスター内のどのワーカー・プールを自動スケーリングするかを選択できます。クラスターごとに実行できる `ibm-iks-cluster-autoscaler` Helm チャートは 1 つだけです。
+はい。Helm チャートをインストールした後、[構成マップで](#ca_cm)クラスター内のどのワーカー・プールを自動スケーリングするかを選択できます。 クラスターごとに実行できる `ibm-iks-cluster-autoscaler` Helm チャートは 1 つだけです。
 {: shortdesc}
 
 ### どうすればクラスター自動スケーリング機能が、アプリで必要なリソースに対応して確実に実行されますか?
 {: #scalable-practices-resrequests}
 
-クラスター自動スケーリング機能は、ワークロードの[リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) に応じてクラスターをスケーリングします。 つまり、クラスター自動スケーリング機能は、ワークロードの実行に必要なワーカー・ノード数を計算するためにリソース要求を使用するので、すべてのデプロイメントに[リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) を指定してください。自動スケーリング機能は、ワークロード構成によって要求されるコンピュートの使用量に基づいており、マシン・コストなどの他の要因を考慮していないことに注意してください。
+クラスター自動スケーリング機能は、ワークロードの[リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) に応じてクラスターをスケーリングします。 つまり、クラスター自動スケーリング機能は、ワークロードの実行に必要なワーカー・ノード数を計算するためにリソース要求を使用するので、すべてのデプロイメントに[リソース要求 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) を指定してください。 自動スケーリング機能は、ワークロード構成によって要求されるコンピュートの使用量に基づいており、マシン・コストなどの他の要因を考慮していないことに注意してください。
 {: shortdesc}
 
 ### ワーカー・プールをゼロ (0) ノードまでスケールダウンできますか?
 {: #scalable-practices-zero}
 
-いいえ。クラスター自動スケーリング機能の `minSize` を `0` に設定することはできません。また、クラスターでアプリケーション・ロード・バランサー (ALB) を[無効](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)にしている場合を除き、ALB ポッドを分散させて高可用性を確保するために、1 ゾーンあたりの `minSize` を `2` ワーカー・ノードに変更する必要があります。
+いいえ。クラスター自動スケーリング機能の `minSize` を `0` に設定することはできません。また、クラスターの各ゾーンですべてのパブリック・アプリケーション・ロード・バランサー (ALB) を[無効](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)にしている場合を除き、ALB ポッドを分散させて高可用性を確保するために、1 ゾーンあたりの `minSize` を `2` ワーカー・ノードに変更する必要があります。
 {: shortdesc}
 
 ### 自動スケーリングのためにデプロイメントを最適化できますか?
@@ -177,14 +182,14 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 ### 自動スケーリングされたワーカー・プールがアンバランスになるのはなぜですか?
 {: #scalable-practices-unbalanced}
 
-スケールアップ時に、クラスター自動スケーリング機能はゾーン間でノード数のバランスを取ります。許容されるワーカー・ノード数の差はプラス・マイナス 1 (+/- 1) です。 保留中のワークロードが要求している容量が少ないために、各ゾーンのバランスが取れていない可能性があります。 そのような場合に手動でワーカー・プールのバランスを取るには、アンバランスなワーカー・プールを削除するように[クラスター自動スケーリング機能の構成マップを更新](#ca_cm)します。 次に、`ibmcloud ks worker-pool-rebalance` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)を実行して、そのワーカー・プールをクラスター自動スケーリング機能の構成マップに戻します。
+スケールアップ時に、クラスター自動スケーリング機能はゾーン間でノード数のバランスを取ります。許容されるワーカー・ノード数の差はプラス・マイナス 1 (+/- 1) です。 保留中のワークロードが要求している容量が少ないために、各ゾーンのバランスが取れていない可能性があります。 そのような場合に手動でワーカー・プールのバランスを取るには、アンバランスなワーカー・プールを削除するように[クラスター自動スケーリング機能の構成マップを更新](#ca_cm)します。 次に、`ibmcloud ks worker-pool-rebalance` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)を実行して、そのワーカー・プールをクラスター自動スケーリング機能の構成マップに戻します。
 {: shortdesc}
 
 
 ### ワーカー・プールのサイズ変更も再バランス化もできないのはなぜですか?
 {: #scalable-practices-resize}
 
-クラスター自動スケーリング機能を有効にしたワーカー・プールは、[サイズ変更](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)も[再バランス化](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)もできません。 [構成マップを編集](#ca_cm)して、ワーカー・プールの最小/最大サイズを変更するか、そのワーカー・プールのクラスター自動スケーリングを無効にする必要があります。 `ibmcloud ks worker-rm` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)を使用してワーカー・プールから個々のワーカー・ノードを削除しないでください。この操作を行うと、ワーカー・プールがアンバランスになる可能性があります。
+クラスター自動スケーリング機能を有効にしたワーカー・プールは、[サイズ変更](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)も[再バランス化](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)もできません。 [構成マップを編集](#ca_cm)して、ワーカー・プールの最小/最大サイズを変更するか、そのワーカー・プールのクラスター自動スケーリングを無効にする必要があります。 `ibmcloud ks worker-rm` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm)を使用してワーカー・プールから個々のワーカー・ノードを削除しないでください。この操作を行うと、ワーカー・プールがアンバランスになる可能性があります。
 {: shortdesc}
 
 さらに、ワーカー・プールを無効にせずに `ibm-iks-cluster-autoscaler` Helm チャートをアンインストールした場合は、ワーカー・プールのサイズを手動で変更することはできません。 `ibm-iks-cluster-autoscaler` Helm チャートを再インストールし、[構成マップを編集](#ca_cm)してワーカー・プールを無効にしてから、やり直してください。
@@ -200,15 +205,15 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 
 **始める前に**:
 
-1.  [必要な CLI とプラグインをインストール](/docs/cli?topic=cloud-cli-ibmcloud-cli)します。
+1.  [必要な CLI とプラグインをインストール](/docs/cli?topic=cloud-cli-getting-started)します。
     *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
     *  {{site.data.keyword.containerlong_notm}} プラグイン (`ibmcloud ks`)
     *  {{site.data.keyword.registrylong_notm}} プラグイン (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  **Kubernetes バージョン1.12 以降**を実行する[標準クラスターを作成](/docs/containers?topic=containers-clusters#clusters_ui)します。
-3.   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  {{site.data.keyword.Bluemix_notm}} の ID/アクセス管理の資格情報がクラスターに保管されていることを確認します。 クラスター自動スケーリング機能はこのシークレットを使用して認証を受けます。
+3.   [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4.  {{site.data.keyword.Bluemix_notm}} の ID/アクセス管理の資格情報がクラスターに保管されていることを確認します。 クラスター自動スケーリング機能はこのシークレットを使用して資格情報を認証します。シークレットが欠落している場合は、[資格情報をリセットすることでシークレットを作成します](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)。
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -225,7 +230,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  ワーカー・プールに必要なラベルがない場合は、[新しいワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)し、クラスター自動スケーリング機能で使用します。
+    2.  ワーカー・プールに必要なラベルがない場合は、[新しいワーカー・プールを追加](/docs/containers?topic=containers-add_workers#add_pool)し、クラスター自動スケーリング機能で使用します。
 
 
 <br>
@@ -257,7 +262,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     {: pre}
 4.  クラスター自動スケーリング機能の Helm チャートをクラスターの `kube-system` 名前空間にインストールします。
 
-    インストール中に、ワーカー・ノード数を増減するまでの待機時間など、さらに[クラスター自動スケーリング機能の設定をカスタマイズ](#ca_chart_values)するオプションがあります。
+    インストール中に、さらに[クラスター自動スケーリング機能の設定をカスタマイズ](#ca_chart_values)できます (ワーカー・ノードをスケールアップまたはスケールダウンするまでの待機時間など)。
     {: tip}
 
     ```
@@ -348,12 +353,12 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 設定した最小値と最大値に基づいて、ワーカー・プール内のワーカー・ノードを自動的にスケーリングできるように、クラスター自動スケーリング機能の構成マップを更新します。
 {: shortdesc}
 
-構成マップを編集してワーカー・プールを有効にすると、クラスター自動スケーリング機能はワークロード要求に応じたクラスターのスケーリングを開始します。 そのため、ワーカー・プールの[サイズ変更](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)や[再バランス化](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)はできません。 スキャンとスケールアップ/スケールダウンは一定の間隔で継続して行われ、ワーカー・ノード数によっては、完了までに長い時間がかかることがあります (30 分など)。 後から[クラスター自動スケーリング機能を削除](#ca_rm)するには、まず構成マップで各ワーカー・プールを無効にする必要があります。
+構成マップを編集してワーカー・プールを有効にすると、クラスター自動スケーリング機能はワークロード要求に応じてクラスターをスケーリングします。そのため、ワーカー・プールの[サイズ変更](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)や[再バランス化](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)はできません。 スキャンとスケールアップ/スケールダウンは一定の間隔で継続して行われ、ワーカー・ノード数によっては、完了までに長い時間がかかることがあります (30 分など)。 後から[クラスター自動スケーリング機能を削除](#ca_rm)するには、まず構成マップで各ワーカー・プールを無効にする必要があります。
 {: note}
 
 **始める前に**:
 *  [`ibm-iks-cluster-autoscaler` プラグイン](#ca_helm)をインストールします。
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **クラスター自動スケーリング機能の構成マップと値を更新するには**:
 
@@ -380,7 +385,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  パラメーターを使用して構成マップを編集し、クラスター自動スケーリング機能でクラスター・ワーカー・プールをどのようにスケーリングするかを定義します。 標準クラスターでアプリケーション・ロード・バランサー (ALB) を[無効](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)にしている場合を除き、ALB ポッドを分散させて高可用性を確保するために、1 ゾーンあたりの `minSize` を `2` に変更する必要があります。
+2.  パラメーターを使用して構成マップを編集し、クラスター自動スケーリング機能でクラスター・ワーカー・プールをどのようにスケーリングするかを定義します。 **注:** 標準クラスターの各ゾーンですべてのパブリック・アプリケーション・ロード・バランサー (ALB) を[無効](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)にしている場合を除き、ALB ポッドを分散させて高可用性を確保するために、1 ゾーンあたりの `minSize` を `2` に変更する必要があります。
 
     <table>
     <caption>クラスター自動スケーリング機能の構成マップ・パラメーター</caption>
@@ -396,15 +401,16 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **注**: クラスター自動スケーリング機能は、`ibm-cloud.kubernetes.io/worker-pool-id` ラベルを持つワーカー・プールのみをスケーリングできます。 ワーカー・プールに必要なラベルがあるかどうかを確認するには、`ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels` を実行します。 ワーカー・プールに必要なラベルがない場合は、[新しいワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)し、クラスター自動スケーリング機能で使用します。</td>
+    **注**: クラスター自動スケーリング機能は、`ibm-cloud.kubernetes.io/worker-pool-id` ラベルを持つワーカー・プールのみをスケーリングできます。 ワーカー・プールに必要なラベルがあるかどうかを確認するには、`ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels` を実行します。 ワーカー・プールに必要なラベルがない場合は、[新しいワーカー・プールを追加](/docs/containers?topic=containers-add_workers#add_pool)し、クラスター自動スケーリング機能で使用します。</td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
-    <td headers="parameter-minsize parameter-with-description">ワーカー・プールに常に含める 1 ゾーンあたりの最小ワーカー・ノード数を指定します。 ALB ポッドを分散させて高可用性を確保するためには、値を 2 以上にする必要があります。 標準クラスターで ALB を[無効](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)にした場合は、値を `1` に設定できます。</td>
+    <td headers="parameter-minsize parameter-with-description">ゾーンあたりの最小ワーカー・ノード数を指定します。クラスター自動スケーリング機能はこの最小数を下限として、ワーカー・プールをスケールダウンできます。ALB ポッドを分散させて高可用性を確保するためには、値を `2` 以上にする必要があります。 標準クラスターの各ゾーンですべてのパブリック ALB を[無効](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)にした場合は、この値を `1` に設定できます。
+<p class="note">`minSize` を設定しても、自動的にスケールアップはトリガーされません。`minSize` は、クラスター自動スケーリング機能によって、ゾーンあたりのワーカー・ノードが一定数を下回るようにスケーリングされることを防止するためのしきい値です。クラスターで、ゾーンあたりの数がまだこれに達していない場合は、より多くのリソースを必要とするワークロード・リソース要求が発生するまで、クラスター自動スケーリング機能によってスケールアップされることはありません。例えば、3 つのゾーンあたり 1 つのワーカー・ノードが含まれた 1 つのワーカー・プールがある場合に (合計 3 つのワーカー・ノード)、`minSize` をゾーンあたり `4` に設定した場合は、クラスター自動スケーリング機能によって、ゾーンあたりの追加の 3 つのワーカー・ノード (合計 12 個のワーカー・ノード) が即時にプロビジョンされることはありません。代わりに、リソース要求によってスケールアップがトリガーされます。15 個のワーカー・ノードのリソースを要求するワークロードを作成した場合、クラスター自動スケーリング機能はこの要求を満たすようにワーカー・プールをスケールアップします。ここでの `minSize` は、ゾーンあたり 4 つのワーカー・ノードを要求するワークロードを手動で削除した場合でも、クラスター自動スケーリング機能がこのゾーンあたりの数を下回るようにスケールダウンしないことを指定します。詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster) を参照してください。</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
-    <td headers="parameter-maxsize parameter-with-description">ワーカー・プールに含める 1 ゾーンあたりの最大ワーカー・ノード数を指定します。 値は、`minSize` に設定した値以上でなければなりません。</td>
+    <td headers="parameter-maxsize parameter-with-description">ゾーンあたりの最大ワーカー・ノード数を指定します。クラスター自動スケーリング機能はこの最大数を上限として、ワーカー・プールをスケールアップできます。値は、`minSize` に設定した値以上でなければなりません。</td>
     </tr>
     <tr>
     <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
@@ -446,7 +452,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 {: shortdesc}
 
 **始める前に**:
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [`ibm-iks-cluster-autoscaler` プラグイン](#ca_helm)をインストールします。
 
 **クラスター自動スケーリング機能の値を更新するには**:
@@ -462,7 +468,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
@@ -493,7 +499,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     <tbody>
     <tr>
     <td>`api_route` パラメーター</td>
-    <td>クラスターが存在する地域の [{{site.data.keyword.containerlong_notm}} API エンドポイント](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)を設定します。</td>
+    <td>クラスターが存在する地域の [{{site.data.keyword.containerlong_notm}} API エンドポイント](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)を設定します。</td>
     <td>デフォルトはありません。クラスターが存在するターゲット地域を使用します。</td>
     </tr>
     <tr>
@@ -501,13 +507,13 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     <td>ワーカー・プールが複数ある場合に、クラスター自動スケーリング機能でスケーリングするワーカー・プールを決定する方法を指定します。 使用可能な値を以下に示します。
     <ul><li>`random`: `most-pods` と `least-waste` の間でランダムに選択します。</li>
     <li>`most-pods`: スケールアップ時に最も多くのポッドをスケジュールできるワーカー・プールを選択します。 `nodeSelector` を使用してポッドを特定のワーカー・ノードにデプロイしている場合は、このメソッドを使用します。</li>
-    <li>`least-waste`: スケールアップ後に不使用の CPU が最も少ない (同順位の場合は不使用のメモリーが最も少ない) ワーカー・プールを選択します。 この方法は、大容量の CPU とメモリーを備えたマシン・タイプのワーカー・プールが複数あり、保留ポッドに大量のリソースが必要な場合にのみ、それらの大容量マシンを使用したい場合に使用してください。</li></ul></td>
+    <li>`least-waste`: スケールアップ後に不使用の CPU が最も少ないワーカー・プールを選択します。2 つのワーカー・プールがスケールアップ後に同じ量の CPU リソースを使用する場合は、未使用メモリーが最も少ないワーカー・プールが選択されます。</li></ul></td>
     <td>random</td>
     </tr>
     <tr>
     <td>`image.repository` パラメーター</td>
     <td>使用するクラスター自動スケーリング機能の Docker イメージを指定します。</td>
-    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
+    <td>`icr.io/iks-charts/ibm-iks-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>`image.pullPolicy` パラメーター</td>
@@ -520,57 +526,57 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     <tr>
     <td>`maxNodeProvisionTime` パラメーター</td>
     <td>ワーカー・ノードがプロビジョニングの開始に費やせる最大時間を分単位で設定します。これを過ぎると、クラスター自動スケーリング機能によってスケールアップ要求は取り消されます。</td>
-    <td>120m</td>
+    <td>`120m`</td>
     </tr>
     <tr>
     <td>`resources.limits.cpu` パラメーター</td>
     <td>`ibm-iks-cluster-autoscaler` ポッドが消費できるワーカー・ノードの CPU の最大量を設定します。</td>
-    <td>300m</td>
+    <td>`300m`</td>
     </tr>
     <tr>
     <td>`resources.limits.memory` パラメーター</td>
     <td>`ibm-iks-cluster-autoscaler` ポッドが消費できるワーカー・ノードのメモリーの最大量を設定します。</td>
-    <td>300Mi</td>
+    <td>`300Mi`</td>
     </tr>
     <tr>
     <td>`resources.requests.cpu` パラメーター</td>
     <td>`ibm-iks-cluster-autoscaler` ポッド開始時のワーカー・ノードの CPU の最小量を設定します。</td>
-    <td>100m</td>
+    <td>`100m`</td>
     </tr>
     <tr>
     <td>`resources.requests.memory` パラメーター</td>
     <td>`ibm-iks-cluster-autoscaler` ポッド開始時のワーカー・ノードのメモリーの最小量を設定します。</td>
-    <td>100Mi</td>
+    <td>`100Mi`</td>
     </tr>
     <tr>
     <td>`scaleDownUnneededTime` パラメーター</td>
     <td>ワーカー・ノードが不要になってからスケールダウンが開始されるまでの時間を分単位で設定します。</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>`scaleDownDelayAfterAdd` パラメーター、`scaleDownDelayAfterDelete` パラメーター</td>
     <td>スケールアップ (`add`) またはスケールダウン (`delete`) 後に、クラスター自動スケーリング機能が次のスケーリング操作を開始するまで待機する時間を分単位で設定します。</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>`scaleDownUtilizationThreshold` パラメーター</td>
     <td>ワーカー・ノードの使用率しきい値を設定します。 ワーカー・ノードの使用率がこのしきい値を下回ると、スケールダウン対象のワーカー・ノードと見なされます。 ワーカー・ノードの使用率は、ワーカー・ノードで実行されているすべてのポッドから要求される CPU リソースとメモリー・リソースの合計を、ワーカー・ノードのリソース容量で除算して算出します。</td>
-    <td>0.5</td>
+    <td>`0.5`</td>
     </tr>
     <tr>
     <td>`scanInterval` パラメーター</td>
     <td>スケールアップまたはスケールダウンをトリガーするワークロードの使用状況がないか、クラスター自動スケーリング機能がスキャンする間隔を分単位で設定します。</td>
-    <td>1m</td>
+    <td>`1m`</td>
     </tr>
     <tr>
     <td>`skipNodes.withLocalStorage` パラメーター</td>
     <td>`true` に設定すると、ローカル・ストレージにデータを保存しているポッドを持つワーカー・ノードはスケールダウンされません。</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     <tr>
     <td>`skipNodes.withSystemPods` パラメーター</td>
     <td>`true` に設定すると、`kube-system` ポッドを持つワーカー・ノードはスケールダウンされません。 `kube-system` ポッドがスケールダウンされると予期しない結果が生じる可能性があるため、この値を `false` に設定しないでください。</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     </tbody>
     </table>
@@ -590,27 +596,29 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## 自動スケーリングされる特定のワーカー・プールでのみ実行するようにアプリを制限する
 {: #ca_limit_pool}
 
-ポッドのデプロイメントを、クラスター自動スケーリング機能によって管理される特定のワーカー・プールのみに制限するには、ラベルと `nodeSelector` を使用します。
+ポッドのデプロイメントを、クラスター自動スケーリング機能によって管理される特定のワーカー・プールのみに制限するには、ラベルと `nodeSelector` または `nodeAffinity` を使用します。`nodeAffinity` を使用すると、ポッドをワーカー・ノードに照合するためにスケジューリング動作がどのように機能するのかをより細かく制御できます。ワーカー・ノードへのポッドの割り当てについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) を参照してください。
 {: shortdesc}
 
 **始める前に**:
 *  [`ibm-iks-cluster-autoscaler` プラグイン](#ca_helm)をインストールします。
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **特定の自動スケーリングされるワーカー・プールで実行するようにポッドを制限するには**:
 
-1.  使用するラベルを指定してワーカー・プールを作成します。
+1.  使用するラベルを指定してワーカー・プールを作成します。 例えば、`app: nginx` などのラベルを使用します。
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [ワーカー・プールをクラスター自動スケーリング機能の構成に追加](#ca_cm)します。
-3.  ポッド仕様テンプレートで、`nodeSelector` をワーカー・プールで使用したラベルと一致させます。
+3.  ポッド仕様テンプレートで、`nodeSelector` または `nodeAffinity` をワーカー・プールで使用したラベルと一致させます。
+
+    `nodeSelector` の例:
     ```
     ...
     spec:
@@ -621,6 +629,25 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    `nodeAffinity` の例:
+    ```
+    spec:
+          containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                  operator: In
+                  values:
+                - nginx
     ```
     {: codeblock}
 4.  ポッドをデプロイします。 ラベルが一致しているため、ポッドはラベルが付いたワーカー・プール内のワーカー・ノードにスケジュールされます。
@@ -642,10 +669,10 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 
 <dl>
   <dt><strong>一時停止ポッド</strong></dt>
-  <dd>特定のリソース要求を持つポッドで[一時停止コンテナー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) をデプロイするデプロイメントを作成し、そのデプロイメントに低いポッド優先度を割り当てることができます。 それらのリソースが高優先度のワークロードで必要になると、その一時停止ポッドは先行停止 (preempt) され、保留ポッドになります。 このイベントにより、クラスター自動スケーリング機能のスケールアップがトリガーされます。<br><br>一時停止ポッドのデプロイメントのセットアップについて詳しくは、[Kubernetes の FAQ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler) を参照してください。 [このサンプルのオーバープロビジョン構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) を使用して、優先度クラス、サービス・アカウント、およびデプロイメントを作成できます。<p class="note">この方法を使用する場合は、[ポッドの優先度](/docs/containers?topic=containers-pod_priority#pod_priority)がどのように機能するか、およびデプロイメントに合わせたポッドの優先度の設定方法について必ず理解してください。例えば、一時停止ポッドに、優先度の高いポッドに使用できるリソースが十分にない場合、そのポッドは先行停止されません。 優先度の高いワークロードが保留中のままになり、クラスター自動スケーリング機能のスケールアップがトリガーされます。 ただし、この場合は、実行するワークロードはリソース不足のためにスケジュールできないので、スケールアップ・アクションは早期になりません。</p></dd>
+  <dd>特定のリソース要求を持つポッドで[一時停止コンテナー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) をデプロイするデプロイメントを作成し、そのデプロイメントに低いポッド優先度を割り当てることができます。 それらのリソースが高優先度のワークロードで必要になると、その一時停止ポッドは先行停止 (preempt) され、保留ポッドになります。 このイベントにより、クラスター自動スケーリング機能のスケールアップがトリガーされます。<br><br>一時停止ポッドのデプロイメントのセットアップについて詳しくは、[Kubernetes の FAQ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler) を参照してください。[このサンプルのオーバープロビジョン構成ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) を使用して、優先度クラス、サービス・アカウント、およびデプロイメントを作成できます。<p class="note">この方法を使用する場合は、[ポッドの優先度](/docs/containers?topic=containers-pod_priority#pod_priority)がどのように機能するか、およびデプロイメントに合わせたポッドの優先度の設定方法について必ず理解してください。 例えば、一時停止ポッドに、優先度の高いポッドに使用できるリソースが十分にない場合、そのポッドは先行停止されません。 優先度の高いワークロードが保留中のままになり、クラスター自動スケーリング機能のスケールアップがトリガーされます。 ただし、この場合は、実行するワークロードはリソース不足のためにスケジュールできないので、スケールアップ・アクションは早期になりません。</p></dd>
 
   <dt><strong>水平ポッド自動スケーリング (HPA)</strong></dt>
-  <dd>水平ポッドの自動スケーリングはポッドの平均 CPU 使用率に基づいて行われるので、設定した CPU 使用限度には、ワーカー・プールが実際にリソースを使い果たす前に達します。 さらにポッドが要求されると、クラスター自動スケーリング機能のワーカー・プールのスケールアップがトリガーされます。<br><br>HPA のセットアップについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) を参照してください。</dd>
+  <dd>水平ポッドの自動スケーリングはポッドの平均 CPU 使用率に基づいて行われるので、設定した CPU 使用限度には、ワーカー・プールがリソースを使い果たす前に達します。 さらにポッドが要求されると、クラスター自動スケーリング機能のワーカー・プールのスケールアップがトリガーされます。<br><br>HPA のセットアップについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/) を参照してください。</dd>
 </dl>
 
 <br />
@@ -660,7 +687,7 @@ _図: クラスターの自動スケールアップ/スケールダウン。_
 Helm チャートをバージョン 1.0.2 以前から最新バージョンに更新する場合は、 [この手順](#ca_helm_up_102)に従ってください。
 {: note}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
     ```
@@ -723,7 +750,7 @@ Helm チャートをバージョン 1.0.2 以前から最新バージョンに�
 クラスター自動スケーリング機能の Helm チャートを最新バージョンにするには、以前にインストールされたクラスター自動スケーリング機能の Helm チャートのバージョンを完全に削除する必要があります。 バージョン 1.0.2 以前の Helm チャートがインストールされている場合は、クラスター自動スケーリング機能の最新の Helm チャートをインストールする前に、まずそのバージョンをアンインストールしてください。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  クラスター自動スケーリング機能の構成マップを取得します。
     ```
@@ -790,10 +817,10 @@ Helm チャートをバージョン 1.0.2 以前から最新バージョンに�
 ## クラスター自動スケーリング機能を削除する
 {: #ca_rm}
 
-ワーカー・プールを自動的にスケーリングしないようにするには、クラスター自動スケーリング機能の Helm チャートをアンインストールします。 削除した後は、手動でワーカー・プールの[サイズを変更](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)したり、[再バランス化](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)したりする必要があります。
+ワーカー・プールを自動的にスケーリングしないようにするには、クラスター自動スケーリング機能の Helm チャートをアンインストールします。 削除した後は、手動でワーカー・プールの[サイズを変更](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)したり、[再バランス化](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)したりする必要があります。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  [クラスター自動スケーリング機能の構成マップ](#ca_cm)で、`"enabled"` 値を `false` に設定してワーカー・プールを削除します。
     ```

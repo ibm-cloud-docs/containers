@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} の金融サービス・ユース・ケース
@@ -41,7 +41,7 @@ subcollection: containers
 {{site.data.keyword.containerlong_notm}} と主要なテクノロジー:
 * [水平スケーリング](/docs/containers?topic=containers-app#highly_available_apps)
 * [高可用性を実現するために複数の地域に配備](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [コンテナーのセキュリティーと分離](/docs/containers?topic=containers-security#security)
 * [アプリ間でデータを永続化および同期化する {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -109,7 +109,7 @@ subcollection: containers
 それ以降、開発者は実験を簡単にできるようになり、オープン・ツールチェーンを使用して開発とテスト用のシステムの変更を素早くプッシュできるようになりました。 従来型のソフトウェア開発ツールは、ワンクリックで AI クラウド・サービスをアプリに追加すると、一新されます。
 
 主要なテクノロジー:
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.watson}} AI を使用した不正防止機能](https://www.ibm.com/cloud/watson-studio)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

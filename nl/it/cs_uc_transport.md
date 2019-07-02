@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casi di utilizzo di trasporto per {{site.data.keyword.cloud_notm}}
@@ -130,7 +130,7 @@ Un responsabile delle risorse umane (CHRO) ha bisogno di un nuovo sito di indenn
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce una facile attivazione del calcolo. Quindi, gli sviluppatori possono sperimentare facilmente, distribuendo rapidamente le modifiche nei sistemi di sviluppo e test con toolchain aperte. I loro strumenti di sviluppo software tradizionali ottengono una marcia in più quando aggiungono IBM Watson Assistant. Il nuovo sito di indennità è stato creato in meno di 3 settimane.
 
 Tecnologie chiave:    
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Servizio chatbot con tecnologia Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

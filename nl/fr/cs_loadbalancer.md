@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Equilibrage de charge de base et DSR à l'aide d'équilibreurs de charge de réseau (NLB)
@@ -62,7 +62,7 @@ Lorsque vous créez un cluster standard, un sous-réseau public portable et un s
 {: shortdesc}
 
 * Le sous-réseau public portable fournit 5 adresses IP utilisables. 1 adresse IP publique portable est utilisée par l'[équilibreur de charge d'application (ALB) Ingress public](/docs/containers?topic=containers-ingress) par défaut. Les 4 autres adresses IP publiques portables peuvent être utilisées pour exposer des applications individuelles sur Internet en créant des services d'équilibreur de charge de réseau (NLB) publics.
-* Le sous-réseau privé portable fournit 5 adresses IP utilisables. 1 adresse IP privée portable est utilisée par l'[équilibreur de charge d'application (ALB) Ingress privé](/docs/containers?topic=containers-ingress#private_ingress) par défaut. Les 4 autres adresses IP privées portables peuvent être utilisées pour exposer des applications individuelles sur un réseau privé en créant des services d'équilibreur de charge privés, ou NLB. 
+* Le sous-réseau privé portable fournit 5 adresses IP utilisables. 1 adresse IP privée portable est utilisée par l'[équilibreur de charge d'application (ALB) Ingress privé](/docs/containers?topic=containers-ingress#private_ingress) par défaut. Les 4 autres adresses IP privées portables peuvent être utilisées pour exposer des applications individuelles sur un réseau privé en créant des services d'équilibreur de charge privés, ou NLB.
 
 Les adresses IP publiques et privées portables sont des adresses IP flottantes statiques et ne changent pas en cas de retrait d'un noeud worker. Si le noeud worker dans lequel figure l'adresse IP de l'équilibreur de charge de réseau est retiré, un démon Keepalived qui surveille en permanence l'adresse IP transfère automatiquement celle-ci sur un autre noeud worker. Vous pouvez affecter n'importe quel port à votre équilibreur de charge de réseau. Le service d'équilibreur de charge de réseau fait office de point d'entrée externe pour les demandes entrantes pour l'application. Pour accéder au NLB depuis Internet, vous pouvez utiliser l'adresse IP publique de votre NLB et le port affecté en utilisant le format `<IP_address>:<port>`. Vous pouvez également créer des entrées DNS pour des NLB en enregistrant les adresses IP NLB avec des noms d'hôte.
 
@@ -71,10 +71,10 @@ Lorsque vous exposez une application avec un service NLB, elle est également au
 <br />
 
 
-## Comparaison entre les NLB de version 1.0 et 2.0
+## Comparaison de l'équilibrage de charge de base et DSR dans les équilibreurs de charge de réseau versions 1.0 et 2.0
 {: #comparison}
 
-Lorsque vous créez un équilibreur de charge de réseau, vous pouvez choisir un équilibreur de charge de réseau de version 1.0 ou 2.0. Notez que les équilibreurs de charge de réseau de 2.0 sont en version bêta.
+Lorsque vous créez un équilibreur de charge de réseau, vous pouvez choisir un équilibreur de charge de réseau version 1.0, qui effectue l'équilibrage de charge de base, ou un équilibreur de charge version 2.0, qui effectue l'équilibrage de charge DSR (Direct Server Return). Notez que les équilibreurs de charge de réseau version 2.0 sont en version bêta.
 {: shortdesc}
 
 **En quoi les équilibreurs de charge de réseau 1.0 et 2.0 sont-ils semblables ?**
@@ -83,14 +83,14 @@ Les équilibreurs de charge de réseau 1.0 et 2.0 sont des équilibreurs de char
 
 **En quoi les équilibreurs de charge de réseau 1.0 et 2.0 sont-ils différents ?**
 
-Lorsqu'un client envoie une demande à votre application, l'équilibreur de charge de réseau achemine des paquets de demandes à l'adresse IP du noeud worker où il existe un pod d'application. Les équilibreurs de charge de réseau 1.0 utilisent une conversion d'adresses réseau (NAT) pour réécrire l'adresse IP source du paquet de demandes sur l'adresse IP du noeud worker où il existe un pod d'équilibreur de charge. Lorsque le noeud worker renvoie un paquet de réponses d'application, il utilise l'adresse IP du noeud worker où se trouve l'équilibreur de charge de réseau. L'équilibreur de charge de réseau doit ensuite envoyer le paquet de réponses au client. Pour empêcher la réécriture de l'adresse IP, vous pouvez [activer la conservation de l'adresse IP source](#node_affinity_tolerations). Cependant, la conservation de l'adresse IP source nécessite que les pods d'équilibreur de charge et les pods d'application s'exécutent sur le même noeud worker pour éviter d'avoir à transférer la demande vers un autre noeud worker. Vous devez ajouter des propriétés d'affinité de noeud et de tolérance aux pods d'application.
+Lorsqu'un client envoie une demande à votre application, l'équilibreur de charge de réseau achemine des paquets de demandes à l'adresse IP du noeud worker où il existe un pod d'application. Les équilibreurs de charge de réseau 1.0 utilisent une conversion d'adresses réseau (NAT) pour réécrire l'adresse IP source du paquet de demandes sur l'adresse IP du noeud worker où il existe un pod d'équilibreur de charge. Lorsque le noeud worker renvoie un paquet de réponses d'application, il utilise l'adresse IP du noeud worker où se trouve l'équilibreur de charge de réseau. L'équilibreur de charge de réseau doit ensuite envoyer le paquet de réponses au client. Pour empêcher la réécriture de l'adresse IP, vous pouvez [activer la conservation de l'adresse IP source](#node_affinity_tolerations). Cependant, la conservation de l'adresse IP source nécessite que les pods d'équilibreur de charge et les pods d'application s'exécutent sur le même noeud worker pour éviter d'avoir à transférer la demande vers un autre noeud worker. Vous devez ajouter des propriétés d'affinité de noeud et de tolérance aux pods d'application. Pour plus d'informations sur l'équilibrage de charge de base avec des équilibreurs de charge de réseau version 1.0, voir [Version 1.0 : Composants et architecture de l'équilibrage de charge de base](#v1_planning).
 
-Contrairement aux équilibreurs de charge de réseau 1.0, les équilibreurs de charge de réseau 2.0 n'utilisent pas la conversion NAT lors du transfert des demandes aux pods d'application sur d'autres noeuds worker. Lorsqu'un équilibreur de charge de réseau 2.0 achemine une demande client, il utilise un tunnel IP sur IP (IPIP) pour encapsuler le paquet de demandes d'origine dans un nouveau paquet distinct. Ce paquet comporte une adresse IP source du noeud worker dans lequel se trouve le pod d'équilibreur de charge, ce qui permet au paquet de demandes d'origine de conserver l'adresse IP du client comme adresse IP source. Le noeud worker utilise ensuite le mode DSR (Direct Server Return) pour envoyer le paquet de réponses de l'application à l'adresse IP du client. Le paquet de réponses ignore l'équilibreur de charge de réseau et est envoyé directement au client, réduisant ainsi la quantité de trafic que l'équilibreur de charge de réseau doit traiter.
+Contrairement aux équilibreurs de charge de réseau 1.0, les équilibreurs de charge de réseau 2.0 n'utilisent pas la conversion NAT lors du transfert des demandes aux pods d'application sur d'autres noeuds worker. Lorsqu'un équilibreur de charge de réseau 2.0 achemine une demande client, il utilise un tunnel IP sur IP (IPIP) pour encapsuler le paquet de demandes d'origine dans un nouveau paquet distinct. Ce paquet comporte une adresse IP source du noeud worker dans lequel se trouve le pod d'équilibreur de charge, ce qui permet au paquet de demandes d'origine de conserver l'adresse IP du client comme adresse IP source. Le noeud worker utilise ensuite le mode DSR (Direct Server Return) pour envoyer le paquet de réponses de l'application à l'adresse IP du client. Le paquet de réponses ignore l'équilibreur de charge de réseau et est envoyé directement au client, réduisant ainsi la quantité de trafic que l'équilibreur de charge de réseau doit traiter. Pour plus d'informations sur l'équilibrage de charge DRS avec des équilibreurs de charge de réseau version 2.0, voir [Version 2.0 : Composants et architecture de l'équilibrage de charge DSR](#planning_ipvs).
 
 <br />
 
 
-## Version 1.0 : Composants et architecture
+## Version 1.0 : Composants et architecture de l'équilibrage de charge de base
 {: #v1_planning}
 
 L'équilibreur de charge de réseau 1.0 TCP/UDP utilise Iptables, une fonction du noyau Linux, pour équilibrer la charge des demandes sur les pods d'une application.
@@ -108,7 +108,7 @@ Le diagramme suivant montre comment un équilibreur de charge de réseau 1.0 dir
 
 2. La demande est automatiquement transmise à l'adresse IP et au port du cluster interne du service NLB. L'adresse IP du cluster interne est accessible uniquement à l'intérieur du cluster.
 
-3. `kube-proxy` achemine la demande vers le service NLB pour l'application. 
+3. `kube-proxy` achemine la demande vers le service NLB pour l'application.
 
 4. La demande est transférée à l'adresse IP privée du pod d'application. L'adresse IP source du package de demande est remplacée par l'adresse IP publique du noeud worker sur lequel s'exécute le pod d'application. Si plusieurs instances d'application sont déployées dans le cluster, l'équilibreur de charge de réseau achemine les demandes entre les pods d'application.
 
@@ -130,8 +130,8 @@ Par défaut, chaque équilibreur de charge de réseau 1.0 est configuré dans un
 
 **Avant de commencer** :
 * Pour pouvoir créer des équilibreurs de charge de réseau (NLB) publics dans plusieurs zones, au moins un VLAN public doit comporter des sous-réseaux portables disponibles dans chaque zone. Pour pouvoir créer des équilibreurs de charge de réseau (NLB) privés dans plusieurs zones, au moins un VLAN privé doit comporter des sous-réseaux portables disponibles dans chaque zone. Vous pouvez ajouter des sous-réseaux en suivant la procédure indiquée dans [Configuration de sous-réseaux pour les clusters](/docs/containers?topic=containers-subnets).
-* Si vous limitez le trafic réseau aux noeuds worker de périphérie, vérifiez qu'au moins 2 [noeuds worker de périphérie](/docs/containers?topic=containers-edge#edge) sont activés dans chaque zone pour assurer le déploiement uniforme des équilibreurs de charge de réseau. 
-* Activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+* Si vous limitez le trafic réseau aux noeuds worker de périphérie, vérifiez qu'au moins 2 [noeuds worker de périphérie](/docs/containers?topic=containers-edge#edge) sont activés dans chaque zone pour assurer le déploiement uniforme des équilibreurs de charge de réseau.
+* Activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) pour votre compte d'infrastructure IBM Cloud (SoftLayer) afin que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`. 
 * Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`.
 
 
@@ -216,7 +216,7 @@ Pour configurer un service d'équilibreur de charge de réseau 1.0 dans un clust
       ```
       {: codeblock}
 
-  3. Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`.  La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`. La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
   4. Créez le service dans votre cluster.
 
@@ -360,7 +360,7 @@ Pour créer un service d'équilibreur de charge de réseau 1.0 dans un cluster �
         ```
         {: codeblock}
 
-    3. Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`.  La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3. Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`. La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Créez le service dans votre cluster.
 
@@ -484,7 +484,7 @@ Lorsque votre cluster est connecté à plusieurs réseaux locaux virtuels (VLAN)
 
 Lorsque l'adresse IP source est activée, planifiez les pods d'application sur les noeuds worker avec le même VLAN que l'adresse IP de l'équilibreur de charge de réseau en ajoutant une règle d'affinité au déploiement de l'application.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Procurez-vous l'adresse IP du service d'équilibreur de charge de réseau. Recherchez cette adresse dans la zone **LoadBalancer Ingress**.
     ```
@@ -511,7 +511,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
         ```
         {: screen}
 
-    2. Dans la sortie sous **Subnet VLANs**, recherchez le routage CIDR de sous-réseau correspondant à l'adresse IP NLB que vous avez récupérée précédemment et notez l'ID du VLAN. 
+    2. Dans la sortie sous **Subnet VLANs**, recherchez le routage CIDR de sous-réseau correspondant à l'adresse IP NLB que vous avez récupérée précédemment et notez l'ID du VLAN.
 
         Par exemple, si l'adresse IP du service d'équilibreur de charge de réseau est `169.36.5.xxx`, le sous-réseau correspondant dans l'exemple de sortie de l'étape précédente est `169.36.5.xxx/29`. L'ID du VLAN auquel est connecté ce sous-réseau est `2234945`.
 
@@ -652,17 +652,17 @@ Avant de créer un équilibreur de charge de réseau 2.0, vous devez respecter l
 
 1. [Mettez à jour le maître et les noeuds worker de votre cluster](/docs/containers?topic=containers-update) vers Kubernetes version 1.12 ou ultérieure.
 
-2. Pour permettre à votre équilibreur de charge de réseau 2.0 de transférer les demandes aux pods d'application dans plusieurs zones, ouvrez un cas de support pour demander la configuration pour vos réseaux locaux virtuels (VLAN). **Important** : vous devez demander cette configuration pour tous les VLAN publics. Si vous demandez un nouveau VLAN associé, vous devez ouvrir un autre ticket pour ce VLAN.
+2. Pour permettre à votre équilibreur de charge de réseau version 2.0 de transférer les demandes aux pods d'application dans plusieurs zones, ouvrez un cas de support afin de demander l'agrégation de capacité pour vos réseaux locaux virtuels (VLAN). Ce paramètre de configuration ne provoque pas d'indisponibilité ou d'interruption de réseau. 
     1. Connectez-vous à la [console{{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/).
     2. Dans la barre de menu, cliquez sur **Support**, cliquez sur l'onglet **Gérer les cas**, puis sur **Créer un cas**.
     3. Dans les zones correspondant au cas, indiquez ceci :
        * Comme type de support, sélectionnez **Technique**.
        * Comme catégorie, sélectionnez **Spanning VLAN**.
        * Comme objet, saisissez **Public VLAN Network Question.**
-    4. Ajoutez les informations suivantes à la description : "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
+    4. Ajoutez les informations suivantes à la description : "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Notez que si vous souhaitez autoriser l'agrégation de capacité sur des réseaux VLAN spécifiques, tels que les VLAN publics pour un seul cluster, vous pouvez spécifier ces ID VLAN dans la description.
     5. Cliquez sur **Soumettre**.
 
-3. Activez une [fonction de routeur (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Lorsqu'une fonction VRF ou Spanning VLAN est activée, l'équilibreur de charge de réseau 2.0 peut router des paquets vers différents sous-réseaux dans le compte. 
+3. Activez une [fonction de routeur (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer). Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Lorsqu'une fonction VRF ou Spanning VLAN est activée, l'équilibreur de charge de réseau 2.0 peut router des paquets vers différents sous-réseaux dans le compte.
 
 4. Si vous utilisez des [règles réseau Calico pre-DNAT](/docs/containers?topic=containers-network_policies#block_ingress) pour gérer le trafic à destination de l'adresse IP d'un équilibreur de charge de réseau 2.0, vous devez ajouter les zones `applyOnForward: true` et `doNotTrack: true` et retirer la zone `preDNAT: true` dans la section `spec` dans ces règles. `applyOnForward: true` garantit l'application de la règle Calico au trafic à mesure qu'il est encapsulé et transféré. `doNotTrack: true` garantit que les noeuds worker peuvent utiliser le mode DSR pour renvoyer un paquet de réponses directement au client sans avoir besoin d'assurer le suivi de la connexion. Par exemple, si vous utilisez une règle Calico pour placer en liste blanche le trafic provenant uniquement d'adresses IP spécifiques vers l'adresse IP de votre équilibreur de charge de réseau, la règle ressemble à ce qui suit :
     ```
@@ -703,7 +703,7 @@ Vous pouvez ensuite suivre la procédure décrite dans [Configuration d'un équi
 
 * **Important** : effectuez les [tâches prérequises relatives à l'équilibreur de charge de réseau 2.0](#ipvs_provision).
 * Pour pouvoir créer des équilibreurs de charge de réseau publics dans plusieurs zones, au moins un VLAN public doit comporter des sous-réseaux portables disponibles dans chaque zone. Pour pouvoir créer des équilibreurs de charge de réseau (NLB) privés dans plusieurs zones, au moins un VLAN privé doit comporter des sous-réseaux portables disponibles dans chaque zone. Vous pouvez ajouter des sous-réseaux en suivant la procédure indiquée dans [Configuration de sous-réseaux pour les clusters](/docs/containers?topic=containers-subnets).
-* Si vous limitez le trafic réseau aux noeuds worker de périphérie, vérifiez qu'au moins 2 [noeuds worker de périphérie](/docs/containers?topic=containers-edge#edge) sont activés dans chaque zone pour assurer le déploiement uniforme des équilibreurs de charge de réseau. 
+* Si vous limitez le trafic réseau aux noeuds worker de périphérie, vérifiez qu'au moins 2 [noeuds worker de périphérie](/docs/containers?topic=containers-edge#edge) sont activés dans chaque zone pour assurer le déploiement uniforme des équilibreurs de charge de réseau.
 * Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`.
 
 
@@ -940,7 +940,7 @@ Pour créer un service d'équilibreur de charge de réseau 2.0 dans un cluster �
         </tr>
         </tbody></table>
 
-    3.  Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`.  La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3.  Facultatif : rendez votre service d'équilibreur de charge de réseau accessible uniquement à une plage d'adresses IP limitée en spécifiant les adresses IP dans la zone `spec.loadBalancerSourceRanges`. La zone `loadBalancerSourceRanges` est implémentée par `kube-proxy` dans votre cluster via des règles Iptables sur les noeuds worker. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Créez le service dans votre cluster.
 
@@ -1010,7 +1010,8 @@ Les algorithmes de planification déterminent comment un équilibreur de charge 
 <dt>Round Robin (<code>rr</code>)</dt>
 <dd>L'équilibreur de charge de réseau parcourt la liste des pods d'application lors de l'acheminement des connexions aux noeuds worker, en traitant chaque pod d'application de la même manière. Round Robin (rr) est l'algorithme de planification par défaut des équilibreurs de charge de réseau 2.0.</dd>
 <dt>Source Hashing (<code>sh</code>)</dt>
-<dd>L'équilibreur de charge de réseau génère une clé de hachage en fonction de l'adresse IP source du paquet de demandes du client. L'équilibreur de charge de réseau recherche ensuite la clé de hachage dans une table de hachage affectée de manière statique et achemine la demande au pod d'application qui traite les hachages de cette plage. Cet algorithme garantit que les demandes d'un client particulier sont toujours dirigées vers le même pod d'application. </br>**Remarque** : Kubernetes utilise des règles Iptables, ce qui entraîne l'envoi des demandes à un pod aléatoire sur le noeud worker. Pour utiliser cet algorithme de planification, vous devez vous assurer qu'il n'y a qu'un seul pod de votre application déployé par noeud worker. Par exemple, si chaque pod est labellisé <code>run=&lt;app_name&gt;</code>, ajoutez la règle d'anti-affinité suivante dans la section <code>spec</code> du déploiement de votre application : </br><pre class="codeblock">
+<dd>L'équilibreur de charge de réseau génère une clé de hachage en fonction de l'adresse IP source du paquet de demandes du client. L'équilibreur de charge de réseau recherche ensuite la clé de hachage dans une table de hachage affectée de manière statique et achemine la demande au pod d'application qui traite les hachages de cette plage. Cet algorithme garantit que les demandes d'un client particulier sont toujours dirigées vers le même pod d'application. </br>**Remarque** : Kubernetes utilise des règles Iptables, ce qui entraîne l'envoi des demandes à un pod aléatoire sur le noeud worker. Pour utiliser cet algorithme de planification, vous devez vous assurer qu'il n'y a qu'un seul pod de votre application déployé par noeud worker. Par exemple, si chaque pod est labellisé <code>run=&lt;app_name&gt;</code>, ajoutez la règle d'anti-affinité suivante dans la section <code>spec</code> du déploiement de votre application : </br>
+<pre class="codeblock">
 <code>
     spec:
       affinity:
@@ -1058,17 +1059,17 @@ Après avoir configuré des équilibreurs de charge de réseau, vous pouvez à p
 
 <dl>
 <dt>Nom d'hôte</dt>
-<dd>Lorsque vous créez un équilibreur de charge de réseau public dans un cluster à zone unique ou à zones multiples, vous pouvez exposer votre application sur Internet en créant un nom d'hôte pour l'adresse IP NLB. En outre, {{site.data.keyword.Bluemix_notm}} se charge de générer et gérer le certificat SSL d'assistant pour le nom d'hôte. <p>Dans les clusters à zones multiples, vous pouvez créer un nom d'hôte et ajouter l'adresse IP NLB de chaque zone à cette entrée DNS de nom d'hôte. Par exemple, si vous avez déployé des équilibreurs de charge de noeud pour votre application dans 3 zones dans la région Sud des Etats-Unis, vous pouvez créer le nom d'hôte `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` pour les 3 adresses IP NLB. Lorsqu'un utilisateur accède à votre nom d'hôte d'application, le client accède à l'une de ces adresses IP de manière aléatoire et la demande est envoyée à cet équilibreur de charge de réseau. </p>
+<dd>Lorsque vous créez un équilibreur de charge de réseau public dans un cluster à zone unique ou à zones multiples, vous pouvez exposer votre application sur Internet en créant un nom d'hôte pour l'adresse IP NLB. En outre, {{site.data.keyword.Bluemix_notm}} se charge de générer et gérer le certificat SSL d'assistant pour le nom d'hôte.
+<p>Dans les clusters à zones multiples, vous pouvez créer un nom d'hôte et ajouter l'adresse IP NLB de chaque zone à cette entrée DNS de nom d'hôte. Par exemple, si vous avez déployé des équilibreurs de charge de noeud pour votre application dans 3 zones dans la région Sud des Etats-Unis, vous pouvez créer le nom d'hôte `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` pour les 3 adresses IP NLB. Lorsqu'un utilisateur accède à votre nom d'hôte d'application, le client accède à l'une de ces adresses IP de manière aléatoire et la demande est envoyée à cet équilibreur de charge de réseau.</p>
 Notez que vous ne pouvez pas créer de noms d'hôte pour des équilibreurs de charge de réseau privés.</dd>
 <dt>Moniteur de diagnostic d'intégrité</dt>
-<dd>Activez des diagnostics d'intégrité sur les adresses IP NLB situées derrière un nom d'hôte unique afin de déterminer si elles sont disponibles ou non. Lorsque vous activez un moniteur pour votre nom d'hôte, il réalise un diagnostic d'intégrité de l'adresse IP NLB et tient à jour les résultats de recherche DNS en fonction de ces diagnostics d'intégrité.
-Par exemple, si vos équilibreurs de charge de réseau ont les adresses IP `1.1.1.1`, `2.2.2.2` et `3.3.3.3`, une opération normale de recherche DNS de votre nom d'hôte renvoie ces trois adresses IP, dont 1 est accessible au client de manière aléatoire. Si l'équilibreur de charge de réseau avec l'adresse IP `3.3.3.3` devient indisponible pour une raison quelconque, par exemple en cas de défaillance d'une zone, le diagnostic d'intégrité correspondant à cette adresse IP échoue, le moniteur retire du nom d'hôte l'adresse IP ayant échoué et la recherche DNS renvoie uniquement les adresses IP `1.1.1.1` et `2.2.2.2` qui sont saines. </dd>
+<dd>Activez des diagnostics d'intégrité sur les adresses IP NLB situées derrière un nom d'hôte unique afin de déterminer si elles sont disponibles ou non. Lorsque vous activez un moniteur pour votre nom d'hôte, il réalise un diagnostic d'intégrité de l'adresse IP NLB et tient à jour les résultats de recherche DNS en fonction de ces diagnostics d'intégrité. Par exemple, si vos équilibreurs de charge de réseau ont les adresses IP `1.1.1.1`, `2.2.2.2` et `3.3.3.3`, une opération normale de recherche DNS de votre nom d'hôte renvoie ces trois adresses IP, dont 1 est accessible au client de manière aléatoire. Si l'équilibreur de charge de réseau avec l'adresse IP `3.3.3.3` devient indisponible pour une raison quelconque, par exemple en cas de défaillance d'une zone, le diagnostic d'intégrité correspondant à cette adresse IP échoue, le moniteur retire du nom d'hôte l'adresse IP ayant échoué et la recherche DNS renvoie uniquement les adresses IP `1.1.1.1` et `2.2.2.2` qui sont saines.</dd>
 </dl>
 
 Vous pouvez voir tous les noms d'hôte qui sont enregistrés pour les adresses IP d'équilibreur de charge de réseau dans votre cluster en exécutant la commande suivante :
 ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
-  ```
+ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+```
 {: pre}
 
 </br>
@@ -1081,14 +1082,14 @@ Exposez votre application au public sur Internet en créant un nom d'hôte pour 
 
 Avant de commencer :
 * Passez en revue les remarques et limitations suivantes.
-  * Vous pouvez créer des noms d'hôte pour les équilibreurs de charge de réseau 1.0 et 2.0. 
+  * Vous pouvez créer des noms d'hôte pour les équilibreurs de charge de réseau 1.0 et 2.0.
   * Vous ne pouvez pas créer de noms d'hôte pour des équilibreurs de charge de réseau privés.
-  * Vous pouvez enregistrer jusqu'à 128 noms d'hôte. Cette limite peut être levée sur demande en ouvrant un [cas de support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+  * Vous pouvez enregistrer jusqu'à 128 noms d'hôte. Cette limite peut être levée sur demande en ouvrant un [cas de support](/docs/get-support?topic=get-support-getting-customer-support).
 * [Créez un équilibreur de charge de réseau pour votre application dans un cluster à zone unique](#lb_config) ou [créez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples](#multi_zone_config).
 
 Pour créer un nom d'hôte pour une ou plusieurs adresses IP NLB :
 
-1. Procurez-vous l'adresse **EXTERNAL-IP** de votre équilibreur de charge de réseau. Si vous avez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples qui exposent une application, procurez-vous les adresses IP pour chaque équilibreur de charge de réseau. 
+1. Procurez-vous l'adresse **EXTERNAL-IP** de votre équilibreur de charge de réseau. Si vous avez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples qui exposent une application, procurez-vous les adresses IP pour chaque équilibreur de charge de réseau.
   ```
   kubectl get svc
   ```
@@ -1102,13 +1103,13 @@ Pour créer un nom d'hôte pour une ou plusieurs adresses IP NLB :
   ```
   {: screen}
 
-2. Enregistrez l'adresse IP en créant un nom d'hôte DNS. Notez que vous pouvez initialement créer le nom d'hôte avec une seule adresse IP. 
+2. Enregistrez l'adresse IP en créant un nom d'hôte DNS. Notez que vous pouvez initialement créer le nom d'hôte avec une seule adresse IP.
   ```
   ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP>
   ```
   {: pre}
 
-3. Vérifiez que le nom d'hôte est créé. 
+3. Vérifiez que le nom d'hôte est créé.
   ```
   ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
@@ -1121,14 +1122,14 @@ Pour créer un nom d'hôte pour une ou plusieurs adresses IP NLB :
   ```
   {: screen}
 
-4. Si vous avez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples qui exposent une application, ajoutez les adresses IP des autres équilibreurs de charge de réseau au nom d'hôte. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez ajouter. 
+4. Si vous avez des équilibreurs de charge de réseau dans chaque zone d'un cluster à zones multiples qui exposent une application, ajoutez les adresses IP des autres équilibreurs de charge de réseau au nom d'hôte. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez ajouter.
   ```
   ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
   ```
   {: pre}
 
 5. Facultatif : vérifiez que les adresses IP sont enregistrés avec votre nom d'hôte en exécutant une commande `host` ou `ns lookup`.
-Exemple de commande :
+  Exemple de commande :
   ```
   host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
   ```
@@ -1141,7 +1142,7 @@ Exemple de commande :
   ```
   {: screen}
 
-6. Dans un navigateur Web, entrez l'URL permettant d'accéder à votre application via le nom d'hôte que vous avez créé. 
+6. Dans un navigateur Web, entrez l'URL permettant d'accéder à votre application via le nom d'hôte que vous avez créé.
 
 Vous pouvez ensuite [activer les diagnostics d'intégrité sur le nom d'hôte en créant un moniteur d'état](#loadbalancer_hostname_monitor).
 
@@ -1153,7 +1154,7 @@ Vous pouvez ensuite [activer les diagnostics d'intégrité sur le nom d'hôte en
 Les noms d'hôte pour les équilibreurs de charge de réseau suivent le format `<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`.
 {: shortdesc}
 
-Par exemple, un nom d'hôte que vous créez pour un équilibreur de charge de réseau peut se présenter comme suit : `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. Le tableau suivant décrit chaque composant du nom d'hôte. 
+Par exemple, un nom d'hôte que vous créez pour un équilibreur de charge de réseau peut se présenter comme suit : `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. Le tableau suivant décrit chaque composant du nom d'hôte.
 
 <table>
 <thead>
@@ -1164,26 +1165,26 @@ Par exemple, un nom d'hôte que vous créez pour un équilibreur de charge de r�
 <td><code>&lt;cluster_name&gt;</code></td>
 <td>Nom de votre cluster.
 <ul><li>Si le nom du cluster comprend tout au plus 26 caractères, il est entièrement inclus sans être modifié : <code>myclustername</code>.</li>
-<li>Si le nom du cluster comprend au moins 26 caractères et s'il est unique dans cette région, seuls les 24 premiers caractères sont utilisés : <code>myveryverylongclusternam</code>. </li>
-<li>Si le nom du cluster comprend au moins 26 caractères et s'il n'est pas unique dans cette région, seuls les 17 premiers caractères sont utilisés et un tiret suivi de 6 caractères aléatoires est ajouté : <code>myveryverylongclu-ABC123</code>. </li></ul>
+<li>Si le nom du cluster comprend au moins 26 caractères et s'il est unique dans cette région, seuls les 24 premiers caractères sont utilisés : <code>myveryverylongclusternam</code>.</li>
+<li>Si le nom du cluster comprend au moins 26 caractères et s'il n'est pas unique dans cette région, seuls les 17 premiers caractères sont utilisés et un tiret suivi de 6 caractères aléatoires est ajouté : <code>myveryverylongclu-ABC123</code>.</li></ul>
 </td>
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>Une valeur de hachage unique globale est créée pour votre compte {{site.data.keyword.Bluemix_notm}}. Tous les noms d'hôte que vous créez pour des équilibreurs de charge de réseau dans des clusters dans votre compte utilisent cette valeur de hachage unique globale. </td>
+<td>Une valeur de hachage unique globale est créée pour votre compte {{site.data.keyword.Bluemix_notm}}. Tous les noms d'hôte que vous créez pour des équilibreurs de charge de réseau dans des clusters dans votre compte utilisent cette valeur de hachage unique globale.</td>
 </tr>
 <tr>
 <td><code>0001</code></td>
 <td>
-Le premier et le deuxième caractères, <code>00</code>, indiquent un nom d'hôte public. Le troisième et le quatrième caractères, par exemple, <code>01</code> ou un autre nombre, agissent en tant que compteur pour chaque nom d'hôte que vous créez. </td>
+Le premier et le deuxième caractères, <code>00</code>, indiquent un nom d'hôte public. Le troisième et le quatrième caractères, par exemple, <code>01</code> ou un autre nombre, agissent en tant que compteur pour chaque nom d'hôte que vous créez.</td>
 </tr>
 <tr>
 <td><code>&lt;region&gt;</code></td>
-<td>Région dans laquelle le cluster est créé. </td>
+<td>Région dans laquelle le cluster est créé.</td>
 </tr>
 <tr>
 <td><code>containers.appdomain.cloud</code></td>
-<td>Sous-domaine pour les noms d'hôte {{site.data.keyword.containerlong_notm}}. </td>
+<td>Sous-domaine pour les noms d'hôte {{site.data.keyword.containerlong_notm}}.</td>
 </tr>
 </tbody>
 </table>
@@ -1225,19 +1226,19 @@ Avant de commencer, [enregistrez des adresses IP NLB avec un nom d'hôte DNS](#l
   <tbody>
   <tr>
   <td><code>--cluster &lt;cluster_name_or_ID&gt;</code></td>
-  <td>Obligatoire : nom ou ID du cluster sur lequel le nom d'hôte est enregistré. </td>
+  <td>Obligatoire : nom ou ID du cluster sur lequel le nom d'hôte est enregistré.</td>
   </tr>
   <tr>
   <td><code>--nlb-host &lt;host_name&gt;</code></td>
-  <td>Obligatoire : Nom d'hôte pour lequel configurer un moniteur de diagnostic d'intégrité. </td>
+  <td>Obligatoire : Nom d'hôte pour lequel configurer un moniteur de diagnostic d'intégrité.</td>
   </tr>
   <tr>
   <td><code>--enable</code></td>
-  <td>Obligatoire : Activez le moniteur de diagnostic d'intégrité pour le nom d'hôte. </td>
+  <td>Obligatoire : Activez le moniteur de diagnostic d'intégrité pour le nom d'hôte.</td>
   </tr>
   <tr>
   <td><code>--description &lt;description&gt;</code></td>
-  <td>Description du moniteur de diagnostic d'intégrité. </td>
+  <td>Description du moniteur de diagnostic d'intégrité.</td>
   </tr>
   <tr>
   <td><code>--type &lt;type&gt;</code></td>
@@ -1269,7 +1270,7 @@ Avant de commencer, [enregistrez des adresses IP NLB avec un nom d'hôte DNS](#l
   </tr>
   <tr>
   <td><code>--expected-body &lt;expected-body&gt;</code></td>
-  <td>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, sous-chaîne non sensible à la casse que le diagnostic d'intégrité recherche dans le corps de la réponse. Si chaîne n'est pas trouvée, l'adresse IP est considérée comme défectueuse. </td>
+  <td>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, sous-chaîne non sensible à la casse que le diagnostic d'intégrité recherche dans le corps de la réponse. Si chaîne n'est pas trouvée, l'adresse IP est considérée comme défectueuse.</td>
   </tr>
   <tr>
   <td><code>--expected-codes &lt;expected-codes&gt;</code></td>
@@ -1281,18 +1282,18 @@ Avant de commencer, [enregistrez des adresses IP NLB avec un nom d'hôte DNS](#l
   </tr>
   <tr>
   <td><code>--follows-redirects &lt;true&gt;</code></td>
-  <td>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, affectez la valeur <code>true</code> pour suivre les éventuelles redirections qui sont renvoyées par l'adresse IP. </td>
+  <td>Lorsque <code>type</code> a pour valeur <code>HTTP</code> ou <code>HTTPS</code>, affectez la valeur <code>true</code> pour suivre les éventuelles redirections qui sont renvoyées par l'adresse IP.</td>
   </tr>
   </tbody>
   </table>
 
   Exemple de commande :
   ```
-ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
-```
+  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60  --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+  ```
   {: pre}
 
-3. Vérifiez que le moniteur de diagnostic d'intégrité est configuré avec les paramètres appropriés. 
+3. Vérifiez que le moniteur de diagnostic d'intégrité est configuré avec les paramètres appropriés.
   ```
   ibmcloud ks nlb-dns-monitor-get --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
@@ -1304,7 +1305,7 @@ ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a
   ```
   {: screen}
 
-4. Affichez l'état du diagnostic d'intégrité des adresses IP NLB situées derrière votre nom d'hôte. 
+4. Affichez l'état du diagnostic d'intégrité des adresses IP NLB situées derrière votre nom d'hôte.
   ```
   ibmcloud ks nlb-dns-monitor-status --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
@@ -1328,13 +1329,13 @@ Vous pouvez ajouter et retirer des adresses IP NLB dans les noms d'hôte que vou
 
 **Adresses IP d'équilibreur de charge de réseau**
 
-Si vous ajoutez ultérieurement d'autres équilibreurs de charge de réseau dans d'autres zones de votre cluster pour exposer la même application, vous pouvez ajouter les adresses IP correspondantes pour le nom d'hôte existant. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez ajouter. 
+Si vous ajoutez ultérieurement d'autres équilibreurs de charge de réseau dans d'autres zones de votre cluster pour exposer la même application, vous pouvez ajouter les adresses IP correspondantes pour le nom d'hôte existant. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez ajouter.
 ```
-  ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
-  ```
+ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
+```
 {: pre}
 
-Vous pouvez également retirer les adresses IP d'équilibreur de charge de réseau qui ne doivent plus être enregistrées avec un nom d'hôte. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez retirer. Si vous retirez toutes les adresses IP d'un nom d'hôte, le nom d'hôte existe toujours mais aucune adresse IP ne lui est associée. 
+Vous pouvez également retirer les adresses IP d'équilibreur de charge de réseau qui ne doivent plus être enregistrées avec un nom d'hôte. Notez que vous devez exécuter la commande suivante pour chaque adresse IP que vous souhaitez retirer. Si vous retirez toutes les adresses IP d'un nom d'hôte, le nom d'hôte existe toujours mais aucune adresse IP ne lui est associée.
 ```
 ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```
@@ -1344,7 +1345,7 @@ ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host 
 
 **Moniteurs de diagnostic d'intégrité**
 
-Si vous devez modifier la configuration de votre moniteur d'état, vous pouvez modifier des paramètres spécifiques. Ajoutez uniquement les options des paramètres que vous souhaitez modifier. 
+Si vous devez modifier la configuration de votre moniteur d'état, vous pouvez modifier des paramètres spécifiques. Ajoutez uniquement les options des paramètres que vous souhaitez modifier.
 ```
 ibmcloud ks nlb-dns-monitor-configure --cluster <cluster_name_or_id> --nlb-host <host_name> --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
 ```

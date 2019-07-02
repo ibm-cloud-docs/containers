@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # パフォーマンスのチューニング
 {: #kernel}
@@ -116,7 +118,7 @@ subcollection: containers
     ```
     {: pre}
 
-2. [クラスター内のすべてのワーカー・ノードをリブートします](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。 ワーカー・ノードは、デフォルト値が適用された状態でオンラインに戻ります。
+2. [クラスター内のすべてのワーカー・ノードをリブートします](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)。 ワーカー・ノードは、デフォルト値が適用された状態でオンラインに戻ります。
 
 <br />
 
@@ -168,7 +170,7 @@ subcollection: containers
 
 メトリック・プロバイダー・ポッドには、クラスター内のワーカー・ノードの数に応じて `metrics-server` または `heapster` メイン・コンテナーのリソース要求および制限をスケーリングする `nanny` コンテナーもあります。 メトリック・プロバイダーの構成マップを編集して、デフォルトのリソースを変更できます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  クラスターのメトリック・プロバイダーの構成マップ YAML を開きます。
     *  `metrics-server` の場合:

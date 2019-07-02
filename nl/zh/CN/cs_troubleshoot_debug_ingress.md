@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 调试 Ingress
@@ -44,11 +44,11 @@ subcollection: containers
 
 ## 步骤 1：在 {{site.data.keyword.containerlong_notm}} 诊断和调试工具中运行 Ingress 测试
 
-进行故障诊断时，可以使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具来运行 Ingress 测试并从集群收集相关 Ingress 信息。要使用调试工具，请安装 [`ibmcloud-iks-debug` Helm chart ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+进行故障诊断时，可以使用 {{site.data.keyword.containerlong_notm}} 诊断和调试工具来运行 Ingress 测试并从集群收集相关 Ingress 信息。要使用调试工具，请安装 [`ibmcloud-iks-debug` Helm chart ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug)：
 {: shortdesc}
 
 
-1. [在集群中设置 Helm，为 Tiller 创建服务帐户，然后将 `ibm` 存储库添加到 Helm 实例](/docs/containers?topic=containers-integrations#helm)。
+1. [在集群中设置 Helm，为 Tiller 创建服务帐户，然后将 `ibm` 存储库添加到 Helm 实例](/docs/containers?topic=containers-helm)。
 
 2. 将 Helm chart 安装到集群。
   ```
@@ -160,18 +160,18 @@ subcollection: containers
     ```
     {: pre}
 
-    `dal10` 和 `dal13` 中具有工作程序节点的多专区集群的示例输出：
+    `dal10` 和 `dal13` 中具有工作程序节点的多专区集群的输出示例：
 
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone    Build
-    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
-    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
+    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:411/ingress-auth:315   2294021
+    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
+    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238  dal13   ingress:411/ingress-auth:315   2294019
+    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222   dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
 
-    * 如果公共 ALB 没有 IP 地址，请参阅 [Ingress ALB 未部署在专区中](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)。
+    * 如果公共 ALB 没有 IP 地址，请参阅 [Ingress ALB 未部署在专区中](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)。
 
 2. 检查 ALB IP 的运行状况。
 
@@ -184,7 +184,7 @@ ping <ALB_IP>
         * 如果 CLI 返回超时并且您具有保护工作程序节点的定制防火墙，请确保在[防火墙](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)中允许 ICMP。
         * 如果没有防火墙阻止 ping 操作，并且 ping 操作一直运行到超时，请[检查 ALB pod 的状态](#check_pods)。
 
-    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群使用的仍是旧格式 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](/docs/containers?topic=containers-clusters#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
+    * 仅多专区集群：可以使用 MZLB 运行状况检查来确定 ALB IP 的阶段状态。有关 MZLB 的更多信息，请参阅[多专区负载均衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 运行状况检查仅可用于具有以下格式的新 Ingress 子域的集群：`<cluster_name>.<region_or_zone>.containers.appdomain.cloud`。如果集群使用的仍是旧格式 `<cluster_name>.<region>.containers.mybluemix.net`，请[将单专区集群转换为多专区集群](/docs/containers?topic=containers-add_workers#add_zone)。将为集群分配采用新格式的子域，但也可以继续使用较旧的子域格式。或者，可以对自动分配了新的子域格式的新集群进行排序。
     
 
     以下 HTTP cURL 命令使用 `albhealth` 主机，该主机由 {{site.data.keyword.containerlong_notm}} 配置为返回 ALB IP 的 `healthy` 或 `unhealthy` 阶段状态。
@@ -292,8 +292,8 @@ ping <ALB_IP>
 
     例如，不可访问的 IP `169.62.196.238` 属于 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`：
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone   Build
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+    public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:411/ingress-auth:315   2294021
     ```
     {: screen}
 
@@ -317,7 +317,7 @@ ping <ALB_IP>
         ```
         {: pre}
 
-        以下示例输出确认 ALB pod 已配置了正确的运行状况检查主机名 `albhealth.<domain>`：
+        以下输出示例确认 ALB pod 已配置了正确的运行状况检查主机名 `albhealth.<domain>`：
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```
@@ -374,7 +374,7 @@ ping <ALB_IP>
     ```
     {: pre}
 
-    以下示例输出确认仅运行正常的 ALB IP `169.46.52.222` 保留在 DNS 注册中，运行状况欠佳的 ALB IP `169.62.196.238` 已除去：
+    以下输出示例确认仅运行正常的 ALB IP `169.46.52.222` 保留在 DNS 注册中，运行状况欠佳的 ALB IP `169.62.196.238` 已除去：
     ```
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
     ```
@@ -430,7 +430,7 @@ ping <ALB_IP>
 集群仍然有问题吗？
 {: shortdesc}
 
--  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
+-  在终端中，当有 `ibmcloud` CLI 和插件的更新可用时，您会收到通知。务必使 CLI 保持最新，以便您可以使用所有可用的命令和标志。
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/status?selected=status)。
 -   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
     如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
@@ -439,6 +439,6 @@ ping <ALB_IP>
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
--   通过开具案例来联系 IBM 支持人员。要了解有关开具 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
+-   通过打开案例来联系 IBM 支持人员。要了解有关打开 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
 {: tip}
 

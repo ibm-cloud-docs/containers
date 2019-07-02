@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # チュートリアル: Calico ネットワーク・ポリシーを使用したトラフィックのブロック
@@ -31,7 +32,7 @@ subcollection: containers
 
 ただし、セキュリティー上の理由から、特定のソース IP アドレスからのネットワーク・サービスへのトラフィックのみを許可する必要がある場合があります。 [Calico Pre-DNAT ポリシー![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat)を使用して、特定の IP アドレスのトラフィックをホワイトリストまたはブラックリストに入れることができます。 Pre-DNAT ポリシーは、Kubernetes がポッドにトラフィックを転送するために通常の DNAT を使用する前に適用されるため、指定されたトラフィックがアプリに到達することを防止します。 Calico Pre-DNAT ポリシーを作成する場合、ソース IP アドレスをホワイトリストまたはブラックリストに入れるかどうかを選択します。 ほとんどのシナリオでは、ホワイトリスティングによって、既知の許可されたソース IP アドレスからのトラフィックを除くすべてのトラフィックがブロックされるので、最も安全な構成が提供されます。 通常、ブラックリスティングは、少数の IP アドレスからの攻撃を防ぐようなシナリオでのみ有用です。
 
-このシナリオでは、PR 会社のネットワーク管理者の役割を担って、アプリへの何らかの異常なトラフィックを見つけます。 このチュートリアルのレッスンでは、サンプル Web サーバー・アプリを作成し、ネットワーク・ロード・バランサー (NLB) サービスを使用してアプリを公開し、Calico ポリシーのホワイトリストとブラックリストの両方を使用して、不要で異常なトラフィックからアプリを保護します。
+このシナリオでは、PR 会社のネットワーク管理者の役割を担って、アプリへの何らかの異常なトラフィックを見つけます。このチュートリアルのレッスンでは、サンプル Web サーバー・アプリを作成し、ネットワーク・ロード・バランサー (NLB) サービスを使用してアプリを公開し、Calico ポリシーのホワイトリストとブラックリストの両方を使用して、不要で異常なトラフィックからアプリを保護します。
 
 ## 達成目標
 {: #policies_objectives}
@@ -56,7 +57,7 @@ subcollection: containers
 - [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 - [Calico CLI をインストールして構成します](/docs/containers?topic=containers-network_policies#cli_install)。
-- {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
+- {{site.data.keyword.containerlong_notm}} に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
     - [任意のプラットフォーム役割](/docs/containers?topic=containers-users#platform)
     - [**ライター**または**管理者**のサービス役割](/docs/containers?topic=containers-users#platform)
 
@@ -69,7 +70,7 @@ subcollection: containers
 最初のレッスンでは、複数の IP アドレスとポートからアプリがどのように公開されるか、パブリック・トラフィックがクラスターにどのように着信するかを示します。
 {: shortdesc}
 
-チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。 次に、ネットワーク・ロード・バランサー (NLB) 1.0 サービスを作成して、アプリを公開します。 NLB 1.0 サービスにより、NLB サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
+チュートリアルを通じて使用するサンプル Web サーバー・アプリのデプロイから開始します。 `echoserver` Web サーバーでは、クライアントからクラスターへの接続に関するデータが表示され、PR 会社のクラスターへのアクセスをテストできます。次に、ネットワーク・ロード・バランサー (NLB) 1.0 サービスを作成して、アプリを公開します。 NLB 1.0 サービスにより、NLB サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
 
 Ingress アプリケーション・ロード・バランサー (ALB) を使用しますか? ステップ 3 と 4 で NLB を作成する代わりに、[Web サーバー・アプリのサービスを作成して](/docs/containers?topic=containers-ingress#public_inside_1)、[Web サーバー・アプリの Ingress リソースを作成します](/docs/containers?topic=containers-ingress#public_inside_4)。 その後、`ibmcloud ks albs --cluster <cluster_name>` を実行して ALB のパブリック IP を取得し、それらの IP をチュートリアルの `<loadbalancer_IP>` の代わりに常に使用してください。
 {: tip}
@@ -172,7 +173,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) を使用�
         ```
         {: screen}
 
-6. ノード・ポートによってコンピューターから公開されたアプリにパブリック・アクセスできることを確認します。 NLB サービスにより、NLB サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
+6. ノード・ポートによってコンピューターから公開されたアプリにパブリック・アクセスできることを確認します。NLB サービスにより、NLB サービス IP アドレスとワーカー・ノードのノード・ポートの両方でアプリが使用可能になります。
 
     1. NLB がワーカー・ノードに割り当てたノード・ポートを取得します。 ノード・ポートの範囲は 30000 から 32767 までです。
         ```
@@ -196,9 +197,9 @@ Ingress アプリケーション・ロード・バランサー (ALB) を使用�
         出力例:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
         ```
         {: screen}
 
@@ -309,7 +310,13 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
     ```
     {: screen}
 
-4. メモの値を使用して、まだ NLB 外部 IP アドレスにパブリック・アクセスできることを確認します。
+4. 前回のレッスンで作成した LoadBalancer の externalTrafficPolicy を `Cluster` から `Local` に変更します。`Local` にすることで、次のステップで LoadBalancer の外部 IP に対して curl を実行したときに、システムのソース IP が保持されるようになります。
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. メモの値を使用して、まだ NLB 外部 IP アドレスにパブリック・アクセスできることを確認します。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -338,11 +345,11 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
         -no body in request-
     ```
     {: screen}
-    出力の `Request Information` セクションのソース IP アドレスに注意してください (この例では、`client_address=1.1.1.1`)。 ソース IP アドレスは、curl の実行に使用しているシステムのパブリック IP です。 それ以外の場合、プロキシーまたは VPN を介してインターネットに接続している場合は、プロキシーまたは VPN がシステムの実際の IP アドレスを不明瞭にしている可能性があります。 いずれの場合も、NLB はシステムのソース IP アドレスをクライアント IP アドレスとして認識します。
+    出力の `Request Information` セクションでは、ソース IP アドレスは、`client_address=1.1.1.1` などになります。ソース IP アドレスは、curl の実行に使用しているシステムのパブリック IP です。 それ以外の場合、プロキシーまたは VPN を介してインターネットに接続している場合は、プロキシーまたは VPN がシステムの実際の IP アドレスを不明瞭にしている可能性があります。 いずれの場合も、NLB はシステムのソース IP アドレスをクライアント IP アドレスとして認識します。
 
-5. 後のレッスンで使用するために、システムのソース IP アドレス (前のステップの出力では `client_address=1.1.1.1`) をメモにコピーします。
+6. 後のレッスンで使用するために、システムのソース IP アドレス (前のステップの出力では `client_address=1.1.1.1`) をメモにコピーします。
 
-この時点で、アプリはパブリック NLB ポートからのみパブリック・インターネットに公開されています。 パブリック・ノード・ポートへのトラフィックはブロックされています。 不要なトラフィックからクラスターを部分的にロックしました。
+この時点で、アプリはパブリック NLB ポートからのみパブリック・インターネットに公開されています。 パブリック・ノード・ポートへのトラフィックはブロックされています。 不要なトラフィックからクラスターが部分的にロックされました。
 
 次に、特定のソース IP からのトラフィックをホワイトリストに入れるための Calico ポリシーを作成して適用します。
 
@@ -411,7 +418,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
     ```
     {: pre}
 
-4. テキスト・エディターで、`whitelist.yaml` という下位の Pre-DNAT ポリシーを作成し、システムの IP から NLB IP アドレスとポートへのトラフィックを許可します。 メモの値を使用して、`<loadbalancer_IP>` を NLB のパブリック IP アドレスに置き換え、`<client_address>` をシステムのソース IP のパブリック IP アドレスに置き換えます。
+4. テキスト・エディターで、`whitelist.yaml` という下位の Pre-DNAT ポリシーを作成し、システムの IP から NLB IP アドレスとポートへのトラフィックを許可します。 メモの値を使用して、`<loadbalancer_IP>` を NLB のパブリック IP アドレスに置き換え、`<client_address>` をシステムのソース IP のパブリック IP アドレスに置き換えます。 システム IP を思い出せない場合は、`curl ifconfig.co` を実行できます。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -477,7 +484,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
 
 このレッスンでは、所有するシステムのソース IP アドレスからのトラフィックをブロックすることにより、ブラックリストをテストします。 レッスン 4 の終了時に、パブリック・ノード・ポートへのすべてのトラフィックがブロックされ、パブリック NLB へのすべてのトラフィックが許可されます。 ブラックリストに入れたシステム IP からの NLB へのトラフィックのみブロックされます。
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web サーバー・アプリは、パブリック NLB によってインターネットに公開されます。システム IP からのトラフィックのみブロックされます。" style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web サーバー・アプリはパブリック NLB によって、インターネットに公開されます。システム IP からのトラフィックのみがブロックされます。" style="width:550px; border-style: none"/>
 
 1. 前のレッスンで作成したホワイトリスト・ポリシーをクリーンアップします。
     - Linux:
@@ -603,7 +610,7 @@ PR 会社のクラスターを保護するには、アプリを公開してい�
         nets:
         - <client_address>/32
     selector: ibm.role=='worker_public'
-    order: 500
+    order: 300
     types:
     - Ingress
   ```

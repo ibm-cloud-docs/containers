@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Utilitaires de stockage IBM Cloud
@@ -416,7 +418,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
 
 3. Créez l'unité de stockage par blocs dans la même zone que votre noeud worker non SDS.
 
-   **Exemple de mise à disposition d'un stockage par blocs de type endurance de 20 Go avec 2 IOPS par Go :**
+   **Exemple de mise à disposition d'un stockage par blocs de type endurance de 20 Go avec deux IOPS par Go :**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
@@ -463,7 +465,7 @@ Utilisez cette option pour ajouter différentes configurations de stockage par b
    ```
    {: screen}
 
-6. Autorisez l'accès du noeud worker non SDS à l'unité de stockage par blocs. Remplacez `<volume_ID>` par l'ID du volume de votre unité de stockage par blocs que vous avez récupéré précédemment, et `<private_worker_IP>` par l'adresse IP privée du noeud worker non SDS que vous souhaitez utiliser pour connecter l'unité. 
+6. Autorisez l'accès du noeud worker non SDS à l'unité de stockage par blocs. Remplacez `<volume_ID>` par l'ID du volume de votre unité de stockage par blocs que vous avez récupéré précédemment, et `<private_worker_IP>` par l'adresse IP privée du noeud worker non SDS que vous souhaitez utiliser pour connecter l'unité.
 
    ```
    ibmcloud sl block access-authorize <volume_ID> -p <private_worker_IP>
@@ -502,7 +504,7 @@ Pour connecter l'unité de stockage par blocs à un noeud worker non SDS, vous d
 
 **Avant de commencer** :
 - Vérifiez que vous avez créé [automatiquement](#automatic_block) ou [manuellement](#manual_block) du stockage par blocs brut, non formaté et non monté dans vos noeuds worker non SDS.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Pour connecter du stockage par blocs brut à des noeuds worker non SDS** :
 1. Préparez la création du volume persistant.  
@@ -645,3 +647,5 @@ Pour connecter l'unité de stockage par blocs à un noeud worker non SDS, vous d
 
 Si vous souhaitez déconnecter un volume, supprimez le volume persistant. Les volumes déconnectés sont toujours accessibles à un noeud worker spécifique et sont reconnectés lorsque vous créez un nouveau volume persistant avec la classe de stockage {{site.data.keyword.Bluemix_notm}} Block Volume Attacher pour connecter un autre volume au même noeud worker. Pour éviter de reconnecter l'ancien volume déconnecté, n'autorisez plus le noeud worker à accéder au volume déconnecté en exécutant la commande `ibmcloud sl block access-revoke`. La déconnexion du volume ne retire pas le volume de votre compte d'infrastructure IBM Cloud (SoftLayer). Pour annuler la facturation de votre volume, vous devez [retirer manuellement le stockage de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/containers?topic=containers-cleanup).
 {: note}
+
+

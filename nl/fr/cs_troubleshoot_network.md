@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Traitement des incidents liés à la mise en réseau au sein d'un cluster
@@ -55,7 +55,7 @@ Il se peut que votre service NLB ne fonctionne pas correctement pour l'une des r
 {: tsResolve}
 Pour identifier et résoudre les problèmes liés à votre service NLB :
 
-1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre service NLB. 
+1.  Prenez soin de configurer un cluster standard qui est entièrement déployé et qui comporte au moins deux noeuds worker afin d'assurer la haute disponibilité de votre service NLB.
 
   ```
   ibmcloud ks workers --cluster <cluster_name_or_ID>
@@ -202,72 +202,76 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  </tr>
  <tr>
  <td>La valeur confidentielle que vous avez importée porte le même nom que la valeur confidentielle d'Ingress fournie par IBM.</td>
- <td>Renommez votre valeur confidentielle. Vous pouvez vérifier le nom de la valeur confidentielle Ingress fournie par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
-</td>
+ <td>Renommez votre valeur confidentielle. Vous pouvez vérifier le nom de la valeur confidentielle Ingress fournie par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
  </tbody></table>
 
 <br />
 
 
-## Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress
+## Impossible d'obtenir un sous-domaine pour un ALB Ingress, un ALB n'est pas déployé dans une zone ou impossible de déployer un équilibreur de charge
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Lorsque vous exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>`, votre cluster est à l'état `normal` mais aucun **sous-domaine Ingress** n'est disponible.
-
-Vous pouvez obtenir un message d'erreur de ce type :
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* Aucun sous-domaine Ingress : lorsque vous exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>`, votre cluster est à l'état `normal` mais aucun **sous-domaine Ingress** n'est disponible. 
+* Un ALB n'est pas déployé dans une zone : lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun ALB n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* Impossible de déployer un équilibreur de charge : lorsque vous décrivez l'objet ConfigMap `ibm-cloud-provider-vlan-ip-config`, il se peut qu'un message d'erreur semblable à celui décrit ci-après s'affiche :
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition.
+Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition ou il se peut qu'aucune adresse IP publique portable ne soit disponible pour créer un équilibreur de charge de réseau.
 
 Pour afficher le nombre de sous-réseaux d'un VLAN :
 1.  Dans la [console de l'infrastructure IBM Cloud (SoftLayer)](https://cloud.ibm.com/classic?), sélectionnez **Réseau** > **Gestion IP** > **VLAN**.
 2.  Cliquez sur le **Numéro de VLAN** du VLAN que vous avez utilisé pour créer votre cluster. Examinez la section **Sous-réseaux** pour voir s'il existe 40 sous-réseaux ou plus.
 
 {: tsResolve}
-Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Ensuite, [créez un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) qui utilise ce nouveau VLAN.
+Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Ensuite, [créez un cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) qui utilise ce nouveau VLAN.
 
-Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`. 
 
-Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser des sous-réseaux dans le cluster.
-1.  Vérifiez que les sous-réseaux que vous souhaitez utiliser sont disponibles.
+Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser des sous-réseaux sur le VLAN en les ajoutant au cluster.
+1. Vérifiez que le sous-réseau que vous souhaitez utiliser est disponible.
+  <p class="note">Le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.</p>
 
-    Le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.
-    {: note}
+2. Utilisez la se the [commande `ibmcloud ks cluster-subnet-add` ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) pour faire en sorte qu'un sous-réseau existant soit disponible pour votre cluster. 
 
-2.  [Créez un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) avec l'option `--no-subnet` de sorte que le service n'essaie pas de créer de nouveaux sous-réseaux. Indiquez la zone et le VLAN qui contient les sous-réseaux disponibles pouvant être réutilisés.
+3. Vérifiez que le sous-réseau a bien été créé et ajouté à votre cluster. Le CIDR du sous-réseau est répertorié dans la section **Subnet VLANs**.
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  Utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` pour ajouter des sous-réseaux existants à votre cluster. Pour plus d'informations, voir [Ajout ou réutilisation de sous-réseaux personnalisés et existants dans les clusters Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
+    Dans cet exemple de sortie, un deuxième sous-réseau a été ajouté au VLAN public `2234945` :
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## L'ALB Ingress ne se déploie pas dans une zone
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun ALB n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-Dans chaque zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN public du cluster d'une zone a déjà atteint cette limite, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition.
-
-{: tsResolve}
-Pour vérifier le nombre de sous-réseaux d'un VLAN et obtenir les étapes à suivre pour obtenir un autre VLAN, voir [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](#cs_subnet_limit).
+4. Vérifiez que les adresses IP portables issues du sous-réseau que vous avez ajouté soient utilisées pour les ALB ou les équilibreurs de charge dans votre cluster. Il peut s'écouler plusieurs minutes avant que les services n'utilisent les adresses IP portables issues du sous-réseau nouvellement ajouté. 
+  * Aucun sous-domaine Ingress : exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>` pour vérifier que la zone **Sous-domaine Ingress** est renseignée. 
+  * Un ALB n'est pas déployé dans une zone : exécutez la commande `ibmcloud ks albs --cluster <cluster>` pour vérifier que l'ALB manquant est déployé. 
+  * Impossible de déployer un équilibreur de charge : exécutez la commande `kubectl get svc -n kube-system` pour vérifier que l'équilibreur de charge est doté d'une adresse IP externe (valeur **EXTERNAL-IP**).
 
 <br />
 
@@ -575,9 +579,9 @@ Vous devez utiliser l'interface CLI de Calico v3.3 ou ultérieure, la syntaxe du
 
 Pour vous assurer que tous les facteurs Calico sont en phase :
 
-1. [Installez et configurez l'interface CLI de Calico version 3.3 ou ultérieure](/docs/containers?topic=containers-network_policies#cli_install). 
+1. [Installez et configurez l'interface CLI de Calico version 3.3 ou ultérieure](/docs/containers?topic=containers-network_policies#cli_install).
 2. Vérifiez que les règles que vous créez et que vous voulez appliquer à votre cluster utilisent la [syntaxe de Calico v3 ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Si vous disposez d'un fichier `.yaml` de règles existant ou d'un fichier `.json` avec la syntaxe de Calico v2, vous pouvez le convertir en syntaxe de Calico v3 en utilisant la commande [`calicoctl convert` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
-3. Pour [afficher les règles](/docs/containers?topic=containers-network_policies#view_policies), vérifiez que vous utilisez la commande `calicoctl get GlobalNetworkPolicy` pour les règles globales et `calicoctl get NetworkPolicy --namespace <policy_namespace>` pour les règles limitées à des espaces de nom spécifiques.
+3. Pour [afficher les règles](/docs/containers?topic=containers-network_policies#view_policies), prenez soin d'utiliser la commande `calicoctl get GlobalNetworkPolicy` pour les règles globales et `calicoctl get NetworkPolicy --namespace <policy_namespace>` pour les règles limitées à des espaces de nom spécifiques.
 
 <br />
 
@@ -598,11 +602,11 @@ Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte s
 
 {: tsResolve}
 
-Vous pouvez [supprimer votre pool de noeuds worker](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm), puis [créer un nouveau pool de noeuds worker](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
+Vous pouvez [supprimer votre pool de noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm), puis [créer un nouveau pool de noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
 
 Sinon, vous pouvez conserver votre pool de noeuds worker en commandant des nouveaux VLAN que vous utiliserez pour créer de nouveaux noeuds worker dans le pool.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Pour obtenir les zones pour lesquelles vous devez obtenir les nouveaux ID de VLAN, notez l'**emplacement** dans la sortie de la commande suivante. **Remarque** : Si vous disposez d'un cluster à zones multiples, vous avez besoin des ID de VLAN pour chaque zone.
 
@@ -622,7 +626,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     ```
     {: pre}
 
-5.  Utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` pour modifier les métadonnées de réseau du pool de noeuds worker.
+5.  Utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` pour modifier les métadonnées de réseau du pool de noeuds worker. 
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -664,7 +668,7 @@ Vous avez encore des problèmes avec votre cluster ?
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.
--   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support).
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`. Vous pouvez également utiliser l'[outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) pour regrouper et exporter des informations pertinentes de votre cluster à partager avec le support IBM.
 {: tip}
 

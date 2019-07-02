@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-04-18"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -37,8 +38,7 @@ Istio on {{site.data.keyword.containerlong}} 提供了 Istio 的无缝安装，�
 [Istio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/info/istio) 是一种开放式服务网平台，用于连接、保护、控制和观察云平台（例如，{{site.data.keyword.containerlong_notm}} 中的 Kubernetes）上的微服务。
 {:shortdesc}
 
-将单一应用程序转换为分布式微服务体系结构时，会产生一系列新的挑战，例如如何控制微服务的流量，执行服务的灰度上线和金丝雀应用，处理故障，保护服务通信，观察服务以及在服务组中强制实施一致的访问策略。为了解决这些难题，您可以利用服务网。服务网提供了一个与语言无关的透明网络，用于连接、观察、保护和控制微服务之间的连接。通过 Istio，可管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，验证服务身份等，从而掌握服务网的情况并对其进行控制。
-
+将单一应用程序转换为分布式微服务体系结构时，会产生一系列新的挑战，例如如何控制微服务的流量，执行服务的灰度上线和金丝雀应用，处理故障，保护服务通信，观察服务以及在服务组中强制实施一致的访问策略。为了解决这些难题，您可以利用服务网。服务网提供了一个与语言无关的透明网络，用于连接、观察、保护和控制微服务之间的连接。通过 Istio，可掌握服务网的情况并对其进行控制，从而可以管理网络流量，在微服务之间进行负载均衡，强制实施访问策略，验证服务身份等。
 
 例如，在微服务网中使用 Istio 可帮助您：
 - 更好地了解集群中运行的应用程序
@@ -66,9 +66,7 @@ Istio on {{site.data.keyword.containerlong_notm}} 作为受管附加组件提供
 如果需要使用最新版本的 Istio 或定制 Istio 安装，那么可以执行 [{{site.data.keyword.Bluemix_notm}} 快速入门教程 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/) 中的步骤来安装开放式源代码版本的 Istio。
 {: tip}
 
-**是否存在任何限制？** </br> 如果有以下情况，那么无法在集群中启用受管 Istio 附加组件：
-* 集群连接到仅专用 VLAN。
-* 在集群中安装了[容器映像安全性强制实施程序许可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)。
+**是否存在任何限制？** </br> 如果在集群中安装了[容器映像安全性强制实施程序许可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，那么无法在集群中启用受管 Istio 附加组件。
 
 <br />
 
@@ -104,9 +102,6 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-`istio` 受管附加组件可以安装在免费集群中。要同时安装 `istio-extras` 和 `istio-sample-bookinfo` 附加组件，请创建至少具有两个工作程序节点的标准集群。
-{: note}
-
 <br />
 
 
@@ -118,8 +113,8 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 
 **开始之前**</br>
 * 确保您具有对 {{site.data.keyword.containerlong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
-* [创建或使用具有至少 3 个工作程序节点的现有集群，每个节点有 4 个核心和 16 GB 内存 (`b3c.4x16`) 或更高配置](/docs/containers?topic=containers-clusters#clusters_cli)。每个工作程序节点都必须运行 Kubernetes V1.11 或更高版本。
-* [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [创建或使用具有至少 3 个工作程序节点的现有标准集群，每个节点有 4 个核心和 16 GB 内存 (`b3c.4x16`) 或更高配置](/docs/containers?topic=containers-clusters#clusters_ui)。此外，集群和工作程序节点必须至少运行最低受支持的 Kubernetes 版本，您可以通过运行 `ibmcloud ks addon-versions --addon istio` 来查看版本。
+* [将 CLI 的目标指定为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 * 如果使用的是现有集群，并且先前在集群中已使用 IBM Helm chart 或通过其他方法安装了 Istio，请[清除该 Istio 安装](#istio_uninstall_other)。
 
 ### 在 CLI 中安装受管 Istio 附加组件
@@ -152,9 +147,9 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   输出示例：
   ```
   Name                      Version
-  istio                     1.1.2
-  istio-extras              1.1.2
-  istio-sample-bookinfo     1.1.2
+  istio                     1.1.5
+  istio-extras              1.1.5
+  istio-sample-bookinfo     1.1.5
   ```
   {: screen}
 
@@ -277,49 +272,28 @@ BookInfo 附加组件 (`istio-sample-bookinfo`) 会将 [Istio 的 BookInfo 样�
 * `v2` 调用 `ratings` 微服务，并将评级显示为黑色的 1 到 5 颗星。
 * `v3` 调用 `ratings` 微服务，并将评级显示为红色的 1 到 5 颗星。
 
-其中每个微服务的部署 YAML 都已修改，以便在部署之前将 Envoy 侧柜代理作为容器预注入到微服务的 pod 中。有关手动侧柜注入的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。此外，BookInfo 应用程序已由 Istio 网关在公共 IP 入口地址上公开。请注意，虽然 BookInfo 应用程序可以帮助您入门，但该应用程序并不适合用于生产目的。
+其中每个微服务的部署 YAML 都已修改，以便在部署之前将 Envoy 侧柜代理作为容器预注入到微服务的 pod 中。有关手动侧柜注入的更多信息，请参阅 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。此外，BookInfo 应用程序已由 Istio 网关在公共 IP 入口地址上公开。虽然 BookInfo 应用程序可以帮助您入门，但该应用程序并不适合用于生产目的。
 
 开始之前，请在集群中[安装 `istio`、`istio-extras` 和 `istio-sample-bookinfo` 受管附加组件](#istio_install)。
 
 1. 获取集群的公共地址。
-  * 标准集群：
-      2. 设置 Ingress 主机。
+  1. 设置 Ingress 主机。
             ```
             export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
             ```
-        {: pre}
+    {: pre}
 
-      3. 设置 Ingress 端口。
+  2. 设置 Ingress 端口。
             ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
-        {: pre}
+    {: pre}
 
-      4. 创建使用 Ingress 主机和端口的 `GATEWAY_URL` 环境变量。
+  3. 创建使用 Ingress 主机和端口的 `GATEWAY_URL` 环境变量。
          ```
            export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
            ```
-         {: pre}
-
-  * 免费集群：
-      1. 设置 Ingress 主机。
-            此主机是集群中任一工作程序节点的公共 IP 地址。
-        ```
-        export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-        ```
-        {: pre}
-
-      2. 设置 Ingress 端口。
-            ```
-        export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-        ```
-        {: pre}
-
-      3. 创建使用工作程序节点和 NodePort 的公共 IP 地址的 GATEWAY_URL 环境变量。
-         ```
-           export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-           ```
-         {: pre}
+     {: pre}
 
 2. 对 `GATEWAY_URL` 变量运行 curl，以检查 BookInfo 应用程序是否正在运行。`200` 响应表示 BookInfo 应用程序使用 Istio 正常运行。
      
@@ -336,7 +310,7 @@ BookInfo 附加组件 (`istio-sample-bookinfo`) 会将 [Istio 的 BookInfo 样�
     ```
     {: pre}
 
-    Windows:
+    Windows：
     ```
     start http://$GATEWAY_URL/productpage
     ```
@@ -453,7 +427,7 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
 
 4. 搜索 `Istio`，并选择 Sysdig 的某个预定义 Istio 仪表板。
 
-有关引用度量值和仪表板、监视 Istio 内部组件以及监视 Istio A/B 部署和金丝雀部署的更多信息，请查看 Sysdig 博客帖子 [How to monitor Istio, the Kubernetes service mesh ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://sysdig.com/blog/monitor-istio/)。请查找名为“Monitoring Istio: reference metrics and dashboards”的部分。
+有关引用度量值和仪表板、监视 Istio 内部组件以及监视 Istio A/B 部署和金丝雀部署的更多信息，请查看 [How to monitor Istio, the Kubernetes service mesh ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://sysdig.com/blog/monitor-istio/)。请查找该博客帖子中名为“Monitoring Istio: reference metrics and dashboards”的部分。
 
 <br />
 
@@ -469,7 +443,7 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
 ### 启用自动侧柜注入
 {: #istio_sidecar_automatic}
 
-启用自动侧柜注入时，名称空间会侦听任何新的部署，并自动修改 pod 模板规范，以便创建使用 Envoy 代理侧柜容器的应用程序 pod。在计划将要与 Istio 集成的多个应用程序部署到名称空间中时，对该名称空间启用自动侧柜注入。请注意，缺省情况下，在 Istio 受管附加组件中，未对任何名称空间启用自动侧柜注入。
+启用自动侧柜注入时，名称空间会侦听任何新的部署，并自动修改 pod 模板规范，以便创建使用 Envoy 代理侧柜容器的应用程序 pod。在计划将要与 Istio 集成的多个应用程序部署到名称空间中时，对该名称空间启用自动侧柜注入。缺省情况下，在 Istio 受管附加组件中，未对任何名称空间启用自动侧柜注入。
 
 要对名称空间启用自动侧柜注入，请执行以下操作：
 
@@ -497,21 +471,21 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
     ```
     {: pre}
 
-5. 如果尚未创建服务来公开应用程序，请创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开，才能包含为 Istio 服务网中的微服务。确保遵循 [pod 和服务的 Istio 需求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
+5. 如果未创建服务来公开应用程序，请创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开，才能包含为 Istio 服务网中的微服务。确保遵循 [pod 和服务的 Istio 需求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
 
   1. 为应用程序定义服务。
     ```
-              apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myappservice
+    spec:
+      selector:
+        <selector_key>: <selector_value>
+      ports:
        - protocol: TCP
-             port: 8080
-        ```
+         port: 8080
+    ```
     {: codeblock}
 
     <table>
@@ -546,12 +520,12 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
 
 1. 下载 `istioctl` 客户机。
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.2 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
   ```
 
 2. 导航至 Istio 包目录。
   ```
-  cd istio-1.1.2
+  cd istio-1.1.5
   ```
   {: pre}
 
@@ -567,21 +541,21 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
   ```
   {: pre}
 
-5. 如果尚未创建服务来公开应用程序，请创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开，才能包含为 Istio 服务网中的微服务。确保遵循 [pod 和服务的 Istio 需求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
+5. 如果未创建服务来公开应用程序，请创建 Kubernetes 服务。应用程序必须由 Kubernetes 服务公开，才能包含为 Istio 服务网中的微服务。确保遵循 [pod 和服务的 Istio 需求 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
 
   1. 为应用程序定义服务。
     ```
-              apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myappservice
+    spec:
+      selector:
+        <selector_key>: <selector_value>
+      ports:
        - protocol: TCP
-             port: 8080
-        ```
+         port: 8080
+    ```
     {: codeblock}
 
     <table>
@@ -616,7 +590,7 @@ Istio extras 附加组件 (`istio-extras`) 会安装 [Grafana ![外部链接图�
 在[设置 Envoy 代理侧柜注入](#istio_sidecar)，并将应用程序部署到 Istio 服务网后，可以使用 IBM 提供的主机名将 Istio 管理的应用程序公开给公共请求。
 {: shortdesc}
 
-Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 和 [VirtualServices ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 来控制如何将流量路由到应用程序。网关会配置负载均衡器 `istio-ingressgateway`，用于充当 Istio 管理的应用程序的入口点。在标准集群中，可以通过使用 DNS 条目和主机名来注册 `istio-ingressgateway` 负载均衡器的外部 IP 地址，从而公开 Istio 管理的应用程序。
+Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 和 [VirtualServices ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 来控制如何将流量路由到应用程序。网关会配置负载均衡器 `istio-ingressgateway`，用于充当 Istio 管理的应用程序的入口点。可以通过使用 DNS 条目和主机名来注册 `istio-ingressgateway` 负载均衡器的外部 IP 地址，从而公开 Istio 管理的应用程序。
 
 您可以先试用[公开 BookInfo 的示例](#istio_expose_bookinfo)，或者[以公共方式公开您自己的 Istio 管理的应用程序](#istio_expose_link)。
 
@@ -634,7 +608,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
    ```
   {: pre}
 
-  在以下示例输出中，**EXTERNAL-IP** 为 `168.1.1.1`。
+  在以下输出示例中，**EXTERNAL-IP** 为 `168.1.1.1`。
   ```
   NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
   ...
@@ -687,7 +661,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
    ```
   2. 导航至 Istio 包目录。
 ```
-    cd istio-1.1.2
+    cd istio-1.1.5
     ```
     {: pre}
 3. [为应用程序微服务设置侧柜注入，将应用程序微服务部署到名称空间中，并为应用程序微服务创建 Kubernetes 服务，以便可以将这些服务包含在 Istio 服务网中](#istio_sidecar)。
@@ -756,7 +730,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>请注意，指定的是 <code>my-gateway</code>，因此网关可以将这些虚拟服务路由规则应用于 <code>istio-ingressgateway</code> 负载均衡器。<td>
+  <td>指定的是 <code>my-gateway</code>，因此网关可以将这些虚拟服务路由规则应用于 <code>istio-ingressgateway</code> 负载均衡器。<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -764,7 +738,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
   </tr>
   <tr>
   <td><code>http.route.destination.host</code></td>
-  <td>将 <em>&lt;service_name&gt;</em> 替换为入口点微服务的名称。例如，在 BookInfo 应用程序中， <code>productpage</code> 充当调用其他应用程序微服务的入口点微服务。</td>
+  <td>将 <em>&lt;service_name&gt;</em> 替换为入口点微服务的名称。例如，在 BookInfo 应用程序中，<code>productpage</code> 充当调用其他应用程序微服务的入口点微服务。</td>
   </tr>
   <tr>
   <td><code>http.route.destination.port.number</code></td>
@@ -784,7 +758,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
    ```
   {: pre}
 
-  在以下示例输出中，**EXTERNAL-IP** 为 `168.1.1.1`。
+  在以下输出示例中，**EXTERNAL-IP** 为 `168.1.1.1`。
   ```
   NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
   ...
@@ -838,7 +812,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
 如果您已使用完 Istio，那么可以通过卸载 Istio 附加组件来清除集群中的 Istio 资源。
 {:shortdesc}
 
-请注意，`istio` 附加组件是 `istio-extras`、`istio-sample-bookinfo` 和 [`knative`](/docs/containers?topic=containers-knative_tutorial) 附加组件的依赖项。`istio-extras` 附加组件是 `istio-sample-bookinfo` 附加组件的依赖项。
+`istio` 附加组件是 `istio-extras`、`istio-sample-bookinfo` 和 [`knative`](/docs/containers?topic=containers-serverless-apps-knative) 附加组件的依赖项。`istio-extras` 附加组件是 `istio-sample-bookinfo` 附加组件的依赖项。
 {: important}
 
 **可选**：对于在 `istio-system` 名称空间中创建或修改的任何资源，以及由定制资源定义 (CRD) 自动生成的所有 Kubernetes 资源都将被除去。如果要保留这些资源，请先对其进行保存，然后再卸载 `istio` 附加组件。
@@ -930,7 +904,7 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
 * 如果先前已在集群中安装了 BookInfo，请清除这些资源。
   1. 将目录切换到 Istio 文件位置。
        ```
-    cd <filepath>/istio-1.1.2
+    cd <filepath>/istio-1.1.5
     ```
     {: pre}
 
@@ -948,4 +922,4 @@ Istio 使用 [Gateways ![外部链接图标](../icons/launch-glyph.svg "外部�
 
 * 要进一步探索 Istio，您可以在 [Istio 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://istio.io/) 中找到更多指南。
 * 参加 [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/)。**注**：您可以跳过此课程中的 Istio 安装部分。
-* 请查看博客帖子 [Istio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e)，了解有关使用 Istio 可视化 Istio 服务网的信息。
+* 请查看博客帖子 [Vistio ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e)，了解有关使用 Vistio 对 Istio 服务网可视化的信息。

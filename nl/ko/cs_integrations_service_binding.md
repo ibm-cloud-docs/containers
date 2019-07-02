@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud 서비스 바인딩을 사용하여 서비스 추가
@@ -35,7 +37,7 @@ Watson AI, 데이터, 보안 및 IoT(Internet of Things) 등의 분야에서 추
 지원되는 {{site.data.keyword.Bluemix_notm}} 서비스 목록을 찾으려면 [{{site.data.keyword.Bluemix_notm}} 카탈로그](https://cloud.ibm.com/catalog)를 참조하십시오.
 
 **{{site.data.keyword.Bluemix_notm}} 서비스 바인딩은 무엇입니까?**</br>
-서비스 바인딩은 {{site.data.keyword.Bluemix_notm}} 서비스에 대한 서비스 인증 정보를 작성하고 클러스터의 Kubernetes 시크릿에 이 인증 정보를 저장할 수 있는 빠른 방법입니다. 클러스터에 서비스를 바인드하려면 우선 서비스의 인스턴스를 프로비저닝해야 합니다. 그런 다음 `ibmcloud ks cluster-service-bind` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)을 사용하여 서비스 인증 정보 및 Kubernetes 시크릿을 작성합니다. Kubernetes 시크릿은 데이터 보호를 위해 etcd에서 자동으로 암호화됩니다.
+서비스 바인딩은 {{site.data.keyword.Bluemix_notm}} 서비스에 대한 서비스 인증 정보를 작성하고 클러스터의 Kubernetes 시크릿에 이 인증 정보를 저장할 수 있는 빠른 방법입니다. 클러스터에 서비스를 바인드하려면 우선 서비스의 인스턴스를 프로비저닝해야 합니다. 그런 다음 `ibmcloud ks cluster-service-bind` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)을 사용하여 서비스 인증 정보 및 Kubernetes 시크릿을 작성합니다. Kubernetes 시크릿은 데이터 보호를 위해 etcd에서 자동으로 암호화됩니다.
 
 secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.data.keyword.Bluemix_notm}} 서비스 인스턴스의 인증 정보를 저장하는 secret과 같은 기존 및 신규 secret을 암호화하기 위해 클러스터 관리자에게 [{{site.data.keyword.keymanagementservicefull}}를 사용으로 설정](/docs/containers?topic=containers-encryption#keyprotect)하도록 요청하십시오.
 {: tip}
@@ -43,7 +45,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 **내 클러스터에서 모든 {{site.data.keyword.Bluemix_notm}} 서비스를 사용할 수 있습니까?**</br>
 서비스 인증 정보를 자동으로 작성하고 Kubernetes 시크릿에 저장할 수 있도록 서비스 키를 지원하는 서비스에 대한 서비스 바인딩만 사용할 수 있습니다. 서비스 키를 지원하는 서비스의 목록을 찾으려면 [외부 앱이 {{site.data.keyword.Bluemix_notm}} 서비스를 사용할 수 있도록 허용](/docs/resources?topic=resources-externalapp#externalapp)을 참조하십시오.
 
-서비스 키를 지원하지 않는 서비스는 일반적으로 앱에서 사용할 수 있는 API를 제공합니다. 서비스 바인딩 메소드는 앱에 대한 API 액세스를 자동으로 설정하지 않습니다. 서비스의 API 문서를 검토하고 앱에서 API 인터페이스를 구현해야 합니다. 
+서비스 키를 지원하지 않는 서비스는 일반적으로 앱에서 사용할 수 있는 API를 제공합니다. 서비스 바인딩 메소드는 앱에 대한 API 액세스를 자동으로 설정하지 않습니다. 서비스의 API 문서를 검토하고 앱에서 API 인터페이스를 구현해야 합니다.
 
 ## 클러스터에 IBM Cloud 서비스 추가
 {: #bind-services}
@@ -56,7 +58,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
     - 서비스를 바인드할 클러스터에 대한 [**편집자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 액세스 역할](/docs/containers?topic=containers-users#platform)
     - 서비스를 바인드할 Kubernetes 네임스페이스에 대한 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)
     - Cloud Foundry 서비스: 서비스를 프로비저닝하려는 영역에 대한 [**Developer** Cloud Foundry 역할](/docs/iam?topic=iam-mngcf#mngcf)
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스를 추가하려면 다음을 수행하십시오.
 
@@ -67,7 +69,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 2. 작성한 서비스 유형을 확인하고 서비스 인스턴스 **이름**을 기록해 두십시오.
    - **Cloud Foundry 서비스:**
      ```
-    ibmcloud service list
+     ibmcloud service list
      ```
      {: pre}
 
@@ -80,7 +82,7 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
 
   - **{{site.data.keyword.Bluemix_notm}}IAM 사용 서비스:**
      ```
-    ibmcloud resource service-instances
+     ibmcloud resource service-instances
      ```
      {: pre}
 
@@ -105,15 +107,15 @@ secret을 더 안전하게 보호하려 하십니까? 클러스터에서 {{site.
    ```
    {: pre}
 
-   서비스 인증 정보의 작성에 성공하면 이름이 `binding-<service_instance_name>`인 Kubernetes 시크릿이 작성됩니다.   
+   서비스 인증 정보의 작성에 성공하면 이름이 `binding-<service_instance_name>`인 Kubernetes 시크릿이 작성됩니다.  
 
    출력 예:
    ```
-ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service cleardb
-    Binding service instance to namespace...
-    OK
-    Namespace:	     mynamespace
-    Secret name:     binding-<service_instance_name>
+   ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service cleardb
+   Binding service instance to namespace...
+   OK
+   Namespace:	     mynamespace
+   Secret name:     binding-<service_instance_name>
    ```
    {: screen}
 
@@ -127,26 +129,26 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
       출력 예:
       ```
       apiVersion: v1
-       data:
-         binding: <binding>
-       kind: Secret
-       metadata:
-         annotations:
-           service-instance-id: 1111aaaa-a1aa-1aa1-1a11-111aa111aa11
-           service-key-id: 2b22bb2b-222b-2bb2-2b22-b22222bb2222
-         creationTimestamp: 2018-08-07T20:47:14Z
-         name: binding-<service_instance_name>
-         namespace: <namespace>
-         resourceVersion: "6145900"
-         selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
-         uid: 33333c33-3c33-33c3-cc33-cc33333333c
-       type: Opaque
+      data:
+        binding: <binding>
+      kind: Secret
+      metadata:
+        annotations:
+          service-instance-id: 1111aaaa-a1aa-1aa1-1a11-111aa111aa11
+          service-key-id: 2b22bb2b-222b-2bb2-2b22-b22222bb2222
+        creationTimestamp: 2018-08-07T20:47:14Z
+        name: binding-<service_instance_name>
+        namespace: <namespace>
+        resourceVersion: "6145900"
+        selfLink: /api/v1/namespaces/default/secrets/binding-mycloudant
+        uid: 33333c33-3c33-33c3-cc33-cc33333333c
+      type: Opaque
       ```
       {: screen}
 
    2. 바인딩 값을 디코딩하십시오.
       ```
-       echo "<binding>" | base64 -D
+      echo "<binding>" | base64 -D
       ```
       {: pre}
 
@@ -174,7 +176,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
 시작하기 전에:
 -  `kube-system` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [{{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 추가](#bind-services)하십시오.
 
 ### 볼륨으로서 시크릿을 팟(Pod)에 마운트
@@ -191,7 +193,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
     출력 예:
     ```
-        NAME                              TYPE            DATA      AGE
+    NAME                              TYPE            DATA      AGE
     binding-<service_instance_name>   Opaque          1         3m
     ```
     {: screen}
@@ -216,7 +218,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -260,7 +262,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
 4.  팟(Pod)이 작성되었는지 확인하십시오.
     ```
-   kubectl get pods
+    kubectl get pods
     ```
     {: pre}
 
@@ -371,7 +373,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -416,8 +418,8 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
    CLI 출력 예:
    ```
-    NAME                           READY     STATUS    RESTARTS   AGE
-    secret-test-1111454598-gfx32   1/1       Running   0          1m
+   NAME                           READY     STATUS    RESTARTS   AGE
+   secret-test-1111454598-gfx32   1/1       Running   0          1m
    ```
    {: screen}
 
@@ -449,16 +451,16 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    ```
    {: codeblock}
 
-8. 선택사항: 예방 조치로 `BINDING` 환경변수가 올바르게 설정되지 않은 경우 오류 처리를 앱에 추가하십시오.  
-   
-   Java의 예제 코드: 
+8. 선택사항: 예방 조치로 `BINDING` 환경변수가 올바르게 설정되지 않은 경우 오류 처리를 앱에 추가하십시오.
+
+   Java의 예제 코드:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Node.js의 예제 코드:
    ```js
    if (!process.env.BINDING) {
@@ -467,4 +469,3 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    }
    ```
    {: codeblock}
-

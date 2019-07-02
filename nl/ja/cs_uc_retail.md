@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} の小売向けユース・ケース
@@ -40,7 +40,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} が実現するパブリック・クラウド・エコシステムでは、コンテナーによって、新規ビジネス・パートナーやその他の外部参加者が API を介してアプリやデータを共同開発することができます。 小売業システムがパブリック・クラウド上に配置されると、API によってデータ共有が合理化され、新しいアプリ開発が活性化されます。 開発者が試験を容易に行えることでアプリのデプロイメントが増えるため、ツールチェーンにより開発システムやテスト・システムに迅速に変更をプッシュすることができます。
 
 {{site.data.keyword.containerlong_notm}} と主要なテクノロジー:
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [アプリ間でデータを永続化および同期するための {{site.data.keyword.cos_full}}](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [{{site.data.keyword.contdelivery_full}} でのオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -128,7 +128,7 @@ subcollection: containers
 
 主要なテクノロジー:    
 * [水平スケーリングによる開発の加速](/docs/containers?topic=containers-app#highly_available_apps)
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Watson Discovery による市場のトレンドに関する洞察](https://www.ibm.com/watson/services/discovery/)
 * [{{site.data.keyword.contdelivery_full}} でのオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.messagehub_full}} による在庫管理](/docs/services/EventStreams?topic=eventstreams-about#about)

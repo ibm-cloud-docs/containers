@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# Pianificazione per esporre le tue applicazioni con reti in cluster e reti esterne
+
+# Pianificazione della rete in cluster ed esterna per le applicazioni
 {: #cs_network_planning}
 
 Con {{site.data.keyword.containerlong}}, puoi gestire le reti in cluster ed esterne rendendo le applicazioni accessibili pubblicamente o privatamente.
 {: shortdesc}
-
-Questa pagina ti aiuta a pianificare le reti in cluster ed esterne per le tue applicazioni. Per informazioni sulla configurazione della rete per il tuo cluster, vedi [Configurazione della rete del tuo cluster](/docs/containers?topic=containers-cs_network_cluster).
-{: tip}
 
 Per iniziare a utilizzare subito la rete dell'applicazione, segui questo albero delle decisioni e fai clic su un'opzione per visualizzare la documentazione sulla sua configurazione:
 
@@ -167,7 +166,7 @@ Quando si tratta di esporre un'applicazione con un servizio di rete, puoi scegli
 <td>NodePort</td>
 <td>Porta di un nodo di lavoro che espone l'applicazione sull'indirizzo IP pubblico del nodo di lavoro</td>
 <td>Verifica l'accesso pubblico a un'unica applicazione o fornisce l'accesso solo per un breve periodo di tempo.</td>
-<td>[Crea un servizio NodePort pubblico](/docs/containers?topic=containers-nodeport#nodeport_config). </td>
+<td>[Crea un servizio NodePort pubblico](/docs/containers?topic=containers-nodeport#nodeport_config).</td>
 </tr><tr>
 <td>NLB v1.0 (+ nome host)</td>
 <td>Bilanciamento del carico di base che espone l'applicazione con un indirizzo IP o un nome host</td>
@@ -210,13 +209,14 @@ Vuoi ancora maggiori dettagli sui modelli di distribuzione per il bilanciamento 
 Esponi privatamente un'applicazione del tuo cluster solo sulla rete privata.
 {: shortdesc}
 
-Quando distribuisci un'applicazione in un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}, potresti voler rendere l'applicazione accessibile solo agli utenti e ai servizi che si trovano sulla stessa rete privata del tuo cluster. Ad esempio, poni di aver creato un NLB privato per la tua applicazione. Questo NLB privato è accessibile da:
+Quando distribuisci un'applicazione in un cluster Kubernetes in {{site.data.keyword.containerlong_notm}}, potresti voler rendere l'applicazione accessibile solo agli utenti e ai servizi che si trovano sulla stessa rete privata del tuo cluster. Il bilanciamento del carico privato è ideale per rendere la tua applicazione disponibile alle richieste provenienti dall'esterno del cluster, senza esporre l'applicazione al pubblico generale. Puoi anche utilizzare il bilanciamento del carico privato per testare l'accesso, l'instradamento delle richieste e altre configurazioni della tua applicazione, prima di esporla al pubblico tramite servizi di rete pubblica.
+
+Ad esempio, poni di aver creato un NLB privato per la tua applicazione. Questo NLB privato è accessibile da:
 * Qualsiasi pod dello stesso cluster.
 * Qualsiasi pod in qualsiasi cluster dello stesso account {{site.data.keyword.Bluemix_notm}}.
-* Qualsiasi sistema connesso a una qualsiasi delle VLAN private dello stesso account {{site.data.keyword.Bluemix_notm}}, se hai una [VRF](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) o uno[spanning della VLAN](/docs/containers?topic=containers-subnets#subnet-routing) abilitato.
+* Se hai [lo spanning della VLAN o VRF](/docs/containers?topic=containers-subnets#basics_segmentation) abilitati, qualsiasi sistema connesso a una qualsiasi delle VLAN private, nello stesso account {{site.data.keyword.Bluemix_notm}}.
 * Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se non sei nell'account {{site.data.keyword.Bluemix_notm}}, ma ancora dietro il firewall aziendale
 * Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se ti trovi in un account{{site.data.keyword.Bluemix_notm}} differente.
-Il bilanciamento del carico privato è ideale per rendere la tua applicazione disponibile alle richieste provenienti dall'esterno del cluster, senza esporre l'applicazione al pubblico generale. Puoi anche utilizzare il bilanciamento del carico privato per testare l'accesso, l'instradamento delle richieste e altre configurazioni della tua applicazione, prima di esporla al pubblico tramite servizi di rete pubblica.
 
 Per rendere un'applicazione disponibile solo su una rete privata, scegli un modello di distribuzione per il bilanciamento del carico in base alla configurazione della VLAN del cluster:
 * [Configurazione della VLAN pubblica e privata](#private_both_vlans)
@@ -230,6 +230,8 @@ Quando i tuoi nodi di lavoro sono connessi sia a una VLAN pubblica che a una VLA
 
 L'interfaccia di rete pubblica per i nodi di rete è protetta dalle [impostazioni della politica di rete Calico predefinite](/docs/containers?topic=containers-network_policies#default_policy) configurate su ogni nodo di lavoro durante la creazione del cluster. Per impostazione predefinita, tutto il traffico di rete in uscita è consentito per tutti i nodi di lavoro. Il traffico di rete in entrata è bloccato, fatta eccezione per alcune porte. Queste porte sono aperte in modo che IBM possa monitorare il traffico di rete e installare automaticamente gli aggiornamenti di sicurezza per il master Kubernetes e per poter stabilire le connessioni ai servizi NodePort, LoadBalancer e Ingress.
 
+Poiché le politiche di rete Calico predefinite consentono il traffico pubblico in entrata a questi servizi, puoi creare politiche Calico per bloccare invece tutto il traffico pubblico verso i servizi. Ad esempio, un servizio NodePort apre una porta su un nodo di lavoro sia sull'indirizzo IP privato che su quello pubblico del nodo di lavoro. Un servizio NLB con un indirizzo IP privato portatile apre una NodePort pubblica su ciascun nodo di lavoro. Devi creare una [politica di rete preDNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress) per bloccare le NodePort pubbliche.
+
 Controlla i seguenti modelli di distribuzione per il bilanciamento del carico per la rete privata:
 
 |Nome|Metodo di bilanciamento del carico|Caso d'uso|Implementazione|
@@ -237,13 +239,10 @@ Controlla i seguenti modelli di distribuzione per il bilanciamento del carico pe
 |NodePort|Porta di un nodo di lavoro che espone l'applicazione sull'indirizzo IP privato del nodo di lavoro|Verifica l'accesso privato a un'unica applicazione o fornisce l'accesso solo per un breve periodo di tempo.|<ol><li>[Crea un servizio NodePort](/docs/containers?topic=containers-nodeport).</li><li>Un servizio NodePort apre una porta su un nodo di lavoro sia sull'indirizzo IP pubblico che in quello privato del nodo di lavoro. Devi usare una [politica di rete preDNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress) per bloccare il traffico verso le NodePorts pubbliche.</li></ol>|
 |NLB v1.0|Bilanciamento del carico di base che espone l'applicazione con un indirizzo IP privato|Esponi rapidamente un'applicazione su una rete privata con un indirizzo IP privato.|<ol><li>[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Un NLB con un indirizzo IP privato portatile ha ancora una porta del nodo pubblica aperta per i nodi di lavoro. Crea una [politica di rete preDNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress) per bloccare il traffico verso le NodePorts pubbliche.</li></ol>|
 |NLB v2.0|Bilanciamento del carico DSR che espone l'applicazione con un indirizzo IP privato|Esponi un'applicazione che potrebbe ricevere livelli elevati di traffico verso una rete privata con un indirizzo IP.|<ol><li>[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Un NLB con un indirizzo IP privato portatile ha ancora una porta del nodo pubblica aperta per i nodi di lavoro. Crea una [politica di rete preDNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress) per bloccare il traffico verso le NodePorts pubbliche.</li></ol>|
-|ALB Ingress|Bilanciamento del carico HTTPS che espone l'applicazione con un nome host e utilizza regole di instradamento personalizzate|Implementa le regole di instradamento personalizzate e la terminazione SSL per più applicazioni.|<ol><li>[Disabilita l'ALB pubblico](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Abilita l'ALB privato e crea una risorsa
-Ingress](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Personalizza
+|ALB Ingress|Bilanciamento del carico HTTPS che espone l'applicazione con un nome host e utilizza regole di instradamento personalizzate|Implementa le regole di instradamento personalizzate e la terminazione SSL per più applicazioni.|<ol><li>[Disabilita l'ALB pubblico.](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[Abilita l'ALB privato e crea una risorsa
+Ingress](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Personalizza
 le regole di instradamento ALB con [annotazioni](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Caratteristiche dei modelli di distribuzione di rete per la configurazione di una VLAN pubblica e privata" caption-side="top"}
-
-Poiché le politiche di rete Calico predefinite consentono il traffico pubblico in entrata a questi servizi, puoi creare politiche Calico per bloccare invece tutto il traffico pubblico verso i servizi. Ad esempio, un servizio NodePort apre una porta su un nodo di lavoro sia sull'indirizzo IP privato che su quello pubblico del nodo di lavoro. Un servizio NLB con un indirizzo IP privato portatile apre una NodePort pubblica su ciascun nodo di lavoro. Devi creare una [politica di rete preDNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress) per bloccare le NodePort pubbliche.
-{: tip}
 
 <br />
 
@@ -254,17 +253,15 @@ Poiché le politiche di rete Calico predefinite consentono il traffico pubblico 
 Quando i tuoi nodi di lavoro sono connessi solo a una VLAN privata, puoi rendere la tua applicazione accessibile esternamente da una rete privata solo creando dei servizi NodePort, LoadBalancer o Ingress privati.
 {: shortdesc}
 
-Se il tuo cluster è connesso solo a una VLAN privata e abiliti le comunicazioni tra il master e i nodi di lavoro tramite un endpoint servizio solo privato, non puoi esporre automaticamente le tue applicazioni a una rete privata. Devi configurare un dispositivo gateway, ad esempio [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations), in modo che funga da firewall e blocchi o consenta il traffico. Poiché i tuoi nodi di lavoro non sono connessi a una VLAN pubblica, ai servizi NodePort, LoadBalancer o Ingress non viene instradato alcun traffico pubblico. Tuttavia, devi aprire le porte e gli indirizzi IP richiesti nel tuo firewall del dispositivo gateway per consentire il traffico in ingresso verso questi servizi.
+Se il tuo cluster è connesso solo a una VLAN privata e abiliti le comunicazioni tra il master e i nodi di lavoro tramite un endpoint servizio solo privato, non puoi esporre automaticamente le tue applicazioni a una rete privata. Devi configurare un dispositivo gateway, ad esempio [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations), in modo che funga da firewall e blocchi o consenta il traffico. Poiché i tuoi nodi di lavoro non sono connessi a una VLAN pubblica, ai servizi NodePort, LoadBalancer o Ingress non viene instradato alcun traffico pubblico. Tuttavia, devi aprire le porte e gli indirizzi IP richiesti nel tuo firewall del dispositivo gateway per consentire il traffico in entrata verso questi servizi.
 
 Controlla i seguenti modelli di distribuzione per il bilanciamento del carico per la rete privata:
 
 |Nome|Metodo di bilanciamento del carico|Caso d'uso|Implementazione|
 |----|---------------------|--------|--------------|
 |NodePort|Porta di un nodo di lavoro che espone l'applicazione sull'indirizzo IP privato del nodo di lavoro|Verifica l'accesso privato a un'unica applicazione o fornisce l'accesso solo per un breve periodo di tempo.|<ol><li>[Crea un servizio NodePort](/docs/containers?topic=containers-nodeport).</li><li>Nel tuo firewall privato, apri la porta che hai configurato quando hai distribuito il servizio agli indirizzi IP privati per tutti i nodi di lavoro verso cui consentire il traffico. Per trovare la porta, esegui `kubectl get svc`. La porta è compresa nell'intervallo 20000-32000.</li></ol>|
-|NLB v1.0|Bilanciamento del carico di base che espone l'applicazione con un indirizzo IP privato|Esponi rapidamente un'applicazione su una rete privata con un indirizzo IP privato.|<ol><li>
-[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Nel tuo firewall privato, apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP privato dell'NLB.</li></ol>|
-|NLB v2.0|Bilanciamento del carico DSR che espone l'applicazione con un indirizzo IP privato|Esponi un'applicazione che potrebbe ricevere livelli elevati di traffico verso una rete privata con un indirizzo IP.|<ol><li>
-[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Nel tuo firewall privato, apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP privato dell'NLB.</li></ol>|
+|NLB v1.0|Bilanciamento del carico di base che espone l'applicazione con un indirizzo IP privato|Esponi rapidamente un'applicazione su una rete privata con un indirizzo IP privato.|<ol><li>[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Nel tuo firewall privato, apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP privato dell'NLB.</li></ol>|
+|NLB v2.0|Bilanciamento del carico DSR che espone l'applicazione con un indirizzo IP privato|Esponi un'applicazione che potrebbe ricevere livelli elevati di traffico verso una rete privata con un indirizzo IP.|<ol><li>[Crea un servizio NLB privato](/docs/containers?topic=containers-loadbalancer).</li><li>Nel tuo firewall privato, apri la porta che hai configurato quando hai distribuito il servizio all'indirizzo IP privato dell'NLB.</li></ol>|
 |ALB Ingress|Bilanciamento del carico HTTPS che espone l'applicazione con un nome host e utilizza regole di instradamento personalizzate|Implementa le regole di instradamento personalizzate e la terminazione SSL per più applicazioni.|<ol><li>Configura un [servizio DNS che sia disponibile sulla rete privata ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).</li><li>[Abilita l'ALB privato e crea una risorsa Ingress](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Nel tuo firewall privato, apri la porta 80 per HTTP o la porta 443 per HTTPS per l'indirizzo IP relativo all'ALB privato.</li><li>Personalizza
 le regole di instradamento ALB con [annotazioni](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Caratteristiche dei modelli di distribuzione della rete per la configurazione di una VLAN solo privata" caption-side="top"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Changelog versione
@@ -30,23 +30,447 @@ subcollection: containers
 Visualizza le informazioni sulle modifiche alla versione per gli aggiornamenti principali, secondari e patch disponibili per i tuoi cluster Kubernetes {{site.data.keyword.containerlong}}. Le modifiche includono gli aggiornamenti ai componenti Kubernetes e {{site.data.keyword.Bluemix_notm}} Provider.
 {:shortdesc}
 
+Se non diversamente indicato nei changelog, la versione del provider {{site.data.keyword.containerlong_notm}} abilita le funzioni e le API Kubernetes che sono in beta. Le funzioni alpha di Kubernetes, che sono soggette a modifica, sono disabilitate.
+
 Per ulteriori informazioni sulle versioni principali, secondarie e patch e sulle azioni di preparazione tra le versioni secondarie, vedi [Versioni Kubernetes](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 Per informazioni sulle modifiche dalla versione precedente, vedi i seguenti changelog.
+-  [Changelog](#114_changelog) versione 1.14.
 -  [Changelog](#113_changelog) versione 1.13.
 -  [Changelog](#112_changelog) versione 1.12.
--  [Changelog](#111_changelog) versione 1.11.
--  **Obsoleto**: [Changelog](#110_changelog) versione 1.10.
+-  **Obsoleto**: [changelog](#111_changelog) versione 1.11.
 -  [Archivio](#changelog_archive) di changelog per le versioni non supportate.
 
-Alcuni changelog sono per i _fix pack del nodo di lavoro_ e si applicano solo ai nodi di lavoro. Devi [applicare queste patch](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) per garantire la conformità di sicurezza per i tuoi nodi di lavoro. Questi fix pack di nodo di lavoro possono essere a una versione superiore rispetto al master perché alcuni fix pack di build sono specifici per i nodi di lavoro. Altri changelog sono per i _fix pack del master_ e si applicano solo al master del cluster. I fix pack del master potrebbero non essere applicati automaticamente. Puoi scegliere di [applicarli manualmente](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). Per ulteriori informazioni sui tipi di patch, vedi [Tipi di aggiornamento](/docs/containers?topic=containers-cs_versions#update_types).
+Alcuni changelog sono per i _fix pack del nodo di lavoro_ e si applicano solo ai nodi di lavoro. Devi [applicare queste patch](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) per garantire la conformità di sicurezza per i tuoi nodi di lavoro. Questi fix pack di nodo di lavoro possono essere a una versione superiore rispetto al master perché alcuni fix pack di build sono specifici per i nodi di lavoro. Altri changelog sono per i _fix pack del master_ e si applicano solo al master del cluster. I fix pack del master potrebbero non essere applicati automaticamente. Puoi scegliere di [applicarli manualmente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). Per ulteriori informazioni sui tipi di patch, vedi [Tipi di aggiornamento](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
 
+## Changelog versione 1.14
+{: #114_changelog}
+
+### Changelog per 1.14.2_1521, rilasciato il 4 giugno 2019
+{: #1142_1521}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.14.2_1521.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.14.1_1519">
+<caption>Modifiche intervenute dalla versione 1.14.1_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurazione del DNS del cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>È stato corretto un bug che poteva lasciare entrambi i pod CoreDNS e DNS Kubernetes in esecuzione dopo le operazioni di `create` o `update` del cluster.</td>
+</tr>
+<tr>
+<td>Configurazione HA del master cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione è stata aggiornata per ridurre al minimo gli errori di connettività della rete del master intermittenti durante un aggiornamento del master.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Vedi le [note sulla release etcd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Aggiornato per supportare la release Kubernetes 1.14.2.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2).</td>
+</tr>
+<tr>
+<td>Server delle metriche di Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Vedi le [note sulla release del server delle metriche Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.14.1_1519, rilasciato il 20 maggio 2019
+{: #1141_1519}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.14.1_1519.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.14.1_1518">
+<caption>Modifiche intervenute dalla versione 1.14.1_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Ubuntu 16.04</td>
+<td>4.4.0-145 generica</td>
+<td>4.4.0-148 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel Ubuntu 18.04</td>
+<td>4.15.0-47 generica</td>
+<td>4.15.0-50 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.14.1_1518, rilasciato il 13 maggio 2019
+{: #1141_1518}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.14.1_1518.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.14.1_1516">
+<caption>Modifiche intervenute dalla versione 1.14.1_1516</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy HA del master cluster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2019-6706 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Configurazione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione della politica di controllo del server API Kubernetes è stata aggiornata per non registrare l'URL di sola lettura `/openapi/v2*`. Inoltre, la configurazione del gestore controller Kubernetes ha aumentato la durata di validità dei certificati `kubelet` firmati da 1 a 3 anni.</td>
+</tr>
+<tr>
+<td>Configurazione del client OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Il pod `vpn-*` del client OpenVPN nello spazio dei nomi `kube-system` ora imposta `dnsPolicy` su `Default` per evitare il malfunzionamento del pod quando il DNS del cluster è inattivo.</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>Immagine aggiornata per [CVE-2016-7076 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) e [CVE-2017-1000368 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.14.1_1516, rilasciato il 7 maggio 2019
+{: #1141_1516}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.14.1_1516.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.13.5_1519">
+<caption>Modifiche intervenute dalla versione 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.1</td>
+<td>Vedi le [note sulla release Calico![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>Vedi le [note sulla release CoreDNS ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). L'aggiornamento include l'aggiunta di una [porta di metriche ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://coredns.io/plugins/metrics/) sul servizio DNS del cluster. <br><br>CoreDNS è ora il solo provider DNS del cluster supportato. Se aggiorni un cluster a Kubernetes versione 1.14 da una versione precedente e hai utilizzato KubeDNS, KubeDNS viene migrato automaticamente a CoreDNS durante l'aggiornamento del cluster. Per ulteriori informazioni o per testare CoreDNS prima di eseguire l'aggiornamento, vedi [Configura il provider DNS del cluster](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>Immagine aggiornata per [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Aggiornato per supportare la release Kubernetes 1.14.1. Inoltre, la versione `calicoctl` è stata aggiornata alla 3.6.1. Gli aggiornamenti sono stati corretti ai programmi di bilanciamento del carico versione 2.0 con solo un singolo nodo di lavoro disponibile per i pod del programma di bilanciamento del carico. I programmi di bilanciamento del carico privato ora supportano l'esecuzione sui [nodi di lavoro edge privati](/docs/containers?topic=containers-edge#edge).</td>
+</tr>
+<tr>
+<td>Politiche di sicurezza del pod IBM</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>[Le politiche di sicurezza del pod IBM](/docs/containers?topic=containers-psp#ibm_psp) sono aggiornate per supportare la funzione [RunAsGroup ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) Kubernetes,</td>
+</tr>
+<tr>
+<td>Configurazione `kubelet`</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Imposta l'opzione `--pod-max-pids` su `14336` per evitare che un singolo pod utilizzi tutti gli ID processo su un nodo di lavoro.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>Vedi le [note sulla release Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) e il [blog di Kubernetes 1.14 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/).<br><br>Le politiche RBAC (role-based access control) predefinite di Kubernetes non concedono più l'accesso alle [API di rilevamento e controllo delle autorizzazioni agli utenti non autenticati ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). Questa modifica si applica solo ai nuovi cluster versione 1.14. Se aggiorni un cluster da una versione precedente, gli utenti non autenticati hanno ancora accesso alle API di rilevamento e controllo delle autorizzazioni.</td>
+</tr>
+<tr>
+<td>Configurazione dei controller di ammissione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td><ul>
+<li>È stata aggiunta `NodeRestriction` all'opzione `--enable-admission-plugins` per il server API Kubernetes del cluster e sono state configurate le risorse cluster correlate per supportare questo miglioramento della sicurezza.</li>
+<li>È stata eseguita la rimozione di `Initializers` dall'opzione `--enable-admission-plugins` e di `admissionregistration.k8s.io/v1alpha1=true` dall'opzione `--runtime-config` per il server API Kubernetes del cluster perché queste API non sono più supportate. Puoi invece utilizzare i [webhook di ammissione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).</li></ul></td>
+</tr>
+<tr>
+<td>DNS autoscaler di Kubernetes</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>Vedi le [note sulla release di DNS autoscaler di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0).</td>
+</tr>
+<tr>
+<td>Configurazione dei gate delle funzioni Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td><ul>
+  <li>È stata aggiunta `RuntimeClass=false` per disabilitare la selezione della configurazione di runtime del contenitore.</li>
+  <li>È stata rimossa `ExperimentalCriticalPodAnnotation=true` perché l'annotazione del pod `scheduler.alpha.kubernetes.io/critical-pod` non è più supportata. Puoi invece utilizzare [priorità di pod Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>Immagine aggiornata per [CVE-2019-11068 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Changelog versione 1.13
 {: #113_changelog}
+
+### Changelog per 1.13.6_1524, rilasciato il 4 giugno 2019
+{: #1136_1524}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.13.6_1524.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.13.6_1522">
+<caption>Modifiche intervenute dalla versione 1.13.6_1522</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurazione del DNS del cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>È stato corretto un bug che poteva lasciare entrambi i pod CoreDNS e DNS Kubernetes in esecuzione dopo le operazioni di `create` o `update` del cluster.</td>
+</tr>
+<tr>
+<td>Configurazione HA del master cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione è stata aggiornata per ridurre al minimo gli errori di connettività della rete del master intermittenti durante un aggiornamento del master.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Vedi le [note sulla release etcd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Server delle metriche di Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Vedi le [note sulla release del server delle metriche Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.13.6_1522, rilasciato il 20 maggio 2019
+{: #1136_1522}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.13.6_1522.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.13.6_1521">
+<caption>Modifiche intervenute dalla versione 1.13.6_1521</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Ubuntu 16.04</td>
+<td>4.4.0-145 generica</td>
+<td>4.4.0-148 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel Ubuntu 18.04</td>
+<td>4.15.0-47 generica</td>
+<td>4.15.0-50 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.13.6_1521, rilasciato il 13 maggio 2019
+{: #1136_1521}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.13.6_1521.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.13.5_1519">
+<caption>Modifiche intervenute dalla versione 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy HA del master cluster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2019-6706 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Immagine aggiornata per [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Aggiornato per supportare la release Kubernetes 1.13.6. È stato inoltre corretto il processo di aggiornamento per il programma di bilanciamento del carico 2.0 con un solo nodo di lavoro disponibile per i pod del programma di bilanciamento del carico.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6).</td>
+</tr>
+<tr>
+<td>Configurazione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione della politica di controllo del server API Kubernetes è stata aggiornata per non registrare l'URL di sola lettura `/openapi/v2*`. Inoltre, la configurazione del gestore controller Kubernetes ha aumentato la durata di validità dei certificati `kubelet` firmati da 1 a 3 anni.</td>
+</tr>
+<tr>
+<td>Configurazione del client OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Il pod `vpn-*` del client OpenVPN nello spazio dei nomi `kube-system` ora imposta `dnsPolicy` su `Default` per evitare il malfunzionamento del pod quando il DNS del cluster è inattivo.</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Immagine aggiornata per [CVE-2016-7076 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) e [CVE-2019-11068 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.13.5_1519, rilasciato il 29 aprile 2019
+{: #1135_1519}
+
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.13.5_1519.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.13.5_1518">
+<caption>Modifiche intervenute dalla versione 1.13.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>Vedi le [note sulla release di containerd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/containerd/containerd/releases/tag/v1.2.6).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog per il fix pack del nodo di lavoro 1.13.5_1518, rilasciato il 15 aprile 2019
 {: #1135_1518}
@@ -101,7 +525,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.13.5_1517.
 <td>Proxy HA del master cluster</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG).L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -157,7 +581,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -549,6 +973,201 @@ La seguente tabella mostra le modifiche incluse nella patch 1.13.2_1507.
 Esamina il changelog della versione 1.12.
 {: shortdesc}
 
+### Changelog per 1.12.9_1555, rilasciato il 4 giugno 2019
+{: #1129_1555}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.12.9_1555.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.12.8_1553">
+<caption>Modifiche intervenute dalla versione 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurazione del DNS del cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>È stato corretto un bug che poteva lasciare entrambi i pod CoreDNS e DNS Kubernetes in esecuzione dopo le operazioni di `create` o `update` del cluster.</td>
+</tr>
+<tr>
+<td>Configurazione HA del master cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione è stata aggiornata per ridurre al minimo gli errori di connettività della rete del master intermittenti durante un aggiornamento del master.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Vedi le [note sulla release etcd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Aggiornato per supportare la release Kubernetes 1.12.9.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9).</td>
+</tr>
+<tr>
+<td>Server delle metriche di Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Vedi le [note sulla release del server delle metriche Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.12.8_1553, rilasciato il 20 maggio 2019
+{: #1128_1533}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.12.8_1553.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.12.8_1553">
+<caption>Modifiche intervenute dalla versione 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Ubuntu 16.04</td>
+<td>4.4.0-145 generica</td>
+<td>4.4.0-148 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel Ubuntu 18.04</td>
+<td>4.15.0-47 generica</td>
+<td>4.15.0-50 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.12.8_1552, rilasciato il 13 maggio 2019
+{: #1128_1552}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.12.8_1552.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.12.7_1550">
+<caption>Modifiche intervenute dalla versione 1.12.7_1550</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy HA del master cluster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2019-6706 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Immagine aggiornata per [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.7-180</td>
+<td>v1.12.8-210</td>
+<td>Aggiornato per supportare la release Kubernetes 1.12.8. È stato inoltre corretto il processo di aggiornamento per il programma di bilanciamento del carico 2.0 con un solo nodo di lavoro disponibile per i pod del programma di bilanciamento del carico.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.7</td>
+<td>v1.12.8</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8).</td>
+</tr>
+<tr>
+<td>Configurazione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione della politica di controllo del server API Kubernetes è stata aggiornata per non registrare l'URL di sola lettura `/openapi/v2*`. Inoltre, la configurazione del gestore controller Kubernetes ha aumentato la durata di validità dei certificati `kubelet` firmati da 1 a 3 anni.</td>
+</tr>
+<tr>
+<td>Configurazione del client OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Il pod `vpn-*` del client OpenVPN nello spazio dei nomi `kube-system` ora imposta `dnsPolicy` su `Default` per evitare il malfunzionamento del pod quando il DNS del cluster è inattivo.</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Immagine aggiornata per [CVE-2016-7076 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) e [CVE-2019-11068 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.12.7_1550, rilasciato il 29 aprile 2019
+{: #1127_1550}
+
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.12.7_1550.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.12.7_1549">
+<caption>Modifiche intervenute dalla versione 1.12.7_1549</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Vedi le [note sulla release di containerd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Changelog per il fix pack del nodo di lavoro 1.12.7_1549, rilasciato il 15 aprile 2019
 {: #1127_1549}
 
@@ -602,7 +1221,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.12.7_1548.
 <td>Proxy HA del master cluster</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG).L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -658,7 +1277,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1183,7 +1802,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1357,10 +1976,185 @@ Se accedi al dashboard tramite `kubectl proxy`, il pulsante **SKIP** nella pagin
 </tbody>
 </table>
 
-## Changelog versione 1.11
+## Obsoleto: Changelog versione 1.11
 {: #111_changelog}
 
 Esamina il changelog della versione 1.11.
+{: shortdesc}
+
+Kubernetes versione 1.11 è stato dichiarato obsoleto e non sarà più supportato a partire dal 27 giugno 2019 (data ancora non definitiva). [Esamina il potenziale impatto](/docs/containers?topic=containers-cs_versions#cs_versions) di ciascun aggiornamento della versione di Kubernetes e [aggiorna quindi i tuoi cluster](/docs/containers?topic=containers-update#update) immediatamente almeno alla 1.12.
+{: deprecated}
+
+### Changelog per 1.11.10_1561, rilasciato il 4 giugno 2019
+{: #11110_1561}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.11.10_1561.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.11.10_1559">
+<caption>Modifiche intervenute dalla versione 1.11.10_1559</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configurazione HA del master cluster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione è stata aggiornata per ridurre al minimo gli errori di connettività della rete del master intermittenti durante un aggiornamento del master.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Vedi le [note sulla release etcd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Immagine aggiornata per [CVE-2018-10844 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435), e [CVE-2019-5436 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.11.10_1559, rilasciato il 20 maggio 2019
+{: #11110_1559}
+
+La seguente tabella mostra le modifiche incluse nel patch pack 1.11.10_1559.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.11.10_1558">
+<caption>Modifiche intervenute dalla versione 1.11.10_1558</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Ubuntu 16.04</td>
+<td>4.4.0-145 generica</td>
+<td>4.4.0-148 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel Ubuntu 18.04</td>
+<td>4.15.0-47 generica</td>
+<td>4.15.0-50 generica</td>
+<td>Immagini del nodo di lavoro aggiornate con l'aggiornamento del kernel per [CVE-2018-12126 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) e [CVE-2018-12130 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per 1.11.10_1558, rilasciato il 13 maggio 2019
+{: #11110_1558}
+
+La seguente tabella mostra le modifiche incluse nella patch 1.11.10_1558.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.11.9_1556">
+<caption>Modifiche intervenute dalla versione 1.11.9_1556</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy HA del master cluster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2019-6706 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin del dispositivo GPU e programma di installazione</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Immagine aggiornata per [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.9-241</td>
+<td>v1.11.10-270</td>
+<td>Aggiornato per supportare la release Kubernetes 1.11.10.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.9</td>
+<td>v1.11.10</td>
+<td>Vedi le [note sulla release Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10).</td>
+</tr>
+<tr>
+<td>Configurazione Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configurazione della politica di controllo del server API Kubernetes è stata aggiornata per non registrare l'URL di sola lettura `/openapi/v2*`. Inoltre, la configurazione del gestore controller Kubernetes ha aumentato la durata di validità dei certificati `kubelet` firmati da 1 a 3 anni.</td>
+</tr>
+<tr>
+<td>Configurazione del client OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Il pod `vpn-*` del client OpenVPN nello spazio dei nomi `kube-system` ora imposta `dnsPolicy` su `Default` per evitare il malfunzionamento del pod quando il DNS del cluster è inattivo.</td>
+</tr>
+<tr>
+<td>Agent Trusted Compute</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Immagine aggiornata per [CVE-2016-7076 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) e [CVE-2019-11068 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Changelog per il fix pack del nodo di lavoro 1.11.9_1556, rilasciato il 29 aprile 2019
+{: #1119_1556}
+
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.11.9_1556.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.11.9_1555">
+<caption>Modifiche intervenute dalla versione 1.11.9_1555</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Vedi le [note sulla release di containerd ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog per il fix pack del nodo di lavoro 1.11.9_1555, rilasciato il 15 aprile 2019
 {: #1119_1555}
@@ -1415,7 +2209,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.9_1554.
 <td>Proxy HA del master cluster</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG).L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -1477,7 +2271,7 @@ La seguente tabella mostra le modifiche include nella correzione del nodo di lav
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1987,7 +2781,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2102,7 +2896,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.3_1533.
 <td>Kernel abilitato a TPM</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo aver eseguito il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo l'esecuzione del [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -2338,13 +3132,13 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 <td>Rotazione dei log</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oppure il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Scadenza della password root</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
+<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
 </tr>
 <tr>
 <td>Componenti di runtime del nodo di lavoro (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -2516,16 +3310,109 @@ La seguente tabella mostra le modifiche incluse nella patch 1.11.2_1513.
 <br />
 
 
-## Obsoleto: Changelog versione 1.10
+## Archivio
+{: #changelog_archive}
+
+Versioni Kubernetes non supportate:
+*  [Versione 1.10](#110_changelog)
+*  [Versione 1.9](#19_changelog)
+*  [Versione 1.8](#18_changelog)
+*  [Versione 1.7](#17_changelog)
+
+### Changelog della versione 1.10 (non supportata dal 16 maggio 2019)
 {: #110_changelog}
 
-Esamina il changelog della versione 1.10.
+Esamina i changelog della versione 1.10.
 {: shortdesc}
 
-Kubernetes versione 1.10 è stato dichiarato obsoleto e non sarà più supportato a partire dal 15 maggio 2019. [Esamina il potenziale impatto](/docs/containers?topic=containers-cs_versions#cs_versions) di ciascun aggiornamento della versione di Kubernetes e [aggiorna quindi i tuoi cluster](/docs/containers?topic=containers-update#update) immediatamente almeno alla 1.11.
-{: deprecated}
+*   [Changelog per il fix pack del nodo di lavoro 1.10.13_1558, rilasciato il 13 maggio 2019](#11013_1558)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.13_1557, rilasciato il 29 aprile 2019](#11013_1557)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.13_1556, rilasciato il 15 aprile 2019](#11013_1556)
+*   [Changelog per 1.10.13_1555, rilasciato l'8 aprile 2019](#11013_1555)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.13_1554, rilasciato il 1° aprile 2019](#11013_1554)
+*   [Changelog per il fix pack del master 1.10.13_1553, rilasciato il 26 marzo 2019](#11118_1553)
+*   [Changelog per 1.10.13_1551, rilasciato il 20 marzo 2019](#11013_1551)
+*   [Changelog per 1.10.13_1548, rilasciato il 4 marzo 2019](#11013_1548)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.12_1546, rilasciato il 27 febbraio 2019](#11012_1546)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.12_1544, rilasciato il 15 febbraio 2019](#11012_1544)
+*   [Changelog per 1.10.12_1543, rilasciato il 5 febbraio 2019](#11012_1543)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.12_1541, rilasciato il 28 gennaio 2019](#11012_1541)
+*   [Changelog per 1.10.12_1540, rilasciato il 21 gennaio 2019](#11012_1540)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.11_1538, rilasciato il 7 gennaio 2019](#11011_1538)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.11_1537, rilasciato il 17 dicembre 2018](#11011_1537)
+*   [Changelog per 1.10.11_1536, rilasciato il 4 dicembre 2018](#11011_1536)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.8_1532, rilasciato il 27 novembre 2018](#1108_1532)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.8_1531, rilasciato il 19 novembre 2018](#1108_1531)
+*   [Changelog per 1.10.8_1530, rilasciato il 7 novembre 2018](#1108_1530_ha-master)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.8_1528, rilasciato il 26 ottobre 2018](#1108_1528)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.8_1525, rilasciato il 10 ottobre 2018](#1108_1525)
+*   [Changelog per 1.10.8_1524, rilasciato il 2 ottobre 2018](#1108_1524)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.7_1521, rilasciato il 20 settembre 2018](#1107_1521)
+*   [Changelog per 1.10.7_1520, rilasciato il 4 settembre 2018](#1107_1520)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.5_1519, rilasciato il 23 agosto 2018](#1105_1519)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.5_1518, rilasciato il 13 agosto 2018](#1105_1518)
+*   [Changelog per 1.10.5_1517, rilasciato il 27 luglio 2018](#1105_1517)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.3_1514, rilasciato il 3 luglio 2018](#1103_1514)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.3_1513, rilasciato il 21 giugno 2018](#1103_1513)
+*   [Changelog per 1.10.3_1512, rilasciato il 12 giugno 2018](#1103_1512)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.1_1510, rilasciato il 18 maggio 2018](#1101_1510)
+*   [Changelog per il fix pack del nodo di lavoro 1.10.1_1509, rilasciato il 16 maggio 2018](#1101_1509)
+*   [Changelog per 1.10.1_1508, rilasciato il 01 maggio 2018](#1101_1508)
 
-### Changelog per il fix pack del nodo di lavoro 1.10.13_1556, rilasciato il 15 aprile 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.13_1558, rilasciato il 13 maggio 2019
+{: #11013_1558}
+
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.13_1558.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.10.13_1557">
+<caption>Modifiche intervenute dalla versione 1.10.13_1557</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy HA del master cluster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2019-6706 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+</tbody>
+</table>
+
+#### Changelog per il fix pack del nodo di lavoro 1.10.13_1557, rilasciato il 29 aprile 2019
+{: #11013_1557}
+
+La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.13_1557.
+{: shortdesc}
+
+<table summary="Modifiche intervenute dalla versione 1.10.13_1556">
+<caption>Modifiche intervenute dalla 1.10.13_1556</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Precedente</th>
+<th>Corrente</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pacchetti Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Aggiornamenti ai pacchetti Ubuntu installati.</td>
+</tr>
+</tbody>
+</table>
+
+
+#### Changelog per il fix pack del nodo di lavoro 1.10.13_1556, rilasciato il 15 aprile 2019
 {: #11013_1556}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.13_1556.
@@ -2551,7 +3438,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.13_1555, rilasciato l'8 aprile 2019
+#### Changelog per 1.10.13_1555, rilasciato l'8 aprile 2019
 {: #11013_1555}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1555.
@@ -2572,7 +3459,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1555.
 <td>Proxy HA del master cluster</td>
 <td>1.8.12-alpine</td>
 <td>1.9.6-alpine</td>
-<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG).L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
+<td>Vedi le [note sulla release di HAProxy ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.haproxy.org/download/1.9/src/CHANGELOG). L'aggiornamento risolve [CVE-2018-0732 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732), [CVE-2018-0734 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734), [CVE-2018-0737 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737), [CVE-2018-5407 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407), [CVE-2019-1543 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) e [CVE-2019-1559 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559).</td>
 </tr>
 <tr>
 <td>DNS Kubernetes</td>
@@ -2601,7 +3488,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1555.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.13_1554, rilasciato il 1° aprile 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.13_1554, rilasciato il 1° aprile 2019
 {: #11013_1554}
 
 La seguente tabella mostra le modifiche include nella correzione del nodo di lavoro 1.10.13_1554.
@@ -2622,13 +3509,13 @@ La seguente tabella mostra le modifiche include nella correzione del nodo di lav
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Riserve di memoria aumentate per kubelet e containerd per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
 
-### Changelog per il fix pack del master 1.10.13_1553, rilasciato il 26 marzo 2019
+#### Changelog per il fix pack del master 1.10.13_1553, rilasciato il 26 marzo 2019
 {: #11118_1553}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.13_1553.
@@ -2666,7 +3553,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.13_
 </tbody>
 </table>
 
-### Changelog per 1.10.13_1551, rilasciato il 20 marzo 2019
+#### Changelog per 1.10.13_1551, rilasciato il 20 marzo 2019
 {: #11013_1551}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1551.
@@ -2722,7 +3609,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1551.
 </tbody>
 </table>
 
-### Changelog per 1.10.13_1548, rilasciato il 4 marzo 2019
+#### Changelog per 1.10.13_1548, rilasciato il 4 marzo 2019
 {: #11013_1548}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1548.
@@ -2796,7 +3683,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.13_1548.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.12_1546, rilasciato il 27 febbraio 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.12_1546, rilasciato il 27 febbraio 2019
 {: #11012_1546}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.12_1546.
@@ -2822,7 +3709,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.12_1544, rilasciato il 15 febbraio 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.12_1544, rilasciato il 15 febbraio 2019
 {: #11012_1544}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.12_1544.
@@ -2854,7 +3741,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.12_1543, rilasciato il 5 febbraio 2019
+#### Changelog per 1.10.12_1543, rilasciato il 5 febbraio 2019
 {: #11012_1543}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.12_1543.
@@ -2927,7 +3814,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.12_1543.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.12_1541, rilasciato il 28 gennaio 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.12_1541, rilasciato il 28 gennaio 2019
 {: #11012_1541}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.12_1541.
@@ -2953,7 +3840,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.12_1540, rilasciato il 21 gennaio 2019
+#### Changelog per 1.10.12_1540, rilasciato il 21 gennaio 2019
 {: #11012_1540}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.12_1540.
@@ -3004,7 +3891,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.12_1540.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.11_1538, rilasciato il 7 gennaio 2019
+#### Changelog per il fix pack del nodo di lavoro 1.10.11_1538, rilasciato il 7 gennaio 2019
 {: #11011_1538}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.11_1538.
@@ -3030,7 +3917,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.11_1537, rilasciato il 17 dicembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.11_1537, rilasciato il 17 dicembre 2018
 {: #11011_1537}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.11_1537.
@@ -3057,7 +3944,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </table>
 
 
-### Changelog per 1.10.11_1536, rilasciato il 4 dicembre 2018
+#### Changelog per 1.10.11_1536, rilasciato il 4 dicembre 2018
 {: #11011_1536}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.11_1536.
@@ -3102,12 +3989,12 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.11_1536.
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e docker per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e docker per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.8_1532, rilasciato il 27 novembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.8_1532, rilasciato il 27 novembre 2018
 {: #1108_1532}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1532.
@@ -3133,7 +4020,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.8_1531, rilasciato il 19 novembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.8_1531, rilasciato il 19 novembre 2018
 {: #1108_1531}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1531.
@@ -3159,7 +4046,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.8_1530, rilasciato il 7 novembre 2018
+#### Changelog per 1.10.8_1530, rilasciato il 7 novembre 2018
 {: #1108_1530_ha-master}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1530.
@@ -3215,12 +4102,12 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1530.
 <td>Kernel abilitato a TPM</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo aver eseguito il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo l'esecuzione del [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.8_1528, rilasciato il 26 ottobre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.8_1528, rilasciato il 26 ottobre 2018
 {: #1108_1528}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1528.
@@ -3246,7 +4133,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del master 1.10.8_1527, rilasciato il 15 ottobre 2018
+#### Changelog per il fix pack del master 1.10.8_1527, rilasciato il 15 ottobre 2018
 {: #1108_1527}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.8_1527.
@@ -3278,7 +4165,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del master 1.10.8_1
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.8_1525, rilasciato il 10 ottobre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.8_1525, rilasciato il 10 ottobre 2018
 {: #1108_1525}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.8_1525.
@@ -3311,7 +4198,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </table>
 
 
-### Changelog per 1.10.8_1524, rilasciato il 2 ottobre 2018
+#### Changelog per 1.10.8_1524, rilasciato il 2 ottobre 2018
 {: #1108_1524}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.8_1524.
@@ -3362,7 +4249,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.7_1521, rilasciato il 20 settembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.7_1521, rilasciato il 20 settembre 2018
 {: #1107_1521}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.7_1521.
@@ -3383,7 +4270,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Rotazione dei log</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oppure il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componenti di runtime del nodo di lavoro (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -3395,7 +4282,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Scadenza della password root</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
+<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3414,7 +4301,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.7_1520, rilasciato il 4 settembre 2018
+#### Changelog per 1.10.7_1520, rilasciato il 4 settembre 2018
 {: #1107_1520}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.7_1520.
@@ -3464,7 +4351,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.7_1520.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.5_1519, rilasciato il 23 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.5_1519, rilasciato il 23 agosto 2018
 {: #1105_1519}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1519.
@@ -3497,7 +4384,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.10.5_1518, rilasciato il 13 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.5_1518, rilasciato il 13 agosto 2018
 {: #1105_1518}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.5_1518.
@@ -3523,7 +4410,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.5_1517, rilasciato il 27 luglio 2018
+#### Changelog per 1.10.5_1517, rilasciato il 27 luglio 2018
 {: #1105_1517}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517.
@@ -3568,7 +4455,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517.
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 <tr>
 <td>Client OpenVPN</td>
@@ -3579,7 +4466,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.5_1517.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.3_1514, rilasciato il 3 luglio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.3_1514, rilasciato il 3 luglio 2018
 {: #1103_1514}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1514.
@@ -3600,13 +4487,13 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 </tbody>
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.10.3_1513, rilasciato il 21 giugno 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.3_1513, rilasciato il 21 giugno 2018
 {: #1103_1513}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.3_1513.
@@ -3632,7 +4519,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.3_1512, rilasciato il 12 giugno 2018
+#### Changelog per 1.10.3_1512, rilasciato il 12 giugno 2018
 {: #1103_1512}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.3_1512.
@@ -3690,7 +4577,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.3_1512.
 
 
 
-### Changelog per il fix pack del nodo di lavoro 1.10.1_1510, rilasciato il 18 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.1_1510, rilasciato il 18 maggio 2018
 {: #1101_1510}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1510.
@@ -3716,7 +4603,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.10.1_1509, rilasciato il 16 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.10.1_1509, rilasciato il 16 maggio 2018
 {: #1101_1509}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.10.1_1509.
@@ -3742,7 +4629,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.10.1_1508, rilasciato il 01 maggio 2018
+#### Changelog per 1.10.1_1508, rilasciato il 01 maggio 2018
 {: #1101_1508}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.10.1_1508.
@@ -3799,7 +4686,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.1_1508.
 <td>Supporto GPU</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Il supporto per i [carichi di lavoro del contenitore GPU (graphics processing unit)](/docs/containers?topic=containers-app#gpu_app) è ora disponibile per la pianificazione e l'esecuzione. Per un elenco di tipi di macchina GPU disponibili, consulta [Hardware per i nodi di lavoro](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Per ulteriori informazioni, consulta la documentazione Kubernetes in [Schedule GPUs ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Il supporto per i [carichi di lavoro del contenitore GPU (graphics processing unit)](/docs/containers?topic=containers-app#gpu_app) è ora disponibile per la pianificazione e l'esecuzione. Per un elenco di tipi di macchina GPU disponibili, consulta [Hardware per i nodi di lavoro](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). Per ulteriori informazioni, consulta la documentazione Kubernetes in [Schedule GPUs ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -3807,20 +4694,35 @@ La seguente tabella mostra le modifiche incluse nella patch 1.10.1_1508.
 <br />
 
 
-## Archivio
-{: #changelog_archive}
-
-Versioni Kubernetes non supportate:
-*  [Versione 1.9](#19_changelog)
-*  [Versione 1.8](#18_changelog)
-*  [Versione 1.7](#17_changelog)
-
 ### Changelog della versione 1.9 (non supportata dal 27 dicembre 2018)
 {: #19_changelog}
 
-Esamina il changelog della versione 1.9.
+Esamina i changelog della versione 1.9.
+{: shortdesc}
 
-### Changelog per il fix pack del nodo di lavoro 1.9.11_1539, rilasciato il 17 dicembre 2018
+*   [Changelog per il fix pack del nodo di lavoro 1.9.11_1539, rilasciato il 17 dicembre 2018](#1911_1539)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.11_1538, rilasciato il 4 dicembre 2018](#1911_1538)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.11_1537, rilasciato il 27 novembre 2018](#1911_1537)
+*   [Changelog per 1.9.11_1536, rilasciato il 19 novembre 2018](#1911_1536)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.10_1532, rilasciato il 7 novembre 2018](#1910_1532)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.10_1531, rilasciato il 26 ottobre 2018](#1910_1531)
+*   [Changelog per il fix pack del master 1.9.10_1530, rilasciato il 15 ottobre 2018](#1910_1530)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.10_1528, rilasciato il 10 ottobre 2018](#1910_1528)
+*   [Changelog per 1.9.10_1527, rilasciato il 2 ottobre 2018](#1910_1527)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.10_1524, rilasciato il 20 settembre 2018](#1910_1524)
+*   [Changelog per 1.9.10_1523, rilasciato il 4 settembre 2018](#1910_1523)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.9_1522, rilasciato il 23 agosto 2018](#199_1522)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.9_1521, rilasciato il 13 agosto 2018](#199_1521)
+*   [Changelog per 1.9.9_1520, rilasciato il 27 luglio 2018](#199_1520)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.8_1517, rilasciato il 3 luglio 2018](#198_1517)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.8_1516, rilasciato il 21 giugno 2018](#198_1516)
+*   [Changelog per 1.9.8_1515, rilasciato il 19 giugno 2018](#198_1515)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.7_1513, rilasciato l'11 giugno 2018](#197_1513)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.7_1512, rilasciato il 18 maggio 2018](#197_1512)
+*   [Changelog per il fix pack del nodo di lavoro 1.9.7_1511, rilasciato il 16 maggio 2018](#197_1511)
+*   [Changelog per 1.9.7_1510, rilasciato il 30 aprile 2018](#197_1510)
+
+#### Changelog per il fix pack del nodo di lavoro 1.9.11_1539, rilasciato il 17 dicembre 2018
 {: #1911_1539}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1539.
@@ -3846,7 +4748,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.11_1538, rilasciato il 4 dicembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.11_1538, rilasciato il 4 dicembre 2018
 {: #1911_1538}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1538.
@@ -3867,12 +4769,12 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Utilizzo delle risorse del nodo di lavoro</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e docker per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Sono stati aggiunti dei gruppi di controllo (cgroup) dedicati per kubelet e docker per impedire che questi componenti esauriscano le risorse. Per ulteriori informazioni, vedi [Riserve di risorse del nodo di lavoro](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.11_1537, rilasciato il 27 novembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.11_1537, rilasciato il 27 novembre 2018
 {: #1911_1537}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1537.
@@ -3898,7 +4800,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.9.11_1536, rilasciato il 19 novembre 2018
+#### Changelog per 1.9.11_1536, rilasciato il 19 novembre 2018
 {: #1911_1536}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.11_1536.
@@ -3948,7 +4850,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.11_1536.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.10_1532, rilasciato il 7 novembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.10_1532, rilasciato il 7 novembre 2018
 {: #1910_1532}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.11_1532.
@@ -3969,12 +4871,12 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Kernel abilitato a TPM</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo aver eseguito il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+<td>I nodi di lavoro bare metal con chip TPM per Trusted Compute utilizzano il kernel Ubuntu predefinito fino a quando non viene abilitata l'attendibilità. Se [abiliti l'attendibilità](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) su un cluster esistente, devi [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) tutti i nodi di lavoro bare metal esistenti con i chip TPM. Per verificare se un nodo di lavoro bare metal ha un chip TPM, controlla il campo **Trustable** dopo l'esecuzione del [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.10_1531, rilasciato il 26 ottobre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.10_1531, rilasciato il 26 ottobre 2018
 {: #1910_1531}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1531.
@@ -4000,7 +4902,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del master 1.9.10_1530, rilasciato il 15 ottobre 2018
+#### Changelog per il fix pack del master 1.9.10_1530, rilasciato il 15 ottobre 2018
 {: #1910_1530}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1530.
@@ -4026,7 +4928,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.10_1528, rilasciato il 10 ottobre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.10_1528, rilasciato il 10 ottobre 2018
 {: #1910_1528}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1528.
@@ -4059,7 +4961,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </table>
 
 
-### Changelog per 1.9.10_1527, rilasciato il 2 ottobre 2018
+#### Changelog per 1.9.10_1527, rilasciato il 2 ottobre 2018
 {: #1910_1527}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1527.
@@ -4092,7 +4994,7 @@ Inoltre, adesso quando aggiorni il master del cluster, la classe di archiviazion
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.10_1524, rilasciato il 20 settembre 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.10_1524, rilasciato il 20 settembre 2018
 {: #1910_1524}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.10_1524.
@@ -4113,7 +5015,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Rotazione dei log</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oppure il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componenti di runtime del nodo di lavoro (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4125,7 +5027,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Scadenza della password root</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
+<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4144,7 +5046,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.9.10_1523, rilasciato il 4 settembre 2018
+#### Changelog per 1.9.10_1523, rilasciato il 4 settembre 2018
 {: #1910_1523}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1523.
@@ -4188,7 +5090,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.10_1523.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.9_1522, rilasciato il 23 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.9_1522, rilasciato il 23 agosto 2018
 {: #199_1522}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1522.
@@ -4221,7 +5123,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.9.9_1521, rilasciato il 13 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.9_1521, rilasciato il 13 agosto 2018
 {: #199_1521}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.9_1521.
@@ -4247,7 +5149,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.9.9_1520, rilasciato il 27 luglio 2018
+#### Changelog per 1.9.9_1520, rilasciato il 27 luglio 2018
 {: #199_1520}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520.
@@ -4286,7 +5188,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520.
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 <tr>
 <td>Client OpenVPN</td>
@@ -4297,7 +5199,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.9_1520.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.8_1517, rilasciato il 3 luglio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.8_1517, rilasciato il 3 luglio 2018
 {: #198_1517}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1517.
@@ -4318,13 +5220,13 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 </tbody>
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.9.8_1516, rilasciato il 21 giugno 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.8_1516, rilasciato il 21 giugno 2018
 {: #198_1516}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.8_1516.
@@ -4350,7 +5252,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.9.8_1515, rilasciato il 19 giugno 2018
+#### Changelog per 1.9.8_1515, rilasciato il 19 giugno 2018
 {: #198_1515}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.8_1515.
@@ -4395,7 +5297,7 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.8_1515.
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.9.7_1513, rilasciato l'11 giugno 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.7_1513, rilasciato l'11 giugno 2018
 {: #197_1513}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1513.
@@ -4421,7 +5323,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.7_1512, rilasciato il 18 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.7_1512, rilasciato il 18 maggio 2018
 {: #197_1512}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1512.
@@ -4447,7 +5349,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.9.7_1511, rilasciato il 16 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.9.7_1511, rilasciato il 16 maggio 2018
 {: #197_1511}
 
 La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 1.9.7_1511.
@@ -4473,7 +5375,7 @@ La seguente tabella mostra le modifiche incluse nel fix pack del nodo di lavoro 
 </tbody>
 </table>
 
-### Changelog per 1.9.7_1510, rilasciato il 30 aprile 2018
+#### Changelog per 1.9.7_1510, rilasciato il 30 aprile 2018
 {: #197_1510}
 
 La seguente tabella mostra le modifiche incluse nella patch 1.9.7_1510.
@@ -4523,9 +5425,22 @@ La seguente tabella mostra le modifiche incluse nella patch 1.9.7_1510.
 ### Changelog versione 1.8 (non supportato)
 {: #18_changelog}
 
-Esamina le seguenti modifiche.
+Esamina i changelog della versione 1.8.
+{: shortdesc}
 
-### Changelog per il fix pack del nodo di lavoro 1.8.15_1521, rilasciato il 20 settembre 2018
+*   [Changelog per il fix pack del nodo di lavoro 1.8.15_1521, rilasciato il 20 settembre 2018](#1815_1521)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.15_1520, rilasciato il 23 agosto 2018](#1815_1520)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.15_1519, rilasciato il 13 agosto 2018](#1815_1519)
+*   [Changelog per 1.8.15_1518, rilasciato il 27 luglio 2018](#1815_1518)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.13_1516, rilasciato il 3 luglio 2018](#1813_1516)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.13_1515, rilasciato il 21 giugno 2018](#1813_1515)
+*   [Changelog 1.8.13_1514, rilasciato il 19 giugno 2018](#1813_1514)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.11_1512, rilasciato l'11 giugno 2018](#1811_1512)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.11_1511, rilasciato il 18 maggio 2018](#1811_1511)
+*   [Changelog per il fix pack del nodo di lavoro 1.8.11_1510, rilasciato il 16 maggio 2018](#1811_1510)
+*   [Changelog per 1.8.11_1509, rilasciato il 19 aprile 2018](#1811_1509)
+
+#### Changelog per il fix pack del nodo di lavoro 1.8.15_1521, rilasciato il 20 settembre 2018
 {: #1815_1521}
 
 <table summary="Modifiche intervenute dalla versione 1.8.15_1520">
@@ -4543,7 +5458,7 @@ Esamina le seguenti modifiche.
 <td>Rotazione dei log</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oppure il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+<td>Si è passato all'utilizzo dei timer `systemd` anziché `cronjobs` per evitare che `logrotate` non funzioni sui nodi di lavoro che non vengono ricaricati o aggiornati entro 90 giorni. **Nota**: in tutte le versioni precedenti per questa release secondaria, il disco primario si riempie dopo che il lavoro cron ha esito negativo perché i log non vengono ruotati. Il lavoro cron ha esito negativo dopo che il nodo di lavoro resta attivo per 90 giorni senza essere aggiornato o ricaricato. Se i log riempiono l'intero disco primario, il nodo di lavoro entra in uno stato non riuscito. Il nodo di lavoro può essere corretto utilizzando il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componenti di runtime del nodo di lavoro (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4555,7 +5470,7 @@ Esamina le seguenti modifiche.
 <td>Scadenza della password root</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
+<td>Le password root per i nodi di lavoro scadono dopo 90 giorni per motivi di conformità. Se i tuoi strumenti di automazione devono accedere al nodo di lavoro come root o fanno affidamento su lavori cron eseguiti come root, puoi disabilitare la scadenza della password accedendo al nodo di lavoro ed eseguendo `chage -M -1 root`. **Nota**: se hai requisiti di conformità di sicurezza che impediscono l'esecuzione come root o la rimozione della scadenza della password, non disabilitare la scadenza. Puoi invece [aggiornare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) i tuoi nodi di lavoro almeno ogni 90 giorni.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4566,7 +5481,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.8.15_1520, rilasciato il 23 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.15_1520, rilasciato il 23 agosto 2018
 {: #1815_1520}
 
 <table summary="Modifiche intervenute dalla versione 1.8.15_1519">
@@ -4595,7 +5510,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.8.15_1519, rilasciato il 13 agosto 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.15_1519, rilasciato il 13 agosto 2018
 {: #1815_1519}
 
 <table summary="Modifiche intervenute dalla versione 1.8.15_1518">
@@ -4618,7 +5533,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog per 1.8.15_1518, rilasciato il 27 luglio 2018
+#### Changelog per 1.8.15_1518, rilasciato il 27 luglio 2018
 {: #1815_1518}
 
 <table summary="Modifiche intervenute dalla versione 1.8.13_1516">
@@ -4654,7 +5569,7 @@ Esamina le seguenti modifiche.
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>Miglioramenti secondari alle impostazioni di rete dei nodi di lavoro per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 <tr>
 <td>Client OpenVPN</td>
@@ -4665,7 +5580,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.8.13_1516, rilasciato il 3 luglio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.13_1516, rilasciato il 3 luglio 2018
 {: #1813_1516}
 
 <table summary="Modifiche intervenute dalla versione 1.8.13_1515">
@@ -4683,13 +5598,13 @@ Esamina le seguenti modifiche.
 <td>Kernel</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad elevate prestazioni.</td>
+<td>`sysctl` ottimizzato per i carichi di lavoro di rete ad alte prestazioni.</td>
 </tr>
 </tbody>
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.8.13_1515, rilasciato il 21 giugno 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.13_1515, rilasciato il 21 giugno 2018
 {: #1813_1515}
 
 <table summary="Modifiche intervenute dalla versione 1.8.13_1514">
@@ -4712,7 +5627,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog 1.8.13_1514, rilasciato il 19 giugno 2018
+#### Changelog 1.8.13_1514, rilasciato il 19 giugno 2018
 {: #1813_1514}
 
 <table summary="Modifiche intervenute dalla versione 1.8.11_1512">
@@ -4754,7 +5669,7 @@ Esamina le seguenti modifiche.
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.8.11_1512, rilasciato l'11 giugno 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.11_1512, rilasciato l'11 giugno 2018
 {: #1811_1512}
 
 <table summary="Modifiche intervenute dalla versione 1.8.11_1511">
@@ -4778,7 +5693,7 @@ Esamina le seguenti modifiche.
 </table>
 
 
-### Changelog per il fix pack del nodo di lavoro 1.8.11_1511, rilasciato il 18 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.11_1511, rilasciato il 18 maggio 2018
 {: #1811_1511}
 
 <table summary="Modifiche intervenute dalla versione 1.8.11_1510">
@@ -4801,7 +5716,7 @@ Esamina le seguenti modifiche.
 </tbody>
 </table>
 
-### Changelog per il fix pack del nodo di lavoro 1.8.11_1510, rilasciato il 16 maggio 2018
+#### Changelog per il fix pack del nodo di lavoro 1.8.11_1510, rilasciato il 16 maggio 2018
 {: #1811_1510}
 
 <table summary="Modifiche intervenute dalla versione 1.8.11_1509">
@@ -4825,7 +5740,7 @@ Esamina le seguenti modifiche.
 </table>
 
 
-### Changelog per 1.8.11_1509, rilasciato il 19 aprile 2018
+#### Changelog per 1.8.11_1509, rilasciato il 19 aprile 2018
 {: #1811_1509}
 
 <table summary="Modifiche intervenute dalla versione 1.8.8_1507">
@@ -4872,7 +5787,13 @@ Esamina le seguenti modifiche.
 ### Changelog versione 1.7 (non supportato)
 {: #17_changelog}
 
-Esamina le seguenti modifiche.
+Esamina i changelog della versione 1.7.
+{: shortdesc}
+
+*   [Changelog per il fix pack del nodo di lavoro 1.7.16_1514, rilasciato l'11 giugno 2018](#1716_1514)
+*   [Changelog per il fix pack del nodo di lavoro 1.7.16_1513, rilasciato il 18 maggio 2018](#1716_1513)
+*   [Changelog per il fix pack del nodo di lavoro 1.7.16_1512, rilasciato il 16 maggio 2018](#1716_1512)
+*   [Changelog per 1.7.16_1511, rilasciato il 19 aprile 2018](#1716_1511)
 
 #### Changelog per il fix pack del nodo di lavoro 1.7.16_1514, rilasciato l'11 giugno 2018
 {: #1716_1514}

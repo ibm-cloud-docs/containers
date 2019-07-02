@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # VPN 연결 설정
@@ -33,6 +33,8 @@ VPN 연결을 사용하면 {{site.data.keyword.containerlong}}에서 Kubernetes 
 작업자 노드 및 앱을 온프레미스 데이터센터에 연결하려면 다음 옵션 중 하나를 구성할 수 있습니다.
 
 - **strongSwan IPSec VPN 서비스**: Kubernetes 클러스터를 온프레미스 네트워크와 안전하게 연결하는 [strongSwan IPSec VPN 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.strongswan.org/about.html)를 설정할 수 있습니다. strongSwan IPSec VPN 서비스는 업계 표준 IPSec(Internet Protocol Security) 프로토콜 스위트를 기반으로 하는 인터넷 상의 엔드-투-엔드 보안 통신 채널을 제공합니다. 클러스터와 온프레미스 네트워크 간의 보안 연결을 설정하려면 클러스터 내의 팟(Pod)에 직접 [strongSwan IPSec VPN 서비스를 구성하고 배치](#vpn-setup)하십시오.
+
+- **{{site.data.keyword.BluDirectLink}}**: 공용 인터넷을 라우팅하지 않고 [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link)를 통해 원격 네트워크 환경과 {{site.data.keyword.containerlong_notm}} 간의 직접적인 사설 연결을 작성할 수 있습니다. {{site.data.keyword.Bluemix_notm}} Direct Link 오퍼링은 하이브리드 워크로드, 교차 제공자 워크로드, 대규모 또는 빈번한 데이터 전송자 또는 개인용 워크로드를 구현해야 하는 경우 유용합니다. {{site.data.keyword.Bluemix_notm}} Direct Link 오퍼링을 선택하고 {{site.data.keyword.Bluemix_notm}} Direct Link 연결을 설정하려면 {{site.data.keyword.Bluemix_notm}} Direct Link 문서의 [IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link 시작하기](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)를 참조하십시오.
 
 - **가상 라우터 어플라이언스(VRA) 또는 Fortigate 보안 어플라이언스(FSA)**: [VRA(Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) 또는 [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)를 설정하여 IPSec VPN 엔드포인트를 구성하도록 선택할 수 있습니다. 이 옵션은 대규모 클러스터가 있으며 단일 VPN 에서 다중 클러스터에 액세스하려는 경우 또는 라우트 기반 VPN이 필요한 경우에 유용합니다. VRA를 구성하려면 [VRA를 사용하여 VPN 연결 설정](#vyatta)을 참조하십시오.
 
@@ -69,6 +71,9 @@ strongSwan Helm 차트를 사용하기 전에 다음 고려사항 및 제한사�
 * strongSwan Helm 차트는 클러스터 내의 Kubernetes 팟(Pod)으로서 실행됩니다. VPN 성능은 Kubernetes 및 클러스터에 실행 중인 기타 팟(Pod)의 메모리와 네트워크 사용에 따라 영향을 받습니다. 성능이 중요한 환경을 보유 중이면 전용 하드웨어의 클러스터 외부에서 실행되는 VPN 솔루션의 사용을 고려하십시오.
 * strongSwan Helm 차트는 IPSec 터널 엔드포인트로서 단일 VPN 팟(Pod)을 실행합니다. 팟(Pod)이 실패하면 클러스터가 팟(Pod)을 다시 시작합니다. 그러나 새 팟(Pod)이 시작되고 VPN 연결이 다시 설정되는 동안에는 짧은 작동 중지 시간이 발생할 수 있습니다. 보다 빠른 오류 복구 또는 보다 정교한 고가용성 솔루션이 필요한 경우에는 전용 하드웨어의 클러스터 외부에서 실행되는 VPN 솔루션의 사용을 고려하십시오.
 * strongSwan Helm 차트는 VPN 연결을 통해 전달되는 네트워크 트래픽의 메트릭 또는 모니터링을 제공하지 않습니다. 지원되는 모니터링 도구의 목록은 [로깅 및 모니터링 서비스](/docs/containers?topic=containers-supported_integrations#health_services)를 참조하십시오.
+
+클러스터 사용자는 strongSwan VPN 서비스를 사용하여 개인 서비스 엔드포인트를 통해 Kubernetes 마스터에 연결할 수 있습니다. 그러나 개인 서비스 엔드포인트를 통한 Kubernetes 마스터와의 통신은 VPN 연결에서 라우트되지 않는 <code>166.X.X.X</code> IP 주소 범위를 통해 수행되어야 합니다. [사설 네트워크 로드 밸런서(NLB) 사용](/docs/containers?topic=containers-clusters#access_on_prem)을 통해 클러스터 사용자에게 적합한 마스터의 개인 서비스 엔드포인트를 노출할 수 있습니다. 사설 NLB는 strongSwan VPN 팟(Pod)이 액세스할 수 있는 내부 `172.21.x.x` 클러스터 IP 주소로 마스터의 개인 서비스 엔드포인트를 노출합니다. 개인 서비스 엔드포인트만 사용으로 설정하는 경우에는 Kubernetes 대시보드를 사용하거나 임시로 공용 서비스 엔드포인트를 사용으로 설정하여 사설 NLB를 작성할 수 있습니다.
+{: tip}
 
 <br />
 
@@ -147,8 +152,8 @@ VPN 연결이 다중 구역 클러스터에서 아웃바운드인 경우 하나�
       - `zoneSpecificRoutes`: `true`로 설정합니다. 이 설정은 VPN 연결을 클러스터의 단일 구역으로 제한합니다. 특정 구역의 팟(Pod)은 해당 특정 구역에 설정된 VPN 연결만 사용합니다. 이 솔루션은 다중 구역 클러스터에서 다중 VPN을 지원하기 위해 필요한 strongSwan 팟(Pod)의 수를 줄이고 VPN 트래픽이 현재 구역에 있는 작업자 노드로만 이동하므로 VPN 성능을 개선하고, 각 구역에 대한 VPN 접속이 VPN 연결, 중단된 팟(Pod) 또는 다른 구역의 구역 가동 중단에 의해 영향을 받지 않도록 보장합니다. `remoteSubnetNAT`를 구성할 필요가 없습니다. `zoneSpecificRoutes` 설정을 사용하는 복수의 VPN에는 라우팅이 구역 단위로 설정되므로 동일한 `remote.subnet`이 있을 수 있습니다.
       - `enableSingleSourceIP`: `true`로 설정하고 `local.subnet`를 단일 /32 IP 주소로 설정합니다. 이 설정 조합은 단일 /32 IP 주소 뒤에 있는 모든 클러스터 사설 IP 주소를 숨깁니다. 이 고유한 /32 IP 주소를 사용하면 원격 온프레미스 환경의 네트워크가 올바른 VPN 연결을 통해 요청을 시작한 클러스터의 올바른 팟(Pod)에 응답을 다시 전송할 수 있습니다. `local.subnet` 옵션에 구성되는 단일 /32 IP 주소는 각 strongSwan VPN 구성에서 고유해야 합니다.
     * 원격 온프레미스 네트워크의 애플리케이션이 클러스터의 서비스에 액세스해야 하는 경우:    
-      - `localSubnetNAT`: 온프레미스 원격 네트워크에 있는 애플리케이션에서 특정 VPN 연결을 선택하여 해당 클러스터에 트래픽을 전송하고 수신할 수 있는지 확인합니다. 각 strongSwan Helm 구성에서 `localSubnetNAT`를 사용하여 원격 온프레미스 애플리케이션에서 액세스할 수 있는 클러스터 리소스를 고유하게 식별합니다. 다수의 VPN이 원격 온프레미스 네트워크에서 클러스터로 설정되므로 클러스터의 서비스에 액세스할 때 사용할 VPN을 선택할 수 있도록 온프레미스 네트워크에 있는 애플리케이션에 로직을 추가해야 합니다. 클러스터의 서비스는 각 strongSwan VPN 구성의 `localSubetNAT`에 구성한 값에 따라 여러 개의 다른 서브넷을 통해 액세스할 수 있습니다.
-      - `remoteSubnetNAT`: 클러스터에서 팟(Pod)이 동일한 VPN 연결을 사용하여 원격 네트워크에 트래픽을 리턴하도록 보장합니다. 각 strongSwan 배치 파일에서 원격 온프레미스 서브넷을 `remoteSubetNAT` 설정을 사용하는 고유한 서브넷에 맵핑하십시오. 클러스터의 팟(Pod)이 VPN 특정 `remoteSubetNAT`에서 수신한 트래픽은 동일한 VPN 특정 `remoteSubnetNAT`에 전송된 후 동일한 VPN 연결을 통해 다시 전송됩니다.
+      - `localSubnetNAT`: 온프레미스 원격 네트워크에 있는 애플리케이션에서 특정 VPN 연결을 선택하여 해당 클러스터에 트래픽을 전송하고 수신할 수 있는지 확인합니다. 각 strongSwan Helm 구성에서 `localSubnetNAT`를 사용하여 원격 온프레미스 애플리케이션에서 액세스할 수 있는 클러스터 리소스를 고유하게 식별합니다. 다수의 VPN이 원격 온프레미스 네트워크에서 클러스터로 설정되므로 클러스터의 서비스에 액세스할 때 사용할 VPN을 선택할 수 있도록 온프레미스 네트워크에 있는 애플리케이션에 로직을 추가해야 합니다. 클러스터의 서비스는 각 strongSwan VPN 구성의 `localSubnetNAT`에 구성한 값에 따라 여러 개의 다른 서브넷을 통해 액세스할 수 있습니다.
+      - `remoteSubnetNAT`: 클러스터에서 팟(Pod)이 동일한 VPN 연결을 사용하여 원격 네트워크에 트래픽을 리턴하도록 보장합니다. 각 strongSwan 배치 파일에서 원격 온프레미스 서브넷을 `remoteSubnetNAT` 설정을 사용하는 고유한 서브넷에 맵핑하십시오. 클러스터의 팟(Pod)이 VPN 특정 `remoteSubnetNAT`에서 수신한 트래픽은 동일한 VPN 특정 `remoteSubnetNAT`에 전송된 후 동일한 VPN 연결을 통해 다시 전송됩니다.
 
 3. 각 구역에서 로드 밸런서 IP에 별도의 VPN 연결을 설정하도록 원격 VPN 엔드포인트 소프트웨어를 구성하십시오.
 
@@ -162,9 +167,9 @@ strongSwan Helm 차트를 설치하기 전에 strongSwan 구성을 결정해야 
 {: shortdesc}
 
 시작하기 전에:
-* [온프레미스 데이터센터에 IPSec VPN 게이트웨이를 설치](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection)하십시오.
+* 온프레미스 데이터센터에 IPSec VPN 게이트웨이를 설치하십시오.
 * `default` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **참고**: 모든 strongSwan 구성은 표준 클러스터에서 허용됩니다. 무료 클러스터를 사용하는 경우 [3단계](#strongswan_3)에서 아웃바운드 VPN 연결만 선택할 수 있습니다. 인바운드 VPN 연결에는 클러스터에 로드 밸런서가 필요하며 로드 밸런서는 무료 클러스터에서 사용할 수 없습니다.
 
 ### 1단계: strongSwan Helm 차트 가져오기
@@ -173,7 +178,7 @@ strongSwan Helm 차트를 설치하기 전에 strongSwan 구성을 결정해야 
 Helm을 설치하고 strongSwan Helm 차트를 가져와서 가능한 구성을 확인하십시오.
 {: shortdesc}
 
-1.  [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 서비스 계정이 있는 Helm 서버(tiller)를 설치한 후 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오. Helm 버전 2.8 이상이 필요합니다. 
+1.  [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 서비스 계정이 있는 Helm 서버(tiller)를 설치한 후 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오. Helm 버전 2.8 이상이 필요합니다.
 
 2.  Tiller가 서비스 계정으로 설치되어 있는지 확인하십시오.
 
@@ -449,11 +454,11 @@ Helm 차트를 배치한 후 VPN 연결을 테스트하십시오.
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-1</code></td>
-    <td>클러스터의 VPN 팟(Pod)에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 게이트웨이 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다.<ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다.</li><li><code>local.subnet</code> 목록에 있는 클러스터 팟(Pod) 서브넷 CIDR인 <code>172.30.0.0/16</code>을 지정하지 않았습니다.</li></ul></td>
+    <td>클러스터의 VPN 팟(Pod)에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 사설 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다.<ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다.</li><li><code>local.subnet</code> 목록에 있는 클러스터 팟(Pod) 서브넷 CIDR인 <code>172.30.0.0/16</code>을 지정하지 않았습니다.</li></ul></td>
     </tr>
     <tr>
     <td><code>vpn-strongswan-ping-remote-ip-2</code></td>
-    <td>클러스터의 작업자 노드에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 게이트웨이 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다.<ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다.</li><li><code>local.subnet</code> 목록에 있는 클러스터 작업자 노드 사설 서브넷 CIDR을 지정하지 않았습니다.</li></ul></td>
+    <td>클러스터의 작업자 노드에서 온프레미스 VPN 게이트웨이의 <code>remote.privateIPtoPing</code> 사설 IP 주소에 대해 ping을 실행합니다. 다음과 같은 이유로 인해 이 테스트가 실패할 수 있습니다.<ul><li><code>remote.privateIPtoPing</code> IP 주소를 지정하지 않았습니다. 의도적으로 IP 주소를 지정하지 않은 경우 이 실패는 허용됩니다.</li><li><code>local.subnet</code> 목록에 있는 클러스터 작업자 노드 사설 서브넷 CIDR을 지정하지 않았습니다.</li></ul></td>
     </tr>
     </tbody></table>
 
@@ -653,9 +658,6 @@ strongSwan Helm 차트를 최신 버전으로 업그레이드하려면 다음을
   ```
   {: pre}
 
-strongSwan 2.0.0 Helm 차트는 Calico v3 또는 Kubernetes 1.10에서 작동하지 않습니다. [클러스터를 1.10으로 업데이트](/docs/containers?topic=containers-cs_versions#cs_v110)하기 전에 먼저 Calico 2.6 및 Kubernetes 1.9와 역호환이 가능한 2.2.0 이상 Helm 차트로 strongSwan을 업데이트하십시오. 그런 다음 strongSwan Helm 차트를 삭제하십시오. 그러면 업데이트 후 차트를 재설치할 수 있습니다.
-{:tip}
-
 ## strongSwan IPSec VPN 서비스 사용 안함
 {: vpn_disable}
 
@@ -692,11 +694,11 @@ Helm 차트를 삭제하여 VPN 연결을 사용 안함으로 설정할 수 있�
 
 가상 라우터 어플라이언스를 설정하려면 다음을 수행하시시오.
 
-1. [VRA를 주문](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance)하십시오.
+1. [VRA를 주문](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started)하십시오.
 
 2. [VRA에서 사설 VLAN을 구성](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans)하십시오.
 
 3. VRA를 사용하여 VPN 연결을 사용으로 설정하려면 [VRA에서 VRRP를 구성](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp)하십시오.
 
-기존 라우터 어플라이언스가 있으며 클러스터를 추가하는 경우, 클러스터에 대해 주문된 새 포터블 서브넷은 라우터 어플라이언스에서 구성되지 않습니다. 네트워크 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](/docs/containers?topic=containers-subnets#subnet-routing)하여 동일한 VLAN의 서브넷 간에 라우팅을 사용하도록 설정해야 합니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+기존 라우터 어플라이언스가 있으며 클러스터를 추가하는 경우, 클러스터에 대해 주문된 새 포터블 서브넷은 라우터 어플라이언스에서 구성되지 않습니다. 네트워크 서비스를 사용하려면 [VLAN Spanning을 사용으로 설정](/docs/containers?topic=containers-subnets#subnet-routing)하여 동일한 VLAN의 서브넷 간에 라우팅을 사용하도록 설정해야 합니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get --region <region>` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)을 사용하십시오.
 {: important}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Creazione dei contenitori dalle immagini
@@ -53,7 +55,7 @@ Puoi utilizzare più registri con {{site.data.keyword.containerlong_notm}} per d
 
 |Registro|Descrizione|Vantaggi|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|Con questa opzione, puoi configurare il tuo proprio repository delle immagini Docker protetto in {{site.data.keyword.registryshort_notm}}
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|Con questa opzione, puoi configurare il tuo proprio repository delle immagini Docker protetto in {{site.data.keyword.registryshort_notm}}
 dove puoi archiviare e condividere le immagini in sicurezza tra gli utenti del cluster.|<ul><li>Gestisci l'accesso alle immagini nel tuo account.</li><li>Utilizza le applicazioni di esempio e le immagini fornite da
 {{site.data.keyword.IBM_notm}}, come {{site.data.keyword.IBM_notm}} Liberty, come immagine principale e aggiungi il tuo proprio codice
 ad esse.</li><li>Scansione automatica delle immagini per vulnerabilità potenziali dal Controllo vulnerabilità, incluse
@@ -95,9 +97,10 @@ Puoi distribuire i contenitori al tuo cluster da un'immagine pubblica fornita da
 
 Prima di iniziare:
 1. [Configura uno spazio dei nomi in {{site.data.keyword.registryshort_notm}} e inserisci le immagini in questo spazio dei nomi](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Crea un cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Crea un
+cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. Se disponi di un cluster esistente creato prima del **25 febbraio 2019**, [aggiorna il tuo cluster per utilizzare l'`imagePullSecret` della chiave API](#imagePullSecret_migrate_api_key).
-4. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per distribuire un contenitore nello spazio dei nomi **predefinito** del tuo cluster:
 
@@ -126,7 +129,7 @@ Per distribuire un contenitore nello spazio dei nomi **predefinito** del tuo clu
     {: codeblock}
 
     Sostituisci le variabili dell'URL dell'immagine con le informazioni relative alla tua immagine:
-    *  **`<app_name>`**: il nome della tua applicazione. 
+    *  **`<app_name>`**: il nome della tua applicazione.
     *  **`<region>`**: l'endpoint dell'API {{site.data.keyword.registryshort_notm}} della regione per il dominio del registro. Per elencare il dominio per la regione in cui hai effettuato l'accesso, esegui `ibmcloud cr api`.
     *  **`<namespace>`**: lo spazio dei nomi del registro. Per ottenere le informazioni sul tuo spazio dei nomi, esegui `ibmcloud cr namespace-list`.
     *  **`<my_image>:<tag>`**: l'immagine e la tag che desideri utilizzare per creare il contenitore. Per ottenere le immagini disponibili nel tuo registro, esegui `ibmcloud cr images`.
@@ -178,6 +181,9 @@ I token autorizzano l'accesso ai domini di registro `registry.bluemix.net` obsol
 
 Prima che i token obsoleti e i domini `registry.bluemix.net` non siano più supportati, aggiorna i segreti di pull dell'immagine del tuo cluster, in modo da utilizzare il metodo dello [spazio dei nomi Kubernetes `default` ](#imagePullSecret_migrate_api_key) e [qualsiasi altro spazio dei nomi o account](#other) utilizzabile. Quindi, aggiorna le tue distribuzioni in modo da eseguire il pull dai domini di registro `icr.io`.
 
+**Dopo che ho copiato o creato un segreto di pull dell'immagine in un altro spazio dei nomi Kubernetes, ho finito?**<br>
+Non proprio. I tuoi contenitori devono essere autorizzati ad eseguire il pull delle immagini utilizzando il segreto che hai creato. Puoi aggiungere il segreto di pull delle immagini all'account del servizio per lo spazio dei nomi oppure fare riferimento al segreto in ciascuna distribuzione. Per le istruzioni, vedi [Utilizzo del segreto di pull dell'immagine per la distribuzione dei contenitori](/docs/containers?topic=containers-images#use_imagePullSecret).
+
 <br />
 
 
@@ -188,7 +194,7 @@ I nuovi cluster {{site.data.keyword.containerlong_notm}} memorizzano una chiave 
 {: shortdesc}
 
 **Prima di iniziare**:
-*   [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Assicurati di disporre delle seguenti autorizzazioni:
     *   Ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore o Amministratore** per {{site.data.keyword.containerlong_notm}}. Il proprietario dell'account può assegnarti il ruolo eseguendo:
         ```
@@ -246,8 +252,10 @@ I nuovi cluster {{site.data.keyword.containerlong_notm}} memorizzano una chiave 
 ## Utilizzo di un segreto di pull dell'immagine per accedere ad altri spazi dei nomi Kubernetes del cluster, ad altri account {{site.data.keyword.Bluemix_notm}} o a registri privati esterni
 {: #other}
 
-Configura il tuo segreto di pull dell'immagine del tuo cluster per distribuire contenitori in spazi dei nomi Kubernetes diversi da`default`, utilizzare immagini archiviate in altri account {{site.data.keyword.Bluemix_notm}} o utilizzare le immagini archiviate in registri privati esterni. Inoltre, potresti creare il tuo segreto di pull dell'immagine per applicare politiche di accesso IAM che limitano le autorizzazioni a specifici repository delle immagini di registro, spazi dei nomi o azioni (ad esempio, `push` o `pull`).
+Configura il tuo segreto di pull dell'immagine del tuo cluster per distribuire contenitori in spazi dei nomi Kubernetes diversi da`default`, utilizzare immagini archiviate in altri account {{site.data.keyword.Bluemix_notm}} o utilizzare le immagini archiviate in registri privati esterni. Inoltre, potresti creare il tuo segreto di pull dell'immagine per applicare politiche di accesso IAM che limitano le autorizzazioni a specifici spazi dei nomi delle immagini di registro o azioni (ad esempio, `push` o `pull`).
 {:shortdesc}
+
+Dopo che hai creato il segreto di pull dell'immagine, i tuoi contenitori devono utilizzare il segreto per essere autorizzati a eseguire il pull di un'immagine dal registro. Puoi aggiungere il segreto di pull delle immagini all'account del servizio per lo spazio dei nomi oppure fare riferimento al segreto in ciascuna distribuzione. Per le istruzioni, vedi [Utilizzo del segreto di pull dell'immagine per la distribuzione dei contenitori](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 I segreti di pull dell'immagine sono validi solo per gli spazi dei nomi Kubernetes per i quali sono stati creati. Ripeti questa procedura
 per ogni spazio dei nomi in cui vuoi distribuire i contenitori. Le immagini da [DockerHub](#dockerhub) non richiedono segreti di pull dell'immagine.
@@ -256,9 +264,10 @@ per ogni spazio dei nomi in cui vuoi distribuire i contenitori. Le immagini da [
 Prima di iniziare:
 
 1.  [Configura uno spazio dei nomi in {{site.data.keyword.registryshort_notm}} e inserisci le immagini in questo spazio dei nomi](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2.  [Crea un cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2.  [Crea un
+cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3.  Se disponi di un cluster esistente creato prima del **25 febbraio 2019**, [aggiorna il tuo cluster per utilizzare il segreto di pull dell'immagine basato su chiave API](#imagePullSecret_migrate_api_key).
-4.  [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4.  [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 Per utilizzare il tuo proprio segreto di pull dell'immagine, scegli tra le seguenti opzioni:
@@ -343,12 +352,12 @@ di pull dell'immagine sono denominati `<namespace_name>-icr-<region>-io`.
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [Puoi scegliere di aggiungere il segreto di pull dell'immagine a un account di servizio Kubernetes in modo che qualsiasi pod nello spazio dei nomi possa utilizzare il segreto quando distribuisci un contenitore](#use_imagePullSecret).
+5.  [Aggiungi il segreto di pull dell'immagine a un account di servizio Kubernetes in modo che qualsiasi pod nello spazio dei nomi possa utilizzare tale segreto quando distribuisci un contenitore](#use_imagePullSecret).
 
 ### Creazione di un segreto di pull dell'immagine con credenziali chiavi API IAM differenti, per un maggior controllo o accedere a immagini in altri account {{site.data.keyword.Bluemix_notm}}
 {: #other_registry_accounts}
 
-Puoi assegnare politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM a utenti o a un ID servizio, per limitare le autorizzazioni a specifici repository delle immagini di registro, spazi dei nomi o azioni (quali `push` o `pull`).
+Puoi assegnare politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM a utenti o a un ID servizio per limitare le autorizzazioni a specifici spazi dei nomi delle immagini di registro o azioni (quali `push` o `pull`).
 Quindi, crea una chiave API e archivia le credenziali del registro in un segreto di pull dell'immagine per il tuo cluster.
 {: shortdesc}
 
@@ -483,7 +492,7 @@ Kubernetes.</td>
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [Puoi scegliere di aggiungere il segreto di pull dell'immagine a un account di servizio Kubernetes in modo che qualsiasi pod nello spazio dei nomi possa utilizzare il segreto quando distribuisci un contenitore](#use_imagePullSecret).
+8.  [Aggiungi il segreto di pull dell'immagine a un account di servizio Kubernetes in modo che qualsiasi pod nello spazio dei nomi possa utilizzare tale segreto quando distribuisci un contenitore](#use_imagePullSecret).
 
 ### Accesso alle immagini memorizzate in altri registri privati
 {: #private_images}
@@ -493,7 +502,8 @@ Se hai già un registro privato, devi memorizzare le credenziali del registro in
 
 Prima di iniziare:
 
-1.  [Crea un cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+1.  [Crea un
+cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 2.  [Indirizza la tua CLI al tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Per creare un segreto di pull dell'immagine:
@@ -688,7 +698,7 @@ Ogni spazio dei nomi ha un account di servizio Kubernetes denominato `default`. 
    spec:
      containers:
        - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+         image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
    ```
    {: codeblock}
 
@@ -733,7 +743,8 @@ Con il token del registro memorizzato nel segreto di pull dell'immagine, puoi di
 
 Prima di iniziare:
 1. [Configura uno spazio dei nomi in {{site.data.keyword.registryshort_notm}} e inserisci le immagini in questo spazio dei nomi](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Crea un cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Crea un
+cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. [Indirizza la tua CLI al tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Per distribuire un contenitore nello spazio dei nomi **predefinito** del tuo

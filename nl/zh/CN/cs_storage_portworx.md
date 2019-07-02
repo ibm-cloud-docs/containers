@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,38 +21,38 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 使用 Portworx 在软件定义的存储 (SDS) 上存储数据
 {: #portworx}
 
-[Portworx ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://portworx.com/products/introduction/) 是一种高可用性软件定义的存储解决方案，可用于管理容器化数据库和其他有状态应用程序的持久存储，或者在多个专区的 pod 之间共享数据。
+[Portworx ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://portworx.com/products/introduction/) 是一种高可用性软件定义的存储解决方案，可用于管理容器化数据库和其他有状态应用程序的本地持久性存储器，或者在多个专区的 pod 之间共享数据。
 {: shortdesc}
 
-**什么是软件定义的存储 (SDS)？**</br>SDS 解决方案对连接到集群中工作程序节点的各种类型、大小或来自不同供应商的存储设备进行抽象化。在硬盘上具有可用存储器的工作程序节点会添加为存储集群的节点。在此集群中，会对物理存储器进行虚拟化，并将其作为虚拟存储池显示给用户。存储集群由 SDS 软件进行管理。如果数据必须存储在存储集群上，那么 SDS 软件会决定在何处存储数据以实现最高可用性。虚拟存储器随附一组常用的功能和服务，您可以利用这些功能和服务，而无需关注实际底层存储体系结构。
+**什么是软件定义的存储 (SDS)？**</br>SDS 解决方案会对连接到集群中工作程序节点的各种类型、大小或来自不同供应商的存储设备进行抽象化处理。在硬盘上具有可用存储器的工作程序节点会添加为存储集群的节点。在此集群中，会对物理存储器进行虚拟化，并将其作为虚拟存储池显示给用户。存储集群由 SDS 软件进行管理。如果数据必须存储在存储集群上，那么 SDS 软件会决定在何处存储数据以实现最高可用性。虚拟存储器随附一组常用的功能和服务，您可以利用这些功能和服务，而无需关注实际底层存储体系结构。
 
 **Portworx 是如何运作的？**</br>Portworx 将连接到工作程序节点的可用存储器聚集在一起，并创建统一的持久存储层，供要在集群中运行的容器化数据库或其他有状态应用程序使用。通过在多个工作程序节点上使用每个容器级别卷的卷复制，Portworx 可确保跨专区的数据持久性和数据可访问性。
 
 此外，Portworx 还随附可用于有状态应用程序的其他功能，例如卷快照、卷加密、隔离，以及集成的 Kubernetes 存储编排器 (Stork)，用于确保以最佳方式布置集群中的卷。有关更多信息，请参阅 [Portworx 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.portworx.com/)。
 
 **{{site.data.keyword.containerlong_notm}} 中的哪种工作程序节点类型模板适用于 Portworx？**</br>
-{{site.data.keyword.containerlong_notm}} 提供了针对[软件定义的存储 (SDS) 使用情况](/docs/containers?topic=containers-plan_clusters#sds)进行优化的裸机工作程序节点类型模板，这些类型模板随附一个或多个可用于 Portworx 存储层的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 SDS 工作程序节点机器时，Portworx 的性能最佳。
+{{site.data.keyword.containerlong_notm}} 提供了针对[软件定义的存储 (SDS) 使用情况](/docs/containers?topic=containers-planning_worker_nodes#sds)进行优化的裸机工作程序节点类型模板，这些类型模板随附一个或多个可用于 Portworx 存储层的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 SDS 工作程序节点机器时，Portworx 的性能最佳。
 
 **如果要在非 SDS 工作程序节点上运行 Portworx 该怎么做？**</br> 您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。非 SDS 工作程序节点可以是虚拟或裸机。如果要使用虚拟机，请使用工作程序节点类型模板 `b2c.16x64` 或更好版本。类型模板为 `b3c.4x16` 或 `u3c.2x4` 的虚拟机没有提供 Portworx 正常工作所需的资源。请记住，虚拟机随附的网速是 1000 Mbps，这不足以使 Portworx 达到理想性能。裸机机器随附的计算资源和网络速度足以满足 Portworx 的需求，但您必须先[添加未格式化且未安装的原始块存储器](#create_block_storage)，然后才能使用这些机器。
 
-**如何确保数据是以高可用性方式存储的？**</br>在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并跨 3 个或更多专区中的 SDS 工作程序节点复制卷。
+**如何确保数据是以高可用性方式存储的？**</br>在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-ha_clusters#multizone)，并跨 3 个或更多专区中的 SDS 工作程序节点复制卷。
 
 **哪种卷拓扑可为 pod 提供最佳性能？**</br>在集群中运行有状态应用程序时，最大挑战之一是确保在容器或整个主机出现故障时，可以将容器重新安排到其他主机上。在 Docker 中，容器必须重新安排到其他主机上时，卷不会移至新主机。可以将 Portworx 配置为以 `hyper-converged` 方式运行，以确保计算资源和存储器始终位于同一工作程序节点上。必须对应用程序进行重新安排时，Portworx 会将应用程序移至其中一个卷副本所在的工作程序节点，以确保有状态应用程序的本地磁盘访问速度和最佳性能。以 `hyper-converged` 方式运行可为 pod 提供最佳性能，但需要存储器在集群中的所有工作程序节点上可用。
 
 此外，还可以选择仅将一部分工作程序节点用于 Portworx 存储层。例如，您可能有两个工作程序池，一个包含随附本地原始块存储器的 SDS 工作程序节点，另一个包含未随附本地存储器的虚拟工作程序节点。安装 Portworx 时，会将 Portworx pod 安排到集群中的每个工作程序节点上，以作为守护程序集的一部分。由于 SDS 工作程序节点具有本地存储器，因此这些工作程序节点仅会包含在 Portworx 存储层中。虚拟工作程序节点因缺少本地存储器，不作为存储节点包含在内。但是，将应用程序 pod 部署到虚拟工作程序节点时，此 pod 仍可以使用 Portworx 守护程序集 pod 来访问物理存储在 SDS 工作程序节点上的数据。此设置称为 `storage-heavy`，提供的性能比 `hyper-converged` 设置略慢，因为虚拟工作程序节点必须通过专用网络与 SDS 工作程序节点进行对话来访问数据。
 
-**供应 Portworx 时需要什么？**</br>{{site.data.keyword.containerlong}} 提供了针对 SDS 使用情况进行优化的工作程序节点类型模板，这些类型模板随附一个或多个可用于存储数据的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 [SDS 工作程序节点机器](/docs/containers?topic=containers-plan_clusters#sds)时，Portworx 的性能最佳。然而，您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。工作程序节点成功运行 Portworx 的最低需求包括：
+**供应 Portworx 时需要什么？**</br>{{site.data.keyword.containerlong}} 提供了针对 SDS 使用情况进行优化的工作程序节点类型模板，这些类型模板随附一个或多个可用于存储数据的未格式化且未安装的原始本地磁盘。您使用随附 10 Gbps 网络速度的 [SDS 工作程序节点机器](/docs/containers?topic=containers-planning_worker_nodes#sds)时，Portworx 的性能最佳。然而，您可以在非 SDS 工作程序节点类型模板上安装 Portworx，但可能无法获得应用程序所需的性能优点。工作程序节点成功运行 Portworx 的最低需求包括：
 - 4 个 CPU 核心
 - 4 GB 内存
 - 128 GB 未格式化的原始存储器
 - 10 Gbps 网络速度
-
-**如何确保数据是以高可用性方式存储的？**</br>在 Portworx 集群中需要至少有 3 个工作程序节点，这样 Portworx 才能跨节点复制数据。通过跨工作程序节点复制数据，Portworx 可以确保万一发生故障，有状态应用程序可以重新安排到其他工作程序节点，而不会丢失数据。要实现更高可用性，请使用[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，并在跨 3 个专区的 SDS 工作程序节点上复制卷。
 
 **必须计划哪些限制？**</br>Portworx 可用于设置为使用公用网络连接的标准集群。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么除非在 TCP 端口 443 上打开所有输出网络流量，或者启用公共服务端点，否则无法在集群中使用 Portworx。
 
@@ -62,7 +62,7 @@ subcollection: containers
 ## 为非 SDS 工作程序节点创建未格式化且未安装的原始块存储器
 {: #create_block_storage}
 
-使用针对[软件定义的存储 (SDS) 使用情况](/docs/containers?topic=containers-plan_clusters#sds)进行优化的工作程序节点类型模板时，Portworx 能以最佳性能运行。但是，如果您无法或不想使用 SDS 工作程序节点，那么可以选择在非 SDS 工作程序节点类型模板上安装 Portworx。请记住，非 SDS 工作程序节点未针对 Portworx 进行优化，因此可能无法提供应用程序所需的性能优点。
+使用针对[软件定义的存储 (SDS) 使用情况](/docs/containers?topic=containers-planning_worker_nodes#sds)进行优化的工作程序节点类型模板时，Portworx 能以最佳性能运行。但是，如果您无法或不想使用 SDS 工作程序节点，那么可以选择在非 SDS 工作程序节点类型模板上安装 Portworx。请记住，非 SDS 工作程序节点未针对 Portworx 进行优化，因此可能无法提供应用程序所需的性能优点。
 {: shortdesc}
 
 要将非 SDS 工作程序节点包含在 Portworx 集群中，必须使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件将未格式化且未安装的原始块存储设备添加到工作程序节点。不能使用 Kubernetes 持久卷声明 (PVC) 来供应原始块存储器，因为 {{site.data.keyword.containerlong_notm}} 会对块存储设备自动进行格式化。Portworx 仅支持块存储器。不能将用于安装文件存储器或对象存储器的非 SDS 工作程序节点用于 Portworx 数据层。
@@ -93,7 +93,7 @@ Portworx 键/值存储充当 Portworx 集群的单一事实源。如果键/值�
 ### 设置 Databases for etcd 服务实例
 {: #databaseetcd}
 
-Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安全地存储和复制数据，从而为数据提供高可用性和弹性。有关更多信息，请参阅 [Databases for etcd 入门教程](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started#getting-started)。
+Databases for etcd 是一种受管 etcd 服务，用于跨三个存储器实例安全地存储和复制数据，从而为数据提供高可用性和弹性。有关更多信息，请参阅 [Databases for etcd 入门教程](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started#getting-started)。
 
 以下步骤说明如何为 Portworx 供应和设置 Databases for etcd 服务实例。
 
@@ -115,7 +115,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 4. {: #databases_credentials}检索服务凭证和证书。
    1. 在服务凭证表中的**操作**列中，单击**查看凭证**。
    2. 找到服务凭证的 `grp.authentication` 部分，并记下 **`username`** 和 **`password`**。
-      用户名和密码的示例输出：
+      用户名和密码的输出示例：
       ```
       "grpc": {
       "authentication": {
@@ -126,14 +126,14 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       ```
       {: screen}
    3. 找到服务凭证的 `composed` 部分，并记下 etcd **`--endpoints`**。  
-      `--endpoints` 的示例输出：
+      `--endpoints` 的输出示例：
       ```
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
       ```
       {: screen}
 
    4. 找到服务凭证的 `certificate` 部分，并记下 **`certificate_base64`**。
-      `certificate` 的示例输出：
+      `certificate` 的输出示例：
       ```
       "certificate": {
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
@@ -186,13 +186,13 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    2. 转至**概述**选项卡。
    3. 在**连接字符串**部分中，选择**命令行**。
    4. 记下 `--endpoints` 和 `--user` 参数的值。
-      `--endpoints` 的示例输出：
+      `--endpoints` 的输出示例：
       ```
       --endpoints=https://portal-ssl123-34.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345,https://portal-ssl123-35.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345
       ```
       {: screen}
 
-      `--user` 的示例输出：
+      `--user` 的输出示例：
       ```
       --user=root:ABCDEFGHIJKLMNOP
       ```
@@ -214,13 +214,13 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 - 如果要将非 SDS 工作程序节点用于 Portworx 存储层，请[向非 SDS 工作程序节点添加未格式化的块存储设备](#create_block_storage)。
 - 创建 [{{site.data.keyword.composeForEtcd}} 服务实例](#portworx_database)，以存储 Portworx 配置和元数据。
 - 决定是否要使用 {{site.data.keyword.keymanagementservicelong_notm}} 来加密 Portworx 卷。要加密卷，必须[设置 {{site.data.keyword.keymanagementservicelong_notm}} 服务实例并在 Kubernetes 私钥中存储服务信息](#encrypt_volumes)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要安装 Portworx，请执行以下操作：
 
-1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+1.  [按照指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后使用服务帐户在集群中安装 Helm 服务器 (Tiller)。
 
-2.  验证 Tiller 是否已使用服务帐户进行安装。
+2.  验证是否已使用服务帐户安装 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -418,7 +418,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       {: pre}
 
       输出示例：
-        ```
+    ```
       portworx-594rw                          1/1       Running     0          20h
       portworx-rn6wk                          1/1       Running     0          20h
       portworx-rx9vf                          1/1       Running     0          20h
@@ -483,7 +483,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       {: pre}
 
       输出示例：
-        ```
+    ```
       NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
       10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
       10.176.48.67	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal10	us-south	default
@@ -491,7 +491,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       ```
       {: screen}
 
-太棒了！既然您已设置好 Portworx 集群，现在可以[将存储器从集群添加到应用程序](#add_portworx_storage)。
+太好了！既然您已设置好 Portworx 集群，现在可以[将存储器从集群添加到应用程序](#add_portworx_storage)。
 
 ### 更新集群中的 Portworx
 {: #update_portworx}
@@ -537,7 +537,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    ```
    {: screen}
 
-2. 通过除去 Helm 图表来删除 Portworx。
+2. 通过除去 Helm chart 来删除 Portworx。
    ```
    helm delete --purge <helm_chart_name>
    ```
@@ -549,7 +549,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    ```
    {: pre}
 
-      如果 CLI 输出中未显示任何 pod，说明 pod 除去操作成功。
+      如果 CLI 输出中未显示任何 pod，那么表明已成功除去 pod。
 
 ## 使用 {{site.data.keyword.keymanagementservicelong_notm}} 加密 Portworx 卷
 {: #encrypt_volumes}
@@ -561,7 +561,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 
 查看以下信息：
 - 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷加密工作流程](#px_encryption)用于按卷加密的概述
-- 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷解密工作流程](#decryption)用于按卷解密的概述
+- 将使用 {{site.data.keyword.keymanagementservicelong_notm}} 的 [Portworx 卷解密工作流程](#decryption)用于按卷加密的概述
 - 为 Portworx 卷[设置按卷加密](#setup_encryption)。
 
 ### Portworx 按卷加密工作流程
@@ -581,7 +581,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
 ### Portworx 按卷解密工作流程
 {: #decryption}
 
-下图说明了在 Portworx 中设置按卷解密时，使用 {{site.data.keyword.keymanagementservicelong_notm}} 的解密工作流程。
+下图说明了在 Portworx 中设置按卷加密时，使用 {{site.data.keyword.keymanagementservicelong_notm}} 的解密工作流程。
 
 
 <img src="images/cs_portworx_volume_decryption.png" alt="使用 {{site.data.keyword.keymanagementservicelong_notm}} 解密 Portworx 卷" width="600" style="width: 600px; border-style: none"/>
@@ -801,7 +801,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       {: pre}
 
       输出示例：
-        ```
+    ```
       {
       "alertingurl": "",
       "clusterid": "px-kp-test",
@@ -1086,17 +1086,16 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    安装点位于 **Volume Mounts** 字段中，卷位于 **Volumes** 字段中。
 
    ```
-     Volume Mounts:
-          /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
-          /volumemount from myvol (rw)
-    ...
+    Volume Mounts:
+         /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+         /volumemount from myvol (rw)
+   ...
    Volumes:
-      myvol:
-        Type: PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-        ClaimName: mypvc
-        ReadOnly: false
-
-    ```
+     myvol:
+       Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+       ClaimName:	mypvc
+       ReadOnly:	false
+   ```
    {: screen}
 
 4. 验证是否可以将数据写入 Portworx 集群。
@@ -1167,7 +1166,7 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    ```
    {: pre}
 
-   如果回收策略显示为 `Delete`，那么在除去 PVC 时，会除去 PV 以及 Portworx 集群中物理存储器上的数据。如果回收策略显示 `Retain`，或者供应的是不使用存储类的存储器，那么在除去 PVC 时不会除去 PV 和数据。您必须分别除去 PVC、PV 和数据。
+   如果回收策略显示为 `Delete`，那么在除去 PVC 时，会除去 PV 以及 Portworx 集群中物理存储器上的数据。如果回收策略显示 `Retain`，或者供应的是不使用存储类的存储器，那么在除去 PVC 时不会除去 PV 和数据。必须分别除去 PVC、PV 和数据。
 
 3. 除去安装了 PVC 的所有 pod。
    1. 列出安装了 PVC 的所有 pod。
@@ -1177,14 +1176,14 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
       {: pre}
 
       输出示例：
-        ```
+    ```
       blockdepl-12345-prz7b:	claim1-block-bronze  
       ```
       {: screen}
 
-      如果 CLI 输出中未返回任何 pod，说明没有使用该 PVC 的 pod。
+      如果 CLI 输出中未返回任何 pod，那么说明没有 pod 使用 PVC。
 
-   2. 除去使用该 PVC 的 pod。
+   2. 除去使用 PVC 的 pod。
 
       如果 pod 是部署的一部分，请除去该部署。
       {: tip}
@@ -1206,13 +1205,13 @@ Databases for etcd 是一种受管 etcd 服务，用于跨三个存储实例安�
    ```
    {: pre}
 
-5. 复查 PV 的阶段状态。使用先前检索到的 PV 的名称作为 **VOLUME**。
+5. 查看 PV 的阶段状态。使用先前检索到的显示为 **VOLUME** 的 PV 的名称。
    ```
    kubectl get pv <pv_name>
    ```
    {: pre}
 
-   除去 PVC 时，会释放绑定到该 PVC 的 PV。根据供应存储器的方式，如果 PV 是自动删除的，那么该 PV 会进入 `Deleting` 状态，或者如果必须手动删除 PV，那么该 PV 会进入 `Released` 状态。**注**：对于自动删除的 PV，在删除之前，阶段状态可能会短暂地显示为 `Released`。几分钟后重新运行该命令以查看该 PV 是否已除去。
+   除去 PVC 时，会释放绑定到该 PVC 的 PV。如果 PV 是自动删除的，那么该 PV 会进入 `Deleting` 状态；如果必须手动删除 PV，那么该 PV 会进入 `Released` 状态，具体取决于存储器的供应方式。**注**：对于自动删除的 PV，在删除之前，阶段状态可能会短暂地显示为 `Released`。请在几分钟后重新运行该命令以查看该 PV 是否已除去。
 
 6. 如果 PV 未删除，请手动除去该 PV。
    ```

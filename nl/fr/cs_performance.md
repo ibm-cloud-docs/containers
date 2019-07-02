@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Optimisation des performances
 {: #kernel}
@@ -116,7 +118,7 @@ Pour rétablir les valeurs par défaut des paramètres `sysctl` de vos noeuds wo
     ```
     {: pre}
 
-2. [Réamorcez tous les noeuds worker dans le cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Les noeuds worker sont à nouveau en ligne dès que les valeurs par défaut sont appliquées.
+2. [Réamorcez tous les noeuds worker dans le cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). Les noeuds worker sont à nouveau en ligne dès que les valeurs par défaut sont appliquées.
 
 <br />
 
@@ -168,7 +170,7 @@ Les configurations du fournisseur de métriques de votre cluster (`metrics-serve
 
 Le pod du fournisseur de métriques comporte également un conteneur `nanny` pour la mise à l'échelle des demandes et des limites de ressources du conteneur principal de `metrics-server` ou `heapster` en réponse au nombre de noeuds worker dans le cluster. Vous pouvez modifier les ressources par défaut en éditant l'élément configmap du fournisseur de métriques.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Ouvrez le fichier YAML correspondant à l'élément configmap du fournisseur de métriques du cluster.
     *  Pour `metrics-server` :

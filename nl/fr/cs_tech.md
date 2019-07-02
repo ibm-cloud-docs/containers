@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Technologie d'{{site.data.keyword.containerlong_notm}}
@@ -124,7 +126,7 @@ Définissez des stratégies de mise à jour de votre application, notamment le n
 Dans un cluster Kubernetes qui s'exécute sur {{site.data.keyword.containerlong_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Plus précisément, les applications s'exécutent dans des pods et ces pods sont hébergés sur des noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. La configuration de la communication entre le maître Kubernetes et les noeuds worker dépend de la manière dont vous avez configuré votre réseau d'infrastructure IBM Cloud (SoftLayer) : compte avec noeud final de service public ou compte avec fonction VRF activée comportant des noeuds finaux de service public et privé.
 {: shortdesc}
 
-L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec uniquement le [noeud final de service public activé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec uniquement le [noeud final de service public activé](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="Architecture d'{{site.data.keyword.containerlong_notm}} Kubernetes">
@@ -132,7 +134,7 @@ L'image suivante présente les composants de votre cluster et montre leur intera
 </figure>
 </p>
 
-L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec la fonction VRF activée lorsque les [noeuds finaux de service public et privé sont activés](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+L'image suivante présente les composants de votre cluster et montre leur interaction dans un compte avec la fonction VRF activée lorsque les [noeuds finaux de service public et privé sont activés](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 
 <p>
 <figure>
@@ -146,7 +148,7 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
 <dl>
   <dt>Maître Kubernetes</dt>
     <dd>Le maître Kubernetes est chargé de gérer toutes les ressources de calcul, de réseau et de stockage dans le cluster. Il assure que vos applications et services conteneurisés sont déployés de manière égale sur les noeuds worker dans le cluster. En fonction de la configuration de vos applications et de vos services, le maître détermine le noeud worker qui dispose des ressources suffisantes pour répondre aux besoins de l'application.</br></br>Sont décrits dans le tableau suivant les composants du maître Kubernetes :
-<table>
+    <table>
     <caption>Composants du maître Kubernetes</caption>
     <thead>
     <th>Composant du maître</th>
@@ -259,3 +261,53 @@ Quelle est la différence entre le maître Kubernetes et un noeud worker ? Bonne
 
 Vous souhaitez voir comment utiliser {{site.data.keyword.containerlong_notm}} avec d'autres produits et services ? Consultez quelques exemples d'[intégrations](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
+
+## Limitations de service
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} et le projet open source Kubernetes sont fournis avec des paramètres et les limitations de service par défaut pour plus de sécurité et de confort et pour garantir les fonctions de base. Vous pouvez modifier certaines limitations lorsque cela est précisé. Si vous pensez que vous êtes sur le point d'atteindre les limitations {{site.data.keyword.containerlong_notm}} suivantes, contactez l'équipe IBM via le [canal Slack interne![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) ou le [canal Slack externe![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
+{: shortdesc}
+
+<table summary="Ce tableau contient des informations sur les limitations {{site.data.keyword.containerlong_notm}}. Les lecture des colonnes s'effectue de gauche à droite. La première colonne contient le type de limitation et la seconde colonne contient une description de la limitation.">
+<caption>Limitations liées à la {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Limites de débit d'API</td>
+    <td>100 demandes par 10 secondes vers l'API {{site.data.keyword.containerlong_notm}} pour chaque adresse IP source unique. </td>
+  </tr>
+  <tr>
+    <td>Capacité de noeud worker</td>
+    <td>Les noeuds worker sont disponibles dans [certaines versions](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) de ressources de calcul. </td>
+  </tr>
+  <tr>
+    <td>Accès à l'hôte de noeud worker</td>
+    <td>Par mesure de sécurité, vous ne pouvez pas ouvrir une session SSH dans l'hôte de calcul du noeud worker. </td>
+  </tr>
+  <tr>
+    <td>Nombre maximal de noeuds worker</td>
+    <td>Si vous prévoyez de dépasser 900 noeuds worker par cluster, contactez d'abord l'équipe IBM via le [canal Slack interne![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) ou le [canal Slack externe![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).<br><br>Si vous voyez une limite de capacité d'infrastructure IBM Cloud (SoftLayer) sur le nombre d'instances par centre de données ou qui sont commandées chaque mois, contactez votre représentant d'infrastructure IBM Cloud (SoftLayer). </td>
+  </tr>
+  <tr>
+    <td>Nombre maximal de pods</td>
+    <td>110 par noeud worker.<br><br>Le nombre de pods inclut des pods `kube-system` et `ibm-system` qui s'exécutent sur le noeud worker. Pour améliorer les performances, pensez à limiter le nombre de pods que vous exécutez par coeur de calcul afin de ne pas faire une utilisation excessive du noeud worker. Par exemple, sur un noeud worker avec une version `b3c.4x16`, vous pouvez exécuter 10 pods par coeur qui n'utilisent pas plus de 75 % de la capacité totale du noeud worker. </td>
+  </tr>
+  <tr>
+    <td>Nombre maximal de services Kubernetes</td>
+    <td>65 000 adresses IP par cluster dans la plage 172.21.0.0/16 que vous pouvez affecter aux services Kubernetes au sein du cluster.</td>
+  </tr>
+  <tr>
+    <td>Trafic d'équilibreur de charge d'application (ALB) Ingress</td>
+    <td>32 768 connexions par seconde. <br><br>Si votre trafic entrant dépasse ce nombre, [augmentez le nombre de répliques ALB](/docs/containers?topic=containers-ingress#scale_albs) dans votre cluster afin de traiter la charge de travail accrue. </td>
+  </tr>
+  <tr>
+    <td>Volumes de stockage</td>
+    <td>Combinaison de 250 volumes d'instances de stockage de fichiers et de stockage par blocs d'infrastructure IBM Cloud (SoftLayer) par compte. <br><br>Si vous montez davantage de volumes, un message indiquant que la capacité est insuffisante ("out of capacity") peut s'afficher lorsque vous mettez à disposition des volumes persistants. Dans ce cas, vous devez contacter votre représentant d'infrastructure IBM Cloud (SoftLayer). Pour consulter d'autres foires aux questions, voir la documentation sur [le stockage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) et surstockage[le stockage par blocs](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-). </td>
+  </tr>
+</tbody>
+</table>

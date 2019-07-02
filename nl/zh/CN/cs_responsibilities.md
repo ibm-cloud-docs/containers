@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 使用 {{site.data.keyword.containerlong_notm}} 的责任
@@ -60,7 +60,7 @@ IBM 为您提供了一个企业云平台，供您部署应用程序以及 {{site
      <td align="center"><img src="images/icon_tools.svg" alt="扳手图标"/><br>受管集群</td>
      <td>
      **IBM 的责任**：
-    <ul><li>提供一套用于自动执行集群管理的工具，例如 {{site.data.keyword.containerlong_notm}}[API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api/)、[CLI 插件](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)和[控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/clusters)。</li>
+    <ul><li>提供一套用于自动执行集群管理的工具，例如 {{site.data.keyword.containerlong_notm}} [API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api/)、[CLI 插件](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)和[控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/clusters)。</li>
      <li>自动应用 Kubernetes 主节点补丁操作系统、版本和安全更新。使主要更新和次要更新可供您应用。</li>
      <li>更新和恢复集群中运行的 {{site.data.keyword.containerlong_notm}} 和 Kubernetes 组件，例如 Ingress 应用程序负载均衡器和 File Storage 插件。</li>
      <li>备份和恢复 etcd 中的数据，例如 Kubernetes 工作负载配置文件。</li>
@@ -100,17 +100,17 @@ IBM 为您提供了一个企业云平台，供您部署应用程序以及 {{site
       **您的责任**：
       <ul>
       <li>使用 API、CLI 或控制台工具将提供的[安全补丁更新](/docs/containers?topic=containers-changelog#changelog)应用于工作程序节点。</li>
-      <li>选择如何设置[集群网络](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)，并配置进一步的[安全设置](/docs/containers?topic=containers-security#security)，以满足工作负载的安全性和合规性需求。如果适用，请配置[防火墙](/docs/containers?topic=containers-firewall#firewall)。</li></ul>
+      <li>选择如何设置[集群网络](/docs/containers?topic=containers-plan_clusters)，并配置进一步的[安全设置](/docs/containers?topic=containers-security#security)，以满足工作负载的安全性和合规性需求。如果适用，请配置[防火墙](/docs/containers?topic=containers-firewall#firewall)。</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="代码方括号的图标"/><br>应用程序编排</td>
         <td>
         **IBM 的责任**：
       <ul>
         <li>供应已安装 Kubernetes 组件的集群，以便您可以访问 Kubernetes API。</li>
-        <li>提供若干受管附加组件以扩展应用程序的功能，例如 [Istio](/docs/containers?topic=containers-istio#istio) 和 [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)。为您简化了维护工作，因为 IBM 为受管附加组件提供了安装和更新。</li>
+        <li>提供若干受管附加组件以扩展应用程序的功能，例如 [Istio](/docs/containers?topic=containers-istio#istio) 和 [Knative](/docs/containers?topic=containers-serverless-apps-knative)。为您简化了维护工作，因为 IBM 为受管附加组件提供了安装和更新。</li>
         <li>提供了集群与精选第三方合作伙伴关系技术（例如，{{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}} 和 Portworx）的集成。</li>
         <li>提供自动化以支持与其他 {{site.data.keyword.Bluemix_notm}} 服务的服务绑定。</li>
         <li>使用映像拉取私钥创建集群，以便在 `default` Kubernetes 名称空间中的部署可以从 {{site.data.keyword.registrylong_notm}} 中拉取映像。</li>
@@ -147,4 +147,4 @@ IBM 为您提供了一个企业云平台，供您部署应用程序以及 {{site
 *   对任何服务或系统进行未经授权的修改
 *   侵犯他人的权利
 
-请参阅 [Cloud Services 条款](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms)，以获取总体使用条款。
+请参阅 [Cloud Services 条款](/docs/overview/terms-of-use?topic=overview-terms#terms)，以获取总体使用条款。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Registrazione e monitoraggio di Ingress
@@ -259,7 +260,7 @@ L'exporter di metriche ALB utilizza la direttiva NGINX, `vhost_traffic_status_zo
 Installa il grafico Helm per l'exporter di metriche per monitorare un ALB nel tuo cluster.
 {: shortdesc}
 
-I pod dell'exporter di metriche ALB devono essere distribuiti sugli stessi nodi di lavoro in cui sono distribuiti i tuoi ALB. Se i tuoi ALB vengono eseguiti su nodi di lavoro edge e tali nodi edge sono corrotti per evitare altre distribuzioni del carico di lavoro, i pod dell'exporter di metriche non possono essere pianificati. Devi rimuovere le corruzioni eseguendo `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
+I pod dell'exporter di metriche ALB devono essere distribuiti sugli stessi nodi di lavoro in cui sono distribuiti i tuoi ALB. Se i tuoi ALB vengono eseguiti su nodi di lavoro edge e tali nodi edge sono contaminati per evitare altre distribuzioni del carico di lavoro, i pod dell'exporter di metriche non possono essere pianificati. Devi rimuovere le contaminazioni eseguendo `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
 1.  **Importante**: [segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere i repository Helm {{site.data.keyword.Bluemix_notm}}.

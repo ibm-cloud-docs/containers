@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 클러스터 네트워킹 문제점 해결
@@ -209,64 +209,69 @@ ALB 시크릿이 실패할 수 있는 다음과 같은 이유와 해당 문제�
 <br />
 
 
-## Ingress ALB의 하위 도메인을 가져올 수 없음
+## Ingress ALB에 대한 하위 도메인을 가져올 수 없으며, ALB는 구역에 배치되지 않거나 로드 밸런서를 배치할 수 없음
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-get --cluster <cluster>`를 실행하면 클러스터는 `normal` 상태이지만 사용 가능한 **Ingress 하위 도메인**이 없습니다.
-
-다음과 같은 오류 메시지가 표시될 수 있습니다.
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* Ingress 하위 도메인 없음: `ibmcloud ks cluster-get --cluster <cluster>`를 실행하면 클러스터는 `normal` 상태이지만 사용 가능한 **Ingress 하위 도메인**이 없습니다.
+* ALB는 구역에 배치되지 않음: 다중 구역 클러스터가 있으며 `ibmcloud ks albs --cluster <cluster>`를 실행하는 경우, ALB가 구역에 배치되지 않습니다. 예를 들어, 3개의 구역에 작업자 노드가 있으면 공용 ALB가 세 번째 구역에 배치되지 않은 다음과 유사한 출력을 볼 수 있습니다.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* 로드 밸런서를 배치할 수 없음: `ibm-cloud-provider-vlan-ip-config` configmap을 설명할 때 다음 출력 예와 유사한 오류 메시지가 표시될 수 있습니다. 
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-표준 클러스터에서 구역의 클러스터를 처음으로 작성하는 경우, 해당 구역의 공용 VLAN 및 사설 VLAN은 IBM Cloud 인프라(SoftLayer) 계정에서 사용자를 위해 자동으로 프로비저닝됩니다. 해당 구역에서는 사용자가 지정하는 공용 VLAN에서 1개의 공용 포터블 서브넷이 요청되며 사용자가 지정하는 사설 VLAN에서 1개의 사설 포터블 서브넷이 요청됩니다. {{site.data.keyword.containerlong_notm}}의 경우 VLAN에는 서브넷이 40개로 제한되어 있습니다. 구역에서 클러스터의 VLAN이 이미 해당 한계에 도달한 경우에는 **Ingress 하위 도메인**이 프로비저닝에 실패합니다.
+표준 클러스터에서 구역의 클러스터를 처음으로 작성하는 경우, 해당 구역의 공용 VLAN 및 사설 VLAN은 IBM Cloud 인프라(SoftLayer) 계정에서 사용자를 위해 자동으로 프로비저닝됩니다. 해당 구역에서는 사용자가 지정하는 공용 VLAN에서 1개의 공용 포터블 서브넷이 요청되며 사용자가 지정하는 사설 VLAN에서 1개의 사설 포터블 서브넷이 요청됩니다. {{site.data.keyword.containerlong_notm}}의 경우 VLAN에는 서브넷이 40개로 제한되어 있습니다. 구역에서 클러스터의 VLAN이 이미 해당 한계에 도달한 경우에는 **Ingress 하위 도메인**이 프로비저닝에 실패하거나 해당 구역에 대한 공용 Ingress ALB가 프로비저닝에 실패하거나 네트워크 로드 밸런서(NLB)를 작성하는 데 사용할 수 있는 포터블 공인 IP 주소를 보유하고 있지 않을 수 있습니다. 
 
-VLAN의 서브넷 수를 보려면 다음 작업을 수행하십시오.
+VLAN의 서브넷 수를 보려면 다음을 수행하십시오.
 1.  [IBM Cloud 인프라(SoftLayer) 콘솔](https://cloud.ibm.com/classic?)에서 **네트워크** > **IP 관리** > **VLAN**을 선택하십시오.
 2.  클러스터를 작성하는 데 사용한 VLAN의 **VLAN 번호**를 클릭하십시오. **서브넷** 섹션을 검토하여 40개 이상의 서브넷이 있는지 확인하십시오.
 
 {: tsResolve}
-새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원 팀에 문의](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)하십시오.
+새 VLAN이 필요하면 [{{site.data.keyword.Bluemix_notm}} 지원 팀에 문의](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)하여 VLAN을 주문하십시오. 그런 다음, 이 새 VLAN을 사용하는 [클러스터를 작성](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)하십시오.
 
-사용 가능한 다른 VLAN이 있는 경우에는 기존 클러스터에 [VLAN Spanning을 설정](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)할 수 있습니다. 그 후에는 사용 가능한 서브넷이 있는 다른 VLAN을 사용하는 클러스터에 새 작업자 노드를 추가할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+사용 가능한 다른 VLAN이 있는 경우에는 기존 클러스터에 [VLAN Spanning을 설정](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)할 수 있습니다. 그 후에는 사용 가능한 서브넷이 있는 다른 VLAN을 사용하는 클러스터에 새 작업자 노드를 추가할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get --region <region>` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)을 사용하십시오. 
 
-VLAN의 모든 서브넷을 사용 중인 경우가 아니면 클러스터에서 서브넷을 재사용할 수 있습니다.
-1.  사용할 서브넷이 사용 가능한지 확인하십시오.
+VLAN의 모든 서브넷을 사용 중인 경우가 아니면 서브넷을 클러스터에 추가하여 VLAN에서 서브넷을 재사용할 수 있습니다.
+1. 사용할 서브넷이 사용 가능한지 확인하십시오.
+  <p class="note">사용 중인 인프라 계정이 여러 {{site.data.keyword.Bluemix_notm}} 계정 간에 공유될 수 있습니다. 이 경우에는 `ibmcloud ks subnets` 명령을 실행하여 **바인딩된 클러스터**의 서브넷을 확인해도 사용자가 자체 클러스터에 대한 정보만 볼 수 있습니다. 인프라 계정 소유자에게 확인하여 해당 서브넷이 사용 가능하며 다른 계정 또는 팀에 의해 사용 중이 아닌지 확인하십시오.</p>
 
-    사용 중인 인프라 계정이 여러 {{site.data.keyword.Bluemix_notm}} 계정 간에 공유될 수 있습니다. 이 경우에는 `ibmcloud ks subnets` 명령을 실행하여 **바인딩된 클러스터**의 서브넷을 확인해도 사용자가 자체 클러스터에 대한 정보만 볼 수 있습니다. 인프라 계정 소유자에게 확인하여 해당 서브넷이 사용 가능하며 다른 계정 또는 팀에 의해 사용 중이 아닌지 확인하십시오.
-    {: note}
+2. [`ibmcloud ks cluster-subnet-add` 명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) 기존 서브넷을 클러스터에서 사용할 수 있도록 하십시오.
 
-2.  서비스가 새 서브넷을 작성하지 않도록 `--no-subnet` 옵션을 사용하여 [클러스터를 작성](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)하십시오. 재사용에 이용할 수 있는 서브넷이 있는 구역 및 VLAN을 지정하십시오.
+3. 서브넷이 정상적으로 작성되어 클러스터에 추가되었는지 확인하십시오. 서브넷 CIDR은 **Subnet VLANs** 섹션에 나열되어 있습니다.
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  `ibmcloud ks cluster-subnet-add` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)을 사용하여 기존 서브넷을 클러스터에 추가하십시오. 자세한 정보는 [Kubernetes 클러스터에서 사용자 정의 및 기존 서브넷 추가 또는 재사용](/docs/containers?topic=containers-subnets#subnets_custom)을 참조하십시오.
+    이 예제 출력에서는 두 번째 서브넷이 `2234945` 공용 VLAN에 추가되었습니다.
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## Ingress ALB가 구역에 배치되지 않음
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-다중 구역 클러스터가 있으며 `ibmcloud ks albs <cluster>`를 실행하는 경우, ALB가 구역에 배치되지 않습니다. 예를 들어, 3개의 구역에 작업자 노드가 있으면 공용 ALB가 세 번째 구역에 배치되지 않은 다음과 유사한 출력을 볼 수 있습니다.
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-각 구역에서는 사용자가 지정하는 공용 VLAN에서 1개의 공용 포터블 서브넷이 요청되며 사용자가 지정하는 사설 VLAN에서 1개의 사설 포터블 서브넷이 요청됩니다. {{site.data.keyword.containerlong_notm}}의 경우 VLAN에는 서브넷이 40개로 제한되어 있습니다. 구역에서 클러스터의 공용 VLAN이 이미 해당 한계에 도달한 경우에는 해당 구역에 대한 공용 Ingress ALB가 프로비저닝에 실패합니다.
-
-{: tsResolve}
-VLAN에서 서브넷의 수를 확인하고 다른 VLAN을 가져오는 방법에 대한 단계를 보려면 [Ingress ALB에 대한 하위 도메인을 가져올 수 없음](#cs_subnet_limit)을 참조하십시오.
+4. 추가한 서브넷의 포터블 IP 주소가 클러스터의 ALB 또는 로드 밸런서에 사용되는지 확인하십시오. 서비스가 새로 추가된 서브넷에서 포터블 IP 주소를 사용하는 데 몇 분이 걸릴 수 있습니다. 
+  * Ingress 하위 도메인 없음: `ibmcloud ks cluster-get --cluster <cluster>`를 실행하여 **Ingress 하위 도메인**이 채워져 있는지 확인하십시오.
+  * ALB가 구역에 배치되지 않음: `ibmcloud ks albs --cluster <cluster>`를 실행하여 누락된 ALB가 배치되었는지 확인하십시오.
+  * 로드 밸런서를 배치할 수 없음: `kubectl get svc -n kube-system`을 실행하여 로드 밸런서에 **EXTERNAL-IP**가 있는지 확인하십시오.
 
 <br />
 
@@ -317,7 +322,7 @@ Ingress 서비스는 WebSocket을 사용하는 앱을 노출합니다. 그러나
 
 * **사용자 정의 오염**: `keepalived` 팟(Pod)에 오염 허용이 없는 사용자 정의 오염을 제거하십시오. 대신 [작업자 노드를 에지 노드로 레이블 지정한 후 이러한 에지 노드를 오염](/docs/containers?topic=containers-edge)시킬 수 있습니다.
 
-위 선택사항 중 하나를 완료했으나 `keepalived` 팟(Pod)이 여전히 스케줄되지 않는 경우에는 다음 작업을 수행하여 `keepalived` 팟(Pod)에 대한 더 자세한 정보를 얻을 수 있습니다.
+위 선택사항 중 하나를 완료했으나 `keepalived` 팟(Pod)이 여전히 스케줄되지 않는 경우에는 다음을 수행하여 `keepalived` 팟(Pod)에 대한 더 자세한 정보를 얻을 수 있습니다.
 
 1. `keepalived` 팟(Pod)을 가져오십시오.
     ```
@@ -597,11 +602,11 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 {: tsResolve}
 
-사용자는 [기존 작업자 풀을 삭제](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)한 후에 [새 작업자 풀을 작성](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)할 수 있습니다.
+사용자는 [기존 작업자 풀을 삭제](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)한 후에 [새 작업자 풀을 작성](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)할 수 있습니다.
 
 또는 새 VLAN을 주문하고 이를 사용하여 풀에서 새 작업자 노드를 작성하여 기존 작업자 풀을 유지할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  새 VLAN ID가 필요한 구역을 가져오려면 다음 명령 출력의 **위치**를 기록해 두십시오. **참고**: 클러스터가 다중 구역인 경우에는 각 구역마다 VLAN ID가 필요합니다.
 
@@ -621,7 +626,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-5.  `zone-network-set` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)을 사용하여 작업자 풀 네트워크 메타데이터를 변경하십시오.
+5.  `zone-network-set` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)을 사용하여 작업자 풀 네트워크 메타데이터를 변경하십시오.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -663,7 +668,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)를 참조하십시오.
--   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 참조하십시오.
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
+-   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support)를 참조하십시오.
+문제를 보고할 때 클러스터 ID를 포함하십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
 {: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -37,7 +38,7 @@ subcollection: containers
 在工作程序节点上公开一个公共端口，并使用该工作程序节点的公共 IP 地址通过因特网来公共访问集群中的服务。
 {:shortdesc}
 
-通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 `kubeproxy` 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<IP_address>:<nodeport>`。除了公共 IP 地址外，NodePort 服务还可用于工作程序节点的专用 IP 地址。
+通过创建类型为 NodePort 的 Kubernetes 服务来公开应用程序时，将为该服务分配 30000-32767 范围内的 NodePort 以及内部集群 IP 地址。NodePort 服务充当应用程序入局请求的外部入口点。分配的 NodePort 在集群中每个工作程序节点的 `kubeproxy` 设置中公共公开。每个工作程序节点都会在分配的 NodePort 上开始侦听该服务的入局请求。要从因特网访问该服务，可以使用在集群创建期间分配的任何工作程序节点的公共 IP 地址以及 NodePort，格式为 `<IP_address>:<nodeport>`。如果要访问专用网络上的服务，请使用任何工作程序节点的专用 IP 地址，而不要使用公共 IP 地址。
 
 下图显示配置 NodePort 服务后，如何将通信从因特网定向到应用程序：
 
@@ -114,8 +115,7 @@ apiVersion: v1
      </tr>
      <tr>
      <td><code>ports.nodePort</code></td>
-     <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>要指定 NodePort，并希望查看哪些 NodePort 已在使用，请运行以下命令：<pre class="pre"><code>    kubectl get svc
-    </code></pre><p>所有已在使用的 NodePort 都会显示在**端口**字段下。</p></td>
+     <td>可选：将 <code><em>&lt;31514&gt;</em></code> 替换为范围为 30000-32767 的 NodePort。不要指定其他服务已经在使用的 NodePort。如果未分配 NodePort，系统将为您分配随机的 NodePort。<br><br>要指定 NodePort，并希望查看哪些 NodePort 已在使用，请运行以下命令：<pre class="pre"><code>kubectl get svc</code></pre><p>所有已在使用的 NodePort 都会显示在**端口**字段下。</p></td>
      </tr>
      </tbody></table>
 
@@ -167,7 +167,7 @@ apiVersion: v1
     ```
     {: screen}
 
-    在此示例中，NodePort为 `30872`。
+    在此示例中，NodePort 为 `30872`。
 
     如果 **Endpoints** 部分显示 `<none>`，请检查 NodePort 服务的 `spec.selector` 部分中使用的 `<selectorkey>` 和 `<selectorvalue>`。确保它与部署 YAML 的 `spec.template.metadata.labels` 部分中使用的_键/值_对相同。
     {: note}

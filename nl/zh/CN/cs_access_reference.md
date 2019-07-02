@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 用户访问许可权
@@ -57,65 +59,75 @@ subcollection: containers
 <table>
 <caption>在 {{site.data.keyword.containerlong_notm}} 中无需许可权的 CLI 命令和 API 调用概述</caption>
 <thead>
-<th id="none-actions-action">集群管理操作</th>
+<th id="none-actions-action">操作</th>
 <th id="none-actions-cli">CLI 命令</th>
 <th id="none-actions-api">API 调用</th>
 </thead>
 <tbody>
 <tr>
 <td>查看 {{site.data.keyword.containerlong_notm}} 中支持的受管附加组件版本的列表。</td>
-<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)</code></td>
+<td><code>[GET /v1/addon](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAddons)</code></td>
 </tr>
 <tr>
 <td>查看 {{site.data.keyword.containerlong_notm}} 的 API 端点或将其设定为目标。</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>查看支持的命令和参数的列表。</td>
-<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cs_cli_reference#cs_help)</code></td>
+<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_help)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>初始化 {{site.data.keyword.containerlong_notm}} 插件或指定要在其中创建或访问 Kubernetes 集群的区域。</td>
-<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)</code></td>
+<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本列表。</td>
-<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
+<td>不推荐：查看 {{site.data.keyword.containerlong_notm}} 中支持的 Kubernetes 版本的列表。</td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_kube_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
 <td>查看可用于工作程序节点的机器类型的列表。</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/swagger-api/#!/util/GetDatacenterMachineTypes)</code></td>
+<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
 <td>查看 IBM 标识用户的当前消息。</td>
-<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/swagger-api/#!/util/GetMessages)</code></td>
+<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages)</code></td>
 </tr>
 <tr>
-<td>查找当前所在的 {{site.data.keyword.containerlong_notm}} 区域。</td>
-<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
+<td>不推荐：查找您当前所在的 {{site.data.keyword.containerlong_notm}} 区域。</td>
+<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>设置 {{site.data.keyword.containerlong_notm}} 的区域。</td>
-<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
+<td>不推荐：设置 {{site.data.keyword.containerlong_notm}} 的区域。</td>
+<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>列出可用的区域。</td>
-<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
-<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
+<td>不推荐：列出可用的区域。</td>
+<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_regions)</code></td>
+<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetRegions)</code></td>
+</tr>
+<tr>
+<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的位置的列表。</td>
+<td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)</code></td>
+<td><code>[GET /v1/locations](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations)</code></td>
+</tr>
+<tr>
+<td>查看 {{site.data.keyword.containerlong_notm}} 中支持的版本的列表。</td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td>-</td>
 </tr>
 <tr>
 <td>查看可在其中创建集群的可用专区的列表。</td>
-<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
-<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
+<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_datacenters)</code></td>
+<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetZones)</code></td>
 </tr>
 </tbody>
 </table>
@@ -128,155 +140,136 @@ subcollection: containers
 {: shortdesc}
 
 <table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要查看者平台角色的集群管理 CLI 命令和 API 调用概述</caption>
+<caption>在 {{site.data.keyword.containerlong_notm}} 中需要查看者平台角色的 CLI 命令和 API 调用概述</caption>
 <thead>
-<th id="view-actions-mngt">集群管理操作</th>
+<th id="view-actions-mngt">操作</th>
 <th id="view-actions-cli">CLI 命令</th>
 <th id="view-actions-api">API 调用</th>
 </thead>
 <tbody>
 <tr>
-<td>查看资源组和区域的 {{site.data.keyword.Bluemix_notm}} IAM API 密钥所有者的姓名和电子邮件地址。</td>
-<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetClusterKeyOwner)</code></td>
-</tr>
-<tr>
-<td>下载 Kubernetes 配置数据和证书，以连接到集群并运行 `kubectl` 命令。</td>
-<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterConfig)</code></td>
-</tr>
-<tr>
-<td>查看集群的信息。</td>
-<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetCluster)</code></td>
-</tr>
-<tr>
-<td>列出绑定到某个集群的所有名称空间中的所有服务。</td>
-<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_services)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesForAllNamespaces)</code></td>
-</tr>
-<tr>
-<td>列出所有集群。</td>
-<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cs_cli_reference#cs_clusters)</code></td>
-<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusters)</code></td>
-</tr>
-<tr>
-<td>获取为 {{site.data.keyword.Bluemix_notm}} 帐户设置用于访问其他 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的基础架构凭证。</td>
-<td><code>[        ibmcloud ks credential-get
-        ](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetUserCredentials)</code></td>
-</tr>
-<tr>
-<td>列出绑定到特定名称空间的所有服务。</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesInNamespace)</code></td>
-</tr>
-<tr>
-<td>列出绑定到某个集群的所有由用户管理的子网。</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterUserSubnet)</code></td>
-</tr>
-<tr>
-<td>列出基础架构帐户中的可用子网。</td>
-<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)</code></td>
-<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/swagger-api/#!/properties/ListSubnets)</code></td>
-</tr>
-<tr>
-<td>查看基础架构帐户的 VLAN 生成状态。</td>
-<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)</code></td>
-<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
-</tr>
-<tr>
-<td>为一个集群设置时：列出该集群在专区中连接到的 VLAN。</br>为帐户中的所有集群设置时：列出专区中的所有可用 VLAN。</td>
-<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
-</tr>
-<tr>
-<td>列出一个集群的所有 Webhook。</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWebhooks)</code></td>
-</tr>
-<tr>
-<td>查看工作程序节点的信息。</td>
-<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkers)</code></td>
-</tr>
-<tr>
-<td>查看工作程序池的信息。</td>
-<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPool)</code></td>
-</tr>
-<tr>
-<td>列出一个集群中的所有工作程序池。</td>
-<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pools)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPools)</code></td>
-</tr>
-<tr>
-<td>列出一个集群中的所有工作程序节点。</td>
-<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cs_cli_reference#cs_workers)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWorkers)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要查看者平台角色的 Ingress CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="view-actions-ingress">Ingress 操作</th>
-<th id="view-actions-cli2">CLI 命令</th>
-<th id="view-actions-api2">API 调用</th>
-</thead>
-<tbody>
-<tr>
 <td>查看 Ingress ALB 的信息。</td>
-<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_get)</code></td>
-<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALB)</code></td>
+<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_get)</code></td>
+<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALB)</code></td>
 </tr>
 <tr>
 <td>查看区域中支持的 ALB 类型。</td>
-<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cs_cli_reference#cs_alb_types)</code></td>
-<td><code>[GET /albtypes](https://containers.cloud.ibm.com/swagger-alb-api/#!/util/GetAvailableALBTypes)</code></td>
+<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_types)</code></td>
+<td><code>[GET /albtypes](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAvailableALBTypes)</code></td>
 </tr>
 <tr>
 <td>列出一个集群中的所有 Ingress ALB。</td>
-<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cs_cli_reference#cs_albs)</code></td>
-<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALBs)</code></td>
+<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_albs)</code></td>
+<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
-</tbody>
-</table>
-
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要查看者平台角色的日志记录 CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="view-actions-log">日志记录操作</th>
-<th id="view-actions-cli3">CLI 命令</th>
-<th id="view-actions-api3">API 调用</th>
-</thead>
-<tbody>
+<tr>
+<td>查看资源组和区域的 {{site.data.keyword.Bluemix_notm}} IAM API 密钥所有者的姓名和电子邮件地址。</td>
+<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
+</tr>
+<tr>
+<td>下载 Kubernetes 配置数据和证书，以连接到集群并运行 `kubectl` 命令。</td>
+<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterConfig)</code></td>
+</tr>
+<tr>
+<td>查看集群的信息。</td>
+<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetCluster)</code></td>
+</tr>
+<tr>
+<td>列出绑定到某个集群的所有名称空间中的所有服务。</td>
+<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_services)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesForAllNamespaces)</code></td>
+</tr>
+<tr>
+<td>列出所有集群。</td>
+<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)</code></td>
+<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
+</tr>
+<tr>
+<td>获取为 {{site.data.keyword.Bluemix_notm}} 帐户设置用于访问其他 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的基础架构凭证。</td>
+<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
+</tr>
+<tr>
+<td>检查允许访问目标区域和资源组的 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的凭证是否缺少建议或必需的基础架构许可权。</td>
+<td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
+<td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
+</tr>
 <tr>
 <td>查看 Fluentd 附加组件自动更新的状态。</td>
-<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>查看目标区域的缺省日志记录端点。</td>
 <td>-</td>
-<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetDefaultLoggingEndpoint)</code></td>
 </tr>
 <tr>
 <td>列出集群中或集群中特定日志源的所有日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cs_cli_reference#cs_logging_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigs) 和 [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</code></td>
+<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigs) 和 [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigsForSource)</code></td>
 </tr>
 <tr>
 <td>查看日志过滤配置的信息。</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfig)</code></td>
 </tr>
 <tr>
 <td>列出集群中的所有日志记录过滤器配置。</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfigs)</code></td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfigs)</code></td>
+</tr>
+<tr>
+<td>列出绑定到特定名称空间的所有服务。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>列出绑定到某个集群的所有由用户管理的子网。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>列出基础架构帐户中的可用子网。</td>
+<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)</code></td>
+<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/ListSubnets)</code></td>
+</tr>
+<tr>
+<td>查看基础架构帐户的 VLAN 生成状态。</td>
+<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)</code></td>
+<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetVlanSpanning)</code></td>
+</tr>
+<tr>
+<td>为一个集群设置时：列出该集群在专区中连接到的 VLAN。</br>为帐户中的所有集群设置时：列出专区中的所有可用 VLAN。</td>
+<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/GetDatacenterVLANs)</code></td>
+</tr>
+<tr>
+<td>列出一个集群的所有 Webhook。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWebhooks)</code></td>
+</tr>
+<tr>
+<td>查看工作程序节点的信息。</td>
+<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkers)</code></td>
+</tr>
+<tr>
+<td>查看工作程序池的信息。</td>
+<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPool)</code></td>
+</tr>
+<tr>
+<td>列出一个集群中的所有工作程序池。</td>
+<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pools)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPools)</code></td>
+</tr>
+<tr>
+<td>列出一个集群中的所有工作程序节点。</td>
+<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_workers)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWorkers)</code></td>
 </tr>
 </tbody>
 </table>
@@ -288,195 +281,167 @@ subcollection: containers
 {: shortdesc}
 
 <table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要编辑者平台角色的集群管理 CLI 命令和 API 调用概述</caption>
+<caption>在 {{site.data.keyword.containerlong_notm}} 中需要编辑者平台角色的 CLI 命令和 API 调用概述</caption>
 <thead>
-<th id="editor-actions-mngt">集群管理操作</th>
+<th id="editor-actions-mngt">操作</th>
 <th id="editor-actions-cli">CLI 命令</th>
 <th id="editor-actions-api">API 调用</th>
 </thead>
 <tbody>
 <tr>
-<td>将服务绑定到集群。 **注**：还需要服务所在的空间中的 Cloud Foundry 开发者角色。</td>
-<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/BindServiceToNamespace)</code></td>
-</tr>
-<tr>
-<td>从集群取消绑定服务。**注**：还需要服务所在的空间中的 Cloud Foundry 开发者角色。</td>
-<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_unbind)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UnbindServiceFromNamespace)</code></td>
-</tr>
-<tr>
-<td>在集群中创建 Webhook。</td>
-<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWebhooks)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要编辑者平台角色的 Ingress CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="editor-actions-ingress">Ingress 操作</th>
-<th id="editor-actions-cli2">CLI 命令</th>
-<th id="editor-actions-api2">API 调用</th>
-</thead>
-<tbody>
-<tr>
 <td>禁用 Ingress ALB 附加组件的自动更新。</td>
-<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>启用 Ingress ALB 附加组件的自动更新。</td>
-<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>检查是否启用了 Ingress ALB 附加组件的自动更新。</td>
-<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>启用或禁用 Ingress ALB。</td>
-<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
-<td><code>[POST /albs](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/EnableALB) 和 [DELETE /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#/)</code></td>
+<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</code></td>
+<td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) 和 [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
+</tr>
+<tr>
+<td>创建 Ingress ALB。</td>
+<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
+<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
 </tr>
 <tr>
 <td>将 Ingress ALB 附加组件更新回滚到 ALB pod 先前在运行的构建。</td>
-<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/RollbackUpdate)</code></td>
+<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
 </tr>
 <tr>
 <td>通过手动更新 Ingress ALB 附加组件，强制一次性更新 ALB pod。</td>
-<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</code></td>
-<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBs)</code></td>
+<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_update)</code></td>
+<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBs)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>需要 {{site.data.keyword.containerlong_notm}} 中的“编辑者”平台角色的网络负载均衡器 (NLB) DNS 主机和运行状况检查监视器 CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="lbdns-mgmt">网络负载均衡器 (NLB) DNS 操作</th>
-<th id="lbdns-cli">CLI 命令</th>
-<th id="lbdns-api">API 调用</th>
-</thead>
-<tbody>
-<tr>
-<td>将一个 NLB IP 添加到现有 NLB 主机名。</td>
-<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>创建用于注册一个或多个 NLB IP 的 DNS 主机名。</td>
-<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>列出集群中注册的 NLB 主机名和 IP 地址。</td>
-<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
-</tr>
-<tr>
-<td>从主机名中除去 NLB IP 地址。</td>
-<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>为集群中的现有 NLB 主机名配置运行状况检查监视器，并可选择启用该监视器。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>查看现有运行状况检查监视器的设置。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>对集群中的主机名禁用现有运行状况检查监视器。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>启用配置的运行状况检查监视器。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>列出集群中每个 NLB 主机名的运行状况检查监视器设置。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
-</tr>
-<tr>
-<td>列出集群中 NLB 主机名后面的 IP 的运行状况检查状态。</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要编辑者平台角色的日志记录 CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="editor-log">日志记录操作</th>
-<th id="editor-cli3">CLI 命令</th>
-<th id="editor-api3">API 调用</th>
-</thead>
-<tbody>
 <tr>
 <td>创建 API 服务器审计 Webhook。</td>
-<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_set)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_set)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
 </tr>
 <tr>
 <td>删除 API 服务器审计 Webhook。</td>
-<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_unset)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_unset)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/apiserverconfigs/DeleteAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>将服务绑定到集群。 **注**：您必须具有对服务实例所在空间的 Cloud Foundry 开发者角色。</td>
+<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/BindServiceToNamespace)</code></td>
+</tr>
+<tr>
+<td>从集群取消绑定服务。**注**：您必须具有对服务实例所在空间的 Cloud Foundry 开发者角色。</td>
+<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_unbind)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UnbindServiceFromNamespace)</code></td>
 </tr>
 <tr>
 <td>为除 <code>kube-audit</code> 之外的其他所有日志源创建日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>刷新日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_logging_refresh)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/swagger-logging/#!/logging/RefreshLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_refresh)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/RefreshLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>针对除 <code>kube-audit</code> 之外的其他所有日志源，删除日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>删除集群的所有日志转发配置。</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfigs)</code></td>
 </tr>
 <tr>
 <td>更新日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cs_cli_reference#cs_logging_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/UpdateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/UpdateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>创建日志过滤配置。</td>
-<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/CreateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/CreateFilterConfig)</code></td>
 </tr>
 <tr>
 <td>删除日志过滤配置。</td>
-<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_delete)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_delete)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfig)</code></td>
 </tr>
 <tr>
 <td>删除 Kubernetes 集群的所有日志记录过滤器配置。</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfigs)</code></td>
 </tr>
 <tr>
 <td>更新日志过滤配置。</td>
-<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/UpdateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/UpdateFilterConfig)</code></td>
+</tr>
+<tr>
+<td>将一个 NLB IP 添加到现有 NLB 主机名。</td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>创建 DNS 主机名以注册 NLB IP 地址。</td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>列出集群中注册的 NLB 主机名和 IP 地址。</td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>从主机名中除去 NLB IP 地址。</td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>为集群中的现有 NLB 主机名配置运行状况检查监视器，并可选择启用该监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>查看现有运行状况检查监视器的设置。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>对集群中的主机名禁用现有运行状况检查监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>启用配置的运行状况检查监视器。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>列出集群中每个 NLB 主机名的运行状况检查监视器设置。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>列出向集群中的 NLB 主机名注册的每个 IP 地址的运行状况检查状态。</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+<tr>
+<td>在集群中创建 Webhook。</td>
+<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWebhooks)</code></td>
 </tr>
 </tbody>
 </table>
@@ -489,112 +454,107 @@ subcollection: containers
 {: shortdesc}
 
 <table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要操作员平台角色的集群管理 CLI 命令和 API 调用概述</caption>
+<caption>在 {{site.data.keyword.containerlong_notm}} 中需要操作者平台角色的 CLI 命令和 API 调用概述</caption>
 <thead>
-<th id="operator-mgmt">集群管理操作</th>
+<th id="operator-mgmt">操作</th>
 <th id="operator-cli">CLI 命令</th>
 <th id="operator-api">API 调用</th>
 </thead>
 <tbody>
 <tr>
 <td>刷新 Kubernetes 主节点。</td>
-<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) (cluster-refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>为集群创建 {{site.data.keyword.Bluemix_notm}} IAM 服务标识，为该服务标识创建策略，以用于在 {{site.data.keyword.registrylong_notm}} 中分配**读者**服务访问角色，然后为该服务标识创建 API 密钥。</td>
-<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
+<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>重新启动集群主节点以应用新的 Kubernetes API 配置更改。</td>
-<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
-</tr>
-<tr>
 <td>向集群添加子网。</td>
-<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterSubnet)</code></td>
 </tr>
 <tr>
-<td>创建子网。</td>
-<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
+<td>创建子网并将其添加到集群。</td>
+<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>更新集群。</td>
-<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateCluster)</code></td>
 </tr>
 <tr>
 <td>向集群添加用户管理的子网。</td>
-<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>从集群中除去用户管理的子网。</td>
-<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>添加工作程序节点。</td>
-<td><code>[ibmcloud ks worker-add（不推荐）](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWorkers)</code></td>
+<td><code>[ibmcloud ks worker-add（不推荐）](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWorkers)</code></td>
 </tr>
 <tr>
 <td>创建工作程序池。</td>
-<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateWorkerPool)</code></td>
 </tr>
 <tr>
 <td>重新均衡工作程序池。</td>
-<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>调整工作程序池的大小。</td>
-<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>删除工作程序池。</td>
-<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPool)</code></td>
 </tr>
 <tr>
 <td>重新引导工作程序节点。</td>
-<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>重新装入工作程序节点。</td>
-<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>除去工作程序节点。</td>
-<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterWorker)</code></td>
 </tr>
 <tr>
 <td>更新工作程序节点。</td>
-<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>向工作程序池添加专区。</td>
-<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cs_cli_reference#cs_zone_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZone)</code></td>
+<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZone)</code></td>
 </tr>
 <tr>
 <td>更新工作程序池中给定专区的网络配置。</td>
-<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZoneNetwork)</code></td>
+<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZoneNetwork)</code></td>
 </tr>
 <tr>
 <td>从工作程序池中除去专区。</td>
-<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cs_cli_reference#cs_zone_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPoolZone)</code></td>
+<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPoolZone)</code></td>
 </tr>
 </tbody>
 </table>
@@ -606,139 +566,117 @@ subcollection: containers
 {: shortdesc}
 
 <table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要管理员平台角色的集群管理 CLI 命令和 API 调用概述</caption>
+<caption>在 {{site.data.keyword.containerlong_notm}} 中需要管理员平台角色的 CLI 命令和 API 调用概述</caption>
 <thead>
-<th id="admin-mgmt">集群管理操作</th>
+<th id="admin-mgmt">操作</th>
 <th id="admin-cli">CLI 命令</th>
 <th id="admin-api">API 调用</th>
 </thead>
 <tbody>
 <tr>
+<td>Beta：将证书从 {{site.data.keyword.cloudcerts_long_notm}} 实例部署到 ALB 或更新该证书。</td>
+<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) 或 [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+</tr>
+<tr>
+<td>Beta：查看有关集群中 ALB 私钥的详细信息。</td>
+<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>Beta：从集群中除去 ALB 私钥。</td>
+<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>列出一个集群中的所有 ALB 私钥。</td>
+<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs)</code></td>
+<td>-</td>
+</tr>
+<tr>
 <td>为 {{site.data.keyword.Bluemix_notm}} 帐户设置 API 密钥以访问链接的 IBM Cloud Infrastructure (SoftLayer) 产品服务组合。</td>
-<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)</code></td>
-<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</code></td>
+<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
+<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
 <tr>
 <td>在集群中禁用受管附加组件（例如，Istio 或 Knative）。</td>
-<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
 <td>在集群中启用受管附加组件（例如，Istio 或 Knative）。</td>
-<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
 <td>列出在集群中启用的受管附加组件（例如，Istio 或 Knative）。</td>
-<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons)</code></td>
 </tr>
 <tr>
 <td>创建免费或标准集群。**注**：还需要对 {{site.data.keyword.registrylong_notm}} 的管理员平台角色以及超级用户基础架构角色。</td>
-<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)</code></td>
-<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)</code></td>
+<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateCluster)</code></td>
 </tr>
 <tr>
 <td>禁用集群的指定功能，例如集群主节点的公共服务端点。</td>
-<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>启用集群的指定功能，例如集群主节点的专用服务端点。</td>
-<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>删除集群。</td>
-<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveCluster)</code></td>
+<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
 <td>为 {{site.data.keyword.Bluemix_notm}} 帐户设置用于访问其他 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的基础架构凭证。</td>
-<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)</code></td>
-<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/StoreUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
+<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
 <td>除去 {{site.data.keyword.Bluemix_notm}} 帐户用于访问其他 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的基础架构凭证。</td>
-<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)</code></td>
-<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
+<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
 <tr>
-<td>使用 {{site.data.keyword.keymanagementservicefull}} 加密 Kubernetes 私钥。</td>
-<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateKMSConfig)</code></td>
+<td>Beta：使用 {{site.data.keyword.keymanagementservicefull}} 加密 Kubernetes 私钥。</td>
+<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateKMSConfig)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要管理员平台角色的 Ingress CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="admin-ingress">Ingress 操作</th>
-<th id="admin-cli2">CLI 命令</th>
-<th id="admin-api2">API 调用</th>
-</thead>
-<tbody>
-<tr>
-<td>将证书从 {{site.data.keyword.cloudcerts_long_notm}} 实例部署到 ALB 或更新该证书。</td>
-<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/CreateALBSecret) 或 [PUT /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBSecret)</code></td>
-</tr>
-<tr>
-<td>查看有关集群中 ALB 私钥的详细信息。</td>
-<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>从集群中除去 ALB 私钥。</td>
-<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>列出一个集群中的所有 ALB 私钥。</td>
-<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cs_cli_reference#cs_alb_certs)</code></td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>在 {{site.data.keyword.containerlong_notm}} 中需要管理员平台角色的日志记录 CLI 命令和 API 调用概述</caption>
-<thead>
-<th id="admin-log">日志记录操作</th>
-<th id="admin-cli3">CLI 命令</th>
-<th id="admin-api3">API 调用</th>
-</thead>
-<tbody>
 <tr>
 <td>禁用 Fluentd 集群附加组件的自动更新。</td>
-<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>启用 Fluentd 集群附加组件的自动更新。</td>
-<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_enable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_enable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>在 {{site.data.keyword.cos_full_notm}} 存储区中收集 API 服务器日志的快照。</td>
-<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect)</code></td>
+<td>[POST /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/CreateMasterLogCollection)</td>
 </tr>
 <tr>
 <td>查看 API 服务器日志快照请求的状态。</td>
-<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status)</code></td>
+<td>[GET /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/GetMasterLogCollectionStatus)</td>
 </tr>
 <tr>
 <td>为 <code>kube-audit</code> 日志源创建日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>删除 <code>kube-audit</code> 日志源的日志转发配置。</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 </tbody>
 </table>
@@ -753,7 +691,7 @@ subcollection: containers
 {: shortdesc}
 
 需要了解每个服务角色通过 RBAC 授权的 Kubernetes 操作？请参阅[每个 RBAC 角色的 Kubernetes 资源许可权](#rbac_ref)。
-要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](/docs/containers?topic=containers-users#role-binding)。
+要了解有关 RBAC 角色的更多信息，请参阅[分配 RBAC 许可权](/docs/containers?topic=containers-users#role-binding)和[通过聚集集群角色扩展现有许可权](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)。
 {: tip}
 
 下表显示了每个服务角色及其相应的 RBAC 角色授予的 Kubernetes 资源许可权。
@@ -1110,42 +1048,91 @@ Cloud Foundry 角色会授予对帐户内组织和空间的访问权。要在 {{
 ## 基础架构角色
 {: #infra}
 
-具有**超级用户**基础架构访问角色的用户[为区域和资源组设置 API 密钥](/docs/containers?topic=containers-users#api_key)时，帐户中其他用户的基础架构许可权由 {{site.data.keyword.Bluemix_notm}} IAM 平台角色进行设置。您无需编辑其他用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。仅当无法将**超级用户**分配给设置 API 密钥的用户时，才可以使用下表来定制用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。有关更多信息，请参阅[定制基础架构许可权](/docs/containers?topic=containers-users#infra_access)。
+具有**超级用户**基础架构访问角色的用户可[为区域和资源组设置 API 密钥](/docs/containers?topic=containers-users#api_key)，以便可以执行基础架构操作（或者较少见的情况下，[手动设置其他帐户凭证](/docs/containers?topic=containers-users#credentials)）。然后，帐户中其他用户可以执行的基础架构操作将通过 {{site.data.keyword.Bluemix_notm}} IAM 平台角色进行授权。您无需编辑其他用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。仅当无法将**超级用户**分配给设置 API 密钥的用户时，才可以使用下表来定制用户的 IBM Cloud Infrastructure (SoftLayer) 许可权。有关分配许可权的指示信息，请参阅[定制基础架构许可权](/docs/containers?topic=containers-users#infra_access)。
 {: shortdesc}
 
-下表显示了完成常见任务组所需的基础架构许可权。
+
+
+下表显示了完成多组常见任务所必需的基础架构许可权。
 
 <table>
- <caption>{{site.data.keyword.containerlong_notm}} 通常必需的基础架构许可权</caption>
- <thead>
+<caption>{{site.data.keyword.containerlong_notm}} 通常必需的基础架构许可权</caption>
+<thead>
   <th>{{site.data.keyword.containerlong_notm}} 中的常见任务</th>
   <th>必需的基础架构许可权（按类别）</th>
- </thead>
- <tbody>
-   <tr>
-     <td><strong>最低许可权</strong>：<ul><li>创建集群。</li></ul></td>
-     <td><strong>设备</strong>：<ul><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>发出操作系统重装并启动急救内核</li></ul><strong>帐户</strong>：<ul><li>添加服务器</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>集群管理</strong>：<ul><li>创建、更新和删除集群。</li><li>添加、重新装入和重新引导工作程序节点。</li><li>查看 VLAN。</li><li>创建子网。</li><li>部署 pod 和 LoadBalancer 服务。</li></ul></td>
-     <td><strong>支持</strong>：<ul><li>查看凭单</li><li>添加凭单</li><li>编辑凭单</li></ul>
-     <strong>设备</strong>：<ul><li>查看硬件详细信息</li><li>查看虚拟服务器详细信息</li><li>重新引导服务器并查看 IPMI 系统信息</li><li>发出操作系统重装并启动急救内核</li></ul>
-     <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li></ul>
-     <strong>帐户</strong>：<ul><li>取消服务器</li><li>添加服务器</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>存储器</strong>：<ul><li>创建持久卷声明以供应持久卷。</li><li>创建和管理存储器基础架构资源。</li></ul></td>
-     <td><strong>服务</strong>：<ul><li>管理存储器</li></ul><strong>帐户</strong>：<ul><li>添加存储器</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>专用联网</strong>：<ul><li>管理用于集群内联网的专用 VLAN。</li><li>设置与专用网络的 VPN 连接。</li></ul></td>
-     <td><strong>网络</strong>：<ul><li>管理网络子网路径</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>公用网络</strong>：<ul><li>设置公共负载均衡器或 Ingress 联网以公开应用程序。</li></ul></td>
-     <td><strong>设备</strong>：<ul><li>编辑主机名/域</li><li>管理端口控制</li></ul>
-     <strong>网络</strong>：<ul><li>使用公用网络端口添加计算</li><li>管理网络子网路径</li><li>添加 IP 地址</li></ul>
-     <strong>服务</strong>：<ul><li>管理 DNS、逆向 DNS 和 WHOIS</li><li>查看证书 (SSL)</li><li>管理证书 (SSL)</li></ul></td>
-   </tr>
- </tbody>
+</thead>
+<tbody>
+<tr>
+<td>
+  <strong>最低许可权</strong>：<ul>
+  <li>创建集群。</li></ul></td>
+<td>
+<strong>帐户</strong>：<ul>
+<li>添加服务器</li></ul>
+  <strong>设备</strong>：<ul>
+  <li>对于裸机工作程序节点：查看硬件详细信息</li>
+  <li>IPMI 远程管理</li>
+  <li>操作系统重装和急救内核</li>
+  <li>对于 VM 工作程序节点：查看虚拟服务器详细信息</li></ul></td>
+</tr>
+<tr>
+<td>
+<strong>集群管理</strong>：<ul>
+  <li>创建、更新和删除集群。</li>
+  <li>添加、重新装入和重新引导工作程序节点。</li>
+  <li>查看 VLAN。</li>
+  <li>创建子网。</li>
+  <li>部署 pod 和 LoadBalancer 服务。</li></ul>
+  </td><td>
+<strong>帐户</strong>：<ul>
+  <li>添加服务器</li>
+  <li>取消服务器</li></ul>
+<strong>设备</strong>：<ul>
+  <li>对于裸机工作程序节点：查看硬件详细信息</li>
+  <li>IPMI 远程管理</li>
+  <li>操作系统重装和急救内核</li>
+  <li>对于 VM 工作程序节点：查看虚拟服务器详细信息</li></ul>
+<strong>网络</strong>：<ul>
+  <li>使用公用网络端口添加计算</li></ul>
+<p class="important">您还必须为用户分配管理支持案例的能力。请参阅[定制基础架构许可权](/docs/containers?topic=containers-users#infra_access)中的步骤 8。</p>
+</td>
+</tr>
+<tr>
+<td>
+  <strong>存储器</strong>：<ul>
+  <li>创建持久卷声明以供应持久卷。</li>
+  <li>创建和管理存储器基础架构资源。</li></ul></td>
+<td>
+<strong>帐户</strong>：<ul>
+  <li>添加/升级存储器 (StorageLayer)</li></ul>
+<strong>服务</strong>：<ul>
+  <li>存储管理</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>专用联网</strong>：<ul>
+  <li>管理用于集群内联网的专用 VLAN。</li>
+  <li>设置与专用网络的 VPN 连接。</li></ul></td>
+<td>
+  <strong>网络</strong>：<ul>
+  <li>管理网络子网路径</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>公用网络</strong>：<ul>
+  <li>设置公共负载均衡器或 Ingress 联网以公开应用程序。</li></ul></td>
+<td>
+<strong>设备</strong>：<ul>
+<li>管理端口控制</li>
+  <li>编辑主机名/域</li></ul>
+<strong>网络</strong>：<ul>
+  <li>添加 IP 地址</li>
+  <li>管理网络子网路径</li>
+  <li>使用公用网络端口添加计算</li></ul>
+<strong>服务</strong>：<ul>
+  <li>管理 DNS</li>
+  <li>查看证书 (SSL)</li>
+  <li>管理证书 (SSL)</li></ul></td>
+</tr>
+</tbody>
 </table>

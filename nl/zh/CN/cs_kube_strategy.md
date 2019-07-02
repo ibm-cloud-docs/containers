@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 定义 Kubernetes 策略
 {: #strategy}
@@ -44,36 +46,33 @@ subcollection: containers
 ### 可以将哪些内容移至 {{site.data.keyword.Bluemix_notm}}？
 {: #move_to_cloud}
 
-使用 {{site.data.keyword.Bluemix_notm}} 时，您可以灵活地为工作负载选择[公共云、私有云或混合云方法](/docs/containers?topic=containers-cs_ov#differentiation)。下表就用户通常会移至各种类型云的工作负载类型提供了一些示例。
+使用 {{site.data.keyword.Bluemix_notm}} 时，您可以灵活地在[外部部署、内部部署或混合云环境](/docs/containers?topic=containers-cs_ov#differentiation)中创建 Kubernetes 集群。下表就用户通常会移至各种类型云的工作负载类型提供了一些示例。
+您还可以选择使集群同时在两种环境中运行的混合方法。
 {: shortdesc}
 
-|工作负载|公共云|私有云|混合云|
-| --- | --- | --- | --- |
-|DevOps 支持工具| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|开发和测试应用程序| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|应用程序的需求发生重大变化，需要快速缩放| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|业务应用程序（例如，CRM、HCM、ERP 和电子商务）| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|协作和社交工具（例如，电子邮件）| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|Linux 和 x86 工作负载| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| | |
-|超出公共机器类型能力的密集型 CPU 或 I/O 容量需求| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
-|具有平台和基础架构约束和依赖项的旧应用程序| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|采用严格设计、许可或遵循严密监管的专有应用程序| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
-|在公共云中缩放应用程序，并将数据同步到现场专用数据库| | | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|工作负载|{{site.data.keyword.containershort_notm}} 外部部署|内部部署|
+| --- | --- | --- |
+|DevOps 支持工具| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|开发和测试应用程序| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|应用程序的需求发生重大变化，需要快速缩放| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|业务应用程序（例如，CRM、HCM、ERP 和电子商务）| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|协作和社交工具（例如，电子邮件）| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|Linux 和 x86 工作负载| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| |
+|裸机和 GPU 计算资源| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|符合 PCI 和 HIPAA 的工作负载| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|具有平台和基础架构约束和依赖项的旧应用程序| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|采用严格设计、许可或遵循严密监管的专有应用程序| | <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
+|在公共云中缩放应用程序，并将数据同步到现场专用数据库| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />| <img src="images/confirm.svg" width="32" alt="功能可用" style="width:32px;" />|
 {: caption="{{site.data.keyword.Bluemix_notm}} 实现支持工作负载" caption-side="top"}
 
-**已准备好在公共云中运行工作负载？**</br>
-太棒了！您正在阅读的是公共云文档。请继续阅读以了解更多策略构想，或者通过[立即创建集群](/docs/containers?topic=containers-getting-started)来开始运作。
+**已准备好在 {{site.data.keyword.containerlong_notm}} 中外部部署运行工作负载？**</br>
+太好了！您正在阅读的是公共云文档。请继续阅读以了解更多策略构想，或者通过[立即创建集群](/docs/containers?topic=containers-getting-started)来开始运作。
 
-**对私有云感兴趣？**</br>
+**对内部部署云感兴趣？**</br>
 请探索 [{{site.data.keyword.Bluemix_notm}} Private 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html)。如果您已经对 IBM 技术（例如，WebSphere Application Server 和 Liberty）进行了大量投资，那么可以使用各种工具来优化 {{site.data.keyword.Bluemix_notm}} Private 现代化策略。
-* 要更好地了解现有应用程序和支持环境，请使用 [IBM Transformation Advisor ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html)。
-* 要帮助确定采用就绪情况并提供云路线图，请寻求 [{{site.data.keyword.Bluemix_notm}} 咨询服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/us-en/marketplace/cloud-consulting-services)。
-* 要帮助开发者针对 {{site.data.keyword.Bluemix_notm}} Private 构建服务，请参阅 [IBM Microclimate ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/us-en/marketplace/microclimate)。
-* 要进行多云供应，请考虑使用 [{{site.data.keyword.Bluemix_notm}} Automation Manager ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/us-en/marketplace/cognitive-automation)。
-* 要管理多个云 Kubernetes 集群（如跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），请查看 [IBM Multicloud Manager ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
 
-**要同时使用公共云和私有云？**</br>
-首先设置 {{site.data.keyword.Bluemix_notm}} Private 帐户。然后，请参阅[将 {{site.data.keyword.containerlong_notm}} 与 {{site.data.keyword.Bluemix_notm}} Private 配合使用](/docs/containers?topic=containers-hybrid_iks_icp)，以将 {{site.data.keyword.Bluemix_notm}} Private 环境与 {{site.data.keyword.Bluemix_notm}} Public 中的集群相连接。
+**要同时在内部部署云和外部部署云中运行工作负载？**</br>
+首先设置 {{site.data.keyword.Bluemix_notm}} Private 帐户。然后，请参阅[将 {{site.data.keyword.containerlong_notm}} 与 {{site.data.keyword.Bluemix_notm}} Private 配合使用](/docs/containers?topic=containers-hybrid_iks_icp)，以将 {{site.data.keyword.Bluemix_notm}} Private 环境与 {{site.data.keyword.Bluemix_notm}} Public 中的集群相连接。要管理多个云 Kubernetes 集群（如跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），请查看 [IBM Multicloud Manager ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
 
 ### 可以在 {{site.data.keyword.containerlong_notm}} 中运行哪种应用程序？
 {: #app_types}
@@ -104,9 +103,9 @@ subcollection: containers
 7.  **端口绑定**：端口绑定是自包含的，并且在定义明确的主机和端口上提供服务端点。
 8.  **并行**：通过进程实例（例如，副本和水平缩放）来管理和缩放应用程序。为部署设置资源请求和限制。请注意，Calico 网络策略无法限制带宽。请改为考虑使用 [Istio](/docs/containers?topic=containers-istio)。
 9.  **一次性**：将应用程序设计为一次性的，启动工作极少，可正常关闭，并能容忍进程突然终止。请记住，容器、pod 甚至工作程序节点都应该是一次性的，因此请相应地规划应用程序。
-10.  **开发到生产保持一致**：为应用程序设置[持续集成](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/)和[持续开发](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/)管道，尽可能减小开发环境中的应用程序与生产环境中的应用程序之间的差异。
+10.  **开发到生产保持一致**：为应用程序设置[持续集成](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/)和[持续交付](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/)管道，尽可能减小开发环境中的应用程序与生产环境中的应用程序之间的差异。
 11.  **日志**：将日志视为事件流：外部或托管环境会处理和路由日志文件。**重要信息**：在 {{site.data.keyword.containerlong_notm}} 中，缺省情况下不会开启日志。要启用，请参阅[配置日志转发](/docs/containers?topic=containers-health#configuring)。
-12.  **管理进程**：将任何一次性管理脚本作为 [Kubernetes 作业对象 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) 与应用程序一起保留，以确保管理脚本的运行环境与应用程序本身相同。要对您希望在 Kubernetes 集群中运行的较大型软件包进行编排，请考虑使用软件包管理器，例如 [Helm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://helm.sh/)。
+12.  **管理进程**：将任何一次性管理脚本与应用程序一起保留，并将这些脚本作为 [Kubernetes 作业对象 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) 运行，以确保管理脚本的运行环境与应用程序本身相同。要对您希望在 Kubernetes 集群中运行的较大型软件包进行编排，请考虑使用软件包管理器，例如 [Helm ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://helm.sh/)。
 
 ### 我已有应用程序。如何将其迁移到 {{site.data.keyword.containerlong_notm}}？
 {: #migrate_containerize}
@@ -130,6 +129,31 @@ subcollection: containers
 
 <br />
 
+
+### 在将应用程序移至 {{site.data.keyword.containerlong_notm}} 之前，最好具备哪些知识和技术技能？
+{: #knowledge}
+
+Kubernetes 旨在为两个主要角色提供功能：集群管理员和应用程序开发者。每个角色使用不同的技术技能，以成功运行应用程序并将应用程序部署到集群
+。
+{: shortdesc}
+
+**集群管理员的主要任务和需要具备的技术知识是什么？** </br>
+作为集群管理员，您负责设置、操作、保护和管理集群的 {{site.data.keyword.Bluemix_notm}} 基础架构。典型任务包括：
+- 调整集群的大小，以便为工作负载提供足够的容量。
+- 设计集群，以满足公司的高可用性、灾难恢复和合规标准。
+- 通过设置用户许可权并限制集群中的操作来保护计算资源、网络和数据，从而确保集群安全。
+- 规划和管理基础架构组件之间的网络通信，以确保网络安全性、分段和合规性。
+- 规划持久性存储器选项，以满足数据存储位置和数据保护需求。
+
+集群管理员角色必须具备丰富的知识，包括计算、网络、存储、安全性和合规性。在典型的公司中，这些知识一般由多个专家分别掌握，例如系统工程师、系统管理员、网络工程师、网络架构设计师、IT 经理或安全与合规专家。请考虑将集群管理员角色分配给公司中的多个人员，以便您具备成功操作集群所需的知识。
+
+**应用程序开发者的主要任务和需要具备的技术知识是什么？** </br>
+作为开发者，您要在 Kubernetes 集群中设计、创建、保护、部署、测试、运行和监视云本机容器化应用程序。要创建和运行这些应用程序，您必须熟悉微服务的概念、[12 因子应用程序](#12factor)准则、[Docker 和容器化原则](https://www.docker.com/)以及可用的 [Kubernetes 部署选项](/docs/containers?topic=containers-app#plan_apps)。如果要部署无服务器应用程序，请熟悉 [Knative](/docs/containers?topic=containers-cs_network_planning)。
+
+Kubernetes 和 {{site.data.keyword.containerlong_notm}} 提供了有关如何[公开应用程序并使应用程序保持专用](/docs/containers?topic=containers-cs_network_planning)、[添加持久性存储器](/docs/containers?topic=containers-storage_planning)、[集成其他服务](/docs/containers?topic=containers-ibm-3rd-party-integrations)以及如何[保护工作负载和敏感数据](/docs/containers?topic=containers-security#container)的多个选项。在将应用程序移至 {{site.data.keyword.containerlong_notm}} 中的集群之前，请验证是否可以在支持的 Ubuntu 16.64 和 18.64 操作系统上将应用程序作为容器化应用程序运行，以及 Kubernetes 和 {{site.data.keyword.containerlong_notm}} 是否提供了工作负载所需的功能。
+
+**集群管理员和开发者之间要相互交互吗？**</br>
+是的。集群管理员和开发者必须经常进行交互，通过交互，集群管理员可了解在集群中提供此功能的工作负载需求，而开发者可了解其应用程序开发过程中必须考虑的可用限制、集成和安全性原则。
 
 ## 调整 Kubernetes 集群的大小以支持工作负载
 {: #sizing}
@@ -162,7 +186,7 @@ subcollection: containers
 
 请记住，您希望工作负载尽可能持续可用！
 
-1.  规划针对[高可用性集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)的策略，例如决定是使用单专区集群还是多专区集群。
+1.  规划针对[高可用性集群](/docs/containers?topic=containers-ha_clusters#ha_clusters)的策略，例如决定是使用单专区集群还是多专区集群。
 2.  查看[高可用性部署](/docs/containers?topic=containers-app#highly_available_apps)，以帮助决定如何使应用程序可用。
 
 ### 需要多少个工作程序节点来处理工作负载？
@@ -173,7 +197,7 @@ subcollection: containers
 1.  估算最大工作程序节点容量，这取决于您拥有的集群类型。您并不希望达到最大工作程序节点容量，以防发生激增或其他临时事件。
     *  **单专区集群**：计划在集群中至少有 3 个工作程序节点。此外，需要在集群中提供可容纳 1 个额外节点的 CPU 和内存容量。
     *  **多专区集群**：计划每个专区至少有 2 个工作程序节点，因此在 3 个专区中总共有 6 个节点。此外，将集群的总容量计划为至少等于总工作负载所需容量的 150%，这样，如果一个专区停止运行，您仍有资源可用于维持工作负载。
-2.  将应用程序大小和工作程序节点容量对应于其中一个[可用工作程序节点类型模板](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。要查看专区中的可用类型模板，请运行 `ibmcloud ks machine-types <zone>`。
+2.  将应用程序大小和工作程序节点容量对应于其中一个[可用工作程序节点类型模板](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。要查看专区中的可用类型模板，请运行 `ibmcloud ks machine-types <zone>`。
     *   **不要使工作程序节点超负荷**：为了避免 pod 争用 CPU 或低效运行，您必须了解应用程序需要的资源，以便可以规划所需的工作程序节点数。例如，如果应用程序需要的资源少于工作程序节点上的可用资源，那么可以限制部署到一个工作程序节点的 pod 数。使工作程序节点保持在约 75% 容量的水平，以便为可能需要安排的其他 pod 留出空间。如果应用程序需要的资源超过工作程序节点上的可用资源，请使用可以满足这些需求的其他工作程序节点类型模板。当工作程序节点由于内存或其他资源不足而频繁回报 `NotReady` 状态或逐出 pod 时，即表明工作程序节点超负荷了。
     *   **大型与小型工作程序节点类型模板**：大型节点可能比小型节点更有成本效益，对于设计为在高性能机器上进行处理时获取高效率的工作负载尤其如此。但是，如果大型工作程序节点停止运行，您需要确保集群有足够的容量，可将所有工作负载 pod 正常重新安排到集群中的其他工作程序节点上。小型工作程序有助于更正常地进行缩放。
     *   **应用程序副本数**：要确定所需的工作程序节点数，您还可以考虑要运行的应用程序副本数。例如，如果您知道工作负载需要 32 个 CPU 核心，并且计划运行 16 个应用程序副本，那么每个副本 pod 需要 2 个 CPU 核心。如果希望每个工作程序节点仅运行一个应用程序 pod，那么可以为集群类型订购相应数量的工作程序节点以支持此配置。
@@ -192,16 +216,16 @@ subcollection: containers
 ### 应该获取哪种集群类型和机器类型？
 {: #env_flavors}
 
-**集群类型**：决定是需要[单专区集群、多专区集群还是多集群设置](/docs/containers?topic=containers-plan_clusters#ha_clusters)。多专区集群在[所有六个全球 {{site.data.keyword.Bluemix_notm}} 大城市区域](/docs/containers?topic=containers-regions-and-zones#zones)都可用。另请记住，工作程序节点因专区而异。
+**集群类型**：决定是需要[单专区集群、多专区集群还是多集群设置](/docs/containers?topic=containers-ha_clusters#ha_clusters)。多专区集群在[所有六个全球 {{site.data.keyword.Bluemix_notm}} 大城市区域](/docs/containers?topic=containers-regions-and-zones#zones)都可用。另请记住，工作程序节点因专区而异。
 
-**工作程序节点类型**：一般而言，密集型工作负载更适合在裸机物理机器上运行，而对于有成本效益的测试和开发工作，您可选择共享或专用共享硬件上的虚拟机。使用裸机工作程序节点时，集群的网络速度为 10 Gbps，具有超线程核心，可提供更高吞吐量。虚拟机随附的网络速度为 1 Gbps，具有不提供超线程的常规核心。[查看可用的机器隔离和类型模板](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)。
+**工作程序节点类型**：一般而言，密集型工作负载更适合在裸机物理机器上运行，而对于有成本效益的测试和开发工作，您可选择共享或专用共享硬件上的虚拟机。使用裸机工作程序节点时，集群的网络速度为 10 Gbps，具有超线程核心，可提供更高吞吐量。虚拟机随附的网络速度为 1 Gbps，具有不提供超线程的常规核心。[查看可用的机器隔离和类型模板](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。
 
 ### 我应该使用多个集群，还是只需向现有集群添加更多工作程序？
 {: #env_multicluster}
 
 您创建的集群数取决于工作负载、公司政策和条例以及要对计算资源执行的操作。您还可以在[容器隔离和安全性](/docs/containers?topic=containers-security#container)中查看有关此决策的安全信息。
 
-**多个集群**：需要设置[全局负载均衡器](/docs/containers?topic=containers-plan_clusters#multiple_clusters)，并在每个集群中复制并应用相同的配置 YAML 文件，以在各集群中均衡工作负载。因此，多个集群的管理工作通常更复杂，但可以帮助您实现重要目标，如以下目标。
+**多个集群**：需要设置[全局负载均衡器](/docs/containers?topic=containers-ha_clusters#multiple_clusters)，并在每个集群中复制并应用相同的配置 YAML 文件，以在各集群中均衡工作负载。因此，多个集群的管理工作通常更复杂，但可以帮助您实现重要目标，如以下目标。
 *  符合要求隔离工作负载的安全策略。
 *  测试应用程序如何在不同版本的 Kubernetes 或其他集群软件（如 Calico）中运行。
 *  创建应用程序位于另一个区域中的集群，以提高该地理区域中用户的性能。
@@ -220,7 +244,7 @@ subcollection: containers
   <li><strong>不要过度利用集群带宽</strong>：请记住，缩放虚拟机上的网络带宽大约为 1000 Mbps。如果集群中需要数百个工作程序节点，请将其拆分成多个集群，每个集群具有较少的节点，或者订购裸机节点。</li>
   <li><strong>对服务分类</strong>：部署之前，规划工作负载需要多少服务。联网和端口转发规则会放入 Iptables 中。如果预测有更多数量的服务（例如，超过 5,000 个服务)，请将集群拆分为多个集群。</li></ul></dd>
 <dt>针对计算资源的组合，供应不同类型的机器。</dt>
-  <dd>每个人都希望有权进行选择，对吧？通过 {{site.data.keyword.containerlong_notm}}，您可以部署[机器类型的组合](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)：从针对密集型工作负载的裸机到针对快速缩放的虚拟机。使用标签或名称空间来将部署组织到您的各个机器。创建部署时，请对其进行限制，以便应用程序的 pod 只能在具有正确资源组合的机器上进行部署。例如，您可能希望将数据库应用程序限制为部署到具有大容量本地磁盘存储器的裸机机器，如 `md1c.28x512.4x4tb`。</dd>
+  <dd>每个人都希望有权进行选择，对吧？通过 {{site.data.keyword.containerlong_notm}}，您可以部署[机器类型的组合](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)：从针对密集型工作负载的裸机到针对快速缩放的虚拟机。使用标签或名称空间来将部署组织到您的各个机器。创建部署时，请对其进行限制，以便应用程序的 pod 只能在具有正确资源组合的机器上进行部署。例如，您可能希望将数据库应用程序限制为部署到具有大容量本地磁盘存储器的裸机机器，如 `md1c.28x512.4x4tb`。</dd>
 <dt>如果您有共享集群的多个团队和项目，请设置多个名称空间。</dt>
   <dd><p>名称空间有点类似于集群中的集群。名称空间可用于使用[资源配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 和[缺省限制 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/) 来划分集群资源。创建新的名称空间时，请确保设置正确的 [RBAC 策略](/docs/containers?topic=containers-users#rbac)来控制访问权。有关更多信息，请参阅 Kubernetes 文档中的[使用名称空间共享集群 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/)。</p>
   <p>如果您有一个小型集群、数十个用户以及类似的资源（例如，同一软件的不同版本），那么可能并不需要多个名称空间。您可以改为使用标签。</p></dd>
@@ -229,7 +253,8 @@ subcollection: containers
 <dt>使用标签组织 Kubernetes 对象</dt>
   <dd><p>要组织并选择 Kubernetes 资源（例如，`pod` 或`节点`），请[使用 Kubernetes 标签 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。缺省情况下，{{site.data.keyword.containerlong_notm}} 会应用一些标签，包括 `arch`、`os`、`region`、`zone` 和 `machine-type`。</p>
   <p>标签的示例用例包括[将网络流量限制为流至边缘工作程序节点](/docs/containers?topic=containers-edge)、[将应用程序部署到 GPU 机器](/docs/containers?topic=containers-app#gpu_app)，以及[限制应用程序工作负载 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)，使其只能在满足特定机器类型或 SDS 功能的工作程序节点（例如，裸机工作程序节点）上运行。要查看已应用于资源的标签，请使用带有 <code>--show-labels</code> 标志的 <code>kubectl get</code> 命令。例如：</p>
-  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p></dd>
+  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
+  要将标签应用于工作程序节点，请使用标签[创建工作程序池](/docs/containers?topic=containers-add_workers#add_pool)或[更新现有工作程序池](/docs/containers?topic=containers-add_workers#worker_pool_labels)。</dd>
 </dl>
 
 
@@ -246,10 +271,10 @@ subcollection: containers
 
 查看有关使资源具有高可用性的更多信息。
 * [减少潜在故障点](/docs/containers?topic=containers-ha#ha)。
-* [创建多专区集群](/docs/containers?topic=containers-plan_clusters#ha_clusters)。
+* [创建多专区集群](/docs/containers?topic=containers-ha_clusters#ha_clusters)。
 * [规划高可用性部署](/docs/containers?topic=containers-app#highly_available_apps)，此类部署在多专区中使用副本集和 pod 反亲缘关系等功能。
 * [运行基于云端公共注册表中映像的容器](/docs/containers?topic=containers-images)。
-* [规划数据存储](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。尤其是对于多专区集群，请考虑使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)。
+* [规划数据存储](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。尤其是对于多专区集群，请考虑使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)。
 * 对于多专区集群，启用 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer#multi_zone_config)或 Ingress [多专区负载均衡器](/docs/containers?topic=containers-ingress#ingress)来以公共方式公开应用程序。
 
 <br />
@@ -307,7 +332,7 @@ Kubernetes 集群中的每个 pod 都具有一个 IP 地址。但是，将应用
 ### 我以为自己需要把应用程序放入容器中。现在，pod 中都有哪些相关内容？
 {: #deploy_pods}
 
-[pod ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) 是 Kubernetes 可以管理的最小可部署单元。将容器（或一组容器）放入 pod 中，并使用 pod 配置文件来指示 pod 如何运行容器以及与其他 pod 共享资源。放入 pod 中的所有内容都在共享上下文中运行，这意味着这些内容在同一虚拟机或物理机器上同步工作。
+[pod ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) 是 Kubernetes 可以管理的最小可部署单元。将容器（或一组容器）放入 pod 中，并使用 pod 配置文件来指示 pod 如何运行容器以及与其他 pod 共享资源。放入 pod 中的所有容器都在共享上下文中运行，这意味着这些容器共享同一虚拟机或物理机器。
 {: shortdesc}
 
 **放入容器中的内容**：考虑应用程序的组件时，请考虑这些组件对于 CPU 和内存等是否有明显不同的资源需求。对于以最佳性能运行的某些组件，在将资源转移到其他区域期间，可以接受这些组件停止运行一小会儿吗？是否有面向客户的其他组件，使其保持运行至关重要？如果有这类组件，请将其拆分放入不同的容器中。您始终可以将这些组件部署到同一 pod，使其同步运行。
@@ -384,6 +409,7 @@ apiVersion: v1
     ```
     {: codeblock}
 *  可以使用 `kubectl apply -f` 命令来应用于整个目录，而不仅仅是单个文件。
+*  请试用 [`kusomize` 项目](/docs/containers?topic=containers-app#kustomize)，此项目可用于帮助编写、定制和复用 Kubernetes 资源 YAML 配置。
 
 在 YAML 文件中，可以使用标签或注释作为元数据来管理部署。
 
@@ -448,7 +474,7 @@ apiVersion: v1
 <dt>即时切换</dt>
   <dd>即时切换也称为蓝绿部署，这种方法需要将计算资源加倍，以同时运行两个版本的应用程序。通过此方法，可以近乎实时地将用户切换到更高版本。确保使用服务标签选择器（例如，`version: green` 和 `version: blue`）来确保向正确的应用程序版本发送请求。可以创建新的 `version: green` 部署，等待它准备就绪，然后删除 `version: blue` 部署。或者，可以执行[滚动更新](/docs/containers?topic=containers-app#app_rolling)，但将 `maxUnavailable` 参数设置为 `0%`，将 `maxSurge` 参数设置为 `100%`。</dd>
 <dt>金丝雀或 A/B 部署</dt>
-  <dd>金丝雀部署是更复杂的更新策略，使用此方法时，要求您选取用户百分比（例如，5%），然后将这一比例的用户发送到新的应用程序版本。可以在日志记录和监视工具中收集有关新应用程序版本执行情况的度量值，执行 A/B 测试，然后将更新应用到更多用户。与所有部署一样，标注应用程序（例如，`version: stable` 和 `version: canary`）至关重要。要管理金丝雀部署，可以[安装受管 Istio 附加组件服务网](/docs/containers?topic=containers-istio#istio)，[为集群设置 Sysdig 监视](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)，然后如[此博客帖子 ![ 外部链接图标](../icons/launch-glyph.svg "外部链接图标 ")](https://sysdig.com/blog/monitor-istio/) 中所述，使用 Istio 服务网执行 A/B 测试。</dd>
+  <dd>金丝雀部署是更复杂的更新策略，使用此方法时，要求您选取用户百分比（例如，5%），然后将这一比例的用户发送到新的应用程序版本。可以在日志记录和监视工具中收集有关新应用程序版本执行情况的度量值，执行 A/B 测试，然后将更新应用到更多用户。与所有部署一样，标注应用程序（例如，`version: stable` 和 `version: canary`）至关重要。要管理金丝雀部署，可以[安装受管 Istio 附加组件服务网](/docs/containers?topic=containers-istio#istio)，[为集群设置 Sysdig 监视](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)，然后如[此博客帖子 ![ 外部链接图标](../icons/launch-glyph.svg "外部链接图标 ")](https://sysdig.com/blog/monitor-istio/) 中所述，使用 Istio 服务网执行 A/B 测试。或者，将 Knative 用于金丝雀部署。</dd>
 </dl>
 
 <br />

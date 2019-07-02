@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud 스토리지 유틸리티
@@ -311,13 +313,13 @@ subcollection: containers
       ```
       {: pre}
 
-7.  `mkpvyaml` 컨테이너를 빌드하고 실행하십시오. 이미지에서 컨테이너를 실행하면 `mkpvyaml.py` 스크립트가 실행됩니다. 이 스크립트는 블록 스토리지 디바이스를 클러스터의 모든 작업자 노드에 추가하고 각 작업자 노드가 블록 스토리지 디바이스에 액세스할 수 있는 권한을 부여합니다. 스크립트의 끝에 클러스터에서 지속적 볼륨을 작성하기 위해 나중에 사용할 수 있는 `pv-<cluster_name>.yaml` YAML 파일이 생성됩니다. 
+7.  `mkpvyaml` 컨테이너를 빌드하고 실행하십시오. 이미지에서 컨테이너를 실행하면 `mkpvyaml.py` 스크립트가 실행됩니다. 이 스크립트는 블록 스토리지 디바이스를 클러스터의 모든 작업자 노드에 추가하고 각 작업자 노드가 블록 스토리지 디바이스에 액세스할 수 있는 권한을 부여합니다. 스크립트의 끝에 클러스터에서 지속적 볼륨을 작성하기 위해 나중에 사용할 수 있는 `pv-<cluster_name>.yaml` YAML 파일이 생성됩니다.
     1.  `mkpvyaml` 컨테이너를 빌드하십시오.
         ```
         docker build -t mkpvyaml .
         ```
         {: pre}
-출력 예:
+        출력 예:
         ```
         Sending build context to Docker daemon   29.7kB
         Step 1/16 : FROM ubuntu:18.10
@@ -416,13 +418,13 @@ subcollection: containers
 
 3. 비 SDS 작업자 노드가 있는 동일한 구역에 블록 스토리지 디바이스를 작성하십시오.
 
-   **GB당 2IOPS로 20GB Endurance 블록 스토리지를 프로비저닝하기 위한 예제:**
+   **GB당 2개의 IOPS로 20GB Endurance 블록 스토리지를 프로비저닝하기 위한 예제:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **100IOPS로 20GB 성능 블록 스토리지를 프로비저닝하기 위한 예제:**
+   **100개의 IOPS로 20GB 성능 블록 스토리지를 프로비저닝하기 위한 예제:**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
@@ -502,7 +504,7 @@ subcollection: containers
 
 **시작하기 전에**:
 - 비SDS 작업자 노드에 원시, 포맷되지 않고, 마운트 해제된 블록 스토리지를 [자동](#automatic_block) 또는 [수동](#manual_block)으로 작성했는지 확인하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **비 SDS 작업자 노드에 원시 블록 스토리지를 연결하려면 다음을 수행하십시오**.
 1. PV 작성을 준비하십시오.  
@@ -575,7 +577,7 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>이전에 검색한 블록 스토리지 디바이스의 lun ID를 입력하십시오. </td>
+        <td>이전에 검색한 블록 스토리지 디바이스의 LUN ID를 입력하십시오. </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
@@ -645,3 +647,5 @@ subcollection: containers
 
 볼륨을 분리하려면 PV를 삭제하십시오. 분리된 볼륨은 여전히 특정 작업자 노드에서 액세스할 수 있도록 권한 부여되어 있으며 동일한 작업자 노드에 다른 볼륨을 연결하도록 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 스토리지 클래스로 새 PV를 작성하면 다시 연결됩니다. 이전에 분리한 볼륨을 다시 연결하지 않으려면 `ibmcloud sl block access-revoke` 명령을 사용하여 분리된 볼륨에 액세스하도록 작업자 노드에 권한을 부여하지 마십시오. 볼륨을 분리해도 IBM Cloud 인프라(SoftLayer) 계정에서 볼륨이 제거되지 않습니다. 볼륨에 대한 비용 청구를 취소하려면 수동으로 [IBM Cloud 인프라(SoftLayer) 계정에서 스토리지를 제거](/docs/containers?topic=containers-cleanup)해야 합니다.
 {: note}
+
+

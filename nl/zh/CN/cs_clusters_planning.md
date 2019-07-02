@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,656 +21,237 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# 规划集群和工作程序节点设置
+# 规划集群网络设置
 {: #plan_clusters}
-通过 {{site.data.keyword.containerlong}} 设计标准集群，以实现应用程序的最大可用性和容量。
+
+为 {{site.data.keyword.containerlong}} 集群设计网络设置，以满足工作负载和环境的需求。
 {: shortdesc}
 
-## 高可用性集群
-{: #ha_clusters}
+在 {{site.data.keyword.containerlong_notm}} 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。工作程序节点由 Kubernetes 主节点进行管理。工作程序节点与 Kubernetes 主节点、其他服务、因特网或其他专用网络之间的通信设置取决于如何设置 IBM Cloud Infrastructure (SoftLayer) 网络。
 
-跨多个工作程序节点、专区和集群分布应用程序时，用户不太可能会遇到停机时间。内置功能（例如负载均衡和隔离）可在主机、网络或应用程序发生潜在故障时更快恢复。
+是首次创建集群？请首先试用[教程](/docs/containers?topic=containers-cs_cluster_tutorial)，然后在准备好规划生产就绪型集群后返回此处。
+{: tip}
+
+要规划集群网络设置，请首先[了解集群网络基本信息](#plan_basics)。然后，可以查看适用于基于环境的场景的三个潜在集群网络设置，包括[运行面向因特网的应用程序工作负载](#internet-facing)、[使用受限公共访问权扩展内部部署数据中心](#limited-public)和[仅在专用网络上扩展内部部署数据中心](#private_clusters)。
+
+## 了解集群网络基本信息
+{: #plan_basics}
+
+创建集群时，必须选择联网设置，以便特定集群组件可以相互通信，并且能与集群外部的网络或服务进行通信。
 {: shortdesc}
 
-查看以下潜在的集群设置（按可用性程度从低到高排序）。
+* [工作程序到工作程序的通信](#worker-worker)：所有工作程序节点都必须能够在专用网络上相互通信。在许多情况下，必须允许跨多个专用 VLAN 进行通信，以支持不同 VLAN 和不同专区上的工作程序相互连接。
+* [工作程序与主节点的通信以及用户与主节点的通信](#workeruser-master)：工作程序节点和授权集群用户可以通过 TLS 在公用网络上或通过专用服务端点在专用网络上安全地与 Kubernetes 主节点进行通信。
+* [工作程序与其他 {{site.data.keyword.Bluemix_notm}} 服务或内部部署网络的通信](#worker-services-onprem)：允许工作程序节点安全地与其他 {{site.data.keyword.Bluemix_notm}} 服务（例如，{{site.data.keyword.registrylong}}）以及与内部部署网络进行通信。
+* [与在工作程序节点上运行的应用程序的外部通信](#external-workers)：允许向集群发出公共或专用请求，以及从集群向公共端点发出请求。
 
-![集群的高可用性](images/cs_cluster_ha_roadmap_multizone.png)
+### 工作程序到工作程序的通信
+{: #worker-worker}
 
-1. [单专区集群](#single_zone)，在一个工作程序池中具有多个工作程序节点。
-2. [多专区集群](#multizone)，跨一个区域内的多个专区分布工作程序节点。
-3. [多集群](#multiple_clusters)，跨专区或区域设置并通过全局负载均衡器连接。
-
-## 单专区集群
-{: #single_zone}
-
-要提高应用程序的可用性，并允许在一个工作程序节点在集群中不可用时进行故障转移，请向单专区集群添加更多工作程序节点。
+创建集群时，集群的工作程序节点会自动连接到专用 VLAN，并且可以选择连接到公用 VLAN。VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置，并为工作程序之间的连接提供通道。
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="单专区中集群的高可用性" width="230" style="width:230px; border-style: none"/>
+**工作程序节点的 VLAN 连接**</br>
+所有工作程序节点都必须连接到专用 VLAN，以便每个工作程序节点都可以向其他工作程序节点发送信息以及接收来自其他工作程序节点的信息。创建具有同时连接到公用 VLAN 的工作程序节点的集群时，工作程序节点可以通过公用 VLAN 和专用 VLAN（如果启用了专用服务端点）自动与 Kubernetes 主节点进行通信。公用 VLAN 还会提供公用网络连接，以便可以将集群中的应用程序公开到因特网。但是，如果需要保护应用程序不被公共接口访问，那么有若干选项可用于保护集群，例如使用 Calico 网络策略或将外部网络工作负载隔离到边缘工作程序节点。
+* 免费集群：在免费集群中，缺省情况下集群的工作程序节点会连接到 IBM 拥有的公用 VLAN 和专用 VLAN。因为是 IBM 控制 VLAN、子网和 IP 地址，所以无法创建多专区集群或向集群添加子网，而只能使用 NodePort 服务来公开应用程序。</dd>
+* 标准集群：在标准集群中，首次在某个专区中创建集群时，会自动在 IBM Cloud Infrastructure (SoftLayer) 帐户中供应该专区中的公用 VLAN 和专用 VLAN。如果指定工作程序节点必须仅连接到专用 VLAN，那么将自动供应该专区中的专用 VLAN。对于在该专区中创建的每个后续集群，可以指定要使用的 VLAN 对。可以复用为您创建的相同公用和专用 VLAN，因为多个集群可以共享 VLAN。
+有关 VLAN、子网和 IP 地址的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 中的联网概述](/docs/containers?topic=containers-subnets#basics)。
 
-缺省情况下，单专区集群会设置为使用名为 `default` 的工作程序池。工作程序池将使用集群创建期间所定义的相同配置（如机器类型）的工作程序节点分组在一起。可以通过[调整现有工作程序池大小](/docs/containers?topic=containers-clusters#resize_pool)或[添加新的工作程序池](/docs/containers?topic=containers-clusters#add_pool)，向集群添加更多工作程序节点。
+**工作程序节点跨子网和 VLAN 进行通信**</br>
+在多种情况下，必须允许集群中的组件跨多个专用 VLAN 进行通信。例如，如果要创建多专区集群，如果集群有多个 VLAN，或者如果同一 VLAN 上有多个子网，那么同一 VLAN 中不同子网上的工作程序节点或不同 VLAN 中的工作程序节点无法自动相互通信。您必须为 IBM Cloud Infrastructure (SoftLayer) 帐户启用虚拟路由和转发 (VRF) 或 VLAN 生成。
 
-添加更多工作程序节点时，可以跨多个工作程序节点分布应用程序实例。如果一个工作程序节点停止运行，可用工作程序节点上的应用程序实例会继续运行。Kubernetes 会自动重新安排不可用工作程序节点中的 pod，以确保应用程序的性能和容量。要确保 pod 均匀分布在不同工作程序节点上，请实现 [pod 亲缘关系](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
+* [虚拟路由和转发 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)：VRF 支持基础架构帐户中的所有专用 VLAN 和子网相互通信。此外，需要 VRF 来允许工作程序与主节点通过专用服务端点进行通信，以及与支持专用服务端点的其他 {{site.data.keyword.Bluemix_notm}} 实例进行通信。要启用 VRF，请运行 `ibmcloud account update --service-endpoint-enable true`。此命令输出将提示您开具支持案例，以便为帐户启用 VRF 和服务端点。VRF 会使帐户的 VLAN 生成选项失效，因为所有 VLAN 都能够进行通信。</br></br>启用 VRF 后，任何连接到同一 {{site.data.keyword.Bluemix_notm}} 帐户中的任何专用 VLAN 的系统都可以与集群工作程序节点进行通信。您可以通过应用 [Calico 专用网络策略](/docs/containers?topic=containers-network_policies#isolate_workers)，将集群与专用网络上的其他系统相隔离。</dd>
+* [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)：如果无法或者不希望启用 VRF（例如，如果不需要主节点在专用网络上可供访问，或者如果是使用网关设备通过公用 VLAN 来访问主节点），请启用 VLAN 生成。例如，如果您有现有网关设备，然后添加了集群，那么不会在该网关设备上配置为集群订购的新可移植子网，但 VLAN 生成会启用子网之间的路由。要启用 VLAN 生成，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者来启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。如果选择启用 VLAN 生成而不是 VRF，那么无法启用专用服务端点。
 
-**可以将单专区集群转换为多专区集群吗？**</br>
-如果集群位于某个[受支持的多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中，那么可以这样做。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+</br>
 
+### 工作程序与主节点的通信以及用户与主节点的通信
+{: #workeruser-master}
 
-**必须使用多专区集群吗？**</br>
-不是。您可以根据需要创建任意数量的单专区集群。实际上，为了简化管理，或者在集群必须位于特定[单专区城市](/docs/containers?topic=containers-regions-and-zones#zones)中时，您可能更愿意使用单专区集群。
-
-**在单个专区中可以有高可用性主节点吗？**</br>
-可以。在单个专区中，主节点具有高可用性，在分别用于 Kubernetes API 服务器、etcd、调度程序和控制器管理器的不同物理主机上包含多个副本，以防止发生中断，例如在主节点更新期间。要避免受到专区故障的影响，可以执行以下操作：
-* [在支持多专区的专区中创建集群](/docs/containers?topic=containers-plan_clusters#multizone)，其中主节点在各专区中分布。
-* [创建多个集群](#multiple_clusters)并使用全局负载均衡器连接这些集群。
-
-## 多专区集群
-{: #multizone}
-
-通过 {{site.data.keyword.containerlong_notm}}，可以创建多专区集群。使用工作程序池跨多个工作程序节点和专区分布应用程序时，用户不太可能会遇到停机时间。通过内置功能（如负载均衡），可在主机、网络或应用程序发生潜在专区故障时更快恢复。如果一个专区中的资源停止运行，集群工作负载仍会在其他专区中运行。
+必须设置通信信道，以便工作程序节点可以与 Kubernetes 主节点建立连接。您可通过启用仅公共服务端点、公共和专用服务端点或仅专用服务端点，允许工作程序节点与 Kubernetes 主节点进行通信。
 {: shortdesc}
 
-**什么是工作程序池？**</br>
-工作程序池是具有相同类型模板（例如，机器类型、CPU 和内存）的工作程序节点的集合。在创建集群时，会自动为您创建缺省工作程序池。要使工作程序节点分布在跨专区的池中、将工作程序节点添加到池或者更新工作程序节点，那么可以使用新的 `ibmcloud ks worker-pool` 命令。
+为了保护通过公共和专用服务端点进行的通信，在创建集群时，{{site.data.keyword.containerlong_notm}} 会自动设置 Kubernetes 主节点与工作程序节点之间的 OpenVPN 连接。工作程序通过 TLS 证书与主节点进行安全对话，主节点通过 OpenVPN 连接与工作程序进行对话。
 
-**仍可以使用独立工作程序节点吗？**</br>
-支持独立工作程序节点的先前集群设置，但不推荐使用。确保[向集群添加工作程序池](/docs/containers?topic=containers-clusters#add_pool)，然后[使用工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)来组织工作程序节点，以取代独立工作程序节点。
+**仅公共服务端点**</br>
+如果您不希望或无法为帐户启用 VRF，那么工作程序节点可以通过公共服务端点在公用 VLAN 上自动连接到 Kubernetes 主节点。
+* 工作程序节点和主节点之间的通信通过公共服务端点在公用网络上安全地建立。
+* 主节点仅可供授权集群用户通过公共服务端点公共访问。例如，集群用户可以安全地通过因特网访问 Kubernetes 主节点，以运行 `kubectl` 命令。
 
-**可以将单专区集群转换为多专区集群吗？**</br>
-如果集群位于某个[受支持的多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中，那么可以这样做。请参阅[从独立工作程序节点更新到工作程序池](/docs/containers?topic=containers-update#standalone_to_workerpool)。
+**公共和专用服务端点**</br>
+要使主节点可供集群用户公共或专用访问，可以启用公共和专用服务端点。{{site.data.keyword.Bluemix_notm}} 帐户中需要 VRF，因此必须为帐户启用服务端点。要启用 VRF 和服务端点，请运行 `ibmcloud account update --service-endpoint-enable true`。
+* 如果工作程序节点连接到公用和专用 VLAN，那么工作程序节点与主节点之间的通信将通过专用服务端点在专用网络上建立，以及通过公共服务端点在公用网络上建立。通过将工作程序与主节点的流量一半通过公共端点路由，一半通过专用端点路由，可保护主节点到工作程序的通信不受公共或专用网络潜在中断的影响。如果工作程序节点仅连接到专用 VLAN，那么工作程序节点与主节点之间的通信将仅通过专用服务端点在专用网络上建立。
+* 主节点可供授权集群用户通过公共服务端点公共访问。如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 VPN 连接或 {{site.data.keyword.Bluemix_notm}} Direct Link 与专用网络连接，那么主节点可通过专用服务端点供专用访问。请注意，您必须[通过专用负载均衡器公开主节点端点](/docs/containers?topic=containers-clusters#access_on_prem)，以便用户可以通过 VPN 或 {{site.data.keyword.Bluemix_notm}} Direct Link 连接访问主节点。
 
+**仅专用服务端点**</br>
+要使主节点仅可供专用访问，可以启用专用服务端点。{{site.data.keyword.Bluemix_notm}} 帐户中需要 VRF，因此必须为帐户启用服务端点。要启用 VRF 和服务端点，请运行 `ibmcloud account update --service-endpoint-enable true`。请注意，使用仅专用服务端点不会发生任何计费或计量的带宽费用。
+* 工作程序节点与主节点之间的通信通过专用服务端点在专用网络上建立。
+* 如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 VPN 连接或 DirectLink 与专用网络连接，那么主节点可供专用访问。请注意，您必须[通过专用负载均衡器公开主节点端点](/docs/containers?topic=containers-clusters#access_on_prem)，以便用户可以通过 VPN 或 DirectLink 连接访问主节点。
 
-### 我想了解有关多专区集群设置的更多信息
-{: #mz_setup}
+</br>
 
-<img src="images/cs_cluster_multizone-ha.png" alt="多专区集群的高可用性" width="500" style="width:500px; border-style: none"/>
+### 工作程序与其他 {{site.data.keyword.Bluemix_notm}} 服务或内部部署网络的通信
+{: #worker-services-onprem}
 
-您可以向集群添加更多专区，以在一个区域内跨多个专区的工作程序池中复制工作程序节点。多专区集群旨在跨工作程序节点和专区均匀安排 pod，以确保可用性和故障恢复。如果工作程序节点未跨专区均匀分布，或者其中一个专区中的容量不足，那么 Kubernetes 调度程序可能无法安排所有请求的 pod。结果，pod 可能会进入**暂挂**状态，直到有足够的容量可用为止。如果要更改缺省行为，以使 Kubernetes 调度程序在多个专区中以最佳分布方式分布 pod，请使用 `preferredDuringSchedulingIgnoredDuringExecution` [pod 亲缘关系策略](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature)。
-
-**为什么需要工作程序节点位于 3 个专区中？**</br>在 3 个专区中分布工作负载可确保应用程序的高可用性，以防一个或两个专区不可用的情况，同时这也使集群设置更符合成本效益。您可能会问为什么？下面是一个示例。
-
-假设您需要具有 6 个核心的工作程序节点来处理应用程序的工作负载。要使集群的可用性更高，您具有以下选项：
-
-- **在另一个专区中复制资源：**使用此选项时，会有 2 个工作程序节点，每个节点在每个专区中有 6 个核心，总计 12 个核心。</br>
-- **在 3 个专区中分布资源：**使用此选项时，每个专区会部署 3 个核心，总容量为 9 个核心。要处理工作负载，在同一时间必须有两个专区在正常运行。如果一个专区不可用，那么其他两个专区可以处理工作负载。如果两个专区不可用，那么剩余 3 个核心将处理工作负载。每个区域部署 3 个核心意味着机器更小，从而降低了成本。</br>
-
-**如何设置我的 Kubernetes 主节点？**</br>在[多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中创建集群时，会自动部署高可用性 Kubernetes 主节点，并在该大城市的各专区中分布三个副本。例如，如果集群位于 `dal10`、`dal12` 或 `dal13` 专区中，那么 Kubernetes 主节点的副本会在达拉斯多专区大城市中的各专区中进行分布。
-
-**Kubernetes 主节点变得不可用时会发生什么情况？**</br>[Kubernetes 主节点](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)是用于保持集群正常启动并运行的主组件。主节点将集群资源及其配置存储在充当集群单个事实点的 etcd 数据库中。Kubernetes API 服务器是从工作程序节点到主节点的所有集群管理请求或者想要与集群资源交互时的主入口点。<br><br>如果主节点发生故障，那么工作负载将继续在工作程序节点上运行，但是无法使用 `kubectl` 命令来处理集群资源或查看集群运行状况，直至主节点中的 Kubernetes API 服务器恢复运行。如果在主节点停运期间 pod 停止运行，那么在工作程序节点可再次访问 Kubernetes API 服务器之前，将无法重新调度 pod。<br><br>在主节点停运期间，您仍可以针对 {{site.data.keyword.containerlong_notm}} API 运行 `ibmcloud ks` 命令以处理基础架构资源，例如，工作程序节点或 VLAN。如果通过向集群添加或从中除去工作程序节点来更改当前集群配置，那么在主节点恢复运行前，更改不会发生。
-
-在主节点停运期间，请勿重新启动或重新引导工作程序节点。此操作会从工作程序节点中除去 pod。因为 Kubernetes API 服务器不可用，因此无法将 pod 重新调度到集群中的其他工作程序节点。
-{: important}
-
-
-要保护集群不受 Kubernetes 主节点故障的影响或在多专区集群不可用的区域中保护集群，可以[设置多个集群并通过全局负载均衡器连接](#multiple_clusters)。
-
-**是否必须执行任何操作从而使主节点可与不同专区中的工作程序进行通信？**</br>
-是。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
-
-**如何允许用户通过公用因特网访问应用程序？**</br>
-可以使用 Ingress 应用程序负载均衡器 (ALB) 或 LoadBalancer 服务来公开应用程序。
-
-- **Ingress 应用程序负载均衡器 (ALB)：**缺省情况下，会自动在集群的每个专区中创建并启用公共 ALB。此外，还会自动创建并部署集群的 Cloudflare 多专区负载均衡器 (MZLB)，从而对于每个区域存在 1 个 MZLB。MZLB 将 ALB 的 IP 地址放在同一主机名后面，并且对这些 IP 地址启用运行状况检查，以确定它们是否可用。例如，如果工作程序节点位于美国东部区域的 3 个专区中，那么主机名 `yourcluster.us-east.containers.appdomain.cloud` 具有 3 个 ALB IP 地址。MZLB 运行状况检查会检查区域的每个专区中的公共 ALB IP，并根据这些运行状况检查使 DNS 查找结果保持更新。有关更多信息，请参阅 [Ingress 组件和体系结构](/docs/containers?topic=containers-ingress#planning)。
-
-- **LoadBalancer 服务：**LoadBalancer 服务只需在一个专区中设置。应用程序的入局请求会从一个专区路由到其他专区中的所有应用程序实例。如果此专区变得不可用，那么可能无法通过因特网访问应用程序。考虑到单专区故障，您可以在其他专区中设置更多 LoadBalancer 服务。有关更多信息，请参阅高可用性 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer#multi_zone_config)。
-
-**是否可为多专区集群设置持久性存储器？**</br>
-对于高可用性持久性存储器，请使用云服务，例如 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)。您还可以尝试软件定义的存储 (SDS) 解决方案，例如使用 [SDS 机器](#sds)的 [Portworx](/docs/containers?topic=containers-portworx#portworx)。有关更多信息，请参阅[多专区集群持久性存储选项的比较](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
-
-NFS 文件和块存储器不可跨专区共享。持久卷只能在实际存储设备所在的专区中使用。如果想要继续使用集群中的现有 NFS 文件或块存储器，那么必须将区域和专区标签应用于现有持久卷。这些标签可帮助 kube-scheduler 确定在何处安排使用持久卷的应用程序。运行以下命令并将 `<mycluster>` 替换为您的集群名称。
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-```
-{: pre}
-
-**我已创建多专区集群。为什么仍然只有一个专区？如何向集群添加专区？**</br>
-如果是[使用 CLI 创建多专区集群](/docs/containers?topic=containers-clusters#clusters_cli)的，那么会创建集群，但您必须将专区添加到工作程序池才能完成该过程。要跨多个专区，集群必须位于[多专区大城市位置](/docs/containers?topic=containers-regions-and-zones#zones)中。要向集群添加专区，并跨专区分布工作程序节点，请参阅[向集群添加专区](/docs/containers?topic=containers-clusters#add_zone)。
-
-### 目前管理集群的方式会有哪些变化？
-{: #mz_new_ways}
-
-引入工作程序池后，可以使用一组新的 API 和命令来管理集群。可以在 [CLI 文档页面](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)中或通过在终端中运行 `ibmcloud ks help` 来查看这些新命令。
+允许工作程序节点安全地与其他 {{site.data.keyword.Bluemix_notm}} 服务（例如，{{site.data.keyword.registrylong}}）以及与内部部署网络进行通信。
 {: shortdesc}
 
-下表比较了几种常见集群管理操作的旧方法和新方法。
-<table summary="该表显示了执行多专区命令的新方法的描述。每行从左到右阅读，其中第一列是描述，第二列是旧方法，第三列是新的多专区方法。">
-<caption>多专区工作程序池命令的新方法。</caption>
-  <thead>
-  <th>描述</th>
-  <th>旧的独立工作程序节点</th>
-  <th>新的多专区工作程序池</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>向集群添加工作程序节点。</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code>，用于添加独立工作程序节点。</p></td>
-    <td><ul><li>要添加与现有池不同的机器类型，请创建新的工作程序池：<code>ibmcloud ks worker-pool-create</code> [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)。</li>
-    <li>要向现有池添加工作程序节点，请调整池中每个专区的节点数：<code>ibmcloud ks worker-pool-resize</code> [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)。</li></ul></td>
-    </tr>
-    <tr>
-    <td>从集群中除去工作程序节点。</td>
-    <td><code>ibmcloud ks worker-rm</code>，仍可以使用此命令从集群中删除有问题的工作程序节点。</td>
-    <td><ul><li>如果工作程序池不均衡（例如，除去工作程序节点后），请对其进行重新均衡：<code>ibmcloud ks worker-pool-rebalance</code> [命令](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)。</li>
-    <li>要减少池中的工作程序节点数，请调整每个专区的工作程序节点数（最小值为 1）：<code>ibmcloud ks worker-pool-resize</code> [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)。</li></ul></td>
-    </tr>
-    <tr>
-    <td>将新的 VLAN 用于工作程序节点。</td>
-    <td><p class="deprecated">添加使用新的专用或公用 VLAN 的新工作程序节点：<code>ibmcloud ks worker-add</code>。</p></td>
-    <td>将工作程序池设置为使用不同于先前所用的公用或专用 VLAN：<code>ibmcloud ks zone-network-set</code> [命令](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)。</td>
-    </tr>
-  </tbody>
-  </table>
+**与其他 {{site.data.keyword.Bluemix_notm}} 服务通过专用或公用网络进行通信**</br>
+工作程序节点可以通过 IBM Cloud Infrastructure (SoftLayer) 专用网络，自动、安全地与支持专用服务端点的其他 {{site.data.keyword.Bluemix_notm}} 服务（例如，{{site.data.keyword.registrylong}}）进行通信。如果 {{site.data.keyword.Bluemix_notm}} 服务不支持专用服务端点，那么工作程序节点必须连接到公用 VLAN，这样才能通过公用网络安全地与服务进行通信。
 
-## 通过全局负载均衡器连接的多个集群
-{: #multiple_clusters}
+如果使用 Calico 网络策略来锁定集群中的公用网络，那么可能需要允许访问要在 Calico 策略中使用的服务的公共和专用 IP 地址。如果使用的是网关设备，例如虚拟路由器设备 (Vyatta)，那么必须[允许访问要使用的服务的专用 IP 地址](/docs/containers?topic=containers-firewall#firewall_outbound)（这是要在网关设备防火墙中使用的服务）。
+{: note}
 
-要保护应用程序不受 Kubernetes 主节点故障的影响以及对于多专区集群不可用的区域保护应用程序，可以在一个区域的不同专区中创建多个集群，并通过全局负载均衡器将集群连接在一起。
+**使用 {{site.data.keyword.BluDirectLink}} 通过专用网络与内部部署数据中心内的资源进行通信**</br>
+要将集群与内部部署数据中心（例如，与 {{site.data.keyword.icpfull_notm}}）相连接，可以设置 [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link)。通过 {{site.data.keyword.Bluemix_notm}} Direct Link，您可以在远程网络环境和 {{site.data.keyword.containerlong_notm}} 之间创建直接专用连接，而无需通过公用因特网进行路由。
+
+**使用 strongSwan IPSec VPN 连接通过公用网络与内部部署数据中心内的资源进行通信**
+* 连接到公用和专用 VLAN 的工作程序节点：直接在集群中设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/about.html)。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPSec) 协议组，通过因特网提供安全的端到端通信信道。要在集群与内部部署网络之间设置安全连接，请在集群的 pod 中直接[配置和部署 strongSwan IPSec VPN 服务](/docs/containers?topic=containers-vpn#vpn-setup)。
+* 仅连接到专用 VLAN 的工作程序节点：在网关设备上设置 IPSec VPN 端点，例如虚拟路由器设备 (Vyatta)。然后，在集群中[配置 strongSwan IPSec VPN 服务](/docs/containers?topic=containers-vpn#vpn-setup)，以在网关上使用 VPN 端点。如果不想使用 strongSwan，那么可以[直接使用 VRA 设置 VPN 连接](/docs/containers?topic=containers-vpn#vyatta)。
+
+
+</br>
+
+### 与在工作程序节点上运行的应用程序的外部通信
+{: #external-workers}
+
+允许从集群外部向在工作程序节点上运行的应用程序发出公共或专用流量请求。
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="多个集群的高可用性" width="700" style="width:700px; border-style: none"/>
+**流至集群应用程序的专用流量**</br>
+在集群中部署应用程序后，您可能希望使应用程序仅可供位于集群所在专用网络上的用户和服务访问。专用负载均衡非常适用于使应用程序可供集群外部的请求使用，而无需向一般公众公开应用程序。还可以使用专用负载均衡来测试访问，请求路由以及对应用程序进行其他配置后，再使用公用网络服务向公众公开应用程序。要允许从集群外部向应用程序发出专用流量请求，可以创建专用 Kubernetes 联网服务，例如专用 NodePort、NLB 和 Ingress ALB。然后可以使用 Calico DNAT 前策略来阻止流至专用联网服务的公共 NodePort 的流量。有关更多信息，请参阅[规划专用外部负载均衡](/docs/containers?topic=containers-cs_network_planning#private_access)。
 
-要跨多个集群均衡工作负载，必须设置全局负载均衡器，并将应用程序负载均衡器 (ALB) 或 LoadBalancer 服务的 IP 地址添加到域。通过添加这些 IP 地址，可以在集群之间路由入局流量。要使全局负载均衡器检测其中一个集群是否不可用，请考虑向每个 IP 地址添加基于 ping 操作的运行状况检查。设置此检查后，DNS 提供程序会定期对添加到域的 IP 地址执行 ping 操作。如果一个 IP 地址变为不可用，那么不会再将流量发送到此 IP 地址。但是，Kubernetes 不会在可用集群中工作程序节点上自动重新启动不可用集群中的 pod。如果希望 Kubernetes 在可用集群中自动重新启动可用集群中的 pod，请考虑设置[多专区集群](#multizone)。
+**流至集群应用程序的公共流量**</br>
+要使应用程序可供从公共因特网进行外部访问，可以创建公共 NodePort、网络负载均衡器 (NLB) 和 Ingress 应用程序负载均衡器 (ALB)。公用联网服务通过向应用程序提供公共 IP 地址和（可选）公共 URL 来连接到此公用网络接口。应用程序以公共方式公开时，具有公共服务 IP 地址或为应用程序设置的 URL 的任何人都可以向应用程序发送请求。然后，可以使用 Calico DNAT 前策略来控制流至公用联网服务的流量，例如仅将来自特定源 IP 地址或 CIDR 的流量列入白名单，而阻塞其他所有流量。有关更多信息，请参阅[规划公共外部负载均衡](/docs/containers?topic=containers-cs_network_planning#private_access)。
 
-**为什么需要 3 个集群位于 3 个专区中？**</br>类似于[在多专区集群中使用 3 个专区](#multizone)，您可以通过设置跨专区的 3 个集群，为应用程序提供更高可用性。此外，还可以通过购买更小的机器来处理工作负载，从而降低成本。
+要获得额外的安全性，请将联网工作负载隔离到边缘工作程序节点。边缘工作程序节点通过减少允许外部访问的连接到公用 VLAN 的工作程序节点，并隔离联网工作负载，可以提高集群的安全性。[将工作程序节点标注为边缘节点](/docs/containers?topic=containers-edge#edge_nodes)时，NLB 和 ALB pod 会仅部署到这些指定的工作程序节点。此外，要阻止其他工作负载在边缘节点上运行，可以[感染边缘节点](/docs/containers?topic=containers-edge#edge_workloads)。在 Kubernetes V1.14 和更高版本中，可以将公共和专用 NLB 和 ALB 部署到边缘节点。例如，如果工作程序节点仅连接到专用 VLAN，但您需要允许对集群中的应用程序进行公共访问，那么可以创建边缘工作程序池，其中边缘节点连接到公用和专用 VLAN。可以将公共 NLB 和 ALB 部署到这些边缘节点，以确保只有这些工作程序可处理公共连接。
 
-**如果要跨区域设置多个集群该怎么做？**</br>可以在一个地理位置的不同区域（如美国南部和美国东部）或不同地理位置（如美国南部和欧洲中部）中设置多个集群。这两种设置为应用程序提供的可用性级别相同，但同时在数据共享和数据复制方面增加了复杂性。在大多数情况下，保持在同一地理位置中就足以满足需求。但是，如果您的用户分布在世界各地，那么最好设置用户所在的集群，以便用户在向应用程序发送请求时不会遇到很长的等待时间。
+如果工作程序节点仅连接到专用 VLAN，并且您使用网关设备来提供工作程序节点和集群主节点之间的通信，那么还可以将该设备配置为公共或专用防火墙。要允许从集群外部向应用程序发出公共或专用流量请求，可以创建公共或专用 NodePort、NLB 和 Ingress ALB。然后，必须在网关设备防火墙中[打开必需的端口和 IP 地址](/docs/containers?topic=containers-firewall#firewall_inbound)，以允许通过公用或专用网络流至这些服务的入站流量。
+{: note}
 
-**要设置用于多个集群的全局负载均衡器，请执行以下操作：**
-
-1. 在多个专区或区域中[创建集群](/docs/containers?topic=containers-clusters#clusters)。
-2. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
-3. 在每个集群中，使用[应用程序负载均衡器 (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) 或 [LoadBalancer 服务](/docs/containers?topic=containers-loadbalancer)来公开应用程序。
-4. 对于每个集群，列出 ALB 或 LoadBalancer 服务的公共 IP 地址。
-   - 要列出集群中所有支持公共的 ALB 的 IP 地址，请运行以下命令：
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
-
-   - 要列出 LoadBalancer 服务的 IP 地址，请运行以下命令：
-     ```
-    kubectl describe service <myservice>
-    ```
-     {: pre}
-
-          **LoadBalancer Ingress** IP 地址是分配给 LoadBalancer 服务的可移植 IP 地址。
+<br />
 
 
-4.  使用 {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) 来设置全局负载均衡器，或设置您自己的全局负载均衡器。
+## 场景：在集群中运行面向因特网的应用程序工作负载
+{: #internet-facing}
 
-    **要使用 CIS 全局负载均衡器**：
-    1.  通过执行 [{{site.data.keyword.Bluemix_notm}} Internet Services (CIS) 入门](/docs/infrastructure/cis?topic=cis-getting-started#getting-started)中的步骤 1 - 5 来设置服务。这些步骤会全程指导您供应服务实例，添加应用程序域，配置名称服务器以及创建 DNS 记录。请为收集的每个 ALB 或负载均衡器 IP 地址创建 DNS 记录。这些 DNS 记录会将应用程序域映射到所有集群 ALB 或负载均衡器，并确保在循环周期中将对应用程序域的请求转发到集群。
-    2. 为 ALB 或负载均衡器[添加运行状况检查](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check)。可以对所有集群中的 ALB 或负载均衡器使用相同的运行状况检查，或者创建特定运行状况检查以用于特定集群。
-    3. 通过添加集群的 ALB 或负载均衡器 IP，为每个集群[添加源池](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool)。例如，如果您有 3 个集群，每个集群有 2 个 ALB，请创建 3 个源池，每个池 2 个 ALB IP 地址。为创建的每个源池添加运行状况检查。
-    4. [添加全局负载均衡器](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers)。
+在此场景中，您希望在集群中运行的工作负载可供来自因特网的请求访问，以便最终用户可以访问应用程序。您希望使用的选项是在集群中隔离公共访问，并控制允许向集群发出哪些公共请求。此外，工作程序对要连接到集群的任何 {{site.data.keyword.Bluemix_notm}} 服务都具有自动访问权。
+{: shortdesc}
 
-    **要使用自己的全局负载均衡器**：
-    1. 通过将所有支持公共的 ALB 和 LoadBalancer 服务的 IP 地址添加到域，将域配置为将入局流量路由到 ALB 或 LoadBalancer 服务。
-    2. 对于每个 IP 地址，启用基于 ping 操作的运行状况检查，以便 DNS 提供程序可以检测到运行状况欠佳的 IP 地址。如果检测到运行状况欠佳的 IP 地址，那么流量不会再路由到此 IP 地址。
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="运行面向因特网的工作负载的集群的体系结构图"/>
+ <figcaption>运行面向因特网的工作负载的集群的体系结构</figcaption>
+</figure>
+</p>
 
-## 专用集群
+要实现此设置，请通过将工作程序节点连接到公用和专用 VLAN 来创建集群。
+
+如果创建了使用公用和专用 VLAN 的集群，那么日后无法从该集群中除去所有公用 VLAN。从集群除去所有公用 VLAN 将导致多个集群组件停止工作。请改为创建仅连接到专用 VLAN 的新工作程序池。
+{: note}
+
+可以选择允许通过公用和专用网络或仅通过公用网络进行工作程序与主节点的通信以及用户与主节点的通信。
+* 公共和专用服务端点：帐户必须启用了 VRF 并支持使用服务端点。工作程序节点与主节点之间的通信通过专用服务端点在专用网络上建立，以及通过公共服务端点在公用网络上建立。主节点可供授权集群用户通过公共服务端点公共访问。
+* 公共服务端点：如果您不希望或无法为帐户启用 VRF，那么工作程序节点和授权集群用户可以通过公共服务端点在公用网络上自动连接到 Kubernetes 主节点。
+
+工作程序节点可以自动、安全地与支持专用服务端点的其他 {{site.data.keyword.Bluemix_notm}} 服务通过 IBM Cloud Infrastructure (SoftLayer) 专用网络进行通信。如果 {{site.data.keyword.Bluemix_notm}} 服务不支持专用服务端点，那么工作程序可以通过公用网络安全地与服务进行通信。可以将 Calico 网络策略用于公用网络或专用网络隔离，以锁定工作程序节点的公共或专用接口。您可能需要允许访问要在这些 Calico 隔离策略中使用的服务的公共和专用 IP 地址。
+
+要将集群中的应用程序公开到因特网，可以创建公共网络负载均衡器 (NLB) 或 Ingress 应用程序负载均衡器 (ALB) 服务。通过创建标注为边缘节点的工作程序节点的池，可以提高集群的安全性。公用网络服务的 pod 会部署到边缘节点，以便将外部流量工作负载隔离到集群中的仅少数几个工作程序。您可以通过创建 Calico DNAT 前策略（例如，白名单和黑名单策略），进一步控制流至用于公开应用程序的网络服务的公共流量。
+
+如果工作程序节点需要访问 {{site.data.keyword.Bluemix_notm}} 帐户外部的专用网络中的服务，那么可以在集群中配置并部署 strongSwan IPSec VPN 服务，或者利用 {{site.data.keyword.Bluemix_notm}} Direct Link 服务来连接到这些网络。
+
+准备好开始将集群用于此方案了吗？规划[高可用性](/docs/containers?topic=containers-ha_clusters)和[工作程序节点](/docs/containers?topic=containers-planning_worker_nodes)设置后，请参阅[创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)。
+
+<br />
+
+
+## 场景：将内部部署数据中心扩展到专用网络上的集群，并添加受限公共访问权
+{: #limited-public}
+
+在此场景中，您希望在集群中运行的工作负载可供内部部署数据中心内的服务、数据库或其他资源访问。但是，您可能需要提供对集群的受限公共访问权，并且希望确保在集群中控制和隔离任何公共访问。例如，您可能需要工作程序访问不支持专用服务端点而必须通过公用网络进行访问的 {{site.data.keyword.Bluemix_notm}} 服务。或者，您可能需要提供对集群中运行的应用程序的受限公共访问权。
+{: shortdesc}
+
+要实现此集群设置，可以[使用边缘节点和 Calico 网络策略](#calico-pc)或[使用网关设备](#vyatta-gateway)来创建防火墙。
+
+### 使用边缘节点和 Calico 网络策略
+{: #calico-pc}
+
+通过将边缘节点用作公共网关，并将 Calico 网络策略用作公共防火墙，允许与集群建立受限公共连接。
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="使用边缘节点和 Calico 网络策略进行安全公共访问的集群的体系结构图"/>
+ <figcaption>使用边缘节点和 Calico 网络策略进行安全公共访问的集群的体系结构</figcaption>
+</figure>
+</p>
+
+使用此设置时，可通过将工作程序节点仅连接到专用 VLAN 来创建集群。帐户必须启用了 VRF 并支持使用专用服务端点。
+
+如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 [VPN 连接](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking)或 [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) 与专用网络连接，那么 Kubernetes 主节点可通过专用服务端点进行访问。但是，与 Kubernetes 主节点通过专用服务端点进行的通信必须经过 <code>166.X.X.X</code> IP 地址范围，这不能通过 VPN 连接或 {{site.data.keyword.Bluemix_notm}} Direct Link 进行路由。可以通过使用专用网络负载均衡器 (NLB) 来为集群用户公开主节点的专用服务端点。专用 NLB 将主节点的专用服务端点作为内部 <code>10.X.X.X</code> IP 地址范围公开，用户可以使用 VPN 或 {{site.data.keyword.Bluemix_notm}} Direct Link 连接对这些地址进行访问。如果仅启用专用服务端点，那么可以使用 Kubernetes 仪表板或临时启用公共服务端点来创建专用 NLB。
+
+接下来，可以创建连接到公用和专用 VLAN 并标注为边缘节点的工作程序节点的池。边缘节点通过仅允许外部访问少数几个工作程序节点，并将联网工作负载隔离到这些工作程序，可以提高集群的安全性。
+
+工作程序节点可以自动、安全地与支持专用服务端点的其他 {{site.data.keyword.Bluemix_notm}} 服务通过 IBM Cloud Infrastructure (SoftLayer) 专用网络进行通信。如果 {{site.data.keyword.Bluemix_notm}} 服务不支持专用服务端点，那么连接到公用 VLAN 的边缘节点可以通过公用网络安全地与服务进行通信。可以将 Calico 网络策略用于公用网络或专用网络隔离，以锁定工作程序节点的公共或专用接口。您可能需要允许访问要在这些 Calico 隔离策略中使用的服务的公共和专用 IP 地址。
+
+要提供对集群中应用程序的专用访问权，可以创建专用网络负载均衡器 (NLB) 或 Ingress 应用程序负载均衡器 (ALB)，以仅将应用程序公开到专用网络。通过创建 Calico DNAT 前策略（例如，用于阻止工作程序节点上的公共 NodePort 的策略），可以阻止流至用于公开应用程序的这些网络服务的所有公共流量。如果需要提供对集群中应用程序的受限公共访问权，那么可以创建公共 NLB 或 ALB 来公开应用程序。然后，必须将应用程序部署到这些边缘节点，以便 NLB 或 ALB 可以将公共流量定向到应用程序 pod。您可以通过创建 Calico DNAT 前策略（例如，白名单和黑名单策略），进一步控制流至用于公开应用程序的网络服务的公共流量。专用和公用网络服务的 pod 会部署到边缘节点，以便将外部流量工作负载限制为仅流至集群中的少数几个工作程序。  
+
+要安全地访问 {{site.data.keyword.Bluemix_notm}} 外部和其他内部部署网络上的服务，可以在集群中配置并部署 strongSwan IPSec VPN 服务。strongSwan 负载均衡器 pod 会部署到边缘池中的一个工作程序，其中 pod 会通过加密 VPN 隧道在公用网络上建立与内部部署网络的安全连接。或者，可以使用 {{site.data.keyword.Bluemix_notm}} Direct Link 服务仅通过专用网络将集群连接到内部部署数据中心。
+
+准备好开始将集群用于此方案了吗？规划[高可用性](/docs/containers?topic=containers-ha_clusters)和[工作程序节点](/docs/containers?topic=containers-planning_worker_nodes)设置后，请参阅[创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)。
+
+</br>
+
+### 使用网关设备
+{: #vyatta-gateway}
+
+通过将网关设备（例如，虚拟路由器设备 (Vyatta)）配置为公共网关和防火墙，允许与集群建立受限公共连接。
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="使用网关设备进行安全公共访问的集群的体系结构图"/>
+ <figcaption>使用网关设备进行安全公共访问的集群的体系结构</figcaption>
+</figure>
+</p>
+
+如果仅在专用 VLAN 上设置了工作程序节点，并且您不希望或无法为帐户启用 VRF，那么必须配置网关设备，以通过公用网络在工作程序节点与主节点之间提供网络连接。例如，可以选择设置[虚拟路由器设备](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra)或 [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)。
+
+可以使用定制网络策略来设置网关设备，以便为集群提供专用网络安全性，检测网络侵入并进行补救。在公用网络上设置防火墙时，必须为每个区域打开必需的端口和专用 IP 地址，以便主节点和工作程序节点可以通信。如果还为专用网络配置了此防火墙，那么还必须打开必需的端口和专用 IP 地址，以允许工作程序节点之间的通信，并且使集群通过专用网络访问基础架构资源。此外，还必须为帐户启用 VLAN 生成，以便子网可以在同一 VLAN 上以及不同 VLAN 之间进行路由。
+
+要将工作程序节点和应用程序安全地连接到内部部署网络或 {{site.data.keyword.Bluemix_notm}} 外部的服务，请在网关设备上设置 IPSec VPN 端点，并在集群中设置 strongSwan IPSec VPN 服务以使用网关 VPN 端点。如果不想使用 strongSwan，那么可以使用 VRA 直接设置 VPN 连接。
+
+工作程序节点可以通过网关设备与其他 {{site.data.keyword.Bluemix_notm}} 服务和 {{site.data.keyword.Bluemix_notm}} 外部的公共服务安全地进行通信。可以将防火墙配置为仅允许访问要使用的服务的公共和专用 IP 地址。
+
+要提供对集群中应用程序的专用访问权，可以创建专用网络负载均衡器 (NLB) 或 Ingress 应用程序负载均衡器 (ALB)，以仅将应用程序公开到专用网络。如果需要提供对集群中应用程序的受限公共访问权，那么可以创建公共 NLB 或 ALB 来公开应用程序。由于所有流量都流经网关设备防火墙，因此可以通过在防火墙中打开服务的端口和 IP 地址来允许流至用于公开应用程序的网络服务的入站流量，以控制流至这些服务的公共和专用流量。
+
+准备好开始将集群用于此方案了吗？规划[高可用性](/docs/containers?topic=containers-ha_clusters)和[工作程序节点](/docs/containers?topic=containers-planning_worker_nodes)设置后，请参阅[创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)。
+
+<br />
+
+
+## 场景：将内部部署数据中心扩展到专用网络上的集群
 {: #private_clusters}
 
-缺省情况下，{{site.data.keyword.containerlong_notm}} 将集群设置为具有专用 VLAN 和公用 VLAN 的访问权。专用 VLAN 用于确定分配给每个工作程序节点的专用 IP 地址，这将为每个工作程序节点提供一个专用网络接口。
-公用 VLAN 允许工作程序节点自动、安全地连接到主节点。
+在此场景中，您希望在 {{site.data.keyword.containerlong_notm}} 集群中运行工作负载。但是，您希望这些工作负载仅可供内部部署数据中心内的服务、数据库或其他资源（例如，{{site.data.keyword.icpfull_notm}}）访问。集群工作负载可能需要访问支持通过专用网络进行通信的其他若干 {{site.data.keyword.Bluemix_notm}} 服务，例如 {{site.data.keyword.cos_full_notm}}。
 {: shortdesc}
 
-但是，出于安全或合规性需求，您可能希望创建专用 VLAN 或专用服务端点集群。用于创建专用集群的选项取决于您拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户类型以及所需的公用和专用 VLAN 设置。有关以下每个设置的更多信息，请参阅[规划集群网络](/docs/containers?topic=containers-cs_network_ov)。
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="在专用网络上连接到内部部署数据中心的集群的体系结构图"/>
+ <figcaption>在专用网络上连接到内部部署数据中心的集群的体系结构</figcaption>
+</figure>
+</p>
 
-您是否有要设置为仅专用的现有集群？要了解如何使用新的 VLAN 来添加工作程序池或修改现有工作程序池，请查看[更改工作程序节点 VLAN 连接](/docs/containers?topic=containers-cs_network_cluster#change-vlans)。
-{: note}
+要实现此设置，可通过将工作程序节点仅连接到专用 VLAN 来创建集群。要仅通过专用服务端点在专用网络上提供集群主节点和工作程序节点之间的连接，帐户必须启用 VRF 并支持使用服务端点。由于启用了 VRF 时专用网络上的任何资源都可看到集群，因此可以通过应用 Calico 专用网络策略，将集群与专用网络上的其他系统相隔离。
 
-**公用和专用 VLAN 上的启用 VRF 的帐户、专用 Kubernetes 主节点和工作程序节点**</br>
-在运行 Kubernetes V1.11 或更高版本的集群中，可以将集群网络设置为使用公共和专用服务端点。启用专用服务端点后，Kubernetes 主节点与工作程序节点之间的通信始终通过该专用服务端点在专用 VLAN 上进行。即使为集群启用了公共服务端点，Kubernetes 主节点与工作程序节点之间的通信也保持在专用 VLAN 上进行。启用专用服务端点后，即无法将其禁用。您可以保留公共服务端点以用于通过因特网对 Kubernetes 主节点进行安全访问（例如，运行 `kubectl` 命令），也可以对仅专用服务端点的集群禁用公共服务端点。
+如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 [VPN 连接](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking)或 [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) 与专用网络连接，那么 Kubernetes 主节点可通过专用服务端点进行访问。但是，与 Kubernetes 主节点通过专用服务端点进行的通信必须经过 <code>166.X.X.X</code> IP 地址范围，这不能通过 VPN 连接或 {{site.data.keyword.Bluemix_notm}} Direct Link 进行路由。可以通过使用专用网络负载均衡器 (NLB) 来为集群用户公开主节点的专用服务端点。专用 NLB 将主节点的专用服务端点作为内部 <code>10.X.X.X</code> IP 地址范围公开，用户可以使用 VPN 或 {{site.data.keyword.Bluemix_notm}} Direct Link 连接对这些地址进行访问。如果仅启用专用服务端点，那么可以使用 Kubernetes 仪表板或临时启用公共服务端点来创建专用 NLB。
 
-**仅专用 VLAN 上的非 VRF 或支持 VRF 的帐户、Kubernetes 主节点和工作程序节点**</br>
-如果在仅专用 VLAN 上设置工作程序节点，那么这些工作程序节点无法在公用网络上自动公开其应用程序服务，并且在非 VRF 帐户中也无法连接到主节点。必须配置网关设备以在工作程序节点和主节点之间提供网络连接。
+工作程序节点可以自动、安全地与支持专用服务端点的其他 {{site.data.keyword.Bluemix_notm}} 服务（例如，{{site.data.keyword.registrylong}}）通过 IBM Cloud Infrastructure (SoftLayer) 专用网络进行通信。例如，{{site.data.keyword.cloudant_short_notm}} 的所有标准套餐实例的专用硬件环境都支持专用服务端点。如果 {{site.data.keyword.Bluemix_notm}} 服务不支持专用服务端点，那么集群无法访问该服务。
 
+要提供对集群中应用程序的专用访问权，可以创建专用网络负载均衡器 (NLB) 或 Ingress 应用程序负载均衡器 (ALB)。这些 Kubernetes 网络服务仅将应用程序公开到专用网络，以便连接到该 NLB IP 所在子网的任何内部部署系统都可以访问应用程序。
 
-对于非 VRF 帐户：如果创建了包含公用 VLAN 和专用 VLAN 的集群，那么日后无法从该集群中除去公用 VLAN。从集群除去所有公用 VLAN 将导致多个集群组件停止工作。请改为创建不包含公用 VLAN 的新集群。
-{: note}
-
-**公用和专用 VLAN 上的非 VRF 帐户、Kubernetes 主节点和工作程序节点**</br>
-对于大多数情况，集群设置都可以包含公用和专用 VLAN 上的工作程序节点。然后，可以通过使用 Calico 策略阻止公用 VLAN 流量，并将流量限制为精选边缘节点，从而锁定集群。
-
-## 工作程序池和工作程序节点
-{: #planning_worker_nodes}
-
-Kubernetes 集群由分组成工作程序节点池的工作程序节点组成，并由 Kubernetes 主节点进行集中监视和管理。集群管理员决定如何设置工作程序节点的集群，以确保集群用户具备在集群中部署和运行应用程序所需的所有资源。
-{:shortdesc}
-
-创建标准集群时，会在 IBM Cloud Infrastructure (SoftLayer) 中以您的名义订购具有相同内存、CPU 和磁盘空间规格（类型模板）的工作程序节点，然后将其添加到集群中的缺省工作程序节点池。为每个工作程序节点分配唯一的工作程序节点标识和域名，在创建集群后，不得更改该标识和域名。您可以选择虚拟服务器或物理（裸机）服务器。根据选择的硬件隔离级别，可以将虚拟工作程序节点设置为共享或专用节点。要将不同的类型模板添加到集群，请[创建其他工作程序池](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)。
-
-Kubernetes 限制了在一个集群中可以拥有的最大工作程序节点数。有关更多信息，请查看[工作程序节点和 pod 配额 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/setup/cluster-large/)。
-
-
-要确保始终有足够的工作程序节点来支持工作负载吗？请试用[集群自动缩放器](/docs/containers?topic=containers-ca#ca)。
-{: tip}
-
-<br />
-
-
-## 工作程序节点的可用硬件
-{: #shared_dedicated_node}
-
-在 {{site.data.keyword.Bluemix_notm}} 中创建标准集群时，选择工作程序池包含的工作程序节点是物理机器（裸机）还是在物理硬件上运行的虚拟机。还可以选择工作程序节点类型模板，或者内存、CPU 和其他机器规格（例如，磁盘存储器）组合。
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="标准集群中工作程序节点的硬件选项" style="width:700px; border-style: none"/>
-
-如果想要多个工作程序节点类型模板，那么必须为每个类型模板创建一个工作程序池。不能调整现有工作程序节点的大小，使其具有不同的资源，例如 CPU 或内存。创建免费集群时，工作程序节点会自动作为 IBM Cloud Infrastructure (SoftLayer) 帐户中的虚拟共享节点进行供应。
-在标准集群中，可以选择最适合工作负载的机器类型。规划时，请考虑有关总 CPU 和内存容量的[工作程序节点资源保留量](#resource_limit_node)。
-
-可以使用[控制台 UI](/docs/containers?topic=containers-clusters#clusters_ui) 或 [CLI](/docs/containers?topic=containers-clusters#clusters_cli) 来部署集群。
-
-选择以下一个选项以决定想要的工作程序池的类型。
-* [虚拟机](#vm)
-* [物理机器（裸机）](#bm)
-* [软件定义的存储 (SDS) 机器](#sds)
-
-### 虚拟机
-{: #vm}
-
-相对于裸机，使用虚拟机 (VM) 能以更具成本效益的价格获得更高灵活性、更短供应时间以及更多自动可扩展性功能。您可以将 VM 用于最通用的用例，例如测试和开发环境、编译打包和生产环境、微服务以及业务应用程序。但是，在性能方面会有所牺牲。如果需要针对 RAM 密集型、数据密集型或 GPU 密集型工作负载进行高性能计算，请使用[裸机](#bm)。
-{: shortdesc}
-
-**是想要使用共享还是专用硬件？**</br>
-创建标准虚拟集群时，必须选择是希望底层硬件由多个 {{site.data.keyword.IBM_notm}} 客户共享（多租户）还是仅供您专用（单租户）。
-
-
-* **在多租户、共享硬件设置中**：物理资源（如 CPU 和内存）在部署到同一物理硬件的所有虚拟机之间共享。要确保每个虚拟机都能独立运行，虚拟机监视器（也称为系统管理程序）会将物理资源分段成隔离的实体，并将其作为专用资源分配给虚拟机（系统管理程序隔离）。
-* **在单租户、专用硬件设置中**：所有物理资源都仅供您专用。您可以将多个工作程序节点作为虚拟机部署在同一物理主机上。与多租户设置类似，系统管理程序也会确保每个工作程序节点在可用物理资源中获得应有的份额。
-
-共享节点通常比专用节点更便宜，因为底层硬件的开销由多个客户分担。但是，在决定是使用共享还是专用节点时，可能需要咨询您的法律部门，以讨论应用程序环境所需的基础架构隔离和合规性级别。
-
-某些类型模板仅可用于一种类型的租户设置。例如，`m3c` VM 仅作为 `shared` 租户设置提供。
-{: note}
-
-**VM 有哪些常规功能部件？**</br>
-虚拟机使用本地磁盘（而不是存储区联网 (SAN)）来实现可靠性。可靠性优势包括在将字节序列化到本地磁盘时可提高吞吐量，以及减少因网络故障而导致的文件系统降级。每个 VM 具备 1000Mbps 联网速度、用于操作系统文件系统的 25 GB 主本地磁盘存储和用于数据（例如，容器运行时和 `kubelet`）的 100 GB 辅助本地磁盘存储。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。
-
-**如果我拥有旧机器类型该怎么办？**</br>
-例如，如果集群具有不推荐使用的 `x1c` 或较旧的 Ubuntu 16 `x2c` 工作程序节点类型模板，您可以[将集群更新为具有 Ubuntu 18 `x3c` 工作程序节点](/docs/containers?topic=containers-update#machine_type)。
-
-
-**哪些虚拟机类型模板可用？**</br>
-工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用[裸机](#bm)或 [SDS](#sds) 机器类型。
-
-{: #vm-table}
-<table>
-<caption>{{site.data.keyword.containerlong_notm}} 中的可用虚拟机类型。</caption>
-<thead>
-<th>名称和用例</th>
-<th>核心数/内存</th>
-<th>主/辅助磁盘</th>
-<th>网络速度</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>虚拟，u3c.2x4</strong>：对于快速测试、概念验证和其他轻型工作负载，请使用此最小大小的 VM。</td>
-<td>2 / 4 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，b3c.4x16</strong>：对于测试和开发以及其他轻型工作负载，请选择此均衡的 VM。</td>
-<td>4 / 16 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，b3c.16x64</strong>：对于中型工作负载，请选择此均衡的 VM。</td></td>
-<td>16 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，b3c.32x128</strong>：对于中型到大型工作负载（例如，具有大量并发用户的数据库和动态 Web 站点），请选择此均衡的 VM。</td>
-<td>32 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，b3c.56x242</strong>：对于大型工作负载（例如，具有大量并发用户的数据库和多个应用程序），请选择此均衡的 VM。</td>
-<td>56 / 242 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，c3c.16x16</strong>：如果想要针对轻型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
-<td>16 / 16GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，c3c.16x32</strong>：如果想要针对轻型到中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
-<td>16 / 32GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，c3c.32x32</strong>：如果想要针对中型工作负载完全均衡来自工作程序节点的计算资源，请使用此类型模板。</td>
-<td>32 / 32GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，c3c.32x64</strong>：如果想要针对中型工作负载提供工作程序节点中比率为 1:2 的 CPU 和内存资源，请使用此类型模板。</td>
-<td>32 / 64GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>虚拟，m3c.8x64</strong>：如果想要针对需要更多内存的轻型到中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
-<td>8 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，m3c.16x128</strong>：如果想要针对需要更多内存的中型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
-<td>16 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，m3c.30x240</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅在达拉斯中可用且作为 `--hardware shared` 租户提供。</td>
-<td>30 / 240 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，m3c.48x384</strong>：如果想要针对需要更多内存的中型到大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
-<td>48 / 384 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，m3c.56x448</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
-<td>56 / 448 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>虚拟，m3c.64x512</strong>：如果想要针对需要更多内存的大型工作负载（例如，{{site.data.keyword.Db2_on_Cloud_short}} 等数据库）提供比率为 1:8 的 CPU 和内存资源，请使用此类型模板。仅作为 `--hardware shared` 租户提供。</td>
-<td>64 / 512 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-</tbody>
-</table>
-
-### 物理机器（裸机）
-{: #bm}
-
-可以将工作程序节点作为单租户物理服务器（也称为裸机）进行供应。
-{: shortdesc}
-
-**裸机与 VM 有何不同？**</br>
-通过裸机，您可以直接访问机器上的物理资源，例如内存或 CPU。此设置无需虚拟机系统管理程序将物理资源分配给在主机上运行的虚拟机。相反，裸机机器的所有资源都仅供工作程序专用，因此您无需担心“吵闹的邻居”共享资源或降低性能。物理机器类型的本地存储器大于虚拟机，并且某些类型具有用于提高数据可用性的 RAID。工作程序节点上的本地存储器仅用于短期处理，更新或重新装入工作程序节点时将擦除主磁盘和辅助磁盘。对于持久性存储器解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。
-
-**除了更优秀的性能规格外，是否有些事情是裸机能做而 VM 无法做到的？**</br>
-是。利用裸机，可以选择启用“可信计算”来验证工作程序节点是否被篡改。如果在创建集群期间未启用信任，但希望日后启用，那么可以使用 `ibmcloud ks feature-enable` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。启用信任后，日后无法将其禁用。可以创建不含信任的新集群。有关节点启动过程中的信任工作方式的更多信息，请参阅[具有可信计算的 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#trusted_compute)。可信计算可用于特定的裸机机器类型。运行 `ibmcloud ks machine-types <zone>` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后，可以通过查看 **Trustable** 字段来了解哪些机器支持信任。例如，`mgXc` GPU 类型模板不支持可信计算。
-
-除了可信计算外，还可以利用 {{site.data.keyword.datashield_full}} (Beta)。{{site.data.keyword.datashield_short}} 与 Intel® Software Guard Extensions (SGX) 和 Fortanix® 技术相集成，以便保护使用中的 {{site.data.keyword.Bluemix_notm}} 容器工作负载代码和数据。应用程序代码和数据在 CPU 固化的相关可调度单元组中运行，这是工作程序节点上用于保护应用程序关键方面的可信内存区域，有助于使代码和数据保持机密性且不被修改。如果您或您的公司由于内部策略、政府法规或行业合规性要求而需要数据敏感度，那么此解决方案可帮助您移至云。示例用例包括金融机构和医疗保健机构，或实施了需要内部部署云解决方案的政府政策的国家或地区。
-
-**裸机听起来很不错！有什么因素会影响我立即订购吗？**</br>
-裸机服务器比虚拟服务器更昂贵，最适用于需要更多资源和主机控制的高性能应用程序。
-
-裸机服务器按月计费。如果您在月底之前取消裸机服务器，那么仍将收取该整月的费用。订购或取消裸机服务器后，该过程在 IBM Cloud Infrastructure (SoftLayer) 帐户中手动完成。因此，完成此过程可能需要超过一个工作日的时间。
-{: important}
-
-**我可订购哪些裸机类型模板？**</br>
-工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用 [VM](#vm) 或 [SDS](#sds) 机器类型。
-
-裸机针对不同用例进行了优化，例如，RAM 密集型、数据密集型或 GPU 密集型工作负载。
-
-选择具有正确的存储配置的机器类型以支持您的工作负载。一些类型模板具有以下磁盘和存储配置的组合。例如，一些类型模板可能具有一个 SATA 主磁盘以及一个原始 SSD 辅助磁盘。
-
-* **SATA**：磁性旋转磁盘存储设备，通常用于存储操作系统文件系统的工作程序节点的主磁盘。
-* **SSD**：用于高性能数据的固态驱动器存储设备。
-* **原始**：存储设备未进行格式化，全部容量可供使用。
-* **RAID**：存储设备针对冗余和高性能分布数据，根据 RAID 级别的不同而变化。例如，可供使用的磁盘容量会有所不同。
-
-
-{: #bm-table}
-<table>
-<caption>{{site.data.keyword.containerlong_notm}} 中的可用裸机类型。</caption>
-<thead>
-<th>名称和用例</th>
-<th>核心数/内存</th>
-<th>主/辅助磁盘</th>
-<th>网络速度</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>RAM 密集型裸机，mr3c.28x512</strong>：最大限度提高可用于工作程序节点的 RAM。</td>
-<td>28 / 512 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU 裸机，mg3c.16x128</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 1 块 Tesla K80 物理卡，每块卡有 2 个图形处理单元 (GPU)，共有 2 个 GPU。</td>
-<td>16 / 128 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU 裸机，mg3c.28x256</strong>：对于数学密集型工作负载（例如，高性能计算、机器学习或 3D 应用程序），请选择此类型。此类型模板有 2 块 Tesla K80 物理卡，每块卡有 2 个 GPU，共有 4 个 GPU。</td>
-<td>28 / 256 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>数据密集型裸机，md3c.16x64.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
-<td>16 / 64 GB</td>
-<td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>数据密集型裸机，md3c.28x512.4x4tb</strong>：要将大量本地磁盘存储（包括用于提高数据可用性的 RAID）用于分布式文件系统、大型数据库和大数据分析等工作负载，请使用此类型。</td>
-<td>28 / 512 GB</td>
-<td>2 个 2 TB RAID1 / 4 个 4 TB SATA RAID10</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>均衡裸机，mb3c.4x32</strong>：用于所需计算资源比虚拟机所提供的计算资源更多的均衡工作负载。此类型模板还可以通过 Intel® Software Guard Extensions (SGX) 启用，以便您可以使用 <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta) <img src="../icons/launch-glyph.svg" alt="外部链接图标"></a> 来加密数据内存。</td>
-<td>4 / 32 GB</td>
-<td>2 TB SATA / 2 TB SATA</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>均衡裸机，mb3c.16x64</strong>：用于所需计算资源比虚拟机所提供的计算资源更多的均衡工作负载。</td>
-<td>16 / 64 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### 软件定义的存储 (SDS) 机器
-{: #sds}
-
-软件定义的存储 (SDS) 类型模板是供应有物理本地存储的其他原始磁盘的物理机器。与本地主磁盘和本地辅助磁盘不同，这些原始磁盘在工作程序节点更新或重新装入期间不会被擦除。因为数据与计算节点并存，SDS 机器适合高性能工作负载。
-{: shortdesc}
-
-**何时使用 SDS 类型模板？**</br>
-在下列情况下，通常使用 SDS 机器：
-*  如果对集群使用 SDS 附加组件（例如，[Portworx](/docs/containers?topic=containers-portworx#portworx)），请使用 SDS 机器。
-*  如果应用程序是需要本地存储器的 [StatefulSet ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)，那么可使用 SDS 机器并供应 [Kubernetes 本地持久卷 (beta) ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/)。
-*  您可能具有需要其他原始本地存储器的定制应用程序。
-
-有关更多存储解决方案的信息，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。
-
-**我可订购哪些 SDS 类型模板？**</br>
-工作程序节点类型模板因专区而变化。下表包含最新版本的类型模板，例如 `x3c` Ubuntu 18 工作程序节点类型模板，而不是较旧的 `x2c` Ubuntu 16 工作程序节点类型模板。要查看专区中可用的机器类型，请运行 `ibmcloud ks machine-types <zone>`。您还可以复查可用[裸机](#bm)或 [VM](#vm) 机器类型。
-
-选择具有正确的存储配置的机器类型以支持您的工作负载。一些类型模板具有以下磁盘和存储配置的组合。例如，一些类型模板可能具有一个 SATA 主磁盘以及一个原始 SSD 辅助磁盘。
-
-* **SATA**：磁性旋转磁盘存储设备，通常用于存储操作系统文件系统的工作程序节点的主磁盘。
-* **SSD**：用于高性能数据的固态驱动器存储设备。
-* **原始**：存储设备未进行格式化，全部容量可供使用。
-* **RAID**：存储设备针对冗余和高性能分布数据，根据 RAID 级别的不同而变化。例如，可供使用的磁盘容量会有所不同。
-
-
-{: #sds-table}
-<table>
-<caption>{{site.data.keyword.containerlong_notm}} 中的可用 SDS 机器类型。</caption>
-<thead>
-<th>名称和用例</th>
-<th>核心数/内存</th>
-<th>主/辅助磁盘</th>
-<th>其他原始磁盘</th>
-<th>网络速度</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>具有 SDS 的裸机，ms3c.4x32.1.9tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
-<td>4 / 32 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>1.9 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>具有 SDS 的裸机，ms3c.16x64.1.9tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
-<td>16 / 64 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>1.9 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>具有 SDS 的裸机，ms3c.28x256.3.8tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
-<td>28 / 256 GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>3.8 TB 原始 SSD（设备路径：`/dev/sdc`）</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>具有 SDS 的裸机，ms3c.28x512.4x3.8tb.ssd</strong>：如果需要额外的本地存储器以提高性能，请使用支持软件定义的存储 (SDS) 的这一磁盘密集型类型模板。</td>
-<td>28 / 512 GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>4 个磁盘，3.8 TB 原始 SSD（设备路径：`/dev/sdc`、`/dev/sdd`、`/dev/sde` 和 `/dev/sdf`）</td>
-<td>10000 Mbps</td>
-</tr>
-</tbody>
-</table>
-
-## 工作程序节点资源保留量
-{: #resource_limit_node}
-
-{{site.data.keyword.containerlong_notm}} 会设置计算资源保留量，用于限制每个工作程序节点上的可用计算资源。保留的内存和 CPU 资源不能由工作程序节点上的 pod 使用，因此每个工作程序节点上的可分配资源会变少。最初部署 pod 时，如果工作程序节点没有足够的可分配资源，部署会失败。此外，如果 pod 超过工作程序节点资源限制，那么会逐出这些 pod。在 Kubernetes 中，此限制称为[硬逐出阈值 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds)。
-{:shortdesc}
-
-如果可用的 CPU 或内存少于工作程序节点保留量，Kubernetes 会开始逐出 pod，以复原足够的计算资源。如果有其他工作程序节点可用，那么 pod 会重新安排到该工作程序节点上。如果频繁逐出 pod，请向集群添加更多工作程序节点，或者对 pod 设置[资源限制 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container)。
-
-在工作程序节点上保留的资源取决于工作程序节点随附的 CPU 和内存量。{{site.data.keyword.containerlong_notm}} 定义了内存和 CPU 层，如下表中所示。如果工作程序节点随附多个层中的计算资源，那么将为每个层保留一定百分比的 CPU 和内存资源。
-
-要查看工作程序节点上当前使用的计算资源量，请运行 [`kubectl top node` ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/#top)。
-{: tip}
-
-<table summary="此表显示了工作程序节点内存保留量（按层）。">
-<caption>工作程序节点内存保留量（按层）。</caption>
-<thead>
-<tr>
-  <th>内存层</th>
-  <th>保留的 % 或保留量</th>
-  <th>`b3c.4x16` 工作程序节点 (16 GB) 示例</th>
-  <th>`mg1c.28x256` 工作程序节点 (256 GB) 示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>前 4 GB (0-4 GB)</td>
-  <td>25% 的内存</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>接下来的 4 GB (5-8 GB)</td>
-  <td>20% 的内存</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>接下来的 8 GB (9-16 GB)</td>
-  <td>10% 的内存</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>接下来 112 GB (17-128 GB)</td>
-  <td>6% 的内存</td>
-  <td>不适用</td>
-  <td>6.72 GB</td>
-</tr>
-<tr>
-  <td>剩余 GB（129 GB 及更多）</td>
-  <td>2% 的内存</td>
-  <td>不适用</td>
-  <td>2.54 GB</td>
-</tr>
-<tr>
-  <td>用于 [`kubelet` 逐出 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/) 的其他保留量</td>
-  <td>100 MB</td>
-  <td>100 MB（固定量）</td>
-  <td>100 MB（固定量）</td>
-</tr>
-<tr>
-  <td>**总保留量**</td>
-  <td>**（变化）**</td>
-  <td>**2.7 GB，共 16 GB**</td>
-  <td>**11.96 GB，共 256 GB**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="此表显示了工作程序节点 CPU 保留量（按层）。">
-<caption>工作程序节点 CPU 保留量（按层）。</caption>
-<thead>
-<tr>
-  <th>CPU 层</th>
-  <th>保留的 %</th>
-  <th>`b3c.4x16` 工作程序节点（4 个核心）示例</th>
-  <th>`mg1c.28x256` 工作程序节点（28 个核心）示例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>第 1 个核心（核心 1）</td>
-  <td>6% 的核心</td>
-  <td>0.06 的核心</td>
-  <td>0.06 的核心</td>
-</tr>
-<tr>
-  <td>后 2 个核心（核心 2-3）</td>
-  <td>1% 的核心</td>
-  <td>0.02 的核心</td>
-  <td>0.02 的核心</td>
-</tr>
-<tr>
-  <td>后 2 个核心（核心 4-5）</td>
-  <td>0.5% 的核心</td>
-  <td>0.005 的核心</td>
-  <td>0.01 的核心</td>
-</tr>
-<tr>
-  <td>剩余核心（核心 6 及更多核心）</td>
-  <td>0.25% 的核心</td>
-  <td>不适用</td>
-  <td>0.0575 的核心</td>
-</tr>
-<tr>
-  <td>**总保留量**</td>
-  <td>**（变化）**</td>
-  <td>**0.085 的核心，共 4 个核心**</td>
-  <td>**0.1475 的核心，共 28 个核心**</td>
-</tr>
-</tbody>
-</table>
-
-## 自动恢复工作程序节点
-{: #planning_autorecovery}
-
-关键组件（例如，`containerd`、`kubelet`、`kube-proxy` 和 `calico`）必须正常运行才能拥有正常运行的 Kubernetes 工作程序节点。随着时间变化，这些组件可能会中断，这可能使工作程序节点处于非正常运行状态。非正常运行的工作程序节点会使集群总容量下降，并可能导致应用程序产生停机时间。
-{:shortdesc}
-
-可以[为工作程序节点配置运行状况检查并启用自动恢复](/docs/containers?topic=containers-health#autorecovery)。如果自动恢复根据配置的检查，检测到运行状况欠佳的工作程序节点，那么自动恢复会触发更正操作，例如在工作程序节点上重装操作系统。有关自动恢复的工作方式的更多信息，请参阅[自动恢复博客 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/)。
-
-<br />
-
+准备好开始将集群用于此方案了吗？规划[高可用性](/docs/containers?topic=containers-ha_clusters)和[工作程序节点](/docs/containers?topic=containers-planning_worker_nodes)设置后，请参阅[创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)。

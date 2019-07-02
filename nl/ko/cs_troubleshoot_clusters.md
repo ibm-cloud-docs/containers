@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -60,6 +61,11 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 {: screen}
 
 ```
+Worker not found. Review {{site.data.keyword.Bluemix_notm}} infrastructure permissions.
+```
+{: screen}
+
+```
 {{site.data.keyword.Bluemix_notm}} Infrastructure Exception:
 The user does not have the necessary {{site.data.keyword.Bluemix_notm}}
 Infrastructure permissions to add servers
@@ -77,33 +83,76 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-클러스터를 작성할 권한이 없습니다. 클러스터를 작성하려면 다음 권한이 필요합니다.
-*  IBM Cloud 인프라(SoftLayer)에 대한 **수퍼유저** 역할 또는 최소 [이 최소한의 인프라 권한](/docs/containers?topic=containers-access_reference#infra).
-*  계정 레벨에서 {{site.data.keyword.containerlong_notm}}에 대한 **관리자** 플랫폼 관리 역할.
-*  계정 레벨에서 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 플랫폼 관리 역할. {{site.data.keyword.registryshort_notm}}의 정책을 리소스 그룹 레벨로 제한하지 마십시오. 2018년 10월 4일 이전에 {{site.data.keyword.registrylong_notm}}의 사용을 시작한 경우에는 [{{site.data.keyword.Bluemix_notm}} IAM 정책 적용을 사용으로 설정](/docs/services/Registry?topic=registry-user#existing_users)했는지 확인하십시오.
-
-인프라 관련 오류의 경우, 자동 계정 연결이 사용으로 설정된 후 작성된 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정에는 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 이미 설정되어 있습니다. 추가 구성 없이 클러스터의 인프라 리소스를 구매할 수 있습니다. 종량과금제 계정을 보유 중이며 이 오류 메시지를 수신하는 경우, 인프라 리소스에 액세스하기 위한 올바른 IBM Cloud 인프라(SoftLayer) 계정 인증 정보를 사용 중이지 않을 수 있습니다.
-
-기타 {{site.data.keyword.Bluemix_notm}} 계정 유형의 사용자가 표준 클러스터의 작성을 위해 자체 계정을 구성해야 합니다. 다른 계정 유형을 보유할 수 있는 경우의 예는 다음과 같습니다.
-* 사용자가 {{site.data.keyword.Bluemix_notm}} 플랫폼 계정보다 앞서는 기존 IBM Cloud 인프라(SoftLayer) 계정을 보유 중이며 이를 계속 사용하고자 합니다.
-* 사용자가 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하여 인프라 리소스를 프로비저닝하고자 합니다. 예를 들어, 비용 청구 용도로 다른 인프라 계정을 사용하도록 팀 {{site.data.keyword.Bluemix_notm}} 계정을 설정할 수 있습니다.
-
-인프라 리소스를 프로비저닝하는 데 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하는 경우에는 계정에 [고아 클러스터](#orphaned)가 있을 수 있습니다.
+지역 및 리소스 그룹에 대해 설정된 인프라 인증 정보에는 적절한 [인프라 권한](/docs/containers?topic=containers-access_reference#infra)이 없습니다. 사용자의 인프라 권한은 일반적으로 지역 및 리소스 그룹에 대한 [API 키](/docs/containers?topic=containers-users#api_key)로 저장됩니다. 보다 드물게, [다른 {{site.data.keyword.Bluemix_notm}} 계정 유형](/docs/containers?topic=containers-users#understand_infra)을 사용하는 경우 [수동으로 인프라 인증 정보를 설정](/docs/containers?topic=containers-users#credentials)했을 수 있습니다. 인프라 리소스를 프로비저닝하는 데 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하는 경우에는 계정에 [고아 클러스터](#orphaned)가 있을 수 있습니다.
 
 {: tsResolve}
 계정 소유자는 인프라 계정 인증 정보를 올바르게 설정해야 합니다. 인증 정보는 사용 중인 인프라 계정의 유형에 따라 다릅니다.
 
-1.  인프라 계정에 대한 액세스 권한이 있는지 확인하십시오. [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/)에 로그인하고 메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **클래식 인프라**를 클릭하십시오. 메뉴가 표시되면 인프라 계정에 대한 액세스 권한이 있는 것입니다. 액세스 권한이 없으면 계정을 업그레이드하는 옵션이 표시됩니다.
-2.  클러스터가 종량과금제 계정과 함께 제공된 계정이 아닌 다른 인프라 계정을 사용하는지 확인하십시오.
-    1.  메뉴 ![메뉴 아이콘](../icons/icon_hamburger.svg "메뉴 아이콘")에서 **Kubernetes > 클러스터**를 클릭하십시오.
-    2.  테이블에서 클러스터를 선택하십시오.
-    3.  **개요** 탭에서 **인프라 사용자** 필드를 확인하십시오.
-        * **인프라 사용자** 필드가 나타나지 않으면 사용자가 인프라 및 플랫폼 계정에 대해 동일한 인증 정보를 사용하는 연결된 종량과금제 계정을 보유 중입니다.
-        * **인프라 사용자** 필드가 나타나는 경우, 클러스터는 종량과금제 계정과 함께 제공된 계정이 아닌 다른 인프라 계정을 사용합니다. 이러한 서로 다른 인증 정보는 지역 내의 모든 클러스터에 적용됩니다.
-3.  인프라 권한 문제의 해결 방법을 결정하기 위해 보유하고자 하는 계정의 유형을 결정하십시오. 대부분의 사용자의 경우에는 기본적으로 연결된 종량과금제 계정만으로 충분합니다.
-    *  연결된 종량과금제 {{site.data.keyword.Bluemix_notm}} 계정: [API 키가 올바른 권한으로 설정되어 있는지 확인](/docs/containers?topic=containers-users#default_account)하십시오. 클러스터가 다른 인프라 계정을 사용 중이면 프로세스의 일부로서 해당 인증 정보를 설정 해제해야 합니다.
-    *  다른 {{site.data.keyword.Bluemix_notm}} 플랫폼 및 인프라 계정: 인프라 포트폴리오에 액세스할 수 있는지와 [인프라 계정 인증 정보가 올바른 권한으로 설정되어 있는지](/docs/containers?topic=containers-users#credentials) 확인하십시오.
-4.  인프라 계정에 클러스터의 작업자 노드가 표시되지 않는 경우에는 [클러스터가 고아 상태가 되었는지](#orphaned) 확인해야 합니다.
+시작하기 전에, [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  지역 및 리소스 그룹의 인프라 권한에 사용되는 사용자 인증 정보를 식별하십시오.
+    1.  클러스터의 지역 및 리소스 그룹에 대한 API 키를 확인하십시오.
+        ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+        출력 예:
+        ```
+        Getting information about the API key owner for cluster <cluster_name>...
+        OK
+        Name                Email   
+        <user_name>         <name@email.com>
+        ```
+        {: screen}
+    2.  지역 및 리소스 그룹에 대한 인프라 계정이 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하도록 수동으로 설정되었는지 확인하십시오.
+        ```
+        ibmcloud ks credential-get --region <us-south>
+        ```
+        {: pre}
+
+        **인증 정보가 다른 계정을 사용하도록 설정된 경우의 출력 예**입니다. 이 경우, 다른 사용자의 인증 정보가 이전 단계에서 검색한 API 키에 저장되더라도 사용자의 인프라 인증 정보가 대상으로 지정한 지역 및 리소스 그룹에 사용됩니다.
+        ```
+        OK
+        Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
+        ```
+        {: screen}
+
+        **인증 정보가 다른 계정을 사용하도록 설정되지 않은 경우의 출력 예**입니다. 이 경우, 이전 단계에서 검색한 API 키 소유자는 지역 및 리소스 그룹에 사용된 인프라 인증 정보를 보유하고 있습니다.
+        ```
+        FAILED
+        No credentials set for resource group <resource_group_name>.: The user credentials could not be found. (E0051)
+        ```
+        {: screen}
+2.  사용자가 보유하고 있는 인프라 권한을 유효성 검증하십시오.
+    1.  지역 및 리소스 그룹에 대해 제안되고 필요한 인프라 권한을 나열하십시오.
+        ```
+        ibmcloud ks infra-permissions-get --region <region>
+        ```
+        {: pre}
+    2.  [API 키에 대한 인프라 인증 정보 소유자 또는 수동으로 설정된 계정에 올바른 권한이 있는지](/docs/containers?topic=containers-users#owner_permissions) 확인하십시오.
+    3.  필요한 경우 지역 및 리소스 그룹에 대한 [API 키](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) 또는 [수동으로 설정된](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) 인프라 인증 정보 소유자를 변경할 수 있습니다. 
+3.  변경된 권한으로 권한이 부여된 사용자가 클러스터에 대한 인프라 오퍼레이션을 수행할 수 있는지 테스트하십시오. 
+    1.  예를 들어, 작업자 노드를 삭제하려고 할 수 있습니다.
+        ```
+        ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+    2.  작업자 노드가 제거되었는지 확인하십시오.
+        ```
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+
+        작업자 노드가 제거되었는지 여부에 대한 출력 예입니다. 작업자 노드가 삭제되었으므로 `worker-get` 오퍼레이션이 실패합니다. 인프라 권한이 올바르게 설정되어 있습니다.
+        ```
+        FAILED
+        The specified worker node could not be found. (E0011)
+        ```
+        {: screen}
+
+    3.  작업자 노드가 제거되지 않은 경우 디버깅을 계속하려면 [**상태(State)** 및 **상태(Status)** 필드](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)와 [작업자 노드에 대한 일반 문제](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues)를 검토하십시오. 
+    4.  수동으로 인증 정보를 설정하고 계속해서 인프라 계정에 클러스터의 작업자 노드가 표시되지 않는 경우에는 [클러스터가 고아 상태가 되었는지](#orphaned) 확인해야 합니다.
 
 <br />
 
@@ -162,7 +211,7 @@ CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패
 {: tsResolve}
 1. 클러스터의 작업자 노드를 나열하고 작업자 노드가 오랫동안 `Reloading` 상태가 아닌지 확인하십시오.
    ```
-  ibmcloud ks workers <cluster_name_or_id>
+   ibmcloud ks workers --cluster <cluster_name_or_id>
    ```
    {: pre}
 
@@ -190,7 +239,7 @@ CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패
 * 클러스터에 대한 액세스 권한이 없습니다.
 
 {: tsResolve}
-사용자 액세스 권한을 확인하려면 다음 작업을 수행하십시오.
+사용자 액세스 권한을 확인하려면 다음을 수행하십시오.
 
 1. 자신의 모든 사용자 권한을 나열하십시오.
     ```
@@ -270,10 +319,9 @@ CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패
     * 클러스터에 대해서는 액세스 권한이 있으나 해당 클러스터가 속한 리소스 그룹에 대해서는 액세스 권한이 없는 경우:
       1. 리소스 그룹을 대상으로 지정하지 마십시오. 이미 리소스 그룹을 대상으로 지정한 경우에는 이를 해제하십시오.
         ```
-        ibmcloud target -g none
+        ibmcloud target --unset-resource-group
         ```
         {: pre}
-        `none`이라는 이름의 리소스 그룹이 없으므로 이 명령은 실패합니다. 그러나 현재 리소스 그룹은 명령이 실패할 때 자동으로 대상에서 해제됩니다.
 
       2. 클러스터를 대상으로 지정하십시오.
         ```
@@ -285,10 +333,9 @@ CLI에서 `ibmcloud`, `kubectl` 또는 `calicoctl` 명령을 실행하면 실패
         1. 계정 소유자에게 해당 클러스터에 대한 [{{site.data.keyword.Bluemix_notm}}IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)을 지정해 달라고 요청하십시오.
         2. 리소스 그룹을 대상으로 지정하지 마십시오. 이미 리소스 그룹을 대상으로 지정한 경우에는 이를 해제하십시오.
           ```
-          ibmcloud target -g none
+          ibmcloud target --unset-resource-group
           ```
           {: pre}
-        `none`이라는 이름의 리소스 그룹이 없으므로 이 명령은 실패합니다. 그러나 현재 리소스 그룹은 명령이 실패할 때 자동으로 대상에서 해제됩니다.
         3. 클러스터를 대상으로 지정하십시오.
           ```
           ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
@@ -328,9 +375,9 @@ Instance ID inconsistent with worker records
 머신에서 하드웨어 문제가 발생하면 머신 ID가 {{site.data.keyword.containerlong_notm}} 작업자 레코드와 일치하지 않게 될 수 있습니다. IBM Cloud 인프라(SoftLayer)에서 이 문제를 해결하는 경우, 서비스가 식별하지 않는 시스템 내에서 컴포넌트가 변경될 수 있습니다.
 
 {: tsResolve}
-{{site.data.keyword.containerlong_notm}}가 머신을 다시 식별할 수 있도록 [베어메탈 작업자 노드를 다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)하십시오. **참고**: 다시 로드하면 머신의 [패치 버전](/docs/containers?topic=containers-changelog)도 업데이트됩니다.
+{{site.data.keyword.containerlong_notm}}가 머신을 다시 식별할 수 있도록 [베어메탈 작업자 노드를 다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)하십시오. **참고**: 다시 로드하면 머신의 [패치 버전](/docs/containers?topic=containers-changelog)도 업데이트됩니다.
 
-[베어메탈 작업자 노드를 삭제](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)할 수도 있습니다. **참고**: 베어메탈 인스턴스는 월별로 비용이 청구됩니다.
+[베어메탈 작업자 노드를 삭제](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)할 수도 있습니다. **참고**: 베어메탈 인스턴스는 월별로 비용이 청구됩니다.
 
 <br />
 
@@ -376,13 +423,13 @@ Instance ID inconsistent with worker records
     3.  인프라 탐색 분할창에서 **디바이스 > 디바이스 목록**을 클릭하십시오.
     4.  이전에 기록한 작업자 노드 ID를 검색하십시오.
     5.  해당 작업자 노드 ID를 찾을 수 없는 경우에는 이 작업자 노드가 이 인프라 계정에 프로비저닝되지 않은 것입니다. 다른 인프라 계정으로 전환하고 다시 시도하십시오.
-3.  `ibmcloud ks credential-set` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)을 사용하여 이전 단계에서 찾은, 클러스터 작업자 노드가 프로비저닝된 계정으로 인프라 인증 정보를 변경하십시오.
+3.  `ibmcloud ks credential-set` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)을 사용하여 이전 단계에서 찾은, 클러스터 작업자 노드가 프로비저닝된 계정으로 인프라 인증 정보를 변경하십시오.
     인프라 인증 정보에 대한 액세스 권한을 더 이상 보유하지 않으며 이를 가져올 수 없는 경우에는 {{site.data.keyword.Bluemix_notm}} 지원 케이스를 열어서 고아 클러스터를 제거해야 합니다.
     {: note}
-4.  [클러스터를 삭제](/docs/containers?topic=containers-clusters#remove)하십시오.
-5.  원하는 경우에는 인프라 인증 정보를 이전 계정으로 재설정하십시오. 전환한 계정과 다른 인프라 계정으로 클러스터를 작성한 경우에는 이러한 클러스터가 고아 상태가 될 수 있다는 점을 참고하십시오.
-    * 인증 정보를 다른 인프라 계정으로 설정하려면 `ibmcloud ks credential-set` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)을 사용하십시오.
-    * {{site.data.keyword.Bluemix_notm}} 종량과금제 계정에서 제공하는 기본 인증 정보를 사용하려면 `ibmcloud ks credential-unset` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)을 사용하십시오.
+4.  [클러스터를 삭제](/docs/containers?topic=containers-remove)하십시오.
+5.  원하는 경우에는 인프라 인증 정보를 이전 계정으로 재설정하십시오. 전환한 계정과 다른 인프라 계정으로 클러스터를 작성한 경우에는 이러한 클러스터가 고아 상태가 될 수 있다는 점을 유의하십시오.
+    * 인증 정보를 다른 인프라 계정으로 설정하려면 `ibmcloud ks credential-set` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)을 사용하십시오.
+    * {{site.data.keyword.Bluemix_notm}} 종량과금제 계정에서 제공하는 기본 인증 정보를 사용하려면 `ibmcloud ks credential-unset --region <region>` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)을 사용하십시오.
 
 <br />
 
@@ -402,13 +449,13 @@ Instance ID inconsistent with worker records
 마스터 노드와 작업자 노드 간의 OpenVPN 연결이 제대로 작동하지 않습니다.
 
 {: tsResolve}
-1. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+1. 클러스터용 다중 VLAN, 동일한 VLAN의 다중 서브넷 또는 다중 구역 클러스터가 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)을 사용으로 설정해야 합니다. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)하십시오. VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get --region <region>` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)을 사용하십시오. 
 2. OpenVPN 클라이언트 팟(Pod)을 다시 시작하십시오.
   ```
   kubectl delete pod -n kube-system -l app=vpn
   ```
   {: pre}
-3. 동일한 오류 메시지가 계속 표시되는 경우 VPN 팟(Pod)이 있는 작업자 노드가 비정상일 수 있습니다. VPN 팟(Pod)을 다시 시작하고 다른 작업자 노드로 다시 스케줄하려면 VPN 팟(Pod)이 있는 [작업자 노드를 유출, 드레인 및 다시 부팅](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)하십시오.
+3. 동일한 오류 메시지가 계속 표시되는 경우 VPN 팟(Pod)이 있는 작업자 노드가 비정상일 수 있습니다. VPN 팟(Pod)을 다시 시작하고 다른 작업자 노드로 다시 스케줄하려면 VPN 팟(Pod)이 있는 [작업자 노드를 유출, 드레인 및 다시 부팅](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)하십시오.
 
 <br />
 
@@ -417,7 +464,7 @@ Instance ID inconsistent with worker records
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
 
 ```
 Multiple services with the same name were found.
@@ -431,7 +478,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 {: tsResolve}
 `ibmcloud ks cluster-service-bind` 명령에서 서비스 인스턴스 이름 대신 서비스 GUID를 사용하십시오.
 
-1. [바인딩할 서비스 인스턴스가 포함된 지역에 로그인하십시오.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+1. [바인딩할 서비스 인스턴스가 포함된 {{site.data.keyword.Bluemix_notm}} 지역에 로그인하십시오.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 2. 서비스 인스턴스의 GUID를 가져오십시오.
   ```
@@ -447,7 +494,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
   {: screen}
 3. 서비스를 클러스터에 다시 바인딩하십시오.
   ```
-  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
   ```
   {: pre}
 
@@ -458,7 +505,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
 
 ```
 Binding service to a namespace...
@@ -505,7 +552,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
 4. 몇 분 동안 기다린 후 사용자가 서비스 바인드를 다시 시도하도록 하십시오.
 
-5. 그래도 문제점이 해결되지 않는 경우에는 {{site.data.keyword.Bluemix_notm}} IAM 권한이 비동기화되며 사용자가 직접 문제를 해결할 수 없습니다. 지원 케이스를 열어서 [IBM 지원 센터에 문의](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)하십시오. 클러스터 ID, 사용자 ID 및 서비스 인스턴스 ID를 제공해야 합니다.
+5. 그래도 문제점이 해결되지 않는 경우에는 {{site.data.keyword.Bluemix_notm}} IAM 권한이 비동기화되며 사용자가 직접 문제를 해결할 수 없습니다. 지원 케이스를 열어서 [IBM 지원 센터에 문의](/docs/get-support?topic=get-support-getting-customer-support)하십시오. 클러스터 ID, 사용자 ID 및 서비스 인스턴스 ID를 제공해야 합니다.
    1. 클러스터 ID를 검색하십시오.
       ```
       ibmcloud ks clusters
@@ -526,7 +573,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: #cs_service_keys}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`을 실행하면 다음 메시지가 표시됩니다.
 
 ```
 This service doesn't support creation of keys
@@ -583,8 +630,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
   ```
   {: screen}
 
@@ -646,7 +693,7 @@ unable to validate against any pod security policy
 
 {{site.data.keyword.IBM_notm}} 클러스터 관리 리소스를 삭제한 경우에는 Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
 
-1.  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1.  [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  Kubernetes 마스터를 새로 고쳐서 이를 복원하십시오.
 
     ```
@@ -673,14 +720,42 @@ unable to validate against any pod security policy
 
 다음 솔루션 중 하나를 수행할 수 있습니다.
   - `ibmcloud ks clusters`를 실행하여 클러스터의 상태를 확인하십시오. 그런 다음, `ibmcloud ks workers --cluster <cluster_name>`을 실행하여 작업자 노드가 배치되었는지 확인하십시오.
-  - VLAN이 올바른지 확인하십시오. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다. `ibmcloud ks vlans --zone <zone>`을 실행하여 [VLAN을 나열](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)할 수 있으며, 해당 VLAN이 목록에 표시되지 않으면 이는 유효하지 않은 것입니다. 다른 VALN을 선택하십시오.
+  - VLAN이 올바른지 확인하십시오. 올바른 상태가 되려면 VLAN은 로컬 디스크 스토리지로 작업자를 호스팅할 수 있는 인프라와 연관되어야 합니다. `ibmcloud ks vlans --zone <zone>`을 실행하여 [VLAN을 나열](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)할 수 있으며, 해당 VLAN이 목록에 표시되지 않으면 이는 유효하지 않은 것입니다. 다른 VALN을 선택하십시오.
 
 <br />
 
 
+## 클러스터 작성 오류로 레지스트리에서 이미지를 가져올 수 없음
+{: #ts_image_pull_create}
+
+{: tsSymptoms}
+클러스터를 작성할 때 다음과 유사한 오류 메시지가 표시됩니다. 
 
 
-## 레지스트리에서 이미지를 가져올 수 없음
+```
+Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster-pull-secret-apply'.
+```
+{: screen}
+
+{: tsCauses}
+클러스터 작성 중에 서비스 ID는 클러스터를 위해 작성되고 {{site.data.keyword.registrylong_notm}}에 대한 **독자** 서비스 액세스 정책이 지정됩니다. 그런 다음 이 서비스 ID에 대한 API 키를 생성하고 [이미지 풀 시크릿](/docs/containers?topic=containers-images#cluster_registry_auth)에 저장하여 {{site.data.keyword.registrylong_notm}}에서 이미지를 가져올 수 있는 권한을 부여합니다. 
+
+클러스터 작성 중에 **Reader** 서비스 액세스 정책을 서비스 ID에 지정하려면 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 플랫폼 액세스 정책이 있어야 합니다. 
+
+{: tsResolve}
+
+단계:
+1.  계정 소유자가 사용자에게 {{site.data.keyword.registrylong_notm}}에 대한 **관리자** 역할을 부여했는지 확인하십시오.
+    ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+    ```
+    {: pre}
+2.  [`ibmcloud ks cluster-pull-secret-apply` 명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)을 사용하여 적절한 레지스트리 인증 정보로 이미지 풀 시크릿을 다시 작성하십시오. 
+
+<br />
+
+
+## `ImagePullBackOff` 또는 권한 부여 오류로 레지스트리에서 이미지를 가져오는 데 실패함
 {: #ts_image_pull}
 
 {: tsSymptoms}
@@ -688,7 +763,7 @@ unable to validate against any pod security policy
 {{site.data.keyword.registrylong_notm}}에서 이미지를 가져오는 워크로드를 배치할 때 팟(Pod)에 오류가 발생하며 **`ImagePullBackOff`** 상태가 됩니다.
 
 ```
-            kubectl get pods
+kubectl get pods
 ```
 {: pre}
 
@@ -701,7 +776,7 @@ NAME         READY     STATUS             RESTARTS   AGE
 팟(Pod)을 설명할 때 다음과 유사한 인증 오류가 발생합니다.
 
 ```
-        kubectl describe pod <pod_name>
+kubectl describe pod <pod_name>
 ```
 {: pre}
 
@@ -729,11 +804,11 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     {: pre}
 2.  장애가 발생한 팟(Pod)의 팟(Pod) 구성 파일을 가져오고 `imagePullSecrets` 섹션을 찾으십시오.
     ```
-        kubectl get pod <pod_name> -o yaml
+    kubectl get pod <pod_name> -o yaml
     ```
     {: pre}
 
-출력 예:
+    출력 예:
     ```
     ...
     imagePullSecrets:
@@ -775,11 +850,11 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     ```
     {: pre}
 
-출력 예:
+    출력 예:
     ```
-    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked
-    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false
+    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
+    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false   
+    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
     ```
     {: screen}
 2.  서비스 ID가 {{site.data.keyword.Bluemix_notm}} IAM **독자** [{{site.data.keyword.registryshort_notm}}의 서비스 액세스 역할 정책](/docs/services/Registry?topic=registry-user#create) 이상의 역할로 지정되어 있는지 확인하십시오. 서비스 ID에 **독자** 서비스 역할이 없으면 [IAM 정책을 편집](/docs/iam?topic=iam-serviceidpolicy#access_edit)하십시오. 정책이 올바른 경우 다음 단계를 계속하여 인증 정보가 올바른지 확인하십시오.
@@ -788,18 +863,18 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     ```
     {: pre}
 
-출력 예:
+    출력 예:
+    ```              
+    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
+    Roles:       Reader   
+    Resources:                            
+                  Service Name       container-registry      
+                  Service Instance         
+                  Region                  
+                  Resource Type      namespace      
+                  Resource           <registry_namespace>  
     ```
-    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5
-    Roles:       Reader
-    Resources:
-                  Service Name       container-registry
-                  Service Instance
-                  Region
-                  Resource Type      namespace
-                  Resource           <registry_namespace>
-    ```
-    {: screen}
+    {: screen}  
 3.  이미지 풀 보안 인증 정보가 올바른지 확인하십시오.
     1.  이미지 풀 시크릿 구성을 가져오십시오. 팟(Pod)이 `default` 네임스페이스에 없으면 `-n` 플래그를 포함하십시오.
         ```
@@ -876,7 +951,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     ```
     {: pre}
 
-출력 예:
+    출력 예:
     ```
     {"auths":{"registry.<region>.bluemix.net":{"username":"token","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
     ```
@@ -924,14 +999,14 @@ kubectl get nodes
 1.  기본 포트 번호로 프록시를 설정하십시오.
 
   ```
-   kubectl proxy
+  kubectl proxy
   ```
    {: pre}
 
 2.  Kubernetes 대시보드를 여십시오.
 
   ```
-   http://localhost:8001/ui
+  http://localhost:8001/ui
   ```
   {: pre}
 
@@ -949,7 +1024,7 @@ kubectl get nodes
     2.  작업자 풀의 크기를 조정하여 풀의 범위에 속한 각 구역에 노드를 더 추가하십시오.
 
         ```
-        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ibmcloud ks worker-pool-resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
@@ -962,7 +1037,7 @@ kubectl get nodes
         ```
         {: pre}
 
-    2.  요청이 사용 가능한 용량을 초과하면 요청을 이행할 수 있는 작업자 노드의 [새 작업자 풀을 추가](/docs/containers?topic=containers-clusters#add_pool)하십시오.
+    2.  요청이 사용 가능한 용량을 초과하면 요청을 이행할 수 있는 작업자 노드의 [새 작업자 풀을 추가](/docs/containers?topic=containers-add_workers#add_pool)하십시오.
 
 6.  작업자 노드를 완전히 배치한 후에도 팟(Pod)이 계속 **보류** 상태를 유지하면 [Kubernetes 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending)를 검토하여 보류 상태인 팟(Pod)의 추가 문제점을 해결할 수 있습니다.
 
@@ -994,7 +1069,7 @@ kubectl get nodes
 컨테이너가 리소스 한계를 초과했거나 팟(Pod)이 우선순위가 더 높은 팟(Pod)으로 대체되었을 수 있습니다.
 
 {: tsResolve}
-컨테이너가 리소스 한계로 인해 제거되었는지 확인하려면 다음 작업을 수행하십시오.
+컨테이너가 리소스 한계로 인해 제거되었는지 확인하려면 다음을 수행하십시오.
 <ol><li>팟(Pod)의 이름을 가져오십시오. 레이블을 사용한 경우에는 이를 포함시켜 결과를 필터링할 수 있습니다.<pre class="pre"><code>kubectl get pods --selector='app=wasliberty'</code></pre></li>
 <li>팟(Pod)에 대한 설명을 출력하고 **Restart Count**를 찾으십시오.<pre class="pre"><code>kubectl describe pod</code></pre></li>
 <li>팟(Pod)이 짧은 시간 내에 여러 번 다시 시작된 경우에는 해당 상태를 페치하십시오. <pre class="pre"><code>kubectl get pod -o go-template={{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}</code></pre></li>
@@ -1003,18 +1078,18 @@ kubectl get nodes
 
 <br>
 
-팟(Pod)이 우선순위가 더 높은 팟(Pod)으로 대체되고 있는지 확인하려면 다음 작업을 수행하십시오.
+팟(Pod)이 우선순위가 더 높은 팟(Pod)으로 대체되고 있는지 확인하려면 다음을 수행하십시오.
 1.  팟(Pod)의 이름을 가져오십시오.
 
     ```
-            kubectl get pods
+    kubectl get pods
     ```
     {: pre}
 
 2.  팟(Pod) YAML에 대한 설명을 출력하십시오.
 
     ```
-        kubectl get pod <pod_name> -o yaml
+    kubectl get pod <pod_name> -o yaml
     ```
     {: pre}
 
@@ -1073,13 +1148,13 @@ Helm 차트의 문제점을 해결하려면 다음을 수행하십시오.
     ```
     {: pre}
 
-2. 출력에서 {{site.data.keyword.Bluemix_notm}} 저장소인 `ibm`에 대한 URL이 `https://registry.bluemix.net/helm/ibm`인지 확인하십시오.
+2. 출력에서 {{site.data.keyword.Bluemix_notm}} 저장소인 `ibm`에 대한 URL이 `https://icr.io/helm/iks-charts`인지 확인하십시오.
 
     ```
     NAME    URL
     stable  https://kubernetes-charts.storage.googleapis.com
     local   http://127.0.0.1:8888/charts
-    ibm     https://registry.bluemix.net/helm/ibm
+    ibm     https://icr.io/helm/iks-charts
     ```
     {: screen}
 
@@ -1095,7 +1170,7 @@ Helm 차트의 문제점을 해결하려면 다음을 수행하십시오.
         2. {{site.data.keyword.Bluemix_notm}} 저장소를 다시 추가하십시오.
 
             ```
-            helm repo add ibm  https://registry.bluemix.net/helm/ibm
+            helm repo add iks-charts  https://icr.io/helm/iks-charts
             ```
             {: pre}
 
@@ -1133,7 +1208,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 
 {: tsResolve}
 - 사용자 정의 방화벽을 사용하거나 사용자 정의 Calico 정책을 설정하는 경우, 이미지가 저장된 컨테이너 레지스트리와 작업자 노드 사이의 아웃바운드 및 인바운드 네트워크 트래픽을 허용하십시오. 이미지가 {{site.data.keyword.registryshort_notm}}에 저장되어 있으면 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](/docs/containers?topic=containers-firewall#firewall_outbound)에서 필수 포트를 검토하십시오.
-- 개인 서비스 엔드포인트만 사용으로 설정하여 사설 클러스터를 작성한 경우 클러스터의 [공용 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)할 수 있습니다. 공용 연결을 열지 않고 사설 클러스터에 Helm 차트를 설치하려는 경우 [Tiller가 포함](/docs/containers?topic=containers-helm#private_local_tiller)되거나 [Tiller가 포함되지 않은](/docs/containers?topic=containers-helm#private_install_without_tiller) Helm을 설치할 수 있습니다.
+- 개인 서비스 엔드포인트만 사용으로 설정하여 사설 클러스터를 작성한 경우 클러스터의 [공용 서비스 엔드포인트를 사용으로 설정](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)할 수 있습니다. 공용 연결을 열지 않고 사설 클러스터에 Helm 차트를 설치하려는 경우 [Tiller가 포함](/docs/containers?topic=containers-helm#private_local_tiller)되거나 [Tiller가 포함되지 않은](/docs/containers?topic=containers-helm#private_install_without_tiller) Helm을 설치할 수 있습니다.
 
 <br />
 
@@ -1153,6 +1228,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)를 참조하십시오.
--   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 참조하십시오.
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
+-   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support)를 참조하십시오.
+문제를 보고할 때 클러스터 ID를 포함하십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
 {: tip}
+

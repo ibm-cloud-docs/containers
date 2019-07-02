@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # チュートリアル: Cloud Foundry からクラスターへのアプリのマイグレーション
@@ -144,7 +145,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 4. アプリ・コードを含むイメージを作成し、それを専用レジストリーにプッシュします。
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -176,8 +177,8 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   プライベート・レジストリー内にイメージが作成されます。 `ibmcloud cr images` コマンドを実行すると、イメージが作成されたことを確認できます。
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -213,7 +214,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry_namespace>/cf-py:latest
+        - image: us.icr.io/<registry_namespace>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -240,7 +241,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
   <tbody>
   <tr>
   <td><code>イメージ</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。 名前空間がわからない場合は、`ibmcloud cr namespaces` コマンドを実行して調べることができます。</td>
+  <td>`us.icr.io/<registry_namespace>/cf-py:latest` で、&lt;registry_namespace&gt; をプライベート・イメージ・レジストリーの名前空間に置き換えます。 名前空間がわからない場合は、`ibmcloud cr namespaces` コマンドを実行して調べることができます。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -276,7 +277,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

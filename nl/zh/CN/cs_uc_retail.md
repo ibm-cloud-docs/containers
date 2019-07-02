@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的零售用例
@@ -39,8 +39,8 @@ subcollection: containers
 为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供了公共云生态系统，其中容器支持新的业务合作伙伴和其他外部参与者通过 API 共同开发应用程序和数据。既然零售系统位于公共云上，因此 API 还可简化数据共享以及快速启动新的应用程序开发。在开发者轻松试验时，应用程序部署会增加，从而使用工具链快速推动开发和测试系统的更改。
 
 {{site.data.keyword.containerlong_notm}} 和关键技术：
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-* [用于在应用程序中持久存储和同步数据的 {{site.data.keyword.cos_full}}](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [用于跨应用程序持久存储和同步数据的 {{site.data.keyword.cos_full}}](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 
 **背景：零售商使用 API 与全球业务合作伙伴共享数据，以推动全渠道销售**
@@ -63,7 +63,7 @@ subcollection: containers
 
 要使零售商能够与全球业务合作伙伴协作，库存 API 需要更改以适应每个区域的语言和市场偏好。{{site.data.keyword.containerlong_notm}} 覆盖多个区域（包括北美、欧洲、亚洲和澳大利亚），以便 API 反映每个国家或地区的需求并确保 API 调用的等待时间较短。
 
-另一项要求是，库存数据必须可与业务合作伙伴的客户和公司的客户共享。通过库存 API，开发者可以在应用程序（例如，移动库存应用程序或 Web 电子商务解决方案）中显示信息。开发者还忙于构建和维护主电子商务站点。总之，他们需要专注于编码，而不是管理基础架构。
+另一项要求是，库存数据必须可与公司的业务合作伙伴和客户共享。通过库存 API，开发者可以在应用程序（例如，移动库存应用程序或 Web 电子商务解决方案）中显示信息。开发者还忙于构建和维护主电子商务站点。总之，他们需要专注于编码，而不是管理基础架构。
 
 因此他们选择了 {{site.data.keyword.containerlong_notm}}，因为 IBM 简化了基础架构管理：
 * 管理 Kubernetes 主节点、IaaS 和操作组件，例如 Ingress 和存储器
@@ -127,7 +127,7 @@ subcollection: containers
 
 关键技术：    
 * [水平缩放以加速开发](/docs/containers?topic=containers-app#highly_available_apps)
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [利用 Watson Discovery 来洞察市场趋势](https://www.ibm.com/watson/services/discovery/)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [使用 {{site.data.keyword.messagehub_full}} 进行库存管理](/docs/services/EventStreams?topic=eventstreams-about#about)

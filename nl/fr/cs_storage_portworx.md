@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Stockage de données sur SDS (Software-Defined Storage) avec Portworx
 {: #portworx}
 
-[Portworx ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://portworx.com/products/introduction/) est une solution de stockage SDS à haute disponibilité que vous pouvez utiliser pour gérer du stockage persistant pour vos bases de données conteneurisées et d'autres applications avec état, ou pour partager des données entre des pods sur plusieurs zones.
+[Portworx ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://portworx.com/products/introduction/) est une solution de stockage SDS à haute disponibilité que vous pouvez utiliser afin de gérer du stockage persistant local pour vos bases de données conteneurisées et d'autres applications avec état, ou afin de partager des données entre des pods sur plusieurs zones.
 {: shortdesc}
 
 **Qu'est-ce qu'une solution SDS (Software-Defined Storage) ?** </br>
@@ -38,13 +40,13 @@ Portworx regroupe le stockage disponible lié à vos noeuds worker pour créer u
 Portworx fournit également d'autres fonctions que vous pouvez utiliser pour vos applications avec état, par exemple les images instantanées de volume, le chiffrement de volume, l'isolation, ainsi que l'environnement d'exécution Storage Orchestrator for Kubernetes (Stork) afin d'assurer le positionnement optimal des volumes dans le cluster. Pour plus d'informations, voir la [documentation Portworx ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/).
 
 **Quelle version de noeud worker dans {{site.data.keyword.containerlong_notm}} convient le mieux à Portworx ?** </br>
-{{site.data.keyword.containerlong_notm}} fournit des versions de noeud worker bare metal optimisées en vue d'une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-plan_clusters#sds) et qui sont accompagnées d'un ou plusieurs disques locaux de type RAW, non formatés et non montés que vous pouvez utiliser pour votre couche de stockage Portworx. Portworx offre des performances optimales avec des machines de noeud worker SDS d'un débit réseau de 10 Gbit/s.
+{{site.data.keyword.containerlong_notm}} fournit des versions de noeud worker bare metal optimisées en vue d'une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds) et qui sont accompagnées d'un ou plusieurs disques locaux de type RAW, non formatés et non montés que vous pouvez utiliser pour votre couche de stockage Portworx. Portworx offre des performances optimales avec des machines de noeud worker SDS d'un débit réseau de 10 Gbit/s.
 
 **Et si j'envisage d'exécuter Portworx sur des noeuds worker non SDS ?** </br>
 Vous pouvez installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. Les noeuds worker non SDS peuvent être de type virtuel ou bare metal. Si vous voulez utiliser des machines virtuelles, utilisez un modèle de noeud worker `b2c.16x64` ou supérieur. Les machines virtuelles de modèle `b3c.4x16` ou `u3c.2x4` n'offrent pas les ressources nécessaires au bon fonctionnement de Portworx. N'oubliez pas que les machines virtuelles offrent un débit de 1000 Mbit/s, ce qui n'est pas suffisant pour obtenir les performances idéales de Portworx. Les machines bare metal sont fournies avec suffisamment de ressources de calcul et de vitesse réseau pour Portworx, mais vous devez [ajouter du stockage par blocs brut, non formaté et non monté](#create_block_storage) avant d'utiliser ces machines.
 
 **Comment puis-je m'assurer que le mode de stockage de mes données est à haute disponibilité ?** </br>
-Vous devez disposer d'au moins 3 noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans au moins 3 zones.
+Vous devez disposer d'au moins 3 noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-ha_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans au moins 3 zones.
 
 **Quelle topologie de volume offre les meilleures performances pour mes pods ?** </br>
 L'un des défis majeurs lors de l'exécution d'applications avec état dans un cluster consiste à garantir que votre conteneur puisse être replanifié sur un autre hôte en cas de défaillance du conteneur ou de l'hôte dans son ensemble. Dans Docker, lorsqu'un conteneur doit être replanifié sur un autre hôte, le volume n'est pas transféré sur le nouvel hôte. Portworx peut être configuré pour s'exécuter en mode hyperconvergé (`hyper-converged`) pour garantir que vos ressources de calcul et le stockage résident toujours sur le même noeud worker. Lorsque votre application doit être replanifiée, Portworx la transfère sur un noeud worker où se trouve l'une de vos répliques de volume pour garantir la vitesse d'accès au disque local et les meilleures performances pour votre application avec état. L'exécution en mode `hyper-converged` offre les meilleures performances pour vos pods, mais nécessite que le stockage soit disponible sur tous les noeuds worker dans votre cluster.
@@ -52,14 +54,11 @@ L'un des défis majeurs lors de l'exécution d'applications avec état dans un c
 Vous pouvez également choisir de n'utiliser qu'un sous-ensemble de noeuds worker pour votre couche de stockage Portworx. Par exemple, vous pouvez disposer d'un pool de noeuds worker avec des noeuds worker SDS fournis avec du stockage par blocs brut et un autre pool de noeuds worker avec des noeuds worker virtuels non fournis avec du stockage local. Lorsque vous installez Portworx, un pod Portworx est planifié sur tous les noeuds worker de votre cluster dans le cadre d'un ensemble de démons (daemonSet). Comme vos noeuds worker SDS disposent de stockage local, ces noeuds worker sont inclus uniquement dans la couche de stockage Portworx. Vos noeuds worker virtuels ne sont pas inclus dans un noeud de stockage car ils n'ont pas de stockage local. Cependant, lorsque vous déployez un pod d'application sur votre noeud worker virtuel, ce pod peut toujours accéder aux données qui sont stockées physiquement sur un noeud worker SDS en utilisant le pod d'ensemble de démons Portworx. Cette configuration est désignée par `storage-heavy` et offre des performances légèrement plus faibles que la configuration `hyper-converged` car le noeud worker virtuel doit communiquer avec le noeud worker SDS via le réseau privé pour accéder aux données.
 
 **Quelle est la configuration requise pour mettre à disposition Portworx ?** </br>
-{{site.data.keyword.containerlong}} fournit des versions de noeud worker optimisées pour une utilisation avec SDS et qui sont accompagnées d'un ou plusieurs disques locaux RAW, non formatés et non montés, que vous pouvez utiliser pour stocker vos données. Portworx offre des performances optimales lorsque vous utilisez des [machines de noeud worker SDS](/docs/containers?topic=containers-plan_clusters#sds) d'un débit réseau de 10 Gbit/s. Vous pouvez toutefois installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. La configuration requise minimale d'un noeud worker pour exécuter Portworx correctement comprend :
+{{site.data.keyword.containerlong}} fournit des versions de noeud worker optimisées pour une utilisation avec SDS et qui sont accompagnées d'un ou plusieurs disques locaux RAW, non formatés et non montés, que vous pouvez utiliser pour stocker vos données. Portworx offre des performances optimales lorsque vous utilisez des [machines de noeud worker SDS](/docs/containers?topic=containers-planning_worker_nodes#sds) d'un débit réseau de 10 Gbit/s. Vous pouvez toutefois installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. La configuration requise minimale d'un noeud worker pour exécuter Portworx correctement comprend :
 - 4 coeurs d'UC
 - 4 Go de mémoire
 - 128 Go de stockage non formaté brut
 - 10 Gbit/s de vitesse réseau
-
-**Comment puis-je m'assurer que le mode de stockage de mes données est à haute disponibilité ?** </br>
-Vous devez disposer d'au moins 3 noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans 3 zones.
 
 **Quelles sont les limitations que je dois prévoir ?** </br>
 Portworx est disponible pour des clusters standard configurés avec une connectivité de réseau public. Si votre cluster ne peut pas accéder au réseau public, par exemple si vous disposez d'un cluster privé protégé derrière un pare-feu ou d'un cluster où seul le noeud final de service privé est activé, vous ne pouvez pas utiliser Portworx dans votre cluster, sauf si vous ouvrez tout le trafic réseau sortant sur le port TCP 443 ou si vous activez le noeud final de service public.
@@ -70,7 +69,7 @@ Tout est prêt ? Commençons par [créer un cluster avec un pool de noeuds worke
 ## Création de stockage par blocs brut, non formaté et non monté pour les noeuds worker non SDS
 {: #create_block_storage}
 
-Portworx s'exécute mieux lorsque vous utilisez des versions de noeud worker optimisées pour une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-plan_clusters#sds). Cependant, si vous ne pouvez ou ne voulez pas utiliser des noeuds worker SDS, vous pouvez opter pour l'installation de Portworx sur des versions de noeud worker non SDS. N'oubliez pas que les noeuds worker non SDS ne sont pas optimisés pour Portworx et risquent de ne pas offrir les performances requises par votre application.
+Portworx s'exécute mieux lorsque vous utilisez des versions de noeud worker optimisées pour une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds). Cependant, si vous ne pouvez ou ne voulez pas utiliser des noeuds worker SDS, vous pouvez opter pour l'installation de Portworx sur des versions de noeud worker non SDS. N'oubliez pas que les noeuds worker non SDS ne sont pas optimisés pour Portworx et risquent de ne pas offrir les performances requises par votre application.
 {: shortdesc}
 
 Pour inclure des noeuds worker non SDS dans votre cluster Portworx, vous devez ajouter à vos noeuds worker des unités de stockage par blocs brutes, non formatées et non montées en utilisant le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Le stockage par blocs brut ne peut pas être provisionné avec des réservations de volume persistant (PVC) Kubernetes car l'unité de stockage par blocs est automatiquement formatée par {{site.data.keyword.containerlong_notm}}. Portworx ne prend en charge que le stockage par blocs. Les noeuds worker non SDS qui montent du stockage de fichiers ou d'objets ne peuvent pas être utilisés pour la couche de données Portworx.
@@ -222,7 +221,7 @@ Avant de commencer :
 - Si vous souhaitez utiliser des noeuds worker non SDS pour votre couche de stockage Portworx, [ajoutez une unité de stockage par blocs non formatée à votre noeud worker non SDS](#create_block_storage).
 - Créez une [instance de service {{site.data.keyword.composeForEtcd}}](#portworx_database) pour stocker la configuration et les métadonnées de Portworx.
 - Déterminez si vous souhaitez chiffrer vos volumes Portworx avec {{site.data.keyword.keymanagementservicelong_notm}}. Pour chiffrer vos volumes, vous devez [configurer une instance de service {{site.data.keyword.keymanagementservicelong_notm}} et stocker les informations du service dans une valeur confidentielle (secret) Kubernetes](#encrypt_volumes).
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour installer Portworx :
 

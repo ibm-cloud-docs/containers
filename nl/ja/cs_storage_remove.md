@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # クラスターからの永続ストレージの削除
 {: #cleanup}
 
-クラスターの永続ストレージをセットアップするときには、ストレージを要求する Kubernetes 永続ボリューム請求 (PVC)、ポッドにマウントされる、PVC で指定された Kubernetes 永続ボリューム (PV)、NFS ファイルやブロック・ストレージなどの IBM Cloud インフラストラクチャー (SoftLayer) インスタンスという 3 つの主なコンポーネントを作成します。 これらを作成した方法によっては、3 つすべてを個別に削除しなければならない場合があります。
+クラスターの永続ストレージをセットアップするときには、ストレージを要求する Kubernetes 永続ボリューム請求 (PVC)、ポッドにマウントされる、PVC で指定された Kubernetes 永続ボリューム (PV)、NFS ファイルやブロック・ストレージなどの IBM Cloud インフラストラクチャー (SoftLayer) インスタンスという 3 つの主なコンポーネントを作成します。 ストレージの作成方法によっては、3 つすべてを個別に削除しなければならない場合があります。
 {:shortdesc}
 
 ## 永続ストレージのクリーンアップ
@@ -48,7 +50,7 @@ subcollection: containers
 
 <p class="important">永続ストレージをクリーンアップすると、保管されているすべてのデータが削除されます。 データのコピーが必要な場合は、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_backup_restore)または[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_backup_restore)のバックアップを作成してください。</p>
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 永続データをクリーンアップするには、次の手順を実行します。
 
@@ -156,7 +158,7 @@ subcollection: containers
 
    **Notes** フィールドの情報について
    *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: クラスターが使用するストレージ・プラグイン。
-   *  **`"region":"us-south"`**: クラスターが存在している領域。
+   *  **`"region":"us-south"`**: クラスターが存在している地域。
    *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: ストレージ・インスタンスに関連付けられているクラスター ID。
    *  **`"type":"Endurance"`**: ファイル・ストレージまたはブロック・ストレージのタイプ (`Endurance` または `Performance`)。
    *  **`"ns":"default"`**: ストレージ・インスタンスのデプロイ先の名前空間。
@@ -178,7 +180,7 @@ subcollection: containers
    ```
    {: pre}
 
-9. 物理ストレージ・インスタンスが削除されたことを確認します。 削除処理が完了するまで最大で数日かかることがあるので注意してください。
+9. 物理ストレージ・インスタンスが削除されたことを確認します。 削除プロセスが完了するまで最大で数日かかることがあります。
 
    **ファイル・ストレージ:**
    ```

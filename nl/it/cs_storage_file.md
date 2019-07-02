@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Archiviazione di dati in IBM File Storage per IBM Cloud
@@ -29,7 +31,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per appurare se {{site.data.keyword.Bluemix_notm}} File Storage è l'opzione di archiviazione giusta per te, vedi [Scelta di una soluzione di archiviazione](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Per le informazioni sui prezzi, vedi [Fatturazione](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage è disponibile solo per i cluster standard configurati con la connettività di rete pubblica. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con solo l'endpoint del servizio privato abilitato, puoi eseguire il provisioning di archiviazione file se il tuo cluster esegue Kubernetes versione 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 o successive. Le istanze di archiviazione file NFS sono specifiche per una singola zona. Se hai un cluster multizona, prendi in considerazione le [opzioni di archiviazione persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.Bluemix_notm}} File Storage è disponibile solo per i cluster standard configurati con la connettività di rete pubblica. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con solo l'endpoint del servizio privato abilitato, puoi eseguire il provisioning di archiviazione file se il tuo cluster esegue Kubernetes versione 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 o successive. Le istanze di archiviazione file NFS sono specifiche per una singola zona. Se hai un cluster multizona, prendi in considerazione le [opzioni di archiviazione persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Decisioni relative alla configurazione dell'archiviazione file
@@ -43,7 +45,7 @@ Ogni classe di archiviazione specifica il tipo di archiviazione file di cui eseg
 Dopo aver eseguito il provisioning di uno specifico tipo di archiviazione utilizzando una classe di archiviazione, non puoi modificare il tipo o la politica di conservazione per il dispositivo di archiviazione. Tuttavia, puoi [modificare la dimensione e l'IOPS](#file_change_storage_configuration) se vuoi aumentare la capacità e le prestazioni della tua archiviazione. Per modificare il tipo e la politica di conservazione per la tua archiviazione, devi [creare una nuova istanza di archiviazione e copiare i dati](/docs/containers?topic=containers-kube_concepts#update_storageclass) dalla vecchia istanza di archiviazione a quella nuova.
 {: important}
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per stabilire una configurazione di archiviazione:
 
@@ -433,7 +435,7 @@ Se hai un dispositivo di archiviazione fisico esistente che vuoi usare nel tuo c
 
 Prima di iniziare:
 - Assicurati di avere almeno un nodo di lavoro nella stessa zona della tua istanza di archiviazione file esistente.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Passo 1: Preparazione della tua archiviazione esistente.
 {: #existing-file-1}
@@ -643,7 +645,7 @@ Se vuoi creare automaticamente la tua PVC quando crei la serie con stato, utiliz
 Utilizza questa opzione se vuoi creare automaticamente la PVC quando crei la serie con stato.
 {: shortdesc}
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifica che tutte le serie con stato esistenti nel tuo cluster siano state completamente distribuite. Se una serie con stato è ancora in fase di distribuzione, non puoi iniziare a creare la tua serie con stato. Devi attendere che tutte le serie con stato nel tuo cluster vengano distribuite completamente per evitare risultati imprevisti.
    1. Elenca le serie con stato esistenti nel tuo cluster.
@@ -881,7 +883,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">Specifica la tua regola di anti-affinità per garantire che i tuoi pod di serie con stato siano distribuiti tra i nodi di lavoro e le zone. L'esempio mostra una regola di anti-affinità in cui il pod di serie con stato preferisce non essere pianificato su un nodo di lavoro dove viene eseguito un pod che ha l'etichetta `app: nginx`. `topologykey: failure-domain.beta.kubernetes.io/zone` limita ancora di più questa regole di anti-affinità e impedisce al pod di essere pianificato su un nodo di lavoro se il nodo di lavoro si trova nella stessa zona di un pod che ha l'etichetta `app: nignx`. Utilizzando questa regola di anti-affinità, puoi ottenere l'anti-affinità tra i nodi di lavoro e le zone. </td>
+    <td style="text-align:left">Specifica la tua regola di anti-affinità per garantire che i tuoi pod di serie con stato siano distribuiti tra i nodi di lavoro e le zone. L'esempio mostra una regola di anti-affinità in cui il pod di serie con stato preferisce non essere pianificato su un nodo di lavoro dove viene eseguito un pod che ha l'etichetta `app: nginx`. `topologykey: failure-domain.beta.kubernetes.io/zone` limita ancora di più questa regole di anti-affinità e impedisce al pod di essere pianificato su un nodo di lavoro se il nodo di lavoro si trova nella stessa zona di un pod che ha l'etichetta `app: nginx`. Utilizzando questa regola di anti-affinità, puoi ottenere l'anti-affinità tra i nodi di lavoro e le zone. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -924,7 +926,7 @@ Puoi eseguire il pre-provisioning delle tue PVC prima di creare la serie con sta
 
 Quando [esegui dinamicamente il provisioning delle tue PVC quando crei la serie con stato](#file_dynamic_statefulset), il nome della PVC viene assegnato in base ai valori che hai usato nel file YAML della serie con stato. Affinché la serie con stato utilizzi le PVC esistenti, il nome delle tue PVC deve corrispondere al nome che viene automaticamente creato quando si utilizza il provisioning dinamico.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Se desideri eseguire il pre-provisioning della tua PVC prima di creare la serie con stato, esegui i passi da 1 a 3 in [Aggiunta di archiviazione file alle applicazioni](#add_file) per creare una PVC per ogni replica della serie con stato. Assicurati di creare la tua PVC con un nome che rispetta il seguente formato:`<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: utilizza il nome che vuoi specificare nella sezione `spec.volumeClaimTemplates.metadata.name` della tua serie con stato, ad esempio `nginxvol`.
@@ -1205,7 +1207,7 @@ Esamina le seguenti opzioni di backup e ripristino per la tua archiviazione file
 
 <dl>
   <dt>Configura istantanee periodiche</dt>
-  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione file](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione file. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume.</br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione file](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione file. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume.</br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Elenca i PV esistenti nel tuo cluster. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Ottieni i dettagli del PV per cui vuoi creare uno spazio per l'istantanea e prendi nota dell'ID volume, della dimensione e dell'IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> L'ID volume, la dimensione e l'IOPS possono essere trovati nella sezione <strong>Etichette</strong> del tuo output della CLI. </li><li>Crea la dimensione dell'istantanea per il tuo volume esistente con i parametri che hai richiamato nel passo precedente. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendi che la dimensione dell'istantanea venga creata. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>La dimensione dell'istantanea viene fornita correttamente quando la <strong>Dimensione istantanea (GB)</strong> nel tuo output della CLI viene modificata da 0 con la dimensione che hai ordinato. </li><li>Crea l'istantanea per il tuo volume e prendi nota dell'ID dell'istantanea che ti viene creata. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifica che l'istantanea sia stata creata correttamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Per ripristinare i dati da un'istantanea in un volume esistente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Replica le istantanee in un'altra zona</dt>
@@ -1217,7 +1219,7 @@ Esamina le seguenti opzioni di backup e ripristino per la tua archiviazione file
   <p>Per rendere i tuoi dati ancora più disponibili e proteggere la tua applicazione da un errore di zona, configura una seconda istanza {{site.data.keyword.cos_full}} e replica i dati tra le varie zone. Se devi ripristinare i dati dalla tua istanza {{site.data.keyword.cos_full}}, utilizza lo script di ripristino fornito con l'immagine.</p></dd>
 <dt>Copia i dati nei/dai pod e contenitori</dt>
 <dd><p>Puoi utilizzare il comando `kubectl cp` [![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) per copiare i file e le directory in/da pod o specifici contenitori nel tuo cluster.</p>
-<p>Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se non specifichi un contenitore con <code>-c</code>, il comando utilizza il primo contenitore disponibile nel pod.</p>
+<p>Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se non specifichi un contenitore con <code>-c</code>, il comando utilizza il primo contenitore disponibile nel pod.</p>
 <p>Puoi utilizzare il comando in diversi modi:</p>
 <ul>
 <li>Copiare i dati dalla tua macchina locale in un pod nel tuo cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1428,7 +1430,7 @@ Per creare la tua classe di archiviazione personalizzata, vedi [Personalizzazion
 Per utilizzare l'archiviazione file in un cluster multizona, il tuo pod deve essere pianificato nella stessa zona della tua istanza di archiviazione file in modo che tu possa leggere e scrivere sul volume. Prima che la pianificazione dei volumi che rileva la topologia fosse introdotta da Kubernetes, il provisioning dinamico della tua archiviazione creava automaticamente l'istanza di archiviazione file quando veniva creata una PVC. Quindi, quando creavi il tuo pod, il programma di pianificazione Kubernetes provava a distribuire il pod a un nodo di lavoro nello stesso data center della tua istanza di archiviazione file.
 {: shortdesc}
 
-La creazione dell'istanza di archiviazione file senza conoscere i vincoli del pod può portare a risultati indesiderati. Ad esempio, potrebbe non essere possibile pianificare il tuo pod sullo stesso nodo di lavoro della tua archiviazione perché il nodo di lavoro ha risorse insufficienti oppure perché il nodo di lavoro è corrotto e non consente la pianificazione del pod. Con la pianificazione dei volumi che rileva la topologia, l'istanza di archiviazione file viene ritardata finché non viene creato il primo pod che utilizza l'archiviazione.
+La creazione dell'istanza di archiviazione file senza conoscere i vincoli del pod può portare a risultati indesiderati. Ad esempio, potrebbe non essere possibile pianificare il tuo pod sullo stesso nodo di lavoro della tua archiviazione perché il nodo di lavoro ha risorse insufficienti oppure perché il nodo di lavoro è contaminato e non consente la pianificazione del pod. Con la pianificazione dei volumi che rileva la topologia, l'istanza di archiviazione file viene ritardata finché non viene creato il primo pod che utilizza l'archiviazione.
 
 La pianificazione dei volumi che rileva la topologia è supportata solo sui cluster che eseguono Kubernetes versione 1.12 o successive.
 {: note}

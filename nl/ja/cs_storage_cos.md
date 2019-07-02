@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,16 +21,20 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # IBM Cloud Object Storage へのデータの保管
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。 このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。 {{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。 このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。 {{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
+{: shortdesc}
 
 {{site.data.keyword.cos_full_notm}} に接続するには、ご使用のクラスターは {{site.data.keyword.Bluemix_notm}} Identity and Access Management から認証を受けるためにパブリック・ネットワークにアクセスできる必要があります。 プライベート専用クラスターを使用している場合は、{{site.data.keyword.cos_full_notm}} のプライベート・サービス・エンドポイントと通信するには、プラグイン・バージョン `1.0.3` 以降をインストールして、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを HMAC 認証に対応するようにセットアップする必要があります。 HMAC 認証の使用を希望しない場合は、このプラグインがプライベート・クラスター内で適切に機能するために、ポート 443 上のすべてのアウトバウンド・ネットワーク・トラフィックを開放する必要があります。
 {: important}
+
+バージョン 1.0.5 では、{{site.data.keyword.cos_full_notm}} プラグインの名前が `ibmcloud-object-storage-plugin` から `ibm-object-storage-plugin` に変更されました。 新しいバージョンのプラグインをインストールするには、[古い Helm チャート・インストールをアンインストール](#remove_cos_plugin)し、[{{site.data.keyword.cos_full_notm}} プラグインの新しいバージョンで Helm チャートを再インストール](#install_cos)する必要があります。
+{: note}
 
 ## オブジェクト・ストレージ・サービス・インスタンスの作成
 {: #create_cos_service}
@@ -66,7 +70,7 @@ subcollection: containers
 
 以下の手順に従って、{{site.data.keyword.cos_full_notm}} サービス・インスタンスの資格情報用の Kubernetes シークレットを作成します。 ローカル Cloud Object Storage サーバーまたは異なる s3 API エンドポイントを使用する予定の場合は、適切な資格情報を使用して Kubernetes シークレットを作成してください。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. [{{site.data.keyword.cos_full_notm}} サービス資格情報](#service_credentials)の **apikey**、または **access_key_id** と **secret_access_key** を取得します。
 
@@ -75,15 +79,15 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-   
-3. サービス資格情報を保管する Kubernetes シークレットを作成します。 シークレットを作成すると、すべての値が自動的に base64 にエンコードされます。 
-   
+
+3. サービス資格情報を保管する Kubernetes シークレットを作成します。 シークレットを作成すると、すべての値が自動的に base64 にエンコードされます。
+
    **API キーの使用例:**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
    ```
    {: pre}
-   
+
    **HMAC 認証の例:**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
@@ -132,7 +136,7 @@ subcollection: containers
 {{site.data.keyword.cos_full_notm}} プラグインを更新または削除する方法の説明をお探しですか? [IBM Cloud Object Storage プラグインの更新](#update_cos_plugin)と [IBM Cloud Object Storage プラグインの削除](#remove_cos_plugin)を参照してください。
 {: tip}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. ワーカー・ノードで、ご使用のマイナー・バージョンに対する最新パッチが適用されていることを確認します。
    1. ワーカー・ノードの現在のパッチ・バージョンをリストします。
@@ -145,7 +149,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -155,25 +159,20 @@ subcollection: containers
 
    3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
 
-2.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
+2.  {{site.data.keyword.cos_full_notm}} プラグインを Helm サーバー (Tiller) を使用してインストールするか、使用せずにインストールするかを選択します。 次に、[手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシン上に Helm クライアントをインストールし、Tiller を使用する場合には、サービス・アカウントで Tiller をクラスター内にインストールします。
 
-    Helm サーバー Tiller をインストールするには、パブリック Google Container Registry へのパブリック・ネットワーク接続が必要です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、[Tiller イメージをローカル・マシンにプルして、そのイメージを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](/docs/containers?topic=containers-helm#private_local_tiller)のか、[Tiller を使用せずに Helm チャートをインストールする](/docs/containers?topic=containers-helm#private_install_without_tiller)のかを選択できます。
-    {: note}
-
-3.  tiller がサービス・アカウントでインストールされていることを確認します。
-
-    ```
-    kubectl get serviceaccount -n kube-system tiller
-    ```
-    {: pre}
-
-    出力例:
-
-    ```
-    NAME                                 SECRETS   AGE
+3. Tiller を使用してプラグインをインストールする場合は、Tiller がサービス・アカウントでインストールされていることを確認します。
+   ```
+   kubectl get serviceaccount -n kube-system tiller
+   ```
+   {: pre}
+   
+   出力例:
+   ```
+   NAME                                 SECRETS   AGE
     tiller                               1         2m
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 4. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーをクラスターに追加します。
    ```
@@ -181,22 +180,22 @@ subcollection: containers
    ```
    {: pre}
 
-5. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+4. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
    {: pre}
 
-6. Helm チャートをダウンロードして、現行ディレクトリーにチャートをアンパックします。
+5. Helm チャートをダウンロードして、現行ディレクトリーにチャートをアンパックします。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-7. macOS または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}} Helm プラグイン `ibmc` をインストールします。 このプラグインは、クラスターの場所を自動的に取得し、ストレージ・クラスの {{site.data.keyword.cos_full_notm}} バケットに API エンドポイントを設定するために使用されます。 Windows をオペレーティング・システムとして使用する場合は、次のステップに進みます。
+7. OS X または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}} Helm プラグイン `ibmc` をインストールします。 このプラグインは、クラスターの場所を自動的に取得し、ストレージ・クラスの {{site.data.keyword.cos_full_notm}} バケットに API エンドポイントを設定するために使用されます。 Windows をオペレーティング・システムとして使用する場合は、次のステップに進みます。
    1. Helm プラグインをインストールします。
       ```
-      helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
+      helm plugin install ./ibm-object-storage-plugin/helm-ibmc
       ```
       {: pre}
 
@@ -205,6 +204,9 @@ subcollection: containers
       Installed plugin: ibmc
       ```
       {: screen}
+      
+      エラー `Error: plugin already exists` が表示された場合は、`rm -rf ~/.helm/plugins/helm-ibmc` を実行して、`ibmc` Helm プラグインを削除します。
+      {: tip}
 
    2. `ibmc` プラグインが正常にインストールされていることを確認します。
       ```
@@ -214,20 +216,28 @@ subcollection: containers
 
       出力例:
       ```
-      Install or upgrade Helm charts in IBM K8S Service
+      IBM K8S Service (IKS) および IBM Cloud Private (ICP) で Helm チャートをインストールまたはアップグレードします。
 
       Available Commands:
-       helm ibmc install [CHART][flags]              Install a Helm chart
-       helm ibmc upgrade [RELEASE][CHART] [flags]    Upgrades the release to a new version of the Helm chart
+         helm ibmc install [CHART][flags]                      Install a Helm chart
+         helm ibmc upgrade [RELEASE][CHART] [flags]            Upgrade the release to a new version of the Helm chart
+         helm ibmc template [CHART][flags] [--apply|--delete]  Install/uninstall a Helm chart without tiller
 
       Available Flags:
-    --verbos                      (Optional) Verbosity intensifies... ...
-       -f, --values valueFiles       (Optional) specify values in a YAML file (can specify multiple) (default [])
-       -h, --help                    (Optional) This text.
-       -u, --update                  (Optional) Update this plugin to the latest version
+         -h, --help                    (Optional) This text.
+         -u, --update                  (Optional) Update this plugin to the latest version
 
       Example Usage:
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+         With Tiller:
+             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+         Without Tiller:
+             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+
+      注:
+         1. 常に、最新バージョンの ibm-object-storage-plugin チャートをインストールすることをお勧めします。
+         2. 常に、「kubectl」クライアントを最新の状態にしておくことをお勧めします。
       ```
       {: screen}
 
@@ -239,7 +249,7 @@ subcollection: containers
    2. [{{site.data.keyword.cos_full_notm}} サービス資格情報を Kubernetes シークレットに保管します](#create_cos_secret)。
    3. `templates` ディレクトリーにナビゲートし、使用可能なファイルをリストします。  
       ```
-      cd ibmcloud-object-storage-plugin/templates && ls
+      cd ibm-object-storage-plugin/templates && ls
       ```
       {: pre}
 
@@ -261,16 +271,32 @@ subcollection: containers
 
 9. {{site.data.keyword.cos_full_notm}} プラグインをインストールします。 このプラグインをインストールすると、事前定義されたストレージ・クラスがクラスターに追加されます。
 
-   - **macOS および Linux の場合:**
-     - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。
+   - **OS X および Linux の場合:**
+     - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。</br>
+       **Tiller なし**:
        ```
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       ```
+       {: pre}
+       
+       **Tiller あり**:
+       ```
+       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
-     - 前述のステップを完了した場合は、特定の Kubernetes シークレットに制限してインストールします。
+     - 前述のステップを完了した場合は、特定の Kubernetes シークレットに制限してインストールします。</br>
+       **Tiller なし**:
        ```
-       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       cd ../..
+       helm ibmc template ./ibm-object-storage-plugin --apply 
+       ```
+       {: pre}
+       
+       **Tiller あり**:
+       ```
+       cd ../..
+       helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -288,95 +314,96 @@ subcollection: containers
         {: pre}
 
      3. Helm チャートをインストールします。
-        - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。
+        - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。</br>
+          **Tiller なし**:
           ```
-          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+          ```
+          {: pre}
+          
+          **Tiller あり**:
+          ```
+          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-        - 前述のステップを完了した場合は、特定の Kubernetes シークレットに制限してインストールします。
+        - 前述のステップを完了した場合は、特定の Kubernetes シークレットに制限してインストールします。</br>
+          **Tiller なし**:
           ```
-          helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          cd ../..
+          helm ibmc template ./ibm-object-storage-plugin --apply 
+          ```
+          {: pre}
+          
+          **Tiller あり**:
+          ```
+          cd ../..
+          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-   出力例:
+
+   Tiller なしでインストールする場合の出力例:
    ```
-   Installing the Helm chart
-   DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
-   NAME:   mewing-duck
-   LAST DEPLOYED: Mon Jul 30 13:12:59 2018
-   NAMESPACE: default
-   STATUS: DEPLOYED
-
-   RESOURCES:
-   ==> v1/Pod(related)
-   NAME                                             READY  STATUS             RESTARTS  AGE
-   ibmcloud-object-storage-driver-hzqp9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-jtdb9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
-
-   ==> v1/StorageClass
-   NAME                                  PROVISIONER       AGE
-   ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-cross-region      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-regional          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-cross-region       ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-cross-region  ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-regional      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-regional           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-cross-region          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-regional              ibm.io/ibmc-s3fs  1s
-
-   ==> v1/ServiceAccount
-   NAME                            SECRETS  AGE
-   ibmcloud-object-storage-driver  1        1s
-   ibmcloud-object-storage-plugin  1        1s
-
-   ==> v1beta1/ClusterRole
-   NAME                                   AGE
-   ibmcloud-object-storage-secret-reader  1s
-   ibmcloud-object-storage-plugin         1s
-
-   ==> v1beta1/ClusterRoleBinding
-   NAME                                   AGE
-   ibmcloud-object-storage-plugin         1s
-   ibmcloud-object-storage-secret-reader  1s
-
-   ==> v1beta1/DaemonSet
-   NAME                            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
-   ibmcloud-object-storage-driver  3        3        0      3           0          <none>         1s
-
-   ==> v1beta1/Deployment
-   NAME                            DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-   ibmcloud-object-storage-plugin  1        1        1           0          1s
-
-   NOTES:
-   Thank you for installing: ibmcloud-object-storage-plugin.   Your release is named: mewing-duck
-
-   Please refer Chart README.md file for creating a sample PVC.
-   Please refer Chart RELEASE.md to see the release details/fixes.
+   Rendering the Helm chart templates...
+   DC: dal10
+   Chart: iks-charts/ibm-object-storage-plugin
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/tests/check-driver-install.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner.yaml
+   Installing the Helm chart...
+   serviceaccount/ibmcloud-object-storage-driver created
+   daemonset.apps/ibmcloud-object-storage-driver created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-regional created
+   serviceaccount/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   deployment.apps/ibmcloud-object-storage-plugin created
+   pod/ibmcloud-object-storage-driver-test created
    ```
    {: screen}
 
 10. プラグインが正しくインストールされていることを確認します。
-   ```
-   kubectl get pod -n kube-system -o wide | grep object
-   ```
-   {: pre}
+    ```
+    kubectl get pod -n kube-system -o wide | grep object
+    ```
+    {: pre}
 
-   出力例:
-   ```
-   ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
+    出力例:
+    ```
+    ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
-   ```
-   {: screen}
+    ```
+    {: screen}
 
-   1 つの `ibmcloud-object-storage-plugin` ポッドと 1 つ以上の `ibmcloud-object-storage-driver` ポッドが表示されたら、インストールは成功しています。 `ibmcloud-object-storage-driver` ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 プラグインが正しく機能するためには、すべてのポッドが `Running` 状態である必要があります。 ポッドが失敗した場合は、障害の根本原因を見つけるために `kubectl describe pod -n kube-system <pod_name>` を実行してください。
+    1 つの `ibmcloud-object-storage-plugin` ポッドと 1 つ以上の `ibmcloud-object-storage-driver` ポッドが表示されたら、インストールは成功しています。 `ibmcloud-object-storage-driver` ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 プラグインが正しく機能するためには、すべてのポッドが `Running` 状態である必要があります。 ポッドが失敗した場合は、障害の根本原因を見つけるために `kubectl describe pod -n kube-system <pod_name>` を実行してください。
 
 11. ストレージ・クラスが正常に作成されたことを確認します。
     ```
@@ -409,40 +436,70 @@ subcollection: containers
 既存の {{site.data.keyword.cos_full_notm}} プラグインを最新バージョンにアップグレードできます。
 {: shortdesc}
 
-1. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+1. 以前に `ibmcloud-object-storage-plugin` という名前のバージョン 1.0.4 以前の Helm チャートをインストールした場合は、この Helm インストールをクラスターから削除します。 次に、Helm チャートを再インストールします。
+   1. 古いバージョンの {{site.data.keyword.cos_full_notm}} Helm チャートがクラスターにインストールされているかどうかを確認します。  
+      ```
+      helm ls | grep ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+      出力例:
+      ```
+      ibmcloud-object-storage-plugin	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.4	default
+      ```
+      {: screen}
+
+   2. `ibmcloud-object-storage-plugin` という名前のバージョン 1.0.4 以前の Helm チャートが存在する場合は、クラスターから Helm チャートを削除します。 `ibm-object-storage-plugin` という名前のバージョン 1.0.5 以降の Helm チャートが存在する場合は、ステップ 2 に進みます。
+      ```
+      helm delete --purge ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+   3. [{{site.data.keyword.cos_full_notm}} プラグインのインストール](#install_cos)の手順に従って、最新バージョンの {{site.data.keyword.cos_full_notm}} プラグインをインストールします。
+
+2. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
    {: pre}
 
-2. macOS または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}}`ibmc` Helm プラグインを最新バージョンに更新します。
+3. OS X または Linux ディストリビューションを使用する場合は、{{site.data.keyword.cos_full_notm}} `ibmc` Helm プラグインを最新バージョンに更新します。
    ```
    helm ibmc --update
    ```
    {: pre}
 
-3. 最新の {{site.data.keyword.cos_full_notm}} Helm チャートをローカル・マシンにダウンロードしてパッケージを解凍して、`release.md` ファイルを参照して最新のリリース情報を確認します。
+4. 最新の {{site.data.keyword.cos_full_notm}} Helm チャートをローカル・マシンにダウンロードしてパッケージを解凍して、`release.md` ファイルを参照して最新のリリース情報を確認します。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
-   ```
-
-4. Helm チャートのインストール名を検索します。
-   ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-   出力例:
+5. プラグインをアップグレードします。 </br>
+   **Tiller なし**: 
    ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-5. {{site.data.keyword.cos_full_notm}} Helm チャートを最新バージョンにアップグレードします。
-   ```   
-   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc template iks-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
+     
+   **Tiller あり**: 
+   1. Helm チャートのインストール名を検索します。
+      ```
+      helm ls | grep ibm-object-storage-plugin
+      ```
+      {: pre}
+
+      出力例:
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibm-object-storage-plugin-1.0.5	default
+      ```
+      {: screen}
+
+   2. {{site.data.keyword.cos_full_notm}} Helm チャートを最新バージョンにアップグレードします。
+      ```   
+      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      ```
+      {: pre}
 
 6. `ibmcloud-object-storage-plugin` が正常にアップグレードされたことを確認します。  
    ```
@@ -470,7 +527,7 @@ subcollection: containers
 ### IBM Cloud Object Storage プラグインの削除
 {: #remove_cos_plugin}
 
-クラスターで {{site.data.keyword.cos_full_notm}} をプロビジョンして使用する必要がない場合は、Helm チャートをアンインストールできます。
+クラスターで {{site.data.keyword.cos_full_notm}} をプロビジョンして使用する必要がない場合は、プラグインをアンインストールできます。
 {: shortdesc}
 
 このプラグインを削除しても、既存の PVC、PV、データは削除されません。 このプラグインを削除すると、関連するすべてのポッドとデーモン・セットがクラスターから削除されます。 プラグインを削除した後では、{{site.data.keyword.cos_full_notm}} API を直接使用するようにアプリを構成しない限り、クラスターで新しい {{site.data.keyword.cos_full_notm}} をプロビジョンしたり、既存の PVC および PV を使用したりすることはできません。
@@ -483,25 +540,33 @@ subcollection: containers
 
 プラグインを削除するには、以下のようにします。
 
-1. Helm チャートのインストール名を検索します。
+1. クラスターからプラグインを削除します。 </br>
+   **Tiller あり**: 
+   1. Helm チャートのインストール名を検索します。
+      ```
+      helm ls | grep object-storage-plugin
+      ```
+      {: pre}
+
+      出力例:
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+      ```
+      {: screen}
+
+   2. Helm チャートを削除することによって、{{site.data.keyword.cos_full_notm}} プラグインを削除します。
+      ```
+      helm delete --purge <helm_chart_name>
+      ```
+      {: pre}
+
+   **Tiller なし**: 
    ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
-   出力例:
-   ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-2. Helm チャートを削除することによって、{{site.data.keyword.cos_full_notm}} プラグインを削除します。
-   ```
-   helm delete --purge <helm_chart_name>
-   ```
-   {: pre}
-
-3. {{site.data.keyword.cos_full_notm}} ポッドが削除されたことを確認します。
+2. {{site.data.keyword.cos_full_notm}} ポッドが削除されたことを確認します。
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
@@ -509,7 +574,7 @@ subcollection: containers
 
    CLI 出力にポッドが表示されていなければ、ポッドは正常に削除されています。
 
-4. ストレージ・クラスが削除されたことを確認します。
+3. ストレージ・クラスが削除されたことを確認します。
    ```
    kubectl get storageclasses | grep s3
    ```
@@ -517,7 +582,7 @@ subcollection: containers
 
    CLI 出力にストレージ・クラスが表示されていなければ、ストレージ・クラスは正常に削除されています。
 
-5. macOS または Linux ディストリビューションを使用する場合、`ibmc` Helm プラグインを削除します。 Windows を使用する場合、このステップは不要です。
+4. OS X または Linux ディストリビューションを使用する場合は、`ibmc` Helm プラグインを削除します。 Windows を使用する場合、このステップは不要です。
    1. `ibmc` プラグインを削除します。
       ```
       rm -rf ~/.helm/plugins/helm-ibmc
@@ -698,6 +763,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
        ibm.io/bucket: "<bucket_name>"
        ibm.io/object-path: "<bucket_subdirectory>"
        ibm.io/secret-name: "<secret_name>"
+       ibm.io/endpoint: "https://<s3fs_service_endpoint>"
    spec:
      accessModes:
        - ReadWriteOnce
@@ -741,6 +807,10 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
    <td><code>ibm.io/secret-name</code></td>
    <td>以前に作成した {{site.data.keyword.cos_full_notm}} 資格情報を保持するシークレットの名前を入力します。 </td>
    </tr>
+   <tr>
+  <td><code>ibm.io/endpoint</code></td>
+  <td>クラスターとは異なるロケーションに {{site.data.keyword.cos_full_notm}} サービス・インスタンスを作成した場合は、使用する {{site.data.keyword.cos_full_notm}} サービス・インスタンスのプライベート・サービス・エンドポイントまたはパブリック・サービス・エンドポイントを入力します。 使用可能なサービス・エンドポイントの概要については、[追加のエンドポイント情報](/docs/services/cloud-object-storage?topic=cloud-object-storage-advanced-endpoints)を参照してください。 デフォルトでは、<code>ibmc</code> Helm プラグインにより、クラスター・ロケーションが自動的に取得され、クラスター・ロケーションに一致する {{site.data.keyword.cos_full_notm}} プライベート・サービス・エンドポイントを使用して、ストレージ・クラスが作成されます。 クラスターがいずれかの大都市ゾーン (`dal10` など) に存在する場合、その大都市 (この場合にはダラス) の {{site.data.keyword.cos_full_notm}} プライベート・サービス・エンドポイントが使用されます。 ストレージ・クラス内のサービス・エンドポイントがサービス・インスタンスのサービス・エンドポイントと一致することを確認するには、`kubectl describe storageclass <storageclassname>` を実行します。 サービス・エンドポイントは、プライベート・サービス・エンドポイントの場合には `https://<s3fs_private_service_endpoint>` の形式で、パブリック・サービス・エンドポイントの場合には `http://<s3fs_public_service_endpoint>` の形式で、入力するようにしてください。 ストレージ・クラス内のサービス・エンドポイントが {{site.data.keyword.cos_full_notm}} サービス・インスタンスのサービス・エンドポイントと一致する場合は、PVC YAML ファイルに <code>ibm.io/endpoint</code> オプションを含めないでください。 </td>
+  </tr>
    <tr>
    <td><code>resources.requests.storage</code></td>
    <td>ご使用の {{site.data.keyword.cos_full_notm}} バケットの架空のサイズ (ギガバイト単位)。 このサイズは Kubernetes で必要になりますが、{{site.data.keyword.cos_full_notm}} では考慮されません。 希望するサイズを入力できます。 {{site.data.keyword.cos_full_notm}} で使用する実際のスペースは異なる場合があり、[料金設定表 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) に基づいて請求されます。 </td>

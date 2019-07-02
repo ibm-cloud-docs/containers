@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans la distribution
@@ -40,7 +40,7 @@ Un dirigeant dans ce secteur d'activité doit augmenter les canaux de distributi
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} offre un écosystème sur cloud public, dans lequel des conteneurs permettent à de nouveaux partenaires commerciaux et à d'autres acteurs externes de développer ensemble des applications et des données à l'aide d'API. Comme ce système de distribution est sur le cloud public, les API rationalisent le partage des données et relancent le développement de nouvelles applications. Les déploiements d'applications augmentent lorsque les développeurs expérimentent l'intégration facile et rapide de changements dans les systèmes de développement et de test avec des chaînes d'outils.
 
 {{site.data.keyword.containerlong_notm}} et technologies clés :
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} pour conserver et synchroniser les données sur plusieurs applications](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -128,7 +128,7 @@ Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_no
 
 Technologies clés :    
 * [Mise à l'échelle horizontale pour accélérer le développement](/docs/containers?topic=containers-app#highly_available_apps)
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Connaissances des tendances du marché avec Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Gestion des stocks avec {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)

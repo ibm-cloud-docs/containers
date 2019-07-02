@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # Panoramica dei casi di utilizzo
 {: #cs_uc_intro}
 
-Diversi casi di utilizzano mostrano i punti di forza dei servizi {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}} quando vengono utilizzati insieme. Queste storie evidenziano diversi settori e tipi di carichi di lavoro. Anche se ogni caso di utilizzo è presentato attraverso l'obiettivo di un particolare settore, i carichi di lavoro sono tipici in una varietà di settori. Vedrai temi del carico di lavoro, come ad esempio: 
+Vari casi di utilizzo mostrano i punti di forza dell'utilizzo congiunto dei servizi {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}}. Queste storie evidenziano diversi settori e tipi di carichi di lavoro. Anche se ogni caso viene presentato attraverso l'obiettivo di un particolare settore, questi carichi di lavoro sono tipici di vari settori. Vengono mostrati temi quali: 
 * Intelligenza artificiale e machine learning
 * Dati e archiviazione
 * DevOps
@@ -57,13 +58,13 @@ Diversi casi di utilizzano mostrano i punti di forza dei servizi {{site.data.key
       <td align="center"><img src="images/health.svg" alt="Icona di borsa medica"/><br>Assistenza sanitaria</td>
       <td><ul>
      <li>[Migrare i carichi di lavoro da VM inefficienti a contenitori di facile utilizzo per i sistemi di gestione dei pazienti](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
-      <li>[Ospitare in modo sicuro i dati sensibili durante la crescente ricerca con i partner](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
+      <li>[Ospitare in modo sicuro i dati sensibili mentre cresce la ricerca con i partner](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
       </ul></td>
       </tr>
       <tr>
          <td align="center"><img src="images/retail.svg" alt="Icona di carrello degli acquisti con il simbolo di valuta"/><br>Vendita al dettaglio</td>
          <td><ul>
-        <li>[Condividere dati con i partner globali tramite le API per promuovere vendite omnicanale](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[Condividere dati con i business partner globali tramite le API, per promuovere vendite omnicanale](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[Ottimizzare le spese di inventario con informazioni digitali sui comportamenti di vendita](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -71,7 +72,7 @@ Diversi casi di utilizzano mostrano i punti di forza dei servizi {{site.data.key
        <td align="center"><img src="images/transport.svg" alt="Icona di vagone ferroviario con contenitori"/><br>Trasporto</td>
            <td><ul>
           <li>[Creare e distribuire il sito HR con l'intelligenza artificiale in meno di 3 settimane](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Aumentare la disponibilità dei sistemi mondiali per i partner](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[Aumentare la disponibilità dei sistemi mondiali per i business partner](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

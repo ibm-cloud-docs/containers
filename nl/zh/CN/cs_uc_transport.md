@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的运输用例
@@ -129,7 +129,7 @@ IoT 设备流式传输的数据由 {{site.data.keyword.messagehub_full}} 分发�
 为什么选择 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供了易于启动的计算。开发者还可以轻松进行试验，利用开放式工具链，快速将更改推送到开发和测试系统。他们的传统软件开发工具添加到 IBM Watson Assistant 后性能得到提升。新的福利站点在 3 周内就创建完成。
 
 关键技术：    
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [基于 Watson 技术的聊天机器人服务](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

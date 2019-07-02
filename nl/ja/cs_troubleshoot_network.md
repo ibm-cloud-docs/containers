@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # クラスターのネットワーキングのトラブルシューティング
@@ -209,64 +209,69 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 <br />
 
 
-## Ingress ALB のサブドメインを取得できない
+## Ingress ALB のサブドメインを取得できない、ALB がゾーンにデプロイされない、またはロード・バランサーをデプロイできない
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-get --cluster <cluster>` を実行すると、クラスターが `normal` 状態であるのに、使用可能な **Ingress サブドメイン**がありません。
-
-次のようなエラー・メッセージが表示される可能性があります。
-
-```
-この VLAN で許可されているサブネットの最大数に既に達しています。(There are already the maximum number of subnets permitted in this VLAN.)
-```
-{: screen}
+* Ingress サブドメインなし: `ibmcloud ks cluster-get --cluster <cluster>` を実行すると、クラスターが `normal` 状態であるのに、使用可能な **Ingress サブドメイン**がありません。
+* ALB がゾーンにデプロイされない: 複数ゾーン・クラスターがある場合、`ibmcloud ks albs --cluster <cluster>` を実行しても、ALB はゾーンにデプロイされません。例えば、3 つのゾーンにワーカー・ノードがある場合、パブリック ALB が 3 番目のゾーンにデプロイされなかった次のような出力が表示される場合があります。
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* ロード・バランサーをデプロイできない: `ibm-cloud-provider-vlan-ip-config` 構成マップを記述すると、以下の出力例のようなエラー・メッセージが表示される場合があります。
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。 そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress Subdomain** をプロビジョンできません。
+標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。 そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress サブドメイン**のプロビジョンが失敗するか、そのゾーン用のパブリック Ingress ALB のプロビジョンが失敗するか、ポータブル・パブリック IP アドレスをネットワーク・ロード・バランサー (NLB) の作成に使用できない可能性があります。
 
 VLAN のサブネット数を表示するには、以下のようにします。
 1.  [IBM Cloud インフラストラクチャー (SoftLayer) コンソール](https://cloud.ibm.com/classic?)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
 2.  クラスターの作成に使用した VLAN の **「VLAN の数 (VLAN Number)」**をクリックします。 **「サブネット」**セクションで、サブネットが 40 個以上存在するかどうかを確認します。
 
 {: tsResolve}
-新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)。
+新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)。
 
-使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
-VLAN に使用していないサブネットがある場合、クラスターでサブネットを再利用できます。
-1.  使用したいサブネットが使用可能であることを確認します。
+VLAN に使用していないサブネットがある場合、クラスターに追加することで、VLAN のサブネットを再利用できます。
+1. 使用したいサブネットが使用可能であることを確認します。
+  <p class="note">使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 この場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報のみが表示されます。サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。</p>
 
-    使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 その場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報しか表示できません。 サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。
-    {: note}
+2. [`ibmcloud ks cluster-subnet-add` コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)を使用して、クラスターで既存のサブネットを使用できるようにします。
 
-2.  サービスが新規サブネットの作成を試行しないように、`--no-subnet` オプションを指定して [クラスターを作成](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)します。 再利用できるサブネットがあるゾーンと VLAN を指定します。
+3. クラスターにサブネットが正常に作成されて追加されたことを確認します。 サブネットの CIDR は **Subnet VLANs** セクションにリストされます。
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  `ibmcloud ks cluster-subnet-add` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)を使用して、既存のサブネットをクラスターに追加します。 詳しくは、[Kubernetes クラスターでカスタム・サブネットおよび既存のサブネットを追加または再利用する](/docs/containers?topic=containers-subnets#subnets_custom)を参照してください。
+    次の例の出力では、2 番目のサブネットがパブリック VLAN の `2234945` に追加されています。
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## Ingress ALB がゾーンにデプロイされない
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-複数ゾーン・クラスターがある場合、`ibmcloud ks albs <cluster>` を実行しても、ALB はゾーンにデプロイされません。 例えば、3 つのゾーンにワーカー・ノードがある場合、パブリック ALB が 3 番目のゾーンにデプロイされなかった次のような出力が表示される場合があります。
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-各ゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターのパブリック VLAN が既にその上限に達している場合、そのゾーン用の Ingress ALB をプロビジョンできません。
-
-{: tsResolve}
-VLAN 上のサブネットの数を確認する場合、および別の VLAN の取得方法に関する手順については、[Ingress ALB のサブドメインを取得できない](#cs_subnet_limit)を参照してください。
+4. 追加したサブネットからのポータブル IP アドレスが、クラスター内の ALB またはロード・バランサーに使用されていることを確認します。新しく追加されたサブネットからのポータブル IP アドレスがサービスで使用されるまでに数分かかる場合があります。
+  * Ingress サブドメインなし: `ibmcloud ks cluster-get --cluster <cluster>` を実行して、**Ingress サブドメイン**にデータが設定されていることを確認します。
+  * ALB がゾーンにデプロイされない: `ibmcloud ks albs --cluster <cluster>` を実行して、欠落している ALB がデプロイされていることを確認します。
+  * ロード・バランサーをデプロイできない: `kubectl get svc -n kube-system` を実行して、ロード・バランサーに **EXTERNAL-IP** があることを確認します。
 
 <br />
 
@@ -597,11 +602,11 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 {: tsResolve}
 
-[既存のワーカー・プールを削除](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)してから、[新しいワーカー・プールを作成](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)できます。
+[既存のワーカー・プールを削除](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)してから、[新しいワーカー・プールを作成](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)できます。
 
 また、新しい VLAN をオーダーし、これらを使用してプール内に新しいワーカー・ノードを作成することによって、既存のワーカー・プールを保持することもできます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  新しい VLAN ID を必要とする対象のゾーンを取得するには、次のコマンドの出力の **Location** をメモします。 **注**: クラスターが複数ゾーンの場合、ゾーンごとに VLAN ID が必要です。
 
@@ -621,7 +626,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-5.  `zone-network-set` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)を使用して、ワーカー・プールのネットワーク・メタデータを変更します。
+5.  `zone-network-set` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)を使用して、ワーカー・プールのネットワーク・メタデータを変更します。
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -663,7 +668,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support)を参照してください。
 問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # 用例概述
 {: #cs_uc_intro}
 
-各种用例说明了 {{site.data.keyword.containerlong_notm}} 和 {{site.data.keyword.Bluemix_notm}} 服务一起使用时的优点。这些案例着重说明了多个行业以及多种类型的工作负载。尽管每个用例是从特定行业的角度呈现的，但工作负载在各种行业中是典型的。您将看到各种工作负载主题，例如： 
+各种用例说明了 {{site.data.keyword.containerlong_notm}} 和 {{site.data.keyword.Bluemix_notm}} 服务一起使用时的优点。这些案例着重说明了多个行业以及多种类型的工作负载。尽管每个用例是从特定行业的角度呈现的，但这些工作负载在各种行业中是典型的。您将看到各种工作负载主题，例如： 
 * AI 和机器学习
 * 数据和存储
 * DevOps
@@ -64,7 +65,7 @@ subcollection: containers
       <tr>
          <td align="center"><img src="images/retail.svg" alt="具有货币符号的购物车的图标"/><br>零售</td>
          <td><ul>
-        <li>[通过 API 与全球合作伙伴共享数据，以推动全渠道销售](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[通过 API 与全球业务合作伙伴共享数据，以推动全渠道销售](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[通过对销售行为的数字洞察，优化库存费用](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -72,7 +73,7 @@ subcollection: containers
        <td align="center"><img src="images/transport.svg" alt="装有集装箱的火车车厢的图标"/><br>运输</td>
            <td><ul>
           <li>[在 3 周内通过 AI 构建和部署 HR 站点](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[提高合作伙伴的全球范围系统的可用性](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[提高业务合作伙伴的全球范围系统的可用性](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

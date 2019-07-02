@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Traitement des incidents liés à la consignation et à la surveillance
@@ -71,20 +71,20 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
   <tr>
     <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur ou Auditeur n'ont pas été affectés au propriétaire du compte sur cet espace.</td>
       <td>Pour modifier les droits d'accès du propriétaire du compte :
-      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info</code>.</li>
+      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>. </li>
       <li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containerlong_notm}} sur cet espace, voir <a href="/docs/containers?topic=containers-users">Gestion de l'accès au cluster</a>.</li>
       <li>Pour actualiser le jeton de journalisation après une modification des droits d'accès, exécutez la commande <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Vous avez une configuration de consignation d'application avec un lien symbolique dans le chemin de votre application.</td>
-      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut avoir créé un lien symbolique.</p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
+      <td>Vous avez une configuration de consignation pour votre application avec un lien symbolique dans le chemin de votre application.</td>
+      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut créer un lien symbolique. </p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
     </tr>
   </tbody>
 </table>
 
 Pour tester les modifications apportées lors de la résolution des incidents, vous pouvez déployer l'exemple de pod *Noisy*, lequel génère plusieurs événements de journal sur un noeud worker dans votre cluster.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Créez le fichier de configuration `deploy-noisy.yaml`.
     ```
@@ -141,7 +141,7 @@ Supprimez le pod `kube-dashboard` pour forcer un redémarrage. Le pod est recré
 {: #quota}
 
 {: tsSymptoms}
-Vous avez configuré une configuration de consignation dans votre cluster pour transférer les journaux à {{site.data.keyword.loganalysisfull}}. Lorsque vous affichez les journaux, vous voyez ceci ou des messages d'erreur de ce type :
+Vous avez configuré une configuration de consignation dans votre cluster pour transférer les journaux à {{site.data.keyword.loganalysisfull}}. Lorsque vous les affichez, les journaux contiennent un message d'erreur semblable à ce qui suit :
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -163,7 +163,7 @@ Examinez les motifs suivants pour savoir pourquoi vous avez atteint votre quota 
  </thead>
  <tbody>
   <tr>
-    <td>Un ou plusieurs pods génèrent une quantité de journaux très élevée.</td>
+    <td>Un ou plusieurs pods produisent un nombre élevé de journaux.</td>
     <td>Vous pouvez libérer de l'espace de stockage pour les journaux en empêchant le transfert de journaux de pods spécifiques. Créez un [filtre de consignation](/docs/containers?topic=containers-health#filter-logs) pour ces pods.</td>
   </tr>
   <tr>
@@ -207,7 +207,7 @@ Vous avez encore des problèmes avec votre cluster ?
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.
--   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contactez le support IBM en ouvrant un cas. Pour savoir comment ouvrir un cas de support IBM ou obtenir les niveaux de support et la gravité des cas, voir [Contacter le support](/docs/get-support?topic=get-support-getting-customer-support).
 Lorsque vous signalez un problème, incluez l'ID de votre cluster. Pour identifier l'ID du cluster, exécutez la commande `ibmcloud ks clusters`. Vous pouvez également utiliser l'[outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) pour regrouper et exporter des informations pertinentes de votre cluster à partager avec le support IBM.
 {: tip}
 

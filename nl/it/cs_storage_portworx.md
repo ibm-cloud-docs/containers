@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Archiviazione di dati su SDS (software-defined storage) con Portworx
 {: #portworx}
 
-[Portworx ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://portworx.com/products/introduction/) è una soluzione SDS (software-defined storage) altamente disponibile che puoi utilizzare per gestire l'archiviazione persistente per i tuoi database inseriti nei contenitori e altre applicazioni con stato oppure per condividere dati tra i pod in più zone.
+[Portworx ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://portworx.com/products/introduction/) è una soluzione SDS (software-defined storage) altamente disponibile che puoi utilizzare per gestire l'archiviazione persistente locale per i tuoi database inseriti nei contenitori e altre applicazioni con stato oppure per condividere dati tra i pod in più zone.
 {: shortdesc}
 
 **Cos'è SDS (software-defined storage)?** </br>
@@ -38,13 +40,13 @@ Portworx aggrega l'archiviazione disponibile che è collegata ai tuoi nodi di la
 Portworx viene fornito anche con ulteriori funzioni che puoi utilizzare per le tue applicazioni con stato, come ad esempio le istantanee del volume, la crittografia dei volumi, l'isolamento e uno Storage Orchestrator for Kubernetes (Stork) integrato per garantire un posizionamento ottimale dei volumi nel cluster. Per ulteriori informazioni, vedi la [documentazione di Portworx![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/).
 
 **Quale tipo di nodo di lavoro in {{site.data.keyword.containerlong_notm}} è quello giusto per Portworx?** </br>
-{{site.data.keyword.containerlong_notm}} fornisce dei tipi di nodo di lavoro bare metal che sono ottimizzati per l'[utilizzo SDS (software-defined storage)](/docs/containers?topic=containers-plan_clusters#sds) e che sono forniti con uno o più dischi locali non elaborati, non formattati e non montati che puoi utilizzare per il tuo livello di archiviazione Portworx. Portworx offre delle prestazioni ottimali quando utilizzi le macchine di nodo di lavoro SDS fornite con una velocità di rete di 10Gbps.
+{{site.data.keyword.containerlong_notm}} fornisce dei tipi di nodo di lavoro bare metal che sono ottimizzati per l'[utilizzo SDS (software-defined storage)](/docs/containers?topic=containers-planning_worker_nodes#sds) e che sono forniti con uno o più dischi locali non elaborati, non formattati e non montati che puoi utilizzare per il tuo livello di archiviazione Portworx. Portworx offre delle prestazioni ottimali quando utilizzi le macchine di nodo di lavoro SDS fornite con una velocità di rete di 10Gbps.
 
 **Cosa devo fare se voglio eseguire Portworx su nodi di lavoro non SDS?** </br>
 Puoi installare Portworx su tipi di nodo di lavoro non SDS ma potresti non ottenere i vantaggi prestazionali richiesti dalla tua applicazione. I nodi di lavoro non SDS possono essere virtuali o bare metal. Se vuoi utilizzare le macchine virtuali, utilizza un tipo di nodo di lavoro `b2c.16x64` o migliore. Le macchine virtuali con un tipo `b3c.4x16` o `u3c.2x4` non forniscono le risorse necessarie perché Portworx funzioni correttamente. Tieni presente che le macchine virtuali sono fornite con 1000Mbps, che non è sufficiente per delle prestazioni ideali di Portworx. Le macchine bare metal sono fornite con risorse di calcolo e velocità di rete sufficienti per Portworx, ma devi [aggiungere dell'archiviazione blocchi non elaborata, non formattata e non montata](#create_block_storage) prima di poter utilizzare queste macchine.
 
 **Come posso assicurarmi che i miei dati vengano archiviati in modo che siano altamente disponibili?** </br>
-Hai bisogno di almeno 3 nodi di lavoro nel tuo cluster Portworx per consentire a Portworx di replicare i tuoi dati tra i nodi. Replicando i tuoi dati tra i nodi di lavoro, Portworx può garantire che la tua applicazione con stato possa essere ripianificata su un nodo di lavoro differente nel caso in cui si verificasse un malfunzionamento senza che si verifichi alcuna perdita di dati. Per una disponibilità ancora più elevata, utilizza un [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone) e replica i tuoi volumi tra i nodi di lavoro SDS in 3 o più zone.
+Hai bisogno di almeno 3 nodi di lavoro nel tuo cluster Portworx per consentire a Portworx di replicare i tuoi dati tra i nodi. Replicando i tuoi dati tra i nodi di lavoro, Portworx può garantire che la tua applicazione con stato possa essere ripianificata su un nodo di lavoro differente nel caso in cui si verificasse un malfunzionamento senza che si verifichi alcuna perdita di dati. Per una disponibilità ancora più elevata, utilizza un [cluster multizona](/docs/containers?topic=containers-ha_clusters#multizone) e replica i tuoi volumi tra i nodi di lavoro SDS in 3 o più zone.
 
 **Quale topologia dei volumi offre le prestazioni migliori per i miei pod?** </br>
 Una delle maggiori sfide quando si eseguono applicazioni con stato in un cluster consiste nell'assicurare che il tuo contenitore possa essere ripianificato su un altro host se si verifica un malfunzionamento del contenitore o dell'intero host. In Docker, quando un contenitore deve essere ripianificato su un host diverso, il volume non viene spostato al nuovo host. Portworx può essere configurato in modo da eseguire `hyper-converged` per garantire che le tue risorse di calcolo e l'archiviazione siano sempre posizionate sullo stesso nodo di lavoro. Quando la tua applicazione deve essere ripianificata, Portworx sposta la tua applicazione su un nodo di lavoro dove si trova una delle tue repliche di volume per garantire una velocità di accesso al disco locale e le prestazioni migliori per la tua applicazione con stato. L'esecuzione di `hyper-converged` offre le migliori prestazioni per i tuoi pod ma richiede che l'archiviazione sia disponibile su tutti i nodi di lavoro nel tuo cluster.
@@ -52,25 +54,22 @@ Una delle maggiori sfide quando si eseguono applicazioni con stato in un cluster
 Puoi anche scegliere di utilizzare solo un sottoinsieme di nodi di lavoro per il tuo livello di archiviazione Portworx. Ad esempio, potresti avere un pool di nodi di lavoro con nodi di lavoro SDS che sono forniti con archiviazione blocchi non elaborata locale e un altro pool di nodi di lavoro con nodi di lavoro virtuali che non sono forniti con archiviazione locale. Quando installi Portworx, viene pianificato un pod Portworx su ogni nodo di lavoro nel tuo cluster come parte di una serie di daemon. Poiché i tuoi nodi di lavoro SDS hanno l'archiviazione locale, questi nodi di lavoro sono inclusi solo nel livello di archiviazione Portworx. I tuoi nodi di lavoro virtuali non sono inclusi come nodi di archiviazione perché manca l'archiviazione locale. Tuttavia, quando distribuisci un pod dell'applicazione al tuo nodo di lavoro virtuale, questo pod può ancora accedere ai dati archiviati fisicamente su un nodo di lavoro SDS utilizzando il pod della serie di daemon Portworx, Questa configurazione viene indicata come `storage-heavy` e offre delle prestazioni leggermente più lente rispetto alla configurazione `hyper-converged` perché il nodo di lavoro virtuale deve comunicare con il nodo di lavoro SDS sulla rete privata per accedere ai dati.
 
 **Cosa mi serve per eseguire il provisioning di Portworx?** </br>
-{{site.data.keyword.containerlong}} fornisce dei tipi di nodo di lavoro che sono ottimizzati per l'utilizzo SDS e che sono forniti con uno o più dischi locali non elaborati, non formattati e non montati che puoi utilizzare per archiviare i tuoi dati. Portworx offre delle prestazioni ottimali quando utilizzi le [macchine di nodo di lavoro SDS](/docs/containers?topic=containers-plan_clusters#sds) fornite con la velocità di rete di 10Gbps. Puoi tuttavia installare Portworx su tipi di nodo di lavoro non SDS ma potresti non ottenere i vantaggi prestazionali richiesti dalla tua applicazione. I requisiti minimi di un nodo di lavoro per eseguire correttamente Portworx includono:
+{{site.data.keyword.containerlong}} fornisce dei tipi di nodo di lavoro che sono ottimizzati per l'utilizzo SDS e che sono forniti con uno o più dischi locali non elaborati, non formattati e non montati che puoi utilizzare per archiviare i tuoi dati. Portworx offre delle prestazioni ottimali quando utilizzi le [macchine di nodo di lavoro SDS](/docs/containers?topic=containers-planning_worker_nodes#sds) fornite con la velocità di rete di 10Gbps. Puoi tuttavia installare Portworx su tipi di nodo di lavoro non SDS ma potresti non ottenere i vantaggi prestazionali richiesti dalla tua applicazione. I requisiti minimi di un nodo di lavoro per eseguire correttamente Portworx includono:
 - 4 core CPU
 - 4GB di memoria
 - 128GB di archiviazione non elaborata e non formattata
 - Una velocità di rete di 10Gbps
 
-**Come posso assicurarmi che i miei dati vengano archiviati in modo che siano altamente disponibili?** </br>
-Hai bisogno di almeno 3 nodi di lavoro nel tuo cluster Portworx per consentire a Portworx di replicare i tuoi dati tra i nodi. Replicando i tuoi dati tra i nodi di lavoro, Portworx può garantire che la tua applicazione con stato possa essere ripianificata su un nodo di lavoro differente nel caso in cui si verificasse un malfunzionamento senza che si verifichi alcuna perdita di dati. Per una disponibilità ancora più elevata, utilizza un [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone) e replica i tuoi volumi tra i nodi di lavoro SDS su 3 zone.
-
 **Quali limitazioni devo prevedere?** </br>
 Portworx è disponibile per i cluster standard configurati con la connettività di rete pubblica. Se il tuo cluster non può accedere alla rete pubblica, ad esempio un cluster privato dietro un firewall o un cluster con solo l'endpoint del servizio privato abilitato, non puoi utilizzare Portworx nel tuo cluster a meno che tu non apra tutto il traffico di rete in uscita sulla porta TCP 443 o abiliti l'endpoint del servizio pubblico.
 
 
-Sei pronto? Iniziamo [creando un cluster con un pool di lavoro SDS di almeno 3 nodi di lavoro](/docs/containers?topic=containers-clusters#clusters_ui). Se vuoi includere dei nodi di lavoro non SDS nel tuo cluster Portworx, [aggiungi l'archiviazione blocchi non elaborata](#create_block_storage) a ciascun nodo di lavoro. Una volta preparato il tuo cluster, [installa il grafico Helm di Portworx](#install_portworx) nel tuo cluster e crea il tuo primo cluster di archiviazione iperconvergente.  
+Sei pronto? Iniziamo [creando un cluster con un pool di nodi di lavoro SDS di almeno 3 nodi di lavoro](/docs/containers?topic=containers-clusters#clusters_ui). Se vuoi includere dei nodi di lavoro non SDS nel tuo cluster Portworx, [aggiungi l'archiviazione blocchi non elaborata](#create_block_storage) a ciascun nodo di lavoro. Una volta preparato il tuo cluster, [installa il grafico Helm di Portworx](#install_portworx) nel tuo cluster e crea il tuo primo cluster di archiviazione iperconvergente.  
 
 ## Creazione di archiviazione blocchi non elaborata, non formattata e non montata per nodi di lavoro non SDS
 {: #create_block_storage}
 
-Portworx viene eseguito in modo ottimale quando utilizzi dei tipi di nodo di lavoro ottimizzati per l'[utilizzo SDS (software-defined storage)](/docs/containers?topic=containers-plan_clusters#sds). Tuttavia, se non puoi o non vuoi utilizzare dei nodi di lavoro SDS, puoi scegliere di installare Portworx su tipi di nodo di lavoro non SDS. Tieni presente che i nodi di lavoro non SDS non sono ottimizzati per Portworx e potrebbero non offrire i vantaggi prestazionali richiesti dalla tua applicazione.
+Portworx viene eseguito in modo ottimale quando utilizzi dei tipi di nodo di lavoro ottimizzati per l'[utilizzo SDS (software-defined storage)](/docs/containers?topic=containers-planning_worker_nodes#sds). Tuttavia, se non puoi o non vuoi utilizzare dei nodi di lavoro SDS, puoi scegliere di installare Portworx su tipi di nodo di lavoro non SDS. Tieni presente che i nodi di lavoro non SDS non sono ottimizzati per Portworx e potrebbero non offrire i vantaggi prestazionali richiesti dalla tua applicazione.
 {: shortdesc}
 
 Per includere dei nodi di lavoro non SDS nel tuo cluster Portworx, devi aggiungere dei dispositivi di archiviazione blocchi non elaborati, non formattati e non montati ai tuoi nodi di lavoro utilizzando il plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Non è possibile eseguire il provisioning di archiviazione blocchi non elaborata utilizzando le attestazioni del volume persistente (o PVC, persistent volume claim) poiché il dispositivo di archiviazione blocchi viene formattato automaticamente da {{site.data.keyword.containerlong_notm}}. Portworx supporta solo l'archiviazione blocchi. I nodi di lavoro non SDS che montano archiviazione file o blocchi non possono essere utilizzati per il livello di dati Portworx.
@@ -85,7 +84,7 @@ Se hai dei tipi di nodo di lavoro SDS nel tuo cluster e vuoi utilizzare tali nod
 ## Ottenimento di una licenza Portworx
 {: #portworx_license}
 
-Quando [installi Portworx con un grafico Helm](#install_portworx), ottieni l'edizione `px-enterprise` di Portworx come una versione di prova. La versione di prova ti offre la piena funzionalità di Portworx che puoi testare per 30 giorni. Una volta scaduta la versione di prova, devi acquistare una licenza di Portworx per continua a utilizzare il tuo cluster Portworx.
+Quando [installi Portworx con un grafico Helm](#install_portworx), ottieni l'edizione `px-enterprise` di Portworx come una versione di prova. La versione di prova ti offre la piena funzionalità di Portworx che puoi testare per 30 giorni. Una volta scaduta la versione di prova, devi acquistare una licenza di Portworx per continuare a utilizzare il tuo cluster Portworx.
 {: shortdesc}
 
 Per ulteriori informazioni sui tipi di licenza disponibili e su come eseguire l'upgrade della tua licenza di prova, vedi [Portworx Licensing ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/reference/knowledge-base/px-licensing/). I dipendenti IBM devono ordinare una licenza Portworx attenendosi a [questa procedura](https://github.ibm.com/alchemy-containers/armada-storage/blob/master/portworx/px-license.md).
@@ -175,7 +174,7 @@ La seguente procedura mostra come eseguire il provisioning e come configurare un
 ### Configurazione di un'istanza del servizio Compose for etcd
 {: #compose}
 
-{{site.data.keyword.composeForEtcd}} viene fornito con l'opzione di configurare il tuo database come parte di un cluster di archiviazione cloud che offre alta disponibilità e resilienza in caso di un malfunzionamento di una zona. Per ulteriori informazioni, vedi l'{{site.data.keyword.composeForEtcd}} [Esercitazione introduttiva](/docs/services/ComposeForEtcd?topic=compose-for-etcd-getting-started-tutorial#getting-started-tutorial).
+{{site.data.keyword.composeForEtcd}} viene fornito con l'opzione di configurare il tuo database come parte di un cluster di archiviazione cloud che offre alta disponibilità e resilienza in caso di un malfunzionamento di una zona. Per ulteriori informazioni, vedi l'[Esercitazione introduttiva](/docs/services/ComposeForEtcd?topic=compose-for-etcd-getting-started-tutorial#getting-started-tutorial) di {{site.data.keyword.composeForEtcd}}.
 {: shortdesc}
 
 La seguente procedura mostra come eseguire il provisioning e la configurazione del servizio database {{site.data.keyword.composeForEtcd}} per Portworx.
@@ -222,7 +221,7 @@ Prima di iniziare:
 - Se vuoi utilizzare dei nodi di lavoro non SDS per il tuo livello di archiviazione Portworx, [aggiungi un dispositivo di archiviazione blocchi non formattato al tuo nodo di lavoro non SDS](#create_block_storage).
 - Crea un'[istanza del servizio {{site.data.keyword.composeForEtcd}}](#portworx_database) per archiviare la configurazione e i metadati di Portworx.
 - Decidi se vuoi crittografare i tuoi volumi Portworx con {{site.data.keyword.keymanagementservicelong_notm}}. Per crittografare i tuoi volumi, devi [configurare un'istanza del servizio {{site.data.keyword.keymanagementservicelong_notm}} e archiviare le tue informazioni sul servizio in un segreto Kubernetes](#encrypt_volumes).
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per installare Portworx:
 
@@ -258,7 +257,7 @@ Per installare Portworx:
    {: pre}
 
 6. Aggiorna i seguenti valori e salva le tue modifiche.
-   - **`etcdEndPoint`**: aggiungi l'endpoint alla tua istanza del servizio {{site.data.keyword.composeForEtcd}} che hai richiamato in precedenza nel formato `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`.:Se hai più di un endpoint, includi tutti gli endpoint e separali con un carattere punto e virgola )`;`).
+   - **`etcdEndPoint`**: aggiungi l'endpoint alla tua istanza del servizio {{site.data.keyword.composeForEtcd}} che hai richiamato in precedenza nel formato `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`.: Se hai più di un endpoint, includi tutti gli endpoint e separali con un carattere punto e virgola )`;`).
     - **`imageVersion`**: immetti la versione più recente del grafico Helm di Portworx. Per trovare la versione più recente, fai riferimento alle [note sulla release![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/reference/release-notes/) di Portworx.
    - **`clusterName`**: immetti il nome del cluster dove vuoi installare Portworx.
    - **`usedrivesAndPartitions`**: immetti `true` per lasciare che Portworx trovi le partizioni e le unità disco rigido non montate.

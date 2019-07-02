@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # 유스 케이스의 개요
 {: #cs_uc_intro}
 
-다양한 유스 케이스는 {{site.data.keyword.containerlong_notm}}와 {{site.data.keyword.Bluemix_notm}}가 함께 사용되었을 때의 장점을 보여줍니다. 이들 케이스에는 몇 가지 업계 및 워크로드 유형이 강조되어 있습니다. 각 유스 케이스는 특정 업계의 시점에서 제시되지만, 워크로드는 다양한 업계에서 전형적입니다. 다음과 같은 워크로드 주제를 볼 수 있습니다. 
+다양한 유스 케이스는 {{site.data.keyword.containerlong_notm}}와 {{site.data.keyword.Bluemix_notm}}가 함께 사용되었을 때의 장점을 보여줍니다. 이들 케이스에는 몇 가지 업계 및 워크로드 유형이 강조되어 있습니다. 각 유스 케이스는 특정 업계의 시점에서 제시되지만, 워크로드는 다양한 업계에서 전형적입니다. 다음과 같은 워크로드 주제가 표시됩니다. 
 * AI 및 기계 학습
 * 데이터 및 스토리지
 * DevOps
@@ -63,7 +64,7 @@ subcollection: containers
       <tr>
          <td align="center"><img src="images/retail.svg" alt="쇼핑 카트와 통화 기호가 있는 아이콘"/><br>소매</td>
          <td><ul>
-        <li>[옴니채널 판매량 향상을 위해 API를 통해 글로벌 파트너와 데이터 공유](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[옴니채널 판매량 향상을 위해 API를 통해 글로벌 비즈니스 파트너와 데이터 공유](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[소비 행동에 대한 디지털 인사이트를 통해 인벤토리 비용 최적화](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -71,7 +72,7 @@ subcollection: containers
        <td align="center"><img src="images/transport.svg" alt="컨테이너가 실린 철도 차량의 아이콘"/><br>수송</td>
            <td><ul>
           <li>[AI를 사용하여 3주일 안에 HR 사이트를 빌드하고 배치](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[파트너를 위해 전 세계 시스템의 가용성 개선](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[비즈니스 파트너를 위해 전 세계 시스템의 가용성 개선](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

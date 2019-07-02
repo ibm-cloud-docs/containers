@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks
 
@@ -21,65 +21,150 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# クラスター・ネットワークのセットアップ
+
+# サービス・エンドポイントまたは VLAN 接続の変更
 {: #cs_network_cluster}
 
-{{site.data.keyword.containerlong}} クラスターにネットワーク構成をセットアップします。
-{:shortdesc}
-
-このページには、クラスターのネットワーク構成をセットアップするときに役立つ情報を記載します。 どのセットアップを選べばよいかわからない場合は、 [クラスター・ネットワークの計画](/docs/containers?topic=containers-cs_network_ov)を参照してください。
-{: tip}
-
-## パブリック VLAN およびプライベート VLAN を使用するクラスター・ネットワークのセットアップ
-{: #both_vlans}
-
-[パブリック VLAN およびプライベート VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) にアクセスできるクラスターをセットアップします。
+[クラスターの作成](/docs/containers?topic=containers-clusters)時に、最初にネットワークをセットアップした後、Kubernetes マスターがアクセス可能なサービス・エンドポイントを変更したり、ワーカー・ノード用の VLAN 接続を変更したりできます。
 {: shortdesc}
 
-このネットワークをセットアップするには、クラスター作成時に以下の必須のネットワーク構成を設定し、クラスター作成後にオプションのネットワーク構成を設定します。
+## プライベート・サービス・エンドポイントのセットアップ
+{: #set-up-private-se}
 
-1. ファイアウォールの内側の環境にクラスターを作成する場合は、使用する予定の {{site.data.keyword.Bluemix_notm}} サービスの[パブリック IP およびプライベート IP へのアウトバウンド・ネットワーク・トラフィック](/docs/containers?topic=containers-firewall#firewall_outbound)を許可します。
+Kubernetes バージョン 1.11 以降を実行するクラスターでは、クラスターのプライベート・サービス・エンドポイントを有効/無効にできます。
+{: shortdesc}
 
-2. パブリック VLAN とプライベート VLAN に接続されるクラスターを作成します。 複数ゾーン・クラスターを作成する場合は、ゾーンごとに VLAN のペアを選択できます。
+プライベート・サービス・エンドポイントがあれば、Kubernetes マスターにプライベートからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、プライベート・ネットワーク経由で Kubernetes マスターと通信できます。 プライベート・サービス・エンドポイントを有効にできるかどうかを判別するには、[ワーカーとマスターおよびユーザーとマスターの間の通信](/docs/containers?topic=containers-plan_clusters#internet-facing)を参照してください。プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
 
-3. Kubernetes マスターとワーカー・ノードの通信方法を選択します。
-  * {{site.data.keyword.Bluemix_notm}} アカウントの VRF が有効になっている場合は、[パブリックのみ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)、[パブリックとプライベート](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)、または [プライベートのみ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)のサービス・エンドポイントを有効にします。
-  * VRF の有効化が不可能または不要な場合は、[パブリック・サービス・エンドポイントのみ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)を有効にし、[VLAN スパンニングを有効にします](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。
+[VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) および[サービス・エンドポイント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)のアカウントを有効にする前に、プライベート・サービス・エンドポイントのみを含むクラスターを作成しましたか? [パブリック・サービス・エンドポイントのセットアップ](#set-up-public-se)を試行して、サポート・ケースが処理されてアカウントが更新されるまで、クラスターを使用できるようにします。
+{: tip}
 
-4. クラスターを作成したら、以下のネットワーク・オプションを構成できます。
-  * [strongSwan VPN 接続サービス](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)をセットアップして、クラスターとオンプレミスのネットワークまたは {{site.data.keyword.icpfull_notm}} との通信を許可する。
-  * [Kubernetes ディスカバリー・サービス](/docs/containers?topic=containers-cs_network_planning#in-cluster)を作成して、ポッド間のクラスター内部通信を許可する。
-  * [パブリック](/docs/containers?topic=containers-cs_network_planning#public_access)・ネットワーク・ロード・バランサー (NLB)、Ingress アプリケーション・ロード・バランサー (ALB)、または NodePort サービスを作成して、アプリをパブリック・ネットワークで公開する。
-  * [プライベート](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)・ネットワーク・ロード・バランサー (NLB)、Ingress アプリケーション・ロード・バランサー (ALB)、または NodePort サービスを作成してアプリをプライベート・ネットワークで公開し、Calico ネットワーク・ポリシーを作成してパブリック・アクセスからクラスターを保護する。
-  * ネットワーク・ワークロードを[エッジ・ワーカー・ノード](#both_vlans_private_edge)に分離する。
-  * [プライベート・ネットワーク上でクラスターを分離する](#isolate)。
+1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
+2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
+3. プライベート・サービス・エンドポイントを有効にします。
+   ```
+   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. プライベート・サービス・エンドポイントを使用するには、Kubernetes マスター API サーバーをリフレッシュします。 CLI のプロンプトに従うか、または以下のコマンドを手動で実行します。
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+5. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
+6. クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
+
+   <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+   {: pre}
+
+8. クラスターがファイアウォールの内側の環境にある場合:
+  * [許可されたクラスター・ユーザーに対して、`kubectl` コマンドの実行を許可し、プライベート・サービス・エンドポイントを介してマスターにアクセスできるようにします。](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * 使用する予定のインフラストラクチャー・リソースや {{site.data.keyword.Bluemix_notm}} サービスの[プライベート IP へのアウトバウンド・ネットワーク・トラフィックを許可](/docs/containers?topic=containers-firewall#firewall_outbound)します。
+
+9. オプション: プライベート・サービス・エンドポイントのみを使用するには、パブリック・サービス・エンドポイントを無効にします。
+   ```
+   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
 <br />
 
 
-## プライベート VLAN のみを使用するクラスター・ネットワークのセットアップ
-{: #setup_private_vlan}
+## パブリック・サービス・エンドポイントのセットアップ
+{: #set-up-public-se}
 
-固有のセキュリティー要件がある場合や、専用ネットワークのセキュリティーを装備するためにカスタムのネットワーク・ポリシーやルーティング・ルールを作成する必要がある場合は、[プライベート VLAN のみ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)にアクセスできるクラスターをセットアップします。
+クラスターのパブリック・サービス・エンドポイントを有効または無効にします。
 {: shortdesc}
 
-このネットワークをセットアップするには、クラスター作成時に以下の必須のネットワーク構成を設定し、クラスター作成後にオプションのネットワーク構成を設定します。
+パブリック・サービス・エンドポイントがあれば、Kubernetes マスターにパブリックからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、パブリック・ネットワークを介して Kubernetes マスターと安全に通信できます。 詳しくは、[ワーカーとマスターおよびユーザーとマスターの間の通信](/docs/containers?topic=containers-plan_clusters#internet-facing)を参照してください。
 
-1. ファイアウォールの内側の環境にクラスターを作成する場合は、使用する予定の {{site.data.keyword.Bluemix_notm}} サービスの[パブリック IP およびプライベート IP へのアウトバウンド・ネットワーク・トラフィック](/docs/containers?topic=containers-firewall#firewall_outbound)を許可します。
+**有効にする手順**</br>
+パブリック・エンドポイントを無効にした場合は、後で再び有効にすることができます。
+1. パブリック・サービス・エンドポイントを有効にします。
+   ```
+   ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+2. パブリック・サービス・エンドポイントを使用するには、Kubernetes マスター API サーバーをリフレッシュします。 CLI のプロンプトに従うか、または以下のコマンドを手動で実行します。
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
-2. [プライベート VLAN のみ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)に接続するクラスターを作成します。 複数ゾーン・クラスターを作成する場合は、ゾーンごとにプライベート VLAN を選択できます。
+   </br>
 
-3. Kubernetes マスターとワーカー・ノードの通信方法を選択します。
-  * {{site.data.keyword.Bluemix_notm}} アカウントの VRF が有効になっている場合は、[プライベート・サービス・エンドポイントを有効にします](#set-up-private-se)。
-  * VRF を有効にできない、またはしたくない場合、そのままでは Kubernetes マスター・ノードとワーカー・ノードは接続できません。 [ゲートウェイ・アプライアンス](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)をクラスターに構成する必要があります。
+**無効にする手順**</br>
+パブリック・サービス・エンドポイントを無効にするには、まず、ワーカー・ノードが Kubernetes マスターと通信できるように、プライベート・サービス・エンドポイントを有効にする必要があります。
+1. プライベート・サービス・エンドポイントを有効にします。
+   ```
+   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+2. プライベート・サービス・エンドポイントを使用するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+3. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
 
-4. クラスターを作成したら、以下のネットワーク・オプションを構成できます。
-  * [VPN ゲートウェイをセットアップ](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)して、クラスターとオンプレミスのネットワークまたは {{site.data.keyword.icpfull_notm}} との通信を許可する。 マスター・ノードとワーカー・ノードの通信を許可するために既に VRA (Vyatta) または FSA をセットアップしている場合は、その VRA または FSA に IPSec VPN エンドポイントを構成できます。
-  * [Kubernetes ディスカバリー・サービス](/docs/containers?topic=containers-cs_network_planning#in-cluster)を作成して、ポッド間のクラスター内部通信を許可する。
-  * [プライベート](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)・ネットワーク・ロード・バランサー (NLB)、 Ingress アプリケーション・ロード・バランサー (ALB)、または NodePort サービスを作成して、アプリをプライベート・ネットワークで公開する。
-  * ネットワーク・ワークロードを[エッジ・ワーカー・ノード](#both_vlans_private_edge)に分離する。
-  * [プライベート・ネットワーク上でクラスターを分離する](#isolate)。
+4. クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
+
+   <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
+5. パブリック・サービス・エンドポイントを無効にします。
+   ```
+   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+## パブリック・サービス・エンドポイントからプライベート・サービス・エンドポイントへの切り替え
+{: #migrate-to-private-se}
+
+Kubernetes バージョン 1.11 以降を実行するクラスターでは、プライベート・サービス・エンドポイントを有効にして、ワーカー・ノードにパブリック・ネットワークではなくプライベート・ネットワーク経由でマスターと通信させることができます。
+{: shortdesc}
+
+パブリック VLAN およびプライベート VLAN に接続しているすべてのクラスターは、デフォルトでは、パブリック・サービス・エンドポイントを使用します。 ワーカー・ノードと許可されたクラスター・ユーザーは、パブリック・ネットワークを介して Kubernetes マスターと安全に通信できます。 ワーカー・ノードにパブリック・ネットワークではなくプライベート・ネットワーク経由で Kubernetes マスターと通信させるには、プライベート・サービス・エンドポイントを有効にします。 その後に、任意でパブリック・サービス・エンドポイントを無効にできます。
+* プライベート・サービス・エンドポイントを有効にし、パブリック・サービス・エンドポイントも有効にしたままの場合、ワーカーは常にプライベート・ネットワーク経由でマスターと通信します。一方、ユーザーはパブリックとプライベートのどちらのネットワーク経由でもマスターと通信できます。
+* プライベート・サービス・エンドポイントを有効にし、パブリック・サービス・エンドポイントを無効にした場合、ワーカーとユーザーはプライベート・ネットワーク経由でマスターと通信しなければなりません。
+
+プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
+
+1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
+2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
+3. プライベート・サービス・エンドポイントを有効にします。
+   ```
+   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. プライベート・サービス・エンドポイントを使用するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+5. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
+
+6.  クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
+
+    <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
+    ```
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. オプション: パブリック・サービス・エンドポイントを無効にします。
+   ```
+   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
 <br />
 
@@ -91,14 +176,14 @@ subcollection: containers
 {: shortdesc}
 
 * ゾーンのワーカー・プールの VLAN が不足してきたので、クラスター・ワーカー・ノード用に新しい VLAN をプロビジョンする必要がある。
-* クラスターのワーカー・ノードがパブリック VLAN とプライベート VLAN の両方に接続しているが、[プライベート専用クラスター](#setup_private_vlan)に変更したい。
+* クラスターのワーカー・ノードがパブリック VLAN とプライベート VLAN の両方に接続しているが、[プライベート専用クラスター](/docs/containers?topic=containers-plan_clusters#private_clusters)に変更したい。
 * プライベート専用クラスターであるが、パブリック VLAN に接続した[エッジ・ノード](/docs/containers?topic=containers-edge#edge)のワーカー・プールなど、一部のワーカー・ノードでアプリをインターネットに公開したい。
 
 代わりに、マスター対ワーカーの通信用のサービス・エンドポイントを変更できませんか? [パブリック・サービス・エンドポイント](#set-up-public-se)と [プライベート](#set-up-private-se)・サービス・エンドポイントをセットアップするトピックを確認してください。
 {: tip}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * スタンドアロンのワーカー・ノード (ワーカー・プールの一部ではないワーカー・ノード) は、[ワーカー・プールに更新します](/docs/containers?topic=containers-update#standalone_to_workerpool)。
 
 ワーカー・ノードをプロビジョンするときにワーカー・プールが使用する VLAN を変更するには、以下の手順を実行します。
@@ -141,7 +226,7 @@ subcollection: containers
 
 4. ゾーンごとに、新しい VLAN ネットワーク・メタデータをワーカー・プールにセットアップします。 ワーカー・プールを新規作成することも、既存のワーカー・プールを変更することもできます。
 
-  * **ワーカー・プールを新規作成する**: [ワーカー・プールを新規作成してワーカー・ノードを追加する](/docs/containers?topic=containers-clusters#add_pool)を参照してください。
+  * **ワーカー・プールを新規作成する**: [ワーカー・プールを新規作成してワーカー・ノードを追加する](/docs/containers?topic=containers-add_workers#add_pool)を参照してください。
 
   * **既存のワーカー・プールを変更する**: ゾーンごとに特定の VLAN を使用するようにワーカー・プールのネットワーク・メタデータを設定します。 プール内に既に作成されているワーカー・ノードは前の VLAN を使用し続けますが、プール内の新しいワーカー・ノードは、設定した新しい VLAN メタデータを使用します。
 
@@ -204,183 +289,4 @@ subcollection: containers
 
 8. オプション: クラスター内の各ワーカー・プールについて、手順 2 から 7 までを繰り返すことができます。 これらの手順が完了すると、クラスター内のすべてのワーカー・ノードに新しい VLAN がセットアップされます。
 
-<br />
-
-
-## プライベート・サービス・エンドポイントのセットアップ
-{: #set-up-private-se}
-
-Kubernetes バージョン 1.11 以降を実行するクラスターでは、クラスターのプライベート・サービス・エンドポイントを有効/無効にできます。
-{: shortdesc}
-
-プライベート・サービス・エンドポイントがあれば、Kubernetes マスターにプライベートからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、プライベート・ネットワーク経由で Kubernetes マスターと通信できます。 プライベート・サービス・エンドポイントを有効にできるかどうかを調べるには、 [マスター対ワーカーの通信の計画](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を参照してください。 プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
-
-**クラスター作成時に有効にする手順**</br>
-1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
-3. ファイアウォールの内側の環境にクラスターを作成する場合は、使用する予定のインフラストラクチャー・リソースや {{site.data.keyword.Bluemix_notm}} サービスの[パブリック IP およびプライベート IP へのアウトバウンド・トラフィックを許可](/docs/containers?topic=containers-firewall#firewall_outbound)します。
-4. クラスターを作成します。
-  * [CLIを使用してクラスターを作成し、](/docs/containers?topic=containers-clusters#clusters_cli)`--private-service-endpoint` フラグを使用します。 パブリック・サービス・エンドポイントも有効にする場合は、`--public-service-endpoint` フラグも使用します。
-  * [UI でクラスターを作成し、](/docs/containers?topic=containers-clusters#clusters_ui_standard)**「プライベート・エンドポイントのみ (Private endpoint only)」**を選択します。 パブリック・サービス・エンドポイントも有効にする場合は、**「パブリック・エンドポイントとプライベート・エンドポイント (Both private & public endpoints)」**を選択します。
-5. ファイアウォールの内側の環境のクラスターに対してプライベート・サービス・エンドポイントのみを有効にする場合:
-  1. {{site.data.keyword.Bluemix_notm}} プライベート・ネットワークの中で作業していること、または、VPN 接続経由でプライベート・ネットワークに接続していることを確認します。
-  2. [許可されたクラスター・ユーザーに対して、`kubectl` コマンドの実行を許可し](/docs/containers?topic=containers-firewall#firewall_kubectl)、プライベート・サービス・エンドポイントを介してマスターにアクセスできるようにします。 `kubectl` コマンドを実行するクラスター・ユーザーは、{{site.data.keyword.Bluemix_notm}} プライベート・ネットワークの中で作業しているか、VPN 接続経由でプライベート・ネットワークに接続している必要があります。
-  3. ネットワーク・アクセスが会社のファイアウォールによって保護されている場合は、[ファイアウォールで `ibmcloud` API および `ibmcloud ks` API のパブリック・エンドポイントへのアクセスを許可する](/docs/containers?topic=containers-firewall#firewall_bx)必要があります。 マスターへのすべての通信はプライベート・ネットワークを経由しますが、`ibmcloud` コマンドと `ibmcloud ks` コマンドはパブリック API エンドポイントを経由する必要があります。
-
-  </br>
-
-**クラスター作成後に有効にする手順**</br>
-1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
-3. プライベート・サービス・エンドポイントを有効にします。
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-4. プライベート・サービス・エンドポイントを使用するには、Kubernetes マスター API サーバーをリフレッシュします。 CLI のプロンプトに従うか、または以下のコマンドを手動で実行します。
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-5. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
-6. クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
-
-   <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
-   ```
-   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-   ```
-   {: pre}
-
-8. クラスターがファイアウォールの内側の環境にある場合:
-  * [許可されたクラスター・ユーザーに対して、`kubectl` コマンドの実行を許可し、プライベート・サービス・エンドポイントを介してマスターにアクセスできるようにします。](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * 使用する予定のインフラストラクチャー・リソースや {{site.data.keyword.Bluemix_notm}} サービスの[プライベート IP へのアウトバウンド・ネットワーク・トラフィックを許可](/docs/containers?topic=containers-firewall#firewall_outbound)します。
-
-9. オプション: プライベート・サービス・エンドポイントのみを使用するには、パブリック・サービス・エンドポイントを無効にします。
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-  </br>
-
-**無効にする手順**</br>
-プライベート・サービス・エンドポイントは無効にできません。
-
-## パブリック・サービス・エンドポイントのセットアップ
-{: #set-up-public-se}
-
-クラスターのパブリック・サービス・エンドポイントを有効または無効にします。
-{: shortdesc}
-
-パブリック・サービス・エンドポイントがあれば、Kubernetes マスターにパブリックからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、パブリック・ネットワークを介して Kubernetes マスターと安全に通信できます。 パブリック・サービス・エンドポイントを有効にできるかどうかを調べるには、[ワーカー・ノードと Kubernetes マスターの通信の計画](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を参照してください。
-
-**クラスター作成時に有効にする手順**</br>
-
-1. ファイアウォールの内側の環境にクラスターを作成する場合は、使用する予定の {{site.data.keyword.Bluemix_notm}} サービスの[パブリック IP およびプライベート IP へのアウトバウンド・ネットワーク・トラフィック](/docs/containers?topic=containers-firewall#firewall_outbound)を許可します。
-
-2. クラスターを作成します。
-  * [CLI を使用してクラスターを作成し、](/docs/containers?topic=containers-clusters#clusters_cli)`--public-service-endpoint` フラグを使用します。 プライベート・サービス・エンドポイントも有効にする場合は、`--private-service-endpoint` フラグも使用します。
-  * [UI でクラスターを作成し、](/docs/containers?topic=containers-clusters#clusters_ui_standard)**「パブリック・エンドポイントのみ (Public endpoint only)」**を選択します。 プライベート・サービス・エンドポイントも有効にする場合は、**「パブリック・エンドポイントとプライベート・エンドポイント (Both private & public endpoints)」**を選択します。
-
-3. ファイアウォールの内側の環境にクラスターを作成する場合は、[許可されたクラスター・ユーザーに対して `kubectl` コマンドの実行を許可し、パブリック・サービス・エンドポイントからのみマスターにアクセスできるようにするか、またはパブリックとプライベートの両方のサービス・エンドポイントからマスターにアクセスできるようにします。](/docs/containers?topic=containers-firewall#firewall_kubectl)
-
-  </br>
-
-**クラスター作成後に有効にする手順**</br>
-パブリック・エンドポイントを無効にした場合は、後で再び有効にすることができます。
-1. パブリック・サービス・エンドポイントを有効にします。
-   ```
-   ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. パブリック・サービス・エンドポイントを使用するには、Kubernetes マスター API サーバーをリフレッシュします。 CLI のプロンプトに従うか、または以下のコマンドを手動で実行します。
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   </br>
-
-**無効にする手順**</br>
-パブリック・サービス・エンドポイントを無効にするには、まず、ワーカー・ノードが Kubernetes マスターと通信できるように、プライベート・サービス・エンドポイントを有効にする必要があります。
-1. プライベート・サービス・エンドポイントを有効にします。
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. プライベート・サービス・エンドポイントを使用するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-3. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
-
-4. クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
-
-   <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
-   ```
-   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-   ```
-  {: pre}
-5. パブリック・サービス・エンドポイントを無効にします。
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-## パブリック・サービス・エンドポイントからプライベート・サービス・エンドポイントへの切り替え
-{: #migrate-to-private-se}
-
-Kubernetes バージョン 1.11 以降を実行するクラスターでは、プライベート・サービス・エンドポイントを有効にして、ワーカー・ノードにパブリック・ネットワークではなくプライベート・ネットワーク経由でマスターと通信させることができます。
-{: shortdesc}
-
-パブリック VLAN およびプライベート VLAN に接続しているすべてのクラスターは、デフォルトでは、パブリック・サービス・エンドポイントを使用します。 ワーカー・ノードと許可されたクラスター・ユーザーは、パブリック・ネットワークを介して Kubernetes マスターと安全に通信できます。 ワーカー・ノードにパブリック・ネットワークではなくプライベート・ネットワーク経由で Kubernetes マスターと通信させるには、プライベート・サービス・エンドポイントを有効にします。 その後に、任意でパブリック・サービス・エンドポイントを無効にできます。
-* プライベート・サービス・エンドポイントを有効にし、パブリック・サービス・エンドポイントも有効にしたままの場合、ワーカーは常にプライベート・ネットワーク経由でマスターと通信します。一方、ユーザーはパブリックとプライベートのどちらのネットワーク経由でもマスターと通信できます。
-* プライベート・サービス・エンドポイントを有効にし、パブリック・サービス・エンドポイントを無効にした場合、ワーカーとユーザーはプライベート・ネットワーク経由でマスターと通信しなければなりません。
-
-プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
-
-1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
-3. プライベート・サービス・エンドポイントを有効にします。
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-4. プライベート・サービス・エンドポイントを使用するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-5. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
-
-6.  クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
-
-    <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
-    ```
-    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-    ```
-    {: pre}
-
-7. オプション: パブリック・サービス・エンドポイントを無効にします。
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-<br />
-
-
-## オプション: ネットワーク・ワークロードをエッジ・ワーカー・ノードに分離する
-{: #both_vlans_private_edge}
-
-エッジ・ワーカー・ノードを使用すると、外部的にアクセスされるワーカー・ノードの数を減らし、ネットワークのワークロードを分離することができるので、クラスターのセキュリティーが改善されます。 指定したワーカー・ノードにのみネットワーク・ロード・バランサー (NLB) ポッドと Ingress アプリケーション・ロード・バランサー (ALB) ポッドがデプロイされるようにするには、[ワーカー・ノードにエッジ・ノードのラベルを付けます](/docs/containers?topic=containers-edge#edge_nodes)。 他のワークロードをエッジ・ノードで実行しないようにするには、[エッジ・ノードにテイントを適用します](/docs/containers?topic=containers-edge#edge_workloads)。
-{: shortdesc}
-
-クラスターをパブリック VLAN に接続しているけれども、エッジ・ワーカー・ノード上のパブリック NodePorts へのトラフィックをブロックしたい場合は、 [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)も使用できます。 ノード・ポートをブロックすることにより、エッジ・ワーカー・ノードだけが着信トラフィックを扱うワーカー・ノードとなります。
-
-## オプション: プライベート・ネットワーク上のクラスターを分離する
-{: #isolate}
-
-複数ゾーン・クラスター、単一ゾーン・クラスター用の複数 VLAN、または同じ VLAN 上に複数のサブネットがある場合、[VLAN スパンニングを有効](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)にするか、または [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、プライベート・ネットワークによるワーカー・ノードの相互通信を可能にする必要があります。 ただし、VLAN スパンニングまたは VRF が有効になっている場合、同じ IBM Cloud アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステムはワーカーにアクセスできます。 [Calico ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#isolate_workers)を使用して、プライベート・ネットワーク上の他のシステムから複数ゾーン・クラスターを分離できます。 このポリシーでは、プライベート・ファイアウォールで開いたプライベート IP 範囲およびポートの着信および発信も許可されます。
-{: shortdesc}
+9. クラスター内のデフォルトの ALB は、その IP アドレスが古い VLAN 上のサブネットからのものであるため、引き続きその VLAN にバインドされます。 ALB を VLAN 間で移動することはできないため、代わりに、[新しい VLAN 上に ALB を作成し、古い VLAN 上の ALB を無効化](/docs/containers?topic=containers-ingress#migrate-alb-vlan)できます。

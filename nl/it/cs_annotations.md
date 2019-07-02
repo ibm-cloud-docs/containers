@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Personalizzazione di Ingress con le annotazioni
@@ -29,7 +31,7 @@ subcollection: containers
 Per aggiungere funzionalità al tuo ALB (application load balancer) Ingress, puoi specificare delle annotazioni sotto forma di metadati in una risorsa Ingress.
 {: shortdesc}
 
-Prima di utilizzare le annotazioni, assicurati di aver impostato correttamente la configurazione del tuo servizio Ingress seguendo la procedura in [Bilanciamento del carico HTTPS con ALB (application load balancers) Ingress](/docs/containers?topic=containers-ingress). Una volta impostato l'ALB Ingress con una configurazione di base, puoi espanderne le capacità aggiungendo le annotazioni al file di risorse Ingress.
+Prima di utilizzare le annotazioni, assicurati di aver impostato correttamente la configurazione del tuo servizio Ingress seguendo la procedura in [Bilanciamento del carico HTTPS con ALB (application load balancer) Ingress](/docs/containers?topic=containers-ingress). Una volta impostato l'ALB Ingress con una configurazione di base, puoi espanderne le capacità aggiungendo le annotazioni al file di risorse Ingress.
 {: note}
 
 <table>
@@ -662,7 +664,6 @@ spec:
 
 **Descrizione**</br>
 Imposta il numero massimo di richieste che possono essere offerte attraverso una connessione keepalive.
-
 
 **YAML risorsa Ingress di esempio**</br>
 ```
@@ -1570,8 +1571,7 @@ spec:
   {: pre}
 
 3. Aggiungi le porte TCP alla mappa di configurazione. Sostituisci `<port>` con le porte TCP che desideri aprire.
-
-Per impostazione predefinita, sono aperte le porte 80 e 443. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte TCP che specifichi nel campo `public-ports`. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`. Per ulteriori informazioni, consulta [Apertura delle porte nell'ALB Ingress](/docs/containers?topic=containers-ingress#opening_ingress_ports).
+  Per impostazione predefinita, sono aperte le porte 80 e 443. Se vuoi mantenere le porte 80 e 443 aperte, devi includerle in aggiunta a tutte le altre porte TCP che specifichi nel campo `public-ports`. Se hai abilitato un ALB privato, devi inoltre specificare tutte le porte che vuoi mantenere aperte nel campo `private-ports`. Per ulteriori informazioni, consulta [Apertura delle porte nell'ALB Ingress](/docs/containers?topic=containers-ingress#opening_ingress_ports).
   {: note}
   ```
   apiVersion: v1
@@ -1772,7 +1772,7 @@ Instrada il traffico di rete in entrata in un percorso di dominio dell'ALB a un 
 {:shortdesc}
 
 **Descrizione**</br>
-Il tuo dominio ALB Ingress instrada il traffico di rete in entrata su `mykubecluster.us-south.containers.appdomain.cloud/beans` alla tua applicazione. La tua applicazione è in ascolto su `/coffee`, invece di `/beans`. Per inoltrare il traffico di rete in entrata alla tua applicazione, aggiungi l'annotazione di riscrittura al file di configurazione della tua risorsa Ingress. L'annotazione di riscrittura garantisce che il traffico di rete in entrata su `/beans` venga inoltrato alla tua applicazione utilizzando il percorso `/coffee`. Quando includi più servizi, utilizza solo un punto e virgola (;) per
+Il tuo dominio ALB Ingress instrada il traffico di rete in entrata su `mykubecluster.us-south.containers.appdomain.cloud/beans` alla tua applicazione. La tua applicazione è in ascolto su `/coffee`, invece di `/beans`. Per inoltrare il traffico di rete in entrata alla tua applicazione, aggiungi l'annotazione di riscrittura al file di configurazione della tua risorsa Ingress. L'annotazione di riscrittura garantisce che il traffico di rete in entrata su `/beans` venga inoltrato alla tua applicazione utilizzando il percorso `/coffee`. Quando includi più servizi, utilizza solo un carattere punto e virgola (;) non preceduto o seguito da uno spazio per
 separarli.
 
 **YAML risorsa Ingress di esempio**</br>
@@ -1823,7 +1823,7 @@ in ascolto su uno specifico percorso, ma utilizza il percorso root e una porta s
 ## Annotazioni buffer proxy
 {: #proxy-buffer}
 
-L'ALB Ingress funge da proxy tra la tua applicazione di back-end e il browser web del client. Con le annotazioni di buffer proxy, puoi configurare il modo in cui i dati vengono memorizzati nel buffer sul tuo ALB durante l'invio o la ricezione di pacchetti di dati.
+L'ALB Ingress funge da proxy tra la tua applicazione di back-end e il browser web del client. Con le annotazioni di buffer proxy, puoi configurare il modo in cui i dati vengono memorizzati nel buffer sul tuo ALB durante l'invio o la ricezione di pacchetti di dati.  
 {: shortdesc}
 
 ### Buffer di intestazione client di grandi dimensioni (`large-client-header-buffers`)
@@ -1888,7 +1888,7 @@ Utilizza l'annotazione del buffer per disabilitare l'archiviazione dei dati dell
 **Descrizione**</br>
 L'ALB Ingress funge da proxy tra la tua applicazione di back-end e il browser web del client. Quando una risposta viene inviata dall'applicazione di back-end al client, i dati della risposta vengono memorizzati nel buffer sull'ALB per impostazione predefinita. L'ALB trasmette tramite proxy la risposta client e inizia a inviare la risposta al client al ritmo del client. Una volta che l'ALB ha ricevuto tutti i dati dall'applicazione di back-end, la connessione all'applicazione di back-end viene chiusa. La connessione dall'ALB al client rimane aperta finché il client non riceve tutti i dati.
 
-Se il buffer dei dati della risposta sull'ALB è disabilitato, i dati vengono immediatamente inviati dall'ALB al client. Il client deve essere in grado di gestire i dati in entrata al ritmo dell'ALB. Se il client è troppo lento, i dati potrebbero andare persi.
+Se il buffer dei dati della risposta sull'ALB è disabilitato, i dati vengono immediatamente inviati dall'ALB al client. Il client deve essere in grado di gestire i dati in entrata al ritmo dell'ALB. Se il client è troppo lento, la connessione di upstream rimane aperta fino a quando il client non riesce a rimettersi al passo.
 
 Il buffer dei dati della risposta sull'ALB è abilitato per impostazione predefinita.
 
@@ -2354,7 +2354,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2378,6 +2378,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Facoltativo: per applicare una dimensione massima del corpo del client a un servizio specifico, sostituisci <code>&lt;<em>myservice</em>&gt;</code> con il nome del servizio. Se non specifichi un nome del servizio, la dimensione viene applicata a tutti i servizi. Nello YAML di esempio, il formato <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> applica la prima dimensione al servizio <code>myservice</code> e applica la seconda dimensione a tutti gli altri servizi.</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>La dimensione massima del corpo della risposta client. Ad esempio, per impostare la dimensione massima su 200 megabyte, definisci <code>200m</code>. Puoi impostare la dimensione su 0 per disabilitare il controllo della dimensione del corpo della richiesta client.</td>
 </tr>
@@ -2595,9 +2598,9 @@ Poiché l'applicazione utilizza {{site.data.keyword.appid_short_notm}} per l'aut
       3. Fai clic su **Crea**.
 
 2. Aggiungi gli URL di reindirizzamento per la tua applicazione. Un URL di reindirizzamento è l'endpoint di callback della tua applicazione. Per impedire attacchi di phishing, l'ID dell'applicazione convalida l'URL richiesto con la whitelist degli URL di reindirizzamento.
-  1. Nella console di gestione {{site.data.keyword.appid_short_notm}}, vai a **Provider di identità > Gestisci**.
-  2. Assicurati di aver selezionato un provider di identità. Se non vengono selezionati provider di identità, verrà emesso un token di accesso per l'accesso anonimo all'applicazione.
-  3. Nel campo **Aggiungi URL di reindirizzamento web**, aggiungi gli URL di reindirizzamento per la tua applicazione nel formato `http://<hostname>/<app_path>/appid_callback` o `https://<hostname>/<app_path>/appid_callback`.
+  1. Nella console di gestione {{site.data.keyword.appid_short_notm}}, passa a **Gestisci autenticazione**.
+  2. Nella scheda **Provider di identità**, assicurati di avere un Provider di identità selezionato. Se non vengono selezionati provider di identità, verrà emesso un token di accesso per l'accesso anonimo all'applicazione.
+  3. Nella scheda **Impostazioni di autenticazione**, aggiungi gli URL di reindirizzamento per la tua applicazione nel formato `http://<hostname>/<app_path>/appid_callback` o `https://<hostname>/<app_path>/appid_callback`.
 
     {{site.data.keyword.appid_full_notm}} offre una funzione di disconnessione: se `/logout` è presente nel tuo percorso di {{site.data.keyword.appid_full_notm}}, i cookie vengono rimossi e l'utente viene rimandato alla pagina di accesso. Per utilizzare questa funzione, devi aggiungere `/appid_logout` al tuo dominio nel formato `https://<hostname>/<app_path>/appid_logout` e includere questo URL nell'elenco degli URL di reindirizzamento.
     {: note}
@@ -2626,3 +2629,5 @@ della tua istanza del servizio. Output CLI di esempio:
   {: pre}
 
 5. Utilizza il segreto di bind e lo spazio dei nomi del cluster per aggiungere l'annotazione `appid-auth` alla tua risorsa Ingress.
+
+

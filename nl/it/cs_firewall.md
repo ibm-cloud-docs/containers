@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -159,7 +160,7 @@ Per concedere l'accesso per un cluster specifico:
    }
     ```
     {: screen}
-  * Se è abilitato l'endpoint del servizio privato, devi trovarti nella tua rete privata {{site.data.keyword.Bluemix_notm}} o connetterti alla rete privata attraverso una connessione VPN per verificare la tua connessione al master:
+  * Se è abilitato l'endpoint del servizio privato, devi trovarti nella tua rete privata {{site.data.keyword.Bluemix_notm}} o connetterti alla rete privata attraverso una connessione VPN per verificare la tua connessione al master. Nota: devi [esporre l'endpoint master tramite un programma di bilanciamento del carico privato](/docs/containers?topic=containers-clusters#access_on_prem) in modo che gli utenti possano accedere al master tramite una VPN o una connessione {{site.data.keyword.BluDirectLink}}.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -230,7 +231,7 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
     ```
     {: pre}
 
-2.  Consenti il traffico di rete in uscita da <em>&lt;each_worker_node_publicIP&gt;</em> di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-32767 e alla porta 443, e ai seguenti indirizzi IP e gruppi di reti. Se hai un firewall aziendale che impedisce l'accesso alla tua macchina locale dagli endpoint Internet pubblici, segui questa procedura per i tuoi nodi di lavoro di origine e la tua macchina locale.
+2.  Consenti il traffico di rete in uscita da <em>&lt;each_worker_node_publicIP&gt;</em> di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-32767 e alla porta 443, e ai seguenti indirizzi IP e gruppi di reti. Questi indirizzi IP consentono ai nodi di lavoro di comunicare con il master cluster. Se hai un firewall aziendale che impedisce alla tua macchina locale di accedere agli endpoint internet pubblici, esegui questa operazione anche per la tua macchina locale in modo da poter accedere al master cluster.
 
     Devi consentire il traffico in uscita alla porta 443 per tutte le zone all'interno della regione, per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster si trova negli Stati Uniti Sud, devi consentire il traffico dagli IP pubblici su ciascuno dei tuoi nodi di lavoro alla porta 443 dell'indirizzo IP per tutte le zone.
     {: important}
@@ -284,7 +285,7 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
           </tbody>
         </table>
 
-3.  Consenti il traffico di rete in uscita dai nodi di lavoro alle [regioni {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
+3.  {: #firewall_registry}Per permettere ai nodi di lavoro di comunicare con {{site.data.keyword.registrylong_notm}}, consenti il traffico di rete in uscita dai nodi di lavoro alle [regioni {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions):
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  Sostituisci <em>&lt;registry_subnet&gt;</em> con la sottorete del registro per cui desideri consentire il traffico. Il registro globale archivia le immagini pubbliche fornite da IBM e i registri regionali archiviano le tue proprie immagini pubbliche e private. La porta 4443 è richiesta per funzioni notarili, come ad esempio la [Verifica delle firme delle immagini](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con la zona server nella colonna uno e gli indirizzi IP corrispondenti nella colonna due.">
   <caption>Gli indirizzi IP da aprire per il traffico del registro</caption>
@@ -297,49 +298,43 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
     <tbody>
       <tr>
         <td>Registro globale tra le regioni <br>Regioni {{site.data.keyword.containerlong_notm}}</td>
-        <td><strong>Pubblico</strong>: <code>icr.io</code><br>
-        Obsoleto: <code>registry.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        Obsoleto: <code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>Asia Pacifico Nord</td>
-        <td><strong>Pubblico</strong>: <code>jp.icr.io</code><br>
-        Obsoleto: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        Obsoleto: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>Asia Pacifico Sud</td>
-        <td><strong>Pubblico</strong>: <code>au.icr.io</code><br>
-        Obsoleto: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        Obsoleto: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>Europa Centrale</td>
-        <td><strong>Pubblico</strong>: <code>de.icr.io</code><br>
-        Obsoleto: <code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        Obsoleto: <code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>Regno Unito Sud</td>
-        <td><strong>Pubblico</strong>: <code>uk.icr.io</code><br>
-        Obsoleto: <code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        Obsoleto: <code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>Stati Uniti Est, Stati Uniti Sud</td>
-        <td><strong>Pubblico</strong>: <code>us.icr.io</code><br>
-        Obsoleto: <code>registry.ng.bluemix.net</code><br><br>
-        <strong>Privato</strong>: <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        Obsoleto: <code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -463,7 +458,7 @@ Se hai un firewall sulla rete privata, consenti le comunicazioni tra i nodi di l
 
 2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) in modo da poter creare nodi di lavoro nel tuo cluster.
     1. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) appropriati. Vedi [Rete di backend (privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) per tutte le [zone](/docs/containers?topic=containers-regions-and-zones#zones) che stai utilizzando. Nota: devi aggiungere gli IP per le zone `dal01` e `wdc04`. Vedi [Rete del servizio (nella rete di backend/privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) per tutte le [zone](/docs/containers?topic=containers-regions-and-zones#zones) che stai utilizzando. Nota: devi aggiungere gli IP per le zone `dal01`, `dal10` e `wdc04` e, se il tuo cluster si trova nell'area geografica Europa, per la zona `ams01`. Vedi [Rete del servizio (nella rete di backend/privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Apri le seguenti porte:
     - Consenti connessioni TCP e UDP in uscita dai nodi di lavoro alle porte 80 e 443 per consentire gli aggiornamenti e i ricaricamenti dei nodi di lavoro.
@@ -472,7 +467,7 @@ Se hai un firewall sulla rete privata, consenti le comunicazioni tra i nodi di l
     - Consenti connessioni TCP e UDP in entrata alla porta 10250 per il dashboard Kubernetes e comandi come `kubectl logs` e `kubectl exec`.
     - Consenti connessioni in entrata e in uscita TCP e UDP alla porta 53 per l'accesso DNS.
 
-4. Se hai anche un firewall sulla rete pubblica o se hai un cluster solo VLAN privata e stai utilizzando un'applicazione gateway come firewall, devi consentire anche gli IP e le porte specificati in [Concessione al cluster dell'accesso alle risorse dell'infrastruttura e ad altri servizi](#firewall_outbound).
+4. Se hai anche un firewall sulla rete pubblica o se hai un cluster solo VLAN privata e stai utilizzando un dispositivo gateway come firewall, devi consentire anche gli IP e le porte specificati in [Concessione al cluster dell'accesso alle risorse dell'infrastruttura e ad altri servizi](#firewall_outbound).
 
 <br />
 
@@ -583,13 +578,13 @@ Se vuoi accedere a servizi eseguiti all'interno o all'esterno di {{site.data.key
       ```
       {: pre}
 
-    2. Dall'output del passo precedente, prendi nota di tutti gli ID di rete univoci (i primi 3 ottetti) dell'**IP pubblico** per i nodi di lavoro nel tuo cluster.<staging> Se vuoi inserire nella whitelist un cluster solo privato, prendi nota invece dell'**IP privato**.<staging> Nel seguente output, gli ID di rete univoci sono `169.xx.178` e `169.xx.210`.
+    2. Dall'output del passo precedente, prendi nota di tutti gli ID di rete univoci (primi 3 ottetti) dell'**IP pubblico** per i nodi di lavoro nel tuo cluster. Se vuoi inserire in whitelist un cluster solo privato, prendi invece nota dell'**IP privato** . Nel seguente output, gli ID di rete univoci sono `169.xx.178` e `169.xx.210`.
         ```
-        ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  Elenca le sottoreti VLAN per ogni ID di rete univoco.

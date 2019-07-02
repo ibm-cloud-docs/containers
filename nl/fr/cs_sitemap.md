@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-04-15"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Plan du site
@@ -149,15 +150,6 @@ lastupdated: "2019-04-15"
   * [Leçon 3b : Mise à jour du déploiement Watson Tone Analyzer en cours d'exécution](/docs/containers?topic=containers-cs_apps_tutorial#lesson3b)
 * [Etape suivante ?](/docs/containers?topic=containers-cs_apps_tutorial#apps_next)
 
-[Tutoriel : Utilisation du module complémentaire géré Knative pour exécuter des applications sans serveur dans les clusters Kubernetes](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
-* [Objectifs](/docs/containers?topic=containers-knative_tutorial#knative_objectives)
-* [Durée](/docs/containers?topic=containers-knative_tutorial#knative_time)
-* [Public](/docs/containers?topic=containers-knative_tutorial#knative_audience)
-* [Prérequis](/docs/containers?topic=containers-knative_tutorial#knative_prerequisites)
-* [Leçon 1 : Configuration du module complémentaire géré Knative](/docs/containers?topic=containers-knative_tutorial#knative_setup)
-* [Leçon 2 : Déploiement d'une application sans serveur dans votre cluster](/docs/containers?topic=containers-knative_tutorial#deploy_app)
-* [Etape suivante ?](/docs/containers?topic=containers-knative_tutorial#whats-next)
-
 [Tutoriel : Utilisation des règles réseau Calico pour bloquer le trafic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [Objectifs](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
 * [Durée](/docs/containers?topic=containers-policy_tutorial#policies_time)
@@ -199,40 +191,63 @@ lastupdated: "2019-04-15"
 * [Actualisation des jetons d'accès {{site.data.keyword.Bluemix_notm}} IAM et acquisition de nouveaux jetons d'actualisation avec l'API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
 * [Actualisation des jetons d'accès {{site.data.keyword.Bluemix_notm}} IAM et acquisition de nouveaux jetons d'actualisation avec l'interface de ligne de commande (CLI)](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
+## Configuration de clusters
+{: #sitemap-setup-clusters}
+
+[Planification d'une configuration de réseau pour votre cluster](/docs/containers?topic=containers-plan_clusters)
+* [Description des principes de base d'un réseau de cluster](/docs/containers?topic=containers-plan_clusters#plan_basics)
+  * [Communication entre noeuds worker](/docs/containers?topic=containers-plan_clusters#worker-worker)
+  * [Communication entre le maître et les noeuds worker](/docs/containers?topic=containers-plan_clusters#workeruser-master)
+  * [Communication entre les noeuds Worker et d'autres services {{site.data.keyword.Bluemix_notm}} ou réseaux sur site](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
+  * [Communication externe avec des applications qui s'exécutent sur des noeuds worker](docs/containers?topic=containers-plan_clusters#external-workers)
+* [Scénario : Exécution de charges de travail d'application accessible sur Internet dans un cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
+* [Scénario : Extension de votre centre de données sur site à un cluster sur le réseau privé et ajout d'un accès public limité](/docs/containers?topic=containers-plan_clusters#internet-facing)
+  * [Utilisation de noeuds de périphérie et de règles réseau Calico](/docs/containers?topic=containers-plan_clusters#internet-facing)
+  * [Utilisation d'un périphérique de passerelle](/docs/containers?topic=containers-plan_clusters#internet-facing)
+* [Scénario : Extension de votre centre de données sur site à un cluster sur le réseau privé](/docs/containers?topic=containers-plan_clusters#internet-facing)
+
+[Planification de votre cluster pour la haute disponibilité](/docs/containers?topic=containers-ha_clusters)
+* [Cluster à zone unique](/docs/containers?topic=containers-ha_clusters#single_zone)
+* [Cluster à zones multiples](/docs/containers?topic=containers-ha_clusters#multizone)
+  * [Pouvez-vous m'en dire davantage sur la configuration d'un cluster à zones multiples ?](/docs/containers?topic=containers-ha_clusters#mz_setup)
+  * [Quels sont les changements par rapport à la façon dont je gère mes clusters actuellement ?](/docs/containers?topic=containers-ha_clusters#mz_new_ways)
+* [Plusieurs clusters connectés avec un équilibreur de charge global](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
+
+[Planification de la configuration de noeud worker](/docs/containers?topic=containers-planning_worker_nodes)
+* [Matériel disponible pour les noeuds worker](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
+* [Machines virtuelles](/docs/containers?topic=containers-planning_worker_nodes#vm)
+* [Machines physiques (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
+* [Machines SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds)
+* [Réserves de ressources de noeud worker](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
+
+[Création de clusters](/docs/containers?topic=containers-clusters)
+* [Au niveau du compte](/docs/containers?topic=containers-clusters#cluster_prepare)
+* [Au niveau du cluster](/docs/containers?topic=containers-clusters#prepare_cluster_level)
+* [Création d'un cluster gratuit](/docs/containers?topic=containers-clusters#clusters_free)
+  * [Création d'un cluster gratuit dans la console](/docs/containers?topic=containers-clusters#clusters_ui_free)
+  * [Création d'un cluster gratuit dans l'interface de ligne de commande](/docs/containers?topic=containers-clusters#clusters_cli_free)
+* [Création d'un cluster gratuit](/docs/containers?topic=containers-clusters#clusters_standard)
+  * [Création d'un cluster standard dans la console](/docs/containers?topic=containers-clusters#clusters_ui)
+  * [Création d'un cluster standard dans l'interface de ligne de commande](/docs/containers?topic=containers-clusters#clusters_cli_steps)
+* [Accès à votre cluster](/docs/containers?topic=containers-clusters#access_cluster)
+  * [Accès aux clusters via le noeud final de service public](/docs/containers?topic=containers-clusters#access_internet)
+  * [Accès aux clusters via le noeud final de service privé](/docs/containers?topic=containers-clusters#access_on_prem)
+* [Etapes suivantes](/docs/containers?topic=containers-clusters#next_steps)
+  * [Exécution de charges de travail d'application accessible sur Internet dans un cluster](/docs/containers?topic=containers-clusters#next_steps_internet)
+  * [Extension de votre centre de données sur site à un cluster et autorisation de l'accès public limité à l'aide de noeuds de périphérie et de règles réseau Calico](/docs/containers?topic=containers-clusters#next_steps_calico)
+  * [Extension de votre centre de données sur site à un cluster et autorisation de l'accès public limité à l'aide d'un périphérique de passerelle](/docs/containers?topic=containers-clusters#next_steps_gateway)
+  * [Extension de votre centre de données sur site à un cluster sur le réseau privé uniquement](/docs/containers?topic=containers-clusters#next_steps_extend)
+
+[Ajout de noeuds worker et de zones dans les clusters](/docs/containers?topic=containers-add_workers)
+* [Ajout de noeuds worker en redimensionnant un pool de noeuds worker existant](/docs/containers?topic=containers-add_workers#resize_pool)
+* [Ajout de noeuds worker en créant un nouveau pool de noeuds worker](/docs/containers?topic=containers-add_workers#add_pool)
+* [Ajout de noeuds worker en ajoutant une zone dans un pool de noeuds worker](/docs/containers?topic=containers-add_workers#add_zone)
+* [Déprécié : Ajout de noeuds worker autonomes](/docs/containers?topic=containers-add_workers#standalone)
+* [Ajout de libellés à des pools de noeuds worker existants](/docs/containers?topic=containers-add_workers#worker_pool_labels)
+* [Reprise automatique pour vos noeuds worker](/docs/containers?topic=containers-add_workers#planning_autorecovery)
+
 ## Administration des clusters
 {: #sitemap-clusters-admin}
-
-[Planification de votre cluster et configuration de noeuds worker](/docs/containers?topic=containers-plan_clusters#plan_clusters)
-* [Clusters à haute disponibilité](/docs/containers?topic=containers-plan_clusters#ha_clusters)
-* [Cluster à zone unique](/docs/containers?topic=containers-plan_clusters#single_zone)
-* [Cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone)
-  * [Pouvez-vous m'en dire davantage sur la configuration d'un cluster à zones multiples ?](/docs/containers?topic=containers-plan_clusters#mz_setup)
-  * [Quels sont les changements par rapport à la façon dont je gère mes clusters actuellement ?](/docs/containers?topic=containers-plan_clusters#mz_new_ways)
-* [Plusieurs clusters connectés avec un équilibreur de charge global](/docs/containers?topic=containers-plan_clusters#multiple_clusters)
-* [Clusters privés](/docs/containers?topic=containers-plan_clusters#private_clusters)
-* [Pools de noeuds worker et noeuds worker](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)
-* [Matériel disponible pour les noeuds worker](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
-  * [Machines virtuelles](/docs/containers?topic=containers-plan_clusters#vm)
-  * [Machines physiques (bare metal)](/docs/containers?topic=containers-plan_clusters#bm)
-  * [Machines SDS (Software-Defined Storage)](/docs/containers?topic=containers-plan_clusters#sds)
-* [Réserves de ressources de noeud worker](/docs/containers?topic=containers-plan_clusters#resource_limit_node)
-* [Reprise automatique pour vos noeuds worker](/docs/containers?topic=containers-plan_clusters#planning_autorecovery)
-
-[Configuration de clusters et de noeuds worker](/docs/containers?topic=containers-clusters#clusters)
-* [Préparation à la création des clusters](/docs/containers?topic=containers-clusters#cluster_prepare)
-  * [Au niveau du compte](/docs/containers?topic=containers-clusters#prepare_account_level)
-  * [Au niveau du cluster](/docs/containers?topic=containers-clusters#prepare_cluster_level)
-* [Création de clusters avec la console {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-clusters#clusters_ui)
-  * [Création d'un cluster gratuit](/docs/containers?topic=containers-clusters#clusters_ui_free)
-  * [Création d'un cluster standard](/docs/containers?topic=containers-clusters#clusters_ui_standard)
-* [Création de clusters avec l'interface de ligne de commande (CLI) {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-clusters#clusters_cli)
-* [Ajout de noeuds worker et de zones dans les clusters](/docs/containers?topic=containers-clusters#add_workers)
-  * [Ajout de noeuds worker en redimensionnant un pool de noeuds worker existant](/docs/containers?topic=containers-clusters#resize_pool)
-  * [Ajout de noeuds worker en créant un nouveau pool de noeuds worker](/docs/containers?topic=containers-clusters#add_pool)
-  * [Ajout de noeuds worker en ajoutant une zone dans un pool de noeuds worker](/docs/containers?topic=containers-clusters#add_zone)
-  * [Déprécié : Ajout de noeuds worker autonomes](/docs/containers?topic=containers-clusters#standalone)
-* [Affichage des états d'un cluster](/docs/containers?topic=containers-clusters#states)
-* [Suppression de clusters](/docs/containers?topic=containers-clusters#remove)
 
 [Mise à l'échelle des clusters](/docs/containers?topic=containers-ca#ca)
 * [Comment fonctionne le programme de mise à l'échelle automatique de cluster ?](/docs/containers?topic=containers-ca#ca_about)
@@ -249,9 +264,10 @@ lastupdated: "2019-04-15"
 * [Mise à jour des noeuds worker](/docs/containers?topic=containers-update#worker_node)
   * [Mise à jour des noeuds worker dans la console](/docs/containers?topic=containers-update#worker_up_console)
 * [Mise à jour des types de machine](/docs/containers?topic=containers-update#machine_type)
-* [Mise à jour des modules complémentaires de cluster](/docs/containers?topic=containers-update#addons)
+* [Mise à jour de composants de cluster](/docs/containers?topic=containers-update#components)
   * [Gestion des mises à jour automatiques pour le module complémentaire Fluentd pour la consignation](/docs/containers?topic=containers-update#logging-up)
   * [Gestion des mises à jour automatiques pour le module complémentaire ALB Ingress](/docs/containers?topic=containers-update#alb)
+* [Mise à jour des modules complémentaires de cluster](/docs/containers?topic=containers-update#addons)
 * [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users)
@@ -299,21 +315,19 @@ lastupdated: "2019-04-15"
 
 [Consignation et surveillance](/docs/containers?topic=containers-health#health)
 * [Choix d'une solution de consignation](/docs/containers?topic=containers-health#logging_overview)
-* [Description de l'acheminement des journaux de cluster et d'application](/docs/containers?topic=containers-health#logging)
-* [Configuration de l'acheminement des journaux de cluster et d'application](/docs/containers?topic=containers-health#configuring)
-  * [Activation de l'acheminement des journaux avec la console {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-health#enable-forwarding-ui)
-  * [Activation de l'acheminement des journaux avec l'interface de ligne de commande](/docs/containers?topic=containers-health#enable-forwarding)
-  * [Vérification de l'acheminement des journaux](/docs/containers?topic=containers-health#verifying-log-forwarding)
-  * [Mise à jour de l'acheminement des journaux](/docs/containers?topic=containers-health#updating-forwarding)
-  * [Arrêt de l'acheminement des journaux](/docs/containers?topic=containers-health#log_sources_delete)
-  * [Affichage des journaux](/docs/containers?topic=containers-health#view_logs)
-* [Filtrage des journaux](/docs/containers?topic=containers-health#filter-logs)
-* [Configuration de l'acheminement des journaux d'audit d'API Kubernetes](/docs/containers?topic=containers-health#api_forward)
-  * [Envoi des journaux d'audit à Log Analysis](/docs/containers?topic=containers-health#audit_enable_loganalysis)
-  * [Envoi des journaux d'audit à un serveur externe](/docs/containers?topic=containers-health#audit_enable)
-* [Collecte des journaux du maître](/docs/containers?topic=containers-health#collect_master)
+* [Acheminement des journaux de cluster et d'application vers {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Déprécié : Acheminement des journaux de cluster, d'application et d'audit d'API Kubernetes vers IBM Cloud Log Analysis](/docs/containers?topic=containers-health#loga)
+* [Acheminement des journaux de cluster, d'application et d'audit d'API Kubernetes vers un serveur externe](/docs/containers?topic=containers-health#configuring)
+  * [Compréhension de l'acheminement des journaux vers un serveur externe](/docs/containers?topic=containers-health#logging)
+  * [Acheminement des journaux de cluster et d'application](/docs/containers?topic=containers-health#enable-forwarding)
+  * [Acheminement des journaux d'audit d'API Kubernetes](/docs/containers?topic=containers-health#audit_enable)
+  * [Filtrage des journaux qui sont acheminés](/docs/containers?topic=containers-health#filter-logs)
+  * [Vérification, mise à jour et suppression de l'acheminement des journaux](/docs/containers?topic=containers-health#verifying-log-forwarding)
+* [Acheminement des journaux d'audit Kubernetes vers {{site.data.keyword.cloudaccesstrailfull_notm}}](/docs/containers?topic=containers-health#api_forward)
+* [Collecte des journaux maître dans un compartiment {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-health#collect_master)
 * [Choix d'une solution de surveillance](/docs/containers?topic=containers-health#view_metrics)
   * [Autres outils de surveillance de l'état de santé](/docs/containers?topic=containers-health#health_tools)
+* [Affichage des états d'un cluster](/docs/containers?topic=containers-health#states)
 * [Configurer la surveillance de l'état de santé des noeuds worker avec le système de reprise automatique](/docs/containers?topic=containers-health#autorecovery)
 
 [Optimisation des performances](/docs/containers?topic=containers-kernel#kernel)
@@ -321,53 +335,19 @@ lastupdated: "2019-04-15"
 * [Optimisation des performances de pod](/docs/containers?topic=containers-kernel#pod)
 * [Ajustement des ressources du fournisseur de métriques du cluster](/docs/containers?topic=containers-kernel#metrics)
 
-## Configuration réseau de cluster
+[Suppression de clusters](/docs/containers?topic=containers-remove)
+
+## Gestion du trafic réseau de cluster
 {: #sitemap-clusters-networking}
-
-[Planification réseau de votre cluster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)
-* [Description des principes de base d'un réseau {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics)
-  * [Quels composants de cluster doivent communiquer entre eux ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_components)
-  * [Comment fonctionne la mise en réseau dans {{site.data.keyword.containerlong_notm}} ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_vlans)
-  * [Que sont les sous-réseaux ? Quels sont les types de sous-réseaux proposés par {{site.data.keyword.containerlong_notm}} ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_subnets)
-  * [Comment sont configurés les VLAN et les sous-réseaux pour assurer la segmentation du réseau ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation)
-* [Planification de la communication entre les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker)
-  * [Quelles sont les options dont je dispose pour la connectivité de VLAN de noeud worker ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)
-  * [J'ai choisi mes connexions de VLAN. Comment les configurer ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_setup)
-  * [Puis-je changer d'avis sur mes VLAN par la suite ?](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_change)
-* [Planification de la communication entre le maître et les noeuds worker](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)
-  * [Noeud final de service public](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)
-  * [Noeud final de service privé uniquement](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)
-  * [Noeud finaux de service public et privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)
-  * [Configuration de réseau privé avec un dispositif de passerelle](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)
-* [Planification du cluster sur le réseau sur site ou pour la communication avec {{site.data.keyword.icpfull_notm}}](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn)
-  * [Etablissement d'une connexion VPN pour une configuration de VLAN public et privé](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)
-  * [Etablissement d'une connexion VPN pour une configuration de VLAN privé uniquement](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)
-
-[Configuration de votre réseau de cluster](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster)
-* [Configuration réseau avec un VLAN public et un VLAN privé](/docs/containers?topic=containers-cs_network_cluster#both_vlans)
-* [Configuration réseau avec un VLAN privé uniquement](/docs/containers?topic=containers-cs_network_cluster#setup_private_vlan)
-* [Modification des connexions de VLAN de vos noeuds worker](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
-* [Configuration du noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-* [Configuration du noeud final de service public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-* [Passage du noeud final de service public au noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
-* [Isolement des charges de travail sur le réseau avec des noeuds worker de périphérie](/docs/containers?topic=containers-cs_network_cluster#both_vlans_private_edge)
-* [Isolement de votre cluster sur le réseau privé](/docs/containers?topic=containers-cs_network_cluster#isolate)
 
 [Ouverture des ports et adresses IP requis dans votre pare-feu](/docs/containers?topic=containers-firewall#firewall)
 * [Exécution de commandes `kubectl` derrière un pare-feu](/docs/containers?topic=containers-firewall#firewall_kubectl)
 * [Exécution de commandes `calicoctl` derrière un pare-feu](/docs/containers?topic=containers-firewall#firewall_calicoctl)
 * [Autorisation accordée au cluster d'accéder aux ressources de l'infrastructure et à d'autres services](/docs/containers?topic=containers-firewall#firewall_outbound)
 * [Autorisation accordée au cluster d'accéder aux ressources via un pare-feu privé](/docs/containers?topic=containers-firewall#firewall_private)
-* [Autorisation accordée au cluster d'accéder aux ressources via des politiques sortantes Calico](/docs/containers?topic=containers-firewall#firewall_calico_egress)
+* [Autorisation accordée au cluster d'accéder aux ressources via des règles sortantes Calico](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Accès au service NodePort, au service d'équilibreur de charge et au service Ingress de l'extérieur du cluster](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Placement de votre cluster en liste blanche dans les pare-feux d'autres services ou dans les pare-feux locaux](/docs/containers?topic=containers-firewall#whitelist_workers)
-
-[Configuration du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#cluster_dns)
-* [Mise à l'échelle automatique du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
-* [Personnalisation du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#dns_customize)
-* [Configuration d'un fournisseur DNS de cluster avec CoreDNS ou KubeDNS](/docs/containers?topic=containers-cluster_dns#dns_set)
-  * [Configuration de CoreDNS comme fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#set_coredns)
-  * [Configuration de KubeDNS comme fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#set_kubedns)
 
 [Contrôle du trafic à l'aide de règles réseau](/docs/containers?topic=containers-network_policies#network_policies)
 * [Règles réseau Calico et Kubernetes par défaut](/docs/containers?topic=containers-network_policies#default_policy)
@@ -402,14 +382,43 @@ lastupdated: "2019-04-15"
 * [Configuration de l'injection de composants sidecar pour vos applications](/docs/containers?topic=containers-istio#istio_sidecar)
   * [Activation de l'injection automatique de composants sidecar](/docs/containers?topic=containers-istio#istio_sidecar_automatic)
   * [Injection manuelle de composants sidecar](/docs/containers?topic=containers-istio#istio_sidecar_manual)
-* [Exposition d'applications gérées par Istio à l'aide du sous-domaine Ingress fourni par {{site.data.keyword.IBM_notm}}](/docs/containers?topic=containers-istio#istio_expose)
-  * [Exemple : Exposition de l'application BookInfo en utilisant le sous-domaine Ingress fourni par {{site.data.keyword.IBM_notm}}](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
-  * [Exposition publique de vos propres applications gérées par Istio en connectant la passerelle Istio et l'ALB Ingress](/docs/containers?topic=containers-istio#istio_expose_link)
+* [Exposition d'applications gérées par Istio à l'aide d'un nom d'hôte fourni par IBM](/docs/containers?topic=containers-istio#istio_expose)
+  * [Exemple : Exposition de l'application BookInfo à l'aide d'un nom d'hôte fourni par IBM](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
+  * [Exposition publique d'applications gérées par Istio à l'aide d'un nom d'hôte fourni par IBM](/docs/containers?topic=containers-istio#istio_expose_link)
 * [Désinstallation d'Istio sur {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_uninstall)
   * [Désinstallation des modules complémentaires Istio gérés dans l'interface de ligne de commande](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [Désinstallation des modules complémentaires Istio gérés dans l'interface utilisateur](/docs/containers?topic=containers-istio#istio_uninstall_ui)
   * [Désinstallation d'autres installations Istio dans votre cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [Etape suivante ?](/docs/containers?topic=containers-istio#istio_next)
+
+[Configuration de sous-réseaux pour les clusters](/docs/containers?topic=containers-subnets#subnets)
+* [Présentation de la mise en réseau dans IBM Cloud Kubernetes Service](/docs/containers?topic=containers-subnets#basics)
+  * [Réseaux locaux virtuels (VLAN)](/docs/containers?topic=containers-subnets#basics_vlans)
+  * [Sous-réseaux et adresses IP](/docs/containers?topic=containers-subnets#basics_subnets)
+  * [Segmentation du réseau](/docs/containers?topic=containers-subnets#basics_segmentation)
+* [Utilisation de sous-réseaux existants pour créer un cluster](/docs/containers?topic=containers-subnets#subnets_custom)
+* [Gestion des adresses IP portables existantes](/docs/containers?topic=containers-subnets#managing_ips)
+  * [Affichage des adresses IP publiques portables disponibles](/docs/containers?topic=containers-subnets#review_ip)
+  * [Libération des adresses IP utilisées](/docs/containers?topic=containers-subnets#free)
+* [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips)
+  * [Ajout d'adresses IP portables en commandant d'autres sous-réseaux](/docs/containers?topic=containers-subnets#request)
+  * [Ajout d'adresses IP privées portables en utilisant des sous-réseaux gérés par l'utilisateur](/docs/containers?topic=containers-subnets#subnet_user_managed)
+* [Gestion du routage de sous-réseaux](/docs/containers?topic=containers-subnets#subnet-routing)
+  * [Activation du routage entre les sous-réseaux principaux sur le même VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
+  * [Gestion du routage de sous-réseaux pour les périphériques de passerelle](/docs/containers?topic=containers-subnets#vra-routing)
+
+[Modification des noeuds finaux de service ou des connexions VLAN](/docs/containers?topic=containers-cs_network_cluster)
+* [Configuration du noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+* [Configuration du noeud final de service public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [Passage du noeud final de service public au noeud final de service privé](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Modification des connexions de VLAN de vos noeuds worker](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
+
+[Configuration du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#cluster_dns)
+* [Mise à l'échelle automatique du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
+* [Personnalisation du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#dns_customize)
+* [Configuration d'un fournisseur DNS de cluster avec CoreDNS ou KubeDNS](/docs/containers?topic=containers-cluster_dns#dns_set)
+  * [Configuration de CoreDNS comme fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#set_coredns)
+  * [Configuration de KubeDNS comme fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#set_kubedns)
 
 [Configuration de la connectivité VPN](/docs/containers?topic=containers-vpn#vpn)
 * [Utilisation d'une charte Helm du service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup)
@@ -433,18 +442,6 @@ lastupdated: "2019-04-15"
 * [Mise à niveau de la charte Helm strongSwan](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Désactivation du service VPN IPsec strongSwan](/docs/containers?topic=containers-vpn#disabling-the-strongswan-ipsec-vpn-service)
 * [Utilisation d'un dispositif de routeur virtuel (VRA)](/docs/containers?topic=containers-vpn#vyatta)
-
-[Configuration de sous-réseaux pour les clusters](/docs/containers?topic=containers-subnets#subnets)
-* [Utilisation de sous-réseaux personnalisés ou existants pour créer un cluster](/docs/containers?topic=containers-subnets#subnets_custom)
-* [Gestion des adresses IP portables existantes](/docs/containers?topic=containers-subnets#managing_ips)
-  * [Affichage des adresses IP publiques portables disponibles](/docs/containers?topic=containers-subnets#review_ip)
-  * [Libération des adresses IP utilisées](/docs/containers?topic=containers-subnets#free)
-* [Ajout d'adresses IP portables](/docs/containers?topic=containers-subnets#adding_ips)
-  * [Ajout d'adresses IP portables en commandant d'autres sous-réseaux](/docs/containers?topic=containers-subnets#request)
-  * [Ajout d'adresses IP privées portables en utilisant des sous-réseaux gérés par l'utilisateur](/docs/containers?topic=containers-subnets#subnet_user_managed)
-* [Gestion du routage de sous-réseaux](/docs/containers?topic=containers-subnets#subnet-routing)
-  * [Activation du routage entre les sous-réseaux principaux sur le même VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-  * [Gestion du routage de sous-réseaux pour les dispositifs de passerelle](/docs/containers?topic=containers-subnets#vra-routing)
 
 ## Génération de conteneurs à partir d'images
 {: #sitemap-images}
@@ -531,7 +528,7 @@ lastupdated: "2019-04-15"
 [Equilibrage de charge HTTPS avec des équilibreurs de charge d'application Ingress](/docs/containers?topic=containers-ingress#ingress)
 * [Exemples de fichiers YAML](/docs/containers?topic=containers-ingress#sample_ingress)
 * [Qu'est-ce qu'Ingress ?](/docs/containers?topic=containers-ingress#planning)
-  * [Quels sont les composants fournis avec Ingress ?](/docs/containers?topic=containers-ingress#components)
+  * [Quels sont les composants fournis avec Ingress ?](/docs/containers?topic=containers-ingress#ingress_components)
   * [Comment sont affectées les adresses IP dans les ALB Ingress ?](/docs/containers?topic=containers-ingress#ips)
     * [Comment une demande accède à mon application avec Ingress dans un cluster à zone unique ?](/docs/containers?topic=containers-ingress#architecture-single)
     * [Comment une demande accède à  mon application avec Ingress dans un cluster à zones multiples ?](/docs/containers?topic=containers-ingress#architecture-multi)
@@ -736,20 +733,21 @@ lastupdated: "2019-04-15"
 ## Amélioration des fonctions de cluster avec des intégrations
 {: #sitemap-integrations}
 
-[Intégration de services](/docs/containers?topic=containers-integrations#integrations)
-* [Ajout de services à l'aide de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#managed-addons)
-  * [Ajout de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
-  * [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
-* [Ajout de services à l'aide de Helm](/docs/containers?topic=containers-helm#helm)
-  * [Configuration de Helm dans un cluster avec accès public](/docs/containers?topic=containers-helm#public_helm_install)
-  * [Clusters privés : Insertion de l'image de Tiller dans votre registre privé dans {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
-  * [Clusters privés : Installation des chartes Helm sans utiliser Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
-  * [Liens associés à Helm](/docs/containers?topic=containers-integrations#helm_links)
-* [Ajout de services à l'aide d'une liaison de service {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#service-binding)
-  * [Ajout de services {{site.data.keyword.Bluemix_notm}} à des clusters](/docs/containers?topic=containers-service-binding#bind-services)
-  * [Accès aux données d'identification à partir de vos applications](/docs/containers?topic=containers-service-binding#adding_app)
-      * [Montage de la valeur confidentielle sous forme de volume dans votre pod](/docs/containers?topic=containers-service-binding#mount_secret)
-      * [Référencement de la valeur confidentielle dans les variables d'environnement](/docs/containers?topic=containers-service-binding#reference_secret)
+[Ajout de services à l'aide de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#managed-addons)
+* [Ajout de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
+* [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
+
+[Ajout de services à l'aide de Helm](/docs/containers?topic=containers-helm#helm)
+* [Configuration de Helm dans un cluster avec accès public](/docs/containers?topic=containers-helm#public_helm_install)
+* [Clusters privés : Insertion de l'image de Tiller dans votre registre privé dans {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+* [Clusters privés : Installation des chartes Helm sans utiliser Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
+* [Liens associés à Helm](/docs/containers?topic=containers-helm#helm_links)
+
+[Ajout de services à l'aide d'une liaison de service {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#service-binding)
+* [Ajout de services {{site.data.keyword.Bluemix_notm}} à des clusters](/docs/containers?topic=containers-service-binding#bind-services)
+* [Accès aux données d'identification à partir de vos applications](/docs/containers?topic=containers-service-binding#adding_app)
+    * [Montage de la valeur confidentielle sous forme de volume dans votre pod](/docs/containers?topic=containers-service-binding#mount_secret)
+    * [Référencement de la valeur confidentielle dans les variables d'environnement](/docs/containers?topic=containers-service-binding#reference_secret)
 
 ## Evénements d'Activity Tracker
 {: #sitemap-at}
@@ -796,19 +794,19 @@ lastupdated: "2019-04-15"
 ## Guide de référence du plug-in de l'interface CLI {{site.data.keyword.containerlong_notm}}
 {: #sitemap-cli-plugin}
 
-[Guide de référence des commandes](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
-* [Utilisation de la structure de commande bêta](/docs/containers?topic=containers-cs_cli_reference#cs_beta)
-* [Commandes d'API](/docs/containers?topic=containers-cs_cli_reference#api_commands)
-* [Commandes d'utilisation du plug-in de l'interface CLI](/docs/containers?topic=containers-cs_cli_reference#cli_plug-in_commands)
-* [Commandes de cluster : Gestion](/docs/containers?topic=containers-cs_cli_reference#cluster_mgmt_commands)
-* [Commandes de cluster : Services et intégrations](/docs/containers?topic=containers-cs_cli_reference#cluster_services_commands)
-* [Commandes de cluster : Sous-réseaux](/docs/containers?topic=containers-cs_cli_reference#cluster_subnets_commands)
-* [Commandes de l'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-cs_cli_reference#alb_commands)
-* [Commandes de l'infrastructure](/docs/containers?topic=containers-cs_cli_reference#infrastructure_commands)
-* [Commandes de consignation](/docs/containers?topic=containers-cs_cli_reference#logging_commands)
-* [Commandes de région](/docs/containers?topic=containers-cs_cli_reference#region_commands)
-* [Commandes de noeud worker](/docs/containers?topic=containers-cs_cli_reference#worker-node-commands)
-* [Commandes de pool de noeuds worker](/docs/containers?topic=containers-cs_cli_reference#worker-pool)
+[Guide de référence des commandes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
+* [Utilisation de la structure de commande bêta](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta)
+* [Commandes d'API](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_commands)
+* [Commandes d'utilisation du plug-in de l'interface CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_plug-in_commands)
+* [Commandes de cluster : Gestion](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_mgmt_commands)
+* [Commandes de cluster : Services et intégrations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_services_commands)
+* [Commandes de cluster : Sous-réseaux](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_subnets_commands)
+* [Commandes de l'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb_commands)
+* [Commandes de l'infrastructure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infrastructure_commands)
+* [Commandes de consignation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
+* [Commandes de région](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#region_commands)
+* [Commandes de noeud worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-node-commands)
+* [Commandes de pool de noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
 
 [Journal des modifications de l'interface de ligne de commande (CLI)](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
@@ -833,12 +831,8 @@ lastupdated: "2019-04-15"
     * [Mise à jour des maîtres cluster pour la haute disponibilité dans Kubernetes 1.11](/docs/containers?topic=containers-cs_versions#ha-masters)
   * [Mise à jour vers l'environnement d'exécution de conteneur containerd](/docs/containers?topic=containers-cs_versions#containerd)
   * [Préparation à la mise à jour vers Calico v3](/docs/containers?topic=containers-cs_versions#111_calicov3)
-* [Version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110)
-  * [Mise à jour avant le maître](/docs/containers?topic=containers-cs_versions#110_before)
-  * [Mise à jour après le maître](/docs/containers?topic=containers-cs_versions#110_after)
-    * [Mise à jour des maîtres cluster pour la haute disponibilité dans Kubernetes 1.10](/docs/containers?topic=containers-cs_versions#110_ha-masters)
-  * [Préparation à la mise à jour vers Calico v3](/docs/containers?topic=containers-cs_versions#110_calicov3)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.10 (non prise en charge)](/docs/containers?topic=containers-cs_versions#cs_v110)
   * [Version 1.9 (non prise en charge)](/docs/containers?topic=containers-cs_versions#cs_v19)
   * [Version 1.8 (non prise en charge)](/docs/containers?topic=containers-cs_versions#cs_v18)
   * [Version 1.7 (non prise en charge)](/docs/containers?topic=containers-cs_versions#cs_v17)
@@ -890,7 +884,8 @@ lastupdated: "2019-04-15"
   * [Journal des modifications pour la version 1.11.2_1516, publié le 4 septembre 2018](/docs/containers?topic=containers-changelog#1112_1516)
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.11.2_1514, publié le 23 août 2018](/docs/containers?topic=containers-changelog#1112_1514)
   * [Journal des modifications pour la version 1.11.2_1513, publié le 14 août 2018](/docs/containers?topic=containers-changelog#1112_1513)
-* [Journal des modifications - Version 1.10](/docs/containers?topic=containers-changelog#110_changelog)
+* [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
+* [Journal des modifications pour la version 1.10 (non prise en charge depuis le 16 mai 2019)](/docs/containers?topic=containers-changelog#110_changelog)
   * [Journal des modifications pour la version 1.10.13_1551, publié le 20 mars 2019](/docs/containers?topic=containers-changelog#11013_1551)
   * [Journal des modifications pour la version 1.10.13_1548, publié le 4 mars 2019](/docs/containers?topic=containers-changelog#11013_1548)
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.10.12_1546, publié le 27 février 2019](/docs/containers?topic=containers-changelog#11012_1546)
@@ -919,7 +914,6 @@ lastupdated: "2019-04-15"
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1510, publié le 18 mai 2018](/docs/containers?topic=containers-changelog#1101_1510)
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.10.1_1509, publié le 16 mai 2018](/docs/containers?topic=containers-changelog#1101_1509)
   * [Journal des modifications pour la version 10. 1_1508, publié le 1er mai 2018](/docs/containers?topic=containers-changelog#1101_1508)
-* [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
   * [Journal des modifications pour la version 1.9 (non prise en charge depuis le 27 décembre 2018)](/docs/containers?topic=containers-changelog#19_changelog)
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.9.11_1539, publié le 17 décembre 2018](/docs/containers?topic=containers-changelog#1911_1539)
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.9.11_1538, publié le 4 décembre 2018](/docs/containers?topic=containers-changelog#1911_1538)
@@ -960,8 +954,23 @@ lastupdated: "2019-04-15"
     * [Journal des modifications de noeud worker - Groupe de correctifs 1.7.16_1512, publié le 16 mai 2018](/docs/containers?topic=containers-changelog#1716_1512)
     * [Journal des modifications pour la version 1.7.16_1511, publié le 19 avril 2018](/docs/containers?topic=containers-changelog#1716_1511)
 
-[Journal des modifications des modules complémentaires de cluster](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
+[Journal des modifications de l'équilibreur de charge d'application Ingress et de Fluentd](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
+* [Journal des modifications du module complémentaire Fluentd](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 * [Journal des modifications du module complémentaire d'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
+
+## Emplacements
+{: #sitemap-locations}
+
+[Emplacements](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
+* [Emplacements {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#locations)
+  * [Emplacements disponibles](/docs/containers?topic=containers-regions-and-zones#available-locations)
+  * [Emplacements à zone unique et à zones multiples dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
+  * [Clusters à zone unique](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+  * [Clusters à zones multiples](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Accès au noeud final global](/docs/containers?topic=containers-regions-and-zones#endpoint)
+  * [Connexion à {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
+  * [Connexion à {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
+* [Déprécié : Région et structure de zone {{site.data.keyword.Bluemix_notm}} précédentes](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 ## Droits d'accès des utilisateurs
 {: #sitemap-user-access}
@@ -982,11 +991,12 @@ lastupdated: "2019-04-15"
 {: #sitemap-supported-integrations}
 
 [Intégrations prises en charge](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [Services de base de données](/docs/containers?topic=containers-supported_integrations#database_services)
 * [Services DevOps](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Services de cloud hybride](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
 * [Services de consignation et de surveillance](/docs/containers?topic=containers-supported_integrations#health_services)
 * [Services de sécurité](/docs/containers?topic=containers-supported_integrations#security_services)
 * [Services de stockage](/docs/containers?topic=containers-supported_integrations#storage_services)
-* [Services de base de données](/docs/containers?topic=containers-supported_integrations#database_services)
 
 ## Foire aux questions
 {: #sitemap-faqs}
@@ -1045,7 +1055,8 @@ lastupdated: "2019-04-15"
 * [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)
 
 [Traitement des incidents liés au stockage en cluster](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
-* [Dans un cluster à zones multiples, le montage d'un volume persistant sur un pod échoue](/docs/containers?topic=containers-cs_troubleshoot_storage#mz_pv_mount)
+* [Débogage des incidents de stockage persistant](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
+* [Echec de la création de réservation de volume persistant en raison de droits manquants](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [Stockage de fichiers : les systèmes de fichiers de vos noeuds worker passent en mode lecture seule](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)
 * [Stockage de fichiers : l'application échoue lorsqu'un utilisateur non root détient le chemin de montage du stockage de fichiers NFS](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)
 * [Stockage de fichiers : échec de l'ajout de l'accès d'utilisateur non root au stockage persistant](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
@@ -1054,7 +1065,7 @@ lastupdated: "2019-04-15"
 * [Stockage d'objets : l'installation du plug-in Helm ibmcloud d'{{site.data.keyword.cos_full_notm}} échoue](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
 * [Stockage d'objets : La création de la réservation de volume persistant (PVC) ou du pod échoue car la valeur confidentielle Kubernetes est introuvable](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)
 * [Stockage d'objets : la création de la PVC échoue en raison de données d'identification incorrectes ou d'un accès refusé](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
-* [Stockage d'objets : accès impossible à un compartiment existant](/docs/containers?topic=containers-cs_troubleshoot_storage#object-storage-cannot-access-an-existing-bucket)
+* [Stockage d'objets : accès impossible à un compartiment existant](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
 * [Stockage d'objets : l'accès aux fichiers avec un utilisateur non root échoue](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
 * [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_storage#storage_getting_help)
 
@@ -1078,7 +1089,7 @@ lastupdated: "2019-04-15"
 * [Impossible de se connecter à une application via Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_fails)
 * [Problèmes de valeur confidentielle de l'équilibreur de charge d'application Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
 * [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
-* [L'ALB Ingress ne se déploie pas dans une zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)
+* [L'ALB Ingress ne se déploie pas dans une zone](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
 * [La connexion via WebSocket s'interrompt au bout de 60 secondes](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_websocket)
 * [La conservation de l'adresse IP source échoue lors de l'utilisation de noeuds avec taint](/docs/containers?topic=containers-cs_troubleshoot_network#cs_source_ip_fails)
 * [Impossible d'établir une connectivité VPN avec la charte Helm strongSwan](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails)
@@ -1087,26 +1098,6 @@ lastupdated: "2019-04-15"
 * [Récupération impossible des règles réseau Calico](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
 * [Impossible d'ajouter des noeuds worker en raison d'un ID de VLAN non valide](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
 * [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
-
-## Rubriques les plus consultées pour {{site.data.keyword.containerlong_notm}}
-{: #sitemap-poptopics}
-
-[Rubriques les plus consultées pour {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_popular_topics)
-* [Rubriques les plus consultées en février 2019](/docs/containers?topic=containers-cs_popular_topics#feb19)
-* [Rubriques les plus consultées en janvier 2019](/docs/containers?topic=containers-cs_popular_topics#jan19)
-* [Rubriques les plus consultées en décembre 2018](/docs/containers?topic=containers-cs_popular_topics#dec18)
-* [Rubriques les plus consultées en novembre 2018](/docs/containers?topic=containers-cs_popular_topics#nov18)
-* [Rubriques les plus consultées en octobre 2018](/docs/containers?topic=containers-cs_popular_topics#oct18)
-* [Rubriques les plus consultées en septembre 2018](/docs/containers?topic=containers-cs_popular_topics#sept18)
-* [Rubriques les plus consultées en août 2018](/docs/containers?topic=containers-cs_popular_topics#aug18)
-* [Rubriques les plus consultées en juillet 2018](/docs/containers?topic=containers-cs_popular_topics#july18)
-* [Rubriques les plus consultées en juin 2018](/docs/containers?topic=containers-cs_popular_topics#june18)
-* [Rubriques les plus consultées en mai 2018](/docs/containers?topic=containers-cs_popular_topics#may18)
-* [Rubriques les plus consultées en avril 2018](/docs/containers?topic=containers-cs_popular_topics#apr18)
-* [Rubriques les plus consultées en mars 2018](/docs/containers?topic=containers-cs_popular_topics#mar18)
-* [Rubriques les plus consultées en février 2018](/docs/containers?topic=containers-cs_popular_topics#feb18)
-* [Rubriques les plus consultées en janvier 2018](/docs/containers?topic=containers-cs_popular_topics#jan18)
-* [Discussion avec des développeurs partageant les mêmes idées sur Slack](/docs/containers?topic=containers-cs_popular_topics#slack)
 
 ## Liens connexes
 {: #sitemap-rellinks}

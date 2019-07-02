@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -123,7 +124,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 要查看、管理和添加 Calico 策略，请安装并配置 Calico CLI。
 {:shortdesc}
 
-1. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+1. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -211,7 +212,7 @@ Calico 会通过在 Kubernetes 工作程序节点上设置 Linux Iptables 规则
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -272,7 +273,7 @@ Linux 和 Mac 用户不需要在 `calicoctl` 命令中包含 `--config=filepath/
 要创建 Calico 策略，请使用以下步骤。
 
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -319,7 +320,7 @@ Calico DNAT 前网络策略的一些常见用途：
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -353,11 +354,11 @@ Calico DNAT 前网络策略的一些常见用途：
             destination:
               ports:
               - 30000:32767
-        protocol: UDP
-        source: {}
-      selector: ibm.role=='worker_public'
-      order: 1100
-      types:
+            protocol: UDP
+            source: {}
+          selector: ibm.role=='worker_public'
+          order: 1100
+          types:
           - Ingress
         ```
         {: codeblock}
@@ -365,27 +366,27 @@ Calico DNAT 前网络策略的一些常见用途：
         将从仅指定源 CIDR 流至 NLB 2.0 的流量列入白名单的示例资源：
 
         ```
-apiVersion: projectcalico.org/v3
-    kind: GlobalNetworkPolicy
-    metadata:
-      name: whitelist
-    spec:
-      applyOnForward: true
-      doNotTrack: true
-      ingress:
+        apiVersion: projectcalico.org/v3
+        kind: GlobalNetworkPolicy
+        metadata:
+          name: whitelist
+        spec:
+          applyOnForward: true
+          doNotTrack: true
+          ingress:
           - action: Allow
-        destination:
-          nets:
+            destination:
+              nets:
               - <loadbalancer_IP>/32
-          ports:
+              ports:
               - 80
-        protocol: TCP
-        source:
-          nets:
+            protocol: TCP
+            source:
+              nets:
               - <client_address>/32
-      selector: ibm.role=='worker_public'
-      order: 500
-      types:
+          selector: ibm.role=='worker_public'
+          order: 500
+          types:
           - Ingress
         ```
         {: codeblock}
@@ -402,18 +403,18 @@ apiVersion: projectcalico.org/v3
           preDNAT: true
           ingress:
           - action: Allow
-        destination:
-          nets:
+            destination:
+              nets:
               - <loadbalancer_IP>/32
-          ports:
+              ports:
               - 80
-        protocol: TCP
-        source:
-          nets:
+            protocol: TCP
+            source:
+              nets:
               - <client_address>/32
-      selector: ibm.role=='worker_public'
-      order: 500
-      types:
+          selector: ibm.role=='worker_public'
+          order: 500
+          types:
           - Ingress
         ```
         {: codeblock}
@@ -439,7 +440,7 @@ calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
 ## 隔离专用网络上的集群
 {: #isolate_workers}
 
-如果有多专区集群、有多个 VLAN 用于单专区集群，或者在同一 VLAN 上有多个子网，那么必须[启用 VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，以便工作程序节点可以在专用网络上相互通信。但是，当启用 VLAN 生成时，任何连接到相同 IBM Cloud 帐户中的任何专用 VLAN 的系统都可以与工作程序进行通信。
+如果有多专区集群、有多个 VLAN 用于单专区集群，或者在同一 VLAN 上有多个子网，那么必须启用 VRF 或 VLAN 生成，以便工作程序节点可以在专用网络上相互通信。但是，启用 VRF 或 VLAN 生成后，任何连接到同一 {{site.data.keyword.Bluemix_notm}} 帐户中的任何专用 VLAN 的系统都可以与工作程序进行通信。
 {: shortdesc}
 
 您还可以通过应用 [Calico 专用网络策略 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation)，将集群与专用网络上的其他系统隔离。此组 Calico 策略和主机端点将集群的专用网络流量与帐户专用网络中的其他资源隔离。
@@ -458,7 +459,7 @@ calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
+2. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 和 `--network` 选项。`--admin` 用于下载密钥，以用于访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。`--network` 用于下载 Calico 配置文件以运行所有 Calico 命令。
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -483,7 +484,7 @@ calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
     1. 打开 `generic-privatehostendpoint.yaml` 策略。
     2. 将 `<worker_name>` 替换为工作程序节点的名称。**重要信息**：某些工作程序节点必须遵循 Calico 策略的不同命名结构。必须使用以下命令所返回格式的工作程序节点名称。
       ```
-      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      calicoctl get nodes --config==filepath/calicoctl.cfg
       ```
       {: pre}
     3. 将 `<worker-node-private-ip>` 替换为工作程序节点的专用 IP 地址。要查看工作程序节点的专用 IP，请运行 `ibmcloud ks workers --cluster <my_cluster>`。
@@ -636,7 +637,7 @@ spec:
 
 开始之前：
 1. [安装和配置 Calico CLI](#cli_install)。
-2. [设定 Kubernetes CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 选项，以用于下载证书和许可权文件。此下载还包含密钥以访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。
+2. [将 Kubernetes CLI 的目标指定为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。在 `ibmcloud ks cluster-config` 命令中包含 `--admin` 选项，以用于下载证书和许可权文件。此下载还包含密钥以访问基础架构产品服务组合以及在工作程序节点上运行 Calico 命令。
     ```
     ibmcloud ks cluster-config --cluster <cluster_name> --admin
     ```

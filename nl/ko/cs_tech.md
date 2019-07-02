@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}} 기술
@@ -62,7 +64,7 @@ subcollection: containers
 <ul>
   <li>이미지 조각을 재사용하여 컨테이너 빌드 </li>
   <li>스테이징에서 프로덕션 환경으로 앱 코드를 신속하게 이동</li>
-  <li>지속적인 전달 도구를 사용하여 프로세스 자동화</li>
+  <li>지속적 딜리버리 도구를 사용하여 프로세스 자동화</li>
   </ul>
   </dd>
 
@@ -126,7 +128,7 @@ Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱�
 {{site.data.keyword.containerlong_notm}}에서 실행되는 Kubernetes 클러스터에서 컨테이너화된 앱은 작업자 노드라고 하는 컴퓨팅 호스트에서 호스팅됩니다. 좀 더 구체적으로 설명하면, 앱은 작업자 노드에서 호스팅되는 팟(Pod)에서 실행됩니다. 작업자 노드는 Kubernetes 마스터가 관리합니다. Kubernetes 마스터와 작업자 노드 간의 통신 설정은 공용 클라우드 엔드 포인트를 사용하는 계정 또는 공용 및 개인 서비스 엔드 포인트를 사용하는 VRF 사용 계정의 IBM Cloud 인프라 (SoftLayer) 네트워크를 설정하는 방법에 따라 다릅니다.
 {: shortdesc}
 
-다음 이미지는 [공용 서비스 엔드포인트만 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)된 경우 클러스터의 컴포넌트와 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
+다음 이미지는 [공용 서비스 엔드포인트만 사용으로 설정](/docs/containers?topic=containers-plan_clusters#workeruser-master)된 경우 클러스터의 컴포넌트와 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 아키텍처">
@@ -134,7 +136,7 @@ Kubernetes 마스터에서 관리합니다. 그러므로 컨테이너화된 앱�
 </figure>
 </p>
 
-다음 이미지는 [공용 및 개인 서비스 엔드포인트가 사용으로 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)된 경우 클러스터 컴포넌트와 VRF 사용 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
+다음 이미지는 [공용 및 개인 서비스 엔드포인트가 사용으로 설정](/docs/containers?topic=containers-plan_clusters#workeruser-master)된 경우 클러스터 컴포넌트와 VRF 사용 계정에서 클러스터의 컴포넌트가 상호작용하는 방법을 표시합니다.
 
 <p>
 <figure>
@@ -200,7 +202,7 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
     <tr>
     <td>`kubelet`</td>
     <td>kube-system</td>
-    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터링하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 라이브 및 준비 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
+    <td>kubelet는 모든 작업자 노드에서 실행되는 팟(Pod)이며, 작업자 노드에서 실행되는 팟(Pod)의 상태를 모니터링하고 Kubernetes API 서버가 전송하는 이벤트를 감시하는 역할을 담당합니다. 이벤트를 기반으로, kubelet는 팟(Pod)을 작성 또는 제거하고 활동 상태 및 준비 상태 프로브를 보장하며 팟(Pod)의 상태를 다시 Kubernetes API 서버에 보고합니다.</td>
     </tr>
     <tr>
     <td>`coredns`</td>
@@ -262,3 +264,53 @@ Kubernetes 마스터와 작업자 노드 간의 차이점은 무엇입니까? �
 
 {{site.data.keyword.containerlong_notm}}를 다른 제품 및 서비스와 함께 사용하는 방법을 알아보시겠습니까? 몇 가지 [통합](/docs/containers?topic=containers-supported_integrations#supported_integrations)을 참고해 보십시오.
 {: tip}
+
+## 서비스 제한사항
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} 및 Kubernetes 오픈 소스 프로젝트는 보안, 편의성 및 기본 기능을 보장하도록 기본 서비스 설정 및 제한사항이 함께 제공됩니다. 명시된 일부 제한사항을 변경할 수 있습니다. 다음 {{site.data.keyword.containerlong_notm}} 제한사항에 도달할 것으로 예상하는 경우 먼저 [내부 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 또는 [외부 Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)을 통해 IBM 팀에 문의하십시오.
+{: shortdesc}
+
+<table summary="이 표에는 {{site.data.keyword.containerlong_notm}} 제한사항에 대한 정보가 포함되어 있습니다. 열은 왼쪽에서 오른쪽 방향으로 읽어야 합니다. 첫 번째 열에는 제한사항의 유형, 두 번째 열에는 제한사항에 대한 설명이 있습니다.">
+<caption>{{site.data.keyword.containerlong_notm}} 제한사항</caption>
+<thead>
+  <tr>
+    <th>유형</th>
+    <th>설명</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>API 제한 비율</td>
+    <td>각 고유 소스 IP 주소마다 {{site.data.keyword.containerlong_notm}} API에 대한 10초당 100개의 요청</td>
+  </tr>
+  <tr>
+    <td>작업자 노드 용량</td>
+    <td>작업자 노드는 컴퓨팅 리소스의 [특성 선택](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)에서 사용 가능합니다. </td>
+  </tr>
+  <tr>
+    <td>작업자 노드 호스트 액세스</td>
+    <td>보안을 위해 작업자 노드 컴퓨팅 호스트에 SSH를 실행할 수 없습니다. </td>
+  </tr>
+  <tr>
+    <td>최대 작업자 노드 수</td>
+    <td>클러스터당 900개를 초과할 경우 먼저 [내부 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 또는 [외부 Slack ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://ibm-container-service.slack.com)을 통해 IBM 팀에 문의하십시오. <br><br>매월 주문되는 인스턴스 수 또는 데이터 센터당 인스턴스 수에 대한 IBM Cloud 인프라(SoftLayer) 용량 제한이 표시되면 IBM Cloud 인프라(SoftLayer) 담당자에게 문의하십시오.</td>
+  </tr>
+  <tr>
+    <td>최대 팟(Pod) 수</td>
+    <td>작업자 노드당 110개<br><br>팟(Pod) 수에는 작업자 노드에서 실행되는 `kube-system` 및 `ibm-system` 팟(Pod)이 포함됩니다. 성능 향상을 위해, 작업자 노드를 과도하게 사용하지 않도록 컴퓨팅 코어당 실행하는 팟(Pod)의 수를 제한할 것을 고려해보십시오. 예를 들어, `b3c.4x16` 특성이 있는 작업자 노드에서 총 작업자 노드 용량의 75% 이하를 사용하는 코어당 10개의 팟(Pod)을 실행할 수 있습니다. </td>
+  </tr>
+  <tr>
+    <td>최소 Kubernetes 서비스 수</td>
+    <td>클러스터 내 Kubernetes 서비스에 지정할 수 있는 172.21.0.0/16 범위로 된 클러스터당 65,000개의 IP</td>
+  </tr>
+  <tr>
+    <td>Ingress 애플리케이션 로드 밸런서(ALB) 트래픽</td>
+    <td>초당 32,768개의 연결<br><br>유입 트래픽이 이 수를 초과하면 클러스터에서 [ALB 복제본의 수를 스케일링 업](/docs/containers?topic=containers-ingress#scale_albs)하십시오. </td>
+  </tr>
+  <tr>
+    <td>스토리지 볼륨</td>
+    <td>계정당 IBM Cloud 인프라(SoftLayer)의 파일 및 블록 스토리지 인스턴스의 결합된 총 250개의 볼륨<br><br>이보다 더 많은 양을 마운트하는 경우 지속적 볼륨을 프로비저닝하면 "용량 부족" 메시지가 표시될 수 있으며, 이때 IBM Cloud 인프라(SoftLayer) 담당자에게 문의해야 할 수 있습니다. 더 많은 FAQ는 [파일](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) 및 [블록](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) 스토리지 문서를 참조하십시오.</td>
+  </tr>
+</tbody>
+</table>

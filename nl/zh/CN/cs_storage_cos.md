@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,16 +21,20 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 在 IBM Cloud Object Storage 上存储数据
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 是一种持久的高可用性存储器，可以使用 {{site.data.keyword.cos_full_notm}} 插件安装到在 Kubernetes 集群中运行的应用程序。这是一种 Kubernetes Flex-Volume 插件，用于将 Cloud {{site.data.keyword.cos_short}} 存储区连接到集群中的 pod。使用 {{site.data.keyword.cos_full_notm}} 存储的信息会进行动态和静态加密，分布在多个地理位置，并使用 REST API 通过 HTTP 进行访问。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) 是一种持久的高可用性存储器，可以使用 {{site.data.keyword.cos_full_notm}} 插件安装到在 Kubernetes 集群中运行的应用程序。这是一种 Kubernetes Flex-Volume 插件，用于将 Cloud {{site.data.keyword.cos_short}} 存储区连接到集群中的 pod。使用 {{site.data.keyword.cos_full_notm}} 存储的信息会进行动态和静态加密，分布在多个地理位置，并使用 REST API 通过 HTTP 进行访问。
+{: shortdesc}
 
 要连接到 {{site.data.keyword.cos_full_notm}}，集群需要公用网络访问权通过 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 进行认证。如果您有仅专用集群，那么安装插件 V`1.0.3` 或更高版本后，可与 {{site.data.keyword.cos_full_notm}} 专用服务端点进行通信，并可设置 {{site.data.keyword.cos_full_notm}} 服务实例进行 HMAC 认证。如果不想使用 HMAC 认证，那么必须在端口 443 上打开所有出站网络流量，该插件才能在专用集群中正常工作。
 {: important}
+
+对于 V1.0.5，{{site.data.keyword.cos_full_notm}} 插件已从 `ibmcloud-object-storage-plugin` 重命名为 `ibm-object-storage-plugin`。要安装新版本的插件，必须[卸载旧的 Helm chart 安装](#remove_cos_plugin)，然后[使用新的 {{site.data.keyword.cos_full_notm}} 插件版本重新安装 Helm chart](#install_cos)。
+{: note}
 
 ## 创建 Object Storage 服务实例
 {: #create_cos_service}
@@ -66,7 +70,7 @@ subcollection: containers
 
 要为 {{site.data.keyword.cos_full_notm}} 服务实例的凭证创建 Kubernetes 私钥，请执行以下步骤。如果计划使用本地 Cloud Object Storage 服务器或其他 s3 API 端点，请使用相应的凭证创建 Kubernetes 私钥。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 检索 [{{site.data.keyword.cos_full_notm}} 服务凭证](#service_credentials)的 **apikey** 或者 **access_key_id** 和 **secret_access_key**。
 
@@ -75,15 +79,15 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-   
-3. 创建 Kubernetes 私钥以用于存储服务凭证。创建私钥时，所有值都会自动编码为 Base64。 
-   
+
+3. 创建 Kubernetes 私钥以用于存储服务凭证。创建私钥时，所有值都会自动编码为 Base64。
+
    **使用 API 密钥的示例：**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
    ```
    {: pre}
-   
+
    **HMAC 认证的示例：**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
@@ -126,13 +130,13 @@ subcollection: containers
 ## 安装 IBM Cloud Object Storage 插件
 {: #install_cos}
 
-通过 Helm 图表来安装 {{site.data.keyword.cos_full_notm}} 插件，以便为 {{site.data.keyword.cos_full_notm}} 设置预定义的存储类。可以使用这些存储类来创建用于为应用程序供应 {{site.data.keyword.cos_full_notm}} 的 PVC。
+通过 Helm chart 来安装 {{site.data.keyword.cos_full_notm}} 插件，以便为 {{site.data.keyword.cos_full_notm}} 设置预定义的存储类。可以使用这些存储类来创建用于为应用程序供应 {{site.data.keyword.cos_full_notm}} 的 PVC。
 {: shortdesc}
 
 在查找有关如何更新或除去 {{site.data.keyword.cos_full_notm}} 插件的指示信息？请参阅[更新插件](#update_cos_plugin)和[除去插件](#remove_cos_plugin)。
 {: tip}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 确保工作程序节点应用次版本的最新补丁。
    1. 列出工作程序节点的当前补丁版本。
@@ -142,10 +146,10 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
+        ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -155,25 +159,20 @@ subcollection: containers
 
    3. 通过重新装入工作程序节点来应用最新的补丁版本。请遵循 [ibmcloud ks worker-reload 命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)中的指示信息执行操作，以便在重新装入工作程序节点之前，正常重新安排工作程序节点上任何正在运行的 pod。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
 
-2.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+2.  选择是要安装使用还是不使用 Helm 服务器 Tiller 的 {{site.data.keyword.cos_full_notm}} 插件。然后，[按照指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机以及（如果要使用 Tiller）使用服务帐户在集群中安装 Tiller。
 
-    安装 Helm 服务器 Tiller 需要与公共 Google Container Registry 的公用网络连接。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么可以选择[将 Tiller 映像拉出到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](/docs/containers?topic=containers-helm#private_local_tiller)，或者[安装 Helm chart（不使用 Tiller）](/docs/containers?topic=containers-helm#private_install_without_tiller)。
-    {: note}
-
-3.  验证 Tiller 是否已使用服务帐户进行安装。
-
-    ```
+3. 如果要安装使用 Tiller 的插件，请验证 Tiller 是否已随服务帐户一起安装。
+   ```
     kubectl get serviceaccount -n kube-system tiller
     ```
-    {: pre}
-
-    输出示例：
-
-    ```
+   {: pre}
+   
+   输出示例：
+   ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
     ```
-    {: screen}
+   {: screen}
 
 4. 将 {{site.data.keyword.Bluemix_notm}} Helm 存储库添加到集群。
    ```
@@ -181,30 +180,33 @@ subcollection: containers
    ```
    {: pre}
 
-5. 更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+4. 更新 Helm 存储库以在此存储库中检索所有最新版本的 Helm chart。
    ```
    helm repo update
    ```
    {: pre}
 
-6. 下载 Helm 图表，并将这些图表解包到当前目录。
+5. 下载 Helm chart，并将这些图表解包到当前目录。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-7. 如果使用的是 macOS 或 Linux 分发版，请安装 {{site.data.keyword.cos_full_notm}} Helm 插件 `ibmc`。该插件用于自动检索集群位置，并在存储类中为 {{site.data.keyword.cos_full_notm}} 存储区设置 API 端点。如果使用的是 Windows 操作系统，请继续执行下一步。
+7. 如果使用的是 OS X 或 Linux 分发版，请安装 {{site.data.keyword.cos_full_notm}} Helm 插件 `ibmc`。该插件用于自动检索集群位置，并在存储类中为 {{site.data.keyword.cos_full_notm}} 存储区设置 API 端点。如果使用的是 Windows 操作系统，请继续执行下一步。
    1. 安装 Helm 插件。
       ```
-      helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
+      helm plugin install ./ibm-object-storage-plugin/helm-ibmc
       ```
       {: pre}
 
       输出示例：
-      ```
+        ```
       Installed plugin: ibmc
       ```
       {: screen}
+      
+      如果看到错误 `Error: plugin already exists`，请通过运行 `rm -rf ~/.helm/plugins/helm-ibmc` 来除去 `ibmc` Helm 插件。
+      {: tip}
 
    2. 验证 `ibmc` 插件是否已成功安装。
       ```
@@ -213,25 +215,31 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
-         在 IBM K8S 服务中安装或升级 Helm 图表
+        ```
+      Install or upgrade Helm charts in IBM K8S Service(IKS) and IBM Cloud Private(ICP)
+
+      Available Commands:
+         helm ibmc install [CHART][flags]                      Install a Helm chart
+         helm ibmc upgrade [RELEASE][CHART] [flags]            Upgrade the release to a new version of the Helm chart
+         helm ibmc template [CHART][flags] [--apply|--delete]  Install/uninstall a Helm chart without tiller
+
+      Available Flags:
+         -h, --help                    (Optional) This text.
+         -u, --update                  （可选）将此插件更新到最新版本
 
    
 
-      可用命令：
-       helm ibmc install [CHART][flags]              安装 Helm 图表
-       helm ibmc upgrade [RELEASE][CHART] [flags]    将发布升级到新版本的 Helm 图表
+      Example Usage:
+         With Tiller:
+             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+         Without Tiller:
+             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
 
-      可用标志：
-    --verbos                      （可选）详细程度强化...
-       -f, --values valueFiles       （可选）指定 YAML 文件中的值（可以指定多个值）（缺省值为 []）
-    -h, --help                    （可选）此文本。
-    -u, --update                  （可选）将此插件更新到最新版本
-
-   
-
-      示例用法：
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+      Note:
+         1. It is always recommended to install latest version of ibm-object-storage-plugin chart.
+         2. It is always recommended to have 'kubectl' client up-to-date.
       ```
       {: screen}
 
@@ -243,7 +251,7 @@ subcollection: containers
    2. [将 {{site.data.keyword.cos_full_notm}} 服务凭证存储在 Kubernetes 私钥中](#create_cos_secret)。
    3. 浏览到 `templates` 目录并列出可用文件。  
       ```
-      cd ibmcloud-object-storage-plugin/templates && ls
+      cd ibm-object-storage-plugin/templates && ls
       ```
       {: pre}
 
@@ -265,21 +273,36 @@ subcollection: containers
 
 9. 安装 {{site.data.keyword.cos_full_notm}} 插件。安装该插件时，会将预定义的存储类添加到集群中。
 
-   - **对于 macOS 和 Linux：**
-     - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。
-          ```
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+   - **对于 OS X 和 Linux：**
+     - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。</br>
+       **不使用 Tiller**：
+       ```
+       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       ```
+       {: pre}
+       
+       **使用 Tiller**：
+       ```
+       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
-     - 如果完成了前一个步骤，那么安装时会限制为使用特定 Kubernetes 私钥。
-          ```
-       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+     - 如果完成了前一个步骤，那么安装时会限制为使用特定 Kubernetes 私钥。</br>
+       **不使用 Tiller**：
+       ```
+       cd ../..
+       helm ibmc template ./ibm-object-storage-plugin --apply 
+       ```
+       {: pre}
+       
+       **使用 Tiller**：
+       ```
+       cd ../..
+       helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
-   - **对于 Windows：
-    **
+   - **对于 Windows：**
      1. 检索部署了集群的专区，并将该专区存储在环境变量中。
         ```
         export DC_NAME=$(kubectl get cm cluster-info -n kube-system -o jsonpath='{.data.cluster-config\.json}' | grep datacenter | awk -F ': ' '{print $2}' | sed 's/\"//g' |sed 's/,//g')
@@ -293,95 +316,96 @@ subcollection: containers
         {: pre}
 
      3. 安装 Helm chart。
-        - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。
+        - 如果跳过了前一个步骤，那么安装时不会限制为使用特定 Kubernetes 私钥。</br>
+          **不使用 Tiller**：
           ```
-          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+          ```
+          {: pre}
+          
+          **使用 Tiller**：
+          ```
+          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-        - 如果完成了前一个步骤，那么安装时会限制为使用特定 Kubernetes 私钥。
+        - 如果完成了前一个步骤，那么安装时会限制为使用特定 Kubernetes 私钥。</br>
+          **不使用 Tiller**：
           ```
-          helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          cd ../..
+          helm ibmc template ./ibm-object-storage-plugin --apply 
+          ```
+          {: pre}
+          
+          **使用 Tiller**：
+          ```
+          cd ../..
+          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-   输出示例：
+
+   不使用 Tiller 进行安装的示例输出：
    ```
-   Installing the Helm chart
-   DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
-   NAME:   mewing-duck
-   LAST DEPLOYED: Mon Jul 30 13:12:59 2018
-   NAMESPACE: default
-   STATUS: DEPLOYED
-
-   RESOURCES:
-   ==> v1/Pod(related)
-   NAME                                             READY  STATUS             RESTARTS  AGE
-   ibmcloud-object-storage-driver-hzqp9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-jtdb9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
-
-   ==> v1/StorageClass
-   NAME                                  PROVISIONER       AGE
-   ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-cross-region      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-regional          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-cross-region       ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-cross-region  ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-regional      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-regional           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-cross-region          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-regional              ibm.io/ibmc-s3fs  1s
-
-   ==> v1/ServiceAccount
-   NAME                            SECRETS  AGE
-   ibmcloud-object-storage-driver  1        1s
-   ibmcloud-object-storage-plugin  1        1s
-
-   ==> v1beta1/ClusterRole
-   NAME                                   AGE
-   ibmcloud-object-storage-secret-reader  1s
-   ibmcloud-object-storage-plugin         1s
-
-   ==> v1beta1/ClusterRoleBinding
-   NAME                                   AGE
-   ibmcloud-object-storage-plugin         1s
-   ibmcloud-object-storage-secret-reader  1s
-
-   ==> v1beta1/DaemonSet
-   NAME                            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
-   ibmcloud-object-storage-driver  3        3        0      3           0          <none>         1s
-
-   ==> v1beta1/Deployment
-   NAME                            DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-   ibmcloud-object-storage-plugin  1        1        1           0          1s
-
-   NOTES:
-   Thank you for installing: ibmcloud-object-storage-plugin.   Your release is named: mewing-duck
-
-   Please refer Chart README.md file for creating a sample PVC.
-   Please refer Chart RELEASE.md to see the release details/fixes.
+   Rendering the Helm chart templates...
+   DC: dal10
+   Chart: iks-charts/ibm-object-storage-plugin
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/tests/check-driver-install.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner.yaml
+   Installing the Helm chart...
+   serviceaccount/ibmcloud-object-storage-driver created
+   daemonset.apps/ibmcloud-object-storage-driver created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-regional created
+   serviceaccount/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   deployment.apps/ibmcloud-object-storage-plugin created
+   pod/ibmcloud-object-storage-driver-test created
    ```
    {: screen}
 
 10. 验证插件是否已正确安装。
-   ```
-   kubectl get pod -n kube-system -o wide | grep object
-   ```
-   {: pre}
+    ```
+    kubectl get pod -n kube-system -o wide | grep object
+    ```
+    {: pre}
 
-   输出示例：
-   ```
-   ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
+    输出示例：
+    ```
+       ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
    ```
-   {: screen}
+    {: screen}
 
-   看到一个 `ibmcloud-object-storage-plugin` pod 以及一个或多个 `ibmcloud-object-storage-driver` pod 时，说明安装成功。`ibmcloud-object-storage-driver` pod 的数量等于集群中的工作程序节点数。所有 pod 都必须处于 `Running` 状态，插件才能正常运行。如果 pod 发生故障，请运行 `kubectl describe pod -n kube-system <pod_name>` 来查找故障的根本原因。
+    看到一个 `ibmcloud-object-storage-plugin` pod 以及一个或多个 `ibmcloud-object-storage-driver` pod 时，说明安装成功。`ibmcloud-object-storage-driver` pod 的数量等于集群中的工作程序节点数。所有 pod 都必须处于 `Running` 状态，插件才能正常运行。如果 pod 发生故障，请运行 `kubectl describe pod -n kube-system <pod_name>` 来查找故障的根本原因。
 
 11. 验证存储类是否已成功创建。
     ```
@@ -391,19 +415,19 @@ subcollection: containers
 
     输出示例：
     ```
-       ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
-   ```
+    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
+    ```
     {: screen}
 
 12. 对要访问 {{site.data.keyword.cos_full_notm}} 存储区的所有集群重复这些步骤。
@@ -414,40 +438,70 @@ subcollection: containers
 可以将现有 {{site.data.keyword.cos_full_notm}} 插件升级到最新版本。
 {: shortdesc}
 
-1. 更新 {{site.data.keyword.Bluemix_notm}} Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+1. 如果先前安装了名为 `ibmcloud-object-storage-plugin` 的 Helm chart V1.0.4 或更低版本，请从集群中除去此 Helm 安装。然后，重新安装 Helm chart。
+   1. 检查集群中是否安装了旧版本的 {{site.data.keyword.cos_full_notm}} Helm chart。  
+      ```
+   helm ls | grep ibmcloud-object-storage-plugin
+   ```
+      {: pre}
+
+      输出示例：
+        ```
+      ibmcloud-object-storage-plugin	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.4	default
+      ```
+      {: screen}
+
+   2. 如果有名为 `ibmcloud-object-storage-plugin` 的 Helm chart V1.0.4 或更低版本，请从集群中除去此 Helm chart。如果有名为 `ibm-object-storage-plugin` 的 Helm chart V1.0.5 或更高版本，请继续执行步骤 2。
+      ```
+      helm delete --purge ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+   3. 执行[安装 {{site.data.keyword.cos_full_notm}} 插件](#install_cos)中的步骤，以安装最新版本的 {{site.data.keyword.cos_full_notm}} 插件。
+
+2. 更新 {{site.data.keyword.Bluemix_notm}} Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
    ```
    helm repo update
    ```
    {: pre}
 
-2. 如果使用的是 macOS 或 Linux 分发版，请将 Helm 插件 {{site.data.keyword.cos_full_notm}} `ibmc` 更新为最新版本。
+3. 如果使用的是 OS X 或 Linux 分发版，请将 Helm 插件 {{site.data.keyword.cos_full_notm}} `ibmc` 更新为最新版本。
    ```
    helm ibmc --update
    ```
    {: pre}
 
-3. 将最新 {{site.data.keyword.cos_full_notm}} Helm chart 下载到本地计算机，然后解压缩该包来查看 `release.md` 文件，以了解最新发行版信息。
+4. 将最新 {{site.data.keyword.cos_full_notm}} Helm chart 下载到本地计算机，然后解压缩该包来查看 `release.md` 文件，以了解最新发行版信息。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
-   ```
-
-4. 查找 Helm chart 的安装名称。
-   ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-   输出示例：
+5. 升级该插件。</br>
+   **不使用 Tiller**： 
    ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-5. 将 {{site.data.keyword.cos_full_notm}} Helm chart 升级到最新版本。
-   ```   
-   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc template iks-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
+     
+   **使用 Tiller**： 
+   1. 查找 Helm chart 的安装名称。
+      ```
+      helm ls | grep ibm-object-storage-plugin
+      ```
+      {: pre}
+
+      输出示例：
+        ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibm-object-storage-plugin-1.0.5	default
+      ```
+      {: screen}
+
+   2. 将 {{site.data.keyword.cos_full_notm}} Helm chart 升级到最新版本。
+      ```   
+      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      ```
+      {: pre}
 
 6. 验证 `ibmcloud-object-storage-plugin` 是否已成功升级。  
    ```
@@ -475,7 +529,7 @@ subcollection: containers
 ### 除去 IBM Cloud Object Storage 插件
 {: #remove_cos_plugin}
 
-如果不想在集群中供应和使用 {{site.data.keyword.cos_full_notm}}，那么可以卸载 Helm chart。
+如果不想在集群中供应和使用 {{site.data.keyword.cos_full_notm}}，那么可以卸载该插件。
 {: shortdesc}
 
 除去该插件不会除去现有 PVC、PV 或数据。除去该插件时，将从集群中除去所有相关的 pod 和守护程序集。除非直接将应用程序配置为使用 {{site.data.keyword.cos_full_notm}} API，否则无法为集群供应新的 {{site.data.keyword.cos_full_notm}}，也无法使用现有 PVC 和 PV。
@@ -488,33 +542,41 @@ subcollection: containers
 
 要除去该插件，请执行以下操作：
 
-1. 查找 Helm chart 的安装名称。
+1. 从集群中除去该插件。</br>
+   **使用 Tiller**： 
+   1. 查找 Helm chart 的安装名称。
+      ```
+      helm ls | grep object-storage-plugin
+      ```
+      {: pre}
+
+      输出示例：
+        ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+      ```
+      {: screen}
+
+   2. 通过除去 Helm chart 来删除 {{site.data.keyword.cos_full_notm}} 插件。
+      ```
+      helm delete --purge <helm_chart_name>
+      ```
+      {: pre}
+
+   **不使用 Tiller**： 
    ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
-   输出示例：
-   ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-2. 通过除去 Helm chart 来删除 {{site.data.keyword.cos_full_notm}} 插件。
-   ```
-   helm delete --purge <helm_chart_name>
-   ```
-   {: pre}
-
-3. 验证 {{site.data.keyword.cos_full_notm}} pod 是否已除去。
+2. 验证 {{site.data.keyword.cos_full_notm}} pod 是否已除去。
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
    {: pre}
 
-      如果 CLI 输出中未显示任何 pod，说明 pod 除去操作成功。
+      如果 CLI 输出中未显示任何 pod，那么表明已成功除去 pod。
 
-4. 验证存储类是否已除去。
+3. 验证存储类是否已除去。
    ```
    kubectl get storageclasses | grep s3
    ```
@@ -522,8 +584,8 @@ subcollection: containers
 
       如果 CLI 输出中未显示任何存储类，说明存储类除去操作成功。
 
-5. 如果使用的是 macOS 或 Linux 分发版，请除去 Helm 插件 `ibmc`。如果使用的是 Windows，那么此步骤不是必需的。
-   1. 除去 `ibmc` 插件。 .
+4. 如果使用的是 OS X 或 Linux 分发版，请除去 Helm 插件 `ibmc`。如果使用的是 Windows，那么此步骤不是必需的。
+   1. 除去 `ibmc` 插件。
       ```
    rm -rf ~/.helm/plugins/helm-ibmc
    ```
@@ -536,7 +598,7 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
+        ```
         NAME	VERSION	DESCRIPTION
    ```
      {: screen}
@@ -704,6 +766,7 @@ subcollection: containers
        ibm.io/bucket: "<bucket_name>"
        ibm.io/object-path: "<bucket_subdirectory>"
        ibm.io/secret-name: "<secret_name>"
+       ibm.io/endpoint: "https://<s3fs_service_endpoint>"
    spec:
      accessModes:
        - ReadWriteOnce
@@ -748,12 +811,16 @@ subcollection: containers
    <td>输入用于保存先前创建的 {{site.data.keyword.cos_full_notm}} 凭证的私钥的名称。</td>
    </tr>
    <tr>
+  <td><code>ibm.io/endpoint</code></td>
+  <td>如果 {{site.data.keyword.cos_full_notm}} 服务实例的创建位置与集群所在的位置不同，请输入要使用的 {{site.data.keyword.cos_full_notm}} 服务实例的专用或公共服务端点。有关可用服务端点的概述，请参阅[其他端点信息](/docs/services/cloud-object-storage?topic=cloud-object-storage-advanced-endpoints)。缺省情况下，<code>ibmc</code> Helm 插件会自动检索集群位置，并使用与集群位置匹配的 {{site.data.keyword.cos_full_notm}} 专用服务端点来创建存储类。如果集群位于其中一个大城市专区（例如，`dal10`）中，那么将使用该大城市（在本例中为达拉斯）的 {{site.data.keyword.cos_full_notm}} 专用服务端点。要验证存储类中的服务端点是否与服务实例的服务端点相匹配，请运行 `kubectl describe storageclass <storageclassname>`。确保以 `https://<s3fs_private_service_endpoint>`（对于专用服务端点）或 `http://<s3fs_public_service_endpoint>`（对于公共服务端点）格式输入服务端点。如果存储类中的服务端点与 {{site.data.keyword.cos_full_notm}} 服务实例的服务端点相匹配，请不要在 PVC YAML 文件中包含 <code>ibm.io/endpoint</code> 选项。</td>
+  </tr>
+   <tr>
    <td><code>resources.requests.storage</code></td>
    <td>{{site.data.keyword.cos_full_notm}} 存储区的虚构大小（以千兆字节为单位）。Kubernetes 需要此大小，但在 {{site.data.keyword.cos_full_notm}} 中并不考虑此大小。所以您可以输入所需的任意大小。您在 {{site.data.keyword.cos_full_notm}} 中使用的实际空间可能有所不同，会根据[定价表 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) 计费。</td>
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
-   <td>在以下选项之间进行选择：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 设置为 <strong>true</strong>：输入要用于新存储区的存储类。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 设置为 <strong>false</strong>：输入要用于创建现有存储区的存储类。</br></br>如果在 {{site.data.keyword.cos_full_notm}} 服务实例中手动创建了存储区，或者无法记住所使用的存储类，请在 {{site.data.keyword.Bluemix}}“仪表板”中查找服务实例，然后查看现有存储区的<strong>类</strong>和<strong>位置</strong>。然后，使用相应的[存储类](#cos_storageclass_reference)。<p class="note">存储类中设置的 {{site.data.keyword.cos_full_notm}} API 端点基于集群所在的区域。如果要访问非集群所在区域中的存储区，那么必须创建[定制存储类](/docs/containers?topic=containers-kube_concepts#customized_storageclass)并对存储区使用相应的 API 端点。</p></li></ul>  </td>
+   <td>在以下选项之间进行选择：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 设置为 <strong>true</strong>：输入要用于新存储区的存储类。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 设置为 <strong>false</strong>：输入已用于创建现有存储区的存储类。</br></br>如果在 {{site.data.keyword.cos_full_notm}} 服务实例中手动创建了存储区，或者无法记住所使用的存储类，请在 {{site.data.keyword.Bluemix}}“仪表板”中查找服务实例，然后查看现有存储区的<strong>类</strong>和<strong>位置</strong>。然后，使用相应的[存储类](#cos_storageclass_reference)。<p class="note">存储类中设置的 {{site.data.keyword.cos_full_notm}} API 端点基于集群所在的区域。如果要访问非集群所在区域中的存储区，那么必须创建[定制存储类](/docs/containers?topic=containers-kube_concepts#customized_storageclass)并对存储区使用相应的 API 端点。</p></li></ul>  </td>
    </tr>
    </tbody>
    </table>
@@ -877,10 +944,10 @@ subcollection: containers
      安装点位于 **Volume Mounts** 字段中，卷位于 **Volumes** 字段中。
 
      ```
-     Volume Mounts:
-          /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
-          /volumemount from myvol (rw)
-    ...
+      Volume Mounts:
+           /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+           /volumemount from myvol (rw)
+     ...
      Volumes:
        myvol:
          Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 로깅 및 모니터링 문제점 해결
@@ -71,20 +71,20 @@ Kibana 대시보드에 액세스할 때 로그가 표시되지 않습니다.
   <tr>
     <td>클러스터 작성시 영역을 지정한 경우, 계정 소유자에게 해당 영역에 대한 관리자, 개발자 또는 감사자 권한이 없습니다.</td>
       <td>계정 소유자의 액세스 권한을 변경하려면 다음을 수행하십시오.
-      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info</code>를 실행하십시오.</li>
+      <ol><li>클러스터에 대한 계정 소유자를 찾으려면 <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li>
       <li>계정 소유자에게 영역에 대한 관리자, 개발자 또는 감사자 {{site.data.keyword.containerlong_notm}} 액세스 권한을 부여하려면 <a href="/docs/containers?topic=containers-users">클러스터 액세스 관리</a>를 참조하십시오.</li>
       <li>권한이 변경된 후에 로깅 토큰을 새로 고치려면 <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>를 실행하십시오.</li></ol></td>
     </tr>
     <tr>
-      <td>애플리케이션 로깅 구성의 앱 경로에 symlink가 포함되어 있습니다.</td>
-      <td><p>로그를 전송하려면 로깅 구성에 절대 경로를 사용해야 하며, 그렇지 않으면 로그를 읽을 수 없습니다. 경로가 작업자 노드에 마운트되어 있는 경우에는 symlink가 작성되었을 수 있습니다.</p> <p>예: 지정된 경로가 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>이지만 로그가 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>로 이동하는 경우에는 이 로그를 읽을 수 없습니다.</p></td>
+      <td>사용자 앱에 적합한 로깅 구성의 앱 경로에 symlink가 포함되어 있습니다.</td>
+      <td><p>로그를 전송하려면 로깅 구성에 절대 경로를 사용해야 하며, 그렇지 않으면 로그를 읽을 수 없습니다. 경로가 작업자 노드에 마운트되어 있는 경우에는 symlink를 작성할 수 있습니다. </p> <p>예: 지정된 경로가 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>이지만 로그가 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>로 이동하는 경우에는 이 로그를 읽을 수 없습니다.</p></td>
     </tr>
   </tbody>
 </table>
 
 문제점 해결 중에 변경한 사항을 테스트하려는 경우에는 여러 로그 이벤트를 생성하는 샘플 팟(Pod) *Noisy*를 클러스터의 작업자 노드에 배치할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. `deploy-noisy.yaml` 구성 파일을 작성하십시오.
     ```
@@ -141,7 +141,7 @@ Kubernetes 대시보드에 액세스할 때 사용률 그래프는 표시되지 
 {: #quota}
 
 {: tsSymptoms}
-클러스터에서 로깅 구성을 설정하여 로그를 {{site.data.keyword.loganalysisfull}}에 전달합니다. 로그를 보면 이 오류 메시지 또는 이와 유사한 오류 메시지가 표시됩니다.
+클러스터에서 로깅 구성을 설정하여 로그를 {{site.data.keyword.loganalysisfull}}에 전달합니다. 로그를 볼 때 다음과 유사한 오류 메시지가 표시됩니다.
 
 ```
 IBM® Cloud Log Analysis 인스턴스{인스턴스 GUID}의 Bluemix 영역{영역 GUID}에 할당한 일일 할당량에 도달했습니다. 현재 일일 할당은 로그 검색 스토리지에 XXX이며, 이는 3일 동안 유지되며, 이 기간 동안 Kibana에서 검색할 수 있습니다. 그리고 로그 콜렉션 스토리지의 로그 보존 정책에는 영향을 주지 않습니다. 하루에 로그 검색 스토리지에 더 많은 데이터를 저장할 수 있도록 플랜을 업그레이드하려면 이 영역에 대한 로그 분석 서비스 플랜을 업그레이드하십시오. 서비스 플랜 및 플랜 업그레이드 방법에 대한 자세한 정보는 플랜을 참조하십시오.
@@ -163,7 +163,7 @@ IBM® Cloud Log Analysis 인스턴스{인스턴스 GUID}의 Bluemix 영역{영�
  </thead>
  <tbody>
   <tr>
-    <td>하나 이상의 팟(Pod)에서 매우 많은 양의 로그를 생성하고 있습니다.</td>
+    <td>하나 이상의 팟(Pod)에 많은 수의 로그가 생성됩니다.</td>
     <td>특정 팟(Pod)의 로그가 전달되지 않도록 하여 로그 스토리지 공간을 확보할 수 있습니다. 이러한 팟(Pod)에 대한 [로깅 필터](/docs/containers?topic=containers-health#filter-logs)를 작성하십시오.</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ IBM® Cloud Log Analysis 인스턴스{인스턴스 GUID}의 Bluemix 영역{영�
 {: #long_lines}
 
 {: tsSymptoms}
-클러스터에서 로깅 구성을 설정하여 로그를 {{site.data.keyword.loganalysisfull_notm}}에 전달합니다. 로그를 볼 때 매우 긴 로그 메시지가 표시됩니다. 또한 Kibana에 로그 메시지의 마지막 600 - 700자만 표시됩니다.
+클러스터에서 로깅 구성을 설정하여 로그를 {{site.data.keyword.loganalysisfull_notm}}에 전달합니다. 로그를 볼 때 긴 로그 메시지가 표시됩니다. 또한 Kibana에 로그 메시지의 마지막 600 - 700자만 표시됩니다.
 
 {: tsCauses}
 긴 로그 메시지는 Fluentd에서 수집하기 전에 길이로 인해 잘릴 수 있으므로 로그가 {{site.data.keyword.loganalysisshort_notm}}에 전달되기 전에 Fluentd에서 올바르게 구문 분석하지 못할 수도 있습니다.
@@ -207,7 +207,7 @@ IBM® Cloud Log Analysis 인스턴스{인스턴스 GUID}의 Bluemix 영역{영�
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)를 참조하십시오.
--   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 참조하십시오.
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
+-   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support)를 참조하십시오.
+문제를 보고할 때 클러스터 ID를 포함하십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
 {: tip}
 

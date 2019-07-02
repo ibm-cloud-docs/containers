@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **REST API**
 
-- [用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api/)
-- [用于集群的 REST API JSON ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [用于在集群中进行日志记录的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-logging/)
-- [用于管理集群中 Ingress 应用程序负载均衡器的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [用于集群的 REST API ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [用于集群的 REST API JSON ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [为 {{site.data.keyword.containerlong}} 设置持续集成/持续交付 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [将 VM 应用程序迁移到云 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [将 CF 应用程序迁移到云 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [使用 Knative 在集群中运行无服务器应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [使用 Knative 在集群中运行无服务器应用程序 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/containers?topic=containers-serverless-apps-knative)
 - [使用基于 Apache Kafka 的消息传递服务为应用程序编排长时间运行的工作负载 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [使用 Terraform 在集群中自动执行部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [组织用户和团队 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Ottimizzazione delle prestazioni
 {: #kernel}
@@ -116,7 +118,7 @@ Per ripristinare i parametri `sysctl` dei tuoi nodi di lavoro ai valori predefin
     ```
     {: pre}
 
-2. [Riavvia tutti i nodi di lavoro nel cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). I nodi di lavoro tornano online con i valori predefiniti applicati.
+2. [Riavvia tutti i nodi di lavoro nel cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). I nodi di lavoro tornano online con i valori predefiniti applicati.
 
 <br />
 
@@ -168,7 +170,7 @@ Le configurazione del provider di metriche del tuo cluster (`metrics-server` in 
 
 Il pod del provider di metriche ha anche un contenitore `nanny` che ridimensiona le richieste e i limiti delle risorse del contenitore principale `metrics-server` o `heapster` in risposta al numero di nodi di lavoro nel cluster. Puoi modificare le risorse predefinite modificando la mappa di configurazione del provider di metriche.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Apri il file YALM di mappa di configurazione del provider di metriche del cluster.
     *  Per `metrics-server`:

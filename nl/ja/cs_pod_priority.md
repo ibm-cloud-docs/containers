@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-05-31"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # ポッドの優先度の設定
 {: #pod_priority}
@@ -91,7 +93,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 
@@ -173,7 +175,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * ポッドをデプロイする名前空間に対して[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 * 優先度によって既存のポッドが回避され、クラスターのリソースの消費方法に影響を与える可能性があるため、[優先度スケジューリングの仕組みを理解](#priority_scheduling)します。
@@ -222,7 +224,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
         spec:
           containers:
           - name: ibmliberty
-            image: registry.bluemix.net/ibmliberty:latest
+            image: icr.io/ibmliberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

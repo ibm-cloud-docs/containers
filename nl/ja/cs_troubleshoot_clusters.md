@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -59,6 +60,11 @@ that is linked to an IBM Cloud infrastructure (SoftLayer) account term or that y
 {: screen}
 
 ```
+Worker not found. Review {{site.data.keyword.Bluemix_notm}} infrastructure permissions.
+```
+{: screen}
+
+```
 {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.Bluemix_notm}} Infrastructure permissions to add servers
 ```
 {: screen}
@@ -74,33 +80,76 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-クラスターを作成する適切な許可がありません。 クラスターを作成するには、次の許可が必要です。
-*  IBM Cloud インフラストラクチャー (SoftLayer) に対する**スーパーユーザー**の役割、または少なくとも[ここに示す最小限のインフラストラクチャー許可](/docs/containers?topic=containers-access_reference#infra)。
-*  {{site.data.keyword.containerlong_notm}} に対するアカウント・レベルの**管理者**のプラットフォーム管理役割。
-*  {{site.data.keyword.registrylong_notm}} に対するアカウント・レベルの**管理者**のプラットフォーム管理役割。 {{site.data.keyword.registryshort_notm}} のポリシーを、リソース・グループ・レベルに制限しないでください。 2018 年 10 月 4 日より前に {{site.data.keyword.registrylong_notm}} を使い始めた場合は、[{{site.data.keyword.Bluemix_notm}} IAM ポリシー制約を有効に](/docs/services/Registry?topic=registry-user#existing_users)していることを確認してください。
-
-インフラストラクチャー関連のエラーについては、自動アカウント・リンクを有効にした後に作成した {{site.data.keyword.Bluemix_notm}} の従量課金アカウントが、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように既にセットアップされています。 追加の構成を行わなくても、クラスターのためのインフラストラクチャー・リソースを購入できます。 有効な従量制課金アカウントを持っていて、このエラー・メッセージを受け取った場合は、インフラストラクチャー・リソースにアクセスするための正しい IBM Cloud インフラストラクチャー (SoftLayer) アカウントの資格情報を使用していない可能性があります。
-
-他の {{site.data.keyword.Bluemix_notm}} アカウント・タイプを持つユーザーは、標準クラスターを作成するようにアカウントを構成する必要があります。 異なるアカウント・タイプがある場合の例を以下に示します。
-* {{site.data.keyword.Bluemix_notm}} プラットフォーム・アカウントよりも前から存在する IBM Cloud インフラストラクチャー (SoftLayer) アカウントがあり、引き続きそれを使用する必要がある。
-* インフラストラクチャー・リソースのプロビジョンに異なる IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する必要がある。 例えば、請求のために異なるインフラストラクチャー・アカウントを使用するようにチームの {{site.data.keyword.Bluemix_notm}} アカウントをセットアップできます。
-
-インフラストラクチャー・リソースのプロビジョンに別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する場合は、アカウントに[孤立クラスター](#orphaned)が作成されることもあります。
+地域およびリソース・グループに対して設定されたインフラストラクチャー資格情報に、適切な[インフラストラクチャー許可](/docs/containers?topic=containers-access_reference#infra)がありません。通常、ユーザーのインフラストラクチャー許可は、地域およびリソース・グループの [API キー](/docs/containers?topic=containers-users#api_key)として保管されます。まれに、[別の {{site.data.keyword.Bluemix_notm}} アカウント・タイプ](/docs/containers?topic=containers-users#understand_infra)を使用する場合は、[手動でインフラストラクチャー資格情報を設定](/docs/containers?topic=containers-users#credentials)している可能性があります。インフラストラクチャー・リソースのプロビジョンに別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する場合は、アカウントに[孤立クラスター](#orphaned)が作成されることもあります。
 
 {: tsResolve}
 アカウント所有者は、インフラストラクチャー・アカウントの資格情報を正しくセットアップする必要があります。 資格情報は、使用しているインフラストラクチャー・アカウントのタイプによって異なります。
 
-1.  インフラストラクチャー・アカウントに対するアクセス権限があることを確認します。 [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) にログインし、メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン")の**「クラシック・インフラストラクチャー」**をクリックします。 メニューが表示された場合は、インフラストラクチャー・アカウントへのアクセス権限があります。 アクセス権限がない場合は、アカウントをアップグレードするオプションが表示されます。
-2.  クラスターが従量課金 (PAYG) アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しているかどうかを確認します。
-    1.  メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") の**「Kubernetes」> 「クラスター」**をクリックします。
-    2.  テーブルから、該当のクラスターを選択します。
-    3.  **「概要」**タブで、**「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドを確認します。
-        * **「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドが表示されない場合、インフラストラクチャー・アカウントとプラットフォーム・アカウントに同じ資格情報を使用する、リンクされた従量課金 (PAYG) アカウントがあります。
-        * **「インフラストラクチャー・ユーザー (Infrastructure User)」**フィールドが表示される場合、クラスターでは、従量課金 (PAYG) アカウントに付属したものとは異なるインフラストラクチャー・アカウントを使用しています。 これらの異なる資格情報は、地域内のすべてのクラスターに適用されます。
-3.  インフラストラクチャー許可の問題をトラブルシューティングする方法を決定するために必要なアカウントのタイプを決定します。 ほとんどのユーザーは、デフォルトのリンクされた従量課金 (PAYG) アカウントで十分です。
-    *  リンクされた従量課金 (PAYG) {{site.data.keyword.Bluemix_notm}} アカウント: [API キーが正しい権限でセットアップされていることを確認します](/docs/containers?topic=containers-users#default_account)。 クラスターで異なるインフラストラクチャー・アカウントを使用している場合は、その資格情報をプロセスの一部として設定解除する必要があります。
-    *  異なる {{site.data.keyword.Bluemix_notm}} プラットフォーム・アカウントおよびインフラストラクチャー・アカウント: インフラストラクチャー・ポートフォリオにアクセスできること、および[インフラストラクチャー・アカウントの資格情報が正しい権限でセットアップされていることを確認します](/docs/containers?topic=containers-users#credentials)。
-4.  インフラストラクチャー・アカウントにクラスターのワーカー・ノードを表示できない場合は、[クラスターが孤立](#orphaned)していないかどうかを確認してください。
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  地域およびリソース・グループのインフラストラクチャー許可に使用されるユーザー資格情報を特定します。
+    1.  クラスターの地域およびリソース・グループの API キーを確認します。
+        ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+        出力例:
+        ```
+        Getting information about the API key owner for cluster <cluster_name>...
+        OK
+        Name                Email   
+        <user_name>         <name@email.com>
+        ```
+        {: screen}
+    2.  地域およびリソース・グループのインフラストラクチャー・アカウントが、別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用するように手動で設定されているかどうかを確認します。
+        ```
+        ibmcloud ks credential-get --region <us-south>
+        ```
+        {: pre}
+
+        **資格情報が別のアカウントを使用するように設定されている場合の出力例**。この場合、前のステップで取得した API キーに別のユーザーの資格情報が保管されていても、ターゲットにした地域とリソース・グループには、ユーザーのインフラストラクチャー資格情報が使用されます。
+        ```
+        OK
+        Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
+        ```
+        {: screen}
+
+        **資格情報が別のアカウントを使用するように設定されていない場合の出力例**。この場合、前のステップで取得した API キーの所有者は、地域およびリソース・グループに使用されるインフラストラクチャー資格情報を持っています。
+        ```
+        FAILED
+        No credentials set for resource group <resource_group_name>.: The user credentials could not be found. (E0051)
+        ```
+        {: screen}
+2.  ユーザーのインフラストラクチャー許可を検証します。
+    1.  地域およびリソース・グループの推奨および必須のインフラストラクチャー許可をリストします。
+        ```
+        ibmcloud ks infra-permissions-get --region <region>
+        ```
+        {: pre}
+    2.  [API キーまたは手動で設定されたアカウントのインフラストラクチャー資格情報の所有者が正しい許可を持っている](/docs/containers?topic=containers-users#owner_permissions)ことを確認します。
+    3.  必要に応じて、地域およびリソース・グループの [API キー](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)または[手動で設定された](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)インフラストラクチャー資格情報の所有者を変更できます。
+3.  変更された許可によって、許可ユーザーがクラスターのインフラストラクチャー操作を実行できることをテストします。
+    1.  例えば、ワーカー・ノードの削除を試行できます。
+        ```
+        ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+    2.  ワーカー・ノードが削除されたかどうかを確認します。
+        ```
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+
+        ワーカー・ノードが正常に削除された場合の出力例。ワーカー・ノードが削除されたため、`worker-get` 操作は失敗します。インフラストラクチャー許可が正しくセットアップされています。
+        ```
+        FAILED
+        The specified worker node could not be found. (E0011)
+        ```
+        {: screen}
+
+    3.  ワーカー・ノードが削除されていない場合は、[**State** フィールドと **Status** フィールド](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)、および[ワーカー・ノードに関する一般的な問題](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues)を確認して、デバッグを続行します。
+    4.  資格情報を手動で設定しており、引き続きインフラストラクチャー・アカウントにクラスターのワーカー・ノードを表示できない場合は、[クラスターが孤立](#orphaned)していないかどうかを確認できます。
 
 <br />
 
@@ -159,7 +208,7 @@ CLI からコマンド `ibmcloud`、`kubectl`、または `calicoctl` を実行�
 {: tsResolve}
 1. クラスター内のワーカー・ノードをリストして、ワーカー・ノードが `Reloading` 状態で停滞していないことを確認します。
    ```
-   ibmcloud ks workers <cluster_name_or_id>
+   ibmcloud ks workers --cluster <cluster_name_or_id>
    ```
    {: pre}
 
@@ -267,10 +316,9 @@ CLI からコマンド `ibmcloud`、`kubectl`、または `calicoctl` を実行�
     * クラスターに対するアクセス権限はあるが、そのクラスターが属するリソース・グループに対するアクセス権限はない場合:
       1. リソース・グループをターゲットとして設定しないでください。 既にリソース・グループをターゲットとして設定していた場合は、ターゲット設定を解除してください。
         ```
-        ibmcloud target -g none
+        ibmcloud target --unset-resource-group
         ```
         {: pre}
-        名前が `none` のリソース・グループは存在しないため、このコマンドは失敗します。 ただし、コマンドが失敗すると、現在のリソース・グループへのターゲット設定は自動的に解除されます。
 
       2. クラスターをターゲットとして設定します。
         ```
@@ -282,10 +330,9 @@ CLI からコマンド `ibmcloud`、`kubectl`、または `calicoctl` を実行�
         1. アカウント所有者に連絡して、そのクラスターに対する [{{site.data.keyword.Bluemix_notm}}IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)を自分に割り当ててもらいます。
         2. リソース・グループをターゲットとして設定しないでください。 既にリソース・グループをターゲットとして設定していた場合は、ターゲット設定を解除してください。
           ```
-          ibmcloud target -g none
+          ibmcloud target --unset-resource-group
           ```
           {: pre}
-          名前が `none` のリソース・グループは存在しないため、このコマンドは失敗します。 ただし、コマンドが失敗すると、現在のリソース・グループへのターゲット設定は自動的に解除されます。
         3. クラスターをターゲットとして設定します。
           ```
           ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
@@ -325,9 +372,9 @@ Instance ID inconsistent with worker records
 マシンでハードウェアの問題が発生した場合、マシン ID が {{site.data.keyword.containerlong_notm}} のワーカー・レコードと不整合になる可能性があります。 IBM Cloud インフラストラクチャー (SoftLayer) がこの問題を解決すると、サービスが識別していないシステム内で、あるコンポーネントが変化する可能性があります。
 
 {: tsResolve}
-{{site.data.keyword.containerlong_notm}} がそのマシンを再識別するには、[ベアメタルのワーカー・ノードを再ロードします](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)。 **注**: 再ロードによって、マシンの[パッチ・バージョン](/docs/containers?topic=containers-changelog)も更新されます。
+{{site.data.keyword.containerlong_notm}} がそのマシンを再識別するには、[ベアメタルのワーカー・ノードを再ロードします](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)。 **注**: 再ロードによって、マシンの[パッチ・バージョン](/docs/containers?topic=containers-changelog)も更新されます。
 
-[ベアメタル・ワーカー・ノードは削除](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)することもできます。 **注**: ベア・メタル・インスタンスは月単位で請求されます。
+[ベアメタル・ワーカー・ノードは削除](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)することもできます。 **注**: ベア・メタル・インスタンスは月単位で請求されます。
 
 <br />
 
@@ -373,13 +420,13 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントのクラ
     3.  インフラストラクチャーのナビゲーション・ペインから**「デバイス」>「デバイス・リスト」**をクリックします。
     4.  先ほど書き留めたワーカー・ノードの ID を検索します。
     5.  このワーカー・ノード ID が見つからない場合、そのワーカー・ノードはこのインフラストラクチャー・アカウントにプロビジョンされていません。 別のインフラストラクチャー・アカウントに切り替えて、もう一度やり直します。
-3.  `ibmcloud ks credential-set` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)を使用して、インフラストラクチャー資格情報を、クラスター・ワーカー・ノードがプロビジョンされたアカウント (前のステップで見つけたアカウント) に変更します。
+3.  `ibmcloud ks credential-set` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)を使用して、インフラストラクチャー資格情報を、クラスター・ワーカー・ノードがプロビジョンされたアカウント (前のステップで見つけたアカウント) に変更します。
     インフラストラクチャー資格情報にもうアクセスできず、それを取得できない場合は、{{site.data.keyword.Bluemix_notm}} サポート・ケースを開いて孤立クラスターを除去する必要があります。
     {: note}
-4.  [クラスターを削除します](/docs/containers?topic=containers-clusters#remove)。
+4.  [クラスターを削除します](/docs/containers?topic=containers-remove)。
 5.  必要に応じて、インフラストラクチャー資格情報を前のアカウントにリセットします。 切り替え後のアカウントとは異なるインフラストラクチャー・アカウントを使用してクラスターを作成した場合、それらのクラスターは孤立化する可能性があります。
-    * 資格情報を別のインフラストラクチャー・アカウントに設定するには、`ibmcloud ks credential-set` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)を使用します。
-    * {{site.data.keyword.Bluemix_notm}} 従量課金 (PAYG) アカウントに付属するデフォルトの資格情報を使用するには、`ibmcloud ks credential-unset` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)を使用します。
+    * 資格情報を別のインフラストラクチャー・アカウントに設定するには、`ibmcloud ks credential-set` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)を使用します。
+    * {{site.data.keyword.Bluemix_notm}} 従量課金 (PAYG) アカウントに付属するデフォルトの資格情報を使用するには、`ibmcloud ks credential-unset --region <region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)を使用します。
 
 <br />
 
@@ -399,13 +446,13 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントのクラ
 マスター・ノードとワーカー・ノードの間の OpenVPN 接続が正しく機能していません。
 
 {: tsResolve}
-1. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+1. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 2. OpenVPN クライアント・ポッドを再始動します。
   ```
   kubectl delete pod -n kube-system -l app=vpn
   ```
   {: pre}
-3. それでも同じエラー・メッセージが表示される場合は、VPN ポッドがあるワーカー・ノードが正常ではない可能性があります。 VPN ポッドを再始動し、異なるワーカー・ノードにスケジュールを変更するには、VPN ポッドがある[ワーカー・ノードを閉鎖、排出してリブートします](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。
+3. それでも同じエラー・メッセージが表示される場合は、VPN ポッドがあるワーカー・ノードが正常ではない可能性があります。 VPN ポッドを再始動し、異なるワーカー・ノードにスケジュールを変更するには、VPN ポッドがある[ワーカー・ノードを閉鎖、排出してリブートします](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)。
 
 <br />
 
@@ -414,7 +461,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントのクラ
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` を実行すると、以下のメッセージが表示されます。
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` を実行すると、以下のメッセージが表示されます。
 
 ```
 Multiple services with the same name were found.
@@ -428,7 +475,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 {: tsResolve}
 `ibmcloud ks cluster-service-bind` コマンドで、サービス・インスタンス名ではなくサービス GUID を使用してください。
 
-1. [バインドするサービス・インスタンスが含まれる地域にログインします。](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+1. [バインドするサービス・インスタンスが含まれる {{site.data.keyword.Bluemix_notm}} 地域にログインします。](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 2. サービス・インスタンスの GUID を取得します。
   ```
@@ -444,7 +491,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
   {: screen}
 3. サービスをクラスターに再びバインドします。
   ```
-  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
   ```
   {: pre}
 
@@ -455,7 +502,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` を実行すると、以下のメッセージが表示されます。
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` を実行すると、以下のメッセージが表示されます。
 
 ```
 Binding service to a namespace...
@@ -502,7 +549,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
 4. 数分待ってから、ユーザーにサービスのバインドを再試行してもらってください。
 
-5. これで問題が解決しない場合は、{{site.data.keyword.Bluemix_notm}} IAM 許可が同期していないため、自分で問題を解決することはできません。 サポート・ケースを開いて、[IBM サポートにお問い合わせください](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。 必ず、クラスター ID、ユーザー ID、およびサービス・インスタンス ID をご提供ください。
+5. これで問題が解決しない場合は、{{site.data.keyword.Bluemix_notm}} IAM 許可が同期していないため、自分で問題を解決することはできません。 サポート・ケースを開いて、[IBM サポートにお問い合わせください](/docs/get-support?topic=get-support-getting-customer-support)。 必ず、クラスター ID、ユーザー ID、およびサービス・インスタンス ID をご提供ください。
    1. クラスター ID を取得します。
       ```
       ibmcloud ks clusters
@@ -523,7 +570,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: #cs_service_keys}
 
 {: tsSymptoms}
-`ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` を実行すると、以下のメッセージが表示されます。
+`ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` を実行すると、以下のメッセージが表示されます。
 
 ```
 This service doesn't support creation of keys
@@ -580,8 +627,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
   ```
   {: screen}
 
@@ -643,7 +690,7 @@ unable to validate against any pod security policy
 
 {{site.data.keyword.IBM_notm}} クラスター管理リソースを削除した場合は、Kubernetes マスターをリフレッシュして復元します。
 
-1.  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1.  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  Kubernetes マスターを最新表示して復元します。
 
     ```
@@ -670,14 +717,42 @@ unable to validate against any pod security policy
 
 以下のいずれかの解決策を試してください。
   - `ibmcloud ks clusters` を実行して、クラスターの状況を確認します。 その後、`ibmcloud ks workers --cluster <cluster_name>` を実行して、ワーカー・ノードがデプロイされていることを確認します。
-  - VLAN が有効かどうかを確認します。 VLAN が有効であるためには、ローカル・ディスク・ストレージを持つワーカーをホストできるインフラストラクチャーに VLAN が関連付けられている必要があります。 `ibmcloud ks vlans --zone <zone>` を実行して [VLAN をリスト](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)できます。VLAN がリストに表示されない場合、その VLAN は有効ではありません。 別の VLAN を選択してください。
+  - VLAN が有効かどうかを確認します。 VLAN が有効であるためには、ローカル・ディスク・ストレージを持つワーカーをホストできるインフラストラクチャーに VLAN が関連付けられている必要があります。 `ibmcloud ks vlans --zone <zone>` を実行して [VLAN をリスト](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)できます。VLAN がリストに表示されない場合、その VLAN は有効ではありません。 別の VLAN を選択してください。
 
 <br />
 
 
+## クラスター作成エラーにより、レジストリーからイメージをプルできない
+{: #ts_image_pull_create}
+
+{: tsSymptoms}
+クラスターを作成した場合に、以下のようなエラー・メッセージが表示されました。
 
 
-## イメージをレジストリーからプルできない
+```
+Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster-pull-secret-apply'.
+```
+{: screen}
+
+{: tsCauses}
+クラスターの作成中に、クラスターに対してサービス ID が作成され、そのサービス ID に、{{site.data.keyword.registrylong_notm}} に対する**リーダー**のサービス・アクセス・ポリシーが割り当てられます。次に、クラスターによる {{site.data.keyword.registrylong_notm}} からのイメージのプルが許可されるように、このサービス ID の API キーが生成されて[イメージ・プル・シークレット](/docs/containers?topic=containers-images#cluster_registry_auth)に保管されます。
+
+クラスターの作成時に**リーダー**のサービス・アクセス・ポリシーをサービス ID に正常に割り当てるには、{{site.data.keyword.registrylong_notm}} に対する**管理者**のプラットフォーム・アクセス・ポリシーが必要です。
+
+{: tsResolve}
+
+手順:
+1.  アカウント所有者がユーザーに {{site.data.keyword.registrylong_notm}} に対する**管理者**の役割を付与していることを確認します。
+    ```
+    ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+    ```
+    {: pre}
+2.  [`ibmcloud ks cluster-pull-secret-apply` コマンドを使用して](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)、適切なレジストリー資格情報を持つイメージ・プル・シークレットを再作成します。
+
+<br />
+
+
+## `ImagePullBackOff` または許可エラーにより、レジストリーからイメージをプルできない
 {: #ts_image_pull}
 
 {: tsSymptoms}
@@ -774,9 +849,9 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 
     出力例:
     ```
-    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked
-    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false
+    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
+    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false   
+    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
     ```
     {: screen}
 2.  サービス ID に少なくとも {{site.data.keyword.Bluemix_notm}} IAM **リーダー**の[サービス・アクセス役割ポリシーが {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#create) に対して割り当てられていることを確認します。 サービス ID に**リーダー**のサービス役割が割り当てられていない場合は、[IAM ポリシーを編集します](/docs/iam?topic=iam-serviceidpolicy#access_edit)。 ポリシーが正しい場合は、次のステップに進み、資格情報が有効かどうかを確認してください。
@@ -786,17 +861,17 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     {: pre}
 
     出力例:
+    ```              
+    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
+    Roles:       Reader   
+    Resources:                            
+                  Service Name       container-registry      
+                  サービス・インスタンス         
+                  地域                  
+                  Resource Type      namespace      
+                  Resource           <registry_namespace>  
     ```
-    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5
-    Roles:       Reader
-    Resources:
-                  Service Name       container-registry
-                  Service Instance
-                  Region
-                  Resource Type      namespace
-                  Resource           <registry_namespace>
-    ```
-    {: screen}
+    {: screen}  
 3.  イメージ・プル・シークレットの資格情報が有効かどうかを確認します。
     1.  イメージ・プル・シークレットの構成を取得します。 ポッドが `default` 名前空間にない場合は、`-n` フラグを含めます。
         ```
@@ -946,7 +1021,7 @@ kubectl get nodes
     2.  ワーカー・プールをサイズ変更して、そのプールが及ぶ範囲のゾーンごとにノードをさらに追加します。
 
         ```
-        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ibmcloud ks worker-pool-resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
@@ -959,7 +1034,7 @@ kubectl get nodes
         ```
         {: pre}
 
-    2.  要求が使用可能な容量を超える場合は、要求を満たすワーカー・ノードを使用して[新規ワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)します。
+    2.  要求が使用可能な容量を超える場合は、要求を満たすワーカー・ノードを使用して[新規ワーカー・プールを追加](/docs/containers?topic=containers-add_workers#add_pool)します。
 
 6.  ワーカー・ノードが完全にデプロイされたのにまだポッドが **pending** 状態のままである場合は、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) を参照して、ポッドの pending 状態のトラブルシューティングを行ってください。
 
@@ -1070,13 +1145,13 @@ Helm チャートをトラブルシューティングするには、以下のよ
     ```
     {: pre}
 
-2. 出力で、{{site.data.keyword.Bluemix_notm}} リポジトリー `ibm` の URL が `https://registry.bluemix.net/helm/ibm` であることを確認します。
+2. 出力で、{{site.data.keyword.Bluemix_notm}} リポジトリー `ibm` の URL が `https://icr.io/helm/iks-charts` であることを確認します。
 
     ```
     NAME    URL
     stable  https://kubernetes-charts.storage.googleapis.com
     local   http://127.0.0.1:8888/charts
-    ibm     https://registry.bluemix.net/helm/ibm
+    ibm     https://icr.io/helm/iks-charts
     ```
     {: screen}
 
@@ -1092,7 +1167,7 @@ Helm チャートをトラブルシューティングするには、以下のよ
         2. {{site.data.keyword.Bluemix_notm}} リポジトリーを再度追加します。
 
             ```
-            helm repo add ibm  https://registry.bluemix.net/helm/ibm
+            helm repo add iks-charts https://icr.io/helm/iks-charts
             ```
             {: pre}
 
@@ -1130,7 +1205,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 
 {: tsResolve}
 - カスタム・ファイアウォールを使用しているか、カスタム Calico ポリシーを設定している場合は、ワーカー・ノードと、イメージが保管されているコンテナー・レジストリーとの間のアウトバウンドおよびインバウンドのネットワーク・トラフィックを許可します。 イメージが {{site.data.keyword.registryshort_notm}} に保管されている場合は、[クラスターからインフラストラクチャー・リソースや他のサービスへのアクセスの許可](/docs/containers?topic=containers-firewall#firewall_outbound)で必要なポートを確認してください。
-- プライベート・サービス・エンドポイントのみを有効にしてプライベート・クラスターを作成した場合は、そのクラスターの[パブリック・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)ことができます。 パブリック接続を開かずにプライベート・クラスターに Helm チャートをインストールする場合、[Tiller を使用しても](/docs/containers?topic=containers-helm#private_local_tiller)、[Tiller を使用しなくても](/docs/containers?topic=containers-helm#private_install_without_tiller)、Helm をインストールできます。
+- プライベート・サービス・エンドポイントのみを有効にしてプライベート・クラスターを作成した場合は、そのクラスターの[パブリック・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)ことができます。 パブリック接続を開かずにプライベート・クラスターに Helm チャートをインストールする場合、[Tiller を使用しても](/docs/containers?topic=containers-helm#private_local_tiller)、[Tiller を使用しなくても](/docs/containers?topic=containers-helm#private_install_without_tiller)、Helm をインストールできます。
 
 <br />
 
@@ -1150,6 +1225,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support)を参照してください。
 問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
+

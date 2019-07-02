@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}f
 
 
 # 지원되는 IBM Cloud 및 서드파티 통합
@@ -29,9 +30,108 @@ subcollection: containers
 {{site.data.keyword.containerlong}}의 표준 Kubernetes 클러스터에서 다양한 외부 서비스와 카탈로그 서비스를 사용할 수 있습니다.
 {:shortdesc}
 
+## 인기 있는 통합
+{: #popular_services}
+
+<table summary="이 표는 클러스터에 추가할 수 있으며 {{site.data.keyword.containerlong_notm}} 사용자에게 인기 있는 사용 가능한 서비스를 보여줍니다. 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서비스의 이름, 2열에는 서비스에 대한 설명이 있습니다.">
+<caption>인기 있는 서비스</caption>
+<thead>
+<tr>
+<th>서비스</th>
+<th>카테고리</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>클러스터 활동 로그</td>
+<td>Grafana를 통해 로그를 분석하여 클러스터에서 수행된 관리 활동을 모니터합니다. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) 문서를 참조하십시오. 추적할 수 있는 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](/docs/containers?topic=containers-at_events)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.appid_full}}</td>
+<td>인증</td>
+<td>사용자가 로그인하도록 하여 [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started)를 통해 앱에 보안 레벨을 추가합니다. 앱에 웹 또는 API HTTP/HTTPS 요청을 인증하기 위해 [{{site.data.keyword.appid_short_notm}} 인증 Ingress 어노테이션](/docs/containers?topic=containers-ingress_annotation#appid-auth)을 사용하여 {{site.data.keyword.appid_short_notm}}를 Ingress 서비스와 통합할 수 있습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} Block Storage</td>
+<td>블록 스토리지</td>
+<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적, 고성능 iSCSI 스토리지입니다. 블록 스토리지를 사용하여 단일 구역에 Stateful 앱을 배치하거나, 블록 스토리지를 단일 팟(Pod)에 대한 고성능 스토리지로 사용하십시오. 클러스터에서 블록 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Block Storage에 데이터 저장](/docs/containers?topic=containers-block_storage#block_storage)을 참조하십시오.,</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloudcerts_full}}</td>
+<td>TLS 인증서</td>
+<td><a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 사용하여 앱에 대한 SSL 인증서를 저장하고 관리할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">{{site.data.keyword.containerlong_notm}}에서 {{site.data.keyword.cloudcerts_long_notm}}를 사용하여 사용자 정의 도메인 TLS 인증서 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 문서"></a>를 참조하십시오. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.registrylong}}</td>
+<td>컨테이너 이미지</td>
+<td>클러스터 사용자 간에 이미지를 안전하게 저장하고 공유할 수 있는 보안된 Docker 이미지 저장소를 설정하십시오. 자세한 정보는 <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_full}}</td>
+<td>빌드 자동화</td>
+<td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정에 대한 자세한 정보는 블로그 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.datashield_full}}(베타)</td>
+<td>메모리 암호화</td>
+<td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용하여 데이터 메모리를 암호화할 수 있습니다. {{site.data.keyword.datashield_short}}는 Intel® Software Guard Extensions(SGX) 및 Fortanix® 기술과 통합되어 {{site.data.keyword.Bluemix_notm}} 컨테이너 워크로드 코드와 데이터가 사용 중에 보호됩니다. 앱 코드와 데이터는 앱의 중요한 부분을 보호하는 작업자 노드의 신뢰할 수 있는 메모리 영역인 CPU 강화 엔클레이브에서 실행되므로 코드와 데이터를 기밀로 유지하고 수정하지 않고 유지하는 데 도움이 됩니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} File Storage</td>
+<td>파일 스토리지</td>
+<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. 클러스터에서 파일 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} File Storage에 데이터 저장](/docs/containers?topic=containers-file_storage#file_storage)을 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.keymanagementservicefull}}</td>
+<td>데이터 암호화</td>
+<td>{{site.data.keyword.keymanagementserviceshort}}를 사용으로 설정하여 클러스터에 있는 Kubernetes secret을 암호화하십시오. Kubernetes secret을 암호화하면 권한 없는 사용자가 민감한 클러스터 정보에 액세스하지 못하도록 할 수 있습니다.<br>설정하려면 <a href="/docs/containers?topic=containers-encryption#keyprotect">{{site.data.keyword.keymanagementserviceshort}}를 사용한 Kubernetes 시크릿 암호화</a>를 참조하십시오.<br>자세한 정보는 <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.la_full}}</td>
+<td>클러스터 및 앱 로그</td>
+<td>팟(Pod) 컨테이너에서 로그를 관리하기 위해 LogDNA를 작업자 노드에 서드파티 서비스로 배치하여 로그 관리 기능을 클러스터에 추가합니다. 자세한 정보는 [LogDNA로 {{site.data.keyword.loganalysisfull_notm}}에서 Kubernetes 클러스터 로그 관리](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full}}</td>
+<td>클러스터 및 앱 메트릭</td>
+<td>메트릭을 {{site.data.keyword.monitoringlong}}에 전달하기 위해 Sysdig를 작업자 노드에 서드파티의 서비스로 배치하여 앱의 성능과 상태에 대한 작동 가시성을 얻을 수 있습니다. 자세한 정보는 [Kubernetes 클러스터에서 앱에 대한 메트릭 분석](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)을 참조하십시오. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cos_full}}</td>
+<td>오브젝트 스토리지</td>
+<td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 서비스에 대한 자세한 정보는 <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+</tr>
+<tr>
+<td>Istio on {{site.data.keyword.containerlong_notm}}</td>
+<td>마이크로서비스 관리</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 클라우드 오케스트레이션 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터링하기 위한 방법을 개발자에게 제공하는 오픈 소스 서비스입니다. Istio on {{site.data.keyword.containerlong}}는 관리 추가 기능을 통해 클러스터에 Istio의 1단계 설치를 제공합니다. 한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. 시작하려면 [관리 Istio 추가 기능(베타) 사용](/docs/containers?topic=containers-istio)을 참조하십시오.</td>
+</tr>
+<tr>
+<td>Knative</td>
+<td>서버리스 앱</td>
+<td>[Knative ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)는 클러스터에 소스 중심으로 컨테이너화된 현대적 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장하는 것을 목표로 IBM, Google, Pivotal, Red Hat, Cisco 등에서 개발한 오픈 소스 플랫폼입니다. 이 플랫폼은 프로그래밍 언어와 프레임워크 전반에서 일관된 접근 방식을 사용하여 개발자가 가장 중요한 것(소스 코드)에 집중할 수 있도록 Kubernetes에서 워크로드를 빌드, 배치 및 관리하는 데 따르는 운영 부담을 제거합니다. 자세한 정보는 [Knative를 사용한 서버리스 앱 배치](/docs/containers?topic=containers-serverless-apps-knative)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>Portworx</td>
+<td>Stateful 앱을 위한 스토리지</td>
+<td>[Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 공유하는 데 사용할 수 있는 고가용성 소프트웨어 정의 스토리지 솔루션입니다. Helm 차트에 Portworx를 설치하고 Kubernetes 지속적 볼륨을 사용하여 앱에 스토리지를 프로비저닝할 수 있습니다. 클러스터에 Portworx를 설정하는 방법에 대한 자세한 정보는 [Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장](/docs/containers?topic=containers-portworx#portworx)을 참조하십시오.</td>
+</tr>
+<tr>
+<td>Razee</td>
+<td>배치 자동화</td>
+<td>[Razee ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://razee.io/)는 클러스터, 환경 및 클라우드 제공자에 대한 Kubernetes 리소스 배치를 자동화 및 관리하며, 사용자가 롤아웃 프로세스를 모니터하고 배치 문제를 더 빨리 찾을 수 있도록 리소스의 배치 정보를 시각화하는 데 도움을 주는 오픈 소스 프로젝트입니다. Razee에 대한 자세한 정보 및 배치 프로세스를 자동화하기 위해 클러스터에 Razee를 설정하는 방법에 대한 자세한 정보는 [Razee 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/razee-io/Razee)를 참조하십시오. </td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## DevOps 서비스
 {: #devops_services}
+
 <table summary="이 표에는 클러스터에 추가하여 추가 DevOps 기능을 추가할 수 있는 사용 가능한 서비스가 표시됩니다. 행은 왼쪽에서 오른쪽으로 읽어야 하며, 1열에는 서비스 이름, 2열에는 서비스의 설명이 있습니다.">
 <caption>DevOps 서비스</caption>
 <thead>
@@ -47,7 +147,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Codeship</td>
-<td>컨테이너의 Continuous Integration 및 Continuous Delivery를 위해 <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Codeship Pro를 사용하여 {{site.data.keyword.containerlong_notm}}에 워크로드 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
+<td>컨테이너의 지속적 통합 및 지속적 딜리버리를 위해 <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 사용할 수 있습니다. 자세한 정보는 <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Codeship Pro를 사용하여 {{site.data.keyword.containerlong_notm}}에 워크로드 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
 <tr>
 <td>Grafeas</td>
@@ -55,29 +155,58 @@ subcollection: containers
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 새 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다. <p>자세한 정보는 [{{site.data.keyword.containerlong_notm}}에서 Helm 설정](/docs/containers?topic=containers-integrations#helm)을 참조하십시오.</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>은 Kubernetes 패키지 관리자입니다. {{site.data.keyword.containerlong_notm}} 클러스터에서 실행되는 복잡한 Kubernetes 애플리케이션을 정의, 설치 및 업그레이드하기 위해 새 Helm 차트를 작성하거나 기존 Helm 차트를 사용할 수 있습니다. <p>자세한 정보는 [{{site.data.keyword.containerlong_notm}}에서 Helm 설정](/docs/containers?topic=containers-helm)을 참조하십시오. </p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
-<td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정 정보는 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">DevOps 파이프라인을 사용하여 {{site.data.keyword.containerlong_notm}}에 Kubernetes 팟(Pod) 배치 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a> 블로그를 참조하십시오. </td>
+<td>도구 체인을 사용하여 Kubernetes 클러스터에 대한 컨테이너 배치 및 앱 빌드를 자동화합니다. 설정에 대한 자세한 정보는 블로그 <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
 <tr>
 <td>Istio on {{site.data.keyword.containerlong_notm}}</td>
-<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 클라우드 오케스트레이션 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터링하기 위한 방법을 개발자에게 제공하는 오픈 소스 서비스입니다. Istio on {{site.data.keyword.containerlong}}는 관리 추가 기능을 통해 클러스터에 Istio의 1단계 설치를 제공합니다. 한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. 시작하려면 [관리 Istio 추가 기능 사용(베타)](/docs/containers?topic=containers-istio)을 참조하십시오.</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>는 클라우드 오케스트레이션 플랫폼에서 서비스 메시(service mesh)로도 알려진 마이크로서비스의 네트워크에 연결하고, 보안, 관리 및 모니터링하기 위한 방법을 개발자에게 제공하는 오픈 소스 서비스입니다. Istio on {{site.data.keyword.containerlong}}는 관리 추가 기능을 통해 클러스터에 Istio의 1단계 설치를 제공합니다. 한 번의 클릭으로 Istio 핵심 컴포넌트, 추가 추적, 모니터링 및 시각화를 모두 확보할 수 있고 BookInfo 샘플 앱을 시작하고 실행할 수 있습니다. 시작하려면 [관리 Istio 추가 기능(베타) 사용](/docs/containers?topic=containers-istio)을 참조하십시오.</td>
 </tr>
 <tr>
 <td>Jenkins X</td>
-<td>Jenkins X는 빌드 프로세스를 자동화하는 데 사용할 수 있는 Kubernetes 고유 Continuous Integration 및 Continuous Delivery 플랫폼입니다. {{site.data.keyword.containerlong_notm}}에 Jenkins X를 설치하는 방법에 대한 자세한 정보는 [Jenkins X 오픈 소스 프로젝트 소개 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/)를 참조하십시오.</td>
+<td>Jenkins X는 빌드 프로세스를 자동화하는 데 사용할 수 있는 Kubernetes 고유 지속적 통합 및 지속적 딜리버리 플랫폼입니다. {{site.data.keyword.containerlong_notm}}에 Jenkins X를 설치하는 방법에 대한 자세한 정보는 [Jenkins X 오픈 소스 프로젝트 소개 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/)를 참조하십시오.</td>
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)는 Kubernetes 클러스터 맨 위에 최신의, 소스 중심으로 컨테이너화된 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장한다는 목표로 IBM, Google, Pivotal, Red Hat, Cisco 등에서 개발한 오픈 소스 플랫폼입니다. 이 플랫폼은 프로그래밍 언어와 프레임워크 전반에서 일관된 접근 방식을 사용하여 개발자가 가장 중요한 것(소스 코드)에 집중할 수 있도록 Kubernetes에 워크로드를 빌드, 배치 및 관리하는 데 따르는 운영 부담을 추상화합니다. 자세한 정보는 [튜토리얼: 관리 Knative를 사용하여 Kubernetes 클러스터의 서버리스 앱 실행](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)을 참조하십시오. </td>
+<td>[Knative ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/knative/docs)는 클러스터에 소스 중심으로 컨테이너화된 현대적 서버리스 앱을 작성할 수 있도록 Kubernetes의 기능을 확장하는 것을 목표로 IBM, Google, Pivotal, Red Hat, Cisco 등에서 개발한 오픈 소스 플랫폼입니다. 이 플랫폼은 프로그래밍 언어와 프레임워크 전반에서 일관된 접근 방식을 사용하여 개발자가 가장 중요한 것(소스 코드)에 집중할 수 있도록 Kubernetes에서 워크로드를 빌드, 배치 및 관리하는 데 따르는 운영 부담을 제거합니다. 자세한 정보는 [Knative를 사용한 서버리스 앱 배치](/docs/containers?topic=containers-serverless-apps-knative)를 참조하십시오. </td>
+</tr>
+<tr>
+<td>Razee</td>
+<td>[Razee ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://razee.io/)는 클러스터, 환경 및 클라우드 제공자에 대한 Kubernetes 리소스 배치를 자동화 및 관리하며, 사용자가 롤아웃 프로세스를 모니터하고 배치 문제를 더 빨리 찾을 수 있도록 리소스의 배치 정보를 시각화하는 데 도움을 주는 오픈 소스 프로젝트입니다. Razee에 대한 자세한 정보 및 배치 프로세스를 자동화하기 위해 클러스터에 Razee를 설정하는 방법에 대한 자세한 정보는 [Razee 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/razee-io/Razee)를 참조하십시오. </td>
 </tr>
 </tbody>
 </table>
 
 <br />
 
+
+## 하이브리드 클라우드 서비스
+{: #hybrid_cloud_services}
+
+<table summary="이 표는 클러스터를 온프레미스 데이터 센터에 연결하는 데 사용할 수 있는 서비스를 보여줍니다. 행은 왼쪽에서 오른쪽으로 읽어야 하며 1열에는 서비스의 이름, 2열에는 서비스에 대한 설명이 있습니다.">
+<caption>하이브리드 클라우드 서비스</caption>
+<thead>
+<tr>
+<th>서비스</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{site.data.keyword.BluDirectLink}}</td>
+    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link)는 사용자가 공용 인터넷을 통한 라우팅 없이 원격 네트워크 환경과 {{site.data.keyword.containerlong_notm}} 간에 개인용 직접 연결을 작성할 수 있게 해 줍니다. {{site.data.keyword.Bluemix_notm}} Direct Link 오퍼링은 하이브리드 워크로드, 교차 제공자 워크로드, 대규모 또는 빈번한 데이터 전송자 또는 개인용 워크로드를 구현해야 하는 경우 유용합니다. {{site.data.keyword.Bluemix_notm}} Direct Link 오퍼링을 선택하고 {{site.data.keyword.Bluemix_notm}} Direct Link 연결을 설정하려면 {{site.data.keyword.Bluemix_notm}} Direct Link 문서의 [{{site.data.keyword.Bluemix_notm}} Direct Link 시작하기](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)를 참조하십시오. </td>
+  </tr>
+<tr>
+  <td>strongSwan IPSec VPN 서비스</td>
+  <td>Kubernetes 클러스터를 온프레미스 네트워크에 안전하게 연결하는 [strongSwan IPSec VPN 서비스 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.strongswan.org/about.html)를 설정하십시오. strongSwan IPSec VPN 서비스는 업계 표준 IPSec(Internet Protocol Security) 프로토콜 스위트를 기반으로 하는 인터넷 상의 엔드-투-엔드 보안 통신 채널을 제공합니다. 클러스터와 온프레미스 네트워크 간의 보안 연결을 설정하려면 클러스터 내의 팟(Pod)에 직접 [strongSwan IPSec VPN 서비스를 구성하고 배치](/docs/containers?topic=containers-vpn#vpn-setup)하십시오.</td>
+  </tr>
+  </tbody>
+  </table>
+
+<br />
 
 
 ## 서비스 로깅 및 모니터링
@@ -101,7 +230,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Grafana를 통해 로그를 분석하여 클러스터에서 작성된 관리 활동을 모니터링합니다. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla) 문서를 참조하십시오. 추적할 수 있는 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](/docs/containers?topic=containers-at_events)를 참조하십시오.</td>
+<td>Grafana를 통해 로그를 분석하여 클러스터에서 수행된 관리 활동을 모니터합니다. 서비스에 대한 자세한 정보는 [활동 트래커](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) 문서를 참조하십시오. 추적할 수 있는 이벤트의 유형에 대한 자세한 정보는 [활동 트래커 이벤트](/docs/containers?topic=containers-at_events)를 참조하십시오.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
@@ -117,7 +246,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus는 특별히 Kubernetes용으로 디자인된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. Prometheus는 Kubernetes 로깅 정보를 기반으로 클러스터, 작업자 노드 및 배치 상태에 대한 자세한 정보를 검색합니다. 클러스터에서 실행 중인 각 컨테이너에 대한 CPU, 메모리, I/O 및 네트워크 활동이 수집됩니다. 사용자 정의 조회 또는 경보에서 수집된 데이터를 사용하여 클러스터의 성능 및 워크로드를 모니터링할 수 있습니다.
+<td>Prometheus는 Kubernetes에 맞게 디자인된 오픈 소스 모니터링, 로깅 및 경보 도구입니다. Prometheus는 Kubernetes 로깅 정보를 기반으로 클러스터, 작업자 노드 및 배치 상태에 대한 자세한 정보를 검색합니다. 클러스터에서 실행 중인 각 컨테이너에 대한 CPU, 메모리, I/O 및 네트워크 활동이 수집됩니다. 사용자 정의 조회 또는 경보에서 수집된 데이터를 사용하여 클러스터의 성능 및 워크로드를 모니터링할 수 있습니다.
 
 <p>Prometheus를 사용하려면 <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">CoreOS 지시사항 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>을 따르십시오.</p>
 </td>
@@ -132,7 +261,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope는 서비스, 팟(Pod), 컨테이너, 프로세스, 노드 등을 포함하여 Kubernetes 클러스터 내의 리소스에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리에 대한 대화식 메트릭을 제공하며 컨테이너로 tail 및 exec를 실행하기 위한 도구도 제공합니다.<p>자세한 정보는 [Weave Scope 및 {{site.data.keyword.containerlong_notm}}를 사용하여 Kubernetes 클러스터 리소스 시각화](/docs/containers?topic=containers-integrations#weavescope)를 참조하십시오.</p></li></ol>
+<td>[Weave Scope ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.weave.works/oss/scope/)는 Kubernetes 클러스터 내의 리소스(서비스, 팟(Pod), 컨테이너, 프로세스, 노드 등 포함)에 대한 시각적 다이어그램을 제공합니다. Weave Scope는 CPU 및 메모리에 대한 대화식 메트릭을 제공하며 컨테이너로 tail 및 exec를 실행하기 위한 도구도 제공합니다.</li></ol>
 </td>
 </tr>
 </tbody>
@@ -157,7 +286,7 @@ subcollection: containers
 </tr>
 </thead>
 <tbody>
-  <tr id="appid">
+  <tr>
     <td>{{site.data.keyword.appid_full}}</td>
     <td>사용자가 로그인하도록 하여 [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started)를 통해 앱에 보안 레벨을 추가합니다. 앱에 웹 또는 API HTTP/HTTPS 요청을 인증하기 위해 [{{site.data.keyword.appid_short_notm}} 인증 Ingress 어노테이션](/docs/containers?topic=containers-ingress_annotation#appid-auth)을 사용하여 {{site.data.keyword.appid_short_notm}}를 Ingress 서비스와 통합할 수 있습니다.</td>
   </tr>
@@ -213,15 +342,15 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적, 고성능 iSCSI 스토리지입니다. 블록 스토리지를 사용하여 단일 구역에 Stateful 앱을 배치하거나 단일 팟(Pod)에 대한 고성능 스토리지로 사용합니다. 클러스터에서 블록 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Block Storage에 데이터 저장](/docs/containers?topic=containers-block_storage#block_storage)을 참조하십시오.,</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨(PV)을 사용하여 앱에 추가할 수 있는 지속적, 고성능 iSCSI 스토리지입니다. 블록 스토리지를 사용하여 단일 구역에 Stateful 앱을 배치하거나, 블록 스토리지를 단일 팟(Pod)에 대한 고성능 스토리지로 사용하십시오. 클러스터에서 블록 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} Block Storage에 데이터 저장](/docs/containers?topic=containers-block_storage#block_storage)을 참조하십시오.,</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 이 서비스에 대한 일반 정보는 <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오.</td>
+  <td>{{site.data.keyword.cos_short}}에 저장된 데이터는 암호화되어 여러 지리적 위치에 분산되며, REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다. [ibm-backup-restore 이미지](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) 를 사용하여 클러스터 내의 데이터에 대해 일회성 또는 스케줄된 백업을 작성하도록 서비스를 구성할 수 있습니다. 서비스에 대한 자세한 정보는 <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}} 문서 <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 참조하십시오. </td>
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. 클러스터에서 파일 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} File Storage에 데이터 저장](/docs/containers?topic=containers-file_storage#file_storage)을 참조하십시오.</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started)는 Kubernetes 지속적 볼륨을 사용하여 앱에 추가할 수 있는 지속적이고 빠르며 유연한 네트워크 연결 NFS 기반 파일 스토리지입니다. 워크로드의 요구사항을 충족하는 GB 크기와 IOPS를 사용하여 사전정의된 스토리지 계층 중에서 선택할 수 있습니다. 클러스터에서 파일 스토리지를 프로비저닝하는 방법에 대한 자세한 정보는 [{{site.data.keyword.Bluemix_notm}} File Storage에 데이터 저장](/docs/containers?topic=containers-file_storage#file_storage)을 참조하십시오.</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -251,7 +380,7 @@ subcollection: containers
   </tr>
 <tr>
   <td>클라우드 데이터베이스</td>
-  <td>다양한 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스(예: {{site.data.keyword.composeForMongoDB_full}} 또는 {{site.data.keyword.cloudantfull}}) 중에서 선택하여 클러스터에 고가용성 및 확장 가능한 데이터베이스 솔루션을 배치할 수 있습니다. 사용 가능한 클라우드 데이터베이스 목록은 [{{site.data.keyword.Bluemix_notm}} 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/catalog?category=databases)를 참조하십시오.  </td>
+  <td>다양한 {{site.data.keyword.Bluemix_notm}} 데이터베이스 서비스(예: {{site.data.keyword.composeForMongoDB_full}} 또는 {{site.data.keyword.cloudantfull}}) 중에서 원하는 항목을 선택하여 클러스터에 확장 가능한 고가용성 데이터베이스 솔루션을 배치할 수 있습니다. 사용 가능한 클라우드 데이터베이스 목록은 [{{site.data.keyword.Bluemix_notm}} 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/catalog?category=databases)를 참조하십시오.  </td>
   </tr>
   </tbody>
   </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,670 +21,240 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Pianificazione della tua impostazione di cluster e nodi di lavoro
+# Pianificazione della configurazione di rete del tuo cluster
 {: #plan_clusters}
-Progetta il tuo cluster standard per la massima capacità e disponibilità per la tua applicazione con {{site.data.keyword.containerlong}}.
+
+Progetta una configurazione di rete per il tuo cluster {{site.data.keyword.containerlong}} che soddisfi le esigenze dei tuoi carichi di lavoro e del tuo ambiente.
 {: shortdesc}
 
-## Cluster altamente disponibili
-{: #ha_clusters}
+In un cluster {{site.data.keyword.containerlong_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. La configurazione delle comunicazioni tra i nodi di lavoro e il master Kubernetes, altri servizi, Internet o altre reti private dipende da come configuri la rete della tua infrastruttura IBM Cloud (SoftLayer).
 
-I tuoi utenti hanno meno probabilità di riscontrare tempi di inattività quando distribuisci le tue applicazioni tra più nodi di lavoro, zone e cluster. Le funzionalità integrate, come il bilanciamento del carico e l'isolamento, aumentano la resilienza nei confronti di
-potenziali errori con host, reti o applicazioni.
+È la prima volta che crei un cluster? Prova prima la nostra [esercitazione](/docs/containers?topic=containers-cs_cluster_tutorial) e torna qui quando sei pronto per pianificare i tuoi cluster pronti per la produzione.
+{: tip}
+
+Per pianificare la configurazione di rete del tuo cluster, per prima cosa [comprendi i principi di base della rete del cluster](#plan_basics). Quindi, puoi esaminare tre potenziali configurazioni di rete del cluster che sono adatte a scenari basati sull'ambiente, tra cui l'[esecuzione di carichi di lavoro dell'applicazione con connessione Internet](#internet-facing), l'[estensione di un data center in loco con accesso pubblico limitato](#limited-public) e l'[estensione di un data center in loco solo sulla rete privata](#private_clusters).
+
+## Descrizione dei principi di base della rete del cluster
+{: #plan_basics}
+
+Quando crei il tuo cluster, devi scegliere una configurazione di rete in modo che alcuni componenti cluster possano comunicare tra loro e con reti o servizi esterni al cluster.
 {: shortdesc}
 
-Rivedi la configurazione di questi cluster potenziali ordinati per gradi di disponibilità.
+* [Comunicazioni tra i nodi di lavoro](#worker-worker): tutti i nodi di lavoro devono essere in grado di comunicare tra loro sulla rete privata. Le comunicazioni devono essere autorizzate su più VLAN private per consentire ai nodi di lavoro che si trovano su VLAN e zone diverse di connettersi tra loro.
+* [Comunicazioni tra nodo di lavoro e master e tra utente e master](#workeruser-master): i tuoi nodi di lavoro e gli utenti del cluster autorizzati possono comunicare in modo sicuro con il master Kubernetes sulla rete pubblica con TLS o sulla rete privata tramite endpoint del servizio privato.
+* [Comunicazioni tra nodo di lavoro e altri servizi {{site.data.keyword.Bluemix_notm}} o reti in loco](#worker-services-onprem): consenti ai tuoi nodi di lavoro di comunicare in modo sicuro con altri servizi {{site.data.keyword.Bluemix_notm}}, come {{site.data.keyword.registrylong}}, e con una rete in loco.
+* [Comunicazioni esterne alle applicazioni in esecuzione sui nodi di lavoro](#external-workers): consenti richieste pubbliche o private nel cluster e richieste fuori dal cluster a un endpoint pubblico.
 
-![Alta disponibilità per i cluster](images/cs_cluster_ha_roadmap_multizone.png)
+### Comunicazioni tra i nodi di lavoro
+{: #worker-worker}
 
-1. Un [cluster a zona singola](#single_zone) con più nodi di lavoro in un pool di nodi di lavoro.
-2. Un [cluster multizona](#multizone) che estende i nodi di lavoro tra le zone all'interno di una regione.
-3. [Più cluster](#multiple_clusters) impostati tra le zone o le regioni e che sono connessi tramite un programma di bilanciamento del carico globale.
-
-## Cluster a zona singola
-{: #single_zone}
-
-Per migliorare la disponibilità per la tua applicazione e per consentire il failover nel caso in cui un nodo di lavoro non sia disponibile nel tuo cluster, aggiungi altri nodi di lavoro al tuo cluster a zona singola.
+Quando crei un cluster, i nodi di lavoro del cluster vengono connessi automaticamente a una VLAN privata e facoltativamente a una VLAN pubblica. Una VLAN configura un gruppo di nodi di lavoro e pod come se fossero collegati allo stesso cavo fisico e fornisce un canale per la connettività tra i nodi di lavoro.
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="Alta disponibilità per i cluster in una zona singola" width="230" style="width:230px; border-style: none"/>
+**Connessioni VLAN per i nodi di lavoro**</br>
+Tutti i nodi di lavoro devono essere connessi a una VLAN privata in modo che ogni nodo possa inviare e ricevere informazioni da altri nodi di lavoro. Quando crei un cluster con nodi di lavoro che sono anche connessi a una VLAN pubblica, i tuoi nodi di lavoro possono comunicare automaticamente con il master Kubernetes sulla VLAN pubblica e sulla VLAN privata se abiliti l'endpoint del servizio privato. La VLAN pubblica fornisce anche la connettività di rete pubblica in modo che tu possa esporre le applicazioni nel tuo cluster a Internet. Tuttavia, se hai bisogno di proteggere le tue applicazioni dall'interfaccia pubblica, sono disponibili diverse opzioni per proteggere il cluster, come l'utilizzo delle politiche di rete Calico o l'isolamento del carico di lavoro della rete esterna sui nodi di lavoro edge.
+* Cluster gratuiti: nei cluster gratuiti, i nodi di lavoro del cluster sono connessi a una VLAN pubblica e a una VLAN privata di proprietà di IBM per impostazione predefinita. Poiché IBM controlla le VLAN, le sottoreti e gli indirizzi IP, non puoi creare dei cluster multizona o aggiungere sottoreti al tuo cluster e puoi solo utilizzare i servizi NodePort per esporre la tua applicazione.</dd>
+* Cluster standard: nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Se specifichi che i nodi di lavoro devono essere connessi solo a una VLAN privata, il provisioning automatico viene eseguito solo per la VLAN privata in quella zona. Per ogni cluster successivo che crei in tale zona, puoi specificare la coppia di VLAN che vuoi utilizzare. Puoi riutilizzare le stesse VLAN pubbliche e private che sono state create per te perché più cluster possono condividere VLAN.
 
-Per impostazione predefinita, il tuo cluster a zona singola è impostato con un pool di nodi di lavoro denominato `default`. Il pool di nodi di lavoro raggruppa i nodi di lavoro con la stessa configurazione, ad esempio il tipo di macchina, che hai definito durante la creazione del cluster. Puoi aggiungere altri nodi di lavoro al tuo cluster [ridimensionando un pool di nodi di lavoro esistente](/docs/containers?topic=containers-clusters#resize_pool) o [aggiungendo un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-clusters#add_pool).
+Per ulteriori informazioni su VLAN, sottoreti e indirizzi IP, vedi [Panoramica della rete in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
 
-Quando aggiungi più nodi di lavoro, le istanze dell'applicazione possono essere distribuite tra più nodi di lavoro. Se un nodo di lavoro si disattiva, le istanze dell'applicazione sui nodi di lavoro disponibili continueranno a funzionare. Kubernetes ripianifica automaticamente i pod dai nodi di lavoro non disponibili per garantire le prestazioni e la capacità della tua applicazione. Per assicurarti che i tuoi pod vengano distribuiti uniformemente tra i nodi di lavoro, implementa l'[affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
+**Comunicazioni del nodo di lavoro attraverso sottoreti e VLAN**</br>
+In diverse situazioni, i componenti del tuo cluster devono essere autorizzati a comunicare su più VLAN private. Ad esempio, se vuoi creare un cluster multizona, hai più VLAN per un cluster o hai più sottoreti sulla stessa VLAN, i nodi di lavoro che si trovano su sottoreti diverse nella stessa VLAN o in VLAN diverse non possono comunicare automaticamente tra loro. Devi abilitare il VRF (Virtual Routing and Forwarding) o lo spanning della VLAN per il tuo account dell'infrastruttura IBM Cloud (SoftLayer).
 
-**Posso convertire il mio cluster a zona singola in un cluster multizona?**</br>
-Se il cluster si trova in una delle [località metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
+* [VRF (Virtual Routing and Forwarding)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud): VRF consente a tutte le VLAN e sottoreti private nel tuo account dell'infrastruttura di comunicare tra loro. Inoltre, VRF è necessario per consentire ai tuoi nodi di lavoro e al master di comunicare sull'endpoint del servizio privato e di comunicare con le altre istanze {{site.data.keyword.Bluemix_notm}} che supportano gli endpoint del servizio privato. Per abilitare VRF, esegui `ibmcloud account update --service-endpoint-enable true`. L'output di questo comando ti richiede di aprire un caso di supporto per abilitare il tuo account all'utilizzo di VRF e degli endpoint del servizio. VRF elimina l'opzione di spanning della VLAN per il tuo account poiché tutte le VLAN sono in grado di comunicare.</br></br>
+Quando VRF è abilitato, qualsiasi sistema connesso a qualsiasi VLAN privata nello stesso account {{site.data.keyword.Bluemix_notm}} può comunicare con i nodi di lavoro del cluster. Puoi isolare il tuo cluster da altri sistemi sulla rete privata applicando delle [politiche di rete privata Calico](/docs/containers?topic=containers-network_policies#isolate_workers).</dd>
+* [Spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning): se non puoi o non vuoi abilitare VRF, ad esempio se non hai bisogno che il master sia accessibile sulla rete privata o se utilizzi un dispositivo gateway per accedere al master sulla VLAN pubblica, abilita lo spanning della VLAN. Ad esempio, se hai un dispositivo gateway esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non vengono configurate sul dispositivo gateway ma lo spanning della VLAN abilita l'instradamento tra le sottoreti. Per abilitare lo spanning della VLAN, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Non puoi abilitare l'endpoint del servizio privato se scegli di abilitare lo spanning della VLAN invece di VRF.
 
+</br>
 
-**Devo utilizzare i cluster multizona?**</br>
-No. Puoi creare tutti i cluster a zona singola che desideri. In effetti, potresti preferire i cluster a zona singola per la gestione semplificata oppure se il tuo cluster deve risiedere in una specifica [città a zona singola](/docs/containers?topic=containers-regions-and-zones#zones).
+### Comunicazioni tra nodo di lavoro e master e tra utente e master
+{: #workeruser-master}
 
-**Posso avere un master altamente disponibile in una singola zona?**</br>
-Sì. In una singola zona, il tuo master è altamente disponibile e include repliche su host fisici separati per il server API, etcd, il programma di pianificazione e il gestore controller Kubernetes per proteggerti in caso di interruzione, come durante un aggiornamento del master. Per proteggerti da un malfunzionamento della zona, puoi:
-* [Creare un cluster in una zona che supporta il multizona](/docs/containers?topic=containers-plan_clusters#multizone), dove il master viene distribuito tra le zone.
-* [Creare più cluster](#multiple_clusters) e connetterli con un programma di bilanciamento del carico globale.
-
-## Cluster multizona
-{: #multizone}
-
-Con {{site.data.keyword.containerlong_notm}}, puoi creare cluster multizona. I tuoi utenti hanno meno probabilità di riscontrare tempi di inattività quando distribuisci le tue applicazioni tra più nodi di lavoro e zone utilizzando un pool di nodi di lavoro. Le funzionalità integrate, come il bilanciamento del carico, aumentano la resilienza nei confronti di
-potenziali malfunzionamenti della zona con host, reti o applicazioni. Se le risorse in una zona si disabilitano, i tuoi carichi di lavoro del cluster saranno ancora operativi nelle altre zone.
+È necessario configurare un canale di comunicazione in modo che i nodi di lavoro possano stabilire una connessione al master Kubernetes. Puoi consentire le comunicazioni tra i tuoi nodi di lavoro e il master Kubernetes abilitando solo l'endpoint del servizio pubblico, gli endpoint del servizio pubblico e privato o solo l'endpoint del servizio privato.
 {: shortdesc}
 
-**Cos'è un pool di nodi di lavoro?**</br>
-Un pool di nodi di lavoro è una raccolta di nodi di lavoro con la stessa varietà, ad esempio tipo di macchina, CPU e memoria. Quando crei un cluster, viene automaticamente creato per tuo conto un pool di nodi di lavoro predefinito. Per distribuire i nodi di lavoro nel tuo pool tra le zone, aggiungere nodi di lavoro al pool o aggiornare i nodi di lavoro, puoi utilizzare i nuovi comandi `ibmcloud ks worker-pool`.
+Per proteggere le comunicazioni sugli endpoint del servizio pubblico e privato, {{site.data.keyword.containerlong_notm}} configura automaticamente una connessione OpenVPN tra il master Kubernetes e il nodo di lavoro quando viene creato il cluster. I nodi di lavoro comunicano in modo sicuro con il master attraverso i certificati TLS e il master comunica con i nodi di lavoro attraverso la connessione OpenVPN.
 
-**Posso ancora utilizzare nodi di lavoro autonomi?**</br>
-La configurazione cluster precedente dei nodi di lavoro autonomi è supportata ma obsoleta. Assicurati di [aggiungere un pool di nodi di lavoro al tuo cluster](/docs/containers?topic=containers-clusters#add_pool) e quindi di [utilizzare i pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool) per organizzare i tuoi nodi di lavoro anziché i nodi di lavoro autonomi.
+**Solo endpoint del servizio pubblico**</br>
+Se non vuoi o non puoi abilitare VRF per il tuo account, i tuoi nodi di lavoro possono connettersi automaticamente al master Kubernetes sulla VLAN pubblica attraverso l'endpoint del servizio pubblico.
+* Le comunicazioni tra i nodi di lavoro e il master vengono stabilite in modo sicuro sulla rete pubblica attraverso l'endpoint del servizio pubblico.
+* Il master è pubblicamente accessibile agli utenti del cluster autorizzati solo attraverso l'endpoint del servizio pubblico. Gli utenti del tuo cluster possono accedere in modo sicuro al tuo master Kubernetes su Internet per eseguire, ad esempio, i comandi `kubectl`.
 
-**Posso convertire il mio cluster a zona singola in un cluster multizona?**</br>
-Se il cluster si trova in una delle [località metropolitane multizona supportate](/docs/containers?topic=containers-regions-and-zones#zones), sì. Vedi [Aggiornamento dai nodi di lavoro autonomi ai pool di nodi di lavoro](/docs/containers?topic=containers-update#standalone_to_workerpool).
+**Endpoint del servizio pubblico e privato**</br>
+Per rendere il tuo master accessibile pubblicamente o privatamente agli utenti del cluster, puoi abilitare gli endpoint del servizio pubblico e privato. VRF è richiesto nel tuo account {{site.data.keyword.Bluemix_notm}} e devi abilitare il tuo account per l'utilizzo degli endpoint del servizio. Per abilitare VRF e gli endpoint del servizio, esegui `ibmcloud account update --service-endpoint-enable true`.
+* Se i nodi di lavoro sono connessi a VLAN pubbliche e private, le comunicazioni tra i nodi di lavoro e il master vengono stabilite sia sulla rete privata attraverso l'endpoint del servizio privato che sulla rete pubblica attraverso l'endpoint del servizio pubblico. Instradando
+metà del traffico nodo di lavoro-master sull'endpoint pubblico e metà sull'endpoint privato, le tue comunicazioni master-nodo di lavoro sono protette da eventuali interruzioni della rete pubblica o privata. Se i nodi di lavoro sono connessi solo a VLAN private, le comunicazioni tra i nodi di lavoro e il master vengono stabilite sulla rete privata solo attraverso l'endpoint del servizio privato.
+* Il master è pubblicamente accessibile agli utenti del cluster autorizzati attraverso l'endpoint del servizio pubblico. Il master è accessibile privatamente tramite l'endpoint del servizio privato se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata tramite una connessione VPN o {{site.data.keyword.Bluemix_notm}} Direct Link. Nota che devi [esporre l'endpoint master attraverso un programma di bilanciamento del carico privato](/docs/containers?topic=containers-clusters#access_on_prem) affinché gli utenti possano accedere al master tramite una connessione VPN o {{site.data.keyword.Bluemix_notm}} Direct Link.
 
+**Solo endpoint del servizio privato**</br>
+Per rendere il tuo master accessibile solo privatamente, puoi abilitare l'endpoint del servizio privato. VRF è richiesto nel tuo account {{site.data.keyword.Bluemix_notm}} e devi abilitare il tuo account per l'utilizzo degli endpoint del servizio. Per abilitare VRF e gli endpoint del servizio, esegui `ibmcloud account update --service-endpoint-enable true`. Nota che se si utilizza solo l'endpoint del servizio privato non viene applicato alcun addebito di larghezza di banda fatturata o misurata.
+* Le comunicazioni tra i nodi di lavoro e il master vengono stabilite sulla rete privata attraverso l'endpoint del servizio privato.
+* Il master è accessibile privatamente se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata tramite una connessione VPN o DirectLink. Nota che devi [esporre l'endpoint master attraverso un programma di bilanciamento del carico privato](/docs/containers?topic=containers-clusters#access_on_prem) affinché gli utenti possano accedere al master tramite una connessione VPN o DirectLink.
 
-### Ulteriori informazioni sulla configurazione del cluster multizona
-{: #mz_setup}
+</br>
 
-<img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilità per i cluster multizona" width="500" style="width:500px; border-style: none"/>
+### Comunicazioni tra nodo di lavoro e altri servizi {{site.data.keyword.Bluemix_notm}} o reti in loco
+{: #worker-services-onprem}
 
-Puoi aggiungere ulteriori zone al tuo cluster per replicare i nodi di lavoro nei tuoi pool di nodi di lavoro tra più zone all'interno di una regione. I cluster multizona sono progettati per pianificare uniformemente i pod tra i nodi di lavoro e le zone per garantire la disponibilità e il ripristino in caso di malfunzionamento. Se i nodi di lavoro non vengono distribuiti uniformemente tra le zone o se la capacità di una delle zone non è sufficiente, il programma di pianificazione (scheduler) Kubernetes potrebbe non riuscire a pianificare tutti i pod richiesti. Di conseguenza, i pod potrebbero essere in uno stato di **In sospeso** fino a quando non sarà disponibile capacità sufficiente. Se vuoi modificare il comportamento predefinito in modo che il programma di pianificazione (scheduler) Kubernetes distribuisca i pod tra le zone con una distribuzione migliore, usa la [politica di affinità pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
-
-**Perché ho bisogno dei nodi di lavoro in 3 zone?** </br>
-La distribuzione del tuo carico di lavoro tra 3 zone garantisce l'alta disponibilità per la tua applicazione nel caso in cui una o due zone non siano disponibili, ma rende anche la configurazione del tuo cluster più efficiente. Ti chiedi per quale motivo? Di seguito troverai un esempio.
-
-Supponiamo che hai bisogno di un nodo di lavoro con 6 core per gestire il carico di lavoro per la tua applicazione. Per rendere il tuo cluster ancora più disponibile, hai le seguenti opzioni:
-
-- **Duplica le tue risorse in un'altra zona:** questa opzione ti lascia con 2 nodi di lavoro, ciascuno con 6 core in ogni zona per un totale di 12 core.</br>
-- **Distribuisci le risorse tra 3 zone:** con questa opzione, distribuisci 3 core per zona, lasciandoti con una capacità totale di 9 core. Per gestire il tuo carico di lavoro, è necessario che siano attive due zone alla volta. Se una zona non è disponibile, le altre due zone possono gestire il tuo carico di lavoro. Se due zone non sono disponibili, i 3 core rimanenti sono attivi per gestire il tuo carico di lavoro. La distribuzione di 3 core per zona comporta l'impiego di macchine più piccole e quindi una riduzione dei costi per te.</br>
-
-**Come è configurato il mio master Kubernetes?** </br>
-Quando crei un cluster multizona in una [località metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), viene distribuito automaticamente un master Kubernetes altamente disponibile e vengono distribuite tre repliche tra le zone della località metropolitana. Ad esempio, se il cluster si trova nelle zone `dal10`, `dal12` o `dal13`, le repliche del master Kubernetes vengono estese su ogni zona nella città metropolitana multizona di Dallas.
-
-**Cosa accade se il master Kubernetes diventa non disponibile?** </br>
-Il [master Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) è il componente principale che mantiene operativo il tuo cluster. Il master archivia le risorse del cluster e le loro configurazioni nel database etcd che funge da SPoT (single point of truth) per il tuo cluster. Il server API Kubernetes funge da punto di ingresso principale per tutte le richieste di gestione del cluster dai nodo di lavoro al master oppure quando vuoi interagire con le tue risorse cluster.<br><br>Se si verifica un malfunzionamento del master, i tuoi carichi di lavoro continuano a essere eseguiti sui nodi di lavoro ma non puoi utilizzare i comandi `kubectl` per gestire le tue risorse cluster o visualizzare l'integrità del cluster finché il server API Kubernetes nel master non torna a essere attivo. Se un pod viene disattivato durante l'interruzione del master, non è possibile ripianificarlo finché il nodo di lavoro non potrà raggiungere nuovamente il server API Kubernetes.<br><br>Durante un'interruzione del master, puoi continuare a eseguire i comandi `ibmcloud ks` sull'API {{site.data.keyword.containerlong_notm}} per gestire le tue risorse dell'infrastruttura, quali i nodi di lavoro o le VLAN. Se modifichi la configurazione del cluster corrente aggiungendo o rimuovendo nodi di lavoro nel cluster, le tue modifiche diventeranno effettive solo dopo che il master sarà tornato attivo.
-
-Non riavviare un nodo di lavoro durante un'interruzione del master. Questa azione rimuove i pod dal tuo nodo di lavoro. Poiché il server API Kubernetes non è disponibile, i pod non possono essere ripianificati su altri nodi di lavoro nel cluster.
-{: important}
-
-
-Per proteggere il tuo cluster da un malfunzionamento del master Kubernetes o quando si trova in regioni in cui non sono disponibili cluster multizona, puoi [impostare più cluster e collegarli ad un programma di bilanciamento del carico globale](#multiple_clusters).
-
-**Devo fare qualcosa affinché il master possa comunicare con i nodi di lavoro tra zone?**</br>
-Sì. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-
-**Come posso consentire ai miei utenti l'accesso alla mia applicazione da un Internet pubblico?**</br>
-Puoi esporre le tue applicazioni utilizzando un ALB (application load balancer) Ingress o il servizio del programma di bilanciamento del carico.
-
-- **ALB (application load balancer) Ingress:** per impostazione predefinita, gli ALB pubblici vengono creati e abilitati automaticamente in ciascuna zona del tuo cluster. Viene anche creato e distribuito automaticamente un programma di bilanciamento del carico multizona (MZLB) Cloudflare per il tuo cluster in modo che esista 1 MZLB per ogni regione. L'MZLB mette gli indirizzi IP dei tuoi ALB dietro lo stesso nome host e abilita i controlli dell'integrità su tali indirizzi IP per determinare se sono disponibili o meno. Ad esempio, se hai dei nodi di lavoro in 3 zone nella regione Stati Uniti Est, il nome host `yourcluster.us-east.containers.appdomain.cloud` ha 3 indirizzi IP ALB. L'MZLB controlla l'integrità dell'IP ALB pubblico in ciascuna zona di una regione e tiene i risultati della ricerca DNS aggiornati in base a tali controlli dell'integrità. Per ulteriori informazioni, vedi [Componenti e architettura di Ingress](/docs/containers?topic=containers-ingress#planning).
-
-- **Servizi del programma di bilanciamento del carico:** i servizi del programma di bilanciamento del carico vengono configurati solo in una zona. Le richieste in entrata alla tua applicazione vengono instradate da tale zona a tutte le istanze dell'applicazione in altre zone. Se questa zona diventa non disponibile, la tua applicazione potrebbe non essere raggiungibile da Internet. Puoi impostare ulteriori servizi del programma di bilanciamento del carico nelle altre zone per tenere conto del malfunzionamento di una singola zona. Per ulteriori informazioni, vedi i [servizi del programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer#multi_zone_config) ad alta disponibilità.
-
-**Posso configurare l'archiviazione persistente per il mio cluster multizona?**</br>
-Per l'archiviazione persistente altamente disponibile, usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Puoi anche provare una soluzione SDS (software-defined storage) come [Portworx](/docs/containers?topic=containers-portworx#portworx) che utilizza [macchine SDS](#sds). Per ulteriori informazioni, vedi [Confronto tra le opzioni di archiviazione persistente per i cluster multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
-L'archiviazione file e blocchi NFS non è condivisibile tra le zone. I volumi persistenti possono essere utilizzati solo nella zona in cui si trova il dispositivo di archiviazione effettivo. Se nel tuo cluster hai dell'archiviazione blocchi o file NFS che vuoi continuare a utilizzare, devi applicare le etichette di regione e zona ai volumi persistenti esistenti. Queste etichette consentono al programma di pianificazione (scheduler) kube di determinare dove pianificare un'applicazione che utilizza il volume persistente. Esegui il seguente comando e sostituisci `<mycluster>` con il nome del tuo cluster.
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-```
-{: pre}
-
-**Ho creato il mio cluster multizona. Perché è presente ancora una sola zona? Come aggiungo zone al mio cluster?**</br>
-Se [crei il tuo cluster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), il cluster viene creato, ma devi aggiungere le zone al pool di nodi di lavoro per completare il processo. Per estendersi su più zone, il tuo cluster deve trovarsi in una [località metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Per aggiungere una zona al tuo cluster ed estendere i nodi di lavoro tra le zone, vedi [Aggiunta di una zona al tuo cluster](/docs/containers?topic=containers-clusters#add_zone).
-
-### Quali sono alcuni cambiamenti rispetto a come gestisco attualmente i miei cluster?
-{: #mz_new_ways}
-
-Con l'introduzione dei pool di nodi di lavoro, puoi utilizzare una nuova serie di API e di comandi per gestire il tuo cluster. Puoi vedere questi nuovi comandi nella [pagina della documentazione della CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) oppure sul tuo terminale eseguendo `ibmcloud ks help`.
+Consenti ai tuoi nodi di lavoro di comunicare in modo sicuro con altri servizi {{site.data.keyword.Bluemix_notm}}, come {{site.data.keyword.registrylong}}, e con una rete in loco.
 {: shortdesc}
 
-La tabella riportata di seguito confronta i vecchi metodi con i nuovi per alcune azioni di gestione cluster comuni.
-<table summary="La tabella mostra la descrizione del nuovo modo per eseguire i comandi multizona. Le righe devono essere lette da sinistra a destra, con la descrizione nella colonna uno, il vecchio modo nella colonna due e il nuovo modo multizona nella colonna tre.">
-<caption>Nuovi metodi per i comandi del pool di nodi di lavoro multizona.</caption>
-  <thead>
-  <th>Descrizione</th>
-  <th>Vecchi nodi di lavoro autonomi</th>
-  <th>Nuovi pool di nodi di lavoro multizona</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>Aggiungi i nodi di lavoro al cluster.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> per aggiungere nodi di lavoro autonomi.</p></td>
-    <td><ul><li>Per aggiungere tipi di macchina diversi rispetto al tuo pool esistente, crea un nuovo pool di nodi di lavoro: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
-    <li>Per aggiungere nodi di lavoro ad un pool esistente, ridimensiona il numero di nodi per zona nel pool: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Rimuovi i nodi di lavoro dal cluster.</td>
-    <td><code>ibmcloud ks worker-rm</code>, che puoi ancora utilizzare per eliminare un nodo di lavoro problematico dal tuo cluster.</td>
-    <td><ul><li>Se il tuo pool di nodi di lavoro non è bilanciato, ad esempio dopo la rimozione di un nodo di lavoro, ribilancialo: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) <code>ibmcloud ks worker-pool-rebalance</code>.</li>
-    <li>Per ridurre il numero di nodi di lavoro in un pool, ridimensiona il numero per zona (valore minimo pari a 1): [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Usa una nuova VLAN per i nodi di lavoro.</td>
-    <td><p class="deprecated">Aggiungi un nuovo nodo di lavoro che utilizza la nuova VLAN privata o pubblica: <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Imposta il pool di nodi di lavoro per utilizzare una VLAN pubblica o privata diversa rispetto a quella utilizzata in precedenza: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
-    </tr>
-  </tbody>
-  </table>
+**Comunicazioni con altri servizi {{site.data.keyword.Bluemix_notm}} sulla rete privata o pubblica**</br>
+I tuoi nodi di lavoro possono comunicare in modo automatico e sicuro con altri servizi {{site.data.keyword.Bluemix_notm}} che supportano gli endpoint del servizio privato, come {{site.data.keyword.registrylong}}, sulla tua rete privata dell'infrastruttura IBM Cloud (SoftLayer). Se un servizio {{site.data.keyword.Bluemix_notm}} non supporta gli endpoint del servizio privato, è necessario che i nodi di lavoro siano connessi a una VLAN pubblica affinché possano comunicare in modo sicuro con i servizi sulla rete pubblica.
 
-## Più cluster connessi a un programma di bilanciamento del carico globale
-{: #multiple_clusters}
+Se utilizzi le politiche di rete Calico per bloccare la rete pubblica nel tuo cluster, potresti dover consentire l'accesso agli indirizzi IP pubblici e privati dei servizi che vuoi utilizzare nelle politiche Calico. Se utilizzi un dispositivo gateway, ad esempio un Virtual Router Appliance (Vyatta), devi [consentire l'accesso agli indirizzi IP privati dei servizi che vuoi utilizzare](/docs/containers?topic=containers-firewall#firewall_outbound) nel firewall del tuo dispositivo gateway.
+{: note}
 
-Per proteggere la tua applicazione da un malfunzionamento del master Kubernetes e per le regioni in cui non sono disponibili cluster multizona, puoi creare più cluster in zone diverse all'interno di una regione e collegarli con un programma di bilanciamento del carico globale.
+**{{site.data.keyword.BluDirectLink}} per le comunicazioni sulla rete privata con le risorse nei data center in loco**</br>
+Per connettere il tuo cluster con un data center in loco, ad esempio con {{site.data.keyword.icpfull_notm}}, puoi configurare [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Con {{site.data.keyword.Bluemix_notm}} Direct Link, crei una connessione diretta e privata tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento sull'Internet pubblico.
+
+**Connessione VPN IPSec strongSwan sulla rete pubblica con le risorse nei data center in loco**
+* Nodi di lavoro connessi a VLAN pubbliche e private: configura un [servizio VPN IPSec strongSwan ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/about.html) direttamente nel tuo cluster. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end protetto su Internet basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore. Per configurare una connessione protetta tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) direttamente in un pod nel tuo cluster.
+* Nodi di lavoro connessi solo a una VLAN privata: configura un endpoint VPN IPSec su un dispositivo gateway, ad esempio Virtual Router Appliance (Vyatta). Quindi, [configura il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) nel tuo cluster per utilizzare l'endpoint VPN sul tuo gateway. Se non vuoi utilizzare strongSwan, puoi [impostare la connettività VPN direttamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
+
+</br>
+
+### Comunicazioni esterne alle applicazioni in esecuzione sui nodi di lavoro
+{: #external-workers}
+
+Consenti le richieste di traffico pubblico o privato dall'esterno del cluster alle tue applicazioni eseguite sui nodi di lavoro.
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="Alta disponibilità per più cluster" width="700" style="width:700px; border-style: none"/>
+**Traffico privato alle applicazioni del cluster**</br>
+Quando distribuisci un'applicazione nel tuo cluster, potresti voler rendere l'applicazione accessibile solo agli utenti e ai servizi che si trovano sulla stessa rete privata del cluster. Il bilanciamento del carico privato è ideale per rendere la tua applicazione disponibile alle richieste provenienti dall'esterno del cluster, senza esporre l'applicazione al pubblico generale. Puoi anche utilizzare il bilanciamento del carico privato per testare l'accesso, l'instradamento delle richieste e altre configurazioni della tua applicazione, prima di esporla al pubblico tramite servizi di rete pubblica. Per consentire le richieste di traffico privato dall'esterno del cluster alle tue applicazioni, puoi creare servizi di rete Kubernetes privata, come NodePort, NLB e ALB Ingress privati. Puoi quindi utilizzare le politiche pre-DNAT Calico per bloccare il traffico verso le NodePort pubbliche dei servizi di rete privata. Per ulteriori informazioni, vedi [Pianificazione del bilanciamento del carico esterno privato](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-Per bilanciare il carico di lavoro tra più cluster, devi impostare un programma di bilanciamento del carico globale e aggiungere gli indirizzi IP dei tuoi ALB o dei tuoi servizi di bilanciamento del carico al tuo dominio. Aggiungendo questi indirizzi IP, puoi instradare il traffico in entrata tra i tuoi cluster. Affinché il programma di bilanciamento del carico globale rilevi se uno dei tuoi cluster non è disponibile, prendi in considerazione di aggiungere il controllo dell'integrità basato su ping ad ogni indirizzo IP. Quando imposti questo controllo, il tuo provider DNS esegue regolarmente il ping degli indirizzi IP che hai aggiunto al tuo domino. Se uno degli indirizzi IP diventa non disponibile, il traffico non verrà più inviato a questo indirizzo IP. Tuttavia, Kubernetes non riavvia automaticamente i pod dal cluster non disponibile sui nodi di lavoro nei cluster disponibili. Se vuoi che Kubernetes riavvii automaticamente i pod nei cluster disponibili, prendi in considerazione di impostare un [cluster multizona](#multizone).
+**Traffico pubblico alle applicazioni del cluster**</br>
+Per rendere le tue applicazioni accessibili esternamente dall'Internet pubblico, puoi creare NodePort, NLB (network load balancer) e ALB (application load balancer) pubblici. I servizi di rete pubblica si connettono a questa interfaccia di rete pubblica fornendo alla tua applicazione un indirizzo IP pubblico e, facoltativamente, un URL pubblico. Quando un'applicazione viene esposta pubblicamente, chiunque disponga dell'indirizzo IP del servizio pubblico o dell'URL che hai configurato per la tua applicazione può inviare una richiesta a tale applicazione. Puoi quindi utilizzare le politiche pre-DNAT Calico per controllare il traffico verso i servizi di rete pubblica, come l'inserimento in whitelist del traffico proveniente solo da determinati indirizzi IP di origine o CIDR e il blocco di tutto il resto del traffico. Per ulteriori informazioni, vedi [Pianificazione del bilanciamento del carico esterno pubblico](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-**Perché ho bisogno di 3 cluster in 3 zone?** </br>
-In modo analogo all'utilizzo di [3 zone in un cluster multizona](#multizone), puoi fornire una maggiore disponibilità alla tua applicazione impostando fino a 3 cluster tra le zone. Puoi anche ridurre i costi acquistando macchine più piccole per gestire il tuo carico di lavoro.
+Per ulteriore sicurezza, isola i carichi di lavoro di rete nei nodi di lavoro edge. I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster consentendo a un minor numero di nodi di lavoro connessi alle VLAN pubbliche di essere accessibili esternamente e isolando il carico di lavoro della rete. Quando [etichetti i nodi di lavoro come nodi edge](/docs/containers?topic=containers-edge#edge_nodes), i pod NLB e ALB vengono distribuiti solo su quei nodi di lavoro specificati. Per impedire inoltre che altri carichi di lavoro vengano eseguiti sui nodi edge, puoi [contaminare i nodi edge](/docs/containers?topic=containers-edge#edge_workloads). In Kubernetes versione 1.14 e successive, puoi distribuire gli NLB e gli ALB sia pubblici che privati ai nodi edge.
+Ad esempio, se i tuoi nodi di lavoro sono connessi solo a una VLAN privata, ma ha bisogno di consentire l'accesso pubblico a un'applicazione nel tuo cluster, puoi creare un pool di nodi di lavoro edge in cui i nodi edge siano connessi alle VLAN pubbliche e private. Puoi distribuire gli NLB e gli ALB pubblici su questi nodi edge per garantire che solo quei nodi di lavoro gestiscano le connessioni pubbliche.
 
-**Se voglio impostare più cluster tra le regioni?** </br>
-Puoi impostare più cluster in regioni diverse di una geolocalizzazione (ad esempio, Stati Uniti Sud e Stati Uniti Est) o tra geolocalizzazioni (ad esempio, Stati Uniti Sud ed Europa Centrale). Entrambe le configurazioni offrono lo stesso livello di disponibilità per la tua applicazione, ma aggiungono anche complessità quando si tratta di condivisione e di replica dei dati. Per la maggior parte dei casi, trovarsi all'interno della stessa geolocalizzazione si rivela sufficiente. Ma se hai utenti in tutto il mondo, sarebbe meglio impostare un cluster dove si trovano gli utenti, in questo modo questi ultimi non riscontreranno lunghi tempi di attesa quando invieranno una richiesta alla tua applicazione.
+Se i tuoi nodi di lavoro sono connessi solo a una VLAN privata e utilizzi un dispositivo gateway per fornire la comunicazione tra i nodi di lavoro e il master cluster, puoi inoltre configurare il dispositivo come firewall pubblico o privato. Per consentire le richieste di traffico pubblico o privato dall'esterno del cluster alle tue applicazioni, puoi creare NodePort, NLB e ALB Ingress pubblici o privati. Quindi, devi [aprire le porte e gli indirizzi IP richiesti](/docs/containers?topic=containers-firewall#firewall_inbound) nel firewall del tuo dispositivo gateway per consentire il traffico in entrata verso questi servizi sulla rete pubblica o privata.
+{: note}
 
-**Per impostare un programma di bilanciamento del carico globale per più cluster:**
+<br />
 
-1. [Crea i cluster](/docs/containers?topic=containers-clusters#clusters) in più zone o regioni.
-2. Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-3. In ciascun cluster, esponi la tua applicazione utilizzando un [ALB](/docs/containers?topic=containers-ingress#ingress_expose_public) o un [servizio del programma di bilanciamento del carico](/docs/containers?topic=containers-loadbalancer).
-4. Per ciascun cluster, elenca gli indirizzi IP pubblici dei tuoi ALB o dei tuoi servizi del programma di bilanciamento del carico.
-   - Per elencare l'indirizzo IP di tutti gli AL pubblici abilitati nel tuo cluster:
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
 
-   - Per elencare l'indirizzo IP per il tuo servizio del programma di bilanciamento del carico:
-     ```
-     kubectl describe service <myservice>
-     ```
-     {: pre}
+## Scenario: Esegui carichi di lavoro dell'applicazione con connessione Internet in un cluster
+{: #internet-facing}
 
-     L'indirizzo IP **Ingress programma di bilanciamento del carico** è l'indirizzo IP portatile che è stato assegnato al tuo servizio del programma di bilanciamento del carico.
+In questo scenario, vuoi eseguire dei carichi di lavoro in un cluster che siano accessibili alle richieste da Internet in modo che gli utenti finali possano accedere alle tue applicazioni. Vuoi avere la possibilità di isolare l'accesso pubblico nel tuo cluster e di controllare quali richieste pubbliche sono consentite al cluster. Inoltre, i tuoi nodi di lavoro hanno accesso automatico a tutti i servizi {{site.data.keyword.Bluemix_notm}} che desideri connettere al tuo cluster.
+{: shortdesc}
 
-4.  Imposta un programma di bilanciamento del carico globale utilizzando {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) oppure imposta il tuo programma di bilanciamento del carico globale.
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="Immagine dell'architettura per un cluster che esegue carichi di lavoro con connessione Internet"/>
+ <figcaption>Architettura per un cluster che esegue carichi di lavoro con connessione Internet</figcaption>
+</figure>
+</p>
 
-    **Per utilizzare un programma di bilanciamento del carico globale CIS**:
-    1.  Configura il servizio seguendo i passi da 1 a 5 illustrati in [Introduzione a {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Questi passi ti guidano attraverso il provisioning dell'istanza del servizio, l'aggiunta del tuo dominio dell'applicazione, la configurazione dei tuoi server dei nomi e la creazione dei record DNS. Crea un record DNS per ciascun indirizzo IP ALB o del programma di bilanciamento del carico che hai raccolto. Questi record DNS associano il tuo dominio dell'applicazione a tutti i tuoi programmi di bilanciamento del carico o agli ALB del cluster e garantiscono che le richieste al tuo dominio dell'applicazione vengono inoltrate ai tuoi cluster in un ciclo round-robin.
-    2. [Aggiungi i controlli dell'integrità](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) per gli ALB o i programmi di bilanciamento del carico. Puoi utilizzare lo stesso controllo dell'integrità per gli ALB o i programmi di bilanciamento del carico in tutti i tuoi cluster oppure creare controlli dell'integrità specifici da utilizzare per cluster specifici.
-    3. [Aggiungi un pool di origine](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) per ciascun cluster aggiungendo gli IP dell'ALB o del programma di bilanciamento del carico del cluster. Ad esempio, se hai 3 cluster che hanno 2 ALB, crea 3 pool di origine che hanno 2 indirizzi IP ALB ciascuno. Aggiungi un controllo dell'integrità a ciascun pool di origine che hai creato.
-    4. [Aggiungi un programma di bilanciamento del carico globale](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
+Per ottenere questa configurazione, crei un cluster connettendo i nodi di lavoro alle VLAN pubbliche e private.
 
-    **Per utilizzare un tuo programma di bilanciamento del carico globale**:
-    1. Configura il tuo dominio per instradare il traffico in entrata al tuo ALB o ai servizi di bilanciamento del carico aggiungendo gli indirizzi IP di tutti gli ALB e di tutti i servizi del programma di bilanciamento del carico abilitati pubblici al tuo dominio.
-    2. Per ciascun indirizzo IP, abilita il controllo dell'integrità basato su ping in modo che il tuo provider DNS possa rilevare gli indirizzi IP non integri. Se viene rilevato un indirizzo IP non integro, il traffico non verrà più instradato a questo indirizzo IP.
+Se crei il cluster con VLAN pubbliche e private, non puoi rimuovere in seguito tutte le VLAN pubbliche da quel cluster. In caso di rimozione di tutte le VLAN pubbliche da un cluster, diversi componenti cluster smettono di funzionare. Crea invece un nuovo pool di nodi di lavoro che sia connesso solo a una VLAN privata.
+{: note}
 
-## Cluster privati
+Puoi scegliere di consentire le comunicazioni tra nodo di lavoro e master e tra utente e master sulle reti pubbliche e private o solo sulla rete pubblica.
+* Endpoint del servizio pubblico e privato: il tuo account deve essere abilitato con VRF e abilitato per utilizzare gli endpoint del servizio. Le comunicazioni tra i nodi di lavoro e il master vengono stabilite sia sulla rete privata attraverso l'endpoint del servizio privato che sulla rete pubblica attraverso l'endpoint del servizio pubblico. Il master è pubblicamente accessibile agli utenti del cluster autorizzati attraverso l'endpoint del servizio pubblico.
+* Endpoint del servizio pubblico: se non vuoi o non puoi abilitare VRF per il tuo account, i tuoi nodi di lavoro e gli utenti del cluster autorizzati possono connettersi automaticamente al master Kubernetes sulla rete pubblica attraverso l'endpoint del servizio pubblico.
+
+I tuoi nodi di lavoro possono comunicare in modo automatico e sicuro con altri servizi {{site.data.keyword.Bluemix_notm}} che supportano gli endpoint del servizio privato sulla tua rete privata dell'infrastruttura IBM Cloud (SoftLayer). Se un servizio {{site.data.keyword.Bluemix_notm}} non supporta gli endpoint del servizio privato, i nodi di lavoro possono comunicare in modo sicuro con i servizi sulla rete pubblica. Puoi bloccare le interfacce pubbliche o private dei nodi di lavoro utilizzando le politiche di rete Calico per l'isolamento della rete pubblica o della rete privata. Potresti dover consentire l'accesso agli indirizzi IP pubblici e privati dei servizi che vuoi utilizzare in queste politiche di isolamento Calico.
+
+Per esporre un'applicazione nel tuo cluster a Internet, puoi creare un servizio NLB (network load balancer) o ALB (application load balancer) Ingress pubblico. Puoi migliorare la sicurezza del tuo cluster creando un pool di nodi di lavoro etichettati come nodi edge. I pod per i servizi di rete pubblica vengono distribuiti sui nodi edge in modo che i carichi di lavoro del traffico esterno siano isolati solo a pochi nodi di lavoro nel cluster. Puoi controllare ulteriormente il traffico pubblico verso i servizi di rete che espongono le tue applicazioni creando delle politiche pre-DNAT Calico, come le politiche di whitelist e blacklist.
+
+Se i tuoi nodi di lavoro devono accedere a servizi nelle reti private al di fuori del tuo account {{site.data.keyword.Bluemix_notm}}, puoi configurare e distribuire il servizio VPN IPSec strongSwan nel tuo cluster o sfruttare i servizi {{site.data.keyword.Bluemix_notm}} {{site.data.keyword.Bluemix_notm}} Direct Link per connetterti a queste reti.
+
+Sei pronto a iniziare a usare un cluster per questo scenario? Dopo aver pianificato le tue configurazioni di [alta disponibilità](/docs/containers?topic=containers-ha_clusters) e dei [nodi di lavoro](/docs/containers?topic=containers-planning_worker_nodes), vedi [Creazione dei cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Scenario: estendi il tuo data center in loco a un cluster sulla rete privata e aggiungi un accesso pubblico limitato
+{: #limited-public}
+
+In questo scenario, vuoi eseguire dei carichi di lavoro in un cluster che siano accessibili a servizi, database o altre risorse nel tuo data center in loco. Tuttavia, potresti dover fornire un accesso pubblico limitato al tuo cluster e voler garantire che qualsiasi accesso pubblico sia controllato e isolato nel cluster. Ad esempio, potresti aver bisogno che i tuoi nodi di lavoro accedano a un servizio {{site.data.keyword.Bluemix_notm}} che non supporta gli endpoint del servizio privato e che si debba accedere tramite la rete pubblica. Oppure, potresti dover fornire l'accesso pubblico limitato a un'applicazione che viene eseguita nel tuo cluster.
+{: shortdesc}
+
+Per ottenere questa configurazione cluster, puoi creare un firewall [utilizzando i nodi edge e le politiche di rete Calico](#calico-pc) o [utilizzando un dispositivo gateway](#vyatta-gateway).
+
+### Utilizzo dei nodi edge e delle politiche di rete Calico
+{: #calico-pc}
+
+Consenti una connettività pubblica limitata al tuo cluster utilizzando i nodi edge come gateway pubblico e le politiche di rete Calico come firewall pubblico.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="Immagine dell'architettura per un cluster che utilizza nodi edge e politiche di rete Calico per un accesso pubblico sicuro"/>
+ <figcaption>Architettura per un cluster che utilizza nodi edge e politiche di rete Calico per un accesso pubblico sicuro</figcaption>
+</figure>
+</p>
+
+Con questa configurazione, crei un cluster connettendo i nodi di lavoro solo a una VLAN privata. Il tuo account deve essere abilitato con VRF e abilitato per utilizzare gli endpoint del servizio privato.
+
+Il master Kubernetes è accessibile tramite l'endpoint del servizio privato se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata tramite una [connessione VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Tuttavia, le comunicazioni con il master Kubernetes sull'endpoint del servizio privato devono passare attraverso l'intervallo di indirizzi IP <code>166.X.X.X</code>, che non è instradabile da una connessione VPN o tramite {{site.data.keyword.Bluemix_notm}} Direct Link. Puoi esporre l'endpoint del servizio privato del master per gli utenti del tuo cluster utilizzando un NLB (network load balancer) privato. L'NLB privato espone l'endpoint del servizio privato del master come intervallo di indirizzi IP <code>10.X.X.X</code> interno a cui gli utenti possono accedere con la connessione VPN o {{site.data.keyword.Bluemix_notm}} Direct Link. Se abiliti solo l'endpoint del servizio privato, puoi utilizzare il dashboard Kubernetes o abilitare temporaneamente l'endpoint del servizio pubblico per creare l'NLB privato.
+
+Successivamente, puoi creare un pool di nodi di lavoro connessi alle VLAN pubbliche e private ed etichettati come nodi edge. I nodi edge possono migliorare la sicurezza del tuo cluster consentendo solo a pochi nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete a questi nodi di lavoro.
+
+I tuoi nodi di lavoro possono comunicare in modo automatico e sicuro con altri servizi {{site.data.keyword.Bluemix_notm}} che supportano gli endpoint del servizio privato sulla tua rete privata dell'infrastruttura IBM Cloud (SoftLayer). Se un servizio {{site.data.keyword.Bluemix_notm}} non supporta gli endpoint del servizio privato, i tuoi nodi edge che sono connessi a una VLAN pubblica possono comunicare in modo sicuro con i servizi sulla rete pubblica. Puoi bloccare le interfacce pubbliche o private dei nodi di lavoro utilizzando le politiche di rete Calico per l'isolamento della rete pubblica o della rete privata. Potresti dover consentire l'accesso agli indirizzi IP pubblici e privati dei servizi che vuoi utilizzare in queste politiche di isolamento Calico.
+
+Per fornire l'accesso privato a un'applicazione nel tuo cluster, puoi creare un NLB (network load balancer) o un ALB (application load balancer) Ingress privato per esporre l'applicazione solo alla rete privata. Puoi bloccare tutto il traffico pubblico verso questi servizi di rete che espongono le tue applicazioni creando delle politiche pre-DNAT Calico, come le politiche per bloccare le NodePort pubbliche sui nodi di lavoro. Se hai bisogno di fornire un accesso pubblico limitato a un'applicazione nel tuo cluster, puoi creare un NLB o un ALB pubblico per esporre la tua applicazione. Devi quindi distribuire le tue applicazioni su questi nodi edge in modo che gli NLB o gli ALB possano indirizzare il traffico pubblico ai pod delle applicazioni. Puoi controllare ulteriormente il traffico pubblico verso i servizi di rete che espongono le tue applicazioni creando delle politiche pre-DNAT Calico, come le politiche di whitelist e blacklist. I pod per i servizi di rete sia pubblica che privata vengono distribuiti sui nodi edge in modo che i carichi di lavoro del traffico esterno siano limitati solo a pochi nodi di lavoro nel cluster.  
+
+Per accedere in modo sicuro a servizi esterni a {{site.data.keyword.Bluemix_notm}} e ad altre reti in loco, puoi configurare e distribuire il servizio VPN IPSec strongSwan nel tuo cluster. Il pod del programma di bilanciamento del carico strongSwan viene distribuito su un nodo di lavoro nel pool edge, dove il pod stabilisce una connessione sicura alla rete in loco tramite un tunnel VPN crittografato sulla rete pubblica. In alternativa, puoi utilizzare i servizi {{site.data.keyword.Bluemix_notm}} Direct Link per connettere il tuo cluster al data center in loco solo sulla rete privata.
+
+Sei pronto a iniziare a usare un cluster per questo scenario? Dopo aver pianificato le tue configurazioni di [alta disponibilità](/docs/containers?topic=containers-ha_clusters) e dei [nodi di lavoro](/docs/containers?topic=containers-planning_worker_nodes), vedi [Creazione dei cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+</br>
+
+### Utilizzo di un dispositivo gateway
+{: #vyatta-gateway}
+
+Consenti una connettività pubblica limitata al tuo cluster configurando un dispositivo gateway, ad esempio un Virtual Router Appliance (Vyatta), come gateway e firewall pubblico.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="Immagine dell'architettura per un cluster che utilizza un dispositivo gateway per un accesso pubblico sicuro"/>
+ <figcaption>Architettura per un cluster che utilizza un dispositivo gateway per un accesso pubblico sicuro</figcaption>
+</figure>
+</p>
+
+Se configuri i tuoi nodi di lavoro solo su una VLAN privata e non vuoi o non puoi abilitare VRF per il tuo account, devi configurare un dispositivo gateway per fornire la connettività di rete tra i nodi di lavoro e il master sulla rete pubblica. Ad esempio, potresti scegliere di configurare un [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations).
+
+Puoi configurare il tuo dispositivo gateway con politiche di rete personalizzate per fornire la sicurezza di rete dedicata per il tuo cluster e per rilevare e risolvere intrusioni di rete. Quando configuri un firewall sulla rete pubblica, devi aprire le porte e gli indirizzi IP privati richiesti per ogni regione in modo che il master e i nodi di lavoro possano comunicare. Se configuri questo firewall anche per la rete privata, devi aprire anche le porte e gli indirizzi IP privati necessari per consentire le comunicazioni tra i nodi di lavoro e permettere al tuo cluster di accedere alle risorse dell'infrastruttura sulla rete privata. Devi inoltre abilitare lo spanning della VLAN per il tuo account in modo che le sottoreti possano essere instradate sulla stessa VLAN e su tutte le VLAN.
+
+Per connettere in modo sicuro i tuoi nodi di lavoro e le tue applicazioni a una rete in loco o a servizi esterni a {{site.data.keyword.Bluemix_notm}}, configura un endpoint VPN IPSec sul tuo dispositivo gateway e il servizio VPN IPSec strongSwan nel tuo cluster per utilizzare l'endpoint VPN del gateway. Se non vuoi utilizzare strongSwan, puoi configurare la connettività VPN direttamente con VRA.
+
+I tuoi nodi di lavoro possono comunicare in modo sicuro con altri servizi {{site.data.keyword.Bluemix_notm}} e servizi pubblici esterni a {{site.data.keyword.Bluemix_notm}} tramite il tuo dispositivo gateway. Puoi configurare il tuo firewall per consentire l'accesso agli indirizzi IP pubblici e privati dei soli servizi che vuoi utilizzare.
+
+Per fornire l'accesso privato a un'applicazione nel tuo cluster, puoi creare un NLB (network load balancer) o un ALB (application load balancer) Ingress privato per esporre l'applicazione solo alla rete privata. Se hai bisogno di fornire un accesso pubblico limitato a un'applicazione nel tuo cluster, puoi creare un NLB o un ALB pubblico per esporre la tua applicazione. Poiché tutto il traffico passa attraverso il firewall del tuo dispositivo gateway, puoi controllare il traffico pubblico e privato verso i servizi di rete che espongono le tue applicazioni aprendo le porte e gli indirizzi IP del servizio nel tuo firewall per consentire il traffico in entrata verso questi servizi.
+
+Sei pronto a iniziare a usare un cluster per questo scenario? Dopo aver pianificato le tue configurazioni di [alta disponibilità](/docs/containers?topic=containers-ha_clusters) e dei [nodi di lavoro](/docs/containers?topic=containers-planning_worker_nodes), vedi [Creazione dei cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Scenario: estendi il tuo data center in loco a un cluster sulla rete privata
 {: #private_clusters}
 
-Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura il tuo cluster con l'accesso a una VLAN privata e una VLAN pubblica. La VLAN privata determina l'indirizzo IP privato che viene assegnato a ciascun nodo di lavoro, che fornisce a ciascun nodo di lavoro un'interfaccia di rete privata. La VLAN pubblica consente ai nodi di lavoro di connettersi automaticamente e in modo protetto al master.
+In questo scenario, vuoi eseguire dei carichi di lavoro in un cluster {{site.data.keyword.containerlong_notm}}. Tuttavia, vuoi che questi carichi di lavoro siano accessibili solo a servizi, database o altre risorse nel tuo data center in loco, ad esempio {{site.data.keyword.icpfull_notm}}. I carichi di lavoro del tuo cluster potrebbero dover accedere ad alcuni altri servizi {{site.data.keyword.Bluemix_notm}} che supportano le comunicazioni sulla rete privata, ad esempio {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
-Tuttavia, potresti voler creare un cluster con VLAN privata o con endpoint del servizio privato per i requisiti di sicurezza o di conformità. Le tue opzioni per la creazione di un cluster privato dipendono dal tipo di account dell'infrastruttura IBM Cloud (SoftLayer) di cui disponi e dalla configurazione della VLAN pubblica e privata che vuoi utilizzare. Per ulteriori informazioni su ciascuna delle seguenti configurazioni, vedi [Pianificazione della rete del tuo cluster](/docs/containers?topic=containers-cs_network_ov).
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="Immagine dell'architettura per un cluster che si connette a un data center in loco sulla rete privata"/>
+ <figcaption>Architettura per un cluster che si connette a un data center in loco sulla rete privata</figcaption>
+</figure>
+</p>
 
-Hai un cluster esistente che vuoi rendere solo privato? Per vedere come aggiungere pool di nodi di lavoro o modificare i pool esistenti con nuove VLAN, consulta [Modifica delle connessioni VLAN dei tuoi nodi di lavoro](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
-{: note}
+Per ottenere questa configurazione, crei un cluster connettendo i nodi di lavoro solo a una VLAN privata. Per fornire la connettività tra il master cluster e i nodi di lavoro sulla rete privata solo tramite l'endpoint del servizio privato, il tuo account deve essere abilitato con VRF e abilitato per utilizzare gli endpoint del servizio. Poiché il tuo cluster è visibile a qualsiasi risorsa sulla rete privata quando VRF è abilitato, puoi isolare il tuo cluster da altri sistemi sulla rete privata applicando le politiche di rete privata Calico.
 
-**Account abilitati per VRF, master Kubernetes privato e nodi di lavoro su VLAN sia pubbliche che private**</br>
-Nei cluster che eseguono Kubernetes versione 1.11 o successiva, puoi configurare la rete del tuo cluster in modo che utilizzi endpoint del servizio pubblici e privati. Dopo aver abilitato l'endpoint del servizio privato, il master Kubernetes e i tuoi nodi di lavoro comunicano sempre sulla VLAN privata tramite l'endpoint del servizio privato. Anche se abiliti l'endpoint del servizio pubblico per il tuo cluster, le comunicazioni tra il master Kubernetes e i nodi di lavoro rimangono sulla VLAN privata. Dopo aver abilitato l'endpoint del servizio privato, non puoi disabilitarlo. Puoi mantenere l'endpoint del servizio pubblico per l'accesso sicuro al tuo master Kubernetes su Internet, ad esempio per eseguire i comandi `kubectl` o puoi disabilitare l'endpoint del servizio pubblico se vuoi un cluster con solo l'endpoint del servizio privato.
+Il master Kubernetes è accessibile tramite l'endpoint del servizio privato se gli utenti del cluster autorizzati si trovano nella tua rete privata {{site.data.keyword.Bluemix_notm}} o sono connessi alla rete privata tramite una [connessione VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Tuttavia, le comunicazioni con il master Kubernetes sull'endpoint del servizio privato devono passare attraverso l'intervallo di indirizzi IP <code>166.X.X.X</code>, che non è instradabile da una connessione VPN o tramite {{site.data.keyword.Bluemix_notm}} Direct Link. Puoi esporre l'endpoint del servizio privato del master per gli utenti del tuo cluster utilizzando un NLB (network load balancer) privato. L'NLB privato espone l'endpoint del servizio privato del master come intervallo di indirizzi IP <code>10.X.X.X</code> interno a cui gli utenti possono accedere con la connessione VPN o {{site.data.keyword.Bluemix_notm}} Direct Link. Se abiliti solo l'endpoint del servizio privato, puoi utilizzare il dashboard Kubernetes o abilitare temporaneamente l'endpoint del servizio pubblico per creare l'NLB privato.
 
-**Account non VRF o abilitati per VRF, master Kubernetes e nodi di lavoro solo su VLAN privata**</br>
-Se configuri i tuoi nodi di lavoro solo su una VLAN privata, i nodi di lavoro non possono esporre automaticamente i loro servizi dell'applicazione sulla rete pubblica e, in un account non VRF, non possono connettersi al master. Devi configurare un'applicazione gateway per fornire la connettività di rete tra i nodi di lavoro e il master.
+I tuoi nodi di lavoro possono comunicare in modo automatico e sicuro con altri servizi {{site.data.keyword.Bluemix_notm}} che supportano gli endpoint del servizio privato, come {{site.data.keyword.registrylong}}, sulla tua rete privata dell'infrastruttura IBM Cloud (SoftLayer). Ad esempio, gli ambienti hardware dedicati per tutte le istanze del piano standard di {{site.data.keyword.cloudant_short_notm}} supportano gli endpoint del servizio privato. Se un servizio {{site.data.keyword.Bluemix_notm}} non supporta gli endpoint del servizio privato, il tuo cluster non può accedere a tale servizio.
 
-Per gli account non VRF: se crei il cluster con VLAN sia pubbliche che private, non puoi rimuovere successivamente le VLAN pubbliche da tale cluster. In caso di rimozione di tutte le VLAN pubbliche da un cluster, diversi componenti cluster smettono di funzionare. Crea invece un nuovo cluster senza la VLAN pubblica.
-{: note}
+Per fornire l'accesso privato a un'applicazione nel tuo cluster, puoi creare un NLB (network load balancer) o un ALB (application load balancer) Ingress privato. Questi servizi di rete Kubernetes espongono la tua applicazione solo alla rete privata in modo che qualsiasi sistema in loco con una connessione alla sottorete su cui si trova l'IP NLB possa accedere all'applicazione.
 
-**Account non VRF, master Kubernetes e nodi di lavoro su VLAN sia pubbliche che private**</br>
-Per la maggior parte dei casi, la configurazione del cluster può includere nodi di lavoro sia su VLAN pubbliche che private. Puoi quindi bloccare il cluster interrompendo il traffico della VLAN pubblica con le politiche Calico e limitando il traffico a specifici nodi edge.
-
-## Pool di nodi di lavoro e nodi di lavoro
-{: #planning_worker_nodes}
-
-Un cluster Kubernetes è costituito da nodi di lavoro raggruppati in pool di nodi di lavoro ed è monitorato e gestito centralmente dal master Kubernetes. Gli amministratori del cluster decidono come configurare il cluster di nodi di lavoro per garantire che gli utenti dispongano di tutte le risorse per distribuire ed eseguire applicazioni nel cluster.
-{:shortdesc}
-
-Quando crei un cluster standard, nell'infrastruttura IBM Cloud (SoftLayer) vengono ordinati per tuo conto i nodi di lavoro delle stesse specifiche di memoria, CPU e spazio su disco (varietà) e vengono aggiunti al pool di nodi di lavoro predefinito nel tuo cluster. A ogni nodo di lavoro viene
-assegnato un ID e nome dominio univoco che non deve essere modificato dopo la creazione del cluster. Puoi scegliere tra server virtuali o fisici (bare metal). A seconda del livello di isolamento hardware che scegli, i nodi di lavoro virtuali possono essere configurati come nodi condivisi o dedicati. Per aggiungere delle varietà differenti al tuo cluster, [crea un altro pool di nodi di lavoro](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
-
-Kubernetes limita il numero massimo di nodi di lavoro che puoi avere in un cluster. Controlla [nodo di lavoro e quote pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/setup/cluster-large/) per ulteriori informazioni.
-
-
-Vuoi essere sicuro di avere sempre abbastanza nodi di lavoro per gestire il tuo carico di lavoro? Prova [il cluster autoscaler](/docs/containers?topic=containers-ca#ca).
-{: tip}
-
-<br />
-
-
-## Hardware disponibile per i nodi di lavoro
-{: #shared_dedicated_node}
-
-Quando crei un cluster standard in {{site.data.keyword.Bluemix_notm}}, scegli se i tuoi pool di nodi di lavoro sono costituiti da nodi di lavoro che sono macchine fisiche (bare metal) o macchine virtuali che vengono eseguite su hardware fisico. Puoi anche selezionare la varietà di nodo di lavoro oppure una combinazione di memoria, CPU e altre specifiche macchina quali l'archiviazione disco.
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="Opzioni hardware per i nodi di lavoro in un cluster standard" style="width:700px; border-style: none"/>
-
-Se vuoi più di una varietà di nodo di lavoro, devi creare un pool di nodi di lavoro per ciascuna varietà. Non puoi ridimensionare i nodi di lavoro esistenti per avere risorse diverse come CPU o memoria. Quando crei un cluster gratuito, viene eseguito automaticamente il provisioning del tuo nodo di lavoro come nodo virtuale condiviso nell'account dell'infrastruttura IBM Cloud (SoftLayer). Nei cluster standard, puoi scegliere il tipo di macchina più adatto al tuo carico di lavoro. Mentre pianifichi, considera le [riserve di risorse del nodo di lavoro](#resource_limit_node) sulla capacità totale di CPU e memoria.
-
-Puoi distribuire i cluster utilizzando l'[IU della console](/docs/containers?topic=containers-clusters#clusters_ui) o la [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
-
-Seleziona una delle seguenti opzioni per decidere quale tipo di pool di nodi di lavoro vuoi.
-* [Macchine virtuali](#vm)
-* [Macchine fisiche (bare metal)](#bm)
-* [Macchine SDS (software-defined storage)](#sds)
-
-### Macchine virtuali
-{: #vm}
-
-Con le VM, ottieni maggiore flessibilità, tempi di provisioning più veloci e ulteriori funzioni di scalabilità automatica rispetto ai bare metal, ad un prezzo più conveniente. Puoi utilizzare le VM per casi di utilizzo più generali come gli ambienti di sviluppo e test, di preparazione e di produzione, i microservizi e le applicazioni di business. Tuttavia, è un compromesso nelle prestazioni. Se hai bisogno di calcolo ad elevate prestazioni per i carichi di lavoro con un utilizzo intensivo di RAM, dati o GPU, utilizza [bare metal](#bm).
-{: shortdesc}
-
-**È meglio se utilizzo hardware condiviso o dedicato?**</br>
-Quando crei un cluster virtuale standard, devi scegliere se desideri che l'hardware sottostante sia condiviso tra più clienti {{site.data.keyword.IBM_notm}} (più tenant) o che sia dedicato solo a te (tenant singolo).
-
-* **In una configurazione di hardware condiviso a più tenant**: le risorse fisiche, quali CPU e memoria, sono condivise tra tutte le macchine virtuali distribuite allo stesso hardware fisico. Per assicurare che ogni macchina virtuale
-possa essere eseguita indipendentemente, un monitoraggio della macchina virtuale, conosciuto anche come hypervisor,
-divide le risorse fisiche in entità isolate e le alloca come risorse dedicate
-a una macchina virtuale (isolamento hypervisor).
-* **In una configurazione hardware dedicato a singolo tenant**: tutte le risorse fisiche sono dedicate soltanto a te. Puoi distribuire
-più nodi di lavoro come macchine virtuali allo stesso host fisico. In modo simile alla configurazione a più tenant,
-l'hypervisor assicura che ogni nodo ottenga la propria condivisione di risorse
-fisiche disponibili.
-
-I nodi condivisi sono generalmente più economici dei nodi dedicati perché i costi dell'hardware sottostante
-sono condivisi tra più clienti. Tuttavia, quando decidi tra nodi condivisi e dedicati,
-potresti voler verificare con il tuo dipartimento legale e discutere sul livello di conformità e isolamento dell'infrastruttura
-che il tuo ambiente dell'applicazione necessita.
-
-Alcune varietà sono disponibili per un solo tipo di configurazione di tenancy. Ad esempio, le VM `m3c` sono disponibili solo come configurazione di tenancy `shared`.
-{: note}
-
-**Quali sono le funzioni generali delle VM?**</br>
-Le macchine virtuali utilizzano il disco locale anziché SAN (Storage Area Networking) per garantire l'affidabilità. I vantaggi dell'affidabilità includono una velocità di elaborazione più elevata durante la serializzazione dei byte sul disco locale e una riduzione del danneggiamento del file system dovuto a errori di rete. Ogni VM offre una velocità di rete di 1000Mbps, 25GB di archiviazione disco locale primaria per il file system del sistema operativo e 100GB di archiviazione disco locale secondaria per dati quali il runtime del contenitore e il `kubelet`. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Cosa succede se utilizzo tipi di macchina precedenti?**</br>
-se il tuo cluster ha tipi di nodo di lavoro `x1c` o Ubuntu 16 `x2c` precedenti obsoleti, puoi[aggiornare il tuo cluster ai nodi di lavoro `x3c`
-di Ubuntu 18 ](/docs/containers?topic=containers-update#machine_type).
-
-**Quali tipi di macchina virtuale sono disponibili?**</br>
-I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [SDS](#sds) disponibili.
-
-{: #vm-table}
-<table>
-<caption>Tipi di macchina virtuale disponibili in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nome e caso di utilizzo</th>
-<th>Core / Memoria</th>
-<th>Disco primario / secondario</th>
-<th>Velocità di rete</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtuale, u3c.2x4</strong>: utilizza questa VM di dimensione minima per il test rapido, le prove di concetto e altri carichi di lavoro leggeri.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b3c.4x16</strong>: seleziona questa VM bilanciata per il test e lo sviluppo e altri carichi di lavoro leggeri.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b3c.16x64</strong>: seleziona questa VM bilanciata per carichi di lavoro di dimensione media.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b3c.32x128</strong>: seleziona questa VM bilanciata per carichi di lavoro medio-grandi, come un database e un sito Web dinamico con molti utenti simultanei.</td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, b3c.56x242</strong>: seleziona questa VM bilanciata per carichi di lavoro grandi, come un database e più applicazioni con molti utenti simultanei.</td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, c3c.16x16</strong>: utilizza questo tipo quando vuoi un bilanciamento equilibrato delle risorse di elaborazione provenienti dal nodo di lavoro per carichi di lavoro leggeri.</td>
-<td>16 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, c3c.16x32</strong>: utilizza questo tipo quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria del nodo di lavoro per carichi di lavoro leggeri o di medie dimensioni.</td>
-<td>16 / 32GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, c3c.32x32</strong>: utilizza questo tipo quando vuoi un bilanciamento equilibrato delle risorse di elaborazione provenienti dal nodo di lavoro per carichi di lavoro di medie dimensioni.</td>
-<td>32 / 32GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, c3c.32x64</strong>: utilizza questo tipo quando vuoi un rapporto 1:2 tra le risorse di CPU e memoria del nodo di lavoro per carichi di lavoro di medie dimensioni.</td>
-<td>32 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtuale, m3c.8x64</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro leggeri o di medie dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
-<td>8 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, m3c.16x128</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie dimensioni che richiedono più memoria, quali i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
-<td>16 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, m3c.30x240</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie o grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo a Dallas e come tenancy `--hardware shared`.</td>
-<td>30 / 240GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, m3c.48x384</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per carichi di lavoro di medie o grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di
-`--hardware shared`.</td>
-<td>48 / 384GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, m3c.56x448</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di
-`--hardware shared`.</td>
-<td>56 / 448GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtuale, m3c.64x512</strong>: utilizza questo tipo quando vuoi un rapporto 1:8 tra le risorse di CPU e memoria per i carichi di lavoro di grandi dimensioni che richiedono più memoria, come i database {{site.data.keyword.Db2_on_Cloud_short}}. Disponibile solo come tenancy di `--hardware shared`.</td>
-<td>64 / 512GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-</tbody>
-</table>
-
-### Macchine fisiche (bare metal)
-{: #bm}
-
-Puoi eseguire il provisioning del tuo nodo di lavoro come server fisico a singolo tenant, indicato anche come bare metal.
-{: shortdesc}
-
-**In che modo il bare metal di differenzia dalle VM?**</br>
-Bare metal ti dà accesso diretto alle risorse fisiche sulla macchina, come la memoria o la CPU. Questa configurazione elimina l'hypervisor della macchina virtuale che assegna risorse fisiche alle macchine virtuali eseguite sull'host. Invece, tutte le risorse di una macchina bare metal sono dedicate esclusivamente al nodo di lavoro, quindi non devi preoccuparti degli "elementi di disturbo" che condividono risorse o rallentano le prestazioni. I tipi di macchine fisiche hanno più archiviazione locale rispetto a quelle virtuali e alcune dispongono di RAID per aumentare la disponibilità dei dati. L'archiviazione locale sul nodo di lavoro è solo per l'elaborazione a breve termine e i dischi primari e secondari vengono cancellati quando aggiorni o ricarichi il nodo di lavoro. Per le soluzioni di archiviazione persistente, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Oltre ad avere specifiche migliori per le prestazioni, posso fare qualcosa con bare metal che non posso fare con le macchine virtuali?**</br>
-Sì. Con bare metal, puoi abilitare Trusted Compute per verificare possibili tentativi di manomissione dei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente. Puoi creare un nuovo cluster senza attendibilità. Per ulteriori informazioni su come funziona l'attendibilità durante il processo di avvio del nodo, vedi [{{site.data.keyword.containerlong_notm}} con Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute è disponibile per alcuni tipi di macchina bare metal. Quando esegui il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>`, puoi vedere quali macchine supportano l'attendibilità controllando il campo **Trustable**. Ad esempio, le varietà GPU `mgXc` non supportano Trusted Compute.
-
-Oltre a Trusted Compute, puoi anche sfruttare {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.Bluemix_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati. Se tu o la tua azienda richiedete la sensibilità dei dati a causa di politiche interne, regolamentazioni governative o requisiti di conformità del settore, questa soluzione potrebbe aiutarvi a passare al cloud. Casi di utilizzo di esempio includono istituzioni finanziarie e sanitarie o paesi con politiche governative che richiedono soluzioni cloud in loco.
-
-**Bare metal sembra essere un'opzione estremamente valida. Cosa mi impedisce di ordinarne uno immediatamente?**</br>
-I server bare metal sono più costosi di quelli virtuali e sono più adatti per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host.
-
-I server bare metal vengono fatturati mensilmente. Se annulli un server bare metal prima della fine del mese, ti viene addebitato il costo fino alla fine di quel mese. Dopo aver ordinato o annullato un server bare metal, il processo viene completato manualmente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Pertanto, ci vuole più di un giorno lavorativo per completare questo processo.
-{: important}
-
-**Quali tipi di bare metal posso ordinare?**</br>
-I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [VM](#vm) o [SDS](#sds) disponibili.
-
-Le macchine bare metal sono ottimizzate per diversi casi d'uso quali i carichi di lavoro con un utilizzo intensivo di RAM, dati o GPU.
-
-Scegli un tipo di macchina con la configurazione di archiviazione corretta per supportare il tuo carico di lavoro. Alcune varietà hanno una combinazione delle seguenti configurazioni di dischi e archiviazione. Ad esempio, alcune varietà possono avere un disco primario SATA con un disco secondario SSD raw.
-
-* **SATA**: un dispositivo di archiviazione disco a rotazione magnetica che viene spesso utilizzato per il disco primario del nodo di lavoro che memorizza il file system del sistema operativo.
-* **SSD**: un dispositivo di archiviazione SSD (solid state drive) per dati ad elevate prestazioni.
-* **Raw**: il dispositivo di archiviazione non è formattato; tutta la capacità è disponibile per l'utilizzo.
-* **RAID**: il dispositivo di archiviazione ha i dati distribuiti per la ridondanza e prestazioni che variano a seconda del livello RAID. Di conseguenza, la capacità del disco disponibile per l'utilizzo varia.
-
-
-{: #bm-table}
-<table>
-<caption>Tipi di macchina bare metal disponibili in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nome e caso di utilizzo</th>
-<th>Core / Memoria</th>
-<th>Disco primario / secondario</th>
-<th>Velocità di rete</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal con RAM intensiva, mr3c.28x512</strong>: massimizza la disponibilità della RAM dei tuoi nodi di lavoro.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg3c.16x128</strong>: scegli questo tipo per i carichi di lavoro matematicamente complessi, quale il calcolo ad alte prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 1 scheda fisica Tesla K80 con 2 GPU (graphics processing unit) per scheda per un totale di 2 GPU.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg3c.28x256</strong>: scegli questo tipo per i carichi di lavoro matematicamente complessi, quale il calcolo ad alte prestazioni, il machine learning o le applicazioni 3D. Questa varietà ha 2 schede fisiche Tesla K80 con 2 GPU per scheda per un totale di 4 GPU.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con uso intensivo di dati, md3c.16x64.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID, per aumentare la disponibilità dei dati, per carichi di lavoro quali file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con uso intensivo di dati, md3c.28x512.4x4tb</strong>: utilizza questo tipo per una quantità significativa di archiviazione su disco locale, incluso RAID, per aumentare la disponibilità dei dati, per carichi di lavoro quali file system distribuiti, database di grandi dimensioni e analisi dei big data.</td>
-<td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal bilanciato, mb3c.4x32</strong>: utilizzalo per i carichi di lavoro bilanciati che richiedono risorse di calcolo superiori a quelle offerte dalle macchine virtuali. Questa varietà può anche essere abilitata per Intel® Software Guard Extensions (SGX) in modo che tu possa utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal bilanciato, mb3c.16x64</strong>: utilizzalo per i carichi di lavoro bilanciati che richiedono risorse di calcolo superiori a quelle offerte dalle macchine virtuali.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### Macchine SDS (software-defined storage)
-{: #sds}
-
-Le varietà SDS (software-defined storage) sono macchine fisiche fornite con dischi non formattati aggiuntivi per l'archiviazione locale fisica. A differenza del disco locale primario e secondario, questi dischi non formattati non vengono cancellati durante l'aggiornamento o il ricaricamento del nodo di lavoro. Poiché i dati sono co-ubicati con il nodo di elaborazione, le macchine SDS sono adatte per i carichi di lavoro ad elevate prestazioni.
-{: shortdesc}
-
-**Quando utilizzo i tipi SDS?**</br>
-Di norma utilizzi le macchine SDS nei seguenti casi:
-*  Se utilizzi un componente aggiuntivo SDS come [Portworx](/docs/containers?topic=containers-portworx#portworx) nel cluster, usa una macchina SDS.
-*  Se la tua applicazione è uno [StatefulSet ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) che richiede l'archiviazione locale, puoi utilizzare le macchine SDS ed eseguire il provisioning di [volumi persistenti locali Kubernetes (beta)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Potresti avere applicazioni personalizzate che richiedono ulteriore archiviazione locale non elaborata.
-
-Per ulteriori soluzioni di archiviazione, vedi [Pianificazione di archiviazione persistente altamente disponibile](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Quali tipi di SDS posso ordinare?**</br>
-I tipi di nodo di lavoro variano in base alla zona. La seguente tabella include la versione più recente di un tipo, ad esempio i tipi di nodi di lavoro Ubuntu 18 `x3c`, invece dei tipi di nodi di lavoro Ubuntu 16 precedenti, `x2c`. Per vedere i tipi di macchina disponibili nella tua zona, esegui `ibmcloud ks machine-types <zone>`. Puoi anche riesaminare i tipi di macchina [bare metal](#bm) o [VM](#vm) disponibili.
-
-Scegli un tipo di macchina con la configurazione di archiviazione corretta per supportare il tuo carico di lavoro. Alcune varietà hanno una combinazione delle seguenti configurazioni di dischi e archiviazione. Ad esempio, alcune varietà possono avere un disco primario SATA con un disco secondario SSD raw.
-
-* **SATA**: un dispositivo di archiviazione disco a rotazione magnetica che viene spesso utilizzato per il disco primario del nodo di lavoro che memorizza il file system del sistema operativo.
-* **SSD**: un dispositivo di archiviazione SSD (solid state drive) per dati ad elevate prestazioni.
-* **Raw**: il dispositivo di archiviazione non è formattato; tutta la capacità è disponibile per l'utilizzo.
-* **RAID**: il dispositivo di archiviazione ha i dati distribuiti per la ridondanza e prestazioni che variano a seconda del livello RAID. Di conseguenza, la capacità del disco disponibile per l'utilizzo varia.
-
-
-{: #sds-table}
-<table>
-<caption>Tipi di macchina SDS disponibili in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nome e caso di utilizzo</th>
-<th>Core / Memoria</th>
-<th>Disco primario / secondario</th>
-<th>Dischi non formattati aggiuntivi</th>
-<th>Velocità di rete</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal con SDS, ms3c.4x32.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>SSD raw di 1,9TB (percorso dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con SDS, ms3c.16x64.1.9tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>SSD raw di 1,9TB (percorso dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con SDS, ms3c.28x256.3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
-<td>28 / 256GB</td>
-<td>SATA di 2TB / SSD di 1,9TB</td>
-<td>SSD raw di 3,8TB (percorso dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal con SDS, ms3c.28x512.4x3.8tb.ssd</strong>: se hai bisogno di archiviazione locale supplementare per motivi di prestazioni, utilizza questo tipo dotato di notevole capacità di disco che supporta l'SDS (software-defined storage).</td>
-<td>28 / 512GB</td>
-<td>SATA di 2TB / SSD di 1,9TB</td>
-<td>4 dischi, SSD raw di 3,8TB (percorsi dispositivo: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000Mbps</td>
-</tr>
-</tbody>
-</table>
-
-## Riserve di risorse del nodo di lavoro
-{: #resource_limit_node}
-
-{{site.data.keyword.containerlong_notm}} imposta riserve di risorse di calcolo che limitano le risorse di calcolo disponibili su ciascun nodo di lavoro. Le risorse di memoria e CPU riservate non possono essere utilizzate dai pod sul nodo di lavoro e riducono le risorse assegnabili su ciascun nodo di lavoro. Quando distribuisci inizialmente i pod, se il nodo di lavoro non dispone di sufficienti risorse assegnabili, la distribuzione non riesce. Inoltre, se i pod superano il limite di risorse del nodo di lavoro, i pod vengono rimossi. In Kubernetes, questo limite è chiamato [soglia di rimozione rigida![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
-{:shortdesc}
-
-Se sono disponibili meno CPU o memoria rispetto alle riserve del nodo di lavoro, Kubernetes inizia a rimuovere i pod per ripristinare risorse di calcolo sufficienti. I pod vengono ripianificati su un altro nodo di lavoro, laddove disponibile. Se i tuoi pod vengono rimossi frequentemente, aggiungi più nodi di lavoro al tuo cluster o imposta i [limiti di risorsa ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) sui tuoi pod.
-
-Le risorse che sono riservate sul tuo nodo di lavoro dipendono dalla quantità di CPU e memoria con cui viene fornito il tuo nodo di lavoro. {{site.data.keyword.containerlong_notm}} definisce i livelli di memoria e CPU come mostrato nelle seguenti tabelle. Se il tuo nodo di lavoro viene fornito con risorse di calcolo su più livelli, una percentuale delle tue risorse di CPU e memoria è riservata per ogni livello.
-
-Per verificare quante risorse di calcolo sono attualmente utilizzate sul tuo nodo di lavoro, esegui [`kubectl top node` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
-{: tip}
-
-<table summary="Questa tabella mostra le riserve di memoria del nodo di lavoro per livello.">
-<caption>Riserve di memoria del nodo di lavoro per livello.</caption>
-<thead>
-<tr>
-  <th>Livello di memoria</th>
-  <th>% o quantità riservata</th>
-  <th>Esempio di nodo di lavoro `b3c.4x16` (16 GB)</th>
-  <th>Esempio di nodo di lavoro `mg1c.28x256` (256 GB)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primi 4 GB (0-4 GB)</td>
-  <td>25% di memoria</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Successivi 4 GB (5-8 GB)</td>
-  <td>20% di memoria</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Successivi 8 GB (9-16 GB)</td>
-  <td>10% di memoria</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Successivi 112 GB (17-128 GB)</td>
-  <td>6% di memoria</td>
-  <td>N/D</td>
-  <td>6,72 GB</td>
-</tr>
-<tr>
-  <td>GB rimanenti (+ 129 GB)</td>
-  <td>2% di memoria</td>
-  <td>N/D</td>
-  <td>2,54 GB</td>
-</tr>
-<tr>
-  <td>Riserva aggiuntiva per la [rimozione `kubelet` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (quantità fissa)</td>
-  <td>100 MB (quantità fissa)</td>
-</tr>
-<tr>
-  <td>**Totale riservato**</td>
-  <td>**(variabile)**</td>
-  <td>**2,7 GB di 16 GB totali**</td>
-  <td>**11,96 GB di 256 GB totali**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="Questa tabella mostra le riserve di CPU del nodo di lavoro per livello.">
-<caption>Riserve di CPU del nodo di lavoro per livello.</caption>
-<thead>
-<tr>
-  <th>Livello di CPU</th>
-  <th>% riservata</th>
-  <th>Esempio di nodo di lavoro `b3c.4x16` (4 core)</th>
-  <th>Esempio di nodo di lavoro `mg1c.28x256` (28 core)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primo core (Core 1)</td>
-  <td>6% di core</td>
-  <td>0,06 core</td>
-  <td>0,06 core</td>
-</tr>
-<tr>
-  <td>Successivi 2 core (Core 2-3)</td>
-  <td>1% di core</td>
-  <td>0,02 core</td>
-  <td>0,02 core</td>
-</tr>
-<tr>
-  <td>Successivi 2 core (Core 4-5)</td>
-  <td>0.5% di core</td>
-  <td>0,005 core</td>
-  <td>0,01 core</td>
-</tr>
-<tr>
-  <td>Core rimanenti (Core 6+)</td>
-  <td>0,25% di core</td>
-  <td>N/D</td>
-  <td>0,0575 core</td>
-</tr>
-<tr>
-  <td>**Totale riservato**</td>
-  <td>**(variabile)**</td>
-  <td>**0,085 core di 4 core totali**</td>
-  <td>**0,1475 core di 28 core totali**</td>
-</tr>
-</tbody>
-</table>
-
-## Autorecovery per i tuoi nodi di lavoro
-{: #planning_autorecovery}
-
-I componenti critici, come `containerd`, `kubelet`, `kube-proxy` e `calico`, devono funzionare correttamente per avere un nodo di lavoro Kubernetes integro. Con il passare del tempo questi componenti possono rompersi e lasciare il tuo nodo di lavoro in uno stato non funzionale. I nodi di lavoro non funzionali riducono la capacità totale del cluster e possono causare tempi di inattività per la tua applicazione.
-{:shortdesc}
-
-Puoi [configurare i controlli dell'integrità per il nodo di lavoro e abilitare l'Autorecovery](/docs/containers?topic=containers-health#autorecovery). Se Autorecovery rileva un nodo di lavoro non integro in base ai controlli configurati, attiva un'azione correttiva come un ricaricamento del sistema operativo sul nodo di lavoro. Per ulteriori informazioni su come funziona Autorecovery, vedi il [blog Autorecovery ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
+Sei pronto a iniziare a usare un cluster per questo scenario? Dopo aver pianificato le tue configurazioni di [alta disponibilità](/docs/containers?topic=containers-ha_clusters) e dei [nodi di lavoro](/docs/containers?topic=containers-planning_worker_nodes), vedi [Creazione dei cluster](/docs/containers?topic=containers-clusters#cluster_prepare).

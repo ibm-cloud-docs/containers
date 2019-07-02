@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的医疗保健用例
@@ -39,7 +39,7 @@ subcollection: containers
 为什么选择 {{site.data.keyword.cloud_notm}}：为了改善患者服务，提供者希望通过 {{site.data.keyword.containerlong_notm}} 和 {{site.data.keyword.contdelivery_full}} 来减少 IT 支出并加速开发，所有这些工作全部在一个安全平台上完成。提供者的 SaaS 系统用于支持患者记录系统和业务报告应用程序，使用频率高，需要频繁更新。然而，内部部署环境阻碍了敏捷开发工作。提供者还希望能应对不断上升的员工成本，并降低预算。
 
 关键技术：
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [水平缩放](/docs/containers?topic=containers-app#highly_available_apps)
 * [容器安全性和隔离](/docs/containers?topic=containers-security#security)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
@@ -100,7 +100,7 @@ subcollection: containers
 
 他们可以使用定义的规则和自动化 Kubernetes 编排器来复制和缩放应用程序。{{site.data.keyword.containerlong_notm}} 提供了可缩放的计算资源和关联的 DevOps 仪表板，可根据需要创建、缩放和拆除应用程序和服务。通过使用 Kubernetes 的部署和运行时对象，提供者可以可靠地监视和管理应用程序升级。
 
-{{site.data.keyword.SecureGatewayfull}} 用于针对要重新托管用于在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序，创建通往内部部署数据库和文档的安全管道。
+{{site.data.keyword.SecureGatewayfull}} 用于针对要重新托管以在 {{site.data.keyword.containerlong_notm}} 中运行的应用程序，创建通往内部部署数据库和文档的安全管道。
 
 {{site.data.keyword.cloudant}} 是一种现代 NoSQL 数据库，适用于一系列数据驱动的用例，从键/值到复杂的面向文档的数据存储和查询。为了最大限度地减少对后台 RDBMS 的查询，{{site.data.keyword.cloudant}} 用于对应用程序中用户的会话数据进行高速缓存。这些选项改进了 {{site.data.keyword.containerlong_notm}} 上各应用程序中的前端应用程序易用性和性能。
 
@@ -148,7 +148,7 @@ CI/CD 过程本身的大部分内容通过云中的 IBM Continuous Delivery 服�
 
 **数据获取** - 在存储研究人员的丰富数据文档的每个区域集群中使用 {{site.data.keyword.cloudant}}，并且可以根据需要对其进行查询和处理。{{site.data.keyword.cloudant}} 可加密静态和动态数据，以遵守区域数据隐私法。
 
-{{site.data.keyword.openwhisk}} 用于创建处理功能，以获取研究数据并将其作为结构化数据文档存储在 {{site.data.keyword.cloudant}} 中。通过 {{site.data.keyword.SecureGatewayfull}}，{{site.data.keyword.openwhisk}} 能以安全方式轻松访问内部部署数据。
+{{site.data.keyword.openwhisk}} 用于创建处理函数，以获取研究数据并将其作为结构化数据文档存储在 {{site.data.keyword.cloudant}} 中。通过 {{site.data.keyword.SecureGatewayfull}}，{{site.data.keyword.openwhisk}} 能以安全方式轻松访问内部部署数据。
 
 区域集群中的 Web 应用程序是在 nodeJS 中开发的，用于手动输入结果、模式定义和研究组织从属关系的数据。IBM Key Protect 用于帮助保护对 {{site.data.keyword.cloudant}} 数据的访问，IBM 漏洞顾问程序用于扫描应用程序容器和映像以查找安全漏洞。
 

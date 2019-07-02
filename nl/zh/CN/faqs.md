@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -19,7 +19,9 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
+{:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 # 常见问题
 {: #faqs}
@@ -37,7 +39,7 @@ Kubernetes 是一个开放式源代码平台，用于管理跨多个主机的容
 {: #kubernetes_service}
 {: faq}
 
-通过 {{site.data.keyword.containerlong_notm}}，您可以创建自己的 Kubernetes 集群，以在 {{site.data.keyword.Bluemix_notm}} 上部署和管理容器化应用程序。容器化应用程序在称为工作程序节点的 IBM Cloud Infrastructure (SoftLayer) 计算主机上托管。您可以选择将计算主机作为[虚拟机](/docs/containers?topic=containers-plan_clusters#vm)（使用共享或专用资源）或[裸机机器](/docs/containers?topic=containers-plan_clusters#bm)（可以针对 GPU 和软件定义的存储 (SDS) 使用情况进行优化）进行供应。工作程序节点由 IBM 配置、监视和管理的高可用性 Kubernetes 主节点进行控制。您可以通过 {{site.data.keyword.containerlong_notm}} API 或 CLI 来使用集群基础架构资源，通过 Kubernetes API 或 CLI 来管理部署和服务。
+通过 {{site.data.keyword.containerlong_notm}}，您可以创建自己的 Kubernetes 集群，以在 {{site.data.keyword.Bluemix_notm}} 上部署和管理容器化应用程序。容器化应用程序在称为工作程序节点的 IBM Cloud Infrastructure (SoftLayer) 计算主机上托管。您可以选择将计算主机作为[虚拟机](/docs/containers?topic=containers-planning_worker_nodes#vm)（使用共享或专用资源）或[裸机机器](/docs/containers?topic=containers-planning_worker_nodes#bm)（可以针对 GPU 和软件定义的存储 (SDS) 使用情况进行优化）进行供应。工作程序节点由 IBM 配置、监视和管理的高可用性 Kubernetes 主节点进行控制。您可以通过 {{site.data.keyword.containerlong_notm}} API 或 CLI 来使用集群基础架构资源，通过 Kubernetes API 或 CLI 来管理部署和服务。
 
 有关如何设置集群资源的更多信息，请参阅[服务体系结构](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)。要查找功能和优点的列表，请参阅[为什么选择 {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)。
 
@@ -66,9 +68,9 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 
 {{site.data.keyword.containerlong_notm}} 体系结构和基础架构旨在确保可靠性、处理等待时间短以及服务正常运行时间最长。缺省情况下，{{site.data.keyword.containerlong_notm}} 中的每个集群都设置为具有多个 Kubernetes 主节点实例，以确保集群资源的可用性和可访问性，即使 Kubernetes 主节点的一个或多个实例不可用也不受影响。
 
-通过将工作负载分布在一个区域的多个专区中的多个工作程序节点上，可以进一步提高集群的高可用性，防止应用程序产生停机时间。此设置称为[多专区集群](/docs/containers?topic=containers-plan_clusters#multizone)，用于确保应用程序可访问，即使某个工作程序节点或整个专区不可用也不受影响。
+通过将工作负载分布在一个区域的多个专区中的多个工作程序节点上，可以进一步提高集群的高可用性，防止应用程序产生停机时间。此设置称为[多专区集群](/docs/containers?topic=containers-ha_clusters#multizone)，用于确保应用程序可访问，即使某个工作程序节点或整个专区不可用也不受影响。
 
-要防止整个区域发生故障，请创建[多个集群并将其分布在多个 {{site.data.keyword.containerlong_notm}} 区域中](/docs/containers?topic=containers-plan_clusters#multiple_clusters)。通过为集群设置网络负载均衡器 (NLB)，可以实现对集群进行跨区域负载均衡和跨区域联网。
+要防止整个区域发生故障，请创建[多个集群并将其分布在多个 {{site.data.keyword.containerlong_notm}} 区域中](/docs/containers?topic=containers-ha_clusters#multiple_clusters)。通过为集群设置网络负载均衡器 (NLB)，可以实现对集群进行跨区域负载均衡和跨区域联网。
 
 如果您具有即使发生中断也必须可用的数据，请确保将数据存储在[持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)上。
 
@@ -81,6 +83,26 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 您可以使用 {{site.data.keyword.containerlong_notm}} 中的内置安全功能来保护集群中的组件以及数据和应用程序部署，以确保安全合规性和数据完整性。使用这些功能可以保护 Kubernetes API 服务器、etcd 数据存储、工作程序节点、网络、存储器、映像和部署免受恶意攻击。您还可以利用内置日志记录和监视工具来检测恶意攻击和可疑使用模式。
 
 有关集群组件以及如何保护每个组件的更多信息，请参阅 [{{site.data.keyword.containerlong_notm}} 的安全性](/docs/containers?topic=containers-security#security)。
+
+## 我能为集群用户提供哪些访问策略？
+{: #faq_access}
+{: faq}
+
+{{site.data.keyword.containerlong_notm}} 使用 {{site.data.keyword.iamshort}} (IAM) 通过 IAM 平台角色授予对集群资源的访问权，并且还使用 Kubernetes 基于角色的访问控制 (RBAC) 策略通过 IAM 服务角色来授予对集群资源的访问权。有关访问策略类型的更多信息，请参阅[为用户选取适当的访问策略和角色](/docs/containers?topic=containers-users#access_roles)。
+{: shortdesc}
+
+分配给用户的访问策略根据您希望用户能够执行的操作而有所不同。您可以在[用户访问权参考页面](/docs/containers?topic=containers-access_reference)或下表的链接中找到有关哪些角色授权哪些操作类型的更多信息。有关分配策略的步骤，请参阅[通过 {{site.data.keyword.Bluemix_notm}} IAM 授予用户对集群的访问权](/docs/containers?topic=containers-users#platform)。
+
+|用例|示例角色和作用域|
+| --- | --- |
+|应用程序审计员|[对集群、区域或资源组的查看者平台角色](/docs/containers?topic=containers-access_reference#view-actions)以及[对集群、区域或资源组的读取者服务角色](/docs/containers?topic=containers-access_reference#service)。|
+|应用程序开发者|[对集群的编辑者平台角色](/docs/containers?topic=containers-access_reference#editor-actions)、[作用域限定为名称空间的写入者服务角色](/docs/containers?topic=containers-access_reference#service)以及 [Cloud Foundry 开发者空间角色](/docs/containers?topic=containers-access_reference#cloud-foundry)。|
+|计费|[对集群、区域或资源组的查看者平台角色](/docs/containers?topic=containers-access_reference#view-actions)。|
+|创建集群|对超级用户基础架构凭证的帐户级别许可权，对 {{site.data.keyword.containerlong_notm}} 的管理员平台角色以及对 {{site.data.keyword.registrylong_notm}} 的管理员平台角色。有关更多信息，请参阅[准备创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)。|
+|集群管理员|[对集群的管理员平台角色](/docs/containers?topic=containers-access_reference#admin-actions)以及[未将作用域限定为名称空间（对整个集群）的管理者服务角色](/docs/containers?topic=containers-access_reference#service)。|
+|DevOps 操作员|[对集群的操作者平台角色](/docs/containers?topic=containers-access_reference#operator-actions)、[未将作用域限定为名称空间（对整个集群）的写入者服务角色](/docs/containers?topic=containers-access_reference#service)以及 [Cloud Foundry 开发者空间角色](/docs/containers?topic=containers-access_reference#cloud-foundry)。|
+|操作员或站点可靠性工程师|[对集群、区域或资源组的管理员平台角色](/docs/containers?topic=containers-access_reference#admin-actions)、[对集群或区域的读取者服务角色](/docs/containers?topic=containers-access_reference#service)或[对所有集群名称空间的管理者服务角色](/docs/containers?topic=containers-access_reference#service)，以能够使用 `kubectl top nodes,pods` 命令。|
+{: caption="可分配用于满足不同用例的角色类型。" caption-side="top"}
 
 ## 在哪里可以找到影响集群的安全公告的列表？
 {: #faq_security_bulletins}
@@ -96,7 +118,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 
 是的，您可以将工作程序节点作为单租户物理裸机服务器进行供应。裸机服务器能为工作负载（例如，数据、AI 和 GPU）带来高性能优点。此外，所有硬件资源都专供您的工作负载使用，因此您不必担心“吵闹的邻居”。
 
-有关可用裸机类型模板以及裸机与虚拟机的差异的更多信息，请参阅[物理机器（裸机）](/docs/containers?topic=containers-plan_clusters#bm)。
+有关可用裸机类型模板以及裸机与虚拟机的差异的更多信息，请参阅[物理机器（裸机）](/docs/containers?topic=containers-planning_worker_nodes#bm)。
 
 ## 服务支持哪些 Kubernetes 版本？
 {: #supported_kube_versions}
@@ -105,9 +127,9 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 {{site.data.keyword.containerlong_notm}} 同时支持多个版本的 Kubernetes。发布最新版本 (n) 时，支持最多低 2 (n-2) 的版本。比最新版本低 2 以上的版本 (n-3) 将首先不推荐使用，然后不再支持。
 当前支持以下版本：
 
-*   最新版本：1.13.5
-*   缺省版本：1.12.7
-*   其他版本：1.11.9
+*   最新版本：1.14.2
+*   缺省版本：1.13.6
+*   其他版本：1.12.9
 
 有关支持的版本以及从一个版本移至另一个版本时必须执行的更新操作的更多信息，请参阅[版本信息和更新操作](/docs/containers?topic=containers-cs_versions#cs_versions)。
 
@@ -117,7 +139,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 
 {{site.data.keyword.containerlong_notm}} 在全球范围内可用。您可以在每个支持的 {{site.data.keyword.containerlong_notm}} 区域中创建标准集群。免费集群仅在精选区域中可用。
 
-有关支持的区域的更多信息，请参阅[区域和专区](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)。
+有关支持的区域的更多信息，请参阅[位置](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)。
 
 ## 服务符合哪些标准？
 {: #standards}
@@ -169,6 +191,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 * [子网 IP 地址](#subnet_ips)
 * [存储器](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} 服务](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">工作程序节点</dt>
@@ -180,7 +203,7 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
   <p><strong>物理机器（裸机）</strong>能为工作负载（例如，数据、AI 和 GPU）带来高性能优点。此外，所有硬件资源都专供您的工作负载使用，因此您没有“吵闹的邻居”。请牢记以下影响裸机成本的因素：</p>
   <ul><li><strong>仅按月计费</strong>：所有裸机均按月计费。</li>
   <li><strong>订购过程更长</strong>：订购或取消裸机服务器后，该过程在 IBM Cloud Infrastructure (SoftLayer) 帐户中手动完成。因此，完成此过程可能需要超过一个工作日的时间。</li></ul>
-  <p>有关机器规范的详细信息，请参阅[工作程序节点的可用硬件](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。</p></dd>
+  <p>有关机器规范的详细信息，请参阅[工作程序节点的可用硬件](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。</p></dd>
 
 <dt id="bandwidth">公共带宽</dt>
   <dd><p>带宽是指入站和出站网络流量的公共数据传输，包括进出全球数据中心的 {{site.data.keyword.Bluemix_notm}} 资源的数据传输。公共带宽按每 GB 计费。您可以通过登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)，从菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中选择**经典基础架构**，然后选择**网络 > 带宽 > 摘要**页面来查看当前带宽摘要。
@@ -191,11 +214,11 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
   <p>有关更多信息，请参阅[带宽包 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/bandwidth)。</p></dd>
 
 <dt id="subnet_ips">子网 IP 地址</dt>
-  <dd><p>创建标准集群时，会订购具有 8 个公共 IP 地址的可移植公用子网，并按月向您的帐户收费。</p><p>如果基础架构帐户中有可用的子网，那么可以改为使用这些子网。使用 `--no-subnets` [标志](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)创建集群，然后[复用子网](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
+  <dd><p>创建标准集群时，会订购具有 8 个公共 IP 地址的可移植公用子网，并按月向您的帐户收费。</p><p>如果基础架构帐户中有可用的子网，那么可以改为使用这些子网。使用 `--no-subnets` [标志](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)创建集群，然后[复用子网](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
   </dd>
 
 <dt id="persistent_storage">存储器</dt>
-  <dd>供应存储器时，可以选择适合您用例的存储类型和存储类。费用随存储类型、位置和存储实例的规范而有所不同。某些存储解决方案（例如，File Storage 和 Block Storage）提供了按小时和按月收费的套餐供您选择。要选择正确的存储解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。有关更多信息，请参阅：
+  <dd>供应存储器时，可以选择适合您用例的存储器类型和存储类。费用随存储器类型、位置和存储器实例的规范而有所不同。某些存储解决方案（例如，File Storage 和 Block Storage）提供了按小时和按月收费的套餐供您选择。要选择正确的存储解决方案，请参阅[规划高可用性持久性存储器](/docs/containers?topic=containers-storage_planning#storage_planning)。有关更多信息，请参阅：
   <ul><li>[NFS 文件存储器定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/file-storage/pricing)</li>
   <li>[块存储器定价 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud/block-storage/pricing)</li>
   <li>[Object Storage 套餐 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
@@ -203,7 +226,12 @@ Kubernetes 会定期发布[主要更新、次要更新或补丁更新](/docs/con
 <dt id="services">{{site.data.keyword.Bluemix_notm}} 服务</dt>
   <dd>与集群集成的每个服务都有自己的定价模型。请查看每个产品文档，并使用 {{site.data.keyword.Bluemix_notm}} 控制台来[估算成本](/docs/billing-usage?topic=billing-usage-cost#cost)。</dd>
 
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) 作为 Beta 提供，用于测试 OpenShift 集群。</p>如果创建 [Red Hat OpenShift on IBM Cloud 集群](/docs/containers?topic=containers-openshift_tutorial)，那么工作程序节点将随 Red Hat Enterprise Linux 操作系统一起安装，这将增加[工作程序节点机器](#nodes)的价格。您还必须具有 OpenShift 许可证，除了每小时的 VM 成本或每月裸机成本外，还会发生每月成本。OpenShift 许可证适用于工作程序节点类型模板的每 2 个核心。如果在月末之前删除了您的工作程序节点，那么每月许可证可供工作程序池中的其他工作程序节点使用。有关 OpenShift 集群的更多信息，请参阅[创建 Red Hat OpenShift on IBM Cloud 集群](/docs/containers?topic=containers-openshift_tutorial)。</dd>
+
 </dl>
+<br><br>
 
 按月计费的资源根据上个月的使用量从当月的第一天开始计费。如果您是在月中订购的按月计费资源，那么会根据该月按比例分配的金额向您收费。但是，如果您在月中取消按月计费资源，那么仍会向您收取该资源的整月费用。
 {: note}

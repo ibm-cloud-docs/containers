@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -145,7 +146,7 @@ subcollection: containers
     ```
     {: pre}
 
-출력 예:
+    출력 예:
     ```
     {
      "major": "1",
@@ -160,7 +161,7 @@ subcollection: containers
    }
     ```
     {: screen}
-  * 개인 서비스 엔드포인트가 사용으로 설정된 경우, {{site.data.keyword.Bluemix_notm}} 사설 네트워크를 사용하거나 VPN 연결을 통해 사설 네트워크에 연결하여 마스터에 대한 연결을 확인해야 합니다.
+  * 개인 서비스 엔드포인트가 사용으로 설정된 경우, {{site.data.keyword.Bluemix_notm}} 사설 네트워크를 사용하거나 VPN 연결을 통해 사설 네트워크에 연결하여 마스터에 대한 연결을 확인해야 합니다. 사용자가 VPN 또는 {{site.data.keyword.BluDirectLink}} 연결을 통해 마스터에 액세스할 수 있도록 [사설 로드 밸런서를 통해 마스터 엔드포인트를 노출](/docs/containers?topic=containers-clusters#access_on_prem)해야 한다는 점을 유의하십시오.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -227,17 +228,17 @@ subcollection: containers
 1.  클러스터의 모든 작업자 노드에 대한 공인 IP 주소를 기록해 두십시오.
 
     ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-2.  소스 <em>&lt;each_worker_node_publicIP&gt;</em>에서 대상 TCP/UDP 포트 범위 20000-32767 및 포트 443으로의 발신 네트워크 트래픽과 다음 IP 주소 및 네트워크 그룹을 허용하십시오. 로컬 머신이 공용 인터넷 엔드포인트에 액세스하지 못하도록 방지하는 회사 방화벽이 있는 경우, 소스 작업자 노드와 로컬 머신 둘 다에 대해 이 단계를 수행하십시오.
+2.  소스 <em>&lt;each_worker_node_publicIP&gt;</em>에서 대상 TCP/UDP 포트 범위 20000-32767 및 포트 443으로의 발신 네트워크 트래픽과 다음 IP 주소 및 네트워크 그룹을 허용하십시오. 이러한 IP 주소는 작업자 노드가 클러스터 마스터와 통신할 수 있도록 합니다. 로컬 시스템이 공용 인터넷 엔드포인트에 액세스하지 못하도록 하는 회사 방화벽이 있는 경우에는 클러스터 마스터에 액세스할 수 있도록 로컬 시스템에 대해서도 이 단계를 수행하십시오. 
 
     부트스트랩 프로세스 중에 로드 밸런싱을 수행하려면 지역 내의 모든 구역에 대해 포트 443에 대한 발신 트래픽을 허용해야 합니다. 예를 들어, 클러스터가 미국 남부에 있는 경우에는 각 작업자 노드의 공용 IP에서 모든 구역의 IP 주소의 포트 443으로 트래픽을 허용해야 합니다.
     {: important}
 
     {: #master_ips}
-    <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다. ">
+    <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
       <caption>발신 트래픽을 위해 열리는 IP 주소</caption>
           <thead>
           <th>지역</th>
@@ -285,7 +286,7 @@ subcollection: containers
           </tbody>
         </table>
 
-3.  작업자 노드에서 [{{site.data.keyword.registrylong_notm}} 지역](/docs/services/Registry?topic=registry-registry_overview#registry_regions)으로의 발신 네트워크 트래픽을 허용하십시오.
+3.  {: #firewall_registry}작업자 노드와 {{site.data.keyword.registrylong_notm}}가 통신할 수 있도록 하려면 작업자 노드에서 [{{site.data.keyword.registrylong_notm}} 지역](/docs/services/Registry?topic=registry-registry_overview#registry_regions)으로의 발신 네트워크 트래픽을 허용하십시오. 
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  <em>&lt;registry_subnet&gt;</em>을 트래픽을 허용하려는 레지스트리 서브넷으로 대체하십시오. 글로벌 레지스트리는 IBM 제공 공용 이미지를 저장하고 지역 레지스트리는 사용자의 개인용 이미지 또는 공용 이미지를 저장합니다. 포트 4443은 [이미지 서명 확인](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)과 같은 공증 기능에 필요합니다. <table summary="표에서 첫 번째 행은 두 열 모두에 걸쳐 있습니다. 나머지 행은 왼쪽에서 오른쪽 방향으로 읽어야 하며, 서버 구역은 1열에 있고 일치시킬 IP 주소는 2열에 있습니다.">
   <caption>레지스트리 트래픽을 위해 열리는 IP 주소</caption>
@@ -298,56 +299,50 @@ subcollection: containers
     <tbody>
       <tr>
         <td><br>{{site.data.keyword.containerlong_notm}} 지역 전체의 글로벌 레지스트리</td>
-        <td><strong>공용</strong>: <code>icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>AP 북부</td>
-        <td><strong>공용</strong>: <code>jp.icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>AP 남부</td>
-        <td><strong>공용</strong>: <code>au.icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>중앙 유럽</td>
-        <td><strong>공용</strong>: <code>de.icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>영국 남부</td>
-        <td><strong>공용</strong>: <code>uk.icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>미국 동부, 미국 남부</td>
-        <td><strong>공용</strong>: <code>us.icr.io</code><br>
-        더 이상 사용되지 않음: <code>registry.ng.bluemix.net</code><br><br>
-        <strong>사설</strong>: <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        더 이상 사용되지 않음: <code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
       </tbody>
     </table>
 
-4. 선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig 및서비스로의 발신 네트워크 트래픽을 허용하십시오.
+4. 선택사항: 작업자 노드에서 {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig 및 서비스로의 발신 네트워크 트래픽을 허용하십시오.
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
         <em>&lt;monitoring_subnet&gt;</em>을 트래픽을 허용하려는 모니터링 지역에 대한 서브넷으로 대체하십시오.
@@ -464,7 +459,7 @@ subcollection: containers
 
 2. 클러스터에서 작업자 노드를 작성할 수 있도록 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오.
     1. 적합한 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오. [백엔드(사설) 네트워크](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network)를 참조하십시오.
-    2. 사용 중인 모든 [구역](/docs/containers?topic=containers-regions-and-zones#zones)에 대해 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오. 참고로, `dal01` 및 `wdc04` 구역에 대해 IP를 추가해야 합니다. [(백엔드/사설 네트워크의) 서비스 네트워크](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)를 참조하십시오.
+    2. 사용 중인 모든 [구역](/docs/containers?topic=containers-regions-and-zones#zones)에 대해 IBM Cloud 인프라(SoftLayer) 사설 IP 범위를 허용하십시오. `dal01`, `dal10`, `wdc04` 구역(클러스터가 유럽 지역에 있는 경우에는 `ams01` 구역까지)의 IP를 추가해야 한다는 점을 유의하십시오. [(백엔드/사설 네트워크의) 서비스 네트워크](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)를 참조하십시오.
 
 3. 다음 포트를 여십시오.
     - 작업자 노드 업데이트와 재로드가 허용되도록 작업자에서 포트 80 및 443으로 아웃바운드 TCP 및 UDP 연결을 허용하십시오.
@@ -473,7 +468,7 @@ subcollection: containers
     - Kubernetes 대시보드와 명령(예: `kubectl logs` 및 `kubectl exec`)에 대해 포트 10250으로의 인바운드 TCP 및 UDP 연결을 허용하십시오.
     - DNS 액세스용 TCP 및 UDP 포트 53에 대한 인바운드와 아웃바운드 연결을 허용하십시오.
 
-4. 공용 네트워크에도 방화벽이 있는 경우, 또는 사설 VLAN 전용 클러스터가 있으며 게이트웨이 어플라이언스를 방화벽으로 사용 중인 경우에는 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](#firewall_outbound)에 지정된 IP 주소 및 포트도 허용해야 합니다.
+4. 공용 네트워크에도 방화벽이 있는 경우, 또는 사설 VLAN 전용 클러스터가 있으며 게이트웨이 디바이스를 방화벽으로 사용 중인 경우에는 [클러스터가 인프라 리소스 및 기타 서비스에 액세스할 수 있도록 허용](#firewall_outbound)에 지정된 IP 및 포트도 허용해야 합니다. 
 
 <br />
 
@@ -490,7 +485,7 @@ subcollection: containers
   ```
   {: pre}
 
-2. 클러스터에서 172.20.0.1:2040 및 172.21.0.1:443(API 서버용)과 172.20.0.1:2041(etcd 로컬 프록시용)로 공용 트래픽을 허용하는 Calico 네트워크 정책을 작성하십시오. 
+2. 클러스터에서 172.20.0.1:2040 및 172.21.0.1:443(API 서버용)과 172.20.0.1:2041(etcd 로컬 프록시용)로 공용 트래픽을 허용하는 Calico 네트워크 정책을 작성하십시오.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -583,13 +578,13 @@ NodePort, 로드 밸런서 및 Ingress 서비스에 대한 수신 액세스를 �
       ```
       {: pre}
 
-    2. 이전 단계의 출력에서 클러스터의 작업자 노드에 대한 **공인 IP**의 고유 네트워크 ID(처음 세 옥텟)를 모두 기록해 두십시오.<staging> 사설 전용 클러스터를 화이트리스트로 지정하려면 대신 **사설 IP**를 기록해 두십시오.<staging> 다음 출력에서 고유 네트워크 ID는 `169.xx.178` 및 `169.xx.210`입니다.
+    2. 이전 단계의 출력에서 클러스터의 작업자 노드에 대한 **Public IP**의 고유 네트워크 ID(처음 세 옥텟)을 모두 기록해 두십시오. 사설 전용 클러스터를 화이트리스트 지정하려는 경우에는 **Private IP**를 대신 기록해 두십시오. 다음 출력에서 고유 네트워크 ID는 `169.xx.178` 및 `169.xx.210`입니다.
         ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  각 고유 네트워크 ID에 대한 VLAN 서브넷을 나열하십시오.
@@ -598,7 +593,7 @@ ID                                                 Public IP        Private IP  
         ```
         {: pre}
 
-출력 예:
+        출력 예:
         ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
         1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.Bluemix_notm}} の自治体ユース・ケース
@@ -39,9 +39,9 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} を使用すると、この行政官は公用データと民間データを組み合わせた斬新な価値を提供できます。 同様に、このサービスは、一体構造のオンプレミス・アプリからマイクロサービスをリファクタリングし、公開するためのパブリック・クラウド・プラットフォームを提供します。 また、パブリック・クラウドでは、自治体と公共の提携機関が、外部クラウド・サービスや、コラボレーションしやすいオープン・ソースのツール類を使用できます。
 
 主要なテクノロジー:    
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.cos_full_notm}} による公用データへのアクセスの提供](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [{{site.data.keyword.cos_full_notm}} による公用データへのアクセスの提供](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [プラグ・アンド・プレイの IBM Cloud アナリティクス・サービス](https://www.ibm.com/cloud/analytics)
 
 **コンテキスト: 自治体は公用データと民間データを組み合わせる地域の開発者とのコラボレーションを促進し、加速化しています**
@@ -117,7 +117,7 @@ CI/CD プロセス自体の多くは、{{site.data.keyword.contdelivery_full}} �
 {{site.data.keyword.Bluemix_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} では、政府と公共の提携機関が、外部クラウド・サービスや、コラボレーションしやすいオープン・ソースのツール類を使用できます。 コンテナーは、港湾当局と輸送会社の両方が、共有情報がセキュアなプラットフォーム上でホストされていると安心できるような共有可能なプラットフォームを提供しました。 さらにそのプラットフォームは、開発/テスト用の小規模なシステムから実動規模のシステムまで、段階に応じて拡大/縮小されます。 オープン・ツールチェーンを使用することによって、ビルド、テスト、デプロイメントが自動化されて、開発がさらに加速しました。
 
 主要なテクノロジー:    
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [コンテナーのセキュリティーと分離](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.containerlong_notm}} を使用する際の責任
@@ -60,7 +60,7 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
      <td align="center"><img src="images/icon_tools.svg" alt="レンチ・アイコン"/><br>管理対象クラスター</td>
      <td>
      **IBM の責任**:
-     <ul><li>{{site.data.keyword.containerlong_notm}} [API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/)、[CLI プラグイン](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)、[コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/clusters) など、クラスター管理を自動化するためのツールを提供します。</li>
+     <ul><li>{{site.data.keyword.containerlong_notm}} [API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/)、[CLI プラグイン](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)、[コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/clusters) など、クラスター管理を自動化するためのツールを提供します。</li>
      <li>Kubernetes マスターに OS、バージョン、およびセキュリティーのパッチ更新を自動的に適用します。 メジャー更新とマイナー更新を適用できるようにします。</li>
      <li>Ingress アプリケーション・ロード・バランサーやファイル・ストレージ・プラグインなど、クラスター内の運用 {{site.data.keyword.containerlong_notm}} および Kubernetes コンポーネントを更新およびリカバリーします。</li>
      <li>Kubernetes ワークロード構成ファイルなどの etcd でデータをバックアップおよびリカバリーします</li>
@@ -100,17 +100,17 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
       **お客様の責任**:
       <ul>
       <li>API、CLI、またはコンソール・ツールを使用して、提供された[セキュリティーのパッチ更新](/docs/containers?topic=containers-changelog#changelog)をワーカー・ノードに適用します。</li>
-      <li>[クラスター・ネットワーク](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)のセットアップ方法を選択し、追加の[セキュリティー設定](/docs/containers?topic=containers-security#security)を構成して、ワークロードのセキュリティーとコンプライアンスのニーズを満たします。 適用可能であれば、[ファイアウォール](/docs/containers?topic=containers-firewall#firewall)を構成します。</li></ul>
+      <li>[クラスター・ネットワーク](/docs/containers?topic=containers-plan_clusters)のセットアップ方法を選択し、追加の[セキュリティー設定](/docs/containers?topic=containers-security#security)を構成して、ワークロードのセキュリティーとコンプライアンスのニーズを満たします。 適用可能であれば、[ファイアウォール](/docs/containers?topic=containers-firewall#firewall)を構成します。</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="コードの括弧アイコン"/><br>アプリのオーケストレーション</td>
         <td>
         **IBM の責任**:
         <ul>
         <li>Kubernetes API にアクセスできるように、インストールされた Kubernetes コンポーネントでクラスターをプロビジョンします。</li>
-        <li>[Istio](/docs/containers?topic=containers-istio#istio) や [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial) など、多くの管理対象アドオンを提供して、アプリの機能を拡張します。IBM によって管理対象アドオンのインストールおよび更新が提供されるため、保守が簡素化されます。</li>
+        <li>[Istio](/docs/containers?topic=containers-istio#istio) や [Knative](/docs/containers?topic=containers-serverless-apps-knative) など、多くの管理対象アドオンを提供して、アプリの機能を拡張します。 IBM によって管理対象アドオンのインストールおよび更新が提供されるため、保守が簡素化されます。</li>
         <li>{{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}}、Portworx など、選択したサード・パーティーのパートナーシップ・テクノロジーとのクラスター統合を提供します。</li>
         <li>他の {{site.data.keyword.Bluemix_notm}} サービスへのサービス・バインディングを可能にする自動化を提供します。</li>
         <li>`default` Kubernetes 名前空間でのデプロイメントが {{site.data.keyword.registrylong_notm}} からイメージをプルできるように、イメージ・プル・シークレットを使用してクラスターを作成します。</li>
@@ -147,4 +147,4 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
 *   サービスまたはシステムに対する無許可の変更
 *   他のお客様の権利を侵害すること
 
-すべての使用条件については、[クラウド・サービスのご利用条件](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms)を参照してください。
+すべての使用条件については、[クラウド・サービスのご利用条件](/docs/overview/terms-of-use?topic=overview-terms#terms)を参照してください。

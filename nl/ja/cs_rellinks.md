@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **REST API**
 
-- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/)
-- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [クラスターでのロギング用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-logging/)
-- [クラスターでの Ingress アプリケーション・ロード・バランサーの管理用 REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [クラスター用の REST API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [クラスター用の REST API JSON ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [{{site.data.keyword.containerlong}} の継続的統合/継続的デリバリーをセットアップする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [VM アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [CF アプリをクラウドにマイグレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Knative を使用してクラスター内でサーバーレス・アプリを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative を使用してクラスター内でサーバーレス・アプリを実行する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/containers?topic=containers-serverless-apps-knative)
 - [実行時間が長いアプリのワークロードを Apache Kafka ベースのメッセージング・サービスを使用してオーケストレーションする ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Terraform によってクラスターへのデプロイメントを自動化する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [ユーザーとチームを編成する ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

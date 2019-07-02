@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # アノテーションを使用した Ingress のカスタマイズ
@@ -29,7 +31,7 @@ subcollection: containers
 Ingress アプリケーション・ロード・バランサー (ALB) に機能を追加するため、Ingress リソースにメタデータとしてアノテーションを指定できます。
 {: shortdesc}
 
-アノテーションを使用する前に、[Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング](/docs/containers?topic=containers-ingress)の手順に従い、Ingress サービス構成を適切にセットアップしてください。基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
+アノテーションを使用する前に、[Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング](/docs/containers?topic=containers-ingress)の手順に従い、Ingress サービス構成を適切にセットアップしてください。 基本構成で Ingress ALB をセットアップしたら、Ingress リソース・ファイルにアノテーションを追加して機能を拡張できます。
 {: note}
 
 <table>
@@ -1596,7 +1598,7 @@ spec:
   ```
   {: screen}
 
-5. 標準以外の TCP ポートを介してアプリにアクセスするように ALB を構成します。このリファレンスではサンプル YAML ファイルの `tcp-ports` アノテーションを使用します。
+5. 標準以外の TCP ポートを介してアプリにアクセスするように ALB を構成します。 このリファレンスではサンプル YAML ファイルの `tcp-ports` アノテーションを使用します。
 
 6. ALB リソースを作成するか、既存の ALB 構成を更新します。
   ```
@@ -1768,7 +1770,7 @@ ALB ドメイン・パスへの着信ネットワーク・トラフィックを�
 {:shortdesc}
 
 **説明**</br>
-Ingress ALB ドメインは、`mykubecluster.us-south.containers.appdomain.cloud/beans` への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、`/beans` ではなく `/coffee` で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、`/beans` 上の着信ネットワーク・トラフィックは `/coffee` パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用して区切ってください。
+Ingress ALB ドメインは、`mykubecluster.us-south.containers.appdomain.cloud/beans` への着信ネットワーク・トラフィックをアプリにルーティングします。 アプリは、`/beans` ではなく `/coffee` で listen します。 着信ネットワーク・トラフィックをアプリに転送するには、Ingress リソース構成ファイルに再書き込みアノテーションを追加します。 再書き込みアノテーションにより、`/beans` 上の着信ネットワーク・トラフィックは `/coffee` パスを使用してアプリに転送されるようになります。 複数のサービスを含める場合は、セミコロン (;) のみを使用してサービスを区切り、セミコロンの前後にはスペースを入れないでください。
 
 **サンプル Ingress リソース YAML**</br>
 
@@ -1817,7 +1819,7 @@ spec:
 ## プロキシー・バッファー・アノテーション
 {: #proxy-buffer}
 
-Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 プロキシー・バッファー・アノテーションを使用すると、データ・パケットの送受信時に ALB でデータをバッファーに入れる方法を構成できます。
+Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 プロキシー・バッファー・アノテーションを使用すると、データ・パケットの送受信時に ALB でデータをバッファーに入れる方法を構成できます。  
 {: shortdesc}
 
 ### ラージ・クライアント・ヘッダー・バッファー (`large-client-header-buffers`)
@@ -1881,7 +1883,7 @@ spec:
 **説明**</br>
 Ingress ALB は、バックエンド・アプリとクライアント Web ブラウザーの間のプロキシーとして機能します。 応答がバックエンド・アプリからクライアントに送信されると、デフォルトでは、応答データが ALB のバッファーに入れられます。 ALB は、クライアント応答をプロキシー処理し、クライアントのペースでクライアントに応答を送信し始めます。 バックエンド・アプリからのすべてのデータを ALB が受信すると、バックエンド・アプリへの接続は閉じられます。 ALB からクライアントへの接続は、クライアントがすべてのデータを受信するまで開いたままです。
 
-ALB での応答データのバッファリングを無効にすると、データは即時に ALB からクライアントに送信されます。 クライアントが、ALB のペースで着信データを処理できなければなりません。 クライアントの処理速度が遅すぎる場合は、データが失われる可能性があります。
+ALB での応答データのバッファリングを無効にすると、データは即時に ALB からクライアントに送信されます。 クライアントが、ALB のペースで着信データを処理できなければなりません。 クライアントの処理速度が遅すぎる場合は、クライアントの処理が追いつくまでアップストリーム接続は開いたままになります。
 
 ALB での応答データのバッファリングは、デフォルトでは有効です。
 
@@ -2347,7 +2349,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2371,6 +2373,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>オプション: クライアント本体の最大サイズを特定のサービスに適用するには、<code>&lt;<em>myservice</em>&gt;</code> をサービスの名前に置き換えます。サービス名を指定しない場合は、サイズはすべてのサービスに適用されます。この YAML の例の形式 <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> では、最初のサイズは <code>myservice</code> サービスに適用され、2 番目のサイズは他のすべてのサービスに適用されます。</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。 サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
 </tr>
@@ -2571,7 +2576,7 @@ spec:
 </tr>
 <tr>
 <td><code>idToken=false</code></td>
-<td>オプション: Liberty OIDC クライアントはアクセス・トークンと識別トークンの両方を同時に解析することはできません。Liberty を処理する場合は、この値を false に設定して、識別トークンが Liberty サーバーに送信されないようにしてください。</td>
+<td>オプション: Liberty OIDC クライアントはアクセス・トークンと識別トークンの両方を同時に解析することはできません。 Liberty を処理する場合は、この値を false に設定して、識別トークンが Liberty サーバーに送信されないようにしてください。</td>
 </tr>
 </tbody></table>
 
@@ -2587,9 +2592,9 @@ spec:
       3. **「作成」**をクリックします。
 
 2. アプリのリダイレクト URL を追加します。 リダイレクト URL は、アプリのコールバック・エンドポイントです。 フィッシング攻撃を防止するため、アプリ ID では、リダイレクト URL のホワイトリストを使用して要求 URL が検証されます。
-  1. {{site.data.keyword.appid_short_notm}} 管理コンソールで、**「ID プロバイダー」 > 「管理」**とナビゲートします。
-  2. ID プロバイダーが選択されていることを確認します。 ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
-  3. 「**Web リダイレクト URL の追加**」フィールドで、`http://<hostname>/<app_path>/appid_callback` または `https://<hostname>/<app_path>/appid_callback` という形式でアプリのリダイレクト URL を追加します。
+  1. {{site.data.keyword.appid_short_notm}} 管理コンソールで、**「認証の管理 (Manage Authentication)」**にナビゲートします。
+  2. **「ID プロバイダー**タブで、ID プロバイダーが選択されていることを確認します。ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
+  3. **「認証設定 (Authentication settings)」**タブで、アプリのリダイレクト URL を形式 `http://<hostname>/<app_path>/appid_callback` または `https://<hostname>/<app_path>/appid_callback` で追加します。
 
     {{site.data.keyword.appid_full_notm}} はログアウト機能を提供します。`/logout` が {{site.data.keyword.appid_full_notm}} パスに存在する場合は、Cookie が削除され、ユーザーはログイン・ページに戻されます。 この機能を使用するには、`/appid_logout` を `https://<hostname>/<app_path>/appid_logout` の形式でドメインに付加し、この URL をリダイレクト URL リストに含める必要があります。
     {: note}
@@ -2616,3 +2621,5 @@ spec:
   {: pre}
 
 5. バインド・シークレットとクラスター名前空間を使用して、`appid-auth` アノテーションを Ingress リソースに追加します。
+
+

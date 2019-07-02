@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}}의 의료 유스 케이스
@@ -39,7 +39,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}}를 사용해야 하는 이유: 환자 서비스를 개선하기 위해, 제공업체는 {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.contdelivery_full}}를 도입하여 안전한 플랫폼에서 IT 비용을 줄이고 개발을 가속화하고자 합니다. 이 제공업체에서 많이 사용되고 있으며 환자 기록 시스템과 비즈니스 보고 앱을 포함하고 있는 SaaS 시스템은 빈번한 업데이트를 필요로 합니다. 그러나 온프레미스 환경이 Agile 개발을 저해하고 있습니다. 또한 제공업체는 증가하는 인건비와 예산 감소에 대처하려 합니다.
 
 주요 기술:
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [수평적 확장](/docs/containers?topic=containers-app#highly_available_apps)
 * [컨테이너 보안 및 격리](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
@@ -87,7 +87,7 @@ subcollection: containers
 **3단계: 마이크로서비스와 Garage Method**
 * 앱을 협업 마이크로서비스의 세트로 다시 구성합니다. 이 세트는 품질 문제점이 가장 큰 앱의 기능 영역을 기반으로 하는 {{site.data.keyword.containerlong_notm}} 내에서 실행됩니다.
 * {{site.data.keyword.cloudant}}를 클라우드 내 데이터의 캐싱을 위해 고객이 제공한 키와 함께 사용합니다.
-* Continuous Integration 및 Continuous Delivery(CI/CD) 방법을 채택하여 개발자가 필요에 따라 고유한 스케줄로 마이크로서비스를 버전화하고 릴리스하도록 합니다. {{site.data.keyword.contdelivery_full}}는 CI/CD 프로세스를 위한 워크플로우 도구 체인, 이미지 작성 및 컨테이너 이미지에 대한 취약성 스캔을 제공합니다.
+* 지속적 통합 및 지속적 딜리버리(CI/CD) 방법을 채택하여 개발자가 필요에 따라 고유한 스케줄로 마이크로서비스를 버전화하고 릴리스하도록 합니다. {{site.data.keyword.contdelivery_full}}는 CI/CD 프로세스를 위한 워크플로우 도구 체인, 이미지 작성 및 컨테이너 이미지에 대한 취약성 스캔을 제공합니다.
 * IBM Garage Method의 반복적인 Agile 개발 방법을 채택하여 작동 중단 시간이 없는 새 기능, 패치 및 수정사항 릴리스를 가능하게 합니다.
 
 **기술적 솔루션**
@@ -104,14 +104,14 @@ subcollection: containers
 
 {{site.data.keyword.cloudant}}는 키-값부터 복잡한 문서 지향 데이터 저장 및 조회에 이르기까지, 다양한 데이터 중심 유스 케이스에 적합한 최신 NoSQL 데이터베이스입니다. 여러 앱 전체에서 사용자의 세션 데이터를 캐시함으로써 창구 배후 부문 RDBMS에 대한 조회를 최소화하기 위해 {{site.data.keyword.cloudant}}가 사용됩니다. 이러한 선택사항은 {{site.data.keyword.containerlong_notm}}에 있는 앱 전체에서 프론트 엔드 앱 사용성 및 성능을 향상시킵니다.
 
-컴퓨팅 워크로드를 {{site.data.keyword.cloud_notm}}로 이동하는 것만으로는 충분하지 않습니다. 제공업체는 프로세스 및 방법 또한 변경해야 합니다. 제공업체는 IBM Garage Method의 방법을 채택하여 CI/CD와 같은 최신 DevOps 방법을 지원하는 반복적인 Agile 제공 프로세스를 구현할 수 있습니다.
+컴퓨팅 워크로드를 {{site.data.keyword.cloud_notm}}로 이동하는 것만으로는 충분하지 않습니다. 제공업체는 프로세스 및 방법 또한 변경해야 합니다. 제공업체는 IBM Garage Method의 방법을 채택하여 CI/CD와 같은 최신 DevOps 방법을 지원하는 반복적인 Agile 전달 프로세스를 구현할 수 있습니다.
 
-대부분의 CI/CD 프로세스 자체는 클라우드에서 제공되는 IBM의 Continuous Delivery를 통해 자동화됩니다. 제공업체는 컨테이너 이미지를 준비하고, 취약성을 확인하고, 이를 Kubernetes 클러스터에 배치하는 데 사용되는 워크플로우 도구 체인을 정의할 수 있습니다.
+대부분의 CI/CD 프로세스 자체는 클라우드에서 제공되는 IBM의 Continuous Delivery 서비스를 통해 자동화됩니다. 제공업체는 컨테이너 이미지를 준비하고, 취약성을 확인하고, 이를 Kubernetes 클러스터에 배치하는 데 사용되는 워크플로우 도구 체인을 정의할 수 있습니다.
 
 **결과**
 * 제공업체는 가장 먼저 기존 모놀리식 VM을 클라우드에서 호스팅되는 컨테이너로 이동시킴으로써 자본 비용을 절약하는 동시에 최신 DevOps 방법을 배웁니다.
 * 모놀리식 앱을 세부 마이크로서비스의 세트로 다시 구성함으로써 패치, 버그 수정 및 새 기능의 제공 소요 시간이 크게 줄어듭니다.
-* 동시에, 제공자는 기존 기술 관련 부채를 관리하기 위해 시간이 제한된 단순 반복을 구현합니다.
+* 동시에, 제공업체는 기존 기술 관련 부채를 관리하기 위해 시간이 제한된 단순 반복을 구현합니다.
 
 ## 비영리 연구기관에서 파트너와의 연구 협력을 늘리면서 민감한 데이터를 안전하게 호스팅함
 {: #uc_research}
@@ -174,7 +174,7 @@ subcollection: containers
 
 전 세계에서의 가용성을 달성하기 위해 개발, 테스트 및 프로덕션 시스템이 세계 곳곳에 있는 여러 데이터 센터에 배치됩니다. 연구기관은 고가용성을 위해 다중 지역 클러스터 외에, 서로 다른 여러 지역의 클러스터 조합을 사용합니다. 이는 현지 유럽 규제를 준수하기 위해 프랑크푸르트 클러스터에 연구 앱을 손쉽게 배치할 수 있습니다. 또한 지역 내 가용성 및 장애 복구를 보장하기 위해 미국 클러스터에 앱을 배치할 수도 있습니다. 또한 유럽 앱의 가용성 및 효율적인 워크로드 밸런싱을 보장하기 위해 프랑크푸르트 내의 다중 구역 클러스터 간에 연구 워크로드를 분산시킵니다. 연구자들이 연구 공유 앱을 사용하여 민감한 데이터를 업로드하므로 앱의 클러스터는 더 엄격한 규제가 적용되는 지역에서 호스팅됩니다.
 
-개발자는 기존 도구를 사용하여 전문 분야의 문제점에 집중합니다. 이들은 고유 ML 코드를 작성하는 대신 {{site.data.keyword.cloud_notm}} 서비스를 클러스터에 바인드하여 ML 로직을 앱에 포함시킵니다. IBM이 Kubernetes와 인프라 업그레이드, 보안 등을 관리하므로 개발자는 또한 인프라 관리 태스크로부터도 자유로워집니다.
+개발자는 기존 도구를 사용하여 전문 분야의 문제점에 집중합니다. 이들은 고유 ML 코드를 작성하는 대신 {{site.data.keyword.cloud_notm}} 서비스를 클러스터에 바인드하여 ML 로직을 앱에 포함합니다. IBM이 Kubernetes와 인프라 업그레이드, 보안 등을 관리하므로 개발자는 또한 인프라 관리 태스크로부터도 자유로워집니다.
 
 **솔루션**
 

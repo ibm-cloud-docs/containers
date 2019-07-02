@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casi di utilizzo di vendita al dettaglio per {{site.data.keyword.cloud_notm}}
@@ -40,7 +40,7 @@ Un responsabile della linea di business deve aumentare i canali di vendita, ma i
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce un ecosistema di cloud pubblico, in cui i contenitori consentono a nuovi business partner e altri soggetti esterni di co-sviluppare applicazioni e dati, tramite le API. Ora che il sistema di vendita al dettaglio è sul cloud pubblico, le API semplificano anche la condivisione dei dati e lanciano il nuovo sviluppo di applicazioni. Le distribuzioni di applicazioni aumentano quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test con le toolchain.
 
 {{site.data.keyword.containerlong_notm}} e tecnologie chiave:
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -64,7 +64,7 @@ La soluzione è composta da questi componenti principali:
 
 Affinché il rivenditore lavori con business partner globali, le API di inventario hanno richiesto modifiche per adattarsi alle preferenze della lingua e del mercato di ciascuna regione. {{site.data.keyword.containerlong_notm}} offre copertura in più regioni, tra cui Nord America, Europa, Asia e Australia, in modo che le API riflettano le esigenze di ogni paese e garantiscano una bassa latenza per le chiamate API.
 
-Un altro requisito è che i dati di inventario siano condivisibili con i clienti dei business partner e della società. Con le API di inventario, gli sviluppatori possono fornire informazioni nelle applicazioni, ad esempio applicazioni di inventario per dispositivi mobili o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione del sito di e-commerce principale. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura.
+Un altro requisito è che i dati di inventario siano condivisibili con i clienti e i business partner della società. Con le API di inventario, gli sviluppatori possono fornire informazioni nelle applicazioni, ad esempio applicazioni di inventario per dispositivi mobili o soluzioni di e-commerce web. Gli sviluppatori sono anche impegnati nella creazione e manutenzione del sito di e-commerce principale. In sintesi, devono concentrarsi sulla codifica anziché sulla gestione dell'infrastruttura.
 
 Pertanto, hanno scelto {{site.data.keyword.containerlong_notm}} perché IBM semplifica la gestione dell'infrastruttura:
 * Gestione di master Kubernetes, IaaS e componenti operativi, come Ingress e archiviazione
@@ -128,7 +128,7 @@ Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm
 
 Tecnologie chiave:    
 * [Adattamento orizzontale per accelerare lo sviluppo](/docs/containers?topic=containers-app#highly_available_apps)
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Informazioni approfondite sulle tendenze del mercato con Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Gestione dell'inventario con {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)

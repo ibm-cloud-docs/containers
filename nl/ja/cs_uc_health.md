@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} の医療ユース・ケース
@@ -39,7 +39,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} を使用する理由: この医療機関は、患者サービスを向上させるために、{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.contdelivery_full}} を活用することにしました。これなら、すべてをセキュアなプラットフォーム上で IT 費用を削減し、開発を加速できるからです。 この医療機関で使用度が高い SaaS システム (患者記録システムと業務報告アプリの両方で構成される) は更新を頻繁に必要としていました。 しかし、オンプレミス環境で運用されていたので、アジャイル開発が進みませんでした。 また、この医療機関は、増加し続ける人件費と減少し続ける予算への対応策も必要としていました。
 
 主要なテクノロジー:
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [水平スケーリング](/docs/containers?topic=containers-app#highly_available_apps)
 * [コンテナーのセキュリティーと分離](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)

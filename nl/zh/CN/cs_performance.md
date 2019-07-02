@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 调整性能
 {: #kernel}
@@ -116,7 +118,7 @@ subcollection: containers
     ```
     {: pre}
 
-2. [重新引导集群中的所有工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)。工作程序节点恢复为应用了缺省值的联机状态。
+2. [重新引导集群中的所有工作程序节点](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)。工作程序节点恢复为应用了缺省值的联机状态。
 
 <br />
 
@@ -168,7 +170,7 @@ subcollection: containers
 
 度量值提供程序 pod 还有一个 `nanny` 容器，用于对 `metrics-server` 或 `heapster` 主容器的资源请求和限制进行调整，以响应集群中工作程序节点的数量。您可以通过编辑度量值提供程序的配置映射来更改缺省资源。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  打开集群度量值提供程序配置映射 YAML。
     *  对于 `metrics-server`：

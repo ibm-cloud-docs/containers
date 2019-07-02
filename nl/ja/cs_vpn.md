@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # VPN 接続のセットアップ
@@ -33,6 +33,8 @@ VPN 接続を使用すると、{{site.data.keyword.containerlong}} 上の Kubern
 ワーカー・ノードとアプリをオンプレミス・データ・センターに接続するには、以下のいずれかのオプションを構成します。
 
 - **strongSwan IPSec VPN サービス**: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/about.html) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPSec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、クラスター内のポッドに直接、[strongSwan IPSec VPN サービスを構成してデプロイします](#vpn-setup)。
+
+- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間の直接のプライベート接続を作成できます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングは、ハイブリッド・ワークロード、プロバイダー間ワークロード、大規模なデータ転送や頻繁なデータ転送、またはプライベート・ワークロードを実装する必要がある場合に役立ちます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングを選択し、{{site.data.keyword.Bluemix_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.Bluemix_notm}} Direct Link の資料の [IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。
 
 - **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) または [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) をセットアップして、IPSec VPN エンドポイントを構成することもできます。 このオプションは、クラスターが大きい場合、単一の VPN で複数のクラスターにアクセスする場合、ルート・ベース VPN が必要な場合に役立ちます。 VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
 
@@ -69,6 +71,9 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 * strongSwan Helm チャートは、クラスター内で Kubernetes ポッドとして実行されます。 VPN のパフォーマンスは、クラスター内で実行されている Kubernetes やその他のポッドのメモリーおよびネットワークの使用量の影響を受けます。 パフォーマンスが重要な環境の場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
 * strongSwan Helm チャートでは、IPSec トンネル・エンドポイントとして単一の VPN ポッドが実行されます。 ポッドに障害が発生すると、クラスターはポッドを再始動します。 ただし、新しいポッドが開始され、VPN 接続が再確立されるまで、わずかなダウン時間が発生する場合があります。 より迅速なエラー・リカバリーやより精緻な高可用性ソリューションが必要な場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
 * strongSwan Helm チャートでは、VPN 接続を介して流れるネットワーク・トラフィックのメトリックまたはモニターは提供されません。 サポートされるモニター・ツールのリストについては、[サービスのロギングとモニタリング](/docs/containers?topic=containers-supported_integrations#health_services)を参照してください。
+
+クラスター・ユーザーは、strongSwan VPN サービスを使用して、プライベート・サービス・エンドポイントを介して Kubernetes マスターに接続できます。ただし、プライベート・サービス・エンドポイントを介した Kubernetes マスターとの通信は、VPN 接続からルーティングできない <code>166.X.X.X</code> IP アドレス範囲を経由する必要があります。[プライベート・ネットワーク・ロード・バランサー (NLB) を使用して](/docs/containers?topic=containers-clusters#access_on_prem)、クラスター・ユーザーのマスターのプライベート・サービス・エンドポイントを公開できます。プライベート NLB は、strongSwan VPN ポッドがアクセスできる内部の `172.21.x.x` クラスター IP アドレスとして、マスターのプライベート・サービス・エンドポイントを公開します。プライベート・サービス・エンドポイントのみを有効にする場合は、Kubernetes ダッシュボードを使用するか、パブリック・サービス・エンドポイントを一時的に有効にして、プライベート NLB を作成できます。
+{: tip}
 
 <br />
 
@@ -147,8 +152,8 @@ VPN 接続がマルチゾーン・クラスターからのアウトバウンド�
       - `zoneSpecificRoutes`: `true` に設定します。 この設定は、VPN 接続をクラスター内の単一のゾーンに制限します。 特定のゾーン内のポッドは、その特定のゾーン用にセットアップされた VPN 接続のみを使用します。 この方法では、マルチゾーン・クラスターで複数の VPN をサポートするために必要になる strongSwan ポッドの数が減ります。また、VPN トラフィックが現在のゾーンのワーカー・ノードにしか転送されないので、VPN のパフォーマンスが向上します。さらに、各ゾーンの VPN 接続が、他のゾーンの VPN 接続、ポッドのクラッシュ、ゾーン障害の影響を受けなくなります。 `remoteSubnetNAT` は構成する必要がないことに注意してください。 `zoneSpecificRoutes` 設定を使用する場合は、ルーティングがゾーンごとにセットアップされるので、複数の VPN に同じ `remote.subnet` を指定できます。
       - `enableSingleSourceIP`: `true` に設定し、`local.subnet` に単一の /32 IP アドレスを設定します。 この組み合わせの設定により、単一の /32 IP アドレスの背後にあるクラスターのすべてのプライベート IP アドレスが隠されます。 この固有の /32 IP アドレスにより、リモートのオンプレミス・ネットワークは、要求を開始したクラスター内の正しいポッドに正しい VPN 接続を介して応答を送り返すことができます。 `local.subnet` オプションに設定する単一の /32 IP アドレスは、各 strongSwan VPN 構成内で固有でなければならないことに注意してください。
     * リモートのオンプレミス・ネットワーク内のアプリケーションがクラスター内のサービスにアクセスする必要がある場合    
-      - `localSubnetNAT`: オンプレミスのリモート・ネットワーク内のアプリケーションが、クラスターとの間でトラフィックを送受信するために特定の VPN 接続を選択できることを確認します。 各 strongSwan Helm 構成で、リモートのオンプレミス・アプリケーションからアクセスできるクラスター・リソースを、`localSubnetNAT` を使用して一意に識別します。 リモートのオンプレミス・ネットワークからクラスターには複数の VPN が確立されるので、オンプレミス・ネットワーク上のアプリケーションに、クラスター内のサービスにアクセスするときに使用すべき VPN を選択できるようにするロジックを追加する必要があります。 各 strongSwan VPN 構成の `localSubetNAT` に構成した内容に応じて、クラスター内のサービスに複数の異なるサブネットからアクセスできることに注意してください。
-      - `remoteSubnetNAT`: クラスター内のポッドが同じ VPN 接続を使用してトラフィックをリモート・ネットワークに返すようにします。 各 strongSwan デプロイメント・ファイルで、`remoteSubetNAT` 設定を使用して、リモートのオンプレミス・サブネットを固有のサブネットにマップします。 クラスター内のポッドによって VPN 固有の `remoteSubetNAT` から受信されたトラフィックは、その同じ VPN 固有の `remoteSubnetNAT` に送信され、その後、同じ VPN 接続を介して送り返されます。
+      - `localSubnetNAT`: オンプレミスのリモート・ネットワーク内のアプリケーションが、クラスターとの間でトラフィックを送受信するために特定の VPN 接続を選択できることを確認します。 各 strongSwan Helm 構成で、リモートのオンプレミス・アプリケーションからアクセスできるクラスター・リソースを、`localSubnetNAT` を使用して一意に識別します。 リモートのオンプレミス・ネットワークからクラスターには複数の VPN が確立されるので、オンプレミス・ネットワーク上のアプリケーションに、クラスター内のサービスにアクセスするときに使用すべき VPN を選択できるようにするロジックを追加する必要があります。 各 strongSwan VPN 構成の `localSubnetNAT` に構成した内容に応じて、クラスター内のサービスに複数の異なるサブネットからアクセスできることに注意してください。
+      - `remoteSubnetNAT`: クラスター内のポッドが同じ VPN 接続を使用してトラフィックをリモート・ネットワークに返すようにします。 各 strongSwan デプロイメント・ファイルで、`remoteSubnetNAT` 設定を使用して、リモートのオンプレミス・サブネットを固有のサブネットにマップします。 クラスター内のポッドによって VPN 固有の `remoteSubnetNAT` から受信されたトラフィックは、その同じ VPN 固有の `remoteSubnetNAT` に送信され、その後、同じ VPN 接続を介して送り返されます。
 
 3. リモートの VPN エンドポイント・ソフトウェアを、すべてのゾーンのロード・バランサー IP に個々に VPN 接続を確立するように構成します。
 
@@ -162,9 +167,9 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 {: shortdesc}
 
 開始前に、以下のことを行います。
-* [オンプレミス・データ・センターに IPSec VPN ゲートウェイをインストールします](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection)。
+* オンプレミス・データ・センターに IPSec VPN ゲートウェイをインストールします。
 * `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
-* [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **注意**: 標準クラスターでは、すべての strongSwan 構成を使用できます。 フリー・クラスターを使用する場合は、[ステップ 3](#strongswan_3) のアウトバウンド VPN 接続のみを選択できます。インバウンド VPN 接続のためには、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
 
 ### ステップ 1: strongSwan Helm チャートの取得
@@ -653,9 +658,6 @@ strongSwan Helm チャートを最新バージョンにアップグレードす�
   ```
   {: pre}
 
-strongSwan 2.0.0 Helm チャートは Calico v3 または Kubernetes 1.10 では機能しません。 [クラスターを 1.10 に更新する](/docs/containers?topic=containers-cs_versions#cs_v110)前に、まず、Calico 2.6 および Kubernetes 1.9 との後方互換性がある 2.2.0 以降の Helm チャートに strongSwan を更新してください。 次に、strongSwan Helm チャートを削除します。 それから、更新後にチャートを再インストールすることができます。
-{:tip}
-
 ## strongSwan IPSec VPN サービスの無効化
 {: vpn_disable}
 
@@ -692,11 +694,11 @@ Helm チャートを削除して、VPN 接続を無効にすることができ�
 
 Virtual Router Appliance をセットアップするには、以下のようにします。
 
-1. [VRA を注文します](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance)。
+1. [VRA を注文します](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started)。
 
 2. [VRA 上でプライベート VLAN を構成します](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans)。
 
 3. VRA を使用して VPN 接続を有効にするには、[VRA 上で VRRP を構成します](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp)。
 
-既存のルーター・アプライアンスがある場合にクラスターを追加すると、クラスター用に注文した新しいポータブル・サブネットは、ルーター・アプライアンス上に構成されません。 ネットワーク・サービスを使用するには、[VLAN スパンニングを有効にして](/docs/containers?topic=containers-subnets#subnet-routing)、同じ VLAN 上のサブネット間の転送を可能にする必要があります。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+既存のルーター・アプライアンスがある場合にクラスターを追加すると、クラスター用に注文した新しいポータブル・サブネットは、ルーター・アプライアンス上に構成されません。 ネットワーク・サービスを使用するには、[VLAN スパンニングを有効にして](/docs/containers?topic=containers-subnets#subnet-routing)、同じ VLAN 上のサブネット間の転送を可能にする必要があります。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 {: important}

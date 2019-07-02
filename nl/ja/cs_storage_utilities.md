@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud ストレージ・ユーティリティー
@@ -502,7 +504,7 @@ subcollection: containers
 
 **始める前に**:
 - 未フォーマットおよび未マウントのロー・ブロック・ストレージを非 SDS ワーカー・ノードに対して[自動的に](#automatic_block)または[手動で](#manual_block)作成済みであることを確認します。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **ロー・ブロック・ストレージを非 SDS ワーカー・ノードに接続するには、以下のようにします**。
 1. PV の作成を準備します。  
@@ -575,7 +577,7 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>既に取得したブロック・ストレージ・デバイスの lun ID を入力します。 </td>
+        <td>既に取得したブロック・ストレージ・デバイスの LUN ID を入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
@@ -645,3 +647,5 @@ subcollection: containers
 
 ボリュームを切り離す場合は、PV を削除します。 切り離されたボリュームは、特定のワーカー・ノードによるアクセスが引き続き許可されて、異なるボリュームを同じワーカー・ノードに接続するために {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスを使用して新しい PV を作成したときに再接続されます。 元の切り離されたボリュームが再接続されることを回避するには、`ibmcloud sl block access-revoke` コマンドを使用して、ワーカー・ノードが切り離されたボリュームにアクセスすることを禁止してください。 ボリュームを切り離しても、そのボリュームは IBM Cloud インフラストラクチャー (SoftLayer) アカウントから削除されません。 ボリュームの課金をキャンセルするには、[該当ストレージを IBM Cloud インフラストラクチャー (SoftLayer) アカウントから手動で削除する必要があります](/docs/containers?topic=containers-cleanup)。
 {: note}
+
+

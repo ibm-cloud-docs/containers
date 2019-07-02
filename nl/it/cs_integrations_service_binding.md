@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Aggiunta di servizi attraverso il bind del servizio IBM Cloud
@@ -35,8 +37,7 @@ Quando aggiungi servizi {{site.data.keyword.Bluemix_notm}} al tuo cluster, puoi 
 Per trovare un elenco dei servizi {{site.data.keyword.Bluemix_notm}} supportati, vedi il [catalogo {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
 
 **Cosa è un bind del servizio {{site.data.keyword.Bluemix_notm}}?**</br>
-Il bind del servizio ti consente di creare rapidamente le credenziali per un servizio {{site.data.keyword.Bluemix_notm}} e archiviarle in un segreto Kubernetes nel tuo cluster. Per eseguire il bind di un servizio al tuo cluster, devi innanzitutto eseguire il provisioning di un'istanza del servizio. Quindi, utilizzi il [comando `ibmcloud ks cluster-service-bind`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind) per creare le credenziali del servizio e il segreto
-Kubernetes. Il segreto Kubernetes viene crittografato automaticamente in etcd per proteggere i tuoi dati.
+Il bind del servizio ti consente di creare rapidamente le credenziali per un servizio {{site.data.keyword.Bluemix_notm}} e archiviarle in un segreto Kubernetes nel tuo cluster. Per eseguire il bind di un servizio al tuo cluster, devi innanzitutto eseguire il provisioning di un'istanza del servizio. Quindi, utilizzi il [comando `ibmcloud ks cluster-service-bind`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) per creare le credenziali del servizio e il segreto Kubernetes. Il segreto Kubernetes viene crittografato automaticamente in etcd per proteggere i tuoi dati.
 
 Vuoi rendere i tuoi segreti ancora più sicuri? Chiedi al tuo amministratore cluster di [abilitare {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) nel tuo cluster per crittografare i segreti nuovi ed esistenti, come ad esempio il segreto che memorizza le credenziali delle tue istanze del servizio {{site.data.keyword.Bluemix_notm}}.
 {: tip}
@@ -44,7 +45,6 @@ Vuoi rendere i tuoi segreti ancora più sicuri? Chiedi al tuo amministratore clu
 **Posso utilizzare tutti i servizi {{site.data.keyword.Bluemix_notm}} nel mio cluster?**</br>
 Puoi utilizzare il bind dei servizi solo per i servizi che supportano chiavi del servizio, cosicché le credenziali del servizio possano essere create e archiviate automaticamente in un segreto
 Kubernetes. Per trovare un elenco dei servizi che supportano le chiavi del servizio, vedi [Abilitazione di applicazioni esterne a utilizzare servizi {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
-
 
 I servizi che non supportano le chiavi del servizio di solito forniscono un'API che puoi utilizzare nella tua applicazione. Il metodo di bind del servizio non configura automaticamente l'accesso API per la tua applicazione. Assicurati di rivedere la documentazione API del tuo servizio e implementare l'interfaccia API nella tua applicazione.
 
@@ -60,7 +60,7 @@ Prima di iniziare:
 Editor o Amministratore](/docs/containers?topic=containers-users#platform) per il cluster in cui desideri eseguire il bind di un servizio
     - [Ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi Kubernetes in cui desideri eseguire il bind del servizio
     - Per i servizi Cloud Foundry: [ruolo Cloud Foundry **Sviluppatore**](/docs/iam?topic=iam-mngcf#mngcf) per lo spazio in cui desideri eseguire il provisioning del servizio
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per aggiungere un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster:
 
@@ -179,7 +179,7 @@ Le credenziali di un'istanza del servizio hanno una codifica base64 e sono archi
 
 Prima di iniziare:
 -  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Aggiungi un servizio {{site.data.keyword.Bluemix_notm}} al tuo cluster](#bind-services).
 
 ### Montaggio del segreto come un volume al tuo pod
@@ -222,7 +222,7 @@ corretto.
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -378,7 +378,7 @@ corretto.
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -456,16 +456,16 @@ corretto.
    ```
    {: codeblock}
 
-8. Facoltativo: come precauzione, aggiungi la gestione degli errori alla tua applicazione nel caso in cui la variabile di ambiente `BINDING` non sia impostata correttamente. 
-   
-   Codice di esempio in Java: 
+8. Facoltativo: come precauzione, aggiungi la gestione degli errori alla tua applicazione nel caso in cui la variabile di ambiente `BINDING` non sia impostata correttamente.
+
+   Codice di esempio in Java:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Codice di esempio in Node.js:
    ```js
    if (!process.env.BINDING) {
@@ -474,4 +474,3 @@ corretto.
    }
    ```
    {: codeblock}
-

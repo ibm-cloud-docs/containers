@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-# Obsoleto: Introduzione ai cluster in {{site.data.keyword.Bluemix_dedicated_notm}}
+# Obsoleto: Cloud dedicato
 {: #dedicated}
 
 {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_dedicated_notm}} è obsoleto. Non puoi creare cluster in un ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Per creare cluster in {{site.data.keyword.Bluemix_notm}} Public, consulta [Introduzione a {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started).
@@ -91,7 +92,7 @@ per accedere pubblicamente al tuo servizio nel cluster.</td>
 dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) o il [provisioning
 statico](/docs/containers?topic=containers-kube_concepts#static_provisioning) dei volumi.</td>
  <td>Utilizza il [provisioning
-dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) dei volumi. [Apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) per richiedere un backup per i tuoi volumi, richiedere il ripristino dai tuoi volumi e per eseguire altre funzioni di archiviazione.</li></ul></td>
+dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) dei volumi. [Apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support) per richiedere un backup per i tuoi volumi, richiedere il ripristino dai tuoi volumi e per eseguire altre funzioni di archiviazione.</li></ul></td>
  </tr>
  <tr>
  <td>URL del registro di immagini in {{site.data.keyword.registryshort_notm}}</td>
@@ -106,13 +107,14 @@ Kubernetes](#cs_dedicated_tokens) per l'autenticazione.</li></ul></td>
  </tr>
  <tr>
  <td>Cluster multizona</td>
- <td>Crea [cluster multizona](/docs/containers?topic=containers-plan_clusters#multizone) aggiungendo più zone ai tuoi pool di nodi di lavoro.</td>
- <td>Crea [cluster a zona singola](/docs/containers?topic=containers-plan_clusters#single_zone). La zona disponibile è stata predefinita al momento della configurazione dell'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Per impostazione predefinita, un cluster a zona singola è impostato con un pool di nodi di lavoro denominato `default`. Il pool di nodi di lavoro raggruppa i nodi di lavoro con la stessa configurazione, ad esempio il tipo di macchina, che hai definito durante la creazione del cluster. Puoi aggiungere altri nodi di lavoro al tuo cluster [ridimensionando un pool di nodi di lavoro esistente](/docs/containers?topic=containers-clusters#resize_pool) o [aggiungendo un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-clusters#add_pool). Quando aggiungi un pool di nodi di lavoro, devi aggiungere la zona disponibile al pool di nodi di lavoro in modo tale che i nodi di lavoro possano essere distribuiti nella stessa zona. Tuttavia, non puoi aggiungere altre zone ai tuoi pool di nodi di lavoro.</td>
+ <td>Crea [cluster multizona](/docs/containers?topic=containers-ha_clusters#multizone) aggiungendo più zone ai tuoi pool di nodi di lavoro.</td>
+ <td>Crea [cluster a zona singola](/docs/containers?topic=containers-ha_clusters#single_zone). La zona disponibile è stata predefinita al momento della configurazione dell'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Per impostazione predefinita, un cluster a zona singola è impostato con un pool di nodi di lavoro denominato `default`. Il pool di nodi di lavoro raggruppa i nodi di lavoro con la stessa configurazione, ad esempio il tipo di macchina, che hai definito durante la creazione del cluster. Puoi aggiungere altri nodi di lavoro al tuo cluster [ridimensionando un pool di nodi di lavoro esistente](/docs/containers?topic=containers-add_workers#resize_pool) o [aggiungendo un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool). Quando aggiungi un pool di nodi di lavoro, devi aggiungere la zona disponibile al pool di nodi di lavoro in modo tale che i nodi di lavoro possano essere distribuiti nella stessa zona. Tuttavia, non puoi aggiungere altre zone ai tuoi pool di nodi di lavoro.</td>
  </tr>
 </tbody></table>
 {: caption="Differenze delle funzioni tra {{site.data.keyword.Bluemix_notm}} pubblico e {{site.data.keyword.Bluemix_dedicated_notm}}" caption-side="top"}
 
 <br />
+
 
 
 ### Architettura del servizio
@@ -207,13 +209,13 @@ Per consentire agli utenti {{site.data.keyword.Bluemix_dedicated_notm}} di acced
         ```
         {: pre}
 
-        Gli utenti invitati che hanno un ID IBM esistente hanno uno stato di `ATTIVO`. Gli utenti invitati che non hanno un ID IBM esistente hanno lo stato di `IN SOSPESO` prima di accettare l'invito e `ATTIVO` dopo averlo accettato.
+        Gli utenti invitati che hanno un ID IBM esistente hanno uno stato di `ACTIVE`. Gli utenti invitati che non hanno un ID IBM esistente hanno lo stato di `PENDING` prima di accettare l'invito e `ACTIVE` dopo averlo accettato.
 
 3.  Se un utente ha bisogno dei privilegi per creare un cluster, devi concedere il ruolo amministratore a tale utente.
 
     1.  Dalla barra dei menu nella console pubblica, fai clic su **Gestisci > Sicurezza > Identità e accesso** e fai clic su **Utenti**.
 
-    2.  Dalla riga dell'utente a cui vuoi assegnare l'accesso, seleziona il menu **Azioni** e fai clic su **Assegna accesso**.
+    2.  Dalla riga per l'utente per l'assegnazione dell'accesso, seleziona il menu **Azioni** e fai clic su **Assegna accesso**.
 
     3.  Seleziona **Assegna l'accesso alle risorse**.
 
@@ -279,7 +281,7 @@ Kubernetes**.
 
 5. Configura i tuoi dettagli del cluster.
 
-    1. Immetti un **Nome cluster**. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+    1. Immetti un **Nome cluster**. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Utilizza un nome che sia univoco tra le regioni. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
 
     2. Seleziona la **Zona** in cui distribuire il tuo cluster. La zona disponibile è stata predefinita al momento della configurazione dell'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}.
 
@@ -289,17 +291,17 @@ Kubernetes**.
 
         - **Virtuale - Dedicato**: i tuoi nodi di lavoro sono ospitati sull'infrastruttura dedicata al tuo account. Le tue risorse fisiche sono completamente isolate.
 
-        - **Bare Metal**: il provisioning dei server bare metal, con fatturazione mensile, viene eseguito manualmente mediante l'infrastruttura IBM Cloud (SoftLayer) dopo il tuo ordine e il completamento di questo processo può richiedere più di un giorno lavorativo. Bare metal è più adatto per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. 
+        - **Bare Metal**: il provisioning dei server bare metal, con fatturazione mensile, viene eseguito manualmente mediante l'infrastruttura IBM Cloud (SoftLayer) dopo il tuo ordine e il completamento di questo processo può richiedere più di un giorno lavorativo. Bare metal è più adatto per le applicazioni ad alte prestazioni che richiedono più risorse e controllo host. Per degli specifici tipi di macchina, puoi anche scegliere di abilitare [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) per verificare possibili tentativi di intrusione nei tuoi nodi di lavoro. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.
 
         Assicurati di voler eseguire il provisioning di una macchina bare metal. Poiché viene fatturata mensilmente, se la annulli immediatamente dopo un ordine effettuato per errore, ti viene comunque addebitato l'intero mese.
         {:tip}
 
-    5. Seleziona un **Tipo di macchina**. Il tipo di macchina definisce la quantità di CPU virtuale, di memoria e di spazio disco configurata in ogni nodo di lavoro e resa disponibile ai contenitori. I tipi di macchine bare metal e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-type`. Dopo aver creato il tuo cluster, puoi aggiungere diversi tipi di macchina aggiungendo un nodo di lavoro al cluster.
+    5. Seleziona un **Tipo di macchina**. Il tipo di macchina definisce la quantità di CPU virtuale, di memoria e di spazio disco configurata in ogni nodo di lavoro e resa disponibile ai contenitori. I tipi di macchine bare metal e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-type`. Dopo aver creato il tuo cluster, puoi aggiungere diversi tipi di macchina aggiungendo un nodo di lavoro al cluster.
 
     6. Scegli il **Numero di nodi di lavoro** di cui hai bisogno. Seleziona `3` per assicurare l'alta disponibilità al tuo cluster.
 
     7. Seleziona una **VLAN pubblica** (facoltativo) e una **VLAN privata** (obbligatorio). Le VLAN pubbliche e private disponibili vengono predefinite quando viene configurato l'ambiente {{site.data.keyword.Bluemix_dedicated_notm}}. Entrambe le VLAN comunicano con i nodi di lavoro ma la VLAN pubblica anche con il master Kubernetes gestito da IBM. Puoi utilizzare la stessa VLAN per più cluster.
-        Se i nodi di lavoro sono configurati solo con una VLAN privata, devi consentire le comunicazioni tra i nodi di lavoro e il master cluster [abilitando l'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) o [configurando un dispositivo gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).
+        Se i nodi di lavoro sono configurati solo con una VLAN privata, devi consentire le comunicazioni tra i nodi di lavoro e il master cluster [abilitando l'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) o [configurando un dispositivo gateway](/docs/containers?topic=containers-plan_clusters#workeruser-master).
         {: note}
 
     8. Per impostazione predefinita, **Codifica disco locale** è selezionato. Se scegli di deselezionare la casella di spunta, i dati di runtime del contenitore dell'host non vengono crittografati. [Ulteriori informazioni sulla crittografia](/docs/containers?topic=containers-security#encrypted_disk).
@@ -322,7 +324,19 @@ Kubernetes**.
     Se disponi di un ID federato, utilizza `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` per accedere alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti il tuo nome utente e usa l'URL fornito nell'output della CLI per richiamare la tua passcode monouso. Sai che hai un ID federato quando l'accesso ha esito negativo senza `--sso` e positivo con l'opzione `--sso`.
     {: tip}
 
-3.  Per selezionare una regione, esegui `ibmcloud ks region-set`.
+3.  Indica come destinazione un endpoint regionale. Sono supportati i seguenti endpoint regionali:
+  * Dallas (Stati Uniti Sud, us-south): `https://us-south.containers.cloud.ibm.com`
+  * Francoforte (Europa Centrale, eu-de): `https://eu-de.containers.cloud.ibm.com`
+  * Londra (Regno Unito Sud, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+  * Sydney (Asia Pacifico Sud, au-syd): `https://au-syd.containers.cloud.ibm.com`
+  * Tokyo (Asia Pacifico Nord, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
+  * Washington, D.C. (Stati Uniti Est, us-east): `https://us-east.containers.cloud.ibm.com`
+  ```
+  ibmcloud ks init --host <endpoint>
+  ```
+  {: pre}
+  Non puoi utilizzare l'endpoint globale: `https://containers.cloud.ibm.com`. Devi indicare come destinazione un endpoint regionale per creare o gestire i cluster in tale regione.
+  {: important}
 
 4.  Crea un cluster con il comando `cluster-create`. Quando crei un cluster standard, l'hardware del nodo di lavoro viene addebitato in base alle ore di utilizzo.
 
@@ -349,11 +363,11 @@ Kubernetes**.
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>Immetti un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-type`.</td>
+    <td>Immetti un tipo di macchina. Puoi distribuire i tuoi nodi di lavoro come macchine virtuali su hardware dedicato o come macchine fisiche su bare metal. I tipi di macchine fisiche e virtuali disponibili variano in base alla zona in cui distribuisci il cluster. Per ulteriori informazioni, consulta la documentazione per il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-type`. </td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Immetti l'Id della VLAN pubblica che il tuo ambiente dedicato è configurato a utilizzare. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione.<p class="note">Se i nodi di lavoro sono configurati solo con una VLAN privata, devi consentire le comunicazioni tra i nodi di lavoro e il master cluster [abilitando l'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private) o [configurando un dispositivo gateway](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway).</p></td>
+    <td>Immetti l'Id della VLAN pubblica che il tuo ambiente dedicato è configurato a utilizzare. Se vuoi collegare i tuoi nodi di lavoro solo a una VLAN privata, non specificare questa opzione.<p class="note">Se i nodi di lavoro sono configurati solo con una VLAN privata, devi consentire le comunicazioni tra i nodi di lavoro e il master cluster [abilitando l'endpoint del servizio privato](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) o [configurando un dispositivo gateway](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -361,7 +375,7 @@ Kubernetes**.
     </tr>  
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>Immetti un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
+    <td>Immetti un nome per il tuo cluster. Il nome deve iniziare con una lettera, può contenere lettere, numeri e un trattino (-) e non può contenere più di 35 caratteri. Utilizza un nome che sia univoco tra le regioni. Il nome cluster e la regione in cui viene distribuito il cluster formano il nome dominio completo per il dominio secondario Ingress. Per garantire che il dominio secondario Ingress sia univoco all'interno di una regione, è possibile che il nome cluster venga troncato e vi venga aggiunto un valore casuale all'interno del nome dominio Ingress.
 </td>
     </tr>
     <tr>
@@ -370,7 +384,7 @@ Kubernetes**.
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-    <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili, esegui <code>ibmcloud ks kube-versions</code>.
+    <td>La versione di Kubernetes per il nodo master del cluster. Questo valore è facoltativo. Quando la versione non viene specificata, il cluster viene creato con l'impostazione predefinita delle versioni di Kubernetes supportate. Per visualizzare le versioni disponibili, esegui <code>ibmcloud ks versions</code>.
 </td>
     </tr>
     <tr>
@@ -379,7 +393,7 @@ Kubernetes**.
     </tr>
     <tr>
     <td><code>--trusted</code></td>
-    <td>Abilita [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td>
+    <td>Abilita [Trusted Compute](/docs/containers?topic=containers-security#trusted_compute) per verificare i tentativi di intrusione nei tuoi nodi di lavoro bare metal. Se non abiliti l'attendibilità durante la creazione del cluster ma vuoi farlo in seguito, puoi usare il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Dopo aver abilitato l'attendibilità, non puoi disabilitarla successivamente.</td>
     </tr>
     </tbody></table>
 
@@ -391,16 +405,16 @@ Kubernetes**.
     {: pre}
 
     * Per le macchine virtuali, possono essere necessari alcuni minuti per l'ordine delle macchine del nodo di lavoro e per la configurazione e il provisioning del cluster nel tuo account. Il provisioning delle macchine fisiche bare metal viene eseguito tramite l'interazione manuale con l'infrastruttura Cloud IBM (SoftLayer) e il completamento di questo processo può richiedere più di un giorno lavorativo.
-    * Se visualizzi il seguente messaggio di errore, [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+    * Se visualizzi il seguente messaggio di errore, [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support).
         ```
         Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile inserire l'ordine. Le risorse dietro il router 'router_name' non sono sufficienti a soddisfare la richiesta per i seguenti guest: 'worker_id'.
         ```
 
-    Quando è stato terminato il provisioning del tuo cluster, lo stato del tuo cluster viene modificato in **distribuito**.
+    Una volta completato il provisioning del tuo cluster, lo stato del tuo cluster viene modificato in **deployed**.
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.13.6      Default
     ```
     {: screen}
 
@@ -411,14 +425,14 @@ Kubernetes**.
     ```
     {: pre}
 
-    Quando i nodi di lavoro sono pronti, la condizione passa a **normale** e lo stato è **Pronto**. Quando lo stato del nodo è **Pronto**, puoi accedere al cluster.
+    Quando i nodi di lavoro sono pronti, la condizione passa a **normal** e lo stato è **Ready**. Quando lo stato del nodo è **Ready**, puoi accedere al cluster.
 
     A ogni nodo di lavoro viene assegnato un ID e nome dominio univoco che non deve essere modificato manualmente dopo la creazione del cluster. La modifica dell'ID o del nome dominio impedisce al master Kubernetes di gestire il tuo cluster.
     {: important}
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -481,7 +495,7 @@ Kubernetes**.
 ### Aggiunta di nodi di lavoro
 {: #add_workers_dedicated}
 
-Con un {{site.data.keyword.Bluemix_dedicated_notm}}, puoi creare solo [cluster a zona singola](/docs/containers?topic=containers-plan_clusters#single_zone). Per impostazione predefinita, un cluster a zona singola è impostato con un pool di nodi di lavoro denominato `default`. Il pool di nodi di lavoro raggruppa i nodi di lavoro con la stessa configurazione, ad esempio il tipo di macchina, che hai definito durante la creazione del cluster. Puoi aggiungere altri nodi di lavoro al tuo cluster [ridimensionando un pool di nodi di lavoro esistente](/docs/containers?topic=containers-clusters#resize_pool) o [aggiungendo un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-clusters#add_pool). Quando aggiungi un pool di nodi di lavoro, devi aggiungere la zona disponibile al pool di nodi di lavoro in modo tale che i nodi di lavoro possano essere distribuiti nella stessa zona. Tuttavia, non puoi aggiungere altre zone ai tuoi pool di nodi di lavoro.
+Con un {{site.data.keyword.Bluemix_dedicated_notm}}, puoi creare solo [cluster a zona singola](/docs/containers?topic=containers-ha_clusters#single_zone). Per impostazione predefinita, un cluster a zona singola è impostato con un pool di nodi di lavoro denominato `default`. Il pool di nodi di lavoro raggruppa i nodi di lavoro con la stessa configurazione, ad esempio il tipo di macchina, che hai definito durante la creazione del cluster. Puoi aggiungere altri nodi di lavoro al tuo cluster [ridimensionando un pool di nodi di lavoro esistente](/docs/containers?topic=containers-add_workers#resize_pool) o [aggiungendo un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool). Quando aggiungi un pool di nodi di lavoro, devi aggiungere la zona disponibile al pool di nodi di lavoro in modo tale che i nodi di lavoro possano essere distribuiti nella stessa zona. Tuttavia, non puoi aggiungere altre zone ai tuoi pool di nodi di lavoro.
 {: shortdesc}
 
 ### Utilizzo dei registri di immagini pubblici e privati
@@ -511,12 +525,12 @@ Requisiti:
 
 Prima di iniziare: configura l'instradamento del traffico di rete in entrata e in uscita della tua rete aziendale alla rete {{site.data.keyword.Bluemix_dedicated_notm}} che utilizzerà la sottorete gestita dall'utente.
 
-1. Per utilizzare la tua propria sottorete, [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) e fornisci l'elenco dei CIDR della sottorete che vuoi utilizzare. **Nota**: il modo in cui ALB e i programmi di bilanciamento del carico vengono gestiti per un account interno e in loco si differenzia a seconda del formato del CIDR della sottorete. Consulta il passo finale per le differenze di configurazione.
+1. Per utilizzare la tua propria sottorete, [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support) e fornisci l'elenco dei CIDR della sottorete che vuoi utilizzare. **Nota**: il modo in cui ALB e i programmi di bilanciamento del carico vengono gestiti per un account interno e in loco si differenzia a seconda del formato del CIDR della sottorete. Consulta il passo finale per le differenze di configurazione.
 
 2. Dopo che {{site.data.keyword.IBM_notm}} ha eseguito il provisioning delle sottoreti gestite dall'utente, rendi una sottorete disponibile al tuo cluster Kubernetes.
 
     ```
-    ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
+    ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
     ```
     {: pre}
     Sostituisci <em>&lt;cluster_name&gt;</em> con il nome o l'ID del tuo cluster, <em>&lt;subnet_CIDR&gt;</em> con uno dei CIDR della sottorete che hai fornito nel caso di supporto e <em>&lt;private_VLAN&gt;</em> con un ID VLAN privata disponibile. Puoi trovare l'ID di una VLAN privata disponibile eseguendo `ibmcloud ks vlans`.
@@ -537,11 +551,11 @@ Prima di iniziare: configura l'instradamento del traffico di rete in entrata e i
     ```
     {: screen}
 
-4. **Importante**: se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+4. **Importante**: se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, usa il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 5. Per configurare la connettività dell'account interna e in loco, scegli tra queste opzioni:
   - Se hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività dell'account interna e in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, vedi [Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress](/docs/containers?topic=containers-cs_network_planning#external).
-  - Se non hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, vedi [Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress](/docs/containers?topic=containers-cs_network_planning#external). Tuttavia, devi utilizzare una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per configurare la connettività dell'account interna tra il tuo cluster e altri servizi basati su Cloud Foundry. Puoi creare una sottorete privata portatile con il comando [`ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add). Per questo scenario, il tuo cluster ha una sottorete gestita dall'utente per la connettività in loco e una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per la connettività dell'account interna.
+  - Se non hai utilizzato un intervallo di IP privato 10.x.x.x per la sottorete, utilizza gli IP validi da tale intervallo per configurare la connettività in loco con Ingress e un programma di bilanciamento del carico. Per ulteriori informazioni, vedi [Pianificazione della rete con i servizi NodePort, LoadBalancer o Ingress](/docs/containers?topic=containers-cs_network_planning#external). Tuttavia, devi utilizzare una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per configurare la connettività dell'account interna tra il tuo cluster e altri servizi basati su Cloud Foundry. Puoi creare una sottorete privata portatile con il comando [`ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add). Per questo scenario, il tuo cluster ha una sottorete gestita dall'utente per la connettività in loco e una sottorete privata portatile dell'infrastruttura IBM Cloud (SoftLayer) per la connettività dell'account interna.
 
 ### Configurazione degli altri cluster
 {: #dedicated_other}
@@ -552,7 +566,7 @@ Rivedi le seguenti opzioni per le configurazioni degli altri cluster:
   * [Aggiornamento dei nodi di lavoro](/docs/containers?topic=containers-update#worker_node)
   * [Configurazione della registrazione cluster](/docs/containers?topic=containers-health#logging). L'abilitazione del log non è supportata dall'endpoint dedicato. Devi accedere all'endpoint {{site.data.keyword.cloud_notm}} pubblico e specificare come destinazione la tua organizzazione e il tuo spazio pubblici per abilitare l'inoltro dei log.
   * [Configurazione del monitoraggio dei cluster](/docs/containers?topic=containers-health#view_metrics). Esiste un cluster `ibm-monitoring` all'interno di ogni account {{site.data.keyword.Bluemix_dedicated_notm}}. Questo cluster monitora continuamente l'integrità di {{site.data.keyword.containerlong_notm}} nell'ambiente dedicato, verificando la stabilità e la connettività dell'ambiente. Non rimuovere questo cluster dall'ambiente.
-  * [Rimozione dei cluster](/docs/containers?topic=containers-clusters#remove)
+  * [Rimozione dei cluster](/docs/containers?topic=containers-remove)
 
 <br />
 
@@ -576,19 +590,19 @@ Per gli ambienti {{site.data.keyword.Bluemix_dedicated_notm}}, gli indirizzi IP 
 #### Configurazione dell'accesso a un'applicazione utilizzando il tipo di servizio LoadBalancer
 {: #dedicated_apps_public_load_balancer}
 
-Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) per configurare la whitelist di firewall. Quindi, segui la procedura descritta in [Bilanciamento del carico DSR e di base con gli NLB (network load balancer)](/docs/containers?topic=containers-loadbalancer).
+Se vuoi utilizzare gli indirizzi IP pubblici per il programma di bilanciamento del carico, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support) per configurare la whitelist di firewall. Quindi, segui la procedura descritta in [Bilanciamento del carico DSR e di base con gli NLB (network load balancer)](/docs/containers?topic=containers-loadbalancer).
 {: shortdesc}
 
 #### Configurazione dell'accesso pubblico a un'applicazione utilizzando Ingress
 {: #dedicated_apps_public_ingress}
 
-Se vuoi utilizzare gli indirizzi IP pubblici per l'ALB Ingress, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) per configurare la whitelist di firewall. Quindi segui la procedura presente in [Esposizione delle applicazioni in pubblico](/docs/containers?topic=containers-ingress#ingress_expose_public).
+Se vuoi utilizzare gli indirizzi IP pubblici per l'ALB Ingress, assicurati che sia stata fornita una whitelist di firewall aziendali a IBM o [apri un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support) per configurare la whitelist di firewall. Quindi segui la procedura presente in [Esposizione delle applicazioni in pubblico](/docs/containers?topic=containers-ingress#ingress_expose_public).
 {: shortdesc}
 
 ### Creazione di archiviazione persistente
 {: #dedicated_apps_volume_claim}
 
-Per esaminare le opzioni per la creazione dell'archiviazione persistente, vedi Opzioni di archiviazione dati persistente per l'elevata disponibilità](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Per richiedere un backup per i tuoi volumi, un ripristino dai tuoi volumi, un'eliminazione di volumi oppure un'istantanea periodica dell'archiviazione file, devi [aprire un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+Per esaminare le opzioni per creare l'archiviazione persistente, vedi [Opzioni di archiviazione dati persistente per l'elevata disponibilità](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Per richiedere un backup per i tuoi volumi, un ripristino dai tuoi volumi, un'eliminazione di volumi oppure un'istantanea periodica dell'archiviazione file, devi [aprire un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support).
 {: shortdesc}
 
 Se scegli di eseguire il provisioning di [archiviazione file](/docs/containers?topic=containers-file_storage#file_predefined_storageclass), scegli le classi di archiviazione di non conservazione. La scelta di classi di archiviazione di non conservazione aiuta ad evitare istanze di archiviazione persistente orfane nell'infrastruttura IBM Cloud (SoftLayer) che puoi rimuovere solo aprendo un caso di supporto.

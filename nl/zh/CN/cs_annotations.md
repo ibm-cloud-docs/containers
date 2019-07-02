@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 使用注释定制 Ingress
@@ -606,16 +608,11 @@ annotations:
 **描述**</br>
 将客户机请求发送到 Ingress ALB 时，ALB 会打开与后端应用程序的连接。缺省情况下，ALB 会等待 60 秒以接收来自后端应用程序的应答。如果后端应用程序在 60 秒内未应答，那么连接请求将异常中止，并且后端应用程序将视为不可用。
 
-
-
 ALB 连接到后端应用程序后，ALB 会从后端应用程序读取响应数据。在此读操作期间，ALB 在两次读操作之间等待最长 60 秒以接收来自后端应用程序的数据。如果后端应用程序在 60 秒内未发送数据，那么与后端应用程序的连接请求将关闭，并且后端应用程序将视为不可用。
-
 
 60 秒连接超时和读取超时是代理上的缺省超时，通常不应进行更改。
 
-
 如果由于工作负载过高而导致应用程序的可用性不稳定或应用程序响应速度缓慢，那么您可能会希望增大连接超时或读取超时。请记住，增大超时会影响 ALB 的性能，因为与后端应用程序的连接必须保持打开状态，直至达到超时为止。
-
 
 另一方面，您可以减小超时以提高 ALB 的性能。确保后端应用程序能够在指定的超时内处理请求，即使在更高的工作负载期间。
 
@@ -858,9 +855,7 @@ spec:
 **描述**</br>
 为了实现高可用性，某些应用程序设置要求您部署多个上游服务器来处理入局客户机请求。客户机连接到后端应用程序后，可以使用会话亲缘关系，使得在会话期间或完成任务所需的时间内，客户机由同一个上游服务器处理。您可以将 ALB 配置为始终将入局网络流量路由到同一个上游服务器来确保会话亲缘关系。
 
-
 连接到后端应用程序的每个客户机都会由 ALB 分配其中一个可用的上游服务器。ALB 会创建会话 cookie，该会话 cookie 存储在客户机的应用程序中，并且包含在 ALB 和客户机之间每个请求的头信息中。该 cookie 中的信息将确保在整个会话中的所有请求都由同一个上游服务器进行处理。
-
 
 依赖粘性会话会增加复杂性并降低可用性。例如，您可能有一个 HTTP 服务器，用于维护初始连接的某个会话状态，以便 HTTP 服务只接受具有相同会话状态值的后续请求。但是，这会妨碍对 HTTP 服务进行轻松水平缩放。请考虑使用外部数据库（例如，Redis 或 Memcached）来存储 HTTP 请求会话值，以便可以在多个服务器之间维护该会话状态。
 {: note}
@@ -986,7 +981,6 @@ spec:
 
 **描述**</br>
 设置给定服务的上游服务器的最大空闲保持活动连接数。缺省情况下，上游服务器具有 64 个空闲保持活动连接。
-  
 
 **样本 Ingress 资源 YAML**</br>
 ```
@@ -1096,8 +1090,6 @@ spec:
 
 **描述**</br>
 缺省情况下，Ingress ALB 配置为在端口 80 上侦听入局 HTTP 网络流量，在端口 443 上侦听入局 HTTPS 网络流量。您可以更改缺省端口以向 ALB 域添加安全性，或仅启用 HTTPS 端口。
-
-
 
 要在端口上启用相互认证，请[配置 ALB 以打开有效端口](/docs/containers?topic=containers-ingress#opening_ingress_ports)，然后在 [`mutual-auth` 注释](#mutual-auth)中指定该端口。不要使用 `custom-port` 注释来指定用于相互认证的端口。
 {: note}
@@ -1480,7 +1472,7 @@ spec:
    {: codeblock}
 
    如果还要对上游流量强制执行相互认证，那么除了在 data 部分中提供 `trusted.crt` 外，还可以提供 `client.crt` 和 `client.key`。
-     {: tip}
+   {: tip}
 
 4. 将证书创建为 Kubernetes 私钥。
      
@@ -1582,7 +1574,6 @@ spec:
   {: pre}
 
   CLI 输出类似于以下内容：
-
   ```
   NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                      AGE
   public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   80:30416/TCP,443:32668/TCP   109d
@@ -1800,7 +1791,7 @@ spec:
 {:shortdesc}
 
 **描述**</br>
-Ingress ALB 域将 `mykubecluster.us-south.containers.appdomain.cloud/beans` 上的入局网络流量路由到应用程序。应用程序侦听的是 `/coffee`，而不是 `/beans`。要将入局网络流量转发到应用程序，请将 rewrite 注释添加到 Ingress 资源配置文件。rewrite 注释可确保使用 `/coffee` 路径将 `/beans` 上的入局网络流量转发到应用程序。当包含多个服务时，请仅使用分号 (;) 来分隔这些服务。
+Ingress ALB 域将 `mykubecluster.us-south.containers.appdomain.cloud/beans` 上的入局网络流量路由到应用程序。应用程序侦听的是 `/coffee`，而不是 `/beans`。要将入局网络流量转发到应用程序，请将 rewrite 注释添加到 Ingress 资源配置文件。rewrite 注释可确保使用 `/coffee` 路径将 `/beans` 上的入局网络流量转发到应用程序。当包含多个服务时，请仅使用分号 (;) 来分隔这些服务，分号前后不留空格。
 
 **样本 Ingress 资源 YAML**</br>
 
@@ -1849,7 +1840,7 @@ spec:
 ## 代理缓冲区注释
 {: #proxy-buffer}
 
-Ingress ALB 充当后端应用程序和客户机 Web 浏览器之间的代理。通过使用代理缓冲区注释，可以配置在发送或接收数据包时如何在 ALB 上对数据进行缓冲。
+Ingress ALB 充当后端应用程序和客户机 Web 浏览器之间的代理。通过使用代理缓冲区注释，可以配置在发送或接收数据包时如何在 ALB 上对数据进行缓冲。  
 {: shortdesc}
 
 ### 大型客户机头缓冲区 (`large-client-header-buffers`)
@@ -1914,8 +1905,7 @@ spec:
 **描述**</br>
 Ingress ALB 充当后端应用程序和客户机 Web 浏览器之间的代理。当响应从后端应用程序发送到客户机时，缺省情况下会在 ALB 上对响应数据进行缓冲。ALB 作为代理传递客户机响应，并开始按客户机的速度将响应发送到客户机。ALB 接收到来自后端应用程序的所有数据后，会关闭与后端应用程序的连接。ALB 与客户机的连接会保持打开状态，直到客户机接收完所有数据为止。
 
-如果在 ALB 上禁用响应数据缓冲，那么数据会立即从 ALB 发送到客户机。客户机必须能够按 ALB 的速度来处理入局数据。如果客户机速度太慢，数据可能会丢失。
-
+如果在 ALB 上禁用响应数据缓冲，那么数据会立即从 ALB 发送到客户机。客户机必须能够按 ALB 的速度来处理入局数据。如果客户机速度太慢，上游连接会保持打开状态，直到客户机能够赶上。
 
 缺省情况下，ALB 上启用了响应数据缓冲。
 
@@ -2188,7 +2178,7 @@ spec:
 <br />
 
 
-### 额外的客户机请求或响应头（(`proxy-add-headers` 和 `response-add-headers`）
+### 额外的客户机请求或响应头（`proxy-add-headers` 和 `response-add-headers`）
 {: #proxy-add-headers}
 
 向客户机请求添加额外的头信息，然后将该请求发送到后端应用程序，或者向客户机响应添加额外的头信息，然后将该响应发送到客户机。
@@ -2385,7 +2375,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2409,6 +2399,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>可选：要将客户机最大主体大小应用于特定服务，请将 <code>&lt;<em>myservice</em>&gt;</code> 替换为服务的名称。如果未指定服务名称，那么会将大小应用于所有服务。在示例 YAML 中，格式 <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> 会将第一个大小应用于 <code>myservice</code> 服务，将第二个大小应用于所有其他服务。</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>客户机响应主体的最大大小。例如，要将最大大小设置为 200 兆字节，请定义 <code>200m</code>。可以将大小设置为 0 以禁止检查客户机请求主体大小。</td>
 </tr>
@@ -2628,9 +2621,9 @@ spec:
       3. 单击**创建**。
 
 2. 添加应用程序的重定向 URL。重定向 URL 是应用程序的回调端点。要防止钓鱼攻击，应用程序标识将根据重定向 URL 的白名单来验证请求 URL。
-  1. 在 {{site.data.keyword.appid_short_notm}} 管理控制台中，浏览至**身份提供者 > 管理**。
-  2. 确保已选择身份提供者。如果未选择身份提供者，那么不会对用户进行认证，但会向用户颁发访问令牌以供匿名访问应用程序。
-  3. 在**添加 Web 重定向 URL** 字段中，以 `http://<hostname>/<app_path>/appid_callback` 或 `https://<hostname>/<app_path>/appid_callback` 格式添加应用程序的重定向 URL。
+  1. 在 {{site.data.keyword.appid_short_notm}} 管理控制台中，导航至**管理认证**。
+  2. 在**身份提供者**选项卡中，确保已选择身份提供者。如果未选择身份提供者，那么不会对用户进行认证，但会向用户颁发访问令牌以供匿名访问应用程序。
+  3. 在**认证设置**选项卡中，以 `http://<hostname>/<app_path>/appid_callback` 或 `https://<hostname>/<app_path>/appid_callback` 格式添加应用程序的重定向 URL。
 
     {{site.data.keyword.appid_full_notm}} 提供了注销功能：如果 {{site.data.keyword.appid_full_notm}} 路径中存在 `/logout`，那么将除去 cookie 并将用户发送回登录页面。要使用此功能，必须将 `/appid_logout` 附加到域，格式为 `https://<hostname>/<app_path>/appid_logout`，并在重定向 URL 列表中包含此 URL。
     {: note}
@@ -2659,3 +2652,5 @@ spec:
   {: pre}
 
 5. 使用绑定私钥和集群名称空间，将 `appid-auth` 注释添加到 Ingress 资源。
+
+

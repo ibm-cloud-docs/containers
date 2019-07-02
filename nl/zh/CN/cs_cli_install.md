@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 
@@ -31,7 +31,7 @@ subcollection: containers
 可以使用 {{site.data.keyword.containerlong}} CLI 或 API 来创建和管理 Kubernetes 集群。
 {:shortdesc}
 
-## 安装 CLI
+## 安装 IBM Cloud CLI 和插件
 {: #cs_cli_install_steps}
 
 安装必需的 CLI 以在 {{site.data.keyword.containerlong_notm}} 中创建和管理 Kubernetes 集群，并将容器化应用程序部署到集群。
@@ -39,10 +39,9 @@ subcollection: containers
 
 此任务包含用于安装这些 CLI 和插件的信息：
 
-- {{site.data.keyword.Bluemix_notm}} CLI 
-- {{site.data.keyword.containerlong_notm}} 插件
-- {{site.data.keyword.registryshort_notm}} 插件
-- 与集群的 `major.minor` 版本相匹配的 Kubernetes CLI 版本
+-   {{site.data.keyword.Bluemix_notm}} CLI 
+-   {{site.data.keyword.containerlong_notm}} 插件
+-   {{site.data.keyword.registryshort_notm}} 插件
 
 如果要改为使用 {{site.data.keyword.Bluemix_notm}} 控制台，那么在创建集群后，可以在 [Kubernetes 终端](#cli_web)中直接通过 Web 浏览器来运行 CLI 命令。
 {: tip}
@@ -52,76 +51,140 @@ subcollection: containers
 
 
 
-1. 安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安装包括：
-  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
-  - {{site.data.keyword.containerlong_notm}} 插件。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud ks`。
-  - {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 IBM 托管的具备高可用性和高可缩放性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。用于运行注册表命令的前缀是 `ibmcloud cr`。
+1.  安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-getting-started#idt-prereq)。此安装包括：
+    -   基本 {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)。
+    -   {{site.data.keyword.containerlong_notm}} 插件 (`ibmcloud ks`)。
+    -   {{site.data.keyword.registryshort_notm}} 插件 (`ibmcloud cr`)。使用此插件可在 IBM 托管的具备高可用性和高可缩放性的多租户专用映像注册表中设置自己的名称空间，存储 Docker 映像并与其他用户共享这些映像。要将容器部署到集群中，Docker 映像是必需的。
+    -   Kubernetes CLI (`kubectl`)，与缺省版本 1.13.6 相匹配。<p class="note">如果计划使用运行其他版本的集群，那么可能需要[单独安装该版本的 Kubernetes CLI](#kubectl)。如果您有 (OpenShift) 集群，请[同时安装 `oc` 和 `kubectl` CLI](#cli_oc)。</p>
+    -   Helm CLI (`helm`)。可以将 Helm 用作软件包管理器，以通过 Helm chart 将 {{site.data.keyword.Bluemix_notm}} 服务和复杂应用程序安装到集群。但仍必须在要使用 Helm 的每个集群中[设置 Helm](/docs/containers?topic=containers-helm)。
 
-  计划大量使用 CLI 吗？尝试[针对 {{site.data.keyword.Bluemix_notm}} CLI 启动 shell 自动完成（仅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
+    计划大量使用 CLI 吗？尝试[针对 {{site.data.keyword.Bluemix_notm}} CLI 启动 shell 自动完成（仅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
     {: tip}
 
-2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
-  ```
+2.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
+    ```
     ibmcloud login
     ```
-  {: pre}
+    {: pre}
 
-  如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
-     {: tip}
+    如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
+    {: tip}
 
-3. 验证各插件是否已正确安装。
-  ```
+3.  验证 {{site.data.keyword.containerlong_notm}} 插件和 {{site.data.keyword.registryshort_notm}} 插件是否已正确安装。
+    ```
     ibmcloud plugin list
     ```
-  {: pre}
+    {: pre}
 
-  {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 **container-service**，{{site.data.keyword.registryshort_notm}} 插件会在结果中显示为 **container-registry**。
+    输出示例：
+    ```
+    Listing installed plug-ins...
 
-4. {: #kubectl}要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
-
-  最新的稳定版本的 `kubectl` 随基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安装。但是，要使用集群，必须改为安装与计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。如果使用的 `kubectl` CLI 版本与集群的 `major.minor` 版本不匹配，那么可能会遇到意外的结果。请确保 Kubernetes 集群版本和 CLI 版本保持最新。
-        {: important}
-
-  1. 下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.12.7。
-    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**：将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
-
-  2. 如果使用的是 OS X 或 Linux，请完成以下步骤。
-    1. 将可执行文件移至 `/usr/local/bin` 目录。
-      ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
-            ```
-      {: pre}
-
-    2. 确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
-      ```
-      echo $PATH
-      ```
-      {: pre}
-      示例 CLI 输出：
-      ```
-      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-      ```
-      {: screen}
-
-    3. 使文件可执行。
-      ```
-      chmod +x /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-接下来，开始[使用 {{site.data.keyword.containerlong_notm}} 通过 CLI 创建 Kubernetes 集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+    Plugin Name                            Version   Status        
+    container-registry                     0.1.373     
+    container-service/kubernetes-service   0.3.23   
+    ```
+    {: screen}
 
 有关这些 CLI 的参考信息，请参阅那些工具的文档。
 
 -   [`ibmcloud` 命令](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
--   [`ibmcloud ks` 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`ibmcloud cr` 命令](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
--   [`kubectl` 命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)
+-   [`ibmcloud ks` 命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
+-   [`ibmcloud cr` 命令](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
+
+## 安装 Kubernetes CLI (`kubectl`)
+{: #kubectl}
+
+要查看 Kubernetes 仪表板的本地版本以及将应用程序部署到集群，请安装 Kubernetes CLI (`kubectl`)。最新的稳定版本的 `kubectl` 随基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安装。但是，要使用集群，必须改为安装与计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。如果使用的 `kubectl` CLI 版本与集群的 `major.minor` 版本不匹配，那么可能会遇到意外的结果。例如，[Kubernetes 不支持 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/setup/version-skew-policy/) 比服务器版本高/低 2 个或更多版本 (n +/- 2) 的 `kubectl` 客户机版本。务必使 Kubernetes 集群版本和 CLI 版本保持最新。
+{: shortdesc}
+
+使用的是 OpenShift 集群吗？请改为安装 OpenShift Origin CLI (`oc`)，该 CLI 随附 `kubectl`。如果同时有 Red Hat OpenShift on IBM Cloud 和 Ubuntu 本机 {{site.data.keyword.containershort_notm}} 集群，请确保使用与集群 `major.minor` Kubernetes 版本匹配的 `kubectl` 二进制文件。
+{: tip}
+
+1.  如果您已具有集群，请检查客户机 `kubectl` CLI 的版本是否与集群 API 服务器的版本相匹配。
+    1.  [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  比较客户机和服务器版本。如果客户机与服务器不匹配，请继续执行下一步。如果版本匹配，说明您已安装正确版本的 `kubectl`。
+        ```
+        kubectl version  --short
+        ```
+        {: pre}
+2.  下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.13.6。
+    -   **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    -   **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    -   **Windows**：将 Kubernetes CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
+
+3.  如果使用的是 OS X 或 Linux，请完成以下步骤。
+    1.  将可执行文件移至 `/usr/local/bin` 目录。
+        ```
+        mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        示例 CLI 输出：
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+
+    3.  使文件可执行。
+        ```
+        chmod +x /usr/local/bin/kubectl
+        ```
+        {: pre}
+4.  **可选**：[启用 `kubectl` 命令的自动完成 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。具体步骤根据您使用的 shell 而变化。
+
+接下来，开始[使用 {{site.data.keyword.containerlong_notm}} 通过 CLI 创建 Kubernetes 集群](/docs/containers?topic=containers-clusters#clusters_cli_steps)。
+
+有关 Kubernetes CLI 的更多信息，请参阅 [`kubectl` 参考文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubectl.docs.kubernetes.io/)。
+{: note}
 
 <br />
 
+
+## 安装 OpenShift Origin CLI (`oc`) 预览 Beta
+{: #cli_oc}
+
+[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) 作为 Beta 提供，用于测试 OpenShift 集群。
+{: preview}
+
+要查看 OpenShift 仪表板的本地版本以及将应用程序部署到 Red Hat OpenShift on IBM Cloud 集群，请安装 OpenShift CLI (`oc`)。`oc` CLI 包含匹配版本的 Kubernetes CLI (`kubectl`)。有关更多信息，请参阅 [OpenShift 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html)。
+{: shortdesc}
+
+使用的是 Red Hat OpenShift on IBM Cloud 和 Ubuntu 本机 {{site.data.keyword.containershort_notm}} 集群吗？`oc` CLI 随附 `oc` 和 `kubectl` 二进制文件，但不同集群可能运行的是不同版本的 Kubernetes，例如 OpenShift 上运行的是 1.11，Ubuntu 上运行的是 1.13.6。确保使用与集群 `major.minor` Kubernetes 版本匹配的 `kubectl` 二进制文件。
+{: note}
+
+1.  根据本地操作系统和 OpenShift 版本，[下载 OpenShift Origin CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.okd.io/download.html)。当前缺省 OpenShift 版本为 3.11。
+
+2.  如果使用的是 Mac OS 或 Linux，请完成以下步骤将二进制文件添加到 `PATH` 系统变量。如果使用的是 Windows，请将 `oc` CLI 安装在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目录中。通过此设置，您在以后运行命令时，可减少一些文件路径更改操作。
+    1.  将 `oc` 和 `kubectl` 可执行文件移至 `/usr/local/bin` 目录。
+        ```
+        mv /<filepath>/oc /usr/local/bin/oc && mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        示例 CLI 输出：
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+3.  **可选**：[启用 `kubectl` 命令的自动完成 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。具体步骤根据您使用的 shell 而变化。可以重复这些步骤来启用 `oc` 命令的自动完成。例如，在 Linux 上的 bash 中，可以运行 `oc completion bash >/etc/bash_completion.d/oc_completion`，以代替 `kubectl completion bash >/etc/bash_completion.d/kubectl`。
+
+接下来，开始[创建 Red Hat OpenShift on IBM Cloud 集群（预览）](/docs/containers?topic=containers-openshift_tutorial)。
+
+有关 OpenShift Origin CLI 的更多信息，请参阅 [`oc` 命令文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html)。
+{: note}
+
+<br />
 
 
 ## 在计算机上的容器中运行 CLI
@@ -135,14 +198,14 @@ subcollection: containers
 1. 基于提供的 Dockerfile 创建映像。
 
     ```
-    docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
+docker build -t <image_name> https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/install-clis-container/Dockerfile
     ```
     {: pre}
 
 2. 将映像本地部署为容器，并安装卷以访问本地文件。
 
     ```
-    docker run -it -v /local/path:/container/volume <image_name>
+docker run -it -v /local/path:/container/volume <image_name>
     ```
     {: pre}
 
@@ -158,18 +221,18 @@ subcollection: containers
 您可以使用 Kubernetes CLI 随附的命令，在 {{site.data.keyword.Bluemix_notm}} 中管理集群。
 {:shortdesc}
 
-支持 Kubernetes 1.12.7 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
+支持 Kubernetes 1.13.6 中可用的所有 `kubectl` 命令用于 {{site.data.keyword.Bluemix_notm}} 中的集群。创建集群后，使用环境变量，将本地 CLI 的上下文设置到该集群。
 然后，您可以运行 Kubernetes `kubectl` 命令，以在 {{site.data.keyword.Bluemix_notm}} 中使用集群。
 
 
 要能够运行 `kubectl` 命令，请先执行以下操作：
 * [安装必需的 CLI](#cs_cli_install)。
-* [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+* [创建集群](/docs/containers?topic=containers-clusters#clusters_cli_steps)。
 * 确保您具有授予相应 Kubernetes RBAC 角色的[服务角色](/docs/containers?topic=containers-users#platform)，以便您可以使用 Kubernetes 资源。如果您只有服务角色而没有平台角色，那么需要集群管理员为您提供集群名称和标识，或者提供**查看者**平台角色，以便能列出集群。
 
 要使用 `kubectl` 命令，请执行以下操作：
 
-1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
+1.  登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
 
     ```
     ibmcloud login
@@ -187,24 +250,17 @@ subcollection: containers
     ```
     {: pre}
 
-4.  要在非先前所选 {{site.data.keyword.Bluemix_notm}} 区域的区域中创建或访问 Kubernetes 集群，请将该区域设定为目标。
-    ```
-    ibmcloud ks region-set
-    ```
-    {: pre}
-
-5.  列出帐户中的所有集群以获取集群的名称。如果您仅具有 {{site.data.keyword.Bluemix_notm}} IAM 服务角色，并且无法查看集群，请要求集群管理员提供 IAM **查看者**平台角色，或提供集群名称和标识。
+4.  列出帐户中的所有集群以获取集群的名称。如果您仅具有 {{site.data.keyword.Bluemix_notm}} IAM 服务角色，并且无法查看集群，请要求集群管理员提供 IAM **查看者**平台角色，或提供集群名称和标识。
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-6.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
-    1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
-
+5.  将所创建的集群设置为此会话的上下文。每次使用集群时都完成这些配置步骤。
+    1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。<p class="tip">使用的是 Windows PowerShell？请包含 `--powershell` 标志以获取 Windows PowerShell 格式的环境变量。</p>
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -222,9 +278,6 @@ subcollection: containers
         **Mac 或 Linux 用户**：可以不运行 `ibmcloud ks cluster-config` 命令并复制 `KUBECONFIG` 环境变量，而改为运行 `ibmcloud ks cluster-config --export <cluster-name>`。根据您的 shell，您可以通过运行 `eval $(ibmcloud ks cluster-config --export <cluster-name>)` 来设置 shell。
         {: tip}
 
-        **Windows PowerShell 用户**：不要从 `ibmcloud ks cluster-config` 的输出中复制并粘贴 `SET` 命令，您必须改为运行相关命令来设置 `KUBECONFIG` 环境变量，例如运行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-    {:tip}
-
     3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
         示例：
@@ -236,11 +289,11 @@ subcollection: containers
 
         输出：
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+                /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
-7.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
+6.  通过检查 Kubernetes CLI 服务器版本，验证 `kubectl` 命令是否针对您的集群正常运行。
 
     ```
     kubectl version  --short
@@ -250,8 +303,8 @@ subcollection: containers
     输出示例：
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -261,6 +314,8 @@ subcollection: containers
 
 
 <br />
+
+
 
 
 ## 更新 CLI
@@ -273,15 +328,15 @@ subcollection: containers
 
 -   {{site.data.keyword.Bluemix_notm}} CLI V0.8.0 或更高版本
 -   {{site.data.keyword.containerlong_notm}} 插件
--   Kubernetes CLI V1.12.7 或更高版本
+-   Kubernetes CLI V1.13.6 或更高版本
 -   {{site.data.keyword.registryshort_notm}} 插件
 
 <br>
 要更新 CLI，请执行以下操作：
 
-1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli) 并运行安装程序。
+1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下载[最新版本 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-getting-started) 并运行安装程序。
 
-2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。要指定 {{site.data.keyword.Bluemix_notm}} 区域，请[包含 API 端点](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
+2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
 
     ```
     ibmcloud login
@@ -289,7 +344,7 @@ subcollection: containers
     {: pre}
 
      如果您有联合标识，请使用 `ibmcloud login --sso` 登录到 {{site.data.keyword.Bluemix_notm}} CLI。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。如果不使用 `--sso` 时登录失败，而使用 `--sso` 选项时登录成功，说明您拥有的是联合标识。
-     {: tip}
+    {: tip}
 
 3.  更新 {{site.data.keyword.containerlong_notm}} 插件。
     1.  通过 {{site.data.keyword.Bluemix_notm}} 插件存储库安装更新。
@@ -302,8 +357,8 @@ subcollection: containers
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-        ibmcloud plugin list
-        ```
+    ibmcloud plugin list
+    ```
         {: pre}
 
         {{site.data.keyword.containerlong_notm}} 插件会在结果中显示为 container-service。
@@ -328,8 +383,8 @@ subcollection: containers
     2.  通过运行以下命令并检查已安装的插件的列表来验证插件安装。
 
         ```
-        ibmcloud plugin list
-        ```
+    ibmcloud plugin list
+    ```
         {: pre}
 
         Registry 插件会在结果中显示为 container-registry。
@@ -389,7 +444,7 @@ Kubernetes 终端允许您使用 {{site.data.keyword.Bluemix_notm}} CLI 直接�
 Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组件发布，可能会根据用户反馈和进一步的测试而更改。因此，不要在生产集群中使用此功能，以避免意外的副作用。
 {: important}
 
-如果在 {{site.data.keyword.Bluemix_notm}} 控制台中使用集群仪表板来管理集群，但希望快速进行更高级的配置更改，现在可以在 Kubernetes 终端的 Web 浏览器中直接运行 CLI 命令。Kubernetes 终端通过基本 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli)、{{site.data.keyword.containerlong_notm}} 插件和 {{site.data.keyword.registryshort_notm}} 插件启用。此外，终端上下文已设置为您所使用的集群，以便您可以运行 Kubernetes `kubectl` 命令来使用集群。
+如果在 {{site.data.keyword.Bluemix_notm}} 控制台中使用集群仪表板来管理集群，但希望快速进行更高级的配置更改，现在可以在 Kubernetes 终端的 Web 浏览器中直接运行 CLI 命令。Kubernetes 终端通过基本 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-getting-started)、{{site.data.keyword.containerlong_notm}} 插件和 {{site.data.keyword.registryshort_notm}} 插件启用。此外，终端上下文已设置为您所使用的集群，以便您可以运行 Kubernetes `kubectl` 命令来使用集群。
 
 在本地下载和编辑的任何文件（如 YAML 文件）都会临时存储在 Kubernetes 终端中，而不会跨会话持久存储。
 {: note}
@@ -420,7 +475,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
 
 要向 {{site.data.keyword.containerlong_notm}} 进行认证，必须提供包含创建集群的 {{site.data.keyword.Bluemix_notm}} 帐户标识且使用 {{site.data.keyword.Bluemix_notm}} 凭证生成的 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 令牌。根据您向 {{site.data.keyword.Bluemix_notm}} 进行认证的方式，可以在下列选项之间进行选择，以自动创建 {{site.data.keyword.Bluemix_notm}} IAM 令牌。
 
-您还可以使用 [API Swagger JSON 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api-json) 来生成可与 API 交互（作为自动化工作的一部分）的客户机。
+您还可以使用 [API Swagger JSON 文件 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json) 来生成可与 API 交互（作为自动化工作的一部分）的客户机。
 {: tip}
 
 <table summary="标识类型和选项，其中第 1 列是输入参数，第 2 列是值。">
@@ -432,11 +487,13 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
 <tbody>
 <tr>
 <td>未联合的标识</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 用户名和密码：</strong>您可以遵循本主题中的步骤来完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌的创建。</li>
-<li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong>作为使用 {{site.data.keyword.Bluemix_notm}} 用户名和密码的替代方法，您可以<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 密钥</a>。{{site.data.keyword.Bluemix_notm}} API 密钥依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 {{site.data.keyword.Bluemix_notm}} IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li></ul></tr>
+<td><ul><li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong>作为使用 {{site.data.keyword.Bluemix_notm}} 用户名和密码的替代方法，您可以<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 密钥</a>。{{site.data.keyword.Bluemix_notm}} API 密钥依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 {{site.data.keyword.Bluemix_notm}} IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li>
+<li><strong>{{site.data.keyword.Bluemix_notm}} 用户名和密码：</strong>您可以遵循本主题中的步骤来完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌的创建。</li></ul>
+</tr>
 <tr>
 <td>联合标识</td>
-<td><ul><li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong><a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 密钥</a>依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 {{site.data.keyword.Bluemix_notm}} IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li><li><strong>使用一次性密码：</strong>如果使用一次性密码向 {{site.data.keyword.Bluemix_notm}} 进行认证，那么无法完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 令牌的创建，因为检索一次性密码需要与 Web 浏览器进行手动交互。要完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 令牌的创建，必须改为创建 {{site.data.keyword.Bluemix_notm}} API 密钥。</ul></td>
+<td><ul><li><strong>生成 {{site.data.keyword.Bluemix_notm}} API 密钥：</strong><a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 密钥</a>依赖于为其生成这些密钥的 {{site.data.keyword.Bluemix_notm}} 帐户。您不能将 {{site.data.keyword.Bluemix_notm}} API 密钥与同一 {{site.data.keyword.Bluemix_notm}} IAM 令牌中的不同帐户标识组合使用。要访问使用非 {{site.data.keyword.Bluemix_notm}} API 密钥所基于的帐户创建的集群，必须登录该帐户以生成新的 API 密钥。</li>
+<li><strong>使用一次性密码：</strong>如果使用一次性密码向 {{site.data.keyword.Bluemix_notm}} 进行认证，那么无法完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 令牌的创建，因为检索一次性密码需要与 Web 浏览器进行手动交互。要完全自动化 {{site.data.keyword.Bluemix_notm}} IAM 令牌的创建，必须改为创建 {{site.data.keyword.Bluemix_notm}} API 密钥。</ul></td>
 </tr>
 </tbody>
 </table>
@@ -489,7 +546,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
     </tbody>
     </table>
 
-    输出示例：
+    使用 API 密钥的示例输出：
 
     ```
     {
@@ -526,8 +583,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
   		<td>头</td>
       <td><ul><li><code>Content-Type: application/json</code></li>
         <li>`Authorization: bearer <iam_access_token>`</li>
-        <li><code>Accept: application/json
-</code></li></ul></td>
+        <li><code>Accept: application/json</code></li></ul></td>
   	</tr>
     </tbody>
     </table>
@@ -543,7 +599,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
       "resources":
         {
           "metadata": {
-"guid": "<account_ID>",
+            "guid": "<account_ID>",
             "url": "/v1/accounts/<account_ID>",
             "created_at": "2016-01-07T18:55:09.726Z",
             "updated_at": "2017-04-28T23:46:03.739Z",
@@ -711,7 +767,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
      </tbody>
      </table>
 
-5.  请查看 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api)，以查找受支持 API 的列表。
+5.  请查看 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api)，以查找受支持 API 的列表。
 
 <br />
 
@@ -971,7 +1027,7 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
 
     您可以在 API 输出的 **access_token** 字段中找到新的 {{site.data.keyword.Bluemix_notm}} IAM 令牌，在 **refresh_token** 字段中找到刷新令牌。
 
-2.  使用上一步中的令牌，继续执行 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/swagger-api) 中的操作。
+2.  使用上一步中的令牌，继续执行 [{{site.data.keyword.containerlong_notm}} API 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://containers.cloud.ibm.com/global/swagger-global-api) 中的操作。
 
 <br />
 
@@ -979,9 +1035,9 @@ Kubernetes 终端作为 Beta {{site.data.keyword.containerlong_notm}} 附加组�
 ## 使用 CLI 刷新 {{site.data.keyword.Bluemix_notm}} IAM 访问令牌并获取新的刷新令牌
 {: #cs_cli_refresh}
 
-启动新的 CLI 会话时，或者如果当前 CLI 会话已超过 24 小时，那么必须通过运行 `ibmcloud ks cluster-config <cluster_name>` 来为集群设置上下文。使用此命令设置集群的上下文时，将下载 Kubernetes 集群的 `kubeconfig` 文件。此外，还会发出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 标识令牌和刷新令牌以用于提供认证。
+启动新的 CLI 会话时，或者如果当前 CLI 会话已超过 24 小时，那么必须通过运行 `ibmcloud ks cluster-config --cluster <cluster_name>` 来为集群设置上下文。使用此命令设置集群的上下文时，将下载 Kubernetes 集群的 `kubeconfig` 文件。此外，还会发出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 标识令牌和刷新令牌以用于提供认证。
 {: shortdesc}
 
 **标识令牌**：通过 CLI 发出的每个 IAM 标识令牌都会在 1 小时后到期。标识令牌到期时，会向令牌提供程序发送刷新令牌以刷新标识令牌。这将刷新您的认证，随后您可以继续对集群运行命令。
 
-**刷新令牌**：刷新令牌每 30 天到期一次。如果刷新令牌到期，那么无法刷新标识令牌，并且您无法在 CLI 中继续运行命令。您可以通过运行 `ibmcloud ks cluster-config <cluster_name>` 来获取新的刷新令牌。此命令还会刷新标识令牌。
+**刷新令牌**：刷新令牌每 30 天到期一次。如果刷新令牌到期，那么无法刷新标识令牌，并且您无法在 CLI 中继续运行命令。您可以通过运行 `ibmcloud ks cluster-config --cluster <cluster_name>` 来获取新的刷新令牌。此命令还会刷新标识令牌。

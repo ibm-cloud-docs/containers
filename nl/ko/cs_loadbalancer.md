@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 네트워크 로드 밸런서(NLB)가 사용된 기본 및 DSR 로드 밸런싱
@@ -64,17 +64,17 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 * 포터블 공용 서브넷은 5개의 사용 가능한 IP 주소를 제공합니다. 포터블 공인 IP 주소 1개는 기본 [공용 Ingress ALB](/docs/containers?topic=containers-ingress)에 사용됩니다. 나머지 4개의 포터블 공인 IP 주소는 공용 네트워크 로드 밸런서 서비스 또는 NLB 작성을 통해 단일 앱을 인터넷에 노출하는 데 사용할 수 있습니다.
 * 포터블 사설 서브넷은 5개의 사용 가능한 IP 주소를 제공합니다. 포터블 사설 IP 주소 1개는 기본 [사설 Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress)에 사용됩니다. 나머지 4개의 포터블 사설 IP 주소는 사설 로드 밸런서 서비스 또는 NLB 작성을 통해 단일 앱을 사설 네트워크에 노출하는 데 사용할 수 있습니다.
 
-포터블 공인 및 사설 IP 주소는 정적인 유동 IP이므로 작업자 노드가 제거될 때 변경되지 않습니다. NLB IP 주소가 있는 작업자 노드가 제거되는 경우에는 해당 IP 주소를 지속적으로 모니터링하는 Keepalived 디먼이 이 IP 주소를 다른 작업자 노드로 자동으로 이동시킵니다. NLB에 포트를 지정할 수 있습니다. NLB 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 인터넷에서 NLB에 액세스하기 위해 `<IP_address>:<port>` 형식의 지정된 포트와 NLB의 공인 IP 주소를 사용할 수 있습니다. 호스트 이름 없이 NLB IP 주소를 등록하여 NLB에 대한 DNS 항목을 작성할 수도 있습니다.
+포터블 공인 및 사설 IP 주소는 정적인 유동 IP이므로 작업자 노드가 제거될 때 변경되지 않습니다. NLB IP 주소가 있는 작업자 노드가 제거되는 경우에는 해당 IP 주소를 지속적으로 모니터링하는 Keepalived 디먼이 이 IP 주소를 다른 작업자 노드로 자동으로 이동시킵니다. NLB에 포트를 지정할 수 있습니다. NLB 서비스는 앱의 수신 요청에 대한 외부 시작점 역할을 합니다. 인터넷에서 NLB에 액세스하기 위해 `<IP_address>:<port>` 형식의 지정된 포트와 NLB의 공인 IP 주소를 사용할 수 있습니다.  호스트 이름 없이 NLB IP 주소를 등록하여 NLB에 대한 DNS 항목을 작성할 수도 있습니다.
 
 NLB 서비스를 사용하여 앱을 노출하면 서비스의 NodePorts를 통해 앱이 자동으로 사용 가능해집니다. [NodePort](/docs/containers?topic=containers-nodeport)는 클러스터 내 모든 작업자 노드의 모든 공용 및 사설 IP 주소에서 액세스 가능합니다. NLB를 사용하는 동안 NodePort에 대한 트래픽을 차단하려면 [네트워크 로드 밸런서(NLB) 또는 NodePort 서비스에 대한 인바운드 트래픽 제어](/docs/containers?topic=containers-network_policies#block_ingress)를 참조하십시오.
 
 <br />
 
 
-## 버전 1.0 및 2.0 NLB 비교
+## 버전 1.0 NLB와 2.0 NLB의 기본 및 DSR 로드 밸런싱 비교
 {: #comparison}
 
-NLB를 작성할 때 버전 1.0 또는 2.0 NLB를 선택할 수 있습니다. 버전 2.0 NLB는 베타로 제공합니다.
+NLB를 작성할 때는 기본 로드 밸런싱을 수행하는 버전 1.0 NLB, 또는 DSR(Direct Server Return) 로드 밸런싱을 수행하는 버전 2.0 NLB를 선택할 수 있습니다. 버전 2.0 NLB는 베타로 제공합니다.
 {: shortdesc}
 
 **버전 1.0과 비슷한 2.0 NLB는 얼마나 유사합니까?**
@@ -83,14 +83,14 @@ NLB를 작성할 때 버전 1.0 또는 2.0 NLB를 선택할 수 있습니다. �
 
 **버전 1.0과 비슷한 2.0 NLB는 얼마나 다릅니까?**
 
-클라이언트가 요청을 앱에 전송하면 NLB는 앱 팟(Pod)이 있는 작업자 노드 IP 주소로 요청 패킷을 라우팅합니다. 버전 1.0 NLB는 NAT(Network Address Translation)을 사용하여 요청 패킷의 소스 IP 주소를 로드 밸런서 팟(Pod)이 있는 작업자 노드의 IP에 재작성합니다. 작업자 노드가 앱 응답 패킷을 리턴하면 NLB가 있는 작업자 노드 IP가 사용됩니다. 그러면 NLB는 응답 패킷을 클라이언트에 전송해야 합니다. IP 주소 재작성을 방지하기 위해 [소스 IP 보존을 사용으로 설정](#node_affinity_tolerations)할 수 있습니다. 그러나 소스 IP 보존을 사용하려면 요청을 다른 작업자로 전달할 필요가 없도록 로드 밸런서 팟(Pod)과 앱 팟(Pod)을 동일한 작업자에서 실행해야 합니다. 노드 친화성 및 결함 허용을 앱 팟(Pod)에 추가해야 합니다.
+클라이언트가 요청을 앱에 전송하면 NLB는 앱 팟(Pod)이 있는 작업자 노드 IP 주소로 요청 패킷을 라우팅합니다. 버전 1.0 NLB는 NAT(Network Address Translation)을 사용하여 요청 패킷의 소스 IP 주소를 로드 밸런서 팟(Pod)이 있는 작업자 노드의 IP에 재작성합니다. 작업자 노드가 앱 응답 패킷을 리턴하면 NLB가 있는 작업자 노드 IP가 사용됩니다. 그러면 NLB는 응답 패킷을 클라이언트에 전송해야 합니다. IP 주소 재작성을 방지하기 위해 [소스 IP 보존을 사용으로 설정](#node_affinity_tolerations)할 수 있습니다. 그러나 소스 IP 보존을 사용하려면 요청을 다른 작업자로 전달할 필요가 없도록 로드 밸런서 팟(Pod)과 앱 팟(Pod)을 동일한 작업자에서 실행해야 합니다. 노드 친화성 및 결함 허용을 앱 팟(Pod)에 추가해야 합니다. 버전 1.0 NLB를 사용한 기본 로드 밸런싱에 대한 자세한 정보는 [v1.0: 기본 로드 밸런싱의 컴포넌트 및 아키텍처](#v1_planning)를 참조하십시오. 
 
-버전 1.0 NLB와 반대로, 버전 2.0 NLB는 요청을 다른 작업자의 앱 팟(Pod)에 전달할 때 NAT를 사용하지 않습니다. NLB 2.0은 클라이언트 요청을 라우팅할 때 IPIP(IP over IP)를 사용하여 원래 요청 패킷을 다른 새 패킷에 캡슐화합니다. 이 캡슐화 IPIP 패킷은 로드 밸런서 팟(Pod)이 있는 작업자 노드의 소스 IP를 제공하므로, 원래 요청 패킷이 클라이언트 IP를 소스 IP 주소로 보존할 수 있습니다. 그러면 작업자 노드는 DSR(Direct Server Return)을 사용하여 앱 응답 패킷을 클라이언트 IP로 전송합니다. 응답 패킷은 NLB를 건너뛰고 클라이언트로 직접 전송되므로 NLB에서 처리해야 하는 트래픽의 양이 줄어듭니다.
+버전 1.0 NLB와 반대로, 버전 2.0 NLB는 요청을 다른 작업자의 앱 팟(Pod)에 전달할 때 NAT를 사용하지 않습니다. NLB 2.0은 클라이언트 요청을 라우팅할 때 IPIP(IP over IP)를 사용하여 원래 요청 패킷을 다른 새 패킷에 캡슐화합니다. 이 캡슐화 IPIP 패킷은 로드 밸런서 팟(Pod)이 있는 작업자 노드의 소스 IP를 제공하므로, 원래 요청 패킷이 클라이언트 IP를 소스 IP 주소로 보존할 수 있습니다. 그러면 작업자 노드는 DSR(Direct Server Return)을 사용하여 앱 응답 패킷을 클라이언트 IP로 전송합니다. 응답 패킷은 NLB를 건너뛰고 클라이언트로 직접 전송되므로 NLB에서 처리해야 하는 트래픽의 양이 줄어듭니다. 버전 2.0 NLB를 사용한 DSR 로드 밸런싱에 대한 자세한 정보는 [v2.0: DSR 로드 밸런싱의 컴포넌트 및 아키텍처](#planning_ipvs)를 참조하십시오. 
 
 <br />
 
 
-## v1.0: 컴포넌트 및 아키텍처
+## v1.0: 기본 로드 밸런싱의 컴포넌트 및 아키텍처
 {: #v1_planning}
 
 TCP/UDP 네트워크 로드 밸런서(NLB) 1.0은 Linux 커널 기능인 Iptables를 사용하여 앱 팟(Pod) 전체에서 요청을 로드 밸런싱합니다.
@@ -131,7 +131,7 @@ TCP/UDP 네트워크 로드 밸런서(NLB) 1.0은 Linux 커널 기능인 Iptable
 **시작하기 전에**:
 * 공용 네트워크 로드 밸런서(NLB)를 다중 구역에 작성하려면 하나 이상의 공용 VLAN의 각 구역에서 포터블 서브넷이 사용 가능해야 합니다. 사설 NLB를 다중 구역에 작성하려면 하나 이상의 사설 VLAN의 각 구역에서 포터블 서브넷이 사용 가능해야 합니다. [클러스터의 서브넷 구성](/docs/containers?topic=containers-subnets)에 있는 단계를 수행하여 서비넷을 추가할 수 있습니다.
 * 에지 작업자 노드로 네트워크 트래픽을 제한하는 경우에는 NLB가 균등하게 배치되도록 각 구역에서 최소한 2개의 [에지 작업자 노드](/docs/containers?topic=containers-edge#edge)가 사용으로 설정되었는지 확인하십시오.
-* 작업자 노드가 사설 네트워크에서 서로 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
+* 작업자 노드가 사설 네트워크에서 서로 통신할 수 있도록 IBM Cloud 인프라(SoftLayer) 계정에 대해 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. 이 조치를 수행하려면 **네트워크 > 네트워크 VLAN Spanning 관리** [인프라 권한](/docs/containers?topic=containers-users#infra_access)이 필요합니다. 또는 이를 사용으로 설정하도록 계정 소유자에게 요청할 수 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get --region <region>` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)을 사용하십시오. 
 * `default` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 
 
@@ -484,7 +484,7 @@ spec:
 
 소스 IP를 사용할 수 있도록 설정된 경우에는 앱 배치에 친화성 규칙을 추가하여 NLB의 IP 주소와 동일한 VLAN인 작업자 노드에 앱 팟(Pod)을 스케줄하십시오.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. NLB 서비스의 IP 주소를 가져오십시오. **LoadBalancer Ingress** 필드에서 IP 주소를 확인하십시오.
     ```
@@ -652,19 +652,19 @@ NLB 2.0을 작성하려면 먼저 다음 전제조건 단계를 완료해야 합
 
 1. [클러스터의 마스터 및 작업자 노드를](/docs/containers?topic=containers-update) Kubernetes 버전 1.12 이상으로 업데이트하십시오.
 
-2. NLB 2.0이 다중 구역에 있는 앱 팟(Pod)으로 요청을 전달할 수 있게 허용하려면 VLAN에 대한 구성 설정을 요청하는 지원 케이스를 여십시오. **중요**: 모든 공용 VLAN에 대해 이 구성을 요청해야 합니다. 연관된 VLAN을 새로 요청하는 경우 해당 VLAN에 대해 다른 티켓을 열어야 합니다.
+2. NLB 2.0이 다중 구역에 있는 앱 팟(Pod)으로 요청을 전달할 수 있게 하려면 VLAN에 대한 용량 집계를 요청하는 지원 케이스를 여십시오. 이 구성 설정은 네트워크 중단 또는 가동 중단을 발생시키지 않습니다. 
     1. [{{site.data.keyword.Bluemix_notm}} 콘솔](https://cloud.ibm.com/)에 로그인하십시오.
     2. 메뉴 표시줄에서 **지원**을 클릭하고 **케이스 관리** 탭을 클릭한 후 **새 케이스 작성**을 클릭하십시오.
     3. 케이스 필드에 다음을 입력하십시오.
        * 지원 유형에는 **기술**을 선택하십시오.
        * 카테고리는 **VLAN Spanning**을 선택하십시오.
        * 주제에는 **공용 VLAN 네트워크 질문**을 입력하십시오.
-    4. 설명에 다음 내용을 추가하십시오. "내 계정과 연관된 공용 VLAN에 대한 용량 집계를 허용하도록 네트워크를 설정하십시오. 이 요청에 대한 참조 티켓은 https://control.softlayer.com/support/tickets/63859145입니다."
+    4. 설명에 다음 내용을 추가하십시오. "내 계정과 연관된 공용 VLAN에 대한 용량 집계를 허용하도록 네트워크를 설정하십시오. 이 요청에 대한 참조 티켓은 https://control.softlayer.com/support/tickets/63859145입니다." 특정 VLAN(예: 한 클러스터의 공용 VLAN만)에서 용량 집계를 허용하려는 경우에는 설명에 해당 VLAN ID를 지정할 수 있습니다. 
     5. **제출**을 클릭하십시오.
 
-3. IBM Cloud 인프라(SoftLayer) 계정에 대해 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의하십시오](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. VRF 또는 VLAN Spanning이 사용으로 설정된 경우, NLB 2.0이 패킷을 계정의 다양한 서브넷으로 라우팅할 수 있습니다.
+3. IBM Cloud 인프라(SoftLayer) 계정에 대해 [VRF(Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오. VRF를 사용으로 설정하려면 [IBM Cloud 인프라(SoftLayer) 계정 담당자에게 문의](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)하십시오. VRF를 사용할 수 없거나 사용하지 않으려면 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)을 사용으로 설정하십시오. VRF 또는 VLAN Spanning이 사용으로 설정된 경우, NLB 2.0이 패킷을 계정의 다양한 서브넷으로 라우팅할 수 있습니다.
 
-4. [Calico 사전 DNAT 네트워크 정책](/docs/containers?topic=containers-network_policies#block_ingress)을 사용하여 NLB 2.0의 IP 주소에 대한 트래픽을 관리하는 경우, `applyOnForward: true` 및 `doNotTrack: true` 필드를 추가하고 해당 정책의 `spec` 섹션에서 `preDNAT: true` 필드를 제거해야 합니다. `applyOnForward: true`를 사용하면 Calico 정책이 캡슐화되고 전달된 상태로 트래픽에 전송됩니다. `doNotTrack: true`를 사용하면 작업자 노드가 연결을 추적하지 않고도 DSR을 사용하여 응답 패킷을 클라이언트에 직접 리턴할 수 있습니다. 예를 들어 Calico 정책을 사용하여 특정 IP 주소와 NLB IP 주소 간 트래픽을 화이트리스트에 추가할 경우, 정책이 다음과 유사하게 표시됩니다.
+4. [Calico Pre-DNAT 네트워크 정책](/docs/containers?topic=containers-network_policies#block_ingress)을 사용하여 NLB 2.0의 IP 주소에 대한 트래픽을 관리하는 경우, `applyOnForward: true` 및 `doNotTrack: true` 필드를 추가하고 해당 정책의 `spec` 섹션에서 `preDNAT: true` 필드를 제거해야 합니다. `applyOnForward: true`를 사용하면 Calico 정책이 캡슐화되고 전달된 상태로 트래픽에 전송됩니다. `doNotTrack: true`를 사용하면 작업자 노드가 연결을 추적하지 않고도 DSR을 사용하여 응답 패킷을 클라이언트에 직접 리턴할 수 있습니다. 예를 들어 Calico 정책을 사용하여 특정 IP 주소와 NLB IP 주소 간 트래픽을 화이트리스트에 추가할 경우, 정책이 다음과 유사하게 표시됩니다.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -1060,13 +1060,13 @@ spec:
 <dl>
 <dt>호스트 이름</dt>
 <dd>단일 또는 다중 구역 클러스터에서 공용 NLB를 작성하는 경우 NLB IP 주소에 대한 호스트 이름을 작성하여 앱을 인터넷에 노출할 수 있습니다. 또한 {{site.data.keyword.Bluemix_notm}}가 사용자에게 적합한 호스트 이름에 대한 와일드카드 SSL 인증서의 생성 및 유지보수를 관리합니다.
-<p>다중 구역 클러스터에서 호스트 이름을 작성하고 각 구역의 NLB IP 주소를 해당 호스트 이름 DNS 항목에 추가할 수 있습니다. 예를 들어, 미국 남부 지역의 3개 구역에 사용자 앱에 적합한 NLB를 배치한 경우 3개의 NLB IP 주소에 대한 호스트 이름 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`를 작성할 수 있습니다. 사용자가 앱 호스트 이름에 액세스하면 클라이언트는 무작위로 이러한 IP 중 하나에 액세스하고 요청이 해당 NLB로 전송됩니다. </p>
-현재 사설 NLB에 대한 호스트 이름을 작성할 수 없습니다. </dd>
+<p>다중 구역 클러스터에서 호스트 이름을 작성하고 각 구역의 NLB IP 주소를 해당 호스트 이름 DNS 항목에 추가할 수 있습니다. 예를 들어, 미국 남부 지역의 3개 구역에 사용자 앱에 적합한 NLB를 배치한 경우 3개의 NLB IP 주소에 대한 호스트 이름 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`를 작성할 수 있습니다. 사용자가 앱 호스트 이름에 액세스하면 클라이언트는 무작위로 이러한 IP 중 하나에 액세스하고 요청이 해당 NLB로 전송됩니다.</p>
+현재 사설 NLB에 대한 호스트 이름을 작성할 수 없습니다.</dd>
 <dt>상태 검사 모니터</dt>
 <dd>단일 호스트 이름 뒤에 있는 NLB IP 주소의 상태 검사를 사용으로 설정하여 해당 NLB IP 주소의 사용 가능 여부를 판별합니다. 호스트 이름에 대한 모니터를 사용으로 설정하면, 모니터 상태는 각 NLB IP를 검사하고 이러한 상태 검사를 기반으로 DNS 검색 결과가 지속적으로 업데이트되도록 합니다. 예를 들어, NLB의 IP 주소가 `1.1.1.1`, `2.2.2.2` 및 `3.3.3.3`인 경우에 host 하위 도메인의 정상 오퍼레이션 DNS 검색은 모두 3개의 IP를 리턴하며 이 중에서 1개를 클라이언트가 무작위로 액세스합니다. IP 주소가 `3.3.3.3`인 NLB가 어떤 이유로든 사용 불가능하게 된 경우(예: 구역 장애로 인해), 해당 IP에 대한 상태 검사는 실패하며 모니터는 호스트 이름에서 실패한 IP를 제거합니다. 그리고 DNS 검색은 정상적인 `1.1.1.1` 및 `2.2.2.2` IP만 리턴합니다.</dd>
 </dl>
 
-다음 명령을 실행하여 클러스터의 NLB IP에 등록된 모든 호스트 이름을 볼 수 있습니다. 
+다음 명령을 실행하여 클러스터의 NLB IP에 등록된 모든 호스트 이름을 볼 수 있습니다.
 ```
 ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 ```
@@ -1082,14 +1082,14 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 
 시작하기 전에:
 * 다음 고려사항 및 제한사항을 검토하십시오.
-  * 공용 버전 1.0 및 2.0 NLB에 대한 호스트 이름을 작성할 수 있습니다. 
-  * 현재 사설 NLB에 대한 호스트 이름을 작성할 수 없습니다. 
-  * 최대 128개의 호스트 이름을 등록할 수 있습니다. [지원 케이스](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 열어 이 제한사항을 해제할 수 있습니다. 
+  * 공용 버전 1.0 및 2.0 NLB에 대한 호스트 이름을 작성할 수 있습니다.
+  * 현재 사설 NLB에 대한 호스트 이름을 작성할 수 없습니다.
+  * 최대 128개의 호스트 이름을 등록할 수 있습니다. [지원 케이스](/docs/get-support?topic=get-support-getting-customer-support)를 열어 이 제한사항을 해제할 수 있습니다.
 * [단일 구역 클러스터에서 사용자 앱에 적합한 NLB를 작성](#lb_config)하거나 [다중 구역 클러스터의 각 구역에서 NLB를 작성](#multi_zone_config)하십시오.
 
 하나 이상의 NLB IP 주소에 대한 호스트 이름을 작성하려면 다음을 수행하십시오.
 
-1. NLB에 대한 **EXTERNAL-IP** 주소를 가져오십시오. 하나의 앱을 노출하는 다중 구역 클러스터의 각 구역에 NLB가 있는 경우 각 NLB에 대해 IP를 가져오십시오. 
+1. NLB에 대한 **EXTERNAL-IP** 주소를 가져오십시오. 하나의 앱을 노출하는 다중 구역 클러스터의 각 구역에 NLB가 있는 경우 각 NLB에 대해 IP를 가져오십시오.
   ```
     kubectl get svc
   ```
@@ -1103,7 +1103,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: screen}
 
-2. DNS 호스트 이름을 작성하여 IP를 등록하십시오. 초기에는 하나의 IP 주소로만 호스트 이름을 작성할 수 있습니다. 
+2. DNS 호스트 이름을 작성하여 IP를 등록하십시오. 초기에는 하나의 IP 주소로만 호스트 이름을 작성할 수 있습니다.
   ```
   ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP>
   ```
@@ -1122,7 +1122,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: screen}
 
-4. 하나의 앱을 노출하는 다중 구역 클러스터의 각 구역에 NLB가 있는 경우 기타 NLB의 IP를 호스트 이름에 추가하십시오. 추가할 각 IP 주소에 대해 다음 명령을 실행해야 합니다. 
+4. 하나의 앱을 노출하는 다중 구역 클러스터의 각 구역에 NLB가 있는 경우 기타 NLB의 IP를 호스트 이름에 추가하십시오. 추가할 각 IP 주소에 대해 다음 명령을 실행해야 합니다.
   ```
   ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
   ```
@@ -1142,7 +1142,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: screen}
 
-6. 웹 브라우저에서 작성한 호스트 이름을 통해 앱에 액세스하려면 URL을 입력하십시오. 
+6. 웹 브라우저에서 작성한 호스트 이름을 통해 앱에 액세스하려면 URL을 입력하십시오.
 
 그 다음에는 [상태 모니터를 작성하여 호스트 이름의 상태 검사를 사용으로 설정](#loadbalancer_hostname_monitor)할 수 있습니다.
 
@@ -1154,7 +1154,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`를 따릅니다.
 {: shortdesc}
 
-예를 들어, NLB에 대해 작성하는 호스트 이름이 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`와 같이 표시될 수 있습니다. 다음 표는 호스트 이름의 각 컴포넌트에 대해 설명합니다. 
+예를 들어, NLB에 대해 작성하는 호스트 이름이 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`와 같이 표시될 수 있습니다. 다음 표는 호스트 이름의 각 컴포넌트에 대해 설명합니다.
 
 <table>
 <thead>
@@ -1164,23 +1164,23 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
 <tr>
 <td><code>&lt;cluster_name&gt;</code></td>
 <td>클러스터의 이름입니다.
-<ul><li><code>myclustername</code>: 클러스터 이름이 26자 이하이면 전체 클러스터 이름이 포함되고 수정되지 않습니다. </li>
-<li><code>myveryverylongclusternam</code>: 클러스터 이름이 26자 이상이고 클러스터 이름이 이 지역에서 고유한 경우 클러스터 이름의 처음 24자만 사용됩니다. </li>
-<li><code>myveryverylongclu-ABC123</code>: 클러스터 이름이 26자 이상이고 이 지역에서 동일한 이름의 기존 클러스터가 있는 경우 클러스터의 처음 17자만 사용되고 대시와 6개의 무작위 문자가 포함됩니다. </li></ul>
+<ul><li><code>myclustername</code>: 클러스터 이름이 26자 이하이면 전체 클러스터 이름이 포함되고 수정되지 않습니다.</li>
+<li><code>myveryverylongclusternam</code>: 클러스터 이름이 26자 이상이고 클러스터 이름이 이 지역에서 고유한 경우 클러스터 이름의 처음 24자만 사용됩니다.</li>
+<li><code>myveryverylongclu-ABC123</code>: 클러스터 이름이 26자 이상이고 이 지역에서 동일한 이름의 기존 클러스터가 있는 경우 클러스터의 처음 17자만 사용되고 대시와 6개의 무작위 문자가 포함됩니다.</li></ul>
 </td>
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>전세계적으로 고유한 HASH가 {{site.data.keyword.Bluemix_notm}} 계정에 대해 작성됩니다. 클러스터에서 NLB에 대해 작성하는 모든 호스트 이름이 전세계적으로 고유한 이 HASH를 사용합니다. </td>
+<td>전세계적으로 고유한 HASH가 {{site.data.keyword.Bluemix_notm}} 계정에 대해 작성됩니다. 클러스터에서 NLB에 대해 작성하는 모든 호스트 이름이 전세계적으로 고유한 이 HASH를 사용합니다.</td>
 </tr>
 <tr>
 <td><code>0001</code></td>
 <td>
-첫 번째 및 두 번째 문자인 <code>00</code>은 공용 호스트 이름을 나타냅니다. 세 번째 및 네 번째 문자인 <code>01</code> 또는 다른 숫자는 사용자가 작성하는 각 호스트 이름에 대한 카운터의 역할을 합니다. </td>
+첫 번째 및 두 번째 문자인 <code>00</code>은 공용 호스트 이름을 나타냅니다. 세 번째 및 네 번째 문자인 <code>01</code> 또는 다른 숫자는 사용자가 작성하는 각 호스트 이름에 대한 카운터의 역할을 합니다.</td>
 </tr>
 <tr>
 <td><code>&lt;지역&gt;</code></td>
-<td>클러스터가 작성되는 지역입니다. </td>
+<td>클러스터가 작성되는 지역입니다.</td>
 </tr>
 <tr>
 <td><code>containers.appdomain.cloud</code></td>
@@ -1199,7 +1199,7 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
 
 시작하기 전에 [DNS 호스트 이름으로 NLB IP를 등록](#loadbalancer_hostname_dns)하십시오.
 
-1. 호스트 이름을 가져오십시오. 출력에서는 호스트에 `Unconfigured`의 **상태** 모니터가 있다는 점에 유의하십시오. 
+1. 호스트 이름을 가져오십시오. 출력에서는 호스트에 `Unconfigured`의 **상태** 모니터가 있다는 점에 유의하십시오.
   ```
   ibmcloud ks nlb-dns-monitor-ls --cluster <cluster_name_or_id>
   ```
@@ -1212,7 +1212,7 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
   ```
   {: screen}
 
-2. 호스트 이름에 대한 상태 검사 모니터를 작성하십시오. 구성 매개변수를 포함하지 않은 경우 기본값이 사용됩니다. 
+2. 호스트 이름에 대한 상태 검사 모니터를 작성하십시오. 구성 매개변수를 포함하지 않은 경우 기본값이 사용됩니다.
   ```
   ibmcloud ks nlb-dns-monitor-configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
   ```
@@ -1270,7 +1270,7 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
   </tr>
   <tr>
   <td><code>--expected-body &lt;expected-body&gt;</code></td>
-  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: 상태 검사가 응답 본문에서 찾는 하위 문자열입니다(대소문자 구분). 이 문자열을 찾을 수 없으면 IP가 비정상 상태로 간주됩니다. </td>
+  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: 상태 검사가 응답 본문에서 찾는 하위 문자열입니다(대소문자 구분). 이 문자열을 찾을 수 없으면 IP가 비정상 상태로 간주됩니다.</td>
   </tr>
   <tr>
   <td><code>--expected-codes &lt;expected-codes&gt;</code></td>
@@ -1278,11 +1278,11 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
   </tr>
   <tr>
   <td><code>--allows-insecure &lt;true&gt;</code></td>
-  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: 인증서를 유효성 검증하지 않으려면 <code>true</code>를 설정하십시오. </td>
+  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: 인증서를 유효성 검증하지 않으려면 <code>true</code>를 설정하십시오.</td>
   </tr>
   <tr>
   <td><code>--follows-redirects &lt;true&gt;</code></td>
-  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: IP로 리턴되는 경로 재지정을 따르려면 <code>true</code>를 설정하십시오. </td>
+  <td><code>type</code>이 <code>HTTP</code> 또는 <code>HTTPS</code>인 경우: IP로 리턴되는 경로 재지정을 따르려면 <code>true</code>를 설정하십시오.</td>
   </tr>
   </tbody>
   </table>
@@ -1293,7 +1293,7 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
   ```
   {: pre}
 
-3. 상태 검사 모니터가 올바른 설정으로 구성되었는지 확인하십시오. 
+3. 상태 검사 모니터가 올바른 설정으로 구성되었는지 확인하십시오.
   ```
   ibmcloud ks nlb-dns-monitor-get --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
@@ -1305,7 +1305,7 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
   ```
   {: screen}
 
-4. 호스트 이름 뒤에 있는 NLB IP의 상태 검사 상태를 보십시오. 
+4. 호스트 이름 뒤에 있는 NLB IP의 상태 검사 상태를 보십시오.
   ```
   ibmcloud ks nlb-dns-monitor-status --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
@@ -1329,13 +1329,13 @@ NLB의 호스트 이름은 형식 `<cluster_name>-<globally_unique_account_HASH>
 
 **NLB IP**
 
-나중에 동일한 앱을 노출하도록 클러스터의 다른 구역에서 더 많은 NLB를 추가하는 경우 NLB IP를 기존 호스트 이름에 추가할 수 있습니다. 추가할 각 IP 주소에 대해 다음 명령을 실행해야 합니다. 
+나중에 동일한 앱을 노출하도록 클러스터의 다른 구역에서 더 많은 NLB를 추가하는 경우 NLB IP를 기존 호스트 이름에 추가할 수 있습니다. 추가할 각 IP 주소에 대해 다음 명령을 실행해야 합니다.
 ```
 ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
 ```
 {: pre}
 
-호스트 이름으로 더 이상 등록하지 않을 NLB의 IP 주소도 제거할 수 있습니다. 제거할 각 IP 주소에 대해 다음 명령을 실행해야 합니다. 호스트 이름에서 모든 IP를 제거하는 경우 호스트 이름은 계속해서 존재하지만 IP가 이와 연관되지 않습니다. 
+호스트 이름으로 더 이상 등록하지 않을 NLB의 IP 주소도 제거할 수 있습니다. 제거할 각 IP 주소에 대해 다음 명령을 실행해야 합니다. 호스트 이름에서 모든 IP를 제거하는 경우 호스트 이름은 계속해서 존재하지만 IP가 이와 연관되지 않습니다.
 ```
 ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```
@@ -1345,7 +1345,7 @@ ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host 
 
 **상태 검사 모니터**
 
-상태 모니터 구성을 변경해야 하는 경우 특정 설정을 변경할 수 있습니다. 변경할 설정에 대한 플래그만 포함하십시오. 
+상태 모니터 구성을 변경해야 하는 경우 특정 설정을 변경할 수 있습니다. 변경할 설정에 대한 플래그만 포함하십시오.
 ```
 ibmcloud ks nlb-dns-monitor-configure --cluster <cluster_name_or_id> --nlb-host <host_name> --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
 ```
@@ -1357,7 +1357,7 @@ ibmcloud ks nlb-dns-monitor-disable --cluster <cluster_name_or_id> --nlb-host <h
 ```
 {: pre}
 
-호스트 이름에 대한 모니터를 사용으로 다시 설정하려면 다음 명령을 실행하십시오. 
+호스트 이름에 대한 모니터를 사용으로 다시 설정하려면 다음 명령을 실행하십시오.
 ```
 ibmcloud ks nlb-dns-monitor-enable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans le domaine des transports
@@ -111,7 +111,7 @@ Solution technique :
 **Etape 4 : Distribution en continu**
 * {{site.data.keyword.contdelivery_full}} aide les développeurs à mettre en place rapidement une chaîne d'outils intégrée, en utilisant des modèles pouvant être partagés et personnalisés avec les outils d'IBM, de tiers et des outils open source. Les compilations et les tests sont automatiques et le contrôle qualité est assuré par des fonctions d'analyse.
 * Une fois que les développeurs ont construit et testé les applications dans leurs clusters de développement et de test, ils utilisent des chaînes d'outils IBM CI/CD pour déployer des applications dans des clusters à l'échelle mondiale.
-* {{site.data.keyword.containerlong_notm}} facilite le transfert et la restauration d'applications. Des applications personnalisées sont déployées pour répondre aux exigences régionales via le routage intelligent et l'équilibrage de charge d'Istio. 
+* {{site.data.keyword.containerlong_notm}} facilite le transfert et la restauration d'applications. Des applications personnalisées sont déployées pour répondre aux exigences régionales via le routage intelligent et l'équilibrage de charge d'Istio.
 
 **Résultats**
 
@@ -130,7 +130,7 @@ Un directeur des ressources humaines a besoin d'un nouveau site RH avec un agent
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} facilite le lancement des calculs. Les développeurs peuvent ensuite expérimenter facilement l'intégration rapide de changements dans des systèmes de développement et de test avec des chaînes d'outils ouvertes. Les outils de développement de logiciels traditionnels sont encore plus performants lorsqu'ils fonctionnent avec IBM Watson Assistant. Le nouveau site de prestations a pu voir le jour en moins de 3 semaines.
 
 Technologies clés :    
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Service d'un agent conversationnel optimisé par Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

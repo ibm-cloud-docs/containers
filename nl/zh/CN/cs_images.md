@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 基于映像构建容器
@@ -46,7 +48,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 |注册表|描述|优点|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加您自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|使用此选项，可以在 {{site.data.keyword.registryshort_notm}} 中设置您自己的安全 Docker 映像存储库，在其中可以安全地存储映像并在集群用户之间共享这些映像。|<ul><li>管理对您帐户中映像的访问权。</li><li>将 {{site.data.keyword.IBM_notm}} 提供的映像和样本应用程序（如 {{site.data.keyword.IBM_notm}} Liberty）用作父映像，并向其添加您自己的应用程序代码。</li><li>漏洞顾问程序会自动扫描映像以确定是否有潜在漏洞，包括特定于操作系统的漏洞修复建议。</li></ul>|
 |其他任何专用注册表|通过创建[映像拉取私钥 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/containers/images/)，将任何现有专用注册表连接到集群。私钥用于将注册表 URL 和凭证安全地保存在 Kubernetes 私钥中。|<ul><li>独立于源（Docker Hub、组织拥有的注册表或其他云专用注册表）使用现有专用注册表。</li></ul>|
 |[公共 Docker Hub ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://hub.docker.com/){: #dockerhub}|使用此选项可在不需要 Dockerfile 更改时，在 [Kubernetes 部署 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) 中直接通过 Docker Hub 使用现有公共映像。<p>**注**：请记住，此选项可能不满足您组织的安全需求，如访问管理、漏洞扫描或应用程序隐私。</p>|<ul><li>无需为集群进行其他设置。</li><li>包含各种开放式源代码应用程序。</li></ul>|
 {: caption="公共和专用映像注册表选项" caption-side="top"}
@@ -81,9 +83,9 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 开始之前：
 1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2. [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+2. [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 3. 如果具有在 **2019 年 2 月 25 日**之前创建的现有集群，请[更新集群以使用 API 密钥 `imagePullSecret`](#imagePullSecret_migrate_api_key)。
-4. [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+4. [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要将容器部署到集群的 **default** 名称空间，请执行以下操作：
 
@@ -112,7 +114,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     {: codeblock}
 
     将映像 URL 变量替换为映像的信息：
-    *  **`<app_name>`**：应用程序的名称。 
+    *  **`<app_name>`**：应用程序的名称。
     *  **`<region>`**：注册表域的区域 {{site.data.keyword.registryshort_notm}} API 端点。要列出您登录到的区域的域，请运行 `ibmcloud cr api`。
     *  **`<namespace>`**：注册表名称空间。要获取名称空间信息，请运行 `ibmcloud cr namespace-list`。
     *  **`<my_image>:<tag>`**：要用于构建容器的映像和标记。要获取注册表中可用的映像，请运行 `ibmcloud cr images`。
@@ -163,6 +165,9 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 在不推荐使用的令牌和 `registry.bluemix.net` 域变为不受支持之前，请更新集群映像拉取私钥，以将 API 密钥方法用于 [`default` Kubernetes 名称空间](#imagePullSecret_migrate_api_key)以及可能使用的[其他任何名称空间或帐户](#other)。然后，将部署更新为从 `icr.io` 注册表域中进行拉取。
 
+**在另一个 Kubernetes 名称空间中复制或创建映像拉取私钥之后，即完成操作了吗？**<br>
+还没完。容器必须有权使用所创建的私钥来拉取映像。可以将映像拉取私钥添加到该名称空间的服务帐户，或者在每个部署中引用此私钥。有关指示信息，请参阅[使用映像拉取私钥部署容器](/docs/containers?topic=containers-images#use_imagePullSecret)。
+
 <br />
 
 
@@ -173,7 +178,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 {: shortdesc}
 
 **开始之前**：
-*   [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   确保您具有以下许可权：
     *   对 {{site.data.keyword.containerlong_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **操作员或管理员**平台角色。帐户所有者可以通过运行以下命令为您授予角色：
         ```
@@ -231,8 +236,10 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 ## 使用映像拉取私钥访问其他集群 Kubernetes 名称空间、其他 {{site.data.keyword.Bluemix_notm}} 帐户或外部专用注册表
 {: #other}
 
-在集群中设置您自己的映像拉取私钥，以将容器部署到非 `default` Kubernetes 名称空间，使用存储在其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或使用存储在外部专用注册表中的映像。此外，您还可以创建自己的映像拉取私钥来应用 IAM 访问策略，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。
+在集群中设置您自己的映像拉取私钥，以将容器部署到非 `default` Kubernetes 名称空间，使用存储在其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，或使用存储在外部专用注册表中的映像。此外，您还可以创建自己的映像拉取私钥来应用 IAM 访问策略，以将许可权作用对象限制为特定注册表映像名称空间或操作（例如，`push` 或 `pull`）。
 {:shortdesc}
+
+创建映像拉取私钥后，容器必须使用该私钥才有权从注册表中拉取映像。可以将映像拉取私钥添加到该名称空间的服务帐户，或者在每个部署中引用此私钥。有关指示信息，请参阅[使用映像拉取私钥部署容器](/docs/containers?topic=containers-images#use_imagePullSecret)。
 
 映像拉取私钥仅对于创建用于的 Kubernetes 名称空间有效。对要部署容器的每个名称空间，重复这些步骤。来自 [DockerHub](#dockerhub) 的映像不需要映像拉取私钥。
 {: tip}
@@ -240,9 +247,9 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 开始之前：
 
 1.  [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2.  [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+2.  [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 3.  如果具有在 **2019 年 2 月 25 日**之前创建的现有集群，请[更新集群以使用 API 密钥映像拉取私钥](#imagePullSecret_migrate_api_key)。
-4.  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+4.  [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 要使用您自己的映像拉取私钥，请从以下选项中进行选择：
@@ -267,13 +274,13 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
     输出示例：
     ```
-       default          Active    79d
-   ibm-cert-store   Active    79d
-   ibm-system       Active    79d
-   istio-system     Active    34d
-   kube-public      Active    79d
-   kube-system      Active    79d
-   ```
+    default          Active    79d
+    ibm-cert-store   Active    79d
+    ibm-system       Active    79d
+    istio-system     Active    34d
+    kube-public      Active    79d
+    kube-system      Active    79d
+    ```
     {: screen}
 
     要创建名称空间，请运行以下命令：
@@ -326,12 +333,12 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [可以选择向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
+5.  [向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
 
 ### 创建具有不同 IAM API 密钥凭证的映像拉取私钥，以加强对其他 {{site.data.keyword.Bluemix_notm}} 帐户中映像的控制权或访问权
 {: #other_registry_accounts}
 
-可以将 {{site.data.keyword.Bluemix_notm}} IAM 访问策略分配给用户或服务标识，以将许可权作用对象限制为特定注册表映像存储库、名称空间或操作（例如，`push` 或 `pull`）。然后，创建 API 密钥并将这些注册表凭证存储在集群的映像拉取私钥中。
+可以将 {{site.data.keyword.Bluemix_notm}} IAM 访问策略分配给用户或服务标识，以将许可权作用对象限制为特定注册表映像名称空间或操作（例如，`push` 或 `pull`）。然后，创建 API 密钥并将这些注册表凭证存储在集群的映像拉取私钥中。
 {: shortdesc}
 
 例如，要访问其他 {{site.data.keyword.Bluemix_notm}} 帐户中的映像，请创建 API 密钥，用于存储该帐户中用户或服务标识的 {{site.data.keyword.registryshort_notm}} 凭证。然后，在集群的帐户中，将这些 API 密钥凭证保存在每个集群和集群名称空间的映像拉取私钥中。
@@ -347,13 +354,13 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
     输出示例：
     ```
-       default          Active    79d
-   ibm-cert-store   Active    79d
-   ibm-system       Active    79d
-   istio-system     Active    34d
-   kube-public      Active    79d
-   kube-system      Active    79d
-   ```
+    default          Active    79d
+    ibm-cert-store   Active    79d
+    ibm-system       Active    79d
+    istio-system     Active    34d
+    kube-public      Active    79d
+    kube-system      Active    79d
+    ```
     {: screen}
 
     要创建名称空间，请运行以下命令：
@@ -461,10 +468,10 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 7.  验证私钥是否已成功创建。将 <em>&lt;kubernetes_namespace&gt;</em> 替换为在其中创建映像拉取私钥的名称空间。
 
     ```
-    kubectl get secrets --namespace <kubernetes_namespace>
+        kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [可以选择向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
+8.  [向 Kubernetes 服务帐户添加映像拉取私钥，以便在部署容器时，名称空间中的任何 pod 都可以使用映像拉取私钥](#use_imagePullSecret)。
 
 ### 访问存储在其他专用注册表中的映像
 {: #private_images}
@@ -474,7 +481,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 开始之前：
 
-1.  [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+1.  [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 2.  [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 要创建映像拉取私钥，请执行以下操作：
@@ -670,7 +677,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
    spec:
      containers:
        - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+         image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
    ```
    {: codeblock}
 
@@ -715,7 +722,7 @@ Docker 映像是使用 {{site.data.keyword.containerlong}} 所创建的每一个
 
 开始之前：
 1. [在 {{site.data.keyword.registryshort_notm}} 中设置名称空间，并将映像推送到此名称空间](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2. [创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+2. [创建集群](/docs/containers?topic=containers-clusters#clusters_ui)。
 3. [设定 CLI 的目标为集群](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 要将容器部署到集群的**缺省**名称空间，请创建配置文件。

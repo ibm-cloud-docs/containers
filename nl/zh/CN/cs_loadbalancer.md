@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 使用网络负载均衡器 (NLB) 进行基本负载均衡和 DSR 负载均衡
@@ -71,10 +71,10 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 <br />
 
 
-## 比较 V1.0 和 V2.0 NLB
+## V1.0 和 V2.0 NLB 中基本负载均衡和 DSR 负载均衡的比较
 {: #comparison}
 
-创建 NLB 时，可以选择 V1.0 或 V2.0 NLB。请注意，V2.0 NLB 处于 Beta 阶段。
+创建 NLB 时，可以选择 V1.0 NLB（执行基本负载均衡）或 V2.0 NLB（执行直接服务器返回 (DSR) 负载均衡）。请注意，V2.0 NLB 处于 Beta 阶段。
 {: shortdesc}
 
 **V1.0 和 V2.0 NLB 有哪些相似之处？**
@@ -83,14 +83,14 @@ V1.0 和 V2.0 NLB 都是仅在 Linux 内核空间中生存的第 4 层负载均�
 
 **V1.0 和 V2.0 NLB 有哪些不同之处？**
 
-客户机向应用程序发送请求时，NLB 会将请求包路由到应用程序 pod 所在的工作程序节点 IP 地址。V1.0 NLB 会使用网络地址转换 (NAT) 将请求包的源 IP 地址重写为负载均衡器 pod 所在的工作程序节点的 IP。在工作程序节点返回应用程序响应包时，会使用 NLB 所在的工作程序节点 IP。然后，NLB 必须将响应包发送到客户机。为了防止重写 IP 地址，您可以[启用源 IP 保留](#node_affinity_tolerations)。但是，源 IP 保留需要负载均衡器 pod 和应用程序 pod 在同一工作程序上运行，这样请求就不必转发给其他工作程序。为此，您必须向应用程序 pod 添加节点亲缘关系和容忍度。
+客户机向应用程序发送请求时，NLB 会将请求包路由到应用程序 pod 所在的工作程序节点 IP 地址。V1.0 NLB 会使用网络地址转换 (NAT) 将请求包的源 IP 地址重写为负载均衡器 pod 所在的工作程序节点的 IP。在工作程序节点返回应用程序响应包时，会使用 NLB 所在的工作程序节点 IP。然后，NLB 必须将响应包发送到客户机。为了防止重写 IP 地址，您可以[启用源 IP 保留](#node_affinity_tolerations)。但是，源 IP 保留需要负载均衡器 pod 和应用程序 pod 在同一工作程序上运行，这样请求就不必转发给其他工作程序。为此，您必须向应用程序 pod 添加节点亲缘关系和容忍度。有关使用 V1.0 NB 进行基本负载均衡的更多信息，请参阅 [V1.0：基本负载均衡的组件和体系结构](#v1_planning)。
 
-与 V1.0 NLB 不同，V2.0 NLB 在将请求转发到其他工作程序上的应用程序 pod 时不会使用 NAT。NLB 2.0 路由客户机请求时，会使用 IP-over-IP (IPIP) 将原始请求包封装到另一个新包中。此封装的 IPIP 包具有负载均衡器 pod 所在的工作程序节点的源 IP，这允许原始请求包保留客户机 IP 作为其源 IP 地址。然后，工作程序节点使用直接服务器返回 (DSR) 将应用程序响应包发送到客户机 IP。响应包会跳过 NLB 而直接发送到客户机，从而减少了 NLB 必须处理的流量。
+与 V1.0 NLB 不同，V2.0 NLB 在将请求转发到其他工作程序上的应用程序 pod 时不会使用 NAT。NLB 2.0 路由客户机请求时，会使用 IP-over-IP (IPIP) 将原始请求包封装到另一个新包中。此封装的 IPIP 包具有负载均衡器 pod 所在的工作程序节点的源 IP，这允许原始请求包保留客户机 IP 作为其源 IP 地址。然后，工作程序节点使用直接服务器返回 (DSR) 将应用程序响应包发送到客户机 IP。响应包会跳过 NLB 而直接发送到客户机，从而减少了 NLB 必须处理的流量。有关使用 V2.0 NB 进行 DSR 负载均衡的更多信息，请参阅 [V2.0：DSR 负载均衡的组件和体系结构](#planning_ipvs)。
 
 <br />
 
 
-## V1.0：组件和体系结构
+## V1.0：基本负载均衡的组件和体系结构
 {: #v1_planning}
 
 TCP/UDP 网络负载均衡器 (NLB) 1.0 使用 Iptables（Linux 内核功能）在应用程序的各 pod 中对请求进行负载均衡。
@@ -131,7 +131,7 @@ TCP/UDP 网络负载均衡器 (NLB) 1.0 使用 Iptables（Linux 内核功能）�
 **开始之前**：
 * 要在多个专区中创建公共网络负载均衡器 (NLB)，至少一个公用 VLAN 必须在每个专区中提供可移植子网。要在多个专区中创建专用 NLB，至少一个专用 VLAN 必须在每个专区中提供可移植子网。您可以执行[配置集群的子网](/docs/containers?topic=containers-subnets)中的步骤来添加子网。
 * 如果将网络流量限制为流至边缘工作程序节点，请确保每个专区中至少启用 2 个[边缘工作程序节点](/docs/containers?topic=containers-edge#edge)，以便 NLB 能以均匀方式进行部署。
-* 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，以便工作程序节点可以在专用网络上彼此通信。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+* 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，以便工作程序节点可以在专用网络上彼此通信。要执行此操作，您需要有**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，也可以请求帐户所有者来启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get --region <region>` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
 * 确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
 
 
@@ -485,7 +485,7 @@ spec:
 
 启用源 IP 后，通过将亲缘关系规则添加到应用程序部署，将应用程序 pod 安排在 NLB 的 IP 地址所在 VLAN 中的工作程序节点上。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 获取 NLB 服务的 IP 地址。在 **LoadBalancer Ingress** 字段中查找该 IP 地址。
     ```
@@ -514,7 +514,7 @@ spec:
 
     2. 在输出的 **Subnet VLANs** 下，查找与先前检索到的 NLB IP 地址相匹配的子网 CIDR，并记下相应的 VLAN 标识。
 
-        例如，如果 NLB 服务 IP 地址为 `169.36.5.xxx`，那么上一步的示例输出中的匹配子网为 `169.36.5.xxx/29`。该子网连接到的 VLAN 标识为 `2234945`。
+        例如，如果 NLB 服务 IP 地址为 `169.36.5.xxx`，那么上一步的输出示例中的匹配子网为 `169.36.5.xxx/29`。该子网连接到的 VLAN 标识为 `2234945`。
 
 3. 向上一步中记录的 VLAN 标识的应用程序部署[添加亲缘关系规则 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)。
 
@@ -569,7 +569,7 @@ spec:
 
     2. 在输出中，确定应用程序的 pod。记下该 pod 所在的工作程序节点的 **NODE** 标识。
 
-        在上一步的示例输出中，应用程序 pod `cf-py-d7b7d94db-vp8pq` 位于工作程序节点 `10.176.48.78` 上。
+        在上一步的输出示例中，应用程序 pod `cf-py-d7b7d94db-vp8pq` 位于工作程序节点 `10.176.48.78` 上。
 
     3. 列出工作程序节点的详细信息。
 
@@ -653,17 +653,17 @@ NLB 2.0 是使用 Linux 内核的 IP 虚拟服务器 (IPVS) 的第 4 层负载�
 
 1. [更新集群的主节点和工作程序节点](/docs/containers?topic=containers-update)至 Kubernetes V1.12 或更高版本。
 
-2. 要允许 NLB 2.0 将请求转发到多个专区中的应用程序 pod，请开具支持案例以请求对 VLAN 进行配置设置。**重要信息**：必须为所有公用 VLAN 请求此配置。如果请求关联的新 VLAN，那么必须为该 VLAN 开具另一个凭单。
+2. 要允许 NLB 2.0 将请求转发到多个专区中的应用程序 pod，请开具支持案例以请求对 VLAN 进行容量聚集。此配置设置不会导致任何网络中断。
     1. 登录到 [{{site.data.keyword.Bluemix_notm}} 控制台](https://cloud.ibm.com/)。
     2. 在菜单栏中，单击**支持**，单击**管理案例**选项卡，然后单击**创建新案例**。
     3. 在案例字段中，输入以下内容：
        * 对于“支持类型”，选择**技术**。
        * 对于“类别”，选择 **VLAN 生成**。
        * 对于“主题”，输入**公用 VLAN 网络问题**。
-    4. 将以下信息添加到描述：“请设置网络以允许与我的帐户关联的公用 VLAN 上进行容量聚集。此请求的引用凭单为：https://control.softlayer.com/support/tickets/63859145”。
+    4. 将以下信息添加到描述：“请设置网络以允许与我的帐户关联的公用 VLAN 上进行容量聚集。此请求的引用凭单为：https://control.softlayer.com/support/tickets/63859145”。请注意，如果要允许特定 VLAN 上的容量聚集（例如，仅一个集群的公用 VLAN），那么可以在描述中指定这些 VLAN 标识。
     5. 单击**提交**。
 
-3. 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。启用了 VRF 或 VLAN 生成后，NLB 2.0 可以将包路由到帐户中的各种子网。
+3. 为 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。启用了 VRF 或 VLAN 生成后，NLB 2.0 可以将包路由到帐户中的各种子网。
 
 4. 如果使用 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来管理流至 NLB 2.0 IP 地址的流量，那么必须向策略中的 `spec` 部分添加 `applyOnForward: true` 和 `doNotTrack: true` 字段，并从该部分中除去 `preDNAT: true`。`applyOnForward: true` 确保 Calico 策略应用于封装和转发的流量。`doNotTrack: true` 确保工作程序节点可以使用 DSR 将响应包直接返回给客户机，而无需跟踪连接。例如，如果使用 Calico 策略将仅从特定 IP 地址到 NLB IP 地址的流量列入白名单，那么该策略类似于以下内容：
     ```
@@ -1083,7 +1083,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 * 查看以下注意事项和限制。
   * 可以为公共 V1.0 和 V2.0 NLB 创建主机名。
   * 目前无法为专用 NLB 创建主机名。
-  * 最多可以注册 128 个主机名。可以通过开具[支持案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)来解除对请求的这一限制。
+  * 最多可以注册 128 个主机名。可以通过开具[支持案例](/docs/get-support?topic=get-support-getting-customer-support)来解除对请求的这一限制。
 * [在单专区集群中为应用程序创建 NLB](#lb_config) 或[在多专区集群的每个专区中创建 NLB](#multi_zone_config)。
 
 要为一个或多个 NLB IP 地址创建一个主机名，请执行以下操作：
@@ -1094,7 +1094,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: pre}
 
-  在以下示例输出中，NLB **EXTERNAL-IP** 为 `168.2.4.5` 和 `88.2.4.5`。
+  在以下输出示例中，NLB **EXTERNAL-IP** 为 `168.2.4.5` 和 `88.2.4.5`。
   ```
   NAME             TYPE           CLUSTER-IP       EXTERNAL-IP       PORT(S)                AGE
   lb-myapp-dal10   LoadBalancer   172.21.xxx.xxx   168.2.4.5         1883:30303/TCP         6d

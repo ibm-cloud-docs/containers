@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # Ajout de services à l'aide de modules complémentaires gérés
 {: #managed-addons}
@@ -34,7 +35,7 @@ Les modules complémentaires {{site.data.keyword.containerlong_notm}} gérés pe
 **Comment la facturation et le support fonctionnent-ils pour les modules complémentaires gérés ?** </br>
 Les modules complémentaires gérés sont entièrement intégrés dans l'organisation de support {{site.data.keyword.Bluemix_notm}}. Pour toute question ou problématique relative à l'utilisation des modules complémentaires gérés, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Si l'outil que vous ajoutez à votre cluster entraîne des coûts, ceux-ci sont automatiquement intégrés et répertoriés dans le cadre de votre facturation {{site.data.keyword.containerlong_notm}}. Le cycle de facturation est déterminé par {{site.data.keyword.Bluemix_notm}} en fonction du moment où vous activez le module complémentaire dans votre cluster. 
+Si l'outil que vous ajoutez à votre cluster entraîne des coûts, ceux-ci sont automatiquement intégrés et répertoriés dans le cadre de votre facturation {{site.data.keyword.containerlong_notm}}. Le cycle de facturation est déterminé par {{site.data.keyword.Bluemix_notm}} en fonction du moment où vous activez le module complémentaire dans votre cluster.
 
 **Quelles sont les limitations à prendre en compte ?** </br>
 Si vous avez installé le [contrôleur d'admission Container Image Security Enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce) dans votre cluster, vous ne pouvez pas activer les modules complémentaires gérés dans votre cluster.
@@ -42,12 +43,12 @@ Si vous avez installé le [contrôleur d'admission Container Image Security Enfo
 ## Ajout de modules complémentaires gérés
 {: #adding-managed-add-ons}
 
-Pour activer un module complémentaire géré dans votre cluster, vous utilisez la [commande `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable). Lorsque vous activez le module complémentaire géré, une version prise en charge de l'outil, y compris toutes les ressources Kubernetes, est installée automatiquement dans votre cluster. Reportez-vous à la documentation de chacun des modules complémentaires gérés afin d'identifier les prérequis auxquels votre cluster doit satisfaire pour pourvoir les installer. 
+Pour activer un module complémentaire géré dans votre cluster, vous utilisez la [commande `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Lorsque vous activez le module complémentaire géré, une version prise en charge de l'outil, y compris toutes les ressources Kubernetes, est installée automatiquement dans votre cluster. Reportez-vous à la documentation de chacun des modules complémentaires gérés afin d'identifier les prérequis auxquels votre cluster doit satisfaire pour pourvoir les installer.
 
 Pour plus d'informations sur les prérequis pour chaque module complémentaire, voir :
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## Mise à jour des modules complémentaires gérés
 {: #updating-managed-add-ons}
@@ -55,9 +56,9 @@ Pour plus d'informations sur les prérequis pour chaque module complémentaire, 
 Les versions de chaque module complémentaire géré sont testées par {{site.data.keyword.Bluemix_notm}} et approuvées pour être utilisées dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour les composants d'un module complémentaire vers la dernière version prise en charge par {{site.data.keyword.containerlong_notm}}, procédez comme indiqué ci-après.
 {: shortdesc}
 
-1. Vérifiez si la version de vos modules complémentaires est la plus récente. Les modules complémentaires signalés par `* (<version> latest)` peuvent être mis à jour. 
+1. Vérifiez si la version de vos modules complémentaires est la plus récente. Les modules complémentaires signalés par `* (<version> latest)` peuvent être mis à jour.
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,13 +66,12 @@ Les versions de chaque module complémentaire géré sont testées par {{site.da
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
-2. Sauvegardez les ressources, par exemple des fichiers de configuration de services ou d'applications, que vous avez créées ou modifiées dans l'espace de nom généré par le module complémentaire.
-Par exemple, le module complémentaire Istio utilise `istio-system`, et le module complémentaire Knative utilise `knative-serving`, `knative-monitoring`, `knative-eventing` et `knative-build`.
+2. Sauvegardez les ressources, par exemple des fichiers de configuration de services ou d'applications, que vous avez créées ou modifiées dans l'espace de nom généré par le module complémentaire. Par exemple, le module complémentaire Istio utilise `istio-system`, et le module complémentaire Knative utilise `knative-serving`, `knative-monitoring`, `knative-eventing` et `knative-build`.
    Exemple de commande :
    ```
    kubectl get pod <pod_name> -o yaml -n istio-system
@@ -87,9 +87,9 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
 
    2. Sauvegardez les ressources créées à partir de ces CRD.
 
-4. Facultatif pour Knative : si vous avez modifié l'une quelconque des ressources suivantes, procurez-vous le fichier YAML et sauvegardez-les sur votre machine locale. Notez que si vous avez modifié l'une quelconque de ces ressources et que vous souhaitez utiliser à la place celle qui est installée par défaut, vous pouvez supprimer la ressource. Au bout de quelques minutes, la ressource est recréée avec les valeurs par défaut installées.
+4. Facultatif pour Knative : si vous avez modifié l'une quelconque des ressources suivantes, procurez-vous le fichier YAML et sauvegardez-les sur votre machine locale. Si vous avez modifié l'une quelconque de ces ressources et que vous souhaitez utiliser à la place celle qui est installée par défaut, vous pouvez supprimer la ressource. Au bout de quelques minutes, la ressource est recréée avec les valeurs par défaut installées.
   <table summary="Tableau des ressources Knative">
-<caption>Ressources Knative</caption>
+  <caption>Ressources Knative</caption>
   <thead><tr><th>Nom de ressource</th><th>Type de ressource</th><th>Espace de nom</th></tr></thead>
   <tbody>
   <tr><td><code>config-autoscaler</code></td><td>ConfigMap</td><td><code>knative-serving</code></td></tr>
@@ -110,7 +110,7 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
   ```
   {: pre}
 
-5. Si vous avez activé les modules complémentaires `istio-sample-bookinfo` et `istio-extras`, désactivez-les. 
+5. Si vous avez activé les modules complémentaires `istio-sample-bookinfo` et `istio-extras`, désactivez-les.
    1. Désactivez le module complémentaire `istio-sample-bookinfo`.
       ```
       ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
@@ -123,7 +123,7 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
       ```
       {: pre}
 
-6. Désactivez le module complémentaire. 
+6. Désactivez le module complémentaire.
    ```
    ibmcloud ks cluster-addon-disable <add-on_name> --cluster <cluster_name_or_ID> -f
    ```
@@ -141,7 +141,7 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
      ```
      {: pre}
 
-8. Choisissez la version de module complémentaire vers laquelle vous souhaitez effectuer une mise à jour. 
+8. Choisissez la version de module complémentaire vers laquelle vous souhaitez effectuer une mise à jour.
    ```
    ibmcloud ks addon-versions
    ```
@@ -165,7 +165,7 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
     ```
     {: pre}
 
-12. Facultatif pour Istio : réactivez les modules complémentaires `istio-extras` et `istio-sample-bookinfo`. Utilisez la même version pour ces modules complémentaires que pour le module complémentaire `istio`. 
+12. Facultatif pour Istio : réactivez les modules complémentaires `istio-extras` et `istio-sample-bookinfo`. Utilisez la même version pour ces modules complémentaires que pour le module complémentaire `istio`.
     1. Activez le module complémentaire `istio-extras`.
        ```
        ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID> --version <version>
@@ -177,3 +177,10 @@ Par exemple, le module complémentaire Istio utilise `istio-system`, et le modul
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. Facultatif pour Istio : si vous utilisez des sections TLS dans vos fichiers de configuration de passerelle, vous devez supprimer et recréer les passerelles de sorte que Envoy puisse accéder aux valeurs confidentielles. 
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

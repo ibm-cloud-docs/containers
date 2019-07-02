@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 教程：创建 Kubernetes 集群
@@ -62,6 +64,7 @@ subcollection: containers
 -  查看[准备创建集群](/docs/containers?topic=containers-clusters#cluster_prepare)时需要执行的步骤。
 -  确保您具有以下访问策略：
     - 对 {{site.data.keyword.containerlong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)
+    - 对 {{site.data.keyword.registrylong_notm}} 的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)
     - 对 {{site.data.keyword.containerlong_notm}} 的[{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)
 
 
@@ -77,7 +80,7 @@ subcollection: containers
 
 1.  [在 {{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/kubernetes/catalog/cluster/create) 中，创建免费或标准集群，其中包含具有 1 个工作程序节点的 1 个工作程序池。
 
-    您还可以[在 CLI 中创建集群](/docs/containers?topic=containers-clusters#clusters_cli)。
+    您还可以[在 CLI 中创建集群](/docs/containers?topic=containers-clusters#clusters_cli_steps)。
     {: tip}
 
 集群供应后，请安装用于管理集群的以下 CLI：
@@ -92,15 +95,15 @@ subcollection: containers
 </br>
 **安装 CLI 及其必备软件**
 
-1. 安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安装包括：
+1. 安装 [{{site.data.keyword.Bluemix_notm}} CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](/docs/cli?topic=cloud-cli-getting-started)。此安装包括：
   - 基本 {{site.data.keyword.Bluemix_notm}} CLI。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud`。
   - {{site.data.keyword.containerlong_notm}} 插件。用于通过 {{site.data.keyword.Bluemix_notm}} CLI 运行命令的前缀是 `ibmcloud ks`。
   - {{site.data.keyword.registryshort_notm}} 插件。使用此插件可在 {{site.data.keyword.registryshort_notm}} 中设置和管理专用映像存储库。用于运行注册表命令的前缀是 `ibmcloud cr`。
 
 2. 登录到 {{site.data.keyword.Bluemix_notm}} CLI。根据提示，输入您的 {{site.data.keyword.Bluemix_notm}} 凭证。
   ```
-        ibmcloud login
-        ```
+    ibmcloud login
+    ```
   {: pre}
 
   如果您有联合标识，请使用 `--sso` 标志登录。输入您的用户名，并使用 CLI 输出中提供的 URL 来检索一次性密码。
@@ -118,28 +121,28 @@ subcollection: containers
 
 6. 要将应用程序部署到集群中，请[安装 Kubernetes CLI ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。用于通过 Kubernetes CLI 来运行命令的前缀是 `kubectl`。
 
-  1. 下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.12.7。
-    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
+  1. 下载与您计划使用的 Kubernetes 集群 `major.minor` 版本相匹配的 Kubernetes CLI `major.minor` 版本。当前 {{site.data.keyword.containerlong_notm}} 缺省 Kubernetes 版本是 1.13.6。
+    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    - **Windows**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
   2. 如果使用的是 OS X 或 Linux，请完成以下步骤。
 
     1. 将可执行文件移至 `/usr/local/bin` 目录。
       ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
-            ```
+      mv /filepath/kubectl /usr/local/bin/kubectl
+      ```
       {: pre}
 
     2. 确保 `/usr/local/bin` 列在 `PATH` 系统变量中。`PATH` 变量包含操作系统可以在其中找到可执行文件的所有目录。列在 `PATH` 变量中的目录用于不同的用途。`/usr/local/bin` 用于为不属于操作系统的一部分，而是由系统管理员手动安装的软件存储其可执行文件。
       ```
-            echo $PATH
-            ```
+      echo $PATH
+      ```
       {: pre}
-示例 CLI 输出：
-    ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-            ```
+      示例 CLI 输出：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
       {: screen}
 
     3. 使文件可执行。
@@ -185,7 +188,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -198,7 +201,6 @@ subcollection: containers
 每次登录到 {{site.data.keyword.containerlong}} CLI 来使用集群时，必须运行这些命令以将集群配置文件的路径设置为会话变量。Kubernetes CLI 使用此变量来查找与 {{site.data.keyword.Bluemix_notm}} 中的集群连接所必需的本地配置文件和证书。
 
 1.  获取命令以设置环境变量并下载 Kubernetes 配置文件。
-
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
@@ -207,16 +209,14 @@ subcollection: containers
     配置文件下载完成后，会显示一个命令，您可以使用该命令将本地 Kubernetes 配置文件的路径设置为环境变量。
 
     OS X 的示例：
-
     ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
-        ```
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    ```
     {: screen}
+    使用的是 Windows PowerShell？请包含 `--powershell` 标志以获取 Windows PowerShell 格式的环境变量。
+    {: tip}
 
 2.  复制并粘贴终端中显示的命令，以设置 `KUBECONFIG` 环境变量。
-
-    **Windows PowerShell 用户**：不要从 `ibmcloud ks cluster-config` 的输出中复制并粘贴 `SET` 命令，您必须改为运行相关命令来设置 `KUBECONFIG` 环境变量，例如运行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-    {: note}
 
 3.  验证是否已正确设置 `KUBECONFIG` 环境变量。
 
@@ -244,8 +244,8 @@ subcollection: containers
     输出示例：
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -261,14 +261,14 @@ subcollection: containers
     {: note}
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south
     ```
     {: pre}
 
 2.  将 {{site.data.keyword.toneanalyzershort}} 实例绑定到集群的 `default` Kubernetes 名称空间。您可以在以后创建自己的名称空间来管理对 Kubernetes 资源的用户访问权，但现在，请使用 `default` 名称空间。Kubernetes 名称空间不同于先前创建的注册表名称空间。
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 

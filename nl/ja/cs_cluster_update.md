@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,11 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-# クラスター、ワーカー・ノード、アドオンの更新
+
+# クラスター、ワーカー・ノード、クラスター・コンポーネントの更新
 {: #update}
 
 更新をインストールして、{{site.data.keyword.containerlong}} の Kubernetes クラスターを最新に保つことができます。
@@ -39,11 +41,11 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールと CLI で通知されます。また、[サポートされるバージョン](/docs/containers?topic=containers-cs_versions)のページをチェックすることもできます。
 
 **マスターのバージョンは最新のバージョンよりいくつ古いものまでサポートされますか?**</br>
-一般に IBM は常に 3 つのバージョンの Kubernetes をサポートします。 Kubernetes API サーバーは、最大で現行バージョンより 2 つ先のバージョンに更新できます。
+一般に IBM は同時に 3 つの Kubernetes バージョンをサポートします。Kubernetes API サーバーは、最大で現行バージョンより 2 つ先のバージョンに更新できます。
 
-例えば、現在の Kubernetes API サーバーのバージョンが 1.8 の場合に、1.11 に更新するためには、まず 1.10 に更新する必要があります。 更新を強制実行することは可能ですが、3 つ以上先のマイナー・バージョンへの更新では、予期しない結果が生じたり失敗したりするおそれがあります。
+例えば、現在の Kubernetes API サーバーのバージョンが 1.11 の場合に、1.14に更新するためには、まず 1.12 に更新する必要があります。
 
-サポートされない Kubernetes バージョンがクラスターで実行されている場合は、更新を強制する必要がある場合があります。 したがって、動作への影響を避けるために、クラスターを最新の状態に保ってください。
+クラスターで、サポートされない Kubernetes バージョンが実行されている場合は、[バージョン・アーカイブの説明](/docs/containers?topic=containers-cs_versions#k8s_version_archive)に従ってください。サポートされない状態や動作上の影響を回避するには、クラスターを最新状態に保ってください。
 
 **ワーカー・ノードをマスターよりも新しいバージョンにすることはできますか?**</br>
 ワーカー・ノードは、マスターより新しい `major.minor` Kubernetes バージョンを実行することはできません。 まずは、[マスターを更新](#update_master)して最新の Kubernetes バージョンにしてください。 その後に、クラスター内の[ワーカー・ノードを更新](#worker_node)してください。
@@ -51,7 +53,7 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 ワーカー・ノードは、セキュリティー更新プログラム用のワーカー・ノードに固有のパッチ・バージョンなど、マスターより新しいパッチ・バージョンを実行できます。
 
 **パッチの更新はどのように適用されますか?**</br>
-デフォルトでは、マスターのパッチ更新は数日にわたって自動的に適用されます。そのため、まだマスターに適用されていないパッチ・バージョンが、使用可能なバージョンとして表示されることがあります。 また、更新の自動化では、正常な状態でないクラスターや現在進行中の操作があるクラスターはスキップされます。 必要に応じて、IBM は特定のマスターのフィックスパック (マスターが 1 つ前のマイナー・バージョンから更新される場合にのみ必要なパッチなど) に対して、自動更新を無効にする場合があります。 どのような場合でも、[バージョンの変更ログを参照](/docs/containers?topic=containers-changelog)して影響がないか確認したら、自動更新が適用されるのを待たずに、`ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)を適切に使用してお客様自身で更新することができます。
+デフォルトでは、マスターのパッチ更新は数日にわたって自動的に適用されます。そのため、まだマスターに適用されていないパッチ・バージョンが、使用可能なバージョンとして表示されることがあります。 また、更新の自動化では、正常な状態でないクラスターや現在進行中の操作があるクラスターはスキップされます。 必要に応じて、IBM は特定のマスターのフィックスパック (マスターが 1 つ前のマイナー・バージョンから更新される場合にのみ必要なパッチなど) に対して、自動更新を無効にする場合があります。 どのような場合でも、[バージョンの変更ログを参照](/docs/containers?topic=containers-changelog)して影響がないか確認したら、自動更新が適用されるのを待たずに、`ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)を適切に使用してお客様自身で更新することができます。
 
 マスターとは異なり、ワーカーはパッチ・バージョンごとに更新する必要があります。
 
@@ -77,11 +79,11 @@ Kubernetes マスターの_メジャー_・バージョンまたは_マイナー
 
 1.  [Kubernetes の変更点](/docs/containers?topic=containers-cs_versions)を確認し、『_マスターの前に行う更新_』というマークのある更新を実行します。
 
-2.  [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/login)を使用するか CLI `ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)を実行して、Kubernetes API サーバーと、関連する Kubernetes マスター・コンポーネントを更新します。
+2.  [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/login)を使用するか CLI `ibmcloud ks cluster-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)を実行して、Kubernetes API サーバーと、関連する Kubernetes マスター・コンポーネントを更新します。
 
 3.  数分待ってから、更新が完了したことを確認します。 {{site.data.keyword.Bluemix_notm}} クラスター・ダッシュボードで Kubernetes API サーバーのバージョンを確認するか、`ibmcloud ks clusters` を実行します。
 
-4.  Kubernetes マスターで実行されている Kubernetes API サーバーと同じバージョンの [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) をインストールします。
+4.  Kubernetes マスターで実行されている Kubernetes API サーバーと同じバージョンの [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) をインストールします。 サーバーのバージョンと比べて 2 バージョン以上新しいか古い `kubectl` クライアント・バージョンは、[Kubernetes ではサポートされていません ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/setup/version-skew-policy/)。
 
 Kubernetes API サーバーの更新が完了したら、ワーカー・ノードを更新できます。
 
@@ -98,7 +100,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 更新対象のワーカー・ノード上でデプロイメントの一部として実行しているアプリは、クラスター内のその他のワーカー・ノードにスケジュール変更されます。 別のワーカー・プール内のワーカー・ノードにスケジュールされたり、スタンドアロン・ワーカー・ノードがある場合はそのノードにアプリがスケジュールされたりすることもあります。 アプリのダウン時間を回避するには、ワークロードに対応できるだけの十分な容量がクラスター内になければなりません。
 
 **更新中、一度に停止するワーカー・ノード数を制御するにはどうしたらよいですか?**</br>
-すべてのワーカー・ノードを稼働状態にする必要がある場合は、[ワーカー・プールをサイズ変更](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)するか、[スタンドアロン・ワーカー・ノードを追加](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)して、ワーカー・ノードを追加することを検討してください。 追加したワーカー・ノードは、更新が完了したら削除できます。
+すべてのワーカー・ノードを稼働状態にする必要がある場合は、[ワーカー・プールをサイズ変更](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)するか、[スタンドアロン・ワーカー・ノードを追加](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add)して、ワーカー・ノードを追加することを検討してください。 追加したワーカー・ノードは、更新が完了したら削除できます。
 
 また、Kubernetes 構成マップを作成して、更新中に一度に使用不可にできるワーカー・ノードの最大数を指定することもできます。 ワーカー・ノードは、ワーカー・ノード・ラベルで識別されます。 IBM 提供のラベルも、ワーカー・ノードに追加したカスタム・ラベルも使用できます。
 
@@ -106,7 +108,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 構成マップを定義しない場合は、デフォルトが使用されます。 デフォルトでは、更新処理中、クラスターごとに全ワーカー・ノードの最大 20% が使用不可になります。
 
 **始める前に**:
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Kubernetes マスターを更新します](#master)。 ワーカー・ノードの Kubernetes バージョンを、Kubernetes マスターで実行される Kubernetes API サーバーのバージョンより高くすることはできません。
 - [Kubernetes の変更](/docs/containers?topic=containers-cs_versions)の『_マスターの後に行う更新_』に記載されている変更作業を行います。
 - パッチの更新を適用する場合は、[Kubernetes バージョンの変更ログ](/docs/containers?topic=containers-changelog#changelog)を確認してください。
@@ -201,7 +203,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
     <tbody>
       <tr>
         <td><code>drain_timeout_seconds</code></td>
-        <td> オプション: [排出 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) が完了するまで待機するタイムアウト(秒単位)。 ワーカー・ノードの排出を行うと、そのワーカー・ノードから既存のポッドがすべて安全に削除され、クラスター内のその他のワーカー・ノード上にスケジュール変更されます。 指定可能な値は、1 から 180 までの整数です。 デフォルト値は	30 です。</td>
+        <td> オプション: [排出 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) が完了するまで待機するタイムアウト(秒単位)。 ワーカー・ノードの排出を行うと、そのワーカー・ノードから既存のポッドがすべて安全に削除され、クラスター内のその他のワーカー・ノード上にスケジュール変更されます。 指定可能な値は、1 から 180 の範囲の整数です。デフォルト値は	30 です。</td>
       </tr>
       <tr>
         <td><code>zonecheck.json</code></br><code>regioncheck.json</code></td>
@@ -209,11 +211,11 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
       </tr>
       <tr>
         <td><code>defaultcheck.json</code></td>
-        <td>構成マップを作成しない場合や、マップの構成が正しくない場合は、Kubernetes のデフォルトが適用されます。 デフォルトでは、同時に使用不可になるのは、クラスターのワーカー・ノードの 20% のみです。 デフォルトのチェックを構成マップに追加して、このデフォルト値をオーバーライドできます。 この例では、ゾーンのチェック (<code>dal13</code>) でも地域のチェック (<code>us-south</code>) でも指定されていないすべてのワーカー・ノードが更新中に使用不可になることができます。 </td>
+        <td>構成マップを作成しない場合や、マップの構成が正しくない場合は、Kubernetes のデフォルトが適用されます。 デフォルトでは、同時に使用不可にできるのは、クラスターのワーカー・ノードの 20% のみです。デフォルトのチェックを構成マップに追加して、このデフォルト値をオーバーライドできます。 この例では、ゾーンのチェック (<code>dal13</code>) でも地域のチェック (<code>us-south</code>) でも指定されていないすべてのワーカー・ノードが更新中に使用不可になることができます。 </td>
       </tr>
       <tr>
         <td><code>MaxUnavailablePercentage</code></td>
-        <td>指定したラベルのキーと値で使用不可にできるノードの最大量 (パーセンテージで指定)。 ワーカー・ノードは、デプロイ、再ロード、またはプロビジョニングのプロセス中に使用不可になります。 定義した使用不可ノードの最大パーセンテージを超える場合、待機中のワーカー・ノードの更新はブロックされます。 </td>
+        <td>指定したラベルのキーと値について使用不可にできるノードの最大数 (パーセンテージで指定)。ワーカー・ノードが使用不可になるのは、デプロイ、再ロード、またはプロビジョニングのプロセス中です。定義した使用不可ノードの最大パーセンテージを超える場合、待機中のワーカー・ノードの更新はブロックされます。 </td>
       </tr>
       <tr>
         <td><code>NodeSelectorKey</code></td>
@@ -268,7 +270,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 ### コンソールでのワーカー・ノードの更新
 {: #worker_up_console}
 
-構成マップを初めてセットアップしたら、続いて {{site.data.keyword.Bluemix_notm}} コンソールを使用してワーカー・ノードを更新できます。
+構成マップを初めてセットアップした後に、{{site.data.keyword.Bluemix_notm}} コンソールを使用してワーカー・ノードを更新できます。
 {: shortdesc}
 
 開始前に、以下のことを行います。
@@ -298,7 +300,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 {: shortdesc}
 
 開始前に、以下のことを行います。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - ワーカー・ノードにデータを保管している場合、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)されていなければデータは削除されます。
 - [**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
@@ -320,7 +322,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 
      3. ワーカー・ノードの詳細を取得し、ゾーン、プライベート VLAN ID、パブリック VLAN ID をメモします。
         ```
-        ibmcloud ks worker-get --cluster <cluster_name_or_ID> <worker_ID>
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}
 
@@ -365,7 +367,7 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 
    - **非推奨: スタンドアロン・ワーカー・ノードの場合**:
        ```
-       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <machine_type> --number <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <machine_type> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
        ```
        {: pre}
 
@@ -405,20 +407,20 @@ Kubernetes API サーバーの更新が完了したら、ワーカー・ノー�
 
 7. 上記の手順を繰り返して、他のワーカー・プールまたはスタンドアロン・ワーカー・ノードを別のマシン・タイプに更新します。
 
-## クラスター・アドオンの更新
-{: #addons}
+## クラスター・コンポーネントの更新
+{: #components}
 
-{{site.data.keyword.containerlong_notm}} クラスターにはロギング用の Fluentd などのアドオンが付属していて、クラスターのプロビジョン時に自動的にインストールされます。 デフォルトでは、これらのアドオンは IBM によって自動的に更新されます。 ただし、一部のアドオンは、自動更新を無効にして、マスター・ノードおよびワーカー・ノードとは別に手動で更新することができます。
+{{site.data.keyword.containerlong_notm}} クラスターにはロギング用の Fluentd などのコンポーネントが付属していて、クラスターのプロビジョン時に自動的にインストールされます。 デフォルトでは、これらのコンポーネントは IBM によって自動的に更新されます。 ただし、一部のコンポーネントは、自動更新を無効にして、マスター・ノードおよびワーカー・ノードとは別に手動で更新することができます。
 {: shortdesc}
 
-**クラスターと別に更新できるデフォルトのアドオンは何ですか?**</br>
-必要に応じて、以下のアドオンの自動更新を無効にできます。
+**クラスターと別に更新できるデフォルトのコンポーネントは何ですか?**</br>
+必要に応じて、以下のコンポーネントの自動更新を無効にできます。
 * [ロギング用の Fluentd](#logging-up)
-* [Ingress アプリケーション・ロード・バランサー](#alb)
+* [Ingress アプリケーション・ロード・バランサー (ALB)](#alb)
 
-**クラスターと別には更新できないアドオンはありますか?**</br>
+**クラスターと別には更新できないコンポーネントはありますか?**</br>
 
-はい。 クラスターは以下の管理対象アドオンと関連リソースと共にデプロイされます。パフォーマンス上の特定の効果を目的としてポッドをスケーリングする場合や構成マップを編集する場合を除き、これらを変更することはできません。 これらのデプロイメント・アドオンのいずれかを変更しようとした場合、それらのオリジナル設定が定期的な間隔でリストアされます。
+はい。 クラスターは以下の管理対象コンポーネントと関連リソースと共にデプロイされます。パフォーマンス上の特定の効果を目的としてポッドをスケーリングする場合や構成マップを編集する場合を除き、これらを変更することはできません。 これらのデプロイメント・コンポーネントのいずれかを変更しようとした場合、それらのオリジナル設定が定期的な間隔でリストアされます。
 
 * `coredns`
 * `coredns-autoscaler`
@@ -439,26 +441,26 @@ kubectl get deployments --all-namespaces -l addonmanager.kubernetes.io/mode=Reco
 ```
 {: pre}
 
-**デフォルト以外のアドオンをインストールできますか?**</br>
-はい。 {{site.data.keyword.containerlong_notm}} には、クラスターに機能を追加するために選択できるアドオンが他にもあります。 例えば、[Helm チャートを使用](/docs/containers?topic=containers-helm#public_helm_install)して [Block Storage プラグイン](/docs/containers?topic=containers-block_storage#install_block)、[Istio](/docs/containers?topic=containers-istio)、[strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup) をインストールできます。 以下の手順に従って Helm チャートを更新し、各アドオンを個々に更新する必要があります。
+**デフォルト・コンポーネント以外のプラグインやアドオンをインストールできますか?**</br>
+はい。 {{site.data.keyword.containerlong_notm}} では、クラスターに機能を追加するために選択できる他のプラグインやアドオンが提供されます。例えば、[Helm チャートを使用](/docs/containers?topic=containers-helm#public_helm_install)して [ブロック・ストレージ・プラグイン](/docs/containers?topic=containers-block_storage#install_block)や [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup) をインストールできます。または、[Istio](/docs/containers?topic=containers-istio) や [Knative](/docs/containers?topic=containers-serverless-apps-knative) などの IBM 管理のアドオンをクラスター内で有効にすることもできます。Helm チャートの README の指示に従うか、[管理対象アドオンを更新](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)するための手順に従って、これらの Helm チャートとアドオンを別個に更新する必要があります。
 
-### ロギング用 Fluentd アドオンの自動更新の管理
+### Fluentd の自動更新の管理
 {: #logging-up}
 
-ロギングやフィルター構成に変更を加えるには、Fluentd アドオンが最新バージョンでなければなりません。 デフォルトでは、このアドオンに対する自動更新が有効になっています。
+ロギングやフィルターの構成を変更するには、Fluentd コンポーネントが最新バージョンである必要があります。デフォルトでは、このコンポーネントに対する自動更新は有効になっています。
 {: shortdesc}
 
-Fluentd アドオンの自動更新は、以下の方法で管理できます。 **注**: 以下のコマンドを実行するには、クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
+Fluentd コンポーネントの自動更新は、以下の方法で管理できます。**注**: 以下のコマンドを実行するには、クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 
-* `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)を実行して、自動更新が有効になっているかどうかを確認します。
-* `ibmcloud ks logging-autoupdate-disable` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)を実行して、自動更新を無効にします。
-* 自動更新を無効にしたのに構成変更が必要になったという場合は、以下の 2 つの選択肢があります。
+* `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get)を実行して、自動更新が有効になっているかどうかを確認します。
+* `ibmcloud ks logging-autoupdate-disable` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable)を実行して、自動更新を無効にします。
+* 自動更新が無効になっている場合に、構成を変更する必要がある場合は、以下の 2 つのオプションがあります。
     * Fluentd ポッドの自動更新をオンにします。
         ```
         ibmcloud ks logging-autoupdate-enable --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    * `--force-update` オプションを指定したロギング・コマンドを使用して、一回限りの更新を強制実行します。 **注**: ポッドが最新バージョンの Fluentd アドオンに更新されますが、それ以降、Fluentd が自動更新されることはありません。
+    * `--force-update` オプションを指定したロギング・コマンドを使用して、一回限りの更新を強制実行します。 **注**: ポッドが最新バージョンの Fluentd コンポーネントに更新されますが、それ以降、Fluentd が自動更新されることはありません。
         コマンド例:
 
         ```
@@ -466,17 +468,17 @@ Fluentd アドオンの自動更新は、以下の方法で管理できます。
         ```
         {: pre}
 
-### Ingress ALB アドオンの自動更新の管理
+### Ingress ALB の自動更新の管理
 {: #alb}
 
-Ingress アプリケーション・ロード・バランサー (ALB) アドオンを更新するタイミングを制御してください。
+Ingress アプリケーション・ロード・バランサー (ALB) コンポーネントを更新するタイミングを制御してください。
 {: shortdesc}
 
-ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-ingress` コンテナーと `ingress-auth` コンテナーが最新のビルド・バージョンに更新されます。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 更新はローリング方式で行われるので、Ingress ALB にダウン時間は発生しません。
+Ingress ALB コンポーネントが更新されると、すべての ALB ポッド内の `nginx-ingress` と `ingress-auth` のコンテナーが最新のビルド・バージョンに更新されます。デフォルトでは、ALB に対する自動更新は有効になっています。更新はローリング方式で行われるので、Ingress ALB にダウン時間は発生しません。
 
-自動更新を無効にした場合は、お客様がアドオンを更新する必要があります。 更新プログラムが利用可能になると、`ibmcloud ks albs` コマンドまたは `alb-autoupdate-get` コマンドを実行したときに CLI で通知されます。
+自動更新を無効にした場合は、お客様が ALB を更新する必要があります。更新プログラムが利用可能になると、`ibmcloud ks albs` コマンドまたは `alb-autoupdate-get` コマンドを実行したときに CLI で通知されます。
 
-お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB アドオンのビルド・バージョンは変更しません。 お客様が、最新の Kubernetes バージョンと Ingress ALB アドオン・イメージの適合性を確認する必要があります。
+お客様がクラスターの Kubernetes のメジャー・バージョンまたはマイナー・バージョンを更新した場合、IBM は Ingress デプロイメントに対して必要な変更を自動的に行いますが、Ingress ALB のビルド・バージョンは変更しません。 お客様が、最新の Kubernetes バージョンと Ingress ALB イメージの互換性を確認する必要があります。
 {: note}
 
 開始前に、以下のことを行います。
@@ -487,7 +489,7 @@ ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-
     ```
     {: pre}
 
-2. Ingress ALB アドオンの自動更新の状況を確認します。
+2. Ingress ALB コンポーネントの自動更新の状況を確認します。
     ```
     ibmcloud ks alb-autoupdate-get --cluster <cluster_name_or_ID>
     ```
@@ -519,23 +521,23 @@ ALB アドオンが更新されると、すべての ALB ポッド内の `nginx-
 
     出力例:
     ```
-    ALB ID                                            Status    Type      ALB IP         Zone    Build
-    private-crb110acca09414e88a44227b87576ceea-alb1   enabled   private   10.130.5.78    mex01   ingress:350/ingress-auth:192*
-    public-crb110acca09414e88a44227b87576ceea-alb1    enabled   public    169.57.1.110   mex01   ingress:350/ingress-auth:192*
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                           ALB VLAN ID
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   10.xxx.xx.xxx   dal10   ingress:411/ingress-auth:315*   2234947
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315*   2234945
 
     * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers?topic=containers-update#alb
     ```
     {: screen}
 
-Ingress ALB アドオンの自動更新は、以下の方法で管理できます。 **注**: 以下のコマンドを実行するには、クラスターに対する[**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
+Ingress ALB コンポーネントの自動更新は、以下の方法で管理できます。**注**: 以下のコマンドを実行するには、クラスターに対する[**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 * 自動更新を無効にします。
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
     ```
     {: pre}
-* Ingress ALB アドオンを手動で更新します。
-    1. 更新プログラムが利用可能である場合にアドオンを更新するには、まず、[最新バージョンの Ingress ALB アドオンの変更ログ](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)を参照し、障害をもたらす可能性のある変更がないか確認します。
-    2. 一回限りの ALB ポッド更新を強制実行します。 クラスター内のすべての ALB ポッドが最新のビルド・バージョンに更新されます。 個々の ALB を更新したり、どのビルドにアドオンを更新するかを選択したりすることはできません。 自動更新は無効のままです。
+* Ingress ALB を手動で更新します。
+    1. 更新プログラムが利用可能である場合に ALB を更新するには、まず、[最新バージョンの Ingress ALB コンポーネントの変更ログ](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)を参照し、障害をもたらす可能性のある変更がないか確認します。
+    2. 一回限りの ALB ポッド更新を強制実行します。 クラスター内のすべての ALB ポッドが最新のビルド・バージョンに更新されます。 個々の ALB を更新したり、どのビルドに ALB を更新するかを選択したりすることはできません。自動更新は無効のままです。
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
         ```
@@ -554,6 +556,11 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
 <br />
 
 
+## 管理対象アドオンの更新
+{: #addons}
+
+管理対象 {{site.data.keyword.containerlong_notm}} アドオンを使用すると、Istio や Knative などのオープン・ソース機能を使用してクラスターを簡単に強化できます。クラスターに追加するオープン・ソース・ツールのバージョンは、IBM によってテストされて、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。 クラスター内で有効にした管理対象アドオンを最新バージョンに更新するには、[管理対象アドオンの更新](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)を参照してください。
+
 ## スタンドアロン・ワーカー・ノードからワーカー・プールへの更新
 {: #standalone_to_workerpool}
 
@@ -571,7 +578,7 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
 
 開始前に、以下のことを行います。
 - クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 スタンドアロン・ワーカー・ノードをワーカー・プールに更新するには、以下のようにします。
 
@@ -599,7 +606,7 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
    ```
    {: pre}
 
-5. ゾーンをワーカー・プールに追加します。 ゾーンをワーカー・プールに追加すると、ワーカー・プールで定義されているワーカー・ノードがそのゾーンにプロビジョンされ、それ以降のワークロード・スケジュールの対象に含められます。 {{site.data.keyword.containerlong}} により、地域を表す `failure-domain.beta.kubernetes.io/region` ラベルと、ゾーンを表す `failure-domain.beta.kubernetes.io/zone` ラベルが各ワーク・ノードに自動的に追加されます。 Kubernetes スケジューラーは、これらのラベルを使用して、同じ領域内のゾーン間にポッドを分散させます。
+5. ゾーンをワーカー・プールに追加します。 ゾーンをワーカー・プールに追加すると、ワーカー・プールで定義されているワーカー・ノードがそのゾーンにプロビジョンされ、それ以降のワークロード・スケジュールの対象に含められます。 {{site.data.keyword.containerlong}} により、地域を表す `failure-domain.beta.kubernetes.io/region` ラベルと、ゾーンを表す `failure-domain.beta.kubernetes.io/zone` ラベルが各ワーク・ノードに自動的に追加されます。 Kubernetes スケジューラーは、これらのラベルを使用して、同じ地域内のゾーン間にポッドを分散させます。
    1. **1 つのゾーンを 1 つのワーカー・プールに追加する場合**:  `<pool_name>` をワーカー・プールの名前に置き換え、クラスター ID、ゾーン、VLAN に事前に取得した情報を入力します。 そのゾーンにプライベート VLAN もパブリック VLAN もない場合は、このオプションを指定しないでください。 プライベート VLAN とパブリック VLAN は自動的に作成されます。
 
       ワーカー・プールごとに別の VLAN を使用する場合は、このコマンドを VLAN とその対応するワーカー・プールごとに繰り返します。 指定した VLAN に新しいワーカー・ノードが追加されますが、既存のワーカー・ノードの VLAN は変更されません。
@@ -608,13 +615,13 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
       ```
       {: pre}
 
-   2. **1 つのゾーンを複数のワーカー・プールに追加する場合**: 複数のワーカー・プールを `ibmcloud ks zone-add` コマンドに追加します。 複数のワーカー・プールを 1 つのゾーンに追加するには、そのゾーン内に既存のプライベート VLAN とパブリック VLAN がなければなりません。 そのゾーン内にパブリック VLAN もプライベート VLAN もない場合は、まず 1 つのワーカー・プールにそのゾーンを追加して、パブリック VLAN とプライベート VLAN が作成されるようにしてください。 そうすると、そのゾーンを他のワーカー・プールに追加できます。 </br></br>ゾーン間でクラスターのバランスが取れるように、すべてのワーカー・プールのワーカー・ノードをすべてのゾーンにプロビジョンすることが重要です。 ワーカー・プールごとに別の VLAN を使用する場合は、ワーカー・プールで使用する VLAN を指定してこのコマンドを繰り返します。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+   2. **1 つのゾーンを複数のワーカー・プールに追加する場合**: 複数のワーカー・プールを `ibmcloud ks zone-add` コマンドに追加します。 複数のワーカー・プールを 1 つのゾーンに追加するには、そのゾーン内に既存のプライベート VLAN とパブリック VLAN がなければなりません。 そのゾーン内にパブリック VLAN もプライベート VLAN もない場合は、まず 1 つのワーカー・プールにそのゾーンを追加して、パブリック VLAN とプライベート VLAN が作成されるようにしてください。 そうすると、そのゾーンを他のワーカー・プールに追加できます。 </br></br>ゾーン間でクラスターのバランスが取れるように、すべてのワーカー・プールのワーカー・ノードをすべてのゾーンにプロビジョンすることが重要です。 ワーカー・プールごとに別の VLAN を使用する場合は、ワーカー・プールで使用する VLAN を指定してこのコマンドを繰り返します。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}
 
-   3. **複数のゾーンを複数のワーカー・プールに追加する場合**: 別のゾーンを指定して `ibmcloud ks zone-add` コマンドを繰り返し、そのゾーンにプロビジョンするワーカー・プールを指定します。 クラスターにゾーンを追加すると、クラスターが単一ゾーン・クラスターから[複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)に変わります。
+   3. **複数のゾーンを複数のワーカー・プールに追加する場合**: 別のゾーンを指定して `ibmcloud ks zone-add` コマンドを繰り返し、そのゾーンにプロビジョンするワーカー・プールを指定します。 クラスターにゾーンを追加すると、クラスターが単一ゾーン・クラスターから[複数ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#multizone)に変わります。
 
 6. 各ゾーンにワーカー・ノードがデプロイされるまで待ちます。
    ```
@@ -647,7 +654,7 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
       {: pre}
       この処理には数分かかる場合があります。
 
-   5. スタンドアロン・ワーカー・ノードを削除します。 `ibmcloud ks workers <cluster_name_or_ID>` コマンドを使用して取得したワーカー・ノードの ID を使用します。
+   5. スタンドアロン・ワーカー・ノードを削除します。 `ibmcloud ks workers --cluster <cluster_name_or_ID>` コマンドを使用して取得したワーカー・ノードの ID を使用します。
       ```
       ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
@@ -656,7 +663,7 @@ Ingress ALB アドオンの自動更新は、以下の方法で管理できま�
 
 
 **次の作業** </br>
-ワーカー・プールを使用するようにクラスターを更新したので、クラスターにさらにゾーンを追加して可用性を向上させることができます。 クラスターに追加するゾーンの数を増やすと、クラスターが単一ゾーン・クラスターから[複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#ha_clusters)に変更されます。 単一ゾーン・クラスターを複数ゾーン・クラスターに変更すると、Ingress ドメインが `<cluster_name>.<region>.containers.mybluemix.net` から `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` に変更されます。 既存の Ingress ドメインはまだ有効で、要求をアプリに送信するのに使用できます。
+ワーカー・プールを使用するようにクラスターを更新したので、クラスターにさらにゾーンを追加して可用性を向上させることができます。 クラスターに追加するゾーンの数を増やすと、クラスターが単一ゾーン・クラスターから[複数ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#ha_clusters)に変更されます。 単一ゾーン・クラスターを複数ゾーン・クラスターに変更すると、Ingress ドメインが `<cluster_name>.<region>.containers.mybluemix.net` から `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` に変更されます。 既存の Ingress ドメインはまだ有効で、要求をアプリに送信するのに使用できます。
 
 <br />
 

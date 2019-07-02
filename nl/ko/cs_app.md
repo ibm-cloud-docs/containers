@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -21,13 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# 클러스터에 앱 배치
+# 클러스터에 Kubernetes 기반 앱 배치
 {: #app}
 
-{{site.data.keyword.containerlong}}에서 Kubernetes 기술을 사용하여 컨테이너에 앱을 배치하고 앱이 시작되어 실행 중인지 항상 확인할 수 있습니다. 예를 들어, 사용자를 위해 작동 중단 시간 없이 롤링 업데이트 및 롤백을 수행할 수 있습니다. Kubernetes는 특정 언어나 앱이 필요하지 않은 확장 가능한 컨테이너 오케스트레이션 플랫폼이므로 선택한 언어로 작성된 Stateless, Stateful 및 데이터 처리 앱과 같은 다양한 워크로드를 실행할 수 있습니다.
+{{site.data.keyword.containerlong}}에서 Kubernetes 기술을 사용하여 컨테이너에 앱을 배치하고 앱이 시작되어 실행 중인지 항상 확인할 수 있습니다. 예를 들어, 사용자를 위해 작동 중단 시간 없이 롤링 업데이트 및 롤백을 수행할 수 있습니다. Kubernetes는 특정 언어나 앱을 요구하지 않는 확장 가능한 컨테이너 오케스트레이션 플랫폼이므로 원하는 언어로 작성된 Stateless, Stateful 및 데이터 처리 앱과 같은 다양한 워크로드를 실행할 수 있습니다.
 {: shortdesc}
 
 다음 이미지의 영역을 클릭하여 앱을 배치하기 위한 일반 단계를 자세히 보십시오. 우선 기본사항을 알고 싶으십니까? [앱 배치 튜토리얼](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)을 이용해 보십시오.
@@ -101,7 +101,7 @@ ConfigMap 또는 secret을 이용하려면 이를 팟(Pod)에 마운트해야 �
 <li><strong>명령행 인수</strong>: 컨테이너 스펙에 사용되는 명령행 인수를 설정하십시오.</li></ul></dd>
 
 <dt>시크릿</dt>
-<dd>워크로드에 다음과 같은 민감한 정보를 제공합니다. 클러스터의 다른 사용자에게 secret에 대한 액세스 권한이 있을 수 있으므로, secret 정보가 이러한 사용자와 공유될 수 있다는 점을 반드시 알고 있어야 합니다.
+<dd>워크로드에 다음과 같은 민감한 정보를 제공합니다. 클러스터의 다른 사용자에게 시크릿에 대한 액세스 권한이 있을 수 있으므로, 시크릿 정보가 이러한 사용자와 공유될 수 있다는 점을 반드시 알고 있어야 합니다.
 <ul><li><strong>PII(Personally Identifiable Information)</strong>: Secret에 이메일 정보, 또는 회사나 정부의 규제 준수에 필요한 기타 정보와 같은 민감한 정보를 저장하십시오.</li>
 <li><strong>인증 정보</strong>: 비밀번호, 키 및 토큰과 같은 인증 정보를 Secret에 입력하여 실수로 노출할 위험을 줄이십시오. 예를 들어, 클러스터에 [서비스를 바인드](/docs/containers?topic=containers-service-binding#bind-services)하는 경우에는 인증 정보가 Secret에 저장됩니다.</li></ul></dd>
 </dl>
@@ -171,7 +171,7 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크�
 2.  복제본 세트에 의해 관리되며 단일 구역 클러스터의 다중 노드 간에 전개된(반친화성) n+2 팟(Pod)의 배치.
 3.  복제본 세트에 의해 관리되며 구역 간의 다중 구역 클러스터의 다중 노드 간에 전개된(반친화성) n+2 팟(Pod)의 배치.
 
-고가용성을 높이기 위해 [서로 다른 지역의 다중 클러스터를 글로벌 로드 밸런서와 연결](/docs/containers?topic=containers-plan_clusters#multiple_clusters)할 수도 있습니다.
+고가용성을 높이기 위해 [서로 다른 지역의 다중 클러스터를 글로벌 로드 밸런서와 연결](/docs/containers?topic=containers-ha_clusters#multiple_clusters)할 수도 있습니다.
 
 ### 앱의 가용성 향상
 {: #increase_availability}
@@ -183,11 +183,11 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크�
   <dt>배치 및 복제본 세트를 사용하여 앱과 해당 종속 항목 배치</dt>
     <dd><p>배치는 앱과 해당 종속 항목의 모든 컴포넌트를 선언하는 데 사용할 수 있는 Kubernetes 리소스입니다. 배치를 사용하면 모든 단계를 기록할 필요 없이 앱에 집중할 수 있습니다.</p>
     <p>둘 이상의 팟(Pod)을 배치하는 경우, 팟(Pod)을 모니터링하며 항상 지정된 수의 팟(Pod)이 시작되고 실행되도록 보장하는 복제본 세트가 배치에 대해 자동으로 작성됩니다. 팟(Pod)이 중단되는 경우, 복제본 세트는 응답하지 않는 팟(Pod)을 새 팟(Pod)으로 대체합니다.</p>
-    <p>배치를 사용하면 롤링 업데이트 중에 추가할 팟(Pod)의 수와 한 번에 사용 불가능한 팟(Pod)의 수를 포함하여 앱에 대한 업데이트 전략을 정의할 수 있습니다. 롤링 업데이트를 수행할 때 배치는 개정이 작동 중인지 여부를 확인하며, 장애가 발견되면 롤아웃을 중지합니다.</p>
-    <p>배치를 사용하면 서로 다른 플래그를 사용하여 여러 개정판을 동시에 배치할 수 있습니다. 예를 들면, 배치를 프로덕션으로 푸시하기로 결정하기 전에 먼저 이를 테스트할 수 있습니다.</p>
-    <p>배치는 배치된 개정판을 추적할 수 있게 해 줍니다. 사용자는 이 히스토리를 사용하여 업데이트가 예상한 대로 작동하지 않는 경우 이전 버전으로 롤백할 수 있습니다.</p></dd>
+    <p>배치를 사용하여 앱에 대한 업데이트 전략(롤링 업데이트 중에 추가할 팟(Pod)의 수와 한 번에 사용 불가능 상태가 될 수 있는 팟(Pod)의 수 포함)을 정의할 수 있습니다. 롤링 업데이트를 수행할 때 배치는 개정이 작동 중인지 여부를 확인하며, 장애가 발견되면 롤아웃을 중지합니다.</p>
+    <p>배치를 사용하면 플래그가 서로 다른 여러 개정을 동시에 배치할 수 있습니다. 예를 들면, 배치를 프로덕션으로 푸시하기로 결정하기 전에 먼저 이를 테스트할 수 있습니다.</p>
+    <p>배치를 사용하면 배치된 개정을 계속해서 추적할 수 있습니다. 사용자는 이 히스토리를 사용하여 업데이트가 예상한 대로 작동하지 않는 경우 이전 버전으로 롤백할 수 있습니다.</p></dd>
   <dt>앱의 워크로드를 위한 충분한 복제본과 두 개의 추가 복제본 포함</dt>
-    <dd>앱의 보다 높은 가용성과 장애에 대한 복원성을 더욱 높이려면, 예상된 워크로드를 처리할 수 있도록 최소량 이상의 추가 복제본을 포함할 것을 고려하십시오. 팟(Pod)이 중단되었으며 복제본 세트가 아직 중단된 팟(Pod)을 복구하지 않은 경우, 추가 복제본은 워크로드를 처리할 수 있습니다. 두 건의 장애가 동시에 발생하지 않도록 방지하려면, 두 개의 추가 복제본을 포함하십시오. 이 설정은 N + 2 패턴으로, 여기서 N은 수신 워크로드를 처리하기 위한 복제본의 수이며 + 2는 두 개의 추가 복제본입니다. 팟(Pod)은 클러스터에 충분한 공간이 있는 한 원하는 만큼 보유할 수 있습니다.</dd>
+    <dd>앱의 보다 높은 가용성과 장애에 대한 복원성을 더욱 높이려면, 예상된 워크로드를 처리할 수 있도록 최소량 이상의 추가 복제본을 포함할 것을 고려하십시오. 팟(Pod)이 충돌했으며 복제본 세트가 아직 충돌된 팟(Pod)을 복구하지 않은 경우에는 추가 복제본이 워크로드를 처리할 수 있습니다. 두 건의 장애가 동시에 발생하지 않도록 방지하려면, 두 개의 추가 복제본을 포함하십시오. 이 설정은 N + 2 패턴으로, 여기서 N은 수신 워크로드를 처리하기 위한 복제본의 수이며 + 2는 두 개의 추가 복제본입니다. 팟(Pod)은 클러스터에 충분한 공간이 있는 한 원하는 만큼 보유할 수 있습니다.</dd>
   <dt>여러 노드 간에 팟(Pod) 전개(반친화성)</dt>
     <dd><p>배치를 작성할 때 각 팟(Pod)을 동일한 작업자 노드에 배치할 수 있습니다. 이를 친화성(affinity) 또는 동일 위치에 배치라고 합니다. 작업자 노드 장애로부터 앱을 보호하기 위해, 표준 클러스터에 <code>podAntiAffinity</code> 옵션을 사용하여 여러 작업자 노드에 팟(Pod)이 분산되도록 배치를 구성할 수 있습니다. 팟(Pod) 반친화성에는 선호 및 필수의 두 가지 유형이 있습니다.
       <p>자세한 정보는 <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(새 탭 또는 창에서 열림)">노드에 팟(Pod) 지정</a>에 대한 Kubernetes 문서를 참조하십시오.</p>
@@ -195,15 +195,15 @@ secret을 더 안전하게 보호하려 하십니까? 기존 및 신규 시크�
       </dd>
     </dd>
 <dt>여러 구역 또는 지역 간에 팟(Pod) 분배</dt>
-  <dd><p>구역 장애에서 앱을 보호하기 위해, 별도의 구역에서 다중 클러스터를 작성하거나 다중 구역 클러스터의 작업자 풀에 구역을 추가할 수 있습니다. 다중 구역 클러스터는 [특정 메트로 영역](/docs/containers?topic=containers-regions-and-zones#zones)(예: 댈러스)에서만 사용 가능합니다. 별도의 구역에서 다중 클러스터를 작성하는 경우에는 [글로벌 로드 밸런서를 설정](/docs/containers?topic=containers-plan_clusters#multiple_clusters)해야 합니다.</p>
-  <p>복제본 세트를 사용하고 팟(Pod) 반친화성을 지정하는 경우, Kubernetes는 노드 간에 앱 팟(Pod)을 전개합니다. 노드가 다중 구역에 있으면 팟(Pod)이 구역 간에 전개되며 앱의 가용성이 증가됩니다. 하나의 구역에서만 실행하도록 앱을 제한하려는 경우에는 팟(Pod) 친화성을 구성하거나 하나의 구역에서 작업자 풀을 작성하고 해당 레이블을 지정할 수 있습니다. 자세한 정보는 [다중 구역 클러스터에 대한 고가용성](/docs/containers?topic=containers-plan_clusters#ha_clusters)을 참조하십시오.</p>
+  <dd><p>구역 장애에서 앱을 보호하기 위해, 별도의 구역에서 다중 클러스터를 작성하거나 다중 구역 클러스터의 작업자 풀에 구역을 추가할 수 있습니다. 다중 구역 클러스터는 [특정 메트로 영역](/docs/containers?topic=containers-regions-and-zones#zones)(예: 댈러스)에서만 사용 가능합니다. 별도의 구역에서 다중 클러스터를 작성하는 경우에는 [글로벌 로드 밸런서를 설정](/docs/containers?topic=containers-ha_clusters#multiple_clusters)해야 합니다.</p>
+  <p>복제본 세트를 사용하고 팟(Pod) 반친화성을 지정하는 경우, Kubernetes는 노드 간에 앱 팟(Pod)을 전개합니다. 노드가 다중 구역에 있으면 팟(Pod)이 구역 간에 전개되며 앱의 가용성이 증가됩니다. 하나의 구역에서만 실행하도록 앱을 제한하려는 경우에는 팟(Pod) 친화성을 구성하거나 하나의 구역에서 작업자 풀을 작성하고 해당 레이블을 지정할 수 있습니다. 자세한 정보는 [다중 구역 클러스터에 대한 고가용성](/docs/containers?topic=containers-ha_clusters#ha_clusters)을 참조하십시오.</p>
   <p><strong>다중 구역 클러스터 배치에서 내 앱 팟(Pod)이 노드 간에 균등하게 분배되어 있습니까?</strong></p>
-  <p>팟(Pod)은 구역 간에는 균등하게 분배되어 있지만, 노드 간에는 항상 그렇지 않습니다. 예를 들어, 3개의 구역 각각에 1개의 노드가 있는 클러스터가 있고 6개 팟(Pod)의 복제본 세트를 배치하는 경우에는 각 노드가 2개의 팟(Pod)을 갖습니다. 그러나 3개의 구역 각각에 2개의 노드가 있는 클러스터가 있고 6개 팟(Pod)의 복제본 세트를 배치하는 경우에는 각 구역이 스케줄된 2개의 팟(Pod)을 갖게 되며 노드당 1개의 팟(Pod)을 스케줄하거나 그러지 않을 수 있습니다. 스케줄링에 대한 추가적인 제어를 위해 [팟(Pod) 친화성을 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)할 수 있습니다.</p>
-  <p><strong>구역이 작동 중지되면 어떻게 기타 구역의 나머지 노드로 팟(Pod)이 다시 스케줄됩니까?</strong></br>이는 배치에서 사용한 스케줄링 정책에 따라 다릅니다. [노드 특정 팟(Pod) 친화성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)을 포함한 경우에는 팟(Pod)이 다시 스케줄되지 않습니다. 그렇지 않은 경우에는 팟(Pod)이 기타 구역의 사용 가능한 작업자 노드에서 작성되지만, 이의 밸런스가 유지되지 않을 수 있습니다. 예를 들어, 2개의 팟(Pod)이 2개의 사용 가능한 노드 간에 전개될 수 있습니다. 또는 둘 모두가 가용 용량이 있는 1개의 노드로 스케줄될 수 있습니다. 이와 유사하게, 사용 불가능한 구역이 리턴되면 팟(Pod)이 자동으로 삭제되지 않으며 노드 간에 리밸런싱됩니다. 구역이 백업된 후에 구역 간에 팟(Pod)의 리밸런싱을 원하는 경우에는 [Kubernetes 디스케줄러(descheduler) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/descheduler)의 사용을 고려하십시오.</p>
-  <p><strong>팁</strong>: 다중 구역 클러스터에서는 구역 장애에 대해 클러스터의 보호를 위해 충분한 용량이 남아 있도록 구역당 50% 의 작업자 노드 용량을 유지시키십시오.</p>
-  <p><strong>지역 간에 내 앱을 전개하려면 어떻게 합니까?</strong></br>지역 장애로부터 앱을 보호하려면, 다른 지역에 두 번째 클러스터를 작성하고 클러스터에 연결할 [글로벌 로드 밸런서를 설정](/docs/containers?topic=containers-plan_clusters#multiple_clusters)한 후에 배치 YAML을 사용하여 앱에 대한 [팟(Pod) 반친화성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)으로 중복 복제본 세트를 배치하십시오.</p>
+  <p>팟(Pod)은 구역 간에는 균등하게 분배되어 있지만, 노드 간에는 항상 그렇지 않습니다. 예를 들어, 세 개의 구역 각각에 하나의 노드가 있는 클러스터가 있고 팟(Pod)이 여섯 개인 복제본 세트를 배치하는 경우에는 각 노드가 두 개의 팟(Pod)을 갖습니다. 그러나 세 개의 구역 각각에 두 개의 노드가 있는 클러스터가 있고 팟(Pod)이 여섯 개인 복제본 세트를 배치하는 경우에는 각 구역이 두 개의 팟(Pod)을 스케줄하며, 노드당 하나의 팟(Pod)을 스케줄할 수도 있고 스케줄하지 않을 수도 있습니다. 스케줄링에 대한 추가적인 제어를 위해 [팟(Pod) 친화성을 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node)할 수 있습니다.</p>
+  <p><strong>구역이 작동 중지되면 어떻게 기타 구역의 나머지 노드로 팟(Pod)이 다시 스케줄됩니까?</strong></br>이는 배치에서 사용한 스케줄링 정책에 따라 다릅니다. [노드 특정 팟(Pod) 친화성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature)을 포함한 경우에는 팟(Pod)이 다시 스케줄되지 않습니다. 그렇지 않은 경우에는 팟(Pod)이 기타 구역의 사용 가능한 작업자 노드에서 작성되지만, 이의 밸런스가 유지되지 않을 수 있습니다. 예를 들면 두 개의 팟(Pod)이 두 개의 사용 가능한 노드에 분배되거나, 둘 모두 가용 용량이 있는 하나의 노드에 스케줄될 수 있습니다. 이와 유사하게, 사용 불가능한 구역이 리턴되면 팟(Pod)이 자동으로 삭제되지 않으며 노드 간에 리밸런싱됩니다. 구역이 백업된 후에 구역 간에 팟(Pod)의 리밸런싱을 원하는 경우에는 [Kubernetes 디스케줄러(descheduler) ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/descheduler)의 사용을 고려하십시오.</p>
+  <p><strong>팁</strong>: 다중 구역 클러스터에서는 구역 장애에 대해 클러스터를 보호하기 위해 충분한 용량이 남아 있도록 구역당 50%의 작업자 노드 용량을 유지하십시오. </p>
+  <p><strong>지역 간에 내 앱을 전개하려면 어떻게 합니까?</strong></br>지역 장애로부터 앱을 보호하려면, 다른 지역에 두 번째 클러스터를 작성하고 클러스터에 연결할 [글로벌 로드 밸런서를 설정](/docs/containers?topic=containers-ha_clusters#multiple_clusters)한 후에 배치 YAML을 사용하여 앱에 대한 [팟(Pod) 반친화성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/)으로 중복 복제본 세트를 배치하십시오.</p>
   <p><strong>내 앱에서 지속적 스토리지가 필요하면 어떻게 합니까?</strong></p>
-  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 또는 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 등의 클라우드 서비스를 사용하십시오.</p></dd>
+  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 또는 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) 등의 클라우드 서비스를 사용하십시오.</p></dd>
 </dl>
 
 ## YAML 파일에 앱 요구사항 지정
@@ -243,8 +243,9 @@ replicas: 3</pre></code></p></dd>
 
 <dt id="label">레이블</dt>
   <dd><p>[레이블](/docs/containers?topic=containers-strategy#deploy_organize)을 사용하면 클러스터에 있는 서로 다른 유형의 리소스를 동일한 `key: value` 쌍으로 표시할 수 있습니다. 그 후에는 해당하는 다른 리소스에 빌드할 수 있도록 하기 위해 레이블을 비교하도록 선택기를 지정할 수 있습니다. 앱을 외부에 노출하려는 경우에는 서비스에 지정하는 선택기와 일치하는 레이블을 사용해야 합니다. 다음 예에서 배치 스펙은 레이블 `app: wasliberty`와 일치하는 템플리트를 사용합니다.</p>
-  <p>`staging` 또는 `production` 컴포넌트를 보려는 경우와 같이, 클러스터에서 레이블 지정된 오브젝트를 검색할 수 있습니다. 예를 들면, 클러스터에 있는 모든 네임스페이스에서 `env: production` 레이블이 있는 모든 리소스를 나열하는 경우 있습니다. 이 명령을 실행하려면 모든 네임스페이스에 대한 액세스 권한이 필요하다는 점을 참고하십시오.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <p>`staging` 또는 `production` 컴포넌트를 보려는 경우와 같이, 클러스터에서 레이블 지정된 오브젝트를 검색할 수 있습니다. 예를 들면, 클러스터에 있는 모든 네임스페이스에서 `env: production` 레이블이 있는 모든 리소스를 나열하는 경우 있습니다. <strong>참고:</strong> 이 명령을 실행하려면 모든 네임스페이스에 대한 액세스 권한이 필요합니다. <pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>레이블에 대한 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)를 참조하십시오.</li>
+  <li>작업자 노드에 레이블을 적용하려면 레이블이 있는 [작업자 풀을 작성](/docs/containers?topic=containers-add_workers#add_pool)하거나 [기존 작업자 풀을 업데이트](/docs/containers?topic=containers-add_workers#worker_pool_labels)하십시오. </li>
   <li>더 자세한 예는 [레이블을 사용하여 특정 작업자 노드에 앱 배치](/docs/containers?topic=containers-app#node_affinity)를 참조하십시오.</li></ul>
   <p><pre class="codeblock"><code>selector:
 matchLabels:
@@ -257,21 +258,21 @@ app: wasliberty</pre></code></p></dd>
 <dt id="affinity">친화성</dt>
   <dd><p>팟(Pod)이 스케줄되는 작업자 노드를 더 자세하게 제어하려는 경우에는 친화성(동일 위치에 배치)을 지정하십시오. 친화성은 스케줄 시에만 팟(Pod)에 영향을 줍니다. 예를 들어, 팟(Pod)이 동일한 노드에 스케줄될 수 있도록 하지 않고 작업자 노드 간에 배치를 분산시키려는 경우에는 표준 클러스터에 <code>podAntiAffinity</code> 옵션을 사용하십시오. 팟(Pod) 반친화성에는 선호 및 필수의 두 가지 유형이 있습니다.</p>
   <p>자세한 정보는 <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(새 탭 또는 창에서 열림)">노드에 팟(Pod) 지정</a>에 대한 Kubernetes 문서를 참조하십시오.</p>
-  <ul><li><strong>필수 반친화성</strong>: 보유한 작업자 노드 수만큼만 복제본을 배치할 수 있습니다. 예를 들어, 클러스터에 3개의 작업자 노드가 있으나 YAML 파일에 5개의 복제본이 있는 경우에는 3개의 복제본만 배치됩니다. 각 복제본은 서로 다른 작업자 노드에 상주합니다. 남은 2개의 복제본은 보류 상태로 유지됩니다. 클러스터에 다른 작업자 노드를 추가하면 남은 복제본 중 하나가 자동으로 새 작업자 노드에 배치됩니다. 한 작업자 노드가 실패하는 경우, 친화성 정책이 필요하므로 해당 팟(Pod)은 다시 스케줄되지 않습니다. 필수 반친화성이 있는 YAML의 예는 <a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(새 탭 또는 창에서 열림)">필수 팟(Pod) 반친화성이 있는 Liberty 앱</a>을 참조하십시오.</li>
-  <li><strong>선호 반친화성</strong>: 사용 가능한 용량이 있는 노드에 팟(Pod)을 배치할 수 있으며, 이는 워크로드에 더 큰 유연성을 제공합니다. 가능한 경우 팟(Pod)은 서로 다른 작업자 노드에 스케줄됩니다. 예를 들어 3개의 작업자 노드가 있고 클러스터에 충분한 용량이 있는 경우에는 노드 간에 5개의 복제본 팟(Pod)을 스케줄할 수 있습니다. 그러나 클러스터에 두 개의 작업자 노드를 추가하는 경우 친화성 규칙은 기존 노드에서 실행 중인 2개의 추가 팟(Pod)이 사용 가능한 노드로 다시 스케줄되도록 강제하지 않습니다.</li>
+  <ul><li><strong>필수 반친화성</strong>: 보유한 작업자 노드 수만큼만 복제본을 배치할 수 있습니다. 예를 들어, 클러스터에 세 개의 작업자 노드가 있으나 YAML 파일에 다섯 개의 복제본을 정의하는 경우에는 세 개의 복제본만 배치됩니다. 각 복제본은 서로 다른 작업자 노드에 상주합니다. 남은 두 개의 복제본은 보류 상태로 유지됩니다. 클러스터에 다른 작업자 노드를 추가하면 남은 복제본 중 하나가 자동으로 새 작업자 노드에 배치됩니다. 한 작업자 노드가 실패하는 경우, 친화성 정책이 필요하므로 해당 팟(Pod)은 다시 스케줄되지 않습니다. 필수 반친화성이 있는 YAML의 예는 <a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(새 탭 또는 창에서 열림)">필수 팟(Pod) 반친화성이 있는 Liberty 앱</a>을 참조하십시오.</li>
+  <li><strong>선호 반친화성</strong>: 사용 가능한 용량이 있는 노드에 팟(Pod)을 배치할 수 있으며, 이는 워크로드에 더 큰 유연성을 제공합니다. 가능한 경우 팟(Pod)은 서로 다른 작업자 노드에 스케줄됩니다. 예를 들어, 클러스터에 용량이 충분한 세 개의 작업자 노드가 있는 경우에는 노드 전체에 다섯 개의 복제본 팟(Pod)을 스케줄할 수 있습니다. 그러나 클러스터에 두 개의 작업자 노드를 추가하는 경우 친화성 규칙은 기존 노드에서 실행 중인 두 개의 추가 팟(Pod)이 사용 가능한 노드로 다시 스케줄되도록 강제하지 않습니다. </li>
   <li><strong>작업자 노드 친화성</strong>: 베어메탈과 같은 특정 작업자 노드에서만 실행되도록 배치를 구성할 수 있습니다. 자세한 정보는 [레이블을 사용하여 특정 작업자 노드에 앱 배치](/docs/containers?topic=containers-app#node_affinity)를 참조하십시오.</li></ul>
   <p>선호 반친화성에 대한 예:</p>
   <p><pre class="codeblock"><code>spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
             - key: app
-                  operator: In
-                  values:
+              operator: In
+              values:
               - wasliberty
           topologyKey: kubernetes.io/hostname</pre></code></p></dd>
 
@@ -279,13 +280,13 @@ app: wasliberty</pre></code></p></dd>
   <dd>
   <p>컨테이너에 대해 사용할 이미지, 이미지의 위치 및 이미지 가져오기 정책을 지정하십시오. 이미지 태그를 지정하지 않으면 기본적으로 `latest`로 태그 지정된 이미지를 가져옵니다.</p>
   <p>**주의**: 프로덕션 워크로드에 대해서는 latest 태그를 사용하지 마십시오. Docker Hub 또는 {{site.data.keyword.registryshort_notm}}와 같은 공용 또는 공유 저장소를 사용하고 있는 경우에는 워크로드를 최신 이미지에 대해 테스트하지 않았을 수 있습니다.</p>
-  <p>예를 들어, 공용 IBM 이미지의 태그를 나열하려면 다음 작업을 수행하십시오.</p>
+  <p>예를 들어, 공용 IBM 이미지의 태그를 나열하려면 다음을 수행하십시오.</p>
   <ol><li>글로벌 레지스트리 지역으로 전환하십시오.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
   <li>IBM 이미지를 나열하십시오.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
-  <p>기본 `imagePullPolicy`는 이미지가 아직 로컬에 없는 경우에만 이를 가져오는 `IfNotPresent`입니다. 컨테이너가 시작할 때마다 이미지를 가져오도록 하려면 `imagePullPolicy: Always`를 지정하십시오.</p>
+  <p>기본 `imagePullPolicy`는 이미지가 로컬에 없는 경우에만 이를 가져오는 `IfNotPresent`입니다. 컨테이너가 시작할 때마다 이미지를 가져오도록 하려면 `imagePullPolicy: Always`를 지정하십시오.</p>
   <p><pre class="codeblock"><code>containers:
 - name: wasliberty
-  image: registry.bluemix.net/ibmliberty:webProfile8
+  image: icr.io/ibmliberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">앱 서비스의 포트</dt>
@@ -295,55 +296,55 @@ app: wasliberty</pre></code></p></dd>
 
 <dt id="resourcereq">리소스 요청 및 한계</dt>
   <dd><p>클러스터 관리자는 클러스터에 있는 각 Kubernetes 네임스페이스에 대해 [<code>ResourceQuota</code> 오브젝트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/policy/resource-quotas/)를 작성하여 클러스터를 공유하는 팀들이 컴퓨팅 리소스(메모리 및 CPU)를 필요 이상으로 사용하지 않도록 할 수 있습니다. 클러스터 관리자가 컴퓨팅 리소스 할당량을 설정하는 경우 배치 템플리트 내의 각 컨테이너는 메모리 및 CPU에 대한 리소스 요청 및 한계를 지정해야 하며, 이렇게 하지 않으면 팟(Pod) 작성이 실패합니다.</p>
-  <p><ol><li>네임스페이스에 대해 리소스 할당량이 설정되었는지 확인하십시오.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
+  <p><ol><li>네임스페이스에 대해 리소스 할당량이 설정되었는지 확인하십시오. <pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>할당량 한계가 얼마인지 확인하십시오.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>리소스 할당량이 설정되지 않은 경우에도, 작업자 노드 리소스 관리 능력을 향상시키기 위해 배치에 리소스 요청 및 한계를 포함시킬 수 있습니다.</p><p class="note">컨테이너가 한계를 초과하면 해당 컨테이너가 다시 시작되거나 실패할 수 있습니다. 컨테이너가 요청을 초과하는 경우, 작업자 노드에서 초과된 리소스가 모두 사용되면 해당 팟(Pod)이 제거됩니다. 문제점 해결 정보는 [팟(Pod) 다시 시작이 계속 실패하거나 팟(Pod)이 예기치 않게 제거됨](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail)을 참조하십시오.</p>
-  <p>**요청**: 컨테이너가 사용할 수 있도록 스케줄러가 예약하는 최소 리소스 양입니다. 이 양이 한계와 동일한 경우에는 요청이 보장됩니다. 이 양이 한계보다 작은 경우 요청은 여전히 보장되지만, 스케줄러가 다른 컨테이너의 리소스를 만족시키기 위해 요청과 한계의 차이를 사용할 수 있습니다.</p>
+  <p>리소스 할당량이 설정되지 않은 경우에도, 작업자 노드 리소스 관리 능력을 향상시키기 위해 배치에 리소스 요청 및 한계를 포함시킬 수 있습니다.</p><p class="note">컨테이너가 한계를 초과하면 해당 컨테이너가 다시 시작되거나 실패할 수 있습니다. 컨테이너가 요청을 초과하는 경우, 작업자 노드에서 초과된 리소스가 모두 사용되면 해당 팟(Pod)이 제거됩니다. 문제점 해결에 대한 자세한 정보는 [팟(Pod) 다시 시작이 계속 실패하거나 팟(Pod)이 예기치 않게 제거됨](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail)을 참조하십시오. </p>
+  <p>**요청**: 컨테이너가 사용할 수 있도록 스케줄러가 예약하는 최소 리소스 양입니다. 이 양이 한계와 동일한 경우에는 요청이 보장됩니다. 이 양이 한계보다 작은 경우 요청은 여전히 보장되지만, 스케줄러가 다른 컨테이너의 리소스를 만족시키기 위해 요청과 한계의 차이를 사용할 수 있습니다. </p>
   <p>**한계**: 컨테이너가 이용할 수 있는 최대 리소스 양입니다. 컨테이너 전체에서 사용되는 리소스의 양이 작업자 노드에서 사용 가능한 양을 초과하는 경우에는 공간을 확보하기 위해 컨테이너가 제거됩니다. 제거를 방지하려면 리소스 요청을 컨테이너의 한계와 동일하게 설정하십시오. 한계가 지정되지 않은 경우 기본값은 작업자 노드의 용량입니다.</p>
   <p>자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/)를 참조하십시오.</p>
   <p><pre class="codeblock"><code>resources:
-requests:
+  requests:
     memory: "512Mi"
     cpu: "500m"
-limits:
+  limits:
     memory: "1024Mi"
     cpu: "1000m"</pre></code></p></dd>
 
 <dt id="probe">활동 상태 및 준비 상태 프로브</dt>
-  <dd><p>기본적으로 Kubernetes는 팟(Pod) 내의 모든 컨테이너가 시작되면 앱 팟(Pod)에 트래픽을 전송하며, 컨테이너가 충돌하면 이를 다시 시작합니다. 사용자는 상태 검사를 설정하여 서비스 트래픽 라우팅의 내구성을 향상시킬 수 있습니다. 예를 들면, 사용자의 앱에 시작 지연 시간이 있습니다. 이 앱 프로세스가 전체 앱이 완전히 준비되기 전에 시작될 수 있으며, 이는 응답(특히 많은 인스턴스로 스케일 확장할 때)에 영향을 줄 수 있습니다. 상태 검사를 사용하면 앱이 실행 중인지, 요청을 수신할 준비가 되었는지 시스템에 알려 줄 수 있습니다. 이러한 프로브를 설정하면 앱의 [롤링 업데이트](#app_rolling)를 수행할 때 작동 중단 시간을 방지하는 데도 도움을 줄 수 있습니다. 사용자는 활동 상태 프로브와 준비 상태 프로브의 두 가지 상태 검사를 설정할 수 있습니다.</p>
+  <dd><p>기본적으로 Kubernetes는 팟(Pod) 내의 모든 컨테이너가 시작되면 앱 팟(Pod)에 트래픽을 전송하며, 컨테이너가 충돌하면 이를 다시 시작합니다. 사용자는 상태 검사를 설정하여 서비스 트래픽 라우팅의 내구성을 향상시킬 수 있습니다. 예를 들면, 사용자의 앱에 시작 지연 시간이 있습니다. 이 앱 프로세스가 전체 앱이 완전히 준비되기 전에 시작될 수 있으며, 이는 응답(특히 많은 인스턴스로 스케일 확장할 때)에 영향을 줄 수 있습니다. 상태 검사를 사용하면 앱의 실행 중 여부 및 요청 수신 준비 여부를 시스템에 알려 줄 수 있습니다. 이러한 프로브를 설정하면 앱의 [롤링 업데이트](#app_rolling)를 수행할 때 작동 중단 시간을 방지하는 데도 도움을 줄 수 있습니다. 사용자는 활동 상태 프로브와 준비 상태 프로브의 두 가지 상태 검사를 설정할 수 있습니다.</p>
   <p>**활동 상태 프로브**: 컨테이너가 실행 중인지 확인하는 활동 상태 프로브를 설정합니다. 이 프로브가 실패하면 컨테이너가 다시 시작됩니다. 컨테이너가 활동 상태 프로브를 지정하지 않은 경우, 이 프로브는 컨테이너가 **Running** 상태이면 컨테이너가 작동 중이라고 가정하므로 성공합니다.</p>
   <p>**준비 상태 프로브**: 컨테이너가 요청 및 외부 트래픽을 수신할 준비가 되었는지 확인하는 준비 상태 프로브를 설정합니다. 이 프로브가 실패하면 팟(Pod)의 IP 주소가 제거되며 해당 주소가 팟(Pod)과 일치하는 서비스를 위한 사용 가능한 IP 주소가 되지만, 컨테이너가 다시 시작되지는 않습니다. 앱이 시작되는 데 어느 정도 시간이 소요되는 경우에는 초기 지연 시간이 있는 준비 상태 프로브를 설정하는 것이 특히 중요합니다. 초기 지연 시간이 경과하기 전에는 프로브가 시작되지 않으며, 이는 컨테이너가 준비를 완료할 시간을 줍니다. 컨테이너가 준비 상태 프로브를 제공하지 않은 경우, 이 프로브는 컨테이너가 **Running** 상태이면 컨테이너가 작동 중이라고 가정하므로 성공합니다.</p>
   <p>명령, HTTP 요청 또는 TCP 소켓으로 프로브를 설정할 수 있습니다. 다음 예는 HTTP 요청을 사용합니다. 준비 상태 프로브보다 활동 상태 프로브에 더 많은 시간을 지정하십시오. 자세한 정보는 [Kubernetes 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/)를 참조하십시오.</p>
   <p><pre class="codeblock"><code>livenessProbe:
-httpGet:
+  httpGet:
     path: /
-port: 9080
+    port: 9080
   initialDelaySeconds: 300
   periodSeconds: 15
 readinessProbe:
-httpGet:
+  httpGet:
     path: /
-port: 9080
+    port: 9080
   initialDelaySeconds: 45
-periodSeconds: 5</pre></code></p></dd>
+  periodSeconds: 5</pre></code></p></dd>
 
 <dt id="app-service">앱 노출 서비스</dt>
   <dd><p>앱을 노출하는 서비스를 작성할 수 있습니다. `spec` 섹션에서, `port` 및 레이블 값이 배치에 사용한 것과 일치하도록 하십시오. 이 서비스는 다음 예에서 `app: wasliberty`와 같은 레이블과 일치하는 오브젝트를 노출합니다.</p>
   <ul><li>기본적으로 서비스는 서비스를 클러스터 내에서만 액세스할 수 있도록 하며 클러스터 외부에서는 액세스할 수 없도록 하는 [`ClusterIP ` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/)를 사용합니다.</li>
   <li>NodePort, 로드 밸런서 또는 Ingress 서비스를 작성하여 앱을 외부에 공개할 수 있습니다. 이러한 서비스에는 두 개의 IP 주소(하나는 외부, 하나는 내부)가 있습니다. 외부 IP 주소에 트래픽이 수신되면, 이는 내부 클러스터 IP 주소로 전달됩니다. 그 후 이 트래픽은 내부 클러스터 IP 주소에서 앱의 컨테이너 IP 주소로 라우팅됩니다.</li>
-  <li>다음 예는 `NodePort`를 사용하여 서비스를 클러스터 외부에 노출합니다. 외부 액세스를 설정하는 방법에 대한 정보는 [NodePort, 로드 밸런서 또는 Ingress 서비스 선택](/docs/containers?topic=containers-cs_network_planning#external)을 참조하십시오.</li></ul>
+  <li>다음 예는 `NodePort`를 사용하여 서비스를 클러스터 외부에 노출합니다. 외부 액세스를 설정하는 방법에 대한 자세한 정보는 [NodePort, 로드 밸런서 또는 Ingress 서비스 선택](/docs/containers?topic=containers-cs_network_planning#external)을 참조하십시오. </li></ul>
   <p><pre class="codeblock"><code>apiVersion: v1
 kind: Service
 metadata:
-name: wasliberty
-labels:
-app: wasliberty
+  name: wasliberty
+  labels:
+    app: wasliberty
 spec:
-ports:
+  ports:
   - port: 9080
   selector:
     app: wasliberty
-  type: NodePort</pre></code></p></dd>
+    type: NodePort</pre></code></p></dd>
 
 <dt id="configmap">컨테이너 환경 변수를 위한 ConfigMap</dt>
 <dd><p>ConfigMap은 배치 워크로드의 민감하지 않은 구성 정보를 제공합니다. 다음 예는 ConfigMap의 값을 배치 YAML의 컨테이너 spec 섹션에서 환경 변수로서 참조하는 방법을 보여줍니다. ConfigMap의 값을 참조함으로써, 사용자는 이 구성 정보를 배치로부터 분리하여 컨테이너화된 앱을 포터블 상태로 유지할 수 있습니다.<ul><li>[변수에 대해 Kubernetes `ConfigMap` 또는 `Secret` 오브젝트 중 어느 것을 사용할지 결정하는 데 도움을 주십시오](#variables).</li>
@@ -351,14 +352,14 @@ ports:
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: wasliberty
+  name: wasliberty
 spec:
-        replicas: 3
-template:
+  replicas: 3
+  template:
     ...
-spec:
+    spec:
       ...
-containers:
+      containers:
       - name: wasliberty
         ...
         env:
@@ -385,19 +386,19 @@ data:
   LANGUAGE: en</pre></code></p></dd>
 
   <dt id="secret">컨테이너 환경 변수를 위한 Secret</dt>
-  <dd><p>Secret은 배치 워크로드의 비밀번호와 같은 민감한 구성 정보를 제공합니다. 다음 예는 Secret의 값을 배치 YAML의 컨테이너 spec 섹션에서 환경 변수로서 참조하는 방법을 보여줍니다. Secret을 볼륨으로서 마운트할 수도 있습니다. Secret의 값을 참조함으로써, 사용자는 이 구성 정보를 배치로부터 분리하여 컨테이너화된 앱을 포터블 상태로 유지할 수 있습니다.<ul><li>[변수에 대해 ConfigMap 또는 Secret 중 어느 것을 사용할지 결정하는 데 도움을 주십시오](#variables).</li>
+  <dd><p>Secret은 배치 워크로드의 비밀번호와 같은 민감한 구성 정보를 제공합니다. 다음 예는 시크릿의 값을 배치 YAML의 컨테이너 spec 섹션에서 환경 변수로서 참조하는 방법을 보여줍니다. Secret을 볼륨으로서 마운트할 수도 있습니다. Secret의 값을 참조함으로써, 사용자는 이 구성 정보를 배치로부터 분리하여 컨테이너화된 앱을 포터블 상태로 유지할 수 있습니다.<ul><li>[변수에 대해 ConfigMap 또는 Secret 중 어느 것을 사용할지 결정하는 데 도움을 주십시오](#variables).</li>
   <li>자세한 정보는 [Secret을 사용하는 경우 이해](/docs/containers?topic=containers-encryption#secrets)를 참조하십시오.</li></ul></p>
   <p><pre class="codeblock"><code>apiVersion: apps/v1
-kind: Deployment
-metadata:
-name: wasliberty
-spec:
-        replicas: 3
-template:
+  kind: Deployment
+  metadata:
+    name: wasliberty
+  spec:
+    replicas: 3
+    template:
       ...
-spec:
+      spec:
         ...
-containers:
+        containers:
         - name: wasliberty
           ...
           env:
@@ -429,14 +430,14 @@ containers:
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
-name: wasliberty
+  name: wasliberty
 spec:
-        replicas: 3
-template:
+  replicas: 3
+  template:
     ...
-spec:
+    spec:
       ...
-containers:
+      containers:
       - name: wasliberty
         ...
         volumeMounts:
@@ -460,9 +461,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-         resources:
-           requests:
-             storage: 24Gi</pre></code></p></dd>
+  resources:
+    requests:
+      storage: 24Gi</pre></code></p></dd>
 
 <dt id="nextsteps">앱을 배치할 준비가 되었습니까?</dt>
 <dd><ul><li>[전체 YAML의 사본을 시작하기 위한 템플리트로 사용](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)하십시오.</li>
@@ -476,6 +477,15 @@ spec:
 
 다음 항목은 [앞에서 섹션별로 다룬](#app_yaml) 배치 YAML의 사본입니다. [이 YAML을 GitHub에서 다운로드](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)할 수도 있습니다.
 {: shortdesc}
+
+YAML을 적용하려면 다음 명령을 실행하십시오. 
+
+```
+kubectl apply -f file.yaml [-n <namespace>]
+```
+{: pre}
+
+예제 YAML:
 
 ```yaml
 apiVersion: apps/v1
@@ -506,7 +516,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
-        image: registry.bluemix.net/ibmliberty
+        image: icr.io/ibmliberty
         env:
           - name: VERSION
             valueFrom:
@@ -612,6 +622,224 @@ spec:
 <br />
 
 
+## 여러 환경에서 재사용할 수 있도록 Kustomize를 사용하여 Kubernetes 환경 파일 관리
+{: #kustomize}
+
+사용자는 [12가지 요소 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://12factor.net/) 클라우드 기반 앱의 일부로서, 버전 제어되는 공통 코드 베이스 소스를 사용하는 지속적 개발 및 딜리버리 파이프라인을 설정하여 개발/프로덕션 일치를 유지하고자 합니다. 코드 베이스 저장소에서 Kubernetes 리소스 구성 Manifest 파일은 보통 YAML 형식으로 저장됩니다. 사용자는 Kubernetes 프로젝트인 [Kustomize ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kustomize.io/)를 사용하여 여러 환경에서의 배치를 표준화하고 사용자 정의할 수 있습니다.
+{: shortdesc}
+
+예를 들면, 기본 `kustomization` YAML을 설정하여 개발, 테스트 및 프로덕션 환경에서 공유하는 배치 및 PVC와 같은 Kubernetes 오브젝트를 선언할 수 있습니다. 그 다음에는 테스트 환경보다 프로덕션 환경의 복제본 수가 많은 것과 같이 각 환경의 사용자 정의된 구성이 있는 별도의 `kustomization` YAML을 설정할 수 있습니다. 그 후에는 이러한 사용자 정의된 YAML을 공유 기본 YAML에 오버레이하거나 그 위에 빌드함으로써 몇 가지 오버레이 구성 차이를 제외하고 소스 제어하는 환경과 거의 동일한 환경을 관리할 수 있습니다. Kustomize에 대한 자세한 정보(용어집 및 FAQ)는 [Kustomize 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs)를 확인하십시오. 
+
+시작하기 전에:
+*   Kubernetes 버전 1.14 이상을 실행하는 클러스터를 [작성](/docs/containers?topic=containers-clusters#clusters_ui)하거나 이러한 클러스터로 [업데이트](/docs/containers?topic=containers-update)하십시오. 
+*   [`kubectl` 버전](/docs/containers?topic=containers-cs_cli_install#kubectl)이 클러스터 버전과 일치하는지 확인하십시오. 
+*   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+Kustomize를 사용하여 구성 파일을 설정하려면 다음을 수행하십시오. 
+1.  [`kustomize` 도구 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md)를 설치하십시오. 
+    *   MacOS의 경우에는 `brew` 패키지 관리자를 사용할 수 있습니다.
+        ```
+        brew install kustomize
+        ```
+        {: pre}
+    *   Windows의 경우에는 `chocolatey` 패키지 관리자를 사용할 수 있습니다.
+        ```
+        choco install kustomize
+        ```
+        {: pre}
+2.  Git과 같은 버전 제어 시스템에 앱의 디렉토리를 작성하십시오.
+    ```
+    git init ~/<my_app>
+    ```
+    {: pre}
+3.  `kustomize` [`base` ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#base) 디렉토리, [`overlay`](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#overlay) 디렉토리, 환경 디렉토리(staging 및 production 등)의 저장소 구조를 작성하십시오. 후속 단계에서는 `kustomize`와 함께 사용하기 위해 이러한 저장소를 설정합니다.
+    ```
+    mkdir -p ~/<my_app>/base &&
+    mkdir -p ~/<my_app>/overlay &&
+    mkdir -p ~/<my_app>/overlay/staging &&
+    mkdir -p ~/<my_app>/overlay/prod
+    ```
+    {: pre}
+    
+    저장소 구조 예:
+    ```
+    .
+    ├── base
+    └── overlay
+        ├── prod
+        └── staging
+    ```
+    {: screen}
+4.  `base` 저장소를 설정하십시오. 
+    1.  base 저장소로 이동하십시오.
+        ```
+        cd ~/<my_app>/base
+        ```
+        {: pre}
+    2.  앱 배치를 위한 초기 Kubernetes 구성 YAML 파일 세트를 작성하십시오. `wasliberty` [YAML 예](#yaml-example)를 사용하여 배치, 서비스, ConfigMap 및 지속적 볼륨 클레임을 작성할 수 있습니다. 
+    3.  환경 전체에 적용할 기본 구성을 지정하는 [`kustomization` 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml)을 작성하십시오. `kustomization` 파일은 동일한 `base` 저장소에 저장되는 Kubernetes 리소스 구성 YAML을 포함해야 합니다. `kustomization` 파일에서는 base 저장소의 모든 리소스 YAML에 적용되는 구성(모든 리소스 이름에 추가되는 접두부 또는 접미부, 레이블, 모든 리소스가 작성되는 기존 네임스페이스, Secret, ConfigMap 등) 또한 추가할 수 있습니다.
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namespace: wasliberty
+        namePrefix: kustomtest-
+        nameSuffix: -v2
+        commonLabels:
+          app: kustomized-wasliberty
+        resources:
+        - deployment.yaml
+        - service.yaml
+        - pvc.yaml
+        - configmap.yaml
+        - secret.yaml
+        ```
+        {: codeblock}
+        
+        `resources` YAML의 이름은 `base` 저장소에 있는 다른 파일의 이름과 일치해야 합니다. 이름이 동일한 여러 구성을 포함시킬 수도 있지만, 이 예의 구성은 `deployment.yaml`, `service.yaml`, `pvc.yaml`과 같은 별도의 파일입니다. 
+        
+    4.  `kustomization` 기본 YAML 파일에 정의한 구성으로 리소스 YAML 파일을 빌드하십시오. 리소스는 `kustomization`과 리소스 YAML의 구성을 결합하여 빌드됩니다. 결합된 YAML 파일은 터미널 출력의 `stdout`에서 리턴됩니다. 새 레이블을 추가하는 것과 같이 `kustomization` YAML에 수행하는 후속 변경사항을 빌드하는 경우에는 이와 동일한 명령을 사용하십시오.
+        ```
+        kustomize build
+        ```
+        {: pre}
+5.  각 환경(staging 및 prod 등)에 대해 고유 `kustomization` YAML 파일이 있는 overlay 저장소를 설정하십시오. 
+    1.  staging 저장소에서 `kustomization.yaml` 파일을 작성하십시오. 테스트할 새 컴포넌트의 레이블, 이미지 태그 또는 YAML과 같이 staging에 고유한 구성을 추가하십시오.
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namePrefix: staging-
+        commonLabels:
+          env: staging
+          owner: TeamA
+        bases:
+        - ../../base
+        patchesStrategicMerge:
+        - configmap.yaml
+        - new_staging_resource.yaml
+        resources:
+        - new_staging_resource.yaml
+        ```
+        {: codeblock}
+        <table summary="1열의 YAML 파일 필드 및 2열의 해당 필드를 채우는 방법에 대해 설명하는 표입니다.">
+        <caption>YAML 컴포넌트</caption>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>namePrefix</code></td>
+        <td>staging `kustomization` 파일을 사용하여 작성할 각 리소스의 이름에 연결할 접두부를 지정하십시오(예: `staging-`). </td>
+        </tr>
+        <tr>
+        <td><code>commonLabels</code></td>
+        <td>staging 환경 및 담당 팀과 같이 staging 오브젝트에 고유한 레이블을 추가하십시오. </td>
+        </tr>
+        <tr>
+        <td><code>bases</code></td>
+        <td>base `kustomization` 파일을 포함하는 원격 저장소의 디렉토리 또는 URL에 대한 상대 경로를 추가하십시오. 예를 들면, 이 상대 경로는 이전에 작성한 `base` 저장소의 base `kustomization` 파일을 가리킬 수 있습니다. 이 필드는 overlay `kustomization`에 필요합니다. </td>
+        </tr>
+        <tr>
+        <td><code>patchesStrategicMerge</code></td>
+        <td>base `kustomization`에 병합할 리소스 구성 YAML 파일을 나열하십시오. `kustomization` 파일과 마찬가지로 이러한 파일도 동일한 저장소(예: `overlay/staging`)에 추가해야 합니다. 이러한 리소스 구성 파일은 동일한 이름의 기본 구성 파일에 패치로서 병합되는 사소한 변경사항을 포함할 수 있습니다. 리소스는 `base` 구성 파일에 있는 모든 컴포넌트와 사용자가 `overlay` 구성 파일에 지정하는 추가 컴포넌트를 모두 가져옵니다. <br><br>구성이 기본에 없는 새 파일인 경우에는 해당 파일 이름을 `resources` 필드에 추가해야 합니다. </td>
+        </tr>
+        <tr>
+        <td><code>resources</code></td>
+        <td>base 저장소에 포함되지 않으며 staging 저장소에서 고유한 리소스 구성 YAML 파일을 나열하십시오. `patchesStrategicMerge` 필드에도 이러한 파일을 포함하고, 이들을 `kustomization` 파일과 동일한 저장소(예: `overlay/staging`)에 추가하십시오. </td>
+        </tr>
+        <tr>
+        <td>기타 가능한 구성</td>
+        <td>파일에 추가할 수 있는 기타 구성은 [kustomization YAML 예 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml)를 참조하십시오. </td>
+        </tr>
+        </tbody></table>
+    2.  staging overlay 구성 파일을 빌드하십시오.
+        ```
+        kustomize build overlay/staging
+        ```
+        {: pre}
+    3.  이러한 단계를 반복하여 prod overlay `kustomization` 및 기타 구성 YAML 파일을 작성하십시오. 예를 들면, prod 환경이 더 많은 사용자 요청을 처리할 수 있도록 `deployment.yaml`에서 복제본 수를 늘릴 수 있습니다. 
+    4.  `kustomize` 저장소 구조를 검토하여 필요한 모든 YAML 구성 파일이 포함되었는지 확인하십시오. 이 구조는 다음 예와 같을 수 있습니다.
+        ```
+        ├── base
+        │   ├── configmap.yaml
+        │   ├── deployment.yaml
+        │   ├── kustomization.yaml
+        │   ├── pvc.yaml
+        │   ├── secret.yaml
+        │   └── service.yaml
+        └── overlay
+            ├── prod
+            │   ├── deployment.yaml
+            │   ├── kustomization.yaml
+            │   └── new_prod_resource.yaml
+            └── staging
+                ├── configmap.yaml
+                ├── kustomization.yaml
+                └── new_staging_resource.yaml
+        ```
+        {: screen}
+6.  배치할 환경에 대한 Kubernetes 리소스를 적용하십시오. 다음 예는 staging 저장소를 사용합니다. 
+    1.  staging overlay 디렉토리로 이동하십시오. 이전 단계에서 리소스를 빌드하지 않은 경우에는 지금 작성하십시오.
+        ```
+        cd overlay/staging && kustomize build
+        ```
+        {: pre}
+    2.  클러스터에 Kubernetes 리소스를 적용하십시오. `-k` 플래그와 `kustomization` 파일이 위치한 디렉토리를 포함하십시오. 예를 들어, 이미 staging 디렉토리로 이동한 경우에는 `../staging`을 포함시켜 디렉토리의 경로를 표시하십시오.
+        ```
+        kubectl apply -k ../staging
+        ```
+        {: pre}
+        출력 예:
+        ```
+        configmap/staging-kustomtest-configmap-v2 created
+        secret/staging-kustomtest-secret-v2 created
+        service/staging-kustomtest-service-v2 created
+        deployment.apps/staging-kustomtest-deployment-v2 created
+        job.batch/staging-pi created
+        persistentvolumeclaim/staging-kustomtest-pvc-v2 created
+        ```
+    3.  staging의 고유 변경사항이 적용되었는지 확인하십시오. 예를 들어, `staging-` 접두부를 추가한 경우에는 팟(Pod) 및 작성된 기타 리소스의 이름이 이 접두부를 포함합니다.
+        ```
+        kubectl get -k ../staging
+        ```
+        {: pre}
+        출력 예:
+        ```
+        NAME                                        DATA   AGE
+        configmap/staging-kustomtest-configmap-v2   2      90s
+
+        NAME                                  TYPE     DATA   AGE
+        secret/staging-kustomtest-secret-v2   Opaque   2      90s
+
+        NAME                                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+        service/staging-kustomtest-service-v2   NodePort   172.21.xxx.xxx   <none>        9080:30200/TCP   90s
+
+        NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+        deployment.apps/staging-kustomtest-deployment-v2   0/3     3            0           91s
+
+        NAME                   COMPLETIONS   DURATION   AGE
+        job.batch/staging-pi   1/1           41s        2m37s
+
+        NAME                                              STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS       AGE
+        persistentvolumeclaim/staging-kustomtest-pvc-v2   Pending                                      ibmc-file-bronze   90s
+        ```
+        {: screen}
+    4.  빌드할 각 환경에 대해 이러한 단계를 반복하십시오. 
+7.  **선택사항**: Kustomize로 적용한 모든 리소스를 제어하여 환경을 정리하십시오.
+    ```
+    kubectl delete -k <directory>
+    ```
+    {: pre}
+    출력 예:
+    ```
+    configmap "staging-kustomtest-configmap-v2" deleted
+    secret "staging-kustomtest-secret-v2" deleted
+    service "staging-kustomtest-service-v2" deleted
+    deployment.apps "staging-kustomtest-deployment-v2" deleted
+    job.batch "staging-pi" deleted
+    persistentvolumeclaim "staging-kustomtest-pvc-v2" deleted
+    ```
+    {: screen}
+
 ## Kubernetes 대시보드 실행
 {: #cli_dashboard}
 
@@ -624,7 +852,7 @@ spec:
 시작하기 전에:
 * Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 * [콘솔에서 Kubernetes 대시보드를 시작](#db_gui)하려면 [플랫폼 역할](/docs/containers?topic=containers-users#platform)이 지정되어야 합니다. 서비스 역할만 지정되었지만 플랫폼 역할이 지정되지 않은 경우에는 [CLI에서 Kubernetes 대시보드를 시작](#db_cli)하십시오.
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 기본 포트를 사용하거나 자체 포트를 설정하여 클러스터에 대한 Kubernetes 대시보드를 실행할 수 있습니다.
 
@@ -646,7 +874,7 @@ spec:
 1.  Kubernetes 인증 정보를 가져오십시오.
 
     ```
-        kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
+    kubectl config view -o jsonpath='{.users[0].user.auth-provider.config.id-token}'
     ```
     {: pre}
 
@@ -655,14 +883,14 @@ spec:
 3.  기본 포트 번호로 프록시를 설정하십시오.
 
     ```
-        kubectl proxy
+    kubectl proxy
     ```
     {: pre}
 
     출력 예:
 
     ```
-        Starting to serve on 127.0.0.1:8001
+    Starting to serve on 127.0.0.1:8001
     ```
     {: screen}
 
@@ -698,14 +926,14 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 시작하기 전에:
 
 -   [필수 CLI를 설치](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)하십시오.
--   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 -   [콘솔에서 Kubernetes 대시보드를 시작](#db_gui)하려면 [플랫폼 역할](/docs/containers?topic=containers-users#platform)이 지정되어야 합니다. 서비스 역할만 지정되었지만 플랫폼 역할이 지정되지 않은 경우에는 [CLI에서 Kubernetes 대시보드를 시작](#db_cli)하십시오.
 
 앱을 배치하려면 다음을 수행하십시오.
 
 1.  Kubernetes [대시보드](#cli_dashboard)를 열고 **+ 작성**을 클릭하십시오.
-2.  다음 두 방법 중 하나로 앱 세부사항을 입력하십시오.
+2.  다음 두 방법 중 하나로 앱 세부사항을 입력하십시오. 
   * **아래의 앱 세부사항 지정**을 선택하고 세부사항을 입력하십시오.
   * **YAML 또는 JSON 파일 업로드**를 선택하여 앱 [구성 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/)을 업로드하십시오.
 
@@ -728,7 +956,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 시작하기 전에:
 
 -   필수 [CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install)를 설치하십시오.
--   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 앱을 배치하려면 다음을 수행하십시오.
@@ -758,11 +986,11 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 ## 레이블을 사용하여 특정 작업자 노드에 앱 배치
 {: #node_affinity}
 
-앱을 배치할 때 앱 팟(Pod)은 클러스터의 여러 작업자 노드에 무작위로 배치됩니다. 일부 경우에는 사용자가 앱 팟(Pod)이 배치되는 작업자 노드를 제한하고자 할 수 있습니다. 예를 들어, 해당 작업자 노드가 베어메탈 머신에 있으므로 사용자는 앱 팟(Pod)이 특정 작업자 풀의 작업자 노드에만 배치되기를 원할 수 있습니다. 앱 팟(Pod)이 배치되어야 하는 작업자 노드를 지정하려면 앱 배치에 친화성 규칙을 추가하십시오.
+앱을 배치할 때 앱 팟(Pod)은 클러스터의 여러 작업자 노드에 무작위로 배치됩니다. 일부 경우에는 사용자가 앱 팟(Pod)이 배치되는 작업자 노드를 제한하고자 할 수 있습니다. 예를 들면, 특정 작업자 풀의 작업자 노드는 베어메탈 머신에 있으므로 이러한 작업자 노드에만 앱 팟(Pod)을 배치하려 할 수 있습니다. 앱 팟(Pod)이 배치되어야 하는 작업자 노드를 지정하려면 앱 배치에 친화성 규칙을 추가하십시오.
 {:shortdesc}
 
 시작하기 전에:
-*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 특정 작업자 노드에 앱을 배치하려면 다음을 수행하십시오.
@@ -804,7 +1032,7 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -893,13 +1121,13 @@ Kubernetes 대시보드를 사용하여 클러스터에 앱을 배치하는 경�
 ## GPU 머신에 앱 배치
 {: #gpu_app}
 
-[베어메탈 그래픽 처리 장치(GPU) 머신 유형](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)이 있는 경우 작업자 노드에 수학적으로 집약적인 워크로드를 스케줄할 수 있습니다. 예를 들어, 성능 향상을 위해 CUDA(Compute Unified Device Architecture) 플랫폼을 사용하여 GPU 및 CPU에서 처리 로드를 공유하는 3D 앱을 실행할 수 있습니다.
+[베어메탈 그래픽 처리 장치(GPU) 머신 유형](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)이 있는 경우 작업자 노드에 수학적으로 집약적인 워크로드를 스케줄할 수 있습니다. 예를 들어, 성능 향상을 위해 CUDA(Compute Unified Device Architecture) 플랫폼을 사용하여 GPU 및 CPU에서 처리 로드를 공유하는 3D 앱을 실행할 수 있습니다.
 {:shortdesc}
 
 다음 단계에서는 GPU가 필요한 워크로드를 배치하는 방법에 대해 알아봅니다. 또한 GPU 및 CPU 모두에서 워크로드를 처리할 필요가 없는 [앱을 배치](#app_ui)할 수도 있습니다. 이후 [이 Kubernetes 데모 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow)를 통해 [TensorFlow ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.tensorflow.org/) 기계 학습 프레임워크와 같은 수학적으로 집약적인 워크로드를 살펴보는 것이 유용할 수 있습니다.
 
 시작하기 전에:
-* [베어메탈 GPU 머신 유형을 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오. 이 프로세스를 완료하는 데 1영업일 이상이 걸릴 수 있습니다.
+* [베어메탈 GPU 머신 유형을 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오. 이 프로세스는 완료하는 데 영업일 기준으로 이틀 이상 걸릴 수 있습니다. 
 * 네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
 GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
@@ -970,7 +1198,7 @@ GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
     </tr>
     <tr>
     <td><code>volumeMounts</code></td>
-    <td>컨테이너에 마운트된 볼륨의 이름을 지정하십시오(예: <code>nvidia0</code>). 컨테이너에 볼륨의 <code>mountPath</code>를 지정하십시오. 이 예에서는 <code>/usr/test</code> 경로가 작업 컨테이너 명령에서 사용되는 경로와 일치합니다.</td>
+    <td>컨테이너에 마운트된 볼륨의 이름을 지정하십시오(예: <code>nvidia0</code>). 컨테이너에 볼륨의 <code>mountPath</code>를 지정하십시오. 이 예에서는 <code>/usr/test</code> 경로가 작업 컨테이너 명령에서 사용되는 경로와 일치합니다. </td>
     </tr>
     <tr>
     <td><code>volumes</code></td>
@@ -1065,11 +1293,11 @@ GPU 머신에서 워크로드를 실행하려면 다음을 수행하십시오.
 Kubernetes에서는 [수평 팟(Pod) Auto-Scaling ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)을 사용하여 CPU를 기반으로 앱의 인스턴스 수를 늘리거나 줄일 수 있습니다.
 {:shortdesc}
 
-Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니까? [{{site.data.keyword.Bluemix_notm}}에 대한 IBM Auto-Scaling](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started)을 확인하십시오. 팟(Pod) 대신 작업자 노드를 스케일링하시겠습니까? [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)를 확인하십시오.
+Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니까? [{{site.data.keyword.Bluemix_notm}}용 IBM Auto-Scaling](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started)을 확인하십시오. 팟(Pod) 대신 작업자 노드를 스케일링하시겠습니까? [클러스터 오토스케일러](/docs/containers?topic=containers-ca#ca)를 확인하십시오.
 {: tip}
 
 시작하기 전에:
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - heapster 모니터링은 Auto-Scaling을 수행할 클러스터에 배치되어야 합니다.
 - 네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 지정되어 있는지 확인하십시오.
 
@@ -1149,14 +1377,14 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
 {: tip}
 
 시작하기 전에:
-*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   [배치](#app_cli)를 작성하십시오.
-*   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
+*   네임스페이스의 Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)을 보유하고 있는지 확인하십시오.
 
 앱에 대한 롤링 업데이트를 관리하려면 다음을 수행하십시오.
 1.  컨테이너가 실행 중이고 요청을 대한 준비가 된 경우에만 배치가 준비로 표시되는지 확인하려면 [활동 상태 및 준비 상태 프로브를 배치](#probe)에 추가하십시오.
 
-2.  업데이트 중에 최대 갑작스러운 증가 및 사용 불가능한 팟(Pod) 또는 팟(Pod)의 백분율을 지정하는 롤링 업데이트 전략을 포함하도록 배치를 업데이트하십시오. 
+2.  업데이트 중에 최대 갑작스러운 증가 및 사용 불가능한 팟(Pod) 또는 팟(Pod)의 백분율을 지정하는 롤링 업데이트 전략을 포함하도록 배치를 업데이트하십시오.
 
     ```
     apiVersion: apps/v1
@@ -1187,11 +1415,11 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
     <tbody>
     <tr>
     <td><code>spec.minReadySeconds</code></td>
-    <td>기본적으로 배치는 팟(Pod)이 롤아웃을 계속하도록 `ready`로 표시될 때까지 대기합니다. 최신 팟(Pod)의 앱이 아직 준비되지 않은 경우에도 배치가 계속해서 팟(Pod)을 작성하는 경우 이 필드를 사용하여 배치 롤아웃의 속도를 늦추십시오. 예를 들어, `5`를 지정하는 경우 배치는 팟(Pod)이 다음 팟(Pod)을 작성하기 전에 `ready`가 된 후 5초를 기다립니다. </td>
+    <td>기본적으로 배치는 팟(Pod)이 롤아웃을 계속하도록 `ready`로 표시될 때까지 대기합니다. 최신 팟(Pod)의 앱이 아직 준비되지 않은 경우에도 배치가 계속해서 팟(Pod)을 작성하는 경우 이 필드를 사용하여 배치 롤아웃의 속도를 늦추십시오. 예를 들어, `5`를 지정하는 경우 배치는 팟(Pod)이 다음 팟(Pod)을 작성하기 전에 `ready`가 된 후 5초를 기다립니다.</td>
     </tr>
     <tr>
     <td><code>spec.progressDeadlineSeconds</code></td>
-    <td>배치가 실패로 간주되기 전에 제한시간(초)를 설정하십시오. 예를 들어, 제한시간 없이 새 앱 버전에 버그가 있고 즉시 정지되는 경우 팟(Pod)이 `ready` 상태에 도달하지 않으므로 롤아웃을 계속할 수 없습니다. 이 제한시간을 `600`초로 설정하는 경우 롤아웃의 단계에서 10초 동안 진행하는 데 실패하는 경우 배치는 실패로 표시되고 롤아웃이 중지됩니다. </td>
+    <td>배치가 실패로 간주되기 전에 제한시간(초)를 설정하십시오. 예를 들어, 제한시간 없이 새 앱 버전에 버그가 있고 즉시 정지되는 경우 팟(Pod)이 `ready` 상태에 도달하지 않으므로 롤아웃을 계속할 수 없습니다. 이 제한시간을 `600`초로 설정하는 경우 롤아웃의 단계에서 10초 동안 진행하는 데 실패하는 경우 배치는 실패로 표시되고 롤아웃이 중지됩니다.</td>
     </tr>
     <tr>
     <td><code>spec.strategy.type</code></td>
@@ -1203,7 +1431,7 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
     </tr>
     <tr>
     <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
-    <td>배치가 롤아웃 중에 사용할 수 있는 추가 리소스의 최대 수를 숫자(`2`) 또는 백분율(`50%`)로 설정하십시오. 예를 들어, 배치가 `10`개의 복제본을 지정하고 `maxSurge`를 `2`로 설정하는 경우 롤아웃 중에 2개의 새 복제본이 작성됩니다. 이제 12개의 복제본(10개의 기존 복제본, 2개의 신규 복제본)을 보유하게 됩니다. 2개의 새 복제본이 이미 준비된 후에는 지정된 10개의 복제본을 총족하도록 배치가 이전 복제본을 8로 스케일링 다운합니다. 이 프로세스는 롤아웃이 완료되고 모든 10개의 복제본이 새 버전을 실행할 때까지 계속됩니다. <p class="tip">Blue-Green 간의 즉각적인 전환 스타일 업데이트를 수행하려면 `maxSurge`를 `100%`로 설정하십시오. 배치는 새 필수 복제본을 모두 작성한 후 이전 버전 복제본을 0으로 스케일링 다운합니다.</p></td>
+    <td>배치가 롤아웃 중에 사용할 수 있는 추가 리소스의 최대 수를 숫자(`2`) 또는 백분율(`50%`)로 설정하십시오. 예를 들어, 배치가 `10`개의 복제본을 지정하고 `maxSurge`를 `2`로 설정하는 경우 롤아웃 중에 두 개의 새 복제본이 작성됩니다. 이제 12개의 복제본(10개의 기존 복제본, 2개의 신규 복제본)을 보유하게 됩니다. 두 개의 새 복제본이 준비된 후에는 지정된 10개의 복제본을 맞추기 위해 배치가 이전 복제본을 8개로 스케일링 다운합니다. 이 프로세스는 롤아웃이 완료되고 모든 10개의 복제본이 새 버전을 실행할 때까지 계속됩니다.<p class="tip">Blue-Green 간의 즉각적인 전환 스타일 업데이트를 수행하려면 `maxSurge`를 `100%`로 설정하십시오. 배치는 새 필수 복제본을 모두 작성한 후 이전 버전 복제본을 0으로 스케일링 다운합니다.</p></td>
     </tr>
     </tbody></table>
 
@@ -1212,14 +1440,14 @@ Cloud Foundry 애플리케이션 스케일링에 대한 정보를 찾으십니�
     1.  배치 이름을 가져오십시오.
 
         ```
-         kubectl get deployments
+        kubectl get deployments
         ```
         {: pre}
 
     2.  팟(Pod) 이름을 가져오십시오.
 
         ```
-            kubectl get pods
+        kubectl get pods
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}}의 금융 서비스 유스 케이스
@@ -43,7 +43,7 @@ subcollection: containers
 {{site.data.keyword.containerlong_notm}} 및 주요 기술:
 * [수평적 확장](/docs/containers?topic=containers-app#highly_available_apps)
 * [고가용성을 위한 여러 지역](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [컨테이너 보안 및 격리](/docs/containers?topic=containers-security#security)
 * [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cloudant}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -111,7 +111,7 @@ subcollection: containers
 이렇게 되면 개발자들은 공개 도구 체인을 사용하여 개발 및 테스트 시스템으로 변경사항을 신속히 푸시하며 손쉽게 실험을 수행할 수 있게 됩니다. 한 번의 클릭으로 앱에 AI 클라우드 서비스를 추가하면 기존 소프트웨어 개발 도구가 새로운 모습으로 변신합니다.
 
 주요 기술:
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.watson}} AI를 사용한 사기 방지](https://www.ibm.com/cloud/watson-studio)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

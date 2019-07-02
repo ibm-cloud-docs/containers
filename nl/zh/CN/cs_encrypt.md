@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 保护集群中的敏感信息
@@ -40,7 +42,7 @@ _图：集群中数据加密的概览图_
 
 1.  **etcd**：etcd 是主节点的组件，用于存储 Kubernetes 资源的数据，例如对象配置 `.yaml` 文件和私钥。etcd 中的数据将存储在 Kubernetes 主节点的本地磁盘上，并备份到 {{site.data.keyword.cos_full_notm}}。数据在传输到 {{site.data.keyword.cos_full_notm}} 期间和处于静态时会进行加密。通过为集群[启用 {{site.data.keyword.keymanagementservicelong_notm}} 加密](#keyprotect)，您可以选择对 Kubernetes 主节点的本地磁盘上的 etcd 数据启用加密。运行更低版本 Kubernetes 的集群中的 etcd 数据会存储在由 IBM 管理并每天备份的加密磁盘上。将 etcd 数据发送到 pod 时，这些数据会通过 TLS 加密以确保数据保护和完整性。
 2.  **工作程序节点的辅助磁盘**：工作程序节点的辅助磁盘是存储容器文件系统和本地拉取的映像的位置。该磁盘使用 LUKS 加密密钥进行 AES 256 位加密，该密钥对于工作程序节点唯一，并在 etcd 中存储为由 IBM 管理的私钥。重新装入或更新工作程序节点时，会轮换使用 LUKS 密钥。
-3.  **存储器**：可以选择通过[设置文件持久性存储器、块持久性存储器或对象持久性存储器](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)来存储数据。IBM Cloud Infrastructure (SoftLayer) 存储实例将数据保存在加密磁盘上，因此静态数据会被加密。此外，如果选择对象存储器，那么传输中的数据也会进行加密。
+3.  **存储器**：可以选择通过[设置文件持久性存储器、块持久性存储器或对象持久性存储器](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)来存储数据。IBM Cloud Infrastructure (SoftLayer) 存储器实例将数据保存在加密磁盘上，因此静态数据会被加密。此外，如果选择对象存储器，那么传输中的数据也会进行加密。
 4.  **{{site.data.keyword.Bluemix_notm}} 服务**：可以[将 {{site.data.keyword.Bluemix_notm}} 服务](/docs/containers?topic=containers-service-binding#bind-services)（例如，{{site.data.keyword.registryshort_notm}} 或 {{site.data.keyword.watson}}）与集群集成。服务凭证存储在已保存在 etcd 中的私钥中，应用程序可以通过在[部署](/docs/containers?topic=containers-app#secret)中将私钥安装为卷或将私钥指定为环境变量来访问服务凭证。
 5.  **{{site.data.keyword.keymanagementserviceshort}}**：在集群中[启用 {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) 后，会将包装的数据加密密钥 (DEK) 存储在 etcd 中。DEK 将加密集群中的私钥，包括服务凭证和 LUKS 密钥。因为根密钥位于 {{site.data.keyword.keymanagementserviceshort}} 实例中，所以您可以控制对加密私钥的访问。{{site.data.keyword.keymanagementserviceshort}} 密钥由通过了 FIPS 140-2 二级认证的基于云的硬件安全模块进行保护，以防御信息被盗。有关 {{site.data.keyword.keymanagementserviceshort}} 加密如何运作的更多信息，请参阅[包络加密](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption)。
 
@@ -91,7 +93,7 @@ ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。�
 {: important}
 
 开始之前：
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * 通过运行 `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` 并查看 **Version** 字段，检查集群是否运行的是 Kubernetes V1.11.3_1521 或更高版本。
 * 确保您具有对集群的 [{{site.data.keyword.Bluemix_notm}} IAM **管理员**平台角色](/docs/containers?topic=containers-users#platform)。
 * 确保为集群所在区域设置的 API 密钥有权使用 Key Protect。要检查为该区域存储其凭证的 API 密钥所有者，请运行 `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`。
@@ -132,11 +134,11 @@ ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。�
 
 8.  在启用期间，您可能无法访问 Kubernetes 主节点，例如针对部署更新 YAML 配置。在以下命令的输出中，检查 **Master Status** 是否为 **Ready**。
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
-    ```
+   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+   ```
     {: pre}
 
-    正在启用时的示例输出：
+    正在启用时的输出示例：
     ```
     Name:                   <cluster_name>   
     ID:                     <cluster_ID>   
@@ -145,7 +147,7 @@ ALB 会对流至集群中应用程序的 HTTP 网络流量进行负载均衡。�
     ```
     {: screen}
 
-    主节点准备就绪时的示例输出：
+    主节点准备就绪时的输出示例：
     ```
     Name:                   <cluster_name>   
     ID:                     <cluster_ID>   

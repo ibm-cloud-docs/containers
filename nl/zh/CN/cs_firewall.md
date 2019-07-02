@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -159,7 +160,7 @@ subcollection: containers
    }
    ```
     {: screen}
-  * 如果启用了专用服务端点，那么您必须位于 {{site.data.keyword.Bluemix_notm}} 专用网络中或通过 VPN 连接来连接到专用网络，以验证与主节点的连接：
+  * 如果启用了专用服务端点，您必须位于 {{site.data.keyword.Bluemix_notm}} 专用网络中或通过 VPN 连接与专用网络连接，以验证与主节点的连接。请注意，您必须[通过专用负载均衡器公开主节点端点](/docs/containers?topic=containers-clusters#access_on_prem)，以便用户可以通过 VPN 或 {{site.data.keyword.BluDirectLink}} 连接访问主节点。
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -230,7 +231,7 @@ subcollection: containers
    ```
     {: pre}
 
-2.  允许从源 <em>&lt;each_worker_node_publicIP&gt;</em> 到目标 TCP/UDP 端口范围 20000-32767 和端口 443 以及以下 IP 地址和网络组的出站网络流量。如果您拥有的公司防火墙阻止您的本地机器访问公用因特网端点，请对源工作程序节点和本地机器执行此步骤。
+2.  允许从源 <em>&lt;each_worker_node_publicIP&gt;</em> 到目标 TCP/UDP 端口范围 20000-32767 和端口 443 以及以下 IP 地址和网络组的出站网络流量。这些 IP 地址允许工作程序节点与集群主节点进行通信。如果您拥有的企业防火墙阻止本地计算机访问公用因特网端点，请同时对本地计算机执行此步骤，以便可以访问集群主节点。
 
     针对区域内的所有专区，必须允许出局流量流至端口 443，以便在引导过程中均衡负载。例如，如果集群位于美国南部，那么必须允许流量从每个工作程序节点的公共 IP 流至所有专区的 IP 地址的端口 443。
     {: important}
@@ -284,7 +285,7 @@ subcollection: containers
           </tbody>
         </table>
 
-3.  允许出站网络流量从工作程序节点流至 [{{site.data.keyword.registrylong_notm}} 区域](/docs/services/Registry?topic=registry-registry_overview#registry_regions)：
+3.  {: #firewall_registry}要允许工作程序节点与 {{site.data.keyword.registrylong_notm}} 进行通信，请允许出站网络流量从工作程序节点流至 [{{site.data.keyword.registrylong_notm}} 区域](/docs/services/Registry?topic=registry-registry_overview#registry_regions)：
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  将 <em>&lt;registry_subnet&gt;</em> 替换为要允许流量流至的注册表子网。全局注册表存储 IBM 提供的公共映像，区域注册表存储您自己的专用或公共映像。对于公证功能，端口 4443 是必需的，例如[验证映像签名](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)。<table summary="表中第一行跨两列。其他行应从左到右阅读，其中第一列是服务器专区，第二列是要匹配的 IP 地址。">
   <caption>要为注册表流量打开的 IP 地址</caption>
@@ -297,49 +298,43 @@ subcollection: containers
     <tbody>
       <tr>
         <td>跨 <br>{{site.data.keyword.containerlong_notm}} 区域的全局注册表</td>
-        <td><strong>公共</strong>：<code>icr.io</code><br>
-        不推荐：<code>registry.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        不推荐：<code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>亚太地区北部</td>
-        <td><strong>公共</strong>：<code>jp.icr.io</code><br>
-        不推荐：<code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        不推荐：<code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>亚太地区南部</td>
-        <td><strong>公共</strong>：<code>au.icr.io</code><br>
-        不推荐：<code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        不推荐：<code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>欧洲中部</td>
-        <td><strong>公共</strong>：<code>de.icr.io</code><br>
-        不推荐：<code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        不推荐：<code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>英国南部</td>
-        <td><strong>公共</strong>：<code>uk.icr.io</code><br>
-        不推荐：<code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        不推荐：<code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>美国东部和美国南部</td>
-        <td><strong>公共</strong>：<code>us.icr.io</code><br>
-        不推荐：<code>registry.ng.bluemix.net</code><br><br>
-        <strong>专用</strong>：<code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        不推荐：<code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -463,7 +458,7 @@ subcollection: containers
 
 2. 允许 IBM Cloud Infrastructure (SoftLayer) 专用 IP 范围，从而可在集群中创建工作程序节点。
     1. 允许相应的 IBM Cloud Infrastructure (SoftLayer) 专用 IP 范围。请参阅[后端（专用）网络](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network)。
-    2. 针对使用的所有[专区](/docs/containers?topic=containers-regions-and-zones#zones)，允许 IBM Cloud Infrastructure (SoftLayer) 专用 IP 范围。请注意，必须针对 `dal01` 和 `wdc04` 专区添加 IP。请参阅[服务网络（在后端/专用网络上）](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)。
+    2. 针对使用的所有[专区](/docs/containers?topic=containers-regions-and-zones#zones)，允许 IBM Cloud Infrastructure (SoftLayer) 专用 IP 范围。请注意，必须针对 `dal01`、`dal10` 和 `wdc04` 专区添加 IP，如果集群位于欧洲地理位置，那么还必须针对 `ams01` 专区添加 IP。请参阅[服务网络（在后端/专用网络上）](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)。
 
 3. 打开以下端口：
     - 允许从工作程序到端口 80 和 443 的出站 TCP 和 UDP 连接，从而允许工作程序节点更新和重新装入。
@@ -582,13 +577,13 @@ subcollection: containers
    ```
       {: pre}
 
-    2. 从上一步的输出中，记下集群中工作程序节点的 **Public IP** 的所有唯一网络标识（前 3 个八位元）。<staging>如果要将仅专用集群列入白名单，请改为记下 **Private IP**。<staging>在以下输出中，唯一网络标识为 `169.xx.178` 和 `169.xx.210`。
+    2. 从上一步的输出中，记下集群中工作程序节点的 **Public IP** 的所有唯一网络标识（前 3 个八位元）。如果要将仅专用集群列入白名单，请改为记下 **Private IP**。在以下输出中，唯一网络标识为 `169.xx.178` 和 `169.xx.210`。
         ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  列出每个唯一网络标识的 VLAN 子网。
@@ -597,8 +592,8 @@ ID                                                 Public IP        Private IP  
         ```
         {: pre}
 
-        输出示例：
-        ```
+    输出示例：
+    ```
         ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
         1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5   
         7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6    

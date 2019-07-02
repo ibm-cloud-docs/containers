@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -16,11 +16,13 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip}rwo
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Block Storage for IBM Cloud에 데이터 저장
@@ -38,7 +40,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} Block Storage 플러그인을 Helm 차트와 함께 설치하여 블록 스토리지를 위한 사전 정의된 스토리지 클래스를 설정하십시오. 이러한 스토리지 클래스를 사용하여 앱을 위한 블록 스토리지를 프로비저닝하는 데 필요한 PVC를 작성할 수 있습니다.
 {: shortdesc}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 작업자 노드가 부 버전에 대한 최신 패치를 적용하는지 확인하십시오.
    1. 작업자 노드의 현재 패치 버전을 나열하십시오.
@@ -51,7 +53,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -95,7 +97,7 @@ subcollection: containers
 
 6. {{site.data.keyword.Bluemix_notm}} Block Storage 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 블록 스토리지 클래스가 클러스터에 추가됩니다.
    ```
-   helm install iks-charts/ibmcloud-block-storage-plugin 
+   helm install iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -187,7 +189,7 @@ subcollection: containers
 기존 {{site.data.keyword.Bluemix_notm}} Block Storage 플러그인을 최신 버전으로 업그레이드할 수 있습니다.
 {: shortdesc}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
@@ -234,7 +236,7 @@ subcollection: containers
 {: important}
 
 시작하기 전에:
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 블록 스토리지를 사용하는 클러스터에 PVC 또는 PV가 없는지 확인하십시오.
 
 플러그인을 제거하려면 다음을 수행하십시오.
@@ -539,7 +541,7 @@ subcollection: containers
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
     Capacity:	20Gi
-    Access Modes:	RWX
+    Access Modes:	RWO
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
@@ -863,7 +865,7 @@ PV를 작성하여 PVC에 바인딩했습니다. 이제 클러스터 사용자�
 {: shortdesc}
 
 **Stateful 세트에 블록 스토리지를 추가할 때는 어떤 사항을 알아야 합니까?** </br>
-Stateful 세트에 스토리지를 추가하려는 경우에는 Stateful 세트 YAML의 `volumeClaimTemplates` 섹션에 스토리지 구성을 지정합니다. `volumeClaimTemplates`는 PVC의 기반이며 프로비저닝할 블록 스토리지의 스토리지 클래스와 크기 또는 IOPS를 포함할 수 있습니다. 그러나 `volumeClaimTemplates`에 레이블을 포함시키려는 경우 Kubernetes는 PVC를 작성할 때 이러한 레이블을 포함시키지 않습니다. 대신 사용자가 직접 Stateful 세트에 해당 레이블을 추가해야 합니다.
+Stateful 세트에 스토리지를 추가하려는 경우에는 Stateful 세트 YAML의 `volumeClaimTemplates` 섹션에 스토리지 구성을 지정합니다. `volumeClaimTemplates`는 PVC의 기반이며 프로비저닝할 블록 스토리지의 스토리지 클래스와 크기 또는 IOPS를 포함할 수 있습니다. 그러나 `volumeClaimTemplates`에 레이블을 포함하려는 경우 Kubernetes는 PVC를 작성할 때 이러한 레이블을 포함하지 않습니다. 대신 사용자가 직접 Stateful 세트에 해당 레이블을 추가해야 합니다.
 
 동시에 두 Stateful 세트를 배치할 수는 없습니다. 한 Stateful 세트가 완전히 배치되기 전에 다른 세트를 작성하려 시도하면 Stateful 세트 배치 작업에서 예기치 않은 결과가 발생할 수 있습니다.
 {: important}
@@ -883,7 +885,7 @@ Stateful 세트를 작성할 때 자동으로 PVC를 작성하려는 경우에�
 Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택사항을 사용하십시오.
 {: shortdesc}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 클러스터 내의 모든 기존 Stateful 세트가 완전히 배치되었는지 확인하십시오. 특정 Stateful 세트가 여전히 배치 중인 경우에는 Stateful 세트 작성을 시작할 수 없습니다. 예기치 않은 결과를 방지하려면 클러스터 내의 모든 Stateful 세트가 완전히 배치될 때까지 기다려야 합니다.
    1. 클러스터에 있는 기존 Stateful 세트를 나열하십시오.
@@ -1114,7 +1116,7 @@ Stateful 세트를 작성할 때 PVC를 자동으로 작성하려면 이 선택�
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-     <td style="text-align:left">Stateful 세트 및 PVC에 포함시킬 모든 레이블을 입력하십시오. Stateful 세트의 <code>volumeClaimTemplates</code>에 포함시키는 레이블은 Kubernetes가 인식하지 않습니다. 포함시킬 수 있는 레이블의 샘플로는 다음과 같은 항목이 있습니다. <ul><li><code><strong>region</strong></code> 및 <code><strong>zone</strong></code>: 모든 Stateful 세트 복제본 및 PVC를 하나의 특정 구역에서 작성하려는 경우에는 두 레이블을 모두 추가하십시오. 사용하는 스토리지 클래스에 구역 및 지역을 지정할 수도 있습니다. 다중 구역 클러스터를 보유한 상태에서 구역 및 지역을 지정하지 않으면 모든 구역 간에 볼륨 요청의 균등한 밸런스를 유지하기 위해 스토리지가 프로비저닝되는 구역이 라운드 로빈 기반으로 선택됩니다.</li><li><code><strong>billingType</strong></code>: PVC에 사용할 비용 청구 유형을 입력하십시오. <code>hourly</code> 또는 <code>monthly</code> 중에서 선택하십시오. 이 레이블을 지정하지 않으면 모든 PVC가 시간별 비용 청구 유형으로 작성됩니다. </li></ul></td>
+     <td style="text-align:left">Stateful 세트 및 PVC에 포함시킬 모든 레이블을 입력하십시오. Stateful 세트의 <code>volumeClaimTemplates</code>에 포함하는 레이블은 Kubernetes가 인식하지 않습니다. 포함시킬 수 있는 레이블의 샘플로는 다음과 같은 항목이 있습니다. <ul><li><code><strong>region</strong></code> 및 <code><strong>zone</strong></code>: 모든 Stateful 세트 복제본 및 PVC를 하나의 특정 구역에서 작성하려는 경우에는 두 레이블을 모두 추가하십시오. 사용하는 스토리지 클래스에 구역 및 지역을 지정할 수도 있습니다. 다중 구역 클러스터를 보유한 상태에서 구역 및 지역을 지정하지 않으면 모든 구역 간에 볼륨 요청의 균등한 밸런스를 유지하기 위해 스토리지가 프로비저닝되는 구역이 라운드 로빈 기반으로 선택됩니다.</li><li><code><strong>billingType</strong></code>: PVC에 사용할 비용 청구 유형을 입력하십시오. <code>hourly</code> 또는 <code>monthly</code> 중에서 선택하십시오. 이 레이블을 지정하지 않으면 모든 PVC가 시간별 비용 청구 유형으로 작성됩니다. </li></ul></td>
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
@@ -1165,7 +1167,7 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
 
 [Stateful 세트를 작성할 때 동적으로 PVC를 프로비저닝](#block_dynamic_statefulset)하는 경우, PVC의 이름은 Stateful 세트 YAML 파일에 사용한 값에 따라 지정됩니다. Stateful 세트가 기존 PVC를 사용하기 위해서는 PVC의 이름이 동적 프로비저닝을 사용할 때 자동으로 작성되는 이름과 일치해야 합니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하려는 경우, [앱에 블록 스토리지 추가](#add_block)의 1 - 3단계를 따라 각 Stateful 세트 복제본에 대한 PVC를 작성하십시오. 반드시 다음 형식을 따르는 이름을 사용하여 PVC를 작성해야 합니다. `<volume_name>-<statefulset_name>-<replica_number>`
    - **`<volume_name>`**: Stateful 세트의 `spec.volumeClaimTemplates.metadata.name` 섹션에 지정할 이름을 사용하십시오(예: `nginxvol`).
@@ -1181,7 +1183,7 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
    - **`metadata.name`**: PVC 이름의 `<statefulset_name>`을 입력하십시오.
    - **`spec.replicas`**: Stateful 세트에 대해 작성할 복제본의 수를 입력하십시오. 복제본의 수는 이전에 작성한 PVC의 수와 동일해야 합니다.
 
-   PVC가 다른 구역에 있는 경우, Stateful 세트에 지역 또는 구역 레이블을 포함시키지 마십시오.
+   PVC가 다른 구역에 있는 경우, Stateful 세트에 지역 또는 구역 레이블을 포함하지 마십시오.
    {: note}
 
 3. Stateful 세트 복제본 팟(Pod)에서 PVC가 사용되었는지 확인하십시오.
@@ -1221,7 +1223,7 @@ Stateful 세트를 작성하기 전에 PVC를 사전 프로비저닝하거나 �
 스토리지 용량 또는 성능을 높이기 위해 기존 볼륨을 수정할 수 있습니다.
 {: shortdesc}
 
-비용 청구에 대한 질문이 있거나 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용한 스토리지 수정 방법에 대한 단계를 찾으려면 [블록 스토리지 용량 확장](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity)을 참조하십시오. {{site.data.keyword.Bluemix_notm}} 콘솔을 사용하여 스토리지를 수정하려면 이 주제의 4 - 7단계에 따라 수정을 완료해야 합니다.
+비용 청구에 대한 질문이 있거나 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용한 스토리지 수정 방법에 대한 단계를 찾으려면 [블록 스토리지 용량 확장](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) 및 [IOPS 조정](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)을 참조하십시오. 콘솔에서 작성한 업데이트는 지속적 볼륨(PV) 에 반영되지 않습니다. 이 정보를 PV에 추가하려면 `kubectl patch pv <pv_name>`를 실행하고 PV의 **레이블** 및 **어노테이션** 섹션에서 크기와 IOPS를 수동으로 업데이트하십시오.
 {: tip}
 
 1. 클러스터의 PVC를 나열하고 **VOLUME** 열에서 연관된 PV의 이름을 기록해 두십시오.
@@ -1233,11 +1235,64 @@ kubectl get pvc
    출력 예:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWO            ibmc-block-bronze    147d
    ```
    {: screen}
 
-2. PVC가 바인딩된 PV의 세부사항을 나열하여 PVC와 연관된 실제 파일 스토리지의 **`VolumeID`** 및 **`StorageType`**을 검색하십시오. `<pv_name>`을 이전 단계에서 검색한 PV의 이름으로 대체하십시오. 스토리지 유형은 **레이블** 섹션에 표시되며, 볼륨 ID는 CLI 출력의 **소스** > **옵션** 섹션에 표시됩니다.
+2. 블록 스토리지의 IOPS 및 크기를 변경할 경우 먼저 PV의 `metadata.labels.IOPS` 섹션에서 IOPS를 편집하십시오. 더 작거나 큰 IOPS 값으로 변경할 수 있습니다. 해당 스토리지 유형에 대해 지원되는 IOPS를 입력해야 합니다. 예를 들어, 네 개의 IOPS가 포함된 Endurance 블록 스토리지가 있는 경우 IOPS를 2 또는 10으로 변경할 수 있습니다. 지원되는 IOPS 값에 대한 자세한 정보는 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)을 참조하십시오. 
+   ```
+   kubectl edit pv <pv_name>
+   ```
+   {: pre}
+
+   CLI에서 IOPS를 변경하려면 블록 스토리지의 크기도 변경해야 합니다. 크기를 제외하고 IOPS만 변경할 경우 [콘솔에서 IOPS 변경 요청](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)을 참조하십시오.
+   {: note}
+
+3. PVC를 편집하고 PVC의 `spec.resources.requests.storage` 섹션에서 새 크기를 추가하십시오. 스토리지 클래스로 설정된 최대 용량까지만 크기를 늘리도록 변경할 수 있습니다. 기존 스토리지의 크기를 줄일 수 없습니다. 스토리지 클래스의 사용 가능한 크기를 보려면 [블록 스토리지 구성 결정](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)을 참조하십시오.
+   ```
+   kubectl edit pvc <pvc_name>
+   ```
+   {: pre}
+
+4. 볼륨 확장이 요청되었는지 확인하십시오. CLI 출력의 **조건** 섹션에서 `FileSystemResizePending` 메시지가 표시되면 볼륨 확장이 요청된 것입니다.  
+   ```
+   kubectl describe pvc <pvc_name>
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   ...
+   Conditions:
+   Type                      Status  LastProbeTime                     LastTransitionTime                Reason  Message
+   ----                      ------  -----------------                 ------------------                ------  -------
+   FileSystemResizePending   True    Mon, 01 Jan 0001 00:00:00 +0000   Thu, 25 Apr 2019 15:52:49 -0400           Waiting for user to (re-)start a pod to finish file system resize of volume on node.
+   ```
+   {: screen}
+
+5. PVC를 마운트하는 모든 팟(Pod)을 나열하십시오. 팟(Pod)으로 PVC가 마운트되면 볼륨 확장이 자동으로 처리됩니다. 팟(Pod)으로 PVC가 마운트되지 않으면 볼륨 확장을 처리할 수 있도록 PVC를 마운트해야 합니다.  
+   ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+
+   마운트된 팟(Pod)은 다음 형식으로 리턴됩니다. `<pod_name>: <pvc_name>`
+
+6. 팟(Pod)으로 PVC가 마운트되지 않으면 [팟(Pod) 또는 배치를 작성하고 PVC를 마운트](/docs/containers?topic=containers-block_storage#add_block)하십시오. 팟(Pod)으로 PVC가 마운트되는 경우 다음 단계로 진행하십시오.  
+
+7. 볼륨 확장 상태를 모니터하십시오. CLI 출력에서 `"message":"Success"` 메시지가 표시되면 볼륨 확장이 완료된 것입니다. 
+   ```
+   kubectl get pv <pv_name> -o go-template=$'{{index .metadata.annotations "ibm.io/volume-expansion-status"}}\n'
+   ```
+   {: pre}
+
+   출력 예:
+   ```
+   {"size":50,"iops":500,"orderid":38832711,"start":"2019-04-30T17:00:37Z","end":"2019-04-30T17:05:27Z","status":"complete","message":"Success"}
+   ```
+   {: screen}
+
+8. 크기 및 IOPS가 CLI 출력의 **레이블** 섹션에서 변경되었는지 확인하십시오. 
    ```
    kubectl describe pv <pv_name>
    ```
@@ -1245,132 +1300,12 @@ kubectl get pvc
 
    출력 예:
    ```
-   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
-   Labels:          CapacityGb=24
-                    Datacenter=dal13
-                    IOPS=4
-                    StorageType=Endurance
-                    billingType=hourly
-                    failure-domain.beta.kubernetes.io/region=us-south
-                    failure-domain.beta.kubernetes.io/zone=dal13
-                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
    ...
-   Source:
-       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
-       Driver:     ibm/ibmc-block
-       FSType:     ext4
-       SecretRef:  <nil>
-       ReadOnly:   false
-       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
-   ...
+   Labels:       CapacityGb=50
+                 Datacenter=dal10
+                 IOPS=500
    ```
    {: screen}
-
-3. IBM Cloud 인프라(SoftLayer) 계정에서 볼륨의 크기 또는 IOPS를 수정하십시오.
-
-   성능 스토리지의 예:
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
-   ```
-   {: pre}
-
-   endurance 스토리지의 예:
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
-   ```
-   {: pre}
-
-   <table>
-   <caption>명령의 컴포넌트 이해</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 파일 컴포넌트 이해</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>&lt;volume_ID&gt;</code></td>
-   <td>이전에 검색한 볼륨의 ID를 입력하십시오.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-size&gt;</code></td>
-   <td>볼륨의 새 크기(Gi)를 입력하십시오. 올바른 크기에 대해서는 [블록 스토리지 구성 결정](#block_predefined_storageclass)을 참조하십시오. 입력된 크기는 볼륨의 현재 크기보다 크거나 같아야 합니다. 새 크기를 지정하지 않으면 볼륨의 현재 크기가 사용됩니다. </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-iops&gt;</code></td>
-   <td>성능 스토리지에만 해당됩니다. 원하는 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [블록 스토리지 구성 결정](#block_predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.3 미만인 경우, 새 IOPS/GB 비율은 0.3 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.3보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.3보다 크거나 같아아야 합니다.</p> </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-tier&gt;</code></td>
-   <td>endurance 스토리지에만 해당됩니다. 원하는 GB당 새 IOPS 수를 입력하십시오. 올바른 IOPS에 대해서는 [블록 스토리지 구성 결정](#block_predefined_storageclass)을 참조하십시오. IOPS를 지정하지 않으면 현재 IOPS가 사용됩니다. <p class="note">볼륨의 원래 IOPS/GB 비율이 0.25 미만인 경우, 새 IOPS/GB 비율은 0.25 미만이어야 합니다. 볼륨의 원래 IOPS/GB 비율이 0.25보다 크거나 같은 경우, 볼륨의 새 IOPS/GB 비율은 0.25보다 크거나 같아아야 합니다.</p> </td>
-   </tr>
-   </tbody>
-   </table>
-
-   출력 예:
-   ```
-   Order 31020713 was placed successfully!.
-   > Storage as a Service
-
-   > 40 GBs
-
-   > 2 IOPS per GB
-
-   > 20 GB Storage Space (Snapshot Space)
-
-   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
-   ```
-   {: screen}
-
-4. `autofix-resizefs` 어노테이션을 추가할 수 있도록 PV 구성을 패치하십시오. 이 어노테이션은 볼륨이 팟(Pod)에 마운트될 때 파일 시스템의 크기를 자동으로 조정합니다.  
-   ```
-   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
-   ```
-   {: pre}
-
-5. PVC를 사용하는 모든 팟(Pod)을 나열하십시오.
-   ```
-      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
-   ```
-   {: pre}
-
-   팟(Pod)은 다음 형식으로 리턴됩니다. `<pod_name>: <pvc_name>`
-
-6. PVC를 사용하는 팟(Pod)이 있으면 팟(Pod)을 제거하고 Kubernetes가 이를 다시 작성하도록 하여 팟(Pod)을 다시 시작하십시오. Kubernetes 배치 또는 복제본 세트를 사용하지 않고 팟(Pod)을 작성한 경우에는 팟(Pod)을 제거한 이후 이를 다시 작성해야 합니다.
-   팟(Pod) 작성에 사용된 YAML 파일을 검색하려면 `kubectl get pod <pod_name> -o yaml >pod.yaml`을 실행하십시오.
-   {: tip}
-   ```
-      kubectl delete pod <pod_name>
-   ```
-   {: pre}
-
-7. 볼륨의 크기를 변경한 경우에는 팟(Pod)에 로그인하여 새 크기를 확인하십시오. 스토리지 인스턴스의 크기를 조정하는 동안 약간의 시간이 소요되며 프로세스가 완료될 때까지 크기를 확인할 수 없습니다.
-   1. 볼륨에 액세스하기 위해 팟(Pod)에서 사용한 볼륨 마운트 경로를 가져오십시오.
-      ```
-        kubectl describe pod <pod_name>
-      ```
-      {: pre}
-
-      볼륨 마운트 경로는 CLI 출력의 **컨테이너** > **블록** > **마운트** 섹션에 표시됩니다.
-   2. 팟(Pod)에 로그인하십시오.
-      ```
-      kubectl exec -it <pod_name> bash
-      ```
-      {: pre}
-
-   3. 디스크 사용 통계를 표시하고 이전에 검색한 볼륨의 마운트 경로를 찾으십시오. **크기** 열이 볼륨의 새 크기를 표시하는지 확인하십시오.
-      ```
-      df -h
-      ```
-      {: pre}
-
-      출력 예:
-      ```
-      Filesystem                                     Size  Used Avail Use% Mounted on
-      overlay                                         99G  3.2G   91G   4% /
-      tmpfs                                           64M     0   64M   0% /dev
-      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
-      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
-      ```
-      {: screen}
 
 
 ## 데이터 백업 및 복원
@@ -1383,7 +1318,7 @@ kubectl get pvc
 
 <dl>
   <dt>주기적 스냅샷 설정</dt>
-  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [블록 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots)할 수 있습니다. 스냅샷을 저장하려면 블록 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다.</br></br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 크기 및 IOPS는 CLI 출력의 <strong>레이블</strong> 섹션에 표시됩니다. 볼륨 ID을 찾으려면 CLI 출력의 <code>ibm.io/network-storage-id</code> 어노테이션을 검토하십시오. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>특정 시점에 인스턴스 상태를 캡처하는 읽기 전용 이미지인 [블록 스토리지에 대한 주기적 스냅샷을 설정](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots)할 수 있습니다. 스냅샷을 저장하려면 블록 스토리지의 스냅샷 영역을 요청해야 합니다. 스냅샷은 동일한 구역 내의 기본 스토리지 인스턴스에 저장됩니다. 사용자가 실수로 볼륨에서 중요한 데이터를 제거한 경우 스냅샷에서 데이터를 복원할 수 있습니다.</br></br> <strong>볼륨에 대한 스냅샷을 작성하려면 다음을 수행하십시오. </strong><ol><li>[계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI에 로그인하십시오. <pre class="pre"><code>ibmcloud sl init</code></pre></li><li>클러스터에 있는 기존 PV를 나열하십시오. <pre class="pre"><code>kubectl get pv</code></pre></li><li>스냅샷 영역을 작성할 PV에 대한 세부사항을 가져오고 볼륨 ID, 크기 및 IOPS를 기록해 두십시오. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 크기 및 IOPS는 CLI 출력의 <strong>레이블</strong> 섹션에 표시됩니다. 볼륨 ID을 찾으려면 CLI 출력의 <code>ibm.io/network-storage-id</code> 어노테이션을 검토하십시오. </li><li>이전 단계에서 검색한 매개변수를 사용하여 기존 볼륨의 스냅샷 크기를 작성하십시오. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>스냅샷 크기가 작성될 때까지 기다리십시오. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 출력의 <strong>Snapshot Size (GB)</strong>가 0에서 주문한 크기로 변경된 경우 스냅샷 크기가 성공적으로 프로비저닝된 것입니다. </li><li>볼륨에 대한 스냅샷을 작성하고 작성된 스냅샷의 ID를 기록해 두십시오. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>스냅샷이 작성되었는지 확인하십시오. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>스냅샷의 데이터를 기본 볼륨에 복원하려면 다음을 수행하십시오. </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>다른 구역으로 스냅샷 복제</dt>
  <dd><p>구역 장애로부터 데이터를 보호하기 위해 다른 구역에서 설정된 블록 스토리지 인스턴스로 [스냅샷을 복제](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication)할 수 있습니다. 데이터는 기본 스토리지에서 백업 스토리지로만 복제할 수 있습니다. 복제된 블록 스토리지 인스턴스를 클러스터에 마운트할 수는 없습니다. 기본 스토리지에서 장애가 발생하는 경우에는 복제된 백업 스토리지가 기본 스토리지가 되도록 수동으로 설정할 수 있습니다. 그런 다음 클러스터에 이를 추가할 수 있습니다. 기본 스토리지가 복원되고 나면 백업 스토리지로부터 데이터를 복원할 수 있습니다.</p></dd>
  <dt>스토리지 복제(duplicate)</dt>
@@ -1393,7 +1328,7 @@ kubectl get pvc
 데이터의 고가용성을 개선하고 구역 장애로부터 앱을 보호하려면 두 번째 {{site.data.keyword.cos_short}} 인스턴스를 설정하고 구역 간에 데이터를 복제하십시오. {{site.data.keyword.cos_short}} 인스턴스에서 데이터를 복원해야 하는 경우 이미지와 함께 제공된 복원 스크립트를 사용하십시오.</dd>
 <dt>팟(Pod) 및 컨테이너에서 데이터 복사</dt>
 <dd><p>`kubectl cp` [명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/overview/#cp)을 사용하여 클러스터의 팟(Pod) 또는 특정 컨테이너에서 파일 및 디렉토리를 복사할 수 있습니다.</p>
-<p>시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code>를 사용하여 컨테이너를 지정하지 않는 경우 이 명령은 팟(Pod)의 사용 가능한 첫 번째 컨테이너를 사용합니다.</p>
+<p>시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code>를 사용하여 컨테이너를 지정하지 않는 경우 이 명령은 팟(Pod)의 사용 가능한 첫 번째 컨테이너를 사용합니다.</p>
 <p>이 명령은 다양한 방식으로 사용할 수 있습니다.</p>
 <ul>
 <li>로컬 머신에서 클러스터의 팟(Pod)으로 데이터 복사: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

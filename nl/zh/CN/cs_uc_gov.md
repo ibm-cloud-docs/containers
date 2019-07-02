@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.Bluemix_notm}} 的政府用例
@@ -39,9 +39,9 @@ subcollection: containers
 为什么选择 {{site.data.keyword.Bluemix_notm}}：通过 {{site.data.keyword.containerlong_notm}}，主管可发挥组合公共/专用数据的转化价值。同样，该服务会提供公共云平台，以基于单体内部部署应用程序来重构并公开微服务。此外，公共云还支持政府和公共合作伙伴关系使用外部云服务及适合协作的开放式源代码工具。
 
 关键技术：    
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
-* [通过 {{site.data.keyword.cos_full_notm}} 提供对公共数据的访问](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [通过 {{site.data.keyword.cos_full_notm}} 提供对公共数据的访问](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [即插即用的 IBM Cloud Analytics 服务](https://www.ibm.com/cloud/analytics)
 
 **背景：政府通过组合使用公共/专用数据的社区开发者来改进协作并加快速度**
@@ -69,7 +69,7 @@ subcollection: containers
 * 监视工作程序节点的运行状况和恢复
 * 提供全球计算，使开发者不必在工作负载和数据需要位于的全球各区域中支持基础架构
 
-不过，仅仅将计算工作负载移至 {{site.data.keyword.Bluemix_notm}} 是不够的。政府还需要实现过程和方法转型。通过采用 IBM Garage Method 的实践，提供者可以实施敏捷的迭代交付过程，以支持持续集成和持续交付 (CI/CD) 等现代 DevOps 实践。
+仅仅将计算工作负载移至 {{site.data.keyword.Bluemix_notm}} 是不够的。政府还需要实现过程和方法转型。通过采用 IBM Garage Method 的实践，提供者可以实施敏捷的迭代交付过程，以支持持续集成和持续交付 (CI/CD) 等现代 DevOps 实践。
 
 大部分 CI/CD 过程本身可通过云中的 {{site.data.keyword.contdelivery_full}} 自动执行。提供者可以定义工作流程工具链，以准备容器映像，检查是否有漏洞，然后将其部署到 Kubernetes 集群。
 
@@ -117,7 +117,7 @@ subcollection: containers
 为什么选择 {{site.data.keyword.Bluemix_notm}}：{{site.data.keyword.containerlong_notm}} 支持政府和公共合作伙伴关系使用外部云服务及适合协作的开放式源代码工具。容器提供了一个可共享平台，港口和运输公司对于共享信息在该安全平台上进行托管都很放心。此外，这些公司从小型开发/测试系统发展到生产规模的系统时，该平台也会相应进行缩放。开放式工具链通过自动执行构建、测试和部署，进一步加速了开发工作。
 
 关键技术：    
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [容器安全性和隔离](/docs/containers?topic=containers-security#security)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

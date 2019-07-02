@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Helm 차트를 사용하여 서비스 추가
@@ -30,22 +32,22 @@ Helm 차트를 사용하여 복잡한 Kubernetes 앱을 클러스터에 추가�
 {: shortdesc}
 
 **Helm은 개념 및 사용 방법은 무엇입니까?** </br>
-[Helm ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://helm.sh)은 클러스터에서 복잡한 Kubernetes 앱을 정의하고, 설치하고, 업그레이드하는 데 사용하는 Kubernetes 패키지 관리자입니다. Helm 차트는 앱을 빌드하는 Kubernetes 리소스의 YAML 파일을 생성하기 위한 스펙을 패키지합니다. 이 Kubernetes 리소스는 클러스터에서 자동으로 적용되고 Helm으로 버전화됩니다. 또한 Helm을 사용하여 고유한 앱을 지정하고 패키할 수 있으며 Helm을 통해 Kubernetes 리소스에 대한 YAML 파일을 생성할 수 있습니다.   
+[Helm ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://helm.sh)은 클러스터에서 복잡한 Kubernetes 앱을 정의하고, 설치하고, 업그레이드하는 데 사용하는 Kubernetes 패키지 관리자입니다. Helm 차트는 앱을 빌드하는 Kubernetes 리소스의 YAML 파일을 생성하기 위한 스펙을 패키지합니다. 이러한 Kubernetes 리소스는 클러스터에서 자동으로 적용되고 Helm에 의해 버전이 지정됩니다. 또한 Helm을 사용하여 고유한 앱을 지정하고 패키할 수 있으며 Helm을 통해 Kubernetes 리소스에 대한 YAML 파일을 생성할 수 있습니다.  
 
-클러스터에서 Helm을 사용하려면 로컬 머신에 Helm CLI를 설치하고 Helm을 사용할 모든 클러스터에 Helm 서버 Tiller를 설치해야 합니다. 
+클러스터에서 Helm을 사용하려면 로컬 머신에 Helm CLI를 설치하고 Helm을 사용할 모든 클러스터에 Helm 서버 Tiller를 설치해야 합니다.
 
 **{{site.data.keyword.containerlong_notm}}에서 지원되는 Helm 차트는 무엇입니까?** </br>
-사용 가능한 Helm 차트의 개요는 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts)를 참조하십시오. 카탈로그에 나열된 Helm 차트는 다음과 같이 그룹화됩니다. 
+사용 가능한 Helm 차트의 개요는 [Helm 차트 카탈로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts)를 참조하십시오. 이 카탈로그에 나열된 Helm 차트는 다음과 같이 그룹화됩니다. 
 
-- **iks-charts**: {{site.data.keyword.containerlong_notm}}에 허용되는 Helm 차트입니다. 이 저장소의 이름은 `ibm`에서 `iks-charts`로 변경되었습니다. 
-- **ibm-charts**: {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.Bluemix_notm}} Private 클러스터에 허용되는 Helm 차트입니다. 
-- **kubernetes**: Kubernetes 커뮤니티에서 제공되고 커뮤니티 통제에서 `stable`로 간주되는 Helm 차트입니다. 이 차트는 {{site.data.keyword.containerlong_notm}} 또는 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 작동하는지 확인되지 않습니다. 
-- **kubernetes-incubator**: Kubernetes 커뮤니티에서 제공되고 커뮤니티 통제에서 `incubator`로 간주되는 Helm 차트입니다. 이 차트는 {{site.data.keyword.containerlong_notm}} 또는 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 작동하는지 확인되지 않습니다. 
+- **iks-charts**: {{site.data.keyword.containerlong_notm}}에 허용되는 Helm 차트입니다. 이 저장소의 이름은 `ibm`에서 `iks-charts`로 변경되었습니다.
+- **ibm-charts**: {{site.data.keyword.containerlong_notm}} 및 {{site.data.keyword.Bluemix_notm}} Private 클러스터에 허용되는 Helm 차트입니다.
+- **kubernetes**: Kubernetes 커뮤니티에서 제공되고 커뮤니티 통제에서 `stable`로 간주되는 Helm 차트입니다. 이 차트는 {{site.data.keyword.containerlong_notm}} 또는 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 작동하는지 확인되지 않습니다.
+- **kubernetes-incubator**: Kubernetes 커뮤니티에서 제공되고 커뮤니티 통제에서 `incubator`로 간주되는 Helm 차트입니다. 이 차트는 {{site.data.keyword.containerlong_notm}} 또는 {{site.data.keyword.Bluemix_notm}} Private 클러스터에서 작동하는지 확인되지 않습니다.
 
 **iks-charts** 및 **ibm-charts** 저장소의 Helm 차트는 {{site.data.keyword.Bluemix_notm}} 지원 조직으로 완전히 통합됩니다. 이 Helm 차트 사용에 대한 질문이나 문제가 있으면 {{site.data.keyword.containerlong_notm}} 지원 채널 중 하나를 사용할 수 있습니다. 자세한 정보는 [도움 및 지원 받기](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)를 참조하십시오.
 
 **Helm을 사용하기 위한 전제조건은 무엇이며 사설 클러스터에서 Helm을 사용할 수 있습니까?** </br>
-Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클러스터에 Helm 서버(Tiller)를 설치해야 합니다. Tiller 이미지는 공용 Google Container Registry에 저장됩니다. Tiller 설치 중에 이미지에 액세스하려면 클러스터에서 공용 Google Container Registry에 대한 공용 네트워크 연결을 허용해야 합니다. 공용 서비스 엔드포인트가 사용으로 설정된 클러스터는 자동으로 이미지에 액세스할 수 있습니다. 사용자 정의 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트만 사용하도록 설정된 클러스터는 Tiller 이미지에 대한 액세스를 허용하지 않습니다. 대신 [로컬 시스템으로 이미지를 가져오고 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 이미지를 푸시](#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](#private_install_without_tiller)하십시오.
+Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클러스터에 Helm 서버(Tiller)를 설치해야 합니다. Tiller 이미지는 공용 Google Container Registry에 저장됩니다. Tiller 설치 중에 이미지에 액세스하려면 클러스터에서 공용 Google Container Registry에 대한 공용 네트워크 연결을 허용해야 합니다. 공용 서비스 엔드포인트를 사용하는 클러스터는 자동으로 이미지에 액세스할 수 있습니다. 사용자 정의 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트만 사용하도록 설정된 클러스터는 Tiller 이미지에 대한 액세스를 허용하지 않습니다. 대신 [로컬 시스템으로 이미지를 가져오고 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 이미지를 푸시](#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](#private_install_without_tiller)하십시오.
 
 
 ## 공용 액세스 권한이 있는 클러스터에 Helm 설정
@@ -55,86 +57,86 @@ Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클�
 {: shortdesc}
 
 시작하기 전에:
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - `kube-system` 네임스페이스에서 Kubernetes 서비스 계정 및 클러스터 역할 바인딩으로 Tiller를 설치하려면 [`cluster-admin` 역할](/docs/containers?topic=containers-users#access_policies)이 있는지 확인하십시오.
 
 공용 액세스 권한이 있는 클러스터에 Helm을 설치하려면 다음을 수행하십시오.
 
 1. 로컬 시스템에 <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="외부 링크 아이콘"></a>를 설치하십시오.
 
-2. 클러스터에서 Kubernetes 서비스 계정을 사용하여 Tiller를 이미 설치했는지 확인하십시오.  
+2. 클러스터에서 Kubernetes 서비스 계정을 사용하여 Tiller를 이미 설치했는지 확인하십시오. 
    ```
    kubectl get serviceaccount --all-namespaces | grep tiller
    ```
    {: pre}
-      
-   Tiller가 설치된 경우 출력 예: 
+
+   Tiller가 설치된 경우 출력 예:
    ```
    kube-system      tiller                               1         189d
    ```
    {: screen}
-      
-   출력 예에는 Kubernetes 네임스페이스 및 Tiller에 대한 서비스 계정의 이름이 포함되어 있습니다. Tiller가 클러스터에서 서비스 계정을 사용하여 설치되지 않은 경우 CLI 출력이 리턴되지 않습니다.  
-      
-3. **중요**: 클러스터 보안을 유지보수하려면 클러스터에서 서비스 계정 및 클러스터 역할 바인딩을 사용하여 Tiller를 설정하십시오.  
-   - **Tiller가 서비스 계정을 사용하여 설치된 경우:** 
+
+   출력 예에는 Kubernetes 네임스페이스 및 Tiller에 대한 서비스 계정의 이름이 포함되어 있습니다. Tiller가 클러스터에서 서비스 계정을 사용하여 설치되지 않은 경우 CLI 출력이 리턴되지 않습니다.
+
+3. **중요**: 클러스터 보안을 유지보수하려면 클러스터에서 서비스 계정 및 클러스터 역할 바인딩을 사용하여 Tiller를 설정하십시오.
+   - **Tiller가 서비스 계정을 사용하여 설치된 경우:**
      1. Tiller 서비스 계정에 대한 클러스터 역할 바인딩을 작성하십시오. `<namespace>`를 클러스터에 Tiller가 설치되어 있는 네임스페이스로 대체하십시오.
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=<namespace>:tiller -n <namespace>
         ```
         {: pre}
-  
+
      2. Tiller를 업데이트하십시오. `<tiller_service_account_name>`를 이전 단계에서 검색한 Tiller에 대한 Kubernetes 서비스 계정의 이름으로 대체하십시오.
         ```
         helm init --upgrade --service-account <tiller_service_account_name>
         ```
         {: pre}
-           
+
      3. `tiller-deploy` 팟(Pod)이 클러스터에서 `Running` **상태**인지 확인하십시오.
         ```
         kubectl get pods -n <namespace> -l app=helm
         ```
         {: pre}
-           
+
         출력 예:
 
         ```
-    NAME                            READY     STATUS    RESTARTS   AGE
-    tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
         ```
         {: screen}
-        
-   - **Tiller가 서비스 계정을 사용하여 설치되지 않은 경우:** 
+
+   - **Tiller가 서비스 계정을 사용하여 설치되지 않은 경우:**
      1. 클러스터의 `kube-system` 네임스페이스에서 Tiller에 대한 Kubernetes 서비스 계정 및 클러스터 역할 바인딩을 작성하십시오.
         ```
         kubectl create serviceaccount tiller -n kube-system
         ```
         {: pre}
-        
+
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
         ```
         {: pre}
-           
+
      2. Tiller 서비스 계정이 작성되었는지 확인하십시오.
         ```
         kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
-           
-        출력 예: 
+
+        출력 예:
         ```
-                NAME                                 SECRETS   AGE
+        NAME                                 SECRETS   AGE
         tiller                               1         2m
         ```
         {: screen}
-          
+
      3. Helm CLI를 초기화하고 작성한 서비스 계정을 사용하여 Tiller를 설치하십시오.
         ```
     helm init --service-account tiller
         ```
         {: pre}
-           
+
      4. `tiller-deploy` 팟(Pod)이 클러스터에서 `Running` **상태**인지 확인하십시오.
         ```
         kubectl get pods -n kube-system -l app=helm
@@ -143,8 +145,8 @@ Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클�
 
         출력 예:
         ```
-            NAME                            READY     STATUS    RESTARTS   AGE
-    tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
+        NAME                            READY     STATUS    RESTARTS   AGE
+        tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
         ```
         {: screen}
 
@@ -172,7 +174,7 @@ Helm 차트를 배치하려면 로컬 시스템에 Helm CLI를 설치하고 클�
    {: pre}
 
    ```
-    helm search ibm-charts
+   helm search ibm-charts
    ```
    {: pre}
 
@@ -189,7 +191,7 @@ Tiller를 사용하지 않고 Helm 차트를 설치하려면 [사설 클러스�
 {: tip}
 
 시작하기 전에:
-- 로컬 시스템에 Docker를 설치하십시오. [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli)를 설치한 경우 Docker는 이미 설치되어 있습니다.
+- 로컬 시스템에 Docker를 설치하십시오. [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started)를 설치한 경우 Docker는 이미 설치되어 있습니다.
 - [{{site.data.keyword.registryshort_notm}} CLI 플러그인을 설치하고 네임스페이스를 설정](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install)하십시오.
 - `kube-system` 네임스페이스에서 Kubernetes 서비스 계정 및 클러스터 역할 바인딩으로 Tiller를 설치하려면 [`cluster-admin` 역할](/docs/containers?topic=containers-users#access_policies)이 있는지 확인하십시오.
 
@@ -255,7 +257,7 @@ Tiller를 사용하지 않고 Helm 차트를 설치하려면 [사설 클러스�
 
 10. 모든 Helm 차트의 최신 버전을 검색하려면 저장소를 업데이트하십시오.
     ```
-   helm repo update
+    helm repo update
     ```
     {: pre}
 

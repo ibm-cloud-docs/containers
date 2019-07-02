@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-05-31"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 팟(Pod) 우선순위 설정
 {: #pod_priority}
@@ -91,7 +93,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * `default` 네임스페이스에 대해 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 * 클러스터를 Kubernetes 버전 1.11로 [작성](/docs/containers?topic=containers-clusters#clusters_ui)하거나 [업데이트](/docs/containers?topic=containers-update#update)하십시오.
 
@@ -143,7 +145,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     <tr>
     <td><code>globalDefault</code></td>
     <td>선택사항: 이 우선순위를 `priorityClassName` 값 없이 스케줄되는 모든 팟(Pod)에 적용되는 글로벌 기본값으로 지정하려면 이 필드를 `true`로 설정하십시오. 클러스터에서 1개의 우선순위 클래스만 글로벌 기본값으로 설정될 수 있습니다. 글로벌 기본값이 없는 경우, `priorityClassName`이 지정되지 않은 팟(Pod)의 우선순위는 영(`0`)입니다.</br></br>
-    [기본 우선순위 클래스](#default_priority_class)는 `globalDefault`를 설정하지 않습니다. 클러스터에서 다른 우선순위 클래스를 작성한 경우에는 `kubectl describe priorityclass <name>`을 실행하여 `globalDefault`가 설정되지 않았는지 확인할 수 있습니다.</td>
+        [기본 우선순위 클래스](#default_priority_class)는 `globalDefault`를 설정하지 않습니다. 클러스터에서 다른 우선순위 클래스를 작성한 경우에는 `kubectl describe priorityclass <name>`을 실행하여 `globalDefault`가 설정되지 않았는지 확인할 수 있습니다.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -173,7 +175,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * 팟(Pod)을 배치할 네임스페이스에 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오.
 * 클러스터를 Kubernetes 버전 1.11로 [작성](/docs/containers?topic=containers-clusters#clusters_ui)하거나 [업데이트](/docs/containers?topic=containers-update#update)하십시오.
 * 우선순위가 기존 팟(Pod)을 선취하고 클러스터의 리소스가 이용되는 방법에 영향을 줄 수 있으므로 [우선순위 스케줄링이 작동하는 방법을 이해](#priority_scheduling)하십시오.
@@ -222,7 +224,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
         spec:
           containers:
           - name: ibmliberty
-            image: registry.bluemix.net/ibmliberty:latest
+            image: icr.io/ibmliberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Stockage de données sur IBM File Storage pour IBM Cloud
@@ -29,7 +31,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} File Storage est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants (PV) Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour déterminer si {{site.data.keyword.Bluemix_notm}} File Storage est l'option de stockage qui vous convient le mieux, voir [Choix d'une solution de stockage](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Pour obtenir les informations de tarification, voir [Facturation](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage est disponible uniquement pour les clusters standard qui sont configurés avec une connectivité de réseau public. Si votre cluster n'a pas accès au réseau public, par exemple s'il s'agit d'un cluster privé derrière un pare-feu ou d'un cluster avec uniquement le noeud final de service privé activé, vous pouvez mettre à disposition du stockage de fichiers si votre cluster exécute Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 ou plus. Les instances de stockage de fichiers NFS sont spécifiques à une seule zone. Si vous disposez d'un cluster à zones multiples, tenez compte des [options de stockage persistant dans les zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.Bluemix_notm}} File Storage est disponible uniquement pour les clusters standard qui sont configurés avec une connectivité de réseau public. Si votre cluster n'a pas accès au réseau public, par exemple s'il s'agit d'un cluster privé derrière un pare-feu ou d'un cluster avec uniquement le noeud final de service privé activé, vous pouvez mettre à disposition du stockage de fichiers si votre cluster exécute Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 ou plus. Les instances de stockage de fichiers NFS sont spécifiques à une seule zone. Si vous disposez d'un cluster à zones multiples, tenez compte des [options de stockage persistant dans les zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Détermination de la configuration de stockage de fichiers
@@ -43,7 +45,7 @@ Toutes les classes de stockage indiquent le type de stockage de fichiers à mett
 Après avoir mis à disposition un type de stockage spécifique en utilisant une classe de stockage, vous ne pouvez plus modifier le type ou la règle de conservation de l'unité de stockage. Vous pouvez toutefois [modifier la taille et le nombre d'IOPS](#file_change_storage_configuration) si vous souhaitez augmenter la capacité de stockage ou les performances. Pour modifier le type et la règle de conservation de votre stockage, vous devez [créer une nouvelle instance de stockage et copier les données](/docs/containers?topic=containers-kube_concepts#update_storageclass) de l'ancienne instance de stockage vers la nouvelle.
 {: important}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour déterminer une configuration de stockage :
 
@@ -433,7 +435,7 @@ Si vous disposez déjà d'une unité de stockage physique que vous souhaitez uti
 
 Avant de commencer :
 - Vérifiez que vous disposez d'au moins un noeud worker présent dans la même zone que votre instance de stockage de fichiers existante.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Etape 1 : Préparation de votre stockage existant.
 {: #existing-file-1}
@@ -483,7 +485,7 @@ Si vous envisagez d'utiliser du stockage existant que vous avez mis à dispositi
 1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/classic?), cliquez sur **Stockage**.
 2.  Cliquez sur **Stockage de fichiers** et, dans le menu **Actions**, sélectionnez **Autoriser l'hôte**.
 3.  Sélectionnez **Sous-réseaux**.
-4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name>` et comparez l'`adresse IP privée` de votre noeud worker à celle du sous-réseau que vous avez trouvé dans liste déroulante. 
+4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name>` et comparez l'`adresse IP privée` de votre noeud worker à celle du sous-réseau que vous avez trouvé dans liste déroulante.
 5.  Cliquez sur **Soumettre**.
 6.  Cliquez sur le nom du stockage de fichiers.
 7.  Notez les zones `Point de montage`, `Taille` et `Emplacement`. La zone `Point de montage` s'affiche sous la forme `<nfs_server>:<file_storage_path>`.
@@ -643,7 +645,7 @@ Si vous souhaitez créer automatiquement votre PVC lorsque vous créez l'ensembl
 Utilisez cette option pour créer automatiquement la PVC lorsque vous créez l'ensemble avec état.
 {: shortdesc}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Vérifiez que tous les ensembles avec état existants de votre cluster sont entièrement déployés. Si un ensemble avec état est en cours de déploiement, vous ne pouvez pas lancer la création de votre ensemble avec état. Vous devez attendre jusqu'à ce que tous les ensembles avec état de votre cluster soient entièrement déployés pour éviter d'obtenir des résultats imprévisibles.
    1. Répertoriez les ensembles avec état existants dans votre cluster.
@@ -881,7 +883,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">Spécifiez votre règle d'anti-affinité pour garantir que les pods de votre ensemble avec état sont répartis sur les noeuds worker et les zones. L'exemple montre une règle d'anti-affinité dans laquelle le pod de l'ensemble avec état préfère ne pas être planifié sur un noeud worker où s'exécute un pod avec le libellé `app: nginx`. La section `topologykey: failure-domain.beta.kubernetes.io/zone` limite davantage cette règle d'anti-affinité et empêche la planification du pod sur un noeud worker si ce noeud figure dans la même zone que le pod ayant le libellé `app: nignx`. En utilisant cette règle d'anti-affinité, vous pouvez appliquer l'anti-affinité aux différents noeuds worker et aux différentes zones. </td>
+    <td style="text-align:left">Spécifiez votre règle d'anti-affinité pour garantir que les pods de votre ensemble avec état sont répartis sur les noeuds worker et les zones. L'exemple montre une règle d'anti-affinité dans laquelle le pod de l'ensemble avec état préfère ne pas être planifié sur un noeud worker où s'exécute un pod avec le libellé `app: nginx`. La section `topologykey: failure-domain.beta.kubernetes.io/zone` limite davantage cette règle d'anti-affinité et empêche la planification du pod sur un noeud worker si ce noeud figure dans la même zone que le pod ayant le libellé `app: nginx`. En utilisant cette règle d'anti-affinité, vous pouvez appliquer l'anti-affinité aux différents noeuds worker et aux différentes zones. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -924,7 +926,7 @@ Vous pouvez mettre à disposition vos PVC de manière anticipée avant de créer
 
 Lorsque vous [effectuez une mise à disposition dynamique de vos PVC lors de la création de l'ensemble avec état](#file_dynamic_statefulset), le nom de la PVC est affecté en fonction des valeurs que vous avez utilisées dans le fichier YAML de l'ensemble avec état. Pour que l'ensemble avec état utilise des PVC existantes, le nom de vos PVC doit correspondre à celui qui serait automatiquement créé via une mise à disposition dynamique.
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Si vous souhaitez effectuer une mise à disposition préalable de votre PVC avant de créer l'ensemble avec état, suivez les étapes 1 à 3 de la section [Ajout de stockage de fichiers à des applications](#add_file) pour créer une PVC pour chaque réplique de l'ensemble avec état. Prenez soin de créer votre PVC avec un nom qui respecte le format suivant : `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`** : utilisez le nom de volume que vous souhaitez indiquer dans la section `spec.volumeClaimTemplates.metadata.name` de votre ensemble avec état, par exemple `nginxvol`.
@@ -1205,7 +1207,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 
 <dl>
   <dt>Configurer la prise d'instantanés régulière</dt>
-  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. </br><strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Vous pouvez [configurer la prise d'instantanés régulière de votre stockage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots). Un instantané est une image en lecture seule qui capture l'état de l'instance à un moment donné. Pour stocker l'instantané, vous devez demander de l'espace d'image instantanée dans votre stockage de fichiers. Les instantanés sont stockés dans l'instance de stockage existante figurant dans la même zone. Vous pouvez restaurer des données à partir d'un instantané si l'utilisateur supprime accidentellement des données importantes du volume. </br> <strong>Pour créer un instantané de votre volume :</strong><ol><li>[Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Connectez-vous à l'interface de ligne de commande `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Répertoriez les volumes persistants (PV) existants dans votre cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenez les détails du volume persistant pour lequel vous voulez créer un espace d'instantané et notez l'ID du volume, la taille et le nombre d'entrées-sorties par seconde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> L'ID du volume, la taille et le nombre d'IOPS se trouvent dans la section <strong>Labels</strong> dans la sortie de l'interface CLI. </li><li>Créez la taille de l'instantané pour le volume existant avec les paramètres que vous avez récupérés à l'étape précédente. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendez que la taille de l'instantané soit créée. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>La taille de l'instantané est mise à disposition lorsque la section <strong>Snapshot Size (GB)</strong> de la sortie de l'interface CLI passe de 0 à la taille que vous avez commandée. </li><li>Créez l'instantané de votre volume et notez l'ID de l'instantané qui a été créé pour vous. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Vérifiez que la création de l'instantané a abouti. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Pour restaurer les données d'un instantané sur un volume existant : </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Répliquer les instantanés dans une autre zone</dt>
  <dd><p>Pour protéger vos données en cas de défaillance d'une zone, vous pouvez [répliquer des instantanés](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication) sur une instance de stockage de fichiers configurée dans une autre zone. Les données peuvent être répliquées du stockage principal uniquement vers le stockage de sauvegarde. Vous ne pouvez pas monter une instance de stockage de fichiers répliquée dans un cluster. En cas de défaillance de votre stockage principal, vous pouvez manuellement définir votre stockage de sauvegarde répliqué comme stockage principal. Vous pouvez ensuite le monter sur votre cluster. Une fois votre stockage principal restauré, vous pouvez récupérer les données dans le stockage de sauvegarde.</p></dd>
@@ -1216,7 +1218,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
   <p>Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'une zone, configurez une deuxième instance {{site.data.keyword.cos_full}} et répliquez les données entre les différentes zones. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.cos_full}}, utilisez le script de restauration fourni avec l'image.</p></dd>
 <dt>Copier les données depuis et vers des pods et des conteneurs</dt>
 <dd><p>Vous pouvez utiliser la [commande![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` pour copier des fichiers et des répertoires depuis et vers des pods ou des conteneurs spécifiques dans votre cluster.</p>
-<p>Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
+<p>Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
 <p>Vous pouvez utiliser la commande de plusieurs manières :</p>
 <ul>
 <li>Copier les données de votre machine locale vers un pod dans votre cluster : <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

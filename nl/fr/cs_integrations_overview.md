@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}f
 
 
 # Intégrations IBM Cloud et tierces prises en charge
@@ -29,9 +30,108 @@ subcollection: containers
 Vous pouvez utiliser différents services externes et services de catalogue avec un cluster Kubernetes standard dans {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
+## Intégrations populaires
+{: #popular_services}
+
+<table summary="Le tableau présente les services disponibles que vous pouvez ajouter à votre cluster et qui ont le plus de succès auprès des utilisateurs d'{{site.data.keyword.containerlong_notm}}. La lecture des lignes s'effectue de gauche à droite, avec le nom du service dans la première colonne et une description de ce service dans la seconde colonne.">
+<caption>Services populaires</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Catégorie </th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{{site.data.keyword.cloudaccesstrailfull}}</td>
+<td>Journaux d'activité de cluster</td>
+<td>Surveillez les activités d'administration intervenant dans votre cluster en analysant les journaux via Grafana. Pour plus d'informations sur ce service, voir la documentation d'[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started). Pour plus d'informations sur les types d'événement dont vous pouvez assurer le suivi, voir [Evénements Activity Tracker](/docs/containers?topic=containers-at_events).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.appid_full}}</td>
+<td>Authentification</td>
+<td>Ajoutez un niveau de sécurité à vos applications avec [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) en obligeant les utilisateurs à se connecter. Pour l'authentification de demandes HTTP/HTTPS Web ou d'API vers votre application, vous pouvez intégrer {{site.data.keyword.appid_short_notm}} au service Ingress en utilisant l'[annotation Ingress d'authentification {{site.data.keyword.appid_short_notm}}](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} Block Storage</td>
+<td>Stockage par blocs</td>
+<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) est une solution de stockage iSCSI persistant hautes performances que vous pouvez ajouter à vos applications en utilisant des volumes persistants (PV) Kubernetes. Utilisez du stockage par blocs pour déployer des applications avec état dans une zone unique ou sous forme de stockage haute performance pour des pods uniques. Pour plus d'informations sur la mise à disposition de stockage par blocs dans votre cluster, voir [Stockage de données sur {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloudcerts_full}}</td>
+<td>Certificats TLS</td>
+<td>Vous pouvez utiliser <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour stocker et gérer les certificats SSL pour vos applications. Pour plus d'informations, voir <a href="https://www.ibm.com/blogs/bluemix/2018/01/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates/" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.registrylong}}</td>
+<td>Images de conteneur</td>
+<td>Configurez votre propre référentiel d'images Docker sécurisé où vous pourrez stocker et partager des images en toute sécurité entre les utilisateurs du cluster. Pour plus d'informations, voir la <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">documentation {{site.data.keyword.registrylong}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.contdelivery_full}}</td>
+<td>Automatisation de la génération</td>
+<td>Permet d'automatiser vos générations d'applications et vos déploiements de conteneur sur les clusters Kubernetes en utilisant une chaîne d'outils. Pour plus d'informations sur la configuration, voir le blogue <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.datashield_full}} (bêta)</td>
+<td>Chiffrement de la mémoire</td>
+<td>Vous pouvez utiliser <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour chiffrer votre mémoire de données. {{site.data.keyword.datashield_short}} est intégré à la technologie Intel® Software Guard Extensions (SGX) et Fortanix® pour que le code et les données de vos charges de travail de conteneur {{site.data.keyword.Bluemix_notm}} soient protégés lors de leur utilisation. Le code d'application et les données s'exécutent dans des enclaves d'UC fortifiées, qui correspondent à des zones de mémoire sécurisées sur le noeud worker qui protègent les aspects critiques de l'application, ce qui permet de conserver le code et les données confidentiels et inchangés.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix}} File Storage</td>
+<td>Stockage de fichiers</td>
+<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour plus d'informations sur la mise à disposition de stockage de fichiers dans votre cluster, voir [Stockage de données sur {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.keymanagementservicefull}}</td>
+<td>chiffrement de données</td>
+<td>Chiffrez les valeurs confidentielles (secrets) Kubernetes figurant dans votre cluster en activant {{site.data.keyword.keymanagementserviceshort}}. Le chiffrement des valeurs confidentielles Kubernetes empêche des utilisateurs non autorisés d'accéder aux informations sensibles du cluster.<br>Pour configurer le chiffrement, voir <a href="/docs/containers?topic=containers-encryption#keyprotect">Chiffrement de valeurs confidentielles Kubernetes à l'aide de {{site.data.keyword.keymanagementserviceshort}}</a>.<br>Pour plus d'informations, voir la <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">documentation {{site.data.keyword.keymanagementserviceshort}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.la_full}}</td>
+<td>Journaux de cluster et d'application</td>
+<td>Ajoutez des fonctionnalités de gestion de journaux à votre cluster en déployant LogDNA en tant que service tiers sur vos noeuds worker afin de gérer les journaux à partir de vos conteneurs de pod. Pour plus d'informations, voir [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.mon_full}}</td>
+<td>Métriques de cluster et d'application</td>
+<td>Gagnez en visibilité opérationnelle sur les performances et l'état de santé de vos applications en déployant Sysdig en tant que service tiers sur vos noeuds worker pour transférer des métriques à {{site.data.keyword.monitoringlong}}. Pour plus d'informations, voir [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cos_full}}</td>
+<td>Stockage d'objets</td>
+<td>Les données stockées avec {{site.data.keyword.cos_short}} sont chiffrées et disséminées entre plusieurs emplacements géographiques. Elles sont accessibles via HTTP en utilisant une API REST. Vous pouvez utiliser l'[image ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) pour configurer le service de sorte à effectuer des sauvegardes ponctuelles ou planifiées pour les données figurant dans vos clusters. Pour plus d'informations sur le service, voir la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">documentation {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+</tr>
+<tr>
+<td>Istio sur {{site.data.keyword.containerlong_notm}}</td>
+<td>Gestion de microservice</td>
+<td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un service open source qui fournit aux développeurs un moyen de connecter, sécuriser, gérer et surveiller un réseau de microservices, appelé également maillage de services, sur des plateformes d'orchestration de cloud. Istio sur {{site.data.keyword.containerlong}} propose une installation en une seule étape d'Istio dans votre cluster via un module complémentaire géré. En un seul clic, vous pouvez obtenir tous les composants de base d'Istio, des fonctions de suivi, de surveillance et de visualisation supplémentaires, ainsi que le modèle opérationnel d'application BookInfo. Pour commencer, voir [Utilisation du module complémentaire Istio géré (bêta)](/docs/containers?topic=containers-istio).</td>
+</tr>
+<tr>
+<td>Knative</td>
+<td>Applications sans serveur</td>
+<td>[Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/knative/docs) est une plateforme open source développée par IBM, Google, Pivotal, Red Hat, Cisco et d'autres firmes dans l'objectif d'étendre les capacités de Kubernetes pour vous aider à créer des applications modernes, conteneurisées, axées sur la source et sans serveur, en plus de votre cluster Kubernetes. Cette plateforme utilise une approche cohérente couvrant plusieurs infrastructures et langages de programmation pour permettre l'abstraction de la charge opérationnelle de construction, déploiement et gestion des charges de travail dans Kubernetes pour que les développeurs puissent se concentrer sur ce qui les intéresse le plus : le code source. Pour plus d'informations, voir [Déploiement d'applications sans serveur avec Knative](/docs/containers?topic=containers-serverless-apps-knative). </td>
+</tr>
+<tr>
+<td>Portworx</td>
+<td>Stockage pour les applications avec état</td>
+<td>[Portworx ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://portworx.com/products/introduction/) est une solution de stockage SDS à haute disponibilité que vous pouvez utiliser pour gérer du stockage persistant pour vos bases de données conteneurisées et d'autres applications avec état, ou pour partager des données entre des pods sur plusieurs zones. Vous pouvez installer Portworx avec une charte Helm et mettre à disposition du stockage pour vos applications en utilisant des volumes persistants Kubernetes. Pour plus d'informations sur la configuration de Portworx dans votre cluster, voir [Stockage de données sur SDS (Software-Defined Storage) avec Portworx](/docs/containers?topic=containers-portworx#portworx).</td>
+</tr>
+<tr>
+<td>Razee</td>
+<td>Automatisation du déploiement</td>
+<td>[Razee ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://razee.io/) est un projet open source qui automatise et gère le déploiement de ressources Kubernetes sur des clusters, des environnements et des fournisseurs de cloud, et vous aide à visualiser des informations de déploiement pour vos ressources afin de vous permettre de surveiller le processus de déploiement et détecter les problèmes de déploiement plus rapidement. Pour obtenir plus d'informations sur Razee et savoir comment le configurer dans votre cluster pour automatiser votre processus de déploiement, voir la [documentation Razee ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/razee-io/Razee).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
 
 ## Services DevOps
 {: #devops_services}
+
 <table summary="Le tableau présente les services disponibles que vous pouvez ajouter à votre cluster pour ajouter des fonctionnalités DevOps supplémentaires. La lecture des lignes s'effectue de gauche à droite, avec le nom du service dans la première colonne et une description du service dans la deuxième colonne.">
 <caption>Services DevOps</caption>
 <thead>
@@ -55,11 +155,11 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un gestionnaire de package Kubernetes. Vous pouvez créer de nouvelles chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}. <p>Pour plus d'informations, voir [Configuration de Helm dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#helm).</p></td>
+<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> est un gestionnaire de package Kubernetes. Vous pouvez créer de nouvelles chartes Helm ou utiliser des chartes Helm préexistantes pour définir, installer et mettre à niveau des applications Kubernetes complexes qui s'exécutent dans les clusters {{site.data.keyword.containerlong_notm}}. <p>Pour plus d'informations, voir [Configuration de Helm dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).</p></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
-<td>Permet d'automatiser vos générations d'applications et vos déploiements de conteneur sur les clusters Kubernetes en utilisant une chaîne d'outils. Pour obtenir des informations de configuration, voir le blogue <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
+<td>Permet d'automatiser vos générations d'applications et vos déploiements de conteneur sur les clusters Kubernetes en utilisant une chaîne d'outils. Pour plus d'informations sur la configuration, voir le blogue <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>. </td>
 </tr>
 <tr>
 <td>Istio sur {{site.data.keyword.containerlong_notm}}</td>
@@ -71,13 +171,42 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Knative</td>
-<td>[Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/knative/docs) est une plateforme open source développée par IBM, Google, Pivotal, Red Hat, Cisco et d'autres firmes dans l'objectif d'étendre les capacités de Kubernetes pour vous aider à créer des applications modernes, conteneurisées, axées sur la source et sans serveur, en plus de votre cluster Kubernetes. Cette plateforme utilise une approche cohérente couvrant plusieurs infrastructures et langages de programmation pour permettre l'abstraction de la charge opérationnelle de construction, déploiement et gestion des charges de travail dans Kubernetes pour que les développeurs puissent se concentrer sur ce qui les intéresse le plus : le code source. Pour plus d'informations, voir [Tutoriel : Utilisation du module complémentaire géré Knative pour exécuter des applications sans serveur dans les clusters Kubernetes](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). </td>
+<td>[Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/knative/docs) est une plateforme open source développée par IBM, Google, Pivotal, Red Hat, Cisco et d'autres firmes dans l'objectif d'étendre les capacités de Kubernetes pour vous aider à créer des applications modernes, conteneurisées, axées sur la source et sans serveur, en plus de votre cluster Kubernetes. Cette plateforme utilise une approche cohérente couvrant plusieurs infrastructures et langages de programmation pour permettre l'abstraction de la charge opérationnelle de construction, déploiement et gestion des charges de travail dans Kubernetes pour que les développeurs puissent se concentrer sur ce qui les intéresse le plus : le code source. Pour plus d'informations, voir [Déploiement d'applications sans serveur avec Knative](/docs/containers?topic=containers-serverless-apps-knative). </td>
+</tr>
+<tr>
+<td>Razee</td>
+<td>[Razee ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://razee.io/) est un projet open source qui automatise et gère le déploiement de ressources Kubernetes sur des clusters, des environnements et des fournisseurs de cloud, et vous aide à visualiser des informations de déploiement pour vos ressources afin de vous permettre de surveiller le processus de déploiement et détecter les problèmes de déploiement plus rapidement. Pour obtenir plus d'informations sur Razee et savoir comment le configurer dans votre cluster pour automatiser votre processus de déploiement, voir la [documentation Razee ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/razee-io/Razee).</td>
 </tr>
 </tbody>
 </table>
 
 <br />
 
+
+## Services de cloud hybride
+{: #hybrid_cloud_services}
+
+<table summary="Le tableau présente les services disponibles que vous pouvez connecter votre cluster à des centres de données sur site. La lecture des lignes s'effectue de gauche à droite, avec le nom du service dans la première colonne et une description de ce service dans la seconde colonne.">
+<caption>Services de cloud hybride</caption>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{site.data.keyword.BluDirectLink}}</td>
+    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) vous permet de créer une connexion privée directe entre vos environnements de réseau distants et {{site.data.keyword.containerlong_notm}} sans routage sur l'Internet public. Les offres {{site.data.keyword.Bluemix_notm}} Direct Link sont utiles lorsque vous devez implémenter des charges de travail hybrides, des charges de travail inter-fournisseur, des transferts de données volumineux ou fréquents ou des charges de travail privées. Pour choisir une offre {{site.data.keyword.Bluemix_notm}} Direct Link et configurer une connexion {{site.data.keyword.Bluemix_notm}} Direct Link, voir [Initiation à  {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) dans la documentation {{site.data.keyword.Bluemix_notm}} Direct Link. </td>
+  </tr>
+<tr>
+  <td>Service VPN IPSec strongSwan</td>
+  <td>Configurez un [service VPN IPSec strongSwan ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.strongswan.org/about.html) connectant de manière sécurisée votre cluster Kubernetes avec un réseau sur site. Le service VPN IPSec strongSwan fournit un canal de communication de bout en bout sécurisé sur Internet, basé sur l'ensemble de protocoles IPSec (Internet Protocol Security) aux normes de l'industrie. Pour configurer une connexion sécurisée entre votre cluster et un réseau sur site, [configurez et déployez le service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) directement dans un pod de votre cluster.</td>
+  </tr>
+  </tbody>
+  </table>
+
+<br />
 
 
 ## Services de consignation et de surveillance
@@ -101,7 +230,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Surveillez les activités d'administration intervenant dans votre cluster en analysant les journaux via Grafana. Pour plus d'informations sur ce service, voir la documentation d'[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Pour plus d'informations sur les types d'événement dont vous pouvez assurer le suivi, voir [Evénements Activity Tracker](/docs/containers?topic=containers-at_events).</td>
+<td>Surveillez les activités d'administration intervenant dans votre cluster en analysant les journaux via Grafana. Pour plus d'informations sur ce service, voir la documentation d'[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started). Pour plus d'informations sur les types d'événement dont vous pouvez assurer le suivi, voir [Evénements Activity Tracker](/docs/containers?topic=containers-at_events).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
@@ -117,7 +246,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Prometheus</td>
-<td>Prometheus est un outil open source de surveillance, de consignation et d'alerte spécialement conçu pour Kubernetes. Prometheus extrait des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. L'activité de l'UC, de la mémoire, des E-S et du réseau est collectée pour chaque conteneur s'exécutant dans un cluster. Vous pouvez utiliser les données collectées dans des demandes ou des alertes personnalisées pour surveiller les performances et les charges de travail dans votre cluster.
+<td>Prometheus est un outil open source de surveillance, de consignation et d'alerte conçu pour Kubernetes. Prometheus extrait des informations détaillées sur le cluster, les noeuds worker et l'état de santé du déploiement à partir des informations de consignation de Kubernetes. L'activité de l'UC, de la mémoire, des E-S et du réseau est collectée pour chaque conteneur qui s'exécute dans un cluster. Vous pouvez utiliser les données collectées dans des demandes ou des alertes personnalisées pour surveiller les performances et les charges de travail dans votre cluster.
 
 <p>Pour utiliser Prometheus, suivez les <a href="https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus" target="_blank">instructions CoreOS <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</p>
 </td>
@@ -132,7 +261,7 @@ Vous pouvez utiliser différents services externes et services de catalogue avec
 </tr>
 <tr>
 <td>Weave Scope</td>
-<td>Weave Scope produit un diagramme visuel de vos ressources dans un cluster Kubernetes, notamment des services, pods, conteneurs, processus, noeuds, et autres. Weave Scope fournit des métriques interactives sur l'utilisation de l'UC et de la mémoire, ainsi que des outils pour suivi et exécution dans un conteneur.<p>Pour plus d'informations, voir [Visualisation de ressources de cluster Kubernetes via Weave Scope et {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-integrations#weavescope).</p></li></ol>
+<td>[Weave Scope ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.weave.works/oss/scope/) fournit un diagramme visuel de vos ressources dans un cluster Kubernetes, notamment des services, pods, conteneurs, processus, noeuds, et autres. Weave Scope fournit des métriques interactives sur l'utilisation de l'UC et de la mémoire, ainsi que des outils pour suivi et exécution dans un conteneur.</li></ol>
 </td>
 </tr>
 </tbody>
@@ -157,7 +286,7 @@ Vous souhaitez avoir une vision globale de l'intégration des services de sécur
 </tr>
 </thead>
 <tbody>
-  <tr id="appid">
+  <tr>
     <td>{{site.data.keyword.appid_full}}</td>
     <td>Ajoutez un niveau de sécurité à vos applications avec [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) en obligeant les utilisateurs à se connecter. Pour l'authentification de demandes HTTP/HTTPS Web ou d'API vers votre application, vous pouvez intégrer {{site.data.keyword.appid_short_notm}} au service Ingress en utilisant l'[annotation Ingress d'authentification {{site.data.keyword.appid_short_notm}}](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
   </tr>
@@ -217,11 +346,11 @@ Vous souhaitez avoir une vision globale de l'intégration des services de sécur
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>Les données stockées avec {{site.data.keyword.cos_short}} sont chiffrées et disséminées entre plusieurs emplacements géographiques. Elles sont accessibles via HTTP en utilisant une API REST. Vous pouvez utiliser l'[image ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) pour configurer le service de sorte à effectuer des sauvegardes ponctuelles ou planifiées pour les données figurant dans vos clusters. Pour obtenir des informations générales sur le service, voir la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">documentation {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
+  <td>Les données stockées avec {{site.data.keyword.cos_short}} sont chiffrées et disséminées entre plusieurs emplacements géographiques. Elles sont accessibles via HTTP en utilisant une API REST. Vous pouvez utiliser l'[image ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) pour configurer le service de sorte à effectuer des sauvegardes ponctuelles ou planifiées pour les données figurant dans vos clusters. Pour plus d'informations sur le service, voir la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">documentation {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a>.</td>
 </tr>
   <tr>
   <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour plus d'informations sur la mise à disposition de stockage de fichiers dans votre cluster, voir [Stockage de données sur {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour plus d'informations sur la mise à disposition de stockage de fichiers dans votre cluster, voir [Stockage de données sur {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -251,7 +380,7 @@ Vous souhaitez avoir une vision globale de l'intégration des services de sécur
   </tr>
 <tr>
   <td>Bases de données cloud</td>
-  <td>Vous pouvez choisir entre toute une gamme de services de base de données {{site.data.keyword.Bluemix_notm}}, notamment {{site.data.keyword.composeForMongoDB_full}} ou {{site.data.keyword.cloudantfull}} pour déployer des solutions de base de données évolutives à haute disponibilité dans votre cluster. Pour obtenir une liste des bases de données disponibles, voir le [catalogue {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/catalog?category=databases).  </td>
+  <td>Vous pouvez faire choix parmi toute une gamme de services de base de données {{site.data.keyword.Bluemix_notm}}, notamment {{site.data.keyword.composeForMongoDB_full}} ou {{site.data.keyword.cloudantfull}} pour déployer des solutions de base de données évolutives à haute disponibilité dans votre cluster. Pour obtenir une liste des bases de données disponibles, voir le [catalogue {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/catalog?category=databases).  </td>
   </tr>
   </tbody>
   </table>

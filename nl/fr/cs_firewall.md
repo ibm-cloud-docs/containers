@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -35,7 +36,7 @@ Examinez ces situations pour lesquelles vous aurez peut-être à ouvrir des port
 * [Pour exécuter des commandes `calicoctl`](#firewall_calicoctl) depuis votre système local lorsque les règles réseau de l'entreprise empêchent l'accès à des noeuds finaux de l'Internet public via des proxys ou des pare-feux.
 * [Pour autoriser la communication entre le maître Kubernetes et les noeuds worker ](#firewall_outbound)lorsqu'un pare-feu a été mis en place pour les noeuds worker ou que les paramètres du pare-feu ont été personnalisés dans votre compte d'infrastructure IBM Cloud (SoftLayer).
 * [Pour autoriser le cluster à accéder aux ressources via un pare-feu sur le réseau privé](#firewall_private).
-* [Pour autoriser le cluster à accéder aux ressources lorsque les politiques de réseau Calico bloquent la sortie du noeud worker](#firewall_calico_egress).
+* [Pour autoriser le cluster à accéder aux ressources lorsque les règles réseau Calico bloquent la sortie du noeud worker](#firewall_calico_egress).
 * [Pour accéder au service NodePort, au service d'équilibreur de charge ou au service Ingress de l'extérieur du cluster](#firewall_inbound).
 * [Pour autoriser le cluster à accéder aux services qui s'exécutent en interne ou en externe dans {{site.data.keyword.Bluemix_notm}} ou sur site, et qui sont protégés par un pare-feu](#whitelist_workers).
 
@@ -159,7 +160,8 @@ Pour autoriser l'accès à un cluster spécifique :
    }
     ```
     {: screen}
-  * Si le noeud final de service privé est activé, vous devez être dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou vous connecter au réseau privé via une connexion VPN pour tester votre connexion au maître :
+  * Si le noeud final de service privé est activé, vous devez être dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou vous connecter au réseau privé via une connexion VPN pour vérifier votre connexion au maître.
+    Notez que vous devez [exposer le noeud final maître via un équilibreur de charge privé](/docs/containers?topic=containers-clusters#access_on_prem) de sorte que les utilisateurs puissent accéder au maître via un VPN ou une connexion {{site.data.keyword.BluDirectLink}}.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -230,7 +232,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
     ```
     {: pre}
 
-2.  Autorisez le trafic entrant depuis la source <em>&lt;each_worker_node_publicIP&gt;</em> vers la plage de ports de destination TCP/UDP 20000 à 32767 et le port 443, et les adresses IP et groupes de réseau suivants. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux de l'Internet public, effectuez cette étape tant pour vos noeuds worker source que pour votre machine locale.
+2.  Autorisez le trafic entrant depuis la source <em>&lt;each_worker_node_publicIP&gt;</em> vers la plage de ports de destination TCP/UDP 20000 à 32767 et le port 443, et les adresses IP et groupes de réseau suivants. Ces adresses IP permettent aux noeuds worker de communiquer avec le maître cluster. Si un pare-feu d'entreprise empêche votre machine locale d'accéder à des noeuds finaux de l'Internet public, effectuez cette étape également pour votre machine locale afin de pouvoir accéder au maître cluster.
 
     Vous devez autoriser le trafic sortant vers le port 443 pour toutes les zones de la région afin d'équilibrer la charge lors du processus d'amorçage. Par exemple, si votre cluster se trouve au Sud des Etats-Unis, vous devez autoriser le trafic depuis les adresses IP publiques de chacun de vos noeuds worker sur le port 443 de l'adresse IP pour toutes les zones.
     {: important}
@@ -284,7 +286,7 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
           </tbody>
         </table>
 
-3.  Autorisez le trafic réseau sortant provenant des noeuds worker vers les [régions {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions) :
+3.  {: #firewall_registry}Pour permettre aux noeuds worker à communiquer avec {{site.data.keyword.registrylong_notm}}, autorisez le trafic réseau sortant provenant des noeuds worker vers les [régions {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-registry_overview#registry_regions) : 
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  Remplacez <em>&lt;registry_subnet&gt;</em> par le sous-réseau du registre vers lequel vous souhaitez autoriser le trafic. Le registre global héberge des images publiques fournies par IBM et les registres régionaux vos propres images privées ou publiques. Le port 4443 est requis pour les fonctions notariales, telles que la [vérification des signatures d'image](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="La première ligne du tableau est répartie sur deux colonnes. La lecture des autres lignes s'effectue de gauche à droite, avec la zone du serveur dans la première colonne et les adresses IP correspondantes dans la deuxième.">
   <caption>Adresses IP à ouvrir pour le trafic du registre</caption>
@@ -297,49 +299,43 @@ Selon la configuration de votre cluster, vous accédez aux services en utilisant
     <tbody>
       <tr>
         <td>Registre global entre les régions <br>d'{{site.data.keyword.containerlong_notm}}</td>
-        <td><strong>Public</strong> : <code>icr.io</code><br>
-        Déprécié : <code>registry.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        Déprécié : <code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>Asie-Pacifique nord</td>
-        <td><strong>Public</strong> : <code>jp.icr.io</code><br>
-        Déprécié : <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        Déprécié : <code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>Asie-Pacifique sud</td>
-        <td><strong>Public</strong> : <code>au.icr.io</code><br>
-        Déprécié : <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        Déprécié : <code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>Europe centrale</td>
-        <td><strong>Public</strong> : <code>de.icr.io</code><br>
-        Déprécié : <code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        Déprécié : <code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>Sud du Royaume-Uni</td>
-        <td><strong>Public</strong> : <code>uk.icr.io</code><br>
-        Déprécié : <code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        Déprécié : <code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>Est des Etats-Unis, Sud des Etats-Unis</td>
-        <td><strong>Public</strong> : <code>us.icr.io</code><br>
-        Déprécié : <code>registry.ng.bluemix.net</code><br><br>
-        <strong>Privé</strong> : <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        Déprécié : <code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -463,7 +459,7 @@ Si vous disposez d'un pare-feu sur le réseau privé, autorisez la communication
 
 2. Autorisez les plages d'adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) pour pouvoir créer des noeuds worker dans votre cluster.
     1. Autorisez les plages d'adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) appropriées. Voir [Réseau (privé) de back end](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Autorisez les plages d'adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) pour toutes les [zones](/docs/containers?topic=containers-regions-and-zones#zones) que vous utilisez. Notez que vous devez ajouter des adresses IP pour les zones `dal01` et `wdc04`. Voir [Réseau de service (sur réseau back end/privé)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Autorisez les plages d'adresses IP privées de l'infrastructure IBM Cloud (SoftLayer) pour toutes les [zones](/docs/containers?topic=containers-regions-and-zones#zones) que vous utilisez. Notez que vous devez ajouter des adresses IP pour les zones `dal01`, `dal10`, `wdc04`, et si votre cluster se trouve en Europe, pour la zone `ams01`. Voir [Réseau de service (sur réseau back end/privé)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Ouvrez les ports suivants :
     - Autorisez les connexions TCP et UDP sortantes à partir des noeuds worker sur les ports 80 et 443 pour permettre les mises à jour et les rechargements des noeuds worker.
@@ -477,10 +473,10 @@ Si vous disposez d'un pare-feu sur le réseau privé, autorisez la communication
 <br />
 
 
-## Autorisation accordée au cluster d'accéder aux ressources via des politiques sortantes Calico
+## Autorisation accordée au cluster d'accéder aux ressources via des règles sortantes Calico
 {: #firewall_calico_egress}
 
-Si vous utilisez des [politiques de réseau Calico](/docs/containers?topic=containers-network_policies) qui agissent en tant que pare-feu pour limiter toutes les sorties de noeud worker publiques, vous devez autoriser vos noeuds worker à accéder aux proxy locaux pour le serveur d'API maître et etcd.
+Si vous utilisez des [règles réseau Calico](/docs/containers?topic=containers-network_policies) qui agissent en tant que pare-feu pour limiter toutes les sorties de noeud worker publiques, vous devez autoriser vos noeuds worker à accéder aux proxy locaux pour le serveur d'API maître et etcd.
 {: shortdesc}
 
 1. [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
@@ -489,7 +485,7 @@ Si vous utilisez des [politiques de réseau Calico](/docs/containers?topic=conta
   ```
   {: pre}
 
-2. Créez une politique de réseau Calico qui autorise le trafic public à partir de votre cluster vers 172.20.0.1:2040 et 172.21.0.1:443 pour le proxy local de serveur d'API, et 172.20.0.1:2041 pour le proxy local etcd. 
+2. Créez une politique de réseau Calico qui autorise le trafic public à partir de votre cluster vers 172.20.0.1:2040 et 172.21.0.1:443 pour le proxy local de serveur d'API, et 172.20.0.1:2041 pour le proxy local etcd.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -582,13 +578,14 @@ Si vous voulez accéder aux services qui s'exécutent en interne ou en externe d
       ```
       {: pre}
 
-    2. Dans la sortie de l'étape précédente, notez les ID de réseau uniques (les 3 premiers octets) de l'**adresse IP publique** des noeuds worker dans votre cluster.<staging> Si vous souhaitez mettre sur liste blanche un cluster privé uniquement, notez l'**adresse IP privée** à la place.<staging> Dans la sortie suivante, les ID de réseau uniques sont `169.xx.178` et `169.xx.210`.
+    2. Dans la sortie de l'étape précédente, notez tous les ID de réseau uniques (les 3 premiers octets) de l'**adresse IP publique** des noeuds worker dans votre cluster.
+Si vous souhaitez mettre sur liste blanche un cluster privé uniquement, notez l'**adresse IP privée** à la place. Dans la sortie suivante, les ID de réseau uniques sont `169.xx.178` et `169.xx.210` :
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  Répertoriez les sous-réseaux de VLAN correspondant à chaque ID de réseau unique.

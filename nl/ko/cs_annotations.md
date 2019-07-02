@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 어노테이션으로 Ingress의 사용자 정의
@@ -1352,7 +1354,7 @@ spec:
 </tr>
 </tbody></table>
 
-**상호 인증 시크릿을 작성하려면 다음을 수행하십시오.**
+**상호 인증 시크릿을 작성하려면 다음을 수행하십시오. **
 
 1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오.
     테스트 용도로 OpenSSL을 사용하여 자체 서명 인증서를 작성할 수 있습니다. 자세한 정보는 이 [자체 서명 SSL 인증서 튜토리얼![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.akadia.com/services/ssh_test_certificate.html) 또는 이 [사용자 고유의 CA 작성이 포함된 상호 인증 튜토리얼![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/)을 참조하십시오.
@@ -1360,18 +1362,18 @@ spec:
 2. [인증서를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)하십시오.
 3. 인증서를 사용하여 시크릿 YAML 파일을 작성하십시오.
    ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     ca.crt: <ca_certificate>
    ```
    {: codeblock}
 4. 인증서를 Kubernetes 시크릿으로 작성하십시오.
    ```
-     kubectl create -f ssl-my-test
+   kubectl create -f ssl-my-test
    ```
    {: pre}
 
@@ -1437,19 +1439,19 @@ spec:
 </tbody></table>
 
 
-**단방향 인증 시크릿을 작성하려면 다음 작업을 수행하십시오. **
+**단방향 인증 시크릿을 작성하려면 다음을 수행하십시오. **
 
 1. 업스트림 서버 및 SSL 클라이언트 인증서에서 인증 기관(CA) 키 및 인증서를 가져오십시오. IBM ALB는 루트 인증서, 중간 인증서 및 백엔드 인증서가 필요한 NGINX를 기반으로 합니다. 자세한 정보는 [NGINX 문서![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/)를 참조하십시오.
 2. [인증서를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)하십시오.
 3. 인증서를 사용하여 시크릿 YAML 파일을 작성하십시오.
    ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       trusted.crt: <ca_certificate>
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     trusted.crt: <ca_certificate>
    ```
    {: codeblock}
 
@@ -1458,12 +1460,12 @@ spec:
 
 4. 인증서를 Kubernetes 시크릿으로 작성하십시오.
    ```
-     kubectl create -f ssl-my-test
+   kubectl create -f ssl-my-test
    ```
    {: pre}
 
 </br>
-**상호 인증 시크릿을 작성하려면 다음 작업을 수행하십시오. **
+**상호 인증 시크릿을 작성하려면 다음을 수행하십시오. **
 
 1. 인증서 제공자의 인증 기관(CA) 인증서 및 키를 생성하십시오. 고유 도메인이 있는 경우 도메인의 공식적 TLS 인증서를 구매하십시오. [CN ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://support.dnsimple.com/articles/what-is-common-name/)이 각 인증서에 대해 서로 다른지 확인하십시오.
     테스트 용도로 OpenSSL을 사용하여 자체 서명 인증서를 작성할 수 있습니다. 자세한 정보는 이 [자체 서명 SSL 인증서 튜토리얼![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.akadia.com/services/ssh_test_certificate.html) 또는 이 [사용자 고유의 CA 작성이 포함된 상호 인증 튜토리얼![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/)을 참조하십시오.
@@ -1471,18 +1473,18 @@ spec:
 2. [인증서를 base-64로 변환 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.base64encode.org/)하십시오.
 3. 인증서를 사용하여 시크릿 YAML 파일을 작성하십시오.
    ```
-     apiVersion: v1
-     kind: Secret
-     metadata:
-       name: ssl-my-test
-     type: Opaque
-     data:
-       ca.crt: <ca_certificate>
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: ssl-my-test
+   type: Opaque
+   data:
+     ca.crt: <ca_certificate>
    ```
    {: codeblock}
 4. 인증서를 Kubernetes 시크릿으로 작성하십시오.
    ```
-     kubectl create -f ssl-my-test
+   kubectl create -f ssl-my-test
    ```
    {: pre}
 
@@ -1588,7 +1590,7 @@ spec:
   kubectl get service -n kube-system
   ```
   {: pre}
-CLI 출력이 다음과 유사하게 나타납니다.
+  CLI 출력이 다음과 유사하게 나타납니다.
   ```
   NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)                               AGE
   public-cr18e61e63c6e94b658596ca93d087eed9-alb1   LoadBalancer   10.xxx.xx.xxx    169.xx.xxx.xxx   <port1>:30776/TCP,<port2>:30412/TCP   109d
@@ -1767,7 +1769,7 @@ ALB 도메인 경로의 수신 네트워크 트래픽을 백엔드 앱이 청취
 {:shortdesc}
 
 **설명**</br>
-Ingress ALB 도메인은 `mykubecluster.us-south.containers.appdomain.cloud/beans`의 수신 네트워크 트래픽을 사용자의 앱으로 라우팅합니다. 사용자 앱은 `/beans` 대신 `/coffee`를 청취합니다. 수신 네트워크 트래픽을 사용자 앱에 전달하려면 재작성 어노테이션을 Ingress 리소스 구성 파일에 추가하십시오. 재작성 어노테이션에서는 `/coffee` 경로를 사용하여 `/beans`의 수신 네트워크 트래픽을 사용자 앱으로 전달할 수 있습니다. 여러 서비스가 포함된 경우에는 세미콜론(;)만 사용하여 이를 구분하십시오.
+Ingress ALB 도메인은 `mykubecluster.us-south.containers.appdomain.cloud/beans`의 수신 네트워크 트래픽을 사용자의 앱으로 라우팅합니다. 사용자 앱은 `/beans` 대신 `/coffee`를 청취합니다. 수신 네트워크 트래픽을 사용자 앱에 전달하려면 재작성 어노테이션을 Ingress 리소스 구성 파일에 추가하십시오. 재작성 어노테이션에서는 `/coffee` 경로를 사용하여 `/beans`의 수신 네트워크 트래픽을 사용자 앱으로 전달할 수 있습니다. 여러 서비스를 포함하는 경우에는 세미콜론(;) 앞뒤에 공백 없이, 세미콜론만 사용하여 이를 구분하십시오. 
 
 **샘플 Ingress 리소스 YAML**</br>
 
@@ -1816,7 +1818,7 @@ spec:
 ## 프록시 버퍼 어노테이션
 {: #proxy-buffer}
 
-Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. 프록시 버퍼 어노테이션을 사용하면 데이터 패킷을 전송하거나 수신할 때 ALB에서 데이터가 버퍼링되는 방법을 구성할 수 있습니다.
+Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. 프록시 버퍼 어노테이션을 사용하면 데이터 패킷을 전송하거나 수신할 때 ALB에서 데이터가 버퍼링되는 방법을 구성할 수 있습니다.  
 {: shortdesc}
 
 ### 대형 클라이언트 헤더 버퍼(`large-client-header-buffers`)
@@ -1880,7 +1882,7 @@ spec:
 **설명**</br>
 Ingress ALB는 백엔드 앱과 클라이언트 웹 브라우저 사이의 프록시 역할을 합니다. 백엔드 앱에서 클라이언트로 응답을 전송하면 기본적으로 응답 데이터가 ALB에서 버퍼링됩니다. ALB는 클라이언트 응답을 프록시하고 클라이언트의 속도에 맞춰 클라이언트로 응답을 전송하기 시작합니다. ALB가 백엔드 앱으로부터 모든 데이터를 수신하면 백엔드 앱에 대한 연결이 종료됩니다. 클라이언트가 모든 데이터를 수신할 때까지 ALB에서 클라이언트로의 연결은 열린 상태로 남아 있습니다.
 
-ALB에서 응답 데이터 버퍼링을 사용하지 않으면 ALB에서 클라이언트로 데이터가 즉시 전송됩니다. 클라이언트는 ALB의 속도에 따라 수신되는 데이터를 처리할 수 있어야 합니다. 클라이언트가 너무 느리면 데이터가 유실될 수 있습니다.
+ALB에서 응답 데이터 버퍼링을 사용하지 않으면 ALB에서 클라이언트로 데이터가 즉시 전송됩니다. 클라이언트는 ALB의 속도에 따라 수신되는 데이터를 처리할 수 있어야 합니다. 클라이언트가 너무 느린 경우에는 클라이언트가 따라잡을 수 있을 때까지 업스트림 연결이 열린 상태로 유지됩니다. 
 
 ALB에서 응답 데이터 버퍼링은 기본적으로 사용으로 설정됩니다.
 
@@ -2346,7 +2348,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2370,6 +2372,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>선택사항: 특정 서비스에 클라이언트 최대 본문 크기를 적용하려면 <code>&lt;<em>myservice</em>&gt;</code>를 서비스의 이름으로 대체하십시오. 서비스 이름을 지정하지 않으면 해당 크기가 모든 서비스에 적용됩니다. YAML 예에서, <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> 형식은 <code>myservice</code> 서비스에 첫 번째 크기를 적용하고 모든 기타 서비스에 두 번째 크기를 적용합니다. </li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>클라이언트 응답 본문의 최대 크기입니다. 예를 들어, 최대 크기를 200MB로 설정하려면 <code>200m</code>을 정의하십시오. 클라이언트 요청 본문 크기의 검사를 사용 안함으로 설정하려면 크기를 0으로 설정할 수 있습니다.</td>
 </tr>
@@ -2570,7 +2575,7 @@ spec:
 </tr>
 <tr>
 <td><code>idToken=false</code></td>
-<td>선택사항: Liberty OIDC 클라이언트는 액세스 및 ID 토큰을 모두 동시에 구문 분석할 수 없습니다. Liberty에 대해 작업하는 경우 ID 토큰이 Liberty 서버로 전송되지 않도록 이 값을 false로 설정하십시오. </td>
+<td>선택사항: Liberty OIDC 클라이언트는 액세스 및 ID 토큰을 모두 동시에 구문 분석할 수 없습니다. Liberty에 대해 작업하는 경우 ID 토큰이 Liberty 서버로 전송되지 않도록 이 값을 false로 설정하십시오.</td>
 </tr>
 </tbody></table>
 
@@ -2586,32 +2591,34 @@ spec:
       3. **작성**을 클릭하십시오.
 
 2. 앱에 대한 경로 재지정 URL을 추가하십시오. 경로 재지정 URL은 앱의 콜백 엔드포인트입니다. 피싱 공격 방지를 위해 앱 ID는 경로 재지정 URL의 화이트리스트에 대해 요청 URL의 유효성을 검증합니다.
-  1. {{site.data.keyword.appid_short_notm}} 관리 콘솔에서 **ID 제공자 > 관리**로 이동하십시오.
-  2. ID 제공자가 선택되었는지 확인하십시오. ID 제공자가 선택되지 않으면 사용자가 인증되지 않지만, 앱에 대한 익명 액세스를 위해 액세스 토큰이 사용자에게 발행됩니다.
-  3. **웹 경로 재지정 URL 추가** 필드에서 `http://<hostname>/<app_path>/appid_callback` 또는 `https://<hostname>/<app_path>/appid_callback` 형식으로 앱에 대한 경로 재지정 URL을 추가하십시오.
+  1. {{site.data.keyword.appid_short_notm}} 관리 콘솔에서 **인증 관리**로 이동하십시오. 
+  2. **ID 제공자** 탭에서 ID 제공자가 선택되었는지 확인하십시오. ID 제공자가 선택되지 않으면 사용자가 인증되지 않지만, 앱에 대한 익명 액세스를 위해 액세스 토큰이 사용자에게 발행됩니다.
+  3. **인증 설정** 탭에서 `http://<hostname>/<app_path>/appid_callback` 또는 `https://<hostname>/<app_path>/appid_callback` 형식으로 앱에 대한 경로 재지정 URL을 추가하십시오. 
 
     {{site.data.keyword.appid_full_notm}}는 로그아웃 기능을 제공합니다. `/logout`이 {{site.data.keyword.appid_full_notm}} 경로에 있으면 쿠키가 제거되고 사용자를 로그인 페이지로 다시 보냅니다. 이 기능을 사용하려면 `/appid_logout`을 도메인에 `https://<hostname>/<app_path>/appid_logout` 형식으로 추가하고 이 URL을 경로 재지정 URL 목록에 포함해야 합니다.
     {: note}
 
 3. {{site.data.keyword.appid_short_notm}} 서비스 인스턴스를 클러스터에 바인드하십시오. 이 명령은 서비스 인스턴스의 서비스 키를 작성합니다. 또는 `--key` 플래그를 포함하여 기존 서비스 키 인증 정보를 사용할 수 있습니다.
   ```
-    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
+  ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
   ```
   {: pre}
-서비스가 클러스터에 정상적으로 추가되면 서비스 인스턴스의 인증 정보를 보유하는 클러스터 시크릿이 작성됩니다. CLI 출력 예:
+  서비스가 클러스터에 정상적으로 추가되면 서비스 인스턴스의 인증 정보를 보유하는 클러스터 시크릿이 작성됩니다. CLI 출력 예:
   ```
-    ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
-    Binding service instance to namespace...
-    OK
-    Namespace:    mynamespace
-    Secret name:  binding-<service_instance_name>
+  ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
+  Binding service instance to namespace...
+  OK
+  Namespace:    mynamespace
+  Secret name:  binding-<service_instance_name>
   ```
   {: screen}
 
 4. 클러스터 네임스페이스에서 작성된 시크릿을 가져오십시오.
   ```
-    kubectl get secrets --namespace=<namespace>
+  kubectl get secrets --namespace=<namespace>
   ```
   {: pre}
 
 5. 바인드 시크릿 및 클러스터 네임스페이스를 사용하여 `appid-auth` 어노테이션을 Ingress 리소스에 추가하십시오.
+
+

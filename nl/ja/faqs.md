@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -19,7 +19,9 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
+{:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 # FAQ
 {: #faqs}
@@ -37,7 +39,7 @@ Kubernetes について詳しくは、[Kubernetes の資料 ![外部リンク・
 {: #kubernetes_service}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} を利用すると、{{site.data.keyword.Bluemix_notm}} で独自の Kubernetes クラスターを作成してコンテナー化アプリをデプロイおよび管理できます。 コンテナー化アプリは、ワーカー・ノードと呼ばれる IBM Cloud インフラストラクチャー (SoftLayer) のコンピュート・ホスト上でホストされます。 コンピュート・ホストは、共有リソースまたは専用リソースを備えた[仮想マシン](/docs/containers?topic=containers-plan_clusters#vm)としてプロビジョンすることも、GPU およびソフトウェア定義ストレージ (SDS) を使用するために最適化できる[ベア・メタル・マシン](/docs/containers?topic=containers-plan_clusters#bm)としてプロビジョンすることもできます。 ワーカー・ノードは、IBM が構成、モニター、および管理する、高可用性の Kubernetes マスターによって制御されます。 クラスター・インフラストラクチャーのリソースの操作には {{site.data.keyword.containerlong_notm}} の API または CLI を、デプロイメントとサービスの管理には Kubernetes の API または CLI を使用できます。
+{{site.data.keyword.containerlong_notm}} を利用すると、{{site.data.keyword.Bluemix_notm}} で独自の Kubernetes クラスターを作成してコンテナー化アプリをデプロイおよび管理できます。 コンテナー化アプリは、ワーカー・ノードと呼ばれる IBM Cloud インフラストラクチャー (SoftLayer) のコンピュート・ホスト上でホストされます。 コンピュート・ホストは、共有リソースまたは専用リソースを備えた[仮想マシン](/docs/containers?topic=containers-planning_worker_nodes#vm)としてプロビジョンすることも、GPU およびソフトウェア定義ストレージ (SDS) を使用するために最適化できる[ベアメタル・マシン](/docs/containers?topic=containers-planning_worker_nodes#bm)としてプロビジョンすることもできます。ワーカー・ノードは、IBM が構成、モニター、および管理する、高可用性の Kubernetes マスターによって制御されます。 クラスター・インフラストラクチャーのリソースの操作には {{site.data.keyword.containerlong_notm}} の API または CLI を、デプロイメントとサービスの管理には Kubernetes の API または CLI を使用できます。
 
 クラスター・リソースのセットアップ方法について詳しくは、[サービス・アーキテクチャー](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)を参照してください。 機能と利点を示したリストを確認するには、[{{site.data.keyword.containerlong_notm}} を使用する理由](/docs/containers?topic=containers-cs_ov#cs_ov)を参照してください。
 
@@ -65,9 +67,9 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 
 {{site.data.keyword.containerlong_notm}} のアーキテクチャーとインフラストラクチャーは、信頼性を確保し、処理待ち時間を短く、サービスの実行可能時間を最大にするように設計されています。 デフォルトでは、{{site.data.keyword.containerlong_notm}} のすべてのクラスターに、複数の Kubernetes マスター・インスタンスがセットアップされます。これにより、1 つ以上の Kubernetes マスター・インスタンスが使用不可になっても、クラスター・リソースの可用性と利用可能性を確保できます。
 
-クラスターの可用性をさらに高め、アプリのダウン時間を回避するために、地域の複数のゾーンに複数のワーカー・ノードを置いてワークロードを分散させることができます。 [複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)と呼ばれるこのセットアップでは、1 つのワーカー・ノードまたは 1 つのゾーン全体が使用不可になっても、引き続きアプリにアクセスできます。
+クラスターの可用性をさらに高め、アプリのダウン時間を回避するために、地域の複数のゾーンに複数のワーカー・ノードを置いてワークロードを分散させることができます。 [複数ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#multizone)と呼ばれるこのセットアップでは、1 つのワーカー・ノードまたは 1 つのゾーン全体が使用不可になっても、引き続きアプリにアクセスできます。
 
-地域全体の障害から保護するには、[複数のクラスターを作成し、それらを複数の {{site.data.keyword.containerlong_notm}} 地域に分散](/docs/containers?topic=containers-plan_clusters#multiple_clusters)させます。 それらのクラスターに対するネットワーク・ロード・バランサー (NLB) をセットアップすることで、クラスターの地域間ロード・バランシングと地域間ネットワーキングを実現できます。
+地域全体の障害から保護するには、[複数のクラスターを作成し、それらを複数の {{site.data.keyword.containerlong_notm}} 地域に分散](/docs/containers?topic=containers-ha_clusters#multiple_clusters)させます。それらのクラスターに対するネットワーク・ロード・バランサー (NLB) をセットアップすることで、クラスターの地域間ロード・バランシングと地域間ネットワーキングを実現できます。
 
 障害発生時にもデータを使用できるようにするには、必ず[永続ストレージ](/docs/containers?topic=containers-storage_planning#storage_planning)にデータを保管してください。
 
@@ -80,6 +82,26 @@ Kubernetes は、定期的に[メジャー、マイナー、またはパッチ�
 {{site.data.keyword.containerlong_notm}} の組み込みセキュリティー機能を使用して、クラスター内のコンポーネント、データ、アプリ・デプロイメントを保護し、セキュリティー・コンプライアンスとデータ保全性を確保できます。 これらの機能を使用して、Kubernetes API サーバー、etcd データ・ストア、ワーカー・ノード、ネットワーク、ストレージ、イメージ、デプロイメントを悪意のある攻撃から保護できます。 また、ロギングおよびモニタリングのための組み込みのツールを利用して、悪意のある攻撃や不審な使用パターンを検出することもできます。
 
 クラスターのコンポーネント、および各コンポーネントを保護する方法について詳しくは、[{{site.data.keyword.containerlong_notm}} のセキュリティー](/docs/containers?topic=containers-security#security)を参照してください。
+
+## クラスター・ユーザーには、どのようなアクセス・ポリシーを付与しますか?
+{: #faq_access}
+{: faq}
+
+{{site.data.keyword.containerlong_notm}} では、{{site.data.keyword.iamshort}} (IAM) を使用して、IAM プラットフォーム役割によってクラスター・リソースへのアクセス権限を付与するか、IAM サービス役割によって Kubernetes 役割ベース・アクセス制御 (RBAC) ポリシーを割り当てます。アクセス・ポリシーのタイプについて詳しくは、[ユーザーに対する適切なアクセス・ポリシーと役割の選出](/docs/containers?topic=containers-users#access_roles)を参照してください。
+{: shortdesc}
+
+ユーザーに割り当てるアクセス・ポリシーは、ユーザーに実行できるようにする操作によって異なります。どの役割がどのタイプのアクションを許可するかについて詳しくは、[ユーザー・アクセスのリファレンス・ページ](/docs/containers?topic=containers-access_reference)または以下の表のリンクを参照してください。ポリシーを割り当てる手順については、[{{site.data.keyword.Bluemix_notm}} IAM によるユーザーへのクラスター・アクセス権限の付与](/docs/containers?topic=containers-users#platform)を参照してください。
+
+| ユース・ケース | 役割および有効範囲の例 |
+| --- | --- |
+| アプリ監査員 | [クラスター、地域、またはリソース・グループに対するビューアー・プラットフォーム役割](/docs/containers?topic=containers-access_reference#view-actions)、[クラスター、地域、またはリソース・グループに対するリーダー・サービス役割](/docs/containers?topic=containers-access_reference#service)。|
+| アプリ開発者 | [クラスターに対するエディター・プラットフォーム役割](/docs/containers?topic=containers-access_reference#editor-actions)、[1 つの名前空間に有効範囲が設定されたライター・サービス役割](/docs/containers?topic=containers-access_reference#service)、[Cloud Foundry 開発者スペース役割](/docs/containers?topic=containers-access_reference#cloud-foundry)。|
+| 課金 | [クラスター、地域、またはリソース・グループに対するビューアー・プラットフォーム役割](/docs/containers?topic=containers-access_reference#view-actions)。|
+| クラスターの作成 | スーパーユーザー・インフラストラクチャー資格情報に対するアカウント・レベルの許可、{{site.data.keyword.containerlong_notm}} に対する管理者プラットフォーム役割、および {{site.data.keyword.registrylong_notm}} に対する管理者プラットフォーム役割。詳しくは、[クラスター作成の準備](/docs/containers?topic=containers-clusters#cluster_prepare)を参照してください。|
+| クラスター管理者| [クラスターに対する管理者プラットフォーム役割](/docs/containers?topic=containers-access_reference#admin-actions)、[1 つの名前空間に有効範囲が設定されていない (クラスター全体に対する) マネージャー・サービス役割](/docs/containers?topic=containers-access_reference#service)。|
+| DevOps オペレーター | [クラスターに対するオペレーター・プラットフォーム役割](/docs/containers?topic=containers-access_reference#operator-actions)、[1 つの名前空間に有効範囲が設定されていない (クラスター全体に対する) ライター・サービス役割](/docs/containers?topic=containers-access_reference#service)、[Cloud Foundry 開発者スペース役割](/docs/containers?topic=containers-access_reference#cloud-foundry)。|
+| オペレーターまたはサイト信頼性エンジニア | [クラスター、地域、またはリソース・グループに対する管理者プラットフォーム役割](/docs/containers?topic=containers-access_reference#admin-actions)、[クラスターまたは地域に対するリーダー・サービス役割](/docs/containers?topic=containers-access_reference#service)、または `kubectl top nodes,pods` コマンドを使用できる[すべてのクラスター名前空間に対するマネージャー・サービス役割](/docs/containers?topic=containers-access_reference#service)。|
+{: caption="さまざまなユース・ケースを満たすために割り当てることができる役割のタイプ" caption-side="top"}
 
 ## クラスターに影響を与えるセキュリティー情報のリストはどこにありますか?
 {: #faq_security_bulletins}
@@ -95,7 +117,7 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
 
 はい。ワーカー・ノードを単一テナントの物理ベア・メタル・サーバーとしてプロビジョンできます。 ベア・メタル・サーバーは、データ、AI、GPU などのワークロードで高性能を発揮します。 また、すべてのハードウェア・リソースがお客様のワークロード専用になるので、「ノイジー・ネイバー」に関する問題がありません。
 
-使用可能なベア・メタル・フレーバー、およびベア・メタルと仮想マシンの違いについて詳しくは、[物理マシン (ベア・メタル)](/docs/containers?topic=containers-plan_clusters#bm) を参照してください。
+使用可能なベア・メタル・フレーバー、およびベア・メタルと仮想マシンの違いについて詳しくは、[物理マシン (ベア・メタル)](/docs/containers?topic=containers-planning_worker_nodes#bm) を参照してください。
 
 ## このサービスは、どの Kubernetes バージョンをサポートしていますか?
 {: #supported_kube_versions}
@@ -103,9 +125,9 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
 
 {{site.data.keyword.containerlong_notm}} は、複数のバージョンの Kubernetes を同時にサポートします。 最新バージョン (n) がリリースされると、2 つ前のバージョン (n-2) までサポートされます。 最新バージョンから 2 つより前のバージョン (n-3) は、まず非推奨になり、その後サポートされなくなります。 現在、以下のバージョンがサポートされています。
 
-*   最新: 1.13.5
-*   デフォルト: 1.12.7
-*   その他: 1.11.9
+*   最新: 1.14.2
+*   デフォルト: 1.13.6
+*   その他: 1.12.9
 
 サポートされるバージョンと、バージョンの移行のために実行する必要がある更新操作について詳しくは、[バージョン情報および更新操作](/docs/containers?topic=containers-cs_versions#cs_versions)を参照してください。
 
@@ -115,7 +137,7 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
 
 {{site.data.keyword.containerlong_notm}} は世界中で利用できます。 標準クラスターは、サポートされるすべての {{site.data.keyword.containerlong_notm}} 地域で作成できます。 フリー・クラスターは、選択地域でのみ使用可能です。
 
-サポートされる地域について詳しくは、[地域とゾーン](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)を参照してください。
+サポートされている地域について詳しくは、[ロケーション](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)を参照してください。
 
 ## サービスはどのような標準に準拠していますか?
 {: #standards}
@@ -167,6 +189,7 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
 * [サブネット IP アドレス](#subnet_ips)
 * [ストレージ](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} サービス](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">ワーカー・ノード</dt>
@@ -178,7 +201,7 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
   <p><strong>物理マシン (ベアメタル)</strong> は、データ、AI、GPU などのワークロードで高性能を発揮します。 また、すべてのハードウェア・リソースは独自のワークロード専用なので、「ノイジー・ネイバー」はありません。 ベアメタルのコストに影響を与える以下のような要因に留意してください。</p>
   <ul><li><strong>月単位の課金のみ</strong>: すべてのベアメタルは月単位で課金されます。</li>
   <li><strong>注文処理に時間がかかる</strong>: お客様がベアメタル・サーバーを注文またはキャンセルした後に、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの処理が手動で実行されます。 そのため、完了するまでに 1 営業日以上かかる場合があります。</li></ul>
-  <p>マシンの仕様について詳しくは、[ワーカー・ノードに使用可能なハードウェア](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)を参照してください。</p></dd>
+  <p>マシンの仕様について詳しくは、[ワーカー・ノードに使用可能なハードウェア](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を参照してください。</p></dd>
 
 <dt id="bandwidth">パブリック帯域幅</dt>
   <dd><p>帯域幅とは、世界中のデータ・センター内の {{site.data.keyword.Bluemix_notm}} リソース間で送受信される、インバウンドおよびアウトバウンドのネットワーク・トラフィックのパブリック・データ転送を指します。 パブリック帯域幅は、GB 単位で課金されます。 現行帯域幅のサマリーを確認するには、[{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/)にログインし、メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から**「クラシック・インフラストラクチャー」**を選択し、**「ネットワーク」>「帯域幅」>「サマリー」**ページを選択します。
@@ -189,7 +212,7 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
   <p>詳しくは、[Bandwidth packages ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/bandwidth) を参照してください。</p></dd>
 
 <dt id="subnet_ips">サブネット IP アドレス</dt>
-  <dd><p>標準クラスターを作成すると、8 つのパブリック IP アドレスを持つポータブル・パブリック・サブネットが注文され、月単位でアカウントに課金されます。</p><p>インフラストラクチャー・アカウントに使用可能なサブネットが既にある場合は、これらのサブネットを代わりに使用できます。 クラスターを `--no-subnets` [フラグ](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)を使用して作成し、[それらのサブネットを再使用します](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
+  <dd><p>標準クラスターを作成すると、8 つのパブリック IP アドレスを持つポータブル・パブリック・サブネットが注文され、月単位でアカウントに課金されます。</p><p>インフラストラクチャー・アカウントに使用可能なサブネットが既にある場合は、これらのサブネットを代わりに使用できます。 クラスターを `--no-subnets` [フラグ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)を使用して作成し、[それらのサブネットを再使用します](/docs/containers?topic=containers-subnets#subnets_custom)。</p>
   </dd>
 
 <dt id="persistent_storage">ストレージ</dt>
@@ -201,7 +224,12 @@ Kubernetes で脆弱性が検出されると、Kubernetes は CVE をセキュ�
 <dt id="services">{{site.data.keyword.Bluemix_notm}}services</dt>
   <dd>クラスターと統合する各サービスには、それぞれ独自の価格設定モデルがあります。 各製品資料を確認し、{{site.data.keyword.Bluemix_notm}} コンソールを使用して、[コストを見積もってください](/docs/billing-usage?topic=billing-usage-cost#cost)。</dd>
 
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) は、OpenShift クラスターをテストするためのベータ版として使用できます。</p>[Red Hat OpenShift on IBM Cloud クラスター](/docs/containers?topic=containers-openshift_tutorial)を作成すると、ワーカー・ノードが Red Hat Enterprise Linux オペレーティング・システムとともにインストールされるため、[ワーカー・ノード・マシン](#nodes)の価格が高くなります。OpenShift ライセンスも必要です。これにより、時間単位の VM コストまたは月単位のベアメタル・コストに加えて、月単位のコストが発生します。OpenShift ライセンスは、ワーカー・ノード・フレーバーの 2 つのコアごとに必要です。月末より前にワーカー・ノードを削除した場合、使用するワーカー・プール内の他のワーカー・ノードで月次ライセンスを使用できます。OpenShift クラスターについて詳しくは、[Red Hat OpenShift on IBM Cloud クラスターの作成](/docs/containers?topic=containers-openshift_tutorial) を参照してください。</dd>
+
 </dl>
+<br><br>
 
 月単位のリソースは、月初めをベースにして前月の使用量について課金されます。 月の半ばに月単位のリソースを注文した場合、その月については日割り計算した金額が課金されます。 ただし、月の半ばにリソースをキャンセルした場合でも、月単位のリソースの 1 カ月分全額が課金されます。
 {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}} 技术
@@ -92,7 +94,7 @@ subcollection: containers
 <dd>Kubernetes 集群由一个或多个计算主机组成，这些计算主机称为工作程序节点。工作程序节点由 Kubernetes 主节点管理，主节点用于集中控制和监视集群中的所有 Kubernetes 资源。因此，在部署容器化应用程序的资源时，Kubernetes 主节点会考虑部署需求和集群中的可用容量，然后决定将这些资源部署在哪个工作程序节点上。Kubernetes 资源包括服务、部署和 pod。</dd>
 
 <dt>服务</dt>
-<dd>服务是 Kubernetes 资源，可将一组 pod 分组在一起，并提供与这些 pod 的网络连接，而无需公开每个 pod 的实际专用 IP 地址。您可以通过服务使应用程序在集群或公用因特网中可用。</dd>
+<dd>服务是 Kubernetes 资源，可将一组 pod 分组在一起，并提供与这些 pod 的网络连接，而无需公开每个 pod 的实际专用 IP 地址。您可以通过服务使应用程序在集群或公共因特网中可用。</dd>
 
 <dt>部署</dt>
 <dd>部署是一种 Kubernetes 资源，在其中可指定运行应用程序所需的其他资源或功能的信息，例如服务、持久性存储器或注释。在配置 YAML 文件中记录部署，然后将其应用于集群。Kubernetes 主节点会配置资源，并将容器部署到具有可用容量的工作程序节点上的 pod 中。</br></br>
@@ -122,7 +124,7 @@ subcollection: containers
 在 {{site.data.keyword.containerlong_notm}} 上运行的 Kubernetes 集群中，容器化应用程序在称为工作程序节点的计算主机上托管。更具体地说，应用程序在 pod 中运行，而 pod 在工作程序节点上托管。工作程序节点由 Kubernetes 主节点进行管理。Kubernetes 主节点与工作程序节点之间的通信设置取决于如何设置 IBM Cloud Infrastructure (SoftLayer) 网络：具有公共服务端点的帐户，或者具有公共和专用服务端点的启用 VRF 的帐户。
 {: shortdesc}
 
-下图显示了集群的组件及其在仅[启用公共服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)时在帐户中的交互方式。
+下图显示了集群的组件及其在仅[启用公共服务端点](/docs/containers?topic=containers-plan_clusters#workeruser-master)时在帐户中的交互方式。
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 体系结构">
@@ -130,7 +132,7 @@ subcollection: containers
 </figure>
 </p>
 
-下图显示了集群的组件及其在已[启用公共和专用服务端点](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)时在启用 VRF 的帐户中的交互方式。
+下图显示了集群的组件及其在已[启用公共和专用服务端点](/docs/containers?topic=containers-plan_clusters#workeruser-master)时在启用 VRF 的帐户中的交互方式。
 
 <p>
 <figure>
@@ -257,3 +259,54 @@ Kubernetes 主节点与工作程序节点之间有何区别？问得好。
 
 想要了解如何将 {{site.data.keyword.containerlong_notm}} 与其他产品和服务配合使用？请查看一些[集成](/docs/containers?topic=containers-supported_integrations#supported_integrations)。
 {: tip}
+
+## 服务限制
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} 和 Kubernetes 开放式源代码项目随附缺省服务设置和限制，以确保提供基本功能以及安全性和便利性。您可能可以更改其中注明的一些限制。如果预期会达到以下 {{site.data.keyword.containerlong_notm}} 限制，请通过[内部 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 或[外部 Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 联系 IBM 团队。
+{: shortdesc}
+
+<table summary="该表包含有关 {{site.data.keyword.containerlong_notm}} 限制的信息。各列从左到右阅读。第一列是限制的类型，第二列是限制的描述。">
+<caption>{{site.data.keyword.containerlong_notm}} 限制</caption>
+<thead>
+  <tr>
+    <th>类型</th>
+    <th>描述</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>API 速率限制</td>
+    <td>针对每个唯一源 IP 地址，每 10 秒向 {{site.data.keyword.containerlong_notm}} API 发出 100 个请求。</td>
+  </tr>
+  <tr>
+    <td>工作程序节点容量</td>
+    <td>工作程序节点在计算资源的[选择类型模板](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)中提供。</td>
+  </tr>
+  <tr>
+    <td>工作程序节点主机访问</td>
+    <td>出于安全原因，您无法通过 SSH 登录到工作程序节点计算主机。</td>
+  </tr>
+  <tr>
+    <td>最大工作程序节点数</td>
+    <td>如果计划每个集群的工作程序节点数会超过 900 个，请首先通过[内部 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 或[外部 Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 联系 IBM 团队。
+<br><br>如果看到针对每个数据中心的实例数或每月订购的实例数的 IBM Cloud Infrastructure (SoftLayer) 容量限制，请联系 IBM Cloud Infrastructure (SoftLayer) 代表。</td>
+  </tr>
+  <tr>
+    <td>最大 pod 数</td>
+    <td>每个工作程序节点 110 个 pod。<br><br>pod 数包括在工作程序节点上运行的 `kube-system` 和 `ibm-system` pod。要提高性能，请考虑限制每个计算核心运行的 pod 数，以便不会过度使用工作程序节点。例如，在使用 `b3c.4x16` 类型模板的工作程序节点上，可每个核心运行 10 个 pod，这些 pod 使用的容量占工作程序节点总容量的比例不超过 75%。</td>
+  </tr>
+  <tr>
+    <td>最大 Kubernetes 服务数</td>
+    <td>在 172.21.0.0/16 范围内，每个集群 65,000 个 IP，可以将这些 IP 分配给集群中的 Kubernetes 服务。</td>
+  </tr>
+  <tr>
+    <td>Ingress 应用程序负载均衡器 (ALB) 流量</td>
+    <td>每秒 32,768 个连接。<br><br>如果入口流量超过此数量，请在集群中[扩展 ALB 副本数](/docs/containers?topic=containers-ingress#scale_albs)，以处理增加的工作负载。</td>
+  </tr>
+  <tr>
+    <td>存储卷</td>
+    <td>每个帐户的 IBM Cloud Infrastructure (SoftLayer) 文件存储器和块存储器实例的卷的合并总数 250 个。<br><br>如果安装的数量超过此数量，那么在供应持久卷时可能会看到“容量不足”消息，并且需要联系 IBM Cloud Infrastructure (SoftLayer) 代表。有关更多常见问题，请参阅[文件](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-)存储器和[块](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-)存储器文档。</td>
+  </tr>
+</tbody>
+</table>

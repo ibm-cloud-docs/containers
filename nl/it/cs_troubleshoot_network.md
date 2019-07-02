@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Risoluzione dei problemi di rete del cluster
@@ -129,7 +129,7 @@ Per risolvere i problemi del tuo servizio NLB:
     <li>Se vengono trovati almeno due nodi di lavoro, elenca i dettagli del nodo di lavoro. </br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Assicurati che gli ID di VLAN pubblica e privata dei nodi di lavoro restituiti dai comandi <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code> corrispondano.</li></ol></li></ul>
 
-4.  Se stai utilizzando un dominio personalizzato per collegarti al tuo servizio NLB, assicurati che sia associato all'indirizzo IP pubblico del tuo servizio NLB.
+4.  Se utilizzi un dominio personalizzato per connetterti al tuo servizio NLB, assicurati che sia associato all'indirizzo IP pubblico del tuo servizio NLB.
     1.  Trova l'indirizzo IP pubblico del tuo servizio NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
@@ -209,64 +209,69 @@ Controlla i seguenti motivi sul perché il segreto dell'ALB può avere un malfun
 <br />
 
 
-## Impossibile ottenere un dominio secondario per l'ALB Ingress
+## Non è possibile ottenere un dominio secondario per Ingress ALB, ALB non viene distribuito in una zona o non è possibile distribuire un programma di bilanciamento del carico
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Quando esegui `ibmcloud ks cluster-get --cluster <cluster>`, il tuo cluster è in uno stato `normal` ma non è disponibile alcun **dominio secondario Ingress**.
-
-Potresti ricevere un messaggio di errore simile al seguente.
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* Nessun dominio secondario Ingress: quando esegui `ibmcloud ks cluster-get --cluster <cluster>`, il tuo cluster è in uno stato `normal` ma non è disponibile alcun **dominio secondario Ingress**.
+* Un ALB non viene distribuito in una zona: quando hai un cluster multizona ed esegui `ibmcloud ks albs --cluster <cluster>`, nessun ALB viene distribuito in una zona. Ad esempio, se hai dei nodi di lavoro in 3 zone, potresti vedere un output simile al seguente in cui un ALB pubblico non è stato distribuito nella terza zona.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* Non è possibile distribuire un programma di bilanciamento del carico: quando descrivi la mappa di configurazione `ibm-cloud-provider-vlan-ip-config`, potresti vedere un errore simile al seguente output di esempio.
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). In tale zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN del cluster in una zona ha già raggiunto tale limite, il provisioning del **dominio secondario Ingress** non riesce.
+Nei cluster standard, la prima volta che crei un cluster in una zona, viene automaticamente eseguito il provisioning di una VLAN pubblica e di una VLAN privata in tale zona per tuo conto nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). In tale zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN di un cluster in una zona ha già raggiunto tale limite, il provisioning del **dominio secondario Ingress** non riesce, il provisioning dell'ALB Ingress per tale zona non riesce oppure potresti non disporre di un indirizzo IP pubblico portatile per creare un NLB (network load balancer).
 
 Per visualizzare quante sottoreti sono presenti in una VLAN:
 1.  Dalla [console dell'infrastruttura IBM Cloud (SoftLayer)](https://cloud.ibm.com/classic?), seleziona **Rete** > **Gestione IP** > **VLAN**.
 2.  Fai clic sul **Numero VLAN** della VLAN che hai usato per creare il tuo cluster. Esamina la sezione **Sottoreti** per vedere se ci sono 40 o più sottoreti.
 
 {: tsResolve}
-Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Quindi [crea un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) che utilizzi questa nuova VLAN.
+Se hai bisogno di una nuova VLAN, ordinane una [contattando il supporto {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Quindi [crea un cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) che utilizzi questa nuova VLAN.
 
-Se hai un'altra VLAN disponibile, puoi [configurare lo spanning delle VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Se hai un'altra VLAN disponibile, puoi [configurare lo spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) nel tuo cluster esistente. Dopo, puoi aggiungere nuovi nodi di lavoro al cluster che utilizza l'altra VLAN con sottoreti disponibili. Per controllare se lo spanning della VLAN è già abilitato, usa il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
-Se non stai utilizzando tutte le sottoreti nella VLAN, puoi riutilizzare le sottoreti nel cluster.
-1.  Controlla che le sottoreti che desideri utilizzare siano disponibili.
+Se non stai utilizzando tutte le sottoreti nella VLAN, puoi riutilizzare le sottoreti sulla VLAN aggiungendole al tuo cluster.
+1. Controlla che la sottorete che desideri utilizzare sia disponibile.
+  <p class="note">L'account dell'infrastruttura che utilizzi potrebbe essere condiviso tra più account {{site.data.keyword.Bluemix_notm}}. In questo caso, anche se esegui il comando `ibmcloud ks subnets` per vedere le sottoreti con **Bound Clusters**, potrai vedere le informazioni solo per i tuoi cluster. Controlla con il proprietario dell'account dell'infrastruttura per assicurarti che le sottoreti siano disponibili e non in uso da parte di un altro account o team.</p>
 
-    L'account dell'infrastruttura che stai utilizzando potrebbe essere condiviso tra più account {{site.data.keyword.Bluemix_notm}}. Se è questo il caso, anche se esegui il comando `ibmcloud ks subnets` per vedere le sottoreti con **Bound Clusters**, potrai vedere le informazioni solo per i tuoi cluster. Controlla con il proprietario dell'account dell'infrastruttura per assicurarti che le sottoreti siano disponibili e non in uso da parte di un altro account o team.
-    {: note}
+2. Utilizza il [comando `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) per rendere disponibile per il tuo cluster una sottorete esistente.
 
-2.  [Crea un cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) con l'opzione `--no-subnet` in modo tale che il servizio non tenti di creare nuove sottoreti. Specifica la zona e la VLAN in cui le sottoreti sono disponibili per essere utilizzate.
+3. Verifica che la sottorete sia stata creata e aggiunta correttamente al tuo cluster. Il CIDR della sottorete viene elencato nella sezione **Subnet VLANs**.
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  Usa il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` per aggiungere sottoreti esistenti al tuo cluster. Per ulteriori informazioni, consulta [Aggiunta o riutilizzo di sottoreti personalizzate ed esistenti nei cluster Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
+    Nell'output di esempio, è stata aggiunta una seconda sottorete alla VLAN pubblica `2234945`:
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## L'ALB Ingress non viene distribuito in una zona
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Quando hai un cluster multizona ed esegui `ibmcloud ks albs <cluster>`, in una zona non viene distribuito alcun ALB. Ad esempio, se hai dei nodi di lavoro in 3 zone, potresti vedere un output simile al seguente in cui un ALB pubblico non è stato distribuito nella terza zona.
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-In ciascuna zona, 1 sottorete pubblica portatile è richiesta sulla VLAN pubblica da te specificata e 1 sottorete privata portatile è richiesta sulla VLAN privata da te specificata. Per {{site.data.keyword.containerlong_notm}}, le VLAN hanno un limite di 40 sottoreti. Se la VLAN pubblica del cluster in una zona ha già raggiunto tale limite, il provisioning dell'ALB Ingress pubblico per tale zona non riesce.
-
-{: tsResolve}
-Per controllare il numero di sottoreti in una VLAN e per la procedura su come ottenere un'altra VLAN, vedi [Impossibile ottenere un dominio secondario per l'ALB Ingress](#cs_subnet_limit).
+4. Verifica che gli indirizzi IP portatili dalla sottorete che hai aggiunto siano utilizzati per gli ALB o i programmi di bilanciamento del carico nel tuo cluster. Potrebbe volerci qualche minuto perché i servizi utilizzino gli indirizzi IP portatili dalla sottorete appena aggiunta.
+  * Nessun dominio secondario Ingress: esegui `ibmcloud ks cluster-get --cluster <cluster>` per verificare che il **dominio secondario Ingress** sia popolato.
+  * Un ALB non viene distribuito in una zona: esegui `ibmcloud ks albs --cluster <cluster>` per verificare che l'ALB mancante sia distribuito.
+  * Non è possibile distribuire un programma di bilanciamento del carico: esegui `kubectl get svc -n kube-system` per verificare che il programma di bilanciamento del carico abbia un **EXTERNAL-IP**.
 
 <br />
 
@@ -297,25 +302,25 @@ Per evitare che la connessione venga chiusa dopo 60 secondi di inattività:
 <br />
 
 
-## La conservazione dell'IP di origine non riesce quando si utilizzano nodi corrotti
+## La conservazione dell'IP di origine non riesce quando si utilizzano nodi contaminati
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
 Hai abilitato la conservazione dell'IP di origine per un servizio del [programma di bilanciamento del carico versione 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) o dell'[ALB Ingress](/docs/containers?topic=containers-ingress#preserve_source_ip) modificando `externalTrafficPolicy` in `Local` nel file di configurazione del servizio. Tuttavia, il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
 {: tsCauses}
-Quando abiliti la conservazione dell'IP di origine per i servizi del programma di bilanciamento del carico o dell'ALB Ingress, l'indirizzo IP di origine della richiesta del client viene conservato. Il servizio inoltra il traffico ai pod dell'applicazione solo sullo stesso nodo di lavoro per garantire che l'indirizzo IP del pacchetto di richiesta non venga modificato. In genere, i pod dei servizi del programma di bilanciamento del carico o dell'ALB Ingress vengono distribuiti negli stessi nodi di lavoro su cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del servizio e i pod dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro. Se utilizzi le [corruzioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) sui nodi di lavoro, a tutti i pod che non hanno una tolleranza alle corruzioni viene impedita l'esecuzione sui nodi di lavoro corrotti. La conservazione dell'IP di origine potrebbe non funzionare in base al tipo di corruzione che hai utilizzato:
+Quando abiliti la conservazione dell'IP di origine per i servizi del programma di bilanciamento del carico o dell'ALB Ingress, l'indirizzo IP di origine della richiesta del client viene conservato. Il servizio inoltra il traffico ai pod dell'applicazione solo sullo stesso nodo di lavoro per garantire che l'indirizzo IP del pacchetto di richiesta non venga modificato. In genere, i pod dei servizi del programma di bilanciamento del carico o dell'ALB Ingress vengono distribuiti negli stessi nodi di lavoro su cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del servizio e i pod dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro. Se utilizzi le [contaminazioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) sui nodi di lavoro, a tutti i pod che non hanno una tolleranza alle contaminazioni viene impedita l'esecuzione sui nodi di lavoro contaminati. La conservazione dell'IP di origine potrebbe non funzionare in base al tipo di contaminazione che hai utilizzato:
 
-* **Corruzioni del nodo edge**: hai [aggiunto l'etichetta `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i pod Ingress e del programma di bilanciamento del carico vengano distribuiti solo a quei nodi di lavoro. Quindi, hai anche [corrotto quei nodi edge](/docs/containers?topic=containers-edge#edge_workloads) per impedire che altri carichi di lavoro vengano eseguiti su nodi edge. Tuttavia, non hai aggiunto una regola di affinità del nodo edge e una tolleranza alla tua distribuzione dell'applicazione. I tuoi pod dell'applicazione non possono essere pianificati sugli stessi nodi corrotti dei pod del servizio e il traffico non raggiunge il servizio di back-end per la tua applicazione.
+* **Contaminazioni del nodo edge**: hai [aggiunto l'etichetta `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) a due o più nodi di lavoro su ogni VLAN pubblica nel tuo cluster per garantire che i pod Ingress e del programma di bilanciamento del carico vengano distribuiti solo a quei nodi di lavoro. Quindi, hai anche [contaminato quei nodi edge](/docs/containers?topic=containers-edge#edge_workloads) per impedire che altri carichi di lavoro vengano eseguiti su nodi edge. Tuttavia, non hai aggiunto una regola di affinità del nodo edge e una tolleranza alla tua distribuzione dell'applicazione. I tuoi pod dell'applicazione non possono essere pianificati sugli stessi nodi contaminati dei pod del servizio e il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
-* **Corruzioni personalizzate**: hai utilizzato corruzioni personalizzate su diversi nodi in modo che solo i pod dell'applicazione con tolleranza a queste corruzioni possano essere distribuiti su tali nodi. Hai aggiunto regole di affinità e tolleranze alle distribuzioni dell'applicazione e del servizio del programma di bilanciamento del carico o Ingress in modo che i loro pod vengano distribuiti solo su tali nodi. Tuttavia, i pod `keepalived` `ibm-cloud-provider-ip` che vengono creati automaticamente nello spazio dei nomi `ibm-system` garantiscono che i pod del programma di bilanciamento del carico e i pod dell'applicazione siano sempre pianificati sullo stesso nodo di lavoro. Questi pod `keepalived` non hanno le tolleranze per le corruzioni personalizzate che hai utilizzato. Non possono essere pianificati sugli stessi nodi corrotti su cui sono in esecuzione i tuoi pod dell'applicazione e il traffico non raggiunge il servizio di back-end per la tua applicazione.
+* **Contaminazioni personalizzate**: hai utilizzato contaminazioni personalizzate su diversi nodi in modo che solo i pod dell'applicazione con tolleranza a queste contaminazioni possano essere distribuiti su tali nodi. Hai aggiunto regole di affinità e tolleranze alle distribuzioni dell'applicazione e del servizio del programma di bilanciamento del carico o Ingress in modo che i loro pod vengano distribuiti solo su tali nodi. Tuttavia, i pod `keepalived` `ibm-cloud-provider-ip` che vengono creati automaticamente nello spazio dei nomi `ibm-system` garantiscono che i pod del programma di bilanciamento del carico e i pod dell'applicazione siano sempre pianificati sullo stesso nodo di lavoro. Questi pod `keepalived` non hanno le tolleranze per le contaminazioni personalizzate che hai utilizzato. Non possono essere pianificati sugli stessi nodi contaminati su cui sono in esecuzione i tuoi pod dell'applicazione e il traffico non raggiunge il servizio di back-end per la tua applicazione.
 
 {: tsResolve}
 Risolvi il problema scegliendo una delle seguenti opzioni:
 
-* **Corruzioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge corrotti, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
+* **Contaminazioni del nodo edge**: per garantire che i tuoi pod del programma di bilanciamento del carico e dell'applicazione vengano distribuiti sui nodi edge contaminati, [aggiungi regole di affinità e tolleranze del nodo edge alla tua distribuzione dell'applicazione](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). I pod del programma di bilanciamento del carico e dell'ALB Ingress hanno queste regole di affinità e tolleranze per impostazione predefinita.
 
-* **Corruzioni personalizzate**: rimuovi le corruzioni personalizzate per le quali i pod `keepalived` non hanno tolleranze. Puoi invece [etichettare i nodi di lavoro come edge e quindi danneggiare quei nodi edge](/docs/containers?topic=containers-edge).
+* **Contaminazioni personalizzate**: rimuovi le contaminazioni personalizzate per le quali i pod `keepalived` non hanno tolleranze. Puoi invece [etichettare i nodi di lavoro come edge e quindi danneggiare quei nodi edge](/docs/containers?topic=containers-edge).
 
 Se completi una delle opzioni precedenti ma i pod `keepalived` non vengono ancora pianificati, puoi ottenere ulteriori informazioni sui pod `keepalived`:
 
@@ -432,12 +437,12 @@ In precedenza hai stabilito una connessione VPN funzionante utilizzando il servi
 Se hai aggiunto un nodo di lavoro a un pool di nodi di lavoro:
 
 * È stato eseguito il provisioning del nodo di lavoro su una nuova sottorete privata che non è esposta tramite la connessione VPN dalle tue impostazioni `localSubnetNAT` o `local.subnet` esistenti
-* Gli instradamenti VPN non possono essere aggiunti al nodo di lavoro perché il nodo di lavoro ha delle corruzioni o etichette che non sono incluse nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
+* Gli instradamenti VPN non possono essere aggiunti al nodo di lavoro perché il nodo di lavoro ha delle contaminazioni o etichette che non sono incluse nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
 * Il pod VPN è in esecuzione sul nuovo nodo di lavoro, ma l'indirizzo IP pubblico di tale nodo di lavoro non è consentito attraverso il firewall in loco
 
 Se hai eliminato il nodo di lavoro:
 
-* Quel nodo di lavoro era l'unico nodo su cui era in esecuzione un pod VPN, a causa delle restrizioni su determinate corruzioni o etichette nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
+* Quel nodo di lavoro era l'unico nodo su cui era in esecuzione un pod VPN, a causa delle restrizioni su determinate contaminazioni o etichette nelle tue impostazioni `tolerations` o `nodeSelector` esistenti
 
 {: tsResolve}
 Aggiorna i valori del grafico Helm per riflettere le modifiche del nodo di lavoro:
@@ -469,7 +474,7 @@ Aggiorna i valori del grafico Helm per riflettere le modifiche del nodo di lavor
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Il nodo di lavoro aggiunto potrebbe essere distribuito su una nuova sottorete privata diversa rispetto alle altre sottoreti esistenti su cui sono attivi altri nodi di lavoro. Se utilizzi il NAT della sottorete per riassociare gli indirizzi IP locali privati del tuo cluster e il nodo di lavoro è stato aggiunto in una nuova sottorete, aggiungi il CIDR della nuova sottorete a questa impostazione.</td>
+     <td>Il nodo di lavoro aggiunto potrebbe essere distribuito su una nuova sottorete privata diversa rispetto alle altre sottoreti esistenti su cui sono attivi altri nodi di lavoro. Se utilizzi la NAT della sottorete per riassociare gli indirizzi IP locali privati del tuo cluster e il nodo di lavoro è stato aggiunto in una nuova sottorete, aggiungi il CIDR della nuova sottorete a questa impostazione.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -477,7 +482,7 @@ Aggiorna i valori del grafico Helm per riflettere le modifiche del nodo di lavor
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Se il nodo di lavoro aggiunto è corrotto, modifica questa impostazione per consentire l'esecuzione del pod VPN su tutti i nodi di lavoro corrotti con qualsiasi corruzione o con delle corruzioni specifiche.</td>
+     <td>Se il nodo di lavoro aggiunto è contaminato, modifica questa impostazione per consentire l'esecuzione del pod VPN su tutti i nodi di lavoro contaminati con qualsiasi contaminazione o con delle contaminazioni specifiche.</td>
      </tr>
      <tr>
      <td><code>local.subnet</code></td>
@@ -496,7 +501,7 @@ Aggiorna i valori del grafico Helm per riflettere le modifiche del nodo di lavor
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Se stai utilizzando il NAT di sottorete per riassociare specifici indirizzi IP locali privati, rimuovi, da questa impostazione, gli indirizzi IP che provengono dal vecchio nodo di lavoro. Se utilizzi il NAT della sottorete per riassociare intere sottoreti e non ci sono nodi di lavoro rimanenti in una sottorete, rimuovi il CIDR di tale sottorete da questa impostazione.</td>
+     <td>Se utilizzi il NAT di sottorete per riassociare specifici indirizzi IP locali privati, rimuovi, da questa impostazione, gli indirizzi IP che provengono dal vecchio nodo di lavoro. Se utilizzi il NAT della sottorete per riassociare intere sottoreti e non ci sono nodi di lavoro rimanenti in una sottorete, rimuovi il CIDR di tale sottorete da questa impostazione.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -504,7 +509,7 @@ Aggiorna i valori del grafico Helm per riflettere le modifiche del nodo di lavor
      </tr>
      <tr>
      <td><code>tolerations</code></td>
-     <td>Se il nodo di lavoro che hai eliminato non era corrotto, ma lo sono gli unici nodi di lavoro rimasti, modifica questa impostazione per consentire l'esecuzione del pod VPN sui nodi di lavoro con qualsiasi corruzione o con delle corruzioni specifiche.
+     <td>Se il nodo di lavoro che hai eliminato non era contaminato, ma lo sono gli unici nodi di lavoro rimasti, modifica questa impostazione per consentire l'esecuzione del pod VPN sui nodi di lavoro con qualsiasi contaminazione o con delle contaminazioni specifiche.
      </td>
      </tr>
      </tbody></table>
@@ -576,7 +581,7 @@ Per assicurarti che tutti i fattori Calico siano allineati:
 
 1. [Installa e configura una CLI Calico versione 3.3 o successive](/docs/containers?topic=containers-network_policies#cli_install).
 2. Assicurati che tutte le politiche che crei e vuoi applicare al tuo cluster utilizzino la [sintassi Calico v3 ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Se hai un file `.yaml` o `.json` della politica esistente nella sintassi Calico v2, puoi convertirlo in Calico v3 utilizzando il comando [`calicoctl convert` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
-3. Per [visualizzare le politiche](/docs/containers?topic=containers-network_policies#view_policies), assicurati che stai utilizzando `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche di cui è delimitato l'ambito a specifici spazi dei nomi.
+3. Per [visualizzare le politiche](/docs/containers?topic=containers-network_policies#view_policies), assicurati di utilizzare `calicoctl get GlobalNetworkPolicy` per le politiche globali e `calicoctl get NetworkPolicy --namespace <policy_namespace>` per le politiche di cui è delimitato l'ambito a specifici spazi dei nomi.
 
 <br />
 
@@ -597,11 +602,11 @@ Quando un account viene sospeso, i nodi di lavoro all'interno dell'account vengo
 
 {: tsResolve}
 
-Puoi [eliminare il tuo pool di nodi di lavoro esistente](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm) e quindi [creare un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
+Puoi [eliminare il tuo pool di nodi di lavoro esistente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm) e quindi [creare un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
 
 In alternativa, puoi conservare il tuo pool di nodi di lavoro esistente ordinando delle nuove VLAN e utilizzandole per creare dei nuovi nodi di lavoro nel pool.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Per ottenere le zone per cui hai bisogno di nuovi ID VLAN, prendi nota dell'**Ubicazione** nel seguente output di comando. **Nota**: se il tuo cluster è un multizona, ti servono degli ID VLAN per ciascuna zona.
 
@@ -621,7 +626,7 @@ Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, s
     ```
     {: pre}
 
-5.  Utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` per modificare i metadati della rete del pool di nodi di lavoro.
+5.  Utilizza il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` per modificare i metadati della rete del pool di nodi di lavoro.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -667,7 +672,7 @@ Stai ancora avendo problemi con il tuo cluster?
 [IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
--   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support).
 Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`. Puoi anche utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per raccogliere ed esportare informazioni pertinenti dal tuo cluster da condividere con il supporto IBM.
 {: tip}
 

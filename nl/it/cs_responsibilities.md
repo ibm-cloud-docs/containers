@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Le tue responsabilità nell'utilizzo di {{site.data.keyword.containerlong_notm}}
@@ -33,10 +33,10 @@ Ulteriori informazioni sulle responsabilità di gestione del cluster e sui termi
 ## Responsabilità di gestione del cluster
 {: #responsibilities}
 
-IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire le applicazioni insieme a servizi di sicurezza, {{site.data.keyword.Bluemix_notm}} DevOps, AI e dati.  Puoi scegliere come configurare, integrare e utilizzare le tue applicazioni e i tuoi servizi nel cloud.
+IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire le applicazioni insieme a servizi di sicurezza, {{site.data.keyword.Bluemix_notm}} DevOps, AI e dati. Puoi scegliere come configurare, integrare e utilizzare le tue applicazioni e i tuoi servizi nel cloud.
 {:shortdesc}
 
-<table summary="La tabella mostra le responsabilità di IBM e le tue. le righe devono essere lette da sinistra a destra; le icone rappresentano ciascuna responsabilità nella colonna uno e la descrizione è contenuta nella colonna due.">
+<table summary="La tabella mostra le responsabilità di IBM e le tue. Le righe devono essere lette da sinistra a destra; le icone rappresentano ciascuna responsabilità nella colonna uno e la descrizione è contenuta nella colonna due.">
 <caption>Responsabilità di IBM e tue</caption>
   <thead>
   <th colspan=2>Responsabilità in base al tipo</th>
@@ -60,7 +60,7 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
      <td align="center"><img src="images/icon_tools.svg" alt="Icona di una chiave inglese"/><br>Cluster gestito</td>
      <td>
      **Responsabilità di IBM**:
-     <ul><li>Fornire una suite di strumenti per automatizzare la gestione del cluster, come ad esempio [API ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/), [plug-in CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) e [console ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/clusters) {{site.data.keyword.containerlong_notm}}.</li>
+     <ul><li>Fornire una suite di strumenti per automatizzare la gestione del cluster, come ad esempio [API ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/global/swagger-global-api/), [plug-in CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) e [console ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/clusters) {{site.data.keyword.containerlong_notm}}.</li>
      <li>Applicare automaticamente aggiornamenti di sicurezza, versione e sistema operativo di patch master Kubernetes. Eseguire gli aggiornamenti principali e secondari a tua disposizione per poterli applicare.</li>
      <li>Aggiornare e ripristinare componenti {{site.data.keyword.containerlong_notm}} e Kubernetes operativi all'interno del cluster, come ad esempio l'ALB (application load balancer) Ingress e il plugin di archiviazione file.</li>
      <li>Eseguire il backup e il ripristino dei dati in etcd, come ad esempio i tuoi file di configurazione del carico di lavoro Kubernetes</li>
@@ -100,17 +100,17 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
       **Le tue responsabilità**:
       <ul>
       <li>Utilizzare gli strumenti API, CLI o console per applicare gli [aggiornamenti di patch di sicurezza](/docs/containers?topic=containers-changelog#changelog) forniti ai tuoi nodi di lavoro.</li>
-      <li>Scegliere come configurare la tua [rete cluster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) e configurare ulteriori [impostazioni di sicurezza](/docs/containers?topic=containers-security#security) per soddisfare le esigenze di sicurezza e di compatibilità del tuo carico di lavoro. Se applicabile, configura il tuo [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <li>Scegliere come configurare la tua [rete cluster](/docs/containers?topic=containers-plan_clusters) e configurare ulteriori [impostazioni di sicurezza](/docs/containers?topic=containers-security#security) per soddisfare le esigenze di sicurezza e di compatibilità del tuo carico di lavoro. Se applicabile, configura il tuo [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="Icona di parentesi di codice"/><br>Orchestrazione delle applicazioni</td>
         <td>
         **Responsabilità di IBM**:
-       <ul>
+        <ul>
         <li>Eseguire il provisioning ai cluster dei componenti Kubernetes installati in modo da consentirti di accedere all'API Kubernetes.</li>
-        <li>Fornire diversi componenti aggiuntivi gestiti per estendere le funzionalità della tua applicazione, come ad esempio [Istio](/docs/containers?topic=containers-istio#istio) e [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). La manutenzione, per te, è semplificata poiché IBM fornisce l'installazione e gli aggiornamenti per i componenti aggiuntivi gestiti.</li>
+        <li>Fornire diversi componenti aggiuntivi gestiti per estendere le funzionalità della tua applicazione, come ad esempio [Istio](/docs/containers?topic=containers-istio#istio) e [Knative](/docs/containers?topic=containers-serverless-apps-knative). La manutenzione, per te, è semplificata poiché IBM fornisce l'installazione e gli aggiornamenti per i componenti aggiuntivi gestiti.</li>
         <li>Fornire l'integrazione cluster con tecnologie di partenariato di terze parti selezionate, come ad esempio {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} e Portworx.</li>
         <li>Fornire l'automazione per abilitare l'associazione mediante bind dei servizi ad altri servizi {{site.data.keyword.Bluemix_notm}}.</li>
         <li>Creare dei cluster con i segreti di pull dell'immagine in modo che le tue distribuzioni nello spazio dei nomi Kubernetes `default` possano eseguire il pull di immagini da {{site.data.keyword.registrylong_notm}}.</li>
@@ -120,7 +120,7 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
         </ul>
         <br><br>
         **Le tue responsabilità**:
-      <ul>
+        <ul>
         <li>Utilizzare gli strumenti e le funzioni forniti per [configurare e distribuire](/docs/containers?topic=containers-app#app); [configurare le autorizzazioni](/docs/containers?topic=containers-users#users); [eseguire l'integrazione con altri servizi](/docs/containers?topic=containers-supported_integrations#supported_integrations); [servire esternamente](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [monitorare l'integrità](/docs/containers?topic=containers-health#health); [salvare, eseguire il backup e ripristinare i dati](/docs/containers?topic=containers-storage_planning#storage_planning) e gestire in altro modo i tuoi carichi di lavoro [altamente disponibili](/docs/containers?topic=containers-ha#ha) e resilienti.</li>
         </ul>
         </td>
@@ -149,4 +149,4 @@ con l'utilizzo di {{site.data.keyword.containerlong_notm}}
 *   La violazione dei diritti altrui
 
 Per i termini generali di utilizzo, consulta [Termini dei
-servizi cloud](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms).
+servizi cloud](/docs/overview/terms-of-use?topic=overview-terms#terms).

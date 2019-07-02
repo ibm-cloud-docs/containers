@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Protezione delle informazioni sensibili nel tuo cluster
@@ -93,7 +95,7 @@ Non eliminare le chiavi root nella tua istanza {{site.data.keyword.keymanagement
 {: important}
 
 Prima di iniziare:
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Verifica che il cluster esegua Kubernetes versione 1.11.3_1521 o successiva, eseguendo `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` e selezionando il campo **Versione**.
 * Assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Amministratore**](/docs/containers?topic=containers-users#platform) per il cluster.
 * Assicurati che la chiave API impostata per la regione in cui si trova il tuo cluster sia autorizzata a utilizzare Key Protect. Per controllare il proprietario della chiave API di cui sono state memorizzate le credenziali per la regione, esegui `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
@@ -134,7 +136,7 @@ Per abilitare {{site.data.keyword.keymanagementserviceshort}} o per aggiornare l
 
 8.  Durante l'abilitazione, potresti non essere in grado di accedere al master Kubernetes, ad esempio, per aggiornare le configurazioni YAML per le distribuzioni. Nell'output del seguente comando, verifica che il valore di **Master Status** sia **Ready**.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 튜토리얼: Cloud Foundry에서 클러스터로 앱 마이그레이션
@@ -78,7 +79,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
 2. 앱 코드 및 모든 관련 파일을 이 디렉토리에 복사하십시오. 자신의 고유 앱 코드를 사용하거나 카탈로그에서 표준 유형을 다운로드하십시오. 이 튜토리얼에서는 Python Flask 표준 유형을 사용합니다. 그러나 Node.js, Java 또는 [Kitura](https://github.com/IBM-Cloud/Kitura-Starter) 앱에 대해서도 동일한 기본 단계를 사용할 수 있습니다.
 
-    Python Flask 앱 코드를 다운로드하려면 다음 작업을 수행하십시오.
+    Python Flask 앱 코드를 다운로드하려면 다음을 수행하십시오.
 
     a. 카탈로그의 **표준 유형**에서 **Python Flask**를 클릭하십시오. 이 표준 유형에는 Python 2 앱 및 Python 3 앱 모두를 위한 런타임 환경이 포함되어 있습니다.
 
@@ -144,7 +145,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 4. 앱 코드를 포함하는 Docker 이미지를 빌드하고 이 이미지를 개인용 레지스트리에 푸시하십시오.
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -176,8 +177,8 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   이미지가 개인용 레지스트리에 작성됩니다. `ibmcloud cr images` 명령을 실행하여 이미지가 작성되었는지 확인할 수 있습니다.
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -213,7 +214,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry_namespace>/cf-py:latest
+        - image: us.icr.io/<registry_namespace>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -240,7 +241,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>`registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오.</td>
+  <td>`us.icr.io/<registry_namespace>/cf-py:latest`에서 &lt;registry_namespace&gt;를 개인용 이미지 레지스트리의 네임스페이스로 대체하십시오. 자신의 네임스페이스가 무엇인지 확실치 않으면 `ibmcloud cr namespaces` 명령을 실행하여 이를 찾으십시오.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -276,7 +277,7 @@ Cloud Foundry를 사용하여 이전에 배치한 앱과 동일한 컨테이너 
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

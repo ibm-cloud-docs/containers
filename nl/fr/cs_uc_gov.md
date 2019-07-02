@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Cas d'utilisation d'{{site.data.keyword.Bluemix_notm}} dans l'administration
@@ -39,9 +39,9 @@ Un responsable du programme d'ouverture des données de l'administration (Open-G
 Pourquoi {{site.data.keyword.Bluemix_notm}} ? Avec {{site.data.keyword.containerlong_notm}}, ce responsable peut fournir la valeur de transformation de la combinaison de données publiques et privées. De la même manière, le service fournit la plateforme de cloud public pour restructurer et exposer des microservices à partir d'applications monolithiques sur site. Le cloud public permet également à l'administration et aux partenariats publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif.
 
 Technologies clés :    
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [Services IBM Cloud Analytics prêts à l'emploi](https://www.ibm.com/cloud/analytics)
 
 **L'administration améliore la collaboration et la rapidité d'exécution avec des développeurs de la communauté qui combinent des données publiques et privées**
@@ -117,7 +117,7 @@ Les responsables informatiques d'une compagnie maritime privée et le port admin
 Pourquoi {{site.data.keyword.Bluemix_notm}} ?  {{site.data.keyword.containerlong_notm}} permet à l'administration et aux partenaires publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif. Les conteneurs offrent une plateforme pouvant être partagée où les autorités portuaires et la compagnie maritime ont l'assurance que les informations partagées sont hébergées sur une plateforme sécurisée. Par ailleurs, cette plateforme évolue lorsqu'ils passent des petits systèmes de développement et de test à des systèmes de production beaucoup plus importants. Des chaînes d'outils ouvertes contribuent à accélérer le développement en automatisant la réalisation, les tests et les déploiements.
 
 Technologies clés :    
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Sécurité et isolement de conteneur](/docs/containers?topic=containers-security#security)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

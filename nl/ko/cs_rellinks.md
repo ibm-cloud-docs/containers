@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **REST API**
 
-- [클러스터용 REST API![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api/)
-- [클러스터용 REST API JSON ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [클러스터의 로깅용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-logging/)
-- [클러스터의 Ingress 애플리케이션 로드 밸런서 관리용 REST API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [클러스터용 REST API![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [클러스터용 REST API JSON ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [{{site.data.keyword.containerlong}}용 Continuous Integration/Continuous Delivery 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [클라우드로 VM 앱 마이그레이션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [클라우드로 CF 앱 마이그레이션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Knative로 클러스터에서 서버리스 앱 실행 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative로 클러스터에서 서버리스 앱 실행 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Apache Kafka 기반 메시지 전달 서비스에서 앱에 대한 장기 실행 워크로드 오케스트레이션 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Terraform에서 클러스터의 배치 자동화 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [사용자 및 팀 구성 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 성능 튜닝
 {: #kernel}
@@ -116,7 +118,7 @@ subcollection: containers
     ```
     {: pre}
 
-2. [클러스터의 모든 작업자 노드를 재부팅](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)하십시오. 작업자 노드가 기본값이 적용되어 다시 온라인 상태가 됩니다.
+2. [클러스터의 모든 작업자 노드를 재부팅](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)하십시오. 작업자 노드가 기본값이 적용되어 다시 온라인 상태가 됩니다.
 
 <br />
 
@@ -168,7 +170,7 @@ subcollection: containers
 
 메트릭 제공자 팟(Pod)에는 또한 `nanny` 컨테이너도 있는데, 이 컨테이너는 클러스터의 작업자 노드 수에 대한 응답으로 `metrics-server` 또는 `heapster` 기본 컨테이너의 리소스 요청 및 한계를 스케일링합니다. 메트릭 제공자의 configmap을 편집하여 기본 리소스를 변경할 수 있습니다.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  클러스터 메트릭 제공자 configmap YAML을 여십시오.
     *  `metrics-server`의 경우:
@@ -181,7 +183,7 @@ subcollection: containers
        kubectl get configmap heapster-config -n kube-system -o yaml
        ```
        {: pre}
-출력 예:
+    출력 예:
     ```
     apiVersion: v1
     data:

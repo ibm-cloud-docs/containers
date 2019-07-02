@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-# 非推奨: {{site.data.keyword.Bluemix_dedicated_notm}} でのクラスターの概説
+# 非推奨: 専用クラウド
 {: #dedicated}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} での {{site.data.keyword.containerlong}} が非推奨になりました。{{site.data.keyword.Bluemix_dedicated_notm}} 環境では、クラスターを作成することはできません。{{site.data.keyword.Bluemix_notm}} Public でクラスターを作成するには、[{{site.data.keyword.containerlong_notm}} 概説](/docs/containers?topic=containers-getting-started)を参照してください。
+{{site.data.keyword.Bluemix_dedicated_notm}} での {{site.data.keyword.containerlong}} が非推奨になりました。 {{site.data.keyword.Bluemix_dedicated_notm}} 環境では、クラスターを作成することはできません。 {{site.data.keyword.Bluemix_notm}} Public でクラスターを作成するには、[{{site.data.keyword.containerlong_notm}} 概説](/docs/containers?topic=containers-getting-started)を参照してください。
 {: deprecated}
 
 {{site.data.keyword.Bluemix_dedicated_notm}} アカウントがある場合、Kubernetes クラスターを専用クラウド環境 (`https://<my-dedicated-cloud-instance>.bluemix.net`) にデプロイし、同じくそこで実行されている事前選択された {{site.data.keyword.Bluemix_notm}} サービスに接続することができます。
@@ -84,7 +85,7 @@ subcollection: containers
  <tr>
  <td>永続ストレージ</td>
  <td>ボリュームの[動的プロビジョニング](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)または[静的プロビジョニング](/docs/containers?topic=containers-kube_concepts#static_provisioning)を使用します。</td>
- <td>ボリュームの[動的プロビジョニング](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)を使用します。 ボリュームのバックアップの要求、ボリュームからのリストアの要求、その他のストレージ機能の実行のためには、[サポート・ケースを開きます](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。</li></ul></td>
+ <td>ボリュームの[動的プロビジョニング](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)を使用します。 ボリュームのバックアップの要求、ボリュームからのリストアの要求、その他のストレージ機能の実行のためには、[サポート・ケースを開きます](/docs/get-support?topic=get-support-getting-customer-support)。</li></ul></td>
  </tr>
  <tr>
  <td>{{site.data.keyword.registryshort_notm}} のイメージ・レジストリー URL</td>
@@ -98,13 +99,14 @@ subcollection: containers
  </tr>
  <tr>
  <td>複数ゾーン・クラスター</td>
- <td>ワーカー・プールにさらにゾーンを追加して、[複数ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#multizone)を作成します。</td>
- <td>[単一ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#single_zone)を作成します。 {{site.data.keyword.Bluemix_dedicated_notm}} 環境がセットアップされている場合、使用可能なゾーンが事前定義されています。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](/docs/containers?topic=containers-clusters#resize_pool)するか、[新しいワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)して、クラスターにワーカー・ノードを追加できます。 ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。</td>
+ <td>ワーカー・プールにさらにゾーンを追加して、[複数ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#multizone)を作成します。</td>
+ <td>[単一ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#single_zone)を作成します。 {{site.data.keyword.Bluemix_dedicated_notm}} 環境がセットアップされている場合、使用可能なゾーンが事前定義されています。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](/docs/containers?topic=containers-add_workers#resize_pool)するか、[新しいワーカー・プールを追加](/docs/containers?topic=containers-add_workers#add_pool)して、クラスターにワーカー・ノードを追加できます。ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。</td>
  </tr>
 </tbody></table>
 {: caption="{{site.data.keyword.Bluemix_notm}} パブリックと {{site.data.keyword.Bluemix_dedicated_notm}} のフィーチャーの相違点" caption-side="top"}
 
 <br />
+
 
 
 ### サービス・アーキテクチャー
@@ -199,7 +201,7 @@ subcollection: containers
         ```
         {: pre}
 
-        招待されたユーザーが既存の IBM ID を持っている場合、そのユーザーの状況は `ACTIVE` になります。 招待されたユーザーが既存の IBM ID を持っていなかった場合、そのユーザーの状況は、招待を受け入れてから `ACTIVE` 状況を受け入れるまで `PENDING` になります。
+        招待されたユーザーが既存の IBM ID を持っている場合、そのユーザーの状況は `ACTIVE` になります。 招待されたユーザーが既存の IBMid を持っていなかった場合、そのユーザーは、招待を受け入れるまでは `PENDING` の状況、招待を受け入れた後は `ACTIVE` の状況になります。
 
 3.  ユーザーがクラスター作成特権を必要とする場合は、そのユーザーに管理者役割を付与する必要があります。
 
@@ -270,7 +272,7 @@ subcollection: containers
 
 5. クラスターの詳細を構成します。
 
-    1. **クラスター名**を入力します。 名前は先頭が文字でなければならず、文字、数字、およびハイフン (-) を使用できます。35 文字以内でなければなりません。 Ingress サブドメインの完全修飾ドメイン・ネームは、クラスター名と、クラスターがデプロイされる地域で形成されます。 Ingress サブドメインを地域内で固有にするために、クラスター名が切り捨てられ、Ingress ドメイン・ネームにランダムな値が付加されることがあります。
+    1. **クラスター名**を入力します。 名前は先頭が文字でなければならず、文字、数字、およびハイフン (-) を使用できます。35 文字以内でなければなりません。 地域をまたいで固有の名前を使用します。Ingress サブドメインの完全修飾ドメイン・ネームは、クラスター名と、クラスターがデプロイされる地域で形成されます。 Ingress サブドメインを地域内で固有にするために、クラスター名が切り捨てられ、Ingress ドメイン・ネームにランダムな値が付加されることがあります。
 
     2. クラスターをデプロイする**ゾーン**を選択します。 {{site.data.keyword.Bluemix_dedicated_notm}} 環境がセットアップされている場合、使用可能なゾーンが事前定義されています。
 
@@ -280,17 +282,17 @@ subcollection: containers
 
         - **仮想 - 専用**: ワーカー・ノードはお客様のアカウント専用のインフラストラクチャーでホストされます。 物理リソースは完全に分離されます。
 
-        - **ベアメタル**: 月単位で課金されるベアメタル・サーバーは、お客様が注文した後に IBM Cloud インフラストラクチャー (SoftLayer) によって手動でプロビジョンされます。完了するまでに 1 営業日以上かかることがあります。 多くのリソースとホスト制御を必要とする高性能アプリケーションには、ベア・メタルが最適です。 
+        - **ベアメタル**: 月単位で課金されるベアメタル・サーバーは、お客様が注文した後に IBM Cloud インフラストラクチャー (SoftLayer) によって手動でプロビジョンされます。完了するまでに 1 営業日以上かかることがあります。 多くのリソースとホスト制御を必要とする高性能アプリケーションには、ベア・メタルが最適です。 マシン・タイプの選択では、ワーカー・ノードが改ざんされていないことを検証するために、[トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にすることもできます。クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。
 
         ベア・メタル・マシンは、必ず確認してからプロビジョンしてください。 月単位で課金されるので、誤って注文した後にすぐに解約しても、1 カ月分の料金が課金されます。
         {:tip}
 
-    5. **マシン・タイプ**を選択します。 各ワーカー・ノードにセットアップされ、コンテナーで使用できるようになる仮想 CPU、メモリー、ディスク・スペースの量は、マシン・タイプによって決まります。 使用可能なベア・メタル・マシンと仮想マシンのタイプは、クラスターをデプロイするゾーンによって異なります。 詳しくは、`ibmcloud ks machine-type` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)についての説明を参照してください。 クラスターを作成した後、ワーカー・ノードをクラスターに追加して別のマシン・タイプを追加できます。
+    5. **マシン・タイプ**を選択します。 各ワーカー・ノードにセットアップされ、コンテナーで使用できるようになる仮想 CPU、メモリー、ディスク・スペースの量は、マシン・タイプによって決まります。 使用可能なベア・メタル・マシンと仮想マシンのタイプは、クラスターをデプロイするゾーンによって異なります。 詳しくは、`ibmcloud ks machine-type` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の資料を参照してください。クラスターを作成した後、ワーカー・ノードをクラスターに追加して別のマシン・タイプを追加できます。
 
     6. 必要な**ワーカー・ノードの数**を選択します。 `3` を選択して、クラスターの高可用性を確保します。
 
     7. **パブリック VLAN** (オプション) と**プライベート VLAN** (必須) を選択します。 使用可能なパブリック VLAN とプライベート VLAN は、{{site.data.keyword.Bluemix_dedicated_notm}} 環境のセットアップ時に事前定義されています。 どちらの VLAN もワーカー・ノード間で通信を行いますが、パブリック VLAN は IBM 管理の Kubernetes マスターとも通信を行います。 複数のクラスターで同じ VLAN を使用できます。
-        プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。
+        プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-plan_clusters#workeruser-master)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。
         {: note}
 
     8. デフォルトでは、**「ローカル・ディスクの暗号化 (Encrypt local disk)」**が選択されます。 チェック・ボックスをクリアした場合、ホストのコンテナー・ランタイムのデータは暗号化されません。 [暗号化について詳しくは、こちらをご覧ください](/docs/containers?topic=containers-security#encrypted_disk)。
@@ -313,7 +315,19 @@ subcollection: containers
     フェデレーテッド ID がある場合は、`ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
     {: tip}
 
-3.  ある地域をターゲットに設定するには、`ibmcloud ks region-set` を実行します。
+3.  地域エンドポイントをターゲットとします。以下の地域エンドポイントがサポートされています。
+  * ダラス (米国南部、us-south): `https://us-south.containers.cloud.ibm.com`
+  * フランクフルト (中欧、eu-de): `https://eu-de.containers.cloud.ibm.com`
+  * ロンドン (英国南部、eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+  * シドニー (南アジア太平洋地域、au-syd): `https://au-syd.containers.cloud.ibm.com`
+  * 東京 (北アジア太平洋地域、jp-tok): `https://jp-tok.containers.cloud.ibm.com`
+  * ワシントン D.C. (米国東部、us-east): `https://us-east.containers.cloud.ibm.com`
+  ```
+  ibmcloud ks init --host <endpoint>
+  ```
+  {: pre}
+  グローバル・エンドポイント `https://containers.cloud.ibm.com` は使用できません。地域内のクラスターを作成または処理するには、地域エンドポイントをターゲットにする必要があります。
+  {: important}
 
 4.  `cluster-create` コマンドを使用してクラスターを作成します。 標準クラスターを作成する場合、ワーカー・ノードのハードウェアは、使用時間に応じて課金されます。
 
@@ -340,11 +354,11 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
-    <td>マシン・タイプを入力します。 ワーカー・ノードは、専用ハードウェア上に仮想マシンとしてデプロイすることも、ベア・メタル上に物理マシンとしてデプロイすることもできます。 使用可能な物理マシンと仮想マシンのタイプは、クラスターをデプロイするゾーンによって異なります。 詳しくは、`ibmcloud ks machine-type` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)についての説明を参照してください。</td>
+    <td>マシン・タイプを入力します。 ワーカー・ノードは、専用ハードウェア上に仮想マシンとしてデプロイすることも、ベア・メタル上に物理マシンとしてデプロイすることもできます。 使用可能な物理マシンと仮想マシンのタイプは、クラスターをデプロイするゾーンによって異なります。 詳しくは、`ibmcloud ks machine-type` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の資料を参照してください。 </td>
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
-    <td>Dedicated 環境で使用されるように構成されているパブリック VLAN の ID を入力します。 ワーカー・ノードをプライベート VLAN だけに接続する場合は、このオプションを指定しないでください。<p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_gateway)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。</p></td>
+    <td>Dedicated 環境で使用されるように構成されているパブリック VLAN の ID を入力します。 ワーカー・ノードをプライベート VLAN だけに接続する場合は、このオプションを指定しないでください。<p class="note">プライベート VLAN のみを使用してワーカー・ノードをセットアップする場合は、[プライベート・サービス・エンドポイントを有効にする](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)か、[ゲートウェイ・デバイスを構成する](/docs/containers?topic=containers-plan_clusters#workeruser-master)ことによって、ワーカー・ノードとクラスター・マスターが通信できるようにする必要があります。</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
@@ -352,7 +366,7 @@ subcollection: containers
     </tr>  
     <tr>
     <td><code>--name <em>&lt;name&gt;</em></code></td>
-    <td>クラスターの名前を入力します。 名前は先頭が文字でなければならず、文字、数字、およびハイフン (-) を使用できます。35 文字以内でなければなりません。 Ingress サブドメインの完全修飾ドメイン・ネームは、クラスター名と、クラスターがデプロイされる地域で形成されます。 Ingress サブドメインを地域内で固有にするために、クラスター名が切り捨てられ、Ingress ドメイン・ネームにランダムな値が付加されることがあります。
+    <td>クラスターの名前を入力します。 名前は先頭が文字でなければならず、文字、数字、およびハイフン (-) を使用できます。35 文字以内でなければなりません。 地域をまたいで固有の名前を使用します。Ingress サブドメインの完全修飾ドメイン・ネームは、クラスター名と、クラスターがデプロイされる地域で形成されます。 Ingress サブドメインを地域内で固有にするために、クラスター名が切り捨てられ、Ingress ドメイン・ネームにランダムな値が付加されることがあります。
 </td>
     </tr>
     <tr>
@@ -361,7 +375,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-    <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 バージョンを指定しなかった場合、クラスターは、サポートされるデフォルトの Kubernetes バージョンを使用して作成されます。 使用可能なバージョンを確認するには、<code>ibmcloud ks kube-versions</code> を実行します。
+    <td>クラスター・マスター・ノードの Kubernetes のバージョン。 この値はオプションです。 バージョンを指定しなかった場合、クラスターは、サポートされるデフォルトの Kubernetes バージョンを使用して作成されます。 使用可能なバージョンを確認するには、<code>ibmcloud ks versions</code> を実行します。
 </td>
     </tr>
     <tr>
@@ -370,7 +384,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>--trusted</code></td>
-    <td>[トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にして、ベア・メタル・ワーカー・ノードが改ざんされていないことを検証します。 クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。</td>
+    <td>[トラステッド・コンピューティング](/docs/containers?topic=containers-security#trusted_compute)を有効にして、ベア・メタル・ワーカー・ノードが改ざんされていないことを検証します。 クラスターの作成時にトラストを有効にしなかった場合に、後で有効にするには、`ibmcloud ks feature-enable` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)を使用します。 トラストを有効にした後に無効にすることはできません。</td>
     </tr>
     </tbody></table>
 
@@ -382,7 +396,7 @@ subcollection: containers
     {: pre}
 
     * 仮想マシンの場合、ワーカー・ノード・マシンの注文と、アカウントへのクラスターのセットアップとプロビジョンには、数分かかります。 ベア・メタル物理マシンは、IBM Cloud インフラストラクチャー (SoftLayer) との人同士のやりとりによりプロビジョンされるので、完了するのに 1 営業日以上かかることがあります。
-    * 次のエラー・メッセージが表示された場合は、[サポート・ケースを開いてください](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。
+    * 次のエラー・メッセージが表示された場合は、[サポート・ケースを開いてください](/docs/get-support?topic=get-support-getting-customer-support)。
         ```
         {{site.data.keyword.Bluemix_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.
         ```
@@ -390,8 +404,8 @@ subcollection: containers
     クラスターのプロビジョニングが完了すると、クラスターの状況が **deployed** に変わります。
 
     ```
-    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1          mil01     1.12.7      Default
+    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.6      Default
     ```
     {: screen}
 
@@ -409,7 +423,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -472,7 +486,7 @@ subcollection: containers
 ### ワーカー・ノードの追加
 {: #add_workers_dedicated}
 
-{{site.data.keyword.Bluemix_dedicated_notm}} では、[単一ゾーン・クラスター](/docs/containers?topic=containers-plan_clusters#single_zone)のみ作成できます。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](/docs/containers?topic=containers-clusters#resize_pool)するか、[新しいワーカー・プールを追加](/docs/containers?topic=containers-clusters#add_pool)して、クラスターにワーカー・ノードを追加できます。 ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。
+{{site.data.keyword.Bluemix_dedicated_notm}} では、[単一ゾーン・クラスター](/docs/containers?topic=containers-ha_clusters#single_zone)のみ作成できます。 デフォルトでは、単一ゾーン・クラスターには、`default` という名前のワーカー・プールがセットアップされています。 このワーカー・プールに、クラスターの作成時に定義した同じ構成 (マシン・タイプなど) のワーカー・ノードがグループ化されています。 [既存のワーカー・プールのサイズを変更](/docs/containers?topic=containers-add_workers#resize_pool)するか、[新しいワーカー・プールを追加](/docs/containers?topic=containers-add_workers#add_pool)して、クラスターにワーカー・ノードを追加できます。ワーカー・プールを追加した場合は、ワーカー・ノードをゾーンにデプロイできるように、使用可能なゾーンをワーカー・プールに追加する必要があります。 ただし、他のゾーンをワーカー・プールに追加することはできません。
 {: shortdesc}
 
 ### プライベートとパブリックのイメージ・レジストリーの使用
@@ -501,12 +515,12 @@ subcollection: containers
 
 始める前に、ユーザー管理のサブネットを使用する {{site.data.keyword.Bluemix_dedicated_notm}} ネットワークとエンタープライズ・ネットワークとの間のネットワーク・トラフィックの出入りのルーティングを構成します。
 
-1. 独自のサブネットを使用するには、[サポート・ケースを開き](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)、使用するサブネット CIDR のリストを指定します。 **注**: オンプレミスと内部アカウント接続のために ALB とロード・バランサーを管理する方法は、サブネット CIDR のフォーマットによって異なります。 構成の違いについては、最後のステップを参照してください。
+1. 独自のサブネットを使用するには、[サポート・ケースを開き](/docs/get-support?topic=get-support-getting-customer-support)、使用するサブネット CIDR のリストを指定します。 **注**: オンプレミスと内部アカウント接続のために ALB とロード・バランサーを管理する方法は、サブネット CIDR のフォーマットによって異なります。 構成の違いについては、最後のステップを参照してください。
 
 2. {{site.data.keyword.IBM_notm}} がユーザー管理のサブネットをプロビジョンした後に、Kubernetes クラスターでそのサブネットを使用できるようにします。
 
     ```
-    ibmcloud ks cluster-user-subnet-add <cluster_name> <subnet_CIDR> <private_VLAN>
+    ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
     ```
     {: pre}
     <em>&lt;cluster_name&gt;</em> をクラスターの名前または ID に置き換え、<em>&lt;subnet_CIDR&gt;</em> を、サポート・ケースに指定したいずれかのサブネット CIDR に置き換え、<em>&lt;private_VLAN&gt;</em> を使用可能なプライベート VLAN ID に置き換えます。 使用可能なプライベート VLAN の ID は、`ibmcloud ks vlans` を実行することによって見つけることができます。
@@ -527,11 +541,11 @@ subcollection: containers
     ```
     {: screen}
 
-4. **重要**: 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+4. **重要**: 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 5. オンプレミスと内部アカウントの接続を構成するには、以下のオプションの間から選択します。
   - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用した場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスと内部アカウントの接続を構成します。 詳しくは、[NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを使用したネットワーキングの計画](/docs/containers?topic=containers-cs_network_planning#external)を参照してください。
-  - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用していない場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスの接続を構成します。 詳しくは、[NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを使用したネットワーキングの計画](/docs/containers?topic=containers-cs_network_planning#external)を参照してください。 ただし、IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットを使用して、クラスターと他の Cloud Foundry ベースのサービスの間に内部アカウントの接続を構成する必要があります。 ポータブル・プライベート・サブネットは、[`ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) コマンドによって作成できます。 このシナリオでは、クラスターに、オンプレミス接続のためのユーザー管理のサブネットと、内部アカウント接続のための IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットの両方があります。
+  - サブネットに 10.x.x.x プライベート IP アドレス範囲を使用していない場合、その範囲にある有効な IP を使用して、Ingress とロード・バランサーによるオンプレミスの接続を構成します。 詳しくは、[NodePort サービス、ロード・バランサー・サービス、または Ingress サービスを使用したネットワーキングの計画](/docs/containers?topic=containers-cs_network_planning#external)を参照してください。 ただし、IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットを使用して、クラスターと他の Cloud Foundry ベースのサービスの間に内部アカウントの接続を構成する必要があります。 ポータブル・プライベート・サブネットは、[`ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) コマンドによって作成できます。 このシナリオでは、クラスターに、オンプレミス接続のためのユーザー管理のサブネットと、内部アカウント接続のための IBM Cloud インフラストラクチャー (SoftLayer) のポータブル・プライベート・サブネットの両方があります。
 
 ### その他のクラスター構成
 {: #dedicated_other}
@@ -542,7 +556,7 @@ subcollection: containers
   * [ワーカー・ノードの更新](/docs/containers?topic=containers-update#worker_node)
   * [クラスター・ロギングの構成](/docs/containers?topic=containers-health#logging)。 ログの有効化は Dedicated エンドポイントからはサポートされていません。 ログの転送を有効にするには、パブリックな {{site.data.keyword.cloud_notm}} エンドポイントにログインして、パブリックな組織とスペースをターゲットにする必要があります。
   * [クラスター・モニタリングの構成](/docs/containers?topic=containers-health#view_metrics)。 `ibm-monitoring` クラスターは各 {{site.data.keyword.Bluemix_dedicated_notm}} アカウント内にあります。 このクラスターは、Dedicated 環境での {{site.data.keyword.containerlong_notm}} の正常性を継続的にモニターし、環境の安定度と接続性を検査します。 このクラスターは環境から除去しないでください。
-  * [クラスターの削除](/docs/containers?topic=containers-clusters#remove)
+  * [クラスターの削除](/docs/containers?topic=containers-remove)
 
 <br />
 
@@ -566,19 +580,19 @@ Kubernetes リソースを処理する際の[個人情報の保護](/docs/contai
 #### ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法
 {: #dedicated_apps_public_load_balancer}
 
-ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング](/docs/containers?topic=containers-loadbalancer)の手順に従います。
+ロード・バランサーにパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング](/docs/containers?topic=containers-loadbalancer)の手順に従います。
 {: shortdesc}
 
 #### Ingress を使用してアプリへのパブリック・アクセスを構成する方法
 {: #dedicated_apps_public_ingress}
 
-Ingress ALB にパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[パブリックにアプリを公開する](/docs/containers?topic=containers-ingress#ingress_expose_public)の手順に従います。
+Ingress ALB にパブリック IP アドレスを使用する場合、企業ファイアウォール・ホワイトリストが IBM に提出されていることを確認するか、[サポート・ケースを開いて](/docs/get-support?topic=get-support-getting-customer-support)ファイアウォール・ホワイトリストを構成します。 その後、[パブリックにアプリを公開する](/docs/containers?topic=containers-ingress#ingress_expose_public)の手順に従います。
 {: shortdesc}
 
 ### 永続ストレージの作成
 {: #dedicated_apps_volume_claim}
 
-永続ストレージの作成に関するオプションを確認するには、高可用性のための永続データ・ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) を参照してください。 ボリュームのバックアップ、ボリュームからのリストア、ボリュームの削除、またはファイル・ストレージの定期的なスナップショットを要求するには、[サポート・ケースを開く](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)必要があります。
+永続ストレージを作成するためのオプションを確認するには、[高可用性のための永続データ・ストレージのオプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を参照してください。ボリュームのバックアップ、ボリュームからのリストア、ボリュームの削除、またはファイル・ストレージの定期的なスナップショットを要求するには、[サポート・ケースを開く](/docs/get-support?topic=get-support-getting-customer-support)必要があります。
 {: shortdesc}
 
 [ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)のプロビジョンを選択する場合は、非保存のストレージ・クラスを選択します。 非保存のストレージ・クラスを選択すると、IBM Cloud インフラストラクチャー (SoftLayer) 内の孤立永続ストレージ・インスタンスの発生を防止できます。このインスタンスは、サポート・ケースを開くことによってのみ削除できます。

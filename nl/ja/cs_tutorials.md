@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # チュートリアル: Kubernetes クラスターの作成
@@ -62,6 +64,7 @@ subcollection: containers
 -  [クラスター作成の準備](/docs/containers?topic=containers-clusters#cluster_prepare)に必要な手順を確認します。
 -  以下のアクセス・ポリシーがあることを確認します。
     - {{site.data.keyword.containerlong_notm}} に対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)
+    - {{site.data.keyword.registrylong_notm}} に対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)
     - {{site.data.keyword.containerlong_notm}} に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)
 
 
@@ -77,7 +80,7 @@ subcollection: containers
 
 1.  [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") で](https://cloud.ibm.com/kubernetes/catalog/cluster/create)、1 つのワーカー・ノードがある 1 つのワーカー・プールを持つフリー・クラスターまたは標準クラスターを作成します。
 
-    [CLI でクラスター](/docs/containers?topic=containers-clusters#clusters_cli)を作成することもできます。
+    [CLI でクラスター](/docs/containers?topic=containers-clusters#clusters_cli_steps)を作成することもできます。
     {: tip}
 
 クラスターがプロビジョンされたら、クラスターを管理するために使用する以下の CLI をインストールします。
@@ -92,7 +95,7 @@ subcollection: containers
 </br>
 **CLI とその前提条件をインストールするには、以下のようにします。**
 
-1. [{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。 このインストールには、以下が含まれます。
+1. [{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](/docs/cli?topic=cloud-cli-getting-started)。 このインストールには、以下が含まれます。
   - 基本 {{site.data.keyword.Bluemix_notm}} CLI。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud` です。
   - {{site.data.keyword.containerlong_notm}} プラグイン。 {{site.data.keyword.Bluemix_notm}} CLI を使用してコマンドを実行するための接頭部は、`ibmcloud ks` です。
   - {{site.data.keyword.registryshort_notm}} プラグイン。 このプラグインを使用して、{{site.data.keyword.registryshort_notm}} でプライベート・イメージ・リポジトリーをセットアップして管理します。 レジストリー・コマンドを実行するための接頭部は、`ibmcloud cr` です。
@@ -118,10 +121,10 @@ subcollection: containers
 
 6. クラスターにアプリをデプロイするには、[Kubernetes CLI をインストールします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。 Kubernetes CLI を使用してコマンドを実行するための接頭部は、`kubectl` です。
 
-  1. 使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.12.7 です。
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
+  1. 使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.13.6 です。
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
   2. OS X または Linux を使用している場合、以下の手順を実行します。
 
@@ -185,7 +188,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -198,7 +201,6 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
 クラスターの作業を行うために {{site.data.keyword.containerlong}} CLI にログインするたびに、これらのコマンドを実行して、クラスターの構成ファイルのパスをセッション変数として設定する必要があります。 Kubernetes CLI はこの変数を使用して、{{site.data.keyword.Bluemix_notm}} 内のクラスターと接続するために必要なローカル構成ファイルと証明書を検索します。
 
 1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。
-
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
@@ -207,16 +209,14 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     構成ファイルのダウンロードが完了すると、そのローカルの Kubernetes 構成ファイルのパスを環境変数として設定するために使用できるコマンドが表示されます。
 
     OS X の場合の例:
-
     ```
     export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
     ```
     {: screen}
+    Windows PowerShell を使用していますか? Windows PowerShell 形式の環境変数を取得するには、`--powershell` フラグを含めます。
+    {: tip}
 
 2.  `KUBECONFIG` 環境変数を設定するためのコマンドとしてターミナルに表示されたものを、コピーして貼り付けます。
-
-    **Windows PowerShell ユーザー**: `ibmcloud ks cluster-config` の出力から `SET` コマンドをコピーして貼り付ける代わりに、次の例のように実行して `KUBECONFIG` 環境変数を設定する必要があります。`$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`。
-    {: note}
 
 3.  `KUBECONFIG` 環境変数が適切に設定されたことを確認します。
 
@@ -234,7 +234,7 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     ```
     {: screen}
 
-4.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行することを確認します。
+4.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行されることを確認します。
 
     ```
     kubectl version  --short
@@ -244,8 +244,8 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     出力例:
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -261,14 +261,14 @@ CLI で Kubernetes クラスターのコンテキストを設定します。
     {: note}
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south
     ```
     {: pre}
 
 2.  {{site.data.keyword.toneanalyzershort}} インスタンスをクラスターの `default` の Kubernetes 名前空間にバインドします。 あとで独自の名前空間を作成して Kubernetes リソースへのユーザー・アクセスを管理できますが、現時点では `default` 名前空間を使用します。 Kubernetes 名前空間は、以前に作成したレジストリー名前空間とは異なります。
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 

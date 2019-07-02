@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Debug di Ingress
@@ -44,11 +44,11 @@ Prima di iniziare, assicurati di disporre delle seguenti [politiche di accesso {
 
 ## Passo 1: Esegui i test Ingress nel {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 
-Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool per eseguire dei test Ingress e raccogliere informazioni Ingress pertinenti dal tuo cluster. Per utilizzare lo strumento di debug, installa il grafico Helm [`ibmcloud-iks-debug` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug):
+Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool per eseguire dei test Ingress e raccogliere informazioni Ingress pertinenti dal tuo cluster. Per utilizzare lo strumento di debug, installa il [grafico Helm `ibmcloud-iks-debug` ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
 
 
-1. [Configura Helm nel tuo cluster, crea un account di servizio per Tiller e aggiungi il repository `ibm` alla tua istanza Helm](/docs/containers?topic=containers-integrations#helm).
+1. [Configura Helm nel tuo cluster, crea un account di servizio per Tiller e aggiungi il repository `ibm` alla tua istanza Helm](/docs/containers?topic=containers-helm).
 
 2. Installa il grafico Helm nel tuo cluster.
   ```
@@ -164,15 +164,15 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
     Output di esempio per un cluster multizona con nodi di lavoro in `dal10` e `dal13`:
 
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone    Build
-    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
-    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
+    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:411/ingress-auth:315   2294021
+    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
+    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238  dal13   ingress:411/ingress-auth:315   2294019
+    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222   dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
 
-    * Se un ALB pubblico non ha alcun indirizzo IP, vedi [L'ALB Ingress non viene distribuito in una zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit).
+    * Se un ALB pubblico non ha alcun indirizzo IP, vedi [L'ALB Ingress non viene distribuito in una zona](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 
 2. Controlla l'integrità dei tuoi IP ALB.
 
@@ -185,7 +185,7 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
         * Se la CLI restituisce un timeout e hai un firewall personalizzato che sta proteggendo i tuoi di nodi di lavoro, assicurati di consentire ICMP nel tuo [firewall](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * Se non c'è alcun firewall che sta bloccando i ping e l'esecuzione dei ping continua comunque fino a una condizione di timeout, [controlla lo stato dei tuoi pod ALB](#check_pods).
 
-    * Solo cluster multizona: puoi utilizzare il controllo dell'integrità MZLB per determinare lo stato dei tuoi IP ALB. Per ulteriori informazioni sull'MZLB, vedi [Programma di bilanciamento del carico multizona (o MZLB, multizone load balancer)](/docs/containers?topic=containers-ingress#planning). Il controllo dell'integrità MZLB è disponibile solo per i cluster che hanno il nuovo dominio secondario Ingress nel formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se il tuo cluster utilizza ancora il formato meno recente di `<cluster_name>.<region>.containers.mybluemix.net`, [converti il tuo cluster a zona singola in multizona](/docs/containers?topic=containers-clusters#add_zone). Al tuo cluster viene assegnato un dominio secondario con il nuovo formato ma può anche continuare a utilizzare il formato di dominio secondario meno recente. In alternativa, puoi ordinare un nuovo cluster a cui viene automaticamente assegnato il nuovo formato di dominio secondario.
+    * Solo cluster multizona: puoi utilizzare il controllo dell'integrità MZLB per determinare lo stato dei tuoi IP ALB. Per ulteriori informazioni sull'MZLB, vedi [Programma di bilanciamento del carico multizona (o MZLB, multizone load balancer)](/docs/containers?topic=containers-ingress#planning). Il controllo dell'integrità MZLB è disponibile solo per i cluster che hanno il nuovo dominio secondario Ingress nel formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se il tuo cluster utilizza ancora il formato meno recente di `<cluster_name>.<region>.containers.mybluemix.net`, [converti il tuo cluster a zona singola in multizona](/docs/containers?topic=containers-add_workers#add_zone). Al tuo cluster viene assegnato un dominio secondario con il nuovo formato ma può anche continuare a utilizzare il formato di dominio secondario meno recente. In alternativa, puoi ordinare un nuovo cluster a cui viene automaticamente assegnato il nuovo formato di dominio secondario.
 
     Il seguente comando HTTP cURL utilizza l'host `albhealth`, che è configurato da {{site.data.keyword.containerlong_notm}} per restituire lo stato `healthy` o `unhealthy` per un IP ALB.
         ```
@@ -291,8 +291,8 @@ Supponiamo ad esempio che hai un cluster multizona in 2 zone e 2 ALB pubblici ha
 
     Ad esempio, l'IP irraggiungibile `169.62.196.238` appartiene all'ALB `public-cr24a9f2caf6554648836337d240064935-alb1`:
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone   Build
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+    public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:411/ingress-auth:315   2294021
     ```
     {: screen}
 
@@ -442,7 +442,7 @@ Stai ancora avendo problemi con il tuo cluster?
 [IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
--   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support).
 Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`. Puoi anche utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per raccogliere ed esportare informazioni pertinenti dal tuo cluster da condividere con il supporto IBM.
 {: tip}
 

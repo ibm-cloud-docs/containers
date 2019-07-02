@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 设置 VPN 连接
@@ -34,12 +34,14 @@ subcollection: containers
 
 - **strongSwan IPSec VPN 服务**：您可以设置 [strongSwan IPSec VPN 服务 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.strongswan.org/about.html)，以将 Kubernetes 集群与内部部署网络安全连接。strongSwan IPSec VPN 服务基于业界标准因特网协议安全性 (IPSec) 协议组，通过因特网提供安全的端到端通信信道。要在集群与内部部署网络之间设置安全连接，请在集群的 pod 中直接[配置和部署 strongSwan IPSec VPN 服务](#vpn-setup)。
 
+- **{{site.data.keyword.BluDirectLink}}**：[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) 允许您在远程网络环境和 {{site.data.keyword.containerlong_notm}} 之间创建直接专用连接，而无需通过公用因特网进行路由。必须实现混合工作负载、跨提供者工作负载、大型或频繁数据传输或者专用工作负载时，{{site.data.keyword.Bluemix_notm}} Direct Link 产品非常有用。要选择 {{site.data.keyword.Bluemix_notm}} Direct Link 产品并设置 {{site.data.keyword.Bluemix_notm}} Direct Link 连接，请参阅 {{site.data.keyword.Bluemix_notm}} Direct Link 文档中的 [{{site.data.keyword.Bluemix_notm}} Direct Link 入门](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)。
+
 - **虚拟路由器设备 (VRA) 或 Fortigate Security Appliance (FSA)**：您可选择设置 [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) 或 [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) 来配置 IPSec VPN 端点。如果您具有更大的集群，希望通过单个 VPN 访问多个集群，或者需要基于路径的 VPN，那么此选项会非常有用。要配置 VRA，请参阅[使用 VRA 设置 VPN 连接](#vyatta)。
 
 ## 使用 strongSwan IPSec VPN 服务 Helm chart
 {: #vpn-setup}
 
-使用 Helm 图表在 Kubernetes pod 内配置并部署 strongSwan IPSec VPN 服务。
+使用 Helm chart 在 Kubernetes pod 内配置并部署 strongSwan IPSec VPN 服务。
 {:shortdesc}
 
 由于 strongSwan 已在集群中集成，因此无需外部网关设备。建立 VPN 连接时，会在集群中的所有工作程序节点上自动配置路径。这些路径允许在任何工作程序节点和远程系统上的 pod 之间通过 VPN 隧道进行双向连接。例如，下图显示了 {{site.data.keyword.containerlong_notm}} 中的应用程序可以如何通过 strongSwan VPN 连接与内部部署服务器进行通信：
@@ -59,16 +61,19 @@ subcollection: containers
 ## strongSwan VPN 服务注意事项
 {: #strongswan_limitations}
 
-使用 strongSwan Helm 图表之前，请查看以下注意事项和限制。
+使用 strongSwan Helm chart 之前，请查看以下注意事项和限制。
 {: shortdesc}
 
-* strongSwan Helm 图表需要远程 VPN 端点启用 NAT 遍历。除了缺省 IPSec UDP 端口 500 之外，NAT 遍历还需要 UDP 端口 4500。需要允许这两个 UDP 端口通过任何配置的防火墙。
-* strongSwan Helm 图表不支持基于路径的 IPSec VPN。
-* strongSwan Helm 图表支持使用预共享密钥的 IPSec VPN，但不支持需要证书的 IPSec VPN。
-* strongSwan Helm 图表不允许多个集群和其他 IaaS 资源共享单个 VPN 连接。
-* strongSwan Helm 图表作为集群内部的 Kubernetes pod 运行。VPN 性能受集群中运行的 Kubernetes 和其他 pod 的内存和网络使用情况的影响。如果您的环境中性能很重要，请考虑使用在集群外部的专用硬件上运行的 VPN 解决方案。
-* strongSwan Helm 图表将单个 VPN pod 作为 IPSec 隧道端点运行。如果 pod 发生故障，集群将重新启动该 pod。但是，在新 pod 启动并重新建立 VPN 连接时，您可能会遇到较短的停机时间。如果需要从错误更快恢复，或需要更详细的高可用性解决方案，请考虑使用在集群外部的专用硬件上运行的 VPN 解决方案。
-* strongSwan Helm 图表不提供对通过 VPN 连接传递的网络流量的度量或监视。有关受支持监视工具的列表，请参阅[日志记录和监视服务](/docs/containers?topic=containers-supported_integrations#health_services)。
+* strongSwan Helm chart 需要远程 VPN 端点启用 NAT 遍历。除了缺省 IPSec UDP 端口 500 之外，NAT 遍历还需要 UDP 端口 4500。需要允许这两个 UDP 端口通过任何配置的防火墙。
+* strongSwan Helm chart 不支持基于路径的 IPSec VPN。
+* strongSwan Helm chart 支持使用预共享密钥的 IPSec VPN，但不支持需要证书的 IPSec VPN。
+* strongSwan Helm chart 不允许多个集群和其他 IaaS 资源共享单个 VPN 连接。
+* strongSwan Helm chart 作为集群内部的 Kubernetes pod 运行。VPN 性能受集群中运行的 Kubernetes 和其他 pod 的内存和网络使用情况的影响。如果您的环境中性能很重要，请考虑使用在集群外部的专用硬件上运行的 VPN 解决方案。
+* strongSwan Helm chart 将单个 VPN pod 作为 IPSec 隧道端点运行。如果 pod 发生故障，集群将重新启动该 pod。但是，在新 pod 启动并重新建立 VPN 连接时，您可能会遇到较短的停机时间。如果需要从错误更快恢复，或需要更详细的高可用性解决方案，请考虑使用在集群外部的专用硬件上运行的 VPN 解决方案。
+* strongSwan Helm chart 不提供对通过 VPN 连接传递的网络流量的度量或监视。有关受支持监视工具的列表，请参阅[日志记录和监视服务](/docs/containers?topic=containers-supported_integrations#health_services)。
+
+集群用户可以使用 strongSwan VPN 服务通过专用服务端点连接到 Kubernetes 主节点。但是，与 Kubernetes 主节点通过专用服务端点进行的通信必须经过 <code>166.X.X.X</code> IP 地址范围，这不能通过 VPN 连接进行路由。可以通过[使用专用网络负载均衡器 (NLB)](/docs/containers?topic=containers-clusters#access_on_prem) 来公开集群用户的主节点的专用服务端点。专用 NLB 将主节点的专用服务端点作为 strongSwan VPN pod 可以访问的内部 `172.21.x.x` 集群 IP 地址公开。如果仅启用专用服务端点，那么可以使用 Kubernetes 仪表板或临时启用公共服务端点来创建专用 NLB。
+{: tip}
 
 <br />
 
@@ -95,7 +100,7 @@ subcollection: containers
 ### 从多专区集群配置一个出站 VPN 连接
 {: #multizone_one_outbound}
 
-要在多专区集群中配置 strongSwan VPN 服务，最简单的解决方案是使用在集群中所有可用性专区的不同工作程序节点之间浮动的单个出站 VPN 连接。
+要在多专区集群中配置 strongSwan VPN 服务，最简单的解决方案是使用可在集群中所有可用性专区的不同工作程序节点之间切换的单个出站 VPN 连接。
 {: shortdesc}
 
 VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwan 部署。如果某个工作程序节点已除去或遇到停机时间，`kubelet` 会将 VPN pod 重新安排到新的工作程序节点上。如果某个可用性专区遇到中断，`kubelet` 会将 VPN pod 重新安排到其他专区中的新工作程序节点上。
@@ -114,7 +119,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 ### 配置与多专区集群的一个入站 VPN 连接
 {: #multizone_one_inbound}
 
-如果需要入局 VPN 连接，并且远程 VPN 端点可以在检测到故障时自动与其他 IP 重新建立 VPN 连接，那么可以使用在集群中所有可用性专区的不同工作程序节点之间浮动的单个入站 VPN 连接。
+如果需要入局 VPN 连接，并且远程 VPN 端点可以在检测到故障时自动与其他 IP 重新建立 VPN 连接，那么可以使用可在集群中所有可用性专区的不同工作程序节点之间切换的单个入站 VPN 连接。
 {: shortdesc}
 
 远程 VPN 端点可以与任何专区中的任何 strongSwan 负载均衡器建立 VPN 连接。无论 VPN pod 位于哪个专区中，都会将入局请求发送到该 VPN pod。来自 VPN pod 的响应会通过原始负载均衡器发送回远程 VPN 端点。此选项可确保高可用性，因为如果某个工作程序节点已除去或遇到停机时间，`kubelet` 会将 VPN pod 重新安排到新的工作程序节点上。此外，如果某个可用性专区遇到中断，那么远程 VPN 端点可以与其他专区中的负载均衡器 IP 地址重新建立 VPN 连接，以便仍能访问 VPN pod。
@@ -147,8 +152,8 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
       - `zoneSpecificRoutes`：设置为 `true`。此设置将 VPN 连接限制为集群中的单个专区。特定专区中的 pod 仅使用针对该特定专区设置的 VPN 连接。此解决方案减少了在多专区集群中支持多个 VPN 所需的 strongSwan pod 数，提高了 VPN 性能（因为 VPN 流量仅流至位于当前专区中的工作程序节点），并可确保每个专区的 VPN 连接不受其他专区中的 VPN 连接、崩溃的 pod 或专区中断的影响。请注意，无需配置 `remoteSubnetNAT`。使用 `zoneSpecificRoutes` 设置的多个 VPN 可以具有相同的 `remote.subnet`，因为路由是按专区设置的。
       - `enableSingleSourceIP`：设置为 `true`，并将 `local.subnet` 设置为单个 /32 IP 地址。此设置组合将隐藏单个 /32 IP 地址后面的所有集群专用 IP 地址。此唯一的 /32 IP 地址允许远程内部部署网络通过正确的 VPN 连接，将回复发送回集群中启动请求的正确 pod。请注意，为 `local.subnet` 选项配置的单个 /32 IP 地址在每个 strongSwan VPN 配置中必须唯一。
     * 如果远程内部部署网络中的应用程序必须访问集群中的服务：    
-      - `localSubnetNAT`：确保内部部署远程网络中的应用程序可以选择特定的 VPN 连接来发送和接收流至集群的流量。在每个 strongSwan Helm 配置中，使用 `localSubnetNAT` 来唯一地标识可由远程内部部署应用程序访问的集群资源。由于从远程内部部署网络到集群建立了多个 VPN，因此必须将逻辑添加到内部部署网络上的应用程序，以便可以选择要在访问集群中的服务时使用的 VPN。请注意，集群中的服务可通过多个不同的子网进行访问，具体取决于在每个 strongSwan VPN 配置中为 `localSugetNAT` 配置的内容。
-      - `remoteSubnetNAT`：确保集群中的 pod 使用相同的 VPN 连接将流量返回到远程网络。在每个 strongSwan 部署文件中，使用 `remoteSubetNAT` 设置将远程内部部署子网映射到唯一子网。集群中的 pod 从特定于 VPN 的 `remoteSubetNAT` 收到的流量会发送回特定于 VPN 的这一相同 `remoteSubnetNAT`，然后通过这一相同 VPN 连接传递。
+      - `localSubnetNAT`：确保内部部署远程网络中的应用程序可以选择特定的 VPN 连接来发送和接收流至集群的流量。在每个 strongSwan Helm 配置中，使用 `localSubnetNAT` 来唯一地标识可由远程内部部署应用程序访问的集群资源。由于从远程内部部署网络到集群建立了多个 VPN，因此必须将逻辑添加到内部部署网络上的应用程序，以便可以选择要在访问集群中的服务时使用的 VPN。请注意，集群中的服务可通过多个不同的子网进行访问，具体取决于在每个 strongSwan VPN 配置中为 `localSubnetNAT` 配置的内容。
+      - `remoteSubnetNAT`：确保集群中的 pod 使用相同的 VPN 连接将流量返回到远程网络。在每个 strongSwan 部署文件中，使用 `remoteSubnetNAT` 设置将远程内部部署子网映射到唯一子网。集群中的 pod 从特定于 VPN 的 `remoteSubnetNAT` 收到的流量会发送回特定于 VPN 的这一相同 `remoteSubnetNAT`，然后通过这一相同 VPN 连接传递。
 
 3. 配置远程 VPN 端点软件，以与每个专区中的负载均衡器 IP 建立单独的 VPN 连接。
 
@@ -158,24 +163,24 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 ## 配置 strongSwan Helm chart
 {: #vpn_configure}
 
-安装 strongSwan Helm 图表之前，您必须决定 strongSwan 配置。
+安装 strongSwan Helm chart 之前，您必须决定 strongSwan 配置。
 {: shortdesc}
 
 开始之前：
-* [在内部部署数据中心安装 IPSec VPN 网关](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection)。
+* 在内部部署数据中心内安装 IPSec VPN 网关。
 * 确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **注**：标准集群中允许所有 strongSwan 配置。如果使用的是免费集群，那么只能在[步骤 3](#strongswan_3) 中选择出站 VPN 连接。入站 VPN 连接需要集群中的负载均衡器，但负载均衡器对于免费集群不可用。
 
 ### 步骤 1：获取 strongSwan Helm chart
 {: #strongswan_1}
 
-安装 Helm 并获取 strongSwan Helm 图表以查看可能的配置。
+安装 Helm 并获取 strongSwan Helm chart 以查看可能的配置。
 {: shortdesc}
 
 1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，使用服务帐户安装 Helm 服务器 (Tiller)，然后添加 {{site.data.keyword.Bluemix_notm}} Helm 存储库。请注意，需要 Helm V2.8 或更高版本。
 
-2.  验证 Tiller 是否已使用服务帐户进行安装。
+2.  验证是否已使用服务帐户安装 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
@@ -190,7 +195,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
     ```
     {: screen}
 
-3. 在本地 YAML 文件中保存 strongSwan Helm 图表的缺省配置设置。
+3. 在本地 YAML 文件中保存 strongSwan Helm chart 的缺省配置设置。
 
     ```
     helm inspect values iks-charts/strongswan > config.yaml
@@ -205,7 +210,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 要控制 VPN 连接的建立，请修改以下基本 IPSec 设置。
 {: shortdesc}
 
-有关每个设置的更多信息，请阅读 Helm 图表的 `config.yaml` 文件中提供的文档。
+有关每个设置的更多信息，请阅读 Helm chart 的 `config.yaml` 文件中提供的文档。
 {: tip}
 
 1. 如果内部部署 VPN 隧道端点不支持 `ikev2` 作为初始化连接的协议，请将 `ipsec.keyexchange` 的值更改为 `ikev1`。
@@ -239,7 +244,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 
 要建立入站 VPN 连接，请修改以下设置：
 1. 验证 `ipsec.auto` 是否设置为 `add`。
-2. 可选：将 `loadBalancerIP` 设置为 strongSwan VPN 服务的可移植公共 IP 地址。需要稳定的 IP 地址时（例如，必须指定允许通过内部部署防火墙使用的 IP 地址时），指定 IP 地址很有用。该集群必须至少具有一个可用的公共负载均衡器 IP 地址。[可以检查以确定可用的公共 IP 地址](/docs/containers?topic=containers-subnets#review_ip)或[释放使用的 IP 地址](/docs/containers?topic=containers-subnets#free)。
+2. 可选：将 `loadBalancerIP` 设置为 strongSwan VPN 服务的可移植公共 IP 地址。需要稳定的 IP 地址时（例如，必须指定允许哪些 IP 地址通过内部部署防火墙时），指定 IP 地址很有用。该集群必须至少具有一个可用的公共负载均衡器 IP 地址。[可以检查以确定可用的公共 IP 地址](/docs/containers?topic=containers-subnets#review_ip)或[释放使用的 IP 地址](/docs/containers?topic=containers-subnets#free)。
     * 如果将此设置保留为空，那么将使用其中一个可用的可移植公共 IP 地址。
     * 还必须配置为内部部署 VPN 端点上的集群 VPN 端点选择或分配给该端点的公共 IP 地址。
 
@@ -273,12 +278,12 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
     * 如果是添加整个子网（格式为 `10.171.42.0/24=10.10.10.0/24`），那么重新映射方式为 1 对 1：内部网络子网中的所有 IP 地址都会映射到外部网络子网，反之亦然。
     * 如果是添加单个 IP 地址（格式为 `10.171.42.17/32=10.10.10.2/32,10.171.42.29/32=10.10.10.3/32`），那么只有这些内部 IP 地址会映射到指定的外部 IP 地址。
 
-3. 对于 V2.2.0 和更高版本的 strongSwan Helm 图表为可选：通过将 `enableSingleSourceIP` 设置为 `true`，将所有集群 IP 地址隐藏在单个 IP 地址后面。此选项为 VPN 连接提供了其中一种最安全的配置，因为不允许远程网络向后连接到集群。
+3. 对于 V2.2.0 和更高版本的 strongSwan Helm chart 为可选：通过将 `enableSingleSourceIP` 设置为 `true`，将所有集群 IP 地址隐藏在单个 IP 地址后面。此选项为 VPN 连接提供了其中一种最安全的配置，因为不允许远程网络向后连接到集群。
     <br>
     * 此设置要求不管 VPN 连接是从集群还是从远程网络建立的，通过 VPN 连接传递的所有数据流都必须为出站。
     * `local.subnet` 只能设置为一个 /32 子网。
 
-4. 对于 V2.2.0 和更高版本的 strongSwan Helm 图表为可选：通过使用 `localNonClusterSubnet` 设置，允许 strongSwan 服务将来自远程网络的入局请求路由到存在于集群外部的服务。
+4. 对于 V2.2.0 和更高版本的 strongSwan Helm chart 为可选：通过使用 `localNonClusterSubnet` 设置，允许 strongSwan 服务将来自远程网络的入局请求路由到存在于集群外部的服务。
     <br>
     * 非集群服务必须存在于同一专用网络上，或存在于工作程序节点可访问的专用网络上。
     * 非集群工作程序节点无法通过 VPN 连接来启动流至远程网络的流量，但非集群节点可以是来自远程网络的入局请求的目标。
@@ -292,7 +297,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 
 1. 将一个或多个内部部署专用子网的 CIDR 添加到 `remote.subnet` 设置。
     **注**：如果 `ipsec.keyexchange` 设置为 `ikev1`，那么只能指定一个子网。
-2. 对于 V2.2.0 和更高版本的 strongSwan Helm 图表为可选：使用 `remoteSubnetNAT` 设置重新映射远程网络子网。子网的网络地址转换 (NAT) 提供了针对集群网络与内部部署远程网络之间子网冲突的变通方法。可以使用 NAT 将远程网络的 IP 子网重新映射到其他专用子网。在通过 VPN 隧道发送包之前，会发生重新映射。集群中的 pod 看到的是重新映射的 IP 子网，而不是原始子网。在 pod 通过 VPN 隧道发送数据之前，重新映射的 IP 子网将切换回远程网络正在使用的实际子网。可以通过 VPN 来同时公开重新映射和未重新映射的子网。
+2. 对于 V2.2.0 和更高版本的 strongSwan Helm chart 为可选：使用 `remoteSubnetNAT` 设置重新映射远程网络子网。子网的网络地址转换 (NAT) 提供了针对集群网络与内部部署远程网络之间子网冲突的变通方法。可以使用 NAT 将远程网络的 IP 子网重新映射到其他专用子网。在通过 VPN 隧道发送包之前，会发生重新映射。集群中的 pod 看到的是重新映射的 IP 子网，而不是原始子网。在 pod 通过 VPN 隧道发送数据之前，重新映射的 IP 子网将切换回远程网络正在使用的实际子网。可以通过 VPN 来同时公开重新映射和未重新映射的子网。
 
 ### 步骤 6（可选）：通过 Slack Webhook 集成启用监视
 {: #strongswan_6}
@@ -324,7 +329,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 
 8. 转至选择的 Slack 通道来验证测试消息是否成功。
 
-9. 在 Helm 图表的 `config.yaml` 文件中，配置 Webhook 以监视 VPN 连接。
+9. 在 Helm chart 的 `config.yaml` 文件中，配置 Webhook 以监视 VPN 连接。
     1. 将 `monitoring.enable` 更改为 `true`。
     2. 将专用 IP 地址或要确保可通过 VPN 连接访问的远程子网中的 HTTP 端点添加到 `monitoring.privateIPs` 或 `monitoring.httpEndpoints`。例如，可以将 `remote.privateIPtoPing` 设置中的 IP 添加到 `monitoring.privateIPs`。
     3. 将 Webhook URL 添加到 `monitoring.slackWebhook`。
@@ -333,10 +338,10 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 ### 步骤 7：部署 Helm chart
 {: #strongswan_7}
 
-使用您先前选择的配置在集群中部署 strongSwan Helm 图表。
+使用您先前选择的配置在集群中部署 strongSwan Helm chart。
 {: shortdesc}
 
-1. 如果需要配置更高级的设置，请遵循为 Helm 图表中的每个设置提供的文档。
+1. 如果需要配置更高级的设置，请遵循为 Helm chart 中的每个设置提供的文档。
 
 3. 保存更新的 `config.yaml` 文件。
 
@@ -367,7 +372,7 @@ VPN 连接是来自多专区集群的出站连接时，只需要一个 strongSwa
 ## 测试并验证 strongSwan VPN 连接
 {: #vpn_test}
 
-部署 Helm 图表后，请测试 VPN 连接。
+部署 Helm chart 后，请测试 VPN 连接。
 {:shortdesc}
 
 1. 如果内部部署网关上的 VPN 处于不活动状态，请启动 VPN。
@@ -396,7 +401,7 @@ Security Associations (1 up, 0 connecting):
     ```
     {: screen}
 
-    * 尝试使用 strongSwan Helm 图表建立 VPN 连接时，很有可能 VPN 阶段状态一开始不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置，并多次更改配置文件，连接才能成功：
+    * 尝试使用 strongSwan Helm chart 建立 VPN 连接时，很有可能 VPN 阶段状态一开始不是 `ESTABLISHED`。您可能需要检查内部部署 VPN 端点设置，并多次更改配置文件，连接才能成功：
         1. 运行 `helm delete --purge <release_name>`
         2. 修正配置文件中的错误值。
         3. 运行 `helm install -f config.yaml --name=<release_name> ibm/strongswan`
@@ -526,12 +531,12 @@ kubectl delete pods -l app=strongswan-test
 例如，假设您希望仅特定名称空间 `my-secure-namespace` 中的 pod 可通过 VPN 发送和接收数据。您不希望其他名称空间（例如，`kube-system`、`ibm-system` 或 `default`）中的 pod 访问内部部署网络。要将 VPN 流量限制为仅 `my-secure-namespace`，可以创建 Calico 全局网络策略。
 
 使用此解决方案之前，请查看以下注意事项和限制。
-* 您无需将 strongSwan Helm 图表部署到指定的名称空间中。strongSwan VPN pod 和路径守护程序集可以部署到 `kube-system` 或其他任何名称空间中。如果 strongSwan VPN 未部署到指定的名称空间中，那么 `vpn-strongswan-ping-remote-ip-1` Helm 测试会失败。这是预期故障，可以接受。测试会通过不位于对远程子网具有直接访问权的名称空间中的 pod，对内部部署 VPN 网关的 `remote.privateIPtoPing` 专用 IP 地址执行 ping 操作。但是，VPN pod 仍能够将流量转发到具有到远程子网的路径的名称空间中的 pod，并且流量仍可正常流动。VPN 状态仍为 `ESTABLISHED`，并且指定名称空间中的 pod 可以通过 VPN 进行连接。
+* 您无需将 strongSwan Helm chart 部署到指定的名称空间中。strongSwan VPN pod 和路径守护程序集可以部署到 `kube-system` 或其他任何名称空间中。如果 strongSwan VPN 未部署到指定的名称空间中，那么 `vpn-strongswan-ping-remote-ip-1` Helm 测试会失败。这是预期故障，可以接受。测试会通过不位于对远程子网具有直接访问权的名称空间中的 pod，对内部部署 VPN 网关的 `remote.privateIPtoPing` 专用 IP 地址执行 ping 操作。但是，VPN pod 仍能够将流量转发到具有到远程子网的路径的名称空间中的 pod，并且流量仍可正常流动。VPN 状态仍为 `ESTABLISHED`，并且指定名称空间中的 pod 可以通过 VPN 进行连接。
 
 * 以下步骤中的 Calico 全局网络策略不会阻止使用主机联网的 Kubernetes pod 通过 VPN 发送和接收数据。pod 配置为使用主机联网，在该 pod 中运行的应用程序可以侦听其所在的工作程序节点的网络接口。这些主机联网 pod 可以在任何名称空间中存在。要确定哪些 pod 具有主机联网，请运行 `kubectl get pods --all-namespaces -o wide`，并查找没有 `172.30.0.0/16` pod IP 地址的任何 pod。如果要阻止主机联网 pod 通过 VPN 发送和接收数据，那么可以在 `values.yaml` 部署文件中设置以下选项：`local.subnet: 172.30.0.0/16` 和 `enablePodSNAT: false`。这些配置设置通过 VPN 连接向远程网络公开所有 Kubernetes pod。但是，只有位于指定安全名称空间中的 pod 可通过 VPN 进行访问。
 
 开始之前：
-* [部署 strongSwan Helm 图表](#vpn_configure)，并[确保 VPN 连接正常工作](#vpn_test)。
+* [部署 strongSwan Helm chart](#vpn_configure)，并[确保 VPN 连接正常工作](#vpn_test)。
 * [安装和配置 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 
 要将 VPN 流量限制为特定名称空间，请执行以下操作：
@@ -600,9 +605,9 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
 在多租户集群中具有多个 strongSwan VPN 部署时，可以将每个部署的 VPN 流量限制为专用于每个租户的特定工作程序节点。
 {: shortdesc}
 
-部署 strongSwan Helm 图表时，会创建 strongSwan VPN 部署。strongSwan VPN pod 会部署到任何无污点工作程序节点。此外，还会创建 Kubernetes 守护程序集。此守护程序集会将集群中所有无污点工作程序节点上的路径自动配置为连接到每个远程子网。在内部部署网络中，strongSwan VPN pod 使用工作程序节点上的路径将请求转发到远程子网。
+部署 strongSwan Helm chart 时，会创建 strongSwan VPN 部署。strongSwan VPN pod 会部署到任何无污点工作程序节点。此外，还会创建 Kubernetes 守护程序集。此守护程序集会将集群中所有无污点工作程序节点上的路径自动配置为连接到每个远程子网。在内部部署网络中，strongSwan VPN pod 使用工作程序节点上的路径将请求转发到远程子网。
 
-除非在 `value.yaml` 文件的 `tolerations` 设置中指定了污点，否则不会在有污点的节点上配置路径。通过污染工作程序节点，可以防止在这些工作程序上配置任何 VPN 路径。然后，可以仅针对确实希望在有污点工作程序上允许的 VPN 部署，在 `tolerations` 设置中指定污点。这样，用于一个租户的 Helm 图表部署的 strongSwan VPN 将仅使用该租户的工作程序节点上的路径来通过 VPN 连接将流量转发到远程子网。
+除非在 `value.yaml` 文件的 `tolerations` 设置中指定了污点，否则不会在有污点的节点上配置路径。通过污染工作程序节点，可以防止在这些工作程序上配置任何 VPN 路径。然后，可以仅针对确实希望在有污点工作程序上允许的 VPN 部署，在 `tolerations` 设置中指定污点。这样，用于一个租户的 Helm chart 部署的 strongSwan VPN 将仅使用该租户的工作程序节点上的路径来通过 VPN 连接将流量转发到远程子网。
 
 使用此解决方案之前，请查看以下注意事项和限制。
 * 缺省情况下，Kubernetes 会将应用程序 pod 置于可用的任何无污点工作程序节点上。要确保此解决方案正常工作，每个租户必须首先确保仅将其应用程序 pod 部署到正确租户的有污点工作程序。此外，每个有污点工作程序节点还必须具有容忍度，以允许将应用程序 pod 放置在该节点上。有关污点和容忍度的更多信息，请参阅 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)。
@@ -615,7 +620,7 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
 
 要将 VPN 流量限制为每个租户的有污点节点，请执行以下操作：
 
-1. 要将 VPN 流量限制为仅专用于本示例中租户 A 的工作程序，请在租户 A 的 strongSwan Helm 图表的 `values.yaml` 文件中指定以下 `toleration`：
+1. 要将 VPN 流量限制为仅专用于本示例中租户 A 的工作程序，请在租户 A 的 strongSwan Helm chart 的 `values.yaml` 文件中指定以下 `toleration`：
     ```
     tolerations:
      - key: dedicated
@@ -626,7 +631,7 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
     {: codeblock}
     此容忍度允许路径守护程序集在有 `dedicated="tenantA"` 污点的两个工作程序节点上以及两个无污点工作程序节点上运行。此部署的 strongSwan VPN 会在两个无污点工作程序节点上运行。
 
-2. 要将 VPN 流量限制为仅专用于本示例中租户 B 的工作程序，请在租户 B 的 strongSwan Helm 图表的 `values.yaml` 文件中指定以下 `toleration`：
+2. 要将 VPN 流量限制为仅专用于本示例中租户 B 的工作程序，请在租户 B 的 strongSwan Helm chart 的 `values.yaml` 文件中指定以下 `toleration`：
     ```
     tolerations:
      - key: dedicated
@@ -643,7 +648,7 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
 ## 升级 strongSwan Helm chart
 {: #vpn_upgrade}
 
-通过升级 stronSwan Helm 图表以确保该图表是最新的。
+通过升级 stronSwan Helm chart 以确保该图表是最新的。
 {:shortdesc}
 
 要将 strongSwan Helm chart 升级到最新版本，请执行以下操作：
@@ -653,13 +658,10 @@ calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
   ```
   {: pre}
 
-strongSwan 2.0.0 Helm 图表不适用于 Calico V3 或 Kubernetes 1.10。在[将集群更新到 1.10](/docs/containers?topic=containers-cs_versions#cs_v110) 之前，请先将 strongSwan 更新到 2.2.0 或更高版本的 Helm chart，此版本向后兼容 Calico 2.6 以及 Kubernetes 1.9。接下来，删除 strongSwan Helm chart。然后，在更新后，可以重新安装该图表。
-{:tip}
-
 ## 禁用 strongSwan IPSec VPN 服务
 {: vpn_disable}
 
-可以通过删除 Helm 图表来禁用 VPN 连接。
+可以通过删除 Helm chart 来禁用 VPN 连接。
 {:shortdesc}
 
   ```
@@ -692,11 +694,11 @@ strongSwan 2.0.0 Helm 图表不适用于 Calico V3 或 Kubernetes 1.10。在[将
 
 要设置虚拟路由器设备，请执行以下操作：
 
-1. [订购 VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance)。
+1. [订购 VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started)。
 
 2. [在 VRA 上配置专用 VLAN](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans)。
 
 3. 要使用 VRA 来启用 VPN 连接，请[在 VRA 上配置 VRRP](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp)。
 
-如果您有现有路由器设备，然后添加了集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过[启用 VLAN 生成](/docs/containers?topic=containers-subnets#subnet-routing)启用同一 VLAN 上子网之间的路由。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+如果您有现有路由器设备，然后添加了集群，那么不会在该路由器设备上配置为集群订购的新可移植子网。要使用联网服务，必须通过[启用 VLAN 生成](/docs/containers?topic=containers-subnets#subnet-routing)来启用同一 VLAN 上子网之间的路由。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get --region <region>` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
 {: important}

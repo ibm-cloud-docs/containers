@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -33,7 +34,7 @@ subcollection: containers
 どのタイプのストレージが適切なソリューションであるかを判断する前に、アプリの要件、保管するデータのタイプ、およびこのデータにアクセスする頻度を理解しておく必要があります。
 {: shortdesc}
 
-1. データを永久に保管する必要があるかどうか、または特定の時点でデータを削除できるかどうかを決定します。
+1. データを永久に保管する必要があるかどうか、またはいつでもデータを削除できるかどうかを決定します。
    - **永続ストレージ:** コンテナー、ワーカー・ノード、またはクラスターが削除されても、引き続きデータが使用可能です。 永続ストレージは、以下のシナリオで使用します。
        - ステートフルなアプリ
        - コア・ビジネス・データ
@@ -68,7 +69,7 @@ subcollection: containers
    {: tip}
 
 5. 複数のアプリ・インスタンス、ゾーン、または地域にわたってデータを共有する必要があるかどうかを調査します。
-   - **複数のポッドによるアクセス:** ストレージにアクセスするために Kubernetes 永続ボリュームを使用する場合、ボリュームを同時にマウントすることができるポッドの数を決定できます。 ブロック・ストレージなどの一部のストレージ・ソリューションには、一度に 1 つのポッドのみがアクセスできます。 それ以外のストレージ・ソリューションでは、複数のポッドで同じボリュームを共有できます。
+   - **複数のポッドによるアクセス:** ストレージにアクセスするために Kubernetes 永続ボリュームを使用する場合、ボリュームを同時にマウントすることができるポッドの数を決定できます。 ブロック・ストレージなどの一部のストレージ・ソリューションには、一度に 1 つのポッドのみがアクセスできます。 他のストレージ・ソリューションでは、複数のポッド間でボリュームを共有できます。
    - **複数のゾーンおよび地域でのアクセス:** 複数のゾーンまたは地域でデータをアクセス可能にする必要がある場合があります。 ファイル・ストレージやブロック・ストレージなどの一部のストレージ・ソリューションは、データ・センター固有のものであり、複数ゾーン・クラスター・セットアップを使用して複数のゾーンで共有することはできません。
 
    データを複数のゾーンや地域で利用できるようにする場合は、社内の法務部門に相談して、データを複数のゾーンや国外に保管できることを確認してください。
@@ -322,7 +323,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">パフォーマンス</td>
 <td style="text-align:left">読み取り操作の場合はハイ。 非 SDS マシンの使用時は、割り当てられる IOPS とサイズのために予測可能です。</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS マシンの使用時は、順次読み取り/書き込み操作についてはベア・メタル・パフォーマンスに近い。 </li><li style="margin:0px; padding:0px">高性能データベースを実行するための[プロファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) を提供</li><li style="margin:0px; padding:0px">ご使用のアプリで選択できる各種のパフォーマンス・プロファイルを使用してストレージ層を作成可能。</li></ul> </td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">SDS マシンの使用時は、順次読み取り/書き込み操作についてはベア・メタル・パフォーマンスに近い。 </li><li style="margin:0px; padding:0px">高性能データベースを実行するための[プロファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) を提供。</li><li style="margin:0px; padding:0px">ご使用のアプリで選択できる各種のパフォーマンス・プロファイルを使用してストレージ層を作成可能。</li></ul> </td>
 <td style="text-align:left">アプリと同じデータ・センターにデプロイされた場合はハイ。</td>
 </tr>
 <tr>
@@ -340,7 +341,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">回復力</td>
 <td style="text-align:left">ハイ (3 つのゾーンまたは地域にわたってデータ・スライスが分散するため)。 単一ゾーンのみにセットアップされた場合はミディアム。</td>
-<td style="text-align:left">3 つのゾーンにまたがるレプリケーションをサポートするようにセットアップされた場合はハイ。 単一ゾーンのみにデータを保管する場合はミディアム。</td>
+<td style="text-align:left">3 つのゾーンにまたがるレプリケーションをサポートするようにセットアップされた場合はハイ。 単一ゾーンにのみデータを保管する場合はミディアム。</td>
 <td style="text-align:left">DBaaS およびセットアップによって異なります。 </td>
 </tr>
 <tr>

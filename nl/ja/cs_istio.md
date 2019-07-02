@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-04-18"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -26,7 +27,7 @@ lastupdated: "2019-04-18"
 {{site.data.keyword.containerlong}} 上の Istio は、Istio のシームレス・インストール、Istio コントロール・プレーン・コンポーネントの自動更新とライフサイクル管理、およびプラットフォームのロギングとモニタリングのツールとの統合を行います。
 {: shortdesc}
 
-ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。 {{site.data.keyword.containerlong_notm}} 上の Istio は管理対象アドオンとして提供されるので、すべての Istio コンポーネントが {{site.data.keyword.Bluemix_notm}} によって自動的に最新に保たれます。
+ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。 {{site.data.keyword.containerlong_notm}} 上の Istio は管理対象アドオンとして提供されるため、すべての Istio コンポーネントが {{site.data.keyword.Bluemix_notm}} によって自動的に最新に保たれます。
 
 ## {{site.data.keyword.containerlong_notm}} 上の Istio について
 {: #istio_ov}
@@ -37,7 +38,7 @@ lastupdated: "2019-04-18"
 [Istio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/info/istio) は、{{site.data.keyword.containerlong_notm}} における Kubernetes など、クラウド・プラットフォーム上のマイクロサービスを接続、保護、制御、監視するためのオープンなサービス・メッシュ・プラットフォームです。
 {:shortdesc}
 
-一体構造アプリケーションを分散マイクロサービス・アーキテクチャーにシフトする際には、一連の難題が新たに生じます。例えば、マイクロサービスのトラフィックの制御、サービスのダーク起動とカナリア配備の実施、障害の処理、サービス通信の保護、サービスの監視、サービスのフリート全体への一貫性のあるアクセス・ポリシーの実施をそれぞれどのように行うかなどです。 これらの問題に対処するために、サービス・メッシュを活用できます。 サービス・メッシュは、マイクロサービス間の接続と、その接続の監視、保護、制御のための、透過的で言語に依存しないネットワークを提供します。 Istio を使用すると、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス・アイデンティティーの検証などを行えるので、サービス・メッシュを洞察し、制御できます。
+一体構造アプリケーションを分散マイクロサービス・アーキテクチャーにシフトする際には、一連の難題が新たに生じます。例えば、マイクロサービスのトラフィックの制御、サービスのダーク起動とカナリア配備の実施、障害の処理、サービス通信の保護、サービスの監視、サービスのフリート全体への一貫性のあるアクセス・ポリシーの実施をそれぞれどのように行うかなどです。 これらの問題に対処するために、サービス・メッシュを活用できます。 サービス・メッシュは、マイクロサービス間の接続と、その接続の監視、保護、制御のための、透過的で言語に依存しないネットワークを提供します。 Istio を使用すると、ネットワーク・トラフィックの管理、マイクロサービス間のロード・バランシング、アクセス・ポリシーの実施、サービス・アイデンティティーの検証などを行うことができるため、サービス・メッシュを洞察し、制御できます。
 
 例えば、マイクロサービス・メッシュで Istio を使用すると、以下のことを行えるようになります。
 - クラスター内で実行中のアプリに対する可視性を向上させる。
@@ -53,7 +54,7 @@ Istio サービス・メッシュは、データ・プレーンとコントロ�
 {{site.data.keyword.containerlong_notm}} 上の Istio は、Istio を Kubernetes クラスターと直接統合する管理対象アドオンとして提供されます。
 {: shortdesc}
 
-管理対象 Istio アドオンはベータ版として分類されているため、不安定になったり頻繁に変更されたりする可能性があります。また、ベータ機能は、一般出荷可能機能と同レベルのパフォーマンスや互換性を提供しない可能性もあり、実稼働環境での使用を意図したものではありません。
+管理対象 Istio アドオンはベータ版として分類されているため、不安定になったり頻繁に変更されたりする可能性があります。 また、ベータ機能は、一般出荷可能機能と同レベルのパフォーマンスや互換性を提供しない可能性もあり、実稼働環境での使用を意図したものではありません。
 {: note}
 
 **それはクラスター内でどのように見えますか?**</br>
@@ -66,9 +67,7 @@ Istio アドオンをインストールすると、Istio のコントロール�
 {: tip}
 
 **何か制限はありますか?** </br>
-以下の場合は、クラスター内で管理対象 Istio アドオンを有効にすることはできません。
-* クラスターがプライベート VLAN のみに接続されている場合。
-* [Container Image Security Enforcer アドミッション・コントローラー](/docs/services/Registry?topic=registry-security_enforce#security_enforce)がクラスターにインストールされている場合。
+[Container Image Security Enforcer アドミッション・コントローラー](/docs/services/Registry?topic=registry-security_enforce#security_enforce)をクラスター内にインストールした場合は、クラスター内で管理対象 Istio アドオンを有効にすることはできません。
 
 <br />
 
@@ -104,9 +103,6 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-`istio` 管理対象アドオンはフリー・クラスターにインストールできます。 `istio-extras` アドオンと `istio-sample-bookinfo` アドオンもインストールするためには、少なくとも 2 つのワーカー・ノードがある標準クラスターを作成します。
-{: note}
-
 <br />
 
 
@@ -118,7 +114,7 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 
 **始める前に**</br>
 * {{site.data.keyword.containerlong_notm}} に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
-* [それぞれが 4 コアと 16 GB のメモリー (`b3c.4x16`) 以上を備えた、少なくとも 3 つのワーカー・ノードのある既存のクラスターを使用するか、このようなクラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。 各ワーカー・ノードでは、Kubernetes バージョン 1.11 以降が実行されている必要があります。
+* [それぞれが 4 コアと 16 GB のメモリー (`b3c.4x16`) 以上を備えた、少なくとも 3 つのワーカー・ノードのある既存の標準クラスターを使用するか、このようなクラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。 さらに、クラスターおよびワーカー・ノードで、少なくともサポートされる最小バージョンの Kubernetes を実行する必要があります。これは、`ibmcloud ks addon-versions --addon istio` を実行して確認できます。
 * [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 * 既存のクラスターを使用している場合に、IBM Helm チャートまたは別の方法を使用して、そのクラスターに Istio を既にインストールしている場合は、[その Istio インストール済み環境をクリーンアップしてください](#istio_uninstall_other)。
 
@@ -152,9 +148,9 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   出力例:
   ```
   Name                      Version
-  istio                     1.1.2
-  istio-extras              1.1.2
-  istio-sample-bookinfo     1.1.2
+  istio                     1.1.5
+  istio-extras              1.1.5
+  istio-sample-bookinfo     1.1.5
   ```
   {: screen}
 
@@ -277,48 +273,28 @@ BookInfo アドオン (`istio-sample-bookinfo`) は、[Istio 用 BookInfo サン
 * `v2` は `ratings` マイクロサービスを呼び出し、1 つから 5 つまでの黒色の星印で評価を表示します。
 * `v3` は `ratings` マイクロサービスを呼び出し、1 つから 5 つまでの赤色の星印で評価を表示します。
 
-これらのマイクロサービスそれぞれのデプロイメント YAML は、それらがデプロイされる前に Envoy サイドカー・プロキシーがマイクロサービスのポッドにコンテナーとして事前注入されるように、変更されています。 手動サイドカー注入について詳しくは、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/setup/kubernetes/sidecar-injection/) を参照してください。 BookInfo アプリは、Istio Gateway によってパブリック IP 入口アドレスでも既に公開されています。 BookInfo アプリは始めるのに役立ちますが、実動用ではないということに注意してください。
+これらのマイクロサービスそれぞれのデプロイメント YAML は、それらがデプロイされる前に Envoy サイドカー・プロキシーがマイクロサービスのポッドにコンテナーとして事前注入されるように、変更されています。 手動サイドカー注入について詳しくは、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/setup/kubernetes/sidecar-injection/) を参照してください。 BookInfo アプリは、Istio Gateway によってパブリック IP ingress アドレスでも既に公開されています。 BookInfo アプリは始めるのに役立ちますが、実動用ではありません。
 
 始める前に、クラスターに [`istio`、`istio-extras`、`istio-sample-bookinfo` の各管理対象アドオンをインストールします](#istio_install)。
 
 1. クラスターのパブリック・アドレスを取得します。
-  * 標準クラスター:
-      2. ingress ホストを設定します。
-        ```
-        export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-        ```
-        {: pre}
+  1. ingress ホストを設定します。
+    ```
+    export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    ```
+    {: pre}
 
-      3. ingress ポートを設定します。
-        ```
-        export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-        ```
-        {: pre}
+  2. ingress ポートを設定します。
+    ```
+    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+    ```
+    {: pre}
 
-      4. ingress のホストとポートを使用する `GATEWAY_URL` 環境変数を作成します。
-         ```
-         export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
-
-  * フリー・クラスター:
-      1. ingress ホストを設定します。 このホストは、クラスター内のいずれかのワーカー・ノードのパブリック IP アドレスです。
-        ```
-        export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-        ```
-        {: pre}
-
-      2. ingress ポートを設定します。
-        ```
-        export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-        ```
-        {: pre}
-
-      3. ワーカー・ノードのパブリック IP アドレスと NodePort を使用する GATEWAY_URL 環境変数を作成します。
-         ```
-         export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
+  3. ingress のホストとポートを使用する `GATEWAY_URL` 環境変数を作成します。
+     ```
+     export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+     ```
+     {: pre}
 
 2. `GATEWAY_URL` 変数に対して curl を実行し、BookInfo アプリが稼働中であることを確認します。 応答 `200` は、Istio で BookInfo アプリが適切に稼働していることを意味します。
    ```
@@ -329,7 +305,7 @@ BookInfo アドオン (`istio-sample-bookinfo`) は、[Istio 用 BookInfo サン
 3.  ブラウザーで BookInfo Web ページを表示します。
 
     Mac OS または Linux の場合:
-```
+    ```
     open http://$GATEWAY_URL/productpage
     ```
     {: pre}
@@ -345,12 +321,12 @@ BookInfo アドオン (`istio-sample-bookinfo`) は、[Istio 用 BookInfo サン
 ### 何が起きたかを理解する
 {: #istio_bookinfo_understanding}
 
-BookInfo サンプルは、Istio のトラフィック管理コンポーネントの 3 つがどのように連携して進入トラフィックをアプリにルーティングするかを示すデモ用サンプルです。
+BookInfo サンプルは、Istio のトラフィック管理コンポーネントの 3 つがどのように連携して受信トラフィックをアプリにルーティングするかを示すデモ用サンプルです。
 {: shortdesc}
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>`bookinfo-gateway` [Gateway ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) は、ロード・バランサーである `istio-system` 名前空間内の `istio-ingressgateway` サービスを表し、BookInfo の HTTP/TCP トラフィックの進入エントリー・ポイントとして機能します。 Istio は、ゲートウェイ構成ファイル内に定義されたポート上で Istio 管理対象アプリに対する着信要求を listen するようにロード・バランサーを構成します。
+<dd>`bookinfo-gateway` [Gateway ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) は、ロード・バランサーである `istio-system` 名前空間内の `istio-ingressgateway` サービスを表し、BookInfo の HTTP/TCP トラフィックの受信エントリー・ポイントとして機能します。 Istio は、ゲートウェイ構成ファイル内に定義されたポート上で Istio 管理対象アプリに対する着信要求を listen するようにロード・バランサーを構成します。
 </br></br>BookInfo ゲートウェイの構成ファイルを調べるには、次のコマンドを実行します。
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -396,7 +372,7 @@ Istio 追加機能アドオン (`istio-extras`) は、[Grafana ![外部リンク
 2. Istio Grafana ダッシュボードを開くには、URL http://localhost:3000/dashboard/db/istio-mesh-dashboard に移動します。 [BookInfo アドオン](#istio_bookinfo)がインストールされている場合は、製品ページを何回か最新表示したときに生成されたトラフィックのメトリックが Istio ダッシュボードに表示されます。 Istio Grafana ダッシュボードの使用について詳しくは、Istio オープン・ソース資料内の [Viewing the Istio Dashboard ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) を参照してください。
 
 **Jaeger**</br>
-1. デフォルトでは、Istio では 100 件の要求中 1 件という割合でトレース・スパンが生成され、これは 1% というサンプリング・レートに相当します。最初のトレースが表示されるためには、その前に少なくとも 100 件の要求を送信する必要があります。100 件の要求を [BookInfo アドオン](#istio_bookinfo)の `productpage` サービスに送信するには、次のコマンドを実行します。
+1. デフォルトでは、Istio では 100 件の要求中 1 件という割合でトレース・スパンが生成され、これは 1% というサンプリング・レートに相当します。最初のトレースが表示されるためには、その前に少なくとも 100 件の要求を送信する必要があります。 100 件の要求を [BookInfo アドオン](#istio_bookinfo)の `productpage` サービスに送信するには、次のコマンドを実行します。
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
   ```
@@ -454,7 +430,7 @@ Prometheus に関する作業はすべて行われているので、残ってい
 
 4. `Istio` を検索し、Sysdig で事前定義された Istio ダッシュボードのうちの 1 つを選択します。
 
-メトリックとダッシュボードの参照、Istio 内部コンポーネントのモニター、Istio A/B デプロイメントとカナリア配備のモニターについて詳しくは、Sysdig ブログ投稿の [How to monitor Istio, the Kubernetes service mesh ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://sysdig.com/blog/monitor-istio/) を確認してください。 『Monitoring Istio: reference metrics and dashboards』というセクションを探してください。
+メトリックとダッシュボードの参照、Istio 内部コンポーネントのモニター、および Istio A/B デプロイメントとカナリア・デプロイメントのモニターについて詳しくは、[How to monitor Istio, the Kubernetes service mesh ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://sysdig.com/blog/monitor-istio/) を確認してください。ブログ投稿の『Monitoring Istio: reference metrics and dashboards』というセクションを探してください。
 
 <br />
 
@@ -470,7 +446,7 @@ Istio を使用して独自のアプリを管理する準備ができました�
 ### 自動サイドカー注入の有効化
 {: #istio_sidecar_automatic}
 
-自動サイドカー注入を有効にすると、名前空間によって新規デプロイメントの有無が listen されて、ポッド・テンプレート仕様が自動的に変更されて、Envoy プロキシー・サイドカー・コンテナーを使用してアプリ・ポッドが作成されるようになります。Istio と統合する複数のアプリをある名前空間にデプロイする場合は、その名前空間に対して自動サイドカー注入を有効にします。 Istio 管理対象アドオンでは、どの名前空間に対しても自動サイドカー注入はデフォルトで有効にならないということに注意してください。
+自動サイドカー注入を有効にすると、名前空間によって新規デプロイメントの有無が listen されて、ポッド・テンプレート仕様が自動的に変更されて、Envoy プロキシー・サイドカー・コンテナーを使用してアプリ・ポッドが作成されるようになります。 Istio と統合する複数のアプリをある名前空間にデプロイする場合は、その名前空間に対して自動サイドカー注入を有効にします。 Istio 管理対象アドオンでは、どの名前空間に対しても自動サイドカー注入はデフォルトで有効にはなりません。
 
 名前空間に対して自動サイドカー注入を有効にするには、以下のようにします。
 
@@ -547,12 +523,12 @@ Istio を使用して独自のアプリを管理する準備ができました�
 
 1. `istioctl` クライアントをダウンロードします。
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.2 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
   ```
 
 2. Istio パッケージ・ディレクトリーにナビゲートします。
   ```
-  cd istio-1.1.2
+  cd istio-1.1.5
   ```
   {: pre}
 
@@ -617,14 +593,14 @@ Istio を使用して独自のアプリを管理する準備ができました�
 [Envoy プロキシー・サイドカー注入をセットアップ](#istio_sidecar)し、Istio サービス・メッシュにアプリをデプロイしたら、IBM 提供のホスト名を使用して、パブリック要求に対して Istio 管理対象アプリを公開できるようになります。
 {: shortdesc}
 
-Istio は、[Gateway ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) と [VirtualService ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) を使用して、トラフィックをアプリにどのようにルーティングするかを制御します。ゲートウェイでは、Istio 管理対象アプリのエントリー・ポイントとして機能するロード・バランサー `istio-ingressgateway` が構成されます。標準クラスター内では、`istio-ingressgateway` ロード・バランサーの外部 IP アドレスを DNS エントリーおよび DNS ホスト名に登録することで、Istio 管理対象アプリを公開できます。
+Istio は、[Gateway ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) と [VirtualService ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) を使用して、トラフィックをアプリにどのようにルーティングするかを制御します。 ゲートウェイでは、Istio 管理対象アプリのエントリー・ポイントとして機能するロード・バランサー `istio-ingressgateway` が構成されます。 `istio-ingressgateway` ロード・バランサーの外部 IP アドレスを DNS エントリーおよび DNS ホスト名に登録することで、Istio 管理対象アプリを公開できます。
 
 [BookInfo を公開する例](#istio_expose_bookinfo)をまず試すことも、[独自の Istio 管理対象アプリをパブリックに公開](#istio_expose_link)することもできます。
 
 ### 例: IBM 提供のホスト名を使用した BookInfo の公開
 {: #istio_expose_bookinfo}
 
-クラスター内で BookInfo アドオンを有効にすると、Istio ゲートウェイ `bookinfo-gateway` が自動的に作成されます。このゲートウェイは、Istio の仮想サービス・ルールと宛先ルールを使用して、BookInfoアプリをパブリックに公開するロード・バランサー `istio-ingressgateway` を構成します。 以下の手順では、`istio-ingressgateway` ロード・バランサーの IP アドレスのホスト名を作成します。このホスト名を通じて BookInfo にパブリック・アクセスできます。
+クラスター内で BookInfo アドオンを有効にすると、Istio ゲートウェイ `bookinfo-gateway` が自動的に作成されます。 このゲートウェイは、Istio の仮想サービス・ルールと宛先ルールを使用して、BookInfoアプリをパブリックに公開するロード・バランサー `istio-ingressgateway` を構成します。 以下の手順では、`istio-ingressgateway` ロード・バランサーの IP アドレスのホスト名を作成します。このホスト名を通じて BookInfo にパブリック・アクセスできます。
 {: shortdesc}
 
 開始前に、クラスター内で [`istio-sample-bookinfo` という管理対象アドオンを有効にします](#istio_install)。
@@ -669,7 +645,7 @@ Istio は、[Gateway ![外部リンク・アイコン](../icons/launch-glyph.svg
   ```
   {: codeblock}
 
-5. ページの最新表示を複数回試行します。 `http://<host_name>/productpage` への要求は ALB で受信されて Istio ゲートウェイ・ロード・バランサーに転送されます。Istio ゲートウェイはマイクロサービス用の仮想サービス・ルールと宛先ルーティング・ルールを管理するため、依然として複数の異なるバージョンの `reviews` マイクロサービスがランダムに返されます。
+5. ページの最新表示を複数回試行します。 `http://<host_name>/productpage` への要求は ALB で受信されて Istio ゲートウェイ・ロード・バランサーに転送されます。 Istio ゲートウェイはマイクロサービス用の仮想サービス・ルールと宛先ルーティング・ルールを管理するため、依然として複数の異なるバージョンの `reviews` マイクロサービスがランダムに返されます。
 
 BookInfo アプリのゲートウェイ、仮想サービス・ルール、宛先ルールについて詳しくは、[何が起きたかを理解する](#istio_bookinfo_understanding)を参照してください。 {{site.data.keyword.containerlong_notm}} での DNS ホスト名の登録について詳しくは、[NLB ホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)を参照してください。
 
@@ -688,7 +664,7 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
     ```
   2. Istio パッケージ・ディレクトリーにナビゲートします。
     ```
-    cd istio-1.1.2
+    cd istio-1.1.5
     ```
     {: pre}
 3. [アプリ・マイクロサービスのためのサイドカー注入をセットアップし、アプリ・マイクロサービスを名前空間にデプロイします。さらに、アプリ・マイクロサービスを Istio サービス・メッシュに組み込めるように、アプリ・マイクロサービスのための Kubernetes サービスを作成します](#istio_sidecar)。
@@ -696,6 +672,7 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
 </br>
 **ホスト名を使用して Istio 管理対象アプリをパブリックに公開するには、次のようにします。
 **
+
 1. ゲートウェイを作成します。 このサンプル・ゲートウェイは、`istio-ingressgateway` ロード・バランサー・サービスを使用して、HTTP 用のポート 80 を公開します。 `<namespace>` を、Istio 管理対象マイクロサービスがデプロイされている名前空間に置き換えてください。 `80` とは異なるポートでマイクロサービスが listen する場合は、そのポートを追加してください。 ゲートウェイ YAML の構成要素について詳しくは、[Istio のリファレンス資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) を参照してください。
   ```
   apiVersion: networking.istio.io/v1alpha3
@@ -757,7 +734,7 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td><code>my-gateway</code> が指定されているのは、このゲートウェイがこのような仮想サービス・ルーティング・ルールを <code>istio-ingressgateway</code> ロード・バランサーに適用できるようにするためです。<td>
+  <td><code>my-gateway</code> が指定されているのは、このゲートウェイにより、これらの仮想サービス・ルーティング・ルールを <code>istio-ingressgateway</code> ロード・バランサーに適用できるようにするためです。<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -819,9 +796,9 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
   ```
   {: codeblock}
 
-ここまでの手順で、`my-gateway` という名前のゲートウェイを作成しました。このゲートウェイは既存の `istio-ingressgateway` ロード・バランサー・サービスを使用してアプリを公開します。`istio-ingressgateway` ロード・バランサーは、`my-virtual-service` 仮想サービスで定義されたルールを使用して、アプリへのトラフィックをルーティングします。最後に、`istio-ingressgateway` ロード・バランサーのホスト名を作成しました。このホスト名宛てのすべてのユーザー要求は、定義した Istio ルーティング・ルールに従って、アプリに転送されます。{{site.data.keyword.containerlong_notm}} での DNS ホスト名の登録について、およびホスト名のカスタム・ヘルス・チェックのセットアップについては、[NLB ホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)を参照してください。
+ここまでの手順で、`my-gateway` という名前のゲートウェイを作成しました。 このゲートウェイは既存の `istio-ingressgateway` ロード・バランサー・サービスを使用してアプリを公開します。 `istio-ingressgateway` ロード・バランサーは、`my-virtual-service` 仮想サービスで定義されたルールを使用して、アプリへのトラフィックをルーティングします。 最後に、`istio-ingressgateway` ロード・バランサーのホスト名を作成しました。 このホスト名宛てのすべてのユーザー要求は、定義した Istio ルーティング・ルールに従って、アプリに転送されます。 {{site.data.keyword.containerlong_notm}} での DNS ホスト名の登録について、およびホスト名のカスタム・ヘルス・チェックのセットアップについては、[NLB ホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)を参照してください。
 
-よりきめ細かくルーティングを制御することもできます。ロード・バランサーによって各マイクロサービスにトラフィックがルーティングされた後に適用されるルールを作成するには (同一マイクロサービスの複数のバージョンにトラフィックを送信するためのルールなど)、[`DestinationRules` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) を作成して適用します。
+よりきめ細かくルーティングを制御することもできます。 ロード・バランサーによって各マイクロサービスにトラフィックがルーティングされた後に適用されるルールを作成するには (同一マイクロサービスの複数のバージョンにトラフィックを送信するためのルールなど)、[`DestinationRules` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/) を作成して適用します。
 {: tip}
 
 <br />
@@ -830,7 +807,7 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
 ## {{site.data.keyword.containerlong_notm}} での Istio の更新
 {: #istio_update}
 
-管理対象 Istio アドオン内の Istio バージョンは、{{site.data.keyword.Bluemix_notm}} によってテストされており、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。Istio コンポーネントを {{site.data.keyword.containerlong_notm}} でサポートされている最新バージョンの Istio に更新するには、[管理対象アドオンの更新](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)を参照してください。
+管理対象 Istio アドオン内の Istio バージョンは、{{site.data.keyword.Bluemix_notm}} によってテストされており、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。 Istio コンポーネントを {{site.data.keyword.containerlong_notm}} でサポートされている最新バージョンの Istio に更新するには、[管理対象アドオンの更新](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)を参照してください。
 {: shortdesc}
 
 ## {{site.data.keyword.containerlong_notm}} での Istio のアンインストール
@@ -839,12 +816,12 @@ Istio 管理対象アプリをパブリックに公開するには、Istio ゲ�
 Istio に関する作業を終えたら、Istio アドオンをアンインストールすることによって、クラスター内の Istio リソースをクリーンアップできます。
 {:shortdesc}
 
-`istio` アドオンには `istio-extras` アドオン、`istio-sample-bookinfo` アドオン、[`knative`](/docs/containers?topic=containers-knative_tutorial) アドオンが依存していることに注意してください。 `istio-extras` アドオンには `istio-sample-bookinfo` アドオンが依存しています。
+`istio` アドオンには、`istio-extras` アドオン、`istio-sample-bookinfo` アドオン、および [`knative`](/docs/containers?topic=containers-serverless-apps-knative) アドオンが依存しています。 `istio-extras` アドオンには `istio-sample-bookinfo` アドオンが依存しています。
 {: important}
 
-**オプション**: `istio-system` 名前空間内で作成または変更したすべてのリソースと、カスタム・リソース定義 (CRD) によって自動的に生成されたすべての Kubernetes リソースは削除されます。これらのリソースを保持するには、これらを保存してから、`istio` アドオンをアンインストールしてください。
+**オプション**: `istio-system` 名前空間内で作成または変更したすべてのリソースと、カスタム・リソース定義 (CRD) によって自動的に生成されたすべての Kubernetes リソースは削除されます。 これらのリソースを保持するには、これらを保存してから、`istio` アドオンをアンインストールしてください。
 1. `istio-system` 名前空間内で作成または変更したすべてのリソース (サービスやアプリの構成ファイルなど) を保存します。
-コマンド例:
+   コマンド例:
    ```
    kubectl get pod <pod_name> -o yaml -n istio-system
    ```
@@ -852,7 +829,7 @@ Istio に関する作業を終えたら、Istio アドオンをアンインス�
 
 2. `istio-system` 内の CRD によって自動的に生成された Kubernetes リソースを、ローカル・マシン上の YAML ファイルに保存します。
    1. `istio-system` 内の CRD を取得します。
-```
+      ```
       kubectl get crd -n istio-system
       ```
       {: pre}
@@ -931,7 +908,7 @@ IBM Helm チャートを使用して、または別の方法で、クラスタ�
 * 以前にクラスター内に BookInfo をインストールした場合は、それらのリソースをクリーンアップします。
   1. ディレクトリーを Istio ファイルの場所に切り替えます。
     ```
-    cd <filepath>/istio-1.1.2
+    cd <filepath>/istio-1.1.5
     ```
     {: pre}
 
@@ -949,4 +926,4 @@ IBM Helm チャートを使用して、または別の方法で、クラスタ�
 
 * Istio についてさらに詳しく知るには、[Istio の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://istio.io/) でその他のガイドを参照できます。
 * [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/) を受講します。 **注**: このコースの Istio のインストールのセクションはスキップできます。
-* [Istio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) の使用に関するこのブログ投稿を確認して、お客様の Istio サービス・メッシュを視覚化します。
+* [Vistio ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) の使用に関するこのブログ投稿を確認して、お客様の Istio サービス・メッシュを視覚化します。

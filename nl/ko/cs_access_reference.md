@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 사용자 액세스 권한
@@ -57,65 +59,75 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 <table>
 <caption>{{site.data.keyword.containerlong_notm}}에서 권한이 필요하지 않은 CLI 명령 및 API 호출 개요</caption>
 <thead>
-<th id="none-actions-action">클러스터 관리 조치</th>
+<th id="none-actions-action">조치</th>
 <th id="none-actions-cli">CLI 명령</th>
 <th id="none-actions-api">API 호출</th>
 </thead>
 <tbody>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}}에 관리 추가 기능에 대해 지원되는 버전 목록을 봅니다.</td>
-<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)</code></td>
+<td><code>[GET /v1/addon](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAddons)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}}에 대한 API 엔드포인트를 보거나 대상으로 지정합니다.</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>지원되는 명령 및 매개변수의 목록을 봅니다.</td>
-<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cs_cli_reference#cs_help)</code></td>
+<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_help)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}} 플러그인을 초기화하거나 Kubernetes 클러스터를 작성 또는 액세스할 지역을 지정합니다.</td>
-<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)</code></td>
+<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.containerlong_notm}}에서 지원되는 Kubernetes 버전 목록을 봅니다.</td>
-<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
+<td>더 이상 사용되지 않음: {{site.data.keyword.containerlong_notm}}에서 지원되는 Kubernetes 버전의 목록을 봅니다. </td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_kube_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
 <td>작업자 노드에 대해 사용 가능한 머신 유형의 목록을 봅니다.</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/swagger-api/#!/util/GetDatacenterMachineTypes)</code></td>
+<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
 <td>IBM ID 사용자에 대한 현재 메시지를 봅니다.</td>
-<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/swagger-api/#!/util/GetMessages)</code></td>
+<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages)</code></td>
 </tr>
 <tr>
-<td>사용자가 현재 있는 {{site.data.keyword.containerlong_notm}} 지역을 찾습니다.</td>
-<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
+<td>더 이상 사용되지 않음: 사용자가 현재 있는 {{site.data.keyword.containerlong_notm}} 지역을 찾습니다. </td>
+<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.containerlong_notm}}의 지역을 설정합니다.</td>
-<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
+<td>더 이상 사용되지 않음: {{site.data.keyword.containerlong_notm}}의 지역을 설정합니다. </td>
+<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>사용 가능한 지역을 나열합니다.</td>
-<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
-<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
+<td>더 이상 사용되지 않음: 사용 가능한 지역을 나열합니다. </td>
+<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_regions)</code></td>
+<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetRegions)</code></td>
+</tr>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}}에서 지원되는 위치의 목록을 봅니다. </td>
+<td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)</code></td>
+<td><code>[GET /v1/locations](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations)</code></td>
+</tr>
+<tr>
+<td>{{site.data.keyword.containerlong_notm}}에서 지원되는 버전의 목록을 봅니다. </td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td>-</td>
 </tr>
 <tr>
 <td>사용자가 클러스터를 작성할 수 있는 사용 가능한 구역 목록을 봅니다.</td>
-<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
-<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
+<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_datacenters)</code></td>
+<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetZones)</code></td>
 </tr>
 </tbody>
 </table>
@@ -127,154 +139,136 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 {: shortdesc}
 
 <table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 뷰어 플랫폼 역할이 필요한 클러스터 관리 CLI 명령 및 API 호출 개요</caption>
+<caption>{{site.data.keyword.containerlong_notm}}에서 뷰어 플랫폼 역할이 필요한 CLI 명령 및 API 호출의 개요</caption>
 <thead>
-<th id="view-actions-mngt">클러스터 관리 조치</th>
+<th id="view-actions-mngt">조치</th>
 <th id="view-actions-cli">CLI 명령</th>
 <th id="view-actions-api">API 호출</th>
 </thead>
 <tbody>
 <tr>
+<td>Ingress ALB에 대한 정보를 봅니다.</td>
+<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_get)</code></td>
+<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALB)</code></td>
+</tr>
+<tr>
+<td>지역에서 지원되는 ALB 유형을 봅니다.</td>
+<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_types)</code></td>
+<td><code>[GET /albtypes](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAvailableALBTypes)</code></td>
+</tr>
+<tr>
+<td>클러스터의 모든 Ingress ALB를 나열합니다.</td>
+<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_albs)</code></td>
+<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
+</tr>
+<tr>
 <td>리소스 그룹 및 지역에 대해 {{site.data.keyword.Bluemix_notm}} IAM API 키 소유자의 이름 및 이메일 주소를 봅니다.</td>
-<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetClusterKeyOwner)</code></td>
+<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
 </tr>
 <tr>
 <td>클러스터에 연결하는 데 필요한 Kubernetes 구성 데이터 및 인증서를 다운로드하고 `kubectl` 명령을 실행합니다.</td>
-<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterConfig)</code></td>
+<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterConfig)</code></td>
 </tr>
 <tr>
 <td>클러스터에 대한 정보를 봅니다.</td>
-<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetCluster)</code></td>
+<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetCluster)</code></td>
 </tr>
 <tr>
 <td>클러스터에 바인딩된 모든 네임스페이스의 모든 서비스를 나열합니다.</td>
-<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_services)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesForAllNamespaces)</code></td>
+<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_services)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesForAllNamespaces)</code></td>
 </tr>
 <tr>
 <td>모든 클러스터를 나열합니다.</td>
-<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cs_cli_reference#cs_clusters)</code></td>
-<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusters)</code></td>
+<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)</code></td>
+<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} 계정이 다른 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하도록 설정된 인프라 인증 정보를 가져옵니다.</td>
-<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
-<td>특정 네임스페이스에 바인딩된 모든 서비스를 나열합니다.</td>
+<td>대상으로 지정된 지역 및 리소스 그룹의 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있게 해 주는 인증 정보에 권장 또는 필수 인프라 권한이 누락되어 있는지 확인합니다. </td>
+<td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
+<td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
+</tr>
+<tr>
+<td>Fluentd 추가 기능에 대한 자동 업데이트의 상태를 봅니다.</td>
+<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetUpdatePolicy)</code></td>
+</tr>
+<tr>
+<td>대상으로 지정된 지역의 기본 로깅 엔드포인트를 봅니다. </td>
 <td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesInNamespace)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetDefaultLoggingEndpoint)</code></td>
+</tr>
+<tr>
+<td>클러스터의 모든 로그 전달 구성 또는 클러스터의 특정 로그 소스를 나열합니다.</td>
+<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigs) 및 [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigsForSource)</code></td>
+</tr>
+<tr>
+<td>로그 필터링 구성에 대한 정보를 봅니다.</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfig)</code></td>
+</tr>
+<tr>
+<td>클러스터의 모든 로깅 필터 구성을 나열합니다.</td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfigs)</code></td>
+</tr>
+<tr>
+<td>특정 네임스페이스에 바인드된 모든 서비스를 나열합니다. </td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
 </tr>
 <tr>
 <td>클러스터에 바인딩된 모든 사용자 관리 서브넷을 나열합니다.</td>
 <td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterUserSubnet)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>인프라 계정에서 사용 가능한 서브넷을 나열합니다.</td>
-<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)</code></td>
-<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/swagger-api/#!/properties/ListSubnets)</code></td>
+<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)</code></td>
+<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/ListSubnets)</code></td>
 </tr>
 <tr>
 <td>인프라 계정에 대한 VLAN Spanning 상태를 봅니다.</td>
-<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)</code></td>
-<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
+<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)</code></td>
+<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetVlanSpanning)</code></td>
 </tr>
 <tr>
 <td>한 클러스터에 대해 설정된 경우: 구역 내에서 해당 클러스터가 연결된 VLAN을 나열합니다.</br>계정 내 모든 클러스터에 대해 설정된 경우: 구역 내의 모든 사용 가능한 VLAN을 나열합니다.</td>
-<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
+<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/GetDatacenterVLANs)</code></td>
 </tr>
 <tr>
 <td>클러스터의 모든 웹훅을 나열합니다.</td>
 <td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWebhooks)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWebhooks)</code></td>
 </tr>
 <tr>
 <td>작업자 노드에 대한 정보를 봅니다.</td>
-<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkers)</code></td>
+<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkers)</code></td>
 </tr>
 <tr>
 <td>작업자 풀에 대한 정보를 봅니다.</td>
-<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPool)</code></td>
 </tr>
 <tr>
 <td>클러스터의 모든 작업자 풀을 나열합니다.</td>
-<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pools)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPools)</code></td>
+<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pools)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPools)</code></td>
 </tr>
 <tr>
 <td>클러스터의 모든 작업자 노드를 나열합니다.</td>
-<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cs_cli_reference#cs_workers)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWorkers)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 뷰어 플랫폼 역할이 필요한 Ingress CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="view-actions-ingress">Ingress 조치</th>
-<th id="view-actions-cli2">CLI 명령</th>
-<th id="view-actions-api2">API 호출</th>
-</thead>
-<tbody>
-<tr>
-<td>Ingress ALB에 대한 정보를 봅니다.</td>
-<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_get)</code></td>
-<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALB)</code></td>
-</tr>
-<tr>
-<td>지역에서 지원되는 ALB 유형을 봅니다.</td>
-<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cs_cli_reference#cs_alb_types)</code></td>
-<td><code>[GET /albtypes](https://containers.cloud.ibm.com/swagger-alb-api/#!/util/GetAvailableALBTypes)</code></td>
-</tr>
-<tr>
-<td>클러스터의 모든 Ingress ALB를 나열합니다.</td>
-<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cs_cli_reference#cs_albs)</code></td>
-<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALBs)</code></td>
-</tr>
-</tbody>
-</table>
-
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 뷰어 플랫폼 역할이 필요한 로깅 CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="view-actions-log">로깅 조치</th>
-<th id="view-actions-cli3">CLI 명령</th>
-<th id="view-actions-api3">API 호출</th>
-</thead>
-<tbody>
-<tr>
-<td>Fluentd 추가 기능에 대한 자동 업데이트의 상태를 봅니다.</td>
-<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetUpdatePolicy)</code></td>
-</tr>
-<tr>
-<td>대상 지역의 기본 로깅 엔드포인트를 봅니다.</td>
-<td>-</td>
-<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</code></td>
-</tr>
-<tr>
-<td>클러스터의 모든 로그 전달 구성 또는 클러스터의 특정 로그 소스를 나열합니다.</td>
-<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cs_cli_reference#cs_logging_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigs) 및 [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</code></td>
-</tr>
-<tr>
-<td>로그 필터링 구성에 대한 정보를 봅니다.</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfig)</code></td>
-</tr>
-<tr>
-<td>클러스터의 모든 로깅 필터 구성을 나열합니다.</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfigs)</code></td>
+<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_workers)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWorkers)</code></td>
 </tr>
 </tbody>
 </table>
@@ -286,195 +280,167 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 {: shortdesc}
 
 <table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 편집자 플랫폼 역할이 필요한 클러스터 관리 CLI 명령 및 API 호출 개요</caption>
+<caption>{{site.data.keyword.containerlong_notm}}에서 편집자 플랫폼 역할이 필요한 CLI 명령 및 API 호출의 개요</caption>
 <thead>
-<th id="editor-actions-mngt">클러스터 관리 조치</th>
+<th id="editor-actions-mngt">조치</th>
 <th id="editor-actions-cli">CLI 명령</th>
 <th id="editor-actions-api">API 호출</th>
 </thead>
 <tbody>
 <tr>
-<td>서비스를 클러스터에 바인드합니다. **참고**: 서비스가 있는 공간에서의 Developer Cloud Foundry 역할도 필요합니다.</td>
-<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/BindServiceToNamespace)</code></td>
-</tr>
-<tr>
-<td>클러스터에서 서비스를 바인드 해제합니다. **참고**: 서비스가 있는 공간에서의 Developer Cloud Foundry 역할도 필요합니다.</td>
-<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_unbind)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UnbindServiceFromNamespace)</code></td>
-</tr>
-<tr>
-<td>클러스터에 웹훅을 작성합니다.</td>
-<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWebhooks)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 편집자 플랫폼 역할이 필요한 Ingress CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="editor-actions-ingress">Ingress 조치</th>
-<th id="editor-actions-cli2">CLI 명령</th>
-<th id="editor-actions-api2">API 호출</th>
-</thead>
-<tbody>
-<tr>
 <td>Ingress ALB 추가 기능에 대한 자동 업데이트를 사용 안함으로 설정합니다.</td>
-<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Ingress ALB 추가 기능에 대한 자동 업데이트를 사용으로 설정합니다.</td>
-<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
-<td>Ingress ALB 추가 기능에 대한 자동 업데이트가 사용으로 설정되어 있는지 확인합니다.</td>
-<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetUpdatePolicy)</code></td>
+<td>Ingress ALB 추가 기능에 대한 자동 업데이트가 사용으로 설정되어 있는지 확인합니다. </td>
+<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Ingress ALB를 사용 또는 사용 안함으로 설정합니다.</td>
-<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
-<td><code>[POST /albs](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/EnableALB) 및 [DELETE /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#/)</code></td>
+<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</code></td>
+<td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) 및 [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
 </tr>
 <tr>
-<td>ALB 팟(Pod)이 이전에 실행되었던 빌드에 Ingress ALB 추가 기능 업데이트를 롤백합니다.</td>
-<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/RollbackUpdate)</code></td>
+<td>Ingress ALB를 작성합니다. </td>
+<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
+<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
+</tr>
+<tr>
+<td>Ingress ALB 추가 기능 업데이트를 ALB 팟(Pod)이 이전에 실행하던 빌드로 롤백합니다. </td>
+<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
 </tr>
 <tr>
 <td>Ingress ALB 추가 기능을 수동으로 업데이트하여 ALB 팟(Pod)의 일회성 업데이트를 강제 실행합니다.</td>
-<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</code></td>
-<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBs)</code></td>
+<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_update)</code></td>
+<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBs)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 편집자 플랫폼 역할이 필요한 네트워크 로드 밸런서(NLB) DNS 호스트 및 상태 검사 모니터 CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="lbdns-mgmt">네트워크 로드 밸런서(NLB) DNS 조치</th>
-<th id="lbdns-cli">CLI 명령</th>
-<th id="lbdns-api">API 호출</th>
-</thead>
-<tbody>
-<tr>
-<td>기존 NLB 호스트 이름에 하나의 NLB IP를 추가합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>DNS 호스트 이름을 작성하여 하나 이상의 NLB IP를 등록합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>클러스터에 등록된 NLB 호스트 이름 및 IP 주소를 나열합니다.</td>
-<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
-</tr>
-<tr>
-<td>호스트 이름에서 NLB IP 주소를 제거합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>클러스터의 기존 NLB 호스트 이름에 대한 상태 검사 모니터를 구성하고 선택적으로 사용으로 설정합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>기존 상태 검사 모니터에 대한 설정을 봅니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>클러스터의 호스트 이름에 대한 기존 상태 검사 모니터를 사용 안함으로 설정합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>구성한 상태 검사 모니터를 사용으로 설정합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>클러스터의 각 NLB 호스트 이름에 대한 상태 검사 모니터 설정을 나열합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
-</tr>
-<tr>
-<td>클러스터의 NLB 호스트 이름 뒤에 있는 IP에 대한 상태 검사 상태를 나열합니다.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 편집자 플랫폼 역할이 필요한 로깅 CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="editor-log">로깅 조치</th>
-<th id="editor-cli3">CLI 명령</th>
-<th id="editor-api3">API 호출</th>
-</thead>
-<tbody>
 <tr>
 <td>API 서버 감사 웹훅을 작성합니다.</td>
-<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_set)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_set)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
 </tr>
 <tr>
 <td>API 서버 감사 웹훅을 삭제합니다.</td>
-<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_unset)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_unset)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/apiserverconfigs/DeleteAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>서비스를 클러스터에 바인드합니다. **참고**: 서비스 인스턴스가 있는 영역에 대한 Cloud Foundry 개발자 역할을 보유하고 있어야 합니다. </td>
+<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/BindServiceToNamespace)</code></td>
+</tr>
+<tr>
+<td>클러스터에서 서비스를 바인드 해제합니다. **참고**: 서비스 인스턴스가 있는 영역에 대한 Cloud Foundry 개발자 역할을 보유하고 있어야 합니다. </td>
+<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_unbind)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UnbindServiceFromNamespace)</code></td>
 </tr>
 <tr>
 <td><code>kube-audit</code>를 제외한 모든 로그 소스에 대한 로그 전달 구성을 작성합니다.</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>로그 전달 구성을 새로 고칩니다.</td>
-<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_logging_refresh)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/swagger-logging/#!/logging/RefreshLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_refresh)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/RefreshLoggingConfig)</code></td>
 </tr>
 <tr>
 <td><code>kube-audit</code>를 제외한 모든 로그 소스에 대한 로그 전달 구성을 삭제합니다.</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>클러스터에 대한 모든 로그 전달 구성을 삭제합니다.</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfigs)</code></td>
 </tr>
 <tr>
 <td>로그 전달 구성을 업데이트하십시오.</td>
-<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cs_cli_reference#cs_logging_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/UpdateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/UpdateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>로그 필터링 구성을 작성합니다.</td>
-<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/CreateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/CreateFilterConfig)</code></td>
 </tr>
 <tr>
 <td>로그 필터링 구성을 삭제합니다.</td>
-<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_delete)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_delete)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfig)</code></td>
 </tr>
 <tr>
 <td>Kubernetes 클러스터에 대한 모든 로깅 필터 구성을 삭제합니다.</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfigs)</code></td>
 </tr>
 <tr>
 <td>로그 필터링 구성을 업데이트합니다.</td>
-<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/UpdateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/UpdateFilterConfig)</code></td>
+</tr>
+<tr>
+<td>기존 NLB 호스트 이름에 하나의 NLB IP 주소를 추가합니다. </td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>NLB IP 주소를 등록할 DNS 호스트 이름을 작성합니다. </td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>클러스터에 등록된 NLB 호스트 이름 및 IP 주소를 나열합니다.</td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>호스트 이름에서 NLB IP 주소를 제거합니다.</td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>클러스터의 기존 NLB 호스트 이름에 대한 상태 검사 모니터를 구성하고 선택적으로 사용으로 설정합니다.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>기존 상태 검사 모니터에 대한 설정을 봅니다.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>클러스터의 호스트 이름에 대한 기존 상태 검사 모니터를 사용 안함으로 설정합니다.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>구성한 상태 검사 모니터를 사용으로 설정합니다.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>클러스터의 각 NLB 호스트 이름에 대한 상태 검사 모니터 설정을 나열합니다.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>클러스터의 NLB 호스트 이름으로 등록된 각 IP 주소의 상태 검사 상태를 나열합니다. </td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+<tr>
+<td>클러스터에 웹훅을 작성합니다.</td>
+<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWebhooks)</code></td>
 </tr>
 </tbody>
 </table>
@@ -486,112 +452,107 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 {: shortdesc}
 
 <table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 운영자 플랫폼 역할이 필요한 클러스터 관리 CLI 명령 및 API 호출 개요</caption>
+<caption>{{site.data.keyword.containerlong_notm}}에서 운영자 플랫폼 역할이 필요한 CLI 명령 및 API 호출의 개요</caption>
 <thead>
-<th id="operator-mgmt">클러스터 관리 조치</th>
+<th id="operator-mgmt">조치</th>
 <th id="operator-cli">CLI 명령</th>
 <th id="operator-api">API 호출</th>
 </thead>
 <tbody>
 <tr>
 <td>Kubernetes 마스터를 새로 고칩니다.</td>
-<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh)(cluster-refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>클러스터의 {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID를 작성하고 {{site.data.keyword.registrylong_notm}}에서 **독자** 서비스 액세스 역할을 지정하는 서비스 ID에 대해 정책을 작성한 다음 서비스 ID의 API 키를 작성합니다.</td>
-<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
+<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>새 Kubernetes API 구성 변경사항을 적용하기 위해 클러스터 마스터 노드를 다시 시작합니다.</td>
-<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
-</tr>
-<tr>
 <td>클러스터에 서브넷을 추가합니다.</td>
-<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterSubnet)</code></td>
 </tr>
 <tr>
-<td>서브넷을 작성합니다.</td>
-<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
+<td>서브넷을 작성하여 클러스터에 추가합니다. </td>
+<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>클러스터를 업데이트합니다.</td>
-<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateCluster)</code></td>
 </tr>
 <tr>
 <td>클러스터에 사용자 관리 서브넷을 추가합니다.</td>
-<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>클러스터에서 사용자 관리 서브넷을 제거합니다.</td>
-<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>작업자 노드를 추가합니다.</td>
-<td><code>[ibmcloud ks worker-add(더 이상 사용되지 않음)](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWorkers)</code></td>
+<td><code>[ibmcloud ks worker-add(더 이상 사용되지 않음)](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWorkers)</code></td>
 </tr>
 <tr>
 <td>작업자 풀을 작성하십시오.</td>
-<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateWorkerPool)</code></td>
 </tr>
 <tr>
 <td>작업자 풀을 리밸런싱합니다.</td>
-<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>작업자 풀의 크기를 조정합니다.</td>
-<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>작업자 풀을 삭제합니다.</td>
-<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPool)</code></td>
 </tr>
 <tr>
 <td>작업자 노드를 다시 부팅합니다.</td>
-<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>작업자 노드를 다시 로드합니다.</td>
-<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>작업자 노드를 제거합니다.</td>
-<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterWorker)</code></td>
 </tr>
 <tr>
 <td>작업자 노드를 업데이트합니다.</td>
-<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
-<td>작업자 풀에 구역을 추가합니다.</td>
-<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cs_cli_reference#cs_zone_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZone)</code></td>
+<td>작업자 풀에 구역을 추가합니다. </td>
+<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZone)</code></td>
 </tr>
 <tr>
 <td>작업자 풀의 특정 구역에 대한 네트워크 구성을 업데이트합니다.</td>
-<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZoneNetwork)</code></td>
+<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZoneNetwork)</code></td>
 </tr>
 <tr>
 <td>작업자 풀에서 구역을 제거합니다.</td>
-<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cs_cli_reference#cs_zone_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPoolZone)</code></td>
+<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPoolZone)</code></td>
 </tr>
 </tbody>
 </table>
@@ -603,139 +564,117 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 {: shortdesc}
 
 <table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 관리자 플랫폼 역할이 필요한 클러스터 관리 CLI 명령 및 API 호출 개요</caption>
+<caption>{{site.data.keyword.containerlong_notm}}에서 관리자 플랫폼 역할이 필요한 CLI 명령 및 API 호출의 개요</caption>
 <thead>
-<th id="admin-mgmt">클러스터 관리 조치</th>
+<th id="admin-mgmt">조치</th>
 <th id="admin-cli">CLI 명령</th>
 <th id="admin-api">API 호출</th>
 </thead>
 <tbody>
 <tr>
+<td>베타: {{site.data.keyword.cloudcerts_long_notm}} 인스턴스의 인증서를 ALB에 배치하거나 업데이트합니다. </td>
+<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) 또는 [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+</tr>
+<tr>
+<td>베타: 클러스터의 ALB 시크릿에 대한 세부사항을 봅니다. </td>
+<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>베타: 클러스터에서 ALB 시크릿을 제거합니다. </td>
+<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>클러스터의 모든 ALB 시크릿을 나열합니다.</td>
+<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs)</code></td>
+<td>-</td>
+</tr>
+<tr>
 <td>연결된 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 {{site.data.keyword.Bluemix_notm}} 계정의 API 키를 설정합니다.</td>
-<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)</code></td>
-<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</code></td>
+<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
+<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
 <tr>
 <td>클러스터에서 관리 추가 기능(예: Istio 또는 Knative)을 사용 안함으로 설정합니다.</td>
-<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
 <td>클러스터에서 관리 추가 기능(예: Istio 또는 Knative)을 사용으로 설정합니다.</td>
-<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
-<td>클러스터에서 사용으로 설정된 관리 추가 기능(예: Istio 또는 Knative)을 나열합니다.</td>
-<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</code></td>
+<td>클러스터에서 사용으로 설정된 관리 추가 기능(예: Istio 또는 Knative)을 나열합니다. </td>
+<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons)</code></td>
 </tr>
 <tr>
 <td>무료 또는 표준 클러스터를 작성합니다. **참고**: 또한 {{site.data.keyword.registrylong_notm}} 및 수퍼유저 인프라 역할에 대한 관리자 플랫폼 역할도 필요합니다.</td>
-<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)</code></td>
-<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)</code></td>
+<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateCluster)</code></td>
 </tr>
 <tr>
 <td>클러스터에 지정된 기능을 사용 안함으로 설정합니다(예: 클러스터 마스터의 공용 서비스 엔드포인트).</td>
-<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>클러스터에 지정된 기능을 사용으로 설정합니다(예: 클러스터 마스터의 개인 서비스 엔드포인트).</td>
-<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>클러스터를 삭제합니다.</td>
-<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveCluster)</code></td>
+<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} 계정이 다른 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 인프라 인증 정보를 설정합니다.</td>
-<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)</code></td>
-<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/StoreUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
+<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} 계정이 다른 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위한 인프라 인증 정보를 제거합니다.</td>
-<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)</code></td>
-<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
+<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
 <tr>
-<td>{{site.data.keyword.keymanagementservicefull}}를 사용하여 Kubernetes 시크릿을 암호화합니다.</td>
-<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateKMSConfig)</code></td>
+<td>베타: {{site.data.keyword.keymanagementservicefull}}를 사용하여 Kubernetes 시크릿을 암호화합니다. </td>
+<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateKMSConfig)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 관리자 플랫폼 역할이 필요한 Ingress CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="admin-ingress">Ingress 조치</th>
-<th id="admin-cli2">CLI 명령</th>
-<th id="admin-api2">API 호출</th>
-</thead>
-<tbody>
-<tr>
-<td>{{site.data.keyword.cloudcerts_long_notm}} 인스턴스의 인증서를 ALB에 배치하거나 업데이트합니다.</td>
-<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/CreateALBSecret) 또는 [PUT /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBSecret)</code></td>
-</tr>
-<tr>
-<td>클러스터의 ALB 시크릿에 대한 세부사항을 봅니다.</td>
-<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>클러스터에서 ALB 시크릿을 제거합니다.</td>
-<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>클러스터의 모든 ALB 시크릿을 나열합니다.</td>
-<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cs_cli_reference#cs_alb_certs)</code></td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>{{site.data.keyword.containerlong_notm}}에서 관리자 플랫폼 역할이 필요한 로깅 CLI 명령 및 API 호출 개요</caption>
-<thead>
-<th id="admin-log">로깅 조치</th>
-<th id="admin-cli3">CLI 명령</th>
-<th id="admin-api3">API 호출</th>
-</thead>
-<tbody>
 <tr>
 <td>Fluentd 클러스터 추가 기능에 대한 자동 업데이트를 사용 안함으로 설정합니다.</td>
-<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Fluentd 클러스터 추가 기능에 대한 자동 업데이트를 사용으로 설정합니다.</td>
-<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_enable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_enable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cos_full_notm}} 버킷의 API 서버 로그 스냅샷을 수집합니다.</td>
-<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect)</code></td>
+<td>[POST /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/CreateMasterLogCollection)</td>
 </tr>
 <tr>
 <td>API 서버 로그 스냅샷 요청의 상태를 확인합니다.</td>
-<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status)</code></td>
+<td>[GET /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/GetMasterLogCollectionStatus)</td>
 </tr>
 <tr>
 <td><code>kube-audit</code> 로그 소스에 대한 로그 전달 구성을 작성합니다.</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td><code>kube-audit</code> 로그 소스에 대한 로그 전달 구성을 삭제합니다.</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 </tbody>
 </table>
@@ -749,10 +688,10 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 {{site.data.keyword.Bluemix_notm}} IAM 서비스 액세스 역할이 지정된 모든 사용자에게는 특정 네임스페이스의 해당 Kubernetes 역할 기반 액세스 제어(RBAC) 역할도 자동으로 지정됩니다. 서비스 액세스 역할에 대해 자세히 알아보려면 [{{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)을 참조하십시오. 서비스 역할과 동일한 시간에 {{site.data.keyword.Bluemix_notm}} IAM platform 역할을 지정하지 마십시오. 플랫폼 및 서비스 역할을 별도로 지정해야 합니다.
 {: shortdesc}
 
-각 서비스 역할이 RBAC를 통해 부여한 Kubernetes 조치를 찾으십니까? [RBAC 역할별 Kubernetes 리소스 권한](#rbac_ref)을 참조하십시오. RBAC 역할에 대해 자세히 알아보려면 [RBAC 권한 지정](/docs/containers?topic=containers-users#role-binding)을 참조하십시오.
+각 서비스 역할이 RBAC를 통해 부여한 Kubernetes 조치를 찾으십니까? [RBAC 역할별 Kubernetes 리소스 권한](#rbac_ref)을 참조하십시오. RBAC 역할에 대해 자세히 알아보려면 [RBAC 권한 지정](/docs/containers?topic=containers-users#role-binding) 및 [클러스터 역할을 집계하여 기존 권한 확장](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)을 참조하십시오.
 {: tip}
 
-다음 표는 각 서비스 역할 및 해당 RBAC 역할별로 부여된 Kubernetes 리소스 권한을 보여줍니다.
+다음 표는 각 서비스 역할 및 해당 RBAC 역할에 따라 부여되는 Kubernetes 리소스 권한을 보여줍니다. 
 
 <table>
 <caption>서비스 및 해당 RBAC 역할별 Kubernetes 리소스 권한</caption>
@@ -1078,7 +1017,7 @@ CLI 명령을 실행하거나 다음 표의 조치에 해당하는 API를 호출
 Cloud Foundry 역할은 계정 내 조직 및 영역에 대한 액세스 권한을 부여합니다. {{site.data.keyword.Bluemix_notm}}에 있는 Cloud Foundry 기반 서비스의 목록을 보려면 `ibmcloud service list`를 실행하십시오. 보다 자세히 알아보려면 {{site.data.keyword.Bluemix_notm}} IAM 문서에서 사용 가능한 모든 [조직 및 영역 역할](/docs/iam?topic=iam-cfaccess) 또는 [Cloud Foundry 액세스 권한 관리](/docs/iam?topic=iam-mngcf) 단계를 참조하십시오.
 {: shortdesc}
 
-다음 표에는 클러스터 조치 권한에 필요한 Cloud Foundry 역할이 표시되어 있습니다.
+다음 표는 클러스터 조치 권한에 필요한 Cloud Foundry 역할을 보여줍니다. 
 
 <table>
   <caption>Cloud Foundry 역할별 클러스터 관리 권한</caption>
@@ -1105,42 +1044,91 @@ Cloud Foundry 역할은 계정 내 조직 및 영역에 대한 액세스 권한�
 ## 인프라 역할
 {: #infra}
 
-**수퍼유저** 인프라 액세스 역할이 있는 사용자가 [지역 및 리소스 그룹의 API를 설정](/docs/containers?topic=containers-users#api_key)하는 경우, 계정의 기타 사용자에 대한 인프라 권한은 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할에 의해 설정됩니다. 사용자가 다른 사용자의 IBM Cloud 인프라(SoftLayer) 권한을 편집할 필요는 없습니다. API 키를 설정하는 사용자에게 **수퍼유저**를 지정할 수 없는 경우에만 다음 표를 사용하여 사용자의 IBM Cloud 인프라(SoftLayer) 권한을 사용자 정의하십시오. 자세한 정보는 [인프라 권한 사용자 정의](/docs/containers?topic=containers-users#infra_access)를 참조하십시오.
+**수퍼유저** 인프라 액세스 역할이 있는 사용자는 해당 인프라 조치를 수행할 수 있도록 [지역 및 리소스 그룹에 대한 API 키를 설정](/docs/containers?topic=containers-users#api_key)(더 드물게는 [다른 계정 인증 정보를 수동으로 설정](/docs/containers?topic=containers-users#credentials))합니다. 그 후에는 계정에 있는 다른 사용자가 수행할 수 있는 인프라 조치가 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할을 통해 권한 부여됩니다. 사용자가 다른 사용자의 IBM Cloud 인프라(SoftLayer) 권한을 편집할 필요는 없습니다. API 키를 설정하는 사용자에게 **수퍼유저**를 지정할 수 없는 경우에만 다음 표를 사용하여 사용자의 IBM Cloud 인프라(SoftLayer) 권한을 사용자 정의하십시오. 권한 지정에 대한 지시사항은 [인프라 권한 사용자 정의](/docs/containers?topic=containers-users#infra_access)를 참조하십시오.
 {: shortdesc}
 
-다음 표는 일반적인 태스크 그룹을 완료하는 데 필요한 인프라 권한을 보여줍니다.
+
+
+다음 표는 일반적인 태스크 그룹을 완료하는 데 필요한 인프라 권한을 보여줍니다. 
 
 <table>
- <caption>{{site.data.keyword.containerlong_notm}}에 공통으로 필요한 인프라 권한</caption>
- <thead>
+<caption>{{site.data.keyword.containerlong_notm}}에 공통으로 필요한 인프라 권한</caption>
+<thead>
   <th>{{site.data.keyword.containerlong_notm}}의 공통 태스크</th>
   <th>카테고리에서 필요한 인프라 권한</th>
- </thead>
- <tbody>
-   <tr>
-     <td><strong>최소 권한</strong>: <ul><li>클러스터 작성.</li></ul></td>
-     <td><strong>디바이스</strong>:<ul><li>Virtual Server 세부사항 보기</li><li>서버 다시 부팅 및 IPMI 시스템 정보 보기</li><li>OS 다시 로드 실행 및 복구 커널 시작</li></ul><strong>계정</strong>: <ul><li>서버 추가</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>클러스터 관리</strong>: <ul><li>클러스터 작성, 업데이트 및 삭제</li><li>작업자 노드 추가, 다시 로드 및 다시 부팅</li><li>VLAN 보기</li><li>서브넷 작성</li><li>팟(Pod) 및 로드 밸런서 서비스 배치</li></ul></td>
-     <td><strong>지원</strong>:<ul><li>티켓 보기</li><li>티켓 추가</li><li>티켓 편집</li></ul>
-     <strong>디바이스</strong>:<ul><li>하드웨어 세부사항 보기</li><li>Virtual Server 세부사항 보기</li><li>서버 다시 부팅 및 IPMI 시스템 정보 보기</li><li>OS 다시 로드 실행 및 복구 커널 시작</li></ul>
-     <strong>네트워크</strong>:<ul><li>공용 네트워크 포트로 컴퓨팅 추가</li></ul>
-     <strong>계정</strong>:<ul><li>서버 취소</li><li>서버 추가</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>스토리지</strong>: <ul><li>지속적 볼륨 클레임을 작성하여 지속적 볼륨 프로비저닝</li><li>스토리지 인프라 리소스 작성 및 관리</li></ul></td>
-     <td><strong>서비스</strong>:<ul><li>스토리지 관리</li></ul><strong>계정</strong>:<ul><li>스토리지 추가</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>사설 네트워크</strong>: <ul><li>클러스터 내부 네트워킹을 위한 사설 VLAN 관리</li><li>VPN 연결을 사설 네트워크에 설정</li></ul></td>
-     <td><strong>네트워크</strong>:<ul><li>네트워크 서브넷 라우트 관리</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>사설 네트워킹</strong>:<ul><li>공용 로드 밸런서 또는 Ingress 네트워킹을 설정하여 앱 노출</li></ul></td>
-     <td><strong>디바이스</strong>:<ul><li>호스트 이름/도메인 편집</li><li>포트 제어 관리</li></ul>
-     <strong>네트워크</strong>:<ul><li>공용 네트워크 포트로 컴퓨팅 추가</li><li>네트워크 서브넷 라우트 관리</li><li>IP 주소 추가</li></ul>
-     <strong>서비스</strong>:<ul><li>DNS, 리버스 DNS 및 WHOIS 관리</li><li>인증서(SSL) 보기</li><li>인증서(SSL) 관리</li></ul></td>
-   </tr>
- </tbody>
+</thead>
+<tbody>
+<tr>
+<td>
+  <strong>최소 권한</strong>: <ul>
+  <li>클러스터 작성</li></ul></td>
+<td>
+<strong>계정</strong>: <ul>
+<li>서버 추가</li></ul>
+  <strong>디바이스</strong>:<ul>
+  <li>베어메탈 작업자 노드의 경우: 하드웨어 세부사항 보기</li>
+  <li>IPMI 원격 관리</li>
+  <li>OS 다시 로드 및 복구 커널</li>
+  <li>VM 작업자 노드의 경우: 가상 서버 세부사항 보기</li></ul></td>
+</tr>
+<tr>
+<td>
+<strong>클러스터 관리</strong>:<ul>
+  <li>클러스터 작성, 업데이트 및 삭제</li>
+  <li>작업자 노드 추가, 다시 로드 및 다시 부팅</li>
+  <li>VLAN 보기</li>
+  <li>서브넷 작성</li>
+  <li>팟(Pod) 및 로드 밸런서 서비스 배치</li></ul>
+  </td><td>
+<strong>계정</strong>:<ul>
+  <li>서버 추가</li>
+  <li>서버 취소</li></ul>
+<strong>디바이스</strong>:<ul>
+  <li>베어메탈 작업자 노드의 경우: 하드웨어 세부사항 보기</li>
+  <li>IPMI 원격 관리</li>
+  <li>OS 다시 로드 및 복구 커널</li>
+  <li>VM 작업자 노드의 경우: 가상 서버 세부사항 보기</li></ul>
+<strong>네트워크</strong>:<ul>
+  <li>공용 네트워크 포트로 컴퓨팅 추가</li></ul>
+<p class="important">사용자에게 지원 케이스를 관리할 수 있는 기능 또한 지정해야 합니다. [인프라 권한 사용자 정의](/docs/containers?topic=containers-users#infra_access)의 8단계를 참조하십시오. </p>
+</td>
+</tr>
+<tr>
+<td>
+  <strong>스토리지</strong>: <ul>
+  <li>지속적 볼륨 클레임을 작성하여 지속적 볼륨 프로비저닝</li>
+  <li>스토리지 인프라 리소스 작성 및 관리</li></ul></td>
+<td>
+<strong>계정</strong>:<ul>
+  <li>스토리지(StorageLayer) 추가/업그레이드</li></ul>
+<strong>서비스</strong>:<ul>
+  <li>스토리지 관리</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>사설 네트워크</strong>: <ul>
+  <li>클러스터 내부 네트워킹을 위한 사설 VLAN 관리</li>
+  <li>VPN 연결을 사설 네트워크에 설정</li></ul></td>
+<td>
+  <strong>네트워크</strong>:<ul>
+  <li>네트워크 서브넷 라우트 관리</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>사설 네트워킹</strong>:<ul>
+  <li>공용 로드 밸런서 또는 Ingress 네트워킹을 설정하여 앱 노출</li></ul></td>
+<td>
+<strong>디바이스</strong>:<ul>
+<li>포트 제어 관리</li>
+  <li>호스트 이름/도메인 편집</li></ul>
+<strong>네트워크</strong>:<ul>
+  <li>IP 주소 추가</li>
+  <li>네트워크 서브넷 라우트 관리</li>
+  <li>공용 네트워크 포트로 컴퓨팅 추가</li></ul>
+<strong>서비스</strong>:<ul>
+  <li>DNS 관리</li>
+  <li>인증서(SSL) 보기</li>
+  <li>인증서(SSL) 관리</li></ul></td>
+</tr>
+</tbody>
 </table>

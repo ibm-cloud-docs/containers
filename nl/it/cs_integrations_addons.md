@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # Aggiunta di servizi tramite componenti aggiuntivi gestiti
 {: #managed-addons}
@@ -42,12 +43,12 @@ Se hai installato il [controller di ammissione Container image security enforcer
 ## Aggiunta di componenti aggiuntivi gestiti
 {: #adding-managed-add-ons}
 
-Per abilitare un componente aggiuntivo gestito nel tuo cluster, utilizza il[comando `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable). Quando abiliti il componente aggiuntivo gestito, viene automaticamente installata nel tuo cluster una versione supportata dello strumento, comprendente tutte le risorse Kubernetes. Fai riferimento alla documentazione di ciascun componente aggiuntivo gestito per trovare i prerequisiti che il tuo cluster deve soddisfare per installarlo.
+Per abilitare un componente aggiuntivo gestito nel tuo cluster, utilizza il [comando `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Quando abiliti il componente aggiuntivo gestito, viene automaticamente installata nel tuo cluster una versione supportata dello strumento, comprendente tutte le risorse Kubernetes. Fai riferimento alla documentazione di ciascun componente aggiuntivo gestito per trovare i prerequisiti che il tuo cluster deve soddisfare per installarlo.
 
 Per ulteriori informazioni sui prerequisiti per ciascun componente aggiuntivo, vedi:
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## Aggiornamento di componenti aggiuntivi gestiti
 {: #updating-managed-add-ons}
@@ -57,7 +58,7 @@ Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.d
 
 1. Controlla se i tuoi componenti aggiuntivi sono aggiornati all'ultima versione. È possibile aggiornare qualsiasi componente aggiuntivo contrassegnato con `* (<version> più recente)`.
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,13 +66,12 @@ Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.d
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
 2. Salva qualsiasi risorsa, quale i file di configurazione di un qualsiasi servizio o applicazione, che hai creato o modificato nello spazio dei nomi generato dal componente aggiuntivo. Ad esempio, il componente aggiuntivo Istio utilizza `istio-system` e il componente aggiuntivo Knative utilizza `knative-serving`, `knative-monitoring`, `knative-eventing` e `knative-build`.
-
    Comando di esempio:
    ```
    kubectl get pod <pod_name> -o yaml -n istio-system
@@ -80,15 +80,14 @@ Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.d
 
 3. Salva le risorse Kubernetes generate automaticamente nello spazio dei nomi del componente aggiuntivo gestito in un file YAML sulla tua macchina locale. Queste risorse vengono generate attraverso definizioni di risorse personalizzate.
    1. Ottieni le definizioni di risorse personalizzate per il tuo componente aggiuntivo dallo spazio dei nomi utilizzato da tale componente. Ad esempio, per il componente aggiuntivo Istio, ottieni le definizioni di risorse personalizzate dallo spazio dei nomi `istio-system`.
-
-```
+      ```
       kubectl get crd -n istio-system
       ```
       {: pre}
 
    2. Salva le risorse create da queste definizioni di risorse personalizzate.
 
-4. Facoltativo per Knative: se hai modificato una qualsiasi delle seguenti risorse, prendi il file YAML e salvalo nella tua macchina locale. Nota che se modifichi una qualsiasi di queste risorse, ma desideri invece utilizzare i valori predefiniti installati, puoi eliminare la risorsa. Dopo alcuni minuti, la risorsa viene ricreata con i valori predefiniti installati.
+4. Facoltativo per Knative: se hai modificato una qualsiasi delle seguenti risorse, prendi il file YAML e salvalo nella tua macchina locale. Se hai modificato una qualsiasi di queste risorse, ma desideri invece utilizzare i valori predefiniti installati, puoi eliminare la risorsa. Dopo alcuni minuti, la risorsa viene ricreata con i valori predefiniti installati.
   <table summary="Tabella di risorse Knative">
   <caption>Risorse Knative</caption>
   <thead><tr><th>Nome della risorsa</th><th>Tipo di risorsa</th><th>Spazio dei nomi</th></tr></thead>
@@ -138,8 +137,7 @@ Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.d
      {: pre}
    * Ad esempio, se aggiorni il componente aggiuntivo `knative`, potresti verificare che gli spazi dei nomi `knative-serving`,
 `knative-monitoring`, `knative-eventing`, `knative-build` e `istio-system` siano stati
-eliminati.
-     Lo **STATUS** degli spazi dei nomi potrebbe essere `Terminating` per alcuni minuti prima che vengano completamente eliminati.
+eliminati. Lo **STATUS** degli spazi dei nomi potrebbe essere `Terminating` per alcuni minuti prima che vengano eliminati.
      ```
      kubectl get namespaces -w
      ```
@@ -158,13 +156,13 @@ eliminati.
    {: pre}
 
 10. Applica le risorse delle definizioni di risorse personalizzate che hai salvato nel passo 2.
-```
+    ```
     kubectl apply -f <file_name> -n <namespace>
     ```
     {: pre}
 
 11. Facoltativo per Knative: se hai salvato una qualsiasi delle risorse nel passo 3, riapplicale.
-Comando di esempio:
+    Comando di esempio:
     ```
     kubectl apply -f config-autoscaler.yaml -n knative-serving
     ```
@@ -182,3 +180,10 @@ Comando di esempio:
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. Facoltativo per Istio: se utilizzi le sezioni TLS nei tuoi file di configurazione del gateway, devi eliminare e ricreare i gateway in modo che Envoy possa accedere ai segreti.
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

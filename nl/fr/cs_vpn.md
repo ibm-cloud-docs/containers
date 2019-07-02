@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Configuration de la connectivité VPN
@@ -33,6 +33,8 @@ La connectivité VPN vous permet de connecter de manière sécurisée les applic
 Pour connecter vos noeuds worker et vos applications à un centre de données sur site, vous pouvez configurer l'une des options suivantes.
 
 - **Service VPN IPSec strongSwan** : vous pouvez définir un [service VPN IPSec strongSwan ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.strongswan.org/about.html) connectant de manière sécurisée votre cluster Kubernetes avec un réseau sur site. Le service VPN IPSec strongSwan fournit un canal de communication de bout en bout sécurisé sur Internet, basé sur l'ensemble de protocoles IPSec (Internet Protocol Security) aux normes de l'industrie. Pour configurer une connexion sécurisée entre votre cluster et un réseau sur site, [configurez et déployez le service VPN IPSec strongSwan](#vpn-setup) directement dans un pod de votre cluster.
+
+- **{{site.data.keyword.BluDirectLink}}** : [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) vous permet de créer une connexion privée directe entre vos environnements de réseau distants et {{site.data.keyword.containerlong_notm}} sans routage sur l'Internet public. Les offres {{site.data.keyword.Bluemix_notm}} Direct Link sont utiles lorsque vous devez implémenter des charges de travail hybrides, des charges de travail inter-fournisseur, des transferts de données volumineux ou fréquents ou des charges de travail privées. Pour choisir une offre {{site.data.keyword.Bluemix_notm}} Direct Link et configurer une connexion {{site.data.keyword.Bluemix_notm}} Direct Link, voir [Initiation à IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) dans la documentation {{site.data.keyword.Bluemix_notm}} Direct Link. 
 
 - **Dispositif de routeur virtuel (VRA) ou dispositif de sécurité Fortigate (FSA)** : vous pouvez choisir de configurer un dispositif [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) pour configurer un point de terminaison VPN IPSec. Cette option est pratique si vous disposez d'un cluster plus important, si vous souhaitez accéder à plusieurs clusters via un seul réseau privé virtuel (VPN) ou si vous avez besoin d'un VPN à base de routes. Pour configurer un dispositif de routeur virtuel (VRA), voir la rubrique sur la [configuration d'une connectivité VPN avec un dispositif VRA](#vyatta).
 
@@ -69,6 +71,9 @@ Avant d'utiliser une charte Helm strongSwan, consultez les remarques et limitati
 * La charte Helm strongSwan s'exécute sous forme de pod Kubernetes à l'intérieur du cluster. Les performances du VPN sont affectées par l'utilisation de la mémoire et du réseau de Kubernetes et des autres pods qui s'exécutent dans le cluster. Si vous disposez d'un environnement exigeant en termes de performances, envisagez l'utilisation d'une solution VPN qui s'exécute en dehors du cluster sur du matériel dédié.
 * La charte Helm strongSwan exécute un seul pod VPN comme terminaison de tunnel IPSec. En cas de défaillance du pod, le cluster redémarre un pod. Cependant, vous risquez de faire face à une courte période d'indisponibilité lors du redémarrage du nouveau pod et du rétablissement de la connexion VPN. Si vous nécessitez une reprise sur incident plus rapide ou une solution à haute disponibilité plus élaborée, envisagez l'utilisation d'une solution VPN qui s'exécute en dehors du cluster sur du matériel dédié.
 * La charte Helm strongSwan ne fournit pas de métriques ou de surveillance du trafic réseau circulant via la connexion VPN. Pour obtenir la liste des outils de surveillance pris en charge, voir [Services de consignation et de surveillance](/docs/containers?topic=containers-supported_integrations#health_services).
+
+Votre cluster peut utiliser le service VPN strongSwan pour se connecter à votre maître Kubernetes via le noeud final de service privé. Toutefois, la communication avec le maître Kubernetes via le noeud final de service privé doit passer par la plage d'adresses IP <code>166.X.X.X</code>, qui n'est pas routable à partir d'une connexion VPN. Vous pouvez exposer le noeud final de service privé du maître pour vos utilisateurs de cluster en [utilisant un équilibreur de charge de réseau (NLB) privé](/docs/containers?topic=containers-clusters#access_on_prem). Le NLB privé expose le noeud final de service privé du maître en tant qu'adresse IP de cluster `172.21.x.x` interne à laquelle le pod VPN strongSwan peut accéder. Si vous activez uniquement le noeud final de service privé, vous pouvez utiliser le tableau de bord Kubernetes ou activer temporairement le noeud final de service public pour créer le NLB privé.
+{: tip}
 
 <br />
 
@@ -147,8 +152,8 @@ Après avoir déployé chaque charte Helm, chaque déploiement de VPN strongSwan
       - `zoneSpecificRoutes` : défini sur `true`. Ce paramètre limite la connexion VPN à une zone unique dans le cluster. Les pods d'une zone spécifique utilisent uniquement la connexion VPN configurée pour cette zone spécifique. Cette solution réduit le nombre de pods strongSwan nécessaires pour prendre en charge plusieurs VPN dans un cluster à zones multiples, améliore les performances du VPN car le trafic du VPN passe uniquement par les noeuds worker situés dans la zone actuelle et garantit que la connectivité VPN pour chaque zone n'est pas impactée par la connectivité VPN, les pods en panne ou l'indisponibilité de zone dans les autres zones. Notez que vous n'avez pas besoin de configurer le paramètre `remoteSubnetNAT`. Plusieurs VPN qui utilisent le paramètre `zoneSpecificRoutes` peuvent avoir le même paramètre `remote.subnet` car le routage est configuré par zone.
       - `enableSingleSourceIP` : définissez ce paramètre sur `true` et le paramètre `local.subnet` sur une adresse IP /32 unique. Cette combinaison de paramètres masque toutes les adresses IP privées du cluster derrière une seule adresse IP /32. Cette adresse IP /32 unique permet au réseau sur site à distance de renvoyer des réponses via la connexion VPN adéquate au pod approprié dans le cluster ayant initié la demande. Notez que l'adresse IP /32 unique configurée pour l'option `local.subnet` doit être unique dans chaque configuration de VPN strongSwan.
     * Si des applications dans le réseau sur site à distance doivent accéder aux services dans le cluster :    
-      - `localSubnetNAT` : vérifiez qu'une application dans le réseau distant sur site peut sélectionner une connexion VPN spécifique pour l'envoi et la réception de trafic dans le cluster. Dans chaque configuration Helm strongSwan, utilisez le paramètre `localSubnetNAT` pour identifier de manière unique les ressources de cluster accessibles à l'application sur site distante. Etant donné que plusieurs VPN sont établis à partir du réseau sur site distant dans le cluster, vous devez ajouter une logique à l'application sur le réseau sur site pour qu'elle puisse sélectionner le VPN à utiliser lorsqu'elle accède aux services dans le cluster. Notez que les services du cluster sont accessibles via plusieurs sous-réseaux distincts en fonction de ce que vous avez configuré pour le paramètre `localSubetNAT` dans chaque configuration de VPN strongSwan.
-      - `remoteSubnetNAT`: vérifiez qu'un pod de votre cluster utilise la même connexion VPN pour renvoyer le trafic au réseau distant. Dans chaque fichier de déploiement strongSwan, mappez le sous-réseau sur site distant à un sous-réseau unique en utilisant le paramètre `remoteSubetNAT`. Le trafic reçu par un pod dans le cluster à partir du paramètre `remoteSubetNAT` spécifique à un VPN est renvoyé à ce même paramètre `remoteSubnetNAT`, puis via cette même connexion VPN.
+      - `localSubnetNAT` : vérifiez qu'une application dans le réseau distant sur site peut sélectionner une connexion VPN spécifique pour l'envoi et la réception de trafic dans le cluster. Dans chaque configuration Helm strongSwan, utilisez le paramètre `localSubnetNAT` pour identifier de manière unique les ressources de cluster accessibles à l'application sur site distante. Etant donné que plusieurs VPN sont établis à partir du réseau sur site distant dans le cluster, vous devez ajouter une logique à l'application sur le réseau sur site pour qu'elle puisse sélectionner le VPN à utiliser lorsqu'elle accède aux services dans le cluster. Notez que les services du cluster sont accessibles via plusieurs sous-réseaux distincts en fonction de ce que vous avez configuré pour le paramètre `localSubnetNAT` dans chaque configuration de VPN strongSwan.
+      - `remoteSubnetNAT`: vérifiez qu'un pod de votre cluster utilise la même connexion VPN pour renvoyer le trafic au réseau distant. Dans chaque fichier de déploiement strongSwan, mappez le sous-réseau sur site distant à un sous-réseau unique en utilisant le paramètre `remoteSubnetNAT`. Le trafic reçu par un pod dans le cluster à partir du paramètre `remoteSubnetNAT` spécifique à un VPN est renvoyé à ce même paramètre `remoteSubnetNAT`, puis via cette même connexion VPN.
 
 3. Configurez le logiciel du point de terminaison VPN distant pour établir une connexion VPN distincte à l'adresse IP de l'équilibreur de charge dans chaque zone.
 
@@ -162,9 +167,9 @@ Avant d'installer la charte Helm strongSwan, vous devez déterminer la configura
 {: shortdesc}
 
 Avant de commencer :
-* [Installez une passerelle VPN IPsec dans votre centre de données sur site](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
+* Installez une passerelle VPN IPSec dans votre centre de données sur site. 
 * Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`.
-* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Remarque** : toutes les configurations de strongSwan sont admises dans les clusters standard. Si vous utilisez un cluster gratuit, vous ne pouvez choisir qu'une connexion VPN sortante de l'[étape 3](#strongswan_3). Les connexions VPN entrantes nécessitent un équilibreur de charge dans le cluster, et les équilibreurs de charge ne sont pas disponibles pour les clusters gratuits.
 
 ### Etape 1 : Obtenez la charte Helm strongSwan
@@ -173,7 +178,7 @@ Avant de commencer :
 Installez Helm et récupérez la charge Helm strongSwan pour afficher les configurations possibles.
 {: shortdesc}
 
-1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez le référentiel Helm {{site.data.keyword.Bluemix_notm}}. Notez que la version Helm 2.8 ou ultérieure est requise. 
+1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez le référentiel Helm {{site.data.keyword.Bluemix_notm}}. Notez que la version Helm 2.8 ou ultérieure est requise.
 
 2.  Vérifiez que Tiller est installé avec un compte de service.
 
@@ -400,7 +405,7 @@ Après avoir déployé la charte Helm, testez la connectivité VPN.
         1. Exécutez la commande `helm delete --purge <release_name>`
         2. Corrigez les valeurs incorrectes dans le fichier de configuration.
         3. Exécutez `helm install -f config.yaml --name=<release_name> ibm/strongswan`
-      Vous pouvez également exécuter des vérifications supplémentaires à l'étape suivante. 
+      Vous pouvez également exécuter des vérifications supplémentaires à l'étape suivante.
 
     * Si le pod VPN est à l'état d'erreur (`ERROR`) ou continue à planter et à redémarrer, cela peut être dû à une validation de paramètres dans la section `ipsec.conf` du fichier configmap de la charte.
         1. Recherchez les erreurs de validation éventuelles dans les journaux du pod strongSwan en exécutant la commande `kubectl logs $STRONGSWAN_POD`.
@@ -653,9 +658,6 @@ Pour mettre à niveau votre charte Helm strongSwan à la version la plus récent
   ```
   {: pre}
 
-La charte Helm strongSwan 2.0.0 n'est pas compatible avec Calico v3 ou Kubernetes 1.10. Avant de [mettre à jour à la version 1.10](/docs/containers?topic=containers-cs_versions#cs_v110), effectuez d'abord la mise à jour de strongSwan avec la charte Helm version 2.2.0 ou ultérieure, compatible en amont avec Calico 2.6 et Kubernetes 1.9. Supprimez ensuite votre charte Helm strongSwan. Après la mise à jour, vous pouvez réinstaller la charte.
-{:tip}
-
 ## Désactivation du service VPN IPsec strongSwan
 {: vpn_disable}
 
@@ -692,11 +694,11 @@ Tout le trafic réseau public et privé qui entre ou sort des VLAN du cluster es
 
 Pour configurer un dispositif de routeur virtuel (VRA) :
 
-1. [Commandez un dispositif VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance).
+1. [Commandez un dispositif VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started).
 
 2. [Configurez le VLAN privé sur le dispositif VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans).
 
 3. Pour activer une connexion VPN en utilisant le dispositif VRA, [configurez VRRP sur le dispositif VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-Si vous avez un dispositif de routage et que vous ajoutez un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Si vous avez un dispositif de routage et que vous ajoutez un cluster, les nouveaux sous-réseaux portables commandés pour le cluster ne sont pas configurés sur ce dispositif. Pour utiliser les services de réseau, vous devez activer le routage entre les sous-réseaux sur le même VLAN en [activant la fonction Spanning VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 {: important}

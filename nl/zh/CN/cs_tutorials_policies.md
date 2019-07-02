@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 教程：使用 Calico 网络策略阻止流量
@@ -69,7 +70,7 @@ subcollection: containers
 第一课说明如何从多个 IP 地址和端口公开应用程序，以及公共流量进入集群的位置。
 {: shortdesc}
 
-首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并允许您测试对公关公司集群的访问。然后，通过创建网络负载均衡器 (NLB) 1.0 服务来公开应用程序。NLB 1.0 服务通过 NLB 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
+首先，部署要在整个教程中使用的样本 Web 服务器应用程序。`echoserver` Web 服务器显示有关从客户机与集群建立的连接的数据，并且您可以测试对公关公司集群的访问。然后，通过创建网络负载均衡器 (NLB) 1.0 服务来公开应用程序。NLB 1.0 服务通过 NLB 服务 IP 地址和工作程序节点的节点端口使应用程序可用。
 
 要使用 Ingress 应用程序负载均衡器 (ALB) 吗？请不要在步骤 3 和 4 中创建 NLB，而改为[为 Web 服务器应用程序创建服务](/docs/containers?topic=containers-ingress#public_inside_1)，并[为 Web 服务器应用程序创建 Ingress 资源](/docs/containers?topic=containers-ingress#public_inside_4)。接着，通过运行 `ibmcloud ks albs --cluster <cluster_name>` 来获取 ALB 的公共 IP，然后在本教程中使用这些 IP 来替代 `<loadbalancer_IP>`。
 {: tip}
@@ -148,7 +149,7 @@ subcollection: containers
         ```
         {: pre}
 
-        以下示例输出确认 NLB 在 `169.1.1.1` 公共 NLB IP 地址上公开了应用程序。`webserver-855556f688-76rkp` 应用程序 pod 收到了 curl 请求：
+        以下输出示例确认 NLB 在 `169.1.1.1` 公共 NLB IP 地址上公开了应用程序。`webserver-855556f688-76rkp` 应用程序 pod 收到了 curl 请求：
         ```
         Hostname: webserver-855556f688-76rkp
         Pod Information:
@@ -180,7 +181,7 @@ subcollection: containers
         ```
         {: pre}
 
-        在以下示例输出中，节点端口为 `31024`：
+        在以下输出示例中，节点端口为 `31024`：
     ```
         NAME           CLUSTER-IP       EXTERNAL-IP        PORT(S)        AGE       SELECTOR
         webserver-lb   172.21.xxx.xxx   169.xx.xxx.xxx     80:31024/TCP   2m        run=webserver
@@ -196,9 +197,9 @@ subcollection: containers
         输出示例：
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
         ```
         {: screen}
 
@@ -210,7 +211,7 @@ subcollection: containers
         ```
         {: pre}
 
-        以下示例输出确认对应用程序的请求通过工作程序节点的专用 IP 地址 `10.1.1.1` 和节点端口 `31024` 传入。`webserver-855556f688-xd849` 应用程序 pod 收到了 curl 请求：
+        以下输出示例确认对应用程序的请求通过工作程序节点的专用 IP 地址 `10.1.1.1` 和节点端口 `31024` 传入。`webserver-855556f688-xd849` 应用程序 pod 收到了 curl 请求：
         ```
         Hostname: webserver-855556f688-xd849
         Pod Information:
@@ -259,14 +260,14 @@ subcollection: containers
       preDNAT: true
       ingress:
       - action: Deny
-            destination:
-              ports:
+        destination:
+          ports:
           - 30000:32767
-            protocol: TCP
-            source: {}
+        protocol: TCP
+        source: {}
       - action: Deny
-            destination:
-              ports:
+        destination:
+          ports:
           - 30000:32767
         protocol: UDP
         source: {}
@@ -310,7 +311,13 @@ subcollection: containers
     ```
     {: screen}
 
-4. 使用备忘单中的值，验证是否仍能够以公共方式访问 NLB 外部 IP 地址。
+4. 将上一课中创建的 LoadBalancer 的 externalTrafficPolicy 从 `Cluster` 更改为 `Local`。`Local` 可确保在下一步中对 LoadBalancer 的外部 IP 时运行 curl 命令时保留系统的源 IP。
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. 使用备忘单中的值，验证是否仍能够以公共方式访问 NLB 外部 IP 地址。
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -339,11 +346,11 @@ subcollection: containers
         -no body in request-
     ```
     {: screen}
-    在输出的 `Request Information` 部分中，请注意源 IP 地址的内容，例如 `client_address=1.1.1.1`。源 IP 地址是用于运行 curl 的系统的公共 IP。反之，如果通过代理或 VPN 连接到因特网，代理或 VPN 可能会隐藏系统的实际 IP 地址。在任一情况下，NLB 都会将系统的源 IP 地址视为客户机 IP 地址。
+    例如，在输出的 `Request Information` 部分中，源 IP 地址为 `client_address=1.1.1.1`。源 IP 地址是用于运行 curl 的系统的公共 IP。反之，如果通过代理或 VPN 连接到因特网，代理或 VPN 可能会隐藏系统的实际 IP 地址。在任一情况下，NLB 都会将系统的源 IP 地址视为客户机 IP 地址。
 
-5. 将系统的源 IP 地址（上一步输出中的 `client_address=1.1.1.1`）复制到备忘单中以在后面的课程中使用。
+6. 将系统的源 IP 地址（上一步输出中的 `client_address=1.1.1.1`）复制到备忘单中以在后面的课程中使用。
 
-太棒了！此时，应用程序仅从公共 NLB 端口公开到公用因特网。将阻止流至公共节点端口的流量。您已经部分锁定集群以阻止不需要的流量。
+太好了！此时，应用程序仅从公共 NLB 端口公开到公用因特网。将阻止流至公共节点端口的流量。已部分锁定集群以阻止不需要的流量。
 
 接下来，您可以创建并应用 Calico 策略将来自某些源 IP 的流量列入白名单。
 
@@ -414,6 +421,7 @@ subcollection: containers
     {: pre}
 
 4. 在文本编辑器中，创建名为 `whitelist.yaml` 的低位 DNAT 前策略，以允许来自系统 IP 的流量流至 NLB IP 地址和端口。使用备忘单中的值，将 `<loadbalancer_IP>` 替换为 NLB 的公共 IP 地址，将 `<client_address>` 替换为系统源 IP 的公共 IP 地址。
+    如果记不住系统 IP，可以运行 `curl ifconfig.co`。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -480,7 +488,7 @@ subcollection: containers
 
 在本课程中，您将通过阻止来自自己系统的源 IP 地址的流量来测试黑名单功能。在第 4 课结束时，将阻止流至公共节点端口的所有流量，但允许流至公共 NLB 的所有流量。只阻止来自列入黑名单的系统 IP 的流量流至 NLB：
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 服务器应用程序由公共 NLB 公开到因特网。只阻止来自系统 IP 的流量。" style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Web 服务器应用程序由公共 NLB 公开到因特网。仅阻止来自系统 IP 的流量。" style="width:550px; border-style: none"/>
 
 1. 清除上一课中创建的白名单策略。
     
@@ -494,7 +502,7 @@ subcollection: containers
     ```
       {: pre}
 
-    - Windows and OS X:
+    - Windows 和 OS X：
       ```
       calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
       ```
@@ -577,7 +585,7 @@ subcollection: containers
 
 在示例场景中，您工作的公关公司希望您设置日志记录跟踪，以记录被某个网络策略持续拒绝的任何异常流量。要监视潜在安全威胁，可以设置日志记录，以在每次黑名单策略拒绝对 NLB IP 尝试的操作时进行记录。
 
-1. 创建名为 `log-denied-packets` 的 Calico NetworkPolicy。此日志策略使用与 `blacklist` 策略相同的选择器，这会将此策略添加到 Calico Iptables 规则链。通过使用更低的排序号（例如，`300`），可确保将此规则添加到 Iptables 规则链中 blacklist 策略之前。来自 IP 的包在尝试匹配 `blacklist` 策略规则并被拒绝之前，会由此策略进行记录。
+1. 创建名为 `log-denied-packets` 的 Calico NetworkPolicy。此日志策略使用与 `blacklist` 策略相同的选择器，这会将此策略添加到 Calico Iptables 规则链。通过使用更低位的数字（例如，`300`），可确保将此规则添加到 Iptables 规则链中 blacklist 策略之前。来自 IP 的包在尝试匹配 `blacklist` 策略规则并被拒绝之前，会由此策略进行记录。
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -608,7 +616,7 @@ subcollection: containers
         nets:
         - <client_address>/32
     selector: ibm.role=='worker_public'
-    order: 500
+    order: 300
     types:
     - Ingress
   ```
@@ -642,7 +650,7 @@ subcollection: containers
     ```
       {: pre}
 
-    - Windows and OS X:
+    - Windows 和 OS X：
       ```
       calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
       ```
@@ -655,7 +663,7 @@ subcollection: containers
       ```
       {: pre}
 
-    - Windows and OS X:
+    - Windows 和 OS X：
       ```
       calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
       ```

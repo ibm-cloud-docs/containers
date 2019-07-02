@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -41,7 +42,7 @@ Quando esponi la tua applicazione creando un servizio Kubernetes del tipo NodePo
 una NodePort nell'intervallo 30000 - 32767 e un indirizzo
 IP del cluster interno. Il servizio
 NodePort funge da punto di ingresso per le richieste in entrata per la tua applicazione. La NodePort assegnata è pubblicamente esposta nelle impostazioni `kubeproxy` di ogni nodo di lavoro nel cluster. Ogni nodo di lavoro inizia ad ascoltare dalla NodePort assegnata per le richieste in entrata per il
-servizio. Per accedere al servizio da internet, è possibile utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro che è stato assegnato durante la creazione del cluster e il NodePort nel formato `<IP_address>:<nodeport>`. In aggiunta all'indirizzo IP pubblico, è disponibile un servizio NodePort nell'indirizzo IP privato di un nodo di lavoro.
+servizio. Per accedere al servizio da internet, è possibile utilizzare l'indirizzo IP pubblico di qualsiasi nodo di lavoro che è stato assegnato durante la creazione del cluster e il NodePort nel formato `<IP_address>:<nodeport>`. Se vuoi accedere al servizio sulla rete privata, usa l'indirizzo IP privato di qualsiasi nodo di lavoro invece dell'indirizzo IP pubblico.
 
 Il seguente diagramma mostra come viene diretta la comunicazione da Internet a un'applicazione quando è configurato un servizio NodePort:
 

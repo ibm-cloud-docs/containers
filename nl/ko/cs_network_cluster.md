@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-06"
 
 keywords: kubernetes, iks
 
@@ -21,65 +21,150 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# 클러스터 네트워크 설정
+
+# 서비스 엔드포인트 또는 VLAN 연결 변경
 {: #cs_network_cluster}
 
-{{site.data.keyword.containerlong}} 클러스터에 네트워킹 구성을 설정합니다.
-{:shortdesc}
-
-이 페이지는 클러스터의 네트워크 구성을 설정하는 데 도움이 됩니다. 어떤 설정을 선택해야 할지 모르시겠습니까? [클러스터 네트워크 계획](/docs/containers?topic=containers-cs_network_ov)을 참조하십시오.
-{: tip}
-
-## 공용 및 사설 VLAN으로 클러스터 네트워킹 설정
-{: #both_vlans}
-
-[공용 VLAN 및 사설 VLAN](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options)에 대한 액세스 권한으로 클러스터를 설정합니다.
+[클러스터를 작성](/docs/containers?topic=containers-clusters)할 때 처음 네트워크를 설정한 후에는 Kubernetes 마스터가 액세스할 수 있는 서비스 엔드포인트를 변경하거나 작업자 노드의 VLAN 연결을 변경할 수 있습니다.
 {: shortdesc}
 
-이 네트워킹 설정은 클러스터 작성 및 클러스터 작성 후 선택적 네트워킹 구성 동안 다음과 같은 필수 네트워킹 구성으로 구성됩니다.
+## 개인 서비스 엔드포인트 설정
+{: #set-up-private-se}
 
-1. 방화벽으로 보호되는 환경에 클러스터를 작성하는 경우 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [공인 및 사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
+Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우, 클러스터의 개인 서비스 엔드포인트를 사용 안함으로 설정합니다.
+{: shortdesc}
 
-2. 공용 및 사설 VLAN에 연결된 클러스터를 작성하십시오. 다중 구역 클러스터를 작성하는 경우에는 각 구역에 대해 VLAN 쌍을 선택할 수 있습니다.
+개인 서비스 엔드포인트는 Kubernetes 마스터를 개인용으로 액세스할 수 있게 합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 사설 네트워크를 통해 Kubernetes 마스터와 통신할 수 있습니다. 개인 서비스 엔드포인트를 사용으로 설정할 수 있는지 판별하려면 [작업자 대 마스터 및 사용자 대 마스터 통신](/docs/containers?topic=containers-plan_clusters#internet-facing)을 참조하십시오. 개인 서비스 엔드포인트를 사용으로 설정한 후에는 사용 안함으로 설정할 수 없습니다.
 
-3. Kubernetes 마스터 및 작업자 노드가 통신하는 방법을 선택하십시오.
-  * {{site.data.keyword.Bluemix_notm}} 계정에 VRF가 사용으로 설정된 경우 [공용 전용](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public), [공용 및 개인](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both) 또는 [개인 전용 서비스 엔드포인트](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_private)를 사용으로 설정하십시오.
-  * VRF를 사용할 수 없거나 사용하지 않으려면 [공용 서비스 엔드포인트만](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) 사용으로 설정하고 [VLAN Spanning을 사용으로 설정](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)하십시오. 
+계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) 및 [서비스 엔드포인트](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)를 사용으로 설정하기 전에 개인 서비스 엔드포인트만 사용하여 클러스터를 작성하셨습니까? 지원 케이스가 처리되어 계정이 업데이트되기 전까지 클러스터를 사용할 수 있도록 [공용 서비스 엔드포인트를 설정](#set-up-public-se)해 보십시오.
+{: tip}
 
-4. 클러스터를 작성한 후, 다음 네트워킹 옵션을 구성할 수 있습니다.
-  * [strongSwan VPN 연결 서비스](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_public)를 설정하여 클러스터와 온프레미스 네트워크 또는 {{site.data.keyword.icpfull_notm}} 간의 통신을 허용하십시오.
-  * [Kubernetes 검색 서비스](/docs/containers?topic=containers-cs_network_planning#in-cluster)를 작성하여 팟(Pod) 간의 클러스터 내부 통신을 허용하십시오.
-  * [공용](/docs/containers?topic=containers-cs_network_planning#public_access) 네트워크 로드 밸런서(NLB), Ingress 애플리케이션 로드 밸런서(ALB) 또는 NodePort 서비스를 작성하여 앱을 공용 네트워크에 노출하십시오. 
-  * [사설](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) 네트워크 로드 밸런서(NLB), Ingress 애플리케이션 로드 밸런서(ALB) 또는 NodePort 서비스를 작성하여 앱을 사설 네트워크에 노출하십시오. 
-  * [에지 작업자 노드](#both_vlans_private_edge)에 대한 네트워킹 워크로드를 분리하십시오.
-  * [사설 네트워크에서 클러스터를 분리](#isolate)하십시오.
+1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
+2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 설정](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)하십시오.
+3. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. 개인 서비스 엔드포인트를 사용하려면 Kubernetes 마스터 API 서버를 새로 고치십시오. CLI의 프롬프트에 따라 수동으로 다음 명령을 실행할 수 있습니다.
+   ```
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+5. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
+6. 클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
+
+   <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
+   ```
+ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+   {: pre}
+
+8. 클러스터가 방화벽으로 보호되는 환경에 있는 경우:
+  * [권한이 부여된 클러스터 사용자가 개인 서비스 엔드포인트를 통해 마스터에 액세스할 수 있도록 `kubectl` 명령을 실행하도록 하십시오.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * 사용하려는 인프라 리소스와 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
+
+9. 선택사항: 개인 서비스 엔드포인트만 사용하려면 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
 <br />
 
 
-## 사설 VLAN만 사용하여 클러스터 네트워킹 설정
-{: #setup_private_vlan}
+## 공용 서비스 엔드포인트 설정
+{: #set-up-public-se}
 
-사용자에게 특정 보안 요구사항이 있거나 사용자가 전용 네트워크 보안을 제공하기 위한 사용자 정의 네트워크 정책과 라우팅 규칙을 작성해야 하는 경우, [사설 VLAN에만](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 액세스 권한이 있는 클러스터를 설정하십시오.
+클러스터에 대한 공용 서비스 엔드포인트를 사용 또는 사용 안함으로 설정합니다.
 {: shortdesc}
 
-이 네트워킹 설정은 클러스터 작성 및 클러스터 작성 후 선택적 네트워킹 구성 동안 다음과 같은 필수 네트워킹 구성으로 구성됩니다.
+공용 서비스 엔드포인트는 Kubernetes 마스터에 공용으로 액세스할 수 있게 합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 공용 네트워크를 통해 Kubernetes 마스터와 안전하게 통신할 수 있습니다. 자세한 정보는 [작업자 대 마스터 및 사용자 대 마스터 통신](/docs/containers?topic=containers-plan_clusters#internet-facing)을 참조하십시오. 
 
-1. 방화벽으로 보호되는 환경에 클러스터를 작성하는 경우 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [공인 및 사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
+**사용 설정 단계**</br>
+이전에 공용 엔드포인트를 사용 안함으로 설정한 경우에는 이를 다시 사용으로 설정할 수 있습니다. 
+1. 공용 서비스 엔드포인트를 사용으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+2. 공용 서비스 엔드포인트를 사용하려면 Kubernetes 마스터 API 서버를 새로 고치십시오. CLI의 프롬프트에 따라 수동으로 다음 명령을 실행할 수 있습니다.
+   ```
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
-2. [사설 VLAN에만](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_worker_options) 연결되는 클러스터를 작성하십시오. 다중 구역 클러스터를 작성하는 경우에는 각 구역에서 사설 VLAN을 선택할 수 있습니다.
+   </br>
 
-3. Kubernetes 마스터 및 작업자 노드가 통신하는 방법을 선택하십시오.
-  * {{site.data.keyword.Bluemix_notm}} 계정에 VRF가 사용으로 설정된 경우 [개인 서비스 엔드포인트를 사용으로 설정](#set-up-private-se)하십시오.
-  * VRF를 사용할 수 없거나 사용하지 않으려는 경우 Kubernetes 마스터 및 작업자 노드는 자동으로 마스터에 연결할 수 없습니다. [게이트웨이 어플라이언스](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)를 사용하여 클러스터를 구성해햐 합니다.
+**사용 안함으로 설정하기 위한 단계**</br>
+공용 서비스 엔드포인트를 사용 안함으로 설정하려면 먼저 작업자 노드가 Kubernetes 마스터와 통신할 수 있도록 개인 서비스 엔드포인트를 사용으로 설정해야 합니다.
+1. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+2. CLI 프롬프트를 따르거나 다음 명령을 수동으로 실행하여 개인 서비스 엔드포인트를 사용하도록 Kubernetes 마스터 API 서버를 새로 고치십시오.
+   ```
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+3. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
 
-4. 클러스터를 작성한 후, 다음 네트워킹 옵션을 구성할 수 있습니다.
-  * [VPN 게이트웨이를 설정](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_vpn_private)하여 클러스터와 온프레미스 네트워크 또는 {{site.data.keyword.icpfull_notm}} 간의 통신을 허용하십시오. 이전에 VRA(Vyatta) 또는 FSA를 설정하여 마스터 노드와 작업자 노드 간의 통신을 허용하면 VRA 또는 FSA에 IPSec VPN 엔드포인트를 구성할 수 있습니다.
-  * [Kubernetes 검색 서비스](/docs/containers?topic=containers-cs_network_planning#in-cluster)를 작성하여 팟(Pod) 간의 클러스터 내부 통신을 허용하십시오.
-  * [사설](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) 네트워크 로드 밸런서(NLB), Ingress 애플리케이션 로드 밸런서(ALB) 또는 NodePort 서비스를 작성하여 앱을 사설 네트워크에 노출하십시오. 
-  * [에지 작업자 노드](#both_vlans_private_edge)에 대한 네트워킹 워크로드를 분리하십시오.
-  * [사설 네트워크에서 클러스터를 분리](#isolate)하십시오.
+4. 클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
+
+   <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
+   ```
+ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
+5. 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+## 공용 서비스 엔드포인트에서 개인 서비스 엔드포인트로 전환
+{: #migrate-to-private-se}
+
+Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 작업자 노드는 개인 서비스 엔드포인트를 사용으로 설정하여 공용 네트워크 대신 사설 네트워크를 통해 마스터와 통신할 수 있도록 합니다.
+{: shortdesc}
+
+공용 및 사설 VLAN에 연결된 모든 클러스터는 기본적으로 공용 서비스 엔드포인트를 사용합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 공용 네트워크를 통해 Kubernetes 마스터와 안전하게 통신할 수 있습니다. 공용 네트워크 대신 사설 네트워크를 통해 Kubernetes 마스터와 통신할 작업자 노드를 사용하기 위해 개인 서비스 엔드포인트를 사용으로 설정할 수 있습니다. 그런 다음, 선택적으로 공용 서비스 엔드포인트를 사용 안함으로 설정할 수 있습니다.
+* 개인 서비스 엔드포인트를 사용으로 설정하고 공용 서비스 엔드포인트를 유지하는 경우 작업자는 언제나 사설 네트워크를 통해 마스터와 통신하지만 사용자는 공용 또는 사설 네트워크를 통해 마스터와 통신할 수 있습니다.
+* 개인 서비스 엔드포인트를 사용으로 설정하고 공용 서비스 엔드포인트를 사용 안함으로 설정한 경우 작업자와 사용자는 사설 네트워크를 통해 마스터와 통신해야 합니다.
+
+개인 서비스 엔드포인트를 사용으로 설정한 후에는 사용 안함으로 설정할 수 없습니다.
+
+1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
+2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 설정](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)하십시오.
+3. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. CLI 프롬프트를 따르거나 다음 명령을 수동으로 실행하여 개인 서비스 엔드포인트를 사용하도록 Kubernetes 마스터 API 서버를 새로 고치십시오.
+   ```
+        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+5. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
+
+6.  클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
+
+    <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
+    ```
+    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+    ```
+    {: pre}
+
+7. 선택사항: 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
+   ```
+  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
 
 <br />
 
@@ -91,14 +176,14 @@ subcollection: containers
 {: shortdesc}
 
 * 구역의 작업자 풀 VLAN이 용량이 부족하여 클러스터 작업자 노드가 사용할 새 VLAN을 프로비저닝해야 합니다.
-* 공용 및 사설 VLAN 둘 다에 있는 작업자 노드가 포함된 클러스터가 있지만 [사설 전용 클러스터](#setup_private_vlan)로 변경하려고 합니다.
+* 공용 및 사설 VLAN 둘 다에 있는 작업자 노드가 포함된 클러스터가 있지만 [사설 전용 클러스터](/docs/containers?topic=containers-plan_clusters#private_clusters)로 변경하려고 합니다.
 * 사설 전용 클러스터가 있지만 공용 VLAN에 있는 [에지 노드](/docs/containers?topic=containers-edge#edge)의 작업자 풀과 같은 일부 작업자 노드에서 인터넷에 앱을 노출시키려고 합니다.
 
 대신 마스터-작업자 통신을 위해 서비스 엔드포인트를 변경하시겠습니까? [공용](#set-up-public-se) 및 [개인](#set-up-private-se) 서비스 엔드포인트를 설정하기 위한 주제를 확인하십시오.
 {: tip}
 
 시작하기 전에:
-* [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * 작업자 노드가 독립형(작업자 풀의 파트가 아님)인 경우, [작업자 노드를 작업자 풀에 업데이트](/docs/containers?topic=containers-update#standalone_to_workerpool)하십시오.
 
 작업자 풀이 작업자 노드를 프로비저닝하는 데 사용하는 VLAN을 변경하려면 다음을 수행하십시오.
@@ -141,7 +226,7 @@ subcollection: containers
 
 4. 각 구역에 대한 새 VLAN 네트워크 메타데이터를 사용하여 작업자 풀을 설정하십시오. 새 작업자 풀을 작성하거나 기존 작업자 풀을 수정할 수 있습니다.
 
-  * **새 작업자 풀 작성**: [새 작업자 풀을 작성하여 작업자 노드 추가](/docs/containers?topic=containers-clusters#add_pool)를 참조하십시오.
+  * **새 작업자 풀 작성**: [새 작업자 풀을 작성하여 작업자 노드 추가](/docs/containers?topic=containers-add_workers#add_pool)를 참조하십시오.
 
   * **기존 작업자 풀 수정**: 작업자 풀의 네트워크 메타데이터를 설정하여 각 구역에 대한 VLAN을 사용하십시오. 풀에서 이미 작성된 작업자 노드는 계속해서 이전 VLAN을 사용하지만, 풀의 새 작업자 노드는 설정한 새 VLAN 메타데이터를 사용합니다.
 
@@ -204,183 +289,4 @@ kubectl get nodes
 
 8. 선택사항: 클러스터의 각 작업자 풀에 대해 2-7단계를 반복할 수 있습니다. 이러한 단계를 완료하면 클러스터의 모든 작업자 노드가 새 VLAN으로 설정됩니다.
 
-<br />
-
-
-## 개인 서비스 엔드포인트 설정
-{: #set-up-private-se}
-
-Kubernetes 버전 1.11 이상을 실행하는 클러스터의 경우, 클러스터의 개인 서비스 엔드포인트를 사용 안함으로 설정합니다.
-{: shortdesc}
-
-개인 서비스 엔드포인트는 Kubernetes 마스터를 개인용으로 액세스할 수 있게 합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 사설 네트워크를 통해 Kubernetes 마스터와 통신할 수 있습니다. 개인 서비스 엔드포인트를 사용으로 설정할 수 있는지 여부를 판별하려면 [마스터와 작업자 간의 통신 계획](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)을 참조하십시오. 개인 서비스 엔드포인트를 사용으로 설정한 후에는 사용 안함으로 설정할 수 없습니다.
-
-**클러스터 작성 중에 사용으로 설정하기 위한 단계**</br>
-1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
-2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 하십시오](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-3. 방화벽으로 보호되는 환경에 클러스터를 작성하는 경우 사용하려는 인프라 리소스와 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [공인 및 사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
-4. 클러스터 작성:
-  * [CLI를 사용하여 클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하고 `--private-service-endpoint` 플래그를 사용하십시오. 공용 서비스 엔드포인트도 사용으로 설정하려면 `--public-service-endpoint` 플래그도 사용하십시오.
-  * [UI를 사용하여 클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui_standard)하고 **개인 엔드포인트만** 선택하십시오. 공용 서비스 엔드포인트도 사용으로 설정하려면 **개인 및 공용 엔드포인트를 모두** 선택하십시오.
-5. 방화벽으로 보호되는 환경에서 클러스터에 대해 개인 서비스 엔드포인트만 사용으로 설정하려면 다음을 수행하십시오.
-  1. {{site.data.keyword.Bluemix_notm}} 사설 네트워크를 사용하거나 VPN 연결을 통해 사설 네트워크에 연결되어 있는지 확인하십시오.
-  2. 개인 서비스 엔드포인트를 통해 마스터에 액세스할 수 있도록 [권한이 부여된 클러스터 사용자가 `kubectl` 명령을 실행하도록 하십시오](/docs/containers?topic=containers-firewall#firewall_kubectl). 클러스터 사용자는 {{site.data.keyword.Bluemix_notm}} 사설 네트워크를 사용하거나 VPN 연결을 통해 사설 네트워크에 연결하여 `kubectl` 명령을 실행해야 합니다.
-  3. 네트워크 액세스가 회사 방화벽에 의해 보호되는 경우 [방화벽에서 `ibmcloud` API 및 `ibmcloud ks` API의 공용 엔드포인트에 대한 액세스를 허용](/docs/containers?topic=containers-firewall#firewall_bx)하십시오. 마스터에 대한 모든 통신은 사설 네트워크를 거치지만 `ibmcloud` 및 `ibmcloud ks` 명령은 공용 API 엔드포인트를 거쳐야 합니다.
-
-  </br>
-
-**클러스터 작성 후에 사용으로 설정하기 위한 단계**</br>
-1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
-2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 하십시오](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-3. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-4. 개인 서비스 엔드포인트를 사용하려면 Kubernetes 마스터 API 서버를 새로 고치십시오. CLI의 프롬프트에 따라 수동으로 다음 명령을 실행할 수 있습니다.
-   ```
-        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-5. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
-6. 클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
-
-   <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
-   ```
-ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-   ```
-   {: pre}
-
-8. 클러스터가 방화벽으로 보호되는 환경에 있는 경우:
-  * [권한이 부여된 클러스터 사용자가 개인 서비스 엔드포인트를 통해 마스터에 액세스할 수 있도록 `kubectl` 명령을 실행하도록 하십시오.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * 사용하려는 인프라 리소스와 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
-
-9. 선택사항: 개인 서비스 엔드포인트만 사용하려면 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-  </br>
-
-**사용 안함으로 설정하기 위한 단계**</br>
-개인 서비스 엔드포인트는 사용 안함으로 설정할 수 없습니다.
-
-## 공용 서비스 엔드포인트 설정
-{: #set-up-public-se}
-
-클러스터에 대한 공용 서비스 엔드포인트를 사용 또는 사용 안함으로 설정합니다.
-{: shortdesc}
-
-공용 서비스 엔드포인트는 Kubernetes 마스터에 공용으로 액세스할 수 있게 합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 공용 네트워크를 통해 Kubernetes 마스터와 안전하게 통신할 수 있습니다. 공용 서비스 엔드포인트를 사용으로 설정할 수 있는지 여부를 판별하려면 [작업자 노드와 Kubernetes 마스터 간의 통신 계획](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)을 참조하십시오.
-
-**클러스터 작성 중에 사용으로 설정하기 위한 단계**</br>
-
-1. 방화벽으로 보호되는 환경에 클러스터를 작성하는 경우 사용하려는 {{site.data.keyword.Bluemix_notm}} 서비스에 대해 [공인 및 사설 IP에 대한 아웃바운드 네트워크 트래픽을 허용](/docs/containers?topic=containers-firewall#firewall_outbound)하십시오.
-
-2. 클러스터 작성:
-  * [CLI를 사용하여 클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하고 `--public-service-endpoint` 플래그를 사용하십시오. 개인 서비스 엔드포인트도 사용으로 설정하려면 `--private-service-endpoint` 플래그도 사용하십시오.
-  * [UI를 사용하여 클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui_standard)하고 **공용 엔드포인트만** 선택하십시오. 개인 서비스 엔드포인트도 사용으로 설정하려면 **개인 및 공용 엔드포인트를 모두** 선택하십시오.
-
-3. 방화벽으로 보호되는 환경에 클러스터를 작성하는 경우 [공용 서비스 엔드포인트를 통해서만 또는 공용 및 개인 서비스 엔드포인트를 통해 마스터에 액세스할 수 있도록 권한이 부여된 클러스터 사용자가 `kubectl` 명령을 실행하도록 하십시오.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-
-  </br>
-
-**클러스터 작성 후에 사용으로 설정하기 위한 단계**</br>
-이전에 공용 엔드포인트를 사용 안함으로 설정한 경우 다시 사용으로 설정할 수 있습니다.
-1. 공용 서비스 엔드포인트를 사용으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. 공용 서비스 엔드포인트를 사용하려면 Kubernetes 마스터 API 서버를 새로 고치십시오. CLI의 프롬프트에 따라 수동으로 다음 명령을 실행할 수 있습니다.
-   ```
-        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   </br>
-
-**사용 안함으로 설정하기 위한 단계**</br>
-공용 서비스 엔드포인트를 사용 안함으로 설정하려면 먼저 작업자 노드가 Kubernetes 마스터와 통신할 수 있도록 개인 서비스 엔드포인트를 사용으로 설정해야 합니다.
-1. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. CLI 프롬프트를 따르거나 다음 명령을 수동으로 실행하여 개인 서비스 엔드포인트를 사용하도록 Kubernetes 마스터 API 서버를 새로 고치십시오.
-   ```
-        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-3. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
-
-4. 클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
-
-   <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
-   ```
-ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-   ```
-  {: pre}
-5. 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-## 공용 서비스 엔드포인트에서 개인 서비스 엔드포인트로 전환
-{: #migrate-to-private-se}
-
-Kubernetes 버전 1.11 이상을 실행하는 클러스터에서 작업자 노드는 개인 서비스 엔드포인트를 사용으로 설정하여 공용 네트워크 대신 사설 네트워크를 통해 마스터와 통신할 수 있도록 합니다.
-{: shortdesc}
-
-공용 및 사설 VLAN에 연결된 모든 클러스터는 기본적으로 공용 서비스 엔드포인트를 사용합니다. 작업자 노드와 권한이 부여된 클러스터 사용자는 공용 네트워크를 통해 Kubernetes 마스터와 안전하게 통신할 수 있습니다. 공용 네트워크 대신 사설 네트워크를 통해 Kubernetes 마스터와 통신할 작업자 노드를 사용하기 위해 개인 서비스 엔드포인트를 사용으로 설정할 수 있습니다. 그런 다음, 선택적으로 공용 서비스 엔드포인트를 사용 안함으로 설정할 수 있습니다.
-* 개인 서비스 엔드포인트를 사용으로 설정하고 공용 서비스 엔드포인트를 유지하는 경우 작업자는 언제나 사설 네트워크를 통해 마스터와 통신하지만 사용자는 공용 또는 사설 네트워크를 통해 마스터와 통신할 수 있습니다.
-* 개인 서비스 엔드포인트를 사용으로 설정하고 공용 서비스 엔드포인트를 사용 안함으로 설정한 경우 작업자와 사용자는 사설 네트워크를 통해 마스터와 통신해야 합니다.
-
-개인 서비스 엔드포인트를 사용으로 설정한 후에는 사용 안함으로 설정할 수 없습니다.
-
-1. IBM Cloud infrastructure (SoftLayer) 계정에서 [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)를 사용으로 설정하십시오.
-2. [{{site.data.keyword.Bluemix_notm}} 계정에서 서비스 엔드포인트를 사용하도록 하십시오](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
-3. 개인 서비스 엔드포인트를 사용으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-4. CLI 프롬프트를 따르거나 다음 명령을 수동으로 실행하여 개인 서비스 엔드포인트를 사용하도록 Kubernetes 마스터 API 서버를 새로 고치십시오.
-   ```
-        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-5. [configmap을 작성](/docs/containers?topic=containers-update#worker-up-configmap)하여 클러스터에서 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하십시오. 작업자 노드를 업데이트할 때 configmap을 사용하면 앱이 사용 가능한 작업자 노드에 순서대로 다시 스케줄되므로 앱의 작동중단시간을 방지할 수 있습니다.
-
-6.  클러스터에서 모든 작업자 노드를 업데이트하여 개인 서비스 엔드포인트 구성을 선택하십시오.
-
-    <p class="important">업데이트 명령을 실행하면 작업자 노드가 다시 로드되어 서비스 엔드포인트 구성을 선택합니다. 작업자 업데이트를 사용할 수 없으면 [작업자 노드를 수동으로 다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)해야 합니다. 다시 로드하는 경우, 한 번에 사용할 수 없는 최대 작업자 노드 수를 제어하려면 순서를 유출, 드레인 및 관리해야 합니다.</p>
-    ```
-    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
-    ```
-    {: pre}
-
-7. 선택사항: 공용 서비스 엔드포인트를 사용 안함으로 설정하십시오.
-   ```
-  ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-<br />
-
-
-## 선택사항: 에지 작업자 노드에 대한 네트워킹 워크로드 격리
-{: #both_vlans_private_edge}
-
-에지 작업자 노드는 외부에서 적은 수의 작업자 노드에 액세스할 수 있게 하고 네트워크 워크로드를 격리함으로써 클러스터의 보안을 향상시킬 수 있습니다. 네트워크 로드 밸런서(NLB) 및 Ingress 애플리케이션 로드 밸런서(ALB) 팟(Pod)이 지정된 작업자 노드에만 배치되도록 보장하려면 [작업자 노드를 에지 노드로서 레이블링](/docs/containers?topic=containers-edge#edge_nodes)하십시오. 또한 기타 워크로드가 에지 노드에서 실행하지 못하도록 방지하려면 [에지 노드를 오염(taint)](/docs/containers?topic=containers-edge#edge_workloads)시키십시오.
-{: shortdesc}
-
-클러스터가 공용 VLAN에 연결되어 있지만 에지 작업자 노드에서 공용 NodePorts에 대한 트래픽을 차단하려면 [Calico preDNAT 네트워크 정책](/docs/containers?topic=containers-network_policies#block_ingress)도 사용할 수 있습니다. 노드 포트를 차단하면 에지 작업자 노드가 수신 트래픽을 처리하는 유일한 작업자 노드가 됩니다.
-
-## 선택사항: 사설 네트워크에서 클러스터 격리
-{: #isolate}
-
-다중 구역 클러스터, 단일 구역 클러스터용 다중 VLAN 또는 동일한 VLAN의 다중 서브넷이 있는 경우에는 작업자 노드가 사설 네트워크에서 서로 간에 통신할 수 있도록 [VLAN Spanning을 사용으로 설정](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)하거나 [VRF를 사용으로 설정](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)하십시오. 그러나 VLAN Spanning 또는 VRF가 사용으로 설정되면 동일한 IBM Cloud 계정에서 사설 VLAN에 연결된 시스템이 작업자에 액세스할 수 있습니다. [Calico 네트워크 정책](/docs/containers?topic=containers-network_policies#isolate_workers)을 사용하여 사설 네트워크의 기타 시스템으로부터 다중 구역 클러스터를 격리시킬 수 있습니다. 이러한 정책은 사설 방화벽에서 열린 사설 IP 범위 및 포트에 대한 유입 및 유출도 허용합니다.
-{: shortdesc}
+9. 클러스터의 기본 ALB는 해당 IP 주소가 이전 VLAN의 서브넷에 속하므로 여전히 이전 VLAN에 바인드되어 있습니다. ALB를 VLAN 간에 이동할 수는 없으므로, 사용자는 대신 [새 VLAN에 ALB를 작성하고 이전 VLAN에서 ALB를 사용 안함으로 설정](/docs/containers?topic=containers-ingress#migrate-alb-vlan)할 수 있습니다. 

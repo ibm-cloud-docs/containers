@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **API REST**
 
-- [API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/)
-- [JSON API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [API REST per la registrazione nei cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API REST per la gestione degli ALB (application load balancer) Ingress nei cluster![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [JSON API REST per i cluster ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [Configura l'integrazione e la fornitura continue per {{site.data.keyword.containerlong}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migra un'applicazione VM al cloud ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [Migra un'applicazione CF al cloud ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Esegui applicazioni senza server in un cluster con Knative ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Esegui applicazioni senza server in un cluster con Knative ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Orchestra carichi di lavoro a lunga esecuzione per le applicazioni con un servizio di messaggistica basato su Apache Kafka ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automatizza le distribuzioni in un cluster con Terraform ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organizzazione di utenti e team![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

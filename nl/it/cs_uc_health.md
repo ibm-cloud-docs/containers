@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casi di utilizzo di assistenza sanitaria per {{site.data.keyword.cloud_notm}}
@@ -39,7 +39,7 @@ Un responsabile IT per un fornitore di assistenza sanitaria dispone di sistemi a
 Perché {{site.data.keyword.cloud_notm}}: per migliorare il servizio dei pazienti, il fornitore ha cercato {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.contdelivery_full}} per ridurre la spesa IT e accelerare lo sviluppo, il tutto su una piattaforma sicura. I sistemi SaaS ad alto utilizzo del fornitore, che contenevano sia i sistemi di registrazione dei pazienti che le applicazioni di report aziendali, necessitavano di aggiornamenti frequenti. Tuttavia, l'ambiente in loco ha ostacolato lo sviluppo agile. Il fornitore voleva anche contrastare l'aumento del costo del lavoro e un budget in diminuzione.
 
 Tecnologie chiave:
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Adattamento orizzontale](/docs/containers?topic=containers-app#highly_available_apps)
 * [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

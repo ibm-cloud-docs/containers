@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-05-31"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 设置 pod 优先级
 {: #pod_priority}
@@ -91,7 +93,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 开始之前：
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * 确保您具有对 `default` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
 * [创建](/docs/containers?topic=containers-clusters#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](/docs/containers?topic=containers-update#update)到 Kubernetes V1.11 或更高版本。
 
@@ -164,7 +166,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     ```
     {: pre}
 
-太棒了！您已创建优先级类。请通知您的团队有关该优先级类以及他们必须用于自己 pod 部署的优先级类（如果有）的信息。  
+太好了！您已创建优先级类。请通知您的团队有关该优先级类以及他们必须用于自己 pod 部署的优先级类（如果有）的信息。  
 
 ## 为 pod 分配优先级
 {: #prioritize}
@@ -173,7 +175,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 开始之前：
-* [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+* [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * 确保您在要将 pod 部署到的名称空间中具有 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
 * [创建](/docs/containers?topic=containers-clusters#clusters_ui) Kubernetes V1.11 或更高版本的集群，或将集群[更新](/docs/containers?topic=containers-update#update)到 Kubernetes V1.11 或更高版本。
 * [了解优先级安排的运作方式](#priority_scheduling)，因为优先级可以抢占现有 pod，并影响如何使用集群的资源。
@@ -222,7 +224,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
         spec:
           containers:
           - name: ibmliberty
-            image: registry.bluemix.net/ibmliberty:latest
+            image: icr.io/ibmliberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

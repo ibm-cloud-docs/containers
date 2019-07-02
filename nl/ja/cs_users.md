@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -62,8 +63,8 @@ subcollection: containers
 <dl>
 <dt><a href="#platform">{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割とサービス役割</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} では、{{site.data.keyword.Bluemix_notm}} の ID/アクセス管理 (IAM) のプラットフォーム役割とサービス役割を使用して、ユーザーにクラスターへのアクセスを許可します。
-<ul><li>**プラットフォーム**: プラットフォーム役割は、{{site.data.keyword.containerlong_notm}} API、コンソール、および CLI (`ibmcloud ks`) を使用してクラスター・インフラストラクチャーに対してユーザーが実行できる操作を決定するものです。 プラットフォーム役割では、Kubernetes API へのアクセスは許可されません。 これらの役割のポリシーは、リソース・グループ、地域、またはクラスター・インスタンスごとに設定できます。 プラットフォーム役割は、クラスターに対するインフラストラクチャー操作の実行を許可しますが、IBM Cloud インフラストラクチャー (SoftLayer) のリソースに対するアクセスは許可しません。 IBM Cloud インフラストラクチャー (SoftLayer) リソースへのアクセス権限は、[地域に対して設定される API キー](#api_key)によって決まります。 プラットフォーム役割によって許可される操作には、例えば、クラスターの作成/削除、クラスターへのサービスのバインディング、ネットワーキング・リソースやストレージ・リソースの管理、ワーカー・ノードの追加などがあります。<br><br>プラットフォーム役割しか割り当てられていないユーザーは、クラスター内の Kubernetes リソースを操作できません。 しかし、その状態でも `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)は実行できます。 そのようなユーザーに、[カスタム RBAC ポリシー](/docs/containers?topic=containers-users#role-binding)を使用して、特定の Kubernetes 操作の実行を許可することができます。 例えば、Kubernetes のアクセス制御にカスタム RBAC ポリシーを現在使用していて、今後もサービス役割ではなくカスタム RBAC を使用し続ける予定の組織では、このような方法を取ると良いでしょう。</li>
-<li>**サービス**: サービス役割は、対応する Kubernetes RBAC ポリシーを付与するものです。Kubernetes RBAC ポリシーは、クラスター内でユーザーに与えられます。 つまり、サービス役割は、Kubernetes API、ダッシュボード、および CLI (`kubectl`) へのアクセスを許可します。 サービス役割のポリシーは、リソース・グループ、地域、またはクラスター・インスタンスごとに設定できます。 さらに、サービス役割の対象を、すべてのクラスター、個々のクラスター、または地域全体のクラスターの Kubernetes 名前空間にすることもできます。 サービス役割の対象を名前空間にする場合は、同時にそのポリシーをリソース・グループに適用したり、プラットフォーム役割を割り当てたりすることはできません。 サービス役割によって許可される操作には、例えば、アプリ・デプロイメントの作成、名前空間の追加、構成マップのセットアップがあります。<br><br>サービス役割しか割り当てられていないユーザーは、{{site.data.keyword.containerlong_notm}} リソースを表示することも、操作することもできません。 クラスターにアクセスしてクラスターの Kubernetes リソースを使用するユーザーには、`ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、クラスター名と ID を伝える必要があります。 さらにそのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、ユーザーに**ビューアー**のプラットフォーム役割を与えてください。</li></ul></dd>
+<ul><li>**プラットフォーム**: プラットフォーム役割は、{{site.data.keyword.containerlong_notm}} API、コンソール、および CLI (`ibmcloud ks`) を使用してクラスター・インフラストラクチャーに対してユーザーが実行できる操作を決定するものです。 プラットフォーム役割では、Kubernetes API へのアクセスは許可されません。 これらの役割のポリシーは、リソース・グループ、地域、またはクラスター・インスタンスごとに設定できます。 プラットフォーム役割は、クラスターに対するインフラストラクチャー操作の実行を許可しますが、IBM Cloud インフラストラクチャー (SoftLayer) のリソースに対するアクセスは許可しません。 IBM Cloud インフラストラクチャー (SoftLayer) リソースへのアクセス権限は、[地域に対して設定される API キー](#api_key)によって決まります。 プラットフォーム役割によって許可される操作には、例えば、クラスターの作成/削除、クラスターへのサービスのバインディング、ネットワーキング・リソースやストレージ・リソースの管理、ワーカー・ノードの追加などがあります。<br><br>プラットフォーム役割しか割り当てられていないユーザーは、クラスター内の Kubernetes リソースを操作できません。 しかし、その状態でも `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)は実行できます。 そのようなユーザーに、[カスタム RBAC ポリシー](/docs/containers?topic=containers-users#role-binding)を使用して、特定の Kubernetes 操作の実行を許可することができます。 例えば、Kubernetes のアクセス制御にカスタム RBAC ポリシーを現在使用していて、今後もサービス役割ではなくカスタム RBAC を使用し続ける予定の組織では、このような方法を取ると良いでしょう。</li>
+<li>**サービス**: サービス役割は、対応する Kubernetes RBAC ポリシーを付与するものです。Kubernetes RBAC ポリシーは、クラスター内でユーザーに与えられます。 つまり、サービス役割は、Kubernetes API、ダッシュボード、および CLI (`kubectl`) へのアクセスを許可します。 サービス役割のポリシーは、リソース・グループ、地域、またはクラスター・インスタンスごとに設定できます。 さらに、サービス役割の対象を、すべてのクラスター、個々のクラスター、または地域全体のクラスターの Kubernetes 名前空間にすることもできます。 サービス役割の対象を名前空間にする場合は、同時にそのポリシーをリソース・グループに適用したり、プラットフォーム役割を割り当てたりすることはできません。 サービス役割によって許可される操作には、例えば、アプリ・デプロイメントの作成、名前空間の追加、構成マップのセットアップがあります。<br><br>サービス役割しか割り当てられていないユーザーは、{{site.data.keyword.containerlong_notm}} リソースを表示することも、操作することもできません。 クラスターにアクセスしてクラスターの Kubernetes リソースを使用するユーザーには、`ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、クラスター名と ID を伝える必要があります。 さらにそのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、ユーザーに**ビューアー**のプラットフォーム役割を与えてください。</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>Kubernetes では、役割ベース・アクセス制御 (RBAC) は、クラスター内部のリソースを保護する 1 つの方法です。 RBAC 役割によって、リソースでユーザーが実行できる Kubernetes アクションが決まります。 サービス役割が割り当てられているすべてのユーザーには、対応する RBAC クラスター役割が自動的に割り当てられます。 この RBAC クラスター役割は、ポリシーの対象を名前空間にしたかどうかによって、特定の名前空間またはすべての名前空間に適用されます。</br></br>
 RBAC 役割によって許可されるアクションの例として、ポッドなどのオブジェクトの作成やポッド・ログの読み取りがあります。</dd>
@@ -109,12 +110,12 @@ Cloud Foundry 役割によって許可されるアクションの例として、
   <li>サービスの地域内のすべてのインスタンス ({{site.data.keyword.containerlong_notm}} の**米国南部**地域のすべてのクラスターなど)。</li>
   <li>個別インスタンス (1 つのクラスターなど)。</li></ul></dd>
 <dt>Kubernetes 名前空間</dt>
-  <dd><p>{{site.data.keyword.Bluemix_notm}} IAM のクラスター・リソース・インスタンスの一部として、クラスター内の Kubernetes 名前空間に対するサービス・アクセス役割をユーザーに割り当てることができます。 サービス役割の対象を名前空間にする場合は、同時にそのポリシーをリソース・グループに適用したり、プラットフォーム役割を割り当てたりすることはできません。</p>
+  <dd><p>{{site.data.keyword.Bluemix_notm}} IAM のクラスター・リソース・インスタンスの一部として、クラスター内の Kubernetes 名前空間に対するサービス・アクセス役割をユーザーに割り当てることができます。</p>
   <p>名前空間に対するアクセス権限を割り当てると、許可したすべてのクラスターにおいて、その名前空間の現在および将来のすべてのインスタンスにポリシーが適用されます。 例えば、`dev` グループのユーザーが、アジア太平洋北部地域のすべてのクラスターの `test` 名前空間に Kubernetes リソースをデプロイできるようにしたいとします。 `dev` アクセス・グループに、`default` リソース・グループ内のアジア太平洋北部地域のすべてのクラスター内の Kubernetes 名前空間 test に対する**ライター**のサービス・アクセス役割を割り当てれば、その `dev` グループは、 `default` リソース・グループ内のアジア太平洋北部地域のすべてのクラスターの現在および将来の `test` 名前空間にアクセスできるようになります。</p>
-  <p class="important">名前空間を対象にしたサービス・アクセス役割をリソース・グループ・レベルで割り当てたり、同時にプラットフォーム役割として割り当てたりすることはできません。</p></dd>
+  <p class="important">サービス役割の対象を名前空間にする場合は、同時にそのポリシーをリソース・グループに適用したり、プラットフォーム役割を割り当てたりすることはできません。</p></dd>
 <dt>リソース・グループ</dt>
   <dd><p>アカウント・リソースはカスタマイズ可能なグループに編成することができるため、個別ユーザーまたはユーザー・グループに複数のリソースへのアクセス権限を一度に素早く割り当てることができます。 リソース・グループは、オペレーターや管理者がリソースの現在の使用量を表示したり、問題をトラブルシューティングしたり、チームを管理したりするために、リソースをフィルターに掛ける場合に役立ちます。</p>
-  <p class="important">クラスターは 1 つのリソース・グループにしか作成できず、作成後にリソース・グループを変更することはできません。 誤ったリソース・グループにクラスターを作成した場合、クラスターを削除してから、正しいリソース・グループにクラスターを再作成する必要があります。 また、`ibmcloud ks cluster-service-bind` [コマンド](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind)を使用して [{{site.data.keyword.Bluemix_notm}} サービスと統合](/docs/containers?topic=containers-service-binding#bind-services)する必要がある場合は、このサービスがクラスターと同じリソース・グループにある必要があります。{{site.data.keyword.registrylong_notm}} のようにリソース・グループを使用しないサービスや、{{site.data.keyword.la_full_notm}} のようにサービス・バインディングを必要としないサービスは、異なるリソース・グループにクラスターがあっても機能します。</p>
+  <p class="important">クラスターは 1 つのリソース・グループにしか作成できず、作成後にリソース・グループを変更することはできません。 誤ったリソース・グループにクラスターを作成した場合、クラスターを削除してから、正しいリソース・グループにクラスターを再作成する必要があります。 また、`ibmcloud ks cluster-service-bind` [コマンド](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)を使用して [{{site.data.keyword.Bluemix_notm}} サービスと統合](/docs/containers?topic=containers-service-binding#bind-services)する必要がある場合は、このサービスがクラスターと同じリソース・グループにある必要があります。 {{site.data.keyword.registrylong_notm}} のようにリソース・グループを使用しないサービスや、{{site.data.keyword.la_full_notm}} のようにサービス・バインディングを必要としないサービスは、異なるリソース・グループにクラスターがあっても機能します。</p>
   <p>[メトリックに {{site.data.keyword.monitoringlong_notm}}](/docs/containers?topic=containers-health#view_metrics) を使用する計画の場合は、メトリックでの名前の競合を回避するために、アカウント内のリソース・グループおよび地域全体で固有の名前をクラスターに付けることを検討してください。 クラスターの名前を変更することはできません。</p>
   <p>以下のシナリオの場合、リソース・グループに対するアクセス役割をユーザーに割り当てることができます。 リソース・インスタンスとは異なり、リソース・グループ内の個別インスタンスへのアクセス権限を付与することはできないので注意してください。</p>
   <ul><li>リソース・グループのすべての {{site.data.keyword.Bluemix_notm}} IAM サービス ({{site.data.keyword.containerlong_notm}} のすべてのクラスターおよび {{site.data.keyword.registrylong_notm}} のすべてのイメージなど)。</li>
@@ -131,7 +132,7 @@ Cloud Foundry 役割によって許可されるアクションの例として、
 [アカウントで役割、ユーザー、およびリソースを管理する方法](#access_policies)を理解した後、以下のチェックリストを使用して、クラスターのユーザー・アクセス権限を構成します。
 {: shortdesc}
 
-<p class="tip">{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。プラットフォーム役割とサービス役割は別々に割り当てる必要があります。</p>
+<p class="tip">{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。 プラットフォーム役割とサービス役割は別々に割り当てる必要があります。</p>
 
 1. クラスターを作成するすべての地域とリソース・グループに対して、[API キーを設定します](#api_key)。
 2. アカウントにユーザーを招待して、{{site.data.keyword.containerlong_notm}} に対する [{{site.data.keyword.Bluemix_notm}} IAM 役割をユーザーに割り当てます](#platform)。
@@ -151,7 +152,7 @@ Cloud Foundry 役割によって許可されるアクションの例として、
 ## API キーのセットアップによるインフラストラクチャー・ポートフォリオへのアクセスの有効化
 {: #api_key}
 
-クラスターを正常にプロビジョンして使用するには、IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように {{site.data.keyword.Bluemix_notm}} アカウントが正しくセットアップされていることを確認する必要があります。
+クラスターを正常にプロビジョンして使用するには、クラスターのあるリソース・グループおよび地域ごとの IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるように {{site.data.keyword.Bluemix_notm}} アカウントが正しくセットアップされていることを確認する必要があります。
 {: shortdesc}
 
 **ほとんどの場合**: {{site.data.keyword.Bluemix_notm}} 従量課金 (PAYG) アカウントには既に IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限があります。 ポートフォリオにアクセスするように {{site.data.keyword.containerlong_notm}} をセットアップするには、**アカウント所有者**が、地域とリソース・グループの API キーを設定する必要があります。
@@ -162,25 +163,25 @@ Cloud Foundry 役割によって許可されるアクションの例として、
     ```
     {: pre}
 
-2. API キーを設定するリソース・グループをターゲットに指定します。 リソース・グループをターゲットに指定しないと、API キーはデフォルトのリソース・グループに対して設定されます。
+2. API キーを設定するリソース・グループをターゲットに指定します。 リソース・グループをターゲットに指定しないと、API キーはデフォルトのリソース・グループに対して設定されます。 使用可能なリソース・グループをリストするには、`ibmcloud resource groups` を実行します。
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
 
-4. 地域およびリソース・グループの API キーを設定します。
+3. 地域およびリソース・グループの API キーを設定します。
     ```
-    ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. API キーが設定されていることを確認してください。
+4. API キーが設定されていることを確認してください。
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-6. クラスターを作成する地域とリソース・グループごとに繰り返します。
+5. クラスターを作成する地域とリソース・グループごとに繰り返します。
 
 **代替オプションと詳細情報**: IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスする別の方法については、以下のセクションを確認してください。
 * アカウントに IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限が既にあるかどうかが不明の場合は、[IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスについて](#understand_infra)を参照してください。
@@ -290,14 +291,14 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへ
 {{site.data.keyword.Bluemix_notm}} 従量課金アカウントがある場合は、デフォルトで、リンクされた IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセス権限があります。 この IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオから新規ワーカー・ノードや VLAN などのインフラストラクチャー・リソースを注文する際には、この API キーが使用されます。
 {: shortdec}
 
-現在の API キー所有者を調べるには、[`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info) を実行します。 地域に対して保管されている API キーを更新する必要があることがわかった場合は、[`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) コマンドを実行して更新できます。 このコマンドには {{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。
+現在の API キー所有者を調べるには、[`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info) を実行します。 地域に対して保管されている API キーを更新する必要があることがわかった場合は、[`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) コマンドを実行して更新できます。このコマンドには {{site.data.keyword.containerlong_notm}} 管理アクセス・ポリシーが必要です。このコマンドを実行すると、実行したユーザーの API キーがアカウントに保管されます。
 
 キーをリセットする場合、アプリへの影響を確認してください。 キーは、複数の異なる場所で使用されるので、不必要に変更されると破壊的変更が発生する可能性があります。
 {: note}
 
 **始める前に**:
 - アカウント所有者が API キーを設定しない場合は、[API キーを設定するユーザーが正しい許可を得ていることを確認してください](#owner_permissions)。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするために API キーを設定するには、以下のようにします。
 
@@ -310,7 +311,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
         {:pre}
     4.  ユーザーの地域の API キーを設定します。
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}    
     5.  API キーが設定されていることを確認してください。
@@ -324,15 +325,15 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 ### 別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントへのアクセス
 {: #credentials}
 
-地域内のクラスターのインフラストラクチャーを注文するために、デフォルトのリンクされた IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する代わりに、既に所有している別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する場合があります。 [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) コマンドを使用すると、そのようなインフラストラクチャー・アカウントを {{site.data.keyword.Bluemix_notm}} アカウントにリンクできます。 地域に対して保管されているデフォルトの従量課金アカウントの資格情報の代わりに IBM Cloud インフラストラクチャー (SoftLayer) の資格情報が使用されます。
+地域内のクラスターのインフラストラクチャーを注文するために、デフォルトのリンクされた IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する代わりに、既に所有している別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントを使用する場合があります。 [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) コマンドを使用すると、そのようなインフラストラクチャー・アカウントを {{site.data.keyword.Bluemix_notm}} アカウントにリンクできます。 地域に対して保管されているデフォルトの従量課金アカウントの資格情報の代わりに IBM Cloud インフラストラクチャー (SoftLayer) の資格情報が使用されます。
 {: shortdesc}
 
-`ibmcloud ks credential-set` コマンドによって設定された IBM Cloud インフラストラクチャー (SoftLayer) の資格情報は、セッション終了後も永続します。 手動で設定した IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) コマンドを使用して削除した場合、デフォルトの従量課金アカウントの資格情報が使用されます。 ただし、インフラストラクチャー・アカウントの資格情報をこのように変更することによって、[孤立クラスター](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)が発生する可能性があります。
+`ibmcloud ks credential-set` コマンドによって設定された IBM Cloud インフラストラクチャー (SoftLayer) の資格情報は、セッション終了後も永続します。 手動で設定した IBM Cloud インフラストラクチャー (SoftLayer) の資格情報を [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) コマンドを使用して削除した場合、デフォルトの従量課金アカウントの資格情報が使用されます。ただし、インフラストラクチャー・アカウントの資格情報をこのように変更することによって、[孤立クラスター](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)が発生する可能性があります。
 {: important}
 
 **始める前に**:
 - アカウント所有者の資格情報を使用していない場合は、[API キーに設定する資格情報を持つユーザーに正しい許可があることを確認します](#owner_permissions)。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするためにインフラストラクチャー・アカウントの資格情報を設定するには、以下のようにします。
 
@@ -348,13 +349,13 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
 
     2.  使用するインフラストラクチャー API 資格情報を設定します。
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
     3. 正しい資格情報が設定されていることを確認します。
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         出力例:
         ```
@@ -417,7 +418,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
        * **プラットフォーム・アクセス役割**: ユーザーがクラスター、ワーカー・ノード、ワーカー・プール、Ingress アプリケーションのロード・バランサー、ストレージなどのインフラストラクチャー・リソースを管理できるように、{{site.data.keyword.containerlong_notm}} へのアクセスを許可します。 役割別にサポートされる操作をリストしたものが、[プラットフォーム役割の参照ページ](/docs/containers?topic=containers-access_reference#iam_platform)にあります。
        * **サービス・アクセス役割**: ユーザーがポッド、デプロイメント、サービス、名前空間などの Kubernetes リソースを管理できるように、Kubernetes に対するアクセス (クラスター内からのアクセス) を許可します。 役割別にサポートされる操作をリストしたものが、[サービス役割の参照ページ](/docs/containers?topic=containers-access_reference#service)にあります。<p class="note">サービス・アクセス役割をリソース・グループ・レベルで割り当てる場合は、その役割の対象を名前空間にすることはできません。 代わりに、リソース・インスタンスに対するアクセス権限を割り当ててください。 また、プラットフォーム役割をサービス役割と同時に割り当てないでください。</p>
     7. **「割り当て」**をクリックします。
-    8. **オプション**: ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 そのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、この手順を繰り返してユーザーに**ビューアー**のプラットフォーム役割を与えてください。
+    8. **オプション**: ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 そのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、この手順を繰り返してユーザーに**ビューアー**のプラットフォーム役割を与えてください。
   * **リソース・グループ内のリソース・インスタンスまたはリソース・グループをまたぐリソース・インスタンスの場合**:
     1. **「リソースへのアクセス権限の割り当て」**をクリックします。
     2. **「サービス」**リストで、**「{{site.data.keyword.containershort_notm}}」**を選択します。
@@ -430,7 +431,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオに
           * ポリシーの対象を名前空間にした場合に、同時にプラットフォームの役割も割り当てることはできません。 ユーザーにプラットフォーム役割も割り当てる場合は、この手順を繰り返し (ただし、名前空間フィールドは空白にします)、プラットフォーム役割のみを割り当ててください (サービス・アクセス役割は再度割り当てないでください)。
        * **サービス・アクセス役割**: ユーザーがポッド、デプロイメント、サービス、名前空間などの Kubernetes リソースを管理できるように、Kubernetes に対するアクセス (クラスター内からのアクセス) を許可します。 役割別にサポートされる操作をリストしたものが、[サービス役割の参照ページ](/docs/containers?topic=containers-access_reference#service)にあります。
     7. **「割り当て」**をクリックします。
-    8. **オプション**: ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 そのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、この手順を繰り返してユーザーに**ビューアー**のプラットフォーム役割を与えてください。
+    8. **オプション**: ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 そのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、この手順を繰り返してユーザーに**ビューアー**のプラットフォーム役割を与えてください。
 
 4.  オプション: デフォルト以外のリソース・グループにあるクラスターでユーザーが作業できるようにする場合、これらのユーザーには、そのクラスターのあるリソース・グループへの追加のアクセス権限が必要になります。 そのようなユーザーには、リソース・グループに対する**ビューアー**以上のプラットフォーム役割を割り当てることができます (まだ割り当てていない場合)。
     1.  **「リソース・グループ内のアクセス権限の割り当て」**をクリックします。
@@ -450,7 +451,7 @@ CLI を使用して {{site.data.keyword.Bluemix_notm}} IAM プラットフォー
 
 - 作業している {{site.data.keyword.Bluemix_notm}} アカウントの `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割が割り当てられていることを確認します。
 - ユーザーがアカウントに追加されていることを確認します。 ユーザーが追加されていない場合、`ibmcloud account user-invite <user@email.com>` を実行してユーザーをアカウントに招待します。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [プラットフォームとサービス](/docs/containers?topic=containers-users#access_policies)のいずれのアクセス役割を割り当てるかを決定します。 CLI ステップは、割り当てるアクセス役割によって異なります。
   * [CLI からのプラットフォーム役割の割り当て](#add_users_cli_platform)
   * [CLI からのサービス役割の割り当て](#add_users_cli_service)
@@ -506,8 +507,7 @@ CLI を使用して {{site.data.keyword.Bluemix_notm}} IAM プラットフォー
        ```
        {: pre}
 
-    *  個人ユーザーに、`HR` リソース・グループ内のすべてのクラスターへの
-**管理者**のプラットフォーム・アクセス権限を割り当てます。
+    *  個人ユーザーに、`HR` リソース・グループ内のすべてのクラスターへの**管理者**のプラットフォーム・アクセス権限を割り当てます。
        ```
        ibmcloud iam user-policy-create user@email.com --resource-group-name HR --service-name containers-kubernetes [--region <region>] --roles Administrator
        ```
@@ -636,7 +636,7 @@ CLI を使用して {{site.data.keyword.Bluemix_notm}} IAM プラットフォー
         <td>アカウント、クラスター、および名前空間に対するポリシーの有効範囲を構成します。 `"name"` フィールドは例で指定されているとおりにし、以下のように特定の `"value"` フィールドに入力します。
         <ul><li>**`"accountId"`**: 前に取得した {{site.data.keyword.Bluemix_notm}} アカウント ID を入力します</li>
         <li>**`"serviceName"`**: 指定されたサービス名をそのまま使用します (`containers-kubernetes`)。</li>
-        <li>**`"serviceInstance"`**: クラスター ID を入力します。クラスターが複数ある場合はコンマで区切ります。クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。</li>
+        <li>**`"serviceInstance"`**: クラスター ID を入力します。 クラスターが複数ある場合はコンマで区切ります。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。</li>
         <li>**`"namespace"`**: クラスター内の Kubernetes 名前空間を入力します。 クラスター内の名前空間をリストするには、`kubectl get namespaces` を実行します。 <p class="note">クラスター内のすべての名前空間にアクセス・ポリシーを割り当てるには、`{"name": "namespace", "value": "<namespace_name"}` エントリー全体を削除します。</p></li></td>
         </tr>
       </tbody>
@@ -654,7 +654,7 @@ CLI を使用して {{site.data.keyword.Bluemix_notm}} IAM プラットフォー
         ```
         {: pre}
 
-4.  ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 さらにそのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、[ユーザーに**ビューアー**のプラットフォーム役割を与えてください](#add_users_cli_platform)。
+4.  ユーザーにサービス役割しか割り当てなかった場合は、ユーザーが `ibmcloud ks cluster-config` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)を実行して [CLI から Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#db_cli)できるように、あるいは Kubernetes API と対話できるように、クラスター名と ID を伝えてください。 さらにそのユーザーが {{site.data.keyword.containerlong_notm}} クラスター・コンソールにもアクセスして、CLI からクラスターやその他のインフラストラクチャー・リソースを一覧表示できるようにするには、[ユーザーに**ビューアー**のプラットフォーム役割を与えてください](#add_users_cli_platform)。
 
 5.  変更を反映させるために、アクセス権限を与えられたユーザーがクラスター構成をリフレッシュする必要があります。 複数のユーザーを同時に追加した場合でも、ユーザーは、個別にクラスター構成をリフレッシュするまで役割バインディングに追加されません。 また、より高い許可を持っている場合にもユーザーは役割バインディングに追加されません。 例えば、ユーザーがクラスター役割を割り当てられており、クラスター役割バインディング内にいる場合は、個別の名前空間の役割バインディングには追加されません。
     ```
@@ -685,7 +685,7 @@ CLI を使用して {{site.data.keyword.Bluemix_notm}} IAM プラットフォー
         ```
         {: pre}
 
-    **出力例**: ユーザー `user@email.com` とアクセス・グループ `team1` に**リーダー**・サービス役割を割り当て、`kubectl get rolebinding ibm-view -o yaml -n default` を実行した場合は、以下のようになります。
+    **出力例**: ユーザー `user@email.com` とアクセス・グループ `team1` に**リーダー**・サービス役割を割り当て、`kubectl get rolebinding ibm-view -o yaml -n default` を実行した場合は、以下の出力例が示されます。
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -908,7 +908,7 @@ RBAC 役割ごとに許可されているアクションについて詳しくは
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>`User` の場合: 以下の URL に個別ユーザーの E メール・アドレスを追加します。<ul><li>Kubernetes 1.11 以降を実行するクラスターの場合: <code>IAM#user@email.com</code></li><li>Kubernetes 1.10 以前を実行するクラスターの場合: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>`User` の場合: <code>IAM#user@email.com</code> のように、`IAM#` に個別ユーザーの E メール・アドレスを追加します。</li>
               <li>`Group` の場合: Kubernetes 1.11 以降を実行するクラスターの場合、アカウント内の [{{site.data.keyword.Bluemix_notm}}IAM アクセス・グループ](/docs/iam?topic=iam-groups#groups)の名前を指定します。</li>
               <li>`ServiceAccount` の場合: サービス・アカウント名を指定します。</li></ul></td>
             </tr>
@@ -971,6 +971,85 @@ RBAC 役割ごとに許可されているアクションについて詳しくは
 
 カスタム Kubernetes RBAC 役割またはクラスター役割を作成してバインドしたので、ユーザーをフォローアップします。 役割を介して実行許可を持っているアクション (ポッドを削除するなど) をテストするようにユーザーに依頼してください。
 
+### クラスター役割の集約による既存の許可の拡張 
+{: #rbac_aggregate}
+
+クラスター役割を他のクラスター役割と集約または結合することにより、ユーザーの既存の許可を拡張できます。ユーザーに {{site.data.keyword.Bluemix_notm}} サービス役割を割り当てると、そのユーザーは[対応する Kubernetes RBAC クラスター役割](/docs/containers?topic=containers-access_reference#service)に追加されます。ただし、特定のユーザーが追加の操作を実行できるようにすることもできます。
+{: shortdesc}
+
+例えば、名前空間に有効範囲が設定された `admin` クラスター役割を持つユーザーは、`kubectl top pods` コマンドを使用して、名前空間内のすべてのポッドのポッド・メトリックを表示することはできません。`admin` クラスター役割のユーザーに `top pods` コマンドの実行が許可されるように、クラスター役割を集約できます。詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を参照してください](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)。
+
+**デフォルトのクラスター役割の許可を拡張できる一般的な操作は何ですか?**<br>
+[デフォルトの RBAC クラスター役割ごとに許可される操作](/docs/containers?topic=containers-access_reference#rbac_ref)を確認して、ユーザーが実行できる操作を十分に理解してから、許可された操作と実行できるようにする操作を比較します。
+
+同じクラスター役割のユーザーに、同じタイプの操作で以下のようなエラーが発生した場合、クラスター役割を拡張してこの操作を含めることができます。
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**クラスター役割を集約するには**、以下のようにします。
+
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  クラスター役割の YAML ファイルを作成します。`labels` セクションで、許可を集約する既存のクラスター役割を指定します。以下の例では、事前定義された `admin` クラスター役割を拡張して、ユーザーに `kubectl top pods` の実行を許可しています。その他の例については、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を参照してください](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)。
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>YAML の構成要素について</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML の構成要素について</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>クラスター役割の名前を入力します。`view`、`edit`、`admin`、および `cluster-admin` の事前定義されたクラスター役割名は使用**しないでください**。</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>集約するクラスター役割に一致するラベルを `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"` の形式で追加します。事前定義されたクラスター役割のラベルは、以下のとおりです。<ul>
+          <li>IAM の**管理者**のサービス役割 (1 つの名前空間が対象): `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>IAM の**ライター**のサービス役割: `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>IAM の**リーダー**のサービス役割: `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>ユーザーに対話を許可する Kubernetes [API グループ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) (`"apps"`、`"batch"`、`"extensions"` など) を指定します。 REST パス `api/v1` にあるコア API グループに対するアクセス権限については、`[""]` のようにグループをブランクにします。</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>アクセス権限を付与する Kubernetes [リソース・タイプ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) (`"daemonsets"`、`"deployments"`、`"events"`、`"ingresses"` など) を指定します。</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>ユーザーに実行を許可する [アクション ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) のタイプ (`"get"`、`"list"`、`"describe"`、`"create"`、`"delete"` など) を指定します。</td>
+        </tr>
+      </tbody>
+    </table>
+2.  クラスター内にクラスター役割を作成します。`admin` クラスター役割に対する役割バインディングを持つユーザーは、`view-pod-metrics` クラスター役割の追加の許可を持つようになりました。
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  `admin` クラスター役割を持つユーザーをフォローアップします。[クラスター構成をリフレッシュ](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)して、`kubectl top pods` などのアクションをテストするように要求してください。
+
+
 <br />
 
 
@@ -982,8 +1061,9 @@ API キーを設定している管理者またはインフラストラクチャ�
 
 コンプライアンス、セキュリティー、または課金の理由から、API キーを設定しているユーザーまたは `ibmcloud ks credential-set` コマンドを使用して資格情報が設定されているユーザーにインフラストラクチャー役割**スーパーユーザー**を付与しない場合があります。 ただし、このユーザーに**スーパーユーザー**役割がない場合、インフラストラクチャー関連のアクション、例えば、クラスターの作成やワーカー・ノードの再ロードは失敗する可能性があります。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割を使用してユーザーのインフラストラクチャー・アクセスを制御する代わりに、ユーザーに特定の IBM Cloud インフラストラクチャー (SoftLayer) 許可を設定する必要があります。
 
-マルチゾーン・クラスターがある場合、IBM Cloud インフラストラクチャー (SoftLayer) アカウント所有者は、クラスター内で異なるゾーンのノードが通信できるように、VLAN スパンニングをオンにする必要があります。 アカウント所有者は、ユーザーが VLAN スパンニングを有効にできるように、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理 (Manage Network VLAN Spanning)」**許可をユーザーに割り当てることもできます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
-{: tip}
+例えば、アカウントが VRF 対応でない場合、IBM Cloud インフラストラクチャー (SoftLayer) アカウント所有者は VLAN スパンニングをオンにする必要があります。アカウント所有者は、ユーザーが VLAN スパンニングを有効にできるように、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理 (Manage Network VLAN Spanning)」**許可をユーザーに割り当てることもできます。 詳しくは、[VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation) を参照してください。
+
+<p class="tip">`ibmcloud ks credential-set` コマンドを使用して既にインフラストラクチャー資格情報を設定していますか?[`ibmcloud ks infra-permissions-get --region <region>` コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)を実行して、資格情報に、推奨または必須のインフラストラクチャー許可が欠落しているかどうかを確認できます。出力で、推奨または必須の許可がない場合は、このセクションのステップを使用して必要なアクセス権限を割り当てることができます。</p>
 
 始める前に、アカウント所有者であること、または**スーパーユーザー**およびすべてのデバイス・アクセス権限を所有していることを確認してください。 所有していないアクセス権限をユーザーに付与することはできません。
 
@@ -1004,11 +1084,18 @@ API キーを設定している管理者またはインフラストラクチャ�
 
 6.  **「デバイス」**タブで、アクセス権限を付与するデバイスを選択します。
 
-    * **「タイプの選択」**グループで、すべてのベアメタル・サーバー、専用サーバー、および仮想サーバーへのアクセスを付与できるので、ユーザーはすべての[ワーカー・ノードのマシン・タイプ](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)を操作できます。
+    * **「タイプの選択」**グループで、すべてのベアメタル・サーバー、専用サーバー、および仮想サーバーへのアクセスを付与できるので、ユーザーはすべての[ワーカー・ノードのマシン・タイプ](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を操作できます。
     * **「将来のアクセスの有効化」**グループで、将来のすべてのベアメタル・サーバー、専用サーバー、および仮想サーバーへのアクセスをユーザーに付与できます。
     * デバイスの表で、適切なデバイスが選択されていることを確認します。
 
 7. 変更を保存するには、**「設定」**をクリックします。
+
+8. **重要**: ユーザーがクラスターとワーカー・ノードを管理できるように許可を割り当てる場合は、サポート・ケースを処理するためのユーザー・アクセス権限を割り当てる必要があります。
+  1. **「アクセス・ポリシー」**タブをクリックし、**「アクセス権限の割り当て」**をクリックします。
+  2. **「アカウント管理サービスへのアクセス権限の割り当て」**カードをクリックします。
+  3. **「サポート・センター」**を選択します。
+  4. ユーザーがサポート・ケースを表示、追加、および編集できるようにするには、**「管理者」**を選択します。
+  5. **「割り当て」**をクリックします。
 
 アクセス権をダウングレードしていますか? このアクションは完了するまで数分かかる場合があります。
 {: tip}
@@ -1039,7 +1126,7 @@ API キーを設定している管理者またはインフラストラクチャ�
         {: pre}
     * [インフラストラクチャー資格情報を設定して IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスする](#credentials)場合は、以下のようにします。
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1050,12 +1137,12 @@ API キーを設定している管理者またはインフラストラクチャ�
 
     * API キーをリセットするには、以下のようにします。
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}
     * インフラストラクチャー資格情報をリセットするには、以下のようにします。
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # バージョンの変更ログ
@@ -30,23 +30,447 @@ subcollection: containers
 {{site.data.keyword.containerlong}} Kubernetes クラスターに利用可能なメジャー、マイナー、パッチの更新に関するバージョン変更の情報を表示します。 変更には、Kubernetes および {{site.data.keyword.Bluemix_notm}} Provider コンポーネントへの更新が含まれます。
 {:shortdesc}
 
+変更ログに特に記載がない限り、{{site.data.keyword.containerlong_notm}} プロバイダー・バージョンでは、ベータ版の Kubernetes API および機能が有効です。変更される可能性のある Kubernetes アルファ機能は無効になっています。
+
 メジャー・バージョン、マイナー・バージョン、パッチ・バージョンについてと、マイナー・バージョン間の準備アクションについて詳しくは、[Kubernetes のバージョン](/docs/containers?topic=containers-cs_versions)を参照してください。
 {: tip}
 
 前のバージョンからの変更点については、以下の変更ログを参照してください。
+-  バージョン 1.14 [変更ログ](#114_changelog)。
 -  バージョン 1.13 [変更ログ](#113_changelog)。
 -  バージョン 1.12 [変更ログ](#112_changelog)。
--  バージョン 1.11 [変更ログ](#111_changelog)。
--  **非推奨**: バージョン 1.10 [変更ログ](#110_changelog)。
+-  **非推奨**: バージョン 1.11 [変更ログ](#111_changelog)。
 -  非サポートのバージョンの変更ログの[アーカイブ](#changelog_archive)。
 
-一部の変更ログは_ワーカー・ノード・フィックスパック_ に関するものであり、ワーカー・ノードにのみ適用されます。 [これらのパッチを適用して](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)、ワーカー・ノードのセキュリティー・コンプライアンスを確実にする必要があります。 このようなワーカー・ノード・フィックスパックのバージョンはマスターよりも高くなることがあります。ワーカー・ノードに固有のビルド・フィックスパックがあるからです。 他の変更ログは_マスター・フィックスパック_ に関するものであり、クラスター・マスターにのみ適用されます。 マスターのフィックスパックは自動的に適用されない場合があります。 [これらを手動で適用](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)することもできます。 パッチのタイプについて詳しくは、[更新タイプ](/docs/containers?topic=containers-cs_versions#update_types)を参照してください。
+一部の変更ログは_ワーカー・ノード・フィックスパック_ に関するものであり、ワーカー・ノードにのみ適用されます。 [これらのパッチを適用して](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)、ワーカー・ノードのセキュリティー・コンプライアンスを確実にする必要があります。 このようなワーカー・ノード・フィックスパックのバージョンはマスターよりも高くなることがあります。ワーカー・ノードに固有のビルド・フィックスパックがあるからです。 他の変更ログは_マスター・フィックスパック_ に関するものであり、クラスター・マスターにのみ適用されます。 マスターのフィックスパックは自動的に適用されない場合があります。 [これらを手動で適用](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)することもできます。 パッチのタイプについて詳しくは、[更新タイプ](/docs/containers?topic=containers-cs_versions#update_types)を参照してください。
 {: note}
 
 </br>
 
+## バージョン 1.14 変更ログ
+{: #114_changelog}
+
+### 1.14.2_1521 (2019 年 6 月 4 日リリース) の変更ログ
+{: #1142_1521}
+
+以下の表に、パッチ 1.14.2_1521 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.1_1519 からの変更点">
+<caption>バージョン 1.14.1_1519 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター DNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>クラスターの `create` 操作または `update` 操作の後に Kubernetes DNS ポッドと CoreDNS ポッドの両方が実行されたままになることがあるバグが修正されました。</td>
+</tr>
+<tr>
+<td>クラスター・マスター HA 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>マスター更新時に断続的に発生するマスター・ネットワーク接続障害を最小限に抑えるように構成が更新されました。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/etcd/releases/v3.3.13) を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Kubernetes 1.14.2 リリースをサポートするように更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes Metrics Server リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3) を参照してください。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.14.1_1519 (2019 年 5 月 20 日リリース) の変更ログ
+{: #1141_1519}
+
+以下の表に、パッチ 1.14.1_1519 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.1_1518 からの変更点">
+<caption>バージョン 1.14.1_1518 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.14.1_1518 (2019 年 5 月 13 日リリース) の変更ログ
+{: #1141_1518}
+
+以下の表に、パッチ 1.14.1_1518 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.1_1516 からの変更点">
+<caption>バージョン 1.14.1_1516 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA プロキシー</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2019-6706 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706) が解決されます。</td>
+</tr>
+<tr>
+<td>Kubernetes 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+</tr>
+<tr>
+<td>OpenVPN クライアント構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kube-system` 名前空間の OpenVPN クライアントの `vpn-*` ポッドについて、クラスター DNS がダウンしたときにポッドが失敗しないように `dnsPolicy` が `Default` に設定されるようになりました。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) および [CVE-2017-1000368 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.14.1_1516 (2019 年 5 月 7 日リリース) の変更ログ
+{: #1141_1516}
+
+以下の表に、パッチ 1.14.1_1516 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.5_1519 からの変更点">
+<caption>バージョン 1.13.5_1519 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.1</td>
+<td>[Calico リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.6/release-notes/) を参照してください。</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>[CoreDNS リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/2019/01/13/coredns-1.3.1-release/) を参照してください。 更新には、クラスター DNS サービスの[メトリック・ポート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/plugins/metrics/) の追加が含まれます。<br><br>CoreDNS がサポートされる唯一のクラスター DNS プロバイダーになりました。クラスターを旧バージョンから Kubernetes バージョン 1.14 に更新し、KubeDNS を使用していた場合、KubeDNS はクラスター更新時に自動的に CoreDNS に移行されます。詳細および更新前に CoreDNS をテストする方法については、[クラスター DNS プロバイダーの構成](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns)を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Kubernetes 1.14.1 リリースをサポートするように更新されました。さらに、`calicoctl` バージョンが 3.6.1 に更新されました。ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新が修正されました。プライベート・ロード・バランサーは、[プライベート・エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge#edge)での実行をサポートするようになりました。</td>
+</tr>
+<tr>
+<td>IBM ポッド・セキュリティー・ポリシー</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>Kubernetes [RunAsGroup ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) 機能をサポートするように [IBM ポッド・セキュリティー・ポリシー](/docs/containers?topic=containers-psp#ibm_psp)が更新されました。</td>
+</tr>
+<tr>
+<td>`kubelet` 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>1 つのポッドでワーカー・ノード上のすべてのプロセス ID が消費されないように、`--pod-max-pids` オプションが `14336` に設定されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) および [Kubernetes 1.14 のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/) を参照してください。<br><br>Kubernetes のデフォルトの役割ベースのアクセス制御 (RBAC) ポリシーで、[非認証ユーザーに対するディスカバリー API および許可確認 API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles) へのアクセスが認可されなくなりました。この変更は、新規バージョン 1.14 のクラスターにのみ適用されます。以前のバージョンからクラスターを更新した場合、非認証ユーザーはディスカバリー API および許可確認 API に引き続きアクセスできます。</td>
+</tr>
+<tr>
+<td>Kubernetes アドミッション・コントローラーの構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td><ul>
+<li>クラスターの Kubernetes API サーバーの `--enable-admission-plugins` オプションに `NodeRestriction` が追加され、このセキュリティー強化をサポートするようにクラスター・リソースが構成されました。</li>
+<li>クラスターの Kubernetes API サーバーについて、`--enable-admission-plugins` オプションから `Initializers` が削除され、`--runtime-config` オプションから `admissionregistration.k8s.io/v1alpha1=true` が削除されました。これらの API がサポートされなくなったためです。代わりに、[Kubernetes アドミッション Webhook ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) を使用できます。</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>[Kubernetes DNS autoscaler リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes 機能ゲートの構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td><ul>
+  <li>コンテナー・ランタイム構成の選択を無効にするために、`RuntimeClass=false` が追加されました。</li>
+  <li>`scheduler.alpha.kubernetes.io/critical-pod` ポッド・アノテーションがサポートされなくなったため、`ExperimentalCriticalPodAnnotation=true` が削除されました。代わりに、[Kubernetes のポッドの優先度 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority) を使用できます。</li></ul></td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>[CVE-2019-11068 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## バージョン 1.13 変更ログ
 {: #113_changelog}
+
+### 1.13.6_1524 (2019 年 6 月 4 日リリース) の変更ログ
+{: #1136_1524}
+
+以下の表に、パッチ 1.13.6_1524 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.6_1522 からの変更点">
+<caption>バージョン 1.13.6_1522 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター DNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>クラスターの `create` 操作または `update` 操作の後に Kubernetes DNS ポッドと CoreDNS ポッドの両方が実行されたままになることがあるバグが修正されました。</td>
+</tr>
+<tr>
+<td>クラスター・マスター HA 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>マスター更新時に断続的に発生するマスター・ネットワーク接続障害を最小限に抑えるように構成が更新されました。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/etcd/releases/v3.3.13) を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes Metrics Server リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3) を参照してください。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.13.6_1522 (2019 年 5 月 20 日リリース) の変更ログ
+{: #1136_1522}
+
+以下の表に、パッチ 1.13.6_1522 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.6_1521 からの変更点">
+<caption>バージョン 1.13.6_1521 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.13.6_1521 (2019 年 5 月 13 日リリース) の変更ログ
+{: #1136_1521}
+
+以下の表に、パッチ 1.13.6_1521 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.5_1519 からの変更点">
+<caption>バージョン 1.13.5_1519 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA プロキシー</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2019-6706 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706) が解決されます。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Kubernetes 1.13.6 リリースをサポートするように更新されました。ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新プロセスが修正されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+</tr>
+<tr>
+<td>OpenVPN クライアント構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kube-system` 名前空間の OpenVPN クライアントの `vpn-*` ポッドについて、クラスター DNS がダウンしたときにポッドが失敗しないように `dnsPolicy` が `Default` に設定されるようになりました。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368)、および [CVE-2019-11068 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.13.5_1519 (2019 年 4 月 29 日リリース) の変更ログ
+{: #1135_1519}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.13.5_1519 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.5_1518 からの変更点">
+<caption>バージョン 1.13.5_1518 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>インストール済み Ubuntu パッケージが更新されました。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.2.6) を参照してください。</td>
+</tr>
+</tbody>
+</table>
 
 ### ワーカー・ノード・フィックスパック 1.13.5_1518 (2019 年 4 月 15 日リリース) の変更ログ
 {: #1135_1518}
@@ -157,7 +581,7 @@ subcollection: containers
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -549,6 +973,201 @@ subcollection: containers
 バージョン 1.12 の変更ログをまとめます。
 {: shortdesc}
 
+### 1.12.9_1555 (2019 年 6 月 4 日リリース) の変更ログ
+{: #1129_1555}
+
+以下の表に、パッチ 1.12.9_1555 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.8_1553 からの変更点">
+<caption>バージョン 1.12.8_1553 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター DNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>クラスターの `create` 操作または `update` 操作の後に Kubernetes DNS ポッドと CoreDNS ポッドの両方が実行されたままになることがあるバグが修正されました。</td>
+</tr>
+<tr>
+<td>クラスター・マスター HA 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>マスター更新時に断続的に発生するマスター・ネットワーク接続障害を最小限に抑えるように構成が更新されました。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/etcd/releases/v3.3.13) を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Kubernetes 1.12.9 リリースをサポートするように更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes Metrics Server リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3) を参照してください。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.12.8_1553 (2019 年 5 月 20 日リリース) の変更ログ
+{: #1128_1533}
+
+以下の表に、パッチ 1.12.8_1553 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.8_1553 からの変更点">
+<caption>バージョン 1.12.8_1553 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.12.8_1552 (2019 年 5 月 13 日リリース) の変更ログ
+{: #1128_1552}
+
+以下の表に、パッチ 1.12.8_1552 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.7_1550 からの変更点">
+<caption>バージョン 1.12.7_1550 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA プロキシー</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2019-6706 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706) が解決されます。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.7-180</td>
+<td>v1.12.8-210</td>
+<td>Kubernetes 1.12.8 リリースをサポートするように更新されました。 ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新プロセスが修正されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.7</td>
+<td>v1.12.8</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+</tr>
+<tr>
+<td>OpenVPN クライアント構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kube-system` 名前空間の OpenVPN クライアントの `vpn-*` ポッドについて、クラスター DNS がダウンしたときにポッドが失敗しないように `dnsPolicy` が `Default` に設定されるようになりました。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368)、および [CVE-2019-11068 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.12.7_1550 (2019 年 4 月 29 日リリース) の変更ログ
+{: #1127_1550}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.12.7_1550 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.7_1549 からの変更点">
+<caption>バージョン 1.12.7_1549 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>インストール済み Ubuntu パッケージが更新されました。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.7) を参照してください。</td>
+</tr>
+</tbody>
+</table>
+
+
 ### ワーカー・ノード・フィックスパック 1.12.7_1549 (2019 年 4 月 15 日リリース) の変更ログ
 {: #1127_1549}
 
@@ -658,7 +1277,7 @@ subcollection: containers
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -1182,7 +1801,7 @@ subcollection: containers
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -1356,10 +1975,185 @@ subcollection: containers
 </tbody>
 </table>
 
-## バージョン 1.11 変更ログ
+## 非推奨: バージョン 1.11 変更ログ
 {: #111_changelog}
 
 バージョン 1.11 の変更ログをまとめます。
+{: shortdesc}
+
+Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 6 月 27 日 (暫定) に非サポート・バージョンになります。各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](/docs/containers?topic=containers-cs_versions#cs_versions)したうえで、少なくとも 1.12 にただちに[クラスターを更新](/docs/containers?topic=containers-update#update)してください。
+{: deprecated}
+
+### 1.11.10_1561 (2019 年 6 月 4 日リリース) の変更ログ
+{: #11110_1561}
+
+以下の表に、パッチ 1.11.10_1561 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.10_1559 からの変更点">
+<caption>バージョン 1.11.10_1559 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>マスター更新時に断続的に発生するマスター・ネットワーク接続障害を最小限に抑えるように構成が更新されました。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/etcd/releases/v3.3.13) を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.11.10_1559 (2019 年 5 月 20 日リリース) の変更ログ
+{: #11110_1559}
+
+以下の表に、パッチ・パック 1.11.10_1559 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.10_1558 からの変更点">
+<caption>バージョン 1.11.10_1558 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html)、および [CVE-2018-12130 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) に対して、カーネル更新を使用してワーカー・ノード・イメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.11.10_1558 (2019 年 5 月 13 日リリース) の変更ログ
+{: #11110_1558}
+
+以下の表に、パッチ 1.11.10_1558 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.9_1556 からの変更点">
+<caption>バージョン 1.11.9_1556 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA プロキシー</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2019-6706 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706) が解決されます。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.9-241</td>
+<td>v1.11.10-270</td>
+<td>Kubernetes 1.11.10 リリースをサポートするように更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.9</td>
+<td>v1.11.10</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+</tr>
+<tr>
+<td>OpenVPN クライアント構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kube-system` 名前空間の OpenVPN クライアントの `vpn-*` ポッドについて、クラスター DNS がダウンしたときにポッドが失敗しないように `dnsPolicy` が `Default` に設定されるようになりました。</td>
+</tr>
+<tr>
+<td>トラステッド・コンピューティング・エージェント</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368)、および [CVE-2019-11068 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) への対策としてイメージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.11.9_1556 (2019 年 4 月 29 日リリース) の変更ログ
+{: #1119_1556}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.11.9_1556 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.9_1555 からの変更点">
+<caption>バージョン 1.11.9_1555 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>インストール済み Ubuntu パッケージが更新されました。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.7) を参照してください。</td>
+</tr>
+</tbody>
+</table>
+
 
 ### ワーカー・ノード・フィックスパック 1.11.9_1555 (2019 年 4 月 15 日リリース) の変更ログ
 {: #1119_1555}
@@ -1476,7 +2270,7 @@ subcollection: containers
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -1985,7 +2779,7 @@ subcollection: containers
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -2100,7 +2894,7 @@ subcollection: containers
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
@@ -2336,13 +3130,13 @@ subcollection: containers
 <td>ログの循環</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を使用できます。</td>
+<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)を使用できます。</td>
 </tr>
 <tr>
 <td>ルート・パスワードの有効期限</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)してください。</td>
+<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)してください。</td>
 </tr>
 <tr>
 <td>ワーカー・ノード・ランタイム・コンポーネント (`kubelet`、`kube-proxy`、`containerd`)</td>
@@ -2514,16 +3308,109 @@ subcollection: containers
 <br />
 
 
-## 非推奨: バージョン 1.10 変更ログ
+## アーカイブ
+{: #changelog_archive}
+
+サポートされない Kubernetes バージョン:
+*  [バージョン 1.10](#110_changelog)
+*  [バージョン 1.9](#19_changelog)
+*  [バージョン 1.8](#18_changelog)
+*  [バージョン 1.7](#17_changelog)
+
+### バージョン 1.10 の変更ログ (2019 年 5 月 16 日付けでサポート対象外)
 {: #110_changelog}
 
 バージョン 1.10 の変更ログをまとめます。
 {: shortdesc}
 
-Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 5 月 15 日 に非サポート・バージョンになります。 各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](/docs/containers?topic=containers-cs_versions#cs_versions)したうえで、少なくとも 1.11 にただちに[クラスターを更新](/docs/containers?topic=containers-update#update)してください。
-{: deprecated}
+*   [ワーカー・ノード・フィックスパック 1.10.13_1558 (2019 年 5 月 13 日リリース) の変更ログ](#11013_1558)
+*   [ワーカー・ノード・フィックスパック 1.10.13_1557 (2019 年 4 月 29 日リリース) の変更ログ](#11013_1557)
+*   [ワーカー・ノード・フィックスパック 1.10.13_1556 (2019 年 4 月 15 日リリース) の変更ログ](#11013_1556)
+*   [1.10.13_1555 (2019 年 4 月 8 日リリース) の変更ログ](#11013_1555)
+*   [ワーカー・ノード・フィックスパック 1.10.13_1554 (2019 年 4 月 1 日リリース) の変更ログ](#11013_1554)
+*   [マスター・フィックスパック 1.10.13_1553 (2019 年 3 月 26 日リリース) の変更ログ](#11118_1553)
+*   [1.10.13_1551 (2019 年 3 月 20 日リリース) の変更ログ](#11013_1551)
+*   [1.10.13_1548 (2019 年 3 月 4 日リリース) の変更ログ](#11013_1548)
+*   [ワーカー・ノード・フィックスパック 1.10.12_1546 (2019 年 2 月 27 日リリース) の変更ログ](#11012_1546)
+*   [ワーカー・ノード・フィックスパック 1.10.12_1544 (2019 年 2 月 15 日リリース) の変更ログ](#11012_1544)
+*   [1.10.12_1543 (2019 年 2 月 5 日リリース) の変更ログ](#11012_1543)
+*   [ワーカー・ノード・フィックスパック 1.10.12_1541 (2019 年 1 月 28 日リリース) の変更ログ](#11012_1541)
+*   [1.10.12_1540 (2019 年 1 月 21 日リリース) の変更ログ](#11012_1540)
+*   [ワーカー・ノード・フィックスパック 1.10.11_1538 (2019 年 1 月 7 日リリース) の変更ログ](#11011_1538)
+*   [ワーカー・ノード・フィックスパック 1.10.11_1537 (2018 年 12 月 17 日リリース) の変更ログ](#11011_1537)
+*   [1.10.11_1536 (2018 年 12 月 4 日リリース) の変更ログ](#11011_1536)
+*   [ワーカー・ノード・フィックスパック 1.10.8_1532 (2018 年 11 月 27 日リリース) の変更ログ](#1108_1532)
+*   [ワーカー・ノード・フィックスパック 1.10.8_1531 (2018 年 11 月 19 日リリース) の変更ログ](#1108_1531)
+*   [1.10.8_1530 (2018 年 11 月 7 日リリース) の変更ログ](#1108_1530_ha-master)
+*   [ワーカー・ノード・フィックスパック 1.10.8_1528 (2018 年 10 月 26 日リリース) の変更ログ](#1108_1528)
+*   [ワーカー・ノード・フィックスパック 1.10.8_1525 (2018 年 10 月 10 日リリース) の変更ログ](#1108_1525)
+*   [1.10.8_1524 (2018 年 10 月 2 日リリース) の変更ログ](#1108_1524)
+*   [ワーカー・ノード・フィックスパック 1.10.7_1521 (2018 年 9 月 20 日リリース) の変更ログ](#1107_1521)
+*   [1.10.7_1520 (2018 年 9 月 4 日リリース) の変更ログ](#1107_1520)
+*   [ワーカー・ノード・フィックスパック 1.10.5_1519 (2018 年 8 月 23 日リリース) の変更ログ](#1105_1519)
+*   [ワーカー・ノード・フィックスパック 1.10.5_1518 (2018 年 8 月 13 日リリース) の変更ログ](#1105_1518)
+*   [1.10.5_1517 (2018 年 7 月 27 日リリース) の変更ログ](#1105_1517)
+*   [ワーカー・ノード・フィックスパック 1.10.3_1514 (2018 年 7 月 3 日リリース) の変更ログ](#1103_1514)
+*   [ワーカー・ノード・フィックスパック 1.10.3_1513 (2018 年 6 月 21 日リリース) の変更ログ](#1103_1513)
+*   [1.10.3_1512 (2018 年 6 月 12 日リリース) の変更ログ](#1103_1512)
+*   [ワーカー・ノード・フィックスパック 1.10.1_1510 (2018 年 5 月 18 日リリース) の変更ログ](#1101_1510)
+*   [ワーカー・ノード・フィックスパック 1.10.1_1509 (2018 年 5 月 16 日リリース) の変更ログ](#1101_1509)
+*   [1.10.1_1508 (2018 年 5 月 1 日リリース) の変更ログ](#1101_1508)
 
-### ワーカー・ノード・フィックスパック 1.10.13_1556 (2019 年 4 月 15 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.13_1558 (2019 年 5 月 13 日リリース) の変更ログ
+{: #11013_1558}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.10.13_1558 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.10.13_1557 からの変更点">
+<caption>バージョン 1.10.13_1557 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クラスター・マスター HA プロキシー</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2019-6706 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706) が解決されます。</td>
+</tr>
+</tbody>
+</table>
+
+#### ワーカー・ノード・フィックスパック 1.10.13_1557 (2019 年 4 月 29 日リリース) の変更ログ
+{: #11013_1557}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.10.13_1557 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.10.13_1556 からの変更点">
+<caption>1.10.13_1556 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>インストール済み Ubuntu パッケージが更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+
+#### ワーカー・ノード・フィックスパック 1.10.13_1556 (2019 年 4 月 15 日リリース) の変更ログ
 {: #11013_1556}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.13_1556 に含まれる変更内容を示します。
@@ -2549,7 +3436,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.13_1555 (2019 年 4 月 8 日リリース) の変更ログ
+#### 1.10.13_1555 (2019 年 4 月 8 日リリース) の変更ログ
 {: #11013_1555}
 
 以下の表に、パッチ 1.10.13_1555 に含まれる変更内容を示します。
@@ -2599,7 +3486,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.13_1554 (2019 年 4 月 1 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.13_1554 (2019 年 4 月 1 日リリース) の変更ログ
 {: #11013_1554}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.13_1554 に含まれる変更内容を示します。
@@ -2620,13 +3507,13 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と containerd がリソース不足にならないように、これらのコンポーネント用のメモリー予約が増加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
 
 
-### マスター・フィックスパック 1.10.13_1553 (2019 年 3 月 26 日リリース) の変更ログ
+#### マスター・フィックスパック 1.10.13_1553 (2019 年 3 月 26 日リリース) の変更ログ
 {: #11118_1553}
 
 以下の表に、マスターのフィックスパック 1.10.13_1553 に含まれる変更内容を示します。
@@ -2664,7 +3551,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.13_1551 (2019 年 3 月 20 日リリース) の変更ログ
+#### 1.10.13_1551 (2019 年 3 月 20 日リリース) の変更ログ
 {: #11013_1551}
 
 以下の表に、パッチ 1.10.13_1551 に含まれる変更内容を示します。
@@ -2720,7 +3607,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.13_1548 (2019 年 3 月 4 日リリース) の変更ログ
+#### 1.10.13_1548 (2019 年 3 月 4 日リリース) の変更ログ
 {: #11013_1548}
 
 以下の表に、パッチ 1.10.13_1548 に含まれる変更内容を示します。
@@ -2794,7 +3681,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.12_1546 (2019 年 2 月 27 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.12_1546 (2019 年 2 月 27 日リリース) の変更ログ
 {: #11012_1546}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.12_1546 に含まれる変更内容を示します。
@@ -2820,7 +3707,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.12_1544 (2019 年 2 月 15 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.12_1544 (2019 年 2 月 15 日リリース) の変更ログ
 {: #11012_1544}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.12_1544 に含まれる変更内容を示します。
@@ -2852,7 +3739,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.12_1543 (2019 年 2 月 5 日リリース) の変更ログ
+#### 1.10.12_1543 (2019 年 2 月 5 日リリース) の変更ログ
 {: #11012_1543}
 
 以下の表に、パッチ 1.10.12_1543 に含まれる変更内容を示します。
@@ -2925,7 +3812,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.12_1541 (2019 年 1 月 28 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.12_1541 (2019 年 1 月 28 日リリース) の変更ログ
 {: #11012_1541}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.12_1541 に含まれる変更内容を示します。
@@ -2951,7 +3838,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.12_1540 (2019 年 1 月 21 日リリース) の変更ログ
+#### 1.10.12_1540 (2019 年 1 月 21 日リリース) の変更ログ
 {: #11012_1540}
 
 以下の表に、パッチ 1.10.12_1540 に含まれる変更内容を示します。
@@ -3001,7 +3888,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.11_1538 (2019 年 1 月 7 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.11_1538 (2019 年 1 月 7 日リリース) の変更ログ
 {: #11011_1538}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.11_1538 に含まれる変更内容を示します。
@@ -3027,7 +3914,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.11_1537 (2018 年 12 月 17 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.11_1537 (2018 年 12 月 17 日リリース) の変更ログ
 {: #11011_1537}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.11_1537 に含まれる変更内容を示します。
@@ -3054,7 +3941,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.10.11_1536 (2018 年 12 月 4 日リリース) の変更ログ
+#### 1.10.11_1536 (2018 年 12 月 4 日リリース) の変更ログ
 {: #11011_1536}
 
 以下の表に、パッチ 1.10.11_1536 に含まれる変更内容を示します。
@@ -3099,12 +3986,12 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と docker がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と docker がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.8_1532 (2018 年 11 月 27 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.8_1532 (2018 年 11 月 27 日リリース) の変更ログ
 {: #1108_1532}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.8_1532 に含まれる変更内容を示します。
@@ -3130,7 +4017,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.8_1531 (2018 年 11 月 19 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.8_1531 (2018 年 11 月 19 日リリース) の変更ログ
 {: #1108_1531}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.8_1531 に含まれる変更内容を示します。
@@ -3156,7 +4043,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.8_1530 (2018 年 11 月 7 日リリース) の変更ログ
+#### 1.10.8_1530 (2018 年 11 月 7 日リリース) の変更ログ
 {: #1108_1530_ha-master}
 
 以下の表に、パッチ 1.10.8_1530 に含まれる変更内容を示します。
@@ -3212,12 +4099,12 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.8_1528 (2018 年 10 月 26 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.8_1528 (2018 年 10 月 26 日リリース) の変更ログ
 {: #1108_1528}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.8_1528 に含まれる変更内容を示します。
@@ -3243,7 +4130,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### マスター・フィックスパック 1.10.8_1527 (2018 年 10 月 15 日リリース) の変更ログ
+#### マスター・フィックスパック 1.10.8_1527 (2018 年 10 月 15 日リリース) の変更ログ
 {: #1108_1527}
 
 以下の表に、マスターのフィックスパック 1.10.8_1527 に含まれる変更内容を示します。
@@ -3275,7 +4162,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.8_1525 (2018 年 10 月 10 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.8_1525 (2018 年 10 月 10 日リリース) の変更ログ
 {: #1108_1525}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.8_1525 に含まれる変更内容を示します。
@@ -3308,7 +4195,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.10.8_1524 (2018 年 10 月 2 日リリース) の変更ログ
+#### 1.10.8_1524 (2018 年 10 月 2 日リリース) の変更ログ
 {: #1108_1524}
 
 以下の表に、パッチ 1.10.8_1524 に含まれる変更内容を示します。
@@ -3359,7 +4246,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.7_1521 (2018 年 9 月 20 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.7_1521 (2018 年 9 月 20 日リリース) の変更ログ
 {: #1107_1521}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.7_1521 に含まれる変更内容を示します。
@@ -3380,7 +4267,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ログの循環</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を使用できます。</td>
+<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)を使用できます。</td>
 </tr>
 <tr>
 <td>ワーカー・ノード・ランタイム・コンポーネント (`kubelet`、`kube-proxy`、`docker`)</td>
@@ -3392,7 +4279,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ルート・パスワードの有効期限</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)してください。</td>
+<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)してください。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3411,7 +4298,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.7_1520 (2018 年 9 月 4 日リリース) の変更ログ
+#### 1.10.7_1520 (2018 年 9 月 4 日リリース) の変更ログ
 {: #1107_1520}
 
 以下の表に、パッチ 1.10.7_1520 に含まれる変更内容を示します。
@@ -3461,7 +4348,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.5_1519 (2018 年 8 月 23 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.5_1519 (2018 年 8 月 23 日リリース) の変更ログ
 {: #1105_1519}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.5_1519 に含まれる変更内容を示します。
@@ -3494,7 +4381,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.10.5_1518 (2018 年 8 月 13 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.5_1518 (2018 年 8 月 13 日リリース) の変更ログ
 {: #1105_1518}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.5_1518 に含まれる変更内容を示します。
@@ -3520,7 +4407,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.5_1517 (2018 年 7 月 27 日リリース) の変更ログ
+#### 1.10.5_1517 (2018 年 7 月 27 日リリース) の変更ログ
 {: #1105_1517}
 
 以下の表に、パッチ 1.10.5_1517 に含まれる変更内容を示します。
@@ -3576,7 +4463,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.3_1514 (2018 年 7 月 3 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.3_1514 (2018 年 7 月 3 日リリース) の変更ログ
 {: #1103_1514}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.3_1514 に含まれる変更内容を示します。
@@ -3603,7 +4490,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.10.3_1513 (2018 年 6 月 21 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.3_1513 (2018 年 6 月 21 日リリース) の変更ログ
 {: #1103_1513}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.3_1513 に含まれる変更内容を示します。
@@ -3629,7 +4516,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.3_1512 (2018 年 6 月 12 日リリース) の変更ログ
+#### 1.10.3_1512 (2018 年 6 月 12 日リリース) の変更ログ
 {: #1103_1512}
 
 以下の表に、パッチ 1.10.3_1512 に含まれる変更内容を示します。
@@ -3687,7 +4574,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 
 
 
-### ワーカー・ノード・フィックスパック 1.10.1_1510 (2018 年 5 月 18 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.1_1510 (2018 年 5 月 18 日リリース) の変更ログ
 {: #1101_1510}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.1_1510 に含まれる変更内容を示します。
@@ -3713,7 +4600,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.10.1_1509 (2018 年 5 月 16 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.10.1_1509 (2018 年 5 月 16 日リリース) の変更ログ
 {: #1101_1509}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.10.1_1509 に含まれる変更内容を示します。
@@ -3739,7 +4626,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.10.1_1508 (2018 年 5 月 1 日リリース) の変更ログ
+#### 1.10.1_1508 (2018 年 5 月 1 日リリース) の変更ログ
 {: #1101_1508}
 
 以下の表に、パッチ 1.10.1_1508 に含まれる変更内容を示します。
@@ -3796,7 +4683,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>GPU サポート</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>スケジューリングおよび実行で、[グラフィックス・プロセッシング・ユニット (GPU) コンテナー・ワークロード](/docs/containers?topic=containers-app#gpu_app)がサポートされるようになりました。 使用可能な GPU マシン・タイプのリストについては、[ワーカー・ノード用のハードウェア](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)を参照してください。 詳しくは、[GPU のスケジュール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) に関する Kubernetes の資料を参照してください。</td>
+<td>スケジューリングおよび実行で、[グラフィックス・プロセッシング・ユニット (GPU) コンテナー・ワークロード](/docs/containers?topic=containers-app#gpu_app)がサポートされるようになりました。 使用可能な GPU マシン・タイプのリストについては、[ワーカー・ノード用のハードウェア](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を参照してください。 詳しくは、[GPU のスケジュール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) に関する Kubernetes の資料を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -3804,20 +4691,35 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <br />
 
 
-## アーカイブ
-{: #changelog_archive}
-
-サポートされない Kubernetes バージョン:
-*  [バージョン 1.9](#19_changelog)
-*  [バージョン 1.8](#18_changelog)
-*  [バージョン 1.7](#17_changelog)
-
 ### バージョン 1.9 の変更ログ (2018 年 12 月 27 日付けでサポート対象外)
 {: #19_changelog}
 
 バージョン 1.9 の変更ログをまとめます。
+{: shortdesc}
 
-### ワーカー・ノード・フィックスパック 1.9.11_1539 (2018 年 12 月 17 日リリース) の変更ログ
+*   [ワーカー・ノード・フィックスパック 1.9.11_1539 (2018 年 12 月 17 日リリース) の変更ログ](#1911_1539)
+*   [ワーカー・ノード・フィックスパック 1.9.11_1538 (2018 年 12 月 4 日リリース) の変更ログ](#1911_1538)
+*   [ワーカー・ノード・フィックスパック 1.9.11_1537 (2018 年 11 月 27 日リリース) の変更ログ](#1911_1537)
+*   [1.9.11_1536 (2018 年 11 月 19 日リリース) の変更ログ](#1911_1536)
+*   [ワーカー・ノード・フィックス 1.9.10_1532 (2018 年 11 月 7 日リリース) の変更ログ](#1910_1532)
+*   [ワーカー・ノード・フィックスパック 1.9.10_1531 (2018 年 10 月 26 日リリース) の変更ログ](#1910_1531)
+*   [マスター・フィックスパック 1.9.10_1530 (2018 年 10 月 15 日リリース) の変更ログ](#1910_1530)
+*   [ワーカー・ノード・フィックスパック 1.9.10_1528 (2018 年 10 月 10 日リリース) の変更ログ](#1910_1528)
+*   [1.9.10_1527 (2018 年 10 月 2 日リリース) の変更ログ](#1910_1527)
+*   [ワーカー・ノード・フィックスパック 1.9.10_1524 (2018 年 9 月 20 日リリース) の変更ログ](#1910_1524)
+*   [1.9.10_1523 (2018 年 9 月 4 日リリース) の変更ログ](#1910_1523)
+*   [ワーカー・ノード・フィックスパック 1.9.9_1522 (2018 年 8 月 23 日リリース) の変更ログ](#199_1522)
+*   [ワーカー・ノード・フィックスパック 1.9.9_1521 (2018 年 8 月 13 日リリース) の変更ログ](#199_1521)
+*   [1.9.9_1520 (2018 年 7 月 27 日リリース) の変更ログ](#199_1520)
+*   [ワーカー・ノード・フィックスパック 1.9.8_1517 (2018 年 7 月 3 日リリース) の変更ログ](#198_1517)
+*   [ワーカー・ノード・フィックスパック 1.9.8_1516 (2018 年 6 月 21 日リリース) の変更ログ](#198_1516)
+*   [1.9.8_1515 (2018 年 6 月 19 日リリース) の変更ログ](#198_1515)
+*   [ワーカー・ノード・フィックスパック 1.9.7_1513 (2018 年 6 月 11 日リリース) の変更ログ](#197_1513)
+*   [ワーカー・ノード・フィックスパック 1.9.7_1512 (2018 年 5 月 18 日リリース) の変更ログ](#197_1512)
+*   [ワーカー・ノード・フィックスパック 1.9.7_1511 (2018 年 5 月 16 日リリース) の変更ログ](#197_1511)
+*   [1.9.7_1510 (2018 年 4 月 30 日リリース) の変更ログ](#197_1510)
+
+#### ワーカー・ノード・フィックスパック 1.9.11_1539 (2018 年 12 月 17 日リリース) の変更ログ
 {: #1911_1539}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.11_1539 に含まれる変更内容を示します。
@@ -3843,7 +4745,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.11_1538 (2018 年 12 月 4 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.11_1538 (2018 年 12 月 4 日リリース) の変更ログ
 {: #1911_1538}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.11_1538 に含まれる変更内容を示します。
@@ -3864,12 +4766,12 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ワーカー・ノードのリソースの使用方法</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>kubelet と docker がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-plan_clusters#resource_limit_node)を参照してください。</td>
+<td>kubelet と docker がリソース不足にならないように、これらのコンポーネント用に専用の cgroup が追加されました。 詳しくは、[ワーカー・ノードのリソースの予約](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)を参照してください。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.11_1537 (2018 年 11 月 27 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.11_1537 (2018 年 11 月 27 日リリース) の変更ログ
 {: #1911_1537}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.11_1537 に含まれる変更内容を示します。
@@ -3895,7 +4797,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.9.11_1536 (2018 年 11 月 19 日リリース) の変更ログ
+#### 1.9.11_1536 (2018 年 11 月 19 日リリース) の変更ログ
 {: #1911_1536}
 
 以下の表に、パッチ 1.9.11_1536 に含まれる変更内容を示します。
@@ -3945,7 +4847,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックス 1.9.10_1532 (2018 年 11 月 7 日リリース) の変更ログ
+#### ワーカー・ノード・フィックス 1.9.10_1532 (2018 年 11 月 7 日リリース) の変更ログ
 {: #1910_1532}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.11_1532 に含まれる変更内容を示します。
@@ -3966,12 +4868,12 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.10_1531 (2018 年 10 月 26 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.10_1531 (2018 年 10 月 26 日リリース) の変更ログ
 {: #1910_1531}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.10_1531 に含まれる変更内容を示します。
@@ -3997,7 +4899,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### マスター・フィックスパック 1.9.10_1530 (2018 年 10 月 15 日リリース) の変更ログ
+#### マスター・フィックスパック 1.9.10_1530 (2018 年 10 月 15 日リリース) の変更ログ
 {: #1910_1530}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.10_1530 に含まれる変更内容を示します。
@@ -4023,7 +4925,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.10_1528 (2018 年 10 月 10 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.10_1528 (2018 年 10 月 10 日リリース) の変更ログ
 {: #1910_1528}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.10_1528 に含まれる変更内容を示します。
@@ -4056,7 +4958,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.9.10_1527 (2018 年 10 月 2 日リリース) の変更ログ
+#### 1.9.10_1527 (2018 年 10 月 2 日リリース) の変更ログ
 {: #1910_1527}
 
 以下の表に、パッチ 1.9.10_1527 に含まれる変更内容を示します。
@@ -4089,7 +4991,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.10_1524 (2018 年 9 月 20 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.10_1524 (2018 年 9 月 20 日リリース) の変更ログ
 {: #1910_1524}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.10_1524 に含まれる変更内容を示します。
@@ -4110,7 +5012,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ログの循環</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を使用できます。</td>
+<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)を使用できます。</td>
 </tr>
 <tr>
 <td>ワーカー・ノード・ランタイム・コンポーネント (`kubelet`、`kube-proxy`、`docker`)</td>
@@ -4122,7 +5024,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ルート・パスワードの有効期限</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)してください。</td>
+<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)してください。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4141,7 +5043,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.9.10_1523 (2018 年 9 月 4 日リリース) の変更ログ
+#### 1.9.10_1523 (2018 年 9 月 4 日リリース) の変更ログ
 {: #1910_1523}
 
 以下の表に、パッチ 1.9.10_1523 に含まれる変更内容を示します。
@@ -4185,7 +5087,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.9_1522 (2018 年 8 月 23 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.9_1522 (2018 年 8 月 23 日リリース) の変更ログ
 {: #199_1522}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.9_1522 に含まれる変更内容を示します。
@@ -4218,7 +5120,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.9.9_1521 (2018 年 8 月 13 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.9_1521 (2018 年 8 月 13 日リリース) の変更ログ
 {: #199_1521}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.9_1521 に含まれる変更内容を示します。
@@ -4244,7 +5146,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.9.9_1520 (2018 年 7 月 27 日リリース) の変更ログ
+#### 1.9.9_1520 (2018 年 7 月 27 日リリース) の変更ログ
 {: #199_1520}
 
 以下の表に、パッチ 1.9.9_1520 に含まれる変更内容を示します。
@@ -4294,7 +5196,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.8_1517 (2018 年 7 月 3 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.8_1517 (2018 年 7 月 3 日リリース) の変更ログ
 {: #198_1517}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.8_1517 に含まれる変更内容を示します。
@@ -4321,7 +5223,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.9.8_1516 (2018 年 6 月 21 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.8_1516 (2018 年 6 月 21 日リリース) の変更ログ
 {: #198_1516}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.8_1516 に含まれる変更内容を示します。
@@ -4347,7 +5249,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.9.8_1515 (2018 年 6 月 19 日リリース) の変更ログ
+#### 1.9.8_1515 (2018 年 6 月 19 日リリース) の変更ログ
 {: #198_1515}
 
 以下の表に、パッチ 1.9.8_1515 に含まれる変更内容を示します。
@@ -4392,7 +5294,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.9.7_1513 (2018 年 6 月 11 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.7_1513 (2018 年 6 月 11 日リリース) の変更ログ
 {: #197_1513}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.7_1513 に含まれる変更内容を示します。
@@ -4418,7 +5320,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.7_1512 (2018 年 5 月 18 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.7_1512 (2018 年 5 月 18 日リリース) の変更ログ
 {: #197_1512}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.7_1512 に含まれる変更内容を示します。
@@ -4444,7 +5346,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.9.7_1511 (2018 年 5 月 16 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.9.7_1511 (2018 年 5 月 16 日リリース) の変更ログ
 {: #197_1511}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.9.7_1511 に含まれる変更内容を示します。
@@ -4470,7 +5372,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.9.7_1510 (2018 年 4 月 30 日リリース) の変更ログ
+#### 1.9.7_1510 (2018 年 4 月 30 日リリース) の変更ログ
 {: #197_1510}
 
 以下の表に、パッチ 1.9.7_1510 に含まれる変更内容を示します。
@@ -4520,9 +5422,22 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 ### バージョン 1.8 変更ログ (サポート対象外)
 {: #18_changelog}
 
-以下の変更点を確認します。
+バージョン 1.8 の変更ログをまとめます。
+{: shortdesc}
 
-### ワーカー・ノード・フィックスパック 1.8.15_1521 (2018 年 9 月 20 日リリース) の変更ログ
+*   [ワーカー・ノード・フィックスパック 1.8.15_1521 (2018 年 9 月 20 日リリース) の変更ログ](#1815_1521)
+*   [ワーカー・ノード・フィックスパック 1.8.15_1520 (2018 年 8 月 23 日リリース) の変更ログ](#1815_1520)
+*   [ワーカー・ノード・フィックスパック 1.8.15_1519 (2018 年 8 月 13 日リリース) の変更ログ](#1815_1519)
+*   [1.8.15_1518 (2018 年 7 月 27 日リリース) の変更ログ](#1815_1518)
+*   [ワーカー・ノード・フィックスパック 1.8.13_1516 (2018 年 7 月 3 日リリース) の変更ログ](#1813_1516)
+*   [ワーカー・ノード・フィックスパック 1.8.13_1515 (2018 年 6 月 21 日リリース) の変更ログ](#1813_1515)
+*   [1.8.13_1514 (2018 年 6 月 19 日リリース) の変更ログ](#1813_1514)
+*   [ワーカー・ノード・フィックスパック 1.8.11_1512 (2018 年 6 月 11 日リリース) の変更ログ](#1811_1512)
+*   [ワーカー・ノード・フィックスパック 1.8.11_1511 (2018 年 5 月 18 日リリース) の変更ログ](#1811_1511)
+*   [ワーカー・ノード・フィックスパック 1.8.11_1510 (2018 年 5 月 16 日リリース) の変更ログ](#1811_1510)
+*   [1.8.11_1509 (2018 年 4 月 19 日リリース) の変更ログ](#1811_1509)
+
+#### ワーカー・ノード・フィックスパック 1.8.15_1521 (2018 年 9 月 20 日リリース) の変更ログ
 {: #1815_1521}
 
 <table summary="バージョン 1.8.15_1520 からの変更点">
@@ -4540,7 +5455,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ログの循環</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を使用できます。</td>
+<td>90 日内に再ロードまたは更新されないワーカー・ノードで `logrotate` が失敗することを防止するため、`cronjobs` の代わりに `systemd` タイマーを使用するように切り替えられました。 **注**: このマイナー・リリースの前のすべてのバージョンでは、ログが循環されないため、cron ジョブが失敗した後に 1 次ディスクが満杯になります。 ワーカー・ノードが更新も再ロードもされずに 90 日間アクティブだった場合、cron ジョブは失敗します。 ログで 1 次ディスクが満杯になった場合、ワーカー・ノードは失敗状態になります。 ワーカー・ノードを修正するには、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)または `ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)を使用できます。</td>
 </tr>
 <tr>
 <td>ワーカー・ノード・ランタイム・コンポーネント (`kubelet`、`kube-proxy`、`docker`)</td>
@@ -4552,7 +5467,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 <td>ルート・パスワードの有効期限</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)してください。</td>
+<td>ワーカー・ノードのルート・パスワードは、コンプライアンスの理由により 90 日後に有効期限が切れます。 自動化ツールがワーカー・ノードに root としてログインする必要がある場合や、root として実行される cron ジョブを使用している場合は、ワーカー・ノードにログインして `chage -M -1 root` を実行することによって、パスワード有効期限を無効にすることができます。 **注**: セキュリティー・コンプライアンスに関する要件で、root として実行したり、パスワード有効期限を削除したりすることを避ける必要がある場合は、有効期限を無効にしないでください。 代わりに、少なくとも 90 日ごとにワーカー・ノードを[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)または[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)してください。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4563,7 +5478,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.8.15_1520 (2018 年 8 月 23 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.15_1520 (2018 年 8 月 23 日リリース) の変更ログ
 {: #1815_1520}
 
 <table summary="バージョン 1.8.15_1519 からの変更点">
@@ -4592,7 +5507,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.8.15_1519 (2018 年 8 月 13 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.15_1519 (2018 年 8 月 13 日リリース) の変更ログ
 {: #1815_1519}
 
 <table summary="バージョン 1.8.15_1518 からの変更点">
@@ -4615,7 +5530,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.8.15_1518 (2018 年 7 月 27 日リリース) の変更ログ
+#### 1.8.15_1518 (2018 年 7 月 27 日リリース) の変更ログ
 {: #1815_1518}
 
 <table summary="バージョン 1.8.13_1516 からの変更点">
@@ -4662,7 +5577,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.8.13_1516 (2018 年 7 月 3 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.13_1516 (2018 年 7 月 3 日リリース) の変更ログ
 {: #1813_1516}
 
 <table summary="バージョン 1.8.13_1515 からの変更点">
@@ -4686,7 +5601,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.8.13_1515 (2018 年 6 月 21 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.13_1515 (2018 年 6 月 21 日リリース) の変更ログ
 {: #1813_1515}
 
 <table summary="バージョン 1.8.13_1514 からの変更点">
@@ -4709,7 +5624,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.8.13_1514 (2018 年 6 月 19 日リリース) の変更ログ
+#### 1.8.13_1514 (2018 年 6 月 19 日リリース) の変更ログ
 {: #1813_1514}
 
 <table summary="バージョン 1.8.11_1512 からの変更点">
@@ -4751,7 +5666,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.8.11_1512 (2018 年 6 月 11 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.11_1512 (2018 年 6 月 11 日リリース) の変更ログ
 {: #1811_1512}
 
 <table summary="バージョン 1.8.11_1511 からの変更点">
@@ -4775,7 +5690,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.8.11_1511 (2018 年 5 月 18 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.11_1511 (2018 年 5 月 18 日リリース) の変更ログ
 {: #1811_1511}
 
 <table summary="バージョン 1.8.11_1510 からの変更点">
@@ -4798,7 +5713,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.8.11_1510 (2018 年 5 月 16 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.8.11_1510 (2018 年 5 月 16 日リリース) の変更ログ
 {: #1811_1510}
 
 <table summary="バージョン 1.8.11_1509 からの変更点">
@@ -4822,7 +5737,7 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.8.11_1509 (2018 年 4 月 19 日リリース) の変更ログ
+#### 1.8.11_1509 (2018 年 4 月 19 日リリース) の変更ログ
 {: #1811_1509}
 
 <table summary="バージョン 1.8.8_1507 からの変更点">
@@ -4869,7 +5784,13 @@ Kubernetes バージョン 1.10 は非推奨バージョンであり、2019 年 
 ### バージョン 1.7 変更ログ (サポート対象外)
 {: #17_changelog}
 
-以下の変更点を確認します。
+バージョン 1.7 の変更ログをまとめます。
+{: shortdesc}
+
+*   [ワーカー・ノード・フィックスパック 1.7.16_1514 (2018 年 6 月 11 日リリース) の変更ログ](#1716_1514)
+*   [ワーカー・ノード・フィックスパック 1.7.16_1513 (2018 年 5 月 18 日リリース) の変更ログ](#1716_1513)
+*   [ワーカー・ノード・フィックスパック 1.7.16_1512 (2018 年 5 月 16 日リリース) の変更ログ](#1716_1512)
+*   [1.7.16_1511 (2018 年 4 月 19 日リリース) の変更ログ](#1716_1511)
 
 #### ワーカー・ノード・フィックスパック 1.7.16_1514 (2018 年 6 月 11 日リリース) の変更ログ
 {: #1716_1514}

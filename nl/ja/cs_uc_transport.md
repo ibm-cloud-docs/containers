@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} の運輸向けユース・ケース
@@ -130,7 +130,7 @@ HR 幹部 (CHRO) は新しい HR 福利厚生サイトを必要としていま�
 {{site.data.keyword.cloud_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} では、コンピュートのスピンアップが容易です。 それ以降、開発者は実験を簡単にできるようになり、オープン・ツールチェーンを使用して開発とテスト用のシステムの変更を素早くプッシュできるようになりました。 従来型のソフトウェア開発ツールは、IBM Watson Assistant を追加することで強化されます。 新しい福利厚生サイトが 3 週間未満で作成されました。
 
 主要なテクノロジー:    
-* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Watson を採用したチャットボット・サービス](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [{{site.data.keyword.contdelivery_full}} でのオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

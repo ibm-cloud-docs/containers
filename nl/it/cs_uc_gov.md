@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casi di utilizzo di governo per {{site.data.keyword.Bluemix_notm}}
@@ -39,9 +39,9 @@ Un responsabile dei programmi OGD (Open-Government Data) deve condividere i dati
 Perché {{site.data.keyword.Bluemix_notm}}: con {{site.data.keyword.containerlong_notm}}, il responsabile fornisce il valore trasformativo dei dati pubblici e privati combinati. Allo stesso modo, il servizio fornisce la piattaforma cloud pubblica per il refactoring e l'esposizione di microservizi da applicazioni monolitiche in loco. Inoltre, il cloud pubblico consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione.
 
 Tecnologie chiave:    
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Fornisci l'accesso ai dati pubblici con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [Fornisci l'accesso ai dati pubblici con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [Servizi IBM Cloud Analytics plug-and-play](https://www.ibm.com/cloud/analytics)
 
 **Contesto: il governo migliora la collaborazione e la velocità con gli sviluppatori della comunità che combinano i dati pubblici e privati**
@@ -117,7 +117,7 @@ I responsabili IT per una società di spedizione privata e il porto gestito dal 
 Perché {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione. I contenitori hanno fornito una piattaforma condivisibile in cui sia la società portuale che quella di spedizione avevano la garanzia che le informazioni condivise fossero ospitate su una piattaforma sicura. E tale piattaforma si ridimensiona quando si passa da piccoli sistemi di sviluppo e test a grandi sistemi di produzione. Le toolchain aperte hanno accelerato ulteriormente lo sviluppo mediante l'automazione di build, test e distribuzioni.
 
 Tecnologie chiave:    
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

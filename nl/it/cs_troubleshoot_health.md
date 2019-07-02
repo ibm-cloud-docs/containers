@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Risoluzione dei problemi di registrazione e di monitoraggio
@@ -71,20 +71,20 @@ Controlla i seguenti motivi sul perché i tuoi log del cluster non vengono visua
   <tr>
     <td>Se hai specificato uno spazio durante la creazione del cluster, il proprietario dell'account non dispone delle autorizzazioni di Gestore, Sviluppatore o Revisore in quello spazio.</td>
       <td>Per modificare le autorizzazioni di accesso per il proprietario dell'account:
-      <ol><li>Per appurare chi è il proprietario dell'account per il cluster, esegui <code>ibmcloud ks api-key-info</code>.</li>
+      <ol><li>Per appurare chi è il proprietario dell'account per il cluster, esegui <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Per concedere a tale proprietario dell'account le autorizzazioni di accesso allo spazio di gestore, sviluppatore o revisore {{site.data.keyword.containerlong_notm}}, consulta <a href="/docs/containers?topic=containers-users">Gestione dell'accesso al cluster</a>.</li>
       <li>Per aggiornare il token di registrazione dopo che sono state modificate le autorizzazioni, esegui <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Hai una configurazione di registrazione dell'applicazione con un collegamento simbolico nel tuo percorso dell'applicazione.</td>
-      <td><p>Per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potresti aver creato un collegamento simbolico.</p> <p>Esempio: se il percorso specificato è <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> ma vanno in <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, i log non potranno essere letti.</p></td>
+      <td>Hai una configurazione di registrazione per la tua applicazione con un collegamento simbolico nel tuo percorso dell'applicazione.</td>
+      <td><p>Per poter inviare i log, devi utilizzare un percorso assoluto nella tua configurazione della registrazione altrimenti i log non potranno essere letti. Se il tuo percorso viene montato nel tuo nodo di lavoro, potrebbe creare un collegamento simbolico.</p> <p>Esempio: se il percorso specificato è <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> ma vanno in <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, i log non potranno essere letti.</p></td>
     </tr>
   </tbody>
 </table>
 
 Per verificare le modifiche che hai apportato durante la risoluzione dei problemi, puoi distribuire *Noisy*, un pod di esempio che produce diversi eventi di log, a un nodo di lavoro nel tuo cluster.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Crea il file di configurazione `deploy-noisy.yaml`.
     ```
@@ -141,7 +141,7 @@ Elimina il pod `kube-dashboard` per forzare un riavvio. Il pod viene ricreato co
 {: #quota}
 
 {: tsSymptoms}
-Imposti una configurazione di registrazione nel tuo cluster per inoltrare i log a {{site.data.keyword.loganalysisfull}}. Quando visualizzi i log, vedi questo messaggio di errore o uno simile:
+Imposti una configurazione di registrazione nel tuo cluster per inoltrare i log a {{site.data.keyword.loganalysisfull}}. Quando visualizzi i log, vedi un messaggio di errore simile al seguente:
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -163,11 +163,11 @@ Controlla i seguenti motivi per cui stai raggiungendo la tua quota di log e i co
  </thead>
  <tbody>
   <tr>
-    <td>Uno o più pod stanno producendo una quantità molto elevata di log.</td>
+    <td>Uno o più pod producono un numero elevato di log.</td>
     <td>Puoi liberare spazio di archiviazione di log evitando che i log provenienti da specifici pod vengano inoltrati. Crea un [filtro di registrazione](/docs/containers?topic=containers-health#filter-logs) per questi pod.</td>
   </tr>
   <tr>
-    <td>Stai superando l'assegnazione giornaliera di 500MB per l'archiviazione di log per il piano Lite.</td>
+    <td>Superi l'assegnazione giornaliera di 500 MB per l'archiviazione di log per il piano Lite.</td>
     <td>Innanzitutto, [calcola la quota di ricerca e l'utilizzo giornaliero](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) del tuo dominio di log. Puoi quindi aumentare la tua quota di archiviazione di log [eseguendo l'upgrade del tuo piano del servizio {{site.data.keyword.loganalysisshort_notm}}](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ Controlla i seguenti motivi per cui stai raggiungendo la tua quota di log e i co
 {: #long_lines}
 
 {: tsSymptoms}
-Imposti una configurazione di registrazione nel tuo cluster per inoltrare i log a {{site.data.keyword.loganalysisfull_notm}}. Quando visualizzi i log, vedi un messaggio di log molto lungo. Inoltre, in Kibana, potresti riuscire a vedere solo gli ultimi 600 - 700 caratteri del messaggio di log.
+Imposti una configurazione di registrazione nel tuo cluster per inoltrare i log a {{site.data.keyword.loganalysisfull_notm}}. Quando visualizzi i log, vedi un lungo messaggio di log. Inoltre, in Kibana, potresti riuscire a vedere solo gli ultimi 600 - 700 caratteri del messaggio di log.
 
 {: tsCauses}
 Un lungo messaggio di log potrebbe essere troncato a causa della sua lunghezza prima di essere raccolto da Fluentd e, pertanto, il log potrebbe non essere analizzato correttamente da Fluentd prima di essere inoltrato a {{site.data.keyword.loganalysisshort_notm}}.
@@ -211,7 +211,7 @@ Stai ancora avendo problemi con il tuo cluster?
 [IBM Developer Answers ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Includi le tag `ibm-cloud`
 e `containers`.
     Consulta [Come ottenere supporto](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) per ulteriori dettagli sull'utilizzo dei forum.
--   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Contatta il supporto IBM aprendo un caso. Per informazioni su come aprire un caso di supporto IBM o sui livelli di supporto e sulla gravità dei casi, consulta [Come contattare il supporto](/docs/get-support?topic=get-support-getting-customer-support).
 Quando riporti un problema, includi il tuo ID del cluster. Per ottenere il tuo ID del cluster, esegui `ibmcloud ks clusters`. Puoi anche utilizzare il [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) per raccogliere ed esportare informazioni pertinenti dal tuo cluster da condividere con il supporto IBM.
 {: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -37,7 +38,7 @@ Rendez votre application conteneurisée accessible sur Internet en utilisant l'a
 Exposez un port public sur votre noeud worker et utilisez l'adresse IP publique du noeud worker pour accéder au service du cluster depuis Internet.
 {:shortdesc}
 
-Lorsque vous exposez votre application en créant un service Kubernetes du type NodePort, une valeur de port de noeud (NodePort) comprise entre 30000 et 32767 et une adresse IP interne de cluster sont affectées au service. Le service NodePort fait office de point d'entrée externe pour les demandes entrantes vers votre application. Le port de noeud affecté est exposé au public dans les paramètres `kubeproxy` de chaque noeud worker dans le cluster. Chaque noeud worker commence à écouter sur le port de noeud affecté pour détecter des demandes entrantes pour le service. Pour accéder au service depuis Internet, vous pouvez utiliser l'adresse IP publique de n'importe quel noeud worker affectée lors de la création du cluster et le service NodePort au format `<IP_address>:<nodeport>`. En plus de l'adresse IP publique, un service NodePort est accessible via l'adresse IP privée d'un noeud worker.
+Lorsque vous exposez votre application en créant un service Kubernetes du type NodePort, une valeur de port de noeud (NodePort) comprise entre 30000 et 32767 et une adresse IP interne de cluster sont affectées au service. Le service NodePort fait office de point d'entrée externe pour les demandes entrantes vers votre application. Le port de noeud affecté est exposé au public dans les paramètres `kubeproxy` de chaque noeud worker dans le cluster. Chaque noeud worker commence à écouter sur le port de noeud affecté pour détecter des demandes entrantes pour le service. Pour accéder au service depuis Internet, vous pouvez utiliser l'adresse IP publique de n'importe quel noeud worker affectée lors de la création du cluster et le service NodePort au format `<IP_address>:<nodeport>`. Si vous souhaitez accéder au service sur le réseau privé, utilisez l'adresse IP privée de n'importe quel noeud worker à la place de l'adresse IP publique.
 
 Le diagramme suivant montre comment la communication est dirigée vers une application depuis Internet lorsqu'un service NodePort est configuré :
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Tecnologia {{site.data.keyword.containerlong_notm}}
@@ -131,14 +133,14 @@ in un pod, in modo che tali contenitori possano essere indirizzati utilizzando l
 In un cluster Kubernetes eseguito su {{site.data.keyword.containerlong_notm}}, le tue applicazioni inserite in un contenitore sono ospitate su host di calcolo denominati nodi di lavoro. Per essere più specifici, le applicazioni vengono eseguite nei pod e i pod sono ospitati sui nodi di lavoro. I nodi di lavoro sono gestiti dal master Kubernetes. La configurazione delle comunicazioni tra il master Kubernetes e i nodi di lavoro dipende da come configuri la tua infrastruttura IBM Cloud (SoftLayer): un account con un endpoint del servizio pubblico o un account abilitato a VRF con endpoint del servizio pubblico e di servizio privato.
 {: shortdesc}
 
-La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account quando è [abilitato un endpoint del servizio pubblico](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public) solamente.
+La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account quando è [abilitato un endpoint del servizio pubblico](/docs/containers?topic=containers-plan_clusters#workeruser-master) solamente.
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} - architettura Kubernetes">
  <figcaption>Architettura di {{site.data.keyword.containerlong_notm}} quando è abilitato solo l'endpoint del servizio pubblico</figcaption> </figure>
 </p>
 
-La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account abilitato a VRF quando [sono abilitati gli endpoint del servizio pubblico e di servizio privato](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+La seguente immagine mostra i componenti del tuo cluster e come interagiscono in un account abilitato a VRF quando [sono abilitati gli endpoint del servizio pubblico e di servizio privato](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 
 <p>
 <figure>
@@ -264,3 +266,53 @@ Qual è la differenza tra il master Kubernetes e un nodo di lavoro? Grazie di av
 
 Vuoi vedere in che modo {{site.data.keyword.containerlong_notm}} può essere utilizzato con altri prodotti e servizi? Controlla alcune delle [integrazioni](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
+
+## Limitazioni del servizio
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} e il progetto open source Kubernetes sono forniti con le limitazioni e con le impostazioni di servizio predefinite per garantire la sicurezza, la convenienza e la funzionalità di base. Potresti essere in grado di modificare alcune delle limitazioni, laddove indicato. Se prevedi di raggiungere le seguenti limitazioni {{site.data.keyword.containerlong_notm}}, contatta il team IBM nello [Slack interno ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) o [esterno ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
+{: shortdesc}
+
+<table summary="Questa tabella contiene informazioni sulle limitazioni di {{site.data.keyword.containerlong_notm}}. Le colonne si leggono da sinistra a destra. La prima colonna contiene il tipo di limitazione e la seconda colonna contiene la descrizione della limitazione.">
+<caption>Limitazioni di {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+  <tr>
+    <th>Tipo</th>
+    <th>Descrizione</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Limiti di velocità API</td>
+    <td>100 richieste per ogni 10 secondi all'API {{site.data.keyword.containerlong_notm}} per ogni indirizzo IP di origine univoco.</td>
+  </tr>
+  <tr>
+    <td>Capacità del nodo di lavoro</td>
+    <td>I nodi di lavoro sono disponibili in [specifiche caratteristiche](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) di risorse di calcolo.</td>
+  </tr>
+  <tr>
+    <td>Accesso host dei nodi di lavoro</td>
+    <td>Per sicurezza, non puoi eseguire l'SSH nell'host di calcolo dei nodi di lavoro.</td>
+  </tr>
+  <tr>
+    <td>Numero massimo di nodi di lavoro</td>
+    <td> Se intendi superare quota 900 per ogni cluster, contatta prima il team IBM nello [Slack interno ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) o [esterno ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).<br><br>Se vedi un limite della capacità dell'infrastruttura IBM Cloud (SoftLayer) sul numero di istanze per ogni data center o che viene ordinato ogni mese, contatta il tuo rappresentante dell'infrastruttura IBM Cloud (SoftLayer).</td>
+  </tr>
+  <tr>
+    <td>Numero massimo di pod</td>
+    <td>110 per ogni nodo di lavoro.<br><br>Il numero di pod include i pod `kube-system` e `ibm-system` che vengono eseguiti sul nodo di lavoro. Per prestazioni migliorate, considera la limitazione del numero di pod che esegui per ogni core di calcolo in modo da non utilizzare in modo eccessivo il nodo di lavoro. Ad esempio, su un nodo di lavoro con una caratteristica `b3c.4x16` potresti eseguire 10 pod per ogni core che utilizzano non più del 75% della capacità totale del nodo di lavoro.</td>
+  </tr>
+  <tr>
+    <td>Numero massimo di servizi Kubernetes</td>
+    <td>65.000 IP per ogni cluster nell'intervallo 172.21.0.0/16 che puoi assegnare ai servizi Kubernetes all'interno del cluster.</td>
+  </tr>
+  <tr>
+    <td>Traffico ALB (application load balancer) in entrata</td>
+    <td>32.768 connessioni al secondo.<br><br>Se il tuo traffico in entrata supera questo numero, [amplia il numero di repliche ALB](/docs/containers?topic=containers-ingress#scale_albs) nel tuo cluster per gestire il carico di lavoro aumentato.</td>
+  </tr>
+  <tr>
+    <td>Volumi di archiviazione</td>
+    <td>Un totale combinato pari a 250 volumi delle istanze di archiviazione file e blocchi dell'infrastruttura IBM Cloud (SoftLayer) per ogni account.<br><br>Se monti una quantità superiore a questa indicata, potresti vedere un messaggio di "capacità esaurita" quando esegui il provisioning di volumi persistenti e devi contattare il tuo rappresentante dell'infrastruttura IBM Cloud (SoftLayer). Per ulteriori domande frequenti (FAQ), vedi la documentazione relativa all'archiviazione [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) e [blocchi](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-).</td>
+  </tr>
+</tbody>
+</table>

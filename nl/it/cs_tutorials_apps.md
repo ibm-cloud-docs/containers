@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Esercitazione: Distribuzione di applicazioni nei cluster Kubernetes
@@ -111,7 +111,7 @@ Per distribuire l'applicazione:
     ```
     {: pre}
 
-3. [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+3. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  Accedi alla CLI {{site.data.keyword.registryshort_notm}}.
 
@@ -130,10 +130,10 @@ esegui il seguente comando.
 6.  Crea un'immagine Docker che include i file dell'applicazione della directory `Lab 1` ed esegui il push dell'immagine allo spazio dei nomi {{site.data.keyword.registryshort_notm}} che hai creato nell'esercitazione precedente. Se hai bisogno di effettuare una modifica all'applicazione in futuro, ripeti questi passi per creare un'altra versione
 dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione delle tue informazioni personali](/docs/containers?topic=containers-security#pi) quando utilizzi le immagini del contenitore.
 
-    Utilizza caratteri alfanumerici minuscoli o di sottolineatura (`_`) solo nei nomi di immagine. Non dimenticare il punto (`.`) alla fine del comando. Il punto indica a Docker di guardare all'interno della directory corrente per trovare il Dockerfile e le risorse di build per creare l'immagine. Per ottenere il prefisso per la regione in cui ti trovi attualmente, esegui `ibmcloud api`. Ad esempio, il prefisso dell'ubicazione Dallas, regione Stati Uniti Sud, è `ng`.
+    Utilizza caratteri alfanumerici minuscoli o di sottolineatura (`_`) solo nei nomi di immagine. Non dimenticare il punto (`.`) alla fine del comando. Il punto indica a Docker di guardare all'interno della directory corrente per trovare il Dockerfile e le risorse di build per creare l'immagine. Per ottenere la regione del registro in cui ti trovi attualmente, esegui `ibmcloud cr region`.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -141,8 +141,8 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -156,7 +156,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
 7.  Le distribuzioni sono utilizzate per gestire i pod, che includono le istanze inserite nel contenitore di un'applicazione. Il seguente comando distribuisce l'applicazione in un singolo pod. Per gli scopi di questa esercitazione, la distribuzione viene denominata **hello-world-deployment** ma puoi fornirle qualsiasi nome tu voglia.
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -256,7 +256,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 
@@ -310,7 +310,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 3.  Crea, apponi tag ed esegui il push dell'applicazione come un'immagine nel tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}.  Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
@@ -318,8 +318,8 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -334,7 +334,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
     1. Aggiorna i dettagli dell'immagine nel tuo spazio dei nomi del registro privato.
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -481,7 +481,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
     2.  Crea, apponi tag ed esegui il push dell'applicazione `watson` come un'immagine al tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -504,7 +504,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
     2.  Crea, apponi tag ed esegui il push dell'applicazione `watson-talk` come un'immagine al tuo spazio dei nomi in {{site.data.keyword.registryshort_notm}}. Nuovamente, non dimenticare il punto (`.`) alla fine del comando.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -527,11 +527,11 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
     ```
     Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -542,14 +542,14 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -658,7 +658,7 @@ si apre un editor vi o un editor di testo.
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 

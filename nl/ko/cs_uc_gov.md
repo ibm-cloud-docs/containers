@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.Bluemix_notm}}의 정부 유스 케이스
@@ -39,9 +39,9 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}}를 사용해야 하는 이유: {{site.data.keyword.containerlong_notm}}를 통해, 책임자는 변화를 주도하는, 결합된 공공-민간 데이터의 가치를 제공합니다. 마찬가지로, 이 서비스는 기존 모놀리식 온프레미스 앱을 다시 작성하여 마이크로서비스를 노출하는 데 필요한 퍼블릭 클라우드를 제공합니다. 또한 퍼블릭 클라우드는 정부 및 공공 파트너십에서 외부 클라우드 서비스 및 협업 친화적인 오픈 소스 도구를 사용할 수 있게 해 줍니다.
 
 주요 기술:    
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.cos_full_notm}}를 사용하여 공공 데이터에 대한 액세스 제공](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [{{site.data.keyword.cos_full_notm}}를 사용하여 공공 데이터에 대한 액세스 제공](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [IBM Cloud 분석 서비스 즉시 사용](https://www.ibm.com/cloud/analytics)
 
 **컨텍스트: 지역 정부가 공공-민간 데이터를 결합하는 지역 공동체 개발자와의 협업 과정 및 속도를 개선함**
@@ -69,7 +69,7 @@ subcollection: containers
 * 작업자 노드의 상태 및 복구 모니터링
 * 워크로드 및 데이터가 있어야 하는 세계 어느 지역에서든 개발자가 직접 인프라를 확보할 필요가 없도록 글로벌 컴퓨팅 인프라 제공
 
-컴퓨팅 워크로드를 {{site.data.keyword.Bluemix_notm}}로 이동하는 것만으로는 충분하지 않습니다. 정부는 프로세스 및 방법 또한 변경해야 합니다. 제공자는 IBM Garage Method의 방법을 채택하여 Continuous Integration 및 Continuous Delivery(CI/CD)와 같은 최신 DevOps 방법을 지원하는 반복적인 Agile 제공 프로세스를 구현할 수 있습니다.
+컴퓨팅 워크로드를 {{site.data.keyword.Bluemix_notm}}로 이동하는 것만으로는 충분하지 않습니다. 정부는 프로세스 및 방법 또한 변경해야 합니다. 제공업체는 IBM Garage Method의 방법을 채택하여 지속적 통합 및 지속적 딜리버리(CI/CD)와 같은 최신 DevOps 방법을 지원하는 반복적인 Agile 전달 프로세스를 구현할 수 있습니다.
 
 대부분의 CI/CD 프로세스 자체는 클라우드의 {{site.data.keyword.contdelivery_full}}를 통해 자동화됩니다. 제공업체는 컨테이너 이미지를 준비하고, 취약성을 확인하고, 이를 Kubernetes 클러스터에 배치하는 데 사용되는 워크플로우 도구 체인을 정의할 수 있습니다.
 
@@ -117,7 +117,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}}를 사용해야 하는 이유: {{site.data.keyword.containerlong_notm}}는 정부 및 공공 파트너십에서 외부 클라우드 서비스 및 협업 친화적인 오픈 소스 도구를 사용할 수 있게 해 줍니다. 컨테이너는 항만과 운송 회사 모두 공유된 정보가 안전한 플랫폼에 호스팅되었다고 인정할 수 있는 공유 가능한 플랫폼을 제공합니다. 또한 이 플랫폼은 소형 개발-테스트 시스템에서 프로덕션 규모의 시스템에 이르기까지 자유롭게 스케일링됩니다. 공개 도구 체인은 빌드, 테스트 및 배치를 자동화함으로써 개발을 더욱 가속화합니다.
 
 주요 기술:    
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [컨테이너 보안 및 격리](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -150,7 +150,7 @@ subcollection: containers
 
 동시에, {{site.data.keyword.iamlong}}는 리소스에 대해 누가, 어떤 액세스 권한 레벨을 갖는지 제어하는 데 도움을 줍니다.
 
-개발자는 기존 도구를 사용하여 전문 분야의 문제점에 집중합니다. 이들은 고유 로깅 및 모니터링 코드를 작성하는 대신 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인드하여 이를 앱에 포함시킵니다. IBM이 Kubernetes와 인프라 업그레이드, 보안 등을 관리하므로 개발자는 또한 인프라 관리 태스크로부터도 자유로워집니다.
+개발자는 기존 도구를 사용하여 전문 분야의 문제점에 집중합니다. 이들은 고유 로깅 및 모니터링 코드를 작성하는 대신 {{site.data.keyword.Bluemix_notm}} 서비스를 클러스터에 바인드하여 이를 앱에 포함합니다. IBM이 Kubernetes와 인프라 업그레이드, 보안 등을 관리하므로 개발자는 또한 인프라 관리 태스크로부터도 자유로워집니다.
 
 **솔루션 모델**
 

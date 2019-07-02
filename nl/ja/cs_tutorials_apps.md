@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # チュートリアル: Kubernetes クラスターにアプリをデプロイする方法
@@ -99,7 +99,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
     ```
     {: pre}
 
-3. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+3. [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  {{site.data.keyword.registryshort_notm}} CLI にログインします。
 
@@ -116,10 +116,10 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 6.  `Lab 1` ディレクトリーのアプリ・ファイルを組み込んだ Docker イメージをビルドし、以前のチュートリアルで作成した {{site.data.keyword.registryshort_notm}} 名前空間にイメージをプッシュします。 後日アプリを変更しなければならなくなった場合は、この手順を繰り返して別バージョンのイメージを作成します。 **注**: コンテナー・イメージを使用する際の[個人情報の保護](/docs/containers?topic=containers-security#pi)の詳細を確認してください。
 
-    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。 現在自分が属する地域の地域接頭部を取得するには、`ibmcloud api` を実行します。 例えば、ダラス・ロケーションの米国南部地域の接頭部は、`ng` です。
+    イメージ名には小文字の英数字または下線 (`_`) のみを使用してください。 コマンドの末尾にピリオド (`.`) をつけることを忘れないようにしてください。 このピリオドは、イメージをビルドするための Dockerfile とビルド成果物を、現行ディレクトリー内で探すよう Docker に指示するものです。 現在自分が属するレジストリーの地域を取得するには、`ibmcloud cr region` を実行します。
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -127,8 +127,8 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -142,7 +142,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 7.  ポッドはデプロイメントを使用して管理され、コンテナー化されたアプリ・インスタンスを格納するために使用されます。 以下のコマンドでは、アプリを 1 つのポッドにデプロイします。 このチュートリアルのためにデプロイメントの名前は **hello-world-deployment** になっていますが、任意の名前を付けることができます。
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -242,7 +242,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 
@@ -296,7 +296,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 3.  {{site.data.keyword.registryshort_notm}} の名前空間へのイメージとして、アプリをビルドして、タグを指定し、プッシュします。  この場合も、コマンドの末尾にピリオド (`.`) を付けることを忘れないようにしてください。
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
@@ -304,8 +304,8 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -320,7 +320,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     1. プライベート・レジストリー名前空間内のイメージの詳細情報を更新します。
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -462,7 +462,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     2.  {{site.data.keyword.registryshort_notm}} の名前空間へのイメージとして、`watson` アプリをビルドして、タグを指定し、プッシュします。 この場合も、コマンドの末尾にピリオド (`.`) を付けることを忘れないようにしてください。
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -485,7 +485,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     2.  {{site.data.keyword.registryshort_notm}} の名前空間へのイメージとして、`watson-talk` アプリをビルドして、タグを指定し、プッシュします。 この場合も、コマンドの末尾にピリオド (`.`) を付けることを忘れないようにしてください。
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -508,11 +508,11 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     ```
     Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -523,14 +523,14 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -636,7 +636,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 

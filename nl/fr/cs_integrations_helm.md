@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Ajout de services à l'aide de chartes Helm
@@ -30,22 +32,22 @@ Vous pouvez ajouter des applications Kubernetes complexes à votre cluster en ut
 {: shortdesc}
 
 **Qu'est-ce que Helm et comment l'utiliser ?** </br>
-[Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://helm.sh) est un gestionnaire de package Kubernetes qui utilise des chartes Helm pour définir, installer et mettre à niveau des applications Kubernetes complexes dans votre cluster. Les chartes Helm regroupent les spécifications permettant de générer des fichiers YAML pour les ressources Kubernetes qui créent votre application. Ces ressources Kubernetes sont automatiquement appliquées dans votre cluster et leur version est gérée par Helm. Vous pouvez également utiliser Helm pour spécifier et conditionner votre propre application et laisser Helm générer les fichiers YAML pour vos ressources Kubernetes.   
+[Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://helm.sh) est un gestionnaire de package Kubernetes qui utilise des chartes Helm pour définir, installer et mettre à niveau des applications Kubernetes complexes dans votre cluster. Les chartes Helm regroupent les spécifications permettant de générer des fichiers YAML pour les ressources Kubernetes qui créent votre application. Ces ressources Kubernetes sont automatiquement appliquées dans votre cluster et se voient affecter une version par Helm. Vous pouvez également utiliser Helm pour spécifier et conditionner votre propre application et laisser Helm générer les fichiers YAML pour vos ressources Kubernetes.  
 
 Pour utiliser Helm dans votre cluster, vous devez installer l'interface de ligne de commande Helm sur votre machine locale et le serveur Helm Tiller dans chaque cluster où vous souhaitez utiliser Helm.
 
 **Quelles chartes Helm sont prises en charge dans {{site.data.keyword.containerlong_notm}} ?** </br>
 Pour obtenir une présentation des chartes Helm disponibles, voir le [catalogue de chartes Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). Les chartes Helm répertoriées dans ce catalogue sont regroupées comme suit :
 
-- **iks-charts** : chartes Helm qui sont approuvées pour {{site.data.keyword.containerlong_notm}}. Le nom de ce référentiel, `ibm`, a été remplacé par `iks-charts`. 
-- **ibm-charts** : chartes Helm qui sont approuvées pour les clusters {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} Private. 
-- **kubernetes** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `stable` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié. 
-- **kubernetes-incubator** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `incubator` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié. 
+- **iks-charts** : chartes Helm qui sont approuvées pour {{site.data.keyword.containerlong_notm}}. Le nom de ce référentiel, `ibm`, a été remplacé par `iks-charts`.
+- **ibm-charts** : chartes Helm qui sont approuvées pour les clusters {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} Private.
+- **kubernetes** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `stable` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié.
+- **kubernetes-incubator** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `incubator` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié.
 
 Les chartes Helm des référentiels **iks-charts** et **ibm-charts** sont entièrement intégrées dans l'organisation de support {{site.data.keyword.Bluemix_notm}}. Pour toute question ou problématique relative à l'utilisation de ces chartes Helm, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **Quels sont les prérequis pour l'utilisation de Helm et puis-je utiliser Helm dans un cluster privé ?** </br>
-Pour déployer des chartes Helm, vous devez installer l'interface de ligne de commande (CLI) Helm sur votre machine locale et installer le serveur Helm Tiller dans votre cluster. L'image de Tiller est stockée dans le registre public Google Container Registry. Pour accéder à l'image lors de l'installation de Tiller, votre cluster doit autoriser la connectivité de réseau public au registre public Google Container Registry. Les clusters avec le noeud final de service public activé peuvent accéder automatiquement à l'image. Les clusters privés protégés avec un pare-feu personnalisé ou les clusters ayant activé le noeud final de service privé uniquement, n'autorisent pas l'accès à l'image de Tiller. Vous pouvez à la place [extraire l'image sur votre machine locale et l'insérer dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}](#private_local_tiller) ou [installer des chartes Helm sans utiliser le serveur Tiller](#private_install_without_tiller).
+Pour déployer des chartes Helm, vous devez installer l'interface de ligne de commande (CLI) Helm sur votre machine locale et installer le serveur Helm Tiller dans votre cluster. L'image de Tiller est stockée dans le registre public Google Container Registry. Pour accéder à l'image lors de l'installation de Tiller, votre cluster doit autoriser la connectivité de réseau public au registre public Google Container Registry. Les clusters qui activent le noeud final de service public peuvent accéder automatiquement à l'image. Les clusters privés protégés avec un pare-feu personnalisé ou les clusters ayant activé le noeud final de service privé uniquement, n'autorisent pas l'accès à l'image de Tiller. Vous pouvez à la place [extraire l'image sur votre machine locale et l'insérer dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}](#private_local_tiller) ou [installer des chartes Helm sans utiliser le serveur Tiller](#private_install_without_tiller).
 
 
 ## Configuration de Helm dans un cluster avec accès public
@@ -55,47 +57,47 @@ Si votre cluster a activé le noeud final de service public, vous pouvez install
 {: shortdesc}
 
 Avant de commencer :
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Pour installer Tiller avec un compte de service Kubernetes et la liaison de rôle de cluster dans l'espace de nom `kube-system`, vous devez disposer du [rôle `cluster-admin`](/docs/containers?topic=containers-users#access_policies).
 
 Pour installer Helm dans un cluster avec un accès public :
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande (CLI) Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> sur votre machine locale.
 
-2. Vérifiez si vous avez déjà installé Tiller avec un compte de service Kubernetes dans votre cluster. 
+2. Vérifiez si vous avez déjà installé Tiller avec un compte de service Kubernetes dans votre cluster.
    ```
    kubectl get serviceaccount --all-namespaces | grep tiller
    ```
    {: pre}
-      
-   Exemple de sortie si Tiller est installé : 
+
+   Exemple de sortie si Tiller est installé :
    ```
    kube-system      tiller                               1         189d
    ```
    {: screen}
-      
-   L'exemple de sortie comprend l'espace de nom Kubernetes et le nom du compte de service pour Tiller. Si Tiller n'est pas installé avec un compte de service dans votre cluster, aucune sortie d'interface de ligne de commande n'est renvoyée.  
-      
-3. **Important** : pour maintenir la sécurité du cluster, configurez Tiller avec un compte de service et une liaison de rôle de cluster dans votre cluster.  
-   - **Si Tiller est installé avec un compte de service : ** 
+
+   L'exemple de sortie comprend l'espace de nom Kubernetes et le nom du compte de service pour Tiller. Si Tiller n'est pas installé avec un compte de service dans votre cluster, aucune sortie d'interface de ligne de commande n'est renvoyée.
+
+3. **Important** : pour maintenir la sécurité du cluster, configurez Tiller avec un compte de service et une liaison de rôle de cluster dans votre cluster.
+   - **Si Tiller est installé avec un compte de service : **
      1. Créez une liaison de rôle de cluster pour le compte de service Tiller. Remplacez `<namespace>` par l'espace de nom dans lequel Tiller est installé dans votre cluster.
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=<namespace>:tiller -n <namespace>
         ```
         {: pre}
-  
+
      2. Mettez à jour Tiller. Remplacez `<tiller_service_account_name>` par le nom du compte de service Kubernetes pour Tiller que vous avez extrait lors de l'étape précédente.
         ```
         helm init --upgrade --service-account <tiller_service_account_name>
         ```
         {: pre}
-           
+
      3. Vérifiez que la zone **Status** du pod `tiller-deploy` indique `Running` dans votre cluster.
         ```
         kubectl get pods -n <namespace> -l app=helm
         ```
         {: pre}
-           
+
         Exemple de sortie :
 
         ```
@@ -103,38 +105,38 @@ Pour installer Helm dans un cluster avec un accès public :
     tiller-deploy-352283156-nzbcm   1/1       Running   0          2m
         ```
         {: screen}
-        
-   - **Si Tiller n'est pas installé avec un compte de service :** 
+
+   - **Si Tiller n'est pas installé avec un compte de service :**
      1. Créez un compte de service Kubernetes et une liaison de rôle de cluster pour Tiller dans l'espace de nom `kube-system` de votre cluster.
         ```
         kubectl create serviceaccount tiller -n kube-system
         ```
         {: pre}
-        
+
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=kube-system:tiller -n kube-system
         ```
         {: pre}
-           
+
      2. Vérifiez que le compte de service Tiller est créé.
         ```
         kubectl get serviceaccount -n kube-system tiller
         ```
         {: pre}
-           
-        Exemple de sortie : 
+
+        Exemple de sortie :
         ```
         NAME                                 SECRETS   AGE
     tiller                               1         2m
         ```
         {: screen}
-          
+
      3. Initialisez l'interface de ligne de commande Helm et installez Tiller dans votre cluster avec le compte de service que vous avez créé.
         ```
         helm init --service-account tiller
         ```
         {: pre}
-           
+
      4. Vérifiez que la zone **Status** du pod `tiller-deploy` indique `Running` dans votre cluster.
         ```
         kubectl get pods -n kube-system -l app=helm
@@ -189,7 +191,7 @@ Si vous souhaitez installer une charte Helm sans utiliser Tiller, voir [Clusters
 {: tip}
 
 Avant de commencer :
-- Installez Docker sur votre machine locale. Si vous avez installé l'[interface de ligne de commande {{site.data.keyword.Bluemix_notm}}](/docs/cli?topic=cloud-cli-ibmcloud-cli#ibmcloud-cli), Docker est déjà installé.
+- Installez Docker sur votre machine locale. Si vous avez installé l'[interface de ligne de commande {{site.data.keyword.Bluemix_notm}}](/docs/cli?topic=cloud-cli-getting-started), Docker est déjà installé.
 - [Installez le plug-in de l'interface de ligne de commande {{site.data.keyword.registryshort_notm}} et configurez un espace de nom](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - Pour installer Tiller avec un compte de service Kubernetes et la liaison de rôle de cluster dans l'espace de nom `kube-system`, vous devez disposer du [rôle `cluster-admin`](/docs/containers?topic=containers-users#access_policies).
 
@@ -197,8 +199,8 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande (CLI) Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> sur votre machine locale.
 2. Connectez-vous à votre cluster privé à l'aide du tunnel VPN de l'infrastructure {{site.data.keyword.Bluemix_notm}} que vous avez configuré.
-3. **Important** : pour assurer la sécurité du cluster, créez un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy` en appliquant le fichier YAML suivant à partir du [référentiel `kube-samples` d'{{site.data.keyword.Bluemix_notm}}](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). 
-    1. [Procurez-vous le fichier YAML du compte de service et de liaison de rôle de cluster Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml). 
+3. **Important** : pour assurer la sécurité du cluster, créez un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy` en appliquant le fichier YAML suivant à partir du [référentiel `kube-samples` d'{{site.data.keyword.Bluemix_notm}}](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
+    1. [Procurez-vous le fichier YAML du compte de service et de liaison de rôle de cluster Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
 
     2. Créez les ressources Kubernetes dans votre cluster.
        ```
@@ -213,7 +215,7 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 
 4. [Recherchez la version de Tiller ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) que vous souhaitez installer dans votre cluster. Si vous n'avez pas besoin d'une version particulière, utilisez la version la plus récente.
 
-5. Extrayez l'image de Tiller du registre Google Container Registry public sur votre machine locale. 
+5. Extrayez l'image de Tiller du registre Google Container Registry public sur votre machine locale.
    ```
    docker pull gcr.io/kubernetes-helm/tiller:v2.11.0
    ```
@@ -261,8 +263,8 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 
 11. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.Bluemix_notm}}.
     ```
-   helm search iks-charts
-   ```
+    helm search iks-charts
+    ```
     {: pre}
 
     ```

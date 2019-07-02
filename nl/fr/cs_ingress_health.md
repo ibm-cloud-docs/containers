@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Consignation et surveillance d'Ingress
@@ -262,10 +263,11 @@ Installez la charte Helm de l'exportateur de métriques pour surveiller un ALB d
 Les pods d'exportateur de métriques d'ALB doivent se déployer sur les mêmes noeuds worker où sont déployés vos ALB. Si vos ALB s'exécutent sur des noeuds worker de périphérie, et que ces noeuds worker ont l'annotation taint pour empêcher d'autres déploiements de charge de travail, les pods d'exportateur de métriques ne peuvent pas être planifiés. Vous devez supprimer les annotations taint en exécutant la commande `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-1.  **Important** : [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez les référentiels Helm {{site.data.keyword.Bluemix_notm}}. 
+1.  **Important** : [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez les référentiels Helm {{site.data.keyword.Bluemix_notm}}.
 
 2. Installez la charte Helm `ibmcloud-alb-metrics-exporter` dans votre cluster. Cette charte Helm déploie un exportateur de métriques d'ALB et crée un compte de service `alb-metrics-service-account` dans l'espace de nom `kube-system`. Remplacez <alb-ID> par l'ID de l'ALB pour lequel vous souhaitez collecter les métriques. Pour afficher les ID des ALB dans votre cluster, exécutez la commande <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
-  Vous devez déployer une charte pour chaque ALB que vous désirez surveiller.{: note}
+  Vous devez déployer une charte pour chaque ALB que vous désirez surveiller.
+  {: note}
   ```
   helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
   ```
@@ -277,7 +279,7 @@ Les pods d'exportateur de métriques d'ALB doivent se déployer sur les mêmes n
   ```
   {: pre}
 
-4. Vérifiez que les pods `ibmcloud-alb-metrics-exporter` sont en cours d'exécution. 
+4. Vérifiez que les pods `ibmcloud-alb-metrics-exporter` sont en cours d'exécution.
   ```
   kubectl get pods -n kube-system -o wide
   ```
@@ -292,7 +294,7 @@ Les pods d'exportateur de métriques d'ALB doivent se déployer sur les mêmes n
   ```
   {:screen}
 
-5. Facultatif : [Installez l'agent Prometheus](#prometheus-agent) pour récupérer les métriques produites par l'exportateur et les rendre visibles sur un tableau de bord Prometheus. 
+5. Facultatif : [Installez l'agent Prometheus](#prometheus-agent) pour récupérer les métriques produites par l'exportateur et les rendre visibles sur un tableau de bord Prometheus.
 
 ### Installation de la charte Helm de l'agent Prometheus
 {: #prometheus-agent}
@@ -302,7 +304,7 @@ Après avoir installé l'[exportateur de métriques](#metrics-exporter), vous po
 
 1. Téléchargez le fichier TAR pour la charte Helm de l'exportateur de métriques à partir du site https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
 
-2. Accédez au sous-dossier Prometheus. 
+2. Accédez au sous-dossier Prometheus.
   ```
   cd ibmcloud-alb-metrics-exporter-1.0.7.tar/ibmcloud-alb-metrics-exporter/subcharts/prometheus
   ```

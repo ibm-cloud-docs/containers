@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的金融服务用例
@@ -41,7 +41,7 @@ subcollection: containers
 {{site.data.keyword.containerlong_notm}} 和关键技术：
 * [水平缩放](/docs/containers?topic=containers-app#highly_available_apps)
 * [利用多个区域实现高可用性](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [容器安全性和隔离](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} 可以跨应用程序持久存储和同步数据](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -105,7 +105,7 @@ subcollection: containers
 开发者还可以轻松进行试验，利用开放式工具链，快速将更改推送到开发和测试系统。在 AI 云服务上，通过一次单击将他们传统的软件开发工具添加到应用程序时，这些工具将采用全新外观。
 
 关键技术：
-* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [适应各种 CPU、内存和存储器需求的集群](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [通过 {{site.data.keyword.watson}} AI 预防欺诈](https://www.ibm.com/cloud/watson-studio)
 * [DevOps 本机工具，包括 {{site.data.keyword.contdelivery_full}} 中的开放式工具链](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

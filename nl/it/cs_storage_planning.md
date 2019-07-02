@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -68,7 +69,7 @@ Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per t
    {: tip}
 
 5. Analizza se i tuoi dati devono essere condivisi tra più regioni, zone o istanze applicative.
-   - **Accesso tra i pod:** quando utilizzi i volumi persistenti Kubernetes per accedere alla tua archiviazione, puoi determinare il numero di pod che possono montare il volume contemporaneamente. Ad alcune soluzioni di archiviazione, come ad esempio l'archiviazione blocchi, può accedere un solo pod per volta. Altre soluzioni di archiviazione ti consentono di condividere lo stesso volume tra più pod.
+   - **Accesso tra i pod:** quando utilizzi i volumi persistenti Kubernetes per accedere alla tua archiviazione, puoi determinare il numero di pod che possono montare il volume contemporaneamente. Ad alcune soluzioni di archiviazione, come ad esempio l'archiviazione blocchi, può accedere un solo pod per volta. Con altre soluzioni di archiviazione, puoi condividere il volume su più pod.
    - **Accesso tra zone e regioni:** potresti aver bisogno che i tuoi dati siano accessibili tra zone o regioni. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, sono specifiche per i data center e non possono essere condivise tra zone in una configurazione del cluster multizona.
 
    Se desideri rendere i tuoi dati accessibili tra zone o regioni, assicurati di consultare il tuo dipartimento legale per verificare che i tuoi dati possano essere archiviati in più zone o in un altro paese.
@@ -130,7 +131,7 @@ La seguente immagine mostra le opzioni di archiviazione dati non persistente dis
 <tr>
 <td style="text-align:left">Prestazioni</td>
 <td style="text-align:left">Elevata</td>
-<td style="text-align:left">Elevate con latenza più bassa quando si utilizza SSD</td>
+<td style="text-align:left">Elevate con latenza più bassa quando utilizzi SSD</td>
 </tr>
 <tr>
 <td style="text-align:left">Congruenza</td>
@@ -255,7 +256,7 @@ La seguente immagine mostra le opzioni a tua disposizione in {{site.data.keyword
 <tr>
 <td style="text-align:left">Casi di utilizzo comuni</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Archiviazione file singoli o di massa</li><li style="margin:0px; padding:0px">Condivisione file nell'ambito di un cluster a zona singola</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Serie con stato</li><li style="margin:0px; padding:0px">Archiviazione di supporto quando esegui il tuo database</li><li style="margin:0px; padding:0px">Accesso ad elevate prestazioni per i singoli pod</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Serie con stato</li><li style="margin:0px; padding:0px">Archiviazione di supporto quando esegui il tuo database</li><li style="margin:0px; padding:0px">Accesso ad alte prestazioni per i singoli pod</li></ul></td>
 </tr>
 <tr>
 <td style="text-align:left">Casi di utilizzo non ideali</td>
@@ -322,8 +323,8 @@ La seguente immagine mostra le opzioni a tua disposizione in {{site.data.keyword
 </tr>
 <tr>
 <td style="text-align:left">Prestazioni</td>
-<td style="text-align:left">Elevate per le operazioni di lettura. Prevedibili a causa dell'IOPS e della dimensione assegnati quando si utilizzano macchine non SDS.</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Prestazioni prossime a quelle di un bare metal per le operazioni di lettura e scrittura quando si utilizzano macchine SDS. </li><li style="margin:0px; padding:0px">Fornisce [profili ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) per eseguire database ad alte prestazioni</li><li style="margin:0px; padding:0px">Possibilità di creare un livello di archiviazione con profili di prestazioni differenti da cui la tua applicazione può scegliere.</li></ul> </td>
+<td style="text-align:left">Elevate per le operazioni di lettura. Prevedibili a causa dell'IOPS e della dimensione assegnati quando utilizzi macchine non SDS.</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Prestazioni prossime a quelle di un bare metal per le operazioni di lettura e scrittura sequenziali quando utilizzi macchine SDS. </li><li style="margin:0px; padding:0px">Fornisce [profili ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) per eseguire database ad alte prestazioni</li><li style="margin:0px; padding:0px">Possibilità di creare un livello di archiviazione con profili di prestazioni differenti da cui la tua applicazione può scegliere.</li></ul> </td>
 <td style="text-align:left">Elevate in caso di distribuzione allo stesso data center della tua applicazione.</td>
 </tr>
 <tr>
@@ -341,14 +342,14 @@ di archiviazione. Ogni nodo memorizza solo una parte dei dati. </td>
 </tr>
 <tr>
 <td style="text-align:left">Resilienza</td>
-<td style="text-align:left">Elevata poiché le porzioni di dati vengono distribuite in 3 zone o regioni. Media, se configurata solo in una singola zona.</td>
-<td style="text-align:left">Elevata quando configurata con la replica su 3 zone. Media, quando si archiviano i dati solo in una singola zona.</td>
+<td style="text-align:left">Elevata poiché le porzioni di dati vengono distribuite in tre zone o regioni. Media, se configurata solo in una singola zona.</td>
+<td style="text-align:left">Elevata quando configurata con la replica su tre zone. Media, quando archivi i dati solo in una singola zona.</td>
 <td style="text-align:left">Dipende dal DBaaS e dalla tua configurazione. </td>
 </tr>
 <tr>
 <td style="text-align:left">Disponibilità</td>
 <td style="text-align:left">Elevata in ragione della distribuzione tra zone o regioni. </td>
-<td style="text-align:left">Elevata quando si esegue la replica dei dati su 3 nodi di lavoro in zone differenti.</td>
+<td style="text-align:left">Elevata quando esegui la replica dei dati su tre nodi di lavoro in zone differenti.</td>
 <td style="text-align:left">Elevata se hai configurato più istanze. </td>
 </tr>
 <tr>
@@ -366,7 +367,7 @@ di archiviazione. Ogni nodo memorizza solo una parte dei dati. </td>
 <tr>
 <td style="text-align:left">Casi di utilizzo comuni</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li><li style="margin:0px; padding:0px">Big Data statici</li><li style="margin:0px; padding:0px">Contenuto multimediale statico</li><li style="margin:0px; padding:0px">Applicazioni web</li><li style="margin:0px; padding:0px">Backup</li><li style="margin:0px; padding:0px">Archivi</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Serie con stato</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li><li style="margin:0px; padding:0px">Soluzione di archiviazione comune quando si eseguono applicazioni su più provider cloud</li><li style="margin:0px; padding:0px">Archiviazione di supporto quando esegui il tuo database</li><li style="margin:0px; padding:0px">Accesso ad elevate prestazioni per i singoli pod</li><li style="margin:0px; padding:0px">Accesso all'archiviazione condivisa su più pod e nodi di lavoro</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Serie con stato</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li><li style="margin:0px; padding:0px">Soluzione di archiviazione comune quando esegui applicazioni su più provider cloud</li><li style="margin:0px; padding:0px">Archiviazione di supporto quando esegui il tuo database</li><li style="margin:0px; padding:0px">Accesso ad alte prestazioni per i singoli pod</li><li style="margin:0px; padding:0px">Accesso all'archiviazione condivisa su più pod e nodi di lavoro</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Cluster multizona</li><li style="margin:0px; padding:0px">Database relazionali e non relazionali</li><li style="margin:0px; padding:0px">Dati distribuiti geograficamente</li></ul></td>
 </tr>
 <tr>

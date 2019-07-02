@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Suppression de stockage persistant dans un cluster
 {: #cleanup}
 
-Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC, et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer), comme par exemple du stockage de fichiers NFS ou du stockage par blocs. Selon comment vous avez créé ces composants, il vous faudra peut-être les supprimer tous les trois séparément.
+Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC, et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer), comme par exemple du stockage de fichiers NFS ou du stockage par blocs. Selon comment vous avez créé votre stockage, il vous faudra peut-être les supprimer tous les trois séparément.
 {:shortdesc}
 
 ## Nettoyage de stockage persistant
@@ -48,7 +50,7 @@ Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprim
 
 <p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour nettoyer des données persistantes :
 
@@ -75,11 +77,11 @@ Pour nettoyer des données persistantes :
 
    Si la politique de récupération indique `Delete`, votre volume persistant et le stockage physique sont supprimés en même temps que la PVC. Si la politique de récupération indique `Retain` ou si vous avez mis à disposition votre stockage sans classe de stockage, votre volume persistant et votre stockage physique ne sont pas supprimés en même temps que la PVC. Vous devez supprimer la PVC, le volume persistant et le stockage physique séparément.
 
-   Si vous êtes facturé au mois pour le stockage, vous êtes redevable pour le mois complet, même si vous supprimez le stockage avant la fin du cycle de facturation.
+   Si vous êtes facturé tous les mois pour le stockage, vous êtes redevable pour le mois complet, même si vous supprimez le stockage avant la fin du cycle de facturation.
    {: important}
 
-3. Supprimez les pods sur lesquels est montée la PVC.
-   1. Répertoriez les pods sur lesquels est montée la PVC.
+3. Supprimez les pods qui montent la réservation de volume persistant. 
+   1. Répertoriez les pods qui montent la réservation de volume persistant.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
@@ -178,7 +180,7 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
 
-9. Vérifiez que l'instance de stockage physique est supprimée. Notez que l'exécution du processus de suppression peut prendre quelques jours.
+9. Vérifiez que l'instance de stockage physique est supprimée. L'exécution du processus de suppression peut prendre quelques jours.
 
    **Stockage de fichiers :**
    ```

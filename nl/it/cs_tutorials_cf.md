@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Esercitazione: Migrazione di un'applicazione da Cloud Foundry a un cluster
@@ -146,7 +147,7 @@ computer. Il seguente esempio mostra come creare un file Dockerfile con l'editor
 4. Crea un'immagine Docker che includa il tuo codice applicazione e inseriscila nel tuo registro privato.
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -179,8 +180,8 @@ contiene il Dockerfile, immetti un punto (.). Altrimenti, utilizza il percorso r
   L'immagine viene creata nel tuo registro privato. Puoi eseguire il comando `ibmcloud cr images` per verificare che l'immagine sia stata creata.
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -216,7 +217,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry_namespace>/cf-py:latest
+        - image: us.icr.io/<registry_namespace>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -243,7 +244,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>In `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `ibmcloud cr namespaces` per trovarlo.</td>
+  <td>In `us.icr.io/<registry_namespace>/cf-py:latest`, sostituisci &lt;registry_namespace&gt; con lo spazio dei nomi del tuo registro delle immagini privato. Se non sei sicuro di quale sia il tuo spazio dei nomi, esegui il comando `ibmcloud cr namespaces` per trovarlo.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -279,7 +280,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

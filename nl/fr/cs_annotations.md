@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Personnalisation d'Ingress avec des annotations
@@ -327,7 +329,7 @@ Indiquez les actions personnalisées que peut entreprendre l'ALB pour des erreur
 {: shortdesc}
 
 **Description**</br>
-Pour traiter des erreurs spécifiques à HTTP prévisibles, vous pouvez configurer des actions d'erreur personnalisées pour l'ALB. 
+Pour traiter des erreurs spécifiques à HTTP prévisibles, vous pouvez configurer des actions d'erreur personnalisées pour l'ALB.
 
 * L'annotation `custom-errors` définit le nom du service, l'erreur HTTP à traiter et le nom de l'action d'erreur que l'ALB effectue lorsqu'il détecte l'erreur HTTP indiquée pour le service.
 * L'annotation `custom-error-actions` définit les actions d'erreur personnalisées dans les fragments de code NGINX.
@@ -479,7 +481,7 @@ Routez les demandes entrantes vers vos applications avec un équilibreur de char
 {:shortdesc}
 
 **Description**</br>
-Sélectionner un équilibreur de charge ALB privé pour acheminer les demandes entrantes au lieu de l'équilibreur de charge ALB public. 
+Sélectionner un équilibreur de charge ALB privé pour acheminer les demandes entrantes au lieu de l'équilibreur de charge ALB public.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -661,7 +663,7 @@ spec:
 {: #keepalive-requests}
 
 **Description**</br>
-Définir le nombre maximum de demandes pouvant être traitées via une connexion persistante. 
+Définir le nombre maximum de demandes pouvant être traitées via une connexion persistante.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -710,7 +712,7 @@ spec:
 {: #keepalive-timeout}
 
 **Description**</br>
-Définir la durée maximale d'ouverture d'une connexion persistante sur le serveur. 
+Définir la durée maximale d'ouverture d'une connexion persistante sur le serveur.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -1027,7 +1029,7 @@ Définissez le nombre maximal de tentatives de communication infructueuses avec 
 {:shortdesc}
 
 **Description**</br>
-Définissez le nombre maximal de tentatives de connexion infructueuses au serveur par l'ALB avant de considérer que ce serveur est indisponible. Pour que le serveur soit considéré comme indisponible, l'ALB doit atteindre le nombre maximal compris dans la durée impartie définie par l'annotation [`upstream-fail-timeout`](#upstream-fail-timeout).  La durée pendant laquelle le serveur est considéré comme indisponible est également définie par l'annotation `upstream-fail-timeout`.
+Définissez le nombre maximal de tentatives de connexion infructueuses au serveur par l'ALB avant de considérer que ce serveur est indisponible. Pour que le serveur soit considéré comme indisponible, l'ALB doit atteindre le nombre maximal compris dans la durée impartie définie par l'annotation [`upstream-fail-timeout`](#upstream-fail-timeout). La durée pendant laquelle le serveur est considéré comme indisponible est également définie par l'annotation `upstream-fail-timeout`.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -1150,7 +1152,7 @@ spec:
   ```
   {: pre}
 
-3. Ajoutez les ports HTTP et HTTPS différents des valeurs par défaut à la mappe de configuration (ConfigMap). Remplacez `<port>` par le port HTTP ou HTTPS que vous souhaitez ouvrir. 
+3. Ajoutez les ports HTTP et HTTPS différents des valeurs par défaut à la mappe de configuration (ConfigMap). Remplacez `<port>` par le port HTTP ou HTTPS que vous souhaitez ouvrir.
   <p class="note">Par défaut, les ports 80 et 443 sont ouverts. Pour conserver les ports 80 et 443 ouverts, vous devez également les inclure en plus des autres ports TCP que vous indiquez dans la zone `public-ports`. Si vous avez activé un équilibreur de charge ALB privé, vous devez également spécifier tous les ports que vous souhaitez garder ouverts dans la zone `private-ports`. Pour plus d'informations, voir [Ouverture de ports dans l'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-ingress#opening_ingress_ports).</p>
   ```
   apiVersion: v1
@@ -1180,7 +1182,7 @@ spec:
   ```
   {: screen}
 
-5. Configurez Ingress pour utiliser les ports différents des ports par défaut lorsque vous routez le trafic réseau entrant vers vos services. Utilisez l'annotation de l'exemple de fichier YAML dans cette référence. 
+5. Configurez Ingress pour utiliser les ports différents des ports par défaut lorsque vous routez le trafic réseau entrant vers vos services. Utilisez l'annotation de l'exemple de fichier YAML dans cette référence.
 
 6. Mettez à jour la configuration de votre équilibreur de charge ALB.
   ```
@@ -1496,7 +1498,7 @@ Accédez à une application via un port TCP non standard.
 {:shortdesc}
 
 **Description**</br>
-Utiliser cette annotation pour une application qui s'exécute sur une charge de travail de flux TCP. 
+Utiliser cette annotation pour une application qui s'exécute sur une charge de travail de flux TCP.
 
 <p class="note">L'équilibreur de charge ALB opère en mode passe-système et achemine le trafic aux applications de back end. La terminaison SSL n'est pas prise en charge dans ce cas. La connexion TLS est maintenue et fonctionne sans aucun changement.</p>
 
@@ -1595,7 +1597,7 @@ spec:
   ```
   {: screen}
 
-5. Configurez l'ALB pour accéder à votre application via un port TCP non standard. Utilisez l'annotation `tcp-ports` de l'exemple de fichier YAML dans cette référence. 
+5. Configurez l'ALB pour accéder à votre application via un port TCP non standard. Utilisez l'annotation `tcp-ports` de l'exemple de fichier YAML dans cette référence.
 
 6. Créez votre ressource ALB ou mettez à jour la configuration de votre équilibreur de charge ALB existant.
   ```
@@ -1767,7 +1769,7 @@ Routez le trafic réseau entrant sur un chemin de domaine d'un équilibreur de c
 {:shortdesc}
 
 **Description**</br>
-Votre domaine d'équilibreur de charge d'application (ALB) Ingress achemine le trafic réseau entrant sur `mykubecluster.us-south.containers.appdomain.cloud/beans` vers votre application. Votre application est en mode écoute sur `/coffee` au lieu de `/beans`. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur `/beans` est réacheminé vers votre application en utilisant le chemin `/coffee`. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) pour les séparer.
+Votre domaine d'équilibreur de charge d'application (ALB) Ingress achemine le trafic réseau entrant sur `mykubecluster.us-south.containers.appdomain.cloud/beans` vers votre application. Votre application est en mode écoute sur `/coffee` au lieu de `/beans`. Pour acheminer le trafic réseau entrant vers votre application, ajoutez l'annotation rewrite au fichier de configuration de votre ressource Ingress. L'annotation rewrite garantit que le trafic réseau entrant sur `/beans` est réacheminé vers votre application en utilisant le chemin `/coffee`. Lorsque vous incluez plusieurs services, utilisez uniquement un point-virgule (;) non précédé ni suivi d'un espace pour les séparer.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 
@@ -1816,7 +1818,7 @@ spec:
 ## Annotations de mémoire tampon de proxy
 {: #proxy-buffer}
 
-L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Avec les annotations de mémoire tampon de proxy, vous pouvez configurer comment les données sont mises en mémoire tampon sur votre ALB lors de l'envoi ou de la réception de paquets de données.
+L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Avec les annotations de mémoire tampon de proxy, vous pouvez configurer comment les données sont mises en mémoire tampon sur votre ALB lors de l'envoi ou de la réception de paquets de données.  
 {: shortdesc}
 
 ### Mémoires tampons d'en-têtes de demande client volumineux (`large-client-header-buffers`)
@@ -1880,7 +1882,7 @@ Utilisez l'annotation de mémoire tampon pour désactiver le stockage de donnée
 **Description**</br>
 L'équilibreur de charge d'application (ALB) Ingress fait office de proxy entre votre application de back end et le navigateur Web du client. Lorsqu'une réponse est envoyée de l'application de back end au client, les données de réponse sont placées par défaut en mémoire tampon sur l'ALB par défaut. L'équilibreur de charge ALB met en proxy la réponse client et commence à envoyer la réponse au client à la cadence du client. Une fois que toutes les données de l'application de back end ont été reçues par l'équilibreur de charge ALB, la connexion à l'application de back end est clôturée. La connexion de l'équilibreur de charge ALB au client reste ouverte jusqu'à ce que le client ait reçu toutes les données.
 
-Si la mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application (ALB) est désactivée, les données sont envoyées immédiatement de l'ALB au client. Le client doit être capable de traiter les données entrantes au rythme de l'ALB. Si le client est trop lent, les données risquent d'être perdues.
+Si la mise en mémoire tampon des données de réponse sur l'équilibreur de charge d'application (ALB) est désactivée, les données sont envoyées immédiatement de l'ALB au client. Le client doit être capable de traiter les données entrantes au rythme de l'ALB. Si le client est trop lent, la connexion en amont reste ouverte jusqu'à ce que le client puisse rattraper son retard. 
 
 La mise en mémoire tampon des données de réponse sur l'équilibreur de charge ALB est activée par défaut.
 
@@ -2106,7 +2108,7 @@ Ajoutez un port de serveur à la demande du client avant la transmission de la d
 {: shortdesc}
 
 **Description**</br>
-Ajouter l'élément `:server_port` à l'en-tête d'hôte d'une demande client avant de transférer la demande à votre application de back end. 
+Ajouter l'élément `:server_port` à l'en-tête d'hôte d'une demande client avant de transférer la demande à votre application de back end.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -2346,7 +2348,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2370,6 +2372,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Facultatif : pour appliquer la taille de corps maximale d'un client à un service spécifique, remplacez <code>&lt;<em>myservice</em>&gt;</code> par le nom du service. Si vous n'indiquez pas de nom de service, la taille est appliquée à tous les services. Dans l'exemple de fichier YAML, le format <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> applique la première taille au service <code>myservice</code> et applique la seconde taille à tous les autres services.</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>Taille maximale du corps de réponse client. Par exemple, pour définir la taille maximale à 200 mégaoctets, indiquez <code>200m</code>. Vous pouvez définir la taille 0 pour désactiver la vérification de la taille du corps de la demande client.</td>
 </tr>
@@ -2391,7 +2396,7 @@ Limitez le débit de traitement des demandes et le nombre de connexions par une 
 {:shortdesc}
 
 **Description**</br>
-Pour tous les services, cette annotation permet de limiter le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous les chemins des back end sélectionnés. 
+Pour tous les services, cette annotation permet de limiter le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous les chemins des back end sélectionnés.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -2433,7 +2438,7 @@ spec:
 </tr>
 <tr>
 <td><code>conn</code></td>
-<td>Remplacez <code>&lt;<em>number-of-connections</em>&gt;</code> par le nombre de connexions. </td>
+<td>Remplacez <code>&lt;<em>number-of-connections</em>&gt;</code> par le nombre de connexions.</td>
 </tr>
 </tbody></table>
 
@@ -2447,7 +2452,7 @@ Limitez le débit de traitement des demandes et le nombre de connexions pour des
 {:shortdesc}
 
 **Description**</br>
-Pour des services spécifiques, cette annotation permet de limiter le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous les chemins des back end sélectionnés. 
+Pour des services spécifiques, cette annotation permet de limiter le débit de traitement des demandes et le nombre de connexions par une clé définie émanant d'une même adresse IP pour tous les chemins des back end sélectionnés.
 
 **Exemple de fichier YAML de ressource Ingress**</br>
 ```
@@ -2493,7 +2498,7 @@ spec:
 </tr>
 <tr>
 <td><code>conn</code></td>
-<td>Remplacez <code>&lt;<em>number-of-connections</em>&gt;</code> par le nombre de connexions. </td>
+<td>Remplacez <code>&lt;<em>number-of-connections</em>&gt;</code> par le nombre de connexions.</td>
 </tr>
 </tbody></table>
 
@@ -2586,9 +2591,9 @@ Comme l'application utilise {{site.data.keyword.appid_short_notm}} pour l'authen
       3. Cliquez sur **Créer**.
 
 2. Ajoutez des URL de redirection pour votre application. Une URL de redirection est l'URL du point de terminaison de rappel de votre application. Pour éviter les attaques par hameçonnage, App ID valide l'URL de la demande par rapport à la liste blanche des URL de redirection.
-  1. Dans la console de gestion {{site.data.keyword.appid_short_notm}}, accédez à **Fournisseurs d'identité > Gérer**.
-  2. Vérifiez qu'un fournisseur d'identité est sélectionné. Dans le cas contraire, l'utilisateur sera authentifié mais un jeton d'accès pour accès anonyme à l'application sera émis.
-  3. Dans la zone **Ajouter une URL de redirection Web**, ajoutez des URL de redirection pour votre application au format `http://<hostname>/<app_path>/appid_callback` ou `https://<hostname>/<app_path>/appid_callback`.
+  1. Dans la console de gestion {{site.data.keyword.appid_short_notm}}, accédez à **Gérer l'authentification**.
+  2. Dans l'onglet **Fournisseurs d'identité**, assurez-vous qu'un fournisseur d'identité a été sélectionné. Dans le cas contraire, l'utilisateur sera authentifié mais un jeton d'accès pour accès anonyme à l'application sera émis.
+  3. Dans la zone **Paramètres d'authentification**, ajoutez des URL de redirection à votre application au format `http://<hostname>/<app_path>/appid_callback` ou `https://<hostname>/<app_path>/appid_callback`.
 
     {{site.data.keyword.appid_full_notm}} offre une fonction de déconnexion : si `/logout` figure dans votre chemin {{site.data.keyword.appid_full_notm}}, les cookies sont supprimés et l'utilisateur est redirigé vers la page de connexion. Pour utiliser cette fonction, vous devez ajouter `/appid_logout` à votre domaine sous la forme `https://<hostname>/<app_path>/appid_logout` et inclure cette URL dans la liste des URL de redirection.
     {: note}
@@ -2615,3 +2620,5 @@ Comme l'application utilise {{site.data.keyword.appid_short_notm}} pour l'authen
   {: pre}
 
 5. Utilisez la valeur confidentielle de liaison et l'espace de nom du cluster pour ajouter l'annotation `appid-auth` dans votre ressource Ingress.
+
+

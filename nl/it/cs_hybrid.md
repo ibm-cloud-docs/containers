@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-12"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,9 +21,11 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # Cloud ibrido
@@ -32,7 +34,12 @@ subcollection: containers
 Se hai un account {{site.data.keyword.Bluemix}} privato, puoi usarlo con i servizi {{site.data.keyword.Bluemix_notm}} di selezione, incluso {{site.data.keyword.containerlong}}. Per ulteriori informazioni, consulta il blog sull'argomento [Hybrid experience across {{site.data.keyword.Bluemix_notm}} Private and IBM Public Cloud![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-Capisci le offerte [{{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation) e hai sviluppato la tua strategia Kubernetes per stabilire quali [carichi di lavoro eseguire su cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Ora puoi [connettere il tuo cloud pubblico e privato](#hybrid_vpn) e [riutilizzare i tuoi pacchetti privati per i contenitori pubblici](#hybrid_ppa_importer).
+Capisci le offerte [{{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation) e hai sviluppato la tua strategia Kubernetes per stabilire quali [carichi di lavoro eseguire su cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Ora puoi connettere il tuo cloud pubblico e privato attraverso il servizio VPN strongSwan o {{site.data.keyword.BluDirectLink}}.
+
+* Il servizio [VPN strongSwan](#hybrid_vpn) collega in maniera sicura il tuo cluster Kubernetes con una rete in loco, attraverso un canale di comunicazione end-to-end protetto su Internet, basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore.
+* Con [{{site.data.keyword.Bluemix_notm}} Direct Link](#hybrid_dl), puoi creare una connessione privata diretta tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento sull'Internet pubblico.
+
+Una volta che connetti il tuo cloud pubblico e privato, puoi [riusare i tuoi pacchetti privati per i contenitori pubblici](#hybrid_ppa_importer).
 
 ## Connessione del tuo cloud pubblico e privato con la VPN strongSwan
 {: #hybrid_vpn}
@@ -41,8 +48,7 @@ Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua
 {: shortdesc}
 
 1.  Crea un cluster standard con {{site.data.keyword.containerlong}} in {{site.data.keyword.Bluemix_notm}} pubblico oppure usane uno esistente. Per creare un cluster, scegli tra le seguenti opzioni:
-    - [Crea un cluster standard dalla console](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Crea un cluster standard dalla CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+    - [Crea un cluster standard dalla console o dalla CLI](/docs/containers?topic=containers-clusters#clusters_ui).
     - [Usa CAM (Cloud Automation Manager) per creare un cluster utilizzando un template predefinito![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Quando distribuisci un cluster con CAM, viene installato automaticamente il tiller Helm.
 
 2.  Nel tuo cluster {{site.data.keyword.containerlong_notm}}, [attieniti alle istruzioni per configurare il servizio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn_configure).
@@ -100,6 +106,27 @@ Stabilisci una connettività VPN tra il tuo cluster Kubernetes pubblico e la tua
 *   Per gestire più cluster cloud Kubernetes, come ad esempio tra {{site.data.keyword.Bluemix_notm}} Public e {{site.data.keyword.Bluemix_notm}} Private, consulta [IBM Multicloud Manager ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 
+## Connessione del tuo cloud pubblico e privato con {{site.data.keyword.Bluemix_notm}} Direct Link
+{: #hybrid_dl}
+
+Con [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), puoi creare una connessione privata diretta tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento sull'Internet pubblico.
+{: shortdesc}
+
+Per collegare il tuo cloud pubblico e la tua istanza {{site.data.keyword.Bluemix}} privato, puoi utilizzare una delle quattro offerte di seguito indicate:
+* {{site.data.keyword.Bluemix_notm}} Direct Link Connect
+* {{site.data.keyword.Bluemix_notm}} Direct Link Exchange
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
+
+Per scegliere un'offerta {{site.data.keyword.Bluemix_notm}} Direct Link e configurare una connessione {{site.data.keyword.Bluemix_notm}} Direct Link, vedi [Introduzione a {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) nella documentazione di {{site.data.keyword.Bluemix_notm}} Direct Link.
+
+**Operazioni successive**</br>
+* [Esegui le tue immagini software su licenza in cluster pubblici](#hybrid_ppa_importer).
+* Per gestire più cluster cloud Kubernetes, come ad esempio tra {{site.data.keyword.Bluemix_notm}} Public e {{site.data.keyword.Bluemix_notm}} Private, consulta [IBM Multicloud Manager ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
+<br />
+
+
 ## Esecuzione delle immagini di {{site.data.keyword.Bluemix_notm}} privato in contenitori Kubernetes pubblici
 {: #hybrid_ppa_importer}
 
@@ -114,7 +141,7 @@ La seguente tabella è una panoramica dei prodotti {{site.data.keyword.Bluemix_n
 | --- | --- | --- |
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
-| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM MQ Advanced | 9.1.0.0, 9.1.1,0, 9.1.2.0 | - |
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | immagine Docker Hub |
 {: caption="Tabella. Prodotti {{site.data.keyword.Bluemix_notm}} privato supportati da usare in {{site.data.keyword.Bluemix_notm}} pubblico." caption-side="top"}
 
@@ -134,7 +161,7 @@ Per distribuire un'immagine di {{site.data.keyword.Bluemix_notm}} privato in un 
 
     2.  Segui le [istruzioni del grafico Helm Liberty![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
 
-2.  Verifica che lo **STATO** del grafico Helm mostri `DISTRIBUITO`. Nel caso in cui non lo sia, attendi alcuni minuti e ritenta.
+2.  Verifica che lo **STATO** del grafico Helm mostri `DISTRIBUITO`. Se mostra un valore differente, attendi alcuni minuti e ritenta.
     ```
     helm status <helm_chart_name>
     ```

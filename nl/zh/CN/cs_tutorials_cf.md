@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 教程：将应用程序从 Cloud Foundry 迁移到集群
@@ -144,7 +145,7 @@ subcollection: containers
 4. 构建包含应用程序代码的 Docker 映像，并将其推送到专用注册表。
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -176,8 +177,8 @@ subcollection: containers
   映像已在注册表中创建。您可以运行 `ibmcloud cr images` 命令来验证是否已创建映像。
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -213,7 +214,7 @@ subcollection: containers
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry_namespace>/cf-py:latest
+        - image: us.icr.io/<registry_namespace>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -240,7 +241,7 @@ subcollection: containers
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，将 &lt;registry_namespace&gt; 替换为专用映像注册表的名称空间。如果不确定哪个是您的名称空间，请运行 `ibmcloud cr namespaces` 命令进行查找。</td>
+  <td>在 `us.icr.io/<registry_namespace>/cf-py:latest` 中，将 &lt;registry_namespace&gt; 替换为专用映像注册表的名称空间。如果不确定哪个是您的名称空间，请运行 `ibmcloud cr namespaces` 命令进行查找。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -276,7 +277,7 @@ subcollection: containers
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

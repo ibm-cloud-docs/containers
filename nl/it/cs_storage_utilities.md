@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Programmi di utilità di archiviazione IBM Cloud
@@ -416,13 +418,13 @@ Utilizza questa opzione se vuoi aggiungere configurazioni di archiviazione blocc
 
 3. Crea il dispositivo di archiviazione blocchi nella stessa zona in cui si trova il tuo nodo di lavoro non SDS.
 
-   **Esempio per il provisioning di un'archiviazione blocchi endurance da 20GB con 2 IOPS per ogni GB:**
+   **Esempio per il provisioning di un'archiviazione blocchi endurance da 20 GB con due IOPS per ogni GB:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **Esempio per il provisioning di un'archiviazione blocchi performance da 20GB con 100 IOPS:**
+   **Esempio per il provisioning di un'archiviazione blocchi performance da 20 GB con 100 IOPS:**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
@@ -501,8 +503,8 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
 {: shortdesc}
 
 **Prima di iniziare**:
-- Assicurati di aver creato [automaticamente](#automatic_block) o [manualmente](#manual_block) l'archiviazione blocchi non elaborata, non formatta e non montata per i tuoi nodi di lavoro non SDS.
-- [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Assicurati di aver creato [automaticamente](#automatic_block) o [manualmente](#manual_block) l'archiviazione blocchi non elaborata, non formattata e non montata per i tuoi nodi di lavoro non SDS.
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Per collegare l'archiviazione blocchi non elaborata a nodi di lavoro non SDS**:
 1. Prepara la creazione del PV.  
@@ -575,7 +577,7 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>Immetti l'ID lun del tuo dispositivo di archiviazione blocchi che hai richiamato in precedenza. </td>
+        <td>Immetti l'ID LUN del tuo dispositivo di archiviazione blocchi che hai richiamato in precedenza. </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
@@ -645,3 +647,5 @@ Per collegare il dispositivo di archiviazione blocchi a un nodo di lavoro non SD
 
 Se desideri scollegare un volume, elimina il PV. L'accesso da parte di uno specifico nodo di lavoro ai volumi scollegati continua a essere autorizzato e vengono collegati nuovamente quando crei un nuovo PV con la classe di archiviazione {{site.data.keyword.Bluemix_notm}} Block Volume Attacher per collegare un volume differente allo stesso nodo di lavoro. Per evitare di collegare nuovamente il vecchio volume scollegato, annulla l'autorizzazione del nodo di lavoro ad accedere al volume scollegato utilizzando il comando `ibmcloud sl block access-revoke`. Scollegare il volume non rimuove quest'ultimo dal tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per annullare la fatturazione per il tuo volume, devi [rimuovere l'archiviazione dal tuo account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/containers?topic=containers-cleanup) manualmente.
 {: note}
+
+

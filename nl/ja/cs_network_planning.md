@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# クラスターの内部ネットワークおよび外部ネットワークを使用してアプリを公開するための計画
+
+# アプリのクラスターの内部ネットワークおよび外部ネットワークの計画
 {: #cs_network_planning}
 
 {{site.data.keyword.containerlong}} では、アプリをパブリックまたはプライベートに公開して、クラスターの内部ネットワークと外部ネットワークを管理できます。
 {: shortdesc}
-
-このページには、アプリのクラスター内部ネットワークおよび外部ネットワークを計画するときに役立つ情報を記載します。 クラスターにネットワークをセットアップする方法について詳しくは、[クラスター・ネットワークのセットアップ](/docs/containers?topic=containers-cs_network_cluster)を参照してください。
-{: tip}
 
 アプリ・ネットワークを素早く開始するには、以下のデシジョン・ツリーに従ってオプションをクリックし、そのセットアップ資料を参照します。
 
@@ -49,7 +48,7 @@ Kubernetes サービス・ディスカバリーでは、ネットワーク・サ
 **サービス**</br>
 ワーカー・ノードにデプロイされるすべてのポッドには、172.30.0.0/16 の範囲でプライベート IP IP アドレスが割り当てられ、ワーカー・ノード間でのみルーティングされます。 競合を避けるために、ご使用のワーカー・ノードと通信するノードにはこの IP 範囲を使用しないでください。 ワーカー・ノードとポッドは、プライベート IP アドレスを使用してプライベート・ネットワーク上で安全に通信できます。 しかし、ポッドが異常終了した場合やワーカー・ノードを再作成する必要がある場合は、新しいプライベート IP アドレスが割り当てられます。
 
-高可用性が必要とされるアプリの、変化するプライベート IP アドレスの追跡を試みる代わりに、組み込みの Kubernetes サービス・ディスカバリー機能を使用して、アプリをサービスとして公開できます。Kubernetes サービスは、一連のポッドをグループ化し、これらのポッドへのネットワーク接続を提供します。 このサービスでは、ラベルを介してトラフィックをルーティングするターゲット・ポッドを選択します。
+高可用性が必要とされるアプリの、変化するプライベート IP アドレスの追跡を試みる代わりに、組み込みの Kubernetes サービス・ディスカバリー機能を使用して、アプリをサービスとして公開できます。 Kubernetes サービスは、一連のポッドをグループ化し、これらのポッドへのネットワーク接続を提供します。 このサービスでは、ラベルを介してトラフィックをルーティングするターゲット・ポッドを選択します。
 
 サービスは、各ポッドの実際のプライベート IP アドレスを公開することなく、アプリ・ポッドとクラスター内の他のサービスの間の接続を提供します。 サービスには、クラスター内部でのみアクセス可能なクラスター内 IP アドレス `clusterIP` が割り当てられます。 この IP アドレスは、その存続期間中はサービスに関連付けられ、そのサービスが存在する間は変化しません。
 * 新しいクラスター: dal13 ゾーンで 2018 年 2 月より後に作成されたクラスター、またはその他のゾーンで 2017 年 10 月より後に作成されたクラスターでは、172.21.0.0/16 の範囲で 65,000 個の IP の中からサービスに IP が割り当てられます。
@@ -66,7 +65,7 @@ Kubernetes サービス・ディスカバリーでは、ネットワーク・サ
 
 内部クラスター IP アドレスと外部 IP アドレスの両方を提供するサービスを使用している場合、クラスター外のクライアントはサービスの外部パブリック IP アドレスまたはプライベート IP アドレスに要求を送信できます。 `kube-proxy` は、サービスのクラスター内 IP アドレスに要求を転送し、サービスのアプリ・ポッド間でロード・バランシングを行います。
 
-以下のイメージは、Kubernetes が `kube-poxy` および {{site.data.keyword.containerlong_notm}} の NodePort、LoadBalancer、または Ingress のいずれかのサービスを介してパブリック・ネットワーク・トラフィックを転送する仕組みを示しています。
+以下のイメージは、Kubernetes が `kube-proxy` および {{site.data.keyword.containerlong_notm}} の NodePort、LoadBalancer、または Ingress のいずれかのサービスを介してパブリック・ネットワーク・トラフィックを転送する仕組みを示しています。
 <p>
 <figure>
  <img src="images/cs_network_planning_ov-01.png" alt="{{site.data.keyword.containerlong_notm}} 外部トラフィック・ネットワーク・アーキテクチャー">
@@ -136,13 +135,13 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 ### パブリック外部ロード・バランシングのデプロイメント・パターンの選択
 {: #pattern_public}
 
-ネットワーク・サービスを使用してアプリを公開するときには、デプロイメント・パターンに関して複数の選択肢があります。素早く開始するには、デシジョン・ツリーに従ってデプロイメント・パターンを選択します。各デプロイメント・パターン、そのパターンを使用する理由、およびセットアップ方法について詳しくは、デシジョン・ツリーの下の表を参照してください。 デプロイメント・パターンで使用されるネットワーク・サービスの基本情報は、[Kubernetes サービス・タイプについて](#external)を参照してください。
+ネットワーク・サービスを使用してアプリを公開するときには、デプロイメント・パターンに関して複数の選択肢があります。 素早く開始するには、デシジョン・ツリーに従ってデプロイメント・パターンを選択します。 各デプロイメント・パターン、そのパターンを使用する理由、およびセットアップ方法について詳しくは、デシジョン・ツリーの下の表を参照してください。 デプロイメント・パターンで使用されるネットワーク・サービスの基本情報は、[Kubernetes サービス・タイプについて](#external)を参照してください。
 {: shortdesc}
 
 <p>
 <figure>
   <img src="images/cs_network_planning_dt_indepth.png" alt="このイメージに従って、アプリに最適なネットワーキング・デプロイメント・パターンを選択します。">
-  <figcaption>このデシジョン・ツリーを使用して、アプリに最適なネットワーキング・デプロイメント・パターンを選択します。各デプロイメント・パターンについて詳しくは、以下の表を参照してください。</figcaption>
+  <figcaption>このデシジョン・ツリーを使用して、アプリに最適なネットワーキング・デプロイメント・パターンを選択します。 各デプロイメント・パターンについて詳しくは、以下の表を参照してください。</figcaption>
 </figure>
 </p>
 
@@ -205,13 +204,14 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 クラスター内のアプリを、プライベート・ネットワークにのみ、プライベートに公開します。
 {: shortdesc}
 
-{{site.data.keyword.containerlong_notm}} の Kubernetes クラスター内でアプリをデプロイする場合、クラスターと同じプライベート・ネットワークのユーザーおよびサービスのみがアプリにアクセスできるようにすることもできます。 例えば、アプリのプライベート NLB を作成したとします。 このプライベート NLB には、以下がアクセスできます。
+{{site.data.keyword.containerlong_notm}} の Kubernetes クラスター内でアプリをデプロイする場合、クラスターと同じプライベート・ネットワークのユーザーおよびサービスのみがアプリにアクセスできるようにすることもできます。 プライベート・ロード・バランシングは、アプリを一般的に公開することなく、クラスター外からの要求で使用できるようにする場合に理想的です。 プライベート・ロード・バランシングを使用して、アプリのアクセス、要求ルーティング、およびその他の構成をテストしてから、後でパブリック・ネットワーク・サービスを使用してアプリをパブリックに公開することもできます。
+
+例えば、アプリのプライベート NLB を作成したとします。 このプライベート NLB には、以下がアクセスできます。
 * 同じクラスター内のポッド。
 * 同じ {{site.data.keyword.Bluemix_notm}} アカウント内のクラスター内のポッド。
-* [VRF](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) または [VLAN スパンニング](/docs/containers?topic=containers-subnets#subnet-routing)が有効になっている場合、同じ {{site.data.keyword.Bluemix_notm}}アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステム。
+* [VRF または VLAN スパンニング](/docs/containers?topic=containers-subnets#basics_segmentation)が有効になっている場合、同じ {{site.data.keyword.Bluemix_notm}} アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステム。
 * {{site.data.keyword.Bluemix_notm}} アカウントに含まれていないが、会社のファイアウォールの背後にある場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム
 * 異なる {{site.data.keyword.Bluemix_notm}} アカウントに含まれている場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム。
-プライベート・ロード・バランシングは、アプリを一般的に公開することなく、クラスター外からの要求で使用できるようにする場合に理想的です。プライベート・ロード・バランシングを使用して、アプリのアクセス、要求ルーティング、およびその他の構成をテストしてから、後でパブリック・ネットワーク・サービスを使用してアプリをパブリックに公開することもできます。
 
 アプリをプライベート・ネットワークでのみ使用可能にするには、クラスターの VLAN セットアップに基づいてロード・バランシングのデプロイメント・パターンを選択します。
 * [パブリックおよびプライベートの VLAN セットアップ](#private_both_vlans)
@@ -225,6 +225,8 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 
 ワーカー・ノードのパブリック・ネットワーク・インターフェースは、クラスターの作成時にすべてのワーカー・ノードに構成される[事前定義済み Calico ネットワーク・ポリシー設定](/docs/containers?topic=containers-network_policies#default_policy)によって保護されます。 デフォルトでは、すべてのワーカー・ノードに対して、すべてのアウトバウンド・ネットワーク・トラフィックが許可されます。 数個のポートを除いて、インバウンド・ネットワーク・トラフィックがブロックされます。 それらのポートが開かれているのは、IBM がネットワーク・トラフィックをモニターし、Kubernetes マスターのセキュリティー更新を自動的にインストールできるようにするため、また、NodePort、LoadBalancer、および Ingress サービスへの接続を確立できるようにするためです。
 
+デフォルトの Calico ネットワーク・ポリシーはこれらのサービスへのインバウンドのパブリック・トラフィックを許可するので、代わりに各サービスへのすべてのパブリック・トラフィックをブロックする Calico ポリシーを作成すると良いでしょう。 例えば、NodePort サービスは、ワーカー・ノードのプライベート IP アドレスとパブリック IP アドレスの両方に対して、ワーカー・ノード上のポートを開きます。 ポータブル・プライベート IP アドレスを持つ NLB サービスでは、すべてのワーカー・ノードでパブリック NodePort を開きます。 [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を作成してパブリック NodePort をブロックする必要があります。
+
 以下のプライベート・ネットワーキングのロード・バランシングのデプロイメント・パターンを確認してください。
 
 |名前|ロード・バランシングの方法|ユース・ケース|実装|
@@ -232,11 +234,8 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 |NodePort|ワーカーのプライベート IP アドレスでアプリを公開するワーカー・ノードのポート|1 つのアプリへのプライベート・アクセスをテストしたり、短時間のみのアクセスを提供したりします。|<ol><li>[NodePort サービスを作成します](/docs/containers?topic=containers-nodeport)。</li><li>NodePort サービスは、ワーカー・ノードのプライベート IP アドレスとパブリック IP アドレスの両方に対して、ワーカー・ノード上のポートを開きます。 [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を使用してパブリック NodePort へのトラフィックをブロックする必要があります。</li></ol>|
 |NLB v1.0|プライベート IP アドレスを使用してアプリを公開する基本ロード・バランシング|プライベート IP アドレスを使用して 1 つのアプリをプライベート・ネットワークに素早く公開します。|<ol><li>[プライベート NLB サービスを作成します](/docs/containers?topic=containers-loadbalancer)。</li><li>ポータブル・プライベート IP アドレスを使用する NLB では、すべてのワーカー・ノードでパブリック・ノード・ポートも開いています。 パブリック NodePort へのトラフィックをブロックする [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を作成します。</li></ol>|
 |NLB v2.0|プライベート IP アドレスを使用してアプリを公開する DSR ロード・バランシング|IP アドレスを使用して、ハイレベルのトラフィックを受信する可能性があるアプリをプライベート・ネットワークに公開します。|<ol><li>[プライベート NLB サービスを作成します](/docs/containers?topic=containers-loadbalancer)。</li><li>ポータブル・プライベート IP アドレスを使用する NLB では、すべてのワーカー・ノードでパブリック・ノード・ポートも開いています。 パブリック NodePort へのトラフィックをブロックする [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を作成します。</li></ol>|
-|Ingress ALB|ホスト名を使用してアプリを公開し、カスタム・ルーティング・ルールを使用する HTTPS ロード・バランシング|複数のアプリのカスタム・ルーティング・ルールおよび SSL 終端を実装します。|<ol><li>[パブリック ALB を無効にします](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[プライベート ALB を有効にし、Ingress リソースを作成します](/docs/containers?topic=containers-ingress#private_ingress)。</li><li>[アノテーション](/docs/containers?topic=containers-ingress_annotation)を使用して、ALB ルーティング・ルールをカスタマイズします。</li></ol>|
+|Ingress ALB|ホスト名を使用してアプリを公開し、カスタム・ルーティング・ルールを使用する HTTPS ロード・バランシング|複数のアプリのカスタム・ルーティング・ルールおよび SSL 終端を実装します。|<ol><li>[パブリック ALB を無効にします。](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[プライベート ALB を有効にし、Ingress リソースを作成します](/docs/containers?topic=containers-ingress#ingress_expose_private)。</li><li>[アノテーション](/docs/containers?topic=containers-ingress_annotation)を使用して、ALB ルーティング・ルールをカスタマイズします。</li></ol>|
 {: caption="パブリックおよびプライベートの VLAN セットアップのネットワーク・デプロイメント・パターンの特性" caption-side="top"}
-
-デフォルトの Calico ネットワーク・ポリシーはこれらのサービスへのインバウンドのパブリック・トラフィックを許可するので、代わりに各サービスへのすべてのパブリック・トラフィックをブロックする Calico ポリシーを作成すると良いでしょう。 例えば、NodePort サービスは、ワーカー・ノードのプライベート IP アドレスとパブリック IP アドレスの両方に対して、ワーカー・ノード上のポートを開きます。 ポータブル・プライベート IP アドレスを持つ NLB サービスでは、すべてのワーカー・ノードでパブリック NodePort を開きます。 [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を作成してパブリック NodePort をブロックする必要があります。
-{: tip}
 
 <br />
 
@@ -247,7 +246,7 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 ワーカー・ノードがプライベート VLAN のみに接続されている場合は、プライベートの NodePort、LoadBalancer、または Ingress サービスを作成して、プライベート・ネットワークからのみ、アプリに外部からアクセスできるようにできます。
 {: shortdesc}
 
-クラスターをプライベート VLAN にのみ接続し、プライベート・サービス・エンドポイントのみを使用してマスターとワーカー・ノードを通信可能にしている場合は、アプリをプライベート・ネットワークに自動的に公開することはできません。 ファイアウォールとして機能する [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) や [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) のようなゲートウェイ・サービスをセットアップし、トラフィックをブロックまたは許可する必要があります。 ワーカー・ノードはパブリック VLAN に接続されていないため、パブリック・トラフィックは NodePort、LoadBalancer、または Ingress サービスにルーティングされません。ただし、これらのサービスへのインバウンド・トラフィックを許可するために、ゲートウェイ・デバイス・ファイアウォールで必要なポートおよび IP アドレスを開く必要があります。
+クラスターをプライベート VLAN にのみ接続し、プライベート・サービス・エンドポイントのみを使用してマスターとワーカー・ノードを通信可能にしている場合は、アプリをプライベート・ネットワークに自動的に公開することはできません。 ファイアウォールとして機能する [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) や [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) のようなゲートウェイ・サービスをセットアップし、トラフィックをブロックまたは許可する必要があります。 ワーカー・ノードはパブリック VLAN に接続されていないため、パブリック・トラフィックは NodePort、LoadBalancer、または Ingress サービスにルーティングされません。 ただし、これらのサービスへのインバウンド・トラフィックを許可するために、ゲートウェイ・デバイス・ファイアウォールで必要なポートおよび IP アドレスを開く必要があります。
 
 以下のプライベート・ネットワーキングのロード・バランシングのデプロイメント・パターンを確認してください。
 

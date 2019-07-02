@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-11"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,11 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # ポッド・セキュリティー・ポリシーの構成
 {: #psp}
 
-[ポッド・セキュリティー・ポリシー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) により、
+[ポッド・セキュリティー・ポリシー (PSP) ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) により、
 {{site.data.keyword.containerlong}} のポッドの作成および更新をユーザーに許可するポリシーを構成できます。
 
 **なぜポッド・セキュリティー・ポリシーを設定するのですか?**</br>
@@ -50,6 +52,9 @@ subcollection: containers
 
 一般的なエラー・メッセージについては、[ポッド・セキュリティー・ポリシーが原因でポッドをデプロイできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp)を参照してください。
 
+**`privileged-psp-user` クラスター役割バインディングに属していない場合でも、特権ポッドを作成できるのはなぜですか?**<br>
+他のクラスター役割バインディングまたは名前空間に有効範囲が設定された役割バインディングにより、特権ポッドの作成を許可する他のポッド・セキュリティー・ポリシーが提供される場合があります。 さらに、デフォルトでは、クラスター管理者はポッド・セキュリティー・ポリシーを含むすべてのリソースにアクセスできるため、自身を PSP に追加したり、特権リソースを作成したりできます。
+
 ## ポッド・セキュリティー・ポリシーのカスタマイズ
 {: #customize_psp}
 
@@ -62,14 +67,14 @@ subcollection: containers
 
 | 名前 | 名前空間 | タイプ | 目的 |
 |---|---|---|---|
-| `privileged-psp-user` | クラスター全体 | `ClusterRoleBinding` | クラスター管理者、認証済みユーザー、サービス・アカウント、ノードに `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
-| `restricted-psp-user` | クラスター全体 | `ClusterRoleBinding` | クラスター管理者、認証済みユーザー、サービス・アカウント、ノードに `ibm-restricted-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
+| `privileged-psp-user` | すべて | `ClusterRoleBinding` | クラスター管理者、認証済みユーザー、サービス・アカウント、ノードに `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
+| `restricted-psp-user` | すべて | `ClusterRoleBinding` | クラスター管理者、認証済みユーザー、サービス・アカウント、ノードに `ibm-restricted-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
 {: caption="変更できるデフォルトの RBAC リソース" caption-side="top"}
 
 これらの RBAC ロールを変更して、管理者、ユーザー、サービス、またはノードを、ポリシーから削除したりポリシーに追加したりできます。
 
 開始前に、以下のことを行います。
-*  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](/docs/containers?topic=containers-users#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
 * すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
 
@@ -196,17 +201,17 @@ subcollection: containers
 
 | 名前 | 名前空間 | タイプ | 目的 |
 |---|---|---|---|
-| `ibm-anyuid-hostaccess-psp` | クラスター全体 | `PodSecurityPolicy` | フル・ホスト・アクセスのポッド作成用のポリシー。 |
-| `ibm-anyuid-hostaccess-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostaccess-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
-| `ibm-anyuid-hostpath-psp` | クラスター全体 | `PodSecurityPolicy` | ホスト・パス・アクセス・ポッド作成用のポリシー。 |
-| `ibm-anyuid-hostpath-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-hostpath-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
-| `ibm-anyuid-psp` | クラスター全体 | `PodSecurityPolicy` | UID/GID 実行可能ファイルのポッド作成用のポリシー。 |
-| `ibm-anyuid-psp-user` | クラスター全体 | `ClusterRole` | `ibm-anyuid-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
-| `ibm-privileged-psp` | クラスター全体 | `PodSecurityPolicy` | 特権ポッドの作成のポリシー。 |
-| `ibm-privileged-psp-user` | クラスター全体 | `ClusterRole` | `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-anyuid-hostaccess-psp` | すべて | `PodSecurityPolicy` | フル・ホスト・アクセスのポッド作成用のポリシー。 |
+| `ibm-anyuid-hostaccess-psp-user` | すべて | `ClusterRole` | `ibm-anyuid-hostaccess-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-anyuid-hostpath-psp` | すべて | `PodSecurityPolicy` | ホスト・パス・アクセス・ポッド作成用のポリシー。 |
+| `ibm-anyuid-hostpath-psp-user` | すべて | `ClusterRole` | `ibm-anyuid-hostpath-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-anyuid-psp` | すべて | `PodSecurityPolicy` | UID/GID 実行可能ファイルのポッド作成用のポリシー。 |
+| `ibm-anyuid-psp-user` | すべて | `ClusterRole` | `ibm-anyuid-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-privileged-psp` | すべて | `PodSecurityPolicy` | 特権ポッドの作成のポリシー。 |
+| `ibm-privileged-psp-user` | すべて | `ClusterRole` | `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | クラスター管理者、サービス・アカウント、ノードに、`kube-system` 名前空間での `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | クラスター管理者、サービス・アカウント、ノードに、`ibm-system` 名前空間での `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
 | `ibm-privileged-psp-user` | `kubx-cit` | `RoleBinding` | クラスター管理者、サービス・アカウント、ノードに、`kubx-cit` 名前空間での `ibm-privileged-psp` ポッド・セキュリティー・ポリシーの使用を許可します。 |
-| `ibm-restricted-psp` | クラスター全体 | `PodSecurityPolicy` | 非特権ポッドまたは制限付きポッドの作成のポリシー。 |
-| `ibm-restricted-psp-user` | クラスター全体 | `ClusterRole` | `ibm-restricted-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
+| `ibm-restricted-psp` | すべて | `PodSecurityPolicy` | 非特権ポッドまたは制限付きポッドの作成のポリシー。 |
+| `ibm-restricted-psp-user` | すべて | `ClusterRole` | `ibm-restricted-psp` ポッド・セキュリティー・ポリシーの使用を許可するクラスター役割。 |
 {: caption="ユーザーが変更してはいけない IBM ポッド・セキュリティー・ポリシーのリソース" caption-side="top"}

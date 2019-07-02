@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans le domaine de la santé
@@ -39,7 +39,7 @@ Un responsable informatique travaillant pour un prestataire de soins de santé d
 Pourquoi {{site.data.keyword.cloud_notm}} ? Pour améliorer le service aux patients, le prestataire envisage d'utiliser {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.contdelivery_full}} afin de réduire les dépenses informatiques et accélérer le développement, le tout sur une plateforme sécurisée. Les systèmes SaaS (Software as a Service) à utilisation intensive du prestataire qui regroupent à la fois les systèmes d'enregistrements des patients et les applications de diagnostics métier, nécessitent des mises à jour fréquentes. Mais l'environnement sur site ne facilite pas un développement agile. Le prestataire souhaite également réduire les coûts de main d'oeuvre qui ne cessent d'augmenter par rapport à un budget de plus en plus réduit.
 
 Technologies clés :
-* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Mise à l'échelle horizontale](/docs/containers?topic=containers-app#highly_available_apps)
 * [Sécurité et isolement de conteneur](/docs/containers?topic=containers-security#security)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

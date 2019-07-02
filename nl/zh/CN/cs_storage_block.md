@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -16,11 +16,13 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip}rwo
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 在 IBM Block Storage for IBM Cloud 上存储数据
@@ -35,10 +37,10 @@ subcollection: containers
 ## 在集群中安装 {{site.data.keyword.Bluemix_notm}} Block Storage 插件
 {: #install_block}
 
-安装 {{site.data.keyword.Bluemix_notm}} Block Storage 插件和 Helm 图表，以便为块存储器设置预定义的存储类。可以使用这些存储类来创建用于为应用程序供应块存储器的 PVC。
+安装 {{site.data.keyword.Bluemix_notm}} Block Storage 插件和 Helm chart，以便为块存储器设置预定义的存储类。可以使用这些存储类来创建用于为应用程序供应块存储器的 PVC。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 确保工作程序节点应用次版本的最新补丁。
    1. 列出工作程序节点的当前补丁版本。
@@ -48,10 +50,10 @@ subcollection: containers
       {: pre}
 
       输出示例：
-        ```
+    ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -61,12 +63,12 @@ subcollection: containers
 
    3. 通过重新装入工作程序节点来应用最新的补丁版本。请遵循 [ibmcloud ks worker-reload 命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)中的指示信息执行操作，以便在重新装入工作程序节点之前，正常重新安排工作程序节点上任何正在运行的 pod。请注意，在重新装入期间，工作程序节点机器将使用最新映像进行更新，并且如果数据未[存储在工作程序节点外部](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)，那么将删除数据。
 
-2.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+2.  [按照指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后使用服务帐户在集群中安装 Helm 服务器 (Tiller)。
 
     安装 Helm 服务器 Tiller 需要与公共 Google Container Registry 的公用网络连接。如果集群无法访问公用网络（例如，防火墙后面的专用集群或仅启用了专用服务端点的集群），那么可以选择[将 Tiller 映像拉出到本地计算机，并将映像推送到 {{site.data.keyword.registryshort_notm}} 中的名称空间](/docs/containers?topic=containers-helm#private_local_tiller)，或者[安装 Helm chart（不使用 Tiller）](/docs/containers?topic=containers-helm#private_install_without_tiller)。
     {: note}
 
-3.  验证 Tiller 是否已使用服务帐户进行安装。
+3.  验证是否已使用服务帐户安装 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -81,13 +83,13 @@ subcollection: containers
     ```
     {: screen}
 
-4. 在要使用 {{site.data.keyword.Bluemix_notm}} Block Storage 插件的集群中添加 {{site.data.keyword.Bluemix_notm}} Helm 图表存储库。
+4. 在要使用 {{site.data.keyword.Bluemix_notm}} Block Storage 插件的集群中添加 {{site.data.keyword.Bluemix_notm}} Helm chart 存储库。
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
-5. 更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+5. 更新 Helm 存储库以在此存储库中检索所有最新版本的 Helm chart。
    ```
    helm repo update
    ```
@@ -186,15 +188,15 @@ subcollection: containers
 现在，可以将现有 {{site.data.keyword.Bluemix_notm}} Block Storage 插件升级到最新版本。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. 更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+1. 更新 Helm 存储库以在此存储库中检索所有最新版本的 Helm chart。
    ```
    helm repo update
    ```
    {: pre}
 
-2. 可选：将最新 Helm chart 下载到本地计算机。然后，解压缩该包并查看 `release.md` 文件，以了解最新的发行版信息。
+2. 可选：将最新 Helm chart 下载到本地计算机。然后，解压缩包并查看 `release.md` 文件，以了解最新的发行版信息。
    ```
    helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -233,7 +235,7 @@ subcollection: containers
 {: important}
 
 开始之前：
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 确保集群中没有任何使用块存储器的 PVC 或 PV。
 
 要除去该插件，请执行以下操作：
@@ -261,7 +263,7 @@ subcollection: containers
    kubectl get pod -n kube-system | grep ibmcloud-block-storage-plugin
    ```
    {: pre}
-   如果 CLI 输出中未显示任何 pod，说明 pod 除去操作成功。
+   如果 CLI 输出中未显示任何 pod，那么表明已成功除去 pod。
 
 4. 验证块存储器的存储类是否已除去。
    ```
@@ -282,7 +284,7 @@ subcollection: containers
 
 每个存储类指定供应的块存储器的类型，包括可用大小、IOPS、文件系统和保留策略。  
 
-确保仔细选择存储配置，以便有足够的容量来存储数据。使用存储类来供应特定类型的存储器后，即无法更改存储设备的大小、类型、IOPS 或保留策略。如果需要更多存储器或需要具有不同配置的存储器，那么必须[创建新的存储实例并复制数据](/docs/containers?topic=containers-kube_concepts#update_storageclass)，即把旧存储实例中的数据复制到新存储实例。
+确保仔细选择存储配置，以便有足够的容量来存储数据。使用存储类来供应特定类型的存储器后，即无法更改存储设备的大小、类型、IOPS 或保留策略。如果需要更多存储器或需要具有不同配置的存储器，那么必须[创建新的存储器实例并复制数据](/docs/containers?topic=containers-kube_concepts#update_storageclass)，即把旧存储器实例中的数据复制到新存储器实例。
 {: important}
 
 1. 列出 {{site.data.keyword.containerlong}} 中的可用存储类。
@@ -531,21 +533,20 @@ subcollection: containers
     输出示例：
 
     ```
-    Name: mypvc
-    Namespace: default
-    StorageClass: ""
+    Name:		mypvc
+    Namespace:	default
+    StorageClass:	""
     Status:		Bound
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
     Capacity:	20Gi
-    Access Modes:	RWX
+    Access Modes:	RWO
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
-       3m 3m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal Provisioning External provisioner is provisioning volume  for claim "default/my-persistent-volume-claim"
-       3m 1m	 10 {persistentvolume-controller } Normal ExternalProvisioning cannot find provisioner "ibm.io/ibmc-block", expecting that  a volume for the claim is provisioned either manually or via external software
-       1m 1m 1 {ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 } Normal ProvisioningSucceeded	Successfully provisioned volume  pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
-     
+      3m		3m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		Provisioning		External provisioner is provisioning volume for claim "default/my-persistent-volume-claim"
+      3m		1m		10	{persistentvolume-controller }							Normal		ExternalProvisioning	cannot find provisioner "ibm.io/ibmc-block", expecting that a volume for the claim is provisioned either manually or via external software
+      1m		1m		1	{ibm.io/ibmc-block 31898035-3011-11e7-a6a4-7a08779efd33 }			Normal		ProvisioningSucceeded	Successfully provisioned volume pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
 
     ```
     {: screen}
@@ -641,10 +642,10 @@ subcollection: containers
      安装点位于 **Volume Mounts** 字段中，卷位于 **Volumes** 字段中。
 
      ```
-     Volume Mounts:
-          /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
-          /volumemount from myvol (rw)
-    ...
+      Volume Mounts:
+           /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+           /volumemount from myvol (rw)
+     ...
      Volumes:
        myvol:
          Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
@@ -658,7 +659,7 @@ subcollection: containers
 
 
 
-## 使用集群中的现有块存储器
+## 在集群中使用现有块存储器
 {: #existing_block}
 
 如果您具有要在集群中使用的现有物理存储设备，那么可以手动创建 PV 和 PVC，以[静态供应](/docs/containers?topic=containers-kube_concepts#static_provisioning)存储器。
@@ -833,10 +834,10 @@ subcollection: containers
      输出示例：
 
      ```
-    Name: mypvc
-    Namespace: default
-    StorageClass: ""
-    Status: Bound
+     Name: mypvc
+     Namespace: default
+     StorageClass:	""
+     Status: Bound
      Volume: pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
      Labels: <none>
      Capacity: 20Gi
@@ -880,7 +881,7 @@ subcollection: containers
 如果要在创建有状态集时自动创建 PVC，请使用此选项。
 {: shortdesc}
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 验证集群中所有现有的有状态集是否已完全部署。如果某个有状态集仍在进行部署，那么无法开始创建有状态集。您必须等待集群中的所有有状态集完全部署，以避免发生意外结果。
    1. 列出集群中现有的有状态集。
@@ -890,7 +891,7 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
+    ```
       NAME              DESIRED   CURRENT   AGE
       mystatefulset     3         3         6s
       ```
@@ -903,7 +904,7 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
+    ```
       Name:               nginx
       Namespace:          default
       CreationTimestamp:  Fri, 05 Oct 2018 13:22:41 -0400
@@ -1046,12 +1047,12 @@ subcollection: containers
              podAntiAffinity:
                preferredDuringSchedulingIgnoredDuringExecution:
                - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
+                 podAffinityTerm:
+                   labelSelector:
+                     matchExpressions:
                      - key: app
-                  operator: In
-                  values:
+                       operator: In
+                       values:
                        - nginx
                    topologyKey: failure-domain.beta.kubernetes.io/zone
            containers:
@@ -1162,7 +1163,7 @@ subcollection: containers
 
 如果是在[创建有状态集时动态供应 PVC](#block_dynamic_statefulset)，那么 PVC 的名称将根据在有状态集 YAML 文件中使用的值来指定。为了使有状态集使用现有 PVC，PVC 的名称必须与使用动态供应时自动创建的名称相匹配。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 如果要在创建有状态集之前为该有状态集预供应 PVC，请执行[向应用程序添加块存储器](#add_block)中的步骤 1-3，以便为每个有状态集副本创建 PVC。确保创建 PVC 时所使用的名称遵循以下格式：`<volume_name>-<statefulset_name>-<replica_number>`。
    - **`<volume_name>`**：使用要在有状态集的 `spec.volumeClaimTemplates.metadata.name` 部分中指定的名称，例如 `nginxvol`。
@@ -1195,7 +1196,7 @@ subcollection: containers
       {: pre}
 
       输出示例：
-      ```
+    ```
       Name:           nginx-0
       Namespace:      default
       Node:           10.xxx.xx.xxx/10.xxx.xx.xxx
@@ -1218,7 +1219,7 @@ subcollection: containers
 如果要提高存储容量或性能，可以修改现有卷。
 {: shortdesc}
 
-有关计费的问题以及要查找如何使用 {{site.data.keyword.Bluemix_notm}} 控制台来修改存储器的步骤，请参阅[扩展块存储器容量](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity)。如果使用 {{site.data.keyword.Bluemix_notm}} 控制台来修改存储器，那么必须执行本主题中的步骤 4-7 以完成修改。
+有关计费的问题以及要查找如何使用 {{site.data.keyword.Bluemix_notm}} 控制台来修改存储器的步骤，请参阅[扩展块存储器容量](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity)和[调整 IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)。通过控制台进行的更新不会反映在持久卷 (PV) 中。要将此信息添加到 PV，请运行 `kubectl patch pv <pv_name>`，并在 PV 的 **Labels** 和 **Annotation** 部分中手动更新大小和 IOPS。
 {: tip}
 
 1. 列出集群中的 PVC，并记下 **VOLUME** 列中关联 PV 的名称。
@@ -1230,11 +1231,64 @@ subcollection: containers
    输出示例：
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWO            ibmc-block-bronze    147d
    ```
    {: screen}
 
-2. 通过列出 PVC 绑定到的 PV 的详细信息，检索与 PVC 关联的物理文件存储器的 **`VolumeID`** 和 **`StorageType`**。将 `<pv_name>` 替换为在先前步骤中检索到的 PV 的名称。存储类型显示在 CLI 输出的 **Labels** 部分中，卷标识显示在 **Source** > **Options** 部分中。
+2. 如果要更改块存储器的 IOPS 和大小，请先在 PV 的 `metadata.labels.IOPS` 部分中编辑 IOPS。可以更改为更低或更高的 IOPS 值。确保输入您拥有的存储类型支持的 IOPS。例如，如果具有 4 IOPS 的耐久性块存储器，那么可以将 IOPS 更改为 2 或 10。有关更多支持的 IOPS 值，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。
+   ```
+   kubectl edit pv <pv_name>
+   ```
+   {: pre}
+
+   要通过 CLI 更改 IOPS，还必须更改块存储器的大小。如果要仅更改 IOPS，而不更改大小，那么必须[通过控制台请求 IOPS 更改](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)。
+   {: note}
+
+3. 编辑 PVC 并在 PVC 的 `spec.resources.requests.storage` 部分中添加新大小。可以更改为更大的大小，但不能超过存储类设置的最大容量。不能减小现有存储器的大小。要查看存储类的可用大小，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。
+   ```
+   kubectl edit pvc <pvc_name>
+   ```
+   {: pre}
+
+4. 验证是否请求了卷扩展。在 CLI 输出的 **Conditions** 部分中看到 `FileSystemResizePending` 消息时，说明成功请求了卷扩展。 
+   ```
+   kubectl describe pvc <pvc_name>
+   ```
+   {: pre}
+
+   输出示例：
+   ```
+   ...
+   Conditions:
+   Type                      Status  LastProbeTime                     LastTransitionTime                Reason  Message
+   ----                      ------  -----------------                 ------------------                ------  -------
+   FileSystemResizePending   True    Mon, 01 Jan 0001 00:00:00 +0000   Thu, 25 Apr 2019 15:52:49 -0400           Waiting for user to (re-)start a pod to finish file system resize of volume on node.
+   ```
+   {: screen}
+
+5. 列出安装了 PVC 的所有 pod。如果 pod 安装了 PVC，那么会自动处理卷扩展。如果 pod 未安装 PVC，那么必须将 PVC 安装到 pod，以便可以处理卷扩展。 
+   ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+      ```
+   {: pre}
+
+   将按以下格式返回安装的 pod：`<pod_name>: <pvc_name>`。
+
+6. 如果 pod 未安装 PVC，请[创建 pod 或部署并安装 PVC](/docs/containers?topic=containers-block_storage#add_block)。如果 pod 安装了 PVC，请继续执行下一步。 
+
+7. 监视卷扩展状态。在 CLI 输出中看到 `"message":"Success"` 消息时，说明卷扩展完成。
+   ```
+   kubectl get pv <pv_name> -o go-template=$'{{index .metadata.annotations "ibm.io/volume-expansion-status"}}\n'
+   ```
+   {: pre}
+
+   输出示例：
+   ```
+   {"size":50,"iops":500,"orderid":38832711,"start":"2019-04-30T17:00:37Z","end":"2019-04-30T17:05:27Z","status":"complete","message":"Success"}
+   ```
+   {: screen}
+
+8. 验证 CLI 输出的 **Labels** 部分中的大小和 IOPS 是否已更改。
    ```
    kubectl describe pv <pv_name>
    ```
@@ -1242,131 +1296,12 @@ subcollection: containers
 
    输出示例：
    ```
-   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
-   Labels:          CapacityGb=24
-                    Datacenter=dal13
-                    IOPS=4
-                    StorageType=Endurance
-                    billingType=hourly
-                    failure-domain.beta.kubernetes.io/region=us-south
-                    failure-domain.beta.kubernetes.io/zone=dal13
-                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
    ...
-   Source:
-       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
-       Driver:     ibm/ibmc-block
-       FSType:     ext4
-       SecretRef:  <nil>
-       ReadOnly:   false
-       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
-   ...
+   Labels:       CapacityGb=50
+                 Datacenter=dal10
+                 IOPS=500
    ```
    {: screen}
-
-3. 在 IBM Cloud Infrastructure (SoftLayer) 帐户中修改卷的大小或 IOPS。
-
-   性能存储器的示例：
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
-   ```
-   {: pre}
-
-   耐久性存储器的示例：
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
-   ```
-   {: pre}
-
-   <table>
-   <caption>了解命令的组成部分</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="“构想”图标"/> 了解 YAML 文件的组成部分</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>&lt;volume_ID&gt;</code></td>
-   <td>输入先前检索到的卷的标识。</td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-size&gt;</code></td>
-   <td>输入卷的新大小，以千兆字节 (Gi) 为单位。有关有效的大小，请参阅[决定块存储器配置](#block_predefined_storageclass)。输入的大小必须大于或等于卷的当前大小。如果未指定新的大小，那么将使用卷的当前大小。</td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-iops&gt;</code></td>
-   <td>仅适用于性能存储器。输入所需的新 IOPS 数。有关有效的 IOPS，请参阅[决定块存储器配置](#block_predefined_storageclass)。如果不指定 IOPS，那么将使用当前 IOPS。<p class="note">如果卷的原始 IOPS/GB 比率小于 0.3，那么新的 IOPS/GB 比率必须小于 0.3。如果卷的原始 IOP/GB 比率大于或等于 0.3，那么卷的新 IOP/GB 比率必须大于或等于 0.3。</p> </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-tier&gt;</code></td>
-   <td>仅适用于耐久性存储器。输入所需的新 IOPS/GB 数。有关有效的 IOPS，请参阅[决定块存储器配置](#block_predefined_storageclass)。如果不指定 IOPS，那么将使用当前 IOPS。<p class="note">如果卷的原始 IOPS/GB 比率小于 0.25，那么新的 IOPS/GB 比率必须小于 0.25。如果卷的原始 IOP/GB 比率大于或等于 0.25，那么卷的新 IOP/GB 比率必须大于或等于 0.25。</p> </td>
-   </tr>
-   </tbody>
-   </table>
-
-   输出示例：
-   ```
-   Order 31020713 was placed successfully!.
-   > Storage as a Service
-
-   > 40 GBs
-
-   > 2 IOPS per GB
-
-   > 20 GB Storage Space (Snapshot Space)
-
-   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
-   ```
-   {: screen}
-
-4. 修补 PV 配置以添加 `autofix-resizefs` 注释。将卷安装到 pod 时，此注释会自动调整文件系统的大小。  
-   ```
-   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
-   ```
-   {: pre}
-
-5. 列出使用 PVC 的所有 pod。
-   ```
-      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
-      ```
-   {: pre}
-
-   将按以下格式返回 pod：`<pod_name>: <pvc_name>`。
-
-6. 如果您有使用 PVC 的 pod，请通过除去该 pod 并让 Kubernetes 重新创建 pod 来重新启动该 pod。如果 pod 不是使用 Kubernetes 部署或副本集创建的，那么在除去该 pod 之后，必须重新创建该 pod。要检索用于创建 pod 的 YAML 文件，请运行 `kubectl get pod <pod_name> -o yaml >pod.yaml`。
-   {: tip}
-   ```
-      kubectl delete pod <pod_name>
-      ```
-   {: pre}
-
-7. 如果更改了卷的大小，请登录到 pod 以验证新大小。请注意，存储器实例调整大小需要一些时间，并且在此过程完成之前无法验证其大小。
-   1. 获取在 pod 中用于访问卷的卷安装路径。
-      ```
-        kubectl describe pod <pod_name>
-        ```
-      {: pre}
-
-      卷安装路径会显示在 CLI 输出的 **Containers** > **block** > **Mounts** 部分中。
-   2. 登录到 pod。
-      ```
-      kubectl exec -it <pod_name> bash
-      ```
-      {: pre}
-
-   3. 显示磁盘使用情况统计信息，并查找先前检索到的卷的安装路径。验证 **Size** 列是否显示了卷的新大小。
-      ```
-      df -h
-      ```
-      {: pre}
-
-      输出示例：
-      ```
-      Filesystem                                     Size  Used Avail Use% Mounted on
-      overlay                                         99G  3.2G   91G   4% /
-      tmpfs                                           64M     0   64M   0% /dev
-      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
-      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
-      ```
-      {: screen}
 
 
 ## 备份和复原数据
@@ -1379,19 +1314,18 @@ subcollection: containers
 
 <dl>
   <dt>设置定期快照</dt>
-  <dd><p>可以[为块存储器设置定期快照](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots)，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在块存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户不小心除去了卷中的重要数据，那么可以通过快照来复原数据。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>登录到 `ibmcloud sl` CLI。<pre class="pre"><code>    ibmcloud sl init
-    </code></pre></li><li>列出集群中的现有 PV。<pre class="pre"><code>    kubectl get pv
-    </code></pre></li><li>获取要为其创建快照空间的 PV 的详细信息，并记下卷标识、大小和 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 大小和 IOPS 会显示在 CLI 输出的 <strong>Labels</strong> 部分中。要查找卷标识，请查看 CLI 输出的 <code>ibm.io/network-storage-id</code> 注释。</li><li>使用您在先前步骤中检索到的参数为现有卷创建快照大小。<pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待快照大小创建。<pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 输出中的 <strong>Snapshot Size (GB)</strong> 从 0 更改为您所订购的大小时，说明已成功供应快照大小。</li><li>为卷创建快照，并记下创建的快照的标识。<pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>验证快照是否已成功创建。<pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>要将数据从快照复原到现有卷，请运行以下命令：</strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>可以[为块存储器设置定期快照](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots)，这是捕获某个时间点的实例状态的只读映像。要存储快照，必须在块存储器上请求快照空间。快照会存储在同一专区的现有存储器实例上。如果用户不小心除去了卷中的重要数据，那么可以通过快照来复原数据。</br></br> <strong>要为卷创建快照，请执行以下操作：</strong><ol><li>[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>登录到 `ibmcloud sl` CLI。<pre class="pre"><code>ibmcloud sl init</code></pre></li><li>列出集群中的现有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>获取要为其创建快照空间的 PV 的详细信息，并记下卷标识、大小和 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 大小和 IOPS 会显示在 CLI 输出的 <strong>Labels</strong> 部分中。要查找卷标识，请查看 CLI 输出的 <code>ibm.io/network-storage-id</code> 注释。</li><li>使用您在先前步骤中检索到的参数为现有卷创建快照大小。<pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待快照大小创建。<pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>CLI 输出中的 <strong>Snapshot Size (GB)</strong> 从 0 更改为您所订购的大小时，说明已成功供应快照大小。</li><li>为卷创建快照，并记下创建的快照的标识。<pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>验证快照是否已成功创建。<pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>要将数据从快照复原到现有卷，请运行以下命令：</strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>将快照复制到其他专区</dt>
  <dd><p>为了保护数据不受专区故障的影响，可以[复制快照](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication)到其他专区中设置的块存储器实例。数据只能从主存储器复制到备份存储器。不能将复制的块存储器实例安装到集群。主存储器发生故障时，可以手动将复制的备份存储器设置为主存储器。然后，可以将其安装到集群。复原主存储器后，可以从备份存储器复原数据。</p></dd>
  <dt>复制存储器</dt>
- <dd><p>可以在原始存储器实例所在的专区中[复制块存储器实例](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume)。复制项采用原始存储器实例在创建该复制项的时间点的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先为该卷设置快照。</p></dd>
+ <dd><p>可以在原始存储器实例所在的专区中[复制块存储器实例](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume)。复制项所含的数据是其创建的那个时间点上原始存储器实例的数据。与副本不同，复制项用作独立于原始项的存储器实例。要进行复制，请首先为卷设置快照。</p></dd>
   <dt>将数据备份到 {{site.data.keyword.cos_full}}</dt>
   <dd><p>可以使用 [**ibm-backup-restore 映像**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter)来启动集群中的备份和复原 pod。此 pod 包含一个脚本，用于对集群中的任何持久卷声明 (PVC) 运行一次性或定期备份。数据存储在您在某个专区设置的 {{site.data.keyword.cos_full}} 实例中。</p><p class="note">块存储器使用 RWO 访问方式进行安装。此访问权仅允许一次将一个 pod 安装到块存储器。要备份数据，必须从存储器中卸载应用程序 pod，将其安装到备份 pod，备份数据，然后将存储器重新安装到应用程序 pod。</p>
 要使数据具有更高可用性，并保护应用程序不受专区故障的影响，请设置第二个 {{site.data.keyword.cos_short}} 实例，并在各个专区之间复制数据。如果需要从 {{site.data.keyword.cos_short}} 实例复原数据，请使用随映像一起提供的复原脚本。</dd>
 <dt>将数据复制到 pod 和容器，以及从 pod 和容器中复制数据</dt>
 <dd><p>可以使用 `kubectl cp` [命令 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) 将文件和目录复制到集群中的 pod 或特定容器，或者从集群中的 pod 或特定容器中复制文件和目录。</p>
-<p>开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) 如果未使用 <code>-c</code> 来指定容器，那么此命令将使用 pod 中的第一个可用容器。</p>
+<p>开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+如果未使用 <code>-c</code> 来指定容器，那么此命令将使用 pod 中的第一个可用容器。</p>
 <p>可以通过以下各种方法来使用此命令：</p>
 <ul>
 <li>将本地机器中的数据复制到集群中的 pod：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

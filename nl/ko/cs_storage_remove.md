@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 클러스터에서 지속적 스토리지 제거
 {: #cleanup}
 
-클러스터에서 지속적 스토리지를 설정하는 경우에는 스토리지를 요청하는 Kubernetes 지속적 볼륨 클레임(PVC), 팟(Pod)에 마운트되고 PVC에서 설명되는 Kubernetes 지속적 볼륨(PV), 그리고 IBM Cloud 인프라(SoftLayer) 인스턴스(예: NFS 파일 또는 블록 스토리지)의 3개의 기본 컴포넌트가 있습니다. 이를 작성한 방법에 따라 3개 모두를 별도로 삭제해야 할 수 있습니다.
+클러스터에서 지속적 스토리지를 설정하는 경우에는 스토리지를 요청하는 Kubernetes 지속적 볼륨 클레임(PVC), 팟(Pod)에 마운트되고 PVC에서 설명되는 Kubernetes 지속적 볼륨(PV), 그리고 IBM Cloud 인프라(SoftLayer) 인스턴스(예: NFS 파일 또는 블록 스토리지)의 3개의 기본 컴포넌트가 있습니다. 스토리지를 작성한 방법에 따라 3개 모두를 별도로 삭제해야 할 수 있습니다.
 {:shortdesc}
 
 ## 지속적 스토리지 정리
@@ -48,7 +50,7 @@ subcollection: containers
 
 <p class="important">지속적 스토리지를 정리하면 그 안에 저장된 모든 데이터가 삭제됩니다. 데이터의 사본이 필요한 경우에는 [파일 스토리지](/docs/containers?topic=containers-file_storage#file_backup_restore) 또는 [블록 스토리지](/docs/containers?topic=containers-block_storage#block_backup_restore)에 대한 백업을 작성하십시오.</p>
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 지속적 데이터를 정리하려면 다음을 수행하십시오.
 
@@ -178,7 +180,7 @@ subcollection: containers
    ```
    {: pre}
 
-9. 실제 스토리지 인스턴스가 제거되었는지 확인하십시오. 삭제 프로세스가 완료되려면 수 일이 걸릴 수 있습니다.
+9. 실제 스토리지 인스턴스가 제거되었는지 확인하십시오. 삭제 프로세스는 완료되는 데 수 일이 걸릴 수 있습니다.
 
    **파일 스토리지: **
    ```

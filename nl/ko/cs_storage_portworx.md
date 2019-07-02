@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Portworx를 사용하는 소프트웨어 정의 스토리지(SDS)에 데이터 저장
 {: #portworx}
 
-[Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 컨테이너화된 데이터베이스와 기타 stateful 앱에 대한 지속적 스토리지를 관리하거나 다중 구역 간 팟(Pod) 사이의 데이터를 공유하는 데 사용할 수 있는 고가용성 소프트웨어 정의 스토리지 솔루션입니다.
+[Portworx ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://portworx.com/products/introduction/)는 컨테이너화된 데이터베이스 및 기타 Stateful 앱의 로컬 지속적 스토리지를 관리하거나, 여러 구역의 팟(Pod) 간에 데이터를 공유하는 데 사용할 수 있는 고가용성 소프트웨어 정의 스토리지 솔루션입니다.
 {: shortdesc}
 
 **소프트웨어 정의 스토리지(SDS)는 무엇입니까?** </br>
@@ -38,13 +40,13 @@ Portworx는 작업자 노드에 연결된 사용 가능한 스토리지를 모�
 또한 볼륨 스냅샷, 볼륨 암호화, 격리 및 통합된 Stork(Storage Orchestrator for Kubernetes)와 같은 stateful 앱에 사용할 수 있는 추가 기능도 제공하여 클러스터에 볼륨을 최적으로 배치할 수 있습니다. 자세한 정보는 [Portworx 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/)를 참조하십시오.
 
 **Portworx에 적합한 {{site.data.keyword.containerlong_notm}}의 작업자 노드 특성은 무엇입니까?** </br>
-{{site.data.keyword.containerlong_notm}}는 [소프트웨어 정의 스토리지(SDS) 사용](/docs/containers?topic=containers-plan_clusters#sds)에 최적화되고 Portworx 스토리지 계층에 사용할 수 있는 하나 이상의 원시, 포맷되지 않은 그리고 마운트 해제된 로컬 디스크로 제공되는 베어메탈 작업자 노드 특성을 제공합니다. Portworx는 10Gbps 네트워크 속도로 제공되는 SDS 작업자 노드 시스템을 사용할 때 최상의 성능을 제공합니다.
+{{site.data.keyword.containerlong_notm}}는 [소프트웨어 정의 스토리지(SDS) 사용](/docs/containers?topic=containers-planning_worker_nodes#sds)에 최적화되고 Portworx 스토리지 계층에 사용할 수 있는 하나 이상의 원시, 포맷되지 않은 그리고 마운트 해제된 로컬 디스크로 제공되는 베어메탈 작업자 노드 특성을 제공합니다. Portworx는 10Gbps 네트워크 속도로 제공되는 SDS 작업자 노드 시스템을 사용할 때 최상의 성능을 제공합니다.
 
 **비 SDS 작업자 노드에서 Portworx를 실행하려면 어떻게 해야 합니까?** </br>
 비 SDS 작업자 노드 특성에 Portworx를 설치할 수 있지만 앱에 필요한 성능 이점은 얻지 못할 수도 있습니다. 비 SDS 작업자 노드는 가상 또는 베어메탈일 수 있습니다. 가상 머신을 사용하려면 `b2c.16x64` 또는 더 나은 작업자 노드 특성을 사용하십시오. `b3c.4x16` 또는 `u3c.2x4` 특성이 있는 가상 머신은 Portworx가 제대로 작동하기 위한 필수 리소스를 제공하지 않습니다. 가상 머신에는 Portworx의 이상적인 성능을 위해 충분하지 않은 1000Mbps가 제공됩니다. 베어메탈 머신은 Portworx에 필요한 충분한 컴퓨팅 리소스와 네트워크 속도를 제공하지만 이러한 머신을 사용하기 전에 [원시, 포맷되지 않은 그리고 마운트 해제된 블록 스토리지를 추가](#create_block_storage)해야 합니다.
 
 **내 데이터가 고가용성으로 저장되었는지 어떻게 확인할 수 있습니까?** </br>
-Portworx에서 노드 간 데이터를 복제할 수 있도록 Portworx 클러스터에는 3개 이상의 작업자 노드가 필요합니다. 작업자 노드 간 데이터를 복제함으로써 Portworx는 데이터를 유실하지 않고 장애가 발생하는 경우에도 Stateful 앱이 다른 작업자 노드로 다시 스케줄될 수 있도록 보장합니다. 보다 높은 가용성을 위해 [다중 구역 클러스터](/docs/containers?topic=containers-plan_clusters#multizone)를 사용하여 3개 이상의 구역에서 SDS 작업자 노드 간 볼륨을 복제합니다.
+Portworx에서 노드 간 데이터를 복제할 수 있도록 Portworx 클러스터에는 3개 이상의 작업자 노드가 필요합니다. 작업자 노드 간 데이터를 복제함으로써 Portworx는 데이터를 유실하지 않고 장애가 발생하는 경우에도 Stateful 앱이 다른 작업자 노드로 다시 스케줄될 수 있도록 보장합니다. 보다 높은 가용성을 위해 [다중 구역 클러스터](/docs/containers?topic=containers-ha_clusters#multizone)를 사용하여 3개 이상의 구역에서 SDS 작업자 노드 간 볼륨을 복제합니다.
 
 **내 팟(Pod)에 최상의 성능을 제공하는 볼륨 토폴로지는 무엇입니까?** </br>
 클러스터에서 Stateful 앱을 실행할 때 가장 큰 문제 중 하나는 컨테이너 또는 전체 호스트에 장애가 발생한 경우 컨테이너를 다른 호스트로 다시 스케줄할 수 있는지 확인하는 것입니다. Docker에서는 컨테이너를 다른 호스트로 다시 스케줄해야 하는 경우 볼륨은 새 호스트로 이동하지 않습니다. Portworx는 `hyper-converged`를 실행하여 컴퓨팅 리소스 및 스토리지가 항상 동일한 작업자 노드에 배치되도록 구성될 수 있습니다. 앱을 다시 스케줄해야 하는 경우, Portworx는 앱을 볼륨 복제본 중 하나가 상주하는 작업자 노드로 이동하여 로컬 디스크 액세스 속도와 Stateful 앱에 대한 최상의 성능을 보장합니다. `hyper-converged`를 실행하면 팟(Pod)에 최상의 성능을 제공하지만, 클러스터에 있는 모든 작업자 노드에서 스토리지를 사용할 수 있어야 합니다.
@@ -52,14 +54,11 @@ Portworx에서 노드 간 데이터를 복제할 수 있도록 Portworx 클러�
 또한 Portworx 스토리지 계층에 대한 작업자 노드의 서브세트만 사용하도록 선택할 수도 있습니다. 예를 들어, 로컬 원시 블록 스토리지로 제공되는 SDS 작업자 노드가 포함된 작업자 풀과 로컬 스토리지로 제공되지 않는 가상 작업자 노드가 있는 다른 작업자 풀이 있을 수 있습니다. Portworx를 설치할 때 Portworx 팟(Pod)은 디몬 세트의 파트로 클러스터의 모든 작업자 노드에 스케줄됩니다. SDS 작업자 노드에 로컬 스토리지가 있으므로 이러한 작업자 노드는 Portworx 스토리지 계층에만 포함됩니다. 로컬 스토리지가 누락되어 가상 작업자 노드가 스토리지 노드로 포함되지 않습니다. 그러나 가상 작업자 노드에 앱 팟(Pod)을 배치하는 경우, 이 팟(Pod)은 Portworx 디먼 세트 팟(Pod)을 사용하여 실제로 SDS 작업자 노드에 저장된 데이터에 계속 액세스할 수 있습니다. 가상 작업자 노드가 데이터를 액세스하기 위해 사설 네트워크를 통해 SDS 작업자 노드와 통신해야 하므로 이 설정은 `storage-heavy`라고 하며 `hyper-converged` 설정보다 약간 더 느린 성능을 제공합니다.
 
 **Portworx를 프로비저닝하려면 어떻게 해야 합니까?** </br>
-{{site.data.keyword.containerlong}}에서는 데이터를 저장하는 데 사용할 수 있는 하나 이상의 원시, 포맷되지 않은, 마운트 해제된 로컬 디스크로 제공되는 SDS 사용에 최적화된 작업자 노드 특성을 제공합니다. Portworx는 10Gbps 네트워크 속도로 제공되는 [SDS 작업자 노드 시스템](/docs/containers?topic=containers-plan_clusters#sds)을 사용할 때 최고의 성능을 제공합니다. 그러나 비 SDS 작업자 노드 특성에 Portworx를 설치할 수 있지만 앱에 필요한 성능 이점은 얻지 못할 수도 있습니다. Portworx를 정상적으로 실행하기 위한 작업자 노드의 최소 요구사항은 다음과 같습니다.
+{{site.data.keyword.containerlong}}에서는 데이터를 저장하는 데 사용할 수 있는 하나 이상의 원시, 포맷되지 않은, 마운트 해제된 로컬 디스크로 제공되는 SDS 사용에 최적화된 작업자 노드 특성을 제공합니다. Portworx는 10Gbps 네트워크 속도로 제공되는 [SDS 작업자 노드 시스템](/docs/containers?topic=containers-planning_worker_nodes#sds)을 사용할 때 최고의 성능을 제공합니다. 그러나 비 SDS 작업자 노드 특성에 Portworx를 설치할 수 있지만 앱에 필요한 성능 이점은 얻지 못할 수도 있습니다. Portworx를 정상적으로 실행하기 위한 작업자 노드의 최소 요구사항은 다음과 같습니다.
 - 4개의 CPU 코어
 - 4GB 메모리
 - 128GB의 포맷되지 않은 원시 스토리지
 - 10Gbps 네트워크 속도
-
-**내 데이터가 고가용성으로 저장되었는지 어떻게 확인할 수 있습니까?** </br>
-Portworx에서 노드 간 데이터를 복제할 수 있도록 Portworx 클러스터에는 3개 이상의 작업자 노드가 필요합니다. 작업자 노드 간 데이터를 복제함으로써 Portworx는 데이터를 유실하지 않고 장애가 발생하는 경우에도 Stateful 앱이 다른 작업자 노드로 다시 스케줄될 수 있도록 보장합니다. 보다 높은 가용성을 위해 [다중 구역 클러스터](/docs/containers?topic=containers-plan_clusters#multizone)를 사용하여 3개 구역 간 SDS 작업자 노드에 있는 볼륨을 복제합니다.
 
 **어떤 제한사항에 대해 계획해야 합니까?** </br>
 Portworx는 공용 네트워크 연결로 설정되는 표준 클러스터에 사용할 수 있습니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우, TCP 포트 443에서 모든 engress 네트워크 트래픽을 열거나 공용 서비스 엔드포인트를 사용으로 설정하지 않는 한 클러스터에서 Portworx를 사용할 수 없습니다.
@@ -70,7 +69,7 @@ Portworx는 공용 네트워크 연결로 설정되는 표준 클러스터에 �
 ## 비 SDS 작업자 노드에 대한 원시, 포맷되지 않은 그리고 마운트 해제된 블록 스토리지 작성
 {: #create_block_storage}
 
-Portworx는 [소프트웨어 정의 스토리지(SDS) 사용](/docs/containers?topic=containers-plan_clusters#sds)에 최적화된 작업자 노드 특성을 사용하는 경우에 최상으로 실행됩니다. 하지만 SDS 작업자 노드를 사용할 수 없거나 사용하지 않으려는 경우, 비 SDS의 작업자 노드 특성에 포틀릿을 설치하도록 선택할 수 있습니다. 비 SDS 작업자 노드는 Portworx에 대해 최적화되지 않고 앱에 필요한 성능 이점을 제공하지 않음을 유념하십시오.
+Portworx는 [소프트웨어 정의 스토리지(SDS) 사용](/docs/containers?topic=containers-planning_worker_nodes#sds)에 최적화된 작업자 노드 특성을 사용하는 경우에 최상으로 실행됩니다. 하지만 SDS 작업자 노드를 사용할 수 없거나 사용하지 않으려는 경우, 비 SDS의 작업자 노드 특성에 포틀릿을 설치하도록 선택할 수 있습니다. 비 SDS 작업자 노드는 Portworx에 대해 최적화되지 않고 앱에 필요한 성능 이점을 제공하지 않음을 유념하십시오.
 {: shortdesc}
 
 비 SDS 작업자 노드를 Portworx 클러스터에 포함하려면 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 플러그인을 사용하여 작업자 노드에 원시, 포맷되지 않은 그리고 마운트 해제된 블록 스토리지 디바이스를 추가해야 합니다. 원시 블록 스토리지는 블록 스토리지 디바이스가  {{site.data.keyword.containerlong_notm}}에 의해 자동으로 포맷되므로 Kubernetes 지속적 볼륨 클레임(PVC)을 사용하여 프로비저닝할 수 없습니다. Portworx는 블록 스토리지만 지원합니다. 파일 또는 오브젝트 스토리지를 마운트하는 비 SDS 작업자 노드는 Portworx 데이터 계층에 사용될 수 없습니다.
@@ -222,7 +221,7 @@ Portworx의 업데이트 또는 제거 방법에 대한 지시사항을 찾으�
 - Portworx 스토리지 계층에 비 SDS 작업자 노드를 사용하려는 경우 [비 SDS 작업자 노드에 포맷되지 않은 블록 스토리지 디바이스를 추가](#create_block_storage)하십시오.
 - [{{site.data.keyword.composeForEtcd}} 서비스 인스턴스](#portworx_database)를 작성하여 Portworx 구성 및 메타데이터를 저장하십시오.
 - {{site.data.keyword.keymanagementservicelong_notm}}를 사용하여 Portworx 볼륨을 암호화할지 여부를 결정하십시오. 볼륨을 암호화하려면 [{{site.data.keyword.keymanagementservicelong_notm}} 서비스 인스턴스를 설정하고 Kubernetes 시크릿에 서비스 정보를 저장](#encrypt_volumes)해야 합니다.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Portworx를 설치하려면 다음을 수행하십시오.
 
@@ -448,7 +447,7 @@ Portworx를 설치하려면 다음을 수행하십시오.
       ```
       {: pre}
 
-출력 예:
+      출력 예:
       ```
       Status: PX is operational
       License: Trial (expires in 30 days)
@@ -977,7 +976,7 @@ Portworx 클러스터에서 스토리지를 요청하여 스토리지를 앱에�
 
 3. PVC가 작성되었으며 지속적 볼륨(PV)에 바인드되었는지 확인하십시오. 이 프로세스에는 몇 분 정도 소요될 수 있습니다.
    ```
-kubectl get pvc
+   kubectl get pvc
    ```
    {: pre}
 
@@ -1092,15 +1091,15 @@ kubectl get pvc
    마운트 지점은 **Volume Mounts** 필드에 있고 볼륨은 **Volumes** 필드에 있습니다.
 
    ```
-      Volume Mounts:
-           /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
-           /volumemount from myvol (rw)
+    Volume Mounts:
+         /var/run/secrets/kubernetes.io/serviceaccount from default-token-tqp61 (ro)
+         /volumemount from myvol (rw)
    ...
    Volumes:
-       myvol:
-         Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-         ClaimName:	mypvc
-         ReadOnly:	false
+     myvol:
+       Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+       ClaimName:	mypvc
+       ReadOnly:	false
    ```
    {: screen}
 
@@ -1136,7 +1135,7 @@ kubectl get pvc
 <dt>하이퍼컨버지드 팟(Pod) 실행</dt>
 <dd>팟(Pod)의 볼륨이 상주하는 동일한 작업자 노드에서 팟(Pod)을 스케줄하도록 Portworx 클러스터를 구성할 수 있습니다. 이 설정은 `hyperconverged`라고도 하며 데이터 스토리지 성능을 향상시킬 수 있습니다. 자세한 정보는 [동일한 호스트의 팟(Pod)을 볼륨으로 실행 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/)을 참조하십시오.</dd>
 <dt>Portworx 볼륨의 스냅샷 작성</dt>
-<dd>Portworx 스냅샷을 작성하여 볼륨의 현재 상태와 데이터를 저장할 수 있습니다. 스냅샷은 로컬 Portworx 클러스터 또는 Cloud에 저장할 수 있습니다. 자세한 정보는 [로컬 스냅샷 작성 및 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/)을 참조하십시오. </dd>
+<dd>Portworx 스냅샷을 작성하여 볼륨의 현재 상태와 데이터를 저장할 수 있습니다. 스냅샷은 로컬 Portworx 클러스터 또는 클라우드에 저장할 수 있습니다. 자세한 정보는 [로컬 스냅샷 작성 및 사용 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/)을 참조하십시오. </dd>
 	<dt>LightHouse로 Portworx 클러스터 모니터링 및 관리</dt>
 	<dd>[Lighthouse ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.portworx.com/reference/lighthouse/)는 Portworx 클러스터 및 볼륨 스냅샷을 관리하고 모니터링하는 데 도움이 되는 직관적인 그래픽 도구입니다. Lighthouse를 사용하여 사용 가능한 스토리지 노드 수, 볼륨 및 사용 가능한 용량을 포함하여 Portworx 클러스터의 상태를 확인하고 Prometheus, Grafana 또는 Kibana에서 데이터를 분석할 수 있습니다. </dd>
 </dl>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # ロギングとモニタリングのトラブルシューティング
@@ -71,12 +71,12 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
   <tr>
     <td>クラスター作成の際にスペースを指定した場合、アカウント所有者に、そのスペースに対する管理者、開発者、または監査員の権限がない。</td>
       <td>アカウント所有者のアクセス許可を変更するには、以下のようにします。
-      <ol><li>クラスターのアカウント所有者を見つけるために、<code>ibmcloud ks api-key-info</code> を実行します。</li>
+      <ol><li>クラスターのアカウント所有者を見つけるために、<code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> を実行します。</li>
       <li>そのアカウント所有者にスペースに対する管理者、開発者、または監査員の {{site.data.keyword.containerlong_notm}} アクセス許可を付与する方法については、<a href="/docs/containers?topic=containers-users">クラスター・アクセス権限の管理</a>を参照してください。</li>
       <li>許可が変更された後にロギング・トークンをリフレッシュするには、<code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code> を実行します。</li></ol></td>
     </tr>
     <tr>
-      <td>アプリケーション・ロギング構成でアプリのパスにシンボリック・リンクが使用されている。</td>
+      <td>アプリのロギング構成でアプリのパスにシンボリック・リンクが使用されている。</td>
       <td><p>ログが送信されるようにするには、ロギング構成で絶対パスを使用する必要があります。そうしないと、ログを読み取れません。 パスがワーカー・ノードにマウントされている場合は、シンボリック・リンクが作成されている可能性があります。</p> <p>例: 指定されたパスが <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> であるのに、ログが <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> に送信されている場合、ログは読み取れません。</p></td>
     </tr>
   </tbody>
@@ -84,7 +84,7 @@ Kibana ダッシュボードにアクセスしてもログが表示されませ�
 
 トラブルシューティング中に行った変更をテストするために、複数のログ・イベントを生成するサンプルのポッド *Noisy* をクラスター内のワーカー・ノードにデプロイすることができます。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. `deploy-noisy.yaml` 構成ファイルを作成します。
     ```
@@ -163,11 +163,11 @@ You have reached the daily quota that is allocated to the Bluemix space {Space G
  </thead>
  <tbody>
   <tr>
-    <td>1 つ以上のポッドが大量のログを生成している。</td>
+    <td>1 つ以上のポッドで多数のログが生成される。</td>
     <td>特定のポッドからのログの転送を防止することによって、ログ・ストレージ・スペースを解放できます。 これらのポッドに対して[ロギング・フィルター](/docs/containers?topic=containers-health#filter-logs)を作成します。</td>
   </tr>
   <tr>
-    <td>ライト・プランでのログ・ストレージの毎日の割り当て 500 MB を超過した。</td>
+    <td>ライト・プランでのログ・ストレージの毎日の割り当ての 500 MB を超過した。</td>
     <td>まず、ログ・ドメインの[検索割り当て量および日次使用量を計算](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota)します。 次に、[{{site.data.keyword.loganalysisshort_notm}} サービス・プランをアップグレード](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan)することによって、ログ・ストレージ割り当て量を増やすことができます。</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ You have reached the daily quota that is allocated to the Bluemix space {Space G
 {: #long_lines}
 
 {: tsSymptoms}
-クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull_notm}} に転送します。 ログを表示すると、非常に長いログ・メッセージが表示されます。 また、Kibana では、ログ・メッセージの最後の 600 から 700 文字のみが表示される可能性があります。
+クラスターのロギング構成をセットアップして、ログを {{site.data.keyword.loganalysisfull_notm}} に転送します。 ログを表示すると、長いログ・メッセージが表示されます。また、Kibana では、ログ・メッセージの最後の 600 から 700 文字のみが表示される可能性があります。
 
 {: tsCauses}
 長いログ・メッセージは、Fluentd によって収集される前に、長さのために切り捨てられる場合があるため、ログは、{{site.data.keyword.loganalysisshort_notm}} に転送される前に、Fluentd によって正しく解析されない場合があります。
@@ -207,7 +207,7 @@ You have reached the daily quota that is allocated to the Bluemix space {Space G
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。
--   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を参照してください。
+-   ケースを開いて、IBM サポートに連絡してください。 IBM サポート・ケースを開く方法や、サポート・レベルとケースの重大度については、[サポートへのお問い合わせ](/docs/get-support?topic=get-support-getting-customer-support)を参照してください。
 問題を報告する際に、クラスター ID も報告してください。 クラスター ID を取得するには、`ibmcloud ks clusters` を実行します。 また、[{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) を使用して、クラスターから関連情報を収集してエクスポートし、IBM サポートと情報を共有することができます。
 {: tip}
 

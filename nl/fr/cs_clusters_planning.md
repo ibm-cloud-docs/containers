@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,655 +21,246 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Planification de votre cluster et configuration de noeuds worker
+# Planification d'une configuration de réseau pour votre cluster
 {: #plan_clusters}
-Concevez votre cluster standard de sorte à obtenir un maximum de disponibilité et de capacité pour votre application avec {{site.data.keyword.containerlong}}.
+
+Concevez une configuration de réseau pour votre cluster {{site.data.keyword.containerlong}} répondant à vos besoins en termes de charges de travail et d'environnement.
 {: shortdesc}
 
-## Clusters à haute disponibilité
-{: #ha_clusters}
+Dans un cluster {{site.data.keyword.containerlong_notm}}, vos applications conteneurisées sont hébergées sur des hôtes de calcul nommés noeuds worker. Les noeuds worker sont gérés par le maître Kubernetes. La configuration de la communication entre les noeuds worker et le maître Kubernetes, d'autres services, Internet ou d'autres réseaux privés dépend de la manière dont vous avez configuré votre réseau d'infrastructure IBM Cloud (SoftLayer).
 
-Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous répartissez votre configuration entre plusieurs noeuds worker, zones et clusters. Les fonctions intégrées, telles que l'équilibrage de charge et l'isolement, augmentent la résilience en cas de pannes d'hôtes, de réseaux ou d'applications.
+
+Vous créez un cluster pour la première fois ? Exécutez d'abord notre [tutoriel](/docs/containers?topic=containers-cs_cluster_tutorial) et revenez ici lorsque vous êtes  prêt à planifier vos clusters prêts pour la production.
+{: tip}
+
+Avant de planifier la configuration de réseau de votre cluster, vous devez d'abord vous reporter à la [description des principes de base d'un réseau de cluster](#plan_basics). Vous pouvez ensuite passer en revue trois configurations de réseau de cluster potentielles qui sont adaptées à des scénarios basés sur des environnements, à savoir [Exécution de charges de travail d'application accessible sur Internet](#internet-facing), [Extension d'un centre de données sur site avec un accès public limité](#limited-public) et [Extension d'un centre de données sur site sur le réseau privé uniquement](#private_clusters).
+
+## Description des principes de base d'un réseau de cluster
+{: #plan_basics}
+
+Lorsque vous créez votre cluster, vous devez choisir une configuration de réseau pour permettre à certains composants du cluster de communiquer entre eux et avec des réseaux et des services qui se trouvent en dehors du cluster.
 {: shortdesc}
 
-Examinez ces configurations potentielles de cluster, classées par ordre croissant de disponibilité.
+* [Communication entre les noeuds worker](#worker-worker) : Tous les noeuds worker doivent pouvoir communiquer entre eux sur le réseau privé. Dans de nombreux cas, la communication doit être autorisée sur plusieurs VLAN privés pour permettre aux noeuds worker sur différents VLAN et dans différentes zones de se connecter entre eux. 
+* [Communication entre les noeuds worker et le maître et entre les utilisateurs et le maître](#workeruser-master) : Vos noeuds worker et vos utilisateurs de cluster autorisés peuvent communiquer avec le maître Kubernetes de façon sécurisée sur le réseau public  à l'aide de TLS ou sur le réseau privé via des noeuds finaux de service privé. 
+* [Communication entre les noeuds worker et d'autres services {{site.data.keyword.Bluemix_notm}} ou des réseaux sur site](#worker-services-onprem) : Autorisez vos noeuds worker à communiquer de façon sécurisée avec d'autres services {{site.data.keyword.Bluemix_notm}}, tels que {{site.data.keyword.registrylong}}, et avec un réseau sur site. 
+* [Communication externe avec des applications qui s'exécutent sur des noeuds worker](#external-workers) : Autorisez des demandes publiques ou privées dans le cluster ainsi que des demandes depuis le cluster vers un noeud final public. 
 
-![Haute disponibilité pour les clusters](images/cs_cluster_ha_roadmap_multizone.png)
+### Communication entre noeuds worker
+{: #worker-worker}
 
-1. [Cluster à zone unique](#single_zone) avec plusieurs noeuds worker dans un pool de noeuds worker.
-2. [Cluster à zones multiples](#multizone) qui répartit les noeuds worker sur plusieurs zones au sein d'une région.
-3. [Plusieurs clusters](#multiple_clusters) configurés dans plusieurs zones ou régions connectés via un équilibreur de charge global.
-
-## Cluster à zone unique
-{: #single_zone}
-
-Pour améliorer la disponibilité de votre application et permettre le basculement si un noeud worker n'est pas disponible dans votre cluster, ajoutez des noeuds worker supplémentaires dans votre cluster à zone unique.
+Lorsque vous créez un cluster, les noeuds worker du cluster sont connectés automatiquement à un VLAN privé et éventuellement à un VLAN public. Un VLAN configure un groupe de noeuds worker et de pods comme s'ils étaient reliés physiquement au même câble physique et fournit un canal pour la connectivité entre les noeuds worker.
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="Haute disponibilité pour les clusters situés dans une zone unique" width="230" style="width:230px; border-style: none"/>
+**Connexions VLAN pour les noeuds worker**</br>
+Tous les noeuds worker doivent être connectés à un VLAN privé de sorte que chaque noeud worker puisse envoyer à et recevoir des informations d'autres noeuds worker. Lorsque vous créez un cluster avec des noeuds worker qui sont également connectés à un VLAN public, vos noeuds worker peuvent communiquer automatiquement avec le maître Kubernetes via le VLAN public et via le VLAN privé si vous activez le noeud final de service privé. Le VLAN public fournit également la connectivité de réseau public de manière à vous permettre d'exposer des applications dans votre cluster sur Internet. Toutefois, si vous devez sécuriser vos applications à partir de l'interface publique, plusieurs options sont disponibles pour sécuriser votre cluster, par exemple, utiliser des règles réseau Calico ou isoler la charge de travail de réseau externe sur des noeuds worker de périphérie.
+* Clusters gratuits : Dans les clusters gratuits, les noeuds worker du cluster sont connectés par défaut à un VLAN public et un VLAN privé dont IBM est le propriétaire. IBM contrôlant les VLAN, les sous-réseaux et les adresses IP, vous ne pouvez pas créer des clusters à zones multiples ni ajouter des sous-réseaux à votre cluster, et vous ne pouvez utiliser que des services NodePort pour exposer votre application.</dd>
+* Clusters standard : Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé dans cette zone sont automatiquement mis à votre disposition dans votre compte d'infrastructure IBM Cloud (SoftLayer). Si vous spécifiez que des noeuds worker doivent être connectés à un VLAN privé uniquement, un VLAN privé uniquement est mis à disposition automatiquement. Pour tous les autres clusters que vous créez dans cette zone, vous pouvez spécifier la paire de VLAN que vous souhaitez utiliser. Vous pouvez réutiliser le même VLAN public et le même VLAN privé que ceux que vous avez créés pour vous car les VLAN peuvent être partagés par plusieurs clusters. 
 
-Par défaut, votre cluster à zone unique est configuré avec un pool de noeuds worker nommé `default`. Ce pool regroupe des noeuds worker ayant la même configuration, par exemple le type de machine, que vous avez définie lors de la création du cluster. Vous pouvez ajouter d'autres noeuds worker à votre cluster en [redimensionnant un pool de noeuds worker existant](/docs/containers?topic=containers-clusters#resize_pool) ou en [ajoutant un nouveau pool de noeuds worker](/docs/containers?topic=containers-clusters#add_pool).
+Pour plus d'informations sur les VLAN, les sous-réseaux et les adresses IP, voir [Présentation de la mise en réseau dans {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
 
-Lorsque vous ajoutez d'autres noeuds worker, les instances d'application peuvent être réparties sur plusieurs noeuds worker. En cas de défaillance d'un noeud worker, les instances d'application sur les noeuds worker disponibles continuent à s'exécuter. Kubernetes replanifie automatiquement les pods des noeuds worker indisponibles pour que les performances et la capacité de votre application soient assurées. Pour vérifier que vos pods sont répartis uniformément sur les noeuds worker, implémentez l'[affinité des pods](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
+**Communication des noeuds worker sur des sous-réseaux et des VLAN**</br>
+Dans de nombreuses situations, les composants présents dans votre cluster doivent être autorisés à communiquer sur plusieurs VLAN privés. Par exemple, si vous souhaitez créer un cluster à zones multiples, si vous disposez de plusieurs VLAN pour un cluster ou de plusieurs sous-réseaux sur le même VLAN, les noeuds worker sur les différents sous-réseaux du même VLAN ou dans différents VLAN ne peuvent pas automatiquement communiquer entre eux. Vous devez activer la fonction de routeur virtuel (VRF) ou de spanning VLAN pour votre compte d'infrastructure IBM Cloud (SoftLayer).
 
-**Puis-je convertir mon cluster à zone unique en cluster à zones multiples ?**</br>
-Oui, à condition que le cluster se trouve dans l'une des [agglomérations à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
+* [Virtual Routing and Forwarding (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) : Une fonction VRF active tous les VLAN et les sous-réseaux dans votre compte d'infrastructure pour qu'ils communiquent entre eux. De plus, une fonction VRF est requise pour autoriser vos noeuds worker et le maître à communiquer via le noeud final de service privé et pour communiquer avec d'autres instances {{site.data.keyword.Bluemix_notm}} qui prennent en charge les noeuds finaux de service privé. Pour activer VRF, exécutez la commande `ibmcloud account update --service-endpoint-enable true`. Le résultat de cette commande vous invite à ouvrir un cas de support pour permettre à votre compte d'utiliser une fonction VRF et des points finaux de service. La fonction VRF élimine l'option Spanning VLAN de votre compte car tous les VLAN sont en mesure de communiquer.</br></br>Lorsque la fonction VRF est activée, tout système qui est connecté à l'un de vos VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}} peut communiquer avec les noeuds worker du cluster. Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico](/docs/containers?topic=containers-network_policies#isolate_workers).</dd>
+* [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) : Si vous ne pouvez ou souhaitez pas activer la fonction VRF, par exemple, si vous n'avez pas besoin que le maître soit accessible sur le réseau privé ou si vous utilisez un périphérique de passerelle pour accéder au maître via le VLAN public, activez la fonction Spanning VLAN. Par exemple, si vous avez un périphérique de passerelle et que vous ajoutez un cluster, les nouveaux sous-réseaux portables qui sont commandés pour le cluster ne sont pas configurés sur ce périphérique de passerelle mais la fonction Spanning VLAN active le routage entre les sous-réseaux. Pour activer la fonction Spanning VLAN, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si la fonction Spanning VLAN est déjà activée, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Vous ne pouvez pas activer le noeud final de service privé si vous choisissez d'activer la fonction Spanning VLAN à la place d'une fonction VRF.
 
+</br>
 
-**Dois-je utiliser des clusters à zones multiples ?**</br>
-Non. Vous pouvez créer autant de clusters à zone unique que vous le souhaitez. En effet, vous pouvez même préférer des clusters à zone unique pour une gestion simplifiée ou si votre cluster doit résider dans une [ville à zone unique](/docs/containers?topic=containers-regions-and-zones#zones).
+### Communication entre les noeuds worker et le maître et entre les utilisateurs et le maître
+{: #workeruser-master}
 
-**Puis-je disposer d'un maître à haute disponibilité dans une zone unique ?**</br>
-Oui. Dans une zone unique, votre maître est hautement disponible et comprend des répliques sur des hôtes physiques distincts pour le serveur d'API Kubernetes, le composant etcd, le planificateur et le gestionnaire de contrôleurs afin de les protéger en cas d'indisponibilité due par exemple à une mise à jour du maître. Pour vous protéger en cas de défaillance d'une zone, vous pouvez :
-* [Créer un cluster dans une zone compatible avec plusieurs zones](/docs/containers?topic=containers-plan_clusters#multizone), dans laquelle le maître est réparti entre plusieurs zones.
-* [Créer plusieurs clusters](#multiple_clusters) et les connecter avec un équilibreur de charge global.
-
-## Cluster à zones multiples
-{: #multizone}
-
-Avec {{site.data.keyword.containerlong_notm}}, vous avez la possibilité de créer des clusters à zones multiples. Vos utilisateurs risquent moins de rencontrer des indisponibilités lorsque vous répartissez vos applications entre plusieurs zones et noeuds worker en utilisant un pool de noeuds worker. Les fonctions intégrées, telles que l'équilibrage de charge, augmentent la résilience en cas de défaillance potentielle d'une zone avec des hôtes, des réseaux ou des applications. Si les ressources d'une zone sont indisponibles, les charges de travail de vos clusters seront opérationnelles dans les autres zones.
+Un canal de communication doit être configuré pour que les noeuds worker puissent établir une connexion au maître Kubernetes. Vous pouvez permettre la communication entre vos noeuds worker et le maître Kubernetes en activant le noeud final de service public uniquement, des noeuds finaux de service public et privé ou le noeud final de service privé uniquement.
 {: shortdesc}
 
-**Qu'est-ce qu'un pool worker ?**</br>
-Un pool worker est une collection de noeuds worker de même type, par exemple type de machine, UC et mémoire. Lorsque vous créez un cluster, un pool worker par défaut est automatiquement créé pour vous. Pour répartir les noeuds worker de votre pool entre plusieurs zones, ajouter des noeuds worker dans le pool ou mettre à jour des noeuds worker, vous pouvez utiliser les nouvelles commandes `ibmcloud ks worker-pool`.
+Pour sécuriser la communication via des noeuds finaux de service public et privé, {{site.data.keyword.containerlong_notm}} configure automatiquement une connexion OpenVPN entre le maître Kubernetes et le noeud worker lors de la création du cluster. Les noeuds worker dialoguent en toute sécurité avec le maître via des certificats TLS et le maître dialogue avec eux via une connexion OpenVPN.
 
-**Puis-je continuer à utiliser des noeuds worker autonomes ?**</br>
-L'ancienne configuration de noeuds worker autonomes est prise en charge, mais elle est dépréciée. Veillez à [ajouter un pool de noeuds worker à votre cluster](/docs/containers?topic=containers-clusters#add_pool), puis [utilisez des pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool) afin d'organiser vos noeuds worker au lieu d'utiliser des noeuds worker autonomes.
+**Noeud final de service public uniquement**</br>
+Si vous ne souhaitez ou ne pouvez pas activer VRF pour votre compte, vos noeuds worker peuvent automatiquement se connecter au maître Kubernetes sur le VLAN public via le noeud final de service public. 
+* La communication entre les noeuds worker et le maître est établie de manière sécurisée sur le réseau public via le noeud final de service public. 
+* Le maître est accessible au public pour les utilisateurs de cluster autorisés uniquement via le noeud final de service public. Les utilisateurs de votre cluster peuvent accéder de manière sécurisée à votre maître Kubernetes sur Internet pour exécuter des commandes `kubectl`, par exemple.
 
-**Puis-je convertir mon cluster à zone unique en cluster à zones multiples ?**</br>
-Oui, à condition que le cluster se trouve dans l'une des [agglomérations à zones multiples prises en charge](/docs/containers?topic=containers-regions-and-zones#zones). Voir [Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker](/docs/containers?topic=containers-update#standalone_to_workerpool).
-
-
-### Pouvez-vous m'en dire davantage sur la configuration d'un cluster à zones multiples ?
-{: #mz_setup}
-
-<img src="images/cs_cluster_multizone-ha.png" alt="Haute disponibilité pour les clusters à zones multiples" width="500" style="width:500px; border-style: none"/>
-
-Vous pouvez ajouter des zones supplémentaires dans votre cluster pour répliquer les noeuds worker de votre pool de noeuds worker sur plusieurs zones au sein d'une région. Les clusters à zones multiples sont conçus pour planifier de manière uniforme les pods sur les noeuds worker et les zones afin d'assurer la disponibilité et la reprise en cas d'incident. Si les noeuds worker ne sont pas répartis uniformément sur les zones ou si la capacité est insuffisante dans l'une des zones, le planificateur de Kubernetes risque de ne pas parvenir à planifier tous les pods demandés. Par conséquent, les pods peuvent passer à l'état **En attente** jusqu'à ce que la capacité suffisante soit disponible. Si vous souhaitez modifier le comportement par défaut pour que le planificateur de Kubernetes répartisse les pods entre les zones avec une meilleure distribution, utilisez la [règle d'affinité de pods](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
-
-**Pourquoi dois-je avoir des noeuds worker répartis sur 3 zones ?** </br>
-La répartition de vos charges de travail sur 3 zones permet d'assurer la haute disponibilité de votre application en cas d'indisponibilité d'une ou de deux zones, tout en ayant une configuration de cluster plus rentable. Mais pour quelle raison ? Voici un exemple.
-
-Supposons que vous ayez besoin d'un noeud worker à 6 coeurs pour traiter la charge de travail de votre application. Voici les options à votre disposition pour garantir une meilleure disponibilité de votre cluster :
-
-- **Dupliquer vos ressources dans une autre zone :** cette option vous laisse 2 noeuds worker, chacun avec 6 coeurs dans chaque zone, soit un total de 12 coeurs. </br> 
-- **Répartir les ressources sur 3 zones :** avec cette option, vous déployez 3 coeurs par zone, ce qui vous laisse une capacité totale de 9 coeurs. Pour gérer votre charge de travail, deux zones doivent être opérationnelles en même temps. Si l'une des zones est indisponible, les deux autres zones peuvent traiter votre charge de travail. Si deux zones sont indisponibles, il reste trois coeurs opérationnels pour traiter votre charge de travail. Le déploiement de 3 coeurs par zone signifie des machines plus petites et donc une réduction de coût pour vous. </br>
-
-**Comment est configuré le maître Kubernetes ?** </br>
-Lorsque vous créez un cluster dans une [agglomération à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones), un maître à haute disponibilité Kubernetes est automatiquement déployé et trois répliques sont réparties entre les zones de l'agglomération. Par exemple, si le cluster se trouve dans les zones `dal10`, `dal12` ou `dal13`, les répliques du maître Kubernetes sont réparties dans chaque zone de la métropole à zones multiples Dallas.
-
-**Que se passe-t-il si le maître Kubernetes devient indisponible ?** </br>
-Le [maître Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) est le composant principal qui permet de garder votre cluster opérationnel. Le maître stocke les ressources du cluster et leurs configurations dans la base de données etcd qui assure le bon fonctionnement de votre cluster. Le serveur d'API Kubernetes correspond au point d'entrée principal pour toutes les demandes de gestion de cluster des noeuds worker au maître, ou lorsque vous souhaitez interagir avec les ressources de votre cluster.<br><br>En cas de défaillance du maître, vos charges de travail continuent à s'exécuter sur les noeuds worker, mais vous ne pouvez pas utiliser des commandes `kubectl` pour gérer les ressources de votre cluster ou afficher l'état de santé du cluster tant que le serveur d'API Kubernetes dans le maître n'est pas opérationnel. Si un pod tombe en panne lors d'une indisponibilité du maître, le pod ne peut pas être replanifié tant que le noeud worker n'a pas rétabli le contact avec le serveur d'API Kubernetes.<br><br>Lors d'une indisponibilité du maître, vous pouvez toujours exécuter des commandes `ibmcloud ks` pour l'API {{site.data.keyword.containerlong_notm}} pour gérer vos ressources d'infrastructure, telles que les noeuds worker ou les réseaux locaux virtuels (VLAN). Si vous modifiez la configuration actuelle du cluster en ajoutant ou en retirant des noeuds worker dans le cluster, vos modifications ne sont pas appliquées tant que le maître n'est pas opérationnel.
-
-Ne pas redémarrer ou réamorcer un noeud worker pendant la durée d'indisponibilité du maître. Cette action retire les pods de votre noeud worker. Comme le serveur d'API Kubernetes n'est pas disponible, les pods ne peuvent pas être replanifiés sur d'autres noeuds worker dans le cluster.
-{: important}
+**Noeuds finaux de service public et privé**</br>
+Pour rendre votre maître accessible au public ou en privé aux utilisateurs du cluster, vous pouvez activer les noeuds finaux de service public et privé. La fonction VRF est requise dans votre compte {{site.data.keyword.Bluemix_notm}} et vous devez activer votre compte pour l'utilisation de noeuds finaux de service. Pour activer la fonction VRF et des noeuds finaux de service, exécutez `ibmcloud account update --service-endpoint-enable true`.
+* Si des noeuds worker sont connectés aux VLAN publics et privés, la communication entre les noeuds worker et le maître est établie sur le réseau privé via le noeud final de service privé et sur le réseau public via le noeud final de service public. En acheminant la moitié du trafic worker vers maître via le noeud final public et l'autre moitié via le noeud final privé, votre communication maître vers worker est protégée contre d'éventuelles pannes du réseau public ou privé. Si des noeuds worker sont connectés aux VLAN privés uniquement, la communication entre les noeuds worker et le maître est établie sur le réseau privé via le noeud final de service privé uniquement. 
+* Le maître est accessible au public pour les utilisateurs de cluster autorisés via le noeud final de service public. Le maître est accessible en privé via le noeud final de service privé si les utilisateurs de cluster autorisés se trouvent dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou s'ils sont connectés au réseau privé via une connexion VPN ou {{site.data.keyword.Bluemix_notm}} Direct Link. Notez que vous devez [exposer le noeud final maître via un équilibreur de charge privé](/docs/containers?topic=containers-clusters#access_on_prem) de sorte que les utilisateurs puissent accéder au maître via une connexion VPN ou {{site.data.keyword.Bluemix_notm}} Direct Link.
 
 
-Pour protéger votre cluster en cas de défaillance du maître ou dans les régions où les clusters à zones multiples ne sont pas disponibles, vous pouvez [configurer plusieurs clusters et les connecter avec un équilibreur de charge global](#multiple_clusters).
+**Noeud final de service privé uniquement**</br>
+Pour rendre votre maître accessible uniquement en privé, vous pouvez activer le noeud final de service privé. La fonction VRF est requise dans votre compte {{site.data.keyword.Bluemix_notm}} et vous devez activer votre compte pour l'utilisation de noeuds finaux de service. Pour activer la fonction VRF et des noeuds finaux de service, exécutez `ibmcloud account update --service-endpoint-enable true`. Notez que l'utilisation de noeud final de service privé entraîne des frais de bande passante non facturés ou non mesurés. 
+* La communication entre les noeuds worker et le maître est établie sur le réseau privé via le noeud final de service privé. 
+* Le maître est accessible en privé si les utilisateurs de cluster autorisés figurent dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou s'ils sont connectés au réseau privé via une connexion VPN ou Direct Link. Notez que vous devez [exposer le noeud final maître via un équilibreur de charge privé](/docs/containers?topic=containers-clusters#access_on_prem) de sorte que les utilisateurs puissent accéder au maître via une connexion VPN ou Direct Link.
 
-**Dois-je faire quelque chose pour que le maître puisse communiquer avec les noeuds worker entre les différentes zones ?**</br>
-Oui. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
 
-**Comment laisser les utilisateurs accéder à mon application à partir de l'Internet public ?**</br>
-Vous pouvez exposer vos applications en utilisant un équilibreur de charge d'application (ALB) Ingress ou le service d'équilibreur de charge.
+</br>
 
-- **Equilibreur de charge d'application (ALB) :** par défaut, les équilibreurs de charge d'application sont automatiquement créés et activés dans chaque zone de votre cluster. Un équilibreur de charge pour zones multiples (MZLB) Cloudflare pour votre cluster est également automatiquement créé et déployé de sorte à obtenir 1 équilibreur de charge MZLB pour chaque région. L'équilibreur de charge MZLB place les adresses IP de vos équilibreurs de charge d'application (ALB) derrière le même nom d'hôte et active des diagnostics d'intégrité sur ces adresses IP pour déterminer si elles sont disponibles ou pas. Par exemple, si vous disposez de noeuds worker dans 3 zones dans la région Est des Etats-Unis, le nom d'hôte `yourcluster.us-east.containers.appdomain.cloud` comporte 3 adresses IP d'ALB. L'équilibreur de charge MZLB réalise des diagnostics d'intégrité de l'adresse IP d'ALB publique dans chaque zone d'une région et conserve les résultats de recherche DNS à jour en fonction de ces diagnostics. Pour plus d'informations, voir [Composants et architecture du service Ingress](/docs/containers?topic=containers-ingress#planning).
+### Communication entre les noeuds Worker et d'autres services {{site.data.keyword.Bluemix_notm}} ou réseaux sur site
+{: #worker-services-onprem}
 
-- **Services d'équilibreur de charge :** les services d'équilibreur de charge sont configurés dans une seule zone uniquement. Les demandes entrantes dans votre application sont dirigées depuis cette zone vers toutes les instances d'application situées dans d'autres zones. Si cette zone devient indisponible, votre application risque d'être inaccessible sur Internet. Vous pouvez configurer des services d'équilibreur de charge supplémentaires dans d'autres zones pour tenir compte d'une défaillance de zone unique. Pour plus d'informations, voir [Services d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer#multi_zone_config) à haute disponibilité.
-
-**Puis-je configurer du stockage persistant pour mon cluster à zones multiples ?**</br>
-Pour le stockage persistant à haute disponibilité, utilisez un service de cloud, tel que [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Vous pouvez également recourir à une solution de stockage défini par logiciel (SDS), telle que [Portworx](/docs/containers?topic=containers-portworx#portworx) qui utilise des [machines SDS](#sds). Pour plus d'informations, voir [Comparaison des options de stockage persistant pour les clusters à zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
-Le stockage de fichiers NFS et le stockage par blocs ne peuvent pas être partagés entre les zones. Les volumes persistants ne peuvent être utilisés que dans la zone où est située l'unité de stockage réelle. Si vous disposez de stockage de fichiers NFS ou de stockage par blocs dans votre cluster que vous souhaitez continuer à utiliser, vous devez appliquer des libellés de région et de zone aux volumes persistants existants. Ces libellés permettent au planificateur kube-scheduler de déterminer où planifier une application qui utilise le volume persistant. Exécutez la commande suivante et remplacez `<mycluster>` par le nom de votre cluster.
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-```
-{: pre}
-
-**J'ai créé mon cluster à zones multiples. Pourquoi n'y a-t-il qu'une seule zone ? Comment ajouter des zones à mon cluster ?**</br>
-Si vous [créez votre cluster à zones multiples à l'aide de l'interface de ligne de commande](/docs/containers?topic=containers-clusters#clusters_cli), le cluster est créé, mais vous devez ajouter des zones au pool de noeuds worker pour finaliser le processus. Pour couvrir plusieurs zones, votre cluster doit figurer dans une [agglomération à plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones). Pour ajouter une zone à votre cluster et répartir les noeuds worker sur différentes zones, voir [Ajouter une zone dans votre cluster](/docs/containers?topic=containers-clusters#add_zone).
-
-### Quels sont les changements par rapport à la façon dont je gère mes clusters actuellement ?
-{: #mz_new_ways}
-
-Avec l'introduction des pools de noeuds worker, vous pouvez utiliser un nouvel ensemble d'API et de commandes pour gérer votre cluster. Vous pouvez voir ces nouvelles commandes sur la [page de la documentation sur l'interface CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) ou sur votre terminal, en exécutant la commande `ibmcloud ks help`.
+Autorisez vos noeuds worker à communiquer de façon sécurisée avec d'autres services {{site.data.keyword.Bluemix_notm}}, tels que {{site.data.keyword.registrylong}}, et avec un réseau sur site.
 {: shortdesc}
 
-Le tableau suivant compare l'ancienne et la nouvelle méthode pour quelques actions de gestion de cluster courantes.
-<table summary="Le tableau présente la nouvelle manière d'exécuter des commandes pour les zones multiples. La lecture des lignes s'effectue de gauche à droite, avec la description dans la première colonne, l'ancienne méthode dans la deuxième colonne et la nouvelle méthode adaptée aux zones multiples dans la troisième colonne.">
-<caption>Nouvelles méthodes pour les commandes de pool de noeuds worker à zones multiples.</caption>
-  <thead>
-  <th>Description</th>
-  <th>Anciens noeuds worker autonomes</th>
-  <th>Nouveaux pools de noeuds worker à zones multiples</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>Ajout de noeuds worker dans le cluster.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> pour ajouter des noeuds worker autonomes.</p></td>
-    <td><ul><li>Pour ajouter d'autres types de machine que votre pool existant, créez un nouveau pool de noeuds worker : [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
-    <li>Pour ajouter des noeuds worker à un pool existant, redimensionnez le nombre de noeuds par zone dans le pool :  [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Suppression de noeuds worker du cluster.</td>
-    <td>Vous pouvez toujours utiliser la commande <code>ibmcloud ks worker-rm</code> pour supprimer un noeud worker problématique de votre cluster.</td>
-    <td><ul><li>Si votre pool de noeuds worker n'est pas équilibré, par exemple après la suppression d'un noeud worker, rééquilibrez-le : [commande](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) <code>ibmcloud ks worker-pool-rebalance</code>.</li>
-    <li>Pour réduire le nombre de noeuds worker dans un pool, redimensionnez le nombre par zone (valeur minimale = 1) : [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Utilisation d'un nouveau VLAN pour les noeuds worker.</td>
-    <td><p class="deprecated">Ajoutez un nouveau noeud worker utilisant le nouveau VLAN privé ou public : <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Définissez le pool de noeuds worker pour l'utilisation d'un autre VLAN public ou privé que celui qu'il utilisait auparavant : [commande](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
-    </tr>
-  </tbody>
-  </table>
+**Communication avec d'autres services {{site.data.keyword.Bluemix_notm}} sur le réseau privé ou public**</br>
+Vos noeuds worker peuvent communiquer automatiquement et en toute sécurité avec d'autres services {{site.data.keyword.Bluemix_notm}} qui prennent en charge des noeuds finaux de service privé, par exemple, {{site.data.keyword.registrylong}}, sur votre réseau privé d'infrastructure IBM Cloud (SoftLayer). Si un service {{site.data.keyword.Bluemix_notm}} ne prend pas en charge des noeuds finaux de service privé, vos noeuds worker doivent être connectés à un VLAN public de manière à pouvoir communiquer en toute sécurité avec les services sur le réseau public. 
 
-## Plusieurs clusters connectés avec un équilibreur de charge global
-{: #multiple_clusters}
+Si vous utilisez des règles réseau Calico pour verrouiller le réseau public dans votre cluster, vous devrez peut-être autoriser l'accès aux adresses IP publiques et privées des services que vous souhaitez utiliser dans vos règles Calico. Si vous utilisez un périphérique de passerelle, par exemple, un dispositif Vyatta (Virtual Router Appliance), vous devez [autoriser l'accès aux adresses IP privées des services que vous souhaitez utiliser](/docs/containers?topic=containers-firewall#firewall_outbound) dans votre pare-feu de périphérique de passerelle.
+{: note}
 
-Pour protéger votre application en cas de défaillance du maître Kubernetes et pour les régions dans lesquelles les clusters à zones multiples ne sont pas disponibles, vous pouvez créer plusieurs clusters dans différentes zones au sein d'une région et les connecter avec un équilibreur de charge global.
+**{{site.data.keyword.BluDirectLink}} pour la communication sur le réseau privé avec des ressources figurant dans des centres de données sur site**</br>
+Pour connecter votre cluster à votre centre de données sur site, par exemple avec {{site.data.keyword.icpfull_notm}}, vous pouvez configurer [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Avec {{site.data.keyword.Bluemix_notm}} Direct Link, vous créez une connexion privée directe entre vos environnements de réseau distants et {{site.data.keyword.containerlong_notm}} sans routage sur l'internet public. 
+
+**Connexion VPN IPSec strongSwan pour la communication sur le réseau public avec des ressources figurant dans des centres de données sur site**
+* Noeuds worker qui sont connectés à des VLAN publics et privés : configurez un [service VPN IPSec strongSwan![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.strongswan.org/about.html) directement dans votre cluster. Le service VPN IPSec strongSwan fournit un canal de communication de bout en bout sécurisé sur Internet, basé sur l'ensemble de protocoles IPSec (Internet Protocol Security) aux normes de l'industrie. Pour configurer une connexion sécurisée entre votre cluster et un réseau sur site, [configurez et déployez le service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) directement dans un pod de votre cluster.
+* Noeuds worker connectés à un VLAN privé uniquement : configurez un noeud final VPN IPSec sur un périphérique de passerelle, par exemple, un dispositif Vyatta (Virtual Router Appliance). Ensuite, [configurez le service VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) dans votre cluster pour l'utilisation du noeud final VPN sur votre passerelle. Si vous ne souhaitez pas utiliser strongSwan, vous pouvez [configurer une connectivité VPN directement avec VRA](/docs/containers?topic=containers-vpn#vyatta).
+
+</br>
+
+### Communication externe avec des applications qui s'exécutent sur des noeuds worker
+{: #external-workers}
+
+Autorisez les demandes de trafic publiques ou privées depuis l'extérieur du cluster vers vos applications qui s'exécutent sur des noeuds worker.
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="Haute disponibilité pour plusieurs clusters" width="700" style="width:700px; border-style: none"/>
+**Trafic privé vers des applications de cluster**</br>
+Lorsque vous déployez une application dans votre cluster, vous souhaitez peut-être rendre l'application accessible uniquement aux utilisateurs et services qui se trouvent sur le même réseau privé que votre cluster. L'équilibrage de charge privé est idéal pour rendre votre application disponible pour des demandes depuis l'extérieur du cluster sans exposer l'application au public général. Vous pouvez également utiliser l'équilibrage de charge privé pour tester des accès, demander du routage et d'autres configurations pour votre application avant de l'exposer ultérieurement au public avec des services réseau public. Pour autoriser les demandes de trafic privées depuis l'extérieur du cluster vers vos applications, vous pouvez créer des services de mise en réseau Kubernetes privés, tels que des ports de noeud privés, des NLB et des ALB Ingress. Vous pouvez ensuite utiliser des règles pre-DNAT Calico pour bloquer le trafic vers des ports de noeud publics de services de mise en réseau privés. Pour plus d'informations, voir [Planification de l'équilibrage de charge externe privé](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-Pour équilibrer votre charge de travail sur plusieurs clusters, vous devez configurer un équilibreur de charge global et ajouter les adresses IP de vos équilibreurs de charge d'application (ALB) ou services d'équilibreur de charge dans votre domaine. En ajoutant ces adresses IP, vous pouvez acheminer le trafic entrant entre vos clusters. Pour que l'équilibreur de charge global détecte l'indisponibilité d'un de vos clusters, envisagez d'ajouter un diagnostic d'intégrité à base de commande ping pour toutes les adresses IP. Lorsque vous configurez ce diagnostic, votre fournisseur de DNS envoie régulièrement une commande ping pour tester les adresses IP que vous avez ajoutées dans votre domaine. Si une adresse IP devient indisponible, le trafic n'est plus adressé à cette adresse IP. Cependant, Kubernetes ne redémarre pas automatiquement les pods du cluster indisponible sur les noeuds worker des clusters disponibles. Pour que Kubernetes redémarre automatiquement les pods dans les clusters disponibles, envisagez la configuration d'un [cluster à zones multiples](#multizone).
+**Trafic public vers des applications de cluster**</br>
+Pour rendre vos applications accessibles de façon externe à partir de l'internet public, vous pouvez créer des ports de noeud publics, des équilibreurs de charge de réseau (NLB) et des équilibreurs de charge d'application (ALB) Ingress. Les services de mise en réseau publics se connectent à cette interface de réseau public en fournissant à votre application une adresse IP publique et, le cas échéant, une URL publique. Lorsqu'une application est exposée au public, quiconque disposant de l'adresse IP de service public ou de l'URL que vous avez configurée pour votre application peut envoyer une demande à cette dernière. Vous pouvez ensuite utiliser des règles pre-DNAT Calico pour contrôler le trafic vers les services de mise en réseau publics, par exemple, en plaçant sur liste blanche le trafic provenant de certaines adresses IP source ou certains routages CIDR et en bloquant tous les autres trafics. Pour plus d'informations, voir [Planification de l'équilibrage de charge externe public](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-**Pourquoi ai-je besoin de 3 clusters dans 3 zones ?** </br>
-De la même manière que vous utilisez [3 zones dans un cluster à zones multiples](#multizone), vous pouvez apporter une disponibilité accrue à votre application en configurant 3 clusters sur différentes zones. Vous pouvez également réduire les coûts en achetant des machines plus petites pour traiter votre charge de travail.
+Pour plus de sécurité, isolez les charges de travail sur le réseau avec des noeuds worker de périphérie. Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès depuis l'extérieur aux noeuds worker qui sont connectés à des VLAN publics et en isolant la charge de travail du réseau. Lorsque vous [labellisez des noeuds worker en tant que noeuds de périphérie](/docs/containers?topic=containers-edge#edge_nodes), les pods NLB et ALB se déploient uniquement sur les noeuds worker spécifiés. Pour éviter l'exécution d'autres charges de travail sur les noeuds de périphérie, vous pouvez [ajouter une annotation taint aux noeuds de périphérie](/docs/containers?topic=containers-edge#edge_workloads).
+Dans Kubernetes versions 1.14 et ultérieures, vous pouvez déployer des NLB et des ALB publics et privés sur des noeuds de périphérie.
+Par exemple, si vos noeuds worker sont connectés à un VLAN privé uniquement et que vous devez autoriser l'accès public à une application de votre cluster, vous pouvez créer un pool de noeuds worker de périphérie dans lequel les noeuds de périphérie sont connectés à des VLAN publics et privés. Vous pouvez déployer des NLB et des ALB publics sur ces noeuds de périphérie afin de garantir que seuls ces noeuds worker peuvent gérer les connexions publiques. 
 
-**Et si je veux configurer plusieurs clusters dans différentes régions ?** </br>
-Vous pouvez configurer plusieurs clusters dans différentes régions d'une géolocalisation (par exemple Sud des Etats-Unis et Est des Etats-Unis) ou entre plusieurs géolocalisations (par exemple Sud des Etats-Unis et Europe centrale). Ces deux types de configuration offrent le même niveau de disponibilité pour votre application, mais ajoutent également une certaine complexité quand il s'agit de partage et de réplication de données. Dans la plupart des cas, rester dans la même géolocalisation est largement suffisant. Mais si vos utilisateurs sont répartis à travers le monde, il vaut mieux configurer un cluster là où se trouvent vos utilisateurs, pour qu'ils ne soient pas confrontés à de longs délais d'attente lorsqu'ils envoient une demande à votre application.
+Si vos noeuds worker sont connectés à un VLAN privé uniquement et que vous utilisez un périphérique de passerelle pour fournir la communication entre les noeuds worker et le maître cluster, vous pouvez également configurer le périphérique comme pare-feu public ou privé. Pour autoriser les demandes de trafic privées depuis l'extérieur du cluster vers vos applications, vous pouvez créer des ports de noeud privés ou publics, des NLB et des ALB Ingress. Ensuite, vous devez [ouvrir les ports et les adresses IP requis](/docs/containers?topic=containers-firewall#firewall_inbound) dans votre pare-feu de périphérique de passerelle pour autoriser le trafic entrant vers ces services sur le réseau public ou privé.
+{: note}
 
-**Pour configurer un équilibreur de charge global pour plusieurs clusters :**
+<br />
 
-1. [Créez des clusters](/docs/containers?topic=containers-clusters#clusters) dans plusieurs zones ou régions.
-2. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-3. Dans chaque cluster, exposez vos applications en utilisant un [équilibreur de charge d'application (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) ou un [service d'équilibreur de charge](/docs/containers?topic=containers-loadbalancer).
-4. Pour chaque cluster, répertoriez les adresses IP publiques pour vos équilibreurs de charge d'application et vos services d'équilibreur de charge.
-   - Pour répertorier l'adresse IP de tous les équilibreurs de charge d'application publics présents dans votre cluster :
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
 
-   - Pour répertorier l'adresse IP de votre service d'équilibreur de charge :
-     ```
-     kubectl describe service <myservice>
-     ```
-     {: pre}
+## Scénario : Exécution de charges de travail d'application accessible sur Internet dans un cluster
+{: #internet-facing}
 
-     L'adresse IP de l'**équilibreur de charge Ingress** est l'adresse IP portable qui a été affectée à votre service d'équilibreur de charge.
+Dans ce scénario, vous souhaitez exécuter des charges de travail dans un cluster qui sont accessibles aux demandes émises depuis l'Internet de sorte que les utilisateurs finals puissent accéder à vos applications. Vous souhaitez utiliser l'option permettant d'isoler l'accès public dans votre cluster et l'option permettant de contrôler les demandes publiques autorisées vers votre cluster. En outre, vos noeuds worker accèdent automatiquement aux services {{site.data.keyword.Bluemix_notm}} que vous souhaitez connecter à votre cluster.
+{: shortdesc}
 
-4.  Configurez un équilibreur de charge global en utilisant {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) ou configurez votre propre équilibreur de charge global.
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="Image de l'architecture d'un cluster qui exécute des charges de travail accessibles sur Internet"/>
+ <figcaption>Architecture d'un cluster qui exécute des charges de travail accessibles sur Internet</figcaption>
+</figure>
+</p>
 
-    **Pour utiliser un équilibreur de charge global CIS** :
-    1.  Configurez le service en suivant les étapes 1 à 5 dans [Initiation à {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Ces étapes vous guident pour mettre à disposition l'instance de service, ajouter votre domaine d'application, configurer vos serveurs de noms et créer des enregistrements DNS. Créez un enregistrement DNS pour chaque adresse IP d'équilibreur de charge ou d'ALB que vous avez collectée. Ces enregistrements DNS mappent votre domaine d'application à l'ensemble des équilibreurs de charge d'application ou équilibreurs de charge de votre cluster et assurent que les demandes adressées à votre application sont transmises à vos clusters à tour de rôle.
-    2. [Ajoutez des diagnostics d'intégrité](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) pour les équilibreurs de charge ALB ou les équilibreurs de charge. Vous pouvez utiliser le même diagnostic d'intégrité pour les ALB et les équilibreurs de charge dans tous vos clusters ou créer des diagnostics d'intégrité spécifiques à utiliser pour des clusters particuliers.
-    3. [Ajoutez un pool d'origines](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) pour chaque cluster en ajoutant les adresses IP de l'ALB ou de l'équilibreur de charge du cluster. Par exemple, si vous disposez de 3 clusters ayant chacun 2 équilibreurs de charge d'application (ALB), créez 3 pools d'origines ayant chacun deux adresses IP d'ALB. Ajoutez un diagnostic d'intégrité à chaque pool d'origines que vous créez.
-    4. [Ajoutez un équilibreur de charge global](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
+Pour réaliser cette configuration, vous créez un cluster en connectant des noeuds worker à des VLAN publics et privés. 
 
-    **Pour utiliser votre propre équilibreur de charge global** :
-    1. Configurez votre domaine pour acheminer le trafic entrant à votre équilibreur de charge ALB ou aux services d'équilibreur de charge en ajoutant les adresses IP de tous les ALB et services d'équilibreur de charge publics à votre domaine.
-    2. Pour chaque adresse IP, activez un diagnostic d'intégrité à base de commande ping de sorte que votre fournisseur de DNS puisse détecter les adresses IP défectueuses. Si une adresse IP est défectueuse, le trafic n'est plus acheminé vers cette adresse IP.
+Si vous créez le cluster avec des VLAN publics et privés, vous ne pourrez plus retirer tous les VLAN publics de ce cluster par la suite. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. A la place, créez un nouveau pool de noeuds worker qui est connecté à un VLAN privé uniquement.
+{: note}
 
-## Clusters privés
+Vous pouvez choisir d'autoriser la communication entre les noeuds worker et le maître et entre les utilisateurs et le maître sur les réseaux public et privé ou sur le réseau public uniquement. 
+* Noeuds finaux de service public et privé : votre compte doit être activé avec la fonction VRF et activé pour utiliser des noeuds finaux de service. La communication entre les noeuds worker et le maître est établie sur le réseau privé via le noeud final de service privé et sur le réseau public via le noeud final de service public. Le maître est accessible au public pour les utilisateurs de cluster autorisés via le noeud final de service public. 
+* Noeud final de service public : Si vous ne souhaitez ou ne pouvez pas activer VRF pour votre compte, vos noeuds worker et les utilisateurs de cluster autorisés peuvent automatiquement se connecter au maître Kubernetes sur le réseau public via le noeud final de service public. 
+
+Vos noeuds worker peuvent communiquer automatiquement et en toute sécurité avec d'autres services {{site.data.keyword.Bluemix_notm}} qui prennent en charge des noeuds finaux de service privé sur votre réseau privé d'infrastructure IBM Cloud (SoftLayer). Si un service {{site.data.keyword.Bluemix_notm}} ne prend pas en charge des noeuds finaux de service privé, les noeuds worker peuvent communiquer en toute sécurité avec les services sur le réseau public. Vous pouvez verrouiller les interfaces publiques ou privées de noeuds worker en utilisant les règles réseau Calico pour l'isolement de réseau privé ou de réseau public. Vous devrez peut-être autoriser l'accès aux adresses IP publiques et privées des services que vous souhaitez utiliser dans ces règles d'isolement Calico. 
+
+Pour exposer une application dans votre cluster sur Internet, vous pouvez créer un équilibreur de charge de réseau (NLB) public ou un équilibreur de charge d'application (ALB) Ingress. Vous pouvez améliorer la sécurité de votre cluster en créant un pool de noeuds worker qui sont labellisés noeuds de périphérie. Les pods des services de réseau public sont déployés sur des noeuds de périphérie de sorte que les charges de travail de trafic externe soient isolées pour un petit nombre de noeuds worker dans votre cluster. Vous pouvez contrôler davantage le trafic public vers les services de réseau qui exposent vos applications en créant des règles pre-DNAT Calico, telles que des règles d'inscription sur liste blanche et des règles d'inscription sur liste noire. 
+
+Si vos noeuds worker doivent accéder à des services dans des réseaux privés en dehors de votre compte {{site.data.keyword.Bluemix_notm}}, vous pouvez configurer et déployer le service VPN IPSec strongSwan dans votre cluster ou optimiser les services {{site.data.keyword.Bluemix_notm}} Direct Link pour vous connecter à ces services. 
+
+Prêt à utiliser un cluster pour ce scénario ? Après avoir planifié vos configurations de [haute disponibilité](/docs/containers?topic=containers-ha_clusters) et de [noeud worker](/docs/containers?topic=containers-planning_worker_nodes), reportez-vous à la rubrique [Création de clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Scénario : Extension de votre centre de données sur site à un cluster sur le réseau privé et ajout d'un accès public limité
+{: #limited-public}
+
+Dans ce scénario, vous souhaitez exécuter des charges de travail dans un cluster qui sont accessibles aux services, bases de données ou autres ressources de votre centre de données sur site. Cependant, vous pouvez être amené à fournir un accès public limité à votre cluster, et vous souhaitez vous assurer que les accès publics sont contrôlés et isolés dans votre cluster. Par exemple, vous pouvez avoir besoin que vos noeuds worker accèdent à un service {{site.data.keyword.Bluemix_notm}} qui ne prend pas en charge les noeuds finaux de service privé et que ce service soit accessible sur le réseau public. Ou, vous pouvez être amené à fournir un accès public limité à une application qui s'exécute dans votre cluster.
+{: shortdesc}
+
+Pour réaliser cette configuration de cluster, vous pouvez créer un pare-feu en [utilisant des noeuds de périphérie et des règles réseau Calico](#calico-pc) ou [en utilisant un périphérique de passerelle](#vyatta-gateway).
+
+### Utilisation de noeuds de périphérie et de règles réseau Calico
+{: #calico-pc}
+
+Autorisez une connectivité publique limitée à votre cluster en utilisant des noeuds de périphérie en tant que passerelle publique et des règles réseau Calico en tant que pare-feu public.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="Image de l'architecture d'un cluster qui utilise des noeuds de périphérie et des règles réseau Calico pour un accès public sécurisé"/> <figcaption>Architecture d'un cluster qui utilise des noeuds de périphérie et des règles réseau Calico pour un accès public sécurisé</figcaption>
+</figure>
+</p>
+
+Avec cette configuration, vous créez un cluster en connectant des noeuds worker à un VLAN privé uniquement. Votre compte doit être activé avec la fonction VRF et activé pour l'utilisation de noeuds finaux de service privé. 
+
+Le maître Kubernetes est accessible via le noeud final de service privé si les utilisateurs de cluster autorisés se trouvent dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou s'ils sont connectés au réseau privé via une [connexion VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) ou [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Toutefois, la communication avec le maître Kubernetes via le noeud final de service privé doit passer par la plage d'adresses IP <code>166.X.X.X</code>, qui n'est pas routable à partir d'une connexion VPN, ou par {{site.data.keyword.Bluemix_notm}} Direct Link. Vous pouvez exposer le noeud final de service privé du maître pour vos utilisateurs de cluster en utilisant un équilibreur de charge de réseau (NLB) privé. Le NLB privé expose le noeud final de service privé du maître en tant que plage d'adresses IP de cluster <code>10.X.X.X</code> interne auxquelles les utilisateurs peuvent accéder à l'aide de la connexion VPN ou {{site.data.keyword.Bluemix_notm}} Direct Link. Si vous activez uniquement le noeud final de service privé, vous pouvez utiliser le tableau de bord Kubernetes ou activer temporairement le noeud final de service public pour créer le NLB privé.
+
+
+Ensuite, vous pouvez créer un pool de noeuds worker qui sont connectés aux VLAN public et privé et labellisés noeuds de périphérie. Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès en externe à quelques noeuds worker seulement et en isolant la charge de travail du réseau dans ces noeuds worker.
+
+
+Vos noeuds worker peuvent communiquer automatiquement et en toute sécurité avec d'autres services {{site.data.keyword.Bluemix_notm}} qui prennent en charge des noeuds finaux de service privé sur votre réseau privé d'infrastructure IBM Cloud (SoftLayer). Si un service {{site.data.keyword.Bluemix_notm}} ne prend pas en charge des noeuds finaux de service privé, vos noeuds de périphérie qui sont connectés à un VLAN public peuvent communiquer en toute sécurité avec les services sur le réseau public. Vous pouvez verrouiller les interfaces publiques ou privées de noeuds worker en utilisant les règles réseau Calico pour l'isolement de réseau privé ou de réseau public. Vous devrez peut-être autoriser l'accès aux adresses IP publiques et privées des services que vous souhaitez utiliser dans ces règles d'isolement Calico. 
+
+Pour fournir un accès privé à une application de votre cluster, vous pouvez créer un équilibreur de charge de réseau (NLB) privé ou un équilibreur de charge d'application (ALB) Ingress afin d'exposer votre application sur le réseau privé uniquement. Vous pouvez bloquer l'ensemble du trafic public vers les services de réseau qui exposent vos applications en créant des règles pre-DNAT Calico, telles que des règles visant à bloquer des ports de noeud publics sur les noeuds worker. Si vous devez fournir un accès public limité à une application de votre cluster, vous pouvez créer un NLB ou ALB public afin d'exposer votre application. Vous devez ensuite déployer vos applications sur ces noeuds de périphérie de sorte que les NLB ou ALB puissent diriger le trafic public vers vos pods d'application. Vous pouvez contrôler davantage le trafic public vers les services de réseau qui exposent vos applications en créant des règles pre-DNAT Calico, telles que des règles d'inscription sur liste blanche et des règles d'inscription sur liste noire. Les pods des services de réseau public et privé sont déployés sur des noeuds de périphérie de sorte que les charges de travail de trafic externe soient isolées pour un petit nombre de noeuds worker dans votre cluster.   
+
+Pour accéder en toute sécurité à des services en dehors de {{site.data.keyword.Bluemix_notm}} et d'autres réseaux sur site, vous pouvez configurer et déployer le service VPN IPSec strongSwan dans votre cluster. Le pod d'équilibreur de charge strongSwan est déployé sur un noeud worker du pool de noeuds worker de périphérie, où le pod établit une connexion sécurisée avec le réseau sur site via un tunnel VPN chiffré sur le réseau public. Vous pouvez aussi utiliser des services {{site.data.keyword.Bluemix_notm}} Direct Link pour connecter votre cluster à votre centre de données sur site sur le réseau privé uniquement.
+
+Prêt à utiliser un cluster pour ce scénario ? Après avoir planifié vos configurations de [haute disponibilité](/docs/containers?topic=containers-ha_clusters) et de [noeud worker](/docs/containers?topic=containers-planning_worker_nodes), reportez-vous à la rubrique [Création de clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+</br>
+
+### Utilisation d'un périphérique de passerelle
+{: #vyatta-gateway}
+
+Autorisez une connectivité publique limitée à votre cluster en configurant un périphérique de passerelle, tel qu'un dispositif Vyatta (Virtual Router Appliance), en tant que passerelle publique et pare-feu public.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="Image de l'architecture d'un cluster qui utilise un périphérique de passerelle pour un accès public sécurisé"/>
+ <figcaption>Architecture d'un cluster qui utilise un périphérique de passerelle pour un accès public sécurisé</figcaption>
+</figure>
+</p>
+
+Si vous configurez vos noeuds worker sur un VLAN privé uniquement et si vous ne souhaitez ou ne pouvez pas activer la fonction VRF pour votre compte, vous devez configurer un périphérique de passerelle pour fournir la connectivité de réseau entre vos noeuds worker et le maître sur le réseau public. Par exemple, vous pouvez choisir de configurer un [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou un [dispositif de sécurité Fortigate (FSA)](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations).
+
+Vous pouvez configurer votre périphérique de passerelle avec des règles réseau personnalisées afin d'assurer une sécurité réseau dédiée pour votre cluster et détecter et parer à des intrusions réseau. Lorsque vous configurez un pare-feu sur le réseau public, vous devez ouvrir les ports et les adresses IP privées requis pour chaque région de manière à permettre au maître et aux noeuds worker de communiquer.
+Si vous configurez également ce pare-feu sur le réseau privé, vous devez également ouvrir les ports et les adresses IP privées requis de manière à permettre la communication entre les noeuds worker et permettre à votre cluster d'accéder aux ressources d'infrastructure sur le réseau privé.
+Vous devez également activer la fonction Spanning VLAN pour votre compte de sorte que les sous-réseaux puissent effectuer le routage sur le même VLAN et sur les VLAN.
+
+Pour connecter vos noeuds worker et vos applications de manière sécurisée à un réseau sur site ou à des services en dehors de {{site.data.keyword.Bluemix_notm}}, configurez un noeud final VPN IPSec sur votre périphérique de passerelle et le service VPN IPSec strongSwan dans votre cluster pour utiliser le noeud final VPN de passerelle. Si vous ne souhaitez pas utiliser strongSwan, vous pouvez configurer une connectivité VPN directement avec VRA. 
+
+Vos noeuds worker peuvent communiquer en toute sécurité avec d'autres services {{site.data.keyword.Bluemix_notm}} et services publics en dehors de {{site.data.keyword.Bluemix_notm}} via votre périphérique de passerelle. Vous pouvez configurer votre pare-feu pour autoriser l'accès aux adresses IP publiques et privées des seuls services que vous souhaitez utiliser. 
+
+Pour fournir un accès privé à une application de votre cluster, vous pouvez créer un équilibreur de charge de réseau (NLB) privé ou un équilibreur de charge d'application (ALB) Ingress afin d'exposer votre application sur le réseau privé uniquement. Si vous devez fournir un accès public limité à une application de votre cluster, vous pouvez créer un NLB ou ALB public afin d'exposer votre application. Etant donné que l'ensemble du trafic passe par votre pare-feu de périphérique de passerelle, vous pouvez contrôler le trafic public vers les services de réseau qui exposent vos applications en ouvrant les ports et les adresses IP des services dans votre pare-feu pour permettre le trafic entrant vers ces services. 
+
+Prêt à utiliser un cluster pour ce scénario ? Après avoir planifié vos configurations de [haute disponibilité](/docs/containers?topic=containers-ha_clusters) et de [noeud worker](/docs/containers?topic=containers-planning_worker_nodes), reportez-vous à la rubrique [Création de clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Scénario : Extension de votre centre de données sur site à un cluster sur le réseau privé
 {: #private_clusters}
 
-Par défaut, {{site.data.keyword.containerlong_notm}} configure votre cluster avec accès à un VLAN privé et à un VLAN public. Le VLAN privé détermine l'adresse IP privée qui est affectée à chaque noeud worker, ce qui offre à chaque noeud worker une interface réseau privée. Le VLAN public permet aux noeuds worker de se connecter automatiquement au maître de manière sécurisée.
+Dans ce scénario, vous souhaitez exécuter des charges de travail dans un cluster {{site.data.keyword.containerlong_notm}}. Toutefois, vous souhaitez que ces charges de travail soient accessibles uniquement aux services, bases de données ou autres ressources de votre centre de données sur site, par exemple, {{site.data.keyword.icpfull_notm}}. Vos charges de travail de cluster auront peut-être besoin d'accéder à un petit nombre d'autres services {{site.data.keyword.Bluemix_notm}} qui prennent en charge la communication sur le réseau privé, par exemple, {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
-Toutefois, vous pouvez souhaiter créer un cluster avec VLAN privé ou noeud final de service privé pour répondre aux exigences en matière de sécurité ou de conformité. Vos options de création de cluster privé dépendent du type de compte d'infrastructure IBM Cloud (SoftLayer) dont vous disposez et de la configuration de la paire de VLAN public et privé que vous envisagez. Pour plus d'informations sur chacune des configurations suivantes, voir [Planification réseau de votre cluster](/docs/containers?topic=containers-cs_network_ov).
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="Image de l'architecture d'un cluster qui se connecte à un centre de données sur site sur le réseau privé"/>
+ <figcaption>Architecture d'un cluster qui se connecte à un centre de données sur site sur le réseau privé</figcaption>
+</figure>
+</p>
 
-Disposez-vous déjà d'un cluster que vous voulez rendre privé uniquement ? Pour voir comment vous pouvez ajouter des noeuds worker ou modifier des pools de noeuds worker existants avec de nouveaux VLAN, consultez la rubrique [Modification des connexions de VLAN de vos noeuds worker](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
-{: note}
+Pour réaliser cette configuration, vous créez un cluster en connectant des noeuds worker à un VLAN privé uniquement. Pour fournir la connectivité entre le maître cluster et les noeuds worker sur le réseau privé via le noeud final de service privé uniquement, votre compte doit être activé avec la fonction VRF et activé pour l'utilisation de noeuds finaux de service. Etant donné que votre cluster est visible pour n'importe quelle ressource sur le réseau privé lorsque la fonction VRF est activée, vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des règles réseau privé Calico. 
 
-**Compte avec VRF activé, maître Kubernetes privé, noeuds worker à la fois sur VLAN public et privé**</br>
-Dans les clusters exécutant Kubernetes version 1.11 ou ultérieure, vous pouvez configurer le réseau de votre cluster pour utiliser des noeuds finaux de service public et privé. Après avoir activé le noeud final de service privé, le maître Kubernetes et vos noeuds worker communiquent toujours sur le VLAN privé via ce noeud final de service privé. Même si vous activez le noeud final de service public pour votre cluster, la communication entre le maître Kubernetes et les noeuds worker reste sur le VLAN privé. Après avoir activé le noeud final de service privé, vous ne pourrez plus le désactiver. Vous pouvez conserver le noeud final de service public pour l'accès sécurisé de votre maître Kubernetes sur Internet, par exemple pour exécuter des commandes `kubectl`, ou désactiver le noeud final de service public dans le cadre d'un cluster à noeud final de service privé uniquement.
-
-**Compte sans VRF ou avec VRF activé, maître et noeuds worker Kubernetes sur VLAN privé uniquement**</br>
-Si vous avez configuré vos noeuds worker sur un VLAN privé uniquement, ces noeuds ne peuvent pas exposer automatiquement leurs services d'application sur le réseau public, et dans un compte où la fonction VRF n'est pas activée, ils ne peuvent pas non plus se connecter au maître. Vous devez configurer un dispositif de passerelle pour assurer la connectivité du réseau entre les noeuds worker et le maître.
-
-Pour les comptes sans VRF : si vous créez le cluster avec des VLAN publics et privés, vous ne pourrez plus retirer les VLAN publics de ce cluster par la suite. Le retrait de tous les VLAN publics d'un cluster peut provoquer l'arrêt de plusieurs composants du cluster. Créez plutôt un nouveau cluster sans VLAN public à la place.
-{: note}
-
-**Compte sans VRF, maître Kubernetes et noeuds worker à la fois sur VLAN public et privé**</br>
-Dans la plupart des cas, la configuration de votre cluster peut comporter des noeuds worker à la fois sur des VLAN public et privé. Vous pouvez ensuite verrouiller le cluster en bloquant le trafic du VLAN public avec des règles Calico et en limitant le trafic sur une sélection de noeuds de périphérie.
-
-## Pools de noeuds worker et noeuds worker
-{: #planning_worker_nodes}
-
-Un cluster Kubernetes est composé de noeuds worker regroupés en pools de noeuds worker. Il est surveillé et géré de manière centralisée par le maître Kubernetes. Les administrateurs du cluster décident comment configurer le cluster des noeuds worker pour garantir que les utilisateurs du cluster disposent de toutes les ressources pour déployer et exécuter des applications dans le cluster.
-{:shortdesc}
-
-Lorsque vous créez un cluster standard, les noeuds worker ayant les mêmes spécifications de mémoire, UC et espace disque (version) sont commandés dans l'infrastructure IBM Cloud (SoftLayer) pour votre compte et ajoutés dans le pool de noeuds worker par défaut de votre cluster. A chaque noeud worker sont affectés un ID de noeud worker unique et un nom de domaine qui ne doivent pas être modifiés après la création du cluster. Vous pouvez opter entre des serveurs virtuels ou physiques (bare metal). En fonction du niveau d'isolement du matériel que vous sélectionnez, les noeuds worker virtuels peuvent être définis sous forme de noeuds partagés ou dédiés. Pour ajouter différentes versions à votre cluster, [créez un autre pool de noeuds worker](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
-
-Kubernetes limite le nombre maximal de noeuds worker dont vous pouvez disposer dans un cluster. Pour plus d'informations, voir la rubrique sur les [quotas de noeuds worker et de pods ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/setup/cluster-large/).
+Le maître Kubernetes est accessible via le noeud final de service privé si les utilisateurs de cluster autorisés se trouvent dans votre réseau privé {{site.data.keyword.Bluemix_notm}} ou s'ils sont connectés au réseau privé via une [connexion VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) ou [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Toutefois, la communication avec le maître Kubernetes via le noeud final de service privé doit passer par la plage d'adresses IP <code>166.X.X.X</code>, qui n'est pas routable à partir d'une connexion VPN, ou par {{site.data.keyword.Bluemix_notm}} Direct Link. Vous pouvez exposer le noeud final de service privé du maître pour vos utilisateurs de cluster en utilisant un équilibreur de charge de réseau (NLB) privé. Le NLB privé expose le noeud final de service privé du maître en tant que plage d'adresses IP de cluster <code>10.X.X.X</code> interne auxquelles les utilisateurs peuvent accéder à l'aide de la connexion VPN ou {{site.data.keyword.Bluemix_notm}} Direct Link. Si vous activez uniquement le noeud final de service privé, vous pouvez utiliser le tableau de bord Kubernetes ou activer temporairement le noeud final de service public pour créer le NLB privé.
 
 
-Vous voulez vous assurer de toujours disposer d'une quantité suffisante de noeuds worker pour traiter votre charge de travail ? Découvrez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca).
-{: tip}
+Vos noeuds worker peuvent communiquer automatiquement et en toute sécurité avec d'autres services {{site.data.keyword.Bluemix_notm}} qui prennent en charge des noeuds finaux de service privé, par exemple, {{site.data.keyword.registrylong}}, sur votre réseau privé d'infrastructure IBM Cloud (SoftLayer). Par exemple, des environnements de matériel dédié pour toutes les instances de plan standard de {{site.data.keyword.cloudant_short_notm}} prennent en charge des noeuds finaux de service privé. Si un service {{site.data.keyword.Bluemix_notm}} ne prend pas en charge des noeuds finaux de service privé, votre cluster ne peut pas accéder à ce service.
 
-<br />
+Pour fournir un accès privé à une application de votre cluster, vous pouvez créer un équilibreur de charge de réseau (NLB) privé ou un équilibreur de charge d'application (ALB) Ingress. Ces services de réseau Kubernetes exposent votre application sur le réseau privé uniquement de sorte que n'importe quel système sur site ayant une connexion au sous-réseau sur lequel se trouve l'adresse IP NLB puisse accéder à l'application. 
 
-
-## Matériel disponible pour les noeuds worker
-{: #shared_dedicated_node}
-
-Lorsque vous créez un cluster standard dans {{site.data.keyword.Bluemix_notm}}, vous déterminez si vos pools de noeuds worker sont constitués de noeuds worker qui sont soit des machines physiques (bare metal) ou des machines virtuelles s'exécutant sur du matériel physique. Vous sélectionnez également la version du noeud worker ou une combinaison de mémoire, UC et autres spécifications machine, telles que le stockage sur disque.
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="Options de matériel pour les noeuds worker d'un cluster standard" style="width:700px; border-style: none"/>
-
-Si vous disposez de plusieurs versions de noeud worker, vous devez créer un pool de noeuds worker pour chaque version. Vous ne pouvez pas redimensionner des noeuds worker existants pour disposer de ressources différentes, comme de l'UC ou de la mémoire. Lorsque vous créez un cluster gratuit, votre noeud worker est automatiquement mis à disposition sous forme de noeud partagé virtuel dans le compte d'infrastructure IBM Cloud (SoftLayer). Dans les clusters standard, vous pouvez choisir le type de machine le mieux adapté à votre charge de travail. Lors de la planification, tenez compte des [réserves de ressources de noeud worker](#resource_limit_node) sur la capacité totale de mémoire et d'UC.
-
-Vous pouvez déployer des clusters en utilisant l'[interface utilisateur de la console](/docs/containers?topic=containers-clusters#clusters_ui) ou l'[interface CLI](/docs/containers?topic=containers-clusters#clusters_cli).
-
-Sélectionnez l'une des options suivantes pour décider du type de pool de noeuds worker que vous désirez.
-* [Machines virtuelles](#vm)
-* [Machines physiques (bare metal)](#bm)
-* [Machines SDS (Software-Defined Storage)](#sds)
-
-### Machines virtuelles
-{: #vm}
-
-Avec des machines virtuelles, vous pouvez obtenir une plus grande flexibilité, des temps de mise à disposition plus rapides et plus de fonctions de mise à l'échelle automatique qu'avec des machines physiques (bare metal), et ce, à un coût plus avantageux. Vous pouvez utiliser des machines virtuelles pour la plupart des cas d'utilisation généraux, par exemple les environnements de test et de développement, les environnements de préproduction et de production, les microservices et les applications métier. Cependant, il y a un impact sur les performances. Si vous avez besoin de calcul haute performance pour des charges de travail qui consomment beaucoup de mémoire RAM, de données ou de processeur graphique (GPU), utilisez des machines [bare metal](#bm).
-{: shortdesc}
-
-**Dois-je préférer du matériel partagé ou dédié ?**</br>
-Lorsque vous créez un cluster virtuel standard, vous devez décider si vous souhaitez que le matériel sous-jacent soit partagé par plusieurs clients {{site.data.keyword.IBM_notm}} (service partagé) ou vous être dédié exclusivement (service exclusif).
-
-* **Dans une configuration de matériel partagé à service partagé** : les ressources physiques (comme l'UC et la mémoire) sont partagées par toutes les machines virtuelles déployées sur le même matériel physique. Pour permettre à chaque machine virtuelle d'opérer indépendamment, un moniteur de machine virtuelle, également dénommé hyperviseur, segmente les ressources physiques en entités isolées et les alloue à une machine virtuelle en tant que ressources dédiées (isolement par hyperviseur).
-* **Dans une configuration de matériel dédié à service exclusif** : toutes les ressources physiques vous sont exclusivement dédiées. Vous pouvez déployer plusieurs noeuds worker en tant que machines virtuelles sur le même hôte physique. A l'instar de la configuration à service partagé, l'hyperviseur veille à ce que chaque noeud worker ait sa part des ressources physiques disponibles.
-
-Les noeuds partagés sont généralement moins coûteux que les noeuds dédiés, car les coûts du matériel sous-jacent sont partagés entre plusieurs clients. Toutefois, lorsque vous choisissez entre noeuds partagés et noeud dédiés, n'hésitez pas à contacter votre service juridique pour déterminer le niveau d'isolement de l'infrastructure et de conformité requis par votre environnement d'application.
-
-Certaines versions sont disponibles uniquement pour un type de configuration de service. Par exemple, les machines virtuelles `m3c` sont disponibles uniquement avec une configuration de service partagé (`shared`).
-{: note}
-
-**Quelles sont les fonctions générales des machines virtuelles ?**</br>
-Les machines virtuelles utilisent le disque local à la place d'un réseau SAN (Storage Area Network) pour plus de fiabilité. Un réseau SAN procure, entre autres, une capacité de traitement plus élevée lors de la sérialisation des octets sur le disque local et réduit les risques de dégradation du système de fichiers en cas de défaillance du réseau. Toutes les machines virtuelles sont fournies avec une vitesse réseau de 1000 Mbit/s, un stockage sur disque local principal de 25 Go pour le système de fichiers du système d'exploitation et 100 Go de stockage sur disque local secondaire pour les données d'exécution de conteneur ou le `kubelet`. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Que se passe-t-il si je dispose de types de machine plus anciennes ?**</br>
-Si votre cluster a des versions de noeud worker `x1c` obsolètes ou Ubuntu 16 `x2c` plus anciennes, vous pouvez  [mettre à jour votre cluster pour qu'il dispose de noeuds worker Ubuntu 18 `x3c`](/docs/containers?topic=containers-update#machine_type).
-
-**Quelles sont les versions de machine virtuelle disponibles ?**</br>
-Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [SDS](#sds).
-
-{: #vm-table}
-<table>
-<caption>Types de machine disponibles dans {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nom et cas d'utilisation</th>
-<th>Coeurs/ Mémoire</th>
-<th>Disque principal / secondaire</th>
-<th>Vitesse réseau</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtuel, u3c.2x4</strong> : utilisez cette machine virtuelle de petite taille à des fins de test rapide, de démonstration de faisabilité et pour d'autres charges de travail légères.</td>
-<td>2 / 4 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, b3c.4x16</strong> : sélectionnez cette machine virtuelle équilibrée à des fins de test et de développement et pour d'autres charges de travail légères.</td>
-<td>4 / 16 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, b3c.16x64</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne.</td></td>
-<td>16 / 64 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, b3c.32x128</strong> : sélectionnez cette machine virtuelle équilibrée pour les charges de travail de taille moyenne à élevée, par exemple une base de données et un site Web dynamique avec de nombreux utilisateurs simultanés.</td>
-<td>32 / 128 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, b3c.56x242</strong> : sélectionnez cette machine virtuelle équilibrée pour des charges de travail volumineuses, par exemple une base de données et plusieurs applications avec de nombreux utilisateurs simultanés.</td>
-<td>56 / 242 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, c3c.16x16</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail légères.</td>
-<td>16 / 16 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, c3c.16x32</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail légères ou de taille moyenne.</td>
-<td>16 / 32 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, c3c.32x32</strong> : utilisez cette version lorsque vous souhaitez un juste équilibre entre les ressources de calcul du noeud worker pour les charges de travail de taille moyenne.</td>
-<td>32 / 32 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, c3c.32x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:2 entre les ressources d'UC et de mémoire du noeud worker pour les charges de travail de taille moyenne.</td>
-<td>32 / 64 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Virtuel, m3c.8x64</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail légères ou de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
-<td>8 / 64 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, m3c.16x128</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
-<td>16 / 128 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, m3c.30x240</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement à Dallas et en tant que service à matériel partagé (`--hardware shared`).</td>
-<td>30 / 240 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, m3c.48x384</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de taille moyenne à élevée qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
-<td>48 / 384 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, m3c.56x448</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
-<td>56 / 448 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr><tr>
-<td><strong>Virtuel, m3c.64x512</strong> : utilisez cette version lorsque vous souhaitez un rapport 1:8 entre les ressources d'UC et de mémoire pour les charges de travail de grande taille qui nécessitent plus de mémoire comme par exemple des bases de données de type {{site.data.keyword.Db2_on_Cloud_short}}. Disponible uniquement en tant que service à matériel partagé (`--hardware shared`). </td>
-<td>64 / 512 Go</td>
-<td>25 Go / 100 Go</td>
-<td>1000 Mbit/s</td>
-</tr>
-</tbody>
-</table>
-
-### Machines physiques (bare metal)
-{: #bm}
-
-Vous pouvez mettre à disposition votre noeud worker sous forme de serveur physique à service exclusif, également désigné par serveur bare metal.
-{: shortdesc}
-
-**En quoi une machine bare metal est-elle différente d'une machine virtuelle ?**</br>
-Le type bare metal vous permet d'accéder directement aux ressources physiques sur la machine, par exemple à la mémoire ou à l'UC. Cette configuration élimine l'hyperviseur de machine virtuelle qui alloue des ressources physiques aux machines virtuelles qui s'exécutent sur l'hôte. A la place, toutes les ressources d'une machine bare metal sont dédiées exclusivement au noeud worker, donc vous n'avez pas à vous soucier de "voisins gênants" partageant des ressources et responsables du ralentissement des performances. Les types de machine physique ont davantage de capacité de stockage local par rapport aux machines virtuelles et certaines disposent de disques RAID pour augmenter la disponibilité des données. Le stockage local sur le noeud worker est conçu pour un traitement à court terme uniquement et le disque principal et le disque secondaire sont effacés lorsque vous mettez à jour ou rechargez le noeud worker. Pour les solutions de stockage persistant, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Hormis de meilleures spécifications en termes de performances, puis-je faire quelque chose avec une machine bare metal qui ne soit pas possible avec une machine virtuelle ?**</br>
-Oui. Avec une machine bare metal, vous avez la possibilité d'activer la fonction Calcul sécurisé (Trusted Compute) pour vérifier que vos noeuds worker ne font pas l'objet de falsification. Si vous n'activez pas cette fonction lors de la création du cluster mais souhaitez le faire ultérieurement, vous pouvez utiliser la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Après avoir activé cette fonction, vous ne pourrez plus la désactiver par la suite. Vous pouvez créer un nouveau cluster sans la fonction trust. Pour plus d'informations sur le mode de fonctionnement de la fonction de confiance (trust) lors du processus de démarrage du noeud, voir [{{site.data.keyword.containerlong_notm}} avec calcul sécurisé](/docs/containers?topic=containers-security#trusted_compute). La fonction de calcul sécurisé (Trusted Compute) est disponible pour certains types de machine bare metal. Lorsque vous exécutez la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>`, vous pouvez voir les machines qui prennent en charge la fonction de confiance en examinant la zone **Trustable**. Par exemple, les versions GPU `mgXc` ne prennent pas en charge la fonction de calcul sécurisé.
-
-En plus de la fonction de calcul sécurisé, vous pouvez également tirer parti d'{{site.data.keyword.datashield_full}} (bêta). {{site.data.keyword.datashield_short}} est intégré à la technologie Intel® Software Guard Extensions (SGX) et Fortanix® pour que le code et les données de vos charges de travail de conteneur {{site.data.keyword.Bluemix_notm}} soient protégés lors de leur utilisation. Le code d'application et les données s'exécutent dans des enclaves d'UC fortifiées, qui correspondent à des zones de mémoire sécurisées sur le noeud worker qui protègent les aspects critiques de l'application, ce qui permet de conserver le code et les données confidentiels et inchangés. Si vous ou votre entreprise nécessitez la confidentialité des données conformément à votre politique interne, aux réglementations officielles ou aux exigences de conformité de votre secteur d'activité, cette solution peut vous aider à passer au cloud. Parmi les exemples de cas d'utilisation figurent les institutions financières et médicales ou les pays dont les réglementations officielles nécessitent des solutions cloud sur site.
-
-**Bare metal, ça a l'air génial ! Qu'est-ce qui m'empêche de commander une machine de ce type dès maintenant ?**</br>
-Les serveurs bare metal sont plus chers que les serveurs virtuels et conviennent mieux aux applications à hautes performances qui nécessitent plus de ressources et de contrôle hôte.
-
-Les serveurs bare metal sont facturés au mois. Si vous annulez un serveur bare metal avant la fin du mois, vous êtes facturé jusqu'à la fin de ce mois. Après avoir commandé ou annulé un serveur bare metal, le processus est finalisé manuellement dans votre compte d'infrastructure IBM Cloud (SoftLayer). Par conséquent, son exécution peut prendre plus d'un jour ouvrable.
-{: important}
-
-**Quelles versions bare metal puis-je commander ?**</br>
-Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [VM](#vm) ou [SDS](#sds).
-
-Les machines bare metal sont optimisées pour différents cas d'utilisation, par exemple les charges de travail à forte consommation de mémoire RAM, de données ou de processeur graphique (GPU).
-
-Choisissez un type de machine avec la configuration de stockage adaptée à votre charge de travail. Certaines versions comportent un mélange de configurations de stockage et de disques suivant. Par exemple, certaines versions peuvent comporter un disque principal SATA avec un disque secondaire SSD RAW.
-
-* **SATA** : unité de stockage sur disque rotative magnétique souvent utilisée pour le disque principal du noeud worker qui stocke le système de fichiers du système d'exploitation.
-* **SSD** : unité de stockage de type SSD (Solid State Drive) pour les données hautes performances.
-* **RAW** : unité de stockage non formatée, dont la capacité totale peut être utilisée.
-* **RAID** : unité de stockage comportant des données distribuées à des fins de redondance et de performances qui varie en fonction du niveau RAID. Ainsi, la capacité disque disponible à utiliser varie.
-
-
-{: #bm-table}
-<table>
-<caption>Types de machine bare metal disponibles dans {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nom et cas d'utilisation</th>
-<th>Coeurs/ Mémoire</th>
-<th>Disque principal / secondaire</th>
-<th>Vitesse réseau</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal à forte consommation de mémoire RAM, mr3c.28x512</strong> : augmentez au maximum la mémoire RAM disponible pour vos noeuds worker. </td>
-<td>28 / 512 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg3c.16x128</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version comporte 1 carte physique Tesla K80 avec 2 unités de traitement graphiques (GPU) par carte pour un total de 2 GPU.</td>
-<td>16 / 128 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal GPU, mg3c.28x256</strong> : choisissez ce type de machine pour des charges de travail nécessitant de nombreux calculs mathématiques, tels que le calcul hautes performances, l'apprentissage automatique ou les applications en 3D. Cette version possède 2 cartes physiques Tesla K80 avec 2 unités GPU par carte pour un total de 4 unités GPU.</td>
-<td>28 / 256 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal à forte consommation de données, md3c.16x64.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
-<td>16 / 64 Go</td>
-<td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal à forte consommation de données, md3c.28x512.4x4tb</strong> : utilisez ce type pour une grande quantité de stockage sur disque local, avec notamment des disques RAID pour augmenter la disponibilité des données, pour des charges de travail de type systèmes de fichiers répartis, bases de données volumineuses et analyse de mégadonnées.</td>
-<td>28 / 512 Go</td>
-<td>RAID1 2x2 To / RAID10 SATA 4x4 To</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal équilibré, mb3c.4x32</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles. Cette version peut également être activée avec Intel® Software Guard Extensions (SGX) pour que vous puissiez utiliser <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (bêta)<img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> pour chiffrer votre mémoire de données.</td>
-<td>4 / 32 Go</td>
-<td>SATA 2 To / SATA 2 To</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal équilibré, mb3c.16x64</strong> : à utiliser pour les charges de travail équilibrées qui nécessitent plus de ressources de calcul qu'en offrent les machines virtuelles. </td>
-<td>16 / 64 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### Machines SDS (Software-Defined Storage)
-{: #sds}
-
-Les versions SDS (Software-Defined Storage) sont des machines physiques mises à disposition avec des disques RAW supplémentaires pour le stockage local physique. Contrairement aux disques locaux principaux et secondaires, les disques RAW ne sont pas effacés lors de la mise à jour ou du rechargement d'un noeud worker. Comme les données sont colocalisées avec le noeud de traitement, les machines SSD conviennent particulièrement aux charges de travail hautes performances.
-{: shortdesc}
-
-**Quand utiliser des versions SDS ?**</br>
-En général, vous utilisez les machines SDS dans les cas suivants :
-*  Si vous utilisez un module complémentaire SDS, tel que [Portworx](/docs/containers?topic=containers-portworx#portworx) dans le cluster, utilisez une machine SDS.
-*  Si votre application est un objet [StatefulSet ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) qui nécessite un stockage local, vous pouvez utiliser des machines SDS et mettre à disposition des [volumes persistants locaux Kubernetes (bêta) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Vous disposez peut-être d'applications personnalisées qui nécessitent du stockage local brut supplémentaire.
-
-Pour d'autres solutions de stockage, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Quelles versions SDS puis-je commander ?**</br>
-Les versions de noeud worker varient en fonction des zones. Le tableau suivant présente les versions les plus récentes, par exemple les versions des noeuds worker Ubuntu 18 `x3c`, par opposition aux versions de noeud worker Ubuntu 16 `x2c` plus anciennes. Pour voir les types de machine disponibles dans votre zone, exécutez la commande `ibmcloud ks machine-types <zone>`. Vous pouvez également passer en revue les types de machine [bare metal](#bm) ou [VM](#vm).
-
-Choisissez un type de machine avec la configuration de stockage adaptée à votre charge de travail. Certaines versions comportent un mélange de configurations de stockage et de disques suivant. Par exemple, certaines versions peuvent comporter un disque principal SATA avec un disque secondaire SSD RAW.
-
-* **SATA** : unité de stockage sur disque rotative magnétique souvent utilisée pour le disque principal du noeud worker qui stocke le système de fichiers du système d'exploitation.
-* **SSD** : unité de stockage de type SSD (Solid State Drive) pour les données hautes performances.
-* **RAW** : unité de stockage non formatée, dont la capacité totale peut être utilisée.
-* **RAID** : unité de stockage comportant des données distribuées à des fins de redondance et de performances qui varie en fonction du niveau RAID. Ainsi, la capacité disque disponible à utiliser varie.
-
-
-{: #sds-table}
-<table>
-<caption>Types de machine SDS disponibles dans {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nom et cas d'utilisation</th>
-<th>Coeurs/ Mémoire</th>
-<th>Disque principal / secondaire</th>
-<th>Disques RAW supplémentaires</th>
-<th>Vitesse réseau</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal avec SDS, ms3c.4x32.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
-<td>4 / 32 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>SSD RAW 1,9 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal avec SDS, ms3c.16x64.1.9tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
-<td>16 / 64 Go</td>
-<td>SATA 2 To / SSD 960 Go</td>
-<td>SSD RAW 1,9 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal avec SDS, ms3c.28x256.3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
-<td>28 / 256 Go</td>
-<td>SATA 2 To / SSD 1,9 To</td>
-<td>SSD RAW 3,8 To (chemin d'accès à l'unité : `/dev/sdc`)</td>
-<td>10000 Mbit/s</td>
-</tr>
-<tr>
-<td><strong>Bare metal avec SDS, ms3c.28x512.4x3.8tb.ssd</strong> : si vous avez besoin de stockage local supplémentaire à des fins de performances, utilisez cette version DH (disk-heavy) qui prend en charge SDS.</td>
-<td>28 / 512 Go</td>
-<td>SATA 2 To / SSD 1,9 To</td>
-<td>4 disques, SSD RAW 3,8 To (chemins d'accès à ces unités : `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000 Mbit/s</td>
-</tr>
-</tbody>
-</table>
-
-## Réserves de ressources de noeud worker
-{: #resource_limit_node}
-
-{{site.data.keyword.containerlong_notm}} définit des réserves de ressources de calcul qui limitent les ressources de calcul disponibles sur chaque noeud worker. Les ressources de mémoire et d'UC réservées ne peuvent pas être utilisées par des pods sur le noeud worker et réduisent les ressources pouvant être allouées sur chaque noeud worker. Lorsque vous commencez à déployer des pods, si le noeud worker ne dispose pas de ressources suffisantes pouvant être allouées, le déploiement échoue. De plus, si les pods dépassent la limite de ressources du noeud worker, les pods sont expulsés. Dans Kubernetes, cette limite est appelée [seuil d’éviction immédiate![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
-{:shortdesc}
-
-S'il y a moins d'UC ou de mémoire disponible que les réserves de noeud worker, Kubernetes commence à expulser les pods pour restaurer suffisamment de ressources de calcul. Les pods sont replanifiés sur un autre noeud worker, le cas échéant. Si vos pods sont expulsés fréquemment, ajoutez d'autres noeuds worker à votre cluster ou définissez des [limites de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) sur vos pods.
-
-Les ressources réservées sur votre noeud worker dépendent de la quantité d'UC et de mémoire fournie avec votre noeud worker. {{site.data.keyword.containerlong_notm}} définit différents niveaux de mémoire et d'UC, comme indiqué dans les tableaux suivants. Si votre noeud worker est fourni avec des ressources de calcul à plusieurs niveaux, un pourcentage de vos ressources d'UC et de mémoire est réservé pour chaque niveau.
-
-Pour passer en revue la quantité de ressources de calcul actuellement utilisée sur votre noeud worker, exécutez la commande [`kubectl top node` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
-{: tip}
-
-<table summary="Ce tableau présente les réserves de mémoire de noeud worker par niveau.">
-<caption>Réserves de mémoire de noeud worker par niveau.</caption>
-<thead>
-<tr>
-  <th>Niveau mémoire</th>
-  <th>% ou quantité réservés</th>
-  <th>Exemple pour un noeud worker `b3c.4x16` (16 Go)</th>
-  <th>Exemple pour un noeud worker `mg1c.28x256` (256 Go)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>4 premiers Go (0 à 4 Go)</td>
-  <td>25 % de mémoire</td>
-  <td>1 Go</td>
-  <td>1 Go</td>
-</tr>
-<tr>
-  <td>4 Go suivants (5 à 8 Go)</td>
-  <td>20 % de mémoire</td>
-  <td>0,8 Go</td>
-  <td>0,8 Go</td>
-</tr>
-<tr>
-  <td>8 Go suivants (9 à 16 Go)</td>
-  <td>10 % de mémoire</td>
-  <td>0,8 Go</td>
-  <td>0,8 Go</td>
-</tr>
-<tr>
-  <td>112 Go suivants (17 à 128 Go)</td>
-  <td>6 % de mémoire</td>
-  <td>N/A</td>
-  <td>6,72 Go</td>
-</tr>
-<tr>
-  <td>Go restants (129 Go et +)</td>
-  <td>2 % de mémoire</td>
-  <td>N/A</td>
-  <td>2,54 Go</td>
-</tr>
-<tr>
-  <td>Réserve supplémentaire pour les règles d'[éviction avec `kubelet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 Mo</td>
-  <td>100 Mo (montant fixe)</td>
-  <td>100 Mo (montant fixe)</td>
-</tr>
-<tr>
-  <td>**Total réservé**</td>
-  <td>**(variable)**</td>
-  <td>**2,7 Go sur un total de 16 Go**</td>
-  <td>**11,96 Go sur un total de 256 Go**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="Ce tableau présente les réserves d'UC de noeud worker par niveau.">
-<caption>Réserves d'UC de noeud worker par niveau.</caption>
-<thead>
-<tr>
-  <th>Niveau UC</th>
-  <th>% réservé</th>
-  <th>Exemple pour un noeud worker `b3c.4x16` (4 coeurs)</th>
-  <th>Exemple pour un noeud worker `mg1c.28x256` (28 coeurs)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Premier coeur (Coeur 1)</td>
-  <td>6 % des coeurs</td>
-  <td>0,06 coeur</td>
-  <td>0,06 coeur</td>
-</tr>
-<tr>
-  <td>2 coeurs suivants (coeurs 2 et 3)</td>
-  <td>1 % des coeurs</td>
-  <td>0,02 coeur</td>
-  <td>0,02 coeur</td>
-</tr>
-<tr>
-  <td>2 coeurs suivants (coeurs 4 et 5)</td>
-  <td>0,5 % des coeurs</td>
-  <td>0,005 coeur</td>
-  <td>0,01 coeur</td>
-</tr>
-<tr>
-  <td>Coeurs restants (6 coeurs et +)</td>
-  <td>0,25 % des coeurs</td>
-  <td>N/A</td>
-  <td>0,0575 coeur</td>
-</tr>
-<tr>
-  <td>**Total réservé**</td>
-  <td>**(variable)**</td>
-  <td>**0,085 coeur sur un total de 4 coeurs**</td>
-  <td>**0,1475 coeur sur un total de 28 coeurs**</td>
-</tr>
-</tbody>
-</table>
-
-## Reprise automatique pour vos noeuds worker
-{: #planning_autorecovery}
-
-Des composants essentiels, tels que `containerd`, `kubelet`, `kube-proxy` et `calico`, doivent être fonctionnels pour assurer un noeud worker Kubernetes sain. Avec le temps, ces composants peuvent connaître des défaillances et laisser votre noeud worker dans un état non opérationnel. Si les noeuds worker ne sont pas opérationnels, la capacité totale du cluster diminue et votre application peut devenir indisponible.
-{:shortdesc}
-
-Vous pouvez [configurer des diagnostics d'intégrité pour votre noeud worker et activer la reprise automatique](/docs/containers?topic=containers-health#autorecovery). Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Pour plus d'informations sur le fonctionnement de la reprise automatique, consultez le [blogue Autorecovery ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
+Prêt à utiliser un cluster pour ce scénario ? Après avoir planifié vos configurations de [haute disponibilité](/docs/containers?topic=containers-ha_clusters) et de [noeud worker](/docs/containers?topic=containers-planning_worker_nodes), reportez-vous à la rubrique [Création de clusters](/docs/containers?topic=containers-clusters#cluster_prepare).

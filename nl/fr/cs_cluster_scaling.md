@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node scaling
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:gif: data-image-type='gif'}
 
 
@@ -48,7 +49,7 @@ Le programme de mise à l'échelle automatique de cluster analyse régulièremen
 
 L'analyse et l'augmentation ou la diminution de capacité se produit à intervalles réguliers. Selon le nombre de noeuds worker, ces opérations peuvent prendre plus de temps, par exemple 30 minutes.
 
-Le programme de mise à l'échelle automatique de cluster ajuste le nombre de noeuds worker en considérant les [demandes de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) que vous définissez pour vos déploiements, et non pas l'utilisation réelle des noeuds worker. Si vos pods et vos déploiements ne demandent pas les quantités de ressources appropriées, vous devez ajuster leurs fichiers de configuration. Le programme de mise à l'échelle automatique de cluster ne peut pas le faire à votre place. N'oubliez pas que les noeuds worker utilisent une partie de leurs ressources de calcul pour des fonctionnalités de cluster de base, des [modules complémentaires](/docs/containers?topic=containers-update#addons) par défaut et personnalisés, ainsi que pour des [réserves de ressources](/docs/containers?topic=containers-plan_clusters#resource_limit_node).
+Le programme de mise à l'échelle automatique de cluster ajuste le nombre de noeuds worker en considérant les [demandes de ressources ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) que vous définissez pour vos déploiements, et non pas l'utilisation réelle des noeuds worker. Si vos pods et vos déploiements ne demandent pas les quantités de ressources appropriées, vous devez ajuster leurs fichiers de configuration. Le programme de mise à l'échelle automatique de cluster ne peut pas le faire à votre place. En outre, n'oubliez pas que les noeuds worker utilisent une partie de leurs ressources de calcul pour des fonctionnalités de cluster de base, des [modules complémentaires](/docs/containers?topic=containers-update#addons) par défaut et personnalisés, ainsi que pour des [réserves de ressources](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).
 {: note}
 
 <br>
@@ -56,21 +57,25 @@ Le programme de mise à l'échelle automatique de cluster ajuste le nombre de no
 En général, le programme de mise à l'échelle automatique de cluster calcule le nombre de noeuds worker dont votre cluster a besoin pour exécuter sa charge de travail. La mise à l'échelle du cluster dépend de plusieurs facteurs, notamment :
 *   La taille minimale et maximale des noeuds worker par zone que vous avez définies.
 *   Vos demandes de ressources de pod en attente et certaines métadonnées que vous associez à la charge de travail, notamment l'anti-affinité, les libellés pour placer les pods uniquement sur certains types de machine, ou les objets [pod disruption budgets![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   Les pools worker gérés par le programme de mise à l'échelle automatique de cluster, éventuellement sur plusieurs zones d'un [cluster à zones multiples](/docs/containers?topic=containers-plan_clusters#multizone).
-*   Les [valeurs de charte Helm personnalisées](#ca_chart_values) qui sont définies, par exemple, la non prise en compte des noeuds worker pour suppression s'ils utilisent le stockage local. 
+*   Les pools worker gérés par le programme de mise à l'échelle automatique de cluster, éventuellement sur plusieurs zones d'un [cluster à zones multiples](/docs/containers?topic=containers-ha_clusters#multizone).
+*   Les [valeurs de charte Helm personnalisées](#ca_chart_values) qui sont définies, par exemple, la non prise en compte des noeuds worker pour suppression s'ils utilisent le stockage local.
 
 Pour plus d'informations, voir la foire aux questions (FAQ) de Kubernetes Cluster Autoscaler pour [How does scale-up work? ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) et [How does scale-down work? ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
 
 <br>
 
 **Puis-je modifier le fonctionnement de la mise à l'échelle par augmentation et par réduction ?**<br>
-Vous pouvez personnaliser des paramètres ou utiliser d'autres ressources Kubernetes pour affecter le fonctionnement de la mise à l'échelle par augmentation et par diminution. 
-*   **Scale-up** : [Personnalisez les valeurs de charte Helm de mise à l'échelle automatique pour le cluster](#ca_chart_values), par exemple, `scanInterval`, `expander`, `skipNodes` ou `maxNodeProvisionTime`. Passez en revue les moyens d'effectuer un [provisionnement excessif des noeuds worker](#ca_scaleup) afin de pouvoir effectuer une mise à l'échelle par augmentation des noeuds worker avant qu'un pool worker soit à court de ressources. Vous pouvez également [configurer des interruptions de budget de pod Kubernetes et des limites de priorité de pod](#scalable-practices-apps) afin d'affecter le fonctionnement de la mise à l'échelle par augmentation. 
+Vous pouvez personnaliser des paramètres ou utiliser d'autres ressources Kubernetes pour affecter le fonctionnement de la mise à l'échelle par augmentation et par diminution.
+*   **Scale-up** : [Personnalisez les valeurs de charte Helm de mise à l'échelle automatique pour le cluster](#ca_chart_values), par exemple, `scanInterval`, `expander`, `skipNodes` ou `maxNodeProvisionTime`. Passez en revue les moyens d'effectuer un [provisionnement excessif des noeuds worker](#ca_scaleup) afin de pouvoir effectuer une mise à l'échelle par augmentation des noeuds worker avant qu'un pool worker soit à court de ressources. Vous pouvez également [configurer des interruptions de budget de pod Kubernetes et des limites de priorité de pod](#scalable-practices-apps) afin d'affecter le fonctionnement de la mise à l'échelle par augmentation.
 *   **Scale-down** : [Personnalisez les valeurs de charte Helm de mise à l'échelle automatique pour le cluster](#ca_chart_values), par exemple, `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete` ou `scaleDownUtilizationThreshold`.
 
 <br>
+**Puis-je définir la taille minimale par zone pour faire passer immédiatement mon cluster à cette taille ?**<br>
+Non, le fait de définir une taille minimale (`minSize`) ne déclenche pas automatiquement un changement de taille par augmentation. La taille minimale (`minSize`) est un seuil défini pour que le programme de mise à l'échelle automatique de cluster ne procède pas à une mise à l'échelle inférieure à un certain nombre de noeuds worker par zone. Si votre cluster ne dispose pas encore de ce nombre de noeuds par zone, le programme de mise à l'échelle automatique de cluster n'effectue pas de mise à l'échelle par augmentation tant qu'aucune de vos demandes de ressource de charge de travail ne réclame davantage de ressources. Par exemple, si vous disposez d'un pool de noeuds worker avec un noeud worker pour trois zones (trois noeuds worker au total) et vous affectez au paramètre `minSize` la valeur `4` pour chaque zone, le programme de mise à l'échelle automatique de cluster ne met pas immédiatement à disposition trois autres noeuds worker par zone (12 noeuds worker au total). En revanche, la mise à l'échelle par augmentation est déclenchée par les demandes de ressource. Si vous créez une charge de travail qui demande les ressources de 15 noeuds worker, le programme de mise à l'échelle automatique de cluster procède à une mise à l'échelle par augmentation du pool de noeuds worker pour répondre à la demande. Le paramètre `minSize` signifie que le programme de mise à l'échelle automatique de cluster ne procède pas à une mise à l'échelle par réduction au-dessous de quatre noeuds worker pour chaque zone même si vous retirez la charge de travail qui demande la quantité. 
+
+<br>
 **En quoi ce comportement est-il différent des pools worker qui ne sont pas gérés par le programme de mise à l'échelle automatique de cluster ?**<br>
-Lorsque vous [créez un pool worker](/docs/containers?topic=containers-clusters#add_pool), vous spécifiez le nombre de noeuds worker dont il dispose par zone. Le pool worker conserve ce nombre de noeuds tant que vous n'avez pas effectué de [redimensionnement](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou de [rééquilibrage](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) dessus. Le pool worker n'ajoute ou ne supprime pas de noeuds worker pour vous. Si vous disposez d'autres pods pouvant être planifiés, les pods restent à l'état en attente jusqu'à ce que vous redimensionniez le pool worker.
+Lorsque vous [créez un pool worker](/docs/containers?topic=containers-add_workers#add_pool), vous spécifiez le nombre de noeuds worker dont il dispose par zone. Le pool worker conserve ce nombre de noeuds tant que vous n'avez pas effectué de [redimensionnement](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ou de [rééquilibrage](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) dessus. Le pool worker n'ajoute ou ne supprime pas de noeuds worker pour vous. Si vous disposez d'autres pods pouvant être planifiés, les pods restent à l'état en attente jusqu'à ce que vous redimensionniez le pool worker.
 
 Lorsque vous activez le programme de mise à l'échelle automatique de cluster pour un pool worker, les noeuds worker sont augmentés ou diminués, en réponse aux paramètres de spécification et aux demandes de ressources de vos pods. Vous n'avez pas besoin de redimensionner ou de rééquilibrer le pool worker manuellement.
 
@@ -81,15 +86,15 @@ Examinez l'image suivante pour obtenir un exemple de mise à l'échelle.
 _Figure : Mise à l'échelle automatique d'un cluster._
 ![Mise à l'échelle automatique d'un cluster (GIF)](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  Le cluster comporte quatre noeuds worker dans deux pools worker répartis sur deux zones. Chaque pool contient un noeud worker par zone, mais le type de machine du **Pool worker A** est `u2c.2x4` et le type de machine du **Pool worker B** est `b2c.4x16`. Le nombre total de vos ressources de calcul est d'environ 10 coeurs (2 coeurs x 2 noeuds worker pour le **Pool worker A** et 4 coeurs x 2 noeuds worker pour le **Pool worker B**). Votre cluster exécute actuellement une charge de travail qui nécessite 6 de ces 10 coeurs. Notez que d'autres ressources de calcul sont prélevées sur chaque noeud worker par des [ressources réservées](/docs/containers?topic=containers-plan_clusters#resource_limit_node) nécessaires pour exécuter le cluster, les noeuds worker et d'autres modules complémentaires, tels que le programme de mise à l'échelle automatique de cluster.
+1.  Le cluster comporte quatre noeuds worker dans deux pools worker répartis sur deux zones. Chaque pool contient un noeud worker par zone, mais le type de machine du **Pool worker A** est `u2c.2x4` et le type de machine du **Pool worker B** est `b2c.4x16`. Le nombre total de vos ressources de calcul est d'environ 10 coeurs (2 coeurs x 2 noeuds worker pour le **Pool worker A** et 4 coeurs x 2 noeuds worker pour le **Pool worker B**). Votre cluster exécute actuellement une charge de travail qui nécessite 6 de ces 10 coeurs. D'autres ressources de calcul sont prélevées sur chaque noeud worker par des [ressources réservées](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) qui sont nécessaires pour exécuter le cluster, les noeuds worker et d'autres modules complémentaires, tels que le programme de mise à l'échelle automatique de cluster.
 2.  Le programme de mise à l'échelle automatique de cluster est configuré pour gérer les deux pools worker avec la taille minimale et la taille maximale par zone suivantes :
     *  **Pool worker A** : `minSize=1`, `maxSize=5`.
     *  **Pool worker B** : `minSize=1`, `maxSize=2`.
-3.  Vous planifiez des déploiements qui nécessitent 14 répliques de pod supplémentaires d'une application qui sollicite 1 coeur d'UC par réplique. Une réplique de pod peut être déployée sur les ressources actuelles, mais les 13 autres sont en attente.
+3.  Vous planifiez des déploiements qui nécessitent 14 répliques de pod supplémentaires d'une application qui sollicite un coeur d'UC par réplique. Une réplique de pod peut être déployée sur les ressources actuelles, mais les 13 autres sont en attente.
 4.  Le programme de mise à l'échelle automatique du cluster augmente le nombre de vos noeuds worker avec ces contraintes pour la prise en charge des demandes de ressources pour ces 13 autres répliques de pod.
-    *  **Pool worker A** : 7 noeuds worker sont ajoutés à tour de rôle aussi équitablement possible sur les différentes zones. Les noeuds worker augmentent la capacité de calcul du cluster d'environ 14 coeurs (2 coeurs x 7 noeuds worker).
-    *  **Pool worker B** : 2 noeuds worker sont ajoutés de manière équitable entre les zones, atteignant la taille maximale (`maxSize`) de 2 noeuds worker par zone. Les noeuds worker augmentent la capacité du cluster d'environ 8 coeurs (4 coeurs x 2 noeuds worker).
-5.  Les 20 pods avec des demandes correspondant à 1 coeur sont répartis comme suit dans les noeuds worker. Notez que comme les noeuds worker ont des réserves de ressources, ainsi que des pods qui s'exécutent pour les fonctions de cluster par défaut, les pods de votre charge de travail ne peuvent pas utiliser toutes les ressources de calcul disponibles d'un noeud worker. Par exemple, même si les noeuds worker de type `b2c.4x16` ont 4 coeurs, seuls 3 pods qui demandent 1 coeur minimum chacun peuvent être planifiés sur les noeuds worker.
+    *  **Pool de noeuds worker A** : Sept noeuds worker sont ajoutés à tour de rôle aussi équitablement possible sur les différentes zones. Les noeuds worker augmentent la capacité de calcul du cluster d'environ 14 coeurs (2 coeurs x 7 noeuds worker).
+    *  **Pool de noeuds worker B** : Deux noeuds worker sont ajoutés de manière équitable entre les zones, atteignant la taille maximale (`maxSize`) de 2 noeuds worker par zone. Les noeuds worker augmentent la capacité du cluster d'environ 8 coeurs (4 coeurs x 2 noeuds worker).
+5.  Les 20 pods avec des demandes correspondant à 1 coeur sont répartis comme suit dans les noeuds worker. Comme les noeuds worker ont des réserves de ressources, ainsi que des pods qui s'exécutent pour les fonctions de cluster par défaut, les pods de votre charge de travail ne peuvent pas utiliser toutes les ressources de calcul disponibles d'un noeud worker. Par exemple, même si les noeuds worker de type `b2c.4x16` ont quatre coeurs, seuls trois pods qui demandent un coeur minimum chacun peuvent être planifiés sur les noeuds worker.
     <table summary="Tableau présentant la répartition d'une charge de travail dans un cluster mis à l'échelle.">
     <caption>Répartition de la charge de travail dans un cluster mis à l'échelle.</caption>
     <thead>
@@ -106,33 +111,33 @@ _Figure : Mise à l'échelle automatique d'un cluster._
       <td>A</td>
       <td>dal10</td>
       <td>u2c.2x4</td>
-      <td>4 noeuds</td>
-      <td>3 pods</td>
+      <td>Quatre noeuds</td>
+      <td>Trois pods</td>
     </tr>
     <tr>
       <td>A</td>
       <td>dal12</td>
       <td>u2c.2x4</td>
-      <td>5 noeuds</td>
-      <td>5 pods</td>
+      <td>Cinq noeuds</td>
+      <td>Cinq pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal10</td>
       <td>b2c.4x16</td>
-      <td>2 noeuds</td>
-      <td>6 pods</td>
+      <td>Deux noeuds</td>
+      <td>Six pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal12</td>
       <td>b2c.4x16</td>
-      <td>2 noeuds</td>
-      <td>6 pods</td>
+      <td>Deux noeuds</td>
+      <td>Six pods</td>
     </tr>
     </tbody>
     </table>
-6.  Comme vous n'avez plus besoin de charge de travail supplémentaire, vous supprimez le déploiement. Après un court laps de temps, le programme de mise à l'échelle automatique de cluster détecte que votre cluster n'a plus besoin de toutes ses ressources de calcul et commence à réduire le nombre de noeuds worker un par un.
+6.  Comme vous n'avez plus besoin de charge de travail supplémentaire, vous supprimez le déploiement. Après un court laps de temps, le programme de mise à l'échelle automatique de cluster détecte que votre cluster n'a plus besoin de toutes ses ressources de calcul et réduit le nombre de noeuds worker un par un.
 7.  Vos pools worker sont réduits. Le programme de mise à l'échelle automatique de cluster effectue des analyses à intervalles réguliers pour rechercher des demandes de ressources de pods en attente et des noeuds worker sous-utilisés pour augmenter ou diminuer vos pools worker.
 
 ## Pratiques de déploiement évolutives
@@ -141,7 +146,7 @@ _Figure : Mise à l'échelle automatique d'un cluster._
 Tirez le meilleur parti du programme de mise à l'échelle automatique de cluster en utilisant les stratégies suivantes pour votre noeud worker et les stratégies de déploiement de charge de travail. Pour plus d'informations voir la [foire aux questions (FAQ) de Kubernetes Cluster Autoscaler ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
 {: shortdesc}
 
-[Essayez le programme de mise à l'échelle automatique de cluster](#ca_helm) avec un petit nombre de charges de travail de test afin de vous faire une bonne idée de la fonction dont [la mise à l'échelle par augmentation et la mise à l'échelle par réduction fonctionnent](#ca_about), des [valeurs personnalisées](#ca_chart_values) que vous pourriez souhaiter configurer, ainsi que d'autres aspects qui pourraient vous intéresser, par exemple le [provisionnement excessif](#ca_scaleup) de noeuds worker ou la [limitation d'applications](#ca_limit_pool). Ensuite, nettoyez votre environnement de test et prévoyez d'inclure ces valeurs personnalisées et d'autres paramètres avec une toute nouvelle installation du programme de mise à l'échelle automatique de cluster. 
+[Essayez le programme de mise à l'échelle automatique de cluster](#ca_helm) avec un petit nombre de charges de travail de test afin de vous faire une bonne idée de la fonction dont [la mise à l'échelle par augmentation et la mise à l'échelle par réduction fonctionnent](#ca_about), des [valeurs personnalisées](#ca_chart_values) que vous pourriez souhaiter configurer, ainsi que d'autres aspects qui pourraient vous intéresser, par exemple le [provisionnement excessif](#ca_scaleup) de noeuds worker ou la [limitation d'applications](#ca_limit_pool). Ensuite, nettoyez votre environnement de test et prévoyez d'inclure ces valeurs personnalisées et d'autres paramètres avec une toute nouvelle installation du programme de mise à l'échelle automatique de cluster.
 
 ### Puis-je effectuer une mise à l'échelle automatique de plusieurs pools worker en même temps ?
 {: #scalable-practices-multiple}
@@ -157,7 +162,7 @@ Le programme de mise à l'échelle automatique de cluster ajuste votre cluster e
 ### Puis-je réduire un pool worker à zéro (0) noeud ?
 {: #scalable-practices-zero}
 
-Non, vous ne pouvez pas affecter au paramètre `minSize` du programme de mise à l'échelle automatique de cluster la valeur `0`. De plus, à moins de [désactiver](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) les équilibreurs de charge d'application (ALB) dans votre cluster, vous devez remplacer par  `2` la valeur du paramètre `minSize` pour chaque zone de sorte que les pods d'ALB soient dispersés pour assurer une haute disponibilité.
+Non, vous ne pouvez pas affecter au paramètre `minSize` du programme de mise à l'échelle automatique de cluster la valeur `0`. De plus, à moins de [désactiver](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) tous les équilibreurs de charge d'application (ALB) publics dans chaque zone de votre cluster, vous devez remplacer par `2` la valeur du paramètre `minSize` pour chaque zone de sorte que les pods d'ALB soient dispersés pour assurer une haute disponibilité.
 {: shortdesc}
 
 ### Puis-je optimiser mes déploiements pour la mise à l'échelle automatique ?
@@ -177,14 +182,14 @@ Comme les annotations taint ne sont pas applicables au niveau du pool worker, n'
 ### Pourquoi mes pools worker qui ont fait l'objet d'une mise à l'échelle automatique ne sont pas équilibrés ?
 {: #scalable-practices-unbalanced}
 
-Lors d'une mise à l'échelle par augmentation, le programme de mise à l'échelle automatique équilibre les noeuds dans les zones, avec une différence autorisée de plus ou moins un (+/- 1) noeud worker. Vos charges de travail en attente risquent de ne pas demander suffisamment de capacité pour que chaque zone soit équilibrée. Dans ce cas, si vous voulez équilibrer manuellement les pools worker, [mettez à jour le fichier configmap du programme de mise à l'échelle automatique de cluster](#ca_cm) pour retirer les pools worker déséquilibrés. Exécutez ensuite la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) `ibmcloud ks worker-pool-rebalance`, et remettez le pool worker dans le fichier configmap du programme de mise à l'échelle automatique de cluster.
+Lors d'une mise à l'échelle par augmentation, le programme de mise à l'échelle automatique équilibre les noeuds dans les zones, avec une différence autorisée de plus ou moins un (+/- 1) noeud worker. Vos charges de travail en attente risquent de ne pas demander suffisamment de capacité pour que chaque zone soit équilibrée. Dans ce cas, si vous voulez équilibrer manuellement les pools worker, [mettez à jour le fichier configmap du programme de mise à l'échelle automatique de cluster](#ca_cm) pour retirer les pools worker déséquilibrés. Exécutez ensuite la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) `ibmcloud ks worker-pool-rebalance` et remettez le pool de noeuds worker dans le fichier configmap du programme de mise à l'échelle automatique de cluster.
 {: shortdesc}
 
 
 ### Pourquoi ne puis-je pas redimensionner ou rééquilibrer mon pool worker ?
 {: #scalable-practices-resize}
 
-Lorsque le programme de mise à l'échelle automatique de cluster est activé pour un pool worker, vous ne pouvez pas [redimensionner](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) vos pools worker. Vous devez [modifier le fichier configmap](#ca_cm) pour changer les tailles minimale et maximale du pool worker, ou désactiver la mise à l'échelle automatique de cluster pour ce pool worker. N'utilisez pas la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) `ibmcloud ks worker-rm` pour supprimer des noeuds worker individuels de votre pool worker, ce qui pourrait déséquilibrer ce pool.
+Lorsque le programme de mise à l'échelle automatique de cluster est activé pour un pool worker, vous ne pouvez pas [redimensionner](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) vos pools worker. Vous devez [modifier le fichier configmap](#ca_cm) pour changer les tailles minimale et maximale du pool worker, ou désactiver la mise à l'échelle automatique de cluster pour ce pool worker. N'utilisez pas la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) `ibmcloud ks worker-rm` pour supprimer des noeuds worker individuels de votre pool de noeuds worker, car celui-ci pourrait être déséquilibré.
 {: shortdesc}
 
 Par ailleurs, si vous ne désactivez pas les pools worker avant de désinstaller la charte Helm `ibm-iks-cluster-autoscaler`, les pools worker ne peuvent pas être redimensionnés manuellement. Réinstallez la charte Helm `ibm-iks-cluster-autoscaler`, [modifiez le fichier configmap](#ca_cm) pour désactiver le pool worker, et réessayez.
@@ -200,21 +205,22 @@ Installez le plug-in du programme de mise à l'échelle automatique de cluster d
 
 **Avant de commencer** :
 
-1.  [Installez l'interface de ligne de commande et les plug-in requis](/docs/cli?topic=cloud-cli-ibmcloud-cli) :
+1.  [Installez l'interface de ligne de commande et les plug-in requis](/docs/cli?topic=cloud-cli-getting-started) :
     *  Interface de ligne de commande {{site.data.keyword.Bluemix_notm}} (`ibmcloud`)
     *  Plug-in {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`)
     *  Plug-in {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Créez un cluster standard](/docs/containers?topic=containers-clusters#clusters_ui) qui exécute **Kubernetes version 1.12 ou ultérieure**.
-3.   [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirmez que vos données d'identification pour {{site.data.keyword.Bluemix_notm}} Identity and Access Management sont stockées dans le cluster. Le programme de mise à l'échelle automatique de cluster utilise cette valeur confidentielle pour l'authentification.
+3.   [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4.  Confirmez que vos données d'identification pour {{site.data.keyword.Bluemix_notm}} Identity and Access Management sont stockées dans le cluster. Le programme de mise à l'échelle automatique de cluster utilise cette valeur confidentielle pour l'authentification des données d'identification.
+    Si la valeur confidentielle est manquante, [créez-la en redéfinissant des données d'identification](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
     {: pre}
 5.  Le programme de mise à l'échelle automatique de cluster peut fonctionner uniquement pour les pools worker ayant le libellé `ibm-cloud.kubernetes.io/worker-pool-id`.
-    1.  Vérifiez si votre pool worker comporte le libellé requis.
+    1.  Vérifiez si votre pool de noeuds worker comporte le libellé requis.
         ```
         ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels
         ```
@@ -225,7 +231,7 @@ Installez le plug-in du programme de mise à l'échelle automatique de cluster d
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  Si votre pool worker ne dispose pas du libellé requis, [ajoutez un nouveau pool worker](/docs/containers?topic=containers-clusters#add_pool) et utilisez ce nouveau pool avec le programme de mise à l'échelle automatique de cluster.
+    2.  Si votre pool worker ne dispose pas du libellé requis, [ajoutez un nouveau pool worker](/docs/containers?topic=containers-add_workers#add_pool) et utilisez ce nouveau pool avec le programme de mise à l'échelle automatique de cluster.
 
 
 <br>
@@ -248,8 +254,8 @@ Installez le plug-in du programme de mise à l'échelle automatique de cluster d
     {: screen}
 3.  Ajoutez et mettez à jour le référentiel Helm où se trouve la charte Helm du programme de mise à l'échelle automatique de cluster.
     ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
-   ```
+    helm repo add iks-charts https://icr.io/helm/iks-charts
+    ```
     {: pre}
     ```
     helm repo update
@@ -257,7 +263,7 @@ Installez le plug-in du programme de mise à l'échelle automatique de cluster d
     {: pre}
 4.  Installez la charte Helm du programme de mise à l'échelle automatique de cluster dans l'espace de nom `kube-system` de votre cluster.
 
-    Durant l'installation, vous avez la possibilité [personnaliser davantage les paramètres du programme de mise à l'échelle automatique de cluster](#ca_chart_values), par exemple la durée d'attente avant d'augmenter ou de réduire le nombre de noeuds worker.
+    Durant l'installation, vous pouvez [personnaliser davantage les paramètres du programme de mise à l'échelle automatique de cluster](#ca_chart_values), par exemple la durée d'attente avant d'augmenter ou de réduire le nombre de noeuds worker.
     {: tip}
 
     ```
@@ -348,12 +354,12 @@ Installez le plug-in du programme de mise à l'échelle automatique de cluster d
 Mettez à jour la mappe de configuration (configmap) du programme de mise à l'échelle automatique de cluster pour activer la mise à l'échelle automatique des noeuds worker dans vos pools worker en fonction des valeurs minimales et maximales que vous avez définies.
 {: shortdesc}
 
-Après avoir édité la mappe de configuration pour activer un pool worker, le programme de mise à l'échelle automatique de cluster commence à ajuster votre cluster en réponse aux demandes de votre charge de travail. Par conséquent, vous ne pouvez pas [redimensionner](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) vos pools worker. L'analyse et l'augmentation ou la diminution de capacité se produit à intervalles réguliers. Selon le nombre de noeuds worker, ces opérations peuvent prendre plus de temps, par exemple 30 minutes. Par la suite, si vous souhaitez [supprimer le programme de mise à l'échelle automatique de cluster](#ca_rm), vous devez d'abord désactiver chaque pool worker dans la mappe de configuration.
+Après avoir édité la mappe de configuration pour activer un pool de noeuds worker, le programme de mise à l'échelle automatique de cluster commence à ajuster votre cluster en réponse aux demandes de votre charge de travail. Par conséquent, vous ne pouvez pas [redimensionner](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) vos pools worker. L'analyse et l'augmentation ou la diminution de capacité se produit à intervalles réguliers. Selon le nombre de noeuds worker, ces opérations peuvent prendre plus de temps, par exemple 30 minutes. Par la suite, si vous souhaitez [supprimer le programme de mise à l'échelle automatique de cluster](#ca_rm), vous devez d'abord désactiver chaque pool worker dans la mappe de configuration.
 {: note}
 
 **Avant de commencer** :
 *  [Installez le plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Pour mettre à jour la mappe de configuration (configmap) et les valeurs du programme de mise à l'échelle automatique de cluster** :
 
@@ -380,7 +386,7 @@ Après avoir édité la mappe de configuration pour activer un pool worker, le p
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Editez le fichier configmap avec les paramètres permettant de définir comment le programme de mise à l'échelle automatique de cluster procède pour mettre à l'echelle le pool worker de votre cluster. A moins d'avoir [désactivé](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) les équilibreurs de charge d'application (ALB) dans votre cluster standard, vous devez modifier la taille minimale (`minSize`) à `2` par zone pour que les pods d'ALB soient dispersés pour assurer une haute disponibilité.
+2.  Editez le fichier configmap avec les paramètres permettant de définir comment le programme de mise à l'échelle automatique de cluster procède pour mettre à l'échelle le pool de noeuds worker de votre cluster. **Remarque :** A moins d'avoir [désactivé](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) tous les équilibreurs de charge d'application (ALB) publics dans chaque zone de votre cluster standard, vous devez remplacer par `2` la valeur de `minSize` pour chaque zone de sorte que les pods d'ALB soient dispersés afin d'assurer une haute disponibilité. 
 
     <table>
     <caption>Paramètres de la mappe de configuration du programme de mise à l'échelle automatique de cluster</caption>
@@ -396,15 +402,16 @@ Après avoir édité la mappe de configuration pour activer un pool worker, le p
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Remarque** : Le programme de mise à l'échelle automatique de cluster ne peut fonctionner qu'avec des pools worker avec le libellé `ibm-cloud.kubernetes.io/worker-pool-id`. Pour vérifiez si votre pool worker comporte le libellé requis, exécutez la commande `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si votre pool worker ne dispose pas du libellé requis, [ajoutez un nouveau pool worker](/docs/containers?topic=containers-clusters#add_pool) et utilisez ce nouveau pool avec le programme de mise à l'échelle automatique de cluster.</td>
+    **Remarque** : Le programme de mise à l'échelle automatique de cluster ne peut fonctionner qu'avec des pools worker avec le libellé `ibm-cloud.kubernetes.io/worker-pool-id`. Pour vérifiez si votre pool de noeuds worker comporte le libellé requis, exécutez la commande `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si votre pool worker ne dispose pas du libellé requis, [ajoutez un nouveau pool worker](/docs/containers?topic=containers-add_workers#add_pool) et utilisez ce nouveau pool avec le programme de mise à l'échelle automatique de cluster.</td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
-    <td headers="parameter-minsize parameter-with-description">Indiquez le nombre minimal de noeuds worker par zone qui doivent figurer dans le pool worker à tout moment. Cette valeur doit être supérieure ou égale à 2 pour que vos pods d'ALB puissent être dispersés pour assurer la haute disponibilité. Si vous avez [désactivé](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) l'ALB dans votre cluster standard, vous pouvez définir cette valeur sur `1`.</td>
+    <td headers="parameter-minsize parameter-with-description">Indiquez le nombre minimal de noeuds worker par zone auquel le programme de mise à l'échelle automatique de cluster peut réduire le pool de noeuds worker. Cette valeur doit être supérieure ou égale à `2` pour que vos pods d'ALB puissent être dispersés pour assurer la haute disponibilité. Si vous avez [désactivé](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) tous les ALB publics dans chaque zone de votre cluster standard, vous pouvez a affecter la valeur `1`.
+    <p class="note">Le fait de définir une taille minimale (`minSize`) ne déclenche pas automatiquement un changement de taille par augmentation. La taille minimale (`minSize`) est un seuil défini pour que le programme de mise à l'échelle automatique de cluster ne procède pas à une mise à l'échelle inférieure à un certain nombre de noeuds worker par zone. Si votre cluster ne dispose pas encore de ce nombre de noeuds par zone, le programme de mise à l'échelle automatique de cluster n'effectue pas de mise à l'échelle par augmentation tant qu'aucune de vos demandes de ressource de charge de travail ne réclame davantage de ressources. Par exemple, si vous disposez d'un pool de noeuds worker avec un noeud worker pour trois zones (trois noeuds worker au total) et vous affectez au paramètre `minSize` la valeur `4` pour chaque zone, le programme de mise à l'échelle automatique de cluster ne met pas immédiatement à disposition trois autres noeuds worker par zone (12 noeuds worker au total). En revanche, la mise à l'échelle par augmentation est déclenchée par les demandes de ressource. Si vous créez une charge de travail qui demande les ressources de 15 noeuds worker, le programme de mise à l'échelle automatique de cluster procède à une mise à l'échelle par augmentation du pool de noeuds worker pour répondre à la demande. Le paramètre `minSize` signifie que le programme de mise à l'échelle automatique de cluster ne procède pas à une mise à l'échelle par réduction au-dessous de quatre noeuds worker pour chaque zone même si vous retirez la charge de travail qui demande la quantité. Pour plus d'informations, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
-    <td headers="parameter-maxsize parameter-with-description">Indiquez le nombre maximal de noeuds worker par zone qui doivent figurer dans le pool worker. Cette valeur doit être supérieure ou égale à la valeur que vous avez définie pour le paramètre `minSize`.</td>
+    <td headers="parameter-maxsize parameter-with-description">Indiquez le nombre maximal de noeuds worker par zone auquel le programme de mise à l'échelle automatique de cluster peut faire passer le pool de noeuds worker. Cette valeur doit être supérieure ou égale à la valeur que vous avez définie pour le paramètre `minSize`.</td>
     </tr>
     <tr>
     <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
@@ -432,7 +439,7 @@ Après avoir édité la mappe de configuration pour activer un pool worker, le p
 		Namespace:          kube-system
 		...
 		Events:
-    Type    Reason                 Age   From                     Message
+		Type     Reason         Age   From                                        Message
 		----     ------         ----  ----                                        -------
 
 		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
@@ -446,7 +453,7 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
 {: shortdesc}
 
 **Avant de commencer** :
-*  [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [Installez le plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
 
 **Pour mettre à jour les valeurs du programme de mise à l'échelle automatique de cluster** :
@@ -462,7 +469,7 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
@@ -493,7 +500,7 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
     <tbody>
     <tr>
     <td>Paramètre `api_route`</td>
-    <td>Définissez le [noeud final d'API {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api) pour la région dans laquelle se trouve votre cluster.</td>
+    <td>Définissez le [noeud final d'API {{site.data.keyword.containerlong_notm}} ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api) pour la région dans laquelle se trouve votre cluster. </td>
     <td>Aucune valeur par défaut. Utilise la région ciblée dans laquelle se trouve votre cluster.</td>
     </tr>
     <tr>
@@ -501,13 +508,13 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
     <td>Indiquez comment le programme de mise à l'échelle automatique de cluster détermine le pool worker à mettre à l'échelle si vous disposez de plusieurs pools de ce type. Les valeurs possibles sont :
     <ul><li>`random` : sélection de manière aléatoire entre `most-pods` et `least-waste`.</li>
     <li>`most-pods` : sélection du pool worker en mesure de planifier le plus de pods lors d'une augmentation d'échelle. Utilisez cette méthode avec `nodeSelector` pour vous assurer que les pods atterrissent sur des noeuds worker spécifiques.</li>
-    <li>`least-waste` : sélection du pool worker ayant le moins d'UC inutilisée, ou en cas d'égalité de mémoire la moins inutilisée, après une augmentation d'échelle. Utilisez cette méthode si vous disposez de plusieurs pools worker avec des types de machine d'une grande capacité d'UC et de mémoire, et que vous voulez utiliser ces grosses machines uniquement lorsque des pods en attente nécessitent de grandes quantités de ressources.</li></ul></td>
+    <li>`least-waste` : sélection du pool de noeuds worker ayant le moins d'UC inutilisée après une mise à l'échelle par augmentation. Si deux pools de noeuds worker utilisent la même quantité de ressources d'UC après la mise à l'échelle par augmentation, le pool de noeuds worker avec le moins de mémoire inutilisée est sélectionné. </li></ul></td>
     <td>random</td>
     </tr>
     <tr>
     <td>Paramètre `image.repository`</td>
     <td>Indiquez l'image Docker à utiliser pour le programme de mise à l'échelle automatique de cluster.</td>
-    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
+    <td>`icr.io/iks-charts/ibm-iks-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>Paramètre `image.pullPolicy`</td>
@@ -520,57 +527,57 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
     <tr>
     <td>Paramètre `maxNodeProvisionTime`</td>
     <td>Définissez la durée maximale en minutes que peut prendre un noeud worker pour commencer le provisionnement avant l'annulation de la demande d'augmentation par le programme de mise à l'échelle automatique du cluster.</td>
-    <td>120m</td>
+    <td>`120m`</td>
     </tr>
     <tr>
     <td>Paramètre `resources.limits.cpu`</td>
     <td>Définissez la quantité maximale d'UC de noeud worker que peut consommer le pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>300m</td>
+    <td>`300m`</td>
     </tr>
     <tr>
     <td>Paramètre `resources.limits.memory`</td>
     <td>Définissez la quantité maximale de mémoire de noeud worker que peut consommer le pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>300Mi</td>
+    <td>`300Mi`</td>
     </tr>
     <tr>
     <td>Paramètre `resources.requests.cpu`</td>
     <td>Définissez la quantité minimale d'UC de noeud worker dont dispose le pod `ibm-iks-cluster-autoscaler` au démarrage.</td>
-    <td>100m</td>
+    <td>`100m`</td>
     </tr>
     <tr>
     <td>Paramètre `resources.requests.memory`</td>
     <td>Définissez la quantité minimale de mémoire de noeud worker dont dispose le pod `ibm-iks-cluster-autoscaler` au démarrage.</td>
-    <td>100Mi</td>
+    <td>`100Mi`</td>
     </tr>
     <tr>
     <td>Paramètre `scaleDownUnneededTime`</td>
     <td>Définissez la durée en minutes pendant laquelle le noeud worker doit être inutile avant de faire l'objet d'une réduction.</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Paramètres `scaleDownDelayAfterAdd` et `scaleDownDelayAfterDelete`</td>
     <td>Définissez la durée d'attente en minutes du programme de mise à l'échelle automatique de cluster avant de relancer des actions de mise à l'échelle après une augmentation (`add`) ou une réduction (`delete`).</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Paramètre `scaleDownUtilizationThreshold`</td>
     <td>Définissez le seuil d'utilisation du noeud worker. Si cette valeur passe au-dessous du seuil, la réduction du noeud worker est envisagée. L'utilisation du noeud worker est calculée à partir de la somme des ressources d'UC et de mémoire demandées par tous les pods qui s'exécutent sur le noeud worker divisée par la capacité en ressources du noeud worker.</td>
-    <td>0.5</td>
+    <td>`0.5`</td>
     </tr>
     <tr>
     <td>Paramètre `scanInterval`</td>
     <td>Définissez la fréquence en minutes que prend le programme de mise à l'échelle automatique de cluster pour analyser l'utilisation de la charge de travail qui déclenche une augmentation ou une réduction d'échelle.</td>
-    <td>1m</td>
+    <td>`1m`</td>
     </tr>
     <tr>
     <td>Paramètre `skipNodes.withLocalStorage`</td>
     <td>Lorsque la valeur de ce paramètre est définie sur `true`, les noeuds worker qui comportent des pods qui sauvegardent des données sur du stockage local ne font pas l'objet d'une réduction d'échelle.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     <tr>
     <td>Paramètre `skipNodes.withSystemPods`</td>
     <td>Lorsque la valeur de ce paramètre est définie sur `true`, les noeuds worker qui comportent des pods `kube-system` ne sont pas réduits. Ne définissez pas la valeur sur `false` car la réduction des pods `kube-system` peut avoir des résultats imprévisibles.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     </tbody>
     </table>
@@ -590,27 +597,31 @@ Personnalisez les paramètres du programme de mise à l'échelle automatique de 
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## Limitation d'exécution des applications uniquement à certains pools worker mis à l'échelle automatiquement
 {: #ca_limit_pool}
 
-Pour limiter un déploiement de pod à un pool worker spécifique qui est géré par le programme de mise à l'échelle automatique de cluster, utilisez des libellés et le paramètre `nodeSelector`.
+Pour limiter un déploiement de pod à un pool de noeuds worker spécifique qui est géré par le programme de mise à l'échelle automatique de cluster, utilisez des libellés et le paramètre `nodeSelector` ou `nodeAffinity`.
+Le paramètre `nodeAffinity` vous permet de mieux contrôler la façon dont le comportement de planification fonctionne pour faire correspondre des pods et des noeuds worker. Pour plus d'informations sur l'affectation de pods à des noeuds worker, [voir la documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/).
 {: shortdesc}
 
 **Avant de commencer** :
 *  [Installez le plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Pour limiter l'exécution des pods à certains pools worker mis à l'échelle automatiquement** :
 
-1.  Créez le pool worker avec le libellé de votre choix.
+1.  Créez le pool worker avec le libellé de votre choix. Par exemple, votre libellé peut être `app: nginx`.
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Ajoutez le pool worker dans la configuration du programme de mise à l'échelle automatique de cluster](#ca_cm).
-3.  Dans le modèle de spécification (spec) de votre pod, faites correspondre `nodeSelector` au libellé que vous avez utilisé dans votre pool worker.
+3.  Dans le modèle de spécification (spec) de votre pod, faites correspondre `nodeSelector` ou `nodeAffinity` au libellé que vous avez utilisé dans votre pool de noeuds worker.
+    
+
+    Exemple de paramètre `nodeSelector` :
     ```
     ...
     spec:
@@ -621,6 +632,25 @@ Pour limiter un déploiement de pod à un pool worker spécifique qui est géré
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    Exemple de paramètre `nodeAffinity` :
+    ```
+    spec:
+          containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+              operator: In
+              values:
+                - nginx
     ```
     {: codeblock}
 4.  Déployez le pod. En raison du libellé correspondant, le pod est planifié sur un noeud worker qui se trouve dans le pool worker avec ce libellé.
@@ -635,17 +665,17 @@ Pour limiter un déploiement de pod à un pool worker spécifique qui est géré
 ## Augmentation des noeuds worker avant que le pool worker soit à court de ressources
 {: #ca_scaleup}
 
-Comme indiqué à la rubrique [Description du fonctionnement du programme de mise à l'échelle automatique de cluster](#ca_about) et dans la [foire aux questions (FAQ) de Kubernetes Cluster Autoscaler ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), le programme de mise à l'échelle automatique de cluster augmente la capacité de vos pools worker en réponse aux ressources demandées de votre charge de travail par rapport aux ressources disponibles du pool worker. Cependant, vous préférez peut-être que ce programme augmente vos noeuds worker avant que le pool worker soit à court de ressources. Dans ce cas, votre charge de travail n'a pas besoin d'attendre que les noeuds worker soient mis à disposition car le pool worker est déjà mis à l'échelle pour répondre aux demandes de ressources.
+Comme indiqué à la rubrique [Description du fonctionnement du programme de mise à l'échelle automatique de cluster](#ca_about) et dans la [foire aux questions (FAQ) de Kubernetes Cluster Autoscaler ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), le programme de mise à l'échelle automatique de cluster augmente la capacité de vos pools worker en réponse aux ressources demandées de la charge de travail par rapport aux ressources disponibles du pool de noeuds worker. Cependant, vous préférez peut-être que ce programme augmente vos noeuds worker avant que le pool worker soit à court de ressources. Dans ce cas, votre charge de travail n'a pas besoin d'attendre que les noeuds worker soient mis à disposition car le pool worker est déjà mis à l'échelle pour répondre aux demandes de ressources.
 {: shortdesc}
 
 Le programme de mise à l'échelle automatique de cluster ne prend pas en charge la mise à l'échelle anticipée (provisionnement excessif) des pools worker. Cependant, vous pouvez configurer d'autres ressources Kubernetes pour utiliser ce programme et réaliser une mise à l'échelle anticipée.
 
 <dl>
   <dt><strong>Pods de pause</strong></dt>
-  <dd>Vous pouvez créer un déploiement pour déployer des [conteneurs de pause ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) dans des pods avec des demandes de ressources spécifiques, et affecter une priorité de pod faible à ce déploiement. Lorsque ces ressources sont requises par les charges de travail de priorité plus élevée, le pod de pause est préempté et devient un pod en attente. Cet événement déclenche le programme de mise à l'échelle automatique de cluster pour augmenter la capacité.<br><br>Pour plus d'informations sur la configuration d'un déploiement de pod de pause, voir [Kubernetes FAQ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). Vous pouvez utiliser [cet exemple de fichier de configuration de provisionnement excessif![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) pour créer la classe de priorité, le compte de service et les déploiements. <p class="note">Si vous utilisez cette méthode, assurez-vous de comprendre comment fonctionne la [priorité de pod](/docs/containers?topic=containers-pod_priority#pod_priority) et comment définir la priorité de pod pour vos déploiements. Par exemple, si le pod de pause ne dispose pas de ressources suffisantes pour un pod de priorité élevée, le pod n'est pas préempté. La charge de travail de priorité plus élevée reste en attente, provoquant le déclenchement du programme de mise à l'échelle automatique de cluster pour augmenter la capacité. Pourtant dans ce cas précis, l'action de mise à l'échelle par augmentation n'est pas anticipée car la charge de travail que vous souhaitez exécuter ne peut pas être planifiée en raison d'un nombre de ressources insuffisant. </p></dd>
+  <dd>Vous pouvez créer un déploiement pour déployer des [conteneurs de pause ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) dans des pods avec des demandes de ressources spécifiques, et affecter une priorité de pod faible à ce déploiement. Lorsque ces ressources sont requises par les charges de travail de priorité plus élevée, le pod de pause est préempté et devient un pod en attente. Cet événement déclenche le programme de mise à l'échelle automatique de cluster pour augmenter la capacité.<br><br>Pour plus d'informations sur la configuration d'un déploiement de pod de pause, voir [Kubernetes FAQ ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). Vous pouvez utiliser [cet exemple de fichier de configuration de provisionnement excessif![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) pour créer la classe de priorité, le compte de service et les déploiements.<p class="note">Si vous utilisez cette méthode, assurez-vous de comprendre comment fonctionne la [priorité de pod](/docs/containers?topic=containers-pod_priority#pod_priority) et comment définir la priorité de pod pour vos déploiements. Par exemple, si le pod de pause ne dispose pas de ressources suffisantes pour un pod de priorité élevée, le pod n'est pas préempté. La charge de travail de priorité plus élevée reste en attente, provoquant le déclenchement du programme de mise à l'échelle automatique de cluster pour augmenter la capacité. Pourtant dans ce cas précis, l'action de mise à l'échelle par augmentation n'est pas anticipée car la charge de travail que vous souhaitez exécuter ne peut pas être planifiée en raison d'un nombre de ressources insuffisant. </p></dd>
 
   <dt><strong>Mise à l'échelle automatique de pod horizontale (HPA)</strong></dt>
-  <dd>Comme la mise à l'échelle automatique de pod horizontale est basée sur l'utilisation d'UC moyenne des pods, la limite d'utilisation d'UC que vous avez définie est atteinte avant même que les ressources du pool worker soient épuisées. Plus de pods sont demandés, ce qui déclenche le programme de mise à l'échelle automatique de cluster pour augmenter le pool worker.<br><br>Pour plus d'informations sur la mise à l'échelle HPA, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
+  <dd>Comme la mise à l'échelle automatique de pod horizontale est basée sur l'utilisation d'UC moyenne des pods, la limite d'utilisation d'UC que vous avez définie est atteinte avant même que les ressources du pool de noeuds worker ne soient effectivement épuisées. Plus de pods sont demandés, ce qui déclenche le programme de mise à l'échelle automatique de cluster pour augmenter le pool worker.<br><br>Pour plus d'informations sur la configuration de HPA, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
 </dl>
 
 <br />
@@ -660,7 +690,7 @@ Vous pouvez mettre à jour la charte Helm du programme de mise à l'échelle aut
 Mise à jour vers la dernière version de la charte Helm à partir de la version 1.0.2 ou antérieure ? [Suivez ces instructions](#ca_helm_up_102).
 {: note}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Mettez à jour le référentiel Helm pour extraire la dernière version de toutes les chartes Helm figurant dans ce référentiel.
     ```
@@ -723,7 +753,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 La version la plus récente de la charte Helm du programme de mise à l'échelle automatique de cluster nécessite la suppression complète des versions déjà installées de la charte. Si vous avez installé la charte Helm de version 1.0.2 ou antérieure, désinstallez d'abord cette version avant d'installer la dernière version de la charte Helm du programme de mise à l'échelle automatique de cluster.
 {: shortdesc}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Obtenez la mappe de configuration (configmap) de votre programme de mise à l'échelle automatique de cluster.
     ```
@@ -771,7 +801,7 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
     ```
     {: pre}
 
-     Exemple de sortie :
+    Exemple de sortie :
     ```
 		Name:               ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6
 		Namespace:          kube-system
@@ -790,10 +820,10 @@ Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropri
 ## Suppression du programme de mise à l'échelle automatique de cluster
 {: #ca_rm}
 
-Si vous ne souhaitez plus recourir à la mise à l'échelle automatique de vos pools worker, vous pouvez désinstaller la charte Helm du programme de mise à l'échelle automatique de cluster. Après la suppression, vous devez [redimensionner](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) vos pools worker manuellement.
+Si vous ne souhaitez plus recourir à la mise à l'échelle automatique de vos pools worker, vous pouvez désinstaller la charte Helm du programme de mise à l'échelle automatique de cluster. Après la suppression, vous devez [redimensionner](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ou [rééquilibrer](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) vos pools worker manuellement.
 {: shortdesc}
 
-Avant de commencer : [connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Dans la [mappe de configuration (configmap) du programme de mise à l'échelle automatique de cluster](#ca_cm), supprimez le pool worker en définissant la valeur de `"enabled"` sur `false`.
     ```

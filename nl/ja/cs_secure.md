@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.containerlong_notm}}のセキュリティー
@@ -109,16 +109,18 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
       <li>`DefaultTolerationSeconds`</li>
       <li>`DefaultStorageClass`</li>
       <li>`GenericAdmissionWebhook`</li>
-      <li>`Initializers`</li>
+      <li>`Initializers` (Kubernetes 1.13 以前)</li>
       <li>`LimitRanger`</li>
       <li>`MutatingAdmissionWebhook`</li>
       <li>`NamespaceLifecycle`</li>
+      <li>`NodeRestriction` (Kubernetes 1.14 以降)</li>
       <li>`PersistentVolumeLabel`</li>
       <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
-      <li>[`優先度`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11.2 以降)</li>
+      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11 以降)</li>
       <li>`ResourceQuota`</li>
       <li>`ServiceAccount`</li>
       <li>`StorageObjectInUseProtection`</li>
+      <li>`TaintNodesByCondition` (Kubernetes 1.12 以降)</li>
       <li>`ValidatingAdmissionWebhook`</li></ul></br>
       [独自のアドミッション・コントローラーをクラスターにインストール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) したり、{{site.data.keyword.containerlong_notm}} に用意されているオプションのアドミッション・コントローラーから選択したりすることもできます。 <ul><li><strong>[Container Image Security Enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce):</strong> このアドミッション・コントローラーを使用すると、Vulnerability Advisor ポリシーをクラスター内で適用して、脆弱なイメージからのデプロイメントをブロックできます。</li></ul></br><p class="note">手動でインストールしたアドミッション・コントローラーが不要になった場合は、必ず、完全に削除してください。 アドミッション・コントローラーを完全に削除しておかないと、クラスターに対して実行する必要がある操作がすべてブロックされる可能性があります。</p></td>
     </tr>
@@ -131,10 +133,10 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 
 サービス・エンドポイントにより、ワーカー・ノードとクラスター・ユーザーがクラスター・マスターにアクセスできる方法が決まります。
 * パブリック・サービス・エンドポイントのみ: パブリック・ネットワーク経由のクラスター・マスターとワーカー・ノードの間のセキュア OpenVPN 接続が確立されます。 マスターはクラスター・ユーザーにパブリックにアクセスできます。
-* パブリック・サービス・エンドポイントとプライベート・サービス・エンドポイント: プライベート・サービス・エンドポイントを通してプライベート・ネットワーク経由のクラスター・マスターとワーカー・ノードの間の通信が確立されます。 クラスターのパブリック・サービス・エンドポイントを有効にしても、Kubernetes マスターからワーカー・ノードへの通信はプライベート・ネットワーク経由で行われます。 パブリック・サービス・エンドポイントは、インターネット経由で Kubernetes マスターに安全にアクセスするために使用されます。例えば、許可されたクラスター・ユーザーが `kubectl` コマンドを実行できるようになります。
+* パブリック・サービス・エンドポイントとプライベート・サービス・エンドポイント: 通信は、プライベート・サービス・エンドポイントを介するプライベート・ネットワークと、パブリック・サービス・エンドポイントを介するパブリック・ネットワークの両方を経由して確立されます。 ワーカーからマスターへのトラフィックをパブリック・エンドポイントとプライベート・エンドポイントに半分ずつルーティングすると、マスターからワーカーへの通信が、パブリック・ネットワークまたはプライベート・ネットワークの可能性のある障害から保護されます。 許可されたクラスター・ユーザーは、{{site.data.keyword.Bluemix_notm}} プライベート・ネットワークの中で作業している場合、または VPN 接続経由でプライベート・ネットワークに接続している場合に、プライベート・サービス・エンドポイントを介して、プライベートにマスターにアクセスできます。 そうでない場合、許可されたクラスター・ユーザーは、パブリック・サービス・エンドポイントを介してパブリックからマスターにアクセスできます。
 * プライベート・サービス・エンドポイントのみ: プライベート・ネットワーク経由のマスターとワーカー・ノードの間の通信が確立されます。 クラスター・ユーザーがマスターにアクセスするには、{{site.data.keyword.Bluemix_notm}} プライベート・ネットワークの中で作業しているか、VPN 接続経由でプライベート・ネットワークに接続している必要があります。
 
-サービス・エンドポイントの詳細については、[ワーカー・ノードと Kubernetes マスター間の通信の計画](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)を参照してください。
+サービス・エンドポイントについて詳しくは、[ワーカーとマスターおよびユーザーとマスターの間の通信](/docs/containers?topic=containers-plan_clusters#workeruser-master)を参照してください。
 
 <br />
 
@@ -150,7 +152,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 
 標準クラスター内のワーカー・ノードは、ユーザーの {{site.data.keyword.Bluemix_notm}} パブリック・アカウントまたは専用アカウントに関連付けられているIBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 ワーカー・ノードはユーザー・アカウントに専用のものです。このためユーザーは、ワーカー・ノードの OS および {{site.data.keyword.containerlong_notm}} コンポーネントに最新のセキュリティー更新とパッチが適用されるように、ワーカー・ノードに対するタイムリーな更新を要求する責任があります。
 
-`ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)を定期的 (毎月など) に使用して、更新とセキュリティー・パッチをオペレーティング・システムに導入し、Kubernetes バージョンを更新してください。 更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールまたは CLI (`ibmcloud ks clusters` コマンドや `ibmcloud ks workers --cluster <cluster_name>` コマンドなど) でマスターやワーカー・ノードの情報を表示したときに通知されます。 最新のセキュリティー・パッチが含まれる完全なワーカー・ノードのイメージとして、ワーカー・ノードの更新が IBM により提供されています。 更新を適用するには、ワーカー・ノードのイメージを再作成し、新しいイメージを使ってワーカー・ノードを再ロードする必要があります。 ワーカー・ノードの再ロード時に、root ユーザーの鍵は自動的に交替されます。
+`ibmcloud ks worker-update` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)を定期的 (毎月など) に使用して、更新とセキュリティー・パッチをオペレーティング・システムに導入し、Kubernetes バージョンを更新してください。 更新プログラムが利用可能になると、{{site.data.keyword.Bluemix_notm}} コンソールまたは CLI (`ibmcloud ks clusters` コマンドや `ibmcloud ks workers --cluster <cluster_name>` コマンドなど) でマスターやワーカー・ノードの情報を表示したときに通知されます。 最新のセキュリティー・パッチが含まれる完全なワーカー・ノードのイメージとして、ワーカー・ノードの更新が IBM により提供されています。 更新を適用するには、ワーカー・ノードのイメージを再作成し、新しいイメージを使ってワーカー・ノードを再ロードする必要があります。 ワーカー・ノードの再ロード時に、root ユーザーの鍵は自動的に交替されます。
 {: important}
 
 **ワーカー・ノードのセットアップはどのようなものですか?**</br>
@@ -175,7 +177,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
     </tr>
     <tr>
   <td>コンピュートの分離</td>
-  <td>ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。 標準クラスターを作成するときには、ワーカー・ノードを[物理マシン (ベア・メタル) としてプロビジョンするか、共有または専用の物理ハードウェア上で実行される仮想マシンとしてプロビジョンするか](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)を選択できます。 フリー・クラスターのワーカー・ノードは、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の仮想共有ノードとして自動的にプロビジョンされます。</td>
+  <td>ワーカー・ノードは特定のクラスターの専用であり、他のクラスターのワークロードをホストすることはありません。 標準クラスターを作成するときには、ワーカー・ノードを[物理マシン (ベア・メタル) としてプロビジョンするか、共有または専用の物理ハードウェア上で実行される仮想マシンとしてプロビジョンするか](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を選択できます。 フリー・クラスターのワーカー・ノードは、IBM が所有する IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の仮想共有ノードとして自動的にプロビジョンされます。</td>
 </tr>
 <tr>
 <td>ベア・メタルをデプロイするオプション</td>
@@ -183,7 +185,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 </tr>
 <tr>
   <td id="trusted_compute">トラステッド・コンピューティングのオプション</td>
-    <td>トラステッド・コンピューティングをサポートするベア・メタルにクラスターをデプロイした場合は、[トラストを有効にする](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)ことができます。 トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。 したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。 トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。 ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。<p>ハードウェアはトラストのルートに位置し、TPM を使用して測定値を送信します。 TPM は、このプロセス全体で測定データの伝送を保護するために使用する暗号鍵を生成します。 トラスト・エージェントは、始動プロセスの中で (TPM ハードウェアと対話する BIOS ファームウェアから、ブート・ローダーや OS カーネルまでを含む) 各コンポーネントの測定値をトラスト・サーバーに渡します。 その後、トラスト・エージェントはそれらの測定値をトラスト・サーバーで予想された値と比較して、始動が有効なものであったかどうかを確認します。 トラステッド・コンピューティングのプロセスでは、アプリケーションなどのワーカー・ノード内の他のポッドはモニターされません。</p><p>例えば、不正なユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更した場合、トラスト・エージェントは、その変更を検出し、そのノードを信頼できないものとしてマークします。トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
+    <td>トラステッド・コンピューティングをサポートするベア・メタルにクラスターをデプロイした場合は、[トラストを有効にする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)ことができます。 トラステッド・コンピューティングをサポートするクラスター内の各ベア・メタル・ワーカー・ノード (クラスターに将来追加するノードも含む) の Trusted Platform Module (TPM) チップが有効になります。 したがって、トラストを有効にした後に、クラスターのトラストを無効にすることはできません。 トラスト・サーバーがマスター・ノードにデプロイされ、トラスト・エージェントがワーカー・ノードにポッドとしてデプロイされます。 ワーカー・ノードが始動すると、トラスト・エージェント・ポッドがプロセスの各ステージをモニターします。<p>ハードウェアはトラストのルートに位置し、TPM を使用して測定値を送信します。 TPM は、このプロセス全体で測定データの伝送を保護するために使用する暗号鍵を生成します。 トラスト・エージェントは、始動プロセスの中で (TPM ハードウェアと対話する BIOS ファームウェアから、ブート・ローダーや OS カーネルまでを含む) 各コンポーネントの測定値をトラスト・サーバーに渡します。 その後、トラスト・エージェントはそれらの測定値をトラスト・サーバーで予想された値と比較して、始動が有効なものであったかどうかを確認します。 トラステッド・コンピューティングのプロセスでは、アプリケーションなどのワーカー・ノード内の他のポッドはモニターされません。</p><p>例えば、不正なユーザーがシステムにアクセスし、データを収集するためのロジックを追加して OS カーネルを変更した場合、トラスト・エージェントは、その変更を検出し、そのノードを信頼できないものとしてマークします。トラステッド・コンピューティングを使用すると、ワーカー・ノードが改ざんされていないことを検証できます。</p>
     <p class="note">トラステッド・コンピューティングは、選ばれたベア・メタル・マシン・タイプでのみ使用できます。 例えば、`mgXc` GPU フレーバーではトラステッド・コンピューティングはサポートされません。</p>
     <p><img src="images/trusted_compute.png" alt="ベア・メタル・クラスターのトラステッド・コンピューティング" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
@@ -221,7 +223,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 **ネットワーク・セグメンテーションとは何ですか? どうすればクラスターにセットアップできますか?** </br>
 ネットワーク・セグメンテーションとは、1 つのネットワークを複数のサブネットワークに分割する方式を表すものです。 組織内の特定のグループからアクセスできるように、アプリと関連データをグループ化できます。 あるサブネットワーク内で実行されるアプリは、別のサブネットワーク内のアプリを認識することも、アクセスすることもできません。 ネットワーク・セグメンテーションは、内部関係者やサード・パーティー製ソフトウェアに提供されているアクセスも制限するので、さまざまな悪意のあるアクティビティーを制限できます。   
 
-{{site.data.keyword.containerlong_notm}} には、ワーカー・ノードのために高品質のネットワーク・パフォーマンスとネットワークの分離を実現する IBM Cloud インフラストラクチャー (SoftLayer) VLAN が用意されています。 VLAN では、ワーカー・ノードとポッドをまとめたグループが同じ物理ワイヤーに接続されているかのように構成されます。 VLAN は各 {{site.data.keyword.Bluemix_notm}} アカウントに専用のものであり、複数の IBM カスタマーの間で共有されることはありません。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+{{site.data.keyword.containerlong_notm}} には、ワーカー・ノードのために高品質のネットワーク・パフォーマンスとネットワークの分離を実現する IBM Cloud インフラストラクチャー (SoftLayer) VLAN が用意されています。 VLAN では、ワーカー・ノードとポッドをまとめたグループが同じ物理ワイヤーに接続されているかのように構成されます。 VLAN は各 {{site.data.keyword.Bluemix_notm}} アカウントに専用のものであり、複数の IBM カスタマーの間で共有されることはありません。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 自分のアカウントに対して VRF または VLAN スパンニングを有効にすると、クラスターに関するネットワーク・セグメンテーションが削除されます。
 
@@ -256,7 +258,7 @@ Kubernetes API サーバーと etcd データ・ストアを保護するには�
 NLB サービスおよび Ingress ALB サービスを使用する場合は、[Calico および Kubernetes ポリシー](/docs/containers?topic=containers-network_policies)を使用して、クラスターの発信/着信ネットワーク・トラフィックを管理してください。 IBM Cloud インフラストラクチャー (SoftLayer) の[セキュリティー・グループ](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups)は使用しないでください。 IBM Cloud インフラストラクチャー (SoftLayer) のセキュリティー・グループは、単一仮想サーバーのネットワーク・インターフェースに適用され、ハイパーバイザー・レベルでトラフィックをフィルタリングします。 しかし、セキュリティー・グループは、{{site.data.keyword.containerlong_notm}} が NLB の IP アドレスの管理に使用する VRRP プロトコルをサポートしていません。 NLB の IP を管理する VRRP プロトコルが存在しない場合、NLB サービスおよび Ingress ALB サービスは正しく機能しません。 NLB サービスや Ingress ALB サービスを使用せずに、ワーカー・ノードをパブリックから完全に分離する場合は、セキュリティー・グループを使用できます。
 
 **クラスター内のソース IP はどのような方法で保護できますか?** </br>
-バージョン 2.0 の NLB では、クライアント要求のソース IP アドレスはデフォルトで保持されます。 ただし、バージョン 1.0 の NLB およびすべての Ingress ALB では、クライアント要求のソース IP アドレスが保持されません。 アプリへのクライアント要求がクラスターに送信されると、その要求は、NLB 1.0 または ALB のポッドに転送されます。ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、NLB または ALB は異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 パッケージのソース IP アドレスは、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。
+バージョン 2.0 の NLB では、クライアント要求のソース IP アドレスはデフォルトで保持されます。 ただし、バージョン 1.0 の NLB およびすべての Ingress ALB では、クライアント要求のソース IP アドレスが保持されません。 アプリへのクライアント要求がクラスターに送信されると、その要求は、NLB 1.0 または ALB のポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、NLB または ALB は異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 パッケージのソース IP アドレスは、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。
 
 クライアントの IP を保持すると、例えば、アプリ・サーバーがセキュリティーやアクセス制御ポリシーを適用する必要がある場合などに役に立ちます。 クライアント要求の元のソース IP アドレスを保持するには、[バージョン 1.0 の NLB](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) または [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) のソース IP 保持を有効化します。
 
@@ -280,7 +282,7 @@ Ingress サービスは、トラフィック・フロー内の次の 2 つのポ
 - [NFS ファイル・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
 - [ブロック・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 
-[{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) などの {{site.data.keyword.Bluemix_notm}} データベース・サービスを使用して、データをクラスター外の管理対象データベースに保存することもできます。 クラウド・データベース・サービスを使用して保管されたデータには、すべてのクラスター、ゾーン、領域からアクセスできます。 IBM Cloudant NoSQL DB のセキュリティー関連情報については、[サービス資料](/docs/services/Cloudant/offerings?topic=cloudant-security#security)を参照してください。
+[{{site.data.keyword.cloudant}} NoSQL DB](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) などの {{site.data.keyword.Bluemix_notm}} データベース・サービスを使用して、データをクラスター外の管理対象データベースに保存することもできます。 クラウド・データベース・サービスを使用して保管されたデータには、すべてのクラスター、ゾーン、地域からアクセスできます。 IBM Cloudant NoSQL DB のセキュリティー関連情報については、[サービス資料](/docs/services/Cloudant/offerings?topic=cloudant-security#security)を参照してください。
 
 <br />
 

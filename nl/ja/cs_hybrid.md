@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-12"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,9 +21,11 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # ハイブリッド・クラウド
@@ -32,7 +34,12 @@ subcollection: containers
 {{site.data.keyword.Bluemix}} Private アカウントがある場合は、そのアカウントを使用して {{site.data.keyword.containerlong}} を含む上質な {{site.data.keyword.Bluemix_notm}} サービスをご利用いただけます。 詳しくは、[{{site.data.keyword.Bluemix_notm}} Private および IBM Public Cloud![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") でのハイブリッド・エクスペリエンス](http://ibm.biz/hybridJune2018)に関するブログを参照してください。
 {: shortdesc}
 
-ここまでに、[{{site.data.keyword.Bluemix_notm}}オファリング](/docs/containers?topic=containers-cs_ov#differentiation)について理解して、[クラウド上でどのようなワークロードを実行するか](/docs/containers?topic=containers-strategy#cloud_workloads)に関する Kubernetes 戦略を策定しました。すぐにでも、[パブリック・クラウドとプライベート・クラウドを接続](#hybrid_vpn)したり、[パブリック・コンテナーにプライベート・パッケージを再利用](#hybrid_ppa_importer)したりすることができます。
+ここまでに、[{{site.data.keyword.Bluemix_notm}}オファリング](/docs/containers?topic=containers-cs_ov#differentiation)について理解して、[クラウド上でどのようなワークロードを実行するか](/docs/containers?topic=containers-strategy#cloud_workloads)に関する Kubernetes 戦略を策定しました。 これで、strongSwan VPN サービスまたは {{site.data.keyword.BluDirectLink}} を使用して、パブリック・クラウドとプライベート・クラウドを接続できるようになります。
+
+* [strongSwan VPN サービス](#hybrid_vpn)は、業界標準の Internet Protocol Security (IPSec) プロトコル・スイートに基づくインターネットを介したセキュアなエンドツーエンドの通信チャネルを使用して、Kubernetes クラスターをオンプレミス・ネットワークと安全に接続します。
+* [{{site.data.keyword.Bluemix_notm}} Direct Link](#hybrid_dl) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間に直接のプライベート接続を作成できます。
+
+パブリック・クラウドとプライベート・クラウドを接続した後、[プライベート・パッケージをパブリック・コンテナーに再利用できます](#hybrid_ppa_importer)。
 
 ## strongSwan VPN でのパブリック・クラウドとプライベート・クラウドの接続
 {: #hybrid_vpn}
@@ -41,8 +48,7 @@ subcollection: containers
 {: shortdesc}
 
 1.  {{site.data.keyword.containerlong}} がある標準クラスターを {{site.data.keyword.Bluemix_notm}} Public に作成するか、または既存のクラスターを使用します。 クラスターを作成するには、以下のいずれかのオプションを選択します。
-    - [コンソールから標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
-    - [CLI から標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。
+    - [コンソールまたは CLI から、標準クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
     - [クラウド自動化マネージャー (CAM) を使用して、事前定義テンプレート![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html) を使ってクラスターを作成します。 CAM を使用してクラスターをデプロイすると、Helm tiller が自動的にインストールされます。
 
 2.  {{site.data.keyword.containerlong_notm}} クラスターで、[strongSwan IPSec VPN サービスをセットアップするための指示に従います](/docs/containers?topic=containers-vpn#vpn_configure)。
@@ -100,6 +106,27 @@ subcollection: containers
 *   複数のクラウド Kubernetes クラスターを管理するには ({{site.data.keyword.Bluemix_notm}} Public と {{site.data.keyword.Bluemix_notm}} Private にまたがる場合など)、[IBM Multicloud Manager ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html) を確認してください。
 
 
+## {{site.data.keyword.Bluemix_notm}} Direct Link を使用したパブリック・クラウドとプライベート・クラウドの接続
+{: #hybrid_dl}
+
+[{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間に直接のプライベート接続を作成できます。
+{: shortdesc}
+
+パブリック・クラウドとオンプレミス {{site.data.keyword.Bluemix}} Private インスタンスを接続するには、以下の 4 つのオファリングのいずれかを使用できます。
+* {{site.data.keyword.Bluemix_notm}} Direct Link Connect
+* {{site.data.keyword.Bluemix_notm}} Direct Link Exchange
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
+
+{{site.data.keyword.Bluemix_notm}} Direct Link オファリングを選択し、{{site.data.keyword.Bluemix_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.Bluemix_notm}} Direct Link の資料の [{{site.data.keyword.Bluemix_notm}}Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。
+
+**次の作業**</br>
+* [ライセンス交付を受けたソフトウェア・イメージをパブリック・クラスター内で実行します](#hybrid_ppa_importer)。
+* 複数のクラウド Kubernetes クラスターを管理するには ({{site.data.keyword.Bluemix_notm}} Public と {{site.data.keyword.Bluemix_notm}} Private にまたがる場合など)、[IBM Multicloud Manager ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html) を確認してください。
+
+<br />
+
+
 ## パブリック Kubernetes コンテナーでの {{site.data.keyword.Bluemix_notm}} Private イメージの実行
 {: #hybrid_ppa_importer}
 
@@ -114,7 +141,7 @@ subcollection: containers
 | --- | --- | --- |
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
-| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM MQ Advanced | 9.1.0.0, 9.1.1,0, 9.1.2.0 | - |
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | Docker Hub イメージ |
 {: caption="表。 {{site.data.keyword.Bluemix_notm}} Public で使用可能な {{site.data.keyword.Bluemix_notm}} Private 製品。" caption-side="top"}
 

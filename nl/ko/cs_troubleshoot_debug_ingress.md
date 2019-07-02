@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Ingress 디버깅
@@ -44,11 +44,11 @@ subcollection: containers
 
 ## 1단계: {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구로 Ingress 테스트 실행
 
-문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 Ingress 테스트를 실행하여 관련 Ingress 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)를 설치하십시오.
+문제점을 해결하는 중에 {{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구를 사용하여 Ingress 테스트를 실행하여 관련 Ingress 정보를 클러스터에서 수집할 수 있습니다. 디버그 도구를 사용하려면 다음과 같이 [`ibmcloud-iks-debug` Helm 차트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug)를 설치하십시오.
 {: shortdesc}
 
 
-1. [클러스터에 Helm을 설정하고 Tiller의 서비스 계정을 작성한 후 Helm 인스턴스에 `ibm` 저장소를 추가](/docs/containers?topic=containers-integrations#helm)하십시오.
+1. [클러스터에 Helm을 설정하고 Tiller의 서비스 계정을 작성한 후 Helm 인스턴스에 `ibm` 저장소를 추가](/docs/containers?topic=containers-helm)하십시오.
 
 2. 클러스터에 Helm 차트를 설치하십시오.
   ```
@@ -164,15 +164,15 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
     `dal10` 및 `dal13`에서 작업자 노드의 다중 구역 클러스터에 대한 예제 출력:
 
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone    Build
-    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
-    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
+    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:411/ingress-auth:315   2294021
+    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
+    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238  dal13   ingress:411/ingress-auth:315   2294019
+    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222   dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
 
-    * 공용 ALB에 IP 주소가 없는 경우에는 [Ingress ALB가 구역에 배치되지 않음](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)을 참조하십시오.
+    * 공용 ALB에 IP 주소가 없는 경우에는 [Ingress ALB가 구역에 배치되지 않음](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)을 참조하십시오.
 
 2. ALB IP의 상태를 확인하십시오.
 
@@ -185,7 +185,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
         * CLI가 제한시간 초과를 리턴하고 작업자 노드를 보호하는 사용자 정의 방화벽이 있는 경우, [방화벽](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)에서 ICMP가 허용되는지 확인하십시오.
         * Ping 실행을 차단하는 방화벽이 없으며 Ping 실행이 여전히 제한시간을 초과하는 경우에는 [ALB 팟(Pod)의 상태를 확인](#check_pods)하십시오.
 
-    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](/docs/containers?topic=containers-ingress#planning)를 참조하십시오. MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용할 수 있습니다. 클러스터가 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 계속해서 사용하는 경우 [단일 구역 클러스터를 다중 구역으로 변환](/docs/containers?topic=containers-clusters#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
+    * 다중 구역 클러스터에만 해당: MZLB 상태 검사를 사용하여 ALB IP의 상태를 판별할 수 있습니다. MZLB에 대한 자세한 정보는 [다중 구역 로드 밸런서(MZLB)](/docs/containers?topic=containers-ingress#planning)를 참조하십시오. MZLB 상태 검사는 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 형식의 새 Ingress 하위 도메인이 있는 클러스터에만 사용할 수 있습니다. 클러스터가 `<cluster_name>.<region>.containers.mybluemix.net`의 이전 형식을 계속해서 사용하는 경우 [단일 구역 클러스터를 다중 구역으로 변환](/docs/containers?topic=containers-add_workers#add_zone)하십시오. 클러스터에 새 형식의 하위 도메인이 지정되지만, 이전 하위 도메인 형식이 계속 사용될 수도 있습니다. 또는 새 하위 도메인 형식이 자동으로 지정된 새 클러스터를 주문할 수 있습니다.
 
     다음의 HTTP cURL 명령에서는 ALB IP에 대해 `healthy` 또는 `unhealthy` 상태를 리턴하도록 {{site.data.keyword.containerlong_notm}}에 의해 구성된 `albhealth` 호스트를 사용합니다.
         ```
@@ -291,8 +291,8 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
 
     예를 들어, 접속 불가능한 IP `169.62.196.238`은 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`에 속합니다.
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone   Build
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+    public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:411/ingress-auth:315   2294021
     ```
     {: screen}
 
@@ -438,7 +438,7 @@ Ingress 하위 도메인과 ALB의 공인 IP 주소에 대한 가용성을 확�
     -   {{site.data.keyword.containerlong_notm}}로 클러스터 또는 앱을 개발하거나 배치하는 데 대한 기술적 질문이 있으면 [Stack Overflow![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)에 질문을 게시하고 질문에 `ibm-cloud`, `kubernetes` 및 `containers` 태그를 지정하십시오.
     -   서비스 및 시작하기 지시사항에 대한 질문이 있으면 [IBM Developer Answers ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 포럼을 사용하십시오. `ibm-cloud` 및 `containers` 태그를 포함하십시오.
     포럼 사용에 대한 세부사항은 [도움 받기](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)를 참조하십시오.
--   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)를 참조하십시오.
-문제를 보고할 때 클러스터 ID를 포함시키십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
+-   케이스를 열어 IBM 지원 센터에 문의하십시오. IBM 지원 케이스 열기 또는 지원 레벨 및 케이스 심각도에 대해 알아보려면 [지원 문의](/docs/get-support?topic=get-support-getting-customer-support)를 참조하십시오.
+문제를 보고할 때 클러스터 ID를 포함하십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오. 또한 [{{site.data.keyword.containerlong_notm}} 진단 및 디버그 도구](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)를 사용하여 IBM 지원 센터와 공유할 관련 정보를 클러스터에서 수집하고 내보낼 수도 있습니다.
 {: tip}
 

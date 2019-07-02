@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,16 +21,20 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # IBM Cloud Object Storage에 데이터 저장
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)는 {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 Kubernetes 클러스터에서 실행되는 앱에 마운트할 수 있는 지속적 고가용성 스토리지 입니다. 플러그인은 Cloud {{site.data.keyword.cos_short}} 버킷을 클러스터의 팟(pod)에 연결하는 Kubernetes Flex-Volume 플러그인입니다. {{site.data.keyword.cos_full_notm}}에 저장된 정보는 전환하고 저장하는 상태에서 암호화되어 여러 지리적 위치에 분산되며 REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다.
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)는 {{site.data.keyword.cos_full_notm}} 플러그인을 사용하여 Kubernetes 클러스터에서 실행되는 앱에 마운트할 수 있는 지속적 고가용성 스토리지 입니다. 플러그인은 Cloud {{site.data.keyword.cos_short}} 버킷을 클러스터의 팟(pod)에 연결하는 Kubernetes Flex-Volume 플러그인입니다. {{site.data.keyword.cos_full_notm}}에 저장된 정보는 전환하고 저장하는 상태에서 암호화되어 여러 지리적 위치에 분산되며 REST API를 사용하여 HTTP를 통해 액세스할 수 있습니다.
+{: shortdesc}
 
 {{site.data.keyword.cos_full_notm}}에 연결하려면 클러스터에는 {{site.data.keyword.Bluemix_notm}} Identity and Access Management로 인증하기 위한 공용 네트워크 액세스 권한이 필요합니다. 개인 전용 클러스터가 있는 경우 플러그인 버전 `1.0.3` 이상을 설치하고 HMAC 인증용 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 설정하면 {{site.data.keyword.cos_full_notm}} 개인 서비스 엔드포인트와 통신할 수 있습니다. HMAC 인증을 사용하지 않으려는 경우, 사설 클러스터에서 플러그인이 제대로 작동하려면 포트 443의 모든 아웃바운드 네트워크 트래픽을 열어야 합니다.
 {: important}
+
+버전 1.0.5에서는 {{site.data.keyword.cos_full_notm}} 플러그인의 이름이 `ibmcloud-object-storage-plugin`에서 `ibm-object-storage-plugin`으로 변경됩니다. 플러그인의 새 버전을 설치하려면 [이전 Helm 차트 설치를 설치 제거](#remove_cos_plugin)한 후 [새 {{site.data.keyword.cos_full_notm}} 플러그인 버전에서 Helm 차트를 다시 설치](#install_cos)하십시오.
+{: note}
 
 ## 오브젝트 스토리지 서비스 인스턴스 작성
 {: #create_cos_service}
@@ -66,7 +70,7 @@ subcollection: containers
 
 다음 단계를 수행하여 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 인증 정보에 대한 Kubernetes 시크릿을 작성하십시오. 로컬 Cloud Object Storage 서버 또는 다른 s3 API 엔드포인트를 사용하려는 경우 적절한 인증 정보를 사용하여 Kubernetes 시크릿을 작성하십시오.
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보](#service_credentials)의 **apikey** 또는 **access_key_id** 및 **secret_access_key**를 검색하십시오.
 
@@ -75,15 +79,15 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-   
-3. 서비스 인증 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오. 시크릿을 작성하는 경우 모든 값이 base64로 자동 인코딩됩니다. 
-   
+
+3. 서비스 인증 정보를 저장하기 위한 Kubernetes 시크릿을 작성하십시오. 시크릿을 작성하는 경우 모든 값이 base64로 자동 인코딩됩니다.
+
    **API 키 사용의 예:**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
    ```
    {: pre}
-   
+
    **HMAC 인증의 예:**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
@@ -98,12 +102,11 @@ subcollection: containers
    <tbody>
    <tr>
    <td><code>api-key</code></td>
-   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 API 키를 입력하십시오. HMAC 인증을 사용하려면 <code>access-key</code> 및 <code>secret-key</code>를 대신 지정하십시오.
-</td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 API 키를 입력하십시오. HMAC 인증을 사용하려면 <code>access-key</code> 및 <code>secret-key</code>를 대신 지정하십시오.  </td>
    </tr>
    <tr>
    <td><code>access-key</code></td>
-   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 액세스 키 ID를 입력하십시오. OAuth2 인증을 사용하려면 <code>api-key</code>를 대신 지정하십시오.</td>
+   <td>이전에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보에서 검색한 액세스 키 ID를 입력하십시오. OAuth2 인증을 사용하려면 <code>api-key</code>를 대신 지정하십시오.  </td>
    </tr>
    <tr>
    <td><code>secret-key</code></td>
@@ -133,12 +136,12 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 {{site.data.keyword.cos_full_notm}} 플러그인의 업데이트 또는 제거 방법에 대한 지시사항을 찾으십니까? [플러그인 업데이트](#update_cos_plugin) 및 [플러그인 제거](#remove_cos_plugin)를 참조하십시오.
 {: tip}
 
-시작하기 전에: [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 작업자 노드가 부 버전에 대한 최신 패치를 적용하는지 확인하십시오.
    1. 작업자 노드의 현재 패치 버전을 나열하십시오.
       ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -146,7 +149,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -156,25 +159,20 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
    3. 작업자 노드를 다시 로드하여 최신 패치 버전을 적용하십시오. 작업자 노드를 다시 로드하기 전에 작업자 노드에서 실행 중인 팟(Pod)을 단계적으로 다시 스케줄하려면 [ibmcloud ks worker-reload 명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)의 지시사항을 따르십시오. 다시 로드하는 중에 작업자 노드 머신은 최신 이미지로 업데이트되며 [작업자 노드의 외부에 저장](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)되지 않은 경우 데이터가 삭제됨을 유념하십시오.
 
-2.  [지시사항에 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 시스템에 Helm 클라이언트를 설치하고 클러스터에 서비스 계정이 있는 Helm 서버(tiller)를 설치하십시오.
+2.  Helm 서버인 Tiller를 사용하거나 사용하지 않고 {{site.data.keyword.cos_full_notm}} 플러그인을 설치할지 여부를 선택하십시오. 그런 다음 [지시사항을 따라](/docs/containers?topic=containers-helm#public_helm_install) 로컬 머신에 Helm 클라이언트를 설치하고, 서비스 계정으로 클러스터에 Tiller를 설치하십시오(Tiller를 사용할 경우). 
 
-    Helm 서버 Tiller를 설치하려면 공용 Google Container Registry에 대한 공용 네트워크 연결이 필요합니다. 클러스터가 방화벽으로 보호되는 사설 클러스터 또는 개인 서비스 엔드포인트가 사용으로 설정된 클러스터와 같이 공용 네트워크에 액세스할 수 없는 경우, [Tiller 이미지를 로컬 시스템으로 가져와 이미지를 {{site.data.keyword.registryshort_notm}}의 네임스페이스에 푸시](/docs/containers?topic=containers-helm#private_local_tiller)하거나 [Tiller를 사용하지 않고 Helm 차트를 설치](/docs/containers?topic=containers-helm#private_install_without_tiller)할 수 있습니다.
-    {: note}
-
-3.  Tiller가 서비스 계정으로 설치되어 있는지 확인하십시오.
-
-    ```
-    kubectl get serviceaccount -n kube-system tiller
-    ```
-    {: pre}
-
-    출력 예:
-
-    ```
+3. Tiller를 사용하여 플러그인을 설치할 경우 Tiller가 서비스 계정으로 설치되어 있는지 확인하십시오.
+   ```
+   kubectl get serviceaccount -n kube-system tiller
+   ```
+   {: pre}
+   
+   출력 예:
+   ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 4. 클러스터에 {{site.data.keyword.Bluemix_notm}} Helm 저장소를 추가하십시오.
    ```
@@ -182,22 +180,22 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    ```
    {: pre}
 
-5. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+4. Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
    helm repo update
    ```
    {: pre}
 
-6. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.
+5. Helm 차트를 다운로드하고 현재 디렉토리에서 차트의 압축을 푸십시오.
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-7. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} Helm 플러그인 `ibmc`를 설치하십시오. 플러그인을 사용하면 클러스터 위치를 자동 검색하고 스토리지 클래스의 {{site.data.keyword.cos_full_notm}} 버킷에 대한 API 엔드포인트를 설정할 수 있습니다. Windows를 운영 체제로 사용하는 경우에는 다음 단계로 진행하십시오.
+7. OS X 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} Helm 플러그인 `ibmc`를 설치하십시오. 플러그인을 사용하면 클러스터 위치를 자동 검색하고 스토리지 클래스의 {{site.data.keyword.cos_full_notm}} 버킷에 대한 API 엔드포인트를 설정할 수 있습니다. Windows를 운영 체제로 사용하는 경우에는 다음 단계로 진행하십시오.
    1. Helm 플러그인을 설치하십시오.
       ```
-      helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
+      helm plugin install ./ibm-object-storage-plugin/helm-ibmc
       ```
       {: pre}
 
@@ -206,29 +204,40 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
       설치된 플러그인: ibmc
       ```
       {: screen}
+      
+      `Error: plugin already exists` 오류가 표시되면 `rm -rf ~/.helm/plugins/helm-ibmc`를 실행하여 `ibmc` Helm 플러그인을 제거하십시오.
+      {: tip}
 
    2. `ibmc` 플러그인이 성공적으로 설치되었는지 확인하십시오.
       ```
-   helm ibmc --help
+      helm ibmc --help
       ```
       {: pre}
 
       출력 예:
       ```
-         Install or upgrade Helm charts in IBM K8S Service
+      Install or upgrade Helm charts in IBM K8S Service(IKS) and IBM Cloud Private(ICP)
 
       Available Commands:
-       helm ibmc install [CHART][flags]              Install a Helm chart
-       helm ibmc upgrade [RELEASE][CHART] [flags]    Upgrades the release to a new version of the Helm chart
+         helm ibmc install [CHART][flags]                      Install a Helm chart
+         helm ibmc upgrade [RELEASE][CHART] [flags]            Upgrade the release to a new version of the Helm chart
+         helm ibmc template [CHART][flags] [--apply|--delete]  Install/uninstall a Helm chart without tiller
 
       Available Flags:
-    --verbos                      (Optional) Verbosity intensifies... ...
-       -f, --values valueFiles       (Optional) specify values in a YAML file (can specify multiple) (default [])
-       -h, --help                    (Optional) This text.
-       -u, --update                  (Optional) Update this plugin to the latest version
+         -h, --help                    (Optional) This text.
+         -u, --update                  (Optional) Update this plugin to the latest version
 
       Example Usage:
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+         With Tiller:
+             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+         Without Tiller:
+             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+
+      Note:
+         1. It is always recommended to install latest version of ibm-object-storage-plugin chart.
+         2. It is always recommended to have 'kubectl' client up-to-date.
       ```
       {: screen}
 
@@ -240,7 +249,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
    2. [Kubernetes 시크릿에 {{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 저장](#create_cos_secret)하십시오.
    3. `templates` 디렉토리로 이동하여 사용 가능한 파일을 나열하십시오.  
       ```
-      cd ibmcloud-object-storage-plugin/templates && ls
+      cd ibm-object-storage-plugin/templates && ls
       ```
       {: pre}
 
@@ -262,16 +271,32 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
 9. {{site.data.keyword.cos_full_notm}} 플러그인을 설치하십시오. 플러그인을 설치하면 사전 정의된 스토리지 클래스가 클러스터에 추가됩니다.
 
-   - **macOS 및 Linux의 경우:**
-     - 이전 단계를 건너뛴 경우에는 특정 Kubernetes secret에 대한 제한사항 없이 설치하십시오.
+   - **OS X 및 Linux의 경우:**
+     - 이전 단계를 건너뛴 경우에는 특정 Kubernetes 시크릿에 대한 제한사항 없이 설치하십시오.</br>
+       **Tiller 포함 안함**:
        ```
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       ```
+       {: pre}
+       
+       **Tiller 포함**:
+       ```
+       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
-     - 이전 단계를 완료한 경우에는 특정 Kubernetes secret에 대한 제한사항을 적용하여 설치하십시오.
+     - 이전 단계를 완료한 경우에는 특정 Kubernetes 시크릿에 대한 제한사항을 적용하여 설치하십시오.</br>
+       **Tiller 포함 안함**:
        ```
-       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+       cd ../..
+       helm ibmc template ./ibm-object-storage-plugin --apply 
+       ```
+       {: pre}
+       
+       **Tiller 포함**:
+       ```
+       cd ../..
+       helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -289,116 +314,117 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
         {: pre}
 
      3. Helm 차트를 설치하십시오.
-        - 이전 단계를 건너뛴 경우에는 특정 Kubernetes secret에 대한 제한사항 없이 설치하십시오.
+        - 이전 단계를 건너뛴 경우에는 특정 Kubernetes 시크릿에 대한 제한사항 없이 설치하십시오.</br>
+       **Tiller 포함 안함**:
+       ```
+          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
           ```
-          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          {: pre}
+          
+          **Tiller 포함**:
+       ```
+          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-        - 이전 단계를 완료한 경우에는 특정 Kubernetes secret에 대한 제한사항을 적용하여 설치하십시오.
+        - 이전 단계를 완료한 경우에는 특정 Kubernetes 시크릿에 대한 제한사항을 적용하여 설치하십시오.</br>
+       **Tiller 포함 안함**:
+       ```
+          cd ../..
+          helm ibmc template ./ibm-object-storage-plugin --apply 
           ```
-          helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          {: pre}
+          
+          **Tiller 포함**:
+       ```
+          cd ../..
+          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-   출력 예:
+
+   Tiller를 사용하지 않고 설치한 경우 출력 예:
    ```
-   Installing the Helm chart
-   DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
-   NAME:   mewing-duck
-   LAST DEPLOYED: Mon Jul 30 13:12:59 2018
-   NAMESPACE: default
-   STATUS: DEPLOYED
-
-   RESOURCES:
-   ==> v1/Pod(related)
-   NAME                                             READY  STATUS             RESTARTS  AGE
-   ibmcloud-object-storage-driver-hzqp9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-jtdb9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
-
-   ==> v1/StorageClass
-   NAME                                  PROVISIONER       AGE
-   ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-cross-region      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-regional          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-cross-region       ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-cross-region  ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-regional      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-regional           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-cross-region          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-regional              ibm.io/ibmc-s3fs  1s
-
-   ==> v1/ServiceAccount
-   NAME                            SECRETS  AGE
-   ibmcloud-object-storage-driver  1        1s
-   ibmcloud-object-storage-plugin  1        1s
-
-   ==> v1beta1/ClusterRole
-   NAME                                   AGE
-   ibmcloud-object-storage-secret-reader  1s
-   ibmcloud-object-storage-plugin         1s
-
-   ==> v1beta1/ClusterRoleBinding
-   NAME                                   AGE
-   ibmcloud-object-storage-plugin         1s
-   ibmcloud-object-storage-secret-reader  1s
-
-   ==> v1beta1/DaemonSet
-   NAME                            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
-   ibmcloud-object-storage-driver  3        3        0      3           0          <none>         1s
-
-   ==> v1beta1/Deployment
-   NAME                            DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-   ibmcloud-object-storage-plugin  1        1        1           0          1s
-
-   NOTES:
-   Thank you for installing: ibmcloud-object-storage-plugin.   Your release is named: mewing-duck
-
-   Please refer Chart README.md file for creating a sample PVC.
-   Please refer Chart RELEASE.md to see the release details/fixes.
+   Rendering the Helm chart templates...
+   DC: dal10
+   Chart: iks-charts/ibm-object-storage-plugin
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/tests/check-driver-install.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner.yaml
+   Installing the Helm chart...
+   serviceaccount/ibmcloud-object-storage-driver created
+   daemonset.apps/ibmcloud-object-storage-driver created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-regional created
+   serviceaccount/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   deployment.apps/ibmcloud-object-storage-plugin created
+   pod/ibmcloud-object-storage-driver-test created
    ```
    {: screen}
 
 10. 플러그인이 올바르게 설치되었는지 확인하십시오.
-   ```
-   kubectl get pod -n kube-system -o wide | grep object
-   ```
-   {: pre}
-
-   출력 예:
-   ```
-   ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
-   ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
-   ```
-   {: screen}
-
-   하나의 `ibmcloud-object-storage-plugin` 팟(Pod)과 하나 이상의 `ibmcloud-object-storage-driver` 팟(Pod)이 나타나면 설치가 완료된 것입니다. `ibmcloud-object-storage-driver` 팟(Pod)의 수는 클러스터의 작업자 노드 수와 동일합니다. 플러그인이 제대로 작동하려면 모든 팟(Pod)이 `Running` 상태여야 합니다. 팟(Pod)이 실패하는 경우에는 `kubectl describe pod -n kube-system <pod_name>`을 실행하여 실패의 근본 원인을 찾으십시오.
-
-11. 스토리지 클래스가 성공적으로 작성되었는지 확인하십시오.
     ```
-   kubectl get storageclass | grep s3
+    kubectl get pod -n kube-system -o wide | grep object
     ```
     {: pre}
 
     출력 예:
     ```
-       ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
-   ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
+    ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
+    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
+    ```
+    {: screen}
+
+    하나의 `ibmcloud-object-storage-plugin` 팟(Pod)과 하나 이상의 `ibmcloud-object-storage-driver` 팟(Pod)이 나타나면 설치가 완료된 것입니다. `ibmcloud-object-storage-driver` 팟(Pod)의 수는 클러스터의 작업자 노드 수와 동일합니다. 플러그인이 제대로 작동하려면 모든 팟(Pod)이 `Running` 상태여야 합니다. 팟(Pod)이 실패하는 경우에는 `kubectl describe pod -n kube-system <pod_name>`을 실행하여 실패의 근본 원인을 찾으십시오.
+
+11. 스토리지 클래스가 성공적으로 작성되었는지 확인하십시오.
+    ```
+    kubectl get storageclass | grep s3
+    ```
+    {: pre}
+
+    출력 예:
+    ```
+    ibmc-s3fs-cold-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-cold-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-cross-region            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-cross-region       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-perf-regional           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-flex-regional                ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-cross-region        ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-cross-region   ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-perf-regional       ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-standard-regional            ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-cross-region           ibm.io/ibmc-s3fs   8m
+    ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
     ```
     {: screen}
 
@@ -410,40 +436,70 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 기존 {{site.data.keyword.cos_full_notm}} 플러그인을 후속 버전으로 업그레이드할 수 있습니다.
 {: shortdesc}
 
-1. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
+1. 이전에 이름이 `ibmcloud-object-storage-plugin`인 Helm 차트의 버전 1.0.4 이하를 설치한 경우 클러스터에서 이 Helm 설치를 제거하십시오. 그런 다음 Helm 차트를 다시 설치하십시오. 
+   1. {{site.data.keyword.cos_full_notm}} Helm 차트의 이전 버전이 클러스터에 설치되어 있는지 확인하십시오.   
+      ```
+      helm ls | grep ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+      출력 예:
+      ```
+      ibmcloud-object-storage-plugin	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.4	default
+      ```
+      {: screen}
+
+   2. 이름이 `ibmcloud-object-storage-plugin`인 Helm 차트의 버전 1.0.4 이하를 설치한 경우 클러스터에서 Helm 차트를 제거하십시오. 이름이 `ibm-object-storage-plugin`인 Helm 차트의 버전 1.0.5 이상을 설치한 경우 2단계로 진행하십시오.
+      ```
+      helm delete --purge ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+   3. {{site.data.keyword.cos_full_notm}} 플러그인의 최신 버전을 설치하려면 [{{site.data.keyword.cos_full_notm}} 플러그인 설치](#install_cos)의 단계를 따르십시오.
+
+2. {{site.data.keyword.Bluemix_notm}} Helm 저장소를 업데이트하여 이 저장소에 있는 모든 Helm 차트의 최신 버전을 검색하십시오.
    ```
    helm repo update
    ```
    {: pre}
 
-2. macOS 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 최신 버전으로 업데이트하십시오.
+3. OS X 또는 Linux 배포판을 사용하는 경우에는 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 플러그인을 최신 버전으로 업데이트하십시오.
    ```
    helm ibmc --update
    ```
    {: pre}
 
-3. 최신 {{site.data.keyword.cos_full_notm}} Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
+4. 최신 {{site.data.keyword.cos_full_notm}} Helm 차트를 로컬 머신에 다운로드하고 패키지의 압축을 푼 후에 `release.md` 파일을 검토하여 최신 릴리스 정보를 찾으십시오.
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
-   ```
-
-4. Helm 차트의 설치 이름을 찾으십시오.
-   ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-   출력 예:
+5. 플러그인을 업그레이드하십시오.</br>
+   **Tiller 포함 안함**: 
    ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-5. {{site.data.keyword.cos_full_notm}} Helm 차트를 최신 버전으로 업그레이드하십시오.
-   ```   
-   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc template iks-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
+     
+   **Tiller 포함**: 
+   1. Helm 차트의 설치 이름을 찾으십시오.
+      ```
+      helm ls | grep ibm-object-storage-plugin
+      ```
+      {: pre}
+
+      출력 예:
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibm-object-storage-plugin-1.0.5	default
+      ```
+      {: screen}
+
+   2. {{site.data.keyword.cos_full_notm}} Helm 차트를 최신 버전으로 업그레이드하십시오.
+      ```   
+      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      ```
+      {: pre}
 
 6. `ibmcloud-object-storage-plugin`이 성공적으로 업그레이드되었는지 확인하십시오.  
    ```
@@ -471,7 +527,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 ### IBM Cloud Object Storage 플러그인 제거
 {: #remove_cos_plugin}
 
-클러스터에서 {{site.data.keyword.cos_full_notm}}의 프로비저닝과 사용을 원하지 않으면 Helm 차트를 설치 제거할 수 있습니다.
+클러스터에서 {{site.data.keyword.cos_full_notm}}의 프로비저닝과 사용을 원하지 않으면 플러그인을 설치 제거할 수 있습니다.
 {: shortdesc}
 
 이 플러그인을 제거해도 기존 PVC, PV 또는 데이터는 제거되지 않습니다. 플러그인을 제거할 때는 모든 관련 팟(Pod) 및 디먼 세트만 클러스터에서 제거됩니다. {{site.data.keyword.cos_full_notm}} API를 직접 사용하도록 앱을 구성하지 않는 한, 플러그인 제거 이후에 기존 PVC 및 PV를 사용하거나 클러스터의 새 {{site.data.keyword.cos_full_notm}}를 프로비저닝할 수 없습니다.
@@ -484,25 +540,33 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
 플러그인을 제거하려면 다음을 수행하십시오.
 
-1. Helm 차트의 설치 이름을 찾으십시오.
-   ```
-   helm ls | grep ibmcloud-object-storage-plugin
-   ```
-   {: pre}
+1. 클러스터에서 플러그인을 제거하십시오.</br>
+   **Tiller 포함**: 
+   1. Helm 차트의 설치 이름을 찾으십시오.
+      ```
+      helm ls | grep object-storage-plugin
+      ```
+      {: pre}
 
-   출력 예:
-   ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
+      출력 예:
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+      ```
+      {: screen}
 
-2. Helm 차트를 제거하여 {{site.data.keyword.cos_full_notm}} 플러그인을 삭제하십시오.
-   ```
+   2. Helm 차트를 제거하여 {{site.data.keyword.cos_full_notm}} 플러그인을 삭제하십시오.
+      ```
    helm delete --purge <helm_chart_name>
+      ```
+      {: pre}
+
+   **Tiller 포함 안함**: 
+   ```
+   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
-3. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 제거되었는지 확인하십시오.
+2. {{site.data.keyword.cos_full_notm}} 팟(Pod)이 제거되었는지 확인하십시오.
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
@@ -510,7 +574,7 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
       CLI 출력에 팟(Pod)이 표시되지 않으면 팟(Pod) 제거가 성공한 것입니다.
 
-4. 스토리지 클래스가 제거되었는지 확인하십시오.
+3. 스토리지 클래스가 제거되었는지 확인하십시오.
    ```
    kubectl get storageclasses | grep s3
    ```
@@ -518,16 +582,16 @@ Helm 차트로 {{site.data.keyword.cos_full_notm}} 플러그인을 설치하여 
 
       CLI 출력에 스토리지 클래스가 표시되지 않으면 스토리지 클래스 제거가 성공한 것입니다.
 
-5. macOS 또는 Linux 배포판을 사용하는 경우에는 `ibmc` Helm 플러그인을 제거하십시오. Windows를 사용하는 경우에는 이 단계가 필요하지 않습니다.
+4. OS X 또는 Linux 배포판을 사용하는 경우에는 `ibmc` Helm 플러그인을 제거하십시오. Windows를 사용하는 경우에는 이 단계가 필요하지 않습니다.
    1. `ibmc` 플러그인을 제거하십시오.
       ```
-   rm -rf ~/.helm/plugins/helm-ibmc
+      rm -rf ~/.helm/plugins/helm-ibmc
       ```
       {: pre}
 
    2. `ibmc` 플러그인이 제거되었는지 확인하십시오.
       ```
-   helm plugin list
+      helm plugin list
       ```
       {: pre}
 
@@ -700,6 +764,7 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
        ibm.io/bucket: "<bucket_name>"
        ibm.io/object-path: "<bucket_subdirectory>"
        ibm.io/secret-name: "<secret_name>"
+       ibm.io/endpoint: "https://<s3fs_service_endpoint>"
    spec:
      accessModes:
        - ReadWriteOnce
@@ -745,6 +810,10 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
    <td>이전에 작성한 {{site.data.keyword.cos_full_notm}} 인증 정보를 보유하는 시크릿의 이름을 입력하십시오. </td>
    </tr>
    <tr>
+  <td><code>ibm.io/endpoint</code></td>
+  <td>클러스터와 다른 위치에 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스를 작성한 경우 사용할 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 사설 또는 공용 서비스 엔드포인트를 입력하십시오. 사용 가능한 서비스 엔드포인트의 개요는 [추가 엔드포인트 정보](/docs/services/cloud-object-storage?topic=cloud-object-storage-advanced-endpoints)를 참조하십시오. 기본적으로 <code>ibmc</code> Helm 플러그인은 자동으로 클러스터 위치를 검색하고 클러스터 위치와 일치하는 {{site.data.keyword.cos_full_notm}} 개인 서비스 엔드포인트를 사용하여 스토리지 클래스를 작성합니다. 클러스터가 메트로 도시 구역(예: `dal10`)에 위치한 경우 메트로 도시의 {{site.data.keyword.cos_full_notm}} 개인 서비스 엔드포인트(이 경우에서는 Dallas)가 사용됩니다. 스토리지 클래스의 서비스 엔드포인트가 서비스 인스턴스의 서비스 엔드포인트와 일치하는지 확인하려면 `kubectl describe storageclass <storageclassname>`을 실행하십시오. 개인 서비스 엔드포인트의 경우 `https://<s3fs_private_service_endpoint>`의 형식, 공용 서비스 엔드포인트의 경우 `http://<s3fs_public_service_endpoint>` 형식으로 서비스 엔드포인트를 입력해야 합니다. 스토리지 클래스의 서비스 엔드포인트가 {{site.data.keyword.cos_full_notm}} 서비스 인스턴스의 서비스 엔드포인트와 일치하는 경우 PVC YAML 파일에 <code>ibm.io/endpoint</code> 옵션을 포함하지 마십시오. </td>
+  </tr>
+   <tr>
    <td><code>resources.requests.storage</code></td>
    <td>{{site.data.keyword.cos_full_notm}} 버킷의 가상 크기(기가바이트)입니다. Kubernetes에서는 이 크기가 필요하지만, {{site.data.keyword.cos_full_notm}}에서는 무시됩니다. 원하는 크기를 입력할 수 있습니다. {{site.data.keyword.cos_full_notm}}에서 사용되는 실제 영역은 다를 수 있으며, [가격 테이블 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)을 기반으로 비용이 청구됩니다. </td>
    </tr>
@@ -763,7 +832,7 @@ PVC에서 선택하는 설정에 따라 다음 방법으로 {{site.data.keyword.
 
 3. PVC가 작성되고 PV에 바인딩되는지 확인하십시오.
    ```
-kubectl get pvc
+   kubectl get pvc
    ```
    {: pre}
 
@@ -774,7 +843,7 @@ kubectl get pvc
    ```
    {: screen}
 
-4. 선택사항: 비-루트 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) 확인하십시오.
+4. 선택사항: 루트가 아닌 사용자로 데이터에 액세스할 계획이거나 콘솔 또는 API를 사용하여 기존 {{site.data.keyword.cos_full_notm}} 버킷에 직접 파일을 추가한 경우에는 필요 시에 앱이 파일을 성공적으로 읽고 업데이트할 수 있도록 [파일에 올바른 권한이 지정되어 있는지](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access) 확인하십시오.
 
 4.  {: #cos_app_volume_mount}PV를 배치에 마운트하려면 구성 `.yaml` 파일을 작성하고 PV를 바인드하는 PVC를 지정하십시오.
 
@@ -838,7 +907,7 @@ kubectl get pvc
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>선택사항: Kubernetes 버전 1.12 이하를 실행하는 클러스터에서 비-루트 사용자로 앱을 실행하려면 동시에 배치 YAML에 `fsGroup`을 설정하지 않고 비-루트 사용자를 정의하여 팟(Pod)에 대한 [보안 컨텍스트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)를 지정하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며 성능에 영향을 줍니다. 보유한 파일의 수에 따라서는 권한 업데이트 때문에 팟(Pod)이 구동되어 <code>Running</code> 상태가 되지 못할 수 있습니다. </br></br>Kubernetes 버전 1.13 이상을 실행하고 {{site.data.keyword.Bluemix_notm}} Object Storage 플러그인 버전 1.0.4 이상을 실행하는 클러스터가 있는 경우 s3fs 마운트 지점의 소유자를 변경할 수 있습니다. 소유자를 변경하려면 `runAsUser` 및 `fsGroup`을 s3fs 마운트 지점을 소유할 동일한 비루트 사용자 ID로 설정하여 보안 컨텍스트를 지정하십시오. 두 값이 일치하지 않으면 마운트 지점은 자동으로 `root` 사용자가 소유합니다. </td>
+    <td>선택사항: Kubernetes 버전 1.12 이하를 실행하는 클러스터에서 루트가 아닌 사용자로 앱을 실행하려면 동시에 배치 YAML에 `fsGroup`을 설정하지 않고 루트가 아닌 사용자를 정의하여 팟(Pod)에 대한 [보안 컨텍스트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)를 지정하십시오. `fsGroup`을 설정하면 팟(Pod) 배치 시에 버킷의 모든 파일에 대한 그룹 권한을 업데이트하도록 {{site.data.keyword.cos_full_notm}} 플러그인이 트리거됩니다. 권한 업데이트는 쓰기 오퍼레이션이며 성능에 영향을 줍니다. 보유한 파일의 수에 따라서는 권한 업데이트 때문에 팟(Pod)이 구동되어 <code>Running</code> 상태가 되지 못할 수 있습니다. </br></br>Kubernetes 버전 1.13 이상을 실행하고 {{site.data.keyword.Bluemix_notm}} Object Storage 플러그인 버전 1.0.4 이상을 실행하는 클러스터가 있는 경우 s3fs 마운트 지점의 소유자를 변경할 수 있습니다. 소유자를 변경하려면 `runAsUser` 및 `fsGroup`을 s3fs 마운트 지점을 소유할 동일한 비루트 사용자 ID로 설정하여 보안 컨텍스트를 지정하십시오. 두 값이 일치하지 않으면 마운트 지점은 자동으로 `root` 사용자가 소유합니다.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -916,7 +985,7 @@ kubectl get pvc
 - [{{site.data.keyword.cos_full_notm}} 서비스 인증 정보를 저장할 시크릿을 작성](#create_cos_secret)하십시오.
 - [{{site.data.keyword.cos_full_notm}}의 구성을 결정](#configure_cos)하십시오.
 
-오브젝트 스토리지를 사용하는 Stateful 세트를 배치하려면 다음 작업을 수행하십시오.
+오브젝트 스토리지를 사용하는 Stateful 세트를 배치하려면 다음을 수행하십시오.
 
 1. Stateful 세트에 대한 구성 파일과 이 Stateful 세트를 노출하는 데 사용하는 서비스를 작성하십시오. 다음 예는 NGINX를 3개의 복제본을 포함하는 Stateful 세트(각 복제본이 별도의 버킷을 사용하거나 모든 복제본이 동일한 버킷을 공유)로 배치하는 방법을 보여줍니다.
 
@@ -947,7 +1016,7 @@ kubectl get pvc
        matchLabels:
          app: nginx-v01 # must match spec.template.metadata.labels in stateful set YAML and metadata.labels in service YAML
      serviceName: "nginx-v01"
-     replicas: 3 
+     replicas: 3
      template:
        metadata:
          labels:
@@ -1065,7 +1134,7 @@ kubectl get pvc
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">Stateful 세트 및 PVC에 포함시킬 모든 레이블을 입력하십시오. Stateful 세트의 <code>volumeClaimTemplates</code>에 포함시키는 레이블은 Kubernetes가 인식하지 않습니다. 대신 Stateful 세트 YAML의 <code>spec.selector.matchLabels</code> 및 <code>spec.template.metadata.labels</code> 섹션에서 이러한 레이블을 정의해야 합니다. 서비스의 로드 밸런싱에 모든 Stateful 세트 복제본이 포함되도록 하려면 서비스 YAML의 <code>spec.selector</code> 섹션에서 사용한 것과 동일한 레이블을 포함시키십시오. </td>
+    <td style="text-align:left">Stateful 세트 및 PVC에 포함시킬 모든 레이블을 입력하십시오. Stateful 세트의 <code>volumeClaimTemplates</code>에 포함하는 레이블은 Kubernetes가 인식하지 않습니다. 대신 Stateful 세트 YAML의 <code>spec.selector.matchLabels</code> 및 <code>spec.template.metadata.labels</code> 섹션에서 이러한 레이블을 정의해야 합니다. 서비스의 로드 밸런싱에 모든 Stateful 세트 복제본이 포함되도록 하려면 서비스 YAML의 <code>spec.selector</code> 섹션에서 사용한 것과 동일한 레이블을 포함하십시오. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>

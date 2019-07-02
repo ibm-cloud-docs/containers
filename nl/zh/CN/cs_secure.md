@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# {{site.data.keyword.containerlong_notm}}的安全性
+# {{site.data.keyword.containerlong_notm}} 的安全性
 {: #security}
 
 您可以使用 {{site.data.keyword.containerlong}} 中的内置安全功能来进行风险分析和安全保护。这些功能有助于保护 Kubernetes 集群基础架构和网络通信，隔离计算资源，以及确保基础架构组件和容器部署中的安全合规性。
@@ -108,18 +108,20 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
       <li>`DefaultTolerationSeconds`</li>
       <li>`DefaultStorageClass`</li>
       <li>`GenericAdmissionWebhook`</li>
-      <li>`Initializers`</li>
+      <li>`Initializers`（Kubernetes 1.13 或更低版本）</li>
       <li>`LimitRanger`</li>
       <li>`MutatingAdmissionWebhook`</li>
       <li>`NamespaceLifecycle`</li>
+      <li>`NodeRestriction`（Kubernetes 1.14 或更高版本）</li>
       <li>`PersistentVolumeLabel`</li>
       <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
-      <li>[`优先级`](/docs/containers?topic=containers-pod_priority#pod_priority)（Kubernetes 1.11.2 或更高版本）</li>
+      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority)（Kubernetes 1.11 或更高版本）</li>
       <li>`ResourceQuota`</li>
       <li>`ServiceAccount`</li>
       <li>`StorageObjectInUseProtection`</li>
+      <li>`TaintNodesByCondition`（Kubernetes 1.12 或更高版本）</li>
       <li>`ValidatingAdmissionWebhook`</li></ul></br>
-      您可以[在集群中安装自己的许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，也可以从 {{site.data.keyword.containerlong_notm}} 提供的可选许可控制器中进行选择：<ul><li><strong>[容器映像安全性强制执行器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)：</strong>使用此许可控制器可在集群中强制执行漏洞顾问程序策略，以阻止有漏洞的映像进入部署。</li></ul></br><p class="note">如果手动安装了许可控制器，但不想再使用这些控制器，请确保完全除去这些控制器。如果许可控制器未完全除去，可能会阻止您要在集群上执行的所有操作。</p></td>
+      您可以[在集群中安装自己的许可控制器 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks)，也可以从 {{site.data.keyword.containerlong_notm}} 提供的可选许可控制器中进行选择：<ul><li><strong>[容器映像安全性强制实施程序](/docs/services/Registry?topic=registry-security_enforce#security_enforce)：</strong>使用此许可控制器可在集群中强制执行漏洞顾问程序策略，以阻止有漏洞的映像进入部署。</li></ul></br><p class="note">如果手动安装了许可控制器，但不想再使用这些控制器，请确保完全除去这些控制器。如果许可控制器未完全除去，可能会阻止您要在集群上执行的所有操作。</p></td>
     </tr>
   </tbody>
 </table>
@@ -130,10 +132,10 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 
 服务端点确定工作程序节点和集群用户可以如何访问集群主节点。
 * 仅公共服务端点：在公用网络上建立集群主节点与工作程序节点之间的安全 OpenVPN 连接。集群用户可通过公共方式访问主节点。
-* 公共和专用服务端点：主节点与工作程序节点之间的通信通过专用服务端点在专用网络上建立。即使为集群启用了公共服务端点，Kubernetes 主节点与工作程序节点之间的通信也可保持在专用网络上进行。例如，公共服务端点用于通过因特网对 Kubernetes 主节点进行安全访问，以便授权集群用户可以运行 `kubectl` 命令。
-* 仅专用服务端点：在专用网络上建立主节点和工作程序节点之间的通信。集群用户必须位于 {{site.data.keyword.Bluemix_notm}} 专用网络中，或者通过 VPN 连接与专用网络连接才能访问主节点。
+* 公共和专用服务端点：通信通过专用服务端点在专用网络上建立，并通过公共服务端点在公用网络上建立。通过将工作程序到主节点的流量一半通过公共端点路由，一半通过专用端点路由，可保护主节点到工作程序的通信不受公共或专用网络潜在中断的影响。如果授权集群用户位于 {{site.data.keyword.Bluemix_notm}} 专用网络中或通过 VPN 连接与专用网络连接，那么主节点可通过专用服务端点供专用访问。否则，主节点可供授权集群用户通过公共服务端点公开访问。
+* 仅专用服务端点：在专用网络上建立主节点和工作程序节点之间的通信。集群用户必须位于 {{site.data.keyword.Bluemix_notm}} 专用网络中或通过 VPN 连接与专用网络连接，以访问主节点。
 
-有关服务端点的更多信息，请参阅[规划工作程序节点与 Kubernetes 主节点之间的通信](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master)。
+有关服务端点的更多信息，请参阅[工作程序与主节点的通信以及用户与主节点的通信](/docs/containers?topic=containers-plan_clusters#workeruser-master)。
 
 <br />
 
@@ -148,7 +150,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 
 标准集群中的工作程序节点将供应给与公共或专用 {{site.data.keyword.Bluemix_notm}} 帐户关联的 IBM Cloud Infrastructure (SoftLayer) 帐户。工作程序节点专用于您的帐户，您将负责请求及时更新工作程序节点，以确保工作程序节点操作系统和 {{site.data.keyword.containerlong_notm}} 组件应用最新的安全性更新和补丁。
 
-定期（例如，每月）使用 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)将更新和安全补丁部署到操作系统，并更新 Kubernetes 版本。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters` 或 `ibmcloud ks workers --cluster <cluster_name>` 命令），会收到相应通知。工作程序节点更新由 IBM 以包含最新安全补丁的完整工作程序节点映像形式提供。要应用更新，必须使用新映像重新创建工作程序节点的映像并重新装入工作程序节点。重新装入工作程序节点时，会自动轮换 root 用户的密钥。
+定期（例如，每月）使用 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)将更新和安全补丁部署到操作系统，并更新 Kubernetes 版本。更新可用时，您在 {{site.data.keyword.Bluemix_notm}} 控制台或 CLI 中查看有关主节点和工作程序节点的信息时（例如，使用 `ibmcloud ks clusters` 或 `ibmcloud ks workers --cluster <cluster_name>` 命令），会收到相应通知。工作程序节点更新由 IBM 以包含最新安全补丁的完整工作程序节点映像形式提供。要应用更新，必须使用新映像重新创建工作程序节点的映像并重新装入工作程序节点。重新装入工作程序节点时，会自动轮换 root 用户的密钥。
 {: important}
 
 **工作程序节点设置看起来是怎样的？**</br>
@@ -173,7 +175,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
     </tr>
     <tr>
   <td>计算隔离</td>
-  <td>工作程序节点专用于一个集群，而不托管其他集群的工作负载。创建标准集群时，可以选择将工作程序节点作为[物理机器（裸机）或作为虚拟机](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)（在共享或专用物理硬件上运行）进行供应。免费集群中的工作程序节点会自动作为 IBM 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户中的虚拟共享节点进行供应。</td>
+  <td>工作程序节点专用于一个集群，而不托管其他集群的工作负载。创建标准集群时，可以选择将工作程序节点作为[物理机器（裸机）或作为虚拟机](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)（在共享或专用物理硬件上运行）进行供应。免费集群中的工作程序节点会自动作为 IBM 拥有的 IBM Cloud Infrastructure (SoftLayer) 帐户中的虚拟共享节点进行供应。</td>
 </tr>
 <tr>
 <td>用于部署裸机的选项</td>
@@ -181,7 +183,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 </tr>
 <tr>
   <td id="trusted_compute">用于可信计算的选项</td>
-    <td>在支持可信计算的裸机上部署集群时，可以[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)。在集群中每个支持可信计算的裸机工作程序节点（包括未来添加到集群的节点）上，都会启用可信平台模块 (TPM) 芯片。因此，启用信任后，日后无法对集群禁用信任。信任服务器部署在主节点上，并且信任代理程序将作为 pod 部署在工作程序节点上。工作程序节点启动时，信任代理程序 pod 会监视该过程的每个阶段。<p>该硬件是信任的根源，使用 TPM 来发送度量。TPM 会生成加密密钥，用于保护整个过程中度量数据的传输。信任代理程序会将启动过程中每个组件的度量传递到信任服务器：从与 TPM 硬件交互的 BIOS 固件开始，一直到引导装入器和操作系统内核。然后，可信代理程序会将这些度量与可信服务器中的预期值进行比较，以证明启动是否有效。可信计算过程不会监视工作程序节点中的其他 pod，例如应用程序。</p><p>例如，如果未经授权的用户获得对系统的访问权，并使用额外逻辑来修改操作系统内核以收集数据，那么信任代理程序会检测到此更改并将该节点标记为不可信。通过可信计算，可以验证工作程序节点以防止篡改。</p>
+    <td>在支持可信计算的裸机上部署集群时，可以[启用信任](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)。在集群中每个支持可信计算的裸机工作程序节点（包括未来添加到集群的节点）上，都会启用可信平台模块 (TPM) 芯片。因此，启用信任后，日后无法对集群禁用信任。信任服务器部署在主节点上，并且信任代理程序将作为 pod 部署在工作程序节点上。工作程序节点启动时，信任代理程序 pod 会监视该过程的每个阶段。<p>该硬件是信任的根源，使用 TPM 来发送度量。TPM 会生成加密密钥，用于保护整个过程中度量数据的传输。信任代理程序会将启动过程中每个组件的度量传递到信任服务器：从与 TPM 硬件交互的 BIOS 固件开始，一直到引导装入器和操作系统内核。然后，可信代理程序会将这些度量与可信服务器中的预期值进行比较，以证明启动是否有效。可信计算过程不会监视工作程序节点中的其他 pod，例如应用程序。</p><p>例如，如果未经授权的用户获得对系统的访问权，并使用额外逻辑来修改操作系统内核以收集数据，那么信任代理程序会检测到此更改并将该节点标记为不可信。通过可信计算，可以验证工作程序节点以防止篡改。</p>
     <p class="note">可信计算可用于精选的裸机机器类型。例如，`mgXc` GPU 类型模板不支持可信计算。</p>
     <p><img src="images/trusted_compute.png" alt="裸机集群的可信计算" width="480" style="width:480px; border-style: none"/></p></td>
   </tr>
@@ -220,7 +222,7 @@ Kubernetes API 服务器和 etcd 是 Kubernetes 主节点中运行的最易受�
 **什么是网络分段？如何为集群设置网络分段？**</br>网络分段描述了用于将网络划分为多个子网的方法。您可以对要由组织中特定组访问的应用程序和相关数据分组。在一个子网中运行的应用程序无法查看或访问另一个子网中的应用程序。网络分段还会限制提供给内部人员或第三方软件的访问权，并且可以限制恶意活动的范围。   
 
 {{site.data.keyword.containerlong_notm}} 提供了 IBM Cloud Infrastructure (SoftLayer) VLAN，用于确保工作程序节点的高质量网络性能和网络隔离。VLAN 会将一组工作程序节点和 pod 视为连接到同一物理连线那样进行配置。
-VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IBM 客户之间共享。如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IBM 客户之间共享。如果有多个 VLAN 用于一个集群，有多个子网位于同一 VLAN 上或有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要有**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，也可以请求帐户所有者来启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get --region <region>` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
 
 为帐户启用 VRF 或 VLAN 生成时，将除去集群的网络分段。
 
@@ -272,7 +274,7 @@ VLAN 专用于您的 {{site.data.keyword.Bluemix_notm}} 帐户，而不是在 IB
 供应持久性存储器以在集群中存储数据时，如果数据存储在文件共享或块存储器中，那么数据会自动加密，无需额外成本。加密包括快照和复制的存储器。
 {: shortdesc}
 
-有关如何加密特定存储类型的数据的更多信息，请参阅以下链接。
+有关如何加密特定存储器类型的数据的更多信息，请参阅以下链接。
 - [NFS 文件存储器](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
 - [块存储器](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) </br>
 

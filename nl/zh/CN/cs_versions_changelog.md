@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 版本更改日志
@@ -30,23 +30,447 @@ subcollection: containers
 查看可用于 {{site.data.keyword.containerlong}} Kubernetes 集群的主要更新、次要更新和补丁更新的版本更改信息。更改包括对 Kubernetes 和 {{site.data.keyword.Bluemix_notm}} Provider 组件的更新。
 {:shortdesc}
 
+除非在更改日志中另有说明，否则 {{site.data.keyword.containerlong_notm}} Provider 版本支持处于 Beta 阶段的 Kubernetes API 和功能。会随时更改的 Kubernetes Alpha 功能均已禁用。
+
 有关主版本、次版本和补丁版本以及次版本之间的准备操作的更多信息，请参阅 [Kubernetes 版本](/docs/containers?topic=containers-cs_versions)。
 {: tip}
 
 有关自上一个版本以来的更改的信息，请参阅以下更改日志。
+-  V1.14 [更改日志](#114_changelog)。
 -  V1.13 [更改日志](#113_changelog)。
 -  V1.12 [更改日志](#112_changelog)。
--  V1.11 [更改日志](#111_changelog)。
--  **不推荐**：V1.10 [更改日志](#110_changelog)。
+-  **不推荐**：V1.11 [更改日志](#111_changelog)。
 -  对不受支持版本的更改日志[归档](#changelog_archive)。
 
-一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)才能确保工作程序节点的安全合规性。这些工作程序节点修订包的版本可能高于主节点，因为某些构建修订包特定于工作程序节点。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](/docs/containers?topic=containers-cs_versions#update_types)。
+一些更改日志针对_工作程序节点修订包_，仅适用于工作程序节点。您必须[应用这些补丁](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)才能确保工作程序节点的安全合规性。这些工作程序节点修订包的版本可能高于主节点，因为某些构建修订包特定于工作程序节点。另一些更改日志针对_主节点修订包_，仅适用于集群主节点。主节点修订包可能不会自动应用。您可以选择[手动进行应用](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)。有关补丁类型的更多信息，请参阅[更新类型](/docs/containers?topic=containers-cs_versions#update_types)。
 {: note}
 
 </br>
 
+## V1.14 更改日志
+{: #114_changelog}
+
+### 2019 年 6 月 4 日发布的 1.14.2_1521 的更改日志
+{: #1142_1521}
+
+下表显示了补丁 1.14.2_1521 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.14.1_1519 以来进行的更改">
+<caption>自 V1.14.1_1519 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了可能导致 Kubernetes DNS 和 CoreDNS pod 在执行集群创建 (`create`) 或更新 (`update`) 操作之后同时运行的错误。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以最大程度地减少在主节点更新期间发生的间歇性主节点网络连接失败。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.3.11</td>
+<td>V3.3.13</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.13)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.14.1-71</td>
+<td>V1.14.2-100</td>
+<td>更新为支持 Kubernetes 1.14.2 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.14.1</td>
+<td>V1.14.2</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2)。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>V0.3.1</td>
+<td>V0.3.3</td>
+<td>请参阅 [Kubernetes Metrics Server 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 20 日发布的工作程序节点 FP1.14.1_1519 的更改日志
+{: #1141_1519}
+
+下表显示了补丁 1.14.1_1519 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.14.1_1518 以来进行的更改">
+<caption>自 V1.14.1_1518 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 13 日发布的 1.14.1_1518 的更改日志
+{: #1141_1518}
+
+下表显示了补丁 1.14.1_1518 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.14.1_1516 以来进行的更改">
+<caption>自 V1.14.1_1516 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2019-6706 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为不记录 `/openapi/v2*` 只读 URL。此外，Kubernetes 控制器管理器配置将签署的 `kubelet` 证书的有效期从 1 年延长到 3 年。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 OpenVPN 客户机 `vpn-*` pod 将 `dnsPolicy` 设置为 `Default`，以避免在集群 DNS 停止运行时 pod 发生故障。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>针对 [CVE-2016-7076 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) 和 [CVE-2017-1000368 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 7 日发布的 1.14.1_1516 的更改日志
+{: #1141_1516}
+
+下表显示了补丁 1.14.1_1516 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.5_1519 以来进行的更改">
+<caption>自 V1.13.5_1519 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>V3.4.4</td>
+<td>V3.6.1</td>
+<td>请参阅 [Calico 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://docs.projectcalico.org/v3.6/release-notes/)。</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>请参阅 [CoreDNS 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/2019/01/13/coredns-1.3.1-release/)。更新包括在集群 DNS 服务上添加了[度量值端口 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://coredns.io/plugins/metrics/)。<br><br>现在，CoreDNS 是唯一支持的集群 DNS 提供程序。如果将集群从 Kubernetes 的较早版本更新到 V1.14，并且使用的是 KubeDNS，那么在集群更新期间，KubeDNS 会自动迁移到 CoreDNS。有关更多信息或要在更新之前测试 CoreDNS，请参阅[配置集群 DNS 提供程序](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>针对 [CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.13.5-107</td>
+<td>V1.14.1-71</td>
+<td>更新为支持 Kubernetes 1.14.1 发行版。此外，`calicoctl` 版本更新为 3.6.1。修复了对只有一个工作程序节点可用于负载均衡器 pod 的 V2.0 负载均衡器的更新。现在，专用负载均衡器支持在[专用边缘工作程序节点](/docs/containers?topic=containers-edge#edge)上运行。</td>
+</tr>
+<tr>
+<td>IBM pod 安全策略</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>[IBM pod 安全策略](/docs/containers?topic=containers-psp#ibm_psp)更新为支持 Kubernetes [RunAsGroup ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) 功能。</td>
+</tr>
+<tr>
+<td>`kubelet` 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>将 `--pod-max-pids` 选项设置为 `14336`，以阻止单个 pod 使用工作程序节点上的所有进程标识。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.13.5</td>
+<td>V1.14.1</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) 和 [Kubernetes 1.14 博客 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/)。<br><br>Kubernetes 缺省基于角色的访问控制 (RBAC) 策略不再[授予未经认证的用户对发现和许可权检查 API 的访问权 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles)。此更改仅适用于新的 V1.14 集群。如果从先前版本更新集群，那么未经认证的用户仍有权访问发现和许可权检查 API。</td>
+</tr>
+<tr>
+<td>Kubernetes 许可控制器配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td><ul>
+<li>向集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项添加了 `NodeRestriction`，并将相关集群资源配置为支持此安全增强功能。</li>
+<li>从集群的 Kubernetes API 服务器的 `--enable-admission-plugins` 选项中除去了 `Initializers`，从 `--runtime-config` 选项中除去了 `admissionregistration.k8s.io/v1alpha1=true`，因为不再支持这些 API。可以改为使用 [Kubernetes 许可 Webhook ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)。</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes DNS Autoscaler</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>请参阅 [Kubernetes DNS Autoscaler 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0)。</td>
+</tr>
+<tr>
+<td>Kubernetes 功能检测点配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td><ul>
+  <li>添加了 `RuntimeClass=false`，用于禁止选择容器运行时配置。</li>
+  <li>除去了 `ExperimentalCriticalPodAnnotation=true`，因为不再支持 `scheduler.alpha.kubernetes.io/critical-pod` pod 注释。可以改为使用 [Kubernetes pod 优先级 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority)。</li></ul></td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>针对 [CVE-2019-11068 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## V1.13 更改日志
 {: #113_changelog}
+
+### 2019 年 6 月 4 日发布的 1.13.6_1524 的更改日志
+{: #1136_1524}
+
+下表显示了补丁 1.13.6_1524 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.6_1522 以来进行的更改">
+<caption>自 V1.13.6_1522 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了可能导致 Kubernetes DNS 和 CoreDNS pod 在执行集群创建 (`create`) 或更新 (`update`) 操作之后同时运行的错误。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以最大程度地减少在主节点更新期间发生的间歇性主节点网络连接失败。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.3.11</td>
+<td>V3.3.13</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.13)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>V0.3.1</td>
+<td>V0.3.3</td>
+<td>请参阅 [Kubernetes Metrics Server 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 20 日发布的工作程序节点 FP1.13.6_1522 的更改日志
+{: #1136_1522}
+
+下表显示了补丁 1.13.6_1522 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.6_1521 以来进行的更改">
+<caption>自 V1.13.6_1521 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 13 日发布的 1.13.6_1521 的更改日志
+{: #1136_1521}
+
+下表显示了补丁 1.13.6_1521 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.5_1519 以来进行的更改">
+<caption>自 V1.13.5_1519 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2019-6706 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>针对 [CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.13.5-107</td>
+<td>V1.13.6-139</td>
+<td>更新为支持 Kubernetes 1.13.6 发行版。此外，修复了只有一个工作程序节点可用于负载均衡器 pod 的 V2.0 负载均衡器的更新过程。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.13.5</td>
+<td>V1.13.6</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为不记录 `/openapi/v2*` 只读 URL。此外，Kubernetes 控制器管理器配置将签署的 `kubelet` 证书的有效期从 1 年延长到 3 年。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 OpenVPN 客户机 `vpn-*` pod 将 `dnsPolicy` 设置为 `Default`，以避免在集群 DNS 停止运行时 pod 发生故障。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>针对 [CVE-2016-7076 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 和 [CVE-2019-11068 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 29 日发布的工作程序节点 FP1.13.5_1519 的更改日志
+{: #1135_1519}
+
+下表显示了工作程序节点 FP1.13.5_1519 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.13.5_1518 以来进行的更改">
+<caption>自 V1.13.5_1518 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.2.6)。</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019 年 4 月 15 日发布的工作程序节点 FP1.13.5_1518 的更改日志
 {: #1135_1518}
@@ -157,7 +581,7 @@ subcollection: containers
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -548,6 +972,201 @@ subcollection: containers
 查看 V1.12 更改日志。
 {: shortdesc}
 
+### 2019 年 6 月 4 日发布的 1.12.9_1555 的更改日志
+{: #1129_1555}
+
+下表显示了补丁 1.12.9_1555 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.8_1553 以来进行的更改">
+<caption>自 V1.12.8_1553 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群 DNS 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>修复了可能导致 Kubernetes DNS 和 CoreDNS pod 在执行集群创建 (`create`) 或更新 (`update`) 操作之后同时运行的错误。</td>
+</tr>
+<tr>
+<td>集群主节点 HA 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以最大程度地减少在主节点更新期间发生的间歇性主节点网络连接失败。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.3.11</td>
+<td>V3.3.13</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.13)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.8-210</td>
+<td>V1.12.9-227</td>
+<td>更新为支持 Kubernetes 1.12.9 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.8</td>
+<td>V1.12.9</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9)。</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>V0.3.1</td>
+<td>V0.3.3</td>
+<td>请参阅 [Kubernetes Metrics Server 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 20 日发布的工作程序节点 FP1.12.8_1553 的更改日志
+{: #1128_1533}
+
+下表显示了补丁 1.12.8_1553 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.8_1553 以来进行的更改">
+<caption>自 V1.12.8_1553 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 13 日发布的 1.12.8_1552 的更改日志
+{: #1128_1552}
+
+下表显示了补丁 1.12.8_1552 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.7_1550 以来进行的更改">
+<caption>自 V1.12.7_1550 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2019-6706 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>针对 [CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.12.7-180</td>
+<td>V1.12.8-210</td>
+<td>更新为支持 Kubernetes 1.12.8 发行版。此外，修复了只有一个工作程序节点可用于负载均衡器 pod 的 V2.0 负载均衡器的更新过程。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.12.7</td>
+<td>V1.12.8</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为不记录 `/openapi/v2*` 只读 URL。此外，Kubernetes 控制器管理器配置将签署的 `kubelet` 证书的有效期从 1 年延长到 3 年。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 OpenVPN 客户机 `vpn-*` pod 将 `dnsPolicy` 设置为 `Default`，以避免在集群 DNS 停止运行时 pod 发生故障。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>针对 [CVE-2016-7076 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 和 [CVE-2019-11068 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 29 日发布的工作程序节点 FP1.12.7_1550 的更改日志
+{: #1127_1550}
+
+下表显示了工作程序节点 FP1.12.7_1550 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.12.7_1549 以来进行的更改">
+<caption>自 V1.12.7_1549 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.7)。</td>
+</tr>
+</tbody>
+</table>
+
+
 ### 2019 年 4 月 15 日发布的工作程序节点 FP1.12.7_1549 的更改日志
 {: #1127_1549}
 
@@ -657,7 +1276,7 @@ subcollection: containers
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -1180,7 +1799,7 @@ subcollection: containers
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -1354,10 +1973,185 @@ subcollection: containers
 </tbody>
 </table>
 
-## V1.11 更改日志
+## 不推荐：V1.11 更改日志
 {: #111_changelog}
 
 查看 V1.11 更改日志。
+{: shortdesc}
+
+Kubernetes V1.11 已不推荐使用，到 2019 年 6 月 27 日（暂定）即不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.12。
+{: deprecated}
+
+### 2019 年 6 月 4 日发布的 1.11.10_1561 的更改日志
+{: #11110_1561}
+
+下表显示了补丁 1.11.10_1561 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.10_1559 以来进行的更改">
+<caption>自 V1.11.10_1559 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>更新了配置，以最大程度地减少在主节点更新期间发生的间歇性主节点网络连接失败。</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>V3.3.11</td>
+<td>V3.3.13</td>
+<td>请参阅 [etcd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/coreos/etcd/releases/v3.3.13)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>针对 [CVE-2018-10844 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 和 [CVE-2019-5436 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 20 日发布的工作程序节点 FP1.11.10_1559 的更改日志
+{: #11110_1559}
+
+下表显示了补丁包 1.11.10_1559 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.10_1558 以来进行的更改">
+<caption>自 V1.11.10_1558 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 内核</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 内核</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>使用 [CVE-2018-12126 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html)、[CVE-2018-12127 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 和 [CVE-2018-12130 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) 的内核更新对工作程序节点映像进行了更新。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 5 月 13 日发布的 1.11.10_1558 的更改日志
+{: #11110_1558}
+
+下表显示了补丁 1.11.10_1558 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.9_1556 以来进行的更改">
+<caption>自 V1.11.9_1556 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2019-6706 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)。</td>
+</tr>
+<tr>
+<td>GPU 设备插件和安装程序</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>针对 [CVE-2019-1543 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)，更新了映像。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>V1.11.9-241</td>
+<td>V1.11.10-270</td>
+<td>更新为支持 Kubernetes 1.11.10 发行版。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>V1.11.9</td>
+<td>V1.11.10</td>
+<td>请参阅 [Kubernetes 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10)。</td>
+</tr>
+<tr>
+<td>Kubernetes 配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>Kubernetes API 服务器审计策略配置更新为不记录 `/openapi/v2*` 只读 URL。此外，Kubernetes 控制器管理器配置将签署的 `kubelet` 证书的有效期从 1 年延长到 3 年。</td>
+</tr>
+<tr>
+<td>OpenVPN 客户机配置</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>现在，`kube-system` 名称空间中的 OpenVPN 客户机 `vpn-*` pod 将 `dnsPolicy` 设置为 `Default`，以避免在集群 DNS 停止运行时 pod 发生故障。</td>
+</tr>
+<tr>
+<td>可信计算代理程序</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>针对 [CVE-2016-7076 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076)、[CVE-2017-1000368 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 和 [CVE-2019-11068 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)，更新了映像。</td>
+</tr>
+</tbody>
+</table>
+
+### 2019 年 4 月 29 日发布的工作程序节点 FP1.11.9_1556 的更改日志
+{: #1119_1556}
+
+下表显示了工作程序节点 FP1.11.9_1556 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.11.9_1555 以来进行的更改">
+<caption>自 V1.11.9_1555 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>请参阅 [containerd 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.7)。</td>
+</tr>
+</tbody>
+</table>
+
 
 ### 2019 年 4 月 15 日发布的工作程序节点 FP1.11.9_1555 的更改日志
 {: #1119_1555}
@@ -1474,7 +2268,7 @@ subcollection: containers
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -1982,7 +2776,7 @@ subcollection: containers
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 containerd 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
@@ -2097,7 +2891,7 @@ subcollection: containers
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
@@ -2333,13 +3127,13 @@ subcollection: containers
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `containerd`）</td>
@@ -2453,13 +3247,13 @@ subcollection: containers
 <td>containerd</td>
 <td>不适用</td>
 <td>1.1.2</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
+<td>`containerd` 将替换 Docker 来作为 Kubernetes 的新容器运行时。请参阅 [`containerd` 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://github.com/containerd/containerd/releases/tag/v1.1.2)。有关必须执行的操作，请参阅[更新为使用 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>`containerd` 将 Docker 替换为 Kubernetes 的新容器运行时以增强性能。有关必须执行的操作，请参阅[更新为 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
+<td>`containerd` 将替换 Docker 来作为 Kubernetes 的新容器运行时，以增强性能。有关必须执行的操作，请参阅[更新为使用 `containerd` 作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)。</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -2510,16 +3304,109 @@ subcollection: containers
 <br />
 
 
-## 不推荐：V1.10 更改日志
+## 归档
+{: #changelog_archive}
+
+不支持的 Kubernetes 版本：
+*  [V1.10](#110_changelog)
+*  [V1.9](#19_changelog)
+*  [V1.8](#18_changelog)
+*  [V1.7](#17_changelog)
+
+### V1.10 更改日志（自 2019 年 5 月 16 日起不再支持）
 {: #110_changelog}
 
 查看 V1.10 更改日志。
 {: shortdesc}
 
-Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以支持。对于每个 Kubernetes 版本更新，请[查看潜在影响](/docs/containers?topic=containers-cs_versions#cs_versions)，然后立即[更新集群](/docs/containers?topic=containers-update#update)，并且至少更新到 1.11。
-{: deprecated}
+*   [2019 年 5 月 13 日发布的工作程序节点 FP1.10.13_1558 的更改日志](#11013_1558)
+*   [2019 年 4 月 29 日发布的工作程序节点 FP1.10.13_1557 的更改日志](#11013_1557)
+*   [2019 年 4 月 15 日发布的工作程序节点 FP1.10.13_1556 的更改日志](#11013_1556)
+*   [2019 年 4 月 8 日发布的 1.10.13_1555 的更改日志](#11013_1555)
+*   [2019 年 4 月 1 日发布的工作程序节点 FP1.10.13_1554 的更改日志](#11013_1554)
+*   [2019 年 3 月 26 日发布的主节点 FP1.10.13_1553 的更改日志](#11118_1553)
+*   [2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志](#11013_1551)
+*   [2019 年 3 月 4 日发布的 1.10.13_1548 的更改日志](#11013_1548)
+*   [2019 年 2 月 27 日发布的工作程序节点 FP1.10.12_1546 的更改日志](#11012_1546)
+*   [2019 年 2 月 15 日发布的工作程序节点 FP1.10.12_1544 的更改日志](#11012_1544)
+*   [2019 年 2 月 5 日发布的 1.10.12_1543 的更改日志](#11012_1543)
+*   [2019 年 1 月 28 日发布的工作程序节点 FP1.10.12_1541 的更改日志](#11012_1541)
+*   [2019 年 1 月 21 日发布的 1.10.12_1540 的更改日志](#11012_1540)
+*   [2019 年 1 月 7 日发布的工作程序节点 FP1.10.11_1538 的更改日志](#11011_1538)
+*   [2018 年 12 月 17 日发布的工作程序节点 FP1.10.11_1537 的更改日志](#11011_1537)
+*   [2018 年 12 月 4 日发布的 1.10.11_1536 的更改日志](#11011_1536)
+*   [2018 年 11 月 27 日发布的工作程序节点 FP1.10.8_1532 的更改日志](#1108_1532)
+*   [2018 年 11 月 19 日发布的工作程序节点 FP1.10.8_1531 的更改日志](#1108_1531)
+*   [2018 年 11 月 7 日发布的 1.10.8_1530 的更改日志](#1108_1530_ha-master)
+*   [2018 年 10 月 26 日发布的工作程序节点 FP1.10.8_1528 的更改日志](#1108_1528)
+*   [2018 年 10 月 10 日发布的工作程序节点 FP1.10.8_1525 的更改日志](#1108_1525)
+*   [2018 年 10 月 2 日发布的 1.10.8_1524 的更改日志](#1108_1524)
+*   [2018 年 9 月 20 日发布的工作程序节点 FP1.10.7_1521 的更改日志](#1107_1521)
+*   [2018 年 9 月 4 日发布的 1.10.7_1520 的更改日志](#1107_1520)
+*   [2018 年 8 月 23 日发布的工作程序节点 FP1.10.5_1519 的更改日志](#1105_1519)
+*   [2018 年 8 月 13 日发布的工作程序节点 FP1.10.5_1518 的更改日志](#1105_1518)
+*   [2018 年 7 月 27 日发布的 1.10.5_1517 的更改日志](#1105_1517)
+*   [2018 年 7 月 3 日发布的工作程序节点 FP1.10.3_1514 的更改日志](#1103_1514)
+*   [2018 年 6 月 21 日发布的工作程序节点 FP1.10.3_1513 的更改日志](#1103_1513)
+*   [2018 年 6 月 12 日发布的 1.10.3_1512 的更改日志](#1103_1512)
+*   [2018 年 5 月 18 日发布的工作程序节点 FP1.10.1_1510 的更改日志](#1101_1510)
+*   [2018 年 5 月 16 日发布的工作程序节点 FP1.10.1_1509 的更改日志](#1101_1509)
+*   [2018 年 5 月 1 日发布的 1.10.1_1508 的更改日志](#1101_1508)
 
-### 2019 年 4 月 15 日发布的工作程序节点 FP1.10.13_1556 的更改日志
+#### 2019 年 5 月 13 日发布的工作程序节点 FP1.10.13_1558 的更改日志
+{: #11013_1558}
+
+下表显示了工作程序节点 FP1.10.13_1558 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1557 以来进行的更改">
+<caption>自 V1.10.13_1557 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集群主节点 HA 代理</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>请参阅 [HAProxy 发行说明 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://www.haproxy.org/download/1.9/src/CHANGELOG)。更新解决了 [CVE-2019-6706 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)。</td>
+</tr>
+</tbody>
+</table>
+
+#### 2019 年 4 月 29 日发布的工作程序节点 FP1.10.13_1557 的更改日志
+{: #11013_1557}
+
+下表显示了工作程序节点 FP1.10.13_1557 中包含的更改。
+{: shortdesc}
+
+<table summary="自 V1.10.13_1556 以来进行的更改">
+<caption>自 V1.10.13_1556 以来的更改</caption>
+<thead>
+<tr>
+<th>组件</th>
+<th>上一个版本</th>
+<th>当前版本</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 软件包</td>
+<td>不适用</td>
+<td>不适用</td>
+<td>已安装的 Ubuntu 软件包的更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+#### 2019 年 4 月 15 日发布的工作程序节点 FP1.10.13_1556 的更改日志
 {: #11013_1556}
 
 下表显示了工作程序节点 FP1.10.13_1556 中包含的更改。
@@ -2545,7 +3432,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 4 月 8 日发布的 1.10.13_1555 的更改日志
+#### 2019 年 4 月 8 日发布的 1.10.13_1555 的更改日志
 {: #11013_1555}
 
 下表显示了补丁 1.10.13_1555 中包含的更改。
@@ -2595,7 +3482,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 4 月 1 日发布的工作程序节点 FP1.10.13_1554 的更改日志
+#### 2019 年 4 月 1 日发布的工作程序节点 FP1.10.13_1554 的更改日志
 {: #11013_1554}
 
 下表显示了工作程序节点 FP1.10.13_1554 中包含的更改。
@@ -2616,13 +3503,13 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>增大了针对 kubelet 和 containerd 的内存保留量，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
 
 
-### 2019 年 3 月 26 日发布的主节点 FP1.10.13_1553 的更改日志
+#### 2019 年 3 月 26 日发布的主节点 FP1.10.13_1553 的更改日志
 {: #11118_1553}
 
 下表显示了主节点 FP1.10.13_1553 中包含的更改。
@@ -2660,7 +3547,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志
+#### 2019 年 3 月 20 日发布的 1.10.13_1551 的更改日志
 {: #11013_1551}
 
 下表显示了补丁 1.10.13_1551 中包含的更改。
@@ -2716,7 +3603,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 3 月 4 日发布的 1.10.13_1548 的更改日志
+#### 2019 年 3 月 4 日发布的 1.10.13_1548 的更改日志
 {: #11013_1548}
 
 下表显示了补丁 1.10.13_1548 中包含的更改。
@@ -2790,7 +3677,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 2 月 27 日发布的工作程序节点 FP1.10.12_1546 的更改日志
+#### 2019 年 2 月 27 日发布的工作程序节点 FP1.10.12_1546 的更改日志
 {: #11012_1546}
 
 下表显示了工作程序节点 FP1.10.12_1546 中包含的更改。
@@ -2816,7 +3703,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 2 月 15 日发布的工作程序节点 FP1.10.12_1544 的更改日志
+#### 2019 年 2 月 15 日发布的工作程序节点 FP1.10.12_1544 的更改日志
 {: #11012_1544}
 
 下表显示了工作程序节点 FP1.10.12_1544 中包含的更改。
@@ -2848,7 +3735,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 2 月 5 日发布的 1.10.12_1543 的更改日志
+#### 2019 年 2 月 5 日发布的 1.10.12_1543 的更改日志
 {: #11012_1543}
 
 下表显示了补丁 1.10.12_1543 中包含的更改。
@@ -2920,7 +3807,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 1 月 28 日发布的工作程序节点 FP1.10.12_1541 的更改日志
+#### 2019 年 1 月 28 日发布的工作程序节点 FP1.10.12_1541 的更改日志
 {: #11012_1541}
 
 下表显示了工作程序节点 FP1.10.12_1541 中包含的更改。
@@ -2946,7 +3833,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 1 月 21 日发布的 1.10.12_1540 的更改日志
+#### 2019 年 1 月 21 日发布的 1.10.12_1540 的更改日志
 {: #11012_1540}
 
 下表显示了补丁 1.10.12_1540 中包含的更改。
@@ -2996,7 +3883,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2019 年 1 月 7 日发布的工作程序节点 FP1.10.11_1538 的更改日志
+#### 2019 年 1 月 7 日发布的工作程序节点 FP1.10.11_1538 的更改日志
 {: #11011_1538}
 
 下表显示了工作程序节点 FP1.10.11_1538 中包含的更改。
@@ -3022,7 +3909,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 12 月 17 日发布的工作程序节点 FP1.10.11_1537 的更改日志
+#### 2018 年 12 月 17 日发布的工作程序节点 FP1.10.11_1537 的更改日志
 {: #11011_1537}
 
 下表显示了工作程序节点 FP1.10.11_1537 中包含的更改。
@@ -3049,7 +3936,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 12 月 4 日发布的 1.10.11_1536 的更改日志
+#### 2018 年 12 月 4 日发布的 1.10.11_1536 的更改日志
 {: #11011_1536}
 
 下表显示了补丁 1.10.11_1536 中包含的更改。
@@ -3094,12 +3981,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 11 月 27 日发布的工作程序节点 FP1.10.8_1532 的更改日志
+#### 2018 年 11 月 27 日发布的工作程序节点 FP1.10.8_1532 的更改日志
 {: #1108_1532}
 
 下表显示了工作程序节点 FP1.10.8_1532 中包含的更改。
@@ -3125,7 +4012,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 11 月 19 日发布的工作程序节点 FP1.10.8_1531 的更改日志
+#### 2018 年 11 月 19 日发布的工作程序节点 FP1.10.8_1531 的更改日志
 {: #1108_1531}
 
 下表显示了工作程序节点 FP1.10.8_1531 中包含的更改。
@@ -3151,7 +4038,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 11 月 7 日发布的 1.10.8_1530 的更改日志
+#### 2018 年 11 月 7 日发布的 1.10.8_1530 的更改日志
 {: #1108_1530_ha-master}
 
 下表显示了补丁 1.10.8_1530 中包含的更改。
@@ -3207,12 +4094,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 10 月 26 日发布的工作程序节点 FP1.10.8_1528 的更改日志
+#### 2018 年 10 月 26 日发布的工作程序节点 FP1.10.8_1528 的更改日志
 {: #1108_1528}
 
 下表显示了工作程序节点 FP1.10.8_1528 中包含的更改。
@@ -3238,7 +4125,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 10 月 15 日发布的主节点 FP1.10.8_1527 的更改日志
+#### 2018 年 10 月 15 日发布的主节点 FP1.10.8_1527 的更改日志
 {: #1108_1527}
 
 下表显示了主节点 FP1.10.8_1527 中包含的更改。
@@ -3270,7 +4157,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 10 月 10 日发布的工作程序节点 FP1.10.8_1525 的更改日志
+#### 2018 年 10 月 10 日发布的工作程序节点 FP1.10.8_1525 的更改日志
 {: #1108_1525}
 
 下表显示了工作程序节点 FP1.10.8_1525 中包含的更改。
@@ -3303,7 +4190,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 10 月 2 日发布的 1.10.8_1524 的更改日志
+#### 2018 年 10 月 2 日发布的 1.10.8_1524 的更改日志
 {: #1108_1524}
 
 下表显示了补丁 1.10.8_1524 中包含的更改。
@@ -3354,7 +4241,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 9 月 20 日发布的工作程序节点 FP1.10.7_1521 的更改日志
+#### 2018 年 9 月 20 日发布的工作程序节点 FP1.10.7_1521 的更改日志
 {: #1107_1521}
 
 下表显示了工作程序节点 FP1.10.7_1521 中包含的更改。
@@ -3375,7 +4262,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -3387,7 +4274,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3401,12 +4288,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为使用 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 9 月 4 日发布的 1.10.7_1520 的更改日志
+#### 2018 年 9 月 4 日发布的 1.10.7_1520 的更改日志
 {: #1107_1520}
 
 下表显示了补丁 1.10.7_1520 中包含的更改。
@@ -3456,7 +4343,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 8 月 23 日发布的工作程序节点 FP1.10.5_1519 的更改日志
+#### 2018 年 8 月 23 日发布的工作程序节点 FP1.10.5_1519 的更改日志
 {: #1105_1519}
 
 下表显示了工作程序节点 FP1.10.5_1519 中包含的更改。
@@ -3489,7 +4376,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 8 月 13 日发布的工作程序节点 FP1.10.5_1518 的更改日志
+#### 2018 年 8 月 13 日发布的工作程序节点 FP1.10.5_1518 的更改日志
 {: #1105_1518}
 
 下表显示了工作程序节点 FP1.10.5_1518 中包含的更改。
@@ -3515,7 +4402,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 27 日发布的 1.10.5_1517 的更改日志
+#### 2018 年 7 月 27 日发布的 1.10.5_1517 的更改日志
 {: #1105_1517}
 
 下表显示了补丁 1.10.5_1517 中包含的更改。
@@ -3571,7 +4458,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 3 日发布的工作程序节点 FP1.10.3_1514 的更改日志
+#### 2018 年 7 月 3 日发布的工作程序节点 FP1.10.3_1514 的更改日志
 {: #1103_1514}
 
 下表显示了工作程序节点 FP1.10.3_1514 中包含的更改。
@@ -3598,7 +4485,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 6 月 21 日发布的工作程序节点 FP1.10.3_1513 的更改日志
+#### 2018 年 6 月 21 日发布的工作程序节点 FP1.10.3_1513 的更改日志
 {: #1103_1513}
 
 下表显示了工作程序节点 FP1.10.3_1513 中包含的更改。
@@ -3624,7 +4511,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 6 月 12 日发布的 1.10.3_1512 的更改日志
+#### 2018 年 6 月 12 日发布的 1.10.3_1512 的更改日志
 {: #1103_1512}
 
 下表显示了补丁 1.10.3_1512 中包含的更改。
@@ -3682,7 +4569,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 
 
 
-### 2018 年 5 月 18 日发布的工作程序节点 FP1.10.1_1510 的更改日志
+#### 2018 年 5 月 18 日发布的工作程序节点 FP1.10.1_1510 的更改日志
 {: #1101_1510}
 
 下表显示了工作程序节点 FP1.10.1_1510 中包含的更改。
@@ -3708,7 +4595,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 5 月 16 日发布的工作程序节点 FP1.10.1_1509 的更改日志
+#### 2018 年 5 月 16 日发布的工作程序节点 FP1.10.1_1509 的更改日志
 {: #1101_1509}
 
 下表显示了工作程序节点 FP1.10.1_1509 中包含的更改。
@@ -3734,7 +4621,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 5 月 1 日发布的 1.10.1_1508 的更改日志
+#### 2018 年 5 月 1 日发布的 1.10.1_1508 的更改日志
 {: #1101_1508}
 
 下表显示了补丁 1.10.1_1508 中包含的更改。
@@ -3791,7 +4678,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>GPU 支持</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](/docs/containers?topic=containers-app#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
+<td>现在，可支持[图形处理单元 (GPU) 容器工作负载](/docs/containers?topic=containers-app#gpu_app)进行安排和执行。有关可用 GPU 机器类型的列表，请参阅[工作程序节点的硬件](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。有关更多信息，请参阅 Kubernetes 文档以[安排 GPU ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)。</td>
 </tr>
 </tbody>
 </table>
@@ -3799,20 +4686,35 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <br />
 
 
-## 归档
-{: #changelog_archive}
-
-不支持的 Kubernetes 版本：
-*  [V1.9](#19_changelog)
-*  [V1.8](#18_changelog)
-*  [V1.7](#17_changelog)
-
 ### V1.9 更改日志（自 2018 年 12 月 27 日起不再支持）
 {: #19_changelog}
 
 查看 V1.9 更改日志。
+{: shortdesc}
 
-### 2018 年 12 月 17 日发布的工作程序节点 FP1.9.11_1539 的更改日志
+*   [2018 年 12 月 17 日发布的工作程序节点 FP1.9.11_1539 的更改日志](#1911_1539)
+*   [2018 年 12 月 4 日发布的工作程序节点 FP1.9.11_1538 的更改日志](#1911_1538)
+*   [2018 年 11 月 27 日发布的工作程序节点 FP1.9.11_1537 的更改日志](#1911_1537)
+*   [2018 年 11 月 19 日发布的 1.9.11_1536 的更改日志](#1911_1536)
+*   [2018 年 11 月 7 日发布的工作程序节点 FP1.9.10_1532 的更改日志](#1910_1532)
+*   [2018 年 10 月 26 日发布的工作程序节点 FP1.9.10_1531 的更改日志](#1910_1531)
+*   [2018 年 10 月 15 日发布的主节点 FP1.9.10_1530 的更改日志](#1910_1530)
+*   [2018 年 10 月 10 日发布的工作程序节点 FP1.9.10_1528 的更改日志](#1910_1528)
+*   [2018 年 10 月 2 日发布的 1.9.10_1527 的更改日志](#1910_1527)
+*   [2018 年 9 月 20 日发布的工作程序节点 FP1.9.10_1524 的更改日志](#1910_1524)
+*   [2018 年 9 月 4 日发布的 1.9.10_1523 的更改日志](#1910_1523)
+*   [2018 年 8 月 23 日发布的工作程序节点 FP1.9.9_1522 的更改日志](#199_1522)
+*   [2018 年 8 月 13 日发布的工作程序节点 FP1.9.9_1521 的更改日志](#199_1521)
+*   [2018 年 7 月 27 日发布的 1.9.9_1520 的更改日志](#199_1520)
+*   [2018 年 7 月 3 日发布的工作程序节点 FP1.9.8_1517 的更改日志](#198_1517)
+*   [2018 年 6 月 21 日发布的工作程序节点 FP1.9.8_1516 的更改日志](#198_1516)
+*   [2018 年 6 月 19 日发布的 1.9.8_1515 的更改日志](#198_1515)
+*   [2018 年 6 月 11 日发布的工作程序节点 FP1.9.7_1513 的更改日志](#197_1513)
+*   [2018 年 5 月 18 日发布的工作程序节点 FP1.9.7_1512 的更改日志](#197_1512)
+*   [2018 年 5 月 16 日发布的工作程序节点 FP1.9.7_1511 的更改日志](#197_1511)
+*   [2018 年 4 月 30 日发布的 1.9.7_1510 的更改日志](#197_1510)
+
+#### 2018 年 12 月 17 日发布的工作程序节点 FP1.9.11_1539 的更改日志
 {: #1911_1539}
 
 下表显示了工作程序节点 FP1.9.11_1539 中包含的更改。
@@ -3838,7 +4740,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 12 月 4 日发布的工作程序节点 FP1.9.11_1538 的更改日志
+#### 2018 年 12 月 4 日发布的工作程序节点 FP1.9.11_1538 的更改日志
 {: #1911_1538}
 
 下表显示了工作程序节点 FP1.9.11_1538 中包含的更改。
@@ -3859,12 +4761,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>工作程序节点资源利用率</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-plan_clusters#resource_limit_node)。</td>
+<td>添加了针对 kubelet 和 Docker 的专用 cgroup，以防止这些组件耗尽资源。有关更多信息，请参阅[工作程序节点资源保留](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 11 月 27 日发布的工作程序节点 FP1.9.11_1537 的更改日志
+#### 2018 年 11 月 27 日发布的工作程序节点 FP1.9.11_1537 的更改日志
 {: #1911_1537}
 
 下表显示了工作程序节点 FP1.9.11_1537 中包含的更改。
@@ -3890,7 +4792,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 11 月 19 日发布的 1.9.11_1536 的更改日志
+#### 2018 年 11 月 19 日发布的 1.9.11_1536 的更改日志
 {: #1911_1536}
 
 下表显示了补丁 1.9.11_1536 中包含的更改。
@@ -3940,7 +4842,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 11 月 7 日发布的工作程序节点 FP1.9.10_1532 的更改日志
+#### 2018 年 11 月 7 日发布的工作程序节点 FP1.9.10_1532 的更改日志
 {: #1910_1532}
 
 下表显示了工作程序节点 FP1.9.11_1532 中包含的更改。
@@ -3961,12 +4863,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>启用 TPM 的内核</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)后查看 **Trustable** 字段。</td>
+<td>对于将 TPM 芯片用于可信计算的裸机工作程序节点，在信任启用之前，会一直使用缺省 Ubuntu 内核。如果在现有集群上[启用信任](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)，那么需要[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)任何具有 TPM 芯片的现有裸机工作程序节点。要检查裸机工作程序节点是否具有 TPM 芯片，请在运行 `ibmcloud ks machine-types --zone` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)后查看 **Trustable** 字段。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 10 月 26 日发布的工作程序节点 FP1.9.10_1531 的更改日志
+#### 2018 年 10 月 26 日发布的工作程序节点 FP1.9.10_1531 的更改日志
 {: #1910_1531}
 
 下表显示了工作程序节点 FP1.9.10_1531 中包含的更改。
@@ -3992,7 +4894,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 10 月 15 日发布的主节点 FP1.9.10_1530 的更改日志
+#### 2018 年 10 月 15 日发布的主节点 FP1.9.10_1530 的更改日志
 {: #1910_1530}
 
 下表显示了工作程序节点 FP1.9.10_1530 中包含的更改。
@@ -4018,7 +4920,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 10 月 10 日发布的工作程序节点 FP1.9.10_1528 的更改日志
+#### 2018 年 10 月 10 日发布的工作程序节点 FP1.9.10_1528 的更改日志
 {: #1910_1528}
 
 下表显示了工作程序节点 FP1.9.10_1528 中包含的更改。
@@ -4051,7 +4953,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 10 月 2 日发布的 1.9.10_1527 的更改日志
+#### 2018 年 10 月 2 日发布的 1.9.10_1527 的更改日志
 {: #1910_1527}
 
 下表显示了补丁 1.9.10_1527 中包含的更改。
@@ -4084,7 +4986,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 9 月 20 日发布的工作程序节点 FP1.9.10_1524 的更改日志
+#### 2018 年 9 月 20 日发布的工作程序节点 FP1.9.10_1524 的更改日志
 {: #1910_1524}
 
 下表显示了工作程序节点 FP1.9.10_1524 中包含的更改。
@@ -4105,7 +5007,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -4117,7 +5019,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4131,12 +5033,12 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>不适用</td>
 <td>禁用了缺省 Docker 网桥，以便 `172.17.0.0/16` IP 范围现在可用于专用路由。如果通过直接在主机上执行 `docker` 命令或使用安装了 Docker 套接字的 pod 来依赖于在工作程序节点中构建 Docker 容器，请从以下选项中进行选择。<ul><li>要确保构建容器时的外部网络连接，请运行 `docker build . --network host`。</li>
 <li>要显式创建在构建容器时要使用的网络，请运行 `docker network create`，然后使用此网络。</li></ul>
-**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
+**注**：是否对 Docker 套接字或 Docker 有直接依赖关系？请[更新为使用 `containerd`（而不是 `docker`）作为容器运行时](/docs/containers?topic=containers-cs_versions#containerd)，以便准备好集群来运行 Kubernetes V1.11 或更高版本。</td>
 </tr>
 </tbody>
 </table>
 
-### 2018 年 9 月 4 日发布的 1.9.10_1523 的更改日志
+#### 2018 年 9 月 4 日发布的 1.9.10_1523 的更改日志
 {: #1910_1523}
 
 下表显示了补丁 1.9.10_1523 中包含的更改。
@@ -4180,7 +5082,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 8 月 23 日发布的工作程序节点 FP1.9.9_1522 的更改日志
+#### 2018 年 8 月 23 日发布的工作程序节点 FP1.9.9_1522 的更改日志
 {: #199_1522}
 
 下表显示了工作程序节点 FP1.9.9_1522 中包含的更改。
@@ -4213,7 +5115,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 8 月 13 日发布的工作程序节点 FP1.9.9_1521 的更改日志
+#### 2018 年 8 月 13 日发布的工作程序节点 FP1.9.9_1521 的更改日志
 {: #199_1521}
 
 下表显示了工作程序节点 FP1.9.9_1521 中包含的更改。
@@ -4239,7 +5141,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 27 日发布的 1.9.9_1520 的更改日志
+#### 2018 年 7 月 27 日发布的 1.9.9_1520 的更改日志
 {: #199_1520}
 
 下表显示了补丁 1.9.9_1520 中包含的更改。
@@ -4289,7 +5191,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 3 日发布的工作程序节点 FP1.9.8_1517 的更改日志
+#### 2018 年 7 月 3 日发布的工作程序节点 FP1.9.8_1517 的更改日志
 {: #198_1517}
 
 下表显示了工作程序节点 FP1.9.8_1517 中包含的更改。
@@ -4316,7 +5218,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 6 月 21 日发布的工作程序节点 FP1.9.8_1516 的更改日志
+#### 2018 年 6 月 21 日发布的工作程序节点 FP1.9.8_1516 的更改日志
 {: #198_1516}
 
 下表显示了工作程序节点 FP1.9.8_1516 中包含的更改。
@@ -4342,7 +5244,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 6 月 19 日发布的 1.9.8_1515 的更改日志
+#### 2018 年 6 月 19 日发布的 1.9.8_1515 的更改日志
 {: #198_1515}
 
 下表显示了补丁 1.9.8_1515 中包含的更改。
@@ -4387,7 +5289,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 6 月 11 日发布的工作程序节点 FP1.9.7_1513 的更改日志
+#### 2018 年 6 月 11 日发布的工作程序节点 FP1.9.7_1513 的更改日志
 {: #197_1513}
 
 下表显示了工作程序节点 FP1.9.7_1513 中包含的更改。
@@ -4413,7 +5315,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 5 月 18 日发布的工作程序节点 FP1.9.7_1512 的更改日志
+#### 2018 年 5 月 18 日发布的工作程序节点 FP1.9.7_1512 的更改日志
 {: #197_1512}
 
 下表显示了工作程序节点 FP1.9.7_1512 中包含的更改。
@@ -4439,7 +5341,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 5 月 16 日发布的工作程序节点 FP1.9.7_1511 的更改日志
+#### 2018 年 5 月 16 日发布的工作程序节点 FP1.9.7_1511 的更改日志
 {: #197_1511}
 
 下表显示了工作程序节点 FP1.9.7_1511 中包含的更改。
@@ -4465,7 +5367,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 4 月 30 日发布的 1.9.7_1510 的更改日志
+#### 2018 年 4 月 30 日发布的 1.9.7_1510 的更改日志
 {: #197_1510}
 
 下表显示了补丁 1.9.7_1510 中包含的更改。
@@ -4515,9 +5417,22 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 ### V1.8 更改日志（不受支持）
 {: #18_changelog}
 
-查看以下更改。
+查看 V1.8 更改日志。
+{: shortdesc}
 
-### 2018 年 9 月 20 日发布的工作程序节点 FP1.8.15_1521 的更改日志
+*   [2018 年 9 月 20 日发布的工作程序节点 FP1.8.15_1521 的更改日志](#1815_1521)
+*   [2018 年 8 月 23 日发布的工作程序节点 FP1.8.15_1520 的更改日志](#1815_1520)
+*   [2018 年 8 月 13 日发布的工作程序节点 FP1.8.15_1519 的更改日志](#1815_1519)
+*   [2018 年 7 月 27 日发布的 1.8.15_1518 的更改日志](#1815_1518)
+*   [2018 年 7 月 3 日发布的工作程序节点 FP1.8.13_1516 的更改日志](#1813_1516)
+*   [2018 年 6 月 21 日发布的工作程序节点 FP1.8.13_1515 的更改日志](#1813_1515)
+*   [2018 年 6 月 19 日发布的 1.8.13_1514 的更改日志](#1813_1514)
+*   [2018 年 6 月 11 日发布的工作程序节点 FP1.8.11_1512 的更改日志](#1811_1512)
+*   [2018 年 5 月 18 日发布的工作程序节点 FP1.8.11_1511 的更改日志](#1811_1511)
+*   [2018 年 5 月 16 日发布的工作程序节点 FP1.8.11_1510 的更改日志](#1811_1510)
+*   [2018 年 4 月 19 日发布的 1.8.11_1509 的更改日志](#1811_1509)
+
+#### 2018 年 9 月 20 日发布的工作程序节点 FP1.8.15_1521 的更改日志
 {: #1815_1521}
 
 <table summary="自 V1.8.15_1520 以来进行的更改">
@@ -4535,7 +5450,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>日志循环</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)可以修复工作程序节点。</td>
+<td>切换到使用 `systemd` 计时器，而不使用 `cronjobs`，以防止 `logrotate` 因工作程序节点 90 天内未重新装入或更新而失败。**注**：在该次发行版的所有更早版本中，由于日志不循环，因此在定时作业失败后，主磁盘会填满。在工作程序节点 90 天内处于活动状态而未更新或重新装入后，定时作业会失败。如果日志填满整个主磁盘，那么工作程序节点将进入故障状态。使用 `ibmcloud ks worker-reload` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)或 `ibmcloud ks worker-update` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)可以修复工作程序节点。</td>
 </tr>
 <tr>
 <td>工作程序节点运行时组件（`kubelet`、`kube-proxy` 和 `docker`）</td>
@@ -4547,7 +5462,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 <td>root 用户密码到期</td>
 <td>不适用</td>
 <td>不适用</td>
-<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)一次工作程序节点。</td>
+<td>由于合规性原因，工作程序节点的 root 用户密码会在 90 天后到期。如果自动化工具需要以 root 用户身份登录到工作程序节点，或者依赖于以 root 用户身份运行的定时作业，那么可以通过登录到工作程序节点并运行 `chage -M -1 root` 来禁用密码到期。**注**：如果您有阻止以 root 用户身份运行或阻止除去到期密码的安全合规性需求，请不要禁用到期。您可以改为至少每 90 天[更新](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)或[重新装入](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)一次工作程序节点。</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4558,7 +5473,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 8 月 23 日发布的工作程序节点 FP1.8.15_1520 的更改日志
+#### 2018 年 8 月 23 日发布的工作程序节点 FP1.8.15_1520 的更改日志
 {: #1815_1520}
 
 <table summary="自 V1.8.15_1519 以来进行的更改">
@@ -4587,7 +5502,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 8 月 13 日发布的工作程序节点 FP1.8.15_1519 的更改日志
+#### 2018 年 8 月 13 日发布的工作程序节点 FP1.8.15_1519 的更改日志
 {: #1815_1519}
 
 <table summary="自 V1.8.15_1518 以来进行的更改">
@@ -4610,7 +5525,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 27 日发布的 1.8.15_1518 的更改日志
+#### 2018 年 7 月 27 日发布的 1.8.15_1518 的更改日志
 {: #1815_1518}
 
 <table summary="自 V1.8.13_1516 以来进行的更改">
@@ -4657,7 +5572,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 7 月 3 日发布的工作程序节点 FP1.8.13_1516 的更改日志
+#### 2018 年 7 月 3 日发布的工作程序节点 FP1.8.13_1516 的更改日志
 {: #1813_1516}
 
 <table summary="自 V1.8.13_1515 以来进行的更改">
@@ -4681,7 +5596,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 6 月 21 日发布的工作程序节点 FP1.8.13_1515 的更改日志
+#### 2018 年 6 月 21 日发布的工作程序节点 FP1.8.13_1515 的更改日志
 {: #1813_1515}
 
 <table summary="自 V1.8.13_1514 以来进行的更改">
@@ -4704,7 +5619,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 6 月 19 日发布的 1.8.13_1514 的更改日志
+#### 2018 年 6 月 19 日发布的 1.8.13_1514 的更改日志
 {: #1813_1514}
 
 <table summary="自 V1.8.11_1512 以来进行的更改">
@@ -4746,7 +5661,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 6 月 11 日发布的工作程序节点 FP1.8.11_1512 的更改日志
+#### 2018 年 6 月 11 日发布的工作程序节点 FP1.8.11_1512 的更改日志
 {: #1811_1512}
 
 <table summary="自 V1.8.11_1511 以来进行的更改">
@@ -4770,7 +5685,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 5 月 18 日发布的工作程序节点 FP1.8.11_1511 的更改日志
+#### 2018 年 5 月 18 日发布的工作程序节点 FP1.8.11_1511 的更改日志
 {: #1811_1511}
 
 <table summary="自 V1.8.11_1510 以来进行的更改">
@@ -4793,7 +5708,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </tbody>
 </table>
 
-### 2018 年 5 月 16 日发布的工作程序节点 FP1.8.11_1510 的更改日志
+#### 2018 年 5 月 16 日发布的工作程序节点 FP1.8.11_1510 的更改日志
 {: #1811_1510}
 
 <table summary="自 V1.8.11_1509 以来进行的更改">
@@ -4817,7 +5732,7 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 </table>
 
 
-### 2018 年 4 月 19 日发布的 1.8.11_1509 的更改日志
+#### 2018 年 4 月 19 日发布的 1.8.11_1509 的更改日志
 {: #1811_1509}
 
 <table summary="自 V1.8.8_1507 以来进行的更改">
@@ -4864,7 +5779,13 @@ Kubernetes V1.10 已不推荐使用，到 2019 年 5 月 15 日即不再予以�
 ### V1.7 更改日志（不受支持）
 {: #17_changelog}
 
-查看以下更改。
+查看 V1.7 更改日志。
+{: shortdesc}
+
+*   [2018 年 6 月 11 日发布的工作程序节点 FP1.7.16_1514 的更改日志](#1716_1514)
+*   [2018 年 5 月 18 日发布的工作程序节点 FP1.7.16_1513 的更改日志](#1716_1513)
+*   [2018 年 5 月 16 日发布的工作程序节点 FP1.7.16_1512 的更改日志](#1716_1512)
+*   [2018 年 4 月 19 日发布的 1.7.16_1511 的更改日志](#1716_1511)
 
 #### 2018 年 6 月 11 日发布的工作程序节点 FP1.7.16_1514 的更改日志
 {: #1716_1514}

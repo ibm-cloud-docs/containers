@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Configurazione della connettività VPN
@@ -33,6 +33,8 @@ Con la connettività VPN, puoi collegare in modo sicuro le applicazioni di un cl
 Per collegare i tuoi nodi di lavoro e applicazioni a un data center in loco, puoi configurare una delle seguenti opzioni.
 
 - **Servizio VPN IPSec strongSwan**: puoi configurare un [Servizio VPN IPSec strongSwan![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.strongswan.org/about.html) che collega in modo sicuro il tuo cluster Kubernetes a una rete in loco. Il servizio VPN IPSec strongSwan fornisce un canale di comunicazione end-to-end protetto su Internet basato sulla suite di protocolli IPSec (Internet Protocol Security) standard del settore. Per configurare una connessione protetta tra il tuo cluster e una rete in loco, [configura e distribuisci il servizio VPN IPSec strongSwan](#vpn-setup) direttamente in un pod nel tuo cluster.
+
+- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) ti consente di creare una connessione diretta e privata tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento su internet pubblico. Le offerte {{site.data.keyword.Bluemix_notm}} Direct Link sono utili quando devi implementare carichi di lavoro ibridi, carichi di lavoro tra provider, trasferimenti di dati di grandi dimensioni o frequenti oppure carichi di lavoro privati. Per scegliere un'offerta {{site.data.keyword.Bluemix_notm}} Direct Link e configurare una connessione {{site.data.keyword.Bluemix_notm}} Direct Link, vedi [Introduzione a IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) nella documentazione di {{site.data.keyword.Bluemix_notm}} Direct Link.
 
 - **VRA (Virtual Router Appliance) o FSA (Fortigate Security Appliance)**: Potresti scegliere di configurare una [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o una [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) per configurare un endpoint VPN IPSec. Questa opzione è utile quando hai un cluster più grande, vuoi accedere a più cluster su una singola VPN o hai bisogno di una VPN basata sugli instradamenti. Per configurare una VRA, vedi [Configurazione della connettività VPN con VRA](#vyatta).
 
@@ -69,6 +71,9 @@ Prima di utilizzare il grafico Helm strongSwan, esamina le considerazioni e le l
 * Il grafico Helm strongSwan viene eseguito come un pod Kubernetes all'interno del cluster. Le prestazioni della VPN sono influenzate dall'utilizzo della memoria e della rete di Kubernetes e di altri pod che sono in esecuzione nel cluster. Se hai un ambiente critico per le prestazioni, considera l'utilizzo di una soluzione VPN eseguita esternamente al cluster su hardware dedicato.
 * Il grafico Helm strongSwan esegue un singolo pod VPN come endpoint del tunnel IPSec. Se si verifica un malfunzionamento del pod, il cluster lo riavvia. Tuttavia, potresti riscontrare un breve tempo di inattività mentre il nuovo pod viene avviato e la connessione VPN viene ristabilita. Se hai bisogno di un ripristino a seguito di un errore più rapido oppure una soluzione ad alta disponibilità più elaborata, considera l'utilizzo di una soluzione VPN eseguita esternamente al cluster su hardware dedicato.
 * Il grafico Helm strongSwan non fornisce le metriche o il monitoraggio del traffico di rete che transita sulla connessione VPN. Per un elenco degli strumenti di monitoraggio supportati, consulta [Servizi di registrazione e monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services).
+
+I tuoi utenti del cluster possono utilizzare il servizio VPN strongSwan per stabilire una connessione al tuo master Kubernetes tramite l'endpoint del servizio privato. Tuttavia, le comunicazioni con il master Kubernetes sull'endpoint del servizio privato devono passare per l'intervallo di indirizzi IP <code>166.X.X.X</code>, che non è instradabile da una connessione VPN. Puoi esporre l'endpoint del servizio privato del master per i tuoi utenti del cluster [utilizzando un NLB (network load balancer) privato](/docs/containers?topic=containers-clusters#access_on_prem). L'NLB privato espone l'endpoint del servizio privato del master come un indirizzo IP del cluster `172.21.x.x` interno a cui il pod VPN strongSwan può accedere. Se abiliti solo l'endpoint del servizio privato, puoi utilizzare il dashboard Kubernetes o abilitare temporaneamente l'endpoint del servizio pubblico per creare l'NLB privato.
+{: tip}
 
 <br />
 
@@ -147,8 +152,8 @@ Dopo che hai distribuito ciascun grafico Helm, ogni distribuzione VPN strongSwan
       - `zoneSpecificRoutes`: imposta su `true`. Questa impostazione limita la connessione VPN a una singola zona nel cluster. I pod in una zona specifica utilizzano solo la connessione VPN configurata per quella specifica zona. Questa soluzione riduce il numero di pod strongSwan richiesti per supportare più VPN in un cluster multizona, migliora le prestazioni della VPN perché il traffico della VPN fluisce solo ai nodi di lavoro che si trovano nella zona corrente e assicura che la connettività VPN per ciascuna zona non sia influenzata dalla connettività VPN, dai pod per cui si è verificato un arresto anomalo o dalle interruzioni che si sono verificate in altre zone. Tieni presente che non è necessario configurare `remoteSubnetNAT`. Più VPN che utilizzano l'impostazione `zoneSpecificRoutes` possono avere la stessa sottorete remota (`remote.subnet`) perché l'instradamento è configurato in base a ogni singola zona.
       - `enableSingleSourceIP`: imposta su `true` e imposta la sottorete locale (`local.subnet`) su un singolo indirizzo IP /32. Questa combinazione di impostazioni nasconde tutti gli indirizzi IP privati del cluster dietro un singolo indirizzo IP /32. Questo indirizzo /32 univoco consente alla rete in loco remota di inviare risposte sulla connessione VPN corretta al pod corretto nel cluster che ha avviato la richiesta. Tieni presente che il singolo indirizzo IP /32 configurato per l'opzione (`local.subnet`) deve essere univoco in ciascuna configurazione VPN strongSwan.
     * Se le applicazioni nella rete in loco remota devono accedere ai servizi nel cluster:    
-      - `localSubnetNAT`: assicurati che un'applicazione nella rete remota in loco possa selezionare una connessione VPN specifica per inviare e ricevere traffico nel cluster. In ciascuna configurazione Helm strongSwan, utilizza `localSubnetNAT` per identificare in modo univoco le risorse del cluster a cui può accedere l'applicazione in loco remota. Poiché vengono stabilite più VPN dalla rete in loco remota al cluster, devi aggiungere la logica all'applicazione sulla rete in loco in modo che possa selezionare quale VPN utilizzare quando accede ai servizi nel cluster. Tieni presente che i servizi nel cluster sono accessibili tramite molteplici sottoreti differenti, a seconda di quello che hai configurato per `localSubetNAT` in ciascuna configurazione VPN strongSwan.
-      - ` remoteSubnetNAT` assicurati che un pod nel tuo cluster utilizzi la stessa connessione VPN per restituire il traffico alla rete remota. In ogni file di distribuzione strongSwan, associa la sottorete in loco remota a una sottorete univoca utilizzando l'impostazione `remoteSubetNAT`. Il traffico che viene ricevuto da un pod nel cluster da una `remoteSubetNAT` specifica per la VPN viene restituito alla stessa `remoteSubnetNAT` e quindi su quella stessa connessione VPN.
+      - `localSubnetNAT`: assicurati che un'applicazione nella rete remota in loco possa selezionare una connessione VPN specifica per inviare e ricevere traffico nel cluster. In ciascuna configurazione Helm strongSwan, utilizza `localSubnetNAT` per identificare in modo univoco le risorse del cluster a cui può accedere l'applicazione in loco remota. Poiché vengono stabilite più VPN dalla rete in loco remota al cluster, devi aggiungere la logica all'applicazione sulla rete in loco in modo che possa selezionare quale VPN utilizzare quando accede ai servizi nel cluster. Tieni presente che i servizi nel cluster sono accessibili tramite molteplici sottoreti differenti, a seconda di quello che hai configurato per `localSubnetNAT` in ciascuna configurazione VPN strongSwan.
+      - ` remoteSubnetNAT` assicurati che un pod nel tuo cluster utilizzi la stessa connessione VPN per restituire il traffico alla rete remota. In ogni file di distribuzione strongSwan, associa la sottorete in loco remota a una sottorete univoca utilizzando l'impostazione `remoteSubnetNAT`. Il traffico che viene ricevuto da un pod nel cluster da una `remoteSubnetNAT` specifica per la VPN viene restituito alla stessa `remoteSubnetNAT` specifica per la VPN e quindi su quella stessa connessione VPN.
 
 3. Configura il software dell'endpoint VPN remoto per stabilire una connessione VPN separata al programma di bilanciamento del carico in ciascuna zona.
 
@@ -162,9 +167,9 @@ Prima di installare il grafico Helm strongSwan, devi decidere la configurazione 
 {: shortdesc}
 
 Prima di iniziare:
-* [Installa un gateway VPN IPSec nel tuo data center in loco](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
+* Installa un gateway VPN IPSec nel tuo data center in loco.
 * Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Nota**: nei cluster standard sono consentite tutte le configurazioni strongSwan. Se utilizzi un cluster gratuito, puoi scegliere solo una connessione VPN in uscita nel [Passo 3](#strongswan_3). Le connessioni VPN in entrata richiedono un programma di bilanciamento del carico nel cluster e i programmi di bilanciamento del carico non sono disponibili per i cluster gratuiti.
 
 ### Passo 1: Ottieni il grafico Helm strongSwan
@@ -600,20 +605,20 @@ Per limitare il traffico VPN a un determinato spazio dei nomi:
 Se hai più distribuzioni VPN strongSwan in un cluster a più tenant, puoi limitare il traffico VPN per ogni distribuzione a specifici nodi di lavoro dedicati a ciascun tenant.
 {: shortdesc}
 
-Quando distribuisci un grafico Helm strongSwan, viene creata una distribuzione VPN strongSwan. I pod VPN strongSwan vengono distribuiti su qualsiasi nodo di lavoro non corrotto. Inoltre, viene creata una serie di daemon Kubernetes. Questa serie di daemon configura automaticamente gli instradamenti su tutti i nodi di lavoro non corrotti nel cluster a ognuna delle sottoreti remote. Il pod VPN strongSwan utilizza gli instradamenti sui nodi di lavoro per inoltrare le richieste alla sottorete remota nella rete in loco.
+Quando distribuisci un grafico Helm strongSwan, viene creata una distribuzione VPN strongSwan. I pod VPN strongSwan vengono distribuiti su qualsiasi nodo di lavoro non contaminato. Inoltre, viene creata una serie di daemon Kubernetes. Questa serie di daemon configura automaticamente gli instradamenti su tutti i nodi di lavoro non contaminati nel cluster a ognuna delle sottoreti remote. Il pod VPN strongSwan utilizza gli instradamenti sui nodi di lavoro per inoltrare le richieste alla sottorete remota nella rete in loco.
 
-Gli instradamenti non vengono configurati sui nodi corrotti a meno che non specifichi la corruzione nell'impostazione `tolerations` nel file `value.yaml`. Corrompendo i nodi di lavoro, puoi impedire che gli instradamenti VPN vengano configurati su questi nodi di lavoro. Quindi, puoi specificare la corruzione nell'impostazione `tolerations` solo per la distribuzione VPN che vuoi consentire sul nodo di lavoro corrotto. In questo modo, i pod VPN strongSwan per la distribuzione del grafico Helm di un tenant utilizzano solo gli instradamenti sui nodi di lavoro di quel tenant per instradare il traffico attraverso la connessione VPN alla sottorete remota.
+Gli instradamenti non vengono configurati sui nodi contaminati a meno che non specifichi la contaminazione nell'impostazione `tolerations` nel file `value.yaml`. Contaminando i nodi di lavoro, puoi impedire che gli instradamenti VPN vengano configurati su questi nodi di lavoro. Quindi, puoi specificare la contaminazione nell'impostazione `tolerations` solo per la distribuzione VPN che vuoi consentire sul nodo di lavoro contaminato. In questo modo, i pod VPN strongSwan per la distribuzione del grafico Helm di un tenant utilizzano solo gli instradamenti sui nodi di lavoro di quel tenant per instradare il traffico attraverso la connessione VPN alla sottorete remota.
 
 Prima di utilizzare questa soluzione, esamina le considerazioni e le limitazioni riportate di seguito.
-* Per impostazione predefinita, Kubernetes posiziona i pod dell'applicazione su qualsiasi nodo di lavoro non corrotto disponibile. Per assicurarti che questa soluzione funzioni correttamente, ciascun tenant deve prima garantire di distribuire i propri pod dell'applicazione solo ai nodi di lavoro corrotti per il tenant corretto. Inoltre, ciascun nodo di lavoro corrotto deve avere anche una tolleranza per consentire ai pod dell'applicazione di essere posizionati sul nodo. Per ulteriori informazioni sulle corruzioni e tolleranze, vedi la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
-* Le risorse del cluster potrebbero non essere utilizzate in modo ottimale perché nessuno dei tenant può posizionare i pod dell'applicazione sui nodi non corrotti condivisi.
+* Per impostazione predefinita, Kubernetes posiziona i pod dell'applicazione su qualsiasi nodo di lavoro non contaminato disponibile. Per assicurarti che questa soluzione funzioni correttamente, ciascun tenant deve prima garantire di distribuire i propri pod dell'applicazione solo ai nodi di lavoro contaminati per il tenant corretto. Inoltre, ciascun nodo di lavoro contaminato deve avere anche una tolleranza per consentire ai pod dell'applicazione di essere posizionati sul nodo. Per ulteriori informazioni sulle contaminazioni e tolleranze, vedi la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+* Le risorse del cluster potrebbero non essere utilizzate in modo ottimale perché nessuno dei tenant può posizionare i pod dell'applicazione sui nodi non contaminati condivisi.
 
-I seguenti passi per limitare il traffico VPN strongSwan per nodo di lavoro utilizzano questo scenario di esempio: supponiamo che tu abbia un cluster {{site.data.keyword.containerlong_notm}} a più tenant con sei nodi di lavoro. Il cluster supporta il tenant A e il tenant B. Corrompi i nodi di lavoro nei seguenti modi:
-* Due nodi di lavoro vengono corrotti in modo che solo i pod del tenant A siano pianificati sui nodi di lavoro.
-* Due nodi di lavoro vengono corrotti in modo che solo i pod del tenant B siano pianificati sui nodi di lavoro.
-* Due nodi di lavoro non vengono corrotti perché sono richiesti almeno 2 nodi di lavoro per i pod VPN strongSwan e l'IP del programma di bilanciamento del carico sui cui eseguirli.
+I seguenti passi per limitare il traffico VPN strongSwan per nodo di lavoro utilizzano questo scenario di esempio: supponiamo che tu abbia un cluster {{site.data.keyword.containerlong_notm}} a più tenant con sei nodi di lavoro. Il cluster supporta il tenant A e il tenant B. Contamina i nodi di lavoro nei seguenti modi:
+* Due nodi di lavoro vengono contaminati in modo che solo i pod del tenant A siano pianificati sui nodi di lavoro.
+* Due nodi di lavoro vengono contaminati in modo che solo i pod del tenant B siano pianificati sui nodi di lavoro.
+* Due nodi di lavoro non vengono contaminati perché sono richiesti almeno 2 nodi di lavoro per i pod VPN strongSwan e l'IP del programma di bilanciamento del carico sui cui eseguirli.
 
-Per limitare il traffico VPN ai nodi corrotti per ciascun tenant:
+Per limitare il traffico VPN ai nodi contaminati per ciascun tenant:
 
 1. Per limitare il traffico VPN solo ai nodi di lavoro dedicati al tenant A in questo esempio, specifichi la seguente `toleration` nel file `values.yaml` per il grafico Helm strongSwan del tenant A:
     ```
@@ -624,7 +629,7 @@ Per limitare il traffico VPN ai nodi corrotti per ciascun tenant:
        effect: "NoSchedule"
     ```
     {: codeblock}
-    Questa tolleranza consente alla serie di daemon di instradamento di essere eseguita sui due nodi di lavoro che hanno la corruzione `dedicated="tenantA"` e sui due nodi di lavoro non corrotti. I pod VPN strongSwan per questa distribuzione vengono eseguiti sui due nodi di lavoro non corrotti.
+    Questa tolleranza consente alla serie di daemon di instradamento di essere eseguita sui due nodi di lavoro che hanno la contaminazione `dedicated="tenantA"` e sui due nodi di lavoro non contaminati. I pod VPN strongSwan per questa distribuzione vengono eseguiti sui due nodi di lavoro non contaminati.
 
 2. Per limitare il traffico VPN solo ai nodi di lavoro dedicati al tenant B in questo esempio, specifichi la seguente `toleration` nel file `values.yaml` per il grafico Helm strongSwan del tenant B:
     ```
@@ -635,7 +640,7 @@ Per limitare il traffico VPN ai nodi corrotti per ciascun tenant:
        effect: "NoSchedule"
     ```
     {: codeblock}
-    Questa tolleranza consente alla serie di daemon di instradamento di essere eseguita sui due nodi di lavoro che hanno la corruzione `dedicated="tenantB"` e sui due nodi di lavoro non corrotti. I pod VPN strongSwan per questa distribuzione vengono eseguiti anche sui due nodi di lavoro non corrotti.
+    Questa tolleranza consente alla serie di daemon di instradamento di essere eseguita sui due nodi di lavoro che hanno la contaminazione `dedicated="tenantB"` e sui due nodi di lavoro non contaminati. I pod VPN strongSwan per questa distribuzione vengono eseguiti anche sui due nodi di lavoro non contaminati.
 
 <br />
 
@@ -652,9 +657,6 @@ Per aggiornare il tuo grafico Helm strongSwan all'ultima versione:
   helm upgrade -f config.yaml <release_name> ibm/strongswan
   ```
   {: pre}
-
-Il grafico Helm strongSwan 2.0.0 non funziona con Calico v3 o Kubernetes 1.10. Prima di [aggiornare il tuo cluster alla 1.10](/docs/containers?topic=containers-cs_versions#cs_v110), innanzitutto aggiorna strongSwan al grafico Helm 2.2.0 o versioni successive, che sono compatibili con Calico 2.6 e Kubernetes 1.9. Successivamente, elimina il tuo grafico Helm strongSwan. Infine, dopo l'aggiornamento, puoi reinstallare il grafico.
-{:tip}
 
 ## Disabilitazione del servizio VPN IPSec strongSwan
 {: vpn_disable}
@@ -692,11 +694,11 @@ Tutto il traffico di rete pubblico e privato che entra o esce dalle VLAN del clu
 
 Per configurare una VRA (Virtual Router Appliance):
 
-1. [Ordina una VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance).
+1. [Ordina una VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started).
 
 2. [Configura la VLAN privata nella VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans).
 
 3. Per abilitare una connessione VPN utilizzando la VRA, [configura VRRP nella VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-Se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non vengono configurate sull'applicazione router. Per utilizzare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning delle VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Se hai un'applicazione router esistente e aggiungi quindi un cluster, le nuove sottoreti portatili ordinate per il cluster non vengono configurate sull'applicazione router. Per utilizzare i servizi di rete, devi abilitare l'instradamento tra le sottoreti sulla stessa VLAN [abilitando lo spanning della VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Per controllare se lo spanning della VLAN è già abilitato, usa il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 {: important}

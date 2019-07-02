@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}}의 소매 유스 케이스
@@ -40,7 +40,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}}를 사용해야 하는 이유: {{site.data.keyword.containerlong_notm}}는 컨테이너가 새 비즈니스 파트너 및 기타 외부 관련 대상이 API를 통해 앱 및 데이터를 공동 개발할 수 있게 해 주는 퍼블릭 클라우드 에코시스템을 제공합니다. 소매 시스템이 퍼블릭 클라우드에 있게 되면 API가 데이터 공유를 합리화하고 새 앱 개발을 즉시 시작할 수 있습니다. 개발자들이 도구 체인을 사용하여 개발 및 테스트 시스템으로 변경사항을 신속히 푸시하며 손쉽게 실험을 수행할 수 있게 되면 앱 배치가 늘어납니다.
 
 {{site.data.keyword.containerlong_notm}} 및 주요 기술:
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [앱 간에 데이터를 지속시키고 동기화하는 데 필요한 {{site.data.keyword.cos_full}}](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -110,7 +110,7 @@ API 마이크로서비스에 대한 로깅 및 모니터링(특히 이들이 백
 **5단계: 지속적 제공**
 * 공동 개발된 API에 IBM Cloud Logging and Monitoring 도구(다양한 개발자가 액세스 가능한 클라우드 기반 도구)가 추가되면 이들의 디버깅이 더 간단해집니다.
 * {{site.data.keyword.contdelivery_full}}는 개발자가 사용자 정의할 수 있으며 공유 가능한 템플리트를 IBM, 서드파티 및 오픈 소스에서 제공하는 도구와 함께 사용하여 통합 도구 체인을 신속하게 제공할 수 있도록 도와줍니다. 개발자는 분석으로 품질을 제어하면서 빌드와 테스트를 자동화합니다.
-* 개발자는 자신의 개발 및 테스트 클러스터에 앱을 빌드하고 테스트한 후, IBM Continuous Integration 및 Continuous Delivery(CI/CD) 도구 체인을 사용하여 전 세계의 클러스터에 앱을 배치합니다.
+* 개발자는 자신의 개발 및 테스트 클러스터에 앱을 빌드하고 테스트한 후, IBM의 지속적 통합 및 지속적 딜리버리(CI/CD) 도구 체인을 사용하여 전 세계의 클러스터에 앱을 배치합니다.
 * {{site.data.keyword.containerlong_notm}}는 앱의 손쉬운 롤아웃 및 롤백 기능을 제공합니다. Istio의 지능형 라우팅 및 로드 밸런싱 기능을 통해, 맞춤 작성된 앱이 캠페인을 테스트하기 위해 배치됩니다.
 
 **결과**
@@ -129,7 +129,7 @@ API 마이크로서비스에 대한 로깅 및 모니터링(특히 이들이 백
 
 주요 기술:    
 * [개발 가속화를 위한 수평적 확장](/docs/containers?topic=containers-app#highly_available_apps)
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Watson Discovery를 사용한 시장 동향 관련 인사이트 확보](https://www.ibm.com/watson/services/discovery/)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.messagehub_full}}를 사용한 인벤토리 관리](/docs/services/EventStreams?topic=eventstreams-about#about)

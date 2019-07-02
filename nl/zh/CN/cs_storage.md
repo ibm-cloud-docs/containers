@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks 
 
@@ -21,10 +21,11 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 此内容已移动
-请使用可折叠的**在持久性存储器上存储数据**导航，或者单击下列其中一个链接来访问内容。
+请使用可折叠的**在持久性存储器上存储数据**导航，或者单击以下其中一个链接来访问此内容。
 
 - [规划高可用性存储](/docs/containers?topic=containers-storage_planning#storage_planning)
 - [了解 Kubernetes 存储器基础知识](/docs/containers?topic=containers-kube_concepts#kube_concepts)

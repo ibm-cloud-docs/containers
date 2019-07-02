@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # Présentation des cas d'utilisation
 {: #cs_uc_intro}
 
-Toute une variété de cas d'utilisation témoigne de la puissance des services {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} lorsqu'ils sont utilisés ensemble. Ces scénarios mettent en avant plusieurs secteurs d'activité et différents types de charge de travail. Même si chaque cas d'utilisation est présenté sous l'angle d'un secteur d'activité particulier, les charges de travail sont standard dans divers secteurs. Vous constaterez des schémas de charge de travail de ce type : 
+Divers cas d'utilisation témoignent de la puissance des services {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} lorsqu'ils sont utilisés ensemble. Ces scénarios mettent en avant plusieurs secteurs d'activité et différents types de charge de travail. Même si chaque cas d'utilisation est présenté sous l'angle d'un secteur d'activité particulier, ces charges de travail sont standard dans divers secteurs. Vous constaterez des schémas de charge de travail de ce type : 
 * Intelligence artificielle (AI) et apprentissage automatique (ML)
 * Données et stockage
 * DevOps
@@ -63,7 +64,7 @@ Toute une variété de cas d'utilisation témoigne de la puissance des services 
       <tr>
          <td align="center"><img src="images/retail.svg" alt="Icône de caddie avec un symbole monétaire"/><br>Distribution</td>
          <td><ul>
-        <li>[Partage de données avec des API entre des partenaires mondiaux pour augmenter les ventes omnicanal](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[Partage de données avec des API entre des partenaires commerciaux mondiaux pour augmenter les ventes omnicanal](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[Dépenses d'inventaire optimisées avec des connaissances numériques sur le comportement des ventes](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -71,7 +72,7 @@ Toute une variété de cas d'utilisation témoigne de la puissance des services 
        <td align="center"><img src="images/transport.svg" alt="Icône de wagon avec des conteneurs"/><br>Transports</td>
            <td><ul>
           <li>[Construction et déploiement d'un site RH avec l'intelligence artificielle en moins de 3 semaines](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Disponibilité accrue des systèmes internationaux pour les partenaires](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[Disponibilité accrue des systèmes internationaux pour les partenaires commerciaux](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

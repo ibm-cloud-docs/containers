@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# 规划利用集群内联网和外部联网来公开应用程序
+
+# 规划应用程序的集群内联网和外部联网
 {: #cs_network_planning}
 
 借助 {{site.data.keyword.containerlong}}，您可以通过使应用程序可供公开或专用访问来管理集群内联网和外部联网。
 {: shortdesc}
-
-此页面可帮助您规划应用程序的集群内联网和外部联网。有关设置集群进行联网的信息，请参阅[设置集群网络](/docs/containers?topic=containers-cs_network_cluster)。
-{: tip}
 
 要快速开始使用应用程序联网，请遵循以下决策树，然后单击其中一个选项以查看其设置文档：
 
@@ -66,7 +65,7 @@ Kubernetes 服务发现使用网络服务和本地 Kubernetes 代理为应用程
 
 如果使用的服务同时提供了内部集群 IP 地址和外部 IP 地址，那么集群外部的客户机可以向服务的外部公共或专用 IP 地址发送请求。`kube-proxy` 会将请求转发到服务的集群内 IP 地址，并在位于服务后端的应用程序 pod 之间进行负载均衡。
 
-下图演示了 Kubernetes 如何在 {{site.data.keyword.containerlong_notm}} 中通过 `kube-poxy` 和 NodePort、LoadBalancer 或 Ingress 服务转发公用网络流量。
+下图演示了 Kubernetes 如何在 {{site.data.keyword.containerlong_notm}} 中通过 `kube-proxy` 和 NodePort、LoadBalancer 或 Ingress 服务转发公用网络流量。
 <p>
 <figure>
  <img src="images/cs_network_planning_ov-01.png" alt="{{site.data.keyword.containerlong_notm}} 外部流量网络体系结构">
@@ -205,12 +204,14 @@ Kubernetes 支持四种基本类型的网络服务：`ClusterIP`、`NodePort`、
 以专用方式向仅专用网络公开集群中的应用程序。
 {: shortdesc}
 
-在 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 集群中部署应用程序后，您可能希望使应用程序仅可供位于集群所有专用网络上的用户和服务访问。例如，假设为应用程序创建了专用 NLB 服务。此专用 NLB 可由以下各项进行访问：
+在 {{site.data.keyword.containerlong_notm}} 的 Kubernetes 集群中部署应用程序后，您可能希望使应用程序仅可供位于集群所有专用网络上的用户和服务访问。专用负载均衡非常适用于使应用程序可供集群外部的请求使用，而无需向一般公众公开应用程序。还可以使用专用负载均衡来测试访问，请求路由以及对应用程序进行其他配置后，再使用公用网络服务向公众公开应用程序。
+
+例如，假设为应用程序创建了专用 NLB 服务。此专用 NLB 可由以下各项进行访问：
 * 该同一集群中的任何 pod。
 * 同一 {{site.data.keyword.Bluemix_notm}} 帐户中任何集群中的任何 pod。
-* 任何连接到同一 {{site.data.keyword.Bluemix_notm}} 帐户中任何专用 VLAN 的系统（如果启用了 [VRF](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) 或 [VLAN 生成](/docs/containers?topic=containers-subnets#subnet-routing)）。
+* 任何连接到同一 {{site.data.keyword.Bluemix_notm}} 帐户中任何专用 VLAN 的系统（如果启用了 [VRF 或 VLAN 生成](/docs/containers?topic=containers-subnets#basics_segmentation)）。
 * 通过 VPN 连接来连接到 NLB IP 所在子网的任何系统（如果您不在 {{site.data.keyword.Bluemix_notm}} 帐户中，但仍在公司防火墙后）
-* 通过 VPN 连接来连接到 NLB IP 所在子网的任何系统（如果您位于其他 {{site.data.keyword.Bluemix_notm}} 帐户中）。专用负载均衡非常适用于使应用程序可供集群外部的请求使用，而无需向一般公众公开应用程序。还可以使用专用负载均衡来测试访问，请求路由以及对应用程序进行其他配置后，再使用公用网络服务向公众公开应用程序。
+* 通过 VPN 连接来连接到 NLB IP 所在子网的任何系统（如果您位于其他 {{site.data.keyword.Bluemix_notm}} 帐户中）。
 
 要使应用程序仅在专用网络上可用，请根据集群的 VLAN 设置来选择负载均衡部署模式：
 * [公用和专用 VLAN 设置](#private_both_vlans)
@@ -224,6 +225,8 @@ Kubernetes 支持四种基本类型的网络服务：`ClusterIP`、`NodePort`、
 
 工作程序节点的公用网络接口通过集群创建期间在每个工作程序节点上配置的[预定义 Calico 网络策略设置](/docs/containers?topic=containers-network_policies#default_policy)进行保护。缺省情况下，所有工作程序节点都允许所有出站网络流量。入站网络流量会被阻止，但有几个端口例外。这些端口已打开，以便 IBM 可以监视网络流量，并自动为 Kubernetes 主节点安装安全性更新，同时还可以建立与 NodePort、LoadBalancer 和 Ingress 服务的连接。
 
+由于缺省 Calico 网络策略允许流至这些服务的入站公共流量，因此您可以创建 Calico 策略，以改为阻止流至这些服务的所有公共流量。例如，NodePort 服务通过工作程序节点的专用和公共 IP 地址，在工作程序节点上打开一个端口。具有可移植专用 IP 地址的 NLB 服务会在每个工作程序节点上打开一个公共 NodePort。必须创建 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来阻止公共 NodePort。
+
 查看用于专用联网的以下负载均衡部署模式：
 
 |名称|负载均衡方法|用例|实现|
@@ -231,11 +234,8 @@ Kubernetes 支持四种基本类型的网络服务：`ClusterIP`、`NodePort`、
 |NodePort|工作程序节点上用于在工作程序专用 IP 地址上公共应用程序的端口|测试对一个应用程序的专用访问权，或者仅在短时间内提供访问权。|<ol><li>[创建 NodePort 服务](/docs/containers?topic=containers-nodeport)。</li><li>NodePort 服务通过工作程序节点的专用和公共 IP 地址，在工作程序节点上打开一个端口。必须使用 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来阻止流至公共 NodePort 的流量。</li></ol>|
 |NLB V1.0|使用专用 IP 地址公开应用程序的基本负载均衡|使用专用 IP 地址快速向专用网络公开一个应用程序。|<ol><li>[创建专用 NLB 服务](/docs/containers?topic=containers-loadbalancer)。</li><li>具有可移植专用 IP 地址的 NLB 仍在每个工作程序节点上打开公共节点端口。请创建 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来阻止流至公共 NodePort 的流量。</li></ol>|
 |NLB V2.0|使用专用 IP 地址公开应用程序的 DSR 负载均衡|公开一个应用程序，该应用程序可能使用 IP 地址接收流至专用网络的高流量。|<ol><li>[创建专用 NLB 服务](/docs/containers?topic=containers-loadbalancer)。</li><li>具有可移植专用 IP 地址的 NLB 仍在每个工作程序节点上打开公共节点端口。请创建 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来阻止流至公共 NodePort 的流量。</li></ol>|
-|Ingress ALB|使用主机名公开应用程序并使用定制路由规则的 HTTPS 负载均衡|为多个应用程序实现定制路由规则和 SSL 终止。|<ol><li>[禁用公共 ALB](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[启用专用 ALB 并创建 Ingress 资源](/docs/containers?topic=containers-ingress#private_ingress)。</li><li>使用[注释](/docs/containers?topic=containers-ingress_annotation)定制 ALB 路由规则。</li></ol>|
+|Ingress ALB|使用主机名公开应用程序并使用定制路由规则的 HTTPS 负载均衡|为多个应用程序实现定制路由规则和 SSL 终止。|<ol><li>[禁用公共 ALB](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)。</li><li>[启用专用 ALB 并创建 Ingress 资源](/docs/containers?topic=containers-ingress#ingress_expose_private)。</li><li>使用[注释](/docs/containers?topic=containers-ingress_annotation)定制 ALB 路由规则。</li></ol>|
 {: caption="公用和专用 VLAN 设置的网络部署模式的特征" caption-side="top"}
-
-由于缺省 Calico 网络策略允许流至这些服务的入站公共流量，因此您可以创建 Calico 策略，以改为阻止流至这些服务的所有公共流量。例如，NodePort 服务通过工作程序节点的专用和公共 IP 地址，在工作程序节点上打开一个端口。具有可移植专用 IP 地址的 NLB 服务会在每个工作程序节点上打开一个公共 NodePort。必须创建 [Calico DNAT 前网络策略](/docs/containers?topic=containers-network_policies#block_ingress)来阻止公共 NodePort。
-{: tip}
 
 <br />
 

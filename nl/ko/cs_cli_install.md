@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 
@@ -31,7 +31,7 @@ subcollection: containers
 {{site.data.keyword.containerlong}} CLI 또는 API를 사용하여 Kubernetes 클러스터를 작성하고 관리할 수 있습니다.
 {:shortdesc}
 
-## CLI 설치
+## IBM Cloud CLI 및 플러그인 설치
 {: #cs_cli_install_steps}
 
 {{site.data.keyword.containerlong_notm}}에서 Kubernetes 클러스터를 작성해서 관리하며 컨테이너화된 앱을 클러스터에 배치하기 위해 필요한 CLI를 설치하십시오.
@@ -39,10 +39,9 @@ subcollection: containers
 
 이 태스크에는 다음 CLI 및 플러그인을 설치하기 위한 정보가 포함되어 있습니다.
 
-- {{site.data.keyword.Bluemix_notm}} CLI
-- {{site.data.keyword.containerlong_notm}} 플러그인
-- {{site.data.keyword.registryshort_notm}} 플러그인
-- 클러스터의 `major.minor` 버전과 일치하는 Kubernetes CLI 버전
+-   {{site.data.keyword.Bluemix_notm}} CLI
+-   {{site.data.keyword.containerlong_notm}} 플러그인
+-   {{site.data.keyword.registryshort_notm}} 플러그인
 
 대신 {{site.data.keyword.Bluemix_notm}} 콘솔을 사용할 경우 클러스터가 작성된 후 [Kubernetes 터미널](#cli_web)의 웹 브라우저에서 직접 CLI 명령을 실행할 수 있습니다.
 {: tip}
@@ -50,76 +49,140 @@ subcollection: containers
 <br>
 CLI를 설치하려면 다음을 수행하십시오.
 
-1. [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)를 설치하십시오. 이 설치에는 다음이 포함됩니다.
-  - 기본 {{site.data.keyword.Bluemix_notm}} CLI. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud`입니다.
-  - {{site.data.keyword.containerlong_notm}} 플러그인. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud ks`입니다.
-  - {{site.data.keyword.registryshort_notm}} 플러그인. 이 플러그인을 사용하여 IBM이 호스팅하는 멀티 테넌트, 고가용성 및 확장 가능한 개인용 이미지 레지스트리에서 사용자 고유의 네임스페이스를 설정할 수 있으며 Docker 이미지를 저장하고 이를 다른 사용자와 공유할 수 있습니다. Docker 이미지는 클러스터로 컨테이너를 배치하는 데 필요합니다. 레지스트리 명령을 실행하기 위한 접두부는 `ibmcloud cr`입니다.
+1.  [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-getting-started#idt-prereq)를 설치하십시오. 이 설치에는 다음이 포함됩니다.
+    -   기본 {{site.data.keyword.Bluemix_notm}} CLI(`ibmcloud`). 
+    -   {{site.data.keyword.containerlong_notm}} 플러그인(`ibmcloud ks`). 
+    -   {{site.data.keyword.registryshort_notm}} 플러그인(`ibmcloud cr`). 이 플러그인을 사용하여 IBM이 호스팅하는 멀티 테넌트, 고가용성 및 확장 가능한 개인용 이미지 레지스트리에서 사용자 고유의 네임스페이스를 설정할 수 있으며 Docker 이미지를 저장하고 이를 다른 사용자와 공유할 수 있습니다. Docker 이미지는 클러스터로 컨테이너를 배치하는 데 필요합니다.
+    -   기본 버전(1.13.6)에 대응하는 Kubernetes CLI(`kubectl`). <p class="note">다른 버전을 실행하는 클러스터를 사용하려는 경우에는 [해당 Kubernetes CLI 버전을 별도로 설치](#kubectl)해야 할 수 있습니다. (OpenShift) 클러스터가 있는 경우에는 [`oc` 및 `kubectl` CLI를 함께 설치](#cli_oc)합니다. </p>
+    -   Helm CLI(`helm`). Helm 차트를 통해 클러스터에 {{site.data.keyword.Bluemix_notm}} 서비스 및 복합 앱을 설치하기 위한 패키지 관리자로 Helm을 사용할 수 있습니다. Helm을 사용할 각 클러스터에서는 여전히 [Helm을 설정](/docs/containers?topic=containers-helm)해야 합니다. 
 
-  CLI를 많이 사용할 계획입니까? [{{site.data.keyword.Bluemix_notm}} CLI에 대한 쉘 자동 완성 기능을 사용(Linux/MacOS에만 해당)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)해 보십시오.
-  {: tip}
+    CLI를 많이 사용할 계획입니까? [{{site.data.keyword.Bluemix_notm}} CLI에 대한 쉘 자동 완성 기능을 사용(Linux/MacOS에만 해당)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)해 보십시오.
+    {: tip}
 
-2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
-  ```
+2.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
+    ```
     ibmcloud login
-  ```
-  {: pre}
+    ```
+    {: pre}
 
-  연합 ID가 있는 경우에는 `ibmcloud login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
-  {: tip}
+    연합 ID가 있는 경우에는 `ibmcloud login --sso`를 사용하여 {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 사용자 이름을 입력하고 CLI 출력에서 제공된 URL을 사용하여 일회성 패스코드를 검색하십시오. `--sso` 옵션을 사용하지 않으면 로그인에 실패하고 `--sso` 옵션을 사용하면 성공하는 경우에는 연합 ID를 보유하고 있다는 것입니다.
+    {: tip}
 
-3. 플러그인이 올바르게 설치되었는지 확인하십시오.
-  ```
-        ibmcloud plugin list
-  ```
-  {: pre}
+3.  {{site.data.keyword.containerlong_notm}} 플러그인 및 {{site.data.keyword.registryshort_notm}} 플러그인이 올바르게 설치되었는지 확인하십시오.
+    ```
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-  {{site.data.keyword.containerlong_notm}} 플러그인은 **container-service**로 결과에 표시되고, {{site.data.keyword.registryshort_notm}} 플러그인은 **container-registry**로 결과에 표시됩니다.
+    출력 예:
+    ```
+    Listing installed plug-ins...
 
-4. {: #kubectl}Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
-
-  최신 `kubectl`의 고정 버전이 기본 {{site.data.keyword.Bluemix_notm}} CLI와 함께 설칟됩니다. 그러나 클러스터에 대해 작업하려면 사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 대신 설치해야 합니다. 최소한 클러스터의 `major.minor` 버전과 일치하지 않는 `kubectl` CLI 버전을 사용하면 예상치 못한 결과가 발생할 수 있습니다. Kubernetes 클러스터 및 CLI 버전을 최신 상태로 유지해야 합니다.
-  {: important}
-
-  1. 사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.12.7입니다.
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다. [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
-
-  2. OS X 또는 Linux를 사용 중인 경우 다음 단계를 완료하십시오.
-    1. 실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
-      ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-    2. `/usr/local/bin`이 `PATH` 시스템 변수에 나열되어 있는지 확인하십시오. `PATH` 변수에는 운영 체제가 실행 파일을 찾을 수 있는 모든 디렉토리가 포함되어 있습니다. `PATH` 변수에 나열된 디렉토리는 서로 다른 용도로 사용됩니다. `/usr/local/bin`은 시스템 관리자가 수동으로 설치했으며 운영 체제의 일부가 아닌 소프트웨어의 실행 파일을 저장하는 데 사용됩니다.
-      ```
-             echo $PATH
-      ```
-      {: pre}
-CLI 출력 예:
-      ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-      ```
-      {: screen}
-
-    3. 파일을 실행 가능하도록 설정하십시오.
-      ```
-            chmod +x /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-다음으로 [{{site.data.keyword.containerlong_notm}}의 CLI에서 Kubernetes 클러스터 작성](/docs/containers?topic=containers-clusters#clusters_cli)을 시작하십시오.
+    Plugin Name                            Version   Status        
+    container-registry                     0.1.373     
+    container-service/kubernetes-service   0.3.23   
+    ```
+    {: screen}
 
 이러한 CLI에 대한 참조 정보는 해당 도구의 문서를 참조하십시오.
 
 -   [`ibmcloud` 명령](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
--   [`ibmcloud ks` 명령](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`ibmcloud cr` 명령](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
--   [`kubectl` 명령 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubectl.docs.kubernetes.io/)
+-   [`ibmcloud ks` 명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
+-   [`ibmcloud cr` 명령](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
+
+## Kubernetes CLI(`kubectl`) 설치
+{: #kubectl}
+
+Kubernetes 대시보드의 로컬 버전을 보고 클러스터에 앱을 배치하려면 Kubernetes CLI(`kubectl`)를 설치하십시오. 최신 `kubectl`의 고정 버전이 기본 {{site.data.keyword.Bluemix_notm}} CLI와 함께 설칟됩니다. 그러나 클러스터에 대해 작업하려면 사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 대신 설치해야 합니다. 최소한 클러스터의 `major.minor` 버전과 일치하지 않는 `kubectl` CLI 버전을 사용하면 예상치 못한 결과가 발생할 수 있습니다. 예를 들어, 서버 버전과 두 버전(n +/- 2) 이상 차이 나는 `kubectl` 클라이언트 버전을 [Kubernetes는 지원하지 않습니다 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/setup/version-skew-policy/). Kubernetes 클러스터 및 CLI 버전을 최신 상태로 유지해야 합니다.
+{: shortdesc}
+
+OpenShift 클러스터를 사용하고 계십니까? 이러한 경우에는 `kubectl`과 함께 제공되는 OpenShift Origin CLI(`oc`)를 설치하십시오. Red Hat OpenShift on IBM Cloud 클러스터와 Ubuntu 기본 {{site.data.keyword.containershort_notm}} 클러스터를 모두 보유하고 있는 경우에는 반드시 자신의 클러스터 `major.minor` Kubernetes 버전에 대응하는 `kubectl` 바이너리 파일을 사용하십시오.
+{: tip}
+
+1.  클러스터가 이미 있는 경우에는 클라이언트 `kubectl` CLI의 버전이 클러스터 API 서버의 버전과 일치하는지 확인하십시오. 
+    1.  [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  클라이언트와 서버의 버전을 비교하십시오. 클라이언트의 버전이 서버와 일치하지 않는 경우에는 다음 단계로 진행하십시오. 버전이 일치하는 경우에는 이미 적절한 `kubectl` 버전을 설치한 것입니다.
+        ```
+        kubectl version --short
+        ```
+        {: pre}
+2.  사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.13.6입니다. 
+    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    -   **Windows**: {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 Kubernetes CLI를 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다. [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
+
+3.  OS X 또는 Linux를 사용하는 경우 다음 단계를 완료하십시오. 
+    1.  실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
+        ```
+        mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  `/usr/local/bin`이 `PATH` 시스템 변수에 나열되어 있는지 확인하십시오. `PATH` 변수에는 운영 체제가 실행 파일을 찾을 수 있는 모든 디렉토리가 포함되어 있습니다. `PATH` 변수에 나열된 디렉토리는 서로 다른 용도로 사용됩니다. `/usr/local/bin`은 시스템 관리자가 수동으로 설치했으며 운영 체제의 일부가 아닌 소프트웨어의 실행 파일을 저장하는 데 사용됩니다.
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        CLI 출력 예:
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+
+    3.  파일을 실행 가능하도록 설정하십시오.
+        ```
+        chmod +x /usr/local/bin/kubectl
+        ```
+        {: pre}
+4.  **선택사항**: [`kubectl` 명령에 대한 자동 완성 기능을 사용으로 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)하십시오. 단계는 사용하는 쉘에 따라 달라집니다. 
+
+다음으로 [{{site.data.keyword.containerlong_notm}}의 CLI에서 Kubernetes 클러스터 작성](/docs/containers?topic=containers-clusters#clusters_cli_steps)을 시작하십시오. 
+
+Kubernetes CLI에 대한 자세한 정보는 [`kubectl` 참조 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubectl.docs.kubernetes.io/)를 참조하십시오.
+{: note}
 
 <br />
 
+
+## OpenShift Origin CLI(`oc`) 미리보기 베타 설치
+{: #cli_oc}
+
+[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial)는 OpenShift 클러스터를 테스트하기 위한 베타로서 사용 가능합니다.
+{: preview}
+
+OpenShift 대시보드의 로컬 버전을 보고 Red Hat OpenShift on IBM Cloud 클러스터에 앱을 배치하려면 OpenShift Origin CLI(`oc`)를 설치하십시오. `oc` CLI는 대응하는 Kubernetes CLI(`kubectl`) 버전을 포함합니다. 자세한 정보는 [OpenShift 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html)를 참조하십시오.
+{: shortdesc}
+
+Red Hat OpenShift on IBM Cloud 클러스터와 Ubuntu 기본 {{site.data.keyword.containershort_notm}} 클러스터를 둘 다 사용하고 계십니까? `oc` CLI는 `oc` 바이너리 및 `kubectl` 바이너리와 함께 제공되지만 다른 클러스터에서는 다른 Kubernetes 버전(예: OpenShift는 1.11, Ubuntu는 1.13.6)을 실행할 수도 있습니다. 반드시 자신의 클러스터 `major.minor` Kubernetes 버전에 대응하는 `kubectl` 바이너리를 사용하십시오.
+{: note}
+
+1.  자신의 로컬 운영 체제 및 OpenShift 버전에 맞는 [OpenShift Origin CLI를 다운로드 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.okd.io/download.html)하십시오. 현재 기본 OpenShift 버전은 3.11입니다. 
+
+2.  Mac OS 또는 Linux를 사용하는 경우 다음 단계를 완료하여 바이너리를 `PATH` 시스템 변수에 추가하십시오. Windows를 사용하는 경우에는 `oc` CLI를 {{site.data.keyword.Bluemix_notm}} CLI와 동일한 디렉토리에 설치하십시오. 이 설정을 사용하면 나중에 명령을 실행할 때 일부 파일 경로 변경이 필요하지 않습니다.
+    1.  `oc` 및 `kubectl` 실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
+        ```
+        mv /<filepath>/oc /usr/local/bin/oc && mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  `/usr/local/bin`이 `PATH` 시스템 변수에 나열되어 있는지 확인하십시오. `PATH` 변수에는 운영 체제가 실행 파일을 찾을 수 있는 모든 디렉토리가 포함되어 있습니다. `PATH` 변수에 나열된 디렉토리는 서로 다른 용도로 사용됩니다. `/usr/local/bin`은 시스템 관리자가 수동으로 설치했으며 운영 체제의 일부가 아닌 소프트웨어의 실행 파일을 저장하는 데 사용됩니다.
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        CLI 출력 예:
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+3.  **선택사항**: [`kubectl` 명령에 대한 자동 완성 기능을 사용으로 설정 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)하십시오. 단계는 사용하는 쉘에 따라 달라집니다. 해당 단계를 반복하여 `oc` 명령에 대한 자동 완성 기능을 사용으로 설정할 수 있습니다. 예를 들어 Linux의 bash에서는 `kubectl completion bash >/etc/bash_completion.d/kubectl` 대신 `oc completion bash >/etc/bash_completion.d/oc_completion`을 실행할 수 있습니다. 
+
+다음으로 [Red Hat OpenShift on IBM Cloud 클러스터(미리보기) 작성](/docs/containers?topic=containers-openshift_tutorial)을 시작하십시오. 
+
+OpenShift Origin CLI에 대한 자세한 정보는 [`oc` 명령 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html)를 참조하십시오.
+{: note}
+
+<br />
 
 
 ## 컴퓨터의 컨테이너에서 CLI 실행
@@ -156,16 +219,16 @@ CLI 출력 예:
 Kubernetes CLI와 함께 제공되는 명령을 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터를 관리할 수 있습니다.
 {:shortdesc}
 
-Kubernetes 1.12.7 에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터에서 사용이 지원됩니다. 클러스터를 작성한 후, 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
+Kubernetes 1.13.6에서 사용 가능한 모든 `kubectl` 명령은 {{site.data.keyword.Bluemix_notm}}의 클러스터에서 사용할 수 있도록 지원됩니다. 클러스터를 작성한 후 로컬 CLI에 대한 컨텍스트를 환경 변수가 있는 해당 클러스터로 설정하십시오. 그런 다음, Kubernetes `kubectl` 명령을 실행하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터 관련 작업을 수행할 수 있습니다.
 
 `kubectl` 명령을 실행하려면 우선 다음을 수행하십시오.
 * [필수 CLI를 설치](#cs_cli_install)하십시오.
-* [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+* [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli_steps)하십시오.
 * Kubernetes 리소스로 작업할 수 있도록 적절한 Kubernetes RBAC 역할을 권한 부여하는 [서비스 역할](/docs/containers?topic=containers-users#platform)이 있는지 확인하십시오. 서비스 역할이 있지만 플랫폼 역할이 없는 경우 클러스터를 나열하려면 클러스터 관리자에게 클러스터 이름과 ID, 또는 **뷰어** 플랫폼 역할을 제공받아야 합니다.
 
 `kubectl` 명령을 사용하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
+1.  {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
 
     ```
     ibmcloud login
@@ -183,24 +246,18 @@ Kubernetes 1.12.7 에서 사용 가능한 모든 `kubectl` 명령은 {{site.data
     ```
     {: pre}
 
-4.  이전에 선택한 {{site.data.keyword.Bluemix_notm}} 지역 이외의 지역에서 Kubernetes 클러스터를 작성하거나 이에 액세스하려면 해당 지역을 대상으로 지정하십시오.
-    ```
-ibmcloud ks region-set
-    ```
-    {: pre}
-
-5.  클러스터의 이름을 가져오려면 계정에 있는 모든 클러스터를 나열하십시오. {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할만 있고 클러스터를 볼 수 없는 경우 클러스터 관리자에게 IAM 플랫폼 **뷰어** 역할 또는 클러스터 이름과 ID를 요청하십시오.
+4.  클러스터의 이름을 가져오려면 계정에 있는 모든 클러스터를 나열하십시오. {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할만 있고 클러스터를 볼 수 없는 경우 클러스터 관리자에게 IAM 플랫폼 **뷰어** 역할 또는 클러스터 이름과 ID를 요청하십시오.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-6.  작성한 클러스터를 이 세션에 대한 컨텍스트로 설정하십시오. 클러스터 관련 작업을 수행할 때마다 다음 구성 단계를 완료하십시오.
-    1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
-
+5.  작성한 클러스터를 이 세션에 대한 컨텍스트로 설정하십시오. 클러스터 관련 작업을 수행할 때마다 다음 구성 단계를 완료하십시오.
+    1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오. <p class="tip">Windows PowerShell을 사용하고 계십니까? `--powershell` 플래그를 포함하여 Windows PowerShell 형식으로 된 환경 변수를 가져오십시오.
+    </p>
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -213,13 +270,10 @@ ibmcloud ks region-set
         ```
         {: screen}
 
-    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오.
+    2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣으십시오.
 
         **Mac 또는 Linux 사용자**: `ibmcloud ks cluster-config` 명령을 실행하고 `KUBECONFIG` 환경 변수를 복사하는 대신에 `ibmcloud ks cluster-config --export <cluster-name>`를 실행할 수 있습니다. 쉘에 따라 `eval $(ibmcloud ks cluster-config --export <cluster-name>)`를 실행하여 쉘을 설정할 수 있습니다.
-{: tip}
-
-        **Windows PowerShell 사용자**: `ibmcloud ks cluster-config` 출력에서 `SET` 명령을 복사하여 붙여넣는 대신, 다음을 실행하여 `KUBECONFIG` 환경 변수를 설정해야 합니다. 예: `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`
-        {:tip}
+        {: tip}
 
     3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오.
 
@@ -236,18 +290,18 @@ ibmcloud ks region-set
         ```
         {: screen}
 
-7.  Kubernetes CLI 서버 버전을 확인하여 `kubectl` 명령이 올바르게 실행되는지 확인하십시오.
+6.  Kubernetes CLI 서버 버전을 확인하여 `kubectl` 명령이 올바르게 실행되는지 확인하십시오.
 
     ```
-     kubectl version  --short
+    kubectl version  --short
     ```
     {: pre}
 
     출력 예:
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -257,6 +311,8 @@ ibmcloud ks region-set
 
 
 <br />
+
+
 
 
 ## CLI 업데이트
@@ -269,15 +325,15 @@ ibmcloud ks region-set
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 버전 0.8.0 이상
 -   {{site.data.keyword.containerlong_notm}} 플러그인
--   Kubernetes CLI 버전 1.12.7 이상
+-   Kubernetes CLI 버전 1.13.6 이상
 -   {{site.data.keyword.registryshort_notm}} 플러그인
 
 <br>
 CLI를 업데이트하려면 다음을 수행하십시오.
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI를 업데이트하십시오. [최신 버전 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli)을 다운로드하고 설치 프로그램을 실행하십시오.
+1.  {{site.data.keyword.Bluemix_notm}} CLI를 업데이트하십시오. [최신 버전 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-getting-started)을 다운로드하고 설치 프로그램을 실행하십시오.
 
-2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오. {{site.data.keyword.Bluemix_notm}} 지역을 지정하려면 [API 엔드포인트를 포함](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)하십시오.
+2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
 
     ```
     ibmcloud login
@@ -383,7 +439,7 @@ Kubernetes 터미널을 사용하면 {{site.data.keyword.Bluemix_notm}} CLI를 �
 Kubernetes 터미널은 베타 {{site.data.keyword.containerlong_notm}} 추가 기능으로 릴리스되고 사용자 피드백 및 추가 테스트로 인해 변경될 수 있습니다. 예상치 않은 부작용을 방지하려면 프로덕션 클러스터에서 이 기능을 사용하지 마십시오.
 {: important}
 
-{{site.data.keyword.Bluemix_notm}} 콘솔에서 클러스터 대시보드를 사용하여 클러스터를 관리하지만 추가 고급 구성 변경사항을 빠르게 수행할 경우 Kubernetes 터미널의 웹 브라우저에서 직접 CLI 명령을 실행할 수 있습니다. Kubernetes 터미널은 기본 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli), {{site.data.keyword.containerlong_notm}} 플러그인 및 {{site.data.keyword.registryshort_notm}} 플러그인으로 사용 가능합니다. 또한 터미널 컨텍스트는 이미 Kubernetes `kubectl` 명령을 실행하여 클러스터 관련 작업을 수행할 수 있도록 작업 중인 클러스터로 이미 설정되어 있습니다. 
+{{site.data.keyword.Bluemix_notm}} 콘솔에서 클러스터 대시보드를 사용하여 클러스터를 관리하지만 추가 고급 구성 변경사항을 빠르게 수행할 경우 Kubernetes 터미널의 웹 브라우저에서 직접 CLI 명령을 실행할 수 있습니다. Kubernetes 터미널은 기본 [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-getting-started), {{site.data.keyword.containerlong_notm}} 플러그인 및 {{site.data.keyword.registryshort_notm}} 플러그인으로 사용 가능합니다. 또한 터미널 컨텍스트는 이미 Kubernetes `kubectl` 명령을 실행하여 클러스터 관련 작업을 수행할 수 있도록 작업 중인 클러스터로 이미 설정되어 있습니다.
 
 로컬로 다운로드하고 편집하는 파일은 Kubernetes 터미널에 임시로 저장되고 세션에서 지속되지 않습니다.
 {: note}
@@ -398,7 +454,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
 6.  **설치**를 클릭하십시오. 터미널 추가 기능을 설치하는 데 몇 분 정도 걸릴 수 있습니다.
 7.  **터미널** 단추를 다시 클릭하십시오. 터미널이 브라우저에서 열립니다.
 
-그런 다음 **터미널** 단추를 클릭하면 간단히 Kubernetes 터미널을 실행할 수 있습니다. 
+그런 다음 **터미널** 단추를 클릭하면 간단히 Kubernetes 터미널을 실행할 수 있습니다.
 
 <br />
 
@@ -413,7 +469,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
 
 {{site.data.keyword.containerlong_notm}}의 인증을 수행하려면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 사용하여 생성되었으며 클러스터가 작성된 {{site.data.keyword.Bluemix_notm}} 계정 ID가 포함된 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) 토큰을 제공해야 합니다. {{site.data.keyword.Bluemix_notm}}의 인증 방법에 따라 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 작성을 자동화하기 위한 다음 옵션 중에서 선택할 수 있습니다.
 
-[API Swagger JSON 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api-json)을 사용하여 자동화 작업의 일부로서 API와 상호 작용할 수 있는 클라이언트를 생성할 수 있습니다.
+[API Swagger JSON 파일 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)을 사용하여 자동화 작업의 일부로서 API와 상호 작용할 수 있는 클라이언트를 생성할 수 있습니다.
 {: tip}
 
 <table summary="1열의 입력 매개변수 및 2열의 값을 사용한 ID 유형 및 옵션입니다.">
@@ -425,12 +481,14 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
 <tbody>
 <tr>
 <td>비연합 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 작성을 완전히 자동화할 수 있습니다.</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li></ul></tr>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> {{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호 사용의 대안으로 <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키를 사용</a>할 수 있습니다. {{site.data.keyword.Bluemix_notm}} API 키는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다.</li>
+<li><strong>{{site.data.keyword.Bluemix_notm}} 사용자 이름 및 비밀번호:</strong> 이 주제의 단계에 따라 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰의 작성을 완전히 자동화할 수 있습니다.</li></ul>
+</tr>
 <tr>
 <td>연합 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키</a>는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다. </li><li>
-<strong>일회성 패스코드 사용: </strong> 일회성 패스코드를 사용하여 {{site.data.keyword.Bluemix_notm}}의 인증을 수행하는 경우에는 일회성 패스코드의 검색을 위해 웹 브라우저와의 수동 상호작용이 필요하므로 {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화할 수 없습니다. {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화하려면 대신 {{site.data.keyword.Bluemix_notm}} API 키를 작성해야 합니다. </ul></td>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API 키 생성:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 키</a>는 해당 API 키가 생성된 {{site.data.keyword.Bluemix_notm}} 계정에 종속됩니다. {{site.data.keyword.Bluemix_notm}} API 키를 동일한 {{site.data.keyword.Bluemix_notm}} IAM 토큰의 다른 계정 ID와 결합할 수 없습니다. {{site.data.keyword.Bluemix_notm}} API 키의 기반이 되는 계정 이외의 계정으로 작성된 클러스터에 액세스하려면 계정에 로그인하여 새 API 키를 생성해야 합니다.</li>
+<li>
+<strong>일회성 패스코드 사용: </strong> 일회성 패스코드를 사용하여 {{site.data.keyword.Bluemix_notm}}의 인증을 수행하는 경우에는 일회성 패스코드의 검색을 위해 웹 브라우저와의 수동 상호작용이 필요하므로 {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화할 수 없습니다. {{site.data.keyword.Bluemix_notm}} IAM 토큰 작성을 완전히 자동화하려면 대신 {{site.data.keyword.Bluemix_notm}} API 키를 작성해야 합니다.</ul></td>
 </tr>
 </tbody>
 </table>
@@ -442,7 +500,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
     ```
     {: codeblock}
 
-    <table summary="1열의 입력 매개변수 및 2열의 값을 사용하여 IAM 토큰을 검색하는 입력 매개변수입니다.">
+    <table summary="1열의 입력 매개변수 및 2열의 값을 사용하여 IAM 토큰을 검색하기 위한 입력 매개변수입니다.">
     <caption>IAM 토큰을 가져오는 입력 매개변수</caption>
     <thead>
         <th>입력 매개변수</th>
@@ -483,7 +541,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
     </tbody>
     </table>
 
-    출력 예:
+    API 키 사용의 출력 예:
 
     ```
     {
@@ -704,7 +762,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
      </tbody>
      </table>
 
-5.  지원되는 API 목록은 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api)를 검토하십시오.
+5.  지원되는 API 목록은 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/global/swagger-global-api)를 검토하십시오.
 
 <br />
 
@@ -718,16 +776,16 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
 다음 지시사항에는 Kubernetes 마스터의 공용 서비스 엔드포인트에 대해 연결하기 위한 클러스터의 공용 네트워크 액세스 권한이 필요합니다.
 {: note}
 
-1. [API로 클러스터 배치 자동화](#cs_api)의 단계를 수행하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰, 새로 고치기 토큰, Kubernetes API 요청을 실행할 클러스터의 ID 및 클러스터가 위치한 {{site.data.keyword.containerlong_notm}} 지역을 검색하십시오. 
+1. [API로 클러스터 배치 자동화](#cs_api)의 단계를 수행하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰, 새로 고치기 토큰, Kubernetes API 요청을 실행할 클러스터의 ID 및 클러스터가 위치한 {{site.data.keyword.containerlong_notm}} 지역을 검색하십시오.
 
-2. {{site.data.keyword.Bluemix_notm}} IAM 위임 새로 고치기 토큰을 검색하십시오. 
+2. {{site.data.keyword.Bluemix_notm}} IAM 위임 새로 고치기 토큰을 검색하십시오.
    ```
     POST https://iam.bluemix.net/identity/token
    ```
    {: codeblock}
 
    <table summary="1열의 입력 매개변수 및 2열의 값을 사용하여 IAM 위임 새로 고치기 토큰을 가져오는 입력 매개변수입니다.">
-   <caption>IAM 위임 새로 고치기 토큰을 가져오는 입력 매개변수</caption>
+   <caption>IAM 위임 새로 고치기 토큰을 가져오는 입력 매개변수 </caption>
    <thead>
    <th>입력 매개변수</th>
    <th>값</th>
@@ -757,7 +815,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
    ```
    {: screen}
 
-3. 이전 단계의 위임된 새로 고치기 토큰을 사용하여 {{site.data.keyword.Bluemix_notm}} IAM ID, IAM 액세스 및 IAM 새로 고치기 토큰을 검색하십시오. API 출력에서는 **id_token** 필드에서 IAM ID 토큰을 찾고, **access_token** 필드에서 IAM 액세스 토큰을 찾고, **refresh_token** 필드에서 IAM 새로 고치기 토큰을 찾을 수 있습니다. 
+3. 이전 단계의 위임된 새로 고치기 토큰을 사용하여 {{site.data.keyword.Bluemix_notm}} IAM ID, IAM 액세스 및 IAM 새로 고치기 토큰을 검색하십시오. API 출력에서는 **id_token** 필드에서 IAM ID 토큰을 찾고, **access_token** 필드에서 IAM 액세스 토큰을 찾고, **refresh_token** 필드에서 IAM 새로 고치기 토큰을 찾을 수 있습니다.
    ```
     POST https://iam.bluemix.net/identity/token
    ```
@@ -817,7 +875,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
    </tr>
    <tr>
    <td>경로</td>
-   <td>`<cluster_ID>:`: [API로 클러스터 배치 자동화](#cs_api)에서 `GET https://containers.cloud.ibm.com/v1/clusters` API로 검색한 클러스터의 ID입니다. </td>
+   <td>`<cluster_ID>:`: [API로 클러스터 배치 자동화](#cs_api)에서 `GET https://containers.cloud.ibm.com/v1/clusters` API로 검색한 클러스터의 ID입니다.      </td>
    </tr>
    </tbody>
    </table>
@@ -853,7 +911,7 @@ Kubernetes 터미널을 설치하고 실행하려면 다음을 수행하십시�
    {: codeblock}
 
    <table summary="1열의 입력 매개변수 및 2열의 값을 사용하여 클러스터에서 실행되는 Kubernetes 버전을 보는 입력 매개변수입니다.">
-   <caption>클러스터에서 실행되는 Kubernetes 버전을 보는 입력 매개변수</caption>
+   <caption>클러스터에서 실행되는 Kubernetes 버전을 보는 입력 매개변수 </caption>
    <thead>
    <th>입력 매개변수</th>
    <th>값</th>
@@ -963,7 +1021,7 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
 
     **access_token**에서 새 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 찾고 API 출력의 **refresh_token** 필드에서 새로 고치기 토큰을 찾을 수 있습니다.
 
-2.  이전 단계의 토큰을 사용하여 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/swagger-api)에 대한 작업을 진행하십시오.
+2.  이전 단계의 토큰을 사용하여 [{{site.data.keyword.containerlong_notm}} API 문서 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://containers.cloud.ibm.com/global/swagger-global-api)에 대한 작업을 진행하십시오.
 
 <br />
 
@@ -971,9 +1029,9 @@ API를 통해 발행된 모든 {{site.data.keyword.Bluemix_notm}} IAM(Identity a
 ## CLI를 사용하여 {{site.data.keyword.Bluemix_notm}} IAM 액세스 토큰을 새로 고치고 새 새로 고치기 토큰 가져오기
 {: #cs_cli_refresh}
 
-새 CLI 세션을 시작할 때 또는 현재 CLI 세션에서 24시간이 만료된 경우에는 `ibmcloud ks cluster-config <cluster_name>`을 실행하여 클러스터의 컨텍스트를 설정해야 합니다. 이 명령으로 클러스터의 컨텍스트를 설정하면 Kubernetes 클러스터의 `kubeconfig` 파일이 다운로드됩니다. 또한 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) ID 토큰과 새로 고치기 토큰이 인증 제공을 위해 발행됩니다.
+새 CLI 세션을 시작하거나 현재 CLI 세션에서 24시간이 만료된 경우에는 `ibmcloud ks cluster-config --cluster <cluster_name>`을 실행하여 클러스터의 컨텍스트를 설정해야 합니다. 이 명령으로 클러스터의 컨텍스트를 설정하면 Kubernetes 클러스터의 `kubeconfig` 파일이 다운로드됩니다. 또한 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) ID 토큰과 새로 고치기 토큰이 인증 제공을 위해 발행됩니다.
 {: shortdesc}
 
 **ID 토큰**: CLI를 통해 발행된 모든 IAM ID 토큰은 한 시간 후에 만료됩니다. ID 토큰이 만료되면 ID 토큰 새로 고치기를 위해 새로 고치기 토큰이 토큰 제공자에게 전송됩니다. 사용자의 인증이 새로 고쳐지며 사용자는 계속해서 클러스터에 대해 명령을 실행할 수 있습니다.
 
-**새로 고치기 토큰**: 새로 고치기 토큰은 30일마다 만료됩니다. 새로 고치기 토큰이 만료되면 ID 토큰을 새로 고칠 수 없으며 사용자는 CLI에서 명령 실행을 계속할 수 없습니다. `ibmcloud ks cluster-config <cluster_name>`을 실행하여 새 새로 고치기 토큰을 가져올 수 있습니다. 또한 이 명령은 ID 토큰을 새로 고칩니다.
+**새로 고치기 토큰**: 새로 고치기 토큰은 30일마다 만료됩니다. 새로 고치기 토큰이 만료되면 ID 토큰을 새로 고칠 수 없으며 사용자는 CLI에서 명령 실행을 계속할 수 없습니다. `ibmcloud ks cluster-config --cluster <cluster_name>`을 실행하여 새 새로 고치기 토큰을 가져올 수 있습니다. 또한 이 명령은 ID 토큰을 새로 고칩니다.

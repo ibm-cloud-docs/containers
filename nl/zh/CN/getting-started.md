@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 入门教程
@@ -67,7 +68,7 @@ subcollection: containers
 在免费集群到期之前，使用免费集群试用一些功能。
 
 * 浏览[第一个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)，以创建 Kubernetes 集群、安装 CLI 或使用 Kubernetes 终端、创建专用注册表、设置集群环境以及向集群添加服务。
-* 一鼓作气继续浏览有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
+* 一鼓作气完成有关将应用程序部署到集群的[第二个 {{site.data.keyword.containerlong_notm}} 教程](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)。
 * [创建标准集群](/docs/containers?topic=containers-clusters#clusters_ui)（具有多个节点），以实现更高的可用性。
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud の IBM ファイル・ストレージへのデータの保管
@@ -29,7 +31,7 @@ subcollection: containers
 {{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高速で柔軟なネットワーク接続型の永続的 NFS ベース・ファイル・ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.Bluemix_notm}} のファイル・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 価格情報については、[課金](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)を参照してください。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、クラスターで Kubernetes バージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551、またはそれ以降が実行されていると、ファイル・ストレージをプロビジョンできます。 NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
+{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、クラスターで Kubernetes バージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、またはそれ以降が実行されていると、ファイル・ストレージをプロビジョンできます。 NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
 {: important}
 
 ## ファイル・ストレージ構成の決定
@@ -43,7 +45,7 @@ subcollection: containers
 ストレージ・クラスを使用して特定のタイプのストレージをプロビジョンした後に、ストレージ・デバイスのタイプ、または保存ポリシーを変更することはできません。 ただし、ストレージ容量とパフォーマンスを向上させたい場合に、[サイズと IOPS を変更する](#file_change_storage_configuration)ことができます。 ストレージのタイプおよび保存ポリシーを変更するには、[新しいストレージ・インスタンスを作成し、古いストレージ・インスタンスから新しいストレージ・インスタンスにデータをコピー](/docs/containers?topic=containers-kube_concepts#update_storageclass)する必要があります。
 {: important}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ストレージ構成を決定するには、以下のようにします。
 
@@ -433,7 +435,7 @@ subcollection: containers
 
 開始前に、以下のことを行います。
 - 少なくとも 1 つのワーカー・ノードが、既存のファイル・ストレージ・インスタンスと同じゾーンに存在することを確認してください。
-- [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### ステップ 1: 既存のストレージを準備する
 {: #existing-file-1}
@@ -643,7 +645,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 このオプションは、ステートフル・セットを作成するときに PVC を自動的に作成する場合に使用します。
 {: shortdesc}
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. クラスターにある既存のすべてのステートフル・セットが完全にデプロイ済みであることを確認します。 デプロイ中のステートフル・セットがある場合は、ステートフル・セットの作成を開始できません。 予期しない結果が生じるのを避けるため、クラスター内のすべてのステートフル・セットが完全にデプロイされるまで待つ必要があります。
    1. クラスター内の既存のステートフル・セットをリストします。
@@ -924,7 +926,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 [ステートフル・セットの作成時に PVC を動的にプロビジョンする](#file_dynamic_statefulset)場合は、ステートフル・セット YAML ファイルで使用した値に基づいて、PVC の名前が割り当てられます。 ステートフル・セットによって既存の PVC が使用されるようにするには、PVC の名前が、動的プロビジョニングを使用する場合に自動的に作成される名前と一致していなければなりません。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. ステートフル・セットを作成する前に PVC を事前プロビジョンする場合は、[ファイル・ストレージをアプリに追加する](#add_file)のステップ 1 から 3 に従って、各ステートフル・セット・レプリカ用の PVC を作成してください。 作成する PVC の名前は、必ず次のフォーマットに従ったものにしてください: `<volume_name>-<statefulset_name>-<replica_number>`。
    - **`<volume_name>`**: ステートフル・セットの `spec.volumeClaimTemplates.metadata.name` セクションで指定する名前を使用します (例: `nginxvol`)。
@@ -1205,7 +1207,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 <dl>
   <dt>定期的なスナップショットをセットアップする</dt>
-  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。</br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>[ファイル・ストレージの定期的なスナップショットをセットアップ](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)できます。スナップショットとは、特定の時点のインスタンスの状態をキャプチャーした読み取り専用のイメージです。 スナップショットを保管するには、ファイル・ストレージでスナップショット・スペースを要求する必要があります。 スナップショットは、同じゾーン内の既存のストレージ・インスタンスに保管されます。 ユーザーが誤って重要なデータをボリュームから削除した場合に、スナップショットからデータをリストアできます。</br> <strong>ボリュームのスナップショットを作成するには、以下のようにします。</strong><ol><li>[アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>`ibmcloud sl` CLI にログインします。 <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>クラスター内の既存の PV をリストします。 <pre class="pre"><code>kubectl get pv</code></pre></li><li>スナップショット・スペースを作成する PV の詳細を取得し、ボリューム ID、サイズ、および IOPS をメモします。 <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> ボリューム ID、サイズ、および IOPS は CLI 出力の <strong>Labels</strong> セクションにあります。 </li><li>前のステップで取得したパラメーターを使用して、既存のボリュームのスナップショット・サイズを作成します。 <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>スナップショット・サイズが作成されるまで待ちます。 <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 出力の <strong>Snapshot Size (GB)</strong> が 0 から注文したサイズに変更されていれば、スナップショット・サイズは正常にプロビジョンされています。 </li><li>ボリュームのスナップショットを作成し、作成されたスナップショットの ID をメモします。 <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>スナップショットが正常に作成されたことを確認します。 <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>スナップショットから既存のボリュームにデータをリストアするには、以下のようにします。</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>スナップショットを別のゾーンにレプリケーションする</dt>
  <dd><p>ゾーンの障害からデータを保護するために、別のゾーンにセットアップしたファイル・ストレージのインスタンスに[スナップショットをレプリケーション](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)することができます。 データは、1 次ストレージからバックアップ・ストレージにのみレプリケーションできます。 レプリケーションされたファイル・ストレージのインスタンスを、クラスターにマウントすることはできません。 1 次ストレージに障害が発生した場合には、レプリケーションされたバックアップ・ストレージを 1 次ストレージに手動で設定できます。 すると、そのファイル共有をクラスターにマウントできます。 1 次ストレージがリストアされたら、バックアップ・ストレージからデータをリストアできます。</p></dd>
@@ -1216,7 +1218,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
   <p>データを可用性をさらに高め、アプリをゾーン障害から保護するには、2 つ目の {{site.data.keyword.cos_full}} インスタンスをセットアップして、ゾーン間でデータを複製します。 {{site.data.keyword.cos_full}} インスタンスからデータをリストアする必要がある場合は、イメージに付属するリストア・スクリプトを使用します。</p></dd>
 <dt>ポッドおよびコンテナーとの間でデータをコピーする</dt>
 <dd><p>`kubectl cp` [コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) を使用して、クラスター内のポッドまたは特定のコンテナーとの間でファイルとディレクトリーをコピーできます。</p>
-<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
+<p>開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) <code>-c</code> を使用してコンテナーを指定しない場合、コマンドはポッド内で最初に使用可能なコンテナーを使用します。</p>
 <p>このコマンドは、以下のようにさまざまな方法で使用できます。</p>
 <ul>
 <li>ローカル・マシンからクラスター内のポッドにデータをコピーする: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

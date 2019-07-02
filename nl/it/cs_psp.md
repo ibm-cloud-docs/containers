@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-11"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,11 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Configurazione delle politiche di sicurezza del pod
 {: #psp}
 
-Con le [politiche di sicurezza del pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puoi
+Con le [politiche di sicurezza del pod (PSP, pod security policy) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), puoi
 configurare le politiche per autorizzare chi può creare e aggiornare i pod in {{site.data.keyword.containerlong}}.
 
 **Come imposto le politiche di sicurezza dei pod?**</br>
@@ -50,6 +52,9 @@ Quando crei un pod utilizzando un controller della risorsa, ad esempio una distr
 
 Per i messaggi di errore comuni, vedi [Distribuzione dei pod non riuscita a causa di una politica di sicurezza del pod](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp).
 
+**Perché posso ancora creare dei pod privilegiati quando non sono parte del bind del ruolo cluster `privileged-psp-user`?**<br>
+Altri bind del ruolo cluster o bind del ruolo con ambito delimitato agli spazi dei nomi possono darti altre politiche di sicurezza del pod che ti autorizzano a creare pod privilegiati. Inoltre, per impostazione predefinita, gli amministratori del cluster hanno accesso a tutte le risorse, comprese le politiche di sicurezza del pod e, pertanto, possono aggiungersi alle PSP o creare delle risorse privilegiate.
+
 ## Personalizzazione delle politiche di sicurezza del pod
 {: #customize_psp}
 
@@ -64,14 +69,14 @@ agli utenti di creare e aggiornare i pod privilegiati e non privilegiati (limita
 
 | Nome | Spazio dei nomi | Tipo | Scopo |
 |---|---|---|---|
-| `privileged-psp-user` | cluster-wide | `ClusterRoleBinding` | Consente agli amministratori cluster, agli utenti autenticati, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-privileged-psp`. |
-| `restricted-psp-user` | cluster-wide | `ClusterRoleBinding` | Consente agli amministratori cluster, agli utenti autenticati, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-restricted-psp`. |
+| `privileged-psp-user` | Tutti | `ClusterRoleBinding` | Consente agli amministratori cluster, agli utenti autenticati, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-privileged-psp`. |
+| `restricted-psp-user` | Tutti | `ClusterRoleBinding` | Consente agli amministratori cluster, agli utenti autenticati, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-restricted-psp`. |
 {: caption="Risorse RBAC predefinite che puoi modificare" caption-side="top"}
 
 Puoi modificare questi ruoli RBAC per rimuovere o aggiungere gli amministratori, gli utenti, i servizi o i nodi alla politica.
 
 Prima di iniziare:
-*  [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*  [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Comprendi l'utilizzo dei ruoli RBAC. Per ulteriori informazioni, vedi [Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes](/docs/containers?topic=containers-users#rbac) o la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 * Assicurati di disporre del [ruolo di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
 
@@ -199,17 +204,17 @@ Le risorse `PodSecurityPolicy` predefinite fanno riferimento alle politiche di s
 
 | Nome | Spazio dei nomi | Tipo | Scopo |
 |---|---|---|---|
-| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Politica per la creazione di pod con accesso completo all'host. |
-| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-hostaccess-psp`. |
-| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Politica per la creazione di pod con accesso al percorso host. |
-| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-hostpath-psp`. |
-| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Politica per la creazione di qualsiasi pod eseguibile UID/GID. |
-| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-psp`. |
-| `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Politica per la creazione del pod privilegiato. |
-| `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-privileged-psp`. |
+| `ibm-anyuid-hostaccess-psp` | Tutti | `PodSecurityPolicy` | Politica per la creazione di pod con accesso completo all'host. |
+| `ibm-anyuid-hostaccess-psp-user` | Tutti | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-hostaccess-psp`. |
+| `ibm-anyuid-hostpath-psp` | Tutti | `PodSecurityPolicy` | Politica per la creazione di pod con accesso al percorso host. |
+| `ibm-anyuid-hostpath-psp-user` | Tutti | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-hostpath-psp`. |
+| `ibm-anyuid-psp` | Tutti | `PodSecurityPolicy` | Politica per la creazione di qualsiasi pod eseguibile UID/GID. |
+| `ibm-anyuid-psp-user` | Tutti | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-anyuid-psp`. |
+| `ibm-privileged-psp` | Tutti | `PodSecurityPolicy` | Politica per la creazione del pod privilegiato. |
+| `ibm-privileged-psp-user` | Tutti | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-privileged-psp`. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Consente agli amministratori cluster, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-privileged-psp` nello spazio dei nomi `kube-system`. |
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | Consente agli amministratori cluster, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-privileged-psp` nello spazio dei nomi `ibm-system`. |
 | `ibm-privileged-psp-user` | `kubx-cit` | `RoleBinding` | Consente agli amministratori cluster, agli account di servizio e ai nodi di utilizzare la politica di sicurezza del pod `ibm-privileged-psp` nello spazio dei nomi `kubx-cit`. |
-| `ibm-restricted-psp` | cluster-wide | `PodSecurityPolicy` | Politica per la creazione di pod non privilegiati o limitati. |
-| `ibm-restricted-psp-user` | cluster-wide | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-restricted-psp`. |
+| `ibm-restricted-psp` | Tutti | `PodSecurityPolicy` | Politica per la creazione di pod non privilegiati o limitati. |
+| `ibm-restricted-psp-user` | Tutti | `ClusterRole` | Ruolo cluster che consente l'uso della politica di sicurezza del pod `ibm-restricted-psp`. |
 {: caption="Risorse delle politiche di sicurezza del pod IBM che non devi modificare" caption-side="top"}

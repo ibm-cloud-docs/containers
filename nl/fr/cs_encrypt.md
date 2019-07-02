@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Protection des informations sensibles dans votre cluster
@@ -92,8 +94,8 @@ Ne supprimez pas les clés racine dans votre instance {{site.data.keyword.keyman
 {: important}
 
 Avant de commencer :
-* [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Vérifiez que votre cluster exécute Kubernetes version 1.11.3_1521 ou ultérieure en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` et en vérifiant la zone **Version**. 
+* [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Vérifiez que votre cluster exécute Kubernetes version 1.11.3_1521 ou ultérieure en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` et en vérifiant la zone **Version**.
 * Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster.
 * Assurez-vous que la clé d'API définie pour la région dans laquelle se trouve votre cluster est autorisée à utiliser Key Protect. Pour connaître le propriétaire de la clé d'API dont les données d'identification sont stockées pour la région, exécutez la commande `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
@@ -133,7 +135,7 @@ Pour activer {{site.data.keyword.keymanagementserviceshort}} ou mettre à jour l
 
 8.  Lors de l'activation, vous risquez de ne pas pouvoir accéder au maître Kubernetes, par exemple pour mettre à jour la configuration des fichiers YAML correspondant aux déploiements. Dans la sortie de la commande suivante, vérifiez que le statut du maître (**Master Status**) est **Ready**.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -157,7 +159,7 @@ Pour activer {{site.data.keyword.keymanagementserviceshort}} ou mettre à jour l
 
     Une fois {{site.data.keyword.keymanagementserviceshort}} activé dans le cluster, les données dans `etcd`, les valeurs confidentielles existantes et les nouvelles valeurs confidentielles créées dans le cluster sont automatiquement chiffrées en utilisant votre clé racine {{site.data.keyword.keymanagementserviceshort}}.
 
-9.  Facultatif : Vous pouvez faire tourner votre clé à tout moment en répétant ces étapes avec un nouvel ID de clé racine. La nouvelle clé racine est ajoutée à la configuration de cluster en même temps que la clé racine précédente de sorte que les données chiffrées existantes soient toujours protégées. 
+9.  Facultatif : Vous pouvez faire tourner votre clé à tout moment en répétant ces étapes avec un nouvel ID de clé racine. La nouvelle clé racine est ajoutée à la configuration de cluster en même temps que la clé racine précédente de sorte que les données chiffrées existantes soient toujours protégées.
 
 Ne supprimez pas les clés racine dans votre instance {{site.data.keyword.keymanagementserviceshort}}. Ne supprimez pas les clés même si vous effectuez une rotation pour utiliser une nouvelle clé. Vous ne pouvez pas accéder ou retirer les données dans etcd ou les données des secrets dans votre cluster si vous supprimez une clé racine.
 {: important}

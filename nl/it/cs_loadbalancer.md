@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Bilanciamento del carico DSR e di base con gli NLB (network load balancer)
@@ -71,10 +71,10 @@ Quando esponi un'applicazione con un servizio NLB, la tua applicazione viene aut
 <br />
 
 
-## Confronto tra NLB versione 1.0 e 2.0
+## Confronto del bilanciamento del carico di base e DSR negli NLB versione 1.0 e 2.0
 {: #comparison}
 
-Quando crei un NLB, puoi scegliere un NLB versione 1.0 o 2.0. Nota che gli NLB versione 2.0 sono beta.
+Quando crei un NLB, puoi scegliere un NLB versione 1.0, che esegue un bilanciamento del carico di base, oppure un NLB versione 2.0, che esegue un bilanciamento del carico DSR (direct server return). Nota che gli NLB versione 2.0 sono beta.
 {: shortdesc}
 
 **In cosa gli NLB versione 1.0 e 2.0 sono simili?**
@@ -83,15 +83,15 @@ Gli NLB versione 1.0 e 2.0 sono entrambi programmi di bilanciamento del carico d
 
 **In cosa gli NLB versione 1.0 e 2.0 sono diversi?**
 
-Quando un client invia una richiesta alla tua applicazione, l'NLB instrada i pacchetti della richiesta all'indirizzo IP del nodo di lavoro in cui è presente un pod dell'applicazione. Gli NLB versione 1.0 utilizzano la NAT (Network Address Translation) per riscrivere l'indirizzo IP di origine del pacchetto della richiesta sull'IP del nodo di lavoro in cui è presente un pod del programma di bilanciamento del carico. Quando il nodo di lavoro restituisce il pacchetto di risposta dell'applicazione, utilizza l'IP del nodo di lavoro in cui è presente l'NLB. L'NLB deve quindi inviare il pacchetto di risposta al client. Per evitare che l'indirizzo IP venga riscritto, puoi [abilitare la conservazione dell'IP di origine](#node_affinity_tolerations). Tuttavia, la conservazione dell'IP di origine richiede che i pod del programma di bilanciamento del carico e i pod dell'applicazione vengano eseguiti sullo stesso nodo di lavoro in modo che la richiesta non debba essere inoltrata a un altro nodo di lavoro. Devi aggiungere l'affinità e le tolleranze del nodo ai pod dell'applicazione.
+Quando un client invia una richiesta alla tua applicazione, l'NLB instrada i pacchetti della richiesta all'indirizzo IP del nodo di lavoro in cui è presente un pod dell'applicazione. Gli NLB versione 1.0 utilizzano la NAT (Network Address Translation) per riscrivere l'indirizzo IP di origine del pacchetto della richiesta sull'IP del nodo di lavoro in cui è presente un pod del programma di bilanciamento del carico. Quando il nodo di lavoro restituisce il pacchetto di risposta dell'applicazione, utilizza l'IP del nodo di lavoro in cui è presente l'NLB. L'NLB deve quindi inviare il pacchetto di risposta al client. Per evitare che l'indirizzo IP venga riscritto, puoi [abilitare la conservazione dell'IP di origine](#node_affinity_tolerations). Tuttavia, la conservazione dell'IP di origine richiede che i pod del programma di bilanciamento del carico e i pod dell'applicazione vengano eseguiti sullo stesso nodo di lavoro in modo che la richiesta non debba essere inoltrata a un altro nodo di lavoro. Devi aggiungere l'affinità e le tolleranze del nodo ai pod dell'applicazione. Per ulteriori informazioni sul bilanciamento del carico di base con gli NLB versione 1.0, vedi [v1.0: Componenti e architettura del bilanciamento del carico di base](#v1_planning).
 
 A differenza degli NLB versione 1.0, gli NLB versione 2.0 non utilizzano NAT durante l'inoltro delle richieste ai pod dell'applicazione su altri nodi di lavoro. Quando un
-NLB 2.0 instrada una richiesta del client, utilizza l'IPIP (IP over IP) per incapsulare il pacchetto della richiesta originale in un altro pacchetto nuovo. Questo pacchetto IPIP di incapsulamento ha un IP di origine del nodo di lavoro in cui si trova il pod del programma di bilanciamento del carico, che consente al pacchetto di richiesta originale di conservare l'IP del client come proprio indirizzo IP di origine. Il nodo di lavoro utilizza quindi il DSR (direct server return) per inviare il pacchetto di risposta dell'applicazione all'IP del client. Il pacchetto di risposta ignora l'NLB e viene inviato direttamente al client, riducendo la quantità di traffico che deve essere gestita dall'NLB.
+NLB 2.0 instrada una richiesta del client, utilizza l'IPIP (IP over IP) per incapsulare il pacchetto della richiesta originale in un altro pacchetto nuovo. Questo pacchetto IPIP di incapsulamento ha un IP di origine del nodo di lavoro in cui si trova il pod del programma di bilanciamento del carico, che consente al pacchetto di richiesta originale di conservare l'IP del client come proprio indirizzo IP di origine. Il nodo di lavoro utilizza quindi il DSR (direct server return) per inviare il pacchetto di risposta dell'applicazione all'IP del client. Il pacchetto di risposta ignora l'NLB e viene inviato direttamente al client, riducendo la quantità di traffico che deve essere gestita dall'NLB. Per ulteriori informazioni sul bilanciamento del carico DSR con gli NLB versione 2.0, vedi [v2.0: Componenti e architettura del bilanciamento del carico DSR](#planning_ipvs).
 
 <br />
 
 
-## v1.0: Componenti e architettura
+## v1.0: Componenti e architettura del bilanciamento del carico di base
 {: #v1_planning}
 
 L'NLB (network load balancer) TCP/UDP 1.0 utilizza Iptables, una funzione del kernel Linux, per bilanciare il carico delle richieste tra i pod di un'applicazione.
@@ -121,8 +121,7 @@ Il seguente diagramma mostra in che modo un NLB (Network load balancer) 1.0 indi
 
 <img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Utilizza un NLB 1.0 per bilanciare il carico delle applicazioni neicluster multizona" style="width:500px; border-style: none"/>
 
-Per impostazione predefinita, ogni NLB 1.0 è configurato in una sola zona. Per ottenere l'alta disponibilità, devi distribuire un NLB 1.0 in ciascuna zona in cui hai istanze dell'applicazione. 
-Le richieste vengono gestite dagli NLB in varie zone in un ciclo round-robin. Inoltre, ciascun NLB instrada le richieste alle istanze dell'applicazione nella propria zona e quelle delle altre zone.
+Per impostazione predefinita, ogni NLB 1.0 è configurato in una sola zona. Per ottenere l'alta disponibilità, devi distribuire un NLB 1.0 in ciascuna zona in cui hai istanze dell'applicazione. Le richieste vengono gestite dagli NLB in varie zone in un ciclo round-robin. Inoltre, ciascun NLB instrada le richieste alle istanze dell'applicazione nella propria zona e quelle delle altre zone.
 
 <br />
 
@@ -131,9 +130,9 @@ Le richieste vengono gestite dagli NLB in varie zone in un ciclo round-robin. In
 {: #multi_zone_config}
 
 **Prima di iniziare**:
-* Per creare NLB (network load balancers) pubblici in più zone, almeno una VLAN pubblica deve avere delle sottoreti portatili disponibili in ciascuna zona. Per creare NLB privati in più zone, almeno una VLAN privata deve avere delle sottoreti portatili disponibili in ciascuna zona. Puoi aggiungere sottoreti seguendo la procedura in [Configurazione delle sottoreti per i cluster](/docs/containers?topic=containers-subnets).
+* Per creare NLB (network load balancer) pubblici in più zone, almeno una VLAN pubblica deve avere delle sottoreti portatili disponibili in ciascuna zona. Per creare NLB privati in più zone, almeno una VLAN privata deve avere delle sottoreti portatili disponibili in ciascuna zona. Puoi aggiungere sottoreti seguendo la procedura in [Configurazione delle sottoreti per i cluster](/docs/containers?topic=containers-subnets).
 * Se limiti il traffico di rete ai nodi di lavoro edge, assicurati che almeno 2 [nodi di lavoro edge](/docs/containers?topic=containers-edge#edge) siano abilitati in ogni zona in modo che gli NLB vengano distribuiti in modo uniforme.
-* Abilita lo [spanning delle VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+* Abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, usa il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 * Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
 
 
@@ -437,7 +436,7 @@ Per conservare l'indirizzo IP di origine originale della richiesta client, puoi 
 
 Una volta abilitato l'IP di origine, i pod del servizio di bilanciamento del carico devono inoltrare le richieste solo ai pod dell'applicazione che sono distribuiti nello stesso nodo di lavoro Di norma, i pod del servizio del programma di bilanciamento del carico vengono distribuiti anche ai nodi di lavoro a cui vengono distribuiti i pod dell'applicazione. Tuttavia, ci sono alcune situazioni in cui i pod del bilanciamento del carico e quelli dell'applicazione potrebbero non essere pianificati sullo stesso nodo di lavoro:
 
-* Hai nodi edge corrotti in cui puoi distribuire solo i pod del servizio di bilanciamento del carico. I pod dell'applicazione non possono essere distribuiti in questi nodi.
+* Hai nodi edge contaminati in cui puoi distribuire solo i pod del servizio di bilanciamento del carico. I pod dell'applicazione non possono essere distribuiti in questi nodi.
 * Il tuo cluster è connesso a più VLAN pubbliche o private e i tuoi pod dell'applicazione possono essere distribuiti ai nodi di lavoro che sono connessi solo ad una VLAN. I pod del servizio di bilanciamento del carico non possono essere distribuiti in tali nodi di lavoro in quanto l'indirizzo IP dell'NLB è connesso a una VLAN diversa da quella dei nodi di lavoro.
 
 Per forzare la tua applicazione alla distribuzione in specifici nodi di lavoro in cui possono essere distribuiti anche i pod del servizio di bilanciamento del carico, devi aggiungere le regole di affinità e le tolleranze alla tua distribuzione dell'applicazione.
@@ -489,7 +488,7 @@ Quando il tuo cluster è connesso a più VLAN pubbliche o private, i tuoi pod de
 
 Quando l'IP di origine è abilitato, pianifica i pod dell'applicazione sui nodi di lavoro che si trovano nella stessa VLAN dell'indirizzo IP dell'NLB aggiungendo una regola di affinità alla distribuzione dell'applicazione.
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Ottieni l'indirizzo IP del servizio NLB. Ricerca l'indirizzo IP nel campo **LoadBalancer Ingress**.
     ```
@@ -658,14 +657,14 @@ Prima di creare un NLB 2.0, devi completare la seguente procedura prerequisita.
 
 1. [Aggiorna i nodi master e di lavoro del tuo cluster](/docs/containers?topic=containers-update) a Kubernetes versione 1.12 o successive.
 
-2. Per consentire al tuo NLB 2.0 di inoltrare le richieste ai pod dell'applicazione in più zone, apri un caso di supporto per richiedere un'impostazione di configurazione per le tue VLAN. **Importante**: devi richiedere questa configurazione per tutte le VLAN pubbliche. Se richiedi una nuova VLAN associata, devi aprire un altro ticket per tale VLAN.
+2. Per consentire al tuo NLB 2.0 di inoltrare le richieste ai pod dell'applicazione in più zone, apri un caso di supporto per richiedere l'aggregazione di capacità per le tue VLAN. Questa impostazione di configurazione non causa interferenze o interruzioni di rete.
     1. Accedi alla [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/).
     2. Dalla barra dei menu, fai clic su **Supporto**, fai clic sulla scheda **Gestisci casi** e quindi su **Crea nuovo caso**.
     3. Nei campi del caso, immetti quanto segue:
        * Per il tipo di supporto, seleziona **Supporto tecnico**.
        * Per la categoria, seleziona **VLAN Spanning**.
        * Per l'oggetto, immetti **Public VLAN Network Question.**
-    4. Aggiungi le seguenti informazioni alla descrizione: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145".
+    4. Aggiungi le seguenti informazioni alla descrizione: "Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Nota: se vuoi consentire l'aggregazione di capacità su VLAN specifiche, come ad esempio le VLAN pubbliche solo per un singolo cluster, puoi specificare questi ID VLAN nella descrizione.
     5. Fai clic su **Invia**.
 
 3. Abilita una[VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Quando lo spanning della VRF o della VLAN viene abilitato, l'NLB 2.0 può instradare i pacchetti alle varie sottoreti dell'account.
@@ -810,7 +809,7 @@ di configurazione. Questa etichetta è necessaria per identificare tutti i pod i
       ```
       {: codeblock}
 
-  3. Facoltativo: rendi disponibile il tuo servizio NLB solo per un intervallo limitato di indirizzi IP, specificando gli IP nel campo `spec.loadBalancerSourceRanges`. `loadBalancerSourceRanges` è implementato da `kube-proxy` nel tuo cluster tramite regole Iptables sui nodi di lavoro. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Facoltativo: rendi disponibile il tuo servizio NLB solo per un intervallo limitato di indirizzi IP, specificando gli IP nel campo `spec.loadBalancerSourceRanges`.  `loadBalancerSourceRanges` è implementato da `kube-proxy` nel tuo cluster tramite regole Iptables sui nodi di lavoro. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
   4. Crea il servizio nel tuo cluster.
 
@@ -949,8 +948,7 @@ possano essere inclusi nel bilanciamento del carico.
         </tr>
         </tbody></table>
 
-    3.  Facoltativo: rendi disponibile il tuo servizio NLB solo per un intervallo limitato di indirizzi IP, specificando gli IP nel campo `spec.loadBalancerSourceRanges`.
-`loadBalancerSourceRanges` è implementato da `kube-proxy` nel tuo cluster tramite regole Iptables sui nodi di lavoro. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3.  Facoltativo: rendi disponibile il tuo servizio NLB solo per un intervallo limitato di indirizzi IP, specificando gli IP nel campo `spec.loadBalancerSourceRanges`. `loadBalancerSourceRanges` è implementato da `kube-proxy` nel tuo cluster tramite regole Iptables sui nodi di lavoro. Per ulteriori informazioni, consulta la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Crea il servizio nel tuo cluster.
 
@@ -1020,7 +1018,8 @@ Gli algoritmi di pianificazione determinano il modo in cui NLB 2.0 assegna le co
 <dt>Round Robin (<code>rr</code>)</dt>
 <dd>L'NLB scorre l'elenco dei pod dell'applicazione durante l'instradamento delle connessioni ai nodi di lavoro, trattando allo stesso modo ciascun pod dell'applicazione. Round Robin è l'algoritmo di pianificazione predefinito per gli NLB versione 2.0.</dd>
 <dt>Source Hashing (<code>sh</code>)</dt>
-<dd>L'NLB genera una chiave di hash in base all'indirizzo IP di origine del pacchetto di richieste del client. Quindi, l'NLB cerca la chiave di hash in una tabella hash assegnata staticamente e inoltra la richiesta al pod dell'applicazione che gestisce gli hash di tale intervallo. Questo algoritmo garantisce che le richieste provenienti da un determinato client siano sempre indirizzate allo stesso pod dell'applicazione.</br>**Nota**: Kubernetes utilizza le regole Iptables, che comportano l'invio di richieste a un pod casuale sul nodo di lavoro. Per utilizzare questo algoritmo di pianificazione, devi assicurarti che non venga distribuito più di un pod della tua applicazione per ciascun nodo di lavoro. Ad esempio, se ogni pod ha l'etichetta <code>run=&lt;app_name&gt;</code>, aggiungi la seguente regola di anti-affinità alla sezione <code>spec</code> della tua distribuzione dell'applicazione:</br><pre class="codeblock">
+<dd>L'NLB genera una chiave di hash in base all'indirizzo IP di origine del pacchetto di richieste del client. Quindi, l'NLB cerca la chiave di hash in una tabella hash assegnata staticamente e inoltra la richiesta al pod dell'applicazione che gestisce gli hash di tale intervallo. Questo algoritmo garantisce che le richieste provenienti da un determinato client siano sempre indirizzate allo stesso pod dell'applicazione.</br>**Nota**: Kubernetes utilizza le regole Iptables, che comportano l'invio di richieste a un pod casuale sul nodo di lavoro. Per utilizzare questo algoritmo di pianificazione, devi assicurarti che non venga distribuito più di un pod della tua applicazione per ciascun nodo di lavoro. Ad esempio, se ogni pod ha l'etichetta <code>run=&lt;app_name&gt;</code>, aggiungi la seguente regola di anti-affinità alla sezione <code>spec</code> della tua distribuzione dell'applicazione:</br>
+<pre class="codeblock">
 <code>
     spec:
       affinity:
@@ -1069,11 +1068,10 @@ Dopo aver configurato gli NLB (network load balancer), puoi creare le voci DNS p
 <dl>
 <dt>Nome host</dt>
 <dd>Quando crei un NLB pubblico in un cluster a zona singola o multizona, puoi esporre la tua applicazione a Internet creando un nome host per l'indirizzo IP NLB. Inoltre, {{site.data.keyword.Bluemix_notm}} genera e aggiorna automaticamente il certificato SSL jolly per il nome host.
-<p>Nei cluster multizona, puoi creare un nome host e aggiungere l'indirizzo IP NLB in ciascuna zona a quella voce DNS del nome host. Ad esempio, se hai distribuito gli NLB per la tua applicazione in 3 zone negli Stati Uniti Sud, puoi creare il nome host `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` per i 3 indirizzi IP NLB. Quando un utente accede al nome host della tua applicazione, il client accede a uno di questi IP a caso e la richiesta viene inviata a tale NLB. </p>
+<p>Nei cluster multizona, puoi creare un nome host e aggiungere l'indirizzo IP NLB in ciascuna zona a quella voce DNS del nome host. Ad esempio, se hai distribuito gli NLB per la tua applicazione in 3 zone negli Stati Uniti Sud, puoi creare il nome host `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` per i 3 indirizzi IP NLB. Quando un utente accede al nome host della tua applicazione, il client accede a uno di questi IP a caso e la richiesta viene inviata a tale NLB.</p>
 Nota che attualmente non è possibile creare nomi host per NLB privati.</dd>
 <dt>Monitoraggio del controllo di integrità</dt>
-<dd>Abilita i controlli di integrità sugli indirizzi IP NLB dietro un unico nome host per determinare se sono disponibili o meno. Quando abiliti un monitoraggio per il tuo nome host, esso controlla lo stato di integrità di ciascun IP NLB e mantiene aggiornati i risultati della ricerca DNS sulla base dei controlli di integrità effettuati.
-Ad esempio, se i tuoi NLB hanno gli indirizzi IP `1.1.1.1`, `2.2.2.2` e `3.3.3.3`, una normale operazione di ricerca DNS del tuo nome host restituisce tutti e 3 gli IP e il client accede a uno di essi in modo casuale. Se l'NLB con indirizzo IP `3.3.3.3` diventa per un qualsiasi motivo non disponibile, ad esempio a causa di un malfunzionamento di zona, il controllo dell'integrità per tale IP non riesce, il monitoraggio rimuove l'IP non riuscito dal nome host e la ricerca DNS restituisce solo gli IP `1.1.1.1` e `2.2.2.2` integri. </dd>
+<dd>Abilita i controlli di integrità sugli indirizzi IP NLB dietro un unico nome host per determinare se sono disponibili o meno. Quando abiliti un monitoraggio per il tuo nome host, esso controlla lo stato di integrità di ciascun IP NLB e mantiene aggiornati i risultati della ricerca DNS sulla base dei controlli di integrità effettuati. Ad esempio, se i tuoi NLB hanno gli indirizzi IP `1.1.1.1`, `2.2.2.2` e `3.3.3.3`, una normale operazione di ricerca DNS del tuo nome host restituisce tutti e 3 gli IP e il client accede a uno di essi in modo casuale. Se l'NLB con indirizzo IP `3.3.3.3` diventa per un qualsiasi motivo non disponibile, ad esempio a causa di un malfunzionamento di zona, il controllo dell'integrità per tale IP non riesce, il monitoraggio rimuove l'IP non riuscito dal nome host e la ricerca DNS restituisce solo gli IP `1.1.1.1` e `2.2.2.2` integri.</dd>
 </dl>
 
 Puoi visualizzare tutti i nomi host registrati per i IP NLB nel tuo cluster, eseguendo il seguente comando.
@@ -1095,7 +1093,7 @@ Prima di iniziare:
   * Puoi creare nomi host per NLB pubblici, versione 1.0 e 2.0.
   * Al momento non puoi creare i nomi host per NLB privati.
   * Puoi registrare fino a 128 nomi host. Questo limite può essere innalzato su richiesta, aprendo un [caso
-di supporto](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+di supporto](/docs/get-support?topic=get-support-getting-customer-support).
 * [Crea un NLB per la tua applicazione in un cluster a zona singola](#lb_config) o [crea NLB in ciascuna zona di un cluster multizona](#multi_zone_config).
 
 Per creare un nome host per uno o più indirizzi IP NLB:
@@ -1114,7 +1112,7 @@ Per creare un nome host per uno o più indirizzi IP NLB:
   ```
   {: screen}
 
-2. Registra l'IP creando un nome host DNS. Nota che inizialmente puoi creare il nome host con un solo indirizzo IP. 
+2. Registra l'IP creando un nome host DNS. Nota che inizialmente puoi creare il nome host con un solo indirizzo IP.
   ```
   ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP>
   ```
@@ -1133,14 +1131,15 @@ Per creare un nome host per uno o più indirizzi IP NLB:
   ```
   {: screen}
 
-4. Se hai NLB in ciascuna zona di un cluster multizona e tali NLB espongono una sola applicazione, aggiungi gli IP degli altri NLB al nome host. Nota che devi eseguire il seguente comando per ciascun indirizzo IP che desideri aggiungere.
+4. Se hai NLB in ciascuna zona di un cluster multizona e tali NLB espongono una sola applicazione, aggiungi gli IP degli altri NLB al nome host. Nota che devi eseguire
+il seguente comando per ciascun indirizzo IP che desideri aggiungere.
   ```
   ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
   ```
   {: pre}
 
 5. Facoltativo: verificare che gli IP siano registrati con il tuo nome host eseguendo un `host` o `ns lookup`.
-Comando di esempio:
+  Comando di esempio:
   ```
   host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
   ```
@@ -1238,7 +1237,7 @@ Prima di iniziare, [registra gli IP NLB con un nome host DNS](#loadbalancer_host
   <tbody>
   <tr>
   <td><code>--cluster &lt;cluster_name_or_ID&gt;</code></td>
-  <td>Obbligatorio: il nome o l'ID del cluster in cui è registrato il nome host. </td>
+  <td>Obbligatorio: il nome o l'ID del cluster in cui è registrato il nome host.</td>
   </tr>
   <tr>
   <td><code>--nlb-host &lt;host_name&gt;</code></td>
@@ -1246,7 +1245,7 @@ Prima di iniziare, [registra gli IP NLB con un nome host DNS](#loadbalancer_host
   </tr>
   <tr>
   <td><code>--enable</code></td>
-  <td>Obbligatorio: abilita il monitoraggio del controllo di integrità per il nome host. </td>
+  <td>Obbligatorio: abilita il monitoraggio del controllo di integrità per il nome host.</td>
   </tr>
   <tr>
   <td><code>--description &lt;description&gt;</code></td>
@@ -1350,7 +1349,7 @@ ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-h
 {: pre}
 
 Puoi anche rimuovere gli indirizzi IP degli NLB che non desideri più siano registrati con un nome host. Nota che devi eseguire
-il seguente comando per ciascun indirizzo IP che desideri rimuovere. Se rimuovi tutti gli IP da un nome host, il nome host esiste ancora, ma non è associato ad alcun IP. 
+il seguente comando per ciascun indirizzo IP che desideri rimuovere. Se rimuovi tutti gli IP da un nome host, il nome host esiste ancora, ma non è associato ad alcun IP.
 ```
 ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```

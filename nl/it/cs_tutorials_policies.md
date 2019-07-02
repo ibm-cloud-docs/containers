@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Esercitazione: Utilizzo delle politiche di rete Calico per bloccare il traffico
@@ -70,7 +71,7 @@ cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 La prima lezione ti mostra in che modo la tua applicazione viene esposta da molteplici indirizzi IP e porte e da dove proviene il traffico pubblico nel tuo cluster.
 {: shortdesc}
 
-Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il webserver (server web) `echoserver` mostra i dati sulla connessione che si sta stabilendo al cluster dal client e ti consente di testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio NLB (network load balancer) 1.0. Un servizio NLB 1.0 rende la tua applicazione disponibile sia sull'indirizzo IP dell'NLB che sulle porte del nodo dei nodi di lavoro.
+Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il server web `echoserver` mostra i dati sulla connessione che si sta stabilendo al cluster dal client e puoi testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio NLB (network load balancer) 1.0. Un servizio NLB 1.0 rende la tua applicazione disponibile sia sull'indirizzo IP dell'NLB che sulle porte del nodo dei nodi di lavoro.
 
 Vuoi utilizzare un ALB (application load balancer) Ingress? Invece di creare un NLB nei passi 3 e 4, [crea un servizio per ciascuna applicazione server web](/docs/containers?topic=containers-ingress#public_inside_1) e [crea una risorsa Ingress per l'applicazione server web](/docs/containers?topic=containers-ingress#public_inside_4). Ottieni quindi gli IP pubblici dei tuoi ALB eseguendo `ibmcloud ks albs --cluster <cluster_name>` e utilizza questi IP in tutta l'esercitazione al posto di `<loadbalancer_IP>.`
 {: tip}
@@ -126,7 +127,7 @@ La seguente immagine mostra in che modo l'applicazione server web è esposta a i
     ```
     {: pre}
 
-5. Verifica di poter accedere pubblicamente all'applicazione esposta dall'NLB dal tuo computer. 
+5. Verifica di poter accedere pubblicamente all'applicazione esposta dall'NLB dal tuo computer.
 
     1. Ottieni l'indirizzo **EXTERNAL-IP** pubblico dell'NLB.
         ```
@@ -141,7 +142,7 @@ La seguente immagine mostra in che modo l'applicazione server web è esposta a i
         ```
         {: screen}
 
-    2. Crea un file di testo di scheda di riferimento e copia in esso l'IP dell'NLB. La scheda di riferimento ti aiuterà a usare più rapidamente i valori nelle lezioni successive.
+    2. Crea un file di testo di scheda di riferimento e copia in esso l'IP dell'NLB. La scheda di riferimento ti aiuta a usare più rapidamente i valori nelle lezioni successive.
 
     3. Verifica di poter accedere pubblicamente all'IP esterno per l'NLB.
         ```
@@ -197,9 +198,9 @@ La seguente immagine mostra in che modo l'applicazione server web è esposta a i
         Output di esempio:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
         ```
         {: screen}
 
@@ -245,9 +246,9 @@ Puoi quindi iniziare a creare ed applicare politiche Calico per bloccare il traf
 Per proteggere il cluster dell'agenzia di PR, devi bloccare l'accesso pubblico sia al servizio NLB che alle porte del nodo che stanno esponendo la tua applicazione. Inizia bloccando l'accesso alle porte del nodo.
 {: shortdesc}
 
-La seguente immagine mostra come verrà consentito il traffico all'NLB ma non alle porte del nodo alla fine della Lezione 2:
+La seguente immagine mostra come viene consentito il traffico all'NLB ma non alle porte del nodo alla fine della Lezione 2:
 
-<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Alla fine della Lezione 2, l'applicazione webserver è esporta a internet solo dall'NLB pubblico." style="width:425px; border-style: none"/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Alla fine della Lezione 2, l'applicazione webserver è esposta a internet solo dall'NLB pubblico." style="width:425px; border-style: none"/>
 
 1. In un editor di testo, crea una politica pre-DNAT di ordine superiore denominata `deny-nodeports.yaml` per negare il traffico TCP e UDP in entrata da qualsiasi IP di origine a tutte le porte del nodo.
     ```
@@ -310,7 +311,13 @@ La seguente immagine mostra come verrà consentito il traffico all'NLB ma non al
     ```
     {: screen}
 
-4. Utilizzando il valore dalla tua scheda di riferimento, verifica di potere ancora accedere pubblicamente all'indirizzo IP esterno dell'NLB.
+4. Modifica la externalTrafficPolicy del LoadBalancer che hai creato nella lezione precedente da `Cluster` in `Local`. `Local` garantisce che l'IP di origine del tuo sistema venga preservato quando esegui il curl dell'IP esterno del LoadBalancer nel passo successivo.
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. Utilizzando il valore dalla tua scheda di riferimento, verifica di potere ancora accedere pubblicamente all'indirizzo IP esterno dell'NLB.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -339,11 +346,11 @@ La seguente immagine mostra come verrà consentito il traffico all'NLB ma non al
         -no body in request-
     ```
     {: screen}
-    Nella sezione `Request Information` dell'output, nota che l'indirizzo IP di origine è, ad esempio, `client_address=1.1.1.1`. L'indirizzo IP di origine è l'IP pubblico del sistema che stai utilizzando per eseguire curl. Altrimenti, se ti stai collegando a Internet tramite un proxy o una VPN, è possibile che questi ultimi stiano oscurando l'indirizzo IP effettivo del tuo sistema. In entrambi i casi, l'NLB vede l'indirizzo IP di origine del tuo sistema come indirizzo IP del client.
+    Nella sezione `Request Information` dell'output, l'indirizzo IP di origine è, ad esempio, `client_address=1.1.1.1`. L'indirizzo IP di origine è l'IP pubblico del sistema che stai utilizzando per eseguire curl. Altrimenti, se ti stai collegando a Internet tramite un proxy o una VPN, è possibile che questi ultimi stiano oscurando l'indirizzo IP effettivo del tuo sistema. In entrambi i casi, l'NLB vede l'indirizzo IP di origine del tuo sistema come indirizzo IP del client.
 
-5. Copia l'indirizzo IP di origine del sistema (`client_address=1.1.1.1` nell'output del passo precedente) nella tua scheda di riferimento per utilizzarlo nelle lezioni successive.
+6. Copia l'indirizzo IP di origine del sistema (`client_address=1.1.1.1` nell'output del passo precedente) nella tua scheda di riferimento per utilizzarlo nelle lezioni successive.
 
-Ottimo! A questo punto, la tua applicazione è esposta a internet pubblico solo dalla porta dell'NLB pubblico. Il traffico alle porte del nodo pubblico è bloccato. Hai parzialmente bloccato il tuo cluster al traffico indesiderato.
+Ottimo! A questo punto, la tua applicazione è esposta a internet pubblico solo dalla porta dell'NLB pubblico. Il traffico alle porte del nodo pubblico è bloccato. Il tuo cluster è parzialmente bloccato al traffico indesiderato.
 
 Ora puoi creare e applicare le politiche Calico per inserire in whitelist il traffico da specifici IP di origine.
 
@@ -412,7 +419,7 @@ Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata 
     ```
     {: pre}
 
-4. In un editor di testo, crea una politica pre-DNAT di ordine inferiore denominata `whitelist.yaml` per consentire il traffico dall'IP del tuo sistema all'indirizzo IP e alla porta dell'NLB. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico dell'NLB e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema.
+4. In un editor di testo, crea una politica pre-DNAT di ordine inferiore denominata `whitelist.yaml` per consentire il traffico dall'IP del tuo sistema all'indirizzo IP e alla porta dell'NLB. Utilizzando i valori dalla tua scheda di riferimento, sostituisci `<loadbalancer_IP>` con l'indirizzo IP pubblico dell'NLB e `<client_address>` con l'indirizzo IP pubblico dell'IP di origine del tuo sistema. Se non riesci a ricordarti il tuo IP di sistema, puoi eseguire `curl ifconfig.co`.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -478,7 +485,7 @@ Nella lezione precedente, hai bloccato tutto il traffico e inserito in whitelist
 
 In questa lezione, farai un test dell'inserimento in blacklist bloccando il traffico dall'indirizzo IP di origine del tuo sistema. Alla fine della Lezione 4, tutto il traffico alle porte del nodo pubblico sarà bloccato e tutto il traffico all'NLB pubblico sarà consentito. Sarà bloccato solo il traffico dal tuo IP di sistema inserito in blacklist all'NLB:
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'applicazione webserver è esposta dall'NLB pubblico a internet. Il traffico solo dal tuo IP di sistema è bloccato." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'applicazione webserver è esposta dall'NLB pubblico a internet. Solo il traffico dal tuo IP di sistema è bloccato." style="width:550px; border-style: none"/>
 
 1. Elimina le politiche di whitelist che hai creato nella lezione precedente.
     - Linux:
@@ -573,7 +580,7 @@ Nella lezione precedente, hai inserito in blacklist il traffico dal tuo IP di si
 
 Nel nostro scenario di esempio, l'agenzia di PR per cui lavori desidera configurare una traccia di registrazione per tutto il traffico insolito che viene continuamente rifiutato da una delle tue politiche di rete. Per monitorare la potenziale minaccia alla sicurezza, configuri la registrazione nei log per eseguire una registrazione ogni volta che la politica di blacklist rifiuta un'azione tentata sull'IP dell'NLB.
 
-1. Crea una NetworkPolicy Calico denominata `log-denied-packets`. Questa politica di log utilizza lo stesso selettore della politica `blacklist`, che aggiunge questa politica alla catena di regole Iptables Calico. Utilizzando un numero di ordine più basso, come `300`, puoi assicurare che questa regola venga aggiunta alla catena di regole Iptables prima della politica di blacklist. I pacchetti dal tuo IP vengono registrati da questa politica prima che provino la messa in corrispondenza alla regola della politica `blacklist` e vengano rifiutati.
+1. Crea una NetworkPolicy Calico denominata `log-denied-packets`. Questa politica di log utilizza lo stesso selettore della politica `blacklist`, che aggiunge questa politica alla catena di regole Iptables Calico. Utilizzando un numero di ordine più basso, come `300`, puoi assicurarti che questa regola venga aggiunta alla catena di regole Iptables prima della politica di blacklist. I pacchetti dal tuo IP vengono registrati da questa politica prima che provino la messa in corrispondenza alla regola della politica `blacklist` e vengano rifiutati.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -604,7 +611,7 @@ Nel nostro scenario di esempio, l'agenzia di PR per cui lavori desidera configur
         nets:
         - <client_address>/32
     selector: ibm.role=='worker_public'
-    order: 500
+    order: 300
     types:
     - Ingress
   ```

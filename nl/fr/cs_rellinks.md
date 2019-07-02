@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **API REST**
 
-- [API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/swagger-api/)
-- [Fichier JSON d'API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [API REST pour la consignation dans les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API REST pour la gestion des équilibreurs de charge d'application Ingress dans les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [Fichier JSON d'API REST pour les clusters ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [Configuration de l'intégration/distribution continue pour {{site.data.keyword.containerlong}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migration d'une application de machine virtuelle vers le cloud ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [Migration d'une application CF vers le cloud ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Exécution d'applications sans serveur dans un cluster avec Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Exécution d'applications sans serveur dans un cluster avec Knative ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Orchestration de charges de travail à exécution longue pour les applications avec un service de messagerie Apache Kafka ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automatisation de déploiements dans un cluster avec Terraform ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organisation des utilisateurs et des équipes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)

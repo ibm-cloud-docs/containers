@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Rimozione dell'archiviazione persistente da un cluster
 {: #cleanup}
 
-Quando configuri l'archiviazione persistente nel tuo cluster, hai tre componenti principali: l'attestazione del volume persistente (o PVC, persistent volume claim) Kubernetes che richiede l'archiviazione, il volume persistente (o PV, persistent volume) montato in un pod e descritto nella PVC e l'istanza dell'infrastruttura IBM Cloud (SoftLayer), come l'archiviazione blocchi o file NFS. A seconda di come ne hai eseguito la creazione, potresti dover eliminare tutti i tre separatamente.
+Quando configuri l'archiviazione persistente nel tuo cluster, hai tre componenti principali: l'attestazione del volume persistente (o PVC, persistent volume claim) Kubernetes che richiede l'archiviazione, il volume persistente (o PV, persistent volume) montato in un pod e descritto nella PVC e l'istanza dell'infrastruttura IBM Cloud (SoftLayer), come l'archiviazione blocchi o file NFS. A seconda di come hai eseguito la creazione della tua archiviazione, potresti dover eliminare tutti e tre separatamente.
 {:shortdesc}
 
 ## Ripulitura dell'archiviazione persistente
@@ -48,7 +50,7 @@ Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma
 
 <p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
-Prima di iniziare: [accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per ripulire i dati persistenti:
 
@@ -75,7 +77,7 @@ Per ripulire i dati persistenti:
 
    Se la politica di riacquisizione indica `Delete`, il tuo PV e l'archiviazione fisica vengono rimossi quando rimuovi la PVC. Se la politica di riacquisizione indica `Retain`, o se hai eseguito il provisioning della tua archiviazione senza una classe di archiviazione, il tuo PV e l'archiviazione fisica non vengono rimossi quando rimuovi la PVC. Devi rimuovere la PVC, il PV e l'archiviazione fisica separatamente.
 
-   Se la tua archiviazione viene addebitata su base mensile, ti viene comunque addebitato l'importo per l'intero mese, anche se rimuovi l'archiviazione prima della fine del ciclo di fatturazione.
+   Se la tua archiviazione viene addebitata mensilmente, ti viene comunque addebitato l'importo per l'intero mese, anche se rimuovi l'archiviazione prima della fine del ciclo di fatturazione.
    {: important}
 
 3. Rimuovi gli eventuali pod che montano la PVC.
@@ -178,7 +180,7 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
 
-9. Verifica che l'istanza di archiviazione fisica venga rimossa. Nota che il completamento del processo di eliminazione potrebbe richiedere alcuni giorni.
+9. Verifica che l'istanza di archiviazione fisica venga rimossa. Il completamento del processo di eliminazione potrebbe richiedere alcuni giorni.
 
    **Archiviazione file:**
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}}의 수송 유스 케이스
@@ -79,7 +79,7 @@ IoT 디바이스는 데이터를 스트리밍하며 {{site.data.keyword.messageh
 
 회사는 앱의 유럽 버전의 가용성을 보장하고 효율적으로 워크로드의 균형을 맞출 수 있도록 프랑크푸르트 내의 여러 지역 클러스터에 워크로드를 분산시킵니다. 각 지역이 항만 앱에 고유 데이터를 업로드하므로 앱의 클러스터는 대기 시간이 낮은 지역에서 호스팅됩니다.
 
-개발자의 경우 대부분의 Continuous Integration 및 Continuous Delivery(CI/CD) 프로세스는 {{site.data.keyword.contdelivery_full}}를 통해 자동화할 수 있습니다. 회사는 컨테이너 이미지를 준비하고, 취약성을 확인하고, 이를 Kubernetes 클러스터에 배치하는 데 사용되는 워크플로우 도구 체인을 정의할 수 있습니다.
+개발자의 경우 대부분의 지속적 통합 및 지속적 딜리버리(CI/CD) 프로세스는 {{site.data.keyword.contdelivery_full}}를 통해 자동화할 수 있습니다. 회사는 컨테이너 이미지를 준비하고, 취약성을 확인하고, 이를 Kubernetes 클러스터에 배치하는 데 사용되는 워크플로우 도구 체인을 정의할 수 있습니다.
 
 **솔루션 모델**
 
@@ -130,7 +130,7 @@ HR 책임자(CHRO)가 혁신적인 챗봇을 사용하는 새 HR 혜택 사이�
 {{site.data.keyword.cloud_notm}}를 사용해야 하는 이유: {{site.data.keyword.containerlong_notm}}는 컴퓨팅 인프라의 쉬운 스핀업을 제공합니다. 이렇게 되면 개발자들은 공개 도구 체인을 사용하여 개발 및 테스트 시스템으로 변경사항을 신속히 푸시하며 손쉽게 실험을 수행할 수 있게 됩니다. 기존 소프트웨어 개발 도구는 IBM Watson Assistant가 추가되면 새로운 활력을 얻습니다. 3주일 안에 새 혜택 사이트가 작성됩니다.
 
 주요 기술:    
-* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [다양한 CPU, RAM, 스토리지 요구사항을 만족시키는 클러스터](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Watson에서 제공하는 챗봇 서비스](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [{{site.data.keyword.contdelivery_full}}의 공개 도구 체인을 포함한 DevOps 기본 도구](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

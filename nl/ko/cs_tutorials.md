@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 튜토리얼: Kubernetes 클러스터 작성
@@ -62,6 +64,7 @@ subcollection: containers
 -  [클러스터 작성을 준비](/docs/containers?topic=containers-clusters#cluster_prepare)하기 위해 수행해야 하는 단계를 알아보십시오.
 -  다음 액세스 정책이 있는지 확인하십시오.
     - {{site.data.keyword.containerlong_notm}}에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)
+    - {{site.data.keyword.registrylong_notm}}에 대한 [**관리자** {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할](/docs/containers?topic=containers-users#platform)
     - {{site.data.keyword.containerlong_notm}}에 대한 [**작성자** 또는 **관리자** {{site.data.keyword.Bluemix_notm}} IAM 서비스 역할](/docs/containers?topic=containers-users#platform)
 
 
@@ -77,7 +80,7 @@ subcollection: containers
 
 1.  [{{site.data.keyword.Bluemix_notm}} 콘솔 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/kubernetes/catalog/cluster/create)에서 내부에 1개의 작업자 노드가 있는 1개 작업자 풀의 무료 또는 표준 클러스터를 작성하십시오.
 
-    [CLI에서 클러스터](/docs/containers?topic=containers-clusters#clusters_cli)를 작성할 수도 있습니다.
+    [CLI에서 클러스터](/docs/containers?topic=containers-clusters#clusters_cli_steps)를 작성할 수도 있습니다.
     {: tip}
 
 클러스터가 프로비저닝될 때 클러스터를 관리하는 데 사용되는 다음 CLI를 설치하십시오.
@@ -92,14 +95,14 @@ subcollection: containers
 </br>
 **CLI 및 해당 필수 소프트웨어를 설치하려면 다음을 수행하십시오.**
 
-1. [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)를 설치하십시오. 이 설치에는 다음이 포함됩니다.
+1. [{{site.data.keyword.Bluemix_notm}} CLI ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](/docs/cli?topic=cloud-cli-getting-started)를 설치하십시오. 이 설치에는 다음이 포함됩니다.
   - 기본 {{site.data.keyword.Bluemix_notm}} CLI. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud`입니다.
   - {{site.data.keyword.containerlong_notm}} 플러그인. {{site.data.keyword.Bluemix_notm}} CLI를 사용하여 명령을 실행하기 위한 접두부는 `ibmcloud ks`입니다.
   - {{site.data.keyword.registryshort_notm}} 플러그인. 이 플러그인을 사용하여 {{site.data.keyword.registryshort_notm}}에서 개인용 이미지 저장소를 설정하고 관리하십시오. 레지스트리 명령을 실행하기 위한 접두부는 `ibmcloud cr`입니다.
 
 2. {{site.data.keyword.Bluemix_notm}} CLI에 로그인하십시오. 프롬프트가 표시되면 {{site.data.keyword.Bluemix_notm}} 인증 정보를 입력하십시오.
   ```
-        ibmcloud login
+  ibmcloud login
   ```
   {: pre}
 
@@ -110,7 +113,7 @@ subcollection: containers
 
 5. 플러그인이 올바르게 설치되었는지 확인하십시오.
   ```
-    ibmcloud plugin list
+  ibmcloud plugin list
   ```
   {: pre}
 
@@ -118,33 +121,33 @@ subcollection: containers
 
 6. 클러스터에 앱을 배치하려면 [Kubernetes CLI를 설치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)하십시오. Kubernetes CLI를 사용하여 명령을 실행하기 위한 접두부는 `kubectl`입니다.
 
-  1. 사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.12.7입니다.
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
+  1. 사용하려는 Kubernetes 클러스터 `major.minor` 버전과 일치하는 Kubernetes CLI `major.minor` 버전을 다운로드하십시오. 현재 {{site.data.keyword.containerlong_notm}} 기본 Kubernetes 버전은 1.13.6입니다.
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
   2. OS X 또는 Linux를 사용 중인 경우 다음 단계를 완료하십시오.
 
     1. 실행 파일을 `/usr/local/bin` 디렉토리로 이동하십시오.
       ```
-            mv /filepath/kubectl /usr/local/bin/kubectl
+      mv /filepath/kubectl /usr/local/bin/kubectl
       ```
       {: pre}
 
     2. `/usr/local/bin`이 `PATH` 시스템 변수에 나열되어 있는지 확인하십시오. `PATH` 변수에는 운영 체제가 실행 파일을 찾을 수 있는 모든 디렉토리가 포함되어 있습니다. `PATH` 변수에 나열된 디렉토리는 서로 다른 용도로 사용됩니다. `/usr/local/bin`은 시스템 관리자가 수동으로 설치했으며 운영 체제의 일부가 아닌 소프트웨어의 실행 파일을 저장하는 데 사용됩니다.
       ```
-             echo $PATH
+      echo $PATH
       ```
       {: pre}
-CLI 출력 예:
+      CLI 출력 예:
       ```
-            /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
       ```
       {: screen}
 
     3. 파일을 실행 가능하도록 설정하십시오.
       ```
-            chmod +x /usr/local/bin/kubectl
+      chmod +x /usr/local/bin/kubectl
       ```
       {: pre}
 
@@ -177,7 +180,7 @@ CLI 출력 예:
 3.  다음 단계를 계속하기 전에 작업자 노드의 배치가 완료되었는지 확인하십시오.
 
     ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -185,7 +188,7 @@ CLI 출력 예:
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -198,7 +201,6 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
 클러스터 관련 작업을 위해 {{site.data.keyword.containerlong}} CLI에 로그인할 때마다 사용자는 이러한 명령을 실행하여 클러스터의 구성 파일에 대한 경로를 세션 변수로 설정해야 합니다. Kubernetes CLI는 이 변수를 사용하여 {{site.data.keyword.Bluemix_notm}}에서 클러스터와 연결하는 데 필요한 로컬 구성 파일과 인증서를 찾습니다.
 
 1.  환경 변수를 설정하기 위한 명령을 가져오고 Kubernetes 구성 파일을 다운로드하십시오.
-
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
@@ -207,45 +209,43 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
     구성 파일 다운로드가 완료되면 환경 변수로서 경로를 로컬 Kubernetes 구성 파일로 설정하는 데 사용할 수 있는 명령이 표시됩니다.
 
     OS X에 대한 예:
-
     ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+            export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
     ```
     {: screen}
+    Windows PowerShell을 사용하고 계십니까? `--powershell` 플래그를 포함하여 Windows PowerShell 형식으로 된 환경 변수를 가져오십시오.
+    {: tip}
 
-2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣기하십시오.
-
-    **Windows PowerShell 사용자**: `ibmcloud ks cluster-config` 출력에서 `SET` 명령을 복사하여 붙여넣는 대신, 다음을 실행하여 `KUBECONFIG` 환경 변수를 설정해야 합니다. 예: `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`
-    {: note}
+2.  `KUBECONFIG` 환경 변수를 설정하려면 터미널에 표시되는 명령을 복사하여 붙여넣으십시오.
 
 3.  `KUBECONFIG` 환경 변수가 올바르게 설정되었는지 확인하십시오.
 
     OS X에 대한 예:
 
     ```
-        echo $KUBECONFIG
+    echo $KUBECONFIG
     ```
     {: pre}
 
     출력:
 
     ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
+    /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
     ```
     {: screen}
 
 4.  Kubernetes CLI 서버 버전을 확인하여 `kubectl` 명령이 올바르게 실행되는지 확인하십시오.
 
     ```
-        kubectl version  --short
+    kubectl version  --short
     ```
     {: pre}
 
     출력 예:
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -261,14 +261,14 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
     {: note}
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south
     ```
     {: pre}
 
 2.  {{site.data.keyword.toneanalyzershort}} 인스턴스를 클러스터의 `default` Kubernetes 네임스페이스에 바인딩하십시오. 나중에 Kubernetes 리소스에 대한 사용자 액세스 권한을 관리하는 고유 네임스페이스를 작성할 수 있지만 지금은 `default` 네임스페이스를 사용하십시오. Kubernetes 네임스페이스는 이전에 작성한 레지스트리 네임스페이스와는 다릅니다.
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 
@@ -286,7 +286,7 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
 3.  Kubernetes 시크릿이 클러스터 네임스페이스에서 작성되었는지 확인하십시오. 모든 {{site.data.keyword.Bluemix_notm}} 서비스는 컨테이너가 액세스하는 데 사용하는 URL 및 {{site.data.keyword.Bluemix_notm}} IAM(Identity and Access Management) API 키 등의 기밀 정보가 포함된 JSON 파일에 의해 정의됩니다. 이 정보를 안전하게 저장하기 위해 Kubernetes 시크릿이 사용됩니다. 이 예에서는 사용자 계정에서 프로비저닝된 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}의 인스턴스에 액세스하기 위한 API 키가 시크릿에 포함됩니다.
 
     ```
-     kubectl get secrets --namespace=default
+    kubectl get secrets --namespace=default
     ```
     {: pre}
 
@@ -303,7 +303,7 @@ CLI에서 Kubernetes 클러스터에 대한 컨텍스트를 설정하십시오.
 </br>
 수고하셨습니다! 클러스터가 구성되었으며 클러스터에 앱을 배치하기 시작할 수 있도록 로컬 환경이 준비되었습니다.
 
-## 다음 단계
+## 다음에 수행할 작업
 {: #tutorials_next}
 
 * 배운 내용을 테스트하고 [퀴즈 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")를 풀어보십시오](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)!

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 버전 변경 로그
@@ -30,23 +30,447 @@ subcollection: containers
 {{site.data.keyword.containerlong}} Kubernetes 클러스터에 대해 사용 가능한 주 버전, 부 버전 및 패치 업데이트의 버전 변경 정보를 보십시오. 변경사항에는 Kubernetes 및 {{site.data.keyword.Bluemix_notm}} Provider 컴포넌트에 대한 업데이트가 포함됩니다.
 {:shortdesc}
 
+변경 로그에서 달리 언급되지 않는 한, {{site.data.keyword.containerlong_notm}} 제공자 버전은 베타에서 제공되는 Kubernetes API 및 기능을 사용으로 설정합니다. Kubernetes 알파 기능은 변경될 수 있으며 사용 안함으로 설정됩니다. 
+
 부 버전 간의 준비 조치와 주 버전, 부 버전 및 패치 버전에 대한 자세한 정보는 [Kubernetes 버전](/docs/containers?topic=containers-cs_versions)을 참조하십시오.
 {: tip}
 
 이전 버전에서 변경된 사항에 대한 정보는 다음 변경 로그를 보십시오.
+-  버전 1.14 [변경 로그](#114_changelog).
 -  버전 1.13 [변경 로그](#113_changelog).
 -  버전 1.12 [변경 로그](#112_changelog).
--  버전 1.11 [변경 로그](#111_changelog).
--  **더 이상 사용되지 않음**: 버전 1.10 [변경 로그](#110_changelog).
+-  **더 이상 사용되지 않음**: 버전 1.11 [변경 로그](#111_changelog).
 -  지원되지 않는 버전에 대한 변경 로그의 [아카이브](#changelog_archive).
 
-일부는 _작업자 노드 수정팩_의 변경 로그이며, 이는 작업자 노드에만 적용됩니다. 작업자 노드가 확실히 규제를 준수하도록 하려면 [이러한 패치를 적용](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)해야 합니다. 일부 빌드 수정팩은 작업자 노드에만 한정되므로 이러한 작업자 노드 수정팩은 마스터보다 더 상위 버전일 수 있습니다. 그 외의 변경 로그는 _마스터 수정팩_에 대한 것이며 클러스터 마스터에만 적용됩니다. 마스터 수정팩은 자동으로 적용되지 않을 수 있습니다. 이는 [수동으로 적용](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)하도록 선택할 수 있습니다. 패치 유형에 대한 자세한 정보는 [업데이트 유형](/docs/containers?topic=containers-cs_versions#update_types)을 참조하십시오.
+일부는 _작업자 노드 수정팩_의 변경 로그이며, 이는 작업자 노드에만 적용됩니다. 작업자 노드가 확실히 규제를 준수하도록 하려면 [이러한 패치를 적용](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)해야 합니다. 일부 빌드 수정팩은 작업자 노드에만 한정되므로 이러한 작업자 노드 수정팩은 마스터보다 더 상위 버전일 수 있습니다. 그 외의 변경 로그는 _마스터 수정팩_에 대한 것이며 클러스터 마스터에만 적용됩니다. 마스터 수정팩은 자동으로 적용되지 않을 수 있습니다. 이는 [수동으로 적용](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)하도록 선택할 수 있습니다. 패치 유형에 대한 자세한 정보는 [업데이트 유형](/docs/containers?topic=containers-cs_versions#update_types)을 참조하십시오.
 {: note}
 
 </br>
 
+## 버전 1.14 변경 로그
+{: #114_changelog}
+
+### 2019년 6월 4일에 릴리스된 1.14.2_1521에 대한 변경 로그
+{: #1142_1521}
+
+다음 표는 패치 1.14.2_1521에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.14.1_1519 이후에 작성된 변경사항">
+<caption>버전 1.14.1_1519 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 DNS 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 `create` 또는 `update` 오퍼레이션 이후 Kubernetes DNS 및 CoreDNS 팟(Pod)이 둘 다 실행 상태로 유지될 수 있는 버그가 해결되었습니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>마스터 업데이트 중에 간헐적인 마스터 네트워크 연결 실패를 최소화할 수 있도록 구성이 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/coreos/etcd/releases/v3.3.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Kubernetes 1.14.2 릴리스를 지원하도록 업데이트되었습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 메트릭 서버</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes 메트릭 서버 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 20일에 릴리스된 작업자 노드 수정팩 1.14.1_1519에 대한 변경 로그
+{: #1141_1519}
+
+다음 표는 패치 1.14.1_1519에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.14.1_1518 이후에 작성된 변경사항">
+<caption>버전 1.14.1_1518 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 13일에 릴리스된 1.14.1_1518에 대한 변경 로그
+{: #1141_1518}
+
+다음 표는 패치 1.14.1_1518에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.14.1_1516 이후에 작성된 변경사항">
+<caption>버전 1.14.1_1516 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2019-6706 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)을 해결합니다.</td>
+</tr>
+<tr>
+<td>Kubernetes 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>Kubernetes API 서버 감사 정책 구성이 `/openapi/v2*` 읽기 전용 URL을 로깅하지 않도록 업데이트되었습니다. 또한 Kubernetes 제어기 관리자 구성에서는 서명된 `kubelet` 인증서의 유효성 검증 기간을 1년에서 3년으로 늘렸습니다. </td>
+</tr>
+<tr>
+<td>OpenVPN 클라이언트 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 DNS가 작동 중지될 때 팟(Pod)이 실패하지 않도록 `kube-system` 네임스페이스의 OpenVPN 클라이언트 `vpn-*` 팟(Pod)이 이제 `dnsPolicy`를 `Default`로 설정합니다.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) 및 [CVE-2017-1000368 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 7일에 릴리스된 1.14.1_1516에 대한 변경 로그
+{: #1141_1516}
+
+다음 표는 패치 1.14.1_1516에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.5_1519 이후에 작성된 변경사항">
+<caption>버전 1.13.5_1519 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.1</td>
+<td>[Calico 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://docs.projectcalico.org/v3.6/release-notes/)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>[CoreDNS 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://coredns.io/2019/01/13/coredns-1.3.1-release/)를 참조하십시오. 업데이트에는 [메트릭 포트 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://coredns.io/plugins/metrics/) 클러스터 DNS 서비스의 추가가 포함됩니다.<br><br>CoreDNS는 이제 지원되는 유일한 클러스터 DNS 제공자입니다. 클러스터를 이전 버전 및 사용한 KubeDNS에서 Kubernetes 버전 1.14로 업데이트하는 경우 KubeDNS는 클러스터 업데이트 중에 자동으로 CoreDNS로 마이그레이션됩니다. 자세한 정보를 확인하거나 업데이트하기 전에 CoreDNS를 테스트하려면 [클러스터 DNS 제공자 구성](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns)을 참조하십시오.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>[CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Kubernetes 1.14.1 릴리스를 지원하도록 업데이트되었습니다. 또한 `calicoctl` 버전이 3.6.1로 업데이트되었습니다. 로드 밸런서 팟(Pod)에 사용 가능한 하나의 작업자 노드만 포함하여 버전 2.0 로드 밸런서에 대한 업데이트를 수정했습니다. 사설 로드 밸런서는 이제 [사설 에지 작업자 노드](/docs/containers?topic=containers-edge#edge)에서의 실행을 지원합니다.</td>
+</tr>
+<tr>
+<td>IBM 팟(Pod) 보안 정책</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>[IBM 팟(Pod) 보안 정책](/docs/containers?topic=containers-psp#ibm_psp)은 Kubernetes [RunAsGroup ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) 기능을 지원하도록 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>`kubelet` 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>작업자 노드에서 단일 팟(Pod)이 모든 프로세스 ID를 이용하지 않도록 `--pod-max-pids` 옵션을 `14336`으로 설정합니다.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>[Kubernetes 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) 및 [Kubernetes 1.14 블로그 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/)를 참조하십시오.<br><br>Kubernetes 기반 역할 기반 액세스 제어(RBAC) 정책에서는 더 이상 [권한이 없는 사용자에 대한 검색 및 권한 검사 API ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles)에 대한 액세스 권한을 부여하지 않습니다. 이 변경사항은 새 버전 1.14 클러스터에만 적용됩니다. 이전 버전에서 클러스터를 업데이트하는 경우 권한이 없는 사용자는 계속해서 검색 및 권한 검사 API에 액세스할 수 있습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes 허가 제어기 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td><ul>
+<li>클러스터의 Kubernetes API 서버에 대한 `--enable-admission-plugins` 옵션에 `NodeRestriction`이 추가되었으며 이 보안 개선사항을 지원하도록 관련 클러스터 리소스가 구성되었습니다. </li>
+<li>API가 더 이상 지원되지 않으므로 클러스터의 Kubernetes API 서버에 대한 `--enable-admission-plugins` 옵션에서 `Initializers`를 제거하고 `--runtime-config` 옵션에서 `admissionregistration.k8s.io/v1alpha1=true`를 제거했습니다. 대신, [Kubernetes 승인 웹훅 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/)을 사용할 수 있습니다.</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes DNS Autoscaler</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>[Kubernetes DNS Autoscaler 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 기능 게이트 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td><ul>
+  <li>컨테이너 런타임 구성의 선택사항을 사용 안함으로 설정하도록 `RuntimeClass=false`를 추가했습니다. </li>
+  <li>제거된 `ExperimentalCriticalPodAnnotation=true` because the `scheduler.alpha.kubernetes.io/critical-pod` 팟(Pod) 어노테이션은 더 이상 사용되지 않습니다. 대신, [Kubernetes 팟(Pod) 우선순위 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority)를 사용할 수 있습니다.</li></ul></td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>[CVE-2019-11068 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## 버전 1.13 변경 로그
 {: #113_changelog}
+
+### 2019년 6월 4일에 릴리스된 1.13.6_1524에 대한 변경 로그
+{: #1136_1524}
+
+다음 표는 패치 1.13.6_1524에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.6_1522 이후에 작성된 변경사항">
+<caption>버전 1.13.6_1522 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 DNS 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 `create` 또는 `update` 오퍼레이션 이후 Kubernetes DNS 및 CoreDNS 팟(Pod)이 둘 다 실행 상태로 유지될 수 있는 버그가 해결되었습니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>마스터 업데이트 중에 간헐적인 마스터 네트워크 연결 실패를 최소화할 수 있도록 구성이 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/coreos/etcd/releases/v3.3.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Kubernetes 메트릭 서버</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes 메트릭 서버 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 20일에 릴리스된 작업자 노드 수정팩 1.13.6_1522에 대한 변경 로그
+{: #1136_1522}
+
+다음 표는 패치 1.13.6_1522에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.6_1521 이후에 작성된 변경사항">
+<caption>버전 1.13.6_1521 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 13일에 릴리스된 1.13.6_1521에 대한 변경 로그
+{: #1136_1521}
+
+다음 표는 패치 1.13.6_1521에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.5_1519 이후에 작성된 변경사항">
+<caption>버전 1.13.5_1519 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2019-6706 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)을 해결합니다.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Kubernetes 1.13.6 릴리스를 지원하도록 업데이트되었습니다. 또한 로드 밸런서 팟(Pod)에 사용 가능한 하나의 작업자 노드만 있는 버전 2.0 로드 밸런서에 대한 업데이트도 수정했습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>Kubernetes API 서버 감사 정책 구성이 `/openapi/v2*` 읽기 전용 URL을 로깅하지 않도록 업데이트되었습니다. 또한 Kubernetes 제어기 관리자 구성에서는 서명된 `kubelet` 인증서의 유효성 검증 기간을 1년에서 3년으로 늘렸습니다. </td>
+</tr>
+<tr>
+<td>OpenVPN 클라이언트 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 DNS가 작동 중지될 때 팟(Pod)이 실패하지 않도록 `kube-system` 네임스페이스의 OpenVPN 클라이언트 `vpn-*` 팟(Pod)이 이제 `dnsPolicy`를 `Default`로 설정합니다.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 및 [CVE-2019-11068 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 29일에 릴리스된 작업자 노드 수정팩 1.13.5_1519에 대한 변경 로그
+{: #1135_1519}
+
+다음 표는 작업자 노드 수정팩 1.13.5_1519에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.13.5_1518 이후에 작성된 변경사항">
+<caption>버전 1.13.5_1518 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>설치된 Ubuntu 패키지로 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>[containerd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/containerd/containerd/releases/tag/v1.2.6)를 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
 
 ### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.13.5_1518에 대한 변경 로그
 {: #1135_1518}
@@ -157,7 +581,7 @@ subcollection: containers
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -183,7 +607,7 @@ subcollection: containers
 <td>클러스터 DNS 구성</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>업데이트가 클러스터 DNS 제공자에서 CoreDNS로 전환되지 않도록 Kubernetes 버전 1.11에서 업데이트 프로세스를 수정했습니다. 업데이트 후 계속해서 [클러스터 DNS 제공자로 CoreDNS를 설정](/docs/containers?topic=containers-cluster_dns#set_coredns)할 수 있습니다. </td>
+<td>업데이트가 클러스터 DNS 제공자에서 CoreDNS로 전환되지 않도록 Kubernetes 버전 1.11에서 업데이트 프로세스를 수정했습니다. 업데이트 후 계속해서 [클러스터 DNS 제공자로 CoreDNS를 설정](/docs/containers?topic=containers-cluster_dns#set_coredns)할 수 있습니다.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} File Storage 플러그인</td>
@@ -549,6 +973,201 @@ subcollection: containers
 버전 1.12 변경 로그를 검토하십시오.
 {: shortdesc}
 
+### 2019년 6월 4일에 릴리스된 1.12.9_1555에 대한 변경 로그
+{: #1129_1555}
+
+다음 표는 패치 1.12.9_1555에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.8_1553 이후에 작성된 변경사항">
+<caption>버전 1.12.8_1553 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 DNS 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 `create` 또는 `update` 오퍼레이션 이후 Kubernetes DNS 및 CoreDNS 팟(Pod)이 둘 다 실행 상태로 유지될 수 있는 버그가 해결되었습니다.</td>
+</tr>
+<tr>
+<td>클러스터 마스터 HA 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>마스터 업데이트 중에 간헐적인 마스터 네트워크 연결 실패를 최소화할 수 있도록 구성이 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/coreos/etcd/releases/v3.3.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Kubernetes 1.12.9 릴리스를 지원하도록 업데이트되었습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 메트릭 서버</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>[Kubernetes 메트릭 서버 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 20일에 릴리스된 작업자 노드 수정팩 1.12.8_1553에 대한 변경 로그
+{: #1128_1533}
+
+다음 표는 패치 1.12.8_1553에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.8_1553 이후에 작성된 변경사항">
+<caption>버전 1.12.8_1553 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 13일에 릴리스된 1.12.8_1552에 대한 변경 로그
+{: #1128_1552}
+
+다음 표는 패치 1.12.8_1552에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.7_1550 이후에 작성된 변경사항">
+<caption>버전 1.12.7_1550 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2019-6706 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)을 해결합니다.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.7-180</td>
+<td>v1.12.8-210</td>
+<td>Kubernetes 1.12.8 릴리스를 지원하도록 업데이트되었습니다. 또한 로드 밸런서 팟(Pod)에 사용 가능한 하나의 작업자 노드만 있는 버전 2.0 로드 밸런서에 대한 업데이트도 수정했습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.7</td>
+<td>v1.12.8</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>Kubernetes API 서버 감사 정책 구성이 `/openapi/v2*` 읽기 전용 URL을 로깅하지 않도록 업데이트되었습니다. 또한 Kubernetes 제어기 관리자 구성에서는 서명된 `kubelet` 인증서의 유효성 검증 기간을 1년에서 3년으로 늘렸습니다. </td>
+</tr>
+<tr>
+<td>OpenVPN 클라이언트 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 DNS가 작동 중지될 때 팟(Pod)이 실패하지 않도록 `kube-system` 네임스페이스의 OpenVPN 클라이언트 `vpn-*` 팟(Pod)이 이제 `dnsPolicy`를 `Default`로 설정합니다.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 및 [CVE-2019-11068 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 29일에 릴리스된 작업자 노드 수정팩 1.12.7_1550에 대한 변경 로그
+{: #1127_1550}
+
+다음 표는 작업자 노드 수정팩 1.12.7_1550에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.12.7_1549 이후에 작성된 변경사항">
+<caption>버전 1.12.7_1549 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>설치된 Ubuntu 패키지로 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>[containerd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/containerd/containerd/releases/tag/v1.1.7)를 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
+
 ### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.12.7_1549에 대한 변경 로그
 {: #1127_1549}
 
@@ -658,7 +1277,7 @@ subcollection: containers
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -1182,7 +1801,7 @@ subcollection: containers
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -1356,10 +1975,185 @@ subcollection: containers
 </tbody>
 </table>
 
-## 버전 1.11 변경 로그
+## 더 이상 사용되지 않음: 버전 1.11 변경 로그
 {: #111_changelog}
 
 버전 1.11 변경 로그를 검토하십시오.
+{: shortdesc}
+
+Kubernetes 버전 1.11은 더 이상 사용되지 않으며 2019년 6월 27일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.12 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
+{: deprecated}
+
+### 2019년 6월 4일에 릴리스된 1.11.10_1561에 대한 변경 로그
+{: #11110_1561}
+
+다음 표는 패치 1.11.10_1561에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.10_1559 이후에 작성된 변경사항">
+<caption>버전 1.11.10_1559 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>마스터 업데이트 중에 간헐적인 마스터 네트워크 연결 실패를 최소화할 수 있도록 구성이 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>[etcd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/coreos/etcd/releases/v3.3.13)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>[CVE-2018-10844 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) 및 [CVE-2019-5436 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 20일에 릴리스된 작업자 노드 수정팩 1.11.10_1559에 대한 변경 로그
+{: #11110_1559}
+
+다음 표는 패치 팩 1.11.10_1559에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.10_1558 이후에 작성된 변경사항">
+<caption>버전 1.11.10_1558 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 커널</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 커널</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>[CVE-2018-12126 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) 및 [CVE-2018-12130 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html)의 커널 업데이트로 작업자 노드 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 5월 13일에 릴리스된 1.11.10_1558에 대한 변경 로그
+{: #11110_1558}
+
+다음 표는 패치 1.11.10_1558에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.9_1556 이후에 작성된 변경사항">
+<caption>버전 1.11.9_1556 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2019-6706 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)을 해결합니다.</td>
+</tr>
+<tr>
+<td>GPU 디바이스 플러그인 및 설치 프로그램</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>[CVE-2019-1543 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)의 이미지가 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.11.9-241</td>
+<td>v1.11.10-270</td>
+<td>Kubernetes 1.11.10 릴리스를 지원하도록 업데이트되었습니다. </td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.9</td>
+<td>v1.11.10</td>
+<td>[Kubernetes 릴리스 정보![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10)를 참조하십시오.</td>
+</tr>
+<tr>
+<td>Kubernetes 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>Kubernetes API 서버 감사 정책 구성이 `/openapi/v2*` 읽기 전용 URL을 로깅하지 않도록 업데이트되었습니다. 또한 Kubernetes 제어기 관리자 구성에서는 서명된 `kubelet` 인증서의 유효성 검증 기간을 1년에서 3년으로 늘렸습니다. </td>
+</tr>
+<tr>
+<td>OpenVPN 클라이언트 구성</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>클러스터 DNS가 작동 중지될 때 팟(Pod)이 실패하지 않도록 `kube-system` 네임스페이스의 OpenVPN 클라이언트 `vpn-*` 팟(Pod)이 이제 `dnsPolicy`를 `Default`로 설정합니다.</td>
+</tr>
+<tr>
+<td>신뢰할 수 있는 컴퓨팅 에이전트</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>[CVE-2016-7076 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) 및 [CVE-2019-11068 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068)의 이미지가 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+### 2019년 4월 29일에 릴리스된 작업자 노드 수정팩 1.11.9_1556에 대한 변경 로그
+{: #1119_1556}
+
+다음 표는 작업자 노드 수정팩 1.11.9_1556에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.11.9_1555 이후에 작성된 변경사항">
+<caption>버전 1.11.9_1555 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>설치된 Ubuntu 패키지로 업데이트되었습니다.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>[containerd 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://github.com/containerd/containerd/releases/tag/v1.1.7)를 참조하십시오.</td>
+</tr>
+</tbody>
+</table>
+
 
 ### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.11.9_1555에 대한 변경 로그
 {: #1119_1555}
@@ -1476,7 +2270,7 @@ subcollection: containers
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -1985,7 +2779,7 @@ subcollection: containers
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -2100,7 +2894,7 @@ subcollection: containers
 <td>TPM 사용 커널</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
+<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -2149,7 +2943,7 @@ subcollection: containers
 <td>etcd에서 데이터 암호화</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 이전 중에 암호화되고 고정됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정하십시오](/docs/containers?topic=containers-encryption#keyprotect).</td>
+<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 전송 중 및 저장 중에 암호화됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정](/docs/containers?topic=containers-encryption#keyprotect)하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -2279,7 +3073,7 @@ subcollection: containers
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -2312,7 +3106,7 @@ subcollection: containers
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 `ibmc-file-bronze`로 유지됩니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 `ibmc-file-bronze`로 유지됩니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
 </tr>
 <tr>
 <td>키 관리 서비스 제공자</td>
@@ -2336,13 +3130,13 @@ subcollection: containers
 <td>로그 순환</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
+<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
 </tr>
 <tr>
 <td>루트 비밀번호 만료</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)할 수 있습니다.</td>
+<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)할 수 있습니다.</td>
 </tr>
 <tr>
 <td>작업자 노드 런타임 컴포넌트(`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -2514,16 +3308,109 @@ subcollection: containers
 <br />
 
 
-## 더 이상 사용되지 않음: 버전 1.10 변경 로그
+## 아카이브
+{: #changelog_archive}
+
+지원되지 않는 Kubernetes 버전:
+*  [버전 1.10](#110_changelog)
+*  [버전 1.9](#19_changelog)
+*  [버전 1.8](#18_changelog)
+*  [버전 1.7](#17_changelog)
+
+### 버전 1.10 변경 로그(2019년 5월 16일 현재 지원되지 않음)
 {: #110_changelog}
 
 버전 1.10 변경 로그를 검토하십시오.
 {: shortdesc}
 
-Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(임시)부터 지원되지 않습니다. 각 Kubernetes 버전 업데이트의 [잠재적인 영향을 검토](/docs/containers?topic=containers-cs_versions#cs_versions)한 후에 버전 1.11 이상으로 즉시 [클러스터를 업데이트](/docs/containers?topic=containers-update#update)하십시오.
-{: deprecated}
+*   [2019년 5월 13일에 릴리스된 작업자 노드 수정팩 1.10.13_1558에 대한 변경 로그](#11013_1558)
+*   [2019년 4월 29일에 릴리스된 작업자 노드 수정팩 1.10.13_1557에 대한 변경 로그](#11013_1557)
+*   [2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.10.13_1556 대한 변경 로그](#11013_1556)
+*   [2019년 4월 8일에 릴리스된 1.10.13_1555에 대한 변경 로그](#11013_1555)
+*   [2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.10.13_1554에 대한 변경 로그](#11013_1554)
+*   [2019년 3월 26일에 릴리스된 마스터 수정팩 1.10.13_1553에 대한 변경 로그](#11118_1553)
+*   [2019년 3월 20일에 릴리스된 1.10.13_1551에 대한 변경 로그](#11013_1551)
+*   [2019년 3월 4일에 릴리스된 1.10.13_154에 대한 변경 로그](#11013_1548)
+*   [2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.10.12_1546에 대한 변경 로그](#11012_1546)
+*   [2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.10.12_1544에 대한 변경 로그](#11012_1544)
+*   [2019년 2월 5일에 릴리스된 1.10.12_1543에 대한 변경 로그](#11012_1543)
+*   [2019년 1월 28일에 릴리스된 작업자 노드 수정팩 1.10.12_1541에 대한 변경 로그](#11012_1541)
+*   [2019년 1월 21일에 릴리스된 1.10.12_1540에 대한 변경 로그](#11012_1540)
+*   [2019년 1월 7일에 릴리스된 작업자 노드 수정팩 1.10.11_1538에 대한 변경 로그](#11011_1538)
+*   [2019년 12월 17일에 릴리스된 작업자 노드 수정팩 1.10.11_1537에 대한 변경 로그](#11011_1537)
+*   [2018년 12월 4일에 릴리스된 1.10.11_1536에 대한 변경 로그](#11011_1536)
+*   [2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.10.8_1532에 대한 변경 로그](#1108_1532)
+*   [2018년 11월 19일에 릴리스된 작업자 노드 수정팩 1.10.8_1531에 대한 변경 로그](#1108_1531)
+*   [2018년 11월 7일에 릴리스된 1.10.8_1530에 대한 변경 로그](#1108_1530_ha-master)
+*   [2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.10.8_1528에 대한 변경 로그](#1108_1528)
+*   [2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.10.8_1525에 대한 변경 로그](#1108_1525)
+*   [2018년 10월 2일에 릴리스된 1.10.8_1524에 대한 변경 로그](#1108_1524)
+*   [2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.10.7_1521에 대한 변경 로그](#1107_1521)
+*   [2018년 9월 4일에 릴리스된 1.10.7_1520에 대한 변경 로그](#1107_1520)
+*   [2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.10.5_1519에 대한 변경 로그](#1105_1519)
+*   [2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.10.5_1518에 대한 변경 로그](#1105_1518)
+*   [2018년 7월 27일에 릴리스된 1.10.5_1517에 대한 변경 로그](#1105_1517)
+*   [2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.10.3_1514에 대한 변경 로그](#1103_1514)
+*   [2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.10.3_1513에 대한 변경 로그](#1103_1513)
+*   [2018년 6월 12일에 릴리스된 1.10.3_1512에 대한 변경 로그](#1103_1512)
+*   [2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.10.1_1510에 대한 변경 로그](#1101_1510)
+*   [2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.10.1_1509에 대한 변경 로그](#1101_1509)
+*   [2018년 5월 1일에 릴리스된 1.10.1_1508에 대한 변경 로그](#1101_1508)
 
-### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.10.13_1556 대한 변경 로그
+#### 2019년 5월 13일에 릴리스된 작업자 노드 수정팩 1.10.13_1558에 대한 변경 로그
+{: #11013_1558}
+
+다음 표는 작업자 노드 수정팩 1.10.13_1558에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1557 이후에 작성된 변경사항">
+<caption>버전 1.10.13_1557 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>클러스터 마스터 HA 프록시</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>[HAProxy 릴리스 정보 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://www.haproxy.org/download/1.9/src/CHANGELOG)를 참조하십시오. 업데이트는 [CVE-2019-6706 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706)을 해결합니다.</td>
+</tr>
+</tbody>
+</table>
+
+#### 2019년 4월 29일에 릴리스된 작업자 노드 수정팩 1.10.13_1557에 대한 변경 로그
+{: #11013_1557}
+
+다음 표는 작업자 노드 수정팩 1.10.13_1557에 포함된 변경사항을 보여줍니다.
+{: shortdesc}
+
+<table summary="버전 1.10.13_1556 이후에 작성된 변경사항">
+<caption>1.10.13_1556 이후의 변경사항</caption>
+<thead>
+<tr>
+<th>컴포넌트</th>
+<th>이전</th>
+<th>현재</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 패키지</td>
+<td>해당사항 없음</td>
+<td>해당사항 없음</td>
+<td>설치된 Ubuntu 패키지로 업데이트되었습니다.</td>
+</tr>
+</tbody>
+</table>
+
+
+#### 2019년 4월 15일에 릴리스된 작업자 노드 수정팩 1.10.13_1556 대한 변경 로그
 {: #11013_1556}
 
 다음 표는 작업자 노드 수정팩 1.10.13_1556에 포함된 변경사항을 보여줍니다.
@@ -2549,7 +3436,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 4월 8일에 릴리스된 1.10.13_1555에 대한 변경 로그
+#### 2019년 4월 8일에 릴리스된 1.10.13_1555에 대한 변경 로그
 {: #11013_1555}
 
 다음 표는 패치 1.10.13_155에 포함된 변경사항을 보여줍니다.
@@ -2599,7 +3486,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.10.13_1554에 대한 변경 로그
+#### 2019년 4월 1일에 릴리스된 작업자 노드 수정팩 1.10.13_1554에 대한 변경 로그
 {: #11013_1554}
 
 다음 표는 작업자 노드 수정팩 1.10.13_1554에 포함된 변경사항을 보여줍니다.
@@ -2620,13 +3507,13 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 containerd에 대한 메모리 예약을 늘렸습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
 
 
-### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.10.13_1553에 대한 변경 로그
+#### 2019년 3월 26일에 릴리스된 마스터 수정팩 1.10.13_1553에 대한 변경 로그
 {: #11118_1553}
 
 다음 표는 마스터 수정팩 1.10.13_1553에 포함된 변경사항을 보여줍니다.
@@ -2664,7 +3551,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 3월 20일에 릴리스된 1.10.13_1551에 대한 변경 로그
+#### 2019년 3월 20일에 릴리스된 1.10.13_1551에 대한 변경 로그
 {: #11013_1551}
 
 다음 표는 패치 1.10.13_1551에 포함된 변경사항을 보여줍니다.
@@ -2720,7 +3607,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 3월 4일에 릴리스된 1.10.13_154에 대한 변경 로그
+#### 2019년 3월 4일에 릴리스된 1.10.13_154에 대한 변경 로그
 {: #11013_1548}
 
 다음 표는 패치 1.10.13_1548에 포함된 변경사항을 보여줍니다.
@@ -2794,7 +3681,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.10.12_1546에 대한 변경 로그
+#### 2019년 2월 27일에 릴리스된 작업자 노드 수정팩 1.10.12_1546에 대한 변경 로그
 {: #11012_1546}
 
 다음 표는 작업자 노드 수정팩 1.10.12_1546에 포함된 변경사항을 보여줍니다.
@@ -2820,7 +3707,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.10.12_1544에 대한 변경 로그
+#### 2019년 2월 15일에 릴리스된 작업자 노드 수정팩 1.10.12_1544에 대한 변경 로그
 {: #11012_1544}
 
 다음 표는 작업자 노드 수정팩 1.10.12_1544에 포함된 변경사항을 보여줍니다.
@@ -2852,7 +3739,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 2월 5일에 릴리스된 1.10.12_1543에 대한 변경 로그
+#### 2019년 2월 5일에 릴리스된 1.10.12_1543에 대한 변경 로그
 {: #11012_1543}
 
 다음 표는 패치 1.10.12_1543에 포함된 변경사항을 보여줍니다.
@@ -2925,7 +3812,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 1월 28일에 릴리스된 작업자 노드 수정팩 1.10.12_1541에 대한 변경 로그
+#### 2019년 1월 28일에 릴리스된 작업자 노드 수정팩 1.10.12_1541에 대한 변경 로그
 {: #11012_1541}
 
 다음 표는 작업자 노드 수정팩 1.10.12_1541에 포함된 변경사항을 보여줍니다.
@@ -2951,7 +3838,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 1월 21일에 릴리스된 1.10.12_1540에 대한 변경 로그
+#### 2019년 1월 21일에 릴리스된 1.10.12_1540에 대한 변경 로그
 {: #11012_1540}
 
 다음 표는 패치 1.10.12_1540에 포함된 변경사항을 보여줍니다.
@@ -3001,7 +3888,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2019년 1월 7일에 릴리스된 작업자 노드 수정팩 1.10.11_1538에 대한 변경 로그
+#### 2019년 1월 7일에 릴리스된 작업자 노드 수정팩 1.10.11_1538에 대한 변경 로그
 {: #11011_1538}
 
 다음 표는 작업자 노드 수정팩 1.10.11_1538에 포함된 변경사항을 보여줍니다.
@@ -3027,7 +3914,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 12월 17일에 릴리스된 작업자 노드 수정팩 1.10.11_1537에 대한 변경 로그
+#### 2018년 12월 17일에 릴리스된 작업자 노드 수정팩 1.10.11_1537에 대한 변경 로그
 {: #11011_1537}
 
 다음 표는 작업자 노드 수정팩 1.10.11_1537에 포함된 변경사항을 보여줍니다.
@@ -3054,7 +3941,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 12월 4일에 릴리스된 1.10.11_1536에 대한 변경 로그
+#### 2018년 12월 4일에 릴리스된 1.10.11_1536에 대한 변경 로그
 {: #11011_1536}
 
 다음 표는 패치 1.10.11_1536에 포함된 변경사항을 보여줍니다.
@@ -3099,12 +3986,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 docker에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 docker에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.10.8_1532에 대한 변경 로그
+#### 2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.10.8_1532에 대한 변경 로그
 {: #1108_1532}
 
 다음 표는 작업자 노드 수정팩 1.10.8_1532에 포함된 변경사항을 보여줍니다.
@@ -3130,7 +4017,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 11월 19일에 릴리스된 작업자 노드 수정팩 1.10.8_1531에 대한 변경 로그
+#### 2018년 11월 19일에 릴리스된 작업자 노드 수정팩 1.10.8_1531에 대한 변경 로그
 {: #1108_1531}
 
 다음 표는 작업자 노드 수정팩 1.10.8_1531에 포함된 변경사항을 보여줍니다.
@@ -3156,7 +4043,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 11월 7일에 릴리스된 1.10.8_1530에 대한 변경 로그
+#### 2018년 11월 7일에 릴리스된 1.10.8_1530에 대한 변경 로그
 {: #1108_1530_ha-master}
 
 다음 표는 패치 1.10.8_1530에 포함된 변경사항을 보여줍니다.
@@ -3200,7 +4087,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>etcd에서 데이터 암호화</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 이전 중에 암호화되고 고정됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정하십시오](/docs/containers?topic=containers-encryption#keyprotect).</td>
+<td>이전에는 etcd 데이터가 마스터의 NFS 파일 스토리지 인스턴스에 저장되어 저장 상태로 암호화되었습니다. 이제 etcd 데이터는 마스터의 로컬 디스크에 저장되고, {{site.data.keyword.cos_full_notm}}에 백업됩니다. 데이터는 {{site.data.keyword.cos_full_notm}}로 전송 중 및 저장 중에 암호화됩니다. 그러나 마스터의 로컬 디스크에 있는 etcd 데이터는 암호화되지 않습니다. 마스터의 로컬 etcd 데이터를 암호화하려는 경우 [클러스터에서 {{site.data.keyword.keymanagementservicelong_notm}}를 사용으로 설정](/docs/containers?topic=containers-encryption#keyprotect)하십시오.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} Provider</td>
@@ -3212,12 +4099,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>TPM 사용 커널</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
+<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.10.8_1528에 대한 변경 로그
+#### 2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.10.8_1528에 대한 변경 로그
 {: #1108_1528}
 
 다음 표는 작업자 노드 수정팩 1.10.8_1528에 포함된 변경사항을 보여줍니다.
@@ -3243,7 +4130,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 10월 15일에 릴리스된 마스터 수정팩 1.10.8_1527에 대한 변경 로그
+#### 2018년 10월 15일에 릴리스된 마스터 수정팩 1.10.8_1527에 대한 변경 로그
 {: #1108_1527}
 
 다음 표는 마스터 수정팩 1.10.8_1527에 포함된 변경사항을 보여줍니다.
@@ -3275,7 +4162,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.10.8_1525에 대한 변경 로그
+#### 2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.10.8_1525에 대한 변경 로그
 {: #1108_1525}
 
 다음 표는 작업자 노드 수정팩 1.10.8_1525에 포함된 변경사항을 보여줍니다.
@@ -3308,7 +4195,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 10월 2일에 릴리스된 1.10.8_1524에 대한 변경 로그
+#### 2018년 10월 2일에 릴리스된 1.10.8_1524에 대한 변경 로그
 {: #1108_1524}
 
 다음 표는 패치 1.10.8_1524에 포함된 변경사항을 보여줍니다.
@@ -3354,12 +4241,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다. IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.10.7_1521에 대한 변경 로그
+#### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.10.7_1521에 대한 변경 로그
 {: #1107_1521}
 
 다음 표는 작업자 노드 수정팩 1.10.7_1521에 포함된 변경사항을 보여줍니다.
@@ -3380,7 +4267,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>로그 순환</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
+<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
 </tr>
 <tr>
 <td>작업자 노드 런타임 컴포넌트(`kubelet`, `kube-proxy`, `docker`)</td>
@@ -3392,7 +4279,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>루트 비밀번호 만료</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)할 수 있습니다.</td>
+<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)할 수 있습니다.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3411,7 +4298,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 9월 4일에 릴리스된 1.10.7_1520에 대한 변경 로그
+#### 2018년 9월 4일에 릴리스된 1.10.7_1520에 대한 변경 로그
 {: #1107_1520}
 
 다음 표는 패치 1.10.7_1520에 포함된 변경사항을 보여줍니다.
@@ -3461,7 +4348,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.10.5_1519에 대한 변경 로그
+#### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.10.5_1519에 대한 변경 로그
 {: #1105_1519}
 
 다음 표는 작업자 노드 수정팩 1.10.5_1519에 포함된 변경사항을 보여줍니다.
@@ -3494,7 +4381,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.10.5_1518에 대한 변경 로그
+#### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.10.5_1518에 대한 변경 로그
 {: #1105_1518}
 
 다음 표는 작업자 노드 수정팩 1.10.5_1518에 포함된 변경사항을 보여줍니다.
@@ -3520,7 +4407,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 27일에 릴리스된 1.10.5_1517에 대한 변경 로그
+#### 2018년 7월 27일에 릴리스된 1.10.5_1517에 대한 변경 로그
 {: #1105_1517}
 
 다음 표는 패치 1.10.5_1517에 포함된 변경사항을 보여줍니다.
@@ -3576,7 +4463,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.10.3_1514에 대한 변경 로그
+#### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.10.3_1514에 대한 변경 로그
 {: #1103_1514}
 
 다음 표는 작업자 노드 수정팩 1.10.3_1514에 포함된 변경사항을 보여줍니다.
@@ -3603,7 +4490,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.10.3_1513에 대한 변경 로그
+#### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.10.3_1513에 대한 변경 로그
 {: #1103_1513}
 
 다음 표는 작업자 노드 수정팩 1.10.3_1513에 포함된 변경사항을 보여줍니다.
@@ -3629,7 +4516,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 6월 12일에 릴리스된 1.10.3_1512에 대한 변경 로그
+#### 2018년 6월 12일에 릴리스된 1.10.3_1512에 대한 변경 로그
 {: #1103_1512}
 
 다음 표는 패치 1.10.3_1512에 포함된 변경사항을 보여줍니다.
@@ -3687,7 +4574,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 
 
 
-### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.10.1_1510에 대한 변경 로그
+#### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.10.1_1510에 대한 변경 로그
 {: #1101_1510}
 
 다음 표는 작업자 노드 수정팩 1.10.1_1510에 포함된 변경사항을 보여줍니다.
@@ -3713,7 +4600,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.10.1_1509에 대한 변경 로그
+#### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.10.1_1509에 대한 변경 로그
 {: #1101_1509}
 
 다음 표는 작업자 노드 수정팩 1.10.1_1509에 포함된 변경사항을 보여줍니다.
@@ -3739,7 +4626,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 5월 1일에 릴리스된 1.10.1_1508에 대한 변경 로그
+#### 2018년 5월 1일에 릴리스된 1.10.1_1508에 대한 변경 로그
 {: #1101_1508}
 
 다음 표는 패치 1.10.1_1508에 포함된 변경사항을 보여줍니다.
@@ -3796,7 +4683,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>GPU 지원</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>이제 스케줄링 및 실행을 위해 [그래픽 처리 장치(GPU) 컨테이너 워크로드](/docs/containers?topic=containers-app#gpu_app)에 대한 지원을 사용할 수 있습니다. 사용 가능한 GPU 머신 유형의 목록은 [작업자 노드에 대한 하드웨어](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)를 참조하십시오. 자세한 정보는 [GPU 스케줄 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)에 대한 Kubernetes 문서를 참조하십시오.</td>
+<td>이제 스케줄링 및 실행을 위해 [그래픽 처리 장치(GPU) 컨테이너 워크로드](/docs/containers?topic=containers-app#gpu_app)에 대한 지원을 사용할 수 있습니다. 사용 가능한 GPU 머신 유형의 목록은 [작업자 노드에 대한 하드웨어](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)를 참조하십시오. 자세한 정보는 [GPU 스케줄 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/)에 대한 Kubernetes 문서를 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
@@ -3804,20 +4691,35 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <br />
 
 
-## 아카이브
-{: #changelog_archive}
-
-지원되지 않는 Kubernetes 버전:
-*  [버전 1.9](#19_changelog)
-*  [버전 1.8](#18_changelog)
-*  [버전 1.7](#17_changelog)
-
 ### 버전 1.9 변경 로그(2018년 12월 27일 현재 지원되지 않음)
 {: #19_changelog}
 
 버전 1.9 변경 로그를 검토하십시오.
+{: shortdesc}
 
-### 2018년 12월 17일에 릴리스된 작업자 노드 수정팩 1.9.11_1539에 대한 변경 로그
+*   [2019년 12월 17일에 릴리스된 작업자 노드 수정팩 1.9.11_1539에 대한 변경 로그](#1911_1539)
+*   [2018년 12월 4일에 릴리스된 작업자 노드 수정팩 1.9.11_1538에 대한 변경 로그](#1911_1538)
+*   [2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.9.11_1537에 대한 변경 로그](#1911_1537)
+*   [2018년 11월 19일에 릴리스된 1.9.11_1536에 대한 변경 로그](#1911_1536)
+*   [2018년 11월 7일에 릴리스된 작업자 노드 수정팩 1.9.10_1532에 대한 변경 로그](#1910_1532)
+*   [2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.9.10_1531에 대한 변경 로그](#1910_1531)
+*   [2018년 10월 15일에 릴리스된 마스터 수정팩 1.9.10_1530에 대한 변경 로그](#1910_1530)
+*   [2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.9.10_1528에 대한 변경 로그](#1910_1528)
+*   [2018년 10월 2일에 릴리스된 1.9.10_1527에 대한 변경 로그](#1910_1527)
+*   [2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.9.10_1524에 대한 변경 로그](#1910_1524)
+*   [2018년 9월 4일에 릴리스된 1.9.10_1523에 대한 변경 로그](#1910_1523)
+*   [2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.9.9_1522에 대한 변경 로그](#199_1522)
+*   [2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.9.9_1521에 대한 변경 로그](#199_1521)
+*   [2018년 7월 27일에 릴리스된 1.9.9_1520에 대한 변경 로그](#199_1520)
+*   [2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.9.8_1517에 대한 변경 로그](#198_1517)
+*   [2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.9.8_1516에 대한 변경 로그](#198_1516)
+*   [2018년 6월 19일에 릴리스된 1.9.8_1515에 대한 변경 로그](#198_1515)
+*   [2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.9.7_1513에 대한 변경 로그](#197_1513)
+*   [2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.9.7_1512에 대한 변경 로그](#197_1512)
+*   [2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.9.7_1511에 대한 변경 로그](#197_1511)
+*   [2018년 4월 30일에 릴리스된 1.9.7_1510에 대한 변경 로그](#197_1510)
+
+#### 2018년 12월 17일에 릴리스된 작업자 노드 수정팩 1.9.11_1539에 대한 변경 로그
 {: #1911_1539}
 
 다음 표는 작업자 노드 수정팩 1.9.11_1539에 포함된 변경사항을 보여줍니다.
@@ -3843,7 +4745,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 12월 4일에 릴리스된 작업자 노드 수정팩 1.9.11_1538에 대한 변경 로그
+#### 2018년 12월 4일에 릴리스된 작업자 노드 수정팩 1.9.11_1538에 대한 변경 로그
 {: #1911_1538}
 
 다음 표는 작업자 노드 수정팩 1.9.11_1538에 포함된 변경사항을 보여줍니다.
@@ -3864,12 +4766,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>작업자 노드 리소스 활용</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 docker에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-plan_clusters#resource_limit_node)을 참조하십시오.</td>
+<td>해당 컴포넌트의 리소스 소진을 방지하기 위해 kubelet 및 docker에 대한 전용 cgroup이 추가되었습니다. 자세한 정보는 [작업자 노드 리소스 예약](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)을 참조하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.9.11_1537에 대한 변경 로그
+#### 2018년 11월 27일에 릴리스된 작업자 노드 수정팩 1.9.11_1537에 대한 변경 로그
 {: #1911_1537}
 
 다음 표는 작업자 노드 수정팩 1.9.11_1537에 포함된 변경사항을 보여줍니다.
@@ -3895,7 +4797,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 11월 19일에 릴리스된 1.9.11_1536에 대한 변경 로그
+#### 2018년 11월 19일에 릴리스된 1.9.11_1536에 대한 변경 로그
 {: #1911_1536}
 
 다음 표는 패치 1.9.11_1536에 포함된 변경사항을 보여줍니다.
@@ -3945,7 +4847,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 11월 7일에 릴리스된 작업자 노드 수정팩 1.9.10_1532에 대한 변경 로그
+#### 2018년 11월 7일에 릴리스된 작업자 노드 수정팩 1.9.10_1532에 대한 변경 로그
 {: #1910_1532}
 
 다음 표는 작업자 노드 수정팩 1.9.11_1532에 포함된 변경사항을 보여줍니다.
@@ -3966,12 +4868,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>TPM 사용 커널</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
+<td>신뢰할 수 있는 컴퓨팅의 TPM 칩이 있는 베어메탈 작업자 노드는 신뢰가 사용으로 설정될 때까지 기본 Ubuntu 커널을 사용합니다. 기존 클러스터에서 [신뢰를 사용으로 설정](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)하는 경우에는 TPM 칩이 있는 기존 베어메탈 작업자 노드를 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)해야 합니다. 베어메탈 작업자 노드에 TPM 칩이 있는지 확인하려면 `ibmcloud ks machine-types --zone` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)을 실행한 후에 **Trustable** 필드를 검토하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.9.10_1531에 대한 변경 로그
+#### 2018년 10월 26일에 릴리스된 작업자 노드 수정팩 1.9.10_1531에 대한 변경 로그
 {: #1910_1531}
 
 다음 표는 작업자 노드 수정팩 1.9.10_1531에 포함된 변경사항을 보여줍니다.
@@ -3997,7 +4899,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 10월 15일에 릴리스된 마스터 수정팩 1.9.10_1530에 대한 변경 로그
+#### 2018년 10월 15일에 릴리스된 마스터 수정팩 1.9.10_1530에 대한 변경 로그
 {: #1910_1530}
 
 다음 표는 작업자 노드 수정팩 1.9.10_1530에 포함된 변경사항을 보여줍니다.
@@ -4023,7 +4925,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.9.10_1528에 대한 변경 로그
+#### 2018년 10월 10일에 릴리스된 작업자 노드 수정팩 1.9.10_1528에 대한 변경 로그
 {: #1910_1528}
 
 다음 표는 작업자 노드 수정팩 1.9.10_1528에 포함된 변경사항을 보여줍니다.
@@ -4056,7 +4958,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 10월 2일에 릴리스된 1.9.10_1527에 대한 변경 로그
+#### 2018년 10월 2일에 릴리스된 1.9.10_1527에 대한 변경 로그
 {: #1910_1527}
 
 다음 표는 패치 1.9.10_1527에 포함된 변경사항을 보여줍니다.
@@ -4084,12 +4986,12 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
 <td>작업자 노드에서 제공하는 기본값을 사용하기 위해 IBM 파일 스토리지 클래스의 `mountOptions`가 제거되었습니다. IBM 파일 스토리지 클래스에서 중복 `reclaimPolicy` 매개변수가 제거되었습니다.<br><br>
-또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오. </td>
+또한 이제 클러스터 마스터를 업데이트할 때 기본 IBM 파일 스토리지 클래스가 변경되지 않습니다. 기본 스토리지 클래스를 변경하려면 `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`를 실행하고 `<storageclass>`를 스토리지 클래스의 이름으로 대체하십시오.</td>
 </tr>
 </tbody>
 </table>
 
-### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.9.10_1524에 대한 변경 로그
+#### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.9.10_1524에 대한 변경 로그
 {: #1910_1524}
 
 다음 표는 작업자 노드 수정팩 1.9.10_1524에 포함된 변경사항을 보여줍니다.
@@ -4110,7 +5012,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>로그 순환</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
+<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
 </tr>
 <tr>
 <td>작업자 노드 런타임 컴포넌트(`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4122,7 +5024,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>루트 비밀번호 만료</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)할 수 있습니다.</td>
+<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)할 수 있습니다.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4141,7 +5043,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 9월 4일에 릴리스된 1.9.10_1523에 대한 변경 로그
+#### 2018년 9월 4일에 릴리스된 1.9.10_1523에 대한 변경 로그
 {: #1910_1523}
 
 다음 표는 패치 1.9.10_1523에 포함된 변경사항을 보여줍니다.
@@ -4185,7 +5087,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.9.9_1522에 대한 변경 로그
+#### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.9.9_1522에 대한 변경 로그
 {: #199_1522}
 
 다음 표는 작업자 노드 수정팩 1.9.9_1522에 포함된 변경사항을 보여줍니다.
@@ -4218,7 +5120,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.9.9_1521에 대한 변경 로그
+#### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.9.9_1521에 대한 변경 로그
 {: #199_1521}
 
 다음 표는 작업자 노드 수정팩 1.9.9_1521에 포함된 변경사항을 보여줍니다.
@@ -4244,7 +5146,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 27일에 릴리스된 1.9.9_1520에 대한 변경 로그
+#### 2018년 7월 27일에 릴리스된 1.9.9_1520에 대한 변경 로그
 {: #199_1520}
 
 다음 표는 패치 1.9.9_1520에 포함된 변경사항을 보여줍니다.
@@ -4294,7 +5196,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.9.8_1517에 대한 변경 로그
+#### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.9.8_1517에 대한 변경 로그
 {: #198_1517}
 
 다음 표는 작업자 노드 수정팩 1.9.8_1517에 포함된 변경사항을 보여줍니다.
@@ -4321,7 +5223,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.9.8_1516에 대한 변경 로그
+#### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.9.8_1516에 대한 변경 로그
 {: #198_1516}
 
 다음 표는 작업자 노드 수정팩 1.9.8_1516에 포함된 변경사항을 보여줍니다.
@@ -4347,7 +5249,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 6월 19일에 릴리스된 1.9.8_1515에 대한 변경 로그
+#### 2018년 6월 19일에 릴리스된 1.9.8_1515에 대한 변경 로그
 {: #198_1515}
 
 다음 표는 패치 1.9.8_1515에 포함된 변경사항을 보여줍니다.
@@ -4392,7 +5294,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.9.7_1513에 대한 변경 로그
+#### 2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.9.7_1513에 대한 변경 로그
 {: #197_1513}
 
 다음 표는 작업자 노드 수정팩 1.9.7_1513에 포함된 변경사항을 보여줍니다.
@@ -4418,7 +5320,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.9.7_1512에 대한 변경 로그
+#### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.9.7_1512에 대한 변경 로그
 {: #197_1512}
 
 다음 표는 작업자 노드 수정팩 1.9.7_1512에 포함된 변경사항을 보여줍니다.
@@ -4444,7 +5346,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.9.7_1511에 대한 변경 로그
+#### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.9.7_1511에 대한 변경 로그
 {: #197_1511}
 
 다음 표는 작업자 노드 수정팩 1.9.7_1511에 포함된 변경사항을 보여줍니다.
@@ -4470,7 +5372,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 4월 30일에 릴리스된 1.9.7_1510에 대한 변경 로그
+#### 2018년 4월 30일에 릴리스된 1.9.7_1510에 대한 변경 로그
 {: #197_1510}
 
 다음 표는 패치 1.9.7_1510에 포함된 변경사항을 보여줍니다.
@@ -4520,9 +5422,22 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 ### 버전 1.8 변경 로그(지원되지 않음)
 {: #18_changelog}
 
-다음 변경사항을 검토하십시오.
+버전 1.8 변경 로그를 검토하십시오.
+{: shortdesc}
 
-### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.8.15_1521에 대한 변경 로그
+*   [2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.8.15_1521에 대한 변경 로그](#1815_1521)
+*   [2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.8.15_1520에 대한 변경 로그](#1815_1520)
+*   [2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.8.15_1519에 대한 변경 로그](#1815_1519)
+*   [2018년 7월 27일에 릴리스된 1.8.15_1518에 대한 변경 로그](#1815_1518)
+*   [2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.8.13_1516에 대한 변경 로그](#1813_1516)
+*   [2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.8.13_1515에 대한 변경 로그](#1813_1515)
+*   [2018년 6월 19일에 릴리스된 1.8.13_1514에 대한 변경 로그](#1813_1514)
+*   [2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.8.11_1512에 대한 변경 로그](#1811_1512)
+*   [2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.8.11_1511에 대한 변경 로그](#1811_1511)
+*   [2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.8.11_1510에 대한 변경 로그](#1811_1510)
+*   [2018년 4월 19일에 릴리스된 1.8.11_1509에 대한 변경 로그](#1811_1509)
+
+#### 2018년 9월 20일에 릴리스된 작업자 노드 수정팩 1.8.15_1521에 대한 변경 로그
 {: #1815_1521}
 
 <table summary="버전 1.8.15_1520 이후에 변경된 사항">
@@ -4540,7 +5455,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>로그 순환</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
+<td>90일 내에 다시 로드되거나 업데이트되지 않은 작업자 노드에 대해 `logrotate`가 실패하는 것을 방지하기 위해 `cronjobs` 대신 `systemd` 타이머를 사용하도록 전환되었습니다. **참고**: 모든 이전 부 릴리스 버전에서는 로그가 순환되지 않으므로 cron 작업이 실패한 후 기본 디스크가 채워집니다. cron 작업은 작업자 노드가 업데이트되거나 다시 로드되지 않고 90일 이상 활성 상태를 유지하면 실패합니다. 로그가 기본 디스크를 모두 채우면 작업자 노드가 실패 상태로 전환됩니다. 이 작업자 노드는 `ibmcloud ks worker-reload` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) 또는 `ibmcloud ks worker-update` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)을 사용하여 수정할 수 있습니다.</td>
 </tr>
 <tr>
 <td>작업자 노드 런타임 컴포넌트(`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4552,7 +5467,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 <td>루트 비밀번호 만료</td>
 <td>해당사항 없음</td>
 <td>해당사항 없음</td>
-<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)할 수 있습니다.</td>
+<td>규제 준수를 위해 작업자 노드의 루트 비밀번호는 90일이 지나면 만료됩니다. 자동화 도구가 작업자 노드에 루트로 로그인해야 하거나 루트로서 실행되는 cron 작업에 의존하는 경우에는 작업자 노드에 로그인한 후 `chage -M -1 root`를 실행하여 비밀번호 만료를 사용 안함으로 설정할 수 있습니다. **참고**: 루트로서 실행하는 것 또는 비밀번호 만료를 제거하는 것을 금지하는 보안 규제가 있는 경우에는 만료를 사용 안함으로 설정하지 마십시오. 대신 작업자 노드를 90일마다 [업데이트](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)하거나 [다시 로드](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)할 수 있습니다.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4563,7 +5478,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.8.15_1520에 대한 변경 로그
+#### 2018년 8월 23일에 릴리스된 작업자 노드 수정팩 1.8.15_1520에 대한 변경 로그
 {: #1815_1520}
 
 <table summary="버전 1.8.15_1519 이후에 작성된 변경사항">
@@ -4592,7 +5507,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.8.15_1519에 대한 변경 로그
+#### 2018년 8월 13일에 릴리스된 작업자 노드 수정팩 1.8.15_1519에 대한 변경 로그
 {: #1815_1519}
 
 <table summary="버전 1.8.15_1518 이후에 작성된 변경사항">
@@ -4615,7 +5530,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 27일에 릴리스된 1.8.15_1518에 대한 변경 로그
+#### 2018년 7월 27일에 릴리스된 1.8.15_1518에 대한 변경 로그
 {: #1815_1518}
 
 <table summary="버전 1.8.13_1516 이후에 작성된 변경사항">
@@ -4662,7 +5577,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.8.13_1516에 대한 변경 로그
+#### 2018년 7월 3일에 릴리스된 작업자 노드 수정팩 1.8.13_1516에 대한 변경 로그
 {: #1813_1516}
 
 <table summary="버전 1.8.13_1515 이후에 작성된 변경사항">
@@ -4686,7 +5601,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.8.13_1515에 대한 변경 로그
+#### 2018년 6월 21일에 릴리스된 작업자 노드 수정팩 1.8.13_1515에 대한 변경 로그
 {: #1813_1515}
 
 <table summary="버전 1.8.13_1514 이후에 작성된 변경사항">
@@ -4709,7 +5624,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 6월 19일에 릴리스된 1.8.13_1514에 대한 변경 로그
+#### 2018년 6월 19일에 릴리스된 1.8.13_1514에 대한 변경 로그
 {: #1813_1514}
 
 <table summary="버전 1.8.11_1512 이후에 작성된 변경사항">
@@ -4751,7 +5666,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.8.11_1512에 대한 변경 로그
+#### 2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.8.11_1512에 대한 변경 로그
 {: #1811_1512}
 
 <table summary="버전 1.8.11_1511 이후에 작성된 변경사항">
@@ -4775,7 +5690,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.8.11_1511에 대한 변경 로그
+#### 2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.8.11_1511에 대한 변경 로그
 {: #1811_1511}
 
 <table summary="버전 1.8.11_1510 이후에 작성된 변경사항">
@@ -4798,7 +5713,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </tbody>
 </table>
 
-### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.8.11_1510에 대한 변경 로그
+#### 2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.8.11_1510에 대한 변경 로그
 {: #1811_1510}
 
 <table summary="버전 1.8.11_1509 이후에 작성된 변경사항">
@@ -4822,7 +5737,7 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 </table>
 
 
-### 2018년 4월 19일에 릴리스된 1.8.11_1509에 대한 변경 로그
+#### 2018년 4월 19일에 릴리스된 1.8.11_1509에 대한 변경 로그
 {: #1811_1509}
 
 <table summary="버전 1.8.8_1507 이후에 작성된 변경사항">
@@ -4869,7 +5784,13 @@ Kubernetes 버전 1.10은 더 이상 사용되지 않으며 2019년 5월 15일(�
 ### 버전 1.7 변경 로그(지원되지 않음)
 {: #17_changelog}
 
-다음 변경사항을 검토하십시오.
+버전 1.7 변경 로그를 검토하십시오.
+{: shortdesc}
+
+*   [2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.7.16_1514에 대한 변경 로그](#1716_1514)
+*   [2018년 5월 18일에 릴리스된 작업자 노드 수정팩 1.7.16_1513에 대한 변경 로그](#1716_1513)
+*   [2018년 5월 16일에 릴리스된 작업자 노드 수정팩 1.7.16_1512에 대한 변경 로그](#1716_1512)
+*   [2018년 4월 19일에 릴리스된 1.7.16_1511에 대한 변경 로그](#1716_1511)
 
 #### 2018년 6월 11일에 릴리스된 작업자 노드 수정팩 1.7.16_1514에 대한 변경 로그
 {: #1716_1514}

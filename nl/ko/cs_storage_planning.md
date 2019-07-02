@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -68,7 +69,7 @@ subcollection: containers
    {: tip}
 
 5. 여러 앱 인스턴스, 구역 또는 지역 간에 데이터 공유가 필요한지 조사하십시오.
-   - **팟(Pod) 간의 액세스:** Kubernetes 지속적 볼륨을 사용하여 스토리지에 액세스할 때 동시에 볼륨을 마운트할 수 있는 팟(Pod)의 수를 결정할 수 있습니다. 블록 스토리지와 같은 일부 스토리지 솔루션은 한 번에 하나의 팟(Pod)에서만 액세스가 가능합니다. 기타 스토리지 솔루션을 사용하면 동일한 볼륨을 여러 팟(Pod) 간에 공유할 수 있습니다.
+   - **팟(Pod) 간의 액세스:** Kubernetes 지속적 볼륨을 사용하여 스토리지에 액세스할 때 동시에 볼륨을 마운트할 수 있는 팟(Pod)의 수를 결정할 수 있습니다. 블록 스토리지와 같은 일부 스토리지 솔루션은 한 번에 하나의 팟(Pod)에서만 액세스가 가능합니다. 다른 스토리지 솔루션을 사용하여 다중 팟(Pod)에서 볼륨을 공유할 수 있습니다. 
    - **구역 및 지역 간의 액세스:** 구역 및 지역 간의 데이터 액세스가 필요할 수 있습니다. 파일 및 블록 스토리지와 같은 일부 스토리지 솔루션은 데이터센터에 특정하며, 다중 구역 클러스터 설정에서 구역 간에 공유될 수 없습니다.
 
    구역 또는 지역 간에 데이터가 액세스 가능하도록 하려면 법무부에 문의하여 데이터가 다중 구역이나 다른 국가에 저장될 수 있는지 확인하십시오.
@@ -340,14 +341,14 @@ subcollection: containers
 </tr>
 <tr>
 <td style="text-align:left">복원성</td>
-<td style="text-align:left">데이터 슬라이스가 3개의 구역 또는 지역에 분산되므로 높습니다. 하나의 구역에서만 설정된 경우에는 중간입니다.</td>
-<td style="text-align:left">3개의 구역에서 복제를 사용하여 설정하는 경우에 높습니다. 하나의 구역에서만 데이터를 저장하는 경우에는 중간입니다.</td>
+<td style="text-align:left">데이터 슬라이스가 세 개의 구역 또는 지역에 분산되므로 높습니다. 하나의 구역에서만 설정된 경우에는 중간입니다.</td>
+<td style="text-align:left">세 개의 구역에서 복제를 사용하여 설정하는 경우에 높습니다. 하나의 구역에서만 데이터를 저장하는 경우에는 중간입니다.</td>
 <td style="text-align:left">DBaaS 및 사용자 설정에 따라 다릅니다. </td>
 </tr>
 <tr>
 <td style="text-align:left">가용성</td>
 <td style="text-align:left">구역 또는 지역 간에 분산되므로 높습니다. </td>
-<td style="text-align:left">서로 다른 구역에서 3개의 작업자 노드 간에 데이터를 복제하는 경우에는 높습니다.</td>
+<td style="text-align:left">서로 다른 구역에서 세 개의 작업자 노드 간에 데이터를 복제하는 경우에는 높습니다.</td>
 <td style="text-align:left">다중 인스턴스를 설정한 경우 높습니다. </td>
 </tr>
 <tr>
@@ -365,7 +366,7 @@ subcollection: containers
 <tr>
 <td style="text-align:left">일반적인 유스 케이스</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">다중 구역 클러스터</li><li style="margin:0px; padding:0px">지리적으로 분산된 데이터</li><li style="margin:0px; padding:0px">정적 빅데이터</li><li style="margin:0px; padding:0px">정적 멀티미디어 컨텐츠</li><li style="margin:0px; padding:0px">웹 앱</li><li style="margin:0px; padding:0px">백업</li><li style="margin:0px; padding:0px">아카이브</li></ul></td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful 세트</li><li style="margin:0px; padding:0px">지리적으로 분산된 데이터</li><li style="margin:0px; padding:0px">여러 클라우드 제공업체 간에 앱 실행 시 공통 스토리지 솔루션</li><li style="margin:0px; padding:0px">자체 데이터베이스 실행 시에 스토리지 백킹</li><li style="margin:0px; padding:0px">단일 팟(Pod)에 대한 고성능 액세스</li><li style="margin:0px; padding:0px">복수의 팟(Pod) 및 작업자 노드 간의 공유 스토리지 액세스</li></ul></td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Stateful 세트</li><li style="margin:0px; padding:0px">지리적으로 분산된 데이터</li><li style="margin:0px; padding:0px">여러 클라우드 제공자 간에 앱 실행 시 공통 스토리지 솔루션</li><li style="margin:0px; padding:0px">자체 데이터베이스 실행 시에 스토리지 백킹</li><li style="margin:0px; padding:0px">단일 팟(Pod)에 대한 고성능 액세스</li><li style="margin:0px; padding:0px">복수의 팟(Pod) 및 작업자 노드 간의 공유 스토리지 액세스</li></ul></td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">다중 구역 클러스터</li><li style="margin:0px; padding:0px">관계형 및 비관계형 데이터베이스</li><li style="margin:0px; padding:0px">지리적으로 분산된 데이터</li></ul></td>
 </tr>
 <tr>

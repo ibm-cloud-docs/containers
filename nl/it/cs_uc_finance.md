@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casi di utilizzo dei servizi finanziari per {{site.data.keyword.cloud_notm}}
@@ -43,7 +43,7 @@ Perché {{site.data.keyword.Bluemix_notm}}: per migliorare l'analisi dei rischi,
 {{site.data.keyword.containerlong_notm}} e tecnologie chiave:
 * [Adattamento orizzontale](/docs/containers?topic=containers-app#highly_available_apps)
 * [Più regioni per l'alta disponibilità](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -111,7 +111,7 @@ Perché {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_no
 Quindi, gli sviluppatori possono sperimentare facilmente, distribuendo rapidamente le modifiche nei sistemi di sviluppo e test con toolchain aperte. I loro strumenti di sviluppo software tradizionali ottengono un nuovo aspetto quando aggiungono servizi cloud di intelligenza artificiale alle applicazioni con un clic.
 
 Tecnologie chiave:
-* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Prevenzione frodi con 'intelligenza artificiale {{site.data.keyword.watson}}](https://www.ibm.com/cloud/watson-studio)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

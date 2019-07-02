@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Ingress のロギングとモニタリング
@@ -264,7 +265,7 @@ ALB メトリック・エクスポーターのポッドは、ALB がデプロイ
 
 1.  **重要**: [こちらの指示に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をインストールして、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
 
-2. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。 この Helm チャートによって、ALB メトリック・エクスポーターがデプロイされて、`alb-metrics-service-account` サービス・アカウントが `kube-system` 名前空間内に作成されます。<alb-ID> は、メトリックを収集する ALB の ID に置き換えてください。 クラスター内の ALB の ID を表示するには、<code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code> を実行します。
+2. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。 この Helm チャートによって、ALB メトリック・エクスポーターがデプロイされて、`alb-metrics-service-account` サービス・アカウントが `kube-system` 名前空間内に作成されます。 <alb-ID> は、メトリックを収集する ALB の ID に置き換えてください。 クラスター内の ALB の ID を表示するには、<code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code> を実行します。
   モニターする ALB ごとに 1 つのチャートをデプロイする必要があります。
   {: note}
   ```
@@ -309,7 +310,7 @@ ALB メトリック・エクスポーターのポッドは、ALB がデプロイ
   ```
   {: pre}
 
-3. Prometheus の Helm チャートをクラスターにインストールします。<ingress_subdomain> は、クラスターの Ingress サブドメインに置き換えてください。 Prometheus ダッシュボードの URL は、デフォルトの Prometheus サブドメイン `prom-dash` と Ingress サブドメインを組み合わせたものです (例: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`)。クラスターの Ingress サブドメインを確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code> を実行します。
+3. Prometheus の Helm チャートをクラスターにインストールします。 <ingress_subdomain> は、クラスターの Ingress サブドメインに置き換えてください。 Prometheus ダッシュボードの URL は、デフォルトの Prometheus サブドメイン `prom-dash` と Ingress サブドメインを組み合わせたものです (例: `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`)。 クラスターの Ingress サブドメインを確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster_name&gt;</code> を実行します。
   ```
   helm install --name prometheus . --set nameSpace=kube-system --set hostName=prom-dash.<ingress_subdomain>
   ```
@@ -322,7 +323,7 @@ ALB メトリック・エクスポーターのポッドは、ALB がデプロイ
     {: pre}
 
 5. `prometheus` ポッドが実行されていることを確認します。
-```
+    ```
     kubectl get pods -n kube-system -o wide
     ```
     {:pre}

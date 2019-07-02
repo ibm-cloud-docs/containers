@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 튜토리얼: Kubernetes 클러스터에 앱 배치
@@ -99,7 +99,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
 
-3. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+3. [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  {{site.data.keyword.registryshort_notm}} CLI에 로그인하십시오.
 
@@ -118,10 +118,10 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 **참고**: 컨테이너 이미지에 대해 작업하는 경우에는 [개인 정보 보호](/docs/containers?topic=containers-security#pi)에 대해 자세히 알아보십시오.
 
     이미지 이름에서는 소문자 영숫자 문자나 밑줄(`_`)만 사용하십시오. 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오. 마침표는 이미지를 빌드하기 위한
-빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다. 현재 자신이 있는 지역의 지역 접두부를 가져오려면 `ibmcloud api`를 실행하십시오. 예를 들어, 댈러스 위치인 미국 남부 지역 접두부는 `ng`입니다.
+빌드 아티팩트 및 Dockerfile을 현재 디렉토리 내에서 찾도록 Docker에 지시합니다. 현재 자신이 위치한 레지스트리 지역을 가져오려면 `ibmcloud cr region`을 실행하십시오.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -129,8 +129,8 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -144,7 +144,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 7.  배치는 팟(Pod)을 관리하는 데 사용되며, 여기에는 컨테이너화된 앱의 인스턴스가 포함됩니다. 다음 명령은 단일 팟(Pod)에 앱을 배치합니다. 이 튜토리얼을 위해 배치의 이름은 **hello-world-deployment**로 지정되었지만, 원하는 이름을 배치에 지정할 수 있습니다.
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -244,7 +244,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 
@@ -298,7 +298,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 3.  이미지로서 앱을 빌드하고 태그를 지정한 후에 {{site.data.keyword.registryshort_notm}}의 네임스페이스로 이를 푸시하십시오.  역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
@@ -306,8 +306,8 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -322,7 +322,7 @@ git clone https://github.com/IBM/container-service-getting-started-wt.git
     1. 개인용 레지스트리 네임스페이스에서 이미지에 대한 세부사항을 업데이트하십시오.
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -464,7 +464,7 @@ service "hw-demo-service" deleted
     2.  이미지로서 `watson` 앱을 빌드하고 태그를 지정한 후에 {{site.data.keyword.registryshort_notm}}의 네임스페이스로 이를 푸시하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -487,7 +487,7 @@ service "hw-demo-service" deleted
     2.  이미지로서 `watson-talk` 앱을 빌드하고 태그를 지정한 후에 {{site.data.keyword.registryshort_notm}}의 네임스페이스로 이를 푸시하십시오. 역시 명령의 끝에는 반드시 마침표(`.`)를 사용하십시오.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -510,11 +510,11 @@ service "hw-demo-service" deleted
     ```
 Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -525,14 +525,14 @@ Listing images...
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -638,7 +638,7 @@ volumes:
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 
@@ -688,7 +688,7 @@ service "watson-talk-service" deleted
   ```
   {: pre}
 
-## 다음 단계
+## 다음에 수행할 작업
 {: #apps_next}
 
 이제 기본사항을 습득했으므로 고급 활동으로 이동할 수 있습니다. 다음 중 하나를 시도해 보십시오.

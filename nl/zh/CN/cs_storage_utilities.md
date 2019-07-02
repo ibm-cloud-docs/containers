@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud 存储实用程序
@@ -29,20 +31,20 @@ subcollection: containers
 ## 安装 IBM Cloud Block Storage Attacher 插件 (beta)
 {: #block_storage_attacher}
 
-使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件可将未格式化且未安装的原始块存储器连接到集群中的工作程序节点。
+使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件，可以将未格式化且未安装的原始块存储器连接到集群中的工作程序节点。
   
 {: shortdesc}
 
-例如，您希望使用软件定义的存储 (SDS) 解决方案（如 [Portworx](/docs/containers?topic=containers-portworx)）来存储数据，但不想使用针对 SDS 使用经过优化并随附额外的本地磁盘的裸机工作程序节点。要向非 SDS 工作程序节点添加本地磁盘，必须在 {{site.data.keyword.Bluemix_notm}} 基础架构帐户中手动创建块存储设备，并使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 将该存储器连接到非 SDS 工作程序节点。
+例如，您想要使用软件定义的存储 (SDS) 解决方案（如 [Portworx](/docs/containers?topic=containers-portworx)）来存储数据，但不想使用已针对 SDS 使用情况进行优化并随附额外本地磁盘的裸机工作程序节点。要向非 SDS 工作程序节点添加本地磁盘，必须在 {{site.data.keyword.Bluemix_notm}} 基础架构帐户中手动创建块存储设备，然后使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 将该存储器连接到非 SDS 工作程序节点。
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attachcher 插件在集群中的每个工作程序节点上创建 pod 以作为守护程序集的一部分，并设置了 Kubernetes 存储类，稍后您可使用此存储类将块存储设备连接到非 SDS 工作程序节点。
+{{site.data.keyword.Bluemix_notm}} Block Volume Attachcher 插件会在集群中的每个工作程序节点上创建 pod 以作为守护程序集的一部分，还会设置一个 Kubernetes 存储类，稍后您需要使用此存储类将块存储设备连接到非 SDS 工作程序节点。
 
-需要了解有关如何更新或除去 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件的指示信息？请参阅[更新插件](#update_block_attacher)和[除去插件](#remove_block_attacher)。
+要了解有关如何更新或除去 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件的指示信息吗？请参阅[更新插件](#update_block_attacher)和[除去插件](#remove_block_attacher)。
 {: tip}
 
-1.  [遵循指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后在集群中使用服务帐户安装 Helm 服务器 (Tiller)。
+1.  [按照指示信息](/docs/containers?topic=containers-helm#public_helm_install)在本地计算机上安装 Helm 客户机，然后使用服务帐户在集群中安装 Helm 服务器 (Tiller)。
 
-2.  验证 Tiller 是否已使用服务帐户进行安装。
+2.  验证是否已使用服务帐户安装 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
@@ -57,7 +59,7 @@ subcollection: containers
     ```
     {: screen}
 
-3. 更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+3. 更新 Helm 存储库以在此存储库中检索所有最新版本的 Helm chart。
    ```
         helm repo update
         ```
@@ -117,7 +119,7 @@ subcollection: containers
    ```
    {: screen}
 
-   看到一个或多个 **ibmcloud-block-storage-attacher** pod 时，说明安装成功。pod 的数量等于集群中的工作程序节点数。所有 pod 都必须处于 **Running** 状态。
+   如果看到一个或多个 **ibmcloud-block-storage-attacher** pod，那么表明安装成功。pod 数等于集群中的工作程序节点数。所有 pod 都必须处于 **Running** 状态。
 
 6. 验证 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 的存储类是否已成功创建。
    ```
@@ -134,22 +136,22 @@ subcollection: containers
 ### 更新 IBM Cloud Block Storage Attacher 插件
 {: #update_block_attacher}
 
-现在，可以将现有 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件升级到最新版本。
+您可以将现有 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件升级到最新版本。
 {: shortdesc}
 
-1. 更新 Helm 存储库以检索此存储库中最新版本的所有 Helm chart。
+1. 更新 Helm 存储库以在此存储库中检索所有最新版本的 Helm chart。
    ```
-        helm repo update
-        ```
+   helm repo update
+   ```
    {: pre}
 
-2. 可选：将最新 Helm chart 下载到本地计算机。然后，解压缩该包并查看 `release.md` 文件，以了解最新的发行版信息。
+2. 可选：将最新 Helm chart 下载到本地计算机。然后，解压缩包并查看 `release.md` 文件，以了解最新的发行版信息。
    ```
    helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
-3. 查找 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件的 Helm chart 的名称。
+3. 查找 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件的 Helm chart 名称。
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -173,7 +175,7 @@ subcollection: containers
 如果不想在集群中供应和使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件，那么可以卸载 Helm chart。
 {: shortdesc}
 
-1. 查找 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件的 Helm chart 的名称。
+1. 查找 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 插件的 Helm chart 名称。
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -197,7 +199,7 @@ subcollection: containers
    ```
    {: pre}
 
-      如果 CLI 输出中未显示任何 pod，说明 pod 除去操作成功。
+   如果 CLI 输出中未显示任何 pod，那么表明已成功除去 pod。
 
 4. 验证 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 存储类是否已除去。
    ```
@@ -205,21 +207,21 @@ subcollection: containers
    ```
    {: pre}
 
-   如果 CLI 输出中未显示任何存储类，说明存储类除去操作成功。
+   如果 CLI 输出中未显示任何存储类，那么表明已成功除去存储类。
 
 ## 自动供应未格式化的块存储器并授权工作程序节点访问该存储器
 {: #automatic_block}
 
-可以使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件将具有相同配置、未格式化且未安装的原始块存储器添加到集群中的所有工作程序节点。
+您可以使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件将具有相同配置、未格式化且未安装的原始块存储器添加到集群中的所有工作程序节点。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件中包含的 `mkpvyaml` 容器配置为运行脚本，以查找集群中的所有工作程序节点，在 {{site.data.keyword.Bluemix_notm}} 基础架构门户网站中创建原始块存储器，然后授权工作程序节点访问该存储器。
+{{site.data.keyword.Bluemix_notm}} Block Volume Attacher 插件中包含 `mkpvyaml` 容器，其配置为通过运行脚本来查找集群中的所有工作程序节点，在 {{site.data.keyword.Bluemix_notm}} 基础架构门户网站中创建原始块存储器，然后授权工作程序节点访问该存储器。
 
-要添加不同的块存储器配置，将块存储器仅添加到工作程序节点的子集，或者要拥有对供应过程的更多控制权，请选择[手动添加块存储器](#manual_block)。
+要添加不同的块存储器配置，将块存储器仅添加到一部分的工作程序节点，或者要拥有对供应过程的更多控制权，请选择[手动添加块存储器](#manual_block)。
 {: tip}
 
 
-1. 登录到 {{site.data.keyword.Bluemix_notm}}，并将集群所在的资源组设定为目标。
+1. 登录到 {{site.data.keyword.Bluemix_notm}}，然后指定集群所在的目标资源组。
    ```
    ibmcloud login
    ```
@@ -237,7 +239,7 @@ subcollection: containers
    ```
    {: pre}
 
-4. 打开 `yamlgen.yaml` 文件，并指定要添加到集群中每个工作程序节点的块存储器配置。
+4. 打开 `yamlgen.yaml` 文件，然后指定要添加到集群中每个工作程序节点的块存储器配置。
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -261,16 +263,16 @@ subcollection: containers
    </thead>
    <tbody>
    <tr>
-   <td><code>集群</code></td>
+   <td><code>cluster</code></td>
    <td>输入要在其中添加原始块存储器的集群的名称。</td>
    </tr>
    <tr>
-   <td><code>区域</code></td>
-   <td>输入在其中创建了集群的 {{site.data.keyword.containerlong_notm}} 区域。运行 <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code> 以查找集群的区域。</td>
+   <td><code>region</code></td>
+   <td>输入在其中创建了集群的 {{site.data.keyword.containerlong_notm}} 区域。要查找集群的区域，可以运行 <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code>。</td>
    </tr>
    <tr>
    <td><code>type</code></td>
-   <td>选择要供应的存储器的类型。选择 <code>performance</code> 或 <code>endurance</code>。有关更多信息，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。</td>
+   <td>选择要供应的存储器的类型。可以选择 <code>performance</code> 或 <code>endurance</code>。有关更多信息，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。</td>
    </tr>
    <tr>
    <td><code>performance.iops</code></td>
@@ -278,24 +280,23 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>如果要供应 `endurance` 存储器，请输入 IOPS 数/千兆字节。例如，如果要供应 `ibmc-block-bronze` 存储类中定义的块存储器，请输入 2。有关更多信息，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。如果要供应 `performance` 存储器，请除去此部分，或通过在每行开头添加 `#` 来注释掉此部分。
-   </td>
+   <td>如果要供应 `endurance` 存储器，请输入 IOPS 数/千兆字节。例如，如果要根据 `ibmc-block-bronze` 存储类中的定义来供应块存储器，请输入 2。有关更多信息，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。如果要供应 `performance` 存储器，请除去此部分，或通过在每行开头添加 `#` 来注释掉此部分。</td>
    </tr>
    <tr>
    <td><code>size</code></td>
-   <td>输入存储器的大小（以千兆字节为单位）。请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)，以查找存储层支持的大小。 </td>
+   <td>输入存储器的大小（以千兆字节为单位）。要查找存储层支持的大小，请参阅[决定块存储器配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。</td>
    </tr>
    </tbody>
    </table>  
 
-5. 检索 IBM Cloud Infrastructure (SoftLayer) 用户名和 API 密钥。`mkpvyaml` 脚本用于访问集群的用户名和 API 密钥。
+5. 检索 IBM Cloud Infrastructure (SoftLayer) 用户名和 API 密钥。`mkpvyaml` 脚本会使用该用户名和 API 密钥来访问集群。
    1. 登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/)。
    2. 在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，选择**基础架构**。
    3. 在菜单栏中，选择**帐户** > **用户** > **用户列表**。
    4. 查找要检索其用户名和 API 密钥的用户。
    5. 单击**生成**以生成 API 密钥，或单击**查看**以查看现有 API 密钥。这将打开一个弹出窗口，其中显示基础架构用户名和 API 密钥。
 
-6. 在环境变量中存储凭证。
+6. 将凭证存储到环境变量中。
    1. 添加环境变量。
       ```
       export SL_USERNAME=<infrastructure_username>
@@ -313,13 +314,13 @@ subcollection: containers
         ```
       {: pre}
 
-7.  构建并运行 `mkpvyaml` 容器。通过映像运行容器时，将执行 `mkpvyaml.py` 脚本。该脚本会将块存储设备添加到集群中的每个工作程序节点，并授权每个工作程序节点访问该块存储设备。在脚本末尾，将为您生成 `pv-<cluster_name>.yaml` YAML 文件，以供您稍后用于在集群中创建持久卷。
+7.  构建并运行 `mkpvyaml` 容器。通过映像运行容器时，会执行 `mkpvyaml.py` 脚本。该脚本会将块存储设备添加到集群中的每个工作程序节点，并授权每个工作程序节点访问该块存储设备。在脚本末尾，将为您生成 `pv-<cluster_name>.yaml` YAML 文件，以供您稍后用于在集群中创建持久卷。
     1.  构建 `mkpvyaml` 容器。
         ```
         docker build -t mkpvyaml .
         ```
         {: pre}
-输出示例：
+        输出示例：
         ```
         Sending build context to Docker daemon   29.7kB
         Step 1/16 : FROM ubuntu:18.10
@@ -405,7 +406,7 @@ subcollection: containers
 ## 手动将块存储器添加到特定工作程序节点
 {: #manual_block}
 
-要添加不同的块存储器配置，将块存储器仅添加到工作程序节点的子集，或者要拥有对供应过程的更多控制权，请使用此选项。
+要添加不同的块存储器配置，将块存储器仅添加到一部分的工作程序节点，或者要拥有对供应过程的更多控制权，请使用此选项。
 {: shortdesc}
 
 1. 列出集群中的工作程序节点，并记下要在其中添加块存储设备的非 SDS 工作程序节点的专用 IP 地址和专区。
@@ -430,7 +431,7 @@ subcollection: containers
    ```
    {: pre}
 
-4. 验证块存储设备是否已创建，并记下卷的 **`id`**。**注：**如果未立即看到您的块存储设备，请等待几分钟。然后，重新运行此命令。
+4. 验证块存储设备是否已创建，并记下卷的 **`id`**。**注：**如果未立即看到块存储设备，请等待几分钟。然后，重新运行此命令。
    ```
    ibmcloud sl block volume-list 
    ```
@@ -478,7 +479,7 @@ subcollection: containers
    ```
    {: screen}
 
-7. 验证是否已对非 SDS 工作程序节点成功授权，并记下 **`host_iqn`**、**`username`** 和 **`password`**。
+7. 验证是否已成功授权非 SDS 工作程序节点，并记下 **`host_iqn`**、**`username`** 和 **`password`**。
    ```
    ibmcloud sl block access-list <volume_ID>
    ```
@@ -491,7 +492,7 @@ subcollection: containers
    ```
    {: screen}
 
-   分配了 **`host_iqn`**、**`username`** 和 **`password`** 时，说明授权成功。
+   如果分配了 **`host_iqn`**、**`username`** 和 **`password`**，那么表明授权成功。
 
 8. [将块存储设备连接到工作程序节点](#attach_block)。
 
@@ -503,8 +504,8 @@ subcollection: containers
 {: shortdesc}
 
 **开始之前**：
-- 确保[自动](#automatic_block)或[手动](#manual_block)创建要用于非 SDS 工作程序节点的未格式化且未安装的原始块存储器。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- 确保已[自动](#automatic_block)或[手动](#manual_block)创建要用于非 SDS 工作程序节点的未格式化且未安装的原始块存储器。
+- [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **要将原始块存储器连接到非 SDS 工作程序节点，请执行以下操作**：
 1. 准备创建 PV。  
@@ -518,7 +519,7 @@ subcollection: containers
      2. 查看 PV 的配置。
 
    - **如果是手动添加的块存储器：**
-     1. 创建 `pv.yaml` 文件。以下命令使用 `nano` 编辑器来创建该文件。
+     1. 创建 `pv.yaml` 文件。以下命令会使用 `nano` 编辑器来创建该文件。
         ```
         nano pv.yaml
         ```
@@ -561,7 +562,7 @@ subcollection: containers
       	</tr>
         <tr>
         <td><code>ibm.io/iqn</code></td>
-        <td>输入先前检索到的 IQN 主机名。 </td>
+        <td>输入先前检索到的 IQN 主机名。</td>
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
@@ -581,7 +582,7 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
-        <td>输入要在其中连接块存储设备，并且您先前授权其访问块存储设备的工作程序节点的专用 IP 地址。 </td>
+        <td>输入要在其中连接块存储设备并且先前授权其访问块存储设备的工作程序节点的专用 IP 地址。</td>
         </tr>
         <tr>
           <td><code>ibm.io/volID</code></td>
@@ -643,7 +644,9 @@ subcollection: containers
    ```
    {: screen}
 
-   **ibm.io/dm** 设置为设备标识（如 `/dev/dm/1`）时，说明块存储设备已成功连接，并且您可以在 CLI 输出的 **Annotations** 部分中看到 **ibm.io/attachstatus=attached**。
+   如果 **ibm.io/dm** 设置为设备标识（如 `/dev/dm/1`），并且您可以在 CLI 输出的 **Annotations** 部分中看到 **ibm.io/attachstatus=attached**，那么表明块存储设备已成功连接。
 
-如果要拆离卷，请删除 PV。特定工作程序节点仍有权访问拆离的卷，并且在您使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 存储类创建新的 PV，以将其他卷连接到同一工作程序节点时，可再次连接拆离的卷。要避免重新连接旧的已拆离卷，请使用 `ibmcloud sl block access-revoke` 命令取消授权工作程序节点对拆离的卷的访问权。拆离卷并不会从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去该卷。要取消该卷的计费，必须手动[从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去存储器](/docs/containers?topic=containers-cleanup)。
+如果想要拆离卷，可以删除 PV。已拆离的卷仍可由特定工作程序节点进行访问，当您使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 存储类创建新的 PV 以将其他卷连接到同一工作程序节点时，会重新连接已拆离的卷。要避免重新连接旧的已拆离卷，请使用 `ibmcloud sl block access-revoke` 命令取消工作程序节点对已拆离卷的访问权。拆离卷并不会从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去该卷。要取消该卷的计费，必须手动[从 IBM Cloud Infrastructure (SoftLayer) 帐户中除去存储器](/docs/containers?topic=containers-cleanup)。
 {: note}
+
+

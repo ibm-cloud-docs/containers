@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 日志记录和监视故障诊断
@@ -70,20 +70,20 @@ subcollection: containers
   </tr>
   <tr>
     <td>如果您在创建集群时指定了空间，帐户所有者没有对该空间的“管理员”、“开发者”或“审计员”许可权。</td>
-      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要查找该集群的帐户所有者，请运行 <code>ibmcloud ks api-key-info</code>。</li>
+      <td>要更改帐户所有者的访问许可权，请执行以下操作：<ol><li>要找出集群的帐户所有者，请运行 <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>。</li>
       <li>要授予帐户所有者对空间的 {{site.data.keyword.containerlong_notm}}“管理者”、“开发者”或“审计员”访问许可权，请参阅<a href="/docs/containers?topic=containers-users">管理集群访问权</a>。</li>
       <li>要在更改许可权后刷新日志记录令牌，请运行 <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>。</li></ol></td>
     </tr>
     <tr>
       <td>您的应用程序日志记录配置的应用程序路径中有符号链接。</td>
-      <td><p>要发送日志，必须在日志记录配置中使用绝对路径，否则无法读取日志。如果路径安装到工作程序节点上，那么可能已创建符号链接。</p> <p>示例：如果指定的路径为 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>，但日志却转至 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>，那么无法读取日志。</p></td>
+      <td><p>要发送日志，必须在日志记录配置中使用绝对路径，否则无法读取日志。如果路径安装到工作程序节点，该节点可能会创建符号链接。</p> <p>示例：如果指定的路径为 <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code>，但日志却转至 <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>，那么无法读取日志。</p></td>
     </tr>
   </tbody>
 </table>
 
 要测试在故障诊断期间进行的更改，可以在集群中的一个工作程序节点上部署 *Noisy*（用于生成多个日志事件的样本 pod）。
 
-开始之前：[登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+开始之前：[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 创建 `deploy-noisy.yaml` 配置文件。
     ```
@@ -140,10 +140,10 @@ subcollection: containers
 {: #quota}
 
 {: tsSymptoms}
-在集群中设置了日志记录配置，用于将日志转发到 {{site.data.keyword.loganalysisfull}}。查看日志时，您会看到以下错误消息或类似的错误消息：
+在集群中设置了日志记录配置，用于将日志转发到 {{site.data.keyword.loganalysisfull}}。查看日志时，您会看到类似于以下内容的错误消息：
 
 ```
-您已达到分配给 IBM® Cloud Log Analysis 实例 {Instance GUID} 的 Bluemix 空间 {Space GUID} 的每日配额。您当前为“日志搜索”存储器分配的每日存储量是 XXX，数据会保留 3 天，在此期间可以在 Kibana 中对其进行搜索。这不会影响“日志收集”存储器中的日志保留时间策略。要升级套餐，以便可以在“日志搜索”存储器中每天存储更多数据，请升级此空间的 Log Analysis 服务套餐。有关服务套餐以及如何升级套餐的更多信息，请参阅“套餐”。
+您已达到分配给 IBM® Cloud Log Analysis 实例 {Instance GUID} 的 Bluemix 空间 {Space GUID} 的每日配额。您当前为“日志搜索”存储器分配的每日存储量是 XXX，数据会保留 3 天，在此期间可以在 Kibana 中对其进行搜索。这不会影响“日志收集”存储器中的日志保留策略。要升级套餐，以便可以在“日志搜索”存储器中每天存储更多数据，请升级此空间的 Log Analysis 服务套餐。有关服务套餐以及如何升级套餐的更多信息，请参阅“套餐”。
 ```
 {: screen}
 
@@ -162,7 +162,7 @@ subcollection: containers
  </thead>
  <tbody>
   <tr>
-    <td>一个或多个 pod 在生成超高日志量。</td>
+    <td>一个或多个 pod 生成大量日志。</td>
     <td>可以通过阻止转发来自特定 pod 的日志，从而释放日志存储空间。为这些 pod 创建[日志记录过滤器](/docs/containers?topic=containers-health#filter-logs)。</td>
   </tr>
   <tr>
@@ -183,7 +183,7 @@ subcollection: containers
 {: #long_lines}
 
 {: tsSymptoms}
-在集群中设置了日志记录配置，用于将日志转发到 {{site.data.keyword.loganalysisfull_notm}}。查看日志时，您会看到一条非常长的日志消息。此外，在 Kibana 中，您可能只能看到日志消息的最后 600-700 个字符。
+在集群中设置了日志记录配置，用于将日志转发到 {{site.data.keyword.loganalysisfull_notm}}。查看日志时，您会看到一条较长的日志消息。此外，在 Kibana 中，您可能只能看到日志消息的最后 600-700 个字符。
 
 {: tsCauses}
 Fluentd 在收集长日志消息之前，可能会因其太长而将其截断，因此在日志转发到 {{site.data.keyword.loganalysisshort_notm}} 之前，Fluentd 可能无法对其正确解析。
@@ -197,7 +197,7 @@ Fluentd 在收集长日志消息之前，可能会因其太长而将其截断，
 集群仍然有问题吗？
 {: shortdesc}
 
--  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
+-  在终端中，当有 `ibmcloud` CLI 和插件的更新可用时，您会收到通知。务必使 CLI 保持最新，以便您可以使用所有可用的命令和标志。
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/status?selected=status)。
 -   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
     如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
@@ -206,6 +206,6 @@ Fluentd 在收集长日志消息之前，可能会因其太长而将其截断，
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
--   通过开具案例来联系 IBM 支持人员。要了解有关开具 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
+-   通过打开案例来联系 IBM 支持人员。要了解有关打开 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
 {: tip}
 

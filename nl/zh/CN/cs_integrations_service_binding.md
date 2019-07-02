@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 使用 IBM Cloud 服务绑定添加服务
@@ -35,7 +37,7 @@ subcollection: containers
 要查找受支持 {{site.data.keyword.Bluemix_notm}} 服务的列表，请参阅 [{{site.data.keyword.Bluemix_notm}} 目录](https://cloud.ibm.com/catalog)。
 
 **什么是 {{site.data.keyword.Bluemix_notm}} 服务绑定？**</br>
-通过服务绑定，可以快速为 {{site.data.keyword.Bluemix_notm}} 服务创建服务凭证，并将这些凭证存储在集群的 Kubernetes 私钥中。要将服务绑定到集群，必须首先供应服务的实例。然后，使用 `ibmcloud ks cluster-service-bind` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)来创建服务凭证和 Kubernetes 私钥。Kubernetes 私钥在 etcd 中会自动加密，以保护您的数据。
+通过服务绑定，可以快速为 {{site.data.keyword.Bluemix_notm}} 服务创建服务凭证，并将这些凭证存储在集群的 Kubernetes 私钥中。要将服务绑定到集群，必须首先供应服务的实例。然后，使用 `ibmcloud ks cluster-service-bind` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)来创建服务凭证和 Kubernetes 私钥。Kubernetes 私钥在 etcd 中会自动加密，以保护您的数据。
 
 想要使私钥更安全吗？请要求集群管理员在集群中[启用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密新私钥和现有私钥，例如用于存储 {{site.data.keyword.Bluemix_notm}} 服务实例凭证的私钥。
 {: tip}
@@ -56,7 +58,7 @@ subcollection: containers
     - 对要绑定服务的集群的 [{{site.data.keyword.Bluemix_notm}} IAM **编辑者**或**管理员**平台访问角色](/docs/containers?topic=containers-users#platform)
     - 对要绑定服务的 Kubernetes 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)
     - 对于 Cloud Foundry 服务：对要供应服务的空间的 [Cloud Foundry **开发者**角色](/docs/iam?topic=iam-mngcf#mngcf)
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 要将 {{site.data.keyword.Bluemix_notm}} 服务添加到集群：
 
@@ -72,20 +74,20 @@ subcollection: containers
      {: pre}
 
      输出示例：
-        ```
+     ```
      name                         service           plan    bound apps   last operation
      <cf_service_instance_name>   <service_name>    spark                create succeeded
      ```
      {: screen}
 
-  - **{{site.data.keyword.Bluemix_notm}} 启用 IAM 的服务：**
+  - **{{site.data.keyword.Bluemix_notm}}支持 IAM 的服务：**
      ```
     ibmcloud resource service-instances
     ```
      {: pre}
 
      输出示例：
-        ```
+     ```
      Name                          Location   State    Type               Tags
      <iam_service_instance_name>   <region>   active   service_instance
      ```
@@ -175,7 +177,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
 开始之前：
 -  确保您具有对 `kube-system` 名称空间的 [{{site.data.keyword.Bluemix_notm}} IAM **写入者**或**管理者**服务角色](/docs/containers?topic=containers-users#platform)。
-- [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。设置集群的上下文](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [向集群添加 {{site.data.keyword.Bluemix_notm}} 服务](#bind-services)。
 
 ### 将私钥作为卷安装到 pod
@@ -218,7 +220,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -374,7 +376,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -419,9 +421,9 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 
    示例 CLI 输出：
    ```
-    NAME                           READY     STATUS    RESTARTS   AGE
-    secret-test-1111454598-gfx32   1/1       Running   0          1m
-    ```
+   NAME                           READY     STATUS    RESTARTS   AGE
+   secret-test-1111454598-gfx32   1/1       Running   0          1m
+   ```
    {: screen}
 
 6. 验证是否已正确设置环境变量。
@@ -452,16 +454,16 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    ```
    {: codeblock}
 
-8. 可选：作为预防措施，将错误处理添加到应用程序，以应对 `BINDING` 环境变量未正确设置的情况。 
-   
-   Java 示例代码： 
+8. 可选：作为预防措施，将错误处理添加到应用程序，以应对 `BINDING` 环境变量未正确设置的情况。
+
+   Java 示例代码：
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Node.js 示例代码：
    ```js
    if (!process.env.BINDING) {
@@ -470,4 +472,3 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    }
    ```
    {: codeblock}
-

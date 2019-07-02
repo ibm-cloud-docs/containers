@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # イメージからのコンテナーのビルド
@@ -44,7 +46,7 @@ Docker Hub などのパブリック・レジストリーは、Docker および K
 
 |レジストリー|説明|利点|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|このオプションを使用すると、保護された独自の Docker イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} 内にセットアップできます。そこでイメージを安全に保管してクラスター・ユーザー間で共有することができます。|<ul><li>アカウント内でイメージへのアクセス権限を管理できる。</li><li>{{site.data.keyword.IBM_notm}} 提供のイメージとサンプル・アプリ ({{site.data.keyword.IBM_notm}} Liberty など) を親イメージとして使用し、それに独自のアプリ・コードを追加できる。</li><li>Vulnerability Advisor によるイメージの潜在的脆弱性の自動スキャン (それらの脆弱性を修正するための OS 固有の推奨事項を含む)。</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|このオプションを使用すると、保護された独自の Docker イメージ・リポジトリーを {{site.data.keyword.registryshort_notm}} 内にセットアップできます。そこでイメージを安全に保管してクラスター・ユーザー間で共有することができます。|<ul><li>アカウント内でイメージへのアクセス権限を管理できる。</li><li>{{site.data.keyword.IBM_notm}} 提供のイメージとサンプル・アプリ ({{site.data.keyword.IBM_notm}} Liberty など) を親イメージとして使用し、それに独自のアプリ・コードを追加できる。</li><li>Vulnerability Advisor によるイメージの潜在的脆弱性の自動スキャン (それらの脆弱性を修正するための OS 固有の推奨事項を含む)。</li></ul>|
 |他のプライベート・レジストリー|[イメージ・プル・シークレット ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/containers/images/) を作成して、既存のプライベート・レジストリーをクラスターに接続します。 このシークレットは、レジストリーの URL と資格情報を Kubernetes シークレットに安全に保存するために使用されます。|<ul><li>ソース (Docker Hub、組織が所有するレジストリー、または他のプライベート・クラウド・レジストリー) と無関係に既存のプライベート・レジストリーを使用できる。</li></ul>|
 |[パブリック Docker ハブ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://hub.docker.com/){: #dockerhub}|このオプションを使用すると、Dockerfile に変更を加える必要がない場合に、Docker Hub にある既存のパブリック・イメージを [Kubernetes デプロイメント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) で直接使用できます。 <p>**注:** このオプションは組織のセキュリティー要件 (アクセス管理、脆弱性スキャン、アプリ・プライバシーなど) を満たさない可能性があるということに留意してください。</p>|<ul><li>クラスターに関して追加のセットアップは不要です。</li><li>さまざまなオープン・ソース・アプリケーションを含めることができる。</li></ul>|
 {: caption="パブリック・イメージ・レジストリーおよびプライベート・イメージ・レジストリーのオプション" caption-side="top"}
@@ -79,9 +81,9 @@ IBM 提供のパブリック・イメージや {{site.data.keyword.registryshort
 
 開始前に、以下のことを行います。
 1. [{{site.data.keyword.registryshort_notm}} に名前空間をセットアップして、その名前空間にイメージをプッシュします](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2. [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。
+2. [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 3. **2019 年 2 月 25 日**より前に作成された既存のクラスターを使用している場合は、[`imagePullSecret` という API キーを使用するようにそのクラスターを更新](#imagePullSecret_migrate_api_key)します。
-4. [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+4. [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 コンテナーをクラスターの **default** 名前空間内にデプロイするには、以下のステップを実行します。
 
@@ -110,10 +112,10 @@ IBM 提供のパブリック・イメージや {{site.data.keyword.registryshort
     {: codeblock}
 
     イメージの URL の変数は、対象イメージの情報に置き換えます。
-    *  **`<app_name>`**: アプリの名前。 
-    *  **`<region>`**: レジストリー・ドメインの地域 {{site.data.keyword.registryshort_notm}} API エンドポイント。ログイン先の地域のドメインをリストするには、`ibmcloud cr api` を実行します。
-    *  **`<namespace>`**: レジストリー名前空間。名前空間の情報を取得するには、`ibmcloud cr namespace-list` を実行します。
-    *  **`<my_image>:<tag>`**: コンテナーを作成するために使用するイメージとタグ。レジストリー内にあるイメージを取得するには、`ibmcloud cr images` を実行します。
+    *  **`<app_name>`**: アプリの名前。
+    *  **`<region>`**: レジストリー・ドメインの地域 {{site.data.keyword.registryshort_notm}} API エンドポイント。 ログイン先の地域のドメインをリストするには、`ibmcloud cr api` を実行します。
+    *  **`<namespace>`**: レジストリー名前空間。 名前空間の情報を取得するには、`ibmcloud cr namespace-list` を実行します。
+    *  **`<my_image>:<tag>`**: コンテナーを作成するために使用するイメージとタグ。 レジストリー内にあるイメージを取得するには、`ibmcloud cr images` を実行します。
 
 3.  クラスター内にデプロイメントを作成します。
 
@@ -128,37 +130,40 @@ IBM 提供のパブリック・イメージや {{site.data.keyword.registryshort
 ## レジストリーからイメージをプルすることをクラスターに許可する方法について
 {: #cluster_registry_auth}
 
-レジストリーからイメージをプルするために、{{site.data.keyword.containerlong_notm}} クラスターは特別なタイプの Kubernetes シークレットである `imagePullSecret` を使用します。このイメージ・プル・シークレットには、コンテナー・レジストリーにアクセスするための資格情報が保管されます。このコンテナー・レジストリーは、{{site.data.keyword.registrylong_notm}} 内の独自の名前空間、異なる {{site.data.keyword.Bluemix_notm}} アカウントに属する {{site.data.keyword.registrylong_notm}} 内の名前空間、または Docker などの他の任意のプライベート・レジストリーのいずれかにできます。クラスターは、{{site.data.keyword.registrylong_notm}} 内の独自の名前空間からイメージをプルして、これらのイメージからコンテナーをクラスター内の `default` Kubernetes 名前空間にデプロイするようにセットアップされています。他のクラスター Kubernetes 名前空間内のイメージまたは他のレジストリー内のイメージをプルする必要がある場合は、イメージ・プル・シークレットをセットアップする必要があります。
+レジストリーからイメージをプルするために、{{site.data.keyword.containerlong_notm}} クラスターは特別なタイプの Kubernetes シークレットである `imagePullSecret` を使用します。 このイメージ・プル・シークレットには、コンテナー・レジストリーにアクセスするための資格情報が保管されます。 このコンテナー・レジストリーは、{{site.data.keyword.registrylong_notm}} 内の独自の名前空間、異なる {{site.data.keyword.Bluemix_notm}} アカウントに属する {{site.data.keyword.registrylong_notm}} 内の名前空間、または Docker などの他の任意のプライベート・レジストリーのいずれかにできます。 クラスターは、{{site.data.keyword.registrylong_notm}} 内の独自の名前空間からイメージをプルして、これらのイメージからコンテナーをクラスター内の `default` Kubernetes 名前空間にデプロイするようにセットアップされています。 他のクラスター Kubernetes 名前空間内のイメージまたは他のレジストリー内のイメージをプルする必要がある場合は、イメージ・プル・シークレットをセットアップする必要があります。
 {:shortdesc}
 
 **`default` Kubernetes 名前空間からイメージをプルするようにクラスターをセットアップするには、どのようにしますか?**<br>
 クラスターを作成すると、そのクラスターの {{site.data.keyword.Bluemix_notm}} IAM サービス ID に、{{site.data.keyword.registrylong_notm}} に対する **リーダー**の IAM サービス・アクセス役割ポリシーが与えられます。 このサービス ID の資格情報が擬人化され、有効期限のない API キーの中に含められ、API キーがクラスターのイメージ・プル・シークレットに保管されます。 そのイメージ・プル・シークレットが、Kubernetes 名前空間 `default` に追加され、その名前空間の `default` サービス・アカウントのシークレットのリストに含められます。 イメージ・プル・シークレットを使用すれば、デプロイメントから[グローバル・レジストリーと地域レジストリー](/docs/services/Registry?topic=registry-registry_overview#registry_regions)にあるイメージをプルして (読み取り専用アクセスを実行して)、Kubernetes 名前空間 `default` にコンテナーを作成できます。 グローバル・レジストリーには、ユーザーが各地域レジストリーに保管されたイメージを別個に参照する代わりにデプロイメント全体で参照することのできる、IBM 提供のパブリック・イメージが安全に保管されます。 地域レジストリーには、独自のプライベート Docker イメージが安全に保管されます。
 
 **特定の地域レジストリーへのプル・アクセスを制限できますか?**<br>
-はい。[サービス ID の既存の IAM ポリシーを編集](/docs/iam?topic=iam-serviceidpolicy#access_edit)して、**リーダー**のサービス・アクセス役割をその地域レジストリーやレジストリー・リソース (名前空間など) に制限できます。レジストリーの IAM ポリシーをカスタマイズするには、[{{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users) で {{site.data.keyword.Bluemix_notm}} IAM ポリシーを有効にしておく必要があります。
+はい。[サービス ID の既存の IAM ポリシーを編集](/docs/iam?topic=iam-serviceidpolicy#access_edit)して、**リーダー**のサービス・アクセス役割をその地域レジストリーやレジストリー・リソース (名前空間など) に制限できます。 レジストリーの IAM ポリシーをカスタマイズするには、[{{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users) で {{site.data.keyword.Bluemix_notm}} IAM ポリシーを有効にしておく必要があります。
 
   レジストリー資格情報の安全性をさらに高めたいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](/docs/containers?topic=containers-encryption#keyprotect)もらい、レジストリー資格情報を保管する `imagePullSecret` などの、クラスター内の Kubernetes シークレットを暗号化します。
   {: tip}
 
 **`default` 以外の Kubernetes 名前空間内のイメージをプルできますか?**<br>
-デフォルトではできません。デフォルトのクラスター・セットアップを使用することで、{{site.data.keyword.registrylong_notm}} 名前空間内に保管されている任意のイメージからのコンテナーを、クラスターの `default` Kubernetes 名前空間にデプロイできます。これらのイメージを他の Kubernetes 名前空間や他の {{site.data.keyword.Bluemix_notm}} アカウントで使用する場合は、[既存のイメージ・プル・シークレットをコピーするか、独自のイメージ・プル・シークレットを作成するかを選択できます](#other)。
+デフォルトではできません。 デフォルトのクラスター・セットアップを使用することで、{{site.data.keyword.registrylong_notm}} 名前空間内に保管されている任意のイメージからのコンテナーを、クラスターの `default` Kubernetes 名前空間にデプロイできます。 これらのイメージを他の Kubernetes 名前空間や他の {{site.data.keyword.Bluemix_notm}} アカウントで使用する場合は、[既存のイメージ・プル・シークレットをコピーするか、独自のイメージ・プル・シークレットを作成するかを選択できます](#other)。
 
 **異なる {{site.data.keyword.Bluemix_notm}} アカウントからイメージをプルできますか?**<br>
-はい。使用する {{site.data.keyword.Bluemix_notm}} アカウントで API キーを作成してください。次に、プル元となる各クラスター内と各クラスター名前空間内のこれらの API キー資格情報を保管するイメージ・プル・シークレットを作成します。[許可済みのサービス ID API キーが使用されるこちら例の手順に従ってください](#other_registry_accounts)。
+はい。使用する {{site.data.keyword.Bluemix_notm}} アカウントで API キーを作成してください。 次に、プル元となる各クラスター内と各クラスター名前空間内のこれらの API キー資格情報を保管するイメージ・プル・シークレットを作成します。 [許可済みのサービス ID API キーが使用されるこちら例の手順に従ってください](#other_registry_accounts)。
 
 Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使用する場合は、[他のプライベート・レジストリーに格納されたイメージへのアクセス](#private_images)を参照してください。
 
-**API キーはサービス ID 用である必要がありますか?自分のアカウントのサービス ID の制限に達した場合はどうなりますか?**<br>
-デフォルトのクラスター・セットアップでは、{{site.data.keyword.Bluemix_notm}} IAM API キー資格情報をイメージ・プル・シークレットに保管するためのサービス ID が作成されます。ただし、個別ユーザー用の API キーを作成して、それらの資格情報をイメージ・プル・シークレットに保管することもできます。[サービス ID の IAM 制限](/docs/iam?topic=iam-iam_limits#iam_limits)に達した場合は、クラスターはサービス ID とイメージ・プル・シークレットなしで作成されるため、デフォルトではそのクラスターは `icr.io` レジストリー・ドメインからイメージをプルすることはできません。[独自のイメージ・プル・シークレットを作成](#other_registry_accounts)する必要がありますが、そのためには、{{site.data.keyword.Bluemix_notm}} IAM サービス ID ではなく、部門 ID などの個別ユーザー用の API キーを使用します。
+**API キーはサービス ID 用である必要がありますか? 自分のアカウントのサービス ID の制限に達した場合はどうなりますか?**<br>
+デフォルトのクラスター・セットアップでは、{{site.data.keyword.Bluemix_notm}} IAM API キー資格情報をイメージ・プル・シークレットに保管するためのサービス ID が作成されます。 ただし、個別ユーザー用の API キーを作成して、それらの資格情報をイメージ・プル・シークレットに保管することもできます。 [サービス ID の IAM 制限](/docs/iam?topic=iam-iam_limits#iam_limits)に達した場合は、クラスターはサービス ID とイメージ・プル・シークレットなしで作成されるため、デフォルトではそのクラスターは `icr.io` レジストリー・ドメインからイメージをプルすることはできません。 [独自のイメージ・プル・シークレットを作成](#other_registry_accounts)する必要がありますが、そのためには、{{site.data.keyword.Bluemix_notm}} IAM サービス ID ではなく、部門 ID などの個別ユーザー用の API キーを使用します。
 
-**使用しているクラスターのイメージ・プル・シークレットではレジストリー・トークンが使用されます。トークンは現在でも機能しますか?**<br>
+**使用しているクラスターのイメージ・プル・シークレットではレジストリー・トークンが使用されます。 トークンは現在でも機能しますか?**<br>
 
 {{site.data.keyword.registrylong_notm}} にアクセスする権限をクラスターに与えるために、以前は、自動で[トークン](/docs/services/Registry?topic=registry-registry_access#registry_tokens)が生成され、イメージ・プル・シークレットに保管されていました。現在、この方式はサポートされますが、非推奨になっています。
 {: deprecated}
 
-トークンによって、非推奨となった `registry.bluemix.net` レジストリー・ドメインへのアクセスが許可されるのに対して、API キーによって、`icr.io` レジストリー・ドメインへのアクセスが許可されます。トークン・ベースの認証から API キー・ベースの認証への移行期間中は、トークン・ベースと API キー・ベースの両方のイメージ・プル・シークレットが当面は作成されます。トークン・ベースと API キー・ベースの両方のイメージ・プル・シークレットを使用した場合、クラスターは、`default` Kubernetes 名前空間内の `registry.bluemix.net` ドメインまたは `icr.io` ドメインからイメージをプルできます。
+トークンによって、非推奨となった `registry.bluemix.net` レジストリー・ドメインへのアクセスが許可されるのに対して、API キーによって、`icr.io` レジストリー・ドメインへのアクセスが許可されます。 トークン・ベースの認証から API キー・ベースの認証への移行期間中は、トークン・ベースと API キー・ベースの両方のイメージ・プル・シークレットが当面は作成されます。 トークン・ベースと API キー・ベースの両方のイメージ・プル・シークレットを使用した場合、クラスターは、`default` Kubernetes 名前空間内の `registry.bluemix.net` ドメインまたは `icr.io` ドメインからイメージをプルできます。
 
-非推奨のトークンと `registry.bluemix.net` ドメインがサポート対象外になる前に、クラスターのイメージ・プル・シークレットを更新して、[`default` Kubernetes 名前空間](#imagePullSecret_migrate_api_key)および使用する可能性のある[他の任意の名前空間またはアカウント](#other)で API キー方式が使用されるようにしてください。次に、`icr.io` レジストリー・ドメインからプルするようにデプロイメントを更新してください。
+非推奨のトークンと `registry.bluemix.net` ドメインがサポート対象外になる前に、クラスターのイメージ・プル・シークレットを更新して、[`default` Kubernetes 名前空間](#imagePullSecret_migrate_api_key)および使用する可能性のある[他の任意の名前空間またはアカウント](#other)で API キー方式が使用されるようにしてください。 次に、`icr.io` レジストリー・ドメインからプルするようにデプロイメントを更新してください。
+
+**イメージ・プル・シークレットを別の Kubernetes 名前空間にコピーまたは作成したら、完了ですか?**<br>
+十分ではありません。コンテナーが、作成したシークレットを使用してイメージをプルすることを許可されている必要があります。イメージ・プル・シークレットを名前空間のサービス・アカウントに追加することも、各デプロイメントでシークレットを参照することもできます。手順については、[イメージ・プル・シークレットを使用したコンテナーのデプロイ](/docs/containers?topic=containers-images#use_imagePullSecret)を参照してください。
 
 <br />
 
@@ -166,19 +171,19 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 ## API キーのイメージ・プル・シークレットを使用するように既存のクラスターを更新する
 {: #imagePullSecret_migrate_api_key}
 
-新しい {{site.data.keyword.containerlong_notm}} クラスターでは、[{{site.data.keyword.registrylong_notm}} へのアクセス権限を与えるために、イメージ・プル・シークレット](#cluster_registry_auth)に API キーを保管します。それらのイメージ・プル・シークレットを使用すれば、`icr.io` レジストリー・ドメインに保管されているイメージからコンテナーをデプロイできます。 **2019 年 2 月 25 日**より前に作成されたクラスターは、レジストリー・トークンではなく API キーをイメージ・プル・シークレットに保管するように更新する必要があります。
+新しい {{site.data.keyword.containerlong_notm}} クラスターでは、[{{site.data.keyword.registrylong_notm}} へのアクセス権限を与えるために、イメージ・プル・シークレット](#cluster_registry_auth)に API キーを保管します。 それらのイメージ・プル・シークレットを使用すれば、`icr.io` レジストリー・ドメインに保管されているイメージからコンテナーをデプロイできます。 **2019 年 2 月 25 日**より前に作成されたクラスターは、レジストリー・トークンではなく API キーをイメージ・プル・シークレットに保管するように更新する必要があります。
 {: shortdesc}
 
 **始める前に**:
-*   [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+*   [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   以下のアクセス権を持っていることを確認します。
     *   {{site.data.keyword.containerlong_notm}} に対する {{site.data.keyword.Bluemix_notm}} IAM の**オペレーターまたは管理者**のプラットフォーム役割。 アカウント所有者は、次のコマンドを実行することでユーザーにこの役割を付与できます。
-```
+        ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   すべての地域とリソース・グループにまたがる、{{site.data.keyword.registrylong_notm}} に対する {{site.data.keyword.Bluemix_notm}} IAM の**管理者**プラットフォーム役割。アカウント所有者は、次のコマンドを実行することでユーザーにこの役割を付与できます。
-```
+    *   すべての地域とリソース・グループにまたがる、{{site.data.keyword.registrylong_notm}} に対する {{site.data.keyword.Bluemix_notm}} IAM の**管理者**プラットフォーム役割。 アカウント所有者は、次のコマンドを実行することでユーザーにこの役割を付与できます。
+        ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
         {: pre}
@@ -228,8 +233,10 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 ## イメージ・プル・シークレットを使用して、他のクラスター Kubernetes 名前空間、他の {{site.data.keyword.Bluemix_notm}} アカウント、または外部プライベート・レジストリーにアクセスする方法
 {: #other}
 
-クラスター内の独自のイメージ・プル・シークレットのセットアップ内容に応じて、`default` 以外の Kubernetes 名前空間にコンテナーをデプロイしたり、他の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用したり、外部プライベート・レジストリーに保管されているイメージを使用したりできます。さらに、独自のイメージ・プル・シークレットを作成して、特定のレジストリー・イメージ・リポジトリー、名前空間、または操作 (`push` や `pull` など) にアクセス権を制限する IAM アクセス・ポリシーを適用することも可能です。
+クラスター内の独自のイメージ・プル・シークレットのセットアップ内容に応じて、`default` 以外の Kubernetes 名前空間にコンテナーをデプロイしたり、他の {{site.data.keyword.Bluemix_notm}} アカウントに保管されているイメージを使用したり、外部プライベート・レジストリーに保管されているイメージを使用したりできます。 さらに、独自のイメージ・プル・シークレットを作成して、特定のレジストリー・イメージ名前空間または操作 (`push` や `pull` など) にアクセス権を制限する IAM アクセス・ポリシーを適用することも可能です。
 {:shortdesc}
+
+イメージ・プル・シークレットを作成したら、コンテナーがそのシークレットを使用してレジストリーからイメージをプルすることを許可する必要があります。イメージ・プル・シークレットを名前空間のサービス・アカウントに追加することも、各デプロイメントでシークレットを参照することもできます。手順については、[イメージ・プル・シークレットを使用したコンテナーのデプロイ](/docs/containers?topic=containers-images#use_imagePullSecret)を参照してください。
 
 イメージ・プル・シークレットは、それらが作成された対象の Kubernetes 名前空間に対してのみ有効です。 コンテナーをデプロイする名前空間ごとに、以下の手順を繰り返してください。 [DockerHub](#dockerhub) のイメージの場合はイメージ・プル・シークレットは必要ありません。
 {: tip}
@@ -237,9 +244,9 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 開始前に、以下のことを行います。
 
 1.  [{{site.data.keyword.registryshort_notm}} に名前空間をセットアップして、その名前空間にイメージをプッシュします](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2.  [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。
+2.  [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 3.  **2019 年 2 月 25 日**より前に作成された既存のクラスターを使用している場合は、[API キーのイメージ・プル・シークレットを使用するようにそのクラスターを更新](#imagePullSecret_migrate_api_key)します。
-4.  [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+4.  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 独自のイメージ・プル・シークレットを使用する方法としては、以下の選択肢があります。
@@ -253,7 +260,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 ### 既存のイメージ・プル・シークレットのコピー
 {: #copy_imagePullSecret}
 
-イメージ・プル・シークレットをクラスター内の他の名前空間にコピーできます (`default` Kubernetes 名前空間用に自動的に作成されたイメージ・プル・シークレットなど)。例えば、特定の名前空間へのアクセスを制限するために、または他の {{site.data.keyword.Bluemix_notm}} アカウントからイメージをプルするために、この名前空間で別の {{site.data.keyword.Bluemix_notm}} IAM API キー資格情報を使用する必要がある場合は、代わりに、[イメージ・プル・シークレットを作成します](#other_registry_accounts)。
+イメージ・プル・シークレットをクラスター内の他の名前空間にコピーできます (`default` Kubernetes 名前空間用に自動的に作成されたイメージ・プル・シークレットなど)。 例えば、特定の名前空間へのアクセスを制限するために、または他の {{site.data.keyword.Bluemix_notm}} アカウントからイメージをプルするために、この名前空間で別の {{site.data.keyword.Bluemix_notm}} IAM API キー資格情報を使用する必要がある場合は、代わりに、[イメージ・プル・シークレットを作成します](#other_registry_accounts)。
 {: shortdesc}
 
 1.  クラスター内に存在する Kubernetes 名前空間をリストするか、使用する名前空間を作成します。
@@ -323,17 +330,17 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [イメージ・プル・シークレットを Kubernetes サービス・アカウントに追加することもできます。そうすれば、コンテナーをデプロイする時に、名前空間内の任意のポッドでそのイメージ・プル・シークレットを使用できるようになります](#use_imagePullSecret)。
+5.  [コンテナーをデプロイする際に、名前空間内の任意のポッドでそのイメージ・プル・シークレットを使用できるよう、イメージ・プル・シークレットを Kubernetes サービス・アカウントに追加します](#use_imagePullSecret)。
 
 ### 異なる IAM API キー資格情報を使用してイメージ・プル・シークレットを作成することで、より細かい制御を可能にしたり、他の {{site.data.keyword.Bluemix_notm}} アカウント内のイメージへのアクセスを可能にしたりする方法
 {: #other_registry_accounts}
 
-{{site.data.keyword.Bluemix_notm}} の IAM アクセス・ポリシーをユーザーまたはサービス ID に割り当てることで、特定のレジストリー・イメージ・リポジトリー、名前空間、または操作 (`push` や `pull` など) にアクセス権を制限できます。次に、API キーを作成して、これらのレジストリー資格情報をクラスターのイメージ・プル・シークレットに保管します。
+{{site.data.keyword.Bluemix_notm}} の IAM アクセス・ポリシーをユーザーまたはサービス ID に割り当てて、特定のレジストリー・イメージ名前空間または操作 (`push` や `pull` など) にアクセス権を制限できます。次に、API キーを作成して、これらのレジストリー資格情報をクラスターのイメージ・プル・シークレットに保管します。
 {: shortdesc}
 
-例えば、他の {{site.data.keyword.Bluemix_notm}} アカウント内のイメージにアクセスするには、そのアカウント内のユーザーまたはサービス ID の {{site.data.keyword.registryshort_notm}} 資格情報を保管する API キーを作成します。次に、クラスターのアカウント内で、それぞれのクラスターとクラスター名前空間のイメージ・プル・シークレットにその API キー資格情報を保存します。
+例えば、他の {{site.data.keyword.Bluemix_notm}} アカウント内のイメージにアクセスするには、そのアカウント内のユーザーまたはサービス ID の {{site.data.keyword.registryshort_notm}} 資格情報を保管する API キーを作成します。 次に、クラスターのアカウント内で、それぞれのクラスターとクラスター名前空間のイメージ・プル・シークレットにその API キー資格情報を保存します。
 
-以下のステップでは、{{site.data.keyword.Bluemix_notm}} の IAM サービス ID の資格情報を保管する API キーを作成します。サービス ID を使用する代わりに、{{site.data.keyword.registryshort_notm}} に対する {{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス・ポリシーを割り当てたユーザー ID の API キーを作成することもできます。 ただし、そのユーザー ID は部門 ID にしてください。あるいは、その特定のユーザーがいなくなってもクラスターがレジストリーにアクセスできるように計画しておいてください。
+以下のステップでは、{{site.data.keyword.Bluemix_notm}} の IAM サービス ID の資格情報を保管する API キーを作成します。 サービス ID を使用する代わりに、{{site.data.keyword.registryshort_notm}} に対する {{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス・ポリシーを割り当てたユーザー ID の API キーを作成することもできます。 ただし、そのユーザー ID は部門 ID にしてください。あるいは、その特定のユーザーがいなくなってもクラスターがレジストリーにアクセスできるように計画しておいてください。
 {: note}
 
 1.  クラスター内に存在する Kubernetes 名前空間をリストするか、レジストリー・イメージからコンテナーをデプロイする場所として使用する名前空間を作成します。
@@ -461,7 +468,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [イメージ・プル・シークレットを Kubernetes サービス・アカウントに追加することもできます。そうすれば、コンテナーをデプロイする時に、名前空間内の任意のポッドでそのイメージ・プル・シークレットを使用できるようになります](#use_imagePullSecret)。
+8.  [コンテナーをデプロイする際に、名前空間内の任意のポッドでそのイメージ・プル・シークレットを使用できるよう、イメージ・プル・シークレットを Kubernetes サービス・アカウントに追加します](#use_imagePullSecret)。
 
 ### 他のプライベート・レジストリー内に保管されているイメージへのアクセス
 {: #private_images}
@@ -471,7 +478,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 
 開始前に、以下のことを行います。
 
-1.  [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。
+1.  [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 2.  [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 イメージ・プル・シークレットを作成するには、以下のようにします。
@@ -596,7 +603,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>使用するイメージの名前。{{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`ibmcloud cr image-list` を実行します。</td>
+    <td>使用するイメージの名前。 {{site.data.keyword.Bluemix_notm}} アカウント内の使用可能なイメージをリストするには、`ibmcloud cr image-list` を実行します。</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -666,7 +673,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
    spec:
      containers:
        - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+         image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
    ```
    {: codeblock}
 
@@ -709,7 +716,7 @@ Docker などの非 {{site.data.keyword.Bluemix_notm}} レジストリーを使�
 
 開始前に、以下のことを行います。
 1. [{{site.data.keyword.registryshort_notm}} に名前空間をセットアップして、その名前空間にイメージをプッシュします](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)。
-2. [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_cli)。
+2. [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 3. [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
 
 コンテナーをクラスターの **default** 名前空間にデプロイするために、構成ファイルを作成します。

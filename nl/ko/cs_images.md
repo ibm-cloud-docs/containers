@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 이미지에서 컨테이너 빌드
@@ -46,7 +48,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 
 |레지스트리|설명|이점|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|이 옵션을 사용하면 이미지를 안전하게 저장하고 이를 클러스터 사용자 간에 공유할 수 있는 {{site.data.keyword.registryshort_notm}}의 사용자 고유의 보안 Docker 이미지 저장소를 설정할 수 있습니다.|<ul><li>계정에서 이미지에 대한 액세스 권한을 관리합니다.</li><li>{{site.data.keyword.IBM_notm}}이 제공하는 이미지와 샘플 앱 {{site.data.keyword.IBM_notm}} Liberty를 상위 이미지로서 사용하고 이에 자체 앱 코드를 추가합니다.</li><li>Vulnerability Advisor에 의해 잠재적 취약점에 대한 이미지의 자동 스캐닝(이를 해결하기 위한 OS 특정 권장사항 포함).</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|이 옵션을 사용하면 이미지를 안전하게 저장하고 이를 클러스터 사용자 간에 공유할 수 있는 {{site.data.keyword.registryshort_notm}}의 사용자 고유의 보안 Docker 이미지 저장소를 설정할 수 있습니다.|<ul><li>계정에서 이미지에 대한 액세스 권한을 관리합니다.</li><li>{{site.data.keyword.IBM_notm}}이 제공하는 이미지와 샘플 앱 {{site.data.keyword.IBM_notm}} Liberty를 상위 이미지로서 사용하고 이에 자체 앱 코드를 추가합니다.</li><li>Vulnerability Advisor에 의해 잠재적 취약점에 대한 이미지의 자동 스캐닝(이를 해결하기 위한 OS 특정 권장사항 포함).</li></ul>|
 |기타 개인용 레지스트리|[이미지 풀 시크릿 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/containers/images/)을 작성하여 기존 개인용 레지스트리를 클러스터에 연결합니다. 시크릿은 Kubernetes 시크릿에 레지스트리 URL과 인증 정보를 안전하게 저장하는 데 사용됩니다.|<ul><li>자체 소스(Docker Hub, 조직이 소유하는 레지스트리 또는 기타 프라이빗 클라우드 레지스트리)와는 무관하게 기존 개인용 레지스트리를 사용합니다.</li></ul>|
 |[공용 Docker Hub ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://hub.docker.com/){: #dockerhub}|Dockerfile 변경이 필요하지 않은 경우 [Kubernetes 배치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)에서 Docker Hub의 기존 공용 이미지를 직접 사용하려면 이 옵션을 사용하십시오. <p>**참고:** 이 옵션이 조직의 보안 요구사항을 충족하지 않을 수 있음을 유념하십시오(예: 액세스 관리, 취약성 스캐닝 또는 앱 개인정보 보호정책).</p>|<ul><li>클러스터에 대한 추가 단계가 필요하지 않습니다.</li><li>다양한 오픈 소스 애플리케이션이 포함됩니다.</li></ul>|
 {: caption="공용 및 개인용 이미지 레지스트리 옵션" caption-side="top"}
@@ -81,9 +83,9 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 
 시작하기 전에:
 1. [{{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)하십시오.
-2. [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+2. [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 3. **2019년 2월 25일** 이전에 작성된 기존 클러스터를 사용하는 경우, [클러스터를 업데이트하여 API 키 `imagePullSecret`을 사용](#imagePullSecret_migrate_api_key)하십시오.
-4. [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4. [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 클러스터의 **기본** 네임스페이스에 컨테이너를 배치하려면 다음을 수행하십시오.
 
@@ -112,7 +114,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
     {: codeblock}
 
     이미지 URL 변수를 사용자의 이미지 정보로 바꾸십시오.
-    *  **`<app_name>`**: 앱의 이름입니다. 
+    *  **`<app_name>`**: 앱의 이름입니다.
     *  **`<region>`**: 레지스트리 도메인의 지역 {{site.data.keyword.registryshort_notm}} API 엔드포인트입니다. 로그인한 지역의 도메인 목록을 나열하려면 `ibmcloud cr api`를 실행하십시오.
     *  **`<namespace>`**: 레지스트리 네임스페이스입니다. 네임스페이스 정보를 가져오려면 `ibmcloud cr namespace-list`를 실행하십시오.
     *  **`<my_image>:<tag>`**: 컨테이너를 빌드하는 데 사용할 이미지 및 태그입니다. 레지스트리에서 사용할 수 있는 이미지를 가져오려면 `ibmcloud cr images`를 실행하십시오.
@@ -120,7 +122,7 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 3.  클러스터에 배치를 작성하십시오.
 
     ```
-     kubectl apply -f mydeployment.yaml
+    kubectl apply -f mydeployment.yaml
     ```
     {: pre}
 
@@ -146,12 +148,12 @@ Docker 이미지는 {{site.data.keyword.containerlong}}를 사용하여 작성�
 기본적으로는 그렇지 않습니다. 기본 클러스터 설정을 사용하여 {{site.data.keyword.registrylong_notm}} 네임스페이스에 저장된 이미지의 컨테이너를 클러스터의 `default` Kubernetes 네임스페이스에 배치할 수 있습니다. 다른 Kubernetes 네임스페이스 또는 다른 {{site.data.keyword.Bluemix_notm}} 계정에서 이 이미지를 사용하기 위한 [사용자 고유의 이미지 풀 시크릿을 복사 또는 작성하는 옵션](#other)이 있습니다.
 
 **다른 {{site.data.keyword.Bluemix_notm}} 계정에서 이미지를 가져올 수 있습니까?**<br>
-예. 사용할 {{site.data.keyword.Bluemix_notm}} 계정에서 API 키를 작성하십시오. 그런 다음 가져올 각 클러스터 및 클러스터 네임스페이스에서 해당 API 키 인증 정보를 저장하는 이미지 풀 시크릿을 작성하십시오. [권한 부여된 서비스 ID API 키를 사용하는 이 예를 따라 진행하십시오](#other_registry_accounts).
+예. 사용할 {{site.data.keyword.Bluemix_notm}} 계정에서 API 키를 작성하십시오. 그런 다음 가져올 각 클러스터 및 클러스터 네임스페이스에서 해당 API 키 인증 정보를 저장하는 이미지 풀 시크릿을 작성하십시오. [권한 부여된 서비스 ID API 키를 사용하는 이 예를 따라 진행](#other_registry_accounts)하십시오.
 
 Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용하려면 [기타 개인용 레지스트리에 저장된 이미지에 액세스](#private_images)를 참조하십시오.
 
 **서비스 ID를 위해 API 키가 필요합니까? 내 계정에 대한 서비스 ID의 한계에 도달하면 어떻게 됩니까?**<br>
-기본 클러스터 설정은 서비스 ID를 작성하여 이미지 풀 시크릿에 {{site.data.keyword.Bluemix_notm}} IAM API 키 인증 정보를 저장합니다. 그러나 개별 사용자에 대한 API 키를 작성하고 이미지 풀 시크릿에 해당 인증 정보를 저장할 수도 있습니다. [서비스 ID에 대한 IAM 한계](/docs/iam?topic=iam-iam_limits#iam_limits)에 도달하는 경우 기본적으로 클러스터가 서비스 ID 및 이미지 풀 시크릿 없이 작성되고 `icr.io` 레지스트리 도메인에서 이미지를 가져올 수 없습니다. {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID가 아닌 기능 ID와 같은 개별 사용자에 대한 API 키를 사용하여 [고유의 이미지 풀 시크릿을 작성](#other_registry_accounts)해야 합니다. 
+기본 클러스터 설정은 서비스 ID를 작성하여 이미지 풀 시크릿에 {{site.data.keyword.Bluemix_notm}} IAM API 키 인증 정보를 저장합니다. 그러나 개별 사용자에 대한 API 키를 작성하고 이미지 풀 시크릿에 해당 인증 정보를 저장할 수도 있습니다. [서비스 ID에 대한 IAM 한계](/docs/iam?topic=iam-iam_limits#iam_limits)에 도달하는 경우 기본적으로 클러스터가 서비스 ID 및 이미지 풀 시크릿 없이 작성되고 `icr.io` 레지스트리 도메인에서 이미지를 가져올 수 없습니다. {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID가 아닌 기능 ID와 같은 개별 사용자에 대한 API 키를 사용하여 [고유의 이미지 풀 시크릿을 작성](#other_registry_accounts)해야 합니다.
 
 **내 클러스터 이미지 풀 시크릿은 레지스트리 토큰을 사용합니다. 토큰이 계속해서 작동합니까?**<br>
 
@@ -160,7 +162,10 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 
 토큰은 더 이상 사용되지 않는 `registry.bluemix.net` 레지스트리 도메인에 액세스할 권한을 부여하지만 API 키는 `icr.io` 레지스트리 도메인에 액세스할 권한을 부여합니다. 토큰에서 API 키 기반 인증까지의 전이 기간 중에 일시적으로 토큰 및 API 키 기반 이미지 풀 시크릿이 모두 작성됩니다. 토큰 및 API 키 기반 이미지 풀 시크릿을 모두 사용하여 클러스터는 `default` Kubernetes 네임스페이스의 `registry.bluemix.net` 또는 `icr.io` 도메인에서 이미지를 가져올 수 있습니다.
 
-더 이상 사용되지 않는 토큰 및 `registry.bluemix.net` 도메인에 대한 지원이 중단되기 전에, [`default` Kubernetes 네임스페이스](#imagePullSecret_migrate_api_key) 및 사용할 수 있는 [기타 네임스페이스 또는 계정](#other)에 대한 API 키 메소드를 사용하도록 클러스터 이미지 풀 시크릿을 업데이트하십시오. 그런 다음 `icr.io` 레지스트리 도메인에서 가져올 배치를 업데이트하십시오. 
+더 이상 사용되지 않는 토큰 및 `registry.bluemix.net` 도메인에 대한 지원이 중단되기 전에, [`default` Kubernetes 네임스페이스](#imagePullSecret_migrate_api_key) 및 사용할 수 있는 [기타 네임스페이스 또는 계정](#other)에 대한 API 키 메소드를 사용하도록 클러스터 이미지 풀 시크릿을 업데이트하십시오. 그런 다음 `icr.io` 레지스트리 도메인에서 가져올 배치를 업데이트하십시오.
+
+**다른 Kubernetes 네임스페이스에서 이미지 풀 시크릿을 복사하거나 작성하기만 하면 다른 작업은 필요하지 않습니까?**<br>
+아닙니다. 작성한 시크릿을 사용하여 이미지를 가져올 수 있도록 컨테이너에 권한이 부여되어야 합니다. 사용자는 네임스페이스의 서비스 계정에 이미지 풀 시크릿을 추가하거나, 각 배치에서 해당 시크릿을 참조할 수 있습니다. 지시사항은 [이미지 풀 시크릿을 사용하여 컨테이너 배치](/docs/containers?topic=containers-images#use_imagePullSecret)를 참조하십시오. 
 
 <br />
 
@@ -172,7 +177,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 {: shortdesc}
 
 **시작하기 전에**:
-*   [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   다음 권한이 있는지 확인하십시오.
     *   {{site.data.keyword.containerlong_notm}}에 대한 {{site.data.keyword.Bluemix_notm}} IAM **운영자 또는 관리자** 플랫폼 역할. 계정 소유자는 다음을 실행하여 역할을 제공할 수 있습니다.
         ```
@@ -205,7 +210,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
     kubectl get secrets
     ```
     {: pre}
-출력 예:
+    출력 예:
     ```
     default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
@@ -230,8 +235,10 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 ## 이미지 풀 시크릿을 사용하여 다른 클러스터 Kubernetes 네임스페이스, 다른 {{site.data.keyword.Bluemix_notm}} 계정 또는 외부 개인용 레지스트리에 액세스
 {: #other}
 
-클러스터에서 사용자의 이미지 풀 시크릿을 설정하여 `default` 이외의 Kubernetes 네임스페이스에 컨테이너를 배치하거나, 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하거나, 외부 개인용 레지스트리에 저장된 이미지를 사용하십시오. 또한, 특정 레지스트리 이미지 저장소, 네임스페이스 또는 조치(예: `push` 또는 `pull`)에 대한 권한을 제한하는 IAM 액세스 정책을 적용하는 사용자의 이미지 풀 시크릿을 작성할 수 있습니다.
+클러스터에서 사용자의 이미지 풀 시크릿을 설정하여 `default` 이외의 Kubernetes 네임스페이스에 컨테이너를 배치하거나, 다른 {{site.data.keyword.Bluemix_notm}} 계정에 저장된 이미지를 사용하거나, 외부 개인용 레지스트리에 저장된 이미지를 사용하십시오. 또한, 특정 레지스트리 이미지 네임스페이스 또는 조치(예: `push` 또는 `pull`)에 대한 권한을 제한하는 IAM 액세스 정책을 적용할 자신의 고유 이미지 풀 시크릿을 작성할 수도 있습니다.
 {:shortdesc}
+
+이미지 풀 시크릿을 작성한 후에는 컨테이너가 해당 시크릿을 사용하여 레지스트리에서 이미지를 가져올 수 있도록 권한을 부여받아야 합니다. 사용자는 네임스페이스의 서비스 계정에 이미지 풀 시크릿을 추가하거나, 각 배치에서 해당 시크릿을 참조할 수 있습니다. 지시사항은 [이미지 풀 시크릿을 사용하여 컨테이너 배치](/docs/containers?topic=containers-images#use_imagePullSecret)를 참조하십시오. 
 
 이미지 풀 시크릿은 사용하도록 지정된 Kubernetes 네임스페이스에만 유효합니다. 컨테이너를 배치하려는 모든 네임스페이스에 대해 이러한 단계를 반복하십시오. [DockerHub](#dockerhub)의 이미지에는 이미지 풀 시크릿이 필요하지 않습니다.
 {: tip}
@@ -239,14 +246,14 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 시작하기 전에:
 
 1.  [{{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)하십시오.
-2.  [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+2.  [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 3.  **2019년 2월 25일** 이전에 작성된 기존 클러스터를 사용하는 경우, [클러스터를 업데이트하여 API 키 이미지 풀 시크릿을 사용](#imagePullSecret_migrate_api_key)하십시오.
-4.  [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4.  [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 사용자 고유의 이미지 풀 시크릿을 사용하려면 다음 옵션 중에서 선택하십시오.
 - 기본 Kubernetes 네임스페이스에서 클러스터 내의 다른 네임스페이스로 [이미지 풀 시크릿을 복사](#copy_imagePullSecret)합니다.
-- [새 IAM API 키 인증 정보를 작성하고 이미지 풀 시크릿에 저장](#other_registry_accounts)하여 다른 {{site.data.keyword.Bluemix_notm}} 계정의 이미지에 액세스하거나 특정 레지스트리 도메인 또는 네임스페이스에 대한 액세스를 제한하는 IAM 정책을 적용합니다. 
+- [새 IAM API 키 인증 정보를 작성하고 이미지 풀 시크릿에 저장](#other_registry_accounts)하여 다른 {{site.data.keyword.Bluemix_notm}} 계정의 이미지에 액세스하거나 특정 레지스트리 도메인 또는 네임스페이스에 대한 액세스를 제한하는 IAM 정책을 적용합니다.
 - [외부 개인용 레지스트리의 이미지에 액세스하는 이미지 풀 시크릿을 작성](#private_images)합니다.
 
 <br/>
@@ -260,24 +267,24 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 
 1.  클러스터에서 사용 가능한 Kubernetes 네임스페이스를 나열하거나 사용할 네임스페이스를 작성하십시오.
     ```
-   kubectl get namespaces
+    kubectl get namespaces
     ```
     {: pre}
 
     출력 예:
     ```
-       default          Active    79d
-   ibm-cert-store   Active    79d
-   ibm-system       Active    79d
-   istio-system     Active    34d
-   kube-public      Active    79d
-   kube-system      Active    79d
+    default          Active    79d
+    ibm-cert-store   Active    79d
+    ibm-system       Active    79d
+    istio-system     Active    34d
+    kube-public      Active    79d
+    kube-system      Active    79d
     ```
     {: screen}
 
     네임스페이스를 작성하려면 다음을 수행하십시오.
     ```
-       kubectl create namespace <namespace_name>
+    kubectl create namespace <namespace_name>
     ```
     {: pre}
 2.  {{site.data.keyword.registrylong_notm}}의 `default` Kubernetes 네임스페이스에 있는 기존 이미지 풀 시크릿을 나열하십시오.
@@ -285,7 +292,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
     kubectl get secrets -n default | grep icr
     ```
     {: pre}
-출력 예:
+    출력 예:
     ```
     default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
@@ -325,39 +332,39 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [Kubernetes 서비스 계정에 이미지 풀 시크릿을 추가하여 네임 스페이스의 모든 팟(Pod)에서 컨테이너를 배치할 때 이미지 풀 시크릿을 사용할 수 있도록 선택할 수 있습니다](#use_imagePullSecret).
+5.  [컨테이너를 배치할 때 네임스페이스의 모든 팟(Pod)에서 이미지 풀 시크릿을 사용할 수 있도록 Kubernetes 서비스 계정에 이미지 풀 시크릿을 추가](#use_imagePullSecret)하십시오. 
 
 ### 다른 {{site.data.keyword.Bluemix_notm}} 계정에서 이미지에 대한 추가 제어 또는 액세스를 위해 다른 IAM API 키 인증 정보를 사용하여 이미지 풀 시크릿 작성
 {: #other_registry_accounts}
 
-{{site.data.keyword.Bluemix_notm}} IAM 액세스 정책을 사용자 또는 서비스 ID에 지정하여 특정 레지스트리 이미지 저장소, 네임스페이스 또는 조치(예: `push` 또는 `pull`)에 대한 권한을 제한할 수 있습니다. 그런 다음 API 키를 작성하고 사용자 클러스터에 적합한 이미지 풀 시크릿에 이 레지스트리 인증 정보를 저장하십시오.
+{{site.data.keyword.Bluemix_notm}} IAM 액세스 정책을 사용자 또는 서비스 ID에 지정하여 특정 레지스트리 이미지 네임스페이스 또는 조치(예: `push` 또는 `pull`)에 대한 권한을 제한할 수 있습니다. 그런 다음 API 키를 작성하고 사용자 클러스터에 적합한 이미지 풀 시크릿에 이 레지스트리 인증 정보를 저장하십시오.
 {: shortdesc}
 
-예를 들어, 다른 {{site.data.keyword.Bluemix_notm}} 계정의 이미지에 액세스하려면 사용자 또는 서비스 ID의 {{site.data.keyword.registryshort_notm}} 인증 정보를 해당 계정에 저장하는 API 키를 작성하십시오. 그런 다음 클러스터의 계정에서 각 클러스터 및 클러스터 네임스페이스에 대한 이미지 풀 시크릿에 API 키 인증 정보를 저장하십시오. 
+예를 들어, 다른 {{site.data.keyword.Bluemix_notm}} 계정의 이미지에 액세스하려면 사용자 또는 서비스 ID의 {{site.data.keyword.registryshort_notm}} 인증 정보를 해당 계정에 저장하는 API 키를 작성하십시오. 그런 다음 클러스터의 계정에서 각 클러스터 및 클러스터 네임스페이스에 대한 이미지 풀 시크릿에 API 키 인증 정보를 저장하십시오.
 
 다음 단계에서는 {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID의 인증 정보를 저장하는 API 키를 작성합니다. 서비스 ID를 사용하는 대신 {{site.data.keyword.Bluemix_notm}} {{site.data.keyword.registryshort_notm}}에 대한 IAM 서비스 액세스 정책이 있는 사용자 ID에 대한 API 키를 작성하려고 할 수 있습니다. 그러나 사용자가 기능 ID이거나 클러스터가 레지스트리에 계속 액세스할 수 있도록 사용자가 퇴사한 경우 계획이 있는지 확인하십시오.
 {: note}
 
 1.  클러스터에서 사용 가능한 Kubernetes 네임스페이스를 나열하거나 레지스트리 이미지에서 컨테이너를 배치할 위치에서 사용할 네임스페이스를 작성하십시오.
     ```
-   kubectl get namespaces
+    kubectl get namespaces
     ```
     {: pre}
 
     출력 예:
     ```
-       default          Active    79d
-   ibm-cert-store   Active    79d
-   ibm-system       Active    79d
-   istio-system     Active    34d
-   kube-public      Active    79d
-   kube-system      Active    79d
+    default          Active    79d
+    ibm-cert-store   Active    79d
+    ibm-system       Active    79d
+    istio-system     Active    34d
+    kube-public      Active    79d
+    kube-system      Active    79d
     ```
     {: screen}
 
     네임스페이스를 작성하려면 다음을 수행하십시오.
     ```
-       kubectl create namespace <namespace_name>
+    kubectl create namespace <namespace_name>
     ```
     {: pre}
 2.  이미지 풀 시크릿에서 IAM 정책과 API 키 인증 정보에 사용되는 클러스터에 대한 {{site.data.keyword.Bluemix_notm}} IAM 서비스 ID를 작성하십시오. 서비스 ID에 나중에 검색하는 데 도움이 되는 설명(예: 클러스터 및 네임스페이스 이름 포함)을 제공했는지 확인하십시오.
@@ -460,10 +467,10 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 7.  시크릿이 작성되었는지 확인하십시오. <em>&lt;kubernetes_namespace&gt;</em>를 이미지 풀 시크릿을 작성한 네임스페이스로 대체하십시오.
 
     ```
-        kubectl get secrets --namespace <kubernetes_namespace>
+    kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [Kubernetes 서비스 계정에 이미지 풀 시크릿을 추가하여 네임 스페이스의 모든 팟(Pod)에서 컨테이너를 배치할 때 이미지 풀 시크릿을 사용할 수 있도록 선택할 수 있습니다](#use_imagePullSecret).
+8.  [컨테이너를 배치할 때 네임스페이스의 모든 팟(Pod)에서 이미지 풀 시크릿을 사용할 수 있도록 Kubernetes 서비스 계정에 이미지 풀 시크릿을 추가](#use_imagePullSecret)하십시오. 
 
 ### 다른 개인용 레지스트리에 저장된 이미지에 액세스
 {: #private_images}
@@ -473,7 +480,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 
 시작하기 전에:
 
-1.  [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+1.  [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 2.  [클러스터에 CLI를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 
 이미지 풀 시크릿을 작성하려면 다음을 수행하십시오.
@@ -668,7 +675,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
    spec:
      containers:
        - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+         image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
    ```
    {: codeblock}
 
@@ -711,7 +718,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 
 시작하기 전에:
 1. [{{site.data.keyword.registryshort_notm}}에 네임스페이스를 설정하고 이 네임스페이스에 이미지를 푸시](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add)하십시오.
-2. [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_cli)하십시오.
+2. [클러스터를 작성](/docs/containers?topic=containers-clusters#clusters_ui)하십시오.
 3. [클러스터에 CLI를 대상으로 지정](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)하십시오.
 
 클러스터의 **기본** 네임스페이스에 컨테이너를 배치하려면 구성 파일을 작성하십시오.
@@ -747,7 +754,7 @@ Docker와 같은 비{{site.data.keyword.Bluemix_notm}} 레지스트리를 사용
 3.  클러스터에 배치를 작성하십시오.
 
     ```
-     kubectl apply -f mydeployment.yaml
+    kubectl apply -f mydeployment.yaml
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング
@@ -71,10 +71,10 @@ NLB サービスを使用してアプリを公開した場合、自動的にそ�
 <br />
 
 
-## バージョン 1.0 と 2.0 の NLB の比較
+## バージョン 1.0 と 2.0 の NLB での基本ロード・バランシングと DSR ロード・バランシングの比較
 {: #comparison}
 
-NLB を作成する際は、バージョン 1.0 か 2.0 の NLB を選択できます。 バージョン 2.0 の NLB はベータ版であるということに注意してください。
+NLB の作成時に、基本ロード・バランシングを実行するバージョン 1.0 NLB、または直接サーバー・リターン (DSR) ロード・バランシングを実行するバージョン 2.0 NLB を選択できます。 バージョン 2.0 の NLB はベータ版であるということに注意してください。
 {: shortdesc}
 
 **バージョン 1.0 と 2.0 の NLB の類似点は何ですか?**
@@ -83,14 +83,14 @@ NLB を作成する際は、バージョン 1.0 か 2.0 の NLB を選択でき�
 
 **バージョン 1.0 と 2.0 の NLB の相違点は何ですか?**
 
-クライアントがアプリに要求を送信すると、NLB は、アプリ・ポッドが存在するワーカー・ノードの IP アドレスに要求パケットをルーティングします。 バージョン 1.0 の NLB は、ネットワーク・アドレス変換 (NAT) を使用して、要求パケットのソース IP アドレスを、ロード・バランサー・ポッドが存在するワーカー・ノードの IP に書き換えます。 ワーカー・ノードは、アプリの応答パケットを返すときに、その NLB が存在するワーカー・ノードの IP を使用します。 そして、NLB がクライアントに応答パケットを送信します。 IP アドレスの書き換えを回避するには、[ソース IP 保持を有効にします](#node_affinity_tolerations)。 ただし、ソース IP 保持を利用するには、要求を別のワーカーに転送しなくてもよいように、ロード・バランサー・ポッドとアプリ・ポッドを同じワーカー上で実行する必要があります。 ノードのアフィニティーと耐障害性をアプリ・ポッドに追加する必要があります。
+クライアントがアプリに要求を送信すると、NLB は、アプリ・ポッドが存在するワーカー・ノードの IP アドレスに要求パケットをルーティングします。 バージョン 1.0 の NLB は、ネットワーク・アドレス変換 (NAT) を使用して、要求パケットのソース IP アドレスを、ロード・バランサー・ポッドが存在するワーカー・ノードの IP に書き換えます。 ワーカー・ノードは、アプリの応答パケットを返すときに、その NLB が存在するワーカー・ノードの IP を使用します。 そして、NLB がクライアントに応答パケットを送信します。 IP アドレスの書き換えを回避するには、[ソース IP 保持を有効にします](#node_affinity_tolerations)。 ただし、ソース IP 保持を利用するには、要求を別のワーカーに転送しなくてもよいように、ロード・バランサー・ポッドとアプリ・ポッドを同じワーカー上で実行する必要があります。 ノードのアフィニティーと耐障害性をアプリ・ポッドに追加する必要があります。 バージョン 1.0 NLB を使用した基本ロード・バランシングについて詳しくは、[v1.0: 基本ロード・バランシングのコンポーネントとアーキテクチャー](#v1_planning)を参照してください。
 
-バージョン 1.0 の NLB とは異なり、バージョン 2.0 の NLB は、他のワーカー上のアプリ・ポッドに要求を転送する際に NAT を使用しません。 NLB 2.0 は、クライアント要求をルーティングするときに、IP over IP (IPIP) を使用して、元の要求パケットを別の新しいパケットに入れてカプセル化します。 このカプセル化された IPIP パケットには、ロード・バランサー・ポッドが存在するワーカー・ノードのソース IP が含まれているので、元の要求パケットはクライアント IP をそのソース IP アドレスとして保持できます。 そして、ワーカー・ノードは、直接サーバー・リターン (DSR) を使用して、アプリの応答パケットをクライアント IP に送信します。 応答パケットは NLB をスキップしてクライアントに直接送信されるので、NLB が処理する必要のあるトラフィックの量が減少します。
+バージョン 1.0 の NLB とは異なり、バージョン 2.0 の NLB は、他のワーカー上のアプリ・ポッドに要求を転送する際に NAT を使用しません。 NLB 2.0 は、クライアント要求をルーティングするときに、IP over IP (IPIP) を使用して、元の要求パケットを別の新しいパケットに入れてカプセル化します。 このカプセル化された IPIP パケットには、ロード・バランサー・ポッドが存在するワーカー・ノードのソース IP が含まれているので、元の要求パケットはクライアント IP をそのソース IP アドレスとして保持できます。 そして、ワーカー・ノードは、直接サーバー・リターン (DSR) を使用して、アプリの応答パケットをクライアント IP に送信します。 応答パケットは NLB をスキップしてクライアントに直接送信されるので、NLB が処理する必要のあるトラフィックの量が減少します。 バージョン 2.0 NLB を使用した DSR ロード・バランシングについて詳しくは、[v2.0: DSR ロード・バランシングのコンポーネントとアーキテクチャー](#planning_ipvs)を参照してください。
 
 <br />
 
 
-## v1.0: コンポーネントとアーキテクチャー
+## v1.0: 基本ロード・バランシングのコンポーネントとアーキテクチャー
 {: #v1_planning}
 
 TCP/UDP ネットワーク・ロード・バランサー (NLB) 1.0 は、Linux カーネルの機能である Iptables を使用して、アプリのポッド間で要求の負荷分散を行います。
@@ -131,7 +131,7 @@ TCP/UDP ネットワーク・ロード・バランサー (NLB) 1.0 は、Linux �
 **始める前に**:
 * パブリック・ネットワーク・ロード・バランサー (NLB) を複数のゾーンに作成するためには、ゾーンごとに 1 つ以上のパブリック VLAN にポータブル・サブネットを用意する必要があります。 プライベート NLB を複数のゾーンに作成するためには、ゾーンごとに 1 つ以上のプライベート VLAN にポータブル・サブネットを用意する必要があります。 [クラスター用のサブネットの構成](/docs/containers?topic=containers-subnets)に記載されているステップに従うことにより、サブネットを追加できます。
 * ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限する場合は、NLB が均等にデプロイされるように、各ゾーンで 2 つ以上の[エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge#edge)を有効にしてください。
-* IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにします。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+* IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して [VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにします。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 * `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 
@@ -484,7 +484,7 @@ spec:
 
 ソース IP を有効にした場合は、アフィニティー・ルールをアプリのデプロイメントに追加して、NLB の IP アドレスと同じ VLAN にあるワーカー・ノードにアプリ・ポッドをスケジュールしてください。
 
-開始前に、以下のことを行います。 [アカウントにログインします。 該当する地域とリソース・グループ (該当する場合) をターゲットとして設定します。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. NLB サービスのパブリック IP アドレスを取得します。 **LoadBalancer Ingress** フィールドの IP アドレスを確認してください。
     ```
@@ -645,26 +645,26 @@ NLB 2.0 はレイヤー 4 のロード・バランサーであり、Linux カー
 ## v2.0: 前提条件
 {: #ipvs_provision}
 
-既存のバージョン 1.0 の NLB を 2.0 に更新することはできません。 新規 NLB 2.0 を作成する必要があります。クラスター内でバージョン 1.0 と 2.0 の NLB を同時に実行できます。
+既存のバージョン 1.0 の NLB を 2.0 に更新することはできません。 新規 NLB 2.0 を作成する必要があります。 クラスター内でバージョン 1.0 と 2.0 の NLB を同時に実行できます。
 {: shortdesc}
 
 NLB 2.0 を作成する前に、前提条件として次の手順を実行する必要があります。
 
 1. [クラスターのマスター・ノードとワーカー・ノードを更新](/docs/containers?topic=containers-update)して Kubernetes バージョン 1.12 以降にします。
 
-2. NLB 2.0 が複数ゾーン内のアプリ・ポッドに要求を転送できるようにするために、サポート・ケースを開いて VLAN の構成設定を要求します。 **重要**: この構成をすべてのパブリック VLAN について要求する必要があります。 新しい VLAN の関連付けを要求する場合は、その VLAN の別のチケットを開く必要があります。
+2. NLB 2.0 で複数ゾーン内のアプリ・ポッドに要求を転送できるようにするには、サポート・ケースを開いて VLAN の容量集約を要求します。 この構成設定によって、ネットワークの中断や障害が発生することはありません。
     1. [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) にログインします。
     2. メニュー・バーの**「サポート」**をクリックし、**「Case の管理」**タブをクリックして、**「新規 Case の作成 (Create new case)」**をクリックします。
     3. Case フィールドに、以下の情報を入力します。
        * サポートのタイプとして**「テクニカル (Technical)」**を選択します。
        * カテゴリーとして**「VLAN スパンニング」**を選択します。
        * 件名は **Public VLAN Network Question** と入力します。
-    4. 「Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145」という情報を説明に追加します。
+    4. 「Please set up the network to allow capacity aggregation on the public VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145」という情報を説明に追加します。 特定の VLAN (1 つのクラスターのみに対するパブリック VLAN など) について容量集約を許可する場合は、説明でこれらの VLAN ID を指定できます。
     5. **「送信」**をクリックします。
 
-3. IBM Cloud インフラストラクチャー (SoftLayer) アカウントの[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にする必要があります。VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 VRF または VLAN スパンニングが有効になると、NLB 2.0 は、アカウント内のさまざまなサブネットにパケットをルーティングできるようになります。
+3. IBM Cloud インフラストラクチャー (SoftLayer) アカウントの[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 VRF または VLAN スパンニングが有効になると、NLB 2.0 は、アカウント内のさまざまなサブネットにパケットをルーティングできるようになります。
 
-4. [Calico pre-DNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を使用して NLB 2.0 の IP アドレスへのトラフィックを管理する場合は、ポリシーの `spec` セクションに `applyOnForward: true` フィールドと `doNotTrack: true` フィールドを追加し、`preDNAT: true` を削除する必要があります。`applyOnForward: true` は、トラフィックがカプセル化されて転送されるときに Calico ポリシーが適用されるようにします。 `doNotTrack: true` は、ワーカー・ノードが DSR を使用して、接続を追跡する必要なしに応答パケットをクライアントに直接返せるようにします。 例えば、Calico ポリシーを使用して特定の IP アドレスから NLB IP アドレスへのトラフィックのみをホワイトリストに登録する場合、ポリシーは以下のようになります。
+4. [Calico pre-DNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を使用して NLB 2.0 の IP アドレスへのトラフィックを管理する場合は、ポリシーの `spec` セクションに `applyOnForward: true` フィールドと `doNotTrack: true` フィールドを追加し、`preDNAT: true` を削除する必要があります。 `applyOnForward: true` は、トラフィックがカプセル化されて転送されるときに Calico ポリシーが適用されるようにします。 `doNotTrack: true` は、ワーカー・ノードが DSR を使用して、接続を追跡する必要なしに応答パケットをクライアントに直接返せるようにします。 例えば、Calico ポリシーを使用して特定の IP アドレスから NLB IP アドレスへのトラフィックのみをホワイトリストに登録する場合、ポリシーは以下のようになります。
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -1054,16 +1054,16 @@ NLB 2.0 がネットワーク接続をアプリ・ポッドにどのように割
 ## NLB ホスト名の登録
 {: #loadbalancer_hostname}
 
-ネットワーク・ロード・バランサー (NLB) をセットアップした後、ホスト名を作成して、NLB IP の DNS エントリーを作成できます。また、TCP/HTTP(S) モニターをセットアップして、各ホスト名の背後にある NLB IP アドレスのヘルス・チェックを行うこともできます。
+ネットワーク・ロード・バランサー (NLB) をセットアップした後、ホスト名を作成して、NLB IP の DNS エントリーを作成できます。 また、TCP/HTTP(S) モニターをセットアップして、各ホスト名の背後にある NLB IP アドレスのヘルス・チェックを行うこともできます。
 {: shortdesc}
 
 <dl>
 <dt>ホスト名</dt>
 <dd>単一または複数ゾーンのクラスターでパブリック NLB を作成すると、NLB IP アドレスのホスト名を作成して、インターネットにアプリを公開できます。 また、{{site.data.keyword.Bluemix_notm}} によって、ホスト名のワイルドカード SSL 証明書の生成と保守が行われます。
-<p>複数ゾーンのクラスターで、ホスト名を作成し、各ゾーンでそのホスト名の DNS エントリーに NLB IP アドレスを追加できます。例えば、米国南部の 3 つのゾーンでアプリの NLB をデプロイした場合は、3 つの NLB IP アドレスに対してホスト名 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` を作成できます。ユーザーがアプリのホスト名にアクセスすると、クライアントがこれらの IP のいずれかにランダムにアクセスし、要求が NLB に送信されます。</p>
+<p>複数ゾーンのクラスターで、ホスト名を作成し、各ゾーンでそのホスト名の DNS エントリーに NLB IP アドレスを追加できます。 例えば、米国南部の 3 つのゾーンでアプリの NLB をデプロイした場合は、3 つの NLB IP アドレスに対してホスト名 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` を作成できます。 ユーザーがアプリのホスト名にアクセスすると、クライアントがこれらの IP のいずれかにランダムにアクセスし、要求が NLB に送信されます。</p>
 現在、プライベート NLB のホスト名を作成することはできません。</dd>
 <dt>ヘルス・チェック・モニター</dt>
-<dd>単一のホスト名の背後にある NLB IP アドレスに対するヘルス・チェックを有効にして、IP アドレスが使用可能かどうかを判別します。ホスト名のモニターを有効にすると、モニターによって各 NLB IP がヘルス・チェックされ、そのヘルス・チェックに基づいて DNS 参照の結果が最新の状態に保たれます。例えば、NLB IP アドレスが `1.1.1.1`、`2.2.2.2`、`3.3.3.3` である場合、ホスト名の DNS 参照の通常の動作では、3 つの IP がすべて返され、クライアントはそのうちの 1 つにランダムにアクセスします。IP アドレスが `3.3.3.3` の NLB がゾーンの障害などの理由で使用不可になると、その IP のヘルス・チェックが失敗し、モニターは障害のある IP をホスト名から削除し、DNS 参照では正常な `1.1.1.1` および `2.2.2.2` の IP のみが返されます。</dd>
+<dd>単一のホスト名の背後にある NLB IP アドレスに対するヘルス・チェックを有効にして、IP アドレスが使用可能かどうかを判別します。 ホスト名のモニターを有効にすると、モニターによって各 NLB IP がヘルス・チェックされ、そのヘルス・チェックに基づいて DNS 参照の結果が最新の状態に保たれます。 例えば、NLB IP アドレスが `1.1.1.1`、`2.2.2.2`、`3.3.3.3` である場合、ホスト名の DNS 参照の通常の動作では、3 つの IP がすべて返され、クライアントはそのうちの 1 つにランダムにアクセスします。 IP アドレスが `3.3.3.3` の NLB がゾーンの障害などの理由で使用不可になると、その IP のヘルス・チェックが失敗し、モニターは障害のある IP をホスト名から削除し、DNS 参照では正常な `1.1.1.1` および `2.2.2.2` の IP のみが返されます。</dd>
 </dl>
 
 クラスター内の NLB IP に登録されているすべてのホスト名を表示するには、以下のコマンドを実行します。
@@ -1084,12 +1084,12 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 * 以下の考慮事項および制限事項を確認します。
   * パブリック・バージョン 1.0 および 2.0 の NLB のホスト名を作成できます。
   * 現在、プライベート NLB のホスト名を作成することはできません。
-  * 最大 128 台のホスト名を登録できます。この制限は、[サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を開いて、要求によって解除できます。
+  * 最大 128 台のホスト名を登録できます。 この制限は、[サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support)を開いて、要求によって解除できます。
 * [単一ゾーン・クラスターでアプリの NLB を作成する](#lb_config)か、[複数ゾーン・クラスターの各ゾーンで NLB を作成します](#multi_zone_config)。
 
 1 つ以上の NLB IP アドレスのホスト名を作成するには、以下のようにします。
 
-1. NLB の **EXTERNAL-IP** アドレスを取得します。アプリを公開する複数ゾーン・クラスターの各ゾーンに NLB がある場合は、各 NLB の IP を取得します。
+1. NLB の **EXTERNAL-IP** アドレスを取得します。 アプリを公開する複数ゾーン・クラスターの各ゾーンに NLB がある場合は、各 NLB の IP を取得します。
   ```
   kubectl get svc
   ```
@@ -1103,7 +1103,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: screen}
 
-2. DNS ホスト名を作成することによって、この IP を登録します。最初にホスト名を作成するときには、1 つの IP アドレスのみを使用できます。
+2. DNS ホスト名を作成することによって、この IP を登録します。 最初にホスト名を作成するときには、1 つの IP アドレスのみを使用できます。
   ```
   ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP>
   ```
@@ -1122,7 +1122,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: screen}
 
-4. アプリを公開する複数ゾーン・クラスターの各ゾーンに NLB がある場合は、他の NLB の IP をホスト名に追加します。追加する各 IP アドレスに対して以下のコマンドを実行する必要があります。
+4. アプリを公開する複数ゾーン・クラスターの各ゾーンに NLB がある場合は、他の NLB の IP をホスト名に追加します。 追加する各 IP アドレスに対して以下のコマンドを実行する必要があります。
   ```
   ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
   ```
@@ -1171,7 +1171,7 @@ Host names for NLB のホスト名は、フォーマット `<cluster_name>-<glob
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>{{site.data.keyword.Bluemix_notm}} アカウントにグローバルに一意のハッシュが作成されます。アカウントのクラスター内で NLB に作成したすべてのホスト名は、このグローバルに一意のハッシュを使用します。</td>
+<td>{{site.data.keyword.Bluemix_notm}} アカウントにグローバルに一意のハッシュが作成されます。 アカウントのクラスター内で NLB に作成したすべてのホスト名は、このグローバルに一意のハッシュを使用します。</td>
 </tr>
 <tr>
 <td><code>0001</code></td>
@@ -1242,7 +1242,7 @@ Host names for NLB のホスト名は、フォーマット `<cluster_name>-<glob
   </tr>
   <tr>
   <td><code>--type &lt;type&gt;</code></td>
-  <td>ヘルス・チェックに使用するプロトコル: <code>HTTP</code>、<code>HTTPS</code>、または <code>TCP</code>。デフォルト: <code>HTTP</code></td>
+  <td>ヘルス・チェックに使用するプロトコル: <code>HTTP</code>、<code>HTTPS</code>、または <code>TCP</code>。 デフォルト: <code>HTTP</code></td>
   </tr>
   <tr>
   <td><code>--method &lt;method&gt;</code></td>
@@ -1250,7 +1250,7 @@ Host names for NLB のホスト名は、フォーマット `<cluster_name>-<glob
   </tr>
   <tr>
   <td><code>--path &lt;path&gt;</code></td>
-  <td><code>type</code> が <code>HTTPS</code> の場合: ヘルス・チェック対象のエンドポイント・パス。デフォルト: <code>/</code></td>
+  <td><code>type</code> が <code>HTTPS</code> の場合: ヘルス・チェック対象のエンドポイント・パス。 デフォルト: <code>/</code></td>
   </tr>
   <tr>
   <td><code>--timeout &lt;timeout&gt;</code></td>
@@ -1258,15 +1258,15 @@ Host names for NLB のホスト名は、フォーマット `<cluster_name>-<glob
   </tr>
   <tr>
   <td><code>--retries &lt;retries&gt;</code></td>
-  <td>タイムアウトが発生したときに、IP が正常でないと見なされるまでに再試行する回数。再試行は即時に実行されます。 デフォルト: <code>2</code></td>
+  <td>タイムアウトが発生したときに、IP が正常でないと見なされるまでに再試行する回数。 再試行は即時に実行されます。 デフォルト: <code>2</code></td>
   </tr>
   <tr>
   <td><code>--interval &lt;interval&gt;</code></td>
-  <td>各ヘルス・チェックの間隔 (秒)。間隔を短くすると、フェイルオーバーの時間が改善される場合がありますが、IP の負荷が増える場合があります。デフォルト: <code>60</code></td>
+  <td>各ヘルス・チェックの間隔 (秒)。 間隔を短くすると、フェイルオーバーの時間が改善される場合がありますが、IP の負荷が増える場合があります。 デフォルト: <code>60</code></td>
   </tr>
   <tr>
   <td><code>--port &lt;port&gt;</code></td>
-  <td>ヘルス・チェックのために接続するポート番号。<code>type</code> が <code>TCP</code> の場合、このパラメーターは必須です。 <code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合、80 (HTTP の場合) または 443 (HTTPS の場合) 以外のポートを使用する場合にのみポートを定義します。 TCP のデフォルト: <code>0</code>。HTTP のデフォルト: <code>80</code>。 HTTPS のデフォルト: <code>443</code>。</td>
+  <td>ヘルス・チェックのために接続するポート番号。 <code>type</code> が <code>TCP</code> の場合、このパラメーターは必須です。 <code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合、80 (HTTP の場合) または 443 (HTTPS の場合) 以外のポートを使用する場合にのみポートを定義します。 TCP のデフォルト: <code>0</code>。HTTP のデフォルト: <code>80</code>。 HTTPS のデフォルト: <code>443</code>。</td>
   </tr>
   <tr>
   <td><code>--expected-body &lt;expected-body&gt;</code></td>
@@ -1274,7 +1274,7 @@ Host names for NLB のホスト名は、フォーマット `<cluster_name>-<glob
   </tr>
   <tr>
   <td><code>--expected-codes &lt;expected-codes&gt;</code></td>
-  <td><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: 応答内でヘルス・チェックが検索する HTTP コード。HTTP コードが検出されない場合、IP が正常でないと見なされます。 デフォルト: <code>2xx</code></td>
+  <td><code>type</code> が <code>HTTP</code> または <code>HTTPS</code> の場合: 応答内でヘルス・チェックが検索する HTTP コード。 HTTP コードが検出されない場合、IP が正常でないと見なされます。 デフォルト: <code>2xx</code></td>
   </tr>
   <tr>
   <td><code>--allows-insecure &lt;true&gt;</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Ajout de services à l'aide d'une liaison de service IBM Cloud
@@ -35,7 +37,7 @@ Lorsque vous ajoutez des services {{site.data.keyword.Bluemix_notm}} à votre cl
 Pour obtenir la liste des services {{site.data.keyword.Bluemix_notm}} pris en charge, voir le [catalogue {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
 
 **Qu'est-ce qu'une liaison de service {{site.data.keyword.Bluemix_notm}} ?**</br>
-Une liaison de service est un moyen de créer rapidement des données d'identification de service pour un service {{site.data.keyword.Bluemix_notm}} et de stocker ces données dans une valeur confidentielle Kubernetes dans votre cluster. Pour lier un service à votre cluster, vous devez d'abord mettre à disposition une instance du service. Vous utilisez ensuite la [commande](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` pour créer les données d'identification de service et la valeur confidentielle Kubernetes. La valeur confidentielle est chiffrée automatiquement dans etcd pour protéger vos données.
+Une liaison de service est un moyen de créer rapidement des données d'identification de service pour un service {{site.data.keyword.Bluemix_notm}} et de stocker ces données dans une valeur confidentielle Kubernetes dans votre cluster. Pour lier un service à votre cluster, vous devez d'abord mettre à disposition une instance du service. Vous utilisez ensuite la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` pour créer les données d'identification de service et la valeur confidentielle Kubernetes. La valeur confidentielle est chiffrée automatiquement dans etcd pour protéger vos données.
 
 Vous voulez sécuriser davantage vos valeurs confidentielles ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les valeurs confidentielles qu'elles soient nouvelles ou existantes, par exemple la valeur confidentielle dans laquelle sont stockées les données d'identification de vos instances de service {{site.data.keyword.Bluemix_notm}}.
 {: tip}
@@ -43,8 +45,7 @@ Vous voulez sécuriser davantage vos valeurs confidentielles ? Demandez à l'adm
 **Puis-je utiliser tous les services {{site.data.keyword.Bluemix_notm}} dans mon cluster ?**</br>
 Vous pouvez utiliser une liaison de service uniquement pour vos services qui prennent en charge les clés de service de sorte que les données d'identification de service puissent être créées et stockées automatiquement dans une valeur confidentielle Kubernetes. Pour trouver une liste de services compatibles avec les clés de service, voir [Utilisation des services {{site.data.keyword.Bluemix_notm}} avec des applications externes](/docs/resources?topic=resources-externalapp#externalapp).
 
-
-Les services qui ne prennent pas en charge les clés de service fournissent généralement une API que vous pouvez utiliser dans votre application. La méthode de liaison de service ne configure pas automatiquement l'accès API pour votre application. Prenez soin d'examiner la documentation d'API de votre service et d'implémenter l'API dans votre application. 
+Les services qui ne prennent pas en charge les clés de service fournissent généralement une API que vous pouvez utiliser dans votre application. La méthode de liaison de service ne configure pas automatiquement l'accès API pour votre application. Prenez soin d'examiner la documentation d'API de votre service et d'implémenter l'API dans votre application.
 
 ## Ajout de services IBM Cloud à des clusters
 {: #bind-services}
@@ -54,16 +55,16 @@ Utilisez une liaison de service {{site.data.keyword.Bluemix_notm}} pour créer a
 
 Avant de commencer :
 - Vérifiez que vous disposez des rôles suivants :
-    - [Rôle d'accès de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster dans lequel vous souhaitez lier un service 
+    - [Rôle d'accès de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster dans lequel vous souhaitez lier un service
     - [Rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom Kubernetes dans lequel vous souhaitez lier le service
     - Pour les services Cloud Foundry : [Rôle Cloud Foundry **Développeur**](/docs/iam?topic=iam-mngcf#mngcf) pour l'espace dans lequel vous souhaitez mettre à disposition le service
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour ajouter un service {{site.data.keyword.Bluemix_notm}} dans votre cluster :
 
 1. [Créez une instance du service {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
     * Certains services {{site.data.keyword.Bluemix_notm}} ne sont disponibles que dans des régions éligibles. Vous pouvez lier un service à votre cluster uniquement si ce service est disponible dans la même région que votre cluster. En outre, si vous souhaitez créer une instance de service dans la zone Washington DC, vous devez utiliser l'interface CLI.
-    * **Pour les services activés par IAM** : vous devez créer l'instance de service dans le même groupe de ressources que votre cluster. Un service peut être créé dans un seul groupe de ressources que vous ne pouvez plus modifier par la suite. 
+    * **Pour les services activés par IAM** : vous devez créer l'instance de service dans le même groupe de ressources que votre cluster. Un service peut être créé dans un seul groupe de ressources que vous ne pouvez plus modifier par la suite.
 
 2. Vérifiez le type de service que vous avez créé et notez le **nom** de l'instance de service.
    - **Services Cloud Foundry :**
@@ -106,7 +107,7 @@ Pour ajouter un service {{site.data.keyword.Bluemix_notm}} dans votre cluster :
    ```
    {: pre}
 
-   Lorsque la création des données d'identification de service aboutit, une valeur confidentielle Kubernetes portant le nom `binding-<service_instance_name>` est créée.   
+   Lorsque la création des données d'identification de service aboutit, une valeur confidentielle Kubernetes portant le nom `binding-<service_instance_name>` est créée.  
 
    Exemple de sortie :
    ```
@@ -175,7 +176,7 @@ Les données d'identification d'une instance de service sont codées en base64 e
 
 Avant de commencer :
 -  Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `kube-system`.
-- [Connectez-vous à votre compte. Ciblez la région appropriée et, le cas échéant, le groupe de ressources. Définissez le contexte de votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Ajoutez un service {{site.data.keyword.Bluemix_notm}} à votre cluster](#bind-services).
 
 ### Montage de la valeur confidentielle sous forme de volume dans votre pod
@@ -217,7 +218,7 @@ Lorsque vous montez la valeur confidentielle sous forme de volume dans votre pod
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -372,7 +373,7 @@ Vous pouvez ajouter les données d'identification du service et d'autres paires 
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -450,16 +451,16 @@ Vous pouvez ajouter les données d'identification du service et d'autres paires 
    ```
    {: codeblock}
 
-8. Facultatif : par précaution, ajoutez le traitement d'erreurs à votre application au cas où la variable d'environnement `BINDING` ne serait pas correctement définie.  
-   
-   Exemple de code en Java : 
+8. Facultatif : par précaution, ajoutez le traitement d'erreurs à votre application au cas où la variable d'environnement `BINDING` ne serait pas correctement définie.
+
+   Exemple de code en Java :
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Exemple de code en Node.js :
    ```js
    if (!process.env.BINDING) {
@@ -468,4 +469,3 @@ Vous pouvez ajouter les données d'identification du service et d'autres paires 
    }
    ```
    {: codeblock}
-

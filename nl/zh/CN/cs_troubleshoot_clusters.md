@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
 subcollection: containers
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -58,6 +59,11 @@ subcollection: containers
 {: screen}
 
 ```
+找不到工作程序。请复查 {{site.data.keyword.Bluemix_notm}} 基础架构许可权。
+```
+{: screen}
+
+```
 {{site.data.keyword.Bluemix_notm}} Infrastructure 异常：用户没有必需的 {{site.data.keyword.Bluemix_notm}} Infrastructure 许可权来添加服务器
 ```
 {: screen}
@@ -73,34 +79,76 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 {: screen}
 
 {: tsCauses}
-您没有正确的许可权来创建集群。您需要以下许可权才能创建集群：
-*  IBM Cloud Infrastructure (SoftLayer) 的**超级用户**角色，或者至少具有[这些最低基础架构许可权](/docs/containers?topic=containers-access_reference#infra)。
-*  帐户级别的 {{site.data.keyword.containerlong_notm}} 的**管理员**平台管理角色。
-*  帐户级别的 {{site.data.keyword.registrylong_notm}} 的**管理员**平台管理角色。不要将 {{site.data.keyword.registryshort_notm}} 的策略限制为资源组级别。如果您是在 2018 年 10 月 4 日之前开始使用的 {{site.data.keyword.registrylong_notm}}，请确保[启用 {{site.data.keyword.Bluemix_notm}} IAM 策略实施](/docs/services/Registry?topic=registry-user#existing_users)。
-
-对于与基础架构相关的错误，在自动帐户链接启用后创建的 {{site.data.keyword.Bluemix_notm}} 现收现付帐户已设置有对 IBM Cloud Infrastructure (SoftLayer) 产品服务组合的访问权。您可以为集群购买基础架构资源，而无需额外配置。
-如果您有有效的现收现付帐户，但收到此错误消息，说明可能未使用正确的 IBM Cloud Infrastructure (SoftLayer) 帐户凭证来访问基础架构资源。
-
-具有其他 {{site.data.keyword.Bluemix_notm}} 帐户类型的用户必须配置其帐户以创建标准集群。以下是您可能具有不同帐户类型的情况的示例：
-* 您具有日期早于 {{site.data.keyword.Bluemix_notm}} 平台帐户的现有 IBM Cloud Infrastructure (SoftLayer) 帐户，并且想要继续使用此帐户。
-* 您想要使用不同的 IBM Cloud infrastructure (SoftLayer) 帐户来供应基础架构资源。例如，您可以设置团队 {{site.data.keyword.Bluemix_notm}} 帐户以将不同的基础架构帐户用于计费。
-
-如果您使用其他 IBM Cloud Infrastructure (SoftLayer) 帐户来供应基础架构资源，那么您的帐户中还可能有[孤立集群](#orphaned)。
+为区域和资源组设置的基础架构凭证缺少相应的[基础架构许可权](/docs/containers?topic=containers-access_reference#infra)。用户的基础架构许可权最常存储为区域和资源组的 [API 密钥](/docs/containers?topic=containers-users#api_key)。较少见的情况是，如果使用[其他 {{site.data.keyword.Bluemix_notm}} 帐户类型](/docs/containers?topic=containers-users#understand_infra)，那么您可能已 [手动设置基础架构凭证](/docs/containers?topic=containers-users#credentials)。如果您使用其他 IBM Cloud Infrastructure (SoftLayer) 帐户来供应基础架构资源，那么您的帐户中还可能有[孤立集群](#orphaned)。
 
 {: tsResolve}
 帐户所有者必须正确设置基础架构帐户凭证。凭证取决于使用的基础架构帐户的类型。
 
-1.  验证您是否有权访问基础架构帐户。登录到 [{{site.data.keyword.Bluemix_notm}} 控制台 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/)，然后在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击**经典基础架构**。如果看到菜单，说明您有权访问基础架构帐户。如果您没有访问权，那么将看到用于升级帐户的选项。
-2.  检查集群使用的是否是与现收现付帐户随附的基础架构帐户不同的基础架构帐户。
-    1.  在菜单 ![“菜单”图标](../icons/icon_hamburger.svg "“菜单”图标") 中，单击 **Kubernetes > 集群**。
-    2.  从表中选择您的集群。
-    3.  在**概述**选项卡中，检查**基础架构用户**字段。
-        * 如果看不到**基础架构用户**字段，那么会有一个链接的现收现付帐户，此帐户将相同的凭证用于基础架构和平台帐户。
-        * 如果看到**基础架构用户**字段，那么集群使用的基础架构帐户与现收现付帐户随附的基础架构帐户不同。这些不同的凭证应用于区域中的所有集群。
-3.  决定您想要具有哪种类型的帐户以确定如何对基础架构许可权问题进行故障诊断。对于大多数用户，缺省链接的现收现付帐户就已足够。
-    *  链接的现收现付 {{site.data.keyword.Bluemix_notm}} 帐户：[验证 API 密钥是否设置有正确的许可权](/docs/containers?topic=containers-users#default_account)。如果集群正在使用其他基础架构帐户，那么必须在此过程中取消设置这些凭证。
-    *  其他 {{site.data.keyword.Bluemix_notm}} 平台和基础架构帐户：验证您是否可以访问基础架构产品服务组合，以及是否[基础架构帐户凭证设置有正确的许可权](/docs/containers?topic=containers-users#credentials)。
-4.  如果在基础架构帐户中看不到集群的工作程序节点，那么可以检查是否[集群为孤立集群](#orphaned)。
+开始之前，[登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  确定用于区域和资源组的基础架构许可权的用户凭证。
+    1.  检查集群的区域和资源组的 API 密钥。
+        ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+        输出示例：
+        ```
+        Getting information about the API key owner for cluster <cluster_name>...
+        OK
+        Name                Email   
+        <user_name>         <name@email.com>
+        ```
+        {: screen}
+    2.  检查区域和资源组的基础架构帐户是否已手动设置为使用其他 IBM Cloud Infrastructure (SoftLayer) 帐户。
+        ```
+        ibmcloud ks credential-get --region <us-south>
+        ```
+        {: pre}
+
+        **凭证设置为使用其他帐户时的输出示例**。在这种情况下，用户的基础架构凭证将用于目标区域和资源组，即使在上一步中检索到的 API 密钥中存储了其他用户的凭证也是如此。
+        ```
+        OK
+        Infrastructure credentials for user name <1234567_name@email.com> set for resource group <resource_group_name>.
+        ```
+        {: screen}
+
+        **凭证未设置为使用其他帐户时的输出示例**。在这种情况下，在上一步中检索到的 API 密钥所有者具有用于区域和资源组的基础架构凭证。
+        ```
+        FAILED
+        No credentials set for resource group <resource_group_name>.: The user credentials could not be found. (E0051)
+        ```
+        {: screen}
+2.  验证用户拥有的基础架构许可权。
+    1.  列出区域和资源组的建议和必需的基础架构许可权。
+        ```
+        ibmcloud ks infra-permissions-get --region <region>
+        ```
+        {: pre}
+    2.  确保 [API 密钥的基础架构凭证所有者或手动设置的帐户具有正确的许可权](/docs/containers?topic=containers-users#owner_permissions)。
+    3.  如果需要，可以更改区域和资源组的 [API 密钥](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)或[手动设置](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)的基础架构凭证所有者。
+3.  测试更改后的许可权是否允许授权用户对集群执行基础架构操作。
+    1.  例如，您可尝试删除工作程序节点。
+        ```
+        ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+    2.  检查以确定是否除去了工作程序节点。
+        ```
+        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ```
+        {: pre}
+
+        成功除去工作程序节点时的输出示例。由于删除了工作程序节点，因此 `worker-get` 操作会失败。这说明基础架构许可权已正确设置。
+        ```
+        FAILED
+        The specified worker node could not be found. (E0011)
+        ```
+        {: screen}
+
+    3.  如果未除去工作程序节点，请查看[**状态**和**阶段状态**字段](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)以及[工作程序节点的常见问题](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues)以继续进行调试。
+    4.  如果手动设置了凭证，但在基础架构帐户中仍然看不到集群的工作程序节点，那么可以检查是否[集群为孤立集群](#orphaned)。
 
 <br />
 
@@ -159,7 +207,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 {: tsResolve}
 1. 列出集群中的工作程序节点，并验证工作程序节点是否未卡在 `Reloading` 状态。
    ```
-  ibmcloud ks workers <cluster_name_or_id>
+  ibmcloud ks workers --cluster <cluster_name_or_id>
   ```
    {: pre}
 
@@ -267,10 +315,9 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
     * 如果您有权访问集群，但无权访问集群所在的资源组：
       1. 不要将资源组设定为目标。如果已经将某个资源组设定为目标，请取消将其设定为目标：
         ```
-        ibmcloud target -g none
+        ibmcloud target --unset-resource-group
         ```
         {: pre}
-        此命令会失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
 
       2. 将集群设定为目标。
          ```
@@ -282,10 +329,9 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
         1. 请求您的帐户所有者为您分配对该集群的 [{{site.data.keyword.Bluemix_notm}}IAM 平台角色](/docs/containers?topic=containers-users#platform)。
         2. 不要将资源组设定为目标。如果已经将某个资源组设定为目标，请取消将其设定为目标：
           ```
-          ibmcloud target -g none
+          ibmcloud target --unset-resource-group
           ```
           {: pre}
-        此命令会失败，因为不存在名为 `none` 的资源组。但是，命令失败时，会自动取消将当前资源组设定为目标。
         3. 将集群设定为目标。
           ```
           ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
@@ -325,9 +371,9 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 机器遇到硬件问题时，机器标识可能会与 {{site.data.keyword.containerlong_notm}} 工作程序记录不一致。IBM Cloud Infrastructure (SoftLayer) 解决此问题时，组件可能会在服务无法识别的系统内更改。
 
 {: tsResolve}
-要使 {{site.data.keyword.containerlong_notm}} 重新识别到机器，请[重新装入裸机工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)。**注**：重新装入还会更新机器的[补丁版本](/docs/containers?topic=containers-changelog)。
+要使 {{site.data.keyword.containerlong_notm}} 重新识别到机器，请[重新装入裸机工作程序节点](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)。**注**：重新装入还会更新机器的[补丁版本](/docs/containers?topic=containers-changelog)。
 
-您还可以[删除裸机工作程序节点](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)。**注**：裸机实例按月计费。
+您还可以[删除裸机工作程序节点](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)。**注**：裸机实例按月计费。
 
 <br />
 
@@ -373,12 +419,12 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
     3.  在基础架构导航窗格中，单击**设备 > 设备列表**。
     4.  搜索您先前记下的工作程序节点标识。
     5.  如果找不到工作程序节点标识，说明工作程序节点未供应到此基础架构帐户中。请切换到其他基础架构帐户，然后重试。
-3.  使用 `ibmcloud ks credential-set` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)将基础架构凭证更改为集群工作程序节点供应到其中的帐户，即您在上一步中找到的帐户。如果您不再有权访问基础架构凭证，因而无法获得这些凭证，那么必须开具 {{site.data.keyword.Bluemix_notm}} 支持用例来除去孤立集群。
+3.  使用 `ibmcloud ks credential-set` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)将基础架构凭证更改为集群工作程序节点供应到其中的帐户，即您在上一步中找到的帐户。如果您不再有权访问基础架构凭证，因而无法获得这些凭证，那么必须打开一个 {{site.data.keyword.Bluemix_notm}} 支持案例来除去孤立集群。
     {: note}
-4.  [删除集群](/docs/containers?topic=containers-clusters#remove)。
+4.  [删除集群](/docs/containers?topic=containers-remove)。
 5.  如果需要，请将基础架构凭证重置为先前的帐户。请注意，如果创建集群使用的基础架构帐户不同于切换到的帐户，那么可能会使这些集群变为孤立集群。
-    * 要将凭证设置为其他基础架构帐户，请使用 `ibmcloud ks credential-set` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)。
-    * 要使用 {{site.data.keyword.Bluemix_notm}} 现收现付帐户随附的缺省凭证，请使用 `ibmcloud ks credential-unset` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)。
+    * 要将凭证设置为其他基础架构帐户，请使用 `ibmcloud ks credential-set` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)。
+    * 要使用 {{site.data.keyword.Bluemix_notm}} 现收现付帐户随附的缺省凭证，请使用 `ibmcloud ks credential-unset --region <region>` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)。
 
 <br />
 
@@ -398,13 +444,13 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 主节点与工作程序节点之间的 OpenVPN 连接工作不正常。
 
 {: tsResolve}
-1. 如果有多个 VLAN 用于一个集群、在同一 VLAN 上有多个子网或者有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法启用 VRF 或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，或者可以请求帐户所有者启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get` [命令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+1. 如果有多个 VLAN 用于一个集群，有多个子网位于同一 VLAN 上或有一个多专区集群，那么必须针对 IBM Cloud Infrastructure (SoftLayer) 帐户启用[虚拟路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)，从而使工作程序节点可以在专用网络上相互通信。要启用 VRF，请[联系 IBM Cloud Infrastructure (SoftLayer) 客户代表](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果无法或不想启用 VRF，请启用 [VLAN 生成](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。要执行此操作，您需要有**网络 > 管理网络 VLAN 生成**[基础架构许可权](/docs/containers?topic=containers-users#infra_access)，也可以请求帐户所有者来启用 VLAN 生成。要检查是否已启用 VLAN 生成，请使用 `ibmcloud ks vlan-spanning-get --region <region>` [命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
 2. 重新启动 OpenVPN 客户机 pod。
   ```
   kubectl delete pod -n kube-system -l app=vpn
   ```
   {: pre}
-3. 如果仍看到相同的错误消息，说明 VPN pod 所在的工作程序节点可能运行状况欠佳。要重新启动 VPN pod 并将其重新安排到其他工作程序节点，请[对工作程序节点执行 cordon、drain 和 reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)（即，对 VPN pod 所在的工作程序节点执行这些命令）。
+3. 如果仍看到相同的错误消息，说明 VPN pod 所在的工作程序节点可能运行状况欠佳。要重新启动 VPN pod 并将其重新安排到其他工作程序节点，请[对工作程序节点执行 cordon、drain 和 reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)（即，对 VPN pod 所在的工作程序节点执行这些命令）。
 
 <br />
 
@@ -413,7 +459,7 @@ IAM 令牌交换请求失败：无法创建 IMS 门户网站令牌，因为没�
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-运行 `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，您将会看到以下消息。
+运行 `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` 时，您会看到以下消息。
 
 ```
 Multiple services with the same name were found.
@@ -427,7 +473,7 @@ Multiple services with the same name were found.
 {: tsResolve}
 在 `ibmcloud ks cluster-service-bind` 命令中，请使用服务 GUID，而不要使用服务实例名称。
 
-1. [登录到包含要绑定的服务实例的区域](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
+1. [登录到包含要绑定的服务实例的 {{site.data.keyword.Bluemix_notm}} 区域](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
 
 2. 获取服务实例的 GUID。
   ```
@@ -443,7 +489,7 @@ Multiple services with the same name were found.
   {: screen}
 3. 再次将服务绑定到集群。
   ```
-  ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_GUID>
+  ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
   ```
   {: pre}
 
@@ -454,7 +500,7 @@ Multiple services with the same name were found.
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-运行 `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，您将会看到以下消息。
+运行 `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` 时，您会看到以下消息。
 
 ```
 Binding service to a namespace...
@@ -501,7 +547,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 
 4. 稍等几分钟，然后让用户重试绑定服务。
 
-5. 如果这无法解决此问题，说明 {{site.data.keyword.Bluemix_notm}} IAM 许可权不同步，您无法自行解决此问题。请通过打开支持案例来[联系 IBM 支持人员](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。确保提供集群标识、用户标识和服务实例标识。
+5. 如果这无法解决此问题，说明 {{site.data.keyword.Bluemix_notm}} IAM 许可权不同步，您无法自行解决此问题。请通过打开支持案例来[联系 IBM 支持人员](/docs/get-support?topic=get-support-getting-customer-support)。确保提供集群标识、用户标识和服务实例标识。
    1. 检索集群标识。
       ```
       ibmcloud ks clusters
@@ -522,7 +568,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: #cs_service_keys}
 
 {: tsSymptoms}
-运行 `ibmcloud ks cluster-service-bind <cluster_name> <namespace> <service_instance_name>` 时，您将会看到以下消息。
+运行 `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>` 时，您会看到以下消息。
 
 ```
 This service doesn't support creation of keys
@@ -579,8 +625,8 @@ This service doesn't support creation of keys
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.12.7
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.12.7
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
   ```
   {: screen}
 
@@ -642,7 +688,7 @@ This service doesn't support creation of keys
 
 如果已删除 {{site.data.keyword.IBM_notm}} 集群管理资源，请刷新 Kubernetes 主节点以将其复原。
 
-1.  [登录到您的帐户。将相应的区域和（如果适用）资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+1.  [登录到您的帐户。如果适用，请将相应的资源组设定为目标。为集群设置上下文。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 2.  刷新 Kubernetes 主节点以将其复原。
 
     ```
@@ -669,14 +715,42 @@ This service doesn't support creation of keys
 
 可以尝试下列其中一个解决方案：
   - 通过运行 `ibmcloud ks clusters` 来检查集群的阶段状态。然后检查以确保通过运行 `ibmcloud ks workers --cluster <cluster_name>` 部署了工作程序节点。
-  - 检查以确定 VLAN 是否有效。要使 VLAN 有效，必须将 VLAN 与可使用本地磁盘存储来托管工作程序的基础架构相关联。您可以通过运行 `ibmcloud ks vlans --zone <zone>` 来[列出 VLAN](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)，如果 VLAN 未显示在列表中，说明 VLAN 无效。请选择其他 VLAN。
+  - 检查以确定 VLAN 是否有效。要使 VLAN 有效，必须将 VLAN 与可使用本地磁盘存储来托管工作程序的基础架构相关联。您可以通过运行 `ibmcloud ks vlans --zone <zone>` 来[列出 VLAN](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)，如果 VLAN 未显示在列表中，说明 VLAN 无效。请选择其他 VLAN。
 
 <br />
 
 
+## 集群创建错误，无法从注册表中拉取映像
+{: #ts_image_pull_create}
+
+{: tsSymptoms}
+创建集群时，收到了类似于以下内容的错误消息。
 
 
-## 无法从注册表中拉取映像
+```
+由于无法创建 IAM 访问策略，因此集群无法从 IBM Cloud Container Registry“icr.io”域中拉取映像。请确保您具有对 IBM Cloud Container Registry 的 IAM 管理员平台角色。然后，通过运行“ibmcloud ks cluster-pre-secret-apply”以使用注册表的 IAM 凭证创建映像拉取私钥。
+```
+{: screen}
+
+{: tsCauses}
+在集群创建期间，会为集群创建服务标识，并为该标识分配对 {{site.data.keyword.registrylong_notm}} 的**读取者**服务访问策略。然后，会生成此服务标识的 API 密钥，并将其存储在[映像拉取私钥](/docs/containers?topic=containers-images#cluster_registry_auth)中，以授权集群从 {{site.data.keyword.registrylong_notm}} 拉取映像。
+
+要在集群创建期间为服务标识成功分配**读取者**服务访问策略，您必须具有对 {{site.data.keyword.registrylong_notm}} 的**管理员**平台访问策略。
+
+{: tsResolve}
+
+步骤：
+1.  确保帐户所有者为您授予对 {{site.data.keyword.registrylong_notm}} 的**管理员**角色。
+    ```
+        ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
+        ```
+    {: pre}
+2.  [使用 `ibmcloud ks cluster-pull-secret-apply` 命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)以使用相应的注册表凭证重新创建映像拉取私钥。
+
+<br />
+
+
+## 未能从注册表中拉取映像，发生 `ImagePullBackOff` 或授权错误
 {: #ts_image_pull}
 
 {: tsSymptoms}
@@ -773,9 +847,9 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 
 输出示例：
         ```
-    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked
-    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false
+    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
+    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false   
+    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
     ```
     {: screen}
 2.  验证是否为该服务标识至少分配了一个对 [{{site.data.keyword.registryshort_notm}} 的 {{site.data.keyword.Bluemix_notm}} IAM **读取者**服务访问角色策略](/docs/services/Registry?topic=registry-user#create)。 如果服务标识没有**读取者**服务角色，请[编辑 IAM 策略](/docs/iam?topic=iam-serviceidpolicy#access_edit)。如果策略正确，请继续执行下一步以查看凭证是否有效。
@@ -785,17 +859,17 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     {: pre}
 
 输出示例：
-        ```
-    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5
-    Roles:       Reader
-    Resources:
-                  Service Name       container-registry
-                  Service Instance
-                  Region
-                  Resource Type      namespace
-                  Resource           <registry_namespace>
+        ```              
+    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
+    Roles:       Reader   
+    Resources:                            
+                  Service Name       container-registry      
+                  Service Instance         
+区域                  
+                  Resource Type      namespace      
+                  Resource           <registry_namespace>  
     ```
-    {: screen}
+    {: screen}  
 3.  检查映像拉取私钥凭证是否有效。
     1.  获取映像拉取私钥配置。如果 pod 不在 `default` 名称空间中，请包含 `-n` 标志。
         ```
@@ -833,8 +907,8 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
             ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
             ```
             {: pre}
-        2.  在 `default` Kubernetes 名称空间中重新创建部署。如果仍看到授权错误消息，请使用新映像拉取私钥重复步骤 1-5。如果您仍无法登录，请[在 Slack 上联系 IBM 团队，或者开具 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
-    6.  如果登录成功，请在本地拉取映像。如果命令失败并返回 `access denied` 错误，说明注册表帐户与集群不在同一 {{site.data.keyword.Bluemix_notm}} 帐户中。请[创建映像拉取私钥以访问其他帐户中的映像](/docs/containers?topic=containers-images#other_registry_accounts)。如果可以将映像拉出到本地计算机，那么说明 API 密钥具有正确的许可权，但集群中的 API 设置不正确。您无法解决此问题。请[在 Slack 上联系 IBM 团队，或者开具 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
+        2.  在 `default` Kubernetes 名称空间中重新创建部署。如果仍看到授权错误消息，请使用新映像拉取私钥重复步骤 1-5。如果您仍无法登录，请[在 Slack 上联系 IBM 团队，或者打开一个 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
+    6.  如果登录成功，请在本地拉取映像。如果命令失败并返回 `access denied` 错误，说明注册表帐户与集群不在同一 {{site.data.keyword.Bluemix_notm}} 帐户中。请[创建映像拉取私钥以访问其他帐户中的映像](/docs/containers?topic=containers-images#other_registry_accounts)。如果可以将映像拉出到本地计算机，那么说明 API 密钥具有正确的许可权，但集群中的 API 设置不正确。您无法解决此问题。请[在 Slack 上联系 IBM 团队，或者打开一个 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
         ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```
@@ -878,13 +952,13 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
     ```
     {: screen}
 4.  将注册表域名与在容器映像中指定的域名进行比较。例如，如果映像拉取私钥授权访问 `registry.ng.bluemix.net` 域，但指定的映像存储在 `registry.eu-de.bluemix.net` 中，那么必须针对 `registry.eu-de.bluemix.net` [创建要在映像拉取私钥中使用的令牌](/docs/containers?topic=containers-images#token_other_regions_accounts)。
-5.  使用映像拉取私钥中的 `username` 和 `password` 从本地计算机登录到注册表。如果无法登录，说明令牌有您无法解决的问题。请[在 Slack 上联系 IBM 团队，或者开具 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
+5.  使用映像拉取私钥中的 `username` 和 `password` 从本地计算机登录到注册表。如果无法登录，说明令牌有您无法解决的问题。请[在 Slack 上联系 IBM 团队，或者打开一个 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
         ```
     docker login -u token -p <password_string> registry.<region>.bluemix.net
     ```
     {: pre}
-6.  如果登录成功，请在本地拉取映像。如果命令失败并返回 `access denied` 错误，说明注册表帐户与集群不在同一 {{site.data.keyword.Bluemix_notm}} 帐户中。请[创建映像拉取私钥以访问其他帐户中的映像](/docs/containers?topic=containers-images#token_other_regions_accounts)。如果命令成功，请[在 Slack 上联系 IBM 团队，或者开具 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
-    ```
+6.  如果登录成功，请在本地拉取映像。如果命令失败并返回 `access denied` 错误，说明注册表帐户与集群不在同一 {{site.data.keyword.Bluemix_notm}} 帐户中。请[创建映像拉取私钥以访问其他帐户中的映像](/docs/containers?topic=containers-images#token_other_regions_accounts)。如果命令成功，请[在 Slack 上联系 IBM 团队，或者打开一个 {{site.data.keyword.Bluemix_notm}} 支持案例](#clusters_getting_help)。
+        ```
     docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
     ```
     {: pre}
@@ -945,7 +1019,7 @@ kubectl get nodes
     2.  调整工作程序池的大小，以将更多节点添加到池所跨的每个专区。
 
         ```
-        ibmcloud ks worker-pool-resize <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ibmcloud ks worker-pool-resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
@@ -958,7 +1032,7 @@ kubectl get nodes
         ```
         {: pre}
 
-    2.  如果请求超过可用容量，那么使用可满足请求的工作程序节点[添加新的工作程序池](/docs/containers?topic=containers-clusters#add_pool)。
+    2.  如果请求超过可用容量，那么使用可满足请求的工作程序节点[添加新的工作程序池](/docs/containers?topic=containers-add_workers#add_pool)。
 
 6.  如果在完全部署工作程序节点后，pod 仍然保持 **pending** 状态，请查看 [Kubernetes 文档 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) 以进一步对 pod 的暂挂状态进行故障诊断。
 
@@ -1060,7 +1134,7 @@ pod 运行状况良好，但被意外除去或卡在重新启动循环中。
 Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正确。
 
 {: tsResolve}
-要对 Helm 图表进行故障诊断，请执行以下操作：
+要对 Helm chart 进行故障诊断，请执行以下操作：
 
 1. 列出 Helm 实例中当前可用的存储库。
 
@@ -1069,13 +1143,13 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
     ```
     {: pre}
 
-2. 在输出中，验证 {{site.data.keyword.Bluemix_notm}} 存储库 `ibm` 的 URL 是否为 `https://registry.bluemix.net/helm/ibm`。
+2. 在输出中，验证 {{site.data.keyword.Bluemix_notm}} 存储库 `ibm` 的 URL 是否为 `https://icr.io/helm/iks-charts`。
 
     ```
     NAME    URL
     stable  https://kubernetes-charts.storage.googleapis.com
     local   http://127.0.0.1:8888/charts
-    ibm     https://registry.bluemix.net/helm/ibm
+    ibm     https://icr.io/helm/iks-charts
     ```
     {: screen}
 
@@ -1091,8 +1165,8 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
         2. 重新添加 {{site.data.keyword.Bluemix_notm}} 存储库。
 
             ```
-            helm repo add ibm  https://registry.bluemix.net/helm/ibm
-            ```
+   helm repo add iks-charts https://icr.io/helm/iks-charts
+   ```
             {: pre}
 
     * 如果该 URL 正确，请从相应存储库中获取最新更新。
@@ -1117,7 +1191,7 @@ Helm 实例中 {{site.data.keyword.Bluemix_notm}} 存储库的 URL 可能不正�
 
 {: tsSymptoms}
 
-尝试安装 Helm tiller 或希望从公共注册表（例如 DockerHub）部署映像时，安装失败，并显示类似于以下内容的错误：
+尝试安装 Helm Tiller 或要通过公共注册表（如 Dockerhub）部署映像时，安装失败，并显示类似于以下内容的错误：
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
@@ -1129,7 +1203,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 
 {: tsResolve}
 - 如果您有定制防火墙或设置了定制 Calico 策略，请允许工作程序节点与存储映像的容器注册表之间的出站和入站网络流量。如果映像存储在 {{site.data.keyword.registryshort_notm}} 中，请查看[允许集群访问基础架构资源和其他服务](/docs/containers?topic=containers-firewall#firewall_outbound)中的必需端口。
-- 如果是通过仅启用专用服务端点创建的专用集群，那么可以为该集群[启用公共服务端点](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)。如果要在不打开公共连接的情况下在专用集群中安装 Helm chart，那么可以[使用 Tiller](/docs/containers?topic=containers-helm#private_local_tiller) 或[不使用 Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller) 来安装 Helm。
+- 如果是通过仅启用专用服务端点创建的专用集群，那么可以为该集群[启用公共服务端点](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)。如果要在不打开公共连接的情况下在专用集群中安装 Helm chart，那么可以[使用 Tiller](/docs/containers?topic=containers-helm#private_local_tiller) 或[不使用 Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller) 来安装 Helm。
 
 <br />
 
@@ -1140,7 +1214,7 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
 集群仍然有问题吗？
 {: shortdesc}
 
--  在终端中，在 `ibmcloud` CLI 和插件更新可用时，会通知您。请确保保持 CLI 为最新，从而可使用所有可用命令和标志。
+-  在终端中，当有 `ibmcloud` CLI 和插件的更新可用时，您会收到通知。务必使 CLI 保持最新，以便您可以使用所有可用的命令和标志。
 -   要查看 {{site.data.keyword.Bluemix_notm}} 是否可用，请[检查 {{site.data.keyword.Bluemix_notm}} 状态页面 ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://cloud.ibm.com/status?selected=status)。
 -   在 [{{site.data.keyword.containerlong_notm}} Slack ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://ibm-container-service.slack.com) 中发布问题。
     如果未将 IBM 标识用于 {{site.data.keyword.Bluemix_notm}} 帐户，请针对此 Slack [请求邀请](https://bxcs-slack-invite.mybluemix.net/)。
@@ -1149,6 +1223,6 @@ Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = 
     -   如果您有关于使用 {{site.data.keyword.containerlong_notm}} 开发或部署集群或应用程序的技术问题，请在 [Stack Overflow ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) 上发布您的问题，并使用 `ibm-cloud`、`kubernetes` 和 `containers` 标记您的问题。
     -   有关服务的问题和入门指示信息，请使用 [IBM Developer Answers ![外部链接图标](../icons/launch-glyph.svg "外部链接图标")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 论坛。请加上 `ibm-cloud` 和 `containers` 标记。
     有关使用论坛的更多详细信息，请参阅[获取帮助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
--   通过开具案例来联系 IBM 支持人员。要了解有关开具 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。
-您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
+-   通过打开案例来联系 IBM 支持人员。要了解有关打开 IBM 支持案例或有关支持级别和案例严重性的信息，请参阅[联系支持人员](/docs/get-support?topic=get-support-getting-customer-support)。报告问题时，请包含集群标识。要获取集群标识，请运行 `ibmcloud ks clusters`。您还可以使用 [{{site.data.keyword.containerlong_notm}} 诊断和调试工具](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)从集群收集相关信息并导出这些信息，以便与 IBM 支持人员共享。
 {: tip}
+

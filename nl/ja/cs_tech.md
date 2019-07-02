@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}} テクノロジー
@@ -124,7 +126,7 @@ Docker の基本概念についての説明:
 {{site.data.keyword.containerlong_notm}} 上で実行される Kubernetes クラスターでは、コンテナー化アプリは、ワーカー・ノードと呼ばれるコンピュート・ホスト上でホストされます。 これらのアプリはポッド内で実行され、ポッドがワーカー・ノード上でホストされます。 ワーカー・ノードは Kubernetes マスターによって管理されます。 Kubernetes マスターとワーカー・ノードの間の通信セットアップは、IBM Cloud インフラストラクチャー (SoftLayer) ネットワークのセットアップ方法に依存します。つまり、パブリック・サービス・エンドポイントを使用したアカウントなのか、パブリックおよびプライベート・サービス・エンドポイントを使用した VRF 対応アカウントなのかによって異なります。
 {: shortdesc}
 
-次の図は、[パブリック・サービス・エンドポイントのみが有効化](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)されている場合のアカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
+次の図は、[パブリック・サービス・エンドポイントのみが有効化](/docs/containers?topic=containers-plan_clusters#workeruser-master)されている場合のアカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes アーキテクチャー">
@@ -132,7 +134,7 @@ Docker の基本概念についての説明:
 </figure>
 </p>
 
-次の図は、[パブリックおよびプライベート・サービス・エンドポイントが有効化](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)されている場合の VRF 対応アカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
+次の図は、[パブリックおよびプライベート・サービス・エンドポイントが有効化](/docs/containers?topic=containers-plan_clusters#workeruser-master)されている場合の VRF 対応アカウントで、クラスターの各コンポーネントがどのように相互作用するのかを示しています。
 
 <p>
 <figure>
@@ -259,3 +261,53 @@ Kubernetes マスターとワーカー・ノードの違いは何ですか? こ�
 
 {{site.data.keyword.containerlong_notm}} を他の製品やサービスと一緒に使用する方法をご覧になりたいですか? こちらで[統合](/docs/containers?topic=containers-supported_integrations#supported_integrations)についていくつか紹介しています。
 {: tip}
+
+## サービスの制限
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} と Kubernetes オープン・ソース・プロジェクトは、セキュリティー、利便性、および基本的な機能を確保するためのデフォルトのサービス設定と制限を備えています。一部の制限は変更でき、その場合はそのように注記されています。{{site.data.keyword.containerlong_notm}} の以下の制限に達することが予想される場合は、[内部 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) または[外部の Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) で IBM チームにお問い合わせください。
+{: shortdesc}
+
+<table summary="この表には、{{site.data.keyword.containerlong_notm}} の制限に関する情報が含まれています。列は左から右に読みます。1 列目は制限のタイプ、2 列目はその制限の説明です。">
+<caption>{{site.data.keyword.containerlong_notm}} の制限</caption>
+<thead>
+  <tr>
+    <th>タイプ</th>
+    <th>説明</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>API の速度制限</td>
+    <td>固有のソース IP アドレスごとに、{{site.data.keyword.containerlong_notm}} API に対して 10 秒ごとに 100 個の要求。</td>
+  </tr>
+  <tr>
+    <td>ワーカー・ノードの容量</td>
+    <td>ワーカー・ノードは、コンピュート・リソースの[フレーバーの選択](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)で使用可能です。</td>
+  </tr>
+  <tr>
+    <td>ワーカー・ノードのホスト・アクセス</td>
+    <td>セキュリティーのため、ワーカー・ノードのコンピュート・ホストに SSH で接続することはできません。</td>
+  </tr>
+  <tr>
+    <td>ワーカー・ノードの最大数</td>
+    <td>クラスターごとに 900 個を超える予定の場合は、まず[内部 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) または[外部の Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) で IBM チームにお問い合わせください。<br><br>データ・センターあたりのインスタンス数または毎月のインスタンスの注文数に対する IBM Cloud インフラストラクチャー (SoftLayer) の容量の制限を確認する場合は、IBM Cloud インフラストラクチャー (SoftLayer) の担当者にお問い合わせください。</td>
+  </tr>
+  <tr>
+    <td>ポッドの最大数</td>
+    <td>ワーカー・ノードごとに 110 個。<br><br>ポッドの数には、ワーカー・ノードで実行される `kube-system` ポッドと `ibm-system` ポッドが含まれます。パフォーマンスを高めるために、コンピュート・コアごとに実行するポッドの数を制限して、ワーカー・ノードを過剰に使用しないようにすることを検討してください。例えば、`b3c.4x16` フレーバーのワーカー・ノードでは、ワーカー・ノードの合計容量の 75% 以下を使用する、コアあたり 10 個のポッドを実行できます。</td>
+  </tr>
+  <tr>
+    <td>Kubernetes サービスの最大数</td>
+    <td>クラスター内の Kubernetes サービスに割り当てることができる、172.21.0.0/16 の範囲のクラスターあたり 65,000 個の IP。</td>
+  </tr>
+  <tr>
+    <td>Ingress アプリケーション・ロード・バランサー (ALB) トラフィック</td>
+    <td>1 秒あたり 32,768 件の接続数。<br><br>受信トラフィックがこの数を超える場合、増加したワークロードを処理するために、クラスターの [ALB レプリカの数をスケールアップ](/docs/containers?topic=containers-ingress#scale_albs)します。</td>
+  </tr>
+  <tr>
+    <td>ストレージ・ボリューム</td>
+    <td>アカウントあたりの IBM Cloud インフラストラクチャー (SoftLayer) のファイル・ストレージ・インスタンスおよびブロック・ストレージ・インスタンスのボリュームの合計が 250 個。<br><br>この数量を超える数をマウントすると、永続ボリュームをプロビジョンするときに「容量不足」のメッセージが表示されるため、IBM Cloud インフラストラクチャー (SoftLayer) の担当者に問い合わせる必要があります。その他の FAQ については、[ファイル・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-)と[ブロック・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-)の資料を参照してください。</td>
+  </tr>
+</tbody>
+</table>

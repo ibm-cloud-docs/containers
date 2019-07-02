@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # 使用受管附加组件添加服务
 {: #managed-addons}
@@ -42,12 +43,12 @@ subcollection: containers
 ## 添加受管附加组件
 {: #adding-managed-add-ons}
 
-要在集群中启用受管附加组件，请使用 [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` 命令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)。启用受管附加组件时，支持的工具版本（包括所有 Kubernetes 资源）将自动安装在集群中。请参阅每个受管附加组件的文档，以了解集群必须满足才能安装受管附加组件的先决条件。
+要在集群中启用受管附加组件，请使用 [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` 命令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)。启用受管附加组件时，支持的工具版本（包括所有 Kubernetes 资源）将自动安装在集群中。请参阅每个受管附加组件的文档，以了解集群必须满足才能安装受管附加组件的先决条件。
 
 有关每个附加组件的先决条件的更多信息，请参阅：
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## 更新受管附加组件
 {: #updating-managed-add-ons}
@@ -57,7 +58,7 @@ subcollection: containers
 
 1. 检查附加组件是否为最新版本。可以更新使用 `* (<version> latest)` 表示的任何附加组件。
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,8 +66,8 @@ subcollection: containers
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
@@ -86,7 +87,7 @@ subcollection: containers
 
    2. 保存通过这些 CRD 创建的任何资源。
 
-4. 对于 Knative 为可选：如果修改了以下任何资源，请获取 YAML 文件并将其保存到本地计算机。请注意，如果修改了其中任何资源，但希望改为使用安装的缺省值，那么可以删除该资源。几分钟后，该资源会使用安装的缺省值进行重新创建。
+4. 对于 Knative 为可选：如果修改了以下任何资源，请获取 YAML 文件并将其保存到本地计算机。如果修改了其中任何资源，但希望改为使用安装的缺省值，那么可以删除该资源。几分钟后，该资源会使用安装的缺省值进行重新创建。
   <table summary="Knative 资源表">
   <caption>Knative 资源</caption>
   <thead><tr><th>资源名称</th><th>资源类型</th><th>名称空间</th></tr></thead>
@@ -112,14 +113,14 @@ subcollection: containers
 5. 如果启用了 `istio-sample-bookinfo` 和 `istio-extras` 附加组件，请将其禁用。
    1. 禁用 `istio-sample-bookinfo` 附加组件。
       ```
-  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
-  ```
+      ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+      ```
       {: pre}
 
    2. 禁用 `istio-extras` 附加组件。
       ```
-  ibmcloud ks cluster-addon-disable istio-extras --cluster <cluster_name_or_ID>
-  ```
+      ibmcloud ks cluster-addon-disable istio-extras --cluster <cluster_name_or_ID>
+      ```
       {: pre}
 
 6. 禁用附加组件。
@@ -128,13 +129,13 @@ subcollection: containers
    ```
    {: pre}
 
-7. 在继续执行下一步之前，请验证是否除去了附加组件名称空间内附加组件中的资源，或是否除去了附加组件名称空间本身。
+7. 在继续执行下一步之前，请验证是除去了附加组件名称空间内附加组件中的资源，还是除去了附加组件名称空间本身。
    * 例如，如果更新了 `istio-extras` 附加组件，那么可以验证是否从 `istio-system` 名称空间中除去了 `grafana`、`kiali` 和 `jaeger-*` 服务。
      ```
    kubectl get svc -n istio-system
    ```
      {: pre}
-   * 例如，如果更新了 `knative` 附加组件，那么可以验证是否删除了 `knative-serving`、`knative-monitoring`、`knative-eventing`、`knative-build` 和 `istio-system` 名称空间。名称空间在被完全删除前的几分钟内，其 **STATUS** 可能为 `Terminating`。
+   * 例如，如果更新了 `knative` 附加组件，那么可以验证是否删除了 `knative-serving`、`knative-monitoring`、`knative-eventing`、`knative-build` 和 `istio-system` 名称空间。名称空间在被删除前的几分钟内，其 **STATUS** 可能为 `Terminating`。
      ```
      kubectl get namespaces -w
      ```
@@ -177,3 +178,10 @@ subcollection: containers
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. 对于 Istio 为可选：如果在网关配置文件中使用 TLS 部分，那么必须删除并重新创建网关，以便 Envoy 可以访问这些私钥。
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

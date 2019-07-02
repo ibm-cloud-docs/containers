@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-05-31"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Impostazione della priorità dei pod
 {: #pod_priority}
@@ -91,7 +93,7 @@ Per impostare la priorità dei pod, devi utilizzare una classe di priorità.
 {: shortdesc}
 
 Prima di iniziare:
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
 * [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 
@@ -142,7 +144,8 @@ Per utilizzare una classe di priorità:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo la classe di priorità 1 nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`)</br></br>. Le [classi di priorità predefinite](#default_priority_class) non impostano un `globalDefault`. Se hai creato delle altri classi di priorità nel tuo cluster, puoi eseguire una verifica per assicurarti che non impostino un `globalDefault` eseguendo `kubectl describe priorityclass <name>`.</td>
+    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo la classe di priorità 1 nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`)</br></br>.
+    Le [classi di priorità predefinite](#default_priority_class) non impostano un `globalDefault`. Se hai creato delle altri classi di priorità nel tuo cluster, puoi eseguire una verifica per assicurarti che non impostino un `globalDefault` eseguendo `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
@@ -172,7 +175,7 @@ Assegna una classe di priorità alla tua specifica di pod per impostare la prior
 {: shortdesc}
 
 Prima di iniziare:
-* [Accedi al tuo account. Specifica la regione appropriata e, se applicabile, il gruppo di risorse. Imposta il contesto per il tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+* [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) nello spazio dei nomi in cui vuoi distribuire i pod.
 * [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 * [Comprendi come funziona la pianificazione delle priorità](#priority_scheduling), poiché la priorità può prevenire i pod esistenti e influenzare il modo in cui vengono utilizzate le risorse del tuo cluster.
@@ -221,7 +224,7 @@ Per assegnare la priorità ai tuoi pod:
         spec:
           containers:
           - name: ibmliberty
-            image: registry.bluemix.net/ibmliberty:latest
+            image: icr.io/ibmliberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

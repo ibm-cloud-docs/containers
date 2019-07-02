@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -62,8 +63,8 @@ subcollection: containers
 <dl>
 <dt><a href="#platform">{{site.data.keyword.Bluemix_notm}} IAM 플랫폼 및 서비스 역할</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}}는 {{site.data.keyword.Bluemix_notm}} Identity and Access Management(IAM) 플랫폼 및 서비스 역할을 사용하여 클러스터에 대한 사용자 액세스 권한을 부여합니다.
-<ul><li>**플랫폼**: 플랫폼 역할은 사용자가 {{site.data.keyword.containerlong_notm}} API, 콘솔 및 CLI(`ibmcloud ks`)를 사용하여 클러스터 인프라에서 사용자가 수행할 수 있는 조치를 판별합니다. 플랫폼 역할은 Kubernetes API에 대한 액세스를 부여하지 않습니다. 이러한 역할에 대한 정책은 리소스 그룹, 지역 또는 클러스터 인스턴스별로 설정할 수 있습니다. IAM 플랫폼 역할은 사용자에게 클러스터에 대해 인프라 조치를 수행할 수 있도록 권한 부여하지만 IBM Cloud 인프라(SoftLayer) 리소스에 대한 액세스 권한은 부여하지 않습니다. IBM Cloud 인프라(SoftLayer) 리소스에 대한 액세스 권한은 [지역에 대해 설정된 API 키](#api_key)가 결정합니다. 플랫폼 역할에 의해 허용되는 조치에 대한 예로는 클러스터 작성 또는 제거, 클러스터에 서비스 바인딩, 네트워킹 및 스토리지 리소스 관리, 추가 작업자 노드 추가 등이 있습니다.<br><br>사용자에게 플랫폼 역할만 지정하면 클러스터 내의 Kubernetes 리소스와 상호작용할 수 없습니다. 그러나 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)을 계속 수행할 수 있습니다. 그러면 [사용자 정의 RBAC 정책](/docs/containers?topic=containers-users#role-binding)을 사용하여 Kubernetes 선택 조치를 수행할 수 있는 권한을 사용자에게 부여할 수 있습니다. 현재 조직이 사용자 정의 RBAC 정책을 사용하여 Kubernetes 액세스를 제어하고 서비스 역할 대신 사용자 정의 RBAC를 계속 사용할 계획이면 이 작업을 수행할 수 있습니다.</li>
-<li>**서비스**: 서비스 역할은 사용자가 클러스터 내에서 제공하는 해당 Kubernetes RBAC 정책을 부여합니다. 이와 같이, 서비스 역할은 Kubernetes API, 대시보드, CLI(`kubectl`)에 대한 액세스를 부여합니다. 서비스 역할에 대한 정책은 리소스 그룹, 지역 또는 클러스터 인스턴스별로 범위 지정할 수 있습니다. 또한 모두, 개별 또는 지역 전체 클러스터에 있는 Kubernetes 네임스페이스에 대한 서비스 역할을 범위 지정할 수도 있습니다. 서비스 역할을 네임스페이스로 범위 지정하는 경우, 정책을 리소스 그룹에 적용하거나 플랫폼 역할을 동시에 지정할 수 없습니다. 서비스 역할에 의해 허용되는 조치의 예를 들면 앱 배치 작성, 네임스페이스 추가 또는 configmap 설정 등이 있습니다.<br><br>사용자에게 서비스 역할만 지정하면 임의의 {{site.data.keyword.containerlong_notm}} 리소스를 보거나 상호작용할 수 없습니다. 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.</li></ul></dd>
+<ul><li>**플랫폼**: 플랫폼 역할은 사용자가 {{site.data.keyword.containerlong_notm}} API, 콘솔 및 CLI(`ibmcloud ks`)를 사용하여 클러스터 인프라에서 사용자가 수행할 수 있는 조치를 판별합니다. 플랫폼 역할은 Kubernetes API에 대한 액세스를 부여하지 않습니다. 이러한 역할에 대한 정책은 리소스 그룹, 지역 또는 클러스터 인스턴스별로 설정할 수 있습니다. IAM 플랫폼 역할은 사용자에게 클러스터에 대해 인프라 조치를 수행할 수 있도록 권한 부여하지만 IBM Cloud 인프라(SoftLayer) 리소스에 대한 액세스 권한은 부여하지 않습니다. IBM Cloud 인프라(SoftLayer) 리소스에 대한 액세스 권한은 [지역에 대해 설정된 API 키](#api_key)가 결정합니다. 플랫폼 역할에 의해 허용되는 조치에 대한 예로는 클러스터 작성 또는 제거, 클러스터에 서비스 바인딩, 네트워킹 및 스토리지 리소스 관리, 추가 작업자 노드 추가 등이 있습니다.<br><br>사용자에게 플랫폼 역할만 지정하면 클러스터 내의 Kubernetes 리소스와 상호작용할 수 없습니다. 그러나 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)을 계속 수행할 수 있습니다. 그러면 [사용자 정의 RBAC 정책](/docs/containers?topic=containers-users#role-binding)을 사용하여 Kubernetes 선택 조치를 수행할 수 있는 권한을 사용자에게 부여할 수 있습니다. 현재 조직이 사용자 정의 RBAC 정책을 사용하여 Kubernetes 액세스를 제어하고 서비스 역할 대신 사용자 정의 RBAC를 계속 사용할 계획이면 이 작업을 수행할 수 있습니다.</li>
+<li>**서비스**: 서비스 역할은 사용자가 클러스터 내에서 제공하는 해당 Kubernetes RBAC 정책을 부여합니다. 이와 같이, 서비스 역할은 Kubernetes API, 대시보드, CLI(`kubectl`)에 대한 액세스를 부여합니다. 서비스 역할에 대한 정책은 리소스 그룹, 지역 또는 클러스터 인스턴스별로 범위 지정할 수 있습니다. 또한 모두, 개별 또는 지역 전체 클러스터에 있는 Kubernetes 네임스페이스에 대한 서비스 역할을 범위 지정할 수도 있습니다. 서비스 역할을 네임스페이스로 범위 지정하는 경우, 정책을 리소스 그룹에 적용하거나 플랫폼 역할을 동시에 지정할 수 없습니다. 서비스 역할에 의해 허용되는 조치의 예를 들면 앱 배치 작성, 네임스페이스 추가 또는 configmap 설정 등이 있습니다.<br><br>사용자에게 서비스 역할만 지정하면 임의의 {{site.data.keyword.containerlong_notm}} 리소스를 보거나 상호작용할 수 없습니다. 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>Kubernetes에서 역할 기반 액세스 제어(RBAC)는 클러스터 내의 리소스를 보호하는 방법입니다. RBAC 역할은 사용자가 리소스에 대해 수행할 수 있는 Kubernetes 조치를 결정합니다. 서비스 역할이 지정된 사용자에게는 해당 RBAC 클러스터 역할이 자동으로 지정됩니다. 이 RBAC 클러스터 역할은 네임스페이스에 대한 정책의 범위를 지정하는지 여부에 따라 특정 네임스페이스 또는 모든 네임스페이스에 적용됩니다.</br></br>
 RBAC 역할에 의해 허용되는 조치의 예를 들면 팟(Pod)과 같은 오브젝트의 작성, 팟(Pod) 로그 읽기 등이 있습니다.</dd>
@@ -72,7 +73,6 @@ RBAC 역할에 의해 허용되는 조치의 예를 들면 팟(Pod)과 같은 �
 인프라 역할에 의해 허용되는 조치의 예를 들면 클러스터 작업자 노드의 세부사항 보기, 네트워킹 및 스토리지 리소스 편집 등이 있습니다.</dd>
 <dt>Cloud Foundry</dt>
 <dd>{{site.data.keyword.Bluemix_notm}} IAM으로 관리할 수 없는 서비스도 있습니다. 이러한 서비스 중 하나를 사용하고 있는 경우에는 Cloud Foundry 사용자 역할을 계속 사용하여 해당 서비스에 대한 액세스를 제어할 수 있습니다. Cloud Foundry 역할은 계정 내 조직 및 영역에 대한 액세스 권한을 부여합니다. {{site.data.keyword.Bluemix_notm}}에 있는 Cloud Foundry 기반 서비스의 목록을 보려면 <code>ibmcloud service list</code>를 실행하십시오.</br></br>
-
 Cloud Foundry 역할에 의해 허용되는 조치의 예를 들면 새 Cloud Foundry 서비스 인스턴스 작성, 클러스터에 Cloud Foundry 서비스 인스턴스 바인딩 등이 있습니다. 더 자세히 알아보려면 {{site.data.keyword.Bluemix_notm}} IAM 문서에서 사용 가능한 [조직 및 영역 역할](/docs/iam?topic=iam-cfaccess)을 참조하거나 [Cloud Foundry 액세스 권한 관리](/docs/iam?topic=iam-mngcf) 단계를 참조하십시오.</dd>
 </dl>
 
@@ -110,14 +110,14 @@ Cloud Foundry 역할에 의해 허용되는 조치의 예를 들면 새 Cloud Fo
   <li>{{site.data.keyword.containerlong_notm}}의 **미국 남부** 지역에 있는 모든 클러스터와 같은, 특정 서비스의 특정 지역 내에 있는 모든 인스턴스.</li>
   <li>하나의 클러스터와 같은 개별 인스턴스.</li></ul></dd>
 <dt>Kubernetes 네임스페이스</dt>
-  <dd><p>{{site.data.keyword.Bluemix_notm}} IAM에서 클러스터 리소스 인스턴스의 파트로 서비스 액세스 역할이 있는 사용자를 클러스터 내의 Kubernetes 네임스페이스에 지정할 수 있습니다. 서비스 역할을 네임스페이스로 범위 지정하면 정책을 리소스 그룹에 적용하거나 플랫폼 역할을 동시에 지정할 수 없습니다.</p>
+  <dd><p>{{site.data.keyword.Bluemix_notm}} IAM에서 클러스터 리소스 인스턴스의 파트로 서비스 액세스 역할이 있는 사용자를 클러스터 내의 Kubernetes 네임스페이스에 지정할 수 있습니다.</p>
   <p>네임스페이스에 대한 액세스를 지정하면 권한을 부여하는 모든 클러스터에서 네임스페이스의 모든 현재 및 향후 인스턴스에 정책이 적용됩니다. 예를 들어, 사용자의 `dev` 그룹에서 AP 북부에 있는 모든 사용자 클러스터의 `test` 네임스페이스에 Kubernetes 리소스를 배치할 수 있도록 한다고 가정합니다. `default` 리소스 그룹 내 AP 북부 지역의 모든 클러스터에 있는 Kubernetes 네임스페이스 test에 대한 **작성자** 서비스 액세스 역할을 `dev` 액세스 그룹에 지정하면 `dev` 그룹은 현재 네임스페이스가 있거나 궁극적으로 test 네임스페이스가 있는 `default` 리소스 그룹에 있는 AP 북부 클러스터의 `test` 네임스페이스에 액세스할 수 있습니다.</p>
-  <p class="important">리소스 그룹 레벨에서 네임스페이스로 범위 지정된 서비스 액세스 역할을 지정하거나 플랫폼 역할과 동시에 지정할 수 없습니다.</p></dd>
+  <p class="important">서비스 역할을 네임스페이스로 범위 지정하면 정책을 리소스 그룹에 적용하거나 플랫폼 역할을 동시에 지정할 수 없습니다.</p></dd>
 <dt>리소스 그룹</dt>
   <dd><p>개별 사용자 또는 사용자 그룹에 한 번에 둘 이상의 리소스에 대한 액세스 권한을 신속하게 지정할 수 있도록 계정 리소스를 사용자 정의할 수 있는 그룹으로 구성할 수 있습니다. 리소스 그룹은 운영자 및 관리자가 리소스를 해당 용도별로 보고, 문제를 해결하고, 팀을 관리하기 위해 리소스를 필터링하는 데 도움을 줍니다.</p>
-  <p class="important">클러스터는 하나의 리소스 그룹에서만 작성할 수 있으며 이후에는 변경할 수 없습니다. 클러스터를 잘못된 리소스 그룹에 작성한 경우에는 해당 클러스터를 삭제하고 올바른 리소스 그룹에서 다시 작성해야 합니다. 또한 `ibmcloud ks cluster-service-bind` [명령](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind)을 사용하여 [{{site.data.keyword.Bluemix_notm}} 서비스와 통합](/docs/containers?topic=containers-service-binding#bind-services)해야 하는 경우 해당 서비스는 클러스터와 동일한 리소스 그룹에 있어야 합니다. 리소스 그룹(예: {{site.data.keyword.registrylong_notm}})을 사용하지 않거나 서비스 바인딩(예: {{site.data.keyword.la_full_notm}})이 필요하지 않은 서비스는 클러스터가 다른 리소스 그룹에 있는 경우에도 작동합니다. </p>
+  <p class="important">클러스터는 하나의 리소스 그룹에서만 작성할 수 있으며 이후에는 변경할 수 없습니다. 클러스터를 잘못된 리소스 그룹에 작성한 경우에는 해당 클러스터를 삭제하고 올바른 리소스 그룹에서 다시 작성해야 합니다. 또한 `ibmcloud ks cluster-service-bind` [명령](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)을 사용하여 [{{site.data.keyword.Bluemix_notm}} 서비스와 통합](/docs/containers?topic=containers-service-binding#bind-services)해야 하는 경우 해당 서비스는 클러스터와 동일한 리소스 그룹에 있어야 합니다. 리소스 그룹(예: {{site.data.keyword.registrylong_notm}})을 사용하지 않거나 서비스 바인딩(예: {{site.data.keyword.la_full_notm}})이 필요하지 않은 서비스는 클러스터가 다른 리소스 그룹에 있는 경우에도 작동합니다.</p>
   <p>[메트릭에 대해 {{site.data.keyword.monitoringlong_notm}}](/docs/containers?topic=containers-health#view_metrics)을 사용하려는 경우에는 메트릭 이름 충돌을 방지하기 위해 계정 내 리소스 그룹 및 지역 전체에서 클러스터에 고유한 이름을 지정하는 것을 고려하십시오. 클러스터의 이름은 바꿀 수 없습니다.</p>
-  <p>다음 시나리오의 경우에는 사용자에게 리소스 그룹에 대한 액세스 역할을 지정할 수 있습니다. 리소스 인스턴스와 달리, 특정 리소스 그룹 내의 개별 인스턴스에 대해 액세스 권한을 부여할 수는 없다는 점을 참고하십시오.</p>
+  <p>다음 시나리오의 경우에는 사용자에게 리소스 그룹에 대한 액세스 역할을 지정할 수 있습니다. 리소스 인스턴스와 달리, 특정 리소스 그룹 내의 개별 인스턴스에 대해 액세스 권한을 부여할 수는 없다는 점을 유의하십시오.</p>
   <ul><li>{{site.data.keyword.containerlong_notm}}의 모든 클러스터와 {{site.data.keyword.registrylong_notm}}의 이미지를 포함한 리소스 그룹 내 모든 {{site.data.keyword.Bluemix_notm}} IAM 서비스</li>
   <li>{{site.data.keyword.containerlong_notm}}의 모든 클러스터와 같은, 리소스 그룹 내 특정 서비스에 속한 모든 인스턴스.</li>
   <li>{{site.data.keyword.containerlong_notm}}의 **미국 남부** 지역에 있는 모든 클러스터와 같은, 리소스 그룹 내 특정 서비스의 특정 지역에 속한 모든 인스턴스.</li></ul></dd>
@@ -152,7 +152,7 @@ Cloud Foundry 역할에 의해 허용되는 조치의 예를 들면 새 Cloud Fo
 ## 인프라 포트폴리오에 대한 액세스를 가능하게 하기 위한 API 키 설정
 {: #api_key}
 
-클러스터를 프로비저닝하고 이에 대해 작업하려면 {{site.data.keyword.Bluemix_notm}} 계정이 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있도록 올바르게 설정되었는지 확인해야 합니다.
+클러스터를 프로비저닝하고 이에 대해 작업하려면 {{site.data.keyword.Bluemix_notm}} 계정이 클러스터가 위치한 각 리소스 그룹 및 지역의 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스할 수 있도록 올바르게 설정되었는지 확인해야 합니다.
 {: shortdesc}
 
 **대부분의 경우**: 사용자의 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정에는 이미 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 있습니다. 이 포트폴리오에 액세스할 수 있도록 {{site.data.keyword.containerlong_notm}}를 설정하려면 **계정 소유자**가 지역 및 리소스 그룹에 대해 API 키를 설정해야 합니다.
@@ -163,25 +163,25 @@ Cloud Foundry 역할에 의해 허용되는 조치의 예를 들면 새 Cloud Fo
     ```
     {: pre}
 
-2. API 키를 설정할 리소스 그룹을 대상으로 지정하십시오. 리소스 그룹을 대상으로 지정하지 않으면 API 키가 기본 리소스 그룹에 대해 설정됩니다.
+2. API 키를 설정할 리소스 그룹을 대상으로 지정하십시오. 리소스 그룹을 대상으로 지정하지 않으면 API 키가 기본 리소스 그룹에 대해 설정됩니다. 사용 가능한 리소스 그룹을 나열하려면 `ibmcloud resource groups`을 실행하십시오.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
 
-4. 지역 및 리소스 그룹에 대해 API 키를 설정하십시오.
+3. 지역 및 리소스 그룹에 대해 API 키를 설정하십시오.
     ```
-  ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. API 키가 설정되었는지 확인하십시오.
+4. API 키가 설정되었는지 확인하십시오.
     ```
-        ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-6. 클러스터를 작성할 각 지역 및 리소스 그룹에 대해 작업을 반복하십시오.
+5. 클러스터를 작성할 각 지역 및 리소스 그룹에 대해 작업을 반복하십시오.
 
 **대체 방법 및 자세한 정보**: IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하는 다른 방법은 다음 섹션을 참조하십시오.
 * 계정의 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한 유무를 모르는 경우에는 [IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 이해](#understand_infra)를 참조하십시오.
@@ -291,16 +291,16 @@ CLI 세션용 {{site.data.keyword.Bluemix_notm}} IAM 토큰을 보려면 `ibmclo
 {{site.data.keyword.Bluemix_notm}} 종량과금제 계정이 있는 경우에는 연결된 IBM Cloud 인프라(SoftLayer) 포트폴리오에 대한 액세스 권한이 기본적으로 제공됩니다. API 키는 이 IBM Cloud 인프라(SoftLayer) 포트폴리오에서 새 작업자 노드 또는 VLAN과 같은 인프라 리소스를 주문하는 데 사용됩니다.
 {: shortdec}
 
-[`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)를 실행하여 현재 API 키 소유자를 찾을 수 있습니다. 지역에 대해 저장된 API 키를 업데이트해야 한다고 판별된 경우에는 [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) 명령을 사용하여 이를 수행할 수 있습니다. 이 명령은 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요하고 계정에서 이 명령을 실행하는 사용자의 API 키를 저장합니다.
+[`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)를 실행하여 현재 API 키 소유자를 찾을 수 있습니다. 지역에 대해 저장된 API 키를 업데이트해야 한다고 판별된 경우에는 [`ibmcloud ks api-key-reset --region `](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) 명령을 실행하여 이를 수행할 수 있습니다. 이 명령은 {{site.data.keyword.containerlong_notm}} 관리자 액세스 정책이 필요하고 계정에서 이 명령을 실행하는 사용자의 API 키를 저장합니다.
 
 키를 재설정할지 확인하고, 이 작업이 앱에 미치는 영향을 파악하십시오. 키는 여러 다른 위치에서 사용되며 이를 불필요하게 변경하면 기타 컴포넌트에 영향을 줄 수 있는 변경사항(breaking changes)이 발생할 수 있습니다.
 {: note}
 
 **시작하기 전에**:
 - 계정 소유자가 API 키를 설정하지 않는 경우에는 [API 키를 설정하는 사용자에게 올바른 권한이 있는지 확인](#owner_permissions)하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 API 키를 설정하려면 다음 작업을 수행하십시오.
+IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 API 키를 설정하려면 다음을 수행하십시오.
 
 1.  클러스터가 속한 지역 및 리소스 그룹에 대한 API 키를 설정하십시오.
     1.  사용하고자 하는 인프라 권한이 있는 사용자로 터미널에 로그인하십시오.
@@ -311,7 +311,7 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 API 키
         {:pre}
     4.  지역에 대한 사용자의 API 키를 설정하십시오.
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}    
     5.  API 키가 설정되었는지 확인하십시오.
@@ -325,15 +325,15 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 API 키
 ### 다른 IBM Cloud 인프라(SoftLayer) 계정에 액세스
 {: #credentials}
 
-지역 내 클러스터를 위한 인프라를 주문하는 데 IBM Cloud 인프라(SoftLayer) 계정을 사용하는 대신, 이미 보유하고 있는 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하려 하는 경우가 있습니다. [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) 명령을 사용하여 이 인프라 계정을 {{site.data.keyword.Bluemix_notm}} 계정에 연결할 수 있습니다. 지역에 대해 저장된 기본 종량과금제 계정의 인증 정보 대신 이 IBM Cloud 인프라(SoftLayer) 인증 정보가 사용됩니다.
+지역 내 클러스터를 위한 인프라를 주문하는 데 IBM Cloud 인프라(SoftLayer) 계정을 사용하는 대신, 이미 보유하고 있는 다른 IBM Cloud 인프라(SoftLayer) 계정을 사용하려 하는 경우가 있습니다. [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) 명령을 사용하여 이 인프라 계정을 {{site.data.keyword.Bluemix_notm}} 계정에 연결할 수 있습니다. 지역에 대해 저장된 기본 종량과금제 계정의 인증 정보 대신 이 IBM Cloud 인프라(SoftLayer) 인증 정보가 사용됩니다.
 {: shortdesc}
 
-`ibmcloud ks credential-set` 명령으로 설정된 IBM Cloud 인프라(SoftLayer) 인증 정보는 세션이 종료된 후에도 지속됩니다. [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) 명령을 사용하여 수동으로 설정한 IBM Cloud 인프라(SoftLayer) 인증 정보를 제거하면 기본 종량과금제 계정 인증 정보가 사용됩니다. 그러나 이 인프라 계정 인증 정보 변경은 [고아 클러스터](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)를 발생시킬 수 있습니다.
+`ibmcloud ks credential-set` 명령으로 설정된 IBM Cloud 인프라(SoftLayer) 인증 정보는 세션이 종료된 후에도 지속됩니다. [`ibmcloud ks credential-unset --region `](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) 명령을 사용하여 수동으로 설정한 IBM Cloud 인프라(SoftLayer) 인증 정보를 제거하면 기본 종량과금제 계정 인증 정보가 사용됩니다. 그러나 이 인프라 계정 인증 정보 변경은 [고아 클러스터](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)를 발생시킬 수 있습니다.
 {: important}
 
 **시작하기 전에**:
 - 계정 소유자의 인증 정보를 사용하고 있지 않은 경우에는 [API 키에 대해 인증 정보를 설정할 사용자에게 올바른 권한이 있는지 확인](#owner_permissions)하십시오.
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 인프라 계정 인증 정보를 설정하려면 다음을 수행하십시오.
 
@@ -349,15 +349,15 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 인프�
 
     2.  사용할 인프라 API 인증 정보를 설정하십시오.   
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
     3. 올바른 인증 정보가 설정되었는지 확인하십시오.
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
-출력 예:
+        출력 예:
         ```
         Infrastructure credentials for user name user@email.com set for resource group default.
         ```
@@ -395,10 +395,10 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 인프�
 1. [{{site.data.keyword.Bluemix_notm}} 콘솔![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://cloud.ibm.com/)에 로그인하십시오. 메뉴 표시줄에서 **관리 > 액세스(IAM)**를 선택하십시오.
 
 2. 사용자를 개별적으로 선택하거나 사용자의 액세스 그룹을 작성하십시오.
-    * **개별 사용자에게 역할을 지정하려면 다음 작업을 수행하십시오**.
+    * **개별 사용자에게 역할을 지정하려면 다음을 수행하십시오**.
       1. 왼쪽 탐색에서 **사용자** 페이지를 클릭한 후 권한을 설정할 사용자의 이름을 클릭하십시오. 사용자가 표시되지 않으면 **사용자 초대**를 클릭하여 사용자를 계정에 추가하십시오.
       2. **액세스 정책** 탭을 클릭한 후 **액세스 지정**을 클릭하십시오.
-    * **액세스 그룹 내의 여러 사용자에게 역할을 지정하려면 다음 작업을 수행하십시오**.
+    * **액세스 그룹 내의 여러 사용자에게 역할을 지정하려면 다음을 수행하십시오**.
       1. 왼쪽 탐색에서 **액세스 그룹** 페이지를 클릭하십시오.
       2. **작성**을 클릭하고 그룹에 **이름** 및 **설명**을 부여하십시오. **작성**을 클릭하십시오.
       3. **사용자 추가**를 클릭하여 사용자를 액세스 그룹에 추가하십시오. 계정에 대한 액세스 권한이 있는 모든 사용자가 표시됩니다.
@@ -416,9 +416,9 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 인프�
     5. **지역** 목록에서 한 지역 또는 모든 지역을 선택하십시오.
     6. 정책에 대한 역할을 선택하십시오.
        * **플랫폼 액세스 역할**: 사용자가 클러스터, 작업자 노드, 작업자 풀, Ingress 애플리케이션 로드 밸런서 및 스토리지와 같은 인프라 자원을 관리할 수 있도록 {{site.data.keyword.containerlong_notm}}에 대한 액세스를 부여합니다. 각 역할에 대해 지원되는 조치의 목록을 찾으려면 [플랫폼 역할 참조 페이지](/docs/containers?topic=containers-access_reference#iam_platform)를 참조하십시오.
-       * **서비스 액세스 역할**: 사용자가 팟(Pod), 배치, 서비스 및 네임스페이스와 같은 Kubernetes 리소스를 관리할 수 있도록 클러스터 내에서의 액세스로 Kubernetes에 대한 액세스를 부여합니다. 각 역할에 대해 지원되는 조치의 목록을 찾으려면 [서비스 역할 참조 페이지](/docs/containers?topic=containers-access_reference#service)를 참조하십시오.<p class="note">리소스 그룹 레벨에서 역할을 지정하는 경우 서비스 액세스 역할은 네임스페이스로 범위 지정할 수 없습니다. 대신 리소스 인스턴스에 대한 액세스를 지정하십시오. 또한 서비스 역할을 지정하는 동일한 시간에 플랫폼 역할을 지정하지 마십시오. </p>
+       * **서비스 액세스 역할**: 사용자가 팟(Pod), 배치, 서비스 및 네임스페이스와 같은 Kubernetes 리소스를 관리할 수 있도록 클러스터 내에서의 액세스로 Kubernetes에 대한 액세스를 부여합니다. 각 역할에 대해 지원되는 조치의 목록을 찾으려면 [서비스 역할 참조 페이지](/docs/containers?topic=containers-access_reference#service)를 참조하십시오.<p class="note">리소스 그룹 레벨에서 역할을 지정하는 경우 서비스 액세스 역할은 네임스페이스로 범위 지정할 수 없습니다. 대신 리소스 인스턴스에 대한 액세스를 지정하십시오. 또한 서비스 역할을 지정하는 동일한 시간에 플랫폼 역할을 지정하지 마십시오.</p>
     7. **지정**을 클릭하십시오.
-    8. **선택사항**: 사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 이 단계를 반복하여 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.
+    8. **선택사항**: 사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 이 단계를 반복하여 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.
   * **리소스 그룹 내부 또는 전체 리소스 인스턴스의 경우**:
     1. **리소스에 대한 액세스 권한 지정**을 클릭하십시오.
     2. **서비스** 목록에서 **{{site.data.keyword.containershort_notm}}**를 선택하십시오.
@@ -431,7 +431,7 @@ IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스하기 위해 인프�
           * 네임스페이스에 대한 정책을 범위 지정한 경우에는 플랫폼 역할을 동시에 지정할 수도 없습니다. 사용자가 플랫폼 역할을 보유하도록 하려면 이러한 단계를 반복하여 네임스페이스 필드를 공백으로 두고 플랫폼 역할만 지정하십시오(서비스 액세스 역할을 다시 지정하지 않음).
        * **서비스 액세스 역할**: 사용자가 팟(Pod), 배치, 서비스 및 네임스페이스와 같은 Kubernetes 리소스를 관리할 수 있도록 클러스터 내에서 액세스될 때 Kubernetes에 대한 액세스를 부여합니다. 각 역할에 대해 지원되는 조치의 목록을 찾으려면 [서비스 역할 참조 페이지](/docs/containers?topic=containers-access_reference#service)를 참조하십시오.
     7. **지정**을 클릭하십시오.
-    8. **선택사항**: 사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 이 단계를 반복하여 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.
+    8. **선택사항**: 사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 이 단계를 반복하여 사용자에게 플랫폼 **뷰어** 역할을 제공하십시오.
 
 4.  선택사항: 사용자가 기본 외의 리소스 그룹에 속한 클러스터에 대해 작업할 수 있도록 하려는 경우 이러한 사용자에게는 클러스터가 속한 리소스 그룹에 대한 추가 액세스 권한이 필요합니다. 이전에 권한을 지정하지 않은 경우, 이러한 사용자에게는 최소한 리소스 그룹에 대한 **뷰어** 플랫폼 역할을 지정할 수 있습니다.
     1.  **한 리소스 그룹 내의 액세스 권한 지정**을 클릭하십시오.
@@ -450,9 +450,9 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
 **시작하기 전에**:
 
 - 사용자에게 작업 중인 {{site.data.keyword.Bluemix_notm}} 계정에 대한 `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할이 지정되었는지 확인하십시오.
-- 사용자가 계정에 추가되었는지 확인하십시오. 사용자가 계정에 추가되지 않은 경우에는 `ibmcloud account user-invite <user@email.com>`를 실행하여 사용자를 계정에 초대하십시오. 
-- [계정에 로그인하십시오. 적절한 지역을 대상으로 지정하고, 해당되는 경우에는 리소스 그룹도 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [플랫폼 또는 서비스 액세스](/docs/containers?topic=containers-users#access_policies) 역할 지정 여부를 결정하십시오. CLI 단계는 지정할 액세스 역할에 따라 달라집니다. 
+- 사용자가 계정에 추가되었는지 확인하십시오. 사용자가 계정에 추가되지 않은 경우에는 `ibmcloud account user-invite <user@email.com>`를 실행하여 사용자를 계정에 초대하십시오.
+- [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [플랫폼 또는 서비스 액세스](/docs/containers?topic=containers-users#access_policies) 역할 지정 여부를 결정하십시오. CLI 단계는 지정할 액세스 역할에 따라 달라집니다.
   * [CLI에서 플랫폼 역할 지정](#add_users_cli_platform)
   * [CLI에서 서비스 역할 지정](#add_users_cli_service)
 
@@ -531,7 +531,7 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         ```
         {: pre}
 
-3.  사용자 또는 액세스 그룹에 지정된 플랫폼 역할이 있는지 확인하십시오. 
+3.  사용자 또는 액세스 그룹에 지정된 플랫폼 역할이 있는지 확인하십시오.
     *   개별 사용자의 경우:
         ```
         ibmcloud iam user-policies <user@email.com>
@@ -549,7 +549,7 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
 **CLI에서 {{site.data.keyword.Bluemix_notm}} IAM _서비스_ 역할을 지정하려면 다음을 수행하십시오.**
 {: #add_users_cli_service}
 
-1.  서비스 역할을 지정할 개별 사용자 또는 액세스 그룹에 대한 사용자 정보를 가져오십시오. 
+1.  서비스 역할을 지정할 개별 사용자 또는 액세스 그룹에 대한 사용자 정보를 가져오십시오.
 
     1.  **계정 ID**를 가져오십시오.
         ```
@@ -567,7 +567,7 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         ```
         {: pre}
 
-2.  클러스터에서 Kubernetes 네임스페이스로 서비스 액세스 역할 범위를 지정하는 `policy.json` 파일을 작성하십시오. 
+2.  클러스터에서 Kubernetes 네임스페이스로 서비스 액세스 역할 범위를 지정하는 `policy.json` 파일을 작성하십시오.
 
     ```
     {
@@ -621,8 +621,8 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         <tr>
         <td>`subjects.attributes`</td>
         <td>이전에 검색한 개별 사용자 또는 액세스 그룹에 대한 {{site.data.keyword.Bluemix_notm}} IAM 세부사항을 입력하십시오.
-        <ul><li>개별 사용자의 경우 `name` 필드에 대해 `iam_id`를 설정하십시오. `value` 필드에 대해 이전에 검색한 **ibmUniqueId**를 입력하십시오. </li>
-        <li>액세스 그룹의 경우 `name` 필드에 대해 `iam_id`를 설정하십시오. `value` 필드에 대해 이전에 검색한 **ID**를 입력하십시오. </li></ul></td>
+        <ul><li>개별 사용자의 경우 `name` 필드에 대해 `iam_id`를 설정하십시오. `value` 필드에 대해 이전에 검색한 **ibmUniqueId**를 입력하십시오.</li>
+        <li>액세스 그룹의 경우 `name` 필드에 대해 `iam_id`를 설정하십시오. `value` 필드에 대해 이전에 검색한 **ID**를 입력하십시오.</li></ul></td>
         </tr>
         <tr>
         <td>`roles.role_id`</td>
@@ -634,15 +634,15 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         <tr>
         <td>`resources.attributes`</td>
         <td>계정, 클러스터 및 네임스페이스에 대한 정책의 범위를 구성하십시오. `"name"` 필드를 예에서 제공된 상태로 유지하고 특정 `"value"` 필드를 다음과 같이 입력하십시오.
-        <ul><li>**`"accountId"`**: 이전에 검색한 {{site.data.keyword.Bluemix_notm}} 계정 ID를 입력하십시오. </li>
-        <li>**`"serviceName"`**: 서비스 이름을 `containers-kubernetes`와 같이 제공된 상태로 유지하십시오. </li>
+        <ul><li>**`"accountId"`**: 이전에 검색한 {{site.data.keyword.Bluemix_notm}} 계정 ID를 입력하십시오.</li>
+        <li>**`"serviceName"`**: 서비스 이름을 `containers-kubernetes`와 같이 제공된 상태로 유지하십시오.</li>
         <li>**`"serviceInstance"`**: 클러스터 ID를 입력하십시오. 다중 클러스터의 경우 쉼표로 구분하십시오. 클러스터 ID를 가져오려면 `ibmcloud ks clusters`를 실행하십시오.</li>
-        <li>**`"namespace"`**: 클러스터에서 Kubernetes 네임스페이스를 입력하십시오. 클러스터의 네임스페이스를 나열하려면 <code>kubectl get namespaces</code>를 실행하십시오.<p class="note">액세스 정책을 클러스터의 모든 네임스페이스에 지정하려면 전체 `{"name": "namespace", "value": "<namespace_name"}` 항목을 제거하십시오.</p></li></td>
+        <li>**`"namespace"`**: 클러스터에서 Kubernetes 네임스페이스를 입력하십시오. 클러스터의 네임스페이스를 나열하려면 <code>kubectl get namespaces</code>를 실행하십시오. <p class="note">액세스 정책을 클러스터의 모든 네임스페이스에 지정하려면 전체 `{"name": "namespace", "value": "<namespace_name"}` 항목을 제거하십시오.</p></li></td>
         </tr>
       </tbody>
       </table>
 
-3.  {{site.data.keyword.Bluemix_notm}} IAM 정책을 개별 사용자 또는 액세스 그룹에 적용하십시오. 
+3.  {{site.data.keyword.Bluemix_notm}} IAM 정책을 개별 사용자 또는 액세스 그룹에 적용하십시오.
     *   개별 사용자의 경우:
         ```
         ibmcloud iam user-policy-create <user@email.com> --file <filepath>/policy.json
@@ -654,7 +654,7 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         ```
         {: pre}
 
-4.  사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 [사용자에게 플랫폼 **뷰어** 역할을 제공](#add_users_cli_platform)하십시오.
+4.  사용자에게 서비스 역할만 지정한 경우, 사용자가 클러스터에 액세스하고 클러스터의 Kubernetes 리소스를 사용하려면 `ibmcloud ks cluster-config` [명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)을 수행한 다음 [CLI에서 Kubernetes 대시보드를 시작](/docs/containers?topic=containers-app#db_cli)하거나 Kubernetes API와 상호작용할 수 있도록 사용자에게 클러스터 이름과 ID를 제공해야 합니다. 이러한 사용자가 계속 {{site.data.keyword.containerlong_notm}} 클러스터 콘솔에 액세스하고 클러스터와 기타 인프라 자원을 CLI에서 나열할 수 있도록 하려면 [사용자에게 플랫폼 **뷰어** 역할을 제공](#add_users_cli_platform)하십시오.
 
 5.  변경사항을 적용하려면 액세스가 부여된 사용자가 클러스터 구성을 새로 고쳐야 합니다. 사용자는 동시에 여러 사용자를 추가한 경우에도 클러스터 구성을 개별적으로 새로 고칠 때까지 역할 바인딩에 추가되지 않습니다. 또한 사용자에게 더 높은 레벨의 권한이 있는 경우 사용자는 역할 바인딩에 추가되지 않습니다. 예를 들어, 사용자가 클러스터 역할을 갖고 있고 클러스터 역할 바인딩에 있는 경우 사용자는 각 개별 네임스페이스 역할 바인딩에도 추가되지 않습니다.
     ```
@@ -685,7 +685,7 @@ CLI에서 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 관리 및 서비스 
         ```
         {: pre}
 
-    **출력 예**: 사용자 `user@email.com`을 지정하고 그룹 `team1`에 **Reader** 서비스 역할을 지정한 후 `kubectl get rolebinding ibm-view -o yaml -n default`를 실행하는 경우입니다. 
+    **출력 예**: 사용자 `user@email.com`을 지정하고 그룹 `team1`에 **Reader** 서비스 역할을 지정한 후 `kubectl get rolebinding ibm-view -o yaml -n default`를 실행하는 경 다음 출력 예가 표시됩니다. 
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -908,14 +908,14 @@ RBAC 역할 및 클러스터 역할은 사용자가 클러스터에 있는 Kuber
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>`User`의 경우: 개별 사용자의 이메일 주소를 다음 URL에 추가하십시오.<ul><li>Kubernetes 1.11 이상을 실행하는 클러스터의 경우: <code>IAM#user@email.com</code></li><li>Kubernetes 1.10 또는 이전 버전을 실행하는 클러스터의 경우: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>`User`의 경우: <code>IAM#user@email.com</code>과 같이 개별 사용자의 이메일 주소를 `IAM#`에 추가하십시오.</li>
               <li>`Group`: Kubernetes 1.11 이상을 실행하는 클러스터의 경우, 계정에 있는 [{{site.data.keyword.Bluemix_notm}}IAM 액세스 그룹](/docs/iam?topic=iam-groups#groups)의 이름을 지정하십시오.</li>
               <li>`ServiceAccount`의 경우: 서비스 계정 이름을 지정하십시오.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects.apiGroup</code></td>
               <td><ul><li>`User` 또는 `Group`의 경우: `rbac.authorization.k8s.io`를 사용하십시오.</li>
-              <li>`ServiceAccount`의 경우: 이 필드를 포함시키지 마십시오.</li></ul></td>
+              <li>`ServiceAccount`의 경우: 이 필드를 포함하지 마십시오.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects.namespace</code></td>
@@ -971,6 +971,85 @@ RBAC 역할 및 클러스터 역할은 사용자가 클러스터에 있는 Kuber
 
 사용자 정의 Kubernetes RBAC 역할 또는 클러스터 역할의 작성 및 바인드가 완료되었습니다. 사용자에게 후속 조치를 취하십시오. 팟(Pod) 삭제와 같은 역할로 인해 완료할 권한이 있는 조치를 테스트하도록 사용자에게 요청하십시오.
 
+### 클러스터 역할을 집계하여 기존 권한 확장 
+{: #rbac_aggregate}
+
+다른 클러스터 역할과 클러스터 역할을 결합하거나 집계하여 사용자의 기존 권한을 확장할 수 있습니다. 사용자에게 {{site.data.keyword.Bluemix_notm}} 서비스 역할을 지정하면 사용자는 [해당 Kubernetes RBAC 클러스터 역할](/docs/containers?topic=containers-access_reference#service)에 추가됩니다. 그러나 특정 사용자가 추가 오퍼레이션을 수행하도록 허용할 수 있습니다.
+{: shortdesc}
+
+예를 들어, 네임스페이스 범위 `admin` 클러스터 역할로는 `kubectl top pods` 명령을 사용하여 네임스페이스의 모든 팟(Pod)에 대한 팟(Pod) 메트릭을 볼 수 없습니다. `admin` 클러스터 역할의 사용자에게 `top pods` 명령을 실행할 수 있는 권한이 부여되도록 클러스터 역할을 집계할 수 있습니다. 자세한 정보는 [Kubernetes 문서를 참조![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)하십시오.
+
+**기본 클러스터 역할에 맞게 권한을 확장하려고 하는 몇 가지 공통 오퍼레이션은 무엇입니까?**<br>
+[각 기본 RBAC 클러스터 역할에서 허용되는 오퍼레이션](/docs/containers?topic=containers-access_reference#rbac_ref)을 검토하여 사용자가 수행할 수 있는 오퍼레이션을 파악한 후 허용된 오퍼레이션과 수행 가능한 오퍼레이션을 비교하십시오. 
+
+동일한 클러스터 역할의 사용자에게 동일한 유형의 오퍼레이션에 대해 다음과 유사한 오류가 발생하는 경우 이 오퍼레이션을 포함하도록 클러스터 역할을 확장하려고 할 수 있습니다.
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**클러스터 역할을 집계하려면 다음을 수행하십시오.**
+
+시작하기 전에: [계정에 로그인하십시오. 해당되는 경우, 적절한 리소스 그룹을 대상으로 지정하십시오. 클러스터의 컨텍스트를 설정하십시오.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  클러스터 역할 YAML 파일을 작성하십시오. `labels` 섹션에서 권한을 집계할 기존 클러스터 역할을 지정하십시오. 다음 예에서는 사용자가 `kubectl top pods`를 실행할 수 있도록 사전 지정된 `admin` 클러스터 역할을 확장합니다. 더 많은 예를 보려면 [Kubernetes 문서를 참조![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)하십시오.
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>YAML 컴포넌트 이해</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="아이디어 아이콘"/> YAML 컴포넌트 이해</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>클러스터 역할의 이름을 입력하십시오. 사전 지정된 클러스터 역할 이름 즉, `view`, `edit`, `admin` 및 `cluster-admin`을 사용하지 **마십시오**. </td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>집계할 클러스터 역할과 일치하는 `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"` 형식의 레이블을 추가하십시오. 사전 정의된 클러스터 역할의 레이블은 다음과 같습니다. <ul>
+          <li>네임스페이스로 범위 지정된 IAM **관리자** 서비스 역할: `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>IAM **작성자** 서비스 역할: `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>IAM **독자** 서비스 역할: `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>`"apps"`, `"batch"` 또는 `"extensions"`와 같이 사용자가 상호작용할 수 있도록 할 Kubernetes [API 그룹 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups)을 지정하십시오. REST 경로 `api/v1`의 코어 API 그룹에 액세스하려면 그룹을 `[""]`와 같이 공백으로 두십시오.</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>`"daemonsets"`, `"deployments"`, `"events"` 또는 `"ingresses"`와 같이 액세스 권한을 부여할 Kubernetes [리소스 유형 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)을 지정하십시오.</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>`"get"`, `"list"`, `"describe"`, `"create"` 또는 `"delete"`와 같이 사용자가 수행할 수 있도록 할 [조치 ![외부 링크 아이콘](../icons/launch-glyph.svg "외부 링크 아이콘")](https://kubectl.docs.kubernetes.io/)의 유형을 지정하십시오.</td>
+        </tr>
+      </tbody>
+    </table>
+2.  클러스터에서 클러스터 역할을 작성하십시오. `admin` 클러스터 역할에 대한 역할 바인딩이 있는 모든 사용자에게 이제 `view-pod-metrics` 클러스터 역할로부터 추가 권한이 제공됩니다.
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  `admin` 클러스터 역할이 있는 사용자에게 알리십시오. 해당 사용자에게 [클러스터 구성을 새로 고치고](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) `kubectl top pods`와 같은 조치를 테스트하도록 요청하십시오. 
+
+
 <br />
 
 
@@ -982,8 +1061,9 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 
 규제 준수, 보안 또는 비용 청구 관련 이유로 인해 API 키를 설정하는 사용자 또는 `ibmcloud ks credential-set` 명령으로 인증 정보가 설정되어 있는 사용자에게 **수퍼유저** 인프라 역할을 부여하지 않으려 하는 경우가 있습니다. 그러나 이 사용자에게 **수퍼유저** 역할이 없으면 클러스터 작성 또는 작업자 노드 다시 로드와 같은 인프라 관련 조치가 실패할 수 있습니다. 이 경우에는 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 역할을 사용하여 사용자의 인프라 액세스를 제어하는 대신, 사용자에 대해 특정 IBM Cloud 인프라(SoftLayer) 권한을 설정해야 합니다.
 
-다중 구역 클러스터가 있는 경우, IBM Cloud 인프라(SoftLayer) 계정 소유자는 서로 다른 영역의 노드가 클러스터 내에서 통신할 수 있도록 VLAN Spanning을 켜야 합니다. 사용자가 VLAN Spanning을 사용으로 설정할 수 있도록 계정 소유자가 사용자에게 **네트워크 > 네트워크 VLAN Spanning 관리** 권한을 지정할 수도 있습니다. VLAN Spanning이 이미 사용으로 설정되었는지 확인하려면 `ibmcloud ks vlan-spanning-get` [명령](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)을 사용하십시오.
-{: tip}
+예를 들어, 계정이 VRF 사용 계정이 아닌 경우 IBM Cloud 인프라(SoftLayer) 계정 사용자는 VLAN Spanning을 설정해야 합니다. 사용자가 VLAN Spanning을 사용으로 설정할 수 있도록 계정 소유자가 사용자에게 **네트워크 > 네트워크 VLAN Spanning 관리** 권한을 지정할 수도 있습니다. 자세한 정보는 [교차 VLAN 통신을 위한 VLAN Spanning](/docs/containers?topic=containers-subnets#basics_segmentation)을 참조하십시오.
+
+<p class="tip">`ibmcloud ks credential-set` 명령을 사용하여 인프라 인증 정보를 이미 설정했습니까? [`ibmcloud ks infra-permissions-get --region <region>` 명령](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)을 실행하여 인증 정보에 제안되거나 필요한 인프라 권한이 없는지 확인할 수 있습니다. 출력에서 제한되거나 필요한 권한이 없으면 이 절의 단계를 사용하여 필요한 액세스 권한을 지정할 수 있습니다. </p>
 
 시작하기 전에, 자신이 계정 소유자이거나 자신에게 **수퍼유저** 및 모든 디바이스 액세스 권한이 있는지 확인하십시오. 자신에게 없는 액세스 권한을 다른 사용자에게 부여할 수는 없습니다.
 
@@ -1004,11 +1084,18 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 
 6.  **디바이스** 탭에서 액세스 권한을 부여할 디바이스를 선택하십시오.
 
-    * **유형 선택** 그룹에서 모든 [작업자 노드의 시스템 유형](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)을 사용하여 작업할 수 있도록 모든 베어메탈, 데디케이티드 및 Virtual Server에 대한 액세스를 권한 부여할 수 있습니다.
+    * **유형 선택** 그룹에서 모든 [작업자 노드의 시스템 유형](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)을 사용하여 작업할 수 있도록 모든 베어메탈, 데디케이티드 및 Virtual Server에 대한 액세스를 권한 부여할 수 있습니다.
     * **향후 액세스 사용** 그룹에서 향후의 모든 베어메탈, 데디케이티드 및 Virtual Server에 대한 사용자 액세스를 권한 부여할 수 있습니다.
     * 디바이스 테이블에서 적절한 디바이스가 선택되었는지 확인하십시오.
 
 7. 변경사항을 저장하려면 **설정**을 클릭하십시오.
+
+8. **중요**: 사용자가 클러스터 및 작업자 노드를 관리할 수 있도록 권한을 지정하는 경우 지원 케이스 관련 작업을 수행하도록 사용자 액세스 권한을 지정해야 합니다.
+  1. **액세스 정책** 탭을 클릭한 후 **액세스 지정**을 클릭하십시오.
+  2. **계정 관리 서비스에 액세스 권한 지정** 카드를 클릭하십시오.
+  3. **지원 센터**를 선택하십시오.
+  4. 사용자가 지원 케이스를 보고, 추가하고, 편집할 수 있도록 **관리자**를 선택하십시오.
+  5. **지정**을 클릭하십시오.
 
 권한을 다운그레이드하고 계십니까? 이 조치는 완료하는 데 몇 분 정도 소요될 수 있습니다.
 {: tip}
@@ -1039,7 +1126,7 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
         {: pre}
     * [인프라 인증 정보를 설정하여 IBM Cloud 인프라(SoftLayer) 포트폴리오에 액세스](#credentials)하려는 경우:
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1050,12 +1137,12 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 
     * API 키 재설정:
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}
     * 인프라 인증 정보 재설정:
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
@@ -1068,7 +1155,7 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 {: shortdesc}
 
 시작하기 전에:
-- [사용자의 인프라 인증 정보가 API 키를 설정하는 데 사용되거나 `ibmcloud ks credential-set` 명령에 사용되지 않았는지 확인하십시오](#removing).
+- [사용자의 인프라 인증 정보가 API 키를 설정하는 데 사용되거나 `ibmcloud ks credential-set` 명령에 사용되지 않았는지 확인](#removing)하십시오.
 - 사용자가 프로비저닝한 {{site.data.keyword.Bluemix_notm}} 계정에 다른 서비스 인스턴스가 있을 경우 해당 서비스에 대한 문서에서 사용자를 계정에서 제거하기 전에 완료해야 하는 단계를 확인하십시오.
 
 사용자가 퇴사하기 전에 {{site.data.keyword.Bluemix_notm}} 계정 소유자는 {{site.data.keyword.containerlong_notm}}에서 중요한 사항이 변경되지 않도록 다음 단계를 완료해야 합니다.
@@ -1103,7 +1190,7 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 사용자에 대한 특정 권한을 제거하려는 경우 사용자에게 지정된 개별 액세스 정책을 제거할 수 있습니다.
 {: shortdesc}
 
-시작하기 전에 [사용자의 인프라 인증 정보가 API 키를 설정하는 데 사용되거나 `ibmcloud ks credential-set` 명령에 사용되지 않았는지 확인하십시오](#removing). 그런 후 다음을 제거할 수 있습니다.
+시작하기 전에 [사용자의 인프라 인증 정보가 API 키를 설정하는 데 사용되거나 `ibmcloud ks credential-set` 명령에 사용되지 않았는지 확인](#removing)하십시오. 그런 후 다음을 제거할 수 있습니다.
 * [액세스 그룹의 사용자](#remove_access_group)
 * [사용자의 {{site.data.keyword.Bluemix_notm}} IAM 플랫폼 권한 및 연관된 RBAC 권한](#remove_iam_rbac)
 * [사용자의 사용자 정의 RBAC 권한](#remove_custom_rbac)
@@ -1137,7 +1224,7 @@ API 키를 설정하는 관리자 또는 인프라 인증 정보 설정에 사�
 3. 파일을 저장하십시오.
 4. 역할 바인딩 또는 클러스터 역할 바인딩 리소스의 변경사항을 클러스터에 적용하십시오.
     ```
-        kubectl apply -f my_role_binding.yaml
+    kubectl apply -f my_role_binding.yaml
     ```
     {: pre}
 

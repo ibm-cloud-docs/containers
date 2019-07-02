@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Ingress 로깅 및 모니터링
@@ -301,7 +302,7 @@ ALB 메트릭 내보내기 프로그램 팟(Pod)은 ALB가 배치된 동일한 �
 [메트릭 내보내기 프로그램](#metrics-exporter)을 선택한 후, Prometheus 에이전트 Helm 차트를 설치하여 내보내기 프로그램에서 생성한 메트릭을 선택하고 Prometheus 대시보드에 메트릭을 표시할 수 있도록 할 수 있습니다.
 {: shortdesc}
 
-1. https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz에서 메트릭 내보내기 프로그램 Helm 차트에 대한 TAR 파일을 다운로드하십시오. 
+1. https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz에서 메트릭 내보내기 프로그램 Helm 차트에 대한 TAR 파일을 다운로드하십시오.
 
 2. Prometheus 서브폴더로 이동하십시오.
   ```
