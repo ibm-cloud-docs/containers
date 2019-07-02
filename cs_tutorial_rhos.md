@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-28"
+lastupdated: "2019-07-02"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos
 
@@ -130,7 +130,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     1.  Log in to your [{{site.data.keyword.cloud_notm}} account ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
     2.  From the hamburger menu ![hamburger menu icon](../icons/icon_hamburger.svg "hamburger menu icon"), select **Kubernetes** and then click **Create cluster**.
     3.  Choose your cluster setup details and name. For the beta, OpenShift clusters are available only as standard clusters that are located in Washington, DC and London data centers.
-        *   For **Select a plan**, choose **Standard**. 
+        *   For **Select a plan**, choose **Standard**.
         *   For the **Cluster type and version**, choose **OpenShift**. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.
         *   Fill out your cluster name, resource group, and tags.
         *   For the **Location**, set the geography to **North America** or **Europe**, select either a **Single zone** or **Multizone** availability, and then select **Washington, DC** or **London** worker zones.
@@ -575,10 +575,10 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
           ...
     ```
     {: screen}
-    
+
     Having trouble editing the configuration in the terminal? You can download the configuration locally by running `oc get ds logdna-agent -n logdna -o yaml > logdna-ds.yaml`. Then, make your changes and run `oc apply -f logdna-ds.yaml`.
     {: tip}
-    
+
 7.  Verify that the `logdna-agent` pod on each node is in a **Running** status.
     ```
     oc get pods
@@ -762,7 +762,6 @@ The Red Hat OpenShift on IBM Cloud beta is released with the following limitatio
         ```
         {: pre}
     5.  Repeat these steps each time that you need to download the Calico configuration file.
-*   To deploy the [strongSwan VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn_configure), you must run the strongSwan VPN pod with privileged authority. When you configure the `values.yaml` file, set `privilegedVpnPod` to `true`.
 
 **Add-ons, integrations, and other services**:
 *   {{site.data.keyword.containerlong_notm}} add-ons such as Istio, Knative, and the Kubernetes terminal are not available.

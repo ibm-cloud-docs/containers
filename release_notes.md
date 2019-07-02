@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-01"
+lastupdated: "2019-07-02"
 
 keywords: kubernetes, iks
 
@@ -40,8 +40,14 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+  <td>02 July 2019</td>
+  <td><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.58](/docs/containers?topic=containers-cs_cli_changelog).</td>
+</tr>
+<tr>
   <td>01 July 2019</td>
   <td><ul>
+  <li><strong>Infrastructure permissions</strong>: Updated the [classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra) required for common use cases.</li>
+  <li><strong>OpenShift FAQs</strong>: Expanded the [FAQs](/docs/containers?topic=containers-faqs#container_platforms) to include information about OpenShift clusters.</li>
   <li><strong>Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}</strong>: Added information about the [App Identity and Access adapter](/docs/containers?topic=containers-istio#app-id).</li>
   <li><strong>strongSwan VPN service</strong>: If you install strongSwan in a multizone cluster and use the `enableSingleSourceIP=true` setting, you can now [set `local.subnet` to the `%zoneSubnet` variable and use the `local.zoneSubnet` to specify an IP address as a /32 subnet for each zone of the cluster](/docs/containers?topic=containers-vpn#strongswan_4).</li>
   </ul></td>

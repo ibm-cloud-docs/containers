@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1613,7 +1613,7 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     ```
     {: screen}
 
-7. Optional for public ALBs: Verify that the IPs of the new ALBs are listed under the IBM-provided Ingress subdomain for your cluster. You can find this subdomain by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+6. Optional for public ALBs: Verify that the IPs of the new ALBs are listed under the IBM-provided Ingress subdomain for your cluster. You can find this subdomain by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
   ```
   nslookup <Ingress_subdomain>
   ```
