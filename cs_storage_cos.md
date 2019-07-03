@@ -36,7 +36,7 @@ To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public 
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [re-install the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
 {: note}
 
-With version 1.0.8, the {{site.data.keyword.cos_full_notm}} plug-in Helm chart was moved from the `iks-charts` Helm repository to the `ibm-charts` Helm repository. Make sure to fetch the latest version of the Helm chart from the `ibm-charts` repository. To add the repository, run `helm repo add ibm-charts https://icr.io/helm/ibm-charts`. 
+With version 1.0.8, the {{site.data.keyword.cos_full_notm}} plug-in Helm chart is now available in the `ibm-charts` Helm repository. Make sure to fetch the latest version of the Helm chart from this repository. To add the repository, run `helm repo add ibm-charts https://icr.io/helm/ibm-charts`. 
 {: note}
 
 ## Creating your object storage service instance
