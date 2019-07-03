@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -124,7 +125,7 @@ Uma política padrão do Kubernetes que limita o acesso ao Painel do Kubernetes 
 Para visualizar, gerenciar e incluir políticas do Calico, instale e configure a CLI do Calico.
 {:shortdesc}
 
-1. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+1. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -212,7 +213,7 @@ Visualize os detalhes para políticas padrão e quaisquer políticas de rede inc
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -273,7 +274,7 @@ Para criar políticas de rede do Kubernetes, veja a [documentação de política
 Para criar políticas do Calico, use as etapas a seguir.
 
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -320,7 +321,7 @@ Para ver como incluir na lista de desbloqueio ou lista de bloqueio os endereços
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -415,10 +416,10 @@ Para criar uma política pré-DNAT:
 ## Isolando clusters na rede privada
 {: #isolate_workers}
 
-Se você tem um cluster multizona, múltiplas VLANs para um cluster de zona única ou múltiplas sub-redes na mesma VLAN, deve-se [ativar o VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para que seus nós do trabalhador possam se comunicar entre si na rede privada. No entanto, quando o VLAN Spanning está ativado, qualquer sistema que é conectado a qualquer uma das VLANs privadas na mesma conta do IBM Cloud pode se comunicar com os trabalhadores.
+Se você tem um cluster de multizona, múltiplas VLANs para um cluster de zona única ou múltiplas sub-redes na mesma VLAN, deve-se ativar um VRF ou um VLAN Spanning para que seus nós do trabalhador possam se comunicar entre si na rede privada. No entanto, quando o VRF ou o VLAN Spanning estiver ativado, qualquer sistema que estiver conectado a qualquer uma das VLANs privadas na mesma conta do {{site.data.keyword.Bluemix_notm}} poderá se comunicar com os trabalhadores.
 {: shortdesc}
 
-É possível isolar seu cluster de outros sistemas na rede privada aplicando [políticas de rede privada do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Esse conjunto de políticas e terminais de host do Calico isola o tráfego de rede privada de um cluster de outros recursos na rede privada da conta.
+É possível isolar seu cluster de outros sistemas na rede privada aplicando [políticas de rede privada do Calico ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Esse conjunto de políticas do Calico e terminais de host isola o tráfego de rede privada de um cluster de outros recursos na rede privada da conta.
 
 As políticas visam a interface privada do nó do trabalhador (eth0) e a rede de pod de um cluster.
 
@@ -434,7 +435,7 @@ As políticas visam a interface privada do nó do trabalhador (eth0) e a rede de
 
 Antes de iniciar:
 1. [Instale e configure o CLI do Calico.](#cli_install)
-2. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
+2. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Inclua as opções `--admin` e `--network` com o comando `ibmcloud ks cluster-config`. `--admin` faz download das chaves para acessar seu portfólio de infraestrutura e executar comandos do Calico em seus nós do trabalhador. `--network` faz download do arquivo de configuração do Calico para executar todos os comandos do Calico.
 
   ```
   ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
@@ -459,7 +460,7 @@ Para isolar seu cluster na rede privada usando políticas do Calico:
     1. Abra a política  ` generic-privatehostendpoint.yaml ` .
     2. Substitua `<worker_name>` pelo nome de um nó do trabalhador. **Importante**: alguns nós do trabalhador devem seguir uma estrutura de nomenclatura diferente para as políticas do Calico. Deve-se usar o nome de um nó do trabalhador no formato que é retornado pelo comando a seguir.
       ```
-      ibmcloud ks calicoctl get nodes -- config == filepath/calicoctl.cfg
+      calicoctl get nodes --config==filepath/calicoctl.cfg
       ```
       {: pre}
     3. Substitua `<worker-node-private-ip>` pelo endereço IP privado para o nó do trabalhador. Para ver os IPs privados de seu nó do trabalhador, execute `ibmcloud ks workers --cluster <my_cluster>`.
@@ -670,7 +671,7 @@ Para registrar o tráfego negado:
     ```
     {: screen}
 
-2. Para registrar todo o tráfego negado pela política criada na etapa anterior, crie uma NetworkPolicy do Calico denominada `log-denied-packets`. Por exemplo, a política de log a seguir usa o mesmo seletor de pod como a política de exemplo `access-nginx` do Kubernetes descrita na etapa 1, que inclui essa política na cadeia de regras Iptables do Calico. Ao usar um número de pedido mais alto, como `3000`, é possível assegurar que essa regra seja incluída no final da cadeia de regras de Iptables. Qualquer pacote de solicitações do pod rotulado por `run=access` que corresponda a regra de política `access-nginx` é aceito pelos pods rotulados por `run=nginx`. No entanto, quando os pacotes de qualquer outra origem tentam corresponder à regra de política `access-nginx` de baixa ordem, eles são negados. Esses pacotes tentam, então, corresponder à regra de política `log-denied-packets` de alta ordem. `log-denied-packets` registra quaisquer pacotes recebidos, portanto, apenas pacotes negados pelos pods rotulados por `run=nginx` serão registrados. Após o registro das tentativas dos pacotes, os pacotes são eliminados.
+2. Para registrar todo o tráfego negado pela política criada na etapa anterior, crie uma NetworkPolicy do Calico denominada `log-denied-packets`. Por exemplo, a política de log a seguir usa o mesmo seletor de pod como a política de exemplo `access-nginx` do Kubernetes descrita na etapa 1, que inclui essa política na cadeia de regras Iptables do Calico. Usando um número de ordem mais alto, como `3000`, é possível assegurar que essa regra seja incluída no final da cadeia de regras de Iptables. Qualquer pacote de solicitações do pod rotulado por `run=access` que corresponda a regra de política `access-nginx` é aceito pelos pods rotulados por `run=nginx`. No entanto, quando os pacotes de qualquer outra origem tentam corresponder à regra de política `access-nginx` de baixa ordem, eles são negados. Esses pacotes tentam, então, corresponder à regra de política `log-denied-packets` de alta ordem. `log-denied-packets` registra quaisquer pacotes recebidos, portanto, apenas pacotes negados pelos pods rotulados por `run=nginx` serão registrados. Após o registro das tentativas dos pacotes, os pacotes são eliminados.
   ```
   apiVersion: projectcalico.org/v3
   kind: NetworkPolicy

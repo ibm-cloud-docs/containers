@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -38,7 +39,7 @@ Exponha uma porta pública em seu nó do trabalhador e use o endereço IP públi
 {:shortdesc}
 
 Ao expor seu app criando um serviço do Kubernetes do tipo NodePort, um NodePort no intervalo de 30.000 a 32.767 e um endereço IP interno do cluster são designados ao serviço. O serviço NodePort serve como o ponto de entrada externo para solicitações recebidas para seu app. O NodePort designado é exposto publicamente nas configurações de `kubeproxy` de cada nó do trabalhador no cluster. Cada nó do trabalhador inicia o atendimento no NodePort designado para solicitações recebidas para o
-serviço. Para acessar o serviço por meio da Internet, é possível usar o endereço IP público de qualquer nó do trabalhador designado durante a criação do cluster e o NodePort no formato `<IP_address>:<nodeport>`. Além do endereço IP público, um serviço NodePort está disponível durante o endereço IP privado de um nó do trabalhador.
+serviço. Para acessar o serviço por meio da Internet, é possível usar o endereço IP público de qualquer nó do trabalhador designado durante a criação do cluster e o NodePort no formato `<IP_address>:<nodeport>`. Se você desejar acessar o serviço na rede privada, use o endereço IP privado de qualquer nó do trabalhador em vez do endereço IP público.
 
 O diagrama a seguir mostra como a comunicação é direcionada da Internet para um app quando um serviço NodePort está configurado:
 

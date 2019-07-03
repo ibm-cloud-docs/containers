@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, audit
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.cloudaccesstrailshort}} events
@@ -39,7 +41,10 @@ O  {{site.data.keyword.containershort_notm}}  gera dois tipos de eventos do  {{s
     * Esses eventos são gerados automaticamente, mas deve-se configurar seu cluster para encaminhar esses eventos para o serviço {{site.data.keyword.cloudaccesstrailshort}}.
     * É possível configurar seu cluster para enviar eventos para o **domínio de contas** ou para um **domínio de espaço** do {{site.data.keyword.cloudaccesstrailshort}}. Para obter mais informações, consulte [Enviando logs de auditoria](/docs/containers?topic=containers-health#api_forward).
 
-Para obter mais informações sobre o funcionamento do serviço, consulte a [documentação do {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started-with-cla). Para obter mais informações sobre as ações do Kubernetes que são rastreadas, revise a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/home/).
+Para obter mais informações sobre como o serviço funciona, consulte a [documentação do {{site.data.keyword.cloudaccesstrailshort}}](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started). Para obter mais informações sobre as ações do Kubernetes que são rastreadas, revise a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/home/).
+
+O {{site.data.keyword.containerlong_notm}} atualmente não está configurado para usar o {{site.data.keyword.at_full}}. Para gerenciar os eventos de gerenciamento de cluster e os logs de auditoria da API do Kubernetes, continue usando o {{site.data.keyword.cloudaccesstrailfull_notm}} com o LogAnalysis.
+{: note}
 
 ## Localizando informações para eventos
 {: #kube-find}
@@ -152,580 +157,292 @@ Verifique a tabela a seguir para obter uma lista dos eventos de auditoria do ser
 Antes de iniciar: certifique-se de que seu cluster esteja configurado para encaminhar os [eventos de auditoria da API do Kubernetes](/docs/containers?topic=containers-health#api_forward).
 
 <table>
-  <tr>
     <th>Ação</th>
-    <th>Descrição</th>
-  </tr>
-  <tr>
+    <th>Descrição</th><tr>
     <td><code> bindings.create </code></td>
-    <td>Uma ligação é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação é criada.</td></tr><tr>
     <td><code> certificatesigningrequests.create </code></td>
-    <td>Uma solicitação para assinar um certificado é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação para assinar um certificado é criada.</td></tr><tr>
     <td><code> certificatesigningrequests.delete </code></td>
-    <td>Uma solicitação para assinar um certificado é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação para assinar um certificado é excluída.</td></tr><tr>
     <td><code> certificatesigningrequests.patch </code></td>
-    <td>Uma solicitação para assinar um certificado é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação para assinar um certificado é corrigida.</td></tr><tr>
     <td><code> certificatesigningrequests.update </code></td>
-    <td>Uma solicitação para assinar um certificado é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação para assinar um certificado é atualizada.</td></tr><tr>
     <td><code> clusterbindings.create </code></td>
-    <td>Uma ligação de função de cluster é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função de cluster é criada.</td></tr><tr>
     <td><code> clusterbindings.deleted </code></td>
-    <td>Uma ligação de função de cluster foi excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função de cluster foi excluída.</td></tr><tr>
     <td><code> clusterbindings.patched </code></td>
-    <td>Uma ligação de função de cluster é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função de cluster é corrigida.</td></tr><tr>
     <td><code> clusterbindings.updated </code></td>
-    <td>Uma ligação de função de cluster é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função de cluster é atualizada.</td></tr><tr>
     <td><code> clusterroles.create </code></td>
-    <td>Uma função de cluster é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma função de cluster é criada.</td></tr><tr>
     <td><code>clusterroles.deleted</code></td>
-    <td>Uma função de cluster é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma função de cluster é excluída.</td></tr><tr>
     <td><code> clusterroles.patched </code></td>
-    <td>Uma função de cluster é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma função de cluster é corrigida.</td></tr><tr>
     <td><code> clusterroles.updated </code></td>
-    <td>Uma função de cluster é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma função de cluster é atualizada.</td></tr><tr>
     <td><code> configmaps.create </code></td>
-    <td>Um mapa de configuração é criado.</td>
-  </tr>
-  <tr>
+    <td>Um mapa de configuração é criado.</td></tr><tr>
     <td><code> configmaps.delete </code></td>
-    <td>Um mapa de configuração é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um mapa de configuração é excluído.</td></tr><tr>
     <td><code>configmaps.patch</code></td>
-    <td>Um mapa de configuração é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um mapa de configuração é corrigido.</td></tr><tr>
     <td><code> configmaps.update </code></td>
-    <td>Um mapa de configuração é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um mapa de configuração é atualizado.</td></tr><tr>
     <td><code> controllerrevisions.create </code></td>
-    <td>Uma revisão do controlador é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão do controlador é criada.</td></tr><tr>
     <td><code> controllerrevisions.delete </code></td>
-    <td>Uma revisão do controlador é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão do controlador é excluída.</td></tr><tr>
     <td><code> controllerrevisions.patch </code></td>
-    <td>Uma revisão do controlador é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão do controlador é corrigida.</td></tr><tr>
     <td><code> controllerrevisions.update </code></td>
-    <td>Uma revisão do controlador é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão do controlador é atualizada.</td></tr><tr>
     <td><code> daemonsets.create </code></td>
-    <td>Um conjunto de daemon é criado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de daemon é criado.</td></tr><tr>
     <td><code> daemonsets.delete </code></td>
-    <td>Um conjunto de daemon é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de daemon é excluído.</td></tr><tr>
     <td><code>daemonsets.patch</code></td>
-    <td>Um conjunto de daemon é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de daemon é corrigido.</td></tr><tr>
     <td><code> daemonsets.update </code></td>
-    <td>Um conjunto de daemon é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de daemon é atualizado.</td></tr><tr>
     <td><code> deployments.create </code></td>
-    <td>Uma implementação é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma implementação é criada.</td></tr><tr>
     <td><code> deployments.delete </code></td>
-    <td>Uma implementação é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma implementação é excluída.</td></tr><tr>
     <td><code> deployments.patch </code></td>
-    <td>Uma implementação é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma implementação é corrigida.</td></tr><tr>
     <td><code> deployments.update </code></td>
-    <td>Uma implementação é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma implementação é atualizada.</td></tr><tr>
     <td><code> events.create </code></td>
-    <td>Um evento é criado.</td>
-  </tr>
-  <tr>
+    <td>Um evento é criado.</td></tr><tr>
     <td><code> events.delete </code></td>
-    <td>Um evento é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um evento é excluído.</td></tr><tr>
     <td><code> events.patch </code></td>
-    <td>Um evento é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um evento é corrigido.</td></tr><tr>
     <td><code> events.update </code></td>
-    <td>Um evento é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um evento é atualizado.</td></tr><tr>
     <td><code>externaladmissionhookconfigurations.create</code></td>
-    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é criada.</td>
-  </tr>
-  <tr>
+    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é criada.</td></tr><tr>
     <td><code> externaladmissionhookconfigurations.delete </code></td>
-    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é excluída.</td>
-  </tr>
-  <tr>
+    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é excluída.</td></tr><tr>
     <td><code> externaladmissionhookconfigurationconfigurations.patch </code></td>
-    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é corrigida.</td>
-  </tr>
-  <tr>
+    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é corrigida.</td></tr><tr>
     <td><code> externaladmissionhookconfigurations.update </code></td>
-    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é atualizada.</td>
-  </tr>
-  <tr>
+    <td>No Kubernetes v1.8, uma configuração de gancho de admissões externas é atualizada.</td></tr><tr>
     <td><code> horizontalpodautoscalers.create </code></td>
-    <td>Uma política de ajuste de escala automático de pod horizontal é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de ajuste de escala automático de pod horizontal é criada.</td></tr><tr>
     <td><code> horizontalpodautoscalers.delete </code></td>
-    <td>Uma política de ajuste de escala automático de pod horizontal é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma política de ajuste de escala automático de pod horizontal é excluída.</td></tr><tr>
     <td><code> horizontalpodautoscalers.patch </code></td>
-    <td>Uma política de ajuste de escala automático de pod horizontal é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma política de ajuste de escala automático de pod horizontal é corrigida.</td></tr><tr>
     <td><code> horizontalpodautoscalers.update </code></td>
-    <td>Uma política de ajuste de escala automático de pod horizontal é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de ajuste de escala automático de pod horizontal é atualizada.</td></tr><tr>
     <td><code> ingresses.create </code></td>
-    <td>Um ALB do Ingress é criado.</td>
-  </tr>
-  <tr>
+    <td>Um ALB do Ingress é criado.</td></tr><tr>
     <td><code>ingresses.delete</code></td>
-    <td>Um ALB do Ingress é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um ALB do Ingress é excluído.</td></tr><tr>
     <td><code> ingresses.patch </code></td>
-    <td>Um ALB do Ingress é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um ALB do Ingress é corrigido.</td></tr><tr>
     <td><code> ingresses.update </code></td>
-    <td>Um ALB do Ingress é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um ALB do Ingress é atualizado.</td></tr><tr>
     <td><code> jobs.create </code></td>
-    <td>Uma tarefa é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma tarefa é criada.</td></tr><tr>
     <td><code> jobs.delete </code></td>
-    <td>Uma tarefa é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma tarefa é excluída.</td></tr><tr>
     <td><code> jobs.patch </code></td>
-    <td>Uma tarefa é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma tarefa é corrigida.</td></tr><tr>
     <td><code> jobs.update </code></td>
-    <td>Uma tarefa é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma tarefa é atualizada.</td></tr><tr>
     <td><code> localsubjectaccesscesscesscessreviews.create </code></td>
-    <td>Uma revisão de acesso de assunto local é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão de acesso de assunto local é criada.</td></tr><tr>
     <td><code>limitranges.create</code></td>
-    <td>Um limite de intervalo é criado.</td>
-  </tr>
-  <tr>
+    <td>Um limite de intervalo é criado.</td></tr><tr>
     <td><code> UNK tranges.delete </code></td>
-    <td>Um limite de intervalo é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um limite de intervalo é excluído.</td></tr><tr>
     <td><code> UNK tranges.patch </code></td>
-    <td>Um limite de intervalo é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um limite de intervalo é corrigido.</td></tr><tr>
     <td><code> UNK tranges.update </code></td>
-    <td>Um limite de intervalo é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um limite de intervalo é atualizado.</td></tr><tr>
     <td><code> mutatingwebhookconfigurations.create </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma configuração de webhook mutante é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma configuração de webhook mutante é criada.</td></tr><tr>
     <td><code> mutatingwebhookconfigurations.delete </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma configuração de webhook mutante é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma configuração de webhook mutante é excluída.</td></tr><tr>
     <td><code> mutatingwebhookconfigurations.patch </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma configuração de webhook mutante é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma configuração de webhook mutante é corrigida.</td></tr><tr>
     <td><code> mutatingwebhookconfigurations.update </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma configuração de webhook mutante é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma configuração de webhook mutante é atualizada.</td></tr><tr>
     <td><code> namespaces.create </code></td>
-    <td>Um namespace é criado.</td>
-  </tr>
-  <tr>
+    <td>Um namespace é criado.</td></tr><tr>
     <td><code> namespaces.delete </code></td>
-    <td>Um namespace é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um namespace é excluído.</td></tr><tr>
     <td><code> namespaces.patch </code></td>
-    <td>Um namespace é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um namespace é corrigido.</td></tr><tr>
     <td><code>namespaces.update</code></td>
-    <td>Um namespace é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um namespace é atualizado.</td></tr><tr>
     <td><code> networkpolicies.create </code></td>
-    <td>Uma política de rede é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de rede é criada.</td></tr><tr><tr>
     <td><code> networkpolicies.delete </code></td>
-    <td>Uma política de rede é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma política de rede é excluída.</td></tr><tr>
     <td><code> networkpolicies.patch </code></td>
-    <td>Uma política de rede é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma política de rede é corrigida.</td></tr><tr>
     <td><code> networkpolicies.update </code></td>
-    <td>Uma política de rede é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de rede é atualizada.</td></tr><tr>
     <td><code> nodes.create </code></td>
-    <td>Um nó é criado.</td>
-  </tr>
-  <tr>
+    <td>Um nó é criado.</td></tr><tr>
     <td><code>nodes.delete</code></td>
-    <td>Um nó é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um nó é excluído.</td></tr><tr>
     <td><code> nodes.patch </code></td>
-    <td>Um nó é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um nó é corrigido.</td></tr><tr>
     <td><code>nodes.update</code></td>
-    <td>Um nó é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um nó é atualizado.</td></tr><tr>
     <td><code> persistentvolumeclaims.create </code></td>
-    <td>Uma solicitação de volume persistente é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação de volume persistente é criada.</td></tr><tr>
     <td><code> persistentvolumeclaims.delete </code></td>
-    <td>Uma solicitação de volume persistente é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação de volume persistente é excluída.</td></tr><tr>
     <td><code> persistentvolumeclaims.patch </code></td>
-    <td>Uma solicitação de volume persistente é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação de volume persistente é corrigida.</td></tr><tr>
     <td><code> persistentvolumeclaims.update </code></td>
-    <td>Uma solicitação de volume persistente é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma solicitação de volume persistente é atualizada.</td></tr><tr>
     <td><code> persistentvolumes.create </code></td>
-    <td>Um volume persistente é criado.</td>
-  </tr>
-  <tr>
+    <td>Um volume persistente é criado.</td></tr><tr>
     <td><code> persistentvolumes.delete </code></td>
-    <td>Um volume persistente é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um volume persistente é excluído.</td></tr><tr>
     <td><code> persistentvolumes.patch </code></td>
-    <td>Um volume persistente é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um volume persistente é corrigido.</td></tr><tr>
     <td><code> persistentvolumes.update </code></td>
-    <td>Um volume persistente é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um volume persistente é atualizado.</td></tr><tr>
     <td><code> poddisruptionbudgets.create </code></td>
-    <td>Um orçamento de interrupção do pod é criado.</td>
-  </tr>
-  <tr>
+    <td>Um orçamento de interrupção do pod é criado.</td></tr><tr>
     <td><code> poddisruptionbudgets.delete </code></td>
-    <td>Um orçamento de interrupção do pod é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um orçamento de interrupção do pod é excluído.</td></tr><tr>
     <td><code>poddisruptionbudgets.patch</code></td>
-    <td>Um orçamento de interrupção do pod é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um orçamento de interrupção do pod é corrigido.</td></tr><tr>
     <td><code> poddisruptionbudgets.update </code></td>
-    <td>Um orçamento de interrupção do pod é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um orçamento de interrupção do pod é atualizado.</td></tr><tr>
     <td><code> podpresets.create </code></td>
-    <td>Uma pré-configuração de pod é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma pré-configuração de pod é criada.</td></tr><tr>
     <td><code> podpresets.deleted </code></td>
-    <td>Uma pré-configuração de pod é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma pré-configuração de pod é excluída.</td></tr><tr>
     <td><code> podpresets.patched </code></td>
-    <td>Uma pré-configuração de pod é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma pré-configuração de pod é corrigida.</td></tr><tr>
     <td><code> podpresets.updated </code></td>
-    <td>Uma pré-configuração de pod é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma pré-configuração de pod é atualizada.</td></tr><tr>
     <td><code>pods.create</code></td>
-    <td>Um pod é criado.</td>
-  </tr>
-  <tr>
+    <td>Um pod é criado.</td></tr><tr>
     <td><code> pods.delete </code></td>
-    <td>Um pod é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um pod é excluído.</td></tr><tr>
     <td><code> pods.patch </code></td>
-    <td>Um pod é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um pod é corrigido.</td></tr><tr>
     <td><code> pods.update </code></td>
-    <td>Um pod é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um pod é atualizado.</td></tr><tr>
     <td><code> podsecuritypolicies.create </code></td>
-    <td>Uma política de segurança de pod é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de segurança de pod é criada.</td></tr><tr>
     <td><code> podsecuritypolicies.delete </code></td>
-    <td>Uma política de segurança de pod é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma política de segurança de pod é excluída.</td></tr><tr>
     <td><code> podsecuritypolicies.patch </code></td>
-    <td>Uma política de segurança pod é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma política de segurança pod é corrigida.</td></tr><tr>
     <td><code>podsecuritypolicies.update</code></td>
-    <td>Uma política de segurança de pod é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma política de segurança de pod é atualizada.</td></tr><tr>
     <td><code> podtemplates.create </code></td>
-    <td>Um modelo de pod é criado.</td>
-  </tr>
-  <tr>
+    <td>Um modelo de pod é criado.</td></tr><tr>
     <td><code> podtemplates.delete </code></td>
-    <td>Um modelo de pod é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um modelo de pod é excluído.</td></tr><tr>
     <td><code>podtemplates.patch</code></td>
-    <td>Um modelo de pod é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um modelo de pod é corrigido.</td></tr><tr>
     <td><code> podtemplates.update </code></td>
-    <td>Um modelo de pod é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um modelo de pod é atualizado.</td></tr><tr>
     <td><code>replicasets.create</code></td>
-    <td>Um conjunto de réplicas é criado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de réplicas é criado.</td></tr><tr>
     <td><code> replicasets.delete </code></td>
-    <td>Um conjunto de réplicas é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de réplicas é excluído.</td></tr><tr>
     <td><code> replicasets.patch </code></td>
-    <td>Um conjunto de réplicas é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de réplicas é corrigido.</td></tr><tr>
     <td><code> replicasets.update </code></td>
-    <td>Um conjunto de réplicas é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto de réplicas é atualizado.</td></tr><tr>
     <td><code> replicationcontrollers.create </code></td>
-    <td>Um controlador de replicação é criado.</td>
-  </tr>
-  <tr>
+    <td>Um controlador de replicação é criado.</td></tr><tr>
     <td><code> replicationcontrollers.delete </code></td>
-    <td>Um controlador de replicação é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um controlador de replicação é excluído.</td></tr><tr>
     <td><code> replicationcontrollers.patch </code></td>
-    <td>Um controlador de replicação é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um controlador de replicação é corrigido.</td></tr><tr>
     <td><code> replicationcontrollers.update </code></td>
-    <td>Um controlador de replicação é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um controlador de replicação é atualizado.</td></tr><tr>
     <td><code> resourcequotas.create </code></td>
-    <td>Uma cota de recurso é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma cota de recurso é criada.</td></tr><tr>
     <td><code> resourcequotas.delete </code></td>
-    <td>Uma cota de recurso é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma cota de recurso é excluída.</td></tr><tr>
     <td><code> resourcequotas.patch </code></td>
-    <td>Uma cota de recurso é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma cota de recurso é corrigida.</td></tr><tr>
     <td><code> resourcequotas.update </code></td>
-    <td>Uma cota de recurso é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma cota de recurso é atualizada.</td></tr><tr>
     <td><code> rolebindings.create </code></td>
-    <td>Uma ligação de função é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função é criada.</td></tr><tr>
     <td><code> rolebindings.deleted </code></td>
-    <td>Uma ligação de função é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função é excluída.</td></tr><tr>
     <td><code> rolebindings.patched </code></td>
-    <td>Uma ligação de função é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função é corrigida.</td></tr><tr>
     <td><code> rolebindings.updated </code></td>
-    <td>Uma ligação de função é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma ligação de função é atualizada.</td></tr><tr>
     <td><code> roles.create </code></td>
-    <td>Uma função é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma função é criada.</td></tr><tr>
     <td><code> roles.deleted </code></td>
-    <td>Uma função é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma função é excluída.</td></tr><tr>
     <td><code> roles.patched </code></td>
-    <td>Uma função é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma função é corrigida.</td></tr><tr>
     <td><code> roles.updated </code></td>
-    <td>Uma função é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma função é atualizada.</td></tr><tr>
     <td><code>secrets.create</code></td>
-    <td>Um segredo é criado.</td>
-  </tr>
-  <tr>
+    <td>Um segredo é criado.</td></tr><tr>
     <td><code> secrets.deleted </code></td>
-    <td>Um segredo é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um segredo é excluído.</td></tr><tr>
     <td><code> secrets.get </code></td>
-    <td>Um segredo é visualizado.</td>
-  </tr>
-  <tr>
+    <td>Um segredo é visualizado.</td></tr><tr>
     <td><code> secrets.patch </code></td>
-    <td>Um segredo é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um segredo é corrigido.</td></tr><tr>
     <td><code> secrets.updated </code></td>
-    <td>Um segredo é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um segredo é atualizado.</td></tr><tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>Uma revisão de acesso de autoassunto é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão de acesso de autoassunto é criada.</td></tr><tr>
     <td><code> selfsubjectrouesreviews.create </code></td>
-    <td>Uma revisão de regras de autoassunto é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão de regras de autoassunto é criada.</td></tr><tr>
     <td><code> subjectaccessreviewreviews.create </code></td>
-    <td>Uma revisão de acesso de assunto é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão de acesso de assunto é criada.</td></tr><tr>
     <td><code>serviceaccounts.create</code></td>
-    <td>Uma conta de serviço é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma conta de serviço é criada.</td></tr><tr>
     <td><code> serviceaccounts.deleted </code></td>
-    <td>Uma conta de serviço é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma conta de serviço é excluída.</td></tr><tr>
     <td><code> serviceaccounts.patch </code></td>
-    <td>Uma conta de serviço é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma conta de serviço é corrigida.</td></tr><tr>
     <td><code> serviceaccounts.updated </code></td>
-    <td>Uma conta de serviço é atualizada.</td>
-  </tr>
-  <tr>
+    <td>Uma conta de serviço é atualizada.</td></tr><tr>
     <td><code> services.create </code></td>
-    <td>Um serviço é criado.</td>
-  </tr>
-  <tr>
+    <td>Um serviço é criado.</td></tr><tr>
     <td><code> services.deleted </code></td>
-    <td>Um serviço é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um serviço é excluído.</td></tr><tr>
     <td><code> services.patch </code></td>
-    <td>Um serviço é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um serviço é corrigido.</td></tr><tr>
     <td><code>services.updated</code></td>
-    <td>Um serviço é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um serviço é atualizado.</td></tr><tr>
     <td><code> statefulsets.create </code></td>
-    <td>Um conjunto stateful é criado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto stateful é criado.</td></tr><tr>
     <td><code> statefulsets.delete </code></td>
-    <td>Um conjunto stateful é excluído.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto stateful é excluído.</td></tr><tr>
     <td><code> statefulsets.patch </code></td>
-    <td>Um conjunto stateful é corrigido.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto stateful é corrigido.</td></tr><tr>
     <td><code> statefulsets.update </code></td>
-    <td>Um conjunto stateful é atualizado.</td>
-  </tr>
-  <tr>
+    <td>Um conjunto stateful é atualizado.</td></tr><tr>
     <td><code> tokenreviews.create </code></td>
-    <td>Uma revisão de token é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma revisão de token é criada.</td></tr><tr>
     <td><code> validatingwebhookconfigurations.create </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma validação de configuração de webhook é criada.</td>
-  </tr>
-  <tr>
+    <td>Uma validação de configuração de webhook é criada.</td></tr><tr>
     <td><code> validatingwebhookconfigurations.delete </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma validação de configuração de webhook é excluída.</td>
-  </tr>
-  <tr>
+    <td>Uma validação de configuração de webhook é excluída.</td></tr><tr>
     <td><code> validatingwebhookconfigurations.patch </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma validação de configuração de webhook é corrigida.</td>
-  </tr>
-  <tr>
+    <td>Uma validação de configuração de webhook é corrigida.</td></tr><tr>
     <td><code> validatingwebhookconfigurations.update </code></td>
-    <td>No Kubernetes v1.9 e mais recente, uma validação de configuração de webhook é atualizada.</td>
-  </tr>
+    <td>Uma validação de configuração de webhook é atualizada.</td></tr>
 </table>

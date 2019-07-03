@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Protegendo informações sensíveis em seu cluster
@@ -42,7 +44,7 @@ _Figura: visão geral da criptografia de dados em um cluster_
 1.  **etcd**: etcd é o componente do mestre que armazena os dados dos recursos do Kubernetes, como arquivos `.yaml` de configuração de objeto e segredos. Os dados em etcd são armazenados no disco local do principal do Kubernetes e são submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. Será possível optar por ativar a criptografia de seus dados etcd no disco local de seu mestre do Kubernetes [ativando a criptografia do {{site.data.keyword.keymanagementservicelong_notm}}](#keyprotect) para seu cluster. Os dados etcd em clusters que executam uma versão anterior do Kubernetes são armazenados em um disco criptografado que é gerenciado pela IBM e submetido a backup diariamente. Quando os dados etcd são enviados para um pod, eles são criptografados por meio de TLS para assegurar a proteção de dados e a integridade.
 2.  **Disco secundário do nó do trabalhador**: o disco secundário do seu nó do trabalhador é onde o sistema de arquivos de contêiner e imagens puxadas localmente são armazenados. O disco é criptografado com AES de 256 bits com uma chave de criptografia LUKS que é exclusiva para o nó do trabalhador e armazenada como um segredo em etcd, gerenciado pela IBM. Ao recarregar ou atualizar os nós do trabalhador, as chaves LUKS serão giradas.
 3.  **Armazenamento**: é possível optar por armazenar dados [configurando o armazenamento persistente de arquivo, de bloco ou de objeto](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). As instâncias de armazenamento de infraestrutura do IBM Cloud (SoftLayer) salvam os dados em discos criptografados, portanto, seus dados em repouso são criptografados. Além disso, se você escolher armazenamento de objeto, seus dados em trânsito também serão criptografados.
-4.  **Serviços do {{site.data.keyword.Bluemix_notm}}**: é possível [integrar serviços do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), como o {{site.data.keyword.registryshort_notm}} ou o {{site.data.keyword.watson}}, ao seu cluster. As credenciais de serviço são armazenadas em um segredo que é salvo no etcd, que seu app pode acessar montando o segredo como um volume ou especificando-o como uma variável de ambiente em [sua implementação](/docs/containers?topic=containers-app#secret).
+4.  **Serviços do {{site.data.keyword.Bluemix_notm}}**: é possível [integrar serviços do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), como {{site.data.keyword.registryshort_notm}} ou {{site.data.keyword.watson}}, com seu cluster. As credenciais de serviço são armazenadas em um segredo que é salvo no etcd, que seu app pode acessar montando o segredo como um volume ou especificando-o como uma variável de ambiente em [sua implementação](/docs/containers?topic=containers-app#secret).
 5.  **{{site.data.keyword.keymanagementserviceshort}}**: quando você [ativa o {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) em seu cluster, uma chave de criptografia de dados agrupada (DEK) é armazenada em etcd. O DEK criptografa os segredos em seu cluster, incluindo as credenciais de serviço e a chave LUKS. Como a chave raiz está em sua instância do {{site.data.keyword.keymanagementserviceshort}}, você controla o acesso a seus segredos criptografados. As chaves do {{site.data.keyword.keymanagementserviceshort}} são protegidas por módulos de segurança de hardware certificados por FIPS 140-2 Nível 2, baseados em nuvem, que protegem contra roubo de informações. Para obter mais informações sobre como a criptografia do {{site.data.keyword.keymanagementserviceshort}} funciona, consulte [Criptografia do Envelope](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption).
 
 ## Entendendo Quando Usar Segredos
@@ -81,20 +83,20 @@ Ao criar um cluster, os segredos para suas credenciais do {{site.data.keyword.re
 ## Criptografando o disco local e os segredos do mestre do Kubernetes usando o {{site.data.keyword.keymanagementserviceshort}} (beta)
 {: #keyprotect}
 
-É possível proteger o componente etcd em seu principal e nos segredos do Kubernetes usando o [{{site.data.keyword.keymanagementservicefull}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial) como um [provedor de serviço de gerenciamento de chaves (KMS) do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) em seu cluster. O provedor KMS é um recurso alfa no Kubernetes versão 1.11, o que torna a integração do {{site.data.keyword.keymanagementserviceshort}} uma liberação beta no {{site.data.keyword.containerlong_notm}}.
+É possível proteger o componente etcd em seu principal do Kubernetes e segredos do Kubernetes usando o [{{site.data.keyword.keymanagementservicefull}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial) como um provedor [Key Management Service (KMS) do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) em seu cluster. O provedor KMS é um recurso alfa no Kubernetes versão 1.11, o que torna a integração do {{site.data.keyword.keymanagementserviceshort}} uma liberação beta no {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 Por padrão, os segredos da configuração do cluster e do Kubernetes são armazenados no componente etcd do mestre do Kubernetes gerenciado pela IBM. Os nós do trabalhador também têm discos secundários que são criptografados por chaves LUKS gerenciadas pela IBM que são armazenadas como segredos em etcd. Os dados em etcd são armazenados no disco local do principal do Kubernetes e são submetidos a backup no {{site.data.keyword.cos_full_notm}}. Os dados são criptografados durante o trânsito para o {{site.data.keyword.cos_full_notm}} e em repouso. No entanto, os dados em seu componente etcd no disco local de seu mestre do Kubernetes não são criptografados automaticamente até que você ative a criptografia do {{site.data.keyword.keymanagementserviceshort}} para seu cluster. Os dados etcd para clusters que executam uma versão anterior do Kubernetes são armazenados em um disco criptografado gerenciado pela IBM e submetidos a backup diariamente.
 
 Quando você ativa o {{site.data.keyword.keymanagementserviceshort}} em seu cluster, sua própria chave raiz é usada para criptografar dados em etcd, incluindo os segredos do LUKS. Você obtém mais controle sobre seus dados sensíveis criptografando os segredos com sua chave raiz. O uso de sua própria criptografia inclui uma camada de segurança nos dados de etcd e nos segredos do Kubernetes e fornece um controle mais granular de quem pode acessar informações confidenciais do cluster. Se você precisar remover irreversivelmente o acesso para etcd ou seus segredos, será possível excluir a chave raiz.
 
-Não exclua chaves raiz em sua instância do {{site.data.keyword.keymanagementserviceshort}}. Não exclua chaves mesmo se você girar para usar uma nova chave. Não será possível acessar ou remover os dados em etcd ou os dados dos segredos em seu cluster se você excluir uma chave raiz. 
+Não exclua chaves raiz em sua instância do {{site.data.keyword.keymanagementserviceshort}}. Não exclua chaves mesmo se você girar para usar uma nova chave. Não será possível acessar ou remover os dados em etcd ou os dados dos segredos em seu cluster se você excluir uma chave raiz.
 {: important}
 
 Antes de iniciar:
-* [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Verifique se o seu cluster executa o Kubernetes versão 1.11.3_1521 ou mais recente executando `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` e verificando o campo **Versão**.
-* Assegure-se de ter a [função da plataforma do IAM **Administrador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o cluster.
+* Assegure-se de que você tenha a [função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 * Certifique-se de que a chave API que está configurada para a região em que seu cluster está tenha autorização para usar o Key Protect. Para verificar o proprietário da chave de API cujas credenciais são armazenadas para a região, execute `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 Para ativar o {{site.data.keyword.keymanagementserviceshort}} ou para atualizar a instância ou a chave raiz que criptografa segredos no cluster:
@@ -133,7 +135,7 @@ Para ativar o {{site.data.keyword.keymanagementserviceshort}} ou para atualizar 
 
 8.  Durante a ativação, você pode não conseguir acessar o mestre Kubernetes, tal como atualizar configurações YAML para implementações. Na saída do comando a seguir, verifique se o **Status do mestre** é **Pronto**.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -159,7 +161,7 @@ Para ativar o {{site.data.keyword.keymanagementserviceshort}} ou para atualizar 
 
 9.  Opcional: para girar sua chave, repita essas etapas com um novo ID de chave raiz. A nova chave raiz é incluída na configuração do cluster com a chave raiz anterior para que os dados criptografados existentes ainda permaneçam protegidos.
 
-Não exclua chaves raiz em sua instância do {{site.data.keyword.keymanagementserviceshort}}. Não exclua chaves mesmo se você girar para usar uma nova chave. Não será possível acessar ou remover os dados em etcd ou os dados dos segredos em seu cluster se você excluir uma chave raiz. 
+Não exclua chaves raiz em sua instância do {{site.data.keyword.keymanagementserviceshort}}. Não exclua chaves mesmo se você girar para usar uma nova chave. Não será possível acessar ou remover os dados em etcd ou os dados dos segredos em seu cluster se você excluir uma chave raiz.
 {: important}
 
 

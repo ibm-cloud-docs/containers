@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,665 +21,239 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Planejando a configuração do seu cluster e do nó do trabalhador
+# Planejando a configuração de rede de cluster
 {: #plan_clusters}
-Projete seu cluster padrão para máxima disponibilidade e capacidade para seu app com o {{site.data.keyword.containerlong}}.
+
+Projete uma configuração de rede para seu cluster do {{site.data.keyword.containerlong}} que atenda às necessidades de suas cargas de trabalho e ambiente.
 {: shortdesc}
 
-## Clusters altamente disponíveis
-{: #ha_clusters}
+Em um cluster do {{site.data.keyword.containerlong_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. A configuração de comunicação entre os nós do trabalhador e o principal do Kubernetes, outros serviços, a Internet ou outras redes privadas depende de como você configura sua rede de infraestrutura do IBM Cloud (SoftLayer).
 
-Seus usuários são menos propensos a experienciar o tempo de inatividade quando você distribui seus apps em múltiplos nós do trabalhador, zonas e clusters. Recursos integrados, como balanceamento de carga e isolamento, aumentam a resiliência com relação a potenciais
-falhas com hosts, redes ou apps.
+Primeira criação de um cluster? Experimente o nosso [tutorial](/docs/containers?topic=containers-cs_cluster_tutorial) primeiro e volte aqui quando estiver pronto para planejar seus clusters prontos para produção.
+{: tip}
+
+Para planejar sua configuração de rede de cluster, primeiro [entenda os fundamentos de rede de cluster](#plan_basics). Em seguida, é possível revisar três potenciais configurações de rede de cluster que são adequadas para cenários baseados em ambiente, incluindo [executar cargas de trabalho do app voltadas para a Internet](#internet-facing), [ampliar um data center no local com acesso público limitado](#limited-public) e [ampliar um data center no local somente de rede privada](#private_clusters).
+
+## Entendendo os fundamentos de rede de cluster
+{: #plan_basics}
+
+Ao criar seu cluster, deve-se escolher uma configuração de rede para que determinados componentes do cluster possam se comunicar entre si e com redes ou serviços fora do cluster.
 {: shortdesc}
 
-Revise estas potenciais configurações de cluster que são ordenadas com graus crescentes de disponibilidade.
+* [Comunicação de trabalhador para trabalhador](#worker-worker): todos os nós do trabalhador devem ser capazes de se comunicar entre si na rede privada. Em muitos casos, a comunicação deve ser permitida em múltiplas VLANs privadas para permitir que trabalhadores em VLANs diferentes e em zonas diferentes se conectem entre si.
+* [Comunicação de trabalhador para principal e de usuário para principal](#workeruser-master): seus nós do trabalhador e seus usuários do cluster autorizados podem se comunicar com o principal do Kubernetes de forma segura pela rede pública com TLS ou pela rede privada por meio de terminais em serviço privado.
+* [Comunicação do trabalhador para outros serviços do {{site.data.keyword.Bluemix_notm}} ou redes no local](#worker-services-onprem): permita que os nós do trabalhador se comuniquem de forma segura com outros serviços do {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.registrylong}} e com uma rede no local.
+* [Comunicação externa para apps que são executados em nós do trabalhador](#external-workers): permita solicitações públicas ou privadas no cluster, bem como solicitações fora do cluster em um terminal público.
 
-![High availability for clusters](images/cs_cluster_ha_roadmap_multizone.png)
+### Comunicação de trabalhador para trabalhador
+{: #worker-worker}
 
-1. Um [cluster de zona única](#single_zone) com múltiplos nós do trabalhador em um conjunto de trabalhadores.
-2. Um [cluster de múltiplas zonas](#multizone) que difunde nós do trabalhador em zonas dentro de uma região.
-3. [Múltiplos clusters](#multiple_clusters) que são configurados em zonas ou regiões e que são conectados por meio de um balanceador de carga global.
-
-## Cluster de zona única
-{: #single_zone}
-
-Para melhorar a disponibilidade para seu app e para permitir o failover para o caso de um nó do trabalhador não estar disponível em seu cluster, inclua nós do trabalhador adicionais em seu cluster de zona única.
+Quando você cria um cluster, os nós do trabalhador do cluster são conectados automaticamente a uma VLAN privada e, opcionalmente, conectados a uma VLAN pública. Uma VLAN configura um grupo de nós do trabalhador e pods como se eles estivessem conectados à mesma ligação física e fornece um canal para conectividade entre os trabalhadores.
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="Alta disponibilidade para clusters em uma zona única" width="230" style="width:230px; border-style: none"/>
+**Conexões de VLAN para nós do trabalhador**</br>
+Todos os nós do trabalhador devem ser conectados a uma VLAN privada para que cada nó do trabalhador possa enviar e receber informações para outros nós do trabalhador. Ao criar um cluster com nós do trabalhador que também estão conectados a uma VLAN pública, os nós do trabalhador poderão se comunicar com o principal do Kubernetes automaticamente pela VLAN pública e pela VLAN privada, se você ativar o terminal em serviço privado. A VLAN pública também fornece conectividade de rede pública para que seja possível expor apps em seu cluster na Internet. No entanto, se você precisar proteger seus apps na interface pública, várias opções estarão disponíveis para proteger seu cluster, como usar políticas de rede do Calico ou isolar a carga de trabalho de rede externa para os nós do trabalhador de borda.
+* Clusters grátis: em clusters grátis, os nós do trabalhador do cluster são conectados a uma VLAN pública e VLAN privada de propriedade da IBM por padrão. Como a IBM controla as VLANs, as sub-redes e os endereços IP, não é possível criar clusters de múltiplas zonas ou incluir sub-redes em seu cluster e é possível usar somente serviços NodePort para expor seu app.</dd>
+* Clusters padrão: em clusters padrão, na primeira vez que você cria um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona são provisionadas automaticamente em sua conta de infraestrutura do IBM Cloud (SoftLayer). Se você especificar que os nós do trabalhador devem ser conectados a somente uma VLAN privada, somente uma VLAN privada nessa zona será provisionada automaticamente. Para cada cluster subsequente que for criado nessa zona, será possível especificar o par de VLANs que você deseja usar. É possível reutilizar as mesmas VLANs públicas e privadas que foram criadas para você porque múltiplos clusters podem compartilhar VLANs.
 
-Por padrão, seu cluster de zona única está configurado com um conjunto de trabalhadores denominado `default`. O conjunto de trabalhadores agrupa nós do trabalhador com a mesma configuração, tal como o tipo de máquina, que você definiu durante a criação do cluster. É possível incluir mais nós do trabalhador em seu cluster [redimensionando um conjunto de trabalhadores existente](/docs/containers?topic=containers-clusters#resize_pool) ou [incluindo um novo conjunto de trabalhadores](/docs/containers?topic=containers-clusters#add_pool).
+Para obter mais informações sobre VLANs, sub-redes e endereços IP, consulte [Visão geral de rede no {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
 
-Ao incluir mais nós do trabalhador, as instâncias do app podem ser distribuídas entre múltiplos nós do trabalhador. Se um nó do trabalhador ficar inativo, as instâncias do app em nós do trabalhador disponíveis continuarão a ser executadas. O Kubernetes reagenda automaticamente os pods de nós do trabalhador indisponíveis para assegurar desempenho e capacidade para seu app. Para assegurar que os seus pods sejam distribuídos de maneira uniforme entre os nós do trabalhador, implemente a [afinidade de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
+**Comunicação de nó do trabalhador entre sub-redes e VLANs**</br>
+Em várias situações, os componentes em seu cluster devem ter permissão para se comunicar entre múltiplas VLANs privadas. Por exemplo, se você desejar criar um cluster de múltiplas zonas, se você tiver múltiplas VLANs para um cluster ou se tiver múltiplas sub-redes na mesma VLAN, os nós do trabalhador em sub-redes diferentes na mesma VLAN ou em VLANs diferentes não poderão se comunicar automaticamente entre si. Deve-se ativar o Virtual Routing and Forwarding (VRF) ou o VLAN Spanning para sua conta de infraestrutura do IBM Cloud (SoftLayer).
 
-**Posso converter meu cluster de zona única em um cluster multizona?**</br>
-Se o cluster estiver em um dos [locais de metro de múltiplas zonas suportados](/docs/containers?topic=containers-regions-and-zones#zones), sim. Veja [Atualizando de nós do trabalhador independentes para conjuntos de trabalhadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+* [Virtual Routing and Forwarding (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud): o VRF permite que todas as VLANs privadas e sub-redes em sua conta de infraestrutura se comuniquem entre si. Além disso, o VRF é necessário para permitir que seus trabalhadores e o principal se comuniquem pelo terminal em serviço privado e se comuniquem com outras instâncias do {{site.data.keyword.Bluemix_notm}} que suportam terminais em serviço privado. Para ativar o VRF, execute `ibmcloud account update --service-endpoint-enable true`. Essa saída de comando solicita que você abra um caso de suporte para ativar sua conta para usar o VRF e os terminais em serviço. O VRF elimina a opção VLAN Spanning para sua conta porque todas as VLANs são capazes de se comunicar.</br></br>
+Quando o VRF for ativado, qualquer sistema que estiver conectado a qualquer uma das VLANs privadas na mesma conta do {{site.data.keyword.Bluemix_notm}} poderá se comunicar com os nós do trabalhador do cluster. É possível isolar seu cluster de outros sistemas na rede privada, aplicando [políticas de rede privada do Calico](/docs/containers?topic=containers-network_policies#isolate_workers).</dd>
+* [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning): se você não puder ou não desejar ativar o VRF, por exemplo, se não precisar que o principal seja acessível na rede privada ou se usar um dispositivo de gateway para acessar o principal pela VLAN pública, ative o VLAN Spanning. Por exemplo, se você tiver um dispositivo de gateway existente e, em seguida, incluir um cluster, as novas sub-redes móveis que forem pedidas para o cluster não serão configuradas no dispositivo de gateway, mas o VLAN Spanning ativará o roteamento entre as sub-redes. Para ativar o VLAN Spanning, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar VLAN Spanning de rede** ou é possível solicitar ao proprietário da conta para ativá-lo. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Não será possível ativar o terminal em serviço privado se você escolher ativar o VLAN Spanning em vez do VRF.
 
+</br>
 
-**Eu tenho que usar clusters de múltiplas zonas?**</br>
-Não. É possível criar tantos clusters de zona única quantos você desejar. De fato, você pode preferir clusters de zona única para gerenciamento simplificado ou se o seu cluster deve residir em uma [cidade de zona única](/docs/containers?topic=containers-regions-and-zones#zones) específica.
+### Comunicação de trabalhador para principal e de usuário para principal
+{: #workeruser-master}
 
-**Posso ter um principal altamente disponível em uma única zona?**</br>
-Sim. Em uma única zona, o seu mestre está altamente disponível e inclui réplicas em hosts físicos separados para seu servidor de API do Kubernetes, um etcd, um planejador e um gerenciador de controlador para proteger contra uma indisponibilidade, como durante uma atualização principal. Para proteger contra uma falha zonal, é possível:
-* [criar um cluster em uma zona com capacidade para várias zonas](/docs/containers?topic=containers-plan_clusters#multizone), em que o mestre seja distribuído entre zonas.
-* [criar múltiplos clusters](#multiple_clusters) e conectá-los a um balanceador de carga global.
-
-## Cluster de múltiplas zonas
-{: #multizone}
-
-Com o  {{site.data.keyword.containerlong_notm}}, é possível criar clusters multizona. Seus usuários são menos propensos a experienciar o tempo de inatividade quando você distribui seus apps em múltiplos nós do trabalhador e zonas usando um conjunto de trabalhadores. Os recursos integrados, como balanceamento de carga, aumentam a resiliência com relação a potenciais falhas de zona com hosts, redes ou apps. Se os recursos em uma zona ficam inativos, as cargas de trabalho do cluster ainda operam nas outras zonas.
+Um canal de comunicação deve ser configurado para que os nós do trabalhador possam estabelecer uma conexão com o principal do Kubernetes. É possível permitir que seus nós do trabalhador e o principal do Kubernetes se comuniquem ativando somente o terminal em serviço público, os terminais em serviço público e privado ou somente o terminal em serviço privado.
 {: shortdesc}
 
-**O que é um conjunto do trabalhador?**</br>
-Um conjunto de trabalhadores é uma coleção de nós do trabalhador com o mesmo tipo, como o tipo de máquina, a CPU e a memória. Quando você cria um cluster, um conjunto de trabalhadores padrão é criado automaticamente. Para difundir os nós do trabalhador em seu conjunto nas zonas, incluir nós do trabalhador no conjunto ou atualizar nós do trabalhador, é possível usar os novos comandos `ibmcloud ks worker-pool`.
+Para proteger a comunicação por terminais em serviço público e privado, o {{site.data.keyword.containerlong_notm}} configura automaticamente uma conexão OpenVPN entre o principal do Kubernetes e o nó do trabalhador quando o cluster é criado. Os trabalhadores conversam de forma segura com o principal por meio de certificados TLS e o principal conversa com os trabalhadores por meio da conexão OpenVPN.
 
-**Ainda posso usar nós do trabalhador independentes?**</br>
-A configuração de cluster anterior de nós do trabalhador independentes é suportada, mas descontinuada. Certifique-se de [incluir um conjunto de trabalhadores em seu cluster](/docs/containers?topic=containers-clusters#add_pool) e, em seguida, [usar os conjuntos de trabalhadores](/docs/containers?topic=containers-update#standalone_to_workerpool) para organizar os nós do trabalhador em vez de nós do trabalhador independentes.
+**Somente terminal em serviço público**</br>
+Se você não desejar ou não puder ativar o VRF para sua conta, seus nós do trabalhador poderão se conectar automaticamente ao principal do Kubernetes pela VLAN pública por meio do terminal em serviço público.
+* A comunicação entre os nós do trabalhador e o principal é estabelecida de forma segura pela rede pública por meio do terminal em serviço público.
+* O principal é publicamente acessível aos usuários do cluster autorizados somente por meio do terminal em serviço público. Os usuários do cluster podem acessar com segurança seu mestre do Kubernetes na Internet para executar os comandos `kubectl`, por exemplo.
 
-**Posso converter meu cluster de zona única em um cluster multizona?**</br>
-Se o cluster estiver em um dos [locais de metro de múltiplas zonas suportados](/docs/containers?topic=containers-regions-and-zones#zones), sim. Veja [Atualizando de nós do trabalhador independentes para conjuntos de trabalhadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+**Terminais em serviço público e privado**</br>
+Para tornar seu principal acessível de forma pública ou privada aos usuários do cluster, é possível ativar os terminais em serviço público e privado. O VRF é necessário em sua conta do {{site.data.keyword.Bluemix_notm}} e deve-se ativar sua conta para usar os terminais em serviço. Para ativar o VRF e os terminais em serviço, execute `ibmcloud account update --service-endpoint-enable true`.
+* Se os nós do trabalhador estiverem conectados a VLANs públicas e privadas, a comunicação entre os nós do trabalhador e o principal será estabelecida pela rede privada por meio do terminal em serviço privado e pela rede pública por meio do terminal em serviço público. Ao rotear metade do tráfego do trabalhador para o principal pelo terminal público e metade pelo terminal privado, a comunicação entre eles é protegida contra possíveis indisponibilidades da rede pública ou da rede privada. Se os nós do trabalhador estiverem conectados a somente VLANs privadas, a comunicação entre os nós do trabalhador e o principal será estabelecida pela rede privada somente por meio do terminal em serviço privado.
+* O mestre é publicamente acessível aos usuários de cluster autorizados por meio do terminal em serviço público. O principal é acessível de forma privada por meio do terminal em serviço privado se os usuários do cluster autorizados estão em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou estão conectados à rede privada por meio de uma conexão VPN ou do {{site.data.keyword.Bluemix_notm}} Direct Link. Observe que se deve [expor o terminal principal por meio de um balanceador de carga privado](/docs/containers?topic=containers-clusters#access_on_prem) para que os usuários possam acessar o principal por meio de uma conexão VPN ou {{site.data.keyword.Bluemix_notm}} Direct Link.
 
+**Somente terminal em serviço privado**</br>
+Para tornar seu principal acessível somente de forma privada, é possível ativar o terminal em serviço privado. O VRF é necessário em sua conta do {{site.data.keyword.Bluemix_notm}} e deve-se ativar sua conta para usar os terminais em serviço. Para ativar o VRF e os terminais em serviço, execute `ibmcloud account update --service-endpoint-enable true`. Observe que o uso somente do terminal em serviço privado não incorre em encargos de largura da banda faturados ou medidos.
+* A comunicação entre os nós do trabalhador e o principal é estabelecida pela rede privada por meio do terminal em serviço privado.
+* O principal será acessível de forma privada se os usuários do cluster autorizados estiverem em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou estiverem conectados à rede privada por meio de uma conexão VPN ou DirectLink. Observe que se deve [expor o terminal principal por meio de um balanceador de carga privado](/docs/containers?topic=containers-clusters#access_on_prem) para que os usuários possam acessar o principal por meio de uma conexão VPN ou DirectLink.
 
-### Conte-me mais sobre a configuração do cluster de múltiplas zonas
-{: #mz_setup}
+</br>
 
-<img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilidade para clusters de várias zonas" width="500" style="width:500px; border-style: none"/>
+### Comunicação do trabalhador com outros serviços do {{site.data.keyword.Bluemix_notm}} ou redes no local
+{: #worker-services-onprem}
 
-É possível incluir zonas adicionais em seu cluster para replicar os nós do trabalhador em seus conjuntos de trabalhadores em múltiplas zonas dentro de uma região. Os clusters de múltiplas zonas são projetados para planejar uniformemente os pods em nós do trabalhador e zonas para assegurar disponibilidade e recuperação de falha. Se os nós do trabalhador não forem distribuídos uniformemente entre as zonas ou a capacidade for insuficiente em uma delas, o planejador do Kubernetes poderá falhar ao planejar todos os pods solicitados. Como resultado, os pods podem entrar em um estado **Pendente** até que capacidade suficiente esteja disponível. Se você desejar mudar o comportamento padrão para fazer o planejador do Kubernetes distribuir os pods entre zonas em uma melhor distribuição de esforço, use a [política de afinidade de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
-
-**Por que eu preciso de nós do trabalhador em 3 zonas?** </br>
-Distribuir sua carga de trabalho em 3 zonas assegura alta disponibilidade para seu app no caso de uma ou duas zonas não estarem disponíveis, mas também torna sua configuração de cluster mais eficiente em termos de custo. Por que isso, você pergunta? Aqui está um exemplo.
-
-Vamos dizer que você precisa de um nó do trabalhador com 6 núcleos para manipular a carga de trabalho para seu app. Para tornar seu cluster mais disponível, você tem as opções a seguir:
-
-- **Duplicar seus recursos em outra zona:** essa opção o deixa com 2 nós do trabalhador, cada um com 6 núcleos em cada zona, totalizando 12 núcleos. </br>
-- **Distribuir recursos em 3 zonas:** com essa opção, você implementa 3 núcleos por zona, deixando-o uma capacidade total de 9 núcleos. Para manipular a sua carga de trabalho, duas zonas devem estar ativas por vez. Se uma zona estiver indisponível, as outras duas zonas poderão manipular sua carga de trabalho. Se duas zonas estiverem indisponíveis, os 3 núcleos restantes estarão ativos para manipular sua carga de trabalho. Implementar 3 núcleos por zona significa máquinas menores e, portanto, um custo reduzido para você.</br>
-
-**Como meu mestre do Kubernetes está configurado?** </br>
-Quando você cria um cluster em um [local metro multizona](/docs/containers?topic=containers-regions-and-zones#zones), um principal do Kubernetes altamente disponível é implementado automaticamente e três réplicas são difundidas pelas zonas do metro. Por exemplo, se o cluster estiver nas zonas `dal10`, `dal12`ou `dal13`, as réplicas do mestre Kubernetes serão difundidas em cada zona no metropolitano de Dallas multizone.
-
-**O que acontece se o mestre do Kubernetes se torna indisponível?** </br>
-O [Mestre do Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) é o componente principal que mantém seu cluster funcionando. O mestre armazena recursos de cluster e suas configurações no banco de dados etcd que serve como o ponto único de verdade para seu cluster. O servidor da API do Kubernetes é o ponto de entrada principal para todas as solicitações de gerenciamento de cluster dos nós do trabalhador para o principal ou quando você deseja interagir com os recursos de cluster.<br><br>Se ocorrer uma falha do mestre, suas cargas de trabalho continuarão a ser executadas nos nós do trabalhador, mas não será possível usar os comandos `kubectl` para trabalhar com seus recursos de cluster ou visualizar o funcionamento do cluster até que o servidor da API do Kubernetes no mestre esteja novamente ativo. Se um pod ficar inativo durante a indisponibilidade do mestre, o pod não poderá ser reprogramado até que o nó do trabalhador possa atingir o servidor da API do Kubernetes novamente.<br><br>Durante uma indisponibilidade do mestre, ainda é possível executar os comandos `ibmcloud ks` com relação à API do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura, como nós do trabalhador ou VLANs. Se você mudar a configuração de cluster atual incluindo ou removendo nós do trabalhador no cluster, suas mudanças não ocorrerão até que o mestre esteja ativo novamente.
-
-Não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidade do mestre. Essa ação remove os pods de seu nó do trabalhador. Como o servidor da API do Kubernetes está indisponível, os pods não podem ser reprogramados em outros nós do trabalhador no cluster.
-{: important}
-
-
-Para proteger seu cluster com relação a uma falha do mestre do Kubernetes ou em regiões onde os clusters de múltiplas zonas não estão disponíveis, é possível [configurar múltiplos clusters e conectá-los a um balanceador de carga global](#multiple_clusters).
-
-**Preciso fazer algo para que o principal possa se comunicar com os trabalhadores nas zonas?**</br>
-Sim. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-
-**Como posso permitir que meus usuários acessem meu aplicativo por meio da Internet pública?**</br>
-É possível expor seus apps usando um balanceador de carga do aplicativo (ALB) do Ingresso ou um serviço de balanceador de carga.
-
-- **Balanceador de carga do aplicativo (ALB) do Ingress** Por padrão, os ALBs públicos são automaticamente criados e ativados em cada zona em seu cluster. Um multizone load balancer (MZLB) do Cloudflare para seu cluster também é criado e implementado automaticamente para que exista 1 MZLB para cada região. O MZLB coloca os endereços IP de seus ALBs atrás do mesmo nome do host e ativa as verificações de funcionamento nesses endereços IP para determinar se eles estão disponíveis ou não. Por exemplo, se você tiver nós do trabalhador em 3 zonas na região Leste dos EUA, o nome do host `yourcluster.us-east.containers.appdomain.cloud` terá 3 endereços IP de ALB. O funcionamento do MZLB verifica o IP do ALB público em cada zona de uma região e mantém os resultados de consulta de DNS atualizados com base nessas verificações de funcionamento. Para obter mais informações, consulte [Componentes e arquitetura do Ingress](/docs/containers?topic=containers-ingress#planning).
-
-- **Serviços do balanceador de carga:** os serviços do balanceador de carga são configurados em somente uma zona. As solicitações recebidas para seu app são roteadas dessa zona para todas as instâncias do app em outras zonas. Se essa zona se tornar indisponível, seu app poderá não ser acessível por meio da Internet. É possível configurar serviços adicionais de balanceador de carga em outras zonas para considerar uma falha de zona única. Para obter mais informações, consulte [serviços de balanceador de carga](/docs/containers?topic=containers-loadbalancer#multi_zone_config) altamente disponíveis.
-
-**Posso configurar o armazenamento persistente para meu cluster multizona?**</br>
-Para o armazenamento persistente altamente disponível, use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Também é possível tentar uma solução de armazenamento definida por software (SDS), como a [Portworx](/docs/containers?topic=containers-portworx#portworx), que usa [máquinas SDS](#sds). Para obter mais informações, consulte [Comparação de opções de armazenamento persistente para clusters de múltiplas zonas](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
-O arquivo NFS e o armazenamento de bloco não são compartilháveis entre as zonas. Os volumes persistentes podem ser usados somente na zona na qual o dispositivo de armazenamento real está localizado. Se você tem armazenamento de arquivo ou de bloco do NFS existente em seu cluster que deseja continuar a usar, deve-se aplicar rótulos de região e zona aos volumes persistentes existentes. Esses rótulos ajudam o kube-scheduler a determinar onde planejar um app que usa o volume persistente. Execute o comando a seguir e substitua `<mycluster>` pelo nome do seu cluster.
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-```
-{: pre}
-
-** Eu criei meu cluster multizone. Por que ainda há somente uma zona? Como incluo zonas no meu cluster?**</br>
-Se você [cria seu cluster de múltiplas zonas com a CLI](/docs/containers?topic=containers-clusters#clusters_cli), o cluster é criado, mas deve-se incluir zonas no conjunto de trabalhadores para concluir o processo. Para abranger diversas zonas, seu cluster deve estar em um [local metro multizona](/docs/containers?topic=containers-regions-and-zones#zones). Para incluir uma zona em seu cluster e difundir os nós do trabalhador entre as zonas, consulte [Incluindo uma zona em seu cluster](/docs/containers?topic=containers-clusters#add_zone).
-
-### Quais são algumas mudanças de como eu gerencio atualmente meus clusters?
-{: #mz_new_ways}
-
-Com a introdução de conjuntos de trabalhadores, é possível usar um novo conjunto de APIs e comandos para gerenciar seu cluster. É possível ver esses novos comandos na [página de documentação da CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) ou em seu terminal executando `ibmcloud ks help`.
+Permita que os nós do trabalhador se comuniquem de forma segura com outros serviços do {{site.data.keyword.Bluemix_notm}}, como o {{site.data.keyword.registrylong}}, e com uma rede no local.
 {: shortdesc}
 
-A tabela a seguir compara os métodos antigos e novos para algumas ações comuns de gerenciamento de cluster.
-<table summary="A tabela mostra a descrição da nova maneira de executar comandos de múltiplas zonas. As linhas devem ser lidas da esquerda para a direita, com a descrição na coluna um, a maneira antiga na coluna dois e a maneira nova de múltiplas zonas na coluna três.">
-<caption>Novos métodos para comandos do conjunto de trabalhadores de múltiplas zonas.</caption>
-  <thead>
-  <th>Descrição</th>
-  <th>Nós do trabalhador independente antigo</th>
-  <th>Novos conjuntos de trabalhadores multizados</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>Inclua nós do trabalhador no cluster.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> para incluir nós do trabalhador independentes.</p></td>
-    <td><ul><li>Para incluir tipos de máquina diferentes de seu conjunto existente, crie um novo conjunto do trabalhador: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
-    <li>Para incluir nós do trabalhador em um conjunto existente, redimensione o número de nós por zona no conjunto: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Remover nós do trabalhador do cluster.</td>
-    <td><code>ibmcloud ks worker-rm</code>, que ainda é possível usar para excluir um nó do trabalhador problemático de seu cluster.</td>
-    <td><ul><li>Se seu conjunto do trabalhador não estiver balanceado, por exemplo, após remover um nó do trabalhador, rebalance-o: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) <code>ibmcloud ks worker-pool-rebalance</code>.</li>
-    <li>Para reduzir o número de nós do trabalhador em um conjunto, redimensione o número por zona (valor mínimo de 1): [comando](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Use uma nova VLAN para os nós do trabalhador.</td>
-    <td><p class="deprecated">Inclua um novo nó do trabalhador que use a nova VLAN privada ou pública: <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Configure o conjunto do trabalhador para usar uma VLAN pública ou privada diferente da usada anteriormente: [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
-    </tr>
-  </tbody>
-  </table>
+**Comunicação com outros serviços do {{site.data.keyword.Bluemix_notm}} pela rede privada ou pública**</br>
+Os nós do trabalhador podem se comunicar de forma automática e segura com outros serviços do {{site.data.keyword.Bluemix_notm}} que suportam terminais em serviço privado, como {{site.data.keyword.registrylong}}, pela rede privada de infraestrutura do IBM Cloud (SoftLayer). Se um serviço do {{site.data.keyword.Bluemix_notm}} não suportar terminais em serviço privado, os nós do trabalhador deverão ser conectados a uma VLAN pública para que eles possam se comunicar de forma segura com os serviços pela rede pública.
 
-## Múltiplos clusters conectados a um balanceador de carga global
-{: #multiple_clusters}
+Se usar políticas de rede do Calico para bloquear a rede pública em seu cluster, poderá ser necessário permitir o acesso aos endereços IP públicos e privados dos serviços que você desejar usar em suas políticas do Calico. Se você usa um dispositivo de gateway, como um Virtual Router Appliance (Vyatta), deve-se [permitir o acesso aos endereços IP privados dos serviços que você deseja usar](/docs/containers?topic=containers-firewall#firewall_outbound) em seu firewall de dispositivo de gateway.
+{: note}
 
-Para proteger o seu app de uma falha do mestre do Kubernetes ou para regiões nas quais clusters de múltiplas zonas não estão disponíveis, é possível criar múltiplos clusters em zonas diferentes dentro de uma região e conectá-los a um balanceador de carga global.
+**{{site.data.keyword.BluDirectLink}} para comunicação pela rede privada com recursos em data centers no local**</br>
+Para conectar seu cluster ao seu data center no local, como com o {{site.data.keyword.icpfull_notm}}, é possível configurar o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Com o {{site.data.keyword.Bluemix_notm}} Direct Link, você cria uma conexão direta e privada entre seus ambientes de rede remota e o {{site.data.keyword.containerlong_notm}} sem rotear pela Internet pública.
+
+**Conexão VPN IPSec do strongSwan para comunicação pela rede pública com recursos em data centers no local**
+* Nós do trabalhador que estão conectados a VLANs públicas e privadas: configure um [serviço VPN IPSec do strongSwan ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.strongswan.org/about.html) diretamente em seu cluster. O serviço de VPN do IPSec do strongSwan fornece um canal de comunicação seguro de ponta a ponta sobre a Internet que é baseado no conjunto de protocolos padrão de mercado da Internet Protocol Security (IPSec). Para configurar uma conexão segura entre seu cluster e uma rede no local, [configure e implemente o serviço VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) diretamente em um pod no cluster.
+* Nós do trabalhador conectados a somente uma VLAN privada: configure um terminal VPN IPSec em um dispositivo de gateway, como um Virtual Router Appliance (Vyatta). Em seguida, [configure o serviço VPN IPSec do strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) em seu cluster para usar o terminal VPN em seu gateway. Se você não desejar usar o strongSwan, será possível [configurar a conectividade VPN diretamente com o VRA](/docs/containers?topic=containers-vpn#vyatta).
+
+</br>
+
+### Comunicação externa para apps que são executados em nós do trabalhador
+{: #external-workers}
+
+Permita solicitações de tráfego público ou privado de fora do cluster para seus apps que são executados em nós do trabalhador.
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="High availability for multiple clusters" width="700" style="width:700px; border-style: none"/>
+**Tráfego privado para apps de cluster**</br>
+Ao implementar um app em seu cluster, você talvez deseje tornar o aplicativo acessível somente para usuários e serviços que estão na mesma rede privada que o seu cluster. O balanceamento de carga privado é ideal para tornar seu aplicativo disponível para solicitações de fora do cluster sem o expor ao público em geral. Também é possível usar o balanceamento de carga privado para testar o acesso, o roteamento de solicitação e outras configurações para seu aplicativo antes de ele ser exposto posteriormente para o público com serviços de rede pública. Para permitir solicitações de tráfego privado de fora do cluster para seus apps, é possível criar serviços de rede privada do Kubernetes, como NodePorts privados, NLBs e ALBs do Ingress. Em seguida, é possível usar as políticas pré-DNAT do Calico para bloquear o tráfego para NodePorts públicos de serviços de rede privada. Para obter mais informações, consulte [Planejando o balanceamento de carga externa privada](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-Para balancear sua carga de trabalho entre múltiplos clusters, deve-se configurar um balanceador de carga global e incluir os endereços IP de seus balanceadores de carga do aplicativo (ALBs) ou serviços de balanceador de carga em seu domínio. Incluindo esses endereços IP, é possível rotear o tráfego recebido entre os seus clusters. Para que o balanceador de carga global detecte se um de seus clusters está indisponível, considere incluir uma verificação de funcionamento baseada em ping em cada endereço IP. Ao configurar essa verificação, seu provedor DNS faz regularmente os pings dos endereços IP que você incluiu em seu domínio. Se um endereço IP se tornar indisponível, o tráfego não será mais enviado para esse endereço IP. No entanto, o Kubernetes não reinicializa automaticamente os pods do cluster indisponível nos nós do trabalhador em clusters disponíveis. Se você deseja que o Kubernetes reinicie automaticamente os pods em clusters disponíveis, considere configurar um [cluster de múltiplas zonas](#multizone).
+**Tráfego público para apps de cluster**</br>
+Para tornar seus apps externamente acessíveis por meio da Internet pública, é possível criar NodePorts públicos, balanceadores de carga de rede (NLBs) e balanceadores de carga do aplicativo (ALBs) do Ingress. Os serviços de rede pública se conectam a essa interface de rede pública, fornecendo a seu app um endereço IP público e, opcionalmente, uma URL pública. Quando um aplicativo é publicamente exposto, qualquer pessoa que tenha o endereço IP de serviço público ou a URL configurada para ele pode enviar uma solicitação para seu aplicativo. Em seguida, é possível usar as políticas pré-DNAT do Calico para controlar o tráfego para serviços de rede pública, como incluir na lista de desbloqueio o tráfego de somente determinados endereços IP de origem ou CIDRs e bloquear todo o outro tráfego. Para obter mais informações, consulte [Planejando o balanceamento de carga externa pública](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-**Por que eu preciso de 3 clusters em 3 zonas?** </br>
-Semelhante ao uso de [3 zonas em um cluster de múltiplas zonas](#multizone), é possível fornecer mais disponibilidade para o seu app configurando 3 clusters entre zonas. Também é possível reduzir os custos, comprando máquinas menores para manipular sua carga de trabalho.
+Para obter segurança adicional, isole as cargas de trabalho de rede para os nós do trabalhador de borda. Os nós do trabalhador de borda podem melhorar a segurança de seu cluster permitindo que menos nós do trabalhador conectados a VLANs públicas sejam acessados externamente e isolando a carga de trabalho de rede. Quando você [rotula nós do trabalhador como nós de borda](/docs/containers?topic=containers-edge#edge_nodes), os pods NLB e ALB são implementados somente para os nós do trabalhador especificados. Para evitar também que outras cargas de trabalho sejam executadas em nós de borda, é possível [contaminar os nós de borda](/docs/containers?topic=containers-edge#edge_workloads). No Kubernetes versão 1.14 e mais recente, é possível implementar NLBs e ALBs públicos e privados em nós de borda.
+Por exemplo, se os nós do trabalhador estiverem conectados a somente uma VLAN privada, mas você precisar permitir acesso público a um app em seu cluster, será possível criar um conjunto de trabalhadores de borda no qual os nós de borda estão conectados a VLANs públicas e privadas. É possível implementar NLBs e ALBs públicos nesses nós de borda para assegurar que somente esses trabalhadores manipulem conexões públicas.
 
-**E se eu desejar configurar múltiplos clusters entre regiões?** </br>
-É possível configurar múltiplos clusters em diferentes regiões de uma localização geográfica (como o Sul dos EUA e o Leste dos EUA) ou entre as localizações geográficas (como o Sul dos EUA e a Central da UE). Ambas as configurações oferecem o mesmo nível de disponibilidade para seu app, mas também incluem a complexidade quando se trata de compartilhamento de dados e replicação de dados. Para a maioria dos casos, permanecer dentro da mesma localização geográfica é suficiente. Mas se você tiver usuários ao redor do mundo, poderá ser melhor configurar um cluster no local em que os seus usuários estiverem, de maneira que os usuários não experienciem tempos de espera longos quando enviarem uma solicitação ao seu app.
+Se os nós do trabalhador estiverem conectados a somente uma VLAN privada e você usar um dispositivo de gateway para fornecer comunicação entre os nós do trabalhador e o cluster principal, também será possível configurar o dispositivo como um firewall público ou privado. Para permitir solicitações de tráfego público ou privado de fora do cluster para seus apps, é possível criar NodePorts públicos ou privados, NLBs e ALBs do Ingress. Em seguida, deve-se [abrir as portas necessárias e os endereços IP](/docs/containers?topic=containers-firewall#firewall_inbound) em seu firewall de dispositivo de gateway para permitir o tráfego de entrada para esses serviços pela rede pública ou privada.
+{: note}
 
-**Para configurar um balanceador de carga global para múltiplos clusters:**
+<br />
 
-1. [Crie clusters](/docs/containers?topic=containers-clusters#clusters) em múltiplas zonas ou regiões.
-2. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-3. Em cada cluster, exponha seu app usando um [balanceador de carga do aplicativo (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) ou um [serviço de balanceador de carga](/docs/containers?topic=containers-loadbalancer).
-4. Para cada cluster, liste os endereços IP públicos para os seus ALBs ou serviços de balanceador de carga.
-   - Para listar o endereço IP de todos os ALBs ativados públicos em seu cluster:
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
 
-   - Para listar o endereço IP para o seu serviço de balanceador de carga:
-     ```
-     kubectl describe service <myservice>
-     ```
-     {: pre}
+## Cenário: executar cargas de trabalho do app voltadas para a Internet em um cluster
+{: #internet-facing}
 
-     O endereço IP do **Ingresso do balanceador de carga** é o endereço IP móvel que foi designado a seu serviço de balanceador de carga.
+Neste cenário, você deseja executar cargas de trabalho em um cluster que são acessíveis a solicitações da Internet para que os usuários finais possam acessar seus apps. Você deseja a opção de isolar o acesso público em seu cluster e de controlar quais solicitações públicas são permitidas para seu cluster. Além disso, seus trabalhadores têm acesso automático a quaisquer serviços do {{site.data.keyword.Bluemix_notm}} que você deseja conectar com seu cluster.
+{: shortdesc}
 
-4.  Configure um balanceador de carga global usando o {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) ou configure seu próprio balanceador de carga global.
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="Imagem de arquitetura para um cluster que executa cargas de trabalho voltadas para a Internet"/>
+ <figcaption> Arquitetura para um cluster que executa cargas de trabalho voltadas para a Internet </figcaption>
+</figure>
+</p>
 
-    **Para usar um balanceador de carga global do CIS**:
-    1.  Configure o serviço seguindo as etapas de 1 a 5 em [Introdução ao {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Essas etapas o guiam pelo fornecimento da instância de serviço, incluindo seu domínio do app, configurando seus servidores de nomes e criando registros DNS. Crie um registro de DNS para cada ALB ou endereço IP do balanceador de carga que você coletou. Esses registros do DNS mapeiam seu domínio de app para todos os ALBs ou balanceadores de carga do cluster e asseguram que as solicitações para seu domínio de app sejam encaminhadas para seus clusters em um ciclo round-robin.
-    2. [Inclua verificações de funcionamento](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) para os ALBs ou balanceadores de carga. É possível usar a mesma verificação de funcionamento para os ALBs ou balanceadores de carga em todos os seus clusters ou criar verificações de funcionamento específicas para usar para clusters específicos.
-    3. [Inclua um conjunto de origem](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) para cada cluster incluindo os IPs do ALB ou do balanceador de carga do cluster. Por exemplo, se você tiver 3 clusters que cada um tenha 2 ALBs, crie 3 conjuntos de origem que cada um tenha 2 endereços IP de ALB. Inclua uma verificação de funcionamento em cada conjunto de origem que você criar.
-    4. [ Inclua um balanceador de carga global ](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
+Para alcançar essa configuração, você cria um cluster conectando os nós do trabalhador a VLANs públicas e privadas.
 
-    **Para usar seu próprio balanceador de carga global**:
-    1. Configure seu domínio para rotear o tráfego recebido para seu ALB ou serviços de balanceador de carga, incluindo os endereços IP de todos os ALBs ativados públicos e serviços de balanceador de carga para seu domínio.
-    2. Para cada endereço IP, ative uma verificação de funcionamento baseada em ping para que seu provedor DNS possa detectar endereços IP não funcionais. Se um endereço IP não funcional for detectado, o tráfego não será mais roteado para esse endereço IP.
+Se você criar o cluster com VLANs públicas e privadas, não será possível remover posteriormente todas as VLANs públicas desse cluster. A remoção de todas as VLANs públicas de um cluster faz com que diversos componentes do cluster parem de funcionar. Em vez disso, crie um novo conjunto de trabalhadores que esteja conectado a somente uma VLAN privada.
+{: note}
 
-## Clusters privados
+É possível escolher permitir a comunicação de trabalhador para principal e de usuário para principal pelas redes públicas e privadas ou somente pela rede pública.
+* Terminais em serviço público e privado: sua conta deve ser ativada com o VRF e ativada para usar os terminais em serviço. A comunicação entre os nós do trabalhador e o principal é estabelecida pela rede privada por meio do terminal em serviço privado e pela rede pública por meio do terminal em serviço público. O mestre é publicamente acessível aos usuários de cluster autorizados por meio do terminal em serviço público.
+* Terminal em serviço público: se você não desejar ou não puder ativar o VRF para sua conta, seus nós do trabalhador e usuários do cluster autorizados poderão se conectar automaticamente ao principal do Kubernetes pela rede pública por meio do terminal em serviço público.
+
+Seus nós do trabalhador podem se comunicar de forma segura e automática com outros serviços do {{site.data.keyword.Bluemix_notm}} que suportam terminais em serviço privados sobre sua rede privada de infraestrutura do IBM Cloud (SoftLayer). Se um serviço do {{site.data.keyword.Bluemix_notm}} não suportar terminais em serviço privado, os trabalhadores poderão se comunicar de forma segura com os serviços pela rede pública. É possível bloquear as interfaces públicas ou privadas de nós do trabalhador usando políticas de rede do Calico para isolamento de rede pública ou de rede privada. Talvez seja necessário permitir acesso aos endereços IP públicos e privados dos serviços que você deseja usar nessas políticas de isolamento do Calico.
+
+Para expor um app em seu cluster na Internet, é possível criar um serviço público de balanceador de carga de rede (NLB) ou balanceador de carga de aplicativo (ALB) do Ingress. É possível melhorar a segurança de seu cluster, criando um conjunto de nós do trabalhador que são rotulados como nós de borda. Os pods para serviços de rede pública são implementados nos nós de borda para que as cargas de trabalho de tráfego externo sejam isoladas para somente alguns trabalhadores em seu cluster. É possível controlar ainda mais o tráfego público para os serviços de rede que expõem seus apps criando políticas do Calico anteriores ao DNAT, tais como políticas de lista de desbloqueio e de lista de bloqueio.
+
+Se os nós do trabalhador precisarem acessar os serviços em redes privadas fora da sua conta do {{site.data.keyword.Bluemix_notm}}, será possível configurar e implementar o serviço VPN IPSec do strongSwan em seu cluster ou alavancar os serviços {{site.data.keyword.Bluemix_notm}}{{site.data.keyword.Bluemix_notm}} Direct Link para se conectar a essas redes.
+
+Pronto para iniciar com um cluster neste cenário? Depois de planejar suas configurações de [alta disponibilidade](/docs/containers?topic=containers-ha_clusters) e [nó do trabalhador](/docs/containers?topic=containers-planning_worker_nodes), consulte [Criando clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Cenário: ampliar seu data center no local em um cluster na rede privada e incluir o acesso público limitado
+{: #limited-public}
+
+Neste cenário, você deseja executar cargas de trabalho em um cluster que são acessíveis para serviços, bancos de dados ou outros recursos em seu data center no local. No entanto, pode ser necessário fornecer acesso público limitado ao seu cluster e desejar assegurar que qualquer acesso público seja controlado e isolado em seu cluster. Por exemplo, pode ser necessário que seus trabalhadores acessem um serviço do {{site.data.keyword.Bluemix_notm}} que não suporta terminais em serviço privado e deve ser acessado pela rede pública. Ou, pode ser necessário fornecer acesso público limitado a um app que é executado em seu cluster.
+{: shortdesc}
+
+Para alcançar essa configuração de cluster, é possível criar um firewall [usando nós de borda e políticas de rede do Calico](#calico-pc) ou [usando um dispositivo de gateway](#vyatta-gateway).
+
+### Usando nós de borda e políticas de rede do Calico
+{: #calico-pc}
+
+Permita conectividade pública limitada com seu cluster usando nós de borda como um gateway público e políticas de rede do Calico como um firewall público.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="Imagem de arquitetura para um cluster que usa nós de borda e políticas de rede do Calico para acesso público seguro"/>
+ <figcaption>Arquitetura para um cluster que usa nós de borda e políticas de rede do Calico para acesso público seguro</figcaption>
+</figure>
+</p>
+
+Com essa configuração, você cria um cluster conectando nós do trabalhador a somente uma VLAN privada. Sua conta deve ser ativada com o VRF e ativada para usar os terminais em serviço privado.
+
+O mestre do Kubernetes será acessível por meio do terminal em serviço privado se usuários de cluster autorizados estiverem em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou se forem conectados à rede privada por meio de uma [conexão VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) ou do [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). No entanto, a comunicação com o mestre do Kubernetes por meio do terminal em serviço privado deve passar pelo intervalo de endereços IP <code>166.X.X.X</code>, que não é roteável por meio de uma conexão VPN ou por meio do {{site.data.keyword.Bluemix_notm}} Direct Link. É possível expor o terminal em serviço privado do mestre para os usuários do cluster usando um balanceador de carga de rede (NLB) privado. O NLB privado expõe o terminal em serviço privado do mestre como um intervalo interno de endereços IP <code>10.X.X.X</code> que os usuários podem acessar com a VPN ou com a conexão do {{site.data.keyword.Bluemix_notm}} Direct Link. Se você ativar apenas o terminal em serviço privado, será possível usar o painel do Kubernetes ou ativar temporariamente o terminal em serviço público para criar o NLB privado.
+
+Em seguida, é possível criar um conjunto de nós do trabalhador que estão conectados a VLANs públicas e privadas e rotuladas como nós de borda. Os nós de borda podem melhorar a segurança de seu cluster, permitindo que somente alguns nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede para esses trabalhadores.
+
+Seus nós do trabalhador podem se comunicar de forma segura e automática com outros serviços do {{site.data.keyword.Bluemix_notm}} que suportam terminais em serviço privados sobre sua rede privada de infraestrutura do IBM Cloud (SoftLayer). Se um serviço do {{site.data.keyword.Bluemix_notm}} não suportar terminais em serviço privado, seus nós de borda que estão conectados a uma VLAN pública poderão se comunicar de forma segura com os serviços pela rede pública. É possível bloquear as interfaces públicas ou privadas de nós do trabalhador usando políticas de rede do Calico para isolamento de rede pública ou de rede privada. Talvez seja necessário permitir acesso aos endereços IP públicos e privados dos serviços que você deseja usar nessas políticas de isolamento do Calico.
+
+Para fornecer acesso privado a um app em seu cluster, é possível criar um balanceador de carga de rede (NLB) ou um balanceador de carga de aplicativo (ALB) do Ingress privado para expor seu app somente para a rede privada. É possível bloquear todo o tráfego público para esses serviços de rede que expõem seus apps criando políticas pré-DNAT do Calico, tais como políticas para bloquear NodePorts públicos em nós do trabalhador. Se precisar fornecer acesso público limitado a um app em seu cluster, será possível criar um NLB ou um ALB público para expor o app. Em seguida, deve-se implementar seus apps nesses nós de borda para que os NLBs ou ALBs possam direcionar o tráfego público para seus pods de app. É possível controlar ainda mais o tráfego público para os serviços de rede que expõem seus apps criando políticas do Calico anteriores ao DNAT, tais como políticas de lista de desbloqueio e de lista de bloqueio. Os pods para os serviços de rede privada e pública são implementados nos nós de borda para que as cargas de trabalho de tráfego externo sejam restritas a somente alguns trabalhadores em seu cluster.  
+
+Para acessar serviços de forma segura fora do {{site.data.keyword.Bluemix_notm}} e de outras redes no local, é possível configurar e implementar o serviço VPN IPSec do strongSwan em seu cluster. O pod do balanceador de carga do strongSwan implementa em um trabalhador no conjunto de borda, em que o pod estabelece uma conexão segura com a rede no local por meio de um túnel VPN criptografado pela rede pública. Como alternativa, é possível usar os serviços {{site.data.keyword.Bluemix_notm}} Direct Link para conectar seu cluster ao seu data center no local somente pela rede privada.
+
+Pronto para iniciar com um cluster neste cenário? Depois de planejar suas configurações de [alta disponibilidade](/docs/containers?topic=containers-ha_clusters) e [nó do trabalhador](/docs/containers?topic=containers-planning_worker_nodes), consulte [Criando clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+</br>
+
+### Usando um dispositivo de gateway
+{: #vyatta-gateway}
+
+Permita conectividade pública limitada para seu cluster, configurando um dispositivo de gateway, como um Virtual Router Appliance (Vyatta), como um gateway público e um firewall.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="Imagem de arquitetura para um cluster que usa um dispositivo de gateway para acesso público seguro"/>
+ <figcaption>Arquitetura para um cluster que usa um dispositivo de gateway para acesso público seguro</figcaption>
+</figure>
+</p>
+
+Se você configura os nós do trabalhador somente em uma VLAN privada e não deseja ou não pode ativar o VRF para sua conta, deve-se configurar um dispositivo de gateway para fornecer conectividade de rede entre seus nós do trabalhador e o principal pela rede pública. Por exemplo, você pode escolher configurar um [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou um [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations).
+
+É possível configurar seu dispositivo de gateway com políticas de rede customizada para fornecer segurança de rede dedicada para seu cluster e para detectar e corrigir a intrusão de rede. Ao configurar um firewall na rede pública, deve-se abrir as portas necessárias e os endereços IP privados para cada região para que o principal e os nós do trabalhador possam se comunicar. Se esse firewall também é configurado para a rede privada, deve-se também abrir as portas necessárias e os endereços IP privados para permitir a comunicação entre os nós do trabalhador e permitir que seu cluster acesse os recursos de infraestrutura pela rede privada. Deve-se também ativar o VLAN Spanning para sua conta para que as sub-redes possam rotear na mesma VLAN e entre VLANs.
+
+Para conectar de forma segura seus nós do trabalhador e apps a uma rede no local ou serviços fora do {{site.data.keyword.Bluemix_notm}}, configure um terminal VPN IPSec em seu dispositivo de gateway e o serviço VPN IPSec do strongSwan em seu cluster para usar o terminal VPN do gateway. Se você não desejar usar o strongSwan, será possível configurar a conectividade VPN diretamente com o VRA.
+
+Os nós do trabalhador podem se comunicar de forma segura com outros serviços do {{site.data.keyword.Bluemix_notm}} e serviços públicos fora do {{site.data.keyword.Bluemix_notm}} por meio de seu dispositivo de gateway. É possível configurar seu firewall para permitir o acesso aos endereços IP públicos e privados somente dos serviços que você deseja usar.
+
+Para fornecer acesso privado a um app em seu cluster, é possível criar um balanceador de carga de rede (NLB) ou um balanceador de carga de aplicativo (ALB) do Ingress privado para expor seu app somente para a rede privada. Se precisar fornecer acesso público limitado a um app em seu cluster, será possível criar um NLB ou um ALB público para expor o app. Como todo o tráfego passa por seu firewall de dispositivo de gateway, é possível controlar o público e o tráfego público para os serviços de rede que expõem seus apps abrindo as portas do serviço e os endereços IP em seu firewall para permitir o tráfego de entrada para esses serviços.
+
+Pronto para iniciar com um cluster neste cenário? Depois de planejar suas configurações de [alta disponibilidade](/docs/containers?topic=containers-ha_clusters) e [nó do trabalhador](/docs/containers?topic=containers-planning_worker_nodes), consulte [Criando clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Cenário: ampliar seu data center no local para um cluster na rede privada
 {: #private_clusters}
 
-Por padrão, o {{site.data.keyword.containerlong_notm}} configura seu cluster com acesso a uma VLAN privada e a uma VLAN pública. A VLAN privada determina o endereço IP privado que é designado a cada nó do trabalhador, que fornece cada nó do trabalhador com uma interface de rede privada. A VLAN pública permite que os nós do trabalhador se conectem de forma automática e segura ao mestre.
+Neste cenário, você deseja executar cargas de trabalho em um cluster do {{site.data.keyword.containerlong_notm}}. No entanto, você deseja que essas cargas de trabalho sejam acessíveis somente para serviços, bancos de dados ou outros recursos em seu data center no local, como {{site.data.keyword.icpfull_notm}}. Suas cargas de trabalho do cluster podem precisar acessar alguns outros serviços do {{site.data.keyword.Bluemix_notm}} que suportam comunicação pela rede privada, como {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
-No entanto, você pode desejar criar uma VLAN privada ou um cluster de terminal em serviço privado para requisitos de segurança ou de conformidade. Suas opções para criar um cluster privado dependem do tipo de conta de infraestrutura do IBM Cloud (SoftLayer) que você tem e da configuração de VLAN pública e privada que você deseja. Para obter mais informações sobre cada uma das configurações a seguir, consulte [Planejando sua rede de cluster](/docs/containers?topic=containers-cs_network_ov).
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="Imagem de arquitetura para um cluster que se conecta a um data center no local na rede privada"/>
+ <figcaption>Arquitetura para um cluster que se conecta a um data center no local na rede privada</figcaption>
+</figure>
+</p>
 
-Você tem um cluster existente que você deseja tornar apenas privado? Para ver como é possível incluir conjuntos de trabalhadores ou modificar conjuntos de trabalhadores existentes com novas VLANs, confira [Mudando as conexões VLAN do nó do trabalhador](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
-{: note}
+Para alcançar essa configuração, você cria um cluster conectando os nós do trabalhador a somente uma VLAN privada. Para fornecer conectividade entre o cluster principal e os nós do trabalhador pela rede privada por meio somente do terminal em serviço privado, sua conta deve ser ativada com o VRF e ativada para usar os terminais em serviço. Como seu cluster está visível a qualquer recurso na rede privada quando o VRF é ativado, é possível isolar seu cluster de outros sistemas na rede privada, aplicando políticas de rede privada do Calico.
 
-**Conta ativada para VRF, principal do Kubernetes privado, nós do trabalhador nas VLANs pública e privada**</br>
-Em clusters que executam o Kubernetes versão 1.11 ou mais recente, é possível configurar sua rede de cluster para usar terminais de serviço públicos e privados. Depois de ativar o terminal em serviço privado, o mestre Kubernetes e os nós do trabalhador sempre se comunicam por meio da VLAN privada por meio do terminal em serviço privado. Mesmo se você ativar o terminal em serviço público para seu cluster, a comunicação do mestre do Kubernetes com o nó do trabalhador permanecerá na VLAN privada. Depois de ativar o terminal em serviço privado, não é possível desativá-lo. É possível manter o terminal em serviço público para acesso seguro ao mestre do Kubernetes na Internet, por exemplo, para executar comandos `kubectl` ou é possível desativar o terminal em serviço público para um cluster somente de terminal em serviço privado.
+O mestre do Kubernetes será acessível por meio do terminal em serviço privado se usuários de cluster autorizados estiverem em sua rede privada do {{site.data.keyword.Bluemix_notm}} ou se forem conectados à rede privada por meio de uma [conexão VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) ou do [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). No entanto, a comunicação com o mestre do Kubernetes por meio do terminal em serviço privado deve passar pelo intervalo de endereços IP <code>166.X.X.X</code>, que não é roteável por meio de uma conexão VPN ou por meio do {{site.data.keyword.Bluemix_notm}} Direct Link. É possível expor o terminal em serviço privado do mestre para os usuários do cluster usando um balanceador de carga de rede (NLB) privado. O NLB privado expõe o terminal em serviço privado do mestre como um intervalo interno de endereços IP <code>10.X.X.X</code> que os usuários podem acessar com a VPN ou com a conexão do {{site.data.keyword.Bluemix_notm}} Direct Link. Se você ativar apenas o terminal em serviço privado, será possível usar o painel do Kubernetes ou ativar temporariamente o terminal em serviço público para criar o NLB privado.
 
-**Conta não VRF ou ativada para VRF, principal do Kubernetes e nós do trabalhador somente na VLAN privada**</br>
-Se você configurar seus nós do trabalhador somente em uma VLAN privada, eles não poderão expor automaticamente seus serviços de aplicativo na rede pública e, em uma conta não VRF, também não poderão se conectar ao principal. Deve-se configurar um dispositivo de gateway para fornecer conectividade de rede entre os nós do trabalhador e o mestre.
+Os nós do trabalhador podem se comunicar de forma automática e segura com outros serviços do {{site.data.keyword.Bluemix_notm}} que suportam terminais em serviço privado, como {{site.data.keyword.registrylong}}, pela rede privada da infraestrutura do IBM Cloud (SoftLayer). Por exemplo, ambientes de hardware dedicados para todas as instâncias do plano padrão do {{site.data.keyword.cloudant_short_notm}} suportam terminais em serviço privado. Se um serviço do {{site.data.keyword.Bluemix_notm}} não suportar terminais em serviço privado, seu cluster não poderá acessar esse serviço.
 
-Para contas não VRF: se você criar o cluster com VLANs públicas e privadas, não será possível remover mais tarde as VLANs públicas desse cluster. A remoção de todas as VLANs públicas de um cluster faz com que diversos componentes do cluster parem de funcionar. Em vez disso, crie um novo cluster sem a VLAN pública.
-{: note}
+Para fornecer acesso privado a um app em seu cluster, é possível criar um balanceador de carga de rede (NLB) ou balanceador de carga do aplicativo (ALB) do Ingress privado. Esses serviços de rede do Kubernetes expõem seu app somente à rede privada para que qualquer sistema no local com uma conexão à sub-rede em que o IP do NLB esteja possa acessar o aplicativo.
 
-**Conta não VRF, principal do Kubernetes e nós do trabalhador nas VLANs pública e privada**</br>
-Para a maioria dos casos, a configuração de seu cluster pode incluir nós do trabalhador em VLANs públicas e privadas. Em seguida, é possível bloquear o cluster bloqueando o tráfego de VLAN pública com as políticas do Calico e restringindo o tráfego para selecionar os nós de borda.
-
-## Conjuntos do Trabalhador e nós do trabalhador
-{: #planning_worker_nodes}
-
-Um cluster do Kubernetes consiste em nós do trabalhador que são agrupados em conjuntos de nós do trabalhador e são monitorados e gerenciados centralmente pelo mestre do Kubernetes. Os administradores de cluster decidem como configurar o cluster de nós do trabalhador para assegurar que os usuários do cluster tenham todos os recursos para implementar e executar apps no cluster.
-{:shortdesc}
-
-Ao criar um cluster padrão, os nós do trabalhador com as mesmas especificações (tipo) de memória, CPU e espaço em disco são solicitados na infraestrutura do IBM Cloud (SoftLayer) em seu nome e incluídos no conjunto de nós do trabalhador padrão em seu cluster. A cada nó do trabalhador é designado
-um ID de nó do trabalhador e um nome de domínio exclusivos que não devem ser mudados após a criação do cluster. É possível escolher entre servidores virtuais ou físicos (bare metal). Dependendo do nível de isolamento de hardware escolhido, os nós do trabalhador virtual podem ser configurados como nós compartilhados ou dedicados. Para incluir diferentes tipos em seu cluster, [crie outro conjunto de trabalhadores](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
-
-O Kubernetes limita o número máximo de nós do trabalhador que você pode ter em um cluster. Revise [cotas de nó do trabalhador e de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/setup/cluster-large/) para obter mais informações.
-
-
-Deseja certificar-se de sempre ter nós do trabalhador suficientes para cobrir sua carga de trabalho? Experimente  [ o cluster autoscaler ](/docs/containers?topic=containers-ca#ca).
-{: tip}
-
-<br />
-
-
-## Hardware disponível para nós do trabalhador
-{: #shared_dedicated_node}
-
-Ao criar um cluster padrão no {{site.data.keyword.Bluemix_notm}}, você escolhe se os conjuntos de trabalhadores consistem em nós do trabalhador que são máquinas físicas (bare metal) ou máquinas virtuais que são executadas em hardware físico. Você também seleciona o tipo de nó do trabalhador ou a combinação de memória, CPU e outras especificações de máquina, como armazenamento em disco.
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="Opções de hardware para os nós do trabalhador em um cluster padrão" style="width:700px; border-style: none"/>
-
-Se você deseja mais de um tipo de nó do trabalhador, deve-se criar um conjunto de trabalhadores para cada tipo. Não é possível redimensionar os nós do trabalhador existentes para que tenham recursos diferentes, como CPU ou memória. Ao criar um cluster grátis, seu nó do trabalhador é provisionado automaticamente como um nó virtual compartilhado na conta de infraestrutura do IBM Cloud (SoftLayer). Em clusters padrão, é possível escolher o tipo de máquina que funciona melhor para sua carga de trabalho. Conforme você planeja, considere as [reservas de recurso do nó do trabalhador](#resource_limit_node) na capacidade total de CPU e memória.
-
-É possível implementar clusters usando a [UI do console](/docs/containers?topic=containers-clusters#clusters_ui) ou a [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
-
-Selecione uma das opções a seguir para decidir qual tipo de conjunto de trabalhadores você deseja.
-* [Máquinas virtuais](#vm)
-* [Máquinas físicas (bare metal)](#bm)
-* [Máquinas de armazenamento definido pelo software (SDS)](#sds)
-
-### Máquinas virtuais
-{: #vm}
-
-Com as VMs, você tem maior flexibilidade, tempos de fornecimento mais rápidos e recursos de escalabilidade mais automáticos do que o bare metal, com custo reduzido. É possível usar as VMs para casos de uso de propósitos mais gerais, como ambientes de teste e desenvolvimento, ambientes de preparação e produção, microsserviços e apps de negócios. No entanto, há alternativas no desempenho. Se você precisar de computação de alto desempenho para cargas de trabalho com uso intensivo de RAM, dados ou GPU, use [bare metal](#bm).
-{: shortdesc}
-
-**Desejo usar hardware compartilhado ou dedicado?**</br>
-Ao criar um cluster virtual padrão, deve-se escolher se deseja que o hardware subjacente seja compartilhado por múltiplos clientes {{site.data.keyword.IBM_notm}} (ocupação variada) ou seja dedicado somente a você (ocupação única).
-
-* **Em uma configuração de hardware compartilhado de diversos locatários**: os recursos físicos, como CPU e memória, são compartilhados entre todas as máquinas virtuais que são implementadas no mesmo hardware físico. Para assegurar que cada máquina
-virtual possa ser executada independentemente, um monitor de máquina virtual, também referido como hypervisor,
-segmenta os recursos físicos em entidades isoladas e aloca como recursos dedicados para
-uma máquina virtual (isolamento de hypervisor).
-* **Em uma configuração de hardware dedicado de locatário único**: todos os recursos físicos são dedicados somente a você. É possível implementar
-múltiplos nós do trabalhador como máquinas virtuais no mesmo host físico. Semelhante à configuração de diversos locatários,
-o hypervisor assegura que cada nó do trabalhador obtenha seu compartilhamento dos recursos físicos
-disponíveis.
-
-Os nós compartilhados são geralmente menos dispendiosos que os nós dedicados porque os custos para o hardware subjacente são compartilhados entre múltiplos clientes. No entanto, ao decidir entre nós compartilhados
-e dedicados, você pode desejar verificar com seu departamento jurídico para discutir o nível de isolamento
-e conformidade de infraestrutura que seu ambiente de app requer.
-
-Alguns tipos estão disponíveis para apenas um tipo de configuração de ocupação. Por exemplo, as VMs `m3c` estão disponíveis apenas como uma configuração de ocupação `shared`.
-{: note}
-
-**Quais são os recursos gerais das VMs?**</br>
-As máquinas virtuais usam o disco local em vez da rede de área de armazenamento (SAN) para confiabilidade. Os benefícios de confiabilidade incluem maior rendimento ao serializar bytes para o disco local e a degradação do sistema de arquivos reduzido devido a falhas de rede. Cada MV vem com velocidade de rede 1000 Mbps, 25 GB de armazenamento em disco local primário para o sistema de arquivos do S.O. e 100 GB de armazenamento em disco local secundário para dados, como o tempo de execução do contêiner e o `kubelet`. O armazenamento local no nó do trabalhador é somente para processamento de curto prazo e os discos primário e secundário são limpos quando você atualiza ou recarrega o nó do trabalhador. Para obter soluções de armazenamento persistente, consulte [Planejando o armazenamento persistente altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**E se eu tiver tipos de máquina mais antigos?**</br>
-Se o seu cluster tiver tipos de nó do trabalhador descontinuados `x1c` ou outros tipos mais antigos de nós do trabalhador `x2c` do Ubuntu 16, será possível [atualizar seu cluster para ter nós do trabalhador `x3c`](/docs/containers?topic=containers-update#machine_type) do Ubuntu 18.
-
-**Quais tipos de máquina virtual estão disponíveis?**</br>
-Os tipos de nó do trabalhador variam por zona. A tabela a seguir inclui a versão mais recente de um tipo, como tipos de nós do trabalhador `x3c` do Ubuntu 18, em oposição aos tipos de nó do trabalhador `x2c` do Ubuntu 16 mais antigos. Para ver os tipos de máquina disponíveis em sua zona, execute `ibmcloud ks machine-types <zone>`. Também é possível revisar os tipos de máquina [bare metal](#bm) ou [SDS](#sds) disponíveis.
-
-{: #vm-table}
-<table>
-<caption>Tipos de máquina virtual disponíveis no  {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Caso Nome e uso</th>
-<th>Núcleos / Memória</th>
-<th>Disco Primário / Secundário</th>
-<th>Velocidade</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtual, u3c.2x4</strong>: use essa VM menor para testes rápido, provas de conceito e outras cargas de trabalho leves.</td>
-<td>2 / 4GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.4x16</strong>: selecione essa VM balanceada para testes, desenvolvimento e outras cargas de trabalho leves.</td>
-<td>4 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.16x64</strong>: selecione essa VM balanceada para cargas de trabalho de médio porte.</td></td>
-<td>16 / 64GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.32x128</strong>: selecione essa VM balanceada para cargas de trabalho de médio a grande porte, como um banco de dados e um website dinâmico com muitos usuários simultâneos.</td>
-<td>32 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.56x242</strong>: selecione essa VM balanceada para cargas de trabalho grandes, como um banco de dados e diversos aplicativos com muitos usuários simultâneos.</td>
-<td>56 / 242GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, c3c.16x16</strong>: use esse tipo quando desejar um balanceamento uniforme de recursos de cálculo do nó do trabalhador para cargas de trabalho leves.</td>
-<td>16 / 16GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.16x32</strong>: use esse tipo quando desejar uma proporção 1:2 de recursos de CPU e memória do nó do trabalhador para cargas de trabalho de pequeno a médio porte.</td>
-<td>16 / 32GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x32</strong>: use esse tipo quando desejar um balanceamento uniforme de recursos de cálculo do nó do trabalhador para cargas de trabalho de médio porte.</td>
-<td>32 / 32 GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x64</strong>: use esse tipo quando desejar uma proporção 1:2 de recursos de CPU e memória do nó trabalhador para cargas de trabalho de médio porte.</td>
-<td>32 / 64 GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, m3c.8x64</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de pequeno a médio porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente em Dallas e como uma ocupação `--hardware shared`.</td>
-<td>8 / 64 GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.16x128</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de médio porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente em Dallas e como uma ocupação `--hardware shared`.</td>
-<td>16 / 128GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.30x240</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de médio a grande porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente em Dallas e como uma ocupação `--hardware shared`.</td>
-<td>30 / 240GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.48x384</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de médio a grande porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente como locação `--hardware shared`.</td>
-<td>48 / 384GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.56x448</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de grande porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente como locação `--hardware shared`.</td>
-<td>56 / 448GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.64x512</strong>: use esse tipo quando desejar uma proporção 1:8 de recursos de CPU e memória para cargas de trabalho de grande porte que requerem mais memória, como bancos de dados como o {{site.data.keyword.Db2_on_Cloud_short}}. Disponível somente como locação `--hardware shared`.</td>
-<td>64 / 512GB</td>
-<td>25GB / 100GB</td>
-<td>1000Mbps</td>
-</tr>
-</tbody>
-</table>
-
-### Máquinas físicas (bare metal)
-{: #bm}
-
-É possível provisionar o nó do trabalhador como um servidor físico de único locatário, também referido como bare metal.
-{: shortdesc}
-
-**Qual a diferença entre o bare metal e as VMs?**</br>
-O bare metal dá acesso direto aos recursos físicos na máquina, como a memória ou CPU. Essa configuração elimina o hypervisor da máquina virtual que aloca recursos físicos para máquinas virtuais executadas no host. Em vez disso, todos os recursos de uma máquina bare metal são dedicados exclusivamente ao trabalhador, portanto, você não precisará se preocupar com "vizinhos barulhentos" compartilhando recursos ou diminuindo o desempenho. Os tipos de máquina física têm mais armazenamento local do que virtual e alguns têm RAID para aumentar a disponibilidade de dados. O armazenamento local no nó do trabalhador é somente para processamento de curto prazo e os discos primário e secundário são limpos quando você atualiza ou recarrega o nó do trabalhador. Para obter soluções de armazenamento persistente, consulte [Planejando o armazenamento persistente altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Além de melhores especificações para o desempenho, posso fazer algo com bare metal que não posso com VMs?**</br>
-Sim. Com bare metal, você tem a opção de ativar o Cálculo Confiável para verificar seus nós do trabalhador com relação à violação. Se você não ativar a confiança durante a criação do cluster, mas desejar posteriormente, será possível usar o comando `ibmcloud ks feature-enable` [](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable). Depois de ativar a confiança, não é possível desativá-la posteriormente. É possível fazer um novo cluster sem confiança. Para obter mais informações sobre como a confiança funciona durante o processo de inicialização do nó, veja [{{site.data.keyword.containerlong_notm}} com Cálculo confiável](/docs/containers?topic=containers-security#trusted_compute). O Trusted Compute está disponível para determinados tipos de máquina bare metal. Quando você executa o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>`, é possível ver quais máquinas suportam a confiança revisando o campo **Confiável**. Por exemplo, os tipos GPU `mgXc` não suportam o Cálculo confiável.
-
-Além do Trusted Compute, também é possível aproveitar o {{site.data.keyword.datashield_full}} (Beta). O {{site.data.keyword.datashield_short}} está integrado às tecnologias Intel® Software Guard Extensions (SGX) e Fortanix® para que seu código de carga de trabalho de contêiner do {{site.data.keyword.Bluemix_notm}} e os dados sejam protegidos em uso. O código do app e os dados são executados em enclaves reforçados pela CPU, que são áreas confiáveis de memória no nó do trabalhador que protegem os aspectos críticos do app, o que ajuda a manter o código e os dados confidenciais e não modificados. Se você ou sua empresa requer sensibilidade de dados devido a políticas internas, regulamentações governamentais ou requisitos de conformidade da indústria, essa solução pode ajudá-lo a mover-se para a nuvem. Os casos de uso de exemplo incluem instituições financeiras e de assistência médica ou países com políticas governamentais que requerem soluções de nuvem no local.
-
-** Bare metal parece incrível! Por que não solicito um agora mesmo?**</br>
-Os servidores bare metal são mais caros do que os servidores virtuais e são mais adequados para apps de alto desempenho que precisam de mais recursos e controle de host.
-
-Os servidores bare metal são faturados mensalmente. Se você cancelar um servidor bare metal antes do final do mês, será cobrado até o final do mês. Depois de pedir ou cancelar um servidor bare metal, o processo é concluído manualmente em sua conta de infraestrutura do IBM Cloud (SoftLayer). Portanto, isso pode levar mais de um dia útil para ser concluído.
-{: important}
-
-**Quais tipos de bare metal posso solicitar?**</br>
-Os tipos de nó do trabalhador variam por zona. A tabela a seguir inclui a versão mais recente de um tipo, como tipos de nós do trabalhador `x3c` do Ubuntu 18, em oposição aos tipos de nó do trabalhador `x2c` do Ubuntu 16 mais antigos. Para ver os tipos de máquina disponíveis em sua zona, execute `ibmcloud ks machine-types <zone>`. Também é possível revisar os tipos de máquina [VM](#vm) ou [SDS](#sds) disponíveis.
-
-As máquinas bare metal são otimizadas para diferentes casos de uso, como cargas de trabalho intensivas de RAM, de dados ou de GPU.
-
-Escolha um tipo de máquina com a configuração de armazenamento correta para suportar sua carga de trabalho. Alguns tipos têm uma combinação dos discos e configurações de armazenamento a seguir. Por exemplo, alguns tipos podem ter um disco primário SATA com um disco secundário SSD bruto.
-
-* **SATA**: um dispositivo de armazenamento em disco de rotação magnética que é usado frequentemente para o disco primário do nó do trabalhador que armazena o sistema de arquivos de S.O.
-* **SSD**: um dispositivo de armazenamento de unidade de estado sólido para dados de alto desempenho.
-* **Bruto**: o dispositivo de armazenamento não está formatado, com a capacidade total disponível para uso.
-* **RAID**: o dispositivo de armazenamento tem dados distribuídos para redundância e desempenho que variam dependendo do nível do RAID. Como tal, a capacidade do disco que está disponível para uso varia.
-
-
-{: #bm-table}
-<table>
-<caption>Tipos de máquina bare metal disponíveis no  {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Caso Nome e uso</th>
-<th>Núcleos / Memória</th>
-<th>Disco Primário / Secundário</th>
-<th>Velocidade</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal com uso intensivo de RAM, mr3c.28x512</strong>: maximize a RAM disponível para os nós do trabalhador.</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg3c.16x128</strong>: escolha esse tipo para cargas de trabalho matematicamente intensivas, como aplicativos de computação de alto desempenho, machine learning ou aplicativos 3D. Esse tipo tem 1 cartão físico Tesla K80 com 2 unidades de processamento de gráfico (GPUs) por cartão para um total de 2 GPUs.</td>
-<td>16 / 128GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>GPU bare metal, mg3c.28x256</strong>: escolha esse tipo para cargas de trabalho matematicamente intensivas, como computação de alto desempenho, machine learning ou aplicativos 3D. Esse tipo tem 2 cartões físicos Tesla K80 com 2 GPUs por cartão para um total de 4 GPUs.</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal com uso intensivo de dados, md3c.16x64.4x4tb</strong>: use esse tipo para uma quantidade significativa de armazenamento em disco local, incluindo RAID para aumentar a disponibilidade de dados, para cargas de trabalho, como sistemas de arquivos distribuídos, bancos de dados grandes e análise de big data.</td>
-<td>16 / 64GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal com uso intensivo de dados, md3c.28x512.4x4tb</strong>: use esse tipo para uma quantidade significativa de armazenamento em disco local, incluindo RAID para aumentar a disponibilidade de dados, para cargas de trabalho, como sistemas de arquivos distribuídos, bancos de dados grandes e análise de big data.</td>
-<td>28 / 512 GB</td>
-<td>2x2TB RAID1 / 4x4TB SATA RAID10</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal balanceado, mb3c.4x32</strong>: use para cargas de trabalho balanceadas que requerem mais recursos de cálculo do que as máquinas virtuais podem oferecer. Esse tipo também pode ser ativado com o Intel® Software Guard Extensions (SGX) para que seja possível usar o <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Ícone de link externo"></a> para criptografar a sua memória de dados.</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 2TB SATA</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal balanceado, mb3c.16x64</strong>: use para cargas de trabalho balanceadas que requerem mais recursos de cálculo do que as máquinas virtuais podem oferecer.</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### Máquinas de armazenamento definido pelo software (SDS)
-{: #sds}
-
-Os tipos de software-defined storage (SDS) são máquinas físicas que são provisionadas com discos rígidos adicionais para armazenamento local físico. Diferentemente do disco local primário e secundário, esses discos rígidos não são limpos durante uma atualização ou um recarregamento do nó do trabalhador. Como os dados são localizados juntamente com o nó de cálculo, as máquinas SDS são adequadas para cargas de trabalho de alto desempenho.
-{: shortdesc}
-
-**Quando uso tipos do SDS?**</br>
-Você normalmente usa máquinas SDS nos casos a seguir:
-*  Se você usar um complemento SDS, como o [Portworx](/docs/containers?topic=containers-portworx#portworx) para o cluster, use uma máquina SDS.
-*  Se seu app é um [StatefulSet ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) que requer armazenamento local, é possível usar máquinas SDS e provisionar [volumes persistentes locais do Kubernetes (beta) ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Você pode ter apps customizados que requeiram armazenamento local bruto adicional.
-
-Para obter mais soluções de armazenamento, veja [Planejando o armazenamento persistente altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Quais tipos do SDS posso solicitar?**</br>
-Os tipos de nó do trabalhador variam por zona. A tabela a seguir inclui a versão mais recente de um tipo, como tipos de nós do trabalhador `x3c` do Ubuntu 18, em oposição aos tipos de nó do trabalhador `x2c` do Ubuntu 16 mais antigos. Para ver os tipos de máquina disponíveis em sua zona, execute `ibmcloud ks machine-types <zone>`. Também é possível revisar os tipos de máquina [bare metal](#bm) ou [VM](#vm) disponíveis.
-
-Escolha um tipo de máquina com a configuração de armazenamento correta para suportar sua carga de trabalho. Alguns tipos têm uma combinação dos discos e configurações de armazenamento a seguir. Por exemplo, alguns tipos podem ter um disco primário SATA com um disco secundário SSD bruto.
-
-* **SATA**: um dispositivo de armazenamento em disco de rotação magnética que é usado frequentemente para o disco primário do nó do trabalhador que armazena o sistema de arquivos de S.O.
-* **SSD**: um dispositivo de armazenamento de unidade de estado sólido para dados de alto desempenho.
-* **Bruto**: o dispositivo de armazenamento não está formatado, com a capacidade total disponível para uso.
-* **RAID**: o dispositivo de armazenamento tem dados distribuídos para redundância e desempenho que variam dependendo do nível do RAID. Como tal, a capacidade do disco que está disponível para uso varia.
-
-
-{: #sds-table}
-<table>
-<caption>Tipos de máquina SDS disponíveis no  {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Caso Nome e uso</th>
-<th>Núcleos / Memória</th>
-<th>Disco Primário / Secundário</th>
-<th>Discos brutos adicionais</th>
-<th>Velocidade</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare metal com SDS, ms3c.4x32.1.9tb.ssd</strong>: se um armazenamento local adicional for necessário para o desempenho, use esse tipo com uso intensivo de disco, que suporta o armazenamento definido por software (SDS).</td>
-<td>4 / 32GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>SSD Bruto 1,9 TB (caminho do dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal com SDS, ms3c.16x64.1.9tb.ssd</strong>: se um armazenamento local adicional for necessário para o desempenho, use esse tipo com uso intensivo de disco, que suporta o armazenamento definido por software (SDS).</td>
-<td>16 / 64GB</td>
-<td>2TB SATA / 960GB SSD</td>
-<td>SSD Bruto 1,9 TB (caminho do dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal com SDS, ms3c.28x256.3.8tb.ssd</strong>: se um armazenamento local adicional for necessário para o desempenho, use esse tipo com uso intensivo de disco, que suporta o armazenamento definido por software (SDS).</td>
-<td>28 / 256GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>3.8 TB de SSD bruto (caminho do dispositivo: `/dev/sdc`)</td>
-<td>10000Mbps</td>
-</tr>
-<tr>
-<td><strong>Bare metal com SDS, ms3c.28x512.4x3.8tb.ssd</strong>: se um armazenamento local adicional for necessário para o desempenho, use esse tipo com uso intensivo de disco, que suporta o armazenamento definido por software (SDS).</td>
-<td>28 / 512GB</td>
-<td>2TB SATA / 1.9TB SSD</td>
-<td>4 discos, 3.8 TB de SSD bruto (caminhos de dispositivo: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000Mbps</td>
-</tr>
-</tbody>
-</table>
-
-## Reservas de recursos do nó do trabalhador
-{: #resource_limit_node}
-
-O {{site.data.keyword.containerlong_notm}} configura as reservas de recursos de cálculo que limitam os recursos de cálculo disponíveis em cada nó do trabalhador. Os recursos de memória e CPU reservados não podem ser usados por pods no nó do trabalhador e reduzem os recursos alocáveis em cada nó do trabalhador. Quando você implementa inicialmente os pods, se o nó do trabalhador não tiver recursos alocáveis suficientes, a implementação falhará. Além disso, se os pods excederem o limite de recurso do nó do trabalhador, os pods serão despejados. No Kubernetes, esse limite é chamado de [limite máximo de despejo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
-{:shortdesc}
-
-Se menos CPU ou memória estiver disponível do que as reservas do nó do trabalhador, o Kubernetes começará a despejar os pods para restaurar recursos de cálculo suficientes. Os pods serão reagendados em outro nó do trabalhador se um nó do trabalhador estiver disponível. Se os pods forem despejados frequentemente, inclua mais nós do trabalhador em seu cluster ou configure [limites de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) em seus pods.
-
-Os recursos que são reservados em seu nó do trabalhador dependem da quantia de CPU e memória que acompanha seu nó do trabalhador. O {{site.data.keyword.containerlong_notm}} define as camadas de memória e de CPU, conforme mostrado nas tabelas a seguir. Se o nó do trabalhador vem com recursos de cálculo em múltiplas camadas, uma porcentagem de seus recursos de CPU e memória é reservada para cada camada.
-
-Para revisar quantos recursos de cálculo são usados atualmente no nó do trabalhador, execute [`kubectl top node` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
-{: tip}
-
-<table summary="Esta tabela mostra as reservas de memória do nó do trabalhador por camada.">
-<caption>Reservas de memória do nó do trabalhador por camada.</caption>
-<thead>
-<tr>
-  <th>Camada de memória</th>
-  <th>% ou quantia reservada</th>
-  <th>Exemplo `b3c.4x16` do nó do trabalhador (16 GB)</th>
-  <th>Exemplo do nó do trabalhador `mg1c.28x256` (256 GB)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primeiros 4 GB (0-4 GB)</td>
-  <td>25% da memória</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Próximos 4 GB (5-8 GB)</td>
-  <td>20% da memória</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Próximos 8 GB (9-16 GB)</td>
-  <td>10% de memória</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Próximos 112 GB (17 a 128 GB)</td>
-  <td>6% de memória</td>
-  <td>N/A</td>
-  <td>6,72 GB</td>
-</tr>
-<tr>
-  <td>GBs restantes (mais de 129 GB)</td>
-  <td>2% de memória</td>
-  <td>N/A</td>
-  <td>2,54 GB</td>
-</tr>
-<tr>
-  <td>Reserva adicional para o despejo de [`kubelet` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (quantia simples)</td>
-  <td>100 MB (quantia simples)</td>
-</tr>
-<tr>
-  <td>**Total reservado**</td>
-  <td>**(varia)**</td>
-  <td>**2.7 GB de um total de 16 GB**</td>
-  <td>**11.96 GB de um total de 256 GB**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="Esta tabela mostra as reservas de CPU do nó do trabalhador por camada.">
-<caption>Reservas de CPU do nó do trabalhador por camada.</caption>
-<thead>
-<tr>
-  <th>Camada da CPU</th>
-  <th>% reservada</th>
-  <th>Exemplo `b3c.4x16` do nó do trabalhador (4 núcleos)</th>
-  <th>Exemplo do nó do trabalhador `mg1c.28x256` (28 núcleos)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primeiro núcleo (núcleo 1)</td>
-  <td>6% núcleos</td>
-  <td>0,06 núcleos</td>
-  <td>0,06 núcleos</td>
-</tr>
-<tr>
-  <td>Próximos 2 núcleos (núcleos 2-3)</td>
-  <td>1% núcleos</td>
-  <td>0,02 núcleos</td>
-  <td>0,02 núcleos</td>
-</tr>
-<tr>
-  <td>Próximos 2 núcleos (núcleos 4-5)</td>
-  <td>0,5% núcleos</td>
-  <td>0,005 núcleos</td>
-  <td>0,01 núcleos</td>
-</tr>
-<tr>
-  <td>Núcleos restantes (Núcleos 6 +)</td>
-  <td>0,25% núcleos</td>
-  <td>N/A</td>
-  <td>0,0575 núcleos</td>
-</tr>
-<tr>
-  <td>**Total reservado**</td>
-  <td>**(varia)**</td>
-  <td>**0,085 núcleos de 4 núcleos totais**</td>
-  <td>**0,1475 núcleos de 28 núcleos totais**</td>
-</tr>
-</tbody>
-</table>
-
-## Recuperação automática para seus nós do trabalhador
-{: #planning_autorecovery}
-
-Componentes críticos, como `containerd`, `kubelet`, `kube-proxy` e `calico`, devem ser funcionais para ter um nó do trabalhador Kubernetes funcional. Com o tempo, esses componentes podem se dividir e podem deixar o nó do trabalhador em um estado não funcional. Os nós do trabalhador não funcionais diminuem a capacidade total do cluster e podem resultar em tempo de inatividade para seu app.
-{:shortdesc}
-
-É possível [configurar verificações de funcionamento para seu nó do trabalhador e ativar a Recuperação automática](/docs/containers?topic=containers-health#autorecovery). Se a Recuperação automática detecta um nó do trabalhador não funcional com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Para obter mais informações sobre como a Recuperação automática funciona, veja o [blog de Recuperação automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
+Pronto para iniciar com um cluster neste cenário? Depois de planejar suas configurações de [alta disponibilidade](/docs/containers?topic=containers-ha_clusters) e [nó do trabalhador](/docs/containers?topic=containers-planning_worker_nodes), consulte [Criando clusters](/docs/containers?topic=containers-clusters#cluster_prepare).

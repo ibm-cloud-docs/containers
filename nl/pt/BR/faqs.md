@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -19,7 +19,9 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
+{:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 # Perguntas frequentes
 {: #faqs}
@@ -37,7 +39,7 @@ Para obter mais informações sobre o Kubernetes, veja a [documentação do Kube
 {: #kubernetes_service}
 {: faq}
 
-Com o {{site.data.keyword.containerlong_notm}}, é possível criar seu próprio cluster do Kubernetes para implementar e gerenciar apps conteinerizados no {{site.data.keyword.Bluemix_notm}}. Seus apps conteinerizados são hospedados em hosts de cálculo de infraestrutura do IBM Cloud (SoftLayer) que são chamados nós do trabalhador. É possível optar por provisionar seus hosts de cálculo como [máquinas virtuais](/docs/containers?topic=containers-plan_clusters#vm) com recursos compartilhados ou dedicados ou como [máquinas bare metal](/docs/containers?topic=containers-plan_clusters#bm) que podem ser otimizadas para uso de armazenamento (SDS) definido por software e GPU. Os nós do trabalhador são controlados por um mestre do Kubernetes altamente disponível que é configurado, monitorado e gerenciado pela IBM. É possível usar a API ou CLI do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura do cluster e a API ou a CLI do Kubernetes para gerenciar suas implementações e serviços.
+Com o {{site.data.keyword.containerlong_notm}}, é possível criar seu próprio cluster do Kubernetes para implementar e gerenciar apps conteinerizados no {{site.data.keyword.Bluemix_notm}}. Seus apps conteinerizados são hospedados em hosts de cálculo de infraestrutura do IBM Cloud (SoftLayer) que são chamados nós do trabalhador. É possível optar por provisionar seus hosts de cálculo como [máquinas virtuais](/docs/containers?topic=containers-planning_worker_nodes#vm) com recursos compartilhados ou dedicados ou como [máquinas bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm) que podem ser otimizadas para uso de armazenamento (SDS) definido por software e GPU. Os nós do trabalhador são controlados por um mestre do Kubernetes altamente disponível que é configurado, monitorado e gerenciado pela IBM. É possível usar a API ou CLI do {{site.data.keyword.containerlong_notm}} para trabalhar com seus recursos de infraestrutura do cluster e a API ou a CLI do Kubernetes para gerenciar suas implementações e serviços.
 
 Para obter mais informações sobre como os recursos de cluster estão configurados, consulte a [Arquitetura de serviço](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). Para localizar uma lista de recursos e benefícios, consulte [Por que {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)?
 
@@ -65,9 +67,9 @@ Os nós do trabalhador em clusters padrão são provisionados para a sua conta d
 
 A arquitetura e a infraestrutura do {{site.data.keyword.containerlong_notm}} são projetadas para assegurar a confiabilidade, a latência de processamento baixo e um tempo de atividade máximo do serviço. Por padrão, cada cluster no {{site.data.keyword.containerlong_notm}} é configurado com diversas instâncias de principal do Kubernetes para garantir a disponibilidade e a acessibilidade de seus recursos de cluster, mesmo se uma ou mais instâncias de seu principal do Kubernetes estiverem indisponíveis.
 
-É possível tornar seu cluster ainda mais altamente disponível e proteger seu app de um tempo de inatividade, difundindo suas cargas de trabalho em múltiplos nós do trabalhador em múltiplas zonas de uma região. Essa configuração é chamada de [cluster de várias zonas](/docs/containers?topic=containers-plan_clusters#multizone) e assegura que seu app esteja acessível, mesmo que um nó do trabalhador ou uma zona inteira não esteja disponível.
+É possível tornar seu cluster ainda mais altamente disponível e proteger seu app de um tempo de inatividade, difundindo suas cargas de trabalho em múltiplos nós do trabalhador em múltiplas zonas de uma região. Essa configuração é chamada de [cluster de várias zonas](/docs/containers?topic=containers-ha_clusters#multizone) e assegura que seu app esteja acessível, mesmo que um nó do trabalhador ou uma zona inteira não esteja disponível.
 
-Para proteger-se contra uma falha de região inteira, crie [diversos clusters e difunda-os entre as regiões do {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multiple_clusters). Ao configurar um balanceador de carga de rede (NLB) para seus clusters, é possível obter o balanceamento de carga entre regiões e a rede entre regiões para seus clusters.
+Para proteger contra uma falha de região inteira, crie [múltiplos clusters e difunda-os entre as regiões do {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#multiple_clusters). Ao configurar um balanceador de carga de rede (NLB) para seus clusters, é possível obter o balanceamento de carga entre regiões e a rede entre regiões para seus clusters.
 
 Se você tiver dados que devem estar disponíveis, mesmo que ocorra uma indisponibilidade, certifique-se de armazenar seus dados no [armazenamento persistente](/docs/containers?topic=containers-storage_planning#storage_planning).
 
@@ -80,6 +82,26 @@ Para obter mais informações sobre como obter alta disponibilidade para seu clu
 É possível usar recursos de segurança integrados no {{site.data.keyword.containerlong_notm}} para proteger os componentes em seu cluster, seus dados e implementações de app para assegurar a conformidade de segurança e a integridade de dados. Use esses recursos para proteger seu servidor de API do Kubernetes, armazenamento de dados etcd, nó do trabalhador, rede, armazenamento, imagens e implementações contra ataques maliciosos. Também é possível alavancar a criação de log integrada e as ferramentas de monitoramento para detectar ataques maliciosos e padrões de uso suspeitos.
 
 Para obter mais informações sobre os componentes de seu cluster e como é possível proteger cada componente, consulte [Segurança para {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
+
+## Quais políticas de acesso eu forneço aos meus usuários do cluster?
+{: #faq_access}
+{: faq}
+
+O {{site.data.keyword.containerlong_notm}} usa o {{site.data.keyword.iamshort}} (IAM) para conceder acesso aos recursos de cluster por meio de funções da plataforma do IAM e políticas de controle de acesso baseado na função (RBAC) do Kubernetes por meio de funções do serviço do IAM. Para obter mais informações sobre os tipos de políticas de acesso, consulte [Selecionar a política de acesso e a função corretas para seus usuários](/docs/containers?topic=containers-users#access_roles).
+{: shortdesc}
+
+As políticas de acesso que você designa aos usuários variam dependendo do que você deseja que seus usuários sejam capazes de fazer. É possível localizar mais informações sobre quais funções autorizam quais tipos de ações na [Página de referência de acesso de usuário](/docs/containers?topic=containers-access_reference) ou nos links da tabela a seguir. Para obter as etapas para designar políticas, consulte [Concedendo aos usuários o acesso ao seu cluster por meio do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+
+| Caso de uso | Exemplo de funções e escopo |
+| --- | --- |
+| Auditor do app | [Função da plataforma Visualizador para um cluster, região ou grupo de recursos](/docs/containers?topic=containers-access_reference#view-actions), [Função do serviço Leitor para um cluster, região ou grupo de recursos](/docs/containers?topic=containers-access_reference#service). |
+| Desenvolvedores de aplicativo | [Função da plataforma Editor para um cluster](/docs/containers?topic=containers-access_reference#editor-actions), [Função do serviço Gravador com escopo definido para um namespace](/docs/containers?topic=containers-access_reference#service), [Função do espaço Desenvolvedor do Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry). |
+| Faturamento | [Função da plataforma Visualizador para um cluster, região ou grupo de recursos](/docs/containers?topic=containers-access_reference#view-actions). |
+| Criar um cluster | Permissões no nível da conta para credenciais de infraestrutura de Superusuário, função da plataforma Administrador para o {{site.data.keyword.containerlong_notm}} e função da plataforma Administrador para o {{site.data.keyword.registrylong_notm}}. Para obter mais informações, consulte [Preparando para criar clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
+| Administrador de cluster | [Função da plataforma Administrador para um cluster](/docs/containers?topic=containers-access_reference#admin-actions), [Função do serviço Gerenciador sem escopo definido para um namespace (para o cluster inteiro)](/docs/containers?topic=containers-access_reference#service).|
+| Operador do DevOps | [Função da plataforma Operador para um cluster](/docs/containers?topic=containers-access_reference#operator-actions), [Função do serviço Gravador sem escopo definido para um namespace (para o cluster inteiro)](/docs/containers?topic=containers-access_reference#service), [Função do espaço Desenvolvedor do Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
+| Operador ou engenheiro de confiabilidade do site | [Função da plataforma Administrador para um cluster, região ou grupo de recursos](/docs/containers?topic=containers-access_reference#admin-actions), [Função do serviço Leitor para um cluster ou região](/docs/containers?topic=containers-access_reference#service) ou [Função do serviço Gerenciador para todos os namespaces do cluster](/docs/containers?topic=containers-access_reference#service) para poder usar os comandos `kubectl top nodes,pods`. |
+{: caption="Tipos de funções que você pode designar para atender a diferentes casos de uso." caption-side="top"}
 
 ## Onde posso localizar uma lista de boletins de segurança que afetam meu cluster?
 {: #faq_security_bulletins}
@@ -95,7 +117,7 @@ Alguns CVEs requerem a atualização de correção mais recente para uma versão
 
 Sim, é possível provisionar seu nó do trabalhador como um servidor bare metal físico de único locatário. Os servidores bare metal vêm com benefícios de alto desempenho para cargas de trabalho, como dados, AI e GPU. Além disso, todos os recursos de hardware são dedicados a suas cargas de trabalho, para que você não tenha que se preocupar com "vizinhos barulhentos".
 
-Para obter mais informações sobre os tipos de bare metal disponíveis e como o bare metal é diferente das máquinas virtuais, consulte [Máquinas físicas (bare metal)](/docs/containers?topic=containers-plan_clusters#bm).
+Para obter mais informações sobre os tipos de bare metal disponíveis e como o bare metal é diferente das máquinas virtuais, consulte [Máquinas físicas (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm).
 
 ## Quais versões do Kubernetes o serviço suporta?
 {: #supported_kube_versions}
@@ -103,9 +125,9 @@ Para obter mais informações sobre os tipos de bare metal disponíveis e como o
 
 O {{site.data.keyword.containerlong_notm}} suporta simultaneamente múltiplas versões do Kubernetes. Quando uma versão mais recente (n) é liberada, as versões até 2 atrás (n-2) são suportadas. As versões com mais de 2 atrás do mais recente (n-3) são descontinuadas primeiro e depois não suportadas. As versões a seguir são suportadas atualmente:
 
-*   Mais recente: 1.13.5
-*   Padrão: 1.12.7
-*   Outro: 1.11.9
+*   Mais recente: 1.14.2
+*   Padrão: 1.13.6
+*   Outro: 1.12.9
 
 Para obter mais informações sobre versões suportadas e ações de atualização que devem ser executadas para mover de uma versão para outra, consulte [Informações de versão e ações de atualização](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -115,7 +137,7 @@ Para obter mais informações sobre versões suportadas e ações de atualizaç�
 
 {{site.data.keyword.containerlong_notm}} está disponível no mundo todo. É possível criar clusters padrão em cada região suportada do {{site.data.keyword.containerlong_notm}}. Os clusters grátis estão disponíveis somente em regiões selecionadas.
 
-Para obter mais informações sobre regiões suportadas, consulte [Regiões e zonas](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
+Para obter mais informações sobre regiões suportadas, consulte [Locais](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
 
 ## Quais normas o serviço obedece?
 {: #standards}
@@ -167,6 +189,7 @@ Com os clusters do {{site.data.keyword.containerlong_notm}}, é possível usar o
 * [ Endereços IP de sub-rede ](#subnet_ips)
 * [Armazenamento](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} remotos](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">Nós do trabalhador</dt>
@@ -178,7 +201,7 @@ Com os clusters do {{site.data.keyword.containerlong_notm}}, é possível usar o
   <p>As <strong>Máquinas físicas (bare metal)</strong> produzem benefícios de alto desempenho para cargas de trabalho, como dados, AI e GPU. Além disso, todos os recursos de hardware são dedicados às suas cargas de trabalho, para que você não tenha "vizinhos barulhentos". Tenha em mente estes fatores que afetam seus custos de bare metal:</p>
   <ul><li><strong>Somente faturamento mensal</strong>: todos os bare metals são cobrados mensalmente.</li>
   <li><strong>Processo de pedido mais longo</strong>: depois de pedir ou cancelar um servidor bare metal, o processo é concluído manualmente em sua conta de infraestrutura do IBM Cloud (SoftLayer). Portanto, isso pode levar mais de um dia útil para ser concluído.</li></ul>
-  <p>Para obter detalhes sobre as especificações da máquina, veja [Hardware disponível para nós do trabalhador](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
+  <p>Para obter detalhes sobre as especificações da máquina, veja [Hardware disponível para nós do trabalhador](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
 
 <dt id="bandwidth">Largura da banda</dt>
   <dd><p>A largura da banda refere-se à transferência de dados públicos de tráfego de rede de entrada e saída, para e de recursos do {{site.data.keyword.Bluemix_notm}} em data centers no mundo inteiro. A largura da banda pública é cobrada por GB. É possível revisar seu resumo de largura da banda atual efetuando login no [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), no menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecionando **Infra-estrutura Clássica**e, em seguida, selecionando a página **Rede >Largura da Banda >Resumo**.
@@ -189,7 +212,7 @@ Com os clusters do {{site.data.keyword.containerlong_notm}}, é possível usar o
   <p>Para obter mais informações, veja [Pacotes de largura da banda ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnet_ips">Endereços IP de sub-</dt>
-  <dd><p>Quando você cria um cluster padrão, uma sub-rede pública móvel com 8 endereços IP públicos é pedida e cobrada em sua conta mensalmente.</p><p>Se você já tiver sub-redes disponíveis em sua conta de infraestrutura, será possível usar essas sub-redes no lugar. Crie o cluster com o [sinalizador](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) `--no-subnets` e, em seguida, [reutilize suas sub-redes](/docs/containers?topic=containers-subnets#subnets_custom).</p>
+  <dd><p>Quando você cria um cluster padrão, uma sub-rede pública móvel com 8 endereços IP públicos é pedida e cobrada em sua conta mensalmente.</p><p>Se você já tiver sub-redes disponíveis em sua conta de infraestrutura, será possível usar essas sub-redes no lugar. Crie o cluster com a [sinalização](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) `--no-subnets` e, em seguida, [reutilize suas sub-redes](/docs/containers?topic=containers-subnets#subnets_custom).</p>
   </dd>
 
 <dt id="persistent_storage">Armazenamento</dt>
@@ -201,7 +224,12 @@ Com os clusters do {{site.data.keyword.containerlong_notm}}, é possível usar o
 <dt id="services">{{site.data.keyword.Bluemix_notm}}  serviços</dt>
   <dd>Cada serviço que você integra a seu cluster tem seu próprio modelo de precificação. Revise a documentação de cada produto e use o console do {{site.data.keyword.Bluemix_notm}} para [estimar custos](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">O [Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) está disponível como um beta para testar clusters do OpenShift.</p>Se você criar um [cluster do Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial), seus nós do trabalhador serão instalados com o sistema operacional Red Hat Enterprise Linux, o que aumenta o preço das [máquinas do nó do trabalhador](#nodes). Deve-se também deve ter uma licença do OpenShift, que incorre em custos mensais além dos custos de VM por hora ou custos de bare metal mensais. A licença do OpenShift é para cada 2 núcleos do tipo de nó do trabalhador. Se você excluir seu nó do trabalhador antes do término do mês, sua licença mensal estará disponível para outros nós do trabalhador no conjunto de trabalhadores a ser usado. Para obter mais informações sobre clusters do OpenShift, consulte [Criando um cluster do Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial).</dd>
+
 </dl>
+<br><br>
 
 Os recursos mensais são faturados com base no primeiro dia do mês para uso no mês anterior. Se você pedir um recurso mensal no meio do mês, será cobrada uma quantia rateada para esse mês. No entanto, se você cancelar um recurso no meio do mês, ainda será cobrada a quantia integral para o recurso mensal.
 {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Incluindo serviços com o uso da ligação de serviços do IBM Cloud
@@ -35,7 +37,7 @@ Quando você inclui serviços do {{site.data.keyword.Bluemix_notm}} em seu clust
 Para localizar uma lista de serviços suportados do {{site.data.keyword.Bluemix_notm}}, consulte o [catálogo do {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
 
 **O que é a ligação de serviços do {{site.data.keyword.Bluemix_notm}}?**</br>
-A ligação de serviços é uma maneira rápida de criar credenciais de serviço para um serviço do {{site.data.keyword.Bluemix_notm}} e armazená-las em um segredo do Kubernetes em seu cluster. Para ligar um serviço ao cluster, deve-se primeiro provisionar uma instância do serviço. Em seguida, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para criar as credenciais de serviço e o segredo do Kubernetes. O segredo do Kubernetes é criptografado automaticamente em etcd para proteger seus dados.
+A ligação de serviços é uma maneira rápida de criar credenciais de serviço para um serviço do {{site.data.keyword.Bluemix_notm}} e armazená-las em um segredo do Kubernetes em seu cluster. Para ligar um serviço ao cluster, deve-se primeiro provisionar uma instância do serviço. Em seguida, você usa o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para criar as credenciais de serviço e o segredo do Kubernetes. O segredo do Kubernetes é criptografado automaticamente em etcd para proteger seus dados.
 
 Deseja tornar seus segredos ainda mais seguros? Peça ao administrador de cluster para [ativar o {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) em seu cluster para criptografar segredos novos e existentes, como o segredo que armazena as credenciais de suas instâncias de serviço do {{site.data.keyword.Bluemix_notm}}.
 {: tip}
@@ -56,11 +58,11 @@ Antes de iniciar:
     - [Função **Editor** ou **Administrador** de acesso à plataforma {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster no qual um serviço será ligado
     - [Função **Gravador** ou **Gerenciador** do serviço do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace do Kubernetes no qual o serviço será ligado
     - Para serviços do Cloud Foundry: [função **Desenvolvedor** do Cloud Foundry](/docs/iam?topic=iam-mngcf#mngcf) para o espaço no qual o serviço será provisionado
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para incluir um serviço do {{site.data.keyword.Bluemix_notm}} em seu cluster:
 
-1. [Crie uma instância do serviço do {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
+1. [Crie uma instância do serviço {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
     * Alguns serviços do {{site.data.keyword.Bluemix_notm}} estão disponíveis somente em regiões selecionadas. Será possível ligar um serviço a seu cluster somente se o serviço estiver disponível na mesma região que seu cluster. Além disso, se você deseja criar uma instância de serviço na zona Washington DC, deve-se usar a CLI.
     * **Para serviços ativados para o IAM**: deve-se criar a instância de serviço no mesmo grupo de recursos que o cluster. Um serviço poderá ser criado em apenas um grupo de recursos que não poderá ser mudado posteriormente.
 
@@ -174,7 +176,7 @@ As credenciais de uma instância de serviço são codificadas em base64 e armaze
 
 Antes de iniciar:
 -  Assegure-se de que você tenha a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [ Inclua um serviço  {{site.data.keyword.Bluemix_notm}}  em seu cluster ](#bind-services).
 
 ### Montando o segredo como um volume em seu pod
@@ -216,7 +218,7 @@ Quando você monta o segredo como um volume em seu pod, um arquivo denominado `b
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -371,7 +373,7 @@ Quando você monta o segredo como um volume em seu pod, um arquivo denominado `b
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -449,16 +451,16 @@ Quando você monta o segredo como um volume em seu pod, um arquivo denominado `b
    ```
    {: codeblock}
 
-8. Opcional: como uma precaução, inclua a manipulação de erros em seu aplicativo, caso a variável de ambiente `BINDING` não esteja configurada corretamente. 
-   
-   Código de exemplo em Java: 
+8. Opcional: como uma precaução, inclua a manipulação de erros em seu aplicativo, caso a variável de ambiente `BINDING` não esteja configurada corretamente.
+
+   Código de exemplo em Java:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Código de exemplo em Node.js:
    ```js
    if (!process.env.BINDING) {
@@ -467,4 +469,3 @@ Quando você monta o segredo como um volume em seu pod, um arquivo denominado `b
    }
    ```
    {: codeblock}
-

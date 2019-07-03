@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Balanceamento de carga básico e DSR com balanceadores de carga de rede (NLB)
@@ -71,10 +71,10 @@ Quando você expõe um aplicativo com um serviço NLB, ele é disponibilizado au
 <br />
 
 
-## Comparação dos NLBs da versão 1.0 e 2.0
+## Comparação do balanceamento de carga básico e DSR nos NLBs da versão 1.0 e 2.0
 {: #comparison}
 
-Quando você cria um NLB, é possível escolher um NLB da versão 1.0 ou 2.0. Observe que os NLBs da versão 2.0 estão em beta.
+Quando você cria um NLB, é possível escolher um NLB da versão 1.0, que executa o balanceamento de carga básico, ou um NLB da versão 2.0, que executa o balanceamento de carga do direct server return (DSR). Observe que os NLBs da versão 2.0 estão em beta.
 {: shortdesc}
 
 **Qual a semelhança entre os NLBs das versões 1.0 e 2.0?**
@@ -83,14 +83,14 @@ Os NLBs das versões 1.0 e 2.0 são balanceadores de carga de Camada 4 que perma
 
 **Quais as diferenças entre os NLBs das versões 1.0 e 2.0?**
 
-Quando um cliente envia uma solicitação ao seu aplicativo, o NLB roteia pacotes de solicitações para o endereço IP do nó do trabalhador no qual um pod de aplicativo existe. Os NLBs da versão 1.0 usam a conversão de endereço de rede (NAT) para regravar o endereço IP de origem do pacote de solicitações para o IP do nó do trabalhador no qual um pod do balanceador de carga existe. Quando o nó do trabalhador retorna o pacote de resposta do aplicativo, usa esse IP do nó do trabalhador no qual o NLB existe. Em seguida, o NLB deve enviar o pacote de resposta para o cliente. Para evitar que o endereço IP seja reescrito, é possível [ativar a preservação de IP de origem](#node_affinity_tolerations). No entanto, a preservação de IP de origem requer que os pods do balanceador de carga e os pods de app sejam executados no mesmo trabalhador para que a solicitação não tenha que ser encaminhada para outro trabalhador. Deve-se incluir afinidade de nó e tolerâncias nos pods do app.
+Quando um cliente envia uma solicitação ao seu aplicativo, o NLB roteia pacotes de solicitações para o endereço IP do nó do trabalhador no qual um pod de aplicativo existe. Os NLBs da versão 1.0 usam a conversão de endereço de rede (NAT) para regravar o endereço IP de origem do pacote de solicitações para o IP do nó do trabalhador no qual um pod do balanceador de carga existe. Quando o nó do trabalhador retorna o pacote de resposta do aplicativo, usa esse IP do nó do trabalhador no qual o NLB existe. Em seguida, o NLB deve enviar o pacote de resposta para o cliente. Para evitar que o endereço IP seja reescrito, é possível [ativar a preservação de IP de origem](#node_affinity_tolerations). No entanto, a preservação de IP de origem requer que os pods do balanceador de carga e os pods de app sejam executados no mesmo trabalhador para que a solicitação não tenha que ser encaminhada para outro trabalhador. Deve-se incluir afinidade de nó e tolerâncias nos pods do app. Para obter mais informações sobre o balanceamento de carga básico com NLBs da versão 1.0, consulte [v1.0: componentes e arquitetura do balanceamento de carga básico](#v1_planning).
 
-Ao contrário dos NLBs da versão 1.0, os da versão 2.0 não usam o NAT ao encaminhar solicitações para os pods de aplicativo em outros trabalhadores. Quando um NLB 2.0 roteia uma solicitação do cliente, usa IP sobre IP (IPIP) para encapsular o pacote de solicitações original em outro pacote novo. Esse pacote de IPIP de encapsulamento tem um IP de origem do nó do trabalhador no qual o pod do balanceador de carga está, que permite que o pacote de solicitações original preserve o IP do cliente como seu endereço IP de origem. O nó do trabalhador então usa o retorno de retorno do servidor direto (DSR) para enviar o pacote de resposta do app para o IP do cliente. O pacote de resposta ignora o NLB e é enviado diretamente ao cliente, diminuindo a quantidade de tráfego que deve ser manipulada pelo NLB.
+Ao contrário dos NLBs da versão 1.0, os da versão 2.0 não usam o NAT ao encaminhar solicitações para os pods de aplicativo em outros trabalhadores. Quando um NLB 2.0 roteia uma solicitação do cliente, usa IP sobre IP (IPIP) para encapsular o pacote de solicitações original em outro pacote novo. Esse pacote de IPIP de encapsulamento tem um IP de origem do nó do trabalhador no qual o pod do balanceador de carga está, que permite que o pacote de solicitações original preserve o IP do cliente como seu endereço IP de origem. O nó do trabalhador então usa o retorno de retorno do servidor direto (DSR) para enviar o pacote de resposta do app para o IP do cliente. O pacote de resposta ignora o NLB e é enviado diretamente ao cliente, diminuindo a quantidade de tráfego que deve ser manipulada pelo NLB. Para obter informações adicionais sobre o balanceamento de carga do DSR com NLBs da versão 2.0, consulte [v2.0: componentes e arquitetura do balanceamento de carga do DSR](#planning_ipvs).
 
 <br />
 
 
-## v1.0: Componentes e Arquitetura
+## v1.0: componentes e arquitetura do balanceamento de carga básico
 {: #v1_planning}
 
 O balanceador de carga de rede (NLB) 1.0 de TCP/UDP usa Iptables, um recurso de kernel do Linux, para carregar solicitações de balanceamento em pods de um aplicativo.
@@ -131,7 +131,7 @@ Por padrão, cada NLB 1.0 é configurado em apenas uma zona. Para alcançar alta
 ** Antes de iniciar **:
 * Para criar balanceadores de carga de rede (NLBs) pública em diversas zonas, pelo menos uma VLAN pública deve ter sub-redes móveis disponíveis em cada zona. Para criar NLBs privados em múltiplas zonas, pelo menos uma VLAN privada deverá ter sub-redes portáteis disponíveis em cada zona. É possível incluir sub-redes seguindo as etapas em [Configurando sub-redes para clusters](/docs/containers?topic=containers-subnets).
 * Se você restringir o tráfego de rede para nós do trabalhador de borda, assegure-se de que pelo menos 2 [nós do trabalhador de borda](/docs/containers?topic=containers-edge#edge) estejam ativados em cada zona para que os NLBs sejam implementados uniformemente.
-* Ative a [ampliação de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+* Ative a [ampliação de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que os nós do trabalhador possam se comunicar entre si na rede privada. Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region<region>`.
 * Assegure-se de que você tenha a [função de **Gravador** ou **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
 
 
@@ -352,7 +352,7 @@ Para criar um serviço NLB 1.0 em um cluster de zona única:
         ```
         {: codeblock}
 
-    3. Opcional: torne o seu serviço do NLB disponível apenas para um intervalo limitado de endereços IP, especificando os IPs no campo `spec.loadBalancerSourceRanges`. `loadBalancerSourceRanges` é implementado por `kube-proxy` em seu cluster por meio de regras de Iptables nos nós do trabalhador. Para obter mais informações, veja a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+    3. Opcional: torne o seu serviço do NLB disponível apenas para um intervalo limitado de endereços IP, especificando os IPs no campo `spec.loadBalancerSourceRanges`. `loadBalancerSourceRanges` é implementado por `kube-proxy` em seu cluster por meio de regras de Iptables nos nós do trabalhador. Para obter mais informações, consulte [a documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
     4.  Crie o serviço em seu cluster.
 
@@ -462,7 +462,7 @@ Quando o cluster está conectado a múltiplas VLANs públicas ou privadas, os po
 
 Quando o IP de origem estiver ativado, planeje os pods de aplicativo em nós do trabalhador que estejam na mesma VLAN que o endereço IP do NLB incluindo uma regra de afinidade na implementação do app.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Obtenha o endereço IP do serviço NLB. Procure o endereço IP no campo **Ingress do LoadBalancer**.
     ```
@@ -630,14 +630,14 @@ Antes de criar um NLB 2.0, deve-se concluir as etapas de pré-requisito a seguir
 
 1. [Atualize os nós do cluster mestre e do trabalhador](/docs/containers?topic=containers-update) para o Kubernetes versão 1.12 ou mais recente.
 
-2. Para permitir que seu NLB 2.0 encaminhe solicitações para os pods de aplicativo em diversas zonas, abra um caso de suporte para solicitar uma definição de configuração para suas VLANs. **Importante**: deve-se solicitar essa configuração para todas as VLANs públicas. Se você solicitar uma nova VLAN associada, deverá abrir outro chamado para essa VLAN.
+2. Para permitir que seu NLB 2.0 encaminhe solicitações para os pods de app em múltiplas zonas, abra um caso de suporte para solicitar a agregação de capacidade para suas VLANs. Essa definição de configuração não causa interrupções de rede ou indisponibilidades.
     1. Efetue login no  [ console do {{site.data.keyword.Bluemix_notm}}  ](https://cloud.ibm.com/).
     2. Na barra de menus, clique em **Suporte**, clique na guia **Gerenciar casos** e clique em **Criar novo caso**.
     3. Nos campos de caso, insira o seguinte:
        * Para o tipo de suporte, selecione  ** Técnico **.
        * Para categoria, selecione  ** VLAN Spanning **.
        * Para o assunto, insira **Pergunta de rede de VLAN pública.**
-    4. Inclua as informações a seguir na descrição: "Configure a rede para permitir a agregação de capacidade nas VLANs públicas associadas à minha conta. O chamado de referência para essa solicitação é: https://control.softlayer.com/support/tickets/63859145".
+    4. Inclua as informações a seguir na descrição: "Configure a rede para permitir a agregação de capacidade nas VLANs públicas associadas à minha conta. O chamado de referência para essa solicitação é: https://control.softlayer.com/support/tickets/63859145". Observe que, se você deseja permitir a agregação de capacidade em VLANs específicas, como as VLANs públicas para somente um cluster, é possível especificar esses IDs da VLAN na descrição.
     5. Clique em **Enviar**.
 
 3. Ative uma [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta da infraestrutura do IBM Cloud (SoftLayer). Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Quando um VRF ou um VLAN Spanning está ativado, o NLB 2.0 pode rotear pacotes para diversas sub-redes na conta.
@@ -1025,7 +1025,7 @@ Antes de iniciar:
 * Revise as considerações e limitações a seguir.
   * É possível criar nomes de host para os NLBs públicos da versão 1.0 e 2.0.
   * Atualmente, não é possível criar nomes de host para NLBs privados.
-  * É possível registrar até 128 nomes de host. Esse limite pode ser aumentado solicitando um [caso de suporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+  * É possível registrar até 128 nomes de host. Esse limite pode ser aumentado solicitando um [caso de suporte](/docs/get-support?topic=get-support-getting-customer-support).
 * [Crie um NLB para seu aplicativo em um cluster de zona única](#lb_config) ou [crie NLBs em cada zona de um cluster multizona](#multi_zone_config).
 
 Para criar um nome de host para um ou mais endereços IP do NLB:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Resolução de problemas de rede do cluster
@@ -126,7 +126,7 @@ Para solucionar problemas de seu serviço NLB:
     <li>Se pelo menos dois nós do trabalhador disponíveis forem localizados, liste os detalhes do nó do trabalhador.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Certifique-se de que os IDs de VLAN pública e privada para os nós do trabalhador que foram retornados pela correspondência de comandos <code>kubectl get nodes</code> e <code>ibmcloud ks worker-get</code>.</li></ol></li></ul>
 
-4.  Se estiver usando um domínio customizado para se conectar ao seu serviço NLB, certifique-se de que ele esteja mapeado para o endereço IP público de seu serviço NLB.
+4.  Se você usar um domínio customizado para se conectar ao seu serviço NLB, certifique-se de que seu domínio customizado esteja mapeado para o endereço IP público de seu serviço NLB.
     1.  Localize o endereço IP público de seu serviço NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
@@ -206,64 +206,69 @@ Revise as razões a seguir por que o segredo do ALB pode falhar e as etapas de r
 <br />
 
 
-## Não é possível obter um subdomínio para o ALB do Ingress
+## Não é possível obter um subdomínio para o ALB do Ingress, o ALB não é implementado em uma zona ou não é possível implementar um balanceador de carga
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Ao executar `ibmcloud ks cluster-get --cluster <cluster>`, seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
-
-É possível ver uma mensagem de erro semelhante à seguinte:
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* Nenhum subdomínio do Ingress: ao executar `ibmcloud ks cluster-get --cluster <cluster>`, seu cluster está em um estado `normal`, mas nenhum **Subdomínio do Ingress** está disponível.
+* Um ALB não é implementado em uma zona: quando você tem um cluster de multizona e executa `ibmcloud ks albs --cluster <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* Não é possível implementar um balanceador de carga: ao descrever o configmap `ibm-cloud-provider-vlan-ip-config`, você pode ver uma mensagem de erro semelhante à saída de exemplo a seguir.
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-Em clusters padrão, na primeira vez que você criar um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona serão provisionadas automaticamente para você em sua conta de infraestrutura do IBM Cloud (SoftLayer). Nessa zona, 1 sub-rede móvel pública é solicitada na VLAN pública especificada e 1 sub-rede móvel privada é solicitada na VLAN privada especificada. Para o {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN do cluster em uma zona já tiver atingido esse limite, o **Subdomínio do Ingress** falhará ao provisionar.
+Em clusters padrão, na primeira vez que você criar um cluster em uma zona, uma VLAN pública e uma VLAN privada nessa zona serão provisionadas automaticamente para você em sua conta de infraestrutura do IBM Cloud (SoftLayer). Nessa zona, 1 sub-rede móvel pública é solicitada na VLAN pública especificada e 1 sub-rede móvel privada é solicitada na VLAN privada especificada. Para o {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN do cluster em uma zona já tiver atingido esse limite, o **Subdomínio do Ingress** falhará ao provisionar, o ALB do Ingress público para essa zona falhará ao provisionar ou você poderá não ter um endereço IP público móvel disponível para criar um balanceador de carga de rede (NLB).
 
 Para visualizar quantas sub-redes uma VLAN tem:
 1.  No [console da infraestrutura do IBM Cloud (SoftLayer)](https://cloud.ibm.com/classic?), selecione **Rede** > **IP de gerenciamento** > **VLANs**.
 2.  Clique no **Número da VLAN** da VLAN usada para criar seu cluster. Revise a seção **Subnets** para ver se 40 ou mais sub-redes existem.
 
 {: tsResolve}
-Se você precisar de uma nova VLAN, peça uma [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) que usa essa nova VLAN.
+Se precisar de uma nova VLAN, solicite uma [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Em seguida, [crie um cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) que usa essa nova VLAN.
 
-Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Se você tiver outra VLAN disponível, será possível [configurar a ampliação da VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) no cluster existente. Depois, será possível incluir novos nós do trabalhador no cluster que usam a outra VLAN com sub-redes disponíveis. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region<region>`.
 
-Se você não estiver usando todas as sub-redes na VLAN, será possível reutilizar sub-redes no cluster.
-1.  Verifique se as sub-redes que você deseja usar estão disponíveis.
+Se você não estiver usando todas as sub-redes na VLAN, será possível reutilizar sub-redes na VLAN incluindo-as em seu cluster.
+1. Verifique se a sub-rede que você deseja usar está disponível.
+  <p class="note">A conta de infraestrutura que você usa pode ser compartilhada em múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Nesse caso, mesmo se você executar o comando `ibmcloud ks subnets` para ver sub-redes com **Clusters ligados**, será possível ver informações somente para seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.</p>
 
-    A conta de infraestrutura que você está usando pode ser compartilhada entre múltiplas contas do {{site.data.keyword.Bluemix_notm}}. Em caso positivo, mesmo se você executar o comando `ibmcloud ks subnets` para ver sub-redes com **Clusters ligados**, será possível ver informações somente para os seus clusters. Verifique com o proprietário da conta de infraestrutura para certificar-se de que as sub-redes estão disponíveis e não em uso por nenhuma outra conta ou equipe.
-    {: note}
+2. Use o [comando `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) para tornar uma sub-rede existente disponível para seu cluster.
 
-2.  [Crie um cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) com a opção `--no-subnet` para que o serviço não tente criar novas sub-redes. Especifique a zona e a VLAN que tem as sub-redes que estão disponíveis para reutilização.
+3. Verifique se a sub-rede foi criada com sucesso e se foi incluída em seu cluster. O CIDR da sub-rede é listado na seção **Subnet VLANs**.
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add` para incluir sub-redes existentes em seu cluster. Para obter mais informações, veja [Incluindo ou reutilizando sub-redes customizadas e existentes nos clusters do Kubernetes](/docs/containers?topic=containers-subnets#subnets_custom).
+    Nesta saída de exemplo, uma segunda sub-rede foi incluída na VLAN pública `2234945`:
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## O ALB do Ingresso não é implementado em uma zona
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Quando você tem um cluster multizona e executa `ibmcloud ks albs <cluster>`, nenhum ALB é implementado em uma zona. Por exemplo, se você tiver nós do trabalhador em 3 zonas, poderá ver uma saída semelhante à seguinte na qual um ALB público não foi implementado na terceira zona.
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-Em cada zona, 1 sub-rede móvel pública é solicitada na VLAN pública especificada e 1 sub-rede móvel privada é solicitada na VLAN privada especificada. Para o {{site.data.keyword.containerlong_notm}}, as VLANs têm um limite de 40 sub-redes. Se a VLAN pública do cluster em uma zona já tiver atingido esse limite, o ALB do Ingresso público para essa zona falhará ao provisionar.
-
-{: tsResolve}
-Para verificar o número de sub-redes em uma VLAN e para obter as etapas sobre como obter outra VLAN, veja [Não é possível obter um subdomínio para ALB do Ingress](#cs_subnet_limit).
+4. Verifique se os endereços IP móveis da sub-rede que você incluiu são usados para os ALBs ou balanceadores de carga em seu cluster. Pode levar vários minutos para os serviços usarem os endereços IP móveis da sub-rede recém-incluída.
+  * Nenhum subdomínio do Ingress: execute `ibmcloud ks cluster-get --cluster <cluster>` para verificar se o **Subdomínio do Ingress** está preenchido.
+  * Um ALB não é implementado em uma zona: execute `ibmcloud ks albs --cluster <cluster>` para verificar se o ALB ausente está implementado.
+  * Não é possível implementar um balanceador de carga: execute `kubectl get svc -n kube-system` para verificar se o balanceador de carga tem um **EXTERNAL-IP**.
 
 <br />
 
@@ -303,7 +308,7 @@ Você ativou a preservação de IP de origem para um [balanceador de carga da ve
 {: tsCauses}
 Ao ativar a preservação de IP de origem para os serviços de balanceador de carga ou ALB do Ingress, o endereço IP de origem da solicitação do cliente é preservado. O serviço encaminha o tráfego para os pods de app no mesmo nó do trabalhador somente para assegurar que o endereço IP do pacote de solicitações não seja mudado. Geralmente, os pods dos serviços de balanceador de carga ou ALB de Ingress são implementados nos mesmos nós do trabalhador nos quais os pods de app são implementados. No entanto, existem algumas situações em que os pods de serviço e os pods de app podem não ser planejados para o mesmo nó do trabalhador. Se você usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) em nós do trabalhador, quaisquer pods que não tiverem uma tolerância de contaminação serão impedidos de serem executados nos nós do trabalhador contaminados. A preservação de IP de origem pode não estar funcionando com base no tipo de contaminação que você usou:
 
-* **Contaminações do nó de borda**: você [incluiu o rótulo `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para garantir que os pods do Ingress e do balanceador de carga sejam implementados somente nesses nós do trabalhador. Em seguida, você também [contaminou esses nós de borda](/docs/containers?topic=containers-edge#edge_workloads) para evitar que quaisquer outras cargas de trabalho sejam executadas em nós de borda. No entanto, você não incluiu uma regra de afinidade de nó de borda e tolerância em sua implementação do app. Seus pods de app não podem ser planejados nos mesmos nós contaminados que os pods de serviço, e nenhum tráfego atinge o serviço de back-end para o seu app.
+* **Contaminações do nó de borda**: você [incluiu o rótulo `dedicated=edge`](/docs/containers?topic=containers-edge#edge_nodes) em dois ou mais nós do trabalhador em cada VLAN pública em seu cluster para assegurar que os pods do Ingress e do balanceador de carga sejam implementados somente nesses nós do trabalhador. Em seguida, você também [contaminou esses nós de borda](/docs/containers?topic=containers-edge#edge_workloads) para evitar que quaisquer outras cargas de trabalho sejam executadas em nós de borda. No entanto, você não incluiu uma regra de afinidade de nó de borda e tolerância em sua implementação do app. Seus pods de app não podem ser planejados nos mesmos nós contaminados que os pods de serviço, e nenhum tráfego atinge o serviço de back-end para o seu app.
 
 * **Contaminações customizadas**: você usou contaminações customizadas em vários nós para que somente os pods de app com essa tolerância de contaminação possam ser implementados nesses nós. Você incluiu regras de afinidade e tolerâncias para as implementações de seu app e o serviço de balanceador de carga ou Ingress para que seus pods sejam implementados somente nesses nós. No entanto, os pods `ibm-cloud-provider-ip` `keepalived` que são criados automaticamente no namespace `ibm-system` asseguram que os pods do balanceador de carga e os pods de app estejam sempre planejados para o mesmo nó do trabalhador. Esses pods `keepalived` não têm as tolerâncias para as contaminações customizadas que você usou. Eles não podem ser planejados nos mesmos nós contaminados nos quais seus pods de app estão em execução e nenhum tráfego atinge o serviço de back-end para o seu app.
 
@@ -466,7 +471,7 @@ Atualize os valores do gráfico Helm para refletir as mudanças do nó do trabal
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>O trabalhador incluído pode ser implementado em uma sub-rede privada nova e diferente das outras sub-redes existentes em que outros nós do trabalhador estão. Se você estiver usando a sub-rede NAT para remapear endereços IP locais privados de seu cluster e o trabalhador foi incluído em uma nova sub-rede, inclua a nova sub-rede CIDR nesta configuração.</td>
+     <td>O trabalhador incluído pode ser implementado em uma sub-rede privada nova e diferente das outras sub-redes existentes em que outros nós do trabalhador estão. Se você usar a NAT de sub-rede para remapear os endereços IP locais privados do seu cluster e o trabalhador tiver sido incluído em uma nova sub-rede, inclua o novo CIDR de sub-rede nessa configuração.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -493,7 +498,7 @@ Atualize os valores do gráfico Helm para refletir as mudanças do nó do trabal
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Se você estiver usando a sub-rede NAT para remapear endereços IP locais privados específicos, remova quaisquer endereços IP dessa configuração que sejam do trabalhador antigo. Se você estiver usando a sub-rede NAT para remapear sub-redes inteiras e nenhum trabalhador permanecer em uma sub-rede, remova essa sub-rede CIDR desta configuração.</td>
+     <td>Se você usar a NAT de sub-rede para remapear endereços IP locais privados específicos, remova quaisquer endereços IP dessa configuração que sejam do trabalhador antigo. Se você usar a NAT de sub-rede para remapear sub-redes inteiras e nenhum trabalhador permanecer em uma sub-rede, remova esse CIDR de sub-rede dessa configuração.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -572,8 +577,8 @@ Deve-se usar a CLI v3.3 ou mais recente do Calico, a sintaxe do arquivo de confi
 Para assegurar que todos os fatores do Calico estejam alinhados:
 
 1. [Instale e configure uma CLI do Calico da versão 3.3 ou mais recente](/docs/containers?topic=containers-network_policies#cli_install).
-2. Assegure-se de que quaisquer políticas que você criar e desejar aplicar a seu cluster usem a [Sintaxe do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Se tiver um arquivo de política `.yaml` ou `.json` existente na sintaxe do Calico v2, será possível convertê-lo para a sintaxe do Calico v3 usando o comando [`calicoctl convert` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
-3. Para [visualizar políticas](/docs/containers?topic=containers-network_policies#view_policies), certifique-se de estar usando `calicoctl get GlobalNetworkPolicy` para políticas globais e `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas com escopo definido para namespaces específicos.
+2. Assegure-se de que quaisquer políticas que você criar e desejar aplicar a seu cluster usem a [Sintaxe do Calico v3 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy). Se você tiver um arquivo de política existente `.yaml` ou `.json` na sintaxe do Calico v2, será possível convertê-lo em sintaxe do Calico v3 usando o [comando `calicoctl convert` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert).
+3. Para [visualizar políticas](/docs/containers?topic=containers-network_policies#view_policies), assegure-se de usar `calicoctl get GlobalNetworkPolicy` para políticas globais e `calicoctl get NetworkPolicy --namespace <policy_namespace>` para políticas com escopo definido para namespaces específicos.
 
 <br />
 
@@ -594,11 +599,11 @@ Quando uma conta é suspensa, os nós do trabalhador dentro da conta são exclu�
 
 {: tsResolve}
 
-É possível [excluir seu conjunto de trabalhadores existente](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm), em seguida, [criar um novo conjunto de trabalhadores](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
+É possível [excluir seu conjunto de trabalhadores existente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm), em seguida, [criar um novo conjunto de trabalhadores](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
 
 Como alternativa, é possível manter o seu conjunto de trabalhadores existente pedindo novas VLANs e usando-as para criar novos nós do trabalhador no conjunto.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Para obter as zonas para as quais você precisa de novos IDs de VLAN, anote o **Local** na saída de comando a seguir. **Nota**: se o seu cluster for de múltiplas zonas, serão necessários IDs de VLAN para cada zona.
 
@@ -607,7 +612,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     ```
     {: pre}
 
-2.  Obtenha uma nova VLAN privada e pública para cada zona na qual seu cluster está [contatando o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+2.  Obtenha uma nova VLAN privada e pública para cada zona em que seu cluster está, [entrando em contato com o suporte do {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 3.  Anote os novos IDs de VLAN privada e pública para cada zona.
 
@@ -618,7 +623,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     ```
     {: pre}
 
-5.  Use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set` para mudar os metadados da rede do conjunto do trabalhador.
+5.  Use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` para mudar os metadados de rede do conjunto de trabalhadores.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -662,7 +667,7 @@ Ainda está tendo problemas com o seu cluster?
     Consulte
 [Obtendo
 ajuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obter mais detalhes sobre o uso dos fóruns.
--   Entre em contato com o Suporte IBM abrindo um caso. Para saber mais sobre como abrir um caso de suporte IBM ou sobre os níveis de suporte e as severidades do caso, consulte [Entrando em contato com o suporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Entre em contato com o Suporte IBM abrindo um caso. Para saber mais sobre como abrir um caso de suporte IBM ou sobre os níveis de suporte e as severidades do caso, consulte [Entrando em contato com o suporte](/docs/get-support?topic=get-support-getting-customer-support).
 Ao relatar um problema, inclua o ID do cluster. Para obter o ID do seu cluster, execute `ibmcloud ks clusters`. É possível também usar o [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para reunir e exportar informações pertinentes de seu cluster para compartilhar com o Suporte IBM.
 {: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Utilitários de armazenamento do IBM
@@ -414,13 +416,13 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
 
 3. Crie o dispositivo de armazenamento de bloco na mesma zona em que seu nó do trabalhador não SDS está.
 
-   **Exemplo para fornecer o armazenamento de bloco de resistência de 20 GB com 2 IOPS por GB:**
+   **Exemplo para provisionar 20 GB de armazenamento de bloco do Endurance com dois IOPS por GB:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **Exemplo para fornecer o armazenamento de bloco de desempenho de 20 GB com 100 IOPS:**
+   **Exemplo para provisionar o armazenamento de bloco de desempenho de 20 GB com 100 IOPS:**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
@@ -495,12 +497,12 @@ Use essa opção se você desejar incluir configurações de armazenamento de bl
 ## Anexando o armazenamento de bloco bruto em nós do trabalhador não SDS
 {: #attach_block}
 
-Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não SDS, deve-se criar um volume persistente (PV) com a classe de armazenamento do {{site.data.keyword.Bluemix_notm}} Block Volume Attacher e os detalhes de seu dispositivo de armazenamento de bloco.
+Para conectar o dispositivo de armazenamento de bloco a um nó do trabalhador não SDS, deve-se criar um volume persistente (PV) com a classe de armazenamento do {{site.data.keyword.Bluemix_notm}} Block Volume Attacher e os detalhes de seu dispositivo de armazenamento de bloco.
 {: shortdesc}
 
 ** Antes de iniciar **:
-- Certifique-se de ter criado [automaticamente](#automatic_block) ou [manualmente](#manual_block) um armazenamento de bloco bruto, não formatado e desmontado em seus nós do trabalhador não SDS.
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Certifique-se de que você tenha criado [automaticamente](#automatic_block) ou [manualmente](#manual_block) o armazenamento de bloco bruto, não formatado e desmontado em seus nós do trabalhador não SDS.
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para conectar o armazenamento de bloco bruto a nós do trabalhador não SDS**:
 1. Prepare a criação do PV.  
@@ -573,7 +575,7 @@ Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não
         </tr>
         <tr>
         <td><code> ibm.io/lunid </code></td>
-        <td>Insira o ID de lun de seu dispositivo de armazenamento de bloco que você recuperou anteriormente. </td>
+        <td>Insira o ID de LUN do dispositivo de armazenamento de bloco que você recuperou anteriormente. </td>
         </tr>
         <tr>
         <td><code> ibm.io/nodeip </code></td>
@@ -643,3 +645,5 @@ Para anexar o dispositivo de armazenamento de bloco a um nó do trabalhador não
 
 Se desejar desconectar um volume, exclua o PV. Os volumes desconectados ainda estão autorizados a serem acessados por um nó do trabalhador específico e são conectados novamente quando você cria um novo PV com a classe de armazenamento do {{site.data.keyword.Bluemix_notm}} Block Volume Attacher para anexar um volume diferente ao mesmo nó do trabalhador. Para evitar a anexação do volume desconectado antigo novamente, remova a autorização do nó do trabalhador para acessar o volume desconectado usando o comando `ibmcloud sl block access-revoke`. A remoção do volume não remove o volume de sua conta de infraestrutura do IBM Cloud (SoftLayer). Para cancelar o faturamento para seu volume, deve-se [remover manualmente o armazenamento de sua conta de infraestrutura do IBM Cloud (SoftLayer)](/docs/containers?topic=containers-cleanup).
 {: note}
+
+

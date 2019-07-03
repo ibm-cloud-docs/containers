@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -62,8 +63,8 @@ Para ver as permissões específicas do {{site.data.keyword.containerlong_notm}}
 <dl>
 <dt><a href="#platform"> {{site.data.keyword.Bluemix_notm}}  Plataforma IAM e funções de serviço </a></dt>
 <dd>O {{site.data.keyword.containerlong_notm}} usa as funções da plataforma e de serviço do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) e as funções de serviço para conceder aos usuários acesso ao cluster.
-<ul><li>**Plataforma**: as funções da plataforma determinam as ações que os usuários podem executar na infraestrutura do cluster usando a API do {{site.data.keyword.containerlong_notm}}, o console e a CLI (`ibmcloud ks`). As funções da plataforma não concedem acesso à API do Kubernetes. É possível configurar as políticas para essas funções por grupo de recursos, região ou instância de cluster. Embora as funções da plataforma autorizem você a executar ações de infraestrutura no cluster, elas não concedem acesso aos recursos de infraestrutura do IBM Cloud (SoftLayer). O acesso aos recursos de infraestrutura do IBM Cloud (SoftLayer) é determinado pela [chave API que está configurada para a região](#api_key). As ações de exemplo que são permitidas por funções da plataforma estão criando ou removendo clusters, ligando serviços a um cluster, gerenciando recursos de rede e de armazenamento ou incluindo nós do trabalhador extras.<br><br>Se você designar apenas funções da plataforma aos usuários, eles não poderão interagir com recursos do Kubernetes no cluster. Eles podem, no entanto, ainda executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config`. Em seguida, é possível autorizar os usuários a executar ações selecionadas do Kubernetes usando [políticas RBAC customizadas](/docs/containers?topic=containers-users#role-binding). Você pode fazer isso se a sua organização usar atualmente as políticas RBAC customizadas para controlar o acesso de Kubernetes e planejar continuar usando o RBAC customizado em vez de funções de serviço.</li>
-<li>**Serviço**: as funções de serviço concedem políticas de RBAC correspondentes do Kubernetes às que um usuário recebe em um cluster. Como tal, as funções de serviço concedem acesso à API do Kubernetes, ao painel e à CLI (`kubectl`). É possível definir o escopo da política para funções de serviço por grupo de recursos, região ou instância de cluster. Além disso, também é possível definir o escopo de funções de serviço para os espaços de nomes Kubernetes que estão em todos os clusters individuais, individuais ou regionais. Ao definir o escopo de uma função de serviço para um namespace, não é possível aplicar a política a um grupo de recursos ou designar uma função da plataforma ao mesmo tempo. As ações de exemplo que são permitidas pelas funções de serviço estão criando implementações de app, incluindo namespaces ou configurando configmaps.<br><br>Se você designar apenas funções de serviço aos usuários, eles não poderão visualizar ou interagir com nenhum recurso do {{site.data.keyword.containerlong_notm}}. Para que os usuários acessem o cluster e usem os recursos do Kubernetes do cluster, deve-se fornecer aos usuários o nome e o ID do cluster para que eles possam executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` e, então, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli). Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar os clusters e outros recursos de infraestrutura por meio da CLI, dê aos usuários a função da plataforma **Visualizador**.</li></ul></dd>
+<ul><li>**Plataforma**: as funções da plataforma determinam as ações que os usuários podem executar na infraestrutura do cluster usando a API do {{site.data.keyword.containerlong_notm}}, o console e a CLI (`ibmcloud ks`). As funções da plataforma não concedem acesso à API do Kubernetes. É possível configurar as políticas para essas funções por grupo de recursos, região ou instância de cluster. Embora as funções da plataforma autorizem você a executar ações de infraestrutura no cluster, elas não concedem acesso aos recursos de infraestrutura do IBM Cloud (SoftLayer). O acesso aos recursos de infraestrutura do IBM Cloud (SoftLayer) é determinado pela [chave API que está configurada para a região](#api_key). As ações de exemplo que são permitidas por funções da plataforma estão criando ou removendo clusters, ligando serviços a um cluster, gerenciando recursos de rede e de armazenamento ou incluindo nós do trabalhador extras.<br><br>Se você designar apenas funções da plataforma aos usuários, eles não poderão interagir com recursos do Kubernetes no cluster. No entanto, eles poderão ainda executar o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config`. Em seguida, é possível autorizar os usuários a executar ações selecionadas do Kubernetes usando [políticas RBAC customizadas](/docs/containers?topic=containers-users#role-binding). Você pode fazer isso se a sua organização usar atualmente as políticas RBAC customizadas para controlar o acesso de Kubernetes e planejar continuar usando o RBAC customizado em vez de funções de serviço.</li>
+<li>**Serviço**: as funções de serviço concedem políticas de RBAC correspondentes do Kubernetes às que um usuário recebe em um cluster. Como tal, as funções de serviço concedem acesso à API do Kubernetes, ao painel e à CLI (`kubectl`). É possível definir o escopo da política para funções de serviço por grupo de recursos, região ou instância de cluster. Além disso, também é possível definir o escopo de funções de serviço para os espaços de nomes Kubernetes que estão em todos os clusters individuais, individuais ou regionais. Ao definir o escopo de uma função de serviço para um namespace, não é possível aplicar a política a um grupo de recursos ou designar uma função da plataforma ao mesmo tempo. As ações de exemplo que são permitidas pelas funções de serviço estão criando implementações de app, incluindo namespaces ou configurando configmaps.<br><br>Se você designar apenas funções de serviço aos usuários, eles não poderão visualizar ou interagir com nenhum recurso do {{site.data.keyword.containerlong_notm}}. Para que os usuários acessem o cluster e usem os recursos do Kubernetes do cluster, deve-se fornecer aos usuários o nome do cluster e o ID para que eles possam executar o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` e, em seguida, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli). Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar os clusters e outros recursos de infraestrutura por meio da CLI, dê aos usuários a função da plataforma **Visualizador**.</li></ul></dd>
 <dt><a href="#role-binding"> RBAC </a></dt>
 <dd>No Kubernetes, o controle de acesso baseado na função (RBAC) é uma maneira de proteger os recursos dentro de seu cluster. As funções RBAC determinam as ações do Kubernetes que os usuários podem executar nesses recursos. Cada usuário que é designado a uma função de serviço é designado automaticamente a uma função de cluster RBAC correspondente. Essa função de cluster RBAC é aplicada a um namespace específico ou a todos os namespaces, dependendo da definição de escopo da política para um namespace.</br></br>
 As ações de exemplo que são permitidas pelas funções RBAC estão criando objetos como pods ou lendo logs de pod.</dd>
@@ -109,12 +110,12 @@ Quando você cria sua conta do {{site.data.keyword.Bluemix_notm}}, o grupo de re
   <li>Todas as instâncias dentro de uma região de um serviço, como todos os clusters na região **Sul dos EUA** do {{site.data.keyword.containerlong_notm}}.</li>
   <li>Para uma instância individual, como um cluster.</li></ul></dd>
 <dt>Namespace do Kubernetes</dt>
-  <dd><p>Como parte das instâncias de recursos do cluster no {{site.data.keyword.Bluemix_notm}} IAM, é possível designar usuários com funções de acesso de serviço aos namespaces do Kubernetes em seus clusters. Se você definir o escopo de uma função de serviço para um namespace, não será possível aplicar a política a um grupo de recursos ou designar uma função da plataforma ao mesmo tempo.</p>
+  <dd><p>Como parte das instâncias de recursos do cluster no {{site.data.keyword.Bluemix_notm}} IAM, é possível designar usuários com funções de acesso de serviço aos namespaces do Kubernetes em seus clusters.</p>
   <p>Quando você designa acesso a um namespace, a política se aplica a todas as instâncias atuais e futuras do namespace em todos os clusters que você autorizar. Por exemplo, digamos que você deseja que um grupo de usuários `dev` seja capaz de implementar recursos do Kubernetes em um namespace `test` em todos os seus clusters no Norte da AP. Se você designar ao grupo de acesso `dev` a função de acesso de serviço **Gravador** para o teste de namespace do Kubernetes em todos os clusters na região Norte da AP no grupo de recursos `default`, o grupo `dev` poderá acessar o namespace `test` em qualquer cluster do Norte da AP no grupo de recursos `default` que atualmente tem ou posteriormente terá um namespace de teste.</p>
-  <p class="important">Não é possível designar funções de acesso ao serviço com escopo definido por namespace no nível do grupo de recursos ou designá-las ao mesmo tempo que as funções da plataforma.</p></dd>
+  <p class="important">Se você definir o escopo de uma função de serviço para um namespace, não será possível aplicar a política a um grupo de recursos ou designar uma função da plataforma ao mesmo tempo.</p></dd>
 <dt>Grupo de Recurso</dt>
   <dd><p>É possível organizar seus recursos de conta em agrupamentos customizáveis para que seja possível designar rapidamente a indivíduos ou grupos de usuários acesso a mais de um recurso de cada vez. Os grupos de recursos podem ajudar operadores e administradores a filtrar recursos para visualizar seu uso atual, solucionar problemas e gerenciar equipes.</p>
-  <p class="important">Um cluster pode ser criado em apenas um grupo de recursos que não pode ser mudado posteriormente. Se você criar um cluster no grupo de recursos incorreto, deverá excluir o cluster e recriá-lo no grupo de recursos correto. Além disso, se você precisar usar o comando `ibmcloud ks cluster-service-bind` [](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) para [integrar com um serviço do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services). Esse serviço deverá estar no mesmo grupo de recursos que o cluster. Os serviços que não usam grupos de recursos como {{site.data.keyword.registrylong_notm}} ou que não precisam de ligação de serviços como {{site.data.keyword.la_full_notm}} funcionarão mesmo se o cluster estiver em um grupo de recursos diferente.</p>
+  <p class="important">Um cluster pode ser criado em apenas um grupo de recursos que não pode ser mudado posteriormente. Se você criar um cluster no grupo de recursos incorreto, deverá excluir o cluster e recriá-lo no grupo de recursos correto. Além disso, se for necessário usar o [comando](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para [integrá-lo a um serviço do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), esse serviço deverá estar no mesmo grupo de recursos que o cluster. Os serviços que não usam grupos de recursos como {{site.data.keyword.registrylong_notm}} ou que não precisam de ligação de serviços como {{site.data.keyword.la_full_notm}} funcionarão mesmo se o cluster estiver em um grupo de recursos diferente.</p>
   <p>Se você planeja usar o [{{site.data.keyword.monitoringlong_notm}} para métricas ](/docs/containers?topic=containers-health#view_metrics), considere fornecer nomes exclusivos de clusters em grupos de recursos e regiões em sua conta para evitar conflitos de nomenclatura de métricas. Não é possível renomear um cluster.</p>
   <p>É possível designar aos usuários uma função de acesso a um grupo de recursos para os cenários a seguir. Observe que, diferentemente das instâncias de recurso, não é possível conceder acesso a uma instância individual dentro de um grupo de recursos.</p>
   <ul><li>Todos os serviços do {{site.data.keyword.Bluemix_notm}} IAM no grupo de recursos, incluindo todos os clusters no {{site.data.keyword.containerlong_notm}} e imagens no {{site.data.keyword.registrylong_notm}}.</li>
@@ -151,7 +152,7 @@ Para obter mais informações sobre como configurar sua conta e recursos, experi
 ## Configurando a chave API para permitir o acesso ao portfólio de infraestrutura
 {: #api_key}
 
-Para provisionar e trabalhar com clusters com êxito, deve-se assegurar que a sua conta do {{site.data.keyword.Bluemix_notm}} esteja configurada corretamente para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer).
+Para provisionar e trabalhar com êxito com os clusters, deve-se assegurar que a sua conta do {{site.data.keyword.Bluemix_notm}} esteja configurada corretamente para acessar o portfólio da infraestrutura do IBM Cloud (SoftLayer) em cada grupo de recursos e região em que seus clusters estão.
 {: shortdesc}
 
 **Maioria de casos**: a sua conta Pré-paga do {{site.data.keyword.Bluemix_notm}} já tem acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer). Para configurar o {{site.data.keyword.containerlong_notm}} para acessar o portfólio, o **proprietário da conta** deve configurar a chave de API para a região e o grupo de recursos.
@@ -162,25 +163,25 @@ Para provisionar e trabalhar com clusters com êxito, deve-se assegurar que a su
     ```
     {: pre}
 
-2. Destine o grupo de recursos no qual você deseja configurar a chave API. Se você não destinar um grupo de recursos, a chave API será configurada para o grupo de recursos padrão.
+2. Destine o grupo de recursos no qual você deseja configurar a chave API. Se você não destinar um grupo de recursos, a chave API será configurada para o grupo de recursos padrão. Para listar os grupos de recursos disponíveis, execute `ibmcloud resource groups`.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
 
-4. Configure a chave API para a região e o grupo de recursos.
+3. Configure a chave API para a região e o grupo de recursos.
     ```
-    ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. Verifique se a chave API está configurada.
+4. Verifique se a chave API está configurada.
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-6. Repita para cada região e grupo de recursos no qual você deseja criar clusters.
+5. Repita para cada região e grupo de recursos no qual você deseja criar clusters.
 
 **Opções alternativas e mais informações**: para obter maneiras diferentes de acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer), consulte as seções a seguir.
 * Se você não tiver certeza se a sua conta já tem acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer), veja [Entendendo o acesso ao portfólio de infraestrutura do IBM Cloud (SoftLayer)](#understand_infra).
@@ -207,7 +208,7 @@ Para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer), você usa 
   <tbody>
     <tr>
       <td>**Contas Lite** não podem provisionar clusters.</td>
-      <td>[Faça upgrade de sua conta Lite para uma conta pré-paga do {{site.data.keyword.Bluemix_notm}}](/docs/account?topic=account-accounts#paygo).</td>
+      <td>[Faça upgrade da sua conta Lite para uma conta Pagamento por Uso do {{site.data.keyword.Bluemix_notm}}](/docs/account?topic=account-accounts#paygo).</td>
     </tr>
     <tr>
       <td>As contas **Pré-pagas** vêm com acesso ao portfólio de infraestrutura.</td>
@@ -219,7 +220,7 @@ Para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer), você usa 
     </tr>
     <tr>
       <td>**Contas de infraestrutura do IBM Cloud (SoftLayer)**, nenhuma conta do {{site.data.keyword.Bluemix_notm}}</td>
-      <td><p>[Crie uma conta pré-paga do {{site.data.keyword.Bluemix_notm}}](/docs/account?topic=account-accounts#paygo). Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</p><p>Por padrão, a sua nova conta do {{site.data.keyword.Bluemix_notm}} usa a nova conta de infraestrutura. Para continuar usando a conta de infraestrutura antiga, configure manualmente as credenciais.</p></td>
+      <td><p>[Crie uma conta Pagamento por Uso do {{site.data.keyword.Bluemix_notm}}](/docs/account?topic=account-accounts#paygo). Você tem duas contas de infraestrutura do IBM Cloud (SoftLayer) separadas e faturamento.</p><p>Por padrão, a sua nova conta do {{site.data.keyword.Bluemix_notm}} usa a nova conta de infraestrutura. Para continuar usando a conta de infraestrutura antiga, configure manualmente as credenciais.</p></td>
     </tr>
   </tbody>
   </table>
@@ -290,14 +291,14 @@ Para assegurar que todas as ações relacionadas à infraestrutura possam ser co
 Se tiver uma conta Pré-paga do {{site.data.keyword.Bluemix_notm}}, você terá acesso a um portfólio de infraestrutura do IBM Cloud (SoftLayer) vinculado por padrão. A chave API é usada para pedir recursos de infraestrutura desse portfólio de infraestrutura do IBM Cloud (SoftLayer), como novos nós do trabalhador ou VLANs.
 {: shortdec}
 
-É possível localizar o proprietário da chave de API atual executando [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info). Se você descobrir que é necessário atualizar a chave API que está armazenada para uma região, será possível fazer isso executando o comando [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset). Esse comando requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} e armazena a chave API do usuário que executa esse comando na conta.
+É possível localizar o proprietário da chave de API atual executando [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info). Se você descobrir que precisa atualizar a chave de API que está armazenada para uma região, será possível fazer isso executando o comando [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). Esse comando requer a política de acesso de administrador do {{site.data.keyword.containerlong_notm}} e armazena a chave API do usuário que executa esse comando na conta.
 
 Certifique-se de que você deseja reconfigurar a chave e entenda o impacto em seu app. A chave é usada em vários locais diferentes e poderá causar mudanças radicais se ela for mudada desnecessariamente.
 {: note}
 
 ** Antes de iniciar **:
 - Se o proprietário da conta não estiver configurando a chave API, [assegure-se de que o usuário que configura a chave API tenha as permissões corretas](#owner_permissions).
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para configurar a chave API para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer):
 
@@ -310,7 +311,7 @@ Para configurar a chave API para acessar o portfólio de infraestrutura do IBM C
         {:pre}
     4.  Configure a chave API do usuário para a região.
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}    
     5.  Verifique se a chave API está configurada.
@@ -324,15 +325,15 @@ Para configurar a chave API para acessar o portfólio de infraestrutura do IBM C
 ### Acessando uma conta de infraestrutura do IBM Cloud (SoftLayer) diferente
 {: #credentials}
 
-Em vez de usar a conta padrão de infraestrutura do IBM Cloud (SoftLayer) vinculada para pedir a infraestrutura para clusters em uma região, talvez seja melhor usar uma conta de infraestrutura do IBM Cloud (SoftLayer) diferente da que você já tem. É possível vincular essa conta de infraestrutura à sua conta do {{site.data.keyword.Bluemix_notm}} usando o comando [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set). As credenciais de infraestrutura do IBM Cloud (SoftLayer) são usadas em vez das credenciais de conta Pré-paga padrão que são armazenadas para a região.
+Em vez de usar a conta padrão de infraestrutura do IBM Cloud (SoftLayer) vinculada para pedir a infraestrutura para clusters em uma região, talvez seja melhor usar uma conta de infraestrutura do IBM Cloud (SoftLayer) diferente da que você já tem. É possível vincular essa conta de infraestrutura à sua conta do {{site.data.keyword.Bluemix_notm}} usando o comando [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). As credenciais de infraestrutura do IBM Cloud (SoftLayer) são usadas em vez das credenciais de conta Pré-paga padrão que são armazenadas para a região.
 {: shortdesc}
 
-As credenciais de infraestrutura do IBM Cloud (SoftLayer) configuradas pelo comando `ibmcloud ks credential-set` persistem depois que sua sessão termina. Se você remover as credenciais de infraestrutura do IBM Cloud (SoftLayer) que foram configuradas manualmente com o comando [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset), as credenciais de conta padrão pré-paga serão usadas. No entanto, essa mudança nas credenciais de conta de infraestrutura pode causar [clusters órfãos](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
+As credenciais de infraestrutura do IBM Cloud (SoftLayer) configuradas pelo comando `ibmcloud ks credential-set` persistem depois que sua sessão termina. Se você remover as credenciais de infraestrutura do IBM Cloud (SoftLayer) que foram configuradas manualmente com o comando [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset), as credenciais da conta Pagamento por Uso padrão serão usadas. No entanto, essa mudança nas credenciais da conta de infraestrutura pode causar [clusters órfãos](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 {: important}
 
 ** Antes de iniciar **:
 - Se não estiver usando as credenciais do proprietário da conta, [assegure-se de que o usuário cujas credenciais você deseja configurar para a chave API tenha as permissões corretas](#owner_permissions).
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para configurar credenciais da conta da infraestrutura para acessar o portfólio IBM Cloud Infrastructure (SoftLayer):
 
@@ -348,13 +349,13 @@ Para configurar credenciais da conta da infraestrutura para acessar o portfólio
 
     2.  Configure as credenciais de API de infraestrutura a serem usadas.
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
     3. Verifique se as credenciais corretas estão configuradas.
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         Saída de exemplo:
         ```
@@ -365,7 +366,7 @@ Para configurar credenciais da conta da infraestrutura para acessar o portfólio
 3. [Criar um cluster](/docs/containers?topic=containers-clusters). Para criar o cluster, as credenciais de infraestrutura configuradas para a região e o grupo de recursos são usadas.
 
 4. Verifique se o seu cluster usa as credenciais de conta de infraestrutura configuradas.
-  1. Abra o console do [{{site.data.keyword.containerlong_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/clusters) e selecione seu cluster. 
+  1. Abra o [console do {{site.data.keyword.containerlong_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/clusters) e selecione seu cluster. 
   2. Na guia Visão geral, procure um campo **Usuário de infraestrutura**. 
   3. Se vir esse campo, você não usará as credenciais de infraestrutura padrão que vêm com sua conta Pré-paga nessa região. Em vez disso, a região é configurada para usar as credenciais de conta de infraestrutura diferentes que você configurou.
 
@@ -418,7 +419,7 @@ Antes de iniciar, verifique se você está designado à função da plataforma *
        * **Função de acesso da plataforma**: concede acesso ao {{site.data.keyword.containerlong_notm}} para que os usuários possam gerenciar recursos de infraestrutura, como clusters, nós do trabalhador, conjuntos de trabalhadores, balanceadores de carga do aplicativo Ingress e armazenamento. Para localizar uma lista de ações suportadas por função, consulte [página de referência de funções da plataforma](/docs/containers?topic=containers-access_reference#iam_platform).
        * **Função de acesso ao serviço **: concede acesso ao Kubernetes como acesso de dentro de um cluster para que os usuários possam gerenciar os recursos do Kubernetes, como pods, implementações, serviços, serviços e namespaces. Para localizar uma lista de ações suportadas por função, consulte [página de referência de funções de serviço](/docs/containers?topic=containers-access_reference#service).<p class="note">Não é possível definir o escopo de uma função de acesso ao serviço a um namespace se você designar a função no nível do grupo de recursos. Designe o acesso a uma instância de recurso no lugar. Além disso, não designe uma função da plataforma ao mesmo tempo que designa uma função de serviço.</p>
     7. Clique em **Designar**.
-    8. **Opcional**: se você designou apenas uma função de serviço aos usuários, deverá fornecer a eles o nome e o ID do cluster para que possam executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` e, em seguida, [iniciar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou interagir com a API do Kubernetes. Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura da CLI, repita estas etapas para fornecer aos usuários a função de **Visualizador** da plataforma.
+    8. **Opcional**: se você designou somente uma função do serviço aos usuários, deve-se fornecer aos usuários o nome do cluster e o ID para que eles possam executar o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` e, em seguida, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou, de outra forma, interagir com a API do Kubernetes. Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura da CLI, repita estas etapas para fornecer aos usuários a função de **Visualizador** da plataforma.
   * **Para instâncias de recurso dentro ou entre os grupos de recursos**:
     1. Clique em  ** Designar acesso a recursos **.
     2. Na lista **Serviços** , selecione **{{site.data.keyword.containershort_notm}}**.
@@ -431,7 +432,7 @@ Antes de iniciar, verifique se você está designado à função da plataforma *
           * Se você tiver definido o escopo da política para um namespace, não será possível também designar a função da plataforma ao mesmo tempo. Se você também desejar que o usuário tenha uma função da plataforma, repita essas etapas, mas deixe o campo de namespace em branco e designe apenas uma função da plataforma (não designe uma função de acesso ao serviço novamente).
        * **Função de acesso ao serviço**: concede acesso ao Kubernetes conforme acessado de dentro de um cluster para que os usuários possam gerenciar recursos do Kubernetes, como pods, implementações, serviços e namespaces. Para localizar uma lista de ações suportadas por função, consulte [página de referência de funções de serviço](/docs/containers?topic=containers-access_reference#service).
     7. Clique em **Designar**.
-    8. **Opcional**: se você designou apenas funções de serviço para os usuários, deve-se fornecer a eles o nome e o ID do cluster para que eles possam executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` e, então, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou interagir de outra forma com a API do Kubernetes. Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura da CLI, repita estas etapas para fornecer aos usuários a função de **Visualizador** da plataforma.
+    8. **Opcional**: se você designou somente funções do serviço aos usuários, deve-se fornecer aos usuários o nome do cluster e o ID para que eles possam executar o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` e, em seguida, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou, de outra forma, interagir com a API do Kubernetes. Se você desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura da CLI, repita estas etapas para fornecer aos usuários a função de **Visualizador** da plataforma.
 
 4.  Opcional: Se você desejar que os usuários possam trabalhar com clusters em um grupo de recursos diferentes do padrão, esses usuários precisam de acesso adicional aos grupos de recursos nos quais os clusters estão. É possível designar a esses usuários pelo menos a função da plataforma **Visualizador** para grupos de recursos, se isso não tiver sido feito anteriormente.
     1.  Clique em **Designar acesso dentro de um grupo de recursos**.
@@ -451,7 +452,7 @@ Conceda aos usuários acesso aos seus clusters designando funções de acesso ao
 
 - Verifique se você está designado à função `cluster-admin` {{site.data.keyword.Bluemix_notm}} da plataforma IAM para a conta do {{site.data.keyword.Bluemix_notm}} na qual está trabalhando.
 - Verifique se o usuário está incluído na conta. Se o usuário ainda não foi convidado, convide-o para sua conta executando `ibmcloud account user-invite <user@email.com>`.
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Decida se deseja designar funções de [acesso ao serviço ou à plataforma](/docs/containers?topic=containers-users#access_policies). As etapas da CLI variam de acordo com a função de acesso que você deseja designar:
   * [Designar funções de plataforma por meio da CLI](#add_users_cli_platform)
   * [Designar funções de serviço por meio da CLI](#add_users_cli_service)
@@ -652,7 +653,7 @@ Conceda aos usuários acesso aos seus clusters designando funções de acesso ao
         ```
         {: pre}
 
-4.  Se você designou apenas funções de serviço para os usuários, deve-se fornecer aos usuários o nome e o ID do cluster para que eles possam executar o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` e, então [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou interagir de outra forma com a API do Kubernetes. Se desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura por meio da CLI, [forneça a eles a função da plataforma **Visualizador**](#add_users_cli_platform).
+4.  Se você designou somente funções do serviço aos usuários, deve-se fornecer aos usuários o nome do cluster e o ID para que eles possam executar o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` e, em seguida, [ativar o painel do Kubernetes por meio da CLI](/docs/containers?topic=containers-app#db_cli) ou, de outra forma, interagir com a API do Kubernetes. Se desejar que esses usuários ainda possam acessar o console de clusters do {{site.data.keyword.containerlong_notm}} e listar clusters e outros recursos de infraestrutura por meio da CLI, [forneça a eles a função da plataforma **Visualizador**](#add_users_cli_platform).
 
 5.  Para que as mudanças entrem em vigor, o usuário que tem acesso concedido deve atualizar a configuração do cluster. Os usuários não são incluídos nas ligações de função até que atualizem individualmente a configuração do cluster, mesmo que diversos usuários tenham sido incluídos ao mesmo tempo. Eles também não serão incluídos em uma ligação de função se tiverem uma permissão mais alta. Por exemplo, se os usuários tiverem uma função de cluster e estiverem em uma ligação de função de cluster, eles também não serão incluídos em cada ligação de função de namespace individual.
     ```
@@ -683,7 +684,7 @@ Conceda aos usuários acesso aos seus clusters designando funções de acesso ao
         ```
         {: pre}
 
-    **Saída de exemplo**: para o caso de você designar ao usuário `user@email.com` e ao grupo de acesso `team1` a função de serviço **Leitor** e, em seguida, executar `kubectl get rolebinding ibm-view -o yaml -n default`.
+    **Saída de exemplo**: você obterá a saída de exemplo a seguir se designar ao usuário `user@email.com` e ao grupo de acesso `team1` a função do serviço **Leitor** e, em seguida, executar `kubectl get rolebinding ibm-view -o yaml -n default`.
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -899,12 +900,12 @@ Para evitar mudanças de quebra, não mude as funções de cluster `view`, `edit
               <td><code>subjects.kind</code></td>
               <td>Especifique o tipo como um dos seguintes:
               <ul><li>`User`: ligue a função RBAC ou a função de cluster a um usuário individual em sua conta.</li>
-              <li>`Group`: para os clusters que executam o Kubernetes 1.11 ou mais recente, ligue a função RBAC ou de cluster a um [grupo de acesso do {{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-groups#groups) em sua conta.</li>
+              <li>`Grupo`: para clusters que executam o Kubernetes 1.11 ou mais recente, ligue a função RBAC ou a função de cluster a um [grupo de acesso do{{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-groups#groups) em sua conta.</li>
               <li>`ServiceAccount`: ligue a função RBAC ou a função de cluster a uma conta de serviço em um namespace em seu cluster.</li></ul></td>
             </tr>
             <tr>
               <td><code> subjects.name </code></td>
-              <td><ul><li>Para `User`: anexe o endereço de e-mail do usuário individual a uma das URLs a seguir.<ul><li>Para clusters que executam o Kubernetes 1.11 ou mais recente: <code>IAM#user@email.com</code></li><li>Para clusters que executam o Kubernetes 1.10 ou anterior: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>Para `User`: anexe o endereço de e-mail do usuário individual ao `IAM#` conforme a seguir: <code>IAM#user@email.com</code>.</li>
               <li>Para `Group`: para clusters que executam o Kubernetes 1.11 ou mais recente, especifique o nome do [grupo de acesso do {{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-groups#groups) em sua conta.</li>
               <li>Para `ServiceAccount`: especifique o nome da conta do serviço.</li></ul></td>
             </tr>
@@ -967,6 +968,85 @@ Para evitar mudanças de quebra, não mude as funções de cluster `view`, `edit
 
 Agora que você criou e ligou uma função RBAC ou uma função de cluster customizada do Kubernetes, acompanhe os usuários. Peça-lhes para testar uma ação que eles tenham permissão para concluir devido à função, como excluir um pod.
 
+### Ampliando permissões existentes agregando funções de cluster 
+{: #rbac_aggregate}
+
+É possível ampliar as permissões existentes de seus usuários, agregando ou combinando funções de cluster com outras funções de cluster. Quando você designa a um usuário uma função do serviço do {{site.data.keyword.Bluemix_notm}}, o usuário é incluído em uma [função de cluster RBAC do Kubernetes correspondente](/docs/containers?topic=containers-access_reference#service). No entanto, você talvez deseje permitir que determinados usuários executem operações adicionais.
+{: shortdesc}
+
+Por exemplo, um usuário com a função de cluster `admin` com escopo definido por namespace não pode usar o comando `kubectl top pods` para visualizar as métricas de pod para todos os pods no namespace. Você pode agregar uma função de cluster para que os usuários na função de cluster `admin` estejam autorizados a executar o comando `top pods`. Para obter mais informações, [consulte os docs do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+
+**Quais são algumas operações comuns que eu posso desejar ampliar permissões para uma função de cluster padrão?**<br>
+Revise [as operações que cada função de cluster RBAC padrão permite](/docs/containers?topic=containers-access_reference#rbac_ref) para obter uma boa ideia do que seus usuários podem fazer e, em seguida, comparar as operações permitidas com o que você deseja que elas sejam capazes de fazer.
+
+Se seus usuários na mesma função de cluster encontrarem erros semelhantes ao seguinte para o mesmo tipo de operação, você talvez deseje ampliar a função de cluster para incluir essa operação.
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**Para agregar funções de cluster**:
+
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Crie um arquivo YAML de função de cluster. Na seção `labels`, especifique a função de cluster existente para a qual você deseja agregar permissões. O exemplo a seguir amplia a função de cluster `admin` predefinida para permitir que os usuários executem `kubectl top pods`. Para obter mais exemplos, [consulte os docs do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - listar
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>Entendendo os componentes do YAML</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Idea icon"/>  entendendo os componentes do YAML</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>Insira um nome para a função de cluster. **Não** use os nomes de função de cluster predefinidos: `view`, `edit`, `admin` e `cluster-admin`.</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>Inclua um rótulo que corresponda à função de cluster que você deseja agregar no formato `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"`. Os rótulos para as funções de cluster predefinidas são os seguintes.<ul>
+          <li>Função do serviço **Gerenciador** do IAM, com escopo definido para um namespace: `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>Função do serviço **Gravador** do IAM: `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>Função do serviço **Leitor** do IAM: `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code> rules.apiGroups </code></td>
+          <td>Especifique os [grupos de APIs ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) do Kubernetes com os quais você deseja que os usuários possam interagir, como `"apps"`, `"batch"` ou `"extensions"`. Para acesso ao grupo principal de APIs no caminho de REST `api/v1`, deixe o grupo em branco: `[""]`.</td>
+        </tr>
+        <tr>
+          <td><code> rules.resources </code></td>
+          <td>Especifique os [tipos de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) do Kubernetes para os quais você deseja conceder acesso, como `"daemonsets"`, `"deployments"`, `"events"` ou `"ingresses"`.</td>
+        </tr>
+        <tr>
+          <td><code> rules.verbs </code></td>
+          <td>Especifique os tipos de [ações ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubectl.docs.kubernetes.io/) que você deseja que os usuários possam executar, como `"get"`, `"list"`, `"describe"`, `"create"` ou `"delete"`.</td>
+        </tr>
+      </tbody>
+    </table>
+2.  Crie a função de cluster em seu cluster. Quaisquer usuários que tenham uma ligação de função para a função de cluster `admin` têm agora as permissões adicionais da função de cluster `view-pod-metrics`.
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  Contate os usuários que têm a função de cluster `admin`. Solicite a eles para [atualizar sua configuração de cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) e testar a ação, como `kubectl top pods`.
+
+
 <br />
 
 
@@ -978,8 +1058,9 @@ Quando você designa a função de infraestrutura **Superusuário** ao administr
 
 Por motivos de conformidade, segurança ou faturamento, talvez você não queira fornecer a função de infraestrutura **Superusuário** para o usuário que configura a chave de API ou cujas credenciais são configuradas com o comando `ibmcloud ks credential-set`. No entanto, se esse usuário não tiver a função **Superusuário**, as ações relacionadas à infraestrutura, como a criação de um cluster ou o recarregamento de um nó do trabalhador, poderão falhar. Em vez de usar as funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM para controlar o acesso de infraestrutura dos usuários, deve-se configurar permissões específicas de infraestrutura do IBM Cloud (SoftLayer) para os usuários.
 
-Se você tiver clusters de múltiplas zonas, o proprietário da conta de infraestrutura do IBM Cloud (SoftLayer) precisará ativar o VLAN Spanning para que os nós em diferentes zonas possam se comunicar dentro do cluster. O proprietário da conta também pode designar a um usuário a permissão **Rede > Gerenciar VLAN Spanning** para que o usuário possa ativar o VLAN Spanning. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Por exemplo, se sua conta não estiver ativada para VRF, seu proprietário da conta de infraestrutura do IBM Cloud (SoftLayer) deverá ativar o VLAN Spanning. O proprietário da conta também pode designar a um usuário a permissão **Rede > Gerenciar VLAN Spanning** para que o usuário possa ativar o VLAN Spanning. Para obter mais informações, consulte [VLAN Spanning para comunicação de VLAN cruzada](/docs/containers?topic=containers-subnets#basics_segmentation).
+
+<p class="tip">Credenciais de infraestrutura já configuradas usando o comando `ibmcloud ks credential-set`? É possível verificar se as credenciais estão sem as permissões de infraestrutura sugeridas ou necessárias executando o comando [`ibmcloud ks infra-permissions-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get). Na saída, se quaisquer permissões sugeridas ou necessárias estiverem ausentes, será possível usar as etapas nesta seção para designar o acesso necessário.</p>
 
 Antes de iniciar, certifique-se de que você seja o proprietário da conta ou tenha **Superusuário** e todo o acesso ao dispositivo. Não é possível conceder a um usuário acesso que você não tem.
 
@@ -1000,11 +1081,18 @@ Antes de iniciar, certifique-se de que você seja o proprietário da conta ou te
 
 6.  Na guia **Dispositivo**, selecione os dispositivos aos quais conceder acesso.
 
-    * No grupo **Selecionar tipo**, é possível conceder acesso a todos os servidores bare metal, dedicados e virtuais para que os usuários possam trabalhar com todos os [tipos de máquina para nós do trabalhador](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+    * No grupo **Selecionar tipo**, é possível conceder acesso a todos os servidores bare metal, dedicados e virtuais para que os usuários possam trabalhar com todos os [tipos de máquina para nós do trabalhador](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
     * No grupo **Ativar acesso futuro**, é possível conceder ao usuário acesso a todos os futuros servidores bare metal, dedicados e virtuais.
     * Na tabela de dispositivos, certifique-se de que os dispositivos apropriados estejam selecionados.
 
 7. Para salvar suas mudanças, clique em  ** Configurar **.
+
+8. **Importante**: se você está designando permissões para que um usuário possa gerenciar clusters e nós do trabalhador, deve-se designar o acesso de usuário para trabalhar com casos de suporte.
+  1. Clique na guia **Políticas de acesso** e, em seguida, clique em **Designar acesso**.
+  2. Clique no cartão **Designar acesso a serviços de gerenciamento de conta**.
+  3. Selecione **Centro de suporte**.
+  4. Para permitir que o usuário visualize, inclua e edite casos de suporte, selecione **Administrador**.
+  5. Clique em **Designar**.
 
 Reduzindo permissões? A ação pode levar alguns minutos para ser concluída.
 {: tip}
@@ -1035,7 +1123,7 @@ Antes de remover as permissões de acesso específicas de um usuário ou remover
         {: pre}
     * Se você configurar [credenciais de infraestrutura para acessar o portfólio de infraestrutura do IBM Cloud (SoftLayer)](#credentials):
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1046,12 +1134,12 @@ Antes de remover as permissões de acesso específicas de um usuário ou remover
 
     * Para reconfigurar a chave de API:
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}
     * Para reconfigurar as credenciais de infraestrutura:
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 

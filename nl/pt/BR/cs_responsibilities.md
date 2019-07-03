@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Suas responsabilidades usando {{site.data.keyword.containerlong_notm}}
@@ -37,7 +37,7 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
 {:shortdesc}
 
 <table summary="A tabela mostra as suas responsabilidades e as da IBM. As linhas devem ser lidas da esquerda para a direita, com os ícones representando cada responsabilidade na coluna um e a descrição na coluna dois.">
-    <caption>Suas responsabilidades e da IBM</caption>
+<caption>Suas responsabilidades e da IBM</caption>
   <thead>
   <th colspan=2>Responsabilidades por tipo</th>
   </thead>
@@ -60,7 +60,7 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
      <td align="center"><img src="images/icon_tools.svg" alt="Ícone de uma chave"/><br>Cluster gerenciado</td>
      <td>
      **Responsabilidades da IBM**:
-     <ul><li>Forneça um conjunto de ferramentas para automatizar o gerenciamento de cluster, como a [API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/), o [plug-in da CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) e o [console ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/clusters) do {{site.data.keyword.containerlong_notm}}.</li>
+     <ul><li>Fornecer um conjunto de ferramentas para automatizar o gerenciamento de cluster, como a [API ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/global/swagger-global-api/), o [plug-in da CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) e o [console ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/clusters) do {{site.data.keyword.containerlong_notm}}.</li>
      <li>Aplique automaticamente atualizações de correção de S.O., segurança e versão do principal do Kubernetes. Disponibilize atualizações principais e secundárias para a aplicação.</li>
      <li>Atualize e recupere os componentes operacionais do {{site.data.keyword.containerlong_notm}} e do Kubernetes dentro do cluster, como o balanceador de carga do aplicativo Ingress e o plug-in de armazenamento de arquivo.</li>
      <li>Faça backup e recupere dados em etcd, como seus arquivos de configuração de carga de trabalho do Kubernetes</li>
@@ -100,18 +100,18 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
       **As suas responsabilidades**:
       <ul>
       <li>Use as ferramentas de API, CLI ou console para aplicar as [atualizações de correção de segurança](/docs/containers?topic=containers-changelog#changelog) fornecidas para os nós do trabalhador.</li>
-      <li>Escolha como configurar sua [rede de cluster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) e defina outras [configurações de segurança](/docs/containers?topic=containers-security#security) para atender às necessidades de segurança e conformidade de sua carga de trabalho. Se aplicável, configure seu [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <li>Escolha como configurar sua [rede de cluster](/docs/containers?topic=containers-plan_clusters) e defina outras [configurações de segurança](/docs/containers?topic=containers-security#security) para atender às necessidades de segurança e conformidade de sua carga de trabalho. Se aplicável, configure seu [firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="Ícone de colchetes de código"/><br>Orquestração de aplicativo</td>
         <td>
         **Responsabilidades da IBM**:
         <ul>
         <li>Provisione clusters com componentes do Kubernetes instalados para que seja possível acessar a API do Kubernetes.</li>
-        <li>Forneça um número de complementos gerenciados para estender os recursos de seu aplicativo, como o [Istio](/docs/containers?topic=containers-istio#istio) e o [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). A manutenção é simplificada para você porque a IBM fornece a instalação e as atualizações para os complementos gerenciados.</li>
-        <li>Forneça a integração de cluster com as tecnologias de parceria de terceiros selecionadas, como o {{site.data.keyword.la_short}}, o {{site.data.keyword.mon_short}} e o Portworx.</li>
+        <li>Forneça um número de complementos gerenciados para estender os recursos de seu aplicativo, como o [Istio](/docs/containers?topic=containers-istio#istio) e o [Knative](/docs/containers?topic=containers-serverless-apps-knative). A manutenção é simplificada para você porque a IBM fornece a instalação e as atualizações para os complementos gerenciados.</li>
+        <li>Fornecer a integração do cluster com as tecnologias de parceria de terceiros selecionadas, tais como {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} e Portworx.</li>
         <li>Forneça a automação para ativar a ligação de serviços para outros serviços do {{site.data.keyword.Bluemix_notm}}.</li>
         <li>Crie clusters com segredos de pull de imagem para que suas implementações no namespace `default` do Kubernetes possam fazer pull de imagens do {{site.data.keyword.registrylong_notm}}.</li>
         <li>Forneça classes de armazenamento e plug-ins para suportar volumes persistentes para uso com seus aplicativos.</li>
@@ -148,4 +148,5 @@ uso de alguém do {{site.data.keyword.containerlong_notm}}
 *   Modificação não autorizada de qualquer serviço ou sistema
 *   Violação dos direitos de outros
 
-Veja [Termos dos serviços de nuvem](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms) para obter os termos gerais de uso.
+Veja [Termos dos serviços
+de nuvem](/docs/overview/terms-of-use?topic=overview-terms#terms) para obter os termos gerais de uso.

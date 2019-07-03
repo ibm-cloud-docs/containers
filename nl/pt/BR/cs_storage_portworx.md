@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Armazenando dados em armazenamento definido pelo software (SDS) com o Portworx
 {: #portworx}
 
-[Portworx ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://portworx.com/products/introduction/) é uma solução de armazenamento definido por software altamente disponível que pode ser usada para gerenciar o armazenamento persistente para seus bancos de dados conteinerizados e outros apps stateful ou para compartilhar dados entre os pods em múltiplas zonas.
+O [Portworx ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://portworx.com/products/introduction/) é uma solução de armazenamento definido por software altamente disponível que pode ser usada para gerenciar armazenamento persistente local para seus bancos de dados conteinerizados e outros apps stateful ou para compartilhar dados entre os pods em múltiplas zonas.
 {: shortdesc}
 
 **O que é armazenamento definido pelo software (SDS)?** </br>
@@ -38,13 +40,13 @@ O Portworx agrega armazenamento disponível que está conectado a seus nós do t
 O Portworx também é fornecido com recursos adicionais que podem ser usados para seus apps stateful, como capturas instantâneas de volume, criptografia de volume, isolamento e um Storage Orchestrator for Kubernetes (Stork) integrado para assegurar o posicionamento ideal de volumes no cluster. Para obter mais informações, consulte a [Documentação do Portworx ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.portworx.com/).
 
 **Qual tipo de nó do trabalhador no {{site.data.keyword.containerlong_notm}} é o certo para o Portworx?** </br>
-O {{site.data.keyword.containerlong_notm}} fornece tipos de nó do trabalhador bare metal que são otimizados para o [uso de armazenamento definido pelo software (SDS)](/docs/containers?topic=containers-plan_clusters#sds) e que vêm com um ou mais discos locais brutos, não formatados e desmontados, que podem ser usados para sua camada de armazenamento do Portworx. O Portworx oferece melhor desempenho quando você usa as máquinas do nó do trabalhador SDS que vêm com a velocidade de rede de 10Gbps.
+O {{site.data.keyword.containerlong_notm}} fornece tipos de nó do trabalhador bare metal que são otimizados para o [uso de armazenamento definido pelo software (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds) e que vêm com um ou mais discos locais brutos, não formatados e desmontados, que podem ser usados para sua camada de armazenamento do Portworx. O Portworx oferece melhor desempenho quando você usa as máquinas do nó do trabalhador SDS que vêm com a velocidade de rede de 10Gbps.
 
 **E se eu desejar executar o Portworx em nós do trabalhador não SDS?** </br>
 É possível instalar o Portworx em tipos de nó do trabalhador não SDS, mas é possível que você não obtenha os benefícios de desempenho que seu app requer. Os nós do trabalhador não SDS podem ser virtuais ou bare metal. Se você desejar usar máquinas virtuais, use um tipo de nó do trabalhador de `b2c.16x64` ou melhor. As máquinas virtuais do tipo `b3c.4x16` ou `u3c.2x4` não fornecem os recursos necessários para que o Portworx funcione corretamente. Tenha em mente que as máquinas virtuais vêm com 1000 Mbps que não são suficientes para o desempenho ideal do Portworx. As máquinas bare metal vêm com recursos de cálculo suficientes e velocidade de rede para o Portworx, mas deve-se [incluir armazenamento de bloco bruto, não formatado e desmontado](#create_block_storage) antes de poder usar essas máquinas.
 
 **Como posso ter certeza de que meus dados são armazenados altamente disponíveis?** </br>
-Você precisa de pelo menos 3 nós do trabalhador em seu cluster do Portworx para que o Portworx possa replicar seus dados entre os nós. Replicando seus dados nos nós do trabalhador, o Portworx pode assegurar que seu app stateful seja reagendado para um nó do trabalhador diferente no caso de uma falha sem perder dados. Para uma disponibilidade ainda mais alta, use um [cluster com múltiplas zonas](/docs/containers?topic=containers-plan_clusters#multizone) e replique seus volumes em nós do trabalhador SDS em 3 ou mais zonas.
+Você precisa de pelo menos 3 nós do trabalhador em seu cluster do Portworx para que o Portworx possa replicar seus dados entre os nós. Replicando seus dados nos nós do trabalhador, o Portworx pode assegurar que seu app stateful seja reagendado para um nó do trabalhador diferente no caso de uma falha sem perder dados. Para uma disponibilidade ainda mais alta, use um [cluster com múltiplas zonas](/docs/containers?topic=containers-ha_clusters#multizone) e replique seus volumes em nós do trabalhador SDS em 3 ou mais zonas.
 
 **Qual topologia de volume oferece o melhor desempenho para meus pods?** </br>
 Um dos maiores desafios ao executar apps stateful em um cluster é certificar-se de que seu contêiner possa ser reprogramado para outro host se o contêiner ou o host inteiro falhar. No Docker, quando um contêiner deve ser reprogramado para um host diferente, o volume não é movida para o novo host. O Portworx pode ser configurado para executar `hyper-converged` para assegurar que seus recursos de cálculo e o armazenamento sejam sempre colocados no mesmo nó do trabalhador. Quando seu app deve ser reprogramado, o Portworx move seu app para um nó do trabalhador no qual uma das suas réplicas de volume reside para assegurar a velocidade de acesso do disco local e o melhor desempenho para seu app stateful. A execução de `hyper-converged` oferece o melhor desempenho para seus pods, mas requer que o armazenamento esteja disponível em todos os nós do trabalhador em seu cluster.
@@ -52,14 +54,11 @@ Um dos maiores desafios ao executar apps stateful em um cluster é certificar-se
 Também é possível optar por usar apenas um subconjunto de nós do trabalhador para sua camada de armazenamento do Portworx. Por exemplo, você pode ter um conjunto de trabalhadores com nós do trabalhador SDS que vêm com armazenamento de bloco bruto local e outro conjunto de trabalhadores com nós do trabalhador virtual que não vêm com armazenamento local. Quando você instala o Portworx, um pod Portworx é planejado em cada nó do trabalhador em seu cluster como parte de um conjunto de daemons. Como os nós do trabalhador SDS têm armazenamento local, esses nós do trabalhador são incluídos somente na camada de armazenamento do Portworx. Os nós do trabalhador virtual não são incluídos como um nó de armazenamento por causa do armazenamento local ausente. No entanto, quando você implementa um pod de app em seu nó do trabalhador virtual, esse pod ainda pode acessar dados que são armazenados fisicamente em um nó do trabalhador SDS usando o pod do conjunto de daemons do Portworx. Essa configuração é referida como `armazenamento pesado` e oferece desempenho um pouco mais lento do que a configuração `hyper-converged` porque o nó do trabalhador virtual deve conversar com o nó do trabalhador SDS sobre a rede privada para acessar os dados.
 
 **O que eu preciso fornecer ao Portworx?** </br>
-O {{site.data.keyword.containerlong}} fornece tipos de nó do trabalhador que são otimizados para uso do SDS e que vêm com um ou mais discos locais brutos, não formatados e desmontados, que podem ser usados para armazenar seus dados. O Portworx oferece o melhor desempenho quando você usa as [máquinas do nó do trabalhador SDS](/docs/containers?topic=containers-plan_clusters#sds) que vêm com a velocidade de rede de 10 Gbps. No entanto, é possível instalar o Portworx em tipos de nó do trabalhador não SDS, mas é possível que você não obtenha os benefícios de desempenho que seu app requer. Os requisitos mínimos de um nó do trabalhador para executar com êxito o Portworx incluem:
+O {{site.data.keyword.containerlong}} fornece tipos de nó do trabalhador que são otimizados para uso do SDS e que vêm com um ou mais discos locais brutos, não formatados e desmontados, que podem ser usados para armazenar seus dados. O Portworx oferece o melhor desempenho quando você usa as [máquinas do nó do trabalhador SDS](/docs/containers?topic=containers-planning_worker_nodes#sds) que vêm com a velocidade de rede de 10 Gbps. No entanto, é possível instalar o Portworx em tipos de nó do trabalhador não SDS, mas é possível que você não obtenha os benefícios de desempenho que seu app requer. Os requisitos mínimos de um nó do trabalhador para executar com êxito o Portworx incluem:
 - 4 núcleos de
 - 4 GB de memória
 - 128GB de armazenamento não formatado bruto
 - Velocidade de rede de 10
-
-**Como posso ter certeza de que meus dados são armazenados altamente disponíveis?** </br>
-Você precisa de pelo menos 3 nós do trabalhador em seu cluster do Portworx para que o Portworx possa replicar seus dados entre os nós. Replicando seus dados nos nós do trabalhador, o Portworx pode assegurar que seu app stateful seja reagendado para um nó do trabalhador diferente no caso de uma falha sem perder dados. Para uma disponibilidade ainda mais alta, use um [cluster com múltiplas zonas](/docs/containers?topic=containers-plan_clusters#multizone) e replique seus volumes nos nós do trabalhador SDS em 3 zonas.
 
 **Quais limitações devo planejar?** </br>
 O Portworx está disponível para clusters padrão que são configurados com a conectividade de rede pública. Se o seu cluster não puder acessar a rede pública, como um cluster privado atrás de um firewall ou um cluster com apenas o terminal em serviço privado ativado, não será possível usar o Portworx em seu cluster, a menos que você abra todo o tráfego de rede de saída na porta TCP 443 ou ative o terminal em serviço público.
@@ -70,7 +69,7 @@ Tudo pronto? Vamos começar com a [criação de um cluster com um conjunto de tr
 ## Criando armazenamento de bloco bruto, não formatado e desmontado para nós do trabalhador não SDS
 {: #create_block_storage}
 
-O Portworx é executado melhor quando você usa tipos de nó do trabalhador que são otimizados para o [uso de armazenamento definido pelo software (SDS)](/docs/containers?topic=containers-plan_clusters#sds). No entanto, se você não puder ou não desejar usar os nós do trabalhador SDS, será possível optar por instalar o Portworx em tipos de nó do trabalhador não SDS. Lembre-se de que os nós do trabalhador não SDS não são otimizados para o Portworx e podem não oferecer os benefícios de desempenho requeridos pelo seu app.
+O Portworx é executado melhor quando você usa tipos de nó do trabalhador que são otimizados para o [uso de armazenamento definido pelo software (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds). No entanto, se você não puder ou não desejar usar os nós do trabalhador SDS, será possível optar por instalar o Portworx em tipos de nó do trabalhador não SDS. Lembre-se de que os nós do trabalhador não SDS não são otimizados para o Portworx e podem não oferecer os benefícios de desempenho requeridos pelo seu app.
 {: shortdesc}
 
 Para incluir nós do trabalhador não SDS em seu cluster Portworx, deve-se incluir dispositivos de armazenamento de bloco brutos, não formatados e desmontados em seus nós do trabalhador usando o plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. O armazenamento de bloco bruto não pode ser fornecido usando solicitações de volume persistente do Kubernetes (PVCs), pois o dispositivo de armazenamento de bloco é formatado automaticamente pelo {{site.data.keyword.containerlong_notm}}. O Portworx suporta apenas armazenamento de bloco. Os nós do trabalhador não SDS que montam o armazenamento de arquivo ou de objeto não podem ser usados para a camada de dados do Portworx.
@@ -222,7 +221,7 @@ Antes de iniciar:
 - Se você desejar usar nós do trabalhador não SDS para a camada de armazenamento do Portworx, [inclua um dispositivo de armazenamento de bloco não formatado em seu nó do trabalhador não SDS](#create_block_storage).
 - Crie uma [instância de serviço do {{site.data.keyword.composeForEtcd}}](#portworx_database) para armazenar a configuração e os metadados do Portworx.
 - Decida se você deseja criptografar seus volumes do Portworx com o {{site.data.keyword.keymanagementservicelong_notm}}. Para criptografar seus volumes, deve-se [configurar uma instância de serviço do {{site.data.keyword.keymanagementservicelong_notm}} e armazenar suas informações de serviço em um segredo do Kubernetes](#encrypt_volumes).
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para instalar o Portworx:
 

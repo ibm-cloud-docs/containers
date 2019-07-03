@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -33,7 +34,7 @@ subcollection: containers
 Antes de decidir qual tipo de armazenamento é a solução correta para você, deve-se entender os requisitos do app, o tipo de dados que deseja armazenar e a frequência com que deseja acessar esses dados.
 {: shortdesc}
 
-1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos em um determinado momento.
+1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos a qualquer momento.
    - **Armazenamento persistente:** seus dados ainda devem estar disponíveis, mesmo se o contêiner, o nó do trabalhador ou o cluster for removido. Use armazenamento persistente nos cenários a seguir:
        - Apps stateful
        - Dados de negócios principais
@@ -64,11 +65,11 @@ Antes de decidir qual tipo de armazenamento é a solução correta para você, d
    - **Dados frios:** dados que são raramente acessados, se forem. Os casos de uso comuns são archives, backups de longo prazo, dados históricos.
    - **Dados congelados:** dados que não são acessados e que você precisa manter devido a motivos jurídicos.
 
-   Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se as cargas de trabalho são de leitura pesada, de gravação pesada ou balanceada. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.cos_full_notm}} fornece uma classe de armazenamento `flex` que considera com que frequência os dados são acessados em um mês e considera essa medida para otimizar o faturamento mensal.
+   Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se suas cargas de trabalho são de leitura pesada, de gravação pesada ou balanceadas. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.cos_full_notm}} fornece uma classe de armazenamento `flex` que considera como os dados frequentes são acessados em um mês e leva em conta essa medida para otimizar seu faturamento mensal.
    {: tip}
 
 5. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões.
-   - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Outras soluções de armazenamento permitem que você compartilhe o mesmo volume entre múltiplos pods.
+   - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Com outras soluções de armazenamento, é possível compartilhar o volume entre múltiplos pods.
    - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas.
 
    Se você desejar tornar seus dados acessíveis entre zonas ou regiões, certifique-se de consultar seu departamento jurídico para verificar se os dados podem ser armazenados em múltiplas zonas ou em um país diferente.
@@ -130,7 +131,7 @@ A imagem a seguir mostra as opções de armazenamento de dados não persistentes
 <tr>
 <td style="text-align:left">Desempenho</td>
 <td style="text-align:left">Alta</td>
-<td style="text-align:left">Alto com latência inferior ao usar SSD</td>
+<td style="text-align:left">Alto com latência inferior quando você usa SSD</td>
 </tr>
 <tr>
 <td style="text-align:left">Consistência</td>
@@ -321,8 +322,8 @@ A imagem a seguir mostra as opções que você tem no {{site.data.keyword.contai
 </tr>
 <tr>
 <td style="text-align:left">Desempenho</td>
-<td style="text-align:left">Alto para operações de leitura. Previsível devido ao IOPS e ao tamanho designados ao usar máquinas não SDS.</td>
-<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Fechar o desempenho bare metal para operações de leitura e gravação sequenciais ao usar máquinas SDS. </li><li style="margin:0px; padding:0px">Fornece [perfis ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) para execução de bancos de dados de alto desempenho</li><li style="margin:0px; padding:0px">Possibilidade de criar uma camada de armazenamento com perfis de desempenho diferentes dos quais seu app pode escolher.</li></ul> </td>
+<td style="text-align:left">Alto para operações de leitura. Previsível devido ao IOPS e tamanho designados quando você usa máquinas não SDS.</td>
+<td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Próximo ao desempenho de bare metal para operações de leitura e gravação sequenciais quando você usa máquinas SDS. </li><li style="margin:0px; padding:0px">Fornece [perfis ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning) para executar bancos de dados de alto desempenho</li><li style="margin:0px; padding:0px">Possibilidade de criar uma camada de armazenamento com perfis de desempenho diferentes dos quais seu app pode escolher.</li></ul> </td>
 <td style="text-align:left">Alto, se implementado no mesmo data center que seu app.</td>
 </tr>
 <tr>
@@ -335,19 +336,19 @@ A imagem a seguir mostra as opções que você tem no {{site.data.keyword.contai
 <td style="text-align:left">Durabilidade</td>
 <td style="text-align:left">Muito alto, pois as fatias de dados são dispersas em um cluster de nós de
 armazenamento. Cada nó armazena somente uma parte dos dados. </td>
-<td style="text-align:left">Muito alto como três cópias de seus dados são mantidas em todos os momentos.</td>
+<td style="text-align:left">Muito alto, já que três cópias de seus dados são mantidas em todos os momentos.</td>
 <td style="text-align:left">Alta</td>
 </tr>
 <tr>
 <td style="text-align:left">Resiliência</td>
-<td style="text-align:left">Alto, pois as fatias de dados são dispersas em 3 zonas ou regiões. Médio, quando configurado somente em uma zona única.</td>
-<td style="text-align:left">Alto quando configurado com replicação em 3 zonas. Médio, ao armazenar dados em uma única zona apenas.</td>
+<td style="text-align:left">Alta, pois as fatias de dados são dispersas em três zonas ou regiões. Médio, quando configurado somente em uma zona única.</td>
+<td style="text-align:left">Alta quando configurada com replicação em três zonas. Média, quando você armazena dados em somente uma única zona.</td>
 <td style="text-align:left">Depende do DBaaS e de sua configuração. </td>
 </tr>
 <tr>
 <td style="text-align:left">Disponibilidade</td>
 <td style="text-align:left">Alta devido à distribuição entre zonas ou regiões. </td>
-<td style="text-align:left">Alto ao replicar dados em 3 nós do trabalhador em zonas diferentes.</td>
+<td style="text-align:left">Alta quando você replica dados em três nós do trabalhador em zonas diferentes.</td>
 <td style="text-align:left">Alta se você configurar múltiplas instâncias. </td>
 </tr>
 <tr>

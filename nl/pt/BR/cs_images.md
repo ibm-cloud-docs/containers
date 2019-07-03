@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Construindo contêineres de imagens
@@ -53,7 +55,7 @@ privado estejam disponíveis para os usuários do cluster.
 
 |Registro|Descrição|Benefício|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|Com essa opção, é possível configurar o seu próprio repositório de imagem do Docker seguro no {{site.data.keyword.registryshort_notm}} no qual é possível armazenar e compartilhar as imagens com segurança entre
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|Com essa opção, é possível configurar o seu próprio repositório de imagem do Docker seguro no {{site.data.keyword.registryshort_notm}} no qual é possível armazenar e compartilhar as imagens com segurança entre
 usuários do cluster.|<ul><li>Gerencie o acesso a imagens em sua conta.</li><li>Use imagens e apps de amostra fornecidos pela {{site.data.keyword.IBM_notm}}, como o {{site.data.keyword.IBM_notm}} Liberty, como uma imagem pai e inclua seu próprio código de app nela.</li><li>Varredura automática de imagens para potenciais vulnerabilidades pelo Vulnerability Advisor, incluindo
 recomendações específicas do S.O. para corrigi-las.</li></ul>|
 |Qualquer outro registro privado|Conecte qualquer registro privado existente ao seu cluster criando um [segredo de extração de imagem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/containers/images/). O segredo é usado para salvar com segurança sua URL de registro e credenciais em um
@@ -92,9 +94,9 @@ Saiba mais sobre [como proteger suas informações pessoais](/docs/containers?to
 
 Antes de iniciar:
 1. [Configure um namespace no {{site.data.keyword.registryshort_notm}} e envie por push as imagens para esse namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. Se tiver um cluster existente criado antes de **25 de fevereiro de 2019**, [atualize-o para usar a chave de API `imagePullSecret`](#imagePullSecret_migrate_api_key).
-4. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para implementar um contêiner no namespace **padrão** de seu cluster:
 
@@ -109,7 +111,7 @@ Para implementar um contêiner no namespace **padrão** de seu cluster:
     {: codeblock}
 
     Substitua as variáveis da URL da imagem pelas informações para sua imagem:
-    *  **`<app_name>`**: o nome de seu aplicativo. 
+    *  **`<app_name>`**: o nome de seu aplicativo.
     *  **`<region>`**: o terminal de API regional do {{site.data.keyword.registryshort_notm}} para o domínio do registro. Para listar o domínio para a região na qual você está com login efetuado, execute `ibmcloud cr api`.
     *  **`<namespace>`**: o namespace do registro. Para obter suas informações de namespace, execute `ibmcloud cr namespace-list`.
     *  **`<my_image>:<tag>`**: a imagem e a tag que serão usadas para construir o contêiner. Para obter as imagens disponíveis em seu registro, execute `ibmcloud cr images`.
@@ -159,6 +161,9 @@ Os tokens autorizam o acesso aos domínios de registro `registry.bluemix.net` de
 
 Antes que os tokens descontinuados e os domínios `registry.bluemix.net` se tornem não suportados, atualize seus segredos de pull de imagem de cluster para usar o método de chave de API para o [namespace `default` do Kubernetes](#imagePullSecret_migrate_api_key) e [quaisquer outros namespaces ou contas](#other) que possam ser usados. Em seguida, atualize suas implementações para fazer pull dos domínios de registro `icr.io`.
 
+**Depois de copiar ou criar um segredo de pull de imagem em outro namespace do Kubernetes, estou pronto?**<br>
+Não totalmente. Seus contêineres devem estar autorizados a fazer pull de imagens usando o segredo que você criou. É possível incluir o segredo de extração de imagem na conta de serviço do namespace ou referir-se ao segredo em cada implementação. Para obter instruções, consulte [Usando o segredo de extração de imagem para implementar contêineres](/docs/containers?topic=containers-images#use_imagePullSecret).
+
 <br />
 
 
@@ -169,14 +174,14 @@ Novos clusters do {{site.data.keyword.containerlong_notm}} armazenam uma chave d
 {: shortdesc}
 
 ** Antes de iniciar **:
-*   [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+*   [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Certifique-se de que você tenha as permissões a seguir:
-    *   Função da plataforma **Operador ou Administrador** do {{site.data.keyword.Bluemix_notm}} IAM para o {{site.data.keyword.containerlong_notm}}. O proprietário da conta pode conceder a você a função executando: 
+    *   Função da plataforma **Operador ou Administrador** do {{site.data.keyword.Bluemix_notm}} IAM para o {{site.data.keyword.containerlong_notm}}. O proprietário da conta pode conceder a você a função executando:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   Função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM para o {{site.data.keyword.registrylong_notm}}, em todas as regiões e grupos de recursos. O proprietário da conta pode conceder a você a função executando: 
+    *   Função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM para o {{site.data.keyword.registrylong_notm}}, em todas as regiões e grupos de recursos. O proprietário da conta pode conceder a você a função executando:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
@@ -222,8 +227,10 @@ Novos clusters do {{site.data.keyword.containerlong_notm}} armazenam uma chave d
 ## Usando um segredo de pull de imagem para acessar outros namespaces do cluster Kubernetes, outras contas do {{site.data.keyword.Bluemix_notm}} ou registros privados externos
 {: #other}
 
-Configure seu próprio segredo de pull de imagem em seu cluster para implementar contêineres em namespaces do Kubernetes diferentes do `default` e use imagens armazenadas em outras contas do {{site.data.keyword.Bluemix_notm}} ou em registros privados externos. Além disso, é possível criar seu próprio segredo de pull de imagem para aplicar políticas de acesso IAM que restrinjam permissões a repositórios de imagem de registro específicos, namespaces ou ações (como `push` ou `pull`).
+Configure seu próprio segredo de pull de imagem em seu cluster para implementar contêineres em namespaces do Kubernetes diferentes do `default` e use imagens armazenadas em outras contas do {{site.data.keyword.Bluemix_notm}} ou em registros privados externos. Além disso, você pode criar seu próprio segredo de pull de imagem para aplicar políticas de acesso do IAM que restringem permissões a namespaces ou ações de imagem de registro específicos (como `push` ou `pull`).
 {:shortdesc}
+
+Depois de criar o segredo de pull de imagem, seus contêineres devem usar o segredo para serem autorizados a fazer pull de uma imagem do registro. É possível incluir o segredo de extração de imagem na conta de serviço do namespace ou referir-se ao segredo em cada implementação. Para obter instruções, consulte [Usando o segredo de extração de imagem para implementar contêineres](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 Os segredos de extração de imagem são válidos apenas para os namespaces do Kubernetes para os qual eles foram criados. Repita essas etapas para cada namespace no qual você desejar implementar contêineres. Imagens do [DockerHub](#dockerhub) não requerem segredos de extração de imagem.
 {: tip}
@@ -231,9 +238,9 @@ Os segredos de extração de imagem são válidos apenas para os namespaces do K
 Antes de iniciar:
 
 1.  [Configure um namespace no {{site.data.keyword.registryshort_notm}} e envie por push as imagens para esse namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2.  [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2.  [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3.  Se você tiver um cluster existente criado antes de **25 de fevereiro de 2019**, [atualize-o para usar o segredo de pull de imagem da chave de API](#imagePullSecret_migrate_api_key).
-4.  [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+4.  [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 Para usar seu próprio segredo de extração de imagem, escolha entre as opções a seguir:
@@ -312,12 +319,12 @@ Se você já tiver criado um segredo de extração de imagem em seu namespace qu
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [É possível escolher incluir o segredo de extração de imagem em uma conta do serviço do Kubernetes para que qualquer pod no namespace possa usar o segredo de extração de imagem ao implementar um contêiner](#use_imagePullSecret).
+5.  [Inclua o segredo de extração de imagem em uma conta de serviço do Kubernetes para que qualquer pod no namespace possa usar o segredo de extração de imagem ao implementar um contêiner](#use_imagePullSecret).
 
 ### Criando um segredo de pull de imagem com credenciais de chave de API do IAM diferentes para obter mais controle ou acesso a imagens em outras contas do {{site.data.keyword.Bluemix_notm}}
 {: #other_registry_accounts}
 
-É possível designar políticas de acesso do {{site.data.keyword.Bluemix_notm}} IAM a usuários ou um ID de serviço para restringir permissões a repositórios de imagem de registro específicos, namespaces ou ações (como `push` ou `pull`). Em seguida, crie uma chave de API e armazene essas credenciais de registro em um segredo de pull de imagem para seu cluster.
+É possível designar as políticas de acesso do {{site.data.keyword.Bluemix_notm}} IAM aos usuários ou um ID de serviço para restringir permissões a namespaces ou ações de imagem de registro específicos (como `push` ou `pull`). Em seguida, crie uma chave de API e armazene essas credenciais de registro em um segredo de pull de imagem para seu cluster.
 {: shortdesc}
 
 Por exemplo, para acessar imagens em outras contas do {{site.data.keyword.Bluemix_notm}}, crie uma chave de API que armazene as credenciais do {{site.data.keyword.registryshort_notm}} de um ID de serviço ou usuário nessa conta. Em seguida, na conta de seu cluster, salve as credenciais da chave de API em um segredo de pull de imagem para cada cluster e namespace de cluster.
@@ -450,7 +457,7 @@ As etapas a seguir criam uma chave de API que armazena as credenciais de um ID d
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [É possível escolher incluir o segredo de extração de imagem em uma conta do serviço do Kubernetes para que qualquer pod no namespace possa usar o segredo de extração de imagem ao implementar um contêiner](#use_imagePullSecret).
+8.  [Inclua o segredo de extração de imagem em uma conta de serviço do Kubernetes para que qualquer pod no namespace possa usar o segredo de extração de imagem ao implementar um contêiner](#use_imagePullSecret).
 
 ### Acessando imagens que são armazenadas em outros registros privados
 {: #private_images}
@@ -460,7 +467,7 @@ Se você já tiver um registro privado, deverá armazenar as credenciais de regi
 
 Antes de iniciar:
 
-1.  [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+1.  [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 2.  [Destine sua CLI para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Para criar um segredo de extração de imagem:
@@ -645,7 +652,7 @@ Cada namespace tem uma conta de serviço do Kubernetes denominada `default`. É 
    spec:
      containers:
        - name: <container_name>
-         image: registry.<region>.bluemix.net/<namespace_name>/<image_name>:<tag>
+         image: <region>.icr.io/<namespace_name>/<image_name>:<tag>
    ```
    {: codeblock}
 
@@ -688,7 +695,7 @@ Com o token de registro que está armazenado no segredo de extração da imagem,
 
 Antes de iniciar:
 1. [Configure um namespace no {{site.data.keyword.registryshort_notm}} e envie por push as imagens para esse namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. [Destine sua CLI para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Para implementar um contêiner no namespace **padrão** de seu cluster, crie um arquivo de configuração.

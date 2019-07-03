@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -43,10 +43,8 @@ subcollection: containers
 ** APIs de REST **
 
 - [API de REST para clusters
-![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/)
-- [JSON da API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [API de REST para criação de log em clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API de REST para gerenciar balanceadores de carga do aplicativo do Ingresso em clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/swagger-alb-api/)
+![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [JSON da API de REST para clusters ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -63,7 +61,7 @@ subcollection: containers
 - [Configurar a integração contínua/entrega contínua para o {{site.data.keyword.containerlong}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migrar um app VM para a nuvem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [ Migrar um app CF para a nuvem ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Executar apps sem servidor em um cluster com Knative ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Executar apps sem servidor em um cluster com Knative ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Orquestrar cargas de trabalho de execução longa para apps com um serviço de sistema de mensagens baseado no Apache Kafka ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automatizar implementações em um cluster com o Terraform ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organizando usuários e equipes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
@@ -98,7 +96,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [Documentação do {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
+- [{{site.data.keyword.registryshort_notm}} documentação](/docs/services/Registry?topic=registry-getting-started)
 - [API de REST do {{site.data.keyword.registryshort_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry)
 - [API de REST do Vulnerability Advisor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry/va)
 

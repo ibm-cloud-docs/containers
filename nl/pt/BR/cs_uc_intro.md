@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # Visão geral dos casos de uso
 {: #cs_uc_intro}
 
-Uma variedade de casos de uso mostra as intensidades dos serviços {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}} quando usados juntos. Essas histórias destacam várias indústrias, assim como tipos de cargas de trabalho. Embora cada caso de uso seja apresentado pelas lentes de uma indústria específica, as cargas de trabalho são típicas em uma variedade de indústrias. Você verá temas de carga de trabalho, tais como: 
+Vários casos de uso mostram as intensidades dos serviços {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}} quando usados juntos. Essas histórias destacam várias indústrias, assim como tipos de cargas de trabalho. Embora cada caso de uso seja apresentado por meio das lentes de uma indústria específica, essas cargas de trabalho são típicas em várias indústrias. Você vê temas de carga de trabalho, tais como: 
 * IA e aprendizado de máquina
 * Dados e armazenamento
 * DevOps
@@ -57,13 +58,13 @@ Uma variedade de casos de uso mostra as intensidades dos serviços {{site.data.k
       <td align="center"><img src="images/health.svg" alt="Ícone de mala médica"/><br>Saúde</td>
       <td><ul>
      <li>[Migrar cargas de trabalho de VMs ineficientes para contêineres de fácil operação para sistemas de pacientes](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
-      <li>[Hospedar dados sensíveis com segurança ao aumentar a pesquisa com parceiros](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
+      <li>[Hospedar os dados sensíveis de forma segura enquanto você desenvolve a pesquisa com parceiros](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
       </ul></td>
       </tr>
       <tr>
          <td align="center"><img src="images/retail.svg" alt="Ícone de um carrinho de compras com símbolo monetário"/><br>Varejo</td>
          <td><ul>
-        <li>[Compartilhar dados por meio de APIs com parceiros globais para impulsionar as vendas de omni-channel](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[Compartilhar dados por meio de APIs com parceiros de negócios globais para impulsionar as vendas de omnichannel](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[Otimizar despesas de inventário com insights digitais para comportamento de vendas](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -71,7 +72,7 @@ Uma variedade de casos de uso mostra as intensidades dos serviços {{site.data.k
        <td align="center"><img src="images/transport.svg" alt="Ícone de um vagão com contêineres"/><br>Transporte</td>
            <td><ul>
           <li>[Construir e implementar o site de RH com IA em menos de 3 semanas](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Aumentar a disponibilidade de sistemas mundiais para parceiros](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[Aumentar a disponibilidade de sistemas mundiais para parceiros de negócios](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Tecnologia do {{site.data.keyword.containerlong_notm}}
@@ -128,7 +130,7 @@ Defina estratégias de atualização para seu aplicativo, incluindo o número de
 Em um cluster do Kubernetes que é executado no {{site.data.keyword.containerlong_notm}}, seus apps conteinerizados são hospedados em hosts de cálculo que são chamados de nós do trabalhador. Para ser mais específico, os apps são executados em pods e os pods são hospedados em nós do trabalhador. Os nós do trabalhador são gerenciados pelo mestre do Kubernetes. A configuração de comunicação entre o mestre do Kubernetes e os nós do trabalhador depende de como você configura a rede da infraestrutura do IBM Cloud (SoftLayer): uma conta com um terminal em serviço público ou uma conta ativada para VRF com terminais em serviço públicos e privados.
 {: shortdesc}
 
-A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta quando apenas o [terminal em serviço público está ativado](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta quando apenas o [terminal em serviço público está ativado](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes - arquitetura">
@@ -136,7 +138,7 @@ A imagem a seguir mostra os componentes de seu cluster e como eles interagem em 
 </figure>
 </p>
 
-A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta ativada para VRF quando os [terminais em serviço público e privado são ativados](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+A imagem a seguir mostra os componentes de seu cluster e como eles interagem em uma conta ativada para VRF quando os [terminais em serviço público e privado são ativados](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 
 <p>
 <figure>
@@ -235,7 +237,7 @@ no cluster.</td>
     <td>O Heapster é um agregador em todo o cluster de monitoramento e dados do evento. O pod Heapster descobre todos os nós no cluster e consulta as informações de uso do kubelet de cada nó. É possível localizar gráficos de utilização no painel do Kubernetes.</td>
     </tr>
     <tr>
-    <td>ALB do Ingresso</td>
+    <td>ALB do Ingress</td>
     <td>kube-system</td>
     <td>O Ingresso é um serviço do Kubernetes que pode ser usado para balancear cargas de trabalho do tráfego de rede em seu cluster, encaminhando solicitações públicas ou privadas para múltiplos apps em seu cluster. Para expor seus apps por meio da rede pública ou privada, deve-se criar um recurso Ingresso para registrar seus apps com o balanceador de carga do aplicativo (ALB) de ingresso. Múltiplos apps podem então ser acessados usando uma única URL ou endereço IP.</td>
     </tr>
@@ -264,3 +266,53 @@ no cluster.</td>
 
 Quer ver como o {{site.data.keyword.containerlong_notm}} pode ser usado com outros produtos e serviços? Confira algumas das [integrações](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
+
+## Limitações de serviço
+{: #tech_limits}
+
+O {{site.data.keyword.containerlong_notm}} e o projeto de software livre do Kubernetes vêm com as configurações de serviço padrão e limitações para assegurar a segurança, a conveniência e a funcionalidade básica. Algumas das limitações você pode ser capaz de mudar onde anotado. Se você espera atingir as limitações do {{site.data.keyword.containerlong_notm}} a seguir, entre em contato com a equipe da IBM no [Slack interno ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) ou [externo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
+{: shortdesc}
+
+<table summary="Esta tabela contém informações sobre as limitações do {{site.data.keyword.containerlong_notm}}. As colunas são lidas da esquerda para a direita. Na primeira coluna está o tipo de limitação e, na segunda coluna, está a descrição da limitação.">
+<caption>Limitações do {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
+  <tr>
+    <th>Tipo</th>
+    <th>Descrição</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Limites de taxa de API</td>
+    <td>100 solicitações por 10 segundos para a API do {{site.data.keyword.containerlong_notm}} para cada endereço IP de origem exclusivo.</td>
+  </tr>
+  <tr>
+    <td>Capacidade de nó do trabalhador</td>
+    <td>Os nós do trabalhador estão disponíveis em [selecionar tipos](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) de recursos de cálculo.</td>
+  </tr>
+  <tr>
+    <td>Acesso ao host do nó do trabalhador</td>
+    <td>Por segurança, não é possível usar SSH para o host de cálculo do nó do trabalhador.</td>
+  </tr>
+  <tr>
+    <td>Número máximo de nós do trabalhador</td>
+    <td>Se você planejar exceder 900 por cluster, entre em contato com a equipe da IBM no [Slack interno ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) ou [externo ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com) primeiro.<br><br>Se você vir um limite de capacidade da infraestrutura do IBM Cloud (SoftLayer) no número de instâncias por data center ou que são ordenadas a cada mês, entre em contato com seu representante de infraestrutura do IBM Cloud (SoftLayer).</td>
+  </tr>
+  <tr>
+    <td>Número máximo de pods</td>
+    <td>110 por nó do trabalhador.<br><br>O número de pods inclui os pods `kube-system` e `ibm-system` que são executados no nó do trabalhador. Para melhor desempenho, considere limitar o número de pods que você executa por núcleo de cálculo para que não use em excesso o nó do trabalhador. Por exemplo, em um nó do trabalhador com um tipo `b3c.4x16`, é possível executar 10 pods por núcleo que usam não mais que 75% da capacidade total do nó do trabalhador.</td>
+  </tr>
+  <tr>
+    <td>Número máximo de serviços do Kubernetes</td>
+    <td>65.000 IPs por cluster no intervalo de 172.21.0.0/16 que é possível designar aos serviços do Kubernetes no cluster.</td>
+  </tr>
+  <tr>
+    <td>Tráfego do balanceador de carga do aplicativo (ALB) do Ingress</td>
+    <td>32.768 conexões por segundo.<br><br>Se o tráfego de ingresso exceder esse número, [aumente a escala do número de réplicas do ALB](/docs/containers?topic=containers-ingress#scale_albs) em seu cluster para manipular o aumento da carga de trabalho.</td>
+  </tr>
+  <tr>
+    <td>Volumes de armazenamento</td>
+    <td>Total combinado de 250 volumes do arquivo de infraestrutura do IBM Cloud (SoftLayer) e instâncias de armazenamento de bloco por conta.<br><br>Se você montar mais do que essa quantia, poderá ver uma mensagem de "falta de capacidade" quando provisionar volumes persistentes e precisará entrar em contato com o representante de infraestrutura do IBM Cloud (SoftLayer). Para ver mais perguntas mais frequentes, consulte os docs de armazenamento de [arquivo](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) e [bloco](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-).</td>
+  </tr>
+</tbody>
+</table>

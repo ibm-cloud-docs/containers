@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Removendo o armazenamento persistente de um cluster
 {: #cleanup}
 
-Ao configurar o armazenamento persistente em seu cluster, você tem três componentes principais: o persistent volume claim (PVC) do Kubernetes que solicita armazenamento, o persistent volume (PV) do Kubernetes (PV) que é montado em um pod e descrito no PVC e a instância de infraestrutura do IBM Cloud (SoftLayer), como armazenamento de arquivo ou de bloco NFS. Dependendo de como você os criou, pode ser necessário excluir todos os três separadamente.
+Ao configurar o armazenamento persistente em seu cluster, você tem três componentes principais: o persistent volume claim (PVC) do Kubernetes que solicita armazenamento, o persistent volume (PV) do Kubernetes (PV) que é montado em um pod e descrito no PVC e a instância de infraestrutura do IBM Cloud (SoftLayer), como armazenamento de arquivo ou de bloco NFS. Dependendo de como você criou seu armazenamento, pode ser necessário excluir todos os três separadamente.
 {:shortdesc}
 
 ## Limpando o armazenamento persistente
@@ -48,7 +50,7 @@ Depende do que você excluir e do tipo de faturamento. Se você excluir o PVC e 
 
 <p class="important">Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_backup_restore) ou [armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para limpar os dados persistentes:
 
@@ -75,7 +77,7 @@ Para limpar os dados persistentes:
 
    Se a política de recuperação indicar `Delete`, seu PV e o armazenamento físico serão removidos quando você remover o PVC. Se a política de recuperação indicar `Retain` ou se você provisionar o armazenamento sem uma classe de armazenamento, o PV e o armazenamento físico não serão removidos quando o PVC for removido. Deve-se remover o PVC, o PV e o armazenamento físico separadamente.
 
-   Se o seu armazenamento for cobrado mensalmente, você ainda será cobrado pelo mês inteiro, mesmo se você remover o armazenamento antes do término do ciclo de faturamento.
+   Se o seu armazenamento for cobrado mensalmente, você ainda será cobrado pelo mês inteiro, mesmo se remover o armazenamento antes do término do ciclo de faturamento.
    {: important}
 
 3. Remova quaisquer pods que montam o PVC.
@@ -117,7 +119,7 @@ Para limpar os dados persistentes:
    ```
    {: pre}
 
-   Quando você remove o PVC, o PV que está ligado ao PVC é liberado. Dependendo de como você provisionou seu armazenamento, seu PV entrará em um estado `Deleting` se o PV for excluído automaticamente ou em um estado `Released` se o PV deverá ser excluído manualmente. **Nota**: para PVs que são excluídos automaticamente, o status pode indicar brevemente `Released` antes de ser excluído. Execute novamente o comando depois de alguns minutos para ver se o PV foi removido.
+   Quando você remove o PVC, o PV que está ligado ao PVC é liberado. Dependendo de como você provisionou seu armazenamento, seu PV entrará em um estado `Deleting` se o PV for excluído automaticamente ou em um estado `Released` se o PV deverá ser excluído manualmente. **Nota**: para PVs que são excluídos automaticamente, o status pode indicar brevemente `Released` antes de ser excluído. Execute novamente o comando após alguns minutos para ver se o PV foi removido.
 
 6. Se o seu PV não for excluído, remova-o manualmente.
    ```
@@ -178,7 +180,7 @@ Para limpar os dados persistentes:
    ```
    {: pre}
 
-9. Verifique se a instância de armazenamento físico foi removida. Observe que o processo de exclusão pode levar até alguns dias para ser concluído.
+9. Verifique se a instância de armazenamento físico foi removida. O processo de exclusão pode levar até alguns dias para ser concluído.
 
    **Armazenamento de arquivo:**
    ```

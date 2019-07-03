@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Tutorial: criando clusters do Kubernetes
@@ -63,6 +65,7 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 -  Verifique as etapas que você precisa executar para [preparar-se para criar um cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Assegure-se de que tenha as políticas de acesso a seguir:
     - A [função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.containerlong_notm}}
+    - A [função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.registrylong_notm}}
     - A função de serviço [**Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.containerlong_notm}}
 
 
@@ -76,9 +79,9 @@ Crie seu cluster do Kubernetes no console do {{site.data.keyword.Bluemix_notm}} 
 
 Como pode levar alguns minutos para provisão, crie seu cluster antes de instalar as CLIs.
 
-1.  [No console do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), crie um cluster grátis ou padrão com um conjunto do trabalhador que possua um nó do trabalhador.
+1.  [No console do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), crie um cluster grátis ou padrão com 1 conjunto de trabalhadores que contenha 1 nó do trabalhador.
 
-    Também é possível criar um [cluster na CLI](/docs/containers?topic=containers-clusters#clusters_cli).
+    Também é possível criar um [cluster na CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
 
 Como seu cluster é provisionado, instale as CLIs a seguir que são usadas para gerenciar clusters:
@@ -93,7 +96,7 @@ Se, em vez disso, desejar usar o console do {{site.data.keyword.Bluemix_notm}} a
 </br>
 **Para instalar as CLIs e os seus pré-requisitos**
 
-1. Instale a [CLI do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq). Esta instalação inclui:
+1. Instale o [{{site.data.keyword.Bluemix_notm}} CLI ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](/docs/cli?topic=cloud-cli-getting-started). Esta instalação inclui:
   - A CLI de base do {{site.data.keyword.Bluemix_notm}}. O prefixo para executar comandos usando a CLI do {{site.data.keyword.Bluemix_notm}} é `ibmcloud`.
   - O plug-in do {{site.data.keyword.containerlong_notm}}. O prefixo para executar comandos usando a CLI do {{site.data.keyword.Bluemix_notm}} é `ibmcloud ks`.
   - Plug-in do {{site.data.keyword.registryshort_notm}}. Use esse plug-in para configurar e gerenciar um repositório de imagem privada no {{site.data.keyword.registryshort_notm}}. O prefixo para executar comandos de registro é `ibmcloud cr`.
@@ -120,10 +123,10 @@ URL fornecida na saída da CLI para recuperar sua senha descartável.
 
 6. Para implementar apps em seus clusters, [instale a CLI do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). O prefixo para executar comandos usando o Kubernetes CLI é `kubectl`.
 
-  1. Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.12.7.
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
+  1. Faça download da versão `major.minor` da CLI do Kubernetes que corresponda à versão `major.minor` do cluster do Kubernetes que você planeja usar. A versão atual do Kubernetes padrão do {{site.data.keyword.containerlong_notm}} é 1.13.6.
+    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    - **Windows**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
 
   2. Se você estiver usando o OS X ou Linux, conclua as etapas a seguir.
 
@@ -188,7 +191,7 @@ os desenvolvedores podem usar para acessar imagens privadas do Docker.
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.12.7
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.6
     ```
     {: screen}
 
@@ -200,8 +203,8 @@ Configure o contexto para seu cluster do Kubernetes em sua CLI.
 
 Toda vez que você efetua login na CLI do {{site.data.keyword.containerlong}} para trabalhar com clusters, deve-se executar esses comandos para configurar o caminho para o arquivo de configuração do cluster como uma variável de sessão. O Kubernetes CLI usa essa variável para localizar um arquivo de configuração local e certificados que são necessárias para se conectar ao cluster no {{site.data.keyword.Bluemix_notm}}.
 
-1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração do Kubernetes.
-
+1.  Obtenha o comando para configurar a variável de ambiente e fazer download dos arquivos de configuração
+do Kubernetes.
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
     ```
@@ -210,16 +213,14 @@ Toda vez que você efetua login na CLI do {{site.data.keyword.containerlong}} pa
     Quando o download dos arquivos de configuração estiver concluído, será exibido um comando que poderá ser usado para configurar o caminho para o seu arquivo de configuração local do Kubernetes como uma variável de ambiente.
 
     Exemplo para OS X:
-
     ```
     export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-par02-pr_firm_cluster.yml
     ```
     {: screen}
+    Usando o Windows PowerShell? Inclua a sinalização `--powershell` para obter variáveis de ambiente no formato PowerShell do Windows.
+    {: tip}
 
 2.  Copie e cole o comando que é exibido em seu terminal para configurar a variável de ambiente `KUBECONFIG`.
-
-    **Usuários do Windows PowerShell**: em vez de copiar e colar o comando `SET` da saída de `ibmcloud ks cluster-config`, deve-se configurar a variável de ambiente `KUBECONFIG` executando, por exemplo, `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
-    {: note}
 
 3.  Verifique se a variável de ambiente `KUBECONFIG` está configurada corretamente.
 
@@ -247,7 +248,7 @@ Toda vez que você efetua login na CLI do {{site.data.keyword.containerlong}} pa
     Saída de exemplo:
 
     ```
-    Versão do cliente: v1.12.7 Versão do servidor: v1.12.7
+    Versão do cliente: v1.13.6 Versão do servidor: v1.13.6
     ```
     {: screen}
 
@@ -263,14 +264,14 @@ Com serviços {{site.data.keyword.Bluemix_notm}}, é possível aproveitar a func
     {: note}
 
     ```
-    ibmcloud service create tone_analyzer standard <service_name>
+    ibmcloud resource service-instance-create <service_name> tone-analyzer standard us-south
     ```
     {: pre}
 
 2.  Ligue a instância do {{site.data.keyword.toneanalyzershort}} ao namespace `padrão` do Kubernetes para o cluster. Posteriormente, será possível criar seus próprios namespaces para gerenciar o acesso de usuário aos recursos do Kubernetes, mas por enquanto, use o namespace `padrão`. Os namespaces do Kubernetes são diferentes do namespace de registro que você criou anteriormente.
 
     ```
-    ibmcloud ks cluster-service-bind <cluster_name> default <service_name>
+    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Definindo sua estratégia do Kubernetes
 {: #strategy}
@@ -44,36 +46,32 @@ Ainda não está no Slack? [Solicite um convite!](https://bxcs-slack-invite.mybl
 ### O que posso mover para o {{site.data.keyword.Bluemix_notm}}?
 {: #move_to_cloud}
 
-Com o {{site.data.keyword.Bluemix_notm}}, você tem flexibilidade para escolher uma [abordagem de nuvem pública, privada ou híbrida](/docs/containers?topic=containers-cs_ov#differentiation) para suas cargas de trabalho. A tabela a seguir fornece alguns exemplos de quais tipos de cargas de trabalho os usuários geralmente movem para os diversos tipos de nuvem.
+Com o {{site.data.keyword.Bluemix_notm}}, você tem flexibilidade para criar clusters do Kubernetes em [ambientes de nuvem fora do local, no local ou híbrido](/docs/containers?topic=containers-cs_ov#differentiation). A tabela a seguir fornece alguns exemplos de quais tipos de cargas de trabalho os usuários geralmente movem para os diversos tipos de nuvem. Também é possível escolher uma abordagem híbrida na qual você tem clusters em execução em ambos os ambientes.
 {: shortdesc}
 
-| Carga de trabalho | Pública | Privado | Híbrida |
-| --- | --- | --- | --- |
-| Ferramentas de ativação de DevOps | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Desenvolvendo e testando aplicativos | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Aplicativos têm grandes mudanças na demanda e precisam ser dimensionados rapidamente | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Aplicativos de negócios, como o CRM, o HCM, o ERP e o E-commerce | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Ferramentas sociais e de colaboração, como e-mail | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Cargas de trabalho Linux e x86 | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | | |
-| Necessidades de capacidade intensiva de CPU ou E/S que excedem os tipos de máquina pública | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
-| Aplicativos anteriores com restrições e dependências de plataforma e infraestrutura | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
-| Aplicativos proprietários com designs restritos, licenciamento ou regulamentos exigentes | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
-| Dimensionando aplicativos na nuvem pública e sincronizando os dados para um banco de dados privado local | | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+| Carga de trabalho | {{site.data.keyword.containershort_notm}} fora do local | on-prem |
+| --- | --- | --- |
+| Ferramentas de ativação de DevOps | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Desenvolvendo e testando aplicativos | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Aplicativos têm grandes mudanças na demanda e precisam ser dimensionados rapidamente | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Aplicativos de negócios, como o CRM, o HCM, o ERP e o E-commerce | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Ferramentas sociais e de colaboração, como e-mail | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Cargas de trabalho Linux e x86 | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | |
+| Bare metal e recursos de cálculo da GPU | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+| Cargas de trabalho compatíveis com PCI e HIPAA | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+| Aplicativos anteriores com restrições e dependências de plataforma e infraestrutura | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+| Aplicativos proprietários com designs restritos, licenciamento ou regulamentos exigentes | | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
+| Dimensionando aplicativos na nuvem pública e sincronizando os dados para um banco de dados privado local | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />  | <img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" /> |
 {: caption="As implementações do {{site.data.keyword.Bluemix_notm}} suportam suas cargas de trabalho" caption-side="top"}
 
-**Pronto para executar cargas de trabalho na nuvem pública?**</br>
+**Pronto para executar cargas de trabalho fora do local em {{site.data.keyword.containerlong_notm}}?**</br>
 Ótimo! Você já está em nossa documentação de nuvem pública. Continue lendo para obter mais ideias de estratégia ou comece agora [criando um cluster](/docs/containers?topic=containers-getting-started).
 
-**Interessado na nuvem privada?**</br>
+**Interessado em uma nuvem no local?**</br>
 Explore a [documentação do {{site.data.keyword.Bluemix_notm}} Private ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html). Se já tiver investimentos significativos na tecnologia IBM, como o WebSphere Application Server e o Liberty, será possível otimizar sua estratégia de modernização do {{site.data.keyword.Bluemix_notm}} Private com diversas ferramentas.
-* Para compreender melhor seus aplicativos e ambiente de suporte existentes, use o [IBM Transformation Advisor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html).
-* Para determinar sua preparação para a adoção e obter um roteiro da nuvem, confira os [Serviços de Consultoria do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/us-en/marketplace/cloud-consulting-services).
-* Para ajudar os desenvolvedores a construir serviços para o {{site.data.keyword.Bluemix_notm}} Private, consulte o [IBM Microclimate ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/us-en/marketplace/microclimate).
-* Para o fornecimento multinuvem, considere o [{{site.data.keyword.Bluemix_notm}} Automation Manager ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/us-en/marketplace/cognitive-automation).
-* Para gerenciar múltiplos clusters do Kubernetes em nuvem, como ao longo do {{site.data.keyword.Bluemix_notm}} Public e do {{site.data.keyword.Bluemix_notm}} Private, efetue check-out do [IBM Multicloud Manager ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
-**Deseja usar as nuvens pública e privada?**</br>
-Comece configurando uma conta do {{site.data.keyword.Bluemix_notm}} Private. Em seguida, consulte [Usando o {{site.data.keyword.containerlong_notm}} com o {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) para conectar seu ambiente do {{site.data.keyword.Bluemix_notm}} Private com um cluster no {{site.data.keyword.Bluemix_notm}} Public.
+**Deseja executar cargas de trabalho nas nuvens no local e fora do local?**</br>
+Comece configurando uma conta do {{site.data.keyword.Bluemix_notm}} Private. Em seguida, consulte [Usando o {{site.data.keyword.containerlong_notm}} com o {{site.data.keyword.Bluemix_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) para conectar seu ambiente do {{site.data.keyword.Bluemix_notm}} Private com um cluster no {{site.data.keyword.Bluemix_notm}} Public. Para gerenciar múltiplos clusters do Kubernetes em nuvem, como ao longo do {{site.data.keyword.Bluemix_notm}} Public e do {{site.data.keyword.Bluemix_notm}} Private, efetue check-out do [IBM Multicloud Manager ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 ### Quais tipos de aplicativo podem ser executados no {{site.data.keyword.containerlong_notm}}?
 {: #app_types}
@@ -104,9 +102,9 @@ Confira o [Aplicativo de doze fatores ![Ícone de link externo](../icons/launch-
 7.  **Ligação de porta**: ligações de porta são autocontidas e fornecem um terminal de serviço em host e porta bem definidos.
 8.  **Simultaneidade**: gerencie e escale seu aplicativo por meio de instâncias de processo, como réplicas e dimensionamento horizontal. Configure solicitações de recurso e limites para suas implementações. Observe que as políticas de rede do Calico não podem limitar a largura da banda. Em vez disso, considere o [Istio](/docs/containers?topic=containers-istio).
 9.  **Descartabilidade**: projete seu aplicativo para ser descartável, com inicialização mínima, encerramento normal e tolerância para finalizações de processo abruptas. Lembre-se de que contêineres, pods e até mesmo nós do trabalhador devem ser descartáveis, portanto, planeje o seu aplicativo de forma apropriada.
-10.  **Paridade de desenvolvimento para produção**: configure um pipeline de [integração contínua](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) e de [desenvolvimento contínuo](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) para seu aplicativo, com diferença mínima entre o aplicativo em desenvolvimento e o aplicativo em produção.
+10.  **Paridade de desenvolvimento para produção**: configure um pipeline de [integração contínua](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) e [entrega contínua](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) para seu app, com mínima diferença entre o app em desenvolvimento e o app em produção.
 11.  **Logs**: trate os logs como fluxos de eventos, pois o ambiente externo ou de hospedagem processa e roteia arquivos de log. **Importante**: no {{site.data.keyword.containerlong_notm}}, os logs não são ativados por padrão. Para ativá-los, consulte [Configurando o encaminhamento de log](/docs/containers?topic=containers-health#configuring).
-12.  **Processos administrativos**: mantenha quaisquer scripts descartáveis do administrador com o aplicativo como um [Objeto de tarefa do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) para garantir que sejam executados com o mesmo ambiente que o próprio aplicativo. Para a orquestração de pacotes maiores que você deseja executar em seus clusters Kubernetes, considere usar um gerenciador de pacotes, como o [Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://helm.sh/).
+12.  **Processos de administração**: mantenha quaisquer scripts de administrador únicos com seu app e execute-os como um [objeto de Tarefa do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) para assegurar que os scripts de administrador sejam executados com o mesmo ambiente que o app em si. Para a orquestração de pacotes maiores que você deseja executar em seus clusters Kubernetes, considere usar um gerenciador de pacotes, como o [Helm ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://helm.sh/).
 
 ### Já tenho um aplicativo. Como posso migrá-lo para o {{site.data.keyword.containerlong_notm}}?
 {: #migrate_containerize}
@@ -130,6 +128,30 @@ Continue com os tópicos a seguir para obter mais considerações para quando mo
 
 <br />
 
+
+### Quais conhecimentos e qualificações técnicas é bom ter antes de mover meus apps para o {{site.data.keyword.containerlong_notm}}?
+{: #knowledge}
+
+O Kubernetes é projetado para fornecer recursos para duas personas principais, o administrador do cluster e o desenvolvedor de aplicativo. Cada persona usa diferentes qualificações técnicas para executar e implementar com êxito apps em um cluster.
+{: shortdesc}
+
+**Quais são as principais tarefas e conhecimento técnico do administrador do cluster?**</br>
+Como um administrador de cluster, você é responsável por configurar, operar, proteger e gerenciar a infraestrutura do {{site.data.keyword.Bluemix_notm}} de seu cluster. As tarefas típicas incluem:
+- Dimensionar o cluster para fornecer capacidade suficiente para suas cargas de trabalho.
+- Projetar um cluster para atender aos padrões de alta disponibilidade, recuperação de desastre e conformidade de sua empresa.
+- Proteger o cluster configurando permissões de usuário e limitando ações dentro do cluster para proteger seus recursos de cálculo, sua rede e dados.
+- Planejar e gerenciar a comunicação de rede entre os componentes de infraestrutura para assegurar a segurança de rede, segmentação e conformidade.
+- Planejar opções de armazenamento persistente para atender aos requisitos de residência de dados e de proteção de dados.
+
+A persona do administrador do cluster deve ter um amplo conhecimento que inclua cálculo, rede, armazenamento, segurança e conformidade. Em uma empresa típica, esse conhecimento é difundido entre múltiplos especialistas, como Engenheiros de Sistemas, Administradores do Sistema, Engenheiros de Rede, Arquitetos de Rede, Gerentes de TI ou Especialistas de Segurança e Conformidade. Considere designar a função de administrador do cluster a múltiplas pessoas em sua empresa para que você tenha o conhecimento necessário para operar com êxito seu cluster.
+
+**Quais são as principais tarefas e qualificações técnicas do desenvolvedor de aplicativo?**</br>
+Como desenvolvedor, você projeta, cria, protege, implementa, testa, executa e monitora apps nativos em nuvem, conteinerizados em um cluster Kubernetes. Para criar e executar esses apps, deve-se estar familiarizado com o conceito de microsserviços, as diretrizes do [app 12-factor](#12factor), os [princípios de docker e conteinerização](https://www.docker.com/) e as [opções de implementação do Kubernetes](/docs/containers?topic=containers-app#plan_apps) disponíveis. Se você desejar implementar apps serverless, familiarize-se com o [Knative](/docs/containers?topic=containers-cs_network_planning).
+
+O Kubernetes e o {{site.data.keyword.containerlong_notm}} fornecem múltiplas opções de como [expor um app e manter um app privado](/docs/containers?topic=containers-cs_network_planning), [incluir armazenamento persistente](/docs/containers?topic=containers-storage_planning), [integrar outros serviços](/docs/containers?topic=containers-ibm-3rd-party-integrations) e como é possível [proteger suas cargas de trabalho e proteger dados sensíveis](/docs/containers?topic=containers-security#container). Antes de mover seu app para um cluster no {{site.data.keyword.containerlong_notm}}, verifique se é possível executar seu app como um app conteinerizado no sistema operacional Ubuntu 16.64, 18.64 suportado e se o Kubernetes e o {{site.data.keyword.containerlong_notm}} fornecem os recursos necessários para sua carga de trabalho.
+
+**Os administradores e desenvolvedores de cluster interagem uns com os outros?**</br>
+Sim. Os administradores e desenvolvedores de cluster devem interagir com frequência para que os administradores de cluster entendam os requisitos de carga de trabalho para fornecer esse recurso no cluster e para que os desenvolvedores saibam sobre limitações, integrações e princípios de segurança disponíveis que eles devem considerar em seu processo de desenvolvimento de app.
 
 ## Dimensionando seu cluster Kubernetes para suportar sua carga de trabalho
 {: #sizing}
@@ -162,7 +184,7 @@ Agora, incluiremos alguns outros recursos que podem ser usados.
 
 Não se esqueça de que você deseja que sua carga de trabalho esteja tão disponível quanto possível!
 
-1.  Planeje as etapas de sua estratégia para [clusters altamente disponíveis](/docs/containers?topic=containers-plan_clusters#ha_clusters), como a decisão entre clusters únicos ou multizona.
+1.  Planeje as etapas de sua estratégia para [clusters altamente disponíveis](/docs/containers?topic=containers-ha_clusters#ha_clusters), como a decisão entre clusters únicos ou multizona.
 2.  Revise as [implementações altamente disponíveis](/docs/containers?topic=containers-app#highly_available_apps) para obter ajuda para decidir como é possível tornar seu aplicativo disponível.
 
 ### Quantos nós do trabalhador são necessários para manipular minha carga de trabalho?
@@ -173,7 +195,7 @@ Agora que você compreendeu bem como é sua carga de trabalho, mapearemos o uso 
 1.  Estime a capacidade máxima do nó do trabalhador, que depende do tipo de cluster que você possui. Evite exceder a capacidade do nó do trabalhador no caso de um aumento ou de outro evento temporário acontecer.
     *  **Clusters de zona única**: planeje-se para ter pelo menos 3 nós do trabalhador em seu cluster. Além disso, tenha uma capacidade de memória e CPU relativa a um nó adicional disponível no cluster.
     *  **Clusters multizona**: planeje-se para ter pelo menos 2 nós do trabalhador por zona, totalizando 6 nós em 3 zonas. Além disso, planeje-se para que a capacidade total de seu cluster seja pelo menos 150% da capacidade total necessária de sua carga de trabalho, de modo que se uma zona ficar inativa, você tenha recursos disponíveis para manter a carga de trabalho.
-2.  Alinhe o tamanho do aplicativo e a capacidade do nó do trabalhador com um dos [tipos de nó do trabalhador disponíveis](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Para ver os tipos disponíveis em uma zona, execute `ibmcloud ks machine-types <zone>`.
+2.  Alinhe o tamanho do aplicativo e a capacidade do nó do trabalhador com um dos [tipos de nó do trabalhador disponíveis](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). Para ver os tipos disponíveis em uma zona, execute `ibmcloud ks machine-types <zone>`.
     *   **Não sobrecarregue nós do trabalhador**: para evitar que pods disputem CPU ou sejam executados de forma ineficiente, deve-se conhecer os recursos necessários aos aplicativos para que seja possível planejar o número de nós do trabalhador necessários. Por exemplo, se seus aplicativos precisam de menos recursos do que os que estão disponíveis no nó do trabalhador, é possível limitar o número de pods implementados em um nó do trabalhador. Mantenha o nó do trabalhador com cerca de 75% de sua capacidade para deixar espaço para outros pods que possam precisar ser planejados. Se seus aplicativos precisam de mais recursos do que há disponíveis em seu nó do trabalhador, use um tipo diferente de nó do trabalhador que possa atender a esses requisitos. É possível saber se seus nós do trabalhador estão sobrecarregados quando eles frequentemente retornam um status de `NotReady` ou despejam pods devido à falta de memória ou de outros recursos.
     *   **Tipos maiores e menores de nós do trabalhador**: os nós maiores podem ser mais economicamente rentáveis do que os menores, particularmente para cargas de trabalho projetadas para obter eficiência ao processar em uma máquina de alto desempenho. No entanto, se um nó do trabalhador grande ficar inativo, será necessário certificar-se de que seu cluster tenha capacidade suficiente para reagendar normalmente todos os pods de carga de trabalho em outros nós do trabalhador no cluster. Trabalhadores menores podem ajudá-lo a dimensionar mais normalmente.
     *   **Réplicas de seu aplicativo**: para determinar o número desejado de nós do trabalhador, também é possível considerar quantas réplicas de seu aplicativo você deseja executar. Por exemplo, se souber que sua carga de trabalho requer 32 núcleos da CPU e planejar executar 16 réplicas de seu aplicativo, cada pod de réplica precisará de 2 núcleos da CPU. Se desejar executar apenas um pod de aplicativo por nó do trabalhador, será possível solicitar um número apropriado de nós do trabalhador para seu tipo de cluster, para que seja possível suportar essa configuração.
@@ -192,16 +214,16 @@ Seu {{site.data.keyword.containerlong_notm}} está vinculado apenas a um portfó
 ### Que tipos de cluster e de máquina devo obter?
 {: #env_flavors}
 
-**Tipos de clusters**: decida se deseja uma [configuração de diversos clusters, de zona única ou multizona](/docs/containers?topic=containers-plan_clusters#ha_clusters). Os clusters multizona estão disponíveis em [todas as seis regiões metro mundiais do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#zones). Além disso, tenha em mente que os nós do trabalhador variam de acordo com a zona.
+**Tipos de clusters**: decida se deseja uma [configuração de diversos clusters, de zona única ou multizona](/docs/containers?topic=containers-ha_clusters#ha_clusters). Os clusters multizona estão disponíveis em [todas as seis regiões metro mundiais do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-regions-and-zones#zones). Além disso, tenha em mente que os nós do trabalhador variam de acordo com a zona.
 
-**Tipos de nós do trabalhador**: em geral, é mais adequado que suas cargas de trabalho intensivas sejam executadas em máquinas físicas bare metal, em contrapartida, para o trabalho de teste e desenvolvimento economicamente rentável, é possível escolher máquinas virtuais em hardware compartilhado ou compartilhado e dedicado. Com nós do trabalhador bare metal, seu cluster tem uma velocidade de rede de 10Gbps e núcleos hyper-threaded que oferecem maior rendimento. As máquinas virtuais são fornecidas com uma velocidade de rede de 1 Gbps e núcleos regulares que não oferecem hyper-threading. [Confira o isolamento e os tipos de máquina disponíveis](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes).
+**Tipos de nós do trabalhador**: em geral, é mais adequado que suas cargas de trabalho intensivas sejam executadas em máquinas físicas bare metal, em contrapartida, para o trabalho de teste e desenvolvimento economicamente rentável, é possível escolher máquinas virtuais em hardware compartilhado ou compartilhado e dedicado. Com nós do trabalhador bare metal, seu cluster tem uma velocidade de rede de 10Gbps e núcleos hyper-threaded que oferecem maior rendimento. As máquinas virtuais são fornecidas com uma velocidade de rede de 1 Gbps e núcleos regulares que não oferecem hyper-threading. [Confira o isolamento e os tipos de máquina disponíveis](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ### Devo usar diversos clusters ou apenas incluir mais trabalhadores em um cluster existente?
 {: #env_multicluster}
 
 O número de clusters criados depende de sua carga de trabalho, políticas e regulamentações da empresa e o que você deseja fazer com os recursos de cálculo. Também é possível revisar as informações de segurança sobre essa decisão em [Isolamento e segurança de contêiner](/docs/containers?topic=containers-security#container).
 
-**Diversos clusters**: é necessário configurar [um balanceador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) e copiar e aplicar os mesmos arquivos YAML de configuração para balancear cargas de trabalho entre os clusters. Portanto, diversos clusters são geralmente mais complexos de gerenciar, mas podem ajudá-lo a atingir objetivos importantes, como o seguinte.
+**Diversos clusters**: é necessário configurar [um balanceador de carga global](/docs/containers?topic=containers-ha_clusters#multiple_clusters) e copiar e aplicar os mesmos arquivos YAML de configuração para balancear cargas de trabalho entre os clusters. Portanto, diversos clusters são geralmente mais complexos de gerenciar, mas podem ajudá-lo a atingir objetivos importantes, como o seguinte.
 *  Obedecer às políticas de segurança que requerem o isolamento das cargas de trabalho.
 *  Testar como seu aplicativo é executado em uma versão diferente do Kubernetes ou em outro software de cluster, como o Calico.
 *  Criar um cluster com seu aplicativo em outra região para oferecer um desempenho mais alto para os usuários nessa área geográfica.
@@ -220,7 +242,7 @@ O número de clusters criados depende de sua carga de trabalho, políticas e reg
   <li><strong>Não exceda a largura da banda de seu cluster</strong>: tenha em mente que a largura da banda de rede em máquinas virtuais com ajuste de escala fica em torno de 1000 Mbps. Se precisar de centenas de nós do trabalhador em um cluster, divida-o em diversos clusters com menos nós ou solicite nós bare metal.</li>
   <li><strong>Classificando seus serviços</strong>: planeje a quantidade de serviços necessários para sua carga de trabalho antes de realizar a implementação. As regras de encaminhamento de porta e de rede são aplicadas em Iptables. Se prever um número maior de serviços, como mais de 5.000, divida o cluster em diversos clusters.</li></ul></dd>
 <dt>Provisione tipos diferentes de máquinas para uma combinação de recursos de computação.</dt>
-  <dd>Todo mundo gosta de ter opções, certo? Com o {{site.data.keyword.containerlong_notm}}, você tem [uma combinação de tipos de máquina](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes) que podem ser implementadas: de bare metal para cargas de trabalho intensivas até máquinas virtuais para ajuste rápido de escala. Use rótulos ou namespaces para organizar implementações em suas máquinas. Ao criar uma implementação, limite-a para que o pod de seu aplicativo seja implementado somente em máquinas com a combinação ideal de recursos. Por exemplo, é possível que você deseje limitar um aplicativo de banco de dados a uma máquina bare metal com uma quantidade significativa de armazenamento em disco local, como o `md1c.28x512.4x4tb`.</dd>
+  <dd>Todo mundo gosta de ter opções, certo? Com o {{site.data.keyword.containerlong_notm}}, você tem [uma combinação de tipos de máquina](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) que podem ser implementadas: de bare metal para cargas de trabalho intensivas até máquinas virtuais para ajuste rápido de escala. Use rótulos ou namespaces para organizar implementações em suas máquinas. Ao criar uma implementação, limite-a para que o pod de seu aplicativo seja implementado somente em máquinas com a combinação ideal de recursos. Por exemplo, é possível que você deseje limitar um aplicativo de banco de dados a uma máquina bare metal com uma quantidade significativa de armazenamento em disco local, como o `md1c.28x512.4x4tb`.</dd>
 <dt>Configure diversos namespaces quando tiver diversas equipes e projetos que compartilham o cluster.</dt>
   <dd><p>Os namespaces são como um cluster dentro do cluster. Eles são uma maneira de dividir recursos de cluster usando [cotas de recurso ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) e [limites padrão ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/). Ao fazer novos namespaces, certifique-se de configurar as [políticas RBAC](/docs/containers?topic=containers-users#rbac) adequadas para controlar o acesso. Para obter mais informações, consulte [Compartilhar um cluster com namespaces ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) na documentação do Kubernetes.</p>
   <p>Se tiver um cluster pequeno, duas dúzias de usuários e recursos semelhantes (como versões diferentes do mesmo software), provavelmente não serão necessários diversos namespaces. Em vez disso, é possível usar rótulos.</p></dd>
@@ -229,7 +251,8 @@ O número de clusters criados depende de sua carga de trabalho, políticas e reg
 <dt>Organize seus objetos do Kubernetes com rótulos</dt>
   <dd><p>Para organizar e selecionar os recursos do Kubernetes, como `pods` ou `nodes`, [use rótulos do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). Por padrão, o {{site.data.keyword.containerlong_notm}} aplica alguns rótulos, incluindo `arch`, `os`, `region`, `zone` e `machine-type`.</p>
   <p>Casos de uso de exemplo para rótulos incluem [limitar o tráfego de rede para nós do trabalhador de borda](/docs/containers?topic=containers-edge), [implementar um aplicativo em uma máquina de GPU](/docs/containers?topic=containers-app#gpu_app) e [restringir suas cargas de trabalho do aplicativo![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para serem executadas em nós do trabalhador que atendam a determinados recursos SDS ou de tipo de máquina, como nós do trabalhador bare metal. Para ver quais rótulos já estão aplicados a um recurso, use o comando <code>kubectl get</code> com o sinalizador <code>--show-labels</code>. Por exemplo:</p>
-  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p></dd>
+  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
+  Para aplicar rótulos aos nós do trabalhador, [crie seu conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#add_pool) com rótulos ou [atualize um conjunto de trabalhadores existente](/docs/containers?topic=containers-add_workers#worker_pool_labels)</dd>
 </dl>
 
 
@@ -246,10 +269,10 @@ Embora nenhum sistema seja totalmente infalível, é possível executar etapas p
 
 Revise mais informações sobre como tornar os recursos altamente disponíveis.
 * [Reduza possíveis pontos de falha](/docs/containers?topic=containers-ha#ha).
-* [Crie clusters multizona](/docs/containers?topic=containers-plan_clusters#ha_clusters).
+* [Crie clusters multizona](/docs/containers?topic=containers-ha_clusters#ha_clusters).
 * [Planeje implementações altamente disponíveis](/docs/containers?topic=containers-app#highly_available_apps) que usem recursos, como conjuntos de réplicas e antiafinidade de pod, em multizonas.
 * [Execute contêineres baseados em imagens em um registro público baseado em nuvem](/docs/containers?topic=containers-images).
-* [Planeje o armazenamento de dados](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especialmente para clusters multizona, considere usar um serviço de nuvem, como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).
+* [Planeje o armazenamento de dados](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especialmente para clusters multizona, considere usar um serviço de nuvem, como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).
 * Para clusters multizona, ative um [serviço de balanceador de carga](/docs/containers?topic=containers-loadbalancer#multi_zone_config) ou o [balanceador de carga multizona](/docs/containers?topic=containers-ingress#ingress) do Ingress para expor publicamente seus aplicativos.
 
 <br />
@@ -307,12 +330,12 @@ Com o Kubernetes, você declara muitos tipos de objetos em arquivos de configura
 ### Pensei que precisava colocar meu aplicativo em um contêiner. No entanto, o que são essas informações sobre pods?
 {: #deploy_pods}
 
-Um [pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) é a menor unidade implementável que pode ser gerenciada pelo Kubernetes. Você coloca seu contêiner (ou um grupo de contêineres) em um pod e usa o arquivo de configuração de pod para informá-lo sobre como executar o contêiner e compartilhar recursos com outros pods. Tudo o que é colocado em um pod é executado em um contexto compartilhado, o que significa que eles trabalham em sincronização na mesma máquina virtual ou física.
+Um [pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) é a menor unidade implementável que pode ser gerenciada pelo Kubernetes. Você coloca seu contêiner (ou um grupo de contêineres) em um pod e usa o arquivo de configuração de pod para informá-lo sobre como executar o contêiner e compartilhar recursos com outros pods. Todos os contêineres que você coloca em um pod são executados em um contexto compartilhado, o que significa que eles compartilham a mesma máquina virtual ou física.
 {: shortdesc}
 
 **O que colocar em um contêiner**: à medida que pensa sobre os componentes de seu aplicativo, considere se eles têm requisitos de recurso significativamente diferentes para itens como CPU e memória. É possível que alguns componentes funcionem de maneira bastante intensa, sendo aceitável que fiquem inativos brevemente para desviar recursos para outras áreas? Há algum outro componente voltado ao cliente, de maneira que seja fundamental que ele permaneça ativo? Divida-os em contêineres separados. É sempre possível implementá-los no mesmo pod para que sejam executados em sincronia.
 
-**O que colocar em um pod**: os contêineres para seu aplicativo não precisam sempre estar no mesmo pod. Na verdade, se você tiver um componente stateful difícil de dimensionar, como um serviço de banco de dados, coloque-o em um pod diferente que possa ser planejado em um nó do trabalhador com mais recursos para manipular a carga de trabalho. Se seus contêineres funcionam corretamente ao serem executados em nós do trabalhador diferentes, use diversos pods. Se precisarem estar na mesma máquina e ter seu dimensionamento realizado em conjunto, agrupe-os no mesmo pod.
+**O que colocar em um pod**: os contêineres para seu aplicativo não precisam sempre estar no mesmo pod. Na verdade, se você tiver um componente stateful difícil de dimensionar, como um serviço de banco de dados, coloque-o em um pod diferente que possa ser planejado em um nó do trabalhador com mais recursos para manipular a carga de trabalho. Se seus contêineres funcionarem corretamente se eles forem executados em nós do trabalhador diferentes, use múltiplos pods. Se precisarem estar na mesma máquina e ter seu dimensionamento realizado em conjunto, agrupe-os no mesmo pod.
 
 ### Então, se é possível usar apenas um pod, por que preciso de todos esses tipos diferentes de objetos?
 {: #deploy_objects}
@@ -384,6 +407,7 @@ Veja a seguir algumas dicas para organizar arquivos YAML de implementação:
     ```
     {: codeblock}
 *  É possível usar o comando `kubectl apply -f` para aplicar a um diretório inteiro, não apenas a um único arquivo.
+*  Experimente o [projeto `kustomize`](/docs/containers?topic=containers-app#kustomize) que pode ser usado para ajudar a gravar, customizar e reutilizar as configurações de YAML do recurso do Kubernetes.
 
 Dentro do arquivo YAML, é possível usar rótulos ou anotações, como metadados, para gerenciar suas implementações.
 
@@ -449,7 +473,7 @@ Para atualizar seu aplicativo, é possível escolher dentre uma variedade de est
 <dt>Alternância instantânea</dt>
   <dd>Também conhecida como uma implementação azul-verde, uma alternância instantânea requer o dobro dos recursos de cálculo para ter duas versões de um mesmo aplicativo em execução ao mesmo tempo. Com essa abordagem, é possível alternar seus usuários para a versão mais recente em tempo quase real. Certifique-se de usar seletores de rótulo de serviço (como `version: green` e `version: blue`) para garantir que as solicitações sejam enviadas para a versão correta do aplicativo. É possível criar a nova implementação `version: green`, aguardar até que ela esteja pronta e, em seguida, excluir a implementação `version: blue`. Em vez disso, também é possível executar uma [atualização contínua](/docs/containers?topic=containers-app#app_rolling), mas configurar o parâmetro `maxUnavailable` para `0%` e o parâmetro `maxSurge` para `100%`.</dd>
 <dt>Implementação canary ou A/B</dt>
-  <dd>Uma implementação canary, que é uma estratégia de atualização mais complexa, consiste na escolha de uma porcentagem de usuários, como 5%, e seu envio para a nova versão do aplicativo. Você coleta métricas em suas ferramentas de criação de log e monitoramento sobre como a nova versão do aplicativo está sendo executada, realiza testes A/B e, em seguida, apresenta a atualização para mais usuários. Assim como com todas as implementações, a rotulagem do aplicativo (como `version: stable` e `version: canary`) é essencial. Para gerenciar as implementações canary, é possível [instalar a malha de serviços de complemento gerenciado do Istio](/docs/containers?topic=containers-istio#istio), [configurar o monitoramento do Sysdig para seu cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster) e, em seguida, usar a malha de serviços do Istio para testes A/B, conforme descrito [nesta postagem do blog ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://sysdig.com/blog/monitor-istio/).</dd>
+  <dd>Uma implementação canary, que é uma estratégia de atualização mais complexa, consiste na escolha de uma porcentagem de usuários, como 5%, e seu envio para a nova versão do aplicativo. Você coleta métricas em suas ferramentas de criação de log e monitoramento sobre como a nova versão do aplicativo está sendo executada, realiza testes A/B e, em seguida, apresenta a atualização para mais usuários. Assim como com todas as implementações, a rotulagem do aplicativo (como `version: stable` e `version: canary`) é essencial. Para gerenciar as implementações canary, é possível [instalar a malha de serviços de complemento gerenciado do Istio](/docs/containers?topic=containers-istio#istio), [configurar o monitoramento do Sysdig para seu cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster) e, em seguida, usar a malha de serviços do Istio para testes A/B, conforme descrito [nesta postagem do blog ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://sysdig.com/blog/monitor-istio/). Ou, use o Knative para implementações canárias.</dd>
 </dl>
 
 <br />

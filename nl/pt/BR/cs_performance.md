@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Ajustando o Desempenho
 {: #kernel}
@@ -116,7 +118,7 @@ Para reverter os parâmetros `sysctl` de seus nós do trabalhador para os valore
     ```
     {: pre}
 
-2. [Reinicialize todos os nós do trabalhador no cluster](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
+2. [Reinicialize todos os nós do trabalhador no cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). Os nós do trabalhador voltam on-line, com os valores padrão aplicados.
 
 <br />
 
@@ -168,7 +170,7 @@ As configurações do provedor de métricas do seu cluster (`metrics-server` no 
 
 O pod do provedor de métricas também tem um contêiner `nanny` que escala as solicitações de recurso do contêiner principal `metrics-server` ou `heapster` e limites em resposta ao número de nós do trabalhador no cluster. É possível mudar os recursos padrão editando o configmap do provedor de métricas.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Abra o YAML do configmap do provedor de métricas do cluster.
     *  Para `metrics-server`:

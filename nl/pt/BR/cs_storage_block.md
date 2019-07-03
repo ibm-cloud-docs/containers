@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -16,11 +16,13 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip}rwo
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Armazenando dados no IBM Block Storage for IBM Cloud
@@ -38,7 +40,7 @@ O {{site.data.keyword.Bluemix_notm}} Block Storage está disponível somente par
 Instale o plug-in do {{site.data.keyword.Bluemix_notm}} Block Storage com um gráfico Helm para configurar classes de armazenamento predefinidas para armazenamento de bloco. É possível usar essas classes de armazenamento para criar um PVC para provisionar armazenamento de bloco para seus apps.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Certifique-se de que o nó do trabalhador aplique a correção mais recente para sua versão secundária.
    1. Liste a versão de correção atual de seus nós do trabalhador.
@@ -49,7 +51,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
       Saída de exemplo:
       ```
-      OK ID Public IP Private IP Machine Type State Status Zone Version kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26 169.xx.xxx.xxx 10.xxx.xx.xxx b3c.4x16.encrypted normal Ready dal10 1.12.7_1523*
+      OK ID Public IP Private IP Machine Type State Status Zone Version kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26 169.xx.xxx.xxx 10.xxx.xx.xxx b3c.4x16.encrypted normal Ready dal10 1.13.6_1523*
       ```
       {: screen}
 
@@ -92,7 +94,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
 6. Instale o {{site.data.keyword.Bluemix_notm}} Block Storage plug-in. Quando você instala o plug-in, classes de armazenamento de bloco predefinidas são incluídas no cluster.
    ```
-   helm install iks-charts/ibmcloud-block-storage-plugin 
+   helm install iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -183,7 +185,7 @@ Agora é possível continuar a [criar um PVC](#add_block) para provisionar armaz
 É possível fazer upgrade do plug-in existente do {{site.data.keyword.Bluemix_notm}} Block Storage para a versão mais recente.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Atualize o repositório Helm para recuperar a versão mais recente de todos os gráficos Helm nesse repositório.
    ```
@@ -230,7 +232,7 @@ A remoção do plug-in não remove os PVCs, PVs ou dados existentes. Quando voc�
 {: important}
 
 Antes de iniciar:
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Certifique-se de que você não tenha nenhum PVC ou PV em seu cluster que use armazenamento de bloco.
 
 Para remover o plug-in:
@@ -517,7 +519,7 @@ Para incluir o armazenamento de bloco:
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
     Capacity:	20Gi
-    Access Modes:	RWX
+    Access Modes:	RWO
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
@@ -841,7 +843,7 @@ Se você desejar criar automaticamente seu PVC ao criar o conjunto stateful, use
 Use essa opção se desejar criar automaticamente o PVC ao criar o conjunto stateful.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifique se todos os conjuntos stateful existentes no cluster estão totalmente implementados. Se um conjunto stateful ainda estiver sendo implementado, não será possível iniciar a criação do conjunto stateful. Deve-se aguardar até que todos os conjuntos stateful no cluster estejam totalmente implementados para evitar resultados inesperados.
    1. Liste os conjuntos stateful existentes em seu cluster.
@@ -999,7 +1001,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
 Quando você [provisionar dinamicamente seus PVCs ao criar o conjunto stateful](#block_dynamic_statefulset), o nome do PVC será designado com base nos valores usados no arquivo YAML do conjunto stateful. Para que o conjunto stateful use PVCs existentes, o nome dos PVCs deve corresponder ao nome que seria criado automaticamente ao usar o fornecimento dinâmico.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Se você desejar pré-fornecer o PVC para seu conjunto stateful antes de criar o conjunto stateful, siga as etapas de 1 a 3 em [Incluindo armazenamento de bloco em apps](#add_block) para criar um PVC para cada réplica do conjunto stateful. Certifique-se de criar sua PVC com um nome que siga o formato a seguir: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: use o nome que você deseja especificar na seção `spec.volumeClaimTemplates.metadata.name` de seu conjunto stateful, como `nginxvol`.
@@ -1047,7 +1049,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 Se você desejar aumentar a capacidade de armazenamento ou o desempenho, será possível modificar seu volume existente.
 {: shortdesc}
 
-Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, consulte [Expandindo a capacidade do Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity). Se você usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, deve-se seguir as etapas 4 a 7 neste tópico para concluir a modificação.
+Para perguntas sobre faturamento e para localizar as etapas de como usar o console do {{site.data.keyword.Bluemix_notm}} para modificar seu armazenamento, consulte [Expandindo a capacidade do Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) e [Ajustando o IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). As atualizações que você faz por meio do console não são refletidas no volume persistente (PV). Para incluir essas informações no PV, execute `kubectl patch pv <pv_name>` e atualize manualmente o tamanho e o IOPS na seção **Rótulos** e **Anotação** de seu PV.
 {: tip}
 
 1. Liste os PVCs em seu cluster e anote o nome do PV associado na coluna **VOLUME**.
@@ -1059,11 +1061,64 @@ Para perguntas sobre faturamento e para localizar as etapas de como usar o conso
    Saída de exemplo:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWO            ibmc-block-bronze    147d
    ```
    {: screen}
 
-2. Recupere o **`VolumeID`** e o **`StorageType`** do armazenamento de arquivo físico que está associado ao seu PVC, listando os detalhes do PV ao qual o PVC está ligado. Substitua `<pv_name>` pelo nome do PV recuperado na etapa anterior. O tipo de armazenamento é mostrado na seção **Rótulos** e o ID do volume é mostrado na seção **Origem** > **Opções** de sua saída da CLI.
+2. Se você desejar mudar o IOPS e o tamanho para seu armazenamento de bloco, edite o IOPS na seção `metadata.labels.IOPS` de seu PV primeiro. É possível mudar para um valor de IOPS inferior ou superior. Certifique-se de inserir um IOPS que seja suportado para o tipo de armazenamento que você tem. Por exemplo, se você tiver armazenamento de bloco do Endurance com 4 IOPS, será possível mudar o IOPS para 2 ou 10. Para obter mais valores de IOPS suportados, consulte [Decidindo sobre a configuração de armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
+   ```
+   kubectl edit pv <pv_name>
+   ```
+   {: pre}
+
+   Para mudar o IOPS por meio da CLI, deve-se também mudar o tamanho do seu armazenamento de bloco. Se você deseja mudar somente o IOPS, mas não o tamanho, deve-se [solicitar a mudança de IOPS por meio do console](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS).
+   {: note}
+
+3. Edite a PVC e inclua o novo tamanho na seção `spec.resources.requests.storage` de sua PVC. É possível mudar para um tamanho maior somente até a capacidade máxima que é configurada por sua classe de armazenamento. Não é possível reduzir seu armazenamento existente. Para ver os tamanhos disponíveis para sua classe de armazenamento, consulte [Decidindo sobre a configuração de armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
+   ```
+   kubectl edit pvc <pvc_name>
+   ```
+   {: pre}
+
+4. Verifique se a expansão de volume foi solicitada. A expansão de volume foi solicitada com êxito quando você vê uma mensagem `FileSystemResizePending` na seção **Condições** de sua saída da CLI. 
+   ```
+   kubectl describe pvc <pvc_name>
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   ...
+   Conditions:
+   Type                      Status  LastProbeTime                     LastTransitionTime                Reason  Message
+   ----                      ------  -----------------                 ------------------                ------  -------
+   FileSystemResizePending   True    Mon, 01 Jan 0001 00:00:00 +0000   Thu, 25 Apr 2019 15:52:49 -0400           Waiting for user to (re-)start a pod to finish file system resize of volume on node.
+   ```
+   {: screen}
+
+5. Liste todos os pods que montam a PVC. Se a PVC for montada por um pod, a expansão de volume será processada automaticamente. Se a sua PVC não for montada por um pod, a PVC deverá ser montada em um pod para que a expansão de volume possa ser processada. 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+   ```
+   {: pre}
+
+   Os pods montados são retornados no formato: `<pod_name>: <pvc_name>`.
+
+6. Se a PVC não for montada por um pod, [crie um pod ou uma implementação e monte a PVC](/docs/containers?topic=containers-block_storage#add_block). Se a PVC for montada por um pod, continue com a próxima etapa. 
+
+7. Monitore o status de expansão de volume. A expansão de volume é concluída quando você vê a mensagem `"message":"Success"` em sua saída da CLI.
+   ```
+   kubectl get pv <pv_name> -o go-template=$'{{index .metadata.annotations "ibm.io/volume-expansion-status"}}\n'
+   ```
+   {: pre}
+
+   Saída de exemplo:
+   ```
+   {"size":50,"iops":500,"orderid":38832711,"start":"2019-04-30T17:00:37Z","end":"2019-04-30T17:05:27Z","status":"complete","message":"Success"}
+   ```
+   {: screen}
+
+8. Verifique se o tamanho e o IOPS são mudados na seção **Rótulos** de sua saída da CLI.
    ```
    kubectl describe pv <pv_name>
    ```
@@ -1071,132 +1126,12 @@ Para perguntas sobre faturamento e para localizar as etapas de como usar o conso
 
    Saída de exemplo:
    ```
-   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
-   Labels:          CapacityGb=24
-                    Datacenter=dal13
-                    IOPS=4
-                    StorageType=Endurance
-                    billingType=hourly
-                    failure-domain.beta.kubernetes.io/region=us-south
-                    failure-domain.beta.kubernetes.io/zone=dal13
-                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
    ...
-   Source:
-       Type:       FlexVolume (a generic volume resource that is provisioned/attached using an exec based plugin)
-       Driver:     ibm/ibmc-block
-       FSType:     ext4
-       SecretRef:  <nil>
-       ReadOnly:   false
-       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
-   ...
+   Labels:       CapacityGb=50
+                 Datacenter=dal10
+                 IOPS=500
    ```
    {: screen}
-
-3. Modifique o tamanho ou o IOPS de seu volume em sua conta de infraestrutura do IBM Cloud (SoftLayer).
-
-   Exemplo para armazenamento de desempenho:
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-iops <iops>
-   ```
-   {: pre}
-
-   Exemplo para armazenamento do Endurance:
-   ```
-   ibmcloud sl block volume-modify <volume_ID> --new-size <size> --new-tier <iops>
-   ```
-   {: pre}
-
-   <table>
-   <caption>Entendendo os componentes do comando</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ícone de ideia"/> entendendo os componentes de arquivo do YAML</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>&lt;volume_ID&gt;</code></td>
-   <td>Insira o ID do volume recuperado anteriormente.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-size&gt;</code></td>
-   <td>Insira o novo tamanho em gigabytes (Gi) para seu volume. Para tamanhos válidos, consulte [Decidindo sobre a configuração de armazenamento de bloco](#block_predefined_storageclass). O tamanho inserido deve ser maior ou igual ao tamanho atual de seu volume. Se você não especificar um novo tamanho, o tamanho atual do volume será usado. </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-iops&gt;</code></td>
-   <td>Somente para armazenamento de desempenho. Insira o novo número de IOPS que você deseja. Para o IOPS válido, consulte [Decidindo sobre a configuração de armazenamento de bloco](#block_predefined_storageclass). Se você não especificar o IOPS, o IOPS atual será usado. <p class="note">Se a razão IOPS/GB original para o volume for menor que 0,3, a nova razão IOPS/GB deverá ser menor que 0,3. Se a razão IOPS/GB original para o volume for maior ou igual a 0,3, a nova razão IOPS/GB para o volume deverá ser maior ou igual a 0,3.</p> </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-tier&gt;</code></td>
-   <td>Somente para armazenamento do Endurance. Insira o novo número de IOPS por GB que você deseja. Para o IOPS válido, consulte [Decidindo sobre a configuração de armazenamento de bloco](#block_predefined_storageclass). Se você não especificar o IOPS, o IOPS atual será usado. <p class="note">Se a razão IOPS/GB original para o volume for menor que 0,25, a nova razão IOPS/GB deverá ser menor que 0,25. Se a razão IOPS/GB original para o volume for maior ou igual a 0,25, a nova razão IOPS/GB para o volume deverá ser maior ou igual a 0,25.</p> </td>
-   </tr>
-   </tbody>
-   </table>
-
-   Saída de exemplo:
-   ```
-   Order 31020713 was placed successfully!.
-   > Storage as a Service
-
-   > 40 GBs
-
-   > 2 IOPS per GB
-
-   > 20 GB de espaço de armazenamento (Espaço de captura instantânea)
-
-   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
-   ```
-   {: screen}
-
-4. Corrija a configuração do PV para incluir a anotação `autofix-resizefs`. Essa anotação redimensiona automaticamente o sistema de arquivos quando o volume é montado em um pod.  
-   ```
-   kubectl patch pv <pv_name> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
-   ```
-   {: pre}
-
-5. Liste todos os pods que usam o PVC.
-   ```
-   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
-   ```
-   {: pre}
-
-   Pods são retornados no formato: `<pod_name>: <pvc_name>`.
-
-6. se você tiver um pod que usa o PVC, reinicie o pod removendo o pod e permitindo que o Kubernetes recrie-o. Se você criou um pod sem usar uma implementação do Kubernetes ou um conjunto de réplicas, deve-se recriar seu pod depois de removê-lo.
-   Para recuperar o arquivo YAML usado para criar seu pod, execute `kubectl get pod <pod_name> -o yaml >pod.yaml`.
-   {: tip}
-   ```
-   kubectl delete pod <pod_name>
-   ```
-   {: pre}
-
-7. Se você mudou o tamanho de seu volume, efetue login em seu pod para verificar o novo tamanho. Observe que a instância de armazenamento leva um tempo para redimensionar e não é possível verificar o tamanho até que o processo seja concluído.
-   1. Obtenha o caminho de montagem do volume que você usou em seu pod para acessar seu volume.
-      ```
-      kubectl describe pod <pod_name>
-      ```
-      {: pre}
-
-      O caminho de montagem do volume é mostrado na seção **Contêineres** > **bloco** > **Montagens** de sua saída da CLI.
-   2. Efetue login em seu pod.
-      ```
-      kubectl exec -it <pod_name> bash
-      ```
-      {: pre}
-
-   3. Mostre as estatísticas de uso do disco e localize o caminho de montagem para seu volume que você recuperou anteriormente. Verifique se a coluna **Tamanho** mostra o novo tamanho de seu volume.
-      ```
-      df -h
-      ```
-      {: pre}
-
-      Saída de exemplo:
-      ```
-      Filesystem                                     Size  Used Avail Use% Mounted on
-      overlay                                         99G  3.2G   91G   4% /
-      tmpfs                                           64M     0   64M   0% /dev
-      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
-      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
-      ```
-      {: screen}
 
 
 ## Backup e restauração de dados
@@ -1209,7 +1144,7 @@ Revise as opções de backup e restauração a seguir para seu armazenamento de 
 
 <dl>
   <dt>Configurar capturas instantâneas periódicas</dt>
-  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de bloco](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de bloco. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. Será possível restaurar dados de uma captura instantânea se um usuário acidentalmente remover dados importantes do volume.</br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>[Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Efetue login na CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de bloco](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de bloco. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. Será possível restaurar dados de uma captura instantânea se um usuário acidentalmente remover dados importantes do volume.</br></br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>[Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Efetue login na CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O tamanho e o IOPS são mostrados na seção <strong>Labels</strong> de sua saída da CLI. Para localizar o ID do volume, revise a anotação <code>ibm.io/network-storage-id</code> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre"><code> ibmcloud sl block volume-detail  &lt;volume_ID&gt; </code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Tamanho da captura instantânea (GB)</strong> na saída da CLI muda de 0 para o tamanho solicitado. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code> ibmcloud sl block snapshot-create  &lt;volume_ID&gt; </code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code> ibmcloud sl block snapshot-list  &lt;volume_ID&gt; </code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code> ibmcloud sl block snapshot-restore  &lt;volume_ID&gt;  &lt;snapshot_ID&gt; </code></pre></p></dd>
   <dt>Replicar capturas instantâneas para outra zona</dt>
  <dd><p>Para proteger seus dados de uma falha de zona, é possível [replicar capturas instantâneas](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication) para uma instância de armazenamento de bloco que está configurada em outra zona. Os dados podem ser replicados do armazenamento primário para o armazenamento de backup somente. Não é possível montar uma instância de armazenamento de bloco replicada em um cluster. Quando seu armazenamento primário falha, é possível configurar manualmente o armazenamento de backup replicado para ser o primário. Em seguida, é possível montá-lo para seu cluster. Depois que o armazenamento primário é restaurado, é possível restaurar os dados do armazenamento de backup.</p></dd>
@@ -1220,7 +1155,7 @@ Revise as opções de backup e restauração a seguir para seu armazenamento de 
 Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app de uma falha de zona, configure uma segunda instância do {{site.data.keyword.cos_short}} e replique dados entre as zonas. Se você precisa restaurar dados de sua instância do {{site.data.keyword.cos_short}}, use o script de restauração que é fornecido com a imagem.</dd>
 <dt>Copiar dados de e para pods e contêineres</dt>
 <dd><p>É possível usar o [comando `kubectl cp` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) para copiar arquivos e diretórios de pods ou contêineres específicos ou para eles em seu cluster.</p>
-<p>Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
+<p>Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
 <p>É possível usar o comando de várias maneiras:</p>
 <ul>
 <li>Copiar dados de sua máquina local para um pod no cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

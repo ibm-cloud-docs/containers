@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Armazenando dados no IBM File Storage for IBM Cloud
@@ -29,7 +31,7 @@ subcollection: containers
 O {{site.data.keyword.Bluemix_notm}} File Storage é um armazenamento de arquivo baseado em NFS persistente, rápido e conectado à rede flexível que pode ser incluído em seus apps usando volumes persistentes do Kubernetes (PVs). É possível escolher entre camadas de armazenamento predefinidas com tamanhos de GB e IOPS que atendam aos requisitos de suas cargas de trabalho. Para descobrir se o {{site.data.keyword.Bluemix_notm}} File Storage é a opção de armazenamento correta para você, consulte [Escolhendo uma solução de armazenamento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obter informações de precificação, consulte  [ Faturamento ](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-O {{site.data.keyword.Bluemix_notm}} File Storage está disponível somente para clusters padrão configurados com conectividade de rede pública. Se o seu cluster não puder acessar a rede pública, como um cluster privado atrás de um firewall ou um cluster com apenas o terminal de serviço privado ativado, será possível provisionar o armazenamento de arquivo se o cluster executar o Kubernetes versão 1.13.4_1513, 1.12.6_1544, 1.11.8_1550, 1.10.13_1551 ou mais recente. As instâncias de armazenamento de arquivo NFS são específicas para uma única zona. Se você tiver um cluster de múltiplas zonas, considere as [opções de armazenamento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+O {{site.data.keyword.Bluemix_notm}} File Storage está disponível somente para clusters padrão configurados com conectividade de rede pública. Se o seu cluster não puder acessar a rede pública, como um cluster privado atrás de um firewall ou um cluster somente com o terminal em serviço privado ativado, será possível provisionar o armazenamento de arquivo se o cluster executar o Kubernetes versão 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 ou mais recente. As instâncias de armazenamento de arquivo NFS são específicas para uma única zona. Se você tiver um cluster de múltiplas zonas, considere as [opções de armazenamento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Decidindo sobre a configuração de armazenamento de arquivo
@@ -43,7 +45,7 @@ Cada classe de armazenamento especifica o tipo de armazenamento de arquivo que v
 Depois de provisionar um tipo específico de armazenamento usando uma classe de armazenamento, não será possível mudar o tipo ou a política de retenção para o dispositivo de armazenamento. No entanto, é possível [mudar o tamanho e o IOPS](#file_change_storage_configuration) se você desejar aumentar a capacidade de armazenamento e o desempenho. Para mudar o tipo e a política de retenção para seu armazenamento, deve-se [criar uma nova instância de armazenamento e copiar os dados](/docs/containers?topic=containers-kube_concepts#update_storageclass) da instância de armazenamento antiga para a nova.
 {: important}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para decidir sobre uma configuração de armazenamento:
 
@@ -409,7 +411,7 @@ Se você tiver um dispositivo de armazenamento físico existente que desejar usa
 
 Antes de iniciar:
 - Certifique-se de que você tenha pelo menos um nó do trabalhador que exista na mesma zona que sua instância de armazenamento de arquivo existente.
-- [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Etapa 1: Preparando seu armazenamento existente.
 {: #existing-file-1}
@@ -614,7 +616,7 @@ Se você desejar criar automaticamente seu PVC ao criar o conjunto stateful, use
 Use essa opção se desejar criar automaticamente o PVC ao criar o conjunto stateful.
 {: shortdesc}
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifique se todos os conjuntos stateful existentes no cluster estão totalmente implementados. Se um conjunto stateful ainda estiver sendo implementado, não será possível iniciar a criação do conjunto stateful. Deve-se aguardar até que todos os conjuntos stateful no cluster estejam totalmente implementados para evitar resultados inesperados.
    1. Liste os conjuntos stateful existentes em seu cluster.
@@ -729,7 +731,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
     </tr>
     <tr>
     <td style="text-align:left"><code> spec.template.spec.affinity </code></td>
-    <td style="text-align:left">Especifique sua regra de antiafinidade para assegurar que seus pods do conjunto stateful sejam distribuídos entre os nós do trabalhador e as zonas. O exemplo mostra uma regra de antiafinidade em que o pod do conjunto stateful prefere não ser planejado em um nó do trabalhador no qual um pod que tem o rótulo `app: nginx` é executado. O `topologykey: failure-domain.beta.kubernetes.io/zone` restringe essa regra de antiafinidade ainda mais e evita que o pod seja planejado em um nó do trabalhador se o nó do trabalhador estiver na mesma zona que um pod que tenha o rótulo `app: nignx`. Usando essa regra de antiafinidade, é possível alcançar a antiafinidade entre os nós do trabalhador e as zonas. </td>
+    <td style="text-align:left">Especifique sua regra de antiafinidade para assegurar que seus pods do conjunto stateful sejam distribuídos entre os nós do trabalhador e as zonas. O exemplo mostra uma regra de antiafinidade em que o pod do conjunto stateful prefere não ser planejado em um nó do trabalhador no qual um pod que tem o rótulo `app: nginx` é executado. O `topologykey: failure-domain.beta.kubernetes.io/zone` restringe essa regra de antiafinidade ainda mais e evita que o pod seja planejado em um nó trabalhador se o nó do trabalhador estiver na mesma zona que um pod que possui o rótulo `app: nginx`. Usando essa regra de antiafinidade, é possível alcançar a antiafinidade entre os nós do trabalhador e as zonas. </td>
     </tr>
     <tr>
     <td style="text-align:left"><code> spec.volumeClaimTemplates.metadata.name </code></td>
@@ -772,7 +774,7 @@ Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se
 
 Quando você [provisionar dinamicamente seus PVCs ao criar o conjunto stateful](#file_dynamic_statefulset), o nome do PVC será designado com base nos valores usados no arquivo YAML do conjunto stateful. Para que o conjunto stateful use PVCs existentes, o nome dos PVCs deve corresponder ao nome que seria criado automaticamente ao usar o fornecimento dinâmico.
 
-Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Se você desejar pré-fornecer seu PVC antes de criar o conjunto stateful, siga as etapas de 1 a 3 em [Incluindo armazenamento de arquivo em apps](#add_file) para criar um PVC para cada réplica do conjunto stateful. Certifique-se de criar sua PVC com um nome que siga o formato a seguir: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: use o nome que você deseja especificar na seção `spec.volumeClaimTemplates.metadata.name` de seu conjunto stateful, como `nginxvol`.
@@ -1045,7 +1047,7 @@ Revise as opções de backup e restauração a seguir para o seu armazenamento d
 
 <dl>
   <dt>Configurar capturas instantâneas periódicas</dt>
-  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de arquivo](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de arquivo. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. Será possível restaurar dados de uma captura instantânea se um usuário acidentalmente remover dados importantes do volume.</br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>[Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Efetue login na CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>É possível [configurar capturas instantâneas periódicas para o seu armazenamento de arquivo](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), que é uma imagem somente leitura que captura o estado da instância em um momento. Para armazenar a captura instantânea, deve-se solicitar espaço de captura instantânea em seu armazenamento de arquivo. As capturas instantâneas são armazenadas na instância de armazenamento existente dentro da mesma zona. Será possível restaurar dados de uma captura instantânea se um usuário acidentalmente remover dados importantes do volume.</br> <strong>Para criar uma captura instantânea para seu volume: </strong><ol><li>[Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Efetue login na CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>PVs de Lista existente em seu cluster. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Obtenha os detalhes para o PV para o qual você deseja criar espaço de captura instantânea e anote o ID do volume, o tamanho e os IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> O ID do volume, o tamanho e o IOPS podem ser localizados na seção <strong>Labels</strong> de sua saída da CLI. </li><li>Crie o tamanho da captura instantânea para o volume existente com os parâmetros que você recuperou na etapa anterior. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Espere o tamanho da captura instantânea para criar. <pre class="pre"><code> ibmcloud sl arquivo volume-detail  &lt;volume_ID&gt; </code></pre>O tamanho da captura instantânea é provisionado com êxito quando o <strong>Tamanho da captura instantânea (GB)</strong> na saída da CLI muda de 0 para o tamanho solicitado. </li><li>Crie a captura instantânea para o volume e anote o ID da captura instantânea que é criado para você. <pre class="pre"><code> Captura instantânea do arquivo ibmcloud sl-create  &lt;volume_ID&gt; </code></pre></li><li>Verifique se a captura instantânea foi criada com êxito. <pre class="pre"><code> ibmcloud sl file snapshot-list  &lt;volume_ID&gt; </code></pre></li></ol></br><strong>Para restaurar dados por meio de uma captura instantânea para um volume existente: </strong><pre class="pre"><code> ibmcloud sl file snapshot-restore  &lt;volume_ID&gt;  &lt;snapshot_ID&gt; </code></pre></p></dd>
   <dt>Replicar capturas instantâneas para outra zona</dt>
  <dd><p>Para proteger seus dados de uma falha de zona, é possível [replicar capturas instantâneas](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication) para uma instância de armazenamento de arquivo que está configurada em outra zona. Os dados podem ser replicados do armazenamento primário para o armazenamento de backup somente. Não é possível montar uma instância de armazenamento de arquivo replicada em um cluster. Quando seu armazenamento primário falha, é possível configurar manualmente o armazenamento de backup replicado para ser o primário. Em seguida, é possível montá-lo para seu cluster. Depois que o armazenamento primário é restaurado, é possível restaurar os dados do armazenamento de backup.</p></dd>
@@ -1056,7 +1058,7 @@ Revise as opções de backup e restauração a seguir para o seu armazenamento d
   <p>Para tornar os seus dados ainda mais altamente disponíveis e proteger o seu app de uma falha de zona, configure uma segunda instância do {{site.data.keyword.cos_full}} e replique dados entre as zonas. Se você precisa restaurar dados de sua instância do {{site.data.keyword.cos_full}}, use o script de restauração que é fornecido com a imagem.</p></dd>
 <dt>Copiar dados de e para pods e contêineres</dt>
 <dd><p>É possível usar o [comando `kubectl cp` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) para copiar arquivos e diretórios de pods ou contêineres específicos ou para eles em seu cluster.</p>
-<p>Antes de iniciar: [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
+<p>Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Se você não especificar um contêiner com <code>-c</code>, o comando usará o primeiro contêiner disponível no pod.</p>
 <p>É possível usar o comando de várias maneiras:</p>
 <ul>
 <li>Copiar dados de sua máquina local para um pod no cluster: <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>

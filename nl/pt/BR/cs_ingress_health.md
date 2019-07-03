@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Criação de Log e Monitoramento de Ingresso
@@ -136,7 +137,7 @@ Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualiza
 
 Por padrão, os logs do Ingress são formatados em JSON e exibem campos de log comuns. No entanto, também é possível criar um formato de log customizado escolhendo quais componentes de log são encaminhados e como os componentes são organizados na saída de log
 
-Antes de iniciar, assegure-se de ter a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) IAM para o espaço de nomes `kube-system`.
+Antes de iniciar, assegure-se de que tenha a [função de serviço **Gravador** ou **Gerenciador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
 
 1. Edite o arquivo de configuração para o recurso configmap `ibm-cloud-provider-ingress-cm`.
 
@@ -227,7 +228,7 @@ Antes de iniciar, assegure-se de ter a [função de serviço **Gravador** ou **G
    ```
    {: pre}
 
-4. Para visualizar os logs do ALB do Ingresso, escolha entre duas opções.
+4. Para visualizar os logs do ALB do Ingress, escolha entre duas opções.
     * [Crie uma configuração de criação de log para o serviço Ingress](/docs/containers?topic=containers-health#logging) em seu cluster.
     * Verifique os logs a partir da CLI.
         1. Obtenha o ID de um pod para um ALB.
@@ -694,7 +695,7 @@ As zonas de memória compartilhada são definidas para que os processos do traba
 
 No configmap do Ingresso `ibm-cloud-provider-ingress-cm`, o campo `vts-status-zone-size` configura o tamanho da zona de memória compartilhada para a coleta de dados de métrica. Por padrão, `vts-status-zone-size` é configurado como `10m`. Se você tiver um ambiente grande que requeira mais memória para coleta de métricas, será possível substituir o padrão para usar, como alternativa, um valor maior, seguindo estas etapas.
 
-Antes de iniciar, assegure-se de ter a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) IAM para o espaço de nomes `kube-system`.
+Antes de iniciar, assegure-se de que tenha a [função de serviço **Gravador** ou **Gerenciador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
 
 1. Edite o arquivo de configuração para o recurso configmap `ibm-cloud-provider-ingress-cm`.
 

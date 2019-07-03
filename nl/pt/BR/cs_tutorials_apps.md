@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Tutorial: Implementando apps em clusters do Kubernetes
@@ -100,7 +100,7 @@ Para implementar o app:
     ```
     {: pre}
 
-3. [Efetue login em sua conta. Destine a região apropriada e, se aplicável, o grupo de recursos. Configure o contexto para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+3. [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  Efetue login na CLI do {{site.data.keyword.registryshort_notm}}.
 
@@ -119,24 +119,24 @@ Para implementar o app:
 
     Use caracteres alfanuméricos minúsculos ou sublinhados (`_`) somente no nome da imagem. Não esqueça o ponto (`.`) no final do comando. O ponto indica
 ao Docker para verificar dentro do diretório atual para o Dockerfile e construir artefatos para construir a
-imagem. Para obter o prefixo de região para a região em que você está atualmente, execute `ibmcloud api`. Por exemplo, o local de Dallas, o prefixo da região sul dos EUA é `ng`.
+imagem. Para obter a região de registro em que você está atualmente, execute `ibmcloud cr region`.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
     Quando a construção estiver completa, verifique se você vê a mensagem de êxito a seguir:
 
     ```
-    Construído com êxito <image_ID> Registro identificado com êxito.<region>.bluemix.net/<namespace>/hello-world:1 O push refere-se a um repositório [registry.<region>.bluemix.net/<namespace>/hello-world] 29042bc0b00c: Enviado por push f31d9ee9db57: Enviado por push 33c64488a635: Pushed 0804854a4553: A camada já existe 6bd4a62f5178: A camada já existe 9dfa40a0da3b: A camada já existe 1: compilação: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 tamanho: 1576
+    Successfully built <image_ID> Successfully tagged <region>.icr.io/<namespace>/hello-world:1 The push refers to a repository [<region>.icr.io/<namespace>/hello-world] 29042bc0b00c: Pushed f31d9ee9db57: Pushed 33c64488a635: Pushed 0804854a4553: Layer already exists 6bd4a62f5178: Layer already exists 9dfa40a0da3b: Layer already exists 1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
     ```
     {: screen}
 
 7.  As implementações são usadas para gerenciar pods, que incluem instâncias conteinerizadas de um app. O comando a seguir implementa o app em um único pod. Para os propósitos deste tutorial, a implementação é denominada **hello-world-deployment**, mas é possível fornecer à implementação qualquer nome que você desejar.
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -236,7 +236,7 @@ imagem. Para obter o prefixo de região para a região em que você está atualm
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 
@@ -290,14 +290,14 @@ Conforme definido no script de configuração, o Kubernetes pode usar uma verifi
 3.  Construa, identifique e envie por push o app como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}.  Novamente, não esqueça o ponto (`.`) no final do comando.
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
     Verifique se você vê a mensagem de êxito.
 
     ```
-    Construído com êxito <image_ID> Registro identificado com êxito.<region>.bluemix.net/<namespace>/hello-world:1 O push refere-se a um repositório [registry.<region>.bluemix.net/<namespace>/hello-world] 29042bc0b00c: Enviado por push f31d9ee9db57: Enviado por push 33c64488a635: Pushed 0804854a4553: A camada já existe 6bd4a62f5178: A camada já existe 9dfa40a0da3b: A camada já existe 1: compilação: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 tamanho: 1576
+    Successfully built <image_ID> Successfully tagged <region>.icr.io/<namespace>/hello-world:1 The push refers to a repository [<region>.icr.io/<namespace>/hello-world] 29042bc0b00c: Pushed f31d9ee9db57: Pushed 33c64488a635: Pushed 0804854a4553: Layer already exists 6bd4a62f5178: Layer already exists 9dfa40a0da3b: Layer already exists 1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
     ```
     {: screen}
 
@@ -305,7 +305,7 @@ Conforme definido no script de configuração, o Kubernetes pode usar uma verifi
     1. Atualize os detalhes para a imagem em seu namespace de registro privado.
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -450,7 +450,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
     2.  Construa, identifique e envie por push o app `watson` como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}. Novamente, não esqueça o ponto (`.`) no final do comando.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -473,7 +473,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
     2.  Construa, identifique e envie por push o app `watson-talk` como uma imagem para seu namespace no {{site.data.keyword.registryshort_notm}}. Novamente, não esqueça o ponto (`.`) no final do comando.
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -496,11 +496,11 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
     ```
     Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -511,14 +511,14 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         watson:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk:
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -624,7 +624,7 @@ Mude o nome da imagem:
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 

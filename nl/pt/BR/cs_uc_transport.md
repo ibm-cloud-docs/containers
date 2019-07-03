@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casos de uso de transporte para  {{site.data.keyword.cloud_notm}}
@@ -45,7 +45,7 @@ Tecnologias chave:
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
 * [ Abrir cadeias de ferramentas no  {{site.data.keyword.contdelivery_full}} ](https://www.ibm.com/cloud/garage/toolchains/)
 * [ Serviços de nuvem para inovação ](https://www.ibm.com/cloud/products/#analytics)
-* [{{site.data.keyword.messagehub_full}} para enviar dados de evento aos aplicativos](/docs/services/EventStreams?topic=eventstreams-about#about)
+* [{{site.data.keyword.messagehub_full}} para alimentar dados do evento para apps](/docs/services/EventStreams?topic=eventstreams-about#about)
 
 **Contexto: A empresa de remessa aumenta a disponibilidade de sistemas mundiais para o ecossistema de parceiros de negócios**
 
@@ -130,7 +130,7 @@ Um Exec de RH (CHRO) precisa de um novo site de benefícios de RH com um robô d
 Por que o  {{site.data.keyword.cloud_notm}}:  {{site.data.keyword.containerlong_notm}}  fornece fácil spin-up de cálculo. Em seguida, os Desenvolvedores podem experimentar facilmente, enviando por push mudanças para sistemas de Desenvolvimento e teste rapidamente com cadeias de ferramentas abertas. Suas ferramentas de desenvolvimento de software tradicionais ganham impulso quando elas incluem o IBM Watson Assistant. O novo site de benefícios foi criado em menos de 3 semanas.
 
 Tecnologias chave:    
-* [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [ Serviço de Chatbot desenvolvido com o Watson ](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

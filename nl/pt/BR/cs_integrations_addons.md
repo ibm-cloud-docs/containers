@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # Incluindo serviços com o uso de complementos gerenciados
 {: #managed-addons}
@@ -42,12 +43,12 @@ Se você instalou o [controlador de admissão de imposição de segurança de im
 ## Incluindo complementos gerenciados
 {: #adding-managed-add-ons}
 
-Para ativar um complemento gerenciado em seu cluster, você usa o [comando `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable). Quando você ativa o complemento gerenciado, uma versão suportada da ferramenta, incluindo todos os recursos do Kubernetes, é automaticamente instalada em seu cluster. Consulte a documentação de cada complemento gerenciado para localizar os pré-requisitos que seu cluster deve atender para instalar o complemento gerenciado.
+Para ativar um complemento gerenciado em seu cluster, você usa o comando [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Quando você ativa o complemento gerenciado, uma versão suportada da ferramenta, incluindo todos os recursos do Kubernetes, é automaticamente instalada em seu cluster. Consulte a documentação de cada complemento gerenciado para localizar os pré-requisitos que seu cluster deve atender para instalar o complemento gerenciado.
 
 Para obter mais informações sobre os pré-requisitos de cada complemento, consulte:
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## Atualizando complementos gerenciados
 {: #updating-managed-add-ons}
@@ -57,7 +58,7 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
 
 1. Verifique se seus complementos estão na versão mais recente. Quaisquer complementos denotados com `* (<version> latest)` podem ser atualizados.
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,8 +66,8 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
@@ -86,7 +87,7 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
 
    2. Salve qualquer recurso criado por meio desses CRDs.
 
-4. Opcional para Knative: se você modificou qualquer um dos recursos a seguir, obtenha o arquivo YAML e salve-os em sua máquina local. Observe que se você modificou qualquer um desses recursos, mas deseja usar o padrão instalado, será possível excluir o recurso. Após alguns minutos, o recurso é recriado com os valores padrão instalados.
+4. Opcional para Knative: se você modificou qualquer um dos recursos a seguir, obtenha o arquivo YAML e salve-os em sua máquina local. Se você modificou qualquer um desses recursos, mas deseja usar o padrão instalado no lugar, é possível excluir o recurso. Após alguns minutos, o recurso é recriado com os valores padrão instalados.
   <table summary="Tabela de recursos do Knative">
   <caption>Recursos do Knative</caption>
   <thead><tr><th>Nome do recurso</th><th>Tipo de recurso</th><th>Namespace</th></tr></thead>
@@ -128,13 +129,13 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
    ```
    {: pre}
 
-7. Antes de continuar com a próxima etapa, verifique se os recursos do complemento dentro dos namespaces de complemento ou os namespaces de complementos em si foram removidos.
+7. Antes de continuar com a próxima etapa, verifique se os recursos do complemento dentro dos namespaces do complemento ou os próprios namespaces do complemento são removidos.
    * Por exemplo, se você atualizar o complemento `istio-extras`, será possível verificar se os serviços `grafana`, `kiali` e `jaeger-*` foram removidos do namespace `istio-system`.
      ```
      kubectl get svc -n istio-system
      ```
      {: pre}
-   * Por exemplo, se você atualizar o complemento `knative`, será possível verificar se os namespaces `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build` e `istio-system` foram excluídos. Os namespaces podem ter um **STATUS** de `Terminating` por alguns minutos antes de serem completamente excluídos.
+   * Por exemplo, se você atualizar o complemento `knative`, será possível verificar se os namespaces `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build` e `istio-system` foram excluídos. Os namespaces podem ter um **STATUS** de `Terminating` por alguns minutos antes de serem excluídos.
      ```
      kubectl get namespaces -w
      ```
@@ -177,3 +178,10 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. Opcional para Istio: se você usa as seções TLS em seus arquivos de configuração de gateway, deve-se excluir e recriar os gateways para que o Envoy possa acessar os segredos.
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

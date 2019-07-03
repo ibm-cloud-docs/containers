@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Customizando o Ingresso com Anotações
@@ -29,7 +31,7 @@ subcollection: containers
 Para incluir recursos em seu application load balancer (ALB) de Ingresso, é possível especificar anotações como metadados em um recurso de Ingresso.
 {: shortdesc}
 
-Antes de usar anotações, certifique-se de ter definido adequadamente sua configuração de serviço do Ingress seguindo as etapas em [Balanceamento de carga HTTPS com balanceadores de carga do aplicativo (ALB) Ingress](/docs/containers?topic=containers-ingress). Assim que você tiver configurado o ALB do Ingresso com uma configuração básica, será possível expandir os seus recursos incluindo anotações no arquivo do recurso Ingresso.
+Antes de usar anotações, certifique-se de ter definido adequadamente sua configuração de serviço do Ingress seguindo as etapas em [Balanceamento de carga HTTPS com balanceadores de carga do aplicativo (ALB) Ingress](/docs/containers?topic=containers-ingress). Assim que você tiver configurado o ALB do Ingress com uma configuração básica, será possível expandir os seus recursos incluindo anotações no arquivo do recurso Ingresso.
 {: note}
 
 <table>
@@ -1083,7 +1085,7 @@ Mude as portas padrão para o tráfego de rede HTTP (porta 80) e HTTPS (porta 44
 **Descrição**</br>
 Por padrão, o ALB do Ingress é configurado para atender o tráfego de rede HTTP recebido na porta 80 e o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.
 
-Para permitir a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress#opening_ingress_ports) e, em seguida, especifique-a na anotação [`mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
+Para ativar a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress#opening_ingress_ports) e, em seguida, especifique essa porta na anotação [`mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
 {: note}
 
 **YAML de recurso do Ingresso de amostra**</br>
@@ -1760,7 +1762,7 @@ Roteie o tráfego de rede recebido em um caminho de domínio ALB para um caminho
 {:shortdesc}
 
 **Descrição**</br>
-Seu domínio do ALB do Ingress roteia o tráfego de rede recebido em `mykubecluster.us-south.containers.appdomain.cloud/beans` para seu aplicativo. O seu app atende em `/coffee`, em vez de `/beans`. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em `/beans` seja encaminhado para o seu app usando o caminho `/coffee`. Ao incluir múltiplos serviços, use apenas um ponto e vírgula (;) para separá-los.
+Seu domínio do ALB do Ingress roteia o tráfego de rede recebido em `mykubecluster.us-south.containers.appdomain.cloud/beans` para seu aplicativo. O seu app atende em `/coffee`, em vez de `/beans`. Para encaminhar o tráfego de rede recebido para o seu app, inclua a anotação de regravação em seu arquivo de configuração do recurso de Ingresso. A anotação de nova gravação assegura que o tráfego de rede recebido em `/beans` seja encaminhado para o seu app usando o caminho `/coffee`. Ao incluir múltiplos serviços, use somente um ponto e vírgula (;) sem espaço antes ou depois do ponto e vírgula para separá-los.
 
 **YAML de recurso do Ingresso de amostra**</br>
 
@@ -1809,7 +1811,7 @@ spec:
 ## Anotações de buffer de proxy
 {: #proxy-buffer}
 
-O ALB do Ingresso age como um proxy entre seu app backend e o navegador da web do cliente. Com as anotações do buffer de proxy, é possível configurar como os dados são armazenados em buffer em seu ALB ao enviar ou receber pacotes de dados.
+O ALB do Ingress age como um proxy entre seu app backend e o navegador da web do cliente. Com as anotações do buffer de proxy, é possível configurar como os dados são armazenados em buffer em seu ALB ao enviar ou receber pacotes de dados.  
 {: shortdesc}
 
 ### Buffers grandes de cabeçalho do cliente (`large-client-header-buffers`)
@@ -1872,7 +1874,7 @@ Use a anotação de buffer para desativar o armazenamento de dados de resposta n
 
 **Descrição**</br> o Ingress ALB age como um proxy entre o seu app de back-end e o navegador da web do cliente. Quando uma resposta é enviada do app backend para o cliente, os dados de resposta são armazenados em buffer no ALB por padrão. O ALB usa o proxy em uma resposta do cliente e começa a enviar a resposta para o cliente no ritmo do cliente. Depois que todos os dados do app backend são recebidos pelo ALB, a conexão com o app backend é encerrada. A conexão do ALB para o cliente permanece aberta até que o cliente receba todos os dados.
 
-Se o armazenamento em buffer de dados de resposta no ALB está desativado, os dados são enviados imediatamente do ALB para o cliente. O cliente deve ser capaz de manipular os dados recebidos no ritmo do ALB. Se o cliente for muito lento, poderá haver perda de dados.
+Se o armazenamento em buffer de dados de resposta no ALB está desativado, os dados são enviados imediatamente do ALB para o cliente. O cliente deve ser capaz de manipular os dados recebidos no ritmo do ALB. Se o cliente for muito lento, a conexão de envio de dados permanecerá aberta até que o cliente possa alcançá-lo.
 
 O armazenamento em buffer de dados de resposta no ALB é ativado por padrão.
 
@@ -2335,7 +2337,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2359,6 +2361,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Opcional: para aplicar um tamanho máximo do corpo do cliente a um serviço específico, substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço. Se você não especificar um nome de serviço, o tamanho será aplicado a todos os serviços. No YAML de exemplo, o formato <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> aplica o primeiro tamanho ao serviço <code>myservice</code> e aplica o segundo tamanho a todos os outros serviços.</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>O tamanho máximo do corpo de resposta do cliente. Por exemplo, para configurar o tamanho máximo para 200 megabytes, defina <code>200m</code>. É possível configurar o tamanho como 0 para desativar a verificação do tamanho do corpo da solicitação do cliente.</td>
 </tr>
@@ -2576,9 +2581,9 @@ Como o app usa o {{site.data.keyword.appid_short_notm}} para autenticação, dev
 **Criar**.
 
 2. Inclua URLs de redirecionamento para seu app. Uma URL de redirecionamento é o terminal de retorno de chamada de seu app. Para evitar ataques de phishing, o ID do app valida a URL de solicitação com relação à lista de desbloqueio de URLs de redirecionamento.
-  1. No console de gerenciamento do {{site.data.keyword.appid_short_notm}}, navegue para **Provedores de identidade > Gerenciar**.
-  2. Certifique-se de que você tenha um Provedor de Identidade selecionado. Se nenhum Provedor de Identidade estiver selecionado, o usuário não será autenticado, mas um token de acesso será emitido para acesso anônimo ao app.
-  3. No campo **Incluir URLs de redirecionamento da web**, inclua URLs de redirecionamento para seu aplicativo no formato `http://<hostname>/<app_path>/appid_callback` ou `https://<hostname>/<app_path>/appid_callback`.
+  1. No console de gerenciamento do {{site.data.keyword.appid_short_notm}}, navegue para **Gerenciar autenticação**.
+  2. Na guia **Provedores de identidade**, certifique-se de que você tenha um Provedor de identidade selecionado. Se nenhum Provedor de Identidade estiver selecionado, o usuário não será autenticado, mas um token de acesso será emitido para acesso anônimo ao app.
+  3. Na guia **Configurações de autenticação**, inclua URLs de redirecionamento para seu app no formato `http://<hostname>/<app_path>/appid_callback` ou `https://<hostname>/<app_path>/appid_callback`.
 
     O {{site.data.keyword.appid_full_notm}} oferece uma função de logout: se `/logout` existir em seu caminho do {{site.data.keyword.appid_full_notm}}, os cookies serão removidos e o usuário será enviado de volta para a página de login. Para usar essa função, deve-se conectar `/appid_logout` ao domínio no formato `https://<hostname>/<app_path>/appid_logout` e incluir essa URL na lista de URLs de redirecionamento.
     {: note}
@@ -2605,3 +2610,5 @@ Como o app usa o {{site.data.keyword.appid_short_notm}} para autenticação, dev
   {: pre}
 
 5. Use o segredo de ligação e o namespace do cluster para incluir a anotação `appid-auth` em seu recurso Ingress.
+
+
