@@ -304,7 +304,6 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
-
       ```
       ibmcloud target -g <resource_group_name>
       ```
