@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks
 
@@ -84,7 +84,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
 
 To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, to a worker node in your cluster.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
 
 1. Create the `deploy-noisy.yaml` configuration file.
     ```

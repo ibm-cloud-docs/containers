@@ -100,7 +100,7 @@ Using an OpenShift cluster? [Install the OpenShift Origin CLI (`oc`)](#cli_oc). 
 {: tip}
 
 1.  If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
-    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
     2.  Compare the client and server versions. If the client does not match the server, continue to the next step. If the versions match, you already installed the appropriate version of `kubectl`.
         ```
         kubectl version --short
