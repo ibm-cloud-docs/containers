@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-02"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -345,7 +345,7 @@ To review how much compute resources are currently used on your worker node, run
 | **Total reserved** | **(varies)** | **2.7 GB of 16 GB total** | **11.96 GB of 256 GB total**|
 {: class="simple-tab-table"}
 {: caption="Worker node memory reserves by tier" caption-side="top"}
-{: #simpletabtable1}
+{: #worker-memory-reserves}
 {: tab-title="Worker node memory reserves by tier"}
 {: tab-group="Worker Node"}
 
@@ -358,6 +358,6 @@ To review how much compute resources are currently used on your worker node, run
 | **Total reserved** | **(varies)** | **0.085 cores of 4 cores total** | **0.1475 cores of 28 cores total**|
 {: class="simple-tab-table"}
 {: caption="Worker node CPU reserves by tier" caption-side="top"}
-{: #simpletabtable1}
+{: #worker-cpu-reserves}
 {: tab-title="Worker node CPU reserves by tier"}
 {: tab-group="Worker Node"}
