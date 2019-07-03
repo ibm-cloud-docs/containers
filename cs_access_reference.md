@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-02"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks
 
@@ -1068,7 +1068,7 @@ The following table shows the classic infrastructure permissions that the creden
 | View Support Case | As part of the cluster creation automation, support cases are used to provision the cluster infrastructure. | Assign access to account management services > Support Center > Administrator|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_VIEW --enable true</code></pre>  |
 {: class="simple-tab-table"}
 {: caption="Required classic infrastructure permissions" caption-side="top"}
-{: #simpletabtable1}
+{: #classic-permissions-required}
 {: tab-title="Create clusters"}
 {: tab-group="Classic infrastructure permissions"}
 
@@ -1088,6 +1088,6 @@ The following table shows the classic infrastructure permissions that the creden
 | Storage Manage | Manage {{site.data.keyword.cloud_notm}} File or Block storage instances that are attached as volumes to your apps for persistent storage of data. | Classic infrastructure > Permissions > Services|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NAS_MANAGE --enable true</code></pre> |
 {: class="simple-tab-table"}
 {: caption="Suggested classic infrastructure permissions" caption-side="top"}
-{: #simpletabtable1}
+{: #classic-permissions-suggested}
 {: tab-title="Other common use cases"}
 {: tab-group="Classic infrastructure permissions"}

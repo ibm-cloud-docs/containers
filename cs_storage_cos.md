@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks
 
@@ -34,6 +34,9 @@ To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public 
 {: important}
 
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [re-install the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
+{: note}
+
+With version 1.0.8, the {{site.data.keyword.cos_full_notm}} plug-in Helm chart is now available in the `ibm-charts` Helm repository. Make sure to fetch the latest version of the Helm chart from this repository. To add the repository, run `helm repo add ibm-charts https://icr.io/helm/ibm-charts`. 
 {: note}
 
 ## Creating your object storage service instance
@@ -176,7 +179,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 4. Add the {{site.data.keyword.cloud_notm}} Helm repo to your cluster.
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -188,7 +191,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 5. Download the Helm charts and unpack the charts in your current directory.
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
@@ -229,11 +232,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
       Example Usage:
          With Tiller:
-             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+             Install:   helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
          Without Tiller:
-             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
-             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
-             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+             Install:   helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template ibm-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
 
       Note:
          1. It is always recommended to install latest version of ibm-object-storage-plugin chart.
@@ -275,13 +278,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
        **Without Tiller**: 
        ```
-       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
        ```
        {: pre}
        
        **With Tiller**: 
        ```
-       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+       helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -317,13 +320,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
           **Without Tiller**: 
           ```
-          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+          helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
           ```
           {: pre}
           
           **With Tiller**: 
           ```
-          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+          helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
@@ -342,12 +345,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
           ```
           {: pre}
 
-
    Example output for installing without Tiller:
    ```
    Rendering the Helm chart templates...
    DC: dal10
-   Chart: iks-charts/ibm-object-storage-plugin
+   Chart: ibm-charts/ibm-object-storage-plugin
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
@@ -471,14 +473,14 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
 4. Download the latest {{site.data.keyword.cos_full_notm}} Helm chart to your local machine and extract the package to review the `release.md` file to find the latest release information.
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
 5. Upgrade the plug-in. </br>
    **Without Tiller**: 
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --update
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
      
@@ -497,7 +499,7 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
 
    2. Upgrade the {{site.data.keyword.cos_full_notm}} Helm chart to the latest version.
       ```   
-      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      helm ibmc upgrade <helm_chart_name> ibm-charts/ibm-object-storage-plugin --force --recreate-pods -f
       ```
       {: pre}
 
@@ -562,7 +564,7 @@ To remove the plug-in:
 
    **Without Tiller**: 
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
@@ -716,7 +718,7 @@ To remove the plug-in:
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>The TLS cipher suite that must be used when a connection to {{site.data.keyword.cos_full_notm}} is established via the HTTPS endpoint. The value for the cipher suite must follow the [OpenSSL format ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). All storage classes use the <strong><code>AESGCM</code></strong> cipher suite by default.  </td>
+   <td>The TLS cipher suite that must be used when a connection to {{site.data.keyword.cos_full_notm}} is established via the HTTPS endpoint. The value for the cipher suite must follow the [OpenSSL format ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). If your worker nodes run an Ubuntu operating system, your storage classes are set up to use the <strong><code>AESGCM</code></strong> cipher suite by default. For worker nodes that run a Red Hat operating system, the <strong><code>ecdhe_rsa_aes_128_gcm_sha_256</code></strong> cipher suite is used by default.    </td>
    </tr>
    </tbody>
    </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -1076,3 +1076,6 @@ When you start a new CLI session, or if 24 hours has expired in your current CLI
 **ID token**: Every IAM ID token that is issued via the CLI expires after one hour. When the ID token expires, the refresh token is sent to the token provider to refresh the ID token. Your authentication is refreshed, and you can continue to run commands against your cluster.
 
 **Refresh token**: Refresh tokens expire every 30 days. If the refresh token is expired, the ID token cannot be refreshed, and you are not able to continue running commands in the CLI. You can get a new refresh token by running `ibmcloud ks cluster-config --cluster <cluster_name>`. This command also refreshes your ID token.
+
+
+
