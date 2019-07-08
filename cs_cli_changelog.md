@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-02"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.3.28</td>
 <td>23 May 2019</td>
-<td><ul><li>Adds the [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) command to create Ingress ALBs. For more information, see [Scaling ALBs](/docs/containers?topic=containers-ingress#scale_albs).</li>
+<td><ul><li>Adds the [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) command to create Ingress ALBs. For more information, see [Scaling ALBs](/docs/containers?topic=containers-ingress-settings#scale_albs).</li>
 <li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
 <li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
 <li>Removes the <code>--force-update</code> flag from the `worker-update` command.</li>
@@ -109,7 +109,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.2.102</td>
 <td>15 Apr 2019</td>
-<td>Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) for registering and managing a host name for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns-monitor` group of commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor) for creating and modifying health check monitors for NLB host names. For more information, see [Registering NLB IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).
+<td>Adds the [`ibmcloud ks nlb-dns` group of commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) for registering and managing a host name for network load balancer (NLB) IP addresses, and the [`ibmcloud ks nlb-dns-monitor` group of commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor) for creating and modifying health check monitors for NLB host names. For more information, see [Registering NLB IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns).
 </td>
 </tr>
 <tr>
