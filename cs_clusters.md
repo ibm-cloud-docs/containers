@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-27"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -154,7 +154,7 @@ Free clusters include one worker node set up with 2 vCPU and 4 GB memory and hav
 
   Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
   {: important}
-7. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
+7. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_internet).
 
 ### Creating a free cluster in the CLI
 {: #clusters_cli_free}
@@ -182,6 +182,12 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 2. Create a cluster.
   ```
   ibmcloud ks cluster-create --name my_cluster
+  ```
+  {: pre}
+
+3. **Free clusters in the London metro only**: Currently, you must target the EU Central regional API to work with your cluster.
+  ```
+  ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com
   ```
   {: pre}
 
@@ -214,7 +220,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
     Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
     {: important}
 
-5. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
+5. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_internet).
 
 <br />
 
@@ -294,11 +300,10 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
   2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
 
-  3. To create clusters in a resource group other than default, target that resource group. 
+  3. To create clusters in a resource group other than default, target that resource group.
 
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
-
       ```
       ibmcloud target -g <resource_group_name>
       ```
@@ -469,15 +474,15 @@ After your cluster is created, you can begin working with your cluster by config
 To work with your cluster, set the cluster you created as the context for a CLI session to run `kubectl` commands.
 {: shortdesc}
 
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+{: tip}
+
 1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
   1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-firewall#firewall_bx).
   2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-firewall#firewall_kubectl) to access the master through the public only, private only, or public and private service endpoints.
   3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
 2. Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-
-  If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
-  {: tip}
   1. Get the command to set the environment variable and download the Kubernetes configuration files.
       ```
       ibmcloud ks cluster-config --cluster <cluster_name_or_ID>

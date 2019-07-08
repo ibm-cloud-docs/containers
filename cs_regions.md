@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-03"
 
 keywords: kubernetes, iks
 
@@ -90,11 +90,10 @@ The following tables list the available single and multizone locations in {{site
 {: shortdesc}
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
-* **Single zone**: If you create a cluster in a single data center location, you can create multiple worker nodes, but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+* **Single zone**: If you create a cluster in a single zone, or data center, location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 
 To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks supported-locations` and look for the value in the `Multizone Metro` column.
 {: tip}
-
 
 {{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: deprecated}
@@ -355,6 +354,9 @@ Free clusters are limited to specific locations.
 **Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a metro within the region that you target: the Sydney metro in `ap-south`, the Frankfurt metro in `eu-central`, the London metro in `uk-south`, or the Dallas metro in `us-south`. Note that you cannot specify a zone within the metro.
 
 **Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a geography and a metro location in the geography. You can select the Dallas metro in North America, the Frankfurt or London metros in Europe, or the Sydney metro in Asia Pacific. Your cluster is created in a zone within the metro you choose.
+
+To work with a free cluster in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+{: important}
 
 <br />
 

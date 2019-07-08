@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-27"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks
 
@@ -64,7 +64,7 @@ To troubleshoot your NLB service:
 
     In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a machine type other than **free**.
 
-2. For version 2.0 NLBs: Ensure that you complete the [NLB 2.0 prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. For version 2.0 NLBs: Ensure that you complete the [NLB 2.0 prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).
 
 3. Check the accuracy of the configuration file for your NLB service.
     * Version 2.0 NLBs:
@@ -275,6 +275,24 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
 <br />
 
 
+## Ingress ALB cannot be enabled due to subnet errors
+{: #cs_alb_subnet}
+
+{: tsSymptoms}
+When you try to enable an Ingress ALB by running the `ibmcloud ks alb-configure --enable` command, you see the following error:
+```
+No valid subnets found for the specified zone. Verify that a subnet exists on the VLAN in the zone that you specify by running 'ibmcloud ks subnets'. Note: If the problem persists, verify that your ALBs and worker nodes are on the same VLANs by following the steps in this troubleshooting doc: <https://ibm.biz/alb-vlan-ts>
+```
+{: screen}
+
+However, you ran `ibmcloud ks ks subnets` and verified that one or more subnets are available on the VLAN in the zone where the ALB exists.
+
+{: tsCauses}
+Your ALBs and your worker nodes might not exist on the same VLANs. This can occur when you delete worker nodes on the VLANs that the ALBs were also originally created on, and then create new worker nodes on new VLANs.
+
+{: tsResolve}
+Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-settings#migrate-alb-vlan).
+
 ## Connection via WebSocket closes after 60 seconds
 {: #cs_ingress_websocket}
 
@@ -305,7 +323,7 @@ To prevent the connection from closing after 60 seconds of inactivity:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-You enabled source IP preservation for a [version 1.0 load balancer](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) or [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
+You enabled source IP preservation for a [version 1.0 load balancer](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) or [Ingress ALB](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
 
 {: tsCauses}
 When you enable source IP preservation for load balancer or Ingress ALB services, the source IP address of the client request is preserved. The service forwards traffic to app pods on the same worker node only to ensure that the request packet's IP address isn't changed. Typically, load balancer or Ingress ALB service pods are deployed to the same worker nodes that the app pods are deployed to. However, some situations exist where the service pods and app pods might not be scheduled onto the same worker node. If you use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) on worker nodes, any pods that don't have a taint toleration are prevented from running on the tainted worker nodes. Source IP preservation might not be working based on the type of taint you used:
@@ -632,7 +650,7 @@ You can [delete your existing worker pool](/docs/containers?topic=containers-cli
 
 Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
 
 1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
 
