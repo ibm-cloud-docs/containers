@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-02"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks
 
@@ -39,6 +39,15 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>08 July 2019</td>
+  <td>
+  <li><strong>App networking</strong>: You can now find information about app networking with NLBs and Ingress ALBs in the following pages:
+    <ul><li>[Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-cs_sitemap#sitemap-nlb)</li>
+    <li>[HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-cs_sitemap#sitemap-ingress)</li></ul>
+  </li>
+  </td>
+</tr>
 <tr>
   <td>02 July 2019</td>
   <td><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.58](/docs/containers?topic=containers-cs_cli_changelog).</td>
@@ -139,7 +148,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>03 June 2019</td>
   <td><ul>
-  <li><strong>Bringing your own Ingress controller</strong>: Updated the [steps](/docs/containers?topic=containers-ingress#user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.</li>
+  <li><strong>Bringing your own Ingress controller</strong>: Updated the [steps](/docs/containers?topic=containers-ingress-user_managed) to reflect changes to the default community controller and to require a health check for controller IP addresses in multizone clusters.</li>
   <li><strong>{{site.data.keyword.cos_full_notm}}</strong>: Updated the [steps](/docs/containers?topic=containers-object_storage#install_cos) to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller.</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 467](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   <li><strong>Kustomize</strong>: Added an example of [reusing Kubernetes configuration files across multiple environments with Kustomize](/docs/containers?topic=containers-app#kustomize).</li>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks
 
@@ -225,7 +225,7 @@ Before you begin:
 ## Managing existing portable IP addresses
 {: #managing_ips}
 
-By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a network load balancer (NLB) service](/docs/containers?topic=containers-loadbalancer) or by [creating additional Ingress application load balancers (ALBs)](/docs/containers?topic=containers-ingress#scale_albs). To create an NLB or ALB service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
+By default, 4 portable public and 4 portable private IP addresses can be used to expose single apps to the public or private network by [creating a network load balancer (NLB) service](/docs/containers?topic=containers-loadbalancer) or by [creating additional Ingress application load balancers (ALBs)](/docs/containers?topic=containers-ingress-settings#scale_albs). To create an NLB or ALB service, you must have at least 1 portable IP address of the correct type available. You can view portable IP addresses that are available or free up a used portable IP address.
 {: shortdesc}
 
 ### Viewing available portable public IP addresses
@@ -510,8 +510,5 @@ However, if you have an existing router appliance, such as a [Virtual Router App
 
 To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 {: tip}
-
-<br />
-
 
 
