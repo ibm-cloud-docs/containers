@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -215,6 +215,8 @@ ibmcloud plugin list
 
 </br>
 
+
+
 <table summary="Cluster commands: Subnets table">
 <caption>Cluster commands: Subnets commands</caption>
 <col width="25%">
@@ -240,6 +242,8 @@ ibmcloud plugin list
 </table>
 
 </br>
+
+
 
 <table summary="Infrastructure commands table">
 <caption>Cluster commands: Infrastructure commands</caption>
@@ -1940,6 +1944,7 @@ ibmcloud ks cluster-subnet-add --cluster my_cluster --subnet-id 1643389
 {: pre}
 
 </br>
+
 ### ibmcloud ks cluster-subnet-create
 {: #cs_cluster_subnet_create}
 
@@ -1978,6 +1983,9 @@ ibmcloud ks cluster-subnet-create --cluster my_cluster --size 8 --vlan 1764905
 {: pre}
 
 </br>
+
+
+
 ### ibmcloud ks cluster-user-subnet-add
 {: #cs_cluster_user_subnet_add}
 
@@ -2906,7 +2914,9 @@ ibmcloud ks logging-autoupdate-get --cluster CLUSTER
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where you want to check whether automatic updates for the Fluentd add-on are enabled. This value is required.</dd>
 </dl>
+
 </br>
+
 ### ibmcloud ks logging-collect
 {: #cs_log_collect}
 
