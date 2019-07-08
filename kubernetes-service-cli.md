@@ -428,10 +428,10 @@ ibmcloud plugin list
       <td>[ibmcloud ks worker-reload](#cs_worker_reload)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks worker-replace](#cli_worker_replace)</td>
       <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
       <td>[ibmcloud ks worker-update](#cs_worker_update)</td>
       <td>[ibmcloud ks workers](#cs_workers)</td>
+      <td> </td>
     </tr>
   </tbody>
 </table>
