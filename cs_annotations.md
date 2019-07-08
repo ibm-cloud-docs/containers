@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-02"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks, ingress
 
@@ -1088,7 +1088,7 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 **Description**</br>
 By default, the Ingress ALB is configured to listen for incoming HTTP network traffic on port 80 and for incoming HTTPS network traffic on port 443. You can change the default ports to add security to your ALB domain, or to enable only an HTTPS port.
 
-To enable mutual authentication on a port, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.
+To enable mutual authentication on a port, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) and then specify that port in the [`mutual-auth` annotation](#mutual-auth). Do not use the `custom-port` annotation to specify a port for mutual authentication.
 {: note}
 
 **Sample Ingress resource YAML**</br>
@@ -1153,7 +1153,7 @@ spec:
   {: pre}
 
 3. Add the non-default HTTP and HTTPS ports to the config map. Replace `<port>` with the HTTP or HTTPS port that you want to open.
-  <p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress#opening_ingress_ports).</p>
+  <p class="note">By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).</p>
   ```
   apiVersion: v1
   kind: ConfigMap
@@ -1308,7 +1308,7 @@ The mutual authentication annotation validates client certificates. To forward c
 **Pre-requisites**</br>
 
 * You must have a valid mutual authentication secret that contains the required `ca.crt`. To create a mutual authentication secret, see the steps at the end of this section.
-* To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.
+* To enable mutual authentication on a port other than 443, [configure the ALB to open the valid port](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) and then specify that port in this annotation. Do not use the `custom-port` annotation to specify a port for mutual authentication.
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -1568,7 +1568,7 @@ spec:
   {: pre}
 
 3. Add the TCP ports to the config map. Replace `<port>` with the TCP ports that you want to open.
-  By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress#opening_ingress_ports).
+  By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).
   {: note}
   ```
   apiVersion: v1
