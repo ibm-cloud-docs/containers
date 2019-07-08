@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的金融服務使用案例
@@ -30,45 +30,44 @@ subcollection: containers
 這些使用案例強調顯示 {{site.data.keyword.containerlong_notm}} 上的工作負載如何充分運用高可用性、高效能運算、輕鬆啟動叢集以更快速地開發，以及來自 {{site.data.keyword.ibmwatson}} 的 AI。
 {: shortdesc}
 
-## 抵押貸款公司刪減成本並加速合規性
+## 抵押貸款公司刪減成本並加速法規遵循
 {: #uc_mortgage}
 
-房貸公司的「風險管理副總裁」每天都要處理 7 千萬筆記錄，但內部部署系統的速度緩慢，也不精確。IT 費用會急速增加，因為硬體會快速失效而且未完全利用。他們等待硬體佈建時，其合規性會變慢。
+房貸公司的「風險管理副總裁」每天都要處理 7 千萬筆記錄，但內部部署系統的速度緩慢，也不精確。IT 費用會急速增加，因為硬體會快速老舊而且未完全利用。在等待硬體佈建時，法規遵循的進度便會變慢。
 {: shortdesc}
 
-為何要使用 {{site.data.keyword.Bluemix_notm}}：若要改善風險分析，該公司會查看 {{site.data.keyword.containerlong_notm}} 及 IBM Cloud Analytic 服務以降低成本、增加全球可用性，最後加速合規性。在多個地區中使用 {{site.data.keyword.containerlong_notm}}，可以在全球容器化及部署其分析應用程式，並改善可用性及處理當地法規。這些部署透過已是 {{site.data.keyword.containerlong_notm}} 一部分的熟悉開放程式碼工具予以加速。
+為何要使用 {{site.data.keyword.Bluemix_notm}}：若要改善風險分析，該公司會查看 {{site.data.keyword.containerlong_notm}} 及 IBM Cloud Analytic 服務以降低成本、增加全球可用性，最後加速法規遵循。在多個地區中使用 {{site.data.keyword.containerlong_notm}}，可以在全球容器化及部署其分析應用程式，並改善可用性及處理當地法規。這些部署透過已是 {{site.data.keyword.containerlong_notm}} 一部分的熟悉開放程式碼工具予以加速。
 
 {{site.data.keyword.containerlong_notm}} 及重要技術：
 * [水平調整](/docs/containers?topic=containers-app#highly_available_apps)
 * [多個地區的高可用性](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [容器安全及隔離](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} 可以跨應用程式持續保存及同步處理資料](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 
 **解決方案**
 
-它們是從容器化分析應用程式並將它們放入雲端開始。它們的硬體問題一瞬間就會消失。它們能夠輕鬆設計 Kubernetes 叢集，以符合其高效能 CPU、RAM、儲存空間及安全需求。而且它們的分析應用程式變更時，不需要大量硬體投資就可以新增或縮減運算。使用 {{site.data.keyword.containerlong_notm}} 水平調整，其應用程式會隨著不斷成長的記錄數目進行調整，從而加速產生法規報告。{{site.data.keyword.containerlong_notm}} 提供全世界的彈性運算資源，而這些資源是安全且高效能的，可完全使用現代運算資源。
+它們是從容器化分析應用程式並將它們放入雲端開始。它們的硬體問題一瞬間就會消失。它們能夠輕鬆設計 Kubernetes 叢集，以符合其高效能 CPU、RAM、儲存空間及安全需求。而且它們的分析應用程式變更時，不需要大量硬體投資就可以新增或縮減運算。使用 {{site.data.keyword.containerlong_notm}} 水平調整，其應用程式會隨著不斷成長的記錄數目進行調整，而加速產生法規報告。{{site.data.keyword.containerlong_notm}} 提供全世界的彈性運算資源，而這些資源是安全且高效能的，可完全使用現代運算資源。
 
 現在，這些應用程式會從 {{site.data.keyword.cloudant}} 的資料倉儲接收大量資料。{{site.data.keyword.cloudant}} 中的雲端型儲存空間確保可用性高於在內部部署系統中鎖定它時。因為可用性十分重要，所以會跨全球資料中心部署應用程式：適用於 DR 及延遲。
 
-它們也會加快其風險分析及合規性。其預測及風險分析功能（例如 Monte Carlo 計算）現在會透過反覆運算式敏捷部署持續更新。容器編排由受管理的 Kubernetes 所處理，因此作業成本也會減少。最後，抵押貸款的風險分析對市場中的快節奏變更更具回應力。
+它們也會加快其風險分析及法規遵循。其預測及風險分析功能（例如 Monte Carlo 計算）現在會透過反覆運算式敏捷部署持續更新。容器編排由受管理的 Kubernetes 所處理，因此作業成本也會減少。最後，抵押貸款的風險分析對市場中的快節奏變更更具回應力。
 
-**環境定義：房貸的合規性及財務建模**
+**環境定義：房貸的法規遵循及財務建模**
 
 * 需要較好財務風險管理的需求增加，法規監督也會增加。相同的需求會驅動風險評量處理程序的關聯檢閱，並揭露更精細、整合式且豐富的法規報告。
 * 「高效能運算網格」是財務建模的關鍵基礎架構元件。
 
-公司的問題現在是要交付的規模及時間。
+公司的問題現在是規模和交付時間。
 
-其現行環境為 7 年以上、內部部署，並且具有有限的運算、儲存空間及 I/O 容量。
-伺服器重新整理成本很高，需要很長的時間才能完成。軟體及應用程式更新遵循非正式處理程序，而且不可重複。實際 HPC 網格很難對其進行程式設計。API 對於加入的新「開發人員」而言太過複雜，因此需要未記載的知識。主要應用程式升級需要 6 - 9 個月的時間才能完成。
+其現行環境為 7 年以上、內部部署，並且具有有限的運算、儲存空間及 I/O 容量。伺服器重新整理成本很高，需要很長的時間才能完成。軟體及應用程式更新遵循非正式處理程序，而且不可重複。實際 HPC 網格很難對其進行程式設計。API 對於加入的新「開發人員」而言太過複雜，因此需要未記載的知識。主要應用程式升級需要 6 - 9 個月的時間才能完成。
 
 **解決方案模型：隨需應變運算、儲存空間及 I/O 服務是視需要在可安全存取內部部署企業資產的公用雲端中執行**
 
 * 支援結構化及未結構化文件查詢的安全且可擴充文件儲存空間
 * 「提升及轉移」現有企業資產及應用程式，同時將它們整合到一些未移轉的內部部署系統
-* 縮短部署時間解決方案，以及實作標準 DevOps 和監視處理程序來處理可影響報告精確度的錯誤
+* 縮短部署時間解決方案，以及實作標準 DevOps 和監視處理程序來處理可影響報告正確性的錯誤
 
 **詳細解決方案**
 
@@ -91,7 +90,7 @@ subcollection: containers
 **結果**
 
 * 複雜財務模擬的完成比先前使用現有內部部署系統要快 25% 的時間。
-* 部署時間平均已從先前的 6 - 9 個月改善為 1 - 3 週。發生這項改善的原因是 {{site.data.keyword.containerlong_notm}} 容許使用已控管的受控處理程序來升高應用程式容器，並將它們取代為較新的版本。報告錯誤可以快速修正、解決問題（例如精確度）。
+* 部署時間平均已從先前的 6 - 9 個月改善為 1 - 3 週。發生這項改善的原因是 {{site.data.keyword.containerlong_notm}} 容許使用已控管的受控處理程序來升高應用程式容器，並將它們取代為較新的版本。報告錯誤可以快速修正、解決問題（例如正確性）。
 * 使用 {{site.data.keyword.containerlong_notm}} 及 {{site.data.keyword.cloudant}} 所帶來的一組一致且可擴充的儲存空間及運算服務，降低法規報告成本。
 * 一段時間之後，一開始「提升及轉移」至雲端的原始應用程式會重新架構成 {{site.data.keyword.containerlong_notm}} 上所執行的協同微服務。此動作進一步加速開發及部署時間，並且因相對簡單的實驗而容許更多的創新。它們還利用新版微服務發行創新應用程式，以充分運用市場與業務狀況（即所謂的狀況應用程式及微服務）。
 
@@ -106,7 +105,7 @@ Development Exec 的「開發人員」使用可關閉原型的內部部署傳統
 然後，「開發人員」可以輕鬆地進行實驗，並使用開放式工具鏈將變更快速推送至「開發」及「測試」系統。他們的傳統軟體開發工具透過按一下將 AI 雲端服務新增至應用程式時，會出現新的外觀。
 
 重要技術：
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [使用 {{site.data.keyword.watson}} AI 防止詐騙](https://www.ibm.com/cloud/watson-studio)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -128,8 +127,8 @@ Development Exec 在動態支付產業面臨許多挑戰。法規、消費者行
 其商業模型是向事業夥伴提供支付工具，因此可協助這些財務機構及其他組織提供安全且豐富的數位支付體驗。
 
 它們需要一個解決方案來協助「開發人員」及其事業夥伴：
-* 支付工具的前端：費用系統、付款追蹤（包括跨界、合規性、生物識別技術、匯款等等）
-* 法規特定特性：每個國家/地區都有唯一的法規，因此整體工具集看起來可能很類似，但會顯示國家/地區的特定權益
+* 支付工具的前端：費用系統、付款追蹤（包括跨界、法規遵循、生物識別技術、匯款等等）
+* 法規特定特性：每個國家/地區都有獨特的法規，因此整體工具集看起來可能很類似，但會顯示國家/地區的特定權益
 * 開發人員友善的工具：加速推出特性及錯誤修正程式
 * 「詐騙偵測即服務 (FDaaS)」使用 {{site.data.keyword.watson}} AI 早一步防止頻繁且不斷成長的詐騙動作
 
@@ -157,7 +156,7 @@ Development Exec 在動態支付產業面臨許多挑戰。法規、消費者行
 **步驟 1：提升及轉移至安全運算**
 * 管理高度敏感資料的應用程式可以在於「裸機」上執行以進行「授信運算」的 {{site.data.keyword.containerlong_notm}} 上重新管理。「授信運算」可以驗證基礎硬體未遭到竄改。
 * 將虛擬機器映像檔移轉至在公用 {{site.data.keyword.Bluemix_notm}} 的 {{site.data.keyword.containerlong_notm}} 中執行的容器映像檔。
-* 從該核心中，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件漏洞掃描。
+* 從該核心中，Vulnerability Advisor 提供已知惡意軟體的映像檔、原則、容器及套件漏洞掃描。
 * 專用資料中心/內部部署資本成本會大幅減少，並取代為根據工作負載需求調整的公用電腦模型。
 * 利用簡單的 Ingress 註釋，對您的服務及 API 一貫地強制執行原則驅動鑑別。藉由宣告式安全，您可以使用 {{site.data.keyword.appid_short_notm}} 來確保使用者鑑別及記號驗證。
 

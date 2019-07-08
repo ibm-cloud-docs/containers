@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 記載及監視 Ingress
@@ -136,7 +137,7 @@ subcollection: containers
 
 依預設，Ingress 日誌會格式化為 JSON，並顯示一般的日誌欄位。不過，您也可以選擇要轉遞的日誌元件，以及元件在日誌輸出中的排列方式，來建立自訂日誌格式。
 
-開始之前，請確定您具有 `kube-system` 名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+開始之前，請確定您具有 `kube-system` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
 1. 編輯 `ibm-cloud-provider-ingress-cm` configmap 資源的配置檔。
 
@@ -256,15 +257,15 @@ ALB 度量值匯出程式使用 NGINX 指引 `vhost_traffic_status_zone`，來�
 ### 安裝度量值匯出程式 Helm 圖表
 {: #metrics-exporter}
 
-安裝度量值匯出程式 Helm 圖表，以監視叢集中的 ALB。
+安裝度量值匯出程式 Helm 圖表，以監視叢集裡的 ALB。
 {: shortdesc}
 
-ALB 度量值匯出程式 Pod 必須部署至 ALB 部署所在的相同工作者節點。如果 ALB 是在邊緣工作者節點上執行，並且這些邊緣節點受到污染而防止其他工作負載部署，則無法排程度量值匯出程式 Pod。您必須執行 `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` 來移除污點。
+ALB 度量值匯出程式 Pod 必須部署至 ALB 部署所在的相同工作者節點。如果 ALB 是在邊緣工作者節點上執行，並且這些邊緣節點有污點而導致無法進行其他工作負載部署，則無法排定度量值匯出程式 Pod。您必須執行 `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` 來移除污點。
 {: note}
 
-1.  **重要事項**：[遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上、使用服務帳戶安裝 Helm 伺服器 (tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。
+1.  **重要事項**：[遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，在您的本端機器上安裝 Helm 用戶端、使用服務帳戶安裝 Helm 伺服器 (Tiller)，以及新增 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫。
 
-2. 將 `ibmcloud-alb-metrics-exporter` Helm 圖表安裝至叢集。此 Helm 圖表會部署 ALB 度量值匯出程式，並在 `kube-system` 名稱空間中建立 `alb-metrics-service-account` 服務帳戶。將 <alb-ID> 取代為您要收集其度量值之 ALB 的 ID。若要檢視叢集中 ALB 的 ID，請執行 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>。您必須針對要監視的每個 ALB 部署圖表。
+2. 將 `ibmcloud-alb-metrics-exporter` Helm 圖表安裝至叢集。此 Helm 圖表會部署 ALB 度量值匯出程式，並在 `kube-system` 名稱空間中建立 `alb-metrics-service-account` 服務帳戶。將 <alb-ID> 取代為您要收集其度量值之 ALB 的 ID。若要檢視叢集裡 ALB 的 ID，請執行 <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>。您必須針對要監視的每個 ALB 部署圖表。
   {: note}
   ```
   helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
@@ -693,7 +694,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 
 在 `ibm-cloud-provider-ingress-cm` Ingress configmap 中，`vts-status-zone-size` 欄位會設定度量值資料集合的共用記憶體區域大小。依預設，`vts-status-zone-size` 設為 `10m`。如果您的大型環境需要更多記憶體來收集度量值，則可以遵循下列步驟來置換預設值，而非使用較大的值。
 
-開始之前，請確定您具有 `kube-system` 名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+開始之前，請確定您具有 `kube-system` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
 1. 編輯 `ibm-cloud-provider-ingress-cm` configmap 資源的配置檔。
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 使用 IBM Cloud 服務連結新增服務
@@ -30,17 +32,17 @@ subcollection: containers
 {:shortdesc}
 
 **哪些類型的服務可以連結至叢集？** </br>
-當您將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集時，可以選擇針對 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 啟用的服務與根據 Cloud Foundry 的服務。已啟用 IAM 的服務提供更精細的存取控制，並可在 {{site.data.keyword.Bluemix_notm}} 資源群組中進行管理。Cloud Foundry 服務必須新增至 Cloud Foundry 組織及空間，且無法新增至資源群組。若要控制對 Cloud Foundry 服務實例的存取，您可以使用 Cloud Foundry 角色。如需已啟用 IAM 的服務及 Cloud Foundry 服務的相關資訊，請參閱[何謂資源？](/docs/resources?topic=resources-resource#resource)。
+當您將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集時，可以從已啟用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 的服務，與根據 Cloud Foundry 的服務，兩者之間進行選擇。已啟用 IAM 的服務提供更精細的存取控制，並可在 {{site.data.keyword.Bluemix_notm}} 資源群組中進行管理。Cloud Foundry 服務必須新增至 Cloud Foundry 組織及空間，且無法新增至資源群組。若要控制對 Cloud Foundry 服務實例的存取，您可以使用 Cloud Foundry 角色。如需已啟用 IAM 的服務及 Cloud Foundry 服務的相關資訊，請參閱[何謂資源？](/docs/resources?topic=resources-resource#resource)。
 
 若要尋找支援的 {{site.data.keyword.Bluemix_notm}} 服務清單，請參閱 [{{site.data.keyword.Bluemix_notm}} 型錄](https://cloud.ibm.com/catalog)。
 
 **何謂 {{site.data.keyword.Bluemix_notm}} 服務連結？**</br>
-服務連結是一種快速方式，用來建立 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，並將這些認證儲存在叢集的 Kubernetes 密碼中。若要將服務連結至叢集，您必須先佈建服務實例。然後，您可以使用 `ibmcloud ks cluster-service-bind` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)來建立服務認證及 Kubernetes 密碼。在 etcd 中會將 Kubernetes 密碼自動加密，以保護您的資料。
+服務連結是一種快速方式，用來建立 {{site.data.keyword.Bluemix_notm}} 服務的服務認證，並將這些認證儲存在叢集的 Kubernetes 密碼中。若要將服務連結至叢集，您必須先佈建服務實例。然後，您可以使用 `ibmcloud ks cluster-service-bind` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)來建立服務認證及 Kubernetes 密碼。在 etcd 中會將 Kubernetes 密碼自動加密，以保護您的資料。
 
 想要讓您的密碼更加安全嗎？請要求叢集管理者在您的叢集裡[啟用 {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect)，以加密新的及現有的密碼，例如儲存 {{site.data.keyword.Bluemix_notm}} 服務實例之認證的密碼。
 {: tip}
 
-**是否可以使用叢集中的所有 {{site.data.keyword.Bluemix_notm}} 服務？**</br>
+**是否可以使用叢集裡的所有 {{site.data.keyword.Bluemix_notm}} 服務？**</br>
 您只能對支援服務金鑰的服務使用服務連結，以自動建立服務認證，並將其儲存在 Kubernetes 密碼中。若要找出支援服務金鑰的服務清單，請參閱[啟用外部應用程式以使用 {{site.data.keyword.Bluemix_notm}} 服務](/docs/resources?topic=resources-externalapp#externalapp)。
 
 不支援服務金鑰的服務通常會提供您可在應用程式中使用的 API。服務連結方法不會自動為您的應用程式設定 API 存取權。請務必檢閱服務的 API 文件，並在應用程式中實作 API 介面。
@@ -56,7 +58,7 @@ subcollection: containers
     - 您要連結服務的叢集的[**編輯者**或**管理者** {{site.data.keyword.Bluemix_notm}} IAM 平台存取角色](/docs/containers?topic=containers-users#platform)
     - 您要連結服務的 Kubernetes 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)
     - 對於 Cloud Foundry 服務：您要佈建服務的空間的[**開發人員** Cloud Foundry 角色](/docs/iam?topic=iam-mngcf#mngcf)
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集裡，請執行下列動作：
 
@@ -106,7 +108,7 @@ subcollection: containers
     ```
    {: pre}
 
-   成功建立服務認證時，會建立名為 `binding-<service_instance_name>` 的 Kubernetes 密碼。  
+   成功建立服務認證時，會建立名稱為 `binding-<service_instance_name>` 的 Kubernetes 密碼。  
 
    輸出範例：
    ```
@@ -174,8 +176,8 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
 <br>
 
 開始之前：
--  確定您具有 `kube-system` 名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}}IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+-  確定您具有 `kube-system` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [將 {{site.data.keyword.Bluemix_notm}} 服務新增至叢集](#bind-services)。
 
 ### 以磁區將密碼裝載至您的 Pod
@@ -217,7 +219,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -372,7 +374,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -399,7 +401,7 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
      </tr>
      <tr>
      <td><code>env.valueFrom.secretKeyRef.key</code></td>
-     <td>此索引鍵為您密碼的一部分，您想在環境變數中參照它。如果要參照服務認證，您必須使用 <strong>binding</strong> 索引鍵。</td>
+     <td>此索引鍵為您密碼的一部分，您想在環境變數中參照它。若要參照服務認證，您必須使用 <strong>binding</strong> 索引鍵。</td>
      </tr>
      </tbody></table>
 
@@ -450,16 +452,16 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    ```
    {: codeblock}
 
-8. 選用項目：為了小心起見，若未適當設定 `BINDING` 環境變數，請對應用程式新增錯誤處理。 
-   
-   Java 程式碼範例： 
+8. 選用項目：為了小心起見，若未適當設定 `BINDING` 環境變數，請對應用程式新增錯誤處理。
+
+   Java 程式碼範例：
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Node.js 程式碼範例：
    ```js
    if (!process.env.BINDING) {
@@ -468,4 +470,3 @@ ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --s
    }
    ```
    {: codeblock}
-

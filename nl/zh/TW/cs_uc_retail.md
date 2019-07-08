@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的零售使用案例
@@ -39,7 +39,7 @@ Line-of-Business (LOB) Exec 需要增加銷售通道，但內部部署資料中�
 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供一種公用雲端生態系統，其中，容器可讓新商業夥伴及其他外部各方透過 API 共同開發應用程式及資料。現在零售系統位於公用雲端上，API 也會簡化資料共用以及快速開始新的應用程式開發。如果「開發人員」可輕鬆地進行實驗，並使用工具鏈將變更快速推送至「開發」及「測試」系統，則應用程式部署會增加。
 
 {{site.data.keyword.containerlong_notm}} 及重要技術：
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} 可以跨應用程式持續保存及同步處理資料](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -52,7 +52,7 @@ Line-of-Business (LOB) Exec 需要增加銷售通道，但內部部署資料中�
 
 **解決方案**
 
-需要有更聰明的購物體驗，才能增加留客率和毛利率。零售商的傳統銷售模型會因為缺乏商業夥伴庫存無法進行交叉銷售及向上銷售而不佳。它們的購物者正在尋找提高便利性的機會，因此他們可以一起快速找到相關項目（例如瑜伽褲及瑜珈墊）。
+需要有更聰明的購物體驗，才能增加留客率和毛利率。零售商的傳統銷售模型會因為缺乏商業夥伴庫存無法進行交叉銷售及向上銷售而不佳。它們的購物者正在尋找提高便利性的機會，因此他們可以一起快速尋找相關項目（例如瑜伽褲及瑜珈墊）。
 
 零售商也必須為客戶提供有用的內容（例如產品資訊、替代產品資訊、檢閱及即時庫存可見性）。而這些客戶想要透過個人行動裝置及配備行動裝置的商店店員在線上及店內購買。
 
@@ -63,7 +63,7 @@ Line-of-Business (LOB) Exec 需要增加銷售通道，但內部部署資料中�
 
 為了讓零售商與全球商業夥伴合作，庫存 API 需要變更，以符合每個地區的語言及市場喜好設定。{{site.data.keyword.containerlong_notm}} 提供多個地區的涵蓋範圍（包括北美洲、歐洲、亞洲及澳洲），讓 API 反映每個國家/地區中的需求，並且確保 API 呼叫具有低延遲。
 
-另一項需求是庫存資料必須可與商業夥伴及公司客戶共用。使用庫存 API，「開發人員」可以使用應用程式（例如行動庫存應用程式或 Web 電子商務解決方案）來呈現資訊。「開發人員」也忙於建置及維護主要電子商務網站。簡言之，他們需要專注在進行程式編碼，而不是管理基礎架構。
+另一項要求是，庫存資料必須可與公司的事業夥伴和客戶共享。使用庫存 API，「開發人員」可以使用應用程式（例如行動庫存應用程式或 Web 電子商務解決方案）來呈現資訊。「開發人員」也忙於建置及維護主要電子商務網站。簡言之，他們需要專注在進行程式編碼，而不是管理基礎架構。
 
 因此，他們選擇 {{site.data.keyword.containerlong_notm}}，因為 IBM 簡化了基礎架構管理：
 * 管理 Kubernetes 主節點、IaaS 及作業元件（例如 Ingress 及儲存空間）
@@ -120,14 +120,14 @@ Line-of-Business (LOB) Exec 需要增加銷售通道，但內部部署資料中�
 ## 傳統食品雜貨店透過數位見解增加客戶資料流量及銷售
 {: #uc_grocer}
 
-「行銷長 (CMO)」需要藉由讓商店成為差異化資產，以將店內的客戶資料流量增加 20%。大型零售競爭者及線上零售商都會竊取銷售。同時，CMO 需要在在不降價促銷的情況下減少庫存，因為持有庫存太久會鎖住數百萬的資金。
+「行銷長 (CMO)」需要藉由讓商店成為差異化資產，以將店內的客戶資料流量增加 20%。大型零售競爭者及線上零售商都會竊取銷售。同時，CMO 需要在不降價促銷的情況下減少庫存，因為持有庫存太久會鎖住數百萬的資金。
 {: shortdesc}
 
 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供輕鬆地啟動更多運算，其中，「開發人員」會快速新增「雲端分析」服務，以取得銷售行為見解及數位市場適應性。
 
 重要技術：    
 * [水平調整以加速開發](/docs/containers?topic=containers-app#highly_available_apps)
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [使用 Watson Discovery 的市場趨勢見解](https://www.ibm.com/watson/services/discovery/)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 * [使用 {{site.data.keyword.messagehub_full}} 進行庫存管理](/docs/services/EventStreams?topic=eventstreams-about#about)
@@ -152,7 +152,7 @@ Line-of-Business (LOB) Exec 需要增加銷售通道，但內部部署資料中�
 3. 「社交媒體分析」根據趨勢偵測客戶喜好設定來提供個人化：菜餚、主廚及材料。分析會連接地區趨勢與個別的 Twitter、Pinterest 及 Instagram 活動。
 4. 「開發人員友善的工具」可加速推出特性及錯誤修正程式。
 
-產品庫存、商店補貨及產品預測的後端庫存系統具有豐富的資訊，但現代分析可以解開如何更充分地移動高端產品的新見解。使用 {{site.data.keyword.cloudant}} 與 IBM Streaming Analytics 的組合，CMO 即可找到材料的甜蜜點，以符合自訂店內事件。
+產品庫存、商店補貨及產品預測的後端庫存系統具有豐富的資訊，但現代分析可以解開如何更充分地移動高端產品的新見解。使用 {{site.data.keyword.cloudant}} 與 IBM Streaming Analytics 的組合，CMO 即可尋找材料的甜蜜點，以符合自訂店內事件。
 
 {{site.data.keyword.messagehub_full}} 用來作為即時事件平台，以將庫存系統中快速變更的資訊帶入 IBM Streaming Analytics。
 

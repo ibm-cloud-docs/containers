@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-05-31"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 設定 Pod 優先順序
 {: #pod_priority}
@@ -54,7 +56,7 @@ _圖：Pod 優先順序情境_
 **如需相關資訊**：請參閱有關 [Pod 優先順序及先占 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/)的 Kubernetes 文件。
 
 **我可以停用 Pod 優先順序許可控制器嗎？**</br>
-否。若您不想要使用 Pod 優先順序，則不要設定 `globalDefault` 或在 Pod 部署中包含優先順序等級。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
+不能。如果不想使用 Pod 優先順序，請勿設定 `globalDefault` 或在 Pod 部署中包含優先順序類別。除了 IBM 使用[預設優先順序等級](#default_priority_class)部署的叢集重要 Pod 之外，每個 Pod 都預設為零。因為 Pod 優先順序是相對的，所以此基本設定確保叢集重要 Pod 已針對資源設定了優先順序，並遵循您已設定的現有排程原則來排程任何其他 Pod。
 
 **資源配額如何影響 Pod 優先順序？**</br>
 您可以針對執行 Kubernetes 1.12 或更新版本的叢集，搭配使用 Pod 優先順序與資源配額，包括[配額範圍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes)。使用配額範圍，您可以將資源配額設為帳戶，以取得 Pod 優先順序。較高優先順序的 Pod 會在較低優先順序的 Pod 之前，開始耗用資源配額所限制的系統資源。
@@ -91,8 +93,8 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始之前：
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* 確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 * [建立](/docs/containers?topic=containers-clusters#clusters_ui)或[更新](/docs/containers?topic=containers-update#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 
 若要使用優先順序等級，請執行下列動作：
@@ -138,7 +140,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
     </tr>
     <tr>
     <td><code>value</code></td>
-    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集中其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是介於 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
+    <td>必要：輸入小於或等於 10 億 (1000000000) 的整數。值越高，優先順序越高。這些值相對於叢集裡其他優先順序等級的值。對於您不想先佔（移除）的系統重要 Pod 保留非常高的數字。</br></br>例如，[預設叢集重要優先順序等級](#default_priority_class)範圍是介於 900000000-2000001000 的值，所以對於新優先順序等級，請輸入小於這些數字的值，這樣就不會有任何 Pod 高於這些 Pod 的優先順序。</td>
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
@@ -173,8 +175,8 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 {: shortdesc}
 
 開始之前：
-* [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* 確定您具有要在其中部署 Pod 的名稱空間的 [**Writer** 或 **Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* 確定您具有要在其中部署 Pod 之名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 * [建立](/docs/containers?topic=containers-clusters#clusters_ui)或[更新](/docs/containers?topic=containers-update#update)您的叢集至 Kubernetes 1.11 版或更新版本。
 * [瞭解優先順序排程的運作方式](#priority_scheduling)，因為優先順序可能先佔現有的 Pod，並影響叢集資源的使用。
 
@@ -222,7 +224,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
         spec:
           containers:
           - name: ibmliberty
-            image: registry.bluemix.net/ibmliberty:latest
+            image: icr.io/ibmliberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

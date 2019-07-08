@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -30,7 +31,7 @@ subcollection: containers
 當您作為叢集管理者時，可以為 {{site.data.keyword.containerlong}} 叢集定義存取原則，以針對不同使用者建立不同的存取層次。例如，您可以授權某些使用者能使用叢集基礎架構資源，而其他使用者則只能部署容器。
 {: shortdesc}
 
-截至 2019 年 1 月 30 日，{{site.data.keyword.containerlong_notm}} 提供一個使用 {{site.data.keyword.Bluemix_notm}} IAM 來授權使用者的新方法：[服務存取角色](/docs/containers?topic=containers-access_reference#service)。這些服務角色用來授與叢集內資源的存取權，例如，Kubernetes 名稱空間。如需相關資訊，請查看部落格：[Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部鏈結圖](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/)。
+自 2019 年 1 月 30 日起，{{site.data.keyword.containerlong_notm}} 提供一個使用 {{site.data.keyword.Bluemix_notm}} IAM 來授權使用者的新方法：[服務存取角色](/docs/containers?topic=containers-access_reference#service)。這些服務角色用來授與對叢集裡資源（例如 Kubernetes 名稱空間）的存取權。如需相關資訊，請參閱部落格 [Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/)。
 {: note}
 
 ## 瞭解存取原則及角色
@@ -62,8 +63,8 @@ subcollection: containers
 <dl>
 <dt><a href="#platform">{{site.data.keyword.Bluemix_notm}} IAM 平台及服務角色</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} 使用 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 平台及服務角色，來授與使用者對叢集的存取權。
-<ul><li>**平台**：平台角色決定使用者可以在叢集基礎架構上，使用 {{site.data.keyword.containerlong_notm}} API、主控台及 CLI (`ibmcloud ks`) 來執行的動作。平台角色不會授與對 Kubernetes API 的存取權。您可以依資源群組、地區或叢集實例來設定這些角色的原則。雖然平台角色會授權您在叢集上執行基礎架構動作，但不會授與對 IBM Cloud 基礎架構 (SoftLayer) 資源的存取權。對 IBM Cloud 基礎架構 (SoftLayer) 資源的存取權，取決於[針對地區所設定的 API 金鑰](#api_key)。平台角色所允許的範例動作是建立或移除叢集、將服務連結至叢集，管理網路與儲存空間資源，或新增額外的工作者節點。<br><br>如果您僅將平台角色指派給使用者，則他們無法與叢集內的 Kubernetes 資源互動。不過，它們仍然可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)。然後，您可以授權使用者使用[自訂 RBAC 原則](/docs/containers?topic=containers-users#role-binding)來執行選取 Kubernetes 動作。如果您的組織目前使用自訂的 RBAC 原則來控制 Kubernetes 存取權及方案，則您可以執行此動作，以繼續使用自訂 RBAC，而非服務角色。</li>
-<li>**服務**：服務角色會授權在叢集內提供給使用者的對應 Kubernetes RBAC 原則。因此，服務角色會授與對 Kubernetes API、儀表板及 CLI (`kubectl`) 的存取權。您可以依資源群組、地區或叢集實例來限定服務角色的原則範圍。此外，您還可以將服務角色範圍限定為所有、個別或地區叢集中的 Kubernetes 名稱空間。當您將服務角色範圍限定為名稱空間時，無法將原則套用至資源群組或同時指派一個平台角色。服務角色所允許的範例動作是建立應用程式部署、新增名稱空間，或設定 configmaps。<br><br>如果您僅將服務角色指派給使用者，則他們無法檢視任何 {{site.data.keyword.containerlong_notm}} 資源，也無法與其互動。為了讓使用者能夠存取叢集，並使用叢集的 Kubernetes 資源，您必須提供使用者叢集名稱和 ID ，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及列出 CLI 中的叢集與其他基礎架構資源，則請提供使用者平台**檢視者**角色。</li></ul></dd>
+<ul><li>**平台**：平台角色決定使用者可以藉由使用 {{site.data.keyword.containerlong_notm}} API、主控台及 CLI (`ibmcloud ks`) 對叢集基礎架構執行的動作。平台角色不會授與對 Kubernetes API 的存取權。您可以依資源群組、地區或叢集實例來設定這些角色的原則。雖然平台角色會授權您對叢集執行基礎架構動作，但不會授與對 IBM Cloud 基礎架構 (SoftLayer) 資源的存取權。對 IBM Cloud 基礎架構 (SoftLayer) 資源的存取權，取決於[針對地區所設定的 API 金鑰](#api_key)。平台角色所允許的動作範例包括建立或移除叢集、將服務連結至叢集，管理網路與儲存空間資源，或新增額外的工作者節點。<br><br>如果您僅將平台角色指派給使用者，則他們無法與叢集內的 Kubernetes 資源互動。不過，他們仍然可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)。然後，您可以使用[自訂 RBAC 原則](/docs/containers?topic=containers-users#role-binding)，授權使用者執行精選的 Kubernetes 動作。如果您的組織目前使用自訂 RBAC 原則來控制 Kubernetes 存取權，並且計劃繼續使用自訂 RBAC 原則，而非服務角色，則您可以執行此動作。</li>
+<li>**服務**：服務角色會授與在叢集內提供給使用者的對應 Kubernetes RBAC 原則。因此，服務角色會授與對 Kubernetes API、儀表板及 CLI (`kubectl`) 的存取權。您可以依資源群組、地區或叢集實例來限定服務角色的原則範圍。此外，您還可以將服務角色範圍限定為所有、個別或整個地區之叢集裡的 Kubernetes 名稱空間。當您將服務角色範圍限定為名稱空間時，無法將原則套用至資源群組或同時指派一個平台角色。服務角色所允許的動作範例包括建立應用程式部署、新增名稱空間，或設定 configmap。<br><br>如果您僅將服務角色指派給使用者，則他們無法檢視任何 {{site.data.keyword.containerlong_notm}} 資源，也無法與其互動。為了讓使用者能夠存取叢集，並使用叢集的 Kubernetes 資源，您必須提供使用者叢集名稱和 ID，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及從 CLI 列出叢集與其他基礎架構資源，則請將平台**檢視者**角色提供給使用者。</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>在 Kubernetes 中，角色型存取控制 (RBAC) 是保護叢集內資源的一種方式。RBAC 角色決定使用者可對那些資源執行的 Kubernetes 動作。獲指派服務角色的每位使用者，都會自動獲指派對應的 RBAC 叢集角色。此 RBAC 叢集角色會套用至特定名稱空間或所有名稱空間，視您是否將原則範圍限定為名稱空間而定。</br></br>
 RBAC 角色所允許的範例動作是建立 Pod 這類物件或是讀取 Pod 日誌。</dd>
@@ -72,7 +73,7 @@ RBAC 角色所允許的範例動作是建立 Pod 這類物件或是讀取 Pod �
 基礎架構角色所允許的範例動作將會檢視叢集工作者節點機器的詳細資料，或編輯網路及儲存空間資源。</dd>
 <dt>Cloud Foundry</dt>
 <dd>無法使用 {{site.data.keyword.Bluemix_notm}} IAM 來管理所有服務。如果您是使用其中一個服務，則可以繼續使用 Cloud Foundry 使用者角色來控制對這些服務的存取。Cloud Foundry 角色會授與對帳戶內組織及空間的存取權。若要查看 {{site.data.keyword.Bluemix_notm}} 中的 Cloud Foundry 型服務清單，請執行 <code>ibmcloud service list</code>。</br></br>
-Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務實例，或是將 Cloud Foundry 服務實例連結至叢集。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的可用[組織和空間角色](/docs/iam?topic=iam-cfaccess)或[管理 Cloud Foundry 存取](/docs/iam?topic=iam-mngcf)的步驟。</dd>
+Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務實例，或是將 Cloud Foundry 服務實例連結至叢集。若要進一步瞭解，請參閱 {{site.data.keyword.Bluemix_notm}} IAM 文件中的可用[組織和空間角色](/docs/iam?topic=iam-cfaccess)或[管理 Cloud Foundry 存取權](/docs/iam?topic=iam-mngcf)的步驟。</dd>
 </dl>
 
 ### 在 {{site.data.keyword.Bluemix_notm}} IAM 中將存取角色指派給個別使用者或使用者群組
@@ -94,13 +95,13 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
 您也必須指定使用者是否有權存取資源群組中的某個叢集、資源群組中的所有叢集，或您帳戶中所有資源群組的所有叢集。
 
-### 限定使用者存取叢集實例、名稱空間或資源群組
+### 將使用者存取權限定為叢集實例、名稱空間或資源群組
 {: #resource_groups}
 
-在 {{site.data.keyword.Bluemix_notm}} IAM 中，您可以將使用者存取角色指派給資源實例、Kubernetes 名稱空間或資源群組。
+在 {{site.data.keyword.Bluemix_notm}} IAM 中，您可以指派使用者對於資源實例、Kubernetes 名稱空間或資源群組的存取角色。
 {: shortdesc}
 
-當您建立 {{site.data.keyword.Bluemix_notm}} 帳戶時，會自動建立 default 資源群組。如果您在建立資源時未指定資源群組，則資源實例（叢集）屬於 default 資源群組。在 {{site.data.keyword.Bluemix_notm}} IAM 中，Kubernetes 名稱空間是資源實例（叢集）的資源類型。如果您要在帳戶中新增資源群組，請參閱[設定帳戶的最佳作法](/docs/account?topic=account-account_setup)及[設定資源群組](/docs/resources?topic=resources-bp_resourcegroups#setuprgs)。
+當您建立 {{site.data.keyword.Bluemix_notm}} 帳戶時，會自動建立 default 資源群組。如果您在建立資源時未指定資源群組，則資源實例（叢集）屬於 default 資源群組。在 {{site.data.keyword.Bluemix_notm}} IAM 中，Kubernetes 名稱空間是類型為資源實例（叢集）的資源。如果您要在帳戶中新增資源群組，請參閱[設定帳戶的最佳作法](/docs/account?topic=account-account_setup)及[設定資源群組](/docs/resources?topic=resources-bp_resourcegroups#setuprgs)。
 
 <dl>
 <dt>資源實例</dt>
@@ -110,13 +111,13 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
   <li>服務地區內的所有實例（例如 {{site.data.keyword.containerlong_notm}} 之**美國南部**地區中的所有叢集）。</li>
   <li>個別實例（例如某個叢集）。</li></ul></dd>
 <dt>Kubernetes 名稱空間</dt>
-  <dd><p>作為 {{site.data.keyword.Bluemix_notm}} IAM 中叢集資源實例的一部分，您可以將具有服務存取角色的使用者指派給叢集內的 Kubernetes 名稱空間。如果您將服務角色範圍限定為名稱空間，則無法將原則套用至資源群組或同時指派一個平台角色。</p>
-  <p>當您指派對名稱空間的存取權時，原則會套用至您授權之所有叢集中的所有現行及未來的名稱空間實例。例如，假設您想要隸屬於 `dev` 群組的使用者，能夠針對 AP North 中您所有叢集裡的 `test` 名稱空間，部署其中的 Kubernetes 資源。如果您針對 `default` 資源群組內 AP North 地區中的所有叢集，將用於叢集中 Kubernetes 名稱空間測試的**撰寫者**服務存取角色，指派給 `dev` 存取群組，則 `dev` 群組可以在 `default` 資源群組中，存取目前擁有或最後會擁有測試名稱空間之任何 AP North 叢集裡的 `test` 名稱空間。</p>
-  <p class="important">您無法在資源群組層次中指派名稱空間範圍的服務存取角色，或同時將它們指派為平台角色。</p></dd>
+  <dd><p>作為 {{site.data.keyword.Bluemix_notm}} IAM 中叢集資源實例的一部分，您可以將具有服務存取角色的使用者指派給叢集內的 Kubernetes 名稱空間。</p>
+  <p>當您指派對名稱空間的存取權時，原則會套用至您授權之所有叢集裡的所有現行及未來的名稱空間實例。例如，假設您想要隸屬於 `dev` 群組的使用者，能夠針對 AP North 中您所有叢集裡的 `test` 名稱空間，部署其中的 Kubernetes 資源。如果您針對 `default` 資源群組內 AP North 地區中的所有叢集，將用於叢集裡 Kubernetes 名稱空間測試的**撰寫者**服務存取角色，指派給 `dev` 存取群組，則 `dev` 群組可以在 `default` 資源群組中，存取目前擁有或最後會擁有測試名稱空間之任何 AP North 叢集裡的 `test` 名稱空間。</p>
+  <p class="important">如果您將服務角色範圍限定為名稱空間，則無法將原則套用至資源群組或同時指派一個平台角色。</p></dd>
 <dt>資源群組</dt>
   <dd><p>您可以將帳戶資源組織為可自訂分組，讓您可以一次快速地指派個別使用者或使用者群組對多個資源的存取權。資源群組可以協助操作員及管理者過濾資源，以檢視其現行用量、問題疑難排解以及管理團隊。</p>
-  <p class="important">只能在一個資源群組中建立一個叢集，之後就無法進行變更。如果您在錯誤資源群組中建立叢集，則必須刪除叢集，然後在正確的資源群組中予以重建。此外，如果您需要使用 `ibmcloud ks cluster-service-bind` [指令](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind)來進行[與 {{site.data.keyword.Bluemix_notm}} 服務的整合](/docs/containers?topic=containers-service-binding#bind-services)，則該服務必須與叢集位於相同的資源群組中。未使用 {{site.data.keyword.registrylong_notm}} 這類資源群組或不需要 {{site.data.keyword.la_full_notm}} 這類服務連結的服務都會運作，即使叢集位於不同的資源群組中。</p>
-  <p>如果您計劃使用[度量值的 {{site.data.keyword.monitoringlong_notm}}](/docs/containers?topic=containers-health#view_metrics)，請考量提供叢集的名稱，而該名稱在帳戶的所有資源群組和地區中必須是唯一的，以避免發生度量值命名衝突。您無法重新命名叢集。</p>
+  <p class="important">只能在一個資源群組中建立一個叢集，之後就無法進行變更。如果您在錯誤的資源群組中建立叢集，則必須刪除叢集，然後在正確的資源群組中予以重建。此外，如果您需要使用 `ibmcloud ks cluster-service-bind` [指令](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)來進行[與 {{site.data.keyword.Bluemix_notm}} 服務的整合](/docs/containers?topic=containers-service-binding#bind-services)，則該服務必須與叢集位於相同的資源群組中。未使用 {{site.data.keyword.registrylong_notm}} 這類資源群組或不需要 {{site.data.keyword.la_full_notm}} 這類服務連結的服務都會運作，即使叢集位於不同的資源群組中。</p>
+  <p>如果您計劃使用 [{{site.data.keyword.monitoringlong_notm}} 取得度量值](/docs/containers?topic=containers-health#view_metrics)，請考量提供叢集的名稱，而該名稱在帳戶的所有資源群組和地區中必須是唯一的，以避免發生度量值命名衝突。您無法重新命名叢集。</p>
   <p>在下列情境中，您可以將資源群組的存取角色指派給使用者。請注意，與資源實例不同，您無法授與資源群組內個別實例的存取權。</p>
   <ul><li>資源群組中的所有 {{site.data.keyword.Bluemix_notm}} IAM 服務（包括 {{site.data.keyword.containerlong_notm}} 中的所有叢集，以及 {{site.data.keyword.registrylong_notm}} 中的映像檔）。</li>
   <li>資源群組中服務內的所有實例（例如 {{site.data.keyword.containerlong_notm}} 中的所有叢集）。</li>
@@ -137,7 +138,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 1. 針對您要建立叢集的所有地區及資源群組，[設定 API 金鑰](#api_key)。
 2. 邀請使用者加入您的帳戶，並針對 {{site.data.keyword.containerlong_notm}} [指派其 {{site.data.keyword.Bluemix_notm}} IAM 角色](#platform)。
 3. 若要容許使用者將服務連結至叢集，或檢視從叢集記載配置轉遞的日誌，請針對已部署服務或日誌收集所在的組織及空間，[將 Cloud Foundry 角色授與使用者](/docs/iam?topic=iam-mngcf)。
-4. 如果您使用 Kubernetes 名稱空間來隔離叢集內的資源，透過[將名稱空間的 {{site.data.keyword.Bluemix_notm}} IAM 服務角色指派給使用者](#platform)，便可授與對名稱空間的存取權。
+4. 如果您使用 Kubernetes 名稱空間來隔離叢集內的資源，則透過[將名稱空間的 {{site.data.keyword.Bluemix_notm}} IAM 服務角色指派給使用者](#platform)，便可授與對名稱空間的存取權。
 5. 對於任何自動化工具（例如在 CI/CD 管線中），設定服務帳戶，以及[將 Kubernetes RBAC 許可權指派給服務帳戶](#rbac)。
 6. 如需其他進階配置以控制 Pod 層次對叢集資源的存取權，請參閱[配置 Pod 安全](/docs/containers?topic=containers-psp)。
 
@@ -152,7 +153,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 ## 設定 API 金鑰以啟用存取基礎架構組合
 {: #api_key}
 
-若要順利佈建及使用叢集，您必須確定已正確設定 {{site.data.keyword.Bluemix_notm}} 帳戶，可存取 IBM Cloud 基礎架構 (SoftLayer) 組合。
+若要順利佈建和使用叢集，必須確保 {{site.data.keyword.Bluemix_notm}} 帳戶已正確設定為存取叢集所在的每個資源群組和地區中的 IBM Cloud 基礎架構 (SoftLayer) 組合。
 {: shortdesc}
 
 **大部分情況**：您的 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶已有權存取 IBM Cloud 基礎架構 (SoftLayer) 組合。若要設定 {{site.data.keyword.containerlong_notm}} 來存取該組合，**帳戶擁有者**必須設定地區及資源群組的 API 金鑰。
@@ -163,25 +164,25 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     ```
     {: pre}
 
-2. 將您要設定 API 金鑰的資源群組設為目標。如果您未將目標設為資源群組，則會針對 default 資源群組設定 API 金鑰。
+2. 將您要設定 API 金鑰的資源群組設為目標。如果您未將目標設為資源群組，則會針對 default 資源群組設定 API 金鑰。若要列出可用的資源群組，請執行 `ibmcloud resource groups`。
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
 
-4. 設定地區及資源群組的 API 金鑰。
+3. 設定地區及資源群組的 API 金鑰。
     ```
-    ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. 驗證已設定 API 金鑰。
+4. 驗證已設定 API 金鑰。
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
-    ```
+        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ```
     {: pre}
 
-6. 針對您要建立叢集的每個地區及資源群組，重複該步驟。
+5. 針對您要建立叢集的每個地區及資源群組，重複該步驟。
 
 **替代選項及相關資訊**：如需存取 IBM Cloud 基礎架構 (SoftLayer) 組合的不同方式，請參閱下列各節。
 * 如果不確定您的帳戶是否已可存取 IBM Cloud 基礎架構 (SoftLayer) 組合，請參閱[瞭解 IBM Cloud 基礎架構 (SoftLayer) 組合存取權](#understand_infra)。
@@ -216,7 +217,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     </tr>
     <tr>
       <td>**訂閱帳戶**未設定對 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。</td>
-      <td><p><strong>選項 1：</strong>[建立新的隨收隨付制帳戶](/docs/account?topic=account-accounts#paygo)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。</p><p>如果您要繼續使用「訂閱」帳戶，則可以使用新的「隨收隨付制」帳戶在 IBM Cloud 基礎架構 (SoftLayer) 中產生 API 金鑰。然後，您必須手動設定「訂閱」帳戶的 IBM Cloud 基礎架構 (SoftLayer) API 金鑰。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p><p><strong>選項 2：</strong>如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證。</p><p class="note">當您手動鏈結至 IBM Cloud 基礎架構 (SoftLayer) 帳戶時，會將認證用於您 {{site.data.keyword.Bluemix_notm}} 帳戶中的每個 IBM Cloud 基礎架構 (SoftLayer) 特定動作。您必須確定所設定的 API 金鑰具有[足夠的基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，讓使用者可以建立及使用叢集。</p></td>
+      <td><p><strong>選項 1：</strong>[建立新的隨收隨付制帳戶](/docs/account?topic=account-accounts#paygo)，其已設定為具有 IBM Cloud 基礎架構 (SoftLayer) 組合的存取權。當您選擇此選項時，會有兩個不同的 {{site.data.keyword.Bluemix_notm}} 帳戶及計費。</p><p>如果您要繼續使用「訂閱」帳戶，則可以使用新的「隨收隨付制」帳戶在 IBM Cloud 基礎架構 (SoftLayer) 中產生 API 金鑰。然後，您必須手動設定「訂閱」帳戶的 IBM Cloud 基礎架構 (SoftLayer) API 金鑰。請記住，IBM Cloud 基礎架構 (SoftLayer) 資源是透過新的「隨收隨付制」帳戶計費。</p><p><strong>選項 2：</strong>如果您已有想要使用的現有 IBM Cloud 基礎架構 (SoftLayer) 帳戶，則可以針對 {{site.data.keyword.Bluemix_notm}} 帳戶手動設定 IBM Cloud 基礎架構 (SoftLayer) 認證。</p><p class="note">當您手動鏈結至 IBM Cloud 基礎架構 (SoftLayer) 帳戶時，會將認證用於您 {{site.data.keyword.Bluemix_notm}} 帳戶中的每個 IBM Cloud 基礎架構 (SoftLayer) 特定動作。您必須確定所設定的 API 金鑰具有[足夠的基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，讓使用者可以建立及使用叢集。</p></td>
     </tr>
     <tr>
       <td>**IBM Cloud 基礎架構 (SoftLayer) 帳戶**，無 {{site.data.keyword.Bluemix_notm}} 帳戶</td>
@@ -266,24 +267,24 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 ### 確保 API 金鑰或基礎架構認證擁有者具有正確許可權
 {: #owner_permissions}
 
-為了確保可以在叢集裡順利完成所有基礎架構相關動作，您要針對 API 金鑰設定其認證的使用者必須具有適當的許可權。
+為了確保可以在叢集裡順利完成所有基礎架構相關動作，您若要針對 API 金鑰設定其認證的使用者必須具有適當的許可權。
 {: shortdesc}
 
 1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。
 
 2. 為了確保可以順利執行所有帳戶相關動作，請驗證使用者具有正確的 {{site.data.keyword.Bluemix_notm}} IAM 平台角色。
-    1. 從功能表列中，選取**管理 > 存取權 (IAM)**，然後按一下**使用者**頁面。
+    1. 從功能表列，選取**管理 > 存取權 (IAM)**，然後按一下**使用者**頁面。
     2. 按一下您要設定 API 金鑰的使用者名稱，或您要針對 API 金鑰設定其認證的使用者名稱，然後按一下**存取原則**標籤。
     3. 如果使用者沒有所有地區中所有 {{site.data.keyword.containerlong_notm}} 叢集的**管理者**平台角色，請[將該平台角色指派給使用者](#platform)。
     4. 如果使用者沒有您要設定 API 金鑰之資源群組的至少**檢視者**平台角色，請[將該資源群組角色指派給使用者](#platform)。
     5. 若要建立叢集，使用者還需要帳戶層次中 {{site.data.keyword.registrylong_notm}} 的**管理者**平台角色。請不要將 {{site.data.keyword.registryshort_notm}} 的原則限制為資源群組層次。
 
 3. 為了確保可以順利執行叢集裡的所有基礎架構相關動作，請驗證使用者具有正確的基礎架構存取原則。
-    1.  從功能表列中，選取**管理 > 存取權 (IAM)**。
+    1.  從功能表列，選取**管理 > 存取權 (IAM)**。
     2.  選取**使用者**標籤，按一下使用者。
     3. 在 **API 金鑰**窗格中，驗證使用者具有**標準基礎架構 API 金鑰**，或按一下**建立 IBM Cloud API 金鑰**。如需相關資訊，請參閱[管理標準基礎架構 API 金鑰](/docs/iam?topic=iam-classic_keys#classic_keys)。
     4. 按一下**標準基礎架構**標籤，然後按一下**許可權**標籤。
-    5. 如果使用者未勾選每個種類，您可以使用**許可權集**下拉清單，來指派**超級使用者**角色。或者，您可以展開每個種類，並將必要的[基礎架構許可權](/docs/containers?topic=containers-access_reference#infra)提供給使用者。
+    5. 如果使用者未勾選每個種類，您可以使用**許可權集**下拉清單，來指派**超級使用者**角色。或者，您可以展開每個種類，並授與使用者必要的[基礎架構許可權](/docs/containers?topic=containers-access_reference#infra)。
 
 ### 使用預設 {{site.data.keyword.Bluemix_notm}} 隨收隨付制帳戶存取基礎架構組合
 {: #default_account}
@@ -291,14 +292,14 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 如果您有 {{site.data.keyword.Bluemix_notm}}「隨收隨付制」帳戶，依預設，可以存取鏈結的 IBM Cloud 基礎架構 (SoftLayer) 組合。API 金鑰用來從此 IBM Cloud 基礎架構 (SoftLayer) 組合訂購基礎架構資源，例如新的工作者節點或 VLAN。
 {: shortdec}
 
-您可以執行 [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info) 來尋找現行 API 金鑰擁有者。如果您發現需要更新針對某地區而儲存的 API 金鑰，則可以執行 [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) 指令來達成此目的。這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
+您可以執行 [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info) 來尋找現行 API 金鑰擁有者。如果發現需要更新為某個地區儲存的 API 金鑰，則可以透過執行 [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) 指令來執行此操作。這個指令需要 {{site.data.keyword.containerlong_notm}} 管理存取原則，它會將執行這個指令的使用者的 API 金鑰儲存在帳戶中。
 
 請務必重設金鑰，並瞭解這對應用程式的影響。金鑰用於數個不同的地方，如果對其進行不需要的變更，則可能導致岔斷變更。
 {: note}
 
 **開始之前**：
 - 如果帳戶擁有者未設定 API 金鑰，請[確定設定 API 金鑰的使用者具有正確許可權](#owner_permissions)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要設定 API 金鑰來存取 IBM Cloud 基礎架構 (SoftLayer) 組合，請執行下列動作：
 
@@ -311,8 +312,8 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
         {:pre}
     4.  設定地區的使用者 API 金鑰。
         ```
-        ibmcloud ks api-key-reset
-        ```
+    ibmcloud ks api-key-reset --region <region>
+    ```
         {: pre}    
     5.  驗證已設定 API 金鑰。
         ```
@@ -325,15 +326,15 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 ### 存取不同的 IBM Cloud 基礎架構 (SoftLayer) 帳戶
 {: #credentials}
 
-建議您使用已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶，而不是使用預設已鏈結的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購地區內叢集的基礎架構。您可以使用 [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) 指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。使用 IBM Cloud 基礎架構 (SoftLayer) 認證，而不是使用針對地區所儲存的預設「隨收隨付制」帳戶認證。
+建議您使用已具有的不同 IBM Cloud 基礎架構 (SoftLayer) 帳戶，而不是使用預設已鏈結的 IBM Cloud 基礎架構 (SoftLayer) 帳戶來訂購地區內叢集的基礎架構。您可以使用 [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) 指令，將此基礎架構帳戶鏈結至 {{site.data.keyword.Bluemix_notm}} 帳戶。使用 IBM Cloud 基礎架構 (SoftLayer) 認證，而不是使用針對地區所儲存的預設「隨收隨付制」帳戶認證。
 {: shortdesc}
 
-在您的階段作業結束之後，會持續保存 `ibmcloud ks credential-set` 指令所設定的 IBM Cloud 基礎架構 (SoftLayer) 認證。如果您使用 [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) 指令移除手動設定的 IBM Cloud 基礎架構 (SoftLayer) 認證，則會使用預設「隨收隨付制」帳戶認證。不過，基礎架構帳戶認證中的這項變更可能會導致[孤立叢集](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)。
+在您的階段作業結束之後，會持續保存 `ibmcloud ks credential-set` 指令所設定的 IBM Cloud 基礎架構 (SoftLayer) 認證。如果使用 [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) 指令移除手動設定的 IBM Cloud 基礎架構 (SoftLayer) 認證，則將使用預設隨收隨付制帳戶認證。不過，基礎架構帳戶認證中的這項變更可能會導致[孤立叢集](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)。
 {: important}
 
 **開始之前**：
 - 如果您未使用帳戶擁有者的認證，請[確定您要針對 API 金鑰設定其認證的使用者具有正確許可權](#owner_permissions)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要設定基礎架構帳戶認證來存取 IBM Cloud 基礎架構 (SoftLayer) 組合，請執行下列動作：
 
@@ -349,13 +350,13 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
     2.  設定要使用的基礎架構 API 認證。
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
     3. 驗證已設定正確的認證。
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         輸出範例：
         ```
@@ -392,7 +393,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
 開始之前，請驗證您已獲指派所使用之 {{site.data.keyword.Bluemix_notm}} 帳戶的**管理者**平台角色。
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列，選取**管理 > 存取權 (IAM)**。
 
 2. 個別選取使用者，或建立使用者的存取群組。
     * **若要將角色指派給個別使用者**，請執行下列動作：
@@ -412,34 +413,34 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
     1. 按一下**指派資源群組內的存取權**。
     2. 選取資源群組名稱。
     3. 在**指派對資源群組的存取權**下拉清單中，選擇要授與使用者對資源群組本身（而非群組內的資源）的許可權層次。例如，若要讓使用者看到他們可以在多個資源群組中存取的叢集，請針對每個資源群組，提供**檢視者**角色給他們。
-    4. 從**服務**清單中，選取 **{{site.data.keyword.containershort_notm}}**。
-    5. 從**地區**清單中，選取一個或所有地區。
+    4. 從**服務**清單，選取 **{{site.data.keyword.containershort_notm}}**。
+    5. 從**地區**清單，選取一個或所有地區。
     6. 選取原則的角色。
-       * **平台存取角色**：授與對 {{site.data.keyword.containerlong_notm}} 的存取權，以便使用者可以管理基礎架構資源，例如，叢集、工作者節點、工作者節點儲存區、Ingress 應用程式負載平衡器及儲存空間。若要尋找每個角色的支援動作清單，請參閱[平台角色參考頁面](/docs/containers?topic=containers-access_reference#iam_platform)。
-       * **服務存取角色**：從叢集內存取時，授權對 Kubernetes 的存取權，以便使用者可以管理 Kubernetes 資源，例如，Pod、部署、服務及名稱空間。若要尋找每個角色的支援動作清單，請參閱[服務角色參考頁面](/docs/containers?topic=containers-access_reference#service)。<p class="note">如果您在資源群組層次指派角色，則無法將服務存取角色範圍限定為名稱空間。請改為指派對資源實例的存取權。此外，不要同時指派平台角色與服務角色。</p>
+       * **平台存取角色**：授與對 {{site.data.keyword.containerlong_notm}} 的存取權，以便使用者可以管理基礎架構資源，例如叢集、工作者節點、工作者節點儲存區、Ingress 應用程式負載平衡器及儲存空間。若要尋找每個角色的支援動作清單，請參閱[平台角色參考頁面](/docs/containers?topic=containers-access_reference#iam_platform)。
+       * **服務存取角色**：從叢集內存取時，授與對 Kubernetes 的存取權，以便使用者可以管理 Kubernetes 資源，例如 Pod、部署、服務及名稱空間。若要尋找每個角色的支援動作清單，請參閱[服務角色參考頁面](/docs/containers?topic=containers-access_reference#service)。<p class="note">如果您在資源群組層次指派角色，則無法將服務存取角色範圍限定為名稱空間。請改為指派對資源實例的存取權。此外，不要同時指派平台角色與服務角色。</p>
     7. 按一下**指派**。
-    8. **選用**：如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，他們才可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及列出 CLI 中的叢集與其他基礎架構資源，請重複這些步驟，提供使用者平台**檢視者**角色。
+    8. **選用**：如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，他們才可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及從 CLI 列出叢集與其他基礎架構資源，請重複這些步驟，將平台**檢視者**角色提供給使用者。
   * **對於資源群組內或跨資源群組的資源實例**：
     1. 按一下**指派對資源的存取權**。
-    2. 從**服務**清單中，選取 **{{site.data.keyword.containershort_notm}}**。
-    3. 從**地區**清單中，選取一個或所有地區。
-    4. 從**叢集**清單中，選取一個或所有叢集實例。
-    5. 在**名稱空間**欄位中，輸入您要限定_服務存取_ 原則範圍的 Kubernetes 名稱空間名稱。請注意，您無法將_平台存取_ 原則範圍限定為名稱空間。原則會針對您先前選取的所有叢集（例如，某地區內的所有叢集），授與對那些叢集中的名稱空間的存取權。如果要授與對所有名稱空間的存取權，您可以將名稱空間欄位保留空白。
+    2. 從**服務**清單，選取 **{{site.data.keyword.containershort_notm}}**。
+    3. 從**地區**清單，選取一個或所有地區。
+    4. 從**叢集**清單，選取一個或所有叢集實例。
+    5. 在**名稱空間**欄位中，輸入您要限定_服務存取_ 原則範圍的 Kubernetes 名稱空間名稱。請注意，您無法將_平台存取_ 原則範圍限定為名稱空間。原則會針對您先前選取的所有叢集（例如，某地區內的所有叢集），授與對那些叢集裡之名稱空間的存取權。如果要授與對所有名稱空間的存取權，您可以將名稱空間欄位保留空白。
     6. 選取原則的角色。
-       *  **平台存取角色**：授與對 {{site.data.keyword.containerlong_notm}} 的存取權，以便使用者可以管理基礎架構資源，例如，叢集、工作者節點、工作者節點儲存區、Ingress 應用程式負載平衡器及儲存空間。若要尋找每個角色的支援動作清單，請參閱[平台角色參考頁面](/docs/containers?topic=containers-access_reference#iam_platform)。
+       *  **平台存取角色**：授與對 {{site.data.keyword.containerlong_notm}} 的存取權，以便使用者可以管理基礎架構資源，例如叢集、工作者節點、工作者節點儲存區、Ingress 應用程式負載平衡器及儲存空間。若要尋找每個角色的支援動作清單，請參閱[平台角色參考頁面](/docs/containers?topic=containers-access_reference#iam_platform)。
           * 如果您將只針對某個叢集的**管理者**平台角色指派給使用者，則也必須將資源群組中該地區內之所有叢集的**檢視者**平台角色指派給使用者。
           * 如果您將原則範圍限定為名稱空間，則無法同時指派平台角色。如果您也想要使用者具備平台角色，請重複這些步驟，但將名稱空間欄位保留空白，並僅指派一個平台角色（請勿重新指派服務存取角色）。
-       * **服務存取角色**：從叢集內存取時，授權對 Kubernetes 的存取權，以便使用者可以管理 Kubernetes 資源，例如，Pod、部署、服務及名稱空間。若要尋找每個角色的支援動作清單，請參閱[服務角色參考頁面](/docs/containers?topic=containers-access_reference#service)。
+       * **服務存取角色**：從叢集內存取時，授與對 Kubernetes 的存取權，以便使用者可以管理 Kubernetes 資源，例如 Pod、部署、服務及名稱空間。若要尋找每個角色的支援動作清單，請參閱[服務角色參考頁面](/docs/containers?topic=containers-access_reference#service)。
     7. 按一下**指派**。
-    8. **選用**：如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及列出 CLI 中的叢集與其他基礎架構資源，請重複這些步驟，提供使用者平台**檢視者**角色。
+    8. **選用**：如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您想要這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及從 CLI 列出叢集與其他基礎架構資源，請重複這些步驟，將平台**檢視者**角色提供給使用者。
 
 4.  選用項目：如果您希望使用者能夠使用非 default 資源群組中的叢集，則這些使用者需要額外存取權以存取該叢集所在的資源群組。您至少可以將資源群組的**檢視者**平台角色指派給這些使用者（如果您先前未指派的話）。
     1.  按一下**指派資源群組內的存取權**。
     2.  選取資源群組名稱。
-    3.  從**指派對資源群組的存取權**清單中，選取**檢視者**角色。此角色允許使用者存取資源群組本身，但不能存取群組內的資源。
+    3.  從**指派對資源群組的存取權**清單，選取**檢視者**角色。此角色允許使用者存取資源群組本身，但不能存取群組內的資源。
     4.  按一下**指派**。
 
-5.  對於要新增的使用者，RBAC 許可權必須同步至叢集。獲授權存取權的使用者必須[啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_gui)，才能起始同步。RBAC 許可權需要經過快取，因此同步可能不會是即時的。
+5.  對於要新增的使用者，RBAC 許可權必須同步至叢集。獲授與存取權的使用者必須[啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_gui)，才能起始同步。RBAC 許可權會被快取，因此同步可能不會即時發生。
 
 ### 使用 CLI 指派 {{site.data.keyword.Bluemix_notm}} IAM 角色
 {: #add_users_cli}
@@ -451,7 +452,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
 - 驗證您已獲指派所使用之 {{site.data.keyword.Bluemix_notm}} 帳戶的 `cluster-admin` {{site.data.keyword.Bluemix_notm}} IAM 平台角色。
 - 驗證已將使用者新增至帳戶。如果未將使用者新增至帳戶，則請執行 `ibmcloud account user-invite <user@email.com>`，邀請使用者加入帳戶。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - 決定是否要指派[平台或服務存取](/docs/containers?topic=containers-users#access_policies)角色。CLI 步驟會根據您要指派的存取角色而有所不同：
   * [從 CLI 指派平台角色](#add_users_cli_platform)
   * [從 CLI 指派服務角色](#add_users_cli_service)
@@ -461,7 +462,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
 
 1.  建立 {{site.data.keyword.Bluemix_notm}} IAM 存取原則來設定 {{site.data.keyword.containerlong_notm}} 的許可權 (**`--service-name containers-kubernetes`**)。根據您要指派存取權的內容來限定存取原則的範圍。
 
-    <table summary="此表格說明存取區域，您可以使用 CLI 旗標來限定原則的範圍。列從左到右閱讀，第一欄為範圍，第二欄為 CLI 旗標，第三欄為說明。">
+    <table summary="此表格說明存取區域，您可以使用 CLI 旗標來將原則的範圍限定為這些區域。列從左到右閱讀，第一欄為範圍，第二欄為 CLI 旗標，第三欄為說明。">
     <caption>限定存取原則範圍的選項</caption>
       <thead>
       <th>範圍</th>
@@ -478,7 +479,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
         <tr>
         <td>資源群組</td>
         <td>`--resource-group-name`</td>
-        <td>您可以針對資源群組來授權原則。如果您未指定資源群組或特定的叢集 ID，則該原則會套用至所有資源群組的所有叢集。若要列出可用的資源群組，請執行 `ibmcloud resource groups`。</td>
+        <td>您可以針對資源群組來授與原則。如果您未指定資源群組或特定的叢集 ID，則該原則適用於所有資源群組的所有叢集。若要列出可用的資源群組，請執行 `ibmcloud resource groups`。</td>
         </tr>
         <tr>
         <td>叢集</td>
@@ -488,7 +489,7 @@ Cloud Foundry 角色所允許的範例動作是建立新的 Cloud Foundry 服務
         <tr>
         <td>地區</td>
         <td>`--region`</td>
-        <td>您可以限定原則的範圍，以套用至特定地區內的叢集。如果您未指定地區或特定的叢集 ID，則該原則會套用至所有地區的所有叢集。若要列出可用的地區，請執行 `ibmcloud ks regions`，並使用**地區別名**直欄中的值。</td>
+        <td>您可以限定原則的範圍，以套用至特定地區內的叢集。如果您未指定地區或特定的叢集 ID，則該原則會適用於所有地區的所有叢集。若要列出可用的地區，請執行 `ibmcloud ks regions`，並使用**地區別名**直欄中的值。</td>
         </tr>
         <tr>
         <td>角色</td>
@@ -567,7 +568,7 @@ ibmcloud account show
         ```
         {: pre}
 
-2.  建立 `policy.json` 檔案，以將服務存取角色範圍設為叢集中的 Kubernetes 名稱空間。
+2.  建立 `policy.json` 檔案，以將服務存取角色範圍設為叢集裡的 Kubernetes 名稱空間。
 
     ```
     {
@@ -637,7 +638,7 @@ ibmcloud account show
         <ul><li>**對於 `"accountId"`**：輸入您先前擷取的 {{site.data.keyword.Bluemix_notm}} 帳戶 ID</li>
         <li>**對於 `"serviceName"`**：保留給定的服務名稱：`containers-kubernetes`。</li>
         <li>**對於 `"serviceInstance"`**：輸入叢集 ID。請以逗點區隔多個叢集。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。</li>
-        <li>**對於 `"namespace"`**：輸入叢集中的 Kubernetes 名稱空間。若要列出叢集中的名稱空間，請執行 `kubectl get namespaces`。<p class="note">若要將存取原則指派給叢集中的所有名稱空間，請移除整個 `{"name": "namespace", "value": "<namespace_name"}` 項目。</p></li></td>
+        <li>**對於 `"namespace"`**：輸入叢集裡的 Kubernetes 名稱空間。若要列出叢集裡的名稱空間，請執行 `kubectl get namespaces`。<p class="note">若要將存取原則指派給叢集裡的所有名稱空間，請移除整個 `{"name": "namespace", "value": "<namespace_name"}` 項目。</p></li></td>
         </tr>
       </tbody>
       </table>
@@ -654,37 +655,37 @@ ibmcloud account show
         ```
         {: pre}
 
-4.  如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您希望這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及列出 CLI 中的叢集與其他基礎架構資源，請[將平台**檢視者**角色提供給使用者](#add_users_cli_platform)。
+4.  如果您只將服務角色指派給使用者，則必須為使用者提供叢集名稱和 ID，以便他們可以執行 `ibmcloud ks cluster-config` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)，然後[從 CLI 啟動 Kubernetes 儀表板](/docs/containers?topic=containers-app#db_cli)，或者與 Kubernetes API 互動。如果您希望這些使用者仍然可以存取 {{site.data.keyword.containerlong_notm}} 叢集主控台，以及從 CLI 列出叢集與其他基礎架構資源，請[將平台**檢視者**角色提供給使用者](#add_users_cli_platform)。
 
-5.  若要讓變更生效，獲授權存取權的使用者必須重新整理叢集配置。除非使用者個別重新整理叢集配置，否則不會將使用者新增至角色連結，即使是同時新增多個使用者。如果使用者具有較高的許可權，也不會將使用者新增至角色連結。例如，如果使用者具有叢集角色，且位於叢集角色連結中，則也不會將他們新增至每個個別名稱空間角色連結。
+5.  若要讓變更生效，獲授與存取權的使用者必須重新整理叢集配置。除非使用者個別重新整理叢集配置，否則不會將使用者新增至角色連結，即使是同時新增多個使用者。如果使用者具有較高的許可權，也不會將使用者新增至角色連結。例如，如果使用者具有叢集角色，且位於叢集角色連結中，則也不會將他們新增至每個個別名稱空間角色連結。
     ```
     ibmcloud ks cluster-config --cluster <cluster_name_or_id>
     ```
     {: pre}
 
 6.  **選用**：驗證使用者已新增至對應的 [RBAC 角色連結或叢集角色連結](#role-binding)。請注意，您必須是叢集管理者（所有名稱空間中的**管理員**服務角色），才能檢查角色連結及叢集角色連結。請檢查角色的角色連結或叢集角色連結。
-    *   Reader：
+    *   讀者：
         ```
         kubectl get rolebinding ibm-view -o yaml -n <namespace>
         ```
         {: pre}
-    *   Writer：
+    *   撰寫者：
         ```
         kubectl get rolebinding ibm-edit -o yaml -n <namespace>
         ```
         {: pre}
-    *   Manager，範圍限定為名稱空間：
+    *   管理員，範圍限定為名稱空間：
         ```
         kubectl get rolebinding ibm-operate -o yaml -n <namespace>
         ```
         {: pre}
-    *   Manager，所有名稱空間：
+    *   管理員，所有名稱空間：
         ```
         kubectl get clusterrolebinding ibm-admin -o yaml
         ```
         {: pre}
 
-    **輸出範例**：如果您將**讀者**服務角色指派給使用者 `user@email.com` 及存取群組 `team1`，然後執行 `kubectl get rolebinding ibm-view -o yaml -n default`。
+    **輸出範例**：如果為使用者 `user@email.com` 和存取群組 `team1` 指派了**讀者**服務角色並執行了 `kubectl get rolebinding ibm-view -o yaml -n default`，您將看到下列輸出範例。
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -716,30 +717,30 @@ ibmcloud account show
 ## 指派 RBAC 許可權
 {: #role-binding}
 
-使用 RBAC 角色，來定義使用者可以採取的動作，以在您的叢集中使用 Kubernetes 資源。
+使用 RBAC 角色，來定義使用者可以採取的動作，以在您的叢集裡使用 Kubernetes 資源。
 {: shortdesc}
 
 **何謂 RBAC 角色及叢集角色？**</br>
-RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kubernetes 資源互動的許可權。角色限定為特定名稱空間內的資源（例如部署）。叢集角色限定為全叢集資源（例如工作者節點）或可在每個名稱空間中找到的名稱空間範圍資源（例如 Pod）。
+RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kubernetes 資源互動的許可權。角色限定為特定名稱空間內的資源（例如部署）。叢集角色限定為全叢集資源（例如工作者節點）或可在每個名稱空間中尋找的名稱空間範圍資源（例如 Pod）。
 
 **何謂 RBAC 角色連結及叢集角色連結？**</br>
 角色連結會將 RBAC 角色或叢集角色套用至特定的名稱空間。當您使用角色連結來套用角色時，可以將特定名稱空間中特定資源的存取權授與使用者。當您使用角色連結來套用叢集角色時，可以將可在每個名稱空間中找到的名稱空間範圍資源（例如 Pod）的存取權授與使用者，但只限特定名稱空間內。
 
 叢集角色連結會將 RBAC 叢集角色套用至叢集裡的所有名稱空間。當您使用叢集角色連結來套用叢集角色時，可以將全叢集資源（例如工作者節點）或每個名稱空間中名稱空間範圍資源（例如 Pod）的存取權授與使用者。
 
-**這些角色在我的叢集中看起來像什麼？**</br>
+**這些角色在我的叢集裡看起來像什麼？**</br>
 如果您想要使用者能夠與叢集內的 Kubernetes 資源互動，則必須透過 [{{site.data.keyword.Bluemix_notm}} IAM 服務角色](#platform)，將使用者存取權指派給一個以上的名稱空間。獲指派服務角色的每位使用者，都會自動獲指派對應的 RBAC 叢集角色。這些 RBAC 叢集角色已預先定義，並允許使用者與叢集裡的 Kubernetes 資源互動。此外，會建立角色連結以將叢集角色套用至特定的名稱空間，或建立叢集角色連結以將叢集角色套用至所有名稱空間。
 
-若要進一步瞭解每個 RBAC 角色所允許的動作，請查看 [{{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-access_reference#service)參考主題。若要查看每個 RBAC 角色授與個別 Kubernetes 資源的許可權，請查看[每個 RBAC 角色的 Kubernetes 資源許可權](/docs/containers?topic=containers-access_reference#rbac_ref)。
+若要進一步瞭解每個 RBAC 角色所允許的動作，請查看 [{{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-access_reference#service)參考主題。若要查看每個 RBAC 角色授與個別 Kubernetes 資源的許可權，請參閱[每個 RBAC 角色的 Kubernetes 資源許可權](/docs/containers?topic=containers-access_reference#rbac_ref)。
 {: tip}
 
 **我可以建立自訂角色或叢集角色嗎？**
-`view`、`edit`、`admin` 及 `cluster-admin` 叢集角色是預先定義的角色，這些角色是在您將對應的 {{site.data.keyword.Bluemix_notm}} IAM 服務角色指派給使用者時所自動建立的角色。若要授與其他 Kubernetes 許可權，您可以[建立自訂 RBAC 許可權](#rbac)。自訂的 RBAC 角色是另外附加的角色，並不會變更或置換已與服務存取角色一起指派的任何 RBAC 角色。請注意，若要建立自訂 RBAC 許可權，您必須具有 IAM**管理員**服務存取角色，其可提供您 `cluster-admin` Kubernetes RBAC 角色。不過，如果您管理自己的自訂 Kubernetes RBAC 角色，則其他使用者不需要 IAM 服務存取角色。
+`view`、`edit`、`admin` 及 `cluster-admin` 叢集角色是預先定義的角色，這些角色是在您將對應的 {{site.data.keyword.Bluemix_notm}} IAM 服務角色指派給使用者時所自動建立的角色。若要授與其他 Kubernetes 許可權，您可以[建立自訂 RBAC 許可權](#rbac)。自訂 RBAC 角色是另外附加的角色，並不會變更或置換已藉由服務存取角色指派的任何 RBAC 角色。請注意，若要建立自訂 RBAC 許可權，您必須具有 IAM**管理員**服務存取角色，其可提供您 `cluster-admin` Kubernetes RBAC 角色。不過，如果您自行管理自訂 Kubernetes RBAC 角色，則其他使用者不需要 IAM 服務存取角色。
 
-正在製作您自己的自訂 RBAC 原則嗎？請確定不要編輯叢集中現有的 IBM 角色連結，或者以相同的名稱命名新的角色連結。對 IBM 提供的 RBAC 角色連結所做的任何變更都會定期改寫。請改為建立您自己的角色連結。
+正在建立自己的自訂 RBAC 原則嗎？請切勿編輯叢集裡現有的 IBM 角色連結，或者以相同的名稱命名新的角色連結。對 IBM 提供之 RBAC 角色連結所做的任何變更都會定期遭到改寫。請改為建立您自己的角色連結。
 {: tip}
 
-**何時需要使用叢集角色連結以及未關聯至所設定之 {{site.data.keyword.Bluemix_notm}} IAM 許可權的角色連結**
+**何時需要使用叢集角色連結以及未關聯至所設定之 {{site.data.keyword.Bluemix_notm}} IAM 許可權的角色連結？**
 建議您授權誰可以建立及更新您叢集裡的 Pod。使用 [Pod 安全原則](/docs/containers?topic=containers-psp#psp)，您可以使用叢集隨附的現有叢集角色連結，或建立您自己的叢集角色連結。
 
 也建議您將附加程式整合到叢集。例如，當您[在叢集裡設定 Helm](/docs/containers?topic=containers-helm#public_helm_install) 時，必須在 `kube-system` 名稱空間中建立 Tiller 的服務帳戶，以及建立 `tiller-deploy` Pod 的 Kubernetes RBAC 叢集角色連結。
@@ -753,9 +754,9 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 您可以將自訂 RBAC 角色及叢集角色指派給個別使用者、使用者群組（在執行 Kubernetes 1.11 版或更新版本的叢集裡）或服務帳戶。為群組建立連結後，它會影響已新增至該群組或已從該群組移除的任何使用者。當您將使用者新增至群組時，除了您授與他們的任何個別存取權之外，他們還會取得群組的存取權。如果移除他們，則會撤銷其存取權。
 請注意，您無法將服務帳戶新增至存取群組。
 
-如果您要指派在 Pod 中執行之處理程序（例如，持續交付工具鏈）的存取權，則可以使用 [Kubernetes `ServiceAccounts` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。若要遵循指導教學，其示範如何設定 Travis 及 Jenkins 的服務帳戶，以及如何將自訂 RBAC 角色指派給服務帳戶，請參閱部落格文章：[用於自動化系統中的 Kubernetes `ServiceAccounts` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982)。
+如果您要指派對在 Pod 中執行之處理程序（例如，持續交付工具鏈）的存取權，則可以使用 [Kubernetes `ServiceAccounts` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/)。若要遵循指導教學，其示範如何設定 Travis 及 Jenkins 的服務帳戶，以及如何將自訂 RBAC 角色指派給服務帳戶，請參閱部落格文章：[用於自動化系統中的 Kubernetes `ServiceAccounts` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982)。
 
-若要防止岔斷變更，請勿變更預先定義的 `view`、`edit`、`admin` 及 `cluster-admin` 叢集角色。自訂的 RBAC 角色是另外附加的角色，並不會變更或置換已與 {{site.data.keyword.Bluemix_notm}} IAM 服務存取角色一起指派的任何 RBAC 角色。
+若要防止岔斷變更，請勿變更預先定義的 `view`、`edit`、`admin` 及 `cluster-admin` 叢集角色。自訂 RBAC 角色是另外附加的角色，並不會變更或置換藉由 {{site.data.keyword.Bluemix_notm}} IAM 服務存取角色指派的任何 RBAC 角色。
 {: important}
 
 **我要建立角色還是叢集角色？我要使用角色連結還是叢集角色連結套用它？**
@@ -768,7 +769,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 **開始之前**：
 
 - 將 [Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) 的目標設為您的叢集。
-- 確定您具有所有名稱空間的 [**Manager** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+- 確定您具有所有名稱空間的[**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 - 若要指派對個別使用者或存取群組中使用者的存取權，請確定使用者或群組已在 {{site.data.keyword.containerlong_notm}} 服務層次獲指派至少一個 [{{site.data.keyword.Bluemix_notm}} IAM 平台角色](#platform)。
 
 **若要建立自訂 RBAC 許可權**，請執行下列動作：
@@ -908,7 +909,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>對於 `User`：將個別使用者的電子郵件位址附加到下列其中一個 URL。<ul><li>若為執行 Kubernetes 1.11 或更新版本的叢集：<code>IAM#user@email.com</code></li><li>若為執行 Kubernetes 1.10 或更早版本的叢集：<code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>對於 `User`：將個別使用者的電子郵件位址附加到 `IAM#`，如下所示：<code>IAM#user@email.com</code>。</li>
               <li>對於 `Group`：針對執行 Kubernetes 1.11 或更新版本的叢集，指定您帳戶中 [{{site.data.keyword.Bluemix_notm}} IAM 存取群組](/docs/iam?topic=iam-groups#groups)的名稱。</li>
               <li>對於 `ServiceAccount`：指定服務帳戶名稱。</li></ul></td>
             </tr>
@@ -971,6 +972,85 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 
 既然您已建立並連結自訂 Kubernetes RBAC 角色或叢集角色，請對使用者採取後續行動。要求他們測試由於該角色而具有許可權可以完成的動作，例如刪除 Pod。
 
+### 透過聚集叢集角色延伸現有許可權 
+{: #rbac_aggregate}
+
+可以透過聚集或結合叢集角色及其他叢集角色，延伸使用者的現有許可權。為使用者指派 {{site.data.keyword.Bluemix_notm}} 服務角色時，使用者會新增到[對應的 Kubernetes RBAC 叢集角色](/docs/containers?topic=containers-access_reference#service)。但是，您可能希望容許特定使用者執行其他作業。
+{: shortdesc}
+
+例如，具有名稱空間範圍為 `admin` 叢集角色的使用者無法使用 `kubectl top pods` 指令來檢視名稱空間中所有 Pod 的 Pod 度量。您可以聚集叢集角色，以便 `admin` 叢集角色中的使用者有權執行 `top pod` 指令。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)。
+
+**可用於延伸預設叢集角色許可權的常見作業有哪些？**<br>
+請檢閱[每個預設 RBAC 叢集角色允許的作業](/docs/containers?topic=containers-access_reference#rbac_ref)，以瞭解使用者可以執行的作業，然後將允許的作業與您希望使用者能夠執行的作業進行比較。
+
+如果相同叢集角色中的使用者對於相同類型的作業遇到類似下列內容的錯誤，則您可能需要延伸叢集角色以包含此作業。
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**聚集叢集角色**：
+
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  建立叢集角色 YAML 檔案。在 `labels` 區段中，指定要將許可權聚集到的現有叢集角色。下列範例延伸了預先定義的 `admin` 叢集角色，以容許使用者執行 `kubectl top pods`。如需相關範例，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles)。
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>瞭解 YAML 元件</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解 YAML 元件</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>輸入叢集角色的名稱。**不要**使用預先定義的叢集角色名稱：`view`、`edit`、`admin` 和 `cluster-admin`。</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>新增與要聚集到的叢集角色相符合的標籤，格式為 `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"`。預先定義叢集角色的標籤如下所示。<ul>
+          <li>IAM **管理員**服務角色，範圍限定為名稱空間：`rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>IAM **撰寫者**服務角色：`rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>IAM **讀者**服務角色：`rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>指定您要使用者能夠與其互動的 Kubernetes [API 群組 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups)，例如 `"apps"`、`"batch"` 或 `"extensions"`。若要存取位於 REST 路徑 `apiv1` 的核心 API 群組，請將群組保留空白：`[""]`。</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>指定您要授與存取權的 Kubernetes [資源類型 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)，例如 `"daemonset"`、`"deployments"`、`"events"` 或 `"ingresses"`。</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>指定您要使用者能夠執行的[動作類型 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)，例如 `"get"`、`"list"`、`"describe"`、`"create"` 或 `"delete"`。</td>
+        </tr>
+      </tbody>
+    </table>
+2.  在叢集裡建立叢集角色。現在，具有 `admin` 叢集角色的角色連結的任何使用者都具有 `view-pod-metrics` 叢集角色的其他許可權。
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  跟進具有 `admin` 叢集角色的使用者。要求他們[重新整理叢集配置](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)並測試動作，例如 `kubectl top pods`。
+
+
 <br />
 
 
@@ -982,12 +1062,13 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 
 基於法規遵循、安全或計費原因，您可能不想將**超級使用者**基礎架構角色指派給設定 API 金鑰的使用者，或使用 `ibmcloud ks credential-set` 指令設定其認證的使用者。不過，如果此使用者沒有**超級使用者**角色，則基礎架構相關動作（例如建立叢集或重新載入工作者節點）可能會失敗。您必須針對使用者設定特定 IBM Cloud 基礎架構 (SoftLayer) 許可權，而不是使用 {{site.data.keyword.Bluemix_notm}} IAM 平台角色來控制使用者的基礎架構存取權。
 
-如果您有多個叢集，則您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶擁有者需要開啟 VLAN Spanning，不同區域中的節點才能在叢集內通訊。帳戶擁有者也可將**網路 > 管理網路 VLAN Spanning** 許可權指派給使用者，讓使用者可以啟用 VLAN Spanning。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
-{: tip}
+例如，如果帳戶未啟用 VRF，則 IBM Cloud 基礎架構 (SoftLayer) 帳戶擁有者必須開啟 VLAN Spanning。帳戶擁有者也可將**網路 > 管理網路 VLAN Spanning** 許可權指派給使用者，讓使用者可以啟用 VLAN Spanning。如需相關資訊，請參閱[用於跨 VLAN 通訊的 VLAN Spanning](/docs/containers?topic=containers-subnets#basics_segmentation)。
+
+<p class="tip">已使用 `ibmcloud ks credential-set` 指令設定基礎架構認證？您可以透過執行 [`ibmcloud ks infra-permissions-get --region <region>` 指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)來檢查認證是否缺少建議或必要的基礎架構許可權。在輸出中，如果缺少任何建議或必要的許可權，則可以使用此區段中的步驟來指派所需的存取權。</p>
 
 開始之前，請確定您是帳戶擁有者或具有**超級使用者**及所有裝置存取權。您無法將您沒有的存取權授與使用者。
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com)。從功能表列，選取**管理 > 存取權 (IAM)**。
 
 2. 按一下**使用者**頁面，然後按一下您要設定其許可權的使用者名稱。
 
@@ -995,20 +1076,27 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 
 4. 自訂使用者的存取權。使用者需要的許可權取決於他們需要使用的基礎架構資源。您有兩個選項可以指派存取權：
     * 使用**許可權集**下拉清單來指派下列其中一個預先定義的角色。選取角色之後，按一下**設定**。
-        * **僅限檢視**僅將檢視基礎架構詳細資料的許可權授與使用者。
+        * **僅限檢視**僅會提供使用者檢視基礎架構詳細資料的許可權。
         * **基本使用者**會將部分（但並非所有）基礎架構許可權授與使用者。
         * **超級使用者**會將所有基礎架構許可權授與使用者。
     * 針對每個種類選取個別許可權。若要檢閱在 {{site.data.keyword.containerlong_notm}} 中執行一般作業所需的許可權，請參閱[使用者存取權](/docs/containers?topic=containers-access_reference#infra)。
 
 5.  按一下**儲存**。
 
-6.  在**裝置**標籤中，選取要授與存取權的裝置。
+6.  在**裝置**標籤中，選取要授與其存取權的裝置。
 
-    * 在**選取類型**群組中，您可以授與對所有裸機、專用和虛擬伺服器的存取權，讓使用者可以全部使用[工作者節點的機器類型](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)。
+    * 在**選取類型**群組中，您可以授與對所有裸機、專用和虛擬伺服器的存取權，讓使用者可以使用[工作者節點的所有機器類型](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。
     * 在**啟用未來存取**群組中，您可以授與使用者對所有未來裸機、專用和虛擬伺服器的存取權。
     * 在裝置的表格中，確定已選取適當的裝置。
 
 7. 若要儲存變更，請按一下**設定**。
+
+8. **重要事項**：如果要指派許可權，以便使用者可以管理叢集和工作者節點，則必須為使用者指派使用支援案例的存取權。
+  1. 按一下**存取原則**標籤，然後按一下**指派存取權**。
+  2. 按一下**指派對帳戶管理服務的存取權**卡。
+  3. 選取**支援中心**。
+  4. 若要容許使用者檢視、新增和編輯支援案例，請選取**管理者**。
+  5. 按一下**指派**。
 
 要降級許可權嗎？此動作可能需要幾分鐘的時間才能完成。
 {: tip}
@@ -1039,7 +1127,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
         {: pre}
     * 如果您設定[基礎架構認證以存取 IBM Cloud 基礎架構 (SoftLayer) 組合](#credentials)，請執行下列指令：
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1050,12 +1138,12 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 
     * 若要重設 API 金鑰，請執行下列指令：
         ```
-        ibmcloud ks api-key-reset
-        ```
+    ibmcloud ks api-key-reset --region <region>
+    ```
         {: pre}
     * 若要重設基礎架構認證，請執行下列指令：
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
@@ -1071,7 +1159,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 - [確定使用者的基礎架構認證不是用來設定 API 金鑰，也不是用於 `ibmcloud ks credential-set` 指令](#removing)。
 - 如果您在 {{site.data.keyword.Bluemix_notm}} 帳戶中具有使用者可能已佈建的其他服務實例，請檢查這些服務的文件，以找出在移除帳戶中的使用者之前必須完成的所有步驟。
 
-在使用者離開之前，{{site.data.keyword.Bluemix_notm}} 帳戶擁有者必須完成下列步驟，以防止岔斷 {{site.data.keyword.containerlong_notm}} 中的變更。
+在使用者離開之前，{{site.data.keyword.Bluemix_notm}} 帳戶擁有者必須完成下列步驟，以避免在 {{site.data.keyword.containerlong_notm}} 中發生岔斷變更。
 
 1. 判斷使用者已建立了哪些叢集。
     1.  登入 [{{site.data.keyword.containerlong_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters)。
@@ -1090,11 +1178,11 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
         * 如果使用者擁有基礎架構帳戶，則當使用者離開時，系統會刪除基礎架構帳戶。您無法繼續使用這些叢集。若要防止叢集成為孤立的叢集，使用者必須在離開之前刪除叢集。如果使用者已離開，但未刪除叢集，則您必須使用 `ibmcloud k credential - set` 指令，將基礎架構認證變更為叢集工作者節點佈建所在的帳戶，然後刪除叢集。如需相關資訊，請參閱[無法修改或刪除孤立叢集裡的基礎架構](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)。
 
 3. 移除 {{site.data.keyword.Bluemix_notm}} 帳戶中的使用者。
-    1. 從功能表列中，選取**管理 > 存取權 (IAM)**。然後按一下**使用者**頁面。
+    1. 從功能表列，選取**管理 > 存取權 (IAM)**。然後按一下**使用者**頁面。
     2. 按一下使用者的使用者名稱。
     3. 在使用者的表格項目中，按一下**動作功能表** ![動作功能表圖示](../icons/action-menu-icon.svg "動作功能表圖示") **> 移除使用者**。當您移除使用者時，會自動移除使用者獲指派的 {{site.data.keyword.Bluemix_notm}} IAM 平台角色、Cloud Foundry 角色，以及 IBM Cloud 基礎架構 (SoftLayer) 角色。
 
-4.  移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。不過，如果您已建立自訂 RBAC 角色或叢集角色，請[移除那些 RBAC 角色連結或叢集角色連結的使用者](#remove_custom_rbac)。<p class="note">{{site.data.keyword.Bluemix_notm}} IAM 許可權移除處理程序為非同步，可能需要一些時間才能完成。</p>
+4.  移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。不過，如果您已建立自訂 RBAC 角色或叢集角色，請[移除那些 RBAC 角色連結或叢集角色連結的使用者](#remove_custom_rbac)。<p class="note">{{site.data.keyword.Bluemix_notm}} IAM 許可權移除處理程序為非同步，可能需要一點時間才能完成。</p>
 
 
 ### 移除特定的許可權
@@ -1113,7 +1201,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 #### 從存取群組移除使用者
 {: #remove_access_group}
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列，選取**管理 > 存取權 (IAM)**。
 2. 按一下**使用者**頁面，然後按一下您要移除其許可權的使用者名稱。
 3. 按一下**存取群組**標籤。
 4. 在存取群組的表格項目中，按一下**動作功能表** ![動作功能表圖示](../icons/action-menu-icon.svg "動作功能表圖示") **> 移除使用者**。移除使用者時，會從使用者移除任何已指派給存取群組的角色。
@@ -1121,7 +1209,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 #### 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權及關聯的預先定義 RBAC 許可權
 {: #remove_iam_rbac}
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列，選取**管理 > 存取權 (IAM)**。
 2. 按一下**使用者**頁面，然後按一下您要移除其許可權的使用者名稱。
 3. 在使用者的表格項目中，按一下**動作功能表** ![動作功能表圖示](../icons/action-menu-icon.svg "動作功能表圖示") **> 移除使用者**。
 5. 移除 {{site.data.keyword.Bluemix_notm}} IAM 平台許可權時，也會從關聯的預先定義 RBAC 角色中自動移除使用者的許可權。若要使用這些變更來更新 RBAC 角色，請執行 `ibmcloud k cluster-config`。不過，如果您已建立[自訂 RBAC 角色或叢集角色](#rbac)，則必須從 `.yaml` 檔案移除那些 RBAC 角色連結或叢集角色連結的使用者。請參閱以下移除自訂 RBAC 許可權的步驟。
@@ -1147,7 +1235,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 若要移除所有使用者的 Cloud Foundry 許可權，您可以移除使用者的組織角色。如果您只要移除使用者的能力（例如，連結叢集裡的服務），則只會移除使用者的空間角色。
 {: shortdesc}
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)。從功能表列，選取**管理 > 存取權 (IAM)**。
 2. 按一下**使用者**頁面，然後按一下您要移除其許可權的使用者名稱。
 3. 按一下 **Cloud Foundry 存取權**標籤。
     * 若要移除使用者的空間角色，請執行下列動作：
@@ -1168,7 +1256,7 @@ RBAC 角色及叢集角色定義一組有關使用者如何與叢集裡的 Kuber
 您可以使用 {{site.data.keyword.Bluemix_notm}} 主控台，來移除使用者的 IBM Cloud 基礎架構 (SoftLayer) 許可權。
 {: shortdesc}
 
-1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列中，選取**管理 > 存取權 (IAM)**。
+1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。從功能表列，選取**管理 > 存取權 (IAM)**。
 2. 按一下**使用者**頁面，然後按一下您要移除其許可權的使用者名稱。
 4. 按一下**標準基礎架構**標籤，然後按一下**許可權、裝置或 VPN 子網路**標籤。
 5. 在每一個標籤中，取消選取特定的許可權。

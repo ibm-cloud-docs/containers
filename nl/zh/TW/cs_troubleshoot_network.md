@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 叢集網路的疑難排解
@@ -36,14 +36,14 @@ subcollection: containers
 透過 Ingress 連接至應用程式時發生困難嗎？請嘗試[除錯 Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)。
 {: tip}
 
-疑難排解時，您可以使用 [{{site.data.keyword.containerlong_notm}}Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) 來執行測試，並從叢集中收集相關的網路、Ingress 及 strongSwan 資訊。
+疑難排解時，您可以使用 [{{site.data.keyword.containerlong_notm}}Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) 來執行測試，並從叢集收集相關的網路、Ingress 及 strongSwan 資訊。
 {: tip}
 
 ## 無法透過網路負載平衡器 (NLB) 服務連接至應用程式
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
-您已透過在叢集中建立 NLB 服務，公然地公開應用程式。當您嘗試使用 NLB 的公用 IP 位址連接至應用程式時，連線失敗或逾時。
+您已透過在叢集裡建立 NLB 服務，公然地公開應用程式。當您嘗試使用 NLB 的公用 IP 位址連接至應用程式時，連線失敗或逾時。
 
 {: tsCauses}
 NLB 服務可能因下列其中一個原因而未正常運作：
@@ -87,8 +87,8 @@ NLB 服務可能因下列其中一個原因而未正常運作：
         {: screen}
 
         1. 確認您已將 **LoadBalancer** 定義為服務的類型。
-        2. 確認您已併入 `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` 註釋。
-        3. 在 LoadBalancer 服務的 `spec.selector` 區段中，確定 `<selector_key>` 及 `<selector_value>` 與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的鍵值組相同。如果標籤不符，則 LoadBalancer 服務中的 **Endpoints** 區段會顯示 **<none>**，且無法從網際網路存取您的應用程式。
+        2. 確認您已包含 `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"` 註釋。
+        3. 在 LoadBalancer 服務的 `spec.selector` 區段中，確定 `<selector_key>` 及 `<selector_value>` 與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的鍵值組相同。如果標籤不相符，則 LoadBalancer 服務中的 **Endpoints** 區段會顯示 **<none>**，且無法從網際網路存取您的應用程式。
         4. 確認您已使用應用程式所接聽的**埠**。
         5. 確認您已將 `externalTrafficPolicy` 設為 `Local`。
 
@@ -109,10 +109,10 @@ NLB 服務可能因下列其中一個原因而未正常運作：
         {: screen}
 
         1. 確認您已將 **LoadBalancer** 定義為服務的類型。
-        2. 在 LoadBalancer 服務的 `spec.selector` 區段中，確定 `<selector_key>` 及 `<selector_value>` 與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的鍵值組相同。如果標籤不符，則 LoadBalancer 服務中的 **Endpoints** 區段會顯示 **<none>**，且無法從網際網路存取您的應用程式。
+        2. 在 LoadBalancer 服務的 `spec.selector` 區段中，確定 `<selector_key>` 及 `<selector_value>` 與您在部署 YAML 的 `spec.template.metadata.labels` 區段中所使用的鍵值組相同。如果標籤不相符，則 LoadBalancer 服務中的 **Endpoints** 區段會顯示 **<none>**，且無法從網際網路存取您的應用程式。
         3. 確認您已使用應用程式所接聽的**埠**。
 
-3.  檢查 NLB 服務，並檢閱 **Events** 區段來尋找可能的錯誤。
+3.  檢閱 NLB 服務，並檢閱 **Events** 區段來尋找可能的錯誤。
 
     ```
     kubectl describe service <myservice>
@@ -130,7 +130,7 @@ NLB 服務可能因下列其中一個原因而未正常運作：
     <li>如果找到至少兩個可用的工作者節點，則會列出工作者節點詳細資料。</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>請確定 <code>kubectlget nodes</code> 及 <code>ibmcloud ks worker-get</code> 指令所傳回工作者節點的公用及專用 VLAN ID 相符。</li></ol></li></ul>
 
-4.  如果您要使用自訂網域連接至 NLB 服務，請確定已將自訂網域對映至 NLB 服務的公用 IP 位址。
+4.  如果使用自訂網域連接至 NLB 服務，請確定已將自訂網域對映至 NLB 服務的公用 IP 位址。
     1.  尋找 NLB 服務的公用 IP 位址。
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
@@ -210,65 +210,70 @@ NLB 服務可能因下列其中一個原因而未正常運作：
 <br />
 
 
-## 無法取得 Ingress ALB 的子網域
+## 無法取得 Ingress ALB 的子網域，區域中未部署 ALB，或無法部署負載平衡器
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-當您執行 `ibmcloud ks cluster-get --cluster <cluster>` 時，您的叢集處於 `normal` 狀況，但沒有 **Ingress 子網域**可供使用。
-
-您可能會看到類似下列內容的錯誤訊息。
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* 無 Ingress 子網域：執行 `ibmcloud ks cluster-get --cluster <cluster>` 時，叢集處於 `normal` 狀態，但沒有 **Ingress 子網域**可用。
+* 區域中未部署 ALB：具有多區域叢集並執行 `ibmcloud ks albs --cluster <cluster>` 時，區域中未部署任何 ALB。例如，如果您在 3 個區域中具有工作者節點，則可能會看到如下的輸出，其中公用 ALB 未部署至第三個區域。
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* 無法部署負載平衡器：說明 `ibm-cloud-provider-vlan-ip-config` 配置映射時，可能會看到類似於下列範例輸出的錯誤訊息。
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-在標準叢集裡，第一次在區域中建立叢集時，會在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，自動為您在該區域中佈建公用 VLAN 及專用 VLAN。在該區域中，會在您指定的公用 VLAN 上要求 1 個公用可攜式子網路，並在您指定的專用 VLAN 上要求 1 個專用可攜式子網路。對於 {{site.data.keyword.containerlong_notm}}，VLAN 的限制為 40 個子網路。如果區域中的叢集 VLAN 已達到該限制，則無法佈建 **Ingress 子網域**。
+在標準叢集裡，第一次在區域中建立叢集時，會在您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中，自動為您在該區域中佈建公用 VLAN 及專用 VLAN。在該區域中，會在您指定的公用 VLAN 上要求 1 個公用可攜式子網路，並在您指定的專用 VLAN 上要求 1 個專用可攜式子網路。對於 {{site.data.keyword.containerlong_notm}}，VLAN 的限制為 40 個子網路。如果某個區域中叢集的 VLAN 已達到該限制，則佈建 **Ingress 子網域**會失敗，佈建該區域的公用 Ingress ALB 會失敗，或者您可能沒有可攜式的公用 IP 位址可用於建立網路負載平衡器 (NLB)。
 
 若要檢視 VLAN 有多少子網路，請執行下列動作：
 1.  從 [IBM Cloud 基礎架構 (SoftLayer) 主控台](https://cloud.ibm.com/classic?)，選取**網路** > **IP 管理** > **VLAN**。
 2.  按一下您用來建立叢集之 VLAN 的 **VLAN 號碼**。檢閱 **Subnets** 區段，以查看是否有 40 個以上的子網路。
 
 {: tsResolve}
-如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)，進行訂購。然後，[建立叢集](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)，而叢集使用這個新的 VLAN。
-
-如果您有另一個可用的 VLAN，可以在現有叢集裡[設定 VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。之後，您便可以將新的工作者節點新增至使用具有可用子網路之另一個 VLAN 的叢集。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+如果您需要新的 VLAN，請[與 {{site.data.keyword.Bluemix_notm}} 支援中心聯絡](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)，進行訂購。然後，[建立叢集](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)，而叢集使用這個新的 VLAN。
 
 
-如果您未使用 VLAN 中的所有子網路，則可以在叢集裡重複使用子網路。
-1.  檢查您要使用的子網路可供使用。
+如果您有另一個可用的 VLAN，可以在現有叢集裡[設定 VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。之後，您便可以將新的工作者節點新增至使用具有可用子網路之另一個 VLAN 的叢集。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get --region <region>` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
 
-    您所使用的基礎架構帳戶可能會在多個 {{site.data.keyword.Bluemix_notm}} 帳戶之間共用。若是如此，即使您執行 `ibmcloud ks subnets` 指令來查看具有**連結叢集**的子網路，您也只能看到您叢集的資訊。請洽詢基礎架構帳戶擁有者，以確定子網路可供使用，且其他任何帳戶或團隊不在使用中。
-    {: note}
+如果並未使用 VLAN 中的所有子網路，則可以透過將 VLAN 上的子網路新增到叢集來重複使用這些子網路。
+1. 檢查要使用的子網路是否可用。
+  <p class="note">使用的基礎架構帳戶可能在多個 {{site.data.keyword.Bluemix_notm}} 帳戶之間共用。在這種情況下，即使執行 `ibmcloud ks subnets` 指令來查看 **Bound Cluster** 的子網路，也只能看到您的叢集的資訊。請洽詢基礎架構帳戶擁有者，以確定子網路可供使用，且其他任何帳戶或團隊不在使用中。</p>
 
-2.  使用 `--no-subnet` 選項[建立叢集](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)，以便服務不會嘗試建立新的子網路。請指定區域以及具有子網路可供重複使用的 VLAN。
+2. 使用 [`ibmcloud ks cluster-subnet-add` 指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)使現有子網路可供叢集使用。
 
-3.  使用 `ibmcloud ks cluster-subnet-add` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)，將現有子網路新增至叢集。如需相關資訊，請參閱[在 Kubernetes 叢集裡新增或重複使用自訂及現有的子網路](/docs/containers?topic=containers-subnets#subnets_custom)。
+3. 驗證已順利建立子網路並將其新增至叢集。子網路 CIDR 列在 **Subnet VLANs** 區段中。
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ```
+    {: pre}
 
-<br />
+    在此輸出範例中，第二個子網路已新增至 `2234945` 公用 VLAN：
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-
-## Ingress ALB 未在區域中部署
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-當您具有多區域叢集，並執行 `ibmcloud ks albs <cluster>` 時，沒有任何 ALB 部署在區域中。例如，如果您在 3 個區域中具有工作者節點，則可能會看到如下的輸出，其中公用 ALB 未部署至第三個區域。
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-在每一個區域中，會在您指定的公用 VLAN 上要求 1 個公用可攜式子網路，並在您指定的專用 VLAN 上要求 1 個專用可攜式子網路。對於 {{site.data.keyword.containerlong_notm}}，VLAN 的限制為 40 個子網路。如果區域中叢集的公用 VLAN 已達到該限制，則該區域的公用 Ingress ALB 無法佈建。
-
-{: tsResolve}
-若要檢查 VLAN 上的子網路數目，以及如需如何取得另一個 VLAN 的步驟，請參閱[無法取得 Ingress ALB 的子網域](#cs_subnet_limit)。
+4. 驗證新增的子網路中的可攜式 IP 位址是否用於叢集裡的 ALB 或負載平衡器。服務可能需要幾分鐘時間才能使用新增子網路中的可攜式 IP 位址。
+  * 無 Ingress 子網域：執行 `ibmcloud ks cluster-get --cluster <cluster>` 以驗證是否移入了 **Ingress 子網域**。
+  * 區域中未部署 ALB：執行 `ibmcloud ks albs --cluster <cluster>` 以驗證是否部署的是遺漏的 ALB。
+  * 無法部署負載平衡器：執行 `kubectl get svc -n kube-system` 以驗證負載平衡器是否具有 **EXTERNAL-IP**。
 
 <br />
 
@@ -299,25 +304,25 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xx
 <br />
 
 
-## 來源 IP 保留在使用污染的節點時失敗
+## 來源 IP 保留在使用有污點的節點時失敗
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
 您已在服務的配置檔中將 `externalTrafficPolicy` 變更為 `Local`，以啟用 [1.0 版負載平衡器](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)或 [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) 服務的來源 IP 保留。不過，沒有任何資料流量到達您應用程式的後端服務。
 
 {: tsCauses}
-當您啟用負載平衡器或 Ingress ALB 服務的來源 IP 保留時，會保留用戶端要求的來源 IP 位址。服務只會將資料流量轉遞至相同工作者節點上的應用程式 Pod，以確保要求封包的 IP 位址未變更。一般而言，負載平衡器或 Ingress ALB 服務 Pod 會部署至在其中部署應用程式 Pod 的相同工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定服務 Pod 及應用程式 Pod。如果您在工作者節點上使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，即會防止所有沒有污點容忍的 Pod 在污染工作者節點上執行。來源 IP 保留可能無法根據您使用的污點類型來運作：
+當您啟用負載平衡器或 Ingress ALB 服務的來源 IP 保留時，會保留用戶端要求的來源 IP 位址。服務只會將資料流量轉遞至相同工作者節點上的應用程式 Pod，以確保要求封包的 IP 位址未變更。一般而言，負載平衡器或 Ingress ALB 服務 Pod 會部署至在其中部署應用程式 Pod 的相同工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定服務 Pod 及應用程式 Pod。如果您在工作者節點上使用 [Kubernetes 污點 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/)，即會防止沒有污點容忍的任何 Pod 在有污點的工作者節點上執行。來源 IP 保留可能無法根據您使用的污點類型來運作：
 
-* **邊緣節點污點**：您已[新增 `dedicated=edge` 標籤](/docs/containers?topic=containers-edge#edge_nodes)至叢集裡每個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器 Pod 只會部署至那些工作者節點。然後，您也可以[污染邊緣節點](/docs/containers?topic=containers-edge#edge_workloads)，以防止在邊緣節點上執行任何其他工作負載。不過，您未將邊緣節點親緣性規則及容忍新增至應用程式部署。您的應用程式 Pod 無法排定於與服務 Pod 相同的污染節點，而且沒有任何資料流量會到達您應用程式的後端服務。
+* **邊緣節點污點**：您已[新增 `dedicated=edge` 標籤](/docs/containers?topic=containers-edge#edge_nodes)至叢集裡每個公用 VLAN 的兩個以上工作者節點，以確保 Ingress 及負載平衡器 Pod 只會部署至那些工作者節點。然後，您也可以[為邊緣節點加上污點](/docs/containers?topic=containers-edge#edge_workloads)，以防止在邊緣節點上執行任何其他工作負載。不過，您未將邊緣節點親緣性規則及容忍新增至應用程式部署。您的應用程式 Pod 無法排定於與服務 Pod 相同的有污點節點，而且沒有任何資料流量會到達您應用程式的後端服務。
 
-* **自訂污點**：您已在數個節點上使用自訂污點，因此只會將具有該污點容忍的應用程式 Pod 部署至那些節點。您已將親緣性規則及容忍新增至應用程式及負載平衡器或 Ingress 服務的部署，因此其 Pod 只會部署至這些節點。不過，在 `ibm-system` 名稱空間中自動建立的 `ibm-cloud-provider-ip` `keepalived` Pod，確保負載平衡器 Pod 及應用程式 Pod 一律排定至相同的工作者節點。這些 `keepalived` Pod 沒有您所使用之自訂污點的容忍。它們無法排定於應用程式 Pod 執行所在的相同污染節點，而且沒有任何資料流量會到達您應用程式的後端服務。
+* **自訂污點**：您已在數個節點上使用自訂污點，因此只會將具有該污點容忍的應用程式 Pod 部署至那些節點。您已將親緣性規則及容忍新增至應用程式及負載平衡器或 Ingress 服務的部署，因此其 Pod 只會部署至這些節點。不過，在 `ibm-system` 名稱空間中自動建立的 `ibm-cloud-provider-ip` `keepalived` Pod，確保負載平衡器 Pod 及應用程式 Pod 一律排定至相同的工作者節點。這些 `keepalived` Pod 沒有您所使用之自訂污點的容忍。它們無法排定於應用程式 Pod 執行所在的相同有污點節點，而且沒有任何資料流量會到達您應用程式的後端服務。
 
 {: tsResolve}
 選擇下列其中一個選項，以解決問題：
 
-* **邊緣節點污點**：若要確保您的負載平衡器及應用程式 Pod 部署至污染的邊緣節點，請[將邊緣節點親緣性規則及容忍新增至應用程式部署](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)。依預設，負載平衡器及 Ingress ALB Pod 會具有這些親緣性規則及容忍。
+* **邊緣節點污點**：若要確保您的負載平衡器及應用程式 Pod 部署至有污點的邊緣節點，請[將邊緣節點親緣性規則及容忍新增至應用程式部署](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)。依預設，負載平衡器及 Ingress ALB Pod 會具有這些親緣性規則及容忍。
 
-* **自訂污點**：移除 `keepalived` Pod 沒有其容忍的自訂污點。相反地，您可以[將工作者節點標示為邊緣節點，然後污染這些邊緣節點](/docs/containers?topic=containers-edge)。
+* **自訂污點**：移除 `keepalived` Pod 沒有其容忍的自訂污點。相反地，您可以[將工作者節點標示為邊緣節點，然後為這些邊緣節點加上污點](/docs/containers?topic=containers-edge)。
 
 如果您完成上述其中一個選項，但仍未排定 `keepalived` Pod，則可以取得 `keepalived` Pod 的相關資訊：
 
@@ -355,15 +360,15 @@ public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xx
 {: tsResolve}
 當您嘗試使用 strongSwan Helm 圖表建立 VPN 連線功能時，第一次 VPN 狀態可能不是 `ESTABLISHED`。您可能需要檢查數種問題，並據此變更配置檔。若要對 strongSwan VPN 連線功能進行疑難排解，請執行下列動作：
 
-1. [測試並驗證 strongSwan VPN 連線功能](/docs/containers?topic=containers-vpn#vpn_test)，方法是執行五個併入 strongSwan 圖表定義中的 Helm 測試。
+1. [測試並驗證 strongSwan VPN 連線功能](/docs/containers?topic=containers-vpn#vpn_test)，方法是執行五個包含在 strongSwan 圖表定義中的 Helm 測試。
 
 2. 如果您在執行 Helm 測試之後無法建立 VPN 連線功能，則可以執行 VPN Pod 映像檔內所包裝的 VPN 除錯工具。
 
     1. 設定 `STRONGSWAN_POD` 環境變數。
 
         ```
-    export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
-    ```
+        export STRONGSWAN_POD=$(kubectl get pod -l app=strongswan,release=vpn -o jsonpath='{ .items[0].metadata.name }')
+        ```
         {: pre}
 
     2. 執行除錯工具。
@@ -435,7 +440,7 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
 
 * 工作者節點是佈建在新的專用子網路上，現有 `localSubnetNAT` 或 `local.subnet` 設定並未透過 VPN 連線公開該子網路
 * VPN 路徑無法新增至工作者節點，因為工作者節點有污點或標籤未內含在現有 `tolerations` 或 `nodeSelector` 設定中
-* VPN Pod 在新的工作者節點上執行，但不容許該工作者節點的公用 IP 位址通過內部部署防火牆
+* VPN Pod 在新的工作者節點上執行，但不容許該工作者節點的公用 IP 位址透過內部部署防火牆
 
 如果您已刪除工作者節點：
 
@@ -471,7 +476,7 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>新增的工作者可能部署在另一個新的專用子網路上，而不是其他工作者節點所在的其他現有子網路。如果您使用子網路 NAT 來重新對映叢集的專用本端 IP 位址，且工作者節點已新增在新的子網路上，請將新的子網路 CIDR 新增至此設定。</td>
+     <td>新增的工作者可能部署在另一個新的專用子網路上，而不是其他工作者節點所在的其他現有子網路。如果是使用子網路 NAT 來重新對映叢集的專用本端 IP 位址，並且在新子網路上新增了工作者節點，請將新的子網路 CIDR 新增到此設定。</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -498,7 +503,7 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>如果您使用子網路 NAT 來重新對映特定的專用本端 IP 位址，請從這個設定移除舊工作者節點中的任何 IP 位址。如果您使用子網路 NAT 來重新對映整個子網路，且子網路上未剩餘任何工作者節點，請從此設定移除該子網路 CIDR。</td>
+     <td>如果是使用子網路 NAT 來重新對映特定專用本端 IP 位址，請從此設定中移除來自舊工作者節點的任何 IP 位址。如果是使用子網路 NAT 來重新對映整個子網路，並且某個子網路上沒有任何工作者節點存在，請從此設定中移除該子網路 CIDR。</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -578,7 +583,7 @@ Error: release vpn failed: deployments.extensions "vpn-strongswan" already exist
 
 1. [安裝及配置 3.3 版或更新版本的 Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)。
 2. 確定您建立且要套用至您叢集的任何原則都會使用 [Calico 第 3 版語法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy)。如果您在 Calico 第 2 版語法中有現有原則 `.yaml` 或 `.json` 檔案，則可以使用 [`calicoctl convert` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) 將它轉換為 Calico 第 3 版語法。
-3. 若要[檢視原則](/docs/containers?topic=containers-network_policies#view_policies)，請確定您針對廣域原則使用 `calicoctl get GlobalNetworkPolicy`，並針對範圍設為特定名稱空間的原則使用 `calicoctl get NetworkPolicy --namespace <policy_namespace>`。
+3. 若要[檢視原則](/docs/containers?topic=containers-network_policies#view_policies)，請確保對於廣域原則，使用 `calicoctl get GlobalNetworkPolicy`，對於範圍限定為特定名稱空間的原則，使用 `calicoctl get NetworkPolicy --namespace <policy_namespace>`。
 
 <br />
 
@@ -599,11 +604,11 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 
 {: tsResolve}
 
-您可以[刪除現有的工作者節點儲存區](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)，然後[建立新的工作者節點儲存區](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)。
+您可以[刪除現有的工作者節點儲存區](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)，然後[建立新的工作者節點儲存區](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)。
 
 或者，您也可以保留現有的工作者節點儲存區，方法為訂購新的 VLAN，並使用這些 VLAN，在儲存區中建立新的工作者節點。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  若要取得您需要其新 VLAN ID 的區域，請記下下列指令輸出中的**位置**。**附註**：如果您的叢集是多區域，則您需要每一個區域的 VLAN ID。
 
@@ -623,7 +628,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-5.  使用 `zone-network-set` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)，以變更工作者節點儲存區網路 meta 資料。
+5.  使用 `zone-network-set` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)，以變更工作者節點儲存區網路 meta 資料。
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -663,6 +668,6 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
--   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集中的相關資訊，以與 IBM 支援中心共用。
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集裡的相關資訊，以與 IBM 支援中心共用。
 {: tip}
 

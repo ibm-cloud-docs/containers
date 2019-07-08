@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -138,7 +139,7 @@ subcollection: containers
     ```
     {: pre}
 
-    範例指令：
+    指令範例：
     ```
     curl --insecure https://c3.<region>.containers.cloud.ibm.com:31142/version
     ```
@@ -159,19 +160,19 @@ subcollection: containers
     }
     ```
     {: screen}
-  * 如果已啟用專用服務端點，您必須在 {{site.data.keyword.Bluemix_notm}} 專用網路中，或透過 VPN 連線連接至專用網路，以驗證您與主節點的連線：
+  * 如果已啟用了專用服務端點，您必須位於 {{site.data.keyword.Bluemix_notm}} 專用網路中或透過 VPN 連線與專用網路連線，以驗證與主節點的連線。請注意，您必須[透過專用負載平衡器公開主節點端點](/docs/containers?topic=containers-clusters#access_on_prem)，以便使用者可以透過 VPN 或 {{site.data.keyword.BluDirectLink}} 連接存取主節點。
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
     {: pre}
 
-    範例指令：
+    指令範例：
     ```
     curl --insecure https://c3-private.<region>.containers.cloud.ibm.com:31142/version
     ```
     {: pre}
 
-    輸出範例：
+        輸出範例：
     ```
     {
      "major": "1",
@@ -230,7 +231,7 @@ subcollection: containers
     ```
     {: pre}
 
-2.  容許從來源 <em>&lt;each_worker_node_publicIP&gt;</em> 到目的地 TCP/UDP 埠範圍 20000-32767 和埠 443 以及下列 IP 位址和網路群組的送出網路資料流量。如果您的組織防火牆導致本端機器無法存取公用網際網路端點，請針對來源工作者節點及本端機器執行此步驟。
+2.  容許從來源 <em>&lt;each_worker_node_publicIP&gt;</em> 到目的地 TCP/UDP 埠範圍 20000-32767 和埠 443 以及下列 IP 位址和網路群組的送出網路資料流量。這些 IP 位址允許工作者節點與叢集主節點進行通訊。如果您擁有的企業防火牆阻止本端機器存取公用網際網路端點，請同時對本端機器執行此步驟，以便可以存取叢集主節點。
 
     對於地區內的所有區域，您必須容許對埠 443 的送出資料流量，以平衡引導處理程序期間的負載。例如，如果您的叢集是在美國南部，則必須容許從每個工作者節點的公用 IP 傳輸到所有區域的 IP 位址的埠 443。
     {: important}
@@ -284,7 +285,7 @@ subcollection: containers
           </tbody>
         </table>
 
-3.  容許從工作者節點到 [{{site.data.keyword.registrylong_notm}} 地區](/docs/services/Registry?topic=registry-registry_overview#registry_regions)的送出網路資料流量：
+3.  {: #firewall_registry}若要容許工作者節點與 {{site.data.keyword.registrylong_notm}} 進行通訊，請容許送出的網路資料流量從工作者節點流至 [{{site.data.keyword.registrylong_notm}} 地區](/docs/services/Registry?topic=registry-registry_overview#registry_regions)：
   - `TCP port 443, port 4443 FROM <each_worker_node_publicIP> TO <registry_subnet>`
   -  將 <em>&lt;registry_subnet&gt;</em> 取代為您要容許資料流量的登錄子網路。全球登錄會儲存 IBM 提供的公用映像檔，地區登錄會儲存您自己的專用或公用映像檔。
         公證人功能需要有埠 4443，例如[驗證映像檔簽章](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent)。<table summary="表格中的第一列跨越兩個直欄。其餘的列應該從左到右閱讀，第一欄為伺服器區域，第二欄則為要符合的 IP 位址。">
@@ -298,49 +299,43 @@ subcollection: containers
     <tbody>
       <tr>
         <td>跨 <br>{{site.data.keyword.containerlong_notm}} 地區的全球登錄</td>
-        <td><strong>公用</strong>：<code>icr.io</code><br>
-        已淘汰：<code>registry.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        已淘汰：<code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>亞太地區北部</td>
-        <td><strong>公用</strong>：<code>jp.icr.io</code><br>
-        已淘汰：<code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        已淘汰：<code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>亞太地區南部</td>
-        <td><strong>公用</strong>：<code>au.icr.io</code><br>
-        已淘汰：<code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        已淘汰：<code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>歐盟中部</td>
-        <td><strong>公用</strong>：<code>de.icr.io</code><br>
-        已淘汰：<code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        已淘汰：<code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>英國南部</td>
-        <td><strong>公用</strong>：<code>uk.icr.io</code><br>
-        已淘汰：<code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        已淘汰：<code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>美國東部、美國南部</td>
-        <td><strong>公用</strong>：<code>us.icr.io</code><br>
-        已淘汰：<code>registry.ng.bluemix.net</code><br><br>
-        <strong>專用</strong>：<code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        已淘汰：<code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -421,7 +416,7 @@ subcollection: containers
 
 5. 如果您使用負載平衡器服務，請確定在公用和專用介面的工作者節點之間容許使用 VRRP 通訊協定的所有資料流量。{{site.data.keyword.containerlong_notm}} 使用 VRRP 通訊協定來管理公用及專用負載平衡器的 IP 位址。
 
-6. {: #pvc}若要在專用叢集中建立持續性磁區要求，請確定已使用下列 Kubernetes 版本或 {{site.data.keyword.Bluemix_notm}} 儲存空間外掛程式版本來設定您的叢集。這些版本啟用從叢集到持續性儲存空間實例的專用網路通訊。
+6. {: #pvc}若要在專用叢集裡建立持續性磁區要求，請確定已使用下列 Kubernetes 版本或 {{site.data.keyword.Bluemix_notm}} 儲存空間外掛程式版本來設定您的叢集。這些版本啟用從叢集到持續性儲存空間實例的專用網路通訊。
     <table>
     <caption>專用叢集所需的 Kubernetes 或 {{site.data.keyword.Bluemix_notm}} 儲存空間外掛程式版本的概觀</caption>
     <thead>
@@ -438,7 +433,7 @@ subcollection: containers
        <td>{{site.data.keyword.Bluemix_notm}} Block Storage 外掛程式版本 1.3.0 或更新版本</td>
      </tr>
      <tr>
-       <td>Object Storage</td>
+       <td>物件儲存空間</td>
        <td><ul><li>{{site.data.keyword.cos_full_notm}} 外掛程式版本 1.0.3 或更新版本</li><li>以 HMAC 鑑別進行 {{site.data.keyword.cos_full_notm}} 服務設定</li></ul></td>
      </tr>
    </tbody>
@@ -464,7 +459,7 @@ subcollection: containers
 
 2. 容許 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍，以便您可以在叢集裡建立工作者節點。
     1. 容許適當的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請參閱[後端（專用）網路](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network)。
-    2. 容許您所使用的所有[區域](/docs/containers?topic=containers-regions-and-zones#zones)的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請注意，您必須新增 `dal01` 和 `wdc04` 區域的IP。請參閱[服務網路（在後端/專用網路上）](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)。
+    2. 容許您所使用的所有[區域](/docs/containers?topic=containers-regions-and-zones#zones)的 IBM Cloud 基礎架構 (SoftLayer) 專用 IP 範圍。請注意，必須針對 `dal01`、`dal10` 和 `wdc04` 區域新增 IP，如果叢集位於歐洲地理位置，則還必須針對 `ams01` 區域新增 IP。請參閱[服務網路（在後端/專用網路上）](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-)。
 
 3. 開啟下列埠：
     - 容許出埠 TCP 及 UDP 連線從工作者節點到達埠 80 和 443，以容許工作者節點更新及重新載入。
@@ -473,7 +468,7 @@ subcollection: containers
     - 容許入埠 TCP 及 UDP 連線到達埠 10250，以進行 Kubernetes 儀表板及指令（例如 `kubectl logs` 及 `kubectl exec`）。
     - 容許入埠及出埠連線到達 TCP 和 UDP 埠 53，以進行 DNS 存取。
 
-4. 如果您在公用網路上也有防火牆，或者您有一個僅限專用 VLAN 叢集，而且是使用閘道應用裝置作為防火牆，則您也必須容許[容許叢集存取基礎架構資源及其他服務](#firewall_outbound)中指定的 IP 和埠。
+4. 如果您在公用網路上也有防火牆，或者如果您有僅專用 VLAN 的叢集並且使用閘道裝置作為防火牆，您還必須容許在[容許叢集存取基礎架構資源和其他服務](#firewall_outbound)中指定的 IP 和埠。
 
 <br />
 
@@ -575,21 +570,21 @@ subcollection: containers
 1.  [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. 取得工作者節點子網路或工作者節點 IP 位址。
-  * **工作者節點子網路**：如果您預期經常變更叢集中的工作者節點數目，例如，如果您啟用[叢集 autoscaler](/docs/containers?topic=containers-ca#ca)，則您可能不想針對每一個新的工作者節點都更新防火牆。反之，您可以將該叢集使用的 VLAN 子網路列入白名單。請記住，VLAN 子網路可能由其他叢集中的工作者節點共用。
+  * **工作者節點子網路**：如果您預期經常變更叢集裡的工作者節點數目，例如，如果您啟用[叢集 autoscaler](/docs/containers?topic=containers-ca#ca)，則您可能不想針對每一個新的工作者節點都更新防火牆。反之，您可以將該叢集使用的 VLAN 子網路列入白名單。請記住，VLAN 子網路可能由其他叢集裡的工作者節點共用。
     <p class="note">{{site.data.keyword.containerlong_notm}} 為您的叢集佈建的**主要公用子網路**有提供 14 個可用的 IP 位址，並可由相同 VLAN 上的其他叢集共用。當您有超過 14 個工作者節點時，會訂購另一個子網路，因此您需要列入白名單的子網路可以變更。為了減少變更頻率，請建立具有較高 CPU 及記憶體資源之工作者節點特性的工作者節點儲存區，這樣您就不需要經常新增工作者節點。</p>
-    1. 列出叢集中的工作者節點。
+    1. 列出叢集裡的工作者節點。
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
-    2. 從前一個步驟的輸出中，針對您叢集中的工作者節點，記下**公用 IP** 的所有唯一網路 ID（前 3 個八位元組）。<staging> 如果您想要把僅限專用叢集列入白名單，則改為記下**專用 IP**。<staging> 在下列輸出中，唯一網路 ID 是 `169.xx.178` 和 `169.xx.210`。
+    2. 從上一步的輸出中，記下叢集裡工作者節點的 **Public IP** 的所有唯一網路 ID（前 3 個八位元組）。如果要將僅專用叢集列入白名單，請改為記下 **Private IP**。在下列輸出中，唯一網路 ID 為 `169.xx.178` 和 `169.xx.210`。
         ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  列出每個唯一網路 ID 的 VLAN 子網路。
@@ -608,7 +603,7 @@ ID                                                 Public IP        Private IP  
     4.  擷取子網路位址。在輸出中，尋找 **IP** 數目。然後，使 `2` 的 `n` 次方等於 IP 的數目。比方說，如果 IP 的數目是 `16`，則 `2` 的 `4` (`n`) 次方就等於 `16`。現在，從 `32` 位元中減去 `n` 的值，就得出子網路 CIDR。例如，當 `n` 等於 `4` 時，CIDR 是 `28`（來自方程式 `32 - 4 = 28`）。將 **ID** 遮罩與 CIDR 值結合，即可得出完整子網路位址。在前一個輸出中，子網路位址如下：
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **個別工作者節點 IP 位址**：如果您有少數工作者節點只執行一個應用程式且不需要調整，或如果您只想將一個工作者節點列入白名單，請列出叢集中的所有工作者節點，並記下**公用 IP** 位址。如果您的工作者節點僅連接至專用網路，而您想要使用專用服務端點來連接至 {{site.data.keyword.Bluemix_notm}} 服務，請改為記下**專用 IP** 位址。請注意，只有這些工作者節點才會列入白名單。如果您刪除工作者節點或將工作者節點新增至叢集中，您必須相應地更新防火牆。
+  * **個別工作者節點 IP 位址**：如果您有少數工作者節點只執行一個應用程式且不需要調整，或如果您只想將一個工作者節點列入白名單，請列出叢集裡的所有工作者節點，並記下**公用 IP** 位址。如果您的工作者節點僅連接至專用網路，而您想要使用專用服務端點來連接至 {{site.data.keyword.Bluemix_notm}} 服務，請改為記下**專用 IP** 位址。請注意，只有這些工作者節點才會列入白名單。如果您刪除工作者節點或將工作者節點新增至叢集裡，您必須相應地更新防火牆。
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```

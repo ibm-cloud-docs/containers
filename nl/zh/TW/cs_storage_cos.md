@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,21 +21,25 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 將資料儲存在 IBM Cloud Object Storage
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 是一種持續性的高度可用儲存空間，可以使用 {{site.data.keyword.cos_full_notm}} 外掛程式裝載至 Kubernetes 叢集中執行的應用程式。外掛程式是 Kubernetes Flex-Volume 外掛程式，可將 Cloud {{site.data.keyword.cos_short}} 儲存區連接至叢集中的 Pod。與 {{site.data.keyword.cos_full_notm}} 一起儲存的資訊會透過傳輸中及靜態方式進行加密、分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) 是一種持續性的高度可用儲存空間，可以使用 {{site.data.keyword.cos_full_notm}} 外掛程式裝載至 Kubernetes 叢集裡執行的應用程式。外掛程式是 Kubernetes Flex-Volume 外掛程式，可將 Cloud {{site.data.keyword.cos_short}} 儲存區連接至叢集裡的 Pod。與 {{site.data.keyword.cos_full_notm}} 一起儲存的資訊會透過傳輸中及靜態方式進行加密、分散在多個地理位置，並使用 REST API 透過 HTTP 進行存取。
+{: shortdesc}
 
-若要連接至 {{site.data.keyword.cos_full_notm}}，您的叢集需要有向 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 鑑別的公用網路存取權。如果您有僅限專用叢集，則可以在安裝外掛程式 `1.0.3` 版或更新版本時與 {{site.data.keyword.cos_full_notm}} 專用服務端點通訊，以及設定 {{site.data.keyword.cos_full_notm}} 服務實例以進行 HMAC 鑑別。如果您不要使用 HMAC 鑑別，則必須在埠 443 上開啟所有出埠網路資料流量，外掛程式才能在專用叢集中適當地運作。
+若要連接至 {{site.data.keyword.cos_full_notm}}，您的叢集需要有向 {{site.data.keyword.Bluemix_notm}} Identity and Access Management 鑑別的公用網路存取權。如果您有僅限專用叢集，則可以在安裝外掛程式 `1.0.3` 版或更新版本時與 {{site.data.keyword.cos_full_notm}} 專用服務端點通訊，以及設定 {{site.data.keyword.cos_full_notm}} 服務實例以進行 HMAC 鑑別。如果您不要使用 HMAC 鑑別，則必須在埠 443 上開啟所有出埠網路資料流量，外掛程式才能在專用叢集裡適當地運作。
 {: important}
+
+對於 1.0.5 版，{{site.data.keyword.cos_full_notm}} 外掛程式已從 `ibmcloud-object-storage-plugin` 重新命名為 `ibm-object-storage-plugin`。若要安裝新版本的外掛程式，必須[解除安裝舊的 Helm 圖表安裝](#remove_cos_plugin)，然後[使用新的 {{site.data.keyword.cos_full_notm}} 外掛程式版本重新安裝 Helm 圖表](#install_cos)。
+{: note}
 
 ## 建立物件儲存空間服務實例
 {: #create_cos_service}
 
-您必須先在帳戶中佈建 {{site.data.keyword.cos_full_notm}} 服務實例，才能在叢集中開始使用物件儲存空間。
+您必須先在帳戶中佈建 {{site.data.keyword.cos_full_notm}} 服務實例，才能在叢集裡開始使用物件儲存空間。
 {: shortdesc}
 
 {{site.data.keyword.cos_full_notm}} 外掛程式配置成使用任何 s3 API 端點。例如，建議您使用本端 Cloud Object Storage 伺服器（例如 [Minio](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm-charts/ibm-minio-objectstore)），或連接至您在不同雲端提供者設定的 s3 API 端點，而非使用 {{site.data.keyword.cos_full_notm}} 服務實例。
@@ -51,9 +55,9 @@ subcollection: containers
    1.  在「服務詳細資料」頁面的導覽中，按一下**服務認證**。
    2.  按一下**新建認證**。即會顯示一個對話框。
    3.  輸入認證的名稱。
-   4.  從**角色**下拉清單中，選取 `Writer` 或 `Manager`。選取 `Reader` 時，您無法使用認證在 {{site.data.keyword.cos_full_notm}} 中建立儲存區以及在其中寫入資料。
+   4.  從**角色**下拉清單，選取 `Writer` 或 `Manager`。選取 `Reader` 時，您無法使用認證在 {{site.data.keyword.cos_full_notm}} 中建立儲存區以及在其中寫入資料。
    5.  選用項目：在**新增線型配置參數（選用）**中，輸入 `{"HMAC":true}` 來建立 {{site.data.keyword.cos_full_notm}} 服務的其他 HMAC 認證。HMAC 鑑別透過防止誤用過期或隨機建立的 OAuth2 記號，以在 OAuth2 鑑別中新增額外的安全層。**重要事項**：如果您具有沒有公用存取權的僅限專用叢集，則必須使用 HMAC 鑑別，以透過專用網路存取 {{site.data.keyword.cos_full_notm}} 服務。
-   6.  按一下**新增**。您的新認證會列在**服務認證**表格中。
+   6.  按一下**新增**。您的新認證會列出在**服務認證**表格中。
    7.  按一下**檢視認證**。
    8.  記下 **apikey**，以使用 OAuth2 記號向 {{site.data.keyword.cos_full_notm}} 服務鑑別。對於 HMAC 鑑別，在 **cos_hmac_keys** 區段中，記下 **access_key_id** 及 **secret_access_key**。
 3. [將服務認證儲存至叢集的 Kubernetes 密碼](#create_cos_secret)，以存取 {{site.data.keyword.cos_full_notm}} 服務實例。
@@ -66,7 +70,7 @@ subcollection: containers
 
 請遵循下列步驟，為 {{site.data.keyword.cos_full_notm}} 服務實例的認證建立 Kubernetes 密碼。如果您計劃使用本端 Cloud Object Storage 伺服器或不同的 s3 API 端點，請使用適當的認證來建立 Kubernetes 密碼。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 擷取 [{{site.data.keyword.cos_full_notm}} 服務認證](#service_credentials)的 **apikey** 或 **access_key_id** 及 **secret_access_key**。
 
@@ -75,15 +79,15 @@ subcollection: containers
    ibmcloud resource service-instance <service_name> | grep GUID
    ```
    {: pre}
-   
-3. 建立用來儲存服務認證的 Kubernetes 密碼。當您建立密碼時，所有值都會自動編碼為 base64。 
-   
+
+3. 建立用來儲存服務認證的 Kubernetes 密碼。當您建立密碼時，所有值都會自動編碼為 base64。
+
    **API 金鑰使用範例：**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=api-key=<api_key> --from-literal=service-instance-id=<service_instance_guid>
    ```
    {: pre}
-   
+
    **HMAC 鑑別範例：**
    ```
    kubectl create secret generic cos-write-access --type=ibm/ibmc-s3fs --from-literal=access-key=<access_key_ID> --from-literal=secret-key=<secret_access_key>    
@@ -132,7 +136,7 @@ subcollection: containers
 尋找如何更新或移除 {{site.data.keyword.cos_full_notm}} 外掛程式的指示？請參閱[更新外掛程式](#update_cos_plugin)及[移除外掛程式](#remove_cos_plugin)。
 {: tip}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 確定您的工作者節點套用次要版本的最新修補程式。
    1. 列出工作者節點的現行修補程式版本。
@@ -145,7 +149,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -156,25 +160,20 @@ subcollection: containers
    3. 重新載入您的工作者節點，以套用最新的修補程式版本。在重新載入您的工作者節點之前，請遵循 [ibmcloud ks worker-reload 指令](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)中的指示，以在您的工作者節點上正常地重新排程所有執行中 Pod。請注意，在重新載入期間，會使用最新的映像檔更新您的工作者節點機器，而且如果資料不是[儲存在工作者節點之外](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)即會被刪除。
 
 
-2.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
+2.  選擇是要安裝使用還是不使用 Helm 伺服器 Tiller 的 {{site.data.keyword.cos_full_notm}} 外掛程式。然後，[按照指示](/docs/containers?topic=containers-helm#public_helm_install)在本端機器上安裝 Helm 用戶端以及（如果要使用 Tiller）使用服務帳戶在叢集裡安裝 Tiller。
 
-    Helm 伺服器 Tiller 的安裝需要公用 Google Container Registry 的公用網路連線。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則可以選擇[將 Tiller 映像檔取回至本端機器，並將映像檔推送至 {{site.data.keyword.registryshort_notm}} 中的名稱空間](/docs/containers?topic=containers-helm#private_local_tiller)，或[在不使用 Tiller 的情況下安裝 Helm 圖表](/docs/containers?topic=containers-helm#private_install_without_tiller)。
-    {: note}
-
-3.  驗證已使用服務帳戶安裝 tiller。
-
-    ```
+3. 如果要安裝使用 Tiller 的外掛程式，請驗證 Tiller 是否已隨服務帳戶一起安裝。
+   ```
     kubectl get serviceaccount -n kube-system tiller
     ```
-    {: pre}
-
-    輸出範例：
-
-    ```
+   {: pre}
+   
+   輸出範例：
+   ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
     ```
-    {: screen}
+   {: screen}
 
 4. 將 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫新增至叢集。
    ```
@@ -182,22 +181,22 @@ subcollection: containers
    ```
    {: pre}
 
-5. 更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
+4. 更新 Helm 儲存庫，以擷取此儲存庫中所有 Helm 圖表的最新版本。
    ```
    helm repo update
    ```
    {: pre}
 
-6. 下載 Helm 圖表，並解壓縮現行目錄中的圖表。
+5. 下載 Helm 圖表，並解壓縮現行目錄中的圖表。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-7. 如果您使用 macOS 或 Linux 發行套件，請安裝 {{site.data.keyword.cos_full_notm}} Helm 外掛程式 `ibmc`。此外掛程式用來自動擷取您的叢集位置，以及在儲存空間類別中設定 {{site.data.keyword.cos_full_notm}} 儲存區的 API 端點。如果您使用 Windows 作為作業系統，請繼續進行下一步。
+7. 如果使用 OS X 或 Linux 發行套件，請安裝 {{site.data.keyword.cos_full_notm}} Helm 外掛程式 `ibmc`。此外掛程式用來自動擷取您的叢集位置，以及在儲存空間類別中設定 {{site.data.keyword.cos_full_notm}} 儲存區的 API 端點。如果您使用 Windows 作為作業系統，請繼續進行下一步。
    1. 安裝 Helm 外掛程式。
       ```
-      helm plugin install ibmcloud-object-storage-plugin/helm-ibmc
+      helm plugin install ./ibm-object-storage-plugin/helm-ibmc
       ```
       {: pre}
 
@@ -206,6 +205,9 @@ subcollection: containers
       Installed plugin: ibmc
       ```
       {: screen}
+      
+      如果看到錯誤 `Error: plugin already exists`，請透過執行 `rm -rf ~/.helm/plugins/helm-ibmc` 來移除 `ibmc` Helm 外掛程式。
+      {: tip}
 
    2. 驗證已順利安裝 `ibmc` 外掛程式。
       ```
@@ -215,20 +217,26 @@ subcollection: containers
 
       輸出範例：
       ```
-      在 IBM K8S Service 中安裝或升級 Helm 圖表
+      Install or upgrade Helm charts in IBM K8S Service(IKS) and IBM Cloud Private(ICP)
 
-      可用的指令：
-       helm ibmc install [CHART][flags]              安裝 Helm 圖表
-       helm ibmc upgrade [RELEASE][CHART] [flags]    將版本升級為新版的 Helm 圖表
+      Available Commands:
+         helm ibmc install [CHART][flags]                      Install a Helm 圖表         helm ibmc upgrade [RELEASE][CHART] [flags]            Upgrade the release to a new version of the Helm 圖表         helm ibmc template [CHART][flags] [--apply|--delete]  Install/uninstall a Helm 圖表without tiller
 
-      可用的旗標：
-       --verbos                      （選用）詳細程度強化... ...
-       -f, --values valueFiles       （選用）指定 YAML 檔案中的值（可以指定多個）（預設值 []）
-       -h, --help                    （選用）此文字。
-       -u, --update                  （選用）將此外掛程式更新為最新版
+      Available Flags:
+         -h, --help                    (Optional) This text.
+         -u, --update                  （選用）將此外掛程式更新為最新版
 
-      範例用法：
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+      Example Usage:
+         With Tiller:
+             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+         Without Tiller:
+             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+
+      Note:
+         1. It is always recommended to install latest version of ibm-object-storage-plugin chart.
+         2. It is always recommended to have 'kubectl' client up-to-date.
       ```
       {: screen}
 
@@ -240,7 +248,7 @@ subcollection: containers
    2. [將 {{site.data.keyword.cos_full_notm}} 服務認證儲存至 Kubernetes 密碼](#create_cos_secret)。
    3. 導覽至 `templates` 目錄，並列出可用的檔案。  
       ```
-      cd ibmcloud-object-storage-plugin/templates && ls
+      cd ibm-object-storage-plugin/templates && ls
       ```
       {: pre}
 
@@ -262,16 +270,32 @@ subcollection: containers
 
 9. 安裝 {{site.data.keyword.cos_full_notm}} 外掛程式。安裝外掛程式時，會將預先定義的儲存空間類別新增至叢集。
 
-   - **若為 macOS 及 Linux：**
-     - 如果您已跳過前一個步驟，則請安裝但不限制為特定 Kubernetes 密碼。
-          ```
-       helm ibmc install iks-charts/ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+   - **對於 OS X 和 Linux：**
+     - 如果您已跳過前一個步驟，則請安裝但不限制為特定 Kubernetes 密碼。</br>
+          **不含 Tiller**：
+       ```
+       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       ```
+       {: pre}
+       
+       **含 Tiller**：
+       ```
+       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
-     - 如果您已完成前一個步驟，則請安裝並限制為特定 Kubernetes 密碼。
-          ```
-       helm ibmc install ./ibmcloud-object-storage-plugin --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+     - 如果您已完成前一個步驟，則請安裝並限制為特定 Kubernetes 密碼。</br>
+          **不含 Tiller**：
+       ```
+       cd ../..
+       helm ibmc template ./ibm-object-storage-plugin --apply 
+       ```
+       {: pre}
+       
+       **含 Tiller**：
+       ```
+       cd ../..
+       helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -289,95 +313,96 @@ subcollection: containers
         {: pre}
 
      3. 安裝 Helm 圖表。
-        - 如果您已跳過前一個步驟，則請安裝但不限制為特定 Kubernetes 密碼。
+        - 如果您已跳過前一個步驟，則請安裝但不限制為特定 Kubernetes 密碼。</br>
+          **不含 Tiller**：
+       ```
+          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
           ```
-          helm install iks-charts/ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          {: pre}
+          
+          **含 Tiller**：
+          ```
+          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-        - 如果您已完成前一個步驟，則請安裝並限制為特定 Kubernetes 密碼。
+        - 如果您已完成前一個步驟，則請安裝並限制為特定 Kubernetes 密碼。</br>
+          **不含 Tiller**：
           ```
-          helm install ./ibmcloud-object-storage-plugin --set dcname="$DC_NAME" --name ibmcloud-object-storage-plugin -f ibmcloud-object-storage-plugin/ibm/values.yaml
+          cd ../..
+          helm ibmc template ./ibm-object-storage-plugin --apply 
+          ```
+          {: pre}
+          
+          **含 Tiller**：
+          ```
+          cd ../..
+          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
-   輸出範例：
+
+   不使用 Tiller 進行安裝的範例輸出：
    ```
-   Installing the Helm chart
-   DC: dal10  Chart: ibm/ibmcloud-object-storage-plugin
-   NAME:   mewing-duck
-   LAST DEPLOYED: Mon Jul 30 13:12:59 2018
-   NAMESPACE: default
-   STATUS: DEPLOYED
-
-   RESOURCES:
-   ==> v1/Pod(related)
-   NAME                                             READY  STATUS             RESTARTS  AGE
-   ibmcloud-object-storage-driver-hzqp9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-jtdb9             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-driver-tl42l             0/1    ContainerCreating  0         1s
-   ibmcloud-object-storage-plugin-7d87fbcbcc-wgsn8  0/1    ContainerCreating  0         1s
-
-   ==> v1/StorageClass
-   NAME                                  PROVISIONER       AGE
-   ibmc-s3fs-cold-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-cold-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-cross-region           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-cross-region      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-perf-regional          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-flex-regional               ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-cross-region       ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-cross-region  ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-perf-regional      ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-standard-regional           ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-cross-region          ibm.io/ibmc-s3fs  1s
-   ibmc-s3fs-vault-regional              ibm.io/ibmc-s3fs  1s
-
-   ==> v1/ServiceAccount
-   NAME                            SECRETS  AGE
-   ibmcloud-object-storage-driver  1        1s
-   ibmcloud-object-storage-plugin  1        1s
-
-   ==> v1beta1/ClusterRole
-   NAME                                   AGE
-   ibmcloud-object-storage-secret-reader  1s
-   ibmcloud-object-storage-plugin         1s
-
-   ==> v1beta1/ClusterRoleBinding
-   NAME                                   AGE
-   ibmcloud-object-storage-plugin         1s
-   ibmcloud-object-storage-secret-reader  1s
-
-   ==> v1beta1/DaemonSet
-   NAME                            DESIRED  CURRENT  READY  UP-TO-DATE  AVAILABLE  NODE SELECTOR  AGE
-   ibmcloud-object-storage-driver  3        3        0      3           0          <none>         1s
-
-   ==> v1beta1/Deployment
-   NAME                            DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
-   ibmcloud-object-storage-plugin  1        1        1           0          1s
-
-   NOTES:
-   Thank you for installing: ibmcloud-object-storage-plugin.   Your release is named: mewing-duck
-
-   Please refer Chart README.md file for creating a sample PVC.
-   Please refer Chart RELEASE.md to see the release details/fixes.
+   Rendering the Helm 圖表templates...
+   DC: dal10
+   Chart: iks-charts/ibm-object-storage-plugin
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-perf-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-standard-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-cross-region.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-vault-regional.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner-sa.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/flex-driver.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/tests/check-driver-install.yaml
+   wrote object-storage-templates/ibm-object-storage-plugin/templates/provisioner.yaml
+   Installing the Helm chart...
+   serviceaccount/ibmcloud-object-storage-driver created
+   daemonset.apps/ibmcloud-object-storage-driver created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-cold-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-flex-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-perf-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-standard-regional created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-cross-region created
+   storageclass.storage.k8s.io/ibmc-s3fs-vault-regional created
+   serviceaccount/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrole.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-plugin created
+   clusterrolebinding.rbac.authorization.k8s.io/ibmcloud-object-storage-secret-reader created
+   deployment.apps/ibmcloud-object-storage-plugin created
+   pod/ibmcloud-object-storage-driver-test created
    ```
    {: screen}
 
 10. 驗證已正確安裝外掛程式。
-   ```
-   kubectl get pod -n kube-system -o wide | grep object
-   ```
-   {: pre}
+    ```
+    kubectl get pod -n kube-system -o wide | grep object
+    ```
+    {: pre}
 
-   輸出範例：
-   ```
-   ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
-   ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
-   ```
-   {: screen}
+    輸出範例：
+    ```
+    ibmcloud-object-storage-driver-9n8g8                              1/1       Running   0          2m
+    ibmcloud-object-storage-plugin-7c774d484b-pcnnx                   1/1       Running   0          2m
+    ```
+    {: screen}
 
-   當您看到一個 `ibmcloud-object-storage-plugin` Pod 及一個以上的 `ibmcloud-object-storage-driver` Pod 時，安裝即成功。`ibmcloud-object-storage-driver` Pod 的數目等於叢集裡的工作者節點數目。所有 Pod 都必須處於 `Running` 狀態，外掛程式才能正常運作。如果 Pod 失敗，請執行 `kubectl describe pod -n kube-system <pod_name>`，以尋找失敗的主要原因。
+    當您看到一個 `ibmcloud-object-storage-plugin` Pod 及一個以上的 `ibmcloud-object-storage-driver` Pod 時，安裝即成功。`ibmcloud-object-storage-driver` Pod 的數目會等於叢集裡的工作者節點數目。所有 Pod 都必須處於 `Running` 狀態，外掛程式才能正常運作。如果 Pod 失敗，請執行 `kubectl describe pod -n kube-system <pod_name>`，以尋找失敗的主要原因。
 
 11. 驗證已順利建立儲存空間類別。
     ```
@@ -410,40 +435,72 @@ subcollection: containers
 您可以將現有的 {{site.data.keyword.cos_full_notm}} 外掛程式升級至最新版本。
 {: shortdesc}
 
-1. 更新 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫，以擷取此儲存庫中所有 Helm 圖表的最新版本。
+1. 如果先前安裝了名為 `ibmcloud-object-storage-plugin` 的 Helm 圖表 1.0.4 版或較舊版本，請從叢集移除此 Helm 安裝。然後，重新安裝 Helm 圖表。
+   1. 檢查叢集裡是否安裝了舊版本的 {{site.data.keyword.cos_full_notm}} Helm 圖表。  
+      ```
+      helm ls | grep ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+      輸出範例：
+      ```
+      ibmcloud-object-storage-plugin	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.4	default
+      ```
+      {: screen}
+
+   2. 如果有名為 `ibmcloud-object-storage-plugin` 的 Helm 圖表 1.0.4 版或較舊版本，請從叢集移除此 Helm 圖表。如果有名為 `ibm-object-storage-plugin` 的 Helm 圖表 1.0.5 版或更新版本，請繼續執行步驟 2。
+      ```
+      helm delete --purge ibmcloud-object-storage-plugin
+      ```
+      {: pre}
+
+   3. 執行[安裝 {{site.data.keyword.cos_full_notm}} 外掛程式](#install_cos)中的步驟，以安裝最新版本的 {{site.data.keyword.cos_full_notm}} 外掛程式。
+
+2. 更新 {{site.data.keyword.Bluemix_notm}} Helm 儲存庫，以擷取此儲存庫中所有 Helm 圖表的最新版本。
    ```
    helm repo update
    ```
    {: pre}
 
-2. 如果您使用 macOS 或 Linux 發行套件，請將 {{site.data.keyword.cos_full_notm}} `ibmc` Helm 外掛程式更新為最新版本。
+3. 如果使用 OS X 或 Linux 發行套件，請將 Helm 外掛程式 {{site.data.keyword.cos_full_notm}} `ibmc` 更新為最新版本。
    ```
    helm ibmc --update
    ```
    {: pre}
 
-3. 將最新的 {{site.data.keyword.cos_full_notm}} Helm 圖表下載至本端機器，並解壓縮套件以檢閱 `release.md` 檔案來尋找最新版本資訊。
+4. 將最新的 {{site.data.keyword.cos_full_notm}} Helm 圖表下載至本端機器，並解壓縮套件以檢閱 `release.md` 檔案來尋找最新版本資訊。
    ```
-   helm fetch --untar iks-charts/ibmcloud-object-storage-plugin
-   ```
-
-4. 尋找 Helm 圖表的安裝名稱。
-   ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm fetch --untar iks-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-   輸出範例：
+5. 升級該外掛程式。</br>
+   **不含 Tiller**：
+           
    ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-5. 將 {{site.data.keyword.cos_full_notm}} Helm 圖表升級至最新版本。
-   ```   
-   helm ibmc upgrade <helm_chart_name> iks-charts/ibmcloud-object-storage-plugin --force --recreate-pods -f ./ibmcloud-object-storage-plugin/ibm/values.yaml
+   helm ibmc template iks-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
+     
+   **含 Tiller**：
+           
+   1. 尋找 Helm 圖表的安裝名稱。
+      ```
+      helm ls | grep ibm-object-storage-plugin
+      ```
+      {: pre}
+
+      輸出範例：
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibm-object-storage-plugin-1.0.5	default
+      ```
+      {: screen}
+
+   2. 將 {{site.data.keyword.cos_full_notm}} Helm 圖表升級至最新版本。
+      ```   
+      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      ```
+      {: pre}
 
 6. 驗證已順利升級 `ibmcloud-object-storage-plugin`。  
    ```
@@ -471,7 +528,7 @@ subcollection: containers
 ### 移除 IBM Cloud Object Storage 外掛程式
 {: #remove_cos_plugin}
 
-如果您不要在叢集裡佈建及使用 {{site.data.keyword.cos_full_notm}}，則可以解除安裝 Helm 圖表。
+如果不想在叢集裡佈建和使用 {{site.data.keyword.cos_full_notm}}，則可以解除安裝該外掛程式。
 {: shortdesc}
 
 移除外掛程式不會移除現有的 PVC、PV 或資料。移除外掛程式時，會從叢集移除所有相關的 Pod 及常駐程式集。除非您配置應用程式直接使用 {{site.data.keyword.cos_full_notm}} API，否則在移除外掛程式之後，無法針對叢集佈建新的 {{site.data.keyword.cos_full_notm}}，也無法使用現有的 PVC 及 PV。
@@ -484,41 +541,49 @@ subcollection: containers
 
 若要移除外掛程式，請執行下列動作：
 
-1. 尋找 Helm 圖表的安裝名稱。
+1. 從叢集移除該外掛程式。</br>
+   **含 Tiller**： 
+   1. 尋找 Helm 圖表的安裝名稱。
+      ```
+      helm ls | grep object-storage-plugin
+      ```
+      {: pre}
+
+      輸出範例：
+      ```
+      <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
+      ```
+      {: screen}
+
+   2. 移除 Helm 圖表，以刪除 {{site.data.keyword.cos_full_notm}} 外掛程式。
+      ```
+      helm delete --purge <helm_chart_name>
+      ```
+      {: pre}
+
+   **不含 Tiller**： 
    ```
-   helm ls | grep ibmcloud-object-storage-plugin
+   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
-   輸出範例：
-   ```
-   <helm_chart_name> 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-object-storage-plugin-1.0.0	default
-   ```
-   {: screen}
-
-2. 移除 Helm 圖表，以刪除 {{site.data.keyword.cos_full_notm}} 外掛程式。
-   ```
-   helm delete --purge <helm_chart_name>
-   ```
-   {: pre}
-
-3. 驗證已移除 {{site.data.keyword.cos_full_notm}} Pod。
+2. 驗證已移除 {{site.data.keyword.cos_full_notm}} Pod。
    ```
    kubectl get pod -n kube-system | grep object-storage
    ```
    {: pre}
 
-      如果 CLI 輸出中沒有顯示任何 Pod，則表示已順利移除 Pod。
+   如果 CLI 輸出中沒有顯示任何 Pod，則表示已順利移除 Pod。
 
-4. 驗證已移除儲存空間類別。
+3. 驗證已移除儲存空間類別。
    ```
    kubectl get storageclasses | grep s3
    ```
    {: pre}
 
-      如果 CLI 輸出中沒有顯示任何儲存空間類別，則表示已順利移除儲存空間類別。
+   如果 CLI 輸出中沒有顯示任何儲存空間類別，則表示已順利移除儲存空間類別。
 
-5. 如果您使用 macOS 或 Linux 發行套件，請移除 `ibmc` Helm 外掛程式。如果您使用 Windows，則不需要執行此步驟。
+4. 如果使用 OS X 或 Linux 發行套件，請移除 Helm 外掛程式 `ibmc`。如果您使用 Windows，則不需要執行此步驟。
    1. 移除 `ibmc` 外掛程式。
       ```
       rm -rf ~/.helm/plugins/helm-ibmc
@@ -532,7 +597,7 @@ subcollection: containers
       {: pre}
 
       輸出範例：
-      ```
+     ```
      NAME	VERSION	DESCRIPTION
      ```
      {: screen}
@@ -573,7 +638,7 @@ subcollection: containers
    - **標準**：此選項用於經常存取的熱資料。常見使用案例是 Web 或行動應用程式。
    - **加密配置檔**：此選項用於不常存取的工作負載或冷資料（例如一個月一次或更少）。常見使用案例是保存檔、短期資料保留、數位資產保留、磁帶更換及災難回復。
    - **冷**：此選項用於很少存取（每 90 天或更少）的冷資料或非作用中資料。常見使用案例是保存檔、長期備份、您針對法規遵循所保留的歷程資料，或很少存取的工作負載及應用程式。
-   - **Flex**：此選項用於工作負載以及未遵循特定使用型樣的資料，或太大而無法決定或預測使用型樣的資料。**提示：**請查看此[部落格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/)，以瞭解 Flex 儲存空間類別與傳統儲存空間層級相較之下的運作方式。   
+   - **Flex**：此選項用於工作負載以及未遵循特定使用模式的資料，或太大而無法決定或預測使用模式的資料。**提示：**請查看此[部落格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2017/03/interconnect-2017-changing-rules-storage/)，以瞭解 Flex 儲存空間類別與傳統儲存空間層級相較之下的運作方式。   
 
 3. 決定儲存區中所儲存資料的備援層次。
    - **跨地區**：使用此選項時，您的資料會儲存在地理位置內的三個地區，以達到最高可用性。如果您的工作負載分散在多個地區，則會將要求遞送至最近的地區端點。根據您叢集所在的位置，稍早安裝的 `ibmc` Helm 外掛程式會自動設定地理位置的 API 端點。例如，如果您的叢集是在 `US South`，則會將您的儲存空間類別配置成使用您儲存區的 `US GEO` API 端點。如需相關資訊，請參閱[地區及端點](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)。  
@@ -608,7 +673,7 @@ subcollection: containers
    <tbody>
    <tr>
    <td><code>ibm.io/chunk-size-mb</code></td>
-   <td>在 {{site.data.keyword.cos_full_notm}} 中讀取或寫入的資料區塊大小（以 MB 為單位）。名稱中包含 <code>perf</code> 的儲存空間類別設定為 52 MB。名稱中沒有 <code>perf</code> 的儲存空間類別使用 16 MB 的區塊。例如，如果您要讀取 1 GB 的檔案，則外掛程式會以多個 16 或 52 MB 區塊來讀取此檔案。</td>
+   <td>在 {{site.data.keyword.cos_full_notm}} 中讀取或寫入的資料片段大小（以 MB 為單位）。名稱中包含 <code>perf</code> 的儲存空間類別設定為 52 MB。名稱中沒有 <code>perf</code> 的儲存空間類別使用 16 MB 的片段。例如，如果您要讀取 1 GB 的檔案，則外掛程式會以多個 16 或 52 MB 片段來讀取此檔案。</td>
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
@@ -699,6 +764,7 @@ subcollection: containers
        ibm.io/bucket: "<bucket_name>"
        ibm.io/object-path: "<bucket_subdirectory>"
        ibm.io/secret-name: "<secret_name>"
+       ibm.io/endpoint: "https://<s3fs_service_endpoint>"
    spec:
      accessModes:
        - ReadWriteOnce
@@ -725,14 +791,14 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>ibm.io/auto-create-bucket</code></td>
-   <td>請選擇下列選項：<ul><li><strong>true</strong>：當您建立 PVC 時，會自動建立 PV 以及 {{site.data.keyword.cos_full_notm}} 服務實例中的儲存區。選擇此選項，以在 {{site.data.keyword.cos_full_notm}} 服務實例中建立新的儲存區。</li><li><strong>false</strong>：如果您要存取現有儲存區中的資料，請選擇此選項。當您建立 PVC 時，會自動建立 PV，並將其鏈結至您在 <code>ibm.io/bucket</code> 中指定的儲存區。</td>
+   <td>請從下列選項中進行選擇：<ul><li><strong>true</strong>：當您建立 PVC 時，會自動建立 PV 以及 {{site.data.keyword.cos_full_notm}} 服務實例中的儲存區。選擇此選項，以在 {{site.data.keyword.cos_full_notm}} 服務實例中建立新的儲存區。</li><li><strong>false</strong>：如果您要存取現有儲存區中的資料，請選擇此選項。當您建立 PVC 時，會自動建立 PV，並將其鏈結至您在 <code>ibm.io/bucket</code> 中指定的儲存區。</td>
    </tr>
    <tr>
    <td><code>ibm.io/auto-delete-bucket</code></td>
-   <td>請選擇下列選項：<ul><li><strong>true</strong>：當您刪除 PVC 時，會自動移除您的資料、儲存區和 PV。您的 {{site.data.keyword.cos_full_notm}} 服務實例仍然存在，並未刪除。如果您選擇將此選項設為 <strong>true</strong>，則必須設定 <code>ibm.io/auto-create-bucket: true</code> 及 <code>ibm.io/bucket: ""</code>，以使用格式為 <code>tmp-s3fs-xxxx</code> 的名稱自動建立儲存區。</li><li><strong>false</strong>：當您刪除 PVC 時，會自動刪除 PV，但會保留您在 {{site.data.keyword.cos_full_notm}} 服務實例中的資料及儲存區。若要存取資料，您必須以現有儲存區的名稱建立新的 PVC。</li></ul>
+   <td>請從下列選項中進行選擇：<ul><li><strong>true</strong>：當您刪除 PVC 時，會自動移除您的資料、儲存區和 PV。您的 {{site.data.keyword.cos_full_notm}} 服務實例仍然存在，並未刪除。如果您選擇將此選項設為 <strong>true</strong>，則必須設定 <code>ibm.io/auto-create-bucket: true</code> 及 <code>ibm.io/bucket: ""</code>，以使用格式為 <code>tmp-s3fs-xxxx</code> 的名稱自動建立儲存區。</li><li><strong>false</strong>：當您刪除 PVC 時，會自動刪除 PV，但會保留您在 {{site.data.keyword.cos_full_notm}} 服務實例中的資料及儲存區。若要存取資料，您必須以現有儲存區的名稱建立新的 PVC。</li></ul>
    <tr>
    <td><code>ibm.io/bucket</code></td>
-   <td>請選擇下列選項：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 <code>tmp-s3fs-xxxx</code> 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul> </td>
+   <td>請從下列選項中進行選擇：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 <code>tmp-s3fs-xxxx</code> 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul> </td>
    </tr>
    <tr>
    <td><code>ibm.io/object-path</code></td>
@@ -743,12 +809,16 @@ subcollection: containers
    <td>輸入保留您稍早建立之 {{site.data.keyword.cos_full_notm}} 認證的密碼名稱。</td>
    </tr>
    <tr>
+  <td><code>ibm.io/endpoint</code></td>
+  <td>如果 {{site.data.keyword.cos_full_notm}} 服務實例的建立位置與叢集所在的位置不同，請輸入要使用的 {{site.data.keyword.cos_full_notm}} 服務實例的專用或公用服務端點。如需可用服務端點的概觀，請參閱[其他端點資訊](/docs/services/cloud-object-storage?topic=cloud-object-storage-advanced-endpoints)。依預設，<code>ibmc</code> Helm 外掛程式會自動擷取叢集位置，並使用與叢集位置符合的 {{site.data.keyword.cos_full_notm}} 專用服務端點來建立儲存類別。如果叢集位於其中一個都會城市區域（例如，`dal10`）中，則將使用該都會城市（在本例中為達拉斯）的 {{site.data.keyword.cos_full_notm}} 專用服務端點。若要驗證儲存類別中的服務端點是否與服務實例的服務端點相符合，請執行 `kubectl describe storageclass <storageclassname>`。確保以 `https://<s3fs_private_service_endpoint>`（對於專用服務端點）或 `http://<s3fs_public_service_endpoint>`（對於公用服務端點）格式輸入服務端點。如果儲存類別中的服務端點與 {{site.data.keyword.cos_full_notm}} 服務實例的服務端點相符合，請不要在 PVC YAML 檔案中包含 <code>ibm.io/endpoint</code> 選項。</td>
+  </tr>
+   <tr>
    <td><code>resources.requests.storage</code></td>
    <td>您 {{site.data.keyword.cos_full_notm}} 儲存區的虛構大小（以 GB 為單位）。Kubernetes 需要大小，但 {{site.data.keyword.cos_full_notm}} 中不需要。您可以輸入任何想要的大小。您在 {{site.data.keyword.cos_full_notm}} 中使用的實際空間可能不同，並根據[定價表格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api) 計費。</td>
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
-   <td>請選擇下列選項：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入要用於新儲存區的儲存空間類別。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您用來建立現有儲存區的儲存空間類別。</br></br>如果您在 {{site.data.keyword.cos_full_notm}} 服務實例中手動建立儲存區，或不記得您使用的儲存空間類別，請在 {{site.data.keyword.Bluemix}} 儀表板中尋找服務實例，並檢閱現有儲存區的<strong>類別</strong>及<strong>位置</strong>。然後，使用適當的[儲存空間類別](#cos_storageclass_reference)。<p class="note">您儲存空間類別中所設定的 {{site.data.keyword.cos_full_notm}} API 端點，是根據您叢集所在的地區。如果您要存取的儲存區位於與叢集所在地區不同的地區，則必須建立[自訂儲存空間類別](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，並使用您儲存區的適當 API 端點。</p></li></ul>  </td>
+   <td>請從下列選項中進行選擇：<ul><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>true</strong>：請輸入要用於新儲存區的儲存空間類別。</li><li>如果 <code>ibm.io/auto-create-bucket</code> 設為 <strong>false</strong>：請輸入您用來建立現有儲存區的儲存空間類別。</br></br>如果您在 {{site.data.keyword.cos_full_notm}} 服務實例中手動建立儲存區，或不記得您使用的儲存空間類別，請在 {{site.data.keyword.Bluemix}} 儀表板中尋找服務實例，並檢閱現有儲存區的<strong>類別</strong>及<strong>位置</strong>。然後，使用適當的[儲存空間類別](#cos_storageclass_reference)。<p class="note">您儲存空間類別中所設定的 {{site.data.keyword.cos_full_notm}} API 端點，是根據您叢集所在的地區。如果您要存取的儲存區位於與叢集所在地區不同的地區，則必須建立[自訂儲存空間類別](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，並使用您儲存區的適當 API 端點。</p></li></ul>  </td>
    </tr>
    </tbody>
    </table>
@@ -836,7 +906,7 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>選用項目：若要在執行 Kubernetes 1.12 版或更早版本的叢集中使用非 root 使用者身分執行應用程式，請在未於部署 YAML 中設定 `fsGroup` 的情況下同時定義非 root 使用者，以指定 Pod 的[安全環境定義 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。設定 `fsGroup`，即會在部署 Pod 時觸發 {{site.data.keyword.cos_full_notm}} 外掛程式更新儲存區中所有檔案的群組許可權。更新許可權是一項寫入作業，並影響效能。根據您的檔案數目，更新許可權可能會讓 Pod 無法啟動並進入 <code>Running</code> 狀態。</br></br>如果您的叢集執行 Kubernetes 1.13 版或更新版本及 {{site.data.keyword.Bluemix_notm}} Object Storage 外掛程式 1.0.4 版或更新版本，則可以變更 s3fs 裝載點的擁有者。若要變更擁有者，請將 `runAsUser` 及 `fsGroup` 設為您要擁有 s3fs 裝載點的相同非 root 使用者 ID，以指定安全環境定義。如果這兩個值不相符，則 `root` 使用者會自動擁有裝載點。</td>
+    <td>選用項目：若要在執行 Kubernetes 1.12 版或更早版本的叢集裡使用非 root 使用者身分執行應用程式，請在未於部署 YAML 中設定 `fsGroup` 的情況下同時定義非 root 使用者，以指定 Pod 的[安全環境定義 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/)。設定 `fsGroup`，即會在部署 Pod 時觸發 {{site.data.keyword.cos_full_notm}} 外掛程式更新儲存區中所有檔案的群組許可權。更新許可權是一項寫入作業，並影響效能。根據您的檔案數目，更新許可權可能會讓 Pod 無法啟動並進入 <code>Running</code> 狀態。</br></br>如果您的叢集執行 Kubernetes 1.13 版或更新版本及 {{site.data.keyword.Bluemix_notm}} Object Storage 外掛程式 1.0.4 版或更新版本，則可以變更 s3fs 裝載點的擁有者。若要變更擁有者，請將 `runAsUser` 及 `fsGroup` 設為您要擁有 s3fs 裝載點的相同非 root 使用者 ID，以指定安全環境定義。如果這兩個值不相符，則 `root` 使用者會自動擁有裝載點。</td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -903,10 +973,10 @@ subcollection: containers
    6. 開啟儲存區，並驗證您可以看到所建立的 `test.txt`。
 
 
-## 在有狀態集中使用物件儲存空間
+## 在有狀態集合中使用物件儲存空間
 {: #cos_statefulset}
 
-如果您具有有狀態應用程式（例如資料庫），則可以建立有狀態集，以使用 {{site.data.keyword.cos_full_notm}} 來儲存應用程式資料。或者，您也可以使用 {{site.data.keyword.Bluemix_notm}} 資料庫即服務（例如 {{site.data.keyword.cloudant_short_notm}}），然後將資料儲存在雲端。
+如果您具有有狀態應用程式（例如資料庫），則可以建立有狀態集合，以使用 {{site.data.keyword.cos_full_notm}} 來儲存應用程式資料。或者，您也可以使用 {{site.data.keyword.Bluemix_notm}} 資料庫即服務（例如 {{site.data.keyword.cloudant_short_notm}}），然後將資料儲存在雲端。
 {: shortdesc}
 
 開始之前：
@@ -914,11 +984,11 @@ subcollection: containers
 - [建立密碼來儲存 {{site.data.keyword.cos_full_notm}} 服務認證](#create_cos_secret)。
 - [決定 {{site.data.keyword.cos_full_notm}} 的配置](#configure_cos)。
 
-若要部署使用物件儲存空間的有狀態集，請執行下列動作：
+若要部署使用物件儲存空間的有狀態集合，請執行下列動作：
 
-1. 建立有狀態集的配置檔，以及您用來公開有狀態集的服務。下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集，每個抄本都使用個別儲存區，或所有抄本都共用相同的儲存區。
+1. 建立有狀態集合的配置檔，以及您用來公開有狀態集合的服務。下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集合，每個抄本都使用個別儲存區，或所有抄本都共用相同的儲存區。
 
-   **範例：建立具有 3 個抄本的有狀態集，每個抄本都使用個別儲存區**：
+   **範例：建立具有 3 個抄本的有狀態集合，每個抄本都使用個別儲存區**：
    ```
    apiVersion: v1
    kind: Service
@@ -980,7 +1050,7 @@ subcollection: containers
    ```
    {: codeblock}
 
-   **範例：建立具有 3 個抄本的有狀態集，全部都共用相同的儲存區 `mybucket`**：
+   **範例：建立具有 3 個抄本的有狀態集合，全部都共用相同的儲存區 `mybucket`**：
    ```
    apiVersion: v1
    kind: Service
@@ -1044,34 +1114,34 @@ subcollection: containers
 
 
    <table>
-    <caption>瞭解有狀態集 YAML 檔案元件</caption>
+    <caption>瞭解有狀態集合 YAML 檔案元件</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解有狀態集 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解有狀態集合 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
     <td style="text-align:left"><code>metadata.name</code></td>
-    <td style="text-align:left">輸入有狀態集的名稱。您輸入的名稱用來建立 PVC 名稱，格式如下：<code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
+    <td style="text-align:left">輸入有狀態集合的名稱。您輸入的名稱用來建立 PVC 名稱，格式如下：<code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.serviceName</code></td>
-    <td style="text-align:left">輸入您要用來公開有狀態集的服務名稱。</td>
+    <td style="text-align:left">輸入您要用來公開有狀態集合的服務名稱。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.replicas</code></td>
-    <td style="text-align:left">輸入有狀態集的抄本數目。</td>
+    <td style="text-align:left">輸入有狀態集合的抄本數目。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">輸入您要內含在有狀態集及 PVC 的所有標籤。Kubernetes 無法辨識有狀態集的 <code>volumeClaimTemplates</code> 中所內含的標籤。相反地，您必須在有狀態集 YAML 的 <code>spec.selector.matchLabels</code> 及 <code>spec.template.metadata.labels</code> 區段中定義這些標籤。為了確保所有有狀態集抄本都內含在服務的負載平衡中，請包括您在服務 YAML 的 <code>spec.selector</code> 區段中所使用的相同標籤。</td>
+    <td style="text-align:left">輸入您要內含在有狀態集合及 PVC 的所有標籤。Kubernetes 無法辨識有狀態集合的 <code>volumeClaimTemplates</code> 中所內含的標籤。相反地，您必須在有狀態集合 YAML 的 <code>spec.selector.matchLabels</code> 及 <code>spec.template.metadata.labels</code> 區段中定義這些標籤。為了確保所有有狀態集合抄本都內含在服務的負載平衡中，請包括您在服務 YAML 的 <code>spec.selector</code> 區段中所使用的相同標籤。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
-    <td style="text-align:left">輸入您已新增至有狀態集 YAML 的 <code>spec.selector.matchLabels</code> 區段的相同標籤。</td>
+    <td style="text-align:left">輸入您已新增至有狀態集合 YAML 的 <code>spec.selector.matchLabels</code> 區段的相同標籤。</td>
     </tr>
     <tr>
     <td><code>spec.template.spec.</code></br><code>terminationGracePeriodSeconds</code></td>
-    <td>輸入秒數，讓 <code>kubelet</code> 正常地終止可執行有狀態集抄本的 Pod。如需相關資訊，請參閱[刪除 Pod ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#delete-pods)。</td>
+    <td>輸入秒數，讓 <code>kubelet</code> 正常地終止可執行有狀態集合抄本的 Pod。如需相關資訊，請參閱[刪除 Pod ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/run-application/force-delete-stateful-set-pod/#delete-pods)。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>metadata.name</code></td>
@@ -1079,15 +1149,15 @@ subcollection: containers
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-create-bucket</code></td>
-    <td>請選擇下列選項：<ul><li><strong>true：</strong>選擇此選項，以自動建立每個有狀態集抄本的儲存區。</li><li><strong>false：</strong>如果您要在有狀態集抄本之間共用現有儲存區，請選擇此選項。請務必在有狀態集 YAML 的 <code>spec.volumeClaimTemplates.metadata.annotions.ibm.io/bucket</code> 區段中定義儲存區名稱。</li></ul></td>
+    <td>請從下列選項中進行選擇：<ul><li><strong>true：</strong>選擇此選項，以自動建立每個有狀態集合抄本的儲存區。</li><li><strong>false：</strong>如果您要在有狀態集合抄本之間共用現有儲存區，請選擇此選項。請務必在有狀態集合 YAML 的 <code>spec.volumeClaimTemplates.metadata.annotions.ibm.io/bucket</code> 區段中定義儲存區名稱。</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/auto-delete-bucket</code></td>
-    <td>請選擇下列選項：<ul><li><strong>true：</strong>當您刪除 PVC 時，會自動移除您的資料、儲存區及 PV。您的 {{site.data.keyword.cos_full_notm}} 服務實例仍然存在，並未刪除。如果您選擇將此選項設為 true，則必須設定 <code>ibm.io/auto-create-bucket: true</code> 及 <code>ibm.io/bucket: ""</code>，以使用格式為 <code>tmp-s3fs-xxxx</code> 的名稱自動建立儲存區。</li><li><strong>false：</strong>當您刪除 PVC 時，會自動刪除 PV，但會保留您在 {{site.data.keyword.cos_full_notm}} 服務實例中的資料及儲存區。若要存取資料，您必須以現有儲存區的名稱建立新的 PVC。</li></ul></td>
+    <td>請從下列選項中進行選擇：<ul><li><strong>true：</strong>當您刪除 PVC 時，會自動移除您的資料、儲存區及 PV。您的 {{site.data.keyword.cos_full_notm}} 服務實例仍然存在，並未刪除。如果您選擇將此選項設為 true，則必須設定 <code>ibm.io/auto-create-bucket: true</code> 及 <code>ibm.io/bucket: ""</code>，以使用格式為 <code>tmp-s3fs-xxxx</code> 的名稱自動建立儲存區。</li><li><strong>false：</strong>當您刪除 PVC 時，會自動刪除 PV，但會保留您在 {{site.data.keyword.cos_full_notm}} 服務實例中的資料及儲存區。若要存取資料，您必須以現有儲存區的名稱建立新的 PVC。</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/bucket</code></td>
-    <td>請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 tmp-s3fs-xxxx 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul></td>
+    <td>請從下列選項中進行選擇：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要在 {{site.data.keyword.cos_full_notm}} 中建立的儲存區名稱。此外，如果 <code>ibm.io/auto-delete-bucket</code> 設為 <strong>true</strong>，則您必須將此欄位空白，以使用 tmp-s3fs-xxxx 格式的名稱自動指派儲存區。名稱在 {{site.data.keyword.cos_full_notm}} 中必須是唯一的。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您要在叢集裡存取的現有儲存區名稱。</li></ul></td>
     </tr>
     <tr>
     <td><code>spec.volumeClaimTemplates.metadata</code></br><code>annotions.ibm.io/secret-name</code></td>
@@ -1095,11 +1165,11 @@ subcollection: containers
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">輸入您要使用的儲存空間類別。請選擇下列選項：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要用於新儲存區的儲存空間類別。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您用來建立現有儲存區的儲存空間類別。</li></ul></br>若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep s3</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-s3fs</code> 佈建者，以使用物件儲存空間佈建有狀態集。</td>
+    <td style="text-align:left">輸入您要使用的儲存空間類別。請從下列選項中進行選擇：<ul><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 true：</strong>請輸入您要用於新儲存區的儲存空間類別。</li><li><strong>如果 <code>ibm.io/auto-create-bucket</code> 設為 false：</strong>請輸入您用來建立現有儲存區的儲存空間類別。</li></ul></br>若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep s3</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-s3fs</code> 佈建者，以使用物件儲存空間佈建有狀態集合。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
-    <td>輸入您已在有狀態集 YAML 的 <code>spec.volumeClaimTemplates.metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 區段中輸入的相同儲存空間類別。</td>
+    <td>輸入您已在有狀態集合 YAML 的 <code>spec.volumeClaimTemplates.metadata.annotations.volume.beta.kubernetes.io/storage-class</code> 區段中輸入的相同儲存空間類別。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.spec.</code></br><code>resource.requests.storage</code></td>
@@ -1139,7 +1209,7 @@ subcollection: containers
 <td>根據您叢集所在的位置，自動設定備援端點。如需相關資訊，請參閱[地區及端點](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)。</td>
 </tr>
 <tr>
-<td>區塊大小</td>
+<td>片段大小</td>
 <td>沒有 `perf` 的儲存空間類別：16 MB</br>具有 `perf` 的儲存空間類別：52 MB</td>
 </tr>
 <tr>
@@ -1176,7 +1246,7 @@ subcollection: containers
 <td>根據您叢集所在的位置，自動設定備援端點。如需相關資訊，請參閱[地區及端點](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)。</td>
 </tr>
 <tr>
-<td>區塊大小</td>
+<td>片段大小</td>
 <td>16 MB</td>
 </tr>
 <tr>
@@ -1213,7 +1283,7 @@ subcollection: containers
 <td>根據您叢集所在的位置，自動設定備援端點。如需相關資訊，請參閱[地區及端點](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)。</td>
 </tr>
 <tr>
-<td>區塊大小</td>
+<td>片段大小</td>
 <td>16 MB</td>
 </tr>
 <tr>
@@ -1250,7 +1320,7 @@ subcollection: containers
 <td>根據您叢集所在的位置，自動設定備援端點。如需相關資訊，請參閱[地區及端點](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)。</td>
 </tr>
 <tr>
-<td>區塊大小</td>
+<td>片段大小</td>
 <td>沒有 `perf` 的儲存空間類別：16 MB</br>具有 `perf` 的儲存空間類別：52 MB</td>
 </tr>
 <tr>

@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-12"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,9 +21,11 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
+
 
 
 # 混合式雲端
@@ -32,7 +34,12 @@ subcollection: containers
 如果您有「{{site.data.keyword.Bluemix}} 專用」帳戶，則可以將它與精選 {{site.data.keyword.Bluemix_notm}} 服務（包括 {{site.data.keyword.containerlong}}）搭配使用。如需相關資訊，請參閱 [{{site.data.keyword.Bluemix_notm}} 專用及 IBM 公用雲端的混合式經驗 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](http://ibm.biz/hybridJune2018) 上的部落格。
 {: shortdesc}
 
-您瞭解 [{{site.data.keyword.Bluemix_notm}} 供應項目](/docs/containers?topic=containers-cs_ov#differentiation)，並針對[要在雲端上執行的工作負載](/docs/containers?topic=containers-strategy#cloud_workloads)開發了 Kubernetes 策略。現在，您可以[連接公用及專用雲端](#hybrid_vpn)，以及[重複使用公用容器的專用套件](#hybrid_ppa_importer)。
+您瞭解 [{{site.data.keyword.Bluemix_notm}} 供應項目](/docs/containers?topic=containers-cs_ov#differentiation)，並針對[要在雲端上執行的工作負載](/docs/containers?topic=containers-strategy#cloud_workloads)開發了 Kubernetes 策略。現在，可以使用 strongSwan VPN 服務或 {{site.data.keyword.BluDirectLink}} 來連接公用雲端和專用雲端。
+
+* [strongSwan VPN 服務](#hybrid_vpn)根據業界標準網際網路通訊協定安全 (IPSec) 通訊協定套組，透過網際網路提供安全的端對端通訊通道，進而安全地將 Kubernetes 叢集連接到內部部署網路。
+* 透過 [{{site.data.keyword.Bluemix_notm}} Direct Link](#hybrid_dl)，您可以在遠端網路環境和 {{site.data.keyword.containerlong_notm}} 之間建立直接專用連線，而無需透過公用網際網路進行遞送。
+
+連接公用雲端和專用雲端後，可以[在公用容器中重複使用專用套件](#hybrid_ppa_importer)。
 
 ## 使用 strongSwan VPN 連接公用及專用雲端
 {: #hybrid_vpn}
@@ -40,10 +47,9 @@ subcollection: containers
 建立公用 Kubernetes 叢集與「{{site.data.keyword.Bluemix}} 專用」實例之間的 VPN 連線功能，以容許雙向通訊。
 {: shortdesc}
 
-1.  建立標準叢集，讓 {{site.data.keyword.Bluemix_notm}} Public 中有 {{site.data.keyword.containerlong}}，或使用現有的叢集。若要建立叢集，請選擇下列選項：
-    - [從主控台建立標準叢集](/docs/containers?topic=containers-clusters#clusters_ui)。
-    - [從 CLI 建立標準叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
-    - [使用 Cloud Automation Manager (CAM) 利用預先定義的範本來建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。當您使用 CAM 部署叢集時，會自動為您安裝 Helm tiller。
+1.  建立標準叢集，讓 {{site.data.keyword.Bluemix_notm}} Public 中有 {{site.data.keyword.containerlong}}，或使用現有的叢集。若要建立叢集，請從下列選項中進行選擇：
+    - [透過主控台或 CLI 建立標準叢集](/docs/containers?topic=containers-clusters#clusters_ui)。
+    - [使用 Cloud Automation Manager (CAM) 利用預先定義的範本來建立叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html)。當您使用 CAM 部署叢集時，會自動為您安裝 Helm Tiller。
 
 2.  在 {{site.data.keyword.containerlong_notm}} 叢集裡，[遵循指示來設定 strongSwan IPSec VPN 服務](/docs/containers?topic=containers-vpn#vpn_configure)。
 
@@ -96,8 +102,29 @@ subcollection: containers
 
 **下一步為何？**
 
-*   [在公用叢集中執行授權軟體映像檔](#hybrid_ppa_importer)。
+*   [在公用叢集裡執行授權軟體映像檔](#hybrid_ppa_importer)。
 *   若要管理多個雲端 Kubernetes 叢集（例如，跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），請查看 [IBM Multicloud Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
+
+
+## 使用 {{site.data.keyword.Bluemix_notm}} Direct Link 連接公用雲端和專用雲端
+{: #hybrid_dl}
+
+透過 [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link)，您可以在遠端網路環境和 {{site.data.keyword.containerlong_notm}} 之間建立直接專用連線，而無需透過公用網際網路進行路由。
+{: shortdesc}
+
+若要連接公用雲端和內部部署 {{site.data.keyword.Bluemix}} Private 實例，可以使用以下四個供應項目之一：
+* {{site.data.keyword.Bluemix_notm}} Direct Link Connect
+* {{site.data.keyword.Bluemix_notm}} Direct Link Exchange
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
+
+若要選擇 {{site.data.keyword.Bluemix_notm}} Direct Link 供應項目並設定 {{site.data.keyword.Bluemix_notm}} Direct Link 連線，請參閱 {{site.data.keyword.Bluemix_notm}} Direct Link 文件中的[開始使用 {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)。
+
+**下一步為何？**</br>
+* [在公用叢集裡執行授權軟體映像檔](#hybrid_ppa_importer)。
+* 若要管理多個雲端 Kubernetes 叢集（例如，跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），請查看 [IBM Multicloud Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
+
+<br />
 
 
 ## 在公用 Kubernetes 容器中執行 {{site.data.keyword.Bluemix_notm}} 專用映像檔
@@ -108,13 +135,13 @@ subcollection: containers
 
 [IBM Passport Advantage ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www-01.ibm.com/software/passportadvantage/index.html) 中提供授權軟體。若要在「{{site.data.keyword.Bluemix_notm}} 公用」的叢集裡使用此軟體，您必須下載軟體，並擷取映像檔，然後將映像檔上傳至 {{site.data.keyword.registryshort}} 中的名稱空間。與您計劃使用軟體的環境無關，您必須先取得產品的必要授權。
 
-下表概述您可在「{{site.data.keyword.Bluemix_notm}} 公用」的叢集裡使用的可用「{{site.data.keyword.Bluemix_notm}} 專用」產品。
+下表是您可在「{{site.data.keyword.Bluemix_notm}} 公用」的叢集裡使用的可用「{{site.data.keyword.Bluemix_notm}} 專用」產品的概觀。
 
 | 產品名稱 | 版本 | 產品編號 |
 | --- | --- | --- |
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
-| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM MQ Advanced | 9.1.0.0、9.1.1,0、9.1.2.0 | - |
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | Docker Hub 映像檔 |
 {: caption="表. 支援在「{{site.data.keyword.Bluemix_notm}} 公用」中使用的「{{site.data.keyword.Bluemix_notm}} 專用」產品" caption-side="top"}
 
@@ -122,9 +149,9 @@ subcollection: containers
 - [安裝 {{site.data.keyword.registryshort}} CLI 外掛程式 (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install)。
 - [在 {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) 中設定名稱空間，或藉由執行 `ibmcloud cr namespaces` 來擷取現有名稱空間。
 - [將 `kubectl` CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- [在叢集裡安裝 Helm CLI 並設定 tiller](/docs/containers?topic=containers-helm#public_helm_install)。
+- [在叢集裡安裝 Helm CLI 並設定 Tiller](/docs/containers?topic=containers-helm#public_helm_install)。
 
-若要在「{{site.data.keyword.Bluemix_notm}} 公用」的叢集裡部署「{{site.data.keyword.Bluemix_notm}} 專用」映像檔，請執行下列動作：
+若要在 {{site.data.keyword.Bluemix_notm}} Public 的叢集裡部署 {{site.data.keyword.Bluemix_notm}} Private 映像檔，請執行下列動作：
 
 1.  遵循 [{{site.data.keyword.registryshort}} 文件](/docs/services/Registry?topic=registry-ts_index#ts_ppa)中的步驟以從 IBM Passport Advantage 下載授權軟體，並將映像檔推送至名稱空間，然後在叢集裡安裝 Helm 圖表。
 

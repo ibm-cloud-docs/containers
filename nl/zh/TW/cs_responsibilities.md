@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 您使用 {{site.data.keyword.containerlong_notm}} 的責任
@@ -60,7 +60,7 @@ IBM 提供企業雲端平台，供您部署應用程式與 {{site.data.keyword.B
      <td align="center"><img src="images/icon_tools.svg" alt="板手的圖示"/><br>受管理叢集</td>
      <td>
      **IBM 責任**：
-     <ul><li>提供一組工具來自動化叢集管理，例如 {{site.data.keyword.containerlong_notm}} [API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/)、[CLI 外掛程式](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)及[主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters)。</li>
+     <ul><li>提供一組工具來自動化叢集管理，例如 {{site.data.keyword.containerlong_notm}} [API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api/)、[CLI 外掛程式](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)及[主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/clusters)。</li>
      <li>自動套用 Kubernetes 主節點修補程式作業系統、版本及安全更新項目。讓主要和次要更新項目可供您套用。</li>
      <li>更新及回復叢集內的作業 {{site.data.keyword.containerlong_notm}} 及 Kubernetes 元件，例如 Ingress 應用程式負載平衡器及檔案儲存空間外掛程式。</li>
      <li>備份並回復 etcd 中的資料，例如 Kubernetes 工作負載配置檔。</li>
@@ -93,25 +93,25 @@ IBM 提供企業雲端平台，供您部署應用程式與 {{site.data.keyword.B
       <li>持續監視主節點及工作者節點映像檔，以偵測漏洞及安全規範問題。</li>
       <li>為工作者節點佈建兩個本端 SSD、AES 256 位元加密資料分割區。</li>
       <li>提供叢集網路連線功能的選項，例如公用及專用服務端點。</li>
-      <li>提供運算隔離的選項，例如專用虛擬機器、裸機及具有 Trusted Compute 的裸機。</li>
+      <li>提供運算隔離的選項，例如專用虛擬機器、裸機及具有授信運算的裸機。</li>
       <li>整合 Kubernetes 角色型存取控制 (RBAC) 與 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)。</li>
       </ul>
       <br><br>
       **您的責任**：
       <ul>
       <li>使用 API、CLI 或主控台工具，將提供的[安全修補程式更新項目](/docs/containers?topic=containers-changelog#changelog)套用至工作者節點。</li>
-      <li>選擇如何設定[叢集網路](/docs/containers?topic=containers-cs_network_ov#cs_network_ov)，並配置進一步的[安全設定](/docs/containers?topic=containers-security#security)，以符合您工作負載的安全及規範需求。適用的話，請配置[防火牆](/docs/containers?topic=containers-firewall#firewall)。</li></ul>
+      <li>選擇如何設定[叢集網路](/docs/containers?topic=containers-plan_clusters)，並配置進一步的[安全設定](/docs/containers?topic=containers-security#security)，以符合您工作負載的安全及規範需求。適用的話，請配置[防火牆](/docs/containers?topic=containers-firewall#firewall)。</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="程式碼方括弧的圖示"/><br>應用程式編排</td>
         <td>
         **IBM 責任**：
         <ul>
         <li>佈建已安裝 Kubernetes 元件的叢集，讓您可以存取 Kubernetes API。</li>
-        <li>提供許多受管理附加程式，以延伸應用程式的功能，例如 [Istio](/docs/containers?topic=containers-istio#istio) 及 [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)。為您簡化維護，因為 IBM 為受管理附加程式提供安裝及更新項目。</li>
-        <li>提供叢集與精選協力廠商夥伴關係技術的整合，例如 {{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}} 及 Portworx。</li>
+        <li>提供許多受管理附加程式，以延伸應用程式的功能，例如 [Istio](/docs/containers?topic=containers-istio#istio) 及 [Knative](/docs/containers?topic=containers-serverless-apps-knative)。為您簡化維護，因為 IBM 為受管理附加程式提供安裝及更新項目。</li>
+        <li>提供叢集與精選協力廠商夥伴關係技術的整合，例如：{{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}} 和 Portworx）的整合。</li>
         <li>提供自動化，以啟用與其他 {{site.data.keyword.Bluemix_notm}} 服務的服務連結。</li>
         <li>使用映像檔取回密碼來建立叢集，讓 `default` Kubernetes 名稱空間中的部署可以從 {{site.data.keyword.registrylong_notm}} 取回映像檔。</li>
         <li>提供儲存空間類別及外掛程式，以支援與應用程式搭配使用的持續性磁區。</li>
@@ -147,4 +147,4 @@ IBM 提供企業雲端平台，供您部署應用程式與 {{site.data.keyword.B
 *   未經授權即修改任何服務或系統
 *   違反他人權利
 
-如需整體使用條款，請參閱[雲端服務條款](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms)。
+如需整體使用條款，請參閱[雲端服務條款](/docs/overview/terms-of-use?topic=overview-terms#terms)。

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # 定義 Kubernetes 策略
 {: #strategy}
@@ -31,7 +33,7 @@ subcollection: containers
 ## 將工作負載移至 {{site.data.keyword.Bluemix_notm}}
 {: #cloud_workloads}
 
-有許多原因會讓您將工作負載移至 {{site.data.keyword.Bluemix_notm}}：減少總擁有成本、提高應用程式在安全和相容環境中的高可用性、擴增和縮減以回應使用者需求等等。{{site.data.keyword.containerlong_notm}} 結合容器技術與 Kubernetes 這類開放程式碼工具，因此，您可以建置能夠在不同雲端環境之間移轉的雲端原生應用程式，從而避免供應商鎖定。
+有許多原因會讓您將工作負載移至 {{site.data.keyword.Bluemix_notm}}：減少總擁有成本、提高應用程式在安全和相容環境中的高可用性、擴增和縮減以回應使用者需求等等。{{site.data.keyword.containerlong_notm}} 結合容器技術與 Kubernetes 這類開放程式碼工具，因此，您可以建置能夠在不同雲端環境之間移轉的雲本機應用程式，進而避免供應商鎖定。
 {:shortdesc}
 
 然而，該如何達到雲端？這一路上的選擇為何？而且，在到達雲端之後，該如何管理工作負載？
@@ -44,36 +46,33 @@ subcollection: containers
 ### 可以移至 {{site.data.keyword.Bluemix_notm}} 的內容為何？
 {: #move_to_cloud}
 
-使用 {{site.data.keyword.Bluemix_notm}}，您可以靈活地為工作負載選擇[公用、專用或混合式雲端方式](/docs/containers?topic=containers-cs_ov#differentiation)。下表提供一些範例說明使用者一般移至各種雲端類型的工作負載類型。
+使用 {{site.data.keyword.Bluemix_notm}} 時，您可以靈活地在[外部部署、內部部署或混合式雲端環境](/docs/containers?topic=containers-cs_ov#differentiation)中建立 Kubernetes 叢集。下表提供一些範例說明使用者一般移至各種雲端類型的工作負載類型。
+您還可以選擇使叢集同時在兩種環境中執行的混合方法。
 {: shortdesc}
 
-| 工作負載 |公用|專用|混合式|
-| --- | --- | --- | --- |
-| DevOps 啟用工具 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| 開發及測試應用程式 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| 應用程式的需求有重大改變，需要快速擴充 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| CRM、HCM、ERP 及電子商務這類商業應用程式 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| 電子郵件這類協同作業及社交工具 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| Linux 及 x86 工作負載 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | | |
-| 超出公用機型的密集 CPU 或 I/O 容量需求 | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
-| 具有平台和基礎架構限制與相依關係的舊式應用程式 | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
-| 具有嚴格設計、授權或大量法規的專有應用程式 | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
-| 調整公用雲端中的應用程式，並將資料同步化至現場專用資料庫 | | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+| 工作負載 |{{site.data.keyword.containershort_notm}} 外部部署|內部部署|
+| --- | --- | --- |
+| DevOps 啟用工具 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| 開發及測試應用程式 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| 應用程式的需求有重大改變，需要快速擴充 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| CRM、HCM、ERP 及電子商務這類商業應用程式 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| 電子郵件這類協同作業及社交工具 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| Linux 及 x86 工作負載 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | |
+| 裸機伺服器與 GPU 運算資源 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+|符合 PCI 和 HIPAA 的工作負載| <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+| 具有平台和基礎架構限制與相依關係的舊式應用程式 | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+| 具有嚴格設計、授權或大量法規的專有應用程式 | | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
+| 調整公用雲端中的應用程式，並將資料同步化至現場專用資料庫 | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="可用的特性" style="width:32px;" /> |
 {: caption="{{site.data.keyword.Bluemix_notm}} 實作支援您的工作負載" caption-side="top"}
 
-**準備好要在公用雲端中執行工作負載了嗎？**</br>
+**已準備好在 {{site.data.keyword.containerlong_notm}} 中外部部署執行工作負載？**</br>
 太棒了！您已在公用雲端文件中。請持續閱讀更多策略構想，或[立即建立叢集](/docs/containers?topic=containers-getting-started)以馬上開始行動。
 
-**對專用雲端有興趣嗎？**</br>
+**對內部部署雲端感興趣？**</br>
 探索 [{{site.data.keyword.Bluemix_notm}} Private 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html)。如果您已大量投資 WebSphere Application Server 和 Liberty 這類 IBM 技術，則可以利用各種工具來最佳化 {{site.data.keyword.Bluemix_notm}} Private 現代化策略。
-* 若要更深入瞭解現有應用程式和支援的環境，請使用 [IBM Transformation Advisor ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/featured_applications/transformation_advisor.html)。
-* 為了協助您判斷採用準備情形並提供雲端導覽圖，請查閱 [{{site.data.keyword.Bluemix_notm}} Advisory Services ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/us-en/marketplace/cloud-consulting-services)。
-* 如需協助開發人員建置 {{site.data.keyword.Bluemix_notm}} Private 的服務，請參閱 [IBM Microclimate ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/us-en/marketplace/microclimate)。
-* 對於多雲端佈建，請考量 [{{site.data.keyword.Bluemix_notm}} Automation Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/us-en/marketplace/cognitive-automation)。
-* 若要管理多個雲端 Kubernetes 叢集（例如，跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），請查看 [IBM Multicloud Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
 
-**要同時使用公用和專用雲端嗎？**</br>
-請從設定 {{site.data.keyword.Bluemix_notm}} Private 帳戶開始。然後，請參閱[使用 {{site.data.keyword.containerlong_notm}} 與 {{site.data.keyword.Bluemix_notm}} Private 搭配](/docs/containers?topic=containers-hybrid_iks_icp)，以在 {{site.data.keyword.Bluemix_notm}} Public 中連接具有叢集的 {{site.data.keyword.Bluemix_notm}} Private 環境。
+**要同時在內部部署雲端和外部部署雲端中執行工作負載？**</br>
+請從設定 {{site.data.keyword.Bluemix_notm}} Private 帳戶開始。然後，請參閱[使用 {{site.data.keyword.containerlong_notm}} 與 {{site.data.keyword.Bluemix_notm}} Private 搭配](/docs/containers?topic=containers-hybrid_iks_icp)，以在 {{site.data.keyword.Bluemix_notm}} Public 中連接具有叢集的 {{site.data.keyword.Bluemix_notm}} Private 環境。若要管理多個雲端 Kubernetes 叢集（例如，跨 {{site.data.keyword.Bluemix_notm}} Public 和 {{site.data.keyword.Bluemix_notm}} Private），請查看 [IBM Multicloud Manager ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html)。
 
 ### 我可以在 {{site.data.keyword.containerlong_notm}} 中執行哪些類型的應用程式？
 {: #app_types}
@@ -83,16 +82,16 @@ subcollection: containers
 
 <dl>
 <dt>無狀態的應用程式</dt>
-  <dd><p>無狀態的應用程式是 Kubernetes 這類雲端原生環境的首選。它們易於移轉及調整，因為它們會宣告相依關係、將配置與程式碼分開儲存，並將資料庫這類支援服務視為已連接的資源，而不是連結至應用程式。應用程式 Pod 不需要持續資料儲存空間或穩定網路 IP 位址，因此可以終止、重新排程及調整 Pod，以回應工作負載需求。該應用程式使用「資料庫即服務」來持續保存資料，並且使用 NodePort、負載平衡器或 Ingress 服務在穩定 IP 位址上公開工作負載。</p></dd>
+  <dd><p>無狀態的應用程式是 Kubernetes 這類雲端本機環境的首選。它們易於移轉及調整，因為它們會宣告相依關係、將配置與程式碼分開儲存，並將資料庫這類支援服務視為已連接的資源，而不是連結至應用程式。應用程式 Pod 不需要持續資料儲存空間或穩定網路 IP 位址，因此可以終止、重新排程及調整 Pod，以回應工作負載需求。該應用程式使用「資料庫即服務」來持續保存資料，並且使用 NodePort、負載平衡器或 Ingress 服務在穩定 IP 位址上公開工作負載。</p></dd>
 <dt>有狀態的應用程式</dt>
   <dd><p>在設定、管理及調整方面，有狀態的應用程式比無狀態的應用程式更為複雜，因為 Pod 需要持續資料及穩定網路身分。有狀態的應用程式通常是資料庫或其他分散式資料密集工作負載，而這些工作負載的處理更有效的接近資料本身。</p>
-  <p>如果您要部署有狀態的應用程式，則需要設定持續性儲存空間，並將持續性磁區裝載至由 StatefulSet 物件所控制的 Pod。您可以選擇將[檔案](/docs/containers?topic=containers-file_storage#file_statefulset)、[區塊](/docs/containers?topic=containers-block_storage#block_statefulset)或[物件](/docs/containers?topic=containers-object_storage#cos_statefulset)儲存空間新增為有狀態集的持續性儲存空間。您也可以在裸機工作者節點上安裝 [Portworx](/docs/containers?topic=containers-portworx)，並使用 Portworx 作為高度可用的軟體定義儲存空間解決方案，來管理有狀態應用程式的持續性儲存空間。如需有狀態集運作方式的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)。</p></dd>
+  <p>如果您要部署有狀態的應用程式，則需要設定持續性儲存空間，並將持續性磁區裝載至由 StatefulSet 物件所控制的 Pod。您可以選擇將[檔案](/docs/containers?topic=containers-file_storage#file_statefulset)、[區塊](/docs/containers?topic=containers-block_storage#block_statefulset)或[物件](/docs/containers?topic=containers-object_storage#cos_statefulset)儲存空間新增為有狀態集合的持續性儲存空間。您也可以在裸機工作者節點上安裝 [Portworx](/docs/containers?topic=containers-portworx)，並使用 Portworx 作為高度可用的軟體定義儲存空間解決方案，來管理有狀態應用程式的持續性儲存空間。如需有狀態集合運作方式的相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)。</p></dd>
 </dl>
 
-### 開發無狀態雲端原生應用程式有哪些準則？
+### 開發無狀態雲端本機應用程式有哪些準則？
 {: #12factor}
 
-請查看[十二因素應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://12factor.net/)，這種不限語言的方法考慮如何跨 12 個因素來開發應用程式，總結如下。
+請查看 [12 因子應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://12factor.net/)，這種不限語言的方法考慮如何跨 12 個因子來開發應用程式，總結如下。
 {: shortdesc}
 
 1.  **程式碼庫**：在版本控制系統中為您的部署使用單一程式碼庫。當您取回容器部署的映像檔時，請指定已測試的映像檔標籤，而不是使用 `latest`。
@@ -104,9 +103,9 @@ subcollection: containers
 7.  **埠連結**：埠連結為自行包含，並在明確定義的主機和埠上提供服務端點。
 8.  **並行**：透過處理程序實例（例如抄本和水平調整）管理及調整應用程式。設定部署的資源要求和限制。請注意，Calico 網路原則無法限制頻寬。請改為考慮 [Istio](/docs/containers?topic=containers-istio)。
 9.  **可移除**：將您的應用程式設計為可移除的，具有最小啟動、循序關閉以及對突然處理程序終止的容錯。請記住，容器、Pod 甚至是工作者節點都是可移除的，因此請相應地規劃您的應用程式。
-10.  **開發到正式作業同位檢查**：設定應用程式的[持續整合](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/)和[持續開發](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/)管線，而且開發應用程式與正式作業應用程式之間具有最小的差異。
+10.  **開發到正式作業保持一致**：為應用程式設定[持續整合](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/)和[持續交付](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/)管道，盡可能縮小開發環境中的應用程式與正式作業環境中的應用程式之間的差異。
 11.  **日誌**：將日誌視為事件串流：外部或管理環境會處理及遞送日誌檔。**重要事項**：在 {{site.data.keyword.containerlong_notm}} 中，依預設不會開啟日誌。若要啟用，請參閱[配置日誌轉遞](/docs/containers?topic=containers-health#configuring)。
-12.  **管理者處理程序**：保持應用程式作為 [Kubernetes 工作物件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) 的任何一次性管理 Script，以確保使用與應用程式本身相同的環境來執行管理 Script。若要編排您要在 Kubernetes 叢集中執行的較大型套件，請考量使用套件管理程式，例如 [Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/)。
+12.  **管理處理程序**：將任何一次性管理 Script 與應用程式一起保留，並將這些 Script 作為 [Kubernetes 工作物件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) 執行，以確保管理 Script 的執行環境與應用程式本身相同。若要編排您要在 Kubernetes 叢集裡執行的較大型套件，請考量使用套件管理程式，例如 [Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/)。
 
 ### 我已經有應用程式。如何將它移轉至 {{site.data.keyword.containerlong_notm}}？
 {: #migrate_containerize}
@@ -114,8 +113,8 @@ subcollection: containers
 您可以採取一些一般步驟，如下所示將您的應用程式容器化。
 {: shortdesc}
 
-1.  使用[十二因素應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://12factor.net/) 作為指引，來隔離相依關係、將處理程序分成幾個個別服務，以及盡可能減少應用程式的狀態性。
-2.  尋找要使用的適當基礎映像檔。您可以使用 [Docker Hub ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://hub.docker.com/) 中公然可用的映像檔、[公用 IBM 映像檔](/docs/services/Registry?topic=registry-public_images#public_images)，或在專用 {{site.data.keyword.registryshort_notm}} 中建置及管理您自己的映像檔。
+1.  使用 [12 因子應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://12factor.net/) 作為指引，來隔離相依關係、將處理程序分成幾個個別服務，以及盡可能減少應用程式的狀態性。
+2.  尋找要使用的適當基礎映像檔。您可以使用 [Docker Hub ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://hub.docker.com/) 中公開可用的映像檔、[公用 IBM 映像檔](/docs/services/Registry?topic=registry-public_images#public_images)，或在專用 {{site.data.keyword.registryshort_notm}} 中建置及管理您自己的映像檔。
 3.  只將執行應用程式所需的內容新增至 Docker 映像檔。
 4.  規劃使用持續性儲存空間或雲端資料庫即服務解決方案來備份應用程式資料，而不依賴本端儲存空間。
 5.  一段時間後，將應用程式處理程序重構為微服務。
@@ -131,10 +130,34 @@ subcollection: containers
 <br />
 
 
+### 在將應用程式移至 {{site.data.keyword.containerlong_notm}} 之前，最好具備哪些知識和技術技能？
+{: #knowledge}
+
+Kubernetes 旨在為兩個主要角色提供功能：叢集管理和應用程式開發人員。每個角色使用不同的技術技能，以順利執行應用程式並將應用程式部署到叢集。
+{: shortdesc}
+
+**叢集管理的主要作業和需要具備的技術知識是什麼？** </br>
+作為叢集管理，您負責設定、操作、保護和管理叢集的 {{site.data.keyword.Bluemix_notm}} 基礎架構。典型作業包括：
+- 調整叢集的大小，以便為工作負載提供足夠的容量。
+- 設計叢集，以符合公司的高可用性、災難回復和合規標準。
+- 透過設定使用者許可權並限制叢集裡的動作來保護運算資源、網路和資料，進而確保叢集安全。
+- 規劃和管理基礎架構元件之間的網路通訊，以確保網路安全、分段和合規性。
+- 規劃持續性儲存空間選項，以符合資料儲存空間位置和資料保護需求。
+
+叢集管理角色必須具備豐富的知識，包括運算、網路、儲存空間、安全和合規性。在典型的公司中，這些知識一般由多個專家分別掌握，例如系統工程師、系統管理者、網路工程師、網路架構設計師、IT 管理程式或安全與合規專家。請考慮將叢集管理角色指派給公司中的多個人員，以便您具備順利操作叢集所需的知識。
+
+**應用程式開發人員的主要作業和需要具備的技術知識是什麼？** </br>
+作為開發人員，您要在 Kubernetes 叢集裡設計、建立、保護、部署、測試、執行和監視雲端本機容器化應用程式。若要建立和執行這些應用程式，您必須熟悉微服務的概念、[12 因子應用程式](#12factor)準則、[Docker 和容器化原則](https://www.docker.com/)以及可用的 [Kubernetes 部署選項](/docs/containers?topic=containers-app#plan_apps)。如果要部署無伺服器應用程式，請熟悉 [Knative](/docs/containers?topic=containers-cs_network_planning)。
+
+Kubernetes 和 {{site.data.keyword.containerlong_notm}} 提供了有關如何[公開應用程式並使應用程式保持專用](/docs/containers?topic=containers-cs_network_planning)、[新增持續性儲存空間](/docs/containers?topic=containers-storage_planning)、[整合其他服務](/docs/containers?topic=containers-ibm-3rd-party-integrations)以及如何[保護工作負載和敏感資料](/docs/containers?topic=containers-security#container)的多個選項。在將應用程式移至 {{site.data.keyword.containerlong_notm}} 中的叢集之前，請驗證是否可以在支援的 Ubuntu 16.64 和 18.64 作業系統上將應用程式作為容器化應用程式執行，以及 Kubernetes 和 {{site.data.keyword.containerlong_notm}} 是否提供了工作負載所需的功能。
+
+**叢集管理者和開發人員之間要彼此互動嗎？**</br>
+是。叢集管理者和開發人員必須經常進行互動，透過互動，叢集管理者可瞭解在叢集裡提供此功能的工作負載需求，而開發人員可瞭解其應用程式開發程序中必須考慮的可用限制、整合和安全原則。
+
 ## 調整 Kubernetes 叢集大小以支援工作負載
 {: #sizing}
 
-找出叢集中需要多少個工作者節點來支援工作負載並不是一門精確的科學。您可能需要測試不同的配置並進行調整。幸運的是您使用 {{site.data.keyword.containerlong_notm}}，您可在其中新增及移除工作者節點以回應工作負載需求。
+找出叢集裡需要多少個工作者節點來支援工作負載並不是一門精確的科學。您可能需要測試不同的配置並進行調整。幸運的是您使用 {{site.data.keyword.containerlong_notm}}，您可在其中新增及移除工作者節點以回應工作負載需求。
 {: shortdesc}
 
 若要開始調整叢集大小，請問問自己下列問題。
@@ -147,14 +170,14 @@ subcollection: containers
 1.  計算工作負載的平均 CPU 及記憶體用量。例如，您可以在 Windows 機器上檢視「作業管理程式」，或在 Mac 或 Linux 上執行 `top` 指令。您也可以使用度量值服務及執行報告，來計算工作負載用量。
 2.  預期工作負載必須提供的要求數目，讓您可以決定要處理工作負載的應用程式抄本數目。例如，您可以設計應用程式實例每分鐘處理 1000 個要求，並預期您的工作負載每分鐘必須提供 10000 個要求。若是如此，您可以決定建立 12 個應用程式抄本，其中 10 個處理預期的數量，另 2 個則處理激增的容量。
 
-### 除了我的應用程式之外，還有其他項目可能使用叢集中的資源嗎？
+### 除了我的應用程式之外，還有其他項目可能使用叢集裡的資源嗎？
 {: #sizing_other}
 
 現在，讓我們新增一些您可能會使用的其他特性。
 
 
 
-1.  考量應用程式是否取回大型或多個映像檔，而這些映像檔會佔用工作者節點上的本端儲存空間。
+1.  考量應用程式是否取回大型或許多映像檔，而這些映像檔會佔用工作者節點上的本端儲存空間。
 2.  決定是否要[整合服務](/docs/containers?topic=containers-supported_integrations#supported_integrations)至叢集（例如 [Helm](/docs/containers?topic=containers-helm#public_helm_install) 或 [Prometheus ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus)）。這些整合式服務及附加程式會啟動耗用叢集資源的 Pod。
 
 ### 我想要工作負載有何種類型的可用性？
@@ -162,7 +185,7 @@ subcollection: containers
 
 不要忘記，您希望您的工作負載盡可能地多！
 
-1.  規劃[高可用性叢集](/docs/containers?topic=containers-plan_clusters#ha_clusters)的策略，例如決定單一叢集或多區域叢集。
+1.  規劃[高可用性叢集](/docs/containers?topic=containers-ha_clusters#ha_clusters)的策略，例如決定單一叢集或多區域叢集。
 2.  檢閱[高可用性部署](/docs/containers?topic=containers-app#highly_available_apps)，以協助決定如何讓您的應用程式可供使用。
 
 ### 我需要多少個工作者節點才能處理工作負載？
@@ -171,13 +194,13 @@ subcollection: containers
 既然，您已經清楚瞭解工作負載是什麼樣子，就讓我們將預估用量對映至可用的叢集配置。
 
 1.  估計工作者節點容量上限（視您的叢集類型而定）。發生激增或其他暫時事件時，您不想要將工作者節點容量最大化。
-    *  **單一區域叢集**：規劃在叢集中至少有 3 個工作者節點。此外，您還希望叢集內有 1 個擁有 CPU 和記憶體容量的額外節點。
+    *  **單一區域叢集**：規劃在叢集裡至少有 3 個工作者節點。此外，您還希望叢集內有 1 個擁有 CPU 和記憶體容量的額外節點。
     *  **多區域叢集**：規劃每個區域至少有 2 個工作者節點，因此 3 個區域共有 6 個節點。此外，規劃總叢集容量至少為 150% 的總工作負載必要容量，因此，如果 1 個區域關閉，您可以有資源來維護工作負載。
-2.  讓應用程式大小和工作者節點容量與其中一個[可用的工作者節點特性](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)一致。若要查看區域中的可用特性，請執行 `ibmcloud ks machine-types <zone>`。
+2.  讓應用程式大小和工作者節點容量與其中一個[可用的工作者節點特性](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)一致。若要查看區域中的可用特性，請執行 `ibmcloud ks machine-types <zone>`。
     *   **不要使工作者節點超載**：為了避免 Pod 競爭 CPU 或執行效率不佳，您必須知道應用程式所需的資源，以規劃需要的工作者節點數目。例如，如果您應用程式所需的資源比工作者節點上可用的資源還要少，則可以限制部署至一個工作者節點的 Pod 數目。使您的工作者節點保持在 75% 左右的容量，以保留空間供可能需要排定的其他 Pod 使用。如果您應用程式所需的資源比工作者節點上可用的資源還要多，請使用可滿足這些需求的不同工作者節點特性。如果您的工作者節點經常回報 `NotReady` 狀態，或因缺乏記憶體或其他資源而收回 Pod，則您知道工作者節點已超載。
-    *   **較大與較小的工作者節點特性**：較大的節點可能比較小的節點更具成本效益，特別是對於設計用於在高性能機器上處理時提高效率的工作負載。不過，如果大型工作者節點關閉，您需要確保叢集具有足夠的容量，才能循序將所有工作負載 Pod 重新排定到叢集中的其他工作者節點。較小的工作者節點可協助您更妥善調整。
+    *   **較大與較小的工作者節點特性**：較大的節點可能比較小的節點更具成本效益，特別是對於設計用於在高性能機器上處理時提高效率的工作負載。不過，如果大型工作者節點關閉，您需要確保叢集具有足夠的容量，才能循序將所有工作負載 Pod 重新排定到叢集裡的其他工作者節點。較小的工作者節點可協助您更妥善調整。
     *   **應用程式的抄本**：若要判定您想要的工作者節點數目，您也可以考量所要執行之應用程式的抄本數目。例如，如果您知道工作負載需要 32 個 CPU 核心，而且規劃執行應用程式的 16 個抄本，則每個抄本 Pod 都需要 2 個 CPU 核心。如果每個工作者節點只要執行一個應用程式 Pod，您可以為叢集類型訂購適當數目的工作者節點來支援此配置。
-3.  執行效能測試，以透過代表性延遲、可調整性、資料集及工作負載需求繼續調整叢集中所需的工作者節點數目。
+3.  執行效能測試，以透過代表性延遲、可調整性、資料集及工作負載需求繼續調整叢集裡所需的工作者節點數目。
 4.  對於需要擴增及縮減以回應資源要求的工作負載，設定 [Horizontal Pod Autoscaler](/docs/containers?topic=containers-app#app_scaling) 和[叢集工作者節點儲存區 Autoscaler](/docs/containers?topic=containers-ca#ca)。
 
 <br />
@@ -192,16 +215,16 @@ subcollection: containers
 ### 我應該取得的叢集類型及機型為何？
 {: #env_flavors}
 
-**叢集類型**：決定您是要[單一區域、多區域或多重叢集設定](/docs/containers?topic=containers-plan_clusters#ha_clusters)。[全部六個全球 {{site.data.keyword.Bluemix_notm}} 都會地區](/docs/containers?topic=containers-regions-and-zones#zones)都會提供多區域叢集。另外也請記住，工作者節點依區域而有所不同。
+**叢集類型**：決定您是要[單一區域、多區域或多重叢集設定](/docs/containers?topic=containers-ha_clusters#ha_clusters)。[全部六個全球 {{site.data.keyword.Bluemix_notm}} 都會地區](/docs/containers?topic=containers-regions-and-zones#zones)都會提供多區域叢集。另外也請記住，工作者節點依區域而有所不同。
 
-**工作者節點類型**：一般而言，密集工作負載更適合在裸機實體機器上執行，而對於具成本效益的測試及開發工作，您可以選擇共用或專用共用硬體上的虛擬機器。使用裸機工作者節點，您的叢集具有 10Gbps 的網路速度以及提供更高傳輸量的超執行緒核心。虛擬機器隨附 1 Gbps 的網路速度，以及未提供超執行緒的一般核心。[請查看機器隔離及可用的特性](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)。
+**工作者節點類型**：一般而言，密集工作負載更適合在裸機實體機器上執行，而對於具成本效益的測試及開發工作，您可以選擇共用或專用共用硬體上的虛擬機器。使用裸機工作者節點，您的叢集具有 10Gbps 的網路速度以及提供更高傳輸量的超執行緒核心。虛擬機器隨附 1 Gbps 的網路速度，以及未提供超執行緒的一般核心。[請查看機器隔離及可用的特性](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。
 
 ### 我要使用多個叢集，還是只是將更多工作者節點新增至現有叢集？
 {: #env_multicluster}
 
 您建立的叢集數目取決於工作負載、公司政策和法規，以及您要如何處理運算資源。您也可以在[容器隔離及安全](/docs/containers?topic=containers-security#container)中檢閱關於此決策的安全資訊。
 
-**多個叢集**：您需要設定[廣域負載平衡器](/docs/containers?topic=containers-plan_clusters#multiple_clusters)，並在每個叢集中複製及套用相同的配置 YAML 檔案，以將工作負載平衡到各叢集。因此，多個叢集的管理通常較為複雜，但可協助您達成下列重要目標。
+**多個叢集**：您需要設定[廣域負載平衡器](/docs/containers?topic=containers-ha_clusters#multiple_clusters)，並在每個叢集裡複製及套用相同的配置 YAML 檔案，以將工作負載平衡到各叢集。因此，多個叢集的管理通常較為複雜，但可協助您達成下列重要目標。
 *  符合需要您隔離工作負載的安全原則。
 *  測試您的應用程式如何在不同版本的 Kubernetes 或其他叢集軟體（例如 Calico）中執行。
 *  在另一個地區建立具有您應用程式的叢集，以提高該地理區域中的使用者效能。
@@ -217,19 +240,20 @@ subcollection: containers
   <dd>若要深入瞭解工作者節點的效能，請考慮下列各項：
   <ul><li><strong>保持核心強度</strong>：每部機器都有特定數量的核心。根據應用程式的工作負載，設定每個核心的 Pod 數目限制，例如 10。</li>
   <li><strong>避免節點超載</strong>：同樣地，僅因為一個節點可以包含超過 100 個 Pod 並不表示這是您想要的。根據應用程式的工作負載，設定每個節點的 Pod 數目限制，例如 40。</li>
-  <li><strong>不要耗盡叢集頻寬</strong>：請記住，調整虛擬機器的網路頻寬大約是 1000 Mbps。如果叢集中需要數百個工作者節點，請將它分割成多個具有較少節點的叢集，或訂購裸機節點。</li>
+  <li><strong>不要耗盡叢集頻寬</strong>：請記住，調整虛擬機器的網路頻寬大約是 1000 Mbps。如果叢集裡需要數百個工作者節點，請將它分割成多個具有較少節點的叢集，或訂購裸機節點。</li>
   <li><strong>分類服務</strong>：在部署之前，請先規劃工作負載所需的服務數目。網路及埠轉遞規則會放入 Iptables 中。如果您預期有大量服務（例如，超過 5,000 個服務），請將叢集分割成多個叢集。</li></ul></dd>
 <dt>針對混合的運算資源，佈建不同的機型。</dt>
-  <dd>每個人都喜歡選擇，是吧？使用 {{site.data.keyword.containerlong_notm}}，您會有可部署的[混合機型](/docs/containers?topic=containers-plan_clusters#planning_worker_nodes)；從用於密集工作負載的裸機機器到用於快速調整的虛擬機器。使用標籤或名稱空間，將部署組織到機器。當您建立部署時，請限制它，讓應用程式的 Pod 只會部署在具有正確混合資源的機器上。例如，建議您將資料庫應用程式限制為具有大量本端磁碟儲存空間（如 `md1c.28x512.4x4tb`）的裸機機器。</dd>
+  <dd>每個人都喜歡選擇，是吧？使用 {{site.data.keyword.containerlong_notm}}，您會有可部署的[混合機型](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)；從用於密集工作負載的裸機機器到用於快速調整的虛擬機器。使用標籤或名稱空間，將部署組織到機器。當您建立部署時，請限制它，讓應用程式的 Pod 只會部署在具有正確混合資源的機器上。例如，建議您將資料庫應用程式限制為具有大量本端磁碟儲存空間（如 `md1c.28x512.4x4tb`）的裸機機器。</dd>
 <dt>當您有多個共用叢集的團隊及專案時，請設定多個名稱空間。</dt>
   <dd><p>名稱空間有點像是叢集內的某個叢集。它們是使用[資源配額 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) 及[預設限制 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/) 來分割叢集資源的一種方法。當您建立新的名稱空間時，請務必設定適當的 [RBAC 原則](/docs/containers?topic=containers-users#rbac)來控制存取權。如需相關資訊，請參閱 Kubernetes 文件中的[與名稱空間共用叢集 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/)。</p>
   <p>如果您有一個小型叢集、數十位使用者及類似的資源（例如相同軟體的不同版本），則可能不需要多個名稱空間。您可以改為使用標籤。</p></dd>
-<dt>設定資源配額，讓叢集中的使用者必須使用資源要求及限制</dt>
-  <dd>若要確保每個團隊都有所需的資源可以部署服務以及在叢集中執行應用程式，您必須設定每個名稱空間的[資源配額](https://kubernetes.io/docs/concepts/policy/resource-quotas/)。資源配額決定名稱空間的部署限制項，例如您可以部署的 Kubernetes 資源數目，以及可供那些資源耗用的 CPU 和記憶體數量。設定配額之後，使用者必須在其部署中包括資源要求和限制。</dd>
+<dt>設定資源配額，讓叢集裡的使用者必須使用資源要求及限制</dt>
+  <dd>若要確保每個團隊都有所需的資源可以部署服務以及在叢集裡執行應用程式，您必須設定每個名稱空間的[資源配額](https://kubernetes.io/docs/concepts/policy/resource-quotas/)。資源配額決定名稱空間的部署限制項，例如您可以部署的 Kubernetes 資源數目，以及可供那些資源耗用的 CPU 和記憶體數量。設定配額之後，使用者必須在其部署中包括資源要求和限制。</dd>
 <dt>使用標籤組織 Kubernetes 物件</dt>
   <dd><p>若要組織並選取 `pods` 或 `nodes` 這類 Kubernetes 資源，請[使用 Kubernetes 標籤 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。依預設，{{site.data.keyword.containerlong_notm}} 會套用一些標籤，包括 `arch`、`os`、`region`、`zone` 及 `machine-type`。</p>
-  <p>標籤的範例使用案例包括[將網路資料流量限制為邊緣工作者節點](/docs/containers?topic=containers-edge)、[將應用程式部署至 GPU 機器](/docs/containers?topic=containers-app#gpu_app)，以及[限制應用程式工作負載 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 以在工作者節點上執行，而這些工作者節點符合特定機型或 SDS 功能（例如裸機工作者節點）。若要查看已套用至資源的標籤，請使用 <code>kubectl get</code> 指令與 <code>--show-labels</code> 旗標搭配。例如：</p>
-  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p></dd>
+  <p>標籤的使用案例範例包括[將網路資料流量限制為邊緣工作者節點](/docs/containers?topic=containers-edge)、[將應用程式部署至 GPU 機器](/docs/containers?topic=containers-app#gpu_app)，以及[限制應用程式工作負載 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) 以在工作者節點上執行，而這些工作者節點符合特定機型或 SDS 功能（例如裸機工作者節點）。若要查看已套用至資源的標籤，請使用 <code>kubectl get</code> 指令與 <code>--show-labels</code> 旗標搭配。例如：</p>
+  <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
+  若要將標籤套用至工作者節點，請套用標籤[建立工作者節點儲存區](/docs/containers?topic=containers-add_workers#add_pool)或[更新現有工作者節點儲存區](/docs/containers?topic=containers-add_workers#worker_pool_labels)。</dd>
 </dl>
 
 
@@ -246,11 +270,11 @@ subcollection: containers
 
 檢閱讓資源具有高可用性的相關資訊。
 * [減少潛在失敗點](/docs/containers?topic=containers-ha#ha)。
-* [建立多區域叢集](/docs/containers?topic=containers-plan_clusters#ha_clusters)。
+* [建立多區域叢集](/docs/containers?topic=containers-ha_clusters#ha_clusters)。
 * [規劃高可用性部署](/docs/containers?topic=containers-app#highly_available_apps)，以跨多區域使用抄本集和 Pod 反親緣性這類特性。
-* [執行根據雲端型公用登錄中映像檔的容器](/docs/containers?topic=containers-images)。
-* [規劃資料儲存空間](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。特別對於多區域叢集，請考量使用 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about) 這類雲端服務。
-* 對於多區域叢集，啟用[負載平衡器服務](/docs/containers?topic=containers-loadbalancer#multi_zone_config)或 Ingress [多區域負載平衡器](/docs/containers?topic=containers-ingress#ingress)，以公然地公開應用程式。
+* [執行根據以雲端為基礎的公用登錄中映像檔的容器](/docs/containers?topic=containers-images)。
+* [規劃資料儲存空間](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。特別對於多區域叢集，請考量使用 [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) 或 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) 這類雲端服務。
+* 對於多區域叢集，啟用[負載平衡器服務](/docs/containers?topic=containers-loadbalancer#multi_zone_config)或 Ingress [多區域負載平衡器](/docs/containers?topic=containers-ingress#ingress)，以便對大眾公開應用程式。
 
 <br />
 
@@ -258,7 +282,7 @@ subcollection: containers
 ## 設定服務探索
 {: #service_discovery}
 
-Kubernetes 叢集中的每個 Pod 都有 IP 位址。然而，當您將應用程式部署至叢集時，並不想要根據 Pod IP 位址來進行服務探索及網路作業。頻繁且動態地移除及取代 Pod。相反地，請使用 Kubernetes 服務，它代表一組 Pod 並提供透過服務之虛擬 IP 位址（稱為其`叢集 IP`）的穩定進入點。如需相關資訊，請參閱 Kubernetes 文件中關於[服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services) 的部分。
+Kubernetes 叢集裡的每個 Pod 都有 IP 位址。然而，當您將應用程式部署至叢集時，並不想要根據 Pod IP 位址來進行服務探索及網路作業。頻繁且動態地移除及取代 Pod。相反地，請使用 Kubernetes 服務，它代表一組 Pod 並提供透過服務之虛擬 IP 位址（稱為其`叢集 IP`）的穩定進入點。如需相關資訊，請參閱 Kubernetes 文件中關於[服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services) 的部分。
 {:shortdesc}
 
 ### 是否可以自訂 Kubernetes 叢集 DNS 提供者？
@@ -278,10 +302,10 @@ Kubernetes 叢集中的每個 Pod 都有 IP 位址。然而，當您將應用程
 有時，您並不希望服務使用標籤。例如，您可能有一個外部資料庫，或想要將服務指向叢集內不同名稱空間中的另一個服務。發生此情況時，您必須手動新增 endpoints 物件，並將它鏈結至服務。
 
 
-### 如何控制叢集中執行的服務之間的網路資料流量？
+### 如何控制叢集裡執行的服務之間的網路資料流量？
 {: #services_network_traffic}
 
-依預設，Pod 可以與叢集中的其他 Pod 通訊，但是您可以使用網路原則來封鎖對特定 Pod 或名稱空間的資料流量。此外，如果您使用 NodePort、負載平衡器或 Ingress 服務向外部公開應用程式，則建議您設定進階網路原則來封鎖資料流量。在 {{site.data.keyword.containerlong_notm}} 中，您可以使用 Calico 來管理 Kubernetes 和 Calico [網路原則來控制資料流量](/docs/containers?topic=containers-network_policies#network_policies)。
+依預設，Pod 可以與叢集裡的其他 Pod 通訊，但是您可以使用網路原則來封鎖對特定 Pod 或名稱空間的資料流量。此外，如果您使用 NodePort、負載平衡器或 Ingress 服務向外部公開應用程式，則建議您設定進階網路原則來封鎖資料流量。在 {{site.data.keyword.containerlong_notm}} 中，您可以使用 Calico 來管理 Kubernetes 和 Calico [網路原則來控制資料流量](/docs/containers?topic=containers-network_policies#network_policies)。
 
 如果有各種微服務在您需要連接、管理及保護網路資料流量的各平台之間執行，請考量使用服務網工具，例如[受管理 Istio 附加程式](/docs/containers?topic=containers-istio)。
 
@@ -294,25 +318,25 @@ Kubernetes 叢集中的每個 Pod 都有 IP 位址。然而，當您將應用程
 
 您可以針對外部網路建立三種類型的服務：NodePort、LoadBalancer 及 Ingress。如需相關資訊，請參閱[規劃網路服務](/docs/containers?topic=containers-cs_network_planning#external)。
 
-當您規劃叢集中需要多少 `Service` 物件時，請記住，Kubernetes 使用 `iptables` 來處理網路及埠轉遞規則。如果您在叢集中執行大量的服務（例如 5000），則可能會影響效能。
+當您規劃叢集裡需要多少 `Service` 物件時，請記住，Kubernetes 使用 `iptables` 來處理網路及埠轉遞規則。如果您在叢集裡執行大量的服務（例如 5000），則可能會影響效能。
 
 
 
 ## 將應用程式工作負載部署至叢集
 {: #deployments}
 
-使用 Kubernetes，您可以在 YAML 配置檔中宣告多種類型的物件，例如 pods、deployments 及 jobs。這些物件說明下列這類事項：哪些容器化應用程式正在執行、它們所使用的資源，以及哪些原則管理其重新啟動、更新、抄寫等行為。如需相關資訊，請參閱 Kubernetes 文件中關於[配置最佳作法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/) 的部分。
+使用 Kubernetes，您可以在 YAML 配置檔中宣告多種類型的物件，例如 Pod、部署及工作。這些物件說明下列這類事項：哪些容器化應用程式正在執行、它們所使用的資源，以及哪些原則管理其重新啟動、更新、抄寫等行為。如需相關資訊，請參閱 Kubernetes 文件中關於[配置最佳作法 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/overview/) 的部分。
 {: shortdesc}
 
 ### 我認為需要將應用程式置於容器中。現在，要怎麼處理這些 Pod 相關項目？
 {: #deploy_pods}
 
-[Pod ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) 是 Kubernetes 可管理的最小可部署單元。您可以將容器（或容器群組）放入 Pod 中，並使用 Pod 配置檔告知 Pod 如何執行容器以及與其他 Pod 共用資源。任何放入 Pod 中的項目都會在共用環境定義中執行，這表示它們會在相同的虛擬機器或實體機器上同步運作。
+[Pod ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/pods/pod/) 是 Kubernetes 可管理的最小可部署單元。您可以將容器（或容器群組）放入 Pod 中，並使用 Pod 配置檔告知 Pod 如何執行容器以及與其他 Pod 共用資源。放入 Pod 中的所有容器都在共用環境定義中執行，這意味著這些容器共用相同虛擬機或實體機器。
 {: shortdesc}
 
 **放入容器中的項目**：當您思考應用程式的元件時，請考量這些元件對於 CPU 和記憶體這類項目是否有明顯不同的資源需求。部分元件能夠以最佳效能執行嗎？在這種情況下，是否可接受關閉一段時間以將資源轉移至其他區域？是否有另一個客戶端適用元件，因此，保持這一點至關重要？請將它們分割至不同的容器。您可以隨時將它們部署至相同的 Pod，讓它們同步一起執行。
 
-**放入 Pod 中的項目**：應用程式的容器不一定都必須位於相同的 Pod。事實上，如果您的元件是有狀態的且難以調整（例如資料庫服務），則請將其放入可排定於工作者節點的不同 Pod 中，該工作者節點具有較多資源可以處理工作負載。如果容器在不同工作者節點上執行時可以正常運作，則請使用多個 Pod。如果它們需要在相同的機器上並一起調整，請將容器分組到相同的 Pod 中。
+**放入 Pod 中的項目**：應用程式的容器不一定都必須位於相同的 Pod。事實上，如果您的元件是有狀態的且難以調整（例如資料庫服務），則請將其放入可排定於工作者節點的不同 Pod 中，該工作者節點具有較多資源可以處理工作負載。如果在不同工作者節點上執行的容器可以正常工作，請使用多個 Pod。如果它們需要在相同的機器上並一起調整，請將容器分組到相同的 Pod 中。
 
 ### 因此，如果我只能使用 Pod，為何需要所有這些不同類型的物件？
 {: #deploy_objects}
@@ -377,13 +401,14 @@ spec:
     metadata:
     ...
     ---
-apiVersion: v1
+    apiVersion: v1
     kind: Service
     metadata:
-      ...
+    ...
     ```
     {: codeblock}
 *  您可以使用 `kubectl apply -f` 指令來套用至整個目錄，而不只是套用至單一檔案。
+*  請試用 [`kusomize` 專案](/docs/containers?topic=containers-app#kustomize)，此專案可用於協助撰寫、自訂和重複使用 Kubernetes 資源 YAML 配置。
 
 在 YAML 檔案內，您可以使用標籤或註釋作為 meta 資料來管理部署。
 
@@ -397,7 +422,7 @@ apiVersion: v1
 ### 我還能做什麼來準備應用程式進行部署？
 {: #deploy_prep}
 
-還有很多事要做！請參閱[準備容器化應用程式以在叢集中執行](/docs/containers?topic=containers-app#plan_apps)。該主題包括下列相關資訊：
+還有很多事要做！請參閱[準備容器化應用程式以在叢集裡執行](/docs/containers?topic=containers-app#plan_apps)。該主題包括下列相關資訊：
 *  您可以在 Kubernetes 中執行的應用程式類型，包括有狀態及無狀態應用程式的提示。
 *  將應用程式移轉至 Kubernetes。
 *  根據工作負載需求來調整叢集大小。
@@ -420,7 +445,7 @@ apiVersion: v1
 <dt>設定持續整合及交付 (CI/CD) 管線</dt>
   <dd>使用您在 Git 這類來源控制管理系統中所組織的應用程式配置檔，即可建置管線，以測試程式碼並將其部署至 `test` 及 `prod` 這類不同的環境。請查看[這個有關持續部署至 Kubernetes 的指導教學](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)。</dd>
 <dt>包裝應用程式配置檔</dt>
-  <dd>使用 [Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/docs/) Kubernetes 套件管理程式，您可以指定應用程式在 Helm 圖表中需要的所有 Kubernetes 資源。然後，您可以使用 Helm 來建立 YAML 配置檔，並在叢集中部署這些檔案。您也可以[整合 {{site.data.keyword.Bluemix_notm}} 提供的 Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) 以擴充叢集的功能，例如使用區塊儲存空間外掛程式。<p class="tip">您只是要尋找一個簡單的方式來建立 YAML 檔案範本嗎？有些人會使用 Helm 來做到這一點，或者您可以嘗試 [`ytt` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://get-ytt.io/) 這類其他社群工具。</p></dd>
+  <dd>使用 [Helm ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://helm.sh/docs/) Kubernetes 套件管理程式，您可以指定應用程式在 Helm 圖表中需要的所有 Kubernetes 資源。然後，您可以使用 Helm 來建立 YAML 配置檔，並在叢集裡部署這些檔案。您也可以[整合 {{site.data.keyword.Bluemix_notm}} 提供的 Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) 以擴充叢集的功能，例如使用區塊儲存空間外掛程式。<p class="tip">您只是要尋找一個簡單的方式來建立 YAML 檔案範本嗎？有些人會使用 Helm 來做到這一點，或者您可以嘗試 [`ytt` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://get-ytt.io/) 這類其他社群工具。</p></dd>
 </dl>
 
 <br />
@@ -448,7 +473,7 @@ apiVersion: v1
 <dt>即時切換</dt>
   <dd>即時切換也稱為藍綠部署，需要將運算資源加倍，才能同時執行應用程式的兩個版本。使用此方式，您可以近乎即時地將使用者切換至較新的版本。請確定您使用服務標籤選取器（例如 `version: green` 和 `version: blue`），以確保將要求傳送至正確的應用程式版本。您可以建立新的 `version: green` 部署，並等待它就緒，然後刪除 `version: blue` 部署。或者，您可以執行[漸進式更新](/docs/containers?topic=containers-app#app_rolling)，但將 `maxUnavailable` 參數設為 `0%`，並將 `maxSurge` 參數設為 `100%`。</dd>
 <dt>Canary 或 A/B 部署</dt>
-  <dd>Canary 部署是更複雜的更新策略，是指您挑選一定比例（例如 5%）的使用者並將他們傳送至新的應用程式版本。您可以在記載及監視工具中收集下列作業的度量值：如何執行新的應用程式版本，執行 A/B 測試，然後將更新項目推出給更多使用者。與所有部署相同，標示應用程式（例如 `version: stable` 和 `version: canary`）十分重要。若要管理 Canary 部署，您可以[安裝受管理 Istio 附加程式服務網](/docs/containers?topic=containers-istio#istio)，[設定叢集的 Sysdig 監視](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)，然後使用 Istio 服務網進行 A/B 測試，如[本部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://sysdig.com/blog/monitor-istio/) 所述。</dd>
+  <dd>Canary 部署是更複雜的更新策略，是指您挑選一定比例（例如 5%）的使用者並將他們傳送至新的應用程式版本。您可以在記載及監視工具中收集下列作業的度量值：如何執行新的應用程式版本，執行 A/B 測試，然後將更新項目推出給更多使用者。與所有部署相同，標示應用程式（例如 `version: stable` 和 `version: canary`）十分重要。若要管理 Canary 部署，您可以[安裝受管理 Istio 附加程式服務網](/docs/containers?topic=containers-istio#istio)，[設定叢集的 Sysdig 監視](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)，然後使用 Istio 服務網進行 A/B 測試，如[本部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://sysdig.com/blog/monitor-istio/) 所述。或者，將 Knative 用於金絲雀部署。</dd>
 </dl>
 
 <br />

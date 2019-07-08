@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的醫療保健使用案例
@@ -39,7 +39,7 @@ subcollection: containers
 為何要使用 {{site.data.keyword.cloud_notm}}：若要改善病患服務，提供者會尋找 {{site.data.keyword.containerlong_notm}} 及 {{site.data.keyword.contdelivery_full}} 以減少 IT 費用並加速開發，而這些全都是在安全平台上執行。提供者的高使用量 SaaS 系統（同時保留病患記錄系統及商業報告應用程式）需要經常更新。此外，內部部署環境會阻礙敏捷開發。提供者也想要抵消不斷增加的人力成本以及減少預算。
 
 重要技術：
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [水平調整](/docs/containers?topic=containers-app#highly_available_apps)
 * [容器安全及隔離](/docs/containers?topic=containers-security#security)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
@@ -50,7 +50,7 @@ subcollection: containers
 
 加速開發是 IT Exec 的重要致勝點。隨著移至公用雲端，「開發人員」可以使用 Node.js SDK 輕鬆地進行實驗，並將變更推送至「開發」及「測試」系統，以在個別叢集上橫向擴充。這些推送已使用開放式工具鏈及 {{site.data.keyword.contdelivery_full}} 自動化。不再以緩慢且容易出錯的建置處理程序來更新 SaaS 系統。「開發人員」可以將漸進式更新提供給其使用者（每日或甚至更為頻繁）。此外，SaaS 系統的記載及監視（特別是病患前端及後端報告如何互動）會快速整合至系統。「開發人員」不會浪費時間來建置複雜記載系統，只能疑難排解即時系統。
 
-安全第一：使用 {{site.data.keyword.containerlong_notm}} 的裸機，敏感病患工作負載現在已具有熟悉的隔離，但在公用雲端的彈性內。裸機提供「授信運算」，以驗證基礎硬體未遭到竄改。從該核心，「漏洞警告器」提供以下掃描：
+安全第一：使用 {{site.data.keyword.containerlong_notm}} 的裸機，敏感病患工作負載現在已具有熟悉的隔離，但在公用雲端的彈性內。裸機提供「授信運算」，以驗證基礎硬體未遭到竄改。從該核心，Vulnerability Advisor 提供以下掃描：
 * 映像檔漏洞掃描
 * 根據 ISO 27k 的原則掃描
 * 即時容器掃描
@@ -69,12 +69,12 @@ subcollection: containers
 
 **解決方案模型**
 
-隨需應變運算、儲存空間及 I/O 服務是在可安全存取內部部署企業資產的公用雲端中執行。實作 CI/CD 處理程序及其他 IBM Garage Method 組件，以大幅縮短交付週期。
+隨需應變運算、儲存空間及 I/O 服務是在可安全存取內部部署企業資產的公用雲端中執行。實作 CI/CD 處理程序及其他 IBM Garage Method 部分，以大幅縮短交付週期。
 
 **步驟 1：保護運算平台的安全**
 * 管理高度敏感病患資料的應用程式可以在於「裸機」上執行以進行「授信運算」的 {{site.data.keyword.containerlong_notm}} 上重新管理。
 * 「授信運算」可以驗證基礎硬體未遭到竄改。
-* 從該核心，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。
+* 從該核心，Vulnerability Advisor 提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。
 * 利用簡單的 Ingress 註釋，對您的服務及 API 一貫地強制執行原則驅動鑑別。藉由宣告式安全，您可以使用 {{site.data.keyword.appid_short_notm}} 來確保使用者鑑別及記號驗證。
 
 **步驟 2：提升及轉移**
@@ -140,7 +140,7 @@ subcollection: containers
 非營利研究想要聚集全球的癌症研究資料。因此，它們建立一個部門，以專用於其研究人員的解決方案：
 * INGEST - 汲取研究資料的應用程式。研究人員現今使用試算表、文件、商品，以及專有或自有資料庫，來記錄研究結果。此狀況不可能隨著非營利研究嘗試集中化資料分析而變更。
 * ANONYMIZE - 以匿名方式處理資料的應用程式。必須移除 SPI，才能符合地區健康法規。
-* ANALYZE - 分析資料的應用程式。基本型樣是以一般格式儲存資料，然後使用 AI 及機器學習 (ML) 技術、簡單迴歸等等來查詢及處理資料。
+* ANALYZE - 分析資料的應用程式。基本模式是以一般格式儲存資料，然後使用 AI 及機器學習 (ML) 技術、簡單迴歸等等來查詢及處理資料。
 
 研究人員需要與地區叢集產生連結，而且應用程式會汲取、轉換並以匿名方式處理資料：
 1. 將匿名化資料同步到地區叢集，或將它們傳送至集中化資料儲存庫
@@ -164,7 +164,7 @@ subcollection: containers
 
 「開發人員」會從使用 {{site.data.keyword.containerlong_notm}} 以在容器中部署其研究共用 SaaS 應用程式開始。他們已建立「開發」環境的叢集，讓全球「開發人員」能夠快速協同部署應用程式改善。
 
-安全第一：Development Exec 會選擇裸機的「授信運算」，以管理研究叢集。使用 {{site.data.keyword.containerlong_notm}} 的裸機，敏感研究工作負載現在已具有熟悉的隔離，但在公用雲端的彈性內。裸機提供「授信運算」，以驗證基礎硬體未遭到竄改。因為這項非營利研究與製藥公司也具有夥伴關係，所以應用程式安全十分重要。競爭是殘酷的，而且可能會有企業間諜。從該安全核心，「漏洞警告器」提供以下掃描：
+安全第一：Development Exec 會選擇裸機的「授信運算」，以管理研究叢集。使用 {{site.data.keyword.containerlong_notm}} 的裸機，敏感研究工作負載現在已具有熟悉的隔離，但在公用雲端的彈性內。裸機提供「授信運算」，以驗證基礎硬體未遭到竄改。因為這項非營利研究與製藥公司也具有夥伴關係，所以應用程式安全十分重要。競爭是殘酷的，而且可能會有企業間諜。從該安全核心，Vulnerability Advisor 提供以下掃描：
 * 映像檔漏洞掃描
 * 根據 ISO 27k 的原則掃描
 * 即時容器掃描
@@ -197,7 +197,7 @@ subcollection: containers
 **步驟 2：使用安全及高效能運算**
 * 需要較高效能運算的 ML 應用程式是在「裸機」的 {{site.data.keyword.containerlong_notm}} 上進行管理。此 ML 叢集已集中化，因此每個地區叢集都沒有裸機工作者節點的費用；Kubernetes 部署也較為容易。
 * 處理高度敏感臨床資料的應用程式可以在「裸機」上進行「授信運算」的 {{site.data.keyword.containerlong_notm}} 上進行管理。
-* 「授信運算」可以驗證基礎硬體未遭到竄改。從該核心，「漏洞警告器」提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。
+* 「授信運算」可以驗證基礎硬體未遭到竄改。從該核心，Vulnerability Advisor 提供已知惡意軟體的映像檔、原則、容器及套件掃描漏洞掃描。
 
 **步驟 3：確定廣域可用性**
 * 「開發人員」在其「開發」及「測試」叢集裡建置及測試應用程式之後，會使用 IBM CI/CD 工具鏈，將應用程式部署至全球叢集。

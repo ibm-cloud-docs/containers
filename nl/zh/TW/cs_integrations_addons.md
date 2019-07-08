@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # 使用受管理附加程式新增服務
 {: #managed-addons}
@@ -34,20 +35,20 @@ subcollection: containers
 **計費及支援如何作用於受管理附加程式？** </br>
 受管理附加程式已完全整合至 {{site.data.keyword.Bluemix_notm}} 支援組織。如果您有使用受管理附加程式的問題，可以使用其中一個 {{site.data.keyword.containerlong_notm}} 支援頻道。如需相關資訊，請參閱[取得協助及支援](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)。
 
-如果您新增至叢集的工具產生成本需求，則這些成本會自動整合並列在您的 {{site.data.keyword.containerlong_notm}} 計費中。計費週期由 {{site.data.keyword.Bluemix_notm}} 決定，視您在叢集中啟用附加程式的時間而定。
+如果您新增至叢集的工具產生成本需求，則這些成本會自動整合並列在您的 {{site.data.keyword.containerlong_notm}} 計費中。計費週期由 {{site.data.keyword.Bluemix_notm}} 決定，視您在叢集裡啟用附加程式的時間而定。
 
 **需要考量的限制為何？** </br>
-如果您已在叢集中安裝[容器映像檔安全強制執行程式許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，則無法在叢集中啟用受管理附加程式。
+如果您已在叢集裡安裝[容器映像檔安全強制執行程式許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，則無法在叢集裡啟用受管理附加程式。
 
 ## 新增受管理附加程式
 {: #adding-managed-add-ons}
 
-若要在叢集中啟用受管理附加程式，請使用 [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` 指令](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)。當您啟用受管理附加程式時，會自動在叢集中安裝工具的支援版本，包括所有 Kubernetes 資源。請參閱每個受管理附加程式的文件，以尋找您的叢集必須符合才能安裝受管理附加程式的必要條件。
+若要在叢集裡啟用受管理附加程式，請使用 [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>` 指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)。當您啟用受管理附加程式時，會自動在叢集裡安裝工具的支援版本，包括所有 Kubernetes 資源。請參閱每個受管理附加程式的文件，以尋找您的叢集必須符合才能安裝受管理附加程式的必要條件。
 
 如需每個附加程式必要條件的相關資訊，請參閱：
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## 更新受管理附加程式
 {: #updating-managed-add-ons}
@@ -57,7 +58,7 @@ subcollection: containers
 
 1. 檢查附加程式是否為最新版本。可以更新以 `* (<version> latest)` 表示的任何附加程式。
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,8 +66,8 @@ subcollection: containers
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
@@ -86,8 +87,8 @@ subcollection: containers
 
    2. 儲存從這些 CRD 建立的所有資源。
 
-4. Knative 的選用項目：如果您已修改下列任何資源，請取得 YAML 檔案，並將其儲存至本端機器。請注意，如果您已修改其中任何資源，但要改用已安裝的預設值，則可以刪除該資源。在幾分鐘之後，會使用已安裝的預設值來重建資源。
-  <table summary="Knative 資源表">
+4. Knative 的選用項目：如果您已修改下列任何資源，請取得 YAML 檔案，並將其儲存至本端機器。如果修改了其中任何資源，但希望改為使用安裝的預設，則可以刪除該資源。在幾分鐘之後，會使用已安裝的預設值來重建資源。
+  <table summary="Knative 資源表格">
   <caption>Knative 資源</caption>
   <thead><tr><th>資源名稱</th><th>資源類型</th><th>名稱空間</th></tr></thead>
   <tbody>
@@ -128,13 +129,13 @@ subcollection: containers
    ```
    {: pre}
 
-7. 繼續進行下一步之前，請驗證已移除附加程式名稱空間內附加程式的資源或附加程式名稱空間本身的資源。
-   * 例如，如果您更新 `istio-extras` 附加程式，則可能會驗證已從 `istio-system` 名稱空間中移除 `grafana`、`kiali` 及 `jaeger-*` 服務。
+7. 在繼續執行下一步之前，請驗證是已移除附加程式名稱空間內附加程式中的資源，還是已移除附加程式名稱空間本身。
+   * 例如，如果您更新 `istio-extras` 附加程式，則可能會驗證已從 `istio-system` 名稱空間移除 `grafana`、`kiali` 及 `jaeger-*` 服務。
      ```
      kubectl get svc -n istio-system
      ```
      {: pre}
-   * 例如，如果您更新 `knative` 附加程式，則可能會驗證已刪除 `knative-serving`、`knative-monitoring`、`knative-eventing`、`knative-build` 及 `istio-system` 名稱空間。在名稱空間完全刪除之前，可能會有幾分鐘的 `Terminating` **狀態**。
+   * 例如，如果您更新 `knative` 附加程式，則可能會驗證已刪除 `knative-serving`、`knative-monitoring`、`knative-eventing`、`knative-build` 及 `istio-system` 名稱空間。名稱空間在被刪除前的幾分鐘內，其 **STATUS** 可能為 `Terminating`。
      ```
      kubectl get namespaces -w
      ```
@@ -158,7 +159,7 @@ subcollection: containers
     ```
     {: pre}
 
-11. Knative 的選用項目：如果您已在步驟 3 中儲存所有資源，請重新套用它們。
+11. 對於 Knative 為選用：如果在步驟 3 中已儲存任何資源，請重新應用這些資源。
     指令範例：
     ```
     kubectl apply -f config-autoscaler.yaml -n knative-serving
@@ -177,3 +178,10 @@ subcollection: containers
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
+
+13. 對於 Istio 為選用：如果在閘道配置檔中使用 TLS 區段，則必須刪除並重建閘道，以便 Envoy 可以存取這些密碼。
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

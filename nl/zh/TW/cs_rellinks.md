@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **REST API**
 
-- [叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/)
-- [叢集的 REST API JSON ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [用於登入叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-logging/)
-- [用於管理叢集裡 Ingress 應用程式負載平衡器的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [叢集的 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [叢集的 REST API JSON ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [設定 {{site.data.keyword.containerlong}} 的 Continuous Integration/Continuous Delivery ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [將 VM 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [將 CF 應用程式移轉至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [使用 Knative 在叢集中執行無伺服器應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [使用 Knative 在叢集裡執行無伺服器應用程式 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/containers?topic=containers-serverless-apps-knative)
 - [使用 Apache Kafka 型傳訊服務編排應用程式的長時間執行工作負載 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [使用 Terraform 在叢集裡自動化部署 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [組織使用者及團隊 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
@@ -99,7 +97,7 @@ subcollection: containers
 
 - [{{site.data.keyword.registryshort_notm}} 文件](/docs/services/Registry?topic=registry-getting-started)
 - [{{site.data.keyword.registryshort_notm}}REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://{DomainName}/apidocs/container-registry)
-- [漏洞警告器 REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://{DomainName}/apidocs/container-registry/va)
+- [Vulnerability Advisor REST API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://{DomainName}/apidocs/container-registry/va)
 
 <br />
 

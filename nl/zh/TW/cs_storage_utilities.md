@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud 儲存空間公用程式
@@ -29,20 +31,20 @@ subcollection: containers
 ## 安裝 IBM Cloud Block Storage Attacher 外掛程式（測試版）
 {: #block_storage_attacher}
 
-使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 外掛程式，將原始、未格式化且未裝載的區塊儲存空間連接至叢集中的工作者節點。
+使用 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 外掛程式，將原始、未格式化且未裝載的區塊儲存空間連接至叢集裡的工作者節點。
   
 {: shortdesc}
 
-例如，您想要使用 [Portworx](/docs/containers?topic=containers-portworx) 等軟體定義儲存空間解決方案(SDS) 來儲存資料，但不想要使用來自額外本端磁碟，且針對 SDS 用法而進行最佳化的裸機工作者節點。若要新增本端磁碟至您的非 SDS工作者節點，您必須在 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶中，手動建立區塊儲存裝置，然後使用 {{site.data.keyword.Bluemix_notm}}Block Volume Attacher 將該儲存空間連接至您的非 SDS 工作者節點。
+例如，您想要使用 [Portworx](/docs/containers?topic=containers-portworx) 等軟體定義儲存空間解決方案(SDS) 來儲存資料，但不想要使用針對 SDS 用法而進行最佳化，且具有額外本端磁碟的裸機工作者節點。若要新增本端磁碟至您的非 SDS工作者節點，您必須在 {{site.data.keyword.Bluemix_notm}} 基礎架構帳戶中，手動建立區塊儲存裝置，然後使用 {{site.data.keyword.Bluemix_notm}}Block Volume Attacher 將該儲存空間連接至您的非 SDS 工作者節點。
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式會在叢集中的每個工作者節點上建立 Pod，作為常駐程式集的一部分，並設定 Kubernetes 儲存空間類別，您稍後會使用該類別將區塊儲存裝置連接至非 SDS 工作者節點。
+{{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式會在叢集裡的每個工作者節點上建立 Pod，作為常駐程式集的一部分，並設定 Kubernetes 儲存空間類別，您稍後會使用該類別將區塊儲存裝置連接至非 SDS 工作者節點。
 
 您在尋找如何更新或移除 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式的指示嗎？請參閱[更新外掛程式](#update_block_attacher)及[移除外掛程式](#remove_block_attacher)。
 {: tip}
 
-1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集裡使用服務帳戶安裝 Helm 伺服器 (Tiller)。
 
-2.  驗證是否已安裝 Tiller 且具有服務帳戶。
+2.  驗證已使用服務帳戶安裝 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
@@ -57,7 +59,7 @@ subcollection: containers
     ```
     {: screen}
 
-3. 更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
+3. 更新 Helm 儲存庫，以擷取此儲存庫中所有 Helm 圖表的最新版本。
    ```
    helm repo update
    ```
@@ -117,7 +119,7 @@ subcollection: containers
    ```
    {: screen}
 
-   當您看到一個以上的 **ibmcloud-block-storage-attacher** Pod 時，安裝即成功。Pod 的數目等於叢集裡的工作者節點數目。所有 Pod 都必須處於**執行中**狀態。
+   當您看到一個以上的 **ibmcloud-block-storage-attacher** Pod 時，安裝即已成功。Pod 的數目會等於叢集裡的工作者節點數目。所有 Pod 都必須處於 **Running** 狀況。
 
 6. 驗證是否已順利建立 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 的儲存空間類別。
    ```
@@ -137,13 +139,13 @@ subcollection: containers
 您可以將現有的 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 外掛程式升級至最新版本。
 {: shortdesc}
 
-1. 更新 Helm 報告，以擷取此儲存庫中所有 Helm 圖表的最新版本。
+1. 更新 Helm 儲存庫，以擷取此儲存庫中所有 Helm 圖表的最新版本。
    ```
    helm repo update
    ```
    {: pre}
 
-2. 選用項目：將最新的 Helm 圖表下載至您的本端機器。然後，解壓縮套件並檢閱 `release.md` 檔，以尋找最新版本資訊。
+2. 選用項目：將最新的 Helm 圖表下載至您的本端機器。然後，將套件解壓縮，並檢閱 `release.md` 檔案，以找到最新版本資訊。
    ```
    helm fetch iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -197,7 +199,7 @@ subcollection: containers
    ```
    {: pre}
 
-      如果 CLI 輸出中沒有顯示任何 Pod，則表示已順利移除 Pod。
+   如果 CLI 輸出中沒有顯示任何 Pod，則表示已順利移除 Pod。
 
 4. 驗證是否已移除 {{site.data.keyword.Bluemix_notm}} Block Storage Attacher 儲存空間類別。
    ```
@@ -210,16 +212,16 @@ subcollection: containers
 ## 自動佈建未格式化的區塊儲存空間，並授權工作者節點存取儲存空間
 {: #automatic_block}
 
-您可以使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式，將含有相同配置的原始、未格式化且未裝載的區塊儲存空間，自動新增至叢集中的所有工作者節點。
+您可以使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式，將含有相同配置的原始、未格式化且未裝載的區塊儲存空間，自動新增至叢集裡的所有工作者節點。
 {: shortdesc}
 
-內含在 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式中的 `mkpvyaml` 容器，已配置為執行 Script，其會尋找叢集中的所有工作者節點、在 {{site.data.keyword.Bluemix_notm}} 基礎架構入口網站中建立原始區塊儲存空間，然後授權工作者節點存取儲存空間。
+內含在 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式中的 `mkpvyaml` 容器已配置為執行 Script，該 Script 會尋找叢集裡的所有工作者節點、在 {{site.data.keyword.Bluemix_notm}} 基礎架構入口網站中建立原始區塊儲存空間，然後授權工作者節點存取儲存空間。
 
-若要新增不同的區塊儲存空間配置、將區塊儲存空間僅新增至工作者節點子集，或擁有更多的佈建處理程序控制權，請選擇[手動新增區塊儲存空間](#manual_block)。
+若要新增不同的區塊儲存空間配置、將區塊儲存空間僅新增至部分工作者節點，或擁有更多的佈建處理程序控制權，請選擇[手動新增區塊儲存空間](#manual_block)。
 {: tip}
 
 
-1. 登入 {{site.data.keyword.Bluemix_notm}}，並鎖定您的叢集所在的資源群組。
+1. 登入 {{site.data.keyword.Bluemix_notm}}，並將目標設定為您的叢集所在的資源群組。
    ```
    ibmcloud login
    ```
@@ -237,7 +239,7 @@ subcollection: containers
    ```
    {: pre}
 
-4. 開啟 `yamlgen.yaml` 檔，並指定要新增至叢集中每個工作者節點的區塊儲存空間配置。
+4. 開啟 `yamlgen.yaml` 檔，並指定要新增至叢集裡每個工作者節點的區塊儲存空間配置。
    ```
    #
    # Can only specify 'performance' OR 'endurance' and associated clause
@@ -266,7 +268,7 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>region</code></td>
-   <td>輸入要在其中建立叢集的 {{site.data.keyword.containerlong_notm}} 地區。執行 <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code>，以尋找您叢集的地區。</td>
+   <td>輸入您已在其中建立叢集的 {{site.data.keyword.containerlong_notm}} 地區。執行 <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code>，以尋找您叢集的地區。</td>
    </tr>
    <tr>
    <td><code>type</code></td>
@@ -277,7 +279,7 @@ subcollection: containers
    <td>如果您要佈建 `performance` 儲存空間，請輸入 IOPS 的數目。如需相關資訊，請參閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。如果您要佈建 `endurance` 儲存空間，請移除此區段，或將 `#` 新增至每一行的開頭，以註銷此區段。</tr>
    <tr>
    <td><code>endurance.tier</code></td>
-   <td>如果您要佈建 `endurance` 儲存空間，請輸入每 GB 的 IOPS 數目。例如，若您要將區塊儲存空間佈建成其在 `ibmc-block-bronze` 儲存空間類別中的定義，請輸入 2。如需相關資訊，請參閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。如果您要佈建 `performance` 儲存空間，請移除此區段，或將 `#` 新增至每一行的開頭，以註銷此區段。</td>
+   <td>如果您要佈建 `endurance` 儲存空間，請輸入每 GB 的 IOPS 數目。例如，若您要如 `ibmc-block-bronze` 儲存空間類別中所定義，來佈建區塊儲存空間，請輸入 2。如需相關資訊，請參閱[決定區塊儲存空間配置](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)。如果您要佈建 `performance` 儲存空間，請移除此區段，或將 `#` 新增至每一行的開頭，以註銷此區段。</td>
    </tr>
    <tr>
    <td><code>size</code></td>
@@ -288,10 +290,10 @@ subcollection: containers
 
 5. 擷取您的 IBM Cloud 基礎架構 (SoftLayer) 使用者名稱及 API 金鑰。`mkpvyaml` Script 會使用該使用者名稱及 API 金鑰來存取叢集。
    1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/)。
-   2. 從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，選取**基礎架構**。
-   3. 從功能表列中，選取**帳戶** > **使用者** > **使用者清單**。
+   2. 從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示")，選取**基礎架構**。
+   3. 從功能表列，選取**帳戶** > **使用者** > **使用者清單**。
    4. 尋找您要擷取其使用者名稱及 API 金鑰的使用者。
-   5. 按一下**產生**以產生 API 金鑰，或**檢視**以檢視您現有的 API 金鑰。即會開啟一個蹦現視窗，顯示基礎架構使用者名稱及 API 金鑰。
+   5. 按一下**產生**以產生 API 金鑰，或按一下**檢視**以檢視您現有的 API 金鑰。即會開啟一個蹦現視窗，顯示基礎架構使用者名稱及 API 金鑰。
 
 6. 將認證儲存在環境變數中。
    1. 新增環境變數。
@@ -311,7 +313,7 @@ subcollection: containers
         ```
       {: pre}
 
-7.  建置並執行 `mkpvyaml` 容器。當您從映像檔執行容器時，會執行 `mkpvyaml.py` Script。該 Script 會將區塊儲存裝置新增至叢集中的每個工作者節點，並授權每個工作者節點存取該區塊儲存裝置。在 Script 結束時，會產生 `pv-<cluster_name>.yaml` YAML 檔案，您稍後可以使用該檔案在叢集中建立持續性磁區。
+7.  建置並執行 `mkpvyaml` 容器。當您從映像檔執行容器時，會執行 `mkpvyaml.py` Script。該 Script 會將區塊儲存裝置新增至叢集裡的每個工作者節點，並授權每個工作者節點存取該區塊儲存裝置。在 Script 結束時，會產生 `pv-<cluster_name>.yaml` YAML 檔案，您稍後可以使用它在叢集裡建立持續性磁區。
     1.  建置 `mkpvyaml` 容器。
         ```
         docker build -t mkpvyaml .
@@ -403,10 +405,10 @@ subcollection: containers
 ## 手動新增區塊儲存空間至特定的工作者節點
 {: #manual_block}
 
-如果您要新增不同的區塊儲存空間配置、將區塊儲存空間僅新增至工作者節點子集，或擁有更多的佈建處理程序控制權，請使用此選項。
+如果您要新增不同的區塊儲存空間配置、將區塊儲存空間僅新增至部分工作者節點，或擁有更多的佈建處理程序控制權，請使用此選項。
 {: shortdesc}
 
-1. 列出叢集中的工作者節點，並記下您要新增區塊儲存裝置之非 SDS 工作者節點的專用 IP 位址及區域。
+1. 列出叢集裡的工作者節點，並記下您要新增區塊儲存裝置之非 SDS 工作者節點的專用 IP 位址及區域。
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
@@ -416,19 +418,19 @@ subcollection: containers
 
 3. 在非 SDS 工作者節點所在的相同區域中建立區塊儲存裝置。
 
-   **佈建 20GB endurance 區塊儲存空間（每 GB 2 個 IOPS）的範例：**
+   **佈建 20 GB、2 IOPS/GB 耐久性區塊儲存空間的範例：**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **佈建 20GB performance 區塊儲存空間（含 100 個 IOPS）的範例：**
+   **佈建 20 GB、100 IOPS 效能區塊儲存空間的範例：**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-4. 驗證是否已建立區塊儲存裝置，並記下磁區的 **`id`**。**附註：**如果您沒有立即看到您的區塊儲存裝置，請等待幾分鐘。然後，重新執行此指令。
+4. 驗證是否已建立區塊儲存裝置，並記下磁區的 **`id`**。**附註：**如果您沒有立即看到您的區塊儲存裝置，請等待幾分鐘。然後，重新執行這個指令。
    ```
    ibmcloud sl block volume-list
    ```
@@ -476,7 +478,7 @@ subcollection: containers
    ```
    {: screen}
 
-7. 驗證您的非 SDS 工作者節點是否已成功授權，並記下 **`host_iqn`**、**`username`** 及 **`password`**。
+7. 驗證您的非 SDS 工作者節點是否已順利授權，並記下 **`host_iqn`**、**`username`** 及 **`password`**。
    ```
    ibmcloud sl block access-list <volume_ID>
    ```
@@ -497,14 +499,14 @@ subcollection: containers
 ## 將原始區塊儲存空間連接至非 SDS 工作者節點
 {: #attach_block}
 
-若要將區塊儲存裝置連接至非 SDS 工作者節點，您必須建立具有 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 儲存空間類別及區塊儲存裝置詳細資料的持續性磁區 (PV)。
+若要將區塊儲存裝置連接到非 SDS 工作者節點，必須使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 儲存類別和區塊儲存裝置詳細資料來建立持續性磁區 (PV)。
 {: shortdesc}
 
 **開始之前**：
-- 請確定您已[自動](#automatic_block)或[手動](#manual_block)建立原始、未格式化且未裝載的區塊儲存空間至您的非 SDS 工作者節點。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- 確保已[自動](#automatic_block)或[手動](#manual_block)建立要用於非 SDS 工作者節點的未格式化且未裝載的原始區塊儲存空間。
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-**若要將原始區塊儲存空間連接至非 SDS 工作者節點**，請執行下列動作：
+**若要將原始區塊儲存空間連接至非 SDS 工作者節點，請執行下列動作：**
 1. 準備建立 PV。  
    - **如果您使用 `mkpvyaml` 容器，請執行下列動作：**
      1. 開啟 `pv-<cluster_name>.yaml` 檔案。
@@ -575,11 +577,11 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>輸入您先前擷取的區塊儲存裝置 LUN ID。</td>
+        <td>輸入先前擷取到的區塊儲存裝置的 LUN ID。</td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
-        <td>針對要在其中連接區塊儲存裝置，且您先前已授權存取您區塊儲存裝置的工作者節點，輸入其專用 IP 位址。</td>
+        <td>針對要在其中連接區塊儲存裝置，且您先前已授權存取區塊儲存裝置的工作者節點，輸入其專用 IP 位址。</td>
         </tr>
         <tr>
           <td><code>ibm.io/volID</code></td>
@@ -641,7 +643,9 @@ subcollection: containers
    ```
    {: screen}
 
-   當 **ibm.io/dm** 設為裝置 ID（例如，`/dev/dm/1`），且您可以在 CLI 輸出的**註釋**區段中，看到 **ibm.io/attachstatus=attached**，表示已順利連接區塊儲存裝置。
+   當 **ibm.io/dm** 設為裝置 ID（例如 `/dev/dm/1`），且您可以在 CLI 輸出的**註釋**區段中，看到 **ibm.io/attachstatus=attached**，表示已順利連接區塊儲存裝置。
 
-如果您要分離磁區，請刪除 PV。已分離的磁區仍授權由特定工作者節點存取，並在您使用 {{site.data.keyword.Bluemix_notm}} BlockVolume Attacher 儲存空間類別來建立新的 PV 時重新連接，以將不同的磁區連接至相同的工作者節點。若要避免再次連接舊的分離磁區，請使用 `ibmcloud sl block access-revoke` 指令，解除工作者節點存取已分離磁區的授權。分離磁區並不會將磁區從您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶中移除。若要取消磁區的計費，您必須手動[從 IBM Cloud 基礎架構 (SoftLayer) 帳戶移除儲存空間](/docs/containers?topic=containers-cleanup)。
+如果您要分離磁區，請刪除 PV。已分離的磁區仍有授權可供特定工作者節點存取，並且在您使用 {{site.data.keyword.Bluemix_notm}} BlockVolume Attacher 儲存空間類別來建立新的 PV，將不同的磁區連接至相同的工作者節點時，會重新連接。若要避免再次連接舊的分離磁區，請使用 `ibmcloud sl block access-revoke` 指令，解除工作者節點存取已分離磁區的授權。分離磁區並不會將磁區從您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶移除。若要取消磁區的計費，您必須手動[從 IBM Cloud 基礎架構 (SoftLayer) 帳戶移除儲存空間](/docs/containers?topic=containers-cleanup)。
 {: note}
+
+

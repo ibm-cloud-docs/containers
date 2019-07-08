@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}} 技術
@@ -86,7 +88,7 @@ subcollection: containers
 
 <dl>
 <dt>帳戶</dt>
-<dd>您的帳戶指的是 {{site.data.keyword.Bluemix_notm}} 帳戶。</dd>
+<dd>您的帳戶是指 {{site.data.keyword.Bluemix_notm}} 帳戶。</dd>
 
 <dt>叢集</dt>
 <dd>Kubernetes 叢集包含一台以上稱為工作者節點的運算主機。工作者節點是由 Kubernetes 主節點進行管理，Kubernetes 主節點會集中控制及監視叢集裡的所有 Kubernetes 資源。因此，當您部署容器化應用程式的資源時，Kubernetes 主節點會考慮部署需求及叢集裡的可用容量，來決定要在其上部署這些資源的工作者節點。Kubernetes 資源包括服務、部署及 Pod。</dd>
@@ -103,7 +105,7 @@ subcollection: containers
 <dd>稱為 Pod 的 Kubernetes 資源會部署、執行及管理每個部署至叢集的容器化應用程式。Pod 代表 Kubernetes 叢集裡的小型可部署單元，並且用來將必須視為單一單元的容器分組在一起。在大部分情況下，每一個容器都會部署至其專屬 Pod。不過，應用程式可能會要求將一個容器及其他協助容器部署至某個 Pod，以便使用相同的專用 IP 位址來為那些容器定址。</dd>
 
 <dt>應用程式</dt>
-<dd>應用程式可能指的是完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
+<dd>應用程式可能是指完整應用程式或應用程式的元件。您可以在個別 Pod 或個別工作者節點中部署應用程式的元件。
 </dd>
 
 <p>進一步瞭解使用 Kubernetes 資源時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。</p>
@@ -121,17 +123,17 @@ subcollection: containers
 ## 服務架構
 {: #architecture}
 
-在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點與工作者節點之間的通訊設定視您如何設定 IBM Cloud 基礎架構 (SoftLayer) 網路而定：具有公用服務端點的帳戶，或者具有公用及專用服務端點且已啟用 VRF 的帳戶。
+在 {{site.data.keyword.containerlong_notm}} 上執行的 Kubernetes 叢集裡，您的容器化應用程式是在稱為工作者節點的運算主機上進行管理。更明確的說法是，應用程式是在 Pod 執行，而 Pod 是在工作者節點上進行管理。工作者節點是由 Kubernetes 主節點管理。Kubernetes 主節點與工作者節點之間的通訊設定，視您如何設定 IBM Cloud 基礎架構 (SoftLayer) 網路而定：具有公用服務端點的帳戶，或者具有公用及專用服務端點且已啟用 VRF 的帳戶。
 {: shortdesc}
 
-下圖顯示您的叢集元件，以及在只[啟用公用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public)時，這些元件在帳戶中的互動方式。
+下圖顯示您的叢集元件，以及在只[啟用公用服務端點](/docs/containers?topic=containers-plan_clusters#workeruser-master)時，這些元件在帳戶中的互動方式。
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} Kubernetes 架構">
  <figcaption>僅啟用公用服務端點時的 {{site.data.keyword.containerlong_notm}} 架構</figcaption> </figure>
 </p>
 
-下圖顯示您的叢集元件，以及在[啟用公用及專用服務端點](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both)時，這些元件在已啟用 VRF 帳戶中的互動方式。
+下圖顯示您的叢集元件，以及在[啟用公用及專用服務端點](/docs/containers?topic=containers-plan_clusters#workeruser-master)時，這些元件在已啟用 VRF 之帳戶中的互動方式。
 
 <p>
 <figure>
@@ -161,7 +163,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tr>
     <tr>
     <td>etcd</td>
-    <td>etcd 是高度可用的金鑰值儲存庫，其中儲存叢集的所有 Kubernetes 資源（例如服務、部署及 Pod）的狀況。etd 中的資料會備份至 IBM 管理的已加密儲存空間實例。</td>
+    <td>etcd 是高度可用的鍵值儲存庫，其中儲存叢集的所有 Kubernetes 資源（例如服務、部署及 Pod）的狀況。etcd 中的資料會備份至 IBM 管理的已加密儲存空間實例。</td>
     </tr>
     <tr>
     <td>kube-scheduler</td>
@@ -169,11 +171,11 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     </tr>
     <tr>
     <td>kube-controller-manager</td>
-    <td>Kubernetes 控制器管理程式是一種常駐程式，它會監看叢集資源（例如抄本集）的狀況。當資源的狀況變更時，例如，若抄本集中的 Pod 關閉，控制器管理程式會起始更正動作以達到所需的狀況。</td>
+    <td>Kubernetes 控制器管理程式是一種常駐程式，它會監看叢集資源（例如抄本集）的狀況。當資源的狀況變更時，例如，若抄本集中的 Pod 關閉，則控制器管理程式會起始更正動作以達到所需的狀況。</td>
     </tr>
     </tbody></table></dd>
   <dt>工作者節點</dt>
-    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全法規遵循。</br></br><p class="note">不支援修改預設工作者節點元件，例如，`kubelet`，可能導致非預期的結果。</p>下表說明工作者節點的元件。
+    <dd>每一個工作者節點都是雲端環境中，實體機器（裸機）或是在實體硬體上執行的虛擬機器。當您佈建工作者節點時，要判斷該工作者節點上管理之容器可用的資源。工作者節點預設都已設定 {{site.data.keyword.IBM_notm}} 所管理的 Docker Engine、個別的運算資源、網路及磁區服務。內建安全特性提供隔離、資源管理功能及工作者節點安全法規遵循。</br></br><p class="note">不支援修改預設工作者節點元件，例如 `kubelet`，可能導致非預期的結果。</p>下表說明工作者節點的元件。
     <table>
     <caption>工作者節點的元件</caption>
     <thead>
@@ -200,7 +202,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>`coredns`</td>
     <td>kube-system</td>
-    <td>依預設，Kubernetes 在叢集上排程 CoreDNS Pod（或 1.12 版及更早版本中的 KubeDNS Pod）及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
+    <td>依預設，Kubernetes 會在叢集上排定 CoreDNS Pod（或 1.12 版及更早版本中的 KubeDNS Pod）及服務。容器在搜尋其他 Pod 及服務時，會自動使用 DNS 服務的 IP 來解析 DNS 名稱。</td>
     </tr>
     <tr>
     <td>`calico`</td>
@@ -230,7 +232,7 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
     <tr>
     <td>Ingress ALB</td>
     <td>kube-system</td>
-    <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用及專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
+    <td>Ingress 是一種 Kubernetes 服務，可用來將公用或專用要求轉遞給叢集裡的多個應用程式，以平衡叢集裡的網路資料流量工作負載。若要透過公用或專用網路來公開您的應用程式，您必須建立 Ingress 資源，向 Ingress 應用程式負載平衡器 (ALB) 登錄您的應用程式。然後，便可以使用單一 URL 或 IP 位址來存取多個應用程式。</td>
     </tr>
     <tr>
     <td>儲存空間提供者</td>
@@ -257,3 +259,54 @@ Kubernetes 主節點與工作者節點之間的差異為何？問得好。
 
 想要查看 {{site.data.keyword.containerlong_notm}} 如何與其他產品及服務搭配使用嗎？請參閱部分[整合](/docs/containers?topic=containers-supported_integrations#supported_integrations)。
 {: tip}
+
+## 服務限制
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} 和 Kubernetes 開放程式碼專案隨附預設服務設定和限制，以確保提供基本功能以及安全和便利性。您可能可以變更其中註明的一些限制。如果預期會達到下列 {{site.data.keyword.containerlong_notm}} 限制，請透過[內部 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 或[外部 Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 聯絡 IBM 團隊。
+{: shortdesc}
+
+<table summary="該表格包含有關 {{site.data.keyword.containerlong_notm}} 限制的資訊。各直欄從左到右閱讀。第一直欄是限制的類型，第二直欄是限制的說明。">
+<caption>{{site.data.keyword.containerlong_notm}} 限制</caption>
+<thead>
+  <tr>
+    <th>類型</th>
+    <th>說明</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>API 速率限制</td>
+    <td>針對每個唯一來源 IP 位址，每 10 秒向 {{site.data.keyword.containerlong_notm}} API 發出 100 個要求。</td>
+  </tr>
+  <tr>
+    <td>工作者節點容量</td>
+    <td>工作者節點在運算資源的[選取特性](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)中提供。</td>
+  </tr>
+  <tr>
+    <td>工作者節點主機存取</td>
+    <td>基於安全，您無法透過 SSH 登錄到工作者節點運算主機。</td>
+  </tr>
+  <tr>
+    <td>最大工作者節點數</td>
+    <td>如果計劃每個叢集的工作者節點節點數會超過 900 個，請首先透過[內部 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) 或[外部 Slack ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://ibm-container-service.slack.com) 聯絡 IBM 團隊。
+<br><br>如果看到針對每個資料中心的實例數或每個月訂購的實例數的 IBM Cloud 基礎架構 (SoftLayer) 容量限制，請聯絡 IBM Cloud 基礎架構 (SoftLayer) 代表。</td>
+  </tr>
+  <tr>
+    <td>最大 Pod 數</td>
+    <td>每個工作者節點 110 個 Pod。<br><br>pod 數包括在工作者節點上執行的 `kube-system` 和 `ibm-system` Pod。要提高效能，請考慮限制每個運算核心執行的 Pod 數，以便不會過度使用工作者節點。例如，在使用 `b3c.4x16` 特性的工作者節點上，可每個核心執行 10 個 Pod，這些 Pod 使用的容量佔工作者節點總容量的比例不超過 75%。</td>
+  </tr>
+  <tr>
+    <td>最大 Kubernetes 服務數</td>
+    <td>在 172.21.0.0/16 範圍內，每個叢集 65,000 個 IP，可以將這些 IP 指派給叢集裡的 Kubernetes 服務。</td>
+  </tr>
+  <tr>
+    <td>Ingress 應用程式負載平衡器 (ALB) 資料流量</td>
+    <td>每秒 32,768 個連線。<br><br>如果輸入資料流量超過此數目，請在叢集裡[擴增 ALB 抄本數](/docs/containers?topic=containers-ingress#scale_albs)，以處理增加的工作負載。</td>
+  </tr>
+  <tr>
+    <td>儲存空間磁區</td>
+    <td>每個帳戶的 IBM Cloud 基礎架構 (SoftLayer) 檔案儲存空間和區塊儲存空間實例的磁區的合併總數 250 個。<br><br>如果裝載的數量超過此數量，則在佈建持續性磁區時可能會看到「容量不足」訊息，並且需要聯絡 IBM Cloud 基礎架構 (SoftLayer) 代表。如需更多常見問題，請參閱[檔案](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-)儲存空間和[區塊](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-)儲存空間文件。</td>
+  </tr>
+</tbody>
+</table>

@@ -32,23 +32,28 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     指導教學
         cs_tutorials.md
+        cs_tutorial_rhos.md
         cs_tutorials_apps.md
-        cs_tutorials_knative.md
-        cs_tutorials_istio.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [指導教學：將 VM 型應用程式移至 Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [指導教學：使用雲端網際網路服務建立多地區叢集](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [指導教學：設定在 Kubernetes 中執行之容器化應用程式的持續整合及交付管道](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [指導教學：將以 VM 為基礎的應用程式移至 Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [指導教學：使用 Cloud Internet Services 建立多地區叢集](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [指導教學：為在 Kubernetes 中執行的容器化應用程式設定持續整合和交付管道](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
 
     {: .topicgroup}
-    管理叢集
+    設定叢集
         cs_clusters_planning.md
+        cs_plan_ha.md
+        cs_plan_workers.md
         cs_clusters.md
+        cs_workers.md
+
+    {: .topicgroup}
+    管理叢集
         cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md
@@ -57,24 +62,25 @@ IBM Cloud Kubernetes Service
         cs_pod_priority.md
         cs_health.md
         cs_performance.md
+        cs_remove.md
 
     {: .topicgroup}
-    設定叢集網路
-        cs_network_ov.md
-        cs_network_cluster.md
+    管理叢集網路流量
         cs_firewall.md
-        cs_dns.md
         cs_network_policy.md
         cs_edge.md
-        cs_istio.md
         cs_vpn.md
+        cs_istio.md
         cs_subnets.md
+        cs_network_cluster.md
+        cs_dns.md
 
     cs_images.md
     cs_app.md
+    cs_app_knative.md
 
     {: .topicgroup}
-    網路連線至公開應用程式
+    網路連線以便公開應用程式
         cs_network_planning.md
         cs_nodeport.md
         cs_loadbalancer.md
@@ -94,7 +100,9 @@ IBM Cloud Kubernetes Service
         cs_storage_remove.md
 
     {: .topicgroup}
-    使用整合加強叢集功能
+    使用整合增強叢集功能
+        cs_integrations_partnerships.md
+        cs_integrations_ibm_third_party.md
         cs_integrations_addons.md
         cs_integrations_helm.md
         cs_integrations_service_binding.md
@@ -102,17 +110,12 @@ IBM Cloud Kubernetes Service
 
     {: .navgroup id="reference"}
     cs_at_events.md
-
-    {: .topicgroup}
-    已淘汰：專用雲端
-        cs_dedicated.md
-        [已淘汰：執行單一和可擴充容器](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
-
+    cs_dedicated.md
     cs_hybrid.md
 
     {: .topicgroup}
     IBM Cloud Kubernetes Service CLI 外掛程式參考資料
-        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
@@ -122,8 +125,8 @@ IBM Cloud Kubernetes Service
         cs_versions_addons.md
 
     cs_regions.md
-    cs_access_reference.md
     cs_integrations_overview.md
+    cs_access_reference.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
@@ -138,30 +141,8 @@ IBM Cloud Kubernetes Service
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_network.md
 
-    cs_popular_topics.md
+    release_notes.md
     cs_rellinks.md
     cs_sitemap.md
     {: .navgroup-end}
 
-    container_cli_cfic.md
-    container_cli_cfic_install.md
-    container_cli_reference_cfic.md
-    container_cli_reference_cfic_quick.md
-    container_ha.md
-    container_images.md
-    container_images_adding_ov.md
-    container_images_building.md
-    container_integrations.md
-    container_ov.md
-    container_planning.md
-    container_security.md
-    container_single_ui.md
-    container_troubleshoot.md
-    container_volumes_ov.md
-    cs_classic.md
-    cs_cli_devtools.md
-    cs_integrations.md
-    cs_cli_reference.md
-    cs_storage.md
-    transcript_autorecovery.md
-    transcript_loadbalancing.md

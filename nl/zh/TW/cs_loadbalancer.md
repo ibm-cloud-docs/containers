@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 使用網路負載平衡器 (NLB) 的基本及 DSR 負載平衡
@@ -39,12 +39,12 @@ subcollection: containers
     <area target="" alt="登錄負載平衡器主機名稱" title="登錄負載平衡器主機名稱" href="#loadbalancer_hostname" coords="33,119,174,146" shape="rect">
     <area target="" alt="2.0 版：元件和架構（測試版）" title="2.0 版：元件和架構（測試版）" href="#planning_ipvs" coords="273,45,420,72" shape="rect">
     <area target="" alt="2.0 版：必要條件" title="2.0 版：必要條件" href="#ipvs_provision" coords="277,85,417,108" shape="rect">
-    <area target="" alt="2.0 版：在多區域叢集中設定負載平衡器 2.0" title="2.0 版：在多區域叢集中設定負載平衡器 2.0" href="#ipvs_multi_zone_config" coords="276,122,417,147" shape="rect">
-    <area target="" alt="2.0 版：在單一區域叢集中設定負載平衡器 2.0" title="2.0 版：在單一區域叢集中設定負載平衡器 2.0" href="#ipvs_single_zone_config" coords="277,156,419,184" shape="rect">
+    <area target="" alt="2.0 版：在多區域叢集裡設定負載平衡器 2.0" title="2.0 版：在多區域叢集裡設定負載平衡器 2.0" href="#ipvs_multi_zone_config" coords="276,122,417,147" shape="rect">
+    <area target="" alt="2.0 版：在單一區域叢集裡設定負載平衡器 2.0" title="2.0 版：在單一區域叢集裡設定負載平衡器 2.0" href="#ipvs_single_zone_config" coords="277,156,419,184" shape="rect">
     <area target="" alt="2.0 版：排程演算法" title="2.0 版：排程演算法" href="#scheduling" coords="276,196,419,220" shape="rect">
     <area target="" alt="1.0 版：元件和架構" title="1.0 版：元件和架構" href="#v1_planning" coords="519,47,668,74" shape="rect">
-    <area target="" alt="1.0 版：在多區域叢集中設定負載平衡器 1.0" title="1.0 版：在多區域叢集中設定負載平衡器 1.0" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
-    <area target="" alt="1.0 版：在單一區域叢集中設定負載平衡器 1.0" title="1.0 版：在單一區域叢集中設定負載平衡器 1.0" href="#lb_config" coords="520,122,667,146" shape="rect">
+    <area target="" alt="1.0 版：在多區域叢集裡設定負載平衡器 1.0" title="1.0 版：在多區域叢集裡設定負載平衡器 1.0" href="#multi_zone_config" coords="520,85,667,110" shape="rect">
+    <area target="" alt="1.0 版：在單一區域叢集裡設定負載平衡器 1.0" title="1.0 版：在單一區域叢集裡設定負載平衡器 1.0" href="#lb_config" coords="520,122,667,146" shape="rect">
     <area target="" alt="1.0 版：啟用來源 IP 保留" title="1.0 版：啟用來源 IP 保留" href="#node_affinity_tolerations" coords="519,157,667,194" shape="rect">
 </map>
 </br>
@@ -71,10 +71,10 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 <br />
 
 
-## 1.0 版與 2.0 版 NLB 的比較
+## 1.0 版和 2.0 版 NLB 中基本負載平衡和 DSR 負載平衡的比較
 {: #comparison}
 
-當您建立 NLB 時，可以選擇 1.0 版或 2.0 版 NLB。請注意，2.0 版 NLB 是測試版。
+建立 NLB 時，可以選擇 1.0 版 NLB（執行基本負載平衡）或 2.0 版 NLB（執行直接伺服器傳回 (DSR) 負載平衡）。請注意，2.0 版 NLB 是測試版。
 {: shortdesc}
 
 **1.0 版與 2.0 版 NLB 有何類似之處？**
@@ -83,23 +83,23 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 
 **1.0 版與 2.0 版 NLB 有何不同？**
 
-當用戶端將要求傳送至您的應用程式時，NLB 會將要求封包遞送至應用程式 Pod 所在的工作者節點 IP 位址。1.0 版 NLB 會使用網址轉換 (NAT)，將要求封包的來源 IP 位址重寫為負載平衡器 Pod 所在之工作者節點的 IP。當工作者節點傳回應用程式回應封包時，會使用 NLB 所在的工作者節點 IP。然後，NLB 必須將回應封包傳送至用戶端。若要防止 IP 位址重寫，您可以[啟用來源 IP 保留](#node_affinity_tolerations)。不過，來源 IP 保留需要負載平衡器 Pod 和應用程式 Pod 在相同的工作者節點上執行，以便要求不需要轉遞至另一個工作者節點。您必須將節點親緣性及容忍新增至應用程式 Pod。
+當用戶端將要求傳送至您的應用程式時，NLB 會將要求封包遞送至應用程式 Pod 所在的工作者節點 IP 位址。1.0 版 NLB 會使用網址轉換 (NAT)，將要求封包的來源 IP 位址重寫為負載平衡器 Pod 所在之工作者節點的 IP。當工作者節點傳回應用程式回應封包時，會使用 NLB 所在的工作者節點 IP。然後，NLB 必須將回應封包傳送至用戶端。若要防止 IP 位址重寫，您可以[啟用來源 IP 保留](#node_affinity_tolerations)。不過，來源 IP 保留需要負載平衡器 Pod 和應用程式 Pod 在相同的工作者節點上執行，以便要求不需要轉遞至另一個工作者節點。您必須將節點親緣性及容忍新增至應用程式 Pod。如需使用 1.0 版 NB 進行基本負載平衡的相關資訊，請參閱 [1.0 版：基本負載平衡的元件和架構](#v1_planning)。
 
-相對於 1.0 版 NLB，2.0 版 NLB 在轉遞要求至其他工作者節點上的應用程式 Pod 時，不會使用 NAT。當 NLB 2.0 遞送用戶端要求時，會使用 IP over IP (IPIP) 將原始要求封包封裝至另一個新封包。此封裝 IPIP 封包具有負載平衡器 Pod 所在之工作者節點的來源 IP，如此可讓原始要求封包保留用戶端 IP 作為其來源 IP 位址。然後，工作者節點會使用直接伺服器傳回 (DSR)，將應用程式回應封包傳送至用戶端 IP。回應封包會跳過 NLB，並直接傳送至用戶端，因而可減少 NLB 必須處理的資料流量。
+相對於 1.0 版 NLB，2.0 版 NLB 在轉遞要求至其他工作者節點上的應用程式 Pod 時，不會使用 NAT。當 NLB 2.0 遞送用戶端要求時，會使用 IP over IP (IPIP) 將原始要求封包封裝至另一個新封包。此封裝 IPIP 封包具有負載平衡器 Pod 所在之工作者節點的來源 IP，如此可讓原始要求封包保留用戶端 IP 作為其來源 IP 位址。然後，工作者節點會使用直接伺服器傳回 (DSR)，將應用程式回應封包傳送至用戶端 IP。回應封包會跳過 NLB，並直接傳送至用戶端，因而可減少 NLB 必須處理的資料流量。如需使用 2.0 版 NB 進行 DSR 負載平衡的相關資訊，請參閱 [2.0 版：DSR 負載平衡的元件和架構](#planning_ipvs)。
 
 <br />
 
 
-## 1.0 版：元件和架構
+## 1.0 版：基本負載平衡的元件和架構
 {: #v1_planning}
 
 TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性），跨應用程式的 Pod 對要求進行負載平衡。
 {: shortdesc}
 
-### 單一區域叢集中的資料傳輸流
+### 單一區域叢集裡的資料傳輸流
 {: #v1_single}
 
-下圖顯示 NLB 1.0 如何將通訊從網際網路導向至單一區域叢集中的應用程式。
+下圖顯示 NLB 1.0 如何將通訊從網際網路導向至單一區域叢集裡的應用程式。
 {: shortdesc}
 
 <img src="images/cs_loadbalancer_planning.png" width="410" alt="使用 NLB 1.0，在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:410px; border-style: none"/>
@@ -110,33 +110,32 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
 
 3. `kube-proxy` 會將要求遞送至應用程式的 NLB 服務。
 
-4. 要求會轉遞至應用程式 Pod 的專用 IP 位址。要求套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。如果叢集中已部署多個應用程式實例，則 NLB 會在應用程式 Pod 之間遞送要求。
+4. 要求會轉遞至應用程式 Pod 的專用 IP 位址。要求套件的來源 IP 位址會變更為應用程式 Pod 執行所在之工作者節點的公用 IP 位址。如果叢集裡已部署多個應用程式實例，則 NLB 會在應用程式 Pod 之間遞送要求。
 
-### 多區域叢集中的資料傳輸流
+### 多區域叢集裡的資料傳輸流
 {: #v1_multi}
 
-下圖顯示網路負載平衡器 (NLB) 1.0 如何將通訊從網際網路導向至多區域叢集中的應用程式。
+下圖顯示網路負載平衡器 (NLB) 1.0 如何將通訊從網際網路導向至多區域叢集裡的應用程式。
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="使用 NLB 1.0 對多區域叢集中的應用程式進行負載平衡" style="width:500px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="使用 NLB 1.0 對多區域叢集裡的應用程式進行負載平衡" style="width:500px; border-style: none"/>
 
 依預設，每個 NLB 1.0 只會設定在某個區域中。若要達到高可用性，必須在您具有應用程式實例的每個區域中部署 NLB 1.0。各種區域中的 NLB 會以循環式週期處理要求。此外，每個 NLB 都會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。
 
 <br />
 
 
-## 1.0 版：在多區域叢集中設定 NLB 1.0
+## 1.0 版：在多區域叢集裡設定 NLB 1.0
 {: #multi_zone_config}
 
 **開始之前**：
 * 若要在多個區域中建立公用網路負載平衡器 (NLB)，則必須至少有一個公用 VLAN 在每個區域中都具有可用的可攜式子網路。若要在多個區域中建立專用 NLB，則必須至少有一個專用 VLAN 在每個區域中都具有可用的可攜式子網路。您可以遵循[配置叢集子網路](/docs/containers?topic=containers-subnets)中的步驟，來新增子網路。
 * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每個區域中至少啟用 2 個[邊緣工作者節點](/docs/containers?topic=containers-edge#edge)，以統一部署 NLB。
-* 針對您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get` [指令](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)。
+* 針對您的 IBM Cloud 基礎架構 (SoftLayer) 帳戶啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)，讓您的工作者節點可在專用網路上彼此通訊。若要執行此動作，您需要**網路 > 管理網路 VLAN Spanning** [基礎架構許可權](/docs/containers?topic=containers-users#infra_access)，或者您可以要求帳戶擁有者啟用它。若要確認是否已啟用 VLAN Spanning，請使用 `ibmcloud ks vlan-spanning-get --region <region>` [指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)。
+* 確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
-* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
-
-若要在多區域叢集中設定 NLB 1.0 服務，請執行下列動作：
+若要在多區域叢集裡設定 NLB 1.0 服務，請執行下列動作：
 1.  [將應用程式部署至叢集](/docs/containers?topic=containers-app#app_cli)。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 
 2.  為您要公開至公用網際網路或專用網路的應用程式建立負載平衡器服務。
@@ -195,7 +194,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
       </tr>
       </tbody></table>
 
-      這個範例配置檔用來建立專用 NLB 1.0 服務，其會使用 `dal12` 中專用 VLAN `2234945` 上指定的 IP 位址：
+      這個配置檔範例用來建立專用 NLB 1.0 服務，其會使用 `dal12` 中專用 VLAN `2234945` 上指定的 IP 位址：
 
       ```
       apiVersion: v1
@@ -217,7 +216,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
       ```
       {: codeblock}
 
-  3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集中的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
+  3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集裡的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
   4. 在叢集裡建立服務。
 
@@ -278,14 +277,14 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
 <br />
 
 
-## 1.0 版：在單一區域叢集中設定 NLB 1.0
+## 1.0 版：在單一區域叢集裡設定 NLB 1.0
 {: #lb_config}
 
 **開始之前**：
 * 您必須具有可指派給網路負載平衡器 (NLB) 服務的可用可攜式公用或專用 IP 位址。如需相關資訊，請參閱[配置叢集的子網路](/docs/containers?topic=containers-subnets)。
-* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* 確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
-若要在單一區域叢集中建立 NLB 1.0 服務，請執行下列動作：
+若要在單一區域叢集裡建立 NLB 1.0 服務，請執行下列動作：
 
 1.  [將應用程式部署至叢集](/docs/containers?topic=containers-app#app_cli)。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 2.  為您要公開至公用網際網路或專用網路的應用程式建立負載平衡器服務。
@@ -340,7 +339,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
         </tr>
         </tbody></table>
 
-        這個範例配置檔用來建立專用 NLB 1.0 服務，其會使用專用 VLAN `2234945` 上指定的 IP 位址：
+        這個配置檔範例用來建立專用 NLB 1.0 服務，其會使用專用 VLAN `2234945` 上指定的 IP 位址：
 
         ```
         apiVersion: v1
@@ -361,7 +360,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
         ```
         {: codeblock}
 
-    3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集中的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
+    3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集裡的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
     4.  在叢集裡建立服務。
 
@@ -434,7 +433,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
 在啟用來源 IP 之後，負載平衡器服務 Pod 必須將要求轉遞至僅部署至相同工作者節點的應用程式 Pod。一般而言，負載平衡器服務 Pod 也會部署至應用程式 Pod 部署至其中的工作者節點。不過，存在某些狀況，可能未在相同的工作者節點上排定負載平衡器 Pod 及應用程式 Pod。
 
 
-* 您有已受污染、因此僅負載平衡器服務 Pod 可以部署至其中的邊緣節點。不允許將應用程式 Pod 部署至那些節點。
+* 您的邊緣節點已有污點，因此只有負載平衡器服務 Pod 可以部署至其中。不允許將應用程式 Pod 部署至那些節點。
 * 您的叢集連接至多個公用或專用 VLAN，但您的應用程式 Pod 可能部署至僅連接至某個 VLAN 的工作者節點。負載平衡器服務 Pod 可能未部署至那些工作者節點，因為 NLB IP 位址連接至與工作者節點不同的 VLAN。
 
 若要將您的應用程式強制部署至負載平衡器服務 Pod 也可以部署至其中的特定工作者節點，您必須將親緣性規則及容忍新增至您的應用程式部署。
@@ -442,7 +441,7 @@ TCP/UDP 網路負載平衡器 (NLB) 1.0 會使用 Iptables（Linux Kernel 特性
 ### 新增邊緣節點親緣性規則及容忍
 {: #lb_edge_nodes}
 
-當您[將工作者節點標示為邊緣節點](/docs/containers?topic=containers-edge#edge_nodes)，且同時[污染邊緣節點](/docs/containers?topic=containers-edge#edge_workloads)時，負載平衡器服務 Pod 只會部署至那些邊緣節點，而且應用程式 Pod 無法部署至邊緣節點。啟用 NLB 服務的來源 IP 時，邊緣節點上的負載平衡器 Pod 無法將送入要求轉遞至其他工作者節點上的應用程式 Pod。
+當您[將工作者節點標示為邊緣節點](/docs/containers?topic=containers-edge#edge_nodes)，且同時[為邊緣節點加上污點](/docs/containers?topic=containers-edge#edge_workloads)時，負載平衡器服務 Pod 只會部署至那些邊緣節點，而且應用程式 Pod 無法部署至邊緣節點。啟用 NLB 服務的來源 IP 時，邊緣節點上的負載平衡器 Pod 無法將送入要求轉遞至其他工作者節點上的應用程式 Pod。
 {:shortdesc}
 
 若要強制您的應用程式 Pod 部署至邊緣節點，請將邊緣節點[親緣性規則 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) 及[容忍 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/#concepts) 新增至應用程式部署。
@@ -486,7 +485,7 @@ spec:
 
 啟用來源 IP 時，請將親緣性規則新增至應用程式部署，以在其 VLAN 與 NLB 的 IP 位址相同的工作者節點上排定應用程式 Pod。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. 取得 NLB 服務的 IP 位址。在 **LoadBalancer Ingress** 欄位中尋找 IP 位址。
     ```
@@ -610,13 +609,13 @@ spec:
 
 NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負載平衡器。NLB 2.0 支援 TCP 和 UDP、在多個工作者節點的前面執行，並使用 IP over IP (IPIP) 通道作業，將到達單一 NLB IP 位址的資料流量分佈到那些工作者節點。
 
-想要 {{site.data.keyword.containerlong_notm}} 中可用負載平衡部署型樣的其他詳細資料嗎？請參閱此[部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/)。
+想要 {{site.data.keyword.containerlong_notm}} 中可用負載平衡部署模式的其他詳細資料嗎？請參閱此[部落格文章 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/)。
 {: tip}
 
-### 單一區域叢集中的資料傳輸流
+### 單一區域叢集裡的資料傳輸流
 {: #ipvs_single}
 
-下圖顯示 NLB 2.0 如何將通訊從網際網路導向至單一區域叢集中的應用程式。
+下圖顯示 NLB 2.0 如何將通訊從網際網路導向至單一區域叢集裡的應用程式。
 {: shortdesc}
 
 <img src="images/cs_loadbalancer_ipvs_planning.png" width="600" alt="使用 2.0 版 NLB，在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:600px; border-style: none"/>
@@ -625,16 +624,16 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
 
 2. NLB 會在 IPIP 封包（標示為 "IPIP"）內封裝用戶端要求封包（在映像檔中標示為 "CR"）。用戶端要求封包會將用戶端 IP 保留為其來源 IP 位址。IPIP 封裝封包會使用工作者節點 10.73.14.25 IP 作為其來源 IP 位址。
 
-3. NLB 會將 IPIP 封包遞送至應用程式 Pod 所在的工作者節點，即 10.73.14.26。如果叢集中已部署多個應用程式實例，則 NLB 會在應用程式 Pod 部署所在的工作者節點之間遞送要求。
+3. NLB 會將 IPIP 封包遞送至應用程式 Pod 所在的工作者節點，即 10.73.14.26。如果叢集裡已部署多個應用程式實例，則 NLB 會在應用程式 Pod 部署所在的工作者節點之間遞送要求。
 
 4. 工作者節點 10.73.14.26 會解壓縮 IPIP 封裝封包，然後解壓縮用戶端要求封包。用戶端要求封包會轉遞至該工作者節點上的應用程式 Pod。
 
 5. 然後，工作者節點 10.73.14.26 會使用來自原始要求封包的來源 IP 位址（用戶端 IP），將應用程式 Pod 的回應封包直接傳回給用戶端。
 
-### 多區域叢集中的資料傳輸流
+### 多區域叢集裡的資料傳輸流
 {: #ipvs_multi}
 
-透過多區域叢集的資料傳輸流與[透過單一區域叢集的資料傳輸流](#ipvs_single)遵循相同的路徑。在多區域叢集中，NLB 會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。下圖顯示每個區域中的 2.0 版 NLB 如何將網際網路中的資料流量導向至多區域叢集中的應用程式。
+透過多區域叢集的資料傳輸流與[透過單一區域叢集的資料傳輸流](#ipvs_single)遵循相同的路徑。在多區域叢集裡，NLB 會將要求遞送至其專屬區域中的應用程式實例，以及遞送至其他區域中的應用程式實例。下圖顯示每個區域中的 2.0 版 NLB 如何將網際網路中的資料流量導向至多區域叢集裡的應用程式。
 {: shortdesc}
 
 <img src="images/cs_loadbalancer_ipvs_multizone.png" alt="使用 NLB 2.0，在 {{site.data.keyword.containerlong_notm}} 中公開應用程式" style="width:500px; border-style: none"/>
@@ -647,24 +646,24 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
 ## 2.0 版：必要條件
 {: #ipvs_provision}
 
-您無法將現有的 1.0 版 NLB 更新至 2.0。您必須建立新的 NLB 2.0。請注意，您可以在叢集中同步執行 1.0 版及 2.0 版 NLB。
+您無法將現有的 1.0 版 NLB 更新至 2.0。您必須建立新的 NLB 2.0。請注意，您可以在叢集裡同步執行 1.0 版及 2.0 版 NLB。
 {: shortdesc}
 
 在建立 NLB 2.0 之前，您必須完成下列必要步驟。
 
 1. [更新叢集的主節點及工作者節點](/docs/containers?topic=containers-update)至 Kubernetes 1.12 版或更新版本。
 
-2. 若要容許 NLB 2.0 將要求轉遞至多個區域中的應用程式 Pod，請開立支援案例以要求 VLAN 的配置設定。**重要事項**：您必須針對所有公用 VLAN 要求此配置。如果您要求新的關聯 VLAN，則必須針對該 VLAN 開立另一個問題單。
+2. 若要容許 NLB 2.0 將要求轉遞到多個區域中的應用程式 Pod，請開立支援案例以要求對 VLAN 進行容量聚集。此配置設定不會導致任何網路中斷。
     1. 登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)。
-    2. 從功能表列中，按一下**支援**，按一下**管理案例**標籤，然後按一下**建立新的案例**。
+    2. 從功能表列，按一下**支援**，按一下**管理案例**標籤，然後按一下**建立新的案例**。
     3. 在案例欄位中，輸入下列內容：
        * 對於支援類型，選取**技術**。
        * 對於種類，選取 **VLAN Spanning**。
        * 對於主旨，輸入 **Public VLAN Network Question**。
-    4. 將下列資訊新增至說明：「請設定網路，以容許在與我的帳戶相關聯的公用 VLAN 上進行容量聚集。此要求的參照問題單如下：https://control.softlayer.com/support/tickets/63859145」。
+    4. 將下列資訊新增至說明：「請設定網路，以容許在與我的帳戶相關聯的公用 VLAN 上進行容量聚集。此要求的參照問題單如下：https://control.softlayer.com/support/tickets/63859145」。請注意，如果要容許特定 VLAN 上的容量聚集（例如，僅一個叢集的公用 VLAN），則可以在說明中指定這些 VLAN ID。
     5. 按一下**提交**。
 
-3. 啟用 IBM Cloud 基礎架構 (SoftLayer) 帳戶的[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 帳戶業務代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。啟用 VRF 或 VLAN Spanning 時，NLB 2.0 可以將封包遞送至帳戶中的各種子網路。
+3. 啟用 IBM Cloud 基礎架構 (SoftLayer) 帳戶的[虛擬路由器功能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)。若要啟用 VRF，[請與 IBM Cloud 基礎架構 (SoftLayer) 客戶代表聯絡](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。如果您無法或不想要啟用 VRF，請啟用 [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)。啟用 VRF 或 VLAN Spanning 時，NLB 2.0 可以將封包遞送至帳戶中的各種子網路。
 
 4. 如果您使用 [Calico 前置 DNAT 網路原則](/docs/containers?topic=containers-network_policies#block_ingress)來管理 NLB 2.0 之 IP 位址的資料流量，則必須將 `applyOnForward: true` 和 `doNotTrack: true` 欄位新增至原則中的 `spec` 區段，並從中移除 `preDNAT: true`。`applyOnForward: true` 確保在封裝和轉遞時，將 Calico 原則套用至資料流量。`doNotTrack: true` 確保工作者節點可以使用 DSR，直接將回應封包傳回給用戶端，而不需要追蹤連線。例如，如果您使用 Calico 原則，僅將從特定 IP 位址到 NLB IP 位址的資料流量列入白名單，則此原則與下列內容類似：
     ```
@@ -693,12 +692,12 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
     ```
     {: screen}
 
-接下來，您可以遵循[在多區域叢集中設定 NLB 2.0](#ipvs_multi_zone_config) 或[在單一區域叢集中設定 NLB 2.0](#ipvs_single_zone_config) 中的步驟。
+接下來，您可以遵循[在多區域叢集裡設定 NLB 2.0](#ipvs_multi_zone_config) 或[在單一區域叢集裡設定 NLB 2.0](#ipvs_single_zone_config) 中的步驟。
 
 <br />
 
 
-## 2.0 版：在多區域叢集中設定 NLB 2.0
+## 2.0 版：在多區域叢集裡設定 NLB 2.0
 {: #ipvs_multi_zone_config}
 
 **開始之前**：
@@ -706,10 +705,10 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
 * **重要事項**：請完成 [NLB 2.0 必要條件](#ipvs_provision)。
 * 若要在多個區域中建立公用 NLB，則必須至少有一個公用 VLAN 在每個區域中都具有可用的可攜式子網路。若要在多個區域中建立專用 NLB，則必須至少有一個專用 VLAN 在每個區域中都具有可用的可攜式子網路。您可以遵循[配置叢集子網路](/docs/containers?topic=containers-subnets)中的步驟，來新增子網路。
 * 如果您將網路資料流量限制為邊緣工作者節點，請確定在每個區域中至少啟用 2 個[邊緣工作者節點](/docs/containers?topic=containers-edge#edge)，以統一部署 NLB。
-* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* 確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
 
-若要在多區域叢集中設定 NLB 2.0，請執行下列動作：
+若要在多區域叢集裡設定 NLB 2.0，請執行下列動作：
 1.  [將應用程式部署至叢集](/docs/containers?topic=containers-app#app_cli)。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 
 2.  為您要公開至公用網際網路或專用網路的應用程式建立負載平衡器服務。
@@ -783,7 +782,7 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
       </tr>
       </tbody></table>
 
-      這個範例配置檔用來在 `dal12` 中建立使用「循環式」排程演算法的 NLB 2.0 服務：
+      這個配置檔範例用來在 `dal12` 中建立使用「循環式」排程演算法的 NLB 2.0 服務：
 
       ```
       apiVersion: v1
@@ -805,7 +804,7 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
       ```
       {: codeblock}
 
-  3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集中的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
+  3. 選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集裡的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
   4. 在叢集裡建立服務。
 
@@ -864,16 +863,16 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
 <br />
 
 
-## 2.0 版：在單一區域叢集中設定 NLB 2.0
+## 2.0 版：在單一區域叢集裡設定 NLB 2.0
 {: #ipvs_single_zone_config}
 
 **開始之前**：
 
 * **重要事項**：請完成 [NLB 2.0 必要條件](#ipvs_provision)。
 * 您必須具有可指派給 NLB 服務的可用可攜式公用或專用 IP 位址。如需相關資訊，請參閱[配置叢集的子網路](/docs/containers?topic=containers-subnets)。
-* 請確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* 確定您具有 `default` 名稱空間的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
 
-若要在單一區域叢集中建立 NLB 2.0 服務，請執行下列動作：
+若要在單一區域叢集裡建立 NLB 2.0 服務，請執行下列動作：
 
 1.  [將應用程式部署至叢集](/docs/containers?topic=containers-app#app_cli)。請確定您已將標籤新增至您部署中配置檔的 meta 資料區段。此標籤是識別您應用程式執行所在之所有 Pod 的必要項目，如此才能將 Pod 包含在負載平衡中。
 2.  為您要公開至公用網際網路或專用網路的應用程式建立負載平衡器服務。
@@ -942,7 +941,7 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
         </tr>
         </tbody></table>
 
-    3.  選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集中的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
+    3.  選用項目：在 `spec.loadBalancerSourceRanges` 欄位中指定 IP，讓 NLB 服務僅可用於有限範圍的 IP 位址。`loadBalancerSourceRanges` 是由叢集裡的 `kube-proxy` 透過工作者節點的 Iptables 規則予以實作。如需相關資訊，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/)。
 
     4.  在叢集裡建立服務。
 
@@ -1029,7 +1028,7 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
                   - <APP_NAME>
               topologyKey: kubernetes.io/hostname</code></pre>
 
-您可以在[這個 IBM Cloud 部署型樣部落格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-4-multi-zone-cluster-app-exposed-via-loadbalancer-aggregating-whole-region-capacity/) 中找到完整範例。</dd>
+您可以在[這個 IBM Cloud 部署模式部落格 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-4-multi-zone-cluster-app-exposed-via-loadbalancer-aggregating-whole-region-capacity/) 中找到完整範例。</dd>
 </dl>
 
 ### 不受支援的排程演算法
@@ -1061,14 +1060,14 @@ NLB 2.0 是使用 Linux Kernel 的「IP 虛擬伺服器 (IPVS)」的第 4 層負
 
 <dl>
 <dt>主機名稱</dt>
-<dd>當您在單一或多區域叢集中建立公用 NLB 時，可以藉由建立 NLB IP 位址的主機名稱來將應用程式公開至網際網路。此外，{{site.data.keyword.Bluemix_notm}} 還負責為您產生並維護主機名稱的萬用字元 SSL 憑證。
-<p>在多區域叢集中，您可以建立主機名稱，並將每個區域中的 NLB IP 位址新增至該主機名稱 DNS 項目。例如，如果您已在美國南部的 3 個區域中部署應用程式的 NLB，則可以針對 3 個 NLB IP 位址建立主機名稱 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`。當使用者存取您的應用程式主機名稱時，用戶端會隨機存取其中一個 IP，並將要求傳送至該 NLB。</p>
+<dd>當您在單一或多區域叢集裡建立公用 NLB 時，可以藉由建立 NLB IP 位址的主機名稱來將應用程式公開至網際網路。此外，{{site.data.keyword.Bluemix_notm}} 還負責為您產生並維護主機名稱的萬用字元 SSL 憑證。
+<p>在多區域叢集裡，您可以建立主機名稱，並將每個區域中的 NLB IP 位址新增至該主機名稱 DNS 項目。例如，如果您已在美國南部的 3 個區域中部署應用程式的 NLB，則可以針對 3 個 NLB IP 位址建立主機名稱 `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`。當使用者存取您的應用程式主機名稱時，用戶端會隨機存取其中一個 IP，並將要求傳送至該 NLB。</p>
 請注意，您目前無法建立專用 NLB 的主機名稱。</dd>
 <dt>性能檢查監視器</dt>
-<dd>啟用受單一主機名稱保護的 NLB IP 位址的性能檢查，以判定它們是否可用。當您啟用主機名稱的監視器時，監視器會檢查每個 NLB IP 的性能，並根據這些性能檢查來更新 DNS 查閱結果。例如，如果您的 NLB 具有 IP 位址 `1.1.1.1`、`2.2.2.2` 及 `3.3.3.3`，則主機名稱的正常作業 DNS 查閱會傳回所有 3 個 IP，用戶端會隨機存取其中之一。如果由於區域故障等任何原因而導致無法使用具有 IP 位址 `3.3.3.3` 的 NLB，則該 IP 的性能檢查會失敗，監視器會從主機名稱中移除失敗的 IP，而 DNS 查閱只會傳回健全的 `1.1.1.1` 和 `2.2.2.2` IP。</dd>
+<dd>啟用受單一主機名稱保護的 NLB IP 位址的性能檢查，以判定它們是否可用。當您啟用主機名稱的監視器時，監視器會檢查每個 NLB IP 的性能，並根據這些性能檢查來更新 DNS 查閱結果。例如，如果您的 NLB 具有 IP 位址 `1.1.1.1`、`2.2.2.2` 及 `3.3.3.3`，則主機名稱的正常作業 DNS 查閱會傳回所有 3 個 IP，用戶端會隨機存取其中之一。如果由於區域故障等任何原因而導致無法使用具有 IP 位址 `3.3.3.3` 的 NLB，則該 IP 的性能檢查會失敗，監視器會從主機名稱移除失敗的 IP，而 DNS 查閱只會傳回健全的 `1.1.1.1` 和 `2.2.2.2` IP。</dd>
 </dl>
 
-您可以執行下列指令，以查看叢集中 NLB IP 的所有已登錄主機名稱。
+您可以執行下列指令，以查看叢集裡 NLB IP 的所有已登錄主機名稱。
 ```
 ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 ```
@@ -1086,8 +1085,8 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
 * 請檢閱下列考量和限制。
   * 您可以為公用 1.0 版和 2.0 版 NLB 建立主機名稱。
   * 您目前無法建立專用 NLB 的主機名稱。
-  * 您最多可以登錄 128 個主機名稱。開立[支援案例](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)，即可對要求提出此限制。
-* [在單一區域叢集中建立應用程式的 NLB](#lb_config) 或[在多區域叢集的每個區域中建立 NLB](#multi_zone_config)。
+  * 您最多可以登錄 128 個主機名稱。開立[支援案例](/docs/get-support?topic=get-support-getting-customer-support)，即可對要求提出此限制。
+* [在單一區域叢集裡建立應用程式的 NLB](#lb_config) 或[在多區域叢集的每個區域中建立 NLB](#multi_zone_config)。
 
 若要為一個以上的 NLB IP 位址建立主機名稱，請執行下列動作：
 
@@ -1130,7 +1129,7 @@ ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
   ```
   {: pre}
 
-5. 選用項目：執行 `host` 或 `ns lookup`，驗證已使用主機名稱登錄 IP。範例指令：
+5. 選用項目：執行 `host` 或 `ns lookup`，驗證已使用主機名稱登錄 IP。指令範例：
   ```
   host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
   ```
@@ -1172,7 +1171,7 @@ NLB 的主機名稱遵循 `<cluster_name>-<globally_unique_account_HASH>-0001.<r
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>已為 {{site.data.keyword.Bluemix_notm}} 帳戶建立廣域唯一 HASH。您在帳戶的叢集中針對 NLB 建立的所有主機名稱都會使用這個廣域唯一 HASH。</td>
+<td>已為 {{site.data.keyword.Bluemix_notm}} 帳戶建立廣域唯一 HASH。您在帳戶的叢集裡針對 NLB 建立的所有主機名稱都會使用這個廣域唯一 HASH。</td>
 </tr>
 <tr>
 <td><code>0001</code></td>
@@ -1288,7 +1287,7 @@ NLB 的主機名稱遵循 `<cluster_name>-<globally_unique_account_HASH>-0001.<r
   </tbody>
   </table>
 
-  範例指令：
+  指令範例：
   ```
   ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
   ```

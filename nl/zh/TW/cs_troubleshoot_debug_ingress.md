@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # 除錯 Ingress
@@ -44,11 +44,11 @@ subcollection: containers
 
 ## 步驟 1：在 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 中執行 Ingress 測試
 
-疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行 Ingress 測試，並從叢集中收集相關的 Ingress 資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-iks-debug)：
+疑難排解時，您可以使用 {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool 來執行 Ingress 測試，並從叢集收集相關的 Ingress 資訊。若要使用除錯工具，請安裝 [`ibmcloud-iks-debug` Helm 圖表 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug)：
 {: shortdesc}
 
 
-1. [在叢集中設定 Helm，建立 Tiller 的服務帳戶，並將 `ibm` 儲存庫新增至 Helm 實例](/docs/containers?topic=containers-integrations#helm)。
+1. [在叢集裡設定 Helm，建立 Tiller 的服務帳戶，並將 `ibm` 儲存庫新增至 Helm 實例](/docs/containers?topic=containers-helm)。
 
 2. 將 Helm 圖表安裝至您的叢集。
         
@@ -164,15 +164,15 @@ subcollection: containers
     `dal10` 及 `dal13` 中具有工作者節點之多區域叢集的範例輸出：
 
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone    Build
-    private-cr24a9f2caf6554648836337d240064935-alb1   disabled   private   -                dal13   ingress:350/ingress-auth:192   
-    private-cr24a9f2caf6554648836337d240064935-alb2   disabled   private   -                dal10   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192   
-    public-cr24a9f2caf6554648836337d240064935-alb2    enabled    public    169.46.52.222    dal10   ingress:350/ingress-auth:192  
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
+    private-cr24a9f2caf6554648836337d240064935-alb1   false     disabled   private   -               dal13   ingress:411/ingress-auth:315   2294021
+    private-cr24a9f2caf6554648836337d240064935-alb2   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
+    public-cr24a9f2caf6554648836337d240064935-alb1    true      enabled    public    169.62.196.238  dal13   ingress:411/ingress-auth:315   2294019
+    public-cr24a9f2caf6554648836337d240064935-alb2    true      enabled    public    169.46.52.222   dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
 
-    * 如果公用 ALB 沒有 IP 位址，請參閱 [Ingress ALB 未在區域中部署](/docs/containers?topic=containers-cs_troubleshoot_network#cs_multizone_subnet_limit)。
+    * 如果公用 ALB 沒有 IP 位址，請參閱 [Ingress ALB 未在區域中部署](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)。
 
 2. 檢查 ALB IP 的性能。
 
@@ -185,7 +185,7 @@ subcollection: containers
         * 如果 CLI 傳回逾時，而且您有保護工作者節點的自訂防火牆，請確定[防火牆](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)中容許 ICMP。
         * 如果沒有任何防火牆封鎖連線測試，但連線測試仍然執行逾時，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
-    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](/docs/containers?topic=containers-clusters#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
+    * 僅限多區域叢集：您可以使用 MZLB 性能檢查來判斷您 ALB IP 的狀態。如需 MZLB 的相關資訊，請參閱[多區域負載平衡器 (MZLB)](/docs/containers?topic=containers-ingress#planning)。MZLB 性能檢查僅適用於格式為 `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` 之新 Ingress 子網域的叢集。如果您的叢集仍然使用舊格式 `<cluster_name>.<region>.containers.mybluemix.net`，則請[將單一區域叢集轉換成多區域](/docs/containers?topic=containers-add_workers#add_zone)。您的叢集獲指派具有新格式的子網域，但也可以繼續使用較舊的子網域格式。或者，您可以訂購自動獲指派新子網域格式的新叢集。
 
     下列 HTTP cURL 指令使用 `albhealth` 主機，其由 {{site.data.keyword.containerlong_notm}} 配置成傳回 ALB IP 的 `healthy` 或 `unhealthy` 狀態。
         ```
@@ -194,11 +194,11 @@ subcollection: containers
         {: pre}
 
         輸出範例：
-    ```
+        ```
         healthy
         ```
         {: screen}
-            如果有一或多個 IP 傳回 `unhealthy`，則請[檢查 ALB Pod 的狀態](#check_pods)。
+            如果有一個以上的 IP 傳回 `unhealthy`，則請[檢查 ALB Pod 的狀態](#check_pods)。
 
 3. 取得 IBM 提供的 Ingress 子網域。
     ```
@@ -221,7 +221,7 @@ subcollection: containers
     {: pre}
 
     輸出範例：
-    ```
+        ```
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
     myingressresource   mycluster-12345.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
     ```
@@ -238,7 +238,7 @@ subcollection: containers
         {: pre}
 
         輸出範例：
-    ```
+        ```
         www.my-domain.com is an alias for mycluster-12345.us-south.containers.appdomain.cloud
         mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
         mycluster-12345.us-south.containers.appdomain.cloud has address 169.62.196.238
@@ -291,8 +291,8 @@ subcollection: containers
 
     例如，無法連接的 IP `169.62.196.238` 屬於 ALB `public-cr24a9f2caf6554648836337d240064935-alb1`：
     ```
-    ALB ID                                            Status     Type      ALB IP           Zone   Build
-    public-cr24a9f2caf6554648836337d240064935-alb1    enabled    public    169.62.196.238   dal13   ingress:350/ingress-auth:192
+    ALB ID                                            Enabled   Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+    public-cr24a9f2caf6554648836337d240064935-alb1    false     disabled   private   169.62.196.238   dal13   ingress:411/ingress-auth:315   2294021
     ```
     {: screen}
 
@@ -309,7 +309,7 @@ subcollection: containers
     ```
     {: screen}
 
-3. 停用針對所有 ALB Pod 執行的性能檢查。針對您在前一個步驟中取得的每個 ALB Pod，重複這些步驟。這些步驟中的範例指令及輸出會使用第一個 Pod `public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq`。
+3. 停用針對所有 ALB Pod 執行的性能檢查。針對您在前一個步驟中取得的每個 ALB Pod，重複這些步驟。這些步驟中的指令範例及輸出會使用第一個 Pod `public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq`。
     1. 登入 ALB Pod，並檢查 NGINX 配置檔中的 `server_name` 行。
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- grep server_name /etc/nginx/conf.d/kube-system-alb-health.conf
@@ -335,7 +335,7 @@ subcollection: containers
         {: pre}
 
         輸出範例：
-    ```
+        ```
         #server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud
         ```
         {: screen}
@@ -414,7 +414,7 @@ subcollection: containers
     {: pre}
 
     輸出範例：
-    ```
+        ```
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.46.52.222
     mycluster-12345.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```
@@ -436,6 +436,6 @@ subcollection: containers
 -   檢閱討論區，以查看其他使用者是否發生過相同的問題。使用討論區提問時，請標記您的問題，以便 {{site.data.keyword.Bluemix_notm}} 開發團隊能看到它。
     -   如果您在使用 {{site.data.keyword.containerlong_notm}} 開發或部署叢集或應用程式時有技術方面的問題，請將問題張貼到 [Stack Overflow ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers)，並使用 `ibm-cloud`、`kubernetes` 及 `containers` 來標記問題。
     -   若為服務及開始使用指示的相關問題，請使用 [IBM Developer Answers ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) 討論區。請包含 `ibm-cloud` 及 `containers` 標籤。如需使用討論區的詳細資料，請參閱[取得協助](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)。
--   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集中的相關資訊，以與 IBM 支援中心共用。
+-   開立案例，以與「IBM 支援中心」聯絡。若要瞭解如何開立 IBM 支援中心案例，或是瞭解支援層次與案例嚴重性，請參閱[與支援中心聯絡](/docs/get-support?topic=get-support-getting-customer-support)。當您報告問題時，請包含您的叢集 ID。若要取得叢集 ID，請執行 `ibmcloud ks clusters`。您也可以使用 [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)，來收集及匯出叢集裡的相關資訊，以與 IBM 支援中心共用。
 {: tip}
 

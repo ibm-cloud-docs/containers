@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 指導教學：將應用程式從 Cloud Foundry 移轉至叢集
 {: #cf_tutorial}
 
-您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernet 叢集。
+您可以採用先前使用 Cloud Foundry 部署的應用程式，並將容器中的相同程式碼部署至 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes 叢集。
 {: shortdesc}
 
 
@@ -35,7 +36,7 @@ subcollection: containers
 
 - 瞭解將容器中的應用程式部署至 Kubernetes 叢集的一般處理程序。
 - 從您的應用程式碼建立 Dockerfile，以建置容器映像檔。
-- 將容器從該映像檔部署至 Kubernet 叢集。
+- 將容器從該映像檔部署至 Kubernetes 叢集。
 
 ## 所需時間
 {: #cf_time}
@@ -69,7 +70,7 @@ subcollection: containers
 請備妥程式碼。還沒有任何程式碼？您可以下載入門範本程式碼，以在本指導教學中使用。
 {: shortdesc}
 
-1. 建立一個名為 `cf-py` 的目錄，然後導覽至其中。在此目錄中，您將儲存建置 Docker 映像檔及執行應用程式所需的所有檔案。
+1. 建立一個名稱為 `cf-py` 的目錄，然後導覽至其中。在此目錄中，您將儲存建置 Docker 映像檔及執行應用程式所需的所有檔案。
 
   ```
   mkdir cf-py && cd cf-py
@@ -144,7 +145,7 @@ subcollection: containers
 4. 建置包含應用程式碼的 Docker 映像檔，並將它推送至您的專用登錄。
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -168,7 +169,7 @@ subcollection: containers
   </tr>
   <tr>
   <td><code>.</code></td>
-  <td>Dockerfile 的位置。如果您是從包含 Dockerfile 的目錄執行 build 指令，請輸入句點 (.)。否則，請使用 Dockerfile 的相對路徑。</td>
+  <td>Dockerfile 的位置。如果要從包含 Dockerfile 的目錄執行 build 指令，請輸入句點 (.). 否則，請使用 Dockerfile 的相對路徑。</td>
   </tr>
   </tbody>
   </table>
@@ -176,8 +177,8 @@ subcollection: containers
   映像檔會建立在您的專用登錄中。您可以執行 `ibmcloud cr images` 指令，以驗證已建立映像檔。
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -213,7 +214,7 @@ subcollection: containers
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry_namespace>/cf-py:latest
+        - image: us.icr.io/<registry_namespace>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -240,7 +241,7 @@ subcollection: containers
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>在 `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` 中，將 &lt;registry_namespace&gt; 取代為您的專用映像檔登錄的名稱空間。如果您不確定名稱空間，請執行 `ibmcloud cr namespaces` 指令來尋找它。</td>
+  <td>在 `us.icr.io/<registry_namespace>/cf-py:latest` 中，將 &lt;registry_namespace&gt; 取代為專用映像檔登錄的名稱空間。如果您不確定名稱空間，請執行 `ibmcloud cr namespaces` 指令來尋找它。</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
@@ -276,7 +277,7 @@ subcollection: containers
 
     ```
 ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

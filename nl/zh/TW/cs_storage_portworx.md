@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,57 +21,57 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 使用 Portworx 將資料儲存在軟體定義儲存空間 (SDS)
 {: #portworx}
 
-[Portworx ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://portworx.com/products/introduction/) 是一個高可用性軟體定義儲存空間解決方案，可用來管理容器化資料庫及其他有狀態應用程式的持續性儲存空間，或在多個區域的 Pod 之間共用資料。
+[Portworx ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://portworx.com/products/introduction/) 是一個高可用性軟體定義儲存空間解決方案，可用來管理容器化資料庫及其他有狀態應用程式的本端持續性儲存空間，或在多個區域的 Pod 之間共用資料。
 {: shortdesc}
 
-**何謂軟體定義儲存空間 (SDS)？** </br> SDS 解決方案會將各種類型、大小或不同供應商的儲存裝置抽象化，這些裝置連接至您叢集中的工作者節點。硬碟上具有可用儲存空間的工作者節點會被當成節點新增至儲存空間叢集。在此叢集中，已虛擬化實體儲存空間，並當成虛擬儲存區呈現給使用者。儲存空間叢集由 SDS 軟體所管理。如果資料必須儲存在儲存空間叢集，則 SDS 軟體會決定資料的儲存位置，以取得最高可用性。虛擬儲存空間隨附一組共同的功能和服務，讓您可以在不需考慮實際基礎儲存空間架構的情況下加以運用。
+**何謂軟體定義儲存空間 (SDS)？** </br> SDS 解決方案會將各種類型、大小或不同供應商的儲存裝置抽象化，這些裝置連接至您叢集裡的工作者節點。硬碟上具有可用儲存空間的工作者節點會被當成節點新增至儲存空間叢集。在此叢集裡，已虛擬化實體儲存空間，並當成虛擬儲存區呈現給使用者。儲存空間叢集由 SDS 軟體所管理。如果資料必須儲存在儲存空間叢集，則 SDS 軟體會決定資料的儲存位置，以取得最高可用性。虛擬儲存空間隨附一組共同的功能和服務，讓您可以在不需考慮實際基礎儲存空間架構的情況下加以運用。
 
-**Portworx 如何運作？** </br> Portworx 會聚集用於連接至工作者節點的可用儲存空間，並為您要在叢集中執行的容器化資料庫或其他有狀態應用程式建立統一的持續性儲存空間層。透過跨多個工作者節點使用每個容器層次磁區的磁區抄寫，Portworx 可確保跨區域的資料持續性及資料可存取性。
+**Portworx 如何運作？** </br> Portworx 會聚集用於連接至工作者節點的可用儲存空間，並為您要在叢集裡執行的容器化資料庫或其他有狀態應用程式建立統一的持續性儲存空間層。透過跨多個工作者節點使用每個容器層次磁區的磁區抄寫，Portworx 可確保跨區域的資料持續性及資料可存取性。
 
-Portworx 也隨附可用於有狀態應用程式的其他特性（例如，磁區 Snapshot、磁區加密、隔離及整合式 Storage Orchestrator for Kubernetes (Stork)），以確定叢集中磁區的最佳位置。如需相關資訊，請參閱 [Portworx 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/)。
+Portworx 也隨附可用於有狀態應用程式的其他特性（例如，磁區 Snapshot、磁區加密、隔離及整合式 Storage Orchestrator for Kubernetes (Stork)），以確定叢集裡磁區的最佳位置。如需相關資訊，請參閱 [Portworx 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/)。
 
 **{{site.data.keyword.containerlong_notm}} 中的哪個工作者節點特性適用於 Portworx？** </br>
-{{site.data.keyword.containerlong_notm}} 提供裸機工作者節點特性，這些特性已針對[軟體定義儲存空間 (SDS) 用法](/docs/containers?topic=containers-plan_clusters#sds)最佳化，並且隨附一個以上可用於 Portworx 儲存空間層的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 SDS 工作者節點機器時，Portworx 會提供最佳效能。
+{{site.data.keyword.containerlong_notm}} 提供裸機工作者節點特性，這些特性已針對[軟體定義儲存空間 (SDS) 用法](/docs/containers?topic=containers-planning_worker_nodes#sds)最佳化，並且隨附一個以上可用於 Portworx 儲存空間層的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 SDS 工作者節點機器時，Portworx 會提供最佳效能。
 
-**如果我要在非 SDS 工作者節點上執行 Portworx，該怎麼辨？** </br> 您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。非 SDS 工作者節點可以是虛擬或裸機的。如果您要使用虛擬機器，請使用 `b2c.16x64` 或以上的工作者節點特性。特性為 `b3c.4x16` 或 `u3c.2x4` 的虛擬機器未提供讓 Portworx 正常運作的必要資源。請記住，虛擬機器隨附 1000Mbps，這對於獲得最佳 Portworx 效能而言是不足的。裸機機器隨附 Portworx 的足夠運算資源及網路速度，但是您必須先[新增原始、未格式化及未裝載的區塊儲存空間](#create_block_storage)，才能使用這些機器。
+**如果我要在非 SDS 工作者節點上執行 Portworx，該怎麼辨？** </br> 您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法獲得應用程式所需的效能優點。非 SDS 工作者節點可以是虛擬或裸機的。如果您要使用虛擬機器，請使用 `b2c.16x64` 或以上的工作者節點特性。特性為 `b3c.4x16` 或 `u3c.2x4` 的虛擬機器未提供讓 Portworx 正常運作的必要資源。請記住，虛擬機器隨附 1000Mbps，這對於獲得最佳 Portworx 效能而言是不足的。裸機機器隨附 Portworx 的足夠運算資源及網路速度，但是您必須先[新增原始、未格式化及未裝載的區塊儲存空間](#create_block_storage)，才能使用這些機器。
 
-**如何確定以高可用性方式儲存資料？** </br> 您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個以上區域的 SDS 工作者節點的磁區。
+**如何確定以高可用性方式儲存資料？** </br> 您的 Portworx 叢集裡至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-ha_clusters#multizone)，並且抄寫跨 3 個以上區域的 SDS 工作者節點的磁區。
 
-**哪個磁區拓蹼提供 Pod 的最佳效能？** </br> 在叢集中執行有狀態應用程式時，最大的挑戰之一是，在容器或整個主機失敗時，確定您的容器可以重新排定至另一個主機。在 Docker 中，必須將容器重新排定至不同的主機時，不會將磁區移至新的主機。Portworx 可以配置成執行 `hyper-converged`，以確保您的運算資源和儲存空間一律放置在相同的工作者節點上。必須重新排定應用程式時，Portworx 會將您的應用程式移至其中一個磁區抄本所在的工作者節點，以確保有狀態應用程式的本端磁碟存取速度和最佳效能。執行 `hyper-converged` 可提供 Pod 的最佳效能，但需要叢集的所有工作者節點上都可以使用儲存空間。
+**哪個磁區拓蹼提供 Pod 的最佳效能？** </br> 在叢集裡執行有狀態應用程式時，最大的挑戰之一是，在容器或整個主機失敗時，確定您的容器可以重新排定至另一個主機。在 Docker 中，必須將容器重新排定至不同的主機時，不會將磁區移至新的主機。Portworx 可以配置成執行 `hyper-converged`，以確保您的運算資源和儲存空間一律放置在相同的工作者節點上。必須重新排定應用程式時，Portworx 會將您的應用程式移至其中一個磁區抄本所在的工作者節點，以確保有狀態應用程式的本端磁碟存取速度和最佳效能。執行 `hyper-converged` 可提供 Pod 的最佳效能，但需要叢集的所有工作者節點上都可以使用儲存空間。
 
-您也可以選擇只將工作者節點的一部分用於 Portworx 儲存空間層。例如，您的工作者節點儲存區可能具有隨附本端原始區塊儲存空間的 SDS 工作者節點，以及另一個工作者節點儲存區可能具有未隨附本端儲存空間的虛擬工作者節點。安裝 Portworx 時，會將 Portworx Pod 排定到叢集中的每個工作者節點，成為常駐程式集的一部分。因為 SDS 工作者節點具有本端儲存空間，所以這些工作者節點都只會併入 Portworx 儲存空間層。因為遺漏本端儲存空間，所以您的虛擬工作者節點未併入為儲存空間節點。不過，當您將應用程式 Pod 部署至虛擬工作者節點時，此 Pod 仍然可以使用 Portworx 常駐程式集 Pod 來存取實際儲存在 SDS 工作者節點上的資料。此設定稱為 `storage-heavy`，而且提供的效能比 `hyper-converged` 設定略慢，因為虛擬工作者節點必須透過專用網路與 SDS 工作者節點交談，才能存取資料。
+您也可以選擇只將工作者節點的一部分用於 Portworx 儲存空間層。例如，您的工作者節點儲存區可能具有隨附本端原始區塊儲存空間的 SDS 工作者節點，以及另一個工作者節點儲存區可能具有未隨附本端儲存空間的虛擬工作者節點。安裝 Portworx 時，會將 Portworx Pod 排定到叢集裡的每個工作者節點，成為常駐程式集的一部分。因為 SDS 工作者節點具有本端儲存空間，所以這些工作者節點都只會包含在 Portworx 儲存空間層。因為遺漏本端儲存空間，所以您的虛擬工作者節點未包含為儲存空間節點。不過，當您將應用程式 Pod 部署至虛擬工作者節點時，此 Pod 仍然可以使用 Portworx 常駐程式集 Pod 來存取實際儲存在 SDS 工作者節點上的資料。此設定稱為 `storage-heavy`，而且提供的效能比 `hyper-converged` 設定略慢，因為虛擬工作者節點必須透過專用網路與 SDS 工作者節點交談，才能存取資料。
 
-**佈建 Portworx 時需要什麼？** </br> {{site.data.keyword.containerlong}} 提供工作者節點特性，這些特性已針對 SDS 用法最佳化，並且隨附一個以上可用來儲存資料的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 [SDS 工作者節點機器](/docs/containers?topic=containers-plan_clusters#sds)時，Portworx 會提供最佳效能。不過，您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法取得應用程式所需的效能優點。要順利執行 Portworx 的最低工作者節點需求包括：
+**佈建 Portworx 時需要什麼？** </br> {{site.data.keyword.containerlong}} 提供工作者節點特性，這些特性已針對 SDS 用法最佳化，並且隨附一個以上可用來儲存資料的原始、未格式化及未裝載的本端磁碟。當您使用隨附 10Gbps 網路速度的 [SDS 工作者節點機器](/docs/containers?topic=containers-planning_worker_nodes#sds)時，Portworx 會提供最佳效能。不過，您可以在非 SDS 工作者節點特性上安裝 Portworx，但可能無法獲得應用程式所需的效能優點。要順利執行 Portworx 的最低工作者節點需求包括：
 - 4 顆 CPU 核心
 - 4GB 記憶體
 - 128GB 的原始未格式化儲存空間
 - 10Gbps 網路速度
 
-**如何確定以高可用性方式儲存資料？** </br> 您的 Portworx 叢集中至少需要 3 個工作者節點，Portworx 才可以跨節點抄寫您的資料。透過跨工作者節點抄寫資料，Portworx 能夠確保可將您的有狀態應用程式重新排定為不同的工作者節點，以在失敗時不遺失資料。若要獲得更高的可用性，請使用[多區域叢集](/docs/containers?topic=containers-plan_clusters#multizone)，並且抄寫跨 3 個區域的 SDS 工作者節點上的磁區。
-
-**必須規劃的限制為何？** </br> Portworx 適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則除非您在 TCP 埠 443 上開啟所有 Egress 網路資料流量，或啟用公用服務端點，否則無法在叢集中使用 Portworx。
+**必須規劃的限制為何？** </br> Portworx 適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則除非您在 TCP 埠 443 上開啟所有 Egress 網路資料流量，或啟用公用服務端點，否則無法在叢集裡使用 Portworx。
 
 
-準備好了嗎？讓我們從[建立具有至少 3 個工作者節點的 SDS 工作者節點儲存區的叢集](/docs/containers?topic=containers-clusters#clusters_ui)開始。如果您要將非 SDS 工作者節點併入 Portworx 叢集，請[新增原始區塊儲存空間](#create_block_storage)至每個工作者節點。備妥叢集之後，請在叢集中[安裝 Portworx Helm 圖表](#install_portworx)，並建立第一個 hyper-converged 儲存空間叢集。  
+準備好了嗎？讓我們從[建立具有至少 3 個工作者節點的 SDS 工作者節點儲存區的叢集](/docs/containers?topic=containers-clusters#clusters_ui)開始。如果您要將非 SDS 工作者節點包含在 Portworx 叢集，請[新增原始區塊儲存空間](#create_block_storage)至每個工作者節點。備妥叢集之後，請在叢集裡[安裝 Portworx Helm 圖表](#install_portworx)，並建立第一個 hyper-converged 儲存空間叢集。  
 
 ## 針對非 SDS 工作者節點建立原始、未格式化及未裝載的區塊儲存空間
 {: #create_block_storage}
 
-當您使用已針對[軟體定義儲存空間 (SDS) 用法](/docs/containers?topic=containers-plan_clusters#sds)最佳化的工作者節點特性時，Portworx 的執行效果最佳。不過，如果您無法或不要使用 SDS 工作者節點，則可以選擇在非 SDS 工作者節點特性上安裝 Portworx。請牢記，非 SDS 工作者節點不會針對 Portworx 進行最佳化，而且可能未提供應用程式所需的效能優點。
+當您使用已針對[軟體定義儲存空間 (SDS) 用法](/docs/containers?topic=containers-planning_worker_nodes#sds)最佳化的工作者節點特性時，Portworx 的執行效果最佳。不過，如果您無法或不要使用 SDS 工作者節點，則可以選擇在非 SDS 工作者節點特性上安裝 Portworx。請牢記，非 SDS 工作者節點不會針對 Portworx 進行最佳化，而且可能未提供應用程式所需的效能優點。
 {: shortdesc}
 
-若要將非 SDS 工作者節點併入 Portworx 叢集，您必須使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式將原始、未格式化及未裝載的區塊儲存裝置新增至工作者節點。無法使用 Kubernetes 持續性磁區要求 (PVC) 來佈建原始區塊儲存空間，因為 {{site.data.keyword.containerlong_notm}} 會自動格式化區塊儲存裝置。Portworx 僅支援區塊儲存空間。裝載檔案或物件儲存空間的非 SDS 工作者節點無法用於 Portworx 資料層。
+若要將非 SDS 工作者節點包含在 Portworx 叢集，您必須使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式將原始、未格式化及未裝載的區塊儲存裝置新增至工作者節點。無法使用 Kubernetes 持續性磁區要求 (PVC) 來佈建原始區塊儲存空間，因為 {{site.data.keyword.containerlong_notm}} 會自動格式化區塊儲存裝置。Portworx 僅支援區塊儲存空間。裝載檔案或物件儲存空間的非 SDS 工作者節點無法用於 Portworx 資料層。
 
-如果您的叢集中有 SDS 工作者節點特性，而且只要使用這些工作者節點來建立 Portworx 儲存空間層，則可以完全跳過此步驟，並繼續[設定 Portworx 資料庫](#portworx_database)。
+如果您的叢集裡有 SDS 工作者節點特性，而且只要使用這些工作者節點來建立 Portworx 儲存空間層，則可以完全跳過此步驟，並繼續[設定 Portworx 資料庫](#portworx_database)。
 {: note}
 
 1. [安裝 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式](/docs/containers?topic=containers-utilities#block_storage_attacher)。
-2. 如果您要將具有相同配置的區塊儲存空間新增至所有工作者節點，請使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式來[自動新增區塊儲存空間](/docs/containers?topic=containers-utilities#automatic_block)。若要新增具有不同配置的區塊儲存空間，請只將區塊儲存空間新增至工作者節點子集，或進一步控制佈建處理程序，請[手動新增區塊儲存空間](/docs/containers?topic=containers-utilities#manual_block)。
+2. 如果您要將具有相同配置的區塊儲存空間新增至所有工作者節點，請使用 {{site.data.keyword.Bluemix_notm}} Block Volume Attacher 外掛程式來[自動新增區塊儲存空間](/docs/containers?topic=containers-utilities#automatic_block)。若要新增具有不同配置的區塊儲存空間、只將區塊儲存空間新增至部分工作者節點，或擁有更多的佈建處理程序控制權，[請手動新增區塊儲存空間](/docs/containers?topic=containers-utilities#manual_block)。
 3. [將區塊儲存空間連接](/docs/containers?topic=containers-utilities#attach_block)至工作者節點。
 
 ## 取得 Portworx 授權
@@ -160,7 +160,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       kubectl apply -f secret.yaml
       ```
 
-6. [在叢集中安裝 Portworx](#install_portworx)。
+6. [在叢集裡安裝 Portworx](#install_portworx)。
 
 
 ### 設定 Compose for etcd 服務實例
@@ -196,10 +196,10 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       --user=root:ABCDEFGHIJKLMNOP
       ```
       {: screen}
-   5. 當您[在叢集中安裝 Portworx](#install_portworx) 時，請使用這些服務認證。
+   5. 當您[在叢集裡安裝 Portworx](#install_portworx) 時，請使用這些服務認證。
 
 
-## 在叢集中安裝 Portworx
+## 在叢集裡安裝 Portworx
 {: #install_portworx}
 
 使用 Helm 圖表來安裝 Portworx。Helm 圖表會部署 Portworx 企業版 `px-enterprise` 的試用版本，您可以使用 30 天。此外，也會將 [Stork ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) 安裝在 Kubernetes 叢集上。Stork 是 Portworx 儲存空間排程器，容許您共同放置 Pod 及其資料，以及建立與還原 Portworx 磁區的 Snapshot。
@@ -213,13 +213,13 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 - 如果您要對 Portworx 儲存空間層使用非 SDS 工作者節點，則會[將未格式化的區塊儲存裝置新增至非 SDS 工作者節點](#create_block_storage)。
 - 建立 [{{site.data.keyword.composeForEtcd}} 服務實例](#portworx_database)，以儲存 Portworx 配置和 meta 資料。
 - 決定是否要使用 {{site.data.keyword.keymanagementservicelong_notm}} 來加密 Portworx 磁區。若要加密磁區，您必須[使用 Kubernetes 密碼來設定 {{site.data.keyword.keymanagementservicelong_notm}} 服務實例並儲存服務資訊](#encrypt_volumes)。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要安裝 Portworx，請執行下列動作：
 
-1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集中使用服務帳戶安裝 Helm 伺服器 (tiller)。
+1.  [遵循指示](/docs/containers?topic=containers-helm#public_helm_install)，將 Helm 用戶端安裝在本端機器上，並在叢集裡使用服務帳戶安裝 Helm 伺服器 (Tiller)。
 
-2.  驗證已使用服務帳戶安裝 tiller。
+2.  驗證已使用服務帳戶安裝 Tiller。
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -430,7 +430,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: screen}
 
-      當您看到一個以上的 `portworx`、`stork` 及 `stork-scheduler` Pod 時，安裝即成功。`portworx`、`stork` 及 `stork-scheduler` Pod 數目等於 Portworx 叢集中所含的工作者節點數目。所有 Pod 都必須處於 **Running** 狀況。
+      當您看到一個以上的 `portworx`、`stork` 及 `stork-scheduler` Pod 時，安裝即成功。`portworx`、`stork` 及 `stork-scheduler` Pod 數目等於 Portworx 叢集裡所含的工作者節點數目。所有 Pod 都必須處於 **Running** 狀況。
 
 9. 驗證已正確地設定 Portworx 叢集。      
    1. 登入其中一個 `portworx` Pod，並列出 Portworx 叢集的狀態。
@@ -467,9 +467,9 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: screen}
 
-   2. 檢閱 CLI 輸出之**叢集摘要**區段中的 **`StorageNode`** 直欄，以驗證已包括您要併入 Portworx 叢集的所有工作者節點。如果工作者節點併入為 Portworx 叢集中的儲存空間節點，則此工作者節點會在 **`StorageNode`** 直欄中顯示**是**。如果工作者節點未併入 Portworx 叢集，則 Portworx 找不到連接至工作者節點的原始和未格式化的區塊儲存裝置。
+   2. 檢閱 CLI 輸出之**叢集摘要**區段中的 **`StorageNode`** 直欄，以驗證已包括您要包含在 Portworx 叢集的所有工作者節點。如果工作者節點包含為 Portworx 叢集裡的儲存空間節點，則此工作者節點會在 **`StorageNode`** 直欄中顯示**是**。如果工作者節點未包含在 Portworx 叢集，則 Portworx 找不到連接至工作者節點的原始和未格式化的區塊儲存裝置。
 
-      因為 Portworx 以常駐程式集形式在叢集中執行，所以會自動檢查您新增至叢集的新工作者節點中的原始區塊儲存空間，並已新增至 Portworx 資料層。
+      因為 Portworx 以常駐程式集形式在叢集裡執行，所以會自動檢查您新增至叢集的新工作者節點中的原始區塊儲存空間，並已新增至 Portworx 資料層。
       {: note}
 
    3. 檢閱 CLI 輸出之**叢集摘要**區段中的**容量**直欄，以驗證列出的每個儲存空間節點都具有正確的原始區塊儲存空間數量。
@@ -490,15 +490,15 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: screen}
 
-太棒了！現在，您已設定 Portworx 叢集，所以可以[將叢集中的儲存空間新增至應用程式](#add_portworx_storage)。
+太棒了！現在，您已設定 Portworx 叢集，所以可以[將叢集裡的儲存空間新增至應用程式](#add_portworx_storage)。
 
-### 更新叢集中的 Portworx
+### 更新叢集裡的 Portworx
 {: #update_portworx}
 
 您可以將 Portworx 升級至最新版本。
 {: shortdesc}
 
-1. 遵循[在叢集中安裝 Portworx](#install_portworx) 中的步驟 2-5。
+1. 遵循[在叢集裡安裝 Portworx](#install_portworx) 中的步驟 2-5。
 
 2. 尋找 Portworx Helm 圖表的安裝名稱。
    ```
@@ -518,10 +518,10 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    ```
    {: pre}
 
-### 從叢集中移除 Portworx
+### 從叢集移除 Portworx
 {: #remove_portworx}
 
-如果您不要在叢集中使用 Portworx，則可以解除安裝 Helm 圖表。
+如果您不要在叢集裡使用 Portworx，則可以解除安裝 Helm 圖表。
 {: shortdesc}
 
 1. 尋找 Portworx Helm 圖表的安裝名稱。
@@ -556,7 +556,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 若要保護 Portworx 磁區中的資料，您可以選擇使用 {{site.data.keyword.keymanagementservicelong_notm}} 來保護磁區。
 {: shortdesc}
 
-{{site.data.keyword.keymanagementservicelong_notm}} 可協助您佈建「FIPS 140-2 層次 2」認證的雲端型硬體安全模組 (HSM) 所保護的加密金鑰。您可以使用這些金鑰，安全地保護資料不受未獲授權的使用者存取。您可以選擇使用一個加密金鑰來加密叢集中的所有磁區，或是為每個磁區使用一個加密金鑰。將資料傳送至不同的工作者節點時，Portworx 會使用此金鑰來加密靜態資料和傳輸期間的資料。如需相關資訊，請參閱[磁區加密 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption)。為達到更高的安全，請設定每個磁區加密。
+{{site.data.keyword.keymanagementservicelong_notm}} 可協助您佈建「FIPS 140-2 層次 2」認證的雲端型硬體安全模組 (HSM) 所保護的加密金鑰。您可以使用這些金鑰，安全地保護資料不受未獲授權的使用者存取。您可以選擇使用一個加密金鑰來加密叢集裡的所有磁區，或是為每個磁區使用一個加密金鑰。將資料傳送至不同的工作者節點時，Portworx 會使用此金鑰來加密靜態資料和傳輸期間的資料。如需相關資訊，請參閱[磁區加密 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/create-encrypted-pvcs/#volume-encryption)。為達到更高的安全，請設定每個磁區加密。
 
 請檢閱下列資訊：
 - 使用 {{site.data.keyword.keymanagementservicelong_notm}} 進行每個磁區加密的 [Portworx 磁區加密工作流程](#px_encryption)概觀
@@ -575,7 +575,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 2. Portworx 使用 Portworx 密碼中所儲存的客戶根金鑰 (CRK)，以呼叫 {{site.data.keyword.keymanagementservicelong_notm}} API `WrapCreateDEK` 來建立通行詞組。
 3. {{site.data.keyword.keymanagementservicelong_notm}} 服務實例產生 256 位元通行詞組，並將通行詞組包裝在 DEK 中。DEK 會傳回至 Portworx 叢集。
 4. Portworx 叢集使用通行詞組來加密磁區。
-5. Portworx 叢集將 DEK 以純文字格式儲存在 Portworx etcd 資料庫中，並建立磁區 ID 與 DEK 的關聯，然後從其記憶體中移除通行詞組。
+5. Portworx 叢集將 DEK 以純文字格式儲存在 Portworx etcd 資料庫中，並建立磁區 ID 與 DEK 的關聯，然後從其記憶體移除通行詞組。
 
 ### Portworx 每個磁區解密工作流程
 {: #decryption}
@@ -590,7 +590,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 3. Portworx etcd 查閱 DEK，並將 DEK 傳回至 Portworx 叢集。
 4. Portworx 叢集提供 Portworx 密碼中所儲存的 DEK 和根金鑰 (CRK)，來呼叫 {{site.data.keyword.keymanagementservicelong_notm}} API `UnWrapDEK`。
 5. {{site.data.keyword.keymanagementservicelong_notm}} 解除包裝 DEK 以擷取通行詞組，並將通行詞組傳回至 Portworx 叢集。
-6. Portworx 叢集使用通行詞組來解密磁區。磁區在解密之後，會從 Portworx 叢集中移除通行詞組。  
+6. Portworx 叢集使用通行詞組來解密磁區。磁區在解密之後，會從 Portworx 叢集移除通行詞組。  
 
 ### 設定 Portworx 磁區的每個磁區加密
 {: #setup_encryption}
@@ -656,7 +656,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    ```
    {: pre}
 
-10. 在叢集中建立稱為 `portworx` 的名稱空間，並容許 Portworx 存取此名稱空間中儲存的所有 Kubernetes 密碼。
+10. 在叢集裡建立稱為 `portworx` 的名稱空間，並容許 Portworx 存取此名稱空間中儲存的所有 Kubernetes 密碼。
     ```
     apiVersion: v1
     kind: Namespace
@@ -749,7 +749,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
       ```
       {: pre}
 
-12. 如果您已在安裝 Portworx 之前設定加密，則現在可以[在叢集中安裝 Portworx](#add_portworx_storage)。若要在您已安裝 Portworx 之後將加密新增至叢集，請更新 Portworx 常駐程式集，將 `"-secret_type"` 和 `"ibm-kp"` 新增為 Portworx 容器定義的其他引數。
+12. 如果您已在安裝 Portworx 之前設定加密，則現在可以[在叢集裡安裝 Portworx](#add_portworx_storage)。若要在您已安裝 Portworx 之後將加密新增至叢集，請更新 Portworx 常駐程式集，將 `"-secret_type"` 和 `"ibm-kp"` 新增為 Portworx 容器定義的其他引數。
    1. 更新 Portworx 常駐程式集。
       ```
       kubectl edit daemonset portworx -n kube-system
@@ -831,10 +831,10 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 
    6. 結束 Pod。
 
-請參閱如何[加密 Kubernetes 叢集中的密碼](/docs/containers?topic=containers-encryption#keyprotect)，包括針對 Portworx 儲存空間叢集儲存 {{site.data.keyword.keymanagementserviceshort}} CRK 的密碼。
+請參閱如何[加密 Kubernetes 叢集裡的密碼](/docs/containers?topic=containers-encryption#keyprotect)，包括針對 Portworx 儲存空間叢集儲存 {{site.data.keyword.keymanagementserviceshort}} CRK 的密碼。
 {: tip}
 
-## 將 Portworx 叢集中的儲存空間新增至應用程式
+## 將 Portworx 叢集裡的儲存空間新增至應用程式
 {: #add_portworx_storage}
 
 既然 Portworx 叢集已準備就緒，您就可以開始使用 [Kubernetes 動態佈建](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)來建立 Portworx 磁區。
@@ -843,10 +843,10 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 ### 步驟 1：建立或使用 PVC 的現有儲存空間類別
 {: #create_storageclass}
 
-若要從 Portworx 叢集中要求儲存空間，並在應用程式中使用它，您必須從建立或尋找可用來佈建 Portworx 磁區的儲存空間類別開始。
+若要從 Portworx 叢集要求儲存空間，並在應用程式中使用它，您必須從建立或尋找可用來佈建 Portworx 磁區的儲存空間類別開始。
 {: shortdesc}
 
-1. 列出叢集中的可用儲存空間類別，並檢查您是否可以使用現有 Portworx 儲存空間類別。Portworx 隨附一組預設儲存空間類別，而這組預設儲存空間類別針對資料庫使用情形最佳化，以跨 Pod 共用資料。
+1. 列出叢集裡的可用儲存空間類別，並檢查您是否可以使用現有 Portworx 儲存空間類別。Portworx 隨附一組預設儲存空間類別，而這組預設儲存空間類別針對資料庫使用情形最佳化，以跨 Pod 共用資料。
    ```
    kubectl get storageclasses | grep portworx
    ```
@@ -889,15 +889,15 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
-   <td>指定您是否要使用 {{site.data.keyword.keymanagementservicelong_notm}} 來加密磁區中的資料。請選擇下列選項：<ul><li><strong>true</strong>：輸入 <code>true</code>，以啟用 Portworx 磁區的加密。若要加密磁區，您必須具有 {{site.data.keyword.keymanagementservicelong_notm}} 服務實例以及保留客戶根金鑰的 Kubernetes 密碼。如需如何設定 Portworx 磁區加密的相關資訊，請參閱[加密 Portworx 磁區](#encrypt_volumes)。</li><li><strong>false</strong>：當您輸入 <code>false</code> 時，就不會加密 Portworx 磁區。</li></ul> 如果您未指定此選項，則依預設不會加密 Portworx 磁區。<strong>附註：</strong>您可以選擇在 PVC 中啟用磁區加密，即使您已停用儲存空間類別中的加密。您在 PVC 中所做設定的優先順序高於儲存空間類別中的設定。</td>
+   <td>指定您是否要使用 {{site.data.keyword.keymanagementservicelong_notm}} 來加密磁區中的資料。請從下列選項中進行選擇：<ul><li><strong>true</strong>：輸入 <code>true</code>，以啟用 Portworx 磁區的加密。若要加密磁區，您必須具有 {{site.data.keyword.keymanagementservicelong_notm}} 服務實例以及保留客戶根金鑰的 Kubernetes 密碼。如需如何設定 Portworx 磁區加密的相關資訊，請參閱[加密 Portworx 磁區](#encrypt_volumes)。</li><li><strong>false</strong>：當您輸入 <code>false</code> 時，就不會加密 Portworx 磁區。</li></ul> 如果您未指定此選項，則依預設不會加密 Portworx 磁區。<strong>附註：</strong>您可以選擇在 PVC 中啟用磁區加密，即使您已停用儲存空間類別中的加密。您在 PVC 中所做設定的優先順序高於儲存空間類別中的設定。</td>
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>輸入您要為資料要求的 Portworx I/O 優先順序。可用的選項為 `high`、`medium` 及 `low`。設定 Portworx 叢集期間，會檢查每個磁碟，以判定裝置的效能設定檔。設定檔分類取決於工作者節點的網路頻寬，以及您擁有的儲存裝置類型。SDS 工作者節點的磁碟會分類為 `high`。如果您手動將磁碟連接至虛擬工作者節點，則這些磁碟會分類為 `low`，因為隨附虛擬工作者節點的網路速度較低。</br><br> 當您使用儲存空間類別來建立 PVC 時，<code>parameters/repl</code> 中所指定抄本數目的優先順序會高於 I/O 優先順序。例如，如果您指定要儲存在高速磁碟上的 3 個抄本，但叢集中只有一個具有高速磁碟的工作者節點，則建立 PVC 仍然會成功。您的資料會同時抄寫至高速及低速磁碟。</td>
+   <td>輸入您要為資料要求的 Portworx I/O 優先順序。可用的選項為 `high`、`medium` 及 `low`。設定 Portworx 叢集期間，會檢查每個磁碟，以判定裝置的效能設定檔。設定檔分類取決於工作者節點的網路頻寬，以及您擁有的儲存裝置類型。SDS 工作者節點的磁碟會分類為 `high`。如果您手動將磁碟連接至虛擬工作者節點，則這些磁碟會分類為 `low`，因為隨附虛擬工作者節點的網路速度較低。</br><br> 當您使用儲存空間類別來建立 PVC 時，<code>parameters/repl</code> 中所指定抄本數目的優先順序會高於 I/O 優先順序。例如，如果您指定要儲存在高速磁碟上的 3 個抄本，但叢集裡只有一個具有高速磁碟的工作者節點，則建立 PVC 仍然會成功。您的資料會同時抄寫至高速及低速磁碟。</td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
-   <td>定義是否要容許多個 Pod 存取相同的磁區。請選擇下列選項：<ul><li><strong>True</strong>：如果您將此選項設為 <code>true</code>，則可以透過配送至不同區域中各工作者節點的多個 Pod 來存取相同的磁區。</li><li><strong>False</strong>：如果您將此選項設為 <code>false</code>，則只有在將 Pod 部署至連接備份磁區的實體磁碟的工作者節點時，才能從多個 Pod 存取磁區。如果您的 Pod 部署至不同的工作者節點，則 Pod 無法存取磁區。</li></ul></td>
+   <td>定義是否要容許多個 Pod 存取相同的磁區。請從下列選項中進行選擇：<ul><li><strong>True</strong>：如果您將此選項設為 <code>true</code>，則可以透過配送至不同區域中各工作者節點的多個 Pod 來存取相同的磁區。</li><li><strong>False</strong>：如果您將此選項設為 <code>false</code>，則只有在將 Pod 部署至連接備份磁區的實體磁碟的工作者節點時，才能從多個 Pod 存取磁區。如果您的 Pod 部署至不同的工作者節點，則 Pod 無法存取磁區。</li></ul></td>
    </tr>
    </tbody>
    </table>
@@ -952,7 +952,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
     </tr>
     <tr>
     <td><code>resources.requests.storage</code></td>
-    <td>輸入您要從 Portworx 叢集指派的儲存空間數量（以 GB 為單位）。例如，若要從 Portworx 叢集指派 2 GB，請輸入 `2Gi`。您可指定的儲存空間數量受限於 Portworx 叢集中可用的儲存空間數量。如果您已在[儲存空間類別](#create_storageclass)中指定高於 1 的抄寫因數，則會在多個工作者節點上保留 PVC 中所指定的儲存空間數量。</td>
+    <td>輸入您要從 Portworx 叢集指派的儲存空間數量（以 GB 為單位）。例如，若要從 Portworx 叢集指派 2 GB，請輸入 `2Gi`。您可指定的儲存空間數量受限於 Portworx 叢集裡可用的儲存空間數量。如果您已在[儲存空間類別](#create_storageclass)中指定高於 1 的抄寫因數，則會在多個工作者節點上保留 PVC 中所指定的儲存空間數量。</td>
     </tr>
     <tr>
     <td><code>spec.storageClassName</code></td>
@@ -981,7 +981,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 
 1. 為裝載 PVC 的部署建立一個配置檔。
 
-   如需如何使用 Portworx 部署有狀態集的提示，請參閱 [StatefulSets ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/)。Portworx 文件也包括如何部署 [Cassandra ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/)、[Kafka ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/)、[使用 Kibana 的 ElasticSearch ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) 以及[使用 MySQL 的 WordPress ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/) 的範例。
+   如需如何使用 Portworx 部署有狀態集合的提示，請參閱 [StatefulSets ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/)。Portworx 文件也包括如何部署 [Cassandra ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/)、[Kafka ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/)、[使用 Kibana 的 ElasticSearch ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/) 以及[使用 MySQL 的 WordPress ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/) 的範例。
    {: tip}
 
    ```
@@ -1123,8 +1123,8 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 <dl>
 <dt>使用現有 Portworx 磁區</dt>
 <dd>如果您具有手動建立的現有 Portworx 磁區，或刪除 PVC 時未自動刪除現有 Portworx 磁區，則可以靜態地佈建對應的 PV 和 PVC，並搭配使用此磁區與您的應用程式。如需相關資訊，請參閱[使用現有磁區 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/using-preprovisioned-volumes/#using-the-portworx-volume)。</dd>
-<dt>在 Portworx 上執行有狀態集</dt>
-<dd>如果您具有要以有狀態集形式部署至叢集的有狀態應用程式，則可以設定有狀態集以使用 Portworx 叢集中的儲存空間。如需相關資訊，請參閱[建立 MySQL StatefulSet ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/#create-a-mysql-statefulset)。</dd>
+<dt>在 Portworx 上執行有狀態集合</dt>
+<dd>如果您具有要以有狀態集合形式部署至叢集的有狀態應用程式，則可以設定有狀態集合以使用 Portworx 叢集裡的儲存空間。如需相關資訊，請參閱[建立 MySQL StatefulSet ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/#create-a-mysql-statefulset)。</dd>
 <dt>以 hyperconverged 方式執行 Pod</dt>
 <dd>您可以配置 Portworx 叢集來排程 Pod 磁區所在的相同工作者節點上的 Pod。此設定也稱為 `hyperconverged`，可以改善資料儲存空間效能。如需相關資訊，請參閱[在與磁區相同的主機上執行 Pod ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/)。</dd>
 <dt>建立 Portworx 磁區的 Snapshot</dt>
@@ -1139,20 +1139,20 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
 如果您不再需要 [Portworx 磁區](#remove_pvc)、[儲存空間節點](#remove_storage_node_cluster)或[整個 Portworx 叢集](#remove_storage_node_cluster)，則請予以移除。
 {: shortdesc}
 
-### 從應用程式中移除 Portworx 磁區
+### 從應用程式移除 Portworx 磁區
 {: #remove_pvc}
 
-當您將儲存空間從 Portworx 叢集新增至應用程式時，會有三個主要元件：要求儲存空間的 Kubernetes 持續性磁區要求 (PVC)、裝載至 Pod 及 PVC 中所述的 Kubernetes 持續性磁區 (PV)，以及封鎖 Portworx 叢集實體磁碟上空間的 Portworx 磁區。若要從應用程式中移除儲存空間，您必須移除所有元件。
+當您將儲存空間從 Portworx 叢集新增至應用程式時，會有三個主要元件：要求儲存空間的 Kubernetes 持續性磁區要求 (PVC)、裝載至 Pod 及 PVC 中所述的 Kubernetes 持續性磁區 (PV)，以及封鎖 Portworx 叢集實體磁碟上空間的 Portworx 磁區。若要從應用程式移除儲存空間，您必須移除所有元件。
 {: shortdesc}
 
-1. 列出叢集中的 PVC，並記下 PVC 的 **NAME**，以及連結至 PVC 並顯示為 **VOLUME** 的 PV 名稱。
+1. 列出叢集裡的 PVC，並記下 PVC 的 **NAME**，以及連結至 PVC 並顯示為 **VOLUME** 的 PV 名稱。
     ```
     kubectl get pvc
     ```
     {: pre}
 
-    輸出範例：
-    ```
+          輸出範例：
+      ```
     NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS            AGE
     px-pvc		  Bound     pvc-06886b77-102b-11e8-968a-f6612bb731fb   20Gi       RWO           px-high                 78d
     ```
@@ -1223,7 +1223,7 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    ```
    {: pre}
 
-8. 驗證已移除 Portworx 磁區。登入叢集中的其中一個 Portworx Pod，以列出磁區。若要尋找可用的 Portworx Pod，請執行 `kubectl get pods -n kube-system | grep portworx`。
+8. 驗證已移除 Portworx 磁區。登入叢集裡的其中一個 Portworx Pod，以列出磁區。若要尋找可用的 Portworx Pod，請執行 `kubectl get pods -n kube-system | grep portworx`。
    ```
    kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume list
    ```
@@ -1235,16 +1235,16 @@ Databases for etcd 是一種受管理的 etcd 服務，可跨三個儲存空間�
    ```
    {: pre}
 
-### 移除 Portworx 叢集中的工作者節點或移除整個 Portworx 叢集
+### 移除 Portworx 叢集裡的工作者節點或移除整個 Portworx 叢集
 {: #remove_storage_node_cluster}
 
-如果您不想再使用 Portworx，則可以排除 Portworx 叢集中的工作者節點，或移除整個 Portworx 叢集。
+如果您不想再使用 Portworx，則可以排除 Portworx 叢集裡的工作者節點，或移除整個 Portworx 叢集。
 {: shortdesc}
 
-移除 Portworx 叢集時，會移除 Portworx 叢集中的所有資料。請務必[建立資料的 Snapshot，並將此 Snapshot 儲存至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/)。
+移除 Portworx 叢集時，會移除 Portworx 叢集裡的所有資料。請務必[建立資料的 Snapshot，並將此 Snapshot 儲存至雲端 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/)。
 {: important}
 
-- **移除 Portworx 叢集中的工作者節點：**如果您要移除執行 Portworx 並將資料儲存至 Portworx 叢集的工作者節點，則必須將現有 Pod 移轉至其餘的工作者節點，然後解除安裝節點中的 Portworx。如需相關資訊，請參閱[在 Kubernetes 中解除 Portworx 節點任務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/)
+- **移除 Portworx 叢集裡的工作者節點：**如果您要移除執行 Portworx 並將資料儲存至 Portworx 叢集的工作者節點，則必須將現有 Pod 移轉至其餘的工作者節點，然後解除安裝節點中的 Portworx。如需相關資訊，請參閱[在 Kubernetes 中解除 Portworx 節點任務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/)
 - **移除整個 Portworx 叢集：**您可以使用 [`kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl cluster-delete` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.portworx.com/reference/cli/#pxctl-cluster-delete) 或藉由[解除安裝 Portworx Helm 圖表](#remove_portworx)，來移除 Portworx 叢集。
 
 ## 取得協助及支援

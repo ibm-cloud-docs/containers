@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,17 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 將資料儲存在 IBM File Storage for IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage 是一種持續性、快速且具彈性的網路連結的 NFS 型檔案儲存空間，可以使用 Kubernetes 持續性磁區 (PV) 將其新增至應用程式。您可以選擇具有 GB 大小及 IOPS 符合工作負載需求的預先定義儲存空間層級。若要瞭解 {{site.data.keyword.Bluemix_notm}} File Storage 是否為正確的儲存空間選項，請參閱[選擇儲存空間解決方案](/docs/containers?topic=containers-storage_planning#choose_storage_solution)。如需定價資訊，請參閱[計費](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)。
+{{site.data.keyword.Bluemix_notm}} File Storage 是一種持續性、快速且具彈性的網路連結的 NFS 型檔案儲存空間，可以使用 Kubernetes 持續性磁區 (PV) 將其新增至應用程式。您可以從具有符合您工作負載需求之 GB 大小及 IOPS 的預先定義儲存空間層級中進行選擇。若要瞭解 {{site.data.keyword.Bluemix_notm}} File Storage 是否為正確的儲存空間選項，請參閱[選擇儲存空間解決方案](/docs/containers?topic=containers-storage_planning#choose_storage_solution)。如需定價資訊，請參閱[計費](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage 僅適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如受防火牆保護的專用叢集，或只啟用專用服務端點的叢集），則可以在叢集執行 Kubernetes 1.13.4_1513、1.12.6_1544、1.11.8_1550、1.10.13_1551 或更新版本時佈建檔案儲存空間。NFS 檔案儲存空間實例是單一區域特有的。如果您有多區域叢集，請考慮[多區域持續性儲存空間選項](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
+{{site.data.keyword.Bluemix_notm}} File Storage 僅適用於已設定公用網路連線功能的標準叢集。如果叢集無法存取公用網路（例如，防火牆後面的專用叢集或僅已啟用了專用服務端點的叢集），則可以在叢集執行 Kubernetes 1.13.4_1513、1.12.6_1544、1.11.8_1550 版或更高版本時佈建檔案儲存空間。NFS 檔案儲存空間實例是單一區域特有的。如果您有多區域叢集，請考慮[多區域持續性儲存空間選項](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。
 {: important}
 
 ## 決定檔案儲存空間配置
@@ -43,7 +45,7 @@ subcollection: containers
 在使用儲存空間類別佈建特定類型的儲存空間之後，您就無法變更儲存裝置的類型或保留原則。不過，如果想要增加您的儲存空間容量及效能，您可以[變更大小及 IOPS](#file_change_storage_configuration)。若要變更儲存空間的類型及保留原則，您必須[建立新的儲存空間實例，並將資料](/docs/containers?topic=containers-kube_concepts#update_storageclass)從舊的儲存空間實例複製到新的儲存空間實例。
 {: important}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要決定儲存空間配置，請執行下列動作：
 
@@ -166,7 +168,7 @@ $ kubectl get storageclasses
    - 如果要保留資料，則請選擇 `retain` 儲存空間類別。當您刪除 PVC 時，只會刪除 PVC。PV、IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實體儲存裝置，以及您的資料仍然存在。若要收回儲存空間，並再次在您的叢集裡使用它，您必須移除 PV，並遵循[使用現有檔案儲存空間](#existing_file)的步驟。
    - 如果您想要在刪除 PVC 時一併刪除 PV、資料及實體檔案儲存裝置，請選擇沒有 `retain` 的儲存空間類別。
 
-6. 選擇您要按小時還是按月計費。如需相關資訊，請檢查[定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)。依預設，所有檔案儲存裝置都是搭配每小時計費類型進行佈建。如果您選擇按月計費類型，則移除持續性儲存空間時，仍然需要支付它的一個月費用，即使您只是短時間使用也是一樣。
+6. 選擇您要依小時還是依月計費。如需相關資訊，請檢查[定價 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/file-storage/pricing)。依預設，所有檔案儲存裝置都是搭配每小時計費類型進行佈建。如果您選擇依月計費類型，則移除持續性儲存空間時，仍然需要支付它的一個月費用，即使您只是短時間使用也是一樣。
    {: note}
 
 <br />
@@ -183,14 +185,14 @@ $ kubectl get storageclasses
 - 如果您有防火牆，請對叢集所在區域的 IBM Cloud 基礎架構 (SoftLayer) IP 範圍[容許進行 Egress 存取](/docs/containers?topic=containers-firewall#pvc)，這樣您才可以建立 PVC。
 - [決定預先定義的儲存空間類別](#file_predefined_storageclass)或建立[自訂的儲存空間類別](#file_custom_storageclass)。
 
-希望在有狀態集中部署檔案儲存空間嗎？如需相關資訊，請參閱[在有狀態集中使用檔案儲存空間](#file_statefulset)。
+希望在有狀態集合中部署檔案儲存空間嗎？如需相關資訊，請參閱[在有狀態集合中使用檔案儲存空間](#file_statefulset)。
 {: tip}
 
 若要新增檔案儲存空間，請執行下列動作：
 
 1.  建立配置檔來定義持續性磁區要求 (PVC)，以及將配置儲存為 `.yaml` 檔案。
 
-    - **銅級、銀級、金級儲存空間類別的範例**：下列 `.yaml` 檔案會建立一個名為 `mypvc` 的要求，其儲存空間類別為 `"ibmc-file-sliver"`，計費方式為 `"monthly"`，GB 大小為 `24Gi`。
+    - **銅級、銀級、金級儲存空間類別的範例**：下列 `.yaml` 檔案會建立一個名稱為 `mypvc` 的要求，其儲存空間類別為 `"ibmc-file-sliver"`，計費方式為 `"monthly"`，GB 大小為 `24Gi`。
 
        ```
        apiVersion: v1
@@ -211,7 +213,7 @@ $ kubectl get storageclasses
        ```
        {: codeblock}
 
-    -  **使用自訂儲存空間類別的範例**：下列 `.yaml` 檔案會建立一個名為 `mypvc` 的要求，其儲存空間類別為 `ibmc-file-retain-custom`，計費方式為 `"hourly"`，GB 大小為 `45Gi`，IOPS 為 `"300"`。
+    -  **使用自訂儲存空間類別的範例**：下列 `.yaml` 檔案會建立一個名稱為 `mypvc` 的要求，其儲存空間類別為 `ibmc-file-retain-custom`，計費方式為 `"hourly"`，GB 大小為 `45Gi`，IOPS 為 `"300"`。
 
        ```
        apiVersion: v1
@@ -429,7 +431,7 @@ $ kubectl get storageclasses
 
 開始之前：
 - 請確定您至少具有一個工作者節點，存在於與現有檔案儲存空間實例相同的區域中。
-- [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### 步驟1：準備現有的儲存空間。
 {: #existing-file-1}
@@ -474,12 +476,12 @@ $ kubectl get storageclasses
 </br>
 
 **若為在叢集外佈建的持續性儲存空間：** </br>
-如果您想要使用先前佈建但之前從未在叢集中使用過的現有儲存空間，則必須讓儲存空間可在與工作者節點相同的子網路中使用。
+如果您想要使用先前佈建但之前從未在叢集裡使用過的現有儲存空間，則必須讓儲存空間可在與工作者節點相同的子網路中使用。
 
 1.  {: #external_storage}從 [IBM Cloud 基礎架構 (SoftLayer) 入口網站 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/classic?) 中，按一下**儲存空間**。
 2.  按一下**檔案儲存空間**，並從**動作**功能表中選取**授權主機**。
 3.  選取**子網路**。
-4.  從下拉清單中，選取您的工作者節點所連接的專用 VLAN 子網路。若要尋找工作者節點的子網路，請執行 `ibmcloud ks workers --cluster <cluster_name>`，並且比較工作者節點的 `Private IP` 與您在下拉清單中找到的子網路。
+4.  從下拉清單，選取您的工作者節點所連接的專用 VLAN 子網路。若要尋找工作者節點的子網路，請執行 `ibmcloud ks workers --cluster <cluster_name>`，並且比較工作者節點的 `Private IP` 與您在下拉清單中找到的子網路。
 5.  按一下**提交**。
 6.  按一下檔案儲存空間的名稱。
 7.  記下 `Mount Point`、`size` 及 `Location` 欄位。`Mount Point` 欄位會顯示為 `<nfs_server>:<file_storage_path>`。
@@ -611,34 +613,34 @@ $ kubectl get storageclasses
 
 
 
-## 在有狀態集中使用檔案儲存空間
+## 在有狀態集合中使用檔案儲存空間
 {: #file_statefulset}
 
-如果您具有有狀態應用程式（例如資料庫），則可以建立有狀態集，以使用檔案儲存空間來儲存應用程式資料。或者，您也可以使用 {{site.data.keyword.Bluemix_notm}} 資料庫即服務，並將資料儲存在雲端。
+如果您具有有狀態應用程式（例如資料庫），則可以建立有狀態集合，以使用檔案儲存空間來儲存應用程式資料。或者，您也可以使用 {{site.data.keyword.Bluemix_notm}} 資料庫即服務，並將資料儲存在雲端。
 {: shortdesc}
 
-**將檔案儲存空間新增至有狀態集時，需要注意的事項為何？** </br> 若要將儲存空間新增至有狀態集，您可以在有狀態集 YAML 的 `volumeClaimTemplates` 區段中指定儲存空間配置。`volumeClaimTemplates` 是您 PVC 的基礎，可以包括儲存空間類別以及您要佈建的檔案儲存空間大小或 IOPS。不過，如果您要在 `volumeClaimTemplates` 中包括標籤，則在建立 PVC 時，Kubernetes 不會包括這些標籤。相反地，您必須將標籤直接新增至有狀態集。
+**將檔案儲存空間新增至有狀態集合時，需要注意的事項為何？** </br> 若要將儲存空間新增至有狀態集合，您可以在有狀態集合 YAML 的 `volumeClaimTemplates` 區段中指定儲存空間配置。`volumeClaimTemplates` 是您 PVC 的基礎，可以包括儲存空間類別以及您要佈建的檔案儲存空間大小或 IOPS。不過，如果您要在 `volumeClaimTemplates` 中包括標籤，則在建立 PVC 時，Kubernetes 不會包括這些標籤。相反地，您必須將標籤直接新增至有狀態集合。
 
-您無法同時部署兩個有狀態集。如果您嘗試在完整部署不同的有狀態集之前建立有狀態集，則有狀態集的部署可能會導致非預期的結果。
+您無法同時部署兩個有狀態集合。如果您嘗試在完整部署不同的有狀態集合之前建立有狀態集合，則有狀態集合的部署可能會導致非預期的結果。
 {: important}
 
-**如何在特定區域中建立有狀態集？** </br> 在多區域叢集裡，您可以指定要在有狀態集 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，並在有狀態集的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
+**如何在特定區域中建立有狀態集合？** </br> 在多區域叢集裡，您可以指定要在有狀態集合 YAML 的 `spec.selector.matchLabels` 及 `spec.template.metadata.labels` 區段中建立有狀態集合的區域及地區。或者，您也可以將這些標籤新增至[自訂的儲存空間類別](/docs/containers?topic=containers-kube_concepts#customized_storageclass)，並在有狀態集合的 `volumeClaimTemplates` 區段中使用此儲存空間類別。
 
 **可以將連結 PV 至有狀態 Pod 延遲到 Pod 就緒嗎？**<br>
 是，您可以為 PVC [建立自訂儲存空間類別](#file-topology)，其中包括 [`volumeBindingMode: WaitForFirstConsumer` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/storage/storage-classes/#volume-binding-mode) 欄位。
 
-**將檔案儲存空間新增至有狀態集時有哪些選擇？** </br> 如果您要在建立有狀態集時自動建立 PVC，請使用[動態佈建](#file_dynamic_statefulset)。您也可以選擇使用有狀態集來[預先佈建 PVC 或使用現有 PVC](#file_static_statefulset)。  
+**將檔案儲存空間新增至有狀態集合時有哪些選擇？** </br> 如果您要在建立有狀態集合時自動建立 PVC，請使用[動態佈建](#file_dynamic_statefulset)。您也可以選擇使用有狀態集合來[預先佈建 PVC 或使用現有 PVC](#file_static_statefulset)。  
 
-### 動態佈建：在建立有狀態集時建立 PVC
+### 動態佈建：在建立有狀態集合時建立 PVC
 {: #file_dynamic_statefulset}
 
-如果您要在建立有狀態集時自動建立 PVC，請使用此選項。
+如果您要在建立有狀態集合時自動建立 PVC，請使用此選項。
 {: shortdesc}
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. 驗證已完整部署叢集裡的所有現有有狀態集。如果仍在部署有狀態集，則無法開始建立有狀態集。您必須等到叢集裡的所有有狀態集皆已完整部署，才能避免非預期的結果。
-   1. 列出叢集裡的現有有狀態集。
+1. 驗證已完整部署叢集裡的所有現有有狀態集合。如果仍在部署有狀態集合，則無法開始建立有狀態集合。您必須等到叢集裡的所有有狀態集合皆已完整部署，才能避免非預期的結果。
+   1. 列出叢集裡的現有有狀態集合。
       ```
       kubectl get statefulset --all-namespaces
       ```
@@ -651,7 +653,7 @@ $ kubectl get storageclasses
       ```
       {: screen}
 
-   2. 檢視每個有狀態集的 **Pod 狀態**，確定已完成有狀態集的部署。  
+   2. 檢視每個有狀態集合的 **Pod 狀態**，確定已完成有狀態集合的部署。  
       ```
       kubectl describe statefulset <statefulset_name>
       ```
@@ -679,13 +681,13 @@ $ kubectl get storageclasses
       ```
       {: screen}
 
-      當您在 CLI 輸出的 **Replicas** 區段中找到的抄本數目等於 **Pods Status** 區段中的 **Running** Pod 數目時，即已完整部署有狀態集。如果尚未完整部署有狀態集，請先等到部署完成之後，再繼續。
+      當您在 CLI 輸出的 **Replicas** 區段中找到的抄本數目等於 **Pods Status** 區段中的 **Running** Pod 數目時，即已完整部署有狀態集合。如果尚未完整部署有狀態集合，請先等到部署完成之後，再繼續。
 
-2. 建立有狀態集的配置檔，以及您用來公開有狀態集的服務。
+2. 建立有狀態集合的配置檔，以及您用來公開有狀態集合的服務。
 
-  - **用於指定區域的有狀態集範例：**
+  - **用於指定區域的有狀態集合範例：**
 
-    下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集。對於每個抄本，都會根據 `ibmc-file-retain-bronze` 儲存空間類別中的規格，來佈建 20 GB 的檔案儲存裝置。所有儲存裝置都會佈建在 `dal10` 區域。因為無法從其他區域存取檔案儲存空間，所以也會將有狀態集的所有抄本都部署至位於 `dal10` 的工作者節點。
+    下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集合。對於每個抄本，都會根據 `ibmc-file-retain-bronze` 儲存空間類別中的規格，來佈建 20 GB 的檔案儲存裝置。所有儲存裝置都會佈建在 `dal10` 區域。因為無法從其他區域存取檔案儲存空間，所以也會將有狀態集合的所有抄本都部署至位於 `dal10` 的工作者節點。
 
     ```
     apiVersion: v1
@@ -747,9 +749,9 @@ $ kubectl get storageclasses
     ```
     {: codeblock}
 
-  - **具有反親緣性規則和延遲檔案儲存空間建立的有狀態集範例：**
+  - **具有反親緣性規則和延遲檔案儲存空間建立的有狀態集合範例：**
 
-    下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集。有狀態集未指定檔案儲存空間建立所在的地區及區域。相反地，有狀態集會使用反親緣性規則，確保 Pod 分散到各工作者節點和區域。定義 `app: nginx` 標籤，即可達成工作者節點反親緣性。此標籤指示 Kubernetes 排程器在此工作者節點上已執行具有相同標籤的 Pod 時，不在工作者節點上排定 Pod。`topologykey: failure-domain.beta.kubernetes.io/zone` 標籤會進一步限制此反親緣性規則，以及防止在工作者節點上排定 Pod，該工作者節點與已執行具有 `app: nginx` 標籤的 Pod 的工作者節點位於相同的區域。對於每個有狀態集 Pod，會建立兩個 PVC（如 `volumeClaimTemplates` 區段中所定義），但會將建立檔案儲存空間實例延遲到排定用於使用儲存空間的有狀態集 Pod。此設定稱為[拓蹼察覺磁區排程](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)。
+    下列範例顯示如何將 NGINX 部署為具有 3 個抄本的有狀態集合。有狀態集合未指定檔案儲存空間建立所在的地區及區域。相反地，有狀態集合會使用反親緣性規則，確保 Pod 分散到各工作者節點和區域。定義 `app: nginx` 標籤，即可達成工作者節點反親緣性。此標籤指示 Kubernetes 排程器在此工作者節點上已執行具有相同標籤的 Pod 時，不在工作者節點上排定 Pod。`topologykey: failure-domain.beta.kubernetes.io/zone` 標籤會進一步限制此反親緣性規則，以及防止在工作者節點上排定 Pod，該工作者節點與已執行具有 `app: nginx` 標籤的 Pod 的工作者節點位於相同的區域。對於每個有狀態集合 Pod，會建立兩個 PVC（如 `volumeClaimTemplates` 區段中所定義），但會將建立檔案儲存空間實例延遲到排定用於使用儲存空間的有狀態集合 Pod。此設定稱為[拓蹼察覺磁區排程](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/)。
 
     ```
     apiVersion: storage.k8s.io/v1
@@ -842,30 +844,30 @@ $ kubectl get storageclasses
     {: codeblock}
 
     <table>
-    <caption>瞭解有狀態集 YAML 檔案元件</caption>
+    <caption>瞭解有狀態集合 YAML 檔案元件</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解有狀態集 YAML 檔案元件</th>
+    <th colspan=2><img src="images/idea.png" alt="構想圖示"/> 瞭解有狀態集合 YAML 檔案元件</th>
     </thead>
     <tbody>
     <tr>
     <td style="text-align:left"><code>metadata.name</code></td>
-    <td style="text-align:left">輸入有狀態集的名稱。您輸入的名稱用來建立 PVC 名稱，格式如下：<code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
+    <td style="text-align:left">輸入有狀態集合的名稱。您輸入的名稱用來建立 PVC 名稱，格式如下：<code>&lt;volume_name&gt;-&lt;statefulset_name&gt;-&lt;replica_number&gt;</code>。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.serviceName</code></td>
-    <td style="text-align:left">輸入您要用來公開有狀態集的服務名稱。</td>
+    <td style="text-align:left">輸入您要用來公開有狀態集合的服務名稱。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.replicas</code></td>
-    <td style="text-align:left">輸入有狀態集的抄本數目。</td>
+    <td style="text-align:left">輸入有狀態集合的抄本數目。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-    <td style="text-align:left">輸入您要用於有狀態集的 Pod 管理原則。請選擇下列選項：<ul><li><strong><code>OrderedReady</code></strong>：使用此選項，逐一部署有狀態集抄本。例如，如果您已指定 3 個抄本，則 Kubernetes 會為您的第一個抄本建立 PVC、等待 PVC 連結、部署有狀態集抄本，以及將 PVC 裝載至抄本。部署完成之後，會部署第二個抄本。如需此選項的相關資訊，請參閱 [`OrderedReady` Pod 管理 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management)。</li><li><strong>Parallel：</strong>使用此選項，會同時開始部署所有有狀態集抄本。如果您的應用程式支援平行部署抄本，則請使用此選項來儲存您 PVC 及有狀態集抄本的部署時間。</li></ul></td>
+    <td style="text-align:left">輸入您要用於有狀態集合的 Pod 管理原則。請從下列選項中進行選擇：<ul><li><strong><code>OrderedReady</code></strong>：使用此選項，逐一部署有狀態集合抄本。例如，如果您已指定 3 個抄本，則 Kubernetes 會為您的第一個抄本建立 PVC、等待 PVC 連結、部署有狀態集合抄本，以及將 PVC 裝載至抄本。部署完成之後，會部署第二個抄本。如需此選項的相關資訊，請參閱 [`OrderedReady` Pod 管理 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management)。</li><li><strong>Parallel：</strong>使用此選項，會同時開始部署所有有狀態集合抄本。如果您的應用程式支援平行部署抄本，則請使用此選項來儲存您 PVC 及有狀態集合抄本的部署時間。</li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
-    <td style="text-align:left">輸入您要內含在有狀態集及 PVC 的所有標籤。Kubernetes 無法辨識有狀態集的 <code>volumeClaimTemplates</code> 中所內含的標籤。您可能想要併入的範例標籤如下：<ul><li><code><strong>region</strong></code> 及 <code><strong>zone</strong></code>：如果您要在某個特定區域中建立所有有狀態集抄本及 PVC，請新增這兩個標籤。您也可以在所使用的儲存空間類別中指定區域及地區。如果您未指定區域及地區，而且具有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。</li><li><code><strong>billingType</strong></code>：輸入您要用於 PVC 的計費類型。請選擇 <code>hourly</code> 或 <code>monthly</code>。如果您未指定此標籤，則會使用按小時計費類型來建立所有 PVC。</li></ul></td>
+    <td style="text-align:left">輸入您要內含在有狀態集合及 PVC 的所有標籤。Kubernetes 無法辨識有狀態集合的 <code>volumeClaimTemplates</code> 中所內含的標籤。您可能想要包含的範例標籤如下：<ul><li><code><strong>region</strong></code> 及 <code><strong>zone</strong></code>：如果您要在某個特定區域中建立所有有狀態集合抄本及 PVC，請新增這兩個標籤。您也可以在所使用的儲存空間類別中指定區域及地區。如果您未指定區域及地區，而且具有多區域叢集，則會根據循環式基準選取儲存空間佈建所在的區域，以在所有區域均勻地平衡磁區要求。</li><li><code><strong>billingType</strong></code>：輸入您要用於 PVC 的計費類型。請選擇 <code>hourly</code> 或 <code>monthly</code>。如果您未指定此標籤，則會使用依小時計費類型來建立所有 PVC。</li></ul></td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.metadata.labels</code></td>
@@ -873,7 +875,7 @@ $ kubectl get storageclasses
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.template.spec.affinity</code></td>
-    <td style="text-align:left">指定反親緣性規則，確定有狀態集 Pod 分散到各工作者節點和區域。此範例顯示偏好不要在工作者節點上排定有狀態集 Pod 的反親緣性規則，其中 Pod 具有 `app: nginx` 標籤。如果工作者節點與具有 `app: nginx` 標籤的 Pod 位於相同的區域，則 `topologykey: failure-domain.beta.kubernetes.io/zone` 會進一步限制此反親緣性規則，以及防止在工作者節點上排定 Pod。使用此反親緣性規則，您可以跨各工作者節點和區域達到反親緣性。</td>
+    <td style="text-align:left">指定反親緣性規則，確定有狀態集合 Pod 分散到各工作者節點和區域。此範例顯示偏好不要在工作者節點上排定有狀態集合 Pod 的反親緣性規則，其中 Pod 具有 `app: nginx` 標籤。如果工作者節點與具有 `app: nginx` 標籤的 Pod 位於相同的區域，則 `topologykey: failure-domain.beta.kubernetes.io/zone` 會進一步限制此反親緣性規則，以及防止在工作者節點上排定 Pod。使用此反親緣性規則，您可以跨各工作者節點和區域達到反親緣性。</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.name</code></td>
@@ -889,17 +891,17 @@ $ kubectl get storageclasses
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
-    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep file</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-file</code> 佈建者，以使用檔案儲存空間佈建有狀態集。</td>
+    <td style="text-align:left">輸入您要使用的儲存空間類別。若要列出現有儲存空間類別，請執行 <code>kubectl get storageclasses | grep file</code>。如果您未指定儲存空間類別，則會建立 PVC，其具有叢集裡所設定的預設儲存空間類別。請確定預設儲存空間類別使用 <code>ibm.io/ibmc-file</code> 佈建者，以使用檔案儲存空間佈建有狀態集合。</td>
     </tr>
     </tbody></table>
 
-4. 建立有狀態集。
+4. 建立有狀態集合。
    ```
    kubectl apply -f statefulset.yaml
    ```
    {: pre}
 
-5. 等待部署有狀態集。
+5. 等待部署有狀態集合。
    ```
    kubectl describe statefulset <statefulset_name>
    ```
@@ -908,49 +910,49 @@ $ kubectl get storageclasses
    若要查看 PVC 的現行狀態，請執行 `kubectl get pvc`。PVC 名稱的格式為 `<volume_name>-<statefulset_name>-<replica_number>`。
    {: tip}
 
-### 靜態佈建：搭配使用現有 PVC 與有狀態集
+### 靜態佈建：搭配使用現有 PVC 與有狀態集合
 {: #file_static_statefulset}
 
-您可以在使用有狀態集來建立有狀態集或使用現有 PVC 之前，預先佈建 PVC。
+您可以在使用有狀態集合來建立有狀態集合或使用現有 PVC 之前，預先佈建 PVC。
 {: shortdesc}
 
-如果您[在建立有狀態集時動態佈建 PVC](#file_dynamic_statefulset)，則會根據有狀態集 YAML 檔案中所使用的值來指派 PVC 名稱。若要讓有狀態集使用現有 PVC，則 PVC 名稱必須符合使用動態佈建時所自動建立的名稱。
+如果您[在建立有狀態集合時動態佈建 PVC](#file_dynamic_statefulset)，則會根據有狀態集合 YAML 檔案中所使用的值來指派 PVC 名稱。若要讓有狀態集合使用現有 PVC，則 PVC 名稱必須符合使用動態佈建時所自動建立的名稱。
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. 如果您要在建立有狀態集之前預先佈建 PVC，請遵循[將檔案儲存空間新增至應用程式](#add_file)中的步驟 1-3，以建立每個有狀態集抄本的 PVC。請確定您建立名稱遵循下列格式的 PVC：`<volume_name>-<statefulset_name>-<replica_number>`。
-   - **`<volume_name>`**：使用您要在有狀態集的 `spec.volumeClaimTemplates.metadata.name` 區段中指定的名稱，例如 `nginxvol`。
-   - **`<statefulset_name>`**：使用您要在有狀態集的 `metadata.name` 區段中指定的名稱，例如 `nginx_statefulset`。
+1. 如果您要在建立有狀態集合之前預先佈建 PVC，請遵循[將檔案儲存空間新增至應用程式](#add_file)中的步驟 1-3，以建立每個有狀態集合抄本的 PVC。請確定您建立名稱遵循下列格式的 PVC：`<volume_name>-<statefulset_name>-<replica_number>`。
+   - **`<volume_name>`**：使用您要在有狀態集合的 `spec.volumeClaimTemplates.metadata.name` 區段中指定的名稱，例如 `nginxvol`。
+   - **`<statefulset_name>`**：使用您要在有狀態集合的 `metadata.name` 區段中指定的名稱，例如 `nginx_statefulset`。
    - **`<replica_number>`**：輸入抄本數目，從 0 開始。
 
-   例如，如果您必須建立 3 個有狀態集抄本，請建立具有下列名稱的 3 個 PVC：`nginxvol-nginx_statefulset-0`、`nginxvol-nginx_statefulset-1` 及 `nginxvol-nginx_statefulset-2`。  
+   例如，如果您必須建立 3 個有狀態集合抄本，請建立具有下列名稱的 3 個 PVC：`nginxvol-nginx_statefulset-0`、`nginxvol-nginx_statefulset-1` 及 `nginxvol-nginx_statefulset-2`。  
 
    要為現有檔案儲存空間實例建立 PVC 和 PV 嗎？使用[靜態佈建](#existing_file)，以建立 PVC 和 PV。
    {: tip}
 
-2. 遵循[動態佈建：在建立有狀態集時建立 PVC](#file_dynamic_statefulset) 中的步驟，以建立有狀態集。PVC 名稱的格式為 `<volume_name>-<statefulset_name>-<replica_number>`。請務必使用有狀態集規格中的下列 PVC 名稱值：
+2. 遵循[動態佈建：在建立有狀態集合時建立 PVC](#file_dynamic_statefulset) 中的步驟，以建立有狀態集合。PVC 名稱的格式為 `<volume_name>-<statefulset_name>-<replica_number>`。請務必使用有狀態集合規格中的下列 PVC 名稱值：
    - **`spec.volumeClaimTemplates.metadata.name`**：輸入 PVC 名稱的 `<volume_name>`。
    - **`metadata.name`**：輸入 PVC 名稱的 `<statefulset_name>`。
-   - **`spec.replicas`**：輸入您要針對有狀態集建立的抄本數目。抄本數目必須等於您先前所建立的 PVC 數目。
+   - **`spec.replicas`**：輸入您要針對有狀態集合建立的抄本數目。抄本數目必須等於您先前所建立的 PVC 數目。
 
-   如果 PVC 位於不同的區域，請不要在有狀態集中併入地區或區域標籤。
+   如果 PVC 位於不同的區域，請不要在有狀態集合中包含地區或區域標籤。
    {: note}
 
-3. 驗證已在有狀態集抄本 Pod 中使用 PVC。
-   1. 列出叢集裡的 Pod。識別屬於有狀態集的 Pod。
+3. 驗證已在有狀態集合抄本 Pod 中使用 PVC。
+   1. 列出叢集裡的 Pod。識別屬於有狀態集合的 Pod。
       ```
       kubectl get pods
       ```
       {: pre}
 
-   2. 驗證現有 PVC 已裝載至有狀態集抄本。請檢閱 CLI 輸出之 **`Volumes`** 區段中的 **`ClaimName`**。
+   2. 驗證現有 PVC 已裝載至有狀態集合抄本。請檢閱 CLI 輸出之 **`Volumes`** 區段中的 **`ClaimName`**。
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
 
       輸出範例：
-    ```
+      ```
       Name:           nginx-0
       Namespace:      default
       Node:           10.xxx.xx.xxx/10.xxx.xx.xxx
@@ -1197,7 +1199,7 @@ $ kubectl get storageclasses
 
 <dl>
   <dt>設定定期 Snapshot</dt>
-  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。</br><strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>ibmcloud sl init</code></pre></li><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可在 CLI 輸出的 <strong>Labels</strong> 區段中找到磁區 ID、大小及 IOPS。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 輸出中的 <strong>Snapshot Size (GB)</strong> 從 0 變更為您所訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
+  <dd><p>您可以[針對檔案儲存空間設定定期 Snapshot](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots)，這是唯讀映像檔，會擷取實例在某個時間點的狀況。若要儲存 Snapshot，您必須在檔案儲存空間上要求 Snapshot 空間。Snapshot 儲存於相同區域內的現有儲存空間實例上。如果使用者不小心從磁區移除重要資料，您可以從 Snapshot 還原資料。</br><strong>若要建立磁區的 Snapshot，請執行下列動作：</strong><ol><li>[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>登入 `ibmcloud sl` CLI。<pre class="pre"><code>ibmcloud sl init</code></pre></li><li>列出叢集裡的現有 PV。<pre class="pre"><code>kubectl get pv</code></pre></li><li>取得您要建立 Snapshot 空間之 PV 的詳細資料，並記下磁區 ID、大小及 IOPS。<pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> 可在 CLI 輸出的 <strong>Labels</strong> 區段中找到磁區 ID、大小及 IOPS。</li><li>使用您在前一個步驟中擷取的參數，建立現有磁區的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>等待要建立的 Snapshot 大小。<pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>CLI 輸出中的 <strong>Snapshot Size (GB)</strong> 從 0 變更為您所訂購的大小時，即已順利佈建 Snapshot 大小。</li><li>為您的磁區建立 Snapshot，並記下為您建立的 Snapshot ID。<pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>驗證已順利建立 Snapshot。<pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>若要將資料從 Snapshot 還原至現有磁區，請執行下列動作：</strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>將 Snapshot 抄寫至另一個區域</dt>
  <dd><p>若要在發生區域故障時保護資料，您可以[將 Snapshot 抄寫](/docs/infrastructure/FileStorage?topic=FileStorage-replication#replication)至另一個區域中設定的檔案儲存空間實例。資料只能從主要儲存空間抄寫至備份儲存空間。您無法將抄寫的檔案儲存空間實例裝載至叢集。當主要儲存空間失敗時，您可以手動將抄寫的備份儲存空間設為主要儲存空間。然後，您可以將它裝載至叢集。還原主要儲存空間之後，您可以從備份儲存空間中還原資料。</p></dd>
  <dt>複製儲存空間</dt>
@@ -1207,12 +1209,12 @@ $ kubectl get storageclasses
   <p>若要讓資料有更高的可用性，並在發生區域故障時保護應用程式，請設定第二個 {{site.data.keyword.cos_full}} 實例，並在區域之間抄寫資料。如果您需要從 {{site.data.keyword.cos_full}} 實例還原資料，請使用隨該映像檔所提供的還原 Script。</p></dd>
 <dt>在 Pod 與容器之間複製資料</dt>
 <dd><p>您可以使用 `kubectl cp` [指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/kubectl/overview/#cp)，在叢集的 Pod 或特定容器之間複製檔案及目錄。</p>
-<p>開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)如果未使用 <code>-c</code> 來指定容器，則指令會使用 Pod 中第一個可用的容器。</p>
+<p>開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)如果未使用 <code>-c</code> 來指定容器，則指令會使用 Pod 中第一個可用的容器。</p>
 <p>您可以透過下列各種方式來使用指令：</p>
 <ul>
 <li>將資料從本端機器複製到叢集裡的 Pod：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
 <li>將資料從叢集裡的 Pod 複製到本端機器：<pre class="pre"><code>kubectl cp <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;/&lt;filename&gt;</var> <var>&lt;local_filepath&gt;/&lt;filename&gt;</var></code></pre></li>
-<li>將本端機器中的資料複製至叢集之 Pod 中所執行的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
+<li>將資料從本端機器複製到叢集裡的 Pod 中執行的特定容器：<pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var> -c <var>&lt;container></var></code></pre></li>
 </ul></dd>
   </dl>
 
@@ -1415,10 +1417,10 @@ $ kubectl get storageclasses
 ### 建立拓蹼察覺儲存空間
 {: #file-topology}
 
-若要在多區域叢集中使用檔案儲存空間，必須將 Pod 排定至與檔案儲存空間實例相同的區域，以讀取及寫入磁區。在 Kubernetes 引進拓蹼察覺磁區排程之前，儲存空間的動態佈建會在建立 PVC 時自動建立檔案儲存空間實例。然後，在建立 Pod 時，Kubernetes 排程器會嘗試將 Pod 部署至與檔案儲存空間實例相同的資料中心內的工作者節點。
+若要在多區域叢集裡使用檔案儲存空間，必須將 Pod 排定至與檔案儲存空間實例相同的區域，以讀取及寫入磁區。在 Kubernetes 引進拓蹼察覺磁區排程之前，儲存空間的動態佈建會在建立 PVC 時自動建立檔案儲存空間實例。然後，在建立 Pod 時，Kubernetes 排程器會嘗試將 Pod 部署至與檔案儲存空間實例相同的資料中心內的工作者節點。
 {: shortdesc}
 
-在不瞭解 Pod 限制的情況下，建立檔案儲存空間實例可能會導致不想要的結果。例如，Pod 可能無法排定至與儲存空間相同的工作者節點，因為工作者節點的資源不足，或者工作者節點受到污染，而且不容許排定 Pod。使用拓蹼察覺磁區排程時，除非建立可使用儲存空間的第一個 Pod，否則會延遲檔案儲存空間實例。
+在不瞭解 Pod 限制的情況下，建立檔案儲存空間實例可能會導致不想要的結果。例如，Pod 可能無法排定至與儲存空間相同的工作者節點，因為工作者節點的資源不足，或者工作者節點有污點，而且不容許排定 Pod。使用拓蹼察覺磁區排程時，除非建立可使用儲存空間的第一個 Pod，否則會延遲檔案儲存空間實例。
 
 只有在執行 Kubernetes 1.12 版或更新版本的叢集上，才支援拓蹼察覺磁區排程。
 {: note}

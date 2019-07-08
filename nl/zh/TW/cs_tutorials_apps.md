@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # 指導教學：將應用程式部署至 Kubernetes 叢集
@@ -36,7 +36,7 @@ subcollection: containers
 
 <img src="images/cs_app_tutorial_mz-roadmap.png" width="700" alt="課程元件" style="width:700px; border-style: none"/>
 
-如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集中開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包含應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有指定數目的 Pod 已啟動並在執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
+如圖所示，Kubernetes 使用數個不同類型的資源來讓您的應用程式在叢集裡開始執行。在 Kubernetes 中，部署及服務會一起運作。部署包含應用程式的定義。例如，用於容器的映像檔，以及必須為應用程式公開哪個埠。當您建立部署時，會針對您在部署中定義的每一個容器各建立一個 Kubernetes Pod。為了讓您的應用程式更具復原力，您可以在部署中定義相同應用程式的多個實例，並且讓 Kubernetes 自動為您建立抄本集。抄本集會監視 Pod，並確保隨時都有指定數目的 Pod 已啟動並在執行中。如果其中一個 Pod 變得沒有回應，就會自動重建該 Pod。
 
 服務會將一組 Pod 分組在一起，並且為叢集裡的其他服務提供這些 Pod 的網路連線，而不需公開每一個 Pod 的實際專用 IP 位址。您可以使用 Kubernetes 服務，讓叢集內的其他 Pod 能夠使用應用程式，或是將應用程式公開給網際網路使用。在本指導教學中，您使用 Kubernetes 服務，透過使用自動指派給工作者節點的公用 IP 位址以及公用埠，從網際網路存取執行中的應用程式。
 
@@ -49,7 +49,7 @@ subcollection: containers
 
 * 瞭解基本的 Kubernetes 術語
 * 將映像檔推送至 {{site.data.keyword.registryshort_notm}} 中的登錄名稱空間
-* 讓應用程式可供公開存取
+* 讓應用程式可使用公用方式存取
 * 使用 Kubernetes 指令及 Script 將應用程式的單一實例部署在叢集
 * 將應用程式的多個實例部署在性能檢查期間重建的容器
 * 部署使用 {{site.data.keyword.Bluemix_notm}} 服務功能的應用程式
@@ -100,7 +100,7 @@ subcollection: containers
     ```
     {: pre}
 
-3. [登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+3. [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 5.  登入 {{site.data.keyword.registryshort_notm}} CLI。
 
@@ -117,10 +117,10 @@ subcollection: containers
 
 6.  建置 Docker 映像檔，其包括 `Lab 1` 目錄的應用程式檔案，並將映像檔推送至您在前一個指導教學中建立的 {{site.data.keyword.registryshort_notm}} 名稱空間。如果您未來需要對應用程式進行變更，請重複這些步驟，以建立另一個版本的映像檔。**附註**：進一步瞭解使用容器映像檔時如何[保護個人資訊安全](/docs/containers?topic=containers-security#pi)。
 
-    在映像檔名稱中，只可使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。若要取得您目前所在地區的地區字首，請執行 `ibmcloud api`。例如，達拉斯位置，美國南部地區字首為 `ng`。
+    在映像檔名稱中，只可使用小寫英數字元或底線 (`_`)。請不要忘記指令尾端的句點 (`.`)。這個句點告訴 Docker 要在現行目錄中尋找 Dockerfile 及建置構件，以建置映像檔。若要取得您目前所在的登錄地區，請執行 `ibmcloud cr region`。
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:1 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
     ```
     {: pre}
 
@@ -128,8 +128,8 @@ subcollection: containers
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -143,7 +143,7 @@ subcollection: containers
 7.  部署可用來管理 Pod，而 Pod 中包括應用程式的容器化實例。下列指令會將應用程式部署在某個單一 Pod 中。基於本指導教學的目的，部署命名為 **hello-world-deployment**，但您可以將部署改為任何您想要的名稱。
 
     ```
-    kubectl run hello-world-deployment --image=registry.<region>.bluemix.net/<namespace>/hello-world:1
+    kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
     {: pre}
 
@@ -243,7 +243,7 @@ subcollection: containers
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.12.7
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
         ```
         {: screen}
 
@@ -266,7 +266,7 @@ subcollection: containers
 
 做得好！您已部署第一個應用程式版本。
 
-本課程中有太多指令？同意。那麼使用配置 Script 來為您執行某些工作怎麼樣呢？若要為第二個應用程式版本使用配置 Script，以及部署該應用程式的多個實例來建立較高的可用性，請繼續進行下一個課程。
+本課程中有太多指令？同意。則使用配置 Script 來為您執行某些工作怎麼樣呢？若要為第二個應用程式版本使用配置 Script，以及部署該應用程式的多個實例來建立較高的可用性，請繼續進行下一個課程。
 
 <br />
 
@@ -297,7 +297,7 @@ subcollection: containers
 3.  在 {{site.data.keyword.registryshort_notm}} 中，建置、標記並將應用程式當作映像檔推送至您的名稱空間。同樣地，不要忘記指令尾端的句點 (`.`)。
 
     ```
-    ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/hello-world:2 .
+    ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
     {: pre}
 
@@ -305,8 +305,8 @@ subcollection: containers
 
     ```
     Successfully built <image_ID>
-    Successfully tagged registry.<region>.bluemix.net/<namespace>/hello-world:1
-    The push refers to a repository [registry.<region>.bluemix.net/<namespace>/hello-world]
+    Successfully tagged <region>.icr.io/<namespace>/hello-world:1
+    The push refers to a repository [<region>.icr.io/<namespace>/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -321,7 +321,7 @@ subcollection: containers
     1. 在專用登錄名稱空間中更新映像檔的詳細資料。
 
         ```
-        image: "registry.<region>.bluemix.net/<namespace>/hello-world:2"
+        image: "<region>.icr.io/<namespace>/hello-world:2"
         ```
         {: codeblock}
 
@@ -386,7 +386,7 @@ subcollection: containers
   ```
   {: screen}
 
-7.  檢查您的 Pod 狀態，以監視您在 Kubernetes 中應用程式的性能。您可以從 CLI 或在 Kubernet 儀表板中檢查狀態。
+7.  檢查您的 Pod 狀態，以監視您在 Kubernetes 中應用程式的性能。您可以從 CLI 或在 Kubernetes 儀表板中檢查狀態。
 
     *  **從 CLI**：監視在 Pod 變更狀態時所發生的事情。
        ```
@@ -463,7 +463,7 @@ subcollection: containers
     2.  在 {{site.data.keyword.registryshort_notm}} 中，建置、標記並將 `watson` 應用程式當作映像檔推送至您的名稱空間。同樣地，不要忘記指令尾端的句點 (`.`)。
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```
         {: pre}
 
@@ -486,7 +486,7 @@ subcollection: containers
     2.  在 {{site.data.keyword.registryshort_notm}} 中，建置、標記並將 `watson-talk` 應用程式當作映像檔推送至您的名稱空間。同樣地，不要忘記指令尾端的句點 (`.`)。
 
         ```
-        ibmcloud cr build -t registry.<region>.bluemix.net/<namespace>/watson-talk .
+        ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```
         {: pre}
 
@@ -509,11 +509,11 @@ subcollection: containers
     ```
     Listing images...
 
-    REPOSITORY                                      NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
-    registry.ng.bluemix.net/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
-    registry.ng.bluemix.net/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
-    registry.ng.bluemix.net/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
+    REPOSITORY                        NAMESPACE  TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS
+    us.icr.io/namespace/hello-world   namespace  1        0d90cb732881   40 minutes ago  264 MB   OK
+    us.icr.io/namespace/hello-world   namespace  2        c3b506bdf33e   20 minutes ago  264 MB   OK
+    us.icr.io/namespace/watson        namespace  latest   fedbe587e174   3 minutes ago   274 MB   OK
+    us.icr.io/namespace/watson-talk   namespace  latest   fedbe587e174   2 minutes ago   274 MB   OK
     ```
     {: screen}
 
@@ -524,14 +524,14 @@ subcollection: containers
         watson：
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson"
+        image: "<region>.icr.io/namespace/watson"
         ```
         {: codeblock}
 
         watson-talk：
 
         ```
-        image: "registry.<region>.bluemix.net/namespace/watson-talk"
+        image: "<region>.icr.io/namespace/watson-talk"
         ```
         {: codeblock}
 
@@ -564,7 +564,7 @@ subcollection: containers
 
 8.  選用項目：驗證 {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} 密碼已作為磁區裝載至 Pod。
 
-    1.  若要取得 watson pod 的名稱，請執行下列指令。
+    1.  若要取得 watson Pod 的名稱，請執行下列指令。
 
         ```
         kubectl get pods
@@ -637,7 +637,7 @@ subcollection: containers
     ```
     spec:
           containers:
-          - image: registry.<region>.bluemix.net/ibmliberty:latest
+          - image: <region>.icr.io/ibmliberty:latest
     ```
     {: codeblock}
 

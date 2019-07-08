@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.cloud_notm}} 的交通工具使用案例
@@ -129,7 +129,7 @@ HR Exec (CHRO) 需要具有創新聊天機器人的新 HR 權益網站，但現�
 為何要使用 {{site.data.keyword.cloud_notm}}：{{site.data.keyword.containerlong_notm}} 提供輕鬆地啟動運算。然後，「開發人員」可以輕鬆地進行實驗，並使用開放式工具鏈將變更快速推送至「開發」及「測試」系統。他們的傳統軟體開發工具會在加入 IBM Watson Assistant 時得到提升。新的權益網站是在 3 週內建立。
 
 重要技術：    
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [採用 Watson 技術的聊天機器人服務](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

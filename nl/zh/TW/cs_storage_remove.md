@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # 從叢集移除持續性儲存空間
 {: #cleanup}
 
-當您在叢集裡設定持續性儲存空間時，有三個主要元件：要求儲存空間的 Kubernetes 持續性磁區要求 (PVC)、裝載至 Pod 並在 PVC 中說明的 Kubernetes 持續性磁區 (PV)，以及 IBM Cloud 基礎架構 (SoftLayer) 實例，例如 NFS 檔案或區塊儲存空間。視您建立這些元件的方式而定，您可能需要個別刪除這三項。
+當您在叢集裡設定持續性儲存空間時，有三個主要元件：要求儲存空間的 Kubernetes 持續性磁區要求 (PVC)、裝載至 Pod 並在 PVC 中說明的 Kubernetes 持續性磁區 (PV)，以及 IBM Cloud 基礎架構 (SoftLayer) 實例，例如 NFS 檔案或區塊儲存空間。所有這三個項目可能需要分別刪除，具體取決於儲存空間的建立方式。
 {:shortdesc}
 
 ## 清除持續性儲存空間
@@ -43,12 +45,12 @@ subcollection: containers
 在所有其他情況下，請遵循指示來檢查 PVC、PV 及實體儲存裝置的狀態，並在需要時個別刪除它們。
 
 **刪除儲存空間之後，我是否仍然需要為其付費？**</br>
-這取決於您刪除的項目和計費類型。如果您刪除 PVC 及 PV，但未刪除 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實例，則該實例仍會存在，並且您仍要為其付費。您必須刪除所有項目，才能避免費用。此外，在 PVC 中指定 `billingType` 時，您可以選擇 `hourly` 或 `monthly`。如果您選擇 `monthly`，則您的實例是按月計費。刪除實例時，您需要為當月的剩餘時間付費。
+這取決於您刪除的項目和計費類型。如果您刪除 PVC 及 PV，但未刪除 IBM Cloud 基礎架構 (SoftLayer) 帳戶中的實例，則該實例仍會存在，並且您仍要為其付費。您必須刪除所有項目，才能避免費用。此外，在 PVC 中指定 `billingType` 時，您可以選擇 `hourly` 或 `monthly`。如果您選擇 `monthly`，則您的實例是依月計費。刪除實例時，您需要為當月的剩餘時間付費。
 
 
 <p class="important">清除持續性儲存空間時，也會刪除其中儲存的所有資料。如果您需要資料的副本，請備份[檔案儲存空間](/docs/containers?topic=containers-file_storage#file_backup_restore)或[區塊儲存空間](/docs/containers?topic=containers-block_storage#block_backup_restore)。</p>
 
-開始之前：[登入您的帳戶。將目標設為適當的地區及（如果適用的話）資源群組。設定叢集的環境定義](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
+開始之前：[登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 若要清除持續性資料，請執行下列動作：
 
@@ -75,7 +77,7 @@ subcollection: containers
 
    如果收回原則指明為 `Delete`，則在您移除 PVC 時，也會移除 PV 及實體儲存空間。如果收回原則指明為 `Retain`，或如果您已佈建儲存空間，但沒有儲存空間類別，則在您移除 PVC 時，不會移除 PV 及實體儲存空間。您必須個別移除 PVC、PV 及實體儲存空間。
 
-   如果您的儲存空間採取按月計費，則即使您在計費週期結束之前移除儲存空間，您仍需為整個月付費。
+   如果儲存空間依月收費，即使在計費週期結束之前已移除儲存空間，也仍需要依整月付費。
    {: important}
 
 3. 移除任何裝載 PVC 的 Pod。
@@ -117,7 +119,7 @@ subcollection: containers
    ```
    {: pre}
 
-   移除 PVC 時，會釋放連結至 PVC 的 PV。視佈建儲存空間的方式而定，如果自動刪除 PV，您的 PV 會進入 `Deleting` 狀況，或者如果您必須手動刪除 PV，則 PV 會進入 `Released` 狀況。**附註**：若為自動刪除的 PV，則在刪除它之前，狀況可能短暫地顯示為 `Released`。在幾分鐘之後重新執行指令，以查看是否已移除 PV。
+   移除 PVC 時，會釋放連結至 PVC 的 PV。視佈建儲存空間的方式而定，如果自動刪除 PV，您的 PV 會進入 `Deleting` 狀況，或者如果您必須手動刪除 PV，則 PV 會進入 `Released` 狀況。**附註**：若為自動刪除的 PV，則在刪除它之前，狀況可能短暫地顯示為 `Released`。請在幾分鐘後重新執行該指令以查看該 PV 是否已移除。
 
 6. 如果 PV 未刪除，請手動移除 PV。
    ```
@@ -178,7 +180,7 @@ subcollection: containers
    ```
    {: pre}
 
-9. 驗證已移除實體儲存空間實例。請注意，刪除處理程序可能需要幾天才能完成。
+9. 驗證已移除實體儲存空間實例。刪除程序最長可能需要幾天時間才能完成。
 
    **檔案儲存空間：**
    ```

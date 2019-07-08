@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 
@@ -31,7 +31,7 @@ subcollection: containers
 您可以使用 {{site.data.keyword.containerlong}} CLI 或 API 來建立及管理 Kubernetes 叢集。
 {:shortdesc}
 
-## 安裝 CLI
+## 安裝 IBM Cloud CLI 和外掛程式
 {: #cs_cli_install_steps}
 
 安裝必要 CLI 以在 {{site.data.keyword.containerlong_notm}} 中建立及管理 Kubernetes 叢集，並且將容器化應用程式部署至叢集。
@@ -39,10 +39,9 @@ subcollection: containers
 
 此作業包括安裝這些 CLI 及外掛程式的資訊：
 
-- {{site.data.keyword.Bluemix_notm}} CLI 
-- {{site.data.keyword.containerlong_notm}} 外掛程式
-- {{site.data.keyword.registryshort_notm}} 外掛程式
-- 符合叢集 `major.minor` 版本的 Kubernetes CLI 版本
+-   {{site.data.keyword.Bluemix_notm}} CLI 
+-   {{site.data.keyword.containerlong_notm}} 外掛程式
+-   {{site.data.keyword.registryshort_notm}} 外掛程式
 
 如果您要改用 {{site.data.keyword.Bluemix_notm}} 主控台，則在建立叢集之後，您可以在 [Kubernetes Terminal](#cli_web) 中從 Web 瀏覽器直接執行 CLI 指令。
 {: tip}
@@ -52,76 +51,140 @@ subcollection: containers
 
 
 
-1. 安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq)。此安裝包括：
-  - 基本 {{site.data.keyword.Bluemix_notm}} CLI。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud`。
-  - {{site.data.keyword.containerlong_notm}} 外掛程式。使用 {{site.data.keyword.Bluemix_notm}} CLI 來執行指令的字首是 `ibmcloud ks`。
-  - {{site.data.keyword.registryshort_notm}} 外掛程式。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。執行登錄指令的字首是 `ibmcloud cr`。
+1.  安裝 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-getting-started#idt-prereq)。此安裝包括：
+    -   基本 {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)。
+    -   {{site.data.keyword.containerlong_notm}} 外掛程式 (`ibmcloud ks`)。
+    -   {{site.data.keyword.registryshort_notm}} 外掛程式 (`ibmcloud cr`)。您可以使用此外掛程式，在多方承租戶、高可用性並且由 IBM 所管理的可擴充專用映像檔登錄中設定您自己的名稱空間，以及儲存 Docker 映像檔，並將其與其他使用者共用。需要有 Docker 映像檔，才能將容器部署至叢集。
+    -   Kubernetes CLI (`kubectl`)，與預設版本 1.13.6 相符合。<p class="note">如果計劃使用執行其他版本的叢集，則可能需要[個別安裝該版本的 Kubernetes CLI](#kubectl)。如果您有 (OpenShift) 叢集，請[同時安裝 `oc` 和 `kubectl` CLI](#cli_oc)。</p>
+    -   Helm CLI (`helm`)。可以將 Helm 用作套件管理程式，以透過 Helm 圖表將 {{site.data.keyword.Bluemix_notm}} 服務和複雜應用程式安裝到叢集。但仍必須在要使用 Helm 的每個叢集裡[設定 Helm](/docs/containers?topic=containers-helm)。
 
-  計劃要使用很多 CLI 嗎？請嘗試[啟用 {{site.data.keyword.Bluemix_notm}} CLI 的 Shell 自動完成（僅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
+    計劃要使用很多 CLI 嗎？請嘗試[啟用 {{site.data.keyword.Bluemix_notm}} CLI 的 Shell 自動完成（僅限 Linux/MacOS）](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux)。
     {: tip}
 
-2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
-  ```
-  ibmcloud login
-  ```
-  {: pre}
+2.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
+    ```
+    ibmcloud login
+    ```
+    {: pre}
 
-  如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
+    如果您具有聯合 ID，請使用 `ibmcloud login --sso` 來登入 {{site.data.keyword.Bluemix_notm}} CLI。請輸入使用者名稱，並使用 CLI 輸出中提供的 URL 來擷取一次性密碼。若沒有 `--sso` 時登入失敗，而有 `--sso` 選項時登入成功，即表示您有聯合 ID。
     {: tip}
 
-3. 驗證已正確安裝外掛程式。
-  ```
-  ibmcloud plugin list
-  ```
-  {: pre}
+3.  驗證 {{site.data.keyword.containerlong_notm}} 外掛程式和 {{site.data.keyword.registryshort_notm}} 外掛程式是否已正確安裝。
+    ```
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-  {{site.data.keyword.containerlong_notm}} 外掛程式會在結果中顯示為 **container-service**，而 {{site.data.keyword.registryshort_notm}} 外掛程式會在結果中顯示為 **container-registry**。
+    輸出範例：
+    ```
+    Listing installed plug-ins...
 
-4. {: #kubectl}若要檢視本端版本的 Kubernetes 儀表板，以及將應用程式部署至叢集，請[安裝 Kubernetes CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/)。使用 Kubernetes CLI 來執行指令的字首是 `kubectl`。
-
-  最新穩定版本的 `kubectl` 會隨著基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安裝。不過，若要使用叢集，您必須改為安裝與您計劃使用之 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。請確定 Kubernetes 叢集和 CLI 版本保持最新。
-        {: important}
-
-  1. 下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.12.7。
-    - **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**：將 Kubernetes CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，此設定可為您省去一些檔案路徑變更。[https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
-
-  2. 如果您是使用 OS X 或 Linux，請完成下列步驟。
-    1. 將執行檔移至 `/usr/local/bin` 目錄。
-      ```
-      mv /filepath/kubectl /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-    2. 確定 `/usr/local/bin` 列在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
-      ```
-      echo $PATH
-      ```
-      {: pre}
-      CLI 輸出範例：
-      ```
-      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-      ```
-      {: screen}
-
-    3. 使檔案成為可執行檔。
-      ```
-      chmod +x /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-接下來，開始[使用 {{site.data.keyword.containerlong_notm}} 從 CLI 建立 Kubernetes 叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
+    Plugin Name                            Version   Status        
+    container-registry                     0.1.373     
+    container-service/kubernetes-service   0.3.23   
+    ```
+    {: screen}
 
 如需這些 CLI 的相關參考資訊，請參閱那些工具的文件。
 
 -   [`ibmcloud` 指令](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
--   [`ibmcloud ks` 指令](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`ibmcloud cr` 指令](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
--   [`kubectl` 指令 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)
+-   [`ibmcloud ks` 指令](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
+-   [`ibmcloud cr` 指令](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
+
+## 安裝 Kubernetes CLI (`kubectl`)
+{: #kubectl}
+
+若要檢視 Kubernetes 儀表板的本端版本以及將應用程式部署到叢集，請安裝 Kubernetes CLI (`kubectl`)。最新穩定版本的 `kubectl` 會隨著基本 {{site.data.keyword.Bluemix_notm}} CLI 一起安裝。不過，若要使用叢集，您必須改為安裝與您計劃使用之 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。如果您使用的 `kubectl` CLI 版本未至少符合叢集的 `major.minor` 版本，則您可能會看到非預期的結果。例如，[Kubernetes 不支援 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/setup/version-skew-policy/) 比伺服器版本高/低 2 個或更多版本 (n +/- 2) 的 `kubectl` 用戶端版本。請確定 Kubernetes 叢集和 CLI 版本保持最新。
+{: shortdesc}
+
+正在使用 OpenShift 叢集嗎？請改為安裝 OpenShift Origin CLI (`oc`)，該 CLI 隨附 `kubectl`。如果同時有 Red Hat OpenShift on IBM Cloud 和 Ubuntu 原生 {{site.data.keyword.containershort_notm}} 叢集，請確保使用與叢集 `major.minor` Kubernetes 版本符合的 `kubectl` 二進位檔。
+{: tip}
+
+1.  如果您已具有叢集，請檢查用戶端 `kubectl` CLI 的版本是否與叢集 API 伺服器的版本相符合。
+    1.  [登入您的帳戶。適用的話，請將適當的資源群組設為目標。設定叢集的環境定義。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  比較用戶端和伺服器版本。如果用戶端與伺服器不符合，請繼續執行下一步。如果版本符合，說明您已安裝正確版本的 `kubectl`。
+        ```
+    kubectl version  --short
+    ```
+        {: pre}
+2.  下載與您計劃使用的 Kubernetes 叢集 `major.minor` 版本相符的 Kubernetes CLI `major.minor` 版本。現行 {{site.data.keyword.containerlong_notm}} 預設 Kubernetes 版本為 1.13.6。
+    -   **OS X**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    -   **Linux**：[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    -   **Windows**：將 Kubernetes CLI 安裝在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中。當您稍後執行指令時，這項設定可為您省去一些檔案路徑變更。[https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
+
+3.  如果您使用 OS X 或 Linux，請完成下列步驟。
+    1.  將執行檔移至 `/usr/local/bin` 目錄。
+      ```
+        mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  確定 `/usr/local/bin` 列出在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
+      ```
+      echo $PATH
+      ```
+        {: pre}
+      CLI 輸出範例：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+        {: screen}
+
+    3.  使檔案成為可執行檔。
+      ```
+      chmod +x /usr/local/bin/kubectl
+      ```
+        {: pre}
+4.  **選用性**：[啟用 `kubectl` 指令的自動完成 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。步驟會視您使用的 Shell 而變。
+
+接下來，開始[使用 {{site.data.keyword.containerlong_notm}} 透過 CLI 建立 Kubernetes 叢集](/docs/containers?topic=containers-clusters#clusters_cli_steps)。
+
+如需 Kubernetes CLI 的相關資訊，請參閱 [`kubectl` 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)。
+{: note}
 
 <br />
 
+
+## 安裝 OpenShift Origin CLI (`oc`) 預覽測試版
+{: #cli_oc}
+
+[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) 以測試版形式提供，用來測試 OpenShift 叢集。
+{: preview}
+
+若要檢視 OpenShift 儀表板的本端版本以及將應用程式部署到 Red Hat OpenShift on IBM Cloud 叢集，請安裝 OpenShift CLI (`oc`)。`oc` CLI 包含符合版本的 Kubernetes CLI (`kubectl`)。如需相關資訊，請參閱 [OpenShift 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html)。
+{: shortdesc}
+
+同時使用 Red Hat OpenShift on IBM Cloud 和 Ubuntu 原生 {{site.data.keyword.containershort_notm}} 叢集嗎？`oc` CLI 隨附 `oc` 和 `kubectl` 二進位檔，但不同叢集可能執行不同版本的 Kubernetes，例如 OpenShift 上執行 1.11，Ubuntu 上執行 1.13.6。確保使用與叢集 `major.minor` Kubernetes 版本符合的 `kubectl` 二進位檔。
+{: note}
+
+1.  根據本端作業系統和 OpenShift 版本，[下載 OpenShift Origin CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.okd.io/download.html)。現行預設 OpenShift 版本為 3.11。
+
+2.  如果使用訊息鑑別碼 OS 或 Linux，請完成下列步驟將二進位檔新增到 `PATH` 系統變數。如果使用 Windows，請將 `oc` CLI 安裝在 {{site.data.keyword.Bluemix_notm}} CLI 所在的目錄中。當您稍後執行指令時，這項設定可為您省去一些檔案路徑變更。
+    1.  將 `oc` 和 `kubectl` 執行檔移至 `/usr/local/bin` 目錄。
+        ```
+        mv /<filepath>/oc /usr/local/bin/oc && mv /<filepath>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  確定 `/usr/local/bin` 列出在 `PATH` 系統變數中。`PATH` 變數包含作業系統可在其中找到執行檔的所有目錄。`PATH` 變數中所列的目錄用於不同的用途。`/usr/local/bin` 是用來儲存軟體的執行檔，該軟體不是作業系統的一部分，並且已由系統管理者手動安裝。
+      ```
+      echo $PATH
+      ```
+        {: pre}
+      CLI 輸出範例：
+      ```
+      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+      ```
+        {: screen}
+3.  **選用性**：[啟用 `kubectl` 指令的自動完成 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。步驟會視您使用的 Shell 而變。可以重複這些步驟來啟用 `oc` 指令的自動完成。例如，在 Linux 上的 bash 中，可以執行 `oc completion bash >/etc/bash_completion.d/oc_completion`，以代替 `kubectl completion bash >/etc/bash_completion.d/kubectl`。
+
+接下來，開始[建立 Red Hat OpenShift on IBM Cloud 叢集（預覽）](/docs/containers?topic=containers-openshift_tutorial)。
+
+如需 OpenShift Origin CLI 的相關資訊，請參閱 [`oc` 指令文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html)。
+{: note}
+
+<br />
 
 
 ## 在電腦上的容器中執行 CLI
@@ -130,7 +193,7 @@ subcollection: containers
 不是在您的電腦上個別安裝每一個 CLI，而是您可以將 CLI 安裝至在您電腦上執行的容器。
 {:shortdesc}
 
-開始之前，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)，以在本端建置並執行映像檔。如果您使用的是 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
+開始之前，請[安裝 Docker ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.docker.com/community-edition#/download)，以在本端建置並執行映像檔。如果您使用 Windows 8 或更早版本，則可以改為安裝 [Docker Toolbox ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://docs.docker.com/toolbox/toolbox_install_windows/)。
 
 1. 從提供的 Dockerfile 建立映像檔。
 
@@ -158,17 +221,17 @@ subcollection: containers
 您可以使用 Kubernetes CLI 隨附的指令來管理 {{site.data.keyword.Bluemix_notm}} 中的叢集。
 {:shortdesc}
 
-支援 Kubernetes 1.12.7 中所有可用的 `kubectl` 指令與 {{site.data.keyword.Bluemix_notm}} 中的叢集搭配使用。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
+支援 Kubernetes 1.13.6 中可用的所有 `kubectl` 指令用於 {{site.data.keyword.Bluemix_notm}} 中的叢集。建立叢集之後，使用環境變數將本端 CLI 的環境定義設定為該叢集。然後，您可以執行 Kubernetes `kubectl` 指令，在 {{site.data.keyword.Bluemix_notm}} 中使用您的叢集。
 
 
 在可以執行 `kkbectl` 指令之前，請執行下列動作：
 * [安裝必要的 CLI](#cs_cli_install)。
-* [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli)。
+* [建立叢集](/docs/containers?topic=containers-clusters#clusters_cli_steps)。
 * 請確定已經具有[服務角色](/docs/containers?topic=containers-users#platform)來授與適當的 Kubernetes RBAC 角色，以便您可以使用 Kubernetes 資源。如果您只有服務角色而無平台角色，您需要叢集管理者為您提供叢集名稱和 ID，或提供**檢視者**平台角色來列出叢集。
 
 若要使用 `kubectl` 指令，請執行下列動作：
 
-1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
+1.  登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
 
     ```
     ibmcloud login
@@ -186,24 +249,17 @@ subcollection: containers
     ```
     {: pre}
 
-4.  若要在先前所選取 {{site.data.keyword.Bluemix_notm}} 地區以外的地區中建立或存取 Kubernetes 叢集，請將此地區設為目標。
-    ```
-    ibmcloud ks region-set
-    ```
-    {: pre}
-
-5.  列出帳戶中的所有叢集，以取得叢集的名稱。如果您只有 {{site.data.keyword.Bluemix_notm}} IAM 服務角色，無法檢視叢集，請要求叢集管理者提供 IAM 平台**檢視者**角色，或是叢集名稱和 ID。
+4.  列出帳戶中的所有叢集，以取得叢集的名稱。如果您只有 {{site.data.keyword.Bluemix_notm}} IAM 服務角色，無法檢視叢集，請要求叢集管理者提供 IAM 平台**檢視者**角色，或是叢集名稱和 ID。
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-6.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
-    1.  讓指令設定環境變數，並下載 Kubernetes 配置檔。
-
+5.  將您建立的叢集設為此階段作業的環境定義。請在您每次使用叢集時，完成下列配置步驟。
+    1.  取得指令來設定環境變數，並下載 Kubernetes 配置檔。<p class="tip">正在使用 Windows PowerShell 嗎？請包含 `--powershell` 旗標，以取得 Windows PowerShell 格式的環境變數。</p>
         ```
-        ibmcloud ks cluster-config <cluster_name_or_ID>
+        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -221,10 +277,7 @@ subcollection: containers
         **Mac 或 Linux 使用者**：不執行 `ibmcloud ks cluster-config` 指令及複製 `KUBECONFIG` 環境變數，您可以改為執行 `ibmcloud ks cluster-config --export <cluster-name>`。根據您的 Shell，您可以透過執行 `eval $(ibmcloud ks cluster-config --export) <cluster-name>)`  來設定 Shell。
         {: tip}
 
-        **Windows PowerShell 使用者**：不要從 `ibmcloud ks cluster-config` 的輸出中複製並貼上 `SET` 指令，例如，您必須改為執行 `$env:KUBECONFIG = "C:\Users\<user_name>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"` 來設定 `KUBECONCONFIG` 環境變數。
-        {:tip}
-
-    3.  驗證 `KUBECONFIG` 環境變數已適當設定。
+    3.  驗證已適當地設定 `KUBECONFIG` 環境變數。
 
         範例：
 
@@ -239,7 +292,7 @@ subcollection: containers
         ```
         {: screen}
 
-7.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
+6.  檢查 Kubernetes CLI 伺服器版本，驗證叢集已適當地執行 `kubectl` 指令。
 
     ```
     kubectl version  --short
@@ -249,17 +302,19 @@ subcollection: containers
     輸出範例：
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
 您現在可以執行 `kubectl` 指令，以在 {{site.data.keyword.Bluemix_notm}} 中管理叢集。如需完整指令清單，請參閱 [Kubernetes 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubectl.docs.kubernetes.io/)。
 
-**提示：**如果您使用的是 Windows，但未在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI，則必須將目錄切換至 Kubernetes CLI 安裝所在的路徑，才能順利執行 `kubectl` 指令。
+**提示：**如果您使用 Windows，但未在與 {{site.data.keyword.Bluemix_notm}} CLI 相同的目錄中安裝 Kubernetes CLI，則必須將目錄切換至 Kubernetes CLI 安裝所在的路徑，才能順利執行 `kubectl` 指令。
 
 
 <br />
+
+
 
 
 ## 更新 CLI
@@ -272,15 +327,15 @@ subcollection: containers
 
 -   {{site.data.keyword.Bluemix_notm}} CLI 0.8.0 版或更新版本
 -   {{site.data.keyword.containerlong_notm}} 外掛程式
--   Kubernetes CLI 1.12.7 版或更新版本
+-   Kubernetes CLI 1.13.6 版或更新版本
 -   {{site.data.keyword.registryshort_notm}} 外掛程式
 
 <br>
 若要更新 CLI，請執行下列動作：
 
-1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli)，並執行安裝程式。
+1.  更新 {{site.data.keyword.Bluemix_notm}} CLI。下載[最新版本 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-getting-started)，並執行安裝程式。
 
-2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。若要指定 {{site.data.keyword.Bluemix_notm}} 地區，請[包括 API 端點](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)。
+2. 登入 {{site.data.keyword.Bluemix_notm}} CLI。系統提示時，請輸入您的 {{site.data.keyword.Bluemix_notm}} 認證。
 
     ```
     ibmcloud login
@@ -383,10 +438,10 @@ subcollection: containers
 Kubernetes Terminal 容許您使用 {{site.data.keyword.Bluemix_notm}} CLI 直接從 Web 瀏覽器管理叢集。
 {: shortdesc}
 
-Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 附加程式，而且可能會因使用者意見及進一步測試而變更。請不要在正式作業叢集中使用此特性，以避免非預期的負面影響。
+Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 附加程式，而且可能會因使用者意見及進一步測試而變更。請不要在正式作業叢集裡使用此特性，以避免非預期的負面影響。
 {: important}
 
-如果您在 {{site.data.keyword.Bluemix_notm}} 主控台中使用叢集儀表板來管理叢集，但要快速進行更進階的配置變更，則現在可以在 Kubernetes Terminal 中從 Web 瀏覽器直接執行 CLI 指令。Kubernetes Terminal 是使用基礎 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-ibmcloud-cli)、{{site.data.keyword.containerlong_notm}} 外掛程式及 {{site.data.keyword.registryshort_notm}} 外掛程式所啟用。此外，終端機環境定義已設為您正在使用的叢集，因此，您可以執行 Kubernetes `kubectl` 指令來使用叢集。
+如果您在 {{site.data.keyword.Bluemix_notm}} 主控台中使用叢集儀表板來管理叢集，但要快速進行更進階的配置變更，則現在可以在 Kubernetes Terminal 中從 Web 瀏覽器直接執行 CLI 指令。Kubernetes Terminal 是使用基礎 [{{site.data.keyword.Bluemix_notm}} CLI ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/cli?topic=cloud-cli-getting-started)、{{site.data.keyword.containerlong_notm}} 外掛程式及 {{site.data.keyword.registryshort_notm}} 外掛程式所啟用。此外，終端機環境定義已設為您正在使用的叢集，因此，您可以執行 Kubernetes `kubectl` 指令來使用叢集。
 
 您在本端下載及編輯的所有檔案（例如 YAML 檔案）都會暫時儲存在 Kubernetes Terminal 中，而且不會在階段作業之間持續保存。
 {: note}
@@ -394,7 +449,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 若要安裝及啟動 Kubernetes Terminal，請執行下列動作：
 
 1.  登入 [{{site.data.keyword.Bluemix_notm}} 主控台](https://cloud.ibm.com/)。
-2.  從功能表列中，選取您要使用的帳戶。
+2.  從功能表列，選取您要使用的帳戶。
 3.  從功能表 ![「功能表」圖示](../icons/icon_hamburger.svg "「功能表」圖示") 中，按一下 **Kubernetes**。
 4.  在**叢集**頁面上，按一下您要存取的叢集。
 5.  從叢集詳細資料頁面中，按一下**終端機**按鈕。
@@ -416,7 +471,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 
 若要向 {{site.data.keyword.containerlong_notm}} 進行鑑別，您必須提供以 {{site.data.keyword.Bluemix_notm}} 認證產生且包含建立叢集所在 {{site.data.keyword.Bluemix_notm}} 帳戶 ID 的 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 記號。取決於您向 {{site.data.keyword.Bluemix_notm}} 進行鑑別的方式，您可以在下列選項之間進行選擇，以自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號。
 
-您也可以使用 [API Swagger JSON 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api-json) 來產生可在自動化工作期間與 API 互動的用戶端。
+您也可以使用 [API Swagger JSON 檔案 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json) 來產生可在自動化工作期間與 API 互動的用戶端。
 {: tip}
 
 <table summary="ID 類型及選項，第 1 欄是輸入參數，而第 2 欄是值。">
@@ -428,11 +483,13 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 <tbody>
 <tr>
 <td>未聯合 ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} 使用者名稱及密碼：</strong>您可以遵循本主題的步驟，以完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。</li>
-<li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong>如果不使用 {{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼，您的另一個替代方案是<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 金鑰</a>。{{site.data.keyword.Bluemix_notm}} API 金鑰相依於要產生它們的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li></ul></tr>
+<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong>如果不使用 {{site.data.keyword.Bluemix_notm}} 使用者名稱和密碼，您的另一個替代方案是<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">使用 {{site.data.keyword.Bluemix_notm}} API 金鑰</a>。{{site.data.keyword.Bluemix_notm}} API 金鑰相依於要產生它們的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li>
+<li><strong>{{site.data.keyword.Bluemix_notm}} 使用者名稱及密碼：</strong>您可以遵循本主題的步驟，以完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 存取記號。</li></ul>
+</tr>
 <tr>
 <td>聯合 ID</td>
-<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong><a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 金鑰</a>相依於要產生它們的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li><li><strong>使用一次性密碼：</strong>如果您使用一次性密碼來向 {{site.data.keyword.Bluemix_notm}} 進行鑑別，則無法完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，因為擷取一次性密碼需要與 Web 瀏覽器進行手動互動。若要完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，您必須改為建立一個 {{site.data.keyword.Bluemix_notm}} API 金鑰。</ul></td>
+<td><ul><li><strong>產生 {{site.data.keyword.Bluemix_notm}} API 金鑰：</strong><a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API 金鑰</a>相依於要產生它們的 {{site.data.keyword.Bluemix_notm}} 帳戶。您無法將 {{site.data.keyword.Bluemix_notm}} API 金鑰與不同帳戶 ID 結合在相同的 {{site.data.keyword.Bluemix_notm}} IAM 記號中。若要存取使用您 {{site.data.keyword.Bluemix_notm}} API 金鑰根據帳戶以外之帳戶建立的叢集，您必須登入帳戶才能產生新的 API 金鑰。</li>
+<li><strong>使用一次性密碼：</strong>如果您使用一次性密碼來向 {{site.data.keyword.Bluemix_notm}} 進行鑑別，則無法完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，因為擷取一次性密碼需要與 Web 瀏覽器進行手動互動。若要完全自動建立 {{site.data.keyword.Bluemix_notm}} IAM 記號，您必須改為建立一個 {{site.data.keyword.Bluemix_notm}} API 金鑰。</ul></td>
 </tr>
 </tbody>
 </table>
@@ -485,7 +542,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
     </tbody>
     </table>
 
-    輸出範例：
+    使用 API 金鑰的範例輸出：
 
     ```
     {
@@ -706,7 +763,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
      </tbody>
      </table>
 
-5.  請檢閱 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api)，以尋找所支援 API 的清單。
+5.  請檢閱 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api)，以尋找所支援 API 的清單。
 
 <br />
 
@@ -717,7 +774,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 您可以使用 [Kubernetes API ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://kubernetes.io/docs/reference/using-api/api-overview/)，以與 {{site.data.keyword.containerlong_notm}} 中的叢集互動。
 {: shortdesc}
 
-下列指示需要叢集中的公用網路存取，才能連接至 Kubernetes 主節點的公用服務端點。
+下列指示需要叢集裡的公用網路存取，才能連接至 Kubernetes 主節點的公用服務端點。
 {: note}
 
 1. 遵循[使用 API 自動化叢集部署](#cs_api)中的步驟，來擷取 {{site.data.keyword.Bluemix_notm}} IAM 存取記號、重新整理記號、您要執行 Kubernetes API 要求的叢集 ID，以及叢集所在的 {{site.data.keyword.containerlong_notm}} 地區。
@@ -844,7 +901,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
    ```
    {: screen}
 
-5. 使用您稍早擷取的 IAM ID 記號，針對您的叢集執行 Kubernetes API 要求。例如，列出叢集中所執行的 Kubernetes 版本。
+5. 使用您稍早擷取的 IAM ID 記號，針對您的叢集執行 Kubernetes API 要求。例如，列出叢集裡執行的 Kubernetes 版本。
 
    如果您已在 API 測試架構中啟用 SSL 憑證驗證，則請務必停用此特性。
    {: tip}
@@ -854,8 +911,8 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
    ```
    {: codeblock}
 
-   <table summary="檢視叢集中執行的 Kubernetes 版本的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
-   <caption>檢視叢集中執行的 Kubernetes 版本的輸入參數。</caption>
+   <table summary="檢視叢集裡執行的 Kubernetes 版本的輸入參數，第 1 欄是輸入參數，而第 2 欄是值。">
+   <caption>檢視叢集裡執行的 Kubernetes 版本的輸入參數。</caption>
    <thead>
    <th>輸入參數</th>
    <th>值</th>
@@ -900,7 +957,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 開始之前，請確定您有可用來要求新存取記號的 {{site.data.keyword.Bluemix_notm}} IAM 重新整理記號或 {{site.data.keyword.Bluemix_notm}} API 金鑰。
 - **重新整理記號：**請遵循[使用 {{site.data.keyword.Bluemix_notm}} API 自動化叢集建立及管理處理程序](#cs_api)中的指示。
 - **API 金鑰：**如下所示，擷取 [{{site.data.keyword.Bluemix_notm}} ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cloud.ibm.com/) API 金鑰。
-   1. 從功能表列中，按一下**管理** > **存取權 (IAM)**。
+   1. 從功能表列，按一下**管理** > **存取權 (IAM)**。
    2. 按一下**使用者**頁面，然後選取自己。
    3. 在 **API 金鑰**窗格中，按一下**建立 IBM Cloud API 金鑰**。
    4. 輸入 API 金鑰的**名稱**和**說明**，然後按一下**建立**。
@@ -965,7 +1022,7 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 
     您可以在 API 輸出的 **access_token** 欄位中找到新的 {{site.data.keyword.Bluemix_notm}} IAM 記號，並在 **refresh_token** 欄位中找到重新整理記號。
 
-2.  使用前一個步驟中的記號，繼續使用 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/swagger-api)。
+2.  使用前一個步驟中的記號，繼續使用 [{{site.data.keyword.containerlong_notm}} API 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://containers.cloud.ibm.com/global/swagger-global-api)。
 
 <br />
 
@@ -973,9 +1030,9 @@ Kubernetes Terminal 發行為測試版 {{site.data.keyword.containerlong_notm}} 
 ## 使用 CLI 重新整理 {{site.data.keyword.Bluemix_notm}} IAM 存取記號，並取得新的重新整理記號
 {: #cs_cli_refresh}
 
-當您啟動新的 CLI 階段作業時，或如果現行 CLI 階段作業在 24 小時後到期，您必須執行 `ibmcloud ks cluster-config <cluster_name>`，來設定叢集的環境定義。當您使用這個指令來設定叢集的環境定義時，會下載 Kubernetes 叢集的 `kubeconfig` 檔案。此外，會發出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID 記號及重新整理記號，以提供鑑別。
+啟動新的 CLI 階段作業時，或者如果現行 CLI 階段作業已超過 24 小時，則必須透過執行 `ibmcloud ks cluster-config --cluster <cluster_name>` 來為叢集設定環境定義。當您使用這個指令來設定叢集的環境定義時，會下載 Kubernetes 叢集的 `kubeconfig` 檔案。此外，會發出 {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) ID 記號及重新整理記號，以提供鑑別。
 {: shortdesc}
 
 **ID 記號**：每個透過 CLI 發出的 IAM ID 記號都會在一個小時後到期。當 ID 記號到期時，會將重新整理記號傳送至記號提供者，以重新整理 ID 記號。您的鑑別會重新整理，而且您可以繼續針對叢集執行指令。
 
-**重新整理記號**：重新整理記號每隔 30 天到期。如果重新整理記號過期，則無法重新整理 ID 記號，而且您無法在 CLI 中繼續執行指令。您可以執行 `ibmcloud ks cluster-config <cluster_name>`，來取得新的重新整理記號。這個指令也會重新整理您的 ID 記號。
+**重新整理記號**：重新整理記號每隔 30 天到期。如果重新整理記號過期，則無法重新整理 ID 記號，而且您無法在 CLI 中繼續執行指令。您可以透過執行 `ibmcloud ks cluster-config --cluster <cluster_name>` 來取得新的重新整理記號。這個指令也會重新整理您的 ID 記號。

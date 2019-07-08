@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 ---
 
@@ -17,6 +17,7 @@ lastupdated: "2019-04-18"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -26,7 +27,7 @@ lastupdated: "2019-04-18"
 Istio on {{site.data.keyword.containerlong}} 提供 Istio 的無縫安裝、Istio 控制平面元件的自動更新及生命週期管理，以及與平台記載和監視工具的整合。
 {: shortdesc}
 
-只要按一下，您就可以取得所有 Istio 核心元件、額外的追蹤、監視和視覺化，以及啟動並執行 BookInfo 範例應用程式。Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形式提供，因此 {{site.data.keyword.Bluemix_notm}} 會自動保持所有 Istio 元件的最新狀態。
+只要按一下，您就可以取得所有 Istio 核心元件、額外的追蹤、監視和視覺化，以及啟動並執行 BookInfo 範例應用程式。Istio on {{site.data.keyword.containerlong_notm}} 作為受管附加程式提供，因此 {{site.data.keyword.Bluemix_notm}} 會自動使所有 Istio 元件保持最新。
 
 ## 瞭解 Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_ov}
@@ -37,10 +38,10 @@ Istio on {{site.data.keyword.containerlong}} 提供 Istio 的無縫安裝、Isti
 [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.ibm.com/cloud/info/istio) 是一種開放服務網平台，能夠連接、保護、控制及觀察雲端平台上的微服務，例如 {{site.data.keyword.containerlong_notm}} 中的 Kubernetes。
 {:shortdesc}
 
-當您將龐大的應用程式移至分散式微服務架構時，就會產生一組新的挑戰，例如如何控制微服務的資料流量、對服務執行摸黑啟動和 Canary 推出、處理失敗、保護服務通訊、觀察服務，以及跨服務機隊強制執行一致的存取原則。若要解決這些困難，您可以運用服務網。服務網提供透通且與語言無關的網路，用於連接、觀察、保護及控制微服務之間的連線功能。Istio 透過容許您管理網路資料流量、跨微服務的負載平衡、強制執行存取原則、驗證服務身分等等，來提供服務網的見解及控制。
+將單一應用程式轉換為分散微服務架構時，會產生一系列新的挑戰，例如如何控制微服務的資料流量，執行服務的灰度上線和金絲雀應用，處理故障，保護服務通訊，觀察服務以及在服務組中強制實施一致的存取原則。若要解決這些困難，您可以運用服務網。服務網提供透通且與語言無關的網路，用於連接、觀察、保護及控制微服務之間的連線功能。透過 Istio，可掌握服務網的情況並對其進行控制，進而可以管理網路資料流量，在微服務之間進行負載平衡，強制實施存取原則，驗證服務身分等。
 
 例如，在微服務網中使用 Istio 可協助您：
-- 更輕鬆地看到叢集中執行的應用程式
+- 更妥善地瞭解叢集裡執行的 APP
 - 部署 Canary 版本的應用程式，並控制傳送給它們的資料流量
 - 啟用在微服務之間傳送之資料的自動加密
 - 強制執行速率限制及屬性型白名單和黑名單原則
@@ -56,8 +57,8 @@ Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形
 受管理的 Istio 附加程式分類為測試版，而且可能不穩定或經常變更。測試版特性也可能未提供正式發行特性所提供的相同層次效能或相容性，且其目的不是要用於正式作業環境。
 {: note}
 
-**這在我的叢集中看起來像什麼？**</br>
-當您安裝 Istio 附加程式時，Istio 控制項及資料平面會使用您叢集已連接的 VLAN。配置資料流量會流經叢集內的專用網路，且不需要您在防火牆中開啟任何其他埠或 IP 位址。如果您使用 Istio Gateway 公開 Istio 受管理應用程式，則對應用程式提出的外部資料流量要求會流經公用 VLAN。
+**這在我的叢集裡看起來像什麼？**</br>
+當您安裝 Istio 附加程式時，Istio 控制項及資料平面會使用您叢集已連接的 VLAN。配置資料流量會流經叢集內的專用網路，且不需要您在防火牆中開啟任何其他埠或 IP 位址。如果使用 Istio 閘道公開了 Istio 管理的應用程式，則對應用程式的外部資料流量要求會在公用 VLAN 上流程動。
 
 **更新處理程序如何運作？**</br>
 受管理附加程式中的 Istio 版本是透過 {{site.data.keyword.Bluemix_notm}} 進行測試，並核准用於 {{site.data.keyword.containerlong_notm}}。若要將 Istio 元件更新為 {{site.data.keyword.containerlong_notm}} 所支援 Istio 的最新版本，您可以遵循[更新受管理附加程式](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)中的步驟。  
@@ -65,9 +66,7 @@ Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形
 如果您需要使用最新 Istio 版本或自訂 Istio 安裝，則可以遵循 [{{site.data.keyword.Bluemix_notm}} 快速入門指導教學 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/) 中的步驟，來安裝 Istio 的開放程式碼版本。
 {: tip}
 
-**有任何限制嗎？** </br> 在下列情況下，您不能在叢集中啟用受管理 Istio 附加程式：
-* 您的叢集只連接至專用 VLAN。
-* 您已在叢集中安裝[容器映像檔安全強制執行程式許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)。
+**有任何限制嗎？** </br> 如果在叢集裡安裝了[容器映像檔安全強制實施程序許可控制器](/docs/services/Registry?topic=registry-security_enforce#security_enforce)，則無法在叢集裡啟用受管 Istio 附加程式。
 
 <br />
 
@@ -75,7 +74,7 @@ Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形
 ## 我可以安裝什麼？
 {: #istio_components}
 
-在叢集中，Istio on {{site.data.keyword.containerlong_notm}} 是以三個受管理附加程式形式提供。
+在叢集裡，Istio on {{site.data.keyword.containerlong_notm}} 是以三個受管理附加程式形式提供。
 {: shortdesc}
 
 <dl>
@@ -97,14 +96,11 @@ Istio on {{site.data.keyword.containerlong_notm}} 是以受管理附加程式形
 </dl>
 
 <br>
-您一律可以藉由執行下列指令，來查看叢集中已啟用的 Istio 附加程式：
+您一律可以藉由執行下列指令，來查看叢集裡已啟用的 Istio 附加程式：
 ```
 ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
-
-`istio` 受管理附加程式可以安裝到可用的叢集。若要同時安裝 `istio-extras` 和 `istio-sample-bookinfo` 附加程式，請建立至少有兩個工作者節點的標準叢集。
-{: note}
 
 <br />
 
@@ -112,14 +108,14 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 ## 安裝 Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_install}
 
-請在現有叢集中安裝 Istio 受管理附加程式。
+請在現有叢集裡安裝 Istio 受管理附加程式。
 {: shortdesc}
 
 **開始之前**</br>
-* 請確定您具有 {{site.data.keyword.containerlong_notm}} 的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
-* [建立或使用具有至少 3 個工作者節點的現有叢集，每個工作者節點具有 4 個核心和 16 GB 記憶體 (`b3c.4x16`) 或更多](/docs/containers?topic=containers-clusters#clusters_cli)。每個工作者節點都必須執行 Kubernetes 1.11 版或更新版本。
+* 確定您具有 {{site.data.keyword.containerlong_notm}} 的[**撰寫者**或**管理員** {{site.data.keyword.Bluemix_notm}} IAM 服務角色](/docs/containers?topic=containers-users#platform)。
+* [建立或使用具有至少 3 個工作者節點的現有標準叢集，每個節點有 4 個核心數和 16 GB 記憶體 (`b3c.4x16`) 或更高配置](/docs/containers?topic=containers-clusters#clusters_ui)。此外，叢集和工作者節點必須至少執行最低受支援的 Kubernetes 版本，您可以透過執行 `ibmcloud ks addon-versions --addon istio` 來檢閱版本。
 * [將 CLI 的目標設為叢集](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-* 如果使用現有的叢集，而您先前使用 IBM Helm 圖表或透過另一種方法在叢集中安裝 Istio，請[清除該 Istio 安裝](#istio_uninstall_other)。
+* 如果使用的是現有叢集，並且先前在叢集裡已使用 IBM Helm chart 或透過其他方法安裝了 Istio，請[清除該 Istio 安裝](#istio_uninstall_other)。
 
 ### 在 CLI 中安裝受管理 Istio 附加程式
 {: #istio_install_cli}
@@ -142,7 +138,7 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-4. 驗證此叢集中已啟用您所安裝的受管理 Istio 附加程式。
+4. 驗證此叢集裡已啟用您所安裝的受管理 Istio 附加程式。
   ```
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
@@ -151,13 +147,13 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   輸出範例：
   ```
   Name                      Version
-  istio                     1.1.2
-  istio-extras              1.1.2
-  istio-sample-bookinfo     1.1.2
+  istio                     1.1.5
+  istio-extras              1.1.5
+  istio-sample-bookinfo     1.1.5
   ```
   {: screen}
 
-5. 您也可以查看叢集中每個附加程式的個別元件。
+5. 您也可以查看叢集裡每個附加程式的個別元件。
   - `istio` 和 `istio-extras` 的元件：確定已部署 Istio 服務及其對應的 Pod。
     ```
     kubectl get svc -n istio-system
@@ -276,48 +272,28 @@ BookInfo 附加程式 (`istio-sample-bookinfo`) 會將 [Istio 的 BookInfo 範�
 * `v2` 會呼叫 `ratings` 微服務，並將評等顯示為 1 到 5 顆黑色星星。
 * `v3` 會呼叫 `ratings` 微服務，並將評等顯示為 1 到 5 顆紅色星星。
 
-會修改其中每個微服務的部署 YAML，先將 Envoy Sidecar Proxy 以容器形式預先注入微服務的 Pod，再予以部署。如需手動 Sidecar 注入的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。BookInfo 應用程式也已透過 Istio Gateway 公開於公用 IP Ingress 位址。請注意，雖然 BookInfo 應用程式可協助您開始使用，但應用程式不適用於正式作業。
+會修改其中每個微服務的部署 YAML，先將 Envoy Sidecar Proxy 以容器形式預先注入微服務的 Pod，再予以部署。如需手動 Sidecar 注入的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。BookInfo 應用程式也已透過 Istio Gateway 公開於公用 IP Ingress 位址。雖然 BookInfo 應用程式可以協助您開始使用，但該應用程式並不適合用於正式作業目的。
 
-開始之前，請在叢集中[安裝 `istio`、`istio-extras` 及 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
+開始之前，請在叢集裡[安裝 `istio`、`istio-extras` 及 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
 
 1. 取得叢集的公用位址。
-  * 標準叢集：
-      2. 設定 Ingress 主機。
+  1. 設定 Ingress 主機。
             ```
             export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
             ```
-        {: pre}
+    {: pre}
 
-      3. 設定 Ingress 埠。
+  2. 設定 Ingress 埠。
         ```
             export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
             ```
-        {: pre}
+    {: pre}
 
-      4. 建立一個使用 Ingress 主機及埠的 `GATEWAY_URL` 環境變數。
+  3. 建立一個使用 Ingress 主機及埠的 `GATEWAY_URL` 環境變數。
          ```
          export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
          ```
-         {: pre}
-
-  * 免費叢集：
-      1. 設定 Ingress 主機。此主機是叢集中任何工作者節點的公用 IP 位址。
-        ```
-        export INGRESS_HOST=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address}')
-        ```
-        {: pre}
-
-      2. 設定 Ingress 埠。
-        ```
-        export INGRESS_PORT=$(kubectl get svc istio-ingressgateway -n istio-system -o jsonpath='{.spec.ports[0].nodePort}')
-        ```
-        {: pre}
-
-      3. 建立一個使用工作者節點的公用 IP 位址和 NodePort 的 GATEWAY_URL 環境變數。
-         ```
-         export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
-         ```
-         {: pre}
+     {: pre}
 
 2. 對 `GATEWAY_URL` 變數進行 Curl 處理，以確認 BookInfo 應用程式正在執行中。`200` 回應表示 BookInfo 應用程式與 Istio 適當地執行中。
    ```
@@ -339,7 +315,7 @@ BookInfo 附加程式 (`istio-sample-bookinfo`) 會將 [Istio 的 BookInfo 範�
     ```
     {: pre}
 
-4. 嘗試多次重新整理頁面。不同版本的檢閱區段會循環使用紅色星星、黑色星星及無任何星星。
+4. 嘗試多次重新整理頁面。不同版本的評論區段會以紅色星號、黑色星號和無星號進行循環。
 
 ### 瞭解發生什麼情況
 {: #istio_bookinfo_understanding}
@@ -349,7 +325,7 @@ BookInfo 範例示範三種 Istio 的資料流量管理元件如何一起運作�
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>`bookinfo-gateway` [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 說明負載平衡器（`istio-system` 名稱空間中的 `istio-ingressgateway` 服務），用來作為 BookInfo HTTP/TCP 資料流量的 Ingress 進入點。Istio 會配置負載平衡器，以在閘道配置檔中定義的埠上接聽 Istio 受管理應用程式的送入要求。
+<dd>`bookinfo-gateway` - [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 說明了 `istio-system` 名稱空間中的負載平衡器 `istio-ingressgateway` 服務，此服務充當 BookInfo 的 HTTP/TCP 資料流量的流入進入點。Istio 會配置負載平衡器，以在閘道配置檔中定義的埠上接聽 Istio 受管理應用程式的送入要求。
 </br></br>若要查看 BookInfo 閘道的配置檔，請執行下列指令。
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -374,7 +350,7 @@ BookInfo 範例示範三種 Istio 的資料流量管理元件如何一起運作�
 ## 記載、監視、追蹤及視覺化 Istio
 {: #istio_health}
 
-若要記載、監視、追蹤及視覺化 Istio on {{site.data.keyword.containerlong_notm}} 所管理的應用程式，您可以啟動 `istio-extras` 附加程式中所安裝的 Grafana、Jaeger 及 Kiali 儀表板，或將 LogDNA 及 Sysdig 以協力廠商服務形式部署至工作者節點。
+若要對 Istio on {{site.data.keyword.containerlong_notm}} 管理的應用程式進行日誌記錄、監視、追蹤和視覺化，可以啟動在 `istio-extras` 附加程式中安裝的 Grafana、Jaeger 和 Kiali 儀表板，或者將 LogDNA 和 Sysdig 作為協力廠商服務部署到工作者節點。
 {: shortdesc}
 
 ### 啟動 Grafana、Jaeger 及 Kiali 儀表板
@@ -383,7 +359,7 @@ BookInfo 範例示範三種 Istio 的資料流量管理元件如何一起運作�
 Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://grafana.com/)、[Jaeger ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.jaegertracing.io/) 及 [Kiali ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://www.kiali.io/)。啟動其中每個服務的儀表板，為 Istio 提供額外的監視、追蹤及視覺化。
 {: shortdesc}
 
-開始之前，請在叢集中[安裝 `istio` 及 `istio-extras` 受管理附加程式](#istio_install)。
+開始之前，請在叢集裡[安裝 `istio` 及 `istio-extras` 受管理附加程式](#istio_install)。
 
 **Grafana**</br>
 1. 啟動 Grafana 儀表板的 Kubernetes 埠轉遞。
@@ -428,7 +404,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 將 LogDNA 部署至工作者節點以將日誌轉遞給 {{site.data.keyword.loganalysislong}}，來無縫管理每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。
 {: shortdesc}
 
-若要使用 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about)，您可以將記載代理程式部署至叢集中的每個工作者節點。此代理程式會從所有名稱空間（包括 `kube-system`）收集副檔名為 `*.log` 的日誌，以及 Pod 的 `/var/log` 目錄中所儲存的無副檔名檔案。這些日誌包括來自每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。代理程式接著會將日誌轉遞至 {{site.data.keyword.la_full_notm}} 服務。
+若要使用 [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about)，您可以將記載代理程式部署至叢集裡的每個工作者節點。此代理程式會從所有名稱空間（包括 `kube-system`），收集儲存在 Pod 的 `/var/log` 目錄中，副檔名為 `*.log` 的日誌以及無副檔名的檔案。這些日誌包括來自每個 Pod 中應用程式容器和 Envoy Proxy Sidecar 容器的日誌。然後，此代理程式會將日誌轉遞至 {{site.data.keyword.la_full_notm}} 服務。
 
 若要開始，請遵循[使用 {{site.data.keyword.la_full_notm}} 管理 Kubernetes 叢集日誌](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube)中的步驟，來設定叢集的 LogDNA。
 
@@ -441,11 +417,11 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 取得 Istio 受管理應用程式效能及性能的作業可見性，方法是將 Sysdig 部署至工作者節點，以將度量值轉遞至 {{site.data.keyword.monitoringlong}}。
 {: shortdesc}
 
-使用 Istio on {{site.data.keyword.containerlong_notm}}，受管理 `istio` 附加程式即會將 Prometheus 安裝至叢集。叢集中的 `istio-mixer-telemetry` Pod 標註有 Prometheus 端點，讓 Prometheus 可以聚集 Pod 的所有遙測資料。當您將 Sysdig 代理程式部署至叢集中的每個工作者節點時，即已自動啟用 Sysdig 來偵測及提取來自這些 Prometheus 端點的資料，以將它們顯示在 {{site.data.keyword.Bluemix_notm}} 監視儀表板中。
+使用 Istio on {{site.data.keyword.containerlong_notm}}，受管理 `istio` 附加程式即會將 Prometheus 安裝至叢集。叢集裡的 `istio-mixer-telemetry` Pod 會使用 Prometheus 端點進行註釋，以便 Prometheus 可以聚集 Pod 的所有遙測資料。當您將 Sysdig 代理程式部署至叢集裡的每個工作者節點時，即已自動啟用 Sysdig 來偵測及提取來自這些 Prometheus 端點的資料，以將它們顯示在 {{site.data.keyword.Bluemix_notm}} 監視儀表板中。
 
-因為所有 Prometheus 工作都已完成，所以您只需要在叢集中部署 Sysdig 即可。
+因為所有 Prometheus 工作都已完成，所以您只需要在叢集裡部署 Sysdig 即可。
 
-1. 遵循[分析 Kubernetes 叢集中所部署應用程式的度量值](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)中的步驟，來設定 Sysdig。
+1. 遵循[分析 Kubernetes 叢集裡所部署應用程式的度量值](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster)中的步驟，來設定 Sysdig。
 
 2. [啟動 Sysdig 使用者介面 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster_step3)。
 
@@ -453,7 +429,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 
 4. 搜尋 `Istio`，然後選取 Sysdig 的其中一個預先定義 Istio 儀表板。
 
-如需參照度量值和儀表板、監視 Istio 內部元件以及監視 Istio A/B 部署和 Canary 部署的相關資訊，請參閱 Sysdig 部落格文章：[如何監視 Istio（Kubernetes 服務網）![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://sysdig.com/blog/monitor-istio/)。請尋找稱為「監視 Istio：參照度量值及儀表板」的小節。
+如需參照度量和儀表板、監視 Istio 內部元件以及監視 Istio A/B 部署和金絲雀部署的相關資訊，請查看 [How to monitor Istio, the Kubernetes service mesh ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://sysdig.com/blog/monitor-istio/)。請尋找該部落格文章中名稱為 "Monitoring Istio: reference metrics and dashboards" 的區段。
 
 <br />
 
@@ -464,12 +440,12 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 準備好使用 Istio 來管理自己的應用程式了嗎？部署應用程式之前，您必須先決定要如何將 Envoy Proxy Sidecar 注入應用程式 Pod。
 {: shortdesc}
 
-每個應用程式 Pod 都必須執行 Envoy Proxy Sidecar，以將微服務內含在服務網中。您可以確定自動或手動將 Sidecar 注入每個應用程式 Pod。如需 Sidecar 注入的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。
+每個應用程式 Pod 都必須執行 Envoy Proxy Sidecar，以將微服務內含在服務網中。您可以確保側櫃以自動或手動方式注入到每個應用程式 Pod 中。如需 Sidecar 注入的相關資訊，請參閱 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/sidecar-injection/)。
 
 ### 啟用自動 Sidecar 注入
 {: #istio_sidecar_automatic}
 
-啟用自動 Sidecar 注入時，名稱空間會接聽任何新的部署，並自動修改 Pod 範本規格，以使用 Envoy Proxy Sidecar 容器來建立應用程式 Pod。當您打算將要與 Istio 整合的多個應用程式部署至名稱空間時，請針對該名稱空間啟用自動 Sidecar 注入。請注意，依預設，不會針對 Istio 受管理附加程式中的任何名稱空間啟用自動 Sidecar 注入。
+啟用自動 Sidecar 注入時，名稱空間會接聽任何新的部署，並自動修改 Pod 範本規格，以使用 Envoy Proxy Sidecar 容器來建立應用程式 Pod。當您打算將要與 Istio 整合的多個應用程式部署至名稱空間時，請針對該名稱空間啟用自動 Sidecar 注入。依預設，在 Istio 受管附加程式中，未對任何名稱空間已啟用自動側櫃注入。
 
 若要啟用名稱空間的自動 Sidecar 注入，請執行下列動作：
 
@@ -485,7 +461,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   ```
   {: pre}
 
-3. 將應用程式部署至所標示的名稱空間，或重新部署已在名稱空間中的應用程式。
+3. 將應用程式部署到已標記的名稱空間中，或者重新部署已在該名稱空間中的應用程式。
   * 若要將應用程式部署至所標示的名稱空間，請執行下列指令：
     ```
     kubectl apply <myapp>.yaml --namespace <namespace>
@@ -497,18 +473,18 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
     ```
     {: pre}
 
-5. 如果您尚未建立用來公開應用程式的服務，請建立 Kubernetes 服務。您的應用程式必須由 Kubernetes 服務公開，才能併入為 Istio 服務網中的微服務。請確定您遵循 [Pod 及服務的 Istio 需求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
+5. 如果您未建立用來公開應用程式的服務，請建立 Kubernetes 服務。您的應用程式必須由 Kubernetes 服務公開，才能包含為 Istio 服務網中的微服務。請確定您遵循 [Pod 及服務的 Istio 需求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
 
   1. 定義應用程式的服務。
     ```
-              apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myappservice
+    spec:
+      selector:
+        <selector_key>: <selector_value>
+      ports:
        - protocol: TCP
          port: 8080
     ```
@@ -535,7 +511,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
     ```
     {: pre}
 
-應用程式 Pod 現在已整合至您的 Istio 服務網，因為它們的 Istio Sidecar 容器與您的應用程式容器並排執行 。
+應用程式 Pod 現在已整合至您的 Istio 服務網，因為它們的 Istio Sidecar 容器與您的應用程式容器並排執行。
 
 ### 手動注入 Sidecar
 {: #istio_sidecar_manual}
@@ -546,12 +522,12 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 
 1. 下載 `istioctl` 用戶端。
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.2 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
   ```
 
 2. 導覽至 Istio 套件目錄。
   ```
-  cd istio-1.1.2
+  cd istio-1.1.5
   ```
   {: pre}
 
@@ -567,7 +543,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
   ```
   {: pre}
 
-5. 如果您尚未建立用來公開應用程式的服務，請建立 Kubernetes 服務。您的應用程式必須由 Kubernetes 服務公開，才能併入為 Istio 服務網中的微服務。請確定您遵循 [Pod 及服務的 Istio 需求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
+5. 如果您未建立用來公開應用程式的服務，請建立 Kubernetes 服務。您的應用程式必須由 Kubernetes 服務公開，才能包含為 Istio 服務網中的微服務。請確定您遵循 [Pod 及服務的 Istio 需求 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/spec-requirements/)。
 
   1. 定義應用程式的服務。
     ```
@@ -605,7 +581,7 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
     ```
     {: pre}
 
-應用程式 Pod 現在已整合至您的 Istio 服務網，因為它們的 Istio Sidecar 容器與您的應用程式容器並排執行 。
+應用程式 Pod 現在已整合至您的 Istio 服務網，因為它們的 Istio Sidecar 容器與您的應用程式容器並排執行。
 
 <br />
 
@@ -616,22 +592,22 @@ Istio extras 附加程式 (`istio-extras`) 會安裝 [Grafana ![外部鏈結圖�
 [設定 Envoy Proxy Sidecar 注入](#istio_sidecar)並將應用程式部署至 Istio 服務網之後，您可以使用 IBM 提供的主機名稱將 Istio 受管理應用程式公開至公用要求。
 {: shortdesc}
 
-Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 及 [VirtualService ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 來控制資料流量如何遞送至應用程式。閘道會配置負載平衡器 `istio-ingressgateway`，以用來作為 Istio 受管理應用程式的進入點。在標準叢集中，您可以使用 DNS 項目和主機名稱登錄 `istio-ingressgateway` 負載平衡器的外部 IP 位址，以公開 Istio 受管理應用程式。
+Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) 及 [VirtualService ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) 來控制資料流量如何遞送至應用程式。閘道會配置負載平衡器 `istio-ingressgateway`，以用來作為 Istio 受管理應用程式的進入點。可以透過使用 DNS 項目和主機名稱來登錄 `istio-ingressgateway` 負載平衡器的外部 IP 位址，進而公開 Istio 管理的應用程式。
 
-您可以先試用[公開 BookInfo 的範例](#istio_expose_bookinfo)，或[公然地公開自己的 Istio 受管理應用程式](#istio_expose_link)。
+您可以先試用[公開 BookInfo 的範例](#istio_expose_bookinfo)，或[對大眾公開自己的 Istio 受管理應用程式](#istio_expose_link)。
 
 ### 範例：使用 IBM 提供的主機名稱來公開 BookInfo
 {: #istio_expose_bookinfo}
 
-在叢集中啟用 BookInfo 附加程式時，會為您建立 Istio 閘道 `bookinfo-gateway`。該閘道使用 Istio 虛擬服務及目的地規則來配置公然地公開 BookInfo 應用程式的負載平衡器 `istio-ingressgateway`。在下列步驟中，您會建立可用來公然地存取 BookInfo 之 `istio-ingressgateway` 負載平衡器 IP 位址的主機名稱。
+在叢集裡啟用 BookInfo 附加程式時，會為您建立 Istio 閘道 `bookinfo-gateway`。該閘道使用 Istio 虛擬服務及目的地規則來配置對大眾公開 BookInfo 應用程式的負載平衡器 `istio-ingressgateway`。在下列步驟中，您會建立可用來公開地存取 BookInfo 之 `istio-ingressgateway` 負載平衡器 IP 位址的主機名稱。
 {: shortdesc}
 
-開始之前，請在叢集中[啟用 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
+開始之前，請在叢集裡[啟用 `istio-sample-bookinfo` 受管理附加程式](#istio_install)。
 
 1. 取得 `istio-ingressgateway` 負載平衡器的 **EXTERNAL-IP** 位址。
   ```
-    kubectl get svc -n istio-system
-    ```
+  kubectl get svc -n istio-system
+  ```
   {: pre}
 
   在下列輸出範例中，**EXTERNAL-IP** 是 `168.1.1.1`。
@@ -672,14 +648,14 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
 
 如需 BookInfo 應用程式的閘道、虛擬服務規則及目的地規則的相關資訊，請參閱[瞭解發生什麼情況](#istio_bookinfo_understanding)。如需在 {{site.data.keyword.containerlong_notm}} 中登錄 DNS 主機名稱的相關資訊，請參閱[登錄 NLB 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
 
-### 使用 IBM 提供的主機名稱來公然地公開自己的 Istio 受管理應用程式
+### 使用 IBM 提供的主機名稱，對大眾公開自己的 Istio 受管理應用程式
 {: #istio_expose_link}
 
-公然地公開 Istio 受管理應用程式，方法是建立 Istio 閘道、虛擬服務（用來定義 Istio 受管理服務的資料流量管理規則），以及 `istio-ingressgateway` 負載平衡器之外部 IP 位址的 DNS 主機名稱。
+對大眾公開 Istio 受管理應用程式，方法是建立 Istio 閘道、虛擬服務（用來定義 Istio 受管理服務的資料流量管理規則），以及 `istio-ingressgateway` 負載平衡器之外部 IP 位址的 DNS 主機名稱。
 {: shortdesc}
 
 **開始之前：**
-1. 在叢集中[安裝 `istio` 受管理附加程式](#istio_install)。
+1. 在叢集裡[安裝 `istio` 受管理附加程式](#istio_install)。
 2. 安裝 `istioctl` 用戶端。
   1. 下載 `istioctl`。
     ```
@@ -687,13 +663,13 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
        ```
   2. 導覽至 Istio 套件目錄。
     ```
-    cd istio-1.1.2
-    ```
+  cd istio-1.1.5
+  ```
     {: pre}
-3. [設定應用程式微服務的 Sidecar 注入、將應用程式微服務部署至名稱空間，以及建立應用程式微服務的 Kubernetes 服務，以將它們併入 Istio 服務網](#istio_sidecar)。
+3. [設定應用程式微服務的 Sidecar 注入、將應用程式微服務部署至名稱空間，以及建立應用程式微服務的 Kubernetes 服務，以將它們包含在 Istio 服務網](#istio_sidecar)。
 
 </br>
-**若要使用主機名稱來公然地公開 Istio 受管理應用程式，請執行下列動作：**
+**若要使用主機名稱來對大眾公開 Istio 受管理應用程式，請執行下列動作：**
 
 1. 建立閘道。此範例閘道使用 `istio-ingressgateway` 負載平衡器服務來公開埠 80，以用於 HTTP。將 `<namespace>` 取代為在其中部署 Istio 受管理微服務的名稱空間。如果微服務接聽的不是埠 `80`，請新增該埠。如需閘道 YAML 元件的相關資訊，請參閱 [Istio 參考文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/)。
   ```
@@ -715,7 +691,7 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
   ```
   {: codeblock}
 
-2. 在其中部署 Istio 受管理微服務的名稱空間中，套用閘道。
+2. 在部署 Istio 受管理微服務的名稱空間中，套用閘道。
   ```
   kubectl apply -f my-gateway.yaml -n <namespace>
   ```
@@ -756,7 +732,7 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
   </tr>
   <tr>
   <td><code>gateways</code></td>
-  <td>請注意，已指定 <code>my-gateway</code>，讓閘道可以將這些虛擬服務遞送規則套用至 <code>istio-ingressgateway</code> 負載平衡器。<td>
+  <td>指定的是 <code>my-gateway</code>，因此閘道可以將這些虛擬服務路由規則套用於 <code>istio-ingressgateway</code> 負載平衡器。<td>
   </tr>
   <tr>
   <td><code>http.match.uri.exact</code></td>
@@ -818,7 +794,7 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
   ```
   {: codeblock}
 
-在檢閱中，您已建立稱為 `my-gateway` 的閘道。此閘道使用現有 `istio-ingressgateway` 負載平衡器服務來公開應用程式。`istio-ingressgateway` 負載平衡器會使用您在 `my-virtual-service` 虛擬服務中所定義的規則，以將資料流量遞送至應用程式。最後，您已建立 `istio-ingressgateway` 負載平衡器的主機名稱。所有對主機名稱的使用者要求都會根據 Istio 遞送規則來轉遞給您的應用程式。如需在 {{site.data.keyword.containerlong_notm}} 中登錄 DNS 主機名稱的相關資訊（包括設定主機名稱之自訂性能檢查的相關資訊），請參閱[登錄 NLB 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
+回顧一下，您已建立名稱為 `my-gateway` 的閘道。此閘道使用現有 `istio-ingressgateway` 負載平衡器服務來公開應用程式。`istio-ingressgateway` 負載平衡器會使用您在 `my-virtual-service` 虛擬服務中所定義的規則，以將資料流量遞送至應用程式。最後，您已建立 `istio-ingressgateway` 負載平衡器的主機名稱。所有對主機名稱的使用者要求都會根據 Istio 遞送規則來轉遞給您的應用程式。如需在 {{site.data.keyword.containerlong_notm}} 中登錄 DNS 主機名稱的相關資訊（包括設定主機名稱之自訂性能檢查的相關資訊），請參閱[登錄 NLB 主機名稱](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)。
 
 要尋找更精細的遞送控制嗎？若要建立在負載平衡器將資料流量遞送至每個微服務之後所套用的規則（例如，將資料流量傳送至某個微服務的不同版本的規則），您可以建立並套用 [`DestinationRule` ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/)。
 {: tip}
@@ -835,15 +811,15 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
 ## 解除安裝 Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_uninstall}
 
-如果您完成使用 Istio，則可以解除安裝 Istio 附加程式，以清除叢集中的 Istio 資源。
+如果您完成使用 Istio，則可以解除安裝 Istio 附加程式，以清除叢集裡的 Istio 資源。
 {:shortdesc}
 
-請注意，`istio` 附加程式是 `istio-extras`、`istio-sample-bookinfo` 及 [`knative`](/docs/containers?topic=containers-knative_tutorial) 附加程式的相依項。`istio-extras` 附加程式是 `istio-sample-bookinfo` 附加程式的相依項。
+`istio` 附加程式是 `istio-extras`、`istio-sample-bookinfo` 和 [`knative`](/docs/containers?topic=containers-serverless-apps-knative) 附加程式的相依關係。`istio-extras` 附加程式是 `istio-sample-bookinfo` 附加程式的相依項。
 {: important}
 
 **選用**：會移除您在 `istio-system` 名稱空間中所建立或修改的任何資源，以及自訂資源定義 (CRD) 自動產生的所有 Kubernetes 資源。如果您要保留這些資源，請先儲存它們，然後再解除安裝 `istio` 附加程式。
 1. 儲存您在 `istio-system` 名稱空間中所建立或修改的任何資源（例如任何服務或應用程式的配置檔）。
-   範例指令：
+   指令範例：
    ```
    kubectl get pod <pod_name> -o yaml -n istio-system
    ```
@@ -879,7 +855,7 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
   ```
   {: pre}
 
-4. 驗證在此叢集中已停用所有受管理 Istio 附加程式。輸出中未傳回任何 Istio 附加程式。
+4. 驗證在此叢集裡已停用所有受管理 Istio 附加程式。輸出中未傳回任何 Istio 附加程式。
   ```
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
@@ -898,19 +874,19 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
   - 個別 Istio 附加程式：
     1. 按一下**管理**。
     2. 清除您要停用之附加程式的勾選框。如果您清除附加程式，則可能會自動清除其他需要該附加程式作為相依項的附加程式。
-    3. 按一下**管理**。已停用 Istio 附加程式，而且會從此叢集中移除這些附加程式的資源。
+    3. 按一下**管理**。已停用 Istio 附加程式，而且會從此叢集移除這些附加程式的資源。
   - 所有 Istio 附加程式：
-    1. 按一下**解除安裝**。即會停用此叢集中的所有受管理 Istio 附加程式，而且會移除此叢集中的所有 Istio 資源。
+    1. 按一下**解除安裝**。即會停用此叢集裡的所有受管理 Istio 附加程式，而且會移除此叢集裡的所有 Istio 資源。
 
 5. 在 Istio 卡上，驗證不再列出您已解除安裝的附加程式。
 
 <br />
 
 
-### 解除安裝叢集中的其他 Istio 安裝
+### 解除安裝叢集裡的其他 Istio 安裝
 {: #istio_uninstall_other}
 
-如果您先前使用 IBM Helm 圖表或透過另一種方法在叢集中安裝 Istio，請先清除該 Istio 安裝，再啟用叢集中的受管理 Istio 附加程式。若要檢查 Istio 是否已在叢集中，請執行 `kubectl get namespaces`，並在輸出中尋找 `istio-system` 名稱空間。
+如果先前在叢集裡已使用 IBM Helm chart 或透過其他方法安裝了 Istio，請清除該 Istio 安裝後，再啟用叢集裡的受管 Istio 附加程式。若要檢查 Istio 是否已在叢集裡，請執行 `kubectl get namespaces`，並在輸出中尋找 `istio-system` 名稱空間。
 {: shortdesc}
 
 - 如果您是使用 {{site.data.keyword.Bluemix_notm}} Istio Helm 圖表來安裝 Istio，請執行下列動作：
@@ -927,10 +903,10 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
     {: pre}
 
 - 如果您是手動安裝 Istio，或使用 Istio 社群 Helm 圖表，請參閱 [Istio 解除安裝文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components)。
-* 如果您先前在叢集中安裝了 BookInfo，請清除那些資源。
+* 如果您先前在叢集裡安裝了 BookInfo，請清除那些資源。
   1. 切換至 Istio 檔案位置的目錄。
        ```
-    cd <filepath>/istio-1.1.2
+    cd <filepath>/istio-1.1.5
     ```
     {: pre}
 
@@ -948,4 +924,4 @@ Istio 會使用 [Gateway ![外部鏈結圖示](../icons/launch-glyph.svg "外部
 
 * 若要進一步探索 Istio，您可以在 [Istio 文件 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://istio.io/) 中找到更多手冊。
 * 取得[認知類別：使用 Istio 及 IBM Cloud Kubernetes Service 來開始使用微服務 ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/)。**附註**：您可以跳過本課程的 Istio 安裝一節。
-* 請參閱此部落格文章，其描述如何使用 [Istio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) 來視覺化您的 Istio 服務網。
+* 請參閱此部落格文章，其描述如何使用 [Vistio ![外部鏈結圖示](../icons/launch-glyph.svg "外部鏈結圖示")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) 來視覺化您的 Istio 服務網。

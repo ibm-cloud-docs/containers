@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-08"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # 入門指導教學
@@ -35,12 +36,12 @@ subcollection: containers
 ## 開始使用叢集
 {: #clusters_gs}
 
-您要在容器中部署應用程式嗎？等一等！首先，請建立 Kubbernetes 叢集。Kubbernetes 是容器的編排工具。使用 Kubernetes，開發人員可以使用叢集的強大功能和彈性，快速開發高可用性應用程式。
+您要在容器中部署應用程式嗎？等一等！首先，請建立 Kubernetes 叢集。Kubernetes 是容器的編排工具。使用 Kubernetes，開發人員可以使用叢集的強大功能和彈性，快速開發高可用性應用程式。
 {:shortdesc}
 
 何謂叢集？叢集是一組資源、工作者節點、網路及儲存裝置，可讓應用程式保持高可用性。在您具有叢集之後，即可在容器中部署您的應用程式。
 
-開始之前，取得適合您的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://cloud.ibm.com/registration)類型：
+開始之前，請取得適合您的 [{{site.data.keyword.Bluemix_notm}} 帳戶](https://cloud.ibm.com/registration)類型：
 * **計費（隨收隨付制或訂閱）**：您可以建立免費叢集。您也可以佈建要在標準叢集裡建立及使用的 IBM Cloud 基礎架構 (SoftLayer) 資源。
 * **精簡**：您無法建立免費或標準叢集。請[升級帳戶](/docs/account?topic=account-accountfaqs#changeacct)至計費帳戶。
 

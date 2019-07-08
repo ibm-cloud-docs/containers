@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # {{site.data.keyword.Bluemix_notm}} 的政府使用案例
@@ -39,9 +39,9 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 為何要使用 {{site.data.keyword.Bluemix_notm}}：使用 {{site.data.keyword.containerlong_notm}}，Exec 會提供已結合公用-專用資料的變革價值。同樣地，此服務提供公用雲端平台，以從整合型內部部署應用程式重構並公開微服務。此外，公用雲端還容許政府及公用夥伴關係使用外部雲端服務及協同作業友善的開放程式碼工具。
 
 重要技術：    
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
-* [使用 {{site.data.keyword.cos_full_notm}} 存取公用資料](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [透過 {{site.data.keyword.cos_full_notm}} 提供對公用資料的存取](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [隨插即用 IBM Cloud Analytics 服務](https://www.ibm.com/cloud/analytics)
 
 **環境定義：政府改善與結合公用-專用資料之社群「開發人員」的協同作業及速度**
@@ -60,7 +60,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 * 開放式 API – 開發平台，讓 API 由所有社群夥伴提供並重複使用
 * 開放式創新 – 一組雲端服務，讓「開發人員」插入創新，而不是手動進行編碼
 
-若要開始，政府使用 {{site.data.keyword.cos_full_notm}} 將其公用資料儲存在雲端。此儲存空間可以免費使用及重複使用、可由任何人共用，而且僅限歸屬及共用。可以先消毒敏感資料，再將它推送至雲端。除此之外，還會設定存取控制，讓雲端可以涵蓋新的資料儲存空間，而社群可以在其中示範加強型現有可用資料的 POC。
+若要開始，政府使用 {{site.data.keyword.cos_full_notm}} 將其公用資料儲存在雲端。此儲存空間可以免費使用及重複使用、可由任何人共用，而且僅限歸屬及共用。可以先使機密資料為安全的，再將它推送至雲端。除此之外，還會設定存取控制，讓雲端可以涵蓋新的資料儲存空間，而社群可以在其中示範加強型現有可用資料的 POC。
 
 政府公用-私人夥伴關係的下一個步驟是建立 {{site.data.keyword.apiconnect_long}} 中所管理的 API 經濟。社群及企業「開發人員」可以在 API 表單中輕鬆存取資料。其目標是具有公開可用的 REST API、啟用交互作業能力，以及加速應用程式整合。它們使用 IBM {{site.data.keyword.SecureGateway}}，透過內部部署連接回專用資料來源。
 
@@ -75,7 +75,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 
 **解決方案模型**
 
-隨需應變運算、儲存空間及 API 工具是在可安全存取內部部署資料來源的公用雲端中執行。
+隨需應變運算、儲存空間及 API 工具是在公用雲端中執行，並且可安全地存取內部部署資料來源，或從內部部署資料來源進行存取。
 
 技術解決方案：
 * {{site.data.keyword.containerlong_notm}}
@@ -117,7 +117,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 為何要使用 {{site.data.keyword.Bluemix_notm}}：{{site.data.keyword.containerlong_notm}} 容許政府及公用夥伴關係使用外部雲端服務及協同作業友善的開放程式碼工具。這些容器提供可共用的平台，其中，港口及貨運公司都保證共用資訊是在一個安全的平台上進行管理。而該平台會隨著從小型「開發-測試」系統到正式作業大小系統而進行調整。透過自動化建置、測試及部署，開放式工具鏈可進一步加速開發。
 
 重要技術：    
-* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [適合各種 CPU、RAM、儲存空間需求的叢集](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [容器安全及隔離](/docs/containers?topic=containers-security#security)
 * [DevOps 原生工具，包括 {{site.data.keyword.contdelivery_full}} 中的開放式工具鏈](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -142,7 +142,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 
 安全第一：IT Execs 會選擇裸機的「授信運算」，以管理叢集。使用 {{site.data.keyword.containerlong_notm}} 的裸機，敏感海關工作負載現在已具有熟悉的隔離，但在公用雲端的彈性內。裸機提供「授信運算」，以驗證基礎硬體未遭到竄改。
 
-因為貨運公司也想要與其他港口合作，所以應用程式安全十分重要。出貨貨單及海關資訊高度機密。從該安全核心，「漏洞警告器」提供下列掃描：
+因為貨運公司也想要與其他港口合作，所以應用程式安全十分重要。出貨貨單及海關資訊高度機密。從該安全核心，Vulnerability Advisor 提供下列掃描：
 * 映像檔漏洞掃描
 * 根據 ISO 27k 的原則掃描
 * 即時容器掃描
@@ -178,7 +178,7 @@ Open-Government Data Program Executive 需要與社群及私人部門共用公�
 * {{site.data.keyword.cloudant}} 是一個現代 NoSQL 資料庫，適用於從金鑰值到複雜文件導向資料儲存空間及查詢的資料驅動使用案例範圍。
 * 為了將查詢最小化為地區資料庫，會使用 {{site.data.keyword.cloudant}} 跨應用程式來快取使用者的階段作業資料。
 * 此配置可以改善 {{site.data.keyword.containershort}} 上跨應用程式的前端應用程式可用性及效能。
-* {{site.data.keyword.containerlong_notm}} 中的工作者應用程式分析內部部署資料並將結果儲存至 {{site.data.keyword.cloudant}} 時，{{site.data.keyword.openwhisk}} 會反應變更，並自動消毒送入資訊來源上的資料。
+* {{site.data.keyword.containerlong_notm}} 中的工作者節點應用程式分析內部部署資料並將結果儲存至 {{site.data.keyword.cloudant}} 時，{{site.data.keyword.openwhisk}} 會反應變更，並自動消毒送入資訊來源上的資料。
 * 同樣地，可以透過資料上傳觸發某個地區中的出貨通知，讓所有下游消費者可以存取新資料。
 
 **結果**
