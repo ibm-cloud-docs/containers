@@ -428,10 +428,10 @@ ibmcloud plugin list
       <td>[ibmcloud ks worker-reload](#cs_worker_reload)</td>
     </tr>
     <tr>
+      <td>[ibmcloud ks worker-replace](#cli_worker_replace)</td>
       <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
       <td>[ibmcloud ks worker-update](#cs_worker_update)</td>
       <td>[ibmcloud ks workers](#cs_workers)</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
@@ -2338,7 +2338,7 @@ Enable or disable an ALB in your standard cluster.
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb-create` command are enabled by default too.
 * Enable an ALB that you previously disabled.
-* Disable an ALB on an old VLAN after you create an ALB on a new VLAN. For more information, see [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+* Disable an ALB on an old VLAN after you create an ALB on a new VLAN. For more information, see [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-settings#migrate-alb-vlan).
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
 
 ```
@@ -3489,7 +3489,7 @@ ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type a
 ## Network load balancer (NLB) commands
 {: #nlb-dns}
 
-Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer_hostname).
 {: shortdesc}
 
 ### Beta: ibmcloud ks nlb-dns-add
