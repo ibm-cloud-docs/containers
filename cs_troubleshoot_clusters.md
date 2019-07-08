@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -1181,7 +1181,7 @@ To see if your pod is being replaced by higher priority pods:
 {: #cs_helm_install}
 
 {: tsSymptoms}
-When you try to install an updated Helm chart by running `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>`, you get the `Error: failed to download "ibm/<chart_name>"` error message.
+When you try to install an updated Helm chart by running `helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
 
 {: tsCauses}
 The URL for the {{site.data.keyword.cloud_notm}} repository in your Helm instance might be incorrect.
@@ -1232,7 +1232,7 @@ To troubleshoot your Helm chart:
 3. Install the Helm chart with your updates.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>
+    helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>
     ```
     {: pre}
 
