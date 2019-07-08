@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-08"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,39 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019
+{: #1143_1525}
+
+The following table shows the changes that are included in the worker node patch 1.14.3_1525.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.3_1524">
+<caption>Changes since version 1.14.3_1524</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019
 {: #1143_1524}
@@ -401,6 +434,39 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+### Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019
+{: #1137_1528}
+
+The following table shows the changes that are included in the worker node patch 1.13.7_1528.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.7_1527">
+<caption>Changes since version 1.13.7_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for worker node fix pack 1.13.7_1527, released 24 June 2019
 {: #1137_1527}
@@ -1189,6 +1255,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.9_1559, released 8 July 2019
+{: #1129_1559}
+
+The following table shows the changes that are included in the worker node patch 1.12.9_1559.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.9_1558">
+<caption>Changes since version 1.12.9_1558</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.9_1558, released 24 June 2019
 {: #1129_1558}
@@ -2287,6 +2385,38 @@ Review the version 1.11 changelog.
 
 Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
+{: #11110_1564}
+
+The following table shows the changes that are included in the worker node patch 1.11.10_1564.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.11.10_1563">
+<caption>Changes since version 1.11.10_1563</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 kernel</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
 {: #11110_1563}
