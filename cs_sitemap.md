@@ -580,7 +580,7 @@ lastupdated: "2019-07-08"
 [About Ingress and ALBs](/docs/containers?topic=containers-ingress-about)
 * [What comes with Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
-  * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb)
+  * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
 * [How are IPs assigned to Ingress ALBs?](/docs/containers?topic=containers-ingress-about#ips)
 * [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#architecture-single)
