@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Logging and monitoring Ingress
@@ -70,7 +71,7 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](/docs/containers?topic=containers-ingress#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
+<td>The IP address of the request package that the client sent to your app. This IP can change based on the following situations:<ul><li>When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running.</li><li>If [source IP preservation is enabled](/docs/containers?topic=containers-ingress-settings#preserve_source_ip), the original IP address of the client request to your app is recorded instead.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -117,15 +118,15 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons like addresses in the <code>$upstream_addr</code> variable.</td>
+<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons.</td>
 </tr>
 </tbody></table>
 
