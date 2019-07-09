@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -218,7 +218,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`
 ## Allowing the cluster to access infrastructure resources and other services over a public firewall
 {: #firewall_outbound}
 
-Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
+Let your cluster access infrastructure resources and services from behind a public firewall, such as for {{site.data.keyword.containerlong_notm}} regions, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, IBM Cloud infrastructure (SoftLayer) private IPs, and egress for persistent volume claims.
 {:shortdesc}
 
 Want to use Calico policies to act as your cluster firewall instead of a gateway device firewall? See [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public).
