@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -78,9 +78,10 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 1. [Create or upgrade your account to a billable account ({{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription)](https://cloud.ibm.com/registration/).
 
 2. [Set up an {{site.data.keyword.containerlong_notm}} API key](/docs/containers?topic=containers-users#api_key) in the regions that you want to create clusters. Assign the API key with the appropriate permissions to create clusters:
-  * **Super User** role for IBM Cloud infrastructure (SoftLayer).
-  * **Administrator** platform management role for {{site.data.keyword.containerlong_notm}} at the account level.
-  * **Administrator** platform management role for {{site.data.keyword.registrylong_notm}} at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
+  * **Super User** role or the [minimum required permissions](/docs/containers?topic=containers-access_reference#infra) for classic infrastructure.
+  * **Administrator** platform management role for {{site.data.keyword.containershort_notm}} at the account level.
+  * **Administrator** platform management role for Container Registry at the account level. 
+  **Note for registry permissions**: If your account predates 4 October 2018, you need to [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
 
   Are you the account owner? You already have the necessary permissions! When you create a cluster, the API key for that region and resource group is set with your credentials.
   {: tip}
