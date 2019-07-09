@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, node scaling
 
@@ -93,8 +93,8 @@ _Figure: Autoscaling a cluster up and down._
 3.  You schedule deployments that require 14 additional pod replicas of an app that requests one core of CPU per replica. One pod replica can be deployed on the current resources, but the other 13 are pending.
 4.  The cluster autoscaler scales up your worker nodes within these constraints to support the additional 13 pod replicas resource requests.
     *  **Worker Pool A**: Seven worker nodes are added in a round-robin method as evenly as possible across the zones. The worker nodes increase the cluster compute capacity by roughly 14 cores (2 cores x 7 worker nodes).
-    *  **Worker Pool B**: Two worker nodes are added evenly across the zones, reaching the `maxSize` of 2 worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
-5.  The 20 pods with 1-core requests are distributed as follows across the worker nodes. Because worker nodes have resource reserves as well as pods that run to cover default cluster features, the pods for your workload cannot use all the available compute resources of a worker node. For example, although the `b2c.4x16` worker nodes have four cores, only three pods that request a minimum of one core each can be scheduled onto the worker nodes.
+    *  **Worker Pool B**: Two worker nodes are added evenly across the zones, reaching the `maxSize` of two worker nodes per zone. The worker nodes increase cluster capacity by roughly 8 cores (4 cores x 2 worker node).
+5.  The 20 pods with one-core requests are distributed as follows across the worker nodes. Because worker nodes have resource reserves as well as pods that run to cover default cluster features, the pods for your workload cannot use all the available compute resources of a worker node. For example, although the `b2c.4x16` worker nodes have four cores, only three pods that request a minimum of one core each can be scheduled onto the worker nodes.
     <table summary="A table that describes the distribution of workload in scaled cluster.">
     <caption>Distribution of workload in scaled cluster.</caption>
     <thead>
@@ -401,7 +401,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Note**: The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check whether your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) and use this worker pool with the cluster autoscaler.</td>
+    <p class="note">The cluster autoscaler can scale only worker pools that have the `ibm-cloud.kubernetes.io/worker-pool-id` label. To check whether your worker pool has the required label, run `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) and use this worker pool with the cluster autoscaler.</p></td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
@@ -487,7 +487,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
       withLocalStorage: true
       withSystemPods: true
     ```
-    {: codeblock}
+    {: screen}
 
     <table>
     <caption>Cluster autoscaler configuration values</caption>
@@ -839,6 +839,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kind: ConfigMap
     ...
     ```
+    {: screen}
 2.  List your existing Helm charts and note the name of the cluster autoscaler.
     ```
     helm ls
