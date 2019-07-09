@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Version changelog
@@ -378,7 +379,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.5-107</td>
 <td>v1.14.1-71</td>
-<td>Updated to support the Kubernetes 1.14.1 release. Additionally, `calicoctl` version is updated to 3.6.1. Fixed updates to version 2.0 load balancers with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge).</td>
+<td>Updated to support the Kubernetes 1.14.1 release. Additionally, `calicoctl` version is updated to 3.6.1. Fixed updates to version 2.0 network load balancers (NLBs) with only one available worker node for the load balancer pods. Private load balancers now support running on [private edge workers nodes](/docs/containers?topic=containers-edge#edge).</td>
 </tr>
 <tr>
 <td>IBM pod security policies</td>
@@ -694,7 +695,7 @@ The following table shows the changes that are included in the patch 1.13.6_1521
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.5-107</td>
 <td>v1.13.6-139</td>
-<td>Updated to support the Kubernetes 1.13.6 release. Also, fixed the update process for version 2.0 load balancer that have only one available worker node for the load balancer pods.</td>
+<td>Updated to support the Kubernetes 1.13.6 release. Also, fixed the update process for version 2.0 network load balancer that have only one available worker node for the load balancer pods.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1188,7 +1189,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.4-118</td>
 <td>v1.13.2-62</td>
-<td>Updated to support the Kubernetes 1.13.2 release. Additionally, `calicoctl` version is updated to 3.4.0. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+<td>Updated to support the Kubernetes 1.13.2 release. Additionally, `calicoctl` version is updated to 3.4.0. Fixed unnecessary configuration updates to version 2.0 network load balancers on worker node status changes.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -1508,7 +1509,7 @@ The following table shows the changes that are included in the patch 1.12.8_1552
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.7-180</td>
 <td>v1.12.8-210</td>
-<td>Updated to support the Kubernetes 1.12.8 release. Also, fixed the update process for version 2.0 load balancer that have only one available worker node for the load balancer pods.</td>
+<td>Updated to support the Kubernetes 1.12.8 release. Also, fixed the update process for version 2.0 network load balancer that have only one available worker node for the load balancer pods.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1968,7 +1969,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.4-118</td>
 <td>v1.12.5-137</td>
-<td>Updated to support the Kubernetes 1.12.5 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+<td>Updated to support the Kubernetes 1.12.5 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 network load balancers on worker node status changes.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -2366,7 +2367,7 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 <td>Updated to support the Kubernetes 1.12 release. Additional changes include the following:
 <ul><li>Load balancer pods (`ibm-cloud-provider-ip-*` in `ibm-system` namespace) now set CPU and memory resource requests.</li>
 <li>The `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` annotation is added to specify the VLAN that the load balancer service deploys to. To see available VLANs in your cluster, run `ibmcloud ks vlans --zone <zone>`.</li>
-<li>A new [load balancer 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) is available as a beta.</li></ul></td>
+<li>A new [load balancer 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs) is available as a beta.</li></ul></td>
 </tr>
 <tr>
 <td>OpenVPN client configuration</td>
@@ -3044,7 +3045,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.6-180</td>
 <td>v1.11.7-198</td>
-<td>Updated to support the Kubernetes 1.11.7 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 load balancers on worker node status changes.</td>
+<td>Updated to support the Kubernetes 1.11.7 release. Additionally, `calicoctl` version is updated to 3.3.1. Fixed unnecessary configuration updates to version 2.0 network load balancers on worker node status changes.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
