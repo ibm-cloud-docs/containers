@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-28"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -119,7 +119,7 @@ The access policies that you assign users vary depending on what you want your u
 | App auditor | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions), [Reader service role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#service). |
 | App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#editor-actions), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
 | Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions). |
-| Create a cluster | Account-level permissions for Super User infrastructure credentials, Administrator platform role to {{site.data.keyword.containerlong_notm}}, and Administrator platform role to {{site.data.keyword.registrylong_notm}}. For more information, see [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
+| Create a cluster | Account-level permissions set by the API key with Super User infrastructure credentials. Individual user permissions for Administrator platform role to {{site.data.keyword.containerlong_notm}}, and Administrator platform role to {{site.data.keyword.registrylong_notm}}. For more information, see [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
 | Cluster administrator | [Administrator platform role for a cluster](/docs/containers?topic=containers-access_reference#admin-actions), [Manager service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service).|
 | DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#operator-actions), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
 | Operator or site reliability engineer | [Administrator platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#admin-actions), [Reader service role for a cluster or region](/docs/containers?topic=containers-access_reference#service) or [Manager service role for all cluster namespaces](/docs/containers?topic=containers-access_reference#service) to be able to use `kubectl top nodes,pods` commands. |
@@ -217,42 +217,37 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 * [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
-<dt id="nodes">Worker nodes</dt>
-  <dd><p>Clusters can have two main types of worker nodes: virtual or physical (bare metal) machines. Machine type availability and pricing varies by the zone that you deploy your cluster to.</p>
-  <p><strong>Virtual machines</strong> feature greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price than bare-metal. However, VMs have a performance trade-off when compared to bare metal specs, such as networking Gbps, RAM and memory thresholds, and storage options. Keep in mind these factors that impact your VM costs:</p>
-  <ul><li><strong>Shared vs. dedicated</strong>: If you share the underlying hardware of the VM, the cost is lower than dedicated hardware, but the physical resources are not dedicated to your VM.</li>
-  <li><strong>Hourly billing only</strong>: Hourly offers more flexibility to order and cancel VMs quickly.
-  <li><strong>Tiered hours per month</strong>: Hourly billing is tiered. As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.</li></ul>
-  <p><strong>Physical machines (bare metal)</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
-  <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
-  <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
-  <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
-
-<dt id="bandwidth">Public bandwidth</dt>
-  <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe. Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.
-  <p>Review the following factors that impact public bandwidth charges:</p>
-  <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
-  <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250GB for VMs or 500GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
-  <li><strong>Tiered packages</strong>: After you exceed any included bandwidth, you are charged according to a tiered usage scheme that varies by location. If you exceed a tier allotment, you might also be charged a standard data transfer fee.</li></ul>
-  <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
-
-<dt id="subnet_ips">Subnet IP addresses</dt>
-  <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).</p>
-  </dd>
-
-<dt id="persistent_storage">Storage</dt>
-  <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
-  <ul><li>[NFS file storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</li>
-  <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
-  <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
-
-<dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
-  <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
-
-<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
-  <dd>
-  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) is available as a beta to test out OpenShift clusters.</p>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every 2 cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information on OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial).</dd>
-
+  <dt id="nodes">Worker nodes</dt>
+    <dd><p>Clusters can have two main types of worker nodes: virtual or physical (bare metal) machines. Machine type availability and pricing varies by the zone that you deploy your cluster to.</p>
+    <p><strong>Virtual machines</strong> feature greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price than bare-metal. However, VMs have a performance trade-off when compared to bare metal specs, such as networking Gbps, RAM and memory thresholds, and storage options. Keep in mind these factors that impact your VM costs:</p>
+    <ul><li><strong>Shared vs. dedicated</strong>: If you share the underlying hardware of the VM, the cost is lower than dedicated hardware, but the physical resources are not dedicated to your VM.</li>
+    <li><strong>Hourly billing only</strong>: Hourly offers more flexibility to order and cancel VMs quickly.
+    <li><strong>Tiered hours per month</strong>: Hourly billing is tiered. As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.</li></ul>
+    <p><strong>Physical machines, or bare metal,</strong> yield high performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
+    <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
+    <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
+    <p>For details on the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
+  <dt id="bandwidth">Public bandwidth</dt>
+    <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe.</p>
+    <p>Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.</p>
+    <p>Review the following factors that impact public bandwidth charges:</p>
+    <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
+    <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250GB for VMs or 500GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
+    <li><strong>Tiered packages</strong>: After you exceed any included bandwidth, you are charged according to a tiered usage scheme that varies by location. If you exceed a tier allotment, you might also be charged a standard data transfer fee.</li></ul>
+    <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p></dd>
+  <dt id="subnet_ips">Subnet IP addresses</dt>
+    <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).</dd></p>
+    </dd>
+  <dt id="persistent_storage">Storage</dt>
+    <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
+    <ul><li>[NFS file storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</li>
+    <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
+    <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
+  <dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
+    <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
+  <dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+    <dd>
+    <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) is available as a beta to test out OpenShift clusters.</p>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every 2 cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information on OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial).</dd>
 </dl>
 <br><br>
 
