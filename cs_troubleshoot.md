@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 
 2. Install the Helm chart to your cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
 
