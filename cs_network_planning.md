@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Planning in-cluster and external networking for apps
@@ -166,12 +167,12 @@ When it comes to exposing an app with a network service, you have several choice
 <td>NLB v1.0 (+ host name)</td>
 <td>Basic load balancing that exposes the app with an IP address or a host name</td>
 <td>Quickly expose one app to the public with an IP address or a a host name that supports SSL termination.</td>
-<td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td>
+<td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a host name and health checks.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ host name)</td>
 <td>DSR load balancing that exposes the app with an IP address or a host name</td>
 <td>Expose an app that might receive high levels of traffic to the public with an IP address or a host name that supports SSL termination.</td>
-<td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) a host name and health checks.</li></ol></td>
+<td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a host name and health checks.</li></ol></td>
 </tr><tr>
 <td>Istio + NLB host name</td>
 <td>Basic load balancing that exposes the app with a host name and uses Istio routing rules</td>
@@ -186,7 +187,7 @@ When it comes to exposing an app with a network service, you have several choice
 <td>Bring your own Ingress controller + ALB or NLB host name</td>
 <td>HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB host name and uses custom routing rules</td>
 <td>Implement custom routing rules or other specific requirements for custom tuning for multiple apps.</td>
-<td>[Deploy your Ingress controller and leverage an IBM-provided host name](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Deploy your Ingress controller and leverage an IBM-provided host name](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>

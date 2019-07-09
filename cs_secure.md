@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Security for {{site.data.keyword.containerlong_notm}}
@@ -254,7 +255,7 @@ To use NLB and Ingress ALB services, use [Calico and Kubernetes policies](/docs/
 **How can I secure the source IP within the cluster?** </br>
 In version 2.0 NLBs, the source IP address of the client request is preserved by default. However, in version 1.0 NLBs and in all Ingress ALBs, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the NLB 1.0 or ALB. If no app pod exists on the same worker node as the load balancer service pod, the NLB or ALB forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 
-Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [version 1.0 NLBs](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) or [Ingress ALBs](/docs/containers?topic=containers-ingress#preserve_source_ip).
+Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [version 1.0 NLBs](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) or [Ingress ALBs](/docs/containers?topic=containers-ingress-settings#preserve_source_ip).
 
 **How can I encrypt traffic with TLS?** </br>
 The Ingress service offers TLS termination at two points in the traffic flow:
@@ -459,7 +460,7 @@ You are responsible for ensuring the security of your personal information in Ku
 
 To set up encryption for your secrets, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect).
 
-On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using the [{{site.data.keyword.datashield_short}} (Beta) service](/docs/services/data-shield?topic=data-shield-getting-started#getting-started). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
+On SGX-enabled bare metal worker nodes, you can encrypt your data in use by using [{{site.data.keyword.datashield_short}}](/docs/services/data-shield?topic=data-shield-getting-started). Similar to the way encryption works for data at rest and data in motion, Fortanix Runtime Encryption that is integrated with {{site.data.keyword.datashield_short}} protects keys, data, and apps from external and internal threats. The threats might include malicious insiders, cloud providers, OS-level hacks, or network intruders.
 
 ## Kubernetes security bulletins
 {: #security_bulletins}

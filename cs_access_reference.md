@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -307,11 +307,6 @@ The **Editor** platform role includes the permissions that are granted by **View
 <td>Enable or disable an Ingress ALB.</td>
 <td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</code></td>
 <td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) and [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
-</tr>
-<tr>
-<td>Create an Ingress ALB.</td>
-<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
-<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
 </tr>
 <tr>
 <td>Roll back the Ingress ALB add-on update to the build that your ALB pods were previously running.</td>

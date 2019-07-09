@@ -43,7 +43,7 @@ IBM Cloud Kubernetes Service
 
     {: .navgroup id="howto"}
     cs_cli_install.md
-        
+
     {: .topicgroup}
     Setting up clusters
         cs_clusters_planning.md
@@ -75,18 +75,29 @@ IBM Cloud Kubernetes Service
         cs_network_cluster.md
         cs_dns.md
 
-    cs_images.md
-    cs_app.md
-    cs_app_knative.md
-
     {: .topicgroup}
-    Networking to expose apps
+    Deploying apps
+        cs_images.md
+        cs_app.md
+        cs_app_knative.md
         cs_network_planning.md
         cs_nodeport.md
+
+    {: .topicgroup}
+    Basic and DSR load balancing with network load balancers (NLB)
+        cs_loadbalancer_about.md
         cs_loadbalancer.md
+        cs_loadbalancer_v2.md
+        cs_loadbalancer_dns.md
+
+    {: .topicgroup}
+    HTTPS load balancing with Ingress application load balancers (ALB)
+        cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_settings.md
         cs_ingress_health.md
+        cs_ingress_user_managed.md
 
     {: .topicgroup}
     Storing data on persistent storage

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -22,6 +22,8 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
+
 
 # Setting up Ingress
 {: #ingress}

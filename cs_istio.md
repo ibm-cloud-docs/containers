@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-28"
+lastupdated: "2019-07-09"
 
 ---
 
@@ -18,7 +18,6 @@ lastupdated: "2019-06-28"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 
 # Using the managed Istio add-on (beta)
@@ -554,7 +553,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 ### Manually injecting sidecars
 {: #istio_sidecar_manual}
 
-If you do not want to enable automatic sidecar injection on a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
+If you do not want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
 
 To manually inject sidecars into a deployment:
 
@@ -633,7 +632,7 @@ Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-i
 In the following steps, you set up a host name through which your users can access your app by creating the following resources:
 * A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app.
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
-* A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
+* A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
 
 **Before you begin:**
 1. [Install the `istio` managed add-on](#istio_install) in a cluster.

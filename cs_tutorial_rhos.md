@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos, roks, rhoks
 
@@ -337,12 +337,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     ```
     {: pre}
 3.  Verify that the sample Hello World app components are created.
-    1.  Check for the **hello-world** image in the cluster's built-in Docker registry by accessing the registry console in your browser. Make sure that you updated the registry console provider URL with `-e` as described in the previous lesson.
-        ```
-        https://registry-console-default.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud/
-        ```
-        {: codeblock}
-    2.  List the **hello-world** services and note the service name. Your app listens for traffic on these internal cluster IP addresses unless you create a route for the service so that the router can forward external traffic requests to the app.
+    1.  List the **hello-world** services and note the service name. Your app listens for traffic on these internal cluster IP addresses unless you create a route for the service so that the router can forward external traffic requests to the app.
         ```
         oc get svc -n hello-world
         ```
@@ -354,7 +349,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         hello-world   ClusterIP   172.21.xxx.xxx   <nones>       8080/TCP   31m
         ```
         {: screen}
-    3.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **hello-world** pod status is **Running**.
+    2.  List the pods. Pods with `build` in the name are jobs that **Completed** as part of the new app build process. Make sure that the **hello-world** pod status is **Running**.
         ```
         oc get pods -n hello-world
         ```
@@ -367,7 +362,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         hello-world-build   0/1       Completed          0          31m
         ```
         {: screen}
-4.  Set up a route so that you can publicly access the {{site.data.keyword.toneanalyzershort}} service. By default, the host name is in the format of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
+4.  Set up a route so that you can publicly access the hello world service. By default, the host name is in the format of `<service_name>-<namespace>.<cluster_name>-<random_ID>.<region>.containers.appdomain.cloud`. If you want to customize the host name, include the `--hostname=<hostname>` flag.
     1.  Create a route for the **hello-world** service.
         ```
         oc create route edge --service=hello-world -n hello-world

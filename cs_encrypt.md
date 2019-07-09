@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks
 
@@ -165,14 +165,14 @@ Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} 
 {: important}
 
 
-## Encrypting data by using IBM Cloud Data Shield (Beta)
+## Encrypting data by using IBM Cloud Data Shield
 {: #datashield}
 
 {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
 {: shortdesc}
 
-When it comes to protecting your data, encryption is one of the most popular and effective controls. But the data must be encrypted at each step of its lifecycle. Data goes through three phases during its lifecycle: data at rest, data in motion, and data in use. Data at rest and in motion are commonly used to protect data when it is stored and when it is transported. Taking that protection one step further, you can now encrypt data in use.
+When it comes to protecting your data, encryption is one of the most popular and effective controls. But, the data must be encrypted at each step of its lifecycle for your data to really be secure. During its lifecycle, data has three phases. It can be at rest, in motion, or in use. Data at rest and in motion are generally the area of focus when you think of securing your data. But, after an application starts to run, data that is in use by CPU and memory is vulnerable to various attacks. The attacks might include malicious insiders, root users, credential compromise, OS zero-day, network intruders, and others. Taking that protection one step further, you can now encrypt data in use.
 
 If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example solutions include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
-To get started, provision an SGX-enabled bare metal worker cluster with machine type: mb2c.4x32 and check out the [the {{site.data.keyword.datashield_short}} docs](/docs/services/data-shield?topic=data-shield-getting-started#getting-started).
+To get started, provision an SGX-enabled bare metal worker cluster with machine type: mb2c.4x32 and check out the [the {{site.data.keyword.datashield_short}} docs](/docs/services/data-shield?topic=data-shield-getting-started).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-26"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, docker
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 
 # {{site.data.keyword.containerlong_notm}} technology
@@ -291,7 +290,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Maximum number of worker nodes</td>
-    <td>If you plan to exceed 900 per cluster, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com) first.<br><br>If you see an IBM Cloud infrastructure (SoftLayer) capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure (SoftLayer) representative.</td>
+    <td>If you plan to exceed 900 per cluster, contact the {{site.data.keyword.containerlong_notm}} team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com) first.<br><br>If you see an IBM Cloud infrastructure (SoftLayer) capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure (SoftLayer) representative.</td>
   </tr>
   <tr>
     <td>Maximum number of pods</td>
@@ -305,7 +304,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Ingress application load balancer (ALB) traffic</td>
-    <td>32,768 connections per second.<br><br>If your ingress traffic exceeds this number, [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress#scale_albs) in your cluster to handle the increased workload.</td>
+    <td>32,768 connections per second.</td>
   </tr>
   <tr>
     <td>Storage volumes</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}} CLI
@@ -295,14 +296,14 @@ ibmcloud plugin list
       <td>[ibmcloud ks alb-configure](#cs_alb_configure)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks alb-create](#cs_alb_create)</td>
       <td>[ibmcloud ks alb-get](#cs_alb_get)</td>
       <td>[ibmcloud ks alb-rollback](#cs_alb_rollback)</td>
       <td>[ibmcloud ks alb-types](#cs_alb_types)</td>
+        <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
     </tr>
     <tr>
-      <td>[ibmcloud ks alb-update](#cs_alb_update)</td>
       <td>[ibmcloud ks albs](#cs_albs)</td>
+      <td> </td>
       <td> </td>
       <td> </td>
     </tr>
@@ -2336,9 +2337,9 @@ Enable or disable an ALB in your standard cluster.
 {: shortdesc}
 
 You can use this command to:
-* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb-create` command are enabled by default too.
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
 * Enable an ALB that you previously disabled.
-* Disable an ALB on an old VLAN after you create an ALB on a new VLAN. For more information, see [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-settings#migrate-alb-vlan).
+* Disable an ALB.
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
 
 ```
@@ -2386,48 +2387,6 @@ ibmcloud ks alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb
 Example for disabling an ALB:
 ```
 ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-```
-{: pre}
-
-</br>
-
-### ibmcloud ks alb-create
-{: #cs_alb_create}
-
-Create a public or private ALB in a zone. The ALB that you create is enabled by default.
-{: shortdesc}
-
-```
-ibmcloud ks alb-create --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--user-ip IP] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster.</dd>
-
-<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
-<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
-
-<dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone to create the ALB in.</dd>
-
-<dt><code>--vlan <em>VLAN_ID</em></code></dt>
-<dd>The ID of the VLAN to create the ALB on. This VLAN must match the ALB <code>type</code> and must be in the same <code>zone</code> as the ALB that you want to create.</dd>
-
-<dt><code>--user-ip <em>IP</em></code></dt>
-<dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. This IP address must not be in use by another load balancer or ALB in the cluster.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks alb-create --cluster mycluster --type public --zone dal10 --vlan 2234945 --user-ip 1.1.1.1
 ```
 {: pre}
 
