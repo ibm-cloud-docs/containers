@@ -304,7 +304,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Ingress application load balancer (ALB) traffic</td>
-    <td>32,768 connections per second.<br><br>If your ingress traffic exceeds this number, [scale up the number of ALB replicas](/docs/containers?topic=containers-ingress-settings#scale_albs) in your cluster to handle the increased workload.</td>
+    <td>32,768 connections per second.</td>
   </tr>
   <tr>
     <td>Storage volumes</td>
