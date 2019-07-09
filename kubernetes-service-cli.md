@@ -2528,6 +2528,8 @@ ibmcloud ks albs --cluster my_cluster
 If you set up your {{site.data.keyword.cloud_notm}} account to use different credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
 {: shortdesc}
 
+
+
 ```
 ibmcloud ks credential-get --region REGION [-s] [--json]
 ```
@@ -2559,6 +2561,8 @@ ibmcloud ks credential-get --region us-south
 
 Set credentials for a resource group and region so that you can access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
+
+
 
 If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure (SoftLayer) portfolio by default. However, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.cloud_notm}} account by using this command.
 
@@ -2605,6 +2609,8 @@ Remove the credentials for a resource group and region to remove access to the I
 {: shortdesc}
 
 After you remove the credentials, the [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure (SoftLayer).
+
+
 
 ```
 ibmcloud ks credential-unset --region REGION [-s]
