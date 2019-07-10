@@ -364,20 +364,20 @@ ibmcloud plugin list
   </thead>
   <tbody>
     <tr>
-      <td>[Beta: ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
-      <td>[Beta: ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
+      <td>[ibmcloud ks nlb-dns-add](#cs_nlb-dns-add)</td>
+      <td>[ibmcloud ks nlb-dns-create](#cs_nlb-dns-create)</td>
+      <td>[ibmcloud ks nlb-dns-rm](#cs_nlb-dns-rm)</td>
+      <td>[ibmcloud ks nlb-dnss](#cs_nlb-dns-ls)</td>
     </tr>
     <tr>
-      <td>[Beta: ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-configure](#cs_nlb-dns-monitor-configure)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-disable](#cs_nlb-dns-monitor-disable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-enable](#cs_nlb-dns-monitor-enable)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-get](#cs_nlb-dns-monitor-get)</td>
     </tr>
     <tr>
-      <td>[Beta: ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
-      <td>[Beta: ibmcloud ks nlb-dns-monitors](#cs_nlb-dns-monitor-ls)</td>
+      <td>[ibmcloud ks nlb-dns-monitor-status](#cs_nlb-dns-monitor-status)</td>
+      <td>[ibmcloud ks nlb-dns-monitors](#cs_nlb-dns-monitor-ls)</td>
       <td> </td>
       <td> </td>
     </tr>
@@ -3457,7 +3457,7 @@ ibmcloud ks logging-filter-update --cluster example-cluster --id 274885 --type a
 Use this group of commands to create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer_hostname).
 {: shortdesc}
 
-### Beta: ibmcloud ks nlb-dns-add
+### ibmcloud ks nlb-dns-add
 {: #cs_nlb-dns-add}
 
 Add a network load balancer (NLB) IP to an existing host name that you created with the [`ibmcloud ks nlb-dns-create` command](#cs_nlb-dns-create).
@@ -3497,7 +3497,7 @@ ibmcloud ks nlb-dns-add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-create
+### ibmcloud ks nlb-dns-create
 {: #cs_nlb-dns-create}
 
 Publicly expose your app by creating a DNS host name to register a network load balancer (NLB) IP.
@@ -3570,7 +3570,7 @@ ibmcloud ks nlb-dns-rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dnss
+### ibmcloud ks nlb-dnss
 {: #cs_nlb-dns-ls}
 
 List the network load balancer host names and IP addresses that are registered in a cluster.
@@ -3602,7 +3602,7 @@ ibmcloud ks nlb-dnss --cluster mycluster
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitor-configure
+### ibmcloud ks nlb-dns-monitor-configure
 {: #cs_nlb-dns-monitor-configure}
 
 Configure and optionally enable a health check monitor for an existing NLB host name in a cluster. When you enable a monitor for your host name, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
@@ -3681,7 +3681,7 @@ ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitor-get
+### ibmcloud ks nlb-dns-monitor-get
 {: #cs_nlb-dns-monitor-get}
 
 View the settings for an existing health check monitor.
@@ -3716,7 +3716,7 @@ ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cde
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitor-disable
+### ibmcloud ks nlb-dns-monitor-disable
 {: #cs_nlb-dns-monitor-disable}
 
 Disable an existing health check monitor for a host name in a cluster.
@@ -3751,7 +3751,7 @@ ibmcloud ks nlb-dns-monitor-disable --cluster mycluster --nlb-host mycluster-a1b
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitor-enable
+### ibmcloud ks nlb-dns-monitor-enable
 {: #cs_nlb-dns-monitor-enable}
 
 Enable a health check monitor that you configured.
@@ -3788,7 +3788,7 @@ ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitor-status
+### ibmcloud ks nlb-dns-monitor-status
 {: #cs_nlb-dns-monitor-status}
 
 List the health check status for the IPs behind NLB host names in a cluster.
@@ -3823,7 +3823,7 @@ ibmcloud ks nlb-dns-monitor-status --cluster mycluster
 {: pre}
 
 </br>
-### Beta: ibmcloud ks nlb-dns-monitors
+### ibmcloud ks nlb-dns-monitors
 {: #cs_nlb-dns-monitor-ls}
 
 List the health check monitor settings for each NLB host name in a cluster.
