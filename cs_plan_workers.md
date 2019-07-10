@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -45,7 +45,7 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
 
-When you create a standard cluster in {{site.data.keyword.cloud_notm}}, you choose whether your worker pools consists of worker nodes that are either physical machines (bare metal) or virtual machines that run on physical hardware. You also select the worker node flavor, or combination of memory, CPU, and other machine specifications such as disk storage.
+When you create a standard cluster in {{site.data.keyword.cloud_notm}}, you can choose whether your worker pools consists of worker nodes that are either physical machines (bare metal) or virtual machines that run on physical hardware. You also select the worker node flavor, or combination of memory, CPU, and other machine specifications such as disk storage.
 {:shortdesc}
 
 <img src="images/cs_clusters_hardware.png" width="700" alt="Hardware options for worker nodes in a standard cluster" style="width:700px; border-style: none"/>
@@ -177,7 +177,7 @@ You can provision your worker node as a single-tenant physical server, also refe
 Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical machine types have more local storage than virtual, and some have RAID to increase data availability. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Besides better specs for performance, can I do something with bare metal that I can't with VMs?**</br>
-Yes, with bare metal worker nodes, you can use {{site.data.keyword.datashield_full}}. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified. If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example use cases include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
+Yes, with bare metal worker nodes, you can use {{site.data.keyword.datashield_full}}. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.Bluemix_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves. CPU-hardened enclaves are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified. If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example use cases include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
 Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
@@ -193,9 +193,9 @@ Bare metal machines are optimized for different use cases such as RAM-intensive,
 Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
 * **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
-* **SSD**: A solid state drive storage device for high performance data.
-* **Raw**: The storage device is unformatted, with the full capacity is available for use.
-* **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
+* **SSD**: A solid-state drive storage device for high-performance data.
+* **Raw**: The storage device is unformatted and the full capacity is available for use.
+* **RAID**: A storage device with data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
 
 
 {: #bm-table}
@@ -274,9 +274,9 @@ Worker node flavors vary by zone. The following table includes the most recent v
 Choose a machine type with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
 * **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
-* **SSD**: A solid state drive storage device for high performance data.
-* **Raw**: The storage device is unformatted, with the full capacity is available for use.
-* **RAID**: The storage device has data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
+* **SSD**: A solid-state drive storage device for high-performance data.
+* **Raw**: The storage device is unformatted and the full capacity is available for use.
+* **RAID**: A storage device with data distributed for redundancy and performance that varies depending on the RAID level. As such, the disk capacity that is available for use varies.
 
 
 {: #sds-table}
@@ -336,10 +336,10 @@ To review how much compute resources are currently used on your worker node, run
 
 | Memory tier | % or amount reserved | <code>b3c.4x16</code> worker node (16 GB) example | <code>mg1c.28x256</code> worker node (256 GB) example|
 |:-----------------|:-----------------|:-----------------|:-----------------|
-| First 4 GB (0-4 GB) | 25% of memory | 1 GB | 1 GB|
-| Next 4 GB (5-8 GB) | 20% of memory | 0.8 GB | 0.8 GB|
-| Next 8 GB (9-16 GB) | 10% of memory | 0.8 GB | 0.8 GB|
-| Next 112 GB (17-128 GB) | 6% of memory | N/A | 6.72 GB|
+| First 4 GB (0 - 4 GB) | 25% of memory | 1 GB | 1 GB|
+| Next 4 GB (5 - 8 GB) | 20% of memory | 0.8 GB | 0.8 GB|
+| Next 8 GB (9 - 16 GB) | 10% of memory | 0.8 GB | 0.8 GB|
+| Next 112 GB (17 - 128 GB) | 6% of memory | N/A | 6.72 GB|
 | Remaining GBs (129 GB+) | 2% of memory | N/A | 2.54 GB|
 | Additional reserve for [`kubelet` eviction ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/) | 100 MB | 100 MB (flat amount) | 100 MB (flat amount)|
 | **Total reserved** | **(varies)** | **2.7 GB of 16 GB total** | **11.96 GB of 256 GB total**|
@@ -349,13 +349,13 @@ To review how much compute resources are currently used on your worker node, run
 {: tab-title="Worker node memory reserves by tier"}
 {: tab-group="Worker Node"}
 
-| CPU tier | % or amount reserved | <code>b3c.4x16</code> worker node (4 cores) example | <code>mg1c.28x256</code> worker node (28 cores) example|
+| CPU tier | % or amount reserved | <code>b3c.4x16</code> worker node (four cores) example | <code>mg1c.28x256</code> worker node (28 cores) example|
 |:-----------------|:-----------------|:-----------------|:-----------------|
 | First core (Core 1) | 6% cores | 0.06 cores | 0.06 cores|
-| Next 2 cores (Cores 2-3) | 1% cores | 0.02 cores | 0.02 cores|
-| Next 2 cores (Cores 4-5) | 0.5% cores | 0.005 cores | 0.01 cores|
+| Next two cores (Cores 2 - 3) | 1% cores | 0.02 cores | 0.02 cores|
+| Next two cores (Cores 4 - 5) | 0.5% cores | 0.005 cores | 0.01 cores|
 | Remaining cores (Cores 6+) | 0.25% cores | N/A | 0.0575 cores|
-| **Total reserved** | **(varies)** | **0.085 cores of 4 cores total** | **0.1475 cores of 28 cores total**|
+| **Total reserved** | **(varies)** | **0.085 cores of four cores total** | **0.1475 cores of 28 cores total**|
 {: class="simple-tab-table"}
 {: caption="Worker node CPU reserves by tier" caption-side="top"}
 {: #worker-cpu-reserves}
