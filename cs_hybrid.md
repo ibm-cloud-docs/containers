@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-27"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks
 
@@ -130,10 +130,13 @@ To choose a {{site.data.keyword.cloud_notm}} Direct Link offering and set up a {
 ## Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers
 {: #hybrid_ppa_importer}
 
-You can run select licensed IBM products that were packaged for {{site.data.keyword.cloud_notm}} Private in a cluster in {{site.data.keyword.cloud_notm}} Public.  
+You can run select licensed IBM products that were packaged for {{site.data.keyword.cloud_notm}} Private in a cluster in {{site.data.keyword.cloud_notm}} Public by using the PPA importer tool.  
 {: shortdesc}
 
-Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}}. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
+The PPA importer tool is available only for older versions of entitled software. If you want to run entitled software from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
+{: note}
+
+Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
 
 The following table is an overview of available {{site.data.keyword.cloud_notm}} Private products that you can use in your cluster in {{site.data.keyword.cloud_notm}} Public.
 

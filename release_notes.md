@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks
 
@@ -23,6 +23,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
+
 # Release notes
 {: #iks-release}
 
@@ -39,6 +40,10 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>09 July 2019</td>
+  <td><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</td>
+</tr>
 <tr>
   <td>08 July 2019</td>
   <td><ul>
