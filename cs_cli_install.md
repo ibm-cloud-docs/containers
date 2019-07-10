@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -100,7 +100,7 @@ Using an OpenShift cluster? [Install the OpenShift Origin CLI (`oc`)](#cli_oc). 
 {: tip}
 
 1.  If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
-    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
     2.  Compare the client and server versions. If the client does not match the server, continue to the next step. If the versions match, you already installed the appropriate version of `kubectl`.
         ```
         kubectl version --short
@@ -261,6 +261,9 @@ To use `kubectl` commands:
     ibmcloud ks clusters
     ```
     {: pre}
+
+     To work with free clusters in the London metro location, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+     {: note}
 
 5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files. <p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>

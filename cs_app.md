@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -632,7 +632,7 @@ For example, you can set up a base `kustomization` YAML to declare Kubernetes ob
 Before you begin:
 *   [Create](/docs/containers?topic=containers-clusters#clusters_ui) or [update](/docs/containers?topic=containers-update) to a cluster that runs Kubernetes version 1.14 or later.
 *   Make sure that your [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches your cluster version.
-*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To set up configuration files with Kustomize:
 1.  [Install the `kustomize` tool ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
@@ -854,7 +854,7 @@ To check the logs for individual app pods, you can run `kubectl logs <pod name>`
 Before you begin:
 * Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 * To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
-* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 You can use the default port or set your own port to launch the Kubernetes dashboard for a cluster.
 
@@ -927,7 +927,7 @@ Do you have so many resources and users in your cluster that the Kubernetes dash
 Before you begin:
 
 -   [Install the required CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+-   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources.
 -   To [launch the Kubernetes dashboard from the console](#db_gui), you must be assigned a [platform role](/docs/containers?topic=containers-users#platform). If you are assigned only a service role but no platform role, [launch the Kubernetes dashboard from the CLI](#db_cli).
 
@@ -957,7 +957,7 @@ After a cluster is created, you can deploy an app into that cluster by using the
 Before you begin:
 
 -   Install the required [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+-   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy your app:
@@ -991,7 +991,7 @@ When you deploy an app, the app pods indiscriminately deploy to various worker n
 {:shortdesc}
 
 Before you begin:
-*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To deploy apps to specific worker nodes:
@@ -1298,7 +1298,7 @@ Looking for information about scaling Cloud Foundry applications? Check out [IBM
 {: tip}
 
 Before you begin:
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Heapster monitoring must be deployed in the cluster that you want to autoscale.
 - Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
@@ -1378,7 +1378,7 @@ Want to prevent downtime during your rolling update? Be sure to specify a [readi
 {: tip}
 
 Before you begin:
-*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+*   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Create a [deployment](#app_cli).
 *   Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 

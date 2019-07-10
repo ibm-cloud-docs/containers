@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-03"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks
 
@@ -58,7 +58,7 @@ If you remove persistent storage with a `Delete` reclaim policy that you dynamic
 **I deleted my storage. Why can I still see my instances?** </br>
 After you remove persistent storage, it can take up to 72 hours for the removal to be fully processed and for the storage to disappear from your IBM Cloud infrastructure (SoftLayer) console or CLI. 
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) **Note**: To work with free clusters in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To clean up persistent data:
 
