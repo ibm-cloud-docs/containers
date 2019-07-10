@@ -257,7 +257,7 @@ ibmcloud plugin list
  <tbody>
    <tr>
      <td>[ibmcloud ks credential-get](#cs_credential_get)</td>
-     <td>[ibmcloud ks credential-set](#cs_credentials_set)</td>
+     <td>[ibmcloud ks credential-set](#cs_credentials_set) (credentials-set)</td>
      <td>[ibmcloud ks credential-unset](#cs_credentials_unset)</td>
      <td>[ibmcloud ks infra-permissions-get](#infra_permissions_get)</td>
    </tr>
@@ -413,6 +413,7 @@ ibmcloud plugin list
 </br>
 
 
+
 <table summary="Worker node commands table">
 <caption>Worker node commands</caption>
 <col width="25%">
@@ -428,7 +429,6 @@ ibmcloud plugin list
       <td>[ibmcloud ks worker-reboot](#cs_worker_reboot)</td>
       <td>[ibmcloud ks worker-reload](#cs_worker_reload)</td>
     </tr>
-    <tr>
       <td>[ibmcloud ks worker-rm](#cs_worker_rm)</td>
       <td>[ibmcloud ks worker-update](#cs_worker_update)</td>
       <td>[ibmcloud ks workers](#cs_workers)</td>
@@ -1246,8 +1246,8 @@ diskEncryption: <em>false</em>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with one worker node is created. This value is optional for standard clusters and is not available for free clusters.
-<p class="important">If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone.</p>
-<p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
+<p class="important">If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone.</br>
+</br>Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
@@ -1580,6 +1580,7 @@ ibmcloud ks clusters [--locations LOCATION] [--json] [-s]
 
 **Command options**:
 <dl>
+
 <dt><code>--locations <em>LOCATION</em></code></dt>
 <dd>Filter zones by a specific location or a list of comma-separated locations. To see supported locations, run <code>ibmcloud ks supported-locations</code>.</dd>
 
@@ -2343,7 +2344,7 @@ You can use this command to:
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
 
 ```
-ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disable] [--disable-deployment] [-s]
+ibmcloud ks alb-configure --albID ALB_ID --disable|--enable [--user-ip USER_IP]|--disable-deployment [-s]
 ```
 {: pre}
 
@@ -2354,17 +2355,17 @@ ibmcloud ks alb-configure --albID ALB_ID [--enable] [--user-ip USER_IP] [--disab
 <dt><code><em>--albID </em>ALB_ID</code></dt>
 <dd>The ID for an ALB. Run <code>ibmcloud ks albs <em>--cluster </em>CLUSTER</code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
 
-<dt><code>--enable</code></dt>
-<dd>Include this flag to enable an ALB in a cluster.</dd>
-
 <dt><code>--disable</code></dt>
 <dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP address that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
 
-<dt><code>--disable-deployment</code></dt>
-<dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
+<dt><code>--enable</code></dt>
+<dd>Include this flag to enable an ALB in a cluster.</dd>
 
 <dt><code>--user-ip <em>USER_IP</em></code></dt>
 <dd>Optional: If you enable the ALB with the <code>--enable</code> flag, you can specify an IP address that is on a VLAN in the zone that the ALB was created in. The ALB is enabled with and uses this public or private IP address. <strong>Note</strong>: This IP address must not be in use by another load balancer or ALB in the cluster. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster, or the public or private IP address that you previously assigned to the ALB.</dd>
+
+<dt><code>--disable-deployment</code></dt>
+<dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2556,7 +2557,7 @@ ibmcloud ks credential-get --region us-south
 {: pre}
 
 </br>
-### ibmcloud ks credential-set
+### ibmcloud ks credential-set (credentials-set)
 {: #cs_credentials_set}
 
 Set credentials for a resource group and region so that you can access the IBM Cloud infrastructure (SoftLayer) portfolio through your {{site.data.keyword.cloud_notm}} account.
@@ -2710,6 +2711,7 @@ Manage Storage    required
 
 
 </br>
+
 ### ibmcloud ks machine-types
 {: #cs_machine_types}
 
@@ -2752,8 +2754,7 @@ ibmcloud ks machine-types --zone dal10
 View the VLAN spanning status for an IBM Cloud infrastructure (SoftLayer) account. VLAN spanning enables all devices on an account to communicate with each other through the private network, regardless of its assigned VLAN.
 {: shortdesc}
 
-The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).
-{: note}
+<p class="note">The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).</br></br></p>
 
 ```
 ibmcloud ks vlan-spanning-get --region REGION [--json] [-s]
@@ -4110,7 +4111,7 @@ View the details of a worker node.
 {: shortdesc}
 
 ```
-ibmcloud ks worker-get --cluster [CLUSTER_NAME_OR_ID] --worker WORKER_NODE_ID [--json] [-s]
+ibmcloud ks worker-get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--json] [-s]
 ```
 {: pre}
 
@@ -4289,7 +4290,7 @@ Before you reload your worker node, make sure that pods are rescheduled on other
 
 
 ```
-ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-s]
+ibmcloud ks worker-reload --cluster CLUSTER --workers WORKER [WORKER] [--skip-master-healthcheck] [-f] [-s]
 ```
 {: pre}
 
@@ -4300,14 +4301,14 @@ ibmcloud ks worker-reload [-f] --cluster CLUSTER --workers WORKER [WORKER] [--sk
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>-f</code></dt>
-<dd>Use this option to force the reload of a worker node without user prompts. This value is optional.</dd>
-
 <dt><code>--worker <em>WORKER</em></code></dt>
 <dd>The name or ID of one or more worker nodes. Use a space to list multiple worker nodes. This value is required.</dd>
 
 <dt><code>--skip-master-healthcheck</code></dt>
 <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Use this option to force the reload of a worker node without user prompts. This value is optional.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -4320,6 +4321,7 @@ ibmcloud ks worker-reload --cluster my_cluster --workers kube-dal10-cr18a61a63a6
 {: pre}
 
 </br>
+
 ### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
@@ -4487,7 +4489,10 @@ Use this group of commands to view and modify worker pools for a cluster.
 {: #cs_worker_pool_create}
 
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
-{: shortdesc}
+{: shortdesc}<staging-vpc>
+
+To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool-create-vpc-classic` command](#cli-worker-pool-create-vpc-classic) instead.
+{: note}</staging-vpc>
 
 ```
 ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
@@ -4721,6 +4726,9 @@ ibmcloud ks worker-pools --cluster my_cluster
 After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
 {: shortdesc}
 
+To add a zone to worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-add-vpc-classic` command](#cli-zone-add-vpc-classic) instead.
+{: note}
+
 ```
 ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
 ```
@@ -4830,7 +4838,10 @@ ibmcloud ks zone-network-set --zone dal10 --cluster my_cluster --worker-pools po
 {: #cs_zone_rm}
 
 **Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
-{: shortdesc}
+{: shortdesc}<staging-vpc>
+
+To remove a zone from worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-rm-vpc-classic` command](#cli-zone-rm-vpc-classic) instead.
+{: note}</staging-vpc>
 
 Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
@@ -4845,7 +4856,7 @@ ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
+<dd>The zone that you want to remove. This value is required.</dd>
 
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
