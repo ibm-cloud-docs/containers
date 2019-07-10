@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks
 
@@ -1327,6 +1327,6 @@ You can remove IBM Cloud infrastructure (SoftLayer) permissions for a user by us
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
 2. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
-4. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
-5. In each tab, deselect specific permissions.
-6. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
+3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
+4. In each tab, deselect specific permissions.
+5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.

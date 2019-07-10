@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
