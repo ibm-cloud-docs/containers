@@ -2352,8 +2352,8 @@ ibmcloud ks alb-configure --albID ALB_ID --disable|--enable [--user-ip USER_IP]|
 
 **Command options**:
 <dl>
-<dt><code><em>--albID </em>ALB_ID</code></dt>
-<dd>The ID for an ALB. Run <code>ibmcloud ks albs <em>--cluster </em>CLUSTER</code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+<dt><code>--albID <em>ALB_ID</em></code></dt>
+<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code>. This value is required.</dd>
 
 <dt><code>--disable</code></dt>
 <dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP address that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</p></dd>
@@ -2408,8 +2408,8 @@ ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
 
 **Command options**:
 <dl>
-<dt><code><em>--albID </em>ALB_ID</code></dt>
-<dd>The ID for an ALB. Run <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code> to view the IDs for the ALBs in a cluster. This value is required.</dd>
+<dt><code>--albID <em>ALB_ID</em></code></dt>
+<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code>. This value is required.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4867,5 +4867,3 @@ ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
 ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
 ```
 {: pre}
-
-
