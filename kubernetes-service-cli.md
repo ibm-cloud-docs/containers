@@ -2401,7 +2401,7 @@ Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
 
 ![VPC infrastructure provider icon](images/icon-vpc.png) VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
-{: note
+{: note}
 
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb-create` command are enabled by default too.
