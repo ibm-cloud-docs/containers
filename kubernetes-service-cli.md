@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -4324,6 +4324,7 @@ ibmcloud ks worker-reload --cluster my_cluster --workers kube-dal10-cr18a61a63a6
 
 </br>
 
+
 ### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
@@ -4491,10 +4492,7 @@ Use this group of commands to view and modify worker pools for a cluster.
 {: #cs_worker_pool_create}
 
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
-{: shortdesc}<staging-vpc>
-
-To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool-create-vpc-classic` command](#cli-worker-pool-create-vpc-classic) instead.
-{: note}</staging-vpc>
+{: shortdesc}
 
 ```
 ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
@@ -4728,9 +4726,6 @@ ibmcloud ks worker-pools --cluster my_cluster
 After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
 {: shortdesc}
 
-To add a zone to worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-add-vpc-classic` command](#cli-zone-add-vpc-classic) instead.
-{: note}
-
 ```
 ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
 ```
@@ -4840,10 +4835,7 @@ ibmcloud ks zone-network-set --zone dal10 --cluster my_cluster --worker-pools po
 {: #cs_zone_rm}
 
 **Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
-{: shortdesc}<staging-vpc>
-
-To remove a zone from worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-rm-vpc-classic` command](#cli-zone-rm-vpc-classic) instead.
-{: note}</staging-vpc>
+{: shortdesc}
 
 Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
