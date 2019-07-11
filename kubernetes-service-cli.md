@@ -96,6 +96,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
 </table>
 
 
+
 ## ibmcloud ks commands
 {: #cs_commands}
 
@@ -1107,7 +1108,7 @@ ibmcloud ks cluster-addons --cluster CLUSTER
 ### ibmcloud ks cluster-config
 {: #cs_cluster_config}
 
-After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/container-service/clusters/<cluster_name>`.
+After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>`.
 {: shortdesc}
 
 ```
@@ -1125,7 +1126,7 @@ ibmcloud ks cluster-config --cluster CLUSTER [--admin] [--export] [--network] [-
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--admin</code></dt>
-<dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
+<dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
 
 <dt><code>--network</code></dt>
 <dd>Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: To get the export command for the downloaded Kubernetes configuration data and certificates, you must run this command without this flag.</dd>
@@ -2388,6 +2389,62 @@ ibmcloud ks alb-configure --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb
 Example for disabling an ALB:
 ```
 ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+```
+{: pre}
+
+</br>
+
+### ibmcloud ks alb-configure-vpc-classic
+{: #cli_alb-configure-vpc-classic2}
+
+Enable or disable an ALB in a VPC on Classic cluster.
+{: shortdesc}
+
+![VPC infrastructure provider icon](images/icon-vpc.png) VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
+{: note
+
+You can use this command to:
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb-create` command are enabled by default too.
+* Enable an ALB that you previously disabled.
+* Disable an ALB.
+* Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
+
+```
+ibmcloud ks alb-configure-vpc-classic --albID ALB_ID --enable|--disable|--disable-deployment [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--albID <em>ALB_ID</em></code></dt>
+<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks albs --cluster <em>CLUSTER</em></code>. This value is required.</dd>
+
+<dt><code>--enable</code></dt>
+<dd>Include this flag to enable an ALB in a cluster.</dd>
+
+<dt><code>--disable</code></dt>
+<dd>Include this flag to disable an ALB in a cluster.</dd>
+
+<dt><code>--disable-deployment</code></dt>
+<dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Examples**:
+
+Example for enabling an ALB:
+```
+ibmcloud ks alb-configure-vpc-classic --albID private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
+```
+{: pre}
+
+Example for disabling an ALB:
+```
+ibmcloud ks alb-configure-vpc-classic --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
 ```
 {: pre}
 

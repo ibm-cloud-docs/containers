@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks
 
@@ -82,9 +82,9 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
     {: tip}
-3.  In your terminal, log in to your {{site.data.keyword.Bluemix_notm}} account. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Target the region (`-r`) and resource group (`-g`) that you created your cluster in.
+3.  In your terminal, log in to your {{site.data.keyword.Bluemix_notm}} account. Enter your {{site.data.keyword.Bluemix_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
     ```
-    ibmcloud login -r <region> -g <resource_group> [--sso]
+    ibmcloud login [-g <resource_group>] [--sso]
     ```
     {: pre}
 5.  Verify that the plug-ins are installed correctly.
@@ -93,7 +93,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: pre}
   
-    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **container-service**, and the {{site.data.keyword.registryshort_notm}} plug-in is displayed in the results as **container-registry**.
+    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registryshort_notm}} plug-in is displayed in the results as **container-registry**.
 6.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
@@ -127,7 +127,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
         Example for OS X:
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/    pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/    pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
         ```
         {: screen}
     2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
@@ -142,7 +142,7 @@ Because it can take a few minutes to provision, create your cluster before you s
         Example output:
 
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
+        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
         ```
         {: screen}
 

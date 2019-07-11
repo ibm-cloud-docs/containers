@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -277,7 +277,7 @@ To use `kubectl` commands:
         Example:
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
@@ -297,7 +297,7 @@ To use `kubectl` commands:
 
         Output:
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
@@ -392,7 +392,7 @@ To update the CLIs:
     1.  Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
 
         ```
-        ibmcloud plugin update container-service 
+        ibmcloud plugin update kubernetes-service 
         ```
         {: pre}
 
@@ -403,7 +403,7 @@ To update the CLIs:
         ```
         {: pre}
 
-        The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as container-service.
+        The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as kubernetes-service.
 
     3.  Initialize the CLI.
 
@@ -452,7 +452,7 @@ To uninstall the CLIs:
 1.  Uninstall the {{site.data.keyword.containerlong_notm}} plug-in.
 
     ```
-    ibmcloud plugin uninstall container-service
+    ibmcloud plugin uninstall kubernetes-service
     ```
     {: pre}
 
@@ -470,7 +470,7 @@ To uninstall the CLIs:
     ```
     {: pre}
 
-    The container-service and the container-registry plug-in are not displayed in the results.
+    The kubernetes-service and the container-registry plug-in are not displayed in the results.
 
 <br />
 

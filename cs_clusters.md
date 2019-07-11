@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -492,7 +492,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 
       Example for OS X:
       ```
-      export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+      export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
       ```
       {: screen}
   2. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
@@ -505,7 +505,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 
       Output:
       ```
-      /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+      /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
       ```
       {: screen}
 
@@ -607,7 +607,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
         Example for OS X:
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
     2. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
@@ -664,14 +664,14 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
     Example for OS X:
     ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
     ```
     {: screen}
 
 8. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
   1. Navigate to the `kubeconfig` directory and open the file.
     ```
-    cd /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name> && nano touch kube-config-prod-dal10-mycluster.yml
+    cd /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name> && nano touch kube-config-prod-dal10-mycluster.yml
     ```
     {: pre}
   2. Edit your Kubernetes configuration file to add the word `private` to the service endpoint URL. For example, in the Kubernetes configuration file `kube-config-prod-dal10-mycluster.yml`, the server field might look like `server: https://c1.us-east.containers.cloud.ibm.com:30426`. You can change this URL to the private service endpoint URL by changing the server field to `server: https://c1.private.us-east.containers.cloud.ibm.com:30426`.

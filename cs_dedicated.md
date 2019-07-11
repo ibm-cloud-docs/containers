@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-28"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks
 
@@ -437,7 +437,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         Example for OS X:
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
         ```
         {: screen}
 
@@ -454,7 +454,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         Output:
 
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
+        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>/kube-config-prod-dal10-<cluster_name>.yml
 
         ```
         {: screen}
