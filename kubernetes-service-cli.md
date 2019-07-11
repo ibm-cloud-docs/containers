@@ -3682,6 +3682,41 @@ ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a
 {: pre}
 
 </br>
+### ibmcloud ks nlb-dns-monitor-get
+{: #cs_nlb-dns-monitor-get}
+
+View the settings for an existing health check monitor.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dnss --cluster CLUSTER</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+</br>
 ### ibmcloud ks nlb-dns-monitor-disable
 {: #cs_nlb-dns-monitor-disable}
 
@@ -3754,43 +3789,6 @@ ibmcloud ks nlb-dns-monitor-enable --cluster mycluster --nlb-host mycluster-a1b2
 {: pre}
 
 </br>
-
-### ibmcloud ks nlb-dns-monitor-get
-{: #cs_nlb-dns-monitor-get}
-
-View the settings for an existing health check monitor.
-{: shortdesc}
-
-```
-ibmcloud ks nlb-dns-monitor-get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dnss --cluster CLUSTER</code>.</dd>
-
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks nlb-dns-monitor-get --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
-```
-{: pre}
-
-</br>
-
 ### ibmcloud ks nlb-dns-monitor-status
 {: #cs_nlb-dns-monitor-status}
 
@@ -4324,7 +4322,6 @@ ibmcloud ks worker-reload --cluster my_cluster --workers kube-dal10-cr18a61a63a6
 
 </br>
 
-
 ### ibmcloud ks worker-rm
 {: #cs_worker_rm}
 
@@ -4492,7 +4489,10 @@ Use this group of commands to view and modify worker pools for a cluster.
 {: #cs_worker_pool_create}
 
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the machine types for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
-{: shortdesc}
+{: shortdesc}<staging-vpc>
+
+To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool-create-vpc-classic` command](#cli-worker-pool-create-vpc-classic) instead.
+{: note}</staging-vpc>
 
 ```
 ibmcloud ks worker-pool-create --name POOL_NAME --cluster CLUSTER --machine-type MACHINE_TYPE --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--labels LABELS] [--disable-disk-encrypt] [-s] [--json]
@@ -4726,6 +4726,9 @@ ibmcloud ks worker-pools --cluster my_cluster
 After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
 {: shortdesc}
 
+To add a zone to worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-add-vpc-classic` command](#cli-zone-add-vpc-classic) instead.
+{: note}
+
 ```
 ibmcloud ks zone-add --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
 ```
@@ -4835,7 +4838,10 @@ ibmcloud ks zone-network-set --zone dal10 --cluster my_cluster --worker-pools po
 {: #cs_zone_rm}
 
 **Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
-{: shortdesc}
+{: shortdesc}<staging-vpc>
+
+To remove a zone from worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone-rm-vpc-classic` command](#cli-zone-rm-vpc-classic) instead.
+{: note}</staging-vpc>
 
 Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
