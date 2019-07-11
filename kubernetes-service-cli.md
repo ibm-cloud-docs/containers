@@ -2400,7 +2400,7 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="50" style="width:50px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="25" style="width:25px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
 {: note}
 
 You can use this command to:
