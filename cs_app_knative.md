@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-11"
 
 ---
 
@@ -344,7 +344,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
    - Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
-   - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as a record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
+   - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as an A record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
 3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
 4. Create a Kubernetes secret for your cert and key.
    1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
