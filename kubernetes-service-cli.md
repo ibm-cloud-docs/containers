@@ -4586,7 +4586,7 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.13.7_1512
+  Version:            1.13.8_1512
   ```
   {: screen}
 
