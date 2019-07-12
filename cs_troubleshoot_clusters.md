@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-# Troubleshooting clusters and worker nodes 
+# Troubleshooting clusters and worker nodes
 {: #cs_troubleshoot_clusters}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting your clusters and worker nodes.
@@ -132,10 +132,10 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ibmcloud ks infra-permissions-get --region <region>
         ```
         {: pre}
-        
+
         For console and CLI commands to assign these permissions, see [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
         {: tip}
-        
+
     2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) infrastructure credentials owner for the region and resource group.
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster.
@@ -159,6 +159,59 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 
     3.  If the worker node is not removed, review that [**State** and **Status** fields](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) and the [common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues) to continue debugging.
     4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
+
+<br />
+
+
+## Unable to create a cluster or manage worker nodes due to paid account error
+{: #cs_totp}
+
+{: tsSymptoms}
+You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
+* Provision clusters and workers: `ibmcloud ks cluster-create`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+* Reload workers: `ibmcloud ks worker-reload` or `ibmcloud ks worker-update`
+* Reboot workers: `ibmcloud ks worker-reboot`
+* Delete clusters and workers: `ibmcloud ks cluster-rm`, `ibmcloud ks worker-rm`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+
+However, you receive an error message similar to the following.
+```
+Unable to connect to the IBM Cloud account. Ensure that you have a paid account.
+```
+{: screen}
+
+{: tsCauses}
+Your {{site.data.keyword.cloud_notm}} account uses its own automatically linked infrastructure through a Pay-as-you-Go account. However, the account administrator enabled the time-based one-time passcode (TOTP) option so that users are prompted for a time-based one-time passcode (TOTP) at login. This type of [multifactor authentication (MFA)](/docs/iam?topic=iam-types#account-based) is account-based, and affects all access to the account. TOTP MFA also affects the access that {{site.data.keyword.containerlong_notm}} requires to make calls to {{site.data.keyword.cloud_notm}} infrastructure. If TOTP is enabled for the account, you cannot create and manage clusters and worker nodes in {{site.data.keyword.containerlong_notm}}.
+
+{: tsResolve}
+The {{site.data.keyword.cloud_notm}} account owner or an account administrator must either:
+* Disable TOTP for the account, and continue to use the automatically linked infrastructure credentials for {{site.data.keyword.containerlong_notm}}.
+* Continue to use TOTP, but create an infrastructure API key that {{site.data.keyword.containerlong_notm}} can use to make direct calls to the {{site.data.keyword.cloud_notm}} infrastructure API.
+
+
+**To disable TOTP MFA for the account:**
+1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
+2. In the left navigation, click the **Settings** page.
+3. Under **Multifactor authentication**, click **Edit**.
+4. Select **None**, and click **Update**.
+
+**To use TOTP MFA and create an infrastructure API key for {{site.data.keyword.containerlong_notm}}:**
+1. From the [{{site.data.keyword.cloud_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
+2. In the **API Keys** section, find or create a classic infrastructure API key.   
+3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
+    ```
+    ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+    ```
+    {: pre}
+4. Verify that the correct credentials are set.
+    ```
+    ibmcloud ks credential-get --region <region>
+    ```
+    Example output:
+    ```
+    Infrastructure credentials for user name user@email.com set for resource group default.
+    ```
+    {: screen}
+5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key-reset --region <region>` in each region where you have clusters.
 
 <br />
 
@@ -834,7 +887,7 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 {: screen}
 
 {: tsCauses}
-Your cluster uses an API key or token that is stored in an [image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}. By default, new clusters have image pull secrets that use API keys so that the cluster can pull images from any regional `icr.io` registry for containers that are deployed to the `default` Kubernetes namespace. 
+Your cluster uses an API key or token that is stored in an [image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}. By default, new clusters have image pull secrets that use API keys so that the cluster can pull images from any regional `icr.io` registry for containers that are deployed to the `default` Kubernetes namespace.
 
 For clusters that were created before **1 July 2019**, the cluster might have an image pull secret that uses a token. Tokens grant access to {{site.data.keyword.registrylong_notm}} for only certain regional registries that use the deprecated `<region>.registry.bluemix.net` domains.
 

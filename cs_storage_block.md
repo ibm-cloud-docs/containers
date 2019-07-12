@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Storing data on IBM Block Storage for IBM Cloud
+# Storing data on classic IBM Cloud Block Storage
 {: #block_storage}
 
 {{site.data.keyword.cloud_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.cloud_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).

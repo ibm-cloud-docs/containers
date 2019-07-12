@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-11"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2400,7 +2400,7 @@ ibmcloud ks alb-configure --albID public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="25" style="width:25px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cli_alb-configure) instead.
 {: note}
 
 You can use this command to:
@@ -2455,6 +2455,8 @@ ibmcloud ks alb-configure-vpc-classic --albID public-cr18a61a63a6a94b658596aa93a
 
 View the details of an Ingress ALB in a cluster.
 {: shortdesc}
+
+
 
 ```
 ibmcloud ks alb-get --albID ALB_ID [--json] [-s]
