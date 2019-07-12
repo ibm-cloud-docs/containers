@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks
 
@@ -435,6 +435,9 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 ## Version 1.13 changelog
 {: #113_changelog}
+
+Review the version 1.13 changelog.
+{: shortdesc}
 
 ### Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019
 {: #1137_1528}
