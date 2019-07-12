@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector minorista
@@ -39,7 +39,7 @@ Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas,
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados comerciales y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas apps. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas.
 
 {{site.data.keyword.containerlong_notm}} y tecnologías clave:
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -127,7 +127,7 @@ Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_not
 
 Tecnologías clave:    
 * [Escalado horizontal para acelerar el desarrollo](/docs/containers?topic=containers-app#highly_available_apps)
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Datos valiosos sobre tendencias del mercado con Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Gestión de inventario con {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)

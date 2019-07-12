@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Registro de cambios de versiones
@@ -30,23 +30,450 @@ subcollection: containers
 Visualice información de cambios de versiones de actualizaciones mayores, menores y parches de actualización que están disponibles para los clústeres {{site.data.keyword.containerlong}} Kubernetes. Los cambios incluyen actualizaciones a Kubernetes y a los componentes de Proveedores de {{site.data.keyword.Bluemix_notm}}.
 {:shortdesc}
 
+A menos que se indique lo contrario en los registros de cambios, la versión de proveedor de {{site.data.keyword.containerlong_notm}} habilita las API de Kubernetes y las características que están en fase beta. Las características alfa de Kubernetes, que están sujetas a cambios, están inhabilitadas.
+
 Para obtener más información acerca de las versiones principales, secundarias y de parche y sobre las acciones de preparación entre versiones menores, consulte [Versiones de Kubernetes](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 Para obtener información sobre los cambios desde la versión anterior, consulte los siguientes registros de cambios.
+-  [Registros de cambios](#114_changelog) de la versión 1.14.
 -  [Registros de cambios](#113_changelog) de la versión 1.13.
 -  [Registros de cambios](#112_changelog) de la versión 1.12.
--  [Registros de cambios](#111_changelog) de la versión 1.11.
--  **En desuso**: [Registros de cambios](#110_changelog) de la versión 1.10.
+-  **En desuso**: [Registros de cambios](#111_changelog) de la versión 1.11.
 -  [Archivo](#changelog_archive) de registros de cambios para versiones no soportadas.
 
-Algunos registros de cambios son para _fixpacks de nodos trabajadores_ y solo se aplican a los nodos trabajadores. Debe [aplicar estos parches](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) para garantizar la conformidad de seguridad de los nodos trabajadores. Estos fixpacks de nodo trabajador pueden estar en una versión posterior que el maestro porque algunos fixpacks de compilación son específicos de los nodos trabajadores. Otros registros de cambios son para _fixpacks de nodo maestro_ y solo se aplican al nodo maestro del clúster. Es posible que los fixpacks de nodo maestro no se apliquen automáticamente. Puede optar por [aplicarlos manualmente](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). Para obtener más información sobre los tipos de parches, consulte [Tipos de actualizaciones](/docs/containers?topic=containers-cs_versions#update_types).
+Algunos registros de cambios son para _fixpacks de nodos trabajadores_ y solo se aplican a los nodos trabajadores. Debe [aplicar estos parches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) para garantizar la conformidad de seguridad de los nodos trabajadores. Estos fixpacks de nodo trabajador pueden estar en una versión posterior que el maestro porque algunos fixpacks de compilación son específicos de los nodos trabajadores. Otros registros de cambios son para _fixpacks de nodo maestro_ y solo se aplican al nodo maestro del clúster. Es posible que los fixpacks de nodo maestro no se apliquen automáticamente. Puede optar por [aplicarlos manualmente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). Para obtener más información sobre los tipos de parches, consulte [Tipos de actualizaciones](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
 
+## Registro de cambios de la versión 1.14
+{: #114_changelog}
+
+### Registro de cambios para 1.14.2_1521, publicado el 4 de junio de 2019
+{: #1142_1521}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.14.2_1521.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.14.1_1519">
+<caption>Cambios desde la versión 1.14.1_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuración de DNS de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha corregido un error que podía provocar que los pods de Kubernetes DNS y de CoreDNS siguieran ejecutándose después de operaciones `create` o `update`.</td>
+</tr>
+<tr>
+<td>Configuración de alta disponibilidad de nodo maestro de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha actualizado la configuración para minimizar los errores intermitentes de conectividad de red maestra durante una actualización de nodo maestro.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Consulte las [notas del release de etcd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Se ha actualizado para dar soporte al release 1.14.2 de Kubernetes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2).</td>
+</tr>
+<tr>
+<td>Servidor de métricas de Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Consulte las [notas del release del servidor de métricas de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.14.1_1519, publicado el 20 de mayo de 2019
+{: #1141_1519}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.14.1_1519.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.14.1_1518">
+<caption>Cambios desde la versión 1.14.1_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel de Ubuntu 16.04</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel de Ubuntu 18.04</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para 1.14.1_1518, publicado el 13 de mayo de 2019
+{: #1141_1518}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.14.1_1518.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.14.1_1516">
+<caption>Cambios desde la versión 1.14.1_1516</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy de alta disponibilidad de maestro de clúster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Consulte las [notas del release de HAProxy ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La actualización resuelve
+[CVE-2019-6706 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Configuración de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configuración de la política de auditoría del servidor de API de Kubernetes se ha actualizado para que no registre el URL de solo lectura `/openapi/v2*`. Además, la configuración del gestor del controlador de Kubernetes ha aumentado la duración de validez de los certificados de `kubelet` firmados de 1 a 3 años.</td>
+</tr>
+<tr>
+<td>Configuración del cliente OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>El pod `vpn-*` del cliente de OpenVPN del espacio de nombres `kube-system` ahora establece `dnsPolicy` en `Default` para evitar que el pod falle cuando el DNS del clúster esté inactivo.</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>Se ha actualizado la imagen para [CVE-2016-7076 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) y
+[CVE-2017-1000368 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para 1.14.1_1516, publicado el 7 de mayo de 2019
+{: #1141_1516}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.14.1_1516.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.13.5_1519">
+<caption>Cambios desde la versión 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.1</td>
+<td>Consulte las [notas del release de Calico ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>Consulte las [notas del release de CoreDNS ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). La actualización incluye la adición de un [puerto de métricas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://coredns.io/plugins/metrics/) en el servicio DNS de clúster. <br><br>Ahora CoreDNS es el único proveedor de DNS de clúster soportado. Si actualiza un clúster a Kubernetes versión 1.14 desde una versión anterior y utiliza KubeDNS, KubeDNS se migra automáticamente a CoreDNS durante la actualización del clúster. Para obtener más información o para probar CoreDNS antes de actualizar, consulte [Configuración del proveedor de DNS de clúster](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>Se ha actualizado la imagen para [CVE-2019-1543 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Se ha actualizado para dar soporte al release 1.14.1 de Kubernetes. Además, la versión de `calicoctl` se ha actualizado a 3.6.1. Se han corregido las actualizaciones a los equilibradores de carga de la versión 2.0 con solo un nodo trabajador disponible para los pods de equilibrador de carga. Ahora los equilibradores de carga privados se pueden ejecutar en [nodos trabajadores de extremo privados](/docs/containers?topic=containers-edge#edge).</td>
+</tr>
+<tr>
+<td>Políticas de seguridad de pod de IBM</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Las [políticas de seguridad de pod de IBM](/docs/containers?topic=containers-psp#ibm_psp) se han actualizado para dar soporte a la característica [RunAsGroup ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) de Kubernetes.</td>
+</tr>
+<tr>
+<td>Configuración de `kubelet`</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Establezca la opción `--pod-max-pids` en `14336` para evitar que un solo pod consulta todos los ID de proceso de un nodo trabajador.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) y el [blog de Kubernetes 1.14 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/).<br><br>Las políticas de control de acceso basado en rol (RBAC) predeterminadas de Kubernetes ya no otorgan acceso a las [API de descubrimiento y de comprobación de permisos para usuarios autenticados ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). Este cambio solo se aplica a los nuevos clústeres de la versión 1.14. Si actualiza un clúster desde una versión anterior, los usuarios no autenticados siguen teniendo acceso a las API de descubrimiento y comprobación de permisos.</td>
+</tr>
+<tr>
+<td>Configuración de controladores de admisión de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td><ul>
+<li>Se ha añadido `NodeRestriction` a la opción `--enable-admission-plugins` para el servidor de API de Kubernetes del clúster y se han configurado los recursos relacionados del clúster para que den soporte a esta mejora en la seguridad.</li>
+<li>Se ha eliminado `Initializers` de la opción `--enable-admission-plugins` y `admissionregistration.k8s.io/v1alpha1=true` de la opción `--runtime-config` para el servidor de API de Kubernetes del clúster porque estas API ya no reciben soporte. En su lugar, puede utilizar [webhooks de admisión de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/).</li></ul></td>
+</tr>
+<tr>
+<td>Kubernetes DNS Autoscaler</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>Consulte las [notas del release de Kubernetes DNS Autoscaler ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0).</td>
+</tr>
+<tr>
+<td>Configuración de puertas de características de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td><ul>
+  <li>Se ha añadido `RuntimeClass=false` para inhabilitar la selección de la configuración de tiempo de ejecución de contenedor.</li>
+  <li>Se ha eliminado `ExperimentalCriticalPodAnnotation=true` porque la anotación de pod `scheduler.alpha.kubernetes.io/critical-pod` ya no recibe soporte. En su lugar, puede utilizar la [prioridad de pod de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>Se ha actualizado la imagen para [CVE-2019-11068 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Registro de cambios de la versión 1.13
 {: #113_changelog}
+
+### Registro de cambios para 1.13.6_1524, publicado el 4 de junio de 2019
+{: #1136_1524}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.13.6_1524.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.13.6_1522">
+<caption>Cambios desde la versión 1.13.6_1522</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuración de DNS de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha corregido un error que podía provocar que los pods de Kubernetes DNS y de CoreDNS siguieran ejecutándose después de operaciones `create` o `update`.</td>
+</tr>
+<tr>
+<td>Configuración de alta disponibilidad de nodo maestro de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha actualizado la configuración para minimizar los errores intermitentes de conectividad de red maestra durante una actualización de nodo maestro.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Consulte las [notas del release de etcd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Servidor de métricas de Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Consulte las [notas del release del servidor de métricas de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.13.6_1522, publicado el 20 de mayo de 2019
+{: #1136_1522}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.13.6_1522.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.13.6_1521">
+<caption>Cambios desde la versión 1.13.6_1521</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel de Ubuntu 16.04</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel de Ubuntu 18.04</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para 1.13.6_1521, publicado el 13 de mayo de 2019
+{: #1136_1521}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.13.6_1521.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.13.5_1519">
+<caption>Cambios desde la versión 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy de alta disponibilidad de maestro de clúster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Consulte las [notas del release de HAProxy ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La actualización resuelve
+[CVE-2019-6706 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Se ha actualizado la imagen para [CVE-2019-1543 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Se ha actualizado para dar soporte al release 1.13.6 de Kubernetes. Además, se ha corregido el proceso de actualización para el equilibrador de carga de la versión 2.0 que solo tiene un nodo trabajador disponible para los pods del equilibrador de carga.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6).</td>
+</tr>
+<tr>
+<td>Configuración de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configuración de la política de auditoría del servidor de API de Kubernetes se ha actualizado para que no registre el URL de solo lectura `/openapi/v2*`. Además, la configuración del gestor del controlador de Kubernetes ha aumentado la duración de validez de los certificados de `kubelet` firmados de 1 a 3 años.</td>
+</tr>
+<tr>
+<td>Configuración del cliente OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>El pod `vpn-*` del cliente de OpenVPN del espacio de nombres `kube-system` ahora establece `dnsPolicy` en `Default` para evitar que el pod falle cuando el DNS del clúster esté inactivo.</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Se ha actualizado la imagen para [CVE-2016-7076 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) y [CVE-2019-11068 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.13.5_1519, publicado el 29 de abril de 2019
+{: #1135_1519}
+
+En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.13.5_1519.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.13.5_1518">
+<caption>Cambios desde la versión 1.13.5_1518</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquetes Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Actualizaciones de los paquetes de Ubuntu instalados.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>Consulte las [notas del release de containerd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/containerd/containerd/releases/tag/v1.2.6).</td>
+</tr>
+</tbody>
+</table>
 
 ### Registro de cambios para el fixpack de nodo trabajador 1.13.5_1518, publicado el 15 de abril de 2019
 {: #1135_1518}
@@ -137,7 +564,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.13.5_1517
 </tbody>
 </table>
 
-### Changelog para el fixpack de nodo trabajador 1.13.4_1516, publicado el 1 de abril de 2019
+### Registro de cambios para el fixpack de nodo trabajador 1.13.4_1516, publicado el 1 de abril de 2019
 {: #1134_1516}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.13.4_1516.
@@ -158,7 +585,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -556,6 +983,202 @@ y `patch` de la carga de trabajo.</td>
 Revise el registro de cambios de la versión 1.12.
 {: shortdesc}
 
+### Registro de cambios para 1.12.9_1555, publicado el 4 de junio de 2019
+{: #1129_1555}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.12.9_1555.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.12.8_1553">
+<caption>Cambios desde la versión 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuración de DNS de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha corregido un error que podía provocar que los pods de Kubernetes DNS y de CoreDNS siguieran ejecutándose después de operaciones `create` o `update`.</td>
+</tr>
+<tr>
+<td>Configuración de alta disponibilidad de nodo maestro de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha actualizado la configuración para minimizar los errores intermitentes de conectividad de red maestra durante una actualización de nodo maestro.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Consulte las [notas del release de etcd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Se ha actualizado para dar soporte al release 1.12.9 de Kubernetes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9).</td>
+</tr>
+<tr>
+<td>Servidor de métricas de Kubernetes</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Consulte las [notas del release del servidor de métricas de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.12.8_1553, publicado el 20 de mayo de 2019
+{: #1128_1533}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.12.8_1553.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.12.8_1553">
+<caption>Cambios desde la versión 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel de Ubuntu 16.04</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel de Ubuntu 18.04</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para 1.12.8_1552, publicado el 13 de mayo de 2019
+{: #1128_1552}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.12.8_1552.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.12.7_1550">
+<caption>Cambios desde la versión 1.12.7_1550</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy de alta disponibilidad de maestro de clúster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Consulte las [notas del release de HAProxy ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La actualización resuelve
+[CVE-2019-6706 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Se ha actualizado la imagen para [CVE-2019-1543 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.12.7-180</td>
+<td>v1.12.8-210</td>
+<td>Se ha actualizado para dar soporte al release 1.12.8 de Kubernetes. Además, se ha corregido el proceso de actualización para el equilibrador de carga de la versión 2.0 que solo tiene un nodo trabajador disponible para los pods del equilibrador de carga.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.7</td>
+<td>v1.12.8</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8).</td>
+</tr>
+<tr>
+<td>Configuración de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configuración de la política de auditoría del servidor de API de Kubernetes se ha actualizado para que no registre el URL de solo lectura `/openapi/v2*`. Además, la configuración del gestor del controlador de Kubernetes ha aumentado la duración de validez de los certificados de `kubelet` firmados de 1 a 3 años.</td>
+</tr>
+<tr>
+<td>Configuración del cliente OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>El pod `vpn-*` del cliente de OpenVPN del espacio de nombres `kube-system` ahora establece `dnsPolicy` en `Default` para evitar que el pod falle cuando el DNS del clúster esté inactivo.</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Se ha actualizado la imagen para [CVE-2016-7076 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) y [CVE-2019-11068 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.12.7_1550, publicado el 29 de abril de 2019
+{: #1127_1550}
+
+En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.12.7_1550.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.12.7_1549">
+<caption>Cambios desde la versión 1.12.7_1549</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquetes Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Actualizaciones de los paquetes de Ubuntu instalados.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Consulte las [notas del release de containerd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Registro de cambios para el fixpack de nodo trabajador 1.12.7_1549, publicado el 15 de abril de 2019
 {: #1127_1549}
 
@@ -645,7 +1268,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.12.7_1548
 </tbody>
 </table>
 
-### Changelog para el fixpack de nodo trabajador 1.12.6_1547, publicado el 1 de abril de 2019
+### Registro de cambios para el fixpack de nodo trabajador 1.12.6_1547, publicado el 1 de abril de 2019
 {: #1126_1547}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.12.6_1547.
@@ -666,7 +1289,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1197,7 +1820,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han añadido cgroups dedicados para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han añadido cgroups dedicados para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1376,10 +1999,186 @@ Si accede al panel de control a través de `kubectl proxy`, se elimina el botón
 </tbody>
 </table>
 
-## Registro de cambios de la versión 1.11
+## En desuso: Registro de cambios de la versión 1.11
 {: #111_changelog}
 
 Revise el registro de cambios de la versión 1.11.
+{: shortdesc}
+
+La versión 1.11 de Kubernetes está en desuso y dejará de recibir soporte a partir del 27 de junio de 2019 (provisional). [Revise el impacto potencial](/docs/containers?topic=containers-cs_versions#cs_versions) de cada actualización de versión de Kubernetes y luego [actualice los clústeres](/docs/containers?topic=containers-update#update) inmediatamente al menos a la versión 1.12.
+{: deprecated}
+
+### Registro de cambios para 1.11.10_1561, publicado el 4 de junio de 2019
+{: #11110_1561}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.11.10_1561.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.11.10_1559">
+<caption>Cambios desde la versión 1.11.10_1559</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Configuración de alta disponibilidad de nodo maestro de clúster</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Se ha actualizado la configuración para minimizar los errores intermitentes de conectividad de red maestra durante una actualización de nodo maestro.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>v3.3.11</td>
+<td>v3.3.13</td>
+<td>Consulte las [notas del release de etcd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Se ha actualizado la imagen para [CVE-2018-10844 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) y [CVE-2019-5436 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.11.10_1559, publicado el 20 de mayo de 2019
+{: #11110_1559}
+
+En la tabla siguiente se muestran los cambios incluidos en el paquete de parches 1.11.10_1559.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.11.10_1558">
+<caption>Cambios desde la versión 1.11.10_1558</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel de Ubuntu 16.04</td>
+<td>4.4.0-145-generic</td>
+<td>4.4.0-148-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+<tr>
+<td>Kernel de Ubuntu 18.04</td>
+<td>4.15.0-47-generic</td>
+<td>4.15.0-50-generic</td>
+<td>Se han actualizado las imágenes de nodo trabajador con la actualización de kernel para [CVE-2018-12126 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) y [CVE-2018-12130 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para 1.11.10_1558, publicado el 13 de mayo de 2019
+{: #11110_1558}
+
+En la siguiente tabla se muestran los cambios incluidos en el parche 1.11.10_1558.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.11.9_1556">
+<caption>Cambios desde la versión 1.11.9_1556</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy de alta disponibilidad de maestro de clúster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Consulte las [notas del release de HAProxy ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La actualización resuelve
+[CVE-2019-6706 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Plugin de dispositivo GPU e instalador</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Se ha actualizado la imagen para [CVE-2019-1543 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543).</td>
+</tr>
+<tr>
+<td>Proveedor de {{site.data.keyword.Bluemix_notm}}</td>
+<td>v1.11.9-241</td>
+<td>v1.11.10-270</td>
+<td>Se ha actualizado para dar soporte al release 1.11.10 de Kubernetes.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.11.9</td>
+<td>v1.11.10</td>
+<td>Consulte las [notas del release de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10).</td>
+</tr>
+<tr>
+<td>Configuración de Kubernetes</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>La configuración de la política de auditoría del servidor de API de Kubernetes se ha actualizado para que no registre el URL de solo lectura `/openapi/v2*`. Además, la configuración del gestor del controlador de Kubernetes ha aumentado la duración de validez de los certificados de `kubelet` firmados de 1 a 3 años.</td>
+</tr>
+<tr>
+<td>Configuración del cliente OpenVPN</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>El pod `vpn-*` del cliente de OpenVPN del espacio de nombres `kube-system` ahora establece `dnsPolicy` en `Default` para evitar que el pod falle cuando el DNS del clúster esté inactivo.</td>
+</tr>
+<tr>
+<td>Agente de cálculo fiable</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Se ha actualizado la imagen para [CVE-2016-7076 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) y [CVE-2019-11068 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068).</td>
+</tr>
+</tbody>
+</table>
+
+### Registro de cambios para el fixpack de nodo trabajador 1.11.9_1556, publicado el 29 de abril de 2019
+{: #1119_1556}
+
+En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.11.9_1556.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.11.9_1555">
+<caption>Cambios desde la versión 1.11.9_1555</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquetes Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Actualizaciones de los paquetes de Ubuntu instalados.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Consulte las [notas del release de containerd ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Registro de cambios para el fixpack de nodo trabajador 1.11.9_1555, publicado el 15 de abril de 2019
 {: #1119_1555}
@@ -1476,7 +2275,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.11.9_1554
 </tbody>
 </table>
 
-### Changelog para el fixpack de nodo trabajador 1.11.8_1553, publicado el 1 de abril de 2019
+### Registro de cambios para el fixpack de nodo trabajador 1.11.8_1553, publicado el 1 de abril de 2019
 {: #1118_1553}
 
 En la siguiente tabla se muestran los cambios incluidos en el arreglo de nodo trabajador 1.11.8_1553.
@@ -1497,7 +2296,7 @@ En la siguiente tabla se muestran los cambios incluidos en el arreglo de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2013,7 +2812,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han añadido cgroups dedicados para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han añadido cgroups dedicados para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2133,9 +2932,9 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.11.3_1533
 <td>N/D</td>
 <td>N/D</td>
 <td>Los nodos trabajadores nativos con chips TPM para Trusted Compute utilizan el kernel de Ubuntu predeterminado hasta que se habilita la confianza. Si
-[habilita la confianza](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) en un clúster existente, necesitará
-[volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+[habilita la confianza](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) en un clúster existente, necesitará
+[volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
+el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
@@ -2373,14 +3172,13 @@ Además, ahora, cuando actualiza el nodo maestro del clúster, la clase de almac
 <td>N/D</td>
 <td>N/D</td>
 <td>Se ha modificado para utilizar temporizadores `systemd` en lugar de `cronjobs` para evitar que `logrotate` falle en los nodos trabajadores que no se han vuelto a cargar o no se han actualizado en 90 días. **Nota**: en
-todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Caducidad de la contraseña raíz</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
+<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
 </tr>
 <tr>
 <td>Componentes de tiempo de ejecución de nodo trabajador (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -2552,16 +3350,110 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.11.2_1513
 <br />
 
 
-## En desuso: Registro de cambios de la versión 1.10
+## Archivo
+{: #changelog_archive}
+
+Versiones no soportadas de Kubernetes:
+*  [Versión 1.10](#110_changelog)
+*  [Versión 1.9](#19_changelog)
+*  [Versión 1.8](#18_changelog)
+*  [Versión 1.7](#17_changelog)
+
+### Registro de cambios de la versión 1.10 (sin soporte desde el 16 de mayo de 2019)
 {: #110_changelog}
 
-Revise el registro de cambios de la versión 1.10.
+Revise los registros de cambios de la versión 1.10.
 {: shortdesc}
 
-La versión 1.10 de Kubernetes está en desuso y dejará de recibir soporte a partir del 15 de mayo de 2019. [Revise el impacto potencial](/docs/containers?topic=containers-cs_versions#cs_versions) de cada actualización de versión de Kubernetes y luego [actualice los clústeres](/docs/containers?topic=containers-update#update) inmediatamente al menos a la versión 1.11.
-{: deprecated}
+*   [registro de cambios para el fixpack de nodo trabajador 1.10.13_1558, publicado el 13 de mayo de 2019](#11013_1558)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.13_1557, publicado el 29 de abril de 2019](#11013_1557)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.13_1556, publicado el 15 de abril de 2019](#11013_1556)
+*   [Registro de cambios para 1.10.13_1555, publicado el 8 de abril de 2019](#11013_1555)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.13_1554, publicado el 1 de abril de 2019](#11013_1554)
+*   [Registro de cambios para fixpack de nodo maestro 1.10.13_1553, publicado el 26 de marzo de 2019](#11118_1553)
+*   [Registro de cambios para 1.10.13_1551, publicado el 20 de marzo de 2019](#11013_1551)
+*   [Registro de cambios para 1.10.13_1548, publicado el 4 de marzo de 2019](#11013_1548)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1546, publicado el 27 de febrero de 2019](#11012_1546)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1544, publicado el 15 de febrero de 2019](#11012_1544)
+*   [Registro de cambios para 1.10.12_1543, publicado el 5 de febrero de 2019](#11012_1543)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.12_1541, publicado el 28 de enero de 2019](#11012_1541)
+*   [Registro de cambios para 1.10.12_1540, publicado el 21 de enero de 2019](#11012_1540)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.11_1538, publicado el 7 de enero de 2019](#11011_1538)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.11_1537, publicado el 17 de diciembre de 2018](#11011_1537)
+*   [Registro de cambios para 1.10.11_1536, publicado el 4 de diciembre de 2018](#11011_1536)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1532, publicado el 27 de noviembre de 2018](#1108_1532)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1531, publicado el 19 de noviembre de 2018](#1108_1531)
+*   [Registro de cambios para 1.10.8_1530, publicado el 7 de noviembre de 2018](#1108_1530_ha-master)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1528, publicado el 26 de octubre de 2018](#1108_1528)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.8_1525, publicado el 10 de octubre de 2018](#1108_1525)
+*   [Registro de cambios para 1.10.8_1524, publicado el 2 de octubre de 2018](#1108_1524)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.7_1521, publicado el 20 de septiembre de 2018](#1107_1521)
+*   [Registro de cambios para 1.10.7_1520, publicado el 4 de septiembre de 2018](#1107_1520)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.5_1519, publicado el 23 de agosto de 2018](#1105_1519)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.5_1518, publicado el 13 de agosto de 2018](#1105_1518)
+*   [Registro de cambios para 1.10.5_1517, publicado el 27 de julio de 2018](#1105_1517)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.3_1514, publicado el 3 de julio de 2018](#1103_1514)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.3_1513, publicado el 21 de junio de 2018](#1103_1513)
+*   [Registro de cambios para 1.10.3_1512, publicado el 12 de junio de 2018](#1103_1512)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.1_1510, publicado el 18 de mayo de 2018](#1101_1510)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.10.1_1509, publicado el 16 de mayo de 2018](#1101_1509)
+*   [Registro de cambios para 1.10.1_1508, publicado el 01 de mayo de 2018](#1101_1508)
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.13_1556, publicado el 15 de abril de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.13_1558, publicado el 13 de mayo de 2019
+{: #11013_1558}
+
+En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.13_1558.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.10.13_1557">
+<caption>Cambios desde la versión 1.10.13_1557</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Proxy de alta disponibilidad de maestro de clúster</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Consulte las [notas del release de HAProxy ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.haproxy.org/download/1.9/src/CHANGELOG). La actualización resuelve
+[CVE-2019-6706 ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+</tbody>
+</table>
+
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.13_1557, publicado el 29 de abril de 2019
+{: #11013_1557}
+
+En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.13_1557.
+{: shortdesc}
+
+<table summary="Cambios realizados desde la versión 1.10.13_1556">
+<caption>Cambios desde 1.10.13_1556</caption>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Anterior</th>
+<th>Actual</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Paquetes Ubuntu</td>
+<td>N/D</td>
+<td>N/D</td>
+<td>Actualizaciones de los paquetes de Ubuntu instalados.</td>
+</tr>
+</tbody>
+</table>
+
+
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.13_1556, publicado el 15 de abril de 2019
 {: #11013_1556}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.13_1556.
@@ -2587,7 +3479,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.13_1555, publicado el 8 de abril de 2019
+#### Registro de cambios para 1.10.13_1555, publicado el 8 de abril de 2019
 {: #11013_1555}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_1555.
@@ -2637,7 +3529,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_155
 </tbody>
 </table>
 
-### Changelog para el fixpack de nodo trabajador 1.10.13_1554, publicado el 1 de abril de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.13_1554, publicado el 1 de abril de 2019
 {: #11013_1554}
 
 En la siguiente tabla se muestran los cambios incluidos en el arreglo de nodo trabajador 1.10.13_1554.
@@ -2658,13 +3550,13 @@ En la siguiente tabla se muestran los cambios incluidos en el arreglo de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han incrementado las reservas de memoria para kubelet y containerd para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
 
-### Registro de cambios para fixpack de nodo maestro 1.10.13_1553, publicado el 26 de marzo de 2019
+#### Registro de cambios para fixpack de nodo maestro 1.10.13_1553, publicado el 26 de marzo de 2019
 {: #11118_1553}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo maestro 1.10.13_1553.
@@ -2702,7 +3594,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo ma
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.13_1551, publicado el 20 de marzo de 2019
+#### Registro de cambios para 1.10.13_1551, publicado el 20 de marzo de 2019
 {: #11013_1551}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_1551.
@@ -2758,7 +3650,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_155
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.13_1548, publicado el 4 de marzo de 2019
+#### Registro de cambios para 1.10.13_1548, publicado el 4 de marzo de 2019
 {: #11013_1548}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_1548.
@@ -2832,7 +3724,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.13_154
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1546, publicado el 27 de febrero de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1546, publicado el 27 de febrero de 2019
 {: #11012_1546}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.12_1546.
@@ -2858,7 +3750,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1544, publicado el 15 de febrero de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1544, publicado el 15 de febrero de 2019
 {: #11012_1544}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.12_1544.
@@ -2891,7 +3783,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.12_1543, publicado el 5 de febrero de 2019
+#### Registro de cambios para 1.10.12_1543, publicado el 5 de febrero de 2019
 {: #11012_1543}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.12_1543.
@@ -2968,7 +3860,7 @@ y `patch` de la carga de trabajo.</td>
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1541, publicado el 28 de enero de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.12_1541, publicado el 28 de enero de 2019
 {: #11012_1541}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.12_1541.
@@ -2994,7 +3886,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.12_1540, publicado el 21 de enero de 2019
+#### Registro de cambios para 1.10.12_1540, publicado el 21 de enero de 2019
 {: #11012_1540}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.12_1540.
@@ -3045,7 +3937,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.12_154
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.11_1538, publicado el 7 de enero de 2019
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.11_1538, publicado el 7 de enero de 2019
 {: #11011_1538}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.11_1538.
@@ -3071,7 +3963,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.11_1537, publicado el 17 de diciembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.11_1537, publicado el 17 de diciembre de 2018
 {: #11011_1537}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.11_1537.
@@ -3098,7 +3990,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para 1.10.11_1536, publicado el 4 de diciembre de 2018
+#### Registro de cambios para 1.10.11_1536, publicado el 4 de diciembre de 2018
 {: #11011_1536}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.11_1536.
@@ -3146,12 +4038,12 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.11_153
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han añadido cgroups dedicados para kubelet y docker para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han añadido cgroups dedicados para kubelet y docker para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1532, publicado el 27 de noviembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1532, publicado el 27 de noviembre de 2018
 {: #1108_1532}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.8_1532.
@@ -3177,7 +4069,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1531, publicado el 19 de noviembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1531, publicado el 19 de noviembre de 2018
 {: #1108_1531}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.8_1531.
@@ -3203,7 +4095,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.8_1530, publicado el 7 de noviembre de 2018
+#### Registro de cambios para 1.10.8_1530, publicado el 7 de noviembre de 2018
 {: #1108_1530_ha-master}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.8_1530.
@@ -3261,14 +4153,14 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.8_1530
 <td>N/D</td>
 <td>N/D</td>
 <td>Los nodos trabajadores nativos con chips TPM para Trusted Compute utilizan el kernel de Ubuntu predeterminado hasta que se habilita la confianza. Si
-[habilita la confianza](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) en un clúster existente, necesitará
-[volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+[habilita la confianza](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) en un clúster existente, necesitará
+[volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
+el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1528, publicado el 26 de octubre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1528, publicado el 26 de octubre de 2018
 {: #1108_1528}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.8_1528.
@@ -3294,7 +4186,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para fixpack de nodo maestro 1.10.8_1527, publicado el 15 de octubre de 2018
+#### Registro de cambios para fixpack de nodo maestro 1.10.8_1527, publicado el 15 de octubre de 2018
 {: #1108_1527}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo maestro 1.10.8_1527.
@@ -3326,7 +4218,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo ma
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1525, publicado el 10 de octubre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.8_1525, publicado el 10 de octubre de 2018
 {: #1108_1525}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.8_1525.
@@ -3359,7 +4251,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para 1.10.8_1524, publicado el 2 de octubre de 2018
+#### Registro de cambios para 1.10.8_1524, publicado el 2 de octubre de 2018
 {: #1108_1524}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.8_1524.
@@ -3410,7 +4302,7 @@ Además, ahora, cuando actualiza el nodo maestro del clúster, la clase de almac
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.7_1521, publicado el 20 de septiembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.7_1521, publicado el 20 de septiembre de 2018
 {: #1107_1521}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.7_1521.
@@ -3432,8 +4324,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>N/D</td>
 <td>N/D</td>
 <td>Se ha modificado para utilizar temporizadores `systemd` en lugar de `cronjobs` para evitar que `logrotate` falle en los nodos trabajadores que no se han vuelto a cargar o no se han actualizado en 90 días. **Nota**: en
-todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tiempo de ejecución de nodo trabajador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -3445,7 +4336,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 <td>Caducidad de la contraseña raíz</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
+<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3464,7 +4355,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.7_1520, publicado el 4 de septiembre de 2018
+#### Registro de cambios para 1.10.7_1520, publicado el 4 de septiembre de 2018
 {: #1107_1520}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.7_1520.
@@ -3514,7 +4405,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.7_1520
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.5_1519, publicado el 23 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.5_1519, publicado el 23 de agosto de 2018
 {: #1105_1519}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.5_1519.
@@ -3547,7 +4438,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.5_1518, publicado el 13 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.5_1518, publicado el 13 de agosto de 2018
 {: #1105_1518}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.5_1518.
@@ -3573,7 +4464,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.5_1517, publicado el 27 de julio de 2018
+#### Registro de cambios para 1.10.5_1517, publicado el 27 de julio de 2018
 {: #1105_1517}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.5_1517.
@@ -3629,7 +4520,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.5_1517
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.3_1514, publicado el 3 de julio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.3_1514, publicado el 3 de julio de 2018
 {: #1103_1514}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.3_1514.
@@ -3656,7 +4547,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.3_1513, publicado el 21 de junio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.3_1513, publicado el 21 de junio de 2018
 {: #1103_1513}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.3_1513.
@@ -3682,7 +4573,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.3_1512, publicado el 12 de junio de 2018
+#### Registro de cambios para 1.10.3_1512, publicado el 12 de junio de 2018
 {: #1103_1512}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.3_1512.
@@ -3740,7 +4631,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.3_1512
 
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.1_1510, publicado el 18 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.1_1510, publicado el 18 de mayo de 2018
 {: #1101_1510}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.1_1510.
@@ -3766,7 +4657,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.10.1_1509, publicado el 16 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.10.1_1509, publicado el 16 de mayo de 2018
 {: #1101_1509}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.10.1_1509.
@@ -3792,7 +4683,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.10.1_1508, publicado el 01 de mayo de 2018
+#### Registro de cambios para 1.10.1_1508, publicado el 01 de mayo de 2018
 {: #1101_1508}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.1_1508.
@@ -3849,7 +4740,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.1_1508
 <td>Soporte de GPU</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Ahora hay disponible soporte para [cargas de trabajo de contenedor con unidad de proceso de gráficos (GPU)](/docs/containers?topic=containers-app#gpu_app) para su planificación y ejecución. Para obtener una lista de los tipos de máquina con GPU que hay disponibles, consulte [Hardware para nodos trabajadores](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Para obtener más información, consulte la documentación de Kubernetes de [planificación de GPU ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Ahora hay disponible soporte para [cargas de trabajo de contenedor con unidad de proceso de gráficos (GPU)](/docs/containers?topic=containers-app#gpu_app) para su planificación y ejecución. Para obtener una lista de los tipos de máquina con GPU que hay disponibles, consulte [Hardware para nodos trabajadores](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). Para obtener más información, consulte la documentación de Kubernetes de [planificación de GPU ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -3857,20 +4748,35 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.10.1_1508
 <br />
 
 
-## Archivo
-{: #changelog_archive}
-
-Versiones no soportadas de Kubernetes:
-*  [Versión 1.9](#19_changelog)
-*  [Versión 1.8](#18_changelog)
-*  [Versión 1.7](#17_changelog)
-
 ### Registro de cambios de la versión 1.9 (sin soporte desde el 27 de diciembre de 2018)
 {: #19_changelog}
 
-Revise el registro de cambios de la versión 1.9.
+Revise los registros de cambios de la versión 1.9.
+{: shortdesc}
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1539, publicado el 17 de diciembre de 2018
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1539, publicado el 17 de diciembre de 2018](#1911_1539)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1538, publicado el 4 de diciembre de 2018](#1911_1538)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.11_1537, publicado el 27 de noviembre de 2018](#1911_1537)
+*   [Registro de cambios para 1.9.11_1536, publicado el 19 de noviembre de 2018](#1911_1536)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1532, publicado el 7 de noviembre de 2018](#1910_1532)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1531, publicado el 26 de octubre de 2018](#1910_1531)
+*   [Registro de cambios para fixpack de nodo maestro 1.9.10_1530, publicado el 15 de octubre de 2018](#1910_1530)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1528, publicado el 10 de octubre de 2018](#1910_1528)
+*   [Registro de cambios para 1.9.10_1527, publicado el 2 de octubre de 2018](#1910_1527)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.10_1524, publicado el 20 de septiembre de 2018](#1910_1524)
+*   [Registro de cambios para 1.9.10_1523, publicado el 4 de septiembre de 2018](#1910_1523)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.9_1522, publicado el 23 de agosto de 2018](#199_1522)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.9_1521, publicado el 13 de agosto de 2018](#199_1521)
+*   [Registro de cambios para 1.9.9_1520, publicado el 27 de julio de 2018](#199_1520)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.8_1517, publicado el 3 de julio de 2018](#198_1517)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.8_1516, publicado el 21 de junio de 2018](#198_1516)
+*   [Registro de cambios para 1.9.8_1515, publicado el 19 de junio de 2018](#198_1515)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1513, publicado el 11 de junio de 2018](#197_1513)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1512, publicado el 18 de mayo de 2018](#197_1512)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.9.7_1511, publicado el 16 de mayo de 2018](#197_1511)
+*   [Registro de cambios para 1.9.7_1510, publicado el 30 de abril de 2018](#197_1510)
+
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1539, publicado el 17 de diciembre de 2018
 {: #1911_1539}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.11_1539.
@@ -3896,7 +4802,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1538, publicado el 4 de diciembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1538, publicado el 4 de diciembre de 2018
 {: #1911_1538}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.11_1538.
@@ -3917,12 +4823,12 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>Utilización de recursos del nodo trabajador</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Se han añadido cgroups dedicados para kubelet y docker para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Se han añadido cgroups dedicados para kubelet y docker para evitar que estos componentes se puedan quedar sin recursos. Para obtener más información, consulte [Reservas de recursos del nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1537, publicado el 27 de noviembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.11_1537, publicado el 27 de noviembre de 2018
 {: #1911_1537}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.11_1537.
@@ -3948,7 +4854,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.9.11_1536, publicado el 19 de noviembre de 2018
+#### Registro de cambios para 1.9.11_1536, publicado el 19 de noviembre de 2018
 {: #1911_1536}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.11_1536.
@@ -4000,7 +4906,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.11_1536
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1532, publicado el 7 de noviembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1532, publicado el 7 de noviembre de 2018
 {: #1910_1532}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.11_1532.
@@ -4022,14 +4928,14 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>N/D</td>
 <td>N/D</td>
 <td>Los nodos trabajadores nativos con chips TPM para Trusted Compute utilizan el kernel de Ubuntu predeterminado hasta que se habilita la confianza. Si
-[habilita la confianza](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) en un clúster existente, necesitará
-[volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
+[habilita la confianza](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) en un clúster existente, necesitará
+[volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores nativos existentes con chips TPM. Para comprobar si un nodo trabajador local tiene un chip TPM, revise el campo **Trustable** después de ejecutar
+el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone`.</td>
 </tr>
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1531, publicado el 26 de octubre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1531, publicado el 26 de octubre de 2018
 {: #1910_1531}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.10_1531.
@@ -4055,7 +4961,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para fixpack de nodo maestro 1.9.10_1530, publicado el 15 de octubre de 2018
+#### Registro de cambios para fixpack de nodo maestro 1.9.10_1530, publicado el 15 de octubre de 2018
 {: #1910_1530}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.10_1530.
@@ -4081,7 +4987,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1528, publicado el 10 de octubre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1528, publicado el 10 de octubre de 2018
 {: #1910_1528}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.10_1528.
@@ -4114,7 +5020,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para 1.9.10_1527, publicado el 2 de octubre de 2018
+#### Registro de cambios para 1.9.10_1527, publicado el 2 de octubre de 2018
 {: #1910_1527}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.10_1527.
@@ -4147,7 +5053,7 @@ Además, ahora, cuando actualiza el nodo maestro del clúster, la clase de almac
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1524, publicado el 20 de septiembre de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.10_1524, publicado el 20 de septiembre de 2018
 {: #1910_1524}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.10_1524.
@@ -4169,8 +5075,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 <td>N/D</td>
 <td>N/D</td>
 <td>Se ha modificado para utilizar temporizadores `systemd` en lugar de `cronjobs` para evitar que `logrotate` falle en los nodos trabajadores que no se han vuelto a cargar o no se han actualizado en 90 días. **Nota**: en
-todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tiempo de ejecución de nodo trabajador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4182,7 +5087,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 <td>Caducidad de la contraseña raíz</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
+<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4201,7 +5106,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para 1.9.10_1523, publicado el 4 de septiembre de 2018
+#### Registro de cambios para 1.9.10_1523, publicado el 4 de septiembre de 2018
 {: #1910_1523}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.10_1523.
@@ -4245,7 +5150,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.10_1523
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.9_1522, publicado el 23 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.9_1522, publicado el 23 de agosto de 2018
 {: #199_1522}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.9_1522.
@@ -4278,7 +5183,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.9_1521, publicado el 13 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.9_1521, publicado el 13 de agosto de 2018
 {: #199_1521}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.9_1521.
@@ -4304,7 +5209,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.9.9_1520, publicado el 27 de julio de 2018
+#### Registro de cambios para 1.9.9_1520, publicado el 27 de julio de 2018
 {: #199_1520}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.9_1520.
@@ -4354,7 +5259,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.9_1520.
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.8_1517, publicado el 3 de julio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.8_1517, publicado el 3 de julio de 2018
 {: #198_1517}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.8_1517.
@@ -4381,7 +5286,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.8_1516, publicado el 21 de junio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.8_1516, publicado el 21 de junio de 2018
 {: #198_1516}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.8_1516.
@@ -4407,7 +5312,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.9.8_1515, publicado el 19 de junio de 2018
+#### Registro de cambios para 1.9.8_1515, publicado el 19 de junio de 2018
 {: #198_1515}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.8_1515.
@@ -4452,7 +5357,7 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.8_1515.
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1513, publicado el 11 de junio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1513, publicado el 11 de junio de 2018
 {: #197_1513}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.7_1513.
@@ -4478,7 +5383,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1512, publicado el 18 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1512, publicado el 18 de mayo de 2018
 {: #197_1512}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.7_1512.
@@ -4504,7 +5409,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1511, publicado el 16 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.9.7_1511, publicado el 16 de mayo de 2018
 {: #197_1511}
 
 En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo trabajador 1.9.7_1511.
@@ -4530,7 +5435,7 @@ En la siguiente tabla se muestran los cambios incluidos en el fixpack de nodo tr
 </tbody>
 </table>
 
-### Registro de cambios para 1.9.7_1510, publicado el 30 de abril de 2018
+#### Registro de cambios para 1.9.7_1510, publicado el 30 de abril de 2018
 {: #197_1510}
 
 En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.7_1510.
@@ -4580,9 +5485,22 @@ En la siguiente tabla se muestran los cambios incluidos en el parche 1.9.7_1510.
 ### Registro de cambios de la versión 1.8 (no soportada)
 {: #18_changelog}
 
-Revise los siguientes cambios.
+Revise los registros de cambios de la versión 1.8.
+{: shortdesc}
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1521, publicado el 20 de septiembre de 2018
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1521, publicado el 20 de septiembre de 2018](#1815_1521)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1520, publicado el 23 de agosto de 2018](#1815_1520)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.15_1519, publicado el 13 de agosto de 2018](#1815_1519)
+*   [Registro de cambios para 1.8.15_1518, publicado el 27 de julio de 2018](#1815_1518)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.13_1516, publicado el 3 de julio de 2018](#1813_1516)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.13_1515, publicado el 21 de junio de 2018](#1813_1515)
+*   [Registro de cambios para 1.8.13_1514, publicado el 19 de junio de 2018](#1813_1514)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1512, publicado el 11 de junio de 2018](#1811_1512)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1511, publicado el 18 de mayo de 2018](#1811_1511)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.8.11_1510, publicado el 16 de mayo de 2018](#1811_1510)
+*   [Registro de cambios para 1.8.11_1509, publicado el 19 de abril de 2018](#1811_1509)
+
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1521, publicado el 20 de septiembre de 2018
 {: #1815_1521}
 
 <table summary="Cambios realizados desde la versión 1.8.15_1520">
@@ -4601,8 +5519,7 @@ Revise los siguientes cambios.
 <td>N/D</td>
 <td>N/D</td>
 <td>Se ha modificado para utilizar temporizadores `systemd` en lugar de `cronjobs` para evitar que `logrotate` falle en los nodos trabajadores que no se han vuelto a cargar o no se han actualizado en 90 días. **Nota**: en
-todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
+todas las versiones anteriores de este release menor, el disco primario se llenaba después de que fallar el trabajo cron porque los registros no se rotaban. El trabajo cron falla después de que el nodo trabajador esté activo durante 90 días sin que se haya actualizado o recargado. Si los registros llenan todo el disco primario, el nodo trabajador entra en un estado de error. El nodo trabajador se puede arreglar mediante el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` o el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>Componentes de tiempo de ejecución de nodo trabajador (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4614,7 +5531,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 <td>Caducidad de la contraseña raíz</td>
 <td>N/D</td>
 <td>N/D</td>
-<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
+<td>Las contraseñas raíz para los nodos trabajadores caducan después de 90 días por razones de conformidad. Si las herramientas de automatización tienen que iniciar la sesión en el nodo trabajador como usuario root o se basan en trabajos cron que se ejecutan como root, puede inhabilitar la caducidad de la contraseña iniciando una sesión en el nodo trabajador y ejecutando `chage -M -1 root`. **Nota**: si tiene requisitos de conformidad de seguridad que impiden la ejecución como root o la eliminación de la caducidad de la contraseña, no inhabilite la caducidad. En lugar de ello, puede [actualizar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) o [volver a cargar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) los nodos trabajadores al menos cada 90 días.</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4625,7 +5542,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1520, publicado el 23 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1520, publicado el 23 de agosto de 2018
 {: #1815_1520}
 
 <table summary="Cambios realizados desde la versión 1.8.15_1519">
@@ -4654,7 +5571,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1519, publicado el 13 de agosto de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.15_1519, publicado el 13 de agosto de 2018
 {: #1815_1519}
 
 <table summary="Cambios realizados desde la versión 1.8.15_1518">
@@ -4677,7 +5594,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para 1.8.15_1518, publicado el 27 de julio de 2018
+#### Registro de cambios para 1.8.15_1518, publicado el 27 de julio de 2018
 {: #1815_1518}
 
 <table summary="Cambios realizados desde la versión 1.8.13_1516">
@@ -4724,7 +5641,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.13_1516, publicado el 3 de julio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.13_1516, publicado el 3 de julio de 2018
 {: #1813_1516}
 
 <table summary="Cambios realizados desde la versión 1.8.13_1515">
@@ -4748,7 +5665,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.13_1515, publicado el 21 de junio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.13_1515, publicado el 21 de junio de 2018
 {: #1813_1515}
 
 <table summary="Cambios realizados desde la versión 1.8.13_1514">
@@ -4771,7 +5688,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para 1.8.13_1514, publicado el 19 de junio de 2018
+#### Registro de cambios para 1.8.13_1514, publicado el 19 de junio de 2018
 {: #1813_1514}
 
 <table summary="Cambios realizados desde la versión 1.8.11_1512">
@@ -4813,7 +5730,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1512, publicado el 11 de junio de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1512, publicado el 11 de junio de 2018
 {: #1811_1512}
 
 <table summary="Cambios realizados desde la versión 1.8.11_1511">
@@ -4837,7 +5754,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </table>
 
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1511, publicado el 18 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1511, publicado el 18 de mayo de 2018
 {: #1811_1511}
 
 <table summary="Cambios realizados desde la versión 1.8.11_1510">
@@ -4860,7 +5777,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </tbody>
 </table>
 
-### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1510, publicado el 16 de mayo de 2018
+#### Registro de cambios para el fixpack de nodo trabajador 1.8.11_1510, publicado el 16 de mayo de 2018
 {: #1811_1510}
 
 <table summary="Cambios realizados desde la versión 1.8.11_1509">
@@ -4884,7 +5801,7 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 </table>
 
 
-### Registro de cambios para 1.8.11_1509, publicado el 19 de abril de 2018
+#### Registro de cambios para 1.8.11_1509, publicado el 19 de abril de 2018
 {: #1811_1509}
 
 <table summary="Cambios realizados desde la versión 1.8.8_1507">
@@ -4931,7 +5848,13 @@ el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update
 ### Registro de cambios de la versión 1.7 (no soportada)
 {: #17_changelog}
 
-Revise los siguientes cambios.
+Revise los registros de cambios de la versión 1.7.
+{: shortdesc}
+
+*   [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1514, publicado el 11 de junio de 2018](#1716_1514)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1513, publicado el 18 de mayo de 2018](#1716_1513)
+*   [Registro de cambios para el fixpack de nodo trabajador 1.7.16_1512, publicado el 16 de mayo de 2018](#1716_1512)
+*   [Registro de cambios para 1.7.16_1511, publicado el 19 de abril de 2018](#1716_1511)
 
 #### Registro de cambios para el fixpack de nodo trabajador 1.7.16_1514, publicado el 11 de junio de 2018
 {: #1716_1514}

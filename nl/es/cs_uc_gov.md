@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casos de uso de {{site.data.keyword.Bluemix_notm}} en el entorno gubernamental
@@ -39,9 +39,9 @@ Un ejecutivo de un programa de datos de gobierno abierto necesita compartir dato
 Por qué {{site.data.keyword.Bluemix_notm}}: con {{site.data.keyword.containerlong_notm}}, el ejecutivo proporciona el valor transformador de los datos públicos y privados combinados. Paralelamente, el servicio ofrece una plataforma de nube pública para refactorizar y exponer los microservicios de las apps locales monolíticas. Además, la nube pública permite a los gobiernos y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración.
 
 Tecnologías clave:    
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Se proporciona acceso a datos públicos con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [Se proporciona acceso a datos públicos con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [Servicios IBM Cloud Analytics de tipo conectar y usar](https://www.ibm.com/cloud/analytics)
 
 **Contexto: el gobierno mejora la colaboración y la velocidad con los desarrolladores de la comunidad que combinan datos públicos y privados**
@@ -117,7 +117,7 @@ Los ejecutivos de TI de una compañía naviera privada y el puerto, cuyo funcion
 Por qué {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} permite al gobierno y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración. Los contenedores proporcionaron una plataforma compartible en la que tanto el puerto como la compañía naviera confiaban y sabían que la información compartida estaba alojada en una plataforma segura. Y dicha plataforma se puede escalar cuando se pasa de pequeños sistemas de desarrollo y prueba a sistemas de producción. Las cadenas de herramientas abiertas también aceleraron el desarrollo mediante la automatización de los procesos de creación, prueba y despliegue.
 
 Tecnologías clave:    
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

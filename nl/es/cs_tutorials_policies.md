@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Guía de aprendizaje: Utilización de políticas de red de Calico para bloquear el tráfico
@@ -141,7 +142,7 @@ En la siguiente imagen se muestra cómo la app de servidor web se expone a Inter
         ```
         {: screen}
 
-    2. Cree un archivo de texto de hoja de apuntes y copie la IP del NLB en el archivo de texto. La hoja de apuntes le ayudará a utilizar valores rápidamente en las lecciones siguientes.
+    2. Cree un archivo de texto de hoja de apuntes y copie la IP del NLB en el archivo de texto. La hoja de apuntes le ayuda a utilizar valores rápidamente en las lecciones siguientes.
 
     3. Verifique que puede acceder públicamente a la IP externa correspondiente al NLB.
         ```
@@ -173,7 +174,7 @@ En la siguiente imagen se muestra cómo la app de servidor web se expone a Inter
         ```
         {: screen}
 
-6. Verifique que puede acceder públicamente a la app expuesta por el puerto de nodo desde el sistema. Un servicio de NLB hace que la app esté disponible a través de la dirección IP de servicio del NLB y de los puertos de nodo de los nodos trabajadores.
+6. Verifique que puede acceder públicamente a la app expuesta por el node desde el sistema. Un servicio de NLB hace que la app esté disponible a través de la dirección IP de servicio del NLB y de los puertos de nodo de los nodos trabajadores.
 
     1. Obtenga el puerto de nodo que el NLB ha asignado a los nodos trabajadores. El puerto de nodo se encuentra en el rango comprendido entre 30000 y 32767.
         ```
@@ -197,9 +198,9 @@ En la siguiente imagen se muestra cómo la app de servidor web se expone a Inter
         Salida de ejemplo:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
         ```
         {: screen}
 
@@ -245,7 +246,7 @@ A continuación, puede empezar a crear y aplicar políticas de Calico para bloqu
 Para proteger el clúster de la empresa PR, debe bloquear el acceso público tanto al servicio de NLB como a los puertos de nodo que exponen la app. Empiece bloqueando el acceso a los puertos de nodo.
 {: shortdesc}
 
-En la imagen siguiente se muestra cómo se permitirá el tráfico al NLB pero no a los puertos de nodo al final de la Lección 2:
+En la imagen siguiente se muestra cómo se permite el tráfico al NLB, pero no a los puertos de nodo al final de la Lección 2:
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Al final de la Lección 2, la app de servidor web quedará expuesta a Internet solo mediante el NLB público." style="width:425px; border-style: none"/>
 
@@ -310,7 +311,13 @@ En la imagen siguiente se muestra cómo se permitirá el tráfico al NLB pero no
     ```
     {: screen}
 
-4. Utilizando el valor de la hoja de apuntes, verifique que aún puede acceder públicamente a la dirección IP externa del NLB.
+4. Cambie el valor externalTrafficPolicy de LoadBalancer que ha creado en la lección anterior, `Cluster`, por `Local`. `Local` garantiza que la IP de origen del sistema se conserva cuando ejecuta curl sobre la dirección IP externa de LoadBalancer en el paso siguiente.
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. Utilizando el valor de la hoja de apuntes, verifique que aún puede acceder públicamente a la dirección IP externa del NLB.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
@@ -339,11 +346,11 @@ En la imagen siguiente se muestra cómo se permitirá el tráfico al NLB pero no
         -no body in request-
     ```
     {: screen}
-    En la sección `Request Information` de la información de salida, observe que la dirección IP de origen es, por ejemplo, `client_address=1.1.1.1`. La dirección IP de origen es la dirección IP pública del sistema que está utilizando para ejecutar curl. De lo contrario, si se está conectando a internet a través de un proxy o VPN, es posible que el proxy o VPN esté ocultando la dirección IP real del sistema. En cualquier caso, el servicio de NLB ve la dirección IP de origen del sistema como la dirección IP del cliente.
+    En la sección `Request Information` de la información de salida, la dirección IP de origen es, por ejemplo, `client_address=1.1.1.1`. La dirección IP de origen es la dirección IP pública del sistema que está utilizando para ejecutar curl. De lo contrario, si se está conectando a internet a través de un proxy o VPN, es posible que el proxy o VPN esté ocultando la dirección IP real del sistema. En cualquier caso, el servicio de NLB ve la dirección IP de origen del sistema como la dirección IP del cliente.
 
-5. Copie la dirección IP de origen del sistema (`client_address=1.1.1.1` en la información de salida del paso anterior) en la hoja de apuntes para utilizarla en lecciones posteriores.
+6. Copie la dirección IP de origen del sistema (`client_address=1.1.1.1` en la información de salida del paso anterior) en la hoja de apuntes para utilizarla en lecciones posteriores.
 
-¡Estupendo! En este punto, la app está expuesta a internet público solo desde el puerto público del NLB. El tráfico a los puertos de nodo públicos está bloqueado. Ha bloqueado parcialmente el clúster frente a tráfico no deseado.
+¡Estupendo! En este punto, la app está expuesta a internet público solo desde el puerto público del NLB. El tráfico a los puertos de nodo públicos está bloqueado. El clúster se bloquea parcialmente ante tráfico no deseado.
 
 A continuación, puede crear y aplicar políticas de Calico al tráfico de la lista blanca desde determinadas IP de origen.
 
@@ -412,7 +419,7 @@ En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico 
     ```
     {: pre}
 
-4. En un editor de texto, cree una política de Pre-DNAT de orden inferior denominada `whitelist.yaml` para permitir el tráfico desde la IP del sistema a la dirección IP y puerto del NLB. Utilizando los valores de la hoja de apuntes, sustituya `<loadbalancer_IP>` por la dirección IP pública del NLB y `<client_address>` por la dirección IP pública de la IP de origen de su sistema.
+4. En un editor de texto, cree una política de Pre-DNAT de orden inferior denominada `whitelist.yaml` para permitir el tráfico desde la IP del sistema a la dirección IP y puerto del NLB. Utilizando los valores de la hoja de apuntes, sustituya `<loadbalancer_IP>` por la dirección IP pública del NLB y `<client_address>` por la dirección IP pública de la IP de origen de su sistema. Si no recuerda la IP del sistema, puede ejecutar `curl ifconfig.co`.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -478,7 +485,7 @@ En la lección anterior, ha bloqueado todo el tráfico y solo ha colocado en la 
 
 En esta lección, probará la creación de una lista negra que bloquee el tráfico procedente de la dirección IP de origen de su propio sistema. Al final de la Lección 4, todo el tráfico dirigido a los puertos de nodo públicos se bloqueará y se permitirá todo el tráfico dirigido al NLB. Solo se bloqueará el tráfico procedente de la IP del sistema en la lista negra al NLB:
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="La app del servidor web se expone mediante el NLB público a internet. El tráfico procedente sólo de la IP del sistema se bloquea." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="La app de webserver se expone a internet mediante el NLB público. Solo se bloquea el tráfico procedente de la IP del sistema." style="width:550px; border-style: none"/>
 
 1. Limpie las políticas de la lista blanca que ha creado en la lección anterior.
     - Linux:
@@ -573,7 +580,7 @@ En la lección anterior, ha incluido en la lista negra el tráfico desde la dire
 
 En nuestro ejemplo de ejemplo, la empresa PR donde trabaja quiere configurar un seguimiento de registro para cualquier tráfico poco habitual que una de las políticas de red deniega continuamente. Para supervisar la amenaza de seguridad potencial, configura el registro para que registre todas las veces que la política de lista negra deniega un intento de acción en la IP de NLB.
 
-1. Cree una NetworkPolicy de Calico denominada `log-denied-packets`. Esta política de registro utiliza el mismo selector que la política `blacklist`, que añade esta política a la cadena de reglas de Iptables de Calico. Al utilizar un número de orden inferior, como por ejemplo `300`, puede asegurarse de que esta regla se añade a la cadena de reglas de Iptables antes de la política de lista negra. Los paquetes procedentes de su IP los registra esta política antes de que intenten coincidir con la regla de política `blacklist` y sean denegados.
+1. Cree una NetworkPolicy de Calico denominada `log-denied-packets`. Esta política de registro utiliza el mismo selector que la política `blacklist`, que añade esta política a la cadena de reglas de Iptables de Calico. Si utiliza un número de orden inferior, como por ejemplo `300`, puede asegurarse de que esta regla se añade a la cadena de reglas de Iptables antes de la política de lista negra. Los paquetes procedentes de su IP los registra esta política antes de que intenten coincidir con la regla de política `blacklist` y sean denegados.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -604,7 +611,7 @@ En nuestro ejemplo de ejemplo, la empresa PR donde trabaja quiere configurar un 
         nets:
         - <client_address>/32
     selector: ibm.role=='worker_public'
-    order: 500
+    order: 300
     types:
     - Ingress
   ```
@@ -622,7 +629,7 @@ En nuestro ejemplo de ejemplo, la empresa PR donde trabaja quiere configurar un 
   ```
   {: pre}
 
-4. Busque entradas de registro escritas en la vía de acceso `/var/log/syslog` . La entrada de registro se parecerá a lo siguiente.
+4. Busque entradas de registro escritas en la vía de acceso `/var/log/syslog`. La entrada de registro se parecerá a lo siguiente.
   ```
   Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
   ```

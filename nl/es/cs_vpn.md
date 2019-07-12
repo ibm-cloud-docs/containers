@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-10"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Configuración de la conectividad de VPN
@@ -34,6 +34,9 @@ Para conectar de forma segura sus nodos trabajadores y apps a un centro de datos
 
 - **Servicio VPN IPSec de strongSwan**: puede configurar un [servicio VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/about.html) que se conecte de forma segura al clúster de Kubernetes con una red local. El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
 Internet Protocol Security (IPSec) estándar del sector. Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](#vpn-setup) directamente en un pod del clúster.
+
+- **{{site.data.keyword.BluDirectLink}}**:
+[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) le permite crear una conexión privada directa entre entornos de red remotos y {{site.data.keyword.containerlong_notm}} sin tener que direccionar sobre Internet público. Las ofertas de {{site.data.keyword.Bluemix_notm}} Direct Link resultan útiles cuando se deben implementar cargas de trabajo híbridas, cargas de trabajo entre proveedores, transferencias de datos grandes o frecuentes o cargas de trabajo privadas. Para elegir una conexión de {{site.data.keyword.Bluemix_notm}} Direct Link y configurar una conexión de {{site.data.keyword.Bluemix_notm}} Direct Link, consulte [Iniciación a IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) en la documentación de {{site.data.keyword.Bluemix_notm}} Direct Link.
 
 - **Virtual Router Appliance (VRA) o Fortigate Security Appliance (FSA)**: Podría elegir entre configurar un [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para configurar un punto final de VPN IPSec. Esta opción es útil si tiene un clúster grande, desea acceder a varios clústeres sobre una sola VPN o necesita una VPN basada en ruta. Para configurar VRA, consulte [Configuración de la conectividad de VPN con VRA](#vyatta).
 
@@ -49,7 +52,7 @@ Puesto que strongSwan está integrado en su clúster, no necesita un dispositivo
 
 1. Una app en el clúster, `myapp`, recibe una solicitud desde un servicio Ingress o LoadBalancer. Dicha app debe conectarse de forma segura a los datos en su red local.
 
-2. La solicitud al centro de datos local se reenvía al pod de VPN de IPSec strongSwan. La dirección IP de destino se utiliza para determinar qué paquetes de red deben enviarse al pod de VPN de IPSec strongSwan.
+2. La solicitud al centro de datos local se reenvía al pod de VPN IPSec strongSwan. La dirección IP de destino se utiliza para determinar qué paquetes de red deben enviarse al pod de VPN IPSec strongSwan.
 
 3. La solicitud se cifra y envía a través del túnel VPN al centro de datos local.
 
@@ -65,11 +68,14 @@ Antes de utilizar el diagrama de Helm strongSwan, revise las siguientes consider
 
 * El diagrama de Helm strongSwan requiere que el punto final VPN remoto haya habilitado el cruce de NAT. El cruce de NAT requiere el puerto UDP 4500, además del puerto IPSec de IPSec predeterminado de 500. Los dos puertos UDP deben estar permitidos a través de cualquier cortafuegos que esté configurado.
 * El diagrama de Helm strongSwan no da soporte a VPN IPSec basadas en rutas.
-* El diagrama de Helm strongSwan da soporte a VPN IPSec que utilizan claves precompartidas, pero no da soporte a VPN de IPSec que requieren certificados.
+* El diagrama de Helm strongSwan da soporte a VPN IPSec que utilizan claves precompartidas, pero no da soporte a VPN IPSec que requieren certificados.
 * El diagrama de Helm strongSwan no permite que varios clústeres y otros recursos de IaaS compartan una sola conexión VPN.
 * El diagrama de Helm strongSwan se ejecuta como una pod de Kubernetes dentro del clúster. El rendimiento de VPN se ve afectado por el uso de memoria y de red por parte de Kubernetes y de otros pods que se ejecuten en el clúster. Si tiene un entorno en el que el rendimiento sea un factor clave, tenga en cuenta la posibilidad de utilizar una solución VPN que se ejecute fuera del clúster en hardware dedicado.
 * El diagrama de Helm strongSwan ejecuta un solo pod de VPN como punto final de túnel IPSec. Si el pod falla, el clúster reinicia el pod. Sin embargo, puede experimentar un breve periodo de tiempo mientras se inicia el nuevo pod y se restablece la conexión VPN. Si necesita una recuperación de errores más rápida o una solución de alta disponibilidad más elaborada, tenga en cuenta la posibilidad de utilizar una solución VPN que se ejecute fuera del clúster en hardware dedicado.
 * El diagrama de Helm strongSwan no proporciona métricas ni supervisión del tráfico de red que fluye a través de la conexión VPN. Para ver una lista de las herramientas de supervisión a las que se da soporte, consulte [Servicios de registro y de supervisión](/docs/containers?topic=containers-supported_integrations#health_services).
+
+Los usuarios del clúster pueden utilizar el servicio VPN de strongSwan para conectar con el nodo maestro de Kubernetes a través del punto final de servicio privado. Sin embargo, la comunicación con el nodo maestro de Kubernetes sobre el punto final de servicio privado debe pasar a través del rango de direcciones IP <code>166.X.X.X</code>, que no se puede direccionar desde una conexión VPN. Puede exponer el punto final de servicio privado del nodo maestro para los usuarios del clúster [utilizando un equilibrador de carga de red (NLB) privado](/docs/containers?topic=containers-clusters#access_on_prem). El NLB privado expone el punto final de servicio privado del nodo maestro como una dirección IP interna de clúster `172.21.x.x` a la que puede acceder el pod VPN de strongSwan. Si solo habilita el punto final de servicio privado, puede utilizar el panel de control de Kubernetes o puede habilitar temporalmente el punto final de servicio público para crear el NLB privado.
+{: tip}
 
 <br />
 
@@ -150,8 +156,8 @@ Después de desplegar cada diagrama de Helm, cada despliegue de VPN de strongSwa
       - `enableSingleSourceIP`: Establezca este valor en `true` y establezca el valor de `local.subnet` en una única dirección IP /32. Esta combinación de valores oculta todas las direcciones IP privadas del clúster tras una sola dirección IP /32. Esta dirección IP /32 exclusiva permite a la red local remota devolver respuestas sobre la conexión VPN correcta al pod correcto en el clúster que ha iniciado la solicitud. Tenga en cuenta que la única dirección IP /32 que se configura para la opción `local.subnet` debe ser exclusiva en cada configuración de VPN de strongSwan.
     * Si las aplicaciones de la red local remota deben acceder a servicios en el clúster:    
       - `localSubnetNAT`: Asegúrese de que una aplicación de la red remota local pueda seleccionar una conexión VPN específica a la que enviar y de la que recibir tráfico del clúster. En cada configuración de Helm de strongSwan, utilice `localSubnetNAT`
-para identificar de forma exclusiva los recursos del clúster a los que puede acceder la aplicación local remota. Puesto que se establecen varias VPN desde la red local remota al clúster, debe añadir lógica a la aplicación en la red local para que pueda seleccionar la VPN que debe utilizar cuando acceda a servicios del clúster. Tenga en cuenta que se puede acceder a los servicios del clúster a través de varias subredes distintas en función de lo que haya configurado para `localSubetNAT` en cada configuración de VPN de strongSwan.
-      - `remoteSubnetNAT`: Asegúrese de que un pod del clúster utilice la misma conexión VPN para devolver el tráfico a la red remota. En cada archivo de despliegue strongSwan, correlacione la subred local remota con una subred exclusiva mediante el valor `remoteSubetNAT`. El tráfico que recibe un pod del clúster desde un `remoteSubetNAT` específico de VPN se vuelve a enviar a ese mismo `remoteSubnetNAT` específico de VPN y se transmite a través de esa misma conexión VPN.
+para identificar de forma exclusiva los recursos del clúster a los que puede acceder la aplicación local remota. Puesto que se establecen varias VPN desde la red local remota al clúster, debe añadir lógica a la aplicación en la red local para que pueda seleccionar la VPN que debe utilizar cuando acceda a servicios del clúster. Tenga en cuenta que se puede acceder a los servicios del clúster a través de varias subredes distintas en función de lo que haya configurado para `localSubnetNAT` en cada configuración de VPN de strongSwan.
+      - `remoteSubnetNAT`: Asegúrese de que un pod del clúster utilice la misma conexión VPN para devolver el tráfico a la red remota. En cada archivo de despliegue strongSwan, correlacione la subred local remota con una subred exclusiva mediante el valor `remoteSubnetNAT`. El tráfico que recibe un pod del clúster desde un `remoteSubnetNAT` específico de VPN se vuelve a enviar a ese mismo `remoteSubnetNAT` específico de VPN y se transmite a través de esa misma conexión VPN.
 
 3. Configure el software de punto final de VPN remota de modo que establezca una conexión VPN independiente con la IP del equilibrador de carga en cada zona.
 
@@ -165,9 +171,9 @@ Antes de instalar el diagrama de Helm strongSwan, debe elegir su configuración 
 {: shortdesc}
 
 Antes de empezar:
-* [Instale una pasarela de VPN IPSec en su centro de datos local](/docs/infrastructure/iaas-vpn?topic=VPN-setup-ipsec-vpn#setup-ipsec-connection).
-* Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Instale una pasarela de VPN IPSec en su centro de datos local.
+* Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
+* [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Nota**: todas las configuraciones de strongSwan están permitidas en clústeres estándares. Si utiliza un clúster gratuito, solo puede elegir una conexión VPN de salida en el [Paso 3](#strongswan_3). Las conexiones de VPN de entrada requieren un equilibrador de carga en el clúster y los equilibradores de carga no están disponibles para clústeres gratuitos.
 
 ### Paso 1: Obtenga el diagrama de Helm strongSwan
@@ -216,7 +222,7 @@ Para obtener más información sobre cada valor, lea la documentación que se pr
     * Si `ipsec.keyexchange` se establece en `ikev1`, se debe especificar este valor.
     * Si `ipsec.keyexchange` se establece en `ikev2`, este valor es opcional.
     * Si deja este valor en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan `aes128-sha1,3des-sha1`.
-3. Establezca `ipsec.ike` como una lista de algoritmos de autenticación y cifrado de IKE/ISAKMP que el punto final de túnel de VPN local utiliza para la conexión. Los algoritmos deben ser específicos en el formato `encryption-integridad [-prf]-dhgroup`.
+3. Establezca `ipsec.ike` como una lista de algoritmos de autenticación y cifrado de IKE/ISAKMP que el punto final de túnel de VPN local utiliza para la conexión. Los algoritmos deben ser específicos en el formato `encryption-integrity[-prf]-dhgroup`.
     * Si `ipsec.keyexchange` se establece en `ikev1`, se debe especificar este valor.
     * Si `ipsec.keyexchange` se establece en `ikev2`, este valor es opcional.
     * Si deja este valor en blanco, se utilizan para la conexión los algoritmos predeterminados de strongSwan `aes128-sha1-modp2048,3des-sha1-modp1536`.
@@ -666,9 +672,6 @@ Para actualizar el diagrama de Helm de strongSwan a la última versión:
   ```
   {: pre}
 
-El diagrama Helm strongSwan 2.0.0 no funciona con Calico v3 ni con Kubernetes 1.10. Antes de [actualizar el clúster a 1.10](/docs/containers?topic=containers-cs_versions#cs_v110), actualice primero strongSwan al diagrama de Helm 2.2.0 o posterior, que es compatible con Calico 2.6 y Kubernetes 1.9. A continuación, suprima el diagrama de Helm de strongSwan. Después, tras la actualización, puede volver a instalar el diagrama.
-{:tip}
-
 ## Inhabilitación del servicio VPN IPSec de strongSwan
 {: vpn_disable}
 
@@ -705,11 +708,11 @@ Todo el tráfico de red privado y público que entre o salga de las VLAN del cl�
 
 Para configurar un Virtual Router Appliance:
 
-1. [Solicitar un VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started-with-ibm-virtual-router-appliance).
+1. [Solicitar un VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-getting-started).
 
 2. [Configurar la VLAN privada en el VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-managing-your-vlans).
 
 3. Para habilitar una conexión VPN utilizando el VRA, [configure VRRP en el VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN [habilitando la expansión de VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Si tiene un dispositivo direccionador existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo direccionador. Para poder utilizar los servicios de red, debe habilitar el direccionamiento entre las subredes de la misma VLAN [habilitando la distribución de VLAN](/docs/containers?topic=containers-subnets#subnet-routing). Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 {: important}

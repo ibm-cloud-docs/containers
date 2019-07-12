@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -19,7 +19,9 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
+{:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 # Preguntas más frecuentes
 {: #faqs}
@@ -37,7 +39,7 @@ Para obtener más información sobre Kubernetes, consulte la [documentación de 
 {: #kubernetes_service}
 {: faq}
 
-Con {{site.data.keyword.containerlong_notm}}, puede crear su propio clúster de Kubernetes para desplegar y gestionar apps contenerizadas en {{site.data.keyword.Bluemix_notm}}. Las apps contenerizadas se alojan en hosts de cálculo de la infraestructura de IBM Cloud (SoftLayer) que se denominan nodos trabajadores. Puede elegir suministrar los hosts de cálculo como [máquinas virtuales](/docs/containers?topic=containers-plan_clusters#vm) con recursos compartidos o dedicados, o como [máquinas nativas](/docs/containers?topic=containers-plan_clusters#bm) que se puede optimizar para el uso de GPU y almacenamiento definido por software (SDS). Los nodos trabajadores se controlan mediante un maestro de Kubernetes altamente disponible que configura, supervisa y gestiona IBM. Puede utilizar la CLI o la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de infraestructura del clúster y la CLI o la API de Kubernetes para gestionar los despliegues y servicios.
+Con {{site.data.keyword.containerlong_notm}}, puede crear su propio clúster de Kubernetes para desplegar y gestionar apps contenerizadas en {{site.data.keyword.Bluemix_notm}}. Las apps contenerizadas se alojan en hosts de cálculo de la infraestructura de IBM Cloud (SoftLayer) que se denominan nodos trabajadores. Puede elegir suministrar los hosts de cálculo como [máquinas virtuales](/docs/containers?topic=containers-planning_worker_nodes#vm) con recursos compartidos o dedicados, o como [máquinas nativas](/docs/containers?topic=containers-planning_worker_nodes#bm) que se puede optimizar para el uso de GPU y almacenamiento definido por software (SDS). Los nodos trabajadores se controlan mediante un maestro de Kubernetes altamente disponible que configura, supervisa y gestiona IBM. Puede utilizar la CLI o la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de infraestructura del clúster y la CLI o la API de Kubernetes para gestionar los despliegues y servicios.
 
 Para obtener más información sobre cómo se configuran los recursos del clúster, consulte la [Arquitectura del servicio](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). Para ver una lista de prestaciones y beneficios, consulte [Por qué {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
@@ -65,9 +67,9 @@ Los nodos trabajadores de los clústeres estándares se suministran en su cuenta
 
 La arquitectura y la infraestructura de {{site.data.keyword.containerlong_notm}} están diseñadas para garantizar la fiabilidad, la baja latencia de procesamiento y el tiempo máximo de actividad del servicio. De forma predeterminada, cada clúster de {{site.data.keyword.containerlong_notm}} está configurado con varias instancias del maestro de Kubernetes para garantizar la disponibilidad y accesibilidad de los recursos del clúster, incluso si una o más instancias del maestro de Kubernetes no están disponibles.
 
-Puede hacer que el clúster esté una disponibilidad incluso mayor y proteger la app del tiempo de inactividad mediante la dispersión de las cargas de trabajo en varios nodos trabajadores de varias zonas de una región. Esta configuración se denomina [clúster multizona](/docs/containers?topic=containers-plan_clusters#multizone) y garantiza que la app sea accesible, incluso aunque un nodo trabajador o una zona completa no esté disponible.
+Puede hacer que el clúster esté una disponibilidad incluso mayor y proteger la app del tiempo de inactividad mediante la dispersión de las cargas de trabajo en varios nodos trabajadores de varias zonas de una región. Esta configuración se denomina [clúster multizona](/docs/containers?topic=containers-ha_clusters#multizone) y garantiza que la app sea accesible, incluso aunque un nodo trabajador o una zona completa no esté disponible.
 
-Como protección frente a un fallo en toda la región, cree [varios clústeres y distribúyalos en regiones de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_clusters#multiple_clusters). Mediante la configuración de un equilibrador de carga de red (NLB) para los clústeres, puede lograr un equilibrio de carga entre regiones y redes entre regiones para los clústeres.
+Como protección frente a un fallo en toda la región, cree [varios clústeres y distribúyalos en regiones de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha_clusters#multiple_clusters). Mediante la configuración de un equilibrador de carga de red (NLB) para los clústeres, puede lograr un equilibrio de carga entre regiones y redes entre regiones para los clústeres.
 
 Si tiene datos que deban estar disponibles, incluso si se produce una interrupción, asegúrese de almacenar los datos en [almacenamiento persistente](/docs/containers?topic=containers-storage_planning#storage_planning).
 
@@ -80,6 +82,26 @@ Para obtener más información sobre cómo conseguir una alta disponibilidad par
 Puede utilizar características de seguridad incorporadas en {{site.data.keyword.containerlong_notm}} para proteger los componentes del clúster, los datos y los despliegues de apps para garantizar la integridad de los datos y la conformidad de seguridad. Utilice estas características para proteger el servidor de la API de Kubernetes, el almacén de datos etcd, el nodo trabajador, la red, el almacenamiento, las imágenes y los despliegues frente a ataques maliciosos. También puede hacer uso de las herramientas incorporadas de registro y supervisión para detectar ataques maliciosos y patrones de uso sospechosos.
 
 Para obtener más información sobre los componentes del clúster y cómo puede proteger cada componente, consulte [Seguridad para {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
+
+## ¿Qué políticas de acceso debo dar a los usuarios de mi clúster?
+{: #faq_access}
+{: faq}
+
+{{site.data.keyword.containerlong_notm}} utiliza {{site.data.keyword.iamshort}} (IAM) para otorgar acceso a recursos del clúster a través de roles de plataforma de IAM y políticas de control de acceso basadas en rol (RBAC) de Kubernetes a través de los roles de servicio de IAM. Para obtener más información sobre los tipos de políticas de acceso, consulte [Cómo elegir la política de acceso y el rol correctos para los usuarios](/docs/containers?topic=containers-users#access_roles).
+{: shortdesc}
+
+Las políticas de acceso que asigna a los usuarios varían en función de lo que desee que los usuarios puedan realizar. Encontrará más información sobre qué roles autorizan los tipos de acciones en la [página de referencia de acceso de usuario](/docs/containers?topic=containers-access_reference) o en los enlaces de la tabla siguiente. Para ver los pasos a seguir para asignar políticas, consulte [Cómo otorgar a los usuarios acceso al clúster a través de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+
+| Caso de uso | Roles y ámbito de ejemplo |
+| --- | --- |
+| Auditor de apps | [Rol de plataforma de Visor sobre un clúster, una región o un grupo de recursos](/docs/containers?topic=containers-access_reference#view-actions), [Rol de servicio de Lector sobre un clúster, una región o un grupo de recursos](/docs/containers?topic=containers-access_reference#service). |
+| Desarrolladores de apps | [Rol de plataforma de Editor sobre un clúster](/docs/containers?topic=containers-access_reference#editor-actions), [Rol de servicio de Escritor limitado a un espacio de nombres](/docs/containers?topic=containers-access_reference#service), [Rol de espacio de desarrollador de Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry). |
+| Facturación | [Rol de plataforma de Visor sobre un clúster, una región o un grupo de recursos](/docs/containers?topic=containers-access_reference#view-actions). |
+| Creación de un clúster | Permisos a nivel de cuenta para credenciales de infraestructura de superusuario, rol de plataforma de Administrador sobre {{site.data.keyword.containerlong_notm}}, rol de plataforma de Administrador sobre {{site.data.keyword.registrylong_notm}}. Para obtener más información, consulte [Preparación para crear clústeres](/docs/containers?topic=containers-clusters#cluster_prepare).|
+| Administrador del clúster | [Rol de plataforma de Administrador sobre un clúster](/docs/containers?topic=containers-access_reference#admin-actions), [Rol de servicio de Gestor, no limitado a un espacio de nombres (para todo el clúster)](/docs/containers?topic=containers-access_reference#service).|
+| Operador de DevOps | [Rol de plataforma de Operador sobre un clúster](/docs/containers?topic=containers-access_reference#operator-actions), [Rol de servicio de Escritor no limitado a un espacio de nombres (para todo el clúster)](/docs/containers?topic=containers-access_reference#service), [Rol de espacio de desarrollador de Cloud Foundry](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
+| Operador o ingeniero de fiabilidad del sitio | [Rol de plataforma de Administrador sobre un clúster, una región o un grupo de recursos](/docs/containers?topic=containers-access_reference#admin-actions), [Rol de servicio de Lector sobre un clúster o una región](/docs/containers?topic=containers-access_reference#service) o [Rol de servicio de Gestor sobre todos los espacios de nombres del clúster](/docs/containers?topic=containers-access_reference#service) para poder utilizar mandatos `kubectl top nodes,pods`. |
+{: caption="Los tipos de roles que puede asignar para que cumplan distintos casos de uso." caption-side="top"}
 
 ## ¿Dónde puedo encontrar una lista de boletines de seguridad que afectan a mi clúster?
 {: #faq_security_bulletins}
@@ -95,7 +117,7 @@ Algunos CVE requieren la actualización de parches más reciente para una versi�
 
 Sí, puede suministrar el nodo trabajador como un servidor nativo físico de un solo arrendatario. Los servidores nativos ofrecen grandes beneficios en cuanto a alto rendimiento para cargas de trabajo como datos, IA y GPU. Además, todos los recursos de hardware están dedicados a sus cargas de trabajo, así que no tiene que preocuparse por "vecinos molestos".
 
-Para obtener más información sobre los tipos de recursos nativos disponibles y en qué difieren los recursos nativos de las máquinas virtuales, consulte [Máquinas físicas (nativas)](/docs/containers?topic=containers-plan_clusters#bm).
+Para obtener más información sobre los tipos de recursos nativos disponibles y en qué difieren los recursos nativos de las máquinas virtuales, consulte [Máquinas físicas (nativas)](/docs/containers?topic=containers-planning_worker_nodes#bm).
 
 ## ¿Qué versiones de Kubernetes admite el servicio?
 {: #supported_kube_versions}
@@ -103,9 +125,9 @@ Para obtener más información sobre los tipos de recursos nativos disponibles y
 
 {{site.data.keyword.containerlong_notm}} da soporte a varias versiones de Kubernetes simultáneamente. Cuando se publica una versión más reciente (n), se da soporte a hasta 2 versiones anteriores (n-2). Las versiones anteriores a 2 versiones anteriores a la versión más reciente (n-3) son las primeras que quedan en desuso y a las que se deja de dar soporte. Actualmente se admiten las versiones siguientes:
 
-*   Más reciente: 1.13.5
-*   Predeterminada: 1.12.7
-*   Otras: 1.11.9
+*   Más reciente: 1.14.2
+*   Predeterminada: 1.13.6
+*   Otras: 1.12.9
 
 Para obtener más información sobre las versiones admitidas y las acciones de actualización que debe llevar a cabo para pasar de una versión a otra, consulte [Información de versión y acciones de actualización](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -115,7 +137,7 @@ Para obtener más información sobre las versiones admitidas y las acciones de a
 
 {{site.data.keyword.containerlong_notm}} está disponible en todo el mundo. Puede crear clústeres estándar en cada región de {{site.data.keyword.containerlong_notm}} soportada. Los clústeres gratuitos solo están disponibles en determinadas regiones.
 
-Para obtener más información sobre las regiones soportadas, consulte [Regiones y zonas](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
+Para obtener más información sobre las regiones soportadas, consulte [Ubicaciones](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
 
 ## ¿A qué estándares se ajusta el servicio?
 {: #standards}
@@ -168,6 +190,7 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
 * [Direcciones IP de subred](#subnet_ips)
 * [Almacenamiento](#persistent_storage)
 * [Servicios de {{site.data.keyword.Bluemix_notm}}](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">Nodos trabajadores</dt>
@@ -179,7 +202,7 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
   <p>Las <strong>máquinas físicas (nativas)</strong> ofrecen grandes beneficios en cuanto a alto rendimiento para cargas de trabajo como datos, IA y GPU. Además, todos los recursos de hardware están dedicados a sus cargas de trabajo, así que no tiene "vecinos molestos". Tenga en cuenta estos factores que afectan a los costes de la máquina nativa:</p>
   <ul><li><strong>Solo facturación mensual</strong>: todas las máquinas nativas se facturan mensualmente.</li>
   <li><strong>Proceso de solicitud más largo</strong>: después de solicitar o de cancelar un servidor nativo, el proceso se completa manualmente en la cuenta de la infraestructura de IBM Cloud (SoftLayer). Por lo tanto, puede ser necesario más de un día laborable para completar la tramitación.</li></ul>
-  <p>Para obtener detalles sobre las especificaciones de la máquina, consulte [Hardware disponible para los nodos trabajadores](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
+  <p>Para obtener detalles sobre las especificaciones de la máquina, consulte [Hardware disponible para los nodos trabajadores](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
 
 <dt id="bandwidth">Ancho de banda público</dt>
   <dd><p>Ancho de banda se refiere a la transferencia de datos públicos del tráfico de red de entrada y salida, tanto a como desde los recursos de {{site.data.keyword.Bluemix_notm}} de los centros de datos de todo el mundo. El ancho de banda público se carga por GB. Para revisar el resumen de ancho de banda actual, inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), en el menú ![Icono de menú](../icons/icon_hamburger.svg "Icono de menú") seleccione **Infraestructura clásica** y, a continuación, seleccione la página **Red > Ancho de banda > Resumen**.
@@ -190,7 +213,7 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
   <p>Para obtener más información, consulte [Paquetes de ancho de banda ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnet_ips">Direcciones IP de subred</dt>
-  <dd><p>Cuando se crea un clúster estándar, se solicita una subred pública portátil con 8 direcciones IP públicas y se carga a su cuenta mensualmente.</p><p>Si ya tiene subredes disponibles en su cuenta de infraestructura, puede utilizar estas subredes en su lugar. Cree el clúster con el [distintivo](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) `--no-subnets` y luego [reutilice sus subredes](/docs/containers?topic=containers-subnets#subnets_custom).</p>
+  <dd><p>Cuando se crea un clúster estándar, se solicita una subred pública portátil con 8 direcciones IP públicas y se carga a su cuenta mensualmente.</p><p>Si ya tiene subredes disponibles en su cuenta de infraestructura, puede utilizar estas subredes en su lugar. Cree el clúster con el [distintivo](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) `--no-subnets` y luego [reutilice sus subredes](/docs/containers?topic=containers-subnets#subnets_custom).</p>
   </dd>
 
 <dt id="persistent_storage">Almacenamiento</dt>
@@ -202,7 +225,12 @@ Con los clústeres de {{site.data.keyword.containerlong_notm}}, puede utilizar l
 <dt id="services">Servicios de {{site.data.keyword.Bluemix_notm}}</dt>
   <dd>Cada servicio que integre en su clúster tiene su propio modelo de precios. Revise la documentación de cada producto y utilice la consola de {{site.data.keyword.Bluemix_notm}} para [estimar los costes](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) está disponible como versión beta para probar clústeres de OpenShift.</p>Si crea un [clúster de Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial), los nodos trabajadores se instalan con el sistema operativo Red Hat Enterprise Linux, lo que aumenta el precio de las [máquinas de nodo trabajador](#nodes). También debe tener una licencia de OpenShift, que incurre en costes mensuales, además de los costes de la máquina virtual por hora o de los costes de los servidores nativos mensuales. La licencia de OpenShift sirve para cada 2 núcleos de nodo trabajador. Si suprime el nodo de trabajador antes de que acabe el mes, la licencia mensual estará disponible para que la utilicen otros nodos trabajadores de la agrupación de nodos trabajadores. Para obtener más información sobre los clústeres de OpenShift, consulte [Creación de un clúster de Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial).</dd>
+
 </dl>
+<br><br>
 
 Los recursos mensuales de un mes se facturarán el primero del mes siguiente. Si solicita un recurso mensual a mediados de mes, se le cargará una cantidad prorrateada correspondiente a ese mes. Sin embargo, si cancela un recurso a mediados de mes, se le cargará la totalidad correspondiente al recurso mensual.
 {: note}

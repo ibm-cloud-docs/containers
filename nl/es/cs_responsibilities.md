@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Responsabilidades al utilizar {{site.data.keyword.containerlong_notm}}
@@ -48,8 +48,8 @@ IBM proporciona una plataforma en la nube empresarial que le permite desplegar a
     **Responsabilidades de IBM**:
     <ul><li>Desplegar un maestro dedicado totalmente gestionado y altamente disponible en una cuenta de infraestructura protegida, propiedad de IBM, para cada clúster.</li>
     <li>Suministrar nodos trabajadores en la cuenta de infraestructura de IBM Cloud (SoftLayer).</li>
-    <li>Configurar los componentes de gestión de clústeres, como por ejemplo, VLANs y equilibradores de carga.</li>
-    <li>Cumplimentar solicitudes de más infraestructura, como por ejemplo añadir y eliminar nodos de trabajo, crear subredes predeterminadas y suministrar volúmenes de almacenamiento en respuesta a las peticiones de volúmenes persistentes.</li>
+    <li>Configurar los componentes de gestión de clústeres, como por ejemplo, VLAN y equilibradores de carga.</li>
+    <li>Cumplimentar solicitudes de más infraestructura, como por ejemplo añadir y eliminar nodos de trabajo, crear subredes predeterminadas y suministrar volúmenes de almacenamiento en respuesta a las reclamaciones de volúmenes persistentes.</li>
     <li>Integrar los recursos de infraestructura ordenados para trabajar de forma automática con la arquitectura del clúster y estar disponible para las apps y cargas de trabajo desplegadas.</li></ul>
     <br><br>
     **Responsabilidades del usuario**:
@@ -60,7 +60,7 @@ IBM proporciona una plataforma en la nube empresarial que le permite desplegar a
      <td align="center"><img src="images/icon_tools.svg" alt="Icono de una llave inglesa"/><br>Clúster gestionado</td>
      <td>
      **Responsabilidades de IBM**:
-     <ul><li>Proporcionar una suite de herramientas para automatizar la gestión de clústeres, como por ejemplo {{site.data.keyword.containerlong_notm}}[API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-api/), [plugin de CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)y [consola ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/kubernetes/clusters).</li>
+     <ul><li>Proporcionar una suite de herramientas para automatizar la gestión de clústeres, como por ejemplo {{site.data.keyword.containerlong_notm}} [API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/), [plugin de CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) y [consola ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/kubernetes/clusters).</li>
      <li>Aplicar automáticamente los parches del SO, las nuevas versiones y las actualizaciones seguridad en el maestro de Kubernetes. Poner a disposición del usuario las actualizaciones mayores y menores para que las pueda aplicar.</li>
      <li>Actualizar y recuperar los componentes operativos de {{site.data.keyword.containerlong_notm}} y de Kubernetes dentro del clúster, como por ejemplo el equilibrador de carga de aplicación de Ingress y el plugin de almacenamiento de archivos.</li>
      <li>Realizar copia de seguridad y recuperación de datos en etcd, como por ejemplo de los archivos de configuración de carga de trabajo de Kubernetes</li>
@@ -100,21 +100,21 @@ IBM proporciona una plataforma en la nube empresarial que le permite desplegar a
       **Responsabilidades del usuario**:
       <ul>
       <li>Utilizar la API, la CLI o las herramientas de consola para aplicar las [actualizaciones de parches de seguridad](/docs/containers?topic=containers-changelog#changelog) a los nodos trabajadores.</li>
-      <li>Elegir cómo configurar la [red de clúster](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) y configurar más [valores de seguridad](/docs/containers?topic=containers-security#security) para satisfacer las necesidades de seguridad y de conformidad de la carga de trabajo. Si procede, configurar el [cortafuegos](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <li>Elegir cómo configurar la [red de clúster](/docs/containers?topic=containers-plan_clusters) y configurar más [valores de seguridad](/docs/containers?topic=containers-security#security) para satisfacer las necesidades de seguridad y de conformidad de la carga de trabajo. Si procede, configurar el [cortafuegos](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="Icono de corchetes angulares"/><br>Orquestación de app</td>
         <td>
         **Responsabilidades de IBM**:
         <ul>
         <li>Suministrar clústeres con los componentes de Kubernetes instalados para que pueda acceder a la API de Kubernetes.</li>
-        <li>Proporcionar una serie de complementos gestionados para permitir al usuario ampliar las prestaciones de su app, como por ejemplo [Istio](/docs/containers?topic=containers-istio#istio) y [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). El mantenimiento se simplifica para el usuario porque IBM proporciona la instalación y las actualizaciones para los complementos gestionados.</li>
+        <li>Proporcionar una serie de complementos gestionados para permitir al usuario ampliar las prestaciones de su app, como por ejemplo [Istio](/docs/containers?topic=containers-istio#istio) y [Knative](/docs/containers?topic=containers-serverless-apps-knative). El mantenimiento se simplifica para el usuario porque IBM proporciona la instalación y las actualizaciones para los complementos gestionados.</li>
         <li>Ofrecer la integración de clústeres con tecnologías asociadas seleccionadas de terceros, como por ejemplo {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} y Portworx.</li>
         <li>Proporcionar automatización para permitir enlazar los servicios a otros servicios de {{site.data.keyword.Bluemix_notm}}.</li>
         <li>Crear clústeres con secretos de obtención de imagen para que los despliegues en el espacio de nombres `default` de Kubernetes puedan extraer las imágenes de {{site.data.keyword.registrylong_notm}}.</li>
-        <li>Proporcionar clases de almacenamiento y plug-ins para dar soporte a volúmenes persistentes para utilizarlos con las apps.</li>
+        <li>Proporcionar clases de almacenamiento y plugins para dar soporte a volúmenes persistentes para utilizarlos con las apps.</li>
         <li>Crear clústeres con direcciones IP de subred reservadas para utilizar para exponer las apps externamente.</li>
         <li>Dar soporte a equilibradores de carga públicos y privados de Kubernetes y a rutas de Ingress para exponer servicios externamente.</li>
         </ul>
@@ -147,4 +147,4 @@ Entre los usos no apropiados se incluye:
 *   Realizar modificaciones no autorizadas de los servicios o sistemas
 *   Incumplir los derechos de terceros
 
-Consulte [Términos de los servicios en la nube](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms) para obtener una visión general de los términos uso.
+Consulte [Términos de los servicios en la nube](/docs/overview/terms-of-use?topic=overview-terms#terms) para obtener una visión general de los términos uso.

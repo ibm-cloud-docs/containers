@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,9 +21,9 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
-
 
 
 
@@ -42,10 +42,8 @@ subcollection: containers
 
 **API REST**
 
-- [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-api/)
-- [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-api/swagger.json)
-- [API REST para creación de registros en clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-logging/)
-- [API REST para gestión de equilibradores de carga de aplicación de Ingress en clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/swagger-alb-api/)
+- [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/)
+- [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -62,7 +60,7 @@ subcollection: containers
 - [Configuración de integración continua y distribución continua para {{site.data.keyword.containerlong}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
 - [Migración de una app VM a la nube ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
 - [Migración de una app CF a la nube ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-- [Ejecución de apps sin servidor en un clúster con Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Ejecución de apps sin servidor en un clúster con Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/containers?topic=containers-serverless-apps-knative)
 - [Orquestación de cargas de trabajo de larga ejecución para apps con servicio de mensajería basado en Apache Kafka ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 - [Automatización de despliegues en un clúster con Terraform ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)
 - [Organización de usuarios y equipos ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications)
@@ -79,7 +77,7 @@ subcollection: containers
 - [Documentación de Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/knative/docs)
 - [Documentación de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/engine/)
 - <a href="https://docs.helm.sh/helm/" target="_blank">Documentación de Helm <img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para la gestión de paquetes de Kubernetes
-- [Plataforma Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/) para conectar, gestionar y proteger microservicios
+- Plataforma [Istio ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://istio.io/) para conectarse, gestionar y proteger microservicios
 - [Visualización de Weave Scope ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.weave.works/oss/scope/)
 
 <br />

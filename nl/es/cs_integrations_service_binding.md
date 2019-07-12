@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Adición de servicios utilizando enlaces de servicios de IBM Cloud
@@ -32,10 +34,10 @@ Añada servicios de {{site.data.keyword.Bluemix_notm}} para mejorar el clúster 
 **¿Qué tipos de servicios puedo enlazar a mi clúster?** </br>
 Cuando añade servicios de {{site.data.keyword.Bluemix_notm}} a su clúster, puede elegir entre servicios habilitados para {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) y servicios basados en Cloud Foundry. Los servicios habilitados para IAM ofrecen un control de acceso más preciso y se pueden gestionar en un grupo de recursos de {{site.data.keyword.Bluemix_notm}}. Los servicios de Cloud Foundry deben añadirse a una organización y un espacio de Cloud Foundry, y no se pueden añadir a un grupo de recursos. Para controlar el acceso a la instancia de servicio de Cloud Foundry, se deban utilizar roles de Cloud Foundry. Para obtener más información acerca de los servicios habilitados para IAM y los servicios de Cloud Foundry, consulte [¿Qué es un recurso?](/docs/resources?topic=resources-resource#resource).
 
-ara obtener una lista de los servicios de {{site.data.keyword.Bluemix_notm}} admitidos, consulte el [catálogo de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
+Para obtener una lista de los servicios de {{site.data.keyword.Bluemix_notm}} admitidos, consulte el [catálogo de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
 
 **¿Qué es el enlace de servicios de {{site.data.keyword.Bluemix_notm}}?**</br>
-El enlace de servicios es una forma rápida de crear credenciales de servicio para un servicio de {{site.data.keyword.Bluemix_notm}} y almacenar estas credenciales en un secreto de Kubernetes en el clúster. Para enlazar un servicio al clúster, primero debe suministrar una instancia del servicio. A continuación, debe utilizar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para crear las credenciales de servicio y el secreto de Kubernetes. El secreto de Kubernetes se cifra automáticamente en etcd para proteger los datos.
+El enlace de servicios es una forma rápida de crear credenciales de servicio para un servicio de {{site.data.keyword.Bluemix_notm}} y almacenar estas credenciales en un secreto de Kubernetes en el clúster. Para enlazar un servicio al clúster, primero debe suministrar una instancia del servicio. A continuación, debe utilizar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para crear las credenciales de servicio y el secreto de Kubernetes. El secreto de Kubernetes se cifra automáticamente en etcd para proteger los datos.
 
 ¿Desea proteger aún más sus secretos? Solicite al administrador del clúster que [habilite {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) en el clúster para cifrar los secretos nuevos y existentes, como el secreto que almacena las credenciales de las instancias de servicio de {{site.data.keyword.Bluemix_notm}}.
 {: tip}
@@ -43,7 +45,7 @@ El enlace de servicios es una forma rápida de crear credenciales de servicio pa
 **¿Puedo utilizar todos los servicios de {{site.data.keyword.Bluemix_notm}} en mi clúster?**</br>
 Puede utilizar el enlace de servicios sólo para los servicios que admiten claves de servicio de forma que las credenciales de servicio se puedan crear y almacenar automáticamente en un secreto de Kubernetes. Para consultar una lista de servicios que admiten claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
 
-Los servicios que admiten claves de servicio suelen proporcionar una API que puede utilizar en la app. El método de enlace de servicios no configura automáticamente el acceso de API para la app. Asegúrese de revisar la documentación de la API del servicio e implementar la interfaz de API en la app.
+Los servicios que no admiten claves de servicio suelen proporcionar una API que puede utilizar en la app. El método de enlace de servicios no configura automáticamente el acceso de API para la app. Asegúrese de revisar la documentación de la API del servicio e implementar la interfaz de API en la app.
 
 ## Adición de servicios de IBM Cloud a clústeres
 {: #bind-services}
@@ -56,7 +58,7 @@ Antes de empezar:
     - [Rol de acceso a la plataforma de {{site.data.keyword.Bluemix_notm}} IAM de **Editor** o **Administrador**](/docs/containers?topic=containers-users#platform) para el clúster donde desea enlazar un servicio
     - [Rol de servicio de {{site.data.keyword.Bluemix_notm}} IAM de **Escritor** o **Gestor**](/docs/containers?topic=containers-users#platform) para el espacio de nombres de Kubernetes donde desea enlazar el servicio
     - Para los servicios Cloud Foundry: [Rol de Cloud Foundry de **Desarrollador**](/docs/iam?topic=iam-mngcf#mngcf) para el espacio donde desea suministrar el servicio
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
 
@@ -173,8 +175,8 @@ Las credenciales de una instancia de servicio están codificadas como base64 y s
 <br>
 
 Antes de empezar:
--  Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+-  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Añada un servicio de {{site.data.keyword.Bluemix_notm}} a su clúster](#bind-services).
 
 ### Montaje del secreto como un volumen en el pod
@@ -216,7 +218,7 @@ Cuando monta el secreto como volumen en el pod, un archivo denominado `binding` 
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mount_path>
@@ -371,7 +373,7 @@ Puede añadir las credenciales de servicio y otros pares de valores de clave del
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -449,16 +451,16 @@ Puede añadir las credenciales de servicio y otros pares de valores de clave del
    ```
    {: codeblock}
 
-8. Opcional: Como precaución, añada manejo de errores a la app por si la variable de entorno `BINDING` no se ha establecido correctamente. 
-   
-   Código de ejemplo en Java: 
+8. Opcional: Como precaución, añada manejo de errores a la app por si la variable de entorno `BINDING` no se ha establecido correctamente.
+
+   Código de ejemplo en Java:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Código de ejemplo en Node.js:
    ```js
    if (!process.env.BINDING) {
@@ -467,4 +469,3 @@ Puede añadir las credenciales de servicio y otros pares de valores de clave del
    }
    ```
    {: codeblock}
-

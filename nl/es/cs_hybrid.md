@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-12"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,18 +21,25 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
 
+
 # Nube híbrida
 {: #hybrid_iks_icp}
 
-Si tiene una cuenta privada de {{site.data.keyword.Bluemix}}, puede utilizarla con determinados servicios de {{site.data.keyword.Bluemix_notm}}, incluido {{site.data.keyword.containerlong}}. Para obtener más información, consulte el blog sobre [Experiencia híbrida en nube pública de IBM y privada de {{site.data.keyword.Bluemix_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://ibm.biz/hybridJune2018).
+Si tiene una cuenta privada de {{site.data.keyword.Bluemix}}, puede utilizarla con determinados servicios de {{site.data.keyword.Bluemix_notm}}, incluido {{site.data.keyword.containerlong}}. Para obtener más información, consulte el blog sobre [Experiencia híbrida en nube pública de IBM y privada de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](http://ibm.biz/hybridJune2018).
 {: shortdesc}
 
-Si ya conoce las [ofertas de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation) y ha desarrollado la estrategia de Kubernetes sobre qué [cargas de trabajo ejecutar en la nube](/docs/containers?topic=containers-strategy#cloud_workloads). Ahora, puede [conectar su nube pública y privada](#hybrid_vpn) y [reutilizar los paquetes privados para contenedores públicos](#hybrid_ppa_importer).
+Si ya conoce las [ofertas de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_ov#differentiation) y ha desarrollado la estrategia de Kubernetes sobre qué [cargas de trabajo ejecutar en la nube](/docs/containers?topic=containers-strategy#cloud_workloads). Ahora, puede conectar su nube pública y privada mediante el servicio VPN de strongSwan o {{site.data.keyword.BluDirectLink}}.
+
+* El [servicio VPN de strongSwan](#hybrid_vpn) conecta de forma segura el clúster de Kubernetes con una red local a través de un canal de comunicación seguro de extremo a extremo a través de Internet que se basa en la suite de protocolos de Internet Protocol Security (IPSec) estándar del sector.
+* Con [{{site.data.keyword.Bluemix_notm}} Direct Link](#hybrid_dl), puede crear una conexión directa y privada entre los entornos de red remotos y {{site.data.keyword.containerlong_notm}} sin direccionamiento a través de Internet público.
+
+Después de conectar la nube pública y privada, puede [reutilizar los paquetes privados para contenedores públicos](#hybrid_ppa_importer).
 
 ## Conexión de la nube pública y privada con la VPN de strongSwan
 {: #hybrid_vpn}
@@ -41,11 +48,10 @@ Establezca conectividad de VPN entre el clúster de Kubernetes público y la ins
 {: shortdesc}
 
 1.  Cree un clúster estándar con {{site.data.keyword.containerlong}} en {{site.data.keyword.Bluemix_notm}} público o utilice uno existente. Para crear un clúster, elija entre las opciones siguientes:
-    - [Cree un clúster estándar desde la consola](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Cree un clúster estándar desde la CLI](/docs/containers?topic=containers-clusters#clusters_cli).
-    - [Utilice Cloud Automation Manager (CAM) para crear un clúster utilizando una plantilla predefinida![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Cuando se despliega un clúster con CAM, el tiller de Helm se instala automáticamente.
+    - [Cree un clúster estándar desde la consola o la CLI](/docs/containers?topic=containers-clusters#clusters_ui).
+    - [Utilice Cloud Automation Manager (CAM) para crear un clúster utilizando una plantilla predefinida ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). Cuando se despliega un clúster con CAM, el tiller de Helm se instala automáticamente.
 
-2.  En el clúster de {{site.data.keyword.containerlong_notm}}, [siga las instrucciones para configurar el servicio VPN de IPSec de strongSwan](/docs/containers?topic=containers-vpn#vpn_configure).
+2.  En el clúster de {{site.data.keyword.containerlong_notm}}, [siga las instrucciones para configurar el servicio VPN IPSec de strongSwan](/docs/containers?topic=containers-vpn#vpn_configure).
 
     *  Para el [Paso 2](/docs/containers?topic=containers-vpn#strongswan_2), tenga en cuenta que:
 
@@ -68,13 +74,13 @@ Establezca conectividad de VPN entre el clúster de Kubernetes público y la ins
     ```
     {: pre}
 
-4.  [Cree un clúster en {{site.data.keyword.Bluemix_notm}} privado![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
+4.  [Cree un clúster en {{site.data.keyword.Bluemix_notm}} privado ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
 
 5.  En el clúster privado de {{site.data.keyword.Bluemix_notm}}, despliegue el servicio VPN IPSec de strongSwan.
 
     1.  [Complete las soluciones alternativas de VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html).
 
-    2.  [Configure el diagrama de Helm de VPN de strongSwan![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) en el clúster privado.
+    2.  [Configure el diagrama de Helm de VPN de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) en el clúster privado.
 
         *  En los parámetros de configuración, defina el campo **Remote gateway** en el valor de la dirección IP pública portátil que ha establecido como `loadbalancerIP` del clúster de {{site.data.keyword.containerlong_notm}}.
 
@@ -100,6 +106,27 @@ Establezca conectividad de VPN entre el clúster de Kubernetes público y la ins
 *   Para gestionar varios clústeres de Kubernetes de nube, como por ejemplo entre {{site.data.keyword.Bluemix_notm}} Público y {{site.data.keyword.Bluemix_notm}} Privado, consulte [IBM Multicloud Manager ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
 
 
+## Conexión de la nube pública y privada con {{site.data.keyword.Bluemix_notm}} Direct Link
+{: #hybrid_dl}
+
+Con [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), puede crear una conexión directa y privada entre los entornos de red remotos y {{site.data.keyword.containerlong_notm}} sin direccionamiento a través de Internet público.
+{: shortdesc}
+
+Para conectar la nube pública y la instancia local de {{site.data.keyword.Bluemix}} Private, puede utilizar una de estas cuatro ofertas:
+* {{site.data.keyword.Bluemix_notm}} Direct Link Connect
+* {{site.data.keyword.Bluemix_notm}} Direct Link Exchange
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated
+* {{site.data.keyword.Bluemix_notm}} Direct Link Dedicated Hosting
+
+Para elegir una conexión de {{site.data.keyword.Bluemix_notm}} Direct Link y configurar una conexión de {{site.data.keyword.Bluemix_notm}} Direct Link, consulte [Iniciación a {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) en la documentación de {{site.data.keyword.Bluemix_notm}} Direct Link.
+
+**¿Qué es lo siguiente?**</br>
+* [Ejecute las imágenes de software para las que tenga licencia en los clústeres públicos](#hybrid_ppa_importer).
+* Para gestionar varios clústeres de Kubernetes de nube, como por ejemplo entre {{site.data.keyword.Bluemix_notm}} Público y {{site.data.keyword.Bluemix_notm}} Privado, consulte [IBM Multicloud Manager ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+
+<br />
+
+
 ## Ejecución de imágenes de {{site.data.keyword.Bluemix_notm}} privado en contenedores públicos de Kubernetes
 {: #hybrid_ppa_importer}
 
@@ -114,7 +141,7 @@ En la tabla siguiente se ofrece una visión general de los productos disponibles
 | --- | --- | --- |
 | IBM Db2 Direct Advanced Edition Server | 11.1 | CNU3TML |
 | IBM Db2 Advanced Enterprise Server Edition Server | 11.1 | CNU3SML |
-| IBM MQ Advanced | 9.0.5 | CNU1VML |
+| IBM MQ Advanced | 9.1.0.0, 9.1.1,0, 9.1.2.0 | - |
 | IBM WebSphere Application Server Liberty | 16.0.0.3 | Imagen de Docker Hub |
 {: caption="Tabla. Productos de {{site.data.keyword.Bluemix_notm}} privado soportados que se pueden utilizar en {{site.data.keyword.Bluemix_notm}} público." caption-side="top"}
 
@@ -130,10 +157,10 @@ Para desplegar una imagen de {{site.data.keyword.Bluemix_notm}} privado en {{sit
 
     **Para IBM WebSphere Application Server Liberty**:
 
-    1.  En lugar de obtener la imagen de IBM Passport Advantage, utilice la [imagen de Docker Hub ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://hub.docker.com/_/websphere-liberty/). Para obtener instrucciones sobre cómo obtener una licencia de producción, consulte [Actualización de la imagen de Docker Hub a una imagen de producción![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
+    1.  En lugar de obtener la imagen de IBM Passport Advantage, utilice la [imagen de Docker Hub ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://hub.docker.com/_/websphere-liberty/). Para obtener instrucciones sobre cómo obtener una licencia de producción, consulte [Actualización de la imagen de Docker Hub a una imagen de producción ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
 
     2.  Siga las [instrucciones
-del diagrama de Helm de Liberty![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
+del diagrama de Helm de Liberty ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
 
 2.  Verifique que el campo **STATUS** del diagrama de Helm muestra `DEPLOYED`. Si no es así, espere unos minutos e inténtelo de nuevo.
     ```

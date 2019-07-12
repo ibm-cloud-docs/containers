@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -64,11 +65,11 @@ Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted
    - **Datos fríos:** datos a los que se accede con muy poca frecuencia o nunca. Los archivados, las copias de seguridad a largo plazo o los datos históricos son ejemplos habituales de este caso.
    - **Datos bloqueados:** datos a los que no se accede y que se deben conservar por razones legales.
 
-   Si no puede prever la frecuencia o esta no sigue un patrón estricto, determine si las cargas de trabajo presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada. A continuación, busque la opción de almacenamiento que se ajuste a su carga de trabajo e investigue qué nivel de almacenamiento le proporciona la flexibilidad que necesita. Por ejemplo, {{site.data.keyword.cos_full_notm}} proporciona una clase de almacenamiento `flexible` que tiene en cuenta la frecuencia con la que se accede a los datos en un mes y se basa en esta medida para optimizar la facturación mensual.
+   Si no puede predecir la frecuencia o si la frecuencia no permite un patrón estricto, determine si las cargas de trabajo son de lectura pesada, de escritura pesada o equilibradas. A continuación, busque la opción de almacenamiento que se ajuste a su carga de trabajo e investigue qué nivel de almacenamiento le proporciona la flexibilidad que necesita. Por ejemplo, {{site.data.keyword.cos_full_notm}} proporciona una clase de almacenamiento `flexible` que tiene en cuenta la frecuencia con la que se accede a los datos en un mes y se basa en esta medida para optimizar la facturación mensual.
    {: tip}
 
 5. Investigue si los datos se deben compartir entre varias instancias de app, zonas o regiones.
-   - **Acceso en varios pods:** si utiliza volúmenes persistentes de Kubernetes para acceder al almacenamiento, puede determinar el número de pods que pueden montar el volumen al mismo tiempo. Hay algunas soluciones de almacenamiento, como el almacenamiento en bloque, a las que solo puede acceder un pod al mismo tiempo. Otras soluciones de almacenamiento le permiten compartir el mismo volumen en varios pods.
+   - **Acceso en varios pods:** si utiliza volúmenes persistentes de Kubernetes para acceder al almacenamiento, puede determinar el número de pods que pueden montar el volumen al mismo tiempo. Hay algunas soluciones de almacenamiento, como el almacenamiento en bloque, a las que solo puede acceder un pod al mismo tiempo. Con otras soluciones de almacenamiento, puede compartir el volumen entre varios pods.
    - **Acceso en varias zonas y regiones:** puede que necesite que los datos sean accesibles desde varias zonas o regiones. Algunas soluciones de almacenamiento, como el almacenamiento de archivos y en bloque, son específicas del centro de datos y no se pueden compartir entre varias zonas en una configuración de clúster multizona.
 
    Si desea hacer que sus datos sean accesibles a través de zonas y regiones, asegúrese de consultar a su departamento legal para verificar que los datos se puedan almacenar en varias zonas o en otro país.
@@ -77,7 +78,7 @@ Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted
 6. Conozca otras características de almacenamiento que afectan a su elección.
    - **Coherencia:** la garantía de que una operación de lectura devuelva la última versión de un archivo. Las soluciones de almacenamiento pueden proporcionar una `coherencia potente` cuando se garantiza que siempre se recibirá la última versión de un archivo, o una `coherencia eventual` cuando puede que la operación de lectura no devuelva la última versión. La coherencia eventual se suele dar en sistemas distribuidos geográficamente, donde una operación de escritura primero se debe replicar en todas las instancias.
    - **Rendimiento:** el tiempo que se tarda en completar una operación de lectura o escritura.
-   - **Durabilidad:** la garantía de que una operación de escritura que se confirme en el almacenamiento sobreviva permanentemente y no se dañe ni se pierda, aunque se graben gigabytes o terabytes de datos en el almacenamiento de una sola vez.
+   - **Durabilidad:** la garantía de que una operación de escritura que se confirme en el almacenamiento sobreviva permanentemente y no se dañe ni se pierda, aunque se escriban gigabytes o terabytes de datos en el almacenamiento de una sola vez.
    - **Resiliencia:** la capacidad de recuperarse de una interrupción y continuar con las operaciones, aunque haya fallado un componente de hardware o de software. Por ejemplo, el almacenamiento físico experimenta una interrupción de alimentación, un corte de red o queda destruido durante una catástrofe natural.
    - **Disponibilidad:** la capacidad de proporcionar acceso a los datos, incluso si un centro de datos o una región no están disponibles. La disponibilidad de los datos se consigue normalmente añadiendo redundancia y configurando mecanismos de migración tras error.
    - **Escalabilidad:** la capacidad de ampliar la capacidad y personalizar el rendimiento en función de sus necesidades.
@@ -130,7 +131,7 @@ La siguiente imagen muestra las opciones de datos no persistentes disponibles en
 <tr>
 <td style="text-align:left">Rendimiento</td>
 <td style="text-align:left">Alta</td>
-<td style="text-align:left">Alto con baja latencia al utilizar SSD</td>
+<td style="text-align:left">Alto con baja latencia cuando se utiliza SSD</td>
 </tr>
 <tr>
 <td style="text-align:left">Coherencia</td>
@@ -339,14 +340,14 @@ En la imagen siguiente se muestran las opciones que tiene en {{site.data.keyword
 </tr>
 <tr>
 <td style="text-align:left">Resiliencia</td>
-<td style="text-align:left">Alta ya que las porciones de datos se dispersan en 3 zonas o regiones. Media cuando está configurado en una sola zona.</td>
-<td style="text-align:left">Alta cuando se configura con réplica en 3 zonas. Media cuando está configurado en una sola zona.</td>
+<td style="text-align:left">Alta ya que las porciones de datos se dispersan en tres zonas o regiones. Media cuando está configurado en una sola zona.</td>
+<td style="text-align:left">Alta cuando se configura con réplica en tres zonas. Media cuando se almacenan datos en una sola zona.</td>
 <td style="text-align:left">Depende de la DBaaS y de la configuración. </td>
 </tr>
 <tr>
 <td style="text-align:left">Disponibilidad</td>
 <td style="text-align:left">Alta, debido a la distribución en varias zonas o regiones. </td>
-<td style="text-align:left">Alta cuando se replican los datos en 3 nodos trabajadores en diferentes zonas.</td>
+<td style="text-align:left">Alta cuando se duplican los datos en tres nodos trabajadores en diferentes zonas.</td>
 <td style="text-align:left">Alta si se configuran varias instancias. </td>
 </tr>
 <tr>

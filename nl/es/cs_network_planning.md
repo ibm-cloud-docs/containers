@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# Planificación de la exposición de apps con red interna y externa del clúster
+
+# Planificación de redes internas y externas del clúster para las apps
 {: #cs_network_planning}
 
 Con {{site.data.keyword.containerlong}}, puede gestionar redes internas y externas del clúster haciendo que se pueda acceder a las apps de forma pública o privada.
 {: shortdesc}
-
-Esta página le ayuda a planificar la red interna y externa del para las apps. Para obtener información sobre cómo configurar la red del clúster, consulte [Configuración de la red del clúster](/docs/containers?topic=containers-cs_network_cluster).
-{: tip}
 
 Para comenzar a trabajar rápidamente con las redes de apps, siga este árbol de decisiones y pulse en una opción para ver sus documentos de configuración.
 
@@ -43,15 +42,15 @@ Para comenzar a trabajar rápidamente con las redes de apps, siga este árbol de
 ## Equilibrio de carga para apps mediante el descubrimiento de servicios de Kubernetes
 {: #in-cluster}
 
-El descubrimiento de servicios de Kubernetes proporciona apps con conexión de red utilizando servicios de res y un proxy de Kubernetes local.
+El descubrimiento de servicios de Kubernetes proporciona apps con conexión de red utilizando servicios de red y un proxy de Kubernetes local.
 {: shortdesc}
 
 **Servicios**</br>
 A todas las pods que se despliegan en un nodo trabajador se les asigna una dirección IP privada dentro del rango 172.30.0.0/16 y se direccionan únicamente entre nodos trabajadores. Para evitar conflictos, no utilice este rango de IP en ningún otro nodo que se vaya a comunicar con los nodos trabajadores. Los nodos trabajadores y los pods pueden comunicarse de forma segura a través de la red privada utilizando direcciones IP privadas. Sin embargo, cuando un pod se cuelga o cuando es necesario volver a crear un nodo trabajador, se signa una nueva dirección IP privada.
 
-En lugar de intentar realizar un seguimiento de direcciones IP privadas cambiantes para las apps que deben ofrecer una alta disponibilidad, puede utilizar funciones integradas de descubrimiento de servicios de Kubernetes para exponer las apps como servicios. Un servicio de Kubernetes agrupa un conjunto de pods y proporciona una conexión de red a estos pods. El servicio selecciona los las pods de destino a los que direcciona el tráfico a través de etiquetas.
+En lugar de intentar realizar un seguimiento de direcciones IP privadas cambiantes para las apps que deben ofrecer una alta disponibilidad, puede utilizar funciones integradas de descubrimiento de servicios de Kubernetes para exponer las apps como servicios. Un servicio de Kubernetes agrupa un conjunto de pods y proporciona una conexión de red a estos pods. El servicio selecciona los pods de destino a los que direcciona el tráfico a través de etiquetas.
 
-Un servicio proporciona conectividad entre los pod de app y los demás servicios del clúster sin exponer la dirección IP privada real de cada pod. A los servicios se les asigna una dirección IP interna,la `clusterIP`, a la que solo se puede acceder dentro del clúster. Esta dirección IP está vinculada al servicio durante toda su vida útil y no cambia mientras existe el servicio.
+Un servicio proporciona conectividad entre los pods de app y los demás servicios del clúster sin exponer la dirección IP privada real de cada pod. A los servicios se les asigna una dirección IP interna, la `clusterIP`, a la que solo se puede acceder dentro del clúster. Esta dirección IP está vinculada al servicio durante toda su vida útil y no cambia mientras existe el servicio.
 * Clústeres más recientes: en los clústeres creados después de febrero de 2018 en la zona dal13 o después de octubre de 2017 en cualquier otra zona, a los servicios se les asigna una IP de las 65.000 dentro del rango 172.21.0.0/16.
 * Clústeres más antiguos: en los clústeres creados antes de febrero de 2018 en la zona dal13 o antes de octubre de 2017 en cualquier otra zona, se asigna a los servicios una IP de las 254 dentro del rango 10.10.10.0/24. Si ha alcanzado el límite de 254 servicios y necesita más servicios, debe crear un nuevo clúster.
 
@@ -62,11 +61,11 @@ Para evitar conflictos, no utilice este rango de IP en ningún otro nodo que se 
 **`kube-proxy`**</br>
 Para proporcionar equilibrio de carga básico de todo el tráfico de red TCP y UDP para servicios, se ejecuta un proxy de red de Kubernetes local, `kube-proxy`, como daemon en cada nodo trabajador del espacio de nombres `kube-system`. `kube-proxy` utiliza reglas de Iptables, una característica del kernel de Linux, para dirigir las solicitudes al pod detrás de un servicio de igual forma, independientemente de las direcciones IP de dentro del clúster de los pods' y del nodo trabajador donde se despliegan.
 
-Por ejemplo, las app de dentro del clúster pueden acceder a un pod detrás de un servicio de clúster utilizando la IP interna del clúster del servicio o enviando una solicitud al nombre del servicio. Cuando se utiliza el nombre del servicio, `kube-proxy` busca el nombre en el proveedor de DNS del clúster y direcciona la solicitud a la dirección IP interna sel clúster del servicio.
+Por ejemplo, las apps de dentro del clúster pueden acceder a un pod detrás de un servicio de clúster utilizando la IP interna del clúster del servicio o enviando una solicitud al nombre del servicio. Cuando se utiliza el nombre del servicio, `kube-proxy` busca el nombre en el proveedor de DNS del clúster y direcciona la solicitud a la dirección IP interna del clúster del servicio.
 
 Si utiliza un servicio que proporciona tanto una dirección IP de clúster interna como una dirección IP externa, los clientes que están fuera del clúster pueden enviar solicitudes a la dirección IP externa pública o privada del servicio. `kube-proxy` reenvía las solicitudes a la dirección IP del servicio en clúster y equilibra la carga entre los pods de la app que hay detrás del servicio.
 
-En la imagen siguiente se muestra cómo Kubernetes reenvía el tráfico de red pública a través de `kube-poxy` y de los servicios NodePort, LoadBalancer o Ingress en {{site.data.keyword.containerlong_notm}}.
+En la imagen siguiente se muestra cómo Kubernetes reenvía el tráfico de red pública a través de `kube-proxy` y de los servicios NodePort, LoadBalancer o Ingress en {{site.data.keyword.containerlong_notm}}.
 <p>
 <figure>
  <img src="images/cs_network_planning_ov-01.png" alt="arquitectura de red de tráfico externo de {{site.data.keyword.containerlong_notm}}">
@@ -127,7 +126,7 @@ Para elegir un patrón de despliegue del equilibrio de carga basado en uno o má
 Exponer públicamente una app del clúster en internet.
 {: shortdesc}
 
-Cuando crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, puede conectar el clúster a una VLAN pública. La VLAN pública determina la dirección IP pública que se asigna a cada nodo trabajador, lo que proporciona a cada nodo trabajador una interfaz de red pública. Los servicios de red públicos se conectan a esta interfaz de red pública proporcionando a su app una dirección IP pública y, Opcionalmente, un URL público. Cuando se expone públicamente una app, cualquiera que tenga la dirección IP pública del servicio o el URL que haya establecido para la app puede enviar una solicitud a la app. Por este motivo, exponga las menos apps posibles. Exponga una app al público sólo cuando esté preparado para aceptar tráfico procedente de clientes o usuarios web externos.
+Cuando crea un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, puede conectar el clúster a una VLAN pública. La VLAN pública determina la dirección IP pública que se asigna a cada nodo trabajador, lo que proporciona a cada nodo trabajador una interfaz de red pública. Los servicios de red públicos se conectan a esta interfaz de red pública proporcionando a su app una dirección IP pública y, opcionalmente, un URL público. Cuando se expone públicamente una app, cualquiera que tenga la dirección IP pública del servicio o el URL que haya establecido para la app puede enviar una solicitud a la app. Por este motivo, exponga las menos apps posibles. Exponga una app al público sólo cuando esté preparado para aceptar tráfico procedente de clientes o usuarios web externos.
 
 La interfaz de red pública de los nodos trabajadores está protegida por [valores predefinidos de política de red de Calico](/docs/containers?topic=containers-network_policies#default_policy) que se configuran en cada nodo trabajador durante la creación del clúster. De forma predeterminada, todo el tráfico de red de salida está permitido para todos los nodos trabajadores. El tráfico de red de entrada está bloqueado, excepto en algunos puertos. Estos puertos están abiertos para que IBM pueda supervisar el tráfico de red e instalar automáticamente actualizaciones de seguridad para el maestro de Kubernetes, de modo que se puedan establecer conexiones con los servicios NodePort, LoadBalancer e Ingress. Para obtener más información sobre estas políticas, incluido cómo modificarlas, consulte [Políticas de red](/docs/containers?topic=containers-network_policies#network_policies).
 
@@ -167,7 +166,7 @@ En el momento de exponer una app con un servicio de red, dispone de distintas op
 <td>NLB v1.0 (+ nombre de host)</td>
 <td>Equilibrio de carga básico que expone la app con una dirección IP o un nombre de host</td>
 <td>Exponer rápidamente una app al público con una dirección IP o un nombre de host que admita terminación SSL.</td>
-<td><ol><li>Crear un equilibrador de carga de red pública (NLB) 1.0 en un clúster[de una sola zona](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
+<td><ol><li>Crear un equilibrador de carga de red pública (NLB) 1.0 en un clúster [de una sola zona](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ nombre de host)</td>
 <td>Equilibrio de carga de DSR que expone la app con una dirección IP o un nombre de host</td>
@@ -187,7 +186,7 @@ En el momento de exponer una app con un servicio de red, dispone de distintas op
 <td>Traiga su propio controlador de Ingress + nombre de host ALB</td>
 <td>Equilibrio de carga HTTPS con un controlador de Ingress personalizado que expone la app con el nombre de host de ALB proporcionado por IBM y utiliza reglas de direccionamiento personalizadas</td>
 <td>Implementar reglas de direccionamiento personalizadas u otros requisitos específicos para el ajuste personalizado para varias apps.</td>
-<td>[Desplegar el controlador de Ingress y optimizar el nombre de host de ALB proporcionado por IBM ](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Desplegar el controlador de Ingress y optimizar el nombre de host de ALB proporcionado por IBM](/docs/containers?topic=containers-ingress#user_managed).</td>
 </tr>
 </tbody>
 </table>
@@ -204,13 +203,14 @@ En el momento de exponer una app con un servicio de red, dispone de distintas op
 Exponer de forma privada una app del clúster solo en la red privada.
 {: shortdesc}
 
-Al desplegar una app en un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, puede que desee que la app sea accesible sólo para usuarios y servicios que se encuentren en la misma red privada que el clúster. Como ejemplo, supongamos que ha creado un NLB privado para la app. A este NLB privado se puede acceder mediante:
+Al desplegar una app en un clúster de Kubernetes en {{site.data.keyword.containerlong_notm}}, puede que desee que la app sea accesible sólo para usuarios y servicios que se encuentren en la misma red privada que el clúster. El equilibrio de carga privado es ideal para hacer que la app esté disponible para las solicitudes desde fuera del clúster sin exponer la app al público en general. También puede utilizar el equilibrio de carga privado para probar el acceso, el direccionamiento de solicitudes y otras configuraciones para la app antes de exponer su app al público con los servicios de red públicos.
+
+Como ejemplo, supongamos que ha creado un NLB privado para la app. A este NLB privado se puede acceder mediante:
 * Cualquier pod en ese mismo clúster.
 * Cualquier pod en cualquier clúster de la misma cuenta de {{site.data.keyword.Bluemix_notm}}.
-* Si tiene [VRF](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) o la [expansión de VLAN](/docs/containers?topic=containers-subnets#subnet-routing) habilitada, cualquier sistema que esté conectado a cualquiera de las VLAN privadas en la misma cuenta de {{site.data.keyword.Bluemix_notm}}.
+* Si tiene habilitado [VRF o la distribución de VLAN](/docs/containers?topic=containers-subnets#basics_segmentation), cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.Bluemix_notm}}.
 * Si no está en la cuenta de {{site.data.keyword.Bluemix_notm}} sino todavía detrás del cortafuegos de la empresa, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
 * Si está en una cuenta de {{site.data.keyword.Bluemix_notm}} distinta, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
-El equilibrio de carga privado es ideal para hacer que la app esté disponible para las solicitudes desde fuera del clúster sin exponer la app al público en general. También puede utilizar el equilibrio de carga privado para probar el acceso, el direccionamiento de solicitudes y otras configuraciones para la app antes de exponer su app al público con los servicios de red públicos.
 
 Para hacer que una app esté disponible sólo a través de una red privada, elija un patrón de despliegue de equilibrio de carga en base a la configuración de VLAN del clúster:
 * [Configuración de VLAN pública y privada](#private_both_vlans)
@@ -224,6 +224,8 @@ Cuando los nodos trabajadores están conectados tanto a una VLAN pública como a
 
 La interfaz de red pública de los nodos trabajadores está protegida por [valores predefinidos de política de red de Calico](/docs/containers?topic=containers-network_policies#default_policy) que se configuran en cada nodo trabajador durante la creación del clúster. De forma predeterminada, todo el tráfico de red de salida está permitido para todos los nodos trabajadores. El tráfico de red de entrada está bloqueado, excepto en algunos puertos. Estos puertos están abiertos para que IBM pueda supervisar el tráfico de red e instalar automáticamente actualizaciones de seguridad para el maestro de Kubernetes, de modo que se puedan establecer conexiones con los servicios NodePort, LoadBalancer e Ingress.
 
+Puesto que las políticas predeterminadas de red de Calico permiten el tráfico público de entrada a estos servicios, puede crear políticas de Calico para bloquear todo el tráfico público a los servicios. Por ejemplo, un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Un servicio de NLB con una dirección IP privada portátil abre un NodePort público en cada nodo trabajador. Debe crear una [política de red preDNAT de Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear los NodePorts públicos.
+
 Consulte los siguientes patrones de despliegue de equilibrio de carga para red privada:
 
 |Nombre|Método de equilibrio de carga|Caso de uso|Implementación|
@@ -231,11 +233,8 @@ Consulte los siguientes patrones de despliegue de equilibrio de carga para red p
 |NodePort|Puerto en un nodo trabajador que expone la app en la dirección IP privada del trabajador|Probar el acceso privado a una app o proporcionar acceso solo durante un breve período de tiempo.|<ol><li>[Crear un servicio NodePort](/docs/containers?topic=containers-nodeport).</li><li>Un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Debe utilizar una [política de red preDNAT de Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear el tráfico a los NodePorts públicos.</li></ol>|
 |NLB v1.0|Equilibrio de carga básico que expone la app con una dirección IP privada|Exponer rápidamente una app a una red privada con una dirección IP privada.|<ol><li>[Crear un servicio de NLB privado](/docs/containers?topic=containers-loadbalancer).</li><li>Un NLB con una dirección IP privada portátil sigue teniendo un nodo público abierto en cada nodo trabajador. Crear una [política de red preDNAT de Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear el tráfico a los NodePorts públicos.</li></ol>|
 |NLB v2.0|Equilibrio de carga de DSR que expone la app con una dirección IP privada|Exponer una app que pueda recibir altos niveles de tráfico a una red privada con una dirección IP.|<ol><li>[Crear un servicio de NLB privado](/docs/containers?topic=containers-loadbalancer).</li><li>Un NLB con una dirección IP privada portátil sigue teniendo un nodo público abierto en cada nodo trabajador. Crear una [política de red preDNAT de Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear el tráfico a los NodePorts públicos.</li></ol>|
-|ALB de Ingress|Equilibrio de carga HTTPS que expone la app con un nombre de host y utiliza reglas de direccionamiento personalizadas|Implementar reglas de direccionamiento personalizadas y terminación de SSL para varias apps.|<ol><li>[Inhabilitar el ALB público](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Habilitar el ALB privado y crear un recurso Ingress](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Personalizar las reglas de direccionamiento de ALB con [anotaciones](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
+|ALB de Ingress|Equilibrio de carga HTTPS que expone la app con un nombre de host y utiliza reglas de direccionamiento personalizadas|Implementar reglas de direccionamiento personalizadas y terminación de SSL para varias apps.|<ol><li>[Inhabilitar el ALB público.](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[Habilitar el ALB privado y crear un recurso Ingress](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Personalizar las reglas de direccionamiento de ALB con [anotaciones](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Características de los patrones de despliegue de red para una configuración de VLAN pública y privada" caption-side="top"}
-
-Puesto que las políticas predeterminadas de red de Calico permiten el tráfico público de entrada a estos servicios, puede crear políticas de Calico para bloquear todo el tráfico público a los servicios. Por ejemplo, un servicio NodePort abre un puerto en un nodo trabajador sobre la dirección IP privada y pública del nodo trabajador. Un servicio de NLB con una dirección IP privada portátil abre un NodePort público en cada nodo trabajador. Debe crear una [política de red preDNAT de Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear los NodePorts públicos.
-{: tip}
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node scaling
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:gif: data-image-type='gif'}
 
 
@@ -48,7 +49,7 @@ El programa de escalado automático de clústeres explora periódicamente el cl�
 
 La exploración y el escalado se realizan a intervalos regulares a lo largo del tiempo, y, en función del número de nodos trabajadores, pueden tardar más tiempo en completarse, como por ejemplo 30 minutos.
 
-El programa de escalado automático de clústeres ajusta el número de nodos trabajadores teniendo en cuenta las [solicitudes de recursos ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) que ha definido para los despliegues, no el uso real de los nodos trabajadores. Si sus pods y despliegues no solicitan cantidades adecuadas de recursos, debe ajustar sus archivos de configuración. El programa de escalado automático de clústeres no los puede ajustar automáticamente. Tenga también en cuenta que los nodos trabajadores utilizan algunos de sus recursos de cálculo para funcionalidad básica del clúster, [complementos](/docs/containers?topic=containers-update#addons) predeterminados y personalizados y [reservas de recursos](/docs/containers?topic=containers-plan_clusters#resource_limit_node).
+El programa de escalado automático de clústeres ajusta el número de nodos trabajadores teniendo en cuenta las [solicitudes de recursos ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) que ha definido para los despliegues, no el uso real de los nodos trabajadores. Si sus pods y despliegues no solicitan cantidades adecuadas de recursos, debe ajustar sus archivos de configuración. El programa de escalado automático de clústeres no los puede ajustar automáticamente. Tenga también en cuenta que los nodos trabajadores utilizan algunos de sus recursos de cálculo para funcionalidad básica del clúster, [complementos](/docs/containers?topic=containers-update#addons) predeterminados y personalizados y [reservas de recursos](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).
 {: note}
 
 <br>
@@ -56,21 +57,25 @@ El programa de escalado automático de clústeres ajusta el número de nodos tra
 En general, el programa de escalado automático de clústeres calcula el número de nodos trabajadores que necesita el clúster para ejecutar su carga de trabajo. El escalado del clúster depende de muchos factores, incluidos los siguientes.
 *   El tamaño de nodo trabajador mínimo y máximo por zona que se ha establecido.
 *   Las solicitudes de recursos de pod pendientes y determinados metadatos que el usuario asocia con la carga de trabajo, como por ejemplo antiafinidad, etiquetas para colocar pods únicamente en determinados tipos de máquina o [presupuestos de interrupción de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   Las agrupaciones de nodos trabajadores que gestiona el programa de escalado automático de clústeres, potencialmente en las zonas de un [clúster multizona](/docs/containers?topic=containers-plan_clusters#multizone).
+*   Las agrupaciones de nodos trabajadores que gestiona el programa de escalado automático de clústeres, potencialmente en las zonas de un [clúster multizona](/docs/containers?topic=containers-ha_clusters#multizone).
 *   Los [valores de diagrama de Helm personalizados](#ca_chart_values) que hay establecidos, como por ejemplo omitir nodos trabajadores para su supresión si utilizan almacenamiento local.
 
-Para obtener más información, consulte, en las preguntas frecuentes sobre el programa de escalado automático de clústeres de Kubernetes, los temas[¿Cómo funciona el escalado hacia arriba? ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) y [¿Cómo funciona el escalado hacia abajo? ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
+Para obtener más información, consulte, en las preguntas frecuentes sobre el programa de escalado automático de clústeres de Kubernetes, los temas [¿Cómo funciona el escalado hacia arriba? ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) y [¿Cómo funciona el escalado hacia abajo? ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
 
 <br>
 
 **¿Puedo cambiar la forma en que funciona el escalado hacia arriba y hacia abajo?**<br>
 Puede personalizar los valores o utilizar otros recursos de Kubernetes para influir en el funcionamiento del escalado hacia arriba y hacia abajo.
-*   **Escalado hacia arriba**: [Personalice los valores del diagrama de Helm del programa de escalado automático de clústeres](#ca_chart_values) como por ejemplo `scanInterval`, `expander`, `skipNodes` o `maxNodeProvisionTime`. Revise las formas de [sobresuministrar a los nodos trabajadores](#ca_scaleup) para poder ampliar los nodos trabajadores antes de que un agrupación de trabajadores se quede sin recursos. También puede[configurar interrupciones de presupuesto de pod de Kubernetes y límites de prioridad de pods](#scalable-practices-apps) para influir en el funcionamiento del escalado hacia arriba.
-*   **Escalado hacia abajo**: [C>Personalice los valores del diagrama de Helm del programa de escalado automático de clústeres ](#ca_chart_values) como por ejemplo `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete` o `scaleDownUtilizationThreshold`.
+*   **Escalado hacia arriba**: [Personalice los valores del diagrama de Helm del programa de escalado automático de clústeres](#ca_chart_values) como por ejemplo `scanInterval`, `expander`, `skipNodes` o `maxNodeProvisionTime`. Revise las formas de [sobresuministrar a los nodos trabajadores](#ca_scaleup) para poder ampliar los nodos trabajadores antes de que una agrupación de trabajadores se quede sin recursos. También puede [configurar interrupciones de presupuesto de pod de Kubernetes y límites de prioridad de pods](#scalable-practices-apps) para influir en el funcionamiento del escalado hacia arriba.
+*   **Escalado hacia abajo**: [Personalice los valores del diagrama de Helm del programa de escalado automático de clústeres](#ca_chart_values) como por ejemplo `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete` o `scaleDownUtilizationThreshold`.
+
+<br>
+**¿Puedo establecer el tamaño mínimo por zona para aumentar de inmediato mi clúster a dicho tamaño?**<br>
+No, el hecho de establecer `minSize` no activa automáticamente un aumento. El valor `minSize` es un umbral para que el programa de escalado automático del clúster no reduzca por debajo de un determinado número de nodos trabajadores por zona. Si el clúster aún no tiene dicho número por zona, el programa de escalado automático del clúster no lo aumenta hasta que tenga solicitudes de recursos de carga de trabajo que necesiten más recursos. Por ejemplo, si tiene una agrupación de nodos trabajadores con un nodo trabajador por tres zonas (tres nodos trabajadores en total) y establece el valor de `minSize` en `4` por zona, el programa de escalado automático del clúster no suministra inmediatamente tres nodos trabajadores adicionales por zona (12 nodos trabajadores en total). El aumento lo activan las solicitudes de recursos. Si crea una carga de trabajo que solicita los recursos de 15 nodos trabajadores, el programa de escalado automático del clúster aumenta la agrupación de nodos trabajadores para satisfacer esta solicitud. El valor `minSize` significa que el programa de escalado automático del clúster no reduce por debajo de cuatro nodos trabajadores por zona, aunque elimine la carga de trabajo que solicita esta cantidad.
 
 <br>
 **¿En qué se diferencia este comportamiento de las agrupaciones de nodos trabajadores que no gestiona el programa de escalado automático de clústeres?**<br>
-Cuando [crea una agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool), especifica el número de nodos trabajadores que tiene por zona. La agrupación de nodos trabajadores mantiene este número de nodos trabajadores hasta que el usuario [redimensiona](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) o [vuelve a equilibrar](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance). La agrupación de nodos trabajadores no añade ni elimina nodos trabajadores automáticamente. Si tiene más pods de los que se pueden planificar, los pods permanecen en estado pendiente hasta que el usuario redimensiona la agrupación de nodos trabajadores.
+Cuando [crea una agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool), especifica el número de nodos trabajadores que tiene por zona. La agrupación de nodos trabajadores mantiene este número de nodos trabajadores hasta que el usuario [redimensiona](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) o [vuelve a equilibrar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance). La agrupación de nodos trabajadores no añade ni elimina nodos trabajadores automáticamente. Si tiene más pods de los que se pueden planificar, los pods permanecen en estado pendiente hasta que el usuario redimensiona la agrupación de nodos trabajadores.
 
 Cuando se habilita el programa de escalado automático de clústeres para una agrupación de nodos trabajadores, se aumenta o se reduce el número de nodos trabajadores en respuesta a los valores de especificación de pod y a las solicitudes de recursos. No es necesario cambiar el tamaño de la agrupación de nodos trabajadores ni volver a equilibrar la agrupación de nodos trabajadores manualmente.
 
@@ -81,15 +86,15 @@ Examine la imagen siguiente para ver un ejemplo de aumento o reducción de núme
 _Figura: Escalado automático de un clúster._
 ![GIF de escalado automático de un clúster](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  El clúster tiene cuatro nodos trabajadores en dos agrupaciones de nodos trabajadores distribuidas en dos zonas. Cada agrupación tiene un nodo trabajador por zona, pero la **Agrupación de nodos trabajadores A** tiene el tipo de máquina `u2c.2x4` y la **Agrupación de nodos trabajadores B** tiene el tipo de máquina `b2c.4x16`. Los recursos totales de cálculo son de aproximadamente 10 núcleos (2 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores A** y 4 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores B**). Actualmente el clúster ejecuta una carga de trabajo que solicita 6 de estos 10 núcleos. Tenga en cuenta que los recursos de cálculo adicionales se toman en cada nodo trabajador por medio de los [recursos reservados](/docs/containers?topic=containers-plan_clusters#resource_limit_node) necesarios para ejecutar el clúster, los nodos trabajadores y cualquier complemento, como por ejemplo el programa de escalado automático de clústeres.
+1.  El clúster tiene cuatro nodos trabajadores en dos agrupaciones de nodos trabajadores distribuidas en dos zonas. Cada agrupación tiene un nodo trabajador por zona, pero la **Agrupación de nodos trabajadores A** tiene el tipo de máquina `u2c.2x4` y la **Agrupación de nodos trabajadores B** tiene el tipo de máquina `b2c.4x16`. Los recursos totales de cálculo son de aproximadamente 10 núcleos (2 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores A** y 4 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores B**). Actualmente el clúster ejecuta una carga de trabajo que solicita 6 de estos 10 núcleos. Los recursos de cálculo adicionales se toman en cada nodo trabajador por medio de los [recursos reservados](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) necesarios para ejecutar el clúster, los nodos trabajadores y cualquier complemento, como por ejemplo el programa de escalado automático de clústeres.
 2.  El programa de escalado automático de clústeres está configurado para gestionar ambas agrupaciones de nodos trabajadores con el siguiente tamaño mínimo y máximo por zona:
     *  **Agrupación de nodos trabajadores A**: `minSize=1`, `maxSize=5`.
     *  **Agrupación de nodos trabajadores B**: `minSize=1`, `maxSize=2`.
-3.  El usuario planifica despliegues que requieran 14 réplicas adicionales de pod de una app que solicita 1 núcleo de CPU por réplica. Se puede desplegar una réplica de pod en los recursos actuales, pero los otros 13 están pendientes.
+3.  El usuario planifica despliegues que requieran 14 réplicas adicionales de pod de una app que solicita un núcleo de CPU por réplica. Se puede desplegar una réplica de pod en los recursos actuales, pero los otros 13 están pendientes.
 4.  El programa de escalado automático de clústeres aumenta el número de nodos trabajadores dentro de estas restricciones para dar soporte a las solicitudes de recursos de las 13 réplicas de pod adicionales.
-    *  **Agrupación de nodos trabajadores A**: Se añaden 7 nodos trabajadores en un método round robin de la forma más uniforme posible entre las zonas. Los nodos trabajadores aumentan la capacidad de cálculo del clúster en aproximadamente 14 núcleos (2 núcleos x 7 nodos trabajadores).
-    *  **Agrupación de nodos trabajadores B**: Se añaden 2 nodos trabajadores de forma uniforme entre las zonas, con lo que se alcanza el `maxSize` de 2 nodos trabajadores por zona. Los nodos trabajadores aumentan la capacidad del clúster en aproximadamente 8 núcleos (4 núcleos x 2 nodos trabajadores).
-5.  Las solicitudes de los 20 con 1 núcleo se distribuyen del siguiente modo entre los nodos trabajadores. Tenga en cuenta que, debido a que los nodos trabajadores tienen reservas de recursos, así como pods que se ejecutan para cubrir las características predeterminadas del clúster, los pods correspondientes a la carga de trabajo no pueden utilizar todos los recursos de cálculo disponibles de un nodo trabajador. Por ejemplo, aunque los nodos trabajadores `b2c.4x16` tienen 4 núcleos, solo se pueden planificar en los nodos trabajadores 3 pods que solicitan un mínimo de 1 núcleo cada uno.
+    *  **Agrupación de nodos trabajadores A**: Se añaden siete nodos trabajadores en un método round robin de la forma más uniforme posible entre las zonas. Los nodos trabajadores aumentan la capacidad de cálculo del clúster en aproximadamente 14 núcleos (2 núcleos x 7 nodos trabajadores).
+    *  **Agrupación de nodos trabajadores B**: Se añaden dos nodos trabajadores de forma uniforme entre las zonas, con lo que se alcanza el `maxSize` de 2 nodos trabajadores por zona. Los nodos trabajadores aumentan la capacidad del clúster en aproximadamente 8 núcleos (4 núcleos x 2 nodos trabajadores).
+5.  Las solicitudes de los 20 con 1 núcleo se distribuyen del siguiente modo entre los nodos trabajadores. Debido a que los nodos trabajadores tienen reservas de recursos, así como pods que se ejecutan para cubrir las características predeterminadas del clúster, los pods correspondientes a la carga de trabajo no pueden utilizar todos los recursos de cálculo disponibles de un nodo trabajador. Por ejemplo, aunque los nodos trabajadores `b2c.4x16` tienen cuatro núcleos, solo se pueden planificar en los nodos trabajadores tres pods que solicitan un mínimo de un núcleo cada uno.
     <table summary="Una tabla en la que se describe la distribución de la carga de trabajo en un clúster escalado.">
     <caption>Distribución de la carga de trabajo en un clúster escalado.</caption>
     <thead>
@@ -106,33 +111,33 @@ _Figura: Escalado automático de un clúster._
       <td>A</td>
       <td>dal10</td>
       <td>u2c.2x4</td>
-      <td>4 nodos</td>
-      <td>3 pods</td>
+      <td>Cuatro nodos</td>
+      <td>Tres pods</td>
     </tr>
     <tr>
       <td>A</td>
       <td>dal12</td>
       <td>u2c.2x4</td>
-      <td>5 nodos</td>
-      <td>5 pods</td>
+      <td>Cinco nodos</td>
+      <td>Cinco pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal10</td>
       <td>b2c.4x16</td>
-      <td>2 nodos</td>
-      <td>6 pods</td>
+      <td>Dos nodos</td>
+      <td>Seis pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal12</td>
       <td>b2c.4x16</td>
-      <td>2 nodos</td>
-      <td>6 pods</td>
+      <td>Dos nodos</td>
+      <td>Seis pods</td>
     </tr>
     </tbody>
     </table>
-6.  Ya no se necesita la carga de trabajo adicional, por lo que suprime el despliegue. Después de un breve período de tiempo, el programa de escalado automático de clústeres detecta que el clúster ya no necesita todos sus recursos de cálculo y empieza a reducir el número de nodos trabajadores de uno en uno.
+6.  Ya no se necesita la carga de trabajo adicional, por lo que suprime el despliegue. Después de un breve periodo de tiempo, el programa de escalado automático de clústeres detecta que el clúster ya no necesita todos sus recursos de cálculo y empieza a reduce el número de nodos trabajadores de uno en uno.
 7.  Las agrupaciones de nodos trabajadores se escalan hacia abajo. El programa de escalado automático de clústeres realiza exploraciones a intervalos regulares para comprobar si hay solicitudes de recursos de pod pendientes y nodos trabajadores infrautilizados para escalar las agrupaciones de nodos trabajadores hacia arriba o hacia abajo.
 
 ## Seguir prácticas de despliegue escalable
@@ -141,11 +146,11 @@ _Figura: Escalado automático de un clúster._
 Para aprovechar al máximo el programa de escalado automático de clústeres utilice las siguientes estrategias para los nodos trabajadores y los despliegues de cargas de trabajo. Para obtener más información, consulte las [preguntas frecuentes sobre el programa de escalado automático de clústeres de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md).
 {: shortdesc}
 
-[Pruebe el programa de escalado automático de clústeres](#ca_helm) con algunas cargas de trabajo de prueba para obtener una idea de cómo [cómo funciona el escalado hacia arriba o hacia abajo](#ca_about), los[valores personalizados](#ca_chart_values) que puede configurar y otros aspectos que pueden interesarle, como por ejemplo el [sobresuministro](#ca_scaleup) de nodos trabajadores o la [limitación de apps](#ca_limit_pool). A continuación, limpie el entorno de prueba y planifique incluir estos valores personalizados y parámetros adicionales en una instalación nueva del programa de escalado automático de clústeres.
+[Pruebe el programa de escalado automático de clústeres](#ca_helm) con algunas cargas de trabajo de prueba para obtener una idea de cómo [cómo funciona el escalado hacia arriba o hacia abajo](#ca_about), los [valores personalizados](#ca_chart_values) que puede configurar y otros aspectos que pueden interesarle, como por ejemplo el [sobresuministro](#ca_scaleup) de nodos trabajadores o la [limitación de apps](#ca_limit_pool). A continuación, limpie el entorno de prueba y planifique incluir estos valores personalizados y parámetros adicionales en una instalación nueva del programa de escalado automático de clústeres.
 
 ### ¿Puedo escalar automáticamente varias agrupaciones de trabajadores a la vez?
 {: #scalable-practices-multiple}
-Sí, después de instalar el diagrama de Helm, puede elegir las agrupaciones de trabajadores dentro del clúster que desea escalar automáticamente [en el mapa de configuración](#ca_cm). Sólo puede ejecutar un diagrama de Helm `ibm-iks-cluster-autoescaler` por clúster. 
+Sí, después de instalar el diagrama de Helm, puede elegir las agrupaciones de trabajadores dentro del clúster que desea escalar automáticamente [en el mapa de configuración](#ca_cm). Sólo puede ejecutar un diagrama de Helm `ibm-iks-cluster-autoscaler` por clúster.
 {: shortdesc}
 
 ### ¿Cómo puedo asegurarme de que el programa de escalado automático de clústeres responde a los recursos que necesita mi app?
@@ -157,7 +162,7 @@ El programa de escalado automático de clústeres escala el clúster en respuest
 ### ¿Puedo reducir una agrupación de trabajadores a cero (0) nodos?
 {: #scalable-practices-zero}
 
-No, no puede establecer el programa de escalado automático de clústeres `minSize` a `0`. Además, a menos que [inhabilite](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) los equilibradores de carga de la aplicación (ALB) en el clúster, debe cambiar el valor de `minSize` a `2` nodos trabajadores por zona para que los pods de ALB se puedan distribuir para alcanzar una alta disponibilidad.
+No, no puede establecer el programa de escalado automático de clústeres `minSize` a `0`. Además, a menos que [inhabilite](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) todos los equilibradores de carga de la aplicación (ALB) públicos en cada zona del clúster, debe cambiar el valor de `minSize` a `2` nodos trabajadores por zona para que los pods de ALB se puedan distribuir para alcanzar una alta disponibilidad.
 {: shortdesc}
 
 ### ¿Puedo optimizar mis despliegues para el escalado automático?
@@ -177,15 +182,14 @@ Puesto que no se pueden aplicar antagonismos a nivel de agrupación de nodos tra
 ### ¿Por qué están desequilibradas mis agrupaciones de trabajadores escaladas automáticamente?
 {: #scalable-practices-unbalanced}
 
-Durante un escalado hacia arriba, el programa de escalado automático de clústeres equilibra los nodos entre zonas, con una diferencia permitida de más o menos un (+/-1) nodo trabajador. Es posible que las cargas de trabajo pendientes no soliciten suficiente capacidad para hacer que cada zona esté equilibrada. En este caso, si desea equilibrar manualmente las agrupaciones de nodos trabajadores, [actualice el mapa de configuración del programa de escalado automático de clústeres](#ca_cm) para eliminar la agrupación de trabajadores desequilibrada. Luego ejecute
-el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) `ibmcloud ks worker-pool-rebalance` y vuelva a añadir la agrupación de nodos trabajadores al mapa de configuración del programa de escalado automático de clústeres.
+Durante un escalado hacia arriba, el programa de escalado automático de clústeres equilibra los nodos entre zonas, con una diferencia permitida de más o menos un (+/-1) nodo trabajador. Es posible que las cargas de trabajo pendientes no soliciten suficiente capacidad para hacer que cada zona esté equilibrada. En este caso, si desea equilibrar manualmente las agrupaciones de nodos trabajadores, [actualice el mapa de configuración del programa de escalado automático de clústeres](#ca_cm) para eliminar la agrupación de trabajadores desequilibrada. Luego ejecute el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) `ibmcloud ks worker-pool-rebalance` y vuelva a añadir la agrupación de nodos trabajadores al mapa de configuración del programa de escalado automático del clúster.
 {: shortdesc}
 
 
-### W¿Por qué no puedo cambiar el tamaño o volver a equilibrar mi agrupación de nodos trabajadores?<
+### ¿Por qué no puedo cambiar el tamaño o volver a equilibrar mi agrupación de nodos trabajadores?
 {: #scalable-practices-resize}
 
-Cuando el programa de escalado automático de clústeres está habilitado para una agrupación de nodos trabajadores, no puede [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ni [volver a equilibrar](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) sus agrupaciones de nodos trabajadores. Debe [editar el mapa de configuración](#ca_cm) para cambiar el tamaño mínimo o máximo de la agrupación de nodos trabajadores o debe inhabilitar el escalado automático de clústeres para dicha agrupación de nodos trabajadores. No utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) `ibmcloud ks worker-rm` para eliminar nodos trabajadores individuales de la agrupación de nodos trabajadores, lo que podría desequilibrar la agrupación de nodos trabajadores.
+Cuando el programa de escalado automático de clústeres está habilitado para una agrupación de nodos trabajadores, no puede [redimensionar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ni [volver a equilibrar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) sus agrupaciones de nodos trabajadores. Debe [editar el mapa de configuración](#ca_cm) para cambiar el tamaño mínimo o máximo de la agrupación de nodos trabajadores o debe inhabilitar el escalado automático de clústeres para dicha agrupación de nodos trabajadores. No utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) `ibmcloud ks worker-rm` para eliminar nodos trabajadores individuales de la agrupación de nodos trabajadores, lo que podría desequilibrar la agrupación de nodos trabajadores.
 {: shortdesc}
 
 Además, si no inhabilita las agrupaciones de nodos trabajadores antes de desinstalar el diagrama de Helm `ibm-iks-cluster-autoscaler`,
@@ -203,15 +207,15 @@ Instale el plugin del programa de escalado automático de clústeres de {{site.d
 
 **Antes de empezar**:
 
-1.  [Instale los plugins necesarios y la CLI](/docs/cli?topic=cloud-cli-ibmcloud-cli):
+1.  [Instale los plugins necesarios y la CLI](/docs/cli?topic=cloud-cli-getting-started):
     *  CLI de {{site.data.keyword.Bluemix_notm}} (`ibmcloud`)
     *  Plugin {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`)
     *  Plugin {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Cree un clúster estándar](/docs/containers?topic=containers-clusters#clusters_ui) que ejecute **Kubernetes versión 1.12 o posterior**.
-3.   [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirme que las credenciales de {{site.data.keyword.Bluemix_notm}} Identity and Access Management están almacenadas en el clúster. El programa de escalado automático de clústeres utiliza este secreto para autenticar.
+3.   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4.  Confirme que las credenciales de {{site.data.keyword.Bluemix_notm}} Identity and Access Management están almacenadas en el clúster. El programa de escalado automático de clústeres utiliza este secreto para autenticar las credenciales. Si falta el secreto, [créelo restableciendo las credenciales](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -228,7 +232,7 @@ Instale el plugin del programa de escalado automático de clústeres de {{site.d
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.
+    2.  Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.
 
 
 <br>
@@ -260,7 +264,7 @@ Instale el plugin del programa de escalado automático de clústeres de {{site.d
     {: pre}
 4.  Instale el diagrama de Helm del programa de escalado automático de clústeres en el espacio de nombres `kube-system` de su clúster.
 
-    Durante la instalación, tiene la opción de [personalizar más los valores del programa de escalado automático de clústeres](#ca_chart_values), como por ejemplo la cantidad de tiempo que espera hasta escalar hacia arriba o hacia abajo los nodos trabajadores.
+    Durante la instalación, puede [personalizar más los valores del programa de escalado automático de clústeres](#ca_chart_values), como por ejemplo la cantidad de tiempo que espera hasta escalar hacia arriba o hacia abajo los nodos trabajadores.
     {: tip}
 
     ```
@@ -351,13 +355,13 @@ Instale el plugin del programa de escalado automático de clústeres de {{site.d
 Actualice el mapa de configuración del programa de escalado automático de clústeres para habilitar el escalado automático de nodos trabajadores en las agrupaciones de nodos trabajadores en función de los valores mínimos y máximos que ha establecido.
 {: shortdesc}
 
-Después de editar el mapa de configuración para habilitar una agrupación de nodos trabajadores, el programa de escalado automático de clústeres empieza a escalar el clúster en respuesta a las solicitudes de carga de trabajo. Por lo tanto, no puede [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) ni [volver a equilibrar](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) las agrupaciones de nodos trabajadores. La exploración y el escalado se realizan a intervalos regulares a lo largo del tiempo, y, en función del número de nodos trabajadores, pueden tardar más tiempo en completarse, como por ejemplo 30 minutos. Más adelante, si desea [eliminar el programa de escalado automático de clústeres](#ca_rm),
+Después de editar el mapa de configuración para habilitar una agrupación de nodos trabajadores, el programa de escalado automático de clústeres escala el clúster en respuesta a las solicitudes de carga de trabajo. Por lo tanto, no puede [redimensionar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ni [volver a equilibrar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) las agrupaciones de nodos trabajadores. La exploración y el escalado se realizan a intervalos regulares a lo largo del tiempo, y, en función del número de nodos trabajadores, pueden tardar más tiempo en completarse, como por ejemplo 30 minutos. Más adelante, si desea [eliminar el programa de escalado automático de clústeres](#ca_rm),
 primero deberá inhabilitar cada agrupación de nodos trabajadores en el mapa de configuración.
 {: note}
 
 **Antes de empezar**:
 *  [Instale el plugin `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para actualizar el mapa de configuración y los valores del programa de escalado automático de clústeres**:
 
@@ -384,7 +388,7 @@ primero deberá inhabilitar cada agrupación de nodos trabajadores en el mapa de
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Edite el mapa de configuración con los parámetros para definir cómo debe escalar la agrupación de nodos trabajadores el programa de escalado automático de clústeres. Tenga en cuenta que, a no ser que [inhabilite](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) los equilibradores de carga de la aplicación (ALB) en el clúster estándar, debe cambiar el valor de `minSize` por `2` por zona para que los pods de ALB se distribuyan para alcanzar una alta disponibilidad.
+2.  Edite el mapa de configuración con los parámetros para definir cómo debe escalar la agrupación de nodos trabajadores el programa de escalado automático de clústeres. **Nota:** A menos que [inhabilite](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) todos los equilibradores de carga de aplicación (ALB) públicos en cada zona del clúster estándar, debe cambiar el valor `minSize` por `2` por zona para que las pods de ALB se puedan propagar para alta disponibilidad.
 
     <table>
     <caption>Parámetros del mapa de configuración del programa de escalado automático de clústeres</caption>
@@ -400,15 +404,16 @@ primero deberá inhabilitar cada agrupación de nodos trabajadores en el mapa de
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Nota**: El programa de escalado automático de clústeres solo puede escalar las agrupaciones de nodo trabajadores que tienen la etiqueta `ibm-cloud.kubernetes.io/worker-pool-id`. Para comprobar si la agrupación de nodos trabajadores tiene la etiqueta necesaria, ejecute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.</td>
+    **Nota**: El programa de escalado automático de clústeres solo puede escalar las agrupaciones de nodo trabajadores que tienen la etiqueta `ibm-cloud.kubernetes.io/worker-pool-id`. Para comprobar si la agrupación de nodos trabajadores tiene la etiqueta necesaria, ejecute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.</td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
-    <td headers="parameter-minsize parameter-with-description">Especifique el número mínimo de nodos trabajadores por zona que debe haber en la agrupación de nodos trabajadores en todo momento. El valor debe ser 2 o superior para que sus pods de ALB se puedan propagar para alta disponibilidad. Si [inhabilita](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) el ALB en el clúster estándar, puede establecer el valor en `1`.</td>
+    <td headers="parameter-minsize parameter-with-description">Especifique el número mínimo de nodos trabajadores por zona a los que el programa de escalado automático del clúster puede reducir la agrupación de nodos trabajadores. El valor debe ser `2` o superior para que las pods de ALB se puedan propagar para alta disponibilidad. Si [inhabilita](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) todos los ALB públicos en cada zona de su clúster estándar, puede establecer el valor en `1`.
+    <p class="note">El hecho de establecer `minSize` no activa automáticamente un aumento. El valor `minSize` es un umbral para que el programa de escalado automático del clúster no reduzca por debajo de un determinado número de nodos trabajadores por zona. Si el clúster aún no tiene dicho número por zona, el programa de escalado automático del clúster no lo aumenta hasta que tenga solicitudes de recursos de carga de trabajo que necesiten más recursos. Por ejemplo, si tiene una agrupación de nodos trabajadores con un nodo trabajador por tres zonas (tres nodos trabajadores en total) y establece el valor de `minSize` en `4` por zona, el programa de escalado automático del clúster no suministra inmediatamente tres nodos trabajadores adicionales por zona (12 nodos trabajadores en total). El aumento lo activan las solicitudes de recursos. Si crea una carga de trabajo que solicita los recursos de 15 nodos trabajadores, el programa de escalado automático del clúster aumenta la agrupación de nodos trabajadores para satisfacer esta solicitud. El valor `minSize` significa que el programa de escalado automático del clúster no reduce por debajo de cuatro nodos trabajadores por zona, aunque elimine la carga de trabajo que solicita esta cantidad. Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
-    <td headers="parameter-maxsize parameter-with-description">Especifique el número máximo de nodos trabajadores por zona que debe haber en la agrupación de nodos trabajadores. El valor debe ser igual o mayor que el valor que establezca para `minSize`.</td>
+    <td headers="parameter-maxsize parameter-with-description">Especifique el número máximo de nodos trabajadores por zona a los que el programa de escalado automático del clúster puede aumentar la agrupación de nodos trabajadores. El valor debe ser igual o mayor que el valor que establezca para `minSize`.</td>
     </tr>
     <tr>
     <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
@@ -451,7 +456,7 @@ Personalice los valores del programa de escalado automático de clústeres, como
 {: shortdesc}
 
 **Antes de empezar**:
-*  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [Instale el plugin `ibm-iks-cluster-autoscaler`](#ca_helm).
 
 **Para los valores del programa de escalado automático de clústeres**:
@@ -467,7 +472,7 @@ Personalice los valores del programa de escalado automático de clústeres, como
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
@@ -498,7 +503,7 @@ Personalice los valores del programa de escalado automático de clústeres, como
     <tbody>
     <tr>
     <td>Parámetro `api_route`</td>
-    <td>Establezca el [punto final de API de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api) para la región en la que se encuentra el clúster.</td>
+    <td>Establezca el [punto final de API de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api) para la región en la que se encuentra el clúster.</td>
     <td>No hay valor predeterminado; utiliza la región de destino en la que se encuentra el clúster.</td>
     </tr>
     <tr>
@@ -506,13 +511,13 @@ Personalice los valores del programa de escalado automático de clústeres, como
     <td>Especifique cómo determina el programa de escalado automático de clústeres la agrupación de nodo trabajadores se debe escalar si tiene varias agrupaciones de nodos trabajadores. Los valores posibles son:
     <ul><li>`random`: Selecciona aleatoriamente entre `most-pods` y `least-waste`.</li>
     <li>`most-pods`: Selecciona la agrupación de nodos trabajadores que puede planificar la mayor cantidad de pods cuando se escala hacia arriba. Utilice este método si va a utilizar `nodeSelector` para asegurarse de que los pods van a parar a nodos trabajadores específicos.</li>
-    <li>`least-waste`: Selecciona la agrupación de nodos trabajadores que tiene menos CPU no utilizada, o, en el caso de empate, el que tiene menos memoria no utilizada, después de escalar hacia arriba. Utilice este método si tiene varias agrupaciones de nodos trabajadores con tipos de máquinas con mucha CPU y memoria y desea utilizar estas máquinas grandes solo cuando los pods pendientes necesitan gran cantidad de recursos.</li></ul></td>
+    <li>`least-waste`: Selecciona la agrupación de nodos trabajadores que tiene menos CPU no utilizada después de aumentar el número de nodos. Si dos agrupaciones de nodos trabajadores utilizan la misma cantidad de recursos de CPU después de aumentar el número de nodos, se selecciona la agrupación de nodos trabajadores con menos memoria no utilizada.</li></ul></td>
     <td>random</td>
     </tr>
     <tr>
     <td>Parámetro `image.repository`</td>
     <td>Especifique la imagen de Docker que debe utilizar el programa de escalado automático de clústeres.</td>
-    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
+    <td>`icr.io/iks-charts/ibm-iks-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>Parámetro `image.pullPolicy`</td>
@@ -525,57 +530,57 @@ Personalice los valores del programa de escalado automático de clústeres, como
     <tr>
     <td>Parámetro `maxNodeProvisionTime`</td>
     <td>Establezca el intervalo máximo de tiempo en minutos que se puede tardar en empezar a suministrar un nodo trabajador antes de que el programa de escalado automático de clústeres cancele la solicitud de escalado hacia arriba.</td>
-    <td>120m</td>
+    <td>`120m`</td>
     </tr>
     <tr>
     <td>Parámetro `resources.limits.cpu`</td>
     <td>Establezca la cantidad máxima de CPU de nodo trabajador que puede consumir el pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>300m</td>
+    <td>`300m`</td>
     </tr>
     <tr>
     <td>Parámetro `resources.limits.memory`</td>
     <td>Establezca la cantidad máxima de memoria de nodo trabajador que puede consumir el pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>300Mi</td>
+    <td>`300Mi`</td>
     </tr>
     <tr>
     <td>Parámetro `resources.requests.cpu`</td>
     <td>Establezca la cantidad mínima de CPU de nodo trabajador con la que empieza el pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>100m</td>
+    <td>`100m`</td>
     </tr>
     <tr>
     <td>Parámetro `resources.requests.memory`</td>
     <td>Establezca la cantidad mínima de memoria de nodo trabajador con la que empieza el pod `ibm-iks-cluster-autoscaler`.</td>
-    <td>100Mi</td>
+    <td>`100Mi`</td>
     </tr>
     <tr>
     <td>Parámetro `scaleDownUnneededTime`</td>
     <td>Establezca el intervalo de tiempo en minutos que no se necesite un nodo trabajador antes de que se escale hacia abajo.</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Parámetros `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`</td>
     <td>Establezca el intervalo de tiempo en minutos que el programa de escalado automático de clústeres espera para iniciar acciones de escalado después de escalar hacia arriba (`add`) o hacia abajo (`delete`).</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Parámetro `scaleDownUtilizationThreshold`</td>
     <td>Establezca el umbral de utilización de nodo trabajador. Si la utilización del nodo trabajador queda por debajo del umbral, el nodo trabajador se tiene en cuenta para el escalado hacia abajo. La utilización del nodo trabajador se calcula como la suma de los recursos de CPU y de memoria que solicitan todos los pods que se ejecutan en el nodo trabajador dividido por la capacidad de recursos del nodo trabajador.</td>
-    <td>0.5</td>
+    <td>`0.5`</td>
     </tr>
     <tr>
     <td>Parámetro `scanInterval`</td>
     <td>Establezca la frecuencia en minutos con la que el programa de escalado automático de clústeres explora el uso de la carga de trabajo que activa el escalado hacia arriba o hacia abajo.</td>
-    <td>1m</td>
+    <td>`1m`</td>
     </tr>
     <tr>
     <td>Parámetro `skipNodes.withLocalStorage`</td>
     <td>Si tiene el valor `true`, los nodos trabajadores que tienen pods que guardan datos en el almacenamiento local no se escalan hacia abajo.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     <tr>
     <td>Parámetro `skipNodes.withSystemPods`</td>
     <td>Si tiene el valor `true`, los nodos trabajadores que tienen pods `kube-system` no se escalan. No establezca el valor en `false` porque el escalado hacia abajo de pods `kube-system` puede dar lugar a resultados inesperados.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     </tbody>
     </table>
@@ -595,27 +600,29 @@ Personalice los valores del programa de escalado automático de clústeres, como
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## Limitación de apps para que se ejecuten solo en determinadas agrupaciones de trabajadores escaladas automáticamente
 {: #ca_limit_pool}
 
-Para limitar un despliegue de pod a una agrupación de trabajadores específica gestionada por el programa de escalado automático de clústeres, utilice etiquetas y `nodeSelector`.
+Para limitar un despliegue de pod a una agrupación de trabajadores específica gestionada por el programa de escalado automático de clústeres, utilice etiquetas `nodeSelector` y `nodeAffinity`. Con `nodeAffinity`, tiene más control sobre cómo funciona el comportamiento de planificación para combinar pods con nodos trabajadores. Para obtener más información sobre la asignación de pods a nodos trabajadores, [consulte la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/).
 {: shortdesc}
 
 **Antes de empezar**:
 *  [Instale el plugin `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para limitar los pods que se ejecutan en determinadas agrupaciones de trabajadores escaladas automáticamente**:
 
-1.  Cree la agrupación de nodos trabajadores con la etiqueta que desea utilizar.
+1.  Cree la agrupación de nodos trabajadores con la etiqueta que desea utilizar. Por ejemplo, la etiqueta podría ser `app: nginx`.
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Añada la agrupación de nodos trabajadores a la configuración del programa de escalado automático de clústeres](#ca_cm).
-3.  En la plantilla de especificación del pod, haga coincidir `nodeSelector` con la etiqueta que ha utilizado en la agrupación de nodos trabajadores.
+3.  En la plantilla de especificación del pod, haga coincidir `nodeSelector` o `nodeAffinity` con la etiqueta que ha utilizado en la agrupación de nodos trabajadores.
+
+    Ejemplo de `nodeSelector`:
     ```
     ...
     spec:
@@ -626,6 +633,25 @@ Para limitar un despliegue de pod a una agrupación de trabajadores específica 
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    Ejemplo de `nodeAffinity`:
+    ```
+    spec:
+          containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+              operator: In
+              values:
+                - nginx
     ```
     {: codeblock}
 4.  Despliegue el pod. Debido a la etiqueta coincidente, el pod se planifica en un nodo trabajador que se encuentra en la agrupación de nodos trabajadores etiquetada.
@@ -640,17 +666,17 @@ Para limitar un despliegue de pod a una agrupación de trabajadores específica 
 ## Escalado hacia arriba de nodos trabajadores antes de que la agrupación de nodos trabajadores no tenga recursos suficientes
 {: #ca_scaleup}
 
-Tal como se ha descrito en el tema [Visión general del funcionamiento del programa de escalado automático de clústeres](#ca_about) y en las [preguntas frecuentes sobre el programa de escalado automático de clústeres de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), el programa de escalado automático de clústeres escala hacia arriba los nodos trabajadores como respuesta a los recursos solicitados de la carga de trabajo frente a los recursos disponibles en la agrupación de nodos trabajadores. Sin embargo, es posible que desee que el programa de escalado automático de clústeres escale hacia arriba los nodos trabajadores antes de que la agrupación de nodos trabajadores se quede sin recursos. En este caso, la carga de trabajo no tiene que esperar tanto tiempo a que se suministren los nodos trabajadores porque la agrupación de nodos trabajadores ya se ha escalado hacia arriba para satisfacer las solicitudes de recursos.
+Tal como se ha descrito en el tema [Visión general del funcionamiento del programa de escalado automático de clústeres](#ca_about) y en las [preguntas frecuentes sobre el programa de escalado automático de clústeres de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), el programa de escalado automático de clústeres aumenta el número de nodos trabajadores de las agrupaciones de nodos trabajadores como respuesta a los recursos solicitados de la carga de trabajo frente a los recursos disponibles en la agrupación de nodos trabajadores. Sin embargo, es posible que desee que el programa de escalado automático de clústeres escale hacia arriba los nodos trabajadores antes de que la agrupación de nodos trabajadores se quede sin recursos. En este caso, la carga de trabajo no tiene que esperar tanto tiempo a que se suministren los nodos trabajadores porque la agrupación de nodos trabajadores ya se ha escalado hacia arriba para satisfacer las solicitudes de recursos.
 {: shortdesc}
 
 El programa de escalado automático de clústeres no da soporte al escalado temprano (sobresuministro) de agrupaciones de nodos trabajadores. Sin embargo, puede configurar otros recursos de Kubernetes para que trabajen con el programa de escalado automático de clústeres para conseguir un escalado temprano.
 
 <dl>
   <dt><strong>Pods en pausa</strong></dt>
-  <dd>Puede crear un despliegue que despliegue [contenedores en pausa ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) en pods con determinadas solicitudes de recursos y asigne al despliegue una prioridad de pod baja. Cuando cargas de trabajo de prioridad más alta necesiten estos recursos, el pod de pausa se anticipa y se convierte en un pod pendiente. Este suceso activa el escalado hacia arriba del programa de escalado automático de clústeres.<br><br>Para obtener más información sobre cómo configurar un despliegue de pod en pausa, consulte las [preguntas frecuentes de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). Puede utilizar [este ejemplo de archivo de configuración de sobresuministro ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) para crear la clase de prioridad, la cuenta de servicio y los despliegues.<p class="note">Si utiliza este método, asegúrese de que entiende cómo funciona la [prioridad de pod](/docs/containers?topic=containers-pod_priority#pod_priority) y cómo establecer la prioridad de pod para los despliegues. Por ejemplo, si el pod en pausa no tiene suficientes recursos para un pod de prioridad más alta, el pod no se anticipa. La carga de trabajo de prioridad más alta permanece en espera, por lo que el programa de escalado automático de clústeres se activa para que escale hacia arriba. Sin embargo, en este caso la acción de escalado hacia arriba no es temprana porque la carga de trabajo que desea ejecutar no se puede planificar debido a una insuficiencia de recursos.</p></dd>
+  <dd>Puede crear un despliegue que despliegue [contenedores en pausa ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) en pods con determinadas solicitudes de recursos y asigne al despliegue una prioridad de pod baja. Cuando cargas de trabajo de prioridad más alta necesiten estos recursos, el pod de pausa se anticipa y se convierte en un pod pendiente. Este suceso activa el escalado hacia arriba del programa de escalado automático de clústeres.<br><br>Para obtener más información sobre cómo configurar un despliegue de pod de pausa, consulte las [preguntas frecuentes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). Puede utilizar [este ejemplo de archivo de configuración de sobresuministro ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) para crear la clase de prioridad, la cuenta de servicio y los despliegues.<p class="note">Si utiliza este método, asegúrese de que entiende cómo funciona la [prioridad de pod](/docs/containers?topic=containers-pod_priority#pod_priority) y cómo establecer la prioridad de pod para los despliegues. Por ejemplo, si el pod en pausa no tiene suficientes recursos para un pod de prioridad más alta, el pod no se anticipa. La carga de trabajo de prioridad más alta permanece en espera, por lo que el programa de escalado automático de clústeres se activa para que escale hacia arriba. Sin embargo, en este caso la acción de escalado hacia arriba no es temprana porque la carga de trabajo que desea ejecutar no se puede planificar debido a una insuficiencia de recursos.</p></dd>
 
   <dt><strong>Escalado automático de pod horizontal (HPA)</strong></dt>
-  <dd>Puesto que el escalado automático de pod horizontal se basa en el uso medio de CPU de los pods, el límite de uso de CPU establecido se alcanza antes de que la agrupación de trabajadores se quede realmente sin recursos. Se solicitan más pods, lo que activa el programa de escalado automático de clústeres para escalar hacia arriba la agrupación de nodos trabajadores.<br><br>Para obtener más información sobre cómo configurar HPA, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
+  <dd>Puesto que el escalado automático de pod horizontal se basa en el uso medio de CPU de los pods, el límite de uso de CPU establecido se alcanza antes de que la agrupación de trabajadores se quede sin recursos. Se solicitan más pods, lo que activa el programa de escalado automático de clústeres para escalar hacia arriba la agrupación de nodos trabajadores.<br><br>Para obtener más información sobre cómo configurar HPA, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
 </dl>
 
 <br />
@@ -665,7 +691,7 @@ Puede actualizar el diagrama de Helm del programa de escalado automático de cl�
 ¿Desea actualizar al diagrama de Helm más reciente desde la versión 1.0.2 o anterior? [Siga estas instrucciones](#ca_helm_up_102).
 {: note}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Actualice el repositorio de Helm para recuperar la última versión de todos los diagramas de Helm de este repositorio.
     ```
@@ -730,7 +756,7 @@ se ha establecido en `"enabled":true` para las agrupaciones de nodos trabajadore
 La versión más reciente del diagrama de Helm del programa de escalado automático de clústeres requiere una eliminación completa de las versiones anteriormente instaladas del diagrama de Helm del programa de escalado automático de clústeres. Si ha instalado el diagrama de Helm versión 1.0.2 o anterior, desinstale dicha versión antes de instalar el diagrama de Helm más reciente del programa de escalado automático de clústeres.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Obtenga el mapa de configuración del programa de escalado automático de clústeres.
     ```
@@ -797,10 +823,10 @@ Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región
 ## Eliminación del programa de escalado automático de clústeres
 {: #ca_rm}
 
-Si no desea escalar automáticamente las agrupaciones de nodos trabajadores, puede desinstalar el diagrama de Helm del programa de escalado automático de clústeres. Después de la eliminación, debe [redimensionar](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) o [volver a equilibrar](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) las agrupaciones de nodos trabajadores manualmente.
+Si no desea escalar automáticamente las agrupaciones de nodos trabajadores, puede desinstalar el diagrama de Helm del programa de escalado automático de clústeres. Después de la eliminación, debe [redimensionar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) o [volver a equilibrar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) las agrupaciones de nodos trabajadores manualmente.
 {: shortdesc}
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  En el [mapa de configuración del programa de escalado automático de clústeres](#ca_cm), elimine la agrupación de nodos trabajadores estableciendo el valor de `"enabled"` en `false`.
     ```

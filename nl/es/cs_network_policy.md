@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -30,7 +31,7 @@ subcollection: containers
 Cada clúster de Kubernetes está configurado con un plugin de red que se denomina Calico. Las políticas de red predeterminadas se configuran para proteger la interfaz de red pública de cada nodo trabajador en {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-Si tiene requisitos de seguridad exclusivos o si tiene un clúster multizona con expansión de VLAN habilitada, puede utilizar Calico y Kubernetes para crear políticas de red para un clúster. Con las políticas de red de Kubernetes, puede especificar el tráfico de red que desea permitir o bloquear de y desde un pod en un clúster. Para establecer políticas de red más avanzadas como, por ejemplo, para el bloqueo de tráfico entrante (ingress) para los servicios de equilibrador de carga de red (NLB), utilice políticas de red de Calico.
+Si tiene requisitos de seguridad exclusivos o si tiene un clúster multizona con distribución de VLAN habilitada, puede utilizar Calico y Kubernetes para crear políticas de red para un clúster. Con las políticas de red de Kubernetes, puede especificar el tráfico de red que desea permitir o bloquear de y desde un pod en un clúster. Para establecer políticas de red más avanzadas como, por ejemplo, para el bloqueo de tráfico entrante (ingress) para los servicios de equilibrador de carga de red (NLB), utilice políticas de red de Calico.
 
 <ul>
   <li>
@@ -125,7 +126,7 @@ También se crea una política predeterminada de Kubernetes que limita el acceso
 Instale y configure la CLI de Calico para ver, gestionar y añadir políticas de Calico.
 {:shortdesc}
 
-1. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+1. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
 con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
 
   ```
@@ -214,7 +215,7 @@ Consulte los detalles de políticas de red añadidas y predeterminadas que se ap
 
 Antes de empezar:
 1. [Instale y configure la CLI de Calico.](#cli_install)
-2. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+2. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
 con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
 
   ```
@@ -276,7 +277,7 @@ Para crear políticas de red de Kubernetes, consulte la [Documentación de polí
 Siga estos pasos para crear políticas de Calico.
 
 1. [Instale y configure la CLI de Calico.](#cli_install)
-2. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+2. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
 con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
 
   ```
@@ -324,7 +325,7 @@ Para ver cómo colocar direcciones IP en una lista blanca o en una lista negra, 
 
 Antes de empezar:
 1. [Instale y configure la CLI de Calico.](#cli_install)
-2. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+2. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
 con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
 
   ```
@@ -445,7 +446,7 @@ Para crear una política pre-DNAT:
 ## Aislamiento del clúster en la red privada
 {: #isolate_workers}
 
-Si tiene un clúster multizona, varias VLAN para un clúster de una sola zona o varias subredes en la misma VLAN, debe [habilitar la expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Sin embargo, cuando la expansión de VLAN está habilitada, cualquier sistema que esté conectado a cualquiera de las VLAN privadas en la misma cuenta de IBM Cloud se puede comunicar con los trabajadores.
+Si tiene un clúster multizona, varias VLAN para un clúster de una sola zona o varias subredes en la misma VLAN, debe habilitar la distribución de VLAN para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Sin embargo, cuando se habilita la VRF o la distribución de VLAN, cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.Bluemix_notm}} se puede comunicar con los nodos trabajadores.
 {: shortdesc}
 
 Puede aislar el clúster de otros sistemas de la red privada aplicando [políticas de red privada de Calico ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Este conjunto de políticas de Calico y puntos finales de host aísla el tráfico de red privada de un clúster de otros recursos de la red privada de la cuenta.
@@ -464,7 +465,7 @@ Las políticas se dirigen a la interfaz privada de nodo trabajador (eth0) y a la
 
 Antes de empezar:
 1. [Instale y configure la CLI de Calico.](#cli_install)
-2. [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
+2. [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluya las opciones `--admin` y `--network`
 con el mandato `ibmcloud ks cluster-config`. `--admin` descarga las claves para acceder a su portafolio de infraestructura y ejecutar mandatos de Calico en los nodos trabajadores. `--network` descarga el archivo de configuración de Calico para ejecutar todos los mandatos de Calico.
 
   ```
@@ -490,7 +491,7 @@ Para aislar el clúster en la red privada mediante políticas de Calico:
     1. Abra la política `generic-privatehostendpoint.yaml`.
     2. Sustituya `<worker_name>` por el nombre de un nodo trabajador. **Importante**: algunos nodos trabajadores deben seguir una estructura de denominación distinta para las políticas de Calico. Debe utilizar el nombre de un nodo trabajador en el formato que devuelve el mandato siguiente.
       ```
-      ibmcloud ks calicoctl get nodes --config==filepath/calicoctl.cfg
+      calicoctl get nodes --config==filepath/calicoctl.cfg
       ```
       {: pre}
     3. Sustituya `<worker-node-private-ip>` por la dirección IP privada para el nodo trabajador. Para ver las IP privadas de los nodos trabajadores, ejecute `ibmcloud ks workers --cluster <my_cluster>`.
@@ -731,7 +732,7 @@ Para registrar el tráfico denegado:
   </tr>
    <tr>
     <td><code>ingress</code></td>
-    <td><ul><li><code>action</code>: la acción <code>Log</code> graba una entrada de registro para cualquier solicitud que coincida con esta política en la vía de acceso `/var/log/syslog` en el nodo trabajador.</li><li><code>destination</code>: no se ha especificado ningún destino porque el <code>selector</code> aplica esta política a todos los pods con una etiqueta determinada.</li><li><code>source</code>: esta política se aplica a las solicitudes procedentes de cualquier origen.</li></ul></td>
+    <td><ul><li><code>action</code>: la acción <code>Log</code> escribe una entrada de registro para cualquier solicitud que coincida con esta política en la vía de acceso `/var/log/syslog` en el nodo trabajador.</li><li><code>destination</code>: no se ha especificado ningún destino porque el <code>selector</code> aplica esta política a todos los pods con una etiqueta determinada.</li><li><code>source</code>: esta política se aplica a las solicitudes procedentes de cualquier origen.</li></ul></td>
    </tr>
    <tr>
     <td><code>selector</code></td>
@@ -752,7 +753,7 @@ Para registrar el tráfico denegado:
 
 4. Puede generar entradas de registro enviando solicitudes que no están permitidas por la política que ha creado en el paso 1. Por ejemplo, intente hacer ping al pod que está protegido por la política de red desde un pod o una dirección IP que no esté permitida.
 
-5. Busque entradas de registro escritas en la vía de acceso `/var/log/syslog` . Tenga en cuenta que las direcciones IP de DST (destino) o SRC (origen) en la entrada de registro pueden ser distintas de lo esperado debido a los proxies, a la conversión de direcciones de red (NAT) y a otros procesos de red. La entrada de registro se parecerá a lo siguiente.
+5. Busque entradas de registro escritas en la vía de acceso `/var/log/syslog`. Tenga en cuenta que las direcciones IP de DST (destino) o SRC (origen) en la entrada de registro pueden ser distintas de lo esperado debido a los proxies, a la conversión de direcciones de red (NAT) y a otros procesos de red. La entrada de registro se parecerá a lo siguiente.
   ```
   Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
   ```

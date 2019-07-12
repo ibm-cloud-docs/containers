@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -62,13 +63,13 @@ Para ver los permisos de {{site.data.keyword.containerlong_notm}} específicos d
 <dl>
 <dt><a href="#platform">Roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM y de servicio</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} utiliza roles de {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) y de servicio para otorgar a los usuarios acceso al clúster.
-<ul><li>**Plataforma**: los roles de plataforma determinan las acciones que los usuarios pueden llevar a cabo en la infraestructura del clúster mediante la API de {{site.data.keyword.containerlong_notm}}, la consola y la CLI (`ibmcloud ks`). Los roles de plataforma no otorgan acceso a la API de Kubernetes. Puede establecer las políticas para estos roles por grupo de recursos, región o instancia de clúster. Aunque los roles de la plataforma le autorizan a realizar acciones de la infraestructura en el clúster, no otorgan acceso a los recursos de la infraestructura IBM Cloud (SoftLayer). El acceso a los recursos de la infraestructura de IBM Cloud (SoftLayer) viene determinado por la [clave de API que se ha establecido para la región](#api_key). Algunas acciones de ejemplo que están permitidas por los roles de plataforma son crear o eliminar clústeres, enlazar servicios a un clúster, gestionar recursos de red y de almacenamiento o añadir nodos trabajadores adicionales.<br><br>Si solo asigna roles de plataforma a los usuarios, no pueden interactuar con los recursos de Kubernetes dentro del clúster. No obstante, pueden ejecutar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config`. Luego puede autorizar a los usuarios a realizar determinadas acciones de Kubernetes mediante el uso de [políticas de RBAC personalizadas](/docs/containers?topic=containers-users#role-binding). Puede hacerlo si su organización utiliza actualmente políticas de RBAC personalizadas para controlar el acceso de Kubernetes y tiene intención de seguir utilizando políticas de RBAC personalizadas en lugar de roles de servicio.</li>
-<li>**Servicio**: los roles de servicio otorgan políticas de RBAC de Kubernetes correspondientes que se proporcionan a un usuario dentro de un clúster. Como tales, los roles de servicio otorgan acceso a la API de Kubernetes, el panel de control y a la CLI (`kubectl`). Puede limitar la política a roles de servicio por grupo de recursos, por región o por instancia del clúster. También puede limitar los roles de servicio a espacios de nombres de Kubernetes que estén en todos los clústeres, en clústeres individuales o en los clústeres de una región. Si limita un rol de servicio a un espacio de nombres, no puede aplicar la política a un grupo de recursos o asignar un rol de plataforma a la vez. Otros ejemplos de acciones permitidas por roles de servicio son la creación de despliegues de apps, la adición de espacios de nombres o la configuración de mapas de configuración.<br><br>Si solo asigna roles de servicio a los usuarios, no pueden ver ni interactuar con ningún recurso de {{site.data.keyword.containerlong_notm}}. Para que los usuarios accedan al clúster y utilicen los recursos de Kubernetes del clúster, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli). Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, asigne a los usuarios el rol de **Visor** de plataforma.</li></ul></dd>
+<ul><li>**Plataforma**: los roles de plataforma determinan las acciones que los usuarios pueden llevar a cabo en la infraestructura del clúster mediante la API de {{site.data.keyword.containerlong_notm}}, la consola y la CLI (`ibmcloud ks`). Los roles de plataforma no otorgan acceso a la API de Kubernetes. Puede establecer las políticas para estos roles por grupo de recursos, región o instancia de clúster. Aunque los roles de plataforma le autorizan a realizar acciones de la infraestructura en el clúster, no otorgan acceso a los recursos de la infraestructura IBM Cloud (SoftLayer). El acceso a los recursos de la infraestructura de IBM Cloud (SoftLayer) viene determinado por la [clave de API que se ha establecido para la región](#api_key). Algunas acciones de ejemplo que están permitidas por los roles de plataforma son crear o eliminar clústeres, enlazar servicios a un clúster, gestionar recursos de red y de almacenamiento o añadir nodos trabajadores adicionales.<br><br>Si solo asigna roles de plataforma a los usuarios, no pueden interactuar con los recursos de Kubernetes dentro del clúster. No obstante, pueden ejecutar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config`. Luego puede autorizar a los usuarios a realizar determinadas acciones de Kubernetes mediante el uso de [políticas de RBAC personalizadas](/docs/containers?topic=containers-users#role-binding). Puede hacerlo si su organización utiliza actualmente políticas de RBAC personalizadas para controlar el acceso de Kubernetes y tiene intención de seguir utilizando políticas de RBAC personalizadas en lugar de roles de servicio.</li>
+<li>**Servicio**: los roles de servicio otorgan políticas de RBAC de Kubernetes correspondientes que se proporcionan a un usuario dentro de un clúster. Como tales, los roles de servicio otorgan acceso a la API de Kubernetes, el panel de control y a la CLI (`kubectl`). Puede limitar la política a roles de servicio por grupo de recursos, por región o por instancia del clúster. También puede limitar los roles de servicio a espacios de nombres de Kubernetes que estén en todos los clústeres, en clústeres individuales o en los clústeres de una región. Si limita un rol de servicio a un espacio de nombres, no puede aplicar la política a un grupo de recursos o asignar un rol de plataforma a la vez. Otros ejemplos de acciones permitidas por roles de servicio son la creación de despliegues de apps, la adición de espacios de nombres o la configuración de mapas de configuración.<br><br>Si solo asigna roles de servicio a los usuarios, no pueden ver ni interactuar con ningún recurso de {{site.data.keyword.containerlong_notm}}. Para que los usuarios accedan al clúster y utilicen los recursos de Kubernetes del clúster, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli). Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, asigne a los usuarios el rol de **Visor** de plataforma.</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>En Kubernetes, el control de acceso basado en rol (RBAC) es una forma de proteger los recursos dentro de su clúster. Los roles RBAC determinan las acciones de Kubernetes que los usuarios pueden llevar a cabo en dichos recursos. A cada usuario que tenga asignado un rol de servicio se le asigna automáticamente un rol de clúster de RBAC correspondiente. Este rol de clúster de RBAC se aplica en un espacio de nombres específico o en todos los espacios de nombres, en función de si limita la política a un espacio de nombres.</br></br>
 Algunas acciones de ejemplo que están permitidas por los roles RBAC son crear objetos, como pods, o leer registros de pod.</dd>
 <dt><a href="#api_key">Infraestructura</a></dt>
-<dd>Los roles de infraestructura permiten el acceso a los recursos de la infraestructura de IBM Cloud (SoftLayer). Configure un usuario con el rol de infraestructura **Superusuario** y almacene las credenciales de infraestructura de este usuario en una clave de API. A continuación, establezca la clave de API en cada región en la que desee crear clústeres. Después de configurar la clave de API, otros usuarios a los que otorgue acceso a {{site.data.keyword.containerlong_notm}} no necesitarán roles de infraestructura, ya que la clave de API se comparte entre todos los usuarios de la región. En su lugar, los roles de la plataforma {{site.data.keyword.Bluemix_notm}} IAM determinan las acciones de infraestructura que los usuarios pueden llevar a cabo. Si no configura la clave de API con la infraestructura completa de <strong>Superusuario</strong> o tiene que otorgar acceso a un dispositivo específico a los usuarios, puede [personalizar los permisos de infraestructura](#infra_access). </br></br>
+<dd>Los roles de infraestructura permiten el acceso a los recursos de la infraestructura de IBM Cloud (SoftLayer). Configure un usuario con el rol de infraestructura **Superusuario** y almacene las credenciales de infraestructura de este usuario en una clave de API. A continuación, establezca la clave de API en cada región en la que desee crear clústeres. Después de configurar la clave de API, otros usuarios a los que otorgue acceso a {{site.data.keyword.containerlong_notm}} no necesitarán roles de infraestructura, ya que la clave de API se comparte entre todos los usuarios de la región. En su lugar, los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM determinan las acciones de infraestructura que los usuarios pueden llevar a cabo. Si no configura la clave de API con la infraestructura completa de <strong>Superusuario</strong> o tiene que otorgar acceso a un dispositivo específico a los usuarios, puede [personalizar los permisos de infraestructura](#infra_access). </br></br>
 Algunas acciones de ejemplo permitidas por los roles de infraestructura son ver los detalles de las máquinas de los nodos trabajadores del clúster o editar recursos de red y de almacenamiento.</dd>
 <dt>Cloud Foundry</dt>
 <dd>No todos los servicios se pueden gestionar con {{site.data.keyword.Bluemix_notm}} IAM. Si está utilizando uno de estos servicios, puede continuar utilizando los roles de usuario de Cloud Foundry para controlar el acceso a estos servicios. Los roles de Cloud Foundry otorgan acceso a las organizaciones y espacios dentro de la cuenta. Para ver la lista de servicios basados en Cloud Foundry de {{site.data.keyword.Bluemix_notm}}, ejecute <code>ibmcloud service list</code>.</br></br>
@@ -109,12 +110,12 @@ Cuando crea su cuenta de {{site.data.keyword.Bluemix_notm}}, se crea automática
   <li>Todas las instancias de una región de un servicio, como por ejemplo todos los clústeres de la región **EE. UU. sur** de {{site.data.keyword.containerlong_notm}}.</li>
   <li>Una instancia individual, como por ejemplo un clúster.</li></ul></dd>
 <dt>Espacio de nombres de Kubernetes</dt>
-  <dd><p>Como parte de las instancias de recursos de clúster de {{site.data.keyword.Bluemix_notm}} IAM, puede asignar a los usuarios roles de acceso al servicio a espacios de nombres de Kubernetes de los clústeres. Si limita un rol de servicio a un espacio de nombres, no puede aplicar la política a un grupo de recursos o asignar un rol de plataforma a la vez.</p>
+  <dd><p>Como parte de las instancias de recursos de clúster de {{site.data.keyword.Bluemix_notm}} IAM, puede asignar a los usuarios roles de acceso al servicio a espacios de nombres de Kubernetes de los clústeres.</p>
   <p>Si asigna acceso a un espacio de nombres, la política se aplica a todas las instancias actuales y futuras del espacio de nombres en todos los clústeres que autorice. Por ejemplo, supongamos que desea que el grupo de usuarios `dev` pueda desplegar recursos de Kubernetes en el espacio de nombres `test` en todos los clústeres de AP norte. Si asigna al grupo de acceso `dev` el rol de acceso al servicio de **Escritor** sobre el espacio de nombres de Kubernetes test en todos los clústeres de la región AP norte dentro del grupo de recursos `default`, el grupo `dev` podrá acceder al espacio de nombres `test` en cualquier clúster de AP norte del grupo de recursos `default` que actualmente tenga o pueda tener un espacio de nombres test.</p>
-  <p class="important">No puede asignar roles de acceso al servicio limitados a un espacio de nombres a nivel de grupo de recursos ni asignarlos al mismo tiempo que los roles de plataforma.</p></dd>
+  <p class="important">Si limita un rol de servicio a un espacio de nombres, no puede aplicar la política a un grupo de recursos o asignar un rol de plataforma a la vez.</p></dd>
 <dt>Grupo de recursos</dt>
   <dd><p>Puede organizar los recursos de su cuenta en agrupaciones personalizables de forma que pueda asignar rápidamente el acceso de usuarios individuales o grupos de usuarios a más de un recurso a la vez. Los grupos de recursos pueden ayudar a los operadores y administradores a filtrar los recursos para ver su uso actual, resolver problemas y gestionar equipos.</p>
-  <p class="important">Un clúster solo se puede crear en un grupo de recursos que no se puede cambiar después. Si crea un clúster en el grupo de recursos incorrecto, debe suprimir el clúster y volver a crearlo en el grupo de recursos correcto. Además, si necesita utilizar el mandato `ibmcloud ks cluster-service-bind` [](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) para [integrar con un servicio de {{site.data.keyword.Bluemix_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), este servicio debe estar en el mismo grupo de recursos que el clúster. Los servicios que no utilizan grupos de recursos, como {{site.data.keyword.registrylong_notm}}, o que no necesitan enlaces a servicios, como {{site.data.keyword.la_full_notm}}, funcionan aunque el clúster se encuentre en otro grupo de recursos distinto.</p>
+  <p class="important">Un clúster solo se puede crear en un grupo de recursos que no se puede cambiar después. Si crea un clúster en el grupo de recursos incorrecto, debe suprimir el clúster y volver a crearlo en el grupo de recursos correcto. Además, si necesita utilizar el [mandato](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para [integrar con un servicio de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), este servicio debe estar en el mismo grupo de recursos que el clúster. Los servicios que no utilizan grupos de recursos, como {{site.data.keyword.registrylong_notm}}, o que no necesitan enlaces a servicios, como {{site.data.keyword.la_full_notm}}, funcionan aunque el clúster se encuentre en otro grupo de recursos distinto.</p>
   <p>Si tiene previsto utilizar [{{site.data.keyword.monitoringlong_notm}} para métricas](/docs/containers?topic=containers-health#view_metrics), considere la posibilidad de asignar nombres exclusivos a los clústeres de los grupos de recursos y a las regiones de la cuenta para evitar conflictos de nombres de métricas. No se puede cambiar el nombre de un clúster.</p>
   <p>Puede asignar a los usuarios un rol de acceso a un grupo de recursos en los siguientes casos. Tenga en cuenta que, a diferencia de las instancias de recursos, no puede otorgar acceso a una instancia individual dentro de un grupo de recursos.</p>
   <ul><li>Todos los servicios de {{site.data.keyword.Bluemix_notm}} IAM del grupo de recursos, incluidos todos los clústeres de {{site.data.keyword.containerlong_notm}} y las imágenes de {{site.data.keyword.registrylong_notm}}.</li>
@@ -151,7 +152,7 @@ Para obtener más información sobre cómo configurar la cuenta y los recursos, 
 ## Configuración de la clave de API para habilitar el acceso al portafolio de infraestructura
 {: #api_key}
 
-Para suministrar correctamente clústeres y trabajar con ellos, debe asegurarse de que la cuenta de {{site.data.keyword.Bluemix_notm}} esté correctamente configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer).
+Para suministrar correctamente clústeres y trabajar con ellos, debe asegurarse de que la cuenta de {{site.data.keyword.Bluemix_notm}} esté correctamente configurada para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) en cada grupo de recursos y región en los que se encuentren los clústeres.
 {: shortdesc}
 
 **En la mayoría de los casos**: su cuenta de tipo pago según uso de {{site.data.keyword.Bluemix_notm}} ya tiene acceso al portafolio de infraestructura de IBM Cloud (SoftLayer). Para configurar el acceso de {{site.data.keyword.containerlong_notm}} al portafolio, el **propietario de la cuenta** debe establecer la clave de API para la región y el grupo de recursos.
@@ -162,25 +163,25 @@ Para suministrar correctamente clústeres y trabajar con ellos, debe asegurarse 
     ```
     {: pre}
 
-2. Elija como destino el grupo de recursos en el que desea establecer la clave de API. Si no elige como destino un grupo de recursos, la clave de API se establece para el grupo de recursos predeterminado.
+2. Elija como destino el grupo de recursos en el que desea establecer la clave de API. Si no elige como destino un grupo de recursos, la clave de API se establece para el grupo de recursos predeterminado. Para ver una lista de los grupos de recursos, ejecute `ibmcloud resource groups`.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {:pre}
 
-4. Establezca la clave de API para la región y el grupo de recursos.
+3. Establezca la clave de API para la región y el grupo de recursos.
     ```
-    ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. Compruebe que la clave de API está establecida.
+4. Compruebe que la clave de API está establecida.
     ```
-    ibmcloud ks api-key-info <cluster_name_or_ID>
+    ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-6. Repita el proceso para cada región y grupo de recursos en los que desea crear clústeres.
+5. Repita el proceso para cada región y grupo de recursos en los que desea crear clústeres.
 
 **Opciones alternativas y más información**: para ver distintas formas de acceder al portafolio de infraestructura de IBM Cloud (SoftLayer), consulte las secciones siguientes.
 * Si no está seguro de si su cuenta ya tiene acceso al portafolio de infraestructura de IBM Cloud (SoftLayer), consulte [Visión general de acceso al portafolio de infraestructura de IBM Cloud (SoftLayer)](#understand_infra).
@@ -237,7 +238,7 @@ Para ver la señal {{site.data.keyword.Bluemix_notm}} IAM para una sesión de CL
 
 **Si los usuarios tienen acceso al portafolio a través de una señal de {{site.data.keyword.Bluemix_notm}} IAM, ¿cómo limito qué mandatos puede ejecutar un usuario?**
 
-Tras configurar el acceso al portafolio para los usuarios de su cuenta, puede controlar las acciones de la infraestructura que pueden llevar a cabo los usuarios asignando el [rol de la plataforma](#platform) adecuado. Al asignar roles de {{site.data.keyword.Bluemix_notm}} IAM a los usuarios, se establecen límites en cuanto a los mandatos que pueden ejecutar en un clúster. Por ejemplo, debido a que el propietario de la clave de API tiene el rol de infraestructura **Superusuario**, todos los mandatos relacionados con la infraestructura se pueden ejecutar en un clúster. Sin embargo, en función del rol de {{site.data.keyword.Bluemix_notm}} IAM que se haya asignado a un usuario, el usuario podrá ejecutar solo algunos de esos mandatos relacionados con la infraestructura.
+Tras configurar el acceso al portafolio para los usuarios de su cuenta, puede controlar las acciones de la infraestructura que pueden llevar a cabo los usuarios asignando el [rol de plataforma](#platform) adecuado. Al asignar roles de {{site.data.keyword.Bluemix_notm}} IAM a los usuarios, se establecen límites en cuanto a los mandatos que pueden ejecutar en un clúster. Por ejemplo, debido a que el propietario de la clave de API tiene el rol de infraestructura **Superusuario**, todos los mandatos relacionados con la infraestructura se pueden ejecutar en un clúster. Sin embargo, en función del rol de {{site.data.keyword.Bluemix_notm}} IAM que se haya asignado a un usuario, el usuario podrá ejecutar solo algunos de esos mandatos relacionados con la infraestructura.
 
 Por ejemplo, si desea crear un clúster en una región nueva, asegúrese de que el primer clúster lo crea un usuario con el rol de **Superusuario** de la infraestructura, como por ejemplo el propietario de la cuenta. Después, puede invitar a usuarios individuales o a usuarios de grupos de acceso de {{site.data.keyword.Bluemix_notm}} IAM a dicha región estableciendo las políticas de gestión de la plataforma para ellos en dicha región. Un usuario con un rol de plataforma **Visor** no tiene autorización para añadir un nodo trabajador. Por lo tanto, la acción `worker-add` falla, aunque la clave de API tenga los permisos de infraestructura correctos. Si cambia el rol de plataforma del usuario por **Operador**, el usuario tendrá autorización para añadir un nodo trabajador. La acción `worker-add` se ejecuta correctamente porque el usuario está autorizado y la clave de API se ha establecido correctamente. No es necesario que edite los permisos de infraestructura de IBM Cloud (SoftLayer) del usuario.
 
@@ -246,7 +247,7 @@ Para auditar las acciones que ejecutan los usuarios de la cuenta, puede utilizar
 
 **¿Qué sucede si no quiero asignar al propietario de la clave de API o al propietario de las credenciales al rol de Superusuario de la infraestructura?**</br>
 
-Por razones de conformidad, seguridad o facturación, es posible que no desee otorgar el rol de **Superusuario** de la infraestructura al usuario que establece la clave de API o cuyas credenciales se han establecido con el mandato `ibmcloud ks credential-set`. Sin embargo, si este usuario no tiene el rol de **Superusuario**, las acciones relacionadas con la infraestructura, como la creación de un clúster o la recarga de un nodo trabajador, pueden fallar. En lugar de utilizar roles de plataforma {{site.data.keyword.Bluemix_notm}} IAM para controlar el acceso de los usuarios a la infraestructura, debe [establecer permisos específicos de la infraestructura de IBM Cloud (SoftLayer)](#infra_access) para los usuarios.
+Por razones de conformidad, seguridad o facturación, es posible que no desee otorgar el rol de **Superusuario** de la infraestructura al usuario que establece la clave de API o cuyas credenciales se han establecido con el mandato `ibmcloud ks credential-set`. Sin embargo, si este usuario no tiene el rol de **Superusuario**, las acciones relacionadas con la infraestructura, como la creación de un clúster o la recarga de un nodo trabajador, pueden fallar. En lugar de utilizar roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM para controlar el acceso de los usuarios a la infraestructura, debe [establecer permisos específicos de la infraestructura de IBM Cloud (SoftLayer)](#infra_access) para los usuarios.
 
 **¿Qué ocurre si el usuario que ha establecido la clave de API para una región y grupo de recursos deja la empresa?**
 
@@ -270,10 +271,10 @@ Para asegurarse de que todas las acciones relacionadas con la infraestructura se
 
 1. Inicie una sesión en la [consola de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/).
 
-2. Para asegurarse de que todas las acciones relacionadas con la cuenta se pueden realizar satisfactoriamente, verifique que el usuario tenga los roles correctos de la plataforma {{site.data.keyword.Bluemix_notm}} IAM.
+2. Para asegurarse de que todas las acciones relacionadas con la cuenta se pueden realizar satisfactoriamente, verifique que el usuario tenga los roles de plataforma correctos de {{site.data.keyword.Bluemix_notm}} IAM.
     1. En la barra de menús, seleccione **Gestionar > Acceso (IAM)** y, a continuación, pulse la página **Usuarios**.
     2. Pulse el nombre del usuario para el que desea establecer la clave de API o cuyas credenciales desea establecer para la clave de API y luego pulse el separador **Políticas de acceso**.
-    3. Si el usuario no tiene el rol de plataforma **Administrador** para todos los clústeres de {{site.data.keyword.containerlong_notm}} de todas las regiones, [asigne ese rol de la plataforma al usuario](#platform).
+    3. Si el usuario no tiene el rol de plataforma **Administrador** para todos los clústeres de {{site.data.keyword.containerlong_notm}} de todas las regiones, [asigne ese rol de plataforma al usuario](#platform).
     4. Si el usuario no tiene como mínimo el rol de plataforma **Visor** para el grupo de recursos donde desea establecer la clave de API, [asigne ese rol de grupo de recursos al usuario](#platform).
     5. Para crear clústeres, el usuario también necesita el rol de plataforma **Administrador** para {{site.data.keyword.registrylong_notm}} a nivel de cuenta. No limite las políticas para {{site.data.keyword.registryshort_notm}} a nivel de grupo de recursos.
 
@@ -290,14 +291,14 @@ Para asegurarse de que todas las acciones relacionadas con la infraestructura se
 Si tiene una cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}, tiene acceso al portafolio enlazado de una infraestructura de IBM Cloud (SoftLayer) de forma predeterminada. La clave de API se utiliza para solicitar recursos de infraestructura de esta infraestructura de IBM Cloud (SoftLayer) como, por ejemplo, nuevos nodos trabajadores o VLAN.
 {: shortdec}
 
-Puede encontrar el propietario de la clave de API actual ejecutando [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info). Si necesita actualizar la clave de API que hay almacenada para una región, puede hacerlo ejecutando el mandato [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset). Este mandato requiere la política de acceso de administrador de {{site.data.keyword.containerlong_notm}} y almacena la clave de API del usuario que ejecuta este mandato en la cuenta.
+Puede encontrar el propietario de la clave de API actual ejecutando [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info). Si tiene que actualizar la clave de API almacenada para una región, puede hacerlo con el mandato [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). Este mandato requiere la política de acceso de administrador de {{site.data.keyword.containerlong_notm}} y almacena la clave de API del usuario que ejecuta este mandato en la cuenta.
 
 Asegúrese de que desea restablecer la clave y de que comprende el impacto en la app. La clave se utiliza en varios lugares y puede provocar cambios de última hora si se modifica innecesariamente.
 {: note}
 
 **Antes de empezar**:
 - Si el propietario de la cuenta no establece la clave de API, [asegúrese de que el usuario que establece la clave de API tenga los permisos correctos](#owner_permissions).
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para establecer la clave de API para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer):
 
@@ -310,7 +311,7 @@ Para establecer la clave de API para acceder al portafolio de infraestructura de
         {:pre}
     4.  Establezca la clave de API del usuario para la región.
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}    
     5.  Compruebe que la clave de API está establecida.
@@ -324,15 +325,15 @@ Para establecer la clave de API para acceder al portafolio de infraestructura de
 ### Acceso a otra cuenta de infraestructura de IBM Cloud (SoftLayer)
 {: #credentials}
 
-En lugar de utilizar la cuenta enlazada predeterminada de infraestructura de IBM Cloud (SoftLayer) para solicitar la infraestructura para clústeres dentro de una región, es posible que desee otra cuenta de infraestructura de IBM Cloud (SoftLayer) que ya tenga. Puede enlazar esta cuenta de infraestructura a la cuenta de {{site.data.keyword.Bluemix_notm}} mediante el mandato [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set). Se utilizan las credenciales de la infraestructura de IBM Cloud (SoftLayer) en lugar de las credenciales de la cuenta de pago según uso predeterminada almacenadas para la región.
+En lugar de utilizar la cuenta enlazada predeterminada de infraestructura de IBM Cloud (SoftLayer) para solicitar la infraestructura para clústeres dentro de una región, es posible que desee otra cuenta de infraestructura de IBM Cloud (SoftLayer) que ya tenga. Puede enlazar esta cuenta de infraestructura a la cuenta de {{site.data.keyword.Bluemix_notm}} mediante el mandato [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). Se utilizan las credenciales de la infraestructura de IBM Cloud (SoftLayer) en lugar de las credenciales de la cuenta de pago según uso predeterminada almacenadas para la región.
 {: shortdesc}
 
-Las credenciales de la infraestructura de IBM Cloud (SoftLayer) establecidas mediante el mandato `ibmcloud ks credential-set` permanecen después de que finalice la sesión. Si elimina las credenciales de la infraestructura de IBM Cloud (SoftLayer) establecidas manualmente con el mandato [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset), se utilizan las credenciales de la cuenta de pago según uso predeterminada. Sin embargo, este cambio en las credenciales de la cuenta de infraestructura puede provocar [clústeres huérfanos](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
+Las credenciales de la infraestructura de IBM Cloud (SoftLayer) establecidas mediante el mandato `ibmcloud ks credential-set` permanecen después de que finalice la sesión. Si elimina credenciales de infraestructura de IBM Cloud (SoftLayer) definidos manualmente con el mandato [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset), se utilizan las credenciales predeterminadas de la cuenta de pago según uso. Sin embargo, este cambio en las credenciales de la cuenta de infraestructura puede provocar [clústeres huérfanos](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 {: important}
 
 **Antes de empezar**:
 - Si no está utilizando las credenciales del propietario de la cuenta, [asegúrese de que el usuario cuyas credenciales desea establecer para la clave de API tenga los permisos correctos](#owner_permissions).
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para establecer las credenciales de la cuenta de infraestructura para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer):
 
@@ -348,13 +349,13 @@ Para establecer las credenciales de la cuenta de infraestructura para acceder al
 
     2.  Defina las credenciales de API de la infraestructura que desea utilizar.
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
     3. Verifique que se han establecido las credenciales correctas.
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         Salida de ejemplo:
         ```
@@ -418,7 +419,7 @@ Antes de empezar, verifique que tiene asignado el rol de plataforma **Administra
        * **Rol de acceso de plataforma**: Otorga acceso a {{site.data.keyword.containerlong_notm}} de modo que los usuarios puedan gestionar recursos de la infraestructura, como clústeres, nodos trabajadores, agrupaciones de trabajadores, equilibradores de carga de aplicación de Ingress y almacenamiento. Para ver una lista de las acciones admitidas por rol, consulte la [página de referencia de roles de plataforma](/docs/containers?topic=containers-access_reference#iam_platform).
        * **Rol de acceso al servicio**: otorga acceso a Kubernetes como acceso desde dentro de un clúster para que los usuarios puedan gestionar los recursos de Kubernetes, como pods, despliegues, servicios y espacios de nombres. Para ver una lista de las acciones admitidas por rol, consulte la [página de referencia de roles de servicio](/docs/containers?topic=containers-access_reference#service).<p class="note">No puede limitar un rol de acceso al servicio a un espacio de nombres si asigna el rol a nivel de grupo de recursos. Asigne en su lugar acceso a una instancia del recurso. Tampoco asigne un rol de plataforma al mismo tiempo que un rol de servicio.</p>
     7. Pulse **Asignar**.
-    8. **Opcional**: Si solo ha asignado un rol de servicio a los usuarios, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, repita estos pasos para asignar a los usuarios el rol de **Visor** de plataforma.
+    8. **Opcional**: si solo ha asignado un rol de servicio a los usuarios, debe darles el nombre y el ID del clúster para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` y luego [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar de otra manera con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, repita estos pasos para asignar a los usuarios el rol de **Visor** de plataforma.
   * **Para instancias de recursos dentro o entre grupos de recursos**:
     1. Pulse **Asignar acceso a recursos**.
     2. En la lista **Servicios**, seleccione
@@ -432,7 +433,7 @@ Antes de empezar, verifique que tiene asignado el rol de plataforma **Administra
           * Si ha limitado la política a un espacio de nombres, no puede asignar también un rol de plataforma a la vez. Si también desea que el usuario tenga un rol de plataforma, repita estos pasos, pero deje el campo del espacio de nombres en blanco y asigne solo un rol de plataforma (no vuelva a asignar un rol de acceso al servicio).
        * **Rol de acceso al servicio**: otorga acceso a Kubernetes como acceso desde dentro de un clúster para que los usuarios puedan gestionar los recursos de Kubernetes, como pods, despliegues, servicios y espacios de nombres. Para ver una lista de las acciones admitidas por rol, consulte la [página de referencia de roles de servicio](/docs/containers?topic=containers-access_reference#service).
     7. Pulse **Asignar**.
-    8. **Opcional**: si ha asignado solo roles de servicio a usuarios, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, repita estos pasos para asignar a los usuarios el rol de **Visor** de plataforma.
+    8. **Opcional**: si ha asignado solo roles de servicio a usuarios, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, repita estos pasos para asignar a los usuarios el rol de **Visor** de plataforma.
 
 4.  Opcional: si desea que los usuarios puedan trabajar con clústeres en un grupo de recursos que no sea el predeterminado, estos usuarios necesitan acceso adicional a los grupos de recursos en los que se encuentran los clústeres. Puede asignar a estos usuarios el rol de plataforma **Visor** para los grupos de recursos si no lo ha hecho anteriormente.
     1.  Pulse **Asignar acceso dentro de un grupo de recursos**.
@@ -450,9 +451,9 @@ Otorgue a los usuarios acceso a sus clústeres asignando roles de gestión de la
 
 **Antes de empezar**:
 
-- Verifique que tiene asignado el rol `cluster-admin` de la plataforma {{site.data.keyword.Bluemix_notm}} IAM para la cuenta de {{site.data.keyword.Bluemix_notm}} en la que está trabajando.
+- Verifique que tiene asignado el rol de plataforma `cluster-admin` de {{site.data.keyword.Bluemix_notm}} IAM para la cuenta de {{site.data.keyword.Bluemix_notm}} en la que está trabajando.
 - Verifique que el usuario se ha añadido a la cuenta. Si no es así, invite al usuario a su cuenta ejecutando `ibmcloud account user-invite <user@email.com>`.
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Decida si desea asignar los roles de [plataforma o de acceso de servicio](/docs/containers?topic=containers-users#access_policies). Los pasos de la CLI varían según el rol de acceso que desee asignar:
   * [Asignar roles de plataforma desde la CLI](#add_users_cli_platform)
   * [Asignar roles de servicio desde la CLI](#add_users_cli_service)
@@ -613,7 +614,7 @@ Otorgue a los usuarios acceso a sus clústeres asignando roles de gestión de la
     ```
     {: codeblock}
 
-    <table summary="En la tabla se describen los campos que se deben rellenar para el archivo JSON. Las filas se leen de izquierda a derecha, con el ámbito en la primera columna, eldistintivo de CLI en la segunda u¡y la descripción en la tercera.">
+    <table summary="En la tabla se describen los campos que se deben rellenar para el archivo JSON. Las filas se leen de izquierda a derecha, con el ámbito en la primera columna, eldistintivo de CLI en la segunda y la descripción en la tercera.">
     <caption>Visión general de los componentes del archivo JSON</caption>
       <thead>
       <th colspan=2><img src="images/idea.png" alt="Icono de idea"/>Visión general de los componentes del archivo JSON</th>
@@ -634,11 +635,11 @@ Otorgue a los usuarios acceso a sus clústeres asignando roles de gestión de la
         </tr>
         <tr>
         <td>`resources.attributes`</td>
-        <td>Configure el ámbito de la política en la cuenta, el clúster y el espacio de nombres. Deje los campos`"name"` como se indica en el ejemplo, y especifique algunos campos `"value"` como se indica a continuación.
-        <ul><li>**En `"accountId"`**: especifique so ID de cuenta de {{site.data.keyword.Bluemix_notm}} que ha recuperado anteriormente.</li>
+        <td>Configure el ámbito de la política en la cuenta, el clúster y el espacio de nombres. Deje los campos `"name"` como se indica en el ejemplo, y especifique algunos campos `"value"` como se indica a continuación.
+        <ul><li>**En `"accountId"`**: especifique su ID de cuenta de {{site.data.keyword.Bluemix_notm}} que ha recuperado anteriormente.</li>
         <li>**En `"serviceName"`**: deje el nombre de servicio que se proporciona: `containers-kubernetes`.</li>
         <li>**En `"serviceInstance"`**: especifique el ID del clúster. Si hay varios clústeres, sepárelos con una coma. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`.</li>
-        <li>**En `"namespace"`**: especifique un espacio de nombres de Kubernetes del clúster.. Para obtener una lista de los espacios de nombres del clúster, ejecute el mandato `kubectl get namespaces`. <p class="note">Para asignar la política de acceso a todos los espacios de nombres de un clúster, elimine toda la entrada `{"name": "namespace", "value": "<namespace_name"}`.</p></li></td>
+        <li>**En `"namespace"`**: especifique un espacio de nombres de Kubernetes del clúster. Para obtener una lista de los espacios de nombres del clúster, ejecute el mandato `kubectl get namespaces`. <p class="note">Para asignar la política de acceso a todos los espacios de nombres de un clúster, elimine toda la entrada `{"name": "namespace", "value": "<namespace_name"}`.</p></li></td>
         </tr>
       </tbody>
       </table>
@@ -655,7 +656,7 @@ Otorgue a los usuarios acceso a sus clústeres asignando roles de gestión de la
         ```
         {: pre}
 
-4.  Si ha asignado solo roles de servicio a usuarios, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, [asigne a los usuarios el rol de **Visor** de plataforma](#add_users_cli_platform).
+4.  Si ha asignado solo roles de servicio a usuarios, debe dar a los usuarios el nombre de clúster y el ID para que puedan ejecutar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` y, a continuación, [iniciar el panel de control de Kubernetes desde la CLI](/docs/containers?topic=containers-app#db_cli) o interactuar con la API de Kubernetes. Si desea que estos usuarios puedan acceder a la consola de clústeres de {{site.data.keyword.containerlong_notm}} y obtener una lista de clústeres y de otros recursos de infraestructura desde la CLI, [asigne a los usuarios el rol de **Visor** de plataforma](#add_users_cli_platform).
 
 5.  Para que los cambios entren en vigor, el usuario al que se otorga acceso debe renovar la configuración del clúster. Los usuarios no se añaden a los enlaces de rol hasta que cada uno de ellos renueva de forma individual la configuración del clúster, aunque haya añadido varios usuarios al mismo tiempo. Los usuarios tampoco se añaden a un enlace de rol si tienen un permiso superior. Por ejemplo, si los usuarios tienen un rol de clúster y están en un enlace de rol de clúster, no se añaden también a cada uno de los enlaces de rol de espacio de nombres.
     ```
@@ -686,7 +687,7 @@ Otorgue a los usuarios acceso a sus clústeres asignando roles de gestión de la
         ```
         {: pre}
 
-    **Salida de ejemplo**: Por ejemplo, si asigna al usuario `user@email.com` y al grupo de acceso `team1` el rol de servicio **Lector** y después ejecuta `kubectl get rolebinding ibm-view -o yaml -n default`.
+    **Salida de ejemplo**: obtiene la salida de ejemplo siguiente si asigna el usuario `user@email.com` y al grupo de acceso `team1` el rol de servicio **Reader** (Lector) y, a continuación, ejecuta `kubectl get rolebinding ibm-view -o yaml -n default`.
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -909,7 +910,7 @@ Para evitar cambios de última hora, no modifique los roles de clúster predefin
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>Para `User`: añada la dirección de correo electrónico del usuario individual a uno de los siguientes URL.<ul><li>Para los clústeres que ejecutan Kubernetes 1.11 o posteriores: <code>IAM#user@email.com</code></li><li>Para los clústeres que ejecutan Kubernetes 1.10 o anteriores: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>Para `Usuario`: añada la dirección de correo electrónico del usuario individual a `IAM#` del siguiente modo: <code>IAM#user@email.com</code>.</li>
               <li>Para `Group`: para clústeres que ejecutan Kubernetes 1.11 o posterior, especifique el nombre del [grupo de acceso de {{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-groups#groups) en la cuenta.</li>
               <li>Para `ServiceAccount`: especifique el nombre de la cuenta de servicio.</li></ul></td>
             </tr>
@@ -972,6 +973,85 @@ Para evitar cambios de última hora, no modifique los roles de clúster predefin
 
 Ahora que ha creado y enlazado un rol de RBAC o un rol de clúster de Kubernetes personalizado, siga con los usuarios. Pídales que prueben una acción que tengan permiso para realizar debido al rol, como suprimir un pod.
 
+### Ampliación de los permisos existentes mediante la agregación de roles de clúster 
+{: #rbac_aggregate}
+
+Puede ampliar los permisos existentes de los usuarios agregando roles de clúster o combinando roles de clúster con otros roles de clúster. Cuando asigna a un usuario un rol de servicio de {{site.data.keyword.Bluemix_notm}}, el usuario se añade a un [rol de clúster RBAC de Kubernetes correspondiente](/docs/containers?topic=containers-access_reference#service). Sin embargo, es posible que desee permitir a determinados usuarios realizar operaciones adicionales. 
+{: shortdesc}
+
+Por ejemplo, un usuario con el rol de clúster `admin` limitado al espacio de nombres no puede utilizar el mandato `kubectl top pods` para ver métricas de todos los pods del espacio de nombres. Puede agregar un rol de clúster para que los usuarios con el rol de clúster `admin` tengan autorización para ejecutar el mandato `top pods`. Para obtener más información, [consulte la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+
+**¿Cuáles son las operaciones comunes para las que podría querer ampliar los permisos para un rol de clúster predeterminado?**<br>
+Revise [las operaciones que permite cada rol de clúster RBAC predeterminado](/docs/containers?topic=containers-access_reference#rbac_ref) para tener una idea de lo que pueden hacer los usuarios y luego compare las operaciones permitidas con lo que desea que puedan realizar.
+
+Si los usuarios con el mismo rol de clúster encuentran errores similares al siguiente para el mismo tipo de operación, es posible que desee ampliar el rol de clúster para incluir esta operación.
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**Para agregar roles de clúster**:
+
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Cree un archivo YAML de rol de clúster. En la sección `labels`, especifique el rol de clúster existente al que desea agregar permisos. En el ejemplo siguiente se amplía el rol de clúster `admin` predefinido para permitir que los usuarios puedan ejecutar `kubectl top pods`. Para ver más ejemplos, [consulte la documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>Visión general de los componentes del archivo YAML</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>Especifique un nombre para el rol de clúster. **No** utilice los nombres de rol de clúster predefinidos: `view`, `edit`, `admin` y `cluster-admin`.</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>Añada una etiqueta que coincida con el rol de clúster que desea agregar en el formato `rbac.authorization.k8s.io/aggregate-to-<cluster_role>: "true"`. Las etiquetas de los roles de clúster predefinidos son las siguientes.<ul>
+          <li>Rol de servicio de **Gestor** de IAM, limitado a un espacio de nombres: `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>Rol de servicio de **Escritor** de IAM: `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>Rol de servicio de **Lector** de IAM: `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>Especifique los [grupos de API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) de Kubernetes con los que desea que interactúen los usuarios, como por ejemplo `"apps"`, `"batch"` o `"extensions"`. Para acceder al grupo de API principal en la vía de acceso de REST `api/v1`, deje el grupo en blanco: `[""]`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>Especifique los [tipos de recursos ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) de Kubernetes a los que desea otorgar acceso, como por ejemplo `"daemonsets"`, `"deployments"`, `"events"` o `"ingresses"`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>Especifique los tipos de [acciones ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubectl.docs.kubernetes.io/) que desea que los usuarios puedan realizar, como `"get"`, `"list"`, `"describe"`, `"create"` o `"delete"`.</td>
+        </tr>
+      </tbody>
+    </table>
+2.  Cree el rol de clúster en el clúster. Los usuarios que tengan un enlace de rol con el rol de clúster de `admin` ahora disponen de permisos adicionales del rol de clúster `view-pod-metrics`.
+    ```
+    kubectl apply -f <cluster_role_file.yaml>
+    ```
+    {: pre}
+3.  Siga a los usuarios que tienen el rol de clúster `admin`. Solicite que [renueven su configuración de clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) y pruebe una acción, como por ejemplo, `kubectl top pods`.
+
+
 <br />
 
 
@@ -981,10 +1061,11 @@ Ahora que ha creado y enlazado un rol de RBAC o un rol de clúster de Kubernetes
 Cuando asigna el rol de infraestructura **Superusuario** al administrador que establece la clave de API o cuyas credenciales de infraestructura están establecidas, otros usuarios de la cuenta comparten la clave de API o las credenciales para realizar acciones de la infraestructura. Luego puede controlar las acciones de la infraestructura que pueden llevar a cabo los usuarios asignando el [rol de plataforma {{site.data.keyword.Bluemix_notm}} IAM](#platform) adecuado. No es necesario que edite los permisos de infraestructura de IBM Cloud (SoftLayer) del usuario.
 {: shortdesc}
 
-Por razones de conformidad, seguridad o facturación, es posible que no desee otorgar el rol de **Superusuario** de la infraestructura al usuario que establece la clave de API o cuyas credenciales se han establecido con el mandato `ibmcloud ks credential-set`. Sin embargo, si este usuario no tiene el rol de **Superusuario**, las acciones relacionadas con la infraestructura, como la creación de un clúster o la recarga de un nodo trabajador, pueden fallar. En lugar de utilizar roles de plataforma {{site.data.keyword.Bluemix_notm}} IAM para controlar el acceso de los usuarios a la infraestructura, debe establecer permisos específicos de la infraestructura de IBM Cloud (SoftLayer) para los usuarios.
+Por razones de conformidad, seguridad o facturación, es posible que no desee otorgar el rol de **Superusuario** de la infraestructura al usuario que establece la clave de API o cuyas credenciales se han establecido con el mandato `ibmcloud ks credential-set`. Sin embargo, si este usuario no tiene el rol de **Superusuario**, las acciones relacionadas con la infraestructura, como la creación de un clúster o la recarga de un nodo trabajador, pueden fallar. En lugar de utilizar roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM para controlar el acceso de los usuarios a la infraestructura, debe establecer permisos específicos de la infraestructura de IBM Cloud (SoftLayer) para los usuarios.
 
-Si tiene clústeres multizona, el propietario de la cuenta de infraestructura de IBM Cloud (SoftLayer) debe activar la expansión de VLAN de modo que los nodos de distintas zonas se puedan comunicar dentro del clúster. El propietario de la cuenta también puede asignar a un usuario al permiso **Red > Gestionar expansión de VLAN de red** para que el usuario pueda habilitar la expansión de VLAN. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Por ejemplo, si la cuenta no está habilitada para VRF, el propietario de la cuenta de infraestructura de IBM Cloud (SoftLayer) debe activar la distribución de VLAN. El propietario de la cuenta también puede asignar a un usuario al permiso **Red > Gestionar distribución de VLAN de red** para que el usuario pueda habilitar la distribución de VLAN. Para obtener más información, consulte [Distribución de VLAN para la comunicación entre VLAN](/docs/containers?topic=containers-subnets#basics_segmentation).
+
+<p class="tip">¿Ya ha establecido las credenciales de la infraestructura mediante el mandato `ibmcloud ks credential-set`? Puede comprobar si en las credenciales faltan permisos de infraestructura recomendados o necesarios mediante la ejecución del mandato [`ibmcloud ks infr-permissions-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get). En la salida, si falta alguno de los permisos recomendados o necesarios, puede seguir los pasos de esta sección para asignar el acceso necesario.</p>
 
 Antes de empezar, asegúrese de que es el propietario de la cuenta o que tiene el rol de **Superusuario** y todo el acceso de dispositivo. No se puede otorgar un acceso de usuario que no tiene.
 
@@ -1005,11 +1086,18 @@ Antes de empezar, asegúrese de que es el propietario de la cuenta o que tiene e
 
 6.  En el separador **Dispositivo**, seleccione los dispositivos a los que desea otorgar acceso.
 
-    * En el grupo **Seleccionar tipo**, puede otorgar acceso a todos los servidores nativos, dedicados y virtuales para que los usuarios puedan trabajar con todos los [tipos de máquinas correspondientes a nodos trabajadores](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).
+    * En el grupo **Seleccionar tipo**, puede otorgar acceso a todos los servidores nativos, dedicados y virtuales para que los usuarios puedan trabajar con todos los [tipos de máquinas correspondientes a nodos trabajadores](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
     * En el grupo **Habilitar acceso futuro**, puede otorgar al usuario acceso a todos los futuros servidores nativos, dedicados y virtuales.
     * En la tabla de dispositivos, asegúrese de que se han seleccionado los dispositivos adecuados.
 
 7. Para guardar los cambios, pulse **Establecer**.
+
+8. **Importante**: si está asignando permisos para que un usuario pueda gestionar clústeres y nodos trabajadores, debe asignar al usuario acceso para trabajar con casos de soporte.
+  1. Pulse el separador **Políticas de acceso** y, a continuación, pulse **Asignar acceso**.
+  2. Pulse la tarjeta **Asignar acceso a servicios de gestión de cuentas**.
+  3. Seleccione **Centro de soporte**.
+  4. Para permitir que el usuario pueda ver, añadir y editar casos de soporte, seleccione **Administrador**.
+  5. Pulse **Asignar**.
 
 ¿Degradación de permisos? La acción puede tardar unos minutos en completarse.
 {: tip}
@@ -1040,7 +1128,7 @@ Antes de eliminar los permisos de acceso específicos de un usuario o eliminar e
         {: pre}
     * Si ha establecido las [credenciales de infraestructura para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer)](#credentials):
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1051,12 +1139,12 @@ Antes de eliminar los permisos de acceso específicos de un usuario o eliminar e
 
     * Para restablecer la clave de API:
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}
     * Para restablecer las credenciales de infraestructura:
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key>
+        ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
         ```
         {: pre}
 
@@ -1093,7 +1181,7 @@ Antes de que el usuario se vaya, el propietario de la cuenta de {{site.data.keyw
 3. Elimine el usuario de la cuenta de {{site.data.keyword.Bluemix_notm}}.
     1. En la barra de menús, seleccione **Gestionar > Acceso (IAM)**. Luego pulse la página **Usuarios**.
     2. Pulse el nombre del usuario.
-    3. En la entrada de la tabla correspondiente al usuario, pulse el **menú Acción** ![icono del menú Acción](../icons/action-menu-icon.svg "icono del menú Acción") **> Eliminar usuario**. Al eliminar un usuario, los roles de plataforma {{site.data.keyword.Bluemix_notm}} IAM asignados al usuario, así como los roles de Cloud Foundry y los roles de infraestructura de IBM Cloud (SoftLayer) se eliminarán automáticamente.
+    3. En la entrada de la tabla correspondiente al usuario, pulse el **menú Acción** ![icono del menú Acción](../icons/action-menu-icon.svg "icono del menú Acción") **> Eliminar usuario**. Al eliminar un usuario, los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM asignados al usuario, así como los roles de Cloud Foundry y los roles de infraestructura de IBM Cloud (SoftLayer) se eliminarán automáticamente.
 
 4.  Cuando se eliminan permisos de plataforma {{site.data.keyword.Bluemix_notm}} IAM, los permisos del usuario también se eliminan automáticamente de los roles RBAC predefinidos asociados. No obstante, si ha creado roles RBAC personalizados o roles de clúster, [elimine el usuario de dichos enlaces de rol RBAC o enlaces de rol de clúster](#remove_custom_rbac).<p class="note">El proceso de eliminación de permisos de {{site.data.keyword.Bluemix_notm}} IAM es asíncrono y puede tardar un rato en completarse.</p>
 

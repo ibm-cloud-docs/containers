@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,661 +21,226 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Planificación de la configuración del clúster y del nodo trabajador
+# Planificación de la configuración de la red del clúster
 {: #plan_clusters}
-Diseñe su clúster estándar de modo que obtenga la máxima disponibilidad y capacidad de su app con {{site.data.keyword.containerlong}}.
+
+Diseñe una configuración de red para el clúster de {{site.data.keyword.containerlong}} que satisfaga las necesidades de las cargas de trabajo y del entorno.
 {: shortdesc}
 
-## Clústeres de alta disponibilidad
-{: #ha_clusters}
+En un clúster de {{site.data.keyword.containerlong_notm}}, las apps contenerizadas se alojan en hosts de cálculo que se denominan nodos trabajadores. Los nodos trabajadores están gestionados por el maestro de Kubernetes. La configuración de la comunicación entre los nodos trabajadores y el nodo maestro de Kubernetes, otros servicios, Internet u otras redes privadas depende de cómo se configure la red de la infraestructura de IBM Cloud (SoftLayer).
 
-Si distribuye sus apps entre varios nodos trabajadores, zonas y clústeres, es menos probable que los usuarios experimenten un tiempo de inactividad del sistema. Características incorporadas como, por ejemplo, el aislamiento y el equilibrio de carga, incrementan la resiliencia con relación a posibles anomalías con hosts, redes o apps.
+¿Es la primera vez que crea un clúster? Pruebe primero nuestra [guía de aprendizaje](/docs/containers?topic=containers-cs_cluster_tutorial) y vuelva aquí cuando esté preparado para planificar clústeres listos para la producción.
+{: tip}
+
+Para planificar la configuración de la red del clúster, primero debe [entender los conceptos básicos sobre la red del clúster](#plan_basics). A continuación, puede consultar tres potenciales configuraciones de red de clúster que se ajustan a distintos entornos, que incluyen la [ejecución de cargas de trabajo de app conectadas a Internet](#internet-facing), la [ampliación de un centro de datos local con acceso público limitado](#limited-public) y la [ampliación de un centro de datos local solo en la red privada](#private_clusters).
+
+## Visión general de los conceptos básicos de red de clúster
+{: #plan_basics}
+
+Cuando cree el clúster, debe elegir una configuración de red de modo que ciertos componentes del clúster se puedan comunicar entre sí y con redes o servicios externos al clúster.
 {: shortdesc}
 
-Revise estas configuraciones potenciales de clústeres que están ordenadas por grados de disponibilidad en orden ascendente.
+* [Comunicación entre nodo trabajador y nodo trabajador](#worker-worker): todos los nodos trabajadores deben poder comunicarse entre sí en la red privada. En muchos casos, se debe permitir la comunicación entre varias VLAN privadas para permitir que los trabajadores de distintas VLAN y en diferentes zonas se conecten entre sí.
+* [Comunicación entre nodo trabajador y maestro y entre usuario y maestro](#workeruser-master): los nodos trabajadores y los usuarios autorizados del clúster se pueden comunicar con el nodo maestro de Kubernetes de forma segura sobre la red pública con TLS o sobre la red privada a través de puntos finales privados de servicio.
+* [Comunicación entre nodo trabajador y otros servicios de {{site.data.keyword.Bluemix_notm}} o redes locales](#worker-services-onprem): permita que los nodos trabajadores se comuniquen de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.registrylong}}, y con una red local.
+* [Comunicación externa con apps que se ejecutan en nodos trabajadores](#external-workers): permita solicitudes públicas o privadas en el clúster, así como solicitudes fuera del clúster con un punto final público.
 
-![Alta disponibilidad para clústeres](images/cs_cluster_ha_roadmap_multizone.png)
+### Comunicación entre nodo trabajador y nodo trabajador
+{: #worker-worker}
 
-1. Un [clúster de una sola zona](#single_zone) con varios nodos trabajadores en una agrupación de nodos trabajadores.
-2. Un [clúster multizona](#multizone) que abarca varios nodos trabajadores en varias zonas dentro de una región.
-3. [Varios clústeres](#multiple_clusters) configurados entre zonas o regiones conectadas mediante un equilibrador de carga global.
-
-## Clúster de una sola zona
-{: #single_zone}
-
-Para mejorar la disponibilidad de la app y permitir la migración tras error en el caso de que un nodo trabajador no esté disponible en el clúster, añada nodos trabajadores adicionales al clúster de una sola zona.
+Cuando se crea un clúster, los nodos trabajadores del clúster se conectan automáticamente a una VLAN privada y se pueden conectar opcionalmente a una VLAN pública. Una VLAN configura un grupo de nodos trabajadores y pods como si estuvieran conectadas a la misma conexión física y ofrece un canal para la conectividad entre los nodos trabajadores.
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="Alta disponibilidad para clústeres en una sola zona" width="230" style="width:230px; border-style: none"/>
+**Conexiones de VLAN para los nodos trabajadores**</br> Todos los nodos trabajadores deben estar conectados a una VLAN privada para que cada nodo trabajador pueda enviar y recibir información a otros nodos trabajadores. Cuando se crea un clúster con nodos trabajadores que también están conectados a una VLAN pública, los nodos trabajadores se pueden comunicar con el nodo maestro de Kubernetes automáticamente sobre la VLAN pública y sobre la VLAN privada si habilita el punto final de servicio privado. La VLAN pública también proporciona conectividad de red pública para que pueda exponer las apps del clúster en Internet. Sin embargo, si necesita proteger sus apps de la interfaz pública, hay varias opciones disponibles para proteger el clúster, como el uso de políticas de red de Calico o el aislamiento de la carga de trabajo de la red externa a los nodos trabajadores de extremo.
+* Clústeres gratuitos: en los clústeres gratuitos, los nodos trabajadores del clúster se conectan de forma predeterminada a una VLAN privada y VLAN pública propiedad de IBM. Puesto que IBM controla las VLAN, las subredes y las direcciones IP, no puede crear clústeres multizona ni añadir subredes a un clúster, y solo puede utilizar servicios NodePort para exponer la app.</dd>
+* Clústeres estándares: en los clústeres estándares, la primera vez que crea un clúster en una zona, se suministra automáticamente una VLAN pública y una VLAN privada en dicha zona en su cuenta de infraestructura de IBM Cloud (SoftLayer). Si especifica que los nodos trabajadores deben estar conectados únicamente a una VLAN privada, se suministrará automáticamente una VLAN privada en dicha zona. Para los demás clústeres que cree en dicha zona, puede especificar el par de VLAN que desee utilizar. Puede reutilizar las mismas VLAN pública y privada que se han creado porque varios clústeres pueden compartir las VLAN.
 
-De forma predeterminada, un clúster de una sola zona se configura con una agrupación de nodos trabajadores denominada `default`. La agrupación de nodos trabajadores agrupa los nodos trabajadores con la misma configuración, como por ejemplo el tipo de máquina, que ha definido durante la creación del clúster. Puede añadir más nodos trabajadores a su clúster [cambiando el tamaño de una agrupación de nodos trabajadores existente](/docs/containers?topic=containers-clusters#resize_pool) o [añadiendo una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-clusters#add_pool).
+Para obtener más información sobre las VLAN, las subredes y las direcciones IP, consulte [Visión general de la red en {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
 
-Cuando se añaden nodos trabajadores, las instancias de la app se pueden distribuir entre varios nodos trabajadores. Si un nodo trabajador queda inactivo, las instancias de la app de los nodos trabajadores disponibles continúan ejecutándose. Kubernetes vuelve a planificar automáticamente los pods de los nodos trabajadores no disponibles para garantizar el rendimiento y la capacidad de la app. Para asegurarse de que los pods están uniformemente distribuidos entre los nodos trabajadores, implemente la [afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
+**Comunicación de nodos trabajadores a través de subredes y VLAN**</br> En varias situaciones, se debe permitir la comunicación de los componentes del clúster entre varias VLAN privadas. Por ejemplo, si desea crear un clúster multizona, si tiene varias VLAN para un clúster o si tiene varias subredes en la misma VLAN, los nodos trabajadores de distintas subredes de la misma VLAN o de distintas VLAN no se pueden comunicar automáticamente entre sí. Debe habilitar VRF (Virtual Routing and Forwarding) o la distribución de VLAN para su cuenta de infraestructura de IBM Cloud (SoftLayer).
 
-**¿Puedo convertir un clúster de una sola zona en un clúster multizona?**</br>
-Si el clúster se encuentra en una de las [ubicaciones metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+* [Virtual Routing and Forwarding (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud): VRF permite que todas las VLAN y subredes privadas de la cuenta de la infraestructura se comuniquen entre sí. Además, se necesita VRF para permitir que los nodos trabajadores y el nodo maestro se comuniquen sobre el punto final de servicio privado y se comuniquen con otras instancias de {{site.data.keyword.Bluemix_notm}} que dan soporte a puntos finales de servicio privados. Para habilitar VRF, ejecute `ibmcloud account update --service-endpoint-enable true`. La salida de este mandato le solicita que abra un caso de soporte para habilitar la cuenta para que utilice VRF y puntos finales de servicio. VRF elimina la opción de distribución de VLAN para la cuenta, ya que todas las VLAN se pueden comunicar.</br></br>
+Cuando VRF está habilitado, cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.Bluemix_notm}} se puede comunicar con los nodos trabajadores del clúster. Puede aislar el clúster de otros sistemas de la red privada aplicando [Políticas de red privada de Calico](/docs/containers?topic=containers-network_policies#isolate_workers).</dd>
+* [Distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning): si no puede o no desea habilitar VRF, por ejemplo si no necesita que se pueda acceder al nodo maestro en la red privada o si utiliza un dispositivo de pasarela para acceder al nodo maestro a través de la VLAN pública, habilite la distribución de VLAN. Por ejemplo, si tiene un dispositivo de pasarela existente y luego añade un clúster, las nuevas subredes portátiles que se soliciten para el clúster no se configuran en el dispositivo de pasarela, pero la distribución de VLAN permite el direccionamiento entre las subredes. Para habilitar la distribución de VLAN, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. No puede habilitar el punto final de servicio privado si elige habilitar la distribución de VLAN en lugar de VRF.
 
+</br>
 
-**¿Tengo que utilizar clústeres multizona?**</br>
-No. Puede crear tantos clústeres de una sola zona como desee. De hecho, quizás prefiera clústeres de una sola zona para facilitar la gestión o si el clúster debe residir en una [ciudad de una sola zona](/docs/containers?topic=containers-regions-and-zones#zones) específica.
+### Comunicación entre nodo trabajador y maestro y entre usuario y maestro
+{: #workeruser-master}
 
-**¿Puedo tener un maestro de alta disponibilidad en una sola zona?**</br>
-Sí. En una única zona, el maestro está altamente disponible e incluye réplicas en hosts físicos independientes para que el servidor de API de Kubernetes, etcd, el planificador y el gestor de controladores puedan protegerse frente a una interrupción como, por ejemplo, la actualización del maestro. Para protegerse frente a un error zonal, puede:
-* [Crear un clúster en una zona con capacidad multizona](/docs/containers?topic=containers-plan_clusters#multizone), donde el maestro se disperse en zonas.
-* [Crear varios clústeres](#multiple_clusters) y conectarlos con un equilibrador de carga global.
-
-## Clúster multizona
-{: #multizone}
-
-Con {{site.data.keyword.containerlong_notm}}, puede crear clústeres multizona. Si distribuye sus apps entre varios nodos trabajadores y zonas mediante una agrupación de nodos trabajadores, es menos probable que los usuarios experimenten un tiempo de inactividad del sistema. Características incorporadas como, por ejemplo, el equilibrio de carga, incrementan la resiliencia frente a posibles anomalías de zona con hosts, redes o apps. Si caen los recursos de una zona, las cargas de trabajo del clúster siguen funcionando en las otras zonas.
+Se debe configurar un canal de comunicación para que los nodos trabajadores puedan establecer una conexión con el nodo maestro de Kubernetes. Puede permitir que los nodos trabajadores y el nodo maestro de Kubernetes se comuniquen habilitando solo el punto final de servicio público, puntos finales de servicio público y privado o solo el punto final de servicio privado.
 {: shortdesc}
 
-**¿Qué es una agrupación de nodos trabajadores?**</br>
-Una agrupación de nodos trabajadores es una colección de nodos trabajadores que comparten alguna característica, como por ejemplo tipo de máquina, CPU y memoria. Cuando se crea un clúster, se crea automáticamente una agrupación de nodos trabajadores predeterminada. Para propagar los nodos trabajadores de la agrupación entre zonas, añadir nodos trabajadores a la agrupación o actualizar nodos trabajadores, puede utilizar los nuevos mandatos `ibmcloud ks worker-pool`.
+Para proteger la comunicación sobre los puntos finales de servicio público y privado, {{site.data.keyword.containerlong_notm}} configura automáticamente una conexión OpenVPN entre el maestro de Kubernetes y el nodo trabajador cuando se crea el clúster. Los nodos trabajadores se comunican de forma segura con el nodo maestro a través de certificados TLS y el maestro se comunica con los nodos trabajadores a través de la conexión OpenVPN.
 
-**¿Puedo seguir utilizando nodos trabajadores autónomos?**</br>
-La configuración de clúster anterior de nodos trabajadores estándares recibe soporte, pero ha quedado en desuso. Asegúrese de [añadir una agrupación de nodos trabajadores al clúster](/docs/containers?topic=containers-clusters#add_pool) y, a continuación,
-[utilizar agrupaciones de trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool) para organizar los nodos trabajadores en lugar de los nodos trabajadores autónomos.
+**Solo punto final de servicio público**</br> Si no desea o no puede habilitar VRF para su cuenta, los nodos trabajadores se pueden conectar automáticamente al nodo maestro de Kubernetes sobre la VLAN pública a través del punto final de servicio público.
+* La comunicación entre los nodos trabajadores y el maestro
+se establece de forma segura sobre la red pública a través del punto final de servicio público.
+* Los usuarios autorizados del clúster pueden acceder de forma pública al nodo maestro a través del punto final de servicio público. Los usuarios del clúster pueden acceder de forma segura al nodo maestro de Kubernetes sobre internet, por ejemplo para ejecutar mandatos `kubectl`.
 
-**¿Puedo convertir un clúster de una sola zona en un clúster multizona?**</br>
-Si el clúster se encuentra en una de las [ubicaciones metropolitanas multizona soportadas](/docs/containers?topic=containers-regions-and-zones#zones), sí. Consulte [Actualización de nodos trabajadores autónomos a agrupaciones de nodos trabajadores](/docs/containers?topic=containers-update#standalone_to_workerpool).
+**Puntos finales de servicio público y privado**</br> Para que los usuarios del clúster puedan acceder al nodo maestro de forma pública o privada, puede habilitar los puntos finales de servicio público y privado. Se necesita VRF en la cuenta de {{site.data.keyword.Bluemix_notm}} y debe habilitar la cuenta para que utilice puntos finales de servicio. Para habilitar VRF y los puntos finales de servicio, ejecute `ibmcloud account update --service-endpoint-enable true`.
+* Si los nodos trabajadores están conectados a las VLAN pública y privada, la comunicación entre los nodos trabajadores y el nodo maestro se establece tanto sobre la red privada a través del punto final de servicio privado como sobre la red pública a través del punto final de servicio público. Direccionando la mitad del tráfico de trabajador a maestro por el punto final público y la otra mitad por el punto final privado, la comunicación de maestro a trabajador está protegida de posibles interrupciones en la red pública o privada. Si los nodos trabajadores solo están conectados a las VLAN privadas, la comunicación entre los nodos trabajadores y el nodo maestro se establece sobre la red privada solo a través del punto final de servicio privado.
+* Los usuarios autorizados del clúster pueden acceder de forma pública al nodo maestro a través del punto final de servicio público. Se puede acceder de forma privada al nodo maestro a través del punto final de servicio privado si los usuarios autorizados del clúster están en la red privada de {{site.data.keyword.Bluemix_notm}} o están conectados a la red privada a través de una conexión VPN o {{site.data.keyword.Bluemix_notm}} Direct Link. Tenga en cuenta que debe [exponer el punto final maestro a través de un equilibrador de carga de red privado](/docs/containers?topic=containers-clusters#access_on_prem) para que los usuarios puedan acceder al nodo maestro a través de una VPN o de una conexión {{site.data.keyword.Bluemix_notm}} Direct Link.
 
+**Solo punto final de servicio privado**</br> Para solo se pueda acceder al nodo maestro de forma privada, puede habilitar el punto final de servicio privado. Se necesita VRF en la cuenta de {{site.data.keyword.Bluemix_notm}} y debe habilitar la cuenta para que utilice puntos finales de servicio. Para habilitar VRF y los puntos finales de servicio, ejecute `ibmcloud account update --service-endpoint-enable true`. Tenga en cuenta que el uso únicamente de un punto final de servicio privado no incurre en cargos facturados ni de ancho de banda según medición.
+* La comunicación entre los nodos trabajadores y el nodo maestro se establece sobre la red privada a través del punto final de servicio privado.
+* Se accede de forma privada al nodo maestro si los usuarios autorizados del clúster están en la red privada de {{site.data.keyword.Bluemix_notm}} o están conectados a la red privada a través de una conexión VPN o DirectLink. Tenga en cuenta que debe [exponer el punto final maestro a través de un equilibrador de carga privado](/docs/containers?topic=containers-clusters#access_on_prem) para que los usuarios puedan acceder al nodo maestro a través de una conexión VPN o DirectLink.
 
-### Más información sobre la configuración del clúster multizona
-{: #mz_setup}
+</br>
 
-<img src="images/cs_cluster_multizone-ha.png" alt="Alta disponibilidad para clústeres multizona" width="500" style="width:500px; border-style: none"/>
+### Comunicación entre nodos trabajadores y otros servicios de {{site.data.keyword.Bluemix_notm}} o redes locales
+{: #worker-services-onprem}
 
-Puede añadir zonas adicionales al clúster para replicar los nodos trabajadores de las agrupaciones de nodos trabajadores entre varias zonas dentro de una región. Los clústeres multizona se han diseñado para planificar uniformemente los pods entre nodos trabajadores y zonas a fin de garantizar su disponibilidad y la recuperación de errores. Si los nodos trabajadores no se distribuyen uniformemente entre las zonas o si la capacidad es insuficiente en una de las zonas, es posible que el planificador de Kubernetes no planifique todos los pods solicitados. Como resultado, los pods podrían pasar a estar en estado **Pendiente** hasta que haya suficiente capacidad disponible. Si desea cambiar el comportamiento predeterminado para que el planificador de Kubernetes distribuya los pods entre zonas con una mejor distribución, utilice la [política de afinidad de pod](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
-
-**¿Por qué necesito nodos trabajadores en 3 zonas?** </br>
-La distribución de la carga de trabajo entre 3 zonas garantiza una alta disponibilidad para la app en el caso de que una o dos zonas no estén disponibles, pero también hace que la configuración del clúster sea más rentable. ¿Por qué?, se preguntará. Este es un ejemplo.
-
-Supongamos que necesita un nodo trabajador con 6 núcleos para manejar la carga de trabajo de su app. Para aumentar la disponibilidad del clúster, tiene las siguientes opciones:
-
-- **Duplicar los recursos en otra zona:** esta opción le deja con 2 nodos trabajadores, cada uno con 6 núcleos en cada zona, lo que suma un total de 12 núcleos. </br>
-- **Distribuir los recursos en 3 zonas:** con esta opción, despliega 3 núcleos por zona, lo que le deja con una capacidad total de 9 núcleos. Para manejar la carga de trabajo, siempre debe haber dos zonas activas. Si una zona no está disponible, las otras dos zonas pueden gestionar la carga de trabajo. Si dos zonas no están disponibles, los 3 núcleos restantes están activos para gestionar la carga de trabajo. El hecho de desplegar 3 núcleos por zona significa máquinas más pequeñas y, por lo tanto, menor coste.</br>
-
-**¿Cómo se configura mi nodo maestro de Kubernetes?** </br>
-Cuando se crea un clúster en una [ubicación metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones), se despliega automáticamente un maestro de Kubernetes de alta disponibilidad y se distribuyen tres réplicas por las zonas de la ubicación metropolitana. Por ejemplo, si el clúster está en las zonas `dal10`, `dal12` o `dal13`, las réplicas del nodo maestro de Kubernetes se distribuyen en cada zona de la ciudad metropolitana multizona de Dallas.
-
-**¿Qué sucede si el nodo maestro de Kubernetes deja de estar disponible?** </br>
-El [nodo maestro de Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) es el componente principal que mantiene el clúster en funcionamiento. El nodo maestro almacena los recursos de clúster y sus configuraciones en la base de datos etcd, que sirve como único punto fiable para el clúster. El servidor de API de Kubernetes es el punto de entrada principal para todas las solicitudes de gestión del clúster procedentes de los nodos trabajadores destinadas al nodo maestro, o cuando desea interactuar con los recursos de clúster.<br><br>Si se produce un fallo del nodo maestro, las cargas de trabajo siguen ejecutándose en los nodos trabajadores, pero no se pueden utilizar mandatos `kubectl` para trabajar con los recursos del clúster o ver el estado del clúster hasta que el servidor de API de Kubernetes del nodo maestro vuelve a estar activo. Si un pod cae durante la interrupción del nodo maestro, el pod no se puede volver a planificar hasta que el nodo trabajador pueda volver a acceder al servidor de API de Kubernetes.<br><br>Durante una interrupción del nodo maestro, todavía puede ejecutar mandatos `ibmcloud ks` en la API de {{site.data.keyword.containerlong_notm}} para trabajar con los recursos de la infraestructura, como nodos trabajadores o VLAN. Si cambia la configuración actual del clúster añadiendo o eliminando nodos trabajadores en el clúster, los cambios no se producen hasta que el nodo maestro vuelve a estar activo.
-
-No reinicie o rearranque un nodo trabajador durante una interrupción del nodo maestro. Esta acción elimina los pods del nodo trabajador. Puesto que el servidor de API de Kubernetes no está disponible, los pods no se pueden volver a programar en otros nodos trabajadores del clúster.
-{: important}
-
-
-Para proteger el clúster frente a un error del nodo maestro de Kubernetes o en regiones en las que no hay clústeres multizona disponibles, puede [configurar varios clústeres y conectarlos con un equilibrador de carga global](#multiple_clusters).
-
-**¿Tengo que hacer algo para que el nodo maestro se pueda comunicar con los trabajadores entre zonas?**</br>
-Sí. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-
-**¿Cómo puedo permitir que mis usuarios accedan a mi app desde Internet pública?**</br>
-Puede exponer sus apps utilizando un equilibrador de carga de aplicación (ALB) de Ingress o un servicio equilibrador de carga.
-
-- **Equilibrador de carga de aplicación (ALB) de Ingress** de forma predeterminada, los ALB públicos se crean y se habilitan automáticamente en cada zona del clúster. También se crea y se despliega automáticamente un equilibrador de carga multizona (MZLB) de Cloudflare para el clúster, de forma que exista 1 MZLB para cada región. El MZLB coloca las direcciones IP de los ALB detrás del mismo nombre de host y habilita las comprobaciones de estado en estas direcciones IP para determinar si están disponibles o no. Por ejemplo, si tiene nodos trabajadores en 3 zonas en la región EE. UU. este, el nombre de host `yourcluster.us-east.containers.appdomain.cloud` tiene 3 direcciones IP de ALB. El estado de MZLB comprueba la IP de ALB pública en cada zona de una región y mantiene actualizados los resultados de la búsqueda de DNS en función de estas comprobaciones de estado. Para obtener más información, consulte [Componentes y arquitectura de Ingress](/docs/containers?topic=containers-ingress#planning).
-
-- **Servicios de equilibrador de carga:** los servicios del equilibrador de carga se configuran en una sola zona. Las solicitudes de entrada a la app se direccionan desde esa zona a todas las instancias de la app de otras zonas. Si esta zona deja de estar disponible, es posible que no se pueda acceder a la app desde Internet. Puede configurar servicios de equilibrador de carga adicionales en otras zonas como ayuda frente a un error de una sola zona. Para obtener más información, consulte [servicios del equilibrador de carga](/docs/containers?topic=containers-loadbalancer#multi_zone_config) de alta disponibilidad.
-
-**¿Puedo configurar el almacenamiento persistente para mi clúster multizona?**</br>
-Para el almacenamiento persistente de alta disponibilidad, utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). También puede probar una solución de almacenamiento definido por software (SDS), como por ejemplo [Portworx](/docs/containers?topic=containers-portworx#portworx), que utiliza [máquinas SDS](#sds). Para obtener más información, consulte [Comparación entre opciones de almacenamiento persistente para clústeres multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
-El archivo NFS y el almacenamiento en bloque no se puede compartir entre zonas. Los volúmenes persistentes solo se pueden utilizar en la zona en la que se encuentra el dispositivo de almacenamiento real. Si tiene un archivo NFS o un almacenamiento en bloque existente en el clúster que desea seguir utilizando, debe aplicar las etiquetas de región y zona a los volúmenes persistentes existentes. Estas etiquetas ayudan a kube-scheduler a determinar dónde se debe planificar una app que utiliza un volumen persistente. Ejecute el mandato siguiente y sustituya `<mycluster>` por el nombre del clúster.
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <mycluster>
-```
-{: pre}
-
-**He creado mi clúster multizona. ¿Por qué sigue habiendo una sola zona? ¿Cómo se añaden zonas a mi clúster?**</br>
-Si [crea el clúster multizona con la CLI](/docs/containers?topic=containers-clusters#clusters_cli), el clúster se crea, pero debe añadir zonas a la agrupación de nodos trabajadores para completar el proceso. Para abarcar varias zonas, el clúster debe estar en una [ubicación metropolitana multizona](/docs/containers?topic=containers-regions-and-zones#zones). Para añadir una zona al clúster y distribuir los nodos trabajadores entre las zonas, consulte [Adición de una zona a un clúster](/docs/containers?topic=containers-clusters#add_zone).
-
-### ¿Cómo va a cambiar la forma en la que gestiono actualmente mis clústeres?
-{: #mz_new_ways}
-
-Con la introducción de las agrupaciones de nodos trabajadores, puede utilizar un nuevo conjunto de API y mandatos para gestionar el clúster. Puede ver estos nuevos mandatos en la [página de documentación de la CLI](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) o en el terminal ejecutando `ibmcloud ks help`.
+Permita que los nodos trabajadores se comuniquen de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.registrylong}}, y con una red local.
 {: shortdesc}
 
-En la tabla siguiente se comparan los métodos antiguos y los nuevos para unas cuantas acciones comunes de gestión de clústeres.
-<table summary="En la tabla se muestra la descripción de la nueva forma de ejecutar mandatos multizona. Las filas se leen de izquierda a derecha; la descripción está en la columna uno, el método antiguo en la dos y el nuevo método multizona en la tres.">
-<caption>Nuevos métodos para mandatos de la agrupación de nodos trabajadores multizona.</caption>
-  <thead>
-  <th>Descripción</th>
-  <th>Nodos trabajadores autónomos antiguos</th>
-  <th>Nuevas agrupaciones de nodos trabajadores multizona</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>Añadir nodos trabajadores al clúster.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> para añadir nodos trabajadores autónomos.</p></td>
-    <td><ul><li>Para añadir tipos de máquina distintos de la agrupación existente, cree una nueva agrupación de nodos trabajadores: [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
-    <li>Para añadir nodos trabajadores a una agrupación existente, cambie el número de nodos por zona en la agrupación: [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Eliminar nodos trabajadores del clúster.</td>
-    <td><code>ibmcloud ks worker-rm</code>, que aún se puede utilizar para suprimir del clúster un nodo trabajador problemático.</td>
-    <td><ul><li>Si la agrupación de nodos trabajadores no está equilibrada, por ejemplo después de eliminar un nodo trabajador, vuélvala a equilibrar: [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) <code>ibmcloud ks worker-pool-rebalance</code>.</li>
-    <li>Para reducir el número de nodos trabajadores de una agrupación, cambie el número por zona (el valor mínimo es 1): [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Utilizar una nueva VLAN para los nodos trabajadores.</td>
-    <td><p class="deprecated">Añada un nuevo nodo trabajador que utilice la nueva VLAN privada o pública: <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Establecer la agrupación de nodos trabajadores que modo que utilice una VLAN pública o privada distinta de la que se utilizaba anteriormente: [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
-    </tr>
-  </tbody>
-  </table>
+**Comunicación con otros servicios de {{site.data.keyword.Bluemix_notm}} a través de la red privada o pública**</br> Los nodos trabajadores se comunican automáticamente y de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}} que dan soporte a puntos finales de servicio privados, como {{site.data.keyword.registrylong}}, a través de la red privada de infraestructura de IBM Cloud (SoftLayer). Si un servicio de {{site.data.keyword.Bluemix_notm}} no da soporte a puntos finales de servicio privados, los nodos trabajadores deben estar conectados a una VLAN pública para que se puedan comunicar de forma segura con los servicios a través de la red pública.
 
-## Varios clústeres conectados con un equilibrador de carga global
-{: #multiple_clusters}
+Si utiliza políticas de red de Calico para bloquear la red pública en el clúster, es posible que tenga que permitir el acceso a las direcciones IP públicas y privadas de los servicios que desea utilizar en las políticas de Calico. Si utiliza un dispositivo de pasarela, como por ejemplo Virtual Router Appliance (Vyatta), debe [permitir el acceso a las direcciones IP privadas de los servicios que desea utilizar](/docs/containers?topic=containers-firewall#firewall_outbound) en el cortafuegos del dispositivo de pasarela.
+{: note}
 
-Para proteger la app frente a un error del nodo maestro de Kubernetes y para las regiones en las que no están disponibles los clústeres multizona, puede crear varios clústeres en diferentes zonas de una región y conectarlos con un equilibrador de carga global.
+**{{site.data.keyword.BluDirectLink}} para la comunicación a través de la red privada con recursos de centros de datos locales**</br> Para conectar el clúster con el centro de datos local, por ejemplo con {{site.data.keyword.icpfull_notm}}, puede configurar [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Con {{site.data.keyword.Bluemix_notm}} Direct Link, puede crear una conexión directa y privada entre los entornos de red remotos y {{site.data.keyword.containerlong_notm}} sin direccionamiento a través de Internet público.
+
+**Conexión de VPN IPSec de strongSwan para la comunicación a través de la red pública con recursos en centros de datos locales**
+* Nodos trabajadores conectados a VLAN pública y privada: Configure un [servicio VPN IPSec de strongSwan ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.strongswan.org/about.html) directamente en el clúster. El servicio VPN IPSec de strongSwan proporciona un canal de comunicaciones de extremo a extremo seguro sobre Internet que está basado en la suite de protocolos
+Internet Protocol Security (IPSec) estándar del sector. Para configurar una conexión segura entre el clúster y una red local, [configure y despliegue el servicio VPN IPSec strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) directamente en un pod del clúster.
+* Solo nodos trabajadores conectados a una VLAN privada: Configure un punto final de VPN IPSec en un dispositivo de pasarela, como por ejemplo Virtual Router Appliance (Vyatta). A continuación, [configure el servicio VPN IPSec de strongSwan](/docs/containers?topic=containers-vpn#vpn-setup) en el clúster de modo que utilice el punto final de VPN en la pasarela. Si no desea utilizar strongSwan, puede [configurar la conectividad de VPN directamente con VRA](/docs/containers?topic=containers-vpn#vyatta).
+
+</br>
+
+### Comunicación externa a las apps que se ejecutan en nodos trabajadores
+{: #external-workers}
+
+Permita las solicitudes de tráfico público o privado desde el exterior del clúster a las apps que se ejecutan en nodos trabajadores.
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="Alta disponibilidad para varios clústeres" width="700" style="width:700px; border-style: none"/>
+**Tráfico privado a las apps del clúster**</br> Cuando despliega una app en el clúster, es posible que desee que solo puedan acceder a la app los usuarios y servicios que se encuentren en la misma red privada que el clúster. El equilibrio de carga privado es ideal para hacer que la app esté disponible para las solicitudes desde fuera del clúster sin exponer la app al público en general. También puede utilizar el equilibrio de carga privado para probar el acceso, el direccionamiento de solicitudes y otras configuraciones para la app antes de exponer su app al público con los servicios de red públicos. Para permitir solicitudes de tráfico privadas desde fuera del clúster a las apps, puede crear servicios de red privados de Kubernetes, como por ejemplo nodos privados, NLB y ALB de Ingress. Luego puede utilizar políticas pre-DNAT de Calico para bloquear el tráfico destinado a NodePorts públicos de servicios de red privados. Para obtener más información, consulte [Planificación del equilibrio de carga externo privado](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-Para equilibrar la carga de trabajo entre varios clústeres, debe configurar un equilibrador de carga global y añadir las direcciones IP de los equilibradores de carga de aplicación (ALB) o los servicios del equilibrador de carga a su dominio. Al añadir estas direcciones IP, puede direccionar el tráfico de entrada entre los clústeres. Para que el equilibrador de carga global detecte si uno de los clústeres deja de estar disponible, tenga en cuenta la posibilidad de añadir una comprobación de estado basada en ping a cada dirección IP. Cuando se configura esta comprobación, el proveedor de DNS ejecuta ping de forma regular sobre las direcciones IP que ha añadido a su dominio. Si una dirección IP deja de estar disponible, el tráfico ya no se envía a esta dirección IP. Sin embargo, Kubernetes no reinicia automáticamente los pods del clúster no disponible en los nodos trabajadores de los clústeres disponibles. Si desea que Kubernetes reinicie automáticamente los pods en los clústeres disponibles, tenga en cuenta la posibilidad de configurar un [clúster multizona](#multizone).
+**Tráfico público a apps del clúster**</br> Para que se pueda acceder a las apps desde Internet público, puede crear NodePorts públicos, equilibradores de carga de red (NLB) y equilibradores de carga de aplicación (ALB) de Ingress. Los servicios de red públicos se conectan a esta interfaz de red pública proporcionando a su app una dirección IP pública y, opcionalmente, un URL público. Cuando se expone públicamente una app, cualquiera que tenga la dirección IP pública del servicio o el URL que haya establecido para la app puede enviar una solicitud a la app. A continuación, puede utilizar las políticas pre-DNAT de Calico para controlar el tráfico a los servicios de red públicos; por ejemplo, puede colocar en una lista blanca solo determinadas direcciones IP de origen o CIDR y bloquear el resto del tráfico. Para obtener más información, consulte [Planificación del equilibrio de carga externo público](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-**¿Por qué necesito 3 clústeres en 3 zonas?** </br>
-De forma similar a cómo se utilizan [3 zonas en clústeres multizona](#multizone), puede proporcionar más disponibilidad a su app si configura 3 clústeres entre zonas. También puede reducir los costes ya que necesitará máquinas más pequeñas para gestionar la carga de trabajo.
+Para obtener seguridad adicional, aísle las cargas de trabajo de red a los nodos trabajadores de extremo. Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster al permitir el acceso externo a un número inferior de nodos trabajadores conectados a las VLAN públicas y aislar la carga de trabajo en red. Cuando se [etiquetan nodos trabajadores como nodos de extremo](/docs/containers?topic=containers-edge#edge_nodes), los pods de ALB y NLB se despliegan solo en los nodos trabajadores especificados. Para evitar también que se ejecuten otras cargas de trabajo en los nodos de extremo, puede [establecer como antagónicos los nodos de extremo](/docs/containers?topic=containers-edge#edge_workloads). En Kubernetes versión 1.14 y posteriores, puede desplegar los NLB públicos y privados y ALB en los nodos de extremo.
+Por ejemplo, si los nodos trabajadores están conectados únicamente a una VLAN privada, pero tiene que permitir el acceso público a una app en el clúster, puede crear una agrupación de nodos trabajadores de extremo en la que los nodos de extremo se conecten a las VLAN públicas y privadas. Puede desplegar NLB públicos y ALB en estos nodos de extremo para asegurarse de que solo los nodos trabajadores manejen las conexiones públicas.
 
-**¿Qué pasa si deseo configurar varios clústeres entre regiones?** </br>
-Puede configurar varios clústeres en distintas regiones de una geolocalización (como EE. UU. sur y EE. UU. este) o entre geolocalizaciones (como, por ejemplo, EE. UU. sur y UE central). Ambas configuraciones ofrecen el mismo nivel de disponibilidad para la app, pero también añaden complejidad cuando se trata de compartición de datos y réplica de datos. En la mayoría de los casos, resulta suficiente permanecer dentro de la misma geolocalización. Pero, si tiene usuarios en todo el mundo, es posible que sea mejor configurar un clúster donde se encuentren los usuarios, de forma que los usuarios no experimentan tiempos de espera largos cuando envían una solicitud a la app.
+Si los nodos trabajadores están conectados únicamente a una VLAN privada y utiliza un dispositivo de pasarela para establecer comunicación entre los nodos trabajadores y el nodo maestro del clúster, también puede configurar el dispositivo como un cortafuegos público o privado. Para permitir solicitudes de tráfico públicas o privadas desde fuera del clúster a sus apps, puede crear NodePorts públicos o privados, NLB y ALB de Ingress. A continuación, debe [abrir los puertos y las direcciones IP necesarios](/docs/containers?topic=containers-firewall#firewall_inbound) en el cortafuegos del dispositivo de pasarela para permitir el tráfico de entrada a estos servicios a través de la red pública o privada.
+{: note}
 
-**Para configurar un equilibrador de carga global para varios clústeres:**
+<br />
 
-1. [Cree clústeres](/docs/containers?topic=containers-clusters#clusters) en varias zonas o regiones.
-2. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [expansión de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar expansión de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-3. En cada clúster, exponga la app utilizando un [equilibrador de carga de aplicación (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) o un [servicio equilibrador de carga](/docs/containers?topic=containers-loadbalancer).
-4. Para cada clúster, obtenga una lista de las direcciones IP públicas correspondientes a los ALB o a los servicios equilibradores de carga.
-   - Para obtener una lista de la dirección IP de todos los ALB públicos habilitados en el clúster:
-     ```
-     ibmcloud ks albs --cluster <cluster_name_or_id>
-     ```
-     {: pre}
 
-   - Para obtener una lista de las direcciones IP del servicio equilibrador de carga:
-     ```
-     kubectl describe service <myservice>
-     ```
-     {: pre}
+## Caso práctico: Ejecución de cargas de trabajo de una app de cara a Internet en un clúster
+{: #internet-facing}
 
-     La dirección IP de **Load Balancer Ingress** es la dirección IP portátil asignada al servicio equilibrador de carga.
+En este caso práctico, desea ejecutar cargas de trabajo en un clúster que son accesibles para las solicitudes desde Internet de modo que los usuarios finales puedan acceder a sus apps. Desea establecer la opción de aislar el acceso público en el clúster y de controlar las solicitudes públicas que se permiten en el clúster. Además, los nodos trabajadores tienen acceso automático a todos los servicios de {{site.data.keyword.Bluemix_notm}} que desee conectar con el clúster.
+{: shortdesc}
 
-4.  Configure un equilibrador de carga global utilizando {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) o configure su propio equilibrador de carga global.
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="Imagen de arquitectura de un clúster que ejecuta cargas de trabajo de cara a Internet"/> <figcaption>Arquitectura de un clúster que ejecuta cargas de trabajo de cara a Internet</figcaption> </figure>
+</p>
 
-    **Para utilizar un equilibrador de carga global de CIS**:
-    1.  Configure el servicio siguiendo los pasos 1 - 5 del apartado [Iniciación a {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Estos pasos le guían por el proceso de suministro de la instancia de servicio, de adición del dominio de la app, de configuración de los servidores de nombres y de creación de registros de DNS. Cree un registro DNS para cada ALB o dirección IP del equilibrador de carga que haya recopilado. Estos registros DNS correlacionan el dominio de la app con todos los ALB del clúster o los equilibradores de carga y garantizan que las solicitudes destinadas al dominio de la app se reenvían a los clústeres en un ciclo en rueda.
-    2. [Añada comprobaciones de estado](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) para los ALB o equilibradores de carga. Puede utilizar la misma comprobación de estado para los ALB o los equilibradores de carga de todos los clústeres, o bien puede crear comprobaciones de estado específicas que se utilizarán para clústeres específicos.
-    3. [Añada una agrupación de origen](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) para cada clúster añadiendo el ALB o las direcciones IP del equilibrador de carga del clúster. Por ejemplo, si tiene 3 clústeres y cada uno de ellos tiene 2 ALB, cree 3 agrupaciones de origen que tengan 2 direcciones IP de ALB. Añada una comprobación de estado a cada agrupación de origen que cree.
-    4. [Añada un equilibrador de carga global](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
+Para lograr esta configuración, cree un clúster conectando los nodos trabajadores a las VLAN públicas y privadas.
 
-    **Para utilizar su propio equilibrador de carga global**:
-    1. Configure el dominio de modo que direccione el tráfico de entrada a los servicios ALB o de equilibrador de carga añadiendo las direcciones IP de todos los ALB públicos habilitados y de los servicios del equilibrador de carga a su dominio.
-    2. Para cada dirección IP, habilite una comprobación de estado basada en ping para que el proveedor de DNS pueda detectar direcciones IP en mal estado. Si se detecta una dirección IP en mal estado, el tráfico deja de direccionarse a dicha dirección IP.
+Si crea el clúster con VLAN tanto pública como privada, no podrá eliminar posteriormente todas las VLAN públicas de dicho clúster. La eliminación de todas las VLAN públicas de un clúster hace que varios componentes del clúster dejen de funcionar. En su lugar, cree una nueva agrupación de trabajadores que esté conectada únicamente a una VLAN privada.
+{: note}
 
-## Clústeres privados
+Puede optar por permitir la comunicación entre nodo trabajador y nodo maestro y entre usuario y nodo maestro a través de las redes pública y privada o solo a través de la red pública.
+* Puntos finales de servicio públicos y privados: su cuenta debe estar habilitada con VRF y habilitada para utilizar puntos finales de servicio. La comunicación entre nodos trabajadores y nodo maestro se establece tanto sobre la red privada a través del punto final de servicio privado como sobre la red pública a través del punto final de servicio público. Los usuarios autorizados del clúster pueden acceder de forma pública al nodo maestro a través del punto final de servicio público.
+* Solo punto final de servicio público: si no desea o no puede habilitar VRF para su cuenta, los nodos trabajadores y los usuarios autorizados del clúster se pueden conectar automáticamente al nodo maestro de Kubernetes sobre la red pública a través del punto final de servicio público.
+
+Los nodos trabajadores se comunican automáticamente y de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}} que dan soporte a puntos finales de servicio privados a través de la red privada de infraestructura de IBM Cloud (SoftLayer). Si un servicio de {{site.data.keyword.Bluemix_notm}} no da soporte a puntos finales de servicio privados, los nodos trabajadores pueden comunicarse de forma segura con los servicios a través de la red pública. Puede bloquear las interfaces públicas o privadas de los nodos trabajadores mediante políticas de red de Calico para el aislamiento de red pública o de red privada. Es posible que tenga que permitir el acceso a las direcciones IP públicas y privadas de los servicios que desea utilizar en estas políticas de aislamiento de Calico.
+
+Para exponer una app del clúster en Internet, puede crear un servicio equilibrador de carga de red (NLB) público o un servicio equilibrador de carga de aplicación (ALB) de Ingress. Puede mejorar la seguridad del clúster mediante la creación de una agrupación de nodos trabajadores etiquetados como nodos de extremo. Los pods correspondientes a los servicios de red públicos se despliegan en los nodos de extremo de modo que las cargas de trabajo de tráfico externas estén aisladas solo a unos pocos nodos trabajadores del clúster. Puede controlar más el tráfico público a los servicios de red que exponen sus apps mediante la creación de políticas pre-DNAT de Calico, como por ejemplo políticas de lista blanca y de lista negra.
+
+Si los nodos trabajadores necesitan acceder a servicios en redes privadas fuera de su cuenta de {{site.data.keyword.Bluemix_notm}}, puede configurar y desplegar el servicio VPN IPSec de strongSwan en el clúster o aprovechar los servicios {{site.data.keyword.Bluemix_notm}} Direct Link para conectar con estas redes.
+
+¿Está listo para empezar a trabajar con un clúster en este caso práctico? Después de planificar las configuraciones de [alta disponibilidad](/docs/containers?topic=containers-ha_clusters) y de [nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes), consulte el tema sobre [Creación de clústeres](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Caso práctico: Ampliación del centro de datos local a un clúster de la red privada y adición de acceso público limitado
+{: #limited-public}
+
+En este caso práctico, desea ejecutar cargas de trabajo en un clúster que sean accesibles para servicios, bases de datos u otros recursos del centro de datos local. Sin embargo, es posible que tenga que proporcionar un acceso público limitado al clúster y que desee asegurarse de que cualquier acceso público esté controlado y aislado en el clúster. Por ejemplo, es posible que necesite que los nodos trabajadores accedan a un servicio de {{site.data.keyword.Bluemix_notm}} que no dé soporte a puntos finales de servicio privados y al que se deba acceder a través de la red pública. O bien, es posible que tenga que proporcionar un acceso público limitado a una app que se ejecuta en el clúster.
+{: shortdesc}
+
+Para lograr esta configuración de clúster, puede crear un cortafuegos [utilizando nodos de extremo y políticas de red Calico](#calico-pc) o [utilizando un dispositivo de pasarela](#vyatta-gateway).
+
+### Utilización de nodos de extremo y de políticas de red de Calico
+{: #calico-pc}
+
+Permita la conectividad pública limitada a su clúster mediante el uso de nodos de extremo como una pasarela pública y políticas de red de Calico como un cortafuegos público.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="Imagen de arquitectura de un clúster que utiliza nodos de extremo y políticas de red de Calico para un acceso público seguro"/>
+ <figcaption>Arquitectura de un clúster que utiliza nodos de extremo y políticas de red de Calico para un acceso público seguro</figcaption> </figure>
+</p>
+
+Con esta configuración, crea un clúster conectando los nodos trabajadores solo a una VLAN privada. Su cuenta debe estar habilitada con VRF y habilitada para utilizar puntos finales de servicio privados.
+
+Se puede acceder al nodo maestro de Kubernetes a través del punto final de servicio privado si los usuarios autorizados del clúster están en su red privada de {{site.data.keyword.Bluemix_notm}} o si se conectan a la red privada a través de una [conexión VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Sin embargo, la comunicación con el nodo maestro de Kubernetes sobre el punto final de servicio privado debe pasar a través del rango de direcciones IP <code>166.X.X.X</code>, que no se puede direccionar desde una conexión VPN ni a través de {{site.data.keyword.Bluemix_notm}} Direct Link. Puede exponer el punto final de servicio privado del nodo maestro para los usuarios del clúster utilizando un equilibrador de carga de red (NLB) privado. El NLB privado expone el punto final de servicio privado del nodo maestro como un rango de direcciones IP <code>10.X.X.X</code> interno al que pueden acceder los usuarios con la VPN o con la conexión de {{site.data.keyword.Bluemix_notm}} Direct Link. Si solo habilita el punto final de servicio privado, puede utilizar el panel de control de Kubernetes o puede habilitar temporalmente el punto final de servicio público para crear el NLB privado.
+
+A continuación, puede crear una agrupación de nodos trabajadores que estén conectados a las VLAN públicas y privadas y etiquetados como nodos de extremo. Los nodos de extremo pueden mejorar la seguridad de su clúster al permitir que solo se pueda acceder a unos pocos nodos trabajadores de forma externa y aislando la carga de trabajo de red a dichos nodos trabajadores.
+
+Los nodos trabajadores se comunican automáticamente y de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}} que dan soporte a puntos finales de servicio privados a través de la red privada de infraestructura de IBM Cloud (SoftLayer). Si un servicio de {{site.data.keyword.Bluemix_notm}} no da soporte a puntos finales de servicio privados, los nodos de extremo que se conectan a una VLAN pública se pueden comunicar de forma segura con los servicios a través de la red pública. Puede bloquear las interfaces públicas o privadas de los nodos trabajadores mediante políticas de red de Calico para el aislamiento de red pública o de red privada. Es posible que tenga que permitir el acceso a las direcciones IP públicas y privadas de los servicios que desea utilizar en estas políticas de aislamiento de Calico.
+
+Para proporcionar acceso privado a una app del clúster, puede crear un equilibrador de carga de red (NLB) privado o un equilibrador de carga de aplicación (ALB) de Ingress para exponer la app solo a la red privada. Puede bloquear todo el tráfico público a estos servicios de red que exponen sus apps mediante la creación de políticas pre-DNAT de Calico, como por ejemplo políticas para bloquear los NodePorts públicos en los nodos trabajadores. Si tiene que proporcionar un acceso público limitado a una app del clúster, puede crear un NLB o ALB públicos para exponer la app. Luego debe desplegar sus apps en estos nodos de extremo de modo que los NLB o los ALB puedan dirigir el tráfico público a los pods de la app. Puede controlar más el tráfico público a los servicios de red que exponen sus apps mediante la creación de políticas pre-DNAT de Calico, como por ejemplo políticas de lista blanca y de lista negra. Los pods correspondientes a los servicios de red tanto privados como públicos se despliegan en los nodos de extremo de modo que las cargas de trabajo de tráfico externas se restrinjan solo a unos pocos nodos trabajadores del clúster.  
+
+Para acceder de forma segura a servicios externos a {{site.data.keyword.Bluemix_notm}} y de otras redes locales, puede configurar y desplegar el servicio VPN IPSec de strongSwan en el clúster. El pod del equilibrador de carga de strongSwan se despliega en un nodo trabajador de la agrupación de extremo, donde el pod establecer una conexión segura con la red local a través de un túnel VPN cifrado sobre la red pública. De forma alternativa, puede utilizar los servicios {{site.data.keyword.Bluemix_notm}} Direct Link para conectar el clúster a su centro de datos local solo a través de la red privada.
+
+¿Está listo para empezar a trabajar con un clúster en este caso práctico? Después de planificar las configuraciones de [alta disponibilidad](/docs/containers?topic=containers-ha_clusters) y de [nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes), consulte el tema sobre [Creación de clústeres](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+</br>
+
+### Utilización de un dispositivo de pasarela
+{: #vyatta-gateway}
+
+Permita la conectividad pública limitada a su clúster mediante la configuración de un dispositivo de pasarela, como por ejemplo Virtual Router Appliance (Vyatta), como pasarela pública y cortafuegos.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="Imagen de arquitectura de un clúster que utiliza un dispositivo de pasarela para el acceso público seguro"/> <figcaption>Arquitectura de un clúster que utiliza un dispositivo de pasarela para el acceso público seguro</figcaption> </figure>
+</p>
+
+Si configura los nodos trabajadores solo en una VLAN privada y no desea o no puede habilitar VRF para su cuenta, debe configurar un dispositivo de pasarela para proporcionar conectividad de red entre los nodos trabajadores y el nodo maestro a través de la red pública. Por ejemplo, puede configurar un [dispositivo direccionador virtual](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) o un [dispositivo de seguridad Fortigate](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations).
+
+Puede configurar un dispositivo de pasarela con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster y para detectar y solucionar problemas de intrusión en la red. Cuando configure un cortafuegos en la red pública, debe abrir los puertos y las direcciones IP necesarios para cada región de modo que el nodo maestro y los nodos trabajadores se puedan comunicar. Si también configura este cortafuegos para la red privada, también debe abrir los puertos y las direcciones IP privadas necesarios para permitir la comunicación entre los nodos trabajadores y dejar que el clúster acceda a los recursos de la infraestructura a través de la red privada. También debe habilitar la distribución de VLAN para la cuenta de modo que las subredes puedan direccionar en la misma VLAN y entre varias VLAN.
+
+Para conectar de forma segura los nodos trabajadores y las apps a una red local o a servicios fuera de {{site.data.keyword.Bluemix_notm}}, configure un punto final de VPN IPSec en el dispositivo de pasarela y el servicio VPN IPSec de strongSwan en el clúster de modo que utilicen el punto final de VPN de pasarela. Si no desea utilizar strongSwan, puede configurar la conectividad de VPN directamente con VRA.
+
+Los nodos trabajadores pueden comunicarse de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}} y con servicios públicos externos a {{site.data.keyword.Bluemix_notm}} a través del dispositivo de pasarela. Puede configurar el cortafuegos de modo que permita el acceso a las direcciones IP públicas y privadas solo de los servicios que desea utilizar.
+
+Para proporcionar acceso privado a una app del clúster, puede crear un equilibrador de carga de red (NLB) privado o un equilibrador de carga de aplicación (ALB) de Ingress para exponer la app solo a la red privada. Si tiene que proporcionar un acceso público limitado a una app del clúster, puede crear un NLB o ALB públicos para exponer la app. Debido a que todo el tráfico pasa por el cortafuegos del dispositivo de pasarela, puede controlar el tráfico público a los servicios de red que exponen sus apps abriendo los puertos y las direcciones IP en el servicio en el cortafuegos para permitir el tráfico de entrada a estos servicios.
+
+¿Está listo para empezar a trabajar con un clúster en este caso práctico? Después de planificar las configuraciones de [alta disponibilidad](/docs/containers?topic=containers-ha_clusters) y de [nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes), consulte el tema sobre [Creación de clústeres](/docs/containers?topic=containers-clusters#cluster_prepare).
+
+<br />
+
+
+## Caso práctico: Ampliación del centro de datos local a un clúster de la red privada
 {: #private_clusters}
 
-De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el clúster con acceso a una VLAN privada y a una VLAN pública. La VLAN privada determina la dirección IP privada que se asigna a cada nodo trabajador, lo que proporciona a cada nodo trabajador una interfaz de red privada. La VLAN pública permite que los nodos trabajadores se conecten de forma automática y segura con el maestro.
+En este caso práctico, desea ejecutar cargas de trabajo en un clúster de {{site.data.keyword.containerlong_notm}}. Sin embargo, desea que solo puedan acceder a estas cargas de trabajo servicios, bases de datos u otros recursos del centro de datos local, como por ejemplo {{site.data.keyword.icpfull_notm}}. Es posible que las cargas de trabajo del clúster tengan que acceder a otros servicios de {{site.data.keyword.Bluemix_notm}} que dan soporte a la comunicación sobre la red privada, como {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
-Sin embargo, es posible que desee crear una VLAN privada o un clúster de punto final de servicio privado para los requisitos de seguridad o de conformidad. Las opciones para crear un clúster privado dependen del tipo de cuenta de infraestructura de IBM Cloud (SoftLayer) que tenga y de la configuración de VLAN pública y privada que desee. Para obtener más información sobre cada una de las configuraciones siguientes, consulte [Planificación de la red de clúster](/docs/containers?topic=containers-cs_network_ov).
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="Imagen de arquitectura de un clúster que se conecta a un centro de datos local en la red privada"/>
+ <figcaption>Arquitectura de un clúster que se conecta a un centro de datos local en la red privada</figcaption> </figure>
+</p>
 
-¿Tiene un clúster existente que desea convertir en solo privado? Para ver cómo puede añadir agrupaciones de nodos trabajadores o modificar agrupaciones de nodos trabajadores existentes con las nuevas VLAN, consulte [Cambio de las conexiones de VLAN de nodos trabajadores](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
-{: note}
+Para conseguir esta configuración, crea un clúster conectando los nodos trabajadores solo a una VLAN privada. Para proporcionar conectividad entre el nodo maestro del clúster y los nodos trabajadores sobre la red privada solo a través del punto final de servicio privado, la cuenta debe estar habilitada con VRF y habilitada para utilizar puntos finales de servicio. Puesto que el clúster resulta visible para cualquier recurso de la red privada cuando VRF está habilitado, puede aislar el clúster de otros sistemas de la red privada aplicando políticas de red privada de Calico.
 
-**Cuenta habilitada para VRF, nodo maestro de Kubernetes privado, nodos trabajadores en VLAN tanto pública como privada**</br>
-En clústeres que ejecutan Kubernetes versión 1.11 o posteriores, puede configurar la red de clúster para que utilice puntos finales de servicio públicos y privados. Después de habilitar el punto final de servicio privado, el nodo maestro de Kubernetes y los nodos trabajadores siempre se comunican sobre la VLAN privada a través del punto final de servicio privado. Aunque habilite el punto final de servicio público para el clúster, la comunicación entre el maestro de Kubernetes y los nodos trabajadores permanece en la VLAN privada. Después de habilitar el punto final de servicio privado, no puede inhabilitarlo. Puede conservar el punto final de servicio público para el acceso seguro al nodo maestro de Kubernetes a través de Internet, por ejemplo para ejecutar mandatos `kubectl`, o puede inhabilitar el punto final de servicio público para un clúster solo de punto final de servicio privado.
+Se puede acceder al nodo maestro de Kubernetes a través del punto final de servicio privado si los usuarios autorizados del clúster están en su red privada de {{site.data.keyword.Bluemix_notm}} o si se conectan a la red privada a través de una [conexión VPN](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). Sin embargo, la comunicación con el nodo maestro de Kubernetes sobre el punto final de servicio privado debe pasar a través del rango de direcciones IP <code>166.X.X.X</code>, que no se puede direccionar desde una conexión VPN ni a través de {{site.data.keyword.Bluemix_notm}} Direct Link. Puede exponer el punto final de servicio privado del nodo maestro para los usuarios del clúster utilizando un equilibrador de carga de red (NLB) privado. El NLB privado expone el punto final de servicio privado del nodo maestro como un rango de direcciones IP <code>10.X.X.X</code> interno al que pueden acceder los usuarios con la VPN o con la conexión de {{site.data.keyword.Bluemix_notm}} Direct Link. Si solo habilita el punto final de servicio privado, puede utilizar el panel de control de Kubernetes o puede habilitar temporalmente el punto final de servicio público para crear el NLB privado.
 
-**Cuenta no VRF o habilitada para VRF, nodos maestro y trabajadores de Kubernetes solo en VLAN privada**</br>
-Si configura los nodos trabajadores solo en una VLAN privada, los nodos trabajadores no pueden exponer automáticamente sus servicios de app en la red pública, y en una cuenta no VRF tampoco se puede conectar con el nodo maestro. Debe configurar un dispositivo de pasarela para proporcionar conectividad de red entre los nodos trabajadores y el maestro.
+Los nodos trabajadores se comunican automáticamente y de forma segura con otros servicios de {{site.data.keyword.Bluemix_notm}} que dan soporte a puntos finales de servicio privados, como {{site.data.keyword.registrylong}}, a través de la red privada de infraestructura de IBM Cloud (SoftLayer). Por ejemplo, los entornos de hardware dedicados para todas las instancias del plan estándar de {{site.data.keyword.cloudant_short_notm}} dan soporte a puntos finales de servicio privados. Si un servicio de {{site.data.keyword.Bluemix_notm}} no da soporte a puntos finales de servicio privados, el clúster no puede acceder a dicho servicio.
 
-Para cuentas que no VRF: Si crea el clúster con VLAN tanto pública como privada, no podrá eliminar posteriormente las VLAN públicas de dicho clúster. La eliminación de todas las VLAN públicas de un clúster hace que varios componentes del clúster dejen de funcionar. Cree en su lugar un nuevo clúster sin la VLAN pública.
-{: note}
+Para proporcionar acceso privado a una app del clúster, puede crear un equilibrador de carga de red (NLB) privado o un equilibrador de carga de aplicación (ALB) de Ingress. Estos servicios de red de Kubernetes solo exponen la app a la red privada de modo que cualquier sistema local con una conexión con la subred en la que está la IP de NLB pueda acceder a la app.
 
-**Cuenta no VRF, nodo maestro y nodos trabajadores de Kubernetes en VLAN tanto pública como privada**</br>
-En la mayoría de los casos, la configuración del clúster puede incluir nodos trabajadores en VLAN tanto públicas como privadas. A continuación, puede bloquear el clúster bloqueando el tráfico de VLAN pública con políticas de Calico y restringiendo el tráfico a determinados nodos de extremo.
-
-## Agrupaciones de nodos trabajadores y nodos trabajadores
-{: #planning_worker_nodes}
-
-Un clúster de Kubernetes está formado por nodos trabajadores agrupados en agrupaciones de nodos trabajadores y se supervisa y se gestiona de forma centralizada desde el nodo maestro de Kubernetes. Los administradores del clúster deciden cómo configurar el clúster de nodos trabajadores para garantizar que los usuarios del clúster disponen de todos los recursos para desplegar y ejecutar las apps en el clúster.
-{:shortdesc}
-
-Cuando se crea un clúster estándar, se solicitan los nodos trabajadores de las mismas especificaciones de memoria, CPU y espacio de disco (tipo) en la infraestructura de IBM Cloud (SoftLayer) en su nombre y se añaden a la agrupación predeterminada de nodos trabajadores del clúster. A cada nodo trabajador se la asigna un ID exclusivo y un nombre de dominio que no se debe cambiar después de haber creado el clúster. Puede elegir entre servidores virtuales o físicos (nativos). En función del nivel de aislamiento de hardware que elija, los nodos trabajadores virtuales se pueden configurar como nodos compartidos o dedicados. Para añadir distintos tipos al clúster, [cree otra agrupación de nodos trabajadores](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
-
-Kubernetes limita el número máximo de nodos trabajadores que puede tener en un clúster. Consulte el apartado sobre [nodo trabajador y cuotas de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/setup/cluster-large/) para obtener más información.
-
-
-¿Desea asegurarse de que siempre tiene suficientes nodos trabajadores para cubrir la carga de trabajo? Pruebe nuestro [programa de escalado automático de clústeres](/docs/containers?topic=containers-ca#ca).
-{: tip}
-
-<br />
-
-
-## Hardware disponible para los nodos trabajadores
-{: #shared_dedicated_node}
-
-Cuando se crea un clúster estándar en {{site.data.keyword.Bluemix_notm}}, se selecciona si las agrupaciones de trabajadores constan de nodos trabajadores que son máquinas físicas (nativas) o máquinas virtuales que se ejecutan en hardware físico. También se selecciona el tipo de nodo trabajador, la combinación de memoria, la CPU y otras especificaciones de la máquina, como el almacenamiento de disco.
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="Opciones de hardware para nodos trabajadores en un clúster estándar" style="width:700px; border-style: none"/>
-
-Si desea más de un tipo de nodo trabajador, debe crear una agrupación de trabajadores para cada tipo. No puede cambiar el tamaño de los nodos trabajadores existentes para tener recursos diferentes, como por ejemplo CPU o memoria. Cuando se crea un clúster gratuito, el nodo trabajador se suministra automáticamente como nodo compartido virtual en la cuenta de infraestructura de IBM Cloud (SoftLayer). En clústeres estándares, puede elegir el tipo de máquina que funcione mejor para su carga de trabajo. A medida que lo planifique, tenga en cuenta las
-[reservas de recursos de nodos trabajadores](#resource_limit_node) en la capacidad total de CPU y memoria.
-
-Puede desplegar clústeres mediante la [interfaz de usuario de la consola](/docs/containers?topic=containers-clusters#clusters_ui) o la [CLI](/docs/containers?topic=containers-clusters#clusters_cli).
-
-Seleccione una de las opciones siguientes para decidir el tipo de agrupación de trabajadores que desea.
-* [Máquinas virtuales](#vm)
-* [Máquinas físicas (nativas)](#bm)
-* [Máquinas de almacenamiento definido por software (SDS)](#sds)
-
-### Máquinas virtuales
-{: #vm}
-
-Las máquinas virtuales ofrecen una mayor flexibilidad, unos tiempos de suministro más reducidos y proporcionan más características automáticas de escalabilidad que las máquinas nativas, a un precio más reducido. Utilice máquinas virtuales en los casos de uso con un propósito más general como, por ejemplo, en entornos de desarrollo y pruebas, entornos de transferencia y producción, microservicios y apps empresariales. Sin embargo, deberá encontrar un compromiso con su rendimiento. Si necesita un alto rendimiento de cálculo con cargas de trabajo intensivas de RAM, datos o GPU, utilice [máquinas nativas](#bm).
-{: shortdesc}
-
-**¿Quiero utilizar hardware compartido o dedicado?**</br>
-Cuando se crea un clúster virtual estándar, debe seleccionar si desea que el hardware subyacente se comparta entre varios clientes de {{site.data.keyword.IBM_notm}} (tenencia múltiple) o se le dedique a usted exclusivamente (tenencia única).
-
-* **En una configuración de hardware compartido multiarrendatario**: los recursos físicos, como la CPU y la memoria, se comparten en todas las máquinas virtuales desplegadas en el mismo hardware físico. Para asegurarse de que cada máquina virtual se pueda ejecutar de forma independiente, un supervisor de máquina virtual, también conocido como hipervisor, segmenta los recursos físicos en entidades aisladas y los asigna como recursos dedicados a una máquina virtual (aislamiento de hipervisor).
-* **En una configuración de hardware de único arrendatario**: todos los recursos físicos están dedicados únicamente a usted. Puede desplegar varios nodos trabajadores como máquinas virtuales en el mismo host físico. De forma similar a la configuración de tenencia múltiple,
-el hipervisor asegura que cada nodo trabajador recibe su parte compartida de los recursos físicos disponibles.
-
-Los nodos compartidos suelen resultar más económicos que los nodos dedicados porque los costes del hardware subyacente se comparten entre varios clientes. Sin embargo, cuando decida entre nodos compartidos y dedicados, debe ponerse en contacto con el departamento legal y ver el nivel de aislamiento y de conformidad de la infraestructura que necesita el entorno de app.
-
-Algunos tipos solo están disponibles para un tipo de configuración de arrendamiento. Por ejemplo, las máquinas virtuales `m3c`
-solo están disponibles como configuración de arrendamiento `compartido`.
-{: note}
-
-**¿Cuáles son las características generales de las máquinas virtuales?**</br>
-Las máquinas virtuales utilizan el disco local en lugar de la red de área de almacenamiento (SAN) por motivos de fiabilidad. Entre las ventajas de fiabilidad se incluyen un mejor rendimiento al serializar bytes en el disco local y una reducción de la degradación del sistema de archivos debido a anomalías de la red. Todas las máquinas virtuales se suministran con velocidad de red de 1000 Mbps, 25 GB de almacenamiento en disco local primario para el sistema de archivos del sistema operativo y 100 GB de almacenamiento en disco local secundario para datos como, por ejemplo, el tiempo de ejecución de contenedor y `kubelet`. El almacenamiento local en el nodo trabajador solo es para el proceso a corto plazo y los discos primario y secundario se limpian cuando se actualiza o se vuelve a cargar el nodo trabajador. Para ver las soluciones de almacenamiento persistente, consulte [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**¿Qué hago si tengo tipos de máquina más antiguos?**</br>
-Si en su clúster hay tipos de nodo trabajador en desuso, como `x1c` o el más antiguo `x2c` de Ubuntu 16, puede [actualizar el clúster para que tenga nodos trabajadores `x3c` de Ubuntu 18 ](/docs/containers?topic=containers-update#machine_type).
-
-**¿Qué tipos de máquina virtual están disponibles?**</br>
-Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [SDS](#sds) disponibles.
-
-{: #vm-table}
-<table>
-<caption>Tipos de máquina virtual disponibles en {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nombre y caso de uso</th>
-<th>Núcleos / Memoria</th>
-<th>Disco primario / secundario</th>
-<th>Velocidad de red</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtual, u3c.2x4</strong>: Utilice esta máquina virtual con el tamaño más reducido para realizar pruebas rápidas, pruebas de conceptos y ejecutar otras cargas ligeras.</td>
-<td>2 / 4 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.4x16</strong>: Seleccione esta máquina virtual equilibrada para realizar pruebas y desarrollo, y para otras cargas de trabajo ligeras.</td>
-<td>4 / 16 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.16x64</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio.</td></td>
-<td>16 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.32x128</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo de tamaño medio a grande, por ejemplo, como base de datos y sitio web dinámico con muchos usuarios simultáneos.</td>
-<td>32 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.56x242</strong>: Seleccione esta máquina virtual equilibrada para cargas de trabajo grandes, por ejemplo, como base de datos y para varias apps con muchos usuarios simultáneos.</td>
-<td>56 / 242 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, c3c.16x16</strong>: Utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo ligeras.</td>
-<td>16 / 16 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.16x32</strong>: Utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td>
-<td>16 / 32 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x32</strong>: Utilice este tipo cuando desee un equilibrio uniforme de recursos de cálculo del nodo trabajador para cargas de trabajo de tamaño medio.</td>
-<td>32 / 32 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x64</strong>: Utilice este tipo cuando desee una proporción de 1:2 entre recursos de CPU y de memoria del nodo trabajador para cargas de trabajo de tamaño medio.</td>
-<td>32 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, m3c.8x64</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre ligeras y medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
-<td>8 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.16x128</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo medianas que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
-<td>16 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.30x240</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible en Dallas y como arrendamiento de `hardware compartido`.</td>
-<td>30 / 240 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.48x384</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo entre medianas y grandes que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
-<td>48 / 384 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.56x448</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
-<td>56 / 448 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.64x512</strong>: Utilice este tipo cuando desee una proporción de 1:8 de recursos de CPU y memoria para cargas de trabajo de gran tamaño que necesitan más memoria, como por ejemplo bases de datos como {{site.data.keyword.Db2_on_Cloud_short}}. Solo está disponible como arrendamiento de `--hardware shared`.</td>
-<td>64 / 512 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-</tbody>
-</table>
-
-### Máquinas físicas (nativas)
-{: #bm}
-
-Puede suministrar el nodo trabajador como un servidor físico de arrendatario único, también conocido como nativo.
-{: shortdesc}
-
-**¿En qué se diferencian las máquinas nativas de las máquinas virtuales?**</br>
-Los servidores nativos ofrecen acceso directo a los recursos físicos en la máquina, como la memoria o la CPU. Esta configuración elimina el hipervisor de máquina virtual que asigna recursos físicos a máquinas virtuales que se ejecutan en el host. En su lugar, todos los recursos de una máquina nativa están dedicados exclusivamente al trabajador, por lo que no es necesario preocuparse por "vecinos ruidosos" que compartan recursos o ralenticen el rendimiento. Los tipos de máquina física tienen más almacenamiento local que virtual, y algunos tienen RAID para aumentar la disponibilidad de los datos. El almacenamiento local en el nodo trabajador solo es para el proceso a corto plazo y los discos primario y secundario se limpian cuando se actualiza o se vuelve a cargar el nodo trabajador. Para ver las soluciones de almacenamiento persistente, consulte [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Además de mejores especificaciones para el rendimiento, ¿puedo conseguir algo con las máquinas nativas que no pueda con las máquinas virtuales?**</br>
-Sí. Con las máquinas nativas, puede optar por habilitar Trusted Compute para verificar que los nodos trabajadores no se manipulan de forma indebida. Si no habilita la confianza durante la creación del clúster pero la desea posteriormente, puede utilizar el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable`. Una vez que habilita la confianza, no puede inhabilitarla posteriormente. Puede crear un nuevo clúster sin confianza. Para obtener más información sobre cómo funciona la confianza durante el proceso de inicio del nodo, consulte [{{site.data.keyword.containerlong_notm}} con Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute está disponible para determinados tipos de máquinas nativas. Cuando ejecute el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>`, en el campo **Trustable** puede ver qué máquinas dan soporte a la confianza. Por ejemplo, los distintos tipos de GPU `mgXc` no dan soporte a Trusted Compute.
-
-Además de Trusted Compute, también puede aprovechar {{site.data.keyword.datashield_full}} (Beta). {{site.data.keyword.datashield_short}} se integra con la tecnología Intel® Software Guard Extensions (SGX) y la tecnología Fortanix® para que el código de carga de trabajo del contenedor de {{site.data.keyword.Bluemix_notm}} esté protegido mientras se utiliza. El código de la app y los datos se ejecutan en enclaves de CPU, que son áreas de confianza de la memoria en el nodo trabajador que protegen aspectos críticos de la app, lo que ayuda a mantener la confidencialidad del código y de los datos y evita su modificación. Si usted o su empresa necesitan mantener la confidencialidad de los datos debido a políticas internas, regulaciones gubernamentales o requisitos de conformidad del sector, esta solución podría ayudarle a moverse a la nube. Los casos prácticos incluyen instituciones financieras y sanitarias,
-o países con políticas centrales que requieren soluciones de nube local.
-
-**La opción nativa suena genial. ¿Qué me impide solicitarla en este momento?**</br>
-Los servidores nativos son más caros que los servidores virtuales, y son más apropiados para apps de alto rendimiento que necesitan más recursos y control de host.
-
-Los servidores nativos se facturan mensualmente. Si cancela un servidor nativo antes de fin de mes, se le facturará a finales de ese mes. Después de solicitar o de cancelar un servidor nativo, el proceso se completa manualmente en la cuenta de la infraestructura de IBM Cloud (SoftLayer). Por lo tanto, puede ser necesario más de un día laborable para completar la tramitación.
-{: important}
-
-**¿Qué tipos de servidores nativos puedo solicitar?**</br>
-Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [virtual](#vm) o [SDS](#sds).
-
-Las máquinas nativas están optimizadas para distintos casos de uso como, por ejemplo, las cargas de trabajo intensivas de memoria RAM, datos o GPU.
-
-Elija un tipo de máquina con la configuración de almacenamiento correcta para dar soporte a la carga de trabajo. Algunos tipos tienen una combinación de las siguientes configuraciones de disco y almacenamiento. Por ejemplo, algunos tipos tener un disco primario SATA con un disco secundario SSD sin formato.
-
-* **SATA**: un dispositivo de almacenamiento en disco giratorio magnético que se suele utilizar para el disco primario del nodo trabajador que almacena el sistema de archivos del sistema operativo.
-* **SSD**: un dispositivo de almacenamiento de unidad de estado sólido para los datos de alto rendimiento.
-* **Sin formato**: el dispositivo de almacenamiento no está formateado, con la capacidad completa disponible para su uso.
-* **RAID**: el dispositivo de almacenamiento tiene datos distribuidos para redundancia y rendimiento que varían en función del nivel de RAID. Como tal, la capacidad de disco que está disponible para su uso varía.
-
-
-{: #bm-table}
-<table>
-<caption>Tipos de máquina nativa disponibles en {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nombre y caso de uso</th>
-<th>Núcleos / Memoria</th>
-<th>Disco primario / secundario</th>
-<th>Velocidad de red</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Máquina nativa gran capacidad de memoria, mr3c.28x512</strong>: Maximice la RAM disponible para sus nodos trabajadores.</td>
-<td>28 / 512 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Máquina nativas con GPU, mg3c.16x128</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene una tarjeta física Tesla K80 con dos unidades de proceso gráfico (GPU) por tarjeta (2 GPU).</td>
-<td>16 / 128 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Máquina nativas con GPU, mg3c.28x256</strong>: Elija este tipo para cargas de trabajo matemáticas intensivas, por ejemplo, para la computación de alto rendimiento, el aprendizaje máquina u otras aplicaciones 3D. Este tipo tiene 2 tarjetas físicas Tesla K80 con 2 GPU por tarjeta, para hacer un total de 4 GPU.</td>
-<td>28 / 256 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Nativo con mucho uso de datos, md3c.16x64.4x4tb</strong>: Utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
-<td>16 / 64 GB</td>
-<td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Nativo con mucho uso de datos, md3c.28x512.4x4tb</strong>: utilice este tipo para una cantidad significativa de almacenamiento en disco local, incluido RAID para aumentar la disponibilidad de los datos, para cargas de trabajo como sistemas de archivos distribuidos, bases de datos grandes y analítica de big data.</td>
-<td>28 / 512 GB</td>
-<td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Máquina nativa equilibrada, mb3c.4x32</strong>: Utilice este tipo para cargas de trabajo equilibradas que requieran más recursos de computación que los ofrecidos por las máquinas virtuales. Este tipo también se puede habilitar con Intel® Software Guard Extensions (SGX) para que pueda utilizar <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Icono de enlace externo"></a> para cifrar la memoria de datos.</td>
-<td>4 / 32 GB</td>
-<td>2 TB SATA / 2 TB SATA</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Máquina nativa equilibrada, mb3c.16x64</strong>: Utilice este tipo para cargas de trabajo equilibradas que requieran más recursos de computación que los ofrecidos por las máquinas virtuales.</td>
-<td>16 / 64 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### Máquinas de almacenamiento definido por software (SDS)
-{: #sds}
-
-Los tipos de almacenamiento definido por software (SDS) son máquinas físicas que se suministran con discos adicionales sin formato para el almacenamiento local físico. A diferencia del disco local primario y secundario, estos discos sin formato no se limpian durante la actualización o la recarga de un nodo trabajador. Debido a que los datos se coubican con el nodo de cálculo, las máquinas SDS son adecuadas para cargas de trabajo de alto rendimiento.
-{: shortdesc}
-
-**¿Cuándo debo utilizar los tipos de SDS?**</br>
-Normalmente, se utilizan máquinas SDS en los casos siguientes:
-*  Si utiliza un complemento SDS, como por ejemplo [Portworx](/docs/containers?topic=containers-portworx#portworx), en el clúster, utilice una máquina SDS.
-*  Si la app es un [StatefulSet ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) que requiere almacenamiento local, puede utilizar máquinas SDS y suministrar [volúmenes persistentes locales de Kubernetes (beta) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/).
-*  Es posible que tenga apps personalizadas que requieran almacenamiento local adicional en bruto.
-
-Para ver más soluciones de almacenamiento, consulte [Planificación de almacenamiento persistente altamente disponible](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**¿Qué tipos de SDS puedo solicitar?**</br>
-Los tipos de nodos trabajadores varían según la zona. En la tabla siguiente se incluye la versión más reciente de un tipo, como por ejemplo los nodos trabajadores `x3c` de Ubuntu 18, en lugar de los tipos de nodo trabajador más antiguos, `x2c` de Ubuntu 16. Para ver los tipos de máquinas disponibles en su zona, ejecute `ibmcloud ks machine-types <zone>`. También puede consultar los tipos de máquina [nativa](#bm) o [virtual](#vm) disponibles.
-
-Elija un tipo de máquina con la configuración de almacenamiento correcta para dar soporte a la carga de trabajo. Algunos tipos tienen una combinación de las siguientes configuraciones de disco y almacenamiento. Por ejemplo, algunos tipos tener un disco primario SATA con un disco secundario SSD sin formato.
-
-* **SATA**: un dispositivo de almacenamiento en disco giratorio magnético que se suele utilizar para el disco primario del nodo trabajador que almacena el sistema de archivos del sistema operativo.
-* **SSD**: un dispositivo de almacenamiento de unidad de estado sólido para los datos de alto rendimiento.
-* **Sin formato**: el dispositivo de almacenamiento no está formateado, con la capacidad completa disponible para su uso.
-* **RAID**: el dispositivo de almacenamiento tiene datos distribuidos para redundancia y rendimiento que varían en función del nivel de RAID. Como tal, la capacidad de disco que está disponible para su uso varía.
-
-
-{: #sds-table}
-<table>
-<caption>Tipos de máquina SDS disponibles en {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Nombre y caso de uso</th>
-<th>Núcleos / Memoria</th>
-<th>Disco primario / secundario</th>
-<th>Discos sin formato adicionales</th>
-<th>Velocidad de red</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Nativo con SDS, ms3c.4x32.1.9tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
-<td>4 / 32 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>1,9 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Nativo con SDS, ms3c.16x64.1.9tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
-<td>16 / 64 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
-<td>1,9 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Nativo con SDS, ms3c.28x256.3.8tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
-<td>28 / 256 GB</td>
-<td>SATA de 2 TB / SSD de 1,9 TB</td>
-<td>3,8 TB de SSD sin formato (vía de acceso del dispositivo: `/dev/sdc`)</td>
-<td>10000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Nativo con SDS, ms3c.28x512.4x3.8tb.ssd</strong>: Si necesita almacenamiento local adicional para rendimiento, utilice este tipo con mucha actividad de disco que admite almacenamiento definido por software (SDS).</td>
-<td>28 / 512 GB</td>
-<td>SATA de 2 TB / SSD de 1,9 TB</td>
-<td>4 discos, 3,8 TB de SSD sin formato (vías de acceso de dispositivo: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000 Mbps</td>
-</tr>
-</tbody>
-</table>
-
-## Reservas de recursos del nodo trabajador
-{: #resource_limit_node}
-
-{{site.data.keyword.containerlong_notm}} establece reservas de recursos de cálculo que limitan los recursos de cálculo disponibles en cada nodo trabajador. Los recursos de memoria y de CPU reservados no los pueden utilizar los pods del nodo trabajador, y reducen los recursos asignables en cada nodo trabajador. Al desplegar inicialmente los pods, si el nodo trabajador no tiene suficientes recursos asignables, el despliegue falla. Además, si los pods superan el límite de recursos del nodo trabajador, se desalojan los pods. En Kubernetes, este límite se llama [umbral de desalojo de hardware ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds).
-{:shortdesc}
-
-Si hay menos CPU o memoria disponible que las reservas del nodo trabajador, Kubernetes comienza a desalojar pods para restaurar recursos de cálculo suficientes. Los pods se vuelven a planificar en otro nodo trabajador si hay uno disponible. Si los pods se desalojan con frecuencia, añada más nodos trabajadores al clúster o establezca [límites de recurso ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) a los pods.
-
-Los recursos que se reservan en el nodo trabajador dependen de la cantidad de CPU y memoria con la que se suministra el nodo trabajador. {{site.data.keyword.containerlong_notm}} define niveles de memoria y CPU tal como se muestra en las tablas siguientes. Si el nodo trabajador viene con recursos de cálculo en varios niveles, se reserva un porcentaje de los recursos de CPU y memoria para cada nivel.
-
-Para revisar cuántos recursos de cálculo se utilizan actualmente en el nodo trabajador, ejecute [`kubectl top node` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/kubectl/overview/#top).
-{: tip}
-
-<table summary="Esta tabla muestra las reservas de memoria de nodo trabajador por nivel.">
-<caption>Reservas de memoria de nodo trabajador por nivel.</caption>
-<thead>
-<tr>
-  <th>Nivel de memoria</th>
-  <th>% o cantidad reservada</th>
-  <th>Ejemplo de nodo trabajador `b3c.4x16` (16 GB)</th>
-  <th>Ejemplo de nodo trabajador `mg1c.28x256` (256 GB)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primeros 4 GB (0-4 GB)</td>
-  <td>25% de memoria</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Siguientes 4 GB (5-8 GB)</td>
-  <td>20% de memoria</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>Siguientes 8 GB (9-16 GB)</td>
-  <td>10% de memoria</td>
-  <td>0.8 GB</td>
-  <td>0.8 GB</td>
-</tr>
-<tr>
-  <td>Siguientes 112 GB (17-128 GB)</td>
-  <td>6% de memoria</td>
-  <td>N/D</td>
-  <td>6,72 GB</td>
-</tr>
-<tr>
-  <td>GB restantes (129 GB+)</td>
-  <td>2% de memoria</td>
-  <td>N/D</td>
-  <td>2,54 GB</td>
-</tr>
-<tr>
-  <td>Reserva adicional para el [desalojo de `kubelet`
-![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (cantidad fija)</td>
-  <td>100 MB (cantidad fija)</td>
-</tr>
-<tr>
-  <td>**Total reservado**</td>
-  <td>**(varía)**</td>
-  <td>**2,7 GB de 16 GB totales**</td>
-  <td>**11,96 GB de 256 GB totales**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="Esta tabla muestra las reservas de CPU de nodo trabajador por nivel.">
-<caption>Reservas de CPU de nodo trabajador por nivel.</caption>
-<thead>
-<tr>
-  <th>Nivel de CPU</th>
-  <th>% reservado</th>
-  <th>Ejemplo de nodo trabajador `b3c.4x16` (4 núcleos)</th>
-  <th>Ejemplo de nodo trabajador `mg1c.28x256` (28 núcleos)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Primer núcleo (Núcleo 1)</td>
-  <td>6% núcleos</td>
-  <td>0,06 núcleos</td>
-  <td>0,06 núcleos</td>
-</tr>
-<tr>
-  <td>Siguientes 2 núcleos (Núcleos 2-3)</td>
-  <td>1% núcleos</td>
-  <td>0,02 núcleos</td>
-  <td>0,02 núcleos</td>
-</tr>
-<tr>
-  <td>Siguientes 2 núcleos (Núcleos 4-5)</td>
-  <td>0,5% núcleos</td>
-  <td>0,005 núcleos</td>
-  <td>0,01 núcleos</td>
-</tr>
-<tr>
-  <td>Núcleos restantes (Núcleos 6+)</td>
-  <td>0,25% núcleos</td>
-  <td>N/D</td>
-  <td>0,0575 núcleos</td>
-</tr>
-<tr>
-  <td>**Total reservado**</td>
-  <td>**(varía)**</td>
-  <td>**0,085 núcleos de 4 núcleos totales**</td>
-  <td>**0,1475 núcleos de 28 núcleos totales**</td>
-</tr>
-</tbody>
-</table>
-
-## Recuperación automática para los nodos trabajadores
-{: #planning_autorecovery}
-
-Los componentes críticos, como `containerd`, `kubelet`, `kube-proxy` y `calico`, deben ser funcionales para tener un nodo trabajador de Kubernetes en buen estado. Con el tiempo, estos componentes se pueden estropear dejando así el nodo trabajador en estado fuera de servicio. Los nodos trabajadores averiados reducen la capacidad total del clúster y pueden provocar tiempo de inactividad en la app.
-{:shortdesc}
-
-Puede [configurar comprobaciones de estado del nodo trabajador y habilitar la recuperación automática](/docs/containers?topic=containers-health#autorecovery). Si la recuperación automática detecta un nodo trabajador erróneo basado en las comprobaciones configuradas, desencadena una acción correctiva, como una recarga del sistema operativo, en el nodo trabajador. Para obtener más información sobre cómo funciona la recuperación automática, consulte el [blog sobre recuperación automática ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
+¿Está listo para empezar a trabajar con un clúster en este caso práctico? Después de planificar las configuraciones de [alta disponibilidad](/docs/containers?topic=containers-ha_clusters) y de [nodo trabajador](/docs/containers?topic=containers-planning_worker_nodes), consulte el tema sobre [Creación de clústeres](/docs/containers?topic=containers-clusters#cluster_prepare).

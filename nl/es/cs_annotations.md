@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Personalización de Ingress con anotaciones
@@ -913,8 +915,7 @@ spec:
 </tr>
 <tr>
 <td><code>hash</code></td>
-<td>Sustituya <code>&lt;<em>hash_algorithm</em>&gt;</code> por el algoritmo hash que protege la información en la cookie. Solo se admite <code>sha1
-</code>. SHA1 crea una suma de hash en función de la información de la cookie y añade esta suma de hash a la cookie. El servidor puede descifrar la información de la cookie y verificar la integridad de los datos.</td>
+<td>Sustituya <code>&lt;<em>hash_algorithm</em>&gt;</code> por el algoritmo hash que protege la información en la cookie. Solo se admite <code>sha1</code>. SHA1 crea una suma de hash en función de la información de la cookie y añade esta suma de hash a la cookie. El servidor puede descifrar la información de la cookie y verificar la integridad de los datos.</td>
 </tr>
 </tbody></table>
 
@@ -1773,7 +1774,7 @@ Direccione el tráfico de red de entrada en una vía de acceso de dominio de ALB
 {:shortdesc}
 
 **Descripción**</br>
-El dominio del ALB de Ingress direcciona el tráfico de entrada de la red de `mykubecluster.us-south.containers.appdomain.cloud/beans` a la app. La app escucha en `/coffee` en lugar de escuchar en `/beans`. Para reenviar el tráfico de red entrante a la app, añada la anotación de reescritura al archivo de configuración del recurso. La anotación de reescritura garantiza que el tráfico de red entrante de `/beans` se reenvíe a la app utilizando la vía de acceso `/coffee`. Si incluye varios servicios, utilice únicamente un punto y coma (;) para separarlos.
+El dominio del ALB de Ingress direcciona el tráfico de entrada de la red de `mykubecluster.us-south.containers.appdomain.cloud/beans` a la app. La app escucha en `/coffee` en lugar de escuchar en `/beans`. Para reenviar el tráfico de red entrante a la app, añada la anotación de reescritura al archivo de configuración del recurso. La anotación de reescritura garantiza que el tráfico de red entrante de `/beans` se reenvíe a la app utilizando la vía de acceso `/coffee`. Cuando incluya varios servicios, utilice solo un punto y coma (;) sin espacio antes o después del punto y coma para separarlos.
 
 **YAML del recurso de Ingress de ejemplo**</br>
 
@@ -1822,7 +1823,7 @@ spec:
 ## Anotaciones de almacenamiento intermedio de proxy
 {: #proxy-buffer}
 
-El ALB de Ingress actúa como un proxy entre la app de fondo y el navegador web del cliente. Con las anotaciones de almacenamiento intermedio de proxy, puede configurar cómo se almacenan los datos en el almacenamiento intermedio en el ALB al enviar o recibir paquetes de datos.
+El ALB de Ingress actúa como un proxy entre la app de fondo y el navegador web del cliente. Con las anotaciones de almacenamiento intermedio de proxy, puede configurar cómo se almacenan los datos en el almacenamiento intermedio en el ALB al enviar o recibir paquetes de datos.  
 {: shortdesc}
 
 ### Almacenamientos intermedios de cabeceras de cliente largas (`large-client-header-buffers`)
@@ -1886,7 +1887,7 @@ Utilice la anotación buffer para inhabilitar el almacenamiento de datos de resp
 **Descripción**</br>
 El ALB de Ingress actúa como un proxy entre la app de fondo y el navegador web del cliente. Cuando se envía una respuesta de la app de fondo al cliente, los datos de la respuesta se colocan en almacenamiento intermedio en el ALB de forma predeterminada. El ALB procesa mediante proxy la respuesta del cliente y empieza a enviar la respuesta al cliente al ritmo del cliente. Cuando el ALB ha recibido todos los datos procedentes de la app de fondo, la conexión con la app de fondo se cierra. La conexión entre el ALB y el cliente permanece abierta hasta que el cliente haya recibido todos los datos.
 
-Si se inhabilita la colocación en almacenamiento intermedio de los datos de la respuesta en el ALB, los datos se envían inmediatamente del ALB al cliente. El cliente debe ser capaz de manejar los datos de entrada al ritmo del ALB. Si el cliente es demasiado lento, es posible que se pierdan datos.
+Si se inhabilita la colocación en almacenamiento intermedio de los datos de la respuesta en el ALB, los datos se envían inmediatamente del ALB al cliente. El cliente debe ser capaz de manejar los datos de entrada al ritmo del ALB. Si el cliente es demasiado lento, la conexión en sentido ascendente permanece abierta hasta que el cliente pueda ponerse al día.
 
 La colocación en almacenamiento intermedio de datos en el ALB está habilitada de forma predeterminada.
 
@@ -2352,7 +2353,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<size>; size=<size>"
 spec:
  tls:
  - hosts:
@@ -2376,6 +2377,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Opcional: para aplicar un tamaño máximo de cuerpo de cliente a un servicio específico, sustituya <code>&lt;<em>myservice</em>&gt;</code> por el nombre del servicio. Si no especifica un nombre de servicio, el tamaño se aplica a todos los servicios. En el archivo YAML de ejemplo, el formato <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> aplica el primer tamaño al servicio <code>myservice</code> y el segundo tamaño a los demás servicios.</li>
+</tr>
 <td><code>&lt;size&gt;</code></td>
 <td>El tamaño máximo del cuerpo de la respuesta del cliente. Por ejemplo, para establecer el tamaño máximo en 200 megabytes, defina <code>200m</code>. Puede establecer el tamaño en 0 para inhabilitar la comprobación del tamaño del cuerpo de la solicitud del cliente.</td>
 </tr>
@@ -2593,9 +2597,9 @@ Puesto que la app utiliza {{site.data.keyword.appid_short_notm}} para la autenti
       3. Pulse **Crear**.
 
 2. Añada los URL de redirección para la app. Un URL de redirección es el punto final de devolución de llamada de la app. Para evitar ataques de suplantación, el ID de app valida el URL de solicitud comparándolo con la lista blanca de los URL de redirección.
-  1. En la consola de gestión de {{site.data.keyword.appid_short_notm}}, vaya a **Proveedores de identidad > Gestionar**.
-  2. Asegúrese de que ha seleccionado un proveedor de identidad. Si no se ha seleccionado ningún proveedor de identidad, el usuario no se autenticará, pero se emitirá una señal de acceso para el acceso anónimo a la app.
-  3. En el campo **Añadir URL de redirección de web**, añada el URL de redirección para la app en el formato `http://<hostname>/<app_path>/appid_callback` o `https://<hostname>/<app_path>/appid_callback`.
+  1. En la consola de gestión de {{site.data.keyword.appid_short_notm}}, vaya a **Gestionar autenticación**.
+  2. En el separador **Proveedores de identidades**, asegúrese de tener seleccionado un proveedor de identidades. Si no se ha seleccionado ningún proveedor de identidad, el usuario no se autenticará, pero se emitirá una señal de acceso para el acceso anónimo a la app.
+  3. En el separador **Valores de autenticación**, añada el URL de redirección para la app en el formato `http://<hostname>/<app_path>/appid_callback` o `https://<hostname>/<app_path>/appid_callback`.
 
     {{site.data.keyword.appid_full_notm}} ofrece una función de cierre de sesión: si aparece `/logout` en la vía de acceso de {{site.data.keyword.appid_full_notm}}, las cookies se eliminan y se envía al usuario a la página de inicio de sesión. Para utilizar esta función, debe añadir `/appid_logout` a su dominio en el formato `https://<hostname>/<app_path>/appid_logout` y debe incluir este URL en la lista de URL de redirección.
     {: note}
@@ -2622,3 +2626,5 @@ Puesto que la app utiliza {{site.data.keyword.appid_short_notm}} para la autenti
   {: pre}
 
 5. Utilice el secreto de enlace y el espacio de nombres del clúster para añadir la anotación `appid-auth` al recurso de Ingress.
+
+

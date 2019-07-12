@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Resolución de problemas de supervisión y creación de registros
@@ -71,20 +71,20 @@ Revise los siguientes motivos por los que no aparecen sus registros del clúster
   <tr>
     <td>Si ha especificado un espacio durante la creación del clúster, el propietario de la cuenta no tiene permisos de gestor, desarrollador o auditor para el espacio en cuestión.</td>
       <td>Para cambiar los permisos de acceso para el propietario de la cuenta:
-      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>ibmcloud ks api-key-info</code>.</li>
+      <ol><li>Para descubrir quién es el propietario de la cuenta del clúster, ejecute <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Para otorgar a dicho propietario de cuenta permisos de acceso de {{site.data.keyword.containerlong_notm}} de Gestor, Desarrollador o Auditor al espacio, consulte <a href="/docs/containers?topic=containers-users">Gestión de acceso a clústeres</a>.</li>
       <li>Para renovar la señal de registro tras cambiar los permisos, ejecute <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Tiene una configuración de creación de registro de aplicación con un enlace simbólico en la vía de acceso de la app.</td>
-      <td><p>Para que se puedan enviar los registros, se debe utilizar una vía de acceso absoluta en la configuración de registro o de lo contrario, no se podrán leer los registros. Si la vía de acceso está montada en su nodo trabajador, podría haber creado un enlace simbólico.</p> <p>Ejemplo: Si la vía de acceso especificada es <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> pero los registros van a <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, entonces no se podrán leer los registros.</p></td>
+      <td>Tiene una configuración de registro para la app con un enlace simbólico en la vía de acceso de la app.</td>
+      <td><p>Para que se puedan enviar los registros, se debe utilizar una vía de acceso absoluta en la configuración de registro o de lo contrario, no se podrán leer los registros. Si la vía de acceso está montada en su nodo trabajador, podría crear un enlace simbólico.</p> <p>Ejemplo: Si la vía de acceso especificada es <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> pero los registros van a <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, entonces no se podrán leer los registros.</p></td>
     </tr>
   </tbody>
 </table>
 
 Para probar los cambios que ha realizado durante la resolución de problemas, puede desplegar *Noisy*, un pod de ejemplo que produce varios sucesos de registro, en un nodo trabajador en el clúster.
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Cree el archivo de configuración `deploy-noisy.yaml`.
     ```
@@ -141,7 +141,7 @@ Suprima el pod `kube-dashboard` para forzar un reinicio. El pod se volverá a cr
 {: #quota}
 
 {: tsSymptoms}
-Se realiza una configuración de registro en el clúster para reenviar registros a {{site.data.keyword.loganalysisfull}}. Cuando visualiza registros, ve este mensaje de error o uno similar:
+Se realiza una configuración de registro en el clúster para reenviar registros a {{site.data.keyword.loganalysisfull}}. Cuando visualice registros, verá un mensaje de error similar al siguiente:
 
 ```
 Ha alcanzado la cuota diaria asignada al espacio de Bluemix {GUID de espacio} para la instancia de IBM® Cloud Log Analysis {GUID de instancia}. Su asignación diaria actual es de XXX para el almacenamiento de búsqueda de registros, que se retienen durante un periodo de 3 días, durante los cuales se pueden buscar en Kibana. Esto no afecta a la política de retención de registros en el almacenamiento de recopilación de registros. Para actualizar el plan de modo que pueda almacenar más datos en el almacenamiento de búsqueda de registros diario, actualice el plan del servicio Log Analysis para este espacio. Para obtener más información sobre los planes de servicio y sobre cómo actualizar su plan, consulte Planes.
@@ -163,7 +163,7 @@ Revise los siguientes motivos por los que ha alcanzado la cuota de registro y pa
  </thead>
  <tbody>
   <tr>
-    <td>Uno o más pods están produciendo una cantidad muy alta de registros.</td>
+    <td>Uno o más pods generan un gran número de registros.</td>
     <td>Puede liberar espacio de almacenamiento de registro evitando que se reenvíen registros de pods específicos. Cree un [filtro de registro](/docs/containers?topic=containers-health#filter-logs) para estos pods.</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ Revise los siguientes motivos por los que ha alcanzado la cuota de registro y pa
 {: #long_lines}
 
 {: tsSymptoms}
-Se realiza una configuración de registro en el clúster para reenviar registros a {{site.data.keyword.loganalysisfull_notm}}. Cuando visualiza registros, ve un mensaje de registro muy largo. Además, en Kibana, es posible que solo pueda ver los últimos 600-700 caracteres del mensaje de registro.
+Se realiza una configuración de registro en el clúster para reenviar registros a {{site.data.keyword.loganalysisfull_notm}}. Cuando visualiza registros, ve un mensaje de registro largo. Además, en Kibana, es posible que solo pueda ver los últimos 600-700 caracteres del mensaje de registro.
 
 {: tsCauses}
 Es posible que un mensaje de registro largo se trunque debido a su longitud antes de que lo recopile Fluentd, por lo que es posible que Fluentd no analice correctamente el registro antes de reenviarlo a {{site.data.keyword.loganalysisshort_notm}}.
@@ -207,7 +207,7 @@ Para limitar la longitud de línea, puede configurar su propio registrador de mo
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
--   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Póngase en contacto con el soporte de IBM abriendo un caso. Para obtener información sobre cómo abrir un caso de soporte de IBM, o sobre los niveles de soporte y las gravedades de los casos, consulte [Cómo contactar con el servicio de soporte](/docs/get-support?topic=get-support-getting-customer-support).
 Al informar de un problema, incluya el ID de clúster. Para obtener el ID de clúster, ejecute `ibmcloud ks clusters`. También puede utilizar la [herramienta de diagnósticos y de depuración de {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) para recopilar y exportar la información pertinente del clúster que se va a compartir con el servicio de soporte de IBM.
 {: tip}
 

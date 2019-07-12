@@ -31,11 +31,11 @@ Con esta guía de aprendizaje, puede aprender cómo instalar Knative en un clús
 Knative utiliza un enfoque coherente entre lenguajes de programación e infraestructuras para facilitar la carga operativa derivada de crear, desplegar y gestionar cargas de trabajo en Kubernetes de modo que los desarrolladores puedan centrarse en lo que más les importa: el código fuente. Puede utilizar los paquetes de compilación probados con los que ya está familiarizado, como Cloud Foundry, Kaniko, Dockerfile, Bazel y otros. Mediante la integración con Istio, Knative garantiza que las cargas de trabajo sin servidor y contenerizadas se pueden exponer fácilmente en Internet, supervisar y controlar, y que los datos se cifran durante el tránsito.
 
 **¿Cómo funciona Knative?**</br>
-Knative viene con 3 componentes clave, o _primitivas_, que le ayudan a crear, desplegar y gestionar las apps sin servidor en el clúster de Kubernetes:
+Knative viene con 3 componentes clave, o _primitivos_, que le ayudan a crear, desplegar y gestionar las apps sin servidor en el clúster de Kubernetes:
 
-- **Build:** La primitiva de compilación, `Build`, da soporte a la creación de un conjunto de pasos para crear la app a partir del código fuente en una imagen de contenedor. Imagine que utiliza una plantilla de compilación sencilla en la que especifique el repositorio de origen para encontrar el código de la app y el registro de contenedor en el que desea alojar la imagen. Con un solo mandato puede indicar a Knative que tome esta plantilla de compilación, extraiga el código fuente, cree la imagen y envíe por push la imagen al registro de contenedor para que pueda utilizar la imagen en el contenedor.
-- **Serving:** La primitiva de servicio, `Serving`, le ayuda a desplegar apps sin servidor como servicios Knative y a escalarlos automáticamente, incluso hasta llegar a cero instancias. Mediante las funciones de gestión del tráfico y de direccionamiento inteligente de Istio, puede controlar el tráfico que se dirige a una determinada versión del servicio, lo que facilitar al desarrollador la tarea de probar y desplegar una nueva versión de la app o de realizar una prueba de tipo A-B.
-- **Eventing:** Con la primitiva de gestión de sucesos, `Eventing`, puede crear activadores o corrientes de sucesos a los que se pueden suscribir otros servicios. Por ejemplo, supongamos que desea iniciar una nueva compilación de la app cada vez que se envía por push código a su repositorio maestro de GitHub. O que desea ejecutar una app sin servidor solo si la temperatura cae por debajo del punto de congelación. La primitiva `Eventing` se puede integrar en la interconexión CI/CD para automatizar la compilación y el despliegue de apps en caso de que se produzca un suceso específico.
+- **Build:** el primitivo de compilación, `Build`, da soporte a la creación de un conjunto de pasos para crear la app a partir del código fuente en una imagen de contenedor. Imagine que utiliza una plantilla de compilación sencilla en la que especifique el repositorio de origen para encontrar el código de la app y el registro de contenedor en el que desea alojar la imagen. Con un solo mandato puede indicar a Knative que tome esta plantilla de compilación, extraiga el código fuente, cree la imagen y envíe por push la imagen al registro de contenedor para que pueda utilizar la imagen en el contenedor.
+- **Serving:** el primitivo de servicio, `Serving`, le ayuda a desplegar apps sin servidor como servicios Knative y a escalarlos automáticamente, incluso hasta llegar a cero instancias. Mediante las funciones de gestión del tráfico y de direccionamiento inteligente de Istio, puede controlar el tráfico que se dirige a una determinada versión del servicio, lo que facilitar al desarrollador la tarea de probar y desplegar una nueva versión de la app o de realizar una prueba de tipo A-B.
+- **Eventing:** con el primitivo de gestión de sucesos, `Eventing`, puede crear activadores o corrientes de sucesos a los que se pueden suscribir otros servicios. Por ejemplo, supongamos que desea iniciar una nueva compilación de la app cada vez que se envía por push código a su repositorio maestro de GitHub. O que desea ejecutar una app sin servidor solo si la temperatura cae por debajo del punto de congelación. El primitivo `Eventing` se puede integrar en la interconexión CI/CD para automatizar la compilación y el despliegue de apps en caso de que se produzca un suceso específico.
 
 **¿Qué es el complemento Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental)?** </br>
 Managed Knative on {{site.data.keyword.containerlong_notm}} es un complemento gestionado que integra Knative e Istio directamente con el clúster de Kubernetes. IBM prueba la versión de Knative e Istio en el complemento, que se puede utilizar en {{site.data.keyword.containerlong_notm}}. Para obtener más información sobre los complementos gestionados, consulte [Adición de servicios utilizando complementos gestionados](/docs/containers?topic=containers-managed-addons#managed-addons).
@@ -48,9 +48,9 @@ Si ha instalado el [controlador de admisiones del gestor de seguridad de imágen
 ## Objetivos
 {: #knative_objectives}
 
-- Aprender los conceptos básicos de Knative y de las primitivas de Knative.  
+- Aprender los conceptos básicos de Knative y de los primitivos de Knative.  
 - Instalar el complemento Knative gestionado y el complemento Istio gestionado en el clúster.
-- Desplegar la primera app sin servidor con Knative y exponer la app en Internet mediante la primitiva `Serving` de Knative.
+- Desplegar la primera app sin servidor con Knative y exponer la app en Internet mediante el primitivo `Serving` de Knative.
 - Explorar las prestaciones de escalado y de revisión de Knative.
 
 ## Tiempo necesario
@@ -69,7 +69,7 @@ Esta guía de aprendizaje está pensada para los desarrolladores que están inte
 
 -  [Instale la CLI de IBM Cloud, el plugin de {{site.data.keyword.containerlong_notm}} y la CLI de Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Asegúrese de instalar una versión de la CLI de `kubectl` que coincida con la versión de Kubernetes de su clúster.
 -  [Cree un clúster con al menos 3 nodos trabajadores con 4 núcleos y 16 GB de memoria (`b3c.4x16`) o más cada uno](/docs/containers?topic=containers-clusters#clusters_cli). Todos los nodos trabajadores deben ejecutar Kubernetes versión 1.12 o superior.
--  Asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre {{site.data.keyword.containerlong_notm}}.
+-  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre {{site.data.keyword.containerlong_notm}}.
 -  [Defina su clúster como destino de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 ## Lección 1: Configurar el complemento Knative gestionado
@@ -102,20 +102,20 @@ Knative se compila sobre Istio para asegurar que las cargas de trabajo sin servi
    Salida de ejemplo:
    ```
    NAME                                       READY     STATUS      RESTARTS   AGE
-    istio-citadel-748d656b-pj9bw               1/1       Running     0          2m
-    istio-egressgateway-6c65d7c98d-l54kg       1/1       Running     0          2m
-    istio-galley-65cfbc6fd7-bpnqx              1/1       Running     0          2m
-    istio-ingressgateway-f8dd85989-6w6nj       1/1       Running     0          2m
-    istio-pilot-5fd885964b-l4df6               2/2       Running     0          2m
-    istio-policy-56f4f4cbbd-2z2bk              2/2       Running     0          2m
-    istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running     0          2m
-    istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running     0          2m
-    istio-telemetry-8687d9d745-mwjbf           2/2       Running     0          2m
-    prometheus-55c7c698d6-f4drj                1/1       Running     0          2m
+   istio-citadel-748d656b-pj9bw               1/1       Running     0          2m
+   istio-egressgateway-6c65d7c98d-l54kg       1/1       Running     0          2m
+   istio-galley-65cfbc6fd7-bpnqx              1/1       Running     0          2m
+   istio-ingressgateway-f8dd85989-6w6nj       1/1       Running     0          2m
+   istio-pilot-5fd885964b-l4df6               2/2       Running     0          2m
+   istio-policy-56f4f4cbbd-2z2bk              2/2       Running     0          2m
+   istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running     0          2m
+   istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running     0          2m
+   istio-telemetry-8687d9d745-mwjbf           2/2       Running     0          2m
+   prometheus-55c7c698d6-f4drj                1/1       Running     0          2m
    ```
    {: screen}
 
-3. Opcional: si desea utilizar Istio para todas las apps en el espacio de nombres `default` , añada la etiqueta `istio-injection=enabled` al espacio de nombres. Cada pod de app sin servidor debe ejecutar un complemento de proxy de Envoy para que la app se pueda incluir en la red de servicios de Istio. Esta etiqueta permite a Istio modificar automáticamente la especificación de la plantilla de pod en los nuevos despliegues de apps para que los pods se creen con contenedores de complementos de proxy de Envoy.
+3. Opcional: si desea utilizar Istio para todas las apps en el espacio de nombres `default`, añada la etiqueta `istio-injection=enabled` al espacio de nombres. Cada pod de app sin servidor debe ejecutar un complemento de proxy de Envoy para que la app se pueda incluir en la red de servicios de Istio. Esta etiqueta permite a Istio modificar automáticamente la especificación de la plantilla de pod en los nuevos despliegues de apps para que los pods se creen con contenedores de complementos de proxy de Envoy.
   ```
   kubectl label namespace default istio-injection=enabled
   ```
@@ -212,7 +212,7 @@ Knative se compila sobre Istio para asegurar que las cargas de trabajo sin servi
 En esta lección, desplegará la primera app [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) sin servidor en Go. Cuando envía una solicitud a la app de ejemplo, la app lee la variable de entorno `TARGET` y muestra `"Hello ${TARGET}!"`. Si esta variable de entorno está vacía, se devuelve `"Hello World!"`.
 {: shortdesc}
 
-1. Cree un archivo YAML para la primera app `Hello World` sin servidor en Knative. Para desplegar una app con Knative, debe especificar un recurso de servicio Knative. Un servicio se gestiona mediante la primitiva `Serving` de Knative y es el responsable de gestionar todo el ciclo de vida de la carga de trabajo. El servicio garantiza que cada despliegue tenga una revisión de Knative, una ruta y una configuración. Cuando actualiza el servicio, se crea una nueva versión de la app y se añade al historial de revisiones del servicio. Las rutas de Knative garantizan que cada revisión de la app se correlaciona con un punto final de la red para que pueda controlar la cantidad de tráfico de red que se direcciona a una determinada revisión. Las configuraciones de Knative contienen los valores de una determinada revisión de modo que siempre pueda retrotraer a una revisión más antigua o cambiar de revisión. Para obtener más información sobre los recursos `Serving` de Knative, consulte la [documentación de Knative](https://github.com/knative/docs/tree/master/serving).
+1. Cree un archivo YAML para la primera app `Hello World` sin servidor en Knative. Para desplegar una app con Knative, debe especificar un recurso de servicio Knative. Un servicio se gestiona mediante el primitivo `Serving` de Knative y es el responsable de gestionar todo el ciclo de vida de la carga de trabajo. El servicio garantiza que cada despliegue tenga una revisión de Knative, una ruta y una configuración. Cuando actualiza el servicio, se crea una nueva versión de la app y se añade al historial de revisiones del servicio. Las rutas de Knative garantizan que cada revisión de la app se correlaciona con un punto final de la red para que pueda controlar la cantidad de tráfico de red que se direcciona a una determinada revisión. Las configuraciones de Knative contienen los valores de una determinada revisión de modo que siempre pueda retrotraer a una revisión más antigua o cambiar de revisión. Para obtener más información sobre los recursos `Serving` de Knative, consulte la [documentación de Knative](https://github.com/knative/docs/tree/master/serving).
    ```
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -257,7 +257,7 @@ En esta lección, desplegará la primera app [`Hello World`](https://hub.docker.
     </tbody>
     </table>
 
-2. Cree el servicio Knative en el clúster. Cuando se crea el servicio, la primitiva `Serving` de Knative crea una revisión inmutable, una ruta de Knative, una regla de direccionamiento de Ingress, un servicio de Kubernetes, un pod de Kubernetes y un equilibrador de carga para la app. A la app se le asigna un subdominio del subdominio de Ingress en el formato `<knative_service_name>.<namespace>.<ingress_subdomain>` que puede utilizar para acceder a la app desde Internet.
+2. Cree el servicio Knative en el clúster. Cuando se crea el servicio, el primitivo `Serving` de Knative crea una revisión inmutable, una ruta de Knative, una regla de direccionamiento de Ingress, un servicio de Kubernetes, un pod de Kubernetes y un equilibrador de carga para la app. A la app se le asigna un subdominio del subdominio de Ingress en el formato `<knative_service_name>.<namespace>.<ingress_subdomain>` que puede utilizar para acceder a la app desde Internet.
    ```
    kubectl apply -f service.yaml
    ```
@@ -394,14 +394,14 @@ En esta lección, desplegará la primera app [`Hello World`](https://hub.docker.
     ```
     {: pre}
 
-¡Impresionante! Ha desplegado correctamente la primera app de Knative en el clúster y ha explorado las posibilidades de revisión y de escalado de la primitiva `Serving` de Knative.
+¡Impresionante! Ha desplegado correctamente la primera app de Knative en el clúster y ha explorado las posibilidades de revisión y de escalado del primitivo `Serving` de Knative.
 
 
 ## ¿Qué es lo siguiente?   
 {: #whats-next}
 
 - Pruebe este [taller de Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/IBM/knative101/tree/master/workshop) para desplegar la primera app fibonacci de `Node.js` en el clúster.
-  - Explore cómo utilizar la primitiva `Build` de Knative para crear una imagen a partir de un Dockerfile en GitHub y enviar la imagen por push automáticamente al espacio de nombres en {{site.data.keyword.registrylong_notm}}.  
+  - Explore cómo utilizar el primitivo `Build` de Knative para crear una imagen a partir de un Dockerfile en GitHub y enviar la imagen por push automáticamente al espacio de nombres en {{site.data.keyword.registrylong_notm}}.  
   - Aprenda a configurar el direccionamiento para el tráfico de red desde el subdominio de Ingress proporcionado por IBM a la pasarela de Ingress de Istio proporcionada por Knative.
   - Despliegue una nueva versión de la app y utilice Istio para controlar la cantidad de tráfico que se direcciona a cada versión de la app.
 - Explore los ejemplos de [`Eventing` de Knative ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/knative/docs/tree/master/eventing/samples).

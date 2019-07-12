@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Eliminación del almacenamiento persistente de un clúster
 {: #cleanup}
 
-Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en la PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo los haya creado, es posible que los tenga que suprimir por separado.
+Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en la PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo haya creado el almacenamiento, es posible que los tenga que suprimir por separado.
 {:shortdesc}
 
 ## Limpieza del almacenamiento persistente
@@ -48,7 +50,7 @@ Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV,
 
 <p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_backup_restore) o del [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
 
-Antes de empezar: [Inicie la sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para limpiar los datos persistentes:
 
@@ -178,7 +180,7 @@ Para limpiar los datos persistentes:
    ```
    {: pre}
 
-9. Verifique que se ha eliminado la instancia de almacenamiento físico. Tenga en cuenta que el proceso de supresión puede tardar unos días en completarse.
+9. Verifique que se ha eliminado la instancia de almacenamiento físico. El proceso de supresión puede tardar unos días en completarse.
 
    **Almacenamiento de archivos:**
    ```

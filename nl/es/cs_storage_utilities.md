@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Programas de utilidad de almacenamiento de IBM Cloud
@@ -417,13 +419,13 @@ Utilice esta opción si desea añadir otras configuraciones de almacenamiento en
 
 3. Cree el dispositivo de almacenamiento en bloque en la misma zona en la que se encuentra el nodo trabajador no SDS.
 
-   **Ejemplo para el suministro de almacenamiento en bloque de extremo de 20 GB con 2 IOPS por GB:**
+   **Ejemplo de suministro de almacenamiento en bloque resistente de 20 GB con dos IOPS por GB:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
    {: pre}
 
-   **Ejemplo para el suministro de almacenamiento en bloque de rendimiento de 20 GB con 100 IOPS:**
+   **Ejemplo de suministro de almacenamiento en bloque de rendimiento de 20 GB con 100 IOPS:**
    ```
    ibmcloud sl block volume-order --storage-type performance --size 20 --iops 100 --os-type LINUX --datacenter dal10
    ```
@@ -503,7 +505,7 @@ Para conectar el dispositivo de almacenamiento en bloque a un nodo trabajador no
 
 **Antes de empezar**:
 - Asegúrese de que ha creado almacenamiento en bloque sin formato y sin montar de forma [automática](#automatic_block) o [manual](#manual_block) en los nodos trabajadores no SDS.
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Para conectar almacenamiento en bloque sin formato a nodos trabajadores no SDS**:
 1. Prepare la creación de PV.  
@@ -576,7 +578,7 @@ Para conectar el dispositivo de almacenamiento en bloque a un nodo trabajador no
         </tr>
         <tr>
         <td><code>ibm.io/lunid</code></td>
-        <td>Especifique el ID de lun del dispositivo de almacenamiento en bloque que ha recuperado anteriormente. </td>
+        <td>Especifique el ID de LUN del dispositivo de almacenamiento en bloque que ha recuperado anteriormente. </td>
         </tr>
         <tr>
         <td><code>ibm.io/nodeip</code></td>
@@ -646,3 +648,5 @@ Para conectar el dispositivo de almacenamiento en bloque a un nodo trabajador no
 
 Si desea desconectar un volumen, suprima el PV. Aún pueden acceder a los volúmenes desconectados nodos trabajadores específicos y se vuelven a conectar cuando se crea un nuevo PV con la clase de almacenamiento {{site.data.keyword.Bluemix_notm}} Block Volume Attacher para adjuntar otro volumen al mismo nodo trabajador. Para evitar el tener que volver a conectar el volumen desconectado antiguo, desautorice al nodo trabajador a acceder al volumen desconectado con el mandato `ibmcloud sl block access-revoke`. El hecho de desconectar el volumen no elimina el volumen de la cuenta de la infraestructura de IBM Cloud (SoftLayer). Para cancelar la facturación de su volumen, debe [eliminar el almacenamiento de la cuenta de infraestructura de IBM Cloud (SoftLayer)](/docs/containers?topic=containers-cleanup) de forma manual.
 {: note}
+
+

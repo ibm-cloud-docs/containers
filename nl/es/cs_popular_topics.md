@@ -481,7 +481,7 @@ de roles de servicio y de espacios de nombres en IAM para obtener un control má
 <tr>
 <td>27 de febrero</td>
 <td>Imágenes de máquina virtual de hardware (HVM) para nodos trabajadores</td>
-<td>Aumente el rendimiento de E/S de las cargas de trabajo con imágenes de HVM. Active cada nodo trabajador existente con el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o con el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)`ibmcloud ks worker-update`.</td>
+<td>Aumente el rendimiento de E/S de las cargas de trabajo con imágenes de HVM. Active cada nodo trabajador existente con el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` o con el [mandato](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update`.</td>
 </tr>
 <tr>
 <td>26 de febrero</td>

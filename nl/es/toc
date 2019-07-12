@@ -32,23 +32,28 @@ Servicio Kubernetes de IBM Cloud
     {: .topicgroup}
     Guías de aprendizaje
         cs_tutorials.md
+        cs_tutorial_rhos.md
         cs_tutorials_apps.md
-        cs_tutorials_knative.md
-        cs_tutorials_istio.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Guía de aprendizaje: Cómo trasladar una aplicación basada en VM a Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [Guía de aprendizaje: Cómo crear un clúster multiregión mediante Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [Guía de aprendizaje: Configuración de un conducto de integración y entrega continuas para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Guía de aprendizaje: Traslado de una aplicación basada en VM a Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [Guía de aprendizaje: Creación de un clúster de varias regiones mediante Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [Guía de aprendizaje: Configuración de integración continua y conducto de entrega para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
     cs_cli_install.md
 
     {: .topicgroup}
-    Administración de clústeres
+    Configuración de clústeres
         cs_clusters_planning.md
+        cs_plan_ha.md
+        cs_plan_workers.md
         cs_clusters.md
+        cs_workers.md
+
+    {: .topicgroup}
+    Administración de clústeres
         cs_cluster_scaling.md
         cs_cluster_update.md
         cs_users.md
@@ -57,21 +62,22 @@ Servicio Kubernetes de IBM Cloud
         cs_pod_priority.md
         cs_health.md
         cs_performance.md
+        cs_remove.md
 
     {: .topicgroup}
-    Configuración de la red de clúster
-        cs_network_ov.md
-        cs_network_cluster.md
+    Gestión del tráfico de red de un clúster
         cs_firewall.md
-        cs_dns.md
         cs_network_policy.md
         cs_edge.md
-        cs_istio.md
         cs_vpn.md
+        cs_istio.md
         cs_subnets.md
+        cs_network_cluster.md
+        cs_dns.md
 
     cs_images.md
     cs_app.md
+    cs_app_knative.md
 
     {: .topicgroup}
     Sistema de red para exponer apps
@@ -94,7 +100,9 @@ Servicio Kubernetes de IBM Cloud
         cs_storage_remove.md
 
     {: .topicgroup}
-    Mejora de las posibilidades del clúster con integraciones
+    Mejora de las prestaciones de un clúster con integraciones
+        cs_integrations_partnerships.md
+        cs_integrations_ibm_third_party.md
         cs_integrations_addons.md
         cs_integrations_helm.md
         cs_integrations_service_binding.md
@@ -102,17 +110,12 @@ Servicio Kubernetes de IBM Cloud
 
     {: .navgroup id="reference"}
     cs_at_events.md
-
-    {: .topicgroup}
-    En desuso: Nube dedicada
-        cs_dedicated.md
-        [En desuso: Ejecución de contenedores únicos y escalables](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
-
+    cs_dedicated.md
     cs_hybrid.md
 
     {: .topicgroup}
-    Consulta del plugin de CLI de IBM Cloud Kubernetes Service
-        /containers-cli-plugin/containers-cli-plugin-cs_cli_reference
+    Consulta del plugin de la CLI del servicio Kubernetes de IBM Cloud
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
@@ -122,8 +125,8 @@ Servicio Kubernetes de IBM Cloud
         cs_versions_addons.md
 
     cs_regions.md
-    cs_access_reference.md
     cs_integrations_overview.md
+    cs_access_reference.md
     {: .navgroup-end}
 
     {: .navgroup id="help"}
@@ -138,30 +141,8 @@ Servicio Kubernetes de IBM Cloud
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_network.md
 
-    cs_popular_topics.md
+    release_notes.md
     cs_rellinks.md
     cs_sitemap.md
     {: .navgroup-end}
 
-    container_cli_cfic.md
-    container_cli_cfic_install.md
-    container_cli_reference_cfic.md
-    container_cli_reference_cfic_quick.md
-    container_ha.md
-    container_images.md
-    container_images_adding_ov.md
-    container_images_building.md
-    container_integrations.md
-    container_ov.md
-    container_planning.md
-    container_security.md
-    container_single_ui.md
-    container_troubleshoot.md
-    container_volumes_ov.md
-    cs_classic.md
-    cs_cli_devtools.md
-    cs_integrations.md
-    cs_cli_reference.md
-    cs_storage.md
-    transcript_autorecovery.md
-    transcript_loadbalancing.md

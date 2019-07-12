@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector de servicios financieros
@@ -41,7 +41,7 @@ Por qué {{site.data.keyword.Bluemix_notm}}: para mejorar el análisis de riesgo
 {{site.data.keyword.containerlong_notm}} y tecnologías clave:
 * [Escalado horizontal](/docs/containers?topic=containers-app#highly_available_apps)
 * [Varias regiones para alta disponibilidad](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security)
 * [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -109,7 +109,7 @@ Por qué {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_n
 Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo aspecto cuando agregan servicios de nube de IA a apps con una simple pulsación.
 
 Tecnologías clave:
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Prevención de fraudes con {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

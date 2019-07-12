@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector transportes
@@ -129,7 +129,7 @@ Un ejecutivo de RR.HH. (CHRO) necesita un nuevo sitio de beneficios de RR.HH. co
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} agiliza y simplifica el desarrollo de cálculo. Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo impulso cuando se incorpora IBM Watson Assistant. El nuevo sitio de beneficios se creó en menos de 3 semanas.
 
 Tecnologías clave:    
-* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Servicio de chatbot con el respaldo de Watson](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

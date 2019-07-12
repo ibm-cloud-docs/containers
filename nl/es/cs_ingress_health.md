@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Registro y supervisión de Ingress
@@ -37,7 +38,7 @@ Si desea resolver problemas de Ingress o supervisar la actividad de Ingress, pue
 
 Los registros se recopilan automáticamente para los ALB de Ingress. Para ver los registros de ALB, elija entre dos opciones.
 * [Cree una configuración de registro para el servicio Ingress](/docs/containers?topic=containers-health#configuring) en el clúster.
-* Consulte los registros desde la CLI. **Nota**: Debe tener al menos el [rol de **Lector** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+* Consulte los registros desde la CLI. **Nota**: Debe tener al menos el [rol de servicio **Lector** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
     1. Obtenga el ID de un pod para un ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -65,7 +66,7 @@ Los registros se recopilan automáticamente para los ALB de Ingress. Para ver lo
 <tbody>
 <tr>
 <td><code>"time_date": "$time_iso8601"</code></td>
-<td>La hora local en el formato estándar ISO 8601 cuando se graba el registro.</td>
+<td>La hora local en el formato estándar ISO 8601 cuando se escribe el registro.</td>
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
@@ -112,7 +113,7 @@ Los registros se recopilan automáticamente para los ALB de Ingress. Para ver lo
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
-<td>El tiempo de proceso de la solicitud, medido en segundos con una resolución de milisegundos. Este tiempo empieza cuando el ALB lee los primeros bytes de la solicitud de cliente y se detiene cuando el ALB envía los últimos bytes de la respuesta al cliente. El registro se graba inmediatamente después de que se detenga el tiempo de proceso de la solicitud.</td>
+<td>El tiempo de proceso de la solicitud, medido en segundos con una resolución de milisegundos. Este tiempo empieza cuando el ALB lee los primeros bytes de la solicitud de cliente y se detiene cuando el ALB envía los últimos bytes de la respuesta al cliente. El registro se escribe inmediatamente después de que se detenga el tiempo de proceso de la solicitud.</td>
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
@@ -136,7 +137,7 @@ Existe la posibilidad de personalizar el contenido y los formatos de los registr
 
 De forma predeterminada, los registros de Ingress están en formato JSON y visualizan los campos más comunes del registro. Sin embargo, también puede crear un formato de registro personalizado eligiendo los componentes de registro que se reenvían y cómo se disponen los componentes en la salida de registro
 
-Antes de empezar, asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
 
 1. Edite el archivo de configuración del recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`.
 
@@ -251,7 +252,7 @@ Antes de empezar, asegúrese de que tiene el [rol de **Escritor** o de **Gestor*
 Para supervisar los ALB, despliegue un exportador de métricas y el agente Prometheus en el clúster.
 {: shortdesc}
 
-El exportador de métricas de ALB utiliza la directriz de NGINX, `vhost_trafic_status_zone`, para recopilar datos de métricas del punto final `/status/format/json` en cada pod de ALB de Ingress. El exportador de métricas reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. A continuación, un agente Prometheus recopila las métricas generadas por el exportador y hace que las métricas sean visibles en un panel de control de Prometheus.
+El exportador de métricas de ALB utiliza la directriz de NGINX, `vhost_traffic_status_zone`, para recopilar datos de métricas del punto final `/status/format/json` en cada pod de ALB de Ingress. El exportador de métricas reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. A continuación, un agente Prometheus recopila las métricas generadas por el exportador y hace que las métricas sean visibles en un panel de control de Prometheus.
 
 ### Instalación del diagrama de Helm de exportador de métricas
 {: #metrics-exporter}
@@ -278,7 +279,7 @@ Las pods del exportador de métricas de ALB se deben desplegar en los mismos nod
   ```
   {: pre}
 
-4. erifique que los pods `ibmcloud-alb-metrics-exporter` se están ejecutando.
+4. Verifique que los pods `ibmcloud-alb-metrics-exporter` se están ejecutando.
   ```
   kubectl get pods -n kube-system -o wide
   ```
@@ -694,7 +695,7 @@ Las zonas de memoria compartida se definen de forma que los procesos de los nodo
 
 En el mapa de configuración de Ingress `ibm-cloud-provider-ingress-cm`, el campo `vts-status-zone-size` define el tamaño de la zona de memoria compartida para la recopilación de datos de métricas. De forma predeterminada, `vts-status-zone-size` se establece en `10m`. Si tiene un entorno grande que requiere más memoria para la recopilación de métricas, puede modificar el valor predeterminado para utilizar en su lugar un valor mayor siguiendo estos pasos.
 
-Antes de empezar, asegúrese de que tiene el [rol de **Escritor** o de **Gestor** del servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
 
 1. Edite el archivo de configuración del recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`.
 

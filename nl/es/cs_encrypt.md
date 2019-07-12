@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Protección de la información confidencial del clúster
@@ -93,13 +95,13 @@ De forma predeterminada, la configuración del clúster y los secretos de Kubern
 
 Cuando habilita {{site.data.keyword.keymanagementserviceshort}} en el clúster, se utiliza su propia clave raíz para cifrar los datos en etcd, incluidos los secretos de LUKS. Puede obtener más control sobre los datos confidenciales mediante el cifrado de secretos con la clave raíz. El uso de su propio cifrado añade una capa de seguridad a los datos de etcd y los secretos de Kubernetes y le proporciona un mayor control sobre quién puede acceder a la información confidencial del clúster. Si alguna vez necesita eliminar de forma irreversible el acceso a etcd o a sus secretos, puede eliminar la clave raíz.
 
-No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagementserviceshort}}. No suprima claves aunque rote claves para utilizar una clave nueva. No se puede acceder ni eliminar los datos en etcd ni los datos de los secretos del clúster si se suprime una clave raíz. 
+No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagementserviceshort}}. No suprima claves aunque rote claves para utilizar una clave nueva. No se puede acceder ni eliminar los datos en etcd ni los datos de los secretos del clúster si se suprime una clave raíz.
 {: important}
 
 Antes de empezar:
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Compruebe que el clúster ejecuta Kubernetes versión 1.11.3_1521 o posterior ejecutando `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` y comprobando el campo **Version**.
-* Asegúrese de que tiene el [rol de **Administrador** de la plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+* Asegúrese de que tiene el [rol de plataforma **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 * Asegúrese de que la clave de API establecida para la región en la que está el clúster está autorizada para utilizar la protección por clave. Para comprobar el propietario de la clave de API cuyas credenciales están almacenadas para la región, ejecute `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar la instancia o clave raíz que cifra los secretos del clúster:
@@ -138,7 +140,7 @@ Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar
 
 8.  Durante la habilitación, es posible que no pueda acceder al nodo maestro de Kubernetes, como en el caso de actualización de configuraciones de YAML para despliegues. En la salida del mandato siguiente, compruebe que el campo **Master Status** tiene el valor **Ready**.
     ```
-    ibmcloud ks cluster-get <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -164,7 +166,7 @@ Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar
 
 9.  Opcional: para rotar la clave, repita estos pasos con un ID de clave raíz nuevo. La nueva clave raíz se añade a la configuración del clúster junto con la clave de raíz anterior de forma que los datos cifrados existentes siguen estando protegidos.
 
-No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagementserviceshort}}. No suprima claves aunque rote claves para utilizar una clave nueva. No se puede acceder ni eliminar los datos en etcd ni los datos de los secretos del clúster si se suprime una clave raíz. 
+No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagementserviceshort}}. No suprima claves aunque rote claves para utilizar una clave nueva. No se puede acceder ni eliminar los datos en etcd ni los datos de los secretos del clúster si se suprime una clave raíz.
 {: important}
 
 

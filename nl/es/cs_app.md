@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Despliegue de apps en clústeres
+# Despliegue de apps nativas de Kubernetes en clústeres
 {: #app}
 
 Puede utilizar las técnicas de Kubernetes en {{site.data.keyword.containerlong}} para desplegar apps en contenedores y asegurarse de que las estén siempre activas y en funcionamiento. Por ejemplo, puede realizar actualizaciones continuas y retrotracciones sin causar a los usuarios tiempos de inactividad. Debido a que Kubernetes es una plataforma de orquestación de contenedor extensible que no impone un lenguaje o una app específicos, puede ejecutar diversas cargas de trabajo, como por ejemplo apps sin estado, con estado y de proceso de datos escritas en el lenguaje de su elección.
@@ -101,7 +101,7 @@ Ambos recursos definen pares de clave-valor, pero se utilizan para situaciones d
 <li><strong>Argumento de línea de mandatos</strong>: establezca el argumento de línea de mandatos que se utiliza en una especificación de contenedor.</li></ul></dd>
 
 <dt>Secreto</dt>
-<dd>Proporcione información confidencial a las cargas de trabajo tal como se indica a continuación. Tenga en cuenta que otros usuarios del clúster pueden tener acceso al secreto, de modo que asegúrese de que la información secreta se puede compartir con esos usuarios.
+<dd>Proporcione información confidencial a las cargas de trabajo tal como se indica a continuación. Otros usuarios del clúster pueden tener acceso al secreto, de modo que asegúrese de que la información secreta se puede compartir con esos usuarios.
 <ul><li><strong>Información de identificación personal (PII)</strong>: guarde en secretos la información confidencial, como direcciones de correo electrónico u otra información necesaria para la conformidad de la empresa o para la regulación gubernamental.</li>
 <li><strong>Credenciales</strong>: coloque las credenciales, como contraseñas, claves y señales, en un secreto para reducir el riesgo de exposición accidental. Por ejemplo, cuando [enlaza un servicio](/docs/containers?topic=containers-service-binding#bind-services) al clúster, las credenciales se guardan en un secreto.</li></ul></dd>
 </dl>
@@ -170,7 +170,7 @@ Revise las siguientes configuraciones potenciales de apps que están ordenadas p
 2.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en un clúster de una sola zona.
 3.  Un despliegue con n+2 pods gestionados por un conjunto de réplicas y distribuidos en varios nodos (antiafinidad) en varias zonas de un clúster multizona.
 
-También puede [conectar varios clústeres en distintas regiones con un equilibrador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) para aumentar la alta disponibilidad.
+También puede [conectar varios clústeres en distintas regiones con un equilibrador de carga global](/docs/containers?topic=containers-ha_clusters#multiple_clusters) para aumentar la alta disponibilidad.
 
 ### Cómo aumentar la disponibilidad de la app
 {: #increase_availability}
@@ -184,7 +184,7 @@ Tenga en cuenta las opciones siguientes para aumentar la disponibilidad de la ap
     <p>Si despliega más de un pod, se crea automáticamente un conjunto de réplicas para los despliegues que supervisa los pods y garantiza que el número especificado de pods están activos y en ejecución en todo momento. Cuando un pod pasa a estar inactivo, el conjunto de réplicas sustituye el pod que no responde por uno nuevo.</p>
     <p>Puede utilizar un despliegue para definir estrategias para la app que incluyan el número de pods que desea añadir durante una actualización continuada y el número de pods que pueden no estar disponibles al mismo tiempo. Cuando lleva a cabo una actualización continuada, el despliegue comprueba si la revisión funciona o no y detiene la implantación cuando se detectan anomalías.</p>
     <p>Los despliegues permiten desplegar simultáneamente varias revisiones con diferentes distintivos. Por ejemplo, puede probar un primer despliegue antes de decidir si se debe utilizar para producción.</p>
-    <p>Los despliegues permiten realizar un seguimiento de las revisiones desplegadas. Puede utilizar este historial para retrotraer a una versión anterior si detecta que las actualizaciones no funcionan como esperaba.</p></dd>
+    <p>Mediante el uso de despliegues, puede realizar un seguimiento de las revisiones desplegadas. Puede utilizar este historial para retrotraer a una versión anterior si detecta que las actualizaciones no funcionan como esperaba.</p></dd>
   <dt>Incluya suficientes réplicas para la carga de trabajo de la app, más dos</dt>
     <dd>Para que la app esté aún más disponible y resulte más resistente frente a errores, considere la posibilidad de incluir más réplicas que el mínimo para gestionar la carga de trabajo prevista. Las réplicas adicionales pueden gestionar la carga de trabajo en el caso de que un pod se cuelgue y el conjunto de réplicas aún no haya recuperado el pod inactivo. Para la protección frente a dos anomalías simultáneas, incluya dos réplicas adicionales. Esta configuración es un patrón de tipo N+2, donde N es el número de réplicas necesario para gestionar la carga de trabajo entrante y +2 significa dos réplicas adicionales. Mientras el clúster tenga suficiente espacio, puede tener tantos pods como desee.</dd>
   <dt>Distribuya los pods entre varios nodos (antiafinidad)</dt>
@@ -194,15 +194,15 @@ Tenga en cuenta las opciones siguientes para aumentar la disponibilidad de la ap
       </dd>
     </dd>
 <dt>Distribución de pods entre varias zonas o regiones</dt>
-  <dd><p>Para proteger la app frente a un error de zona, puede crear varios clústeres en distintas zonas o puede añadir zonas a una agrupación de nodos trabajadores en un clúster multizona. Los clústeres multizona solo están disponibles en [determinadas áreas metropolitanas](/docs/containers?topic=containers-regions-and-zones#zones), como Dallas. Si crea varios clústeres en distintas zonas, debe [configurar un equilibrador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters).</p>
-  <p>Cuando se utiliza un conjunto de réplicas y se especifica la antiafinidad de pod, Kubernetes distribuye los pods de la app entre los nodos. Si los nodos están en varias zonas, los pods se distribuyen entre las zonas, lo que aumenta la disponibilidad de la app. Si desea limitar las apps de modo que solo se ejecuten en una zona, puede configurar la afinidad de pod, o puede crear y etiquetar una agrupación de nodos trabajadores en una zona. Para obtener más información, consulte [Alta disponibilidad de clústeres multizona](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p>
+  <dd><p>Para proteger la app frente a un error de zona, puede crear varios clústeres en distintas zonas o puede añadir zonas a una agrupación de nodos trabajadores en un clúster multizona. Los clústeres multizona solo están disponibles en [determinadas áreas metropolitanas](/docs/containers?topic=containers-regions-and-zones#zones), como Dallas. Si crea varios clústeres en distintas zonas, debe [configurar un equilibrador de carga global](/docs/containers?topic=containers-ha_clusters#multiple_clusters).</p>
+  <p>Cuando se utiliza un conjunto de réplicas y se especifica la antiafinidad de pod, Kubernetes distribuye los pods de la app entre los nodos. Si los nodos están en varias zonas, los pods se distribuyen entre las zonas, lo que aumenta la disponibilidad de la app. Si desea limitar las apps de modo que solo se ejecuten en una zona, puede configurar la afinidad de pod, o puede crear y etiquetar una agrupación de nodos trabajadores en una zona. Para obtener más información, consulte [Alta disponibilidad de clústeres multizona](/docs/containers?topic=containers-ha_clusters#ha_clusters).</p>
   <p><strong>En un despliegue de clúster multizona, ¿se distribuyen mis pods de app de forma uniforme entre los nodos? </strong></p>
-  <p>Los pods se distribuyen uniformemente entre las zonas, pero no siempre entre los nodos. Por ejemplo, si tiene un clúster con 1 nodo en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada nodo obtiene 2 pods. Sin embargo, si tiene un clúster con 2 nodos en cada una de las 3 zonas y despliega un conjunto de réplicas de 6 pods, cada zona tiene 2 pods planificados, y puede que planifique 1 pod por nodo o puede que no. Para obtener más control sobre la planificación, puede [establecer la afinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>Si cae una zona, ¿cómo se replanifican los pods en los nodos restantes de las otras zonas?</strong></br>Depende de la política de planificación que haya utilizado en el despliegue. Si ha incluido la [afinidad de pod específica del nodo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), los pods no se vuelven a planificar. Si no lo ha hecho, los pods se crean en los nodos trabajadores disponibles en otras zonas, pero es posible que no estén equilibrados. Por ejemplo, es posible que los 2 pods se distribuyan entre los 2 nodos disponibles, o puede que ambos se planifiquen en 1 nodo con capacidad disponible. De forma similar, cuando la zona no disponible vuelve a estar activa, los pods no se suprimen y se reequilibran automáticamente entre los nodos. Si desea que los pods se reequilibren entre las zonas cuando la zona vuelve a estar activa, tenga en cuenta la posibilidad de utilizar el [deplanificador de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/descheduler).</p>
+  <p>Los pods se distribuyen uniformemente entre las zonas, pero no siempre entre los nodos. Por ejemplo, si tiene un clúster con un nodo en cada una de las tres zonas y despliega un conjunto de réplicas de seis pods, cada nodo obtiene dos pods. Sin embargo, si tiene un clúster con dos nodos en cada una de las tres zonas y despliega un conjunto de réplicas de seis pods, cada zona planifica dos pods, y puede que planifique un pod por nodo o puede que no. Para obtener más control sobre la planificación, puede [establecer la afinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
+  <p><strong>Si cae una zona, ¿cómo se replanifican los pods en los nodos restantes de las otras zonas?</strong></br>Depende de la política de planificación que haya utilizado en el despliegue. Si ha incluido la [afinidad de pod específica del nodo ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), los pods no se vuelven a planificar. Si no lo ha hecho, los pods se crean en los nodos trabajadores disponibles en otras zonas, pero es posible que no estén equilibrados. Por ejemplo, es posible que los dos pods se distribuyan entre los dos nodos disponibles, o puede que ambos se planifiquen en un nodo con capacidad disponible. De forma similar, cuando la zona no disponible vuelve a estar activa, los pods no se suprimen y se reequilibran automáticamente entre los nodos. Si desea que los pods se reequilibren entre las zonas cuando la zona vuelve a estar activa, tenga en cuenta la posibilidad de utilizar el [deplanificador de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Consejo</strong>: en clústeres multizona, intente mantener una capacidad de nodo trabajador del 50 % por zona para disponer de suficiente capacidad para proteger el clúster frente un error de la zona.</p>
-  <p><strong>¿Qué ocurre si quiero distribuir mi app entre regiones?</strong></br>Para proteger la app frente a un error de región, cree un segundo clúster en otra región, [configure un equilibrador de carga global](/docs/containers?topic=containers-plan_clusters#multiple_clusters) para conectar los clústeres y utilice un YAML de despliegue para desplegar un conjunto de réplicas duplicado con [antiafinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para la app.</p>
+  <p><strong>¿Qué ocurre si quiero distribuir mi app entre regiones?</strong></br>Para proteger la app frente a un error de región, cree un segundo clúster en otra región, [configure un equilibrador de carga global](/docs/containers?topic=containers-ha_clusters#multiple_clusters) para conectar los clústeres y utilice un YAML de despliegue para desplegar un conjunto de réplicas duplicado con [antiafinidad de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para la app.</p>
   <p><strong>¿Qué pasa si mis apps necesitan almacenamiento persistente?</strong></p>
-  <p>Utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).</p></dd>
+  <p>Utilice un servicio de nube, como por ejemplo [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
 </dl>
 
 ## Especificación de los requisitos de la app en el archivo YAML
@@ -242,8 +242,9 @@ metadata:
 
 <dt id="label">Etiquetas</dt>
   <dd><p>Con las [etiquetas](/docs/containers?topic=containers-strategy#deploy_organize) puede marcar distintos tipos de recursos en el clúster con el mismo par de `clave: valor`. Luego puede especificar el selector de modo que coincida con la etiqueta de forma que pueda crear con base en estos otros recursos. Si tiene previsto exponer la app públicamente, debe utilizar una etiqueta que coincida con el selector que especifique en el servicio. En el ejemplo, la especificación del despliegue utiliza la plantilla que coincide con la etiqueta `app: wasliberty.`</p>
-  <p>Puede recuperar los objetos que están etiquetados en el clúster, por ejemplo para ver los componentes `staging` o `production`. Por ejemplo, obtenga una lista de todos los recursos que tienen la etiqueta `env: production` en todos los espacios de nombres del clúster. Tenga en cuenta que necesita acceso a todos los espacios de nombres para ejecutar este mandato.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <p>Puede recuperar los objetos que están etiquetados en el clúster, por ejemplo para ver los componentes `staging` o `production`. Por ejemplo, obtenga una lista de todos los recursos que tienen la etiqueta `env: production` en todos los espacios de nombres del clúster. <strong>Nota:</strong> se necesita acceso a todos los espacios de nombres para ejecutar este mandato.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>Para obtener más información sobre etiquetas, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
+  <li>Para aplicar etiquetas a nodos trabajadores, [cree la agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) con etiquetas o [actualice una agrupación de nodos trabajadores existente](/docs/containers?topic=containers-add_workers#worker_pool_labels).</li>
   <li>Para ver un ejemplo más detallado, consulte [Despliegue de apps en nodos trabajadores específicos mediante la utilización de etiquetas](/docs/containers?topic=containers-app#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:
@@ -256,8 +257,8 @@ template:
 <dt id="affinity">Afinidad</dt>
   <dd><p>Especifique afinidad (coubicación) cuando desee tener más control sobre los nodos trabajadores en los que están planificados los pods. La afinidad solo afecta a los pods en el momento de la planificación. Por ejemplo, para distribuir el despliegue entre nodos trabajadores en lugar de permitir que los pods planifiquen en el mismo nodo, utilice la opción <code>podAntiAffinity</code> con los clústeres estándares. Puede definir dos tipos de antiafinidad de pod: preferida o necesaria.</p>
   <p>Para obtener más información, consulte la documentación de Kubernetes en <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">Asignación de pods a nodos</a>.</p>
-  <ul><li><strong>Antiafinidad necesaria</strong>: solo puede desplegar la cantidad de réplicas para las que tiene nodos trabajadores. Por ejemplo, si tiene 3 nodos trabajadores en su clúster y define 5 réplicas en su archivo YAML, únicamente se desplegarán 3 réplicas. Cada réplica se basa en un nodo trabajador diferente. Las 2 réplicas sobrantes quedarán pendientes. Si añade otro nodo trabajador al clúster, una de las réplicas sobrantes se desplegará de forma automática en el nuevo nodo trabajador. Si un nodo trabajador falla, el pod no se vuelve a programar porque se necesita la política de afinidad. Para ver un ejemplo de archivo YAML con antiafinidad necesaria, consulte <a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App Liberty con antiafinidad de pod necesaria</a></li>
-  <li><strong>Antiafinidad preferida</strong>: puede desplegar sus pods en nodos con la capacidad disponible, lo que proporciona más flexibilidad para la carga de trabajo. Cuando sea posible, los pods se planifican en distintos nodos trabajadores. Por ejemplo, si tiene 3 nodos trabajadores con suficiente capacidad en el clúster, puede planificar los 5 pods de réplica entre los nodos. Sin embargo, si añade dos nodos trabajadores más al clúster, la regla de afinidad no obliga la reprogramación de los 2 pods adicionales que se ejecutan en los nodos existentes en el nodo libre.</li>
+  <ul><li><strong>Antiafinidad necesaria</strong>: solo puede desplegar el número de réplicas para las que tiene nodos trabajadores. Por ejemplo, si tiene tres nodos trabajadores en su clúster y define cinco réplicas en su archivo YAML, únicamente se desplegarán tres réplicas. Cada réplica se basa en un nodo trabajador diferente. Las dos réplicas sobrantes quedarán pendientes. Si añade otro nodo trabajador al clúster, una de las réplicas sobrantes se desplegará de forma automática en el nuevo nodo trabajador. Si un nodo trabajador falla, el pod no se vuelve a programar porque se necesita la política de afinidad. Para ver un ejemplo de archivo YAML con antiafinidad necesaria, consulte <a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(Se abre en un nuevo separador o ventana)">App Liberty con antiafinidad de pod necesaria</a></li>
+  <li><strong>Antiafinidad preferida</strong>: puede desplegar sus pods en nodos con la capacidad disponible, lo que proporciona más flexibilidad para la carga de trabajo. Cuando sea posible, los pods se planifican en distintos nodos trabajadores. Por ejemplo, si tiene tres nodos trabajadores con suficiente capacidad en el clúster, puede planificar los cinco pods de réplica entre los nodos. Sin embargo, si añade dos nodos trabajadores más al clúster, la regla de afinidad no obliga la reprogramación de los dos pods adicionales que se ejecutan en los nodos existentes en el nodo libre.</li>
   <li><strong>Afinidad de nodo trabajador</strong>: puede configurar el despliegue de modo que solo se ejecute en determinados nodos trabajadores, como por ejemplo los nativos. Para obtener más información, consulte [Despliegue de apps en nodos trabajadores específicos mediante la utilización de etiquetas](/docs/containers?topic=containers-app#node_affinity).</li></ul>
   <p>Ejemplo de antiafinidad preferida:</p>
   <p><pre class="codeblock"><code>spec:
@@ -281,10 +282,10 @@ template:
   <p>Por ejemplo, para obtener una lista de las etiquetas de las imágenes públicas de IBM:</p>
   <ol><li>Vaya a la región de registro global.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
   <li>Obtenga una lista de las imágenes de IBM.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
-  <p>`imagePullPolicy` tiene como valor predeterminado `IfNotPresent`, lo que hace que solo se extraiga la imagen si aún no existe localmente. Si desea que la imagen se extraiga cada vez que se inicie el contenedor, especifique `imagePullPolicy: Always`.</p>
+  <p>`imagePullPolicy` tiene como valor predeterminado `IfNotPresent`, lo que hace que solo se extraiga la imagen si no existe localmente. Si desea que la imagen se extraiga cada vez que se inicie el contenedor, especifique `imagePullPolicy: Always`.</p>
   <p><pre class="codeblock"><code>containers:
 - name: wasliberty
-  image: registry.bluemix.net/ibmliberty:webProfile8
+  image: icr.io/ibmliberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Puerto para el servicio de la app</dt>
@@ -293,10 +294,10 @@ template:
 - containerPort: 9080</pre></code></p></dd>
 
 <dt id="resourcereq">Solicitudes y límites de recursos</dt>
-  <dd><p>Como administrador del clúster, puede asegurarse de que los equipos que comparten el clúster no adquieran más que la parte justa de recursos de cálculo (memoria y CPU) mediante la creación de un [<code>objeto ResourceQuota</code> ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) para cada espacio de nombres de Kubernetes del clúster. Si el administrador del clúster establece una cuota de recursos de cálculo, cada contenedor de la plantilla de despliegue debe especificar solicitudes y límites de recursos para la memoria y la CPU; de lo contrario, la creación del pod falla.</p>
+  <dd><p>Como administrador del clúster, puede asegurarse de que los equipos que comparten el clúster no adquieran más que la parte justa de recursos de cálculo (memoria y CPU) mediante la creación de un [objeto <code>ResourceQuota</code> ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) para cada espacio de nombres de Kubernetes del clúster. Si el administrador del clúster establece una cuota de recursos de cálculo, cada contenedor de la plantilla de despliegue debe especificar solicitudes y límites de recursos para la memoria y la CPU; de lo contrario, la creación del pod falla.</p>
   <p><ol><li>Compruebe si se ha definido una cuota de recursos para un espacio de nombres.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>Vea cuáles son los límites de la cuota.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
-  <p>Aunque no haya ninguna cuota de recursos definida, puede incluir solicitudes y límites de recursos en el despliegue para mejorar la gestión de los recursos de los nodos trabajadores.</p><p class="note">Si un contenedor sobrepasa su límite, el contenedor se puede reiniciar o fallar. Si un contenedor excede una solicitud, su pod se puede desalojar si el nodo trabajador se queda sin este recurso que se ha sobrepasado. Para obtener información sobre la resolución del problema, consulte [Los pods no se pueden reiniciar repetidamente o se eliminan inesperadamente](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail).</p>
+  <p>Aunque no haya ninguna cuota de recursos definida, puede incluir solicitudes y límites de recursos en el despliegue para mejorar la gestión de los recursos de los nodos trabajadores.</p><p class="note">Si un contenedor sobrepasa su límite, el contenedor se puede reiniciar o fallar. Si un contenedor excede una solicitud, su pod se puede desalojar si el nodo trabajador se queda sin este recurso que se ha sobrepasado. Para obtener más información sobre la resolución del problema, consulte [Los pods no se pueden reiniciar repetidamente o se eliminan inesperadamente](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail).</p>
   <p>**Solicitud**: la cantidad mínima del recurso que el planificador reserva para que la utilice el contenedor. Si la cantidad es igual al límite, la solicitud está garantizada. Si la cantidad es menor que el límite, la solicitud sigue estando garantizada, pero el planificador puede utilizar la diferencia entre la solicitud y el límite para asignarla a recursos de otros contenedores.</p>
   <p>**Límite**: la cantidad máxima del recurso que puede consumir el contenedor. Si la cantidad total de recursos que se utiliza en los contenedores supera la cantidad disponible en el nodo trabajador, los contenedores pueden ser desalojados para liberar espacio. Para evitar el desalojo, defina una solicitud de recurso igual al límite del contenedor. Si no se especifica ningún límite, el valor predeterminado es la capacidad del nodo trabajador.</p>
   <p>Para obtener más información, consulte la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
@@ -330,7 +331,7 @@ readinessProbe:
   <dd><p>Puede crear un servicio que exponga la app. En la sección `spec`, asegúrese de que los valores de `port` y de etiqueta coincidan con los que ha utilizado en el despliegue. El servicio expone los objetos que coinciden con la etiqueta, como por ejemplo `app: wasliberty` en el ejemplo siguiente.</p>
   <ul><li>De forma predeterminada, un servicio utiliza [`ClusterIP` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/), lo que hace que el servicio solo esté accesible dentro del clúster, pero no fuera del mismo.</li>
   <li>Puede crear un servicio NodePort, equilibrador de carga o Ingress para exponer la app rápidamente. Estos servicios tienen dos IP, una externa y una interna. Cuando el tráfico se recibe en la IP externa, se reenvía a la IP interna del clúster. A continuación, desde la IP interna del clúster, el tráfico se direcciona a la dirección IP del contenedor de la app.</li>
-  <li>En el ejemplo se utiliza `NodePort` para exponer el servicio fuera del clúster. Para obtener información sobre cómo configurar el acceso externo, consulte [Elección de un servicio NodePort, LoadBalancer o Ingress](/docs/containers?topic=containers-cs_network_planning#external).</li></ul>
+  <li>En el ejemplo se utiliza `NodePort` para exponer el servicio fuera del clúster. Para obtener más información sobre cómo configurar el acceso externo, consulte [Elección de un servicio NodePort, LoadBalancer o Ingress](/docs/containers?topic=containers-cs_network_planning#external).</li></ul>
   <p><pre class="codeblock"><code>apiVersion: v1
 kind: Service
 metadata:
@@ -473,8 +474,17 @@ spec:
 ### Archivo YAML de despliegue de ejemplo completo
 {: #yaml-example}
 
-A continuación se muestra una copia del archivo YAML de despliegue que se ha [explicado en las secciones anteriores](#app_yaml). También puede [descargar el archivo YAML desde GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+A continuación se muestra un ejemplo de una copia del archivo YAML de despliegue que se ha [explicado en las secciones anteriores](#app_yaml). También puede [descargar el archivo YAML desde GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
 {: shortdesc}
+
+Para aplicar el archivo YAML:
+
+```
+kubectl apply -f file.yaml [-n <namespace>]
+```
+{: pre}
+
+Archivo YAML de ejemplo:
 
 ```yaml
 apiVersion: apps/v1
@@ -505,7 +515,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
-        image: registry.bluemix.net/ibmliberty
+        image: icr.io/ibmliberty
         env:
           - name: VERSION
             valueFrom:
@@ -611,6 +621,225 @@ spec:
 <br />
 
 
+## Gestión de los archivos de configuración de Kubernetes para su reutilización en varios entornos con Kustomize
+{: #kustomize}
+
+Como parte de una app nativa de la nube [de 12 factores ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://12factor.net/), desea mantener la paridad entre desarrollo y producción mediante la configuración de un desarrollo continuo y de un conducto de entrega que utilicen una fuente común de base de código controlada por versión. En los repositorios de la base de código, almacene los archivos de manifiesto de configuración de recursos de Kubernetes, que suelen estar en formato YAML. Puede utilizar el proyecto de Kubernetes [Kustomize ![Icono deenlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kustomize.io/) tanto para estandarizar como para personalizar sus despliegues en varios entornos.
+
+{: shortdesc}
+
+Por ejemplo, puede configurar un archivo YAML `kustomization` base para declarar objetos de Kubernetes, como despliegues y PVC, que se comparten en los entornos de desarrollo, prueba y producción. Luego puede configurar otros archivos YAML `kustomization` que tengan configuraciones personalizadas para cada entorno, como más réplicas en el entorno de producción que en el de prueba. Estos archivos YAML personalizados pueden sustituir o crear el archivo YAML base compartido para que pueda gestionar entornos que son prácticamente idénticos, excepto para algunas diferencias de configuración que puede controlar en su origen. Para obtener más información sobre Kustomize, como un glosario y preguntas frecuentes (FAQ), consulte la [documentación de Kustomize ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs).
+
+Antes de empezar:
+*   [Cree](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice](/docs/containers?topic=containers-update) a un clúster que ejecuta Kubernetes versión 1.14 o posterior.
+*   Asegúrese de que su [versión de `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) coincida con su versión del clúster.
+*   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+Para configurar los archivos de configuración con Kustomize:
+1.  [Instale la herramienta `kustomize` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
+    *   Para MacOS, puede utilizar el gestor de paquetes `brew`.
+        ```
+        brew install kustomize
+        ```
+        {: pre}
+    *   Para Windows, puede utilizar el gestor de paquetes `chocolatey`.
+        ```
+        choco install kustomize
+        ```
+        {: pre}
+2.  Cree un directorio para la app en un sistema de control de versiones, como por ejemplo Git.
+    ```
+    git init ~/<my_app>
+    ```
+    {: pre}
+3.  Cree la estructura de repositorio para el directorio de `kustomize` [`base` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#base), [`overlay`](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#overlay) y para los directorios del entorno, como el de transferencia (staging) y el de producción (prod). En los pasos siguientes, configurará estos repositorios para que se utilicen con `kustomize`.
+    ```
+    mkdir -p ~/<my_app>/base &&
+    mkdir -p ~/<my_app>/overlay &&
+    mkdir -p ~/<my_app>/overlay/staging &&
+    mkdir -p ~/<my_app>/overlay/prod
+    ```
+    {: pre}
+    
+    Estructura de repositorios de ejemplo:
+    ```
+    .
+    ├── base
+    └── overlay
+        ├── prod
+        └── staging
+    ```
+    {: screen}
+4.  Configure el repositorio `base`.
+    1.  Vaya al repositorio base.
+        ```
+        cd ~/<my_app>/base
+        ```
+        {: pre}
+    2.  Cree un conjunto inicial de archivos YAML de configuración de Kubernetes para el despliegue de su app. Puede utilizar el [archivo YAML de ejemplo](#yaml-example) `wasliberty` para crear un despliegue, un servicio, un mapa de configuración y una reclamación de volumen persistente.
+    3.  Cree un archivo [`kustomization` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) que especifique la configuración base que se aplicará en los entornos. El archivo `kustomization` debe incluir la lista de archivos YAML de configuración de recursos de Kubernetes almacenados en el mismo repositorio `base`. En el archivo `kustomization`, también puede añadir configuraciones que se apliquen a todos los archivos YAML de recursos del repositorio base, como un prefijo o un sufijo que se añade a todos los nombres de recursos, una etiqueta, el espacio de nombres existente en el que se crean todos los recursos, los secretos, los mapas de configuración y más. 
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namespace: wasliberty
+        namePrefix: kustomtest-
+        nameSuffix: -v2
+        commonLabels:
+          app: kustomized-wasliberty
+        resources:
+        - deployment.yaml
+        - service.yaml
+        - pvc.yaml
+        - configmap.yaml
+        - secret.yaml
+        ```
+        {: codeblock}
+        
+        Los nombres de los archivos YAML de `recursos` deben coincidir con los nombres de los otros archivos del repositorio `base`. Puede incluir varias configuraciones en el mismo archivo, pero, en el ejemplo, las configuraciones son archivos independientes, como `deployment.yaml`, `service.yaml` y `pvc.yaml`.
+        
+    4.  Cree los archivos YAML de recursos con las configuraciones que ha definido en el archivo YAML base de `kustomization`. Los recursos se crean combinando las configuraciones de `kustomization` y los archivos YAML de recursos. Los archivos YAML combinados se devuelven en `stdout` en la salida del terminal. Utilice este mismo mandato para crear los cambios posteriores que realice en el archivo YAML de `kustomization`, como por ejemplo para añadir una nueva etiqueta.
+        ```
+        kustomize build
+        ```
+        {: pre}
+5.  Configure el repositorio overlay con archivos YAML de `kustomization` exclusivos para cada uno de los entornos, como por ejemplo para el de transferencia y el de producción.
+    1.  En el repositorio de transferencia, cree un archivo `kustomization.yaml`. Añada las configuraciones que sean exclusivas del entorno de transferencia, como una etiqueta, un código de imagen o un archivo YAML para un nuevo componente que desee probar.
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namePrefix: staging-
+        commonLabels:
+          env: staging
+          owner: TeamA
+        bases:
+        - ../../base
+        patchesStrategicMerge:
+        - configmap.yaml
+        - new_staging_resource.yaml
+        resources:
+        - new_staging_resource.yaml
+        ```
+        {: codeblock}
+        <table summary="Una tabla que describe en la Columna 1 los campos de los archivos YAML y en la Columna 2 cómo cumplimentar estos campos.">
+        <caption>Componentes de YAML</caption>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>namePrefix</code></td>
+        <td>Especifique el prefijo que se adjuntará al nombre de cada recurso que desee crear con el archivo `kustomization` de transferencia, como por ejemplo `staging-`.</td>
+        </tr>
+        <tr>
+        <td><code>commonLabels</code></td>
+        <td>Añada etiquetas que sean exclusivas de los objetos de transferencia, como por ejemplo el entorno de transferencia y el equipo responsable.</td>
+        </tr>
+        <tr>
+        <td><code>bases</code></td>
+        <td>Añada una vía de acceso relativa a un directorio o un URL a un repositorio remoto que contenga el archivo `kustomization` base. En este ejemplo, la vía de acceso relativa a punta al archivo `kustomization` base del repositorio `base` que ha creado anteriormente. Este campo es obligatorio para una `kustomization` de overlay.</td>
+        </tr>
+        <tr>
+        <td><code>patchesStrategicMerge</code></td>
+        <td>Obtenga una lista de los archivos YAML de configuración de recursos que desea fusionar con `kustomization` base. También debe añadir estos archivos al mismo repositorio que el archivo `kustomization`, como por ejemplo `overlay/staging`. Estos archivos de configuración de recursos pueden contener pequeños cambios que se fusionan con los archivos de configuración base con el mismo nombre como un parche. El recurso obtiene todos los componentes que están en el archivo de configuración `base`, más los componentes adicionales que especifique en el archivo de configuración `overlay`.<br><br>Si la configuración es un archivo nuevo que no está en la base, también debe añadir el nombre de archivo en el campo `resources`.</td>
+        </tr>
+        <tr>
+        <td><code>resources</code></td>
+        <td>Obtenga una lista de los archivos YAML de configuración de recursos que sean exclusivos del repositorio de transferencia y que no estén incluidos en el repositorio base. Incluya también estos archivos en el campo `patchesStrategicMerge` y añádalos al mismo repositorio que el archivo `kustomization`, como por ejemplo `overlay/staging`.</td>
+        </tr>
+        <tr>
+        <td>Otras configuraciones posibles</td>
+        <td>Para obtener más información sobre las configuraciones que puede añadir al archivo, consulte el [`ejemplo de archivo YAML de kustomization ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml).</td>
+        </tr>
+        </tbody></table>
+    2.  Cree los archivos de configuración staging y overlay.
+        ```
+        kustomize build overlay/staging
+        ```
+        {: pre}
+    3.  Repita estos pasos para crear el archivo `kustomization` overlay de producción y otros archivos YAML de configuración. Por ejemplo, puede aumentar el número de réplicas en su `deployment.yaml` para que el entorno de producción pueda manejar más solicitudes de usuario.
+    4.  Revise la estructura de repositorios de `kustomize` para asegurarse de que incluya todos los archivos de configuración de YAML que necesita. La estructura debería parecerse a la del siguiente ejemplo.
+        ```
+        ├── base
+        │   ├── configmap.yaml
+        │   ├── deployment.yaml
+        │   ├── kustomization.yaml
+        │   ├── pvc.yaml
+        │   ├── secret.yaml
+        │   └── service.yaml
+        └── overlay
+            ├── prod
+            │   ├── deployment.yaml
+            │   ├── kustomization.yaml
+            │   └── new_prod_resource.yaml
+            └── staging
+                ├── configmap.yaml
+                ├── kustomization.yaml
+                └── new_staging_resource.yaml
+        ```
+        {: screen}
+6.  Aplique los recursos de Kubernetes correspondientes al entorno que desea desplegar. En el siguiente ejemplo se utiliza el repositorio staging.
+    1.  Vaya al directorio overlay de staging. Si no ha creado los recursos en el paso anterior, créelos ahora.
+        ```
+        cd overlay/staging && kustomize build
+        ```
+        {: pre}
+    2.  Aplique los recursos de Kubernetes al clúster. Incluya el distintivo `-k` y el directorio en el que se encuentra el archivo `kustomization`. Por ejemplo, si ya está en el directorio staging, incluya `../staging` para marcar la vía de acceso al directorio.
+        ```
+        kubectl apply -k ../staging
+        ```
+        {: pre}
+        Salida de ejemplo:
+        ```
+        configmap/staging-kustomtest-configmap-v2 created
+        secret/staging-kustomtest-secret-v2 created
+        service/staging-kustomtest-service-v2 created
+        deployment.apps/staging-kustomtest-deployment-v2 created
+        job.batch/staging-pi created
+        persistentvolumeclaim/staging-kustomtest-pvc-v2 created
+        ```
+    3.  Asegúrese de que se apliquen los cambios exclusivos de staging. Por ejemplo, si ha añadido un prefijo `staging-`, los pods y otros recursos que se crean deben incluir este prefijo en su nombre.
+        ```
+        kubectl get -k ../staging
+        ```
+        {: pre}
+        Salida de ejemplo:
+        ```
+        NAME                                        DATA   AGE
+        configmap/staging-kustomtest-configmap-v2   2      90s
+
+        NAME                                  TYPE     DATA   AGE
+        secret/staging-kustomtest-secret-v2   Opaque   2      90s
+
+        NAME                                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+        service/staging-kustomtest-service-v2   NodePort   172.21.xxx.xxx   <none>        9080:30200/TCP   90s
+
+        NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+        deployment.apps/staging-kustomtest-deployment-v2   0/3     3            0           91s
+
+        NAME                   COMPLETIONS   DURATION   AGE
+        job.batch/staging-pi   1/1           41s        2m37s
+
+        NAME                                              STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS       AGE
+        persistentvolumeclaim/staging-kustomtest-pvc-v2   Pending                                      ibmc-file-bronze   90s
+        ```
+        {: screen}
+    4.  Repita estos pasos para cada entorno que desee crear.
+7.  **Opcional**: limpie el entorno eliminando todos los recursos que ha aplicado con Kustomize.
+    ```
+    kubectl delete -k <directory>
+    ```
+    {: pre}
+    Salida de ejemplo:
+    ```
+    configmap "staging-kustomtest-configmap-v2" deleted
+    secret "staging-kustomtest-secret-v2" deleted
+    service "staging-kustomtest-service-v2" deleted
+    deployment.apps "staging-kustomtest-deployment-v2" deleted
+    job.batch "staging-pi" deleted
+    persistentvolumeclaim "staging-kustomtest-pvc-v2" deleted
+    ```
+    {: screen}
+
 ## Inicio del panel de control de Kubernetes
 {: #cli_dashboard}
 
@@ -624,7 +853,7 @@ Abra un panel de control de Kubernetes en el sistema local para ver información
 Antes de empezar:
 * Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes.
 * Para [iniciar el panel de control de Kubernetes desde la consola](#db_gui), debe tener asignado un [rol de plataforma](/docs/containers?topic=containers-users#platform). Si solo tiene asignado un rol de servicio pero no un rol de plataforma, [inicie el panel de control de Kubernetes desde la CLI](#db_cli).
-* [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Puede utilizar el puerto predeterminado o definir su propio puerto para iniciar el panel de control de Kubernetes para un clúster.
 
@@ -700,7 +929,7 @@ Cuando despliega una app a un clúster utilizando el panel de control de Kuberne
 Antes de empezar:
 
 -   [Instale las CLI necesarias](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes.
 -   Para [iniciar el panel de control de Kubernetes desde la consola](#db_gui), debe tener asignado un [rol de plataforma](/docs/containers?topic=containers-users#platform). Si solo tiene asignado un rol de servicio pero no un rol de plataforma, [inicie el panel de control de Kubernetes desde la CLI](#db_cli).
 
@@ -730,7 +959,7 @@ Después de crear un clúster, puede desplegar una app en dicho clúster mediant
 Antes de empezar:
 
 -   Instale las [CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install) necesarias.
--   [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes en el espacio de nombres.
 
 Para desplegar la app:
@@ -764,7 +993,7 @@ Cuando despliega una app, los pods de la app se despliegan de forma indiscrimina
 {:shortdesc}
 
 Antes de empezar:
-*   [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes en el espacio de nombres.
 
 Para desplegar apps en nodos trabajadores específicos:
@@ -806,7 +1035,7 @@ Para desplegar apps en nodos trabajadores específicos:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -895,13 +1124,13 @@ Para desplegar apps en nodos trabajadores específicos:
 ## Despliegue de una app en una máquina con GPU
 {: #gpu_app}
 
-Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
+Si tiene un [tipo de máquina con GPU (Graphics Processing Unit) nativa](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), puede planificar cargas de trabajo matemáticas intensivas en el nodo trabajador. Por ejemplo, podría querer ejecutar una app 3D que utilizase la plataforma CUDA (Compute Unified Device Architecture) para compartir la carga de trabajo entre la GPU y la CPU para un mayor rendimiento.
 {:shortdesc}
 
 En los pasos siguientes, aprenderá a desplegar cargas de trabajo que requieren la GPU. También puede [desplegar apps](#app_ui) que no tienen la necesidad de procesar sus cargas de trabajo entre la GPU y la CPU. Después, podría encontrar útil probar con cargas de trabajo matemáticas intensivas como por ejemplo las de la infraestructura de aprendizaje máquina de [TensorFlow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.tensorflow.org/) con [esta demo de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow).
 
 Antes de empezar:
-* [Cree un tipo de máquina nativa con GPU](/docs/containers?topic=containers-clusters#clusters_cli). Tenga en cuenta que puede llevar más de 1 día laboral el lograrlo.
+* [Cree un tipo de máquina nativa con GPU](/docs/containers?topic=containers-clusters#clusters_ui). Puede ser necesario más de un día laborable para completar este proceso.
 * Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes en el espacio de nombres.
 
 Para ejecutar una carga de trabajo en una máquina con GPU:
@@ -966,7 +1195,7 @@ Para ejecutar una carga de trabajo en una máquina con GPU:
     </tr>
     <tr>
     <td><code>resources.limits</code></td>
-    <td>Para máquinas con GPU, debe especificar el límite del recurso. El [Device Plug-in![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) de Kubernetes establece la solicitud de recurso predeterminado para que coincida con el límite.
+    <td>Para máquinas con GPU, debe especificar el límite del recurso. El [Device plugin![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) de Kubernetes establece la solicitud de recurso predeterminado para que coincida con el límite.
     <ul><li>Debe especificar la clave como <code>nvidia.com/gpu</code>.</li>
     <li>Especifique el número entero de GPU que solicita, por ejemplo, <code>2</code>. <strong>Nota</strong>: Los pods de contenedor no comparten GPU. Tampoco es posible sobrecargar GPU. Por ejemplo, si solo tiene una máquina `mg1c.16x128`, solo tiene 2 GPU en dicha máquina y puede especificar un máximo de `2`.</li></ul></td>
     </tr>
@@ -1067,11 +1296,11 @@ Para ejecutar una carga de trabajo en una máquina con GPU:
 Con Kubernetes, puede habilitar el [escalado automático de pod horizontal ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar o disminuir automáticamente el número de instancias de las apps en función de la CPU.
 {:shortdesc}
 
-¿Está buscando información sobre las aplicaciones de escalado de Cloud Foundry? Consulte [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started). ¿Desea escalar los nodos trabajadores en lugar de los pods? Consulte el apartado sobre el [programa de escalado automático de clúster](/docs/containers?topic=containers-ca#ca).
+¿Está buscando información sobre las aplicaciones de escalado de Cloud Foundry? Consulte [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). ¿Desea escalar los nodos trabajadores en lugar de los pods? Consulte el apartado sobre el [programa de escalado automático de clúster](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Antes de empezar:
-- [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - La supervisión de Heapster debe desplegarse en el clúster que desea escalar automáticamente.
 - Asegúrese de que tiene asignado un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes en el espacio de nombres.
 
@@ -1151,7 +1380,7 @@ Puede gestionar el despliegue de cambios en una app de forma automática y contr
 {: tip}
 
 Antes de empezar:
-*   [Inicie una sesión en su cuenta. Elija como destino la región adecuada y, si procede, el grupo de recursos. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Cree un [despliegue](#app_cli).
 *   Asegúrese de que tiene un [rol de servicio](/docs/containers?topic=containers-users#platform) que otorgue el rol de RBAC de Kubernetes adecuado para que pueda trabajar con los recursos de Kubernetes en el espacio de nombres.
 
@@ -1205,7 +1434,7 @@ Para gestionar las actualizaciones continuas en las apps:
     </tr>
     <tr>
     <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
-    <td>Establezca cuántos recursos adicionales el despliegue puede utilizar durante la puesta en marcha, en forma de número (`2`) o de porcentaje (`50%`). Por ejemplo, si en su despliegue se especifican `10` réplicas y establece `maxSurge` en `2`, durante la puesta en marcha se crean 2 nuevas réplicas. Ahora tiene 12 réplicas (10 existentes, 2 nuevas). Una vez las 2 nuevas réplicas están listas, el despliegue reduce las réplicas antiguas a 8 para ajustarse a las 10 réplicas especificadas. Este proceso continúa hasta que se completa la puesta en marcha y las 10 réplicas ejecutan la nueva versión.<p class="tip">Si desea realizar una actualización de estilo de conmutación instantánea azul-verde, establezca `maxSurge` en `100%`. El despliegue crea todas las nuevas réplicas necesarias y después reduce a 0 las réplicas de la versión antigua..</p></td>
+    <td>Establezca cuántos recursos adicionales el despliegue puede utilizar durante la puesta en marcha, en forma de número (`2`) o de porcentaje (`50%`). Por ejemplo, si en su despliegue se especifican `10` réplicas y establece `maxSurge` en `2`, durante la puesta en marcha se crean dos nuevas réplicas. Ahora tiene 12 réplicas (10 existentes, 2 nuevas). Una vez las dos nuevas réplicas están listas, el despliegue reduce las réplicas antiguas a 8 para ajustarse a las 10 réplicas especificadas. Este proceso continúa hasta que se completa la puesta en marcha y las 10 réplicas ejecutan la nueva versión.<p class="tip">Si desea realizar una actualización de estilo de conmutación instantánea azul-verde, establezca `maxSurge` en `100%`. El despliegue crea todas las nuevas réplicas necesarias y después reduce a 0 las réplicas de la versión antigua.</p></td>
     </tr>
     </tbody></table>
 
