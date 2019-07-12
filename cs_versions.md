@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks
 
@@ -32,6 +32,7 @@ subcollection: containers
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
+
 **Supported Kubernetes versions**:
 *   Latest: 1.14.3 
 *   Default: 1.13.7
@@ -60,7 +61,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.13.7+IKS
+Server Version: v1.13.8+IKS
 ```
 {: screen}
 
