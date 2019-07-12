@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-11"
+lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -200,7 +200,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
     ```
     Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.7      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.8      Default
     ```
     {: screen}
 
@@ -213,7 +213,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
     When the worker node is ready, the state changes to **normal** and the status is **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.13.7      Default
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   free           normal   Ready    mil01       1.13.8      Default
     ```
     {: screen}
 
@@ -436,7 +436,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
     When the provisioning of your cluster is completed, the status of your cluster changes to **deployed**.
     ```
     Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.7      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.8      Default
     ```
     {: screen}
 
@@ -450,7 +450,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
     ```
     ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.13.7      Default
+    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.13.8      Default
     ```
     {: screen}
 
@@ -687,8 +687,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.13.7
-  Server Version: v1.13.7
+  Client Version: v1.13.8
+  Server Version: v1.13.8
   ```
   {: screen}
 
