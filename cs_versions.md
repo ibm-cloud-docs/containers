@@ -32,11 +32,10 @@ subcollection: containers
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
-
 **Supported Kubernetes versions**:
-*   Latest: 1.14.3 
-*   Default: 1.13.7
-*   Other: 1.12.9
+*   Latest: 1.14.4 
+*   Default: 1.13.8
+*   Other: 1.12.10
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.11
