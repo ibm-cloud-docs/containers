@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks
 
@@ -50,6 +50,55 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for master fix pack 1.14.4_1526, released 15 July 2019
+{: #1144_1526}
+
+The following table shows the changes that are included in the master fix pack 1.14.4_1526.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.3_1525">
+<caption>Changes since version 1.14.3_1525</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.6.1</td>
+<td>v3.6.4</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001).</td>
+</tr>
+<tr>
+<td>CoreDNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>Updated base image packages.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.3</td>
+<td>v1.14.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.3-113</td>
+<td>v1.14.4-139</td>
+<td>Updated to support the Kubernetes 1.14.4 release. Additionally, `calicoctl` version is updated to 3.6.4.</td>
+</tr>
+</table>
 
 ### Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019
 {: #1143_1525}
@@ -438,6 +487,56 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.13.8_1529, released 15 July 2019
+{: #1138_1529}
+
+The following table shows the changes that are included in the master fix pack 1.13.8_1529.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.7_1528">
+<caption>Changes since version 1.13.7_1528</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.4</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001).</td>
+</tr>
+<tr>
+<td>CoreDNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>Updated base image packages.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.7</td>
+<td>v1.13.8</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.7-162</td>
+<td>v1.13.8-188</td>
+<td>Updated to support the Kubernetes 1.13.8 release. Additionally, `calicoctl` version is updated to 3.6.4.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019
 {: #1137_1528}
@@ -1259,6 +1358,58 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.12.10_1560, released 15 July 2019
+{: #11210_1560}
+
+The following table shows the changes that are included in the master fix pack 1.12.10_1560.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.9_1559">
+<caption>Changes since version 1.12.9_1559</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.6</td>
+<td>v3.6.4</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001).
+</td>
+</tr>
+<tr>
+<td>CoreDNS configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Changed the default CoreDNS configuration from a 5 to 30 second TTL for DNS records in the `kubernetes` zone. This change aligns with the default KubeDNS configuration. Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).
+</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>Updated base image packages.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.9</td>
+<td>v1.12.10</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.12.9-227</td>
+<td>v1.12.10-259</td>
+<td>Updated to support the Kubernetes 1.12.10 release. Additionally, `calicoctl` version is updated to 3.6.4.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.9_1559, released 8 July 2019
 {: #1129_1559}
