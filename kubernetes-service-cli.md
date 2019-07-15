@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -2155,10 +2155,12 @@ ibmcloud ks alb-autoupdate-get --cluster CLUSTER
 ### Beta: ibmcloud ks alb-cert-deploy
 {: #cs_alb_cert_deploy}
 
-Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster. You can update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance only.
+Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster.
 {: shortdesc}
 
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
+
+You can also use the `--update` parameter to update certificates, such as to update the certificate in your cluster after you renew the certificate in {{site.data.keyword.cloudcerts_short}}. You can update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance only.
 
 To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb-cert-deploy` and `alb-cert-deploy --update` commands.
 {: note}
@@ -2177,7 +2179,7 @@ ibmcloud ks alb-cert-deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--update</code></dt>
-<dd>Update the certificate for an ALB secret in a cluster. This value is optional.</dd>
+<dd>Update the certificate for an ALB secret in a cluster. You can use this parameter to update the certificate after you renew it in {{site.data.keyword.cloudcerts_short}}.</dd>
 
 <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
 <dd>Specify a name for the ALB secret when it is created in the cluster. This value is required. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress</code>.</dd>
