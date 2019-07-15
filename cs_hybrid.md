@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks
 
@@ -118,7 +118,7 @@ To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} 
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated Hosting
 
-To choose a {{site.data.keyword.cloud_notm}} Direct Link offering and set up a {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
+To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
@@ -133,8 +133,6 @@ To choose a {{site.data.keyword.cloud_notm}} Direct Link offering and set up a {
 You can run select licensed IBM products that were packaged for {{site.data.keyword.cloud_notm}} Private in a cluster in {{site.data.keyword.cloud_notm}} Public by using the PPA importer tool.  
 {: shortdesc}
 
-The PPA importer tool is available only for older versions of entitled software. If you want to run entitled software from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
-{: note}
 
 Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
 
@@ -170,7 +168,7 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
     ```
     {: pre}
 
-3.  Refer to the product-specific documentation for more information about how to configure and use the product with your cluster.
+3.  For more information about how to configure and use the product with your cluster, refer to the product-specific documentation.
 
     - [IBM Db2 Direct Advanced Edition Server ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html)
     - [IBM MQ Advanced ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
