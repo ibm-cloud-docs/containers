@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -38,7 +38,7 @@ No backups are created of your cluster or your data in your persistent storage. 
 Before you begin:
 * Note your cluster ID. You might need the cluster ID to investigate and remove related IBM Cloud infrastructure (SoftLayer) resources that are not automatically deleted with your cluster.
 * If you want to delete the data in your persistent storage, [understand the delete options](/docs/containers?topic=containers-cleanup#cleanup).
-* Make sure you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+* Make sure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To remove a cluster:
 
@@ -67,7 +67,7 @@ To remove a cluster:
         ```
         {: pre}
 
-    3.  Follow the prompts and choose whether to delete cluster resources, which includes containers, pods, bound services, persistent storage, and secrets.
+    3.  Follow the prompts and choose whether to delete cluster resources, which include containers, pods, bound services, persistent storage, and secrets.
       - **Persistent storage**: Persistent storage provides high availability for your data. If you created a persistent volume claim by using an [existing file share](/docs/containers?topic=containers-file_storage#existing_file), then you cannot delete the file share when you delete the cluster. You must manually delete the file share later from your IBM Cloud infrastructure (SoftLayer) portfolio.
 
           Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.

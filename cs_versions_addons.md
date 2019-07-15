@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -58,6 +58,18 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>497 / 331</td>
+<td>14 July 2019</td>
+<td><ul>
+<li>Adds the [`upstream-keepalive-timeout`](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout) to set the maximum time that a keepalive connection stays open between the ALB proxy server and the upstream server for your back-end app.</li>
+<li>Adds support for the [`reuse-port`](/docs/containers?topic=containers-ingress-settings#reuse-port) directive to increase the number of ALB socket listeners from one per cluster to one per worker node.</li>
+<li>Removes the redundant update of the load balancer that exposes an ALB when a port number is changed.</li>
+<li>Fixes `bzip2` vulnerabilities for [CVE-2016-3189 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3189) and [CVE-2019-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900).</li>
+<li>Fixes Expat vulnerabilities for [CVE-2018-20843 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20843).</li>
+</ul></td>
+<td>-</td>
+</tr>
 <tr>
 <td>477 / 331</td>
 <td>24 June 2019</td>

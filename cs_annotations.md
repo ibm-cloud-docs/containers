@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-15"
 
 keywords: kubernetes, iks, ingress
 
@@ -92,7 +92,7 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <tr>
   <td><a href="#keepalive-timeout">Keepalive timeout</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Set the maximum time that a keepalive connection stays open on the server.</td>
+  <td>Set the maximum time that a keepalive connection stays open between the client and the ALB proxy server.</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">Proxy next upstream</a></td>
@@ -113,6 +113,11 @@ Before you use annotations, make sure you have properly set up your Ingress serv
   <td><a href="#upstream-keepalive">Upstream keepalive</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>Set the maximum number of idle keepalive connections for an upstream server.</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-keepalive-timeout">Upstream keepalive timeout</a></td>
+  <td><code>upstream-keepalive-timeout</code></td>
+  <td>Set the maximum time that a keepalive connection stays open between the ALB proxy server and your app's upstream server.</td>
   </tr>
   <tr>
   <td><a href="#upstream-max-fails">Upstream max fails</a></td>
@@ -711,7 +716,7 @@ spec:
 {: #keepalive-timeout}
 
 **Description**</br>
-Sets the maximum time that a keepalive connection stays open on the server.
+Sets the maximum time that a keepalive connection stays open between the client and the ALB proxy server. If you do not use this annotation, the default timeout value is `60s`.
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -763,7 +768,7 @@ Set when the ALB can pass a request to the next upstream server.
 {:shortdesc}
 
 **Description**</br>
-The Ingress ALB acts as a proxy between the client app and your app. Some app setups require multiple upstream servers that handle incoming client requests from the ALB. Sometimes the proxy server that the ALB uses cannot establish a connection with an upstream server that the app uses. The ALB can then try to establish a connection with the next upstream server to pass the request to it instead. You can use the `proxy-next-upstream-config` annotation to set in which cases, how long, and how many times the ALB can try to pass a request to the next upstream server.
+The Ingress ALB acts as a proxy between the client app and your app. Some app setups require multiple upstream servers that handle incoming client requests from the ALB. Sometimes the proxy server that the ALB uses cannot establish a connection with an upstream server that the app uses. The ALB can then try to establish a connection with the next upstream server to pass the request to it instead. You can use the `proxy-next-upstream-config` annotation to set in which cases, for how long, and how many times the ALB can try to pass a request to the next upstream server.
 
 Timeout is always configured when you use `proxy-next-upstream-config`, so don't add `timeout=true` to this annotation.
 {: note}
@@ -1015,6 +1020,55 @@ spec:
 <tr>
 <td><code>keepalive</code></td>
 <td>Replace <code>&lt;<em>max_connections</em>&gt;</code> with the maximum number of idle keepalive connections to the upstream server. The default is <code>64</code>. A <code>0</code> value disables upstream keepalive connections for the given service.</td>
+</tr>
+</tbody></table>
+
+<br />
+
+
+### Upstream keepalive timeout (`upstream-keepalive-timeout`)
+{: #upstream-keepalive-timeout}
+
+**Description**</br>
+Sets the maximum time that a keepalive connection stays open between the ALB proxy server and the upstream server for your back-end app. If you do not use this annotation, the default timeout value is `60s`.
+
+**Sample Ingress resource YAML**</br>
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
+
+<table>
+<caption>Understanding the annotation components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the annotation components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Replace <code>&lt;<em>myservice</em>&gt;</code> with the name of the Kubernetes service that you created for your app. This parameter is optional.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Replace <code>&lt;<em>time</em>&gt;</code> with an amount of time in seconds. Example: <code>timeout=20s</code>. A <code>0</code> value disables the keepalive client connections.</td>
 </tr>
 </tbody></table>
 
@@ -1892,7 +1946,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
+   ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
@@ -2116,7 +2170,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
+   ingress.bluemix.net/add-host-port: "enabled=true serviceName=<myservice>"
 spec:
  tls:
  - hosts:

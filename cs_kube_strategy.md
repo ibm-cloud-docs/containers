@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-07-15"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, containers
 
 subcollection: containers
 
@@ -38,7 +38,7 @@ You have lots of reasons to move your workloads to {{site.data.keyword.cloud_not
 
 But how do you get to the cloud? What are your options along the way? And how do you manage your workloads after you get there?
 
-Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com)
+Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-kubernetes-service.slack.com)
 
 Not on slack yet? [Request an invite!](https://bxcs-slack-invite.mybluemix.net/)
 {: tip}
@@ -46,7 +46,7 @@ Not on slack yet? [Request an invite!](https://bxcs-slack-invite.mybluemix.net/)
 ### What can I move to the {{site.data.keyword.cloud_notm}}?
 {: #move_to_cloud}
 
-With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes clusters in [off-premises, on-premises, or hybrid cloud environments](/docs/containers?topic=containers-cs_ov#differentiation). The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters running in both environments.
+With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes clusters in [off-premises, on-premises, or hybrid cloud environments](/docs/containers?topic=containers-cs_ov#differentiation). The following table provides some examples of what types of workloads that users typically move to the various types of clouds. You might also choose a hybrid approach where you have clusters that run in both environments.
 {: shortdesc}
 
 | Workload | {{site.data.keyword.containershort_notm}} off-prem | on-prem |
@@ -58,10 +58,9 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 | Collaboration and social tools such as email | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
 | Linux and x86 workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | |
 | Bare metal and GPU compute resources | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-| PCI and HIPAA compliant workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| PCI and HIPAA-compliant workloads | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 | Legacy apps with platform and infrastructure constraints and dependencies | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 | Proprietary apps with strict designs, licensing, or heavy regulations | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-| Scaling apps in the public cloud and syncing the data to an on-site private database | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />  | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 {: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="top"}
 
 **Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**</br>
@@ -176,8 +175,8 @@ Now let's add some other features that you might use.
 
 
 
-1.  Consider if your app pulls large or many images, which can take up local storage on the worker node.
-2.  Decide if you want to [integrate services](/docs/containers?topic=containers-supported_integrations#supported_integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-helm#public_helm_install) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
+1.  Consider whether your app pulls large or many images, which can take up local storage on the worker node.
+2.  Decide whether you want to [integrate services](/docs/containers?topic=containers-supported_integrations#supported_integrations) into your cluster, such as [Helm](/docs/containers?topic=containers-helm#public_helm_install) or [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus). These integrated services and add-ons spin up pods that consume cluster resources.
 
 ### What type of availability do I want my workload to have?
 {: #sizing_availability}
@@ -192,9 +191,8 @@ Don't forget that you want your workload to be up as much as possible!
 
 Now that you have a good idea of what your workload looks like, let's map the estimated usage onto your available cluster configurations.
 
-1.  Estimate the max worker node capacity, which depends on what type of cluster you have. You don't want to max out worker node capacity in case a surge or other temporary event happens.
-    *  **Single zone clusters**: Plan to have at least 3 worker nodes in your cluster. Further, you want 1 extra node's worth of CPU and memory capacity available within the cluster.
-    *  **Multizone clusters**: Plan to have at least 2 worker nodes per zone, so 6 nodes across 3 zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if 1 zone goes down, you have resources available to maintain the workload.
+    *  **Single zone clusters**: Plan to have at least three worker nodes in your cluster. Further, you want one extra node's worth of CPU and memory capacity available within the cluster.
+    *  **Multizone clusters**: Plan to have at least two worker nodes per zone, so six nodes across three zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if one zone goes down, you have resources available to maintain the workload.
 2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). To see available flavors in a zone, run `ibmcloud ks machine-types <zone>`.
     *   **Don't overload worker nodes**: To avoid your pods competing for CPU or running inefficiently, you must know what resources your apps require so that you can plan the number of worker nodes that you need. For example, if your apps require less resources than the resources that are available on the worker node, you can limit the number of pods that you deploy to one worker node. Keep your worker node at around 75% capacity to leave space for other pods that might need to be scheduled. If your apps require more resources than you have available on your worker node, use a different worker node flavor that can fulfill these requirements. You know that your worker nodes are overloaded when they frequently report back a status of `NotReady` or evict pods due to the lack of memory or other resources.
     *   **Larger vs. smaller worker node flavors**: Larger nodes can be more cost efficient than smaller nodes, particularly for workloads that are designed to gain efficiency when they process on a high-performance machine. However, if a large worker node goes down, you need to be sure that your cluster has enough capacity to gracefully reschedule all the workload pods onto other worker nodes in the cluster. Smaller worker can help you scale more gracefully.
@@ -216,7 +214,7 @@ Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrast
 
 **Types of clusters**: Decide whether you want a [single zone, multizone, or multiple cluster setup](/docs/containers?topic=containers-ha_clusters#ha_clusters). Multizone clusters are available in [all six worldwide {{site.data.keyword.cloud_notm}} metro regions](/docs/containers?topic=containers-regions-and-zones#zones). Also keep in mind that worker nodes vary by zone.
 
-**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated shared hardware. With bare metal worker nodes, your cluster has a network speed of 10Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+**Types of worker nodes**: In general, your intensive workloads are more suited to run on bare metal physical machines, whereas for cost-effective testing and development work, you might choose virtual machines on shared or dedicated shared hardware. With bare metal worker nodes, your cluster has a network speed of 10 Gbps and hyper-threaded cores that offer higher throughput. Virtual machines come with a network speed of 1 Gbps and regular cores that do not offer hyper-threading. [Check out the machine isolation and flavors that are available](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ### Do I use multiple clusters, or just add more workers to an existing cluster?
 {: #env_multicluster}
@@ -242,7 +240,7 @@ The number of clusters that you create depends on your workload, company policie
   <li><strong>Don't tap out your cluster bandwidth</strong>: Keep in mind that network bandwidth on scaling virtual machines is around 1000 Mbps. If you need hundreds of worker nodes in a cluster, split it up into multiple clusters with fewer nodes, or order bare metal nodes.</li>
   <li><strong>Sorting out your services</strong>: Plan out how many services that you need for your workload before you deploy. Networking and port forwarding rules are put into Iptables. If you anticipate a larger number of services, such as more than 5,000 services, split up the cluster into multiple clusters.</li></ul></dd>
 <dt>Provision different types of machines for a mix of computing resources.</dt>
-  <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of machine types](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod only deploys on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
+  <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of machine types](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod deploys only on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
 <dt>Set up multiple namespaces when you have multiple teams and projects that share the cluster.</dt>
   <dd><p>Namespaces are kind of like a cluster within the cluster. They are a way to divide up cluster resources by using [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [default limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/). When you make new namespaces, be sure to set up proper [RBAC policies](/docs/containers?topic=containers-users#rbac) to control access. For more information, see [Share a cluster with namespaces ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) in the Kubernetes documentation.</p>
   <p>If you have a small cluster, a couple dozen users, and resources that are similar (such as different versions of the same software), you probably don't need multiple namespaces. You can use labels instead.</p></dd>
@@ -252,7 +250,7 @@ The number of clusters that you create depends on your workload, company policie
   <dd><p>To organize and select your Kubernetes resources such as `pods` or `nodes`, [use Kubernetes labels ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). By default, {{site.data.keyword.containerlong_notm}} applies some labels, including `arch`, `os`, `region`, `zone`, and `machine-type`.</p>
   <p>Example use cases for labels include [limiting network traffic to edge worker nodes](/docs/containers?topic=containers-edge), [deploying an app to a GPU machine](/docs/containers?topic=containers-app#gpu_app), and [restricting your app workloads![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) to run on worker nodes that meet certain machine type or SDS capabilities, such as bare metal worker nodes. To see what labels are already applied to a resource, use the <code>kubectl get</code> command with the <code>--show-labels</code> flag. For example:</p>
   <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
-  To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-add_workers#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels)</dd>
+  To apply labels to worker nodes, [create your worker pool](/docs/containers?topic=containers-add_workers#add_pool) with labels or [update an existing worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels).</dd>
 </dl>
 
 
@@ -264,7 +262,7 @@ The number of clusters that you create depends on your workload, company policie
 ## Making your resources highly available
 {: #kube_ha}
 
-While no system is entirely failsafe, you can take steps to increase your the high availability of your apps and services in {{site.data.keyword.containerlong_notm}}.
+While no system is entirely failsafe, you can take steps to increase the high availability of your apps and services in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 Review more information about making resources highly available.
@@ -306,7 +304,7 @@ Sometimes, you don't want the service to use a label. For example, you might hav
 
 By default, pods can communicate with other pods in the cluster, but you can block traffic to certain pods or namespaces with network policies. Additionally, if you expose your app externally by using a NodePort, load balancer, or Ingress service, you might want to set up advanced network policies to block traffic. In {{site.data.keyword.containerlong_notm}}, you can use Calico to manage Kubernetes and Calico [network policies to control traffic](/docs/containers?topic=containers-network_policies#network_policies).
 
-If you have a variety of microservices that run across platforms for which you need to connect, manage, and secure network traffic, consider using a service mesh tool such as the [managed Istio add-on](/docs/containers?topic=containers-istio).
+If you have various microservices that run across platforms for which you need to connect, manage, and secure network traffic, consider using a service mesh tool such as the [managed Istio add-on](/docs/containers?topic=containers-istio).
 
 You can also [set up edge nodes](/docs/containers?topic=containers-edge#edge) to increase the security and isolation of your cluster by restricting the networking workload to select worker nodes.
 
@@ -450,7 +448,7 @@ If you want to run your app in multiple clusters, public and private environment
 <br />
 
 
-## Keeping your app up to date
+## Keeping your app up-to-date
 {: #updating}
 
 You put in a lot of effort preparing for the next version of your app. You can use {{site.data.keyword.cloud_notm}} and Kubernetes update tools to make sure that your app is running in a secured cluster environment, as well as to roll out different versions of your app.
@@ -464,7 +462,7 @@ Make sure that your cluster runs a [supported Kubernetes version](/docs/containe
 ### What app update strategies can I use?
 {: #updating_apps}
 
-To update your app, you can choose from a variety of strategies such as the following. You might start with a rolling deployment or instantaneous switch before you progress to a more complicated canary deployment.
+To update your app, you can choose from various strategies such as the following. You might start with a rolling deployment or instantaneous switch before you progress to a more complicated canary deployment.
 
 <dl>
 <dt>Rolling deployment</dt>
@@ -472,7 +470,7 @@ To update your app, you can choose from a variety of strategies such as the foll
 <dt>Instantaneous switch</dt>
   <dd>Also referred to as a blue-green deployment, an instantaneous switch requires double the compute resources to have two versions of an app running at once. With this approach, you can switch your users to the newer version in near real time. Make sure that you use service label selectors (such as `version: green` and `version: blue`) to make sure that requests are sent to the right app version. You can create the new `version: green` deployment, wait until it is ready, and then delete the `version: blue` deployment. Or, you can perform a [rolling update](/docs/containers?topic=containers-app#app_rolling), but set the `maxUnavailable` parameter to `0%` and the `maxSurge` parameter to `100%`.</dd>
 <dt>Canary or A/B deployment</dt>
-  <dd>A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labelling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio#istio), [set up Sysdig monitoring for your cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/). Or, use Knative for canary deployments.</dd>
+  <dd>A more complex update strategy, a canary deployment is when you pick a percentage of users such as 5% and send them to the new app version. You collect metrics in your logging and monitoring tools on how the new app version performs, do A/B testing, and then roll out the update to more users. As with all deployments, labeling the app (such as `version: stable` and `version: canary`) is critical. To manage canary deployments, you might [install the managed Istio add-on service mesh](/docs/containers?topic=containers-istio#istio), [set up Sysdig monitoring for your cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster), and then use the Istio service mesh for A/B testing as described [in this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/). Or, use Knative for canary deployments.</dd>
 </dl>
 
 <br />
@@ -491,7 +489,7 @@ As you set up your logging and monitoring, think about the following considerati
   <dd>Kubernetes includes a metrics server to help determine basic cluster-level performance. You can review these metrics in your [Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard) or in a terminal by running `kubectl top (pods | nodes)` commands. You might include these commands in your automation.<br><br>
   Forward logs to a log analysis tool so that you can analyze your logs later. Define the verbosity and level of logs that you want to log to avoid storing more logs than you need. Logs can quickly eat up lots of storage, which can impact your app performance and can make log analysis more difficult.</dd>
 <dt>Test app performance</dt>
-  <dd>After you set up logging and monitoring, conduct performance testing. In a test environment, deliberately create a variety of non-ideal scenarios, such as deleting all worker nodes in a zone to replicate a zonal failure. Review the logs and metrics to check how your app recovers.</dd>
+  <dd>After you set up logging and monitoring, conduct performance testing. In a test environment, deliberately create various non-ideal scenarios, such as deleting all worker nodes in a zone to replicate a zonal failure. Review the logs and metrics to check how your app recovers.</dd>
 <dt>Prepare for audits</dt>
   <dd>In addition to app logs and cluster metrics, you want to set up activity tracking so that you have an auditable record of who performed what cluster and Kubernetes actions. For more information, see [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events#at_events).</dd>
 </dl>

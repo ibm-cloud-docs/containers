@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-11"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos, roks, rhoks
 
@@ -33,7 +33,7 @@ Red Hat OpenShift on IBM Cloud is available as a beta to test out OpenShift clus
 With the **Red Hat OpenShift on IBM Cloud beta**, you can create {{site.data.keyword.containerlong_notm}} clusters with worker nodes that come installed with the Red Hat OpenShift on IBM Cloud Container Platform orchestration software. You get all the [advantages of managed {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks) for your cluster infrastructure environment, while using the [OpenShift tooling and catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/welcome/index.html) that runs on Red Hat Enterprise Linux for your app deployments.
 {: shortdesc}
 
-OpenShift worker nodes are available for standard clusters only. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.
+OpenShift worker nodes are available for paid accounts and standard clusters only. Red Hat OpenShift on IBM Cloud supports OpenShift version 3.11 only, which includes Kubernetes version 1.11. The operating system is Red Hat Enterprise Linux 7.
 {: note}
 
 ## Objectives
@@ -222,7 +222,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     Example for OS X:
 
     ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
     ```
     {: screen}
 5.  In your browser, navigate to the address of your **Master URL** and append `/console`. For example, `https://c0.containers.cloud.ibm.com:23652/console`.
@@ -440,7 +440,7 @@ Before you begin, log in to your cluster as an administrator.
     Example for OS X:
 
     ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
+    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
     ```
     {: screen}
 4.  Continue the lesson to set up [{{site.data.keyword.la_short}}](#openshift_logdna) and [{{site.data.keyword.mon_short}}](#openshift_sysdig).
@@ -533,53 +533,54 @@ Set up a project and privileged service account for {{site.data.keyword.la_full_
     ```
     {: pre}
 6.  Edit the LogDNA agent daemon set configuration to refer to the service account that you previously created and to set the security context to privileged.
-    ```
-    oc edit ds logdna-agent
-    ```
-    {: pre}
+    1.  Download a local copy of the configuration file to edit.
+        ```
+        oc get ds logdna-agent -n logdna -o yaml > logdna-ds.yaml
+        ```
+        {: pre}
+    2.  In the configuration file, add the following specifications.
+        *   In `spec.template.spec`, add `serviceAccount: logdna`.
+        *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
+        *   If you created your {{site.data.keyword.la_short}} instance in a region other than `us-south`, update the `spec.template.spec.containers.env` environment variable values for the `LDAPIHOST` and `LDLOGHOST` with the `<region>`.
 
-    In the configuration file, add the following specifications.
-    *   In `spec.template.spec`, add `serviceAccount: logdna`.
-    *   In `spec.template.spec.containers`, add `securityContext: privileged: true`.
-    *   If you created your {{site.data.keyword.la_short}} instance in a region other than `us-south`, update the `spec.template.spec.containers.env` environment variable values for the `LDAPIHOST` and `LDLOGHOST` with the `<region>`.
-
-    Example output:
-    ```
-    apiVersion: extensions/v1beta1
-    kind: DaemonSet
-    spec:
-      ...
-      template:
-        ...
+        Example:
+        ```
+        apiVersion: extensions/v1beta1
+        kind: DaemonSet
         spec:
-          serviceAccount: logdna
-          containers:
-          - securityContext:
-              privileged: true
-            ...
-            env:
-            - name: LOGDNA_AGENT_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: logdna-agent-key
-                  name: logdna-agent-key
-            - name: LDAPIHOST
-              value: api.<region>.logging.cloud.ibm.com
-            - name: LDLOGHOST
-              value: logs.<region>.logging.cloud.ibm.com
           ...
-    ```
-    {: screen}
-
-    Having trouble editing the configuration in the terminal? You can download the configuration locally by running `oc get ds logdna-agent -n logdna -o yaml > logdna-ds.yaml`. Then, make your changes and run `oc apply -f logdna-ds.yaml`.
-    {: tip}
-
+          template:
+            ...
+            spec:
+              serviceAccount: logdna
+              containers:
+              - securityContext:
+                  privileged: true
+                ...
+                env:
+                - name: LOGDNA_AGENT_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      key: logdna-agent-key
+                      name: logdna-agent-key
+                - name: LDAPIHOST
+                  value: api.<region>.logging.cloud.ibm.com
+                - name: LDLOGHOST
+                  value: logs.<region>.logging.cloud.ibm.com
+              ...
+        ```
+        {: screen}
+    3.  Save the configuration file and apply your changes.
+        ```
+        oc apply -f logdna-ds.yaml
+        ```
+        {: pre}
 7.  Verify that the `logdna-agent` pod on each node is in a **Running** status.
     ```
     oc get pods
     ```
     {: pre}
-8.  From the [{{site.data.keyword.cloud_notm}} Observability > Logging console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.la_short}} instance, click **View LogDNA**. The LogDNA dashboard opens, and you can begin to analyze your logs.
+8.  From the [{{site.data.keyword.cloud_notm}} Observability > Logging console](https://cloud.ibm.com/observe/logging), in the row for your {{site.data.keyword.la_short}} instance, click **View LogDNA**. The LogDNA dashboard opens. After a few minutes, your cluster's logs are displayed, and you can begin to analyze your logs.
 
 For more information about how to use {{site.data.keyword.la_short}}, see the [Next steps docs](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube_next_steps).
 

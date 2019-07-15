@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-11"
 
-keywords: kubernetes, iks, docker
+keywords: kubernetes, iks, docker, containers
 
 subcollection: containers
 
@@ -266,6 +266,8 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
 
 {{site.data.keyword.containerlong_notm}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted. If you anticipate reaching the following {{site.data.keyword.containerlong_notm}} limitations, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 {: shortdesc}
+
+
 
 <table summary="This table contains information on the {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation.">
 <caption>{{site.data.keyword.containerlong_notm}} limitations</caption>
