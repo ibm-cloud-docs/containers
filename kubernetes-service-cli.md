@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-16"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -59,6 +59,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     {: pre}
 
 </br>
+
 <table>
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
   <thead>
