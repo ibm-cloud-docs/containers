@@ -27,7 +27,7 @@ lastupdated: "[{LAST_UPDATED_DATE}]"
 This content is staging-only, a work in progress, subject to change, and not intended for external release.
 {: preview}
 
-With {{site.data.keyword.containerlong}}, you can create a cluster from a variety of infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, {{site.data.keyword.containerlong_notm}} provisioned your worker nodes in a single provider, classic infrastructure. As of **DATE**, you can choose from Classic or Virtual Private Cloud (VPC) on Classic infrastructure providers.<!-- Further, VPC offers three kinds of infrastructure providers: VPC, VPC on Classic, and Hyper Protect Containers on IBM Z Systems.  -->
+With {{site.data.keyword.containerlong}}, you can create a cluster from a variety of infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, {{site.data.keyword.containerlong_notm}} provisioned your worker nodes in a single provider, classic infrastructure. As of **DATE**, you can choose from Classic or Virtual Private Cloud (VPC) on Classic infrastructure providers.<!-- Further, VPC offers three kinds of infrastructure providers: VPC, VPC on Classic, and Hyper Protect Containers on IBM Z Systems. -->
 
 <table summary="The rows are read from left to right, with the area of comparison in column one, classic infrastructure provider in column two, and VPC on Classic infrastructure provider in column three.">
 <caption>Infrastructure providers for {{site.data.keyword.containerlong_notm}} clusters</caption>
