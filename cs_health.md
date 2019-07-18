@@ -1005,9 +1005,7 @@ To configure Autorecovery:
     ```
     {: screen}
 
-3. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.
-</br>
-   **Tip:** Define each check as a unique key in the `data` section of the configuration map.
+3. Create a configuration map file that defines your checks in JSON format. For example, the following YAML file defines three checks: an HTTP check and two Kubernetes API server checks. Refer to the tables following the example YAML file for information about the three kinds of checks and information about the individual components of the checks.<p class="tip">*Define each check as a unique key in the `data` section of the configuration map.</p>
 
    ```
    kind: ConfigMap
