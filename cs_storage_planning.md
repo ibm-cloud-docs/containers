@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -27,6 +27,7 @@ subcollection: containers
 
 # Planning highly available persistent storage
 {: #storage_planning}
+
 
 ## Choosing a storage solution
 {: #choose_storage_solution}
@@ -377,3 +378,6 @@ nodes. Every node stores only a part of the data. </td>
 </tr>
 </tbody>
 </table>
+
+
+
