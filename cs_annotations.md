@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks, ingress
 
@@ -30,7 +30,7 @@ subcollection: containers
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
 {: shortdesc}
 
-Before you use annotations, make sure you have properly set up your Ingress service configuration by following the steps in [HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-ingress). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
+Before you use annotations, make sure that you have properly set up your Ingress service configuration by following the steps in [HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-ingress). Once you have set up the Ingress ALB with a basic configuration, you can then expand its capabilities by adding annotations to the Ingress resource file.
 {: note}
 
 <table>
@@ -338,7 +338,7 @@ To handle specific HTTP errors that might occur, you can set up custom error act
 * The `custom-errors` annotation defines the service name, the HTTP error to handle, and the name of the error action that the ALB takes when it encounters the specified HTTP error for the service.
 * The `custom-error-actions` annotation defines custom error actions in NGINX code snippets.
 
-For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet called `/errorAction401` so that the ALB returns a custom error page to the client.</br>
+For example, in the `custom-errors` annotation, you can set up the ALB to handle `401` HTTP errors for `app1` by returning a custom error action called `/errorAction401`. Then, in the `custom-error-actions` annotation, you can define a code snippet that is called `/errorAction401` so that the ALB returns a custom error page to the client.</br>
 
 You can also use the `custom-errors` annotation to redirect the client to an error service that you manage. You must define the path to this error service in the `paths` section of the Ingress resource file.
 
@@ -613,7 +613,7 @@ When a client request is sent to the Ingress ALB, a connection to the back-end a
 
 After the ALB is connected to the back-end app, response data is read from the back-end app by the ALB. During this read operation, the ALB waits a maximum of 60 seconds between two read operations to receive data from the back-end app. If the back-end app does not send data within 60 seconds, the connection to the back-end app is closed and the app is considered to be not available.
 
-A 60 second connect-timeout and read-timeout is the default timeout on a proxy and usually should not be changed.
+A 60 second connect-timeout and read-timeout are the default timeouts on a proxy and usually should not be changed.
 
 If the availability of your app is not steady or your app is slow to respond because of high workloads, you might want to increase the connect-timeout or read-timeout. Keep in mind that increasing the timeout impacts the performance of the ALB as the connection to the back-end app must stay open until the timeout is reached.
 
@@ -810,7 +810,7 @@ spec:
 </tr>
 <tr>
 <td><code>retries</code></td>
-<td>Replace <code>&lt;<em>tries</em>&gt;</code> with the maximum amount of times that the ALB tries to pass a request to the next upstream server. This number includes the original request. To turn off this limitation, use <code>0</code>. If you do not specify a value, the default value <code>0</code> is used.
+<td>Replace <code>&lt;<em>tries</em>&gt;</code> with the maximum number of times that the ALB tries to pass a request to the next upstream server. This number includes the original request. To turn off this limitation, use <code>0</code>. If you do not specify a value, the default value <code>0</code> is used.
 </td>
 </tr>
 <tr>
@@ -855,11 +855,11 @@ Use the sticky cookie annotation to add session affinity to your ALB and always 
 {:shortdesc}
 
 **Description**</br>
-For high availability, some app setups require you to deploy multiple upstream servers that handle incoming client requests. When a client connects to you back-end app, you can use session-affinity so that a client is served by the same upstream server for the duration of a session or for the time it takes to complete a task. You can configure your ALB to ensure session-affinity by always routing incoming network traffic to the same upstream server.
+For high availability, some app setups require you to deploy multiple upstream servers that handle incoming client requests. When a client connects to your back-end app, you can use session-affinity so that a client is served by the same upstream server during a session or for the time it takes to complete a task. You can configure your ALB to ensure session-affinity by always routing incoming network traffic to the same upstream server.
 
 Every client that connects to your back-end app is assigned to one of the available upstream servers by the ALB. The ALB creates a session cookie that is stored in the client's app, which is included in the header information of every request between the ALB and the client. The information in the cookie ensures that all requests are handled by the same upstream server throughout the session.
 
-Relying on sticky sessions can add complexity and reduce your availability. For example, you might have an HTTP server that maintains some session state for an initial connection so that the HTTP service only accepts subsequent requests with the same session state value. However, this prevents easy horizontal scaling of the HTTP service. Consider using an external database, such as Redis or Memcached, to store the HTTP request session value so that you can maintain the session state across multiple servers.
+Relying on sticky sessions can add complexity and reduce your availability. For example, you might have an HTTP server that maintains some session state for an initial connection so that the HTTP service accepts only subsequent requests with the same session state value. However, this prevents easy horizontal scaling of the HTTP service. Consider using an external database, such as Redis or Memcached, to store the HTTP request session value so that you can maintain the session state across multiple servers.
 {: note}
 
 When you include multiple services, use a semi-colon (;) to separate them.
@@ -1222,7 +1222,7 @@ spec:
   ```
   {: codeblock}
 
-4. Verify that your ALB is re-configured with the non-default ports.
+4. Verify that your ALB is reconfigured with the non-default ports.
   ```
   kubectl get service -n kube-system
   ```
@@ -1291,7 +1291,7 @@ spec:
 {: #hsts}
 
 **Description**</br>
-HSTS instructs the browser to only access a domain by using HTTPS. Even if the user enters or follows a plain HTTP link, the browser strictly upgrades the connection to HTTPS.
+HSTS instructs the browser to access a domain only by using HTTPS. Even if the user enters or follows a plain HTTP link, the browser strictly upgrades the connection to HTTPS.
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -1333,7 +1333,7 @@ spec:
 </tr>
 <tr>
 <td><code>maxAge</code></td>
-<td>Replace <code>&lt;<em>31536000</em>&gt;</code> with an integer representing how many seconds a browser will cache sending requests straight to HTTPS. The default is <code>31536000</code>, which is equal to 1 year.</td>
+<td>Replace <code>&lt;<em>31536000</em>&gt;</code> with an integer that represents how many seconds a browser will cache sending requests straight to HTTPS. The default is <code>31536000</code>, which is equal to 1 year.</td>
 </tr>
 <tr>
 <td><code>includeSubdomains</code></td>
@@ -1410,10 +1410,10 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial, which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert.
+3. Create a secret YAML file by using cert.
    ```
    apiVersion: v1
    kind: Secret
@@ -1496,7 +1496,7 @@ spec:
 
 1. Get the certificate authority (CA) key and certificate from your upstream server and an SSL client certificate. The IBM ALB is based on NGINX, which requires the root certificate, intermediate certificate, and back-end certificate. For more information, see the [NGINX docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/).
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert.
+3. Create a secret YAML file by using the cert.
    ```
    apiVersion: v1
    kind: Secret
@@ -1521,10 +1521,10 @@ spec:
 **To create a mutual authentication secret:**
 
 1. Generate a certificate authority (CA) cert and key from your certificate provider. If you have your own domain, purchase an official TLS certificate for your domain. Make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
-    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    For testing purposes, you can create a self-signed certificate by using OpenSSL. For more information, see this [self-signed SSL certificate tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.akadia.com/services/ssh_test_certificate.html) or this [mutual authentication tutorial, which includes creating your own CA ![External link icon](../icons/launch-glyph.svg "External link icon")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Convert the cert into base-64 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.base64encode.org/).
-3. Create a secret YAML file using the cert.
+3. Create a secret YAML file by using the cert.
    ```
    apiVersion: v1
    kind: Secret
@@ -1621,7 +1621,7 @@ spec:
   {: pre}
 
 3. Add the TCP ports to the config map. Replace `<port>` with the TCP ports that you want to open.
-  By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).
+  By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other TCP ports you specify in the `public-ports` field. If you enabled a private ALB, you must also specify any ports that you want to keep open in the `private-ports` field. For more information, see [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).
   {: note}
   ```
   apiVersion: v1
@@ -1754,15 +1754,15 @@ To handle regular expression (regex) paths, this annotation is required.
 <tbody>
 <tr>
 <td><code>=</code></td>
-<td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.<br>For example, if you app listens on <code>/tea</code>, the ALB selects only exact <code>/tea</code> paths when matching a request to your app.</td>
+<td>The equal sign modifier causes the ALB to select exact matches only. When an exact match is found, the search stops and the matching path is selected.<br>For example, if your app listens on <code>/tea</code>, the ALB selects only exact <code>/tea</code> paths when matching a request to your app.</td>
 </tr>
 <tr>
 <td><code>~</code></td>
-<td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/coffee</code> or <code>/123/coffee</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
+<td>The tilde modifier causes the ALB to process paths as case-sensitive regex paths during matching.<br>For example, if your app listens on <code>/coffee</code>, the ALB can select <code>/ab/coffee</code> or <code>/123/coffee</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
 </tr>
 <tr>
 <td><code>~\*</code></td>
-<td>The tilde followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.<br>For example, if you app listens on <code>/coffee</code>, the ALB can select <code>/ab/Coffee</code> or <code>/123/COFFEE</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
+<td>The tilde modifier that is followed by an asterisk modifier causes the ALB to process paths as case-insensitive regex paths during matching.<br>For example, if your app listens on <code>/coffee</code>, the ALB can select <code>/ab/Coffee</code> or <code>/123/COFFEE</code> paths when matching a request to your app even though the paths are not explicitly set for your app.</td>
 </tr>
 <tr>
 <td><code>^~</code></td>
@@ -1871,7 +1871,7 @@ spec:
 ## Proxy buffer annotations
 {: #proxy-buffer}
 
-The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when sending or receiving data packets.  
+The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when you send or receive data packets.  
 {: shortdesc}
 
 ### Large client header buffers (`large-client-header-buffers`)
@@ -1881,7 +1881,7 @@ Set the maximum number and size of buffers that read large client request header
 {:shortdesc}
 
 **Description**</br>
-Buffers that read large client request headers are allocated only by demand: If a connection is transitioned into the keepalive state after the end-of-request processing, these buffers are released. By default, the there are `4` buffers and buffer size is equal to `8K` bytes. If a request line exceeds the set maximum size of one buffer, the `414 Request-URI Too Large` HTTP error is returned to the client. Additionally, if a request header field exceeds the set maximum size of one buffer, the `400 Bad Request` error is returned to the client. You can adjust the maximum number and size of buffers that are used for reading large client request headers.
+Buffers that read large client request headers are allocated only by demand: If a connection is transitioned into the keepalive state after the end-of-request processing, these buffers are released. By default, there are `4` buffers and buffer size is equal to `8K` bytes. If a request line exceeds the set maximum size of one buffer, the `414 Request-URI Too Large` HTTP error is returned to the client. Additionally, if a request header field exceeds the set maximum size of one buffer, the `400 Bad Request` error is returned to the client. You can adjust the maximum number and size of buffers that are used for reading large client request headers.
 
 **Sample Ingress resource YAML**</br>
 ```
@@ -2556,7 +2556,7 @@ If you set the request type to web, a web request that contains an {{site.data.k
 
 If you set the request type to api, an API request that contains an {{site.data.keyword.appid_short_notm}} access token is validated. If the request does not contain an access token, a 401: Unauthorized error message is returned to the user.
 
-For security reasons, {{site.data.keyword.appid_short_notm}} authentication only supports back ends with TLS/SSL enabled.
+For security reasons, {{site.data.keyword.appid_short_notm}} authentication supports only back ends with TLS/SSL enabled.
 {: note}
 
 **Sample Ingress resource YAML**</br>
@@ -2591,7 +2591,7 @@ spec:
 <tbody>
 <tr>
 <td><code>bindSecret</code></td>
-<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
+<td>Replace <em><code>&lt;bind_secret&gt;</code></em> with the Kubernetes secret, which stores the bind secret for your {{site.data.keyword.appid_short_notm}} service instance.</td>
 </tr>
 <tr>
 <td><code>namespace</code></td>

@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -184,7 +183,7 @@ Consider the following options to increase availability of your app.
     <p>When you deploy more than one pod, a replica set is automatically created for your deployments that monitors the pods and assures that the specified number of pods is up and running at all times. When a pod goes down, the replica set replaces the unresponsive pod with a new one.</p>
     <p>You can use a deployment to define update strategies for your app, including the number of pods that you want to add during a rolling update and the number of pods that can be unavailable at a time. When you perform a rolling update, the deployment checks whether or not the revision is working and stops the rollout when failures are detected.</p>
     <p>With deployments, you can concurrently deploy multiple revisions with different flags. For example, you can test a deployment first before you decide to push it to production.</p>
-    <p>By using Deployments, you can keep track of any deployed revisions. You can use this history to roll back to a previous version if you encounter that your updates are not working as expected.</p></dd>
+    <p>By using Deployments, you can track any deployed revisions. You can use this history to roll back to a previous version if you encounter that your updates are not working as expected.</p></dd>
   <dt>Include enough replicas for your app's workload, plus two</dt>
     <dd>To make your app even more highly available and more resilient to failure, consider including extra replicas than the minimum to handle the expected workload. Extra replicas can handle the workload in case a pod crashes and the replica set did not yet recover the crashed pod. For protection against two simultaneous failures, include two extra replicas. This setup is an N+2 pattern, where N is the number of replicas to handle the incoming workload and +2 is an extra two replicas. As long as your cluster has enough space, you can have as many pods as you want.</dd>
   <dt>Spread pods across multiple nodes (anti-affinity)</dt>
@@ -425,7 +424,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Persistent volumes for container storage</dt>
-<dd><p>Persistent volumes (PVs) interface with physical storage to provide persistent data storage for your container workloads. The following example shows how you can add persistent storage to your app. To provision persistent storage, you create a persistent volume claim (PVC) to describe the type and size of file storage that you want to have. After you create the PVC, the persistent volume and the physical storage is automatically created by using [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). By referencing the PVC in your deployment YAML, the storage is automatically mounted to your app pod. When the container in your pod writes data to the `/test` mount path directory, data is stored on the NFS file storage instance.</p><ul><li>For more information, see [Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>For options on other types of storage that you can provision, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
+<dd><p>Persistent volumes (PVs) interface with physical storage to provide persistent data storage for your container workloads. The following example shows how you can add persistent storage to your app. To provision persistent storage, you create a persistent volume claim (PVC) to describe the type and size of file storage that you want to have. After you create the PVC, the persistent volume and the physical storage are automatically created by using [dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). By referencing the PVC in your deployment YAML, the storage is automatically mounted to your app pod. When the container in your pod writes data to the `/test` mount path directory, data is stored on the NFS file storage instance.</p><ul><li>For more information, see [Understanding Kubernetes storage basics](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>For options on other types of storage that you can provision, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -696,7 +695,7 @@ To set up configuration files with Kustomize:
 
         The names of the `resources` YAMLs must match the names of the other files in the `base` repo. You might include multiple configurations in the same file, but in the example, the configurations are separate files such as `deployment.yaml`, `service.yaml`, and `pvc.yaml`.
 
-    4.  Build your resource YAML files with the configurations that you defined in the `kustomization` base YAML file. The resources are built by combining the configurations in the `kustomization` and resource YAMLs together. The combined YAML files are returned in `stdout` in the terminal output. Use this same command to build any subsequent changes that you make to the `kustomization` YAML, such adding a new label.
+    4.  Build your resource YAML files with the configurations that you defined in the `kustomization` base YAML file. The resources are built by combining the configurations in the `kustomization` and resource YAMLs together. The combined YAML files are returned in `stdout` in the terminal output. Use this same command to build any subsequent changes that you make to the `kustomization` YAML, such adding a label.
         ```
         kustomize build
         ```
@@ -1323,7 +1322,7 @@ Steps:
     </tr>
     <tr>
     <td><code>--request=cpu</code></td>
-    <td>The required CPU for the container, which is specified in milli-cores. As an example, <code>--requests=200m</code>.</td>
+    <td>The required CPU for the container, which is specified in millicores. As an example, <code>--requests=200m</code>.</td>
     </tr>
     <tr>
     <td><code>--expose</code></td>

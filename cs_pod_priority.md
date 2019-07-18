@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -49,14 +49,14 @@ To understand how pod priority and scheduler work together, consider the scenari
 _Figure: Pod priority scenarios_
 <img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
 
-1.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node with room for all 3 pods, and schedules them in order of priority, with the highest priority pod scheduled first.
-2.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node, but the worker node only has enough resources to support the high and medium priority pods. The low priority pod is not scheduled and it remains in pending.
+1.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
+2.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
 3.  Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the scheduler schedules the medium priority pod.
 
 **For more information**: See the Kubernetes documentation on [pod priority and preemption ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/).
 
 **Can I disable the pod priority admission controller?**</br>
-No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods following the existing scheduling policies that you have in place.
+No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods by following the existing scheduling policies that you have in place.
 
 **How do resource quotas affect pod priority?**</br>
 You can use pod priority in combination with resource quotas, including [quota scopes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) for clusters that run Kubernetes 1.12 or later. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
@@ -94,7 +94,7 @@ To set pod priority, you need to use a priority class.
 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 * [Create](/docs/containers?topic=containers-clusters#clusters_ui) or [update](/docs/containers?topic=containers-update#update) your cluster to Kubernetes version 1.11 or later.
 
 To use a priority class:
@@ -144,7 +144,7 @@ To use a priority class:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Optional: Set the field to `true` to make this priority class the global default that is applied to every pod that is scheduled without a `priorityClassName` value. Only 1 priority class in your cluster can be set as the global default. If there is no global default, pods with no `priorityClassName` specified have a priority of zero (`0`).</br></br>
+    <td>Optional: Set the field to `true` to make this priority class the global default that is applied to every pod that is scheduled without a `priorityClassName` value. Only one priority class in your cluster can be set as the global default. If there is no global default, pods with no `priorityClassName` specified have a priority of zero (`0`).</br></br>
     The [default priority classes](#default_priority_class) do not set a `globalDefault`. If you created other priority classes in your cluster, you can check to make sure that they do not set a `globalDefault` by running `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@ Assign a priority class to your pod spec to set the pod's priority within your {
 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) in the namespace that you want to deploy the pods to.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) in the namespace that you want to deploy the pods to.
 * [Create](/docs/containers?topic=containers-clusters#clusters_ui) or [update](/docs/containers?topic=containers-update#update) your cluster to Kubernetes version 1.11 or later.
 * [Understand how priority scheduling works](#priority_scheduling), as priority can preempt existing pods and affect how your cluster's resources are consumed.
 
