@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-17"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -40,7 +40,7 @@ For more information about Kubernetes, see the [Kubernetes documentation ![Exter
 {: #kubernetes_service}
 {: faq}
 
-With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure (SoftLayer) compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
+With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
 
 For more information about how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
@@ -211,7 +211,7 @@ For more information, see the [{{site.data.keyword.cloud_notm}} Private product 
 {: #charges}
 {: faq}
 
-With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure (SoftLayer) compute, networking, and storage resources with platform services such as Watson AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges).
+With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure compute, networking, and storage resources with platform services such as Watson AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges).
 * [Worker nodes](#nodes)
 * [Outbound networking](#bandwidth)
 * [Subnet IP addresses](#subnet_ips)
@@ -228,7 +228,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <li><strong>Tiered hours per month</strong>: Hourly billing is tiered. As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.</li></ul>
     <p><strong>Physical machines, or bare metal,</strong> yield high-performance benefits for workloads such as data, AI, and GPU. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
     <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
-    <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure (SoftLayer) account. Therefore, it can take more than one business day to complete.</li></ul>
+    <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure account. Therefore, it can take more than one business day to complete.</li></ul>
     <p>For more information about the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
   <dt id="bandwidth">Public bandwidth</dt>
     <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe.</p>
@@ -262,7 +262,7 @@ Monthly resources are billed based on the first of the month for usage in the pr
 {: faq}
 
 When you use a billable {{site.data.keyword.cloud_notm}} account, platform and infrastructure resources are summarized in one bill.
-If you linked your {{site.data.keyword.cloud_notm}} and IBM Cloud infrastructure (SoftLayer) accounts, you receive a [consolidated bill](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts) for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources.
+If you linked your {{site.data.keyword.cloud_notm}} and IBM Cloud infrastructure accounts, you receive a [consolidated bill](/docs/customer-portal?topic=customer-portal-unifybillaccounts#unifybillaccounts) for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources.
 
 ## Can I estimate my costs?
 {: #cost_estimate}

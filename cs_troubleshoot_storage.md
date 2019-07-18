@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -210,7 +210,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
   <tbody>
     <tr>
       <td><code>User doesn't have permissions to create or manage Storage</code></br></br><code>Failed to find any valid softlayer credentials in configuration file</code></br></br><code>Storage with the order ID %d could not be created after retrying for %d seconds.</code></br></br><code>Unable to locate datacenter with name <datacenter_name>.</code></td>
-      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
       <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
     </tr>
     <tr>
@@ -606,7 +606,7 @@ You might see the following symptoms:
 - When you run a `kubectl describe pod` command, you see the following error in the **Events** section: `MountVolume.SetUp failed for volume ... read-only`.
 
 {: tsCauses}
-If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
+If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
 
 {: tsResolve}
 1. Check the version of the {{site.data.keyword.cloud_notm}} Block Storage plug-in that is installed in your cluster.
@@ -786,7 +786,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
   <tbody>
     <tr>
       <td>`User doesn't have permissions to create or manage Storage`</td>
-      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
       <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
     </tr>
     <tr>
@@ -1190,10 +1190,10 @@ User doesn't have permissions to create or manage Storage
 {: screen}
 
 {: tsCauses}
-The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage.
+The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage.
 
 {: tsResolve}
-1. Retrieve the IAM key or IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used.
+1. Retrieve the IAM key or IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used.
    ```
    kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
    ```
@@ -1223,7 +1223,7 @@ The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stor
    The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command.
 
 2. If you want to change the credentials, update the API key that is used.
-    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
+    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). To update the IBM Cloud infrastructure key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
     2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
        ```
        kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode

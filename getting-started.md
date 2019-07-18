@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks, containers
 
@@ -41,7 +41,7 @@ So you want to deploy an app in a container? Hold on! Start by creating a Kubern
 And what is a cluster? A cluster is a set of resources, worker nodes, networks, and storage devices that keep apps highly available. After you have your cluster, then you can deploy your apps in containers.
 
 Before you begin, get the [{{site.data.keyword.cloud_notm}} account](https://cloud.ibm.com/registration) type that is right for you:
-* **Billable (Pay-As-You-Go or Subscription)**: You can create a free cluster. You can also provision IBM Cloud infrastructure (SoftLayer) resources to create and use in standard clusters.
+* **Billable (Pay-As-You-Go or Subscription)**: You can create a free cluster. You can also provision IBM Cloud infrastructure resources to create and use in standard clusters.
 * **Lite**: You cannot create a free or standard cluster. [Upgrade your account](/docs/account?topic=account-accountfaqs#changeacct) to a billable account.
 
 To create a free cluster:
@@ -58,7 +58,7 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 
 *   **Machine type**: The free cluster has one virtual worker node that is grouped into a worker pool, with 2 CPU, 4 GB memory, and a single 100 GB SAN disk available for your apps to use. When you create a standard cluster, you can choose between physical (bare metal) or virtual machines, along with various machine sizes.
 *   **Managed master**: The worker node is centrally monitored and managed by a dedicated and highly available {{site.data.keyword.IBM_notm}}-owned Kubernetes master that controls and monitors all of the Kubernetes resources in the cluster. You can focus on your worker node and the apps that are deployed in the worker node without worrying about managing this master too.
-*   **Infrastructure resources**: The resources that are required to run the cluster, such as VLANs and IP addresses, are managed in an {{site.data.keyword.IBM_notm}}-owned IBM Cloud infrastructure (SoftLayer) account. When you create a standard cluster, you manage these resources in your own IBM Cloud infrastructure (SoftLayer) account. You can learn more about these resources and the [permissions needed](/docs/containers?topic=containers-users#infra_access) when you create a standard cluster.
+*   **Infrastructure resources**: The resources that are required to run the cluster, such as VLANs and IP addresses, are managed in an {{site.data.keyword.IBM_notm}}-owned IBM Cloud infrastructure account. When you create a standard cluster, you manage these resources in your own IBM Cloud infrastructure account. You can learn more about these resources and the [permissions needed](/docs/containers?topic=containers-users#infra_access) when you create a standard cluster.
 *   **Other options**: Free clusters are deployed within the region that you select, but you cannot choose which zone. For control over zone, networking, and persistent storage, create a standard cluster. [Learn more about the benefits of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types).
 
 <br>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-11"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -122,7 +122,7 @@ Define update strategies for your app, including the number of pods that you wan
 ## Service architecture
 {: #architecture}
 
-In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between the Kubernetes master and the worker nodes depends on how you set up your IBM Cloud infrastructure (SoftLayer) network: an account with a public service endpoint, or a VRF-enabled account with public and private service endpoints.
+In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, your containerized apps are hosted on compute hosts that are called worker nodes. To be more specific, the apps run in pods and the pods are hosted on worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between the Kubernetes master and the worker nodes depends on how you set up your IBM Cloud infrastructure network: an account with a public service endpoint, or a VRF-enabled account with public and private service endpoints.
 {: shortdesc}
 
 The following image shows the components of your cluster and how they interact in an account when only the [public service endpoint is enabled](/docs/containers?topic=containers-plan_clusters#workeruser-master).
@@ -292,7 +292,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Maximum number of worker nodes</td>
-    <td>If you plan to exceed 900 per cluster, contact the {{site.data.keyword.containerlong_notm}} team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com) first.<br><br>If you see an IBM Cloud infrastructure (SoftLayer) capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure (SoftLayer) representative.</td>
+    <td>If you plan to exceed 900 per cluster, contact the {{site.data.keyword.containerlong_notm}} team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com) first.<br><br>If you see an IBM Cloud infrastructure capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure representative.</td>
   </tr>
   <tr>
     <td>Maximum number of pods</td>
@@ -310,7 +310,7 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
   <tr>
     <td>Storage volumes</td>
-    <td>250 combined total of volumes of IBM Cloud infrastructure (SoftLayer) file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure (SoftLayer) representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
+    <td>250 combined total of volumes of IBM Cloud infrastructure file and block storage instances per account.<br><br>If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
   </tr>
   <tr>
     <td>Kubernetes pod logs</td>

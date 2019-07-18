@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -188,11 +188,11 @@ The **Viewer** platform role includes the [actions that require no permissions](
 <td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
-<td>Get the infrastructure credentials that are set for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Get the infrastructure credentials that are set for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure portfolio.</td>
 <td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Check whether the credentials that allow access to the IBM Cloud infrastructure (SoftLayer) portfolio for the targeted region and resource group are missing suggested or required infrastructure permissions.</td>
+<td>Check whether the credentials that allow access to the IBM Cloud infrastructure portfolio for the targeted region and resource group are missing suggested or required infrastructure permissions.</td>
 <td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
 <td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
 </tr>
@@ -588,7 +588,7 @@ The **Administrator** platform role includes all permissions that are granted by
 <td>-</td>
 </tr>
 <tr>
-<td>Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure portfolio.</td>
 <td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
 <td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
@@ -628,12 +628,12 @@ The **Administrator** platform role includes all permissions that are granted by
 <td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
-<td>Set infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Set infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure portfolio.</td>
 <td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
 <td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Remove infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure (SoftLayer) portfolio.</td>
+<td>Remove infrastructure credentials for the {{site.data.keyword.cloud_notm}} account to access a different IBM Cloud infrastructure portfolio.</td>
 <td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>

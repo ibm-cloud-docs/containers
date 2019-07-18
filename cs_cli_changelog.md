@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -90,7 +90,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.3.28</td>
 <td>23 May 2019</td>
 <td><ul>
-<li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
+<li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
 <li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
 <li>Removes the <code>--force-update</code> flag from the `worker-update` command.</li>
 <li>Adds the **VLAN ID** column to the output of the `albs` and `alb-get` commands.</li>

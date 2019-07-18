@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,7 @@ If you have unique security requirements or you have a multizone cluster with VL
 
 Calico enforces these policies, including any Kubernetes network policies that are automatically converted to Calico policies, by setting up Linux Iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.
 
-To use network load balancer (NLB) and Ingress application load balancer (ALB) services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure (SoftLayer) [security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups). IBM Cloud infrastructure (SoftLayer) security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} must use to manage the ALB and NLB IP addresses. If the VRRP protocol is not present to manage the IP, ALB and NLB services do not work properly.
+To use network load balancer (NLB) and Ingress application load balancer (ALB) services, use Calico and Kubernetes policies to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure [security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups). IBM Cloud infrastructure security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} must use to manage the ALB and NLB IP addresses. If the VRRP protocol is not present to manage the IP, ALB and NLB services do not work properly.
 {: tip}
 
 <br />
@@ -83,7 +83,7 @@ Do not remove policies that are applied to a host endpoint unless you fully unde
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Allows incoming connections for specific IBM Cloud infrastructure (SoftLayer) systems that are used to manage the worker nodes.</td>
+      <td>Allows incoming connections for specific IBM Cloud infrastructure systems that are used to manage the worker nodes.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
