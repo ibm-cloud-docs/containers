@@ -28,7 +28,6 @@ subcollection: containers
 # Planning highly available persistent storage
 {: #storage_planning}
 
-
 ## Choosing a storage solution
 {: #choose_storage_solution}
 
