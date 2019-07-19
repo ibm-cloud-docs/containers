@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Locations
 {: #regions-and-zones}
 
-You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you create a Kubernetes cluster, its resources remain in the location that you deploy the cluster to. You can access the {{site.data.keyword.containerlong_notm}} via a global API endpoint to work with your cluster.
+You can deploy community Kubernetes or OpenShift clusters worldwide by using {{site.data.keyword.containerlong}} . When you create a cluster, its resources remain in the location that you deploy the cluster to. To work with your cluster, you can access the {{site.data.keyword.containershort_notm}} via a global API endpoint.
 {:shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} locations](images/locations.png)

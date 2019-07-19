@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -96,9 +96,9 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
         Now, you can initiate a connection from the {{site.data.keyword.cloud_notm}} Private cluster to the {{site.data.keyword.containerlong_notm}} cluster.
 
-7.  [Test the VPN connection](/docs/containers?topic=containers-vpn#vpn_test) between your clusters.
+6.  [Test the VPN connection](/docs/containers?topic=containers-vpn#vpn_test) between your clusters.
 
-8.  Repeat these steps for each cluster that you want to connect.
+7.  Repeat these steps for each cluster that you want to connect.
 
 **What's next?**
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -288,7 +288,7 @@ To add different block storage configurations, add block storage to a subset of 
    </tbody>
    </table>  
 
-5. Retrieve your IBM Cloud infrastructure (SoftLayer) user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
+5. Retrieve your IBM Cloud infrastructure user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
    1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
    2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
    3. From the menu bar, select **Account** > **Users** > **User List**.
@@ -565,11 +565,11 @@ To attach the block storage device to a non-SDS worker node, you must create a p
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
-        <td>Enter the IBM Cloud infrastructure (SoftLayer) user name that you retrieved earlier. </td>
+        <td>Enter the IBM Cloud infrastructure user name that you retrieved earlier. </td>
         </tr>
         <tr>
         <td><code>ibm.io/password</code></td>
-        <td>Enter the IBM Cloud infrastructure (SoftLayer) password that you retrieved earlier. </td>
+        <td>Enter the IBM Cloud infrastructure password that you retrieved earlier. </td>
         </tr>
         <tr>
         <td><code>ibm.io/targetip</code></td>
@@ -645,7 +645,7 @@ To attach the block storage device to a non-SDS worker node, you must create a p
 
    The block storage device is successfully attached when the **ibm.io/dm** is set to a device ID, such as `/dev/dm/1`, and you can see **ibm.io/attachstatus=attached** in the **Annotations** section of your CLI output.
 
-If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure (SoftLayer) account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-cleanup).
+If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure account](/docs/containers?topic=containers-cleanup).
 {: note}
 
 

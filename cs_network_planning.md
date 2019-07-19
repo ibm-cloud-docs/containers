@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ Kubernetes service discovery provides apps with a network connection by using ne
 **Services**</br>
 All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range and are routed between worker nodes only. To avoid conflicts, don't use this IP range on any nodes that communicate with your worker nodes. Worker nodes and pods can securely communicate on the private network by using private IP addresses. However, when a pod crashes or a worker node needs to be re-created, a new private IP address is assigned.
 
-Instead of trying to track changing private IP addresses for apps that must be highly available, you can use built-in Kubernetes service discovery features to expose apps as services. A Kubernetes service groups a set of pods and provides a network connection to these pods. The service selects the targeted pods it routes traffic to via labels.
+Instead of trying to track changing private IP addresses for apps that must be highly available, you can use built-in Kubernetes service discovery features to expose apps as services. A Kubernetes service groups a set of pods and provides a network connection to these pods. The service selects the targeted pods that it routes traffic to via labels.
 
 A service provides connectivity between your app pods and other services in the cluster without exposing the actual private IP address of each pod. Services are assigned an in-cluster IP address, the `clusterIP`, that is accessible inside the cluster only. This IP address is tied to the service for its entire lifespan and does not change while the service exists.
 * Newer clusters: In clusters that were created after February 2018 in the dal13 zone or after October 2017 in any other zone, services are assigned an IP from one of the 65,000 IPs in the 172.21.0.0/16 range.
@@ -116,7 +116,7 @@ The following table compares the features of each network service type.
 |Multiple apps per service| | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of Kubernetes network service types" caption-side="top"}
 
-To choose a load balancing deployment pattern based on one or more of these network services, see [Choosing a deployment pattern for public external load balancing](#pattern_public) or [Choosing a deployment pattern for private external load balancing](#private_access).
+To choose a load-balancing deployment pattern based on one or more of these network services, see [Choosing a deployment pattern for public external load balancing](#pattern_public) or [Choosing a deployment pattern for private external load balancing](#private_access).
 
 <br />
 
@@ -127,11 +127,11 @@ To choose a load balancing deployment pattern based on one or more of these netw
 Publicly expose an app in your cluster to the internet.
 {: shortdesc}
 
-When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface. Public networking services connect to this public network interface by providing your app with a public IP address and, optionally, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. For this reason, expose as few app as possible. Only expose an app to the public when you ready to accept traffic from external web clients or users.
+When you create a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}, you can connect the cluster to a public VLAN. The public VLAN determines the public IP address that is assigned to each worker node, which provides each worker node with a public network interface. Public networking services connect to this public network interface by providing your app with a public IP address and, optionally, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. For this reason, expose as few apps as possible. Expose an app to the public only when you ready to accept traffic from external web clients or users.
 
 The public network interface for worker nodes is protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked except for a few ports. These ports are opened so that IBM can monitor network traffic and automatically install security updates for the Kubernetes master, and so that connections can be established to NodePort, LoadBalancer, and Ingress services. For more information about these policies, including how to modify them, see [Network policies](/docs/containers?topic=containers-network_policies#network_policies).
 
-To make an app publicly available to the internet, choose a load balancing deployment pattern for your app to create public NodePort, LoadBalancer, or Ingress services.
+To make an app publicly available to the internet, choose a load-balancing deployment pattern for your app to create public NodePort, LoadBalancer, or Ingress services.
 
 ### Choosing a deployment pattern for public external load balancing
 {: #pattern_public}
@@ -153,7 +153,7 @@ When it comes to exposing an app with a network service, you have several choice
 <col width="25%">
 <thead>
 <th>Name</th>
-<th>Load balancing method</th>
+<th>Load-balancing method</th>
 <th>Use case</th>
 <th>Implementation</th>
 </thead>
@@ -166,7 +166,7 @@ When it comes to exposing an app with a network service, you have several choice
 </tr><tr>
 <td>NLB v1.0 (+ host name)</td>
 <td>Basic load balancing that exposes the app with an IP address or a host name</td>
-<td>Quickly expose one app to the public with an IP address or a a host name that supports SSL termination.</td>
+<td>Quickly expose one app to the public with an IP address or a host name that supports SSL termination.</td>
 <td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a host name and health checks.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ host name)</td>
@@ -192,7 +192,7 @@ When it comes to exposing an app with a network service, you have several choice
 </tbody>
 </table>
 
-Still want more details about the load balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
 {: tip}
 
 <br />
@@ -213,7 +213,7 @@ As an example, say that you create a private NLB for your app. This private NLB 
 * If you're not in the {{site.data.keyword.cloud_notm}} account but still behind the company firewall, any system through a VPN connection to the subnet that the NLB IP is on
 * If you're in a different {{site.data.keyword.cloud_notm}} account, any system through a VPN connection to the subnet that the NLB IP is on.
 
-To make an app available over a private network only, choose a load balancing deployment pattern based on your cluster's VLAN setup:
+To make an app available over a private network only, choose a load-balancing deployment pattern based on your cluster's VLAN setup:
 * [Public and private VLAN setup](#private_both_vlans)
 * [Private VLAN only setup](#plan_private_vlan)
 
@@ -227,9 +227,9 @@ The public network interface for worker nodes is protected by [predefined Calico
 
 Because the default Calico network policies allow inbound public traffic to these services, you can create Calico policies to instead block all public traffic to the services. For example, a NodePort service opens a port on a worker node over both the private and public IP address of the worker node. An NLB service with a portable private IP address opens a public NodePort on every worker node. You must create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block public NodePorts.
 
-Check out the following load balancing deployment patterns for private networking:
+Check out the following load-balancing deployment patterns for private networking:
 
-|Name|Load balancing method|Use case|Implementation|
+|Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
 |NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time.|<ol><li>[Create a NodePort service](/docs/containers?topic=containers-nodeport).</li><li>A NodePort service opens a port on a worker node over both the private and public IP address of the worker node. You must use a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
 |NLB v1.0|Basic load balancing that exposes the app with a private IP address|Quickly expose one app to a private network with a private IP address.|<ol><li>[Create a private NLB service](/docs/containers?topic=containers-loadbalancer).</li><li>An NLB with a portable private IP address still has a public node port open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.</li></ol>|
@@ -248,9 +248,9 @@ When your worker nodes are connected to a private VLAN only, you can make your a
 
 If your cluster is connected to a private VLAN only and you enable the master and worker nodes to communicate through a private-only service endpoint, you cannot automatically expose your apps to a private network. You must set up a gateway device, such as a [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or an [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall and block or allow traffic. Because your worker nodes aren't connected to a public VLAN, no public traffic is routed to NodePort, LoadBalancer, or Ingress services. However, you must open up the required ports and IP addresses in your gateway device firewall to permit inbound traffic to these services.
 
-Check out the following load balancing deployment patterns for private networking:
+Check out the following load-balancing deployment patterns for private networking:
 
-|Name|Load balancing method|Use case|Implementation|
+|Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
 |NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time.|<ol><li>[Create a NodePort service](/docs/containers?topic=containers-nodeport).</li><li>In your private firewall, open the port that you configured when you deployed the service to the private IP addresses for all of the worker nodes to allow traffic to. To find the port, run `kubectl get svc`. The port is in the 20000-32000 range.</li></ol>|
 |NLB v1.0|Basic load balancing that exposes the app with a private IP address|Quickly expose one app to a private network with a private IP address.|<ol><li>[Create a private NLB service](/docs/containers?topic=containers-loadbalancer).</li><li>In your private firewall, open the port that you configured when you deployed the service to the NLB's private IP address.</li></ol>|

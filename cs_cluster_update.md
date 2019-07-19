@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -34,11 +34,11 @@ You can install updates to keep your Kubernetes clusters up-to-date in {{site.da
 ## Updating the Kubernetes master
 {: #master}
 
-Periodically, Kubernetes releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
+Periodically, the Kubernetes project releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
 {:shortdesc}
 
 **How do I know when to update the master?**</br>
-You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check our [supported versions](/docs/containers?topic=containers-cs_versions) page.
+You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
@@ -79,13 +79,13 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
 
-2.  Update your Kubernetes API server and associated Kubernetes master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
+2.  Update your API server and associated master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster-update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
 
-3.  Wait a few minutes, then confirm that the update is complete. Review the Kubernetes API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks clusters`.
+3.  Wait a few minutes, then confirm that the update is complete. Review the API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks clusters`.
 
-4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes API server version that runs in the Kubernetes master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
+4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
-When the Kubernetes API server update is complete, you can update your worker nodes.
+When the master update is complete, you can update your worker nodes.
 
 <br />
 
@@ -93,7 +93,7 @@ When the Kubernetes API server update is complete, you can update your worker no
 ## Updating worker nodes
 {: #worker_node}
 
-You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the Kubernetes API server and other Kubernetes master components, you must be sure that the worker nodes remain in sync.
+You received a notification to update your worker nodes. What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync.
 {: shortdesc}
 
 **What happens to my apps during an update?**</br>
@@ -109,9 +109,9 @@ When the config map is not defined, the default is used. By default, a maximum o
 
 **Before you begin**:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
-- Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
-- If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
+- [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes clusters](/docs/containers?topic=containers-cs_versions) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version preparation guides.
+- If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog#changelog) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version changelog.
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
@@ -274,11 +274,11 @@ After you set up the config map for the first time, you can then update worker n
 {: shortdesc}
 
 Before you begin:
-*   [Set up a config map](#worker_node) to control how your worker nodes are updated.
-*   [Update the Kubernetes master](#master). The worker node Kubernetes version cannot be higher than the Kubernetes API server version that runs in your Kubernetes master.
-*   Make any changes that are marked with _Update after master_ in the [Kubernetes changes](/docs/containers?topic=containers-cs_versions).
-*   If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog#changelog).
-*   Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
+- [Set up a config map](#worker_node) to control how your worker nodes are updated.
+- [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes clusters](/docs/containers?topic=containers-cs_versions) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version preparation guides.
+- If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog#changelog) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version changelog.
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). </br>
 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -287,7 +287,7 @@ To update worker nodes from the console:
 1.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 2.  From the **Clusters** page, click your cluster.
 3.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
-4.  From the action bar, click **Update Kubernetes**.
+4.  From the action bar, click **Update**.
 
 <br />
 
@@ -628,7 +628,7 @@ To update stand-alone worker nodes to worker pools:
       ```
       {: pre}
 
-   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone-add` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
       ```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```

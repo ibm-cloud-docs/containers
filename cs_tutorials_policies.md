@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -70,7 +70,7 @@ This tutorial is intended for software developers and network administrators who
 The first lesson shows you how your app is exposed from multiple IP addresses and ports, and where public traffic is coming into your cluster.
 {: shortdesc}
 
-Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection that are made to the cluster from the client, and you can test access to the PR firm's cluster. Then, expose the app by creating a network load balancer (NLB) 1.0 service. An NLB 1.0 service makes your app available over both the NLB service IP address and the worker nodes' node ports.
+Start by deploying a sample web server app to use throughout the tutorial. The `echoserver` web server shows data about the connection that is made to the cluster from the client, and you can test access to the PR firm's cluster. Then, expose the app by creating a network load balancer (NLB) 1.0 service. An NLB 1.0 service makes your app available over both the NLB service IP address and the worker nodes' node ports.
 
 Want to use an Ingress application load balancer (ALB)? Instead of creating an NLB in steps 3 and 4, [create a service for the web server app](/docs/containers?topic=containers-ingress#public_inside_1) and [create an Ingress resource for the web server app](/docs/containers?topic=containers-ingress#public_inside_4). Then get the public IPs of your ALBs by running `ibmcloud ks albs --cluster <cluster_name>` and use these IPs throughout the tutorial in place of the `<loadbalancer_IP>.`
 {: tip}
@@ -359,7 +359,8 @@ Next, you can create and apply Calico policies to whitelist traffic from certain
 You now decide to completely lock down traffic to the PR firm's cluster and test access by whitelisting only your own computer's IP address.
 {: shortdesc}
 
-First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB will be blocked and only traffic from your whitelisted system IP will be allowed:
+First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is
+blocked and only traffic from your whitelisted system IP is allowed:
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public NLB to your system IP only." style="width:500px; border-style: none"/>
 
@@ -479,10 +480,10 @@ At this point, all traffic to the public node ports and NLB is blocked. Only tra
 ## Lesson 4: Deny incoming traffic from blacklisted IPs to the NLB
 {: #lesson4}
 
-In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this because it can help you prevent an attack from a small set of IP addresses.
+In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
 {: shortdesc}
 
-In this lesson, you will test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports will be blocked, and all traffic to the public NLB will be allowed. Only traffic from your blacklisted system IP to the NLB will be blocked:
+In this lesson, test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your blacklisted system IP to the NLB is blocked:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked." style="width:550px; border-style: none"/>
 

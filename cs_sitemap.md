@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-08"
+lastupdated: "2019-07-18"
 
 ---
 
@@ -18,6 +18,7 @@ lastupdated: "2019-07-08"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Site map
@@ -307,10 +308,10 @@ lastupdated: "2019-07-08"
   * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
 * [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
 * [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-users#api_key)
-  * [Understanding access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#understand_infra)
+  * [Understanding access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
   * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
   * [Accessing the infrastructure portfolio with your default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](/docs/containers?topic=containers-users#default_account)
-  * [Accessing a different IBM Cloud infrastructure (SoftLayer) account](/docs/containers?topic=containers-users#credentials)
+  * [Accessing a different IBM Cloud infrastructure account](/docs/containers?topic=containers-users#credentials)
 * [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform)
   * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
   * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
@@ -324,7 +325,7 @@ lastupdated: "2019-07-08"
     * [Remove {{site.data.keyword.cloud_notm}} IAM platform permissions and the associated pre-defined RBAC permissions](/docs/containers?topic=containers-users#remove_iam_rbac)
     * [Remove custom RBAC permissions](/docs/containers?topic=containers-users#remove_custom_rbac)
     * [Remove Cloud Foundry permissions](/docs/containers?topic=containers-users#remove_cloud_foundry)
-    * [Remove IBM Cloud infrastructure (SoftLayer) permissions](/docs/containers?topic=containers-users#remove_infra)
+    * [Remove IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#remove_infra)
 
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
 * [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)

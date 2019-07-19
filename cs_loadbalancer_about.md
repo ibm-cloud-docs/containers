@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -47,11 +47,11 @@ When you expose an app with an NLB service, your app is automatically made avail
 When you create an NLB, you can choose a version 1.0 NLB, which performs basic oad balancing, or version 2.0 NLB, which performs direct server return (DSR) load balancing. Note that version 2.0 NLBs are in beta.
 {: shortdesc}
 
-**How are version 1.0 and 2.0 NLBs similar?**
+**How are versions 1.0 and 2.0 NLBs similar?**
 
-Version 1.0 and 2.0 NLBs are both Layer 4 load balancers that exist in the Linux kernel space. Both versions run inside the cluster, and use worker node resources. Therefore, the available capacity of the NLBs is always dedicated to your own cluster. Additionally, both version of NLBs do not terminate the connection. Instead, they forward connections to an app pod.
+Version 1.0 and 2.0 NLBs are both Layer 4 load balancers that exist in the Linux kernel space. Both versions run inside the cluster, and use worker node resources. Therefore, the available capacity of the NLBs is always dedicated to your own cluster. Additionally, both versions of NLBs do not terminate the connection. Instead, they forward connections to an app pod.
 
-**How are version 1.0 and 2.0 NLBs different?**
+**How are versions 1.0 and 2.0 NLBs different?**
 
 When a client sends a request to your app, the NLB routes request packets to the worker node IP address where an app pod exists. Version 1.0 NLBs use network address translation (NAT) to rewrite the request packet's source IP address to the IP of worker node where a load balancer pod exists. When the worker node returns the app response packet, it uses that worker node IP where the NLB exists. The NLB must then send the response packet to the client. To prevent the IP address from being rewritten, you can [enable source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations). However, source IP preservation requires load balancer pods and app pods to run on the same worker so that the request doesn't have to be forwarded to another worker. You must add node affinity and tolerations to app pods. For more information about basic load balancing with version 1.0 NLBs, see [v1.0: Components and architecture of basic load balancing](#v1_planning).
 
@@ -63,7 +63,7 @@ As opposed to version 1.0 NLBs, version 2.0 NLBs don't use NAT when forwarding r
 ## Components and architecture of an NLB 1.0
 {: #v1_planning}
 
-The TCP/UDP network load balancer (NLB) 1.0 uses Iptables, a Linux kernel feature, to load balance requests across an app's pods.
+The TCP/UDP network load balancer (NLB) 1.0 uses Iptables, a Linux kernel feature to load balance requests across an app's pods.
 {: shortdesc}
 
 ### Traffic flow in a single-zone cluster
@@ -103,7 +103,7 @@ Network load balancer (NLB) 2.0 capabilities are in beta. To use an NLB 2.0, you
 
 The NLB 2.0 is a Layer 4 load balancer that uses the Linux kernel's IP Virtual Server (IPVS). The NLB 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic that arrives to a single NLB IP address across those worker nodes.
 
-Want more details about the load balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+Want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
 {: tip}
 
 ### Traffic flow in a single-zone cluster

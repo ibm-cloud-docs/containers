@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, containers
 
@@ -119,7 +119,7 @@ You can take some general steps to containerize your app as follows.
 
 For more, see the following tutorials:
 *  [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial#cf_tutorial)
-*  [Moving a VM based app to Kubernetes](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+*  [Moving a VM-based app to Kubernetes](/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
 
 
 
@@ -206,7 +206,7 @@ Now that you have a good idea of what your workload looks like, let's map the es
 ## Structuring your Kubernetes environment
 {: #kube_env}
 
-Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrastructure (SoftLayer) portfolio only. Within your account, you can create clusters that are composed of a master and various worker nodes. IBM manages the master, and you can create a mix of worker pools that pool together individual machines of the same flavor, or memory and CPU specs. Within the cluster, you can further organize resources by using namespaces and labels. Choose the right mix of cluster, machine types, and organization strategies so that you can make sure that your teams and workloads get the resources that they need.
+Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrastructure portfolio only. Within your account, you can create clusters that are composed of a master and various worker nodes. IBM manages the master, and you can create a mix of worker pools that pool together individual machines of the same flavor, or memory and CPU specs. Within the cluster, you can further organize resources by using namespaces and labels. Choose the right mix of cluster, machine types, and organization strategies so that you can make sure that your teams and workloads get the resources that they need.
 {:shortdesc}
 
 ### What type of cluster and machine types should I get?

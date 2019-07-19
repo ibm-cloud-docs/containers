@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-19"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, access, permissions, api key
 
 subcollection: containers
 
@@ -28,22 +28,19 @@ subcollection: containers
 # Assigning cluster access
 {: #users}
 
-As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} cluster to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
+As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} community Kubernetes or OpenShift clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
 {: shortdesc}
-
-As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.cloud_notm}} IAM: [service access roles](/docs/containers?topic=containers-access_reference#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
 
 ## Understanding access policies and roles
 {: #access_policies}
 
-Access policies determine the level of access that users in your {{site.data.keyword.cloud_notm}} account have to resources across the {{site.data.keyword.cloud_notm}} platform. A policy assigns a user one or more roles that define the scope of access to a single service or to a set of services and resources organized together in a resource group. Each service in {{site.data.keyword.cloud_notm}} might require its own set of access policies.
+Access policies determine the level of access that users in your {{site.data.keyword.cloud_notm}} account have to resources across the {{site.data.keyword.cloud_notm}} platform. A policy assigns a user one or more roles that define the scope of access to a single service or to a set of services and resources that are organized together in a resource group. Each service in {{site.data.keyword.cloud_notm}} might require its own set of access policies.
 {: shortdesc}
 
 As you develop your plan to manage user access, consider the following general steps:
 1.  [Pick the right access policy and role for your users](#access_roles)
 2.  [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](#iam_individuals_groups)
-3.  [Scope user access to cluster instances, Kubernetes namespaces, or resource groups](#resource_groups)
+3.  [Scope user access to cluster instances, Kubernetes namespaces (projects in OpenShift), or resource groups](#resource_groups)
 
 After you understand how roles, users, and resources in your account can be managed, check out [Setting up access to your cluster](#access-checklist) for a checklist of how to configure access.
 
@@ -51,7 +48,7 @@ After you understand how roles, users, and resources in your account can be mana
 ### Pick the right access policy and role for your users
 {: #access_roles}
 
-You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containerlong_notm}} console or through the CLI, even when the actions are completed in IBM Cloud infrastructure (SoftLayer).
+You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions that the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containerlong_notm}} console or through the CLI, even when the actions are completed in IBM Cloud infrastructure.
 {: shortdesc}
 
 The following image shows the different types of permissions and roles, which role can perform which kinds of actions, and how the roles relate to each other.
@@ -64,13 +61,13 @@ To see the specific {{site.data.keyword.containerlong_notm}} permissions by each
 <dl>
 <dt><a href="#platform">{{site.data.keyword.cloud_notm}} IAM platform and service roles</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} uses {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) platform and service roles to grant users access to the cluster.
-<ul><li>**Platform**: Platform roles determine the actions that users can perform on cluster infrastructure by using the {{site.data.keyword.containerlong_notm}} API, console, and CLI (`ibmcloud ks`). Platform roles do not grant access to the Kubernetes API. You can set the policies for these roles by resource group, region, or cluster instance. Although platform roles authorize you to perform infrastructure actions on the cluster, they do not grant access to the IBM Cloud infrastructure (SoftLayer) resources. Access to the IBM Cloud infrastructure (SoftLayer) resources is determined by the [API key that is set for the region](#api_key). Example actions that are permitted by platform roles are creating or removing clusters, binding services to a cluster, managing networking and storage resources, or adding extra worker nodes.<br><br>If you assign only platform roles to users, they cannot interact with Kubernetes resources within the cluster. They can, however, still perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config). Then, you can authorize the users to perform select Kubernetes actions by using [custom RBAC policies](/docs/containers?topic=containers-users#role-binding). You might do this if your organization currently uses custom RBAC policies to control Kubernetes access and plans to continue using custom RBAC instead of service roles.</li>
+<ul><li>**Platform**: Platform roles determine the actions that users can perform on cluster infrastructure by using the {{site.data.keyword.containerlong_notm}} API, console, and CLI (`ibmcloud ks`). Platform roles do not grant access to the Kubernetes API. You can set the policies for these roles by resource group, region, or cluster instance. Although platform roles authorize you to perform infrastructure actions on the cluster, they do not grant access to the IBM Cloud infrastructure resources. Access to the IBM Cloud infrastructure resources is determined by the [API key that is set for the region](#api_key). Example actions that are permitted by platform roles are creating or removing clusters, binding services to a cluster, managing networking and storage resources, or adding extra worker nodes.<br><br>If you assign only platform roles to users, they cannot interact with Kubernetes resources within the cluster. They can, however, still perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config). Then, you can authorize the users to perform select Kubernetes actions by using [custom RBAC policies](/docs/containers?topic=containers-users#role-binding). You might do this if your organization currently uses custom RBAC policies to control Kubernetes access and plans to continue using custom RBAC instead of service roles.</li>
 <li>**Service**: Service roles grant corresponding Kubernetes RBAC policies that a user is given within a cluster. As such, service roles grant access to the Kubernetes API, dashboard, and CLI (`kubectl`). You can scope the policy for service roles by resource group, region, or cluster instance. Further, you can also scope service roles to Kubernetes namespaces that are in all, individual, or region-wide clusters. When you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time. Example actions that are permitted by service roles are creating app deployments, adding namespaces, or setting up configmaps.<br><br>If you assign only service roles to users, they cannot view or interact with any {{site.data.keyword.containerlong_notm}} resources. For the users to access the cluster and use the cluster's Kubernetes resources, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster-config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli). If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, give the users the platform **Viewer** role.</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>In Kubernetes, role-based access control (RBAC) is a way of securing the resources inside your cluster. RBAC roles determine the Kubernetes actions that users can perform on those resources. Every user who is assigned a service role is automatically assigned a corresponding RBAC cluster role. This RBAC cluster role is applied either in a specific namespace or in all namespaces, depending on whether you scope the policy to a namespace.</br></br>
 Example actions that are permitted by RBAC roles are creating objects such as pods or reading pod logs.</dd>
 <dt><a href="#api_key">Classic infrastructure</a></dt>
-<dd>Classic infrastructure roles enable access to your IBM Cloud infrastructure (SoftLayer) resources. Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region and resource group that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} do not need infrastructure roles as the API key is shared for all users within the region. Instead, {{site.data.keyword.cloud_notm}} IAM platform roles determine the infrastructure actions that users are allowed to perform. If you don't set up the API key with full <strong>Super User</strong> infrastructure or you need to grant specific device access to users, you can [customize infrastructure permissions](#infra_access). </br></br>
+<dd>Classic infrastructure roles enable access to your IBM Cloud infrastructure resources. Set up a user with **Super User** infrastructure role, and store this user's infrastructure credentials in an API key. Then, set the API key in each region and resource group that you want to create clusters in. After you set up the API key, other users that you grant access to {{site.data.keyword.containerlong_notm}} do not need infrastructure roles as the API key is shared for all users within the region. Instead, {{site.data.keyword.cloud_notm}} IAM platform roles determine the infrastructure actions that users are allowed to perform. If you don't set up the API key with full <strong>Super User</strong> infrastructure or you need to grant specific device access to users, you can [customize infrastructure permissions](#infra_access). </br></br>
 Example actions that are permitted by infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.</dd>
 <dt>Cloud Foundry</dt>
 <dd>Not all services can be managed with {{site.data.keyword.cloud_notm}} IAM. If you're using one of these services, you can continue to use Cloud Foundry user roles to control access to those services. Cloud Foundry roles grant access to organizations and spaces within the account. To see the list of Cloud Foundry-based services in {{site.data.keyword.cloud_notm}}, run <code>ibmcloud service list</code>.</br></br>
@@ -98,7 +95,7 @@ You must also specify whether users have access to one cluster in a resource gro
 ### Scope user access to cluster instances, namespaces, or resource groups
 {: #resource_groups}
 
-In {{site.data.keyword.cloud_notm}} IAM, you can assign user access roles to resource instances, Kubernetes namespaces, or resource groups.
+In {{site.data.keyword.cloud_notm}} IAM, you can assign user access roles to resource instances, Kubernetes namespaces (projects in OpenShift), or resource groups.
 {: shortdesc}
 
 When you create your {{site.data.keyword.cloud_notm}} account, the default resource group is created automatically. If you do not specify a resource group when you create the resource, resource instances (clusters) belong to the default resource group. In {{site.data.keyword.cloud_notm}} IAM, a Kubernetes namespace is a resource type of a resource instance (cluster). If you want to add a resource group in your account, see [Best practices for setting up your account](/docs/account?topic=account-account_setup) and [Setting up your resource groups](/docs/resources?topic=resources-bp_resourcegroups#setuprgs).
@@ -110,9 +107,9 @@ When you create your {{site.data.keyword.cloud_notm}} account, the default resou
   <li>All instances within a service, such as all the clusters in {{site.data.keyword.containerlong_notm}}.</li>
   <li>All instances within a region of a service, such as all the clusters in the **US South** region of {{site.data.keyword.containerlong_notm}}.</li>
   <li>To an individual instance, such as one cluster.</li></ul></dd>
-<dt>Kubernetes namespace</dt>
-  <dd><p>As part of cluster resource instances in {{site.data.keyword.cloud_notm}} IAM, you can assign users with service access roles to Kubernetes namespaces within your clusters.</p>
-  <p>When you assign access to a namespace, the policy applies to all current and future instances of the namespace in all the clusters that you authorize. For example, say you want a `dev` group of users to be able to deploy Kubernetes resources in a `test` namespace in all your clusters in AP North. If you assign the `dev` access group the **Writer** service access role for the Kubernetes namespace test in all clusters in the AP North region within the `default` resource group, the `dev` group can access the `test` namespace in any AP North cluster in the `default` resource group that currently has or eventually has a test namespace.</p>
+<dt>Kubernetes namespace (projects in OpenShift)</dt>
+  <dd><p>As part of cluster resource instances in {{site.data.keyword.cloud_notm}} IAM, you can assign users with service access roles to namespaces within your clusters.</p>
+  <p>When you assign access to a namespace, the policy applies to all current and future instances of the namespace in all the clusters that you authorize. For example, say that you want a `dev` group of users to be able to deploy Kubernetes resources in a `test` namespace in all your clusters in AP North. If you assign the `dev` access group the **Writer** service access role for the Kubernetes namespace test in all clusters in the AP North region within the `default` resource group, the `dev` group can access the `test` namespace in any AP North cluster in the `default` resource group that currently has or eventually has a test namespace.</p>
   <p class="important">If you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time.</p></dd>
 <dt>Resource group</dt>
   <dd><p>You can organize your account resources in customizable groupings so that you can quickly assign individual or groups of users access to more than one resource at a time. Resource groups can help operators and administrators filter resources to view their current usage, troubleshoot issues, and manage teams.</p>
@@ -153,10 +150,10 @@ For more information about setting up your account and resources, try out this t
 ## Setting up the API key to enable access to the infrastructure portfolio
 {: #api_key}
 
-To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.cloud_notm}} account is correctly set up to access the IBM Cloud infrastructure (SoftLayer) portfolio in each resource group and region that your clusters are in.
+To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.cloud_notm}} account is correctly set up to access the IBM Cloud infrastructure portfolio in each resource group and region that your clusters are in.
 {: shortdesc}
 
-**Most cases**: Your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio. To set up {{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
+**Most cases**: Your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure portfolio. To set up {{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
 
 1. Log in to the terminal as the account owner.
     ```
@@ -184,23 +181,23 @@ To successfully provision and work with clusters, you must ensure that your {{si
 
 5. Repeat for each region and resource group that you want to create clusters in.
 
-**Alternative options and more information**: For different ways to access the IBM Cloud infrastructure (SoftLayer) portfolio, check out the following sections.
-* If you aren't sure whether your account already has access to the IBM Cloud infrastructure (SoftLayer) portfolio, see [Understanding access to the infrastructure portfolio](#understand_infra).
+**Alternative options and more information**: For different ways to access the IBM Cloud infrastructure portfolio, check out the following sections.
+* If you aren't sure whether your account already has access to the IBM Cloud infrastructure portfolio, see [Understanding access to the infrastructure portfolio](#understand_infra).
 * If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 * For more information about using your default account to set the API key, see [Accessing the infrastructure portfolio with your default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](#default_account).
-* If you don't have a default Pay-As-You-Go account or need to use a different IBM Cloud infrastructure (SoftLayer) account, see [Accessing a different IBM Cloud infrastructure (SoftLayer) account](#credentials).
+* If you don't have a default Pay-As-You-Go account or need to use a different IBM Cloud infrastructure account, see [Accessing a different IBM Cloud infrastructure account](#credentials).
 
 ### Understanding access to the infrastructure portfolio
 {: #understand_infra}
 
-Determine whether your account has access to the IBM Cloud infrastructure (SoftLayer) portfolio and learn about how {{site.data.keyword.containerlong_notm}} uses the API key to access the portfolio.
+Determine whether your account has access to the IBM Cloud infrastructure portfolio and learn about how {{site.data.keyword.containerlong_notm}} uses the API key to access the portfolio.
 {: shortdesc}
 
 
 
-**Does my account already have access to the IBM Cloud infrastructure (SoftLayer) portfolio?**</br>
+**Does my account already have access to the IBM Cloud infrastructure portfolio?**</br>
 
-To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account. If you have a different type of account, view your options in the following table.
+To access the IBM Cloud infrastructure portfolio, you use an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account. If you have a different type of account, view your options in the following table.
 
 <table summary="The table shows the standard cluster creation options by account type. Rows are to be read from the left to right, with the account description in column one, and the options to create a standard cluster in column two.">
 <caption>Standard cluster creation options by account type</caption>
@@ -218,21 +215,21 @@ To access the IBM Cloud infrastructure (SoftLayer) portfolio, you use an {{site.
       <td>You can create standard clusters. Use an API key to set up infrastructure permissions for your clusters.</td>
     </tr>
     <tr>
-      <td>**Subscription accounts** are not set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio.</td>
-      <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account?topic=account-accounts#paygo) that is set up with access to the IBM Cloud infrastructure (SoftLayer) portfolio. When you choose this option, you have two separate {{site.data.keyword.cloud_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure (SoftLayer). Then, you must manually set the IBM Cloud infrastructure (SoftLayer) API key for your Subscription account. Keep in mind that IBM Cloud infrastructure (SoftLayer) resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure (SoftLayer) account that you want to use, you can manually set IBM Cloud infrastructure (SoftLayer) credentials for your {{site.data.keyword.cloud_notm}} account.</p><p class="note">When you manually link to an IBM Cloud infrastructure (SoftLayer) account, the credentials are used for every IBM Cloud infrastructure (SoftLayer) specific action in your {{site.data.keyword.cloud_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](/docs/containers?topic=containers-users#infra_access) so that your users can create and work with clusters.</p></td>
+      <td>**Subscription accounts** are not set up with access to the IBM Cloud infrastructure portfolio.</td>
+      <td><p><strong>Option 1:</strong> [Create a new Pay-As-You-Go account](/docs/account?topic=account-accounts#paygo) that is set up with access to the IBM Cloud infrastructure portfolio. When you choose this option, you have two separate {{site.data.keyword.cloud_notm}} accounts and billings.</p><p>If you want to continue using your Subscription account, you can use your new Pay-As-You-Go account to generate an API key in IBM Cloud infrastructure. Then, you must manually set the IBM Cloud infrastructure API key for your Subscription account. Keep in mind that IBM Cloud infrastructure resources are billed through your new Pay-As-You-Go account.</p><p><strong>Option 2:</strong> If you already have an existing IBM Cloud infrastructure account that you want to use, you can manually set IBM Cloud infrastructure credentials for your {{site.data.keyword.cloud_notm}} account.</p><p class="note">When you manually link to an IBM Cloud infrastructure account, the credentials are used for every IBM Cloud infrastructure specific action in your {{site.data.keyword.cloud_notm}} account. You must ensure that the API key that you set has [sufficient infrastructure permissions](/docs/containers?topic=containers-users#infra_access) so that your users can create and work with clusters.</p></td>
     </tr>
     <tr>
-      <td>**IBM Cloud infrastructure (SoftLayer) accounts**, no {{site.data.keyword.cloud_notm}} account</td>
-      <td><p>[Create an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](/docs/account?topic=account-accounts#paygo). You have two separate IBM Cloud infrastructure (SoftLayer) accounts and billing.</p><p>By default, your new {{site.data.keyword.cloud_notm}} account uses the new infrastructure account. To continue using the old infrastructure account, manually set the credentials.</p></td>
+      <td>**IBM Cloud infrastructure accounts**, no {{site.data.keyword.cloud_notm}} account</td>
+      <td><p>[Create an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](/docs/account?topic=account-accounts#paygo). You have two separate IBM Cloud infrastructure accounts and billing.</p><p>By default, your new {{site.data.keyword.cloud_notm}} account uses the new infrastructure account. To continue using the old infrastructure account, manually set the credentials.</p></td>
     </tr>
   </tbody>
   </table>
 
 **Now that my infrastructure portfolio is set up, how does {{site.data.keyword.containerlong_notm}} access the portfolio?**</br>
 
-{{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure (SoftLayer) portfolio by using an API key. The API key impersonates, or stores the credentials of, a user with access to an IBM Cloud infrastructure (SoftLayer) account. API keys are set by region within a resource group, and are shared by users in that region.
+{{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure portfolio by using an API key. The API key impersonates, or stores the credentials of, a user with access to an IBM Cloud infrastructure account. API keys are set by region within a resource group, and are shared by users in that region.
  
-To enable all users to access the IBM Cloud infrastructure (SoftLayer) portfolio, the user whose credentials are stored in the API key must have [the **Super User** infrastructure role and the **Administrator** platform role for {{site.data.keyword.containerlong_notm}} and for {{site.data.keyword.registryshort_notm}}](#owner_permissions) in your {{site.data.keyword.cloud_notm}} account. Then, let that user perform the first admin action in a region and resource group. The user's infrastructure credentials are stored in an API key for that region and resource group.
+To enable all users to access the IBM Cloud infrastructure portfolio, the user whose credentials are stored in the API key must have [the **Super User** infrastructure role and the **Administrator** platform role for {{site.data.keyword.containerlong_notm}} and for {{site.data.keyword.registryshort_notm}}](#owner_permissions) in your {{site.data.keyword.cloud_notm}} account. Then, let that user perform the first admin action in a region and resource group. The user's infrastructure credentials are stored in an API key for that region and resource group.
 
 Other users within the account share the API key for accessing the infrastructure. When users log in to the {{site.data.keyword.cloud_notm}} account, an {{site.data.keyword.cloud_notm}} IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
 
@@ -243,28 +240,28 @@ To see the {{site.data.keyword.cloud_notm}} IAM token for a CLI session, you can
 
 After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [platform role](#platform). By assigning {{site.data.keyword.cloud_notm}} IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has all the required infrastructure roles, all infrastructure-related commands can be run in a cluster. But, depending on the {{site.data.keyword.cloud_notm}} IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
 
-For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After, you can invite individual users or users in {{site.data.keyword.cloud_notm}} IAM access groups to that region by setting platform management policies for them in that region. A user with a **Viewer** platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After verification, you can invite individual users or users in {{site.data.keyword.cloud_notm}} IAM access groups to that region by setting platform management policies for them in that region. A user with a **Viewer** platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure permissions.
 
 To audit the actions that users in your account run, you can use [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events) to view all cluster-related events.
 {: tip}
 
 **What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
 
-For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure (SoftLayer) permissions](#infra_access) for users.
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure permissions](#infra_access) for users.
 
 **What happens if the user who set the API key for a region and resource group leaves the company?**
 
-If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} account owner can remove that user's permissions. However, before you remove a user's specific access permissions or remove a user from your account completely, you must reset the API key with another user's infrastructure credentials. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure (SoftLayer) portal and infrastructure-related commands might fail. For more information, see [Removing user permissions](#removing).
+If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} account owner can remove that user's permissions. However, before you remove a user's specific access permissions or remove a user from your account completely, you must reset the API key with another user's infrastructure credentials. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure portal and infrastructure-related commands might fail. For more information, see [Removing user permissions](#removing).
 
 **How can I lock down my cluster if my API key becomes compromised?**
 
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam?topic=iam-userapikey#delete_user_key) so that no further calls can be made using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/iam?topic=iam-userapikey#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
 
 **How do I set up the API key for my cluster?**</br>
 
-It depends on what type of account that you're using to access the IBM Cloud infrastructure (SoftLayer) portfolio:
+It depends on what type of account that you're using to access the IBM Cloud infrastructure portfolio:
 * [A default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](#default_account)
-* [A different IBM Cloud infrastructure (SoftLayer) account that is not linked to your default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](#credentials)
+* [A different IBM Cloud infrastructure account that is not linked to your default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account](#credentials)
 
 ### Ensuring that the API key or infrastructure credentials owner has the correct permissions
 {: #owner_permissions}
@@ -291,7 +288,7 @@ To ensure that all infrastructure-related actions can be successfully completed 
 ### Accessing the infrastructure portfolio with your default {{site.data.keyword.cloud_notm}} Pay-As-You-Go account
 {: #default_account}
 
-If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have access to a linked IBM Cloud infrastructure (SoftLayer) portfolio by default. The API key is used to order infrastructure resources from this IBM Cloud infrastructure (SoftLayer) portfolio, such as new worker nodes or VLANs.
+If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have access to a linked IBM Cloud infrastructure portfolio by default. The API key is used to order infrastructure resources from this IBM Cloud infrastructure portfolio, such as new worker nodes or VLANs.
 {: shortdec}
 
 You can find the current API key owner by running [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info). If you find that you need to update the API key that is stored for a region, you can do so by running the [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
@@ -303,7 +300,7 @@ Be sure that you want to reset the key and understand the impact to your app. Th
 - If the account owner is not setting the API key, [ensure that the user who sets the API key has the correct permissions](#owner_permissions).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
+To set the API key to access the IBM Cloud infrastructure portfolio:
 
 1.  Set the API key for the region and resource group that the cluster is in.
     1.  Log in to the terminal with the user whose infrastructure permissions you want to use.
@@ -328,21 +325,21 @@ To set the API key to access the IBM Cloud infrastructure (SoftLayer) portfolio:
 ### Accessing a different classic infrastructure account
 {: #credentials}
 
-Instead of using the default linked IBM Cloud infrastructure (SoftLayer) account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure (SoftLayer) account that you already have. You can link this infrastructure account to your {{site.data.keyword.cloud_notm}} account by using the [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) command. The IBM Cloud infrastructure (SoftLayer) credentials are used instead of the default Pay-As-You-Go account's credentials that are stored for the region.
+Instead of using the default linked IBM Cloud infrastructure account to order infrastructure for clusters within a region, you might want to use a different IBM Cloud infrastructure account that you already have. You can link this infrastructure account to your {{site.data.keyword.cloud_notm}} account by using the [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) command. The IBM Cloud infrastructure credentials are used instead of the default Pay-As-You-Go account's credentials that are stored for the region.
 {: shortdesc}
 
 
 
-The IBM Cloud infrastructure (SoftLayer) credentials set by the `ibmcloud ks credential-set` command persist after your session ends. If you remove IBM Cloud infrastructure (SoftLayer) credentials that were manually set with the [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
+The IBM Cloud infrastructure credentials set by the `ibmcloud ks credential-set` command persist after your session ends. If you remove IBM Cloud infrastructure credentials that were manually set with the [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) command, the default Pay-As-You-Go account credentials are used. However, this change in infrastructure account credentials might cause [orphaned clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 {: important}
 
 **Before you begin**:
 - If you are not using the account owner's credentials, [ensure that the user whose credentials you want to set for the API key has the correct permissions](#owner_permissions).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To set infrastructure account credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio:
+To set infrastructure account credentials to access the IBM Cloud infrastructure portfolio:
 
-1. Get the infrastructure account that you want to use to access the IBM Cloud infrastructure (SoftLayer) portfolio. You have different options that depend on your [current account type](#understand_infra).
+1. Get the infrastructure account that you want to use to access the IBM Cloud infrastructure portfolio. You have different options that depend on your [current account type](#understand_infra).
 
 2.  Set the infrastructure API credentials with the user for the correct account.
 
@@ -722,7 +719,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.cloud_notm}
 ## Assigning RBAC permissions
 {: #role-binding}
 
-Use RBAC roles to define the actions a user can take to work with the Kubernetes resources in your cluster.
+Use RBAC roles to define the actions that a user can take to work with the Kubernetes resources in your cluster.
 {: shortdesc}
 
 **What are RBAC roles and cluster roles?**</br>
@@ -740,7 +737,7 @@ To learn more about the actions permitted by each RBAC role, check out the [{{si
 {: tip}
 
 **Can I create custom roles or cluster roles?**
-The `view`, `edit`, `admin` and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.cloud_notm}} IAM service role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac). Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with service access roles. Note that to create custom RBAC permissions, you must have the IAM **Manager** service access role that gives you the `cluster-admin` Kubernetes RBAC role. The other users, however, do not need an IAM service access role if you manage your own custom Kubernetes RBAC roles.
+The `view`, `edit`, `admin`, and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.cloud_notm}} IAM service role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac). Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with service access roles. Note that to create custom RBAC permissions, you must have the IAM **Manager** service access role that gives you the `cluster-admin` Kubernetes RBAC role. However, the other users do not need an IAM service access role if you manage your own custom Kubernetes RBAC roles.
 
 Making your own custom RBAC policies? Be sure not to edit the existing IBM role bindings that are in the cluster, or name new role bindings with the same name. Any changes to IBM-provided RBAC role bindings are overwritten periodically. Instead, create your own role bindings.
 {: tip}
@@ -753,14 +750,14 @@ You might also want to integrate add-ons to your cluster. For example, when you 
 ### Creating custom RBAC permissions for users, groups, or service accounts
 {: #rbac}
 
-The `view`, `edit`, `admin` and `cluster-admin` cluster roles are automatically created when you assign the corresponding {{site.data.keyword.cloud_notm}} IAM service role. Do you need your cluster access policies to be more granular than these predefined permissions allow? No problem! You can create custom RBAC roles and cluster roles.
+The `view`, `edit`, `admin`, and `cluster-admin` cluster roles are automatically created when you assign the corresponding {{site.data.keyword.cloud_notm}} IAM service role. Do you need your cluster access policies to be more granular than these predefined permissions allow? No problem! You can create custom RBAC roles and cluster roles.
 {: shortdesc}
 
 You can assign custom RBAC roles and cluster roles to individual users, groups of users (in clusters that run Kubernetes v1.11 or later), or service accounts. When a binding is created for a group, it affects any user that is added or removed from that group. When you add users to a group, they get the access rights of the group in addition to any individual access rights that you grant them. If they are removed, their access is revoked. Note that you can't add service accounts to access groups.
 
 If you want to assign access to a process that runs in pods, such as a continuous delivery toolchain, you can use [Kubernetes `ServiceAccounts` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/). To follow a tutorial that demonstrates how to set up service accounts for Travis and Jenkins and to assign custom RBAC roles to the service accounts, see the blog post [Kubernetes `ServiceAccounts` for use in automated systems ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
 
-To prevent breaking changes, do not change the predefined `view`, `edit`, `admin` and `cluster-admin` cluster roles. Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with {{site.data.keyword.cloud_notm}} IAM service access roles.
+To prevent breaking changes, do not change the predefined `view`, `edit`, `admin`, and `cluster-admin` cluster roles. Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with {{site.data.keyword.cloud_notm}} IAM service access roles.
 {: important}
 
 **Do I create a role or a cluster role? Do I apply it with a role binding or a cluster role binding?**
@@ -773,7 +770,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
 **Before you begin**:
 
 - Target the [Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) to your cluster.
-- Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
+- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces.
 - To assign access to individual users or users in an access group, ensure that the user or group has been assigned at least one [{{site.data.keyword.cloud_notm}} IAM platform role](#platform) at the {{site.data.keyword.containerlong_notm}} service level.
 
 **To create custom RBAC permissions**:
@@ -1024,7 +1021,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       <tbody>
         <tr>
           <td><code>metadata.name</code></td>
-          <td>Enter a name for the cluster role. **Do not** use the predefined cluster role names: `view`, `edit`, `admin` and `cluster-admin`.</td>
+          <td>Enter a name for the cluster role. **Do not** use the predefined cluster role names: `view`, `edit`, `admin`, and `cluster-admin`.</td>
         </tr>
         <tr>
           <td><code>metadata.labels</code></td>
@@ -1061,14 +1058,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Customizing classic infrastructure permissions
 {: #infra_access}
 
-When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [{{site.data.keyword.cloud_notm}} IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure (SoftLayer) permissions.
+When you assign the **Super User** infrastructure role to the admin who sets the API key or whose infrastructure credentials are set, other users within the account share the API key or credentials for performing infrastructure actions. You can then control which infrastructure actions the users can perform by assigning the appropriate [{{site.data.keyword.cloud_notm}} IAM platform role](#platform). You don't need to edit the user's IBM Cloud infrastructure permissions.
 {: shortdesc}
 
 
 
-For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure (SoftLayer) permissions for users.
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential-set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must set specific IBM Cloud infrastructure permissions for users.
 
-For example, if your account is not VRF-enabled, your IBM Cloud infrastructure (SoftLayer) account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation).
+For example, if your account is not VRF-enabled, your IBM Cloud infrastructure account owner must turn on VLAN spanning. The account owner can also assign a user the **Network > Manage Network VLAN Spanning** permission so that the user can enable VLAN spanning. For more information, see [VLAN spanning for cross-VLAN communication](/docs/containers?topic=containers-subnets#basics_segmentation).
 
 Before you begin:
 *   Make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
@@ -1111,13 +1108,13 @@ Downgrading permissions? The action can take a few minutes to complete.
 
 
 
-1.  Check if the credentials for classic infrastructure access for {{site.data.keyword.containerlong_notm}} in the region and resource group have any missing required or suggested permissions.
+1.  Check whether the credentials for classic infrastructure access for {{site.data.keyword.containerlong_notm}} in the region and resource group have any missing required or suggested permissions.
     ```
     ibmcloud ks infra-permissions-get --region <region>
     ```
     {: pre}
     
-    Example output if classic infrastructure acccess is based on an API key.
+    Example output if classic infrastructure access is based on an API key.
     ```
     ...with infrastructure access set up by linked account API key.
     ```
@@ -1177,7 +1174,7 @@ Downgrading permissions? The action can take a few minutes to complete.
 If a user no longer needs specific access permissions, or if the user is leaving your organization, the {{site.data.keyword.cloud_notm}} account owner can remove that user's permissions.
 {: shortdesc}
 
-Before you remove a user's specific access permissions or remove a user from your account completely, ensure that the user's infrastructure credentials are not used to set the API key or for the `ibmcloud ks credential-set` command. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure (SoftLayer) portal and infrastructure-related commands might fail.
+Before you remove a user's specific access permissions or remove a user from your account completely, ensure that the user's infrastructure credentials are not used to set the API key or for the `ibmcloud ks credential-set` command. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure portal and infrastructure-related commands might fail.
 {: important}
 
 1. Target your CLI context to a region and resource group where you have clusters.
@@ -1187,12 +1184,12 @@ Before you remove a user's specific access permissions or remove a user from you
     {: pre}
 
 2. Check the owner of the API key or infrastructure credentials set for that region and resource group.
-    * If you use the [API key to access the IBM Cloud infrastructure (SoftLayer) portfolio](#default_account):
+    * If you use the [API key to access the IBM Cloud infrastructure portfolio](#default_account):
         ```
         ibmcloud ks api-key-info --cluster <cluster_name_or_id>
         ```
         {: pre}
-    * If you set [infrastructure credentials to access the IBM Cloud infrastructure (SoftLayer) portfolio](#credentials):
+    * If you set [infrastructure credentials to access the IBM Cloud infrastructure portfolio](#credentials):
         ```
         ibmcloud ks credential-get --region <region>
         ```
@@ -1219,7 +1216,7 @@ Before you remove a user's specific access permissions or remove a user from you
 ### Removing a user from your account
 {: #remove_user}
 
-If a user in your account is leaving your organization, you must remove permissions for that user carefully to ensure that you do not orphan clusters or other resources. After, you can remove the user from your {{site.data.keyword.cloud_notm}} account.
+If a user in your account is leaving your organization, you must remove permissions for that user carefully to ensure that you do not orphan clusters or other resources. After you remove permissions, you can remove the user from your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
 Before you begin:
@@ -1241,13 +1238,13 @@ Before the user leaves, the {{site.data.keyword.cloud_notm}} account owner must 
         4.  Search for the worker node ID that you previously noted.
         5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
     2. Determine what happens to the infrastructure account that the user used to provision the clusters after the user leaves.
-        * If the user does not own the infrastructure account, then other users have access to this infrastructure account and it persists after the user leaves. You can continue to work with these clusters in your account. Make sure at least one other user has the [**Administrator** platform role](#platform) for the clusters.
+        * If the user does not own the infrastructure account, then other users have access to this infrastructure account and it persists after the user leaves. You can continue to work with these clusters in your account. Make sure that at least one other user has the [**Administrator** platform role](#platform) for the clusters.
         * If the user owns the infrastructure account, then the infrastructure account is deleted when the user leaves. You cannot continue to work with these clusters. To prevent the cluster from becoming orphaned, the user must delete the clusters before the user leaves. If the user has left but the clusters were not deleted, you must use the `ibmcloud ks credential-set` command to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, and delete the cluster. For more information, see [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 3. Remove the user from the {{site.data.keyword.cloud_notm}} account.
     1. From the menu bar, select **Manage > Access (IAM)**. Then click the **Users** page.
     2. Click the user's user name.
-    3. In the table entry for the user, click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**. When you remove a user, the user's assigned {{site.data.keyword.cloud_notm}} IAM platform roles, Cloud Foundry roles, and IBM Cloud infrastructure (SoftLayer) roles are automatically removed.
+    3. In the table entry for the user, click the **Action menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**. When you remove a user, the user's assigned {{site.data.keyword.cloud_notm}} IAM platform roles, Cloud Foundry roles, and IBM Cloud infrastructure roles are automatically removed.
 
 4.  When {{site.data.keyword.cloud_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. However, if you created custom RBAC roles or cluster roles, [remove the user from those RBAC role bindings or cluster role bindings](#remove_custom_rbac).<p class="note">The {{site.data.keyword.cloud_notm}} IAM permission removal process is asynchronous and can take some time to complete.</p>
 
@@ -1258,7 +1255,7 @@ Before the user leaves, the {{site.data.keyword.cloud_notm}} account owner must 
 If you want to remove specific permissions for a user, you can remove individual access policies that have been assigned to the user.
 {: shortdesc}
 
-Before you begin, [ensure that the user's infrastructure credentials are not used to set the API key or for the `ibmcloud ks credential-set` command](#removing). After, you can remove:
+Before you begin, [ensure that the user's infrastructure credentials are not used to set the API key or for the `ibmcloud ks credential-set` command](#removing). After verification, you can remove:
 * [a user from an access group](#remove_access_group)
 * [a user's {{site.data.keyword.cloud_notm}} IAM platform and associated RBAC permissions](#remove_iam_rbac)
 * [a user's custom RBAC permissions](#remove_custom_rbac)
@@ -1279,7 +1276,7 @@ Before you begin, [ensure that the user's infrastructure credentials are not use
 1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
 2. Click the **Users** page, and then click the name of the user that you want to remove permissions from.
 3. In the table entry for the user, click the **Actions menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Remove user**.
-5. When {{site.data.keyword.cloud_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster-config`. However, if you created [custom RBAC roles or cluster roles](#rbac), you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to remove custom RBAC permissions below.
+5. When {{site.data.keyword.cloud_notm}} IAM platform permissions are removed, the user's permissions are also automatically removed from the associated predefined RBAC roles. To update the RBAC roles with the changes, run `ibmcloud ks cluster-config`. However, if you created [custom RBAC roles or cluster roles](#rbac), you must remove the user from the `.yaml` files for those RBAC role bindings or cluster role bindings. See steps to remove custom RBAC permissions in the next section.
 
 #### Remove custom RBAC permissions
 {: #remove_custom_rbac}
@@ -1299,7 +1296,7 @@ If you do not need custom RBAC permissions anymore, you can remove them.
 #### Remove Cloud Foundry permissions
 {: #remove_cloud_foundry}
 
-To remove all of a user's Cloud Foundry permissions, you can remove the user's organization roles. If you only want to remove a user's ability, for example, to bind services in a cluster, only remove the user's space roles.
+To remove all of a user's Cloud Foundry permissions, you can remove the user's organization roles. If you want to remove only a user's ability, for example, to bind services in a cluster, then remove only the user's space roles.
 {: shortdesc}
 
 1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
@@ -1320,7 +1317,7 @@ To remove all of a user's Cloud Foundry permissions, you can remove the user's o
 #### Remove classic infrastructure permissions
 {: #remove_infra}
 
-You can remove IBM Cloud infrastructure (SoftLayer) permissions for a user by using the {{site.data.keyword.cloud_notm}} console.
+You can remove IBM Cloud infrastructure permissions for a user by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
 
 

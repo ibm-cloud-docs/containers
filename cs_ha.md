@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, disaster recovery, dr, ha, hadr
 
@@ -47,7 +47,7 @@ The {{site.data.keyword.containerlong_notm}} architecture and infrastructure is 
 
 <dl>
 <dt> 1. Container or pod failure.</dt>
-  <dd><p>Containers and pods are, by design, short-lived and can fail unexpectedly. For example, a container or pod might crash if an error occurs in your app. To make your app highly available, you must ensure that you have enough instances of your app to handle the workload plus additional instances in case of a failure. Ideally, these instances are distributed across multiple worker nodes to protect your app from a worker node failure.</p>
+  <dd><p>Containers and pods are, by design, short-lived and can fail unexpectedly. For example, a container or pod might crash if an error occurs in your app. To make your app highly available, you must ensure that you have enough instances of your app to handle the workload plus additional instances in the case of a failure. Ideally, these instances are distributed across multiple worker nodes to protect your app from a worker node failure.</p>
   <p>See [Deploying highly available apps](/docs/containers?topic=containers-app#highly_available_apps).</p></dd>
 <dt> 2. Worker node failure.</dt>
   <dd><p>A worker node is a VM that runs on top of physical hardware. Worker node failures include hardware outages, such as power, cooling, or networking, and issues on the VM itself. You can account for a worker node failure by setting up multiple worker nodes in your cluster.</p><p class="note">Worker nodes in one zone are not guaranteed to be on separate physical compute hosts. For example, you might have a cluster with three worker nodes, but all three worker nodes were created on the same physical compute host in the IBM zone. If this physical compute host goes down, all your worker nodes are down. To protect against this failure, you must [set up a multizone cluster or create multiple single zone clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters) in different zones.</p>
@@ -69,3 +69,5 @@ Do not restart or reboot a worker node during a master outage. This action remov
   <dd><p>In a stateful app, data plays an important role to keep your app up and running. Make sure that your data is highly available so that you can recover from a potential failure. In {{site.data.keyword.containerlong_notm}}, you can choose from several options to persist your data. For example, you can provision NFS storage by using Kubernetes native persistent volumes, or store your data by using an {{site.data.keyword.cloud_notm}} database service.</p>
   <p>See [Planning highly available data](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</p></dd>
 </dl>
+
+

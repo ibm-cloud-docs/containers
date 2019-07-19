@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -31,7 +31,8 @@ subcollection: containers
 In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 {:shortdesc}
 
-To install the {{site.data.keyword.containerlong}} CLI plug-in, see [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+* **Community Kubernetes** [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
+* **OpenShift** [Install the CLI plug-in](/docs/openshift?topic=openshift-openshift-cli), which uses the `ibmcloud oc` alias.
 
 Refer to the following table for a summary of changes for each {{site.data.keyword.containerlong_notm}} CLI plug-in version.
 
@@ -65,7 +66,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>15 Jun 2019</td>
 <td><ul>
 <li>Fixes a bug so that empty tables are not returned in the output of `ibmcloud ks kube-versions`.</li>
-<li>Updates the NLB DNS model so that an array of NLB IP addresses are returned by `ibmcloud ks nlb-dnss`.</li>
+<li>Updates the NLB DNS model so that an array of NLB IP addresses is returned by `ibmcloud ks nlb-dnss`.</li>
 <li>Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
 </ul></td>
 </tr>
@@ -90,7 +91,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.3.28</td>
 <td>23 May 2019</td>
 <td><ul>
-<li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure (SoftLayer) portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
+<li>Adds the [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li>
 <li>Adds the <code>--private-only</code> flag to the `zone-network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li>
 <li>Removes the <code>--force-update</code> flag from the `worker-update` command.</li>
 <li>Adds the **VLAN ID** column to the output of the `albs` and `alb-get` commands.</li>

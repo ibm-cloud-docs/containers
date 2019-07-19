@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-18"
 
 keywords: kubernetes, iks
 
@@ -31,7 +31,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} Block Storage is available for standard clusters only. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} Block Storage is available for standard clusters only. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Installing the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster
@@ -65,7 +65,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 2.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
 
-    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
+    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
 3.  Verify that Tiller is installed with a service account.
@@ -402,7 +402,7 @@ Make sure to choose your storage configuration carefully to have enough capacity
          </tbody></table>
 
 5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted.
-   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing block storage](#existing_block).
+   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing block storage](#existing_block).
    - If you want the PV, the data, and your physical block storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) for more information. By default, all block storage devices are provisioned with an hourly billing type.
@@ -414,14 +414,14 @@ Make sure to choose your storage configuration carefully to have enough capacity
 ## Adding block storage to apps
 {: #add_block}
 
-Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure (SoftLayer) account.
+Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) block storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the actual storage device in your IBM Cloud infrastructure account.
 {:shortdesc}
 
 Block storage comes with a `ReadWriteOnce` access mode. You can mount it to only one pod on one worker node in the cluster at a time.
 {: note}
 
 Before you begin:
-- If you have a firewall, [allow egress access](/docs/containers?topic=containers-firewall#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
+- If you have a firewall, [allow egress access](/docs/containers?topic=containers-firewall#pvc) for the IBM Cloud infrastructure IP ranges of the zones that your clusters are in so that you can create PVCs.
 - Install the [{{site.data.keyword.cloud_notm}} block storage plug-in](#install_block).
 - [Decide on a pre-defined storage class](#block_predefined_storageclass) or create a [customized storage class](#block_custom_storageclass).
 
@@ -670,12 +670,12 @@ Before you can start to mount your existing storage to an app, you must retrieve
 ### Step 1: Retrieving the information of your existing block storage
 {: #existing-block-1}
 
-1.  Retrieve or generate an API key for your IBM Cloud infrastructure (SoftLayer) account.
-    1. Log in to the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic?).
+1.  Retrieve or generate an API key for your IBM Cloud infrastructure account.
+    1. Log in to the [IBM Cloud infrastructure portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic?).
     2. Select **Account**, then **Users**, and then **User List**.
     3. Find your user ID.
     4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.
-2.  Retrieve the API user name for your IBM Cloud infrastructure (SoftLayer) account.
+2.  Retrieve the API user name for your IBM Cloud infrastructure account.
     1. From the **User List** menu, select your user ID.
     2. In the **API Access Information** section, find your **API Username**.
 3.  Log in to the IBM Cloud infrastructure CLI plug-in.
@@ -684,7 +684,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
     ```
     {: pre}
 
-4.  Choose to authenticate by using the user name and API key for your IBM Cloud infrastructure (SoftLayer) account.
+4.  Choose to authenticate by using the user name and API key for your IBM Cloud infrastructure account.
 5.  Enter the user name and API key that you retrieved in the previous steps.
 6.  List available block storage devices.
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -244,7 +244,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Unsupported: The Kubernetes API swagger documents</td>
-<td>The `swagger/*`, `/swagger.json`, and `/swagger-2.0.0.pb-v1` schema API docs are now removed in favor of the `/openapi/v2` schema API docs. The swagger docs were deprecated when the OpenAPI docs became available in Kubernetes version 1.10. Additionally, the Kubernetes API server now only aggregates OpenAPI schemas from `/openapi/v2` endpoints of aggregated API servers. The fallback to aggregate from `/swagger.json` is removed. If you installed apps that provide Kubernetes API extensions, ensure that your apps support the `/openapi/v2` schema API docs.</td>
+<td>The `swagger/*`, `/swagger.json`, and `/swagger-2.0.0.pb-v1` schema API docs are now removed in favor of the `/openapi/v2` schema API docs. The swagger docs were deprecated when the OpenAPI docs became available in Kubernetes version 1.10. Additionally, the Kubernetes API server now aggregates only OpenAPI schemas from `/openapi/v2` endpoints of aggregated API servers. The fallback to aggregate from `/swagger.json` is removed. If you installed apps that provide Kubernetes API extensions, ensure that your apps support the `/openapi/v2` schema API docs.</td>
 </tr>
 <tr>
 <td>Unsupported and deprecated: Select metrics</td>
@@ -333,7 +333,7 @@ The following table shows the actions that you must take after you update the Ku
 <tbody>
 <tr>
 <td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set). For example, you might test your apps on CoreDNS in preparation for the next Kubernetes version update, to make sure that you do not need to [update the app, or to customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).
+<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set). For example, you might test your apps on CoreDNS in preparation for the next Kubernetes version update to make sure that you do not need to [update the app, or to customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).
 <br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
@@ -526,7 +526,7 @@ Review changes that you might need to make when you update from the previous Kub
 Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
 {: deprecated}
 
-Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps listed in [Preparing to update to Calico v3](#111_calicov3).
+Before you can successfully update a cluster from Kubernetes version 1.9 or earlier to version 1.11, you must follow the steps that are listed in [Preparing to update to Calico v3](#111_calicov3).
 {: important}
 
 ### Update before master
@@ -546,7 +546,7 @@ The following table shows the actions that you must take before you update the K
 <tbody>
 <tr>
 <td>Cluster master high availability (HA) configuration</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master that is deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br><br>For actions that you must take, see [Updating to highly available cluster masters](#ha-masters). These preparation actions apply:<ul>
 <li>If you have a firewall or custom Calico network policies.</li>
 <li>If you use host ports `2040` or `2041` on your worker nodes.</li>
 <li>If you used the cluster master IP address for in-cluster access to the master.</li>
@@ -626,7 +626,7 @@ The container log directory changed from `/var/lib/docker/` to `/var/log/pods/`.
 ### Updating to highly available cluster masters in Kubernetes 1.11
 {: #ha-masters}
 
-For clusters that run Kubernetes version 1.10.8_1530, 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
+For clusters that run Kubernetes version 1.10.8_1530, 1.11.3_1531, or later, the cluster master configuration is updated to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with each master that is deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.
 {: shortdesc}
 
 You can check whether your cluster has an HA master configuration by checking the cluster's master URL in the console or by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID`. If the master URL has a host name such as ` https://c2.us-south.containers.cloud.ibm.com:xxxxx` and not an IP address such as ` https://169.xx.xx.xx:xxxxx`, the cluster has an HA master configuration. You might get an HA master configuration because of an automatic master patch update or by applying an update manually. In either case, you still must review the following items to ensure that your cluster network is set up to take full advantage of the configuration.

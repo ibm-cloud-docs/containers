@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -70,7 +70,7 @@ Review the options to debug persistent storage and find the root causes for fail
       {: screen}
 
       The CLI versions match if you can see the same version in `GitVersion` for the client and the server. You can ignore the `+IKS` part of the version for the server.
-   2. If the `kubectl` CLI version on your local machine and your cluster do not match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cs_cli_install#kubectl).
+   2. If the `kubectl` CLI versions on your local machine and your cluster do not match, either [update your cluster](/docs/containers?topic=containers-update) or [install a different CLI version on your local machine](/docs/containers?topic=containers-cs_cli_install#kubectl).
 
 3. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install).
 
@@ -140,7 +140,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    3. Analyze the **Events** section of the CLI output of the `kubectl describe pod` command and the latest logs to find the root cause for the error.
 
-6. Check if your PVC is successfully provisioned.
+6. Check whether your PVC is successfully provisioned.
    1. Check the state of your PVC. A PVC is successfully provisioned if the PVC shows a status of **Bound**.
       ```
       kubectl get pvc
@@ -157,20 +157,20 @@ Review the options to debug persistent storage and find the root causes for fail
       - [File storage and block storage: PVC remains in a pending state](#file_pvc_pending)
       - [Object storage: PVC remains in a pending state](#cos_pvc_pending)
 
-7. Check if the pod that mounts your storage instance is successfully deployed.
+7. Check whether the pod that mounts your storage instance is successfully deployed.
    1. List the pods in your cluster. A pod is successfully deployed if the pod shows a status of **Running**.
       ```
       kubectl get pods
       ```
       {: pre}
 
-   2. Get the details of your pod and check if errors are displayed in the **Events** section of your CLI output.
+   2. Get the details of your pod and check whether errors are displayed in the **Events** section of your CLI output.
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
 
-   3. Retrieve the logs for your app and check if you can see any error messages.
+   3. Retrieve the logs for your app and check whether you can see any error messages.
       ```
       kubectl logs <pod_name>
       ```
@@ -210,7 +210,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
   <tbody>
     <tr>
       <td><code>User doesn't have permissions to create or manage Storage</code></br></br><code>Failed to find any valid softlayer credentials in configuration file</code></br></br><code>Storage with the order ID %d could not be created after retrying for %d seconds.</code></br></br><code>Unable to locate datacenter with name <datacenter_name>.</code></td>
-      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
       <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
     </tr>
     <tr>
@@ -606,7 +606,7 @@ You might see the following symptoms:
 - When you run a `kubectl describe pod` command, you see the following error in the **Events** section: `MountVolume.SetUp failed for volume ... read-only`.
 
 {: tsCauses}
-If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure (SoftLayer) protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
+If a network error occurs while a pod writes to a volume, IBM Cloud infrastructure protects the data on the volume from getting corrupted by changing the volume to a read-only mode. Pods that use this volume cannot continue to write to the volume and fail.
 
 {: tsResolve}
 1. Check the version of the {{site.data.keyword.cloud_notm}} Block Storage plug-in that is installed in your cluster.
@@ -622,7 +622,7 @@ If a network error occurs while a pod writes to a volume, IBM Cloud infrastructu
     ```
     {: pre}
 
-4. Check if re-creating your pod resolved the issue. If not, reload the worker node.
+4. Check whether re-creating your pod resolved the issue. If not, reload the worker node.
    1. Find the worker node where your pod runs and note the private IP address that is assigned to your worker node.
       ```
       kubectl describe pod <pod_name> | grep Node
@@ -786,7 +786,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
   <tbody>
     <tr>
       <td>`User doesn't have permissions to create or manage Storage`</td>
-      <td>The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
+      <td>The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster does not have all the required permissions to provision persistent storage. </td>
       <td>See [PVC creation fails because of missing permissions](#missing_permissions). </td>
     </tr>
     <tr>
@@ -847,7 +847,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
         <tr>
           <td>`cannot access bucket <bucket_name>: Forbidden: Forbidden`</td>
           <td>You specified `ibm.io/auto-create-bucket: false` and tried to access a bucket that you did not create or the service access key or access key ID of your {{site.data.keyword.cos_full_notm}} HMAC credentials are incorrect.  </td>
-          <td>You cannot access a bucket that you did not create. Create a new bucket instead by setting `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""`. If you are the owner of the bucket, see [PVC creation fails due to wrong credentials or access denied](#cred_failure) to check your credentials. </td>
+          <td>You cannot access a bucket that you did not create. Create a bucket instead by setting `ibm.io/auto-create-bucket: true` and `ibm.io/bucket: ""`. If you are the owner of the bucket, see [PVC creation fails due to wrong credentials or access denied](#cred_failure) to check your credentials. </td>
         </tr>
         <tr>
           <td>`cannot create bucket <bucket_name>: AccessDenied: Access Denied`</td>
@@ -1029,7 +1029,7 @@ You might have used the wrong storage class to access your existing bucket, or y
 You uploaded files to your {{site.data.keyword.cos_full_notm}} service instance by using the console or the REST API. When you try to access these files with a non-root user that you defined with `runAsUser` in your app deployment, access to the files is denied.
 
 {: tsCauses}
-In Linux, a file or a directory has 3 access groups: `Owner`, `Group`, and `Other`. When you upload a file to {{site.data.keyword.cos_full_notm}} by using the console or the REST API, the permissions for the `Owner`, `Group`, and `Other` are removed. The permission of each file looks as follows:
+In Linux, a file or a directory has three access groups: `Owner`, `Group`, and `Other`. When you upload a file to {{site.data.keyword.cos_full_notm}} by using the console or the REST API, the permissions for the `Owner`, `Group`, and `Other` are removed. The permission of each file looks as follows:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
@@ -1190,10 +1190,10 @@ User doesn't have permissions to create or manage Storage
 {: screen}
 
 {: tsCauses}
-The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage.
+The IAM API key or the IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster  does not have all the required permissions to provision persistent storage.
 
 {: tsResolve}
-1. Retrieve the IAM key or IBM Cloud infrastructure (SoftLayer) API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used.
+1. Retrieve the IAM key or IBM Cloud infrastructure API key that is stored in the `storage-secret-store` Kubernetes secret of your cluster and verify that the correct API key is used.
    ```
    kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
    ```
@@ -1223,8 +1223,8 @@ The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stor
    The IAM API key is listed in the `Bluemix.iam_api_key` section of your CLI output. If the `Softlayer.softlayer_api_key` is empty at the same time, then the IAM API key is used to determine your infrastructure permissions. The IAM API key is automatically set by the user who runs the first action that requires the IAM **Administrator** platform role in a resource group and region. If a different API key is set in `Softlayer.softlayer_api_key`, then this key takes precedence over the IAM API key. The `Softlayer.softlayer_api_key` is set when a cluster admin runs the `ibmcloud ks credentials-set` command.
 
 2. If you want to change the credentials, update the API key that is used.
-    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). To update the IBM Cloud infrastructure (SoftLayer) key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
-    2. Wait about 10-15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
+    1.  To update the IAM API key, use the `ibmcloud ks api-key-reset` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). To update the IBM Cloud infrastructure key, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
+    2. Wait about 10 - 15 minutes for the `storage-secret-store` Kubernetes secret to update, then verify that the key is updated.
        ```
        kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
        ```
@@ -1244,7 +1244,7 @@ The IAM API key or the IBM Cloud infrastructure (SoftLayer) API key that is stor
    ```
    {: pre}
 
-5. Recreate the PVC.
+5. Re-create the PVC.
    ```
    kubectl apply -f pvc.yaml
    ```

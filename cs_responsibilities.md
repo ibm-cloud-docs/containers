@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -47,7 +47,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
     <td>
     **IBM responsibilities**:
     <ul><li>Deploy a fully managed, highly available dedicated master in a secured, IBM-owned infrastructure account for each cluster.</li>
-    <li>Provision worker nodes in your IBM Cloud infrastructure (SoftLayer) account.</li>
+    <li>Provision worker nodes in your IBM Cloud infrastructure account.</li>
     <li>Set up cluster management components, such as VLANs and load balancers.</li>
     <li>Fulfill requests for more infrastructure, such as adding and removing worker nodes, creating default subnets, and provisioning storage volumes in response to persistent volume claims.</li>
     <li>Integrate ordered infrastructure resources to work automatically with your cluster architecture and become available to your deployed apps and workloads.</li></ul>
@@ -148,3 +148,5 @@ Misuse includes:
 *   Violation of the rights of others
 
 See [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms) for overall terms of use.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -48,9 +48,9 @@ You try to manage worker nodes for a new or an existing cluster by running one o
 However, you receive an error message similar to one of the following.
 
 ```
-We were unable to connect to your IBM Cloud infrastructure (SoftLayer) account.
+We were unable to connect to your IBM Cloud infrastructure account.
 Creating a standard cluster requires that you have either a
-Pay-As-You-Go account that is linked to an IBM Cloud infrastructure (SoftLayer)
+Pay-As-You-Go account that is linked to an IBM Cloud infrastructure
 account term or that you have used the {{site.data.keyword.containerlong_notm}}
 CLI to set your {{site.data.keyword.cloud_notm}} Infrastructure API keys.
 ```
@@ -85,7 +85,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials). If you use a different IBM Cloud infrastructure (SoftLayer) account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
+The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials). If you use a different IBM Cloud infrastructure account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
@@ -107,7 +107,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         <user_name>         <name@email.com>
         ```
         {: screen}
-    2.  Check if the infrastructure account for the region and resource group is manually set to use a different IBM Cloud infrastructure (SoftLayer) account.
+    2.  Check if the infrastructure account for the region and resource group is manually set to use a different IBM Cloud infrastructure account.
         ```
         ibmcloud ks credential-get --region <us-south>
         ```
@@ -265,7 +265,7 @@ When the worker nodes in your cluster cannot communicate on the private network,
 
 
 {: tsCauses}
-To access resources in the cluster, your worker nodes must be able to communicate on the private network. You might have a Vyatta or another firewall set up, or customized your existing firewall settings in your IBM Cloud infrastructure (SoftLayer) account. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. If your worker nodes are spread across multiple zones, you must allow private network communication by enabling VLAN spanning. Communication between worker nodes might also not be possible if your worker nodes are stuck in a reloading loop.
+To access resources in the cluster, your worker nodes must be able to communicate on the private network. You might have a Vyatta or another firewall set up, or customized your existing firewall settings in your IBM Cloud infrastructure account. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. If your worker nodes are spread across multiple zones, you must allow private network communication by enabling VLAN spanning. Communication between worker nodes might also not be possible if your worker nodes are stuck in a reloading loop.
 
 {: tsResolve}
 1. List the worker nodes in your cluster and verify that your worker nodes are not stuck in a `Reloading` state.
@@ -431,7 +431,7 @@ Instance ID inconsistent with worker records
 {: screen}
 
 {: tsCauses}
-The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure (SoftLayer) resolves this issue, a component can change within the system that the service does not identify.
+The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure resolves this issue, a component can change within the system that the service does not identify.
 
 {: tsResolve}
 For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](/docs/containers?topic=containers-changelog).
@@ -451,17 +451,17 @@ You cannot perform infrastructure-related commands on your cluster, such as:
 * Resizing worker pools
 * Updating your cluster
 
-You cannot view the cluster worker nodes in your IBM Cloud infrastructure (SoftLayer) account. However, you can update and manage other clusters in the account.
+You cannot view the cluster worker nodes in your IBM Cloud infrastructure account. However, you can update and manage other clusters in the account.
 
 Further, you verified that you have the [proper infrastructure credentials](#cs_credentials).
 
 {: tsCauses}
-The cluster might be provisioned in an IBM Cloud infrastructure (SoftLayer) account that is no longer linked to your {{site.data.keyword.containerlong_notm}} account. The cluster is orphaned. Because the resources are in a different account, you do not have the infrastructure credentials to modify the resources.
+The cluster might be provisioned in an IBM Cloud infrastructure account that is no longer linked to your {{site.data.keyword.containerlong_notm}} account. The cluster is orphaned. Because the resources are in a different account, you do not have the infrastructure credentials to modify the resources.
 
 Consider the following scenario to understand how clusters might become orphaned.
 1.  You have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account.
 2.  You create a cluster named `Cluster1`. The worker nodes and other infrastructure resources are provisioned into the infrastructure account that comes with your Pay-As-You-Go account.
-3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure (SoftLayer) account. You use the `ibmcloud ks credential-set` command to change the IBM Cloud infrastructure (SoftLayer) credentials to use your team account.
+3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure account. You use the `ibmcloud ks credential-set` command to change the IBM Cloud infrastructure credentials to use your team account.
 4.  You create another cluster named `Cluster2`. The worker nodes and other infrastructure resources are provisioned into the team infrastructure account.
 5.  You notice that `Cluster1` needs a worker node update, a worker node reload, or you just want to clean it up by deleting it. However, because `Cluster1` was provisioned into a different infrastructure account, you cannot modify its infrastructure resources. `Cluster1` is orphaned.
 6.  You follow the resolution steps in the following section, but do not set your infrastructure credentials back to your team account. You can delete `Cluster1`, but now `Cluster2` is orphaned.
@@ -516,7 +516,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with native Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
@@ -543,7 +543,7 @@ If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `
 The OpenVPN connection between the master node and worker nodes is not functioning properly.
 
 {: tsResolve}
-1. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure (SoftLayer) account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure (SoftLayer) account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+1. If you have multiple VLANs for a cluster, multiple subnets on the same VLAN, or a multizone cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 2. Restart the OpenVPN client pod.
   ```
   kubectl delete pod -n kube-system -l app=vpn
