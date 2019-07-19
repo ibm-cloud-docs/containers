@@ -31,7 +31,8 @@ subcollection: containers
 In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 {:shortdesc}
 
-To install the {{site.data.keyword.containerlong}} CLI plug-in, see [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+* **Community Kubernetes** [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
+* **OpenShift** [Install the CLI plug-in](/docs/openshift?topic=openshift-openshift-cli), which uses the `ibmcloud oc` alias.
 
 Refer to the following table for a summary of changes for each {{site.data.keyword.containerlong_notm}} CLI plug-in version.
 

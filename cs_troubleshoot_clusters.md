@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -516,7 +516,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with native Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
