@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, containers
 
@@ -106,23 +106,22 @@ The following image shows the default cluster security settings that address aut
     </tr>
     <tr>
       <td>Admission controllers</td>
-      <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine if a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the following [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/admission-controllers/) in the Kubernetes master, which cannot be changed by the user: <ul>
-      <li>`DefaultTolerationSeconds`</li>
-      <li>`DefaultStorageClass`</li>
-      <li>`GenericAdmissionWebhook`</li>
-      <li>`Initializers` (Kubernetes 1.13 or earlier)</li>
-      <li>`LimitRanger`</li>
-      <li>`MutatingAdmissionWebhook`</li>
+      <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine if a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the following [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/admin/admission-controllers/) in the given order in the Kubernetes master, which cannot be changed by the user: <ul>
       <li>`NamespaceLifecycle`</li>
-      <li>`NodeRestriction` (Kubernetes 1.14 or later)</li>
-      <li>`PersistentVolumeLabel`</li>
-      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
-      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11 or later)</li>
-      <li>`ResourceQuota`</li>
+      <li>`LimitRanger`</li>
       <li>`ServiceAccount`</li>
+      <li>`DefaultStorageClass`</li>
+      <li>`Initializers` (Kubernetes 1.13 or earlier)</li>
+      <li>`MutatingAdmissionWebhook`</li>
+      <li>`ValidatingAdmissionWebhook`</li>
+      <li>`ResourceQuota`</li>
+      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
+      <li>`DefaultTolerationSeconds`</li>
       <li>`StorageObjectInUseProtection`</li>
-      <li>`TaintNodesByCondition` (Kubernetes 1.12 or later)</li>
-      <li>`ValidatingAdmissionWebhook`</li></ul></br>
+      <li>`PersistentVolumeClaimResize`</li>
+      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11 or later)</li>
+      <li>`NodeRestriction` (Kubernetes 1.14 or later)</li>
+      <li>`TaintNodesByCondition` (Kubernetes 1.14 or later)</li></ul></br>
       You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containerlong_notm}} provides: <ul><li><strong>[Container image security enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce):</strong> Use this admission controller to enforce Vulnerability Advisor policies in your cluster to block deployments from vulnerable images.</li></ul></br><p class="note">If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster.</p></td>
     </tr>
   </tbody>
