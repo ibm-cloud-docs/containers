@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, audit
 
@@ -125,7 +125,7 @@ Check out the following list of the cluster management events that are sent to {
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>A service is unbound from a cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>An existing IBM Cloud infrastructure (SoftLayer) subnet is added to a cluster.</td></tr><tr>
+<td>An existing IBM Cloud infrastructure subnet is added to a cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>A subnet is created.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
@@ -244,11 +244,11 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
     <td><code>ingresses.create</code></td>
     <td>An Ingress ALB is created.</td></tr><tr>
     <td><code>ingresses.delete</code></td>
-    <td>A Ingress ALB is deleted.</td></tr><tr>
+    <td>An Ingress ALB is deleted.</td></tr><tr>
     <td><code>ingresses.patch</code></td>
-    <td>A Ingress ALB is patched.</td></tr><tr>
+    <td>An Ingress ALB is patched.</td></tr><tr>
     <td><code>ingresses.update</code></td>
-    <td>A Ingress ALB is updated.</td></tr><tr>
+    <td>An Ingress ALB is updated.</td></tr><tr>
     <td><code>jobs.create</code></td>
     <td>A job is created.</td></tr><tr>
     <td><code>jobs.delete</code></td>
@@ -406,9 +406,9 @@ Before you begin: Be sure that your cluster is configured to forward [Kubernetes
     <td><code>secrets.updated</code></td>
     <td>A secret is updated.</td></tr><tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>A self subject access review is created.</td></tr><tr>
+    <td>A self-subject access review is created.</td></tr><tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>A self subject rules review is created.</td></tr><tr>
+    <td>A self-subject rules review is created.</td></tr><tr>
     <td><code>subjectaccessreviews.create</code></td>
     <td>A subject access review is created.</td></tr><tr>
     <td><code>serviceaccounts.create</code></td>

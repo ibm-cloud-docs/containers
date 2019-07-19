@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -65,7 +65,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>15 Jun 2019</td>
 <td><ul>
 <li>Fixes a bug so that empty tables are not returned in the output of `ibmcloud ks kube-versions`.</li>
-<li>Updates the NLB DNS model so that an array of NLB IP addresses are returned by `ibmcloud ks nlb-dnss`.</li>
+<li>Updates the NLB DNS model so that an array of NLB IP addresses is returned by `ibmcloud ks nlb-dnss`.</li>
 <li>Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
 </ul></td>
 </tr>
