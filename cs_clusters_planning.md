@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -30,9 +30,9 @@ subcollection: containers
 Design a network setup for your {{site.data.keyword.containerlong}} cluster that meets the needs of your workloads and environment.
 {: shortdesc}
 
-In an {{site.data.keyword.containerlong_notm}} cluster, your containerized apps are hosted on compute hosts that are called worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between worker nodes and the Kubernetes master, other services, the Internet, or other private networks depends on how you set up your IBM Cloud infrastructure network.
+In both community Kubernetes and OpenShift clusters, your containerized apps are hosted on compute hosts that are called worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between worker nodes and the Kubernetes master, other services, the Internet, or other private networks depends on how you set up your IBM Cloud infrastructure network.
 
-First time creating a cluster? Try out our [tutorial](/docs/containers?topic=containers-cs_cluster_tutorial) first and come back here when you’re ready to plan out your production-ready clusters.
+First time creating a cluster? Try out our tutorials for [community Kubernetes]](/docs/containers?topic=containers-cs_cluster_tutorial) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_tutorial) first and come back here when you’re ready to plan out your production-ready clusters.
 {: tip}
 
 To plan your cluster network setup, first [understand cluster network basics](#plan_basics). Then, you can review three potential cluster network setups that are suited to environment-based scenarios, including [running internet-facing app workloads](#internet-facing), [extending an on-premises data center with limited public access](#limited-public), and [extending an on-premises data center on the private network only](#private_clusters).

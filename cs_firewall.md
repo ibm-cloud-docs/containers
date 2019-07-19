@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Opening required ports and IP addresses in your firewall
 {: #firewall}
 
-Review these situations in which you might need to open specific ports and IP addresses in your firewalls for {{site.data.keyword.containerlong}}.
+Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your community Kubernetes or OpenShift clusters in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 * [To run `ibmcloud` and `ibmcloud ks` commands](#firewall_bx) from your local system when corporate network policies prevent access to public internet endpoints via proxies or firewalls.

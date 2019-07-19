@@ -69,3 +69,5 @@ Do not restart or reboot a worker node during a master outage. This action remov
   <dd><p>In a stateful app, data plays an important role to keep your app up and running. Make sure that your data is highly available so that you can recover from a potential failure. In {{site.data.keyword.containerlong_notm}}, you can choose from several options to persist your data. For example, you can provision NFS storage by using Kubernetes native persistent volumes, or store your data by using an {{site.data.keyword.cloud_notm}} database service.</p>
   <p>See [Planning highly available data](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</p></dd>
 </dl>
+
+

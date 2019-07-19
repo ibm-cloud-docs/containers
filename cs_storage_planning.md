@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -31,7 +31,7 @@ subcollection: containers
 ## Choosing a storage solution
 {: #choose_storage_solution}
 
-Before you can decide what type of storage is the right solution for you and your Kubernetes clusters, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
+Before you can decide what type of storage is the right solution for you and your community Kubernetes or OpenShift clusters, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
 {: shortdesc}
 
 1. Decide whether your data must be permanently stored, or if your data can be removed at any time.
@@ -59,7 +59,7 @@ Before you can decide what type of storage is the right solution for you and you
    - **Read-only:** Your data is read-only. You do not want to write or change your data.
    - **Read and write:** You want to read, write, and change your data. For data that is read and written, it is important to understand if the operations are read-heavy, write-heavy, or balanced.
 
-4. Determine the frequency that your data is accessed. Understanding the frequency of data access can help you understand the performance that you require for your storage. For example, data that is accessed frequently usually resides on fast storage.
+5. Determine the frequency that your data is accessed. Understanding the frequency of data access can help you understand the performance that you require for your storage. For example, data that is accessed frequently usually resides on fast storage.
    - **Hot data:** Data that is accessed frequently. Common use cases are web or mobile apps.
    - **Cool or warm data:** Data that is accessed infrequently, such as once a month or less. Common use cases are archives, short-term data retention, or disaster recovery.
    - **Cold data:** Data that is rarely accessed, if at all. Common use cases are archives, long-term backups, historical data.
@@ -68,14 +68,14 @@ Before you can decide what type of storage is the right solution for you and you
    If you cannot predict the frequency or the frequency does not follow a strict pattern, determine whether your workloads are read-heavy, write-heavy, or balanced. Then, look at the storage option that fits your workload and investigate what storage tier gives you the flexibility that you need. For example, {{site.data.keyword.cos_full_notm}} provides a `flex` storage class that considers how frequent data is accessed in a month and takes into account this measurement to optimize your monthly billing.
    {: tip}
 
-5. Investigate if your data must be shared across multiple app instances, zones, or regions.
+6. Investigate if your data must be shared across multiple app instances, zones, or regions.
    - **Access across pods:** When you use Kubernetes persistent volumes to access your storage, you can determine the number of pods that can mount the volume at the same time. Some storage solutions, such as block storage, can be accessed by one pod at a time only. With other storage solutions, you can share volume across multiple pods.
    - **Access across zones and regions:** You might require your data to be accessible across zones or regions. Some storage solutions, such as file and block storage, are data center-specific and cannot be shared across zones in a multizone cluster setup.
 
    If you want to make your data accessible across zones or regions, make sure to consult your legal department to verify that your data can be stored in multiple zones or a different country.
    {: note}
 
-6. Understand other storage characteristics that impact your choice.
+7. Understand other storage characteristics that impact your choice.
    - **Consistency:** The guarantee that a read operation returns the latest version of a file. Storage solutions can provide `strong consistency` when you are guaranteed to always receive the latest version of a file, or `eventual consistency` when the read operation might not return the latest version. You often find eventual consistency in geographically distributed systems where a write operation first must be replicated across all instances.
    - **Performance:** The time that it takes to complete a read or write operation.
    - **Durability:** The guarantee that a write operation that is committed to your storage survives permanently and does not get corrupted or lost, even if gigabytes or terabytes of data are written to your storage at the same time.
@@ -84,7 +84,7 @@ Before you can decide what type of storage is the right solution for you and you
    - **Scalability:** The ability to extend capacity and customize performance based on your needs.
    - **Encryption:** The masking of data to prevent visibility when data is accessed by an unauthorized user.
 
-7. [Review available persistent storage solutions](#persistent_storage_overview) and pick the solution that best fits your app and data requirements.
+8. [Review available persistent storage solutions](#persistent_storage_overview) and pick the solution that best fits your app and data requirements.
 
 ## Comparison of non-persistent storage options
 {: #non_persistent_overview}
@@ -377,6 +377,4 @@ nodes. Every node stores only a part of the data. </td>
 </tr>
 </tbody>
 </table>
-
-
 
