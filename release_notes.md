@@ -45,7 +45,12 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
-  <tr>
+<tr>
+  <td>19 July 2019</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Red Hat OpenShift on IBM Cloud</strong>: Added the [Red Hat OpenShift on IBM Cloud documentation to a separate repository](/docs/openshift?topic=openshift-getting-started). Because the {{site.data.keyword.containerlong_notm}} logic and underlying cloud infrastructure is the same, many topics are reused across the documentation for community Kubernetes and OpenShift cluster documentation, such as this release notes topic.
+  </td>
+</tr>
+<tr>
   <td>17 July 2019</td>
   <td><strong>Ingress ALB changelog</strong>: [Fixes `rbash` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).
   </td>
