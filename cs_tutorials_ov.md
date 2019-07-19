@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-17"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -146,7 +146,7 @@ subcollection: containers
 </div>
 
 
-## Deploy apps to a clusters 
+## Deploy apps to a cluster 
 {: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
@@ -306,7 +306,7 @@ subcollection: containers
                 Deploy serverless apps with Knative services
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br><p>Create modern, source-centric containerized and serverless apps on top of your Kubernetes cluster. </p></br>
+                  </br><p>Create modern, source-centric, containerized, and serverless apps on top of your Kubernetes cluster. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src = "images/knative_ov.png" alt="Overview of Knative components and dependencies" />

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks
 
@@ -114,19 +114,19 @@ Logs are automatically collected for your Ingress ALBs. To view the ALB logs, ch
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
-<td>The request processing time, measured in seconds with a milliseconds resolution. This time starts when the ALB reads the client request's first bytes and stops when the ALB sends the response's last bytes to the client. The log is written immediately after the request processing time stops.</td>
+<td>The request processing time, which is measured in seconds with a milliseconds resolution. This time starts when the ALB reads the client request's first bytes and stops when the ALB sends the response's last bytes to the client. The log is written immediately after the request processing time stops.</td>
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons.</td>
+<td>The time that it takes the ALB to receive the response from the upstream server for the back-end app, which is measured in seconds with a milliseconds resolution. Times of several responses are separated by commas and colons.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons.</td>
+<td>The time that it takes the ALB to establish a connection with the upstream server for the back-end app, which is measured in seconds with a milliseconds resolution. If TLS/SSL is enabled in your Ingress resource configuration, this time includes time spent on the handshake. Times of several connections are separated by commas and colons.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons.</td>
+<td>The time that it takes the ALB to receive the response header from the upstream server for the back-end app, which is measured in seconds with a milliseconds resolution. Times of several connections are separated by commas and colons.</td>
 </tr>
 </tbody></table>
 
@@ -138,7 +138,7 @@ You can customize the content and format of logs that are collected for the Ingr
 
 By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format by choosing which log components are forwarded and how the components are arranged in the log output
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -253,7 +253,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
 Monitor your ALBs by deploying a metrics exporter and Prometheus agent into your cluster.
 {: shortdesc}
 
-The ALB metrics exporter uses the NGINX directive, `vhost_traffic_status_zone`, to collect metrics data from the `/status/format/json` endpoint on each Ingress ALB pod. The metrics exporter automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Then, a Prometheus agent picks up the metrics produced by the exporter and makes the metrics visible on a Prometheus dashboard.
+The ALB metrics exporter uses the NGINX directive, `vhost_traffic_status_zone`, to collect metrics data from the `/status/format/json` endpoint on each Ingress ALB pod. The metrics exporter automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Then, a Prometheus agent picks up the metrics that are produced by the exporter and makes the metrics visible on a Prometheus dashboard.
 
 ### Installing the metrics exporter Helm chart
 {: #metrics-exporter}
@@ -295,12 +295,12 @@ The ALB metrics exporter pods must deploy to the same worker nodes that your ALB
   ```
   {:screen}
 
-5. Optional: [Install the Prometheus agent](#prometheus-agent) to pick up the metrics produced by the exporter and make the metrics visible on a Prometheus dashboard.
+5. Optional: [Install the Prometheus agent](#prometheus-agent) to pick up the metrics that are produced by the exporter and make the metrics visible on a Prometheus dashboard.
 
 ### Installing the Prometheus agent Helm chart
 {: #prometheus-agent}
 
-After you install the [metrics exporter](#metrics-exporter), you can install the Prometheus agent Helm chart to pick up the metrics produced by the exporter and make the metrics visible on a Prometheus dashboard.
+After you install the [metrics exporter](#metrics-exporter), you can install the Prometheus agent Helm chart to pick up the metrics that are produced by the exporter and make the metrics visible on a Prometheus dashboard.
 {: shortdesc}
 
 1. Download the TAR file for the metrics exporter Helm chart from https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
@@ -413,7 +413,7 @@ The following table lists the supported ALB metric names with the metric labels 
 ### Server metrics
 {: #server_metrics}
 
-The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Server metrics collect data on the subdomain defined in an Ingress resource; for example, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Server metrics collect data on the subdomain that are defined in an Ingress resource; for example, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
 {: shortdesc}
 
 Server metrics are in the format `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
@@ -433,7 +433,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>The ALB ID. In the above example, the ALB ID is <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>The ALB ID. In the previous example, the ALB ID is <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
@@ -442,19 +442,19 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <li><code>bytes</code> and <code>processing\_time</code> correspond to metrics <code>in</code> and <code>out</code>.</li>
 <li><code>cache</code> corresponds to metrics <code>bypass</code>, <code>expired</code>, <code>hit</code>, <code>miss</code>, <code>revalidated</code>, <code>scare</code>, <code>stale</code>, and <code>updating</code>.</li>
 <li><code>requests</code> corresponds to metrics <code>requestMsec</code>, <code>1xx</code>, <code>2xx</code>, <code>3xx</code>, <code>4xx</code>, <code>5xx</code>, and <code>total</code>.</li></ul>
-In the above example, the subtype is <code>bytes</code>.</td>
+In the previous example, the subtype is <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SERVER-NAME&gt;</code></td>
-<td>The name of the server that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores <code>(\_)</code>. In the above example, the server name is <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
+<td>The name of the server that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores <code>(\_)</code>. In the previous example, the server name is <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported server metrics". In the above example, the metric name is <code>out</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table "Supported server metrics". In the previous example, the metric name is <code>out</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>The value of the collected metric. In the above example, the value is <code>22319</code>.</td>
+<td>The value of the collected metric. In the previous example, the value is <code>22319</code>.</td>
 </tr>
 </tbody></table>
 
@@ -538,7 +538,7 @@ The following table lists the supported server metric names.
 ### Upstream metrics
 {: #upstream_metrics}
 
-The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the back-end service defined in an Ingress resource.
+The `alb-metrics-exporter` automatically reformats each data field in the JSON file into a metric that is readable by Prometheus. Upstream metrics collect data on the back-end service that is defined in an Ingress resource.
 {: shortdesc}
 
 Upstream metrics are formatted in two ways.
@@ -566,23 +566,23 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>The ALB ID. In the above example, the ALB ID is <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
+<td>The ALB ID. In the previous example, the ALB ID is <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
-<td>The subtype of metric. Supported values are <code>bytes</code>, <code>processing\_time</code>, and <code>requests</code>. In the above example, the subtype is <code>bytes</code>.</td>
+<td>The subtype of metric. Supported values are <code>bytes</code>, <code>processing\_time</code>, and <code>requests</code>. In the previous example, the subtype is <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>The name of the upstream service that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores <code>(\_)</code>. In the above example, the upstream name is <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
+<td>The name of the upstream service that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores <code>(\_)</code>. In the previous example, the upstream name is <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 1 metrics". In the above example, the metric name is <code>in</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 1 metrics". In the previous example, the metric name is <code>in</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>The value of the collected metric. In the above example, the value is <code>1227</code>.</td>
+<td>The value of the collected metric. In the previous example, the value is <code>1227</code>.</td>
 </tr>
 </tbody></table>
 
@@ -649,22 +649,22 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>The ALB ID. In the above example, the ALB ID is <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>The ALB ID. In the previous example, the ALB ID is <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>The name of the upstream service that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores (<code>\_</code>). In the above example, the upstream name is <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
+<td>The name of the upstream service that is defined in the Ingress resource. To maintain compatibility with Prometheus, periods (<code>.</code>) are replaced by underscores (<code>\_</code>). In the previous example, the upstream name is <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;POD\_IP&gt;</code></td>
-<td>The IP address and port of a specific upstream service pod. To maintain compatibility with Prometheus, periods (<code>.</code>) and colons (<code>:</code>) are replaced by underscores <code>(_)</code>. In the above example, the upstream pod IP is <code>172_30_75_6_80</code>.</td>
+<td>The IP address and port of a specific upstream service pod. To maintain compatibility with Prometheus, periods (<code>.</code>) and colons (<code>:</code>) are replaced by underscores <code>(_)</code>. In the previous example, the upstream pod IP is <code>172_30_75_6_80</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 2 metrics". In the above example, the metric name is <code>requestMsec</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 2 metrics". In the previous example, the metric name is <code>requestMsec</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>The value of the collected metric. In the above example, the value is <code>40</code>.</td>
+<td>The value of the collected metric. In the previous example, the value is <code>40</code>.</td>
 </tr>
 </tbody></table>
 
@@ -696,7 +696,7 @@ Shared memory zones are defined so that worker processes can share information s
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 

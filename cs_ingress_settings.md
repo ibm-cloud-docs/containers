@@ -161,9 +161,9 @@ To enable source IP preservation, edit the load balancer service that exposes an
         ```
         {: pre}
 
-3. Now, when you look up the headers for the requests sent to your back-end app, you can see the client IP address in the `x-forwarded-for` header.
+3. Now, when you look up the headers for the requests that are sent to your back-end app, you can see the client IP address in the `x-forwarded-for` header.
 
-4. If you no longer want to preserve the source IP, you can revert the changes you made to the service.
+4. If you no longer want to preserve the source IP, you can revert the changes that you made to the service.
     * To revert source IP preservation for your public ALBs:
         ```
         kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
@@ -394,7 +394,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 ### Tuning kernel performance
 {: #ingress_kernel}
 
-To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so only change these settings if you have specific performance optimization requirements.
+To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
 
 <br />
