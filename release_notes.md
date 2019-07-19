@@ -32,7 +32,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 The following icons are used to indicate if a release note applies only to a certain container platform. If no icon is used, the release note applies to both community Kubernetes and OpenShift clusters.<br>
 <img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> Applies to only community Kubernetes clusters.<br>
-<img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/>Applies to only OpenShift clusters. Note that release notes before the Red Hat OpenShift on IBM Cloud beta on 5 June 2019 apply only to community Kubernetes clusters.
+<img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters. Note that release notes before the Red Hat OpenShift on IBM Cloud beta on 5 June 2019 apply only to community Kubernetes clusters.
 {: note}
 
 ## July 2019
@@ -53,7 +53,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tr>
   <td>15 July 2019</td>
   <td><ul>
-  <li><strong>Cluster and worker node ID</strong>: The ID format for clusters and worker nodes is changed. Existing clusters and worker nodes keep their existing IDs. If you have automation that relies on the previous format, update it for new clusters.<ul>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Cluster and worker node ID</strong>: The ID format for clusters and worker nodes is changed. Existing clusters and worker nodes keep their existing IDs. If you have automation that relies on the previous format, update it for new clusters.<ul>
   <li>**Cluster ID**: In the regex format `{a-v0-9}[7]{a-z0-9}[2]{a-v0-9}[11]`</li>
   <li>**Worker node ID**: In the format `kube-<cluster_ID>-<cluster_name_truncated>-<resource_group_truncated>-<worker_ID>`</li></ul></li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 497](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
