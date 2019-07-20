@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-20"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Planning your cluster network setup
 {: #plan_clusters}
 
-Design a network setup for your {{site.data.keyword.containerlong}} cluster that meets the needs of your workloads and environment.
+Design a network setup for your community Kubernetes or OpenShift clusters in {{site.data.keyword.containerlong}} that meets the needs of your workloads and environment.
 {: shortdesc}
 
 In both community Kubernetes and OpenShift clusters, your containerized apps are hosted on compute hosts that are called worker nodes. Worker nodes are managed by the Kubernetes master. The communication setup between worker nodes and the Kubernetes master, other services, the Internet, or other private networks depends on how you set up your IBM Cloud infrastructure network.

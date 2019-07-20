@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-20"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -23,13 +23,11 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Assigning cluster access
 {: #users}
 
 As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} community Kubernetes or OpenShift clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
-{: shortdesc}
+{: shortdesc} 
 
 ## Understanding access policies and roles
 {: #access_policies}
