@@ -2628,16 +2628,59 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 </tbody>
 </table>
 
-## Deprecated: Version 1.11 changelog
+
+## Archive
+{: #changelog_archive}
+
+Unsupported Kubernetes versions:
+*  [Version 1.11](#111_changelog)
+*  [Version 1.10](#110_changelog)
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Version 1.11 changelog (unsupported as of 20 July 2019)
 {: #111_changelog}
 
 Review the version 1.11 changelog.
 {: shortdesc}
 
-Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
-{: deprecated}
+*   [Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019](#11110_1564)
+*   [Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019](#11110_1563)
+*   [Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019](#11110_1562)
+*   [Changelog for 1.11.10_1561, released 4 June 2019](#11110_1561)
+*   [Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019](#11110_1559)
+*   [Changelog for 1.11.10_1558, released 13 May 2019](#11110_1558)
+*   [Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019](#1119_1556)
+*   [Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019](#1119_1555)
+*   [Changelog for 1.11.9_1554, released 8 April 2019](#1119_1554)
+*   [Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019](#1118_1553)
+*   [Changelog for master fix pack 1.11.8_1552, released 26 March 2019](#1118_1552)
+*   [Changelog for 1.11.8_1550, released 20 March 2019](#1118_1550)
+*   [Changelog for 1.11.8_1547, released 4 March 2019](#1118_1547)
+*   [Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019](#1117_1546)
+*   [Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019](#1117_1544)
+*   [Changelog for 1.11.7_1543, released 5 February 2019](#1117_1543)
+*   [Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019](#1116_1541)
+*   [Changelog for 1.11.6_1540, released 21 January 2019](#1116_1540)
+*   [Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019](#1115_1539)
+*   [Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018](#1115_1538)
+*   [Changelog for 1.11.5_1537, released 5 December 2018](#1115_1537)
+*   [Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018](#1114_1536)
+*   [Changelog for 1.11.4_1535, released 27 November 2018](#1114_1535)
+*   [Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018](#1113_1534)
+*   [Changelog for 1.11.3_1533, released 7 November 2018](#1113_1533)
+*   [Changelog for master fix pack 1.11.3_1531, released 1 November 2018](#1113_1531_ha-master)
+*   [Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018](#1113_1531)
+*   [Changelog for master fix pack 1.11.3_1527, released 15 October 2018](#1113_1527)
+*   [Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018](#1113_1525)
+*   [Changelog for 1.11.3_1524, released 2 October 2018](#1113_1524)
+*   [Changelog for 1.11.3_1521, released 20 September 2018](#1113_1521)
+*   [Changelog for 1.11.2_1516, released 4 September 2018](#1112_1516)
+*   [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](#1112_1514)
+*   [Changelog for 1.11.2_1513, released 14 August 2018](#1112_1513)
 
-### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
+#### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
 {: #11110_1564}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1564.
@@ -2669,7 +2712,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
+#### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
 {: #11110_1563}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1563.
@@ -2701,7 +2744,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
+#### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
 {: #11110_1562}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1562.
@@ -2733,7 +2776,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for 1.11.10_1561, released 4 June 2019
+#### Changelog for 1.11.10_1561, released 4 June 2019
 {: #11110_1561}
 
 The following table shows the changes that are included in the patch 1.11.10_1561.
@@ -2777,7 +2820,7 @@ The following table shows the changes that are included in the patch 1.11.10_156
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019
+#### Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019
 {: #11110_1559}
 
 The following table shows the changes that are included in the patch pack 1.11.10_1559.
@@ -2809,7 +2852,7 @@ The following table shows the changes that are included in the patch pack 1.11.1
 </tbody>
 </table>
 
-### Changelog for 1.11.10_1558, released 13 May 2019
+#### Changelog for 1.11.10_1558, released 13 May 2019
 {: #11110_1558}
 
 The following table shows the changes that are included in the patch 1.11.10_1558.
@@ -2871,7 +2914,7 @@ The following table shows the changes that are included in the patch 1.11.10_155
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
+#### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.9_1556.
@@ -2904,7 +2947,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
+#### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
 {: #1119_1555}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.9_1555.
@@ -2930,7 +2973,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.9_1554, released 8 April 2019
+#### Changelog for 1.11.9_1554, released 8 April 2019
 {: #1119_1554}
 
 The following table shows the changes that are included in the patch 1.11.9_1554.
@@ -2998,7 +3041,7 @@ The following table shows the changes that are included in the patch 1.11.9_1554
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019
+#### Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019
 {: #1118_1553}
 
 The following table shows the changes that are included in the worker node fix 1.11.8_1553.
@@ -3024,7 +3067,7 @@ The following table shows the changes that are included in the worker node fix 1
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
+#### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
 {: #1118_1552}
 
 The following table shows the changes that are included in the master fix pack 1.11.8_1552.
@@ -3062,7 +3105,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for 1.11.8_1550, released 20 March 2019
+#### Changelog for 1.11.8_1550, released 20 March 2019
 {: #1118_1550}
 
 The following table shows the changes that are included in the patch 1.11.8_1550.
@@ -3118,7 +3161,7 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 </tbody>
 </table>
 
-### Changelog for 1.11.8_1547, released 4 March 2019
+#### Changelog for 1.11.8_1547, released 4 March 2019
 {: #1118_1547}
 
 The following table shows the changes that are included in the patch 1.11.8_1547.
@@ -3198,7 +3241,7 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
+#### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
 {: #1117_1546}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.7_1546.
@@ -3224,7 +3267,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
+#### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
 {: #1117_1544}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.7_1544.
@@ -3262,7 +3305,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.7_1543, released 5 February 2019
+#### Changelog for 1.11.7_1543, released 5 February 2019
 {: #1117_1543}
 
 The following table shows the changes that are included in the patch 1.11.7_1543.
@@ -3347,7 +3390,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
+#### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
 {: #1116_1541}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.6_1541.
@@ -3373,7 +3416,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.6_1540, released 21 January 2019
+#### Changelog for 1.11.6_1540, released 21 January 2019
 {: #1116_1540}
 
 The following table shows the changes that are included in the patch 1.11.6_1540.
@@ -3423,7 +3466,7 @@ The following table shows the changes that are included in the patch 1.11.6_1540
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
+#### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
 {: #1115_1539}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.5_1539.
@@ -3449,7 +3492,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
+#### Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
 {: #1115_1538}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.5_1538.
@@ -3475,7 +3518,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.5_1537, released 5 December 2018
+#### Changelog for 1.11.5_1537, released 5 December 2018
 {: #1115_1537}
 
 The following table shows the changes that are included in the patch 1.11.5_1537.
@@ -3507,7 +3550,7 @@ The following table shows the changes that are included in the patch 1.11.5_1537
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
+#### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
 {: #1114_1536}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.4_1536.
@@ -3533,7 +3576,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.4_1535, released 27 November 2018
+#### Changelog for 1.11.4_1535, released 27 November 2018
 {: #1114_1535}
 
 The following table shows the changes that are included in patch 1.11.4_1535.
@@ -3583,7 +3626,7 @@ The following table shows the changes that are included in patch 1.11.4_1535.
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
+#### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
 {: #1113_1534}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1534.
@@ -3610,7 +3653,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for 1.11.3_1533, released 7 November 2018
+#### Changelog for 1.11.3_1533, released 7 November 2018
 {: #1113_1533}
 
 The following table shows the changes that are included in patch 1.11.3_1533.
@@ -3648,7 +3691,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
+#### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
 {: #1113_1531_ha-master}
 
 The following table shows the changes that are included in the master fix pack 1.11.3_1531.
@@ -3697,7 +3740,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
+#### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
 {: #1113_1531}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1531.
@@ -3723,7 +3766,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
+#### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
 {: #1113_1527}
 
 The following table shows the changes that are included in the master fix pack 1.11.3_1527.
@@ -3755,7 +3798,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
+#### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
 {: #1113_1525}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1525.
@@ -3788,7 +3831,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for 1.11.3_1524, released 2 October 2018
+#### Changelog for 1.11.3_1524, released 2 October 2018
 {: #1113_1524}
 
 The following table shows the changes that are included in patch 1.11.3_1524.
@@ -3827,7 +3870,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 </tbody>
 </table>
 
-### Changelog for 1.11.3_1521, released 20 September 2018
+#### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
 
 The following table shows the changes that are included in patch 1.11.3_1521.
@@ -3902,7 +3945,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 </tbody>
 </table>
 
-### Changelog for 1.11.2_1516, released 4 September 2018
+#### Changelog for 1.11.2_1516, released 4 September 2018
 {: #1112_1516}
 
 The following table shows the changes that are included in patch 1.11.2_1516.
@@ -3946,7 +3989,7 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
+#### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
 {: #1112_1514}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.2_1514.
@@ -3978,7 +4021,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.2_1513, released 14 August 2018
+#### Changelog for 1.11.2_1513, released 14 August 2018
 {: #1112_1513}
 
 The following table shows the changes that are included in patch 1.11.2_1513.
@@ -4057,14 +4100,6 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <br />
 
 
-## Archive
-{: #changelog_archive}
-
-Unsupported Kubernetes versions:
-*  [Version 1.10](#110_changelog)
-*  [Version 1.9](#19_changelog)
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
 
 ### Version 1.10 changelog (unsupported as of 16 May 2019)
 {: #110_changelog}
