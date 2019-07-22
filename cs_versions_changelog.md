@@ -40,7 +40,6 @@ For information about changes since the previous version, see the following chan
 -  Version 1.14 [changelog](#114_changelog).
 -  Version 1.13 [changelog](#113_changelog).
 -  Version 1.12 [changelog](#112_changelog).
--  **Deprecated**: Version 1.11 [changelog](#111_changelog).
 -  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -4042,13 +4041,13 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance.</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -5077,7 +5076,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? Update to `containerd` instead of `docker` as the container runtime so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -5822,7 +5821,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? Update to `containerd` instead of `docker` as the container runtime so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
