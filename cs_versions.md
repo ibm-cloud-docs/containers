@@ -527,7 +527,6 @@ As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [
 {: shortdesc}
 
 [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
-{: deprecated}
 
 ### Version 1.10 (Unsupported)
 {: #cs_v110}
