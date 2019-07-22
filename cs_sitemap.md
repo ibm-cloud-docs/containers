@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-22"
 
 ---
 
@@ -899,13 +899,8 @@ lastupdated: "2019-07-18"
 * [Version 1.12](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [Update before master](/docs/containers?topic=containers-cs_versions#112_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#112_after)
-* [Version 1.11](/docs/containers?topic=containers-cs_versions#cs_v111)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#111_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#111_after)
-    * [Updating to highly available cluster masters in Kubernetes 1.11](/docs/containers?topic=containers-cs_versions#ha-masters)
-  * [Updating to containerd as the container runtime](/docs/containers?topic=containers-cs_versions#containerd)
-  * [Preparing to update to Calico v3](/docs/containers?topic=containers-cs_versions#111_calicov3)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
   * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
   * [Version 1.9 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
   * [Version 1.8 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v18)
