@@ -52,7 +52,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: #114_changelog}
 
 ### Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019
-{: #1144_1526}
+{: #1144_1526_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.4_1526.
 {: shortdesc}
@@ -521,7 +521,7 @@ Review the version 1.13 changelog.
 {: shortdesc}
 
 ### Changelog for worker node fix pack 1.13.8_1529, released 22 July 2019
-{: #1138_1529}
+{: #1138_1529_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.13.8_1529.
 {: shortdesc}
@@ -1424,7 +1424,7 @@ Review the version 1.12 changelog.
 {: shortdesc}
 
 ### Changelog for worker node fix pack 1.12.10_1560, released 22 July 2019
-{: #11210_1560}
+{: #11210_1560_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.12.10_1560.
 {: shortdesc}
