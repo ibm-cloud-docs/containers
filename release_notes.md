@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-22"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,12 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>22 July 2019</td>
+  <td><ul>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version policy</strong>: Increased the [version deprecation](/docs/containers?topic=containers-cs_versions#version_types) period from 30 to 45 days.</li></ul>
+  </td>
+</tr>
 <tr>
   <td>19 July 2019</td>
   <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Red Hat OpenShift on IBM Cloud</strong>: Added the [Red Hat OpenShift on IBM Cloud documentation to a separate repository](/docs/openshift?topic=openshift-getting-started). Because the {{site.data.keyword.containerlong_notm}} logic and underlying cloud infrastructure is the same, many topics are reused across the documentation for community Kubernetes and OpenShift cluster documentation, such as this release notes topic.
