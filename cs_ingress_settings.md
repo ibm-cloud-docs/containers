@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-22"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -223,6 +223,8 @@ To edit the configmap to enable SSL protocols and ciphers:
    {: pre}
 
 <br />
+
+
 
 
 ## Tuning ALB performance
