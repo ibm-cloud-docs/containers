@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-22"
 
 keywords: kubernetes, iks
 
@@ -42,6 +42,9 @@ _{{site.data.keyword.containerlong_notm}} locations_
 
 {{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
 {: shortdesc}
+
+Using the [Red Hat OpenShift on IBM Cloud beta](/docs/openshift?topic=openshift-getting-started)? You can create OpenShift clusters in two multizone metro areas: Washington, DC and London. Supported zones are wdc04, wdc06, wdc07, lon04, lon05, and lon06.
+{: preview}
 
 ### Available locations
 {: #available-locations}

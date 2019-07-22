@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-22"
 
 keywords: kubernetes, iks
 
@@ -40,7 +40,6 @@ For information about changes since the previous version, see the following chan
 -  Version 1.14 [changelog](#114_changelog).
 -  Version 1.13 [changelog](#113_changelog).
 -  Version 1.12 [changelog](#112_changelog).
--  **Deprecated**: Version 1.11 [changelog](#111_changelog).
 -  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -50,6 +49,38 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019
+{: #1144_1526_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.4_1526.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.3_1525">
+<caption>Changes since version 1.14.3_1525</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.3</td>
+<td>v1.14.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4).</td>
+</tr>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+</tr>
+</table>
+
 
 ### Changelog for master fix pack 1.14.4_1526, released 15 July 2019
 {: #1144_1526}
@@ -487,6 +518,38 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.8_1529, released 22 July 2019
+{: #1138_1529_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.8_1529.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.7_1528">
+<caption>Changes since version 1.13.7_1528</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.7</td>
+<td>v1.13.8</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8).</td>
+</tr>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+</tr>
+</table>
+
 
 ### Changelog for master fix pack 1.13.8_1529, released 15 July 2019
 {: #1138_1529}
@@ -1358,6 +1421,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1560, released 22 July 2019
+{: #11210_1560_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.10_1560.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.9_1559">
+<caption>Changes since version 1.12.9_1559</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.9</td>
+<td>v1.12.10</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10).</td>
+</tr>
+<tr>
+<td>Ubuntu packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+</tr>
+</table>
+
 
 ### Changelog for master fix pack 1.12.10_1560, released 15 July 2019
 {: #11210_1560}
@@ -2532,16 +2627,59 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 </tbody>
 </table>
 
-## Deprecated: Version 1.11 changelog
+
+## Archive
+{: #changelog_archive}
+
+Unsupported Kubernetes versions:
+*  [Version 1.11](#111_changelog)
+*  [Version 1.10](#110_changelog)
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Version 1.11 changelog (unsupported as of 20 July 2019)
 {: #111_changelog}
 
 Review the version 1.11 changelog.
 {: shortdesc}
 
-Kubernetes version 1.11 is deprecated and becomes unsupported on 20 July 2019 (tentative). [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.12.
-{: deprecated}
+*   [Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019](#11110_1564)
+*   [Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019](#11110_1563)
+*   [Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019](#11110_1562)
+*   [Changelog for 1.11.10_1561, released 4 June 2019](#11110_1561)
+*   [Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019](#11110_1559)
+*   [Changelog for 1.11.10_1558, released 13 May 2019](#11110_1558)
+*   [Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019](#1119_1556)
+*   [Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019](#1119_1555)
+*   [Changelog for 1.11.9_1554, released 8 April 2019](#1119_1554)
+*   [Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019](#1118_1553)
+*   [Changelog for master fix pack 1.11.8_1552, released 26 March 2019](#1118_1552)
+*   [Changelog for 1.11.8_1550, released 20 March 2019](#1118_1550)
+*   [Changelog for 1.11.8_1547, released 4 March 2019](#1118_1547)
+*   [Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019](#1117_1546)
+*   [Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019](#1117_1544)
+*   [Changelog for 1.11.7_1543, released 5 February 2019](#1117_1543)
+*   [Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019](#1116_1541)
+*   [Changelog for 1.11.6_1540, released 21 January 2019](#1116_1540)
+*   [Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019](#1115_1539)
+*   [Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018](#1115_1538)
+*   [Changelog for 1.11.5_1537, released 5 December 2018](#1115_1537)
+*   [Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018](#1114_1536)
+*   [Changelog for 1.11.4_1535, released 27 November 2018](#1114_1535)
+*   [Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018](#1113_1534)
+*   [Changelog for 1.11.3_1533, released 7 November 2018](#1113_1533)
+*   [Changelog for master fix pack 1.11.3_1531, released 1 November 2018](#1113_1531_ha-master)
+*   [Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018](#1113_1531)
+*   [Changelog for master fix pack 1.11.3_1527, released 15 October 2018](#1113_1527)
+*   [Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018](#1113_1525)
+*   [Changelog for 1.11.3_1524, released 2 October 2018](#1113_1524)
+*   [Changelog for 1.11.3_1521, released 20 September 2018](#1113_1521)
+*   [Changelog for 1.11.2_1516, released 4 September 2018](#1112_1516)
+*   [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](#1112_1514)
+*   [Changelog for 1.11.2_1513, released 14 August 2018](#1112_1513)
 
-### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
+#### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
 {: #11110_1564}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1564.
@@ -2573,7 +2711,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
+#### Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019
 {: #11110_1563}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1563.
@@ -2605,7 +2743,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
+#### Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019
 {: #11110_1562}
 
 The following table shows the changes that are included in the worker node patch 1.11.10_1562.
@@ -2637,7 +2775,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for 1.11.10_1561, released 4 June 2019
+#### Changelog for 1.11.10_1561, released 4 June 2019
 {: #11110_1561}
 
 The following table shows the changes that are included in the patch 1.11.10_1561.
@@ -2681,7 +2819,7 @@ The following table shows the changes that are included in the patch 1.11.10_156
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019
+#### Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019
 {: #11110_1559}
 
 The following table shows the changes that are included in the patch pack 1.11.10_1559.
@@ -2713,7 +2851,7 @@ The following table shows the changes that are included in the patch pack 1.11.1
 </tbody>
 </table>
 
-### Changelog for 1.11.10_1558, released 13 May 2019
+#### Changelog for 1.11.10_1558, released 13 May 2019
 {: #11110_1558}
 
 The following table shows the changes that are included in the patch 1.11.10_1558.
@@ -2775,7 +2913,7 @@ The following table shows the changes that are included in the patch 1.11.10_155
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
+#### Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019
 {: #1119_1556}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.9_1556.
@@ -2808,7 +2946,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
+#### Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019
 {: #1119_1555}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.9_1555.
@@ -2834,7 +2972,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.9_1554, released 8 April 2019
+#### Changelog for 1.11.9_1554, released 8 April 2019
 {: #1119_1554}
 
 The following table shows the changes that are included in the patch 1.11.9_1554.
@@ -2902,7 +3040,7 @@ The following table shows the changes that are included in the patch 1.11.9_1554
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019
+#### Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019
 {: #1118_1553}
 
 The following table shows the changes that are included in the worker node fix 1.11.8_1553.
@@ -2928,7 +3066,7 @@ The following table shows the changes that are included in the worker node fix 1
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
+#### Changelog for master fix pack 1.11.8_1552, released 26 March 2019
 {: #1118_1552}
 
 The following table shows the changes that are included in the master fix pack 1.11.8_1552.
@@ -2966,7 +3104,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for 1.11.8_1550, released 20 March 2019
+#### Changelog for 1.11.8_1550, released 20 March 2019
 {: #1118_1550}
 
 The following table shows the changes that are included in the patch 1.11.8_1550.
@@ -3022,7 +3160,7 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 </tbody>
 </table>
 
-### Changelog for 1.11.8_1547, released 4 March 2019
+#### Changelog for 1.11.8_1547, released 4 March 2019
 {: #1118_1547}
 
 The following table shows the changes that are included in the patch 1.11.8_1547.
@@ -3102,7 +3240,7 @@ The following table shows the changes that are included in the patch 1.11.8_1547
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
+#### Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019
 {: #1117_1546}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.7_1546.
@@ -3128,7 +3266,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
+#### Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019
 {: #1117_1544}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.7_1544.
@@ -3166,7 +3304,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.7_1543, released 5 February 2019
+#### Changelog for 1.11.7_1543, released 5 February 2019
 {: #1117_1543}
 
 The following table shows the changes that are included in the patch 1.11.7_1543.
@@ -3251,7 +3389,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
+#### Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019
 {: #1116_1541}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.6_1541.
@@ -3277,7 +3415,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.6_1540, released 21 January 2019
+#### Changelog for 1.11.6_1540, released 21 January 2019
 {: #1116_1540}
 
 The following table shows the changes that are included in the patch 1.11.6_1540.
@@ -3327,7 +3465,7 @@ The following table shows the changes that are included in the patch 1.11.6_1540
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
+#### Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019
 {: #1115_1539}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.5_1539.
@@ -3353,7 +3491,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
+#### Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018
 {: #1115_1538}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.5_1538.
@@ -3379,7 +3517,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.5_1537, released 5 December 2018
+#### Changelog for 1.11.5_1537, released 5 December 2018
 {: #1115_1537}
 
 The following table shows the changes that are included in the patch 1.11.5_1537.
@@ -3411,7 +3549,7 @@ The following table shows the changes that are included in the patch 1.11.5_1537
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
+#### Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018
 {: #1114_1536}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.4_1536.
@@ -3437,7 +3575,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.4_1535, released 27 November 2018
+#### Changelog for 1.11.4_1535, released 27 November 2018
 {: #1114_1535}
 
 The following table shows the changes that are included in patch 1.11.4_1535.
@@ -3487,7 +3625,7 @@ The following table shows the changes that are included in patch 1.11.4_1535.
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
+#### Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018
 {: #1113_1534}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1534.
@@ -3514,7 +3652,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for 1.11.3_1533, released 7 November 2018
+#### Changelog for 1.11.3_1533, released 7 November 2018
 {: #1113_1533}
 
 The following table shows the changes that are included in patch 1.11.3_1533.
@@ -3552,7 +3690,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
+#### Changelog for master fix pack 1.11.3_1531, released 1 November 2018
 {: #1113_1531_ha-master}
 
 The following table shows the changes that are included in the master fix pack 1.11.3_1531.
@@ -3601,7 +3739,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
+#### Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018
 {: #1113_1531}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1531.
@@ -3627,7 +3765,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
+#### Changelog for master fix pack 1.11.3_1527, released 15 October 2018
 {: #1113_1527}
 
 The following table shows the changes that are included in the master fix pack 1.11.3_1527.
@@ -3659,7 +3797,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
+#### Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018
 {: #1113_1525}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.3_1525.
@@ -3692,7 +3830,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for 1.11.3_1524, released 2 October 2018
+#### Changelog for 1.11.3_1524, released 2 October 2018
 {: #1113_1524}
 
 The following table shows the changes that are included in patch 1.11.3_1524.
@@ -3731,7 +3869,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 </tbody>
 </table>
 
-### Changelog for 1.11.3_1521, released 20 September 2018
+#### Changelog for 1.11.3_1521, released 20 September 2018
 {: #1113_1521}
 
 The following table shows the changes that are included in patch 1.11.3_1521.
@@ -3806,7 +3944,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 </tbody>
 </table>
 
-### Changelog for 1.11.2_1516, released 4 September 2018
+#### Changelog for 1.11.2_1516, released 4 September 2018
 {: #1112_1516}
 
 The following table shows the changes that are included in patch 1.11.2_1516.
@@ -3845,12 +3983,12 @@ The following table shows the changes that are included in patch 1.11.2_1516.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
+#### Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018
 {: #1112_1514}
 
 The following table shows the changes that are included in the worker node fix pack 1.11.2_1514.
@@ -3882,7 +4020,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.11.2_1513, released 14 August 2018
+#### Changelog for 1.11.2_1513, released 14 August 2018
 {: #1112_1513}
 
 The following table shows the changes that are included in patch 1.11.2_1513.
@@ -3903,13 +4041,13 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>containerd</td>
 <td>N/A</td>
 <td>1.1.2</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2). For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes. See the [`containerd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.2).</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance. For actions that you must take, see [Updating to `containerd` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd).</td>
+<td>`containerd` replaces Docker as the new container runtime for Kubernetes, to enhance performance.</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -3961,14 +4099,6 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <br />
 
 
-## Archive
-{: #changelog_archive}
-
-Unsupported Kubernetes versions:
-*  [Version 1.10](#110_changelog)
-*  [Version 1.9](#19_changelog)
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
 
 ### Version 1.10 changelog (unsupported as of 16 May 2019)
 {: #110_changelog}
@@ -4946,7 +5076,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? Update to `containerd` instead of `docker` as the container runtime so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -4984,7 +5114,7 @@ The following table shows the changes that are included in patch 1.10.7_1520.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br> Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5093,7 +5223,7 @@ The following table shows the changes that are included in patch 1.10.5_1517.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
-<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5691,7 +5821,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Disabled the default Docker bridge so that the `172.17.0.0/16` IP range is now used for private routes. If you rely on building Docker containers in worker nodes by executing `docker` commands on the host directly or by using a pod that mounts the Docker socket, choose from the following options.<ul><li>To ensure external network connectivity when you build the container, run `docker build . --network host`.</li>
 <li>To explicitly create a network to use when you build the container, run `docker network create` and then use this network.</li></ul>
-**Note**: Have dependencies on the Docker socket or Docker directly? [Update to `containerd` instead of `docker` as the container runtime](/docs/containers?topic=containers-cs_versions#containerd) so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
+**Note**: Have dependencies on the Docker socket or Docker directly? Update to `containerd` instead of `docker` as the container runtime so that your clusters are prepared to run Kubernetes version 1.11 or later.</td>
 </tr>
 </tbody>
 </table>
@@ -5723,7 +5853,7 @@ The following table shows the changes that are included in patch 1.9.10_1523.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure (SoftLayer) NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
+<td>Updated incubator version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance's labels, unless you are using a multizone cluster and need to add the region and zone labels.<br><br>Removed the default NFS version from the mount options in the IBM-provided file storage classes. The host's operating system now negotiates the NFS version with the IBM Cloud infrastructure NFS server. To manually set a specific NFS version, or to change the NFS version of your PV that was negotiated by the host's operating system, see [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5826,7 +5956,7 @@ The following table shows the changes that are included in patch 1.9.9_1520.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
-<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -6207,7 +6337,7 @@ Review the version 1.8 changelogs.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>320</td>
 <td>334</td>
-<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure (SoftLayer) account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
+<td>Increased the timeout for persistent volume creation from 15 to 30 minutes. Changed the default billing type to `hourly`. Added mount options to the pre-defined storage classes. In the NFS file storage instance in your IBM Cloud infrastructure account, changed the **Notes** field to JSON format and added the Kubernetes namespace that the PV is deployed to. To support multizone clusters, added zone and region labels to persistent volumes.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
