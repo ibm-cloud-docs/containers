@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-17"
+lastupdated: "2019-07-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -239,6 +239,12 @@ Refer to the following table for a summary of changes for each build of the Flue
 <th>Disruptive changes</th>
 </tr>
 </thead>
+<tr>
+<td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
+<td>22 Jul 2019</td>
+<td>Updates Alpine packages for [CVE-2019-8905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905), [CVE-2019-8906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906), and [CVE-2019-8907 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>e7c10d74350dc64d4d92ba7f72bb4ff9219315d2</td>
 <td>30 May 2019</td>
