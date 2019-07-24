@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-24"
 
 keywords: kubernetes, iks
 
@@ -266,11 +266,9 @@ The ALB metrics exporter pods must deploy to the same worker nodes that your ALB
 
 1.  **Important**: [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repositories.
 
-2. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates an `alb-metrics-service-account` service account in the `kube-system` namespace. Replace <alb-ID> with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
-  You must deploy a chart for each ALB that you want to monitor.
-  {: note}
+2. Install the `ibmcloud-alb-metrics-exporter` Helm chart to your cluster. This Helm chart deploys an ALB metrics exporter and creates an `alb-metrics-service-account` service account in the `kube-system` namespace. Replace `<zone>` with the zone where the ALB exists and `<alb_ID>` with the ID of the ALB that you want to collect metrics for. To view the IDs for the ALBs in your cluster, run `ibmcloud ks albs --cluster <cluster_name>`.
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb_ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -295,7 +293,9 @@ The ALB metrics exporter pods must deploy to the same worker nodes that your ALB
   ```
   {:screen}
 
-5. Optional: [Install the Prometheus agent](#prometheus-agent) to pick up the metrics that are produced by the exporter and make the metrics visible on a Prometheus dashboard.
+5. Repeat steps 2 - 4 for each ALB in your cluster.
+
+6. Optional: [Install the Prometheus agent](#prometheus-agent) to pick up the metrics that are produced by the exporter and make the metrics visible on a Prometheus dashboard.
 
 ### Installing the Prometheus agent Helm chart
 {: #prometheus-agent}
