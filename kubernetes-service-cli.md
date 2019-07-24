@@ -167,7 +167,7 @@ ibmcloud plugin list
   </tr>
   <tr>
     <td>[`ibmcloud ks cluster-config`](#cs_cluster_config)</td>
-    <td>[`ibmcloud ks cluster-create`](#cs_cluster_create)
+    <td>[`ibmcloud ks cluster-create`](#cs_cluster_create)</td>
     <td>[`ibmcloud ks cluster-feature-disable`](#cs_cluster_feature_disable)</td>
     <td>[`ibmcloud ks cluster-feature-enable`](#cs_cluster_feature_enable)</td>
   </tr>
@@ -452,7 +452,7 @@ ibmcloud plugin list
  </thead>
  <tbody>
     <tr>
-      <td>[`ibmcloud ks worker-pool-create`](#cs_worker_pool_create)
+      <td>[`ibmcloud ks worker-pool-create`](#cs_worker_pool_create)</td>
       <td>[`ibmcloud ks worker-pool-get`](#cs_worker_pool_get)</td>
       <td>[`ibmcloud ks worker-pool-rebalance`](#cs_rebalance)</td>
       <td>[`ibmcloud ks worker-pool-resize`](#cs_worker_pool_resize)</td>
@@ -1464,7 +1464,7 @@ ibmcloud ks clusters [--locations LOCATION] [--json] [-s]
 <dd>Filter zones by a specific location or a list of comma-separated locations. To see supported locations, run <code>ibmcloud ks supported-locations</code>.</dd>
 
 <dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
+<dd>Prints the command output in JSON format. This value is optional..</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
