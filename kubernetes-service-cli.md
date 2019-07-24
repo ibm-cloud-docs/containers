@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-23"
+lastupdated: "2019-07-24"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks
 
@@ -122,7 +122,7 @@ ibmcloud plugin list
  <tbody>
   <tr>
     <td>[`ibmcloud ks api`](#cs_cli_api)</td>
-    <td>[`ibmcloud ks apiserver-refresh`](#cs_apiserver_refresh) (cluster-refresh)</td>
+    <td>[`ibmcloud ks apiserver-refresh`](#cs_apiserver_refresh) (`cluster-refresh`)</td>
     <td></td>
  </tr>
 </tbody>
@@ -253,7 +253,7 @@ ibmcloud plugin list
      <td>[`ibmcloud ks api-key-info`](#cs_api_key_info)</td>
      <td>[`ibmcloud ks api-key-reset`](#cs_api_key_reset)</td>
      <td>[`ibmcloud ks credential-get`](#cs_credential_get)</td>
-     <td>[`ibmcloud ks credential-set`](#cs_credentials_set) (credentials-set)</td>
+     <td>[`ibmcloud ks credential-set`](#cs_credentials_set) (`credentials-set`)</td>
    </tr>
    <tr>
      <td>[`ibmcloud ks credential-unset`](#cs_credentials_unset)</td>
@@ -1332,17 +1332,13 @@ VLAN ID   Subnet CIDR         Public   User-managed
 Make an {{site.data.keyword.cloud_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. The API key is then stored in a Kubernetes `imagePullSecret` so that you can pull images from your {{site.data.keyword.registryshort_notm}} namespaces for containers that are in the `default` Kubernetes namespace. This process happens automatically when you create a cluster. If you got an error during the cluster creation process or have an existing cluster, you can use this command to apply the process again.
 {: shortdesc}
 
-
-
-When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr`.
-{: important}
-
 This API key method replaces the previous method of authorizing a cluster to access {{site.data.keyword.registrylong_notm}} by automatically creating a [token](/docs/services/Registry?topic=registry-registry_access#registry_tokens) and storing the token in an image pull secret. Now, by using IAM API keys to access {{site.data.keyword.registrylong_notm}}, you can customize IAM policies for the service ID to restrict access to your namespaces or specific images. For example, you can change the service ID policies in the cluster's image pull secret to pull images from only a certain registry region or namespace. Before you can customize IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
 
 For more information, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#cluster_registry_auth).
 
-If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.
-{: important}
+
+
+<p class="important">When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr`.</br></br>If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.</p>
 
 ```
 ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
@@ -1354,10 +1350,12 @@ ibmcloud ks cluster-pull-secret-apply --cluster CLUSTER
 *  **Administrator** platform role in {{site.data.keyword.registrylong_notm}}
 
 **Command options**:
+
 <dl>
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 </dl>
+
 </br>
 
 ### `ibmcloud ks cluster-rm`
@@ -1397,15 +1395,16 @@ ibmcloud ks cluster-rm --cluster my_cluster
 {: pre}
 
 </br>
+
 ### `ibmcloud ks cluster-update`
 {: #cs_cluster_update}
 
 Update the Kubernetes master to the default API version. During the update, you cannot access or change the cluster. Worker nodes, apps, and resources that were deployed by the user are not modified and continue to run.
 {: shortdesc}
 
-
-
 You might need to change your YAML files for future deployments. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
+
+
 
 ```
 ibmcloud ks cluster-update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
@@ -1484,7 +1483,7 @@ ibmcloud ks clusters --locations ams03,wdc,ap
 View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
-This command is deprecated. Use the [ibmcloud ks versions command](#cs_versions_command) instead.
+This command is deprecated. Use the [`ibmcloud ks versions` command](#cs_versions_command) instead.
 {: deprecated}
 
 ```
@@ -1804,6 +1803,8 @@ ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --ur
 ## Cluster commands: Subnets
 {: #cluster_subnets_commands}
 
+
+
 ### `ibmcloud ks cluster-subnet-add`
 {: #cs_cluster_subnet_add}
 
@@ -2029,9 +2030,9 @@ ibmcloud ks alb-autoupdate-disable --cluster mycluster
 Enable automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-
-
 If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next build version becomes available, the ALBs are automatically updated to the latest build.
+
+
 
 ```
 ibmcloud ks alb-autoupdate-enable --cluster CLUSTER
@@ -2116,10 +2117,10 @@ ibmcloud ks alb-cert-deploy --update --secret-name my_alb_secret --cluster my_cl
 ### Beta: `ibmcloud ks alb-cert-get`
 {: #cs_alb_cert_get}
 
-
-
 If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, view information about the TLS certificate, such as the secrets that are associated with it.
 {: shortdesc}
+
+
 
 ```
 ibmcloud ks alb-cert-get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
@@ -2565,7 +2566,7 @@ ibmcloud ks credential-get --region us-south
 {: pre}
 
 </br>
-### `ibmcloud ks credential-set (credentials-set)`
+### `ibmcloud ks credential-set` (`credentials-set`)
 {: #cs_credentials_set}
 
 Set credentials for a resource group and region so that you can access the IBM Cloud infrastructure portfolio through your {{site.data.keyword.cloud_notm}} account.
@@ -2766,8 +2767,6 @@ ibmcloud ks machine-types --zone dal10
 
 View the VLAN spanning status for an IBM Cloud infrastructure account. VLAN spanning enables all devices on an account to communicate with each other through the private network, regardless of its assigned VLAN.
 {: shortdesc}
-
-
 
 <p class="note">The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).</p>
 
@@ -4030,7 +4029,7 @@ Find the {{site.data.keyword.containerlong_notm}} region that you are currently 
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region-set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region-set` command and use the cluster name when you run commands.
 
-<p class="deprecated">Legacy behavior:<ul><li>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</li><li>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region-set</code> command to change regions.</li></ul></p>
+<p class="deprecated">Legacy behavior:</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</br>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region-set</code> command to change regions.</p>
 
 ```
 ibmcloud ks region-get
@@ -4078,6 +4077,9 @@ ibmcloud ks region-set --region eu-central
 List the available regions. The `Region Name` is the {{site.data.keyword.containerlong_notm}} name, and the `Region Alias` is the general {{site.data.keyword.cloud_notm}} name for the region.
 {: shortdesc}
 
+Region-specific endpoints are deprecated. Use the [global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint) instead.
+{: deprecated}
+
 **Minimum required permissions**: None
 
 **Example**:
@@ -4123,8 +4125,6 @@ View a list of available zones that you can create a cluster in.
 
 
 
-Zones in all locations are returned. To filter zones by a specific location, include the `--locations` flag.
-
 If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, the available zones vary by the region that you are logged in to. To switch regions, run `ibmcloud ks region-set`.
 {: deprecated}
 
@@ -4166,7 +4166,10 @@ ibmcloud ks zones --locations ap
 ### Deprecated: `ibmcloud ks worker-add`
 {: #cs_worker_add}
 
-Add stand-alone worker nodes to a cluster. This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool-create`](#cs_worker_pool_create) or , or add workers to an existing worker pool by running [`ibmcloud ks worker-pool-resize`](#cs_worker_pool_resize).
+Add stand-alone worker nodes to a cluster.
+{: shortdesc}
+
+This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool-create`](#cs_worker_pool_create) or , or add workers to an existing worker pool by running [`ibmcloud ks worker-pool-resize`](#cs_worker_pool_resize).
 {: deprecated}
 
 ```
