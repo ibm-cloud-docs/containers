@@ -2445,7 +2445,7 @@ ibmcloud ks vlans --zone ZONE [--all] [--json] [-s]
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Enter the zone where you want to list your private and public VLANs. This value is required. Review [available zones](/docs/containers?topic=containers-regions-and-zones#zones).</dd>
+<dd>Enter the zone where you want to list your private and public VLANs. This value is required. To see available zones, run `ibmcloud ks zones`.</dd>
 
 <dt><code>--all</code></dt>
 <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANs that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
