@@ -1603,6 +1603,7 @@ ibmcloud ks subnets [--locations LOCATIONS] [--json] [-s]
 
 **Command options**:
 <dl>
+
 <dt><code>--locations <em>LOCATION</em></code></dt>
 <dd>Filter zones by a specific location or a list of comma-separated locations. To see supported locations, run <code>ibmcloud ks supported-locations</code>.</dd>
 
