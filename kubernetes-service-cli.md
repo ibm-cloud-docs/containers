@@ -105,7 +105,6 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
 ## API commands
 {: #api_commands}
 
-</br>
 ### `ibmcloud ks api`
 {: #cs_cli_api}
 
