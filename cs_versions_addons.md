@@ -61,7 +61,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td> - / 334</td>
 <td>Expected 30 July 2019</td>
-<td>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check).</td>
+<td>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed. By default, the readiness check waits 15 seconds after the pod restarts to start checking whether all Ingress files are parsed. If all files are parsed 15 seconds after the pod restarts, the ALB pod begins to route traffic requests again. If all files are not parsed 15 seconds after the pod restarts, the pod does not route traffic, and the readiness check continues to check every 15 seconds for a maximum timeout of 5 minutes. After 5 minutes, the ALB pod begins to route traffic.</td>
 <td>-</td>
 </tr>
 <tr>
