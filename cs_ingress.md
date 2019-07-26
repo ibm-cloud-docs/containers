@@ -242,7 +242,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
       4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          {[kubectl]} apply -f myappservice.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Repeat these steps for every app that you want to expose.
@@ -352,7 +352,7 @@ If you do not have a TLS certificate ready, follow these steps:
 
 4. Create the certificate as a Kubernetes secret.
      ```
-     {[kubectl]} apply -f ssl-my-test
+     kubectl apply -f ssl-my-test
      ```
      {: pre}
      Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
@@ -470,7 +470,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 4.   Verify that the Ingress resource was created successfully.
 
       ```
-      {[kubectl]} describe ingress myingressresource
+      kubectl describe ingress myingressresource
       ```
       {: pre}
 
@@ -673,7 +673,7 @@ Start by deploying your apps and creating Kubernetes services to expose them.
       4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
 
           ```
-          {[kubectl]} apply -f myappservice.yaml [-n <namespace>]
+          kubectl apply -f myappservice.yaml [-n <namespace>]
           ```
           {: pre}
       5.  Repeat these steps for every app that you want to expose.
@@ -923,7 +923,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 4.   Verify that the Ingress resource was created successfully.
 
       ```
-      {[kubectl]} describe ingress myingressresource
+      kubectl describe ingress myingressresource
       ```
       {: pre}
 
