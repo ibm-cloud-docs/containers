@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-25"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -61,7 +61,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td> - / 334</td>
 <td>Expected 30 July 2019</td>
-<td>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to rout traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check).</td>
+<td>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check).</td>
 <td>-</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-11"
+lastupdated: "2019-07-26"
 
 ---
 
@@ -374,7 +374,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 
    4. Create the certificate in your cluster.
       ```
-      kubectl create -f secret.yaml
+      kubectl apply -f secret.yaml
       ```
       {: pre}
 

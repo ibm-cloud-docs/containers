@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -352,7 +352,7 @@ If you do not have a TLS certificate ready, follow these steps:
 
 4. Create the certificate as a Kubernetes secret.
      ```
-     kubectl create -f ssl-my-test
+     kubectl apply -f ssl-my-test
      ```
      {: pre}
      Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.

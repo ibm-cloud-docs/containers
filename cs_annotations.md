@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, ingress
 
@@ -1426,7 +1426,7 @@ spec:
    {: codeblock}
 4. Create the certificate as a Kubernetes secret.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1513,7 +1513,7 @@ spec:
 
 4. Create the certificate as a Kubernetes secret.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1537,7 +1537,7 @@ spec:
    {: codeblock}
 4. Create the certificate as a Kubernetes secret.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
