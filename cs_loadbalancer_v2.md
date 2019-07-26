@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Setting up an NLB 2.0 (beta)
 {: #loadbalancer-v2}
 
-Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 2.0 NLBs, see [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs).
+Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For more information about version 2.0 NLBs, see [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs).
 {:shortdesc}
 
 ## Prerequisites
@@ -92,8 +92,8 @@ Next, you can follow the steps in [Setting up an NLB 2.0 in a multizone cluster]
 
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * To create public NLBs in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private NLBs in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
-* If you restrict network traffic to edge worker nodes, ensure that at least 2 [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 
 To set up an NLB 2.0 in a multizone cluster:
@@ -258,7 +258,7 @@ Next, you can [register an NLB host name](/docs/containers?topic=containers-load
 
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * You must have an available portable public or private IP address to assign to the NLB service. For more information, see [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
-* Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 
 To create an NLB 2.0 service in a single-zone cluster:
 
@@ -426,7 +426,7 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 <dt>Destination Hashing (<code>dh</code>)</dt>
 <dd>The destination of the packet, which is the NLB IP address and port, is used to determine which worker node handles the incoming request. However, the IP address and port for NLBs in {{site.data.keyword.containerlong_notm}} don't change. The NLB is forced to keep the request within the same worker node that it is on, so only app pods on one worker handle all incoming requests.</dd>
 <dt>Dynamic connection counting algorithms</dt>
-<dd>The following algorithms depend on dynamic counting of connections between clients and NLBs. However, because direct service return (DSR) prevents NLB 2.0 pods from being in the return packet path, NLBs don't keep track of established connections.<ul>
+<dd>The following algorithms depend on dynamic counting of connections between clients and NLBs. However, because direct service return (DSR) prevents NLB 2.0 pods from being in the return packet path, NLBs don't track established connections.<ul>
 <li>Least Connection (<code>lc</code>)</li>
 <li>Locality-Based Least Connection (<code>lblc</code>)</li>
 <li>Locality-Based Least Connection with Replication (<code>lblcr</code>)</li>
