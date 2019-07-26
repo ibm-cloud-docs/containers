@@ -46,11 +46,11 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Setting up clusters
-        cs_clusters_planning.md
-        cs_plan_ha.md
-        cs_plan_workers.md
+        cs_cluster_plan_network.md
+        cs_cluster_plan_ha.md
+        cs_worker_plan.md
         cs_clusters.md
-        cs_workers.md
+        cs_worker_add.md
 
     {: .topicgroup}
     Administering clusters
@@ -142,7 +142,7 @@ IBM Cloud Kubernetes Service
         [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
         [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
 
-    cs_regions.md
+    cs_locations.md
     cs_integrations_overview.md
     cs_access_reference.md
     {: .navgroup-end}
