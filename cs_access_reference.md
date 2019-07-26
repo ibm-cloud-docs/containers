@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,22 +23,16 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # User access permissions
 {: #access_reference}
 
 When you [assign cluster permissions](/docs/containers?topic=containers-users), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.cloud_notm}} IAM: [service access roles](#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
-
-
 ## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
+{[product_name_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
 <p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
@@ -58,7 +52,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 {: shortdesc}
 
 <table>
-<caption>Overview of CLI commands and API calls that require no permissions in {{site.data.keyword.containerlong_notm}}</caption>
+<caption>Overview of CLI commands and API calls that require no permissions in {[product_name_notm}}</caption>
 <thead>
 <th id="none-actions-action">Action</th>
 <th id="none-actions-cli">CLI command</th>
@@ -66,12 +60,12 @@ Any user in your account who runs the CLI command or makes the API call for the 
 </thead>
 <tbody>
 <tr>
-<td>View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.</td>
+<td>View a list of supported versions for managed add-ons in {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)</code></td>
 <td><code>[GET /v1/addon](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAddons)</code></td>
 </tr>
 <tr>
-<td>Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}.</td>
+<td>Target or view the API endpoint for {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks api](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
@@ -86,7 +80,7 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td>-</td>
 </tr>
 <tr>
-<td>Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}.</td>
+<td>Deprecated: View a list of Kubernetes versions supported in {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_kube_versions)</code></td>
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
@@ -101,12 +95,12 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td><code>[GET /v1/messages](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages)</code></td>
 </tr>
 <tr>
-<td>Deprecated: Find the {{site.data.keyword.containerlong_notm}} region that you are currently in.</td>
+<td>Deprecated: Find the {[product_name_notm}} region that you are currently in.</td>
 <td><code>[ibmcloud ks region](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Deprecated: Set the region for {{site.data.keyword.containerlong_notm}}.</td>
+<td>Deprecated: Set the region for {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set)</code></td>
 <td>-</td>
 </tr>
@@ -116,12 +110,12 @@ Any user in your account who runs the CLI command or makes the API call for the 
 <td><code>[GET /v1/regions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetRegions)</code></td>
 </tr>
 <tr>
-<td>View a list of supported locations in {{site.data.keyword.containerlong_notm}}.</td>
+<td>View a list of supported locations in {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)</code></td>
 <td><code>[GET /v1/locations](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations)</code></td>
 </tr>
 <tr>
-<td>View a list of supported versions in {{site.data.keyword.containerlong_notm}}.</td>
+<td>View a list of supported versions in {[product_name_notm}}.</td>
 <td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)</code></td>
 <td>-</td>
 </tr>
@@ -140,7 +134,7 @@ The **Viewer** platform role includes the [actions that require no permissions](
 {: shortdesc}
 
 <table>
-<caption>Overview of CLI commands and API calls that require the Viewer platform role in {{site.data.keyword.containerlong_notm}}</caption>
+<caption>Overview of CLI commands and API calls that require the Viewer platform role in {[product_name_notm}}</caption>
 <thead>
 <th id="view-actions-mngt">Action</th>
 <th id="view-actions-cli">CLI command</th>
@@ -281,7 +275,7 @@ The **Editor** platform role includes the permissions that are granted by **View
 {: shortdesc}
 
 <table>
-<caption>Overview of CLI commands and API calls that require the Editor platform role in {{site.data.keyword.containerlong_notm}}</caption>
+<caption>Overview of CLI commands and API calls that require the Editor platform role in {[product_name_notm}}</caption>
 <thead>
 <th id="editor-actions-mngt">Action</th>
 <th id="editor-actions-cli">CLI command</th>
@@ -448,7 +442,7 @@ The **Operator** platform role includes the permissions that are granted by **Vi
 {: shortdesc}
 
 <table>
-<caption>Overview of CLI commands and API calls that require the Operator platform role in {{site.data.keyword.containerlong_notm}}</caption>
+<caption>Overview of CLI commands and API calls that require the Operator platform role in {[product_name_notm}}</caption>
 <thead>
 <th id="operator-mgmt">Action</th>
 <th id="operator-cli">CLI command</th>
@@ -560,7 +554,7 @@ The **Administrator** platform role includes all permissions that are granted by
 {: shortdesc}
 
 <table>
-<caption>Overview of CLI commands and API calls that require the Administrator platform role in {{site.data.keyword.containerlong_notm}}</caption>
+<caption>Overview of CLI commands and API calls that require the Administrator platform role in {[product_name_notm}}</caption>
 <thead>
 <th id="admin-mgmt">Action</th>
 <th id="admin-cli">CLI command</th>
@@ -1088,3 +1082,6 @@ The following table shows the classic infrastructure permissions that the creden
 {: #classic-permissions-suggested}
 {: tab-title="Other common use cases"}
 {: tab-group="Classic infrastructure permissions"}
+
+
+

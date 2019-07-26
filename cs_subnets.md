@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Configuring subnets and IP addresses for clusters
 {: #subnets}
 
-Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your community Kubernetes or OpenShift cluster.
+Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your {{site.data.keyword.containerlong}} cluster.
 {:shortdesc}
 
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
@@ -509,5 +508,7 @@ However, if you have an existing router appliance, such as a [Virtual Router App
 
 To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 {: tip}
+
+
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-20"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Assigning cluster access
 {: #users}
 
-As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} community Kubernetes or OpenShift clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
+As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
 {: shortdesc} 
 
 ## Understanding access policies and roles
@@ -1325,3 +1325,5 @@ You can remove IBM Cloud infrastructure permissions for a user by using the {{si
 3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
 4. In each tab, deselect specific permissions.
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
+
+

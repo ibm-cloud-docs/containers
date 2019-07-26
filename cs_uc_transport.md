@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Transportation use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can
+These use cases highlight how workloads on {[product_name_tm}} can
 take advantage of toolchains for rapid app updates and multiregion deployments across the globe. At the same time, these workloads can connect to existing back-end systems, use Watson AI for personalization, and access IOT data with {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
@@ -38,7 +37,7 @@ take advantage of toolchains for rapid app updates and multiregion deployments a
 An IT Exec has worldwide shipping routing and scheduling systems that partners interact with. Partners require up-to-the-minute information from these systems that access IoT device data. But, these systems were unable to scale across the globe with sufficient HA.
 {: shortdesc}
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy.
+Why {{site.data.keyword.cloud_notm}}: {[product_name_notm}} scales containerized apps with five 9s of availability to meet growing demands. App deployments occur 40 times daily when Developers experiment easily, pushing changes to Development and Test systems quickly. The IoT Platform makes access to IoT data easy.
 
 Key technologies:    
 * [Multi-regions for business partner ecosystem ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
@@ -62,13 +61,13 @@ The solution is made up of these primary components:
 2. Customs paperwork that’s digitally shared with applicable ports and transit partners, including access control
 3. App for shipping customers that aggregates and communicates arrival information for shipped goods, including APIs for shipping customers to reuse shipment data in their own retail and business-to-business apps
 
-For the shipping company to work with global partners, the routing and scheduling systems required local modifications to fit each region’s language, regulations, and unique port logistics. {{site.data.keyword.containerlong_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia so that the apps reflected the needs of its partners, in each country.
+For the shipping company to work with global partners, the routing and scheduling systems required local modifications to fit each region’s language, regulations, and unique port logistics. {[product_name_notm}} offers global coverage in multiple regions, including North America, Europe, Asia, and Australia so that the apps reflected the needs of its partners, in each country.
 
 IoT devices stream data that {{site.data.keyword.messagehub_full}} distributes to the regional port apps and associated Customs and Container manifest data stores. {{site.data.keyword.messagehub_full}} is landing point for IoT events. It  distributes the events based on the managed connectivity that the Watson IoT Platform offers to {{site.data.keyword.messagehub_full}}.
 
 After events are in {{site.data.keyword.messagehub_full}}, they're persisted for immediate use in port transit apps and for any point in the future. Apps that require the lowest latency directly consume in real time from the event stream ({{site.data.keyword.messagehub_full}}). Other future apps, such as analytics tools, can choose to consume in a batch mode from the event store with {{site.data.keyword.cos_full}}.
 
-Since shipping data is shared with the customers of the company, the Developers ensure that the customers can use APIs to surface shipping data in their own apps. Examples of those apps are mobile tracking apps or web e-commerce solutions. The Developers are also busy with building and maintaining the regional port apps that gather and disseminate the customs records and shipping manifests. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {{site.data.keyword.containerlong_notm}} because IBM simplifies infrastructure management:
+Since shipping data is shared with the customers of the company, the Developers ensure that the customers can use APIs to surface shipping data in their own apps. Examples of those apps are mobile tracking apps or web e-commerce solutions. The Developers are also busy with building and maintaining the regional port apps that gather and disseminate the customs records and shipping manifests. In short, they need to focus on coding instead of managing the infrastructure. Thus, they chose {[product_name_notm}} because IBM simplifies infrastructure management:
 * Managing Kubernetes master, IaaS, and operational components, such as Ingress and storage
 * Monitoring health and recovery for worker nodes
 * Providing global compute, so Developers aren't responsible for infrastructure in several regions where they need workloads and data to reside
@@ -86,21 +85,21 @@ For Developers, much of the continuous integration and delivery (CI/CD) process 
 On-demand compute, storage, and event management that run in public cloud with access to shipment data across the globe, as needed
 
 Technical solution:
-* {{site.data.keyword.containerlong_notm}}
+* {[product_name_notm}}
 * {{site.data.keyword.messagehub_full}}
 * {{site.data.keyword.cos_full}}
 * {{site.data.keyword.contdelivery_full}}
 
 **Step 1: Containerize apps, by using microservices**
 
-* Integrate apps into a set of cooperative microservices in {{site.data.keyword.containerlong_notm}} based on functional areas of the app and its dependencies.
-* Deploy apps to containers in {{site.data.keyword.containerlong_notm}}.
+* Integrate apps into a set of cooperative microservices in {[product_name_notm}} based on functional areas of the app and its dependencies.
+* Deploy apps to containers in {[product_name_notm}}.
 * Provide standardized DevOps dashboards through Kubernetes.
 * Enables on-demand scaling of compute for batch and other inventory workloads that run infrequently.
 * Use {{site.data.keyword.messagehub_full}} to manage streaming data from IoT devices.
 
 **Step 2: Ensure global availability**
-* Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
+* Built-in HA tools in {[product_name_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 * Load-balancing, firewalls, and DNS are handled by IBM Cloud Internet Services.
 * Using the toolchains and Helm deployment tools, the apps are also deployed to clusters across the globe, so workloads and data meet regional requirements.
 
@@ -111,11 +110,11 @@ Technical solution:
 **Step 4: Deliver continuously**
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain, by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into clusters across the globe.
-* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps; tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
+* {[product_name_notm}} provides easy rollout and roll-back of apps; tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
 
 **Results**
 
-* With {{site.data.keyword.containerlong_notm}} and IBM CI/CD tools, regional versions of apps are hosted near to the physical devices that they gather data from.
+* With {[product_name_notm}} and IBM CI/CD tools, regional versions of apps are hosted near to the physical devices that they gather data from.
 * Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial development is fast, and updates are frequent.
 * Shipping customers have real-time access to shipments’ locations, delivery schedules, and even approved port records.
 * Transit partners at various shipping terminals are aware of manifests and shipment details so that onsite logistics are improved, instead of delayed.
@@ -127,7 +126,7 @@ Technical solution:
 An HR Exec (CHRO) needs a new HR benefits site with an innovative chatbot, but current Development tools and platform mean long lead times for apps to go live. This situation includes long waits for hardware procurement.
 {: shortdesc}
 
-Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of compute. Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a boost when they add on IBM Watson Assistant. The new benefits site was created in less than 3 weeks.
+Why {{site.data.keyword.cloud_notm}}: {[product_name_notm}} provides easy spin-up of compute. Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a boost when they add on IBM Watson Assistant. The new benefits site was created in less than 3 weeks.
 
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -153,7 +152,7 @@ They need a solution that helps the Developers and their users:
 * CHATBOT to provide authentic conversations about benefits and resolve users requests and questions efficiently.
 
 Technical solution:
-* {{site.data.keyword.containerlong_notm}}
+* {[product_name_notm}}
 * IBM Watson Assistant and Tone Analyzer
 * {{site.data.keyword.contdelivery_full}}
 * IBM Logging and Monitoring
@@ -162,19 +161,19 @@ Technical solution:
 
 Accelerated development is a key win for the HR Exec. The team gets started by containerizing their apps and putting them in the cloud. With the use of modern containers, Developers can experiment easily with Node.js SDK and push changes to Development and Test systems, which are scaled out on separate clusters. Those pushes were automated with open toolchains and {{site.data.keyword.contdelivery_full}}. No longer were updates to the HR site languishing in slow, error-prone build processes. They can deliver incremental updates to their site, daily or even more frequently.  Moreover logging and monitoring for the HR site is rapidly integrated, especially for how the site pulls personalized data from back-end benefit systems. Developers don’t waste time building complex logging systems, just to be able to troubleshoot live systems. Developers don't need to become experts in cloud security, they can enforce policy driven authentication easily by using {{site.data.keyword.appid_full_notm}}.
 
-With {{site.data.keyword.containerlong_notm}}, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the HR site, they could easily design Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for less personnel costs is that IBM manages Kubernetes, so the Developers can focus on delivering better employee experience for benefits enrollment.
+With {[product_name_notm}}, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the HR site, they could easily design Kubernetes clusters to fit their CPU, RAM, and storage needs. Another factor for less personnel costs is that IBM manages Kubernetes, so the Developers can focus on delivering better employee experience for benefits enrollment.
 
-{{site.data.keyword.containerlong_notm}} provides scalable compute resources and the associated DevOps dashboards to create, scale, and tear down apps and services on demand. Using industry-standard containers technology apps can be quickly developed and shared across multiple Development, Test, and Production environments. This setup provides the immediate benefit of scalability. Using Kubernetes rich set of deployment and runtime objects, the HR team can monitor and manage upgrades to apps reliably. They can also replicate and scale the apps, by using defined rules and the automated Kubernetes orchestrator.
+{[product_name_notm}} provides scalable compute resources and the associated DevOps dashboards to create, scale, and tear down apps and services on demand. Using industry-standard containers technology apps can be quickly developed and shared across multiple Development, Test, and Production environments. This setup provides the immediate benefit of scalability. Using Kubernetes rich set of deployment and runtime objects, the HR team can monitor and manage upgrades to apps reliably. They can also replicate and scale the apps, by using defined rules and the automated Kubernetes orchestrator.
 
 **Step 1: Containers, microservices, and the Garage Method**
-* Apps are built in a set of cooperative microservices that run in {{site.data.keyword.containerlong_notm}}. The architecture represents the functional areas of the app with the most quality problems.
-* Deploy apps to container in {{site.data.keyword.containerlong_notm}}, continuously scanned with IBM Vulnerability Advisor.
+* Apps are built in a set of cooperative microservices that run in {[product_name_notm}}. The architecture represents the functional areas of the app with the most quality problems.
+* Deploy apps to container in {[product_name_notm}}, continuously scanned with IBM Vulnerability Advisor.
 * Provide standardized DevOps dashboards through Kubernetes.
 * Adopt the essential agile and iterative development practices within the IBM Garage Method to enable frequent releases of new functions, patches, and fixes without downtime.
 
 **Step 2: Connections to existing benefits back-end**
 * {{site.data.keyword.SecureGatewayfull}} is used to create a secure tunnel to on-premises systems that host the benefits systems.  
-* Combination of on-premises data and {{site.data.keyword.containerlong_notm}} lets them access sensitive data while they adhere to regulations.
+* Combination of on-premises data and {[product_name_notm}} lets them access sensitive data while they adhere to regulations.
 * Chatbot conversations fed back into HR policies, allowing the benefits site to reflect which benefits were most and least popular, including targeted improvements to poorly performing initiatives.
 
 **Step 3: Chatbot and personalization**
@@ -184,11 +183,13 @@ With {{site.data.keyword.containerlong_notm}}, they went from over-built hardwar
 **Step 4: Deliver continuously across the globe**
 * {{site.data.keyword.contdelivery_full}} helps Developers to quickly provision an integrated toolchain, by using customizable, shareable templates with tools from IBM, third parties, and open source. Automate builds and tests, controlling quality with analytics.
 * After Developers build and test the apps in their Development and Test clusters, they use the IBM CI/CD toolchains to deploy apps into Production clusters across the globe.
-* {{site.data.keyword.containerlong_notm}} provides easy rollout and roll-back of apps. Tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
-* Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
+* {[product_name_notm}} provides easy rollout and roll-back of apps. Tailored apps are deployed to meet regional requirements through the intelligent routing and load balancing of Istio.
+* Built-in HA tools in {[product_name_notm}} balance the workload within each geographic region, including self-healing and load balancing.
 
 **Results**
 * With tools like the chatbot, the HR team proved to their workforce that innovation was part of the corporate culture, not just buzz words.
 * Authenticity with personalization in the site addressed the changing expectations of the airline’s workforce today.
 * Last-minute updates to the HR site, including ones that driven by the employees chatbot conversations, went live quickly because Developers were pushing changes at least 10 times daily.
 * With infrastructure management taken care of by IBM, the Development team was freed up to deliver the site in only 3 weeks.
+
+

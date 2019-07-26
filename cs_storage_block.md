@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -22,8 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Storing data on classic IBM Cloud Block Storage
 {: #block_storage}
@@ -63,12 +61,12 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
 
     The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), or to [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
-3.  Verify that Tiller is installed with a service account.
+2.  Verify that Tiller is installed with a service account.
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -83,19 +81,19 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-4. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
+3. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
-5. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+4. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-6. Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+5. Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
    helm install iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -145,7 +143,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: screen}
 
-7. Verify that the installation was successful.
+6. Verify that the installation was successful.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -160,7 +158,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-8. Verify that the storage classes for block storage were added to your cluster.
+7. Verify that the storage classes for block storage were added to your cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -179,7 +177,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: screen}
 
-9. Repeat these steps for every cluster where you want to provision block storage.
+8. Repeat these steps for every cluster where you want to provision block storage.
 
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 
@@ -1708,4 +1706,6 @@ The following examples create a storage class that provisions block storage with
   {: codeblock}
 
 <br />
+
+
 

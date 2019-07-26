@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-24"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
@@ -1323,3 +1322,5 @@ To deploy a stateful set that uses object storage:
 </tr>
 </tbody>
 </table>
+
+
