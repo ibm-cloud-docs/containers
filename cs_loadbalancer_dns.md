@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
 
@@ -33,7 +33,7 @@ After you set up network load balancers (NLBs), you can create DNS entries for t
 <dl>
 <dt>Host name</dt>
 <dd>When you create a public NLB in a single-zone or multizone cluster, you can expose your app to the internet by creating a host name for the NLB IP address. Additionally, {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you.
-<p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in 3 zones in US-South, you can create the host name `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the 3 NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
+<p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in three zones in US-South, you can create the host name `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the three NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
 Note that you currently cannot create host names for private NLBs.</dd>
 <dt>Health check monitor</dt>
 <dd>Enable health checks on the NLB IP addresses behind a single host name to determine whether they are available or not. When you enable a monitor for your host name, the monitor health checks each NLB IP and keeps the DNS lookup results updated based on these health checks. For example, if your NLBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your host name returns all 3 IPs, 1 of which the client accesses at random. If the NLB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that IP fails, the monitor removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` IPs.</dd>
@@ -139,7 +139,7 @@ For example, a host name that you create for an NLB might look like `mycluster-a
 <td>The name of your cluster.
 <ul><li>If the cluster name is 26 characters or fewer, the entire cluster name is included and is not modified: <code>myclustername</code>.</li>
 <li>If the cluster name is 26 characters or greater and the cluster name is unique in this region, only the first 24 characters of the cluster name are used: <code>myveryverylongclusternam</code>.</li>
-<li>If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with 6 random characters is added: <code>myveryverylongclu-ABC123</code>.</li></ul>
+<li>If the cluster name is 26 characters or greater and there is an existing cluster of the same name in this region, only the first 17 characters of the cluster name are used and a dash with six random characters is added: <code>myveryverylongclu-ABC123</code>.</li></ul>
 </td>
 </tr>
 <tr>
@@ -243,7 +243,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   </tr>
   <tr>
   <td><code>--expected-body &lt;expected-body&gt;</code></td>
-  <td>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive sub-string that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</td>
+  <td>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</td>
   </tr>
   <tr>
   <td><code>--expected-codes &lt;expected-codes&gt;</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Planning highly available persistent storage
 {: #storage_planning}
 
 ## Choosing a storage solution
 {: #choose_storage_solution}
 
-Before you can decide what type of storage is the right solution for you and your community Kubernetes or OpenShift clusters, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
+Before you can decide what type of storage is the right solution for your {{site.data.keyword.containerlong}} clusters, you must understand your app requirements, the type of data that you want to store, and how often you want to access this data.
 {: shortdesc}
 
 1. Decide whether your data must be permanently stored, or if your data can be removed at any time.
@@ -377,4 +375,6 @@ nodes. Every node stores only a part of the data. </td>
 </tr>
 </tbody>
 </table>
+
+
 

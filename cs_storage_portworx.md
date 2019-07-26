@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-25"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -40,31 +40,31 @@ Portworx aggregates available storage that is attached to your worker nodes and 
 Portworx also comes with additional features that you can use for your stateful apps, such as volume snapshots, volume encryption, isolation, and an integrated Storage Orchestrator for Kubernetes (Stork) to ensure optimal placement of volumes in the cluster. For more information, see the [Portworx documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/).
 
 **What worker node flavor in {{site.data.keyword.containerlong_notm}} is the right one for Portworx?** </br>
-{{site.data.keyword.containerlong_notm}} provides bare metal worker node flavors that are optimized for [software-defined storage (SDS) usage](/docs/containers?topic=containers-planning_worker_nodes#sds) and that come with one or more raw, unformatted, and unmounted local disks that you can use for your Portworx storage layer. Portworx offers best performance when you use SDS worker node machines that come with 10Gbps network speed.
+{{site.data.keyword.containerlong_notm}} provides bare metal worker node flavors that are optimized for [software-defined storage (SDS) usage](/docs/containers?topic=containers-planning_worker_nodes#sds). These flavors also come with one or more raw, unformatted, and unmounted local disks that you can use for your Portworx storage layer. Portworx offers best performance when you use SDS worker node machines that come with 10 Gbps network speed.
 
 **What if I want to run Portworx on non-SDS worker nodes?** </br>
-You can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Non-SDS worker nodes can be virtual or bare metal. If you want to use virtual machines, use a worker node flavor of `b2c.16x64` or better. Virtual machines with a flavor of `b3c.4x16` or `u3c.2x4` do not provide the required resources for Portworx to work properly. Keep in mind that virtual machines come with 1000Mbps that is not sufficient for ideal performance of Portworx. Bare metal machines come with sufficient compute resources and network speed for Portworx, but you must [add raw, unformatted, and unmounted block storage](#create_block_storage) before you can use these machines.
+You can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Non-SDS worker nodes can be virtual or bare metal. If you want to use virtual machines, use a worker node flavor of `b2c.16x64` or better. Virtual machines with a flavor of `b3c.4x16` or `u3c.2x4` do not provide the required resources for Portworx to work properly. Keep in mind that virtual machines come with 1000 Mbps that is not sufficient for ideal performance of Portworx. Bare metal machines come with sufficient compute resources and network speed for Portworx, but you must [add raw, unformatted, and unmounted block storage](#create_block_storage) before you can use these machines.
 
 **How can I make sure that my data is stored highly available?** </br>
-You need at least 3 worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) and replicate your volumes across SDS worker nodes in 3 or more zones.
+You need at least three worker nodes in your Portworx cluster so that Portworx can replicate your data across nodes. By replicating your data across worker nodes, Portworx can ensure that your stateful app can be rescheduled to a different worker node in case of a failure without losing data. For even higher availability, use a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) and replicate your volumes across SDS worker nodes in 3 or more zones.
 
 **What volume topology offers the best performance for my pods?** </br>
-One of the biggest challenges when running stateful apps in a cluster is to make sure that your container can be rescheduled onto another host if the container or the entire host fails. In Docker, when a container must be rescheduled onto a different host, the volume does not move to the new host. Portworx can be configured to run `hyper-converged` to ensure that your compute resources and the storage are always placed onto the same worker node. When your app must be rescheduled, Portworx moves your app to a worker node where one of your volume replicas resides to ensure local-disk access speed and best performance for your stateful app. Running `hyper-converged` offers the best performance for your pods, but requires storage to be available on all worker nodes in your cluster.
+One of the biggest challenges when you run stateful apps in a cluster is to make sure that your container can be rescheduled onto another host if the container or the entire host fails. In Docker, when a container must be rescheduled onto a different host, the volume does not move to the new host. Portworx can be configured to run `hyper-converged` to ensure that your compute resources and the storage are always placed onto the same worker node. When your app must be rescheduled, Portworx moves your app to a worker node where one of your volume replicas resides to ensure local-disk access speed and best performance for your stateful app. Running `hyper-converged` offers the best performance for your pods, but requires storage to be available on all worker nodes in your cluster.
 
 You can also choose to use only a subset of worker nodes for your Portworx storage layer. For example, you might have a worker pool with SDS worker nodes that come with local raw block storage, and another worker pool with virtual worker nodes that do not come with local storage. When you install Portworx, a Portworx pod is scheduled onto every worker node in your cluster as part of a daemon set. Because your SDS worker nodes have local storage, these worker nodes are included into the Portworx storage layer only. Your virtual worker nodes are not included as a storage node because of the missing local storage. However, when you deploy an app pod to your virtual worker node, this pod can still access data that is physically stored on an SDS worker node by using the Portworx daemon set pod. This setup is referred to as `storage-heavy` and offers slightly slower performance than the `hyper-converged` setup because the virtual worker node must talk to the SDS worker node over the private network to access the data.
 
 **What do I need to provision Portworx?** </br>
-{{site.data.keyword.containerlong}} provides worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-planning_worker_nodes#sds) that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. The minimum requirements of a worker node to successfully run Portworx include:
+{{site.data.keyword.containerlong}} provides worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-planning_worker_nodes#sds) that come with 10 Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. The minimum requirements of a worker node to successfully run Portworx include:
 - 4 CPU cores
-- 4GB memory
-- 128GB of raw unformatted storage
-- 10Gbps network speed
+- 4 GB memory
+- 128 GB of raw unformatted storage
+- 10 Gbps network speed
 
 **What limitations must I plan for?** </br>
-Portworx is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you cannot use Portworx in your cluster, unless you open up all egress network traffic on TCP port 443, or enable the public service endpoint.
+Portworx is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is  enabled, you cannot use Portworx in your cluster, unless you open up all egress network traffic on TCP port 443, or enable the public service endpoint.
 
 
-All set? Let's start with [creating a cluster with an SDS worker pool of at least 3 worker nodes](/docs/containers?topic=containers-clusters#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx) in your cluster and creating your first hyper-converged storage cluster.  
+All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx) in your cluster and creating your first hyper-converged storage cluster.  
 
 ## Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes
 {: #create_block_storage}
@@ -210,7 +210,7 @@ The following steps show how to provision and set up the {{site.data.keyword.com
 ## Installing Portworx in your cluster
 {: #install_portworx}
 
-Install Portworx with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. In addition, [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) is also installed on your Kubernetes cluster. Stork is the Portworx storage scheduler and allows you to co-locate pods with their data and create and restore snapshots of Portworx volumes.
+Install Portworx with a Helm chart. The Helm chart deploys a trial version of the Portworx enterprise edition `px-enterprise` that you can use for 30 days. In addition, [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) is also installed on your Kubernetes cluster. Stork is the Portworx storage scheduler. With Stork, you can co-locate pods with their data and create and restore snapshots of Portworx volumes.
 {: shortdesc}
 
 Looking for instructions about how to update or remove Portworx? See [Updating Portworx](#update_portworx) and [Removing Portworx](#remove_portworx).
@@ -220,7 +220,7 @@ Before you begin:
 - [Create or use an existing cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#create_block_storage).
 - Create a [{{site.data.keyword.composeForEtcd}} service instance](#portworx_database) to store the Portworx configuration and metadata.
-- Decide if you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes).
+- Decide whether you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To install Portworx:
@@ -242,7 +242,7 @@ To install Portworx:
     ```
     {: screen}
 
-3. Retrieve the etcd endpoint, user name and password of the Portworx database that you set up earlier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials).
+3. Retrieve the etcd endpoint, user name, and password of the Portworx database that you set up earlier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials).
 
 4. Download the Portworx Helm chart.
    ```
@@ -264,7 +264,7 @@ To install Portworx:
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
    - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance are stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
+   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance is stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
    - **`etcd.ca`**: Enter the path to the Certificate Authority (CA) file. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts/ca.pem`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
@@ -581,7 +581,7 @@ The following image illustrates the encryption workflow in Portworx with {{site.
 
 1. The user creates a PVC with a Portworx storage class and requests the storage to be encrypted.
 2. Portworx invokes the {{site.data.keyword.keymanagementservicelong_notm}} API `WrapCreateDEK` to create a passphrase by using the customer root key (CRK) that is stored in the Portworx secret.
-3. The {{site.data.keyword.keymanagementservicelong_notm}} service instance generates a 256 bit passphrase and wraps the passphrase in the DEK. The DEK is returned to the Portworx cluster.
+3. The {{site.data.keyword.keymanagementservicelong_notm}} service instance generates a 256-bit passphrase and wraps the passphrase in the DEK. The DEK is returned to the Portworx cluster.
 4. The Portworx cluster uses the passphrase to encrypt the volume.
 5. The Portworx cluster stores the DEK in plain text in the Portworx etcd database, associates the volume ID with the DEK, and removes the passphrase from its memory.
 
@@ -853,7 +853,7 @@ Now that your Portworx cluster is all set, you can start creating Portworx volum
 To request storage from your Portworx cluster and use it in your app, you must start with creating or finding a storage class that you can use to provision a Portworx volume.
 {: shortdesc}
 
-1. List available storage classes in your cluster and check if you can use an existing Portworx storage class. Portworx comes with a set of default storage classes that are optimized for database usage to share data across pods.
+1. List available storage classes in your cluster and check whether you can use an existing Portworx storage class. Portworx comes with a set of default storage classes that are optimized for database usage to share data across pods.
    ```
    kubectl get storageclasses | grep portworx
    ```
@@ -892,19 +892,19 @@ To request storage from your Portworx cluster and use it in your app, you must s
    </tr>
    <tr>
    <td><code>parameters.repl</code></td>
-   <td>Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across 3 different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across 3 worker nodes in different zones. <strong>Note: </strong>You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails. </td>
+   <td>Enter the number of replicas for your data that you want to store across different worker nodes. Allowed numbers are `1`,`2`, or `3`. For example, if you enter `3`, then your data is replicated across three different worker nodes in your Portworx cluster. To store your data highly available, use a multizone cluster and replicate your data across three worker nodes in different zones. <strong>Note: </strong>You must have enough worker nodes to fulfill your replication requirement. For example, if you have two worker nodes, but you specify three replicas, then the creation of the PVC with this storage class fails. </td>
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
-   <td>Specify if you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: <ul><li><strong>true</strong>: Enter <code>true</code> to enable encryption for your Portworx volumes. To encrypt volumes you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](#encrypt_volumes). </li><li><strong>false</strong>: When you enter <code>false</code>, your Portworx volumes are not encrypted. </li></ul> If you do not specify this option, your Portworx volumes are not encrypted by default. <strong>Note:</strong> You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  </td>
+   <td>Specify whether you want to encrypt the data in your volume with {{site.data.keyword.keymanagementservicelong_notm}}. Choose between the following options: <ul><li><strong>true</strong>: Enter <code>true</code> to enable encryption for your Portworx volumes. To encrypt volumes, you must have an {{site.data.keyword.keymanagementservicelong_notm}} service instance and a Kubernetes secret that holds your customer root key. For more information about how to set up encryption for Portworx volumes, see [Encrypting your Portworx volumes](#encrypt_volumes). </li><li><strong>false</strong>: When you enter <code>false</code>, your Portworx volumes are not encrypted. </li></ul> If you do not specify this option, your Portworx volumes are not encrypted by default. <strong>Note:</strong> You can choose to enable volume encryption in your PVC, even if you disabled encryption in your storage class. The setting that you make in the PVC take precedence over the settings in the storage class.  </td>
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. </br><br> When you create a PVC with a storage class, the number of replicas that you specify in <code>parameters/repl</code> takes precedence over the I/O priority. For example, when you specify 3 replicas that you want to store on high speed disks, but you only have one worker node with a high speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. </td>
+   <td>Enter the Portworx I/O priority that you want to request for your data. Available options are `high`, `medium`, and `low`. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on the network bandwidth of your worker node and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes. </br><br> When you create a PVC with a storage class, the number of replicas that you specify in <code>parameters/repl</code> takes precedence over the I/O priority. For example, when you specify three replicas that you want to store on high-speed disks, but you have only one worker node with a high-speed disk in your cluster, then your PVC creation still succeeds. Your data is replicated across both high and low speed disks. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
-   <td>Define if you want to allow multiple pods to access the same volume. Choose between the following options: <ul><li><strong>True: </strong>If you set this option to <code>true</code>, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. </li><li><strong>False: </strong>If you set this option to <code>false</code>, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod cannot access the volume.</li></ul></td>
+   <td>Define whether you want to allow multiple pods to access the same volume. Choose between the following options: <ul><li><strong>True: </strong>If you set this option to <code>true</code>, then you can access the same volume by multiple pods that are distributed across worker nodes in different zones. </li><li><strong>False: </strong>If you set this option to <code>false</code>, you can access the volume from multiple pods only if the pods are deployed onto the worker node that attaches the physical disk that backs the volume. If your pod is deployed onto a different worker node, the pod cannot access the volume.</li></ul></td>
    </tr>
    </tbody>
    </table>
@@ -1043,7 +1043,7 @@ To access the storage from your app, you must mount the PVC to your app.
       </tr>
     <tr>
     <td><code>spec.schedulerName</code></td>
-    <td>Use [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) as the scheduler for your Portworx cluster. Stork allows you to co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. </td>
+    <td>Use [Stork ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) as the scheduler for your Portworx cluster. With Stork, you can co-locate pods with their data, provides seamless migration of pods in case of storage errors and makes it easier to create and restore snapshots of Portworx volumes. </td>
     </tr>
     <tr>
     <td><code>spec.containers.image</code></td>
@@ -1216,7 +1216,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
    ```
    {: pre}
 
-   When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see if the PV is removed.
+   When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
 
 6. If your PV is not deleted, manually remove the PV.
    ```
@@ -1230,7 +1230,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
    ```
    {: pre}
 
-8. Verify that your Portworx volume is removed. Log in to one of your Portworx pod in your cluster to list your volumes. To find available Portworx pods, run `kubectl get pods -n kube-system | grep portworx`.
+8. Verify that your Portworx volume is removed. Log in to one of your Portworx pods in your cluster to list your volumes. To find available Portworx pods, run `kubectl get pods -n kube-system | grep portworx`.
    ```
    kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume list
    ```

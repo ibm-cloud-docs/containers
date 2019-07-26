@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -22,8 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Understanding Kubernetes storage basics
 {: #kube_concepts}
@@ -284,3 +282,5 @@ To update existing PVs:
 Now that you labeled your existing PVs, you can mount the PV to your multizone cluster. See the following links for more information.
 - Use [existing NFS file storage](/docs/containers?topic=containers-file_storage#existing_file)
 - Use [existing block storage](/docs/containers?topic=containers-block_storage#existing_block)
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Restricting network traffic to edge worker nodes
 {: #edge}
 
-Edge worker nodes can improve the security of your community Kubernetes or OpenShift cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload in {{site.data.keyword.containerlong}}.
+Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload.
 {:shortdesc}
 
 When these worker nodes are marked for networking only, other workloads cannot consume the CPU or memory of the worker node and interfere with networking.
@@ -41,7 +40,7 @@ If you have a multizone cluster and want to restrict network traffic to edge wor
 Add the `dedicated=edge` label to two or more worker nodes on each public or private VLAN in your cluster to ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only.
 {:shortdesc}
 
-In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy to edge worker nodes. In Kubernetes 1.13 and earlier, public and private ALBs and public NLBs can deploy to edge nodes, but private NLBs must deploy to non-edge worker nodes in your cluster only.
+**Community Kubernetes clusters**: In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy to edge worker nodes. In Kubernetes 1.13 and earlier, public and private ALBs and public NLBs can deploy to edge nodes, but private NLBs must deploy to non-edge worker nodes in your cluster only.
 {: note}
 
 Before you begin:
@@ -92,7 +91,7 @@ Before you begin:
 
 4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.
 
-  If your cluster runs Kubernetes 1.14 or later, you can deploy both public and private NLBs and ALBs to the edge worker nodes. In Kubernetes 1.13 and earlier, only public and private ALBs and public NLBs can deploy to edge nodes, so do not redeploy private NLB services.
+  **Community Kubernetes clusters**: If your cluster runs Kubernetes 1.14 or later, you can deploy both public and private NLBs and ALBs to the edge worker nodes. In Kubernetes 1.13 and earlier, only public and private ALBs and public NLBs can deploy to edge nodes, so do not redeploy private NLB services.
   {: note}
 
   ```
@@ -223,3 +222,5 @@ Before you begin:
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
+

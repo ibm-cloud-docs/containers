@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Transportation use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can
+These use cases highlight how workloads on {[product_name_tm}} can
 take advantage of toolchains for rapid app updates and multiregion deployments across the globe. At the same time, these workloads can connect to existing back-end systems, use Watson AI for personalization, and access IOT data with {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
@@ -192,3 +191,5 @@ With {{site.data.keyword.containerlong_notm}}, they went from over-built hardwar
 * Authenticity with personalization in the site addressed the changing expectations of the airline’s workforce today.
 * Last-minute updates to the HR site, including ones that driven by the employees chatbot conversations, went live quickly because Developers were pushing changes at least 10 times daily.
 * With infrastructure management taken care of by IBM, the Development team was freed up to deliver the site in only 3 weeks.
+
+

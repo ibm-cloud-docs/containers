@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-17"
+lastupdated: "2019-07-24"
 
 keywords: kubernetes, iks
 
@@ -78,7 +78,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     -   The base {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in plug-in (`ibmcloud ks`). Use this plug-in to manage your Kubernetes clusters, such as to resize worker pools for added compute capacity or to bind {{site.data.keyword.Bluemix_notm}} services to the cluster.
     -   {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}.
-    -   The Kubernetes CLI (`kubectl`). Use this CLI to deploy and manage Kubernetes resources such as your app's pods and services. 
+    -   The Kubernetes CLI (`kubectl`). Use this CLI to deploy and manage Kubernetes resources such as your app's pods and services.
 
     If you want to use the {{site.data.keyword.Bluemix_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
     {: tip}
@@ -92,7 +92,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     ibmcloud plugin list
     ```
     {: pre}
-  
+
     The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registryshort_notm}} plug-in is displayed in the results as **container-registry**.
 6.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.Bluemix_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
@@ -116,7 +116,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.13.8
     ```
     {: screen}
-8.  Set the context for your Kubernetes cluster in your CLI. 
+8.  Set the context for your Kubernetes cluster in your CLI.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.<p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
         ```
         ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
@@ -237,12 +237,12 @@ To deploy the app:
     *   `Dockerfile`: The build definitions for the image.
     *   `app.js`: The Hello world app.
     *   `package.json`: Metadata about the app.
-    
+
     ```
     git clone https://github.com/IBM/container-service-getting-started-wt.git
     ```
     {: pre}
-    
+
 2.  Navigate to the `Lab 1` directory.
     ```
     cd 'container-service-getting-started-wt/Lab 1'
@@ -253,7 +253,7 @@ To deploy the app:
     ibmcloud cr login
     ```
     {: pre}
-    
+
     If you forgot your namespace in {{site.data.keyword.registryshort_notm}}, run the following command.
     ```
     ibmcloud cr namespace-list
@@ -261,7 +261,7 @@ To deploy the app:
     {: pre}
 4.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
-    Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. To get the registry region that you are currently in, run `ibmcloud cr region`.
+    Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/services/Registry?topic=registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
     ```
     ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:1 .
@@ -604,7 +604,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         cd 'container-service-getting-started-wt/Lab 3/watson-talk'
         ```
         {: pre}
-        
+
         ```
         ibmcloud cr build -t <region>.icr.io/<namespace>/watson-talk .
         ```

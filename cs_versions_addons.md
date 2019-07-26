@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-17"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -58,6 +58,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td> - / 334</td>
+<td>Expected 30 July 2019</td>
+<td>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed. By default, the readiness check waits 15 seconds after the pod restarts to start checking whether all Ingress files are parsed. If all files are parsed 15 seconds after the pod restarts, the ALB pod begins to route traffic requests again. If all files are not parsed 15 seconds after the pod restarts, the pod does not route traffic, and the readiness check continues to check every 15 seconds for a maximum timeout of 5 minutes. After 5 minutes, the ALB pod begins to route traffic.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>512 / 334</td>
 <td>17 July 2019</td>
@@ -239,6 +245,12 @@ Refer to the following table for a summary of changes for each build of the Flue
 <th>Disruptive changes</th>
 </tr>
 </thead>
+<tr>
+<td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
+<td>22 Jul 2019</td>
+<td>Updates Alpine packages for [CVE-2019-8905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905), [CVE-2019-8906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906), and [CVE-2019-8907 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>e7c10d74350dc64d4d92ba7f72bb4ff9219315d2</td>
 <td>30 May 2019</td>

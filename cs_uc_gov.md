@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-18"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Government use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. These workloads are isolated in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
+These use cases highlight how workloads on {[product_name_tm}} benefit from the public cloud. These workloads are isolated in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
 {: shortdesc}
 
 ## Regional government improves collaboration and velocity with community Developers who combine public-private data
@@ -187,3 +186,5 @@ Technical solution:
 * Shipping customers and government officials have access to manifest data and can share customs data, while they comply with local regulations.
 * The shipping company benefits from improved logistics management in the supply chain: reduced costs and faster clearance times.
 * 99% are digital declarations, and 90% of imports processed without human intervention.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-12"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -22,8 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Storing data on classic IBM Cloud File Storage
 {: #file_storage}
@@ -164,7 +162,7 @@ To decide on a storage configuration:
          </tbody></table>
 
 5. Choose if you want to keep your data after the cluster or the persistent volume claim (PVC) is deleted.
-   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure (SoftLayer) account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file).
+   - If you want to keep your data, then choose a `retain` storage class. When you delete the PVC, only the PVC is deleted. The PV, the physical storage device in your IBM Cloud infrastructure account, and your data still exist. To reclaim the storage and use it in your cluster again, you must remove the PV and follow the steps for [using existing file storage](#existing_file).
    - If you want the PV, the data, and your physical file storage device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 6. Choose if you want to be billed hourly or monthly. Check the [pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing) for more information. By default, all file storage devices are provisioned with an hourly billing type.
@@ -178,11 +176,11 @@ To decide on a storage configuration:
 ## Adding file storage to apps
 {: #add_file}
 
-Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure (SoftLayer) account.
+Create a persistent volume claim (PVC) to [dynamically provision](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) file storage for your cluster. Dynamic provisioning automatically creates the matching persistent volume (PV) and orders the physical storage device in your IBM Cloud infrastructure account.
 {:shortdesc}
 
 Before you begin:
-- If you have a firewall, [allow egress access](/docs/containers?topic=containers-firewall#pvc) for the IBM Cloud infrastructure (SoftLayer) IP ranges of the zones that your clusters are in so that you can create PVCs.
+- If you have a firewall, [allow egress access](/docs/containers?topic=containers-firewall#pvc) for the IBM Cloud infrastructure IP ranges of the zones that your clusters are in so that you can create PVCs.
 - [Decide on a pre-defined storage class](#file_predefined_storageclass) or create a [customized storage class](#file_custom_storageclass).
 
 Looking to deploy file storage in a stateful set? See [Using file storage in a stateful set](#file_statefulset) for more information.
@@ -482,7 +480,7 @@ To use existing storage in a different cluster than the one where you provisione
 **For persistent storage that was provisioned outside the cluster:** </br>
 If you want to use existing storage that you provisioned earlier, but never used in your cluster before, you must make the storage available in the same subnet as your worker nodes.
 
-1.  {: #external_storage}From the [IBM Cloud infrastructure (SoftLayer) portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic?), click **Storage**.
+1.  {: #external_storage}From the [IBM Cloud infrastructure portal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic?), click **Storage**.
 2.  Click **File Storage** and from the **Actions** menu, select **Authorize Host**.
 3.  Select **Subnets**.
 4.  From the drop-down list, select the private VLAN subnet that your worker node is connected to. To find the subnet of your worker node, run `ibmcloud ks workers --cluster <cluster_name>` and compare the `Private IP` of your worker node with the subnet that you found in the drop-down list.
@@ -1023,7 +1021,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure (SoftLayer) account.
+3. Modify the size or IOPS of your volume in your IBM Cloud infrastructure account.
 
    Example for performance storage:
    ```
@@ -1486,3 +1484,6 @@ The following customized storage class lets you define the NFS version that you 
    mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
+
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-14"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Financial services use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can
+These use cases highlight how workloads on {{site.data.keyword.containerlong}} can
 take advantage of high availability, high-performance compute, easy spin-up of clusters for faster development, and AI from {{site.data.keyword.ibmwatson}}.
 {: shortdesc}
 
@@ -180,3 +179,5 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * In parallel, the provider implemented simple time-boxed iterations to get a handle on the existing technical debt.
 * With the number of transactions they process, they can scale their operations exponentially.
 * At the same time, new fraud analysis with {{site.data.keyword.watson}} increased the speed of detection and prevention, reducing fraud 4 times more than the region’s average.
+
+

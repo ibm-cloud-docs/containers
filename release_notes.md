@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -46,11 +46,19 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
+  <td>26 July 2019</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Red Hat OpenShift on IBM Cloud</strong>: Added [integrations](/docs/openshift?topic=openshift-openshift_integrations), [locations](/docs/openshift?topic=openshift-regions-and-zones), and [security context constraints](/docs/openshift?topic=openshift-openshift_scc) topics. Added the `basic-users` and `self-provisioning` cluster roles to the [IAM service role to RBAC sync](/docs/openshift?topic=openshift-access_reference#service) topic.</td>
+</tr>
+<tr>
+  <td>23 July 2019</td>
+  <td><strong>Fluentd changelog</strong>: Fixes [Alpine vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog).</td>
+</tr>
+<tr>
   <td>22 July 2019</td>
   <td><ul>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version policy</strong>: Increased the [version deprecation](/docs/containers?topic=containers-cs_versions#version_types) period from 30 to 45 days.</li>
       <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.14.4_1526](/docs/containers?topic=containers-changelog#1144_1526_worker), [1.13.8_1529](/docs/containers?topic=containers-changelog#1138_1529_worker), and [1.12.10_1560](/docs/containers?topic=containers-changelog#11210_1560_worker) worker node patch updates.</li>
-    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: [Version 1.11](/docs/containers?topic=containers-changelog#111_changelog) is unsupported.</li>/ul>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: [Version 1.11](/docs/containers?topic=containers-changelog#111_changelog) is unsupported.</li></ul>
   </td>
 </tr>
 <tr>

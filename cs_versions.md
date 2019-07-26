@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-25"
 
 keywords: kubernetes, iks
 
@@ -151,7 +151,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.11](#cs_v111)</td>
   <td>14 Aug 2018</td>
-  <td>20 Jul 2019 `†`</td>
+  <td>20 Jul 2019</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>

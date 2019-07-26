@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Controlling traffic with network policies
 {: #network_policies}
 
-Every community Kubernetes or OpenShift cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in {{site.data.keyword.containerlong}}.
+Every {{site.data.keyword.containerlong}} cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in the cluster.
 {: shortdesc}
 
 If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to network load balancer (NLB) services, use Calico network policies.
@@ -806,3 +805,6 @@ To log denied traffic:
   {: screen}
 
 6. Optional: [Forward the logs](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` to an external syslog server.
+
+
+

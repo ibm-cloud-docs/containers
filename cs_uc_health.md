@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-21"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Healthcare use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} benefit from the public cloud. They have secure compute on isolated bare metal, easy spin-up of clusters for faster development, migration from virtual machines, and data sharing in cloud databases.
+These use cases highlight how workloads on {[product_name_tm}} benefit from the public cloud. They have secure compute on isolated bare metal, easy spin-up of clusters for faster development, migration from virtual machines, and data sharing in cloud databases.
 {: shortdesc}
 
 ## Healthcare provider migrates workloads from inefficient VMs to Ops-friendly containers for reporting and patient systems
@@ -213,3 +212,5 @@ Technical solution:
 * Microservices greatly reduce time to delivery for patches, bug fixes, and new features. Initial development is fast, and updates are frequent.
 * Researchers have access to clinical data and can share clinical data, while they comply with local regulations.
 * Patients who participate in disease research feel confident that their data is secure and making a difference, when it is shared with large research teams.
+
+

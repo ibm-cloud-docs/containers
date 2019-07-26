@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 
@@ -36,7 +35,7 @@ To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public 
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [reinstall the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
 {: note}
 
-With version 1.0.8, the {{site.data.keyword.cos_full_notm}} plug-in Helm chart is now available in the `ibm-charts` Helm repository. Make sure to fetch the latest version of the Helm chart from this repository. To add the repository, run `helm repo add ibm-charts https://icr.io/helm/ibm-charts`. 
+With version 1.0.8, the {{site.data.keyword.cos_full_notm}} plug-in Helm chart is now available in the `ibm-charts` Helm repository. Make sure to fetch the latest version of the Helm chart from this repository. To add the repository, run `helm repo add ibm-charts https://icr.io/helm/ibm-charts`.
 {: note}
 
 ## Creating your object storage service instance
@@ -162,14 +161,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker-reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  Choose if you want to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller. Then, [follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and, if you want to use Tiller, to install Tiller with a service account in your cluster.
+2.  Choose if you want to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller. Then, [follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and optionally Tiller with a service account in your cluster. **Note**: If you use Windows, you must install Tiller.
 
 3. If you want to install the plug-in with Tiller, verify that Tiller is installed with a service account.
    ```
    kubectl get serviceaccount -n kube-system tiller
    ```
    {: pre}
-   
+
    Example output:
    ```
    NAME                                 SECRETS   AGE
@@ -207,8 +206,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       Installed plugin: ibmc
       ```
       {: screen}
-      
-      If you see the error `Error: plugin already exists`, remove the `ibmc` Helm plug-in by running `rm -rf ~/.helm/plugins/helm-ibmc`. 
+
+      If you see the error `Error: plugin already exists`, remove the `ibmc` Helm plug-in by running `rm -rf ~/.helm/plugins/helm-ibmc`.
       {: tip}
 
    2. Verify that the `ibmc` plug-in is installed successfully.
@@ -276,27 +275,27 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    - **For OS X and Linux:**
      - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
-       **Without Tiller**: 
+       **Without Tiller**:
        ```
        helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
-       **With Tiller**: 
+
+       **With Tiller**:
        ```
        helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
      - If you completed the previous step, install with a limitation to specific Kubernetes secrets.</br>
-       **Without Tiller**: 
+       **Without Tiller**:
        ```
        cd ../..
-       helm ibmc template ./ibm-object-storage-plugin --apply 
+       helm ibmc template ./ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
-       **With Tiller**: 
+
+       **With Tiller**:
        ```
        cd ../..
        helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
@@ -318,30 +317,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
      3. Install the Helm chart.
         - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>
-          **Without Tiller**: 
           ```
-          helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
-          ```
-          {: pre}
-          
-          **With Tiller**: 
-          ```
-          helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+          helm install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
         - If you completed the previous step, install with a limitation to specific Kubernetes secrets.</br>
-          **Without Tiller**: 
           ```
           cd ../..
-          helm ibmc template ./ibm-object-storage-plugin --apply 
-          ```
-          {: pre}
-          
-          **With Tiller**: 
-          ```
-          cd ../..
-          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
+          helm install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
@@ -394,7 +378,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 10. Verify that the plug-in is installed correctly.
     ```
-    kubectl get pod -n kube-system -o wide | grep object
+    kubectl get pod -n default -o wide | grep object
     ```
     {: pre}
 
@@ -478,13 +462,13 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    {: pre}
 
 5. Upgrade the plug-in. </br>
-   **Without Tiller**: 
+   **Without Tiller**:
    ```
    helm ibmc template ibm-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
-     
-   **With Tiller**: 
+
+   **With Tiller**:
    1. Find the installation name of your Helm chart.
       ```
       helm ls | grep ibm-object-storage-plugin
@@ -543,7 +527,7 @@ Before you begin:
 To remove the plug-in:
 
 1. Remove the plug-in from your cluster. </br>
-   **With Tiller**: 
+   **With Tiller**:
    1. Find the installation name of your Helm chart.
       ```
       helm ls | grep object-storage-plugin
@@ -562,7 +546,7 @@ To remove the plug-in:
       ```
       {: pre}
 
-   **Without Tiller**: 
+   **Without Tiller**:
    ```
    helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
    ```
@@ -1338,3 +1322,5 @@ To deploy a stateful set that uses object storage:
 </tr>
 </tbody>
 </table>
+
+

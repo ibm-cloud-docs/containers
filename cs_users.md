@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-20"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Assigning cluster access
 {: #users}
 
-As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} community Kubernetes or OpenShift clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
+As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
 {: shortdesc} 
 
 ## Understanding access policies and roles
@@ -732,7 +732,9 @@ Cluster role bindings apply RBAC cluster roles to all namespaces in the cluster.
 If you want users to be able to interact with Kubernetes resources from within a cluster, you must assign user access to one or more namespaces through [{{site.data.keyword.cloud_notm}} IAM service roles](#platform). Every user who is assigned a service role is automatically assigned a corresponding RBAC cluster role. These RBAC cluster roles are predefined and permit users to interact with Kubernetes resources in your cluster. Additionally, a role binding is created to apply the cluster role to a specific namespace, or a cluster role binding is created to apply the cluster role to all namespaces.
 
 To learn more about the actions permitted by each RBAC role, check out the [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service) reference topic. To see the permissions that are granted by each RBAC role to individual Kubernetes resources, check out [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref).
-{: tip}
+
+**OpenShift clusters only**: All users of an OpenShift cluster are added to the following OpenShift RBAC groups: `basic-users` and `self-provisioners`.
+{: note}
 
 **Can I create custom roles or cluster roles?**
 The `view`, `edit`, `admin`, and `cluster-admin` cluster roles are predefined roles that are automatically created when you assign a user the corresponding {{site.data.keyword.cloud_notm}} IAM service role. To grant other Kubernetes permissions, you can [create custom RBAC permissions](#rbac). Custom RBAC roles are in addition to and do not change or override any RBAC roles that you might have assigned with service access roles. Note that to create custom RBAC permissions, you must have the IAM **Manager** service access role that gives you the `cluster-admin` Kubernetes RBAC role. However, the other users do not need an IAM service access role if you manage your own custom Kubernetes RBAC roles.
@@ -1325,3 +1327,5 @@ You can remove IBM Cloud infrastructure permissions for a user by using the {{si
 3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
 4. In each tab, deselect specific permissions.
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
+
+

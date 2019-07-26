@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Retail use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
-These use cases highlight how workloads on {{site.data.keyword.containerlong_notm}} can
+These use cases highlight how workloads on {[product_name_tm}} can
 take advantage of analytics for market insights, multiregion deployments across the globe, and inventory management with {{site.data.keyword.messagehub_full}} and object storage.
 {: shortdesc}
 
@@ -197,3 +196,5 @@ Technical solution:
 * Customer traffic and sales increased in stores by making the stores themselves a differentiating asset.
 * At the same time, new insights from social and cognitive analysis improved reduced inventory OpEx (operating expenses).
 * Social sharing in the mobile app also helps to identify and market to new customers.
+
+

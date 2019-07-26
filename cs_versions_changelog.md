@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -3711,12 +3711,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers?topic=containers-cs_versions#ha-masters). These preparation actions apply:<ul>
-<li>If you have a firewall or custom Calico network policies.</li>
-<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
-<li>If you used the cluster master IP address for in-cluster access to the master.</li>
-<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
-<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -4847,12 +4842,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>Cluster master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.<br>For actions that you must take, see [Updating to highly available cluster masters](/docs/containers?topic=containers-cs_versions#ha-masters). These preparation actions apply:<ul>
-<li>If you have a firewall or custom Calico network policies.</li>
-<li>If you are using host ports `2040` or `2041` on your worker nodes.</li>
-<li>If you used the cluster master IP address for in-cluster access to the master.</li>
-<li>If you have automation that calls the Calico API or CLI (`calicoctl`), such as to create Calico policies.</li>
-<li>If you use Kubernetes or Calico network policies to control pod egress access to the master.</li></ul></td>
+<td>Updated the cluster master configuration to increase high availability (HA). Clusters now have three Kubernetes master replicas that are set up with a highly available (HA) configuration, with each master deployed on separate physical hosts. Further, if your cluster is in a multizone-capable zone, the masters are spread across zones.</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>

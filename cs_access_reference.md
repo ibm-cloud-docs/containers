@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-18"
+lastupdated: "2019-07-26"
 
 keywords: kubernetes, iks
 
@@ -23,17 +23,11 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # User access permissions
 {: #access_reference}
 
 When you [assign cluster permissions](/docs/containers?topic=containers-users), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
-
-As of 30 January 2019, {{site.data.keyword.containerlong_notm}} has a new way of authorizing users with {{site.data.keyword.cloud_notm}} IAM: [service access roles](#service). These service roles are used to grant access to resources within the cluster, such as Kubernetes namespaces. For more information, check out the blog, [Introducing service roles and namespaces in IAM for more granular control of cluster access ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
-
 
 ## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
@@ -716,7 +710,7 @@ The following table shows the Kubernetes resource permissions that are granted b
   </tr>
   <tr>
     <td id="service-role-manager" headers="service-role">Manager role</td>
-    <td headers="service-role-manager rbac-role">When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> role binding in that namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding</td> that applies to all namespaces
+    <td headers="service-role-manager rbac-role">When scoped to one namespace: <strong><code>admin</code></strong> cluster role applied by the <strong><code>ibm-operate</code></strong> role binding in that namespace</br><br>When scoped to all namespaces: <strong><code>cluster-admin</code></strong> cluster role applied by the <strong><code>ibm-admin</code></strong> cluster role binding that applies to all namespaces</td> 
     <td headers="service-role-manager kube-perm">When scoped to one namespace:
       <ul><li>Read/write access to all resources in a namespace but not to resource quota or the namespace itself</li>
       <li>Create RBAC roles and role bindings in a namespace</li>
@@ -728,6 +722,14 @@ The following table shows the Kubernetes resource permissions that are granted b
         <li>Create an Ingress resource that makes apps publicly available</li>
         <li>Review cluster metrics such as with the <code>kubectl top pods</code>, <code>kubectl top nodes</code>, or <code>kubectl get nodes</code> commands</li></ul>
     </td>
+  </tr>
+    <tr>
+    <td>Any service role</td>
+    <td>**OpenShift clusters only**: All users of an OpenShift cluster are given the `basic-users` and `self-provisioners` cluster roles as applied by the `basic-users` and `self-provisioners` cluster role bindings.</td>
+    <td><ul>
+      <li>Get basic information about projects that the user has access to.</li>
+      <li>Create authorized resources in the projects that the user has access to.</li>
+      <li>For more information, see the [OpenShift docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_rbac.html).</li></ul></td>
   </tr>
 </tbody>
 </table>
@@ -1088,3 +1090,7 @@ The following table shows the classic infrastructure permissions that the creden
 {: #classic-permissions-suggested}
 {: tab-title="Other common use cases"}
 {: tab-group="Classic infrastructure permissions"}
+
+
+
+
