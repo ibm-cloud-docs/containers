@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-29"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -576,7 +576,7 @@ To expose apps that are outside your cluster to the public:
         kind: Endpoints
         apiVersion: v1
         metadata:
-          name: myexternalendpoint
+          name: myexternalservice
         subsets:
           - addresses:
               - ip: <external_IP1>
