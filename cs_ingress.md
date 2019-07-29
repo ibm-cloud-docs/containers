@@ -576,7 +576,7 @@ To expose apps that are outside your cluster to the public:
         kind: Endpoints
         apiVersion: v1
         metadata:
-          name: myexternalendpoint
+          name: myexternalservice
         subsets:
           - addresses:
               - ip: <external_IP1>
