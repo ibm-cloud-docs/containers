@@ -48,7 +48,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </thead>
 <tbody>
 <tr>
-<td>0.3.9X</td>
+<td>0.3.95</td>
 <td>30 Jul 2019</td>
 <ul>
 <li>Adds the `ibmcloud oc` alias to the {{site.data.keyword.containershort_notm}} plug-in for management of Red Hat OpenShift on IBM Cloud clusters.</li>
