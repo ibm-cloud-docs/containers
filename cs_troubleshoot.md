@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 subcollection: containers
@@ -248,12 +248,12 @@ Review common error messages and learn how to resolve them.
     </thead>
     <tbody>
       <tr>
-        <td>{{site.data.keyword.cloud_notm}} Infrastructure Exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
         <td>Your IBM Cloud infrastructure account might be restricted from ordering compute resources. Contact {{site.data.keyword.cloud_notm}} support by opening an [{{site.data.keyword.cloud_notm}} support case](#ts_getting_help).</td>
       </tr>
       <tr>
-      <td>{{site.data.keyword.cloud_notm}} infrastructure exception: Could not place order.<br><br>
-      {{site.data.keyword.cloud_notm}} Infrastructure Exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
+      <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order.<br><br>
+      {{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
       <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or, you might have exceeded a limit in your IBM Cloud infrastructure account. To resolve, try one of the following options:
       <ul><li>Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.</li>
       <li>For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.</li>
@@ -262,7 +262,7 @@ Review common error messages and learn how to resolve them.
       <li>Open an [IBM Cloud infrastructure support case](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
-        <td>{{site.data.keyword.cloud_notm}} Infrastructure Exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
         <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
       </tr>
       <tr>
@@ -270,11 +270,11 @@ Review common error messages and learn how to resolve them.
         <td>Your IBM Cloud infrastructure is not set up to order compute resources in the selected data center. Contact [{{site.data.keyword.cloud_notm}} support](#ts_getting_help) to verify that you account is set up correctly.</td>
        </tr>
        <tr>
-        <td>{{site.data.keyword.cloud_notm}} Infrastructure Exception: The user does not have the necessary {{site.data.keyword.cloud_notm}} Infrastructure permissions to add servers
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: The user does not have the necessary {{site.data.keyword.cloud_notm}} classic infrastructure permissions to add servers
         </br></br>
-        {{site.data.keyword.cloud_notm}} Infrastructure Exception: 'Item' must be ordered with permission.
+        {{site.data.keyword.cloud_notm}} classic infrastructure exception: 'Item' must be ordered with permission.
         </br></br>
-        The {{site.data.keyword.cloud_notm}} infrastructure credentials could not be validated.</td>
+        The {{site.data.keyword.cloud_notm}} classic infrastructure credentials could not be validated.</td>
         <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure portfolio, or you are using the wrong infrastructure credentials. See [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-users#api_key).</td>
       </tr>
       <tr>
@@ -286,7 +286,7 @@ Review common error messages and learn how to resolve them.
        <li>If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
       <tr>
-  <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Waiting for machine to be visible to the user</td>
+  <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Worker not found. Review {{site.data.keyword.cloud_notm}} classic infrastructure user permissions</td>
   <td>The owner of the API key that is used to access the IBM Cloud infrastructure portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps:
   <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
   <li>Run <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio. </li>
