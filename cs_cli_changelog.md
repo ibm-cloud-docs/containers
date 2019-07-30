@@ -50,6 +50,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <tr>
 <td>0.3.9X</td>
 <td>30 Jul 2019</td>
+<ul>
 <li>Adds the `ibmcloud oc` alias to the {{site.data.keyword.containershort_notm}} plug-in for management of Red Hat OpenShift on IBM Cloud clusters.</li>
 <td>Adds the [`ibmcloud ks cluster-subnet-detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) command to detach a public or private portable subnet in an IBM Cloud infrastructure account from a cluster.<ul>
 <li>Renames the `ibmcloud ks machine-types` command to `ibmcloud ks flavors`. You can still use the `machine-types` alias.</li>

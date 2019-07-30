@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -225,6 +225,43 @@ To edit the configmap to enable SSL protocols and ciphers:
 <br />
 
 
+## Increasing the restart readiness check time for ALB pods
+{: #readiness-check}
+
+Increase the amount of time that ALB pods have to parse large Ingress resource files when the ALB pods restart.
+{: shortdesc}
+
+When an ALB pod restarts, such as after an update is applied, a readiness check prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss when ALB pods restart. By default, the readiness check waits 15 seconds after the pod restarts to start checking whether all Ingress files are parsed. If all files are parsed 15 seconds after the pod restarts, the ALB pod begins to route traffic requests again. If all files are not parsed 15 seconds after the pod restarts, the pod does not route traffic, and the readiness check continues to check every 15 seconds for a maximum timeout of 5 minutes. After 5 minutes, the ALB pod begins to route traffic.
+
+If you have very large Ingress resource files, it might take longer than 5 minutes for all of the files to be parsed. You can change the default values for the readiness check interval rate and for the total maximum readiness check timeout by adding the `ingress-resource-creation-rate` and `ingress-resource-timeout` settings to the `ibm-cloud-provider-ingress-cm` configmap.
+
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
+    ```
+    kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
+    ```
+    {: pre}
+
+2. In the **data** section, add the `ingress-resource-creation-rate` and `ingress-resource-timeout` settings. Values can be formatted as seconds (`s`) and minutes (`m`). Example:
+   ```
+   apiVersion: v1
+   data:
+     ingress-resource-creation-rate: 1m
+     ingress-resource-timeout: 6m
+     keep-alive: 8s
+     private-ports: 80;443
+     public-ports: 80;443
+   ```
+   {: codeblock}
+
+3. Save the configuration file.
+
+4. Verify that the configmap changes were applied.
+   ```
+   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+<br />
 
 
 ## Tuning ALB performance

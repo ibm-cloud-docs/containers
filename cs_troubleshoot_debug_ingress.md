@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -134,6 +134,8 @@ Start by checking for error messages in the Ingress resource deployment events a
         ibmcloud ks alb-configure --albID <ALB_ID> --enable
         ```
         {: pre}
+        When the pod restarts, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes by default.
+        {: note}
 
 3. Check the logs for your ALB.
     1.  Get the IDs of the ALB pods that are running in your cluster.

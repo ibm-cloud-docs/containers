@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -600,7 +600,7 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
       source:
         nets:
         - <client_address>/32
-    - action: Deny
+    - action: Log
       destination:
         nets:
         - <loadbalancer_IP>/32
