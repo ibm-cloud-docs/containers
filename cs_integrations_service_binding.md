@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-15"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -43,19 +43,19 @@ Want to make your secrets even more secured? Ask your cluster admin to [enable {
 {: tip}
 
 **I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?**</br>
-Yes, you can use services that meet naming requirements and reuse the service credentials. 
+Yes, you can use services that meet naming requirements and reuse the service credentials.
 
 * **Naming**: Make sure that the service name is in the following regex format. Example permitted names are `myservice` or `example.com`. Unallowed characters include spaces and underscores.
   ```
   [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
   ```
   {: screen}
-* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster-service-bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials. 
+* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster-service-bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials.
 
 **What if I want to use service credentials that use the private service endpoint?**</br>
 By default, the `ibmcloud ks cluster-service-bind` command creates service credentials with the public service endpoint. To use the private service endpoint, you must manually create service credentials for your service that use the private service endpoint, and then use the `--key` option to specify the name of the existing service credentials.  
 
-Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service. 
+Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service.
 
 **Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?**</br>
 You can use service binding only for services that support service keys so that the service credentials can automatically be created and stored in a Kubernetes secret. To find a list of services that support service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
@@ -123,9 +123,9 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 
 4. Bind the service to your cluster to create service credentials for your service that use the public service endpoint and store the credentials in a Kubernetes secret. If you have existing service credentials, use the `--key` flag to specify the name of the credentials. For IAM-enabled services, the credentials are automatically created with the **Writer** service access role, but you can use the `--role` flag to specify a different service access role. If you use the `--key` flag, do not include the `--role` flag.
 
-   If your service supports private service endpoints, you can manually create the service credentials with the private service endpoint, and then use the `--key` flag to specify the name of your credentials. 
+   If your service supports private service endpoints, you can manually create the service credentials with the private service endpoint, and then use the `--key` flag to specify the name of your credentials.
    {: tip}
-   
+
    ```
    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
    ```
@@ -462,7 +462,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
       Example output:
       ```
-      BINDING={"apikey":"<API_key>","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"<password>","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      BINDING={"apikey":"<API_key>","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"<API_key_name>","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"<password>","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
       ```
       {: screen}
 
