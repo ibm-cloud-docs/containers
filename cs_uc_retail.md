@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-29"
 
 keywords: kubernetes, iks
 
@@ -26,8 +26,7 @@ subcollection: containers
 # Retail use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
-These use cases highlight how workloads on {[product_name_tm}} can
-take advantage of analytics for market insights, multiregion deployments across the globe, and inventory management with {{site.data.keyword.messagehub_full}} and object storage.
+These use cases highlight how workloads on {{site.data.keyword.containerlong}} can take advantage of analytics for market insights, multiregion deployments across the globe, and inventory management with {{site.data.keyword.messagehub_full}} and object storage.
 {: shortdesc}
 
 ## Brick-and-mortar retailer shares data, by using APIs with global business partners to drive omnichannel sales

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-30"
 
 ---
 
@@ -105,7 +105,7 @@ lastupdated: "2019-07-22"
   * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
   * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
 * [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-  * [What type of cluster and machine types should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
   * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
   * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
 * [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
@@ -294,7 +294,7 @@ lastupdated: "2019-07-22"
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
 * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Updating worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
-* [Updating machine types](/docs/containers?topic=containers-update#machine_type)
+* [Updating flavors](/docs/containers?topic=containers-update#machine_type)
 * [Updating cluster components](/docs/containers?topic=containers-update#components)
   * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#logging-up)
   * [Managing automatic updates for the Ingress ALB add-on](/docs/containers?topic=containers-update#alb)
@@ -434,10 +434,14 @@ lastupdated: "2019-07-22"
   * [Freeing up used IP addresses](/docs/containers?topic=containers-subnets#free)
 * [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
   * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
+  * [Adding portable IPs by adding existing subnets to your cluster](/docs/containers?topic=containers-subnets#add-existing)
   * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
+* [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
+  * [Removing a subnet in an IBM Cloud infrastructure account from a cluster](/docs/containers?topic=containers-subnets#remove-sl-subnets)
+  * [Removing a subnet in an on-premises network from a cluster](/docs/containers?topic=containers-subnets#remove-user-subnets)
 
 [Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
 * [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -56,7 +56,7 @@ For a detailed overview of capabilities and benefits, see [Why {{site.data.keywo
 {: #container_platforms}
 {: faq}
 
-With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud (beta). The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each. 
+With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud (beta). The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
 
 For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
 
@@ -143,6 +143,7 @@ For more information about available bare metal flavors and how bare metal is di
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
+
 **Supported Kubernetes versions**:
 *   Latest: 1.14.4 
 *   Default: 1.13.8
@@ -215,7 +216,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 
 <dl>
   <dt id="nodes">Worker nodes</dt>
-    <dd><p>Clusters can have two main types of worker nodes: virtual or physical (bare metal) machines. Machine type availability and pricing varies by the zone that you deploy your cluster to.</p>
+    <dd><p>Clusters can have two main types of worker nodes: virtual or physical (bare metal) machines. Flavor (machine type) availability and pricing varies by the zone that you deploy your cluster to.</p>
     <p><strong>Virtual machines</strong> feature greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price than bare-metal. However, VMs have a performance trade-off when compared to bare metal specs, such as networking Gbps, RAM and memory thresholds, and storage options. Keep in mind these factors that impact your VM costs:</p>
     <ul><li><strong>Shared vs. dedicated</strong>: If you share the underlying hardware of the VM, the cost is lower than dedicated hardware, but the physical resources are not dedicated to your VM.</li>
     <li><strong>Hourly billing only</strong>: Hourly offers more flexibility to order and cancel VMs quickly.
@@ -248,7 +249,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 </dl>
 <br><br>
 
-Monthly resources are billed based on the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource. 
+Monthly resources are billed based on the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
 {: note}
 
 ## Are my platform and infrastructure resources consolidated in one bill?

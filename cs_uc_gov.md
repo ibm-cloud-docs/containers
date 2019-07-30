@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-27"
 
 keywords: kubernetes, iks
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Government use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
-These use cases highlight how workloads on {[product_name_tm}} benefit from the public cloud. These workloads are isolated in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
+These use cases highlight how workloads on {{site.data.keyword.containerlong}} benefit from the public cloud. These workloads are isolated in global regions for data sovereignty, use Watson machine learning instead of net-new code, and connect to on-premises databases.
 {: shortdesc}
 
 ## Regional government improves collaboration and velocity with community Developers who combine public-private data

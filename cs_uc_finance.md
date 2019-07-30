@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -98,6 +98,7 @@ This solution provides the immediate benefit of scalability. By using Kubernetes
 * Regulatory reporting costs were reduced with a consistent, scalable set of storage and compute services that {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.cloudant}} bring.
 * Over time, the original apps that were initially "lifted and shifted" to the cloud were rearchitected into cooperative microservices that run on {{site.data.keyword.containerlong_notm}}. This action further sped up development and time to deploy and allowed more innovation due to the relative ease of experimentation. They also released innovative apps with newer versions of microservices to take advantage of market and business conditions (that is, so called situational apps and microservices).
 
+
 ## Payment tech company streamlines developer productivity, deploying AI-enabled tools to their partners 4 times faster
 {: #uc_payment_tech}
 
@@ -106,10 +107,11 @@ A Development Exec has Developers that use on-premises traditional tools that sl
 
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides spin-up of compute by using open-source standard technology. After the company moved to {{site.data.keyword.containerlong_notm}}, Developers have access to DevOps friendly tools, such as portable and easily shared containers.
 
-Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional software development tools get a new face when they add on AI cloud services to apps with a click.
+Then, Developers can experiment easily, pushing changes to Development and Test systems quickly with open toolchains. Their traditional  development tools get a new face when they add on AI cloud services to apps with a click.
 
 Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Fraud prevention with {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -158,13 +160,13 @@ Also, logging and monitoring for the tools, especially where they used {{site.da
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive payment tools now have familiar isolation but within the flexibility of public cloud. Scans for vulnerabilities and malware are run continuously.
 
 **Step 1: Lift and shift to secure compute**
-* Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}.
+* Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}. 
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging vulnerability scanning, for known malware.
 * Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 * Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid_short_notm}}.
 
 **Step 2: Operations and connections to existing payment systems back-end**
-* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to on-premises tool systems.
+* Use IBM {{site.data.keyword.SecureGateway}} to maintain secure connections to remaining on-premises tool systems.
 * Provide standardized DevOps dashboards and practices through Kubernetes.
 * After Developers build and test apps in Development and Test clusters, they use the {{site.data.keyword.contdelivery_full}} toolchains to deploy apps into the {{site.data.keyword.containerlong_notm}} clusters across the globe.
 * Built-in HA tools in {{site.data.keyword.containerlong_notm}} balance the workload within each geographic region, including self-healing and load balancing.
