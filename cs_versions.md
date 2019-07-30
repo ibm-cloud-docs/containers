@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-25"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -32,8 +32,9 @@ subcollection: containers
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
+
 **Supported Kubernetes versions**:
-*   Latest: 1.14.4 
+*   Latest: 1.14.4
 *   Default: 1.13.8
 *   Other: 1.12.10
 
@@ -90,6 +91,7 @@ As updates become available, you are notified when you view information about th
 
 {: #prep-up}
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
+
 -  Version 1.14 [preparation actions](#cs_v114).
 -  Version 1.13 [preparation actions](#cs_v113).
 -  Version 1.12 [preparation actions](#cs_v112).
@@ -128,7 +130,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
 </tr>
 </thead>
-<tbody>
+<tbody>  
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.14](#cs_v114)</td>
@@ -386,6 +388,7 @@ The following table shows the actions that you must take after you update your w
 </table>
 
 <br />
+
 
 
 ## Version 1.12

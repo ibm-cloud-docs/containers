@@ -143,8 +143,9 @@ For more information about available bare metal flavors and how bare metal is di
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
+
 **Supported Kubernetes versions**:
-*   Latest: 1.14.4
+*   Latest: 1.14.4 
 *   Default: 1.13.8
 *   Other: 1.12.10
 

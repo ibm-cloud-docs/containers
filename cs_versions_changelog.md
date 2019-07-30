@@ -37,8 +37,10 @@ For more information about major, minor, and patch versions and preparation acti
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+
 -  Version 1.14 [changelog](#114_changelog).
 -  Version 1.13 [changelog](#113_changelog).
+
 -  Version 1.12 [changelog](#112_changelog).
 -  [Archive](#changelog_archive) of changelogs for unsupported versions.
 
@@ -46,6 +48,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: note}
 
 </br>
+
 
 ## Version 1.14 changelog
 {: #114_changelog}
@@ -1414,6 +1417,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 </table>
 
 <br />
+
 
 
 ## Version 1.12 changelog
