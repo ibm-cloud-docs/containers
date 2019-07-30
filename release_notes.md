@@ -32,7 +32,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 The following icons are used to indicate if a release note applies only to a certain container platform. If no icon is used, the release note applies to both community Kubernetes and OpenShift clusters.<br>
 <img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> Applies to only community Kubernetes clusters.<br>
-<img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters. Note that release notes before the Red Hat OpenShift on IBM Cloud beta on 5 June 2019 apply only to community Kubernetes clusters.
+<img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters, which released as a beta on 5 June 2019.
 {: note}
 
 ## July 2019
