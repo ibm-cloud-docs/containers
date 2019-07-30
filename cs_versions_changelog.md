@@ -37,12 +37,10 @@ For more information about major, minor, and patch versions and preparation acti
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
-
--  Version 1.14 [changelog](#114_changelog).
--  Version 1.13 [changelog](#113_changelog).
-
--  Version 1.12 [changelog](#112_changelog).
--  [Archive](#changelog_archive) of changelogs for unsupported versions.
+- Version 1.14 [changelog](#114_changelog).
+- Version 1.13 [changelog](#113_changelog).
+- Version 1.12 [changelog](#112_changelog).
+- [Archive](#changelog_archive) of changelogs for unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
