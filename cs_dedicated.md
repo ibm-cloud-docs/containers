@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-29"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -287,7 +287,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
         {:tip}
 
-    5. Select a **Machine type**. The machine type defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types). After you create your cluster, you can add different machine types by adding a worker node to the cluster.
+    5. Select a **Flavor**. The flavor, or machine type, defines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to the containers. Available bare metal and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types). After you create your cluster, you can add different flavors by adding a worker node to the cluster.
 
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
@@ -334,7 +334,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     Example:
 
     ```
-    ibmcloud ks cluster-create --zone <zone> --machine-type <machine_type> --name <cluster_name> --workers <number>
+    ibmcloud ks cluster-create --zone <zone> --machine-type <flavor> --name <cluster_name> --workers <number>
     ```
     {: pre}
 

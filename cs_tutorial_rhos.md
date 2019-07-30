@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, oks, iro, openshift, red hat, red hat openshift, rhos, roks, rhoks
 
@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 # Tutorial: Creating an IBM Cloud Red Hat OpenShift Container Platform cluster (beta)
-{: #openshift_tutorial} 
+{: #openshift_tutorial}
 
 Red Hat OpenShift on IBM Cloud is available as a beta to test out OpenShift clusters. Not all the features of {{site.data.keyword.containerlong}} are available during the beta. Also, any OpenShift beta clusters that you create remain for only 30 days after the beta ends and Red Hat OpenShift on IBM Cloud becomes generally available.
 {: preview}
@@ -193,7 +193,7 @@ Before you begin, [complete the prerequisites](#openshift_prereqs) to make sure 
     </tr>
     <tr>
     <td><code>--machine-type <em>&lt;worker_node_flavor&gt;</em></code></td>
-    <td>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. To list available machine-types, run `ibmcloud ks machine-types --zone <zone>`.</td>
+    <td>Choose a machine type. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. To list available flavors, run `ibmcloud ks flavors --zone <zone>`.</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number_of_worker_nodes_per_zone&gt;</em></code></td>

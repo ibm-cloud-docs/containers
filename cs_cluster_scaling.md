@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, node scaling
 
@@ -56,7 +56,7 @@ The cluster autoscaler adjusts the number of worker nodes by considering the [re
 **What does scaling up and down look like?**<br>
 In general, the cluster autoscaler calculates the number of worker nodes that your cluster needs to run its workload. Scaling the cluster up or down depends on many factors, including the following.
 *   The minimum and maximum worker node size per zone that you set.
-*   Your pending pod resource requests and certain metadata that you associate with the workload, such as anti-affinity, labels to place pods only on certain machine types, or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+*   Your pending pod resource requests and certain metadata that you associate with the workload, such as anti-affinity, labels to place pods only on certain flavors, or [pod disruption budgets![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   The worker pools that the cluster autoscaler manages, potentially across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone).
 *   The [custom Helm chart values](#ca_chart_values) that are set, such as skipping worker nodes for deletion if they use local storage.
 
@@ -86,7 +86,7 @@ Consider the following image for an example of scaling the cluster up and down.
 _Figure: Autoscaling a cluster up and down._
 ![Autoscaling a cluster up and down GIF](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a machine type of `u2c.2x4` and **Worker Pool B** has a machine type of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) that are required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
+1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a flavor of `u2c.2x4` and **Worker Pool B** has a flavor of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) that are required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
 2.  The cluster autoscaler is configured to manage both worker pools with the following minimum and maximum size-per-zone:
     *  **Worker Pool A**: `minSize=1`, `maxSize=5`.
     *  **Worker Pool B**: `minSize=1`, `maxSize=2`.
@@ -612,7 +612,7 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 
 1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
     ```
-    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
+    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).

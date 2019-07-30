@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-19"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -312,7 +312,7 @@ The file system on the worker node is read-only.
 2.  For a short-term fix to the existing worker node, reload the worker node.
     <pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-For a long-term fix, [update the machine type of your worker pool](/docs/containers?topic=containers-update#machine_type).
+For a long-term fix, [update the flavor of your worker pool](/docs/containers?topic=containers-update#machine_type).
 
 <br />
 

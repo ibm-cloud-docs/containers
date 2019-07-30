@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-29"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -293,10 +293,10 @@ To update worker nodes from the console:
 
 
 
-## Updating machine types
+## Updating flavors (machine types)
 {: #machine_type}
 
-You can update the machine types of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, create Ubuntu 18 worker nodes that use machine types with `x3c` in the names.
+You can update the flavors, or machine types, of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, create Ubuntu 18 worker nodes that use flavors with `x3c` in the names.
 {: shortdesc}
 
 Before you begin:
@@ -304,7 +304,7 @@ Before you begin:
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
-To update machine types:
+To update flavors:
 
 1. List available worker nodes and note their private IP address.
    - **For worker nodes in a worker pool**:
@@ -339,9 +339,9 @@ To update machine types:
         ```
         {: pre}
 
-2. List available machine types in the zone.
+2. List available flavors in the zone.
    ```
-   ibmcloud ks machine-types <zone>
+   ibmcloud ks flavors --zone <zone>
    ```
    {: pre}
 
@@ -349,7 +349,7 @@ To update machine types:
    - **For worker nodes in a worker pool**:
      1. Create a worker pool with the number of worker nodes that you want to replace.
         ```
-        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
         ```
         {: pre}
 
@@ -367,7 +367,7 @@ To update machine types:
 
    - **Deprecated: For stand-alone worker nodes**:
        ```
-       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <machine_type> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
        ```
        {: pre}
 
@@ -392,7 +392,7 @@ To update machine types:
         kubectl drain <worker_name>
         ```
         {: pre}
-6. Remove the old worker node. **Note**: If you are removing a machine type that is billed monthly (such as bare metal), you are charged for the entire the month.
+6. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
    - **For worker nodes in a worker pool**:
      1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```
@@ -418,7 +418,7 @@ To update machine types:
    ```
    {: pre}
 
-8. Repeat these steps to update other worker pools or stand-alone worker nodes to different machine types.
+8. Repeat these steps to update other worker pools or stand-alone worker nodes to different flavors.
 
 ## Updating cluster components
 {: #components}
@@ -604,9 +604,9 @@ To update stand-alone worker nodes to worker pools:
    ```
    {: pre}
 
-2. Create a worker pool and decide on the machine type and the number of worker nodes that you want to add to the pool.
+2. Create a worker pool and decide on the flavor and the number of worker nodes that you want to add to the pool.
    ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 

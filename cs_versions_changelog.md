@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks
 
@@ -3685,7 +3685,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -4872,7 +4872,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -5284,7 +5284,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
+<td>For non-encrypted flavors, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>
@@ -5456,7 +5456,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>GPU support</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-app#gpu_app) is now available for scheduling and execution. For a list of available GPU machine types, see [Hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Support for [graphics processing unit (GPU) container workloads](/docs/containers?topic=containers-app#gpu_app) is now available for scheduling and execution. For a list of available GPU flavors, see [Hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). For more information, see the Kubernetes documentation to [Schedule GPUs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -5641,7 +5641,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks machine-types --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -6017,7 +6017,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
+<td>For non-encrypted flavors, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>
@@ -6392,7 +6392,7 @@ Review the version 1.8 changelogs.
 <td>Docker</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>For non-encrypted machine types, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
+<td>For non-encrypted flavors, the secondary disk is cleaned by getting a fresh file system when you reload or update the worker node.</td>
 </tr>
 </tbody>
 </table>

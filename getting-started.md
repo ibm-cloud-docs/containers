@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-26"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, containers
 
@@ -56,7 +56,7 @@ To create a free cluster:
 
 Good work! You created your first Kubernetes cluster. Here are some details about your free cluster:
 
-*   **Machine type**: The free cluster has one virtual worker node that is grouped into a worker pool, with 2 CPU, 4 GB memory, and a single 100 GB SAN disk available for your apps to use. When you create a standard cluster, you can choose between physical (bare metal) or virtual machines, along with various machine sizes.
+*   **Flavor**: The free cluster has one virtual worker node that is grouped into a worker pool, with 2 CPU, 4 GB memory, and a single 100 GB SAN disk available for your apps to use. When you create a standard cluster, you can choose between physical (bare metal) or virtual machines, along with various machine sizes.
 *   **Managed master**: The worker node is centrally monitored and managed by a dedicated and highly available {{site.data.keyword.IBM_notm}}-owned Kubernetes master that controls and monitors all of the Kubernetes resources in the cluster. You can focus on your worker node and the apps that are deployed in the worker node without worrying about managing this master too.
 *   **Infrastructure resources**: The resources that are required to run the cluster, such as VLANs and IP addresses, are managed in an {{site.data.keyword.IBM_notm}}-owned IBM Cloud infrastructure account. When you create a standard cluster, you manage these resources in your own IBM Cloud infrastructure account. You can learn more about these resources and the [permissions that are needed](/docs/containers?topic=containers-users#infra_access) when you create a standard cluster.
 *   **Other options**: Free clusters are deployed within the region that you select, but you cannot choose which zone. For control over zone, networking, and persistent storage, create a standard cluster. [Learn more about the benefits of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types).

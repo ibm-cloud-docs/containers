@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-29"
+lastupdated: "2019-07-30"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -1115,7 +1115,7 @@ If this cluster is an existing one, check your cluster capacity.
 
 4.  If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
 
-    1.  Review the current sizes and machine types of your worker pools to decide which one to resize.
+    1.  Review the current sizes and flavors of your worker pools to decide which one to resize.
 
         ```
         ibmcloud ks worker-pools

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-22"
+lastupdated: "2019-07-30"
 
 ---
 
@@ -105,7 +105,7 @@ lastupdated: "2019-07-22"
   * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
   * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
 * [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-  * [What type of cluster and machine types should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
   * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
   * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
 * [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
@@ -294,7 +294,7 @@ lastupdated: "2019-07-22"
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
 * [Updating worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Updating worker nodes in the console](/docs/containers?topic=containers-update#worker_up_console)
-* [Updating machine types](/docs/containers?topic=containers-update#machine_type)
+* [Updating flavors](/docs/containers?topic=containers-update#machine_type)
 * [Updating cluster components](/docs/containers?topic=containers-update#components)
   * [Managing automatic updates for the Fluentd for logging add-on](/docs/containers?topic=containers-update#logging-up)
   * [Managing automatic updates for the Ingress ALB add-on](/docs/containers?topic=containers-update#alb)
