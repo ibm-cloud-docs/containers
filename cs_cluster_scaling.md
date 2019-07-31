@@ -22,10 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 {:gif: data-image-type='gif'}
-
 
 
 # Scaling clusters
