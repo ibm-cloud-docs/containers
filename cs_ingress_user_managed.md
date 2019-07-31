@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-09"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks, nginx, ingress controller
+keywords: kubernetes, nginx, iks multiple ingress controllers
 
 subcollection: containers
 
