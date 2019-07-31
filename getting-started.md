@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-30"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, containers
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Getting started tutorial
+# Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
 
 Hit the ground running with {{site.data.keyword.containerlong}} by deploying highly available apps in Docker containers that run in Kubernetes clusters.
@@ -66,8 +66,8 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 **What's next?**</br>
 Try out some things with your free cluster before it expires.
 
-* Go through the [first {{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) for creating a Kubernetes cluster, installing the CLI or using the Kubernetes Terminal, creating a private registry, setting up your cluster environment, and adding a service to your cluster.
-* Keep up your momentum with the [second {{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) about deploying apps to the cluster.
+* Go through the [{{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) for installing the CLI or using the Kubernetes Terminal, creating a private registry, setting up your cluster environment, adding a service to your cluster, and deploying a {{site.data.keyword.watson}} app.
 * [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) with multiple nodes for higher availability.
+* Try out an [{{site.data.keyword.openshifshort}} cluster](/docs/openshift?topic=openshift-openshift_tutorial).
 
 

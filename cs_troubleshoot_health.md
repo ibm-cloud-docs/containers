@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-# Troubleshooting logging and monitoring 
+# Troubleshooting logging and monitoring
 {: #cs_troubleshoot_health}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
