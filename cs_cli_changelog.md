@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # CLI changelog
 {: #cs_cli_changelog}
 

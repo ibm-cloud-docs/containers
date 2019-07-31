@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # About Ingress ALBs
 {: #ingress-about}
 

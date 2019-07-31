@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Logging and monitoring Ingress
 {: #ingress_health}
 

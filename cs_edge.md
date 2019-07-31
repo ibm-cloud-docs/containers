@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Restricting network traffic to edge worker nodes
 {: #edge}
 

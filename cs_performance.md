@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Tuning performance
 {: #kernel}
 

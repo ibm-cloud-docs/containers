@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Protecting sensitive information in your cluster
 {: #encryption}
 

@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Configuring pod security policies
 {: #psp}
 

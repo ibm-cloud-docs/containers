@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Tutorial: Deploying apps into Kubernetes clusters
 {: #cs_apps_tutorial}
 

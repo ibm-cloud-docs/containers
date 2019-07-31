@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Modifying default Ingress behavior
 {: #ingress-settings}
 

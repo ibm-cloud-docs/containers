@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Setting up Ingress
 {: #ingress}
 

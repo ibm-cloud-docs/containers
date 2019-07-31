@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Why {{site.data.keyword.containerlong_notm}}
 {: #cs_ov}
 

@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Adding services by using Helm charts
 {: #helm}
 

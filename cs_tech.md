@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # {{site.data.keyword.containerlong_notm}} technology
 
 Learn more about the technology behind {{site.data.keyword.containerlong}}.

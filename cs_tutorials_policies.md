@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Tutorial: Using Calico network policies to block traffic
 {: #policy_tutorial}
 

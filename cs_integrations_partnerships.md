@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # IBM Cloud Kubernetes Service partners
 {: #service-partners}
 

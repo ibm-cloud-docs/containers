@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Customizing Ingress routing with annotations
 {: #ingress_annotation}
 

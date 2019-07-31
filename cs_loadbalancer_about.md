@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # About NLBs
 {: #loadbalancer-about}
 

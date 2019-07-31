@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Planning in-cluster and external networking for apps
 {: #cs_network_planning}
 

@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # IBM Cloud services and third-party integrations
 {: #ibm-3rd-party-integrations}
 

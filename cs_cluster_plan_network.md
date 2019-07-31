@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Planning your cluster network setup
 {: #plan_clusters}
 

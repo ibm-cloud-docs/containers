@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Registering an NLB host name
 {: #loadbalancer_hostname}
 

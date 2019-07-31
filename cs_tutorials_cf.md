@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Tutorial: Migrating an app from Cloud Foundry to a cluster
 {: #cf_tutorial}
 

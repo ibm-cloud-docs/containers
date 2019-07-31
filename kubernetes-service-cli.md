@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
 

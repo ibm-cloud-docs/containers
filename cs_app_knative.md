@@ -20,8 +20,6 @@ lastupdated: "2019-07-31"
 {:preview: .preview}
 
 
-
-
 # Deploying serverless apps with Knative
 {: #serverless-apps-knative}
 

@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Setting up VPN connectivity
 {: #vpn}
 

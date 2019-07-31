@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Configuring subnets and IP addresses for clusters
 {: #subnets}
 

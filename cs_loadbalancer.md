@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Setting up an NLB 1.0
 {: #loadbalancer}
 

@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # High availability for {{site.data.keyword.containerlong_notm}}
 {: #ha}
 

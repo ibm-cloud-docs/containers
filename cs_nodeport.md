@@ -26,8 +26,6 @@ subcollection: containers
 
 
 
-
-
 # Testing access to apps with NodePorts
 {: #nodeport}
 

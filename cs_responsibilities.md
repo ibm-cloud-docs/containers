@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Your responsibilities by using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}
 

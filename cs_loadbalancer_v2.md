@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Setting up an NLB 2.0 (beta)
 {: #loadbalancer-v2}
 

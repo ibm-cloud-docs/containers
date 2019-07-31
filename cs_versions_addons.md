@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Fluentd and Ingress ALB changelog
 {: #cluster-add-ons-changelog}
 

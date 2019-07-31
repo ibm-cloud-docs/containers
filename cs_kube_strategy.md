@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Defining your Kubernetes strategy
 {: #strategy}
 

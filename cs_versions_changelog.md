@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Version changelog
 {: #changelog}
 

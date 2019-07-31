@@ -24,8 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-
 # Supported IBM Cloud and third-party integrations
 {: #supported_integrations}
 

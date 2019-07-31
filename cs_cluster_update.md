@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Updating clusters, worker nodes, and cluster components
 {: #update}
 

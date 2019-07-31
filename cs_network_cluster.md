@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Changing service endpoints or VLAN connections
 {: #cs_network_cluster}
 

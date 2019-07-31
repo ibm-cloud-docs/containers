@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Adding services by using IBM Cloud service binding
 {: #service-binding}
 

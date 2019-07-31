@@ -20,8 +20,6 @@ lastupdated: "2019-07-31"
 {:preview: .preview}
 
 
-
-
 # Configure the cluster DNS provider
 {: #cluster_dns}
 

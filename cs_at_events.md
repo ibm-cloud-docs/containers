@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 

@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # IBM Cloud storage utilities
 {: #utilities}
 

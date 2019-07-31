@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Setting up the CLI and API
 {: #cs_cli_install}
 

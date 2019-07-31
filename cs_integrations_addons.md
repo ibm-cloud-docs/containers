@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Adding services by using managed add-ons
 {: #managed-addons}
 

@@ -20,8 +20,6 @@ lastupdated: "2019-07-31"
 {:preview: .preview}
 
 
-
-
 # Using the managed Istio add-on (beta)
 {: #istio}
 

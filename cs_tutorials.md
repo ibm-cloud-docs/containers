@@ -25,8 +25,6 @@ subcollection: containers
 
 
 
-
-
 # Tutorial: Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
 

@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Healthcare use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
