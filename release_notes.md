@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-30"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,6 +34,8 @@ The following icons are used to indicate if a release note applies only to a cer
 <img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> Applies to only community Kubernetes clusters.<br>
 <img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters, which released as a beta on 5 June 2019.
 {: note}
+
+
 
 ## July 2019
 {: #jul19}
