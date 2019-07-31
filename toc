@@ -33,7 +33,6 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials_ov.md
         cs_tutorials.md
-        cs_tutorial_rhos.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
