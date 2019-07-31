@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-30"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -150,36 +150,6 @@ lastupdated: "2019-07-30"
   * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Tutorial: Creating a Red Hat OpenShift on IBM Cloud cluster (beta)](/docs/containers?topic=containers-openshift_tutorial)
-* [Objectives](/docs/containers?topic=containers-openshift_tutorial#openshift_objectives)
-* [Time required](/docs/containers?topic=containers-openshift_tutorial#openshift_time)
-* [Audience](/docs/containers?topic=containers-openshift_tutorial#openshift_audience)
-* [Prerequisites](/docs/containers?topic=containers-openshift_tutorial#openshift_prereqs)
-* [Architectural overview](/docs/containers?topic=containers-openshift_tutorial#openshift_architecture)
-* [Lesson 1: Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster)
-  * [Creating a cluster with the console](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster_console)
-  * [Creating a cluster with the CLI](/docs/containers?topic=containers-openshift_tutorial#openshift_create_cluster_cli)
-* [Lesson 2: Accessing built-in OpenShift services](/docs/containers?topic=containers-openshift_tutorial#openshift_access_oc_services)
-  * [Accessing built-in OpenShift services from the console](/docs/containers?topic=containers-openshift_tutorial#openshift_services_console)
-  * [Accessing built-in OpenShift services from the CLI](/docs/containers?topic=containers-openshift_tutorial#openshift_services_cli)
-* [Lesson 3: Deploying an app to your OpenShift cluster](/docs/containers?topic=containers-openshift_tutorial#openshift_deploy_app)
-* [Lesson 4: Setting up LogDNA and Sysdig add-ons to monitor cluster health](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna_sysdig)
-  * [Lesson 4a: Setting up LogDNA](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna)
-  * [Lesson 4b: Setting up Sysdig](/docs/containers?topic=containers-openshift_tutorial#openshift_sysdig)
-  * [Optional: Cleaning up](/docs/containers?topic=containers-openshift_tutorial#openshift_logdna_sysdig_cleanup)
-* [Limitations](/docs/containers?topic=containers-openshift_tutorial#openshift_limitations)
-* [What's next?](/docs/containers?topic=containers-openshift_tutorial#openshift_next)
-* [Feedback and questions](/docs/containers?topic=containers-openshift_tutorial#openshift_support)
-* [Troubleshooting](/docs/containers?topic=containers-openshift_tutorial#openshift_troubleshoot)
-  * [Missing permissions to create clusters](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_cluster_permissions)
-  * [OpenVPN server error due to ingress IP address for NLB](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_openvpn_subnet)
-  * [OpenVPN server error due to NLB DNS](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_openvpn_dns)
-  * [Cannot access registry console](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_registry_console)
-  * [`oc` or `kubectl` commands fail](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_admin_config)
-  * [Cannot use `calicoctl`](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_calicoctl)
-  * [Pods in `CrashLoopBackOff` status](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_pods_crashloop)
-  * [Cannot push or pull images from local machine to Docker registry](/docs/containers?topic=containers-openshift_tutorial#rhoks_ts_docker_local)
-
 [Tutorial: Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
 * [Time required](/docs/containers?topic=containers-policy_tutorial#policies_time)
@@ -213,7 +183,6 @@ lastupdated: "2019-07-30"
 * [Installing the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)
 * [Running the CLI in a container on your computer](/docs/containers?topic=containers-cs_cli_install#cs_cli_container)
 * [Configuring the CLI to run `kubectl`](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* [Accessing an OpenShift cluster from the terminal or automation tools](/docs/containers?topic=containers-cs_cli_install#openshift_cluster_login)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
