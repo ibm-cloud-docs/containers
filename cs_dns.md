@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-10"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -18,6 +18,8 @@ lastupdated: "2019-07-10"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
+
 
 
 # Configure the cluster DNS provider
