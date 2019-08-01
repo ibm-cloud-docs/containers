@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Ingress mit Annotationen anpassen
@@ -382,7 +384,7 @@ metadata:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>app1</em>&gt;</code> durch den Namen des Kubernetes-Service, auf den sich die angepasste Fehlerbehandlung bezieht. Die angepasste Fehlerbehandlung gilt nur für die bestimmten Pfade, die genau diesen vorausgehenden Service (Upstream-Service) verwenden. Wenn Sie keinen Servicenamen festlegen, werden die angepassten Fehlerbehandlungen auf alle Servicepfade angewendet.</td>
+<td>Ersetzen Sie <code>&lt;<em>app1</em>&gt;</code> durch den Namen des Kubernetes Service, auf den sich die angepasste Fehlerbehandlung bezieht. Die angepasste Fehlerbehandlung gilt nur für die bestimmten Pfade, die genau diesen vorausgehenden Service (Upstream-Service) verwenden. Wenn Sie keinen Servicenamen festlegen, werden die angepassten Fehlerbehandlungen auf alle Servicepfade angewendet.</td>
 </tr>
 <tr>
 <td><code>httpError</code></td>
@@ -695,7 +697,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Die Konfiguration wird auf alle Services in der Ingress-Unterdomäne angewendet, wenn kein Service angegeben wird. Wird der Parameter bereitgestellt, werden die Keepalive-Anforderung für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, werden die Keepalive-Anforderungen auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die die Keepalive-Anforderungen nicht konfiguriert sind.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Die Konfiguration wird auf alle Services in der Ingress-Unterdomäne angewendet, wenn kein Service angegeben wird. Wird der Parameter bereitgestellt, werden die Keepalive-Anforderung für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, werden die Keepalive-Anforderungen auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die die Keepalive-Anforderungen nicht konfiguriert sind.</td>
 </tr>
 <tr>
 <td><code>requests</code></td>
@@ -744,7 +746,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Wird der Parameter bereitgestellt, wird das Keepalive-Zeitlimit für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, wird das Keepalive-Zeitlimit auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die das Keepalive-Zeitlimit nicht konfiguriert ist.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional. Wird der Parameter bereitgestellt, wird das Keepalive-Zeitlimit für den angegebenen Service festgelegt. Wird der Parameter nicht bereitgestellt, wird das Keepalive-Zeitlimit auf der Serverebene der Datei <code>nginx.conf</code> für alle Services festgelegt, für die das Keepalive-Zeitlimit nicht konfiguriert ist.</td>
 </tr>
 <tr>
 <td><code>timeout</code></td>
@@ -800,7 +802,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>retries</code></td>
@@ -894,7 +896,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>name</code></td>
@@ -957,7 +959,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName (optional)</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>fail-timeout</code></td>
@@ -1009,7 +1011,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>keepalive</code></td>
@@ -1060,7 +1062,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName (optional)</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>max-fails</code></td>
@@ -1180,7 +1182,7 @@ spec:
   ```
   {: screen}
 
-5. Konfigurieren Sie Ingress zur Verwendung der nicht dem Standard entsprechenden Ports bei der Weiterleitung von eingehendem Netzverkehr an Ihre Services. Verwenden Sie die Annotation in der YAML-Beispieldatei in dieser Referenz. 
+5. Konfigurieren Sie Ingress zur Verwendung der nicht dem Standard entsprechenden Ports bei der Weiterleitung von eingehendem Netzverkehr an Ihre Services. Verwenden Sie die Annotation in der YAML-Beispieldatei in dieser Referenz.
 
 6. Aktualisieren Sie Ihre ALB-Konfiguration.
   ```
@@ -1532,7 +1534,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, auf den über einen nicht standardmäßigen TCP-Port zugegriffen werden soll.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, auf den über einen nicht standardmäßigen TCP-Port zugegriffen werden soll.</td>
 </tr>
 <tr>
 <td><code>ingressPort</code></td>
@@ -1753,7 +1755,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service. dem Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service. dem Sie für Ihre App erstellt haben.</td>
 </tr>
 </tbody></table>
 
@@ -1767,7 +1769,7 @@ Leiten Sie eingehenden Netzverkehr für den Pfad in der Domäne einer Lastausgle
 {:shortdesc}
 
 **Beschreibung**</br>
-Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) leitet eingehenden Netzverkehr für `mykubecluster.us-south.containers.appdomain.cloud/beans` an Ihre App weiter. Ihre App überwacht jedoch `/coffee` und nicht `/beans`. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an `/beans` eingehende Netzverkehr durch den Pfad `/coffee` an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) zum Trennen der Services.
+Die Domäne der Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) leitet eingehenden Netzverkehr für `mykubecluster.us-south.containers.appdomain.cloud/beans` an Ihre App weiter. Ihre App überwacht jedoch `/coffee` und nicht `/beans`. Zum Weiterleiten des eingehenden Netzverkehrs an Ihre App fügen Sie eine Annotation zum erneuten Schreiben (rewrite) zur Konfigurationsdatei der Ingress-Ressource hinzu. Dadurch wird sichergestellt, dass der an `/beans` eingehende Netzverkehr durch den Pfad `/coffee` an Ihre App weitergeleitet wird. Wenn Sie mehrere Services einschließen, verwenden Sie nur ein Semikolon (;) ohne Leerzeichen davor oder danach zum Trennen der Services.
 
 **YAML-Beispiel für eine Ingress-Ressource**</br>
 
@@ -1802,11 +1804,11 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>rewrite</code></td>
-<td>Ersetzen Sie <code>&lt;<em>zielpfad</em>&gt;</code> durch den Pfad, über den Ihre App empfangsbereit ist. Der eingehende Netzverkehr in der Domäne der Lastausgleichsfunktion für Anwendungen (ALB) wird mithilfe dieses Pfads an den Kubernetes-Service weitergeleitet. Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In dem Beispiel für <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> ist der durch 'rewrite' neu angegebene Pfad <code>/coffee</code>. <p class= "note">Wenn Sie diese Datei anwenden und die URL eine Antwort <code>404</code> anzeigt, ist es möglich, dass Ihre Back-End-App einen Pfad überwacht, der auf `/` endet. Wiederholen Sie den Versuch, indem Sie ein abschließendes Zeichen `/` an dieses Rewrite-Feld anfügen. Wenden Sie die Datei anschließend an und probieren Sie die URL erneut aus.</p></td>
+<td>Ersetzen Sie <code>&lt;<em>zielpfad</em>&gt;</code> durch den Pfad, über den Ihre App empfangsbereit ist. Der eingehende Netzverkehr in der Domäne der Lastausgleichsfunktion für Anwendungen (ALB) wird mithilfe dieses Pfads an den Kubernetes Service weitergeleitet. Die meisten Apps überwachen keinen bestimmten Pfad, sondern verwenden den Rootpfad und einen bestimmten Port. In dem Beispiel für <code>mykubecluster.us-south.containers.appdomain.cloud/beans</code> ist der durch 'rewrite' neu angegebene Pfad <code>/coffee</code>. <p class= "note">Wenn Sie diese Datei anwenden und die URL eine Antwort <code>404</code> anzeigt, ist es möglich, dass Ihre Back-End-App einen Pfad überwacht, der auf `/` endet. Wiederholen Sie den Versuch, indem Sie ein abschließendes Zeichen `/` an dieses Rewrite-Feld anfügen. Wenden Sie die Datei anschließend an und probieren Sie die URL erneut aus.</p></td>
 </tr>
 </tbody></table>
 
@@ -1816,7 +1818,7 @@ spec:
 ## Annotationen für Proxypuffer
 {: #proxy-buffer}
 
-Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Mit Annotationen für Proxypuffer können Sie konfigurieren, wie Daten in Ihrer ALB beim Senden oder Empfangen von Datenpaketen gepuffert werden.
+Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Mit Annotationen für Proxypuffer können Sie konfigurieren, wie Daten in Ihrer ALB beim Senden oder Empfangen von Datenpaketen gepuffert werden.  
 {: shortdesc}
 
 ### Puffer für große Client-Header (`large-client-header-buffers`)
@@ -1835,7 +1837,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/large-client-header-buffers: "number=<number> size=<size>"
+   ingress.bluemix.net/large-client-header-buffers: "number=<number> size=<größe>"
 spec:
  tls:
  - hosts:
@@ -1880,7 +1882,7 @@ Verwenden Sie die 'buffer'-Annotation, um das Speichern von Antwortdaten in der 
 **Beschreibung**</br>
 Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen Ihrer Back-End-App und dem Client-Web-Browser. Wenn eine Antwort von der Back-End-App an den Client gesendet wird, werden die Antwortdaten standardmäßig in der Lastausgleichsfunktion für Anwendungen (ALB) gepuffert. Die Lastausgleichsfunktion für Anwendungen (ALB) verarbeitet die Clientantwort als Proxy und beginnt mit dem Senden der Antwort an den Client (in der Geschwindigkeit des Clients). Nachdem alle Daten aus der Back-End-App von der Lastausgleichsfunktion für Anwendungen (ALB) empfangen wurden, wird die Verbindung zur Back-End-App gekappt. Die Verbindung von der Lastausgleichsfunktion für Anwendungen (ALB) zum Client bleibt geöffnet, bis der Client alle Daten empfangen hat.
 
-Wenn die Pufferung von Antwortdaten auf der ALB inaktiviert ist, werden Daten sofort von der ALB an den Client gesendet. Der Client muss eingehende Daten in der Geschwindigkeit der Lastausgleichsfunktion für Anwendungen (ALB) verarbeiten können. Falls der Client zu langsam ist, gehen unter Umständen Daten verloren.
+Wenn die Pufferung von Antwortdaten auf der ALB inaktiviert ist, werden Daten sofort von der ALB an den Client gesendet. Der Client muss eingehende Daten in der Geschwindigkeit der Lastausgleichsfunktion für Anwendungen (ALB) verarbeiten können. Falls der Client zu langsam ist, bleibt die Upstream-Verbindung offen, bis der Client aufgeholt hat.
 
 Die Pufferung von Antwortdaten auf der ALB ist standardmäßig aktiviert.
 
@@ -1920,7 +1922,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, verwenden alle Services diese Annotation.</td>
+<td>Ersetzen Sie <code><em>&lt;mein_service1&gt;</em></code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, verwenden alle Services diese Annotation.</td>
 </tr>
 </tbody></table>
 
@@ -1945,7 +1947,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffers: "serviceName=<myservice> number=<number_of_buffers> size=<size>"
+   ingress.bluemix.net/proxy-buffers: "serviceName=<myservice> number=<number_of_buffers> size=<größe>"
 spec:
  tls:
  - hosts:
@@ -2005,7 +2007,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-buffer-size: "serviceName=<myservice> size=<size>"
+   ingress.bluemix.net/proxy-buffer-size: "serviceName=<myservice> size=<größe>"
 spec:
  tls:
  - hosts:
@@ -2057,7 +2059,7 @@ kind: Ingress
 metadata:
  name: proxy-ingress
  annotations:
-   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=<myservice> size=<size>"
+   ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=<myservice> size=<größe>"
 spec:
  tls:
  - hosts:
@@ -2144,7 +2146,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code><em>&lt;mein_service&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, verwenden alle Services diese Annotation.</td>
+<td>Ersetzen Sie <code><em>&lt;mein_service&gt;</em></code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Trennen Sie mehrere Services durch ein Semikolon (;). Dieses Feld ist optional. Wenn Sie keinen Servicenamen angeben, verwenden alle Services diese Annotation.</td>
 </tr>
 </tbody></table>
 
@@ -2246,7 +2248,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>&lt;header&gt;</code></td>
@@ -2314,7 +2316,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben.</td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben.</td>
 </tr>
 <tr>
 <td><code>&lt;header&gt;</code></td>
@@ -2346,7 +2348,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/client-max-body-size: size=<size>
+   ingress.bluemix.net/client-max-body-size: "serviceName=<myservice> size=<größe>; size=<größe>"
 spec:
  tls:
  - hosts:
@@ -2370,6 +2372,9 @@ spec:
 </thead>
 <tbody>
 <tr>
+<td><code>serviceName</code></td>
+<td>Optional: Zum Anwenden der maximalen Größe des Hauptteils von Clientanforderungen auf einen bestimmten Service ersetzen Sie <code>&lt;<em>myservice</em>&gt;</code> durch den Namen des Service. Wenn Sie keinen Servicenamen angeben, wird die Größe auf alle Services angewendet. In der YAML-Beispieldatei wendet das Format <code>"serviceName=&lt;myservice&gt; size=&lt;größe&gt;; size=&lt;größe&gt;"</code> die erste Größe auf den Service <code>myservice</code> und die zweite Größe auf alle anderen Services an.</li>
+</tr>
 <td><code>&lt;größe&gt;</code></td>
 <td>Die maximal zulässige Größe des Hauptteils der Clientantwort. Um die maximale Größe beispielsweise auf 200 Megabyte festzulegen, definieren Sie <code>200m</code>. Sie können die Größe auf '0' festlegen, um die Prüfung der Größe des Clientanforderungshauptteils zu inaktivieren.</td>
 </tr>
@@ -2566,7 +2571,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Ersetzen Sie <code><em>&lt;mein_service&gt;</em></code> durch den Namen des Kubernetes-Service, den Sie für Ihre App erstellt haben. Dieses Feld ist erforderlich. Wenn ein Servicename nicht enthalten ist, wird die Annotation für alle Services aktiviert.  Wenn ein Servicename enthalten ist, wird die Annotation nur für diesen Service aktiviert. Trennen Sie mehrere Services durch ein Komma (,).</td>
+<td>Ersetzen Sie <code><em>&lt;mein_service&gt;</em></code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Dieses Feld ist erforderlich. Wenn ein Servicename nicht enthalten ist, wird die Annotation für alle Services aktiviert.  Wenn ein Servicename enthalten ist, wird die Annotation nur für diesen Service aktiviert. Trennen Sie mehrere Services durch ein Komma (,).</td>
 </tr>
 <tr>
 <td><code>idToken=false</code></td>
@@ -2586,16 +2591,16 @@ Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung ver
       3. Klicken Sie auf **Erstellen**.
 
 2. Fügen Sie Umleitungs-URLs für Ihre App hinzu. Eine Umleitungs-URL ist der Callback-Endpunkt Ihrer App. Um Phishing-Attacken zu verhindern, validiert die App-ID die Anforderungs-URL gegen die Whitelist von Umleitungs-URLs.
-  1. Navigieren Sie in der {{site.data.keyword.appid_short_notm}}-Managementkonsole zu **Identitätsprovider > Verwalten**.
-  2. Stellen Sie sicher, dass Sie einen Identitätsprovider ausgewählt haben. Wenn kein Identitätsprovider ausgewählt ist, wird der Benutzer nicht authentifiziert, sondern es wird ein Zugriffstoken für den anonymen Zugriff auf die App ausgegeben.
-  3. Fügen Sie im Feld **Web-Weiterleitungs-URLs** Weiterleitungs-URLs für Ihre App im Format `http://<hostname>/<app_path>/appid_callback` oder `https://<hostname>/<app_path>/appid_callback` hinzu.
+  1. Navigieren Sie in der {{site.data.keyword.appid_short_notm}}-Managementkonsole zu **Authentifizierung verwalten**.
+  2. Stellen Sie sicher, dass Sie auf der Registerkarte **Identitätsprovider** einen Identitätsprovider ausgewählt haben. Wenn kein Identitätsprovider ausgewählt ist, wird der Benutzer nicht authentifiziert, sondern es wird ein Zugriffstoken für den anonymen Zugriff auf die App ausgegeben.
+  3. Fügen Sie auf der Registerkarte **Authentifizierungseinstellungen** Weiterleitungs-URLs für Ihre App im Format `http://<hostname>/<app_path>/appid_callback` oder `https://<hostname>/<app_path>/appid_callback` hinzu.
 
     {{site.data.keyword.appid_full_notm}} stellt eine Abmeldefunktion bereit: Wenn `/logout` in Ihrem {{site.data.keyword.appid_full_notm}}-Pfad vorhanden ist, werden Cookies entfernt und der Benutzer wird an die Anmeldeseite zurückverwiesen. Zur Verwendung dieser Funktion müssen Sie `/appid_logout` an Ihre Domäne im Format `https://<hostname>/<app_path>/appid_logout` anhängen und diese URL in der Liste der Umleitungs-URLs verwenden.
     {: note}
 
 3. Binden Sie die {{site.data.keyword.appid_short_notm}}-Serviceinstanz an den Cluster. Der Befehl erstellt einen Serviceschlüssel für die Serviceinstanz. Alternativ können Sie das Flag `--key` mit angeben, um vorhandene Berechtigungsnachweise für den Serviceschlüssel zu verwenden.
   ```
-  ibmcloud ks cluster-service-bind --cluster <clustername_oder_ID> --namespace <namensbereich> --service <serviceinstanzname> [--key <serviceinstanzschlüssel>]
+  ibmcloud ks cluster-service-bind --cluster <clustername_oder_-id> --namespace <namensbereich> --service <serviceinstanzname> [--key <serviceinstanzschlüssel>]
   ```
   {: pre}
   Wenn der Service Ihrem Cluster erfolgreich hinzugefügt wurde, wird ein geheimer Schlüssel für den Cluster erstellt, der die Berechtigungsnachweise Ihrer Serviceinstanz enthält. CLI-Beispielausgabe:
@@ -2615,3 +2620,5 @@ Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung ver
   {: pre}
 
 5. Verwenden Sie den geheimen Bindungsschlüssel und den Namensbereich des Clusters, um die Annotation `appid-auth` zu Ihrer Ingress-Ressource hinzuzufügen.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Anwendungsfälle aus dem Gesundheitswesen für {{site.data.keyword.cloud_notm}}
@@ -39,7 +39,7 @@ Eine IT-Führungskraft eines Anbieters aus dem Gesundheitswesen ist für lokale 
 Warum {{site.data.keyword.cloud_notm}}: Da er den Patientenservice verbessern wollte, informierte sich der Anbieter über {{site.data.keyword.containerlong_notm}} und {{site.data.keyword.contdelivery_full}}, um damit auf einer sicheren Plattform die IT-Ausgaben zu reduzieren und die Entwicklung zu beschleunigen. Für die stark genutzten SaaS-Systeme des Anbieters, die sowohl für die Systeme zum Speichern der Patientendatensätze als auch für die Apps zum Erstellen der Geschäftsberichte verwendet wurden, waren häufig Aktualisierungen erforderlich. Doch die lokale Umgebung verhinderte eine agile Entwicklung. Außerdem wollte der Provider den steigenden Personalkosten und dem sinkenden Budget entgegenwirken.
 
 Schlüsseltechnologien:
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Horizontale Skalierung](/docs/containers?topic=containers-app#highly_available_apps)
 * [Containersicherheit und -isolierung](/docs/containers?topic=containers-security#security)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

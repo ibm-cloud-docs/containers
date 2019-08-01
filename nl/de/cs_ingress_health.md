@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Protokollierung und Überwachung von Ingress
@@ -37,7 +38,7 @@ Wenn Sie Ingress-Fehler beheben oder die Ingress-Aktivität überwachen wollen, 
 
 Für Ihre Ingress-ALBs werden automatisch Protokolle erfasst. Um die ALB-Protokolle anzuzeigen, können Sie zwischen zwei Optionen wählen.
 * [Erstellen Sie eine Protokollierungskonfiguration für den Ingress-Service](/docs/containers?topic=containers-health#configuring) in Ihrem Cluster.
-* Überprüfen Sie die Protokolle über die CLI. **Hinweis:** Sie müssen mindestens über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Leseberechtigter** (Reader)](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` verfügen.
+* Überprüfen Sie die Protokolle über die CLI. **Hinweis:** Sie müssen mindestens über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Leseberechtigter**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` verfügen.
     1. Rufen Sie die ID eines Pods für eine ALB ab.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -136,7 +137,7 @@ Sie können den Inhalt und das Format von Protokollen anpassen, die für die Ing
 
 Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine Protokollfelder an. Sie können jedoch auch ein angepasstes Protokollformat erstellen, indem Sie auswählen, welche Protokollkomponenten weitergeleitet und wie die Komponenten in der Protokollausgabe angeordnet werden.
 
-Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** (Writer) oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
+Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
 
 1. Bearbeiten Sie die Konfigurationsdatei für die Konfigurationszuordnungsressource (Configmap) `ibm-cloud-provider-ingress-cm`.
 
@@ -694,7 +695,7 @@ Gemeinsam genutzte Speicherzonen sind so definiert, dass Workerprozesse Informat
 
 In der Ingress-Konfigurationszuordnung `ibm-cloud-provider-ingress-cm` legt das Feld `vts-status-zone-size` die Größe der gemeinsam genutzten Speicherzone für die Messdatenerfassung fest. Standardmäßig ist der Wert für `vts-status-zone-size` auf `10m` gesetzt. Wenn Sie über eine große Umgebung verfügen, die mehr Speicher für die Erfassung von Messwerten benötigt, können Sie den Standardwert überschreiben, um stattdessen einen größeren Wert zu verwenden, indem Sie die folgenden Schritte ausführen.
 
-Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** (Writer) oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
+Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
 
 1. Bearbeiten Sie die Konfigurationsdatei für die Konfigurationszuordnungsressource (Configmap) `ibm-cloud-provider-ingress-cm`.
 

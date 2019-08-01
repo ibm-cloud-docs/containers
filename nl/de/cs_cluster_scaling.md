@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, node scaling
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:gif: data-image-type='gif'}
 
 
@@ -44,11 +45,11 @@ Der Cluster-Autoscaler prüft den Cluster in regelmäßigen Abständen, um die A
 {: shortdesc}
 
 *   **Anstehende Pods für Scale-up:** Ein Pod gilt als anstehend, wenn nicht ausreichende Rechenressourcen vorhanden sind, um den Pod auf einem Workerknoten zu planen. Wenn der Cluster-Autoscaler anstehende Pods erkennt, fügt der Autoscaler Workerknoten durch ein gleichmäßiges Scale-up über Zonen hinweg hinzu, um die Workloadressourcenanforderungen zu erfüllen.
-*   **Nicht ausgelastete Workerknoten für Scale-down:** Standardmäßig werden Workerknoten, die über 10 Minuten oder länger mit weniger als 50% der angeforderten Gesamtrechenressourcen arbeiten und deren Workloads auf anderen Workerknoten neu geplant werden können, als nicht ausgelastet betrachtet. Wenn der Cluster-Autoscaler nicht ausgelastete Workerknoten erkennt, führt er ein Scale-down Ihrer Workerknoten um jeweils einen pro Mal durch, sodass nur die Rechenressourcen vorhanden sind, die benötigt werden. Falls Sie dies wünschen, können Sie den standardmäßig verwendeten Auslastungsschwellenwert von 50% für 10 Minuten für das Scale-down [anpassen](/docs/containers?topic=containers-ca#ca_chart_values).
+*   **Nicht ausgelastete Workerknoten für Scale-down:** Standardmäßig werden Workerknoten, die über 10 Minuten oder länger mit weniger als 50 % der angeforderten Gesamtrechenressourcen arbeiten und deren Workloads auf anderen Workerknoten neu geplant werden können, als nicht ausgelastet betrachtet. Wenn der Cluster-Autoscaler nicht ausgelastete Workerknoten erkennt, führt er ein Scale-down Ihrer Workerknoten um jeweils einen pro Mal durch, sodass nur die Rechenressourcen vorhanden sind, die benötigt werden. Falls Sie dies wünschen, können Sie den standardmäßig verwendeten Auslastungsschwellenwert von 50% für 10 Minuten für das Scale-down [anpassen](/docs/containers?topic=containers-ca#ca_chart_values).
 
 Das Prüfen (Scannen) und Durchführen von Scale-up- und Scale-down-Operationen erfolgt in regelmäßigen Intervallen im Verlauf der Zeit und kann abhängig von der Anzahl der Workerknoten auch eine längere Zeit (z. B. 30 Minuten) dauern.
 
-Der Cluster-Autoscaler passt die Anzahl von Workerknoten an, indem er die [Ressourcenanforderungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/), die Sie für Ihre Bereitstellungen definieren, und nicht die tatsächliche Nutzung von Workerknoten betrachtet. Falls Ihre Pods und Bereitstellungen keine angemessenen Mengen von Ressourcen anfordern, müssen Sie die Konfigurationsdateien der Pods anpassen. Diese Anpassung kann der Cluster-Autoscaler nicht für Sie vornehmen. Beachten Sie darüber hinaus, dass Workerknoten einen Teil ihrer Rechenressourcen für die grundlegende Clusterfunktionalität, für Standard-Add-ons und angepasste [Add-ons](/docs/containers?topic=containers-update#addons) sowie für [Ressourcenreserven](/docs/containers?topic=containers-plan_clusters#resource_limit_node) verwenden.
+Der Cluster-Autoscaler passt die Anzahl von Workerknoten an, indem er die [Ressourcenanforderungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/), die Sie für Ihre Bereitstellungen definieren, und nicht die tatsächliche Nutzung von Workerknoten betrachtet. Falls Ihre Pods und Bereitstellungen keine angemessenen Mengen von Ressourcen anfordern, müssen Sie die Konfigurationsdateien der Pods anpassen. Diese Anpassung kann der Cluster-Autoscaler nicht für Sie vornehmen. Beachten Sie darüber hinaus, dass Workerknoten einen Teil ihrer Rechenressourcen für die grundlegende Clusterfunktionalität, für Standard-Add-ons und angepasste [Add-ons](/docs/containers?topic=containers-update#addons) sowie für [Ressourcenreserven](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) verwenden.
 {: note}
 
 <br>
@@ -56,7 +57,7 @@ Der Cluster-Autoscaler passt die Anzahl von Workerknoten an, indem er die [Resso
 Im Allgemeinen berechnet der Cluster-Autoscaler die Anzahl der Workerknoten, die Ihr Cluster zur Ausführung seiner Workload benötigt. Die Durchführung von Scale-up- oder Scale-down-Operationen für den Cluster hängt von zahlreichen Faktoren ab, wie zum Beispiel den folgenden.
 *   Die minimale und maximale Workerknotengröße pro Zone, die Sie festlegen.
 *   Ihre Ressourcenanforderungen für anstehende Pods und bestimmte Metadaten, die Sie der Workload zuordnen, wie zum Beispiel Anti-Affinität, Bezeichnungen zur Platzierung von Pods nur auf bestimmten Maschinentypen oder [Budgets für den Podausfall (Pod Disruption Budgets)![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
-*   Die Worker-Pools, die der Cluster-Autoscaler verwaltet, in einem [Mehrzonencluster](/docs/containers?topic=containers-plan_clusters#multizone) potenziell auch über Zonen hinweg.
+*   Die Worker-Pools, die der Cluster-Autoscaler verwaltet, in einem [Mehrzonencluster](/docs/containers?topic=containers-ha_clusters#multizone) potenziell auch über Zonen hinweg.
 *   Die [angepassten Helmdiagramm-Werte](#ca_chart_values), die festgelegt sind, wie z. B. das Überspringen der Workerknoten zum Löschen, wenn der lokale Speicher verwendet wird.
 
 Weitere Informationen finden Sie in den FAQs zu Kubernetes Cluster Autoscaler zu der Frage [Wie funktioniert ein Scale-up? ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-up-work) sowie [Wie funktioniert ein Scale-down? ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-scale-down-work).
@@ -69,8 +70,12 @@ Sie können die Einstellungen anpassen oder andere Kubernetes-Ressourcen verwend
 *   **Scale-down**: [Passen Sie die Cluster-Autoscaler-Helmdiagrammwerte an](#ca_chart_values), z. B. `scaleDownUnneededTime`, `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete` oder `scaleDownUtilizationThreshold`.
 
 <br>
+**Kann ich die Mindestgröße pro Zone so festlegen, dass für meinen Cluster sofort ein Scale-up auf diese Größe durchgeführt wird?**<br>
+Nein, durch Festlegen von `minSize` wird nicht automatisch ein Scale-up ausgelöst. Der Parameter `minSize` ist ein Schwellenwert, sodass der Cluster-Autoscaler keine Skalierung unter eine bestimmte Anzahl von Workerknoten pro Zone durchführt. Wenn für Ihren Cluster diese Anzahl pro Zone noch nicht festgelegt ist, führt der Cluster-Autoscaler ein Scale-up erst durch, wenn Workloadressourcenanforderungen weitere Ressourcen erfordern. Beispiel: Wenn Sie einen Worker-Pool mit einem Workerknoten pro drei Zonen haben (insgesamt drei Workerknoten) und den Parameter `minSize` auf `4` pro Zone setzen, stellt der Cluster-Autoscaler nicht sofort drei zusätzliche Workerknoten pro Zone (insgesamt 12 Workerknoten) bereit. Stattdessen wird die Scale-up-Operation durch Ressourcenanforderungen ausgelöst. Wenn Sie eine Workload erstellen, die die Ressourcen von 15 Workerknoten anfordert, führt der Cluster-Autoscaler ein Scale-up für den Worker-Pool durch, damit diese Anforderung erfüllt werden kann. Jetzt bedeutet der Parameter `minSize`, dass der Cluster-Autoscaler kein Scale-down unter vier Workerknoten durchführt, auch wenn Sie die Workload entfernen, die die Menge anfordert.
+
+<br>
 **Wie unterscheidet sich dieses Verhalten von Worker-Pools, die nicht vom Cluster-Autoscaler verwaltet werden?**<br>
-Wenn Sie einen [Worker-Pool erstellen](/docs/containers?topic=containers-clusters#add_pool), geben Sie an, wie viele Workerknoten pro Zone der Worker-Pool enthält. Der Worker-Pool verwaltet diese Anzahl von Workerknoten, bis Sie seine [Größe ändern](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) oder den Worker-Pool [neu ausgleichen](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance). Der Worker-Pool fügt keine Workerknoten für Sie hinzu und entfernt auch keine Workerknoten. Wenn Sie mehr Pods haben, als geplant werden können, verbleiben die Pods im anstehenden Status (Wartestatus), bis Sie die Größe des Worker-Pools ändern.
+Wenn Sie einen [Worker-Pool erstellen](/docs/containers?topic=containers-add_workers#add_pool), geben Sie an, wie viele Workerknoten pro Zone der Worker-Pool enthält. Der Worker-Pool verwaltet diese Anzahl von Workerknoten, bis Sie seine [Größe ändern](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) oder den Worker-Pool [neu ausgleichen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance). Der Worker-Pool fügt keine Workerknoten für Sie hinzu und entfernt auch keine Workerknoten. Wenn Sie mehr Pods haben, als geplant werden können, verbleiben die Pods im anstehenden Status (Wartestatus), bis Sie die Größe des Worker-Pools ändern.
 
 Wenn Sie den Cluster-Autoscaler für einen Worker-Pool aktivieren, werden Scale-up- und Scale-down-Operationen für Workerknoten als Reaktion auf Ihre Einstellungen der Podspezifikationen und auf Ressourcenanforderungen durchgeführt. Sie brauchen den Worker-Pool nicht manuell in der Größe zu ändern oder neu auszugleichen.
 
@@ -81,15 +86,15 @@ Betrachten Sie die folgende Abbildung eines Beispiels für Scale-up- und Scale-d
 _Abbildung: Automatische Durchführung von Scale-ups und Scale-downs._
 ![Automatische Durchführung von Scale-ups und Scale-downs (GIF-Abbildung)](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  Der Cluster besitzt vier Workerknoten in zwei Worker-Pools, die auf zwei Zonen verteilt sind. Jeder Pool enthält einen Workerknoten pro Zone, jedoch hat **Worker Pool A** den Maschinentyp `u2c.2x4` und **Worker Pool B** den Maschinentyp `b2c.4x16`. Ihre gesamten Rechenressourcen betragen grob 10 Cores (2 Cores x 2 Workerknoten für **Worker Pool A** und 4 Cores x 2 Workerknoten für **Worker Pool B**). Ihr Cluster führt zurzeit eine Workload aus, die 6 dieser 10 Cores anfordert. Beachten Sie, dass weitere Rechenressourcen auf jedem Workerknoten durch die [reservierten Ressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node) belegt werden, die zur Ausführung des Clusters, der Workerknoten und vorhandener Add-ons, wie zum Beispiel den Cluster-Autoscaler, erforderlich sind.
+1.  Der Cluster besitzt vier Workerknoten in zwei Worker-Pools, die auf zwei Zonen verteilt sind. Jeder Pool enthält einen Workerknoten pro Zone, jedoch hat **Worker Pool A** den Maschinentyp `u2c.2x4` und **Worker Pool B** den Maschinentyp `b2c.4x16`. Ihre gesamten Rechenressourcen betragen grob 10 Cores (2 Cores x 2 Workerknoten für **Worker Pool A** und 4 Cores x 2 Workerknoten für **Worker Pool B**). Ihr Cluster führt zurzeit eine Workload aus, die 6 dieser 10 Cores anfordert. Weitere Rechenressourcen werden auf jedem Workerknoten durch die [reservierten Ressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) belegt, die zur Ausführung des Clusters, der Workerknoten und vorhandener Add-ons, wie zum Beispiel den Cluster-Autoscaler, erforderlich sind.
 2.  Der Cluster-Autoscaler ist so konfiguriert, dass er beide Worker-Pools mit den folgenden Minimal- und Maximalgrößen pro Zone verwaltet:
     *  **Worker Pool A:** `minSize=1`, `maxSize=5`.
     *  **Worker Pool B:** `minSize=1`, `maxSize=2`.
-3.  Sie planen Bereitstellungen, die 14 zusätzliche Podreplikate einer App erfordern, die 1 CPU-Core pro Replikat anfordert. Ein Podreplikat kann auf den aktuellen Ressourcen bereitgestellt werden, die anderen 13 sind anstehend.
+3.  Sie planen Bereitstellungen, die 14 zusätzliche Podreplikate einer App erfordern, die einen CPU-Core pro Replikat anfordert. Ein Podreplikat kann auf den aktuellen Ressourcen bereitgestellt werden, die anderen 13 sind anstehend.
 4.  Der Cluster-Autoscaler führt Scale-ups Ihrer Workerknoten innerhalb dieser Beschränkungen durch, um die zusätzlichen Ressourcenanforderungen der 13 Podreplikate zu unterstützen.
-    *  **Worker Pool A:** 7 Workerknoten werden im Umlaufverfahren so gleichmäßig wie möglich auf die Zonen verteilt hinzugefügt. Die Workerknoten erhöhen die Rechenkapazität des Clusters um ca. 14 Cores (2 Cores x 7 Workerknoten).
-    *  **Worker Pool B:** 2 Workerknoten werden gleichmäßig auf die Zonen verteilt hinzufügt, sodass die maximale Größe (`maxSize`) von 2 Workerknoten pro Zone erreicht wird. Die Workerknoten erhöhen die Kapazität des Clusters um ca. 8 Cores (4 Cores x 2 Workerknoten).
-5.  Die 20 Pods mit 1-Core-Anforderungen werden wie folgt auf die Workerknoten verteilt. Beachten Sie, dass die Pods für Ihre Workload nicht alle verfügbaren Rechenressourcen eines Workerknotens nutzen können, da Workerknoten Ressourcenreserven und Pods haben, die ausgeführt werden, um Standardclusterfunktionen abzudecken. Beispiel: Die Workerknoten vom Typ `b2c.4x16` haben zwar 4 Cores, jedoch können nur 3 Pods, die jeweils das Minimum von 1 Core anfordern, auf den Workerknoten geplant werden.
+    *  **Worker Pool A:** Sieben Workerknoten werden im Umlaufverfahren so gleichmäßig wie möglich auf die Zonen verteilt hinzugefügt. Die Workerknoten erhöhen die Rechenkapazität des Clusters um ca. 14 Cores (2 Cores x 7 Workerknoten).
+    *  **Worker Pool B:** Zwei Workerknoten werden gleichmäßig auf die Zonen verteilt hinzufügt, sodass die maximale Größe (`maxSize`) von 2 Workerknoten pro Zone erreicht wird. Die Workerknoten erhöhen die Kapazität des Clusters um ca. 8 Cores (4 Cores x 2 Workerknoten).
+5.  Die 20 Pods mit 1-Core-Anforderungen werden wie folgt auf die Workerknoten verteilt. Die Pods für Ihre Workload können nicht alle verfügbaren Rechenressourcen eines Workerknotens nutzen, da Workerknoten Ressourcenreserven und Pods haben, die ausgeführt werden, um Standardclusterfunktionen abzudecken. Beispiel: Die Workerknoten vom Typ `b2c.4x16` haben zwar vier Cores, jedoch können nur drei Pods, die jeweils das Minimum von einem Core anfordern, auf den Workerknoten geplant werden.
     <table summary="Eine Tabelle, die die Verteilung einer Workload im skalierten Cluster beschreibt.">
     <caption>Workloadverteilung in einem skalierten Cluster.</caption>
     <thead>
@@ -106,33 +111,33 @@ _Abbildung: Automatische Durchführung von Scale-ups und Scale-downs._
       <td>A</td>
       <td>dal10</td>
       <td>u2c.2x4</td>
-      <td>4 Knoten</td>
-      <td>3 Pods</td>
+      <td>Vier Knoten</td>
+      <td>Drei Pods</td>
     </tr>
     <tr>
       <td>A</td>
       <td>dal12</td>
       <td>u2c.2x4</td>
-      <td>5 Knoten</td>
-      <td>5 Pods</td>
+      <td>Fünf Knoten</td>
+      <td>Fünf Pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal10</td>
       <td>b2c.4x16</td>
-      <td>2 Knoten</td>
-      <td>6 Pods</td>
+      <td>Zwei Knoten</td>
+      <td>Sechs Pods</td>
     </tr>
     <tr>
       <td>B</td>
       <td>dal12</td>
       <td>b2c.4x16</td>
-      <td>2 Knoten</td>
-      <td>6 Pods</td>
+      <td>Zwei Knoten</td>
+      <td>Sechs Pods</td>
     </tr>
     </tbody>
     </table>
-6.  Sie benötigen die zusätzliche Workload nicht mehr, sodass Sie die Bereitstellung löschen. Nach kurzer Zeit erkennt der Cluster-Autoscaler, dass Ihr Cluster nicht mehr alle Rechenressourcen benötigt, und beginnt mit einem Scale-down der Workerknoten, indem er jeweils einen gleichzeitig entfernt.
+6.  Sie benötigen die zusätzliche Workload nicht mehr, sodass Sie die Bereitstellung löschen. Nach kurzer Zeit erkennt der Cluster-Autoscaler, dass Ihr Cluster nicht mehr alle Rechenressourcen benötigt, und führt ein Scale-down der Workerknoten durch, indem er jeweils einen entfernt.
 7.  Für Ihre Worker-Pools wird ein Scale-down durchgeführt. Der Cluster-Autoscaler scannt die Worker-Pools in regelmäßigen Abständen auf anstehende Podressourcenanforderungen und nicht ausgelastete Workerknoten, um ein Scale-up oder Scale-down für die Worker-Pools durchzuführen.
 
 ## Praktiken zur skalierbaren Bereitstellung folgen
@@ -157,7 +162,7 @@ Der Cluster-Autoscaler skaliert Ihren Cluster in Reaktion auf die [Ressourcenanf
 ### Kann ich einen Worker-Pool auf null (0) Knoten herunterskalieren?
 {: #scalable-practices-zero}
 
-Nein, Sie können den Cluster-Autoscaler nicht auf `0` herunterskalieren (`minSize`). Zudem müssen Sie, wenn Sie die Lastausgleichsfunktionen für Anwendungen (ALBs) im Cluster nicht [inaktivieren](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure), die Einstellung für `minSize` auf `2` Workerknoten pro Zone festlegen, sodass die ALB-Pods zwecks Hochverfügbarkeit verteilt werden können.
+Nein, Sie können den Cluster-Autoscaler nicht auf `0` herunterskalieren (`minSize`). Zudem müssen Sie, wenn Sie nicht alle Lastausgleichsfunktionen für Anwendungen (ALBs) in allen Zonen im Cluster [inaktivieren](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure), die Einstellung für `minSize` auf `2` Workerknoten pro Zone festlegen, sodass die ALB-Pods zwecks Hochverfügbarkeit verteilt werden können.
 {: shortdesc}
 
 ### Kann ich meine Bereitstellungen für die automatische Skalierung optimieren?
@@ -177,14 +182,14 @@ Da Taints nicht auf Worker-Pool-Ebene angewendet werden können, wenden Sie kein
 ### Warum sind meine automatisch skalierten Worker-Pools nicht ausgeglichen?
 {: #scalable-practices-unbalanced}
 
-Während eines Scale-ups gleicht der Cluster-Autoscaler Knoten mit einer zugelassenen Differenz von plus oder minus einem (+/- 1) Workerknoten über Zonen hinweg aus. Ihre anstehenden Workloads fordern möglicherweise nicht genügend Kapazität an, um alle Zonen auszugleichen. Wenn Sie in einem solchen Fall die Worker-Pools manuell ausgleichen wollen, [aktualisieren Sie die Konfigurationszuordnung (Configmap) Ihres Cluster-Autoscalers](#ca_cm), um den nicht ausgeglichenen Worker-Pool zu entfernen. Führen Sie anschließend den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) `ibmcloud ks worker-pool-rebalance` aus und fügen Sie den Worker-Pool der Konfigurationszuordnung des Cluster-Autoscalers wieder hinzu.
+Während eines Scale-ups gleicht der Cluster-Autoscaler Knoten mit einer zugelassenen Differenz von plus oder minus einem (+/- 1) Workerknoten über Zonen hinweg aus. Ihre anstehenden Workloads fordern möglicherweise nicht genügend Kapazität an, um alle Zonen auszugleichen. Wenn Sie in einem solchen Fall die Worker-Pools manuell ausgleichen wollen, [aktualisieren Sie die Konfigurationszuordnung (Configmap) Ihres Cluster-Autoscalers](#ca_cm), um den nicht ausgeglichenen Worker-Pool zu entfernen. Führen Sie anschließend den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) `ibmcloud ks worker-pool-rebalance` aus und fügen Sie den Worker-Pool der Konfigurationszuordnung des Cluster-Autoscalers wieder hinzu.
 {: shortdesc}
 
 
 ### Warum kann ich die Größe meines Worker-Pools nicht ändern oder den Worker-Pool nicht erneut ausgleichen?
 {: #scalable-practices-resize}
 
-Wenn der Cluster-Autoscaler für Worker-Pools aktiviert ist, können Sie Ihre Worker-Pools nicht [in der Größe ändern](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) oder [neu ausgleichen](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance). Sie müssen die [Konfigurationszuordnung (Configmap) bearbeiten](#ca_cm), um die Minimal- und Maximalgrößen von Worker-Pools zu ändern oder die automatische Clusterskalierung für einen bestimmten Worker-Pool zu inaktivieren. Verwenden Sie nicht den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm) `ibmcloud ks worker-rm`, um einzelne Workerknoten aus dem Worker-Pool zu entfernen, da dies zu einer ungleichmäßigen Workerknotenverteilung im Worker-Pool führen kann.
+Wenn der Cluster-Autoscaler für Worker-Pools aktiviert ist, können Sie Ihre Worker-Pools nicht [in der Größe ändern](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) oder [neu ausgleichen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance). Sie müssen die [Konfigurationszuordnung (Configmap) bearbeiten](#ca_cm), um die Minimal- und Maximalgrößen von Worker-Pools zu ändern oder die automatische Clusterskalierung für einen bestimmten Worker-Pool zu inaktivieren. Verwenden Sie nicht den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) `ibmcloud ks worker-rm`, um einzelne Workerknoten aus dem Worker-Pool zu entfernen, da dies zu einer ungleichmäßigen Workerknotenverteilung im Worker-Pool führen kann.
 {: shortdesc}
 
 Darüber hinaus ist zu beachten, dass die Größe von Worker-Pools nicht manuell geändert werden kann, wenn Sie die Worker-Pools vor dem Deinstallieren des Helm-Diagramms `ibm-iks-cluster-autoscaler` nicht inaktivieren. Installieren Sie in diesem Fall das Helm-Diagramm `ibm-iks-cluster-autoscaler` erneut, [bearbeiten Sie die Konfigurationszuordnung](#ca_cm), um den Worker-Pool zu inaktivieren, und wiederholen Sie den Versuch.
@@ -200,15 +205,15 @@ Installieren Sie das {{site.data.keyword.containerlong_notm}}-Cluster-Autoscaler
 
 **Vorbereitende Schritte**:
 
-1.  [Installieren Sie die erforderliche CLI und die erforderlichen Plug-ins:](/docs/cli?topic=cloud-cli-ibmcloud-cli)
+1.  [Installieren Sie die erforderliche CLI und die erforderlichen Plug-ins:](/docs/cli?topic=cloud-cli-getting-started)
     *  {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)
     *  {{site.data.keyword.containerlong_notm}}-Plug-in (`ibmcloud ks`)
     *  {{site.data.keyword.registrylong_notm}}-Plug-in (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Erstellen Sie einen Standardcluster](/docs/containers?topic=containers-clusters#clusters_ui), der mit **Kubernetes Version 1.12 oder höher** ausgeführt wird.
-3.   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Vergewissern Sie sich, dass Ihre {{site.data.keyword.Bluemix_notm}} Identity and Access Management-Berechtigungsnachweise im Cluster gespeichert sind. Der Cluster-Autoscaler verwendet diesen geheimen Schlüssel zur Authentifizierung.
+3.   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4.  Vergewissern Sie sich, dass Ihre {{site.data.keyword.Bluemix_notm}} Identity and Access Management-Berechtigungsnachweise im Cluster gespeichert sind. Der Cluster-Autoscaler verwendet diesen geheimen Schlüssel zur Authentifizierung von Berechtigungsnachweisen. Wenn der geheime Schlüssel fehlt, [erstellen Sie ihn, indem Sie die Berechtigungsnachweise zurücksetzen](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -225,7 +230,7 @@ Installieren Sie das {{site.data.keyword.containerlong_notm}}-Cluster-Autoscaler
         Labels:             ibm-cloud.kubernetes.io/worker-pool-id=a1aa111111b22b22cc3c3cc444444d44-4d555e5
         ```
         {: screen}
-    2.  Falls Ihr Worker-Pool die erforderliche Bezeichnung nicht hat, [fügen Sie einen neuen Worker-Pool hinzu](/docs/containers?topic=containers-clusters#add_pool) und verwenden Sie diesen Worker-Pool mit dem Cluster-Autoscaler.
+    2.  Falls Ihr Worker-Pool die erforderliche Bezeichnung nicht hat, [fügen Sie einen neuen Worker-Pool hinzu](/docs/containers?topic=containers-add_workers#add_pool) und verwenden Sie diesen Worker-Pool mit dem Cluster-Autoscaler.
 
 
 <br>
@@ -257,7 +262,7 @@ Installieren Sie das {{site.data.keyword.containerlong_notm}}-Cluster-Autoscaler
     {: pre}
 4.  Installieren Sie das Helm-Diagramm für den Cluster-Autoscaler im Namensbereich `kube-system` Ihres Clusters.
 
-    Während der Installation haben Sie die Option, die [Einstellungen des Cluster-Autoscalers weiter anzupassen](#ca_chart_values), z. B. die Wartezeit bis zum Durchführen von Scale-ups oder Scale-downs von Workerknoten.
+    Während der Installation können Sie die [Einstellungen des Cluster-Autoscalers weiter anpassen](#ca_chart_values), z. B. die Wartezeit bis zum Durchführen von Scale-ups oder Scale-downs von Workerknoten.
     {: tip}
 
     ```
@@ -348,12 +353,12 @@ Installieren Sie das {{site.data.keyword.containerlong_notm}}-Cluster-Autoscaler
 Aktualisieren Sie die Konfigurationszuordnung (Configmap) für den Cluster-Autoscaler, um die automatische Skalierung von Workerknoten in Ihren Worker-Pools entsprechend den Minimal- und Maximalwerten, die Sie festlegen, zu aktivieren.
 {: shortdesc}
 
-Nach der Bearbeitung der Konfigurationszuordnung zur Aktivierung eines Worker-Pools beginnt der Cluster-Autoscaler mit der Skalierung als Reaktion auf Ihre Workloadanforderungen. Dementsprechend ist es nicht möglich, die [Größe der Worker-Pools zu ändern](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) oder die [Worker-Pools neu auszugleichen](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance). Das Prüfen (Scannen) und Durchführen von Scale-up- und Scale-down-Operationen erfolgt in regelmäßigen Intervallen im Verlauf der Zeit und kann abhängig von der Anzahl der Workerknoten auch eine längere Zeit (z. B. 30 Minuten) dauern. Wenn Sie später den [Cluster-Autoscaler entfernen](#ca_rm) wollen, müssen Sie jeden Worker-Pool in der Konfigurationszuordnung zuerst inaktivieren.
+Nach der Bearbeitung der Konfigurationszuordnung zur Aktivierung eines Worker-Pools skaliert der Cluster-Autoscaler Ihren Cluster als Reaktion auf Ihre Workloadanforderungen. Dementsprechend ist es nicht möglich, die [Größe der Worker-Pools zu ändern](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) oder die [Worker-Pools neu auszugleichen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance). Das Prüfen (Scannen) und Durchführen von Scale-up- und Scale-down-Operationen erfolgt in regelmäßigen Intervallen im Verlauf der Zeit und kann abhängig von der Anzahl der Workerknoten auch eine längere Zeit (z. B. 30 Minuten) dauern. Wenn Sie später den [Cluster-Autoscaler entfernen](#ca_rm) wollen, müssen Sie jeden Worker-Pool in der Konfigurationszuordnung zuerst inaktivieren.
 {: note}
 
 **Vorbereitende Schritte**:
 *  [Installieren Sie das Plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Gehen Sie wie folgt vor, um die Konfigurationszuordnung und Werte für den Cluster-Autoscaler zu aktualisieren:**
 
@@ -380,7 +385,7 @@ Nach der Bearbeitung der Konfigurationszuordnung zur Aktivierung eines Worker-Po
       uid: b45d047b-f406-11e8-b7f0-82ddffc6e65e
     ```
     {: screen}
-2.  Bearbeiten Sie die Konfigurationszuordnung mit den Parametern, um zu definieren, wie der Cluster-Autoscaler Ihren Worker-Pool skalieren soll. Beachten Sie, dass Sie, wenn Sie die Lastausgleichsfunktionen für Anwendungen (ALBs) in Ihrem Standardcluster nicht [inaktiviert](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) haben, den Wert des Parameters `minSize` in `2` pro Zone ändern müssen, damit die ALB-Pods für Hochverfügbarkeitszwecke verteilt werden können.
+2.  Bearbeiten Sie die Konfigurationszuordnung mit den Parametern, um zu definieren, wie der Cluster-Autoscaler Ihren Worker-Pool skalieren soll. **Hinweis:** Wenn Sie nicht alle Lastausgleichsfunktionen für Anwendungen (ALBs) in allen Zonen Ihres Standardclusters [inaktiviert](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) haben, müssen Sie den Wert des Parameters `minSize` in `2` pro Zone ändern, damit die ALB-Pods für Hochverfügbarkeitszwecke verteilt werden können.
 
     <table>
     <caption>Parameter der Konfigurationszuordnung für den Cluster-Autoscaler</caption>
@@ -396,15 +401,16 @@ Nach der Bearbeitung der Konfigurationszuordnung zur Aktivierung eines Worker-Po
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Hinweis:** Der Cluster-Autoscaler kann nur Worker-Pools skalieren, die die Bezeichnung (Label) `ibm-cloud.kubernetes.io/worker-pool-id` haben. Zum Prüfen, ob Ihr Worker-Pool die erforderliche Bezeichnung hat, führen Sie den folgenden Befehl aus: `ibmcloud ks worker-pool-get --cluster <clustername_oder_-id> --worker-pool <worker-pool-name_oder_-id> | grep Labels`. Falls Ihr Worker-Pool die erforderliche Bezeichnung nicht hat, [fügen Sie einen neuen Worker-Pool hinzu](/docs/containers?topic=containers-clusters#add_pool) und verwenden Sie diesen Worker-Pool mit dem Cluster-Autoscaler.</td>
+    **Hinweis:** Der Cluster-Autoscaler kann nur Worker-Pools skalieren, die die Bezeichnung (Label) `ibm-cloud.kubernetes.io/worker-pool-id` haben. Zum Prüfen, ob Ihr Worker-Pool die erforderliche Bezeichnung hat, führen Sie den folgenden Befehl aus: `ibmcloud ks worker-pool-get --cluster <clustername_oder_-id> --worker-pool <worker-pool-name_oder_-id> | grep Labels`. Falls Ihr Worker-Pool die erforderliche Bezeichnung nicht hat, [fügen Sie einen neuen Worker-Pool hinzu](/docs/containers?topic=containers-add_workers#add_pool) und verwenden Sie diesen Worker-Pool mit dem Cluster-Autoscaler.</td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
-    <td headers="parameter-minsize parameter-with-description">Geben Sie die minimale Anzahl von Workerknoten pro Zone an, die zu jeder Zeit im Worker-Pool vorhanden sein soll. Der Wert muss 2 oder größer sein, damit Ihre ALB-Pods für hohe Verfügbarkeit verteilt werden können. Wenn Sie die ALB in Ihrem Standardcluster [inaktiviert](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure) haben, können Sie den Parameter auf den Wert `1` setzen.</td>
+    <td headers="parameter-minsize parameter-with-description">Geben Sie die minimale Anzahl von Workerknoten pro Zone an, auf die der Cluster-Autoscaler ein Scale-down für den Worker-Pool durchführen kann. Der Wert muss `2` oder größer sein, damit Ihre ALB-Pods für hohe Verfügbarkeit verteilt werden können. Wenn Sie alle öffentlichen ALBs in allen Zonen Ihres Standardclusters [inaktiviert](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) haben, können Sie den Parameter auf den Wert `1` setzen.
+    <p class="note">Durch Festlegen von `minSize` wird nicht automatisch ein Scale-up ausgelöst. Der Parameter `minSize` ist ein Schwellenwert, sodass der Cluster-Autoscaler keine Skalierung unter eine bestimmte Anzahl von Workerknoten pro Zone durchführt. Wenn für Ihren Cluster diese Anzahl pro Zone noch nicht festgelegt ist, führt der Cluster-Autoscaler ein Scale-up erst durch, wenn Workloadressourcenanforderungen weitere Ressourcen erfordern. Beispiel: Wenn Sie einen Worker-Pool mit einem Workerknoten pro drei Zonen haben (insgesamt drei Workerknoten) und den Parameter `minSize` auf `4` pro Zone setzen, stellt der Cluster-Autoscaler nicht sofort drei zusätzliche Workerknoten pro Zone (insgesamt 12 Workerknoten) bereit. Stattdessen wird die Scale-up-Operation durch Ressourcenanforderungen ausgelöst. Wenn Sie eine Workload erstellen, die die Ressourcen von 15 Workerknoten anfordert, führt der Cluster-Autoscaler ein Scale-up für den Worker-Pool durch, damit diese Anforderung erfüllt werden kann. Jetzt bedeutet der Parameter `minSize`, dass der Cluster-Autoscaler kein Scale-down unter vier Workerknoten durchführt, auch wenn Sie die Workload entfernen, die die Menge anfordert. Weitere Informationen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
-    <td headers="parameter-maxsize parameter-with-description">Geben Sie die maximale Anzahl von Workerknoten pro Zone an, die im Worker-Pool vorhanden sein soll. Der Wert muss größer oder gleich dem Wert sein, den Sie für den Parameter `minSize` festlegen.</td>
+    <td headers="parameter-maxsize parameter-with-description">Geben Sie die maximale Anzahl von Workerknoten pro Zone an, auf die der Cluster-Autoscaler ein Scale-up für den Worker-Pool durchführen kann. Der Wert muss größer oder gleich dem Wert sein, den Sie für den Parameter `minSize` festlegen.</td>
     </tr>
     <tr>
     <td id="parameter-enabled" headers="parameter-with-default">`"enabled": false`</td>
@@ -446,7 +452,7 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
 {: shortdesc}
 
 **Vorbereitende Schritte**:
-*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  [Installieren Sie das Plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
 
 **Gehen Sie wie folgt vor, um die Werte für den Cluster-Autoscaler zu aktualisieren:**
@@ -462,7 +468,7 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
     expander: least-waste
     image:
       pullPolicy: Always
-      repository: registry.ng.bluemix.net/armada-master/ibmcloud-cluster-autoscaler
+      repository: icr.io/iks-charts/ibm-iks-cluster-autoscaler
       tag: dev1
     maxNodeProvisionTime: 120m
     resources:
@@ -493,7 +499,7 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
     <tbody>
     <tr>
     <td>Parameter `api_route`</td>
-    <td>Legen Sie den [{{site.data.keyword.containerlong_notm}}-API-Endpunkt](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api) für die Region fest, in der sich Ihr Cluster befindet.</td>
+    <td>Legen Sie den [{{site.data.keyword.containerlong_notm}}-API-Endpunkt](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api) für die Region fest, in der sich Ihr Cluster befindet.</td>
     <td>Kein Standardwert; verwendet die Zielregion, in der sich Ihr Cluster befindet.</td>
     </tr>
     <tr>
@@ -501,13 +507,13 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
     <td>Geben Sie an, wie der Cluster-Autoscaler den zu skalierenden Worker-Pool ermittelt, wenn Sie mehrere Worker-Pools haben. Mögliche Werte:
     <ul><li>`random`: Wählt zufällig zwischen den Methoden `most-pods` und `least-waste` aus.</li>
     <li>`most-pods`: Wählt den Worker-Pool aus, der bei einem Scale-up die meisten Pods planen kann. Verwenden Sie diese Methode, wenn Sie `nodeSelector` verwenden, um sicherzustellen, dass Pods auf bestimmten Workerknoten landen.</li>
-    <li>`least-waste`: Wählt den Worker-Pool aus, der die geringste ungenutzte CPU-Kapazität aufweist, oder, bei Worker-Pools mit gleichen Werten, den Worker-Pool, der nach dem Scale-up die geringste ungenutzte Speicherkapazität aufweist. Verwenden Sie diese Methode, wenn Sie über mehrere Worker-Pools mit Maschinentypen großer CPU- und Speicherkapatzitäten verfügen und diese größeren Maschinen nur verwenden wollen, wenn anstehende Pods große Kapazitäten an Ressourcen benötigen.</li></ul></td>
+    <li>`least-waste`: Wählt den Worker-Pool aus, der nach dem Scale-up die geringste ungenutzte CPU-Kapazität aufweist. Wenn zwei Worker-Pools nach dem Scale-up dieselbe Menge CPU-Ressourcen verwenden, wird der Worker-Pool mit dem meisten ungenutzten Speicher ausgewählt.</li></ul></td>
     <td>random</td>
     </tr>
     <tr>
     <td>Parameter `image.repository`</td>
     <td>Geben Sie das zu verwendende Docker-Image für den Cluster-Autoscaler an.</td>
-    <td>`registry.bluemix.net/ibm/ibmcloud-cluster-autoscaler`</td>
+    <td>`icr.io/iks-charts/ibm-iks-cluster-autoscaler`</td>
     </tr>
     <tr>
     <td>Parameter `image.pullPolicy`</td>
@@ -520,57 +526,57 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
     <tr>
     <td>Parameter `maxNodeProvisionTime`</td>
     <td>Legt die Höchstdauer in Minuten fest, die ein Workerknoten aufwenden kann, um mit dem Bereitstellen zu beginnen, bevor der Cluster-Autoscaler die Scale-up-Anforderung abbricht.</td>
-    <td>120m</td>
+    <td>`120m`</td>
     </tr>
     <tr>
     <td>Parameter `resources.limits.cpu`</td>
     <td>Legt die maximale CPU-Kapazität für Workerknoten fest, die der Pod `ibm-iks-cluster-autoscaler` nutzen kann.</td>
-    <td>300m</td>
+    <td>`300m`</td>
     </tr>
     <tr>
     <td>Parameter `resources.limits.memory`</td>
     <td>Legt die maximale Speicherkapazität für Workerknoten fest, die der Pod `ibm-iks-cluster-autoscaler` nutzen kann.</td>
-    <td>300Mi</td>
+    <td>`300Mi`</td>
     </tr>
     <tr>
     <td>Parameter `resources.requests.cpu`</td>
     <td>Legt die minimale CPU-Kapazität für Workerknoten fest, mit der der Pod `ibm-iks-cluster-autoscaler` startet.</td>
-    <td>100m</td>
+    <td>`100m`</td>
     </tr>
     <tr>
     <td>Parameter `resources.requests.memory`</td>
     <td>Legt die maximale Speicherkapazität für Workerknoten fest, mit der der Pod `ibm-iks-cluster-autoscaler` startet.</td>
-    <td>100Mi</td>
+    <td>`100Mi`</td>
     </tr>
     <tr>
     <td>Parameter `scaleDownUnneededTime`</td>
     <td>Legt die Zeitdauer in Minuten fest, die ein Workerknoten nicht benötigt worden sein muss, bevor er durch ein Scale-down entfernt werden kann.</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Parameter `scaleDownDelayAfterAdd`, `scaleDownDelayAfterDelete`</td>
     <td>Legt die Zeitdauer in Minuten fest, die der Cluster-Autoscaler nach einem Scale-up (`add`) oder Scale-down (`delete`) wartet, bevor er die Skalierungsaktionen erneut startet.</td>
-    <td>10m</td>
+    <td>`10m`</td>
     </tr>
     <tr>
     <td>Parameter `scaleDownUtilizationThreshold`</td>
     <td>Legt den Auslastungsschwellenwert für Workerknoten fest. Wenn die Auslastung eines Workerknotens unter den Schwellenwert fällt, kommt der Workerknoten für ein Scale-down in Betracht. Die Workerknotenauslastung wird als Quotient aus der Summe der CPU- und Speicherressourcen, die von allen Pods angefordert werden, die auf dem Workerknoten ausgeführt werden, dividiert durch die Ressourcenkapazität des Workerknotens berechnet.</td>
-    <td>0.5</td>
+    <td>`0.5`</td>
     </tr>
     <tr>
     <td>Parameter `scanInterval`</td>
     <td>Legt die Häufigkeit in Minuten fest, mit der der Cluster-Autoscaler auf Workloadauslastung prüft (scannt), die ein Scale-up oder Scale-down auslöst.</td>
-    <td>1m</td>
+    <td>`1m`</td>
     </tr>
     <tr>
     <td>Parameter `skipNodes.withLocalStorage`</td>
     <td>Bei `true` werden Workerknoten, die Pods haben, die Daten im lokalen Speicher speichern, nicht durch ein Scale-down entfernt.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     <tr>
     <td>Parameter `skipNodes.withSystemPods`</td>
     <td>Bei `true` werden Workerknoten, die Pods in `kube-system` haben, nicht durch ein Scale-down entfernt. Setzen Sie den Wert nicht auf `false`, da ein Scale-down von Pods in `kube-system` zu unerwarteten Ergebnissen führen kann.</td>
-    <td>true</td>
+    <td>`true`</td>
     </tr>
     </tbody>
     </table>
@@ -590,27 +596,29 @@ Sie können die Einstellungen für den Cluster-Autoscaler anpassen, wie zum Beis
     helm get values ibm-iks-cluster-autoscaler -a
     ```
     {: pre}
-    
+
 
 ## Apps auf die Ausführung nur auf bestimmten automatisch skalierten Worker-Pools beschränken
 {: #ca_limit_pool}
 
-Zur Beschränkung einer Podbereitstellung auf einen bestimmten Worker-Pool, der durch den Cluster-Autoscaler verwaltet wird, verwenden Sie Bezeichnungen (Labels) und die Angabe `nodeSelector`.
+Zur Beschränkung einer Podbereitstellung auf einen bestimmten Worker-Pool, der durch den Cluster-Autoscaler verwaltet wird, verwenden Sie Bezeichnungen (Labels) und die Angabe `nodeSelector` oder `nodeAffinity`. Mit `nodeAffinity` haben Sie mehr Kontrolle über die Funktionsweise des Planungsverhaltens beim Zuordnen von Pods zu Workerknoten. Weitere Informationen zum Zuordnen von Pods zu Workerknoten [finden Sie in der Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/).
 {: shortdesc}
 
 **Vorbereitende Schritte**:
 *  [Installieren Sie das Plug-in `ibm-iks-cluster-autoscaler`](#ca_helm).
-*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Gehen Sie wie folgt vor, um Pods auf das Ausführen bestimmter automatisch skalierter Worker-Pools zu beschränken:**
 
-1.  Erstellen Sie den Worker-Pool mit der Bezeichnung, die Sie verwenden wollen.
+1.  Erstellen Sie den Worker-Pool mit der Bezeichnung, die Sie verwenden wollen. Beispiel: Ihre Bezeichnung könnte `app: nginx` sein.
     ```
     ibmcloud ks worker-pool-create --name <name> --cluster <clustername_oder_-id> --machine-type <maschinentyp> --size-per-zone <anzahl_workerknoten> --labels <schlüssel>=<wert>
     ```
     {: pre}
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
-3.  Stimmen Sie in der Podspezifikationsvorlage (spec template) den Wert von `nodeSelector` auf die Bezeichnung ab, die Sie in Ihrem Worker-Pool verwendet haben.
+3.  Stimmen Sie in der Podspezifikationsvorlage (spec template) den Wert von `nodeSelector` oder `nodeAffinity` auf die Bezeichnung ab, die Sie in Ihrem Worker-Pool verwendet haben.
+
+    Beispiel für `nodeSelector`:
     ```
     ...
     spec:
@@ -621,6 +629,25 @@ Zur Beschränkung einer Podbereitstellung auf einen bestimmten Worker-Pool, der 
       nodeSelector:
         app: nginx
     ...
+    ```
+    {: codeblock}
+
+    Beispiel für `nodeAffinity`:
+    ```
+    spec:
+          containers:
+      - name: nginx
+        image: nginx
+        imagePullPolicy: IfNotPresent
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+              operator: In
+              values:
+                - nginx
     ```
     {: codeblock}
 4.  Stellen Sie den Pod bereit. Durch die übereinstimmende Bezeichnung wird der Pod auf einem Workerknoten geplant, der sich in dem Worker-Pool mit der Bezeichnung befindet.
@@ -635,7 +662,7 @@ Zur Beschränkung einer Podbereitstellung auf einen bestimmten Worker-Pool, der 
 ## Scale-up von Workerknoten durchführen, bevor der Worker-Pool unzureichende Ressourcen hat
 {: #ca_scaleup}
 
-Wie im Abschnitt [Funktionsweise des Cluster-Autoscalers](#ca_about) und in den [FAQs zu Kubernetes Cluster Autoscaler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md) erläutert, führt der Cluster-Autoscaler ein Scale-up Ihrer Worker-Pools als Reaktion auf die durch Ihre Workload angeforderten Ressourcen aus den verfügbaren Ressourcen des Worker-Pools durch. Es kann jedoch wünschenswert sein, dass der Cluster-Autoscaler Workerknoten durch ein Scale-up hinzufügt, bevor der Worker-Pool über zu wenig Ressourcen verfügt. In diesem Fall muss Ihre Workload nicht so lange auf die Bereitstellung von Workerknoten warten, weil der Worker-Pool bereits durch ein Scale-up vergrößert wurde, um die Ressourcenanforderungen zu erfüllen.
+Wie im Abschnitt [Funktionsweise des Cluster-Autoscalers](#ca_about) und in den [FAQs zu Kubernetes Cluster Autoscaler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md) erläutert, führt der Cluster-Autoscaler ein Scale-up Ihrer Worker-Pools als Reaktion auf Ihre durch die Workload angeforderten Ressourcen aus den verfügbaren Ressourcen des Worker-Pools durch. Es kann jedoch wünschenswert sein, dass der Cluster-Autoscaler Workerknoten durch ein Scale-up hinzufügt, bevor der Worker-Pool über zu wenig Ressourcen verfügt. In diesem Fall muss Ihre Workload nicht so lange auf die Bereitstellung von Workerknoten warten, weil der Worker-Pool bereits durch ein Scale-up vergrößert wurde, um die Ressourcenanforderungen zu erfüllen.
 {: shortdesc}
 
 Der Cluster-Autoscaler unterstützt eine frühzeitige Skalierung (Überbereitstellung) von Worker-Pools nicht. Sie haben jedoch die Möglichkeit, andere  Kubernetes-Ressourcen mit Verwaltung durch den Cluster-Autoscaler zu konfigurieren, um eine frühzeitige Skalierung zu erreichen.
@@ -645,7 +672,7 @@ Der Cluster-Autoscaler unterstützt eine frühzeitige Skalierung (Überbereitste
   <dd>Sie können eine Bereitstellung erstellen, durch die [Pausencontainer ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/48651269/what-are-the-pause-containers) in Pods mit bestimmten Ressourcenanforderungen bereitgestellt werden, und der Bereitstellung eine niedrige Podpriorität zuweisen. Wenn diese Ressourcen von Workloads höherer Priorität benötigt werden, wird der Pausenpod präemptiv vom Workerknoten entfernt und wird zu einem anstehenden Pod. Dieses Ereignis löst ein Scale-up durch den Cluster-Autoscaler aus.<br><br>Weitere Informationen zur Einrichtung einer Pausenpodbereitstellung finden Sie unter [Kubernetes FAQ ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-can-i-configure-overprovisioning-with-cluster-autoscaler). Sie können dieses [Beispiel für eine Konfigurationsdatei zur Überbereitstellung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/ibm-ks-cluster-autoscaler/overprovisioning-autoscaler.yaml) verwenden, um die Prioritätsklasse, das Servicekonto und Bereitstellungen zu erstellen.<p class="note">Wenn Sie diese Methode verwenden, stellen Sie sicher, dass Sie mit der Funktionsweise der [Podpriorität](/docs/containers?topic=containers-pod_priority#pod_priority) und der Vorgehensweise zum Festlegen der Podpriorität für Ihre Bereitstellungen vertraut sind. Wenn der Pausenpod zum Beispiel nicht genügend Ressourcen für einen Pod höherer Priorität zur Verfügung hat, wird der Pod nicht präemptiv entfernt. Die Workload mit der höheren Priorität verbleibt im anstehenden Status, sodass ein Scale-up durch den Cluster-Autoscaler ausgelöst wird. Allerdings erfolgt in diesem Fall die automatische Skalierung nicht frühzeitig, da die auszuführende Workload aufgrund unzureichender Ressourcen nicht ausgeführt werden kann.</p></dd>
 
   <dt><strong>Horizontale automatische Podskalierung (HPA - Horizontal Pod Autoscaling)</strong></dt>
-  <dd>Da die horizontale automatische Podskalierung auf der durchschnittlichen CPU-Auslastung der Pods basiert, wird die Begrenzung der CPU-Auslastung, die Sie festlegen, erreicht, bevor der Worker-Pool tatsächlich zu wenig Ressourcen hat. Es werden mehr Pods angefordert, was wiederum ein Scale-up des Worker-Pools durch den Cluster-Autoscaler auslöst.<br><br>Weitere Informationen zur Einrichtung der horizontalen automatischen Podskalierung (HPA) finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
+  <dd>Da die horizontale automatische Podskalierung auf der durchschnittlichen CPU-Auslastung der Pods basiert, wird die Begrenzung der CPU-Auslastung, die Sie festlegen, erreicht, bevor der Worker-Pool zu wenig Ressourcen hat. Es werden mehr Pods angefordert, was wiederum ein Scale-up des Worker-Pools durch den Cluster-Autoscaler auslöst.<br><br>Weitere Informationen zur Einrichtung der horizontalen automatischen Podskalierung (HPA) finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/).</dd>
 </dl>
 
 <br />
@@ -660,7 +687,7 @@ Sie können das vorhandene Helm-Diagramm für den Cluster-Autoscaler auf die neu
 Aktualisierung auf das neueste Helm-Diagramm von Version 1.0.2 oder früher? [Folgen Sie diesen Anweisungen](#ca_helm_up_102).
 {: note}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Aktualisieren Sie das Helm-Repository, um die aktuelle Version aller Helm-Diagramme in diesem Repository abzurufen.
     ```
@@ -723,7 +750,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 Die neueste Helm-Diagrammversion für den Cluster-Autoscaler erfordert ein vollständiges Entfernen der zuvor installierten Versionen des Helm-Diagramms für den Cluster-Autoscaler. Wenn Sie das Helm-Diagramm der Version 1.0.2 oder einer früheren Version installiert haben, deinstallieren Sie diese Version zuerst, bevor Sie das neueste Helm-Diagramm für den Cluster-Autoscaler installieren.
 {: shortdesc}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Rufen Sie die Konfigurationszuordnung Ihres Cluster-Autoscalers ab.
     ```
@@ -790,10 +817,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 ## Cluster-Autoscaler entfernen
 {: #ca_rm}
 
-Wenn Ihre Worker-Pools nicht automatisch skaliert werden sollen, können Sie das Helm-Diagramm für den Cluster-Autoscaler deinstallieren. Nach dem Entfernen müssen Sie die Worker-Pools manuell [in der Größe ändern](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) oder [neu ausgleichen](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance).
+Wenn Ihre Worker-Pools nicht automatisch skaliert werden sollen, können Sie das Helm-Diagramm für den Cluster-Autoscaler deinstallieren. Nach dem Entfernen müssen Sie die Worker-Pools manuell [in der Größe ändern](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) oder [neu ausgleichen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance).
 {: shortdesc}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Entfernen Sie in der [Konfigurationszuordnung des Cluster-Autoscalers](#ca_cm) den Worker-Pool, indem Sie `"enabled"` auf den Wert `false` setzen.
     ```

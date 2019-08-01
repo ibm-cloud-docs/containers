@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -21,13 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Apps in Clustern bereitstellen
+# Kubernetes-native Apps in Clustern bereitstellen
 {: #app}
 
-Sie können Kubernetes-Verfahren in {{site.data.keyword.containerlong}} verwenden, um Apps in Containern bereitzustellen und um sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen. Da Kubernetes eine erweiterbare Containerorchestrierungsplattform ist, die keine bestimmte Sprache oder App voraussetzt, können Sie eine Reihe verschiedener Workloads wie statusunabhängige und statusabhängige Apps sowie Datenverarbeitungsapps ausführen, die in der Sprache Ihrer Wahl geschrieben sind.
+Sie können Kubernetes-Verfahren in {{site.data.keyword.containerlong}} verwenden, um Apps in Containern bereitzustellen und um sicherzustellen, dass Ihre Apps ununterbrochen betriebsbereit sind. Sie können beispielsweise rollierende Aktualisierungen und Rollbacks ausführen, ohne dass Ihren Benutzern hierdurch Ausfallzeiten entstehen. Da Kubernetes eine erweiterbare Containerorchestrierungsplattform ist, die keine bestimmte Sprache oder App voraussetzt, können Sie verschiedene Workloads wie statusunabhängige und statusabhängige Apps sowie Datenverarbeitungsapps ausführen, die in der Sprache Ihrer Wahl geschrieben sind.
 {: shortdesc}
 
 Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, indem Sie auf einen Bereich der folgenden Abbildung klicken. Möchten Sie zuerst die Grundlagen lernen? Probieren Sie dazu das [Lernprogramm zum Bereitstellen von Apps](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial) aus.
@@ -101,7 +101,7 @@ Von beiden Ressourcen werden Schlüssel/Wert-Paare definiert, Sie verwenden dies
 <li><strong>Befehlszeilenargument:</strong> Legen Sie das Befehlszeilenargument fest, das in einer Containerspezifikation verwendet wird.</li></ul></dd>
 
 <dt>Geheimer Schlüssel (Secret)</dt>
-<dd>Geben Sie sensible Informationen wie die folgenden zu Ihren Workloads an. Beachten Sie, dass andere Benutzer des Clusters möglicherweise über Zugriff auf den geheimen Schlüssel verfügen; stellen Sie daher sicher, dass die Informationen des geheimen Schlüssels gemeinsam mit diesen Benutzern genutzt werden können.
+<dd>Geben Sie sensible Informationen wie die folgenden zu Ihren Workloads an. Andere Benutzer des Clusters verfügen möglicherweise über Zugriff auf den geheimen Schlüssel; stellen Sie daher sicher, dass die Informationen des geheimen Schlüssels gemeinsam mit diesen Benutzern genutzt werden können.
 <ul><li><strong>Personenbezogene Daten:</strong> Speichern Sie sensible Informationen wie E-Mail-Adressen oder andere Arten von Informationen, die für die Compliance des Unternehmens oder behördliche Regelungen erforderlich sind, in geheimen Schlüsseln.</li>
 <li><strong>Berechtigungsnachweise:</strong> Schließen Sie Berechtigungsnachweise wie Kennwörter, Schlüssel und Token in einen geheimen Schlüssel ein, um das Risiko einer zufälligen Gefährdung zu reduzieren. Beispiel: Beim [Binden eines Service](/docs/containers?topic=containers-service-binding#bind-services) an einen Cluster werden die Berechtigungsnachweise in einem geheimen Schlüssel gespeichert.</li></ul></dd>
 </dl>
@@ -170,7 +170,7 @@ Betrachten Sie die folgenden potenziellen App-Konfigurationen, die nach zunehmen
 2.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem einzelnen Cluster mit einer Zone verteilt sind.
 3.  Bereitstellung mit n+2 Pods, deren Verwaltung durch eine Replikatgruppe erfolgt und die auf mehrere Knoten (Anti-Affinität) in einem Cluster mit mehreren Zonen verteilt sind.
 
-Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen Lastausgleichsfunktion verbinden](/docs/containers?topic=containers-plan_clusters#multiple_clusters), um die hohe Verfügbarkeit zu erweitern.
+Sie können auch [mehrere Cluster in verschiedenen Regionen mit einer globalen Lastausgleichsfunktion verbinden](/docs/containers?topic=containers-ha_clusters#multiple_clusters), um die hohe Verfügbarkeit zu erweitern.
 
 ### Verfügbarkeit Ihrer App erhöhen
 {: #increase_availability}
@@ -184,7 +184,7 @@ Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in
     <p>Wenn Sie mehrere Pods bereitstellen, wird für Ihre Bereitstellungen automatisch eine Replikatgruppe erstellt, mithilfe deren die Pods überwacht werden und sichergestellt wird, dass die angegebene Anzahl von Pods jederzeit betriebsbereit ist. Wird ein Pod inaktiv, so ersetzt die Replikatgruppe den inaktiven Pod durch einen neuen Pod.</p>
     <p>Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter Anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit unverfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</p>
     <p>Sie können mehrere Revisionen mit unterschiedlichen Flags gleichzeitig bereitstellen. Sie können beispielsweise eine Bereitstellung zuerst testen, bevor Sie sich entschließen, sie per Push-Operation an die Produktion zu übertragen.</p>
-    <p>Mit Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren.</p></dd>
+    <p>Mithilfe von Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren.</p></dd>
   <dt>Ausreichende Anzahl von Replikaten für die Arbeitslast Ihrer App plus 2 einbeziehen</dt>
     <dd>Um Ihre App noch verfügbarer zu machen und ihre Ausfallsicherheit zu steigern, sollten Sie erwägen, über die Mindestzahl hinaus zusätzliche Replikate einzubinden, damit die erwartete Arbeitslast verarbeitet werden kann. Zusätzliche Replikate sind in der Lage, die Arbeitslast abzufangen, wenn ein Pod ausfällt und der ausgefallene Pod noch nicht durch die Replikatgruppe ersetzt wurde. Zum Schutz vor zwei gleichzeitigen Ausfällen sollten Sie zwei zusätzliche Replikate einbinden. Diese Konfiguration folgt dem Muster 'N+2'. Hierbei steht 'N' für die Anzahl der Replikate, die für die Verarbeitung der eingehenden Arbeitslast zur Verfügung steht, während der Wert '+2' die beiden zusätzlich eingebundenen Replikate angibt. Vorausgesetzt, in Ihrem Cluster ist ausreichend Platz, ist die Anzahl der mögliche Pods unbegrenzt.</dd>
   <dt>Pods auf mehrere Knoten (Anti-Affinität) verteilen</dt>
@@ -194,15 +194,15 @@ Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in
       </dd>
     </dd>
 <dt>Pods auf mehrere Zonen oder Regionen verteilen</dt>
-  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metropolbereichen](/docs/containers?topic=containers-regions-and-zones#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](/docs/containers?topic=containers-plan_clusters#multiple_clusters).</p>
-  <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](/docs/containers?topic=containers-plan_clusters#ha_clusters).</p>
+  <dd><p>Um Ihre App vor einem Zonenfehler zu schützen, können Sie mehrere Cluster in separaten Zonen erstellen oder Zonen zu einem Worker-Pool in einem Mehrzonencluster hinzufügen. Mehrzonencluster sind nur in [bestimmten Metropolbereichen](/docs/containers?topic=containers-regions-and-zones#zones) verfügbar, z. B. in Dallas. Wenn Sie mehrere Cluster in unterschiedlichen Zonen erstellen, müssen Sie [eine globale Lastausgleichsfunktion einrichten](/docs/containers?topic=containers-ha_clusters#multiple_clusters).</p>
+  <p>Wenn Sie eine Replikatgruppe verwenden und Anti-Affinität für Pods angeben, verteilt Kubernetes Ihre App-Pods auf die Knoten. Wenn sich die Knoten in mehreren Zonen befinden, werden die Pods auf diese Zonen verteilt, was die Verfügbarkeit für Ihre App erhöht. Wenn Sie Ihre Apps nur in einer einzigen Zone ausführen möchten, können Sie die Pod-Affinität konfigurieren oder einen Worker-Pool in einer Zone erstellen und kennzeichnen. Weitere Informationen finden Sie unter [Hochverfügbarkeit für Mehrzonencluster](/docs/containers?topic=containers-ha_clusters#ha_clusters).</p>
   <p><strong>Sind in einer Bereitstellung mit Mehrzonencluster meine App-Pods gleichmäßig über die Knoten hinweg verteilt?</strong></p>
   <p>Die Pods sind gleichmäßig über die Zonen verteilt, aber nicht immer über Knoten hinweg. Wenn Sie beispielsweise über einen Cluster mit einem Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods bereitstellen, erhält jeder Knoten zwei Pods. Wenn Sie jedoch über einen Cluster mit zwei Knoten in jeder der drei Zonen verfügen und eine Replikatgruppe von sechs Pods bereitstellen, sind für jede Zone zwei Pods geplant und es kann ein Pod pro Knoten geplant werden (oder auch nicht). Für mehr Kontrolle über die Zeitplanung können Sie [die Pod-Affinität festlegen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
-  <p><strong>Wie werden Pods auf den verbleibenden Knoten in den anderen Zonen erneut geplant, wenn eine Zone inaktiv wird?</strong></br>Dies hängt von Ihrer Planungsrichtlinie ab, die Sie in der Bereitstellung verwendet haben. Wenn Sie eine [knotenspezifische Pod-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) angegeben haben, werden die Pods nicht erneut geplant. Wenn Sie dies nicht getan haben, werden die Pods auf verfügbaren Workerknoten in anderen Zonen erstellt, aber sie sind möglicherweise nicht ausgeglichen. Die beiden Pods können beispielsweise über die beiden verfügbaren Knoten verteilt sein, oder sie können beide für einen Knoten mit verfügbarer Kapazität geplant werden. In ähnlicher Weise werden Pods nicht automatisch neu gelöscht und über Knoten hinweg verteilt, wenn die nicht verfügbare Zone wieder verfügbar wird. Wenn Sie möchten, dass die Pods in den Zonen neu verteilt werden, wenn die Zone wieder aktiv ist, sollten Sie den [Kubernetes Descheduler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/descheduler) verwenden.</p>
-  <p><strong>Tipp</strong>: Versuchen Sie in Mehrzonenclustern, die Workerknotenkapazität bei 50 % pro Zone zu halten, damit Ihnen ausreichend Kapazität bleibt, um Ihren Cluster vor einem Zonenausfall zu schützen.</p>
-  <p><strong>Wie gehe ich vor, um meine App über Regionen zu verteilen?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](/docs/containers?topic=containers-plan_clusters#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
+  <p><strong>Wie werden Pods auf den verbleibenden Knoten in den anderen Zonen erneut geplant, wenn eine Zone inaktiv wird?</strong></br>Dies hängt von Ihrer Planungsrichtlinie ab, die Sie in der Bereitstellung verwendet haben. Wenn Sie eine [knotenspezifische Pod-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) angegeben haben, werden die Pods nicht erneut geplant. Wenn Sie dies nicht getan haben, werden die Pods auf verfügbaren Workerknoten in anderen Zonen erstellt, aber sie sind möglicherweise nicht ausgeglichen. Die beiden Pods können beispielsweise über die beiden verfügbaren Knoten verteilt sein oder sie können beide für einen Knoten mit verfügbarer Kapazität geplant werden. In ähnlicher Weise werden Pods nicht automatisch neu gelöscht und über Knoten hinweg verteilt, wenn die nicht verfügbare Zone wieder verfügbar wird. Wenn Sie möchten, dass die Pods in den Zonen neu verteilt werden, wenn die Zone wieder aktiv ist, sollten Sie den [Kubernetes Descheduler ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/descheduler) verwenden.</p>
+  <p><strong>Tipp</strong>: Versuchen Sie in Mehrzonenclustern, die Workerknotenkapazität bei 50 % pro Zone zu halten, damit ausreichend Kapazität übrig bleibt, um Ihren Cluster vor einem Zonenausfall zu schützen.</p>
+  <p><strong>Wie gehe ich vor, um meine App über Regionen zu verteilen?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](/docs/containers?topic=containers-ha_clusters#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
   <p><strong>Was ist, wenn meine Apps persistenten Speicher benötigen?</strong></p>
-  <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about).</p></dd>
+  <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
 </dl>
 
 ## App-Anforderungen in YAML-Datei angeben
@@ -242,8 +242,9 @@ metadata:
 
 <dt id="label">Bezeichnungen</dt>
   <dd><p>Mit [Bezeichnungen](/docs/containers?topic=containers-strategy#deploy_organize) können Sie verschiedene Ressourcentypen im Cluster mit demselben Schlüssel/Wert-Paar (`key: value`) markieren. Anschließend können Sie den Selektor für die Übereinstimmung der Bezeichnung angeben, sodass Sie auf dieser Basis andere Ressourcen erstellen können. Wenn Sie die App öffentlich zugänglich machen möchten, müssen Sie eine Bezeichnung verwenden, die mit dem Selektor übereinstimmt, den Sie im Service angeben. Im Beispiel wird von der Bereitstellungsspezifikation die Vorlage verwendet, die mit der Bezeichnung `app: wasliberty` übereinstimmt.</p>
-  <p>Sie können Objekte abrufen, die im Cluster gekennzeichnet sind, um zum Beispiel die Komponenten `staging` oder `production` anzuzeigen. Beispiel: Listen Sie alle Ressourcen mit der Bezeichnung `env: production` für alle Namensbereiche im Cluster auf. Beachten Sie, dass Sie Zugriff auf alle Namensbereiche benötigen, um diesen Befehl ausführen zu können.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <p>Sie können Objekte abrufen, die im Cluster gekennzeichnet sind, um zum Beispiel die Komponenten `staging` oder `production` anzuzeigen. Beispiel: Listen Sie alle Ressourcen mit der Bezeichnung `env: production` für alle Namensbereiche im Cluster auf. <strong>Hinweis:</strong> Sie benötigen Zugriff auf alle Namensbereiche, um diesen Befehl ausführen zu können.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>Weitere Informationen zu Bezeichnungen finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
+  <li>Um Workerknoten Bezeichnungen hinzuzufügen, [erstellen Sie Ihren Worker-Pool](/docs/containers?topic=containers-add_workers#add_pool) mit Bezeichnungen oder [aktualisieren einen vorhandenen Worker-Pool](/docs/containers?topic=containers-add_workers#worker_pool_labels).</li>
   <li>Ein ausführlicheres Beispiel finden Sie unter [Apps für bestimmte Workerknoten mithilfe von Bezeichnungen bereitstellen](/docs/containers?topic=containers-app#node_affinity).</li></ul>
   <p><pre class="codeblock"><code>selector:
   matchLabels:
@@ -281,10 +282,10 @@ template:
   <p>Gehen Sie zum Beispiel zum Auflisten der Tags von öffentlichen IBM Images wie folgt vor:</p>
   <ol><li>Wechseln Sie zur Region der globalen Registry.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
   <li>Listen Sie die IBM Images auf.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
-  <p>Als Standardwert für `imagePullPolicy` ist `IfNotPresent` festgelegt, was bedeutet, dass das Image nur extrahiert wird, wenn es noch nicht lokal vorhanden ist. Wenn das Image bei jedem Start des Containers extrahiert werden soll, geben Sie `imagePullPolicy: Always` an.</p>
+  <p>Als Standardwert für `imagePullPolicy` ist `IfNotPresent` festgelegt, was bedeutet, dass das Image nur extrahiert wird, wenn es nicht lokal vorhanden ist. Wenn das Image bei jedem Start des Containers extrahiert werden soll, geben Sie `imagePullPolicy: Always` an.</p>
   <p><pre class="codeblock"><code>containers:
 - name: wasliberty
-  image: registry.bluemix.net/ibmliberty:webProfile8
+  image: icr.io/ibmliberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port für den Service der App</dt>
@@ -330,7 +331,7 @@ readinessProbe:
   <dd><p>Sie können einen Service erstellen, von dem die App verfügbar gemacht wird. Stellen Sie im Abschnitt `spec` sicher, dass die Werte für `port` und die Bezeichnungswerte mit denen übereinstimmen, die in der Bereitstellung verwendet werden. Vom Service werden Objekte verfügbar gemacht, die mit der Bezeichnung übereinstimmen, zum Beispiel `app: wasliberty` im folgenden Beispiel.</p>
   <ul><li>Standardmäßig wird von einem Service [`ClusterIP ` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/) verwendet; hierdurch wird der Service nur innerhalb, aber nicht außerhalb des Clusters verfügbar gemacht.</li>
   <li>Sie können einen NodePort-Service, Service für eine Lastausgleichsfunktion oder Ingress-Service erstellen, um die App öffentlich zugänglich zu machen. Diese Services verfügen über zwei IPs, eine externe und eine interne. Wenn der Datenverkehr an der externen IP empfangen wird, wird er an die interne Cluster-IP weitergeleitet. Anschließend wird der Datenverkehr von der internen Cluster-IP an die Container-IP der App weitergeleitet.</li>
-  <li>Im Beispiel wird `NodePort` verwendet, um den Service außerhalb des Clusters zugänglich zu machen. Informationen zum Festlegen des externen Zugriffs finden Sie unter [NodePort-Service, Service für Lastausgleichsfunktion oder Ingress-Service auswählen](/docs/containers?topic=containers-cs_network_planning#external).</li></ul>
+  <li>Im Beispiel wird `NodePort` verwendet, um den Service außerhalb des Clusters zugänglich zu machen. Weitere Informationen zum Festlegen des externen Zugriffs finden Sie unter [NodePort-Service, Service für Lastausgleichsfunktion oder Ingress-Service auswählen](/docs/containers?topic=containers-cs_network_planning#external).</li></ul>
   <p><pre class="codeblock"><code>apiVersion: v1
 kind: Service
 metadata:
@@ -424,7 +425,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Persistente Datenträger für Containerspeicher</dt>
-<dd><p>Persistente Datenträger dienen als Schnittstelle zum physischen Speicher, um einen persistenten Datenspeicher für Container-Workloads bereitzustellen. Im folgenden Beispiel wird veranschaulicht, wie einer App persistenter Speicher hinzugefügt werden kann. Wenn Sie persistenten Speicher bereitstellen möchten, erstellen Sie ein Persistent Volume Claim (PVC), um den Typ und die Größe des gewünschten Dateispeichers zu beschreiben. Nach der Erstellung des PVC werden der persistente Datenträger und der physische Speicher automatisch unter Verwendung der [dynamischen Bereitstellung](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) erstellt. Wenn in der YAML-Bereitstellungsdatei auf den PVC verwiesen wird, wird der Speicher automatisch an den App-Pod angehängt. Wenn vom Container im Pod Daten in das Mountpfadverzeichnis `/test` geschrieben werden, werden die Daten in der NFS-Dateispeicherinstanz gespeichert.</p><ul><li>Weitere Informationen finden Sie unter [Erklärung der grundlegenden Voraussetzungen für Kubernetes-Speicher](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Informationen zu Optionen für weitere Speichertypen, die Sie bereitstellen können, finden Sie unter [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
+<dd><p>Persistente Datenträger dienen als Schnittstelle zum physischen Speicher, um einen persistenten Datenspeicher für Container-Workloads bereitzustellen. Im folgenden Beispiel wird veranschaulicht, wie einer App persistenter Speicher hinzugefügt werden kann. Wenn Sie persistenten Speicher bereitstellen möchten, erstellen Sie einen Persistent Volume Claim (PVC), um den Typ und die Größe des gewünschten Dateispeichers zu beschreiben. Nachdem Sie den PVC erstellt haben, werden der persistente Datenträger und der physische Speicher automatisch unter Verwendung der [dynamischen Bereitstellung](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) erstellt. Wenn in der YAML-Bereitstellungsdatei auf den PVC verwiesen wird, wird der Speicher automatisch an den App-Pod angehängt. Wenn vom Container im Pod Daten in das Mountpfadverzeichnis `/test` geschrieben werden, werden die Daten in der NFS-Dateispeicherinstanz gespeichert.</p><ul><li>Weitere Informationen finden Sie unter [Erklärung der grundlegenden Voraussetzungen für Kubernetes-Speicher](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Informationen zu Optionen für weitere Speichertypen, die Sie bereitstellen können, finden Sie unter [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -473,8 +474,17 @@ spec:
 ### Beispiel einer vollständigen YAML-Bereitstellungsdatei
 {: #yaml-example}
 
-Im Folgenden finden Sie eine Kopie einer YAML-Bereitstellungsdatei, die [vorher Abschnitt für Abschnitt erläutert wurde](#app_yaml). Sie können die [YAML-Datei auch von GitHub herunterladen](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
+Das folgende Beispiel ist eine Kopie einer YAML-Bereitstellungsdatei, die [vorher Abschnitt für Abschnitt erläutert wurde](#app_yaml). Sie können die [YAML-Datei auch von GitHub herunterladen](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml).
 {: shortdesc}
+
+Gehen Sie wie folgt vor, um die YAML-Datei anzuwenden:
+
+```
+kubectl apply -f file.yaml [-n <namensbereich>]
+```
+{: pre}
+
+YAML-Beispiel:
 
 ```yaml
 apiVersion: apps/v1
@@ -505,7 +515,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
-        image: registry.bluemix.net/ibmliberty
+        image: icr.io/ibmliberty
         env:
           - name: VERSION
             valueFrom:
@@ -611,6 +621,224 @@ spec:
 <br />
 
 
+## Kubernetes-Konfigurationsdateien für Wiederverwendung in mehreren Umgebungen mit Kustomize verwalten
+{: #kustomize}
+
+Im Rahmen einer cloudnativen [Zwölf-Faktoren-App ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://12factor.net/) können Sie eine Dev-Prod-Vergleichbarkeit aufrechterhalten, indem Sie eine Pipeline für kontinuierliche Entwicklung und Bereitstellung einrichten, die eine gängige Codebasisquelle mit Versionssteuerung verwendet. In Ihren Codebasis-Repositorys speichern Sie Ihre Manifestdateien für die Kubernetes-Ressourcenkonfiguration in der Regel im YAML-Format. Sie können das Kubernetes-Projekt [Kustomize ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kustomize.io/) sowohl zum Standardisieren als auch zum Anpassen Ihrer Bereitstellungen in mehreren Umgebungen verwenden.
+{: shortdesc}
+
+Sie können beispielsweise eine YAML-Basisdatei mit dem Namen `kustomization` einrichten, um Kubernetes-Objekte zu deklarieren, wie z. B. Bereitstellungen und PVCs, die in Ihrer Entwicklungs-, Test- und Produktionsumgebung gemeinsam genutzt werden. Als Nächstes können Sie separate `kustomization`-YAML-Dateien einrichten, die angepasste Konfigurationen für jede Umgebung enthalten, wie z. B. mehr Replikate in der Produktionsumgebung als in der Testumgebung. Diese angepassten YAML-Dateien können dann die gemeinsam genutzte YAML-Basisdatei überlagern oder ergänzen, sodass Sie fast identische Umgebungen verwalten können, die sich nur in der Overlay-Konfiguration unterscheiden, die Sie per Quellcodeverwaltung steuern. Weitere Informationen zu Kustomize, wie z. B. ein Glossar und FAQs, finden Sie in der [Kustomize-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs).
+
+Vorbemerkungen:
+*   [Erstellen](/docs/containers?topic=containers-clusters#clusters_ui) Sie einen Cluster oder [aktualisieren](/docs/containers?topic=containers-update) Sie auf einen Cluster, der mit Kubernetes Version 1.14 oder höher ausgeführt wird.
+*   Stellen Sie sicher, dass Ihre [`kubectl`-Version](/docs/containers?topic=containers-cs_cli_install#kubectl) mit der Version Ihres Clusters übereinstimmt.
+*   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
+1.  [Installieren Sie das Tool `kustomize` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
+    *   Für MacOS können Sie den Paketmanager `brew` verwenden.
+        ```
+        brew install kustomize
+        ```
+        {: pre}
+    *   Für Windows können Sie den Paketmanager `chocolatey` verwenden.
+        ```
+        choco install kustomize
+        ```
+        {: pre}
+2.  Erstellen Sie ein Verzeichnis für Ihre App in einem Versionssteuerungssystem, wie z. B. Git.
+    ```
+    git init ~/<my_app>
+    ```
+    {: pre}
+3.  Erstellen Sie Ihre Repository-Struktur für Ihre `kustomize`-Verzeichnisse [`base` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#base), [`overlay`](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#overlay) und Umgebungsverzeichnisse, wie z. B. Staging und Produktion. In den nachfolgenden Schritten richten Sie diese Repositorys für die Verwendung mit `kustomize` ein.
+    ```
+    mkdir -p ~/<my_app>/base &&
+    mkdir -p ~/<my_app>/overlay &&
+    mkdir -p ~/<my_app>/overlay/staging &&
+    mkdir -p ~/<my_app>/overlay/prod
+    ```
+    {: pre}
+    
+    Beispiel-Repository-Struktur:
+    ```
+    .
+    ├── base
+    └── overlay
+        ├── prod
+        └── staging
+    ```
+    {: screen}
+4.  Richten Sie das Repository `base` ein.
+    1.  Navigieren Sie zum Repository 'base'.
+        ```
+        cd ~/<my_app>/base
+        ```
+        {: pre}
+    2.  Erstellen Sie eine Anfangsgruppe mit Kubernetes-YAML-Konfigurationsdateien für Ihre App-Bereitstellung. Sie können die [YAML-Beispieldatei](#yaml-example) `wasliberty` verwenden, um eine Bereitstellung, einen Service, eine Konfigurationszuordnung und einen Persistent Volume Claim zu erstellen.
+    3.  Erstellen Sie eine [`kustomization`-Datei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml), die die Basiskonfiguration angibt, die umgebungsübergreifend angewendet werden soll. Die `kustomization`-Datei muss die Liste der YAML-Dateien für die Kubernetes-Ressourcenkonfiguration enthalten, die in demselben Repository `base` gespeichert sind. In der `kustomization`-Datei können Sie auch Konfigurationen hinzufügen, die für alle YAML-Ressourcendateien im Repository 'base' gelten, wie z. B. ein Präfix oder Suffix, das an alle Ressourcennamen angehängt wird, eine Bezeichnung, der vorhandene Namensbereich, in dem alle Ressourcen erstellt werden, usw.
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namespace: wasliberty
+        namePrefix: kustomtest-
+        nameSuffix: -v2
+        commonLabels:
+          app: kustomized-wasliberty
+        resources:
+        - deployment.yaml
+        - service.yaml
+        - pvc.yaml
+        - configmap.yaml
+        - secret.yaml
+        ```
+        {: codeblock}
+        
+        Die Namen der `resources`-YAML-Dateien müssen mit den Namen der anderen Dateien im Repository `base` übereinstimmen. Sie können mehrere Konfigurationen in derselben Datei einschließen, im Beispiel befinden sich die Konfigurationen jedoch in separaten Dateien, wie z. B. `deployment.yaml`, `service.yaml` und `pvc.yaml`.
+        
+    4.  Erstellen Sie Ihre YAML-Ressourcendateien mit den Konfigurationen, die Sie in der `kustomization`-YAML-Basisdatei definiert haben. Die Ressourcen werden durch Kombinieren der Konfigurationen in den `kustomization`-Dateien und in den YAML-Ressourcendateien erstellt. Die kombinierten YAML-Dateien werden in `stdout` in der Terminalausgabe zurückgegeben. Verwenden Sie denselben Befehl zum Erstellen nachfolgender Änderungen, die Sie an der `kustomization`-YAML-Datei vornehmen, wie z. B. Hinzufügen einer neuen Bezeichnung.
+        ```
+        kustomize build
+        ```
+        {: pre}
+5.  Richten Sie Ihr Overlay-Repository mit eindeutigen `kustomization`-YAML-Dateien für jede Ihrer Umgebungen, wie z. B. Staging und Produktion, ein.
+    1.  Erstellen Sie im Repository 'staging' eine Datei `kustomization.yaml`. Fügen Sie alle Konfigurationen hinzu, die für Staging eindeutig sind, wie z. B. Beschriftung, Image-Tag oder YAML-Datei für eine neue Komponente, die Sie testen wollen.
+        ```
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        namePrefix: staging-
+        commonLabels:
+          env: staging
+          owner: TeamA
+        bases:
+        - ../../base
+        patchesStrategicMerge:
+        - configmap.yaml
+        - new_staging_resource.yaml
+        resources:
+        - new_staging_resource.yaml
+        ```
+        {: codeblock}
+        <table summary="Tabelle, die in Spalte 1 die YAML-Dateifelder und in Spalte 2 Anweisungen zum Ausfüllen dieser Felder beschreibt.">
+        <caption>YAML-Dateikomponenten</caption>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>namePrefix</code></td>
+        <td>Geben Sie ein Präfix an, das an den Namen jeder Ressource angehängt werden soll, die Sie mit Ihrer `kustomization`-Datei für Staging erstellen wollen, wie z. B. `staging-`.</td>
+        </tr>
+        <tr>
+        <td><code>commonLabels</code></td>
+        <td>Fügen Sie Bezeichnungen hinzu, die eindeutig für die Staging-Objekte sind, wie z. B. die Staging-Umgebung und das verantwortliche Team.</td>
+        </tr>
+        <tr>
+        <td><code>bases</code></td>
+        <td>Fügen Sie einen relativen Pfad zu einem Verzeichnis oder eine URL zu einem fernen Repository hinzu, das eine `kustomization`-Basisdatei enthält. In diesem Beispiel verweist der relative Pfad auf die `kustomization`-Basisdatei im Repository `base`, das Sie zuvor erstellt haben. Dieses Feld ist für eine `kustomization`-Overlay-Datei erforderlich.</td>
+        </tr>
+        <tr>
+        <td><code>patchesStrategicMerge</code></td>
+        <td>Listen Sie die YAML-Ressourcenkonfigurationsdateien auf, die Sie mit der `kustomization`-Basisdatei zusammenführen wollen. Sie müssen diese Dateien auch demselben Repository wie die `kustomization`-Datei hinzufügen, z. B. `overlay/staging`. Diese Ressourcenkonfigurationsdateien können kleine Änderungen enthalten, die in den Basiskonfigurationsdateien mit demselben Namen als Patch zusammengeführt werden. Die Ressource ruft alle Komponenten ab, die in der `base`-Konfigurationsdatei enthalten sind, plus weitere Komponenten, die Sie in der `overlay`-Konfigurationsdatei angeben. <br><br>Wenn die Konfiguration eine neue Datei ist, die sich nicht in 'base' befindet, müssen Sie den Dateinamen dem Feld `resources` hinzufügen.</td>
+        </tr>
+        <tr>
+        <td><code>resources</code></td>
+        <td>Listen Sie alle YAML-Ressourcenkonfigurationsdateien auf, die für das Repository 'staging' eindeutig sind und nicht im Repository 'base' enthalten sind. Schließen Sie diese Dateien auch im Feld `patchesStrategicMerge` ein und fügen Sie sie auch demselben Repository wie die `kustomization`-Datei hinzu, z. B. `overlay/staging`.</td>
+        </tr>
+        <tr>
+        <td>Andere mögliche Konfigurationen</td>
+        <td>Weitere Konfigurationen, die Sie Ihrer Datei hinzufügen können, finden Sie in der [`kustomization-YAML-Beispieldatei ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml).</td>
+        </tr>
+        </tbody></table>
+    2.  Erstellen Sie Ihre Overlay-Konfigurationsdateien für Staging.
+        ```
+        kustomize build overlay/staging
+        ```
+        {: pre}
+    3.  Wiederholen Sie diese Schritte, um Ihre `kustomization`-Overlay-Datei für die Produktion und andere YAML-Konfigurationsdateien zu erstellen. Sie können beispielsweise die Anzahl der Replikate in Ihrer Datei `deployment.yaml` erhöhen, sodass Ihre Produktionsumgebung mehr Benutzeranforderungen verarbeiten kann. 
+    4.  Überprüfen Sie Ihre `kustomize`-Repository-Struktur, um sicherzustellen, dass sie alle YAML-Konfigurationsdateien enthält, die Sie benötigen. Die Struktur kann dem folgenden Beispiel ähneln.
+        ```
+├── base
+        │   ├── configmap.yaml
+        │   ├── deployment.yaml
+        │   ├── kustomization.yaml
+        │   ├── pvc.yaml
+        │   ├── secret.yaml
+        │   └── service.yaml
+        └── overlay
+            ├── prod
+            │   ├── deployment.yaml
+            │   ├── kustomization.yaml
+            │   └── new_prod_resource.yaml
+            └── staging
+                ├── configmap.yaml
+                ├── kustomization.yaml
+                └── new_staging_resource.yaml
+        ```
+        {: screen}
+6.  Wenden Sie die Kubernetes-Ressourcen für die Umgebung an, die bereitgestellt werden soll. Im folgenden Beispiel wird das Repository 'staging' verwendet.
+    1.  Navigieren Sie zum Overlay-Verzeichnis für Staging. Falls Sie Ihre Ressourcen nicht im vorherigen Schritt erstellt haben, erstellen Sie sie jetzt.
+        ```
+        cd overlay/staging && kustomize build
+        ```
+        {: pre}
+    2.  Wenden Sie die Kubernetes-Ressourcen auf Ihren Cluster an. Schließen Sie das Flag `-k` und das Verzeichnis ein, in dem sich die `kustomization`-Datei befindet. Beispiel: Wenn Sie sich bereits im Verzeichnis 'staging' befinden, schließen Sie `../staging` ein, um den Pfad zum Verzeichnis zu markieren.
+        ```
+        kubectl apply -k ../staging
+        ```
+        {: pre}
+        Beispielausgabe:
+        ```
+        configmap/staging-kustomtest-configmap-v2 created
+        secret/staging-kustomtest-secret-v2 created
+        service/staging-kustomtest-service-v2 created
+        deployment.apps/staging-kustomtest-deployment-v2 created
+        job.batch/staging-pi created
+        persistentvolumeclaim/staging-kustomtest-pvc-v2 created
+        ```
+    3.  Stellen Sie sicher, dass die Staging-spezifischen Änderungen angewendet werden. Beispiel: Wenn Sie ein Präfix `staging-` hinzugefügt haben, enthalten die Pods und die anderen Ressourcen, die erstellt werden dieses Präfix im Namen.
+        ```
+        kubectl get -k ../staging
+        ```
+        {: pre}
+        Beispielausgabe:
+        ```
+        NAME                                        DATA   AGE
+        configmap/staging-kustomtest-configmap-v2   2      90s
+
+        NAME                                  TYPE     DATA   AGE
+        secret/staging-kustomtest-secret-v2   Opaque   2      90s
+
+        NAME                                    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+        service/staging-kustomtest-service-v2   NodePort   172.21.xxx.xxx   <none>        9080:30200/TCP   90s
+
+        NAME                                               READY   UP-TO-DATE   AVAILABLE   AGE
+        deployment.apps/staging-kustomtest-deployment-v2   0/3     3            0           91s
+
+        NAME                   COMPLETIONS   DURATION   AGE
+        job.batch/staging-pi   1/1           41s        2m37s
+
+        NAME                                              STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS       AGE
+        persistentvolumeclaim/staging-kustomtest-pvc-v2   Pending                                      ibmc-file-bronze   90s
+        ```
+        {: screen}
+    4.  Wiederholen Sie diese Schritte für jede Umgebung, die Sie erstellen wollen.
+7.  **Optional**: Bereinigen Sie Ihre Umgebung, indem Sie alle Ressourcen entfernen, die Sie mit Kustomize angewendet haben.
+    ```
+    kubectl delete -k <verzeichnis>
+    ```
+    {: pre}
+    Beispielausgabe:
+    ```
+    configmap "staging-kustomtest-configmap-v2" deleted
+    secret "staging-kustomtest-secret-v2" deleted
+    service "staging-kustomtest-service-v2" deleted
+    deployment.apps "staging-kustomtest-deployment-v2" deleted
+    job.batch "staging-pi" deleted
+    persistentvolumeclaim "staging-kustomtest-pvc-v2" deleted
+    ```
+    {: screen}
+
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
@@ -623,7 +851,7 @@ Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kuber
 Vorbemerkungen:
 * Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen arbeiten zu können.
 * Zum [Starten des Kubernetes-Dashboards über die Konsole](#db_gui) muss Ihnen eine [Plattformrolle](/docs/containers?topic=containers-users#platform) zugeordnet sein. Wenn Ihnen nur eine Servicerolle, jedoch keine Plattformrolle, zugeordnet ist, [starten Sie das Kubernetes-Dashboard über die CLI](#db_cli).
-* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
@@ -697,7 +925,7 @@ Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kuber
 Vorbemerkungen:
 
 -   [Installieren Sie die erforderlichen Befehlszeilenschnittellen](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen arbeiten zu können.
 -   Zum [Starten des Kubernetes-Dashboards über die Konsole](#db_gui) muss Ihnen eine [Plattformrolle](/docs/containers?topic=containers-users#platform) zugeordnet sein. Wenn Ihnen nur eine Servicerolle, jedoch keine Plattformrolle, zugeordnet ist, [starten Sie das Kubernetes-Dashboard über die CLI](#db_cli).
 
@@ -727,7 +955,7 @@ Nachdem ein Cluster erstellt worden ist, können Sie in diesem Cluster über die
 Vorbemerkungen:
 
 -   Installieren Sie die erforderlichen [CLIs](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
--   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+-   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 -   Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen in dem Namensbereich arbeiten zu können.
 
 Gehen Sie wie folgt vor, um Ihre App bereitzustellen:
@@ -761,7 +989,7 @@ Wenn Sie eine App bereitstellen, werden die App-Pods ohne Unterschied für versc
 {:shortdesc}
 
 Vorbemerkungen:
-*   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen in dem Namensbereich arbeiten zu können.
 
 Gehen Sie wie folgt vor, um Apps für bestimmte Workerknoten bereitzustellen:
@@ -803,7 +1031,7 @@ Gehen Sie wie folgt vor, um Apps für bestimmte Workerknoten bereitzustellen:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.12.7_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -892,13 +1120,13 @@ Gehen Sie wie folgt vor, um Apps für bestimmte Workerknoten bereitzustellen:
 ## Eine App auf einer GPU-Maschine bereitstellen
 {: #gpu_app}
 
-Wenn Sie über einen [Bare-Metal-GPU-Maschinentyp (Graphics Processing Unit)](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) verfügen, können Sie rechenintensive Workloads für den Workerknoten terminieren. Sie können beispielsweise eine 3D-App ausführen, die die CUDA-Plattform (CUDA, Compute Unified Device Architecture) verwendet, um zur Leistungssteigerung die Systembelastung auf die GPU und CPU aufzuteilen.
+Wenn Sie über einen [Bare-Metal-GPU-Maschinentyp (Graphics Processing Unit)](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) verfügen, können Sie rechenintensive Workloads für den Workerknoten terminieren. Sie können beispielsweise eine 3D-App ausführen, die die CUDA-Plattform (CUDA, Compute Unified Device Architecture) verwendet, um zur Leistungssteigerung die Systembelastung auf die GPU und CPU aufzuteilen.
 {:shortdesc}
 
 In den nachfolgenden Abschnitten erfahren Sie, wie Sie Workloads bereitstellen, für die die GPU erforderlich ist. Sie können auch [Apps bereitstellen](#app_ui), die ihre Workloads nicht auf der GPU und der CPU verarbeiten müssen. Anschließend kann es hilfreich sein, sich mit rechenintensiven Workloads, wie dem Framework [TensorFlow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.tensorflow.org/) für maschinelles Lernen mit [dieser Kubernetes-Demo ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow) vertraut zu machen.
 
 Vorbemerkungen:
-* [Erstellen Sie einen Bare-Metal-GPU-Maschinentyp](/docs/containers?topic=containers-clusters#clusters_cli). Beachten Sie, dass dieser Prozess länger als einen Geschäftstag dauern kann.
+* [Erstellen Sie einen Bare-Metal-GPU-Maschinentyp](/docs/containers?topic=containers-clusters#clusters_ui). Dieser Prozess kann länger als einen Geschäftstag dauern.
 * Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen in dem Namensbereich arbeiten zu können.
 
 Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
@@ -1064,11 +1292,11 @@ Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
 Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) aktivieren, um die Anzahl der Instanzen Ihrer Apps CPU-basiert automatisch zu erhöhen oder zu verringern.
 {:shortdesc}
 
-Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started#get-started). Möchten Sie Ihre Workerknoten anstelle Ihrer Pods skalieren? Probieren Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aus.
+Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Möchten Sie Ihre Workerknoten anstelle Ihrer Pods skalieren? Probieren Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aus.
 {: tip}
 
 Vorbemerkungen:
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Die Heapster-Überwachung muss in dem Cluster bereitgestellt werden, den Sie automatisch skalieren möchten.
 - Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen in dem Namensbereich arbeiten zu können.
 
@@ -1148,7 +1376,7 @@ Möchten Sie Ausfallzeiten während einer rollierenden Aktualisierung vermeiden?
 {: tip}
 
 Vorbemerkungen:
-*   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Erstellen Sie eine [Bereitstellung](#app_cli).
 *   Stellen Sie sicher, dass Sie über eine [Servicerolle](/docs/containers?topic=containers-users#platform) verfügen, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen in dem Namensbereich arbeiten zu können.
 
@@ -1202,7 +1430,7 @@ Gehen Sie wie folgt vor, um rollierende Aktualisierungen für Ihre Apps zu verwa
     </tr>
     <tr>
     <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
-    <td>Legen Sie fest, wie viele zusätzliche Ressourcen die Bereitstellung während des Rollouts verwenden kann, und zwar als Zahl (`2`) oder Prozentsatz (`50%`). Wenn Ihre Bereitstellung beispielsweise `10` Replikate angibt und Sie `maxSurge` auf `2` setzen, werden während des Rollouts 2 neue Replikate erstellt. Sie haben jetzt 12 Replikate (10 vorhanden, 2 neu). Nachdem die beiden neuen Replikate bereit sind, skaliert die Bereitstellung die alten Replikate auf 8 herunter, um die spezifizierten 10 Replikate zu erfüllen. Dieser Prozess wird so lange fortgesetzt, bis der Rollout abgeschlossen ist und alle 10 Replikate die neue Version ausführen.<p class="tip">Wenn Sie eine sofortige Umschaltung (Blue Green Deployment) durchführen möchten, setzen Sie `maxSurge` auf `100%`. Bei der Bereitstellung werden alle neuen erforderlichen Replikate erstellt und anschließend die Replikate der alten Version auf 0 herunterskaliert.</p></td>
+    <td>Legen Sie fest, wie viele zusätzliche Ressourcen die Bereitstellung während des Rollouts verwenden kann, und zwar als Zahl (`2`) oder Prozentsatz (`50%`). Wenn Ihre Bereitstellung beispielsweise `10` Replikate angibt und Sie `maxSurge` auf `2` setzen, werden während des Rollouts zwei neue Replikate erstellt. Sie haben jetzt 12 Replikate (10 vorhanden, 2 neu). Nachdem die beiden neuen Replikate bereit sind, skaliert die Bereitstellung die alten Replikate auf 8 herunter, um die spezifizierten 10 Replikate zu erfüllen. Dieser Prozess wird so lange fortgesetzt, bis der Rollout abgeschlossen ist und alle 10 Replikate die neue Version ausführen.<p class="tip">Wenn Sie eine sofortige Umschaltung (Blue Green Deployment) durchführen möchten, setzen Sie `maxSurge` auf `100%`. Bei der Bereitstellung werden alle neuen erforderlichen Replikate erstellt und anschließend die Replikate der alten Version auf 0 herunterskaliert.</p></td>
     </tr>
     </tbody></table>
 

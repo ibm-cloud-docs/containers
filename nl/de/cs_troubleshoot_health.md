@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Fehlerbehebung für die Protokollierung und Überwachung
@@ -71,20 +71,20 @@ Beim Zugriff auf das Kibana-Dashboard werden Ihre Protokolle nicht angezeigt.
   <tr>
     <td>Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, verfügt der Kontoeigner nicht über die Berechtigungen eines Managers, Entwicklers oder Prüfers für diesen Bereich.</td>
       <td>Gehen Sie wie folgt vor, um die Zugriffsberechtigungen für den Kontoeigner zu ändern:
-      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner des Clusters zu ermitteln: <code>ibmcloud ks api-key-info</code>.</li>
+      <ol><li>Führen Sie den folgenden Befehl aus, um den Kontoeigner des Clusters zu ermitteln: <code>ibmcloud ks api-key-info --cluster &lt;clustername_oder_-id&gt;</code>.</li>
       <li>Informationen darüber, wie dem betreffenden Kontoeigner die {{site.data.keyword.containerlong_notm}}-Zugriffsberechtigung eines Managers, Entwicklers oder Prüfers für den Bereich zugeordnet werden kann, finden Sie unter <a href="/docs/containers?topic=containers-users">Clusterzugriff verwalten</a>.</li>
       <li>Führen Sie den folgenden Befehl aus, um das Protokollierungstoken nach Änderung der Berechtigungen zu aktualisieren: <code>ibmcloud ks logging-config-refresh --cluster &lt;clustername_oder_-id&gt;</code>.</li></ol></td>
     </tr>
     <tr>
-      <td>Sie haben eine Anwendungsprotokollierungskonfiguration mit einer symbolischen Verbindung in Ihrem App-Pfad.</td>
-      <td><p>Damit Protokolle gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise die symbolische Verbindung erstellt.</p> <p>Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden.</p></td>
+      <td>Sie haben eine Protokollierungskonfiguration für Ihre App mit einer symbolischen Verbindung in Ihrem App-Pfad.</td>
+      <td><p>Damit Protokolle gesendet werden, müssen Sie einen absoluten Pfad in Ihrer Protokollierungskonfiguration verwenden. Andernfalls können die Protokolle nicht gelesen werden. Falls Ihr Pfad an Ihren Workerknoten angehängt ist, wurde dadurch möglicherweise eine symbolische Verbindung erstellt.</p> <p>Beispiel: Falls der angegebene Pfad <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> lautet, aber die Protokolle an <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code> gesendet werden, können sie nicht gelesen werden.</p></td>
     </tr>
   </tbody>
 </table>
 
 Um Änderungen zu testen, die Sie während der Fehlerbehebung vorgenommen haben, können Sie *Noisy* auf einem Workerknoten in Ihrem Cluster bereitstellen. Dabei handelt es sich um einen Beispiel-Pod, der mehrere Protokollereignisse generiert.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Erstellen Sie die Konfigurationsdatei `deploy-noisy.yaml`.
     ```
@@ -141,7 +141,7 @@ Löschen Sie den Pod `kube-dashboard`, um einen Neustart zu erzwingen. Der Pod w
 {: #quota}
 
 {: tsSymptoms}
-Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull}} weiterzuleiten. Wenn Sie Protokolle anzeigen, wird die folgende oder eine ähnliche Fehlernachricht angezeigt:
+Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull}} weiterzuleiten. Wenn Sie Protokolle anzeigen, wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -163,7 +163,7 @@ Prüfen Sie die folgenden Ursachen, aus denen Sie Ihr Protokollkontingent ersch�
  </thead>
  <tbody>
   <tr>
-    <td>Einer oder mehrere der Pods generieren eine große Menge an Protokollen.</td>
+    <td>Ein oder mehrere Pods erzeugen eine hohe Anzahl von Protokollen.</td>
     <td>Sie können Protokollspeicherplatz freigeben, indem Sie verhindern, dass Protokolle aus bestimmten Pods weitergeleitet werden. Erstellen Sie einen [Protokollfilter](/docs/containers?topic=containers-health#filter-logs) für diese Pods.</td>
   </tr>
   <tr>
@@ -184,7 +184,7 @@ Prüfen Sie die folgenden Ursachen, aus denen Sie Ihr Protokollkontingent ersch�
 {: #long_lines}
 
 {: tsSymptoms}
-Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull_notm}} weiterzuleiten. Wenn Sie Protokolle anzeigen, sehen Sie eine sehr lange Protokollnachricht. Außerdem ist es möglich, dass in Kibana nur die letzten 600 - 700 Zeichen der Protokollnachricht zu sehen sind.
+Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull_notm}} weiterzuleiten. Wenn Sie Protokolle anzeigen, sehen Sie eine lange Protokollnachricht. Außerdem ist es möglich, dass in Kibana nur die letzten 600 - 700 Zeichen der Protokollnachricht zu sehen sind.
 
 {: tsCauses}
 Eine lange Protokollnachricht kann aufgrund ihrer Länge abgeschnitten werden, bevor sie von Fluentd erfasst wird, sodass das Protokoll von Fluentd möglicherweise nicht ordnungsgemäß analysiert wird, bevor es an {{site.data.keyword.loganalysisshort_notm}} weitergeleitet wird.
@@ -209,7 +209,7 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support?topic=get-support-getting-customer-support#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support?topic=get-support-getting-customer-support).
 Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen. Sie können außerdem [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um relevante Informationen aus Ihrem Cluster zu erfassen und zu exportieren, um sie dem IBM Support zur Verfügung zu stellen.
 {: tip}
 

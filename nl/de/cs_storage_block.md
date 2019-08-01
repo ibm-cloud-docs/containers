@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-03"
 
 keywords: kubernetes, iks
 
@@ -16,11 +16,13 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
+{:tip: .tip}rwo
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Daten in IBM Blockspeicher für IBM Cloud speichern
@@ -38,7 +40,7 @@ subcollection: containers
 Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in mit einem Helm-Diagramm, um vordefinierte Speicherklassen für den Blockspeicher einzurichten. Mit diesen Speicherklassen können Sie einen PVC zum Bereitstellen von Blockspeicher für Ihre Apps erstellen.
 {: shortdesc}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Stellen Sie sicher, dass auf dem Workerknoten der neueste Patch für die Nebenversion angewendet wird.
    1. Listen Sie die aktuelle Patchversion der Workerknoten auf.
@@ -51,7 +53,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.12.7_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
       ```
       {: screen}
 
@@ -95,7 +97,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 
 6. Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-in. Wenn Sie das Plug-in installieren, werden vordefinierte Blockspeicherklassen zu Ihrem Cluster hinzugefügt.
    ```
-   helm install iks-charts/ibmcloud-block-storage-plugin 
+   helm install iks-charts/ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -186,7 +188,7 @@ Sie können jetzt mit dem [Erstellen eines PVC](#add_block) zum Bereitstellen vo
 Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}}-Blockspeicher-Plug-ins auf die aktuelle Version durchführen.
 {: shortdesc}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Aktualisieren Sie das Helm-Repository, um die aktuelle Version aller Helm-Diagramme in diesem Repository abzurufen.
    ```
@@ -233,7 +235,7 @@ Durch das Entfernen des Plug-ins werden keine vorhandenen PVCs, PVs oder Daten e
 {: important}
 
 Vorbereitende Schritte:
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Stellen Sie sicher, dass in Ihrem Cluster keine PVCs oder persistenten Datenträger vorhanden sind, die Blockspeicher verwenden.
 
 Gehen Sie wie folgt vor, um das Plug-in zu entfernen:
@@ -538,7 +540,7 @@ Gegen Sie wie folgt vor, um Blockspeicher hinzuzufügen:
     Volume:		pvc-0d787071-3a67-11e7-aafc-eef80dd2dea2
     Labels:		<none>
     Capacity:	20Gi
-    Access Modes:	RWX
+    Access Modes:	RWO
     Events:
       FirstSeen	LastSeen	Count	From								SubObjectPath	Type		Reason			Message
       ---------	--------	-----	----								-------------	--------	------			-------
@@ -882,7 +884,7 @@ Falls Sie automatisch einen PVC erstellen möchten, wenn Sie eine statusabhängi
 Verwenden Sie diese Option, wenn bei der Erstellung einer statusabhängigen Gruppe automatisch ein PVC erstellt werden soll.
 {: shortdesc}
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Stellen Sie sicher, dass alle vorhandenen statusabhängigen Gruppen vollständig bereitgestellt werden. Falls die Bereitstellung einer statusabhängigen Gruppe noch andauert, können Sie nicht mit dem Erstellen der statusabhängigen Gruppe beginnen. Sie müssen warten, bis alle statusabhängigen Gruppen im Cluster vollständig bereitgestellt wurden, um unerwartete Ergebnisse zu vermeiden.
    1. Listen Sie vorhandene statusabhängige Gruppen im Cluster auf.
@@ -1164,7 +1166,7 @@ Sie können die PVCs vor der Erstellung der statusabhängigen Gruppe vorab berei
 
 Wenn Sie [die PVCs dynamisch beim Erstellen der statusabhängigen Gruppe bereitstellen](#block_dynamic_statefulset), wird der Name des PVC auf der Basis der Werte zugeordnet, die Sie in der YAML-Datei für die statusabhängige Gruppe verwendet haben. Wenn von der statusabhängigen Gruppe vorhandene PVCs verwendet werden sollen, muss der Name der PVCs mit dem Namen übereinstimmen, der automatisch bei Verwendung der dynamischen Bereitstellung verwendet werden würde.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Wenn Sie den PVC für Ihre statusabhängige Gruppe vorab bereitstellen wollen, bevor Sie die statusabhängige Gruppe erstellen, führen Sie die Schritte 1 bis 3 unter [Blockspeicher zu Apps hinzufügen](#add_block) aus, um einen PVC für jedes Replikat der statusabhängigen Gruppe zu erstellen. Stellen Sie sicher, dass Sie den PVC mit einem Namen erstellen, der das folgende Format aufweist: `<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: Verwenden Sie den Namen, den Sie im Abschnitt `spec.volumeClaimTemplates.metadata.name` der statusabhängigen Gruppe angeben möchten, zum Beispiel `nginxvol`.
@@ -1220,7 +1222,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
 Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern.
 {: shortdesc}
 
-Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Blockspeicherkapazität erweitern](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity). Wenn Sie die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden, um Ihren Speicher zu ändern, müssen Sie die Schritte 4-7 in diesem Abschnitt ausführen, um die Änderung abzuschließen.
+Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Blockspeicherkapazität erweitern](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) und [E/A-Operationen pro Sekunde anpassen](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Aktualisierungen, die Sie über die Konsole vornehmen, werden im persistenten Datenträger (PV - Persistent Volume) nicht widergespiegelt. Um dem persistenten Datenträger diese Informationen hinzuzufügen, führen Sie den Befehl `kubectl patch pv <pv-name>` aus und aktualisieren die Größe und die E/A-Operationen pro Sekunde im Abschnitt **Labels** und **Annotation** für Ihren persistenten Datenträger.
 {: tip}
 
 1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**.
@@ -1232,11 +1234,65 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    Beispielausgabe:
    ```
    NAME             STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWX            ibmc-block-bronze    147d
+   myvol            Bound     pvc-01ac123a-123b-12c3-abcd-0a1234cb12d3   20Gi       RWO            ibmc-block-bronze    147d
    ```
    {: screen}
 
-2. Rufen Sie die Datenträger-ID (**`VolumeID`**) und den Speichertyp (**`StorageType`**) des physischen Dateispeichers ab, die Ihrem PVC zugeordnet sind, indem Sie die Details des persistenten Datenträgers auflisten, an den Ihr PVC gebunden ist. Ersetzen Sie `<pv-name>` durch den Namen des persistenten Datenträgers (PV), den Sie im vorherigen Schritt abgerufen haben. Der Speichertyp wird im Abschnitt mit **Labels** (Bezeichnungen) angezeigt und die Datenträger-ID wird im Abschnitt **Source** (Quelle) > **Options** (Optionen) Ihrer CLI-Ausgabe angezeigt.
+2. Wenn Sie die IOPS und die Größe für Ihren Blockspeicher ändern möchten, bearbeiten Sie zuerst die IOPS im Abschnitt `metadata.labels.IOPS` Ihres persistenten Datenträgers. Sie können einen niedrigeren oder einen höheren IOPS-Wert angeben. Stellen Sie sicher, dass Sie für die E/A-Operationen pro Sekunde einen Wert angeben, der für Ihren Speichertyp unterstützt wird. Wenn Sie beispielsweise einen Endurance-Blockspeicher mit 4 IOPS haben, können Sie den IOPS-Wert entweder in 2 oder 10 ändern. Informationen zu weiteren unterstützten IOPS-Werten finden Sie unter [Blockspeicherkonfiguration festlegen](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
+   ```
+   kubectl edit pv <pv-name>
+   ```
+   {: pre}
+
+   Wenn Sie den IOPS-Wert über die CLI ändern, müssen Sie auch die Größe des Blockspeichers ändern.
+Wenn Sie nur den IOPS-Wert, nicht aber die Größe ändern wollen, müssen Sie die [Änderung des IOPS-Werts über die Konsole anfordern](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS).
+   {: note}
+
+3. Bearbeiten Sie den PVC und fügen Sie die neue Größe im Abschnitt `spec.resources.requests.storage` für Ihren PVC hinzu. Sie können die Größe maximal in die von Ihrer Speicherklasse festgelegte maximale Kapazität ändern. Sie können Ihren vorhandenen Speicher nicht verkleinern. Informationen zu den Größen für Ihre Speicherklasse finden Sie unter [Blockspeicherkonfiguration festlegen](/docs/containers?topic=containers-block_storage#block_predefined_storageclass).
+   ```
+   kubectl edit pvc <pvc-name>
+   ```
+   {: pre}
+
+4. Stellen Sie sicher, dass die Datenträgererweiterung angefordert wurde. Die Datenträgererweiterung wurde erfolgreich angefordert, wenn im Bedingungsabschnitt (**Conditions**) der CLI-Ausgabe eine Nachricht `FileSystemResizePending` angezeigt wird. 
+   ```
+   kubectl describe pvc <pvc-name>
+   ```
+   {: pre}
+
+   Beispielausgabe:
+   ```
+   ...
+   Conditions:
+   Type                      Status  LastProbeTime                     LastTransitionTime                Reason  Message
+   ----                      ------  -----------------                 ------------------                ------  -------
+   FileSystemResizePending   True    Mon, 01 Jan 0001 00:00:00 +0000   Thu, 25 Apr 2019 15:52:49 -0400           Waiting for user to (re-)start a pod to finish file system resize of volume on node.
+   ```
+   {: screen}
+
+5. Listen Sie alle Pods auf, die den PVC anhängen. Wenn Ihr PVC von einem Pod angehängt wird, wird die Datenträgererweiterung automatisch verarbeitet. Wenn Ihr PVC nicht von einem Pod angehängt wird, müssen Sie den PVC an einen Pod anhängen, damit die Datenträgererweiterung verarbeitet werden kann. 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
+   ```
+   {: pre}
+
+   Angehängte Pods werden im folgenden Format zurückgegeben: `<podname>: <pvc-name>`.
+
+6. Wenn Ihr PVC nicht von einem Pod angehängt wird, [erstellen Sie einen Pod oder eine Bereitstellung und hängen Sie den PVC an](/docs/containers?topic=containers-block_storage#add_block). Wenn Ihr PVC von einem Pod angehängt wird, fahren Sie mit dem nächsten Schritt fort. 
+
+7. Überwachen Sie den Status der Datenträgererweiterung. Die Datenträgererweiterung ist abgeschlossen, wenn die Nachricht `"message": "Success"` in Ihrer CLI-Ausgabe angezeigt wird.
+   ```
+   kubectl get pv <pv-name> -o go-template=$'{{index .metadata.annotations "ibm.io/volume-expansion-status"}}\n'
+   ```
+   {: pre}
+
+   Beispielausgabe:
+   ```
+   {"size":50,"iops":500,"orderid":38832711,"start":"2019-04-30T17:00:37Z","end":"2019-04-30T17:05:27Z","status":"complete","message":"Success"}
+   ```
+   {: screen}
+
+8. Stellen Sie sicher, dass die Größe und der IOPS-Wert im Abschnitt **Labels** Ihrer CLI-Ausgabe geändert wurden. 
    ```
    kubectl describe pv <pv-name>
    ```
@@ -1244,133 +1300,12 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
 
    Beispielausgabe:
    ```
-   Name:            pvc-c1839152-c333-11e8-b6a8-46ad53f2579a
-   Labels:          CapacityGb=24
-                    Datacenter=dal13
-                    IOPS=4
-                    StorageType=Endurance
-                    billingType=hourly
-                    failure-domain.beta.kubernetes.io/region=us-south
-                    failure-domain.beta.kubernetes.io/zone=dal13
-                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
    ...
-   Source:
-       Type:       FlexVolume (eine generische Datenträgerressource, die mithilfe eines Exec-basierten Plug-ins bereitgestellt/angehängt wird)
-       Driver:     ibm/ibmc-block
-       FSType:     ext4
-       SecretRef:  <nil>
-       ReadOnly:   false
-       Options:    map[volumeName:pvc-c1839152-c333-11e8-b6a8-46ad53f2579a Lun:1 TargetPortal:161.26.114.56 VolumeID:51889685]
-   ...
+   Labels:       CapacityGb=50
+                 Datacenter=dal10
+                 IOPS=500
    ```
    {: screen}
-
-3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer).
-
-   Beispiel für einen Leistungsspeicher:
-   ```
-   ibmcloud sl block volume-modify <datenträger-id> --new-size <größe> --new-iops <iops>
-   ```
-   {: pre}
-
-   Beispiel für Endurance-Speicher:
-   ```
-   ibmcloud sl block volume-modify <datenträger-id> --new-size <größe> --new-tier <iops>
-   ```
-   {: pre}
-
-   <table>
-   <caption>Erklärung der Komponenten des Befehls</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>&lt;datenträger-id&gt;</code></td>
-   <td>Geben Sie die ID des Datenträgers ein, den Sie zuvor abgerufen haben.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-size&gt;</code></td>
-   <td>Geben Sie die neue Größe in Gigabyte für Ihren Datenträger ein. Informationen zu gültigen Größen finden Sie unter [Blockspeicherkonfiguration festlegen](#block_predefined_storageclass). Die Größe, die Sie eingeben, muss größer-gleich der aktuellen Größe Ihres Datenträgers sein. Wenn Sie keine neue Größe angeben, wird die aktuelle Größe des Datenträgers verwendet. </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-iops&gt;</code></td>
-   <td>Nur für Leistungsspeicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#block_predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,3 ist, muss der neue IOPS/GB-Faktor kleiner als 0,3 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,3 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,3 sein.</p> </td>
-   </tr>
-   <tr>
-   <td><code>&lt;new-tier&gt;</code></td>
-   <td>Nur für Endurance-Speicher. Geben Sie die gewünschte neue Anzahl von E/A-Operationen pro Sekunde pro GB ein. Informationen zu gültigen E/A-Operationen pro Sekunde finden Sie unter [Blockspeicherkonfiguration festlegen](#block_predefined_storageclass). Wenn Sie die E/A-Operationen pro Sekunde nicht angeben, wird die aktuelle Anzahl E/A-Operationen pro Sekunde verwendet. <p class="note">Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger kleiner als 0,25 ist, muss der neue IOPS/GB-Faktor kleiner als 0,25 sein. Wenn der ursprüngliche IOPS/GB-Faktor für den Datenträger größer-gleich 0,25 ist, muss der neue IOPS/GB-Faktor größer-gleich 0,25 sein.</p> </td>
-   </tr>
-   </tbody>
-   </table>
-
-   Beispielausgabe:
-   ```
-   Order 31020713 was placed successfully!.
-   > Storage as a Service
-
-   > 40 GBs
-
-   > 2 IOPS per GB
-
-   > 20 GB Storage Space (Snapshot Space)
-
-   You may run 'ibmcloud sl block volume-list --order 12345667' to find this block volume after it is ready.
-   ```
-   {: screen}
-
-4. Korrigieren Sie die Konfiguration des persistenten Datenträgers, um die Annotation `autofix-resizefs` hinzuzufügen. Diese Annotation ändert die Größe des Dateisystems automatisch, wenn der Datenträger an einen Pod angehängt wird.  
-   ```
-   kubectl patch pv <name_des_persistenten_datenträgers> -p '{"metadata": {"annotations":{"ibm.io/autofix-resizefs":"true"}}}'
-   ```
-   {: pre}
-
-5. Listen Sie alle Pods auf, die den PVC verwenden.
-   ```
-   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc-name>"
-   ```
-   {: pre}
-
-         Pods werden im folgenden Format zurückgegeben: `<pod_name>: <pvc_name>`.
-
-
-6. Wenn Sie über einen Pod verfügen, der den PVC verwendet, starten Sie den Pod erneut, indem Sie den Pod entfernen und ihn von Kubernetes erneut erstellen lassen. Wenn Sie einen Pod erstellt haben, ohne eine Kubernetes-Bereitstellung oder eine Replikatgruppe zu verwenden, müssen Sie Ihren Pod erneut erstellen, nachdem Sie ihn entfernt haben.
-   Um die YAML-Datei abzurufen, mit der zuvor Ihr Pod erstellt wurde, führen Sie den Befehl `kubectl get pod <pod_name> -o yaml >pod.yaml` aus.
-   {: tip}
-   ```
-   kubectl delete pod <podname>
-   ```
-   {: pre}
-
-7. Wenn Sie die Größe Ihres Datenträgers geändert haben, melden Sie sich bei Ihrem Pod an, um die neue Größe zu überprüfen. Beachten Sie, dass die Größenänderung der Speicherinstanz eine Weile dauert und Sie die Größe erst überprüfen können,, wenn der Prozess abgeschlossen ist.
-   1. Rufen Sie den Datenträgermountpfad ab, den Sie in Ihrem Pod verwendet haben, um auf Ihren Datenträger zuzugreifen.
-      ```
-      kubectl describe pod <podname>
-      ```
-      {: pre}
-
-      Der Datenträgermountpfad wird im Abschnitt **Containers** > **block** > **Mounts** Ihrer CLI-Ausgabe angezeigt.
-   2. Melden Sie sich beim Pod an.
-      ```
-      kubectl exec -it <podname> bash
-      ```
-      {: pre}
-
-   3. Zeigen Sie die Statistikdaten zur Plattenbelegung an und suchen Sie den Mountpfad für Ihren Datenträger, den Sie zuvor abgerufen haben. Verifizieren Sie, dass die Spalte **Größe** die neue Größe Ihres Datenträgers anzeigt.
-      ```
-      df -h
-      ```
-      {: pre}
-
-      Beispielausgabe:
-      ```
-      Filesystem                                     Size  Used Avail Use% Mounted on
-      overlay                                         99G  3.2G   91G   4% /
-      tmpfs                                           64M     0   64M   0% /dev
-      tmpfs                                          7.9G     0  7.9G   0% /sys/fs/cgroup
-      /dev/mapper/3600a098038304471562b4c4743384e4d   40G   44M   23G   1% /test
-      ```
-      {: screen}
 
 
 ## Daten sichern und wiederherstellen
@@ -1383,7 +1318,7 @@ Der Blockspeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 
 <dl>
   <dt>Regelmäßige Snapshots konfigurieren</dt>
-  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, wenn ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt hat.</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Sie können [für Ihren Blockspeicher das Erstellen regelmäßiger Snapshots](/docs/infrastructure/BlockStorage?topic=BlockStorage-snapshots#snapshots) konfigurieren. Dies ist ein schreibgeschütztes Image, das den Status der Instanz zu einem bestimmten Zeitpunkt erfasst. Um den Snapshot zu speichern, müssen Sie für den Snapshot Speicherplatz im Blockspeicher anfordern. Snapshots werden in der in derselben Zone vorhandenen Speicherinstanz gespeichert. Sie können Daten von einem Snapshot wiederherstellen, wenn ein Benutzer versehentlich wichtige Daten von dem Datenträger entfernt hat.</br></br> <strong>Gehen Sie wie folgt vor, um einen Snapshot für den Datenträger zu erstellen: </strong><ol><li>[Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Melden Sie sich an der Befehlszeilenschnittstelle `ibmcloud sl` an. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Listen Sie alle vorhandenen PVs in Ihrem Cluster auf. <pre class="pre"><code>kubectl get pv</code></pre></li><li>Rufen Sie die Details für das PV ab, für das Snapshotspeicherplatz angefordert werden soll, und notieren Sie sich die Datenträger-ID, die Größe und die E/A-Operationen pro Sekunde (IOPS). <pre class="pre"><code>kubectl describe pv &lt;pv-name&gt;</code></pre> Die Größe und die Anzahl der E/A-Operationen pro Sekunde werden im Abschnitt <strong>Labels</strong> der CLI-Ausgabe angezeigt. Um die Datenträger-ID zu finden, überprüfen Sie die Annotation <code>ibm.io/network-storage-id</code> der CLI-Ausgabe. </li><li>Erstellen Sie die Snapshotgröße für den vorhandenen Datenträger mit den Parametern, die Sie im vorherigen Schritt abgerufen haben. <pre class="pre"><code>ibmcloud sl block snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Warten Sie, bis die Snapshotgröße erstellt wurde. <pre class="pre"><code>ibmcloud sl block volume-detail &lt;volume_ID&gt;</code></pre>Die Snapshotgröße wird erfolgreich bereitgestellt, wenn der Wert für <strong>Snapshot Size (GB)</strong> (Snapshotgröße (GB)) in der CLI-Ausgabe von '0' in die von Ihnen angeforderte Größe geändert wird. </li><li>Erstellen Sie einen Snapshot für den Datenträger und notieren Sie die ID des von Sie erstellten Snapshots. <pre class="pre"><code>ibmcloud sl block snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Überprüfen Sie, dass der Snapshot erfolgreich erstellt wurde. <pre class="pre"><code>ibmcloud sl block snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Gehen Sie wie folgt vor, um Daten aus einem Snapshot auf einem vorhandenen Datenträger wiederherzustellen: </strong><pre class="pre"><code>ibmcloud sl block snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Snapshots in eine andere Zone replizieren</dt>
  <dd><p>Um Daten vor einem Zonenausfall zu schützen, können Sie in einer Blockspeicherinstanz, die in einer anderen Zone konfiguriert ist, [Snapshots replizieren](/docs/infrastructure/BlockStorage?topic=BlockStorage-replication#replication). Daten können nur aus dem primären Speicher an den Sicherungsspeicher repliziert werden. Sie können eine replizierte Blockspeicherinstanz nicht an einen Cluster anhängen. Wenn Ihr primärer Speicher fehlschlägt, können Sie Ihren replizierten Sicherungsspeicher manuell als primären Speicher festlegen. Anschließend können Sie ihn an den Cluster anhängen. Nachdem Ihr primärer Speicher wiederhergestellt wurde, können Sie die Daten aus dem Sicherungsspeicher wiederherstellen.</p></dd>
@@ -1394,7 +1329,7 @@ Der Blockspeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 Damit Ihre Daten noch besser hoch verfügbar sind und um Ihre App vor einem Zonenausfall zu schützen, konfigurieren Sie eine zweite {{site.data.keyword.cos_short}}-Instanz und replizieren Sie die Daten zonenübergreifend. Falls Sie Daten von Ihrer {{site.data.keyword.cos_short}}-Instanz wiederherstellen müssen, verwenden Sie das Wiederherstellungsscript, das mit dem Image bereitgestellt wird.</dd>
 <dt>Daten in und aus Pods und Containern kopieren</dt>
 <dd><p>Sie können den [Befehl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` verwenden, um Dateien und Verzeichnisse in und aus Pods oder spezifischen Containern in Ihrem Cluster zu kopieren.</p>
-<p>Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Wenn Sie keinen Container mit <code>-c</code> angeben, verwendet der Befehl den ersten verfügbaren Container im Pod.</p>
+<p>Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Wenn Sie keinen Container mit <code>-c</code> angeben, verwendet der Befehl den ersten verfügbaren Container im Pod.</p>
 <p>Sie können den Befehl auf verschiedene Weisen verwenden:</p>
 <ul>
 <li>Kopieren Sie Daten von Ihrer lokalen Maschine in einen Pod in Ihrem Cluster: <pre class="pre"><code>kubectl cp <var>&lt;lokaler_dateipfad&gt;/&lt;dateiname&gt;</var> <var>&lt;namensbereich&gt;/&lt;pod&gt;:&lt;dateipfad_des_pods&gt;</var></code></pre></li>

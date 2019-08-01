@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, helm
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 # Services unter Verwendung verwalteter Add-ons hinzufügen
 {: #managed-addons}
@@ -42,12 +43,12 @@ Wenn Sie den [Zugangscontroller zur Durchsetzung der Sicherheit von Container-Im
 ## Verwaltete Add-ons hinzufügen
 {: #adding-managed-add-ons}
 
-Zum Aktivieren eines verwalteten Add-ons in Ihrem Cluster können Sie den Befehl [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <clustername_oder_-id>`](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable) verwenden. Wenn Sie das verwaltete Add-on aktivieren, wird eine unterstützte Version des Tools, einschließlich aller Kubernetes-Ressourcen, automatisch in Ihrem Cluster installiert. Lesen Sie die Dokumentation zu jedem verwalteten Add-on, um die Voraussetzungen zu ermitteln, die Ihr Cluster erfüllen muss, damit das verwaltete Add-on installiert werden kann.
+Zum Aktivieren eines verwalteten Add-ons in Ihrem Cluster können Sie den Befehl [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <clustername_oder_-id>` verwenden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Wenn Sie das verwaltete Add-on aktivieren, wird eine unterstützte Version des Tools, einschließlich aller Kubernetes-Ressourcen, automatisch in Ihrem Cluster installiert. Lesen Sie die Dokumentation zu jedem verwalteten Add-on, um die Voraussetzungen zu ermitteln, die Ihr Cluster erfüllen muss, damit das verwaltete Add-on installiert werden kann.
 
 Weitere Informationen zu den Voraussetzungen für die einzelnen Add-ons finden Sie unter:
 
 - [Istio](/docs/containers?topic=containers-istio#istio)
-- [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial)
+- [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 ## Verwaltete Add-ons aktualisieren
 {: #updating-managed-add-ons}
@@ -57,7 +58,7 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
 
 1. Überprüfen Sie, ob Ihre Add-ons die neueste Version aufweisen. Add-ons, die mit `* (<version> latest)` gekennzeichnet sind, können aktualisiert werden.
    ```
-   ibmcloud ks cluster-addon-ls --cluster <mycluster>
+   ibmcloud ks cluster-addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -65,14 +66,15 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
    ```
    OK
    Name      Version
-   istio     1.0.6 *(1.1.2 latest)
-   knative   0.4.1
+   istio     1.1.5
+   knative   0.5.2
    ```
    {: screen}
 
-2. Speichern Sie alle Ressourcen, wie z. B. Konfigurationsdateien für alle Services oder Apps, die Sie in dem Namensbereich erstellt oder geändert haben, der von dem Add-on generiert wurde. Das Istio-Add-on verwendet beispielsweise `istio-system` und das Knative-Add-on `knative-serving`, `knative-monitoring`, `knative-eventing` und `knative-build`. Beispielbefehl:
+2. Speichern Sie alle Ressourcen, wie z. B. Konfigurationsdateien für alle Services oder Apps, die Sie in dem Namensbereich erstellt oder geändert haben, der von dem Add-on generiert wurde. Das Istio-Add-on verwendet beispielsweise `istio-system` und das Knative-Add-on `knative-serving`, `knative-monitoring`, `knative-eventing` und `knative-build`.
+   Beispielbefehl:
    ```
-   kubectl get pod <pod_name> -o yaml -n istio-system
+   kubectl get pod <podname> -o yaml -n istio-system
    ```
    {: pre}
 
@@ -85,7 +87,7 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
 
    2. Speichern Sie alle Ressourcen, die aus diesen CRDs erstellt wurden.
 
-4. Optional für Knative: Wenn Sie eine der folgenden Ressourcen geändert haben, rufen Sie die YAML-Datei ab und speichern Sie sie auf Ihrer lokalen Maschine. Beachten Sie: Wenn Sie eine dieser Ressourcen geändert haben, aber stattdessen die installierte Standardeinstellung verwenden möchten, können Sie die Ressource löschen. Nach einigen Minuten wird die Ressource mit den installierten Standardwerten neu erstellt.
+4. Optional für Knative: Wenn Sie eine der folgenden Ressourcen geändert haben, rufen Sie die YAML-Datei ab und speichern Sie sie auf Ihrer lokalen Maschine. Wenn Sie eine dieser Ressourcen geändert haben, aber stattdessen die installierte Standardeinstellung verwenden möchten, können Sie die Ressource löschen. Nach einigen Minuten wird die Ressource mit den installierten Standardwerten neu erstellt.
   <table summary="Tabelle der Knative-Ressourcen">
   <caption>Knative-Ressourcen</caption>
   <thead><tr><th>Ressourcenname</th><th>Ressourcentyp</th><th>Namensbereich</th></tr></thead>
@@ -133,7 +135,7 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
      kubectl get svc -n istio-system
      ```
      {: pre}
-   * Wenn Sie beispielsweise das Add-on `knative` aktualisieren, könnten Sie sicherstellen, dass die Namensbereiche `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build` und `istio-system` gelöscht werden. Die Namensbereiche könnten einige Minuten lang den **STATUS** `Beenden` haben, bevor sie ganz gelöscht werden.
+   * Wenn Sie beispielsweise das Add-on `knative` aktualisieren, könnten Sie sicherstellen, dass die Namensbereiche `knative-serving`, `knative-monitoring`, `knative-eventing`, `knative-build` und `istio-system` gelöscht werden. Die Namensbereiche könnten einige Minuten lang den **STATUS** `Beenden` haben, bevor sie gelöscht werden.
      ```
      kubectl get namespaces -w
      ```
@@ -145,7 +147,7 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
    ```
    {: pre}
 
-9. Aktivieren Sie das Add-on erneut. Verwenden Sie das Flag `-- version`, um die Version anzugeben, die Sie installieren wollen. Ist keine Version angegeben, wird die Standardversion installiert.
+9. Aktivieren Sie das Add-on erneut. Verwenden Sie das Flag `--version`, um die Version anzugeben, die Sie installieren wollen. Ist keine Version angegeben, wird die Standardversion installiert.
    ```
    ibmcloud ks cluster-addon-enable <add-on_name> --cluster <clustername_oder_-id> --version <version>
    ```
@@ -176,3 +178,10 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
        ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <clustername_oder_-id> --version <version>
        ```
        {: pre}
+
+13. Optional für Istio: Wenn Sie in Ihren Gateway-Konfigurationsdateien TLS-Abschnitte verwenden, müssen Sie die Gateways löschen und neu erstellen, damit Envoy auf die geheimen Schlüssel zugreifen kann. 
+  ```
+  kubectl delete gateway mygateway
+  kubectl create -f mygateway.yaml
+  ```
+  {: pre}

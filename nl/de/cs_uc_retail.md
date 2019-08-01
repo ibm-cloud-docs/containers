@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-01"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Anwendungsfälle aus dem Einzelhandel für {{site.data.keyword.cloud_notm}}
@@ -39,7 +39,7 @@ Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhe
 Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Geschäftspartner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen.
 
 {{site.data.keyword.containerlong_notm}} und Schlüsseltechnologien:
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [{{site.data.keyword.cos_full}} zum Beibehalten und Synchronisieren von Daten für Apps](/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 
@@ -63,7 +63,7 @@ Die Lösung besteht aus den folgenden wichtigen Bestandteilen:
 
 Damit das Einzelhandelsunternehmen mit globalen Geschäftspartnern zusammenarbeiten kann, müssen an den APIs für den Lagerbestand Änderungen vorgenommen werden, damit die Sprache und die Marktvorgaben für jede einzelne Region angepasst werden können. {{site.data.keyword.containerlong_notm}} bietet eine Abdeckung in mehreren Regionen, darunter Nordamerika, Europa, Asien und Australien; hierbei spiegeln die APIs die Bedürfnisse der einzelnen Länder wieder und stellen eine kurze Latenzzeit für API-Aufrufe sicher.
 
-Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden der Geschäftspartner und den Unternehmen möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren.
+Eine weitere Voraussetzung ist, dass die gemeinsame Nutzung der Bestandsdaten mit den Kunden und Geschäftspartnern des Unternehmens möglich ist. Mit den APIs für die Bestandsdaten können die Entwickler Informationen in Apps bereitstellen, zum Beispiel als mobile Bestandsdaten-Apps oder E-Commerce-Lösungen für das World Wide Web. Die Entwickler sind auch mit dem Aufbau und der Pflege der primären E-Commerce-Site beschäftigt. Somit müssen sie sich auf die Codierung und nicht auf die Verwaltung der Infrastruktur konzentrieren.
 
 Und schließlich wurde {{site.data.keyword.containerlong_notm}} ausgewählt, weil IBM die Verwaltung der Infrastruktur vereinfacht:
 * Verwaltung des Kubernetes-Masters, von Infrastructure as a Service (IaaS) und der Betriebskomponenten, wie zum Beispiel Ingress und Speicher
@@ -127,7 +127,7 @@ Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}}
 
 Schlüsseltechnologien:    
 * [Horizontale Skalierung zur Beschleunigung der Entwicklung](/docs/containers?topic=containers-app#highly_available_apps)
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Erkenntnisse über Markttrends mit Watson Discovery](https://www.ibm.com/watson/services/discovery/)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Bestandsmanagement mit {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)

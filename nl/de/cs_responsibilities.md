@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Zuständigkeiten bei der Verwendung von {{site.data.keyword.containerlong_notm}}
@@ -60,7 +60,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
      <td align="center"><img src="images/icon_tools.svg" alt="Symbol eines Schraubenschlüssels"/><br>Verwalteter Cluster</td>
      <td>
      **Leistungsumfang**:
-    <ul><li>Bereitstellung einer Tool-Suite zur Automatisierung der Clusterverwaltung, wie z. B. {{site.data.keyword.containerlong_notm}}-[API ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/swagger-api/), -[CLI-Plug-in](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference) oder -[Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters).</li>
+     <ul><li>Bereitstellung einer Tool-Suite zur Automatisierung der Clusterverwaltung, wie z. B. die {{site.data.keyword.containerlong_notm}}-[API ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/global/swagger-global-api/), das [CLI-Plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) und die [Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters).</li>
      <li>Automatische Anwendung von Betriebssystem, Version und Sicherheit des Kubernetes Master-Patches. Verfügbarmachen von Haupt- und Nebenversionen, die Sie anwenden können.</li>
      <li>Verwalten und Wiederherstellen aktiver {{site.data.keyword.containerlong_notm}}- und Kubernetes-Komponenten im Cluster, z. B. Ingress-Lastausgleichsfunktion für Anwendungen oder Dateispeicher-Plug-in.</li>
      <li>Sicherung und Wiederherstellung von Daten in 'etcd', z. B. Ihre Konfigurationsdateien für Kubernetes-Workloads</li>
@@ -72,7 +72,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
      </ul>
      <br><br>
      **Verantwortlichkeiten des Kunden**:
-    <ul>
+     <ul>
      <li>Verwendung der API-, CLI- oder Konsolentools für die [Anwendung](/docs/containers?topic=containers-update#update) der bereitgestellten Haupt- und Nebenversionen des Kubernetes-Masters sowie Haupt-, Neben- und Patchversionen für Workerknoten.</li>
      <li>Verwendung der API-, CLI- oder Konsolentools für die [Wiederherstellung](/docs/containers?topic=containers-cs_troubleshoot#cs_troubleshoot) Ihrer Infrastrukturressourcen oder Einrichtung und Konfiguration der optionalen [automatischen Workerknoten-Wiederherstellung](/docs/containers?topic=containers-health#autorecovery).</li></ul>
      <br><br></td>
@@ -81,7 +81,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
       <td align="center"><img src="images/icon_locked.svg" alt="Schloss-Symbol"/><br>Umgebung mit umfassender Sicherheit</td>
       <td>
       **Leistungsumfang**:
-    <ul>
+      <ul>
       <li>Verwalten von Kontrollmechanismen entsprechend [verschiedenen Konformitätsstandards der Branche](/docs/containers?topic=containers-faqs#standards), z. B. PCI DSS.</li>
       <li>Überwachen, Isolieren und Wiederherstellen des Cluster-Masters.</li>
       <li>Bereitstellung hoch verfügbarer Replikate der Komponenten Kubernetes-Master-API-Server, 'etcd', Scheduler und Controller-Manager zum Schutz vor einem Masterausfall.</li>
@@ -98,19 +98,19 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
       </ul>
       <br><br>
       **Verantwortlichkeiten des Kunden**:
-    <ul>
+      <ul>
       <li>Verwendung der API-, CLI- oder Konsolentools für die Anwendung der bereitgestellten [Sicherheitspatchversionen](/docs/containers?topic=containers-changelog#changelog) auf Ihre Workerknoten.</li>
-      <li>Auswahl der Konfiguration für Ihr [Clusternetz](/docs/containers?topic=containers-cs_network_ov#cs_network_ov) und Konfiguration weiterer [Sicherheitseinstellungen](/docs/containers?topic=containers-security#security) entsprechend den Sicherheits- und Complianceanforderungen Ihrer Workloads. Gegebenenfalls Konfiguration Ihrer [Firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
+      <li>Auswahl der Konfiguration für Ihr [Clusternetz](/docs/containers?topic=containers-plan_clusters) und Konfiguration weiterer [Sicherheitseinstellungen](/docs/containers?topic=containers-security#security) entsprechend den Sicherheits- und Complianceanforderungen Ihrer Workloads. Gegebenenfalls Konfiguration Ihrer [Firewall](/docs/containers?topic=containers-firewall#firewall).</li></ul>
       <br><br></td>
       </tr>
-      
+
       <tr>
         <td align="center"><img src="images/icon_code.svg" alt="Symbol mit Codeklammern"/><br>App-Orchestrierung</td>
         <td>
         **Leistungsumfang**:
-    <ul>
+        <ul>
         <li>Bereitstellung von Clustern mit installierten Kubernetes-Komponenten, sodass Sie auf die Kubernetes-API zugreifen können.</li>
-        <li>Bereitstellung einer Anzahl verwalteter Add-ons zur Erweiterung der Fähigkeiten Ihrer App, z. B. [Istio](/docs/containers?topic=containers-istio#istio) oder [Knative](/docs/containers?topic=containers-knative_tutorial#knative_tutorial). Die Wartung wird für Sie vereinfacht, da IBM die Installation und Aktualisierungen für die verwalteten Add-ons bereitstellt.</li>
+        <li>Bereitstellung einer Anzahl verwalteter Add-ons zur Erweiterung der Fähigkeiten Ihrer App, z. B. [Istio](/docs/containers?topic=containers-istio#istio) oder [Knative](/docs/containers?topic=containers-serverless-apps-knative). Die Wartung wird für Sie vereinfacht, da IBM die Installation und Aktualisierungen für die verwalteten Add-ons bereitstellt.</li>
         <li>Bereitstellung der Clusterintegration mit ausgewählten Partnerschaftstechnologien von Drittanbietern, z. B. {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} oder Portworx.</li>
         <li>Bereitstellung von Automatisierung, um die Servicebindung für andere {{site.data.keyword.Bluemix_notm}}-Services zu aktivieren</li>
         <li>Erstellung von Clustern mit geheimen Schlüsseln für Image-Pull-Operationen, sodass Ihre Bereitstellungen im Kubernetes-Namensbereich `default` Images aus {{site.data.keyword.registrylong_notm}} extrahieren können.</li>
@@ -120,7 +120,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
         </ul>
         <br><br>
         **Verantwortlichkeiten des Kunden**:
-    <ul>
+        <ul>
         <li>Verwendung der bereitgestellten Tools und Funktionen für die [Konfiguration und Bereitstellung](/docs/containers?topic=containers-app#app), [Einrichtung von Berechtigungen](/docs/containers?topic=containers-users#users), [Integration mit anderen Services](/docs/containers?topic=containers-supported_integrations#supported_integrations), für [externen Service](/docs/containers?topic=containers-cs_network_planning#cs_network_planning), die [Statusüberwachung](/docs/containers?topic=containers-health#health), [Speicherung, Sicherung und Wiederherstellung von Daten](/docs/containers?topic=containers-storage_planning#storage_planning) und sonstige Verwaltung Ihrer [hoch verfügbaren](/docs/containers?topic=containers-ha#ha) und widerstandsfähigen Workloads.</li>
         </ul>
         </td>
@@ -147,4 +147,4 @@ Ein unsachgemäßer Gebrauch umfasst:
 *   Unberechtigte Änderung von Services oder Systemen
 *   Verletzung von Rechten anderer Benutzer
 
-Alle Nutzungsbedingungen finden Sie unter [Bedingungen für Cloud-Services](https://cloud.ibm.com/docs/overview/terms-of-use/notices.html#terms).
+Alle Nutzungsbedingungen finden Sie unter [Bedingungen für Cloud-Services](/docs/overview/terms-of-use?topic=overview-terms#terms).

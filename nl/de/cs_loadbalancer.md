@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Basis- und DSR-Lastausgleich mit Netzlastausgleichsfunktionen (NLB)
@@ -71,10 +71,10 @@ Wenn Sie eine App mithilfe eines NLB-Service zugänglich machen, wird Ihre App a
 <br />
 
 
-## Vergleich der NLBs der Versionen 1.0 und 2.0
+## Vergleich des Basis- und DSR-Lastausgleichs in NLBs der Versionen 1.0 und 2.0 
 {: #comparison}
 
-Wenn Sie eine NLB erstellen, haben Sie die Wahl zwischen Version 1.0 und Version 2.0. Beachten Sie, dass die Version 2.0 der NLBs eine Betaversion ist.
+Wenn Sie eine NLB erstellen, können Sie eine NLB der Version 1.0 auswählen, die einen Basislastausgleich ausführt, oder eine NLB der Version 2.0, die einen DSR-Lastausgleich (DSR - Direct Server Return) ausführt. Beachten Sie, dass die Version 2.0 der NLBs eine Betaversion ist.
 {: shortdesc}
 
 **Was haben die NLBs der Versionen 1.0 und 2.0 gemeinsam?**
@@ -83,14 +83,14 @@ Die NLBs der Versionen 1.0 und 2.0 sind beides Layer 4-Lastausgleichsfunktionen,
 
 **Worin unterscheiden sich NLBs der Versionen 1.0 und 2.0?**
 
-Wenn ein Client eine Anforderung an Ihre App sendet, leitet die NLB Anforderungspakete an die IP-Adresse des Workerknotens weiter, auf dem ein App-Pod vorhanden ist. NLBs der Version 1.0 verwenden NAT (Network Address Translation, Netzadressumsetzung), um die Quellen-IP-Adresse des Anforderungspakets in die IP des Workerknotens umzuschreiben, auf dem ein Lastausgleichsfunktions-Pod vorhanden ist. Wenn der Workerknoten das App-Antwortpaket zurückgibt, wird die IP des Workerknotens, auf dem die NLB vorhanden ist, verwendet. Die NLB muss dann das Antwortpaket an den Client senden. Um zu verhindern, dass die IP-Adresse neu geschrieben wird, können Sie die [Beibehaltung der Quellen-IP aktivieren](#node_affinity_tolerations). Die Beibehaltung der Quellen-IP erfordert jedoch, dass Lastausgleichsfunktions-Pods und App-Pods auf demselben Worker ausgeführt werden, sodass die Anforderung nicht an einen anderen Worker weitergeleitet werden muss. Sie müssen Knotenaffinität und -tolerierungen zu App-Pods hinzufügen.
+Wenn ein Client eine Anforderung an Ihre App sendet, leitet die NLB Anforderungspakete an die IP-Adresse des Workerknotens weiter, auf dem ein App-Pod vorhanden ist. NLBs der Version 1.0 verwenden NAT (Network Address Translation, Netzadressumsetzung), um die Quellen-IP-Adresse des Anforderungspakets in die IP des Workerknotens umzuschreiben, auf dem ein Lastausgleichsfunktions-Pod vorhanden ist. Wenn der Workerknoten das App-Antwortpaket zurückgibt, wird die IP des Workerknotens, auf dem die NLB vorhanden ist, verwendet. Die NLB muss dann das Antwortpaket an den Client senden. Um zu verhindern, dass die IP-Adresse neu geschrieben wird, können Sie die [Beibehaltung der Quellen-IP aktivieren](#node_affinity_tolerations). Die Beibehaltung der Quellen-IP erfordert jedoch, dass Lastausgleichsfunktions-Pods und App-Pods auf demselben Worker ausgeführt werden, sodass die Anforderung nicht an einen anderen Worker weitergeleitet werden muss. Sie müssen Knotenaffinität und -tolerierungen zu App-Pods hinzufügen. Weitere Informationen zum Basislastausgleich mit NLBs der Version 1.0 finden Sie unter [Version 1.0: Komponenten und Architektur des Basislastausgleichs](#v1_planning).
 
-Im Gegensatz zu den NLBs der Version 1.0 verwenden die NLBs der Version 2.0 NAT nicht, wenn Anforderungen an App-Pods an andere Worker weitergeleitet werden. Wenn eine NLB der Version 2.0 eine Clientanforderung weiterleitet, verwendet sie IP über IP (IPIP), um das ursprüngliche Anforderungspaket in ein anderes, neues Paket einzubinden. Dieses einbindende IPIP-Paket hat eine Quellen-IP des Workerknotens, auf dem sich der Lastausgleichsfunktions-Pod befindet. Dadurch kann das ursprüngliche Anforderungspaket die Client-IP-Adresse als Quellen-IP-Adresse beibehalten. Der Workerknoten verwendet dann DSR (Direct Server Return), um das App-Antwortpaket an die Client-IP zu senden. Das Antwortpaket überspringt die NLB und wird direkt an den Client gesendet, wodurch der Umfang des Datenverkehrs reduziert wird, den die NLB verarbeiten muss.
+Im Gegensatz zu den NLBs der Version 1.0 verwenden die NLBs der Version 2.0 NAT nicht, wenn Anforderungen an App-Pods an andere Worker weitergeleitet werden. Wenn eine NLB der Version 2.0 eine Clientanforderung weiterleitet, verwendet sie IP über IP (IPIP), um das ursprüngliche Anforderungspaket in ein anderes, neues Paket einzubinden. Dieses einbindende IPIP-Paket hat eine Quellen-IP des Workerknotens, auf dem sich der Lastausgleichsfunktions-Pod befindet. Dadurch kann das ursprüngliche Anforderungspaket die Client-IP-Adresse als Quellen-IP-Adresse beibehalten. Der Workerknoten verwendet dann DSR (Direct Server Return), um das App-Antwortpaket an die Client-IP zu senden. Das Antwortpaket überspringt die NLB und wird direkt an den Client gesendet, wodurch der Umfang des Datenverkehrs reduziert wird, den die NLB verarbeiten muss. Weitere Informationen zum DSR-Lastausgleich mit NLBs der Version 2.0 finden Sie unter [Version 2.0: Komponenten und Architektur des DSR-Lastausgleichs](#planning_ipvs).
 
 <br />
 
 
-## v1.0: Komponenten und Architektur
+## Version 1.0: Komponenten und Architektur des Basislastausgleichs
 {: #v1_planning}
 
 Die TCP/UDP-Netzlastausgleichsfunktion (NLB) der Version 1.0 verwendet 'Iptables', ein Linux-Kernel-Feature, für den Lastausgleich von Anforderungen in den Pods einer App.
@@ -131,7 +131,7 @@ Standardmäßig werden NLBs der Version 1.0 nur in einer Zone konfiguriert. Um e
 **Vorbereitende Schritte**:
 * Um öffentliche Netzlastausgleichsfunktionen in mehreren Zonen zu erstellen, muss mindestens ein öffentliches VLAN portierbare Teilnetze aufweisen, die in jeder Zone verfügbar sind. Um private NLBs in mehreren Zonen zu erstellen, muss mindestens ein privates VLAN portierbare Teilnetze aufweisen, die in jeder Zone verfügbar sind. Sie können Teilnetze hinzufügen, indem Sie die Schritte im Abschnitt [Teilnetze für Cluster konfigurieren](/docs/containers?topic=containers-subnets) ausführen.
 * Wenn Sie den Datenaustausch im Netz auf Edge-Workerknoten beschränken, müssen Sie sicherstellen, dass in jeder Zone mindestens zwei [Edge-Workerknoten](/docs/containers?topic=containers-edge#edge) aktiviert sind, sodass NLBs gleichmäßig bereitgestellt werden können.
-* Aktivieren Sie [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer), damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+* Aktivieren Sie [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer), damit die Workerknoten in dem privaten Netz miteinander kommunizieren können. Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 * Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` innehaben.
 
 
@@ -484,7 +484,7 @@ Wenn Ihr Cluster mit mehreren öffentlichen oder privaten VLANs verbunden ist, w
 
 Wenn die Quellen-IP aktiviert ist, planen Sie App-Pods auf Workerknoten, die dasselbe VLAN wie die NLB-IP-Adresse aufweisen, indem Sie eine Affinitätsregel zur App-Bereitstellung hinzufügen.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Rufen Sie die IP-Adresse des NLB-Service ab. Suchen Sie im Feld **LoadBalancer Ingress** nach der IP-Adresse.
     ```
@@ -652,14 +652,14 @@ Bevor Sie eine NLB der Version 2.0 erstellen, müssen Sie die folgenden vorausge
 
 1. [Aktualisieren Sie die Master- und Workerknoten Ihres Clusters](/docs/containers?topic=containers-update) auf Kubernetes Version 1.12 oder höher.
 
-2. Damit Ihre NLB der Version 2.0 Anforderungen an App-Pods in mehreren Zonen weiterleiten kann, öffnen Sie einen Supportfall, um eine Konfigurationseinstellung für Ihre VLANs anzufordern. **Wichtig**: Sie müssen diese Konfiguration für alle öffentlichen VLANs anfordern. Wenn Sie ein neues zugeordnetes VLAN anfordern, müssen Sie ein weiteres Ticket für dieses VLAN öffnen.
+2. Damit Ihre NLB der Version 2.0 Anforderungen an App-Pods in mehreren Zonen weiterleiten kann, öffnen Sie einen Supportfall, um eine Kapazitätsaggregation für Ihre VLANs anzufordern. Diese Konfigurationseinstellung verursacht keine Netzfehler oder -ausfälle.
     1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) an.
     2. Klicken Sie in der Menüleiste auf **Support**, klicken Sie auf die Registerkarte **Fälle verwalten** und klicken Sie auf **Neuen Fall erstellen**.
     3. Geben Sie in die Fallfelder die folgenden Informationen ein:
        * Wählen Sie für den Typ von Support die Option **Technisch** aus.
        * Wählen Sie für die Kategorie die Option **VLAN Spanning** aus.
        * Geben Sie den Betreff **Frage zu öffentlichem VLAN-Netz** ein.
-    4. Fügen Sie die folgenden Informationen zur Beschreibung hinzu: "Konfigurieren Sie das Netz bitte so, dass eine Kapazitätsaggregation in den öffentlichen VLANs, die diesem Konto zugeordnet sind, zulässig ist. Das Referenzticket für diese Anforderung lautet: https://control.softlayer.com/support/tickets/63859145".
+    4. Fügen Sie die folgenden Informationen zur Beschreibung hinzu: "Konfigurieren Sie das Netz bitte so, dass eine Kapazitätsaggregation in den öffentlichen VLANs, die diesem Konto zugeordnet sind, zulässig ist. Das Referenzticket für diese Anforderung lautet: https://control.softlayer.com/support/tickets/63859145". Wenn Sie die Kapazitätsaggregation für bestimmte VLANs erlauben wollen, z. B. die öffentlichen VLANs für nur einen Cluster, können Sie diese VLAN-IDs in der Beschreibung angeben. 
     5. Klicken Sie auf **Übergeben**.
 
 3. Aktivieren Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer). Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Wenn VRF- oder VLAN-Spanning aktiviert ist, kann die NLB der Version 2.0 Pakete an verschiedene Teilnetz im Konto weiterleiten.
@@ -803,7 +803,7 @@ Gehen Sie wie folgt vor, um eine NLB der Version 2.0 in einem Mehrzonencluster e
       ```
       {: codeblock}
 
-  3. Optional: Stellen Sie sicher, dass Ihre NLB nur für einen begrenzten Bereich von IP-Adressen verfügbar ist, indem Sie die IP-Adressen im Feld `spec.loadBalancerSourceRanges` angeben. `loadBalancerSourceRanges` wird von `kube-proxy` in Ihrem Cluster durch Iptables-Regeln auf Workerknoten implementiert. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
+  3. Optional: Stellen Sie sicher, dass Ihre NLB nur für einen begrenzten Bereich von IP-Adressen verfügbar ist, indem Sie die IP-Adressen im Feld `spec.loadBalancerSourceRanges` angeben.  `loadBalancerSourceRanges` wird von `kube-proxy` in Ihrem Cluster durch Iptables-Regeln auf Workerknoten implementiert. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/).
 
   4. Erstellen Sie den Service in Ihrem Cluster.
 
@@ -1059,7 +1059,8 @@ Nachdem Sie Netzlastausgleichsfunktionen (NLBs) konfiguriert haben, können Sie 
 
 <dl>
 <dt>Hostname</dt>
-<dd>Wenn Sie eine öffentliche NLB in einem Einzel- oder Mehrzonencluster erstellen, machen Sie Ihre App dem Internet zugänglich, indem Sie einen Hostnamen für die NLB-IP-Adresse erstellen. Zusätzlich übernimmt {{site.data.keyword.Bluemix_notm}} für Sie die Generierung und Pflege des Platzhalter-SSL-Zertifikats für den Hostnamen. <p>In Mehrzonenclustern können Sie einen Hostnamen erstellen und die NLB-IP-Adresse in jeder Zone zum DNS-Eintrag dieses Hostnamens hinzufügen. Wenn Sie beispielsweise NLBs für Ihre App in drei Zonen in der Region 'Vereinigte Staaten (Süden)' bereitgestellt haben, können Sie den Hostnamen `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` für die drei NLB-IP-Adressen erstellen. Wenn ein Benutzer auf den Hostnamen Ihrer App zugreift, greift der Client zufällig auf eine dieser IPs zu und die Anforderung wird an diese NLB gesendet. </p>
+<dd>Wenn Sie eine öffentliche NLB in einem Einzel- oder Mehrzonencluster erstellen, machen Sie Ihre App dem Internet zugänglich, indem Sie einen Hostnamen für die NLB-IP-Adresse erstellen. Zusätzlich übernimmt {{site.data.keyword.Bluemix_notm}} für Sie die Generierung und Pflege des Platzhalter-SSL-Zertifikats für den Hostnamen.
+<p>In Mehrzonenclustern können Sie einen Hostnamen erstellen und die NLB-IP-Adresse in jeder Zone zum DNS-Eintrag dieses Hostnamens hinzufügen. Wenn Sie beispielsweise NLBs für Ihre App in drei Zonen in der Region 'Vereinigte Staaten (Süden)' bereitgestellt haben, können Sie den Hostnamen `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` für die drei NLB-IP-Adressen erstellen. Wenn ein Benutzer auf den Hostnamen Ihrer App zugreift, greift der Client zufällig auf eine dieser IPs zu und die Anforderung wird an diese NLB gesendet.</p>
 Beachten Sie, dass Sie derzeit keine Hostnamen für private NLBs erstellen können.</dd>
 <dt>Statusprüfmonitor</dt>
 <dd>Aktivieren Sie Statusprüfungen für die NLB-IP-Adressen hinter einem einzelnen Hostnamen, um festzustellen, ob sie verfügbar sind. Wenn Sie einen Monitor für Ihren Hostnamen aktivieren, wird damit die NLB-IP überwacht und die Ergebnisse der DNS-Suche werden auf Grundlage dieser Statusprüfungen aktualisiert. Wenn Ihre NLBs beispielsweise die IP-Adressen `1.1.1.1`, `2.2.2.2` und `3.3.3.3` haben, gibt eine normale Operation der DNS-Suche nach Ihrem Hostnamen alle drei IPs zurück, von denen der Client zufällig auf eine zugreift. Wenn die NLB mit der IP-Adresse `3.3.3.3` aus irgendeinem Grund nicht verfügbar ist, z. B. wegen eines Zonenfehlers, dann schlägt die Statusprüfung für diese IP fehl. Der Monitor entfernt die fehlgeschlagene IP aus dem Hostnamen und die DNS-Suche gibt nur die einwandfreien IPs `1.1.1.1` und `2.2.2.2` zurück.</dd>
@@ -1083,7 +1084,7 @@ Vorbereitende Schritte:
 * Überprüfen Sie die folgenden Aspekte und Einschränkungen.
   * Sie können Hostnamen für öffentliche NLBs der Version 1.0 und 2.0 erstellen.
   * Sie können derzeit keine Hostnamen für private NLBs erstellen.
-  * Sie können bis zu 128 Host-Namen registrieren. Diese Begrenzung kann auf Anforderung aufgehoben werden, indem ein [Supportfall](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support) geöffnet wird.
+  * Sie können bis zu 128 Host-Namen registrieren. Diese Begrenzung kann auf Anforderung aufgehoben werden, indem ein [Supportfall](/docs/get-support?topic=get-support-getting-customer-support) geöffnet wird.
 * [Erstellen Sie eine NLB für Ihre App in einem Einzelzonencluster](#lb_config) oder [erstellen Sie NLBs in jeder Zone eines Mehrzonenclusters](#multi_zone_config).
 
 Gehen Sie wie folgt vor, um einen Hostnamen für eine oder mehrere NLB-IP-Adressen zu erstellen:
@@ -1102,7 +1103,7 @@ Gehen Sie wie folgt vor, um einen Hostnamen für eine oder mehrere NLB-IP-Adress
   ```
   {: screen}
 
-2. Registrieren Sie die IP, indem Sie einen DNS-Hostnamen erstellen. Beachten Sie, dass Sie zunächst den Hostnamen mit nur einer IP-Adresse erstellen können. 
+2. Registrieren Sie die IP, indem Sie einen DNS-Hostnamen erstellen. Beachten Sie, dass Sie zunächst den Hostnamen mit nur einer IP-Adresse erstellen können.
   ```
   ibmcloud ks nlb-dns-create --cluster <clustername_oder_-id> --ip <NLB_IP>
   ```
@@ -1334,7 +1335,7 @@ ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-h
 ```
 {: pre}
 
-Sie können auch IP-Adressen von NLBs entfernen, die nicht mehr bei einem Hostnamen registriert sein sollen. Beachten Sie, dass Sie den folgenden Befehl für jede IP-Adresse ausführen müssen, die Sie entfernen möchten. Wenn Sie alle IPs aus einem Hostnamen entfernen, ist der Hostname immer noch vorhanden, nur sind ihm keine IPs zugeordnet. 
+Sie können auch IP-Adressen von NLBs entfernen, die nicht mehr bei einem Hostnamen registriert sein sollen. Beachten Sie, dass Sie den folgenden Befehl für jede IP-Adresse ausführen müssen, die Sie entfernen möchten. Wenn Sie alle IPs aus einem Hostnamen entfernen, ist der Hostname immer noch vorhanden, nur sind ihm keine IPs zugeordnet.
 ```
 ibmcloud ks nlb-dns-rm --cluster <clustername_oder_-id> --ip <ip1,ip2> --nlb-host <hostname>
 ```

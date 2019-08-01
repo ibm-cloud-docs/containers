@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, compliance, security standards
 
@@ -19,7 +19,9 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
+{:preview: .preview}
 {:faq: data-hd-content-type='faq'}
+
 
 # Häufig gestellte Fragen
 {: #faqs}
@@ -37,7 +39,7 @@ Weitere Informationen zu Kubernetes finden Sie in der [Kubernetes-Dokumentation 
 {: #kubernetes_service}
 {: faq}
 
-Mit {{site.data.keyword.containerlong_notm}} können Sie Ihren eigenen Kubernetes-Cluster zum Bereitstellen und Verwalten von containerisierten Apps in {{site.data.keyword.Bluemix_notm}} erstellen. Ihre containerisierten Apps werden auf Rechenhosts der IBM Cloud-Infrastruktur (SoftLayer) namens Workerknoten gehostet. Sie können Ihre Rechenhosts als [virtuelle Maschinen](/docs/containers?topic=containers-plan_clusters#vm) mit gemeinsam genutzten oder dedizierten Ressourcen oder als [Bare-Metal-Maschinen](/docs/containers?topic=containers-plan_clusters#bm) bereitstellen, die für die GPU- (Graphics Processing Unit) und SDS-Verwendung (Software-defined Storage) optimiert werden können. Ihre Workerknoten werden von einem hoch verfügbaren Kubernetes-Master gesteuert, der von IBM konfiguriert, überwacht und verwaltet wird. Sie können die {{site.data.keyword.containerlong_notm}}-API oder -CLI verwenden, um mit Ihren Clusterinfrastrukturressourcen zu arbeiten, und die Kubernetes-API oder -CLI, um Ihre Bereitstellungen und Services zu verwalten.
+Mit {{site.data.keyword.containerlong_notm}} können Sie Ihren eigenen Kubernetes-Cluster zum Bereitstellen und Verwalten von containerisierten Apps in {{site.data.keyword.Bluemix_notm}} erstellen. Ihre containerisierten Apps werden auf Rechenhosts der IBM Cloud-Infrastruktur (SoftLayer) namens Workerknoten gehostet. Sie können Ihre Rechenhosts als [virtuelle Maschinen](/docs/containers?topic=containers-planning_worker_nodes#vm) mit gemeinsam genutzten oder dedizierten Ressourcen oder als [Bare-Metal-Maschinen](/docs/containers?topic=containers-planning_worker_nodes#bm) bereitstellen, die für die GPU- (Graphics Processing Unit) und SDS-Verwendung (Software-defined Storage) optimiert werden können. Ihre Workerknoten werden von einem hoch verfügbaren Kubernetes-Master gesteuert, der von IBM konfiguriert, überwacht und verwaltet wird. Sie können die {{site.data.keyword.containerlong_notm}}-API oder -CLI verwenden, um mit Ihren Clusterinfrastrukturressourcen zu arbeiten, und die Kubernetes-API oder -CLI, um Ihre Bereitstellungen und Services zu verwalten.
 
 Weitere Informationen zur Konfiguration Ihrer Clusterressourcen finden Sie unter [Servicearchitektur](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). Eine Liste von Funktionen und Vorteilen finden Sie unter [Warum {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-cs_ov#cs_ov).
 
@@ -65,9 +67,9 @@ Workerknoten in Standardclustern werden in Ihrem {{site.data.keyword.Bluemix_not
 
 Die {{site.data.keyword.containerlong_notm}}-Architektur und -Infrastruktur wurde konzipiert, um eine hohe Zuverlässigkeit, eine geringe Latenzzeit bei der Verarbeitung und eine maximale Betriebszeit des Service zu gewährleisten. Standardmäßig wird jeder Cluster in {{site.data.keyword.containerlong_notm}} mit mehreren Kubernetes-Masterinstanzen konfiguriert, um die Verfügbarkeit und den Zugriff auf die Clusterressourcen zu gewährleisten, selbst wenn eine oder mehrere Instanzen Ihres Kubernetes-Masters nicht verfügbar sind.
 
-Sie können die Hochverfügbarkeit Ihres Clusters weiter steigern und Ihre App vor Ausfallzeiten schützen, indem Sie Ihre Workloads über mehrere Workerknoten in mehreren Zonen einer Region verteilen. Diese Konfiguration wird als [Mehrzonencluster](/docs/containers?topic=containers-plan_clusters#multizone) bezeichnet und stellt sicher, dass auf Ihre App zugegriffen werden kann, selbst wenn ein Workerknoten oder eine gesamte Zone nicht verfügbar ist.
+Sie können die Hochverfügbarkeit Ihres Clusters weiter steigern und Ihre App vor Ausfallzeiten schützen, indem Sie Ihre Workloads über mehrere Workerknoten in mehreren Zonen einer Region verteilen. Diese Konfiguration wird als [Mehrzonencluster](/docs/containers?topic=containers-ha_clusters#multizone) bezeichnet und stellt sicher, dass auf Ihre App zugegriffen werden kann, selbst wenn ein Workerknoten oder eine gesamte Zone nicht verfügbar ist.
 
-Erstellen Sie zum Schutz vor dem Ausfall einer ganzen Region [mehrere Cluster und verteilen Sie diese über {{site.data.keyword.containerlong_notm}}-Regionen](/docs/containers?topic=containers-plan_clusters#multiple_clusters). Indem Sie eine Netzlastausgleichsfunktion (NLB) für Ihre Cluster konfigurieren, können Sie einen regionsübergreifenden Lastausgleich und Netzbetrieb für Ihre Cluster erzielen.
+Erstellen Sie zum Schutz vor dem Ausfall einer ganzen Region [mehrere Cluster und verteilen Sie diese über {{site.data.keyword.containerlong_notm}}-Regionen](/docs/containers?topic=containers-ha_clusters#multiple_clusters). Indem Sie eine Netzlastausgleichsfunktion (NLB) für Ihre Cluster konfigurieren, können Sie einen regionsübergreifenden Lastausgleich und Netzbetrieb für Ihre Cluster erzielen.
 
 Wenn Sie Daten haben, die auch bei einem Ausfall verfügbar sein müssen, müssen Sie sicherstellen, dass Ihre Daten in einem [persistenten Speicher](/docs/containers?topic=containers-storage_planning#storage_planning) gesichert sind.
 
@@ -81,13 +83,33 @@ Sie können integrierte Sicherheitsfeatures in {{site.data.keyword.containerlong
 
 Weitere Informationen zu den Komponenten Ihres Clusters und dazu, wie Sie die einzelnen Komponenten schützen können, finden Sie unter [Sicherheit für {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
 
+## Welche Zugriffsrichtlinien erteile ich meinen Clusterbenutzern?
+{: #faq_access}
+{: faq}
+
+{{site.data.keyword.containerlong_notm}} verwendet {{site.data.keyword.iamshort}} (IAM), um Zugriff auf Clusterressourcen über IAM-Plattformrollen und auf Kubernetes-RBAC-Richtlinien (RBAC - Role-Based Access Control) über IAM-Servicerollen zu erteilen. Weitere Informationen zu Zugriffsrichtlinientypen finden Sie unter [Richtige Zugriffsrichtlinie und Rolle für Benutzer auswählen](/docs/containers?topic=containers-users#access_roles).
+{: shortdesc}
+
+Die Zugriffsrichtlinien, die Sie Benutzern zuweisen, variieren je nachdem, was Ihre Benutzer tun können sollen. Weitere Informationen dazu, welche Rollen welche Aktionstypen autorisieren, finden Sie auf der [Referenzseite für den Benutzerzugriff](/docs/containers?topic=containers-access_reference) oder über die Links in der folgenden Tabelle. Informationen zu den Schritten zum Zuordnen von Richtlinien finden Sie unter [Benutzern Zugriff auf Cluster über {{site.data.keyword.Bluemix_notm}} IAM erteilen](/docs/containers?topic=containers-users#platform).
+
+| Anwendungsfall | Beispielrollen und -bereich |
+| --- | --- |
+| App-Auditor | [Plattformrolle 'Anzeigeberechtigter' für einen Cluster, eine Region oder eine Ressourcengruppe](/docs/containers?topic=containers-access_reference#view-actions), [Servicerolle 'Leseberechtigter' für einen Cluster, eine Region oder eine Ressourcengruppe](/docs/containers?topic=containers-access_reference#service). |
+| App-Entwickler | [Plattformrolle 'Editor' für einen Cluster](/docs/containers?topic=containers-access_reference#editor-actions), [an einem Namensbereich orientierte Servicerolle 'Schreibberechtigter'](/docs/containers?topic=containers-access_reference#service), [Bereichsrolle 'Cloud Foundry-Entwickler'](/docs/containers?topic=containers-access_reference#cloud-foundry). |
+| Abrechnung | [Plattformrolle 'Anzeigeberechtigter' für einen Cluster, eine Region oder eine Ressourcengruppe](/docs/containers?topic=containers-access_reference#view-actions). |
+| Cluster erstellen | Berechtigungen auf Kontoebene für Superuser-Infrastrukturberechtigungsnachweise, Plattformrolle 'Administrator' für {{site.data.keyword.containerlong_notm}} und Plattformrolle 'Administrator' für {{site.data.keyword.registrylong_notm}}. Weitere Informationen finden Sie unter [Clustererstellung vorbereiten](/docs/containers?topic=containers-clusters#cluster_prepare).|
+| Clusteradministrator | [Plattformrolle 'Administrator' für einen Cluster](/docs/containers?topic=containers-access_reference#admin-actions), [nicht an einem Namensbereich orientierte Servicerolle 'Manager' (für den gesamten Cluster)](/docs/containers?topic=containers-access_reference#service).|
+| DevOps-Operator | [Plattformrolle 'Operator' für einen Cluster](/docs/containers?topic=containers-access_reference#operator-actions), [nicht an einem Namensbereich orientierte Servicerolle 'Schreibberechtigter' (für den gesamten Cluster)](/docs/containers?topic=containers-access_reference#service), [Bereichsrolle 'Cloud Foundry-Entwickler'](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
+| Operator oder Site Reliability Engineer | [Plattformrolle 'Administrator' für einen Cluster, eine Region oder eine Ressourcengruppe](/docs/containers?topic=containers-access_reference#admin-actions), [Servicerolle 'Leseberechtigter' für einen Cluster oder eine Region](/docs/containers?topic=containers-access_reference#service) oder [Servicerolle 'Manager' für alle Clusternamensbereiche](/docs/containers?topic=containers-access_reference#service), um `kubectl top nodes/pods`-Befehle verwenden zu können. |
+{: caption="Typen von Rollen, die Sie zuordnen können, um unterschiedlichen Anwendungsfällen zu entsprechen." caption-side="top"}
+
 ## Wo finde ich eine Liste der Sicherheitsbulletins, die meinen Cluster betreffen?
 {: #faq_security_bulletins}
 {: faq}
 
 Wenn Sicherheitslücken in Kubernetes gefunden werden, veröffentlicht Kubernetes CVEs in Sicherheitsbulletins, um Benutzer zu informieren und die Aktionen zu beschreiben, die Benutzer zur Korrektur der Sicherheitslücke ausführen müssen. Kubernetes-Sicherheitsbulletins, die {{site.data.keyword.containerlong_notm}}-Benutzer oder die {{site.data.keyword.Bluemix_notm}}-Plattform betreffen, werden im [{{site.data.keyword.Bluemix_notm}}-Sicherheitsbulletin](https://cloud.ibm.com/status?component=containers-kubernetes&selected=security) veröffentlicht.
 
-Einige CVEs erfordern die neueste Patchaktualisierung für eine Kubernetes-Version, die Sie als Teil des regulären [Clusteraktualisierungsprozesses](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}} installieren können. Stellen Sie sicher, dass Sie Sicherheitspatches zeitgerecht anwenden, um Ihren Cluster gegen böswillige Angriffe zu schützen. Informationen dazu, was ein Sicherheitspatch enthält, finden Sie im [Änderungsprotokoll der Version](/docs/containers?topic=containers-changelog#changelog).
+Einige CVEs erfordern die neueste Patchaktualisierung für eine Kubernetes-Version, die Sie als Teil des regulären [Clusteraktualisierungsprozesses](/docs/containers?topic=containers-update#update) in {{site.data.keyword.containerlong_notm}} installieren können. Stellen Sie sicher, dass Sie Sicherheitspatches zeitgerecht anwenden, um Ihren Cluster gegen böswillige Angriffe zu schützen. Informationen dazu, was ein Sicherheitspatch enthält, finden Sie im [Versionsänderungsprotokoll](/docs/containers?topic=containers-changelog#changelog).
 
 ## Bietet der Service Unterstützung für Bare-Metal und GPU?
 {: #bare_metal_gpu}
@@ -95,7 +117,7 @@ Einige CVEs erfordern die neueste Patchaktualisierung für eine Kubernetes-Versi
 
 Ja, Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird. Bare-Metal-Server bieten den Vorteil hoher Leistung für Workloads wie Daten, KI (künstliche Intelligenz) und GPU (Graphics Processing Unit). Außerdem sind alle Hardwareressourcen für Ihre Workloads dediziert, sodass Sie sich keine Sorgen um Leistungsbeeinträchtigungen machen brauchen, weil Sie Ressourcen mit anderen teilen.
 
-Weitere Informationen zu verfügbaren Bare-Metal-Optionen und zu den Unterschieden zwischen Bare-Metal- und virtuellen Maschinen finden Sie unter [Physische Maschinen (Bare-Metal)](/docs/containers?topic=containers-plan_clusters#bm).
+Weitere Informationen zu verfügbaren Bare-Metal-Optionen und zu den Unterschieden zwischen Bare-Metal- und virtuellen Maschinen finden Sie unter [Physische Maschinen (Bare-Metal)](/docs/containers?topic=containers-planning_worker_nodes#bm).
 
 ## Welche Kubernetes-Versionen unterstützt der Service?
 {: #supported_kube_versions}
@@ -103,9 +125,9 @@ Weitere Informationen zu verfügbaren Bare-Metal-Optionen und zu den Unterschied
 
 {{site.data.keyword.containerlong_notm}} unterstützt momentan mehrere Versionen von Kubernetes. Wenn die aktuellste Version (n) freigegeben wird, werden bis zu 2 Versionen davor (n-2) unterstützt. Versionen, die mehr als zwei Versionen älter sind, als die aktuellsten Version (n-3) werden zuerst nicht mehr verwendet und dann nicht weiter unterstützt. Die folgenden Versionen werden derzeit unterstützt:
 
-*   Aktuelle: 1.13.5
-*   Standard: 1.12.7
-*   Sonstige: 1.11.9
+*   Aktuelle: 1.14.2
+*   Standard: 1.13.6
+*   Sonstige: 1.12.9
 
 Weitere Informationen zu unterstützten Versionen und Aktualisierungsaktionen, die Sie ausführen müssen, um von einer Version zu einer anderen zu wechseln, finden Sie unter [Versionsinformationen und Aktualisierungsaktionen](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -113,9 +135,9 @@ Weitere Informationen zu unterstützten Versionen und Aktualisierungsaktionen, d
 {: #supported_regions}
 {: faq}
 
-{{site.data.keyword.containerlong_notm}} ist weltweit verfügbar. Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Freie Cluster sind nur in ausgewählten Regionen verfügbar.
+{{site.data.keyword.containerlong_notm}} ist weltweit verfügbar. Sie können Standardcluster in jeder unterstützten {{site.data.keyword.containerlong_notm}}-Region erstellen. Kostenlose Cluster sind nur in ausgewählten Regionen verfügbar.
 
-Weitere Informationen zu unterstützten Regionen finden Sie unter [Regionen und Zonen](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
+Weitere Informationen zu unterstützten Regionen finden Sie unter [Standorte](/docs/containers?topic=containers-regions-and-zones#regions-and-zones).
 
 ## Welche Standards hält der Service ein?
 {: #standards}
@@ -149,7 +171,7 @@ Um die Kommunikation zwischen Services zu aktivieren, die in {{site.data.keyword
 
 Einen Überblick über die unterstützen {{site.data.keyword.containerlong_notm}}-Angebote finden Sie unter [Vergleich von Angeboten und ihren Kombinationen](/docs/containers?topic=containers-cs_ov#differentiation).
 
-## Kann ich einen IBM Cloud Kubernetes-Service in meinem eigenen Rechenzentrum bereitstellen?
+## Kann ich IBM Cloud Kubernetes Service in meinem eigenen Rechenzentrum bereitstellen?
 {: #private}
 {: faq}
 
@@ -157,7 +179,7 @@ Wenn Sie Ihre Apps nicht in {{site.data.keyword.Bluemix_notm}} Public verschiebe
 
 Weitere Informationen finden Sie unter [{{site.data.keyword.Bluemix_notm}} Private – Produktdokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
 
-## Welche Gebühren werden bei der Nutzung des IBM Cloud Kubernetes-Service berechnet?
+## Welche Gebühren werden bei der Nutzung von IBM Cloud Kubernetes Service berechnet?
 {: #charges}
 {: faq}
 
@@ -167,6 +189,7 @@ Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, N
 * [IP-Teilnetzadressen](#subnet_ips)
 * [Speicher](#persistent_storage)
 * [{{site.data.keyword.Bluemix_notm}} Services](#services)
+* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
 
 <dl>
 <dt id="nodes">Workerknoten</dt>
@@ -178,7 +201,7 @@ Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, N
   <p><strong>Physische Maschinen (Bare-Metal)</strong> bieten den Vorteil hoher Leistung für Workloads wie Daten, künstliche Intelligenz und Grafik-Verarbeitungseinheiten. Außerdem sind alle Hardwareressourcen für Ihre Workloads dediziert, sodass Sie sich keine Sorgen um Leistungsbeeinträchtigungen machen brauchen, weil sie Ressourcen mit anderen teilen. Beachten Sie, dass sich die folgenden Faktoren auf die Kosten für Bare-Metal-Maschinen auswirken:</p>
   <ul><li><strong>Nur monatliche Abrechnung</strong>: Alle Bare-Metal-Maschinen werden monatlich abgerechnet.</li>
   <li><strong>Längerer Bestellprozess</strong>: Nachdem Sie einen Bare-Metal-Server bestellt oder storniert haben, wird der Prozess manuell in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer) ausgeführt. Die Ausführung kann daher länger als einen Geschäftstag dauern.</li></ul>
-  <p>Details zu den Maschinenspezifikationen finden Sie unter [Verfügbare Hardware für Workerknoten](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node).</p></dd>
+  <p>Details zu den Maschinenspezifikationen finden Sie unter [Verfügbare Hardware für Workerknoten](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
 
 <dt id="bandwidth">Öffentliche Bandbreite</dt>
   <dd><p>Die Bandbreite bezieht sich auf die öffentliche Datenübertragung des eingehenden und abgehenden Netzverkehrs, sowohl zu als auch von den {{site.data.keyword.Bluemix_notm}}-Ressourcen in den Rechenzentren auf der ganzen Welt. Die öffentliche Bandbreite wird nach Gb berechnet. Wenn Sie Ihre aktuelle Zusammenfassung der Bandbreite überprüfen möchten, melden Sie sich an der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) an, wählen Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") die Option **Klassische Infrastruktur** aus und wählen Sie anschließend die Seite **Netz > Bandbreite > Zusammenfassung** aus.
@@ -189,7 +212,7 @@ Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, N
   <p>Weitere Informationen finden Sie in [Bandbreitenpakete ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/bandwidth).</p></dd>
 
 <dt id="subnet_ips">IP-Teilnetzadressen</dt>
-  <dd><p>Wenn Sie einen Standardcluster erstellen, wird ein portierbares öffentliches Teilnetz mit 8 öffentlichen IP-Adressen bestellt und dem Konto monatlich in Rechnung gestellt.</p><p>Wenn Sie im Infrastrukturkonto bereits über Teilnetze verfügen, können Sie stattdessen diese Teilnetze verwenden. Erstellen Sie den Cluster mit dem [Flag](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) `--no-subnets` und [verwenden Sie die Teilnetze erneut](/docs/containers?topic=containers-subnets#subnets_custom).</p>
+  <dd><p>Wenn Sie einen Standardcluster erstellen, wird ein portierbares öffentliches Teilnetz mit 8 öffentlichen IP-Adressen bestellt und dem Konto monatlich in Rechnung gestellt.</p><p>Wenn Sie im Infrastrukturkonto bereits über Teilnetze verfügen, können Sie stattdessen diese Teilnetze verwenden. Erstellen Sie den Cluster mit dem [Flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) `--no-subnets` und [verwenden Sie die Teilnetze erneut](/docs/containers?topic=containers-subnets#subnets_custom).</p>
   </dd>
 
 <dt id="persistent_storage">Speicher</dt>
@@ -201,7 +224,12 @@ Mit {{site.data.keyword.containerlong_notm}}-Clustern können Sie die Rechen-, N
 <dt id="services">{{site.data.keyword.Bluemix_notm}}-Services</dt>
   <dd>Jeder Service, den Sie in den Cluster integrieren, weist ein eigenes Preismodell auf. Lesen Sie die jeweilige Produktdokumentation und verwenden Sie die {{site.data.keyword.Bluemix_notm}}-Konsole, um die [Kosten zu schätzen](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
 
+<dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dd>
+  <p class="preview">[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) ist als Betaversion zum Testen von OpenShift-Clustern verfügbar.</p>Wenn Sie einen [Red Hat OpenShift on IBM Cloud-Cluster](/docs/containers?topic=containers-openshift_tutorial) erstellen, werden Ihre Workerknoten mit dem Red Hat Enterprise Linux-Betriebssystem installiert, wodurch sich der Preis für die [Workerknotenmaschinen](#nodes) erhöht. Sie müssen außerdem über eine OpenShift-Lizenz verfügen, durch die monatlich zusätzlich zu den stündlichen VM-Kosten oder den monatlichen Bare-Metal-Kosten weitere Kosten anfallen. Die OpenShift-Lizenz gilt für jeweils 2 Kerne des Typs 'Workerknoten'. Wenn Sie Ihre Workerknoten vor Ende des Monats löschen, kann Ihre monatliche Lizenz für andere Workerknoten im Worker-Pool verwendet werden. Weitere Informationen zu OpenShift-Clustern finden Sie unter [Red Hat OpenShift on IBM Cloud-Cluster erstellen](/docs/containers?topic=containers-openshift_tutorial).</dd>
+
 </dl>
+<br><br>
 
 Bei monatlichen Ressourcen wird die Nutzung des aktuellen Monats im Folgemonat auf der Basis des Monatsersten abgerechnet. Wenn Sie eine Monatsressource in der Mitte eines Monats bestellen, wird Ihnen für diesen Monat der anteilige Betrag in Rechnung gestellt. Wenn Sie eine Ressource jedoch in der Mitte des Monats kündigen, wird Ihnen trotzdem der volle Betrag für die monatliche Ressource in Rechnung gestellt.
 {: note}

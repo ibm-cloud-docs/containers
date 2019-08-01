@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Benutzerzugriffsberechtigungen
@@ -57,65 +59,75 @@ Jedem Benutzer in Ihrem Konto, der den CLI-Befehl ausführt oder den API-Aufruf 
 <table>
 <caption>Übersicht über die CLI-Befehle und API-Aufrufe, für die keine Berechtigungen in {{site.data.keyword.containerlong_notm}} erforderlich sind</caption>
 <thead>
-<th id="none-actions-action">Clusterverwaltungsaktion</th>
+<th id="none-actions-action">Aktion</th>
 <th id="none-actions-cli">CLI-Befehl</th>
 <th id="none-actions-api">API-Aufruf</th>
 </thead>
 <tbody>
 <tr>
 <td>Liste der Versionen anzeigen, die für verwaltete Add-ons in {{site.data.keyword.containerlong_notm}} unterstützt werden.</td>
-<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cs_cli_reference#cs_addon_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetAddons)</code></td>
+<td><code>[ibmcloud ks addon-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)</code></td>
+<td><code>[GET /v1/addon](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAddons)</code></td>
 </tr>
 <tr>
 <td>API-Endpunkt für {{site.data.keyword.containerlong_notm}} als Ziel festlegen oder anzeigen</td>
-<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cs_cli_reference#cs_cli_api)</code></td>
+<td><code>[ibmcloud ks api](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>Liste der unterstützten Befehle und Parameter anzeigen</td>
-<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cs_cli_reference#cs_help)</code></td>
+<td><code>[ibmcloud ks help](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_help)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}}-Plug-ins initialisieren oder Region angeben, in der Sie Kubernetes-Cluster erstellen oder darauf zugreifen möchten</td>
-<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cs_cli_reference#cs_init)</code></td>
+<td><code>[ibmcloud ks init](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Liste der Kubernetes-Versionen anzeigen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden</td>
-<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cs_cli_reference#cs_kube_versions)</code></td>
-<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetKubeVersions)</code></td>
+<td>Veraltet: Liste der Kubernetes-Versionen anzeigen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden</td>
+<td><code>[ibmcloud ks kube-versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_kube_versions)</code></td>
+<td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
 <td>Liste der für Workerknoten verfügbaren Maschinentypen anzeigen</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/swagger-api/#!/util/GetDatacenterMachineTypes)</code></td>
+<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
 <td>Aktuelle Nachrichten für den Benutzer der IBMid anzeigen</td>
-<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/swagger-api/#!/util/GetMessages)</code></td>
+<td><code>[ibmcloud ks messages](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[GET /v1/messages](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages)</code></td>
 </tr>
 <tr>
-<td>Nach der {{site.data.keyword.containerlong_notm}}-Region suchen, in der Sie sich befinden</td>
-<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cs_cli_reference#cs_region)</code></td>
+<td>Veraltet: Nach der {{site.data.keyword.containerlong_notm}}-Region suchen, in der Sie sich befinden</td>
+<td><code>[ibmcloud ks region](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Region für {{site.data.keyword.containerlong_notm}} festlegen</td>
-<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cs_cli_reference#cs_region-set)</code></td>
+<td>Veraltet: Region für {{site.data.keyword.containerlong_notm}} festlegen</td>
+<td><code>[ibmcloud ks region-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Verfügbare Regionen auflisten</td>
-<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cs_cli_reference#cs_regions)</code></td>
-<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/swagger-api/#!/util/GetRegions)</code></td>
+<td>Veraltet: Verfügbare Regionen auflisten</td>
+<td><code>[ibmcloud ks regions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_regions)</code></td>
+<td><code>[GET /v1/regions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetRegions)</code></td>
+</tr>
+<tr>
+<td>Liste der Standorte anzeigen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden.</td>
+<td><code>[ibmcloud ks supported-locations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)</code></td>
+<td><code>[GET /v1/locations](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations)</code></td>
+</tr>
+<tr>
+<td>Liste der Versionen anzeigen, die in {{site.data.keyword.containerlong_notm}} unterstützt werden.</td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td>-</td>
 </tr>
 <tr>
 <td>Liste der verfügbaren Zonen zum Erstellen eines Clusters anzeigen</td>
-<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cs_cli_reference#cs_datacenters)</code></td>
-<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/swagger-api/#!/util/GetZones)</code></td>
+<td><code>[ibmcloud ks zones](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_datacenters)</code></td>
+<td><code>[GET /v1/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetZones)</code></td>
 </tr>
 </tbody>
 </table>
@@ -127,154 +139,136 @@ Die Plattformrolle **Anzeigeberechtigter** (Viewer) umfasst die [Aktionen, die k
 {: shortdesc}
 
 <table>
-<caption>Übersicht über die CLI-Befehle und API-Aufrufe für die Clusterverwaltung, die die Plattformrolle eines Anzeigeberechtigten in {{site.data.keyword.containerlong_notm}} erfordern</caption>
+<caption>Übersicht über CLI-Befehle und API-Aufrufe, die die Plattformrolle eines Anzeigeberechtigten in {{site.data.keyword.containerlong_notm}} erfordern</caption>
 <thead>
-<th id="view-actions-mngt">Clusterverwaltungsaktion</th>
+<th id="view-actions-mngt">Aktion</th>
 <th id="view-actions-cli">CLI-Befehl</th>
 <th id="view-actions-api">API-Aufruf</th>
 </thead>
 <tbody>
 <tr>
-<td>Name und E-Mail-Adresse für den Eigner des {{site.data.keyword.Bluemix_notm}} IAM-API-Schlüssels für eine Ressourcengruppe und Region anzeigen</td>
-<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetClusterKeyOwner)</code></td>
-</tr>
-<tr>
-<td>Kubernetes-Konfigurationsdaten und -Zertifikate herunterladen, um eine Verbindung zum Cluster herzustellen und `kubectl`-Befehle auszuführen</td>
-<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterConfig)</code></td>
-</tr>
-<tr>
-<td>Informationen zu einem Cluster anzeigen</td>
-<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetCluster)</code></td>
-</tr>
-<tr>
-<td>Alle Services in allen Namensbereichen auflisten, die an einen Cluster gebunden sind</td>
-<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_services)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesForAllNamespaces)</code></td>
-</tr>
-<tr>
-<td>Alle Cluster auflisten</td>
-<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cs_cli_reference#cs_clusters)</code></td>
-<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusters)</code></td>
-</tr>
-<tr>
-<td>Infrastrukturberechtigungsnachweise für das {{site.data.keyword.Bluemix_notm}}-Konto für den Zugriff auf ein anderes Portfolio der IBM Cloud-Infrastruktur (SoftLayer) abrufen</td>
-<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cs_cli_reference#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetUserCredentials)</code></td>
-</tr>
-<tr>
-<td>Alle an einen bestimmten Namensbereich gebundenen Services auflisten</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ListServicesInNamespace)</code></td>
-</tr>
-<tr>
-<td>Alle an einen Cluster gebundenen benutzerverwalteten Teilnetze auflisten</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterUserSubnet)</code></td>
-</tr>
-<tr>
-<td>Verfügbare Teilnetze im Infrastrukturkonto auflisten</td>
-<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cs_cli_reference#cs_subnets)</code></td>
-<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/swagger-api/#!/properties/ListSubnets)</code></td>
-</tr>
-<tr>
-<td>VLAN-Spanning-Status für das Infrastrukturkonto anzeigen</td>
-<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)</code></td>
-<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/swagger-api/#!/accounts/GetVlanSpanning)</code></td>
-</tr>
-<tr>
-<td>Wenn für nur einen Cluster festgelegt: VLANs auflisten, mit denen der Cluster in einer Zone verbunden ist.</br>Wenn für alle Cluster im Konto festgelegt: Alle in einer Zone verfügbaren VLANs auflisten.</td>
-<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cs_cli_reference#cs_vlans)</code></td>
-<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/swagger-api/#!/properties/GetDatacenterVLANs)</code></td>
-</tr>
-<tr>
-<td>Alle Webhooks für einen Cluster auflisten</td>
-<td>-</td>
-<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWebhooks)</code></td>
-</tr>
-<tr>
-<td>Informationen zu einem Workerknoten anzeigen</td>
-<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkers)</code></td>
-</tr>
-<tr>
-<td>Informationen zu einem Worker-Pool anzeigen</td>
-<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_get)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPool)</code></td>
-</tr>
-<tr>
-<td>Alle Worker-Pools in einem Cluster auflisten</td>
-<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pools)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetWorkerPools)</code></td>
-</tr>
-<tr>
-<td>Alle Workerknoten in einem Cluster auflisten</td>
-<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cs_cli_reference#cs_workers)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterWorkers)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Ingress-Aktionen, die die Plattformrolle eines Anzeigeberechtigten in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="view-actions-ingress">Ingress-Aktion</th>
-<th id="view-actions-cli2">CLI-Befehl</th>
-<th id="view-actions-api2">API-Aufruf</th>
-</thead>
-<tbody>
-<tr>
 <td>Informationen zu einer Ingress-Lastausgleichsfunktion für Anwendungen (ALB)</td>
-<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_get)</code></td>
-<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALB)</code></td>
+<td><code>[ibmcloud ks alb-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_get)</code></td>
+<td><code>[GET /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALB)</code></td>
 </tr>
 <tr>
 <td>ALB-Typen anzeigen, die in der Region unterstützt werden</td>
-<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cs_cli_reference#cs_alb_types)</code></td>
-<td><code>[GET /albtypes](https://containers.cloud.ibm.com/swagger-alb-api/#!/util/GetAvailableALBTypes)</code></td>
+<td><code>[ibmcloud ks alb-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_types)</code></td>
+<td><code>[GET /albtypes](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAvailableALBTypes)</code></td>
 </tr>
 <tr>
 <td>Alle Ingress-ALBs in einem Cluster auflisten</td>
-<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cs_cli_reference#cs_albs)</code></td>
-<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetClusterALBs)</code></td>
+<td><code>[ibmcloud ks albs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_albs)</code></td>
+<td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
-</tbody>
-</table>
-
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Protokollierungsaktionen, die die Plattformrolle eines Anzeigeberechtigten in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="view-actions-log">Protokollierungsaktion</th>
-<th id="view-actions-cli3">CLI-Befehl</th>
-<th id="view-actions-api3">API-Aufruf</th>
-</thead>
-<tbody>
+<tr>
+<td>Name und E-Mail-Adresse für den Eigner des {{site.data.keyword.Bluemix_notm}} IAM-API-Schlüssels für eine Ressourcengruppe und Region anzeigen</td>
+<td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
+</tr>
+<tr>
+<td>Kubernetes-Konfigurationsdaten und -Zertifikate herunterladen, um eine Verbindung zum Cluster herzustellen und `kubectl`-Befehle auszuführen</td>
+<td><code>[ibmcloud ks cluster-config](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterConfig)</code></td>
+</tr>
+<tr>
+<td>Informationen zu einem Cluster anzeigen</td>
+<td><code>[ibmcloud ks cluster-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetCluster)</code></td>
+</tr>
+<tr>
+<td>Alle Services in allen Namensbereichen auflisten, die an einen Cluster gebunden sind</td>
+<td><code>[ibmcloud ks cluster-services](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_services)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesForAllNamespaces)</code></td>
+</tr>
+<tr>
+<td>Alle Cluster auflisten</td>
+<td><code>[ibmcloud ks clusters](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)</code></td>
+<td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
+</tr>
+<tr>
+<td>Infrastrukturberechtigungsnachweise für das {{site.data.keyword.Bluemix_notm}}-Konto für den Zugriff auf ein anderes Portfolio der IBM Cloud-Infrastruktur (SoftLayer) abrufen</td>
+<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
+</tr>
+<tr>
+<td>Prüfen, ob in den Berechtigungsnachweisen für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) für die Zielregion und -ressourcengruppe empfohlene oder erforderliche Infrastrukturberechtigungen fehlen</td>
+<td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
+<td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
+</tr>
 <tr>
 <td>Status für automatische Aktualisierungen des Fluentd-Add-ons anzeigen</td>
-<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Standardprotokollierungsendpunkt für die Zielregion anzeigen</td>
 <td>-</td>
-<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/swagger-logging/#!/logging/GetDefaultLoggingEndpoint)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/default](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetDefaultLoggingEndpoint)</code></td>
 </tr>
 <tr>
 <td>Alle Protokollweiterleitungskonfigurationen im Cluster oder für eine Protokollquelle im Cluster auflisten</td>
-<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cs_cli_reference#cs_logging_get)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigs) und [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/FetchLoggingConfigsForSource)</code></td>
+<td><code>[ibmcloud ks logging-config-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_get)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigs) und [GET /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/FetchLoggingConfigsForSource)</code></td>
 </tr>
 <tr>
 <td>Informationen zu einer Protokollfilterkonfiguration anzeigen</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfig)</code></td>
 </tr>
 <tr>
 <td>Alle Protokollierungsfilterkonfigurationen im Cluster auflisten</td>
-<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_view)</code></td>
-<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/FetchFilterConfigs)</code></td>
+<td><code>[ibmcloud ks logging-filter-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_view)</code></td>
+<td><code>[GET /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/FetchFilterConfigs)</code></td>
+</tr>
+<tr>
+<td>Alle an einen bestimmten Namensbereich gebundenen Services auflisten</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>Alle an einen Cluster gebundenen benutzerverwalteten Teilnetze auflisten</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterUserSubnet)</code></td>
+</tr>
+<tr>
+<td>Verfügbare Teilnetze im Infrastrukturkonto auflisten</td>
+<td><code>[ibmcloud ks subnets](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)</code></td>
+<td><code>[GET /v1/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/ListSubnets)</code></td>
+</tr>
+<tr>
+<td>VLAN-Spanning-Status für das Infrastrukturkonto anzeigen</td>
+<td><code>[ibmcloud ks vlan-spanning-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)</code></td>
+<td><code>[GET /v1/subnets/vlan-spanning](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetVlanSpanning)</code></td>
+</tr>
+<tr>
+<td>Wenn für nur einen Cluster festgelegt: VLANs auflisten, mit denen der Cluster in einer Zone verbunden ist.</br>Wenn für alle Cluster im Konto festgelegt: Alle in einer Zone verfügbaren VLANs auflisten.</td>
+<td><code>[ibmcloud ks vlans](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)</code></td>
+<td><code>[GET /v1/datacenters/{datacenter}/vlans](https://containers.cloud.ibm.com/global/swagger-global-api/#/properties/GetDatacenterVLANs)</code></td>
+</tr>
+<tr>
+<td>Alle Webhooks für einen Cluster auflisten</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWebhooks)</code></td>
+</tr>
+<tr>
+<td>Informationen zu einem Workerknoten anzeigen</td>
+<td><code>[ibmcloud ks worker-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkers)</code></td>
+</tr>
+<tr>
+<td>Informationen zu einem Worker-Pool anzeigen</td>
+<td><code>[ibmcloud ks worker-pool-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_get)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPool)</code></td>
+</tr>
+<tr>
+<td>Alle Worker-Pools in einem Cluster auflisten</td>
+<td><code>[ibmcloud ks worker-pools](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pools)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetWorkerPools)</code></td>
+</tr>
+<tr>
+<td>Alle Workerknoten in einem Cluster auflisten</td>
+<td><code>[ibmcloud ks workers](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_workers)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterWorkers)</code></td>
 </tr>
 </tbody>
 </table>
@@ -286,195 +280,168 @@ Die Plattformrolle **Editor** umfasst alle Berechtigungen, die durch die Rolle *
 {: shortdesc}
 
 <table>
-<caption>Übersicht über die CLI-Befehle und API-Aufrufe für die Clusterverwaltung, die die Plattformrolle eines Editors in {{site.data.keyword.containerlong_notm}} erfordern</caption>
+<caption>Übersicht über CLI-Befehle und API-Aufrufe, die die Plattformrolle eines Editors in {{site.data.keyword.containerlong_notm}} erfordern</caption>
 <thead>
-<th id="editor-actions-mngt">Clusterverwaltungsaktion</th>
+<th id="editor-actions-mngt">Aktion</th>
 <th id="editor-actions-cli">CLI-Befehl</th>
 <th id="editor-actions-api">API-Aufruf</th>
 </thead>
 <tbody>
 <tr>
-<td>Service an einen Cluster binden. **Hinweis:** Die Cloud Foundry-Rolle 'Entwickler' (Developer) in dem Bereich, in dem sich der Service befindet, ist ebenfalls erforderlich.</td>
-<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/swagger-api/#!/clusters/BindServiceToNamespace)</code></td>
-</tr>
-<tr>
-<td>Bindung eines Service an einen Cluster aufheben. **Hinweis:** Die Cloud Foundry-Rolle 'Entwickler' (Developer) in dem Bereich, in dem sich der Service befindet, ist ebenfalls erforderlich.</td>
-<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_unbind)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UnbindServiceFromNamespace)</code></td>
-</tr>
-<tr>
-<td>Webhook in einem Cluster erstellen.</td>
-<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cs_cli_reference#cs_webhook_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWebhooks)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Ingress-Aktionen, die die Plattformrolle eines Editors in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="editor-actions-ingress">Ingress-Aktion</th>
-<th id="editor-actions-cli2">CLI-Befehl</th>
-<th id="editor-actions-api2">API-Aufruf</th>
-</thead>
-<tbody>
-<tr>
 <td>Automatische Aktualisierungen für das Ingress-ALB-Add-on inaktivieren</td>
-<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Automatische Aktualisierungen für das Ingress-ALB-Add-on aktivieren</td>
-<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Prüfen, ob automatische Aktualisierungen für das Ingress-ALB-Add-on aktiviert sind</td>
-<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_autoupdate_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/GetUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks alb-autoupdate-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Ingress-ALB aktivieren oder inaktivieren</td>
-<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</code></td>
-<td><code>[POST /albs](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/EnableALB) und [DELETE /albs/{albId}](https://containers.cloud.ibm.com/swagger-alb-api/#/)</code></td>
+<td><code>[ibmcloud ks alb-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</code></td>
+<td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) und [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
+</tr>
+<tr>
+<td>Ingress-ALB erstellen</td>
+<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
+<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
 </tr>
 <tr>
 <td>Aktualisierung des Ingress-ALB-Add-ons auf den Build zurücksetzen, den die ALB-Pods zuvor ausgeführt haben</td>
-<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cs_cli_reference#cs_alb_rollback)</code></td>
-<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/RollbackUpdate)</code></td>
+<td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
+<td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
 </tr>
 <tr>
 <td>Einmalige Aktualisierung der ALB-Pods durch manuelles Aktualisieren des Ingress-ALB-Add-ons erzwingen</td>
-<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cs_cli_reference#cs_alb_update)</code></td>
-<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBs)</code></td>
+<td><code>[ibmcloud ks alb-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_update)</code></td>
+<td><code>[PUT /clusters/{idOrName}/update](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBs)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Netzlastausgleichsfunktion (NLB), DNS-Host und Statusprüfmonitor, die die Plattformrolle eines Editors in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="lbdns-mgmt">DNS-Aktion für Netzlastausgleichsfunktion (NLB)</th>
-<th id="lbdns-cli">CLI-Befehl</th>
-<th id="lbdns-api">API-Aufruf</th>
-</thead>
-<tbody>
-<tr>
-<td>Eine NLB-IP zu einem vorhandenen NLB-Hostnamen hinzufügen.</td>
-<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UpdateDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>Einen DNS-Hostnamen erstellen, um eine oder mehrere NLB-IPs zu registrieren.</td>
-<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/RegisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>NLB-Hostnamen und -IP-Adressen auflisten, die in einem Cluster registriert sind.</td>
-<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/ListNLBIPsForSubdomain)</code></td>
-</tr>
-<tr>
-<td>NLB-IP-Adresse aus einem Hostnamen entfernen.</td>
-<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45dns/UnregisterDNSWithIP)</code></td>
-</tr>
-<tr>
-<td>Statusprüfmonitor für einen vorhandenen NLB-Hostnamen in einem Cluster konfigurieren und optional aktivieren.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>Einstellungen für einen vorhandenen Statusprüfmonitor anzeigen.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>Vorhandenen Statusprüfmonitor für einen Hostnamen in einem Cluster inaktivieren.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>Einen von Ihnen konfigurierten Statusprüfmonitor aktivieren.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
-</tr>
-<tr>
-<td>Einstellungen des Statusprüfmonitors für jeden NLB-Hostnamen in einem Cluster auflisten.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
-</tr>
-<tr>
-<td>Status der Statusprüfung für die IPs hinter den NLB-Hostnamen in einem Cluster auflisten.</td>
-<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cs_cli_reference#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/swagger-dns-api/#!/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Protokollierungsaktionen, die die Plattformrolle eines Editors in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="editor-log">Protokollierungsaktion</th>
-<th id="editor-cli3">CLI-Befehl</th>
-<th id="editor-api3">API-Aufruf</th>
-</thead>
-<tbody>
 <tr>
 <td>Webhook für API-Serveraudit erstellen</td>
-<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_set)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_set)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/apiserverconfigs/UpdateAuditWebhook)</code></td>
 </tr>
 <tr>
 <td>Webhook für einen API-Serveraudit löschen</td>
-<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_config_unset)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/swagger-api/#!/apiserverconfigs/DeleteAuditWebhook)</code></td>
+<td><code>[ibmcloud ks apiserver-config-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_unset)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook](https://containers.cloud.ibm.com/global/swagger-global-api/#/apiserverconfigs/DeleteAuditWebhook)</code></td>
+</tr>
+<tr>
+<td>Service an einen Cluster binden. **Hinweis**: Sie müssen über die Rolle des Cloud Foundry-Entwicklers für den Bereich verfügen, in dem sich Ihre Serviceinstanz befindet.
+</td>
+<td><code>[ibmcloud ks cluster-service-bind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/services](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/BindServiceToNamespace)</code></td>
+</tr>
+<tr>
+<td>Bindung eines Service an einen Cluster aufheben. **Hinweis**: Sie müssen über die Rolle des Cloud Foundry-Entwicklers für den Bereich verfügen, in dem sich Ihre Serviceinstanz befindet.</td>
+<td><code>[ibmcloud ks cluster-service-unbind](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_unbind)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UnbindServiceFromNamespace)</code></td>
 </tr>
 <tr>
 <td>Protokollweiterleitungskonfiguration für alle Protokollquellen außer <code>kube-audit</code> erstellen</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>Anzeige einer Protokollweiterleitungskonfiguration aktualisieren</td>
-<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_logging_refresh)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/swagger-logging/#!/logging/RefreshLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_refresh)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/refresh](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/RefreshLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>Protokollweiterleitungskonfiguration für alle Protokollquellen außer <code>kube-audit</code> löschen</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>Alle Protokollweiterleitungskonfigurationen für einen Cluster löschen</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfigs)</code></td>
 </tr>
 <tr>
 <td>Protokollweiterleitungskonfiguration aktualisieren</td>
-<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cs_cli_reference#cs_logging_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/UpdateLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/UpdateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>Protokollfilterkonfiguration erstellen</td>
-<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/CreateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/CreateFilterConfig)</code></td>
 </tr>
 <tr>
 <td>Protokollfilterkonfiguration löschen</td>
-<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_delete)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_delete)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfig)</code></td>
 </tr>
 <tr>
 <td>Alle Protokollierungsfilterkonfigurationen für den Kubernetes-Cluster löschen</td>
 <td>-</td>
-<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/swagger-logging/#!/filter/DeleteFilterConfigs)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/filterconfigs](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfigs)</code></td>
 </tr>
 <tr>
 <td>Protokollfilterkonfiguration aktualisieren</td>
-<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cs_cli_reference#cs_log_filter_update)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/filter/UpdateFilterConfig)</code></td>
+<td><code>[ibmcloud ks logging-filter-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_update)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/filterconfigs/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/UpdateFilterConfig)</code></td>
+</tr>
+<tr>
+<td>Eine NLB-IP-Adresse zu einem vorhandenen NLB-Hostnamen hinzufügen.</td>
+<td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Einen DNS-Hostnamen erstellen, um eine NLB-IP-Adresse zu registrieren.</td>
+<td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>NLB-Hostnamen und -IP-Adressen auflisten, die in einem Cluster registriert sind.</td>
+<td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+</tr>
+<tr>
+<td>NLB-IP-Adresse aus einem Hostnamen entfernen.</td>
+<td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+</tr>
+<tr>
+<td>Statusprüfmonitor für einen vorhandenen NLB-Hostnamen in einem Cluster konfigurieren und optional aktivieren.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Einstellungen für einen vorhandenen Statusprüfmonitor anzeigen.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Vorhandenen Statusprüfmonitor für einen Hostnamen in einem Cluster inaktivieren.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Einen von Ihnen konfigurierten Statusprüfmonitor aktivieren.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+</tr>
+<tr>
+<td>Einstellungen des Statusprüfmonitors für jeden NLB-Hostnamen in einem Cluster auflisten.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+</tr>
+<tr>
+<td>Status der Statusprüfung für jede IP-Adresse auflisten, die bei einem NLB-Hostnamen in einem Cluster registriert ist.</td>
+<td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+</tr>
+<tr>
+<td>Webhook in einem Cluster erstellen.</td>
+<td><code>[ibmcloud ks webhook-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/webhooks](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWebhooks)</code></td>
 </tr>
 </tbody>
 </table>
@@ -486,112 +453,107 @@ Die Plattformrolle **Operator** (Bediener) umfasst alle Berechtigungen, die durc
 {: shortdesc}
 
 <table>
-<caption>Übersicht über die CLI-Befehle und API-Aufrufe für die Clusterverwaltung, die die Plattformrolle eines Operators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
+<caption>Übersicht über CLI-Befehle und API-Aufrufe, die die Plattformrolle eines Operators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
 <thead>
-<th id="operator-mgmt">Clusterverwaltungsaktion</th>
+<th id="operator-mgmt">Aktion</th>
 <th id="operator-cli">CLI-Befehl</th>
 <th id="operator-api">API-Aufruf</th>
 </thead>
 <tbody>
 <tr>
 <td>Kubernetes-Master aktualisieren</td>
-<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_apiserver_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
+<td><code>[ibmcloud ks apiserver-refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) (cluster-refresh)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix_notm}} IAM-Service-ID für den Cluster erstellen, Richtlinie für die Service-ID erstellen, die die Servicezugriffsrolle **Leseberechtigter** (Reader) in {{site.data.keyword.registrylong_notm}} zuordnet, und schließlich API-Schlüssel für die Service-ID erstellen</td>
-<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_pull_secret_apply)</code></td>
+<td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
 <tr>
-<td>Cluster-Masterknoten erneut starten, um die neuen Änderungen der Kubernetes-API-Konfiguration anzuwenden</td>
-<td><code>[ibmcloud ks cluster-refresh](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_refresh)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/HandleMasterAPIServer)</code></td>
-</tr>
-<tr>
 <td>Teilnetz einem Cluster hinzufügen</td>
-<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterSubnet)</code></td>
 </tr>
 <tr>
-<td>Teilnetz erstellen</td>
-<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateClusterSubnet)</code></td>
+<td>Teilnetz erstellen und einem Cluster hinzufügen.</td>
+<td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>Cluster aktualisieren</td>
-<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateCluster)</code></td>
 </tr>
 <tr>
 <td>Benutzerverwaltetes Teilnetz einem Cluster hinzufügen</td>
-<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/usersubnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>Benutzerverwaltetes Teilnetz aus einem Cluster entfernen</td>
-<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_user_subnet_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterUserSubnet)</code></td>
+<td><code>[ibmcloud ks cluster-user-subnet-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterUserSubnet)</code></td>
 </tr>
 <tr>
 <td>Workerknoten hinzufügen</td>
-<td><code>[ibmcloud ks worker-add (veraltet)](/docs/containers?topic=containers-cs_cli_reference#cs_worker_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddClusterWorkers)</code></td>
+<td><code>[ibmcloud ks worker-add (veraltet)](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workers](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWorkers)</code></td>
 </tr>
 <tr>
 <td>Worker-Pool erstellen</td>
-<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateWorkerPool)</code></td>
 </tr>
 <tr>
 <td>Worker-Pool neu ausgleichen</td>
-<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>Größe eines Worker-Pools ändern</td>
-<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/PatchWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)</code></td>
 </tr>
 <tr>
 <td>Worker-Pool löschen</td>
-<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPool)</code></td>
+<td><code>[ibmcloud ks worker-pool-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPool)</code></td>
 </tr>
 <tr>
 <td>Workerknoten neu starten</td>
-<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>Workerknoten erneut laden</td>
-<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
 <td>Workerknoten entfernen</td>
-<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cs_cli_reference#cs_worker_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterWorker)</code></td>
 </tr>
 <tr>
 <td>Workerknoten aktualisieren</td>
-<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update)</code></td>
-<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/UpdateClusterWorker)</code></td>
+<td><code>[ibmcloud ks worker-update](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)</code></td>
+<td><code>[PUT /v1/clusters/{idOrName}/workers/{workerId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker)</code></td>
 </tr>
 <tr>
-<td>Zonen einem Worker-Pool hinzufügen</td>
-<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cs_cli_reference#cs_zone_add)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZone)</code></td>
+<td>Zone einem Worker-Pool hinzufügen</td>
+<td><code>[ibmcloud ks zone-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_add)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZone)</code></td>
 </tr>
 <tr>
 <td>Netzkonfiguration für eine bestimmte Zone in einem Worker-Pool aktualisieren</td>
-<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/AddWorkerPoolZoneNetwork)</code></td>
+<td><code>[ibmcloud ks zone-network-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZoneNetwork)</code></td>
 </tr>
 <tr>
 <td>Zone aus einem Worker-Pool entfernen</td>
-<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cs_cli_reference#cs_zone_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveWorkerPoolZone)</code></td>
+<td><code>[ibmcloud ks zone-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones/{zoneid}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPoolZone)</code></td>
 </tr>
 </tbody>
 </table>
@@ -603,139 +565,117 @@ Die Plattformrolle **Administrator** umfasst alle Berechtigungen, die durch die 
 {: shortdesc}
 
 <table>
-<caption>Übersicht über die CLI-Befehle und API-Aufrufe für die Clusterverwaltung, die die Plattformrolle eines Administrators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
+<caption>Übersicht über CLI-Befehle und API-Aufrufe, die die Plattformrolle eines Administrators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
 <thead>
-<th id="admin-mgmt">Clusterverwaltungsaktion</th>
+<th id="admin-mgmt">Aktion</th>
 <th id="admin-cli">CLI-Befehl</th>
 <th id="admin-api">API-Aufruf</th>
 </thead>
 <tbody>
 <tr>
+<td>Beta: Zertifikat aus der {{site.data.keyword.cloudcerts_long_notm}}-Instanz für eine Lastausgleichsfunktion für Anwendungen (ALB) bereitstellen</td>
+<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) oder [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+</tr>
+<tr>
+<td>Beta: Details zu einem geheimen ALB-Schlüssel in einem Cluster anzeigen</td>
+<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>Beta: Geheimen ALB-Schlüssel aus einem Cluster entfernen</td>
+<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+</tr>
+<tr>
+<td>Alle geheimen ALB-Schlüssel in einem Cluster auflisten</td>
+<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs)</code></td>
+<td>-</td>
+</tr>
+<tr>
 <td>API-Schlüssel für das {{site.data.keyword.Bluemix_notm}}-Konto für den Zugriff auf das verknüpfte Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festlegen.</td>
-<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset)</code></td>
-<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/swagger-api/#!/accounts/ResetUserAPIKey)</code></td>
+<td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
+<td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
 <tr>
 <td>Verwaltetes Add-on wie Istio oder Knative in einem Cluster inaktvieren.</td>
-<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_disable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
 <td>Verwaltetes Add-on wie Istio oder Knative in einem Cluster aktivieren.</td>
-<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addon_enable)</code></td>
-<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/ManageClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)</code></td>
+<td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
 <td>Verwaltetes Add-ons wie Istio oder Knative auflisten, die in einem Cluster aktiviert sind.</td>
-<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_addons)</code></td>
-<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/swagger-api/#!/clusters/GetClusterAddons)</code></td>
+<td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)</code></td>
+<td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons)</code></td>
 </tr>
 <tr>
 <td>Kostenlosen Cluster oder Standardcluster erstellen. **Hinweis:** Die Plattformrolle 'Administrator' für {{site.data.keyword.registrylong_notm}} und die Infrastrukturrolle 'Superuser' sind ebenfalls erforderlich.</td>
-<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create)</code></td>
-<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateCluster)</code></td>
+<td><code>[ibmcloud ks cluster-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)</code></td>
+<td><code>[POST /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateCluster)</code></td>
 </tr>
 <tr>
 <td>Angegebene Funktion für einen Cluster inaktivieren (z. B. den öffentlichen Serviceendpunkt für den Cluster-Master).</td>
-<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_disable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>Angegebene Funktion für einen Cluster aktivieren (z. B. den privaten Serviceendpunkt für den Cluster-Master).</td>
-<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable)</code></td>
+<td><code>[ibmcloud ks cluster-feature-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)</code></td>
 <td>-</td>
 </tr>
 <tr>
 <td>Cluster löschen.</td>
-<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_rm)</code></td>
-<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/swagger-api/#!/clusters/RemoveCluster)</code></td>
+<td><code>[ibmcloud ks cluster-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
 <td>Infrastrukturberechtigungsnachweise für das {{site.data.keyword.Bluemix_notm}}-Konto für den Zugriff auf ein anderes Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festlegen.</td>
-<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set)</code></td>
-<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/StoreUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
+<td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
 <td>Infrastrukturberechtigungsnachweise für das {{site.data.keyword.Bluemix_notm}}-Konto für den Zugriff auf ein anderes Portfolio der IBM Cloud-Infrastruktur (SoftLayer) entfernen.</td>
-<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset)</code></td>
-<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/swagger-api/#!/clusters/accounts/RemoveUserCredentials)</code></td>
+<td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
+<td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Geheimen Kubernetes-Schlüssel mithilfe von {{site.data.keyword.keymanagementservicefull}} verschlüsseln.</td>
-<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cs_cli_reference#cs_messages)</code></td>
-<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/swagger-api/#!/clusters/CreateKMSConfig)</code></td>
+<td>Beta: Geheimen Kubernetes-Schlüssel mithilfe von {{site.data.keyword.keymanagementservicefull}} verschlüsseln.</td>
+<td><code>[ibmcloud ks key-protect-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)</code></td>
+<td><code>[POST /v1/clusters/{idOrName}/kms](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateKMSConfig)</code></td>
 </tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Ingress-Aktionen, die die Plattformrolle eines Administrators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="admin-ingress">Ingress-Aktion</th>
-<th id="admin-cli2">CLI-Befehl</th>
-<th id="admin-api2">API-Aufruf</th>
-</thead>
-<tbody>
-<tr>
-<td>Zertifikat aus der {{site.data.keyword.cloudcerts_long_notm}}-Instanz für eine Lastausgleichsfunktion für Anwendungen (ALB) bereitstellen</td>
-<td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/CreateALBSecret) oder [PUT /albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/UpdateALBSecret)</code></td>
-</tr>
-<tr>
-<td>Details zu einem geheimen ALB-Schlüssel in einem Cluster anzeigen</td>
-<td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/ViewClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>Geheimen ALB-Schlüssel aus einem Cluster entfernen</td>
-<td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cs_cli_reference#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/swagger-alb-api/#!/alb/DeleteClusterALBSecrets)</code></td>
-</tr>
-<tr>
-<td>Alle geheimen ALB-Schlüssel in einem Cluster auflisten</td>
-<td><code>[ibmcloud ks alb-certs](/docs/containers?topic=containers-cs_cli_reference#cs_alb_certs)</code></td>
-<td>-</td>
-</tr>
-</tbody>
-</table>
-
-<table>
-<caption>Übersicht über CLI-Befehle und API-Aufrufe für Protokollierungsaktionen, die die Plattformrolle eines Administrators in {{site.data.keyword.containerlong_notm}} erfordern</caption>
-<thead>
-<th id="admin-log">Protokollierungsaktion</th>
-<th id="admin-cli3">CLI-Befehl</th>
-<th id="admin-api3">API-Aufruf</th>
-</thead>
-<tbody>
 <tr>
 <td>Automatische Aktualisierungen für das Fluentd-Cluster-Add-on inaktivieren</td>
-<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_disable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Automatische Aktualisierungen für das Fluentd-Cluster-Add-on aktivieren</td>
-<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cs_cli_reference#cs_log_autoupdate_enable)</code></td>
-<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/swagger-logging/#!/logging/ChangeUpdatePolicy)</code></td>
+<td><code>[ibmcloud ks logging-autoupdate-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_enable)</code></td>
+<td><code>[PUT /v1/logging/{idOrName}/updatepolicy](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy)</code></td>
 </tr>
 <tr>
 <td>Snapshot der API-Serverprotokolle in einem {{site.data.keyword.cos_full_notm}}-Bucket erfassen</td>
-<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect)</code></td>
+<td>[POST /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/CreateMasterLogCollection)</td>
 </tr>
 <tr>
 <td>Status des Snapshots der API-Serverprotokolle anzeigen</td>
-<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cs_cli_reference#cs_log_collect_status)</code></td>
-<td>-</td>
+<td><code>[ibmcloud ks logging-collect-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status)</code></td>
+<td>[GET /v1/log-collector/{idOrName}/masterlogs](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/GetMasterLogCollectionStatus)</td>
 </tr>
 <tr>
-<td>Protokollweiterleitungskonfiguration für die Protokollquelle <code>kube-audit</code> erstellen</td>
-<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cs_cli_reference#cs_logging_create)</code></td>
-<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/CreateLoggingConfig)</code></td>
+<td>^Protokollweiterleitungskonfiguration für die Protokollquelle <code>kube-audit</code> erstellen</td>
+<td><code>[ibmcloud ks logging-config-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create)</code></td>
+<td><code>[POST /v1/logging/{idOrName}/loggingconfig/{logSource}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig)</code></td>
 </tr>
 <tr>
 <td>Protokollweiterleitungskonfiguration für die Protokollquelle <code>kube-audit</code> löschen</td>
-<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cs_cli_reference#cs_logging_rm)</code></td>
-<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/swagger-logging/#!/logging/DeleteLoggingConfig)</code></td>
+<td><code>[ibmcloud ks logging-config-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm)</code></td>
+<td><code>[DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig)</code></td>
 </tr>
 </tbody>
 </table>
@@ -746,9 +686,10 @@ Die Plattformrolle **Administrator** umfasst alle Berechtigungen, die durch die 
 ## {{site.data.keyword.Bluemix_notm}} IAM-Servicerollen
 {: #service}
 
-Jedem Benutzer, dem eine {{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrolle zugeordnet ist, wird automatisch auch eine entsprechende Rolle für Kubernetes-RBAC (RBAC - rollenbasierte Zugriffssteuerung) in einem bestimmten Namensbereich zugeordnet. Weitere Informationen zu Servicezugriffsrollen finden Sie unter [{{site.data.keyword.Bluemix_notm}} IAM-Servicerollen](/docs/containers?topic=containers-users#platform). Weisen Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen nicht gleichzeitig mit einer Servicerolle zu. Sie müssen Plattform- und Servicerollen separat zuweisen.{: shortdesc}
+Jedem Benutzer, dem eine {{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrolle zugeordnet ist, wird automatisch auch eine entsprechende Rolle für Kubernetes-RBAC (RBAC - rollenbasierte Zugriffssteuerung) in einem bestimmten Namensbereich zugeordnet. Weitere Informationen zu Servicezugriffsrollen finden Sie unter [{{site.data.keyword.Bluemix_notm}} IAM-Servicerollen](/docs/containers?topic=containers-users#platform). Weisen Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen nicht gleichzeitig mit einer Servicerolle zu. Sie müssen Plattform- und Servicerollen separat zuweisen.
+{: shortdesc}
 
-Suchen Sie nach Informationen dazu, welche Kubernetes-Aktionen die einzelnen Servicerollen durch RBAC erteilen? Siehe [Kubernetes-Ressourcenberechtigungen für RBAC-Rollen](#rbac_ref). Weitere Informationen zu RBAC-Rollen finden Sie unter [RBAC-Berechtigungen zuordnen](/docs/containers?topic=containers-users#role-binding).
+Suchen Sie nach Informationen dazu, welche Kubernetes-Aktionen die einzelnen Servicerollen durch RBAC erteilen? Siehe [Kubernetes-Ressourcenberechtigungen für RBAC-Rollen](#rbac_ref). Weitere Informationen zu RBAC-Rollen finden Sie unter [RBAC-Berechtigungen zuordnen](/docs/containers?topic=containers-users#role-binding) und [Vorhandene Berechtigungen durch Aggregieren von Clusterrollen erweitern](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate).
 {: tip}
 
 In der folgenden Tabelle sind die Kubernetes-Ressourcenberechtigungen aufgeführt, die durch die einzelnen Servicerollen und die entsprechenden RBAC-Rollen erteilt werden.
@@ -1104,42 +1045,91 @@ In der folgenden Tabelle werden die Cloud Foundry-Rollen aufgeführt, die für C
 ## Infrastrukturrollen
 {: #infra}
 
-Wenn ein Benutzer mit der Infrastrukturzugriffsrolle **Superuser** [den API-Schlüssel für eine Region und eine Ressourcengruppe festlegt](/docs/containers?topic=containers-users#api_key), werden die Infrastrukturberechtigungen für die anderen Benutzer im Konto mithilfe von {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen festgelegt. Sie müssen die Berechtigungen der Benutzer für die IBM Cloud-Infrastruktur (SoftLayer) nicht bearbeiten. Verwenden Sie nur die folgende Tabelle zum Anpassen der Benutzerberechtigungen für die IBM Cloud-Infrastruktur (SoftLayer), wenn Sie **Superuser** nicht dem Benutzer zuordnen können, der den API-Schlüssel festgelegt hat. Weitere Informationen finden Sie in [Infrastrukturberechtigungen anpassen](/docs/containers?topic=containers-users#infra_access).
+Ein Benutzer mit der Infrastrukturzugriffsrolle **Superuser** [legt den API-Schlüssel für eine Region und eine Ressourcengruppe fest](/docs/containers?topic=containers-users#api_key), sodass Infrastrukturaktionen ausgeführt werden können. (In seltenen Fällen legt er [manuell unterschiedliche Berechtigungsnachweise für das Konto fest](/docs/containers?topic=containers-users#credentials)). Dann werden die Infrastrukturaktionen, die von anderen Benutzern im Konto ausgeführt werden können, über {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen autorisiert. Sie müssen die Berechtigungen der Benutzer für die IBM Cloud-Infrastruktur (SoftLayer) nicht bearbeiten. Verwenden Sie die folgende Tabelle zum Anpassen der Benutzerberechtigungen für die IBM Cloud-Infrastruktur (SoftLayer) nur, wenn Sie **Superuser** nicht dem Benutzer zuordnen können, der den API-Schlüssel festgelegt hat. Weitere Informationen zum Zuordnen von Berechtigungen finden Sie unter [Infrastrukturberechtigungen anpassen](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
+
+
 
 In der folgenden Tabelle werden die Infrastrukturberechtigungen aufgeführt, die zur Ausführung von Gruppen allgemeiner Tasks erforderlich sind.
 
 <table>
- <caption>Allgemein erforderliche Infrastrukturberechtigungen für {{site.data.keyword.containerlong_notm}}</caption>
- <thead>
+<caption>Allgemein erforderliche Infrastrukturberechtigungen für {{site.data.keyword.containerlong_notm}}</caption>
+<thead>
   <th>Allgemeine Tasks in {{site.data.keyword.containerlong_notm}}</th>
   <th>Erforderliche Infrastrukturberechtigungen nach Kategorie</th>
- </thead>
- <tbody>
-   <tr>
-     <td><strong>Mindestberechtigungen</strong>: <ul><li>Erstellen Sie einen Cluster.</li></ul></td>
-     <td><strong>Geräte</strong>:<ul><li>Details zum virtuellen Server anzeigen</li><li>Server neu starten und IPMI-Systeminformationen anzeigen</li><li>Befehle zum erneuten Laden des Betriebssystems absetzen und Rescue-Kernel initiieren</li></ul><strong>Konto</strong>: <ul><li>Server hinzufügen</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Clusterverwaltung</strong>: <ul><li>Cluster erstellen, aktualisieren und löschen.</li><li>Workerknoten hinzufügen, erneut laden und neu starten.</li><li>VLANs anzeigen.</li><li>Teilnetze erstellen-</li><li>Pods und Lastausgleichsservices  bereitstellen.</li></ul></td>
-     <td><strong>Support</strong>:<ul><li>Tickets anzeigen</li><li>Tickets hinzufügen</li><li>Tickets bearbeiten</li></ul>
-     <strong>Geräte</strong>:<ul><li>Hardwaredetails anzeigen</li><li>Details zum virtuellen Server anzeigen</li><li>Server neu starten und IPMI-Systeminformationen anzeigen</li><li>Befehle zum erneuten Laden des Betriebssystems absetzen und Rescue-Kernel initiieren</li></ul>
-     <strong>Netz</strong>:<ul><li>Berechnen mit öffentlichem Netzport hinzufügen</li></ul>
-     <strong>Konto</strong>:<ul><li>Server abbrechen</li><li>Server hinzufügen</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Speicher</strong>: <ul><li>Persistente Datenträgeranforderungen zur Bereitstellung von persistenten Datenträgern erstellen</li><li>Speicherinfrastrukturressourcen erstellen und verwalten.</li></ul></td>
-     <td><strong>Services</strong>:<ul><li>Speicher verwalten</li></ul><strong>Konto</strong>:<ul><li>Speicher hinzufügen</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Privates Netz</strong>: <ul><li>Private VLANs für Netzbetrieb im Cluster verwalten</li><li>VPN-Konnektivität für private Netze konfigurieren</li></ul></td>
-     <td><strong>Netz</strong>:<ul><li>Teilnetzrouten im Netz verwalten</li></ul></td>
-   </tr>
-   <tr>
-     <td><strong>Öffentliches Netz</strong>:<ul><li>Richten Sie eine öffentliche Lastausgleichsfunktion oder das Ingress-Networking ein, um Apps bereitzustellen.</li></ul></td>
-     <td><strong>Geräte</strong>:<ul><li>Hostname/Domäne bearbeiten</li><li>Portsteuerung verwalten</li></ul>
-     <strong>Netz</strong>:<ul><li>Berechnen mit öffentlichem Netzport hinzufügen</li><li>Teilnetzrouten im Netz verwalten</li><li>IP-Adressen hinzufügen</li></ul>
-     <strong>Services</strong>:<ul><li>DNS, Reverse DNS und WHOIS verwalten</li><li>Zertifikate anzeigen (SSL)</li><li>Zertifikate verwalten (SSL)</li></ul></td>
-   </tr>
- </tbody>
+</thead>
+<tbody>
+<tr>
+<td>
+  <strong>Mindestberechtigungen</strong>: <ul>
+  <li>Erstellen Sie einen Cluster.</li></ul></td>
+<td>
+<strong>Konto</strong>: <ul>
+<li>Server hinzufügen</li></ul>
+  <strong>Geräte</strong>:<ul>
+  <li>Für Bare-Metal--Workerknoten: Hardwaredetails anzeigen </li>
+  <li>IPMI-Fernverwaltung</li>
+  <li>Erneutes Laden des Betriebssystems und Rescue-Kernel</li>
+  <li>Für VM-Workerknoten: Details zu virtuellen Servern anzeigen</li></ul></td>
+</tr>
+<tr>
+<td>
+<strong>Clusterverwaltung</strong>:<ul>
+  <li>Cluster erstellen, aktualisieren und löschen.</li>
+  <li>Workerknoten hinzufügen, erneut laden und neu starten.</li>
+  <li>VLANs anzeigen.</li>
+  <li>Teilnetze erstellen-</li>
+  <li>Pods und Lastausgleichsservices  bereitstellen.</li></ul>
+  </td><td>
+<strong>Konto</strong>:<ul>
+  <li>Server hinzufügen</li>
+  <li>Server abbrechen</li></ul>
+<strong>Geräte</strong>:<ul>
+  <li>Für Bare-Metal--Workerknoten: Hardwaredetails anzeigen</li>
+  <li>IPMI-Fernverwaltung</li>
+  <li>Erneutes Laden des Betriebssystems und Rescue-Kernel</li>
+  <li>Für VM-Workerknoten: Details zu virtuellen Servern anzeigen</li></ul>
+<strong>Netz</strong>:<ul>
+  <li>Berechnen mit öffentlichem Netzport hinzufügen</li></ul>
+<p class="important">Sie müssen dem Benutzer auch die Fähigkeit zum Verwalten von Supportfällen zuordnen. Weitere Informationen finden Sie in Schritt 8 unter [Infrastrukturberechtigungen anpassen](/docs/containers?topic=containers-users#infra_access).</p>
+</td>
+</tr>
+<tr>
+<td>
+  <strong>Speicher</strong>: <ul>
+  <li>Persistente Datenträgeranforderungen zur Bereitstellung von persistenten Datenträgern erstellen</li>
+  <li>Speicherinfrastrukturressourcen erstellen und verwalten.</li></ul></td>
+<td>
+<strong>Konto</strong>:<ul>
+  <li>Speicher hinzufügen/Upgrades für Speicher durchführen (StorageLayer)</li></ul>
+<strong>Services</strong>:<ul>
+  <li>Speicher verwalten</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>Privates Netz</strong>: <ul>
+  <li>Private VLANs für Netzbetrieb im Cluster verwalten</li>
+  <li>VPN-Konnektivität für private Netze konfigurieren</li></ul></td>
+<td>
+  <strong>Netz</strong>:<ul>
+  <li>Teilnetzrouten im Netz verwalten</li></ul></td>
+</tr>
+<tr>
+<td>
+  <strong>Öffentliches Netz</strong>:<ul>
+  <li>Richten Sie eine öffentliche Lastausgleichsfunktion oder das Ingress-Networking ein, um Apps bereitzustellen.</li></ul></td>
+<td>
+<strong>Geräte</strong>:<ul>
+<li>Portsteuerung verwalten</li>
+  <li>Hostname/Domäne bearbeiten</li></ul>
+<strong>Netz</strong>:<ul>
+  <li>IP-Adressen hinzufügen</li>
+  <li>Teilnetzrouten im Netz verwalten</li>
+  <li>Berechnen mit öffentlichem Netzport hinzufügen</li></ul>
+<strong>Services</strong>:<ul>
+  <li>DNS verwalten</li>
+  <li>Zertifikate anzeigen (SSL)</li>
+  <li>Zertifikate verwalten (SSL)</li></ul></td>
+</tr>
+</tbody>
 </table>

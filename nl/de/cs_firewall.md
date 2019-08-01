@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-11"
+lastupdated: "2019-06-07"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -159,7 +160,7 @@ Gehen Sie wie folgt vor, um Zugriff auf einen bestimmten Cluster zu gewähren:
    }
     ```
     {: screen}
-  * Wenn der private Serviceendpunkt aktiviert ist, müssen Sie sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden, oder eine Verbindung zu dem privaten Netz über eine VPN-Verbindung herstellen, um die Verbindung zum Master zu prüfen:
+  * Wenn der private Serviceendpunkt aktiviert ist, müssen Sie sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden, oder eine Verbindung zu dem privaten Netz über eine VPN-Verbindung herstellen, um die Verbindung zum Master zu prüfen. Beachten Sie, dass Sie [den Master-Endpunkt über eine private Lastausgleichsfunktion zugänglich machen müssen](/docs/containers?topic=containers-clusters#access_on_prem), damit Benutzer über eine VPN- oder {{site.data.keyword.BluDirectLink}}-Verbindung auf den Master zugreifen können.
     ```
     curl --insecure <private_serviceendpunkt-url>/version
     ```
@@ -230,7 +231,7 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
     ```
     {: pre}
 
-2.  Ermöglichen Sie Netzverkehr von der Quelle <em>&lt;öffentliche_IP_für_jeden_workerknoten&gt;</em> zum Ziel-TCP/UDP-Portbereich 20000-32767 und zum Port 443 sowie für die folgenden IP-Adressen und Netzgruppen. Wenn Ihre Unternehmensfirewall verhindert, dass Ihr lokales System auf öffentliche Internetendpunkte zugreifen kann, führen Sie diesen Schritt sowohl für Ihre Quellen-Workerknoten als auch für Ihr lokales System aus.
+2.  Ermöglichen Sie Netzverkehr von der Quelle <em>&lt;öffentliche_IP_für_jeden_workerknoten&gt;</em> zum Ziel-TCP/UDP-Portbereich 20000-32767 und zum Port 443 sowie für die folgenden IP-Adressen und Netzgruppen. Diese IP-Adressen ermöglichen Workerknoten die Kommunikation mit dem Cluster-Master. Wenn Ihre Unternehmensfirewall verhindert, dass Ihr lokales System auf öffentliche Internetendpunkte zugreifen kann, führen Sie diesen Schritt auch für Ihr lokales System aus, damit Sie auf den Cluster-Master zugreifen können.
 
     Sie müssen den ausgehenden Datenverkehr am Port 443 für alle Zonen in der Region zulassen, um die Arbeitslast während des Bootstrap-Prozesses auszugleichen. Wenn sich Ihr Cluster beispielsweise in den USA (Süden) befindet, dann müssen Sie den Datenverkehr von den öffentlichen IPs jedes Ihrer Workerknoten an Port 443 der IP-Adresse für alle Zonen zulassen.
     {: important}
@@ -284,7 +285,7 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
           </tbody>
         </table>
 
-3.  Lassen Sie ausgehenden Netzverkehr von den Workerknoten an [{{site.data.keyword.registrylong_notm}}-Regionen](/docs/services/Registry?topic=registry-registry_overview#registry_regions) zu:
+3.  {: #firewall_registry}Damit Workerknoten mit {{site.data.keyword.registrylong_notm}} kommunizieren können, lassen Sie ausgehenden Netzverkehr von den Workerknoten an [{{site.data.keyword.registrylong_notm}}-Regionen](/docs/services/Registry?topic=registry-registry_overview#registry_regions) zu:
   - `TCP-Port 443, Port 4443 VON <each_worker_node_publicIP> ZU <registry_subnet>`
   -  Ersetzen <em>&lt;registry-teilnetz&gt;</em> durch das Registry-Teilnetz, zu dem Sie Datenverkehr zulassen wollen. In der globalen Registry werden von IBM bereitgestellte öffentliche Images gespeichert. Ihre eigenen privaten oder öffentlichen Images werden in regionalen Registrys gespeichert. Port 4443 ist für notarielle Funktionen erforderlich, wie zum Beispiel die [Überprüfung von Imagesignaturen](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
   <caption>Zu öffnende IP-Adressen für Registry-Datenverkehr</caption>
@@ -297,49 +298,43 @@ Abhängig von Ihrem Cluster-Setup greifen Sie auf die Services über die öffent
     <tbody>
       <tr>
         <td>Über <br>{{site.data.keyword.containerlong_notm}}-Regionen hinweg verfügbare globale Registry</td>
-        <td><strong>Öffentlich:</strong> <code>icr.io</code><br>
-        Veraltet: <code>registry.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.icr.io<br>z2-1.private.icr.io<br>z3-1.private.icr.io</code></td>
+        <td><code>icr.io</code><br><br>
+        Veraltet: <code>registry.bluemix.net</code></td>
         <td><code>169.60.72.144/28</code></br><code>169.61.76.176/28</code></br><code>169.62.37.240/29</code></br><code>169.60.98.80/29</code></br><code>169.63.104.232/29</code></td>
         <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
       </tr>
       <tr>
         <td>Asien-Pazifik (Norden)</td>
-        <td><strong>Öffentlich:</strong> <code>jp.icr.io</code><br>
-        Veraltet: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.jp.icr.io<br>z2-1.private.jp.icr.io<br>z3-1.private.jp.icr.io</code></td>
+        <td><code>jp.icr.io</code><br><br>
+        Veraltet: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>161.202.146.86/29</code></br><code>128.168.71.70/29</code></br><code>165.192.71.222/29</code></td>
         <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
       </tr>
       <tr>
         <td>Asien-Pazifik (Süden)</td>
-        <td><strong>Öffentlich:</strong> <code>au.icr.io</code><br>
-        Veraltet: <code>registry.au-syd.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.au.icr.io<br>z2-1.private.au.icr.io<br>z3-1.private.au.icr.io</code></td>
+        <td><code>au.icr.io</code><br><br>
+        Veraltet: <code>registry.au-syd.bluemix.net</code></td>
         <td><code>168.1.45.160/27</code></br><code>168.1.139.32/27</code></br><code>168.1.1.240/29</code></br><code>130.198.88.128/29</code></br><code>135.90.66.48/29</code></td>
         <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
       </tr>
       <tr>
         <td>Mitteleuropa</td>
-        <td><strong>Öffentlich:</strong> <code>de.icr.io</code><br>
-        Veraltet: <code>registry.eu-de.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.de.icr.io<br>z2-1.private.de.icr.io<br>z3-1.private.de.icr.io</code></td>
+        <td><code>de.icr.io</code><br><br>
+        Veraltet: <code>registry.eu-de.bluemix.net</code></td>
         <td><code>169.50.56.144/28</code></br><code>159.8.73.80/28</code></br><code>169.50.58.104/29</code></br><code>161.156.93.16/29</code></br><code>149.81.79.152/29</code></td>
         <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
        </tr>
        <tr>
         <td>Vereinigtes Königreich (Süden)</td>
-        <td><strong>Öffentlich:</strong> <code>uk.icr.io</code><br>
-        Veraltet: <code>registry.eu-gb.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.uk.icr.io<br>z2-1.private.uk.icr.io<br>z3-1.private.uk.icr.io</code></td>
+        <td><code>uk.icr.io</code><br><br>
+        Veraltet: <code>registry.eu-gb.bluemix.net</code></td>
         <td><code>159.8.188.160/27</code></br><code>169.50.153.64/27</code></br><code>158.175.97.184/29</code></br><code>158.176.105.64/29</code></br><code>141.125.71.136/29</code></td>
         <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
        </tr>
        <tr>
         <td>Vereinigte Staaten (Osten), Vereinigte Staaten (Süden)</td>
-        <td><strong>Öffentlich:</strong> <code>us.icr.io</code><br>
-        Veraltet: <code>registry.ng.bluemix.net</code><br><br>
-        <strong>Privat:</strong> <code>z1-1.private.us.icr.io<br>z2-1.private.us.icr.io<br>z3-1.private.us.icr.io</code></td>
+        <td><code>us.icr.io</code><br><br>
+        Veraltet: <code>registry.ng.bluemix.net</code></td>
         <td><code>169.55.39.112/28</code></br><code>169.46.9.0/27</code></br><code>169.55.211.0/27</code></br><code>169.61.234.224/29</code></br><code>169.61.135.160/29</code></br><code>169.61.46.80/29</code></td>
         <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
        </tr>
@@ -463,7 +458,7 @@ Wenn Sie über eine Firewall im privaten Netz verfügen, lassen Sie die Kommunik
 
 2. Lassen Sie für die IBM Cloud-Infrastruktur (SoftLayer) private IP-Bereiche zu, sodass Sie Workerknoten in Ihrem Cluster erstellen können.
     1. Lassen Sie für die entsprechende IBM Cloud-Infrastruktur (SoftLayer) private IP-Bereiche zu. Weitere Informationen finden Sie unter [Back-End-Netz (privat)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Lassen Sie für die IBM Cloud-Infrastruktur (SoftLayer) private IP-Bereiche für alle [Zonen](/docs/containers?topic=containers-regions-and-zones#zones) zu, die Sie verwenden. Beachten Sie, dass Sie IPs für die Zonen `dal01` und `wdc04` hinzufügen müssen. Weitere Informationen finden Sie unter [Servicenetz (im Back-End-Netz/privatem Netz)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+    2. Lassen Sie für die IBM Cloud-Infrastruktur (SoftLayer) private IP-Bereiche für alle [Zonen](/docs/containers?topic=containers-regions-and-zones#zones) zu, die Sie verwenden. Beachten Sie, dass Sie IPs für die Zonen `dal01`, `dal10`, `wdc04` hinzufügen müssen. Wenn sich Ihr Cluster in Europa befindet, müssen Sie auch IPs für die Zone `ams01` hinzufügen. Weitere Informationen finden Sie unter [Servicenetz (im Back-End-Netz/privatem Netz)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Öffnen Sie die folgenden Ports:
     - Abgehende TCP- und UDP-Verbindungen von den Workern zu den Ports 80 und 443 zulassen, um das Aktualisieren und erneute Laden von Workerknoten zu ermöglichen.
@@ -472,7 +467,7 @@ Wenn Sie über eine Firewall im privaten Netz verfügen, lassen Sie die Kommunik
     - Eingehende TCP- und UDP-Verbindungen zu Port 10250 für das Kubernetes-Dashboard und Kubernetes-Befehle wie `kubectl logs` und `kubectl exec` zulassen.
     - Eingehende und abgehende TCP- und UDP-Verbindungen zu TCP- und UDP-Port 53 für den DNS-Zugriff zulassen.
 
-4. Wenn Sie auch über eine Firewall im öffentlichen Netz verfügen oder wenn Sie über einen Cluster mit ausschließlich privatem VLAN verfügen und eine Gateway-Appliance als Firewall verwenden, müssen Sie auch die IPs und Ports zulassen, die im Abschnitt [Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen](#firewall_outbound) angegeben sind.
+4. Wenn Sie auch über eine Firewall im öffentlichen Netz verfügen oder wenn Sie über einen Cluster mit ausschließlich privatem VLAN verfügen und eine Gateway-Einheit als Firewall verwenden, müssen Sie auch die IPs und Ports zulassen, die im Abschnitt [Zugriff des Clusters auf Infrastrukturressourcen und andere Services ermöglichen](#firewall_outbound) angegeben sind.
 
 <br />
 
@@ -582,13 +577,13 @@ Wenn Sie auf Services zugreifen wollen, die innerhalb oder außerhalb von {{site
       ```
       {: pre}
 
-    2. Notieren Sie in der Ausgabe des Befehls im vorherigen Schritt alle eindeutigen Netz-IDs (erste 3 Oktette) der Spalte **Public IP** für die Workerknoten in Ihrem Cluster.<staging> Wenn Sie einen nur privaten Cluster in einer Whitelist angeben wollen, notieren Sie stattdessen die Netz-IDs der Spalte **Private IP**.<staging> In der folgenden Ausgabe sind die öffentlichen Netz-IDs `169.xx.178` und `169.xx.210`.
+    2. Notieren Sie in der Ausgabe des Befehls im vorherigen Schritt alle eindeutigen Netz-IDs (erste 3 Oktette) der Spalte **Public IP** für die Workerknoten in Ihrem Cluster. Wenn Sie einen nur privaten Cluster in einer Whitelist angeben wollen, notieren Sie stattdessen die Netz-IDs der Spalte **Private IP**. In der folgenden Ausgabe sind die öffentlichen Netz-IDs `169.xx.178` und `169.xx.210`.
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.12.7  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.12.7  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
         ```
         {: screen}
     3.  Listen Sie die VLAN-Teilnetze für jede eindeutige Netz-ID auf.

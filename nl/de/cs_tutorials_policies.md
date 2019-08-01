@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Lernprogramm: Calico-Netzrichtlinien zum Blockieren von Datenverkehr verwenden
@@ -31,7 +32,7 @@ Standardmäßig wird Ihre App durch die NodePort-, LoadBalancer- und Ingress-Ser
 
 Aus Sicherheitsgründen ist es jedoch unter Umständen erforderlich, dass der Datenverkehr zu den Netzservices nur über bestimmte Quellen-IP-Adressen zulässig ist. Sie können [Calico-Richtlinien des Typs 'Pre-DNAT' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) verwenden, um Datenverkehr von oder zu bestimmten IP-Adressen in Whitelists oder Blacklists zu führen. Mit Pre-DNAT-Richtlinien wird verhindert, dass angegebener Datenverkehr Ihre Apps erreicht, da die Richtlinien angewendet werden, bevor Kubernetes reguläre DNAT verwendet, um Datenverkehr an Pods weiterzuleiten. Wenn Sie Calico-Richtlinien des Typs Pre-DNAT erstellen, wählen Sie aus, ob Quellen-IP-Adressen in einer Whitelist oder einer Blacklist geführt werden. In den meisten Szenarios bietet das Setzen auf eine Whitelist die sicherste Konfiguration, da der gesamte Datenverkehr mit Ausnahme des Verkehrs von bekannten, zulässigen Quellen-IP-Adressen blockiert wird. Das Setzen auf eine Blacklist ist in der Regel nur in Szenarios nützlich, in denen z. B. ein Angriff, der von einer kleinen Gruppe von IP-Adressen ausgeht, verhindert werden soll.
 
-In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR-Firma und Sie bemerken ungewöhnlichen Datenverkehr, der Ihre Apps erreicht. Die Lerneinheiten in diesem Lernprogramm führen Sie durch die Schritte für die Erstellung einer Web-Server-Beispielapp, für das Verfügbarmachen der App mithilfe eines Netzausgleichsfunktions- (NLB-) Service und für das Schützen der App vor unerwünschtem ungewöhnlichem Datenverkehr mithilfe von Calico-Richtlinien für eine Whitelist und eine Blacklist.
+In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR-Firma und bemerken ungewöhnlichen Datenverkehr, der Ihre Apps erreicht. Die Lerneinheiten in diesem Lernprogramm führen Sie durch die Schritte für die Erstellung einer Web-Server-Beispielapp, für das Verfügbarmachen der App mithilfe eines Netzausgleichsfunktions- (NLB-) Service und für das Schützen der App vor unerwünschtem ungewöhnlichem Datenverkehr mithilfe von Calico-Richtlinien für eine Whitelist und eine Blacklist.
 
 ## Ziele
 {: #policies_objectives}
@@ -69,7 +70,7 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 In der ersten Lerneinheit erfahren Sie, wie Ihre App von mehreren IP-Adressen und Ports aus zugänglich gemacht wird und an welcher Stelle öffentlicher Datenverkehr in Ihren Cluster eingeht.
 {: shortdesc}
 
-Starten Sie mit der Bereitstellung einer Web-Server-Beispielapp, die während des gesamten Lernprogramms verwendet wird. Der Web-Server `echoserver` zeigt Daten zu der Verbindung an, die vom Client zum Cluster hergestellt wird, und lässt Sie den Zugriff auf den Cluster der PR-Firma testen. Anschließend machen Sie die App durch Erstellen eines Netzausgleichsfunktions- (NLB-) Service der Version 1.0 zugänglich. Ein NLB-Service der Version 1.0 macht Ihre App sowohl über die IP-Adresse des NLB-Service als auch über die Knotenports der Workerknoten zugänglich.
+Starten Sie mit der Bereitstellung einer Web-Server-Beispielapp, die während des gesamten Lernprogramms verwendet wird. Der Web-Server `echoserver` zeigt Daten zu der Verbindung an, die vom Client zum Cluster hergestellt wird, und lässt Sie den Zugriff auf den Cluster der PR-Firma testen. Anschließend machen Sie die App durch Erstellen eines Netzausgleichsfunktionsservice (NLB-Service) der Version 1.0 zugänglich. Ein NLB-Service der Version 1.0 macht Ihre App sowohl über die IP-Adresse des NLB-Service als auch über die Knotenports der Workerknoten zugänglich.
 
 Möchten Sie stattdessen eine Ingress-Lastausgleichsfunktion für Anwendungen (Application Load Balancer, ALB) verwenden? Anstatt in den Schritten 3 und 4 eine NLB zu erstellen, [erstellen Sie einen Service für die Web-Server-App](/docs/containers?topic=containers-ingress#public_inside_1) und [erstellen Sie eine Ingress-Ressource für die Web-Server-App](/docs/containers?topic=containers-ingress#public_inside_4). Rufen Sie anschließend die öffentlichen IP-Adressen Ihrer ALBs ab, indem Sie den Befehl `ibmcloud ks albs --cluster <clustername>` ausführen und verwenden Sie diese IP-Adressen im gesamten Lernprogramm anstelle von `<ip_der_lastausgleichsfunktion>.`
 {: tip}
@@ -156,7 +157,7 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
         Server values:
             server_version=nginx: 1.13.3 - lua: 10008
         Request Information:
-            client_address=1.1.1.1
+            clientadresse=1.1.1.1
             method=GET
             real path=/
             query=
@@ -196,9 +197,9 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
         Beispielausgabe:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
         ```
         {: screen}
 
@@ -218,7 +219,7 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
         Server values:
             server_version=nginx: 1.13.3 - lua: 10008
         Request Information:
-            client_address=1.1.1.1
+            clientadresse=1.1.1.1
             method=GET
             real path=/
             query=
@@ -246,7 +247,7 @@ Zum Sichern des Clusters der PR-Firma müssen Sie den öffentlichen Zugriff sowo
 
 In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 der Datenverkehr zur NLB zulässig ist, jedoch nicht zu den Knotenports.
 
-<img src="images/cs_tutorial_policies_Lesson2.png "width="425" alt="Am Ende von Lerneinheit 2 wird die Web-Server-App dem Internet nur über die öffentliche NLB zugänglich gemacht." style="width:425px; border-style: none "/>
+<img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="Am Ende von Lerneinheit 2 wird die Web-Server-App dem Internet nur über die öffentliche NLB zugänglich gemacht." style="width:425px; border-style: none "/>
 
 1. Erstellen Sie in einem Texteditor eine höherwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-nodeports.yaml`, um eingehenden TCP- und UDP-Datenverkehr zurückzuweisen, der von beliebigen Quellen-IPs an alle Knotenports fließt.
     ```
@@ -309,7 +310,13 @@ In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 d
     ```
     {: screen}
 
-4. Prüfen Sie mithilfe des Werts aus Ihrem Spickzettel, ob Sie weiterhin öffentlich auf die externe IP-Adresse der NLB zugreifen können.
+4. Ändern Sie die Richtlinie für externen Datenverkehr (externalTrafficPolicy) der Lastausgleichsfunktion, die Sie in der vorherigen Lerneinheit erstellt haben, von `Cluster` in `Local`. `Local` stellt sicher, dass die Quellen-IP Ihres Systems beibehalten wird, wenn Sie im nächsten Schritt den Befehl curl für die externe IP der Lastausgleichsfunktion ausführen.
+    ```
+    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    ```
+    {: pre}
+
+5. Prüfen Sie mithilfe des Werts aus Ihrem Spickzettel, ob Sie weiterhin öffentlich auf die externe IP-Adresse der NLB zugreifen können.
     ```
     curl --connect-timeout 10 <ip_der_lastausgleichsfunktion>:80
     ```
@@ -323,26 +330,26 @@ In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 d
     Server values:
         server_version=nginx: 1.13.3 - lua: 10008
     Request Information:
-        client_address=1.1.1.1
+        clientadresse=1.1.1.1
         method=GET
         real path=/
         query=
         request_version=1.1
         request_scheme=http
-        request_uri=http://<loadbalancer_IP>:8080/
+        request_uri=http://<ip_der_lastausgleichsfunktion>:8080/
     Request Headers:
         accept=*/*
-        host=<loadbalancer_IP>
+        host=<ip_der_lastausgleichsfunktion>
         user-agent=curl/7.54.0
     Request Body:
         -no body in request-
     ```
     {: screen}
-    Beachten Sie im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe, dass die Quellen-IP-Adresse z. B. `client_address=1.1.1.1` lautet. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen wird die Quellen-IP-Adresse des Systems von der NLB als IP-Adresse des Clients interpretiert.
+Im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe lautet die Quellen-IP-Adresse z. B. `client_address=1.1.1.1`. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen wird die Quellen-IP-Adresse des Systems von der NLB als IP-Adresse des Clients interpretiert.
 
-5. Kopieren Sie die Quellen-IP-Adresse Ihres Systems (`client_address=1.1.1.1` in der Ausgabe des vorherigen Schritts) in Ihren Spickzettel, um sie in späteren Lerneinheiten zu verwenden.
+6. Kopieren Sie die Quellen-IP-Adresse Ihres Systems (`clientadresse=1.1.1.1` in der Ausgabe des vorherigen Schritts) in Ihren Spickzettel, um sie in späteren Lerneinheiten zu verwenden.
 
-Super! Zu diesem Zeitpunkt wird Ihre App nur über den öffentlichen NLB-Port im öffentlichen Internet zugänglich gemacht. Der Datenverkehr an die öffentlichen Knotenports ist blockiert. Sie haben einen Teil Ihres Clusters für unerwünschten Datenverkehr gesperrt.
+Super! Zu diesem Zeitpunkt wird Ihre App nur über den öffentlichen NLB-Port im öffentlichen Internet zugänglich gemacht. Der Datenverkehr an die öffentlichen Knotenports ist blockiert. Ein Teil Ihres Clusters ist für unerwünschten Datenverkehr gesperrt. 
 
 Als Nächstes können Sie Calico-Richtlinien erstellen und anwenden, um Datenverkehr von bestimmten Quellen-IPs in der Whitelist aufzuführen.
 
@@ -356,7 +363,7 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="Die Web-Server-App wird von der öffentlichen NLB nur für Ihre System-IP-Adresse zugänglich gemacht." style="width:500px; border-style: none"/>
 
-1. Erstellen Sie in einem Texteditor eine höherwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-lb-port-80.yaml`, um den gesamten TCP- und UDP-Datenverkehr zurückzuweisen, der von beliebigen Quellen-IPs an die IP-Adresse und den Port der NLB fließt. Ersetzen Sie `<loadbalancer_IP>` durch die öffentliche IP-Adresse der LB, die Sie auf dem Spickzettel notiert haben.
+1. Erstellen Sie in einem Texteditor eine höherwertige Richtlinie des Typs Pre-DNAT mit dem Namen `deny-lb-port-80.yaml`, um den gesamten TCP- und UDP-Datenverkehr zurückzuweisen, der von beliebigen Quellen-IPs an die IP-Adresse und den Port der NLB fließt. Ersetzen Sie `<ip_der_lastausgleichsfunktion>` durch die öffentliche IP-Adresse der NLB, die Sie auf dem Spickzettel notiert haben.
 
     ```
     apiVersion: projectcalico.org/v3
@@ -411,7 +418,7 @@ Zuerst müssen Sie wie schon bei den Knotenports den gesamten eingehenden Datenv
     ```
     {: pre}
 
-4. Erstellen Sie in einem Texteditor eine niederwertige Richtlinie des Typs Pre-DNAT mit dem Namen `whitelist.yaml`, um Datenverkehr von der IP Ihres Systems an die IP-Adresse und den Port der NLB zuzulassen. Ersetzen Sie mithilfe der Werte auf dem Spickzettel `<loadbalancer_IP>` durch die öffentliche IP-Adresse der NLB und `<client_address>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
+4. Erstellen Sie in einem Texteditor eine niederwertige Richtlinie des Typs Pre-DNAT mit dem Namen `whitelist.yaml`, um Datenverkehr von der IP Ihres Systems an die IP-Adresse und den Port der NLB zuzulassen. Ersetzen Sie mithilfe der Werte auf dem Spickzettel `<ip_der_lastausgleichsfunktion>` durch die öffentliche IP-Adresse der NLB und `<clientadresse>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems. Wenn Sie die IP Ihres Systems vergessen haben, können Sie den Befehl `curl ifconfig.co` ausführen.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -477,7 +484,7 @@ In der vorherigen Lerneinheit haben Sie den gesamten Datenverkehr blockiert und 
 
 In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den Datenverkehr blockieren, der aus der Quellen-IP-Adresse Ihres eigenen Systems stammt. Am Ende von Lerneinheit 4 ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche NLB ist zulässig. Nur der Datenverkehr von Ihrer in der Blacklist aufgeführten System-IP zur NLB wird blockiert:
 
-<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Die Web-Server-App wird von der öffentlichen NLB im Internet zugänglich gemacht. Der Datenverkehr nur von der System-IP-Adresse ist blockiert." style="width:550px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L4.png" width="550" alt="Die Web-Server-App ist über eine öffentliche NLB im Internet zugänglich. Nur der Datenverkehr von Ihrer System-IP wird blockiert." style="width:550px; border-style: none"/>
 
 1. Bereinigen Sie die Whitelist-Richtlinien, die Sie in der vorherigen Lerneinheit erstellt haben.
     - Linux:
@@ -502,7 +509,7 @@ In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den D
 
     Nun ist der gesamte eingehende TCP- und UDP-Datenverkehr von beliebigen Quellen-IPs an die IP-Adresse der NLB und an den Port ist erneut zulässig.
 
-2. Wenn Sie den gesamten TCP- und UDP-Datenverkehr von der Quellen-IP-Adresse Ihres Systems an die IP-Adresse und den Port der NLB zurückweisen möchten, erstellen Sie in einem Texteditor eine niedrigstwertige Richtlinie des Typs Pre-DNAT mit dem Namen `blacklist.yaml`. Ersetzen Sie mithilfe der Werte auf dem Spickzettel `<loadbalancer_IP>` durch die öffentliche IP-Adresse der NLB und `<client_address>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
+2. Wenn Sie den gesamten TCP- und UDP-Datenverkehr von der Quellen-IP-Adresse Ihres Systems an die IP-Adresse und den Port der NLB zurückweisen möchten, erstellen Sie in einem Texteditor eine niedrigstwertige Richtlinie des Typs Pre-DNAT mit dem Namen `blacklist.yaml`. Ersetzen Sie mithilfe der Werte auf dem Spickzettel `<ip_der_lastausgleichsfunktion>` durch die öffentliche IP-Adresse der NLB und `<clientadresse>` durch die öffentliche IP-Adresse der Quellen-IP Ihres Systems.
   ```
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -515,23 +522,23 @@ In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den D
     - action: Deny
       destination:
         nets:
-        - <loadbalancer_IP>/32
+        - <ip_der_lastausgleichsfunktion>/32
         ports:
         - 80
       protocol: TCP
       source:
         nets:
-        - <client_address>/32
+        - <clientadresse>/32
     - action: Deny
       destination:
         nets:
-        - <loadbalancer_IP>/32
+        - <ip_der_lastausgleichsfunktion>/32
         ports:
         - 80
       protocol: UDP
       source:
         nets:
-        - <client_address>/32
+        - <clientadresse>/32
     selector: ibm.role=='worker_public'
     order: 500
     types:
@@ -585,25 +592,25 @@ In unserem Beispielszenario möchte die PR-Firma, für die Sie arbeiten, dass Si
     - action: Log
       destination:
         nets:
-        - <loadbalancer_IP>/32
+        - <ip_der_lastausgleichsfunktion>/32
         ports:
         - 80
       protocol: TCP
       source:
         nets:
-        - <client_address>/32
+        - <clientadresse>/32
     - action: Deny
       destination:
         nets:
-        - <loadbalancer_IP>/32
+        - <ip_der_lastausgleichsfunktion>/32
         ports:
         - 80
       protocol: UDP
       source:
         nets:
-        - <client_address>/32
+        - <clientadresse>/32
     selector: ibm.role=='worker_public'
-    order: 500
+    order: 300
     types:
     - Ingress
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-29"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,13 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
 # Übersicht über die Anwendungsfälle
 {: #cs_uc_intro}
 
-In einer Reihe unterschiedlicher Anwendungsfälle werden die Stärken von {{site.data.keyword.containerlong_notm}} und der {{site.data.keyword.Bluemix_notm}}-Services verdeutlicht, wenn beides gemeinsam verwendet wird. In diesen Szenarios werden unterschiedliche Branchen und ihre verschiedenen Workload-Typen beleuchtet. In jedem einzelnen Anwendungsfall wird zwar eine Situation in einer bestimmten Branche beschrieben, die Workloads sind jedoch in vielen Branchen sehr ähnlich. Die Workloads betreffen unter anderem die folgenden Themen: 
+In einer Reihe von Anwendungsfällen werden die Stärken von {{site.data.keyword.containerlong_notm}} und der {{site.data.keyword.Bluemix_notm}}-Services verdeutlicht, wenn beides gemeinsam verwendet wird. In diesen Szenarios werden unterschiedliche Branchen und ihre verschiedenen Workload-Typen beleuchtet. In jedem einzelnen Anwendungsfall wird zwar eine Situation in einer bestimmten Branche beschrieben, die Workloads sind jedoch in vielen Branchen sehr ähnlich. Die Workloads betreffen unter anderem die folgenden Themen: 
 * Künstliche Intelligenz und maschinelles Lernen
 * Daten und Speicher
 * DevOps
@@ -63,7 +64,7 @@ In einer Reihe unterschiedlicher Anwendungsfälle werden die Stärken von {{site
       <tr>
          <td align="center"><img src="images/retail.svg" alt="Symbol eines Einkaufswagens mit Währungssymbol"/><br>Einzelhandel</td>
          <td><ul>
-        <li>[Gemeinsame Nutzung von Daten über APIs mit globalen Partnern zur Förderung des Omni-Channel-Vertriebs](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
+        <li>[Gemeinsame Nutzung von Daten über APIs mit globalen Geschäftspartnern zur Förderung des Omni-Channel-Vertriebs](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
          <li>[Optimierung der Lagerkosten mit digitalen Erkenntnissen über das Einkaufsverhalten](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
@@ -71,7 +72,7 @@ In einer Reihe unterschiedlicher Anwendungsfälle werden die Stärken von {{site
        <td align="center"><img src="images/transport.svg" alt="Symbol eine Eisenbahnwagens mit Containern"/><br>Transportwesen</td>
            <td><ul>
           <li>[Erstellung und Bereitstellung einer Human Resources-Site mit künstlicher Intelligenz in weniger als drei Wochen](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Steigerung der Verfügbarkeit von weltweiten Systemen für Partner](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+           <li>[Steigerung der Verfügbarkeit von weltweiten Systemen für Geschäftspartner](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
       </tr>
   </tbody>
   </table>

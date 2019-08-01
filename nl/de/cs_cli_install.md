@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 
@@ -32,7 +32,7 @@ Sie können die {{site.data.keyword.containerlong}}-CLI
 oder -API zu Erstellen und Verwalten Ihrer Kubernetes-Cluster verwenden.
 {:shortdesc}
 
-## CLI installieren
+## IBM Cloud-CLI und -Plug-ins installieren
 {: #cs_cli_install_steps}
 
 Installieren Sie die erforderlichen CLIs, um Ihre Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} zu erstellen und zu verwalten und um containerisierte Apps in Ihrem Cluster bereitzustellen.
@@ -40,10 +40,9 @@ Installieren Sie die erforderlichen CLIs, um Ihre Kubernetes-Cluster in {{site.d
 
 Diese Task enthält Informationen zur Installation dieser CLIs (Befehlszeilenschnittstellen) und Plug-ins:
 
-- {{site.data.keyword.Bluemix_notm}}-CLI
-- {{site.data.keyword.containerlong_notm}}-Plug-in
-- {{site.data.keyword.registryshort_notm}}-Plug-in
-- Kubernetes CLI-Version, die mit der Version `major.minor` Ihres Clusters übereinstimmt
+-   {{site.data.keyword.Bluemix_notm}}-CLI
+-   {{site.data.keyword.containerlong_notm}}-Plug-in
+-   {{site.data.keyword.registryshort_notm}}-Plug-in
 
 Wenn Sie stattdessen nach der Erstellung des Clusters die {{site.data.keyword.Bluemix_notm}}-Konsole verwenden möchten, können Sie CLI-Befehle direkt über Ihren Web-Browser im [Kubernetes-Terminal](#cli_web) ausführen.
 {: tip}
@@ -51,78 +50,140 @@ Wenn Sie stattdessen nach der Erstellung des Clusters die {{site.data.keyword.Bl
 <br>
 Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu installieren:
 
-1. Installieren Sie die [{{site.data.keyword.Bluemix_notm}}-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-ibmcloud-cli#idt-prereq). Zu dieser Installation gehören:
-  - Die {{site.data.keyword.Bluemix_notm}}-Basis-CLI. Das Präfix zum Ausführen von Befehlen über die {{site.data.keyword.Bluemix_notm}}-CLI lautet `ibmcloud`.
-  - Das {{site.data.keyword.containerlong_notm}}-Plug-in. Das Präfix zum Ausführen von Befehlen über die {{site.data.keyword.Bluemix_notm}}-CLI lautet `ibmcloud ks`.
-  - Das {{site.data.keyword.registryshort_notm}}-Plug-in. Verwenden Sie dieses Plug-in zum Festlegen Ihres eigenen Namensbereichs in einer hoch verfügbaren, skalierbaren, privaten Multi-Tenant-Image-Registry, die von IBM gehostet wird, und zum Speichern und gemeinsamen Nutzen von Docker-Images mit anderen Benutzern. Docker-Images sind erforderlich, um Container in einem Cluster bereitzustellen. Das Präfix für die Ausführung von Registry-Befehlen ist `ibmcloud cr`.
+1.  Installieren Sie die [{{site.data.keyword.Bluemix_notm}}-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-getting-started#idt-prereq). Zu dieser Installation gehören:
+    -   {{site.data.keyword.Bluemix_notm}}-Basis-CLI (`ibmcloud`).
+    -   {{site.data.keyword.containerlong_notm}}-Plug-in (`ibmcloud ks`).
+    -   {{site.data.keyword.registryshort_notm}}-Plug-in (`ibmcloud cr`). Verwenden Sie dieses Plug-in zum Festlegen Ihres eigenen Namensbereichs in einer hoch verfügbaren, skalierbaren, privaten Multi-Tenant-Image-Registry, die von IBM gehostet wird, und zum Speichern und gemeinsamen Nutzen von Docker-Images mit anderen Benutzern. Docker-Images sind erforderlich, um Container in einem Cluster bereitzustellen.
+    -   Die Kubernetes-CLI (`kubectl`), die mit der Standardversion 1.13.6 übereinstimmt.<p class="note">Wenn Sie planen, einen Cluster zu verwenden, der eine andere Version ausführt, müssen Sie [diese Version der Kubernetes-CLI separat installieren](#kubectl). Wenn Sie einen (OpenShift-)Cluster haben, [installieren Sie die `oc`- und die `kubectl`-CLI gemeinsam](#cli_oc).</p>
+    -   Helm-CLI (`helm`). Sie können Helm als Paketmanager zum Installieren von {{site.data.keyword.Bluemix_notm}}-Services und komplexen Apps in Ihrem Cluster über Helm-Diagramme verwenden. Sie müssen immer noch [Helm in jedem Cluster einrichten](/docs/containers?topic=containers-helm), in dem Sie Helm verwenden wollen.
 
-  Beabsichtigen Sie, die CLI häufig einzusetzen? Dann probieren Sie aus, was im Abschnitt [Automatische Vervollständigung für die Shell für die {{site.data.keyword.Bluemix_notm}}-CLI aktivieren (nur Linux/MacOS)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux) beschrieben ist.
-  {: tip}
+    Beabsichtigen Sie, die CLI häufig einzusetzen? Dann probieren Sie aus, was im Abschnitt [Automatische Vervollständigung für die Shell für die {{site.data.keyword.Bluemix_notm}}-CLI aktivieren (nur Linux/MacOS)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux) beschrieben ist.
+    {: tip}
 
-2. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre
-{{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn
-Sie dazu aufgefordert werden.
-  ```
-  ibmcloud login
-  ```
-  {: pre}
+2.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden.
+    ```
+    ibmcloud login
+    ```
+    {: pre}
 
-  Falls Sie über eine föderierte ID verfügen, geben Sie `ibmcloud login --sso` ein, um sich an der Befehlszeilenschnittstelle von {{site.data.keyword.Bluemix_notm}} anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen. Bei Verwendung einer föderierten ID schlägt die Anmeldung ohne die Option `--sso` fehl, mit der Option `--sso` ist sie erfolgreich.
-  {: tip}
+    Falls Sie über eine föderierte ID verfügen, geben Sie `ibmcloud login --sso` ein, um sich an der Befehlszeilenschnittstelle von {{site.data.keyword.Bluemix_notm}} anzumelden. Geben Sie Ihren Benutzernamen ein und verwenden Sie die bereitgestellte URL in Ihrer CLI-Ausgabe, um Ihren einmaligen Kenncode abzurufen. Bei Verwendung einer föderierten ID schlägt die Anmeldung ohne die Option `--sso` fehl, mit der Option `--sso` ist sie erfolgreich.
+    {: tip}
 
-3. Stellen Sie sicher, dass die Plug-ins ordnungsgemäß installiert wurden.
-  ```
-  ibmcloud plugin list
-  ```
-  {: pre}
+3.  Stellen Sie sicher, dass das {{site.data.keyword.containerlong_notm}}-Plug-in und die {{site.data.keyword.registryshort_notm}}-Plug-ins ordnungsgemäß installiert wurden.
+    ```
+    ibmcloud plugin list
+    ```
+    {: pre}
 
-  Das {{site.data.keyword.containerlong_notm}}-Plug-in wird in den Ergebnissen mit **container-service**, das {{site.data.keyword.registryshort_notm}}-Plug-in mit **container-registry** angezeigt.
+    Beispielausgabe:
+    ```
+    Installierte Plug-ins auflisten...
 
-4. {: #kubectl}Um eine lokale Version des Kubernetes-Dashboards anzuzeigen und Apps in Ihren Clustern bereitzustellen, müssen Sie die [Kubernetes-CLI installieren ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/). Das Präfix zum Ausführen von Befehlen über die Kubernetes-CLI lautet `kubectl`.
-
-  Die aktuellste stabile Version von `kubectl` wird mit der {{site.data.keyword.Bluemix_notm}}-Basis-CLI installiert. Um jedoch mit Ihrem Cluster arbeiten zu können, müssen Sie stattdessen die Version `major.minor` der Kubernetes-CLI installieren, die mit der Version `major.minor` des Kubernetes-Clusters übereinstimmt, die Sie verwenden möchten. Wenn Sie eine `kubectl`-CLI-Version verwenden, die nicht wenigstens mit der Version `major.minor` Ihrer Cluster übereinstimmt, kann dies zu unerwarteten Ergebnissen führen. Stellen Sie sicher, dass Ihr Kubernetes-Cluster und die CLI-Versionen immer auf dem neuesten Stand sind.
-  {: important}
-
-  1. Laden Sie die Kubernetes-CLI-Version `major.minor` herunter, die mit der Version des Kubernetes-Clusters `major.minor` übereinstimmt, die Sie verwenden möchten. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.12.7.
-    - **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/darwin/amd64/kubectl)
-    - **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/linux/amd64/kubectl)
-    - **Windows**: Installieren Sie die Kubernetes-CLI im selben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. [https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.12.7/bin/windows/amd64/kubectl.exe)
-
-  2. Wenn Sie mit OS X oder Linux arbeiten, dann führen Sie die folgenden Schritte aus.
-    1. Verschieben Sie die ausführbare Datei in das Verzeichnis `/usr/local/bin`.
-      ```
-      mv /filepath/kubectl /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-    2. Stellen Sie sicher, dass `/usr/local/bin` in der Variablen `PATH` Ihres Systems aufgelistet wird. Die Variable `PATH` enthält alle Verzeichnisse, in denen Ihr Betriebssystem ausführbare Dateien finden kann. Die Verzeichnisse, die in der Variablen `PATH` aufgelistet sind, erfüllen jedoch eine andere Funktion. Im Verzeichnis `/usr/local/bin` werden ausführbare Dateien für Software gespeichert, die nicht Bestandteil des Betriebssystem ist und vom Systemadministrator manuell installiert wurde.
-      ```
-      echo $PATH
-      ```
-      {: pre}
-      CLI-Beispielausgabe:
-      ```
-      /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-      ```
-      {: screen}
-
-    3. Konvertieren Sie die Datei in eine ausführbare Datei.
-      ```
-      chmod +x /usr/local/bin/kubectl
-      ```
-      {: pre}
-
-Beginnen Sie anschließend damit, [Kubernetes-Cluster über die CLI mit {{site.data.keyword.containerlong_notm}} zu erstellen](/docs/containers?topic=containers-clusters#clusters_cli).
+    Plugin Name                            Version   Status        
+    container-registry                     0.1.373     
+    container-service/kubernetes-service   0.3.23   
+    ```
+    {: screen}
 
 Referenzinformationen zu diesen CLIs finden Sie in der Dokumentation zu diesen Tools.
 
 -   [`ibmcloud`-Befehle](/docs/cli/reference/ibmcloud?topic=cloud-cli-ibmcloud_cli#ibmcloud_cli)
--   [`ibmcloud ks`-Befehle](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference)
--   [`ibmcloud cr`-Befehle](/docs/services/Registry?topic=registry-registry_cli_reference#registry_cli_reference)
--   [`kubectl`-Befehle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubectl.docs.kubernetes.io/)
+-   [`ibmcloud ks`-Befehle](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
+-   [`ibmcloud cr`-Befehle](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli)
+
+## Kubernetes-CLI (`kubectl`) installieren
+{: #kubectl}
+
+Um eine lokale Version des Kubernetes-Dashboards anzuzeigen und Apps in Ihren Clustern bereitzustellen, müssen Sie die Kubernetes-CLI (`kubectl`) installieren. Die aktuellste stabile Version von `kubectl` wird mit der {{site.data.keyword.Bluemix_notm}}-Basis-CLI installiert. Um jedoch mit Ihrem Cluster arbeiten zu können, müssen Sie stattdessen die Version `major.minor` der Kubernetes-CLI installieren, die mit der Version `major.minor` des Kubernetes-Clusters übereinstimmt, die Sie verwenden möchten. Wenn Sie eine `kubectl`-CLI-Version verwenden, die nicht wenigstens mit der Version `major.minor` Ihrer Cluster übereinstimmt, kann dies zu unerwarteten Ergebnissen führen. Beispiel: [Kubernetes unterstützt ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl`-Clientversionen nicht, die um zwei oder mehr Versionen von der Serverversion abweichen (n +/- 2). Stellen Sie sicher, dass Ihr Kubernetes-Cluster und die CLI-Versionen immer auf dem neuesten Stand sind.
+{: shortdesc}
+
+Verwenden Sie einen OpenShift-Cluster? Installieren Sie stattdessen die OpenShift Origin CLI (`oc`), die mit `kubectl` geliefert wird. Wenn Sie sowohl Red Hat OpenShift on IBM Cloud-Cluster als auch native {{site.data.keyword.containershort_notm}}-Ubuntu-Cluster verwenden, stellen Sie sicher, dass Sie die `kubectl`-Binärdatei verwenden, die der `major.minor`-Kubernetes-Version Ihres Clusters entspricht.
+{: tip}
+
+1.  Wenn Sie bereits einen Cluster haben, stellen Sie sicher, dass die Version der `kubectl`-CLI Ihres Clients mit der Version des Cluster-API-Servers übereinstimmt.
+    1.  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  Vergleichen Sie die Client- und Serverversionen. Wenn die Clientversion nicht mit der Serverversion übereinstimmt, fahren Sie mit dem nächsten Schritt fort. Wenn die Versionen übereinstimmen, haben Sie bereits die entsprechende Version von `kubectl` installiert.
+        ```
+        kubectl version  --short
+        ```
+        {: pre}
+2.  Laden Sie die Kubernetes-CLI-Version `major.minor` herunter, die mit der Version des Kubernetes-Clusters `major.minor` übereinstimmt, die Sie verwenden möchten. Die aktuelle Kubernetes-Standardversion für {{site.data.keyword.containerlong_notm}} ist Version 1.13.6.
+    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
+    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
+    -   **Windows**: Installieren Sie die Kubernetes-CLI im selben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
+
+3.  Wenn Sie mit OS X oder Linux arbeiten, führen Sie die folgenden Schritte aus.
+    1.  Verschieben Sie die ausführbare Datei in das Verzeichnis `/usr/local/bin`.
+        ```
+        mv /<dateipfad>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  Stellen Sie sicher, dass `/usr/local/bin` in der Variablen `PATH` Ihres Systems aufgelistet wird. Die Variable `PATH` enthält alle Verzeichnisse, in denen Ihr Betriebssystem ausführbare Dateien finden kann. Die Verzeichnisse, die in der Variablen `PATH` aufgelistet sind, erfüllen jedoch eine andere Funktion. Im Verzeichnis `/usr/local/bin` werden ausführbare Dateien für Software gespeichert, die nicht Bestandteil des Betriebssystem ist und vom Systemadministrator manuell installiert wurde.
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        CLI-Beispielausgabe:
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+
+    3.  Konvertieren Sie die Datei in eine ausführbare Datei.
+        ```
+        chmod +x /usr/local/bin/kubectl
+        ```
+        {: pre}
+4.  **Optional**: [Aktivieren Sie die automatische Vervollständigung für `kubectl`-Befehle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). Die Schritte variieren abhängig von der Shell, die Sie verwenden. 
+
+Beginnen Sie anschließend damit, [Kubernetes-Cluster über die CLI mit {{site.data.keyword.containerlong_notm}} zu erstellen](/docs/containers?topic=containers-clusters#clusters_cli_steps).
+
+Weitere Informationen zur Kubernetes-CLI finden Sie in der [`kubectl`-Referenzdokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubectl.docs.kubernetes.io/).
+{: note}
 
 <br />
 
+
+## Betavorabversion von OpenShift Origin CLI (`oc`) installieren
+{: #cli_oc}
+
+[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) ist als Betaversion zum Testen von OpenShift-Clustern verfügbar.
+{: preview}
+
+Um eine lokale Version des OpenShift-Dashboards anzuzeigen und Apps in Ihren Red Hat OpenShift on IBM Cloud-Clustern bereitzustellen, installieren Sie die OpenShift Origin CLI (`oc`). Die `oc`-CLI enthält die entsprechende Version der Kubernetes-CLI (`kubectl`). Weitere Informationen finden Sie in der [OpenShift-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html).
+{: shortdesc}
+
+Sie verwenden Red Hat OpenShift on IBM Cloud-Cluster und native {{site.data.keyword.containershort_notm}}-Ubuntu-Cluster? Die `oc`-CLI enthält die Binärdateien für `oc` und `kubectl`, aber auf Ihren Clustern werden möglicherweise andere Kubernetes-Versionen ausgeführt, z. B. 1.11 unter OpenShift und 1.13.6 unter Ubuntu. Stellen Sie sicher, dass Sie die `kubectl`-Binärdatei verwenden, die der `major.minor`-Kubernetes-Version Ihres Clusters entspricht.
+{: note}
+
+1.  [Laden Sie die OpenShift Origin CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.okd.io/download.html) für Ihr lokales Betriebssystem und Ihre lokale OpenShift-Version herunter. Die aktuelle OpenShift-Standardversion ist 3.11.
+
+2.  Wenn Sie Mac OS oder Linux verwenden, führen Sie die folgenden Schritte aus, um die Binärdateien zu Ihrer Systemvariablen `PATH` hinzuzufügen. Wenn Sie Windows verwenden, installieren Sie die `oc`-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen.
+    1.  Verschieben Sie die ausführbaren `oc`- und `kubectl`-Dateien in das Verzeichnis `/usr/local/bin`.
+        ```
+        mv /<dateipfad>/oc /usr/local/bin/oc && mv /<dateipfad>/kubectl /usr/local/bin/kubectl
+        ```
+        {: pre}
+
+    2.  Stellen Sie sicher, dass `/usr/local/bin` in der Variablen `PATH` Ihres Systems aufgelistet wird. Die Variable `PATH` enthält alle Verzeichnisse, in denen Ihr Betriebssystem ausführbare Dateien finden kann. Die Verzeichnisse, die in der Variablen `PATH` aufgelistet sind, erfüllen jedoch eine andere Funktion. Im Verzeichnis `/usr/local/bin` werden ausführbare Dateien für Software gespeichert, die nicht Bestandteil des Betriebssystem ist und vom Systemadministrator manuell installiert wurde.
+        ```
+        echo $PATH
+        ```
+        {: pre}
+        CLI-Beispielausgabe:
+        ```
+        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+        ```
+        {: screen}
+3.  **Optional**: [Aktivieren Sie die automatische Vervollständigung für `kubectl`-Befehle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). Die Schritte variieren abhängig von der Shell, die Sie verwenden. Sie können die Schritte wiederholen, um die automatische Vervollständigung für `oc`-Befehle zu aktivieren. In Bash unter Linux können Sie z. B. anstelle von `kubectl completion bash >/etc/bash_completion.d/kubectl` den Befehl `oc completion bash >/etc/bash_completion.d/oc_completion` ausführen.
+
+Beginnen Sie dann mit dem [Erstellen eines Red Hat OpenShift on IBM Cloud-Clusters (Beta)](/docs/containers?topic=containers-openshift_tutorial).
+
+Weitere Informationen zur OpenShift Origin CLI finden Sie in der [Dokumentation zu den `oc`-Befehlen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html).
+{: note}
+
+<br />
 
 
 ## CLI in einem Container auf Ihrem Computer ausführen
@@ -160,16 +221,18 @@ Sie können die Befehle, die mit der Kubernetes-Befehlszeilenschnittstelle zur V
 zum Verwalten von Clustern in {{site.data.keyword.Bluemix_notm}} verwenden.
 {:shortdesc}
 
-Alle in Kubernetes 1.12.7 verfügbaren `kubectl`-Befehle werden für die Verwendung mit Clustern in {{site.data.keyword.Bluemix_notm}} unterstützt. Wenn Sie einen Cluster erstellt haben, müssen Sie den Kontext für Ihre lokale Befehlszeilenschnittstelle (CLI) mit einer Umgebungsvariablen auf diesen Cluster festlegen. Anschließend können Sie die Kubernetes-`kubectl`-Befehle verwenden, um in {{site.data.keyword.Bluemix_notm}} mit Ihrem Cluster zu arbeiten.
+Alle in Kubernetes 1.13.6 verfügbaren `kubectl`-Befehle werden für die Verwendung mit Clustern in {{site.data.keyword.Bluemix_notm}} unterstützt. Wenn Sie einen Cluster erstellt haben, müssen Sie den Kontext für Ihre lokale Befehlszeilenschnittstelle (CLI) mit einer Umgebungsvariablen auf diesen Cluster festlegen. Anschließend können Sie die Kubernetes-`kubectl`-Befehle verwenden, um in {{site.data.keyword.Bluemix_notm}} mit Ihrem Cluster zu arbeiten.
 
 Bevor Sie `kubectl`-Befehle ausführen können, müssen Sie Folgendes tun:
 * [Installieren Sie die erforderlichen Befehlszeilenschnittellen](#cs_cli_install).
-* [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+* [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 * Stellen Sie sicher, dass Sie über eine [Servicerolle](/docs/containers?topic=containers-users#platform) verfügen, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen arbeiten zu können. Wenn Sie nur eine Servicerolle, jedoch keine Plattformrolle haben, muss Ihnen der Clusteradministrator den Namen und die ID des Clusters geben oder die Rolle **Anzeigeberechtigter** erteilen, damit Sie Cluster auflisten können.
 
 Gehen Sie wie folgt vor, um `kubectl`-Befehle zu verwenden:
 
-1.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Zur Angabe einer {{site.data.keyword.Bluemix_notm}}-Region müssen Sie den [API-Endpunkt einschließen](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
+1.  Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre
+{{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn
+Sie dazu aufgefordert werden.
 
     ```
     ibmcloud login
@@ -187,24 +250,17 @@ Gehen Sie wie folgt vor, um `kubectl`-Befehle zu verwenden:
     ```
     {: pre}
 
-4.  Um Kubernetes-Cluster in einer anderen als der zuvor ausgewählten {{site.data.keyword.Bluemix_notm}}-Region zu erstellen, wählen Sie die Region als Ziel aus.
-    ```
-    ibmcloud ks region-set
-    ```
-    {: pre}
-
-5.  Listen Sie alle Cluster im Konto auf, um den Namen des Clusters zu ermitteln. Wenn Sie nur eine {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle haben und Cluster nicht anzeigen können, bitten Sie Ihren Clusteradministrator um die IAM-Plattformrolle **Anzeigeberechtigter** oder um den Namen und die ID des Clusters.
+4.  Listen Sie alle Cluster im Konto auf, um den Namen des Clusters zu ermitteln. Wenn Sie nur eine {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle haben und Cluster nicht anzeigen können, bitten Sie Ihren Clusteradministrator um die IAM-Plattformrolle **Anzeigeberechtigter** oder um den Namen und die ID des Clusters.
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
-6.  Legen Sie den von Ihnen erstellten Cluster als Kontext für diese Sitzung fest. Führen Sie diese Konfigurationsschritte jedes Mal aus, wenn Sie mit Ihrem Cluster arbeiten.
-    1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter.
-
+5.  Legen Sie den von Ihnen erstellten Cluster als Kontext für diese Sitzung fest. Führen Sie diese Konfigurationsschritte jedes Mal aus, wenn Sie mit Ihrem Cluster arbeiten.
+    1.  Ermitteln Sie den Befehl zum Festlegen der Umgebungsvariablen und laden Sie die Kubernetes-Konfigurationsdateien herunter. <p class="tip">Sie verwenden Windows PowerShell? Schließen Sie das Flag `--powershell` ein, um Umgebungsvariablen im Windows PowerShell-Format abzurufen.</p>
         ```
-        ibmcloud ks cluster-config <clustername_oder_-id>
+        ibmcloud ks cluster-config --cluster <clustername_oder_-id>
         ```
         {: pre}
 
@@ -222,9 +278,6 @@ Gehen Sie wie folgt vor, um `kubectl`-Befehle zu verwenden:
         **Mac- oder Linux-Benutzer:** Anstatt den Befehl `ibmcloud ks cluster-config` auszuführen und die Umgebungsvariable `KUBECONFIG` zu kopieren, können Sie den Befehl `ibmcloud ks cluster-config --export <clustername>` ausführen. Abhängig von Ihrer Shell können Sie diese durch Ausführen des Befehls `eval $(ibmcloud ks cluster-config --export <clustername>)` einrichten.
         {: tip}
 
-        **Windows PowerShell-Benutzer:** Anstatt den `SET`-Befehl aus der Ausgabe des Befehls `ibmcloud ks cluster-config` zu kopieren und einzufügen, müssen Sie die Umgebungsvariable `KUBECONFIG` festlegen, indem Sie zum Beispiel den folgenden Befehl ausführen: `$env:KUBECONFIG = "C:\Users\<benutzername>\.bluemix\plugins\container-service\clusters\mycluster\kube-config-prod-dal10-mycluster.yml"`.
-        {:tip}
-
     3.  Stellen Sie sicher, dass die Umgebungsvariable `KUBECONFIG` richtig eingestellt ist.
 
         Beispiel:
@@ -240,7 +293,7 @@ Gehen Sie wie folgt vor, um `kubectl`-Befehle zu verwenden:
         ```
         {: screen}
 
-7.  Stellen Sie sicher, dass die `kubectl`-Befehle mit Ihrem Cluster ordnungsgemäß ausgeführt werden. Überprüfen Sie dazu die Serverversion der Kubernetes-CLI wie folgt.
+6.  Stellen Sie sicher, dass die `kubectl`-Befehle mit Ihrem Cluster ordnungsgemäß ausgeführt werden. Überprüfen Sie dazu die Serverversion der Kubernetes-CLI wie folgt.
 
     ```
     kubectl version  --short
@@ -250,8 +303,8 @@ Gehen Sie wie folgt vor, um `kubectl`-Befehle zu verwenden:
     Beispielausgabe:
 
     ```
-    Client Version: v1.12.7
-    Server Version: v1.12.7
+    Client Version: v1.13.6
+    Server Version: v1.13.6
     ```
     {: screen}
 
@@ -261,6 +314,8 @@ Nun können Sie `kubectl`-Befehle zum Verwalten Ihrer Cluster in {{site.data.key
 
 
 <br />
+
+
 
 
 ## CLI aktualisieren
@@ -273,15 +328,17 @@ Diese Task enthält Informationen zur Aktualisierung dieser CLIs (Befehlszeilens
 
 -   {{site.data.keyword.Bluemix_notm}}-CLI Version 0.8.0 oder höher
 -   {{site.data.keyword.containerlong_notm}}-Plug-in
--   Kubernetes-CLI Version 1.12.7 oder höher
+-   Kubernetes-CLI Version 1.13.6 oder höher
 -   {{site.data.keyword.registryshort_notm}}-Plug-in
 
 <br>
 Gehen Sie wie folgt vor, um die Befehlszeilenschnittstellen (CLIs) zu aktualisieren:
 
-1.  Aktualisieren Sie die {{site.data.keyword.Bluemix_notm}}-CLI. Laden Sie die [neueste Version ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-ibmcloud-cli) herunter und führen Sie das Installationsprogramm aus.
+1.  Aktualisieren Sie die {{site.data.keyword.Bluemix_notm}}-CLI. Laden Sie die [neueste Version ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-getting-started) herunter und führen Sie das Installationsprogramm aus.
 
-2. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn Sie dazu aufgefordert werden. Zur Angabe einer {{site.data.keyword.Bluemix_notm}}-Region müssen Sie den [API-Endpunkt einschließen](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).
+2. Melden Sie sich an der {{site.data.keyword.Bluemix_notm}}-CLI an. Geben Sie Ihre
+{{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweise ein, wenn
+Sie dazu aufgefordert werden.
 
     ```
     ibmcloud login
@@ -388,7 +445,7 @@ Das Kubernetes-Terminal ermöglicht Ihnen die Verwendung der {{site.data.keyword
 Das Kubernetes-Terminal wird als Beta-{{site.data.keyword.containerlong_notm}}-Add-on freigegeben und kann sich aufgrund von Benutzerfeedback und weiteren Tests noch ändern. Verwenden Sie diese Funktion nicht in Produktionsclustern, um unerwartete Nebeneffekte zu vermeiden.
 {: important}
 
-Wenn Sie Ihre Cluster mit dem Cluster-Dashboard in der {{site.data.keyword.Bluemix_notm}}-Konsole verwalten, aber recht bald zu fortgeschritteneren Konfigurationsänderungen übergehen möchten, können Sie CLI-Befehle jetzt direkt über Ihren Webbrowser im Kubernetes-Terminal ausführen. Das Kubernetes-Terminal wird mit der [{{site.data.keyword.Bluemix_notm}}-Basis-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-ibmcloud-cli), dem {{site.data.keyword.containerlong_notm}}-Plug-in und dem {{site.data.keyword.registryshort_notm}}-Plug-in aktiviert. Zusätzlich ist der Terminal-Kontext bereits auf den Cluster festgelegt, mit dem Sie arbeiten. Sie können also Kubernetes-`kubectl`-Befehle ausführen, um mit Ihrem Cluster zu arbeiten.
+Wenn Sie Ihre Cluster mit dem Cluster-Dashboard in der {{site.data.keyword.Bluemix_notm}}-Konsole verwalten, aber recht bald zu fortgeschritteneren Konfigurationsänderungen übergehen möchten, können Sie CLI-Befehle jetzt direkt über Ihren Webbrowser im Kubernetes-Terminal ausführen. Das Kubernetes-Terminal wird mit der [{{site.data.keyword.Bluemix_notm}}-Basis-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](/docs/cli?topic=cloud-cli-getting-started), dem {{site.data.keyword.containerlong_notm}}-Plug-in und dem {{site.data.keyword.registryshort_notm}}-Plug-in aktiviert. Zusätzlich ist der Terminal-Kontext bereits auf den Cluster festgelegt, mit dem Sie arbeiten. Sie können also Kubernetes-`kubectl`-Befehle ausführen, um mit Ihrem Cluster zu arbeiten.
 
 Alle Dateien, die Sie lokal herunterladen und bearbeiten, wie z. B. YAML-Dateien, werden vorübergehend im Kubernetes-Terminal gespeichert und bleiben nicht über Sitzungen hinweg bestehen.
 {: note}
@@ -418,7 +475,7 @@ Die {{site.data.keyword.containerlong_notm}}-API benötigt Headerinformationen, 
 
 Zur Authentifizierung bei {{site.data.keyword.containerlong_notm}} müssen Sie ein {{site.data.keyword.Bluemix_notm}} IAM-Token (IAM = Identity and Access Management) angeben, das mit Ihren {{site.data.keyword.Bluemix_notm}}-Berechtigungsnachweisen generiert wurde und das die {{site.data.keyword.Bluemix_notm}}-Konto-ID umfasst, unter der der Cluster erstellt wurde. Abhängig von der Art und Weise, in der Sie die Authentifizierung bei {{site.data.keyword.Bluemix_notm}} durchführen, können Sie zwischen den folgenden Optionen zur Automatisierung der Erstellung Ihres {{site.data.keyword.Bluemix_notm}} IAM-Tokens wählen.
 
-Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/swagger-api-json) verwenden, um einen Client zu generieren, der mit der API als Teil Ihrer Automatisierungsarbeit interagieren kann.
+Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json) verwenden, um einen Client zu generieren, der mit der API als Teil Ihrer Automatisierungsarbeit interagieren kann.
 {: tip}
 
 <table summary="ID-Typen und Optionen mit dem Eingabeparameter in Spalte 1 und dem Wert in Spalte 2.">
@@ -430,11 +487,13 @@ Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](
 <tbody>
 <tr>
 <td>Nicht föderierte ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort:</strong> Sie können die Schritte im vorliegenden Abschnitt ausführen, um die Erstellung des {{site.data.keyword.Bluemix_notm}} IAM-Zugriffstokens vollständig zu automatisieren.</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> Alternativ zur Verwendung des {{site.data.keyword.Bluemix_notm}}-Benutzernamens und des zugehörigen Kennworts können Sie <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">auch {{site.data.keyword.Bluemix_notm}}-API-Schlüssel verwenden</a>. {{site.data.keyword.Bluemix_notm}}-API-Schlüssel sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben {{site.data.keyword.Bluemix_notm}} IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren. </li></ul></tr>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> Alternativ zur Verwendung des {{site.data.keyword.Bluemix_notm}}-Benutzernamens und des zugehörigen Kennworts können Sie <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">auch {{site.data.keyword.Bluemix_notm}}-API-Schlüssel verwenden</a>. {{site.data.keyword.Bluemix_notm}}-API-Schlüssel sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben {{site.data.keyword.Bluemix_notm}} IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren.</li>
+<li><strong>{{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort:</strong> Sie können die Schritte im vorliegenden Abschnitt ausführen, um die Erstellung des {{site.data.keyword.Bluemix_notm}} IAM-Zugriffstokens vollständig zu automatisieren.</li></ul>
+</tr>
 <tr>
 <td>Föderierte ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}}-API-Schlüssel</a> sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben {{site.data.keyword.Bluemix_notm}} IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren. </li><li><strong>Einmaligen Kenncode verwenden:</strong> Wenn Sie sich bei {{site.data.keyword.Bluemix_notm}} authentifizieren, indem Sie einen einmaligen Kenncode verwenden, dann können Sie die Erstellung Ihres {{site.data.keyword.Bluemix_notm}} IAM-Tokens nicht vollständig automatisieren, weil das Abrufen des einmaligen Kenncodes einen manuellen Eingriff beim Web-Browser erfordert. Um die Erstellung Ihres {{site.data.keyword.Bluemix_notm}} IAM-Tokens vollständig zu automatisieren, müssen Sie stattdessen einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel erstellen. </ul></td>
+<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}}-API-Schlüssel generieren:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}}-API-Schlüssel</a> sind von dem {{site.data.keyword.Bluemix_notm}}-Konto abhängig, für das sie generiert wurden. Sie können Ihren {{site.data.keyword.Bluemix_notm}}-API-Schlüssel nicht mit einer anderen Konto-ID in demselben {{site.data.keyword.Bluemix_notm}} IAM-Token kombinieren. Um auf Cluster zugreifen zu können, die mit einem anderen Konto als dem Konto erstellt wurden, auf dem der {{site.data.keyword.Bluemix_notm}}-API-Schlüssel basiert, müssen Sie sich bei dem Konto anmelden, um einen neuen API-Schlüssel zu generieren.</li>
+<li><strong>Einmaligen Kenncode verwenden:</strong> Wenn Sie sich bei {{site.data.keyword.Bluemix_notm}} authentifizieren, indem Sie einen einmaligen Kenncode verwenden, dann können Sie die Erstellung Ihres {{site.data.keyword.Bluemix_notm}} IAM-Tokens nicht vollständig automatisieren, weil das Abrufen des einmaligen Kenncodes einen manuellen Eingriff beim Web-Browser erfordert. Um die Erstellung Ihres {{site.data.keyword.Bluemix_notm}} IAM-Tokens vollständig zu automatisieren, müssen Sie stattdessen einen {{site.data.keyword.Bluemix_notm}}-API-Schlüssel erstellen.</ul></td>
 </tr>
 </tbody>
 </table>
@@ -487,7 +546,7 @@ Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](
     </tbody>
     </table>
 
-    Beispielausgabe:
+    Beispielausgabe für die Verwendung eines API-Schlüssels:
 
     ```
     {
@@ -575,8 +634,8 @@ Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](
     <td>Hauptteil für {{site.data.keyword.Bluemix_notm}}-Benutzername und -Kennwort</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username`: Ihr {{site.data.keyword.Bluemix_notm}}-Benutzername.</li>
-    <li>`password`: Ihr {{site.data.keyword.Bluemix_notm}}-Kennwort.</li>
+    <li>`username`: Ihr {{site.data.keyword.Bluemix_notm}}-Benutzername. </li>
+    <li>`password`: Ihr {{site.data.keyword.Bluemix_notm}}-Kennwort. </li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:` </br><strong>Hinweis</strong>: Fügen Sie den Schlüssel <code>uaa_client_secret</code> ohne angegebenen Wert hinzu.</li>
     <li>`bss_account`: Die {{site.data.keyword.Bluemix_notm}}-Konto-ID, die Sie im vorherigen Schritt abgerufen haben.</li></ul>
@@ -708,7 +767,7 @@ Sie können auch die [swagger.json-Datei für APIs ![Symbol für externen Link](
      </tbody>
      </table>
 
-5.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containerlong_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/swagger-api).
+5.  Eine Liste von unterstützten APIs finden Sie in der [{{site.data.keyword.containerlong_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/global/swagger-global-api).
 
 <br />
 
@@ -747,7 +806,7 @@ Für die folgenden Anweisungen ist ein öffentlicher Netzzugriff in Ihrem Cluste
    <td><ul><li>`delegated_refresh_token_expiry: 600`</li>
    <li>`receiver_client_ids: kube`</li>
    <li>`response_type: delegated_refresh_token` </li>
-   <li>`refresh_token`: Ihr {{site.data.keyword.Bluemix_notm}} IAM-Aktualisierungstoken.</li>
+   <li>`refresh_token`: Ihr {{site.data.keyword.Bluemix_notm}} IAM-Aktualisierungstoken. </li>
    <li>`grant_type: refresh_token`</li></ul></td>
    </tr>
    </tbody>
@@ -849,7 +908,7 @@ Für die folgenden Anweisungen ist ein öffentlicher Netzzugriff in Ihrem Cluste
 5. Führen Sie die Kubernetes-API-Anforderungen für Ihren Cluster aus, indem Sie das IAM-ID-Token verwenden, das Sie zuvor abgerufen haben. Listen Sie zum Beispiel die Version von Kubernetes auf, die in Ihrem Cluster ausgeführt wird.
 
    Wenn Sie die SSL-Zertifikatsprüfung in Ihrem API-Testframework aktiviert haben, müssen Sie diese Funktion inaktivieren.
-{: tip}
+   {: tip}
 
    ```
    GET <publicServiceEndpointURL>/version
@@ -967,7 +1026,7 @@ Führen Sie die folgenden Schritte aus, wenn Sie ein {{site.data.keyword.Bluemix
 
     Sie finden Ihr neues {{site.data.keyword.Bluemix_notm}} IAM-Token im Feld **access_token** und das Aktualisierungstoken im Feld **refresh_token** Ihrer API-Ausgabe.
 
-2.  Arbeiten Sie weiter mit der [{{site.data.keyword.containerlong_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/swagger-api), indem Sie das Token aus dem vorherigen Schritt verwenden.
+2.  Arbeiten Sie weiter mit der [{{site.data.keyword.containerlong_notm}}-API-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://containers.cloud.ibm.com/global/swagger-global-api), indem Sie das Token aus dem vorherigen Schritt verwenden.
 
 <br />
 
@@ -975,9 +1034,9 @@ Führen Sie die folgenden Schritte aus, wenn Sie ein {{site.data.keyword.Bluemix
 ## {{site.data.keyword.Bluemix_notm}} IAM-Zugriffstoken aktualisieren und neue Aktualisierungstoken mit der CLI abrufen
 {: #cs_cli_refresh}
 
-Wenn Sie eine neue CLI-Sitzung starten oder wenn in Ihrer aktuellen CLI-Sitzung 24 Stunden abgelaufen sind, müssen Sie den Kontext für Ihren Cluster festlegen, indem Sie `ibmcloud ks cluster-config <cluster_name>` ausführen. Wenn Sie den Kontext für Ihren Cluster mit diesem Befehl festlegen, wird die Datei `kubeconfig` für Ihren Kubernetes-Cluster heruntergeladen. Außerdem werden ein {{site.data.keyword.Bluemix_notm}} IAM-ID-Token (Identity and Access Management) und ein Aktualisierungstoken zur Authentifizierung ausgegeben.
+Wenn Sie eine neue CLI-Sitzung starten oder wenn in Ihrer aktuellen CLI-Sitzung 24 Stunden abgelaufen sind, müssen Sie den Kontext für Ihren Cluster festlegen, indem Sie `ibmcloud ks cluster-config --cluster <clustername>` ausführen. Wenn Sie den Kontext für Ihren Cluster mit diesem Befehl festlegen, wird die Datei `kubeconfig` für Ihren Kubernetes-Cluster heruntergeladen. Außerdem werden ein {{site.data.keyword.Bluemix_notm}} IAM-ID-Token (Identity and Access Management) und ein Aktualisierungstoken zur Authentifizierung ausgegeben.
 {: shortdesc}
 
 **ID-Token**: Alle IAM-ID-Token, die über die CLI ausgegeben werden, laufen nach einer Stunde ab. Wenn das ID-Token abläuft, wird das Aktualisierungstoken an den Token-Provider gesendet, um das ID-Token zu aktualisieren. Ihre Authentifizierung wird aktualisiert und Sie können wieder Befehle in Ihrem Cluster ausführen.
 
-**Aktualisierungstoken**: Aktualisierungstokens laufen alle 30 Tage ab. Wenn das Aktualisierungstoken abgelaufen ist, kann das ID-Token nicht aktualisiert werden, und Sie können keine Befehle mehr in der CLI ausführen. Sie erhalten ein neues Aktualisierungstoken, indem Sie `ibmcloud ks cluster-config <cluster_name>` ausführen. Mit diesem Befehl wird auch Ihr ID-Token aktualisiert.
+**Aktualisierungstoken**: Aktualisierungstokens laufen alle 30 Tage ab. Wenn das Aktualisierungstoken abgelaufen ist, kann das ID-Token nicht aktualisiert werden, und Sie können keine Befehle mehr in der CLI ausführen. Sie erhalten ein neues Aktualisierungstoken, indem Sie `ibmcloud ks cluster-config --cluster <clustername>` ausführen. Mit diesem Befehl wird auch Ihr ID-Token aktualisiert.

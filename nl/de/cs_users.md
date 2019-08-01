@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -62,8 +63,8 @@ Wenn Sie die spezifischen {{site.data.keyword.containerlong_notm}}-Berechtigunge
 <dl>
 <dt><a href="#platform">{{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen und -Servicerollen</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} verwendet Plattform- und Servicerollen von {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), um Benutzern Zugriff auf Cluster zu erteilen.
-<ul><li>**Plattform:** Plattformrollen bestimmen die Aktionen, die Benutzer an der Clusterinfrastruktur über die {{site.data.keyword.containerlong_notm}}-API, die Konsole und die CLI (`ibmcloud ks`) ausführen können. Plattformrollen erteilen keinen Zugriff auf die Kubernetes-API. Sie können die Richtlinien für diese Rollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Plattformrollen berechtigen zwar zur Ausführung von Infrastrukturaktionen am Cluster, jedoch erteilen sie keinen Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer). Der Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) ergibt sich aus dem [API-Schlüssel, der für die Region festgelegt ist](#api_key). Beispiele für Aktionen, zu denen die Plattformrollen berechtigen, sind das Erstellen oder Entfernen von Clustern, das Binden von Services an einen Cluster, das Verwalten von Netz- und Speicherressourcen oder das Hinzufügen zusätzlicher Workerknoten.<br><br>Wenn Sie Benutzern nur Plattformrollen zuweisen, können sie nicht mit Kubernetes-Ressourcen im Cluster interagieren. Sie können trotzdem den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` ausführen. In diesem Fall können Sie die Benutzer durch [angepasste RBAC-Richtlinien](/docs/containers?topic=containers-users#role-binding) berechtigen, ausgewählte Kubernetes-Aktionen auszuführen. Sie könnten dies zum Beispiel tun, wenn Ihre Organisation zurzeit angepasste RBAC-Richtlinien verwendet, um den Kubernetes-Zugriff zu steuern, und plant, auch weiterhin angepasste RBAC-Richtlinien anstelle von Servicerollen zu verwenden.</li>
-<li>**Service**: Servicerollen berechtigen mit den entsprechenden Kubernetes-RBAC-Richtlinien, die einem Benutzer in einem Cluster gegeben werden. Servicerollen erteilen an sich Zugriff auf die Kubernetes-API, das Dashboard und die CLI (`kubectl`). Sie können den Bereich (Scope) der Richtlinie für Servicerollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Darüber hinaus können Sie den Bereich von Servicerollen auf Kubernetes-Namensbereiche festlegen, die sich in allen, einzelnen oder regionsweiten Clustern befinden. Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen. Beispiele für Aktionen, zu denen Servicerollen berechtigen, sind das Erstellen von App-Bereitstellungen, das Hinzufügen von Namensbereichen oder das Einrichten von Konfigurationszuordnungen (Configmaps).<br><br>Wenn Sie Benutzern nur Servicerollen zuweisen, können diese keine der {{site.data.keyword.containerlong_notm}}-Ressourcen anzeigen oder mit diesen interagieren. Damit Benutzer auf den Cluster zugreifen und die Kubernetes-Ressourcen des Clusters verwenden können, müssen Sie den Benutzern den Clusternamen und die ID geben, sodass sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, geben Sie den Benutzern die Plattformrolle **Anzeigeberechtigter**.</li></ul></dd>
+<ul><li>**Plattform:** Plattformrollen bestimmen die Aktionen, die Benutzer an der Clusterinfrastruktur über die {{site.data.keyword.containerlong_notm}}-API, die Konsole und die CLI (`ibmcloud ks`) ausführen können. Plattformrollen erteilen keinen Zugriff auf die Kubernetes-API. Sie können die Richtlinien für diese Rollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Plattformrollen berechtigen zwar zur Ausführung von Infrastrukturaktionen am Cluster, jedoch erteilen sie keinen Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer). Der Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) ergibt sich aus dem [API-Schlüssel, der für die Region festgelegt ist](#api_key). Beispiele für Aktionen, zu denen die Plattformrollen berechtigen, sind das Erstellen oder Entfernen von Clustern, das Binden von Services an einen Cluster, das Verwalten von Netz- und Speicherressourcen oder das Hinzufügen zusätzlicher Workerknoten.<br><br>Wenn Sie Benutzern nur Plattformrollen zuweisen, können sie nicht mit Kubernetes-Ressourcen im Cluster interagieren. Sie können trotzdem den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen. In diesem Fall können Sie die Benutzer durch [angepasste RBAC-Richtlinien](/docs/containers?topic=containers-users#role-binding) berechtigen, ausgewählte Kubernetes-Aktionen auszuführen. Sie könnten dies zum Beispiel tun, wenn Ihre Organisation zurzeit angepasste RBAC-Richtlinien verwendet, um den Kubernetes-Zugriff zu steuern, und plant, auch weiterhin angepasste RBAC-Richtlinien anstelle von Servicerollen zu verwenden.</li>
+<li>**Service**: Servicerollen berechtigen mit den entsprechenden Kubernetes-RBAC-Richtlinien, die einem Benutzer in einem Cluster gegeben werden. Servicerollen erteilen an sich Zugriff auf die Kubernetes-API, das Dashboard und die CLI (`kubectl`). Sie können den Bereich (Scope) der Richtlinie für Servicerollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Darüber hinaus können Sie den Bereich von Servicerollen auf Kubernetes-Namensbereiche festlegen, die sich in allen, einzelnen oder regionsweiten Clustern befinden. Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen. Beispiele für Aktionen, zu denen Servicerollen berechtigen, sind das Erstellen von App-Bereitstellungen, das Hinzufügen von Namensbereichen oder das Einrichten von Konfigurationszuordnungen (Configmaps).<br><br>Wenn Sie Benutzern nur Servicerollen zuweisen, können diese keine der {{site.data.keyword.containerlong_notm}}-Ressourcen anzeigen oder mit diesen interagieren. Damit Benutzer auf den Cluster zugreifen und die Kubernetes-Ressourcen des Clusters verwenden können, müssen Sie den Benutzern den Clusternamen und die ID geben, sodass sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, geben Sie den Benutzern die Plattformrolle **Anzeigeberechtigter**.</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>In Kubernetes ist eine rollenbasierte Zugriffssteuerung (Role-Based Access Control, RBAC) eine Möglichkeit zum Sichern der Ressourcen im Cluster. Von den RBAC-Rollen hängt ab, welche Kubernetes-Aktionen Benutzer für diese Ressourcen ausführen können. Jedem Benutzer, dem eine Servicerolle zugeordnet ist, wird automatisch eine entsprechende RBAC-Clusterrolle zugeordnet. Diese RBAC-Clusterrolle wird abhängig davon, ob Sie den Bereich der Richtlinie für einen Namensbereich definieren, entweder in einem bestimmten Namensbereich oder in allen Namensbereichen angewendet.</br></br>
 Beispiele für Aktionen, zu denen RBAC-Rollen berechtigen, sind das Erstellen von Objekten wie Pods oder das Lesen von Pod-Protokollen.</dd>
@@ -109,12 +110,12 @@ Wenn Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto erstellen, wird automatisc
   <li>Alle Instanzen in einer Region eines Service, zum Beispiel alle Cluster in der Region **Vereinigte Staaten (Süden)** von {{site.data.keyword.containerlong_notm}}.</li>
   <li>Eine einzelne Instanz, zum Beispiel einen Cluster.</li></ul></dd>
 <dt>Kubernetes-Namensbereich</dt>
-  <dd><p>Als Teil von Clusterressourceinstanzen in {{site.data.keyword.Bluemix_notm}} IAM können Sie Benutzern Servicezugriffsrollen für Kubernetes-Namensbereiche in Ihren Clustern zuweisen. Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen.</p>
+  <dd><p>Als Teil von Clusterressourceinstanzen in {{site.data.keyword.Bluemix_notm}} IAM können Sie Benutzern Servicezugriffsrollen für Kubernetes-Namensbereiche in Ihren Clustern zuweisen.</p>
   <p>Wenn Sie Zugriff auf einen Namensbereich erteilen, gilt die Richtlinie für alle aktuellen und zukünftigen Instanzen des Namensbereichs in allen Clustern, die Sie berechtigen. Beispiel: Sie möchten, dass eine Benutzergruppe `dev` Kubernetes-Ressourcen in einem Namensbereich `test` in allen Ihren Clustern in der Region 'Asien-Pazifik (Norden)' bereitstellen kann. Wenn Sie der Zugriffsgruppe `dev` die Servicezugriffsrolle **Schreibberechtigter** für den Kubernetes-Namensbereich 'test' in allen Clustern in der Region 'Asien-Pazifik (Norden)' in der Ressourcengruppe `default` zuweisen, kann die Gruppe `dev` auf den Namensbereich `test` in einem beliebigen Cluster der Region 'Asien-Pazifik (Norden)' in der Ressourcengruppe `default` zugreifen, die zurzeit einen Namensbereich 'test' enthält oder in Zukunft enthalten wird.</p>
-  <p class="important">Sie können die auf einen Namensbereich festgelegten Servicezugriffsrollen nicht auf Ressourcengruppenebene zuordnen oder solche Rollen gleichzeitig mit Plattformrollen zuordnen.</p></dd>
+  <p class="important">Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen.</p></dd>
 <dt>Ressourcengruppe</dt>
   <dd><p>Sie können Ihre Kontoressourcen in anpassbaren Gruppierungen zusammenfassen, sodass Sie einzelnen Benutzern oder Benutzergruppen schnell Zugriff auf mehrere Ressourcen gleichzeitig zuordnen können. Mit Ressourcengruppen können Operatoren und Administratoren Ressourcen filtern, um ihre aktuelle Verwendung anzuzeigen, Fehler zu beheben und Teams zu verwalten.</p>
-  <p class="important">Ein Cluster kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich. Wenn Sie einen Cluster in der falschen Ressourcengruppe erstellen, müssen Sie den Cluster löschen und in der richtigen Ressourcengruppe erneut erstellen. Wenn Sie außerdem den [Befehl](/docs/containers-cli-plugin?topic=containers-cli-plugin-cs_cli_reference#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` verwenden müssen, um eine [Integration mit einem {{site.data.keyword.Bluemix_notm}}-Service durchzuführen](/docs/containers?topic=containers-service-binding#bind-services), muss sich dieser Service in derselben Ressourcengruppe befinden wie der Cluster. Services, die keine Ressourcengruppen verwenden, wie {{site.data.keyword.registrylong_notm}}, oder die keine Servicebindung benötigen, wie {{site.data.keyword.la_full_notm}}, funktionieren auch dann, wenn sich der Cluster in einer anderen Ressourcengruppe befindet.</p>
+  <p class="important">Ein Cluster kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich. Wenn Sie einen Cluster in der falschen Ressourcengruppe erstellen, müssen Sie den Cluster löschen und in der richtigen Ressourcengruppe erneut erstellen. Wenn Sie außerdem den [Befehl](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` verwenden müssen, um eine [Integration mit einem {{site.data.keyword.Bluemix_notm}}-Service durchzuführen](/docs/containers?topic=containers-service-binding#bind-services), muss sich dieser Service in derselben Ressourcengruppe befinden wie der Cluster. Services, die keine Ressourcengruppen verwenden, wie {{site.data.keyword.registrylong_notm}}, oder die keine Servicebindung benötigen, wie {{site.data.keyword.la_full_notm}}, funktionieren auch dann, wenn sich der Cluster in einer anderen Ressourcengruppe befindet.</p>
   <p>Wenn Sie beabsichtigen, [{{site.data.keyword.monitoringlong_notm}} für Metriken](/docs/containers?topic=containers-health#view_metrics) zu verwenden, achten Sie darauf, für jeden Cluster einen Namen festzulegen, der in allen Ressourcengruppen und Regionen des Kontos eindeutig ist, um Konflikte bei Metriknamen zu vermeiden. Sie können einen Cluster nicht umbenennen.</p>
   <p>Einem Benutzer können Sie eine Zugriffsrolle für eine Ressourcengruppe für die folgenden Szenarios zuordnen. Beachten Sie, dass Sie im Gegensatz zu Ressourceninstanzen nicht Zugriff auf eine einzelne Instanz innerhalb einer Ressourcengruppe erteilen können.</p>
   <ul><li>Alle {{site.data.keyword.Bluemix_notm}} IAM-Services in der Ressourcengruppe, einschließlich aller Cluster in {{site.data.keyword.containerlong_notm}} und Images in {{site.data.keyword.registrylong_notm}}.</li>
@@ -151,7 +152,7 @@ Weitere Informationen zum Konfigurieren des Kontos und der Ressourcen finden Sie
 ## API-Schlüssel für Aktivierung des Zugriffs auf Infrastrukturportfolio konfigurieren
 {: #api_key}
 
-Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie sicherstellen, dass Ihr {{site.data.keyword.Bluemix_notm}}-Konto korrekt für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) konfiguriert wurde.
+Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie sicherstellen, dass Ihr {{site.data.keyword.Bluemix_notm}}-Konto in allen Ressourcengruppen und Regionen, in denen sich Ihre Cluster befinden, korrekt für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) konfiguriert wurde.
 {: shortdesc}
 
 **Meiste Fälle:** Das nutzungsabhängige {{site.data.keyword.Bluemix_notm}}-Konto verfügt bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer). Um für {{site.data.keyword.containerlong_notm}} Zugriff auf das Portfolio zu konfigurieren, muss der **Kontoeigner** den API-Schlüssel für die Region und die Ressourcengruppe festlegen.
@@ -162,25 +163,25 @@ Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie s
     ```
     {: pre}
 
-2. Geben Sie die Ressourcengruppe als Ziel an, in der Sie den API-Schlüssel festlegen möchten. Wenn Sie keine Ressourcengruppe als Ziel angeben, wird der API-Schlüssel für die Standardressourcengruppe festgelegt.
+2. Geben Sie die Ressourcengruppe als Ziel an, in der Sie den API-Schlüssel festlegen möchten. Wenn Sie keine Ressourcengruppe als Ziel angeben, wird der API-Schlüssel für die Standardressourcengruppe festgelegt. Zum Auflisten der verfügbaren Ressourcengruppen führen Sie den Befehl `ibmcloud resource groups` aus.
     ```
     ibmcloud target -g <ressourcengruppenname>
     ```
     {:pre}
 
-4. Definieren Sie den API-Schlüssel für die Region und die Ressourcengruppe.
+3. Definieren Sie den API-Schlüssel für die Region und die Ressourcengruppe.
     ```
-    ibmcloud ks api-key-reset
+    ibmcloud ks api-key-reset --region <region>
     ```
     {: pre}    
 
-5. Überprüfen Sie, dass der API-Schlüssel festgelegt wurde.
+4. Überprüfen Sie, dass der API-Schlüssel festgelegt wurde.
     ```
-    ibmcloud ks api-key-info <clustername_oder_-id>
+    ibmcloud ks api-key-info --cluster <clustername_oder_-id>
     ```
     {: pre}
 
-6. Wiederholen Sie die Schritte für jede Region und Ressourcengruppe, in der Sie Cluster erstellen möchten.
+5. Wiederholen Sie die Schritte für jede Region und Ressourcengruppe, in der Sie Cluster erstellen möchten.
 
 **Alternative Optionen und weitere Informationen:** Informationen zu weiteren Möglichkeiten für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) finden Sie in den folgenden Abschnitten.
 * Wenn Sie sich nicht sicher sind, ob Ihr Konto bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verfügt, lesen Sie den Abschnitt [Informationen zum Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](#understand_infra).
@@ -289,14 +290,14 @@ Um sicherzustellen, dass alle infrastrukturbezogenen Aktionen im Cluster erfolgr
 Wenn Sie über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto verfügen, haben Sie standardmäßig Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer). Der API-Schlüssel wird verwendet, um Infrastrukturressourcen aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, zum Beispiel neue Workerknoten oder VLANs.
 {: shortdec}
 
-Sie können den aktuellen API-Schlüsseleigner finden, indem Sie [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_info) ausführen. Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies mit dem Befehl [`ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cs_cli_reference#cs_api_key_reset) tun. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
+Sie können den aktuellen API-Schlüsseleigner finden, indem Sie [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info) ausführen. Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies mit dem Befehl [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) tun. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
 
 Stellen Sie sicher, dass Sie den Schlüssel zurücksetzen möchten und die Auswirkungen auf Ihre App verstehen. Der Schlüssel wird an mehreren unterschiedlichen Stellen verwendet und kann zu unterbrechenden Änderungen führen, wenn er unnötigerweise geändert wird.
 {: note}
 
 **Vorbereitende Schritte**:
 - Wenn der Kontoeigner keinen API-Schlüssel festlegt, [stellen Sie sicher, dass der Benutzer, der den API-Schlüssel festlegt, über die passenden Berechtigungen verfügt](#owner_permissions).
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festzulegen:
 
@@ -309,7 +310,7 @@ Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfoli
         {:pre}
     4.  Legen Sie den API-Schlüssel für die Region fest.
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}    
     5.  Überprüfen Sie, dass der API-Schlüssel festgelegt wurde.
@@ -323,15 +324,15 @@ Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfoli
 ### Auf anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) zugreifen
 {: #credentials}
 
-Anstatt das verknüpfte Standardkonto der IBM Cloud-Infrastruktur (SoftLayer) zu verwenden, um Infrastruktur für Cluster in einer Region zu bestellen, möchten Sie vielleicht ein anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) verwenden, das über das Sie bereits verfügen. Sie können dieses Infrastrukturkonto mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verbinden, indem Sie den Befehl [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_set) verwenden. Die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) werden anstatt der Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet, die für die Region gespeichert sind.
+Anstatt das verknüpfte Standardkonto der IBM Cloud-Infrastruktur (SoftLayer) zu verwenden, um Infrastruktur für Cluster in einer Region zu bestellen, möchten Sie vielleicht ein anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) verwenden, das über das Sie bereits verfügen. Sie können dieses Infrastrukturkonto mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verbinden, indem Sie den Befehl [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) verwenden. Die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) werden anstatt der Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet, die für die Region gespeichert sind.
 {: shortdesc}
 
-Die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer), die unter Verwendung des Befehls `ibmcloud ks credential-set` festgelegt wurden, bleiben nach dem Ende der Sitzung bestehen. Wenn Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) entfernen, die manuell mit dem Befehl [`ibmcloud ks credential-unset`](/docs/containers?topic=containers-cs_cli_reference#cs_credentials_unset) festgelegt wurden, werden die Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet. Eine solche Änderung der Berechtigungsnachweise für Infrastrukturkonten kann jedoch zu [verwaisten Clustern](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned) führen.
+Die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer), die unter Verwendung des Befehls `ibmcloud ks credential-set` festgelegt wurden, bleiben nach dem Ende der Sitzung bestehen. Wenn Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) entfernen, die manuell mit dem Befehl [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) festgelegt wurden, werden die Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet. Eine solche Änderung der Berechtigungsnachweise für Infrastrukturkonten kann jedoch zu [verwaisten Clustern](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned) führen.
 {: important}
 
 **Vorbereitende Schritte**:
 - Wenn Sie nicht die Berechtigungsnachweise des Kontoeigners verwenden, [stellen Sie sicher, dass der Benutzer, dessen Berechtigungsnachweise Sie für den API-Schlüssel festlegen möchten, über die passenden Berechtigungen verfügt](#owner_permissions).
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um die Berechtigungsnachweise für das Infrastrukturkonto für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festzulegen:
 
@@ -347,13 +348,13 @@ Gehen Sie wie folgt vor, um die Berechtigungsnachweise für das Infrastrukturkon
 
     2.  Legen Sie die zu verwendenden Berechtigungsnachweise für die Infrastruktur-API fest.
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastruktur-api-benutzername> --infrastructure-api-key <infrastruktur-api-authentifizierungsschlüssel>
+        ibmcloud ks credential-set --infrastructure-username <infrastruktur-api-benutzername> --infrastructure-api-key <infrastruktur-API-authentifizierungsschlüssel> --region <region>
         ```
         {: pre}
 
     3. Stellen Sie sicher, dass die ordnungsgemäßen Berechtigungsnachweise festgelegt wurden.
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         Beispielausgabe:
         ```
@@ -416,7 +417,7 @@ Bevor Sie damit beginnen, vergewissern Sie sich, dass Ihnen die Plattformrolle *
        * **Plattformzugriffsrolle:** Erteilt Zugriff auf {{site.data.keyword.containerlong_notm}}, sodass Benutzer Infrastrukturressourcen wie Cluster, Workerknoten, Worker-Pools, Ingress-Lastausgleichsfunktionen für Anwendungen (ALBs) und Speicher verwalten können. Eine Liste der unterstützten Aktionen pro Rolle finden Sie auf der Seite der [Referenzinformationen zu Plattformrollen](/docs/containers?topic=containers-access_reference#iam_platform).
        * **Servicezugriffsrolle:** Erteilt Zugriff auf Kubernetes als Zugriff aus einem Cluster heraus, sodass Benutzer Kubernetes-Ressourcen wie Pods, Bereitstellungen, Services und Namensbereiche verwalten können. Eine Liste der unterstützten Aktionen pro Rolle finden Sie auf der Seite der [Referenzinformationen zu Servicerollen](/docs/containers?topic=containers-access_reference#service).<p class="note">Sie können den Bereich einer Servicezugriffsrolle nicht auf einen Namensbereich festlegen, wenn Sie die Rolle auf der Ressourcengruppenebene zuweisen. Weisen Sie den Zugriff stattdessen auf eine Ressourceninstanz zu. Weisen Sie auch keine Plattformrolle zur selben Zeit wie eine Servicerolle zu.</p>
     7. Klicken Sie auf **Zuweisen**.
-    8. **Optional:** Wenn Sie Benutzern nur eine Servicerolle zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, wiederholen Sie diese Schritte, um den Benutzern die Plattformrolle **Anzeigeberechtigter** zu geben.
+    8. **Optional:** Wenn Sie Benutzern nur eine Servicerolle zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, wiederholen Sie diese Schritte, um den Benutzern die Plattformrolle **Anzeigeberechtigter** zu geben.
   * **Für Ressourceninstanzen innerhalb von Ressourcengruppen oder über Ressourcengruppen hinweg:**
     1. Klicken Sie auf **Zugriff auf Ressourcen zuweisen**.
     2. Wählen Sie in der Liste **Services** den Eintrag **{{site.data.keyword.containershort_notm}}** aus.
@@ -429,7 +430,7 @@ Bevor Sie damit beginnen, vergewissern Sie sich, dass Ihnen die Plattformrolle *
           * Wenn Sie den Bereich der Richtlinie auf einen Namensbereich festgelegt haben, können Sie nicht gleichzeitig eine Plattformrolle zuweisen. Wenn der Benutzer außerdem auch eine Plattformrolle haben soll, wiederholen Sie diese Schritte, lassen jedoch das Namensbereichsfeld leer und weisen nur eine Plattformrolle zu (weisen Sie nicht wieder eine Servicezugriffsrolle zu).
        * **Servicezugriffsrolle:** Erteilt Zugriff auf Kubernetes als Zugriff aus einem Cluster heraus, sodass Benutzer Kubernetes-Ressourcen wie Pods, Bereitstellungen, Services und Namensbereiche verwalten können. Eine Liste der unterstützten Aktionen pro Rolle finden Sie auf der Seite der [Referenzinformationen zu Servicerollen](/docs/containers?topic=containers-access_reference#service).
     7. Klicken Sie auf **Zuweisen**.
-    8. **Optional:** Wenn Sie Benutzern nur Servicerollen zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, wiederholen Sie diese Schritte, um den Benutzern die Plattformrolle **Anzeigeberechtigter** zu geben.
+    8. **Optional:** Wenn Sie Benutzern nur Servicerollen zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, wiederholen Sie diese Schritte, um den Benutzern die Plattformrolle **Anzeigeberechtigter** zu geben.
 
 4.  Optional: Wenn die Benutzer in der Lage sein sollen, mit Clustern in einer anderen Ressourcengruppe als der Standardressourcengruppe zu arbeiten, benötigen diese Benutzer zusätzlichen Zugriff auf die Ressourcengruppen, in denen sich die Cluster befinden. Sie können diesen Benutzern mindestens die Plattformrolle **Anzeigeberechtigter** für Ressourcengruppen zuordnen, wenn Sie dies zuvor nicht getan haben.
     1.  Klicken Sie auf **Zugriff in einer Ressourcengruppe zuweisen**.
@@ -449,7 +450,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
 
 - Vergewissern Sie sich, dass Ihnen die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle `cluster-admin` (Clusteradministrator) für das {{site.data.keyword.Bluemix_notm}}-Konto zugeordnet ist, in dem Sie arbeiten.
 - Stellen Sie sicher, dass der Benutzer dem Konto hinzugefügt wurde. Wenn der Benutzer nicht hinzugefügt wurde, laden Sie den Benutzer in Ihr Konto ein, indem Sie `ibmcloud account user-invite<user@email.com>` ausführen.
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Entscheiden Sie, ob Rollen für den [Plattform- oder Servicezugriff](/docs/containers?topic=containers-users#access_policies) zugewiesen werden sollen. Die CLI-Schritte variieren abhängig von der Zugriffsrolle, die Sie zuweisen möchten:
   * [Plattformrollen über die CLI zuweisen](#add_users_cli_platform)
   * [Servicerollen über die CLI zuweisen](#add_users_cli_service)
@@ -517,7 +518,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
        ```
        {: pre}
 
-2. Wenn die Benutzer in der Lage sein sollen, mit Clustern in einer anderen Ressourcengruppe als der Standardressourcengruppe zu arbeiten, benötigen diese Benutzer zusätzlichen Zugriff auf die Ressourcengruppen, in denen sich die Cluster befinden. Sie können diesen Benutzern mindestens die Rolle **Viewer** (Anzeigeberechtigter) für Ressourcengruppen zuordnen. Zum Suchen der Ressourcengruppen-ID können Sie `ibmcloud resource group <ressourcengruppenname> --id` ausführen.
+2. Wenn die Benutzer in der Lage sein sollen, mit Clustern in einer anderen Ressourcengruppe als der Standardressourcengruppe zu arbeiten, benötigen diese Benutzer zusätzlichen Zugriff auf die Ressourcengruppen, in denen sich die Cluster befinden. Sie können diesen Benutzern mindestens die Rolle **Anzeigeberechtigter** für Ressourcengruppen zuordnen. Zum Suchen der Ressourcengruppen-ID können Sie `ibmcloud resource group <ressourcengruppenname> --id` ausführen.
     *   Für einzelne Benutzer:
         ```
         ibmcloud iam user-policy-create <user@email.com> --resource-type resource-group --resource <resource_group_ID> --roles Viewer
@@ -652,10 +653,10 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
         ```
         {: pre}
 
-4.  Wenn Sie Benutzern nur Servicerollen zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die Konsole des {{site.data.keyword.containerlong_notm}}-Clusters zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLII auflisten können sollen, [geben Sie den Benutzern die Plattformrolle **Anzeigeberechtigter**](#add_users_cli_platform).
+4.  Wenn Sie Benutzern nur Servicerollen zugeordnet haben, müssen Sie den Benutzern den Clusternamen und die Cluster-ID geben, damit sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) oder andere Interaktionen mit der Kubernetes-API durchführen können. Wenn diese Benutzer weiterhin auf die Konsole des {{site.data.keyword.containerlong_notm}}-Clusters zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLII auflisten können sollen, [geben Sie den Benutzern die Plattformrolle **Anzeigeberechtigter**](#add_users_cli_platform).
 
 5.  Der Benutzer, dem der Zugriff erteilt wurde, muss die Clusterkonfiguration aktualisieren, um die Änderungen in Kraft zu setzen. Benutzer werden erst dann zu den Rollenbindungen hinzugefügt, wenn sie die Clusterkonfiguration einzeln aktualisieren, auch dann, wenn Sie mehrere Benutzer gleichzeitig hinzugefügt haben. Benutzer werden einer Rollenbindung auch dann nicht hinzugefügt, wenn sie über eine höhere Berechtigung verfügen. Wenn Benutzer beispielsweise über eine Clusterrolle verfügen und in einer Cluster-Rollenbindung enthalten sind, werden sie nicht zu jeder einzelnen Namensbereichs-Rollenbindung hinzugefügt.
-```
+    ```
     ibmcloud ks cluster-config --cluster <clustername_oder_-id>
     ```
     {: pre}
@@ -683,7 +684,8 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
         ```
         {: pre}
 
-    **Beispielausgabe**: Sie weisen dem Benutzer `user@email.com` und der Zugriffsgruppe `team1` die Servicerolle **Reader** zu und führen dann den Befehl `kubectl get rolebinding ibm-view -o yaml -n default` aus.
+    **Beispielausgabe**: Sie erhalten die folgende Beispielausgabe, wenn Sie dem Benutzer `user@email.com` und der Zugriffsgruppe `team1` die Servicerolle **Reader** (Leseberechtigter) zuweisen und anschließend den Befehl `kubectl get rolebinding ibm-view -o yaml -n default` ausführen.
+    
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -751,7 +753,7 @@ Die Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator
 
 Sie können einzelnen Benutzern, Benutzergruppen (in Clustern, in denen Kubernetes Version 1.11 oder höher ausgeführt wird) oder Servicekonten angepasste RBAC-Rollen und Clusterrollen zuordnen. Wenn für eine Gruppe eine Bindung erstellt wird, wirkt sich dies auf alle Benutzer aus, die dieser Gruppe hinzugefügt oder die aus dieser Gruppe entfernt werden. Wenn Sie Benutzer zu einer Gruppe hinzufügen, erhalten diese zusätzlich zu den individuellen Zugriffsberechtigungen, die Sie ihnen gewähren, die Zugriffsberechtigungen der Gruppe. Werden sie entfernt, wird ihr Zugriff widerrufen. Beachten Sie, dass Sie Zugriffsgruppen keine Servicekonten hinzufügen können.
 
-Wenn Sie Zugriff auf einen Prozess (zum Beispiel eine Continuous Delivery-Toolchain), der in Pods ausgeführt wird, zuweisen möchten, können Sie [Kubernetes-`Servicekonten` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) verwenden. Wenn Sie ein Lernprogramm durcharbeiten möchten, in dem die Einrichtung von Servicekonten für Travis und Jenkins und die Zuordnung von angepassten RBAC-Rollen zu den Servicekonten demonstriert wird, lesen Sie den Blogbeitrag zu [Kubernetes-Servicekonten (`ServiceAccounts)` zur Verwendung in automatisierten Systemen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
+Wenn Sie Zugriff auf einen Prozess (zum Beispiel eine Continuous Delivery-Toolchain), der in Pods ausgeführt wird, zuweisen möchten, können Sie [Kubernetes-`Servicekonten` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) verwenden. Wenn Sie ein Lernprogramm durcharbeiten möchten, in dem die Einrichtung von Servicekonten für Travis und Jenkins und die Zuordnung von angepassten RBAC-Rollen zu den Servicekonten demonstriert wird, lesen Sie den Blogbeitrag zu [Kubernetes Service-Konten (`ServiceAccounts)` zur Verwendung in automatisierten Systemen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
 
 Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) ändern. Angepasste RBAC-Rollen sind zusätzliche Rollen und ändern oder überschreiben keine der RBAC-Rollen, die Sie vielleicht durch {{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrollen zugeordnet haben.
 {: important}
@@ -906,7 +908,7 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
-              <td><ul><li>Für `User`: Hängen Sie die E-Mail-Adresse des einzelnen Benutzers an die folgenden URLs an.<ul><li>Für Cluster, auf denen Kubernetes 1.11 oder eine aktuellere Version ausgeführt wird: <code>IAM#user@email.com</code></li><li>Für Cluster, auf denen Kubernetes 1.10 oder eine ältere Version ausgeführt wird: <code>https://iam.ng.bluemix.net/kubernetes#user@email.com</code></li></ul></li>
+              <td><ul><li>Für `User`: Hängen Sie die E-Mail-Adresse des einzelnen Benutzers wie folgt an `IAM#` an: <code>IAM#user@email.com</code>.</li>
               <li>Für `Group`: Für Cluster, in denen Kubernetes 1.11 oder höher ausgeführt wird, geben Sie den Namen der [{{site.data.keyword.Bluemix_notm}}IAM-Zugriffsgruppe](/docs/iam?topic=iam-groups#groups) in Ihrem Konto an.</li>
               <li>Für `ServiceAccount`: Geben Sie den Namen des Servicekontos an.</li></ul></td>
             </tr>
@@ -969,6 +971,85 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
 
 Fahren Sie jetzt, nachdem Sie eine angepasste Kubernetes-RBAC-Rolle oder -Clusterrolle erstellt und gebunden haben, mit den Benutzern fort. Bitten Sie sie, eine Aktion auszuführen, für deren Ausführung sie die Berechtigung aufgrund Ihrer Rolle haben. Zum Beispiel das Löschen eines Pods.
 
+### Vorhandene Berechtigungen durch Aggregieren von Clusterrollen erweitern 
+{: #rbac_aggregate}
+
+Sie können die vorhandenen Berechtigungen Ihrer Benutzer erweitern, indem Sie Clusterrollen mit anderen Clusterrollen aggregieren oder kombinieren. Wenn Sie einem Benutzer eine {{site.data.keyword.Bluemix_notm}}-Servicerolle zuweisen, wird der Benutzer einer [entsprechenden Kubernetes-RBAC-Clusterrolle](/docs/containers?topic=containers-access_reference#service) hinzugefügt. Möglicherweise möchten Sie jedoch bestimmten Benutzern die Ausführung weiterer Operationen erlauben.
+{: shortdesc}
+
+Beispiel: Ein Benutzer mit der namensbereichsorientierten Clusterrolle `admin` kann den Befehl `kubectl top pods` nicht verwenden, um Podmetriken für alle Pods im Namensbereich anzuzeigen. Sie können eine Clusterrolle aggregieren, sodass Benutzer in der Clusterrolle `admin` berechtigt sind, den Befehl `top pods` auszuführen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+
+**Was sind Beispiele für gängige Operationen, für die ich die Berechtigungen für eine Standardclusterrolle möglicherweise erweitern möchte?**<br>
+Lesen Sie den Abschnitt zu den [Operationen, die für die einzelnen RBAC-Standardclusterrollen zulässig sind](/docs/containers?topic=containers-access_reference#rbac_ref), um eine gute Vorstellung davon zu erhalten, was Ihre Benutzer tun können, und vergleichen Sie die zulässigen Operationen mit den Operationen, die Ihre Benutzer ausführen können sollen. 
+
+Wenn Ihre Benutzer in derselben Clusterrolle Fehler wie den folgenden für denselben Operationstyp erhalten, können Sie die Clusterrolle erweitern, um diese Operation einzuschließen.
+
+```
+Error from server (Forbidden): pods.metrics.k8s.io is forbidden: User "IAM#myname@example.com" cannot list resource "pods" in API group "metrics.k8s.io" in the namespace "mynamespace"
+```
+{: screen}
+
+**Gehen Sie wie folgt vor, um Clusterrollen zu aggregieren:**:
+
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Erstellen Sie eine YAML-Datei für die Clusterrolle. Geben Sie im Abschnitt `labels` die vorhandene Clusterrolle an, für die Sie Berechtigungen aggregieren möchten. Im folgenden Beispiel wird die vordefinierte Clusterrolle `admin` erweitert, damit Benutzer `kubectl top pods` ausführen können. Weitere Beispiel enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: view-pod-metrics
+      labels:
+        rbac.authorization.k8s.io/aggregate-to-admin: "true"
+    rules:
+    - apiGroups:
+      - "metrics.k8s.io"
+      resources:
+      - pods
+      verbs:
+      - list
+    ```
+    {: codeblock}
+    
+    <table>
+    <caption>Erklärung der Komponenten der YAML-Datei</caption>
+      <thead>
+        <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten der YAML-Datei</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>metadata.name</code></td>
+          <td>Geben Sie einen Namen für die Clusterrolle an. Verwenden Sie die vordefinierten Clusterrollennamen **nicht**: `view`, `edit`, `admin` und `cluster-admin`.</td>
+        </tr>
+        <tr>
+          <td><code>metadata.labels</code></td>
+          <td>Fügen Sie eine Bezeichnung, die mit der Clusterrolle übereinstimmt, die Sie aggregieren möchten, im Format `rbac.authorization.k8s.io/aggregate-to-<clusterrolle>: "true"` hinzu. Die Bezeichnungen für die vordefinierten Clusterrollen lauten wie folgt.<ul>
+          <li>IAM-Servicerolle **Manager**, an einem Namensbereich orientiert: `rbac.authorization.k8s.io/aggregate-to-admin: "true"`</li>
+          <li>IAM-Servicerolle **Writer** (Schreibberechtigter): `rbac.authorization.k8s.io/aggregate-to-edit: "true"`</li>
+          <li>IAM-Servicerolle **Reader** (Leseberechtigter): `rbac.authorization.k8s.io/aggregate-to-view: "true"`</li></ul></td>
+        </tr>
+        <tr>
+          <td><code>rules.apiGroups</code></td>
+          <td>Geben Sie die Kubernetes-[API-Gruppen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/using-api/api-overview/#api-groups) an, mit denen Benutzer interagieren können sollen, zum Beispiel `"apps"`, `"batch"` oder `"extensions"`. Für den Zugriff auf die Gruppe der API-Kerndefinitionen im REST-Pfad `api/v1` lassen Sie die Angabe für die Gruppe leer `[""]`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.resources</code></td>
+          <td>Geben Sie die Kubernetes-[Ressourcentypen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/cheatsheet/) an, auf die Sie Zugriff erteilen möchten, zum Beispiel `"daemonsets"`, `"deployments"`, `"events"` oder `"ingresses"`.</td>
+        </tr>
+        <tr>
+          <td><code>rules.verbs</code></td>
+          <td>Geben Sie die Typen der [Aktionen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubectl.docs.kubernetes.io/) an, die Benutzer ausführen können sollen, zum Beispiel `"get"`, `"list"`, `"describe"`, `"create"` oder `"delete"`.</td>
+        </tr>
+      </tbody>
+    </table>
+2.  Erstellen Sie die Clusterrolle in Ihrem Cluster. Alle Benutzer mit einer Rollenbindung an die Clusterrolle `admin` haben jetzt die zusätzlichen Berechtigungen aus der Clusterrolle `view-pod-metrics`.
+    ```
+    kubectl apply -f <clusterrollendatei.yaml>
+    ```
+    {: pre}
+3.  Wenden Sie sich an Benutzer mit der Clusterrolle `admin`. Bitte Sie diese, [ihre Clusterkonfiguration zu aktualisieren](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) und die Aktion, zu testen, z. B. `kubectl top pods`.
+
+
 <br />
 
 
@@ -980,8 +1061,9 @@ Wenn Sie dem Administrator, der den API-Schlüssel festlegt oder dessen Infrastr
 
 Es kann vorkommen, dass Compliance-, Sicherheits- oder Abrechnungsgründe dagegen sprechen, die Infrastrukturrolle **Superuser** dem Benutzer zuzuweisen, der den API-Schlüssel festlegt oder dessen Berechtigungsnachweise mit dem Befehl `ibmcloud ks credential-set` festgelegt werden. Wenn dieser Benutzer jedoch nicht über die Rolle **Superuser** verfügt, können infrastrukturbezogene Aktionen, wie zum Beispiel das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen. Anstatt {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen zu verwenden, um den Infrastrukturzugriff der Benutzer zu steuern, müssen Sie für die Benutzer bestimmte Berechtigungen für die IBM Cloud-Infrastruktur (SoftLayer) festlegen.
 
-Wenn Sie Mehrzonencluster haben, muss der Eigner Ihres Kontos der IBM Cloud-Infrastruktur (SoftLayer) das VLAN-Spanning aktivieren, damit Knoten in unterschiedlichen Zonen innerhalb des Clusters miteinander kommunizieren können. Der Kontoeigner kann einem Benutzer auch die Berechtigung **Netz > VLAN-Spanning für das Netz verwalten** zuweisen, damit der Benutzer das VLAN-Spanning aktivieren kann. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-{: tip}
+Wenn Ihr Konto beispielsweise nicht VFR-fähig ist, muss der Eigner Ihres Kontos für die IBM Cloud-Infrastruktur (SoftLayer) das VLAN-Spanning aktivieren. Der Kontoeigner kann einem Benutzer auch die Berechtigung **Netz > VLAN-Spanning für das Netz verwalten** zuweisen, damit der Benutzer das VLAN-Spanning aktivieren kann. Weitere Informationen finden Sie unter [VLAN-Spanning für VLAN-übergreifende Kommunikation](/docs/containers?topic=containers-subnets#basics_segmentation).
+
+<p class="tip">Sie haben die Infrastrukturberechtigungsnachweise bereits mit dem Befehl `ibmcloud ks credential-set` festgelegt? Sie können prüfen, ob den Berechtigungsnachweisen vorgeschlagene oder erforderliche Infrastrukturberechtigungen fehlen, indem Sie den [Befehl `ibmcloud ks infra-permissions-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) ausführen. Wenn vorgeschlagene oder erforderliche Berechtigungen in der Ausgabe fehlen, können Sie die Schritte in diesem Abschnitt verwenden, um den erforderlichen Zugriff zuzuordnen.</p>
 
 Stellen Sie zunächst sicher, dass Sie der Kontoeigner sind oder über die Zugriffsberechtigung **Superuser** sowie Zugriff auf alle Geräte verfügen. Sie können nicht einen Benutzerzugriff erteilen, über den Sie selbst nicht verfügen.
 
@@ -1002,11 +1084,18 @@ Stellen Sie zunächst sicher, dass Sie der Kontoeigner sind oder über die Zugri
 
 6.  Wählen Sie auf der Registerkarte **Gerät** die Geräte aus, auf die Zugriff erteilt werden soll.
 
-    * In der Gruppe **Typ auswählen** können Sie Zugriff auf alle Bare-Metal-Server, dedizierten Server und virtuellen Server erteilten, sodass Benutzer mit allen [Maschinentypen für Workerknoten](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node) arbeiten können.
+    * In der Gruppe **Typ auswählen** können Sie Zugriff auf alle Bare-Metal-Server, dedizierten Server und virtuellen Server erteilten, sodass Benutzer mit allen [Maschinentypen für Workerknoten](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) arbeiten können.
     * In der Gruppe **Späteren Zugriff aktivieren** können Sie dem Benutzer Zugriff auf alle zukünftigen Bare-Metal-Server, dedizierten Server und virtuellen Server erteilen.
     * Stellen Sie in der Tabelle der Geräte sicher, dass die entsprechenden Geräte ausgewählt sind.
 
 7. Klicken Sie zum Speichern Ihrer Änderungen auf **Festlegen**.
+
+8. **Wichtig**: Wenn Sie Berechtigungen zuweisen, sodass ein Benutzer Cluster und Workerknoten verwalten kann, müssen Sie dem Benutzer Zugriff für die Arbeit mit Supportfällen zuweisen.
+  1. Klicken Sie auf die Registerkarte **Zugriffsrichtlinien** und anschließend auf **Zugriff zuweisen**.
+  2. Klicken Sie auf die Karte **Zugriff auf Kontoverwaltungsservices zuweisen** .
+  3. Wählen Sie **Support Center** aus.
+  4. Wählen Sie **Administrator** aus, um dem Benutzer das Anzeigen, Hinzufügen und Bearbeiten von Supportfällen zu ermöglichen.
+  5. Klicken Sie auf **Zuweisen**.
 
 Laden Sie gerade Berechtigungen herunter? Die Ausführung dieser Aktion kann einige Minuten in Anspruch nehmen.
 {: tip}
@@ -1037,7 +1126,7 @@ Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Ben
         {: pre}
     * Wenn Sie [Infrastrukturberechtigungsnachweise für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](#credentials) festlegen:
         ```
-        ibmcloud ks credential-get
+        ibmcloud ks credential-get --region <region>
         ```
         {: pre}
 
@@ -1048,12 +1137,12 @@ Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Ben
 
     * Gehen Sie wie folgt vor, um den API-Schlüssel zurückzusetzen:
         ```
-        ibmcloud ks api-key-reset
+        ibmcloud ks api-key-reset --region <region>
         ```
         {: pre}
     * Gehen Sie wie folgt vor, um die Infrastrukturberechtigungsnachweise zurückzusetzen:
         ```
-        ibmcloud ks credential-set --infrastructure-username <infrastruktur-api-benutzername> --infrastructure-api-key <infrastruktur-api-authentifizierungsschlüssel>
+        ibmcloud ks credential-set --infrastructure-username <infrastruktur-api-benutzername> --infrastructure-api-key <infrastruktur-API-authentifizierungsschlüssel> --region <region>
         ```
         {: pre}
 

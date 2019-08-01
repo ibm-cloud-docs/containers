@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,32 +21,456 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Änderungsprotokoll der Version
+# Versionsänderungsprotokoll
 {: #changelog}
 
 Zeigen Sie Informationen zu Versionsänderungen für Hauptversions-, Nebenversions- und Patchaktualisierungen an, die für Ihre {{site.data.keyword.containerlong}}-Kubernetes-Cluster verfügbar sind. Diese Änderungen umfassen Updates für Kubernetes und {{site.data.keyword.Bluemix_notm}} Provider-Komponenten.
 {:shortdesc}
 
+Sofern in den Änderungsprotokollen nicht anders angegeben, aktiviert die {{site.data.keyword.containerlong_notm}}-Providerversion Betaversionen der Kubernetes-APIs und -Funktionen. Kubernetes-Alpha-Funktionen, für die Änderungen vorbehalten sind, sind inaktiviert.
+
 Weitere Informationen zu Hauptversionen, Nebenversionen und Patchversionen sowie Vorbereitungsaktionen zwischen Nebenversionen finden Sie unter [Kubernetes-Versionen](/docs/containers?topic=containers-cs_versions).
 {: tip}
 
 Weitere Informationen zu Änderungen seit der vorherigen Version finden Sie in den Änderungsprotokollen.
+-  Version 1.14, [Änderungsprotokoll](#114_changelog).
 -  Version 1.13, [Änderungsprotokoll](#113_changelog).
 -  Version 1.12, [Änderungsprotokoll](#112_changelog).
--  Version 1.11, [Änderungsprotokoll](#111_changelog).
--  **Veraltet:** Version 1.10, [Änderungsprotokoll](#110_changelog).
+-  **Veraltet**: Version 1.11, [Änderungsprotokoll](#111_changelog).
 -  [Archiv](#changelog_archive) der Änderungsprotokolle nicht unterstützter Versionen.
 
-Manche Änderungsprotokolle sind für _Fixpacks für Workerknoten_ konzipiert und können nur auf Workerknoten angewendet werden. Sie müssen [diese Patches anwenden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update), um die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicherzustellen. Diese Fixpacks für Worker-Knoten können eine höhere Version als der Master haben, da einige Build-Fixpacks für die Worker-Knoten spezifisch sind. Manche Änderungsprotokolle sind für _Master-Fixpacks_ konzipiert und können nur auf den Cluster-Master angewendet werden. Es kann vorkommen, dass Master-Fixpacks nicht automatisch angewendet werden. Sie können [sie manuell anwenden](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_update). Weitere Informationen zu Patchtypen finden Sie unter [Aktualisierungstypen](/docs/containers?topic=containers-cs_versions#update_types).
+Manche Änderungsprotokolle sind für _Fixpacks für Workerknoten_ konzipiert und können nur auf Workerknoten angewendet werden. Sie müssen [diese Patches anwenden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update), um die Einhaltung der Sicherheitsbestimmungen für die Workerknoten sicherzustellen. Diese Fixpacks für Worker-Knoten können eine höhere Version als der Master haben, da einige Build-Fixpacks für die Worker-Knoten spezifisch sind. Manche Änderungsprotokolle sind für _Master-Fixpacks_ konzipiert und können nur auf den Cluster-Master angewendet werden. Es kann vorkommen, dass Master-Fixpacks nicht automatisch angewendet werden. Sie können [sie manuell anwenden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). Weitere Informationen zu Patchtypen finden Sie unter [Aktualisierungstypen](/docs/containers?topic=containers-cs_versions#update_types).
 {: note}
 
 </br>
 
+## Version 1.14, Änderungsprotokoll
+{: #114_changelog}
+
+### Änderungsprotokoll für 1.14.2_1521, veröffentlicht am 4. Juni 2019
+{: #1142_1521}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.14.2_1521 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.14.1_1519 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.14.1_1519</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster-DNS-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurde ein Fehler behoben, der dazu führen könnte, dass sowohl die Kubernetes-DNS- als auch die CoreDNS-Pods nach Operationen zum `Erstellen` oder `Aktualisieren` Clustern ausgeführt werden.</td>
+</tr>
+<tr>
+<td>Konfiguration der Hochverfügbarkeit des Cluster-Masters</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration wurde aktualisiert, um intermittierende Fehler der Netzkonnektivität während einer Aktualisierung des Masters zu minimieren.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.3.11</td>
+<td>Version 3.3.13</td>
+<td>Lesen Sie die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.14.1-71</td>
+<td>v1.14.2-100</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.14.2 aktualisiert.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.1</td>
+<td>v1.14.2</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.2).</td>
+</tr>
+<tr>
+<td>Kubernetes-Metrik-Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Lesen Sie die [Releaseinformationen zum Kubernetes-Metrik-Server ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.14.1_1519, veröffentlicht am 20. Mai 2019
+{: #1141_1519}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.14.1_1519 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.14.1_1518 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.14.1_1518</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 Kernel</td>
+<td>4.4.0-145 generisch</td>
+<td>4.4.0-148 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 Kernel</td>
+<td>4.15.0-47 generisch</td>
+<td>4.15.0-50 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.14.1_1518, veröffentlicht am 13. Mai 2019
+{: #1141_1518}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.14.1_1518 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.14.1_1516 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.14.1_1516</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Lesen Sie die [HAProxy-Releaseinformationen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Die Aktualisierung behebt [CVE-2019-6706 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>Kubernetes-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration der Auditrichtlinie des Kubernetes-API-Servers wurde so aktualisiert, dass die schreibgeschützte URL `/openapi/v2*` nicht protokolliert wird. Außerdem wurde die Gültigkeitsdauer signierter `kubelet`-Zertifikate in der Konfiguration des Kubernetes-Controller-Managers von 1 Jahr auf 3 Jahre erhöht.</td>
+</tr>
+<tr>
+<td>OpenVPN-Clientkonfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der OpenVPN-Client-Pod `vpn-*` im Namensbereich `kube-system` legt `dnsPolicy` jetzt auf `Default` fest, damit der Pod bei einer Störung des Cluster-CNS nicht fehlschlägt.</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>e7182c7</td>
+<td>13c7ef0</td>
+<td>Das Image für [CVE-2016-7076 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076) und [CVE-2017-1000368 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.14.1_1516, veröffentlicht am 7. Mai 2019
+{: #1141_1516}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.14.1_1516 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.13.5_1519 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>Version 3.4.4</td>
+<td>Version 3.6.1</td>
+<td>Lesen Sie die [Calico-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>CoreDNS</td>
+<td>1.2.6</td>
+<td>1.3.1</td>
+<td>Lesen Sie die [CoreDNS-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). Die Aktualisierung umfasst die Hinzufügung eines [Metrikports ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/plugins/metrics/) im Cluster-DNS-Service. <br><br>CoreDNS ist jetzt der einzige unterstützte Cluster-DNS-Provider. Wenn Sie einen Cluster von einer früheren Version auf Kubernetes Version 1.14 aktualisieren und KubeDNS verwendet haben, wird KubeDNS während der Clusteraktualisierung automatisch auf CoreDNS migriert. Weitere Informationen finden Sie unter [Cluster-DNS-Provider konfigurieren](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns). Mithilfe dieser Informationen können Sie CoreDNS auch vor der Aktualisierung testen.</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>9ff3fda</td>
+<td>ed0dafc</td>
+<td>Das Image für [CVE-2019-1543 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.14.1-71</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.14.1 aktualisiert. Außerdem wurde `calicoctl` auf Version 3.6.1 aktualisiert. Aktualisierungen für Lastausgleichsfunktionen der Version 2.0 mit nur einem verfügbaren Workerknoten für die Lastausgleichsfunktions-Pods korrigiert. Private Lastausgleichsfunktionen unterstützen jetzt die Ausführung auf [privaten Edge-Workerknoten](/docs/containers?topic=containers-edge#edge).</td>
+</tr>
+<tr>
+<td>IBM Pod-Sicherheitsrichtlinien</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>[IBM Pod-Sicherheitsrichtlinien](/docs/containers?topic=containers-psp#ibm_psp) wurden aktualisiert, um die Kubernetes-Funktion [RunAsGroup ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#users-and-groups) zu unterstützen. </td>
+</tr>
+<tr>
+<td>`kubelet`-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Setzen Sie die Option `--pod-max-pids` auf `14336`, um zu verhindern, dass ein einzelner Pod alle Prozess-IDs auf einem Workerknoten belegt.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.14.1</td>
+<td>Weitere Informationen finden Sie in den [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) und im [Kubernetes 1.14-Blog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/).<br><br>Die Kubernetes-Standardrichtlichen für rollenbasierte Zugriffssteuerung (RBAC) erteilen [nicht authentifizierten Benutzern keine Berechtigung mehr für Erkennungs-APIs oder APIs zur Überprüfung von Berechtigungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). Diese Änderung gilt nur für neue Cluster der Version 1.14. Wenn Sie einen Cluster einer früheren Version aktualisieren, haben nicht authentifizierte Benutzer weiterhin Zugriff auf die Erkennungs-APIs und die APIs zur Überprüfung von Berechtigungen.</td>
+</tr>
+<tr>
+<td>Konfiguration von Kubernetes-Zugangscontrollern</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td><ul>
+<li>`NodeRestriction` wurde zur Option `--enable-admission-plugins` für den Kubernetes-API-Server des Clusters hinzugefügt und die zugehörigen Clusterressourcen wurden für die Unterstützung dieser Sicherheitserweiterung konfiguriert. </li>
+<li>`Initializers` wurde aus der Option `--enable-admission-plugins` entfernt und `admissionregistration.k8s.io/v1alpha1=true` aus der Option `--runtime-config` für den Kubernetes-API-Server des Clusters, da diese APIs nicht mehr unterstützt werden. Stattdessen können Sie [Kubernetes-Zugangs-Webhooks ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) verwenden.</li></ul></td>
+</tr>
+<tr>
+<td>Automatische Kubernetes DNS-Skalierung</td>
+<td>1.3.0</td>
+<td>1.4.0</td>
+<td>Lesen Sie die [Releaseinformationen zur automatischen Kubernetes-DNS-Skalierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.4.0).</td>
+</tr>
+<tr>
+<td>Kubernetes-Feature-Gate-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td><ul>
+  <li>`RuntimeClass=false` hinzugefügt, um die Auswahl der Containerlaufzeitkonfiguration zu inaktivieren. </li>
+  <li>`ExperimentalCriticalPodAnnotation=true` entfernt, da die Pod-Annotation `scheduler.alpha.kubernetes.io/critical-pod` nicht mehr unterstützt wird. Stattdessen können Sie die [Kubernetes-Pod-Priorität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority) verwenden.</li></ul></td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>e132aa4</td>
+<td>e7182c7</td>
+<td>Das Image für [CVE-2019-11068 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+<br />
+
+
 ## Version 1.13, Änderungsprotokoll
 {: #113_changelog}
+
+### Änderungsprotokoll für 1.13.6_1524, veröffentlicht am 4. Juni 2019
+{: #1136_1524}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.13.6_1524 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.13.6_1522 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.13.6_1522</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster-DNS-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurde ein Fehler behoben, der dazu führen könnte, dass sowohl die Kubernetes-DNS- als auch die CoreDNS-Pods nach Operationen zum `Erstellen` oder `Aktualisieren` Clustern ausgeführt werden.</td>
+</tr>
+<tr>
+<td>Konfiguration der Hochverfügbarkeit des Cluster-Masters</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration wurde aktualisiert, um intermittierende Fehler der Netzkonnektivität während einer Aktualisierung des Masters zu minimieren.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.3.11</td>
+<td>Version 3.3.13</td>
+<td>Lesen Sie die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>Kubernetes-Metrik-Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Lesen Sie die [Releaseinformationen zum Kubernetes-Metrik-Server ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.13.6_1522, veröffentlicht am 20. Mai 2019
+{: #1136_1522}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.13.6_1522 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.13.6_1521 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.13.6_1521</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 Kernel</td>
+<td>4.4.0-145 generisch</td>
+<td>4.4.0-148 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 Kernel</td>
+<td>4.15.0-47 generisch</td>
+<td>4.15.0-50 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.13.6_1521, veröffentlicht am 13. Mai 2019
+{: #1136_1521}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.13.6_1521 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.13.5_1519 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.13.5_1519</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Lesen Sie die [HAProxy-Releaseinformationen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Die Aktualisierung behebt [CVE-2019-6706 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Das Image für [CVE-2019-1543 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.13.5-107</td>
+<td>v1.13.6-139</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.13.6 aktualisiert. Außerdem wurde der Aktualisierungsprozess für Lastausgleichsfunktionen der Version 2.0 korrigiert, die nur einen verfügbaren Workerknoten für die Lastausgleichsfunktions-Pods haben.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.5</td>
+<td>v1.13.6</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.6).</td>
+</tr>
+<tr>
+<td>Kubernetes-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration der Auditrichtlinie des Kubernetes-API-Servers wurde so aktualisiert, dass die schreibgeschützte URL `/openapi/v2*` nicht protokolliert wird. Außerdem wurde die Gültigkeitsdauer signierter `kubelet`-Zertifikate in der Konfiguration des Kubernetes-Controller-Managers von 1 Jahr auf 3 Jahre erhöht.</td>
+</tr>
+<tr>
+<td>OpenVPN-Clientkonfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der OpenVPN-Client-Pod `vpn-*` im Namensbereich `kube-system` legt `dnsPolicy` jetzt auf `Default` fest, damit der Pod bei einer Störung des Cluster-CNS nicht fehlschlägt.</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Das Image für [CVE-2016-7076 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) und [CVE-2019-11068 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.13.5_1519, veröffentlicht am 29. April 2019
+{: #1135_1519}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.13.5_1519 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.13.5_1518 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.13.5_1518</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu-Pakete</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Aktualisierungen an installierten Ubuntu-Paketen.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.5</td>
+<td>1.2.6</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.2.6).</td>
+</tr>
+</tbody>
+</table>
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.13.5_1518, veröffentlicht am 15. April 2019
 {: #1135_1518}
@@ -131,7 +555,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.13.5_1517 en
 <td>Ubuntu 18.04 Kernel</td>
 <td>4.15.0-46 generisch</td>
 <td>4.15.0-47 generisch</td>
-<td>Es wurden Workerknoten-Images mit Kernelaktualisierung für [CVE-2019-9213 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) wurden aktualisiert.</td>
+<td>Es wurden Workerknoten-Images mit Kernelaktualisierung für [CVE-2019-9213 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html) aktualisiert.</td>
 </tr>
 </tbody>
 </table>
@@ -157,7 +581,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -549,6 +973,201 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.13.2_1507 en
 Überprüfen Sie das Änderungsprotokoll der Version 1.12.
 {: shortdesc}
 
+### Änderungsprotokoll für 1.12.9_1555, veröffentlicht am 4. Juni 2019
+{: #1129_1555}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.9_1555 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.8_1553 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster-DNS-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Es wurde ein Fehler behoben, der dazu führen könnte, dass sowohl die Kubernetes-DNS- als auch die CoreDNS-Pods nach Operationen zum `Erstellen` oder `Aktualisieren` Clustern ausgeführt werden.</td>
+</tr>
+<tr>
+<td>Konfiguration der Hochverfügbarkeit des Cluster-Masters</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration wurde aktualisiert, um intermittierende Fehler der Netzkonnektivität während einer Aktualisierung des Masters zu minimieren.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.3.11</td>
+<td>Version 3.3.13</td>
+<td>Lesen Sie die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>v1.12.8-210</td>
+<td>v1.12.9-227</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.12.9 aktualisiert.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.8</td>
+<td>v1.12.9</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.9).</td>
+</tr>
+<tr>
+<td>Kubernetes-Metrik-Server</td>
+<td>v0.3.1</td>
+<td>v0.3.3</td>
+<td>Lesen Sie die [Releaseinformationen zum Kubernetes-Metrik-Server ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.3).</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.12.8_1553, veröffentlicht am 20. Mai 2019
+{: #1128_1533}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.8_1553 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.8_1553 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.8_1553</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 Kernel</td>
+<td>4.4.0-145 generisch</td>
+<td>4.4.0-148 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 Kernel</td>
+<td>4.15.0-47 generisch</td>
+<td>4.15.0-50 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.12.8_1552, veröffentlicht am 13. Mai 2019
+{: #1128_1552}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.12.8_1552 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.7_1550 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.7_1550</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Lesen Sie die [HAProxy-Releaseinformationen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Die Aktualisierung behebt [CVE-2019-6706 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Das Image für [CVE-2019-1543 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.12.7-180</td>
+<td>Version 1.12.8-210</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.12.8 aktualisiert. Außerdem wurde der Aktualisierungsprozess für Lastausgleichsfunktionen der Version 2.0 korrigiert, die nur einen verfügbaren Workerknoten für die Lastausgleichsfunktions-Pods haben.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.12.7</td>
+<td>v1.12.8</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.8).</td>
+</tr>
+<tr>
+<td>Kubernetes-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration der Auditrichtlinie des Kubernetes-API-Servers wurde so aktualisiert, dass die schreibgeschützte URL `/openapi/v2*` nicht protokolliert wird. Außerdem wurde die Gültigkeitsdauer signierter `kubelet`-Zertifikate in der Konfiguration des Kubernetes-Controller-Managers von 1 Jahr auf 3 Jahre erhöht.</td>
+</tr>
+<tr>
+<td>OpenVPN-Clientkonfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der OpenVPN-Client-Pod `vpn-*` im Namensbereich `kube-system` legt `dnsPolicy` jetzt auf `Default` fest, damit der Pod bei einer Störung des Cluster-CNS nicht fehlschlägt.</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Das Image für [CVE-2016-7076 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) und [CVE-2019-11068 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.12.7_1550, veröffentlicht am 29. April 2019
+{: #1127_1550}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.12.7_1550 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.12.7_1549 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.12.7_1549</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu-Pakete</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Aktualisierungen an installierten Ubuntu-Paketen.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
+
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.12.7_1549, veröffentlicht am 15. April 2019
 {: #1127_1549}
 
@@ -658,7 +1277,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1182,7 +1801,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1356,10 +1975,185 @@ Wenn Sie über `kubectl proxy` auf das Dashboard zugreifen, wird die Schaltfläc
 </tbody>
 </table>
 
-## Version 1.11, Änderungsprotokoll
+## Veraltet: Version 1.11, Änderungsprotokoll
 {: #111_changelog}
 
 Überprüfen Sie das Änderungsprotokoll der Version 1.11.
+{: shortdesc}
+
+Kubernetes Version 1.11 ist veraltet und wird (voraussichtlich) ab dem 27. Juni 2019 nicht mehr unterstützt. [Überprüfen Sie die mögliche Auswirkung](/docs/containers?topic=containers-cs_versions#cs_versions) jeder einzelnen Aktualisierung einer Kubernetes-Version und [aktualisieren Sie Ihre Cluster](/docs/containers?topic=containers-update#update) dann sofort mindestens auf Version 1.12.
+{: deprecated}
+
+### Änderungsprotokoll für 1.11.10_1561, veröffentlicht am 4. Juni 2019
+{: #11110_1561}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.10_1561 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.10_1559 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.10_1559</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Konfiguration der Hochverfügbarkeit des Cluster-Masters</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration wurde aktualisiert, um intermittierende Fehler der Netzkonnektivität während einer Aktualisierung des Masters zu minimieren.</td>
+</tr>
+<tr>
+<td>etcd</td>
+<td>Version 3.3.11</td>
+<td>Version 3.3.13</td>
+<td>Lesen Sie die [etcd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>55c1f66</td>
+<td>32257d3</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>13c7ef0</td>
+<td>e8c6d72</td>
+<td>Das Image für [CVE-2018-10844 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), [CVE-2018-10845 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10846 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846), [CVE-2019-3829 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-9893 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893), [CVE-2019-5435 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435) und [CVE-2019-5436 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.11.10_1559, veröffentlicht am 20. Mai 2019
+{: #11110_1559}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch-Pack 1.11.10_1559 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.10_1558 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.10_1558</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 Kernel</td>
+<td>4.4.0-145 generisch</td>
+<td>4.4.0-148 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 Kernel</td>
+<td>4.15.0-47 generisch</td>
+<td>4.15.0-50 generisch</td>
+<td>Workerknoten-Images wurden mit der Kernelaktualisierung für [CVE-2018-12126 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html) und [CVE-2018-12130 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html) aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für 1.11.10_1558, veröffentlicht am 13. Mai 2019
+{: #11110_1558}
+
+In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.10_1558 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.9_1556 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.9_1556</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Lesen Sie die [HAProxy-Releaseinformationen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Die Aktualisierung behebt [CVE-2019-6706 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+<tr>
+<td>GPU-Einheiten-Plug-in und Installationsprogramm</td>
+<td>9ff3fda</td>
+<td>55c1f66</td>
+<td>Das Image für [CVE-2019-1543 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) wurde aktualisiert.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>Version 1.11.9-241</td>
+<td>Version 1.11.10-270</td>
+<td>Wurde für die Unterstützung von Kubernetes 1.11.10 aktualisiert.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>Version 1.11.9</td>
+<td>Version 1.11.10</td>
+<td>Lesen Sie die [Kubernetes-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes/kubernetes/releases/tag/v1.11.10).</td>
+</tr>
+<tr>
+<td>Kubernetes-Konfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Die Konfiguration der Auditrichtlinie des Kubernetes-API-Servers wurde so aktualisiert, dass die schreibgeschützte URL `/openapi/v2*` nicht protokolliert wird. Außerdem wurde die Gültigkeitsdauer signierter `kubelet`-Zertifikate in der Konfiguration des Kubernetes-Controller-Managers von 1 Jahr auf 3 Jahre erhöht.</td>
+</tr>
+<tr>
+<td>OpenVPN-Clientkonfiguration</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Der OpenVPN-Client-Pod `vpn-*` im Namensbereich `kube-system` legt `dnsPolicy` jetzt auf `Default` fest, damit der Pod bei einer Störung des Cluster-CNS nicht fehlschlägt.</td>
+</tr>
+<tr>
+<td>Trusted Compute-Agent</td>
+<td>e132aa4</td>
+<td>13c7ef0</td>
+<td>Das Image für [CVE-2016-7076 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-7076), [CVE-2017-1000368 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1000368) und [CVE-2019-11068 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11068) wurde aktualisiert.</td>
+</tr>
+</tbody>
+</table>
+
+### Änderungsprotokoll für Workerknoten-Fixpack 1.11.9_1556, veröffentlicht am 29. April 2019
+{: #1119_1556}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.11.9_1556 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.11.9_1555 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.11.9_1555</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu-Pakete</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Aktualisierungen an installierten Ubuntu-Paketen.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.1.6</td>
+<td>1.1.7</td>
+<td>Lesen Sie die [containerd-Releaseinformationen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/containerd/containerd/releases/tag/v1.1.7).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Änderungsprotokoll für Workerknoten-Fixpack 1.11.9_1555, veröffentlicht am 15. April 2019
 {: #1119_1555}
@@ -1476,7 +2270,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fix 1.1
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -1985,7 +2779,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'containerd' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
@@ -2100,7 +2894,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.3_1533 en
 <td>TPM-aktivierter Kernel</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
 </tr>
 </tbody>
 </table>
@@ -2336,13 +3130,13 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `containerd`)</td>
@@ -2514,16 +3308,109 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.11.2_1513 en
 <br />
 
 
-## Veraltet: Version 1.10, Änderungsprotokoll
+## Archiv
+{: #changelog_archive}
+
+Nicht unterstützte Kubernetes-Versionen:
+*  [Version 1.10](#110_changelog)
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Änderungsprotokoll der Version 1.10 (nicht mehr unterstützt seit 16. Mai 2019)
 {: #110_changelog}
 
-Überprüfen Sie das Änderungsprotokoll der Version 1.10.
+Überprüfen Sie die Änderungsprotokolle der Version 1.10.
 {: shortdesc}
 
-Kubernetes Version 1.10 ist veraltet und wird ab dem 15. Mai 2019 nicht mehr unterstützt. [Überprüfen Sie die mögliche Auswirkung](/docs/containers?topic=containers-cs_versions#cs_versions) jeder einzelnen Aktualisierung einer Kubernetes-Version und [aktualisieren Sie Ihre Cluster](/docs/containers?topic=containers-update#update) dann sofort mindestens auf Version 1.11.
-{: deprecated}
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1558, veröffentlicht am 13. Mai 2019](#11013_1558)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1557, veröffentlicht am 29. April 2019](#11013_1557)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1556, veröffentlicht am 15. April 2019](#11013_1556)
+*   [Änderungsprotokoll für 1.10.13_1555, veröffentlicht am 8. April 2019](#11013_1555)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1554, veröffentlicht am 1. April 2019](#11013_1554)
+*   [Änderungsprotokoll für Master-Fixpack 1.10.13_1553, veröffentlicht am 26. März 2019](#11118_1553)
+*   [Änderungsprotokoll für 1.10.13_1551, veröffentlicht am 20. März 2019](#11013_1551)
+*   [Änderungsprotokoll für 1.10.13_1548, veröffentlicht am 4. März 2019](#11013_1548)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1546, veröffentlicht am 27. Februar 2019](#11012_1546)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1544, veröffentlicht am 15. Februar 2019](#11012_1544)
+*   [Änderungsprotokoll für 1.10.12_1543, veröffentlicht am 5. Februar 2019](#11012_1543)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1541, veröffentlicht am 28. Januar 2019](#11012_1541)
+*   [Änderungsprotokoll für 1.10.12_1540, veröffentlicht am 21. Januar 2019](#11012_1540)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1538, veröffentlicht am 7. Januar 2019](#11011_1538)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1537, veröffentlicht am 17. Dezember 2018](#11011_1537)
+*   [Änderungsprotokoll für 1.10.11_1536, veröffentlicht am 4. Dezember 2018](#11011_1536)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1532, veröffentlicht am 27. November 2018](#1108_1532)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1531, veröffentlicht am 19. November 2018](#1108_1531)
+*   [Änderungsprotokoll für 1.10.8_1530, veröffentlicht am 7. November 2018](#1108_1530_ha-master)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1528, veröffentlicht am 26. Oktober 2018](#1108_1528)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1525, veröffentlicht am 10. Oktober 2018](#1108_1525)
+*   [Änderungsprotokoll für 1.10.8_1524, veröffentlicht am 2. Oktober 2018](#1108_1524)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.7_1521, veröffentlicht am 20. September 2018](#1107_1521)
+*   [Änderungsprotokoll für 1.10.7_1520, veröffentlicht am 4. September 2018](#1107_1520)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1519, veröffentlicht am 23. August 2018](#1105_1519)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1518, veröffentlicht am 13. August 2018](#1105_1518)
+*   [Änderungsprotokoll für 1.10.5_1517, veröffentlicht am 27. Juli 2018](#1105_1517)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1514, veröffentlicht 3. Juli 2018](#1103_1514)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1513, veröffentlicht 21. Juni 2018](#1103_1513)
+*   [Änderungsprotokoll für 1.10.3_1512, veröffentlicht 12. Juni 2018](#1103_1512)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.10.1_1510, veröffentlicht am 18. Mai 2018](#1101_1510)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.10.1_1509, veröffentlicht am 16. Mai 2018](#1101_1509)
+*   [Änderungsprotokoll für 1.10.1_1508, veröffentlicht am 1. Mai 2018](#1101_1508)
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1556, veröffentlicht am 15. April 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1558, veröffentlicht am 13. Mai 2019
+{: #11013_1558}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.13_1558 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.13_1557 vorgenommene Änderungen">
+<caption>Änderungen seit Version 1.10.13_1557</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hochverfügbarkeitsproxy des Cluster-Masters</td>
+<td>1.9.6-alpine</td>
+<td>1.9.7-alpine</td>
+<td>Lesen Sie die [HAProxy-Releaseinformationen![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.haproxy.org/download/1.9/src/CHANGELOG). Die Aktualisierung behebt [CVE-2019-6706 ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6706).</td>
+</tr>
+</tbody>
+</table>
+
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1557, veröffentlicht am 29. April 2019
+{: #11013_1557}
+
+In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.13_1557 enthalten sind.
+{: shortdesc}
+
+<table summary="Seit Version 1.10.13_1556 vorgenommene Änderungen">
+<caption>Änderungen seit 1.10.13_1556</caption>
+<thead>
+<tr>
+<th>Komponente</th>
+<th>Vorher</th>
+<th>Aktuell</th>
+<th>Beschreibung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu-Pakete</td>
+<td>n.z.</td>
+<td>n.z.</td>
+<td>Aktualisierungen an installierten Ubuntu-Paketen.</td>
+</tr>
+</tbody>
+</table>
+
+
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1556, veröffentlicht am 15. April 2019
 {: #11013_1556}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.13_1556 enthalten sind.
@@ -2549,7 +3436,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.13_1555, veröffentlicht am 8. April 2019
+#### Änderungsprotokoll für 1.10.13_1555, veröffentlicht am 8. April 2019
 {: #11013_1555}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1555 enthalten sind.
@@ -2599,7 +3486,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1555 e
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1554, veröffentlicht am 1. April 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.13_1554, veröffentlicht am 1. April 2019
 {: #11013_1554}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fix 1.10.13_1554 enthalten sind.
@@ -2620,13 +3507,13 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fix 1.1
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden die Speicherreservierungen für 'kubelet' und 'containerd' erhöht, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
 
-### Änderungsprotokoll für Master-Fixpack 1.10.13_1553, veröffentlicht am 26. März 2019
+#### Änderungsprotokoll für Master-Fixpack 1.10.13_1553, veröffentlicht am 26. März 2019
 {: #11118_1553}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.10.13_1553 enthalten sind.
@@ -2664,7 +3551,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.10.
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.13_1551, veröffentlicht am 20. März 2019
+#### Änderungsprotokoll für 1.10.13_1551, veröffentlicht am 20. März 2019
 {: #11013_1551}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1551 enthalten sind.
@@ -2720,7 +3607,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1551 e
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.13_1548, veröffentlicht am 4. März 2019
+#### Änderungsprotokoll für 1.10.13_1548, veröffentlicht am 4. März 2019
 {: #11013_1548}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1548 enthalten sind.
@@ -2794,7 +3681,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.13_1548 e
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1546, veröffentlicht am 27. Februar 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1546, veröffentlicht am 27. Februar 2019
 {: #11012_1546}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.12_1546 enthalten sind.
@@ -2820,7 +3707,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1544, veröffentlicht am 15. Februar 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1544, veröffentlicht am 15. Februar 2019
 {: #11012_1544}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.12_1544 enthalten sind.
@@ -2852,7 +3739,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.12_1543, veröffentlicht am 5. Februar 2019
+#### Änderungsprotokoll für 1.10.12_1543, veröffentlicht am 5. Februar 2019
 {: #11012_1543}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.12_1543 enthalten sind.
@@ -2925,7 +3812,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.12_1543 e
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1541, veröffentlicht am 28. Januar 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.12_1541, veröffentlicht am 28. Januar 2019
 {: #11012_1541}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.12_1541 enthalten sind.
@@ -2951,7 +3838,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.12_1540, veröffentlicht am 21. Januar 2019
+#### Änderungsprotokoll für 1.10.12_1540, veröffentlicht am 21. Januar 2019
 {: #11012_1540}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.12_1540 enthalten sind.
@@ -3001,7 +3888,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.12_1540 e
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1538, veröffentlicht am 7. Januar 2019
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1538, veröffentlicht am 7. Januar 2019
 {: #11011_1538}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.11_1538 enthalten sind.
@@ -3027,7 +3914,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1537, veröffentlicht am 17. Dezember 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.11_1537, veröffentlicht am 17. Dezember 2018
 {: #11011_1537}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.11_1537 enthalten sind.
@@ -3054,7 +3941,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für 1.10.11_1536, veröffentlicht am 4. Dezember 2018
+#### Änderungsprotokoll für 1.10.11_1536, veröffentlicht am 4. Dezember 2018
 {: #11011_1536}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.11_1536 enthalten sind.
@@ -3099,12 +3986,12 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.11_1536 e
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1532, veröffentlicht am 27. November 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1532, veröffentlicht am 27. November 2018
 {: #1108_1532}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1532 enthalten sind.
@@ -3130,7 +4017,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1531, veröffentlicht am 19. November 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1531, veröffentlicht am 19. November 2018
 {: #1108_1531}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1531 enthalten sind.
@@ -3156,7 +4043,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.8_1530, veröffentlicht am 7. November 2018
+#### Änderungsprotokoll für 1.10.8_1530, veröffentlicht am 7. November 2018
 {: #1108_1530_ha-master}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.8_1530 enthalten sind.
@@ -3212,12 +4099,12 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.8_1530 en
 <td>TPM-aktivierter Kernel</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
 </tr>
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1528, veröffentlicht am 26. Oktober 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1528, veröffentlicht am 26. Oktober 2018
 {: #1108_1528}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1528 enthalten sind.
@@ -3243,7 +4130,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Master-Fixpack 1.10.8_1527, veröffentlicht am 15. Oktober 2018
+#### Änderungsprotokoll für Master-Fixpack 1.10.8_1527, veröffentlicht am 15. Oktober 2018
 {: #1108_1527}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.10.8_1527 enthalten sind.
@@ -3275,7 +4162,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Master-Fixpack 1.10.
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1525, veröffentlicht am 10. Oktober 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.8_1525, veröffentlicht am 10. Oktober 2018
 {: #1108_1525}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.8_1525 enthalten sind.
@@ -3308,7 +4195,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für 1.10.8_1524, veröffentlicht am 2. Oktober 2018
+#### Änderungsprotokoll für 1.10.8_1524, veröffentlicht am 2. Oktober 2018
 {: #1108_1524}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.8_1524 enthalten sind.
@@ -3359,7 +4246,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.7_1521, veröffentlicht am 20. September 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.7_1521, veröffentlicht am 20. September 2018
 {: #1107_1521}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.7_1521 enthalten sind.
@@ -3380,7 +4267,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -3392,7 +4279,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -3411,7 +4298,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.7_1520, veröffentlicht am 4. September 2018
+#### Änderungsprotokoll für 1.10.7_1520, veröffentlicht am 4. September 2018
 {: #1107_1520}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.7_1520 enthalten sind.
@@ -3461,7 +4348,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.7_1520 en
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1519, veröffentlicht am 23. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1519, veröffentlicht am 23. August 2018
 {: #1105_1519}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.5_1519 enthalten sind.
@@ -3494,7 +4381,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1518, veröffentlicht am 13. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.5_1518, veröffentlicht am 13. August 2018
 {: #1105_1518}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.5_1518 enthalten sind.
@@ -3520,7 +4407,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.5_1517, veröffentlicht am 27. Juli 2018
+#### Änderungsprotokoll für 1.10.5_1517, veröffentlicht am 27. Juli 2018
 {: #1105_1517}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.5_1517 enthalten sind.
@@ -3576,7 +4463,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.5_1517 en
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1514, veröffentlicht 3. Juli 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1514, veröffentlicht 3. Juli 2018
 {: #1103_1514}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.3_1514 enthalten sind.
@@ -3603,7 +4490,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1513, veröffentlicht 21. Juni 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.3_1513, veröffentlicht 21. Juni 2018
 {: #1103_1513}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.3_1513 enthalten sind.
@@ -3629,7 +4516,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.3_1512, veröffentlicht 12. Juni 2018
+#### Änderungsprotokoll für 1.10.3_1512, veröffentlicht 12. Juni 2018
 {: #1103_1512}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.3_1512 enthalten sind.
@@ -3687,7 +4574,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.3_1512 en
 
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.10.1_1510, veröffentlicht am 18. Mai 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.10.1_1510, veröffentlicht am 18. Mai 2018
 {: #1101_1510}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.1_1510 enthalten sind.
@@ -3713,7 +4600,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten Fixpack 1.10.1_1509, veröffentlicht am 16. Mai 2018
+#### Änderungsprotokoll für Workerknoten Fixpack 1.10.1_1509, veröffentlicht am 16. Mai 2018
 {: #1101_1509}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.10.1_1509 enthalten sind.
@@ -3739,7 +4626,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.10.1_1508, veröffentlicht am 1. Mai 2018
+#### Änderungsprotokoll für 1.10.1_1508, veröffentlicht am 1. Mai 2018
 {: #1101_1508}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.1_1508 enthalten sind.
@@ -3796,7 +4683,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.1_1508 en
 <td>GPU-Unterstützung</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Unterstützung für [Container-Workloads der Graphics Processing Unit (GPU)](/docs/containers?topic=containers-app#gpu_app) ist jetzt für die Terminierung und Ausführung verfügbar. Eine Liste der verfügbaren GPU-Maschinentypen finden Sie unter [Hardware für Workerknoten](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node). Weitere Informationen finden Sie in der Kubernetes-Dokumentation zum [Terminieren von GPUs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
+<td>Unterstützung für [Container-Workloads der Graphics Processing Unit (GPU)](/docs/containers?topic=containers-app#gpu_app) ist jetzt für die Terminierung und Ausführung verfügbar. Eine Liste der verfügbaren GPU-Maschinentypen finden Sie unter [Hardware für Workerknoten](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). Weitere Informationen finden Sie in der Kubernetes-Dokumentation zum [Terminieren von GPUs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/).</td>
 </tr>
 </tbody>
 </table>
@@ -3804,20 +4691,35 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.10.1_1508 en
 <br />
 
 
-## Archiv
-{: #changelog_archive}
-
-Nicht unterstützte Kubernetes-Versionen:
-*  [Version 1.9](#19_changelog)
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
-
 ### Änderungsprotokoll der Version 1.9 (nicht mehr unterstützt seit 27. Dezember 2018)
 {: #19_changelog}
 
-Überprüfen Sie das Änderungsprotokoll der Version 1.9.
+Überprüfen Sie die Änderungsprotokolle der Version 1.9.
+{: shortdesc}
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1539, veröffentlicht am 17. Dezember 2018
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1539, veröffentlicht am 17. Dezember 2018](#1911_1539)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1538, veröffentlicht am 4. Dezember 2018](#1911_1538)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1537, veröffentlicht am 27. November 2018](#1911_1537)
+*   [Änderungsprotokoll für 1.9.11_1536, veröffentlicht am 19. November 2018](#1911_1536)
+*   [Änderungsprotokoll für Workerknoten-Fix 1.9.10_1532, veröffentlicht am 7. November 2018](#1910_1532)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1531, veröffentlicht am 26. Oktober 2018](#1910_1531)
+*   [Änderungsprotokoll für Master-Fixpack 1.9.10_1530, veröffentlicht am 15. Oktober 2018](#1910_1530)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1528, veröffentlicht am 10. Oktober 2018](#1910_1528)
+*   [Änderungsprotokoll für 1.9.10_1527, veröffentlicht am 2. Oktober 2018](#1910_1527)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1524, veröffentlicht am 20. September 2018](#1910_1524)
+*   [Änderungsprotokoll für 1.9.10_1523, veröffentlicht am 4. September 2018](#1910_1523)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1522, veröffentlicht am 23. August 2018](#199_1522)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1521, veröffentlicht am 13. August 2018](#199_1521)
+*   [Änderungsprotokoll für 1.9.9_1520, veröffentlicht 27. Juli 2018](#199_1520)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1517, veröffentlicht am 3. Juli 2018](#198_1517)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1516, veröffentlicht am 21. Juni 2018](#198_1516)
+*   [Änderungsprotokoll für 1.9.8_1515, veröffentlicht 19. Juni 2018](#198_1515)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1513, veröffentlicht am 11. Juni 2018](#197_1513)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1512, veröffentlicht am 18. Mai 2018](#197_1512)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.9.7_1511, veröffentlicht am 16. Mai 2018](#197_1511)
+*   [Änderungsprotokoll für 1.9.7_1510, veröffentlicht am 30. April 2018](#197_1510)
+
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1539, veröffentlicht am 17. Dezember 2018
 {: #1911_1539}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1539 enthalten sind.
@@ -3843,7 +4745,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1538, veröffentlicht am 4. Dezember 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1538, veröffentlicht am 4. Dezember 2018
 {: #1911_1538}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1538 enthalten sind.
@@ -3864,12 +4766,12 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ressourcenauslastung von Workerknoten</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-plan_clusters#resource_limit_node).</td>
+<td>Es wurden dedizierte 'cgroups' für 'kubelet' und 'docker' hinzugefügt, damit diesen Komponenten nicht die Ressourcen ausgehen. Weitere Informationen finden Sie unter [Reserven für Workerknotenressourcen](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1537, veröffentlicht am 27. November 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.11_1537, veröffentlicht am 27. November 2018
 {: #1911_1537}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1537 enthalten sind.
@@ -3895,7 +4797,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.9.11_1536, veröffentlicht am 19. November 2018
+#### Änderungsprotokoll für 1.9.11_1536, veröffentlicht am 19. November 2018
 {: #1911_1536}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.11_1536 enthalten sind.
@@ -3945,7 +4847,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.11_1536 en
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fix 1.9.10_1532, veröffentlicht am 7. November 2018
+#### Änderungsprotokoll für Workerknoten-Fix 1.9.10_1532, veröffentlicht am 7. November 2018
 {: #1910_1532}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.11_1532 enthalten sind.
@@ -3966,12 +4868,12 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>TPM-aktivierter Kernel</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
+<td>Bare-Metal-Workerknoten mit TPM-Chips für Trusted Compute verwenden den Ubuntu-Standardkernel, bis die Vertrauensbeziehung eingerichtet ist. Wenn Sie die [Vertrauensbeziehung](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) in einem vorhandenen Cluster aktivieren, müssen Sie alle vorhandenen Bare-Metal-Workerknoten mit TPM-Chips [neu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). Um zu prüfen, ob ein Bare-Metal-Workerknoten über einen TPM-Chip verfügt, prüfen Sie das Feld **Trustable**, nachdem Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types --zone` ausgeführt haben.</td>
 </tr>
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1531, veröffentlicht am 26. Oktober 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1531, veröffentlicht am 26. Oktober 2018
 {: #1910_1531}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1531 enthalten sind.
@@ -3997,7 +4899,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Master-Fixpack 1.9.10_1530, veröffentlicht am 15. Oktober 2018
+#### Änderungsprotokoll für Master-Fixpack 1.9.10_1530, veröffentlicht am 15. Oktober 2018
 {: #1910_1530}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1530 enthalten sind.
@@ -4023,7 +4925,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1528, veröffentlicht am 10. Oktober 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1528, veröffentlicht am 10. Oktober 2018
 {: #1910_1528}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1528 enthalten sind.
@@ -4056,7 +4958,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für 1.9.10_1527, veröffentlicht am 2. Oktober 2018
+#### Änderungsprotokoll für 1.9.10_1527, veröffentlicht am 2. Oktober 2018
 {: #1910_1527}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.10_1527 enthalten sind.
@@ -4089,7 +4991,7 @@ Außerdem bleibt die IBM File Storage-Standardklasse beim Aktualisieren des Clus
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1524, veröffentlicht am 20. September 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.10_1524, veröffentlicht am 20. September 2018
 {: #1910_1524}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.10_1524 enthalten sind.
@@ -4110,7 +5012,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4122,7 +5024,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4141,7 +5043,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.9.10_1523, veröffentlicht am 4. September 2018
+#### Änderungsprotokoll für 1.9.10_1523, veröffentlicht am 4. September 2018
 {: #1910_1523}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.10_1523 enthalten sind.
@@ -4185,7 +5087,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.10_1523 en
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1522, veröffentlicht am 23. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1522, veröffentlicht am 23. August 2018
 {: #199_1522}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.9_1522 enthalten sind.
@@ -4218,7 +5120,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1521, veröffentlicht am 13. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.9_1521, veröffentlicht am 13. August 2018
 {: #199_1521}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.9_1521 enthalten sind.
@@ -4244,7 +5146,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.9.9_1520, veröffentlicht 27. Juli 2018
+#### Änderungsprotokoll für 1.9.9_1520, veröffentlicht 27. Juli 2018
 {: #199_1520}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.9_1520 enthalten sind.
@@ -4294,7 +5196,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.9_1520 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1517, veröffentlicht am 3. Juli 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1517, veröffentlicht am 3. Juli 2018
 {: #198_1517}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.8_1517 enthalten sind.
@@ -4321,7 +5223,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1516, veröffentlicht am 21. Juni 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.8_1516, veröffentlicht am 21. Juni 2018
 {: #198_1516}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.8_1516 enthalten sind.
@@ -4347,7 +5249,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.9.8_1515, veröffentlicht 19. Juni 2018
+#### Änderungsprotokoll für 1.9.8_1515, veröffentlicht 19. Juni 2018
 {: #198_1515}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.8_1515 enthalten sind.
@@ -4392,7 +5294,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.8_1515 ent
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1513, veröffentlicht am 11. Juni 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1513, veröffentlicht am 11. Juni 2018
 {: #197_1513}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1513 enthalten sind.
@@ -4418,7 +5320,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1512, veröffentlicht am 18. Mai 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.9.7_1512, veröffentlicht am 18. Mai 2018
 {: #197_1512}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1512 enthalten sind.
@@ -4444,7 +5346,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten Fixpack 1.9.7_1511, veröffentlicht am 16. Mai 2018
+#### Änderungsprotokoll für Workerknoten Fixpack 1.9.7_1511, veröffentlicht am 16. Mai 2018
 {: #197_1511}
 
 In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack 1.9.7_1511 enthalten sind.
@@ -4470,7 +5372,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die im Workerknoten-Fixpack
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.9.7_1510, veröffentlicht am 30. April 2018
+#### Änderungsprotokoll für 1.9.7_1510, veröffentlicht am 30. April 2018
 {: #197_1510}
 
 In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 enthalten sind.
@@ -4520,9 +5422,22 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 ### Änderungsprotokoll Version 1.8 (nicht unterstützt)
 {: #18_changelog}
 
-Überprüfen Sie die folgenden Änderungen.
+Überprüfen Sie die Änderungsprotokolle der Version 1.8.
+{: shortdesc}
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1521, veröffentlicht am 20. September 2018
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1521, veröffentlicht am 20. September 2018](#1815_1521)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1520, veröffentlicht am 23. August 2018](#1815_1520)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1519, veröffentlicht am 13. August 2018](#1815_1519)
+*   [Änderungsprotokoll für 1.8.15_1518, veröffentlicht 27. Juli 2018](#1815_1518)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1516, veröffentlicht am 3. Juli 2018](#1813_1516)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1515, veröffentlicht am 21. Juni 2018](#1813_1515)
+*   [Änderungsprotokoll für 1.8.13_1514, veröffentlicht 19. Juni 2018](#1813_1514)
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.8.11_1512, veröffentlicht am 11. Juni 2018](#1811_1512)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1511, veröffentlicht am 18. Mai 2018](#1811_1511)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1510, veröffentlicht am 16. Mai 2018](#1811_1510)
+*   [Änderungsprotokoll für 1.8.11_1509, veröffentlicht am 19. April 2018](#1811_1509)
+
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1521, veröffentlicht am 20. September 2018
 {: #1815_1521}
 
 <table summary="Seit Version 1.8.15_1520 vorgenommene Änderungen">
@@ -4540,7 +5455,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 <td>Protokollrotation</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [command](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
+<td>Von Zeitgebern des Typs `cronjobs` wurde zu `systemd` gewechselt, um ein Fehlschlagen von `logrotate` auf Workerknoten zu vermeiden, die nicht innerhalb von 90 Tagen erneute geladen oder aktualisiert werden. **Hinweis**: In allen früheren Versionen für dieses Unterrelease war die primäre Platte mit Daten gefüllt, nachdem der Cron-Job fehlgeschlagen war, weil die Protokolle nicht rotiert wurden. Der Cron-Job schlägt fehl, nachdem der Workerknoten 90 Tage aktiv ist, ohne erneut aktualisiert oder geladen zu werden. Wenn die gesamte Speicherkapazität der primären Platte durch Protokolle erschöpft ist, wechselt der Workerknoten in den Status 'Fehlgeschlagen'. Der Fehler auf dem Workerknoten kann mit dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload` oder dem [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) `ibmcloud ks worker-update` behoben werden.</td>
 </tr>
 <tr>
 <td>Laufzeitkomponenten für Workerknoten (`kubelet`, `kube-proxy`, `docker`)</td>
@@ -4552,7 +5467,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 <td>Ablauf des Rootkennworts</td>
 <td>n.z.</td>
 <td>n.z.</td>
-<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cs_cli_reference#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload).</td>
+<td>Rootkennwörter für Workerknoten laufen aus Konformitätsgründen nach 90 Tagen ab. Wenn für die Automatisierungstools eine Anmeldung am Workerknoten erforderlich ist oder wenn sie auf Cron-Jobs angewiesen sind, die als Root ausgeführt werden, können Sie den Ablauf der Kennwortgültigkeit inaktivieren, indem Sie sich am Workerknoten anmelden und `chage -M -1 root` ausführen. **Hinweis**: Falls Konformitätsanforderungen für die Sicherheit gelten, die eine Ausführung als Root oder eine Entfernung des Ablaufs der Kennwortgültigkeit verhindert, inaktivieren Sie nicht das Ablaufdatum. Stattdessen können Sie die Workerknoten mindestens alle 90 Tage [aktualisieren](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) oder [erneut laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
 </tr>
 <tr>
 <td>systemd</td>
@@ -4563,7 +5478,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1520, veröffentlicht am 23. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1520, veröffentlicht am 23. August 2018
 {: #1815_1520}
 
 <table summary="Seit Version 1.9.9_1519 vorgenommene Änderungen">
@@ -4592,7 +5507,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1519, veröffentlicht am 13. August 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.15_1519, veröffentlicht am 13. August 2018
 {: #1815_1519}
 
 <table summary="Seit Version 1.9.9_1518 vorgenommene Änderungen">
@@ -4615,7 +5530,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.8.15_1518, veröffentlicht 27. Juli 2018
+#### Änderungsprotokoll für 1.8.15_1518, veröffentlicht 27. Juli 2018
 {: #1815_1518}
 
 <table summary="Seit Version 1.8.13_1516 vorgenommene Änderungen">
@@ -4662,7 +5577,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1516, veröffentlicht am 3. Juli 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1516, veröffentlicht am 3. Juli 2018
 {: #1813_1516}
 
 <table summary="Seit Version 1.8.13_1515 vorgenommene Änderungen">
@@ -4686,7 +5601,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1515, veröffentlicht am 21. Juni 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.13_1515, veröffentlicht am 21. Juni 2018
 {: #1813_1515}
 
 <table summary="Seit Version 1.8.13_1514 vorgenommene Änderungen">
@@ -4709,7 +5624,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für 1.8.13_1514, veröffentlicht 19. Juni 2018
+#### Änderungsprotokoll für 1.8.13_1514, veröffentlicht 19. Juni 2018
 {: #1813_1514}
 
 <table summary="Seit Version 1.8.11_1512 vorgenommene Änderungen">
@@ -4751,7 +5666,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </table>
 
 
-### Änderungsprotokoll für Workerknoten-Fixpack 1.8.11_1512, veröffentlicht am 11. Juni 2018
+#### Änderungsprotokoll für Workerknoten-Fixpack 1.8.11_1512, veröffentlicht am 11. Juni 2018
 {: #1811_1512}
 
 <table summary="Seit Version 1.8.11_1511 vorgenommene Änderungen">
@@ -4775,7 +5690,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </table>
 
 
-### Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1511, veröffentlicht am 18. Mai 2018
+#### Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1511, veröffentlicht am 18. Mai 2018
 {: #1811_1511}
 
 <table summary="Seit Version 1.8.11_1510 vorgenommene Änderungen">
@@ -4798,7 +5713,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </tbody>
 </table>
 
-### Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1510, veröffentlicht am 16. Mai 2018
+#### Änderungsprotokoll für Workerknoten Fixpack 1.8.11_1510, veröffentlicht am 16. Mai 2018
 {: #1811_1510}
 
 <table summary="Seit Version 1.8.11_1509 vorgenommene Änderungen">
@@ -4822,7 +5737,7 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 </table>
 
 
-### Änderungsprotokoll für 1.8.11_1509, veröffentlicht am 19. April 2018
+#### Änderungsprotokoll für 1.8.11_1509, veröffentlicht am 19. April 2018
 {: #1811_1509}
 
 <table summary="Seit Version 1.8.8_1507 vorgenommene Änderungen">
@@ -4869,7 +5784,13 @@ In der folgenden Tabelle finden Sie die Änderungen, die in Patch 1.9.7_1510 ent
 ### Version 1.7, Änderungsprotokoll (nicht unterstützt)
 {: #17_changelog}
 
-Überprüfen Sie die folgenden Änderungen.
+Überprüfen Sie die Änderungsprotokolle der Version 1.7.
+{: shortdesc}
+
+*   [Änderungsprotokoll für Workerknoten-Fixpack 1.7.16_1514, veröffentlicht am 11. Juni 2018](#1716_1514)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.7.16_1513, veröffentlicht am 18. Mai 2018](#1716_1513)
+*   [Änderungsprotokoll für Workerknoten Fixpack 1.7.16_1512, veröffentlicht am 16. Mai 2018](#1716_1512)
+*   [Änderungsprotokoll für 1.7.16_1511, veröffentlicht am 19. April 2018](#1716_1511)
 
 #### Änderungsprotokoll für Workerknoten-Fixpack 1.7.16_1514, veröffentlicht am 11. Juni 2018
 {: #1716_1514}

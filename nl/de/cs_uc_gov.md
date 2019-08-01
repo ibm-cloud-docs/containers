@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Anwendungsfälle für Behörden für {{site.data.keyword.Bluemix_notm}}
@@ -39,9 +39,9 @@ Der Leiter eines Open Government-Programms muss öffentliche Daten gemeinsam mit
 Warum {{site.data.keyword.Bluemix_notm}}: Mit {{site.data.keyword.containerlong_notm}} stellt der Leiter den transformativen Wert der kombinierten öffentlich/privaten Daten bereit. Analog stellt der Service eine öffentliche Cloudplattform bereit, auf der für Microservices ein Refactoring ausgeführt werden kann und die Microservices aus den monolithischen lokalen Apps zugänglich gemacht werden können. Darüber hinaus ermöglicht eine öffentliche Cloud Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen.
 
 Schlüsseltechnologien:    
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Bereitstellung von Zugriff auf öffentliche Daten mit {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about)
+* [Bereitstellung von Zugriff auf öffentliche Daten mit {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
 * [IBM Cloud Analytics-Plug-and-play-Services](https://www.ibm.com/cloud/analytics)
 
 **Kontext: Behörden verbessern Zusammenarbeit und Geschwindigkeit mit Entwicklergemeinschaft, die öffentliche und private Daten kombiniert**
@@ -117,7 +117,7 @@ Eine IT-Führungskraft einer privaten Reederei und ein öffentlich geführter Ha
 Warum {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} ermöglicht Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen. Von den Containern wurde eine gemeinsam genutzte Plattform bereitgestellt, auf der sowohl der Hafen als auch die Reederei sicher sind, dass die gemeinsamen genutzten Informationen auf einer sicheren Plattform gehostet wurden. Und diese Plattform lässt sich skalieren, vom kleinen System für Entwicklungstests bis zum großen Produktionssystem. Offene Toolchains beschleunigen die Entwicklung durch die Automatisierung der Erstellungen, Tests und Bereitstellungen.
 
 Schlüsseltechnologien:    
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Containersicherheit und -isolierung](/docs/containers?topic=containers-security#security)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

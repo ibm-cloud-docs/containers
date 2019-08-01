@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-06-04"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Container auf Grundlage von Images erstellen
@@ -37,15 +39,14 @@ Ein Image wird auf der Grundlage einer Dockerfile erstellt. Hierbei handelt es s
 Images werden in der Regel in einer Registry gespeichert, auf die der Zugriff entweder öffentlich (extern) möglich ist (öffentliche Registry) oder aber so eingerichtet ist, dass der Zugriff auf eine kleine Gruppe von Benutzern beschränkt ist (private Registry).
 {:shortdesc}
 
-Öffentliche Registrys wie Docker Hub sind gut dafür geeignet, sich mit Docker und Kubernetes vertraut zu machen und die erste containerisierte App in einem Cluster zu erstellen. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.registryshort_notm}} bereitgestellte Registry) verwenden,
-um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet oder unbefugt Änderungen an ihnen vorgenommen werden. Private Registrys müssen vom Clusteradministrator eingerichtet werden, damit sichergestellt ist, dass die Berechtigungsnachweise für den Zugriff auf die private Registry den Clusterbenutzern zur Verfügung stehen.
+Öffentliche Registrys wie Docker Hub sind gut dafür geeignet, sich mit Docker und Kubernetes vertraut zu machen und die erste containerisierte App in einem Cluster zu erstellen. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry, wie z. B. die von {{site.data.keyword.registryshort_notm}} bereitgestellte Registry, verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet oder unbefugt Änderungen an ihnen vorgenommen werden. Private Registrys müssen vom Clusteradministrator eingerichtet werden, damit sichergestellt ist, dass die Berechtigungsnachweise für den Zugriff auf die private Registry den Clusterbenutzern zur Verfügung stehen.
 
 
 Für die Bereitstellung Ihrer Apps im Cluster können Sie mehrere Registrys mit {{site.data.keyword.containerlong_notm}} verwenden.
 
 |Registry|Beschreibung|Vorteil|
 |--------|-----------|-------|
-|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)|Mit dieser Option können Sie Ihr eigenes geschütztes Docker-Image-Repository in {{site.data.keyword.registryshort_notm}} einrichten, in dem Sie Images sicher speichern und gemeinsam mit den Clusterbenutzern nutzen können.|<ul><li>Ermöglicht die Verwaltung des Zugriffs auf Images in Ihrem Konto.</li><li>Ermöglicht die Verwendung der von {{site.data.keyword.IBM_notm}} bereitgestellten Images und Beispielapps wie zum Beispiel {{site.data.keyword.IBM_notm}} Liberty als übergeordnetes Image, zu dem eigener App-Code hinzugefügt werden kann.</li><li>Automatisches Scannen der Images durch Vulnerability Advisor auf potenzielle Sicherheitslücken und Bereitstellung betriebssystemspezifischer Empfehlungen, um diese zu schließen.</li></ul>|
+|[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|Mit dieser Option können Sie Ihr eigenes geschütztes Docker-Image-Repository in {{site.data.keyword.registryshort_notm}} einrichten, in dem Sie Images sicher speichern und gemeinsam mit den Clusterbenutzern nutzen können.|<ul><li>Ermöglicht die Verwaltung des Zugriffs auf Images in Ihrem Konto.</li><li>Ermöglicht die Verwendung der von {{site.data.keyword.IBM_notm}} bereitgestellten Images und Beispielapps wie zum Beispiel {{site.data.keyword.IBM_notm}} Liberty als übergeordnetes Image, zu dem eigener App-Code hinzugefügt werden kann.</li><li>Automatisches Scannen der Images durch Vulnerability Advisor auf potenzielle Sicherheitslücken und Bereitstellung betriebssystemspezifischer Empfehlungen, um diese zu schließen.</li></ul>|
 |Beliebige andere private Registry|Ermöglicht die Verbindung einer beliebigen vorhandenen privaten Registry mit Ihrem Cluster durch Erstellung eines [geheimen Schlüssels für Image-Pull-Operationen (imagePullSecret) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/containers/images/). Dieser dient dazu, die URL zur Ihrer Registry und die Berechtigungsnachweise sicher in einem geheimen Kubernetes-Schlüssel zu speichern.|<ul><li>Ermöglicht die Verwendung vorhandener privater Registrys unabhängig von ihrer jeweiligen Quelle (Docker Hub, organisationseigene Registrys oder andere private Cloud-Registrys).</li></ul>|
 |[Öffentlicher Docker Hub ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://hub.docker.com/){: #dockerhub}|Verwenden Sie diese Option, um vorhandene öffentliche Images von Docker Hub direkt in Ihrer [Kubernetes-Bereitstellung![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) zu verwenden, wenn keine Dockerfile-Änderungen erforderlich sind. <p>**Hinweis:** Berücksichtigen Sie, dass diese Option möglicherweise den Sicherheitsanforderungen Ihrer Organisation (wie beispielsweise bei der Zugriffsverwaltung, der Ermittlung von Sicherheitslücken oder der Vertraulichkeit von App-Daten) nicht entspricht.</p>|<ul><li>Für Ihren Cluster ist keine zusätzliche Konfiguration erforderlich.</li><li>Enthält eine Vielzahl von Open-Source-Anwendungen.</li></ul>|
 {: caption="Optionen für öffentliche und für private Image-Registrys" caption-side="top"}
@@ -80,9 +81,9 @@ Sie können Container aus einem von IBM bereitgestellten öffentlichen Image ode
 
 Vorbereitende Schritte:
 1. [Richten Sie einen Namensbereich in {{site.data.keyword.registryshort_notm}} ein und übertragen Sie Images per Push-Operation an diesen Namensbereich](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. Wenn Sie einen vorhandenen Cluster verwenden, der vor dem **25. Februar 2019** erstellt wurde, [aktualisieren Sie Ihren Cluster für die Verwendung des API-Schlüssels `imagePullSecret`](#imagePullSecret_migrate_api_key).
-4. [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4. [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um einen Container im **Standardnamensbereich** Ihres Clusters bereitzustellen:
 
@@ -111,7 +112,7 @@ Gehen Sie wie folgt vor, um einen Container im **Standardnamensbereich** Ihres C
     {: codeblock}
 
     Ersetzen Sie die Image-URL-Variablen durch die Informationen für Ihr Image:
-    *  **`<app_name>`**: Der Name Ihrer App. 
+    *  **`<app_name>`**: Der Name Ihrer App.
     *  **`<region>`**: Der regionale {{site.data.keyword.registryshort_notm}}-API-Endpunkt für die Registry-Domäne. Zum Auflisten der Domäne für die Region, in der Sie angemeldet sind, führen Sie `ibmcloud cr api` aus.
     *  **`<namespace>`**: Der Registry-Namensbereich. Zum Abrufen der Informationen zu Ihrem Namensbereich führen Sie den Befehl `ibmcloud cr namespace-list` aus.
     *  **`<my_image>:<tag>`**: Das Image und der Tag, das bzw. die zum Erstellen des Containers verwendet werden soll. Zum Abrufen der in Ihrer Registry verfügbaren Images führen Sie den Befehl `ibmcloud cr images` aus.
@@ -159,7 +160,10 @@ Die vorherige Methode zur Berechtigung des Clusterzugriffs auf {{site.data.keywo
 
 Tokens autorisieren den Zugriff auf die veralteten `registry.bluemix.net`-Registry-Domänen, während API-Schlüssel den Zugriff auf die `icr.io`-Registry-Domänen autorisieren. Während der Übergangszeit von der Token- zur API-Schlüssel-basierten Authentifizierung werden sowohl Token- als auch API-Schlüssel-basierte geheime Schlüssel für Image-Pull-Operationen für eine bestimmte Zeit erstellt. Wenn sowohl Token- als auch API-Schlüssel-basierte geheime Schlüssel für Image-Pull-Operationen vorhanden sind, kann Ihr Cluster Images entweder aus `registry.bluemix.net`- oder aus `icr.io`-Domänen im Kubernetes-Standardnamensbereich (`default`) extrahieren.
 
-Bevor die veralteten Tokens und `registry.bluemix.net`-Domänen nicht mehr unterstützt werden, aktualisieren Sie die geheimen Schlüssel für Image-Pull-Operationen Ihres Clusters, sodass sie die API-Schlüssel-Methode für den [Kubernetes-Standardnamensbereich (`default`) und [alle anderen Namensbereiche oder Konten](#other)(#imagePullSecret_migrate_api_key)] verwenden, die Sie möglicherweise nutzen. Anschließend aktualisieren Sie Ihre Bereitstellungen, sodass sie aus den `icr.io`-Registry-Domänen extrahieren.
+Bevor die veralteten Tokens und `registry.bluemix.net`-Domänen nicht mehr unterstützt werden, aktualisieren Sie die geheimen Schlüssel für Image-Pull-Operationen Ihres Clusters, sodass sie die API-Schlüssel-Methode für den [Kubernetes-Standardnamensbereich (`default`)](#imagePullSecret_migrate_api_key) und [alle anderen Namensbereiche oder Konten](#other) verwenden, die Sie möglicherweise nutzen. Anschließend aktualisieren Sie Ihre Bereitstellungen, sodass sie aus den `icr.io`-Registry-Domänen extrahieren.
+
+**Bin ich fertig, nachdem ich einen geheimen Schlüssel für Image-Pull-Operationen in einen anderen Kubernetes-Namensbereich kopiert oder dort erstellt habe?**<br>
+Nicht ganz. Ihre Container müssen zum Extrahieren von Images unter Verwendung des von Ihnen erstellten geheimen Schlüssels berechtigt sein. Sie können dem Servicekonto für den Namensbereich den geheimen Schlüssel für Image-Pull-Operationen hinzufügen oder in jeder Bereitstellung auf den geheimen Schlüssel verweisen. Anweisungen finden Sie unter [Geheimen Schlüssel für Image-Pull-Operationen zum Bereitstellen von Containern verwenden](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 <br />
 
@@ -171,7 +175,7 @@ Neue {{site.data.keyword.containerlong_notm}}-Cluster speichern einen API-Schlü
 {: shortdesc}
 
 **Vorbereitende Schritte**:
-*   [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*   [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Stellen Sie sicher, dass Sie über die folgenden Berechtigungen verfügen:
     *   {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Operator oder Administrator** für {{site.data.keyword.containerlong_notm}}. Der Kontoeigner kann Ihnen die Rolle erteilen, indem er Folgendes ausführt:
         ```
@@ -229,8 +233,10 @@ Neue {{site.data.keyword.containerlong_notm}}-Cluster speichern einen API-Schlü
 ## Geheimen Schlüssel für Image-Pull-Operationen für den Zugriff auf andere Kubernetes-Clusternamensbereiche, andere {{site.data.keyword.Bluemix_notm}}-Konten oder externe private Registrys verwenden
 {: #other}
 
-Richten Sie Ihren eigenen geheimen Schlüssel für Image-Pull-Operationen in Ihrem Cluster ein, um Container in anderen Kubernetes-Namensbereichen als `default` bereitzustellen, Images zu verwenden, die in anderen {{site.data.keyword.Bluemix_notm}}-Konten gespeichert sind, oder Images zu verwenden, die in externen privaten Registrys gespeichert sind. Weiterhin können Sie einen geheimen Schlüssel für Image-Pull-Operationen erstellen, um IAM-Zugriffsrichtlinien anzuwenden, die Berechtigungen auf bestimmte Repositorys für Registry-Images, Namensbereiche oder Aktionen (z. B. `push` oder `pull`) einschränken.
+Richten Sie Ihren eigenen geheimen Schlüssel für Image-Pull-Operationen in Ihrem Cluster ein, um Container in anderen Kubernetes-Namensbereichen als `default` bereitzustellen, Images zu verwenden, die in anderen {{site.data.keyword.Bluemix_notm}}-Konten gespeichert sind, oder Images zu verwenden, die in externen privaten Registrys gespeichert sind. Weiterhin können Sie einen eigenen geheimen Schlüssel für Image-Pull-Operationen erstellen, um IAM-Zugriffsrichtlinien anzuwenden, die Berechtigungen auf bestimmte Namensbereiche für Registry-Images oder Aktionen (z. B. `push` oder `pull`) beschränken.
 {:shortdesc}
+
+Nachdem Sie den geheimen Schlüssel zum Extrahieren von Images erstellt haben, müssen Ihre Container den geheimen Schlüssel verwenden, um zum Extrahieren eines Image aus der Registry berechtigt zu sein. Sie können dem Servicekonto für den Namensbereich den geheimen Schlüssel für Image-Pull-Operationen hinzufügen oder in jeder Bereitstellung auf den geheimen Schlüssel verweisen. Anweisungen finden Sie unter [Geheimen Schlüssel für Image-Pull-Operationen zum Bereitstellen von Containern verwenden](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 Geheime Schlüssel für Image-Pull-Operationen sind nur für die Kubernetes-Namensbereiche gültig, für die sie erstellt wurden. Wiederholen Sie diese Schritte für jeden Namensbereich, in dem Sie Container bereitstellen möchten. Für Images aus [DockerHub](#dockerhub) sind keine geheimen Schlüssel für Image-Pull-Operationen erforderlich.
 {: tip}
@@ -238,9 +244,9 @@ Geheime Schlüssel für Image-Pull-Operationen sind nur für die Kubernetes-Name
 Vorbereitende Schritte:
 
 1.  [Richten Sie einen Namensbereich in {{site.data.keyword.registryshort_notm}} ein und übertragen Sie Images per Push-Operation an diesen Namensbereich](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2.  [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2.  [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3.  Wenn Sie über einen vorhandenen Cluster verfügen, der vor dem **<25. Februar 2019>** erstellt wurde, [aktualisieren Sie Ihren Cluster zur Verwendung von API-Schlüsseln in geheimen Schlüsseln für Image-Pull-Operationen](#imagePullSecret_migrate_api_key).
-4.  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+4.  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
 Wählen Sie zur Verwendung Ihres eigenen geheimen Schlüssels für Image-Pull-Operationen eine der folgenden Optionen aus:
@@ -324,12 +330,12 @@ Sie können einen geheimen Schlüssel für Image-Pull-Operationen, z. B. den, de
     kubectl get secrets -n <name_des_namensbereichs>
     ```
     {: pre}
-5.  [Sie haben die Möglichkeit, den geheimen Schlüssel für Image-Pull-Operationen einem Kubernetes-Servicekonto hinzuzufügen, sodass jeder Pod in dem Namensbereich den geheimen Schlüssel für Image-Pull-Operationen verwenden kann, wenn Sie einen Container bereitstellen](#use_imagePullSecret).
+5.  [Fügen Sie einem Kubernetes Service-Konto den geheimen Schlüssel für Image-Pull-Operationen hinzu, sodass jeder Pod in dem Namensbereich den geheimen Schlüssel für Image-Pull-Operationen verwenden kann, wenn Sie einen Container bereitstellen](#use_imagePullSecret).
 
 ### Geheimen Schlüssel für Image-Pull-Operationen mit unterschiedlichen IAM-API-Schlüsselberechtigungsnachweisen erstellen, um mehr Kontrolle oder Zugriff auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Konten zu erhalten
 {: #other_registry_accounts}
 
-Sie können {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien an Benutzer oder an eine Service-ID zuweisen, um die Berechtigungen für bestimmte Repositorys für Registry-Images, Namensbereiche oder Aktionen (wie `push` oder `pull`) einzuschränken. Anschließend erstellen Sie einen API-Schlüssel und speichern diese Registry-Berechtigungsnachweise in einem geheimen Schlüssel für Image-Pull-Operationen für Ihren Cluster.
+Sie können Benutzern oder einer Service-ID {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien zuweisen, um die Berechtigungen auf bestimmte Namensbereiche für Registry-Images oder Aktionen (wie `push` oder `pull`) zu beschränken. Anschließend erstellen Sie einen API-Schlüssel und speichern diese Registry-Berechtigungsnachweise in einem geheimen Schlüssel für Image-Pull-Operationen für Ihren Cluster.
 {: shortdesc}
 
 Wenn Sie beispielsweise auf Images in anderen {{site.data.keyword.Bluemix_notm}}-Konten zugreifen möchten, erstellen Sie einen API-Schlüssel, der die {{site.data.keyword.registryshort_notm}}-Berechtigungsnachweise eines Benutzers oder einer Service-ID in diesem Konto speichert. Anschließend speichern Sie Im Konto Ihres Clusters die API-Schlüsselberechtigungsnachweise in einem geheimen Schlüssel für Image-Pull-Operationen für jeden Cluster und Clusternamensbereich.
@@ -462,7 +468,7 @@ Mit den folgenden Schritten wird ein API-Schlüssel erstellt, der die Berechtigu
     kubectl get secrets --namespace <kubernetes-namensbereich>
     ```
     {: pre}
-8.  [Sie haben die Möglichkeit, den geheimen Schlüssel für Image-Pull-Operationen einem Kubernetes-Servicekonto hinzuzufügen, sodass jeder Pod in dem Namensbereich den geheimen Schlüssel für Image-Pull-Operationen verwenden kann, wenn Sie einen Container bereitstellen](#use_imagePullSecret).
+8.  [Fügen Sie einem Kubernetes Service-Konto den geheimen Schlüssel für Image-Pull-Operationen hinzu, sodass jeder Pod in dem Namensbereich den geheimen Schlüssel für Image-Pull-Operationen verwenden kann, wenn Sie einen Container bereitstellen](#use_imagePullSecret).
 
 ### Zugriff auf Images in anderen privaten Registrys
 {: #private_images}
@@ -472,7 +478,7 @@ Wenn bereits eine private Registry vorhanden ist, müssen Sie die Berechtigungsn
 
 Vorbereitende Schritte:
 
-1.  [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+1.  [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 2.  [Geben Sie als Ziel Ihrer CLI Ihren Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Gehen Sie wie folgt vor, um einen geheimen Schlüssel für Image-Pull-Operationen zu erstellen:
@@ -531,12 +537,12 @@ Gehen Sie wie folgt vor, um einen geheimen Schlüssel für Image-Pull-Operatione
 ## Geheimen Schlüssel für Image-Pull-Operationen zum Bereitstellen von Containern verwenden
 {: #use_imagePullSecret}
 
-Sie können einen geheimen Schlüssel für Image-Pull-Operationen in Ihrer Pod-Bereitstellung definieren oder den geheimen Schlüssel für Image-Pull-Operationen in Ihrem Kubernetes-Servicekonto speichern, sodass er für alle Bereitstellungen, bei denen kein Servicekonto angegeben wird, verfügbar ist.
+Sie können einen geheimen Schlüssel für Image-Pull-Operationen in Ihrer Pod-Bereitstellung definieren oder den geheimen Schlüssel für Image-Pull-Operationen in Ihrem Kubernetes Service-Konto speichern, sodass er für alle Bereitstellungen, bei denen kein Servicekonto angegeben wird, verfügbar ist.
 {: shortdesc}
 
 Wählen Sie eine der beiden folgenden Optionen aus:
 * [Verweis auf den geheimen Schlüssel für Image-Pull-Operationen in Ihrer Pod-Bereitstellung:](#pod_imagePullSecret) Verwenden Sie diese Option, wenn Sie nicht allen Pods in Ihrem Namensbereich standardmäßig Zugriff auf Ihre Registry geben möchten.
-* [Speichern des geheimen Schlüssels für Image-Pull-Operationen im Kubernetes-Servicekonto](#store_imagePullSecret): Verwenden Sie diese Option, um Zugriff auf Images in Ihrer Registry für alle Bereitstellungen in den ausgewählten Kubernetes-Namensbereichen zu erteilen.
+* [Speichern des geheimen Schlüssels für Image-Pull-Operationen im Kubernetes Service-Konto](#store_imagePullSecret): Verwenden Sie diese Option, um Zugriff auf Images in Ihrer Registry für alle Bereitstellungen in den ausgewählten Kubernetes-Namensbereichen zu erteilen.
 
 Vorbereitende Schritte:
 * [Erstellen Sie einen geheimen Schlüssel für Image-Pull-Operationen](#other), um auf andere Images in anderen Registrys oder Kubernetes-Namensbereichen als `default` zuzugreifen.
@@ -616,10 +622,10 @@ Wenn Sie auf den geheimen Schlüssel für Image-Pull-Operationen in einer Pod-Be
     ```
     {: pre}
 
-### Geheimen Schlüssel für Image-Pull-Operationen im Kubernetes-Servicekonto für den ausgewählten Namensbereich speichern
+### Geheimen Schlüssel für Image-Pull-Operationen im Kubernetes Service-Konto für den ausgewählten Namensbereich speichern
 {:#store_imagePullSecret}
 
-Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie können diesem Servicekonto den geheimen Schlüssel für Image-Pull-Operationen hinzufügen, um Zugriff auf Images in Ihrer Registry zu erteilen. Bereitstellungen, bei denen kein Servicekonto angegeben ist, verwenden automatisch das Servicekonto `default` für diesen Namensbereich.
+Jeder Namensbereich hat ein Kubernetes Service-Konto namens `default`. Sie können diesem Servicekonto den geheimen Schlüssel für Image-Pull-Operationen hinzufügen, um Zugriff auf Images in Ihrer Registry zu erteilen. Bereitstellungen, bei denen kein Servicekonto angegeben ist, verwenden automatisch das Servicekonto `default` für diesen Namensbereich.
 {:shortdesc}
 
 1. Prüfen Sie, ob bereits ein geheimer Schlüssel für Image-Pull-Operationen für Ihr Standardservicekonto vorhanden ist.
@@ -667,7 +673,7 @@ Jeder Namensbereich hat ein Kubernetes-Servicekonto namens `default`. Sie könne
    spec:
      containers:
        - name: <containername>
-         image: registry.<region>.bluemix.net/<name_des_namensbereichs>/<imagename>:<tag>
+         image: <region>.icr.io/<name_des_namensbereichs>/<imagename>:<tag>
    ```
    {: codeblock}
 
@@ -710,7 +716,7 @@ Mit einem Registry-Token, das im geheimen Schlüssel für Image-Pull-Operationen
 
 Vorbereitende Schritte:
 1. [Richten Sie einen Namensbereich in {{site.data.keyword.registryshort_notm}} ein und übertragen Sie Images per Push-Operation an diesen Namensbereich](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_cli).
+2. [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. [Geben Sie als Ziel Ihrer CLI Ihren Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 Um einen Container im Standardnamensbereich (**default**) Ihres Clusters bereitzustellen, müssen Sie eine Konfigurationsdatei erstellen.

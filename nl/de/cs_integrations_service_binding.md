@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Services durch Binden von IBM Cloud-Services hinzufügen
@@ -35,7 +37,7 @@ Wenn Sie {{site.data.keyword.Bluemix_notm}}-Services zu Ihrem Cluster hinzufüge
 Eine Liste der unterstützten {{site.data.keyword.Bluemix_notm}}-Services finden Sie im [{{site.data.keyword.Bluemix_notm}}-Katalog](https://cloud.ibm.com/catalog).
 
 **Was ist eine {{site.data.keyword.Bluemix_notm}}-Servicebindung?**</br>
-Die Servicebindung ist eine schnelle Methode zum Erstellen von Serviceberechtigungsnachweisen für einen {{site.data.keyword.Bluemix_notm}}-Service und zum Speichern dieser Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in Ihrem Cluster. Zum Binden eines Service an Ihren Cluster müssen Sie zuerst eine Instanz des Service bereitstellen. Anschließend verwenden Sie den Befehl `ibmcloud ks cluster-service-bind`[](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_service_bind), um die Serviceberechtigungsnachweise und den geheimen Kubernetes-Schlüssel zu erstellen. Der geheime Kubernetes-Schlüssel wird automatisch in 'etcd' verschlüsselt, um Ihre Daten zu schützen.
+Die Servicebindung ist eine schnelle Methode zum Erstellen von Serviceberechtigungsnachweisen für einen {{site.data.keyword.Bluemix_notm}}-Service und zum Speichern dieser Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in Ihrem Cluster. Zum Binden eines Service an Ihren Cluster müssen Sie zuerst eine Instanz des Service bereitstellen. Anschließend verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind`, um die Serviceberechtigungsnachweise und den geheimen Kubernetes-Schlüssel zu erstellen. Der geheime Kubernetes-Schlüssel wird automatisch in 'etcd' verschlüsselt, um Ihre Daten zu schützen.
 
 Sollen die geheimen Schlüssel noch sicherer werden? Wenden Sie sich zur [Aktivierung von {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) im Cluster an Ihren Clusteradministrator, um neue und vorhandene geheime Schlüssel zu verschlüsseln, zum Beispiel den geheimen Schlüssel, in dem die Berechtigungsnachweise der {{site.data.keyword.Bluemix_notm}}-Serviceinstanzen enthalten sind.
 {: tip}
@@ -56,7 +58,7 @@ Vorbereitende Schritte:
     - [Die {{site.data.keyword.Bluemix_notm}} IAM-Plattform-Zugriffsrolle](/docs/containers?topic=containers-users#platform) **Editor** oder **Administrator** für den Cluster, in dem Sie einen Service binden möchten
     - [Die {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle](/docs/containers?topic=containers-users#platform) **Schreibberechtigter** oder **Manager** für den Kubernetes-Namensbereich, in dem Sie den Service binden möchten
     - Für Cloud Foundry-Services: [Die Cloud Foundry-Rolle](/docs/iam?topic=iam-mngcf#mngcf) **Entwickler** für den Bereich, in dem Sie den Service bereitstellen möchten
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm}}-Service hinzuzufügen:
 
@@ -174,7 +176,7 @@ Die Berechtigungsnachweise einer Serviceinstanz sind Base64-codiert und werden i
 
 Vorbereitende Schritte:
 -  Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Fügen Sie einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzu](#bind-services).
 
 ### Geheimen Schlüssel als Datenträger an Ihren Pod anhängen
@@ -216,7 +218,7 @@ Wenn Sie den geheimen Schlüssel als Datenträger an Ihren Pod anhängen, wird e
             app: secret-test
         spec:
           containers:
-          - image: registry.bluemix.net/ibmliberty:latest
+          - image: icr.io/ibmliberty:latest
             name: secret-test
             volumeMounts:
             - mountPath: <mountpfad>
@@ -371,7 +373,7 @@ Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare a
            app: secret-test
        spec:
          containers:
-         - image: registry.bluemix.net/ibmliberty:latest
+         - image: icr.io/ibmliberty:latest
            name: secret-test
            env:
            - name: BINDING
@@ -449,16 +451,16 @@ Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare a
    ```
    {: codeblock}
 
-8. Optional: Fügen Sie der App als Vorsichtsmaßnahme eine Fehlerbehandlung hinzu für den Fall, dass die Umgebungsvariable `BINDING` nicht ordnungsgemäß festgelegt ist. 
-   
-   Beispielcode in Java: 
+8. Optional: Fügen Sie der App als Vorsichtsmaßnahme eine Fehlerbehandlung hinzu für den Fall, dass die Umgebungsvariable `BINDING` nicht ordnungsgemäß festgelegt ist.
+
+   Beispielcode in Java:
    ```java
    if (System.getenv("BINDING") == null) {
     throw new RuntimeException("Environment variable 'SECRET' is not set!");
    }
    ```
    {: codeblock}
-   
+
    Beispielcode in Node.js:
    ```js
    if (!process.env.BINDING) {
@@ -467,4 +469,3 @@ Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare a
    }
    ```
    {: codeblock}
-

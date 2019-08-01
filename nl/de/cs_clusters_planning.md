@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,655 +21,239 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
-
-# Einrichtung Ihrer Cluster und Workerknoten planen
+# Einrichtung Ihres Clusternetzes planen
 {: #plan_clusters}
-Konzipieren Sie Ihren Standardcluster mit {{site.data.keyword.containerlong}} für maximale Verfügbarkeit und Kapazität für Ihre App.
+
+Entwerfen Sie eine Netzkonfiguration für Ihren {{site.data.keyword.containerlong}}-Cluster, die den Bedarf Ihrer Workloads und Ihrer Umgebung erfüllt.
 {: shortdesc}
 
-## Hoch verfügbare Cluster
-{: #ha_clusters}
+In einem {{site.data.keyword.containerlong_notm}}-Cluster werden Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Die Einrichtung der Kommunikation zwischen Workerknoten und dem Kubernetes-Master, anderen Services, dem Internet oder anderen privaten Netzen hängt davon ab, wie Sie Ihr IBM Cloud-Infrastrukturnetz (SoftLayer) einrichten.
 
-Die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten verzeichnen, ist geringer, wenn Sie Ihre Apps auf mehrere Workerknoten, Zonen und Cluster verteilen. Integrierte Funktionen wie Lastausgleich (Load Balancing) und Isolation erhöhen die Ausfallsicherheit gegenüber möglichen Fehlerbedingungen mit Hosts, Netzen oder Apps.
+
+Erstellen Sie zum ersten Mal einen Cluster? Probieren Sie zuerst das [Lernprogramm](/docs/containers?topic=containers-cs_cluster_tutorial) aus und kehren Sie hierher zurück, wenn Sie bereit für die Planung Ihrer einsatzfähigen Cluster sind.
+{: tip}
+
+[Machen Sie sich mit den grundlegenden Informationen zu Clusternetzen vertraut](#plan_basics), bevor Sie mit der Planung der Einrichtung Ihres Clusternetzes beginnen. Dann können Sie drei mögliche Clusternetzkonfigurationen prüfen, die für Szenarios auf Umgebungsbasis geeignet sind: [Workloads von mit dem Internet verbundenen Apps ausführen](#internet-facing), [lokales Rechenzentrum mit begrenztem öffentlichen Zugriff erweitern](#limited-public) und [lokales Rechenzentrum nur im privaten Netz erweitern](#private_clusters).
+
+## Grundlegende Informationen zu Clusternetzen
+{: #plan_basics}
+
+Wenn Sie Ihren Cluster erstellen, müssen Sie die Netzeinrichtung auswählen, damit Clusterkomponenten miteinander und mit Netzen oder Services außerhalb des Clusters kommunizieren können.
 {: shortdesc}
 
-Betrachten Sie diese potenziellen Clusterkonfigurationen, die nach zunehmendem Grad der Verfügbarkeit angeordnet sind.
+* [Kommunikation zwischen Workerknoten](#worker-worker): Alle Workerknoten müssen in der Lage sein, über das private Netz miteinander zu kommunizieren. In vielen Fällen muss die Kommunikation über mehrere private VLANs hinweg und in verschiedenen Zonen zugelassen werden, damit Worker Verbindungen zueinander herstellen können.
+* [Worker-zu-Master- und Benutzer-zu-Master-Kommunikation](#workeruser-master): Ihre Workerknoten und Ihre berechtigten Clusterbenutzer können über das öffentliche Netz mit TLS oder über das private Netz über private Serviceendpunkte sicher mit dem Kubernetes-Master kommunizieren. 
+* [Kommunikation zwischen Workerknoten und anderen {{site.data.keyword.Bluemix_notm}}-Services oder lokalen Netzen](#worker-services-onprem): Ermöglichen Sie Ihren Workerknoten die sichere Kommunikation mit anderen {{site.data.keyword.Bluemix_notm}}-Services, wie z. B. {{site.data.keyword.registrylong}}, und mit einem lokalen Netz.
+* [Externe Kommunikation mit Apps, die auf Workerknoten ausgeführt werden](#external-workers): Lassen Sie öffentliche oder private Anforderungen von außerhalb an den Cluster sowie Anforderungen aus dem Cluster an einen öffentlichen Endpunkt zu.
 
-![Hochverfügbarkeit für Cluster](images/cs_cluster_ha_roadmap_multizone.png)
+### Kommunikation zwischen Workerknoten
+{: #worker-worker}
 
-1. Ein [Einzelzonencluster](#single_zone) mit mehreren Workerknoten in einem Worker-Pool.
-2. Ein [Mehrzonencluster](#multizone), der Workerknoten über Zonen hinweg in einer Region verteilt.
-3. [Mehrere Cluster](#multiple_clusters), die über Zonen oder Regionen hinweg eingerichtet werden und über eine globale Lastausgleichsfunktion verbunden sind.
-
-## Einzelzonencluster
-{: #single_zone}
-
-Um die Verfügbarkeit für Ihre App zu verbessern und einen Failover für den Fall zu ermöglichen, dass ein Workerknoten in Ihrem Cluster nicht verfügbar ist, fügen Sie Ihrem Einzelzonencluster zusätzliche Workerknoten hinzu.
+Beim Erstellen eines Clusters werden die Workerknoten des Clusters automatisch mit einem privaten VLAN und optional mit einem öffentlichen VLAN verbunden. Ein VLAN konfiguriert eine Gruppe von Workerknoten und Pods so, als wären diese an dasselbe physische Kabel angeschlossen, und es bietet einen Kanal für die Konnektivität zwischen Workerknoten.
 {: shortdesc}
 
-<img src="images/cs_cluster_singlezone.png" alt="Hochverfügbarkeit für Cluster in einer einzelnen Zone" width="230" style="width:230px; border-style: none"/>
+**VLAN-Verbindungen für Workerknoten**</br>
+Alle Workerknoten müssen mit einem privaten VLAN verbunden sein, sodass jeder Workerknoten Informationen von anderen Workerknoten empfangen und Informationen an andere Workerknoten senden kann. Wenn Sie einen Cluster mit Workerknoten erstellen, die auch mit einem öffentlichen VLAN verbunden sind, können Ihre Workerknoten mit dem Kubernetes-Master automatisch über das öffentliche VLAN und über das private VLAN kommunizieren, wenn Sie einen privaten Serviceendpunkt aktivieren. Das öffentliche VLAN stellt außerdem öffentliche Netzkonnektivität bereit, sodass Sie Apps in Ihrem Cluster im Internet zugänglich machen können. Wenn Sie Ihre Apps jedoch vor der öffentlichen Schnittstelle schützen wollen, sind verschiedene Optionen zum Schützen Ihres Clusters verfügbar, wie zum Beispiel die Verwendung von Calico-Netzrichtlinien oder die Eingrenzung von externen Netzworkloads auf Edge-Workerknoten.
+* Kostenlose Cluster: Bei kostenlosen Clustern werden die Workerknoten des Clusters standardmäßig mit einem öffentlichen und einem privaten VLAN verbunden, deren Eigner IBM ist. Da IBM die VLANs, Teilnetze und IP-Adressen steuert, können Sie keine Mehrzonencluster erstellen oder Ihrem Cluster Teilnetze hinzufügen; darüber hinaus können Sie zum Verfügbarmachen Ihrer App nur NodePort-Services verwenden.</dd>
+* Standardcluster: Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. Wenn Sie angeben, dass Workerknoten nur mit einem privaten VLAN verbunden sein müssen, wird ein privates VLAN nur in dieser Zone automatisch bereitgestellt. Für jeden weiteren Cluster, den Sie in dieser Zone erstellen, können Sie das VLAN-Paar angeben, das Sie verwenden möchten. Sie können dasselbe öffentliche und private VLAN wiederverwenden, die für Sie erstellt wurden, da ein VLAN von mehreren Clustern gemeinsam genutzt werden kann.
 
-Standardmäßig wird der Einzelzonencluster mit einem Worker-Pool konfiguriert, der den Namen `default` hat. Der Worker-Pool gruppiert Workerknoten mit derselben Konfiguration, wie z. B. dem Maschinentyp, die Sie während der Clustererstellung definiert haben. Sie können Ihrem Cluster weitere Workerknoten hinzufügen, indem Sie [die Größe eines vorhandenen Worker-Pools ändern](/docs/containers?topic=containers-clusters#resize_pool) oder [einen neuen Worker-Pool hinzufügen](/docs/containers?topic=containers-clusters#add_pool).
+Weitere Informationen zu VLANs, Teilnetzen und IP-Adressen finden Sie unter [Übersicht über den Netzbetrieb in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
 
-Wenn Sie weitere Workerknoten hinzufügen, können App-Instanzen auf mehrere Workerknoten verteilt werden. Wenn ein Workerknoten ausfällt, werden die App-Instanzen auf den verfügbaren Workerknoten weiter ausgeführt. Kubernetes plant Pods von nicht verfügbaren Workerknoten automatisch neu, um die Leistung und Kapazität für Ihre App zu gewährleisten. Um sicherzustellen, dass die Pods gleichmäßig auf die Workerknoten verteilt werden, implementieren Sie [Pod-Affinität](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature).
+**Kommunikation zwischen Workerknoten über Teilnetze und VLANs**</br>
+In verschiedenen Situationen müssen Komponenten in Ihrem Cluster berechtigt werden, über mehrere private VLANs hinweg zu kommunizieren. Wenn Sie zum Beispiel einen Mehrzonencluster erstellen wollen, wenn Sie mehrere VLANs für einen Cluster haben oder wenn Sie mehrere Teilnetze im selben VLAN haben, können die Workerknoten in verschiedenen Teilnetzen desselben VLAN oder in verschiedenen VLANs nicht automatisch miteinander kommunizieren. Sie müssen entweder VRF (Virtual Routing and Forwarding) oder das VLAN-Spanning für Ihr IBM Cloud-Infrastrukturkonto (SoftLayer) aktivieren.
 
-**Kann ich einen Einzelzonencluster in einen Mehrzonencluster konvertieren?**</br>
-Ja, wenn sich der Cluster in einer der [unterstützten Standorte in einer Mehrzonen-Metropole](/docs/containers?topic=containers-regions-and-zones#zones) befindet. Weitere Informationen finden Sie im Abschnitt [Von eigenständigen Workerknoten auf Worker-Pools aktualisieren](/docs/containers?topic=containers-update#standalone_to_workerpool).
+* [VRF (Virtual Routing and Forwarding)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud): VRF ermöglicht allen privaten VLANs und Teilnetzen in Ihrem Infrastrukturkonto die Kommunikation miteinander. Außerdem ist VRF erforderlich, um die Kommunikation Ihrer Worker und Ihres Masters über den privaten Serviceendpunkt sowie die Kommunikation mit anderen {{site.data.keyword.Bluemix_notm}}-Instanzen, die private Serviceendpunkte unterstützen, zu ermöglichen. Führen Sie `ibmcloud account update --service-endpoint-enable true` aus, um VRF zu aktivieren. Die Ausgabe dieses Befehls fordert Sie zum Öffnen eines Supportfalls auf, um Ihr Konto für die Verwendung von VRF und Serviceendpunkten zu aktivieren. VRF schließt die Option des VLAN-Spannings für Ihr Konto aus, da alle VLANs kommunizieren können.</br></br>
+Wenn VRF aktiviert ist, kann jedes System, das mit einem der privaten VLANs in demselben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist, mit den Workerknoten im Cluster kommunizieren. Sie können Ihren Cluster von anderen Systemen im privaten Netz mithilfe von [Calico-Richtlinien für private Netze](/docs/containers?topic=containers-network_policies#isolate_workers) isolieren.</dd>
+* [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning): Aktivieren Sie VLAN-Spanning, wenn Sie VRF nicht aktivieren können oder wollen, z. B. weil der Master nicht im privaten Netz zugänglich sein muss oder wenn Sie eine Gateway-Einheit für den Zugriff auf den Master über das öffentliche VLAN verwenden. Wenn Sie beispielsweise über eine vorhandene Gateway-Einheit verfügen und dann einen Cluster hinzufügen, sind die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Gateway-Einheit konfiguriert, aber VLAN-Spanning ermöglicht das Routing zwischen den Teilnetzen. Zum Aktivieren von VLAN-Spanning müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`. Sie können den privaten Serviceendpunkt nicht aktivieren, wenn Sie VLAN-Spanning anstelle von VRF aktivieren.
 
+</br>
 
-**Muss ich Mehrzonencluster verwenden?**</br>
-Nein. Sie können so viele Einzelzonencluster erstellen, wie Sie möchten. Möglicherweise bevorzugen Sie tatsächlich Einzelzonencluster für ein vereinfachtes Management oder für den Fall, dass Ihr Cluster sich in einer bestimmten [Stadt mit einer einzigen Zone](/docs/containers?topic=containers-regions-and-zones#zones) befinden muss.
+### Worker-zu-Master- und Benutzer-zu-Master-Kommunikation
+{: #workeruser-master}
 
-**Kann ich einen hoch verfügbaren Master in einer Einzelzone haben?**</br>
-Ja. In einer Einzelzone ist Ihr Master hoch verfügbar und umfasst Replikate auf separaten physischen Hosts für Ihren Kubernetes-API-Server, für 'etcd', für Ihren Scheduler und Ihren Controller-Manager, um beispielsweise vor Ausfällen während der Aktualisierung eines Masters zu schützen. Für den Schutz vor einem Zonenausfall können Sie Folgendes tun:
-* [Erstellen Sie einen Cluster in einer mehrzonenfähigen Zone](/docs/containers?topic=containers-plan_clusters#multizone), wobei sich der Master über mehrere Zonen erstreckt.
-* [Erstellen Sie mehrere Cluster](#multiple_clusters) und verbinden Sie sie mit einer globalen Lastausgleichsfunktion.
-
-## Mehrzonencluster
-{: #multizone}
-
-Mit {{site.data.keyword.containerlong_notm}} können Sie Mehrzonencluster erstellen. Die Wahrscheinlichkeit, dass Ihre Benutzer Ausfallzeiten verzeichnen, ist geringer, wenn Sie Ihre Apps mithilfe von Worker-Pools auf mehrere Workerknoten und Zonen verteilen. Integrierte Funktionen wie der Lastausgleich erhöhen die Ausfallsicherheit bei potenziellen Zonenausfällen mit Hosts, Netzwerken oder Apps. Wenn Ressourcen in einer Zone inaktiv sind, werden Ihre Cluster-Workloads in den anderen Zonen immer noch verarbeitet.
+Es muss ein Kommunikationskanal eingerichtet werden, damit Workerknoten eine Verbindung zum Kubernetes-Master herstellen können. Sie können die Kommunikation zwischen Ihren Workerknoten und dem Kubernetes-Master dadurch ermöglichen, dass Sie nur den öffentlichen Serviceendpunkt, öffentliche und private Serviceendpunkte oder nur den privaten Serviceendpunkt aktivieren.
 {: shortdesc}
 
-**Was ist ein Worker-Pool?**</br>
-Bei einem Worker-Pool handelt es sich um eine Sammlung von Workerknoten mit derselben Version, wie Maschinentyp, CPU und Speicher. Wenn Sie einen Cluster erstellen, wird automatisch ein Worker-Pool für Sie erstellt. Sie können neue `ibmcloud ks worker-pool`-Befehle verwenden, um die Workerknoten in Ihrem Pool über Zonen zu verteilen, Workerknoten zum Pool hinzuzufügen oder Workerknoten zu aktualisieren.
+Zum Schutz der Kommunikation über öffentliche und private Serviceendpunkte richtet {{site.data.keyword.containerlong_notm}} bei der Erstellung des Clusters automatisch eine OpenVPN-Verbindung zwischen dem Kubernetes-Master und den Workerknoten ein. Workerknoten senden Nachrichten mithilfe von TLS-Zertifikaten sicher an den Master und der Master sendet Nachrichten über die OpenVPN-Verbindung an die Workerknoten.
 
-**Kann ich noch eigenständige Workerknoten verwenden?**</br>
-Das bisherige Cluster-Setup mit eigenständigen Workerknoten wird zwar noch unterstützt, jedoch nicht mehr weiterentwickelt. Stellen Sie sicher, dass Sie [einen Worker-Pool zu Ihrem Cluster hinzufügen](/docs/containers?topic=containers-clusters#add_pool) und anschließend anstelle von eigenständigen Workerknoten [Worker-Pools verwenden](/docs/containers?topic=containers-update#standalone_to_workerpool), um Ihre Workerknoten zu organisieren.
+**Nur öffentlicher Servicepunkt**</br>
+Wenn Sie VRF für Ihr Konto nicht aktivieren wollen oder können, können Ihre Workerknoten automatisch eine Verbindung zum Kubernetes-Master über das öffentliche VLAN durch den öffentlichen Serviceendpunkt herstellen. 
+* Die Kommunikation zwischen Workerknoten und Master wird sicher über das öffentliche Netz und den öffentlichen Serviceendpunkt eingerichtet.
+* Der Master ist für berechtigte Clusterbenutzer nur über den öffentlichen Serviceendpunkt öffentlich zugänglich. Ihre Clusterbenutzer können sicher auf Ihren Kubernetes-Master über das Internet zugreifen, um zum Beispiel `kubectl`-Befehle auszuführen.
 
-**Kann ich einen Einzelzonencluster in einen Mehrzonencluster konvertieren?**</br>
-Ja, wenn sich der Cluster in einer der [unterstützten Standorte in einer Mehrzonen-Metropole](/docs/containers?topic=containers-regions-and-zones#zones) befindet. Weitere Informationen finden Sie im Abschnitt [Von eigenständigen Workerknoten auf Worker-Pools aktualisieren](/docs/containers?topic=containers-update#standalone_to_workerpool).
+**Öffentliche und private Serviceendpunkte**</br>
+Wenn Sie Ihren Master öffentlich oder privat für Clusterbenutzer zugänglich machen wollen, können Sie die öffentlichen und die privaten Serviceendpunkte aktivieren. VRF ist in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto erforderlich und Sie müssen Ihr Konto zur Verwendung von Serviceendpunkten aktivieren. Führen Sie `ibmcloud account update --service-endpoint-enable true` aus, um VRF und Serviceendpunkte zu aktivieren.
+* Wenn Workerknoten mit öffentlichen und privaten VLANs verbunden sind, wird die Kommunikation zwischen Workerknoten und Master sowohl über das private Netz durch den privaten Serviceendpunkt als auch über das öffentliche Netz durch den öffentlichen Serviceendpunkt hergestellt. Dadurch, dass die Hälfte des Worker-zu-Master-Datenverkehrs über den öffentlichen Endpunkt und die andere Hälfte über den privaten Endpunkt geleitet wird, ist Ihre Master-zu-Worker-Kommunikation vor potenziellen Ausfällen des öffentlichen oder privaten Netzes geschützt. Wenn Workerknoten nur mit privaten VLANs verbunden sind, wird die Kommunikation zwischen Workerknoten und Master über das private Netz nur durch den privaten Serviceendpunkt hergestellt.
+* Der Master ist für berechtigte Clusterbenutzer über den öffentlichen Serviceendpunkt öffentlich zugänglich. Der Master ist privat über den privaten Serviceendpunkt zugänglich, wenn sich berechtigte Clusterbenutzer in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder durch eine VPN-Verbindung oder {{site.data.keyword.Bluemix_notm}} Direct Link mit dem privaten Netz verbunden sind. Beachten Sie, dass Sie [den Master-Endpunkt über eine private Lastausgleichsfunktion zugänglich machen müssen](/docs/containers?topic=containers-clusters#access_on_prem), damit Benutzer über eine VPN- oder {{site.data.keyword.Bluemix_notm}} Direct Link-Verbindung auf den Master zugreifen können.
 
+**Nur privater Serviceendpunkt**</br>
+Wenn Sie Ihren Master nur privat zugänglich machen wollen, können Sie den privaten Serviceendpunkt aktivieren. VRF ist in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto erforderlich und Sie müssen Ihr Konto zur Verwendung von Serviceendpunkten aktivieren. Führen Sie `ibmcloud account update --service-endpoint-enable true` aus, um VRF und Serviceendpunkte zu aktivieren. Beachten Sie, dass nur bei Verwendung eines privaten Serviceendpunkts keine Gebühren in Rechnung gestellt oder für gemessene Bandbreite erhoben werden. 
+* Die Kommunikation zwischen Workerknoten und Master wird über das private Netz und den privaten Serviceendpunkt hergestellt.
+* Der Master ist privat zugänglich, wenn sich berechtigte Clusterbenutzer in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder durch eine VPN-Verbindung oder Direct Link mit dem privaten Netz verbunden sind. Beachten Sie, dass Sie [den Master-Endpunkt über eine private Lastausgleichsfunktion zugänglich machen müssen](/docs/containers?topic=containers-clusters#access_on_prem), damit Benutzer über eine VPN- oder Direct Link-Verbindung auf den Master zugreifen können.
 
-### Ich möchte mehr über die Mehrzonenclusterkonfiguration erfahren
-{: #mz_setup}
+</br>
 
-<img src="images/cs_cluster_multizone-ha.png" alt="Hochverfügbarkeit für Mehrzonencluster" width="500" style="width:500px; border-style: none"/>
+### Kommunikation zwischen Workerknoten und anderen {{site.data.keyword.Bluemix_notm}}-Services oder lokalen Netzen
+{: #worker-services-onprem}
 
-Sie können zusätzliche Zonen zu Ihrem Cluster hinzufügen, um die Workerknoten in den Worker-Pools über mehrere Zonen in einer Region zu replizieren. Mehrzonencluster sind so konzipiert, dass die Pods gleichmäßig auf die Workerknoten und Zonen verteilt werden, um die Verfügbarkeit und Wiederherstellung nach einem Ausfall zu gewährleisten. Wenn die Workerknoten nicht gleichmäßig über die Zonen verteilt sind oder die Kapazität in einer der Zonen nicht ausreicht, kann der Kubernetes-Scheduler möglicherweise nicht alle angeforderten Pods planen. Daher können Pods in den Status **Anstehend** wechseln, bis eine ausreichende Kapazität verfügbar ist. Wenn Sie das Standardverhalten ändern möchten, damit der Kubernetes-Scheduler Pods in Zonen optimal verteilen kann, verwenden Sie die [Pod-Affinitätsrichtlinie](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#inter-pod-affinity-and-anti-affinity-beta-feature) `preferredDuringSchedulingIgnoredDuringExecution`.
-
-**Warum benötige ich Workerknoten in drei Zonen?** </br>
-Durch die Verteilung der Arbeitslast auf drei Zonen wird die hohe Verfügbarkeit Ihre App für den Fall sichergestellt, dass eine oder zwei Zonen nicht verfügbar sind. Zusätzlich kann eine solche Verteilung Ihr Cluster-Setup auch kosteneffizienter machen. Sie fragen sich, warum das so ist? Hier ist ein Beispiel.
-
-Angenommen, Sie benötigen einen Workerknoten mit sechs Kernen, um die Arbeitslast für Ihre App zu verarbeiten. Für eine höhere Verfügbarkeit Ihres Clusters stehen Ihnen die folgenden Optionen zur Verfügung:
-
-- **Ressourcen in einer anderen Zone duplizieren:** Mit dieser Option erhalten Sie zwei Workerknoten mit jeweils sechs Kernen in jeder Zone, wodurch insgesamt 12 Kerne verfügbar sind. </br>
-- **Ressourcen auf drei Zonen verteilen:** Mit dieser Option stellen Sie drei Kerne pro Zone bereit, wodurch Sie eine Gesamtkapazität von neun Kernen erhalten. Um Ihre Arbeitslast verarbeiten zu können, müssen zwei Zonen gleichzeitig aktiv sein. Wenn eine Zone nicht verfügbar ist, können die anderen beiden Zonen die Arbeitslast verarbeiten. Wenn zwei Zonen nicht verfügbar sind, können die drei verbleibenden Kerne die Arbeitslast übernehmen. Durch die Bereitstellung von drei Kernen pro Zone können Sie mit kleineren Maschinen arbeiten und somit Kosten senken.</br>
-
-**Wie wird mein Kubernetes-Master eingerichtet?** </br>
-Wenn Sie einen Cluster an einem [Standort in einer Mehrzonen-Metropole](/docs/containers?topic=containers-regions-and-zones#zones) erstellen, wird automatisch ein hoch verfügbarer Kubernetes-Master bereitgestellt und drei Replikate werden über die Zonen der Metropole verteilt. Wenn sich der Cluster beispielsweise in den Zonen `dal10`, `dal12` oder `dal13` befindet, werden die Replikate des Kubernetes-Masters auf alle Zonen in der Mehrzonen-Metropole 'Dallas' verteilt.
-
-**Was passiert, wenn der Kubernetes-Master nicht mehr verfügbar ist?** </br>
-Der [Kubernetes-Master](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture) ist die Hauptkomponente, die den Cluster betriebsbereit hält. Der Master speichert Clusterressourcen und ihre Konfigurationen in der etcd-Datenbank, die als Single Point of Truth für Ihren Cluster dient. Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung von den Workerknoten zum Master oder wenn Sie mit Ihren Clusterressourcen interagieren möchten.<br><br>Wenn ein Masterausfall auftritt, werden Ihre Workloads weiterhin auf den Workerknoten ausgeführt, Sie können jedoch erst wieder `kubectl`-Befehle verwenden, um mit Ihren Clusterressourcen zu arbeiten oder den Clusterzustand anzuzeigen, wenn der Kubernetes-API-Server im Master wieder betriebsbereit ist. Wenn ein Pod während des Ausfalls des Masters inaktiv ist, kann der Pod erst wieder ausgeführt werden, wenn der Workerknoten den Kubernetes-API-Server wieder erreichen kann.<br><br>Während eines Masterausfalls können Sie `ibmcloud ks`-Befehle weiterhin für die {{site.data.keyword.containerlong_notm}}-API ausführen, um mit Ihren Infrastrukturressourcen zu arbeiten (z. B. Workerknoten oder VLANs). Wenn Sie die aktuelle Clusterkonfiguration ändern, indem Sie Workerknoten zum Cluster hinzufügen oder aus ihm entfernen, werden die Änderungen erst wirksam, wenn der Master wieder betriebsbereit ist.
-
-Ein Workerknoten darf während eines Masterausfalls nicht neu gestartet werden. Durch diese Aktion werden die Pods aus dem Workerknoten entfernt. Da der Kubernetes-API-Server nicht verfügbar ist, können die Pods nicht auf andere Workerknoten im Cluster umgestellt werden.
-{: important}
-
-
-Um Ihren Cluster vor einem Ausfall des Kubernetes-Masters oder in Regionen zu schützen, in denen Mehrzonencluster nicht verfügbar sind, können Sie [mehrere Cluster einrichten und diese mit einer globalen Lastausgleichsfunktion verbinden](#multiple_clusters).
-
-**Muss ich etwas tun, damit der Master über Zonen hinweg mit den Workern kommunizieren kann?**</br>
-Ja. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-
-**Wie kann ich meine Benutzer über das öffentliche Internet auf meine App zugreifen lassen?**</br>
-Sie können Ihre Apps über eine Ingress-Lastausgleichsfunktion für Anwendungen (ALB) oder einen LoadBalancer-Service zugänglich machen.
-
-- **Ingress-Lastausgleichsfunktion für Anwendungen (ALB):** Standardmäßig werden öffentliche ALBs automatisch in jeder Zone in Ihrem Cluster erstellt und aktiviert. Außerdem wird auch automatisch eine Cloudflare-Lastausgleichsfunktion für mehrere Zonen (Multizone Load Balancer, MZLB) für Ihren Cluster erstellt und bereitgestellt, sodass eine MZLB für jede Region vorhanden ist. Die MZLB stellt die IP-Adressen Ihrer ALBs hinter denselben Hostnamen und aktiviert die Zustandsprüfungen für diese IP-Adressen, um zu ermitteln, ob sie verfügbar sind oder nicht. Wenn Sie beispielsweise Workerknoten in drei (3) Zonen in der Region 'Vereinigte Staaten (Osten)' haben, hat der Hostname `yourcluster.us-east.containers.appdomain.cloud` drei ALB-IP-Adressen. Der MZLB-Status überprüft die öffentliche ALB-IP in jeder Zone des Clusters und hält die Ergebnisse der DNS-Suche auf der Basis dieser Zustandsprüfungen aktualisiert. Weitere Informationen finden Sie im Abschnitt [Komponenten und Architektur von Ingress](/docs/containers?topic=containers-ingress#planning).
-
-- **Lastausgleichsservices:** Lastausgleichsservices werden nur in einer Zone konfiguriert. Eingehende Anforderungen an Ihre App werden von dieser einen Zone an alle App-Instanzen in anderen Zonen weitergeleitet. Wenn diese Zone nicht mehr verfügbar ist, ist Ihre App möglicherweise nicht über das Internet erreichbar. Um einem Ausfall einer einzelnen Zone gerecht zu werden, können Sie zusätzliche LoadBalancer-Services in weiteren Zonen einrichten. Weitere Informationen finden Sie im Abschnitt zu den hoch verfügbaren [LoadBalancer-Services](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
-
-**Kann ich persistenten Speicher für meinen Mehrzonencluster einrichten?**</br>
-Verwenden Sie für hoch verfügbaren persistenten Speicher einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about). Sie können auch eine SDS-Lösung (SDS - Software-Defined Storage) wie [Portworx](/docs/containers?topic=containers-portworx#portworx) ausprobieren, die [SDS-Maschinen](#sds) verwendet. Weitere Informationen finden Sie unter [Vergleich der Optionen für persistenten Speicher für Mehrzonencluster](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
-Der NFS-Datei- und -Blockspeicher kann nicht über Zonen hinweg gemeinsam genutzt werden. Persistente Datenträger können nur in der Zone verwendet werden, in der sich die tatsächliche Speichereinheit befindet. Wenn Sie über NFS-Datei- oder -Blockspeicher in Ihrem Cluster verfügen, den Sie weiterhin verwenden möchten, müssen Sie Regions- und Zonenbezeichnungen auf vorhandene persistente Datenträger anwenden. Mithilfe dieser Bezeichnungen kann 'kube-scheduler' bestimmen, wo eine App geplant werden soll, die den persistenten Datenträger verwendet. Führen Sie den folgenden Befehl aus und ersetzen Sie `<meincluster>` durch den Namen Ihres Clusters.
-
-```
-bash <(curl -Ls https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/file-pv-labels/apply_pv_labels.sh) <meincluster>
-```
-{: pre}
-
-** Ich habe meinen Mehrzonencluster erstellt. Warum gibt es immer noch immer nur eine Zone? Wie füge ich meinem Cluster Zonen hinzu?**</br>
-Wenn Sie [Ihren Mehrzonencluster mit der CLI erstellen](/docs/containers?topic=containers-clusters#clusters_cli), wird der Cluster zwar erstellt, Sie müssen jedoch Zonen zum Worker-Pool hinzufügen, um den Prozess abzuschließen. Damit sich der Cluster über mehrere Zonen erstreckt, muss er sich an einem [Standort in einer Mehrzonen-Metropole](/docs/containers?topic=containers-regions-and-zones#zones) befinden. Informationen zum Hinzufügen einer Zone zu Ihrem Cluster und zum Verteilen von Workerknoten auf Zonen finden Sie im Abschnitt [Zone zu Ihrem Cluster hinzufügen](/docs/containers?topic=containers-clusters#add_zone).
-
-### Wie wird sich das zukünftige Management meiner Cluster vom aktuellen Management unterscheiden?
-{: #mz_new_ways}
-
-Mit der Einführung von Worker-Pools können Sie eine neue Gruppe von APIs und Befehlen zum Verwalten des Clusters verwenden. Sie finden diese neuen Befehle auf der [Seite mit der CLI-Dokumentation](/docs/containers?topic=containers-cs_cli_reference#cs_cli_reference). In Ihrem Terminal können Sie sie durch Ausführen des Befehls `ibmcloud ks help` anzeigen.
+Ermöglichen Sie Ihren Workerknoten die sichere Kommunikation mit anderen {{site.data.keyword.Bluemix_notm}}-Services, wie z. B. {{site.data.keyword.registrylong}}, und mit einem lokalen Netz.
 {: shortdesc}
 
-In der folgenden Tabelle werden die alten und neuen Methoden für einige allgemeine Aktionen der Clusterverwaltung miteinander verglichen.
-<table summary="Die Tabelle enthält die Beschreibung der neuen Vorgehensweisen zum Ausführen von Mehrzonenbefehlen. Die Tabellenzeilen enthalten von links nach rechts die Beschreibung in der ersten Spalte, die alte Vorgehensweise in der zweiten Spalte und die neue Vorgehensweise für Worker-Pools mit mehreren Zonen in der dritten Spalte.">
-<caption>Neue Methoden für Befehle für Worker-Pools mit mehreren Zonen.</caption>
-  <thead>
-  <th>Beschreibung</th>
-  <th>Alte eigenständige Workerknoten</th>
-  <th>Neue Worker-Pools mit mehreren Zonen</th>
-  </thead>
-  <tbody>
-    <tr>
-    <td>Hinzufügen von Workerknoten zum Cluster.</td>
-    <td><p class="deprecated"><code>ibmcloud ks worker-add</code> zum Hinzufügen eigenständiger Workerknoten.</p></td>
-    <td><ul><li>Um andere Maschinentypen als Ihren vorhandenen Pool hinzuzufügen, erstellen Sie einen neuen Worker-Pool: [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
-    <li>Wenn Sie Workerknoten einem vorhandenen Pool hinzufügen möchten, ändern Sie die Anzahl der Knoten pro Zone im Pool: [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Entfernen von Workerknoten aus dem Cluster.</td>
-    <td><code>ibmcloud ks worker-rm</code>: Sie können diesen Befehl immer noch zum Löschen eines problematischen Workerknoten aus dem Cluster verwenden.</td>
-    <td><ul><li>Wenn ein Worker-Pool nicht ausgeglichen ist, z. B. nach dem Entfernen eines Workerknotens, gleichen Sie ihn neu aus: [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_rebalance) <code>ibmcloud ks worker-pool-rebalance</code>.</li>
-    <li>Um die Anzahl der Workerknoten in einem Pool zu reduzieren, ändern Sie die Anzahl pro Zone (Mindestwert '1'): [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
-    </tr>
-    <tr>
-    <td>Verwenden Sie ein neues VLAN für Workerknoten.</td>
-    <td><p class="deprecated">Fügen Sie einen neuen Workerknoten hinzu, der das neue private oder öffentliche VLAN verwendet: <code>ibmcloud ks worker-add</code>.</p></td>
-    <td>Legen Sie den Worker-Pool so fest, dass er ein anderes öffentliches oder privates VLAN als zuvor verwendet: [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</td>
-    </tr>
-  </tbody>
-  </table>
+**Kommunikation mit anderen {{site.data.keyword.Bluemix_notm}}-Services über das private oder öffentliche Netz**</br>
+Ihre Workerknoten können automatisch und sicher über das private Netz Ihrer IBM Cloud-Infrastruktur (SoftLayer) mit anderen {{site.data.keyword.Bluemix_notm}}-Services kommunizieren, die private Serviceendpunkte unterstützen, wie z. B. {{site.data.keyword.registrylong}}. Wenn ein {{site.data.keyword.Bluemix_notm}}-Service private Serviceendpunkte nicht unterstützt, müssen Ihre Workerknoten mit einem öffentlichen VLAN verbunden sein, sodass sie sicher über das öffentliche Netz mit den Services kommunizieren können.
 
-## Mehrere Cluster, die mit einer globalen Lastausgleichsfunktion verbunden sind
-{: #multiple_clusters}
+Wenn Sie Calico-Netzrichtlinien zum Sperren des öffentlichen Netzes in Ihrem Cluster verwenden, müssen Sie Zugriff auf die öffentlichen und privaten IP-Adressen der Services zulassen, die Sie in Ihren Calico-Richtlinien verwenden wollen. Wenn Sie eine Gateway-Einheit, wie z. B. eine Virtual Router Appliance (Vyatta), verwenden, müssen Sie in der Firewall Ihrer Gateway-Einheit [Zugriff auf die privaten IP-Adressen der Services zulassen, die Sie verwenden wollen](/docs/containers?topic=containers-firewall#firewall_outbound).
+{: note}
 
-Um Ihre App bei einem Ausfall eines Kubernetes-Masters zu schützen und für Regionen, in denen Mehrzonencluster nicht verfügbar sind, können Sie mehrere Cluster in verschiedenen Zonen in einer Region erstellen und diese mit einer globalen Lastausgleichsfunktion verbinden.
+**{{site.data.keyword.BluDirectLink}} für die Kommunikation über das private Netz mit Ressourcen in lokalen Rechenzentren**</br>
+Zum Verbinden Ihres Clusters mit Ihrem lokalen Rechenzentrum, z. B. mit {{site.data.keyword.icpfull_notm}}, können Sie [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) einrichten. Mit {{site.data.keyword.Bluemix_notm}} Direct Link erstellen Sie eine direkte, private Verbindung zwischen Ihren fernen Netzumgebungen und {{site.data.keyword.containerlong_notm}} ohne Routing über das öffentliche Internet.
+
+**strongSwan-IPSec-VPN-Verbindung für die Kommunikation über das öffentliche Netz mit Ressourcen in lokalen Rechenzentren**
+* Workerknoten, die mit öffentlichen und privaten VLANs verbunden sind: Richten Sie einen [strongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) direkt in Ihrem Cluster ein. Der strongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec – Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren Sie den strongSwan-IPSec-VPN-Service und stellen ihn](/docs/containers?topic=containers-vpn#vpn-setup) direkt in einem Pod in Ihrem Cluster bereit.
+* Workerknoten, die nur mit einem privaten VLAN verbunden sind: Richten Sie einen IPSec-VPN-Endpunkt auf einer Gateway-Einheit, wie z. B. eine Virtual Router Appliance (Vyatta), ein. Richten Sie anschließend [den strongSwan-IPSec-VPN-Service in Ihrem Cluster ein](/docs/containers?topic=containers-vpn#vpn-setup), um den VPN-Endpunkt auf Ihrem Gateway zu verwenden. Wenn Sie strongSwan nicht verwenden wollen, können Sie die [VPN-Konnektivität direkt mit VRA einrichten](/docs/containers?topic=containers-vpn#vyatta).
+
+</br>
+
+### Externe Kommunikation mit Apps, die auf Workerknoten ausgeführt werden
+{: #external-workers}
+
+Lassen Sie öffentliche oder private Datenverkehrsanforderungen von außerhalb des Clusters an Ihre Apps zu, die auf Workerknoten ausgeführt werden.
 {: shortdesc}
 
-<img src="images/cs_multiple_cluster_zones.png" alt="Hochverfügbarkeit für mehrere Cluster" width="700" style="width:700px; border-style: none"/>
+**Privater Datenverkehr an Cluster-Apps**</br>
+Wenn Sie eine App in Ihrem Cluster bereitstellen, haben Sie die Möglichkeit, die App nur für solche Benutzer und Services zugänglich zu machen, die sich in demselben privaten Netz wie Ihr Cluster befinden. Der private Lastausgleich eignet sich ideal, um Ihre App für Anforderungen von außerhalb des Clusters verfügbar zu machen, ohne die App der allgemeinen Öffentlichkeit zugänglich zu machen. Sie können den privaten Lastausgleich auch verwenden, um den Zugriff, das Anforderungsrouting und andere Konfigurationen für Ihre App zu testen, bevor Sie Ihre App später mit öffentlichen Netzservices der Öffentlichkeit zugänglich machen. Sie können private Kubernetes-Netzservices, wie z. B. private Knotenports (NodePorts), NLBs und Ingress-ALBs erstellen, um private Datenverkehrsanforderungen von außerhalb des Clusters an Ihre Apps zuzulassen. Anschließend können Sie Calico-Richtlinien des Typs Pre-DNAT verwenden, um Datenverkehr an öffentliche Knotenports privater Netzservices zu blockieren. Weitere Informationen finden unter [Privaten externen Lastausgleich planen](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-Um Ihre Arbeitslast auf mehrere Cluster zu verteilen, müssen Sie eine globale Lastausgleichsfunktion einrichten und die IP-Adressen der Lastausgleichsfunktionen für Anwendungen (ALBs) oder LoadBalancer-Services zu Ihrer Domäne hinzufügen. Durch das Hinzufügen dieser IP-Adressen können Sie eingehenden Datenverkehr zwischen Ihren Clustern weiterleiten. Damit die globale Lastausgleichsfunktion erkennen kann, ob einer der Cluster nicht verfügbar ist, sollten Sie in Betracht ziehen, jeder IP-Adresse eine Ping-basierte Statusprüfung hinzuzufügen. Wenn Sie diese Prüfung einrichten, überprüft Ihr DNS-Provider regelmäßig mit Ping die IP-Adressen, die Sie zu Ihrer Domäne hinzugefügt haben. Wenn eine IP-Adresse nicht mehr verfügbar ist, wird der Datenverkehr nicht mehr an diese IP-Adresse gesendet. Kubernetes startet jedoch nicht automatisch erneut Pods von dem nicht verfügbaren Cluster auf Workerknoten in verfügbaren Clustern. Wenn Kubernetes die Pods automatisch in verfügbaren Clustern erneut starten soll, sollten Sie einen [Mehrzonencluster](#multizone) einrichten.
+**Öffentlicher Datenverkehr an Cluster-Apps**</br>
+Damit von außen über das öffentliche Internet auf Ihre Apps zugegriffen werden kann, können Sie öffentliche Knotenports (NodePorts), Netzlastausgleichsfunktionen (NLBs) und Ingress-Lastausgleichsfunktionen für Anwendungen (ALBs) erstellen. Öffentliche Netzservices stellen eine Verbindung zu dieser öffentlichen Netzschnittstelle her, indem sie Ihre App mit einer öffentlichen IP-Adresse und wahlweise einer öffentlichen URL bereitstellen. Wenn eine App öffentlich zugänglich gemacht wird, kann jeder, der über die öffentliche Service-IP-Adresse oder die URL verfügt, die Sie für Ihre App eingerichtet haben, eine Anforderung an Ihre App senden. Sie können dann Calico-Richtlinien des Typs Pre-DNAT verwenden, um den Datenverkehr zu öffentlichen Netzservices zu steuern, z. B. durch Whitelisting des Datenverkehrs von bestimmten Quellen-IP-Adressen oder CIDRs und Blockieren des übrigen Datenverkehrs. Weitere Informationen finden unter [Öffentlichen externen Lastausgleich planen](/docs/containers?topic=containers-cs_network_planning#private_access).
 
-**Warum benötige ich drei Cluster in drei Zonen?** </br>
-Ähnlich wie bei der Verwendung von [drei Zonen in Mehrzonenclustern](#multizone) können Sie mehr Verfügbarkeit für Ihre App bereitstellen, indem Sie drei Cluster über Zonen hinweg einrichten. Sie können auch Kosten reduzieren,, indem Sie sich kleinere Maschinen für die Verarbeitung Ihrer Arbeitslast anschaffen.
+Grenzen Sie Netzauslastungen auf Edge-Workerknoten ein, um mehr Sicherheit zu erreichen. Mit Edge-Workerknoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf weniger Workerknoten, die mit öffentlichen VLANs verbunden sind, beschränkt und die Netzworkload eingegrenzt wird. Wenn Sie [Workerknoten als Edge-Knoten kennzeichnen](/docs/containers?topic=containers-edge#edge_nodes), werden NLB- und ALB-Pods nur auf diesen angegebenen Workerknoten bereitgestellt. Um außerdem zu verhindern, dass andere Workloads auf Edge-Knoten ausgeführt werden, können Sie [Taints auf die Edge-Knoten anwenden](/docs/containers?topic=containers-edge#edge_workloads). In Kubernetes Version 1.14 und höher können Sie sowohl öffentliche als auch private NLBs und ALBs auf Edge-Knoten bereitstellen.
+Beispiel: Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden sind, Sie allerdings öffentlichen Zugriff auf eine App in Ihrem Cluster zulassen müssen, können Sie einen Edge-Worker-Pool erstellen, in dem die Edge-Knoten mit öffentlichen und privaten VLANs verbunden sind. Sie können öffentliche NLBs und ALBs auf diesen Edge-Knoten bereitstellen, um sicherzustellen, dass nur diese Worker öffentliche Verbindungen verarbeiten.
 
-**Was ist, wenn ich mehrere Cluster in mehreren Regionen einrichten möchte?** </br>
-Sie können mehrere Cluster in verschiedenen Regionen eines geografischen Standortes (wie 'Vereinigte Staaten (Süden)' und 'Vereinigte Staaten (Osten)') oder über geografische Standorte hinweg ('Vereinigte Staaten (Süden)' und 'Mitteleuropa') einrichten. Beide Setups bieten das gleiche Maß an Verfügbarkeit für Ihre App, sind aber bei der gemeinsamen Nutzung von Daten und der Datenreplikation komplexer als andere Lösungen. In den meisten Fällen reicht es aus, am selben geografischen Standort zu bleiben. Wenn Sie jedoch Benutzer auf der ganzen Welt haben, kann es besser sein, einen Cluster dort einzurichten, wo sich Ihre Benutzer befinden, damit diese keine langen Wartezeiten beim Senden einer Anforderung an Ihre App haben.
+Wenn Ihre Workerknoten nur mit einem privaten VLAN verbunden sind und Sie eine Gateway-Einheit für die Kommunikation zwischen Workerknoten und dem Cluster-Master verwenden, können Sie auch die Einheit als öffentliche oder private Firewall konfigurieren. Sie können öffentliche oder private Knotenports (NodePorts), NLBs und Ingress-ALBs erstellen, um öffentliche oder private Datenverkehrsanforderungen von außerhalb des Clusters an Ihre Apps zuzulassen. Dann müssen Sie [die erforderlichen Ports und IP-Adressen in der Firewall Ihrer Gateway-Einheit öffnen](/docs/containers?topic=containers-firewall#firewall_inbound), um eingehenden Datenverkehr für diese Services über das öffentliche oder private Netz zuzulassen.
+{: note}
 
-**Gehen Sie wie folgt vor, um eine globale Lastausgleichsfunktion für mehrere Cluster einzurichten:**
+<br />
 
-1. [Erstellen Sie Cluster](/docs/containers?topic=containers-clusters#clusters) in mehreren Zonen oder Regionen.
-2. Wenn Sie über mehrere VLANs für einen Cluster, mehrere Teilnetze in demselben VLAN oder einen Cluster mit mehreren Zonen verfügen, müssen Sie eine [VRF-Funktion (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) für Ihr Konto für die IBM Cloud-Infrastruktur (SoftLayer) aktivieren, damit die Workerknoten über das private Netz miteinander kommunizieren können. Zur Aktivierung von VRF [wenden Sie sich an Ihren Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Wenn Sie VRF nicht aktivieren können oder wollen, aktivieren Sie das [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Um diese Aktion durchführen zu können, müssen Sie über die [Infrastrukturberechtigung](/docs/containers?topic=containers-users#infra_access) **Netz > VLAN-Spanning im Netz verwalten** verfügen oder Sie können den Kontoeigner bitten, diese zu aktivieren. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
-3. Stellen Sie in jedem Cluster Ihre App mit einer [Lastausgleichsfunktion für Anwendungen (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) oder einem [LoadBalancer-Service](/docs/containers?topic=containers-loadbalancer) bereit.
-4. Listen Sie für jeden Cluster die öffentlichen IP-Adressen für Ihre ALBs oder LoadBalancer-Services auf.
-   - Gehen Sie wie folgt vor, um die IP-Adresse aller öffentlichen aktivierten ALBs in Ihrem Cluster aufzulisten:
-     ```
-     ibmcloud ks albs --cluster <clustername_oder_-id>
-     ```
-     {: pre}
 
-   - Gehen Sie wie folgt vor, um die IP-Adresse für den LoadBalancer-Service aufzulisten:
-     ```
-     kubectl describe service <mein_service>
-     ```
-     {: pre}
+## Szenario: Workloads von mit dem Internet verbundenen Apps in einem Cluster ausführen
+{: #internet-facing}
 
-     Die IP-Adresse für **Load Balancer Ingress** ist die portierbare IP-Adresse, die dem LoadBalancer-Service zugewiesen wurde.
+In diesem Szenario wollen Sie Workloads in einem Cluster ausführen, die für Anforderungen aus dem Internet zugänglich sind, sodass Endbenutzer auf Ihre Apps zugreifen können. Sie wollen die Option, dass der öffentliche Zugriff in Ihrem Cluster isoliert werden kann und dass gesteuert werden kann, welche öffentlichen Anforderungen an Ihren Cluster zugelassen werden. Außerdem haben Ihre Worker automatischen Zugriff auf alle {{site.data.keyword.Bluemix_notm}}-Services, die eine Verbindung zu Ihrem Cluster herstellen können.
+{: shortdesc}
 
-4.  Richten Sie eine globale Lastausgleichsfunktion ein, indem Sie {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) verwenden oder eine eigene globale Lastausgleichsfunktion einrichten.
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_internet.png" alt="Abbildung der Architektur für einen Cluster, der mit dem Internet verbundene Workloads ausführt"/> <figcaption>Architektur für einen Cluster, der mit dem Internet verbundene Workloads ausführt</figcaption>
+</figure>
+</p>
 
-    **Gehen Sie wie folgt vor, um eine globale CIS-Lastausgleichsfunktion zu verwenden:**:
-    1.  Richten Sie den Service ein, indem Sie die Schritte 1 bis 5 in der [Einführung in {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started) ausführen. Diese Schritte führen Sie durch die Bereitstellung der Serviceinstanz, das Hinzufügen Ihrer App-Domäne, die Konfiguration Ihrer Namensserver und die Erstellung von DNS-Datensätzen. Erstellen Sie einen DNS-Datensatz für alle IP-Adressen der ALBs oder Lastausgleichsfunktionen, die Sie erfasst haben. Diese DNS-Datensätze ordnen Ihre App-Domäne allen Ihren Cluster-ALBs oder Lastausgleichsfunktionen zu und stellen sicher, dass Anforderungen an Ihre App-Domäne in einem Umlaufzyklus an Ihre Cluster weitergeleitet werden.
-    2. [Fügen Sie Statusprüfungen](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) für die ALBs oder die Lastausgleichsfunktionen hinzu. Sie können dieselbe Statusprüfung für die ALBs oder Lastausgleichsfunktionen in allen Clustern verwenden oder bestimmte Statusprüfungen erstellen, die für bestimmte Cluster verwendet werden.
-    3. [Fügen Sie einen Ursprungspool](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) für jeden Cluster hinzu, indem Sie die ALB- oder Lastausgleichsfunktions-IPs des Clusters hinzufügen. Wenn Sie beispielsweise über drei Cluster mit jeweils zwei ALBs verfügen, erstellen Sie drei Ursprungspools, die jeweils zwei ALB-IP-Adressen aufweisen. Fügen Sie jedem Ursprungspool, den Sie erstellen, eine Statusprüfung hinzu.
-    4. [Fügen Sie eine globale Lastausgleichsfunktion hinzu](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
+Um diese Konfiguration zu erreichen, erstellen Sie einen Cluster, indem Sie Workerknoten mit öffentlichen und privaten VLANs verbinden.
 
-    **Gehen Sie wie folgt vor, um Ihre eigene globale Lastausgleichsfunktion zu verwenden:**:
-    1. Konfigurieren Sie Ihre Domäne für die Weiterleitung des eingehenden Datenverkehrs an Ihre ALB oder LoadBalancer-Services, indem Sie die IP-Adressen aller öffentlichen aktivierten ALBs und LoadBalancer-Services in Ihre Domäne hinzufügen.
-    2. Aktivieren Sie für jede IP-Adresse eine Ping-basierte Statusüberprüfung, damit Ihr DNS-Provider fehlerhafte IP-Adressen erkennen kann. Wird eine fehlerhafte IP-Adresse erkannt, wird der Datenverkehr nicht mehr an diese IP-Adresse weitergeleitet.
+Wenn Sie den Cluster sowohl mit öffentlichen als auch mit privaten VLANs erstellen, können Sie später nicht alle öffentlichen VLANs aus diesem Cluster entfernen. Durch das Entfernen aller öffentlichen VLANs aus einem Cluster werden mehrere Clusterkomponenten gestoppt. Erstellen Sie stattdessen einen neuen Worker-Pool, der nur mit einem privaten VLAN verbunden ist.
+{: note}
 
-## Private Cluster
+Sie können auswählen, ob Sie Worker-zu-Master- und Benutzer-zu-Master-Kommunikation über das öffentliche und das private Netz oder nur über das öffentliche Netz zulassen wollen.
+* Öffentliche und private Serviceendpunkte: Für Ihr Konto muss VRF und die Verwendung von Serviceendpunkten aktiviert sein. Die Kommunikation zwischen Workerknoten und Master wird sowohl über das private Netz durch den privaten Serviceendpunkt als auch über das öffentliche Netz durch den öffentlichen Serviceendpunkt hergestellt. Der Master ist für berechtigte Clusterbenutzer über den öffentlichen Serviceendpunkt öffentlich zugänglich.
+* Öffentlicher Serviceendpunkt: Wenn Sie VRF für Ihr Konto nicht aktivieren wollen oder können, können Ihre Workerknoten und berechtigte Cluster automatisch eine Verbindung zum Kubernetes-Master über das öffentliche Netz durch den öffentlichen Serviceendpunkt herstellen.
+
+
+Ihre Workerknoten können automatisch sicher über das private Netz Ihrer IBM Cloud-Infrastruktur (SoftLayer) mit anderen {{site.data.keyword.Bluemix_notm}}-Services kommunizieren, die private Serviceendpunkte unterstützen. Wenn ein {{site.data.keyword.Bluemix_notm}}-Service private Serviceendpunkte nicht unterstützt, können Worker über das öffentliche Netz sicher mit den Services kommunizieren. Sie können die öffentlichen oder privaten Schnittstellen von Workerknoten mithilfe von Calico-Netzrichtlinien für die Isolation öffentlicher oder privater Netze sperren. Sie müssen Zugriff auf die öffentlichen und privaten IP-Adressen der Services zulassen, die Sie in diesen Calico-Richtlinien verwenden wollen. 
+
+Wenn Sie eine App in Ihrem Cluster im Internet zugänglich machen wollen, können Sie einen Service für eine öffentliche Netzlastausgleichsfunktion (NLB) oder einen Service für eine Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellen. Sie können die Sicherheit Ihres Clusters verbessern, indem Sie einen Pool mit Workerknoten erstellen, die als Edge-Knoten bezeichnet werden. Die Pods für öffentliche Netzservices werden auf den Edge-Knoten bereitgestellt, sodass externe Datenverkehr-Workloads auf nur wenige Worker in Ihrem Cluster eingegrenzt werden. Außerdem können Sie den öffentlichen Datenverkehr zu den Netzservices steuern, die Ihre Apps zugänglich machen, indem Sie Calico-Richtlinien des Typs Pre-DNAT erstellen, wie z. B. Whitelist- und Blacklist-Richtlinien.
+
+Wenn Ihre Workerknoten Zugriff auf Services in privaten Netzen außerhalb Ihres {{site.data.keyword.Bluemix_notm}}-Kontos benötigen, können Sie den strongSwan-IPSec-VPN-Service in Ihrem Cluster bereitstellen oder {{site.data.keyword.Bluemix_notm}} Direct Link-Services nutzen, um eine Verbindung zu diesen Netzen herzustellen.
+
+Sind Sie bereit, mit einem Cluster für dieses Szenario loszulegen? Nach der Planung der Einrichtung der [Hochverfügbarkeit](/docs/containers?topic=containers-ha_clusters) und des [Workerknotens](/docs/containers?topic=containers-planning_worker_nodes) finden Sie in [Cluster erstellen](/docs/containers?topic=containers-clusters#cluster_prepare) weitere Informationen.
+
+<br />
+
+
+## Szenario: Lokales Rechenzentrum in einen Cluster im privaten Netz erweitern und begrenzten öffentlichen Zugriff hinzufügen
+{: #limited-public}
+
+In diesem Szenario wollen Sie Workloads in einem Cluster ausführen, die für Services, Datenbanken oder andere Ressourcen in Ihrem lokalen Rechenzentrum zugänglich sind. Sie müssen jedoch begrenzten öffentlichen Zugriff auf Ihren Cluster bereitstellen und wollen sicherstellen, dass öffentlicher Zugriff gesteuert und in Ihrem Cluster eingegrenzt wird. Beispielsweise benötigen Ihre Worker möglicherweise Zugriff auf einen {{site.data.keyword.Bluemix_notm}}-Service, der keine privaten Serviceendpunkte unterstützt und auf den über das öffentliche Netz zugegriffen werden muss. Oder Sie müssen begrenzten öffentlichen Zugriff auf eine App bereitstellen, die in Ihrem Cluster ausgeführt wird.
+{: shortdesc}
+
+Um dieses Cluster-Setup zu erreichen, erstellen Sie eine Firewall [mithilfe von Edge-Knoten und Calico-Netzrichtlinien](#calico-pc) oder [mithilfe einer Gateway-Einheit](#vyatta-gateway).
+
+### Edge-Knoten und Calico-Netzrichtlinien verwenden
+{: #calico-pc}
+
+Lassen Sie begrenzte öffentliche Konnektivität zu Ihrem Cluster zu, indem Sie Edge-Knoten als öffentliches Gateway und Calico-Netzrichtlinien als öffentliche Firewall verwenden.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_calico.png" alt="Abbildung der Architektur für einen Cluster, bei dem Edge-Knoten und Calico-Netzrichtlinien für sicheren öffentlichen Zugriff verwendet werden"/>
+ <figcaption>Architektur für einen Cluster, bei dem Edge-Knoten und Calico-Netzrichtlinien für sicheren öffentlichen Zugriff verwendet werden</figcaption>
+</figure>
+</p>
+
+Mit dieser Konfiguration erstellen Sie einen Cluster, indem Sie Workerknoten nur mit einem privaten VLAN verbinden. Für Ihr Konto muss VRF und die Verwendung von privaten Serviceendpunkten aktiviert sein.
+
+Der Kubernetes-Master ist über den privaten Serviceendpunkt zugänglich, wenn berechtigte Clusterbenutzer sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder über eine [VPN-Verbindung](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) oder [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) mit dem privaten Netz verbunden sind. Die Kommunikation mit dem Kubernetes-Master über den privaten Serviceendpunkt muss jedoch über den IP-Adressbereich <code>166.X.X</code> erfolgen, der über eine VPN-Verbindung oder über {{site.data.keyword.Bluemix_notm}} Direct Link nicht angesteuert werden kann. Sie können den privaten Serviceendpunkt des Masters für Ihre Clusterbenutzer mithilfe einer privaten Netzlastausgleichsfunktion (NLB) zugänglich machen. Die private NLB macht den privaten Serviceendpunkt des Masters als internen <code>10.X.X.X</code>-IP-Adressbereich zugänglich, auf den Benutzer über eine VPN- oder {{site.data.keyword.Bluemix_notm}} Direct Link-Verbindung zugreifen können. Wenn Sie nur den privaten Serviceendpunkt aktivieren, können Sie das Kubernetes-Dashboard verwenden oder vorübergehend den öffentlichen Serviceendpunkt aktivieren, um die private NLB zu erstellen.
+
+Als Nächstes können Sie einen Pool mit Workerknoten erstellen, die mit öffentlichen und privaten VLANs verbunden und als Edge-Knoten bezeichnet sind. Mit Edge-Knoten kann die Sicherheit des Clusters verbessert werden, indem der externe Zugriff auf nur wenige Workerknoten beschränkt und die Netzarbeitslast auf diese Worker eingegrenzt wird.
+
+Ihre Workerknoten können automatisch sicher über das private Netz Ihrer IBM Cloud-Infrastruktur (SoftLayer) mit anderen {{site.data.keyword.Bluemix_notm}}-Services kommunizieren, die private Serviceendpunkte unterstützen. Wenn ein {{site.data.keyword.Bluemix_notm}}-Service private Serviceendpunkte nicht unterstützt, können Ihre mit einem öffentlichen VLAN verbundenen Edge-Knoten sicher über das öffentliche Netz mit den Services kommunizieren. Sie können die öffentlichen oder privaten Schnittstellen von Workerknoten mithilfe von Calico-Netzrichtlinien für die Isolation öffentlicher oder privater Netze sperren. Sie müssen Zugriff auf die öffentlichen und privaten IP-Adressen der Services zulassen, die Sie in diesen Calico-Richtlinien verwenden wollen.
+
+Wenn Sie privaten Zugriff auf eine App in Ihrem Cluster bereitstellen wollen, können Sie eine Netzlastausgleichsfunktion (NLB) oder Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellen, um Ihre App nur im privaten Netz zugänglich zu machen. Sie können den gesamten öffentlichen Datenverkehr zu diesen Netzservices blockieren, die Ihre Apps zugänglich machen, indem Sie Calico-Richtlinien des Typs Pre-DNAT erstellen, wie z. B. Richtlinien zum Blockieren öffentlicher Knotenports auf Workerknoten. Wenn Sie begrenzten öffentlichen Zugriff auf eine App in Ihrem Cluster bereitstellen müssen, können Sie eine öffentliche NLB oder ALB erstellen, um Ihre App zugänglich zu machen. Sie müssen dann Ihre Apps auf diesen Edge-Knoten bereitstellen, damit die NLBs oder ALBs den öffentlichen Datenverkehr zu Ihren App-Pods leiten können. Außerdem können Sie den öffentlichen Datenverkehr zu den Netzservices steuern, die Ihre Apps zugänglich machen, indem Sie Calico-Richtlinien des Typs Pre-DNAT erstellen, wie z. B. Whitelist- und Blacklist-Richtlinien. Die Pods für private und öffentliche Netzservices werden auf den Edge-Knoten bereitgestellt, sodass externe Datenverkehr-Workloads auf nur wenige Worker in Ihrem Cluster eingeschränkt werden.  
+
+Damit sicher auf Services außerhalb von {{site.data.keyword.Bluemix_notm}} und in lokalen Netzen zugegriffen werden kann, können Sie den strongSwan-IPSec-VPN-Service in Ihrem Cluster konfigurieren und bereitstellen. Der strongSwan-Lastausgleichsfunktions-Pod wird auf einem Worker im Edge-Pool bereitgestellt. Dort stellt der Pod durch einen verschlüsselten VPN-Tunnel über das öffentliche Netz eine sichere Verbindung zum lokalen Netz her. Alternativ dazu können Sie {{site.data.keyword.Bluemix_notm}} Direct Link-Services verwenden, um Ihren Cluster nur über das private Netz mit Ihrem lokalen Rechenzentrum zu verbinden.
+
+Sind Sie bereit, mit einem Cluster für dieses Szenario loszulegen? Nach der Planung der Einrichtung der [Hochverfügbarkeit](/docs/containers?topic=containers-ha_clusters) und des [Workerknotens](/docs/containers?topic=containers-planning_worker_nodes) finden Sie in [Cluster erstellen](/docs/containers?topic=containers-clusters#cluster_prepare) weitere Informationen.
+
+</br>
+
+### Gateway-Einheit verwenden
+{: #vyatta-gateway}
+
+Lassen Sie begrenzte öffentliche Konnektivität zu Ihrem Cluster zu, indem Sie eine Gateway-Einheit, wie z. B. eine Virtual Router Appliance (Vyatta), als öffentliches Gateway und öffentliche Firewall konfigurieren.
+{: shortdesc}
+
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_gateway.png" alt="Abbildung der Architektur für einen Cluster, bei dem eine Gateway-Einheit für sicheren öffentlichen Zugriff verwendet wird"/> <figcaption>Architektur für einen Cluster, bei dem eine Gateway-Einheit für sicheren öffentlichen Zugriff verwendet wird</figcaption>
+</figure>
+</p>
+
+Wenn Sie Ihre Workerknoten nur in einem privaten VLAN einrichten und VRF nicht für Ihr Konto aktivieren wollen oder können, müssen Sie eine Gateway-Einheit konfigurieren, um die Netzkonnektivität zwischen Ihren Workerknoten und dem Master über das öffentliche Netz bereitzustellen. Sie können beispielsweise eine [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) oder eine [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) einrichten.
+
+Sie können eine Gateway-Einheit mit angepassten Netzrichtlinien einrichten, um für Ihren Cluster dedizierte Netzsicherheit bereitzustellen und unbefugten Zugriff zu erkennen und zu unterbinden. Wenn Sie eine Firewall im öffentlichen Netz einrichten, müssen Sie die erforderlichen Ports und IP-Adressen für die einzelnen Regionen öffnen, damit der Master und die Workerknoten kommunizieren können. Wenn Sie diese Firewall für das private Netz konfigurieren, müssen Sie auch die erforderlichen Ports und IP-Adressen öffnen, um die Kommunikation zwischen den Workerknoten zuzulassen und Ihren Cluster über das private Netz auf die Infrastrukturressourcen zugreifen zu lassen. Sie müssen auch VLAN-Spanning für Ihr Konto aktivieren, damit Teilnetze in demselben VLAN und über VLANs Daten weiterleiten können.
+
+Um eine sichere Verbindung Ihrer Workerknoten und Apps zu einem lokalen Netz oder zu Services außerhalb von {{site.data.keyword.Bluemix_notm}} herzustellen, richten Sie einen IPSec-VPN-Endpunkt in Ihrer Gateway-Einheit und den strongSwan-IPSec-VPN-Service in Ihrem Cluster für die Verwendung des Gateway-VPN-Endpunkts ein. Wenn Sie strongSwan nicht verwenden wollen, können Sie die VPN-Konnektivität direkt mit VRA einrichten.
+
+Ihre Workerknoten können durch Ihre Gateway-Einheit sicher mit anderen {{site.data.keyword.Bluemix_notm}}-Services und öffentlichen Services außerhalb von {{site.data.keyword.Bluemix_notm}} kommunizieren. Sie können Ihre Firewall so konfigurieren, dass nur Zugriff auf die öffentlichen und privaten IP-Adressen der Services zugelassen wird, die Sie verwenden wollen. 
+
+Wenn Sie privaten Zugriff auf eine App in Ihrem Cluster bereitstellen wollen, können Sie eine Netzlastausgleichsfunktion (NLB) oder Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellen, um Ihre App nur im privaten Netz zugänglich zu machen. Wenn Sie begrenzten öffentlichen Zugriff auf eine App in Ihrem Cluster bereitstellen müssen, können Sie eine öffentliche NLB oder ALB erstellen, um Ihre App zugänglich zu machen. Da der gesamte Datenverkehr die Firewall Ihrer Gateway-Einheit durchläuft, können Sie den privaten und öffentlichen Zugriff auf die Netzservices steuern, die Ihre Apps zugänglich machen, indem Sie die Ports und IP-Adressen der Services öffnen, um den eingehenden Datenverkehr zu diesen Services zuzulassen.
+
+Sind Sie bereit, mit einem Cluster für dieses Szenario loszulegen? Nach der Planung der Einrichtung der [Hochverfügbarkeit](/docs/containers?topic=containers-ha_clusters) und des [Workerknotens](/docs/containers?topic=containers-planning_worker_nodes) finden Sie in [Cluster erstellen](/docs/containers?topic=containers-clusters#cluster_prepare) weitere Informationen.
+
+<br />
+
+
+## Szenario: Lokales Rechenzentrum in einen Cluster im privaten Netz erweitern
 {: #private_clusters}
 
-{{site.data.keyword.containerlong_notm}} richtet Ihren Cluster standardmäßig mit Zugriff auf ein privates VLAN und ein öffentliches VLAN ein. Das private VLAN bestimmt die private IP-Adresse, die dem jeweiligen Workerknoten zugeordnet ist. Diese Adresse stellt für jeden Workerknoten eine private Netzschnittstelle bereit. Das öffentliche VLAN ermöglicht es den Workerknoten, automatisch und sicher eine Verbindung zum Master herzustellen.
+In diesem Szenario wollen Sie Workloads in einem {{site.data.keyword.containerlong_notm}}-Cluster ausführen. Sie wollen jedoch, dass diese Workloads nur für die Services, Datenbanken oder andere Ressourcen in Ihrem lokalen Rechenzentrum, wie z. B. {{site.data.keyword.icpfull_notm}}, zugänglich sind. Ihre Cluster-Workloads benötigen möglicherweise Zugriff auf einige andere {{site.data.keyword.Bluemix_notm}}-Services, die die Kommunikation über das private Netz unterstützen, wie z. B. {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
-Aufgrund von Sicherheits- oder Konformitätsanforderungen kann es jedoch wünschenswert sein, einen Cluster mit einem privaten VLAN oder einen Cluster mit einem privaten Serviceendpunkt zu erstellen. Ihre Optionen zum Erstellen eines privaten Clusters hängen vom Typ des Kontos für die IBM Cloud-Infrastruktur (SoftLayer) ab, den Sie haben, sowie von der öffentlichen und privaten VLAN-Konfiguration, die Sie wünschen. Weitere Informationen zu den folgenden Konfigurationen finden Sie unter [Clusternetz planen](/docs/containers?topic=containers-cs_network_ov).
+<p>
+<figure>
+ <img src="images/cs_clusters_planning_extend.png" alt="Abbildung der Architektur für einen Cluster, der eine Verbindung zu einem lokalen Rechenzentrum im privaten Netz herstellt"/>
+ <figcaption>Architektur für einen Cluster, der eine Verbindung zu einem lokalen Rechenzentrum im privaten Netz herstellt</figcaption>
+</figure>
+</p>
 
-Haben Sie einen vorhandenen Cluster, den Sie zu einem nur privaten Cluster machen wollen? Im Abschnitt [VLAN-Verbindungen für Workerknoten ändern](/docs/containers?topic=containers-cs_network_cluster#change-vlans) finden Sie Informationen dazu, wie Sie Worker-Pools hinzufügen oder vorhandene Worker-Pools mit neuen VLANs ändern können.
-{: note}
+Um diese Konfiguration zu erreichen, erstellen Sie einen Cluster, indem Sie Workerknoten nur mit einem privaten VLAN verbinden. Zum Bereitstellen der Konnektivität zwischen dem Cluster-Master und Workerknoten im privaten Netz nur durch den privaten Serviceendpunkt muss Ihr Konto für VRF und die Verwendung von Serviceendpunkten aktiviert sein. Da Ihr Cluster für alle Ressourcen im privaten Netz sichtbar ist, wenn VRF aktiviert ist, können Sie Ihren Cluster von anderen Systemen im privaten Netz mithilfe von Calico-Richtlinien für private Netze isolieren.
 
-**VRF-aktiviertes Konto, privater Kubernetes-Master, Workerknoten in einem öffentlichen und einem privaten VLAN**</br>
-In Clustern, die Kubernetes Version 1.11 oder höher ausführen, können Sie Ihr Clusternetz für die Verwendung öffentlicher und privater Serviceendpunkte einrichten. Wenn Sie den privaten Serviceendpunkt aktiviert haben, kommunizieren der Kubernetes-Master und Ihre Workerknoten immer über das private VLAN und den privaten Serviceendpunkt. Auch wenn Sie den öffentlichen Serviceendpunkt für Ihren Cluster aktivieren, verbleibt die Kommunikation zwischen dem Kubernetes-Master und den Workerknoten im privaten VLAN. Nach dem Aktivieren eines privaten Serviceendpunkts können Sie diesen nicht mehr inaktivieren. Sie können den öffentlichen Serviceendpunkt für den sicheren Zugriff auf Ihren Kubernetes-Master über das Internet beibehalten, zum Beispiel um `kubectl`-Befehle auszuführen, oder Sie können den öffentlichen Serviceendpunkt inaktivieren, um einen Cluster mit nur einem privaten Serviceendpunkt zu erhalten.
+Der Kubernetes-Master ist über den privaten Serviceendpunkt zugänglich, wenn berechtigte Clusterbenutzer sich in Ihrem privaten {{site.data.keyword.Bluemix_notm}}-Netz befinden oder über eine [VPN-Verbindung](/docs/infrastructure/iaas-vpn?topic=VPN-gettingstarted-with-virtual-private-networking) oder [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) mit dem privaten Netz verbunden sind. Die Kommunikation mit dem Kubernetes-Master über den privaten Serviceendpunkt muss jedoch über den IP-Adressbereich <code>166.X.X</code> erfolgen, der über eine VPN-Verbindung oder über {{site.data.keyword.Bluemix_notm}} Direct Link nicht angesteuert werden kann. Sie können den privaten Serviceendpunkt des Masters für Ihre Clusterbenutzer mithilfe einer privaten Netzlastausgleichsfunktion (NLB) zugänglich machen. Die private NLB macht den privaten Serviceendpunkt des Masters als internen <code>10.X.X.X</code>-IP-Adressbereich zugänglich, auf den Benutzer über eine VPN- oder {{site.data.keyword.Bluemix_notm}} Direct Link-Verbindung zugreifen können. Wenn Sie nur den privaten Serviceendpunkt aktivieren, können Sie das Kubernetes-Dashboard verwenden oder vorübergehend den öffentlichen Serviceendpunkt aktivieren, um die private NLB zu erstellen.
 
-**Nicht-VRF-aktiviertes oder VRF-aktiviertes Konto, Kubernetes-Master- und Workerknoten nur in privatem VLAN**</br>
-Wenn Sie Ihre Workerknoten nur in einem privaten VLAN einrichten, können die Workerknoten ihre App-Services nicht automatisch über das öffentliche Netz zugänglich machen und in einem Nicht-VRF-Konto können sie darüber hinaus keine Verbindung zum Master herstellen. Sie müssen eine Gateway-Appliance konfigurieren, um die Netzkonnektivität zwischen den Workerknoten und dem Master bereitzustellen.
+Ihre Workerknoten können automatisch sicher über das private Netz Ihrer IBM Cloud-Infrastruktur (SoftLayer) mit anderen {{site.data.keyword.Bluemix_notm}}-Services kommunizieren, die private Serviceendpunkte unterstützen, wie z. B. {{site.data.keyword.registrylong}}. Zum Beispiel unterstützen dedizierte Hardwareumgebungen für alle Standardplaninstanzen von {{site.data.keyword.cloudant_short_notm}} private Serviceendpunkte. Wenn ein {{site.data.keyword.Bluemix_notm}}-Service private Serviceendpunkte nicht unterstützt, kann Ihr Cluster nicht auf diesen Service zugreifen. 
 
-Für Nicht-VRF-Konten: Wenn Sie den Cluster sowohl mit öffentlichen als auch mit privaten VLANs erstellen, können Sie die öffentlichen VLANs später nicht aus diesem Cluster entfernen. Durch das Entfernen aller öffentlichen VLANs aus einem Cluster werden mehrere Clusterkomponenten gestoppt. Erstellen Sie stattdessen einen neuen Cluster ohne das öffentliche VLAN.
-{: note}
+Wenn Sie privaten Zugriff auf eine App in Ihrem Cluster bereitstellen wollen, können Sie eine Netzlastausgleichsfunktion (NLB) oder Ingress-Lastausgleichsfunktion für Anwendungen (ALB) erstellen. Diese Kubernetes-Netzservices machen Ihre App nur für das private Netz zugänglich, sodass alle lokalen Systeme mit einer Verbindung zum Teilnetz, in dem sich die NLB-IP befindet, auf die App zugreifen können.
 
-**Nicht VRF-aktiviertes Konto, Kubernetes-Master- und Workerknoten sowohl in öffentlichem als auch in privatem VLAN**</br>
-Für die meisten Fälle kann Ihr Cluster-Setup Workerknoten sowohl in öffentlichen als auch in privaten VLANs einschließen. Dann können Sie den Cluster einschränken, indem Sie öffentlichen VLAN-Datenverkehr durch Calico-Richtlinien blockieren und Netzdatenverkehr auf ausgewählte Edge-Knoten beschränken.
-
-## Worker-Pools und Workerknoten
-{: #planning_worker_nodes}
-
-Ein Kubernetes-Cluster besteht aus Workerknoten, die in Worker-Pools gruppiert sind und zentral vom Kubernetes-Master überwacht und verwaltet werden. Clusteradministratoren entscheiden, wie sie den Cluster aus Workerknoten einrichten, um sicherzustellen, dass den Clusterbenutzern alle Ressourcen für die Bereitstellung und Ausführung von Apps im Cluster zur Verfügung stehen.
-{:shortdesc}
-
-Wenn Sie einen Standardcluster erstellen, werden die Workerknoten mit denselben Speicher-, CPU- und Plattenspeicherspezifikationen (Typ) in Ihrer IBM Cloud-Infrastruktur (SoftLayer) in Ihrem Namen bestellt und dem Standard-Worker-Pool in Ihrem Cluster hinzugefügt. Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach dem Erstellen des Clusters nicht geändert werden dürfen. Sie können zwischen virtuellen oder physischen Servern (Bare-Metal-Servern) wählen. Abhängig von dem ausgewählten Grad an Hardware-Isolation können virtuelle Workerknoten als gemeinsam genutzte oder als dedizierte Knoten eingerichtet werden. Wenn Sie Ihrem Cluster unterschiedliche Typen hinzufügen möchten, [erstellen Sie einen weiteren Worker-Pool](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
-
-Kubernetes beschränkt die maximale Anzahl von Workerknoten, die in einem Cluster vorhanden sein können. Weitere Informationen finden Sie unter [Worker node and pod quotas ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/setup/cluster-large/).
-
-
-Wollen Sie sichergehen, dass Sie immer ausreichend Workerknoten für Ihre Workload zur Verfügung haben? Probieren Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aus.
-{: tip}
-
-<br />
-
-
-## Verfügbare Hardware für Workerknoten
-{: #shared_dedicated_node}
-
-Wenn Sie einen Standardcluster in {{site.data.keyword.Bluemix_notm}} erstellen, wählen Sie, ob Ihre Worker-Pools aus Workerknoten bestehen, die entweder physische Maschinen (Bare-Metal-Maschinen) sind oder die virtuelle Maschinen sind, die auf physischer Hardware ausgeführt werden. Sie wählen außerdem den Typ des Workerknotens oder die Kombination aus Speicher-, CPU- und anderen Maschinenspezifikationen (wie z. B. Plattenspeicher).
-{:shortdesc}
-
-<img src="images/cs_clusters_hardware.png" width="700" alt="Hardwareoptionen für Workerknoten in einem Standardcluster" style="width:700px; border-style: none"/>
-
-Wenn Sie mehr als einen Typ des Workerknotens benötigen, müssen Sie für jeden Typ einen Worker-Pool erstellen. Sie können vorhandene Workerknoten in ihrer Größe nicht ändern, um andere Ressourcen wie CPU und Hauptspeicher zu erhalten. Wenn Sie einen kostenlosen Cluster erstellen, wird Ihr Workerknoten automatisch als gemeinsam genutzter, virtueller Knoten im Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In Standardclustern können Sie den Typ der Maschine auswählen, der sich am besten für Ihre Workload eignet. Berücksichtigen Sie bei Ihrer Planung die [Reserven für Workerknotenressourcen](#resource_limit_node) bei der Gesamt-CPU und der Speicherkapazität.
-
-Sie können Cluster mithilfe der [Konsolen-UI](/docs/containers?topic=containers-clusters#clusters_ui) oder mithilfe der [CLI](/docs/containers?topic=containers-clusters#clusters_cli) bereitstellen.
-
-Wählen Sie eine der folgenden Optionen aus, um zu entscheiden, welchen Typ von Worker-Pool Sie wünschen.
-* [Virtuelle Maschinen](#vm)
-* [Physische Maschinen (Bare-Metal-Maschinen)](#bm)
-* [SDS-Maschinen (Software-defined Storage)](#sds)
-
-### Virtuelle Maschinen
-{: #vm}
-
-Virtuelle Maschinen bieten eine größere Flexibilität, schnellere Bereitstellungszeiten und mehr automatische Skalierbarkeitsfunktionen als Bare-Metal-Maschinen und sind zudem kostengünstiger. Sie können virtuelle Maschinen für die meisten allgemeinen Anwendungsfälle, wie Test- und Entwicklungsumgebungen, Staging- und Produktionsumgebungen, Microservices und Business-Apps, verwenden. Allerdings müssen bei der Leistung Kompromisse gemacht werden. Wenn Sie für RAM-, GPU- oder datenintensive Arbeitslasten eine Datenverarbeitung mit hoher Leistung benötigen, verwenden Sie [Bare-Metal-Maschinen](#bm).
-{: shortdesc}
-
-**Soll gemeinsam genutzte oder dedizierte Hardware verwendet werden?**</br>
-Wenn Sie einen virtuellen Standardcluster erstellen, müssen Sie auswählen, ob die zugrunde liegende Hardware von mehreren {{site.data.keyword.IBM_notm}} Kunden gemeinsam genutzt werden kann (Multi-Tenant-Konfiguration) oder ob Sie die ausschließlich Ihnen vorbehaltene, dedizierte Nutzung vorziehen (Single-Tenant-Konfiguration).
-
-* **In einer Multi-Tenant-Konfiguration mit gemeinsam genutzter Hardware**: Physische Ressourcen wie CPU und Speicher werden von allen virtuellen Maschinen, die auf derselben physischen Hardware bereitgestellt werden, gemeinsam genutzt. Um sicherzustellen, dass jede virtuelle Maschine unabhängig von anderen Maschinen ausgeführt werden kann, segmentiert ein VM-Monitor, d. h. eine Überwachungsfunktion für virtuelle Maschinen, die auch als Hypervisor bezeichnet wird, die physischen Ressourcen in isolierte Entitäten und ordnet diese einer virtuellen Maschine als dedizierte Ressourcen zu. Dies wird als Hypervisor-Isolation bezeichnet.
-* **In einer Single-Tenant-Konfiguration mit dedizierter Hardware**: Die Nutzung aller physischen Ressourcen ist ausschließlich Ihnen vorbehalten. Sie können mehrere Workerknoten als virtuelle Maschinen auf demselben physischen Host bereitstellen. Ähnlich wie bei der Multi-Tenant-Konfiguration stellt der Hypervisor auch hier sicher, dass jeder Workerknoten seinen Anteil an den verfügbaren physischen Ressourcen erhält.
-
-Gemeinsam genutzte Knoten sind in der Regel kostengünstiger als dedizierte Knoten, weil die Kosten für die ihnen zugrunde liegende Hardware von mehreren Kunden getragen werden. Bei der Entscheidungsfindung hinsichtlich gemeinsam genutzter Knoten versus dedizierter Knoten sollten Sie mit Ihrer Rechtsabteilung Rücksprache halten, um zu klären, welcher Grad an Infrastrukturisolation und Compliance für Ihre App-Umgebung erforderlich ist.
-
-Einige Typen sind nur für einen Typ von Tenant-Setup verfügbar. Zum Beispiel sind VMs vom Typ `m3c` nur als Tenant-Setup `shared` verfügbar.
-{: note}
-
-**Was sind die allgemeinen Features von VMs?**</br>
-Virtuelle Maschinen verwenden lokale Platten anstelle von SAN (Storage Area Networking) für die Zuverlässigkeit. Zu den Vorteilen zählen ein höherer Durchsatz beim Serialisieren von Bytes für die lokale Festplatte und weniger Beeinträchtigungen des Dateisystems aufgrund von Netzausfällen. Jede VM bietet eine Netzgeschwindigkeit von 1000 Mb/s, 25 GB primären lokalen Plattenspeicher für das Dateisystem des Betriebssystems und 100 GB sekundären lokalen Plattenspeicher für Daten (wie die Containerlaufzeit und `kubelet`). Der lokale Speicher auf dem Workerknoten ist nur für die kurzfristige Verarbeitung vorgesehen; die primäre und die sekundäre Platte werden gelöscht, wenn Sie den Workerknoten aktualisieren oder erneut laden. Informationen zu persistenten Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Was passiert, wenn meine Maschinentypen älter sind?**</br>
-Wenn Ihr Cluster über die veralteten `x1c`- (oder ältere) Ubuntu 16 `x2c`-Workerknoten-Typen verfügt, können Sie Ihren [Cluster auf Ubuntu 18 `x3c`-Workerknoten aktualisieren](/docs/containers?topic=containers-update#machine_type).
-
-**Welche Typen sind bei virtuellen Maschinen verfügbar?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können sich außerdem die verfügbaren [Bare-Metal](#bm)- oder [SDS](#sds)-Maschinentypen ansehen.
-
-{: #vm-table}
-<table>
-<caption>Verfügbare virtuelle Maschinentypen in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Name und Anwendungsfall</th>
-<th>Kerne/Speicher</th>
-<th>Primäre/Sekundäre Platte</th>
-<th>Netzgeschwindigkeit</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtuell, u3c.2x4</strong>: Verwenden Sie diese kompakte virtuelle Maschine für Schnelltests, Machbarkeitsnachweise und andere geringe Workloads.</td>
-<td>2/4 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, b3c.4x16</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für Tests und Entwicklung und andere geringe Workloads.</td>
-<td>4/16 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, b3c.16x64</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für mittlere Workloads aus.</td></td>
-<td>16/64 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, b3c.32x128</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für mittlere bis große Workloads, wie eine Datenbank und eine dynamische Website mit vielen gleichzeitigen Benutzern, aus.</td>
-<td>32/128 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, b3c.56x242</strong>: Wählen Sie diese ausgeglichene virtuelle Maschine für große Workloads, wie eine Datenbank und mehrere Apps mit vielen gleichzeitigen Benutzern, aus.</td>
-<td>56/242 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, c3c.16x16</strong>: Verwenden Sie diesen Typ, wenn Sie eine gleichmäßige Verteilung der Rechenressourcen vom Workerknoten für geringe Workloads wünschen.</td>
-<td>16 / 16 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, c3c.16x32</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:2-Verhältnis von CPU- und Speicherressourcen vom Workerknoten für geringe bis mittlere Workloads wünschen.</td>
-<td>16 / 32 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, c3c.32x32</strong>: Verwenden Sie diesen Typ, wenn Sie eine gleichmäßige Verteilung der Rechenressourcen vom Workerknoten für mittlere Workloads wünschen.</td>
-<td>32 GB/ 32 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, c3c.32x64</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:2-Verhältnis von CPU- und Speicherressourcen vom Workerknoten für mittlere Workloads wünschen.</td>
-<td>32 GB/64 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Virtuell, m3c.8x64</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für geringe bis mittlere Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur in Dallas und als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>8 / 64 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, m3c.16x128</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für mittlere Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur in Dallas und als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>16/128 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, m3c.30x240</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für mittlere bis große Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur in Dallas und als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>30 / 240 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, m3c.48x384</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für mittlere bis große Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>48 / 384 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, m3c.56x448</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für große Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>56 / 448 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr><tr>
-<td><strong>Virtuell, m3c.64x512</strong>: Verwenden Sie diesen Typ, wenn Sie ein 1:8-Verhältnis von CPU- und Speicherressourcen für große Workloads wünschen, die mehr Hauptspeicher erfordern, zum Beispiel Datenbanken wie {{site.data.keyword.Db2_on_Cloud_short}}. Nur als Tenant-Setup `--hardware shared` verfügbar.</td>
-<td>64 / 512 GB</td>
-<td>25 GB/100 GB</td>
-<td>1000 MB/s</td>
-</tr>
-</tbody>
-</table>
-
-### Physische Maschinen (Bare-Metal-Maschinen)
-{: #bm}
-
-Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen, der auch als Bare-Metal-Server bezeichnet wird.
-{: shortdesc}
-
-**Wie unterscheiden sich Bare-Metal-Maschinen von VMs?**</br>
-Mit Bare-Metal haben Sie direkten Zugriff auf die physischen Ressourcen auf der Maschine, wie z. B. Speicher oder CPU. Durch diese Konfiguration wird der Hypervisor der virtuellen Maschine entfernt, der physische Ressourcen zu virtuellen Maschinen zuordnet, die auf dem Host ausgeführt werden. Stattdessen sind alle Ressourcen der Bare-Metal-Maschine ausschließlich dem Worker gewidmet, also müssen Sie sich keine Sorgen machen, dass "lärmende Nachbarn" Ressourcen gemeinsam nutzen oder die Leistung verlangsamen. Physische Maschinentypen verfügen über einen größeren lokalen Speicher als virtuelle und einige verfügen zudem über RAID zur Steigerung der Datenverfügbarkeit. Der lokale Speicher auf dem Workerknoten ist nur für die kurzfristige Verarbeitung vorgesehen; die primäre und die sekundäre Platte werden gelöscht, wenn Sie den Workerknoten aktualisieren oder erneut laden. Informationen zu persistenten Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Bietet mir Bare-Metal mehr Möglichkeiten als VMs - abgesehen von besseren Spezifikationen für die Leistung?**</br>
-Ja. Mit Bare-Metal haben Sie die Möglichkeit, Trusted Compute zu aktivieren, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containerlong_notm}} mit Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute ist für bestimmte Bare-Metal-Maschinentypen verfügbar. Bei der Ausführung des [Befehls](/docs/containers?topic=containers-cs_cli_reference#cs_machine_types) `ibmcloud ks machine-types <zone>` können Sie im Feld **Trustable** ablesen, welche Maschinen Trusted Compute unterstützen. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht.
-
-Neben Trusted Compute können Sie auch {{site.data.keyword.datashield_full}} (Beta) nutzen. {{site.data.keyword.datashield_short}} ist in Intel® Software Guard Extensions (SGX) und Fortanix®-Technologie integriert, sodass der Workload-Code und die Daten Ihres {{site.data.keyword.Bluemix_notm}}-Containers während der Nutzung geschützt werden. Der App-Code und die Daten werden in speziellen CPU-Schutzenklaven ausgeführt. Dabei handelt es sich um vertrauenswürdige Speicherbereiche auf dem Workerknoten, die kritische Aspekte der App schützen und dabei helfen, Code und Daten vertraulich und unverändert zu halten. Wenn Sie oder Ihr Unternehmen aufgrund interner Richtlinien, behördlicher Regelungen oder branchenspezifischer Konformitätsanforderungen eine Sicherheitsstufe für Daten benötigen, kann Sie diese Lösung beim Wechsel zur Cloud unterstützen. Beispiele für Anwendungsfälle beziehen sich auf Finanzdienstleister und Einrichtungen des Gesundheitswesen oder auf Länder mit behördlichen Richtlinien, die eine On-Premises-Cloud-Lösung erfordern.
-
-**Bare-Metal scheint nur Vorteile zu bieten. Was könnte dagegen sprechen, diese Lösung zu bestellen?**</br>
-Die Nutzung von Bare-Metal-Servern ist teurer als die Nutzung virtueller Server. Bare-Metal-Server eignen sich für Hochleistungsanwendungen, die mehr Ressourcen und mehr Hoststeuerung benötigen.
-
-Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats in Rechnung gestellt. Nachdem Sie einen Bare-Metal-Server bestellt oder storniert haben, wird der Prozess manuell in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer) ausgeführt. Die Ausführung kann daher länger als einen Geschäftstag dauern.
-{: important}
-
-**Welche Bare-Metal-Typen kann ich bestellen?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können außerdem die verfügbaren [VM](#vm)- oder [SDS](#sds)-Maschinentypen ansehen.
-
-Bare-Metal-Maschinen sind für verschiedene Anwendungsfälle optimiert (z. B. für RAM-intensive, datenintensive oder GPU-intensive Workloads).
-
-Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um Ihre Workload zu unterstützen. Einige Typen verfügen über eine Kombination aus den folgenden Platten und Speicherkonfigurationen. Beispielsweise können bestimmte Typen über eine SATA-Primärplatte mit einer unformatierten SSD-Sekundärplatte verfügen.
-
-* **SATA**: Ein herkömmliches Magnetplattenspeichergerät, das häufig als primärer Datenträger des Workerknotens verwendet wird, auf dem das Dateisystem des Betriebssystems gespeichert ist.
-* **SSD**: Ein Solid-State-Speichergerät für hohe Leistungsdaten.
-* **Raw**: Das Speichergerät ist nicht formatiert und es steht die volle Kapazität zur Verfügung.
-* **RAID**: Das Speichergerät verteilt die Daten für Redundanz und Leistung, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
-
-
-{: #bm-table}
-<table>
-<caption>Verfügbare Bare-Metal-Maschinentypen in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Name und Anwendungsfall</th>
-<th>Kerne/Speicher</th>
-<th>Primäre/Sekundäre Platte</th>
-<th>Netzgeschwindigkeit</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>RAM-intensiv, Bare-Metal, mr3c.28x512</strong>: Maximieren Sie den verfügbaren RAM-Speicher für Ihre Workerknoten.</td>
-<td>28/512 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>GPU, Bare-Metal, mg3c.16x128</strong>: Wählen Sie diesen Typ für rechenintensive Workloads, wie Datenverarbeitungen mit hoher Leistung, maschinelles Lernen oder 3D-Anwendungen. Dieser Typ verfügt über eine physische Tesla K80-Karte mit zwei GPUs (Graphics Processing Units) pro Karte für insgesamt zwei GPUs.</td>
-<td>16/128 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>GPU, Bare-Metal, mg3c.28x256</strong>: Wählen Sie diesen Typ für rechenintensive Workloads, wie Datenverarbeitungen mit hoher Leistung, maschinelles Lernen oder 3D-Anwendungen. Dieser Typ verfügt über zwei physische Tesla K80-Karten, die zwei GPUs (Graphics Processing Units) pro Karte für insgesamt vier GPUs aufweisen.</td>
-<td>28/256 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Datenintensiv, Bare-Metal, md3c.16x64.4x4tb</strong>: Verwenden Sie diesen Typ für einen beträchtlichen Teil des lokalen Plattenspeichers, einschließlich RAID zur Steigerung der Datenverfügbarkeit, für Workloads wie verteilte Dateisysteme, große Datenbanken und Big-Data-Analysen.</td>
-<td>16/64 GB</td>
-<td>2 x 2 TB RAID1/4 x 4 TB SATA RAID10</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Datenintensiv, Bare-Metal, md3c.28x512.4x4tb</strong>: Verwenden Sie diesen Typ für einen beträchtlichen Teil des lokalen Plattenspeichers, einschließlich RAID zur Steigerung der Datenverfügbarkeit, für Workloads wie verteilte Dateisysteme, große Datenbanken und Big-Data-Analysen.</td>
-<td>28/512 GB</td>
-<td>2 x 2 TB RAID1/4 x 4 TB SATA RAID10</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Ausgeglichen, Bare-Metal, mb3c.4x32</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, die mehr Ressourcen für die Datenverarbeitung benötigen, als virtuelle Maschinen bieten können. Dieser Typ kann auch mit Intel® Software Guard Extensions (SGX) eingerichtet werden, sodass Sie <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> zum Verschlüsseln Ihres Datenspeichers verwenden können.</td>
-<td>4/32 GB</td>
-<td>2 TB SATA/2 TB SATA</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Ausgeglichen, Bare-Metal, mb3c.16x64</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, die mehr Ressourcen für die Datenverarbeitung benötigen, als virtuelle Maschinen bieten können. </td>
-<td>16/64 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-</tbody>
-</table>
-
-### SDS-Maschinen (Software-defined Storage)
-{: #sds}
-
-SDS-Typen (SDS = Software-Defined Storage) sind physische Maschinen, die mit einer zusätzlichen unformatierten Platten für den physischen lokalen Speicher bereitgestellt werden. Im Gegensatz zur primären und sekundären lokalen Platte werden diese unformatierten Platten beim Aktualisieren oder erneuten Laden eines Workerknotens nicht gelöscht. Da sich die Daten auf derselben Maschine wie der Rechenknoten befinden, eignen sich SDS-Maschinen für hohe Workloads.
-{: shortdesc}
-
-**Wann verwende ich SDS-Typen?**</br>
-Normalerweise verwenden Sie SDS-Maschinen in den folgenden Fällen:
-*  Wenn Sie ein SDS-Add-on wie [Portworx](/docs/containers?topic=containers-portworx#portworx) für den Cluster verwenden, verwenden Sie Sie eine SDS-Maschine.
-*  Wenn Ihre App ein [StatefulSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) ist, das lokalen Speicher voraussetzt, können Sie SDS-Maschinen verwenden und [lokale Kubernetes-PVs (Beta) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/) einrichten.
-*  Möglicherweise verfügen Sie über angepasste Apps, die zusätzlichen unformatierten lokalen Speicher erfordern.
-
-Informationen zu weiteren Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).
-
-**Welche SDS-Typen kann ich bestellen?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können außerdem die verfügbaren [Bare-Metal](#bm)- oder [VM](#vm)-Maschinentypen ansehen.
-
-Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um Ihre Workload zu unterstützen. Einige Typen verfügen über eine Kombination aus den folgenden Platten und Speicherkonfigurationen. Beispielsweise können bestimmte Typen über eine SATA-Primärplatte mit einer unformatierten SSD-Sekundärplatte verfügen.
-
-* **SATA**: Ein herkömmliches Magnetplattenspeichergerät, das häufig als primärer Datenträger des Workerknotens verwendet wird, auf dem das Dateisystem des Betriebssystems gespeichert ist.
-* **SSD**: Ein Solid-State-Speichergerät für hohe Leistungsdaten.
-* **Raw**: Das Speichergerät ist nicht formatiert und es steht die volle Kapazität zur Verfügung.
-* **RAID**: Das Speichergerät verteilt die Daten für Redundanz und Leistung, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
-
-
-{: #sds-table}
-<table>
-<caption>Verfügbare SDS-Maschinentypen in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Name und Anwendungsfall</th>
-<th>Kerne/Speicher</th>
-<th>Primäre/Sekundäre Platte</th>
-<th>Zusätzliche unformatierte Platten</th>
-<th>Netzgeschwindigkeit</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Bare-Metal mit SDS, ms3c.4x32.1.9tb.ssd</strong>: Wenn Sie zusätzlichen lokalen Speicher zur Leistungssteigerung benötigen, verwenden Sie diesen Typ mit hoher Plattenkapazität, der SDS (Software-Defined Storage) unterstützt.</td>
-<td>4/32 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>1,9 TB Raw SSD (Einheitenpfad: `/dev/sdc`)</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Bare-Metal mit SDS, ms3c.16x64.1.9tb.ssd</strong>: Wenn Sie zusätzlichen lokalen Speicher zur Leistungssteigerung benötigen, verwenden Sie diesen Typ mit hoher Plattenkapazität, der SDS (Software-Defined Storage) unterstützt.</td>
-<td>16/64 GB</td>
-<td>2 TB SATA/960 GB SSD</td>
-<td>1,9 TB Raw SSD (Einheitenpfad: `/dev/sdc`)</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Bare-Metal mit SDS, ms3c.28x256.3.8tb.ssd</strong>: Wenn Sie zusätzlichen lokalen Speicher zur Leistungssteigerung benötigen, verwenden Sie diesen Typ mit hoher Plattenkapazität, der SDS (Software-Defined Storage) unterstützt.</td>
-<td>28/256 GB</td>
-<td>2 TB SATA/1,9 TB SSD</td>
-<td>3,8 TB Raw SSD (Einheitenpfad: `/dev/sdc`)</td>
-<td>10000 MB/s</td>
-</tr>
-<tr>
-<td><strong>Bare-Metal mit SDS, ms3c.28x512.4x3.8tb.ssd</strong>: Wenn Sie zusätzlichen lokalen Speicher zur Leistungssteigerung benötigen, verwenden Sie diesen Typ mit hoher Plattenkapazität, der SDS (Software-Defined Storage) unterstützt.</td>
-<td>28/512 GB</td>
-<td>2 TB SATA/1,9 TB SSD</td>
-<td>4 Platten, 3,8 TB Raw SSD (Einheitenpfade: `/dev/sdc`, `/dev/sdd`, `/dev/sde`, `/dev/sdf`)</td>
-<td>10000 MB/s</td>
-</tr>
-</tbody>
-</table>
-
-## Reserven für Workerknotenressourcen
-{: #resource_limit_node}
-
-{{site.data.keyword.containerlong_notm}} legt Reserven für Rechenressourcen fest, die die verfügbaren Rechenressourcen auf den einzelnen Workerknoten begrenzen. Reservierte Speicher- und CPU-Ressourcen können von Pods auf dem Workerknoten nicht verwendet werden. Auf diese Weise werden die zuordnungsfähigen Ressourcen auf den Workerknoten reduziert. Wenn Sie ursprünglich Pods bereitstellen, der Workerknoten aber nicht über ausreichend zuordnungsfähige Ressourcen verfügt, schlägt die Bereitstellung fehl. Und wenn Pods das Limit für Workerknotenressourcen überschreiten, werden die Pods entfernt. In Kubernetes wird dieses Limit als [harte Räumungsschwelle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds) bezeichnet.
-{:shortdesc}
-
-Wenn weniger CPU oder Speicher verfügbar ist als der Workerknoten reserviert, beginnt Kubernetes damit, Pods zu entfernen, um ausreichend Rechenressourcen verfügbar zu machen. Wenn ein anderer Workerknoten verfügbar ist, wird die Planung für die Pods auf diesem Workerknoten neu erstellt. Wenn Ihre Pods häufig entfernt werden, fügen Sie zusätzliche Workerknoten zu Ihrem Cluster hinzu oder legen Sie [Ressourcenbegrenzungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) für die Pods fest.
-
-Welche Ressourcen auf Ihrem Workerknoten reserviert werden, hängt von der Menge an CPU und Speicher ab, mit der Ihr Workerknoten geliefert wird. {{site.data.keyword.containerlong_notm}} definiert die Speicher- und CPU-Ebenen wie in der folgenden Tabelle dargestellt. Wenn Ihr Workerknoten über Rechenressourcen in mehreren Ebenen verfügt, wird ein Prozentsatz der CPU- und Speicherressourcen für jede Ebene reserviert.
-
-Um zu sehen, wie viele Rechenressourcen derzeit auf dem Workerknoten verwendet werden, führen Sie [`kubectl top node` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#top) aus.
-{: tip}
-
-<table summary="Diese Tabelle enthält für Workerknoten reservierten Speicher nach Ebene.">
-<caption>Für Workerknoten reservierter Speicher nach Ebene</caption>
-<thead>
-<tr>
-  <th>Speicherebene</th>
-  <th>% oder Menge reserviert</th>
-  <th>`b3c.4x16` Workerknoten (16 GB), Beispiel</th>
-  <th>`mg1c.28x256` Workerknoten (256 GB), Beispiel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Erste 4 GB (0-4 GB)</td>
-  <td>25% des Speichers</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Nächste 4 GB (5-8 GB)</td>
-  <td>20% des Speichers</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Nächste 8 GB (9-16 GB)</td>
-  <td>10 % des Speichers</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Die nächsten 112 GB (17-128 GB)</td>
-  <td>6 % des Speichers</td>
-  <td>n.z.</td>
-  <td>6,72 GB</td>
-</tr>
-<tr>
-  <td>Die verbleibenden GB (129 GB+)</td>
-  <td>2 % des Speichers</td>
-  <td>n.z.</td>
-  <td>2,54 GB</td>
-</tr>
-<tr>
-  <td>Zusätzliche Reserve für [`kubelet`-Entfernung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (unstrukturierte Menge)</td>
-  <td>100 MB (unstrukturierte Menge)</td>
-</tr>
-<tr>
-  <td>**Insgesamt reserviert**</td>
-  <td>**(variiert)**</td>
-  <td>**2,7 GB von insgesamt 16 GB**</td>
-  <td>**11,96 GB von insgesamt 256 GB**</td>
-</tr>
-</tbody>
-</table>
-
-<table summary="Diese Tabelle enthält die für Workerknoten reservierte CPU nach Ebene.">
-<caption>Für Workerknoten reservierte CPU nach Ebene</caption>
-<thead>
-<tr>
-  <th>CPU-Ebene</th>
-  <th>% reserviert</th>
-  <th>`b3c.4x16`-Workerknoten (4 Cores), Beispiel</th>
-  <th>`mg1c.28x256` Workerknoten (28 Cores), Beispiel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Erster Core (Core 1)</td>
-  <td>6 % Cores</td>
-  <td>0,06 Cores</td>
-  <td>0,06 Cores</td>
-</tr>
-<tr>
-  <td>Die nächsten 2 Cores (Cores 2-3)</td>
-  <td>1 % Cores</td>
-  <td>0,02 Cores</td>
-  <td>0,02 Cores</td>
-</tr>
-<tr>
-  <td>Die nächsten 2 Cores (Cores 4-5)</td>
-  <td>0,5 % Cores</td>
-  <td>0,005 Cores</td>
-  <td>0,01 Cores</td>
-</tr>
-<tr>
-  <td>Die verbleibenden Cores (Cores 6+)</td>
-  <td>0,25 % Cores</td>
-  <td>n.z.</td>
-  <td>0,0575 Cores</td>
-</tr>
-<tr>
-  <td>**Insgesamt reserviert**</td>
-  <td>**(variiert)**</td>
-  <td>**0,085 Cores von insgesamt 4 Cores**</td>
-  <td>**0,1475 Cores von insgesamt 28 Cores**</td>
-</tr>
-</tbody>
-</table>
-
-## Automatische Wiederherstellung für Ihren Workerknoten
-{: #planning_autorecovery}
-
-Kritische Komponenten - wie z. B. `containerd`, `kubelet`, `kube-proxy` und `calico` - müssen richtig ausgeführt werden, damit die Kubernetes-Workerknoten einen einwandfreiem Zustand aufweisen. Im Laufe der Zeit können diese Komponenten kaputt gehen und ihre Workerknoten möglicherweise in einem nicht funktionsbereiten Zustand versetzen. Nicht funktionsbereite Workerknoten verringern die Gesamtkapazität des Clusters und können zu Ausfallzeiten für Ihre App führen.
-{:shortdesc}
-
-Sie können [Statusprüfungen für Ihre Workerknoten konfigurieren und die automatische Wiederherstellung aktiveren](/docs/containers?topic=containers-health#autorecovery). Wenn die automatische Wiederherstellung basierend auf den konfigurierten Prüfungen einen nicht ordnungsgemäß funktionierenden Workerknoten erkennt, löst das System eine Korrekturmaßnahme, wie das erneute Laden des Betriebssystems, auf dem Workerknoten aus. Weitere Informationen zur Funktionsweise der automatischen Wiederherstellung finden Sie im [Blogbeitrag zur automatischen Wiederherstellung![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
-
-<br />
-
+Sind Sie bereit, mit einem Cluster für dieses Szenario loszulegen? Nach der Planung der Einrichtung der [Hochverfügbarkeit](/docs/containers?topic=containers-ha_clusters) und des [Workerknotens](/docs/containers?topic=containers-planning_worker_nodes) finden Sie in [Cluster erstellen](/docs/containers?topic=containers-clusters#cluster_prepare) weitere Informationen.

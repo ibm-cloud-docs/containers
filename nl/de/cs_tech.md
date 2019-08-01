@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-04"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, docker
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # {{site.data.keyword.containerlong_notm}}-Technologie
@@ -124,7 +126,7 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 In einem Kubernetes-Cluster, der auf {{site.data.keyword.containerlong_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Genauer genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Die Einrichtung der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten hängt davon ab, wie Sie Ihr IBM Cloud-Infrastrukturnetz (SoftLayer) einrichten: ein Konto mit einem öffentlichen Servicepunkt oder ein VRF-aktiviertes Konto mit öffentlichen und privaten Endpunkten.
 {: shortdesc}
 
-Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion, wenn nur der [öffentliche Serviceendpunkt aktiviert ist](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_public).
+Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion, wenn nur der [öffentliche Serviceendpunkt aktiviert ist](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 <p>
 <figure>
  <img src="images/cs_org_ov_public_se.png" alt="{{site.data.keyword.containerlong_notm}} - Kubernetes-Architektur">
@@ -132,7 +134,7 @@ Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weis
 </figure>
 </p>
 
-Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion in einem VRF-aktivierten Konto, wenn der [öffentliche und der private Serviceendpunkt aktiviert sind](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_master_both).
+Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion in einem VRF-aktivierten Konto, wenn der [öffentliche und der private Serviceendpunkt aktiviert sind](/docs/containers?topic=containers-plan_clusters#workeruser-master).
 
 <p>
 <figure>
@@ -232,7 +234,7 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tr>
     <td>Ingress-ALB</td>
     <td>kube-system</td>
-    <td>Ingress ist ein Kubernetes-Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
+    <td>Ingress ist ein Kubernetes Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
     </tr>
     <tr>
     <td>Storage Provider</td>
@@ -247,7 +249,7 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tr>
     <td>Lastausgleichsfunktion</td>
     <td>ibm-system</td>
-    <td>Eine Lastausgleichsfunktion ist ein Kubernetes-Service, der verwendet werden kann, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem öffentliche oder private Anforderungen an eine App weitergeleitet werden.</td>
+    <td>Eine Lastausgleichsfunktion ist ein Kubernetes Service, der verwendet werden kann, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem öffentliche oder private Anforderungen an eine App weitergeleitet werden.</td>
     </tr>
     <tr>
     <td>App-Pods und -Services</td>
@@ -259,3 +261,53 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
 
 Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Produkten und Services verwendet werden kann? Werfen Sie einen Blick auf einige [Integrationen](/docs/containers?topic=containers-supported_integrations#supported_integrations).
 {: tip}
+
+## Serviceeinschränkungen
+{: #tech_limits}
+
+{{site.data.keyword.containerlong_notm}} und das Kubernetes-Open-Source-Projekt werden mit Standardeinstellungen und Standardeinschränkungen für Services bereitgestellt, um die Sicherheit, den Komfort und die Basisfunktionalität zu gewährleisten. Einige der Einschränkungen können Sie bei Bedarf ändern, sofern dies angegeben ist. Wenn Sie erwarten, dass Sie die folgenden {{site.data.keyword.containerlong_notm}}-Einschränkungen erreichen, wenden Sie sich an das IBM Team im [internen ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für internen Link")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) oder [externen Slack ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
+{: shortdesc}
+
+<table summary="Diese Tabelle enthält Informationen zu den {{site.data.keyword.containerlong_notm}}-Einschränkungen. Spalten sind von links nach rechts zu lesen. Die erste Spalte enthält den Typ und die zweite Spalte die Beschreibung der Einschränkung. ">
+<caption>{{site.data.keyword.containerlong_notm}}-Einschränkungen</caption>
+<thead>
+  <tr>
+    <th>Typ</th>
+    <th>Beschreibung</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Grenzwerte für API-Rate</td>
+    <td>100 Anforderungen in jeweils 10 Sekunden an die {{site.data.keyword.containerlong_notm}}-API für jede eindeutige Quellen-IP-Adresse. </td>
+  </tr>
+  <tr>
+    <td>Workerknotenkapazität</td>
+    <td>Workerknoten sind in [ausgewählten Typen](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) der Rechenressourcen verfügbar. </td>
+  </tr>
+  <tr>
+    <td>Zugriff auf Workerknotenhost</td>
+    <td>Aus Sicherheitsgründen können Sie nicht über SSH auf den Rechenhost des Workerknotens zugreifen. </td>
+  </tr>
+  <tr>
+    <td>Maximale Anzahl Workerknoten</td>
+    <td>Wenn Sie mehr als 900 Workerknoten pro Cluster erwarten, wenden Sie sich zuerst an das IBM Team im [internen ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für internen Link")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) oder [externen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com). <br><br>Bei einem Kapazitätslimit der IBM Cloud-Infrastruktur (SoftLayer) bezüglich der Anzahl der Instanzen pro Rechenzentrum oder der pro Monat bestellten Instanzen wenden Sie sich an den Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). </td>
+  </tr>
+  <tr>
+    <td>Maximale Anzahl Pods</td>
+    <td>110 pro Workerknoten.<br><br>Die Anzahl der Pods schließt `kube-system`- und `ibm-system`-Pods ein, die auf dem Workerknoten ausgeführt werden. Für eine verbesserte Leistung sollten Sie eine Begrenzung der Anzahl der Pods in Betracht ziehen, die Sie pro Rechenkern ausführen, damit Sie den Workerknoten nicht überlasten. Auf einem Workerknoten des Typs `b3c.4x16` beispielsweise können Sie 10 Pods pro Kern ausführen, die maximal 75 % der Gesamtkapazität des Workerknotens verwenden. </td>
+  </tr>
+  <tr>
+    <td>Maximale Anzahl Kubernetes Services</td>
+    <td>65.000 IPs pro Cluster im 172.21.0.0/16-Bereich, die Sie Kubernetes Services im Cluster zuordnen können. </td>
+  </tr>
+  <tr>
+    <td>Datenverkehr der Ingress-Lastausgleichsfunktion für Anwendung (ALB)</td>
+    <td>32.768 Verbindungen pro Sekunde.<br><br>Wenn Ihr Ingress-Datenverkehr diesen Wert überschreitet, [skalieren Sie die Anzahl der ALB-Replikate](/docs/containers?topic=containers-ingress#scale_albs) in Ihrem Cluster nach oben, um der erhöhten Auslastung zu entsprechen.</td>
+  </tr>
+  <tr>
+    <td>Speicherdatenträger</td>
+    <td>Insgesamt 250 Datenträger für Datei- und Blockspeicherinstanzen der IBM Cloud-Infrastruktur (SoftLayer) pro Konto. <br><br>Wenn Sie mehr Datenträger anhängen, wird möglicherweise eine Nachricht zu einem Kapazitätsengpass (Out of Capacity) angezeigt, wenn Sie persistente Datenträger bereitstellen. Wenden Sie sich in diesem Fall an den Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). Weitere FAQs finden Sie in der Dokumentation zum [Datei-](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) und [Blockspeicher](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-). </td>
+  </tr>
+</tbody>
+</table>

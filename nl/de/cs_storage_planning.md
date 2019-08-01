@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-03-21"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 
@@ -68,7 +69,7 @@ Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie
    {: tip}
 
 5. Untersuchen Sie, ob Ihre Daten über mehrere App-Instanzen, Zonen oder Regionen hinweg gemeinsam genutzt werden müssen.
-   - **Zugriff über mehrere Pods hinweg:** Wenn Sie persistente Kubernetes-Datenträger für den Zugriff auf Ihren Speicher verwenden, können Sie die Anzahl der Pods bestimmen, die den Datenträger gleichzeitig anhängen können. Bestimmte Speicherlösungen - wie z. B. Blockspeicher - können jeweils nur von einem Pod gleichzeitig aufgerufen werden. Bei anderen Speicherlösungen können Sie denselben Datenträger über mehrere Pods hinweg gemeinsam nutzen.
+   - **Zugriff über mehrere Pods hinweg:** Wenn Sie persistente Kubernetes-Datenträger für den Zugriff auf Ihren Speicher verwenden, können Sie die Anzahl der Pods bestimmen, die den Datenträger gleichzeitig anhängen können. Bestimmte Speicherlösungen - wie z. B. Blockspeicher - können jeweils nur von einem Pod gleichzeitig aufgerufen werden. Mit anderen Speicherlösungen können Sie Datenträger podübergreifend gemeinsam nutzen. 
    - **Zugriff über mehrere Zonen und Regionen hinweg:** Möglicherweise müssen Sie Ihre Daten über mehrere Zonen oder Regionen hinweg zugänglich machen. Bestimmte Speicherlösungen - z. B. Datei- und Blockspeicher - sind spezifisch für Rechenzentren und können in einer Mehrzonenclusterkonfiguration nicht über mehrere Zonen hinweg gemeinsam genutzt werden.
 
    Wenn Sie Ihre Daten zonen- oder regionsübergreifend zugänglich machen möchten, sollten Sie Ihre Rechtsabteilung zu Rate ziehen, um sicherzustellen, dass Ihre Daten in mehreren Zonen oder einem anderen Land gespeichert werden können.
@@ -340,13 +341,13 @@ Die folgende Abbildung zeigt die Optionen, die Sie in {{site.data.keyword.contai
 <tr>
 <td style="text-align:left">Ausfallsicherheit</td>
 <td style="text-align:left">Hoch, da Datenausschnitte auf drei Zonen oder Regionen verteilt sind. Mittel, wenn sich die Daten in nur einer einzigen Zone befinden.</td>
-<td style="text-align:left">Hoch, wenn mit Replikation über 3 Zonen eingerichtet. Mittel, wenn Daten nur in einer einzelnen Zone gespeichert werden.</td>
+<td style="text-align:left">Hoch, wenn mit Replikation über drei Zonen eingerichtet. Mittel, wenn Daten nur in einer einzelnen Zone gespeichert werden.</td>
 <td style="text-align:left">Abhängig von DBaaS und Ihrer Konfiguration. </td>
 </tr>
 <tr>
 <td style="text-align:left">Verfügbarkeit</td>
 <td style="text-align:left">Hoch aufgrund der Verteilung über Zonen oder Regionen. </td>
-<td style="text-align:left">Hoch bei Replikation der Daten auf 3 Workerknoten in verschiedenen Zonen.</td>
+<td style="text-align:left">Hoch bei Replikation der Daten auf drei Workerknoten in verschiedenen Zonen.</td>
 <td style="text-align:left">Hoch, wenn Sie mehrere Instanzen einrichten. </td>
 </tr>
 <tr>

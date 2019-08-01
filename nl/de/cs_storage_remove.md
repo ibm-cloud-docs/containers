@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks
 
@@ -21,12 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Persistenten Speicher aus einem Cluster entfernen
 {: #cleanup}
 
-Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur (SoftLayer), z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie diese erstellt haben, müssen Sie möglicherweise alle drei separat löschen.
+Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur (SoftLayer), z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie Ihren Speicher erstellt haben, müssen Sie möglicherweise alle drei separat löschen.
 {:shortdesc}
 
 ## Persistenten Speicher bereinigen
@@ -48,7 +50,7 @@ Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wen
 
 <p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.</p>
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
 
@@ -178,7 +180,7 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
 
-9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Beachten Sie, dass der Löschvorgang mehrere Tage dauern kann.
+9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Der Löschvorgang kann mehrere Tage dauern.
 
    **Dateispeicher:**
    ```

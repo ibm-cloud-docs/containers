@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,15 +21,14 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
-# Zugänglichmachen von Apps mit clusterinternem Netzbetrieb und mit externem Netzbetrieb planen
+
+# Clusterinterne und externe Vernetzung für Apps planen
 {: #cs_network_planning}
 
 Mit {{site.data.keyword.containerlong}} können Sie die clusterinterne und externe Vernetzung verwalten, indem Sie Apps öffentlich oder privat zugänglich machen.
 {: shortdesc}
-
-Die Informationen dieser Seite unterstützen Sie bei der Planung der clusterinternen und externen Netzbetriebs für Ihre Apps. Informationen zur Einrichtung Ihres Clusters für den Netzbetrieb finden Sie unter [Clusternetz einrichten](/docs/containers?topic=containers-cs_network_cluster).
-{: tip}
 
 Um schnell mit dem App-Netzbetrieb zu beginnen, folgen Sie diesem Entscheidungsbaum und klicken Sie auf eine Option, um die zugehörigen Setup-Dokumente anzuzeigen:
 
@@ -40,16 +39,16 @@ Um schnell mit dem App-Netzbetrieb zu beginnen, folgen Sie diesem Entscheidungsb
 <area target="" href="/docs/containers?topic=containers-ingress" alt="Ingress-ALB-Service (Application Load Balancer)" coords="532,405,568,410,593,427,600,448,582,468,554,477,508,476,467,463,454,441,474,419" shape="poly">
 </map>
 
-## Informationen zum Lastausgleich für Apps über die Kubernetes-Serviceerkennung
+## Informationen zum Lastausgleich für Apps über die Kubernetes -Service-Erkennung
 {: #in-cluster}
 
-Die Kubernetes-Serviceerkennung stellt Apps mit einer Netzverbindung unter Verwendung von Netzservices und eines lokalen Kubernetes-Proxys zur Verfügung.
+Die Kubernetes Service-Erkennung stellt Apps mit einer Netzverbindung unter Verwendung von Netzservices und eines lokalen Kubernetes-Proxys zur Verfügung.
 {: shortdesc}
 
 **Services**</br>
 Alle Pods, die auf einem Workerknoten bereitgestellt werden, erhalten im Bereich 172.30.0.0/16 eine private IP-Adresse und werden nur zwischen den Workerknoten weitergeleitet. Vermeiden Sie Konflikte, indem Sie diesen IP-Bereich nicht auf Knoten verwenden, die mit Ihren Workerknoten kommunizieren. Workerknoten und Pods können im privaten Netz durch die Verwendung von privaten IP-Adressen sicher kommunizieren. Wenn ein Pod ausfällt oder ein Workerknoten neu erstellt werden muss, wird jedoch eine neue private IP-Adresse zugewiesen.
 
-Anstatt zu versuchen, sich ändernde private IP-Adressen für Apps nachzuverfolgen, die hoch verfügbar sein müssen, können Sie die integrierten Kubernetes-Serviceerkennungsfunktionen nutzen, um Apps als Services zugänglich zu machen. Ein Kubernetes-Service fasst eine Gruppe von Pods zusammen und stellt diesen Pods eine Netzverbindung zur Verfügung. Der Service wählt die Ziel-Pods aus, an die er den Datenverkehr über Bezeichnungen weiterleitet.
+Anstatt zu versuchen, sich ändernde private IP-Adressen für Apps nachzuverfolgen, die hoch verfügbar sein müssen, können Sie die integrierten Kubernetes Service-Erkennungsfunktionen nutzen, um Apps als Services zugänglich zu machen. Ein Kubernetes Service fasst eine Gruppe von Pods zusammen und stellt diesen Pods eine Netzverbindung zur Verfügung. Der Service wählt die Ziel-Pods aus, an die er den Datenverkehr über Bezeichnungen weiterleitet.
 
 Ein Service stellt Konnektivität zwischen Ihren App-Pods und anderen Services im Cluster bereit, ohne hierbei die tatsächlichen privaten IP-Adressen der einzelnen Pods preiszugeben. Services wird eine Cluster-interne IP-Adresse zugeordnet, die `clusterIP`, die nur innerhalb des Clusters zugänglich ist. Diese IP-Adresse ist für die gesamte Lebensdauer des Service an diesen gebunden und ändert sich nicht, solange der Service besteht.
 * Neuere Cluster: In Clustern, die nach Februar 2018 in der Zone 'dal13' oder nach Oktober 2017 in einer anderen Zone erstellt wurden, wird Services eine der 65.000 IPs im Bereich 172.21.0.0/16 zugeordnet.
@@ -66,7 +65,7 @@ Apps innerhalb des Clusters können beispielsweise auf einen Pod hinter einem Cl
 
 Wenn Sie einen Service verwenden, der sowohl eine interne Cluster-IP-Adresse als auch eine externe IP-Adresse bereitstellt, können Clients außerhalb des Clusters Anforderungen an die externe öffentliche oder private IP-Adresse des Service senden. `kube-proxy` leitet die Anforderungen an die Cluster-interne IP-Adresse des Service weiter und schafft den Lastausgleich zwischen den App-Pods hinter dem Service.
 
-Die folgende Abbildung zeigt, wie Kubernetes öffentlichen Netzverkehr über `kube-poxy` und den NodePort-, LoadBalancer- oder Ingress-Service in {{site.data.keyword.containerlong_notm}} weiterleitet.
+Die folgende Abbildung zeigt, wie Kubernetes öffentlichen Netzverkehr über `kube-proxy` und den NodePort-, LoadBalancer- oder Ingress-Service in {{site.data.keyword.containerlong_notm}} weiterleitet.
 <p>
 <Abbildung>
  <img src="images/cs_network_planning_ov-01.png" alt="{{site.data.keyword.containerlong_notm}}-Architektur für externen Netzverkehr"> <figcaption>Wie Kubernetes öffentlichen Netzverkehr über den NodePort-, LoadBalancer- oder Ingress-Service in {{site.data.keyword.containerlong_notm}} weiterleitet</figcaption> </figure>
@@ -75,7 +74,7 @@ Die folgende Abbildung zeigt, wie Kubernetes öffentlichen Netzverkehr über `ku
 <br />
 
 
-## Informationen über Kubernetes-Servicetypen
+## Informationen über Kubernetes Service-Typen
 {: #external}
 
 Kubernetes unterstützt vier Basistypen von Netzservices: `ClusterIP`, `NodePort`, `LoadBalancer` und `Ingress`. `ClusterIP`-Services machen Ihre Apps intern zugänglich, um die Kommunikation nur zwischen Pods in Ihrem Cluster zuzulassen. Der `NodePort`-, `LoadBalancer`- und `Ingress`-Service machen Ihre Apps extern vom öffentlichen Internet oder einem privaten Netz aus zugänglich.
@@ -134,7 +133,7 @@ Um eine App öffentlich für das Internet verfügbar zu machen, wählen Sie ein 
 ### Bereitstellungsmuster für öffentlichen externen Lastausgleich planen
 {: #pattern_public}
 
-Wenn es um die Bereitstellung einer App mit einem Netzservice geht, haben Sie mehrere Auswahlmöglichkeiten für Bereitstellungsmuster. Für einen schnellen Start folgen Sie dem Entscheidungsbaum, um ein Bereitstellungsmuster auszuwählen. Weitere Informationen zu den jeweiligen Bereitstellungsmustern, Gründen für ihre Verwendung und Konfigurationsmöglichkeiten finden Sie in der Tabelle nach dem Entscheidungsbaum. Basisinformationen zu den Netzservices, die diese Bereitstellungsmuster verwenden, finden Sie unter [Informationen über Kubernetes-Servicetypen](#external).
+Wenn es um die Bereitstellung einer App mit einem Netzservice geht, haben Sie mehrere Auswahlmöglichkeiten für Bereitstellungsmuster. Für einen schnellen Start folgen Sie dem Entscheidungsbaum, um ein Bereitstellungsmuster auszuwählen. Weitere Informationen zu den jeweiligen Bereitstellungsmustern, Gründen für ihre Verwendung und Konfigurationsmöglichkeiten finden Sie in der Tabelle nach dem Entscheidungsbaum. Basisinformationen zu den Netzservices, die diese Bereitstellungsmuster verwenden, finden Sie unter [Informationen über Kubernetes Service-Typen](#external).
 {: shortdesc}
 
 <p>
@@ -145,7 +144,7 @@ Wenn es um die Bereitstellung einer App mit einem Netzservice geht, haben Sie me
 </p>
 
 <table summary="Die Spalten dieser Tabelle enthalten von links nach rechts Spalten Name, Merkmale, Anwendungsfälle und Bereitstellungsschritte für Bereitstellungsmuster für das öffentliche Netz.">
-<caption>Merkmale der Bereitstellungsmuster für das öffentliche Netz im IBM Cloud Kubernetes-Service</caption>
+<caption>Merkmale der Bereitstellungsmuster für das öffentliche Netz im IBM Cloud Kubernetes Service</caption>
 <col width="10%">
 <col width="25%">
 <col width="25%">
@@ -202,13 +201,14 @@ Wünschen Sie noch weitere Details zu den Bereitstellungsmustern für Lastausgle
 Stellen Sie eine App privat in Ihrem Cluster nur für das private Netz bereit.
 {: shortdesc}
 
-Wenn Sie eine App in einem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} bereitstellen, haben Sie die Möglichkeit, die App nur für solche Benutzer und Services zugänglich zu machen, die sich in demselben privaten Netz wie Ihr Cluster befinden. Nehmen Sie zum Beispiel an, dass Sie eine private NLB für Ihre App erstellt haben. Auf diese private NLB ist der Zugriff wie folgt möglich:
+Wenn Sie eine App in einem Kubernetes-Cluster in {{site.data.keyword.containerlong_notm}} bereitstellen, haben Sie die Möglichkeit, die App nur für solche Benutzer und Services zugänglich zu machen, die sich in demselben privaten Netz wie Ihr Cluster befinden. Der private Lastausgleich eignet sich ideal, um Ihre App für Anforderungen von außerhalb des Clusters verfügbar zu machen, ohne die App der allgemeinen Öffentlichkeit zugänglich zu machen. Sie können den privaten Lastausgleich auch verwenden, um den Zugriff, das Anforderungsrouting und andere Konfigurationen für Ihre App zu testen, bevor Sie Ihre App später mit öffentlichen Netzservices der Öffentlichkeit zugänglich machen.
+
+Nehmen Sie zum Beispiel an, dass Sie eine private NLB für Ihre App erstellt haben. Auf diese private NLB ist der Zugriff wie folgt möglich:
 * Von einem beliebigen Pod im selben Cluster.
 * Von einem beliebigen Pod in einem beliebigen Cluster im selben {{site.data.keyword.Bluemix_notm}}-Konto.
-* Von jedem System, das mit einem beliebigen der privaten VLANs im selben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist (wenn eine [VRF-Funktion](/docs/containers?topic=containers-cs_network_ov#cs_network_ov_basics_segmentation) oder [VLAN-Spanning](/docs/containers?topic=containers-subnets#subnet-routing) aktiviert ist).
+* Von jedem System, das mit einem beliebigen der privaten VLANs im selben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist (wenn eine [VRF-Funktion oder VLAN-Spanning](/docs/containers?topic=containers-subnets#basics_segmentation) aktiviert ist).
 * Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im {{site.data.keyword.Bluemix_notm}}-Konto, aber dennoch hinter der Unternehmensfirewall befinden).
 * Von einem beliebigen System über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im selben {{site.data.keyword.Bluemix_notm}}-Konto befinden).
-Der private Lastausgleich eignet sich ideal, um Ihre App für Anforderungen von außerhalb des Clusters verfügbar zu machen, ohne die App der allgemeinen Öffentlichkeit zugänglich zu machen. Sie können den privaten Lastausgleich auch verwenden, um den Zugriff, das Anforderungsrouting und andere Konfigurationen für Ihre App zu testen, bevor Sie Ihre App später mit öffentlichen Netzservices der Öffentlichkeit zugänglich machen.
 
 Um eine App nur über ein privates Netz verfügbar zu machen, wählen Sie ein Bereitstellungsmuster für Lastausgleich basierend auf der VLAN-Konfiguration Ihres Clusters:
 * [Öffentliche und private VLAN-Konfiguration](#private_both_vlans)
@@ -222,6 +222,8 @@ Wenn die Workerknoten sowohl mit einem öffentlichen als auch mit einem privaten
 
 Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte Calico-Netzrichtlinieneinstellungen](/docs/containers?topic=containers-network_policies#default_policy) geschützt, die bei der Clustererstellung auf jedem Workerknoten konfiguriert werden. Standardmäßig wird der gesamte ausgehende Netzverkehr für alle Workerknoten zugelassen. Eingehender Netzverkehr wird abgesehen von bestimmten Ports blockiert. Diese Ports werden geöffnet, damit IBM den Netzverkehr überwachen und Sicherheitsupdates für den Kubernetes-Master automatisch installieren kann und damit Verbindungen zu NodePort-, LoadBalancer- und Ingress-Services hergestellt werden können.
 
+Da die Standard-Calico-Netzrichtlinien eingehenden öffentlichen Datenverkehr an diese Services zulassen, können Sie Calico-Richtlinien erstellen, um den gesamten öffentlichen Datenverkehr an die Services stattdessen zu blockieren. Beispielsweise öffnet ein NodePort-Service einen Port auf einem Workerknoten sowohl über die private als auch über die öffentliche IP-Adresse des Workerknotens. Ein NLB-Service mit einer portierbaren privaten IP-Adresse öffnet einen öffentlichen Knotenport auf jedem Workerknoten. Sie müssen eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress) erstellen, um öffentliche Knotenports (NodePorts) zu blockieren.
+
 Überprüfen Sie die folgenden Bereitstellungsmuster für Lastausgleich für privaten Netzbetrieb:
 
 |Name|Lastausgleichsmethode|Anwendungsfall|Implementierung|
@@ -229,11 +231,8 @@ Die öffentliche Netzschnittstelle für Workerknoten wird durch [vordefinierte C
 |NodePort|Port auf einem Worker-Knoten, der die App für die private IP-Adresse des Workers verfügbar macht|Testen Sie den privaten Zugriff auf eine App oder bieten Sie Zugriff nur für kurze Zeit.|<ol><li>[Erstellen Sie einen NodePort-Service](/docs/containers?topic=containers-nodeport).</li><li>Ein NodePort-Service öffnet einen Port auf einem Workerknoten sowohl über die private als auch über die öffentliche IP-Adresse des Workerknotens. Sie müssen eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress) verwenden, um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
 |NLB V1.0|Basislastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Schnelles Zugänglichmachen von nur einer App in einem privaten Netzwerk mit einer privaten IP-Adresse.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Eine NLB mit einer portierbaren privaten IP-Adresse verfügt weiterhin auf jedem Workerknoten über einen offenen öffentlichen Knotenport (NodePort). Erstellen Sie eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress), um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
 |NLB V2.0|DSR-Lastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Sie können eine App zugänglich machen, die ein hohes Maß an Datenverkehr für ein privates Netz mit einer IP-Adresse empfangen kann.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Eine NLB mit einer portierbaren privaten IP-Adresse verfügt weiterhin auf jedem Workerknoten über einen offenen öffentlichen Knotenport (NodePort). Erstellen Sie eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress), um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
-|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>[Inaktivieren Sie die öffentliche ALB](/docs/containers?topic=containers-cs_cli_reference#cs_alb_configure)</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation)an.</li></ol>|
+|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>[Inaktivieren Sie die öffentliche ALB.](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation)an.</li></ol>|
 {: caption="Merkmale von Netzbereitstellungsmustern für die öffentliche und private VLAN-Konfiguration" caption-side="top"}
-
-Da die Standard-Calico-Netzrichtlinien eingehenden öffentlichen Datenverkehr an diese Services zulassen, können Sie Calico-Richtlinien erstellen, um den gesamten öffentlichen Datenverkehr an die Services stattdessen zu blockieren. Beispielsweise öffnet ein NodePort-Service einen Port auf einem Workerknoten sowohl über die private als auch über die öffentliche IP-Adresse des Workerknotens. Ein NLB-Service mit einer portierbaren privaten IP-Adresse öffnet einen öffentlichen Knotenport auf jedem Workerknoten. Sie müssen eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress) erstellen, um öffentliche Knotenports (NodePorts) zu blockieren.
-{: tip}
 
 <br />
 

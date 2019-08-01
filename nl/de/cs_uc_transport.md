@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-18"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-
+{:preview: .preview}
 
 
 # Anwendungsfälle aus dem Transportwesen für {{site.data.keyword.cloud_notm}}
@@ -129,7 +129,7 @@ Ein Chief Human Resources Officer (CHRO) benötigt eine neue Human Resources-Sit
 Warum {{site.data.keyword.cloud_notm}}: Mit {{site.data.keyword.containerlong_notm}} kann die Rechenleistung in kurzer Zeit bereitgestellt werden. Somit können die Entwickler ohne großen Aufwand experimentieren und mit offenen Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. Die Arbeit mit ihren herkömmlichen Softwareentwicklungstools verläuft deutlich schneller, wenn sie IBM Watson Assistant hinzufügen. Die neue Leistungsseite wurde in weniger als 3 Wochen erstellt.
 
 Schlüsseltechnologien:    
-* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-plan_clusters#shared_dedicated_node)
+* [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Chatbot-Service, der auf Watson basiert](https://developer.ibm.com/code/patterns/create-cognitive-banking-chatbot/)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)

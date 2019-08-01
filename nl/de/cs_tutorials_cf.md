@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-09"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 
 
 # Lernprogramm: App aus Cloud Foundry in einen Cluster migrieren
@@ -144,7 +145,7 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
 4. Erstellen Sie ein Docker-Image, das Ihren App-Code enthält und übertragen Sie es per Push-Operation in Ihre private Registry.
 
   ```
-  ibmcloud cr build -t registry.<region>.bluemix.net/namespace/cf-py .
+  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
   ```
   {: pre}
 
@@ -176,8 +177,8 @@ Erstellen Sie eine Dockerfile, die Ihren App-Code und die notwendigen Konfigurat
   Das Image wird in Ihrer privaten Registry erstellt. Sie können den Befehl `ibmcloud cr images` ausführen, um zu überprüfen, dass das Image erstellt wurde.
 
   ```
-  REPOSITORY                                     NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  registry.ng.bluemix.net/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
   ```
   {: screen}
 
@@ -213,7 +214,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
           app: cf-py
       spec:
         containers:
-        - image: registry.ng.bluemix.net/<registry-namensbereich>/cf-py:latest
+        - image: us.icr.io/<registry-namensbereich>/cf-py:latest
           name: cf-py
   ---
   apiVersion: v1
@@ -240,11 +241,11 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
   <tbody>
   <tr>
   <td><code>image</code></td>
-  <td>Ersetzen Sie in `registry.ng.bluemix.net/<registry_namespace>/cf-py:latest` &lt;registry_namespace&gt; durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
+  <td>Ersetzen Sie in &lt;registry-namensbereich&gt; in `us.icr.io/<registry-namensbereich>/cf-py:latest` durch den Namensbereich Ihrer privaten Image-Registry. Wenn Sie nicht sicher sind, wie Ihr Namensbereich lautet, führen Sie den Befehl `ibmcloud cr namespaces` aus, um ihn abzurufen.</td>
   </tr>
   <tr>
   <td><code>nodePort</code></td>
-  <td>Machen Sie Ihre App verfügbar, indem Sie einen Kubernetes-Service vom Typ 'NodePort' erstellen. Knotenports (NodePorts) liegen im Bereich zwischen 30000 und 32767. Sie verwenden diesen Port später, um Ihre App in einem Browser zu testen.</td>
+  <td>Machen Sie Ihre App verfügbar, indem Sie einen Kubernetes Service vom Typ 'NodePort' erstellen. Knotenports (NodePorts) liegen im Bereich zwischen 30000 und 32767. Sie verwenden diesen Port später, um Ihre App in einem Browser zu testen.</td>
   </tr>
   </tbody></table>
 
@@ -276,7 +277,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.12.7
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
     ```
     {: screen}
 

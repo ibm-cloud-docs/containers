@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-03"
+lastupdated: "2019-06-11"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,12 +21,13 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Pod-Sicherheitsrichtlinien konfigurieren
 {: #psp}
 
-Mit [Pod-Sicherheitsrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) können Sie
-Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf.
+Mit [Pod-Sicherheitsrichtlinien (PSPs - Pod Security Policies) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) können Sie Richtlinien konfigurieren, um anzugeben, wer Pods in {{site.data.keyword.containerlong}} erstellen und aktualisieren darf.
 
 **Warum lege ich Pod-Sicherheitsrichtlinien fest?**</br>
 Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, insbesondere Aktionen, die sich auf die Sicherheit oder Bereitschaft des Clusters auswirken. Pod-Sicherheitsrichtlinien können Ihnen dabei helfen, die Verwendung von berechtigten Containern, Stammnamensbereichen, Host-Netzbetrieb und -Ports, Datenträgertypen, Hostdateisystemen, Linux-Berechtigungen wie z. B. Nur-Lese-Berechtigung oder Gruppen-IDs und vieles mehr zu steuern.
@@ -50,6 +51,9 @@ Wenn Sie einen Pod mithilfe eines Ressourcencontrollers erstellen (z. B. eine Be
 
 Informationen zu allgemeinen Fehlernachrichten finden Sie im Abschnitt [Pods können wegen einer Pod-Sicherheitsrichtlinie nicht bereitgestellt werden](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp).
 
+**Warum kann ich weiter privilegierte Pods erstellen, wenn ich nicht mehr zur Clusterrollenbindung `privileged-psp-user` gehöre?**<br>
+Andere Clusterrollenbindungen oder namensbereichsorientierte Rollenbindungen weisen Ihnen möglicherweise andere Pod-Sicherheitsrichtlinien zu, die Sie zum Erstellen von privilegierten Pods berechtigen. Darüber hinaus haben Clusteradministratoren standardmäßig Zugriff auf alle Ressourcen, einschließlich Pod-Sicherheitsrichtlinien, und können sich so zu PSPs hinzufügen oder privilegierte Ressourcen erstellen.
+
 ## Pod-Sicherheitsrichtlinien anpassen
 {: #customize_psp}
 
@@ -64,14 +68,14 @@ Richtlinien können Benutzer privilegierte und nicht privilegierte (eingeschrän
 
 | Name | Namensbereich | Typ | Zweck |
 |---|---|---|---|
-| `privileged-psp-user` | cluster-wide | `ClusterRoleBinding` | Ermöglicht Clusteradministratoren, authentifizierten Benutzern, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp`. |
-| `restricted-psp-user` | cluster-wide | `ClusterRoleBinding` | Ermöglicht Clusteradministratoren, authentifizierten Benutzern, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-restricted-psp`. |
+| `privileged-psp-user` | Alle | `ClusterRoleBinding` | Ermöglicht Clusteradministratoren, authentifizierten Benutzern, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp`. |
+| `restricted-psp-user` | Alle | `ClusterRoleBinding` | Ermöglicht Clusteradministratoren, authentifizierten Benutzern, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-restricted-psp`. |
 {: caption="Standard-RBAC-Ressourcen, die Sie ändern können" caption-side="top"}
 
 Sie können diese RBAC-Rollen ändern, um Administratoren, Benutzer, Services oder Knoten zu der Richtlinie hinzuzufügen oder aus ihr zu entfernen.
 
 Vorbereitende Schritte:
-*  [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+*  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](/docs/containers?topic=containers-users#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
 * Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
 
@@ -199,17 +203,17 @@ Die `PodSecurityPolicy`-Standardressourcen beziehen sich auf die von {{site.data
 
 | Name | Namensbereich | Typ | Zweck |
 |---|---|---|---|
-| `ibm-anyuid-hostaccess-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit umfassendem Hostzugriff. |
-| `ibm-anyuid-hostaccess-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostaccess-psp` ermöglicht. |
-| `ibm-anyuid-hostpath-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit Hostpfadzugriff. |
-| `ibm-anyuid-hostpath-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostpath-psp` ermöglicht. |
-| `ibm-anyuid-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die über UID/GUID ausführbare Pod-Erstellung. |
-| `ibm-anyuid-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-psp` ermöglicht. |
-| `ibm-privileged-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für die privilegierte Pod-Erstellung. |
-| `ibm-privileged-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` ermöglicht. |
+| `ibm-anyuid-hostaccess-psp` | Alle | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit umfassendem Hostzugriff. |
+| `ibm-anyuid-hostaccess-psp-user` | Alle | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostaccess-psp` ermöglicht. |
+| `ibm-anyuid-hostpath-psp` | Alle | `PodSecurityPolicy` | Richtlinie für die Pod-Erstellung mit Hostpfadzugriff. |
+| `ibm-anyuid-hostpath-psp-user` | Alle | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-hostpath-psp` ermöglicht. |
+| `ibm-anyuid-psp` | Alle | `PodSecurityPolicy` | Richtlinie für die über UID/GUID ausführbare Pod-Erstellung. |
+| `ibm-anyuid-psp-user` | Alle | `ClusterRole` | Clusterrolle, die die Verwendung der Pod-Sicherheitsrichtlinie `ibm-anyuid-psp` ermöglicht. |
+| `ibm-privileged-psp` | Alle | `PodSecurityPolicy` | Richtlinie für die privilegierte Pod-Erstellung. |
+| `ibm-privileged-psp-user` | Alle | `ClusterRole` | Clusterrolle, die die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` ermöglicht. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Ermöglicht Clusteradministratoren, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` im Namensbereich `kube-system`. |
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | Ermöglicht Clusteradministratoren, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` im Namensbereich `ibm-system`. |
 | `ibm-privileged-psp-user` | `kubx-cit` | `RoleBinding` | Ermöglicht Clusteradministratoren, Servicekonten und Knoten die Verwendung der Sicherheitsrichtlinie `ibm-privileged-psp` im Namensbereich `kubx-cit`. |
-| `ibm-restricted-psp` | cluster-wide | `PodSecurityPolicy` | Richtlinie für nicht privilegierte oder eingeschränkte Pod-Erstellung. |
-| `ibm-restricted-psp-user` | cluster-wide | `ClusterRole` | Clusterrolle, die die Verwendung der Sicherheitsrichtlinie `ibm-restricted-psp` ermöglicht. |
+| `ibm-restricted-psp` | Alle | `PodSecurityPolicy` | Richtlinie für nicht privilegierte oder eingeschränkte Pod-Erstellung. |
+| `ibm-restricted-psp-user` | Alle | `ClusterRole` | Clusterrolle, die die Verwendung der Sicherheitsrichtlinie `ibm-restricted-psp` ermöglicht. |
 {: caption="Ressourcen für IBM Pod-Sicherheitsrichtlinien, die Sie nicht ändern dürfen" caption-side="top"}

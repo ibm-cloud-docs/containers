@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-16"
+lastupdated: "2019-06-12"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # IBM Cloud-Speicherdienstprogramme
@@ -416,7 +418,7 @@ Verwenden Sie diese Option, wenn Sie unterschiedliche Blockspeicherkonfiguration
 
 3. Erstellen Sie die Blockspeichereinheit in derselben Zone, in der sich auch Ihr Nicht-SDS-Workerknoten befindet.
 
-   **Beispiel für die Bereitstellung eines 20 GB großen Blockspeichers vom Typ 'endurance' mit 2 IOPS pro GB:**
+   **Beispiel für die Bereitstellung eines 20 GB großen Blockspeichers vom Typ 'endurance' mit zwei IOPS pro GB:**
    ```
    ibmcloud sl block volume-order --storage-type endurance --size 20 --tier 2 --os-type LINUX --datacenter dal10
    ```
@@ -501,8 +503,8 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
 {: shortdesc}
 
 **Vorbereitende Schritte**:
-- Stellen Sie sicher, dass unaufbereiteten, unformatiert und nicht angehängten Blockspeicher für Ihre Nicht-SDS-Workerknoten [automatisch](#automatic_block) oder [manuell](#manual_block) erstellt haben.
-- [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- Stellen Sie sicher, dass Sie unaufbereiteten, unformatierten und nicht angehängten Blockspeicher für Ihre Nicht-SDS-Workerknoten [automatisch](#automatic_block) oder [manuell](#manual_block) erstellt haben.
+- [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 **Gehen Sie wie folgt vor, unaufbereiteten Blockspeicher Nicht-SDS-Workerknoten zuzuordnen:**
 1. Bereiten Sie die Erstellung des persistenten Datenträgers (PV) vor.  
@@ -645,3 +647,5 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
 
 Wenn Sie die Zuordnung eines Datenträgers aufheben wollen, löschen Sie den PV. Es ist weiterhin ein bestimmter Workerknoten berechtigt, auf solche freigegebene Datenträger zuzugreifen. Freigegebene Datenträger werden erneut zugeordnet, wenn Sie einen neuen PV mit der {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Speicherklasse erstellen, um einen anderen Datenträger demselben Workerknoten zuzuordnen. Zur Vermeidung einer erneuten Zuordnung des alten, freigegebenen Datenträgers entziehen Sie dem Workerknoten die Berechtigung zum Zugriff auf den freigegebenen Datenträger, indem Sie den Befehl `ibmcloud sl block access-revoke` verwenden. Durch die Freigabe des Datenträgers wird der Datenträger selbst nicht aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernt. Zur Stornierung der Rechnungsstellung für Ihren Datenträger müssen Sie [den Speicher manuell aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernen](/docs/containers?topic=containers-cleanup).
 {: note}
+
+

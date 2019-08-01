@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-05"
+lastupdated: "2019-06-05"
 
-keywords: kubernetes, iks 
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 # Leistung optimieren
 {: #kernel}
@@ -116,7 +118,7 @@ Gehen Sie wie folgt vor, um die `sysctl`-Parameter der Workerknoten auf die Stan
     ```
     {: pre}
 
-2. [Führen Sie für alle Workerknoten im Cluster einen Warmstart durch](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reboot). Die Workerknoten werden mit den angewendeten Standardwerten wieder gestartet.
+2. [Führen Sie für alle Workerknoten im Cluster einen Warmstart durch](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). Die Workerknoten werden mit den angewendeten Standardwerten wieder gestartet.
 
 <br />
 
@@ -168,7 +170,7 @@ Die Konfigurationen Ihres Provider von Clustermetriken (`metrics-server` in Kube
 
 Der Pod des Providers von Metriken verfügt auch über einen Container `nanny`, der die Ressourcenanforderungen und -limits des Hauptcontainers `metrics-server` oder `heapster` in Antwort auf die Anzahl von Workerknoten im Cluster skaliert. Sie können die Standardressourcen ändern, indem Sie die Konfigurationszuordnung des Providers von Metriken bearbeiten.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Öffnen Sie die Konfigurationszuordnungs-YAML des Providers von Clustermetriken.
     *  Für `metrics-server`:

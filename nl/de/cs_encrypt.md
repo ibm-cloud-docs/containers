@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-17"
+lastupdated: "2019-05-31"
 
 keywords: kubernetes, iks
 
@@ -21,6 +21,8 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
+
 
 
 # Sensible Informationen im Cluster schützen
@@ -92,7 +94,7 @@ Löschen Sie keine Rootschlüssel in Ihrer {{site.data.keyword.keymanagementserv
 {: important}
 
 Vorbereitende Schritte:
-* [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Stellen Sie sicher, dass im Cluster die Kubernetes-Version 1.11.3_1521 oder höher ausgeführt wird; setzen Sie hierzu `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` ab und überprüfen Sie das Feld **Version**.
 * Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
 * Stellen Sie sicher, dass der API-Schlüssel, der für die Region festgelegt ist, in der sich der Cluster befindet, zur Verwendung von Key Protect berechtigt ist. Führen Sie zum Überprüfen des API-Schlüsseleigners, dessen Berechtigungsnachweise für die Region gespeichert sind, den Befehl `ibmcloud ks api-key-info --cluster <clustername_oder_-id>` aus.
@@ -133,7 +135,7 @@ Gehen Sie wie folgt vor, um {{site.data.keyword.keymanagementserviceshort}} zu a
 
 8.  Während der Aktivierung sind Sie möglicherweise nicht in der Lage, auf den Kubernetes-Master zuzugreifen, zum Beispiel um YAML-Konfigurationen für Bereitstellungen zu aktualisieren. Prüfen Sie in der Ausgabe des folgenden Befehls, ob für **Master Status** der Wert **Ready** angegeben wird.
     ```
-    ibmcloud ks cluster-get <clustername_oder_-id>
+    ibmcloud ks cluster-get --cluster <clustername_oder_-id>
     ```
     {: pre}
 

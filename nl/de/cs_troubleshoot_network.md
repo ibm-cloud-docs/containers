@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-04-15"
+lastupdated: "2019-06-05"
 
 keywords: kubernetes, iks
 
@@ -21,10 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 
 # Fehlerbehebung für Clusternetze
@@ -36,7 +36,7 @@ Ziehen Sie bei der Verwendung von {{site.data.keyword.containerlong}} die folgen
 Haben Sie Schwierigkeiten, über Ingress eine Verbindung zu Ihrer App herzustellen? Versuchen Sie, [Ingress zu debuggen](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
 {: tip}
 
-Bei der Fehlerbehebung können Sie [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen zum Netzbetrieb sowie StrongSwan-Informationen aus Ihrem Cluster zu erfassen.
+Bei der Fehlerbehebung können Sie [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen zum Netzbetrieb sowie strongSwan-Informationen aus Ihrem Cluster zu erfassen.
 {: tip}
 
 ## Verbindung mit einer App über einen Netzausgleichsfunktions- (NLB-) Service kann nicht hergestellt werden
@@ -209,64 +209,69 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
 <br />
 
 
-## Es kann keine Unterdomäne für die Ingress-ALB abgerufen werden
+## Unterdomäne für Ingress-ALB kann nicht abgerufen werden, ALB wird in einer Zone nicht bereitgestellt oder ALB kann eine Lastausgleichsfunktion nicht bereitstellen
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-Wenn Sie den Befehl `ibmcloud ks cluster-get --cluster <cluster>` ausführen, hat Ihr Cluster den Status `normal`, jedoch ist keine Ingress-Unterdomäne (**Ingress Subdomain**) verfügbar.
-
-Es wird möglicherweise eine Fehlernachricht ähnlich der folgenden angezeigt.
-
-```
-There are already the maximum number of subnets permitted in this VLAN.
-```
-{: screen}
+* Keine Ingress-Unterdomäne: Wenn Sie den Befehl `ibmcloud ks cluster-get --cluster <cluster>` ausführen, hat Ihr Cluster den Status `normal`, jedoch ist keine Ingress-Unterdomäne (**Ingress Subdomain**) verfügbar.
+* ALB wird in einer Zone nicht bereitgestellt: Wenn Sie für einen Mehrzonencluster den Befehl `ibmcloud ks albs --cluster <cluster>` ausführen, wird in einer Zone keine ALB bereitgestellt. Wenn Sie z. B. Workerknoten in drei Zonen haben, wird möglicherweise eine Ausgabe ähnlich der folgenden angezeigt, aus der deutlich wird, dass in der dritten Zone keine öffentliche ALB (Lastausgleichsfunktion für Anwendungen) bereitgestellt wurde.
+  ```
+  ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb2   false      disabled   private   -                dal12   ingress:411/ingress-auth:315   2234947
+  private-cr96039a75fddb4ad1a09ced6699c88888-alb3   false      disabled   private   -                dal13   ingress:411/ingress-auth:315   2234943
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb1    true       enabled    public    169.xx.xxx.xxx   dal10   ingress:411/ingress-auth:315   2294019
+  public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
+  ```
+  {: screen}
+* Lastausgleichsfunktion kann nicht bereitgestellt werden: Beim Beschreiben (describe) der Konfigurationszuordnung `ibm-cloud-provider-vlan-ip-config` wird möglicherweise eine Fehlernachricht ähnlich der folgenden Beispielausgabe angezeigt. 
+  ```
+  kubectl get cm ibm-cloud-provider-vlan-ip-config
+  ```
+  {: pre}
+  ```
+  Warning  CreatingLoadBalancerFailed ... ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN.
+  ```
+  {: screen}
 
 {: tsCauses}
-Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die **Ingress-Unterdomäne** nicht bereitgestellt werden.
+Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, schlägt die Bereitstellung der **Ingress-Unterdomäne** oder der öffentlichen Ingress-ALB für die Zone möglicherweise fehl oder es ist möglicherweise keine portierbare öffentliche IP-Adresse zum Erstellen einer Netzlastausgleichsfunktion (NLB) verfügbar. 
 
 Gehen Sie wie folgt vor, um die Anzahl von Teilnetzen eines VLAN anzuzeigen:
 1.  Wählen Sie in der [IBM Cloud Infrastruktur-Konsole (SoftLayer)](https://cloud.ibm.com/classic?) die Optionen **Netz** > **IP-Management** > **VLANs** aus.
 2.  Klicken Sie auf die **VLAN-Nummer** des VLANs, mit dem Sie Ihren Cluster erstellt haben. Überprüfen Sie den Abschnitt **Teilnetze**, um zu sehen, ob mehr als 40 Teilnetze vorhanden sind.
 
 {: tsResolve}
-Wenn Sie ein neues VLAN benötigen, fordern Sie eines an, indem Sie den [{{site.data.keyword.Bluemix_notm}}-Support kontaktieren](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). [Erstellen Sie dann einen Cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create), der dieses neue VLAN verwendet.
+Wenn Sie ein neues VLAN benötigen, fordern Sie eines an, indem Sie den [{{site.data.keyword.Bluemix_notm}}-Support kontaktieren](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). [Erstellen Sie dann einen Cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), der dieses neue VLAN verwendet.
 
-Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get`.
+Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
-Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im Cluster wiederverwenden.
-1.  Prüfen Sie, ob die Teilnetze, die Sie verwenden möchten, verfügbar sind.
+Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im VLAN wiederverwenden, indem Sie sie zu Ihrem Cluster hinzufügen.
+1. Prüfen Sie, ob das Teilnetz, das Sie verwenden möchten, verfügbar ist.
+  <p class="note">Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. In diesem Fall können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.</p>
 
-    Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. Ist dies der Fall, können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.
-    {: note}
+2. Verwenden Sie den [Befehl `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add), um ein vorhandenes Teilnetz für Ihren Cluster verfügbar zu machen. 
 
-2.  [Erstellen Sie einen Cluster](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_create) mit der Option `--no-subnet`, sodass der Service nicht versucht, neue Teilnetze zu erstellen. Geben Sie die Zone und das VLAN an, in denen sich die für eine Wiederverwendung verfügbaren Teilnetze befinden.
+3. Überprüfen Sie, ob das Teilnetz erfolgreich erstellt und zu Ihrem Cluster hinzugefügt wurde. Das Teilnetz-CIDR wird im Abschnitt für **Teilnetz-VLANs** aufgeführt.
+    ```
+    ibmcloud ks cluster-get --showResources <clustername_oder_-id>
+    ```
+    {: pre}
 
-3.  Verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_cluster_subnet_add) `ibmcloud ks cluster-subnet-add`, um vorhandene Teilnetze zu Ihrem Cluster hinzuzufügen. Weitere Informationen finden Sie unter [Angepasste und vorhandene Teilnetze in Kubernetes-Clustern hinzufügen oder daraus entfernen](/docs/containers?topic=containers-subnets#subnets_custom).
+    In dieser Beispielausgabe wurde dem öffentlichen VLAN `2234945` ein zweites Teilnetz hinzugefügt:
+    ```
+    Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+    ```
+    {: screen}
 
-<br />
-
-
-## Ingress-ALB wird in einer Zone nicht bereitgestellt
-{: #cs_multizone_subnet_limit}
-
-{: tsSymptoms}
-Wenn Sie für ein Mehrzonencluster den Befehl `ibmcloud ks albs <cluster>` ausführen, werden keine ALBs in Zonen bereitgestellt. Wenn Sie z. B. Workerknoten in drei Zonen haben, wird möglicherweise eine Ausgabe ähnlich der folgenden angezeigt, aus der deutlich wird, dass in der dritten Zone keine öffentliche ALB (Lastausgleichsfunktion für Anwendungen) bereitgestellt wurde.
-```
-ALB ID                                            Status     Type      ALB IP           Zone    Build
-private-cr96039a75fddb4ad1a09ced6699c88888-alb1   disabled   private   -                dal10   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb2   disabled   private   -                dal12   ingress:350/ingress-auth:192
-private-cr96039a75fddb4ad1a09ced6699c88888-alb3   disabled   private   -                dal13   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb1    enabled    public    169.xx.xxx.xxx  dal10   ingress:350/ingress-auth:192
-public-cr96039a75fddb4ad1a09ced6699c88888-alb2    enabled    public    169.xx.xxx.xxx  dal12   ingress:350/ingress-auth:192
-```
-{: screen}
-
-{: tsCauses}
-In jeder Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das öffentliche VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, kann die öffentliche Ingress-ALB für diese Zone nicht bereitgestellt werden.
-
-{: tsResolve}
-Informationen zum Überprüfen der Anzahl der Teilnetze in einem VLAN und die Schritte zum Abrufen eines anderen VLANs finden Sie im Abschnitt [Unterdomäne für Ingress-ALB kann nicht abgerufen werden](#cs_subnet_limit).
+4. Stellen Sie sicher, dass die portierbaren IP-Adressen aus dem Teilnetz, das Sie hinzugefügt haben, für die ALBs oder Lastausgleichsfunktionen in Ihrem Cluster verwendet werden. Es kann mehrere Minuten dauern, bis die Services die portierbaren IP-Adressen aus dem neu hinzugefügten Teilnetz verwenden.
+  * Keine Ingress-Unterdomäne: Führen Sie `ibmcloud ks cluster-get --cluster <cluster>` aus, um zu überprüfen, ob die **Ingress-Unterdomäne** gefüllt ist.
+  * ALB wird in einer Zone nicht bereitgestellt: Führen Sie `ibmcloud ks albs --cluster <cluster>` aus, um sicherzustellen, dass die fehlende ALB bereitgestellt wird. 
+  * Lastausgleichsfunktion kann nicht bereitgestellt werden: Führen Sie `kubectl get svc -n kube-system` aus, um sicherzustellen, dass die Lastausgleichsfunktion über eine **externe IP** verfügt.
 
 <br />
 
@@ -341,7 +346,7 @@ Falls Sie eine der oben aufgeführten Optionen durchgeführt haben, die `keepali
 <br />
 
 
-## VPN-Konnektivität kann nicht mit dem StrongSwan-Helm-Diagramm erstellt werden
+## VPN-Konnektivität kann nicht mit dem strongSwan-Helm-Diagramm erstellt werden
 {: #cs_vpn_fails}
 
 {: tsSymptoms}
@@ -351,9 +356,9 @@ Wenn Sie die VPN-Konnektivität überprüfen, indem Sie den Befehl `kubectl exec
 Ihre Helm-Diagrammkonfigurationsdatei weist falsche oder fehlende Werte auf oder es liegen Syntaxfehler vor.
 
 {: tsResolve}
-Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass der Status beim ersten Mal nicht `ESTABLISHED` lautet. Möglicherweise müssen Sie mehrere Problemtypen überprüfen und Ihre Konfigurationsdatei entsprechend ändern. Gehen Sie wie folgt vor, um Fehler in Ihrer StrongSwan-VPN-Konnektivität zu beheben:
+Wenn Sie versuchen, VPN-Konnektivität mit dem strongSwan-Helm-Diagramm zu erstellen, ist es wahrscheinlich, dass der Status beim ersten Mal nicht `ESTABLISHED` lautet. Möglicherweise müssen Sie mehrere Problemtypen überprüfen und Ihre Konfigurationsdatei entsprechend ändern. Gehen Sie wie folgt vor, um Fehler in Ihrer strongSwan-VPN-Konnektivität zu beheben:
 
-1. [Testen und verifizieren Sie die strongSwan-VPN-Konnektivität](/docs/containers?topic=containers-vpn#vpn_test), indem Sie die fünf Helm-Tests ausführen, die in der StrongSwan-Diagrammdefinition enthalten sind.
+1. [Testen und verifizieren Sie die strongSwan-VPN-Konnektivität](/docs/containers?topic=containers-vpn#vpn_test), indem Sie die fünf Helm-Tests ausführen, die in der strongSwan-Diagrammdefinition enthalten sind.
 
 2. Wenn Sie die VPN-Konnektivität nach der Ausführung der Helm-Tests nicht herstellen können, können Sie das VPN-Debugging-Tool ausführen, das mit dem VPN-Pod-Image bereitgestellt wird.
 
@@ -376,18 +381,18 @@ Wenn Sie versuchen, VPN-Konnektivität mit dem StrongSwan-Helm-Diagramm zu erste
     <br />
 
 
-## Neues Release des StrongSwan-Helm-Diagramms kann nicht installiert werden
+## Neues Release des strongSwan-Helm-Diagramms kann nicht installiert werden
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-Sie ändern Ihr StrongSwan-Helm-Diagramm und versuchen Ihr neues Release zu installieren, indem Sie `helm install -f config.yaml --name=vpn ibm/strongswan` ausführen. Es wird jedoch der folgende Fehler angezeigt:
+Sie ändern Ihr strongSwan-Helm-Diagramm und versuchen Ihr neues Release zu installieren, indem Sie `helm install -f config.yaml --name=vpn ibm/strongswan` ausführen. Es wird jedoch der folgende Fehler angezeigt:
 ```
 Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```
 {: screen}
 
 {: tsCauses}
-Dieser Fehler gibt an, dass das Vorgängerrelease des StrongSwan-Diagramms nicht vollständig deinstalliert war.
+Dieser Fehler gibt an, dass das Vorgängerrelease des strongSwan-Diagramms nicht vollständig deinstalliert war.
 
 {: tsResolve}
 
@@ -409,7 +414,7 @@ Dieser Fehler gibt an, dass das Vorgängerrelease des StrongSwan-Diagramms nicht
     ```
     {: pre}
 
-4. Installieren Sie das aktualisierte StrongSwan-Helm-Diagramm mit einem neuen Releasenamen.
+4. Installieren Sie das aktualisierte strongSwan-Helm-Diagramm mit einem neuen Releasenamen.
     ```
     helm install -f config.yaml --name=vpn ibm/strongswan
     ```
@@ -418,11 +423,11 @@ Dieser Fehler gibt an, dass das Vorgängerrelease des StrongSwan-Diagramms nicht
 <br />
 
 
-## StrongSwan-VPN-Konnektivität schlägt nach Hinzufügen oder Löschen von Workerknoten fehl
+## strongSwan-VPN-Konnektivität schlägt nach Hinzufügen oder Löschen von Workerknoten fehl
 {: #cs_vpn_fails_worker_add}
 
 {: tsSymptoms}
-Sie haben zuvor eine funktionierende VPN-Verbindung mithilfe des StrongSwan-IPSec-VPN-Service hergestellt. Nachdem Sie einen Workerknoten in Ihrem Cluster hinzugefügt oder gelöscht haben, tritt jedoch mindestens eines der folgenden Symptome auf:
+Sie haben zuvor eine funktionierende VPN-Verbindung mithilfe des strongSwan-IPSec-VPN-Service hergestellt. Nachdem Sie einen Workerknoten in Ihrem Cluster hinzugefügt oder gelöscht haben, tritt jedoch mindestens eines der folgenden Symptome auf:
 
 * Der VPN-Status lautet nicht `ESTABLISHED`.
 * Sie können von Ihrem lokalen Netz im Unternehmen nicht auf einen neuen Workerknoten zugreifen.
@@ -449,7 +454,7 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
     ```
     {: pre}
 
-2. Öffnen Sie die Konfigurationsdatei für Ihren StrongSwan-VPN-Service.
+2. Öffnen Sie die Konfigurationsdatei für Ihren strongSwan-VPN-Service.
 
     ```
     helm inspect values ibm/strongswan > config.yaml
@@ -469,7 +474,7 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
      <tbody>
      <tr>
      <td><code>localSubnetNAT</code></td>
-     <td>Der hinzugefügte Worker kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die anderen vorhandenen Teilnetze, auf denen sich andere Workerknoten befinden. Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um die privaten lokalen IP-Adressen Ihres Clusters erneut zuzuordnen, und wenn der Worker auf einem neuen Teilnetz hinzugefügt wurde, fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu.</td>
+     <td>Der hinzugefügte Worker kann in einem neuen, anderen privaten Teilnetz bereitgestellt werden als die anderen vorhandenen Teilnetze, auf denen sich andere Workerknoten befinden. Wenn Sie die Teilnetz-NAT (subnetNAT) verwenden, um die privaten lokalen IP-Adressen Ihres Clusters erneut zuzuordnen, und der Worker in einem neuen Teilnetz hinzugefügt wurde, fügen Sie die neue Teilnetz-CIDR zu dieser Einstellung hinzu.</td>
      </tr>
      <tr>
      <td><code>nodeSelector</code></td>
@@ -545,7 +550,7 @@ Aktualisieren Sie die Helm-Diagrammwerte, um die Änderungen im Workerknoten abz
 
     * Sobald die VPN-Verbindung den Status `ESTABLISHED` erreicht hat, war die VPN-Verbindung erfolgreich. Es ist keine weitere Aktion erforderlich.
 
-    * Wenn Sie immer noch Verbindungsprobleme haben, lesen Sie die Informationen im Abschnitt [VPN-Konnektivität mit StrongSwan-Helm-Diagramm kann nicht erstellt werden](#cs_vpn_fails), um weiter nach Fehlern bei der VPN-Verbindung zu suchen.
+    * Wenn Sie immer noch Verbindungsprobleme haben, lesen Sie die Informationen im Abschnitt [VPN-Konnektivität mit strongSwan-Helm-Diagramm kann nicht erstellt werden](#cs_vpn_fails), um weiter nach Fehlern bei der VPN-Verbindung zu suchen.
 
 <br />
 
@@ -576,7 +581,7 @@ Gehen Sie wie folgt vor, um sicherzustellen, dass alle Calico-Faktoren aufeinand
 
 1. [Installieren und konfigurieren Sie die Calico-CLI der Version 3.3 oder höher](/docs/containers?topic=containers-network_policies#cli_install).
 2. Stellen Sie sicher, dass alle Richtlinien, die Sie erstellen und auf den Cluster anwenden möchten, die [Calico Version 3-Syntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) verwenden. Wenn eine bestehende `.yaml`- oder `.json`-Richtliniendatei mit der Calicao Version 2-Syntax vorliegt, können Sie sie mithilfe des Befehls [`calicoctl convert` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/commands/convert) in die Calico Version 3-Syntax konvertieren.
-3. Stellen Sie zum [Anzeigen von Richtlinien](/docs/containers?topic=containers-network_policies#view_policies) sicher, dass Sie den Befehl `calicoctl get GlobalNetworkPolicy` für globale Richtlinien und den Befehl `calicoctl get NetworkPolicy --namespace <policy_namespace>` für Richtlinien verwenden, die sich auf bestimmte Namensbereiche beziehen.
+3. Stellen Sie zum [Anzeigen von Richtlinien](/docs/containers?topic=containers-network_policies#view_policies) sicher, dass Sie den Befehl `calicoctl get GlobalNetworkPolicy` für globale Richtlinien und den Befehl `calicoctl get NetworkPolicy --namespace <richtliniennamensbereich>` für Richtlinien verwenden, die sich auf bestimmte Namensbereiche beziehen.
 
 <br />
 
@@ -597,11 +602,11 @@ Wenn ein Konto ausgesetzt wird, werden die in dem Konto vorhandenen Workerknoten
 
 {: tsResolve}
 
-Sie können [Ihren vorhandenen Worker-Pool löschen](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_rm) und anschließend [einen neuen Worker-Pool erstellen](/docs/containers?topic=containers-cs_cli_reference#cs_worker_pool_create).
+Sie können [Ihren vorhandenen Worker-Pool löschen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm) und anschließend [einen neuen Worker-Pool erstellen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
 
 Alternativ können Sie Ihren vorhandenen Worker-Pool beibehalten, indem Sie neue VLANs bestellen und sie zum Erstellen neuer Worker-Pools im Pool zu verwenden.
 
-Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel die entsprechende Region und, sofern zutreffend, die Ressourcengruppe an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Wenn Sie die Zonen abrufen möchten, für die Sie neue VLAN-IDs benötigen, notieren Sie sich den Standort (**Standort**), der in der Ausgabe des folgenden Befehls angezeigt wird. **Hinweis**: Wenn Ihr Cluster ein Mehrzonencluster ist, benötigen Sie VLAN-IDs für jede der einzelnen Zonen.
 
@@ -621,10 +626,10 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie als Ziel d
     ```
     {: pre}
 
-5.  Verwenden Sie den [Befehl](/docs/containers?topic=containers-cs_cli_reference#cs_zone_network_set) `zone-network-set`, um die Netz-Metadaten des Worker-Pools zu ändern.
+5.  Verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set`, um die Netzmetadaten des Worker-Pools zu ändern.
 
     ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <clustername_oder_-id> -- worker-pools <worker-pool> --private-vlan <id_des_privaten_vlans> --public-vlan <id_des_öffentlichen_vlans>
+    ibmcloud ks zone-network-set --zone <zone> --cluster <clustername_oder_-id> --worker-pools <worker-pool> --private-vlan <id_des_privaten_vlans> --public-vlan <id_des_öffentlichen_vlans>
     ```
     {: pre}
 
@@ -665,7 +670,7 @@ von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support?topic=get-support-getting-customer-support#using-avatar).
--   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support).
+-   Wenden Sie sich an den IBM Support, indem Sie einen Fall öffnen. Informationen zum Öffnen eines IBM Supportfalls oder zu Supportstufen und zu Prioritätsstufen von Fällen finden Sie unter [Support kontaktieren](/docs/get-support?topic=get-support-getting-customer-support).
 Geben Sie beim Melden eines Problems Ihre Cluster-ID an. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen. Sie können außerdem [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um relevante Informationen aus Ihrem Cluster zu erfassen und zu exportieren, um sie dem IBM Support zur Verfügung zu stellen.
 {: tip}
 
