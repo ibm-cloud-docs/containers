@@ -279,7 +279,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
      This process can take a few minutes.
   5. Remove the worker node. Use the worker ID that you previously retrieved.
      ```
-     ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --worker <worker_name_or_ID>
+     ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --workers <worker_name_or_ID>
      ```
      {: pre}
   6. Verify that the worker node is removed.
