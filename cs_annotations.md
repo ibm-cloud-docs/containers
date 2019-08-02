@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-02"
 
 keywords: kubernetes, iks, ingress
 
@@ -422,7 +422,7 @@ When a server block receives a request, the location block matches the URI to a 
 
 To modify the server block as a whole instead, see the [`server-snippets`](#server-snippets) annotation.
 
-To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
+To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/conf.d/<kubernetes_namespace>-<ingress_resource_name>.conf`
 {: tip}
 
 **Sample Ingress resource YAML**</br>
@@ -537,7 +537,7 @@ Add a custom server block configuration.
 **Description**</br>
 A server block is an NGINX directive that defines the configuration for the ALB virtual server. By providing a custom configuration snippet in the `server-snippets` annotation, you can modify how the ALB handles requests at the server level.
 
-To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/default-<ingress_resource_name>.conf`
+To view server and location blocks in the NGINX configuration file, run the following command for one of your ALB pods: `kubectl exec -ti <alb_pod> -n kube-system -c nginx-ingress -- cat ./etc/nginx/conf.d/<kubernetes_namespace>-<ingress_resource_name>.conf`
 {: tip}
 
 **Sample Ingress resource YAML**</br>
