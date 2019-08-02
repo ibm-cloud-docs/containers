@@ -68,6 +68,6 @@ Try out some things with your free cluster before it expires.
 
 * Go through the [{{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) for installing the CLI or using the Kubernetes Terminal, creating a private registry, setting up your cluster environment, adding a service to your cluster, and deploying a {{site.data.keyword.watson}} app.
 * [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) with multiple nodes for higher availability.
-* Try out an [{{site.data.keyword.openshifshort}} cluster](/docs/openshift?topic=openshift-openshift_tutorial).
+* Try out an [OpenShift cluster](/docs/openshift?topic=openshift-openshift_tutorial).
 
 
