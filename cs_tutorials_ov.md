@@ -129,7 +129,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-  <a href = "/docs/containers?topic=containers-openshift_tutorial">
+  <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
           Red Hat OpenShift cluster
