@@ -829,12 +829,12 @@ The following instructions require public network access in your cluster to conn
    <tbody>
    <tr>
    <td>Header</td>
-     <td><ul><li>`Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.</li><li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
+     <td><ul><li>`Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.</li><li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/global/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
    </td>
    </tr>
    <tr>
    <td>Path</td>
-   <td>`<cluster_ID>:` The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).      </td>
+   <td>`<cluster_ID>:` The ID of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/global/v1/clusters` API in [Automating cluster deployments with the API](#cs_api).      </td>
    </tr>
    </tbody>
    </table>
