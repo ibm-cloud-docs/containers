@@ -46,6 +46,10 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
+  <td>02 August 2019</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Red Hat OpenShift on IBM Cloud changelog</strong>: Changelogs added for [3.11.129_1517_openshift](/docs/openshift?topic=openshift-openshift_changelog#311129_1517).</td>
+</tr>
+<tr>
   <td>01 August 2019</td>
   <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Red Hat OpenShift on IBM Cloud</strong>: Red Hat OpenShift on IBM Cloud is generally available as of 1 August 2019 at 0:00 UTC. Any beta clusters expire within 30 days. You can [create a GA cluster](/docs/openshift?topic=openshift-openshift_tutorial) and then re-deploy any apps that you use in the beta clusters before the beta clusters are removed.<br><br>Because the {{site.data.keyword.containerlong_notm}} logic and underlying cloud infrastructure is the same, many topics are reused across the documentation for [community Kubernetes](/docs/containers?topic=containers-getting-started) and [OpenShift](/docs/openshift?topic=openshift-getting-started) clusters, such as this release notes topic.</td>
 </tr>
