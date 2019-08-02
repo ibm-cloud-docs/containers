@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-02"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -635,7 +635,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 
 4.  List available {{site.data.keyword.containerlong_notm}} regions and select the region that you want to work in. Use the IAM access token and refresh token from the previous step to build your header information.
     ```
-    GET https://containers.cloud.ibm.com/v1/regions
+    GET https://containers.cloud.ibm.com/global/v1/regions
     ```
     {: codeblock}
 
@@ -702,7 +702,7 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 5.  List all clusters in the {{site.data.keyword.containerlong_notm}} region that you selected. If you want to [run Kubernetes API requests against your cluster](#kube_api), make sure to note the **id** and **region** of your cluster.
 
      ```
-     GET https://containers.cloud.ibm.com/v1/clusters
+     GET https://containers.cloud.ibm.com/global/v1/clusters
      ```
      {: codeblock}
 
@@ -816,7 +816,7 @@ The following instructions require public network access in your cluster to conn
 
 4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output.
    ```
-   GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
+   GET https://containers.cloud.ibm.com/global/v1/clusters/<cluster_ID>
    ```
    {: codeblock}
 
