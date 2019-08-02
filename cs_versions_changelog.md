@@ -551,6 +551,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
 </tr>
+  </tbody>
 </table>
 
 
@@ -1455,6 +1456,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>N/A</td>
 <td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
 </tr>
+  </tbody>
 </table>
 
 
