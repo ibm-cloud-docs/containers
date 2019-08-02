@@ -1528,7 +1528,7 @@ ibmcloud ks cluster-subnet-detach --cluster CLUSTER --subent-id SUBNET_ID [-s]
 <dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud ks clusters` [command](#cs_clusters).</dd>
 
 <dt><code>--vlan <em>VLAN_ID</em></code></dt>
-<dd>The ID of the public or private subnet that you want to detach. To find the subnet ID, first run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> and look for the subnet CIDR in the <strong>Subnet VLANs</strong> section of the output. Then, using the subnet CIDR, run <code>ibmcloud ks subnets</code> and look for the subnet's <strong>ID</staong>.</dd>
+<dd>The ID of the public or private subnet that you want to detach. To find the subnet ID, first run <code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> and look for the subnet CIDR in the <strong>Subnet VLANs</strong> section of the output. Then, using the subnet CIDR, run <code>ibmcloud ks subnets</code> and look for the subnet's <strong>ID</strong>.</dd>
 </dl>
 
 **Example**:
