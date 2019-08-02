@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-01"
+lastupdated: "2019-08-02"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks
 
@@ -741,8 +741,6 @@ diskEncryption: <em>false</em>
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 </dl>
-
-
 
 **<code>-s</code>**</br>
 Do not show the message of the day or update reminders. This value is optional.
