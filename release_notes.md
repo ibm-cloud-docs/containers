@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-02"
+lastupdated: "2019-08-05"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,16 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>05 August 2019</td>
+  <td><ul>
+  <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.99](/docs/containers?topic=containers-cs_cli_changelog).</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! `NodeLocal` DNS caching (beta)</strong>: For clusters that run Kubernetes 1.15 or later, you can set up improved cluster DNS performance with [`NodeLocal` DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache).</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! Version 1.15</strong>: You can create community Kubernetes clusters that run version 1.15. To update from a previous version, review the [1.15 changes](/docs/containers?topic=containers-cs_versions#cs_v115).</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Deprecated: Version 1.12</strong>: Kubernetes version 1.12 is deprecated. Review the [changes across versions](/docs/containers?topic=containers-cs_versions), and update to a more recent version.</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.14.4_1527](/docs/containers?topic=containers-changelog#1144_1527_worker), [1.13.8_1530](/docs/containers?topic=containers-changelog#1138_1530_worker), and [1.12.10_1561](/docs/containers?topic=containers-changelog#11210_1561_worker) worker node patch updates.</li>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelogs added for worker node patch [3.11.129_1518_openshift](/docs/openshift?topic=openshift-openshift_changelog#311129_1518_worker).</li></ul></td>
+</tr>
 <tr>
   <td>02 August 2019</td>
   <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelogs added for [3.11.129_1517_openshift](/docs/openshift?topic=openshift-openshift_changelog#311129_1517).</td>
