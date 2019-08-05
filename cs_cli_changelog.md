@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-02"
+lastupdated: "2019-08-05"
 
 keywords: kubernetes, iks
 
@@ -47,6 +47,15 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.3.99</td>
+<td>05 Aug 2019</td>
+<td>
+<ul>
+<li>Improves error handling for `ibmcloud ks cluster-config`.</li>
+<li>Updates translations of help text.</li>
+</ul></td>
+</tr>
 <tr>
 <td>0.3.95</td>
 <td>30 Jul 2019</td>
