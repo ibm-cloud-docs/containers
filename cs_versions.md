@@ -259,7 +259,7 @@ The following table shows the actions that you must take after you update the Ku
 </table>
 
 ### Update after worker nodes
-{: #115_after}
+{: #115_after_worker}
 
 The following table shows the actions that you must take after you update your worker nodes.
 {: shortdesc}
