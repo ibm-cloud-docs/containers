@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-30"
+lastupdated: "2019-08-05"
 
 keywords: kubernetes, iks
 
@@ -32,15 +32,14 @@ subcollection: containers
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
 
-
 **Supported Kubernetes versions**:
-*   Latest: 1.14.4
+*   Latest: 1.15.1
 *   Default: 1.13.8
-*   Other: 1.12.10
+*   Other: 1.14.4
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: N/A
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11  
+*   Deprecated: 1.12.10
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11
 
 </br>
 
@@ -91,10 +90,10 @@ As updates become available, you are notified when you view information about th
 
 {: #prep-up}
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version.
-
+-  Version 1.15 [preparation actions](#cs_v115).
 -  Version 1.14 [preparation actions](#cs_v114).
 -  Version 1.13 [preparation actions](#cs_v113).
--  Version 1.12 [preparation actions](#cs_v112).
+-  **Deprecated**: Version 1.12 [preparation actions](#cs_v112).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br/>
@@ -130,7 +129,13 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
 </tr>
 </thead>
-<tbody>  
+<tbody>
+  <tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.15](#cs_v115)</td>
+  <td>5 Aug 2019</td>
+  <td>July 2020 `†`</td>
+</tr>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.14](#cs_v114)</td>
@@ -143,11 +148,11 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>05 Feb 2019</td>
   <td>Jan 2020 `†`</td>
 </tr>
-<tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <tr>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.12](#cs_v112)</td>
   <td>07 Nov 2018</td>
-  <td>Oct 2019 `†`</td>
+  <td>31 Oct 2019 `†`</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -192,6 +197,86 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>04 Apr 2018</td>
 </tr>
 </tbody>
+</table>
+
+<br />
+
+
+## Version 1.15
+{: #cs_v115}
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.15.
+{: shortdesc}
+
+### Update before master
+{: #115_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.15">
+<caption>Changes to make before you update the master to Kubernetes 1.15</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`kubelet` cgroup metrics collection</td>
+<td>`kubelet` now collects only cgroups metrics for the node, container runtime, kubelet, pods, and containers. If any automation or components rely on additional cgroup metrics, update the components to reflect these changes.</td>
+</tr>
+<tr>
+<td>Default Calico policy change</td>
+<td>If you created custom Calico HostEndpoints that refer to an `iks.worker.interface == 'private'` label, a new default Calico policy, `allow-all-private-default`, might disrupt network traffic. You must create a Calico policy with the `iks.worker.interface == 'private'` label to override the default policy. For more information, see [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy).</td>
+</tr>
+</table>
+
+### Update after master
+{: #115_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.15">
+<caption>Changes to make after you update the master to Kubernetes 1.15</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unsupported: `kubectl exec --pod`</td>
+<td>The `kubectl exec` command's `--pod` and shorthand `-p` flags are no longer supported. If your scripts rely on these flags, update them.</td>
+</tr>
+<tr>
+<td>Unsupported: `kubectl scale job`</td>
+<td>The `kubectl scale job` command is removed. If your scripts rely on this command, update them.</td>
+</tr>
+</table>
+
+### Update after worker nodes
+{: #115_after}
+
+The following table shows the actions that you must take after you update your worker nodes.
+{: shortdesc}
+
+<table summary="Kubernetes updates for version 1.15">
+<caption>Changes to make after you update the worker nodes to Kubernetes 1.15</caption>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`kubelet probe metrics` type are now counters rather than gauge</td>
+<td>The previous method of using the gauge type for probe metrics is replaced by the counters type. The gauge type returned `0` for success and `1` for failed operations. Now, the counters type keeps track of the number of times that the metric returns `successful`, `failure`, or `unknown`. If your automation processes rely on a `0` successful or `1` failed gauge response, update the processes to use the counters response statuses. The numerical response value can now indicate the number of times that the counters response statuses are reported.<br><br>Additionally, to reflect this change in functionality, the `prober_probe_result` metric is replaced by the `prober_probe_total` metric.</td>
+</tr>
 </table>
 
 <br />
@@ -390,8 +475,7 @@ The following table shows the actions that you must take after you update your w
 <br />
 
 
-
-## Version 1.12
+## Deprecated: Version 1.12
 {: #cs_v112}
 
 <p><img src="images/certified_kubernetes_1x12.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.12 certification for IBM Cloud Container Service."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.12 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>

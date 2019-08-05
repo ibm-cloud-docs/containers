@@ -37,9 +37,10 @@ For more information about major, minor, and patch versions and preparation acti
 {: tip}
 
 For information about changes since the previous version, see the following changelogs.
+- Version 1.15 [changelog](#115_changelog).
 - Version 1.14 [changelog](#114_changelog).
 - Version 1.13 [changelog](#113_changelog).
-- Version 1.12 [changelog](#112_changelog).
+- Version 1.12 (Deprecated) [changelog](#112_changelog).
 - [Archive](#changelog_archive) of changelogs for unsupported versions.
 
 Some changelogs are for _worker node fix packs_, and apply only to worker nodes. You must [apply these patches](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to ensure security compliance for your worker nodes. These worker node fix packs can be at a higher version than the master because some build fix packs are specific to worker nodes. Other changelogs are for _master fix packs_, and apply only to the cluster master. Master fix packs might not be automatically applied. You can choose to [apply them manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). For more information about patch types, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -47,6 +48,82 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 </br>
 
+## Version 1.15 changelog
+{: #115_changelog}
+
+### Changelog for 1.15.1_1511, released 5 August 2019
+{: #1151_1511}
+
+The following table shows the changes that are included in the patch 1.15.1_1511.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.4_1526">
+<caption>Changes since version 1.14.4_1526</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.6.4</td>
+<td>v3.8.1</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.8/release-notes/). In addition, Kubernetes version 1.15 clusters now have a new `allow-all-private-default` global network policy to allow all ingress and egress network traffic on private interface. For more information, see [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.4-139</td>
+<td>v1.15.1-86</td>
+<td><ul><li>Updated to support the Kubernetes 1.15.1 release.</li><li>`calicoctl` version is updated to 3.8.1.</li></ul>.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.4</td>
+<td>v1.15.1</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1) and [Kubernetes 1.15 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/).</td>
+</tr>
+<tr>
+<td>Kubernetes configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated Kubernetes API server default toleration seconds to 600 for the Kubernetes default `node.kubernetes.io/not-ready` and `node.kubernetes.io/unreachable` pod tolerations. For more information about tolerations, see [Taints and Tolerations ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).</td>
+</tr>
+<tr>
+<td>Kubernetes add-on resizer</td>
+<td>1.8.4</td>
+<td>1.8.5</td>
+<td>For more information, see the [Kubernetes addon resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.4.0</td>
+<td>1.6.0</td>
+<td>For more information, see the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.6.0).</td>
+</tr>
+<tr>
+<td>Kubernetes nodelocal DNS cache</td>
+<td>N/A</td>
+<td>1.15.4</td>
+<td>For more information, see the [Kubernetes nodelocal DNS cache release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). For more information about this new beta feature, see [Setting up Nodelocal DNS Cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache).</td>
+</tr>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>1.9.7-alpine</td>
+<td>2.0.1-alpine</td>
+<td>See the [HAProxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/2.0/src/CHANGELOG).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>a7e8ece</td>
+<td>d91d200</td>
+<td>Updated image for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924).</td>
+</tr>
+  </tbody>
+</table>
 
 ## Version 1.14 changelog
 {: #114_changelog}
@@ -1484,8 +1561,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <br />
 
 
-
-## Version 1.12 changelog
+## Deprecated: Version 1.12 changelog
 {: #112_changelog}
 
 Review the version 1.12 changelog.
