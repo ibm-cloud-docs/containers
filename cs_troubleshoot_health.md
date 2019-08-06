@@ -84,7 +84,7 @@ Review the following reasons why your cluster logs are not appearing and the cor
 
 To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, to a worker node in your cluster.
 
-Before you begin: {[target]}
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Create the `deploy-noisy.yaml` configuration file.
     ```

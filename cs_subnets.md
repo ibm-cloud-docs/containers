@@ -117,7 +117,7 @@ All subnets that were automatically ordered during cluster creation are immediat
 {: note}
 
 Before you begin:
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To reuse user-managed private subnets from a cluster that you no longer need, delete the unneeded cluster.
    ```
    ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
@@ -241,7 +241,7 @@ To list only portable public IP addresses that are available to create public NL
 
 Before you begin:
 -  Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To list available portable public IP addresses:
 
@@ -302,7 +302,7 @@ You can free up a used portable IP address by deleting the network load balancer
 
 Before you begin:
 -  Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To delete an NLB or disable an ALB:
 
@@ -347,7 +347,7 @@ Portable public IP addresses are charged monthly. If you remove portable public 
 
 Before you begin:
 -  Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To order a subnet:
 
@@ -405,7 +405,7 @@ You can get more portable IPs for NLB services by making an existing subnet in a
 
 Before you begin:
 -  Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To make a subnet available to your cluster:
 
@@ -486,7 +486,7 @@ Before you begin:
 - Configure the routing of network traffic into and out of the external subnet.
 - Confirm that you have VPN connectivity between the on-premises data center network gateway and either the private network Virtual Router Appliance or the strongSwan VPN service that runs in your cluster. Alternatively, ensure that you have a DirectLink connection set up between your cluster and the on-premises data center network. For more information, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 -  Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-- {[target]}
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
 To add a subnet from an on-premises network:
