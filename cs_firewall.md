@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, firewall, vyatta, ips
 
 subcollection: containers
 
@@ -557,5 +557,6 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     {: pre}
 4.  Add the subnet CIDR or IP addresses to your service's firewall for outbound traffic or your on-premises firewall for inbound traffic.
 5.  Repeat these steps for each cluster that you want to whitelist.
+
 
 

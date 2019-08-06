@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, infrastructure, rbac, policy
 
 subcollection: containers
 
@@ -1100,7 +1100,6 @@ The following table shows the classic infrastructure permissions that the creden
 {: #classic-permissions-suggested}
 {: tab-title="Other common use cases"}
 {: tab-group="Classic infrastructure permissions"}
-
 
 
 

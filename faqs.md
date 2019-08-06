@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-05"
+lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks, compliance, security standards
+keywords: kubernetes, iks, compliance, security standards, faq
 
 subcollection: containers
 
@@ -146,7 +146,7 @@ For more information about available bare metal flavors and how bare metal is di
 **Supported Kubernetes versions**:
 *   Latest: 1.15.1
 *   Default: 1.13.8
-*   Other: 1.14.4<
+*   Other: 1.14.4
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

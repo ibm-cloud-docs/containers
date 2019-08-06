@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks
+keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
 subcollection: containers
 
@@ -4740,5 +4740,6 @@ ibmcloud ks zone-rm --zone ZONE --cluster CLUSTER [-f] [-s]
 ibmcloud ks zone-rm --zone dal10 --cluster my_cluster
 ```
 {: pre}
+
 
 

@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2019
 lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, networking
 
 subcollection: containers
 
