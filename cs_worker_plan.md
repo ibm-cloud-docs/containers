@@ -175,10 +175,12 @@ Worker node flavors vary by zone and container platform. The following table inc
 You can provision your worker node as a single-tenant physical server, also referred to as bare metal.
 {: shortdesc}
 
+
 <staging vpc>
 Physical machines are available for classic clusters only and are not supported in VPC on Classic clusters.
 {: note}
 </staging vpc>
+
 
 **How is bare metal different than VMs?**</br>
 Bare metal gives you direct access to the physical resources on the machine, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Physical flavors have more local storage than virtual, and some have RAID to increase data availability. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
@@ -266,10 +268,12 @@ Choose a flavor with the right storage configuration to support your workload. S
 Software-defined storage (SDS) flavors are physical machines that are provisioned with additional raw disks for physical local storage. Unlike the primary and secondary local disk, these raw disks are not wiped during a worker node update or reload. Because data is co-located with the compute node, SDS machines are suited for high-performance workloads.
 {: shortdesc}
 
+
 <staging vpc>
-Software-defined storage flavors are available for classic clusters only and are not supported in VPC on Classic clusters.
+Software-defined storage flavor are available for classic clusters only and are not supported in VPC on Classic clusters.
 {: note}
 </staging vpc>
+
 
 **When do I use SDS flavors?**</br>
 You typically use SDS machines in the following cases:
