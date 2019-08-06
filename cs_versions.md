@@ -205,8 +205,6 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 ## Version 1.15
 {: #cs_v115}
 
-
-
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.15.
 {: shortdesc}
 
