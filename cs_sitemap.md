@@ -2,11 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-06"
-
-keywords: kubernetes, iks
-
-subcollection: containers
+lastupdated: "2019-08-07"
 
 ---
 
@@ -627,7 +623,9 @@ subcollection: containers
   * [Global rate limits (global-rate-limit)](/docs/containers?topic=containers-ingress_annotation#global-rate-limit)
   * [Service rate limits (service-rate-limit)](/docs/containers?topic=containers-ingress_annotation#service-rate-limit)
 * [User authentication annotations](/docs/containers?topic=containers-ingress_annotation#user-authentication)
-  * [App ID Authentication (appid-auth)](/docs/containers?topic=containers-ingress_annotation#appid-auth)
+  * [App ID Authentication (appid-auth)](/docs/containers?topic=containers-ingress_annotation#appid-auth)<staging permanent>
+  * [{{site.data.keyword.cloud_notm}} IAM command-line authentication (iam-cli-auth)](/docs/containers?topic=containers-ingress_annotation#iam-cli-auth)
+  * [{{site.data.keyword.cloud_notm}} IAM user interface authentication (iam-ui-auth)](/docs/containers?topic=containers-ingress_annotation#iam-ui-auth)</staging permanent>
 
 [Modifying default Ingress behavior](/docs/containers?topic=containers-ingress-settings)
 * [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
