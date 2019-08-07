@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-07"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -98,6 +98,8 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 
 {{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: deprecated}
+
+
 
 **Multizone metro locations**
 
