@@ -117,7 +117,7 @@ subcollection: containers
     <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-          Kubernetes-native cluster on Ubuntu
+          Community Kubernetes cluster
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
@@ -132,7 +132,7 @@ subcollection: containers
   <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-          Red Hat OpenShift cluster
+          OpenShift cluster
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software. </p></br>

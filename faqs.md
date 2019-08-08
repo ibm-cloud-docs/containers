@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-07"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, compliance, security standards, faq
 
@@ -211,7 +211,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 * [Subnet IP addresses](#subnet_ips)
 * [Storage](#persistent_storage)
 * [{{site.data.keyword.cloud_notm}} services](#services)
-* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
+* [Red Hat OpenShift on IBM Cloud](#roks_charges)
 
 <dl>
   <dt id="nodes">Worker nodes</dt>
@@ -242,7 +242,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
   <dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
     <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
-  <dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dt id="roks_charges">Red Hat OpenShift on IBM Cloud</dt>
     <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every two cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information about OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial).</dd>
 </dl>
 <br><br>
