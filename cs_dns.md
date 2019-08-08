@@ -2,7 +2,11 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-08"
+
+keywords: kubernetes, iks, coredns, kubedns
+
+subcollection: containers
 
 ---
 
