@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 {:gif: data-image-type='gif'}
 
-# Creating clusters
+# Creating classic clusters
 {: #clusters}
 
 Create a Kubernetes cluster in {{site.data.keyword.containerlong}}.
