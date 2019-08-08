@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, encrypt, security
 
@@ -161,6 +161,7 @@ To enable {{site.data.keyword.keymanagementserviceshort}}, or to update the inst
 
 Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.
 {: important}
+
 
 
 ## Encrypting data by using IBM Cloud Data Shield
