@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-01"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, vlan
 
@@ -23,13 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Changing service endpoints or VLAN connections
 {: #cs_network_cluster}
 
 After you initially set up your network when you [create a cluster](/docs/containers?topic=containers-clusters), you can change the service endpoints that your Kubernetes master is accessible through or change the VLAN connections for your worker nodes.
 {: shortdesc}
+
+
 
 ## Setting up the private service endpoint
 {: #set-up-private-se}

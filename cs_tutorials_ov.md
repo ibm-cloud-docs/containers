@@ -114,21 +114,35 @@ subcollection: containers
 {: #tutorials-create-cluster-deploy-app}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
+  <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
+  <div class = "solutionBox">
+      <div class = "solutionBoxContent">
+        Community Kubernetes cluster
+        <div class="solutionBoxDescription">
+              <div class="descriptionContainer">
+                </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
+              </div>
+              <div class="architectureDiagramContainer">
+                  <img class="architectureDiagram" src="images/tutorial_ov.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
+              </div>
+          </div>
+      </div>
+  </div>staging vpc>
+  <a href = "/docs/containers?topic=containers-vpc_ks_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-          Community Kubernetes cluster
-          <div class="solutionBoxDescription">
+          Virtual Private Cloud cluster
+            <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
+                  </br><p>Create a classic cluster in your Virtual Private Cloud (VPC). </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/tutorial_ov.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
+                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC on Classic cluster tutorial diagram" /></br>
                 </div>
             </div>
         </div>
     </div>
-    </a>
+  </a></staging vpc>
   <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
@@ -147,7 +161,7 @@ subcollection: containers
 </div>
 
 
-## Deploy apps to a cluster 
+## Deploy apps to a cluster
 {: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
@@ -334,7 +348,7 @@ subcollection: containers
     <a href = "https://github.com/razee-io/Razee">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Automate multi-cluster deployments with Razee 
+                Automate multi-cluster deployments with Razee
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br>  <p>Automate, manage, and visualize the deployment of Kubernetes resources across clusters, environments, and cloud providers with Razee.</p></br>
@@ -371,7 +385,7 @@ subcollection: containers
   <a href = "/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
-                Analyze cluster metrics with {{site.data.keyword.mon_full_notm}} 
+                Analyze cluster metrics with {{site.data.keyword.mon_full_notm}}
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Set up a Sysdig metrics agent in your cluster and explore how you can monitor your cluster's health.  </p></br>
@@ -386,7 +400,7 @@ subcollection: containers
 </div>
 
 
-## Migrate apps to the cloud 
+## Migrate apps to the cloud
 {: #tutorials-ov-migrate-apps}
 
 <div class = "solutionBoxContainer">

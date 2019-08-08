@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
 
@@ -29,6 +29,8 @@ subcollection: containers
 
 After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating host names. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each host name.
 {: shortdesc}
+
+
 
 <dl>
 <dt>Host name</dt>

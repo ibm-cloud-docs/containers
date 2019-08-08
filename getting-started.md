@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-02"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, containers
 
@@ -67,7 +67,6 @@ Good work! You created your first Kubernetes cluster. Here are some details abou
 Try out some things with your free cluster before it expires.
 
 * Go through the [{{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) for installing the CLI or using the Kubernetes Terminal, creating a private registry, setting up your cluster environment, adding a service to your cluster, and deploying a {{site.data.keyword.watson}} app.
-* [Create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui) with multiple nodes for higher availability.
 * Try out an [OpenShift cluster](/docs/openshift?topic=openshift-openshift_tutorial).
 
 
