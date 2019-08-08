@@ -127,22 +127,7 @@ subcollection: containers
               </div>
           </div>
       </div>
-  </div>staging vpc>
-  <a href = "/docs/containers?topic=containers-vpc_ks_tutorial">
-    <div class = "solutionBox">
-        <div class = "solutionBoxContent">
-          Virtual Private Cloud cluster
-            <div class="solutionBoxDescription">
-                <div class="descriptionContainer">
-                  </br><p>Create a classic cluster in your Virtual Private Cloud (VPC). </p></br>
-                </div>
-                <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC on Classic cluster tutorial diagram" /></br>
-                </div>
-            </div>
-        </div>
-    </div>
-  </a></staging vpc>
+  </div>
   <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">

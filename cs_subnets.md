@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-07"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -30,12 +30,12 @@ Change the pool of available portable public or private IP addresses for network
 {:shortdesc}
 
 
+
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
 {: #basics}
 
 Understand the basic concepts of networking in {{site.data.keyword.containerlong_notm}} clusters. {{site.data.keyword.containerlong_notm}} uses VLANs, subnets, and IP addresses to give cluster components network connectivity.
 {: shortdesc}
-
 
 ### VLANs
 {: #basics_vlans}
