@@ -19,3 +19,7 @@ https://containers.cloud.ibm.com/swagger,
 https://containers.cloud.ibm.com,
 https://containers.bluemix.net,
 https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982,
+https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2,
+https://kustomize.io/,
+https://neuvector.com/,
+/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#pod-subnet

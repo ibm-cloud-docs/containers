@@ -1025,11 +1025,6 @@ lastupdated: "2019-08-09"
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-  * [Actions requiring no permissions](/docs/containers?topic=containers-access_reference#none-actions)
-  * [Viewer actions](/docs/containers?topic=containers-access_reference#view-actions)
-  * [Editor actions](/docs/containers?topic=containers-access_reference#editor-actions)
-  * [Operator actions](/docs/containers?topic=containers-access_reference#operator-actions)
-  * [Administrator actions](/docs/containers?topic=containers-access_reference#admin-actions)
 * [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
