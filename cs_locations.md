@@ -40,19 +40,19 @@ _{{site.data.keyword.containerlong_notm}} locations_
 ## {{site.data.keyword.containerlong_notm}} locations
 {: #locations}
 
-{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
+{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location. To list available {{site.data.keyword.containerlong_notm}} locations, use the following command.
 {: shortdesc}
 
-### Available locations
-{: #available-locations}
+```
+ibmcloud ks supported-locations
+```
+{: pre}
 
-To list available {{site.data.keyword.containerlong_notm}} locations, use the `ibmcloud ks supported-locations` command.
-{: shortdesc}
-
-#### How locations are organized
+### How locations are organized
 {: #example_locations_org}
 
 The following image is used as an example to explain how {{site.data.keyword.containerlong_notm}} locations are organized.
+{: shortdesc}
 
 ![Organization of {{site.data.keyword.containerlong_notm}} locations](images/cs_regions_hierarchy.png)
 
@@ -90,7 +90,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 ### Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
-The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Also, free clusters are only available in select geographies as only single zone clusters with one worker node.
+The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node.
 {: shortdesc}
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
@@ -113,7 +113,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 {: class="simple-tab-table"}
 {: caption="Available multizone metro locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #locationtabtablemulti}
-{: tab-title="Multizone metro locations"}
+{: tab-title="Multizone metros"}
 {: tab-group="location-multi-single"}
   
 | Geography |  Country  | Metro | Data center |  Deprecated region  |
@@ -139,9 +139,9 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
 {: class="simple-tab-table"}
-{: caption="Available single zone locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available single zone data center locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #locationtabtablesingle}
-{: tab-title="Single zone data center locations"}
+{: tab-title="Single zones"}
 {: tab-group="location-multi-single"}
 
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
