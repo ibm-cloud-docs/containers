@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-07"
+lastupdated: "2019-08-09"
 
 ---
 
@@ -209,8 +209,6 @@ lastupdated: "2019-08-07"
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
 * [Single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone)
 * [Multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone)
-  * [Tell me more about the multizone cluster setup](/docs/containers?topic=containers-ha_clusters#mz_setup)
-  * [What are some changes from how I currently manage my clusters?](/docs/containers?topic=containers-ha_clusters#mz_new_ways)
 * [Multiple clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
