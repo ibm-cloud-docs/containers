@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-02"
+lastupdated: "2019-08-09"
 
-keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
+keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
 subcollection: containers
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 {:gif: data-image-type='gif'}
-
-
 
 # Creating clusters
 {: #clusters}

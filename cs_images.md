@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-08"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, registry, pull secret, secrets
 
 subcollection: containers
 
@@ -22,8 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Building containers from images
 {: #images}
@@ -300,7 +298,7 @@ You can copy an image pull secret, such as the one that is automatically created
     default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
-3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`.
+3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.
     ```
     kubectl get secret default-us-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
@@ -330,7 +328,7 @@ You can copy an image pull secret, such as the one that is automatically created
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [Add the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container](#use_imagePullSecret).
+5.  [Use the image pull secret to deploy containers](#use_imagePullSecret). You can choose between referring to the image pull secret separately in each deployment, or adding the image pull secret to a Kubernetes service account so that any pod in the namespace can use the image pull secret when you deploy a container.
 
 ### Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts
 {: #other_registry_accounts}

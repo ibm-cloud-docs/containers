@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-08"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers
 
@@ -41,6 +41,8 @@ You have 2 options for bringing your own Ingress controller:
 
 Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a host name for the NLB IP address.
 {: shortdesc}
+
+
 
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/tree/master/deploy/cloud-generic). If you use the community controller, edit the `kustomization.yaml` file by following these steps.
   1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.

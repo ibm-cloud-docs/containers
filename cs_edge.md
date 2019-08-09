@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-06"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, affinity, taint
 
 subcollection: containers
 
@@ -222,5 +222,6 @@ Before you begin:
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
 
 

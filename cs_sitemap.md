@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-09"
 
 ---
 
@@ -209,8 +209,6 @@ lastupdated: "2019-07-31"
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
 * [Single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone)
 * [Multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone)
-  * [Tell me more about the multizone cluster setup](/docs/containers?topic=containers-ha_clusters#mz_setup)
-  * [What are some changes from how I currently manage my clusters?](/docs/containers?topic=containers-ha_clusters#mz_new_ways)
 * [Multiple clusters connected with a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters)
 
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
@@ -1027,11 +1025,6 @@ lastupdated: "2019-07-31"
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
 * [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-  * [Actions requiring no permissions](/docs/containers?topic=containers-access_reference#none-actions)
-  * [Viewer actions](/docs/containers?topic=containers-access_reference#view-actions)
-  * [Editor actions](/docs/containers?topic=containers-access_reference#editor-actions)
-  * [Operator actions](/docs/containers?topic=containers-access_reference#operator-actions)
-  * [Administrator actions](/docs/containers?topic=containers-access_reference#admin-actions)
 * [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)

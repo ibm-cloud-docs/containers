@@ -161,7 +161,7 @@ IBM Cloud Kubernetes Service
 
     release_notes.md
     cs_sitemap.md
-    {: .navgroup-end} 
+    {: .navgroup-end}
 
     cs_tutorials_apps.md
     cs_rellinks.md

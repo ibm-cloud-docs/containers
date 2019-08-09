@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-05"
+lastupdated: "2019-08-09"
 
-keywords: kubernetes, iks, compliance, security standards
+keywords: kubernetes, iks, compliance, security standards, faq
 
 subcollection: containers
 
@@ -112,12 +112,12 @@ The access policies that you assign users vary depending on what you want your u
 
 | Use case | Example roles and scope |
 | --- | --- |
-| App auditor | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions), [Reader service role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#service). |
-| App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#editor-actions), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
-| Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions). |
+| App auditor | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform), [Reader service role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#service). |
+| App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
+| Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform). |
 | Create a cluster | Account-level permissions set by the API key with Super User infrastructure credentials. Individual user permissions for Administrator platform role to {{site.data.keyword.containerlong_notm}}, and Administrator platform role to {{site.data.keyword.registrylong_notm}}. For more information, see [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
 | Cluster administrator | [Administrator platform role for a cluster](/docs/containers?topic=containers-access_reference#admin-actions), [Manager service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service).|
-| DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#operator-actions), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
+| DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
 | Operator or site reliability engineer | [Administrator platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#admin-actions), [Reader service role for a cluster or region](/docs/containers?topic=containers-access_reference#service) or [Manager service role for all cluster namespaces](/docs/containers?topic=containers-access_reference#service) to be able to use `kubectl top nodes,pods` commands. |
 {: caption="Types of roles you might assign to meet different use cases." caption-side="top"}
 
@@ -146,7 +146,7 @@ For more information about available bare metal flavors and how bare metal is di
 **Supported Kubernetes versions**:
 *   Latest: 1.15.1
 *   Default: 1.13.8
-*   Other: 1.14.4<
+*   Other: 1.14.4
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -211,7 +211,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 * [Subnet IP addresses](#subnet_ips)
 * [Storage](#persistent_storage)
 * [{{site.data.keyword.cloud_notm}} services](#services)
-* [Red Hat OpenShift on IBM Cloud](#rhos_charges)
+* [Red Hat OpenShift on IBM Cloud](#roks_charges)
 
 <dl>
   <dt id="nodes">Worker nodes</dt>
@@ -236,13 +236,13 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <dd><p>When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).
     </dd>
   <dt id="persistent_storage">Storage</dt>
-    <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). <staging vpc><p class="note">For VPC on Classic, only block storage is available.</p></staging vpc>For more information, see:
+    <dd>When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
     <ul><li>[NFS file storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/file-storage/pricing)</li>
     <li>[Block storage pricing![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing)</li>
     <li>[Object storage plans![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud-computing/bluemix/pricing-object-storage#s3api)</li></ul></dd>
   <dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
     <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
-  <dt id="rhos_charges">Red Hat OpenShift on IBM Cloud</dt>
+  <dt id="roks_charges">Red Hat OpenShift on IBM Cloud</dt>
     <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every two cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information about OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial).</dd>
 </dl>
 <br><br>

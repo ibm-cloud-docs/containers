@@ -2,9 +2,10 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-08"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, help, debug
+
 subcollection: containers
 
 ---

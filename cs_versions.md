@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-05"
+lastupdated: "2019-08-08"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, versions, update
 
 subcollection: containers
 
@@ -204,6 +204,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 
 ## Version 1.15
 {: #cs_v115}
+
+<p><img src="images/certified_kubernetes_1x15.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.15 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.15 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.15.
 {: shortdesc}

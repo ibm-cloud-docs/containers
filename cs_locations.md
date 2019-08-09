@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-09"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -40,16 +40,19 @@ _{{site.data.keyword.containerlong_notm}} locations_
 ## {{site.data.keyword.containerlong_notm}} locations
 {: #locations}
 
-{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
+{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location. To list available {{site.data.keyword.containerlong_notm}} locations, use the following command.
 {: shortdesc}
 
-### Available locations
-{: #available-locations}
+```
+ibmcloud ks supported-locations
+```
+{: pre}
 
-To list available {{site.data.keyword.containerlong_notm}} locations, use the `ibmcloud ks supported-locations` command.
-{: shortdesc}
+### How locations are organized
+{: #example_locations_org}
 
 The following image is used as an example to explain how {{site.data.keyword.containerlong_notm}} locations are organized.
+{: shortdesc}
 
 ![Organization of {{site.data.keyword.containerlong_notm}} locations](images/cs_regions_hierarchy.png)
 
@@ -87,7 +90,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
 ### Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
-The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Also, free clusters are only available in select geographies as only single zone clusters with one worker node.
+The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node.
 {: shortdesc}
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
@@ -99,217 +102,47 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 {{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: deprecated}
 
-**Multizone metro locations**
-
-<table summary="The table shows the available multizone metro locations in {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right.  Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available multizone metro locations in {{site.data.keyword.containerlong_notm}}.</caption>
-  <thead>
-  <th>Geography</th>
-  <th>Country</th>
-  <th>Metro</th>
-  <th>Data center</th>
-  <th>Deprecated region</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Sydney</td>
-      <td>syd01, syd04, syd05</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Japan</td>
-      <td>Tokyo</td>
-      <td>tok02, tok04, tok05</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Germany</td>
-      <td>Frankfurt</td>
-      <td>fra02, fra04, fra05</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>United Kingdom</td>
-      <td>London</td>
-      <td>lon04, lon05`*`, lon06</td>
-      <td>UK South (`uk-south`, `eu-gb`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Dallas</td>
-      <td>dal10, dal12, dal13</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Washington, D.C.</td>
-      <td>wdc04, wdc06, wdc07</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-  </tbody>
-  </table>
-
-**Single zone data center locations**
-
-<table summary="The table shows the available single zone data center locations in {{site.data.keyword.containerlong_notm}}. Rows are to be read from the left to right. Column one is the geography that the location is in, column two is the country of the location, column three is the metro of the location, column four is the data center, and column five is the deprecated region that the location used to be organized into.">
-<caption>Available single zone locations in {{site.data.keyword.containerlong_notm}}.</caption>
-  <thead>
-  <th>Geography</th>
-  <th>Country</th>
-  <th>Metro</th>
-  <th>Data center</th>
-  <th>Deprecated region</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Melbourne</td>
-      <td>mel01</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Australia</td>
-      <td>Sydney</td>
-      <td>syd01, syd04, syd05</td>
-      <td>AP South (`ap-south`, `au-syd`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>China</td>
-      <td>Hong Kong<br>SAR of the PRC</td>
-      <td>hkg02</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>India</td>
-      <td>Chennai</td>
-      <td>che01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Japan</td>
-      <td>Tokyo</td>
-      <td>tok02, tok04, tok05</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Korea</td>
-      <td>Seoul</td>
-      <td>seo01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Asia Pacific</td>
-      <td>Singapore</td>
-      <td>Singapore</td>
-      <td>sng01</td>
-      <td>AP North (`ap-north`, `jp-tok`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>France</td>
-      <td>Paris</td>
-      <td>par01</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Germany</td>
-      <td>Frankfurt</td>
-      <td>fra02, fra04, fra05</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Italy</td>
-      <td>Milan</td>
-      <td>mil01</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>The Netherlands</td>
-      <td>Amsterdam</td>
-      <td>ams03</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>Norway</td>
-      <td>Oslo</td>
-      <td>osl</td>
-      <td>EU Central (`eu-central`, `eu-de`)</td>
-    </tr>
-    <tr>
-      <td>Europe</td>
-      <td>United Kingdom</td>
-      <td>London</td>
-      <td>lon02`*`, lon04, lon05`*`, lon06</td>
-      <td>UK South (`uk-south`, `eu-gb`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Canada</td>
-      <td>Montreal</td>
-      <td>mon01</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Canada</td>
-      <td>Toronto</td>
-      <td>tor01</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>Mexico</td>
-      <td>Mexico City</td>
-      <td>mex01</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Dallas</td>
-      <td>dal10, dal12, dal13</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>San Jose</td>
-      <td>sjc03, sjc04</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-    <tr>
-      <td>North America</td>
-      <td>United States</td>
-      <td>Washington, D.C.</td>
-      <td>wdc04, wdc06, wdc07</td>
-      <td>US East (`us-east`)</td>
-    </tr>
-    <tr>
-      <td>South America</td>
-      <td>Brazil</td>
-      <td>São Paulo</td>
-      <td>sao01</td>
-      <td>US South (`us-south`)</td>
-    </tr>
-  </tbody>
-  </table>
+| Geography |  Country  | Metro | Data center |  Deprecated region  |
+|-----|-----|-----|-----|-----|
+| Asia Pacific | Australia | Sydney | syd01, syd04, syd05 | AP South (`ap-south`, `au-syd`) |
+| Asia Pacific | Japan | Tokyo | tok02, tok04, tok05 | AP North (`ap-north`, `jp-tok`) |
+| Europe | Germany | Frankfurt | fra02, fra04, fra05 | EU Central (`eu-central`, `eu-de`) |
+| Europe | United Kingdom | London | lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
+| North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
+| North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
+{: class="simple-tab-table"}
+{: caption="Available multizone metro locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: #locationtabtablemulti}
+{: tab-title="Multizone metros"}
+{: tab-group="location-multi-single"}
+  
+| Geography |  Country  | Metro | Data center |  Deprecated region  |
+|-----|-----|-----|-----|-----|
+| Asia Pacific | Australia | Melbourne | mel01 | AP South (`ap-south`, `au-syd`) |
+| Asia Pacific | Australia | Sydney | syd01, syd04, syd05 | AP South (`ap-south`, `au-syd`) |
+| Asia Pacific | China | Hong Kong<br>SAR of the PRC | hkg02 | AP North (`ap-north`, `jp-tok`) |
+| Asia Pacific | India | Chennai | che01 | AP North (`ap-north`, `jp-tok`) |
+| Asia Pacific | Japan | Tokyo | tok02, tok04, tok05 | AP North (`ap-north`, `jp-tok`) |
+| Asia Pacific | Korea | Seoul | seo01 | AP North (`ap-north`, `jp-tok`) |
+| Asia Pacific | Singapore | Singapore | sng01 | AP North (`ap-north`, `jp-tok`) |
+| Europe | France | Paris | par01 | EU Central (`eu-central`, `eu-de`) |
+| Europe | Germany | Frankfurt | fra02, fra04, fra05 | EU Central (`eu-central`, `eu-de`) |
+| Europe | Italy | Milan | mil01 | EU Central (`eu-central`, `eu-de`) |
+| Europe | The Netherlands | Amsterdam | ams03 | EU Central (`eu-central`, `eu-de`) |
+| Europe | Norway | Oslo | osl | EU Central (`eu-central`, `eu-de`) |
+| Europe | United Kingdom | London | lon02`*`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
+| North America | Canada | Montreal | mon01 | US East (`us-east`) |
+| North America | Canada | Toronto | tor01 | US East (`us-east`) |
+| North America | Mexico | Mexico City | mex01 | US South (`us-south`) |
+| North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
+| North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
+| North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
+| South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
+{: class="simple-tab-table"}
+{: caption="Available single zone data center locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: #locationtabtablesingle}
+{: tab-title="Single zones"}
+{: tab-group="location-multi-single"}
 
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
