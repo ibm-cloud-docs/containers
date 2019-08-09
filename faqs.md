@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-08"
+lastupdated: "2019-08-09"
 
 keywords: kubernetes, iks, compliance, security standards, faq
 
@@ -112,12 +112,12 @@ The access policies that you assign users vary depending on what you want your u
 
 | Use case | Example roles and scope |
 | --- | --- |
-| App auditor | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions), [Reader service role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#service). |
-| App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#editor-actions), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
-| Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#view-actions). |
+| App auditor | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform), [Reader service role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#service). |
+| App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
+| Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform). |
 | Create a cluster | Account-level permissions set by the API key with Super User infrastructure credentials. Individual user permissions for Administrator platform role to {{site.data.keyword.containerlong_notm}}, and Administrator platform role to {{site.data.keyword.registrylong_notm}}. For more information, see [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
 | Cluster administrator | [Administrator platform role for a cluster](/docs/containers?topic=containers-access_reference#admin-actions), [Manager service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service).|
-| DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#operator-actions), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
+| DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
 | Operator or site reliability engineer | [Administrator platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#admin-actions), [Reader service role for a cluster or region](/docs/containers?topic=containers-access_reference#service) or [Manager service role for all cluster namespaces](/docs/containers?topic=containers-access_reference#service) to be able to use `kubectl top nodes,pods` commands. |
 {: caption="Types of roles you might assign to meet different use cases." caption-side="top"}
 
