@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-12"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,10 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>12 August 2019</td>
+  <td><strong>Ingress ALB changelog</strong>: Updated the ALB `nginx-ingress` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
+</tr>
 <tr>
   <td>05 August 2019</td>
   <td><ul>
