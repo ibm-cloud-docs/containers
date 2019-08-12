@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-08"
+lastupdated: "2019-08-12"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
 
@@ -99,7 +99,7 @@ To create a host name for one or more NLB IP addresses:
 
 4. If you have NLBs in each zone of a multizone cluster that expose one app, add the IPs of the other NLBs to the host name. Note that you must run the following command for each IP address that you want to add.
   ```
-  ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
+  ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <NLB_IP> --nlb-host <host_name>
   ```
   {: pre}
 
@@ -306,7 +306,7 @@ You can add and remove NLB IP addresses from host names that you have generated.
 
 If you later add more NLBs in other zones of your cluster to expose the same app, you can add the NLB IPs to the existing host name. Note that you must run the following command for each IP address that you want to add.
 ```
-ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <IP_address> --nlb-host <host_name>
+ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <NLB_IP> --nlb-host <host_name>
 ```
 {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-09"
+lastupdated: "2019-08-12"
 
 ---
 
@@ -221,9 +221,6 @@ lastupdated: "2019-08-09"
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Account-level](/docs/containers?topic=containers-clusters#cluster_prepare)
 * [Cluster-level](/docs/containers?topic=containers-clusters#prepare_cluster_level)
-* [Creating a free cluster](/docs/containers?topic=containers-clusters#clusters_free)
-  * [Creating a free cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui_free)
-  * [Creating a free cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_free)
 * [Creating a free cluster](/docs/containers?topic=containers-clusters#clusters_standard)
   * [Creating a standard cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
