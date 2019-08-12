@@ -47,7 +47,9 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>12 August 2019</td>
-  <td><strong>Ingress ALB changelog</strong>: Updated the ALB `nginx-ingress` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
+  <td><ul>
+  <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.103](/docs/containers?topic=containers-cs_cli_changelog).</li>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB `nginx-ingress` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul></td>
 </tr>
 <tr>
   <td>05 August 2019</td>
