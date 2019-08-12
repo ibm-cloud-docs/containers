@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-12"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -59,8 +59,14 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>515 / 335</td>
+<td>12 Aug 2019</td>
+<td>Fixes `musl libc` vulnerabilities for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>-</td>
+</tr>
+<tr>
 <td>515 / 334</td>
-<td>30 July 2019</td>
+<td>30 Jul 2019</td>
 <td><ul>
 <li>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check).</li>
 <li>Fixes GNU `patch` vulnerabilities for [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13636) and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13638).</li>
@@ -69,7 +75,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>512 / 334</td>
-<td>17 July 2019</td>
+<td>17 Jul 2019</td>
 <td><ul>
 <li>Fixes `rbash` vulnerabilities for [CVE-2016-3189 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924).</li>
 <li>Removes the following apt packages from the `nginx-ingress` image: `curl`, `bash`, `vim`, `tcpdump`, and `ca-certificates`.</li></ul></td>
@@ -77,7 +83,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>497 / 334</td>
-<td>14 July 2019</td>
+<td>14 Jul 2019</td>
 <td><ul>
 <li>Adds the [`upstream-keepalive-timeout`](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout) to set the maximum time that a keepalive connection stays open between the ALB proxy server and the upstream server for your back-end app.</li>
 <li>Adds support for the [`reuse-port`](/docs/containers?topic=containers-ingress-settings#reuse-port) directive to increase the number of ALB socket listeners from one per cluster to one per worker node.</li>
@@ -89,14 +95,14 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>477 / 331</td>
-<td>24 June 2019</td>
+<td>24 Jun 2019</td>
 <td>Fixes SQLite vulnerabilities for [CVE-2016-6153 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6153), [CVE-2017-10989 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-10989), [CVE-2017-13685 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-13685), [CVE-2017-2518 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2518), [CVE-2017-2519 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2519), [CVE-2017-2520 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2520), [CVE-2018-20346 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20346), [CVE-2018-20505 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20505), [CVE-2018-20506 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20506), [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457), [CVE-2019-9936 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9936), and [CVE-2019-9937 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9937).
 </td>
 <td>-</td>
 </tr>
 <tr>
 <td>473 / 331</td>
-<td>18 June 2019</td>
+<td>18 Jun 2019</td>
 <td><ul>
 <li>Fixes Vim vulnerabilities for [CVE-2019-5953 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5953) and [CVE-2019-12735 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12735).</li>
 <li>Updates the NGINX version of ALBs to 1.15.12.</li></ul>
@@ -105,21 +111,21 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>470 / 330</td>
-<td>07 June 2019</td>
+<td>07 Jun 2019</td>
 <td>Fixes Berkeley DB vulnerabilities for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457).
 </td>
 <td>-</td>
 </tr>
 <tr>
 <td>470 / 329</td>
-<td>06 June 2019</td>
+<td>06 Jun 2019</td>
 <td>Fixes Berkeley DB vulnerabilities for [CVE-2019-8457 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457).
 </td>
 <td>-</td>
 </tr>
 <tr>
 <td>467 / 329</td>
-<td>03 June 2019</td>
+<td>03 Jun 2019</td>
 <td>Fixes GnuTLS vulnerabilities for [CVE-2019-3829 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829), [CVE-2019-3836 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836), [CVE-2019-3893 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3893), [CVE-2018-10844 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845), [CVE-2018-10845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844), and [CVE-2018-10846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846).
 </td>
 <td>-</td>
