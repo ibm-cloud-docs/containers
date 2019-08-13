@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -30,6 +30,8 @@ subcollection: containers
 
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For more information about version 2.0 NLBs, see [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs).
 {:shortdesc}
+
+
 
 ## Prerequisites
 {: #ipvs_provision}
@@ -97,7 +99,7 @@ Next, you can follow the steps in [Setting up an NLB 2.0 in a multizone cluster]
 
 
 To set up an NLB 2.0 in a multizone cluster:
-1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This custom label identifies all pods where your app is running to include them in the load balancing.
 
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
@@ -113,7 +115,7 @@ To set up an NLB 2.0 in a multizone cluster:
           service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"
           service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"
           service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "<algorithm>"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler: "<algorithm>"
       spec:
         type: LoadBalancer
         selector:
@@ -149,7 +151,7 @@ To set up an NLB 2.0 in a multizone cluster:
         <td>Annotation to specify a version 2.0 load balancer.</td>
       </tr>
       <tr>
-        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler:</code>
+        <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler:</code>
         <td>Optional: Annotation to specify the scheduling algorithm. Accepted values are <code>"rr"</code> for Round Robin (default) or <code>"sh"</code> for Source Hashing. For more information, see [2.0: Scheduling algorithms](#scheduling).</td>
       </tr>
       <tr>
@@ -180,7 +182,7 @@ To set up an NLB 2.0 in a multizone cluster:
         annotations:
           service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "dal12"
           service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
-          service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "rr"
+          service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler: "rr"
       spec:
         type: LoadBalancer
         selector:
@@ -276,7 +278,7 @@ To create an NLB 2.0 service in a single-zone cluster:
             service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
             service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"
             service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"
-            service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "<algorithm>"
+            service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler: "<algorithm>"
         spec:
           type: LoadBalancer
           selector:
@@ -308,7 +310,7 @@ To create an NLB 2.0 service in a single-zone cluster:
           <td>Annotation to specify a load balancer 2.0.</td>
         </tr>
         <tr>
-          <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler:</code>
+          <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler:</code>
           <td>Optional: Annotation to specify a scheduling algorithm. Accepted values are <code>"rr"</code> for Round Robin (default) or <code>"sh"</code> for Source Hashing. For more information, see [2.0: Scheduling algorithms](#scheduling).</td>
         </tr>
         <tr>
@@ -389,7 +391,7 @@ Next, you can [register an NLB host name](/docs/containers?topic=containers-load
 ## Scheduling algorithms
 {: #scheduling}
 
-Scheduling algorithms determine how an NLB 2.0 assigns network connections to your app pods. As client requests arrive to your cluster, the NLB routes the request packets to worker nodes based on the scheduling algorithm. To use a scheduling algorithm, specify its Keepalived short name in the scheduler annotation of your NLB service configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-scheduler: "rr"`. Check the following lists to see which scheduling algorithms are supported in {{site.data.keyword.containerlong_notm}}. If you do not specify a scheduling algorithm, the Round Robin algorithm is used by default. For more information, see the [Keepalived documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](http://www.Keepalived.org/doc/scheduling_algorithms.html).
+Scheduling algorithms determine how an NLB 2.0 assigns network connections to your app pods. As client requests arrive to your cluster, the NLB routes the request packets to worker nodes based on the scheduling algorithm. To use a scheduling algorithm, specify its Keepalived short name in the scheduler annotation of your NLB service configuration file: `service.kubernetes.io/ibm-load-balancer-cloud-provider-ipvs-scheduler: "rr"`. Check the following lists to see which scheduling algorithms are supported in {{site.data.keyword.containerlong_notm}}. If you do not specify a scheduling algorithm, the Round Robin algorithm is used by default. For more information, see the [Keepalived documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](http://www.Keepalived.org/doc/scheduling_algorithms.html).
 {: shortdesc}
 
 ### Supported scheduling algorithms
