@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-12"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, knative
 
@@ -458,6 +458,157 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 
 With your Ingress routing rules and Knative configmaps all set up, you can create Knative services with your custom domain and TLS certificate.
 
+## Using volumes to access Kubernetes secrets and config maps 
+{: #knative-access-volume}
+
+Access Kubernetes secrets and config maps from your Knative service by mounting the secret or config map as a volume to your Knative service. 
+{: shortdesc}
+
+Knative services support the Kubernetes `volume` specification to mount an existing Kubernetes secret or configmap to your app. 
+
+Although the `volume` specification is supported, not all of the related features are supported in Knative. As of today, you can mount volumes that point to Kubernetes secrets or config maps only. To access other types of volumes, such as persisten storage claims (PVCs), you must use Kubernetes directly.
+{: note}
+
+1. Retrieve existing Kubernetes secrets or config maps in your cluster and note the name of the secret or config map that you want to mount.
+   
+   Example command for secrets: 
+   ```
+   kubectl get secrets
+   ```
+   {: pre}
+   
+   Example command for config maps: 
+   ```
+   kubectl get configmaps
+   ```
+   {: pre}
+   
+2. Reference your secret or config map as a Kubernetes volume in your Knative service. To share secrets and config maps across Knative services, mount the volume to every service that must access the data. 
+
+   Example YAML file for mounting a secret: 
+   ```
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: kn-helloworld
+     namespace: default
+   spec:
+     template:
+       spec:
+         containers:
+         - image: docker.io/ibmcom/kn-helloworld
+           volumeMounts:
+           - name: <volume_name>
+             mountPath: /<file_path>
+         volumes:
+         - name: <volume_name>
+           secret:
+             secretName: <secret_name>
+   ```
+   {: codeblock}
+   
+   Example YAML file for mounting a config map: 
+   ```
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: kn-helloworld
+     namespace: default
+   spec:
+     template:
+       spec:
+         containers:
+         - image: docker.io/ibmcom/kn-helloworld
+           volumeMounts:
+           - name: <volume_name>
+             mountPath: /<file_path>
+         volumes:
+         - name: <volume_name>
+           configMap:
+             name: <configmap_name>
+   ```
+   {: codeblock}
+   
+   <table>
+   <caption>Understanding the YAML file components</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   </thead>
+   <tbody>
+   <tr>
+     <td><code>spec.containers.volumeMounts.name</code></td>
+   <td>Enter a name for the volume that you want to mount to your pod.     </td>
+   </tr>
+   <tr>
+   <td><code>spec.containers.volumeMounts.mountPath</code></td>
+   <td>Enter the absolute path of the directory to where the volume is mounted inside the container. You use this mount directory to access the data from your secret or config map. </td>
+   </tr>
+   <tr>
+   <td><code>spec.volumes.name</code></td>
+     <td>Enter the same name for your volume that you entered in <code>spec.containers.volumeMounts.name</code>.</td>
+   </tr>
+   <tr>
+   <td><code>spec.volumes.secret.secretName</code></td>
+     <td>Enter the name of the secret that you want to mount to your Knative service.</td>
+   </tr>
+   <tr>
+   <td><code>spec.volumes.configMap.name</code></td>
+     <td>Enter the name of the config map that you want to mount to your Knative service.</td>
+   </tr>
+   </tbody>
+   </table>
+   
+3. Create the Knative service in your cluster.
+   ```
+   kubectl apply -f service.yaml
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   service.serving.knative.dev "kn-helloworld" created
+   ```
+   {: screen}
+   
+## Pulling images from a private container registry
+{: #knative-private-registry}
+
+To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registryshort_notm}}. To access other private registries, you must store the credentials in a Kubernetes secret in your cluster. 
+{: shortdesc}
+
+1. Follow the instructions to [create an image pull secret](/docs/containers?topic=containers-images#private_images) that includes the credentials to access your private container registry.
+
+2. Create a Knative service that uses the image pull secret. You can choose if you want to reference the image pull secret in your Knative service directly as shown in the following example, or to [add the image pull secret to the Kubernetes service account of the namespace](/docs/containers?topic=containers-images#store_imagePullSecret) where you want to deploy your Knative service. 
+
+   Example to reference the image pull secret in your Knative service: 
+   ```
+   apiVersion: serving.knative.dev/v1alpha1
+   kind: Service
+   metadata:
+     name: kn-helloworld
+     namespace: default
+   spec:
+     template:
+       spec:
+         containers:
+         - image: docker.io/ibmcom/kn-helloworld
+         imagePullSecrets:
+         - name: <secret_name>
+   ```
+   {: codeblock}
+   
+3. Create the Knative service in your cluster.
+   ```
+   kubectl apply -f service.yaml
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   service.serving.knative.dev "kn-helloworld" created
+   ```
+   {: screen}
+
 ## Accessing a Knative service from another Knative service
 {: #knative-access-service}
 
@@ -503,12 +654,15 @@ You can access your Knative service from another Knative service by using a REST
 Review common Knative service settings that you might find useful as you develop your serverless app.
 {: shortdesc}
 
-- [Setting minimum and maximum number of pods](#knative-min-max-pods)
+- [Setting the minimum and maximum number of pods](#knative-min-max-pods)
+- [Scaling your app based on CPU usage or number of requests](#scale-cpu-vs-number-requests)
 - [Specifying the maximum number of requests per pod](#max-request-per-pod)
+- [Changing the default container port](#knative-container-port)
+- [Changing the `scale-to-zero-grace-period`](#knative-idle-time)
 - [Creating private-only serverless apps](#knative-private-only)
 - [Forcing the Knative service to repull a container image](#knative-repull-image)
 
-### Setting minimum and maximum number of pods
+### Setting the minimum and maximum number of pods
 {: #knative-min-max-pods}
 
 You can specify the minimum and maximum number of pods that you want to run for your apps by using an annotation. For example, if you don't want Knative to scale down your app to zero instances, set the minimum number of pods to 1.
@@ -549,10 +703,47 @@ spec:
 </tbody>
 </table>
 
+### Scaling your app based on CPU usage or number of requests
+{: #scale-cpu-vs-number-requests}
+
+By default, Knative scales your app based on the average number of incoming requests per pod. If the number of concurrent requests exceeds the default setting of 100 requests per pod, Knative automatically creates another instance of your pod and starts load balancing incoming requests between your instances. This behavior is also referred to as concurrency or concurrent auto-scaling. You can change the default number of requests by [specifying the number of requests per pod](#max-request-per-pod). To instruct Knative to scale your app based on CPU usage instead, use the `autoscaling.knative.dev/metric` annotation.
+{: shortdesc}
+
+```
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: myservice
+spec:
+  template:
+    metadata: 
+       annotations:
+         autoscaling.knative.dev/metric: cpu
+    spec:
+      containers:
+      - image: <image_name>
+....
+```
+{: codeblock}
+
+<table>
+<caption>Understanding the YAML file components</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+</thead>
+<tbody>
+<tr>
+<td><code>autoscaling.knative.dev/metric</code></td>
+<td>Instruct Knative to scale your service instances based on CPU usage. By default, the CPU threshold is set to 80 percent. If your service instance exceeds this threshold, then new services instances are automatically created by Knative. If you do not set this annotation, your Knative service is scaled based on the average number of concurrent requests by default.   </td>
+</tr>
+</tbody>
+</table>
+
+
 ### Specifying the maximum number of requests per pod
 {: #max-request-per-pod}
 
-You can specify the maximum number of requests that an app instance can receive and process before Knative considers to scale up your app instances. For example, if you set the maximum number of requests to 1, then your app instance can receive one request at a time. If a second request arrives before the first one is fully processed, Knative scales up another instance.
+You can specify the maximum number of requests that an app instance can receive and process before Knative considers to scale up your app instances. For example, if you set the maximum number of requests to 1, then your app instance can receive one request at a time. If a second request arrives before the first one is fully processed, Knative scales up another instance. By default, Knative sets the maximum number of requests for a pod to 100. 
 
 ```
 apiVersion: serving.knative.dev/v1alpha1
@@ -581,6 +772,58 @@ spec:
 </tr>
 </tbody>
 </table>
+
+### Changing the default container port
+{: #knative-container-port}
+
+By default, all incoming requests to your Knative service are sent to port 8080. You can change this setting by using the `containerPort` specification. 
+{: shortdesc}
+
+```
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: ...
+spec:
+  template:
+    spec:
+      containers:
+        - image: <image_name>
+          ports:
+          - containerPort: <container_port>
+```
+{: codeblock}
+
+### Changing the `scale-to-zero-grace-period`
+{: #knative-idle-time}
+
+Change the default time that your Knative service instance does not receive any requests before Knative scales down your service to zero instances. 
+{: shortdesc}
+
+Knative uses the `config-autoscaler` config map in the `knative-serving` namespace to determine the amount of time to wait before a stable Knative service is considered `idle` and can be scaled down to zero instances. This time is also referred to as the `scale-to-zero-grace-period`.  By default, the grace period is set to 30 seconds. However, before Knative starts counting down the seconds, the service must be considered stable for 60 seconds (`stable-window`). For example, if requests are stopped to your app, your Knative service instance is still up for the next 90 seconds (30s `scale-to-zero-grace-period` + 60s `stable window`) before Knative scales down your service to zero instances. 
+
+If you do not want Knative to scale down your service to zero instances, set the [minimum number of pods](#knative-min-max-pods) to 1. 
+{: tip}
+
+1. Open the `config-autoscaler` config map in the `knative-serving` namespace of your cluster. The config map opens in the `vi` editor. 
+   ```
+   kubectl edit configmap config-autoscaler -n knative-serving
+   ```
+   {: pre}
+   
+2. Change the default value for the `scale-to-zero-grace-period`. The new value must be configured in seconds (`s`). 
+   ```
+   scale-to-zero-grace-period: "60s"
+   ```
+   {: codeblock}
+   
+3. Optional. To also change the time that your service must be considered stable, update the `stable-window` property. The new value must be configured in seconds (`s`).  
+   ```
+   stable-window: "90s"
+   ```
+   {: codeblock}
+   
+4. Save your changes to the config map and close the `vi` editor. Your changes are automatically applied to existing and new Knative services. 
 
 ### Creating private-only serverless apps
 {: #knative-private-only}
@@ -657,7 +900,6 @@ The current implementation of Knative does not provide a standard way to force y
           imagePullPolicy: Always
     ```
     {: codeblock}
-
 
 ## Related links  
 {: #knative-related-links}
