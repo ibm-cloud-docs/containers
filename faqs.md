@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-09"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, compliance, security standards, faq
 
@@ -51,6 +51,12 @@ For more information about how your cluster resources are set up, see the [Servi
 {{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering that delivers powerful tools, an intuitive user experience, and built-in security for rapid delivery of apps that you can bind to cloud services that are related to {{site.data.keyword.ibmwatson}}, AI, IoT, DevOps, security, and data analytics. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management. The service also has advanced capabilities around simplified cluster management, container security and isolation policies, the ability to design your own cluster, and integrated operational tools for consistency in deployment.
 
 For a detailed overview of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
+
+## Can I get a free cluster?
+{: #faq_benefits}
+{: faq}
+
+You can have 1 free cluster at a time in {{site.data.keyword.containerlong_notm}}, and each free cluster expires in 30 days. Free clusters have [select capabilities](/docs/containers?topic=containers-cs_ov#cluster_types), minimal 2x4 compute resources, select single zone [locations](/docs/containers?topic=containers-regions-and-zones#regions_free), and support only the Kubernetes container platform. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the {{site.data.keyword.containerlong_notm}} API, CLI, and console tools. After you are done playing around with your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](/docs/containers?topic=containers-app#copy_apps_cluster).
 
 ## What container platforms are available for my cluster?
 {: #container_platforms}
