@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -836,7 +836,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
    </tr>
    <tr>
     <td>`Unsupported`</td>
-    <td>The [Kubernetes version](/docs/containers?topic=containers-cs_versions#cs_versions) that the cluster runs is no longer supported. Your cluster's health is no longer actively monitored or reported. Additionally, you cannot add or reload worker nodes. To continue receiving important security updates and support, you must update your cluster. Review the [version update preparation actions](/docs/containers?topic=containers-cs_versions#prep-up), then [update your cluster](/docs/containers?topic=containers-update#update) to a supported Kubernetes version.<br><br><p class="note">Clusters that are three or more versions behind the oldest supported version cannot be updated. To avoid this situation, you can update the cluster to a Kubernetes version less than three ahead of the current version, such as 1.12 to 1.14. Further, if your cluster runs version 1.5, 1.7, or 1.8, then the version is too far behind to update. Instead, you must [create a cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the cluster.</p></td>
+    <td>The [Kubernetes version](/docs/containers?topic=containers-cs_versions#cs_versions) that the cluster runs is no longer supported. Your cluster's health is no longer actively monitored or reported. Additionally, you cannot add or reload worker nodes. To continue receiving important security updates and support, you must update your cluster. Review the [version update preparation actions](/docs/containers?topic=containers-cs_versions#prep-up), then [update your cluster](/docs/containers?topic=containers-update#update) to a supported Kubernetes version.</td>
    </tr>
     <tr>
        <td>`Warning`</td>
