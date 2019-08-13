@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -284,7 +284,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 1. Get the public address for your cluster.
   1. Set the ingress host.
     ```
-    export INGRESS_HOST=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+    export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
     ```
     {: pre}
 
@@ -296,7 +296,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
   3. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
      ```
-     export GATEWAY_URL=$INGRESS_HOST:$INGRESS_PORT
+     export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
      ```
      {: pre}
 
@@ -330,7 +330,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS host name.
   ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip $INGRESS_HOST
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip $INGRESS_IP
   ```
   {: pre}
 
@@ -353,7 +353,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
   ```
   {: codeblock}
 
-4. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the ALB and are forwarded to the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+4. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
 
 
 ### Understanding what happened
@@ -634,11 +634,15 @@ Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-i
 {: shortdesc}
 
 In the following steps, you set up a host name through which your users can access your app by creating the following resources:
-* A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app.
+* A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app. The gateway can optionally be configured for TLS termination.
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
 * A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
 
+### Exposing Istio-managed apps without TLS termination
+{: #no-tls}
+
 **Before you begin:**
+
 1. [Install the `istio` managed add-on](#istio_install) in a cluster.
 2. Install the `istioctl` client.
   1. Download `istioctl`.
@@ -652,8 +656,7 @@ In the following steps, you set up a host name through which your users can acce
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
-</br>
-**To publicly expose your Istio-managed apps with a host name:**
+**To publicly expose your Istio-managed apps with a host name without using TLS:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
   ```
@@ -778,11 +781,229 @@ In the following steps, you set up a host name through which your users can acce
   ```
   {: codeblock}
 
+### Exposing Istio-managed apps with TLS termination
+{: #tls}
+
+**Before you begin:**
+
+1. [Install the `istio` managed add-on](#istio_install) in a cluster.
+2. Install the `istioctl` client.
+  1. Download `istioctl`.
+    ```
+    curl -L https://git.io/getLatestIstio | sh -
+    ```
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.2.2
+    ```
+    {: pre}
+3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
+
+**To publicly expose your Istio-managed apps with a host name using TLS:**
+
+1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 443 for HTTPS. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `443`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
+  ```
+  apiVersion: networking.istio.io/v1alpha3
+  kind: Gateway
+  metadata:
+    name: my-gateway
+    namespace: <namespace>
+  spec:
+    selector:
+      istio: ingressgateway
+    servers:
+    - port:
+        name: https
+        protocol: HTTPS
+        number: 443
+        tls:
+          mode: SIMPLE
+          serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+          privateKey: /etc/istio/ingressgateway-certs/tls.key
+      hosts:
+      - "*"
+  ```
+  {: codeblock}
+
+2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
+  ```
+  kubectl apply -f my-gateway.yaml -n <namespace>
+  ```
+  {: pre}
+
+3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
+  ```
+  apiVersion: networking.istio.io/v1alpha3
+  kind: VirtualService
+  metadata:
+    name: my-virtual-service
+    namespace: <namespace>
+  spec:
+    gateways:
+    - my-gateway
+    hosts:
+    - '*'
+    http:
+    - match:
+      - uri:
+          exact: /<service_path>
+      route:
+      - destination:
+          host: <service_name>
+          port:
+            number: 443
+  ```
+  {: codeblock}
+
+  <table>
+  <thead>
+  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td><code>namespace</code></td>
+  <td>Replace <em>&lt;namespace&gt;</em> with the namespace where your Istio-managed microservices are deployed.</td>
+  </tr>
+  <tr>
+  <td><code>gateways</code></td>
+  <td>The <code>my-gateway</code> is specified so that the gateway can apply these virtual service routing rules to the <code>istio-ingressgateway</code> load balancer.<td>
+  </tr>
+  <tr>
+  <td><code>http.match.uri.exact</code></td>
+  <td>Replace <em>&lt;service_path&gt;</em> with the path that your entrypoint microservice listens on. For example, in the BookInfo app, the path is defined as <code>/productpage</code>.</td>
+  </tr>
+  <tr>
+  <td><code>http.route.destination.host</code></td>
+  <td>Replace <em>&lt;service_name&gt;</em> with the name of your entrypoint microservice. For example, in the BookInfo app, <code>productpage</code> served as the entrypoint microservice that called the other app microservices.</td>
+  </tr>
+  <tr>
+  <td><code>http.route.destination.port.number</code></td>
+  <td>If your microservice listens on a different port, replace <em>&lt;443&gt;</em> with the port.</td>
+  </tr>
+  </tbody></table>
+
+4. Apply the virtual service rules in the namespace where your Istio-managed microservice is deployed.
+  ```
+  kubectl apply -f my-virtual-service.yaml -n <namespace>
+  ```
+  {: pre}
+
+5. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
+  ```
+  kubectl get svc -n istio-system
+  ```
+  {: pre}
+
+  In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+
+6. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+  ```
+  {: pre}
+
+7. Verify that the host name is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+8. Retrieve the YAML file of the SSL secret and save it to a `mysecret.yaml` file on your local machine.
+  ```
+  kubectl get secret <secret_name> --namespace default --export -o yaml > mysecret.yaml
+  ```
+  {: pre}
+
+9. In the `mysecret.yaml` file, change the value of `name:` to `istio-ingressgateway-certs` and save the file.
+
+10. Apply the modified secret to the `istio-system` namespace in your cluster.
+  ```
+  kubectl apply -f ./mysecret.yaml -n istio-system
+  ```
+  {: pre}
+
+11. Restart the Istio ingress pods so that the pods use the secret and are configured for TLS termination.
+  ```
+  kubectl delete pod -n istio-system -l istio=ingressgateway
+  ```
+  {: pre}
+
+12. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+  ```
+  https://<host_name>/<service_path>
+  ```
+  {: codeblock}
+
+The certificates for the NLB DNS host secret expires every 90 days. The secret in the default namespace is automatically renewed by {[product_name]} 37 days before it expires, but you must manually copy the secret to the `istio-system` namespace every time that the secret is renewed. Use scripts to automate this process.
+{: note}
+
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
 
 <br />
 
+
+## Securing in-cluster traffic by enabling mTLS
+{: #mtls}
+
+Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls).
+{: shortdesc}
+
+1. Create a mesh-wide authentication policy file that is named `meshpolicy.yaml`. This policy configures all workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh.
+  ```
+  apiVersion: "authentication.istio.io/v1alpha1"
+  kind: "MeshPolicy"
+  metadata:
+    name: "default"
+  spec:
+    peers:
+    - mtls: {}
+  ```
+  {: codeblock}
+
+2. Apply the authentication policy.
+  ```
+  kubectl apply -f meshpolicy.yaml
+  ```
+  {: pre}
+
+3. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
+  ```
+  apiVersion: "networking.istio.io/v1alpha3"
+  kind: "DestinationRule"
+  metadata:
+    name: "default"
+    namespace: "istio-system"
+  spec:
+    host: "*.local"
+    trafficPolicy:
+      tls:
+        mode: ISTIO_MUTUAL
+  ```
+  {: codeblock}
+
+4. Apply the destination rule.
+  ```
+  kubectl apply -f destination-mtls.yaml
+  ```
+  {: pre}
+
+Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
+{: note}
 
 ## Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}
 {: #app-id}
@@ -795,8 +1016,105 @@ By using the App Identity and Access adapter, you can centralize all of your ide
 ## Updating the Istio add-ons
 {: #istio_update}
 
-The Istio version in the managed Istio add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+Update your Istio add-ons to the latest versions, which are tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
+
+During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterrupted.
+
+1. Check whether your add-ons are at the latest version. Any addons that are denoted with `* (<version> latest)` can be updated.
+   ```
+   ibmcloud ks cluster-addons --cluster <mycluster>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   OK
+   Name      Version
+   istio     1.2.2
+   knative   0.7.1
+   ```
+   {: screen}
+
+2. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
+   ```
+   kubectl get pod <pod_name> -o yaml -n istio-system
+   ```
+   {: pre}
+
+3. Save the Kubernetes resources that were automatically generated in the namespace of the managed add-on to a YAML file on your local machine. These resources are generated by using custom resource definitions (CRDs).
+   1. Get the CRDs for your add-on.
+      ```
+      kubectl get crd -n istio-system
+      ```
+      {: pre}
+
+   2. Save any resources created from these CRDs.
+
+5. If you enabled the `istio-sample-bookinfo` and `istio-extras` add-ons, disable them.
+   1. Disable the `istio-sample-bookinfo` add-on.
+      ```
+      ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+   2. Disable the `istio-extras` add-on.
+      ```
+      ibmcloud ks cluster-addon-disable istio-extras --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+6. Disable the Istio add-on.
+   ```
+   ibmcloud ks cluster-addon-disable istio --cluster <cluster_name_or_ID> -f
+   ```
+   {: pre}
+
+7. Before you continue to the next step, verify that add-on resources and namespaces are removed. For example, for the `istio-extras` add-on, you might verify that the `grafana`, `kiali`, and `jaeger-*` services are removed from the `istio-system` namespace.
+   ```
+   kubectl get svc -n istio-system
+   ```
+   {: pre}
+
+8. Choose the Istio version that you want to update to.
+   ```
+   ibmcloud ks addon-versions
+   ```
+   {: pre}
+
+9. Re-enable Istio. Use the `--version` flag to specify the version that you want to install. If no version is specified, the default version is installed.
+   ```
+   ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID> --version <version>
+   ```
+   {: pre}
+
+10. Apply the CRD resources that you saved in step 2.
+    ```
+    kubectl apply -f <file_name> -n <namespace>
+    ```
+    {: pre}
+
+11. If you automatically or manually injected Envoy proxy sidecars, [upgrade your sidecars ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
+
+12. Optional: Re-enable the `istio-extras` and `istio-sample-bookinfo` add-ons. Use the same version for these add-ons as for the `istio` add-on.
+    1. Enable the `istio-extras` add-on.
+       ```
+       ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID> --version <version>
+       ```
+       {: pre}
+
+    2. Enable the `istio-sample-bookinfo` add-on.
+       ```
+       ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
+       ```
+       {: pre}
+
+13. Optional: If you use TLS sections in your gateway configuration files, you must delete and recreate the gateways so that Envoy can access the secrets.
+  ```
+  kubectl delete gateway mygateway
+  kubectl apply -f mygateway.yaml
+  ```
+  {: pre}
 
 ## Uninstalling Istio
 {: #istio_uninstall}
