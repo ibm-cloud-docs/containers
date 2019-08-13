@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -44,7 +44,7 @@ When you expose an app with an NLB service, your app is automatically made avail
 ## Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs
 {: #comparison}
 
-When you create an NLB, you can choose a version 1.0 NLB, which performs basic oad balancing, or version 2.0 NLB, which performs direct server return (DSR) load balancing. Note that version 2.0 NLBs are in beta.
+When you create an NLB, you can choose a version 1.0 NLB, which performs basic load balancing, or version 2.0 NLB, which performs direct server return (DSR) load balancing. Note that version 2.0 NLBs are in beta.
 {: shortdesc}
 
 **How are versions 1.0 and 2.0 NLBs similar?**

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-13"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -35,6 +35,8 @@ To quickly get started, you can run the following command to create a load balan
 kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --name my-lb-svc
 ```
 {: pre}
+
+
 
 ## Setting up an NLB 1.0 in a multizone cluster
 {: #multi_zone_config}
