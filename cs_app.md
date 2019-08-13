@@ -1514,7 +1514,7 @@ To manage rolling updates to your apps:
 ## Copying deployments to another cluster
 {: #copy_apps_cluster}
 
-When you use a [version control system such as Git](/docs/containers?topic=containers-strategy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-app#kustomize), or continuous delivery tools such as [Razee ![External link icon](../icons/launch-glyph.svg "External link icon")](https://razee.io/) in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs {{site.data.keyword.openshifshort}}.
+When you use a [version control system such as Git](/docs/containers?topic=containers-strategy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-app#kustomize), or continuous delivery tools such as [Razee ![External link icon](../icons/launch-glyph.svg "External link icon")](https://razee.io/) in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs OpenShift.
 {: shortdesc}
 
 Before you begin, you need two clusters and the **Manager** [service role](/docs/containers?topic=containers-users#platform) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
@@ -1528,17 +1528,17 @@ Before you begin, you need two clusters and the **Manager** [service role](/docs
 
     Example output:
     ```
-    NAME                                               READY   STATUS             RESTARTS   AGE
-    pod/java-web-6955bdbcdf-l756b                      1/1     Running            0          59d
+    NAME                                   READY   STATUS             RESTARTS   AGE
+    pod/java-web-6955bdbcdf-l756b          1/1     Running            0          59d
 
-    NAME                                            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
-    service/java-web                                NodePort    172.21.xxx.xxx   <none>        8080:30889/TCP   59d
+    NAME                                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+    service/java-web                       NodePort    172.21.xxx.xxx   <none>        8080:30889/TCP   59d
 
-    NAME                                          READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/java-web                      1/1     1            1           59d
+    NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/java-web               1/1     1            1           59d
 
-    NAME                                                     DESIRED   CURRENT   READY   AGE
-    replicaset.apps/java-web-6955bdbcdf                      1         1         1       59d
+    NAME                                   DESIRED   CURRENT   READY   AGE
+    replicaset.apps/java-web-6955bdbcdf    1         1         1       59d
     ```
     {: screen}
 3.  Copy the configuration files in your cluster to a local directory. The `--export` flag removes cluster-specific information from the configuration files.

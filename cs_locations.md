@@ -191,7 +191,7 @@ Free clusters are limited to specific locations.
 * London metro in `uk-south`
 * Dallas metro in `us-south`
 
-**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a **Geography** and a **Metro** location in the geography. Your cluster is created in a data center within the region that you metro corresponds to. You cannot specify the data center. The following geographies and metros are available.
+**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a **Geography** and a **Metro** location in the geography. Your cluster is created in a data center within the region that your metro corresponds to. You cannot specify the data center. The following geographies and metros are available.
 * Dallas metro in North America
 * Frankfurt or London metros in Europe
 * Sydney metro in Asia Pacific
