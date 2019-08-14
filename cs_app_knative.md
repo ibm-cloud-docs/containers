@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-14"
 
 keywords: kubernetes, iks, knative
 
@@ -461,12 +461,10 @@ With your Ingress routing rules and Knative configmaps all set up, you can creat
 ## Using volumes to access Kubernetes secrets and config maps 
 {: #knative-access-volume}
 
-Access Kubernetes secrets and config maps from your Knative service by mounting the secret or config map as a volume to your Knative service. 
+Access Kubernetes secrets and config maps from your Knative service by mounting the secret or config map as a volume to your Knative service.  
 {: shortdesc}
 
-Knative services support the Kubernetes `volume` specification to mount an existing Kubernetes secret or configmap to your app. 
-
-Although the `volume` specification is supported, not all of the related features are supported in Knative. As of today, you can mount volumes that point to Kubernetes secrets or config maps only. To access other types of volumes, such as persisten storage claims (PVCs), you must use Kubernetes directly.
+Knative services support the Kubernetes `volume` specification to mount an existing Kubernetes secret or configmap to your app. Although the `volume` specification is supported, not all of the related features are supported in Knative. As of today, you can mount volumes that point to Kubernetes secrets or config maps only. To access other types of volumes, such as persistent volume claims (PVCs), you must use Kubernetes directly.
 {: note}
 
 1. Retrieve existing Kubernetes secrets or config maps in your cluster and note the name of the secret or config map that you want to mount.
@@ -483,7 +481,7 @@ Although the `volume` specification is supported, not all of the related feature
    ```
    {: pre}
    
-2. Reference your secret or config map as a Kubernetes volume in your Knative service. To share secrets and config maps across Knative services, mount the volume to every service that must access the data. 
+2. Reference your secret or config map as a Kubernetes volume in your Knative service. To share secrets and config maps across Knative services, mount the volume to every Knative service that must access the data. 
 
    Example YAML file for mounting a secret: 
    ```
@@ -573,7 +571,7 @@ Although the `volume` specification is supported, not all of the related feature
 ## Pulling images from a private container registry
 {: #knative-private-registry}
 
-To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registryshort_notm}}. To access other private registries, you must store the credentials in a Kubernetes secret in your cluster. 
+To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registryshort_notm}}. To access other private registries, you must store the credentials in a Kubernetes image pull secret in your cluster. 
 {: shortdesc}
 
 1. Follow the instructions to [create an image pull secret](/docs/containers?topic=containers-images#private_images) that includes the credentials to access your private container registry.
@@ -719,6 +717,7 @@ spec:
     metadata: 
        annotations:
          autoscaling.knative.dev/metric: cpu
+         autoscaling.knative.dev/target: 80
     spec:
       containers:
       - image: <image_name>
@@ -736,6 +735,10 @@ spec:
 <td><code>autoscaling.knative.dev/metric</code></td>
 <td>Instruct Knative to scale your service instances based on CPU usage. By default, the CPU threshold is set to 80 percent. If your service instance exceeds this threshold, then new services instances are automatically created by Knative. If you do not set this annotation, your Knative service is scaled based on the average number of concurrent requests by default.   </td>
 </tr>
+  <tr>
+    <td><code>autoscaling.knative.dev/target</code></td>
+    <td>Enter the CPU threshold that your app must meet before Knative scales up your service instances. By default, the threshold is set to <code>80</code>, which scales up your service instances if your app uses 80 percent of the CPU. To change the default setting, enter the CPU threshold that you want. </td>
+  </tr>
 </tbody>
 </table>
 
@@ -800,7 +803,7 @@ spec:
 Change the default time that your Knative service instance does not receive any requests before Knative scales down your service to zero instances. 
 {: shortdesc}
 
-Knative uses the `config-autoscaler` config map in the `knative-serving` namespace to determine the amount of time to wait before a stable Knative service is considered `idle` and can be scaled down to zero instances. This time is also referred to as the `scale-to-zero-grace-period`.  By default, the grace period is set to 30 seconds. However, before Knative starts counting down the seconds, the service must be considered stable for 60 seconds (`stable-window`). For example, if requests are stopped to your app, your Knative service instance is still up for the next 90 seconds (30s `scale-to-zero-grace-period` + 60s `stable window`) before Knative scales down your service to zero instances. 
+Knative uses the `config-autoscaler` config map in the `knative-serving` namespace to determine the amount of time to wait before a stable Knative service is considered `idle` and can be scaled down to zero instances. This time is also referred to as the `scale-to-zero-grace-period`.  By default, the grace period is set to 30 seconds. However, before Knative starts counting down the seconds, the service must be considered stable for 60 seconds (`stable-window`). For example, if requests are stopped to your app, your Knative service instance is still up for the next 90 seconds (60s `stable window` + 30s `scale-to-zero-grace-period`) before Knative scales down your service to zero instances. 
 
 If you do not want Knative to scale down your service to zero instances, set the [minimum number of pods](#knative-min-max-pods) to 1. 
 {: tip}
