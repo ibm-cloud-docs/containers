@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-14"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Setting up an NLB 1.0
+# Setting up basic load balancing with an NLB 1.0
 {: #loadbalancer}
 
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 1.0 NLBs, see [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning).
@@ -83,7 +83,7 @@ To set up an NLB 1.0 service in a multizone cluster:
       <tbody>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-        <td>Annotation to specify a <code>private</code> or <code>public</code> load balancer.</td>
+        <td>Annotation to specify a <code>private</code> or <code>public</code> load balancer.<p class="note>If you do not specify this annotation and your worker nodes are connected to public VLANs, a public `LoadBalancer` service is created. If your worker nodes are connected to private VLANs only, a private `LoadBalancer` service is created.</p></td>
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>

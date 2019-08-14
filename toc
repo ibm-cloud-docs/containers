@@ -83,7 +83,7 @@ IBM Cloud Kubernetes Service
         cs_nodeport.md
 
     {: .topicgroup}
-    Basic and DSR load balancing with network load balancers (NLB)
+    Exposing apps with load balancers
         cs_loadbalancer_about.md
         cs_loadbalancer.md
         cs_loadbalancer_v2.md

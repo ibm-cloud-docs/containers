@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-14"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Setting up an NLB 2.0 (beta)
+# Setting up DSR load balancing with an NLB 2.0 (beta)
 {: #loadbalancer-v2}
 
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For more information about version 2.0 NLBs, see [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs).

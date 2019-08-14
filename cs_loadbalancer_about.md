@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-14"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# About NLBs
+# About network load balancers (NLBs)
 {: #loadbalancer-about}
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
