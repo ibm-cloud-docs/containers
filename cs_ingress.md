@@ -621,7 +621,7 @@ To use a private ALB, you must first enable the private ALB. Because private VLA
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
 * Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) or to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan).
-* If you have a classic cluster with worker nodes that are connected to a private VLAN only, or if you have VPC cluster, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+* If you have a cluster with worker nodes that are connected to a private VLAN only, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 ### Step 1: Deploy apps and create app services
 {: #private_1}
@@ -705,13 +705,13 @@ When you create a standard cluster, a private ALB is created in each zone that y
 When you configure the private ALBs, you must expose your apps by using a custom domain.
 {: shortdesc}
 
-**Private VLAN-only classic clusters:**
+**Private VLAN-only clusters:**
 
 1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get --albID <private_alb_ID>` for each ALB.
 
-**Private and public VLAN classic clusters:**
+**Private and public VLAN clusters:**
 
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
