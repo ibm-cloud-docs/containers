@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-14"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, versions, update
 
@@ -51,6 +51,73 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.15 changelog
 {: #115_changelog}
 
+### Changelog for master fix pack 1.15.2_1513, released 15 August 2019
+{: #1152_1513}
+
+The following table shows the changes that are included in the master fix pack 1.15.2_1513.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.1_1511">
+<caption>Changes since version 1.15.1_1511</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container. In addition, the `calico-node` deployment in the `kube-system` namespace no longer includes the `flexvol-driver` init container.</td>
+</tr>
+<tr>
+<td>Cluster health</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was cancelled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>d91d200</td>
+<td>07c9b67</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.15.1-86</td>
+<td>v1.15.2-94</td>
+<td>Updated to support the Kubernetes 1.15.2 release.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>347</td>
+<td>348</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.15.1</td>
+<td>v1.15.2</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>146</td>
+<td>147</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-90</td>
+<td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.15.1_1511, released 5 August 2019
 {: #1151_1511}
@@ -129,6 +196,73 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 ## Version 1.14 changelog
 {: #114_changelog}
 
+### Changelog for master fix pack 1.14.5_1529, released 15 August 2019
+{: #1145_1529}
+
+The following table shows the changes that are included in the master fix pack 1.14.5_1529.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.4_1527">
+<caption>Changes since version 1.14.4_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container.</td>
+</tr>
+<tr>
+<td>Cluster health</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was cancelled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>a7e8ece</td>
+<td>07c9b67</td>
+<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>347</td>
+<td>348</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.4-139</td>
+<td>v1.14.5-160</td>
+<td>Updated to support the Kubernetes 1.14.5 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.4</td>
+<td>v1.14.5</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>146</td>
+<td>147</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+</tbody>
+</table>
   
 ### Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019
 {: #1144_1527_worker}
@@ -633,6 +767,73 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 Review the version 1.13 changelog.
 {: shortdesc}
 
+### Changelog for master fix pack 1.13.9_1532, released 15 August 2019
+{: #1139_1532}
+
+The following table shows the changes that are included in the master fix pack 1.13.9_1532.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.8_1530">
+<caption>Changes since version 1.13.8_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container.</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>a7e8ece</td>
+<td>07c9b67</td>
+<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.filestorage_full_notm}} plug-in</td>
+<td>347</td>
+<td>348</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.8-188</td>
+<td>v1.13.9-209</td>
+<td>Updated to support the Kubernetes 1.13.9 release.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.8</td>
+<td>v1.13.9</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.13</td>
+<td>1.15.4</td>
+<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>146</td>
+<td>147</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+</tbody>
+</table>
   
 ### Changelog for worker node fix pack 1.13.8_1530, released 5 August 2019
 {: #1138_1530_worker}
@@ -1570,6 +1771,67 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for master fix pack 1.12.10_1563, released 15 August 2019
+{: #11210_1563}
+
+The following table shows the changes that are included in the master fix pack 1.12.10_1563.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1561">
+<caption>Changes since version 1.12.10_1561</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Calico `calico-kube-controllers` deployment in the `kube-system` namespace sets a memory limit on the `calico-kube-controllers` container.</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>a7e8ece</td>
+<td>07c9b67</td>
+<td>Image updated for [CVE-2019-9924 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) and [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>347</td>
+<td>348</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS</td>
+<td>1.14.13</td>
+<td>1.15.4</td>
+<td>See the [Kubernetes DNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/releases/tag/1.15.4). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>Kubernetes DNS autoscaler</td>
+<td>1.2.0</td>
+<td>1.3.0</td>
+<td>See the [Kubernetes DNS autoscaler release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.3.0). Image update resolves [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>146</td>
+<td>147</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN client</td>
+<td>2.4.6-r3-IKS-13</td>
+<td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.10_1561, released 5 August 2019
 {: #11210_1561_worker}
