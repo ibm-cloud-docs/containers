@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-14"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 # Setting up basic load balancing with an NLB 1.0
 {: #loadbalancer}

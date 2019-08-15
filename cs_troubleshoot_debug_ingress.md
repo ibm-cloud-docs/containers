@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -25,7 +25,6 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
-
 
 # Debugging Ingress
 {: #cs_troubleshoot_debug_ingress}
