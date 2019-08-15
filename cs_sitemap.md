@@ -549,8 +549,8 @@ lastupdated: "2019-08-15"
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
-* [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#classic-single)
-* [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#classic-multi)
+* [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#architecture-single)
+* [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#architecture-multi)
 
 [Setting up Ingress](/docs/containers?topic=containers-ingress)
 * [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)
