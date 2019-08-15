@@ -48,7 +48,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <tr>
   <td>15 August 2019</td>
   <td><ul>
-  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1513](/docs/containers?topic=containers-changelog#1152_1513_worker), [1.14.5_1529](/docs/containers?topic=containers-changelog#1145_1529_worker), [1.13.9_1532](/docs/containers?topic=containers-changelog#1139_1532_worker), and [1.12.10_1563](/docs/containers?topic=containers-changelog#11210_1563) master fix pack updates.</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1513](/docs/containers?topic=containers-changelog#1152_1513), [1.14.5_1529](/docs/containers?topic=containers-changelog#1145_1529), [1.13.9_1532](/docs/containers?topic=containers-changelog#1139_1532), and [1.12.10_1563](/docs/containers?topic=containers-changelog#11210_1563) master fix pack updates.</li>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelogs added for master fix pack [3.11.135_1520_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1520_master).</li></ul></td>
 </tr>
 <tr>
