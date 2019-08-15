@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-07"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 
 # Setting up Ingress
@@ -119,16 +118,13 @@ spec:
 Before you get started with Ingress, review the following prerequisites.
 {:shortdesc}
 
-**Prerequisites for all Ingress configurations:**
-- Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
 - Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Manager** service role in all namespaces
-
-**Prerequisites for using Ingress in multizone clusters**:
- - If you restrict network traffic to [edge worker nodes](/docs/containers?topic=containers-edge), at least two edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all the zones in your cluster and has at least two worker nodes per zone.
- - In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
- - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
+- Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
+- If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
+- If you restrict network traffic to [edge worker nodes](/docs/containers?topic=containers-edge), at least two edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all the zones in your cluster and has at least two worker nodes per zone.
+- In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 <br />
 
@@ -275,9 +271,7 @@ Ingress Secret:         <tls_secret>
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
       * If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Configure your domain to route incoming network traffic to the IBM-provided ALB. Choose between these options:
-    -   Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
-    -   Map your custom domain to the portable public IP address of the IBM-provided ALB by adding the IP address as an A record. To find the portable public IP address of the ALB, run `ibmcloud ks alb-get --albID  <public_alb_ID>`.
+2.  Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
 
 ### Step 3: Select TLS termination
 {: #public_inside_3}
@@ -627,7 +621,7 @@ To use a private ALB, you must first enable the private ALB. Because private VLA
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
 * Review the options for planning private access to apps when worker nodes are connected to [a public and a private VLAN](/docs/containers?topic=containers-cs_network_planning#private_both_vlans) or to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan).
-    * If your worker nodes are connected to a private VLAN only, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+* If you have a cluster with worker nodes that are connected to a private VLAN only, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 ### Step 1: Deploy apps and create app services
 {: #private_1}
@@ -682,16 +676,10 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 ### Step 2: Enable the default private ALB
 {: #private_ingress}
 
-When you create a standard cluster, an IBM-provided private application load balancer (ALB) is created in each zone that you have worker nodes and assigned a portable private IP address and a private route. However, the default private ALB in each zone is not automatically enabled. To use the default private ALB to load balance private network traffic to your apps, you must first enable it with either the IBM-provided portable private IP address or your own portable private IP address.
+When you create a standard cluster, a private ALB is created in each zone that you have worker nodes and assigned a private IP address. However, the default private ALB in each zone is not automatically enabled. You must first enable each private ALB.
 {:shortdesc}
 
-If you used the `--no-subnet` flag when you created the cluster, then you must add a portable private subnet or a user-managed subnet before you can enable the private ALB. For more information, see [Requesting more subnets for your cluster](/docs/containers?topic=containers-subnets#request).
-{: note}
-
-**To enable a default private ALB by using the pre-assigned, IBM-provided portable private IP address:**
-
-1. Get the ID of the default private ALB that you want to enable. Replace <em>&lt;cluster_name&gt;</em> with the name of the cluster where the app that you want to expose is deployed.
-
+1. Get the private ALB IDs for your cluster.
     ```
     ibmcloud ks albs --cluster <cluster_name>
     ```
@@ -704,81 +692,23 @@ If you used the `--no-subnet` flag when you created the cluster, then you must a
     public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   2234945
     ```
     {: screen}
-    In multizone clusters, the numbered suffix on the ALB ID indicates the order that the ALB was added.
-    * For example, the `-alb1` suffix on the ALB `private-cr6d779503319d419aa3b4ab171d12c3b8-alb1` indicates that it was the first default private ALB that was created. It exists in the zone where you created the cluster. In the previous example, the cluster was created in `dal10`.
-    * The `-alb2` suffix on the ALB `private-crb2f60e9735254ac8b20b9c1e38b649a5-alb2` indicates that it was the second default private ALB that was created. It exists in the second zone that you added to your cluster. In the previous example, the second zone is `dal12`.
 
-2. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB from the output in the previous step.
-
+2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--user-ip` flag.
    ```
-   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable
+   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable [--user-ip <user_IP>]
    ```
    {: pre}
-
-3. **Multizone clusters**: For high availability, repeat the previous steps for the private ALB in each zone.
-
-<br>
-**To enable the private ALB by using your own portable private IP address:**
-
-1. List the available ALBs in your cluster. Note the ID of a private ALB and the zone that the ALB is in.
-
- ```
- ibmcloud ks albs --cluster <cluster_name>
- ```
- {: pre}
-
- The field **Status** for the private ALB is _disabled_.
- ```
- ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
- private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
- public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   2234945
- ```
- {: screen}
-
- 2. Configure the user-managed subnet of your chosen IP address to route traffic on the private VLAN in that zone.
-
-   ```
-   ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
-   ```
-   {: pre}
-
-   <table>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the command components</th>
-   </thead>
-   <tbody>
-   <tr>
-   <td><code>&lt;cluster_name&gt;</code></td>
-   <td>The name or ID of the cluster where the app that you want to expose is deployed.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;subnet_CIDR&gt;</code></td>
-   <td>The CIDR of your user-managed subnet.</td>
-   </tr>
-   <tr>
-   <td><code>&lt;private_VLAN_ID&gt;</code></td>
-   <td>The ID of the private VLAN. This value is required. The ID must be for a private VLAN in the same zone as the private ALB. To see private VLANs for this zone that worker nodes are on, run `ibmcloud ks workers --cluster <cluster_name_or_ID>` and note the ID of a worker node in this zone. Using the worker node ID, run `ibmcloud ks worker-get --worker <worker_id> --cluster <cluster_name_or_id>`. In the output, note the **Private VLAN** ID.</td>
-   </tr>
-   </tbody></table>
-
-3. Enable the private ALB. Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for private ALB and <em>&lt;user_IP&gt;</em> with the IP address from your user-managed subnet that you want to use.
-   ```
-   ibmcloud ks alb-configure --albID <private_ALB_ID> --enable --user-ip <user_IP>
-   ```
-   {: pre}
-
-4. **Multizone clusters**: For high availability, repeat the previous steps for the private ALB in each zone.
 
 ### Step 3: Map your custom domain
 {: #private_3}
 
-Private VLAN-only clusters are not assigned an IBM-provided Ingress subdomain. When you configure the private ALB, expose your apps by using a custom domain.
+When you configure the private ALBs, you must expose your apps by using a custom domain.
 {: shortdesc}
 
 **Private VLAN-only clusters:**
 
-1. If your worker nodes are connected to a private VLAN only, you must configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
-2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as *.custom_domain.net`.
+1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get --albID <private_alb_ID>` for each ALB.
 
 **Private and public VLAN clusters:**

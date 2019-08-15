@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-12"
+lastupdated: "2019-08-15"
 
 ---
 
@@ -18,8 +18,6 @@ lastupdated: "2019-08-12"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Site map
 {: #cs_sitemap}
@@ -551,7 +549,6 @@ lastupdated: "2019-08-12"
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
-* [How are IPs assigned to Ingress ALBs?](/docs/containers?topic=containers-ingress-about#ips)
 * [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#architecture-single)
 * [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#architecture-multi)
 

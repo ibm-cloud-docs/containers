@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-02"
+lastupdated: "2019-08-14"
 
 keywords: kubernetes, iks
 
@@ -736,7 +736,7 @@ Change the name of the image:
     {: pre}
 
     Depending on your operating system, either a vi editor opens or a text editor opens.
-2.  Change the name of the image to the `ibmliberty` image.
+2.  Change the name of the image to `ibmliberty`.
     ```
     spec:
           containers:

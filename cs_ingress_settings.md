@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 
 # Modifying default Ingress behavior
@@ -91,6 +90,8 @@ For more information about configmap resources, see the [Kubernetes documentatio
 
 ## Preserving the source IP address
 {: #preserve_source_ip}
+
+
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 {: shortdesc}

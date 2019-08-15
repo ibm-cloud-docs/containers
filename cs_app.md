@@ -1510,3 +1510,59 @@ To manage rolling updates to your apps:
 
 <br />
 
+
+## Copying deployments to another cluster
+{: #copy_apps_cluster}
+
+When you use a [version control system such as Git](/docs/containers?topic=containers-strategy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-app#kustomize), or continuous delivery tools such as [Razee ![External link icon](../icons/launch-glyph.svg "External link icon")](https://razee.io/) in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs OpenShift.
+{: shortdesc}
+
+Before you begin, you need two clusters and the **Manager** [service role](/docs/containers?topic=containers-users#platform) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
+
+1.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy resources from, such as a free cluster.
+2.  List all the configuration files in your cluster and verify that you want to copy these configurations.
+    ```
+    kubectl get all
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME                                   READY   STATUS             RESTARTS   AGE
+    pod/java-web-6955bdbcdf-l756b          1/1     Running            0          59d
+
+    NAME                                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+    service/java-web                       NodePort    172.21.xxx.xxx   <none>        8080:30889/TCP   59d
+
+    NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+    deployment.apps/java-web               1/1     1            1           59d
+
+    NAME                                   DESIRED   CURRENT   READY   AGE
+    replicaset.apps/java-web-6955bdbcdf    1         1         1       59d
+    ```
+    {: screen}
+3.  Copy the configuration files in your cluster to a local directory. The `--export` flag removes cluster-specific information from the configuration files.
+    ```
+    kubectl get all -o yaml --export > myconfigs.yaml
+    ```
+    {: pre}
+4.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resoruces to, such as a production-ready standard cluster.
+5.  Optional: If your free cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
+6.  Deploy the copied configuration files to your cluster. If a configuration file has specific information that cannot be applied, you might need to update the configuration file and reapply.
+    ```
+    kubectl apply -f myconfigs.yaml
+    ```
+    {: pre}
+    Example output:
+    ```
+    pod/java-web-6955bdbcdf-l756b created
+    service/java-web created
+    deployment.apps/java-web created
+    replicaset.apps/java-web-6955bdbcdf created
+    ```
+    {: screen}
+7.  Verify that your configuration files are applied.
+    ```
+    kubectl get all
+    ```
+    {: pre}

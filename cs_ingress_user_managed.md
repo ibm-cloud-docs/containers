@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-08"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers
 
@@ -23,12 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Bringing your own Ingress controller
 {: #ingress-user_managed}
 
 Bring your own Ingress controller to run on {{site.data.keyword.cloud_notm}} and leverage an IBM-provided host name and TLS certificate.
 {: shortdesc}
+
+
 
 The IBM-provided Ingress application load balancers (ALBs) are based on NGINX controllers that you can configure by using [custom {{site.data.keyword.cloud_notm}} annotations](/docs/containers?topic=containers-ingress_annotation). Depending on what your app requires, you might want to configure your own custom Ingress controller. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, updating the controller, and any security-related updates to keep your Ingress controller free from vulnerabilities. **Note**: Bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
 
@@ -41,8 +42,6 @@ You have 2 options for bringing your own Ingress controller:
 
 Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a host name for the NLB IP address.
 {: shortdesc}
-
-
 
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/ingress-nginx/tree/master/deploy/cloud-generic). If you use the community controller, edit the `kustomization.yaml` file by following these steps.
   1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.

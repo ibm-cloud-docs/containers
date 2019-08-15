@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-15"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -23,8 +23,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Setting up an NLB 1.0
+# Setting up basic load balancing with an NLB 1.0
 {: #loadbalancer}
 
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 1.0 NLBs, see [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning).
@@ -35,6 +34,8 @@ To quickly get started, you can run the following command to create a load balan
 kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --name my-lb-svc
 ```
 {: pre}
+
+
 
 ## Setting up an NLB 1.0 in a multizone cluster
 {: #multi_zone_config}
@@ -47,7 +48,7 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 
 
 To set up an NLB 1.0 service in a multizone cluster:
-1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label in the metadata section of your deployment configuration file. This label is needed to identify all of the pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label in the metadata section of your deployment configuration file. This custom label identifies all pods where your app is running to include them in the load balancing.
 
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
@@ -81,7 +82,7 @@ To set up an NLB 1.0 service in a multizone cluster:
       <tbody>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type:</code>
-        <td>Annotation to specify a <code>private</code> or <code>public</code> load balancer.</td>
+        <td>Annotation to specify a <code>private</code> or <code>public</code> load balancer.<p class="note>If you do not specify this annotation and your worker nodes are connected to public VLANs, a public `LoadBalancer` service is created. If your worker nodes are connected to private VLANs only, a private `LoadBalancer` service is created.</p></td>
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
