@@ -34,7 +34,6 @@ subcollection: containers
         flex-wrap: wrap !important;
     }
     .icon {
-        margin-top: 20px; 
         width: 1rem; 
         height: 1rem; 
     }
