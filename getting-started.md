@@ -37,7 +37,6 @@ subcollection: containers
         margin-top: 20px; 
         width: 2rem; 
         height: 2rem; 
-        margin-right: 1rem;
     }
     .bx--tile-content {
         box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
@@ -52,7 +51,6 @@ subcollection: containers
         padding: 10px !important;
         border: 1px #dfe6eb solid !important;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-        height: 400px;
     }
     @media screen and (min-width: 960px) {
         .solutionBox {
