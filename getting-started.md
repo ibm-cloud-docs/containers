@@ -33,11 +33,13 @@ subcollection: containers
         flex-direction: row !important;
         flex-wrap: wrap !important;
     }
-    .solutionBoxContainer {}
-    .solutionBoxContainer a {
-        text-decoration: none !important;
-        border: none !important;
+    .icon {
+        margin-top: 20px; 
+        width: 2rem; 
+        height: 2rem; 
+        margin-right: 1rem;
     }
+    .solutionBoxContainer {}
     .solutionBox {
         display: inline-block !important;
         width: 600px !important;
