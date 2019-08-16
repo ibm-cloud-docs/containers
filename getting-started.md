@@ -47,11 +47,12 @@ subcollection: containers
     .solutionBoxContainer {}
     .solutionBox {
         display: inline-block !important;
-        width: 600px !important;
+        width: 800px !important;
         margin: 0 10px 20px 0 !important;
         padding: 10px !important;
         border: 1px #dfe6eb solid !important;
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
+        height: 400px;
     }
     @media screen and (min-width: 960px) {
         .solutionBox {
