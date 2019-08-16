@@ -39,6 +39,11 @@ subcollection: containers
         height: 2rem; 
         margin-right: 1rem;
     }
+    .bx--tile-content {
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+        background-color: #fff;
+        border: 1px solid #dfe3e6;
+    }
     .solutionBoxContainer {}
     .solutionBox {
         display: inline-block !important;
