@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-15"
+lastupdated: "2019-08-16"
 
 ---
 
@@ -640,7 +640,6 @@ lastupdated: "2019-08-15"
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
 * [Expose your Ingress controller by creating an NLB and a host name](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
-* [Expose your Ingress controller by using the existing load balancer and Ingress subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_alb)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

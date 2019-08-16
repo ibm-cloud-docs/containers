@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-15"
+lastupdated: "2019-08-16"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -123,17 +123,18 @@ Start by checking for error messages in the Ingress resource deployment events a
     2. Make sure that all pods are running by checking the **STATUS** column.
 
     3. If a pod is not `Running`, you can disable and re-enable the ALB. In the following commands, replace `<ALB_ID>` with the ID of the pod's ALB. For example, if the pod that is not running has the name `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, the ALB ID is `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
-        ```
-        ibmcloud ks alb-configure --albID <ALB_ID> --disable
-        ```
-        {: pre}
 
-        ```
-        ibmcloud ks alb-configure --albID <ALB_ID> --enable
-        ```
-        {: pre}
-        When the pod restarts, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes by default.
-        {: note}
+      When the pod restarts, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes by default.
+      {: note}
+      ```
+      ibmcloud ks alb-configure --albID <ALB_ID> --disable
+      ```
+      {: pre}
+
+      ```
+      ibmcloud ks alb-configure --albID <ALB_ID> --enable
+      ```
+      {: pre}
 
 3. Check the logs for your ALB.
     1.  Get the IDs of the ALB pods that are running in your cluster.
