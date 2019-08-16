@@ -76,29 +76,6 @@ subcollection: containers
         display: flex !important;
         flex-direction: column !important;
     }
-    .descriptionContainer {
-    }
-    .descriptionContainer p {
-        margin: 2px !important;
-        overflow: hidden !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 4 !important;
-        -webkit-box-orient: vertical !important;
-        font-size: 12px !important;
-        font-weight: 400 !important;
-        line-height: 1.5 !important;
-        letter-spacing: 0 !important;
-        max-height: 70px !important;
-    }
-    .architectureDiagramContainer {
-        flex-grow: 1 !important;
-        min-width: 200px !important;
-        padding: 0 10px !important;
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-    }
 -->
 </style>
 
