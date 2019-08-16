@@ -47,7 +47,7 @@ subcollection: containers
     .solutionBoxContainer {}
     .solutionBox {
         display: inline-block !important;
-        width: 800px !important;
+        width: 100% !important;
         margin: 0 10px 20px 0 !important;
         padding: 10px !important;
         border: 1px #dfe6eb solid !important;
