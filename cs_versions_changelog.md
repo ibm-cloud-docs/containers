@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-16"
+lastupdated: "2019-08-17"
 
 keywords: kubernetes, iks, versions, update
 
@@ -48,6 +48,32 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+### Changelog for master fix pack 1.15.2_1514, released 17 August 2019
+{: #1152_1514}
+
+The following table shows the changes that are included in the master fix pack 1.15.2_1514.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.1_1513">
+<caption>Changes since version 1.15.1_1513</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key Management Service provider</td>
+<td>167</td>
+<td>207</td>
+<td>Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.15.2_1513, released 15 August 2019
 {: #1152_1513}
@@ -205,6 +231,32 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for master fix pack 1.14.5_1530, released 17 August 2019
+{: #1145_1530}
+
+The following table shows the changes that are included in the master fix pack 1.14.5_1530.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.5_1529">
+<caption>Changes since version 1.14.5_1529</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key Management Service provider</td>
+<td>167</td>
+<td>207</td>
+<td>Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.14.5_1529, released 15 August 2019
 {: #1145_1529}
@@ -776,6 +828,32 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.13.9_1533, released 17 August 2019
+{: #1139_1533}
+
+The following table shows the changes that are included in the master fix pack 1.13.9_1533.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.9_1532">
+<caption>Changes since version 1.13.9_1532</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key Management Service provider</td>
+<td>167</td>
+<td>207</td>
+<td>Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.13.9_1532, released 15 August 2019
 {: #1139_1532}
@@ -1780,6 +1858,32 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.12.10_1564, released 17 August 2019
+{: #11210_1564}
+
+The following table shows the changes that are included in the master fix pack 1.12.10_1564.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1563">
+<caption>Changes since version 1.12.10_1563</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Key Management Service provider</td>
+<td>167</td>
+<td>207</td>
+<td>Fixed an issue that causes the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) to fail to manage Kubernetes secrets.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.12.10_1563, released 15 August 2019
 {: #11210_1563}
@@ -4351,7 +4455,7 @@ Also, now when you update the cluster master, the default IBM file storage class
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5442,7 +5546,7 @@ The following table shows the changes that are included in patch 1.10.8_1524.
 <td>Key Management Service Provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Added the ability to use the Kubernetes key management service (KMS) provider in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
+<td>Added the ability to use the Kubernetes [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in the cluster, to support {{site.data.keyword.keymanagementservicefull}}. When you [enable {{site.data.keyword.keymanagementserviceshort}} in your cluster](/docs/containers?topic=containers-encryption#keyprotect), all your Kubernetes secrets are encrypted.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
