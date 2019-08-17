@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-16"
+lastupdated: "2019-08-17"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, upgrade, version
 
 subcollection: containers
 
