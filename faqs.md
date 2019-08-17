@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-16"
 
 keywords: kubernetes, iks, compliance, security standards, faq
 
@@ -150,9 +150,9 @@ For more information about available bare metal flavors and how bare metal is di
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
 **Supported Kubernetes versions**:
-*   Latest: 1.15.1
-*   Default: 1.13.8
-*   Other: 1.14.4
+*   Latest: 1.15.2
+*   Default: 1.13.9
+*   Other: 1.14.5
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -249,7 +249,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
     <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
   <dt id="roks_charges">Red Hat OpenShift on IBM Cloud</dt>
-    <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. The OpenShift license is for every two cores of the worker node flavor. If you delete your worker node before the end of the month, your monthly license is available for other worker nodes in the worker pool to use. For more information about OpenShift clusters, see [Creating a Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial).</dd>
+    <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). You must also have an OpenShift license, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. For more information, see [What am I charged for when I use an OpenShift cluster?](/docs/openshift?topic=openshift-faqs#openshift_charges).</dd>
 </dl>
 <br><br>
 

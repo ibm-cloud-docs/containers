@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-15"
+lastupdated: "2019-08-17"
 
 ---
 
@@ -319,7 +319,6 @@ lastupdated: "2019-08-15"
 * [Forwarding Kubernetes API audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}}](/docs/containers?topic=containers-health#api_forward)
 * [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
-  * [Other health monitoring tools](/docs/containers?topic=containers-health#health_tools)
 * [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Configuring health monitoring for worker nodes with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 
@@ -640,7 +639,6 @@ lastupdated: "2019-08-15"
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
 * [Expose your Ingress controller by creating an NLB and a host name](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
-* [Expose your Ingress controller by using the existing load balancer and Ingress subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_alb)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}
@@ -798,9 +796,7 @@ lastupdated: "2019-08-15"
 {: #sitemap-at}
 
 [Activity Tracker events](/docs/containers?topic=containers-at_events#at_events)
-* [Finding information for events](/docs/containers?topic=containers-at_events#kube-find)
 * [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
-* [Tracking Kubernetes audit events](/docs/containers?topic=containers-at_events#kube-events)
 
 ## Deprecated: Dedicated cloud
 {: #sitemap-dedicated}

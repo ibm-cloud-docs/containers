@@ -119,20 +119,10 @@ IBM Cloud Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    cs_at_events.md
-    cs_dedicated.md
-    cs_hybrid.md
-
     {: .topicgroup}
     CLI plug-in reference
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
-
-    {: .topicgroup}
-    Version history
-        cs_versions.md
-        cs_versions_changelog.md
-        cs_versions_addons.md
 
     {: .topicgroup}
     API reference
@@ -142,8 +132,17 @@ IBM Cloud Kubernetes Service
         [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
         [Community Kubernetes API](https://kubernetes.io/docs/reference/)
 
+    {: .topicgroup}
+    Version history
+        cs_versions.md
+        cs_versions_changelog.md
+        cs_versions_addons.md
+
     cs_locations.md
+    cs_hybrid.md
+    cs_dedicated.md
     cs_integrations_overview.md
+    cs_at_events.md
     cs_access_reference.md
     {: .navgroup-end}
 
