@@ -150,7 +150,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 ### Deploying an app to your classic cluster
 {: #classic-deploy-app}
 
-Deploy your first `nginx` app in your classic cluster by using the Kubernetes dashboard. The Kubernetes dashboard is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces. 
+Deploy your first `nginx` app in your classic cluster by using the Kubernetes dashboard. The [Kubernetes dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard) is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces. 
 {: shortdesc}
 
 1. From the cluster details page, click **Kubernetes dashboard**. 
