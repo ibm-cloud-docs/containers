@@ -89,11 +89,11 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
 ## Overview
 {: #gs-overview}
 
-Learn more about {{site.data.keyword.containerlong}}, its capabilities and the options that are available to you to customize the cluster to your needs. 
+Learn more about , its capabilities and the options that are available to you to customize the cluster to your needs. 
 {: shortdesc}
 
-**What is {{site.data.keyword.containerlong}} and how does it work?** </br>
-{{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud. 
+**What is {{site.data.keyword.containerlong_notm}} and how does it work?** </br>
+{{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud. 
 
 **What is Kubernetes?** </br>
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers management tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 
