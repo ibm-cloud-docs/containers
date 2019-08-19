@@ -11,6 +11,7 @@ IBM Cloud Kubernetes Service
     {: .topicgroup}
     About
         cs_why.md
+        cs_providers.md
         cs_tech.md
 
     {: .topicgroup}
@@ -33,6 +34,7 @@ IBM Cloud Kubernetes Service
     Tutorials
         cs_tutorials_ov.md
         cs_tutorials.md
+        cs_tutorial_vpc.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
@@ -41,7 +43,10 @@ IBM Cloud Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
-    cs_cli_install.md
+    {: .topicgroup}
+    Installing the CLI and API
+        cs_cli_install.md
+        cs_api_install.md
 
     {: .topicgroup}
     Setting up clusters
@@ -84,6 +89,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Exposing apps with load balancers
+        vpc_lbaas.md
         cs_loadbalancer_about.md
         cs_loadbalancer.md
         cs_loadbalancer_v2.md
@@ -104,6 +110,7 @@ IBM Cloud Kubernetes Service
         cs_storage_basics.md
         cs_storage_file.md
         cs_storage_block.md
+        cs_storage_block_vpc.md
         cs_storage_cos.md
         cs_storage_portworx.md
         cs_storage_utilities.md
@@ -157,6 +164,7 @@ IBM Cloud Kubernetes Service
         cs_troubleshoot_health.md
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_network.md
+        vpc_ts.md
 
     release_notes.md
     cs_sitemap.md

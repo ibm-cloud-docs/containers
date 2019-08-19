@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-08"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, coredns, kubedns
 
@@ -303,7 +303,7 @@ Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
 Set up the `NodeLocal` DNS caching agent on select worker nodes for improved cluster DNS performance in your {{site.data.keyword.containerlong_notm}} cluster. For more information, see the [Kubernetes docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/).
 {: shortdesc}
 
-`NodeLocal` DNS cache is a beta feature that is subject to change, available for clusters that run Kubernetes version 1.15 or later. 
+`NodeLocal` DNS cache is a beta feature that is subject to change, available for clusters that run Kubernetes version 1.15 or later. Further, you can enable this beta feature on only classic clusters, not on VPC clusters, because the worker nodes must be reloaded.
 {: preview}
 
 By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy) are sent to the cluster DNS service. If you enable this beta feature on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10.
@@ -326,7 +326,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
 
 <br>
 **To enable NodeLocal DNS cache**:
-     
+
 1. List the nodes in your cluster. The `NodeLocal` DNS caching agent pods are part of a daemon set that run on each node.
    ```
    kubectl get nodes
@@ -336,13 +336,13 @@ The following steps update DNS pods that run on particular worker nodes. You can
    ```
    kubectl label node <node_name> --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
    ```
-   {: pre} 
+   {: pre}
    1. Verify that the node has the label by checking that the `NODE-LOCAL-DNS-ENABLED` field is set to `true`.
       ```
       kubectl get nodes -L "ibm-cloud.kubernetes.io/node-local-dns-enabled"
       ```
       {: pre}
-    
+
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
@@ -353,7 +353,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       ```
       kubectl get pods -n kube-system -l k8s-app=node-local-dns -o wide
       ```
-      {: pre} 
+      {: pre}
 
       Example output:
       ```
@@ -362,7 +362,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       ```
       {: screen}
 3. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
-   ``` 
+   ```
    kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
    ```
    {: pre}
@@ -392,7 +392,7 @@ You can disable the beta feature for one or more worker nodes.
 {: shortdesc}
 
 1. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
-   ``` 
+   ```
    kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
    ```
    {: pre}
@@ -406,7 +406,7 @@ You can disable the beta feature for one or more worker nodes.
       kubectl get nodes -L "ibm-cloud.kubernetes.io/node-local-dns-enabled"
       ```
       {: pre}
-       
+
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
@@ -418,7 +418,7 @@ You can disable the beta feature for one or more worker nodes.
       kubectl get pods -n kube-system -l k8s-app=node-local-dns -o wide
       ```
       {: pre}
-       
+
       Example output:
       ```
       No resources found.

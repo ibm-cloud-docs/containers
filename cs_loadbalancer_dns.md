@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-12"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
 
@@ -24,12 +24,15 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Registering an NLB host name
+# Classic: Registering an NLB host name
 {: #loadbalancer_hostname}
 
 After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating host names. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each host name.
 {: shortdesc}
 
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> DNS entries can be created for network load balancers (NLBs) in classic clusters only, and cannot be created for Kubernetes `LoadBalancers` in VPC on Classic clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+{: note}
 
 
 <dl>
@@ -57,7 +60,8 @@ Expose your app to the public internet by creating a host name for the network l
 
 Before you begin:
 * Review the following considerations and limitations.
-  * You can create host names for public version 1.0 and 2.0 NLBs.
+  * You can create host names for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC on Classic clusters
+  .
   * You currently cannot create host names for private NLBs.
   * You can register up to 128 host names. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 * [Create an NLB for your app in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config) or [create NLBs in each zone of a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
