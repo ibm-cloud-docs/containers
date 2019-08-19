@@ -89,7 +89,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
 ## Overview
 {: #gs-overview}
 
-Learn more about , its capabilities and the options that are available to you to customize the cluster to your needs. 
+Learn more about {{site.data.keyword.containerlong}}, its capabilities and the options that are available to you to customize the cluster to your needs. 
 {: shortdesc}
 
 **What is {{site.data.keyword.containerlong_notm}} and how does it work?** </br>
