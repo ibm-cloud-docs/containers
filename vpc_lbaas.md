@@ -78,7 +78,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
     {: screen}
   3. For any other security groups for your VPC, add a rule to allow inbound TCP traffic on ports 30000-32767 to the private IP addresses of your worker nodes. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc-on-classic?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
     ```
-    ibmcloud is security-group-rule-add <security_group_ID> --remote <worker_node_private_IP> inbound tcp --port-min 30000 --port-max 32767
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --remote <worker_node_private_IP> --port-min 30000 --port-max 32767
     ```
     {: pre}
 
