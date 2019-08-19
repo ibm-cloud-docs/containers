@@ -136,9 +136,13 @@ Create a free classic cluster with one worker node and deploy your first app to 
 Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. 
 {: shortdesc}
 
-Before you begin, get the [{{site.data.keyword.cloud_notm}} account](https://cloud.ibm.com/registration) type that is right for you:
-* **Billable (Pay-As-You-Go or Subscription)**: You can create a free cluster. You can also provision IBM Cloud infrastructure resources to create and use in standard clusters.
-* **Lite**: You cannot create a free or standard cluster. [Upgrade your account](/docs/account?topic=account-accountfaqs#changeacct) to a billable account.
+Before you begin: 
+- Make sure that you have a [billable Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](https://cloud.ibm.com/registration). In this getting started tutorial you create a free classic cluster with one worker node. Although this cluster does not incur any costs, you must have a billable {{site.data.keyword.cloud_notm}} account to create the cluster. 
+- Make sure that you are assigned the following permissions in {{site.data.keyword.cloud_notm}} Identity and Access Management. If you are the {{site.data.keyword.cloud_notm}} account owner, you already have all permissions by default. 
+  * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}} at the account level.
+  * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+  * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry at the account level.
+  *  **Super User** role or the [minimum required permissions](/docs/containers?topic=containers-access_reference#infra) for classic infrastructure.
 
 To create a free classic cluster:
 
