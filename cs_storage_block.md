@@ -1251,7 +1251,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: pre}
 
-4. Verify that the volume expansion is requested. The volume expansion is successfully requested when you see a `FileSystemResizePending` message in the **Conditions** section of your CLI output. 
+4. Verify that the volume expansion is requested. The volume expansion is successfully requested when you see a `FileSystemResizePending` message in the **Conditions** section of your CLI output.
    ```
    kubectl describe pvc <pvc_name>
    ```
@@ -1267,7 +1267,7 @@ For questions about billing and to find the steps for how to use the {{site.data
    ```
    {: screen}
 
-5. List all the pods that mount the PVC. If your PVC is mounted by a pod, the volume expansion is automatically processed. If your PVC is not mounted by a pod, you must mount the PVC to a pod so that the volume expansion can be processed. 
+5. List all the pods that mount the PVC. If your PVC is mounted by a pod, the volume expansion is automatically processed. If your PVC is not mounted by a pod, you must mount the PVC to a pod so that the volume expansion can be processed.
    ```
    kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
    ```
@@ -1275,7 +1275,7 @@ For questions about billing and to find the steps for how to use the {{site.data
 
    Mounted pods are returned in the format: `<pod_name>: <pvc_name>`.
 
-6. If your PVC is not mounted by a pod, [create a pod or deployment and mount the PVC](/docs/containers?topic=containers-block_storage#add_block). If your PVC is mounted by a pod, continue with the next step. 
+6. If your PVC is not mounted by a pod, [create a pod or deployment and mount the PVC](/docs/containers?topic=containers-block_storage#add_block). If your PVC is mounted by a pod, continue with the next step.
 
 7. Monitor the volume expansion status. The volume expansion is complete when you see the `"message":"Success"` message in your CLI output.
    ```
