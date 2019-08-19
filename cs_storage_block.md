@@ -16,7 +16,7 @@ subcollection: containers
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}rwo
+{:tip: .tip}
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
@@ -1706,6 +1706,7 @@ The following examples create a storage class that provisions block storage with
   {: codeblock}
 
 <br />
+
 
 
 
