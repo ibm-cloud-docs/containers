@@ -437,8 +437,8 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <tr>
 <th>Service</th>
 <th>Description</th>
-  <th>Classic</th>
-  <th>VPC on Classic </th>
+<th>Classic</th>
+<th>VPC on Classic </th>
 </tr>
 </thead>
 <tbody>
@@ -478,7 +478,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
     <td>[Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
-  </tr>
+</tr>
 </tbody>
 </table>
 
