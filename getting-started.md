@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-18"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, containers
 
@@ -56,7 +56,7 @@ subcollection: containers
         width: 27% !important;
         }
         .solutionBoxContent {
-        height: 320px !important;
+        height: 300px !important;
         }
     }
     @media screen and (min-width: 1298px) {
@@ -64,7 +64,7 @@ subcollection: containers
         width: calc(33% - 2%) !important;
         }
         .solutionBoxContent {
-        min-height: 320px !important;
+        min-height: 300px !important;
         }
     }
     .solutionBox:hover {
