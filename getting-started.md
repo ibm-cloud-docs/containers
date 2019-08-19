@@ -99,14 +99,15 @@ Learn more about {{site.data.keyword.containerlong}}, its capabilities and the o
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers management tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational). 
 
 **What container platform can I choose from?** </br>
-With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. In community Kubernetes clusters, you get access to community Kubernetes API features that are considered beta or higher by the community. Your worker nodes are set up with an Ubuntu operating system and you can use native Kubernetes commands or API to work with your cluster and the cluster resources. Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
+With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. In community Kubernetes clusters, you get access to community Kubernetes API features that are considered beta or higher by the community. Your worker nodes are set up with an Ubuntu operating system and you can use native Kubernetes commands or APIs to work with your cluster and the cluster resources. Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
 
 In this getting started tutorial, you create a community Kubernetes cluster. If you want to create an OpenShift instead, see [Getting started with {{site.data.keyword.openshiftlong}}](/docs/openshift?topic=openshift-getting-started). 
+{: note}
 
 **What compute host infrastructure does the service offer?** </br>
 With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure.
 
-Classic clusters are created on virtual or bare metal worker nodes that are connected to VLANs. In a classic cluster, you can choose from a variety of virtual and bare metal worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes. 
+[Classic clusters](#clusters_gs) are created on virtual or bare metal worker nodes that are connected to VLANs. In a classic cluster, you can choose from a variety of virtual and bare metal worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes. 
 
 
 
@@ -170,7 +171,7 @@ Congratulations! You just deployed your first app in your Kubernetes classic clu
 {: #classic-whats-next}
 
 - Go through the [{{site.data.keyword.containerlong_notm}} tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) for installing the CLI or using the Kubernetes Terminal, creating a private registry, setting up your cluster environment, adding a service to your cluster, and deploying a {{site.data.keyword.watson}} app.
-- [Create a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_ui) with multiple nodes that you can customize to your workload requirements and set up your cluster for high availability.
+- [Create a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_ui) with multiple worker nodes that you can customize to your workload requirements and set up your cluster for high availability.
 
 
 
