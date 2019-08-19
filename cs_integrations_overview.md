@@ -30,9 +30,6 @@ subcollection: containers
 You can use various external services and catalog services with a standard Kubernetes cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
-Unless otherwise noted, integrations are not verified to run on VPC clusters.
-{: note}
-
 ## Popular integrations
 {: #popular_services}
 
