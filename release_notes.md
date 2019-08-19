@@ -54,7 +54,11 @@ The following icons are used to indicate if a release note applies only to a cer
     <li>[About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)</li>
     <li>[Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)</li>
     <li>[Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics)</li></ul>
-    Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).</li></ul>
+    Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).</li>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1514](/docs/containers?topic=containers-changelog#1152_1514_worker), [1.14.5_1530](/docs/containers?topic=containers-changelog#1145_1530_worker), [1.13.9_1533](/docs/containers?topic=containers-changelog#1139_1533_worker), and [1.12.10_1564](/docs/containers?topic=containers-changelog#11210_1564_worker) worker node fix pack updates.</li>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for worker node fix pack [3.11.135_1521_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1521_worker).</li></ul></td>
+  </tr>  
+  </ul>
   </td>
   </tr>
   <tr>

@@ -161,7 +161,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`zones`](#cs_datacenters)</li></ul></td>
    <td>Required. Uses the v2 API.<ul>
    <li>[`subnets`](#cs_subnets)</li>
-   <li>[`zones`](#cs_datacenters)</li></ul></td>
+   <li>[`zones`](#cs_datacenters)</li></ul></td> 
  </tr>
  <tr>
    <td colspan="3">**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** The commands use and return the v1 API responses.</td>
