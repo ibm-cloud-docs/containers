@@ -456,7 +456,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
   </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} VPC Block Storage</td>
-<td>Block storage</td>
 <td>[Block Storage for VPC](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC on Classic cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block)</td>
 <td></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
