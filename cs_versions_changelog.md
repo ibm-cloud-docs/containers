@@ -49,6 +49,50 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.15 changelog
 {: #115_changelog}
 
+### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019
+{: #1152_1514_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.15.2_1514.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.1_1511">
+<caption>Changes since version 1.15.1_1511</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>2.0.1-alpine</td>
+<td>1.8.21-alpine</td>
+<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.15.1</td>
+<td>v1.15.2</td>
+<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-157-generic</td>
+<td>4.4.0-159-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-55-generic</td>
+<td>4.15.0-58-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2000-1134 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2000-1134), [CVE-2007-3852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2007-3852), [CVE-2008-0525 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2008-0525), [CVE-2009-0416 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2009-0416), [CVE-2011-4834 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2011-4834), [CVE-2015-1838 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-1838), [CVE-2015-7442 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-7442), [CVE-2016-7489 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-7489), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for master fix pack 1.15.2_1514, released 17 August 2019
 {: #1152_1514}
 
@@ -231,6 +275,50 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019
+{: #1145_1530_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.5_1530.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.4_1527">
+<caption>Changes since version 1.14.4_1527</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>2.0.1-alpine</td>
+<td>1.8.21-alpine</td>
+<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.4</td>
+<td>v1.14.5</td>
+<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-157-generic</td>
+<td>4.4.0-159-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-55-generic</td>
+<td>4.15.0-58-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2000-1134 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2000-1134), [CVE-2007-3852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2007-3852), [CVE-2008-0525 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2008-0525), [CVE-2009-0416 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2009-0416), [CVE-2011-4834 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2011-4834), [CVE-2015-1838 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-1838), [CVE-2015-7442 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-7442), [CVE-2016-7489 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-7489), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.14.5_1530, released 17 August 2019
 {: #1145_1530}
@@ -828,6 +916,51 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.9_1533, released 19 August 2019
+{: #1139_1533_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.9_1533.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.8_1530">
+<caption>Changes since version 1.13.8_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>2.0.1-alpine</td>
+<td>1.8.21-alpine</td>
+<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.8</td>
+<td>v1.13.9</td>
+<td>For more information, see the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-157-generic</td>
+<td>4.4.0-159-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-55-generic</td>
+<td>4.15.0-58-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2000-1134 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2000-1134), [CVE-2007-3852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2007-3852), [CVE-2008-0525 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2008-0525), [CVE-2009-0416 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2009-0416), [CVE-2011-4834 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2011-4834), [CVE-2015-1838 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-1838), [CVE-2015-7442 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-7442), [CVE-2016-7489 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-7489), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+</tr>
+</tbody>
+</table>
+
 
 ### Changelog for master fix pack 1.13.9_1533, released 17 August 2019
 {: #1139_1533}
@@ -1858,6 +1991,44 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1564, released 19 August 2019
+{: #11210_1564_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.10_1564.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1561">
+<caption>Changes since version 1.12.10_1561</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cluster master HA proxy</td>
+<td>2.0.1-alpine</td>
+<td>1.8.21-alpine</td>
+<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-157-generic</td>
+<td>4.4.0-159-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13012), [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), and [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-55-generic</td>
+<td>4.15.0-58-generic</td>
+<td>Updated worker node images with package updates for [CVE-2019-1125 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-1125), [CVE-2019-2101 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-2101), [CVE-2018-5383 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-5383), [CVE-2019-13233 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13233), [CVE-2019-13272 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-13272), [CVE-2000-1134 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2000-1134), [CVE-2007-3852 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2007-3852), [CVE-2008-0525 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2008-0525), [CVE-2009-0416 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2009-0416), [CVE-2011-4834 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2011-4834), [CVE-2015-1838 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-1838), [CVE-2015-7442 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2015-7442), [CVE-2016-7489 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-7489), [CVE-2019-12614 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12614), [CVE-2019-10126](https://nvd.nist.gov/vuln/detail/CVE-2019-10126), [CVE-2019-3846 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-3846), [CVE-2019-12818 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12818), [CVE-2019-12984 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12984), and [CVE-2019-12819 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-12819).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.12.10_1564, released 17 August 2019
 {: #11210_1564}
