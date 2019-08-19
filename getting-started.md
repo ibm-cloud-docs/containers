@@ -120,6 +120,8 @@ Review the following links to find out more about the benefits and responsibilit
 - [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 - [Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy)
 
+<br />
+
 
 ## Getting started with classic clusters
 {: #clusters_gs}
