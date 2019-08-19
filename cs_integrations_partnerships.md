@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, helm
 
@@ -31,6 +31,9 @@ IBM is dedicated to make {{site.data.keyword.containerlong_notm}} the best Kuber
 {: shortdesc}
 
 Review our partners and the benefits of each solution that they provide. To find other proprietary {{site.data.keyword.cloud_notm}} and third-party open source services that you can use in your cluster, see [Understanding {{site.data.keyword.cloud_notm}} and 3rd party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations).
+
+Unless otherwise noted, integrations are not verified to run on VPC clusters.
+{: note}
 
 ## LogDNA
 {: #logdna-partner}
