@@ -56,7 +56,7 @@ Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access p
 
 <br>
 Install the command-line tools.
-*   [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}}plug-in (`ibmcloud ks`), and {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`)](/docs/containerstopic=containers-cs_cli_install#cs_cli_install_steps).
+*   [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}}plug-in (`ibmcloud ks`), and {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
 *   Update your {{site.data.keyword.containerlong_notm}} plug-in to the latest version.
     ```
     ibmcloud plugin update container-service

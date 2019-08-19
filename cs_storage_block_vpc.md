@@ -30,7 +30,7 @@ subcollection: containers
 [{{site.data.keyword.cloud_notm}} Block Storage for Virtual Private Cloud (VPC)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
 {: shortdsc}
 
-You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if VPC Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for Block Storage for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-block-storage-pricing).
+You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if VPC Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for Block Storage for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
 
 VPC Block Storage is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use block storage in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage). VPC Block Storage is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -41,7 +41,7 @@ VPC Block Storage is available only for standard clusters that are provisioned o
 Use an [{{site.data.keyword.cloud_notm}} managed add-on](/docs/containers?topic=containers-managed-addons) to install the VPC Block Storage plug-in in your cluster. The add-on automatically installs the plug-in drivers and a set of pre-defined storage classes that you can use to provision VPC Block Storage in your cluster.
 {: shortdesc}
 
-Before you install the VPC Block Storage add-on, make sure that your cluster's VPC subnets are configued with a public gateway. For more information, see step 12 in [Creating a VPC and subnet](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-console#creating-a-vpc-and-subnet). 
+Before you install the VPC Block Storage add-on, make sure that your cluster's VPC subnets are configued with a public gateway. For more information, see step 12 in [Creating a VPC and subnet](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-console#creating-a-vpc-and-subnet).
 {: important}
 
 1. Verify that your cluster runs the minimum required Kubernetes version for the VPC Block Storage plug-in.
@@ -316,11 +316,11 @@ Choose your VPC Block Storage profile and create a persistent volume claim to dy
    ```
    {: pre}
 
-9. Verify that the PVC is successfully mounted to your app. It might take a few minutes for your pods to get into a **Running** state. 
+9. Verify that the PVC is successfully mounted to your app. It might take a few minutes for your pods to get into a **Running** state.
 
-   During the deployment of your app, you might see intermittent `Unable to mount volumes` errors in the **Events** section of your CLI output. The VPC Block Storage add-on automatically retries mounting the storage to your apps. Wait a few more minutes for the storage to mount to your app. 
+   During the deployment of your app, you might see intermittent `Unable to mount volumes` errors in the **Events** section of your CLI output. The VPC Block Storage add-on automatically retries mounting the storage to your apps. Wait a few more minutes for the storage to mount to your app.
    {: tip}
-   
+
    ```
    kubectl describe deployment <deployment_name>
    ```
@@ -467,7 +467,7 @@ You can create a customized storage class to provision VPC Block Storage with a 
    kubectl get storageclass ibmc-vpc-block-retain-general-purpose -o yaml
    ```
    {: pre}
-  
+
    Example output:
    ```
    apiVersion: storage.k8s.io/v1
@@ -527,7 +527,7 @@ You can create a customized storage class to provision VPC Block Storage with a 
    volumeBindingMode: Immediate
    ```
    {: codeblock}
-   
+
     <table>
     <caption>Understanding the YAML file components</caption>
     <thead>
@@ -552,19 +552,19 @@ You can create a customized storage class to provision VPC Block Storage with a 
        </tr>
        </tbody>
        </table>
-    
+
 3. Create the customized storage class in your cluster.
    ```
    kubectl apply -f storageclass.yaml
    ```
    {: pre}
-   
+
 4. Verify that your storage class is available in the cluster.
    ```
    kubectl get storageclasses
    ```
    {: pre}
-   
+
    Example output:
    ```
    NAME                                    PROVISIONER            AGE
@@ -579,38 +579,38 @@ You can create a customized storage class to provision VPC Block Storage with a 
    xfs-storageclass                        vpc.block.csi.ibm.io   4m26s
    ```
    {: screen}
-   
-5. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage with a different file system. Then, mount this storage to a sample app. 
 
-   Your app might take a few minutes to mount the storage and get into a **Running** state. 
+5. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage with a different file system. Then, mount this storage to a sample app.
+
+   Your app might take a few minutes to mount the storage and get into a **Running** state.
    {: note}
-   
-6. Verify that your storage is mounted with the correct file system. 
-   1. List the pods in your cluster and note the **Name** of the pod that you used to mount your storage. 
+
+6. Verify that your storage is mounted with the correct file system.
+   1. List the pods in your cluster and note the **Name** of the pod that you used to mount your storage.
       ```
       kubectl get pod
       ```
       {: pre}
-      
-   2. Log in to your pod. 
+
+   2. Log in to your pod.
       ```
       kubectl exec <pod_name> -it bash
       ```
       {: pre}
-      
+
    3. List the mount paths inside your pod.  
       ```
       mount | grep /dev/xvdg
       ```
       {: pre}
-      
-      Example output for `xfs`: 
+
+      Example output for `xfs`:
       ```
       /dev/xvdg on /test type xfs (rw,relatime,attr2,inode64,noquota)
       ```
       {: pre}
-     
-   4. Exit your pod. 
+
+   4. Exit your pod.
       ```
       exit
       ```
@@ -626,27 +626,27 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 
 2.  [Create a root key](/docs/services/key-protect?topic=key-protect-create-root-keys#create-root-keys). By default, the root key is created without an expiration date.
 
-3. Retrieve the service CRN for your root key. 
-   1. From the {{site.data.keyword.keymanagementserviceshort}} details page, select the **Manage** tab to find the list of your keys. 
-   2. Find the root key that you created and from the actions menu, click **View CRN**. 
-   3. Note the CRN of your root key. 
-   
-4. Authorize VPC Block Storage to access {{site.data.keyword.keymanagementservicelong}}. 
-   1. From the {{site.data.keyword.cloud_notm}} menu, select **Manage** > **Access (IAM)**. 
-   2. From the menu, select **Authorizations**. 
-   3. Click **Create**. 
-   4. Select **Cloud Block Storage** as your source service. 
-   5. Select **Key Protect** as your target service. 
-   6. Select the **Reader** service access role and click **Authorize**. 
-   
-5. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class. 
+3. Retrieve the service CRN for your root key.
+   1. From the {{site.data.keyword.keymanagementserviceshort}} details page, select the **Manage** tab to find the list of your keys.
+   2. Find the root key that you created and from the actions menu, click **View CRN**.
+   3. Note the CRN of your root key.
+
+4. Authorize VPC Block Storage to access {{site.data.keyword.keymanagementservicelong}}.
+   1. From the {{site.data.keyword.cloud_notm}} menu, select **Manage** > **Access (IAM)**.
+   2. From the menu, select **Authorizations**.
+   3. Click **Create**.
+   4. Select **Cloud Block Storage** as your source service.
+   5. Select **Key Protect** as your target service.
+   6. Select the **Reader** service access role and click **Authorize**.
+
+5. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
 
 6. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-vpc-block-5iops-tier` storage class.
    ```
    kubectl get storageclass ibmc-vpc-block-5iops-tier -o yaml
    ```
    {: pre}
-  
+
    Example output:
    ```
    apiVersion: storage.k8s.io/v1
@@ -697,7 +697,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
      billingType: "hourly"
      encrypted: "true"
      encryptionKey: "<encryption_key>"
-     resourceGroup: "" 
+     resourceGroup: ""
      zone: ""
      tags: ""
      generation: "gc"
@@ -726,19 +726,19 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
        </tr>
        </tbody>
        </table>
-       
+
 8. Create the customized storage class in your cluster.
     ```
     kubectl apply -f storageclass.yaml
     ```
     {: pre}
-   
+
 9. Verify that your storage class is available in the cluster.
    ```
    kubectl get storageclasses
    ```
    {: pre}
-   
+
    Example output:
    ```
    NAME                                    PROVISIONER            AGE
@@ -753,32 +753,32 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
    encryption_storageclass                 vpc.block.csi.ibm.io   4m26s
    ```
    {: screen}
-   
-10. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage that is configured for encryption with your {{site.data.keyword.keymanagementserviceshort}} root key. Then, mount this storage to a sample app. 
 
-    Your app might take a few minutes to mount the storage and get into a **Running** state. 
+10. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage that is configured for encryption with your {{site.data.keyword.keymanagementserviceshort}} root key. Then, mount this storage to a sample app.
+
+    Your app might take a few minutes to mount the storage and get into a **Running** state.
     {: note}
-   
+
 11. Verify that your data is encrypted.
-    1. List your VPC Block Storage volumes and note the **ID** of the VPC Block Storage instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC. 
+    1. List your VPC Block Storage volumes and note the **ID** of the VPC Block Storage instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC.
        ```
        ibmcloud is vols
        ```
        {: pre}
-       
+
        Example output:
        ```
-       ID                                     Name                                       Status      Capacity   IOPS   Profile           Attachment type   Created                     Zone         Resource group 
+       ID                                     Name                                       Status      Capacity   IOPS   Profile           Attachment type   Created                     Zone         Resource group
        a395b603-74bf-4703-8fcb-b68e0b4d6960   pvc-479d590f-ca72-4df2-a30a-0941fceeca42   available   10         3000   5iops-tier        data              2019-08-17T12:29:18-05:00   us-south-1   a8a12accd63b437bbd6d58fb6a462ca7
        ```
        {: screen}
-        
-    2. Using the volume **ID**, list the details for your VPC Block Storage instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output. 
+
+    2. Using the volume **ID**, list the details for your VPC Block Storage instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output.
        ```
        ibmcloud is vol <volume_ID>
        ```
        {: codeblock}
-       
+
        Example output:
        ```
        ID                                     a395b603-74bf-4703-8fcb-b68e0b4d6960   
@@ -789,13 +789,13 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
        Profile                                5iops-tier   
        Encryption key                         crn:v1:bluemix:public:kms:us-south:a/6ef045fd2b43266cfe8e6388dd2ec098:53369322-958b-421c-911a-c9ae8d5156d1:key:47a985d1-5f5e-4477-93fc-12ce9bae343f   
        Encryption                             user_managed   
-       Resource group                         a8a12accd63b437bbd6d58fb6a462ca7 
+       Resource group                         a8a12accd63b437bbd6d58fb6a462ca7
        Created                                2019-08-17T12:29:18-05:00
        Zone                                   us-south-1   
-       Volume Attachment Instance Reference 
+       Volume Attachment Instance Reference
        ```
        {: screen}
- 
+
 
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
@@ -837,7 +837,7 @@ To back up or restore data, choose between the following options:
 | File system | `ext4` |
 | Corresponding VPC Block Storage tier | [10 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-block-storage-pricing)|
+| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
 {: caption="VPC Block Storage class: 10 IOPS-tier" caption-side="top"}
 {: #vpc-block-10iops}
@@ -850,7 +850,7 @@ To back up or restore data, choose between the following options:
 | File system | `ext4` |
 | Corresponding VPC Block Storage tier | [5 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-block-storage-pricing)|
+| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
 {: caption="VPC Block Storage class: 5 IOPS-tier" caption-side="top"}
 {: #vpc-block-5iops}
@@ -863,7 +863,7 @@ To back up or restore data, choose between the following options:
 | File system | `ext4` |
 | Corresponding VPC Block Storage tier | [Custom](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#custom) |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-block-storage-pricing)|
+| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
 {: caption="VPC Block Storage class: custom" caption-side="top"}
 {: #vpc-block-custom}
@@ -876,13 +876,12 @@ To back up or restore data, choose between the following options:
 | File system | `ext4` |
 | Corresponding VPC Block Storage tier | [3 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-block-storage-pricing)|
+| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
 {: caption="VPC Block Storage class: 3 IOPS-tier" caption-side="top"}
 {: #vpc-block-3iops}
 {: tab-title="General purpose"}
 {: tab-group="VPC block storage class"}
-
 
 
 

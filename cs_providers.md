@@ -67,7 +67,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  <tr>
    <td>Cluster administration</td>
    <td>Classic clusters support the entire set of v1 API automation, such as resizing worker pools, reloading worker nodes, and updating masters and worker nodes across major, minor, and patch versions. When you delete a cluster, you can choose to remove any attached subnet or storage instances.</td>
-   <td>VPC on Classic clusters cannot be reloaded or updated. Instead, use the [`worker-replace --update` operation](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) to replace worker nodes that are outdated or in a troubled state.</td>
+   <td>VPC on Classic clusters cannot be reloaded or updated. Instead, use the [`worker-replace --update` operation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) to replace worker nodes that are outdated or in a troubled state.</td>
  </tr>
  <tr>
    <td>Cluster networking</td>
