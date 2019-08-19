@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -90,11 +90,12 @@ The following image is used as an example to explain how {{site.data.keyword.con
 ### Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
-The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node.
+The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node. Classic clusters are available in both multizone metros and single zones, but VPC clusters are available only in select multizone metros.
 {: shortdesc}
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
 * **Single zone**: If you create a cluster in a single zone, or data center, location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+* **VPC regions and zones**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
 
 To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks supported-locations` and look for the value in the `Multizone Metro` column.
 {: tip}
@@ -111,11 +112,11 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 {: class="simple-tab-table"}
-{: caption="Available multizone metro locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #locationtabtablemulti}
-{: tab-title="Multizone metros"}
+{: tab-title="Multizone metros for classic clusters"}
 {: tab-group="location-multi-single"}
-  
+
 | Geography |  Country  | Metro | Data center |  Deprecated region  |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Melbourne | mel01 | AP South (`ap-south`, `au-syd`) |
@@ -139,10 +140,25 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
 {: class="simple-tab-table"}
-{: caption="Available single zone data center locations in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: caption="Available single zone data center locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #locationtabtablesingle}
-{: tab-title="Single zones"}
+{: tab-title="Single zones for classic clusters"}
 {: tab-group="location-multi-single"}
+
+| Geography |  Country  | Metro | Region | Zone | Location |
+|-----|-----|-----|-----|-----|
+| Asia Pacific | Australia | Sydney | au-syd | au-syd-1<br>au-syd-2<br>au-syd-3 | Sydney 1<br>Sydney 2<br>Sydney 3|
+| Asia Pacific | Japan | Tokyo | jp-tok | jp-tok-1<br>jp-tok-2<br>jp-tok-3 | Tokyo 1<br>Tokyo 2<br>Tokyo 3|
+| Europe | Germany | Frankfurt | eu-de | eu-de-1<br>eu-de-2<br>eu-de-3 | Frankfurt 1<br>Frankfurt 2<br>Frankfurt 3|
+| Europe | United Kingdom | London | eu-gb | eu-gb-1<br>eu-gb-2<br>eu-gb-3 | London 1<br>London 2<br>London 3|
+| North America | United States | Dallas | us-south | us-south-1<br>us-south-2<br>us-south-3 | Dallas 1<br>Dallas 2<br>Dallas 3|
+{: class="simple-tab-table"}
+{: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: #locationtabtablemulti}
+{: tab-title="Multizone metros for VPC clusters"}
+{: tab-group="location-multi-single"}
+
+
 
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
@@ -182,7 +198,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 ### Free clusters
 {: #regions_free}
 
-Free clusters are limited to specific locations.
+Free clusters are limited to specific locations and are available for only classic infrastructure, not VPC infrastructure.
 {: shortdesc}
 
 **Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region-set`. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
@@ -262,7 +278,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 
 </br></br>
 **{{site.data.keyword.containerlong_notm}} API**:
-* [Get started with the API](/docs/containers?topic=containers-cs_cli_install#cs_api).
+* [Get started with the API](/docs/containers?topic=containers-cs_api_install#cs_api).
 * [View documentation on the API commands](https://containers.cloud.ibm.com/global/swagger-global-api/).
 * Generate a client of the API to use in automation by using the [`swagger.json` API](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json).
 

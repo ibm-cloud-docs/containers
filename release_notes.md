@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-17"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,9 +45,22 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
-    <tr>
+ <tr>
+  <td>19 August 2019</td>
+  <td><ul>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! Virtual Private Cloud</strong>: You can create standard Kubernetes clusters on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Classic on VPC clusters are available for only standard, Kubernetes clusters (not free or OpenShift clusters).<br><br>
+  With classic clusters in VPC, {{site.data.keyword.containerlong_notm}} introduces version 2 of the API, which supports multiple infrastructure providers for your clusters. Your cluster network setup also changes, from worker nodes that use public and private VLANs and the public service endpoint to worker nodes that are on a private subnet only and have the private service endpoint enabled. For more information, check out the following links:<ul>
+    <li>[Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)</li>
+    <li>[About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)</li>
+    <li>[Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)</li>
+    <li>[Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics)</li></ul>
+    Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).</li></ul>
+  </td>
+  </tr>
+  <tr>
   <td>17 August 2019</td>
   <td><ul>
+  <li><strong>{{site.data.keyword.at_full}}</strong>: The [{{site.data.keyword.at_full_notm}} service](/docs/containers?topic=containers-at_events) is now supported for you to view, manage, and audit user-initiated activities in your clusters.</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1514](/docs/containers?topic=containers-changelog#1152_1514), [1.14.5_1530](/docs/containers?topic=containers-changelog#1145_1530), [1.13.9_1533](/docs/containers?topic=containers-changelog#1139_1533), and [1.12.10_1564](/docs/containers?topic=containers-changelog#11210_1564) master fix pack updates.</li>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for master fix pack [3.11.135_1521_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1521_master).</li></ul></td>
   </tr>

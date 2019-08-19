@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-17"
+lastupdated: "2019-08-19"
 
 ---
 
@@ -184,10 +184,10 @@ lastupdated: "2019-08-17"
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the Kubernetes Terminal in your web browser (beta)](/docs/containers?topic=containers-cs_cli_install#cli_web)
-* [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_cli_install#cs_api)
-* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_cli_install#kube_api)
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_api_install#cs_api)
+* [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
+* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
+* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 ## Setting up clusters
 {: #sitemap-setup-clusters}
@@ -548,8 +548,8 @@ lastupdated: "2019-08-17"
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
-* [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#architecture-single)
-* [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#architecture-multi)
+* [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#classic-single)
+* [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#classic-multi)
 
 [Setting up Ingress](/docs/containers?topic=containers-ingress)
 * [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)

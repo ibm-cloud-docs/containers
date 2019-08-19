@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, helm
 
@@ -29,6 +29,9 @@ subcollection: containers
 
 You can use {{site.data.keyword.cloud_notm}} platform and infrastructure services, and other third-party integrations to add extra capabilities to your cluster.
 {: shortdesc}
+
+Unless otherwise noted, integrations are not verified to run on VPC clusters.
+{: note}
 
 ## IBM Cloud services
 {: #ibm-cloud-services}

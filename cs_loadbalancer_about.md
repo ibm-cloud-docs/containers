@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-15"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -24,9 +24,12 @@ subcollection: containers
 {:preview: .preview}
 
 
-# About network load balancers (NLBs)
+# Classic: About network load balancers (NLBs)
 {: #loadbalancer-about}
 
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+{: note}
 
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.

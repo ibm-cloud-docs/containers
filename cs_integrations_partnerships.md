@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, helm
 
@@ -57,7 +57,10 @@ Review the following table to find a list of key benefits that you can get by us
 LogDNA is provided by {{site.data.keyword.la_full_notm}}, an {{site.data.keyword.cloud_notm}} platform service that you can use with your cluster. {{site.data.keyword.la_full_notm}} is operated by LogDNA in partnership with IBM.
 {: shortdesc}
 
-To use LogDNA in your cluster, you must provision an instance of {{site.data.keyword.la_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your Kubernetes clusters as a log source. After the cluster is configured, logs are automatically collected and forwarded to your {{site.data.keyword.la_full_notm}} service instance. You can use the {{site.data.keyword.la_full_notm}} dashboard to access your logs.   
+To use LogDNA in your classic or VPC on Classic cluster, you must provision an instance of {{site.data.keyword.la_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your Kubernetes clusters as a log source. After the cluster is configured, logs are automatically collected and forwarded to your {{site.data.keyword.la_full_notm}} service instance. You can use the {{site.data.keyword.la_full_notm}} dashboard to access your logs.   
+
+If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the public LogDNA API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound). 
+{: important}
 
 For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube).
 
@@ -92,7 +95,10 @@ Review the following table to find a list of key benefits that you can get by us
 Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, an {{site.data.keyword.cloud_notm}} platform service that you can use with your cluster. {{site.data.keyword.mon_full_notm}} is operated by Sysdig in partnership with IBM.
 {: shortdesc}
 
-To use Sysdig Monitor in your cluster, you must provision an instance of {{site.data.keyword.mon_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your Kubernetes clusters as a metrics source. After the cluster is configured, metrics are automatically collected and forwarded to your {{site.data.keyword.mon_full_notm}} service instance. You can use the {{site.data.keyword.mon_full_notm}} dashboard to access your metrics.   
+To use Sysdig Monitor in your classic or VPC on Classic cluster, you must provision an instance of {{site.data.keyword.mon_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your cluster as a metrics source. After the cluster is configured, metrics are automatically collected and forwarded to your {{site.data.keyword.mon_full_notm}} service instance. You can use the {{site.data.keyword.mon_full_notm}} dashboard to access your metrics.   
+
+If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the Sysdig API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound). 
+{: important}
 
 For more information, see [Analyze metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster).
 
@@ -108,6 +114,9 @@ Because Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, your 
 
 [Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
+
+Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
+{: important}
 
 **What is software-defined storage (SDS)?** </br>
 An SDS solution abstracts storage devices of various types, sizes, or from different vendors that are attached to the worker nodes in your cluster. Worker nodes with available storage on hard disks are added as a node to a storage cluster. In this cluster, the physical storage is virtualized and presented as a virtual storage pool to the user. The storage cluster is managed by the SDS software. If data must be stored on the storage cluster, the SDS software decides where to store the data for highest availability. Your virtual storage comes with a common set of capabilities and services that you can leverage without caring about the actual underlying storage architecture.
@@ -131,19 +140,19 @@ Review the following table to find a list of key benefits that you can get by us
 ### Integration with {{site.data.keyword.containerlong_notm}}
 {: #portworx-integration}
 
-{{site.data.keyword.containerlong_notm}} provides worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-planning_worker_nodes#sds) that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires.
+If you have a classic {{site.data.keyword.containerlong_notm}} cluster, you can choose worker node flavors that are optimized for SDS usage and that come with one or more raw, unformatted, and unmounted local disks that you can use to store your data. Portworx offers best performance when you use [SDS worker node machines](/docs/containers?topic=containers-planning_worker_nodes#sds) that come with 10Gbps network speed. However, you can install Portworx on non-SDS worker node flavors in classic clusters, but you might not get the performance benefits that your app requires.
 {: shortdesc}
 
 Portworx is installed by using a [Helm chart](/docs/containers?topic=containers-portworx#install_portworx). When you install the Helm chart, Portworx automatically analyzes the local persistent storage that is available in your cluster and adds the storage to the Portworx storage layer. To add storage from your Portworx storage layer to your apps, you must use [Kubernetes persistent volume claims](/docs/containers?topic=containers-portworx#add_portworx_storage).
 
-To install Portworx in your cluster, you must have a Portworx license. If you are a first time user, you can use the `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must [purchase a Portworx license ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-portworx#portworx_license) to continue using your Portworx cluster.
+To install Portworx in your classic {{site.data.keyword.containerlong_notm}} cluster, you must have a Portworx license. If you are a first time user, you can use the `px-enterprise` edition as a Trial version. The Trial version provides you with the full Portworx functionality that you can test out for 30 days. After the Trial version expires, you must [purchase a Portworx license ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-portworx#portworx_license) to continue using your Portworx cluster.
 
 For more information about how to install and use Portworx with {{site.data.keyword.containerlong_notm}}, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx).
 
 ### Billing and support
 {: #portworx-billing-support}
 
-SDS worker node machines that come with local disks, and virtual machines that you use for Portworx are included in your monthly {{site.data.keyword.containerlong_notm}} bill. For pricing information, see the [{{site.data.keyword.cloud_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster). The Portworx license is a separate cost and is not included in your monthly bill.
+Classic SDS worker node machines that come with local disks, and classic virtual machines that you use for Portworx are included in your monthly {{site.data.keyword.containerlong_notm}} bill. For pricing information, see the [{{site.data.keyword.cloud_notm}} catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster). The Portworx license is a separate cost and is not included in your monthly bill.
 {: shortdesc}
 
 If you run into an issue with using Portworx or you want to chat about Portworx configurations for your specific use case, post a question in the `portworx-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://bxcs-slack-invite.mybluemix.net/).

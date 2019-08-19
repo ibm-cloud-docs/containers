@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-17"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, versions, update
 
@@ -170,7 +170,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.14.4-139</td>
 <td>v1.15.1-86</td>
-<td><ul><li>Updated to support the Kubernetes 1.15.1 release.</li><li>`calicoctl` version is updated to 3.8.1.</li></ul>.</td>
+<td><ul><li>Updated to support the Kubernetes 1.15.1 release.</li><li>`calicoctl` version is updated to 3.8.1.</li><li>Virtual Private Cloud (VPC) load balancer support is added for VPC clusters.</li></ul>.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>

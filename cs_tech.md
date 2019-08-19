@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -126,8 +126,14 @@ In a Kubernetes cluster that runs on {{site.data.keyword.containerlong_notm}}, y
 {: shortdesc}
 
 
+### Classic cluster architecture
+{: #architecture_classic}
 
 The following image shows the components of your cluster and how they interact in an account when only the [public service endpoint is enabled](/docs/containers?topic=containers-plan_clusters#workeruser-master).
+{: shortdesc}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
+{: note}
 
 <p>
 <figure>
@@ -265,6 +271,29 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
 {: tip}
 
 
+### VPC cluster architecture
+{: #architecture_vpc}
+
+The following diagram and table describe the default components that are set up in an {{site.data.keyword.containerlong_notm}} VPC cluster architecture.
+{: shortdesc}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
+{: note}
+
+![Kubernetes cluster in VPC on Classic](images/cs_org_ov_vpc.png)
+
+| Component | Description |
+|:-----------------|:-----------------|
+| Master |  Master components, including the API server and etcd, have three replicas and are spread across zones for even higher availability. Masters include the same components as described in the community Kubernetes architecture. |
+| Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes belong to you, and you manage them through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC on Classic worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.<br><br>Worker nodes include the same components as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 16.64, 18.64. |
+| Cluster networking | Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run `kubectl` commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPN gateway device on the private network. |
+| App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. NodePorts are also automatically opened on the worker nodes in your cluster. The VPC load balancer routes external requests to the NodePorts on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas).<br><br>Calico is used as the cluster networking policy fabric. |
+| Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Storing data on IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
+
+<br />
+
+
+
 
 ## Service limitations
 {: #tech_limits}
@@ -272,6 +301,9 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
 {{site.data.keyword.containerlong_notm}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted. If you anticipate reaching the following {{site.data.keyword.containerlong_notm}} limitations, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 {: shortdesc}
 
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following limitations are specific to the classic infrastructure provider. For limitations that are specific to the VPC infrastructure provider, see [VPC cluster limitations](#vpc_ks_limits) in the VPC clusters tutorial.
+{: note}
 
 
 <table summary="This table contains information on the {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation.">
@@ -323,5 +355,45 @@ Want to see how {{site.data.keyword.containerlong_notm}} can be used with other 
   </tr>
 </tbody>
 </table>
+
+
+<br />
+
+
+## VPC cluster limitations
+{: #vpc_ks_limits}
+
+VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released with the following limitations.
+{: shortdesc}
+
+**Compute**:
+* You can have up to 100 worker nodes across all VPC clusters per account.
+* Only certain flavors are available for worker node virtual machines.
+* Bare metal machines are not supported.
+* You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker-replace` command.
+* Cluster autoscaling is not supported.
+
+**Container platforms**: VPC clusters are available for only community Kubernetes clusters, not OpenShift clusters.
+
+**Load balancing for apps**: See [Exposing apps with VPC load balancers: Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
+
+**Location**: VPC clusters are available in the following [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones): Dallas, Frankfurt, London, Sydney, and Tokyo.
+
+**Storage**: 
+* You can set up only block persistent storage. VPC block storage is available as a cluster add-on. For more information, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block).
+* To use VPC block storage, you must [attach a public gateway to all the VPC subnets](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-5-attach-a-public-gateway) that the cluster uses.
+* File, object, and Portworx software-defined storage (SDS) are not available.
+
+**strongSwan VPN service**: Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established. Additionally, because VPC on Classic clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC on Classic clusters:
+  * `enableServiceSourceIP`
+  * `loadBalancerIP`
+  * `zoneLoadBalancer`
+  * `connectUsingLoadBalancerIP`
+
+**Versions**: VPC clusters must run Kubernetes version 1.15 or later.
+
+**Virtual Private Cloud**: See [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations).
+
+**v2 API**: VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks clusters`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about).
 
 
