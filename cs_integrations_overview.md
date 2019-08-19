@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-19"
 
 keywords: kubernetes, iks, helm
 
@@ -29,6 +29,9 @@ subcollection: containers
 
 You can use various external services and catalog services with a standard Kubernetes cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+Unless otherwise noted, integrations are not verified to run on VPC clusters.
+{: note}
 
 ## Popular integrations
 {: #popular_services}

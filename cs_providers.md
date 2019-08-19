@@ -96,6 +96,10 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
    <td>To create classic infrastructure clusters, you must set up [infrastructure credentials](/docs/containers?topic=containers-users#api_key) for each region and resource group. To let users manage the cluster, use [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform). To grant users access to Kubernetes resources within the cluster, use [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service), which correspond with Kubernetes RBAC roles.</td>
    <td>Unlike for classic infrastructure, with VPC on Classic, you can use only [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources) to authorize users to create infrastructure, manage your cluster, and access Kubernetes resources.</td>
  </tr>
+ <tr>
+   <td>Integrations</td>
+   <td>You can extend your cluster and app capabilities with a variety of {{site.data.keyword.cloud_notm}} services, add-ons, and third-party integrations. For a list, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-supported_integrations).</td>
+   <td>Unless otherwise noted, integrations are not verified to run on VPC clusters.</td>
  </tr>
  <tr>
    <td>Available locations and versions</td>
@@ -114,8 +118,8 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  <tr>
    <td>Troubleshooting and support</td>
-   <td>Both classic and VPC on Classic clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-cs_troubleshoot) guide. For questions, try posting in the [{{site.data.keyword.containerlong_notm}} Slack #general channel ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/).</td>
-   <td>Both classic and VPC on Classic clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [VPC troubleshooting](/docs/containers?topic=containers-vpc_troubleshoot#vpc_troubleshoot) specific information.</td>
+   <td>Both classic and VPC on Classic clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-cs_troubleshoot) guide. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.</td>
+   <td>Both classic and VPC on Classic clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [VPC troubleshooting](/docs/containers?topic=containers-vpc_troubleshoot#vpc_troubleshoot) specific information. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.</td>
  </tr>
  </tbody>
 </table>

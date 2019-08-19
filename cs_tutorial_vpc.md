@@ -503,3 +503,8 @@ Now that you have a VPC cluster, learn more about what you can do.
 * [VPC cluster limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vpc_ks_limits)
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
 * [Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
+
+Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.
+
+If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
+{: tip}
