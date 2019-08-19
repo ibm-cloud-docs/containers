@@ -115,7 +115,7 @@ Because Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, your 
 [Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
 
-Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshift}} clusters.
+Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
 {: important}
 
 **What is software-defined storage (SDS)?** </br>
