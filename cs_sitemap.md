@@ -187,7 +187,7 @@ lastupdated: "2019-08-19"
 * [Automating cluster deployments with the API](/docs/containers?topic=containers-cs_api_install#cs_api)
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
-* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 
 ## Setting up clusters
 {: #sitemap-setup-clusters}
