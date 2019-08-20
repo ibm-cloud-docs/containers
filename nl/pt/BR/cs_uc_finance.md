@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de serviços financeiros para  {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
 
-Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong_notm}} podem
+Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong}} podem
 aproveitar a alta disponibilidade, o cálculo de alto desempenho,
 a aceleração fácil de clusters para desenvolvimento mais rápido e AI do {{site.data.keyword.ibmwatson}}.
 {: shortdesc}
@@ -35,10 +34,10 @@ a aceleração fácil de clusters para desenvolvimento mais rápido e AI do {{si
 ## A empresa de hipoteca reduz os custos e acelera a conformidade regulamentar
 {: #uc_mortgage}
 
-Um VP de Gerenciamento de Risco para uma empresa de hipoteca residencial processa 70 milhões de registros por dia, mas o sistema no local estava lento e também inexato. As despesas de TI subiram porque o hardware ficou desatualizado rapidamente e não foi totalmente utilizado. Enquanto aguardavam o fornecimento de hardware, sua conformidade regulamentar desacelerou.
+Um VP de Gerenciamento de Risco para uma empresa de hipoteca residencial processa 70 milhões de registros por dia, mas o sistema no local estava lento e também inexato. As despesas de TI subiram porque o hardware ficou desatualizado rapidamente e não foi totalmente utilizado. Enquanto aguardavam o fornecimento de hardware, sua conformidade regulamentar desacelerou. 
 {: shortdesc}
 
-Por que o {{site.data.keyword.Bluemix_notm}}: para melhorar a análise de risco, a empresa verificou os serviços {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reduzir custos, aumentar a disponibilidade mundial e, por último, acelerar a conformidade regulamentar. Com o {{site.data.keyword.containerlong_notm}} em múltiplas regiões, seus apps de análise podem ser conteinerizados e implementados no mundo inteiro, melhorando a disponibilidade e endereçando regulamentações locais. Essas implementações são aceleradas com as ferramentas de software livre conhecidas, que já fazem parte do {{site.data.keyword.containerlong_notm}}.
+Por que o {{site.data.keyword.cloud_notm}}: para melhorar a análise de risco, a empresa verificou os serviços {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reduzir custos, aumentar a disponibilidade mundial e, por último, acelerar a conformidade regulamentar. Com o {{site.data.keyword.containerlong_notm}} em múltiplas regiões, seus apps de análise podem ser conteinerizados e implementados no mundo inteiro, melhorando a disponibilidade e endereçando regulamentações locais. Essas implementações são aceleradas com as ferramentas de software livre conhecidas, que já fazem parte do {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}}  e tecnologias chave:
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
@@ -100,18 +99,20 @@ O {{site.data.keyword.cloudant}} é um banco de dados NoSQL moderno que é útil
 * Os custos de relatório regulamentares foram reduzidos com um conjunto consistente e escalável de armazenamento e serviços de cálculo que o {{site.data.keyword.containerlong_notm}} e o {{site.data.keyword.cloudant}} trazem.
 * Ao longo do tempo, os apps originais que foram "levantados e deslocados" inicialmente para a nuvem foram reprojetados para microsserviços cooperativos que são executados no {{site.data.keyword.containerlong_notm}}. Essa ação acelerou o desenvolvimento e o tempo para implementação e permitiu mais inovação devido à relativa facilidade de experimentação. Eles também liberaram apps inovadores com versões mais recentes de microsserviços para aproveitar as condições de mercado e negócios (ou seja, chamados de apps e microsserviços situacionais).
 
+
 ## A empresa de tecnologia de pagamento aperfeiçoa a produtividade do desenvolvedor, implementando ferramentas ativadas por AI para seus parceiros 4 vezes mais rápido
 {: #uc_payment_tech}
 
 Um Exec de Desenvolvimento tem Desenvolvedores que usam ferramentas tradicionais no local que desaceleram a criação de protótipos enquanto aguardam as compras de hardware.
 {: shortdesc}
 
-Por que o {{site.data.keyword.Bluemix_notm}}: o {{site.data.keyword.containerlong_notm}} fornece a aceleração de cálculo usando a tecnologia padrão de software livre. Depois que a empresa mudou para o {{site.data.keyword.containerlong_notm}}, os Desenvolvedores têm acesso a ferramentas amigáveis do DevOps, como contêineres móveis e facilmente compartilhados.
+Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece a aceleração de cálculo usando a tecnologia padrão de software livre. Depois que a empresa mudou para o {{site.data.keyword.containerlong_notm}}, os Desenvolvedores têm acesso a ferramentas amigáveis do DevOps, como contêineres móveis e facilmente compartilhados.
 
-Em seguida, os Desenvolvedores podem experimentar facilmente, enviando por push mudanças para sistemas de Desenvolvimento e teste rapidamente com cadeias de ferramentas abertas. Suas ferramentas de desenvolvimento de software tradicionais obtêm uma nova face quando elas incluem serviços de nuvem do AI em apps com um clique.
+Em seguida, os Desenvolvedores podem experimentar facilmente, enviando por push mudanças para sistemas de Desenvolvimento e teste rapidamente com cadeias de ferramentas abertas. Suas ferramentas de desenvolvimento tradicionais ganham uma nova aparência quando incluem os serviços de nuvem de IA nos aplicativos com um clique.
 
 Tecnologias chave:
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [ Prevenção de Fraude com  {{site.data.keyword.watson}}  AI ](https://www.ibm.com/cloud/watson-studio)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -157,17 +158,16 @@ O desenvolvimento acelerado é uma vitória chave para o Exec. Com o uso de cont
 
 Além disso, a criação de log e o monitoramento para as ferramentas, especialmente onde eles usavam o {{site.data.keyword.watson}} AI, se integram rapidamente ao sistema. Os Desenvolvedores não desperdiçam o tempo construindo sistemas de criação de log complexos, apenas para serem capazes de solucionar problemas de seus sistemas em tempo real. Um fator chave para menos custos de equipe é que a IBM gerencia o Kubernetes, para que os Desenvolvedores possam se concentrar em ferramentas de pagamento melhores.
 
-Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_notm}}, as ferramentas de pagamento sensíveis agora têm isolamento familiar, mas dentro da flexibilidade de nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. As varreduras para vulnerabilidades e malware são executadas continuamente.
+Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_notm}}, as ferramentas de pagamento sensíveis agora têm isolamento familiar, mas dentro da flexibilidade de nuvem pública. As varreduras para vulnerabilidades e malware são executadas continuamente.
 
 **Etapa 1: levantar e deslocar para cálculo seguro**
-* Os apps que gerenciam dados altamente sensíveis podem ser hospedados novamente no {{site.data.keyword.containerlong_notm}} em execução no Bare Metal para Cálculo Confiável. O cálculo confiável pode verificar o hardware subjacente com relação à violação.
-* Migre imagens de máquina virtual para imagens de contêiner que são executadas no {{site.data.keyword.containerlong_notm}} no {{site.data.keyword.Bluemix_notm}} público.
+* Migre imagens de máquina virtual para imagens de contêiner que são executadas no {{site.data.keyword.containerlong_notm}} no {{site.data.keyword.Bluemix_notm}} público. 
 * Nesse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de imagem, política, contêiner e empacotamento, para malware conhecido.
 * O data center privado/os custos de capital no local são bastante reduzidos e substituídos por um modelo de computação utilitária que é escalado com base na demanda de carga de trabalho.
 * Cumpra consistentemente a autenticação acionada por política para seus serviços e APIs com uma anotação simples de Ingress. Com a segurança declarativa, é possível assegurar a autenticação do usuário e a validação do token usando o {{site.data.keyword.appid_short_notm}}.
 
 **Etapa 2: operações e conexões para os sistemas de pagamento existentes de backend**
-* Use o IBM {{site.data.keyword.SecureGateway}} para manter conexões seguras com sistemas de ferramentas no local.
+* Use o {{site.data.keyword.SecureGateway}} da IBM para manter conexões seguras com os sistemas de ferramentas locais restantes.
 * Forneça painéis e práticas padronizados do DevOps por meio do Kubernetes.
 * Depois que os Desenvolvedores constroem e testam apps nos clusters de Desenvolvimento e Teste, eles usam as cadeias de ferramentas do {{site.data.keyword.contdelivery_full}} para implementar apps nos clusters do {{site.data.keyword.containerlong_notm}} no mundo inteiro.
 * Ferramentas HA integradas no {{site.data.keyword.containerlong_notm}} fazem o balanceamento da carga de trabalho dentro de cada região geográfica, incluindo balanceamento com capacidade de recuperação automática e balanceamento de carga.
@@ -182,3 +182,5 @@ Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_not
 * Em paralelo, o provedor implementou iterações de prazo fechado simples para obter um identificador na dívida técnica existente.
 * Com o número de transações processadas, eles podem escalar suas operações exponencialmente.
 * Ao mesmo tempo, uma nova análise de fraude com o {{site.data.keyword.watson}} aumentou a velocidade de detecção e prevenção, reduzindo a fraude 4 vezes mais do que a média da região.
+
+

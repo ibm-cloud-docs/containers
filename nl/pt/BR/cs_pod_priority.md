@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -49,14 +49,14 @@ Para entender como a prioridade do pod e o planejador trabalham juntos, consider
 _ Figura: Cenários de Prioridade do Pod _
 <img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
 
-1.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível com espaço para todos os 3 pods e planeja-os em ordem de prioridade, com o pod de prioridade mais alta planejado primeiro.
-2.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível, mas o nó do trabalhador tem recursos suficientes somente para suportar os pods de prioridade alta e média. O pod de baixa prioridade não está planejado e permanece pendente.
+1.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível com espaço para todos os três pods e planeja-os em ordem de prioridade, com o pod de prioridade mais alta planejado primeiro.
+2.  Três pods com prioridade alta, média e baixa estão pendentes de planejamento. O planejador localiza um nó do trabalhador disponível, mas o nó do trabalhador possui apenas recursos suficientes para suportar os pods de prioridade alta e média. O pod de baixa prioridade não está planejado e permanece em pendente.
 3.  Dois pods com prioridade alta e média estão pendentes de planejamento. Existe um terceiro pod com baixa prioridade em um nó do trabalhador disponível. No entanto, o nó do trabalhador não tem recursos suficientes para planejar qualquer um dos pods pendentes. O planejador prioriza ou remove o pod de baixa prioridade, que retorna o pod para um estado pendente. Em seguida, o planejador tenta planejar o pod de alta prioridade. No entanto, o nó do trabalhador não tem recursos suficientes para planejar o pod de alta prioridade e, em vez disso, o planejador planeja o pod de prioridade média.
 
 **Para obter mais informações**: consulte a documentação do Kubernetes sobre [prioridade do pod e preempção ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/).
 
 **Posso desativar o controlador de admissão de prioridade de pod?**</br>
-Não. Se você não desejar usar a prioridade do pod, não configure um `globalDefault` ou inclua uma classe de prioridade em suas implementações de pod. Cada pod é padronizado para zero, exceto para os pods críticos do cluster que a IBM implementa com as [classes de prioridade padrão](#default_priority_class). Como a prioridade do pod é relativa, essa configuração básica assegura que os pods críticos do cluster sejam priorizados para recursos e planeja quaisquer outros pods seguindo as políticas de planejamento existentes que você tem no local.
+Não. Se você não desejar usar a prioridade do pod, não configure um `globalDefault` ou inclua uma classe de prioridade em suas implementações de pod. Cada pod é padronizado para zero, exceto para os pods críticos do cluster que a IBM implementa com as [classes de prioridade padrão](#default_priority_class). Como a prioridade do pod é relativa, essa configuração básica assegura que os pods críticos de cluster sejam priorizados para os recursos e planeja qualquer outro pod seguindo as políticas de planejamento existentes estabelecidas.
 
 **Como as cotas de recurso afetam a prioridade de pod?**</br>
 É possível usar a prioridade do pod em combinação com cotas de recurso, incluindo [escopos de cota ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) para clusters que executam o Kubernetes 1.12 ou mais recente. Com os escopos de cota, é possível configurar suas cotas de recurso para considerar a prioridade do pod. Os pods de prioridade mais alta podem consumir recursos do sistema que são limitados pela cota de recurso antes dos pods de prioridade mais baixa.
@@ -94,7 +94,7 @@ Para configurar a prioridade do pod, é necessário usar uma classe de prioridad
 
 Antes de iniciar:
 * [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Assegure-se de que você tenha a [função de **Gravador** ou **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
+* Assegure-se de que você tenha a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
 * [Crie](/docs/containers?topic=containers-clusters#clusters_ui) ou [atualize](/docs/containers?topic=containers-update#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 
 Para usar uma classe de prioridade:
@@ -144,7 +144,7 @@ Para usar uma classe de prioridade:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Opcional: configure o campo como `true` para tornar essa classe de prioridade o padrão global que é aplicado a cada pod que está planejado sem um valor `priorityClassName`. Somente 1 classe de prioridade em seu cluster pode ser configurada como o padrão global. Se não houver nenhum padrão global, os pods sem `priorityClassName` especificado terão uma prioridade de zero (`0`).</br></br>
+    <td>Opcional: configure o campo como `true` para tornar essa classe de prioridade o padrão global que é aplicado a cada pod que está planejado sem um valor `priorityClassName`. Apenas uma classe de prioridade em seu cluster pode ser configurada como o padrão global. Se não houver nenhum padrão global, os pods sem `priorityClassName` especificado terão uma prioridade de zero (`0`).</br></br>
     As [classes de prioridade padrão](#default_priority_class) não configuram um `globalDefault`. Se outras classes de prioridade foram criadas em seu cluster, será possível garantir que elas não configurem um `globalDefault` executando `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@ Designe uma classe de prioridade à sua especificação de pod para configurar a
 
 Antes de iniciar:
 * [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Assegure-se de que você tenha [a função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) no namespace no qual deseja implementar os pods.
+* Certifique-se de ter a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) no namespace no qual deseja implementar o pod.
 * [Crie](/docs/containers?topic=containers-clusters#clusters_ui) ou [atualize](/docs/containers?topic=containers-update#update) seu cluster para o Kubernetes versão 1.11 ou mais recente.
 * [Entenda como o planejamento de prioridade funciona](#priority_scheduling), pois a prioridade pode priorizar os pods existentes e afetar como os recursos de seu cluster são consumidos.
 

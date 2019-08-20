@@ -2,10 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
-
 subcollection: containers
 
 ---
@@ -31,12 +30,12 @@ subcollection: containers
 # Debug del tuo cluster
 {: #cs_troubleshoot}
 
-Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presenti queste tecniche per procedure generiche sulla risoluzione dei problemi e sull'esecuzione del debug per i tuoi cluster. Puoi anche verificare lo [stato del sistema {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
+Mentre utilizzi {{site.data.keyword.containerlong}}, tieni presenti queste tecniche per procedure generiche sulla risoluzione dei problemi e sull'esecuzione del debug per i tuoi cluster Kubernetes od OpenShift. Puoi anche verificare lo [stato del sistema {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://developer.ibm.com/bluemix/support/#status).
 {: shortdesc}
 
 Puoi eseguire questi passi generali per assicurarti che i tuoi cluster siano aggiornati:
 - Controlla mensilmente la disponibilità delle patch di sicurezza e del sistema operativo per [aggiornare i tuoi nodi di lavoro](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).
-- [Aggiorna il tuo cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) alla [versione di Kubernetes](/docs/containers?topic=containers-cs_versions) più recente predefinita per {{site.data.keyword.containerlong_notm}}<p class="important">Assicurati che la versione del [tuo client CLI `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) corrisponda a quella del server del tuo cluster. [Kubernetes non supporta ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/setup/version-skew-policy/) le versioni client `kubectl` che precedono o seguono di oltre due versioni quella del server (n +/- 2).</p>
+- [Aggiorna il tuo cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) alla versione predefinita più recente per [Kubernetes della community](/docs/containers?topic=containers-cs_versions) od [OpenShift](/docs/containers?topic=containers-cs_versions).<p class="important">Assicurati che la versione del [tuo client CLI `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) corrisponda a quella del server del tuo cluster. [Kubernetes non supporta ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/setup/version-skew-policy/) le versioni client `kubectl` che precedono o seguono di oltre due versioni quella del server (n +/- 2).</p>
 
 ## Esecuzione di test con {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
@@ -49,10 +48,9 @@ Mentre risolvi i problemi, puoi utilizzare il {{site.data.keyword.containerlong_
 
 2. Installa il grafico Helm nel tuo cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
-
 
 3. Avvia un server proxy per visualizzare l'interfaccia dello strumento di debug.
   ```
@@ -96,11 +94,11 @@ Rivedi le opzioni per il debug dei tuoi cluster e per trovare le cause principal
    <tbody>
 <tr>
    <td>`Aborted`</td>
-   <td>L'eliminazione del cluster viene richiesta dall'utente prima che il master Kubernetes venga distribuito. Al termine dell'eliminazione del cluster, questo viene rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per molto tempo, apri un [caso di supporto {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+   <td>L'eliminazione del cluster viene richiesta dall'utente prima che il master Kubernetes venga distribuito. Al termine dell'eliminazione del cluster, questo viene rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per molto tempo, apri un [caso di supporto {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
  <tr>
      <td>`Critical`</td>
-     <td>Il master Kubernetes non può essere raggiunto o tutti i nodi di lavoro nel cluster sono inattivi. </td>
+     <td>Il master Kubernetes non può essere raggiunto o tutti i nodi di lavoro nel cluster sono inattivi. Se hai abilitato {{site.data.keyword.keymanagementservicelong_notm}} nel tuo cluster, il contenitore {{site.data.keyword.keymanagementserviceshort}} potrebbe non riuscire a crittografare o decrittografare i tuoi segreti del cluster. In questo caso, puoi vedere un errore con ulteriori informazioni quando esegui `kubectl get secrets`.</td>
     </tr>
    <tr>
      <td>`Delete failed`</td>
@@ -108,7 +106,7 @@ Rivedi le opzioni per il debug dei tuoi cluster e per trovare le cause principal
    </tr>
    <tr>
      <td>`Deleted`</td>
-     <td>Il cluster viene eliminato ma non ancora rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per molto tempo, apri un [caso di supporto {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Il cluster viene eliminato ma non ancora rimosso dal tuo dashboard. Se il tuo cluster rimane bloccato in questo stato per molto tempo, apri un [caso di supporto {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>`Deleting`</td>
@@ -116,7 +114,7 @@ Rivedi le opzioni per il debug dei tuoi cluster e per trovare le cause principal
    </tr>
    <tr>
      <td>`Deploy failed`</td>
-     <td>Non è stato possibile completare la distribuzione del master Kubernetes. Non puoi risolvere questo stato. Contatta il supporto IBM Cloud aprendo un [caso di supporto {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>Non è stato possibile completare la distribuzione del master Kubernetes. Non puoi risolvere questo stato. Contatta il supporto IBM Cloud aprendo un [caso di supporto {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
      <tr>
        <td>`Deploying`</td>
@@ -132,7 +130,7 @@ Rivedi le opzioni per il debug dei tuoi cluster e per trovare le cause principal
      </tr>
    <tr>
      <td>`Requested`</td>
-     <td>Viene inviata una richiesta per creare il cluster e ordinare l'infrastruttura per il master Kubernetes e i nodi di lavoro. Quando viene avviata la distribuzione del cluster, lo stato del cluster cambia in <code>Deploying</code>. Se il tuo cluster rimane bloccato nello stato <code>Requested</code> per molto tempo, apri un [caso di supporto {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Viene inviata una richiesta per creare il cluster e ordinare l'infrastruttura per il master Kubernetes e i nodi di lavoro. Quando viene avviata la distribuzione del cluster, lo stato del cluster cambia in <code>Deploying</code>. Se il tuo cluster rimane bloccato nello stato <code>Requested</code> per molto tempo, apri un [caso di supporto {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>`Updating`</td>
@@ -144,7 +142,9 @@ Rivedi le opzioni per il debug dei tuoi cluster e per trovare le cause principal
    </tr>
     <tr>
        <td>`Warning`</td>
-       <td>Almeno un nodo di lavoro nel cluster non è disponibile, ma altri lo sono e possono subentrare nel carico di lavoro. </td>
+       <td><ul><li>Almeno un nodo di lavoro nel cluster non è disponibile, ma altri lo sono e possono subentrare nel carico di lavoro. Prova a [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) i nodi di lavoro non disponibili.</li>
+       <li>Il tuo cluster ha zero nodi di lavoro, come se tu avessi creato un cluster senza alcun nodo di lavoro o avessi rimosso manualmente tutti i nodi di lavoro dal cluster.[Ridimensiona il tuo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#resize_pool) per aggiungere dei nodi di lavoro per il ripristino da uno stato di `Warning`.</li>
+       <li>Un'operazione del piano di controllo per il tuo cluster non è riuscita. Visualizza il cluster nella console oppure esegui `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` per [controllare il **Master Status** per un ulteriore debug.](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -180,9 +180,9 @@ Rivedi le opzioni per eseguire il debug dei nodi di lavoro e trovare le cause pr
     <td>Un nodo di lavoro può entrare in uno stato Critical per diversi motivi: <ul><li>Hai effettuato un riavvio per il tuo nodo di lavoro senza prima delimitarlo e svuotarlo. Il riavvio di un nodo di lavoro può causare il danneggiamento dei dati in <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code> e <code>calico</code>. </li>
     <li>I pod distribuiti sul tuo nodo di lavoro non utilizzano limiti di risorse per [memoria ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) e [CPU ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Senza limiti di risorse, i pod possono consumare tutte le risorse disponibili, senza lasciare risorse per altri pod da eseguire su questo nodo di lavoro. Questo eccesso del carico di lavoro causa un errore per il nodo di lavoro. </li>
     <li><code>containerd</code>, <code>kubelet</code> o <code>calico</code> sono entrati in uno stato irreversibile dopo aver eseguito centinaia o migliaia di contenitori nel tempo. </li>
-    <li>Hai configurato una VRA (Virtual Router Appliance) per il tuo nodo di lavoro che è diventato inattivo e ha interrotto le comunicazioni tra il nodo di lavoro e il master Kubernetes. </li><li> Problemi di rete correnti in {{site.data.keyword.containerlong_notm}} o nell'infrastruttura IBM Cloud (SoftLayer) che comportano un errore di comunicazione tra il tuo nodo di lavoro e il master Kubernetes.</li>
+    <li>Hai configurato una VRA (Virtual Router Appliance) per il tuo nodo di lavoro che è diventato inattivo e ha interrotto le comunicazioni tra il nodo di lavoro e il master Kubernetes. </li><li> Problemi di rete correnti in {{site.data.keyword.containerlong_notm}} o nell'infrastruttura IBM Cloud che comportano un errore di comunicazione tra il tuo nodo di lavoro e il master Kubernetes.</li>
     <li>Il tuo nodo di lavoro ha esaurito la capacità. Controlla lo stato (<strong>Status</strong>) del nodo di lavoro per vedere se indica una condizione di <strong>Out of disk</strong> o <strong>Out of memory</strong>. Se il tuo nodo di lavoro ha esaurito la capacità, puoi ridurre il carico di lavoro sul nodo di lavoro o aggiungere un nodo di lavoro al tuo cluster per bilanciare il carico di lavoro.</li>
-    <li>Il dispositivo è stato spento dall'[elenco di risorse della console {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/resources). Apri l'elenco risorse e trova il tuo ID nodo di lavoro nell'elenco **Dispositivi**. Nel menu delle azioni, fai clic su **Accendi**.</li></ul>
+    <li>Il dispositivo è stato spento dall'[elenco di risorse della console {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/resources). Apri l'elenco risorse e trova il tuo ID nodo di lavoro nell'elenco **Dispositivi**. Nel menu delle azioni, fai clic su **Accendi**.</li></ul>
     In molti casi, [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) il nodo di lavoro può risolvere il problema. Quando ricarichi il tuo nodo di lavoro, verrà applicata la [versione patch](/docs/containers?topic=containers-cs_versions#version_types)
 più recente. La versione principale e quella secondaria non cambiano. Prima di ricaricare il tuo nodo di lavoro, assicurati di delimitarlo e svuotarlo per garantire che i pod esistenti vengano terminati normalmente e ripianificati sui nodi di lavoro rimanenti. </br></br> Se il ricaricamento del nodo di lavoro non risolve il problema, vai al passo successivo per continuare a risolvere il problema. </br></br><strong>Suggerimento:</strong> puoi [configurare i controlli dell'integrità per il nodo di lavoro e abilitare l'Autorecovery](/docs/containers?topic=containers-health#autorecovery). Se Autorecovery rileva un nodo di lavoro non integro in base ai controlli configurati, attiva un'azione correttiva come un ricaricamento del sistema operativo sul nodo di lavoro. Per ulteriori informazioni su come funziona Autorecovery, vedi il [blog Autorecovery ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
     </td>
@@ -222,7 +222,7 @@ più recente. La versione principale e quella secondaria non cambiano. Prima di 
     <tr>
      <td>`Unknown`</td>
      <td>Il master Kubernetes non è raggiungibile per uno dei seguenti motivi:<ul><li>Hai richiesto un aggiornamento del tuo master Kubernetes. Lo stato del nodo di lavoro non può essere richiamato durante l'aggiornamento. Se il nodo di lavoro rimane in questo stato per un periodo di tempo prolungato anche dopo che il master Kubernetes è stato aggiornato correttamente, prova a [ricaricare](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) il nodo di lavoro.</li><li>Potresti avere un altro firewall che protegge i tuoi nodi di lavoro o hai modificato le impostazioni del firewall recentemente. {{site.data.keyword.containerlong_notm}}
-richiede che alcuni indirizzi IP e porte siano aperti per consentire le comunicazioni dal nodo di lavoro al master Kubernetes e viceversa. Per ulteriori informazioni, vedi [Il firewall impedisce la connessione dei nodi di lavoro](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Il master Kubernetes è inattivo. Contatta il supporto {{site.data.keyword.Bluemix_notm}} aprendo un [caso di supporto {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
+richiede che alcuni indirizzi IP e porte siano aperti per consentire le comunicazioni dal nodo di lavoro al master Kubernetes e viceversa. Per ulteriori informazioni, vedi [Il firewall impedisce la connessione dei nodi di lavoro](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Il master Kubernetes è inattivo. Contatta il supporto {{site.data.keyword.cloud_notm}} aprendo un [caso di supporto {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
 </tr>
    <tr>
       <td>`Warning`</td>
@@ -231,7 +231,7 @@ richiede che alcuni indirizzi IP e porte siano aperti per consentire le comunica
   </tbody>
 </table>
 </p></li>
-<li>Elenca i dettagli del nodo di lavoro. Se i dettagli includono un messaggio di errore, rivedi l'elenco di [messaggi di errore comuni per i nodi di lavoro](#common_worker_nodes_issues) per imparare come risolvere il problema.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></li>
+<li>Elenca i dettagli del nodo di lavoro. Se i dettagli includono un messaggio di errore, rivedi l'elenco di [messaggi di errore comuni per i nodi di lavoro](#common_worker_nodes_issues) per imparare come risolvere il problema.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
 </ol>
 
 <br />
@@ -250,54 +250,53 @@ Controlla i messaggi di errore comuni e impara come risolverli.
     </thead>
     <tbody>
       <tr>
-        <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: al tuo account è al momento vietato ordinare le 'Istanze di calcolo'.</td>
-        <td>Al tuo account dell'infrastruttura IBM Cloud (SoftLayer) potrebbe essere stato impedito di ordinare le risorse di calcolo. Contatta il supporto {{site.data.keyword.Bluemix_notm}} aprendo un [caso di supporto {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</td>
+        <td>Eccezione dell'infratruttura classica {{site.data.keyword.cloud_notm}}: al tuo account è al momento vietato ordinare le 'Istanze di calcolo'.</td>
+        <td>Al tuo account dell'infrastruttura IBM Cloud potrebbe essere stato impedito di ordinare le risorse di calcolo. Contatta il supporto {{site.data.keyword.cloud_notm}} aprendo un [caso di supporto {{site.data.keyword.cloud_notm}}](#ts_getting_help).</td>
       </tr>
       <tr>
-      <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile inserire l'ordine.<br><br>
-      Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile inserire l'ordine. Le risorse dietro il router 'router_name' non sono sufficienti a soddisfare la richiesta per i seguenti guest: 'worker_id'.</td>
-      <td>La zona che hai selezionato potrebbe non avere sufficiente capacità dell'infrastruttura per eseguire il provisioning dei tuoi nodi di lavoro. È anche possibile che tu abbia superato un limite nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per risolvere questa condizione, prova una delle seguenti opzioni:
+      <td>Eccezione dell'infrastruttura classica {{site.data.keyword.cloud_notm}}: impossibile inserire l'ordine.<br><br>
+      Eccezione dell'infrastruttura classica {{site.data.keyword.cloud_notm}}: impossibile inserire l'ordine. Le risorse dietro il router 'router_name' non sono sufficienti a soddisfare la richiesta per i seguenti guest: 'worker_id'.</td>
+      <td>La zona che hai selezionato potrebbe non avere sufficiente capacità dell'infrastruttura per eseguire il provisioning dei tuoi nodi di lavoro. È anche possibile che tu abbia superato un limite nel tuo account dell'infrastruttura IBM Cloud. Per risolvere questa condizione, prova una delle seguenti opzioni:
       <ul><li>La disponibilità di risorse dell'infrastruttura può fluttuare spesso. Attendi qualche minuto e riprova.</li>
       <li>Per un cluster a zona singola, crea il cluster in una zona differente. Per un cluster multizona, aggiungi una zona al cluster.</li>
-      <li>Specifica una coppia differente di VLAN pubblica e privata per i tuoi nodi di lavoro nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Per i nodi di lavoro che si trovano in un pool di nodi di lavoro, puoi utilizzare il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</li>
-      <li>Contatta il responsabile del tuo account dell'infrastruttura IBM Cloud (SoftLayer) per verificare che non superi un limite dell'account, come ad esempio una quota globale.</li>
-      <li>Apri un [caso di supporto dell'infrastruttura IBM Cloud (SoftLayer)](#ts_getting_help)</li></ul></td>
+      <li>Specifica una coppia differente di VLAN pubblica e privata per i tuoi nodi di lavoro nel tuo account dell'infrastruttura IBM Cloud. Per i nodi di lavoro che si trovano in un pool di nodi di lavoro, puoi utilizzare il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</li>
+      <li>Contatta il responsabile del tuo account dell'infrastruttura IBM Cloud per verificare che non superi un limite dell'account, come ad esempio una quota globale.</li>
+      <li>Apri un [caso di supporto dell'infrastruttura IBM Cloud](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
-        <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: impossibile ottenere la VLAN di rete con ID: <code>&lt;vlan id&gt;</code>.</td>
-        <td>Non è stato possibile eseguire il provisioning del tuo nodo di lavoro perché non è stato possibile trovare l'ID della VLAN selezionato per uno dei seguenti motivi:<ul><li>Potresti aver specificato un numero della VLAN invece dell'ID. Il numero della VLAN è di 3 o 4 cifre, mentre l'ID è di 7. Esegui <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> per richiamare l'ID VLAN.<li>L'ID VLAN potrebbe non essere associato all'account dell'infrastruttura IBM Cloud (SoftLayer) da te utilizzato. Esegui <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> per elencare gli ID VLAN disponibili per il tuo account. Per modificare l'account dell'infrastruttura IBM Cloud (SoftLayer) , vedi [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
+        <td>Eccezione dell'infrastruttura classica {{site.data.keyword.cloud_notm}}: impossibile ottenere la VLAN di rete con ID: <code>&lt;vlan id&gt;</code>.</td>
+        <td>Non è stato possibile eseguire il provisioning del tuo nodo di lavoro perché non è stato possibile trovare l'ID della VLAN selezionato per uno dei seguenti motivi:<ul><li>Potresti aver specificato un numero della VLAN invece dell'ID. Il numero della VLAN è di 3 o 4 cifre, mentre l'ID è di 7. Esegui <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> per richiamare l'ID VLAN.<li>L'ID VLAN potrebbe non essere associato all'account dell'infrastruttura IBM Cloud da te utilizzato. Esegui <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> per elencare gli ID VLAN disponibili per il tuo account. Per modificare l'account dell'infrastruttura IBM Cloud , vedi [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: l'ubicazione fornita per questo ordine non è valida. (HTTP 500)</td>
-        <td>La tua infrastruttura IBM Cloud (SoftLayer) non è configurata per ordinare le risorse di calcolo nel data center selezionato. Contatta il [supporto {{site.data.keyword.Bluemix_notm}}](#ts_getting_help) per verificare che il tuo account sia configurato correttamente.</td>
+        <td>La tua infrastruttura IBM Cloud non è configurata per ordinare le risorse di calcolo nel data center selezionato. Contatta il [supporto {{site.data.keyword.cloud_notm}}](#ts_getting_help) per verificare che il tuo account sia configurato correttamente.</td>
        </tr>
        <tr>
-        <td>Eccezione infrastruttura {{site.data.keyword.Bluemix_notm}}: l'utente non dispone delle autorizzazioni dell'infrastruttura {{site.data.keyword.Bluemix_notm}} necessarie per aggiungere i server
+        <td>Eccezione dell'infrastruttura classica {{site.data.keyword.cloud_notm}}: l'utente non dispone delle autorizzazioni dell'infrastruttura classica {{site.data.keyword.cloud_notm}} necessarie per aggiungere i server.</br></br>
+        Eccezione dell'infrastruttura classica {{site.data.keyword.cloud_notm}}: 'Elemento' deve essere ordinato con l'autorizzazione.
         </br></br>
-        Eccezione dell'infrastruttura {{site.data.keyword.Bluemix_notm}}: 'Elemento' deve essere ordinato con l'autorizzazione.
-        </br></br>
-        Non è stato possibile convalidare le credenziali dell'infrastruttura {{site.data.keyword.Bluemix_notm}}.</td>
-        <td>Potresti non disporre delle autorizzazioni necessarie per eseguire l'azione nel tuo portfolio dell'infrastruttura IBM Cloud (SoftLayer) oppure stai utilizzando le credenziali dell'infrastruttura errate. Vedi [Configurazione della chiave API per consentire l'accesso al portfolio dell'infrastruttura](/docs/containers?topic=containers-users#api_key).</td>
+        Non è stato possibile convalidare le credenziali dell'infrastruttura classica {{site.data.keyword.cloud_notm}}.</td>
+        <td>Potresti non disporre delle autorizzazioni necessarie per eseguire l'azione nel tuo portfolio dell'infrastruttura IBM Cloud oppure stai utilizzando le credenziali dell'infrastruttura errate. Vedi [Configurazione della chiave API per consentire l'accesso al portfolio dell'infrastruttura](/docs/containers?topic=containers-users#api_key).</td>
       </tr>
       <tr>
        <td>Il nodo di lavoro non riesce a comunicare con i server {{site.data.keyword.containerlong_notm}}. Verifica che la configurazione del firewall consenta il traffico da questo nodo di lavoro.
        <td><ul><li>Se hai un firewall, [configura le impostazioni del tuo firewall per consentire il traffico in uscita alle porte e agli indirizzi IP appropriati](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Controlla se il tuo cluster non ha un IP pubblico eseguendo `ibmcloud ks workers --cluster &lt;mycluster&gt;`. Se non viene elencato alcun IP pubblico, il tuo cluster ha solo VLAN private.
+       <li>Controlla se il tuo cluster non ha un IP pubblico eseguendo `ibmcloud ks workers --cluster <mycluster>`. Se non viene elencato alcun IP pubblico, il tuo cluster ha solo VLAN private.
        <ul><li>Se vuoi che il cluster abbia solo VLAN private, configura la tua [connessione VLAN](/docs/containers?topic=containers-plan_clusters#private_clusters) e il tuo [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Se hai creato il cluster utilizzando solo l'endpoint servizio privato prima di abilitare il tuo account per [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e gli [endpoint del sevizio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started), i tuoi nodi di lavoro non possono più connettersi al master. Prova a [configurare l'endpoint del servizio pubblico](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) in modo da poter utilizzare il tuo cluster fino all'elaborazione dei tuoi casi di supporto per aggiornare il tuo account. Se, dopo l'aggiornamento del tuo account, desideri ancora un cluster con solo un endpoint del servizio privato, puoi disabilitare l'endpoint del servizio pubblico.</li>
+       <li>Se hai creato il cluster utilizzando solo l'endpoint servizio privato prima di abilitare il tuo account per [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e gli [endpoint del sevizio](/docs/resources?topic=resources-private-network-endpoints#getting-started), i tuoi nodi di lavoro non possono più connettersi al master. Prova a [configurare l'endpoint del servizio pubblico](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) in modo da poter utilizzare il tuo cluster fino all'elaborazione dei tuoi casi di supporto per aggiornare il tuo account. Se, dopo l'aggiornamento del tuo account, desideri ancora un cluster con solo un endpoint del servizio privato, puoi disabilitare l'endpoint del servizio pubblico.</li>
        <li>Se vuoi che il cluster abbia un IP pubblico, [aggiungi nuovi nodi di lavoro](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) con VLAN sia pubbliche che private.</li></ul></li></ul></td>
      </tr>
       <tr>
-  <td>Impossibile creare il token del portale IMS e nessun account IMS è collegato all'account BSS selezionato</br></br>L'utente fornito non è stato trovato o non è attivo</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: lo stato dell'account utente è attualmente cancel_pending.</br></br>In attesa che la macchina sia visibile all'utente</td>
-  <td>Il proprietario della chiave API utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer) non dispone delle autorizzazioni necessarie per eseguire l'azione o potrebbe essere in attesa di eliminazione.</br></br><strong>Come utente</strong>, attieniti alla seguente procedura:
+  <td>Impossibile creare il token del portale IMS e nessun account IMS è collegato all'account BSS selezionato</br></br>L'utente fornito non è stato trovato o non è attivo</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: lo stato dell'account utente è attualmente cancel_pending.</br></br>Worker not found. Riesamina le autorizzazioni utente dell'infrastruttura classica {{site.data.keyword.cloud_notm}}</td>
+  <td>Il proprietario della chiave API utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud non dispone delle autorizzazioni necessarie per eseguire l'azione o potrebbe essere in attesa di eliminazione.</br></br><strong>Come utente</strong>, attieniti alla seguente procedura:
   <ol><li>Se hai accesso a più account, assicurati di essere collegato all'account in cui desideri lavorare con {{site.data.keyword.containerlong_notm}}. </li>
-  <li>Esegui <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> per visualizzare il proprietario della chiave API attuale utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud (SoftLayer). </li>
-  <li>Esegui <code>ibmcloud account list</code> per visualizzare il proprietario dell'account {{site.data.keyword.Bluemix_notm}} che usi attualmente. </li>
-  <li>Contatta il proprietario dell'account {{site.data.keyword.Bluemix_notm}} e segnala che il proprietario della chiave API non dispone di autorizzazioni sufficienti nell'infrastruttura IBM Cloud (SoftLayer) o potrebbe essere in attesa di eliminazione. </li></ol>
+  <li>Esegui <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> per visualizzare il proprietario della chiave API attuale utilizzata per accedere al portfolio dell'infrastruttura IBM Cloud.</li>
+  <li>Esegui <code>ibmcloud account list</code> per visualizzare il proprietario dell'account {{site.data.keyword.cloud_notm}} che usi attualmente. </li>
+  <li>Contatta il proprietario dell'account {{site.data.keyword.cloud_notm}} e segnala che il proprietario della chiave API non dispone di autorizzazioni sufficienti nell'infrastruttura IBM Cloud o potrebbe essere in attesa di eliminazione. </li></ol>
   </br><strong>Come proprietario dell'account</strong>, attieniti alla seguente procedura:
-  <ol><li>Rivedi le [autorizzazioni necessarie nell'infrastruttura IBM Cloud (SoftLayer)](/docs/containers?topic=containers-users#infra_access) per eseguire l'azione precedentemente non riuscita. </li>
+  <ol><li>Rivedi le [autorizzazioni necessarie nell'infrastruttura IBM Cloud](/docs/containers?topic=containers-users#infra_access) per eseguire l'azione precedentemente non riuscita. </li>
   <li>Correggi le autorizzazioni del proprietario della chiave API o crea una nuova chiave API utilizzando il comando [<code>ibmcloud ks api-key-reset -- region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). </li>
-  <li>Se tu o un altro amministratore dell'account impostate manualmente le credenziali dell'infrastruttura IBM Cloud (SoftLayer) nel tuo account, esegui [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) per rimuovere le credenziali dall'account.</li></ol></td>
+  <li>Se tu o un altro amministratore dell'account impostate manualmente le credenziali dell'infrastruttura IBM Cloud nel tuo account, esegui [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) per rimuovere le credenziali dal tuo account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -366,7 +365,7 @@ Il **Master Status** fornisce dettagli sull'operazione in corso da quando è cam
 
 Rivedi le opzioni di cui disponi per il debug delle tue distribuzioni dell'applicazione e per trovare le cause principali degli errori.
 
-Prima di iniziare, assicurati di disporre di [**Scrittore** o **Gestore** come ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi dove è distribuita la tua applicazione.
+Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi dove è distribuita la tua applicazione.
 
 1. Ricerca anomalie nelle risorse di distribuzione o nel servizio eseguendo il comando `describe`.
 
@@ -412,11 +411,11 @@ Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
 -  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plugin e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
--   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
+-   Per vedere se {{site.data.keyword.cloud_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
-    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
+    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.cloud_notm}}, [richiedi un invito](https://cloud.ibm.com/kubernetes/slack) a questo Slack.
     {: tip}
--   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
+-   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.cloud_notm}}.
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
 {{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.

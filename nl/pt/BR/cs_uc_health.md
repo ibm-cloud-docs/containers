@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,34 +23,34 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Os casos de uso do Healthcare para  {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
-Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong_notm}} se beneficiam da nuvem pública. Eles têm cálculo seguro sobre bare metal isolado, aceleração fácil de clusters para desenvolvimento mais rápido, migração de máquinas virtuais e compartilhamento de dados em bancos de dados em nuvem.
+Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong}} se beneficiam da nuvem pública. Eles têm cálculo seguro sobre bare metal isolado, aceleração fácil de clusters para desenvolvimento mais rápido, migração de máquinas virtuais e compartilhamento de dados em bancos de dados em nuvem.
 {: shortdesc}
+
 
 ## O provedor de assistência médica migra cargas de trabalho de VMs ineficientes para contêineres amigáveis para Operações para sistemas de relatório e pacientes
 {: #uc_migrate}
 
-Um Exec de TI para um provedor de assistência médica tem relatório de negócios e sistemas de pacientes no local. Esses sistemas passam por ciclos de aprimoramento lento, o que leva a níveis de serviço de pacientes estagnados.
+Um Exec de TI para um provedor de assistência médica tem relatório de negócios e sistemas de pacientes no local. Esses sistemas passam por ciclos de aprimoramento lento, o que leva a níveis de serviço de pacientes estagnados. 
 {: shortdesc}
 
-Por que o {{site.data.keyword.cloud_notm}}: para melhorar o atendimento ao paciente, o provedor buscou o {{site.data.keyword.containerlong_notm}} e o {{site.data.keyword.contdelivery_full}} para reduzir os gastos de TI e acelerar o desenvolvimento, tudo em uma plataforma segura. Os sistemas SaaS de alto uso do provedor, que mantiveram os sistemas de registro de pacientes e apps de relatório de negócios, precisavam de atualizações frequentemente. No entanto, o ambiente no local dificultou o desenvolvimento ágil. O provedor também queria combater o aumento dos custos de mão de obra e um orçamento decrescente.
+Por que o {{site.data.keyword.cloud_notm}}: para melhorar o atendimento ao paciente, o provedor buscou o {{site.data.keyword.containerlong_notm}} e o {{site.data.keyword.contdelivery_full}} para reduzir os gastos de TI e acelerar o desenvolvimento, tudo em uma plataforma segura. Os sistemas SaaS de alto uso do provedor, que mantiveram os sistemas de registro de pacientes e apps de relatório de negócios, precisavam de atualizações frequentemente. No entanto, o ambiente no local dificultou o desenvolvimento ágil.  O provedor também queria combater o aumento dos custos de mão de obra e um orçamento decrescente.
 
 Tecnologias chave:
 * [Clusters que se ajustam às necessidades variadas de CPU, RAM e armazenamento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [ Escalação Horizontal ](/docs/containers?topic=containers-app#highly_available_apps)
-* [ Segurança do contêiner e isolamento ](/docs/containers?topic=containers-security#security)
+* [ Segurança do contêiner e isolamento ](/docs/containers?topic=containers-security#security) 
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 * [Recurso de conexão sem mudar o código do app usando o {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
-Eles começaram conteinerizando seus sistemas SaaS e colocando-os na nuvem. Nessa primeira etapa, eles foram de hardware superconstruído em um data center privado para cálculo customizável que reduz as operações de TI, a manutenção e a energia. Para hospedar os sistemas SaaS, eles projetaram facilmente os clusters do Kubernetes para ajustar suas necessidades de CPU, RAM e armazenamento. Outro fator para diminuir os custos de equipe é que a IBM gerencia o Kubernetes, para que o provedor possa se concentrar em entregar o melhor atendimento ao cliente.
+Eles começaram conteinerizando seus sistemas SaaS e colocando-os na nuvem. Nessa primeira etapa, eles foram de hardware superconstruído em um data center privado para cálculo customizável que reduz as operações de TI, a manutenção e a energia. Para hospedar os aplicativos SaaS, eles projetam facilmente os clusters Kubernetes para ajustar suas necessidades de CPU, RAM e armazenamento.  Outro fator para diminuir os custos de equipe é que a IBM gerencia o Kubernetes, para que o provedor possa se concentrar em entregar o melhor atendimento ao cliente. 
 
 O desenvolvimento acelerado é a vitória chave para o Exec de TI. Com a mudança para a nuvem pública, os Desenvolvedores podem experimentar facilmente com o SDK do Node.js, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste, escalados em clusters separados. Esses pushes foram automatizados com cadeias de ferramentas abertas e o {{site.data.keyword.contdelivery_full}}. As atualizações para o sistema SaaS não mais se arrastam em processos de construção lentos e propensos a erros. Os Desenvolvedores podem fornecer atualizações incrementais para seus usuários, diariamente ou ainda mais frequentemente.  Além disso, a criação de log e o monitoramento para os sistemas SaaS, especialmente como os relatórios de front-end e backend de paciente interagem, se integram rapidamente ao sistema. Os desenvolvedores não perdem tempo construindo sistemas de criação de log complexos, apenas para solucionar problemas de sistemas em tempo real.
 
-Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_notm}}, as cargas de trabalho sensíveis do paciente agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. Nesse núcleo, o Vulnerability Advisor fornece varredura:
+Segurança primeiro: com bare metal para o {{site.data.keyword.containerlong_notm}}, as cargas de trabalho sensíveis do paciente agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. Nesse núcleo, o Vulnerability Advisor fornece varredura:
 * Varredura de Vulnerabilidade de Imag
 * Varredura de política com base no ISO 27k
 * Varredura de contêiner ativo
@@ -72,8 +72,6 @@ Os dados seguros do paciente levam a pacientes mais felizes.
 Os serviços de cálculo, de armazenamento e de E/S on demand são executados na nuvem pública com acesso seguro aos ativos corporativos no local. Implemente um processo CI/CD e outras partes do IBM Garage Method para encurtar dramaticamente os ciclos de entrega.
 
 ** Etapa 1: Proteger a plataforma de cálculo **
-* Os apps que gerenciam dados do paciente altamente sensíveis podem ser hospedados novamente no {{site.data.keyword.containerlong_notm}} que são executados no Bare Metal para Cálculo Confiável.
-* O cálculo confiável pode verificar o hardware subjacente com relação à violação.
 * Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido.
 * Cumpra consistentemente a autenticação acionada por política para seus serviços e APIs com uma anotação simples de Ingress. Com a segurança declarativa, é possível assegurar a autenticação do usuário e a validação do token usando o {{site.data.keyword.appid_short_notm}}.
 
@@ -91,12 +89,12 @@ Os serviços de cálculo, de armazenamento e de E/S on demand são executados na
 * Adote as práticas de desenvolvimento agile e iterativo do IBM Garage Method para permitir liberações frequentes de novas funções, correções e correções sem tempo de inatividade.
 
 ** Solução Técnica **
-* {{site.data.keyword.containerlong_notm}}
+* {{site.data.keyword.containerlong_notm}} 
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_short_notm}}
 
-Para as cargas de trabalho mais sensíveis, os clusters podem ser hospedados no {{site.data.keyword.containerlong_notm}} para Bare Metal.  Isso fornece uma plataforma de cálculo confiável que varre automaticamente o hardware e o código de tempo de execução em busca de vulnerabilidades. Usando a tecnologia de contêineres de padrão de mercado, os apps podem ser inicialmente hospedados novamente no {{site.data.keyword.containerlong_notm}} de forma rápida sem grandes mudanças arquiteturais. Essa mudança fornece o benefício imediato de escalabilidade.
+Para as cargas de trabalho mais sensíveis, os clusters podem ser hospedados no {{site.data.keyword.containerlong_notm}} para Bare Metal. Usando a tecnologia de contêineres de padrão de mercado, os apps podem ser inicialmente hospedados novamente no {{site.data.keyword.containerlong_notm}} de forma rápida sem grandes mudanças arquiteturais. Essa mudança fornece o benefício imediato de escalabilidade.
 
 Eles podem replicar e escalar os apps usando regras definidas e o orquestrador do Kubernetes automatizado. O {{site.data.keyword.containerlong_notm}} fornece recursos de cálculo escaláveis e os painéis associados do DevOps para criar, escalar e derrubar apps e serviços on demand. Usando os objetos de implementação e de tempo de execução do Kubernetes, o provedor pode monitorar e gerenciar upgrades para apps de forma confiável.
 
@@ -109,8 +107,8 @@ Mover as cargas de trabalho de cálculo para o {{site.data.keyword.cloud_notm}} 
 Grande parte do processo CI/CD propriamente dito é automatizado com o serviço de Entrega Contínua da IBM no Cloud. O provedor pode definir cadeias de ferramentas de fluxo de trabalho para preparar imagens de contêiner, verificar vulnerabilidades e implementá-las no cluster do Kubernetes.
 
 ** Resultados **
-* Levantar as VMs monolíticas existentes em contêineres hospedados em nuvem foi uma primeira etapa que permitiu ao provedor economizar em custos de capital e iniciar o aprendizado de práticas modernas do DevOps.
-* Reprojetar apps monolíticos para um conjunto de microsserviços de baixa granularidade reduziu muito o tempo de entrega para correções, correções de bug e novos recursos.
+* Levantar as VMs monolíticas existentes em contêineres hospedados em nuvem foi uma primeira etapa que permitiu ao provedor economizar em custos de capital e iniciar o aprendizado de práticas modernas do DevOps. 
+* A rearquitetura de aplicativos monolíticos chave para um conjunto de microsserviços de baixa granularidade reduziu o tempo de entrega de correções, correções de bug e novos recursos.
 * Em paralelo, o provedor implementou iterações de prazo fechado simples para obter um identificador na dívida técnica existente.
 
 ## A pesquisa sem fins lucrativos hospeda com segurança os dados sensíveis enquanto aumenta a pesquisa com parceiros
@@ -126,7 +124,7 @@ Tecnologias chave:
 * [{{site.data.keyword.cloudant}} para persistir e sincronizar dados entre os apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [Varredura de vulnerabilidade e isolamento para cargas de trabalho](/docs/services/Registry?topic=va-va_index#va_index)
 * [Ferramentas nativas do DevOps, incluindo cadeias de ferramentas abertas no {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} para limpar os dados e notificar pesquisadores sobre mudanças de estrutura de dados](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} para limpar os dados e notificar pesquisadores sobre mudanças de estrutura de dados](/docs/openwhisk?topic=cloud-functions-pkg_cloudant#openwhisk_cloudant)
 
 **Contexto: hospedando e compartilhando com segurança dados de doença para Pesquisa sem fins lucrativos**
 
@@ -164,7 +162,7 @@ A organização sem fins lucrativos também fornece apps que são executados em 
 
 Os desenvolvedores iniciaram implementando seus apps SaaS de compartilhamento de pesquisa em contêineres com o {{site.data.keyword.containerlong_notm}}. Eles criaram clusters para um ambiente de Desenvolvimento que permitem que os Desenvolvedores no mundo inteiro implementem colaborativamente melhorias de app de forma rápida.
 
-Segurança primeiro: o Exec de Desenvolvimento escolheu Cálculo Confiável para bare metal para hospedar os clusters de pesquisa. Com bare metal para {{site.data.keyword.containerlong_notm}}, as cargas de trabalho de pesquisa sensíveis agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. O bare metal fornece Cálculo confiável que pode verificar o hardware subjacente com relação à violação. Como essa organização sem fins lucrativos também tem uma parceria com as empresas farmacêuticas, a segurança do app é crucial. A competição é acirrada e a espionagem corporativa é possível. Nesse núcleo seguro, o Vulnerability Advisor fornece varredura:
+Segurança primeiro: o Development Exec escolheu o bare metal para hospedar os clusters de pesquisa. Com bare metal para {{site.data.keyword.containerlong_notm}}, as cargas de trabalho de pesquisa sensíveis agora têm um isolamento familiar, mas dentro da flexibilidade da nuvem pública. Como essa organização sem fins lucrativos também tem uma parceria com as empresas farmacêuticas, a segurança do app é crucial. A competição é acirrada e a espionagem corporativa é possível. Nesse núcleo seguro, o Vulnerability Advisor fornece varredura:
 * Varredura de Vulnerabilidade de Imag
 * Varredura de política com base no ISO 27k
 * Varredura de contêiner ativo
@@ -181,7 +179,7 @@ Os desenvolvedores se concentram em problemas de domínio, usando as ferramentas
 Os kits do iniciador de cálculo, armazenamento e nó sob demanda são executados em nuvem pública com acesso seguro a dados de pesquisa no mundo inteiro, conforme garantido. O cálculo em clusters é à prova de violação e isolado para o bare metal.
 
 Solução Técnica:
-* {{site.data.keyword.containerlong_notm}} com Cálculo confiável
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
@@ -196,8 +194,7 @@ Solução Técnica:
 
 ** Etapa 2: usar cálculo seguro e de desempenho**
 * Os apps ML que requerem cálculo de alto desempenho são hospedados no {{site.data.keyword.containerlong_notm}} no Bare Metal. Esse cluster ML é centralizado, portanto, cada cluster regional não tem a despesa de trabalhadores de bare metal; as implementações do Kubernetes são mais fáceis também.
-* Os apps que processam dados clínicos altamente sensíveis podem ser hospedados no {{site.data.keyword.containerlong_notm}} no Bare Metal para Cálculo Confiável.
-* O cálculo confiável pode verificar o hardware subjacente com relação à violação. Por meio desse núcleo, o Vulnerability Advisor fornece varredura de vulnerabilidade de varredura de imagem, política, contêiner e empacotamento, para malware conhecido.
+* O Vulnerability Advisor fornece imagem, política, contêiner e varredura de vulnerabilidade de pacote para malware conhecido.
 
 ** Etapa 3: assegure-se de disponibilidade global **
 * Depois que os Desenvolvedores constroem e testam os apps em seus clusters de Desenvolvimento e teste, eles usam as cadeias de ferramentas CI/CD da IBM para implementar apps nos clusters em todo o globo.
@@ -216,3 +213,5 @@ Solução Técnica:
 * Os microsserviços reduzem muito o tempo de entrega de correções, correções de bug e novos recursos. O desenvolvimento inicial é rápido e as atualizações são frequentes.
 * Os pesquisadores têm acesso a dados clínicos e podem compartilhar dados clínicos, enquanto eles obedecem às regulamentações locais.
 * Os pacientes que participam da pesquisa de doenças se sentem confiantes de que seus dados estão seguros e fazendo a diferença, quando são compartilhados com grandes equipes de pesquisa.
+
+

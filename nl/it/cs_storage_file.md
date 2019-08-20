@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Archiviazione di dati in IBM File Storage per IBM Cloud
+# Archiviazione dei dati su un classico IBM Cloud File Storage
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per appurare se {{site.data.keyword.Bluemix_notm}} File Storage è l'opzione di archiviazione giusta per te, vedi [Scelta di una soluzione di archiviazione](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Per le informazioni sui prezzi, vedi [Fatturazione](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{{site.data.keyword.cloud_notm}} File Storage è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per appurare se {{site.data.keyword.cloud_notm}} File Storage è l'opzione di archiviazione giusta per te, vedi [Scelta di una soluzione di archiviazione](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Per le informazioni sui prezzi, vedi [Fatturazione](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage è disponibile solo per i cluster standard configurati con la connettività di rete pubblica. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con solo l'endpoint del servizio privato abilitato, puoi eseguire il provisioning di archiviazione file se il tuo cluster esegue Kubernetes versione 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 o successive. Le istanze di archiviazione file NFS sono specifiche per una singola zona. Se hai un cluster multizona, prendi in considerazione le [opzioni di archiviazione persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} File Storage è disponibile solo per i cluster standard configurati con la connettività di rete pubblica. Se il tuo cluster non può accedere alla rete pubblica, come ad esempio un cluster privato dietro un firewall o un cluster con solo l'endpoint del servizio privato abilitato, puoi eseguire il provisioning di archiviazione file se il tuo cluster esegue Kubernetes versione 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 o successive. Le istanze di archiviazione file NFS sono specifiche per una singola zona. Se hai un cluster multizona, prendi in considerazione le [opzioni di archiviazione persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Decisioni relative alla configurazione dell'archiviazione file
@@ -164,7 +162,7 @@ Per stabilire una configurazione di archiviazione:
          </tbody></table>
 
 5. Scegli se vuoi mantenere i tuoi dati dopo l'eliminazione del cluster o dell'attestazione del volume persistente (o PVC, persistent volume claim).
-   - Se vuoi conservare i tuoi dati, scegli una classe di archiviazione `retain`. Quando elimini la PVC, viene eliminata solo la PVC. Il PV, il dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) e i tuoi dati permangono. Per reclamare l'archiviazione e utilizzarla nuovamente nel tuo cluster, devi rimuovere il PV e attenerti alla procedura per l'[utilizzo dell'archiviazione file esistente](#existing_file).
+   - Se vuoi conservare i tuoi dati, scegli una classe di archiviazione `retain`. Quando elimini la PVC, viene eliminata solo la PVC. Il PV, il dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud e i tuoi dati permangono. Per reclamare l'archiviazione e utilizzarla nuovamente nel tuo cluster, devi rimuovere il PV e attenerti alla procedura per l'[utilizzo dell'archiviazione file esistente](#existing_file).
    - Se vuoi che il PV, i dati e il tuo dispositivo di archiviazione file fisico vengano eliminati quando elimini la PVC, scegli una classe di archiviazione senza `retain`.
 
 6. Scegli se preferisci una fatturazione oraria o mensile. Per ulteriori informazioni, controlla la sezione relativa ai [prezzi ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing). Per impostazione predefinita, il provisioning di tutti i dispositivi di archiviazione file viene eseguito con un tipo di fatturazione oraria.
@@ -178,11 +176,11 @@ Per stabilire una configurazione di archiviazione:
 ## Aggiunta di archiviazione file alle applicazioni
 {: #add_file}
 
-Crea un'attestazione del volume persistente (o PVC, persistent volume claim) per [eseguire dinamicamente il provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) di archiviazione file per il tuo cluster. Il provisioning dinamico crea automaticamente il volume persistente (o PV, persistent volume) corrispondente e ordina il dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+Crea un'attestazione del volume persistente (o PVC, persistent volume claim) per [eseguire dinamicamente il provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) di archiviazione file per il tuo cluster. Il provisioning dinamico crea automaticamente il volume persistente (o PV, persistent volume) corrispondente e ordina il dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud.
 {:shortdesc}
 
 Prima di iniziare:
-- Se hai un firewall, [consenti l'accesso in uscita](/docs/containers?topic=containers-firewall#pvc) per gli intervalli IP dell'infrastruttura IBM Cloud (SoftLayer) delle zone in cui si trovano i tuoi cluster, in modo da poter creare le PVC.
+- Se hai un firewall, [consenti l'accesso in uscita](/docs/containers?topic=containers-firewall#pvc) per gli intervalli IP dell'infrastruttura IBM Cloud delle zone in cui si trovano i tuoi cluster, in modo da poter creare le PVC.
 - [Decidi in merito alla classe di archiviazione predefinita](#file_predefined_storageclass) oppure crea una [classe di archiviazione personalizzata](#file_custom_storageclass).
 
 Intendi esporre l'archiviazione file in una serie con stato? Vedi [Utilizzo dell'archiviazione file in una serie con stato](#file_statefulset) per ulteriori informazioni.
@@ -435,7 +433,7 @@ Se hai un dispositivo di archiviazione fisico esistente che vuoi usare nel tuo c
 
 Prima di iniziare:
 - Assicurati di avere almeno un nodo di lavoro nella stessa zona della tua istanza di archiviazione file esistente.
-- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 ### Passo 1: Preparazione della tua archiviazione esistente.
 {: #existing-file-1}
@@ -482,7 +480,7 @@ Per utilizzare l'archiviazione esistente in un cluster diverso da quello dove ne
 **Per l'archiviazione persistente di cui era stato eseguito il provisioning fuori dal cluster:** </br>
 se vuoi utilizzare l'archiviazione esistente di cui avevi eseguito il provisioning in precedenza ma che non hai mai usato nel tuo cluster in precedenza, devi renderla disponibile nella stessa sottorete dei tuoi nodi di lavoro.
 
-1.  {: #external_storage}Dal [portale dell'infrastruttura IBM Cloud (SoftLayer) ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/classic?), fai clic su **Archiviazione**.
+1.  {: #external_storage}Dal [portale dell'infrastruttura IBM Cloud ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/classic?), fai clic su **Archiviazione**.
 2.  Fai clic su **File Storage** e, dal menu **Azioni**, seleziona **Autorizza host**.
 3.  Seleziona **Sottoreti**.
 4.  Dall'elenco a discesa, seleziona la sottorete VLAN privata a cui è connesso il nodo di lavoro. Per trovare la sottorete del tuo nodo di lavoro, esegui `ibmcloud ks workers --cluster <cluster_name>` e confronta l'IP privato (`Private IP`) del tuo nodo di lavoro con la sottorete che hai trovato nell'elenco a discesa.
@@ -621,7 +619,7 @@ Hai creato correttamente un PV e lo hai collegato ad una PVC. Gli utenti del clu
 ## Utilizzo dell'archiviazione file in una serie con stato
 {: #file_statefulset}
 
-Se hai un'applicazione con stato, come ad esempio un database, puoi creare delle serie con stato che utilizzano l'archiviazione file per memorizzare i dati della tua applicazione. In alternativa, puoi utilizzare un DBaaS (database-as-a-service) {{site.data.keyword.Bluemix_notm}} e memorizzare i tuoi dati sul cloud.
+Se hai un'applicazione con stato, come ad esempio un database, puoi creare delle serie con stato che utilizzano l'archiviazione file per memorizzare i dati della tua applicazione. In alternativa, puoi utilizzare un DBaaS (database-as-a-service) {{site.data.keyword.cloud_notm}} e memorizzare i tuoi dati sul cloud.
 {: shortdesc}
 
 **Cosa devo sapere quando aggiungo l'archiviazione file a una serie con stato?** </br>
@@ -645,7 +643,7 @@ Se vuoi creare automaticamente la tua PVC quando crei la serie con stato, utiliz
 Utilizza questa opzione se vuoi creare automaticamente la PVC quando crei la serie con stato.
 {: shortdesc}
 
-Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Verifica che tutte le serie con stato esistenti nel tuo cluster siano state completamente distribuite. Se una serie con stato è ancora in fase di distribuzione, non puoi iniziare a creare la tua serie con stato. Devi attendere che tutte le serie con stato nel tuo cluster vengano distribuite completamente per evitare risultati imprevisti.
    1. Elenca le serie con stato esistenti nel tuo cluster.
@@ -825,9 +823,9 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
@@ -926,7 +924,7 @@ Puoi eseguire il pre-provisioning delle tue PVC prima di creare la serie con sta
 
 Quando [esegui dinamicamente il provisioning delle tue PVC quando crei la serie con stato](#file_dynamic_statefulset), il nome della PVC viene assegnato in base ai valori che hai usato nel file YAML della serie con stato. Affinché la serie con stato utilizzi le PVC esistenti, il nome delle tue PVC deve corrispondere al nome che viene automaticamente creato quando si utilizza il provisioning dinamico.
 
-Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Se desideri eseguire il pre-provisioning della tua PVC prima di creare la serie con stato, esegui i passi da 1 a 3 in [Aggiunta di archiviazione file alle applicazioni](#add_file) per creare una PVC per ogni replica della serie con stato. Assicurati di creare la tua PVC con un nome che rispetta il seguente formato:`<volume_name>-<statefulset_name>-<replica_number>`.
    - **`<volume_name>`**: utilizza il nome che vuoi specificare nella sezione `spec.volumeClaimTemplates.metadata.name` della tua serie con stato, ad esempio `nginxvol`.
@@ -983,7 +981,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 Se vuoi modificare la capacità o le prestazioni di archiviazione, puoi modificare il tuo volume esistente.
 {: shortdesc}
 
-Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.Bluemix_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di condivisione file](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
+Per domande sulla fatturazione e per trovare i passi su come utilizzare la console {{site.data.keyword.cloud_notm}} per modificare la tua archiviazione, vedi [Espansione della capacità di condivisione file](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
 1. Elenca le PVC nel tuo cluster e prendi nota del nome del PV associato dalla colonna **VOLUME**.
@@ -1023,7 +1021,7 @@ Per domande sulla fatturazione e per trovare i passi su come utilizzare la conso
    ```
    {: screen}
 
-3. Modifica la dimensione o l'IOPS del volume nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+3. Modifica la dimensione o l'IOPS del volume nel tuo account dell'infrastruttura IBM Cloud.
 
    Esempio per l'archiviazione Performance:
    ```
@@ -1111,7 +1109,7 @@ Per domande sulla fatturazione e per trovare i passi su come utilizzare la conso
 ## Modifica della versione NFS predefinita
 {: #nfs_version}
 
-La versione dell'archiviazione file determina il protocollo che viene utilizzato per comunicare con il server dell'archiviazione file {{site.data.keyword.Bluemix_notm}}. Per impostazione predefinita, le istanze dell'archiviazione file sono configurate con NFS versione 4. Puoi modificare il PV esistente con una versione precedente di NFS se la tua applicazione richiede una versione specifica per funzionare correttamente.
+La versione dell'archiviazione file determina il protocollo che viene utilizzato per comunicare con il server dell'archiviazione file {{site.data.keyword.cloud_notm}}. Per impostazione predefinita, le istanze dell'archiviazione file sono configurate con NFS versione 4. Puoi modificare il PV esistente con una versione precedente di NFS se la tua applicazione richiede una versione specifica per funzionare correttamente.
 {: shortdesc}
 
 Per modificare la versione NFS predefinita, puoi creare una nuova classe di archiviazione per fornire l'archiviazione file in modo dinamico al tuo cluster oppure scegliere un PV esistente montato nel tuo pod.
@@ -1207,7 +1205,7 @@ Esamina le seguenti opzioni di backup e ripristino per la tua archiviazione file
 
 <dl>
   <dt>Configura istantanee periodiche</dt>
-  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione file](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione file. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume.</br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
+  <dd><p>Puoi [configurare delle istantanee periodiche per la tua archiviazione file](/docs/infrastructure/FileStorage?topic=FileStorage-snapshots), che è un'immagine di sola lettura che acquisisce lo stato dell'istanza in un punto nel tempo. Per archiviare l'istantanea, devi richiedere lo spazio per l'istantanea nella tua archiviazione file. Le istantanee vengono archiviate nell'istanza di archiviazione esistente all'interno della stessa zona. Puoi ripristinare i dati da un'istantanea se un utente rimuove accidentalmente dati importanti dal volume.</br> <strong>Per creare un'istantanea per il tuo volume:</strong><ol><li>[Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)</li><li>Accedi alla CLI `ibmcloud sl`. <pre class="pre"><code>    ibmcloud sl init
     </code></pre></li><li>Elenca i PV esistenti nel tuo cluster. <pre class="pre"><code>    kubectl get pv
     </code></pre></li><li>Ottieni i dettagli del PV per cui vuoi creare uno spazio per l'istantanea e prendi nota dell'ID volume, della dimensione e dell'IOPS. <pre class="pre"><code>kubectl describe pv &lt;pv_name&gt;</code></pre> L'ID volume, la dimensione e l'IOPS possono essere trovati nella sezione <strong>Etichette</strong> del tuo output della CLI. </li><li>Crea la dimensione dell'istantanea per il tuo volume esistente con i parametri che hai richiamato nel passo precedente. <pre class="pre"><code>ibmcloud sl file snapshot-order &lt;volume_ID&gt; --size &lt;size&gt; --tier &lt;iops&gt;</code></pre></li><li>Attendi che la dimensione dell'istantanea venga creata. <pre class="pre"><code>ibmcloud sl file volume-detail &lt;volume_ID&gt;</code></pre>La dimensione dell'istantanea viene fornita correttamente quando la <strong>Dimensione istantanea (GB)</strong> nel tuo output della CLI viene modificata da 0 con la dimensione che hai ordinato. </li><li>Crea l'istantanea per il tuo volume e prendi nota dell'ID dell'istantanea che ti viene creata. <pre class="pre"><code>ibmcloud sl file snapshot-create &lt;volume_ID&gt;</code></pre></li><li>Verifica che l'istantanea sia stata creata correttamente. <pre class="pre"><code>ibmcloud sl file snapshot-list &lt;volume_ID&gt;</code></pre></li></ol></br><strong>Per ripristinare i dati da un'istantanea in un volume esistente: </strong><pre class="pre"><code>ibmcloud sl file snapshot-restore &lt;volume_ID&gt; &lt;snapshot_ID&gt;</code></pre></p></dd>
   <dt>Replica le istantanee in un'altra zona</dt>
@@ -1234,182 +1232,68 @@ Esamina le seguenti opzioni di backup e ripristino per la tua archiviazione file
 ## Riferimento delle classi di archiviazione
 {: #file_storageclass_reference}
 
-### Bronze
-{: #file_bronze}
+| Caratteristiche | Impostazione|
+|:-----------------|:-----------------|
+| Nome | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| Tipo | [Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 2|
+| Intervallo di dimensioni in gigabyte | 20-12000 Gi|
+| Disco rigido | SSD|
+| Fatturazione | Oraria|
+| Prezzi | [Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe di archiviazione file: bronze" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
-<table>
-<caption>Classe di archiviazione file: bronze</caption>
-<thead>
-<th>Caratteristiche</th>
-<th>Impostazione</th>
-</thead>
-<tbody>
-<tr>
-<td>Nome</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Intervallo di dimensioni in gigabyte</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disco rigido</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Fatturazione</td>
-<td>Oraria</td>
-</tr>
-<tr>
-<td>Prezzi</td>
-<td>[Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Caratteristiche | Impostazione|
+|:-----------------|:-----------------|
+| Nome | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| Tipo | [Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 4|
+| Intervallo di dimensioni in gigabyte | 20-12000 Gi|
+| Disco rigido | SSD|
+| Fatturazione | Oraria|
+| Prezzi | [Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe di archiviazione file: silver" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| Caratteristiche | Impostazione|
+|:-----------------|:-----------------|
+| Nome | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| Tipo | [Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| File system | NFS|
+| IOPS per gigabyte | 10|
+| Intervallo di dimensioni in gigabyte | 20-4000 Gi|
+| Disco rigido | SSD|
+| Fatturazione | Oraria|
+| Prezzi | [Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe di archiviazione file: gold" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### Silver
-{: #file_silver}
-
-<table>
-<caption>Classe di archiviazione file: silver</caption>
-<thead>
-<th>Caratteristiche</th>
-<th>Impostazione</th>
-</thead>
-<tbody>
-<tr>
-<td>Nome</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Intervallo di dimensioni in gigabyte</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disco rigido</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Fatturazione</td>
-<td>Oraria</li></ul></td>
-</tr>
-<tr>
-<td>Prezzi</td>
-<td>[Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Gold
-{: #file_gold}
-
-<table>
-<caption>Classe di archiviazione file: gold</caption>
-<thead>
-<th>Caratteristiche</th>
-<th>Impostazione</th>
-</thead>
-<tbody>
-<tr>
-<td>Nome</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Archiviazione Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS per gigabyte</td>
-<td>10</td>
-</tr>
-<tr>
-<td>Intervallo di dimensioni in gigabyte</td>
-<td>20-4000 Gi</td>
-</tr>
-<tr>
-<td>Disco rigido</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Fatturazione</td>
-<td>Oraria</li></ul></td>
-</tr>
-<tr>
-<td>Prezzi</td>
-<td>[Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Personalizzata
-{: #file_custom}
-
-<table>
-<caption>Classe di archiviazione file: custom</caption>
-<thead>
-<th>Caratteristiche</th>
-<th>Impostazione</th>
-</thead>
-<tbody>
-<tr>
-<td>Nome</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Prestazioni](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>File system</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS e dimensione</td>
-<td><p><strong>Intervallo di dimensioni in gigabyte / intervallo di IOPS in multipli di 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>Disco rigido</td>
-<td>Il rapporto IOPS-gigabyte determina il tipo di disco rigido di cui viene eseguito il provisioning. Per determinare il tuo rapporto IOPS/gigabyte, dividi l'IOPS per la dimensione della tua archiviazione. </br></br>Esempio: </br>hai scelto 500Gi di archiviazione con 100 IOPS. Il tuo rapporto è 0,2 (100 IOPS/500Gi). </br></br><strong>Panoramica dei tipi di disco rigido per rapporto:</strong><ul><li>Inferiore o uguale a 0,3: SATA</li><li>Maggiore di 0,3: SSD</li></ul></td>
-</tr>
-<tr>
-<td>Fatturazione</td>
-<td>Oraria</li></ul></td>
-</tr>
-<tr>
-<td>Prezzi</td>
-<td>[Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Caratteristiche | Impostazione|
+|:-----------------|:-----------------|
+| Nome | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| Tipo | [Prestazioni](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| File system | NFS|
+| IOPS e dimensione | <p><strong>Intervallo di dimensioni in gigabyte / intervallo di IOPS in multipli di 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul>|
+| Disco rigido | Il rapporto IOPS-gigabyte determina il tipo di disco rigido di cui viene eseguito il provisioning. Per determinare il tuo rapporto IOPS/gigabyte, dividi l'IOPS per la dimensione della tua archiviazione. </br></br>Esempio: </br>hai scelto 500Gi di archiviazione con 100 IOPS. Il tuo rapporto è 0,2 (100 IOPS/500Gi). </br></br><strong>Panoramica dei tipi di disco rigido per rapporto:</strong><ul><li>Inferiore o uguale a 0,3: SATA</li><li>Maggiore di 0,3: SSD</li></ul>|
+| Fatturazione | Oraria|
+| Prezzi | [Informazioni sui prezzi![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe di archiviazione file: custom" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1602,3 +1486,6 @@ La seguente classe di archiviazione personalizzata ti consente di definire la ve
    mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
+
+
+

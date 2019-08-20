@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -32,7 +32,7 @@ Standardmäßig wird Ihre App durch die NodePort-, LoadBalancer- und Ingress-Ser
 
 Aus Sicherheitsgründen ist es jedoch unter Umständen erforderlich, dass der Datenverkehr zu den Netzservices nur über bestimmte Quellen-IP-Adressen zulässig ist. Sie können [Calico-Richtlinien des Typs 'Pre-DNAT' ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) verwenden, um Datenverkehr von oder zu bestimmten IP-Adressen in Whitelists oder Blacklists zu führen. Mit Pre-DNAT-Richtlinien wird verhindert, dass angegebener Datenverkehr Ihre Apps erreicht, da die Richtlinien angewendet werden, bevor Kubernetes reguläre DNAT verwendet, um Datenverkehr an Pods weiterzuleiten. Wenn Sie Calico-Richtlinien des Typs Pre-DNAT erstellen, wählen Sie aus, ob Quellen-IP-Adressen in einer Whitelist oder einer Blacklist geführt werden. In den meisten Szenarios bietet das Setzen auf eine Whitelist die sicherste Konfiguration, da der gesamte Datenverkehr mit Ausnahme des Verkehrs von bekannten, zulässigen Quellen-IP-Adressen blockiert wird. Das Setzen auf eine Blacklist ist in der Regel nur in Szenarios nützlich, in denen z. B. ein Angriff, der von einer kleinen Gruppe von IP-Adressen ausgeht, verhindert werden soll.
 
-In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR-Firma und bemerken ungewöhnlichen Datenverkehr, der Ihre Apps erreicht. Die Lerneinheiten in diesem Lernprogramm führen Sie durch die Schritte für die Erstellung einer Web-Server-Beispielapp, für das Verfügbarmachen der App mithilfe eines Netzausgleichsfunktions- (NLB-) Service und für das Schützen der App vor unerwünschtem ungewöhnlichem Datenverkehr mithilfe von Calico-Richtlinien für eine Whitelist und eine Blacklist.
+In diesem Szenario übernehmen Sie die Rolle des Netzadministrators für eine PR-Firma und bemerken ungewöhnlichen Datenverkehr, der Ihre Apps erreicht. Die Lerneinheiten in diesem Lernprogramm führen Sie durch die Schritte zur Erstellung einer Web-Server-Beispielapp, für das Verfügbarmachen der App mithilfe eines Service für Netzausgleichsfunktionen (NLBs) und zum Schützen der App vor unerwünschtem ungewöhnlichem Datenverkehr mithilfe von Calico-Richtlinien für eine Whitelist und eine Blacklist.
 
 ## Ziele
 {: #policies_objectives}
@@ -57,7 +57,7 @@ Dieses Lernprogramm ist für Softwareentwickler und Netzadministratoren konzipie
 - [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Installieren und konfigurieren Sie die Calico-CLI](/docs/containers?topic=containers-network_policies#cli_install).
-- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
+- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.cloud_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
     - [Beliebige Plattformrolle](/docs/containers?topic=containers-users#platform)
     - [Die Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform)
 
@@ -197,9 +197,9 @@ Aus der folgenden Abbildung geht hervor, wie die Web-Server-App am Ende von Lern
         Beispielausgabe:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
         ```
         {: screen}
 
@@ -345,11 +345,11 @@ In der folgenden Abbildung wird veranschaulicht, wie am Ende von Lerneinheit 2 d
         -no body in request-
     ```
     {: screen}
-Im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe lautet die Quellen-IP-Adresse z. B. `client_address=1.1.1.1`. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen wird die Quellen-IP-Adresse des Systems von der NLB als IP-Adresse des Clients interpretiert.
+    Im Abschnitt für die Anforderungsinformationen (`Request Information`) der Ausgabe lautet die Quellen-IP-Adresse z. B. `client_address=1.1.1.1`. Die Quellen-IP-Adresse ist die öffentliche IP des Systems, das Sie verwenden, um den Befehl 'curl' auszuführen. Wenn Sie eine Verbindung zum Internet über einen Proxy oder ein VPN herstellen, kann nämlich andernfalls der Proxy oder das VPN die tatsächliche IP-Adresse Ihres Systems verdecken. In beiden Fällen wird die Quellen-IP-Adresse des Systems von der NLB als IP-Adresse des Clients interpretiert.
 
 6. Kopieren Sie die Quellen-IP-Adresse Ihres Systems (`clientadresse=1.1.1.1` in der Ausgabe des vorherigen Schritts) in Ihren Spickzettel, um sie in späteren Lerneinheiten zu verwenden.
 
-Super! Zu diesem Zeitpunkt wird Ihre App nur über den öffentlichen NLB-Port im öffentlichen Internet zugänglich gemacht. Der Datenverkehr an die öffentlichen Knotenports ist blockiert. Ein Teil Ihres Clusters ist für unerwünschten Datenverkehr gesperrt. 
+Super! Zu diesem Zeitpunkt wird Ihre App nur über den öffentlichen NLB-Port im öffentlichen Internet zugänglich gemacht. Der Datenverkehr an die öffentlichen Knotenports ist blockiert. Ein Teil Ihres Clusters ist für unerwünschten Datenverkehr gesperrt.
 
 Als Nächstes können Sie Calico-Richtlinien erstellen und anwenden, um Datenverkehr von bestimmten Quellen-IPs in der Whitelist aufzuführen.
 
@@ -479,10 +479,10 @@ Zu diesem Zeitpunkt ist der gesamte Datenverkehr an die öffentlichen Knotenport
 ## Lerneinheit 4: Eingehenden Datenverkehr an die NLB zurückweisen, der von IPs stammt, die in der Blacklist aufgeführt sind
 {: #lesson4}
 
-In der vorherigen Lerneinheit haben Sie den gesamten Datenverkehr blockiert und nur einige IPs in der Whitelist aufgeführt. Dieses Szenario ist günstig für Testzwecke, wenn Sie den Zugriff auf nur einige wenige kontrollierte Quellen-IP-Adressen beschränken wollen. Die PR-Firma hat jedoch Apps, die in hohem Maße öffentlich verfügbar sein sollen. Sie müssen sicherstellen, dass der gesamte Datenverkehr zulässig ist, mit Ausnahme des ungewöhnlichen Datenverkehrs, der von einigen wenigen IP-Adressen stammt. Das Aufführen in einer Blacklist ist in einem solchen Szenario wie diesem nützlich, da es Ihnen helfen kann, einen Angriff zu verhindern, der von einer kleinen Gruppe von IP-Adressen ausgeht.
+In der vorherigen Lerneinheit haben Sie den gesamten Datenverkehr blockiert und nur einige IPs in der Whitelist aufgeführt. Dieses Szenario ist günstig für Testzwecke, wenn Sie den Zugriff auf nur einige wenige kontrollierte Quellen-IP-Adressen beschränken wollen. Die PR-Firma hat jedoch Apps, die in hohem Maße öffentlich verfügbar sein sollen. Sie müssen sicherstellen, dass der gesamte Datenverkehr zulässig ist, mit Ausnahme des ungewöhnlichen Datenverkehrs, der von einigen wenigen IP-Adressen stammt. Das Aufführen in einer Blacklist ist in einem Szenario wie diesem nützlich, da es Ihnen helfen kann, einen Angriff zu verhindern, der von einer kleinen Gruppe von IP-Adressen ausgeht.
 {: shortdesc}
 
-In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den Datenverkehr blockieren, der aus der Quellen-IP-Adresse Ihres eigenen Systems stammt. Am Ende von Lerneinheit 4 ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche NLB ist zulässig. Nur der Datenverkehr von Ihrer in der Blacklist aufgeführten System-IP zur NLB wird blockiert:
+In dieser Lerneinheit testen Sie die Arbeit mit einer Blacklist, indem Sie den Datenverkehr blockieren, der aus der Quellen-IP-Adresse Ihres eigenen Systems stammt. Am Ende von Lerneinheit 4 ist der gesamte Datenverkehr an die öffentlichen Knotenports blockiert und der gesamte Datenverkehr an die öffentliche NLB ist zulässig. Nur der Datenverkehr von der in der Blacklist aufgeführten System-IP zur NLB ist blockiert:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="Die Web-Server-App ist über eine öffentliche NLB im Internet zugänglich. Nur der Datenverkehr von Ihrer System-IP wird blockiert." style="width:550px; border-style: none"/>
 
@@ -592,23 +592,23 @@ In unserem Beispielszenario möchte die PR-Firma, für die Sie arbeiten, dass Si
     - action: Log
       destination:
         nets:
-        - <ip_der_lastausgleichsfunktion>/32
+        - <loadbalancer_IP>/32
         ports:
         - 80
       protocol: TCP
       source:
         nets:
-        - <clientadresse>/32
-    - action: Deny
+        - <client_address>/32
+    - action: Log
       destination:
         nets:
-        - <ip_der_lastausgleichsfunktion>/32
+        - <loadbalancer_IP>/32
         ports:
         - 80
       protocol: UDP
       source:
         nets:
-        - <clientadresse>/32
+        - <client_address>/32
     selector: ibm.role=='worker_public'
     order: 300
     types:

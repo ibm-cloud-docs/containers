@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -30,12 +30,12 @@ Aggiunta rapida di tecnologie open source al tuo cluster con componenti aggiunti
 {: shortdesc}
 
 **Cosa sono i componenti aggiuntivi gestiti?** </br>
-I componenti aggiuntivi {{site.data.keyword.containerlong_notm}} gestiti rappresentano un modo facile per migliorare il tuo cluster con funzionalità open source, quali Istio o Knative. La versione dello strumento open source che aggiungi al tuo cluster viene testata da IBM e approvata perl'uso in {{site.data.keyword.containerlong_notm}}.
+I componenti aggiuntivi {{site.data.keyword.containerlong_notm}} gestiti rappresentano un modo facile per migliorare il tuo cluster con funzionalità open source, quali Istio o Knative. La versione dello strumento open source che aggiungi al tuo cluster viene testata da IBM e approvata per l'uso in {{site.data.keyword.containerlong_notm}}.
 
 **Come funzionano la fatturazione e il supporto dei componenti aggiuntivi gestiti?** </br>
-I componenti aggiuntivi gestiti sono pienamente integrati nell'organizzazione di supporto {{site.data.keyword.Bluemix_notm}}. Se hai domande o riscontri un problema nell'utilizzo dei componenti aggiuntivi gestiti, puoi utilizzare uno dei canali di supporto {{site.data.keyword.containerlong_notm}}. Per ulteriori informazioni, vedi [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+I componenti aggiuntivi gestiti sono pienamente integrati nell'organizzazione di supporto {{site.data.keyword.cloud_notm}}. Se hai domande o riscontri un problema nell'utilizzo dei componenti aggiuntivi gestiti, puoi utilizzare uno dei canali di supporto {{site.data.keyword.containerlong_notm}}. Per ulteriori informazioni, vedi [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Se lo strumento che aggiungi al tuo cluster comporta dei costi, questi vengono automaticamente integrati ed elencati all'interno della come parte della tua fatturazione {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.Bluemix_notm}} determina il ciclo di fatturazione sulla base della data di abilitazione del componente aggiuntivo nel tuo cluster.
+Se lo strumento che aggiungi al tuo cluster comporta dei costi, questi vengono automaticamente integrati ed elencati all'interno della come parte della tua fatturazione {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.cloud_notm}} determina il ciclo di fatturazione sulla base della data di abilitazione del componente aggiuntivo nel tuo cluster.
 
 **Di quali limitazioni devo tenere conto?** </br>
 Se hai installato il [controller di ammissione Container image security enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce) nel tuo cluster, non puoi abilitarvi alcun componente aggiuntivo gestito.
@@ -53,7 +53,7 @@ Per ulteriori informazioni sui prerequisiti per ciascun componente aggiuntivo, v
 ## Aggiornamento di componenti aggiuntivi gestiti
 {: #updating-managed-add-ons}
 
-Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.data.keyword.Bluemix_notm}} e approvate per l'uso in {{site.data.keyword.containerlong_notm}}. Per aggiornare i componenti di un componente aggiuntivo alla versione più recente supportata da {{site.data.keyword.containerlong_notm}}, utilizza la seguente procedura.
+Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.data.keyword.cloud_notm}} e approvate per l'uso in {{site.data.keyword.containerlong_notm}}. Per aggiornare i componenti di un componente aggiuntivo alla versione più recente supportata da {{site.data.keyword.containerlong_notm}}, utilizza la seguente procedura.
 {: shortdesc}
 
 1. Controlla se i tuoi componenti aggiuntivi sono aggiornati all'ultima versione. È possibile aggiornare qualsiasi componente aggiuntivo contrassegnato con `* (<version> più recente)`.
@@ -66,8 +66,8 @@ Le versioni di ciascun componente aggiuntivo gestito vengono testate da {{site.d
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -184,6 +184,6 @@ eliminati. Lo **STATUS** degli spazi dei nomi potrebbe essere `Terminating` per 
 13. Facoltativo per Istio: se utilizzi le sezioni TLS nei tuoi file di configurazione del gateway, devi eliminare e ricreare i gateway in modo che Envoy possa accedere ai segreti.
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

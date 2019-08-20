@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Planejando armazenamento persistente altamente disponível
 {: #storage_planning}
 
 ## Escolhendo uma solução de armazenamento
 {: #choose_storage_solution}
 
-Antes de decidir qual tipo de armazenamento é a solução correta para você, deve-se entender os requisitos do app, o tipo de dados que deseja armazenar e a frequência com que deseja acessar esses dados.
+Antes de decidir qual tipo de armazenamento é a solução correta para seus clusters do {{site.data.keyword.containerlong}}, deve-se entender os requisitos do app, o tipo de dados que você deseja armazenar e com que frequência deseja acessar esses dados.
 {: shortdesc}
 
 1. Decida se seus dados devem ser armazenados permanentemente ou se seus dados podem ser removidos a qualquer momento.
@@ -59,7 +57,7 @@ Antes de decidir qual tipo de armazenamento é a solução correta para você, d
    - ** Somente leitura: **  seus dados são somente leitura. Você não deseja gravar ou mudar seus dados.
    - **Leitura e gravação:** você deseja ler, gravar e mudar seus dados. Para dados que são lidos e gravados, é importante entender se as operações são de leitura pesada, de gravação pesada ou balanceada.
 
-4. Determine a frequência em que seus dados são acessados. Entender a frequência de acesso a dados pode ajudar a entender o desempenho requerido para seu armazenamento. Por exemplo, os dados que são acessados frequentemente geralmente residem em armazenamento rápido.
+5. Determine a frequência em que seus dados são acessados. Entender a frequência de acesso a dados pode ajudar a entender o desempenho requerido para seu armazenamento. Por exemplo, os dados que são acessados frequentemente geralmente residem em armazenamento rápido.
    - **Dados quentes:** dados que são acessados frequentemente. Casos de uso comuns são apps da web ou móveis.
    - **Dados frescos ou mornos:** dados que são acessados infrequentemente, como uma vez por mês ou menos. Os casos de uso comuns são archives, retenção de dados de curto prazo ou recuperação de desastre.
    - **Dados frios:** dados que são raramente acessados, se forem. Os casos de uso comuns são archives, backups de longo prazo, dados históricos.
@@ -68,14 +66,14 @@ Antes de decidir qual tipo de armazenamento é a solução correta para você, d
    Se não for possível prever a frequência ou a frequência não seguir um padrão estrito, determine se suas cargas de trabalho são de leitura pesada, de gravação pesada ou balanceadas. Em seguida, consulte a opção de armazenamento que se ajusta à sua carga de trabalho e investigue qual camada de armazenamento fornece a flexibilidade necessária. Por exemplo, o {{site.data.keyword.cos_full_notm}} fornece uma classe de armazenamento `flex` que considera como os dados frequentes são acessados em um mês e leva em conta essa medida para otimizar seu faturamento mensal.
    {: tip}
 
-5. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões.
+6. Investigue se seus dados devem ser compartilhados entre múltiplas instâncias de app, zonas ou regiões.
    - **Acessar entre pods:** quando você usa volumes persistentes do Kubernetes para acessar seu armazenamento, é possível determinar o número de pods que podem montar o volume ao mesmo tempo. Algumas soluções de armazenamento, como armazenamento de bloco, podem ser acessadas somente por um pod por vez. Com outras soluções de armazenamento, é possível compartilhar o volume entre múltiplos pods.
    - **Acessar entre zonas e regiões:** você pode requerer que os seus dados estejam acessíveis entre zonas ou regiões. Algumas soluções de armazenamento, como armazenamento de arquivo e de bloco, são específicas do data center e não podem ser compartilhadas entre as zonas em uma configuração de cluster de múltiplas zonas.
 
    Se você desejar tornar seus dados acessíveis entre zonas ou regiões, certifique-se de consultar seu departamento jurídico para verificar se os dados podem ser armazenados em múltiplas zonas ou em um país diferente.
    {: note}
 
-6. Entenda outras características de armazenamento que impactam sua opção.
+7. Entenda outras características de armazenamento que impactam sua opção.
    - **Consistência:** a garantia de que uma operação de leitura retorna a versão mais recente de um arquivo. As soluções de armazenamento podem fornecer `strong consistency` quando você tem garantia de sempre receber a versão mais recente de um arquivo ou `eventual consistency` quando a operação de leitura pode não retornar a versão mais recente. Frequentemente, você localiza uma consistência eventual em sistemas distribuídos geograficamente em que uma operação de gravação deve primeiro ser replicada em todas as instâncias.
    - **Desempenho:** o tempo que leva para concluir uma operação de leitura ou gravação.
    - **Durabilidade:** a garantia de que uma operação de gravação que está confirmada em seu armazenamento mantenha-se permanentemente e não seja corrompida ou perdida, mesmo se gigabytes ou terabytes de dados forem gravados em seu armazenamento ao mesmo tempo.
@@ -84,7 +82,7 @@ Antes de decidir qual tipo de armazenamento é a solução correta para você, d
    - **Escalabilidade:** a capacidade de ampliar a capacidade e customizar o desempenho com base em suas necessidades.
    - **Criptografia:** o mascaramento de dados para evitar visibilidade quando os dados são acessados por um usuário não autorizado.
 
-7. [Revise as soluções de armazenamento persistente disponíveis](#persistent_storage_overview) e escolha a solução que melhor se ajuste ao seu app e aos requisitos de dados.
+8. [Revise as soluções de armazenamento persistente disponíveis](#persistent_storage_overview) e escolha a solução que melhor se ajuste ao seu app e aos requisitos de dados.
 
 ## Comparação de Opções de Armazenamento não Persistente
 {: #non_persistent_overview}
@@ -156,7 +154,7 @@ A imagem a seguir mostra as opções de armazenamento de dados não persistentes
 <tr>
 <td style="text-align:left">Durabilidade</td>
 <td style="text-align:left">Os dados são perdidos quando o contêiner trava ou é removido. </td>
-<td style="text-align:left">Os dados em volumes <code>hostPath</code> ou <code>emptyDir</code> são perdidos quando: <ul><li>O nó do trabalhador é excluído.</li><li>O nó do trabalhador é recarregado ou atualizado.</li><li>O cluster é excluído.</li><li>A conta do {{site.data.keyword.Bluemix_notm}} atinge um estado suspenso. </li></ul></p><p>Além disso, os dados em um volume <code>emptyDir</code> são removidos quando: <ul><li>O pod designado é excluído permanentemente do nó do trabalhador.</li><li>O pod designado é planejado em outro nó do trabalhador.</li></ul>
+<td style="text-align:left">Os dados em volumes <code>hostPath</code> ou <code>emptyDir</code> são perdidos quando: <ul><li>O nó do trabalhador é excluído.</li><li>O nó do trabalhador é recarregado ou atualizado.</li><li>O cluster é excluído.</li><li>A conta do {{site.data.keyword.cloud_notm}} atinge um estado suspenso. </li></ul></p><p>Além disso, os dados em um volume <code>emptyDir</code> são removidos quando: <ul><li>O pod designado é excluído permanentemente do nó do trabalhador.</li><li>O pod designado é planejado em outro nó do trabalhador.</li></ul>
 </tr>
 <tr>
 <td style="text-align:left">Casos de uso comuns</td>
@@ -287,7 +285,7 @@ A imagem a seguir mostra as opções que você tem no {{site.data.keyword.contai
 <th style="text-align:left">Características</th>
 <th style="text-align:left">Objeto</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">Banco de dados do {{site.data.keyword.Bluemix_notm}}</th>
+<th style="text-align:left">Banco de dados do {{site.data.keyword.cloud_notm}}</th>
 </thead>
 <tbody>
 <tr>
@@ -377,3 +375,6 @@ armazenamento. Cada nó armazena somente uma parte dos dados. </td>
 </tr>
 </tbody>
 </table>
+
+
+

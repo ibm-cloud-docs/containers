@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casi di utilizzo di trasporto per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
+Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong}} possano
 avvalersi delle toolchain per aggiornamenti rapidi delle applicazioni e le distribuzioni multiregione in tutto il mondo. Allo stesso tempo, questi carichi di lavoro possono connettersi a sistemi di back-end esistenti, utilizzare Watson AI per la personalizzazione e accedere ai dati IOT con {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
@@ -35,7 +34,7 @@ avvalersi delle toolchain per aggiornamenti rapidi delle applicazioni e le distr
 ## La società di spedizione aumenta la disponibilità dei sistemi mondiali per l'ecosistema di business partner
 {: #uc_shipping}
 
-Un responsabile IT ha dei sistemi di pianificazione e instradamento delle spedizioni con cui i partner interagiscono. I partner richiedono informazioni aggiornate da questi sistemi che accedono ai dati dei dispositivi IoT. Tuttavia, questi sistemi non potevano essere ridimensionati in tutto il mondo con un'elevata disponibilità sufficiente.
+Un responsabile IT ha dei sistemi di pianificazione e instradamento delle spedizioni con cui i partner interagiscono. I partner richiedono informazioni aggiornate da questi sistemi che accedono ai dati dei dispositivi IoT. Tuttavia, questi sistemi non potevano essere ridimensionati in tutto il mondo con un'elevata disponibilità sufficiente. 
 {: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} ridimensiona le applicazioni inserite nel contenitore con 99,999 percento di disponibilità per soddisfare le crescenti richieste. Le distribuzioni di applicazioni si verificano 40 volte a giorno quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test. La piattaforma IoT facilita l'accesso ai dati IoT.
@@ -192,3 +191,5 @@ Con {{site.data.keyword.containerlong_notm}}, sono passati dall'hardware sovradi
 * L'autenticità con la personalizzazione nel sito ha affrontato le mutevoli aspettative della forza lavoro della compagnia aerea attuale.
 * Gli aggiornamenti dell'ultimo minuto del sito HR, compresi quelli guidati dalle conversazioni chatbot dei dipendenti, sono stati pubblicati rapidamente perché gli sviluppatori hanno distribuito modifiche almeno 10 volte al giorno.
 * Con la gestione dell'infrastruttura curata da IBM, il team di sviluppo è stato libero di consegnare il sito in sole 3 settimane.
+
+

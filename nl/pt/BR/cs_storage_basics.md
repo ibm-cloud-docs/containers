@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Entendendo as informações básicas de armazenamento do Kubernetes
 {: #kube_concepts}
 
@@ -34,15 +32,15 @@ subcollection: containers
 Antes de começar a provisionar o fornecimento, é importante entender os conceitos do Kubernetes de um volume persistente e de uma solicitação de volume persistente e como eles trabalham juntos em um cluster.
 {: shortdesc}
 
-A imagem a seguir mostra os componentes de armazenamento em um cluster do Kubernetes.
+A imagem a seguir mostra os componentes de armazenamento em um cluster.
 
 <img src="images/cs_storage_pvc_pv.png" alt="Storage components in a cluster" width="275" style="width: 275px; border-style: none"/>
 
 - **Cluster**</br> Por padrão, cada cluster é configurado com um plug-in para [provisionar o armazenamento de arquivo](/docs/containers?topic=containers-file_storage#add_file). É possível escolher instalar outros complementos, como aquele para [armazenamento de bloco](/docs/containers?topic=containers-block_storage). Para usar o armazenamento em um cluster, deve-se criar uma solicitação de volume persistente, um volume persistente e uma instância de armazenamento físico. Ao excluir o cluster, você tem a opção de excluir instâncias de armazenamento relacionadas.
 - **Aplicativo**</br> Para ler e gravar na instância de armazenamento, deve-se montar a solicitação de volume persistente (PVC) para seu aplicativo. Os diferentes tipos de armazenamento têm regras de leitura/gravação diferentes. Por exemplo, é possível montar múltiplos pods para o mesmo PVC para armazenamento de arquivo. O armazenamento de bloco é fornecido com um modo de acesso RWO (ReadWriteOnce) de maneira que seja possível montar o armazenamento em somente um pod.
-- **Solicitação de volume persistente (PVC)** </br> Uma PVC é a solicitação de provisionamento do armazenamento persistente com um tipo e uma configuração específicos. Para especificar o tipo de armazenamento persistente que você deseja, use as [Classes de armazenamento do Kubernetes](#storageclasses). O administrador de cluster pode definir classes de armazenamento ou é possível escolher dentre uma das classes de armazenamento predefinidas no {{site.data.keyword.containerlong_notm}}. Quando você cria um PVC, a solicitação é enviada para o provedor de armazenamento do {{site.data.keyword.Bluemix}}. Dependendo da configuração que está definida na classe de armazenamento, o dispositivo de armazenamento físico é pedido e provisionado em sua conta de infraestrutura do IBM Cloud (SoftLayer). Se a configuração solicitada não existir, o armazenamento não será criado.
-- **Volume persistente (PV)** </br> Um PV é uma instância de armazenamento virtual incluída como um volume no cluster. O PV aponta para um dispositivo de armazenamento físico em sua conta de infraestrutura do IBM Cloud (SoftLayer) e abstrai a API que é usada para se comunicar com o dispositivo de armazenamento. Para montar um PV em um app, deve-se ter um PVC correspondente. Os PVs montados aparecem como uma pasta dentro do sistema de arquivos do contêiner.
-- **Armazenamento físico** </br> Uma instância de armazenamento físico que pode ser usada para persistir seus dados. Exemplos de armazenamento físico no {{site.data.keyword.Bluemix_notm}} incluem [File Storage](/docs/containers?topic=containers-file_storage#file_storage), [Block Storage](/docs/containers?topic=containers-block_storage#block_storage), [Object Storage](/docs/containers?topic=containers-object_storage#object_storage) e armazenamento de nó do trabalhador local que podem ser usados como armazenamento SDS com o [Portworx](/docs/containers?topic=containers-portworx#portworx). O {{site.data.keyword.Bluemix_notm}} fornece alta disponibilidade para instâncias de armazenamento físico. No entanto, os dados que são armazenados em uma instância de armazenamento físico não são submetidos a backup automaticamente. Dependendo do tipo de armazenamento que você usa, existem métodos diferentes para configurar as soluções de backup e restauração.
+- **Solicitação de volume persistente (PVC)** </br> Uma PVC é a solicitação de provisionamento do armazenamento persistente com um tipo e uma configuração específicos. Para especificar o tipo de armazenamento persistente que você deseja, use as [Classes de armazenamento do Kubernetes](#storageclasses). O administrador de cluster pode definir classes de armazenamento ou é possível escolher dentre uma das classes de armazenamento predefinidas no {{site.data.keyword.containerlong_notm}}. Quando você cria um PVC, a solicitação é enviada para o provedor de armazenamento do {{site.data.keyword.Bluemix}}. Dependendo da configuração que está definida na classe de armazenamento, o dispositivo de armazenamento físico é solicitado e provisionado para sua conta de infraestrutura do IBM Cloud. Se a configuração solicitada não existir, o armazenamento não será criado.
+- **Volume persistente (PV)** </br> Um PV é uma instância de armazenamento virtual incluída como um volume no cluster. O PV aponta para um dispositivo de armazenamento físico em sua conta de infraestrutura do IBM Cloud e resume a API que é usada para se comunicar com o dispositivo de armazenamento. Para montar um PV em um app, deve-se ter um PVC correspondente. Os PVs montados aparecem como uma pasta dentro do sistema de arquivos do contêiner.
+- **Armazenamento físico** </br> Uma instância de armazenamento físico que pode ser usada para persistir seus dados. Exemplos de armazenamento físico no {{site.data.keyword.cloud_notm}} incluem [File Storage](/docs/containers?topic=containers-file_storage#file_storage), [Block Storage](/docs/containers?topic=containers-block_storage#block_storage), [Object Storage](/docs/containers?topic=containers-object_storage#object_storage) e armazenamento de nó do trabalhador local que podem ser usados como armazenamento SDS com o [Portworx](/docs/containers?topic=containers-portworx#portworx). O {{site.data.keyword.cloud_notm}} fornece alta disponibilidade para instâncias de armazenamento físico. No entanto, os dados que são armazenados em uma instância de armazenamento físico não são submetidos a backup automaticamente. Dependendo do tipo de armazenamento que você usa, existem métodos diferentes para configurar as soluções de backup e restauração.
 
 Para obter mais informações sobre como criar e usar PVCs, PVs e o dispositivo de armazenamento físico, consulte:
 - [ Provisionamento Dinâmico ](#dynamic_provisioning)
@@ -67,8 +65,8 @@ A imagem a seguir mostra como o armazenamento de arquivo é provisionado dinamic
 <img src="images/cs_storage_dynamic.png" alt="Fluxo de amostra para provisionar armazenamento de arquivo dinamicamente em um cluster" width="500" style="width: 500px; border-style: none"/>
 
 1. O usuário cria um persistent volume claim (PVC) que especifica o tipo de armazenamento, a classe de armazenamento, o tamanho em gigabytes, o número de IOPS e o tipo de faturamento. A classe de armazenamento determina o tipo de armazenamento que é provisionado e os intervalos permitidos para tamanho e IOPS. A criação de um PVC em um cluster aciona automaticamente o plug-in de armazenamento para o tipo solicitado de armazenamento para provisionar armazenamento com a especificação fornecida.
-2. O dispositivo de armazenamento é pedido e provisionado automaticamente em sua conta de infraestrutura do IBM Cloud (SoftLayer). O ciclo de faturamento para seu dispositivo de armazenamento é iniciado.
-3. O plug-in de armazenamento cria automaticamente um persistent volume (PV) no cluster, um dispositivo de armazenamento virtual que aponta para o dispositivo de armazenamento real em sua conta de infraestrutura do IBM Cloud (SoftLayer).
+2. O dispositivo de armazenamento é automaticamente solicitado e provisionado para sua conta de infraestrutura do IBM Cloud. O ciclo de faturamento para seu dispositivo de armazenamento é iniciado.
+3. O plug-in de armazenamento cria automaticamente um volume persistente (PV) no cluster, um dispositivo de armazenamento virtual que aponta para o dispositivo de armazenamento real em sua conta de infraestrutura do IBM Cloud.
 4. O PVC e o PV são conectados automaticamente um ao outro. O status do PVC e do PV muda para `Bound`. Agora é possível usar o PVC para montar armazenamento persistente em seu app. Se você excluir a PVC, o PV e a instância de armazenamento relacionada também serão excluídos. </br>
 
 ** Quando uso o fornecimento dinâmico? **</br>
@@ -85,7 +83,7 @@ Para obter mais informações sobre como provisionar dinamicamente o armazenamen
 ## Provisionamento estático
 {: #static_provisioning}
 
-Se você tiver um dispositivo de armazenamento persistente existente em sua conta de infraestrutura do IBM Cloud (SoftLayer), será possível usar o fornecimento estático para tornar a instância de armazenamento disponível para seu cluster.
+Se você tiver um dispositivo de armazenamento persistente existente em sua conta de infraestrutura do IBM Cloud, será possível usar o provisionamento estático para tornar a instância de armazenamento disponível para seu cluster.
 {: shortdesc}
 
 ** Como ele funciona? **</br>
@@ -101,15 +99,15 @@ A imagem a seguir mostra como provisionar estaticamente o armazenamento de arqui
 <img src="images/cs_storage_static.png" alt="Fluxo de amostra para provisionar estaticamente o armazenamento de arquivo em um cluster" width="500" style="width: 500px; border-style: none"/>
 
 1. O administrador de cluster reúne todos os detalhes sobre o dispositivo de armazenamento existente e cria um volume persistente (PV) no cluster.
-2. Com base nos detalhes de armazenamento no PV, o plug-in de armazenamento conecta o PV ao dispositivo de armazenamento em sua conta de infraestrutura do IBM Cloud (SoftLayer).
+2. Com base nos detalhes de armazenamento no PV, o plug-in de armazenamento conecta-se ao PV com o dispositivo de armazenamento em sua conta de infraestrutura do IBM Cloud.
 3. O administrador de cluster ou um desenvolvedor cria um PVC. Como o PV e o dispositivo de armazenamento já existem, nenhuma classe de armazenamento é especificada no PVC.
 4. Depois que o PVC é criado, o plug-in de armazenamento tenta corresponder o PVC a um PV existente. O PVC e o PV correspondem quando os mesmos valores para o tamanho, IOPS e modo de acesso são usados no PVC e no PV. Quando o PVC e o PV correspondem, o status do PVC e do PV muda para `Bound`. Agora é possível usar o PVC para montar armazenamento persistente em seu app. Quando você exclui o PVC, o PV e a instância de armazenamento físico não são removidos. Deve-se remover a PVC, o PV e a instância de armazenamento físico separadamente.  </br>
 
 ** Quando eu utilizo fornecimento estático? **</br>
 
 Revise os casos de uso comuns a seguir para fornecimento estático de armazenamento persistente:
-1. **Tornar os dados retidos disponíveis para o cluster:** você provisionou o armazenamento persistente com uma classe de armazenamento de retenção usando fornecimento dinâmico. Você removeu o PVC, mas o PV, o armazenamento físico na infraestrutura do IBM Cloud (SoftLayer) e os dados ainda existem. Você deseja acessar os dados retidos por meio de um app em seu cluster.
-2. **Usar um dispositivo de armazenamento existente:** você provisionou o armazenamento persistente diretamente em sua conta de infraestrutura do IBM Cloud (SoftLayer) e deseja usar esse dispositivo de armazenamento em seu cluster.
+1. **Tornar os dados retidos disponíveis para o cluster:** você provisionou o armazenamento persistente com uma classe de armazenamento de retenção usando fornecimento dinâmico. Você removeu o PVC, mas o PV, o armazenamento físico na infraestrutura do IBM Cloud, e os dados ainda existem. Você deseja acessar os dados retidos por meio de um app em seu cluster.
+2. **Use um dispositivo de armazenamento existente:** você provisionou o armazenamento persistente diretamente em sua conta de infraestrutura do IBM Cloud e deseja usar esse dispositivo de armazenamento em seu cluster.
 3. **Compartilhar armazenamento persistente entre clusters na mesma zona:** você provisionou o armazenamento persistente para seu cluster. Para compartilhar a mesma instância de armazenamento persistente com outros clusters na mesma zona, deve-se criar manualmente o PV e o PVC correspondente no outro cluster. **Nota:** o compartilhamento de armazenamento persistente em clusters estará disponível somente se o cluster e a instância de armazenamento estiverem localizados na mesma zona.
 4. **Compartilhar armazenamento persistente entre namespaces no mesmo cluster:** você provisionou o armazenamento persistente em um namespace de seu cluster. Você deseja usar a mesma instância de armazenamento para um pod de app que é implementado em um namespace diferente em seu cluster.
 
@@ -123,7 +121,7 @@ Para obter mais informações sobre como provisionar armazenamento estaticamente
 Para provisionar dinamicamente o armazenamento persistente, deve-se definir o tipo e a configuração do armazenamento que você deseja.
 {: shortdesc}
 
-Uma [classe de armazenamento do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/storage-classes/) é usada para abstrair a plataforma de armazenamento subjacente que é suportada em {{site.data.keyword.Bluemix_notm}} para que você não tenha que saber todos os detalhes sobre tamanhos suportados, IOPS ou políticas de retenção para provisionar com êxito o armazenamento persistente em um cluster. O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento predefinidas para cada tipo de armazenamento que é suportado. Cada classe de armazenamento é projetada para abstrair a camada de armazenamento suportada enquanto lhe dá a opção de decidir sobre o tamanho, o IOPS e a política de retenção que você deseja.
+Uma [classe de armazenamento do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/storage/storage-classes/) é usada para abstrair a plataforma de armazenamento subjacente que é suportada em {{site.data.keyword.cloud_notm}} para que você não tenha que saber todos os detalhes sobre tamanhos suportados, IOPS ou políticas de retenção para provisionar com êxito o armazenamento persistente em um cluster. O {{site.data.keyword.containerlong_notm}} fornece classes de armazenamento predefinidas para cada tipo de armazenamento que é suportado. Cada classe de armazenamento é projetada para abstrair a camada de armazenamento suportada enquanto lhe dá a opção de decidir sobre o tamanho, o IOPS e a política de retenção que você deseja.
 
 Para obter as especificações de classe de armazenamento predefinidas, consulte:
 - [Armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
@@ -210,7 +208,7 @@ Use um script para localizar todos os PVs em seu cluster e aplique os rótulos d
 
 Antes de iniciar:
 - [Destine a CLI do Kubernetes para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region<region>`.
+- Se você tiver múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou em um cluster multizona, você deverá ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud para que os nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o seu representante de conta de infraestrutura do IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Para verificar se um VRF já está ativado, use o comando `ibmcloud account show`. Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se a ampliação de VLAN já está ativada, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 Para atualizar PVs existentes:
 
@@ -284,3 +282,5 @@ Para atualizar PVs existentes:
 Agora que você rotulou seus PVs existentes, é possível montar o PV em seu cluster de múltiplas zonas. Consulte os links a seguir para obter mais informações.
 - Use  [ armazenamento de arquivo NFS existente ](/docs/containers?topic=containers-file_storage#existing_file)
 - Use  [ armazenamento de bloco existente ](/docs/containers?topic=containers-block_storage#existing_block)
+
+

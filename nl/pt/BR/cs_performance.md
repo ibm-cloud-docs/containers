@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Se você tiver requisitos de otimização de desempenho específicos, será poss
 
 Os nós do trabalhador são provisionados automaticamente com o desempenho do kernel otimizado, mas é possível mudar as configurações padrão aplicando um objeto `DaemonSet` do [Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) customizado ao seu cluster. O conjunto de daemons altera as configurações para todos os nós do trabalhador existentes e aplica as configurações a todos os novos nós do trabalhador que são fornecidos no cluster. Nenhum pods é afetado.
 
-Você deve ter a [função de serviço IAM do **Manager** {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar o `initContainer`privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+Deve-se ter a [função de serviço **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar o `initContainer` privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 {: note}
 
 1. Salve o daemon a seguir configurado em um arquivo denominado `worker-node-kernel-settings.yaml`. Na seção `spec.template.spec.initContainers`, inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Esse conjunto de daemons de exemplo muda o número máximo padrão de conexões que são permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_port_range`.
@@ -131,7 +131,7 @@ Se você tiver demandas de carga de trabalho de desempenho específicas, será p
 
 Para otimizar as configurações do kernel para os pods de app, é possível inserir uma correção [`initContainer ` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) no YAML `pod/ds/rs/deployment` para cada implementação. O `initContainer` é incluído em cada implementação de app que está no namespace de rede do pod para o qual você deseja otimizar o desempenho.
 
-Antes de iniciar, assegure-se de que você tenha a [ função de serviço **Gerenciador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar a amostra privilegiada `initContainer`. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
+Antes de iniciar, assegure-se de que tenha a [função de serviço **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces para executar o `initContainer` privilegiado de amostra. Após os contêineres para as implementações serem inicializados, os privilégios serão eliminados.
 
 1. Salve a correção `initContainer` a seguir em um arquivo denominado `pod-patch.yaml` e inclua os campos e valores para os parâmetros `sysctl` que você deseja ajustar. Este exemplo `initContainer` muda o número máximo padrão de conexões permitidas no ambiente por meio da configuração `net.core.somaxconn` e do intervalo de portas efêmeras por meio da configuração `net.ipv4.ip_local_port_range`.
     ```

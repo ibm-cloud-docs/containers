@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,34 +23,34 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casi di utilizzo di assistenza sanitaria per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_health}
 
-Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} traggono vantaggio dal cloud pubblico. Garantiscono un calcolo sicuro su bare metal isolato, la facile attivazione dei cluster per uno sviluppo più rapido, la migrazione da macchine virtuali e la condivisione dei dati nei database cloud.
+Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong}} traggono vantaggio dal cloud pubblico. Garantiscono un calcolo sicuro su bare metal isolato, la facile attivazione dei cluster per uno sviluppo più rapido, la migrazione da macchine virtuali e la condivisione dei dati nei database cloud.
 {: shortdesc}
+
 
 ## Il fornitore di assistenza sanitaria migra i carichi di lavoro da VM inefficienti a contenitori operativi per i sistemi di reporting e gestione dei pazienti.
 {: #uc_migrate}
 
-Un responsabile IT per un fornitore di assistenza sanitaria dispone di sistemi aziendali di reporting e gestione dei pazienti installati in loco. Questi sistemi hanno lenti cicli di miglioramento, che portano a livelli di servizio stagnanti per i pazienti.
+Un responsabile IT per un fornitore di assistenza sanitaria dispone di sistemi aziendali di reporting e gestione dei pazienti installati in loco. Questi sistemi hanno lenti cicli di miglioramento, che portano a livelli di servizio stagnanti per i pazienti. 
 {: shortdesc}
 
-Perché {{site.data.keyword.cloud_notm}}: per migliorare il servizio dei pazienti, il fornitore ha cercato {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.contdelivery_full}} per ridurre la spesa IT e accelerare lo sviluppo, il tutto su una piattaforma sicura. I sistemi SaaS ad alto utilizzo del fornitore, che contenevano sia i sistemi di registrazione dei pazienti che le applicazioni di report aziendali, necessitavano di aggiornamenti frequenti. Tuttavia, l'ambiente in loco ha ostacolato lo sviluppo agile. Il fornitore voleva anche contrastare l'aumento del costo del lavoro e un budget in diminuzione.
+Perché {{site.data.keyword.cloud_notm}}: per migliorare il servizio dei pazienti, il fornitore ha cercato {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.contdelivery_full}} per ridurre la spesa IT e accelerare lo sviluppo, il tutto su una piattaforma sicura. I sistemi SaaS ad alto utilizzo del fornitore, che contenevano sia i sistemi di registrazione dei pazienti che le applicazioni di report aziendali, necessitavano di aggiornamenti frequenti. Tuttavia, l'ambiente in loco ha ostacolato lo sviluppo agile.  Il fornitore voleva anche contrastare l'aumento del costo del lavoro e un budget in diminuzione.
 
 Tecnologie chiave:
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Adattamento orizzontale](/docs/containers?topic=containers-app#highly_available_apps)
-* [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security)
+* [Sicurezza e isolamento dei contenitori](/docs/containers?topic=containers-security#security) 
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 * [Funzionalità di accesso senza modificare il codice applicativo utilizzando {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
-Hanno iniziato caricando i propri sistemi SaaS in un contenitore e inserendoli nel cloud. Da quel primo passo, sono passati dall'hardware sovradimensionato in un data center privato al calcolo personalizzabile che riduce le operazioni IT, la manutenzione e l'energia. Per ospitare i sistemi SaaS, hanno progettato facilmente cluster Kubernetes per soddisfare le loro esigenze di CPU, RAM e archiviazione. Un altro fattore per la riduzione dei costi del personale è che IBM gestisce Kubernetes, quindi il fornitore può concentrarsi sulla fornitura di un servizio clienti migliore.
+Hanno iniziato caricando i propri sistemi SaaS in un contenitore e inserendoli nel cloud. Da quel primo passo, sono passati dall'hardware sovradimensionato in un data center privato al calcolo personalizzabile che riduce le operazioni IT, la manutenzione e l'energia. Per ospitare le applicazioni SaaS, hanno progettato facilmente cluster Kubernetes per soddisfare le loro esigenze di CPU, RAM e archiviazione. Un altro fattore per la riduzione dei costi del personale è che IBM gestisce Kubernetes, quindi il fornitore può concentrarsi sulla fornitura di un servizio clienti migliore. 
 
 Lo sviluppo accelerato è una vittoria fondamentale per il responsabile IT. Con il passaggio al cloud pubblico, gli sviluppatori possono sperimentare facilmente con l'SDK Node.js, distribuendo le modifiche nei sistemi di sviluppo e test, ridimensionati su cluster separati. Queste distribuzioni sono state automatizzate con le toolchain aperte e {{site.data.keyword.contdelivery_full}}. Gli aggiornamenti al sistema SaaS non sono più rallentati da processi di build lenti e soggetti a errori. Gli sviluppatori possono fornire aggiornamenti incrementali ai loro utenti, tutti i giorni o anche più frequentemente.  Inoltre, la registrazione e il monitoraggio per i sistemi SaaS, in particolare l'interazione tra i report di front-end e back-end dei pazienti, si integrano rapidamente nel sistema. Gli sviluppatori non sprecano tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei sistemi attivi.
 
-La sicurezza prima di tutto: con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro sensibili dei pazienti ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute, che è in grado di verificare eventuali manomissioni dell'hardware sottostante. Da tale nucleo, Vulnerability Advisor fornisce la scansione:
+La sicurezza prima di tutto: con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro sensibili dei pazienti ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Da tale nucleo, Vulnerability Advisor fornisce la scansione:
 * Scansione dei punti vulnerabili delle immagini
 * Scansione delle politiche basata su ISO 27k
 * Scansione dei contenitori attivi
@@ -72,8 +72,6 @@ Proteggere i dati dei pazienti fa sì che i pazienti siano più felici.
 Servizi I/O, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro alle risorse aziendali in loco. Implementare un processo CI/CD e altre parti di IBM Garage Method per ridurre drasticamente i cicli di consegna.
 
 **Passo 1: protezione della piattaforma di calcolo**
-* Le applicazioni che gestiscono dati altamente sensibili dei pazienti possono essere riospitate su {{site.data.keyword.containerlong_notm}} in esecuzione su bare metal per Trusted Compute.
-* Trusted Compute può verificare eventuali manomissioni dell'hardware sottostante.
 * Da tale nucleo, Vulnerability Advisor fornisce la scansione dei punti vulnerabili di immagini, politiche, contenitori e pacchetti per rilevare malware noti.
 * Implementa in modo congruente l'autenticazione controllata dalle politiche ai tuoi servizi e alle tue API con una semplice annotazione Ingress. Con la sicurezza dichiarativa, puoi garantire l'autenticazione degli utenti e la convalida dei token utilizzando {{site.data.keyword.appid_short_notm}}.
 
@@ -91,12 +89,12 @@ Servizi I/O, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico co
 * Adotta le procedure di sviluppo agili e iterative di IBM Garage Method per consentire frequenti rilasci di nuove funzioni, patch e correzioni senza tempi di inattività.
 
 **Soluzione tecnica**
-* {{site.data.keyword.containerlong_notm}}
+* {{site.data.keyword.containerlong_notm}} 
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_short_notm}}
 
-Per i carichi di lavoro più sensibili, i cluster possono essere ospitati in {{site.data.keyword.containerlong_notm}} per Bare Metal.  Fornisce una piattaforma di calcolo attendibile che esegue automaticamente la scansione dell'hardware e del codice di runtime per rilevare eventuali vulnerabilità. Utilizzando la tecnologia dei contenitori standard del settore, le applicazioni possono essere inizialmente riospitate su {{site.data.keyword.containerlong_notm}} in modo rapido senza importanti modifiche architetturali. Questa modifica offre il vantaggio immediato della scalabilità.
+Per i carichi di lavoro più sensibili, i cluster possono essere ospitati in {{site.data.keyword.containerlong_notm}} per Bare Metal. Utilizzando la tecnologia dei contenitori standard del settore, le applicazioni possono essere inizialmente riospitate su {{site.data.keyword.containerlong_notm}} in modo rapido senza importanti modifiche architetturali. Questa modifica offre il vantaggio immediato della scalabilità.
 
 Possono replicare e ridimensionare le applicazioni, utilizzando regole definite e l'orchestratore automatizzato di Kubernetes. {{site.data.keyword.containerlong_notm}} fornisce risorse di calcolo scalabili e i dashboard DevOps associati per creare, ridimensionare e rimuovere applicazioni e servizi su richiesta. Utilizzando gli oggetti di distribuzione e di runtime di Kubernetes, il fornitore può monitorare e gestire gli aggiornamenti alle applicazioni in modo affidabile.
 
@@ -109,8 +107,8 @@ Spostare i carichi di lavoro di calcolo in {{site.data.keyword.cloud_notm}} non 
 Gran parte dello stesso processo CI/CD è automatizzato con il servizio IBM Continuous Delivery nel cloud. Il fornitore può definire toolchain del flusso di lavoro per preparare le immagini del contenitore, verificare la presenza di vulnerabilità e distribuirle nel cluster Kubernetes.
 
 **Risultati**
-* Lo spostamento delle VM monolitiche esistenti nei contenitori ospitati nel cloud è stato il primo passo che ha consentito al fornitore di risparmiare sui costi di capitale e iniziare a conoscere le moderne procedure di DevOps.
-* La riprogettazione delle applicazioni monolitiche in una serie di microservizi dettagliati ha ridotto notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni.
+* Lo spostamento delle VM monolitiche esistenti nei contenitori ospitati nel cloud è stato il primo passo che ha consentito al fornitore di risparmiare sui costi di capitale e iniziare a conoscere le moderne procedure di DevOps. 
+* La riprogettazione delle applicazioni monolitiche chiave in una serie di microservizi dettagliati ha ridotto notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni.
 * In parallelo, il fornitore ha implementato semplici iterazioni a tempo fisso per ottenere la gestione del debito tecnico esistente.
 
 ## La ricerca no-profit ospita in modo sicuro dati sensibili mentre cresce la ricerca con i partner
@@ -126,7 +124,7 @@ Tecnologie chiave:
 * [{{site.data.keyword.cloudant}} per mantenere e sincronizzare i dati tra le applicazioni](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [Scansione e isolamento delle vulnerabilità per i carichi di lavoro](/docs/services/Registry?topic=va-va_index#va_index)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} per ripulire i dati e informare i ricercatori sulle modifiche alla struttura dei dati](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} per ripulire i dati e informare i ricercatori sulle modifiche alla struttura dei dati](/docs/openwhisk?topic=cloud-functions-pkg_cloudant#openwhisk_cloudant)
 
 **Contesto: hosting e condivisione sicura dei dati sulle malattie per la ricerca no-profit**
 
@@ -164,7 +162,7 @@ L'organizzazione no-profit fornisce anche applicazioni che vengono eseguite su n
 
 Gli sviluppatori hanno iniziato distribuendo le loro applicazioni SaaS per la condivisione delle ricerche in contenitori con {{site.data.keyword.containerlong_notm}}. Hanno creato cluster per un ambiente di sviluppo che consentono agli sviluppatori di tutto il mondo di distribuire rapidamente e in modo collaborativo i miglioramenti alle applicazioni.
 
-La sicurezza prima di tutto: il responsabile dello sviluppo ha scelto Trusted Compute per bare metal per ospitare i cluster di ricerca. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro di ricerca sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute che è in grado di verificare eventuali manomissioni dell'hardware sottostante. Poiché questa organizzazione no-profit collabora anche con aziende farmaceutiche, la sicurezza delle applicazioni è fondamentale. La concorrenza è agguerrita e lo spionaggio aziendale è possibile. Da tale nucleo sicuro, Vulnerability Advisor fornisce la scansione:
+La sicurezza prima di tutto: il responsabile dello sviluppo ha scelto bare metal per ospitare i cluster di ricerca. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro di ricerca sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Poiché questa organizzazione no-profit collabora anche con aziende farmaceutiche, la sicurezza delle applicazioni è fondamentale. La concorrenza è agguerrita e lo spionaggio aziendale è possibile. Da tale nucleo sicuro, Vulnerability Advisor fornisce la scansione:
 * Scansione dei punti vulnerabili delle immagini
 * Scansione delle politiche basata su ISO 27k
 * Scansione dei contenitori attivi
@@ -181,7 +179,7 @@ Gli sviluppatori si concentrano sui problemi di dominio, utilizzando gli strumen
 Kit starter Node, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro ai dati di ricerca in tutto il mondo, secondo garanzia. Il calcolo nei cluster è a prova di manomissione e isolato su bare metal.
 
 Soluzione tecnica:
-* {{site.data.keyword.containerlong_notm}} con Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
@@ -196,8 +194,7 @@ Soluzione tecnica:
 
 **Passo 2: utilizza il calcolo sicuro e performante**
 * Le applicazioni di ML che richiedono calcoli con prestazioni più elevate sono ospitate in {{site.data.keyword.containerlong_notm}} su bare metal. Questo cluster ML è centralizzato, quindi ogni cluster regionale non ha le spese dei nodi di lavoro bare metal; anche le distribuzioni di Kubernetes sono più facili.
-* Le applicazioni che elaborano dati clinici altamente sensibili possono essere ospitate in {{site.data.keyword.containerlong_notm}} su bare metal per Trusted Compute.
-* Trusted Compute può verificare eventuali manomissioni dell'hardware sottostante. Da tale nucleo, Vulnerability Advisor fornisce la scansione dei punti vulnerabili di immagini, politiche, contenitori e pacchetti per rilevare malware noti.
+* Vulnerability Advisor fornisce la scansione dei punti vulnerabili di immagini, politiche, contenitori e pacchetti per rilevare malware noti.
 
 **Passo 3: garantisci la disponibilità globale**
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei propri cluster di sviluppo e test, utilizzano le toolchain CI/CD di IBM per distribuire le applicazioni nei cluster in tutto il mondo.
@@ -216,3 +213,5 @@ Soluzione tecnica:
 * I microservizi riducono notevolmente i tempi di consegna di patch, correzioni di bug e nuove funzioni. Lo sviluppo iniziale è veloce e gli aggiornamenti sono frequenti.
 * I ricercatori hanno accesso ai dati clinici e possono condividerli, rispettando al contempo le normative locali.
 * I pazienti che partecipano alla ricerca sulle malattie hanno la certezza che i loro dati siano sicuri e facciano la differenza, quando sono condivisi con grandi team di ricerca.
+
+

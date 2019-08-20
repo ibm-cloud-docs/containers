@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,26 +23,21 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Permissões de acesso de
 {: #access_reference}
 
 Ao [designar permissões de cluster](/docs/containers?topic=containers-users), pode ser difícil julgar qual função precisa ser designada a um usuário. Use as tabelas nas seções a seguir para determinar o nível mínimo de permissões que são necessárias para executar tarefas comuns no {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-A partir de 30 de janeiro de 2019, o {{site.data.keyword.containerlong_notm}} tem uma nova maneira de autorizar usuários com o {{site.data.keyword.Bluemix_notm}} IAM: [funções de acesso ao serviço](#service). Essas funções de serviço são usadas para conceder acesso aos recursos dentro do cluster, como namespaces do Kubernetes. Para obter mais informações, consulte o blog [Introduzindo funções de serviço e namespaces no IAM para obter controle mais granular de acesso ao cluster ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
-
-## {{site.data.keyword.Bluemix_notm}} Funções da Plataforma IAM
+## {{site.data.keyword.cloud_notm}} Funções da Plataforma IAM
 {: #iam_platform}
 
-O {{site.data.keyword.containerlong_notm}} é configurado para usar funções do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM). As funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM determinam as ações que os usuários podem executar em recursos do {{site.data.keyword.Bluemix_notm}}, como clusters, nós do trabalhador e balanceadores de carga do aplicativo (ALBs) Ingress. As funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM também configuram automaticamente as permissões de infraestrutura básica para os usuários. Para configurar funções da plataforma, consulte [Designando permissões de plataforma do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+O {{site.data.keyword.containerlong_notm}} é configurado para usar funções do {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM). As funções da plataforma do {{site.data.keyword.cloud_notm}} IAM determinam as ações que os usuários podem executar em recursos do {{site.data.keyword.cloud_notm}}, como clusters, nós do trabalhador e balanceadores de carga do aplicativo (ALBs) Ingress. As funções da plataforma do {{site.data.keyword.cloud_notm}} IAM também configuram automaticamente as permissões de infraestrutura básica para os usuários. Para configurar funções da plataforma, consulte [Designando permissões de plataforma do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
-<p class="tip">Não designe funções de plataforma do IAM do {{site.data.keyword.Bluemix_notm}} ao mesmo tempo que uma função de serviço. Deve-se designar funções de plataforma e de serviço separadamente.</p>
+<p class="tip">Não designe funções da plataforma do {{site.data.keyword.cloud_notm}} IAM ao mesmo tempo que uma função de serviço. Deve-se designar funções de plataforma e de serviço separadamente.</p>
 
-Em cada uma das seções a seguir, as tabelas mostram as permissões de gerenciamento de cluster, de criação de log e do Ingress concedidas por cada função da plataforma do {{site.data.keyword.Bluemix_notm}} IAM. As tabelas são organizadas alfabeticamente por nome de comando da CLI.
+Em cada uma das seções a seguir, as tabelas mostram as permissões de gerenciamento de cluster, de criação de log e do Ingress concedidas por cada função da plataforma do {{site.data.keyword.cloud_notm}} IAM. As tabelas são organizadas alfabeticamente por nome de comando da CLI.
 
 * [ Ações que não requerem permissões ](#none-actions)
 * [ Ações do visualizador ](#view-actions)
@@ -91,8 +86,8 @@ Qualquer usuário em sua conta que execute o comando da CLI ou faça a chamada A
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
-<td>Visualizar uma lista de tipos de máquina disponíveis para seus nós do trabalhador.</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td>Visualize uma lista de tipos disponíveis para os nós do trabalhador.</td>
+<td><code>[ibmcloud ks flavors](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types)</code></td>
 <td><code>[GET /v1/datacenters/ { datacenter } /machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
@@ -122,7 +117,7 @@ Qualquer usuário em sua conta que execute o comando da CLI ou faça a chamada A
 </tr>
 <tr>
 <td>Visualizar uma lista de versões suportadas no {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -163,7 +158,7 @@ A função da plataforma **Visualizador** inclui as [ações que não requerem p
 <td><code>[GET /clusters/ { idOrName }](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
 <tr>
-<td>Visualize o nome e o endereço de e-mail para o proprietário da chave de API do {{site.data.keyword.Bluemix_notm}} IAM para um grupo de recursos e região.</td>
+<td>Visualize o nome e o endereço de e-mail para o proprietário da chave de API do {{site.data.keyword.cloud_notm}} IAM para um grupo de recursos e região.</td>
 <td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
 <td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
 </tr>
@@ -188,12 +183,12 @@ A função da plataforma **Visualizador** inclui as [ações que não requerem p
 <td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
-<td>Obtenha as credenciais de infraestrutura que estão configuradas para a conta do {{site.data.keyword.Bluemix_notm}} para acessar um portfólio de infraestrutura diferente do IBM Cloud (SoftLayer).</td>
+<td>Obtenha as credenciais de infraestrutura configuradas para a conta do {{site.data.keyword.cloud_notm}} para acessar um portfólio de infraestrutura do IBM Cloud diferente.</td>
 <td><code>[        ibmcloud ks credential-get
         ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Verificar se as credenciais que permitem o acesso ao portfólio da infraestrutura do IBM Cloud (SoftLayer) para a região de destino e o grupo de recursos estão omitindo permissões de infraestrutura sugeridas ou necessárias.</td>
+<td>Verifique se as permissões de infraestrutura sugeridas ou necessárias estão ausentes das credenciais que permitem acesso ao portfólio de infraestrutura do IBM Cloud para a região de destino e o grupo de recursos.</td>
 <td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
 <td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
 </tr>
@@ -226,6 +221,11 @@ A função da plataforma **Visualizador** inclui as [ações que não requerem p
 <td>Listar todos os serviços que estão ligados a um namespace específico.</td>
 <td>-</td>
 <td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>Liste todas as sub-redes de infraestrutura do IBM Cloud que estão ligadas a um cluster.</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterSubnets)</code></td>
 </tr>
 <tr>
 <td>Liste todas as sub-redes gerenciadas pelo usuário que são ligadas a um cluster.</td>
@@ -310,11 +310,6 @@ A função da plataforma **Editor** inclui as permissões que são concedidas pe
 <td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) e [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
 </tr>
 <tr>
-<td>Criar um ALB do Ingress.</td>
-<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
-<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
-</tr>
-<tr>
 <td>Retroceder a atualização do complemento ALB do Ingress para a construção em que os pods do ALB estavam em execução anteriormente.</td>
 <td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
 <td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
@@ -392,52 +387,52 @@ A função da plataforma **Editor** inclui as permissões que são concedidas pe
 <tr>
 <td>Incluir um endereço IP do NLB em um nome do host do NLB existente.</td>
 <td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UpdateDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Criar um nome do host do DNS para registrar um endereço IP do NLB.</td>
 <td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/RegisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Listar os nomes de host e endereços IP de NLB registrados em um cluster.</td>
 <td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/ListNLBIPsForSubdomain)</code></td>
 </tr>
 <tr>
 <td>Remover um endereço IP de NLB de um nome de host.</td>
 <td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UnregisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Configure e, opcionalmente, ative um monitor de verificação de funcionamento para um nome de host do NLB existente em um cluster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/AddNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Visualize as configurações para um monitor de verificação de funcionamento existente.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/GetNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Desativar um monitor de verificação de funcionamento existente para um nome do host em um cluster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Ative um monitor de verificação de funcionamento que você configurou.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Liste as configurações do monitor de verificação de funcionamento para cada nome de host do NLB em um cluster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitors)</code></td>
 </tr>
 <tr>
 <td>Listar o status de verificação de funcionamento de cada endereço IP que está registrado com um nome do host do NLB em um cluster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitorStatus)</code></td>
 </tr>
 <tr>
 <td>Crie um webhook em um cluster.</td>
@@ -450,7 +445,7 @@ A função da plataforma **Editor** inclui as permissões que são concedidas pe
 ### Ações do Operador
 {: #operator-actions}
 
-A função da plataforma **Operador** inclui as permissões que são concedidas pelo **Visualizador**, mais as permissões que são mostradas na tabela a seguir. Com a função **Operador**, os usuários, como os engenheiros de confiabilidade de site, os engenheiros de DevOps ou os administradores de cluster, podem incluir nós do trabalhador e solucionar problemas de infraestrutura, como recarregar um nó do trabalhador, mas não podem criar nem excluir o cluster, mudar as credenciais ou configurar recursos abrangentes de cluster, como terminais de serviço ou complementos gerenciados.
+A função da plataforma **Operador** inclui as permissões que são concedidas pelo **Visualizador**, mais as permissões que são mostradas na tabela a seguir. Com a função **Operador**, usuários como os engenheiros de confiabilidade de site, os engenheiros do DevOps ou os administradores de cluster podem incluir nós do trabalhador e solucionar problemas de infraestrutura, como ao recarregar um nó do trabalhador, mas não podem criar nem excluir o cluster, mudar as credenciais ou configurar recursos abrangentes de cluster, como terminais em serviço ou complementos gerenciados.
 {: shortdesc}
 
 <table>
@@ -467,7 +462,7 @@ A função da plataforma **Operador** inclui as permissões que são concedidas 
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
-<td>Crie um ID de serviço do {{site.data.keyword.Bluemix_notm}} IAM para o cluster, crie uma política para o ID de serviço que designa a função de acesso ao serviço **Leitor** no {{site.data.keyword.registrylong_notm}} e, em seguida, crie uma chave de API para o ID de serviço.</td>
+<td>Crie um ID de serviço do {{site.data.keyword.cloud_notm}} IAM para o cluster, crie uma política para o ID de serviço que designa a função de acesso ao serviço **Leitor** no {{site.data.keyword.registrylong_notm}} e, em seguida, crie uma chave de API para o ID de serviço.</td>
 <td><code>[ ibmcloud ks cluster-pull-secret-apply ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
@@ -480,6 +475,11 @@ A função da plataforma **Operador** inclui as permissões que são concedidas 
 <td>Criar uma sub-rede e incluí-la em um cluster.</td>
 <td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>Remova uma sub-rede de um cluster.</td>
+<td><code>[ibmcloud ks cluster-subnet-detach](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/DetachClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>Atualizar um cluster.</td>
@@ -562,7 +562,7 @@ A função da plataforma **Operador** inclui as permissões que são concedidas 
 ### Ações do Administrador
 {: #admin-actions}
 
-A função da plataforma **Administrador** inclui todas as permissões que são concedidas pelas funções **Visualizador**, **Editor** e **Operador**, mais o seguinte. Com a função **Administrador**, os usuários, como os administradores de cluster ou de conta, podem criar e excluir clusters ou configurar recursos abrangentes de cluster, como terminais de serviço ou complementos gerenciados. Para criar esses recursos de infraestrutura, como máquinas de nós do trabalhador, VLANs e sub-redes, os usuários Administradores precisam da <a href="#infra">função de infraestrutura</a> **Superusuário** ou da chave da API para que a região seja configurada com as permissões apropriadas.
+A função da plataforma **Administrador** inclui todas as permissões que são concedidas pelas funções **Visualizador**, **Editor** e **Operador**, mais o seguinte. Com a função **Administrador**, usuários como os administradores de cluster ou de conta, podem criar e excluir clusters ou configurar recursos abrangentes de cluster, como terminais em serviço ou complementos gerenciados. Para criar esses recursos de infraestrutura, como máquinas de nós do trabalhador, VLANs e sub-redes, os usuários Administradores precisam da <a href="#infra">função de infraestrutura</a> **Superusuário** ou da chave de API para que a região seja configurada com as permissões apropriadas.
 {: shortdesc}
 
 <table>
@@ -576,17 +576,17 @@ A função da plataforma **Administrador** inclui todas as permissões que são 
 <tr>
 <td>Beta: implementar ou atualizar um certificado de sua instância do {{site.data.keyword.cloudcerts_long_notm}} para um ALB.</td>
 <td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) ou [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) ou [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/UpdateALBSecret)</code></td>
 </tr>
 <tr>
 <td>Beta: visualizar detalhes para um segredo do ALB em um cluster.</td>
 <td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/ViewClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>Beta: remover um segredo do ALB de um cluster.</td>
 <td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>Liste todos os segredos do ALB em um cluster.</td>
@@ -594,7 +594,7 @@ A função da plataforma **Administrador** inclui todas as permissões que são 
 <td>-</td>
 </tr>
 <tr>
-<td>Configure a chave de API para a conta do {{site.data.keyword.Bluemix_notm}} para acessar o portfólio de infraestrutura vinculado do IBM Cloud (SoftLayer).</td>
+<td>Configure a chave de API para a conta do {{site.data.keyword.cloud_notm}} para acessar o portfólio de infraestrutura do IBM Cloud vinculado.</td>
 <td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
 <td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
@@ -609,7 +609,7 @@ A função da plataforma **Administrador** inclui todas as permissões que são 
 <td><code>[PATCH /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons)</code></td>
 </tr>
 <tr>
-<td>Listar o complemento gerenciado, como o Istio ou o Knative, que está ativado em um cluster.</td>
+<td>Liste os complementos gerenciados, tais como o Istio ou o Knative, que são ativados em um cluster.</td>
 <td><code>[ibmcloud ks cluster-addons](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)</code></td>
 <td><code>[GET /v1/clusters/{idOrName}/addons](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons)</code></td>
 </tr>
@@ -634,12 +634,12 @@ A função da plataforma **Administrador** inclui todas as permissões que são 
 <td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
-<td>Configure credenciais de infraestrutura para a conta do {{site.data.keyword.Bluemix_notm}} para acessar um portfólio diferente de infraestrutura do IBM Cloud (SoftLayer).</td>
+<td>Configure as credenciais de infraestrutura para a conta do {{site.data.keyword.cloud_notm}} para acessar um portfólio de infraestrutura do IBM Cloud diferente.</td>
 <td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
 <td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Remova as credenciais de infraestrutura para a conta do {{site.data.keyword.Bluemix_notm}} para acessar um portfólio de infraestrutura diferente do IBM Cloud (SoftLayer).</td>
+<td>Remova as credenciais de infraestrutura para a conta do {{site.data.keyword.cloud_notm}} para acessar um portfólio de infraestrutura do IBM Cloud diferente.</td>
 <td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
@@ -684,13 +684,13 @@ A função da plataforma **Administrador** inclui todas as permissões que são 
 <br />
 
 
-## {{site.data.keyword.Bluemix_notm}}  Funções de serviço do IAM
+## {{site.data.keyword.cloud_notm}}  Funções de serviço do IAM
 {: #service}
 
-Cada usuário que é designado a uma função de acesso de serviço do {{site.data.keyword.Bluemix_notm}} IAM também é designado automaticamente a uma função correspondente de controle de acesso baseado na função do Kubernetes (RBAC) em um namespace específico. Para saber mais sobre funções de acesso de serviço, consulte [Funções de serviço do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). Não designe funções de plataforma do IAM do {{site.data.keyword.Bluemix_notm}} ao mesmo tempo que uma função de serviço. Deve-se designar funções de plataforma e de serviço separadamente.
+Cada usuário que é designado a uma função de acesso ao serviço do {{site.data.keyword.cloud_notm}} IAM também é designado automaticamente a uma função correspondente de controle de acesso baseado na função do Kubernetes (RBAC) em um namespace específico. Para saber mais sobre as funções de acesso ao serviço, consulte [Funções de serviço do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform). Não designe funções da plataforma do {{site.data.keyword.cloud_notm}} IAM ao mesmo tempo que uma função de serviço. Deve-se designar funções de plataforma e de serviço separadamente.
 {: shortdesc}
 
-Procurando quais ações do Kubernetes cada função de serviço concede por meio do RBAC? Consulte [Permissões de recurso do Kubernetes por função RBAC](#rbac_ref). Para saber mais sobre as funções RBAC, consulte [Designando permissões RBAC](/docs/containers?topic=containers-users#role-binding) e [Ampliando as permissões existentes agregando funções de cluster](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)
+Procurando quais ações do Kubernetes cada função de serviço concede por meio do RBAC? Consulte [Permissões de recurso do Kubernetes por função RBAC](#rbac_ref). Para saber mais sobre funções RBAC, consulte [Designando permissões RBAC](/docs/containers?topic=containers-users#role-binding) e [Ampliando permissões existentes agregando funções de cluster](/docs/containers?topic=containers-users#rbac_aggregate).
 {: tip}
 
 A tabela a seguir mostra as permissões de recurso do Kubernetes que são concedidas por cada função de serviço e sua função RBAC correspondente.
@@ -722,7 +722,7 @@ A tabela a seguir mostra as permissões de recurso do Kubernetes que são conced
   </tr>
   <tr>
     <td id="service-role-manager" headers="service-role">função de gerenciador</td>
-    <td headers="service-role-manager rbac-role">Quando o escopo estiver definido para um namespace: função de cluster <strong><code>admin</code></strong> aplicada pela ligação de função <strong><code>ibm-operate</code></strong> nesse namespace</br><br>Quando tiver o escopo definido para todos os namespaces: função de cluster <strong><code>cluster-admin</code></strong> aplicada pela ligação de função de cluster <strong><code>ibm-admin</code></strong></td> que se aplica a todos os namespaces
+    <td headers="service-role-manager rbac-role">Quando o escopo estiver definido para um namespace: função de cluster <strong><code>admin</code></strong> aplicada pela ligação de função <strong><code>ibm-operate</code></strong> nesse namespace</br><br>Quando todos os namespaces estão com escopo definido: a função de cluster <strong><code>cluster-admin</code></strong> aplicada pela ligação de função de cluster <strong><code>ibm-admin</code></strong> que se aplica a todos os namespaces</td>
     <td headers="service-role-manager kube-perm">Quando com escopo definido para um namespace:
       <ul><li>Acesso de leitura/gravação para todos os recursos em um namespace, mas não para a cota de recurso ou para o próprio namespace</li>
       <li>Crie funções RBAC e ligações de função em um namespace</li>
@@ -735,6 +735,14 @@ A tabela a seguir mostra as permissões de recurso do Kubernetes que são conced
         <li>Revise as métricas de cluster, tais como com os comandos <code>kubectl top pods</code>, <code>kubectl top nodes</code> ou <code>kubectl get nodes</code></li></ul>
     </td>
   </tr>
+    <tr>
+    <td>Qualquer função de serviço</td>
+    <td>**Somente clusters OpenShift**: todos os usuários de um cluster OpenShift recebem as funções de cluster `basic-users` e `self-provisioners` conforme aplicadas pelas ligações de função de cluster `basic-users` e `self-provisioners`.</td>
+    <td><ul>
+      <li>Obtenha informações básicas sobre os projetos aos quais o usuário tem acesso.</li>
+      <li>Crie recursos autorizados nos projetos aos quais o usuário tem acesso.</li>
+      <li>Para obter mais informações, consulte os [docs do OpenShift ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_rbac.html).</li></ul></td>
+  </tr>
 </tbody>
 </table>
 
@@ -744,7 +752,7 @@ A tabela a seguir mostra as permissões de recurso do Kubernetes que são conced
 ## Permissões de recurso do Kubernetes por função RBAC
 {: #rbac_ref}
 
-Cada usuário que recebe uma função de acesso de serviço do {{site.data.keyword.Bluemix_notm}} IAM também recebe automaticamente uma função de controle de acesso baseada em função (RBAC) do Kubernetes predefinida correspondente. Se você planeja gerenciar suas próprias funções RBAC customizadas do Kubernetes, consulte [Criando permissões customizadas de RBAC para usuários, grupos ou contas de serviço](/docs/containers?topic=containers-users#rbac).
+Cada usuário que recebe uma função de acesso ao serviço do {{site.data.keyword.cloud_notm}} IAM também recebe automaticamente uma função de controle de acesso baseada em função (RBAC) do Kubernetes predefinida correspondente. Se você planeja gerenciar suas próprias funções RBAC customizadas do Kubernetes, consulte [Criando permissões customizadas de RBAC para usuários, grupos ou contas de serviço](/docs/containers?topic=containers-users#rbac).
 {: shortdesc}
 
 Você está pensando se tem as permissões corretas para executar um determinado comando `kubectl` em um recurso em um namespace? Tente o [comando `kubectl auth can-i` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
@@ -1016,7 +1024,7 @@ A tabela a seguir mostra as permissões que são concedidas por cada função RB
 ## Funções do Cloud Foundry
 {: #cloud-foundry}
 
-As funções do Cloud Foundry concedem acesso a organizações e espaços dentro da conta. Para ver a lista de serviços baseados no Cloud Foundry no {{site.data.keyword.Bluemix_notm}}, execute `ibmcloud service list`. Para saber mais, veja todas as [funções de organização e espaço](/docs/iam?topic=iam-cfaccess) disponíveis ou as etapas para [gerenciar o acesso do Cloud Foundry](/docs/iam?topic=iam-mngcf) na documentação do {{site.data.keyword.Bluemix_notm}} IAM.
+As funções do Cloud Foundry concedem acesso a organizações e espaços dentro da conta. Para ver a lista de serviços baseados no Cloud Foundry no {{site.data.keyword.cloud_notm}}, execute `ibmcloud service list`. Para saber mais, veja todas as [funções de organização e espaço](/docs/iam?topic=iam-cfaccess) disponíveis ou as etapas para [gerenciar o acesso do Cloud Foundry](/docs/iam?topic=iam-mngcf) na documentação do {{site.data.keyword.cloud_notm}} IAM.
 {: shortdesc}
 
 A tabela a seguir mostra as funções do Cloud Foundry que são necessárias para permissões de ação do cluster.
@@ -1030,108 +1038,72 @@ A tabela a seguir mostra as funções do Cloud Foundry que são necessárias par
   <tbody>
   <tr>
     <td>Função de espaço: gerenciador</td>
-    <td>Gerenciar acesso de usuário a um espaço do  {{site.data.keyword.Bluemix_notm}}</td>
+    <td>Gerenciar acesso de usuário a um espaço do  {{site.data.keyword.cloud_notm}}</td>
   </tr>
   <tr>
     <td>Função de espaço: desenvolvedor</td>
     <td>
       <ul><li>Criar instâncias de serviço do
-{{site.data.keyword.Bluemix_notm}}</li>
-      <li>Ligar instâncias de serviço do {{site.data.keyword.Bluemix_notm}} a clusters</li>
+{{site.data.keyword.cloud_notm}}</li>
+      <li>Ligar instâncias de serviço do {{site.data.keyword.cloud_notm}} a clusters</li>
       <li>Visualizar logs da configuração de encaminhamento de logs de um cluster no nível de espaço</li></ul>
     </td>
   </tr>
   </tbody>
 </table>
 
-## Funções de infraestrutura
+## Funções da infraestrutura clássica
 {: #infra}
 
-Um usuário com a função de acesso à infraestrutura **Superusuário** [configura a chave de API para uma região e um grupo de recursos](/docs/containers?topic=containers-users#api_key) para que as ações de infraestrutura possam ser executadas (ou mais raramente, [configura manualmente diferentes credenciais de conta](/docs/containers?topic=containers-users#credentials)). Em seguida, as ações de infraestrutura que outros usuários na conta podem executar são autorizadas por meio de funções da plataforma do {{site.data.keyword.Bluemix_notm}} IAM. Não é necessário editar as permissões de infraestrutura do IBM Cloud (SoftLayer) dos outros usuários. Use a tabela a seguir para customizar as permissões de infraestrutura do IBM Cloud (SoftLayer) dos usuários somente quando não é possível designar **Superusuário** ao usuário que configura a chave de API. Para obter instruções para designar permissões, consulte [Customizando permissões de infraestrutura](/docs/containers?topic=containers-users#infra_access).
+Um usuário com a função de acesso à infraestrutura **Superusuário** [configura a chave de API para uma região e um grupo de recursos](/docs/containers?topic=containers-users#api_key) para que as ações de infraestrutura possam ser executadas (ou mais raramente, [configura manualmente diferentes credenciais de conta](/docs/containers?topic=containers-users#credentials)). Em seguida, as ações de infraestrutura que outros usuários na conta podem executar são autorizadas por meio de funções da plataforma do {{site.data.keyword.cloud_notm}} IAM. Não é necessário editar as permissões de infraestrutura clássica dos outros usuários. Use a tabela a seguir para customizar as permissões de infraestrutura clássica dos usuários apenas quando não é possível designar **Superusuário** para o usuário que configura a chave de API. Para obter instruções para designar permissões, consulte [Customizando permissões de infraestrutura](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
 
 
-A tabela a seguir mostra as permissões de infraestrutura que são necessárias para concluir grupos de tarefas comuns.
+Precisa verificar se a chave de API ou as credenciais manualmente configuradas têm as permissões de infraestrutura necessárias e sugeridas? Use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) `ibmcloud ks infra-permissions-get`.
+{: tip}
 
-<table>
-<caption>Permissões de infraestrutura normalmente necessárias para o {{site.data.keyword.containerlong_notm}}</caption>
-<thead>
-  <th>Tarefas comuns no {{site.data.keyword.containerlong_notm}}</th>
-  <th>Permissões de infraestrutura necessárias por categoria</th>
-</thead>
-<tbody>
-<tr>
-<td>
-  <strong>Permissões mínimas</strong>: <ul>
-  <li>Crie um cluster.</li></ul></td>
-<td>
-<strong>Conta</strong>: <ul>
-<li>Incluir servidor</li></ul>
-  <strong>Dispositivos</strong>:<ul>
-  <li>Para nós do trabalhador bare metal: visualizar detalhes do hardware</li>
-  <li>Gerenciamento Remoto do IPMI</li>
-  <li>Recarregamentos do OS e Rescue Kernel</li>
-  <li>Para nós do trabalhador da VM: visualizar detalhes do servidor virtual</li></ul></td>
-</tr>
-<tr>
-<td>
-<strong>Administração de cluster</strong>:<ul>
-  <li>Criar, atualizar e excluir clusters.</li>
-  <li>Incluir, recarregar e reinicializar nós do trabalhador.</li>
-  <li>Visualizar VLANs.</li>
-  <li>Criar sub-redes.</li>
-  <li>Implementar pods e serviços do balanceador de carga.</li></ul>
-  </td><td>
-<strong>Conta</strong>:<ul>
-  <li>Incluir servidor</li>
-  <li>Cancelar servidor</li></ul>
-<strong>Dispositivos</strong>:<ul>
-  <li>Para nós do trabalhador bare metal: visualizar detalhes do hardware</li>
-  <li>Gerenciamento Remoto do IPMI</li>
-  <li>Recarregamentos do OS e Rescue Kernel</li>
-  <li>Para nós do trabalhador da VM: visualizar detalhes do servidor virtual</li></ul>
-<strong>Rede</strong>:<ul>
-  <li>Incluir cálculo com porta de rede pública</li></ul>
-<p class="important">Deve-se também designar ao usuário a capacidade de gerenciar casos de suporte. Consulte a etapa 8 de [Customizando permissões de infraestrutura](/docs/containers?topic=containers-users#infra_access).</p>
-</td>
-</tr>
-<tr>
-<td>
-  <strong>Armazenamento</strong>: <ul>
-  <li>Criar solicitações de volume persistente para provisionar volumes persistentes.</li>
-  <li>Criar e gerenciar recursos de infraestrutura de armazenamento.</li></ul></td>
-<td>
-<strong>Conta</strong>:<ul>
-  <li>Incluir / Fazer Upgrade de Armazenamento (StorageLayer)</li></ul>
-<strong>Serviços</strong>:<ul>
-  <li>Gerenciar de armazenamento</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Rede privada</strong>: <ul>
-  <li>Gerenciar VLANs privadas para rede em cluster.</li>
-  <li>Configurar a conectividade VPN para redes privadas.</li></ul></td>
-<td>
-  <strong>Rede</strong>:<ul>
-  <li>Gerenciar rotas de sub-rede da rede</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Rede pública</strong>:<ul>
-  <li>Configurar o balanceador de carga pública ou rede de Ingresso para expor apps.</li></ul></td>
-<td>
-<strong>Dispositivos</strong>:<ul>
-<li>Gerenciar controle de porta</li>
-  <li>Editar nome do host/domínio</li></ul>
-<strong>Rede</strong>:<ul>
-  <li>Incluir endereços IP</li>
-  <li>Gerenciar rotas de sub-rede da rede</li>
-  <li>Incluir cálculo com porta de rede pública</li></ul>
-<strong>Serviços</strong>:<ul>
-  <li>Gerenciar DNS</li>
-  <li>Visualizar certificados (SSL)</li>
-  <li>Gerenciar certificados (SSL)</li></ul></td>
-</tr>
-</tbody>
-</table>
+A tabela a seguir mostra as permissões de infraestrutura clássica que as credenciais para uma região e um grupo de recursos podem ter para criar clusters e outros casos de uso comuns. A descrição inclui como é possível designar a permissão no console de infraestrutura clássica do {{site.data.keyword.cloud_notm}} IAM ou no comando `ibmcloud sl`. Para obter mais informações, consulte as instruções para o [console](/docs/containers?topic=containers-users#infra_console) ou a [CLI](/docs/containers?topic=containers-users#infra_cli).
+*   **Criar clusters**: as permissões de infraestrutura clássica que você deve ter para criar um cluster. Quando você executa `ibmcloud ks infra-permissions-get`, essas permissões são listadas como **Necessárias**.
+*   **Outros casos de uso comuns**: as permissões de infraestrutura clássica que você deve ter para outros cenários comuns. Mesmo se você tiver permissão para criar um cluster, algumas limitações poderão se aplicar. Por exemplo, você pode não ser capaz de criar ou trabalhar com um cluster com nós do trabalhador bare metal ou um endereço IP público. Após a criação do cluster, etapas adicionais para incluir recursos de rede ou de armazenamento podem falhar. Ao executar `ibmcloud ks infra-permissions-get`, essas permissões são listadas como **Sugeridas**.
+
+| Permissão | Descrição | Console da política de designação do IAM | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| Gerenciamento Remoto do IPMI | Gerenciar nós do trabalhador.|Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission REMOTE_MANAGEMENT --enable true</code></pre> |
+| Incluir servidor | Incluir nós do trabalhador. Para os nós do trabalhador que têm endereços IP públicos, também é necessária a permissão **Incluir cálculo com porta de rede pública**. | Infraestrutura clássica > Permissões > Conta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_ADD --enable true</code></pre>  |
+| Cancelar servidor | Excluir nós do trabalhador. | Infraestrutura clássica > Permissões > Conta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_CANCEL --enable true</code></pre>  |
+| Recarregamentos do OS e Rescue Kernel | Atualizar, reinicializar e recarregar os nós do trabalhador. | Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_RELOAD --enable true</code></pre>  |
+| Visualize os detalhes do Virtual Server | Necessário se o cluster tiver nós do trabalhador da VM. Listar e obter detalhes dos nós do trabalhador da VM. | Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission VIRTUAL_GUEST_VIEW --enable true</code></pre>  |
+| Visualizar detalhes do hardware | Necessário se o cluster tiver nós do trabalhador bare metal. Listar e obter detalhes dos nós do trabalhador bare metal. | Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HARDWARE_VIEW --enable true</code></pre>  |
+| Incluir caso de suporte | Como parte da automação de criação do cluster, os casos de suporte são abertos para provisionar a infraestrutura do cluster. | Designar acesso a serviços de gerenciamento de conta > Centro de suporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_ADD --enable true</code></pre>  |
+| Editar caso de suporte | Como parte da automação de criação do cluster, os casos de suporte são atualizados para provisionar a infraestrutura do cluster. | Designar acesso a serviços de gerenciamento de conta > Centro de suporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_EDIT --enable true</code></pre>  |
+| Visualizar caso de suporte | Como parte da automação de criação do cluster, os casos de suporte são usados para provisionar a infraestrutura do cluster. | Designar acesso a serviços de gerenciamento de conta > Centro de suporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_VIEW --enable true</code></pre>  |
+{: class="simple-tab-table"}
+{: caption="Permissões de infraestrutura clássica necessárias" caption-side="top"}
+{: #classic-permissions-required}
+{: tab-title="Create clusters"}
+{: tab-group="Classic infrastructure permissions"}
+
+| Permissão | Descrição | Console da política de designação do IAM | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| Acessar todos os virtuais | Designar acesso a todos os nós do trabalhador da VM. Sem essa permissão, um usuário que cria um cluster pode não ser capaz de visualizar os nós do trabalhador da VM de outro cluster, mesmo se o usuário tem acesso de IAM a ambos os clusters. | Infraestrutura clássica > Dispositivos > Verificar todos os servidores virtuais e o acesso automático ao servidor virtual|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_GUEST --enable true</code></pre> |
+| Acessar todos os hardware | Designar acesso a todos os nós do trabalhador bare metal.  Sem essa permissão, um usuário que cria um cluster pode não ser capaz de visualizar os nós do trabalhador bare metal de outro cluster, mesmo se o usuário tem acesso de IAM a ambos os clusters. | Infraestrutura clássica > Dispositivos > Verificar todos os servidores virtuais e o acesso automático ao servidor virtual|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_HARDWARE --enable true</code></pre> |
+| Incluir cálculo com porta de rede pública | Permita que os nós do trabalhador tenham uma porta que possa ser acessível na rede pública. | Infraestrutura clássica > Permissões > Rede|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PUBLIC_NETWORK_COMPUTE --enable true</code></pre> |
+| Gerenciar DNS | Configurar o balanceador de carga pública ou rede de Ingresso para expor apps. | Infraestrutura clássica > Permissões > Serviços|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission DNS_MANAGE --enable true</code></pre> |
+| Editar nome do host/domínio | Configurar o balanceador de carga pública ou rede de Ingresso para expor apps. | Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HOSTNAME_EDIT --enable true</code></pre> |
+| Incluir endereços IP | Inclua endereços IP em sub-redes públicas ou privadas que são usadas para balanceamento de carga do cluster. | Infraestrutura clássica > Permissões > Rede|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission IP_ADD --enable true</code></pre> |
+| Gerenciar rotas de sub-rede da rede | Gerenciar VLANs públicas e privadas e sub-redes que são usadas para balanceamento de carga do cluster. | Infraestrutura clássica > Permissões > Rede|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NETWORK_ROUTE_MANAGE --enable true</code></pre> |
+| Gerenciar controle de porta | Gerenciar portas que são usadas para balanceamento de carga do aplicativo. | Infraestrutura clássica > Permissões > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PORT_CONTROL --enable true</code></pre> |
+| Gerenciar certificados (SSL) | Configurar certificados que são usados para o balanceamento de carga do cluster. | Infraestrutura clássica > Permissões > Serviços|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre>  |
+| Visualizar certificados (SSL) | Configurar certificados que são usados para o balanceamento de carga do cluster. | Infraestrutura clássica > Permissões > Serviços|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre> |
+| Incluir / Fazer Upgrade de Armazenamento (StorageLayer) | Criar instâncias do {{site.data.keyword.cloud_notm}} File ou do Block Storage a serem anexadas como volumes aos seus aplicativos para armazenamento persistente de dados. | Infraestrutura clássica > Permissões > Conta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ADD_SERVICE_STORAGE --enable true</code></pre>  |
+| Gerenciar de armazenamento | Gerenciar instâncias do {{site.data.keyword.cloud_notm}} File ou do Block Storage que são anexadas como volumes aos seus aplicativos para armazenamento persistente de dados. | Infraestrutura clássica > Permissões > Serviços|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NAS_MANAGE --enable true</code></pre> |
+{: class="simple-tab-table"}
+{: caption="Permissões de infraestrutura clássica sugeridas" caption-side="top"}
+{: #classic-permissions-suggested}
+{: tab-title="Other common use cases"}
+{: tab-group="Classic infrastructure permissions"}
+
+
+
+

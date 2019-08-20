@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,13 +22,11 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
-
+ 
 # Persistenten Speicher aus einem Cluster entfernen
 {: #cleanup}
 
-Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur (SoftLayer), z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie Ihren Speicher erstellt haben, müssen Sie möglicherweise alle drei separat löschen.
+Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Hauptkomponenten: den Persistent Volume Claim (PVC) von Kubernetes, der Speicher anfordert, den persistenten Datenträger (PV) von Kubernetes, der an einen Pod angehängt und im PVC beschrieben ist, sowie die Instanz der IBM Cloud-Infrastruktur, z. B. NFS-Dateispeicher oder Blockspeicher. Je nachdem, wie Sie Ihren Speicher erstellt haben, müssen Sie möglicherweise alle drei separat löschen.
 {:shortdesc}
 
 ## Persistenten Speicher bereinigen
@@ -37,18 +35,26 @@ Wenn Sie in Ihrem Cluster persistenten Speicher konfigurieren, haben Sie drei Ha
 Erklärung der Löschoptionen:
 
 **Ich habe meinen Cluster gelöscht. Muss ich Weiteres löschen, um den persistenten Speicher zu entfernen?**</br>
-Es kommt darauf an. Wenn Sie einen Cluster löschen, werden der PVC und der persistente Datenträger gelöscht. Sie können jedoch wählen, ob die zugeordnete Speicherinstanz in der IBM Cloud-Infrastruktur (SoftLayer) entfernt werden soll. Wenn Sie wählen, Sie nicht zu entfernen, ist die Speicherinstanz noch vorhanden. Wenn Sie den Cluster in einem nicht einwandfreien Zustand gelöscht haben, kann der Speicher auch dann noch vorhanden sein, wenn Sie ausgewählt haben, ihn zu entfernen. Führen Sie die Anweisungen aus, insbesondere den Schritt zum [Löschen Ihrer Speicherinstanz](#sl_delete_storage) in der IBM Cloud-Infrastruktur (SoftLayer).
+Es kommt darauf an. Wenn Sie einen Cluster löschen, werden der PVC und der persistente Datenträger gelöscht. Sie können jedoch wählen, ob die zugeordnete Speicherinstanz in der IBM Cloud-Infrastruktur entfernt werden soll. Wenn Sie wählen, Sie nicht zu entfernen, ist die Speicherinstanz noch vorhanden. Wenn Sie den Cluster in einem nicht einwandfreien Zustand gelöscht haben, kann der Speicher auch dann noch vorhanden sein, wenn Sie ausgewählt haben, ihn zu entfernen. Führen Sie die Anweisungen aus, insbesondere den Schritt zum [Löschen Ihrer Speicherinstanz](#sl_delete_storage) in der IBM Cloud-Infrastruktur.
 
 **Kann ich den PVC löschen, um meinen gesamten Speicher zu entfernen?**</br>
-Manchmal. Wenn Sie [den persistenten Speicher dynamisch erstellen](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) und eine Speicherklasse wählen, die im Namen kein `retain` führt, werden beim Löschen des PVC auch der persistente Datenträger und die Instanz der IBM Cloud-Infrastruktur (SoftLayer) gelöscht.
+Manchmal. Wenn Sie [den persistenten Speicher dynamisch erstellen](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) und eine Speicherklasse wählen, die im Namen kein `retain` führt, werden beim Löschen des PVC auch der persistente Datenträger und die Speicherinstanz der IBM Cloud-Infrastruktur gelöscht.
 
 Führen Sie in allen anderen Fällen die Anweisungen zum Überprüfen des Status Ihres Persistent Volume Claim, des persistenten Datenträgers und der physischen Speichereinheit aus und löschen Sie sie, falls erforderlich, separat.
 
 **Fallen auch nach dem Löschen des Speichers Gebühren an?**</br>
-Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wenn Sie den PVC und den persistenten Datenträger, aber nicht die Instanz in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) löschen, ist diese Instanz weiterhin vorhanden und Ihnen werden dafür Gebühren berechnet. Damit Ihnen keine Gebühren mehr berechnet werden, müssen Sie alles löschen. Wenn Sie außerdem im Persistent Volume Claim den Abrechnungstyp (`billingType`) angeben, können Sie zwischen einer Abrechnung auf Stundenbasis (`hourly`) und der monatlichen Abrechnung (`monthly`) wählen. Wenn Sie `monthly` auswählen, wird monatlich eine Abrechnung für Ihre Instanz erstellt. Wenn Sie die Instanz löschen, wird Ihnen der Rest des Monats in Rechnung gestellt.
+Dies hängt vom Abrechnungstyp sowie davon ab, welche Elemente Sie löschen. Wenn Sie den PVC und den persistenten Datenträger, aber nicht die Instanz in Ihrem Konto der IBM Cloud-Infrastruktur löschen, ist diese Instanz weiterhin vorhanden und Ihnen werden dafür Gebühren berechnet. Damit Ihnen keine Gebühren mehr berechnet werden, müssen Sie alles löschen. Wenn Sie außerdem im Persistent Volume Claim den Abrechnungstyp (`billingType`) angeben, können Sie zwischen einer Abrechnung auf Stundenbasis (`hourly`) und der monatlichen Abrechnung (`monthly`) wählen. Wenn Sie `monthly` auswählen, wird monatlich eine Abrechnung für Ihre Instanz erstellt. Wenn Sie die Instanz löschen, wird Ihnen der Rest des Monats in Rechnung gestellt.
 
+Wenn Sie die persistente Speicherinstanz manuell über die Konsole der IBM Cloud-Infrastruktur oder über die Befehlszeilenschnittstelle `ibmcloud sl` abbrechen, wird die Abrechnung wie folgt gestoppt: 
+- **Speicher mit stündlicher Abrechnung**: Die Abrechnung wird sofort gestoppt. Nachdem der Speicher storniert wurde, wird die Speicherinstanz möglicherweise für bis zu 72 Stunden in der Konsole angezeigt.  
+- **Speicher mit monatlicher Abrechnung**: Sie können zwischen **sofortiger Stornierung** oder **Stornierung zur Jährung des Vertragsbeginns** wählen. Wenn Sie sich für die sofortige Stornierung entscheiden, dann wird Ihr Speicher sofort entfernt und Sie können ihn nicht mehr verwenden. Wenn Sie Ihren Speicher zur nächsten Jährung des Vertragsbeginns stornieren möchten, dann bleiben die Speicherinstanzen bis zur nächsten Jährung des Vertragsbeginns aktiv und Sie können sie bis zu diesem Datum weiterhin benutzen. In beiden Fällen wird die Abrechnung für den nächsten Abrechnungszyklus gestoppt, die Gebühren werden Ihnen jedoch bis zum Ende des aktuellen Abrechnungszyklus berechnet. Nachdem der Speicher storniert wurde, wird die Speicherinstanz möglicherweise für bis zu 72 Stunden in der Konsole oder der CLI angezeigt.  
 
-<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.</p>
+Wenn Sie persistenten Speicher mit einer Freigaberichtlinie `Löschen` entfernen wollen, die Sie dynamisch durch Löschung des PVC bereitgestellt haben, dann wird der Speicher unabhängig davon sofort entfernt, ob Sie einen stündlichen oder monatlichen Abrechnungstyp ausgewählt haben. Nachdem der Speicher entfernt wurde, wird die Speicherinstanz möglicherweise für bis zu 72 Stunden in der Konsole oder der CLI angezeigt. Persistenter Speicher, der mit einer Freigaberichtlinie vom Typ `Beibehalten` arbeitet, wird nicht entfernt, sodass Ihnen weiterhin Gebühren für dessen Nutzung berechnet werden. 
+
+<p class="important">Wenn Sie den persistenten Speicher bereinigen, werden alle Daten gelöscht, die in ihm gespeichert sind. Wenn Sie eine Kopie der Daten benötigen, müssen Sie für den [Dateispeicher](/docs/containers?topic=containers-file_storage#file_backup_restore) oder den [Blockspeicher](/docs/containers?topic=containers-block_storage#block_backup_restore) eine Sicherung ausführen.  </p>
+
+**Ich habe meinen Speicher gelöscht. Warum werden meine Instanzen weiterhin angezeigt?** </br>
+Nach der Entfernung von persistentem Speicher kann es bis zu 72 Stunden dauern, bis die Entfernung vollständig verarbeitet wurde und bis der Speicher in der Konsole der IBM Cloud-Infrastruktur oder in der Befehlszeilenschnittstelle nicht mehr angezeigt wird. 
 
 Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -180,7 +186,10 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ```
    {: pre}
 
-9. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. Der Löschvorgang kann mehrere Tage dauern.
+10. Überprüfen Sie, dass die physische Speicherinstanz entfernt wurde. 
+   
+   Der Löschvorgang kann bis zu 72 Stunden in Anspruch nehmen.
+   {: important}
 
    **Dateispeicher:**
    ```
@@ -192,3 +201,5 @@ Gehen Sie wie folgt vor, um persistente Daten zu bereinigen:
    ibmcloud sl block volume-list
    ```
    {: pre}
+
+

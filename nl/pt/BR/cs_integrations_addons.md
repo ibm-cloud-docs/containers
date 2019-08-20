@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -33,9 +33,9 @@ Inclua rapidamente tecnologias de software livre em seu cluster com complementos
 Os complementos gerenciados do {{site.data.keyword.containerlong_notm}} são uma maneira fácil de aprimorar seu cluster com recursos de software livre, como o Istio ou o Knative. A versão da ferramenta de software livre incluída em seu cluster é testada pela IBM e aprovada para ser usada no {{site.data.keyword.containerlong_notm}}.
 
 **Como o faturamento e o suporte funcionam para complementos gerenciados?**</br>
-Os complementos gerenciados são totalmente integrados na organização de suporte do {{site.data.keyword.Bluemix_notm}}. Se tiver uma pergunta ou um problema com o uso dos complementos gerenciados, será possível usar um dos canais de suporte do {{site.data.keyword.containerlong_notm}}. Para obter mais informações, consulte [Obtendo ajuda e suporte](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Os complementos gerenciados são totalmente integrados na organização de suporte do {{site.data.keyword.cloud_notm}}. Se tiver uma pergunta ou um problema com o uso dos complementos gerenciados, será possível usar um dos canais de suporte do {{site.data.keyword.containerlong_notm}}. Para obter mais informações, consulte [Obtendo ajuda e suporte](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Se a ferramenta incluída em seu cluster incorrer em custos, eles serão integrados automaticamente e listados como parte de seu faturamento do {{site.data.keyword.containerlong_notm}}. O ciclo de faturamento é determinado pelo {{site.data.keyword.Bluemix_notm}}, dependendo de quando você ativou o complemento em seu cluster.
+Se a ferramenta incluída em seu cluster incorrer em custos, eles serão integrados automaticamente e listados como parte de seu faturamento do {{site.data.keyword.containerlong_notm}}. O ciclo de faturamento é determinado pelo {{site.data.keyword.cloud_notm}}, dependendo de quando você ativou o complemento em seu cluster.
 
 **Quais limitações preciso considerar?**</br>
 Se você instalou o [controlador de admissão de imposição de segurança de imagem do contêiner](/docs/services/Registry?topic=registry-security_enforce#security_enforce) em seu cluster, não será possível ativar nele os complementos gerenciados.
@@ -43,7 +43,7 @@ Se você instalou o [controlador de admissão de imposição de segurança de im
 ## Incluindo complementos gerenciados
 {: #adding-managed-add-ons}
 
-Para ativar um complemento gerenciado em seu cluster, você usa o comando [`ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Quando você ativa o complemento gerenciado, uma versão suportada da ferramenta, incluindo todos os recursos do Kubernetes, é automaticamente instalada em seu cluster. Consulte a documentação de cada complemento gerenciado para localizar os pré-requisitos que seu cluster deve atender para instalar o complemento gerenciado.
+Para ativar um complemento gerenciado em seu cluster, use o [comando `ibmcloud ks cluster-addon-enable <addon_name> --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable). Quando você ativa o complemento gerenciado, uma versão suportada da ferramenta, incluindo todos os recursos do Kubernetes, é automaticamente instalada em seu cluster. Consulte a documentação de cada complemento gerenciado para localizar os pré-requisitos que seu cluster deve atender para instalar o complemento gerenciado.
 
 Para obter mais informações sobre os pré-requisitos de cada complemento, consulte:
 
@@ -53,7 +53,7 @@ Para obter mais informações sobre os pré-requisitos de cada complemento, cons
 ## Atualizando complementos gerenciados
 {: #updating-managed-add-ons}
 
-As versões de cada complemento gerenciado são testadas pelo {{site.data.keyword.Bluemix_notm}} e aprovadas para uso no {{site.data.keyword.containerlong_notm}}. Para atualizar os componentes de um complemento para a versão mais recente suportada pelo {{site.data.keyword.containerlong_notm}}, use as etapas a seguir.
+As versões de cada complemento gerenciado são testadas pelo {{site.data.keyword.cloud_notm}} e aprovadas para uso no {{site.data.keyword.containerlong_notm}}. Para atualizar os componentes de um complemento para a versão mais recente suportada pelo {{site.data.keyword.containerlong_notm}}, use as etapas a seguir.
 {: shortdesc}
 
 1. Verifique se seus complementos estão na versão mais recente. Quaisquer complementos denotados com `* (<version> latest)` podem ser atualizados.
@@ -66,8 +66,8 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -182,6 +182,6 @@ As versões de cada complemento gerenciado são testadas pelo {{site.data.keywor
 13. Opcional para Istio: se você usa as seções TLS em seus arquivos de configuração de gateway, deve-se excluir e recriar os gateways para que o Envoy possa acessar os segredos.
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

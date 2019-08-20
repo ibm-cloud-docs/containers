@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -57,7 +57,7 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 - [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Destinar sua CLI para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Instale e configure a CLI do Calico](/docs/containers?topic=containers-network_policies#cli_install).
-- Assegure-se de que você tenha as políticas de acesso do {{site.data.keyword.Bluemix_notm}} IAM a seguir para o {{site.data.keyword.containerlong_notm}}:
+- Assegure-se de que você tenha as políticas de acesso do {{site.data.keyword.cloud_notm}} IAM a seguir para o {{site.data.keyword.containerlong_notm}}:
     - [Qualquer função da plataforma](/docs/containers?topic=containers-users#platform)
     - [ A função de serviço  ** Writer **  ou  ** Manager **  ](/docs/containers?topic=containers-users#platform)
 
@@ -70,7 +70,7 @@ Este tutorial é destinado a desenvolvedores de software e administradores de re
 A primeira lição mostra como seu app é exposto por meio de múltiplos endereços IP e portas e onde o tráfego público está chegando em seu cluster.
 {: shortdesc}
 
-Inicie implementando um app de servidor da web de amostra para usar em todo o tutorial. O servidor da web `echoserver` mostra os dados sobre a conexão que é feita com o cluster por meio do cliente e é possível testar o acesso ao cluster da firma de RP. Em seguida, exponha o aplicativo ao criar um serviço do balanceador de carga de rede (NLB) 1.0. Um serviço NLB 1.0 torna seu aplicativo disponível por meio do endereço IP do serviço NLB e das portas de nó dos nós do trabalhador.
+Inicie implementando um app de servidor da web de amostra para usar em todo o tutorial. O servidor da web `echoserver` mostra dados sobre a conexão que é feita com o cluster por meio do cliente e é possível testar o acesso ao cluster da firma PR. Em seguida, exponha o aplicativo ao criar um serviço do balanceador de carga de rede (NLB) 1.0. Um serviço NLB 1.0 torna seu aplicativo disponível por meio do endereço IP do serviço NLB e das portas de nó dos nós do trabalhador.
 
 Deseja usar um balanceador de carga do aplicativo Ingress (ALB)? Em vez de criar um NLB nas etapas 3 e 4, [crie um serviço para o aplicativo do servidor da web](/docs/containers?topic=containers-ingress#public_inside_1) e [um recurso do Ingress para ele](/docs/containers?topic=containers-ingress#public_inside_4). Em seguida, obtenha os IPs públicos de seus ALBs executando `ibmcloud ks albs --cluster <cluster_name>` e use esses IPs em todo o tutorial no lugar do `<loadbalancer_IP>.`
 {: tip}
@@ -195,9 +195,9 @@ A imagem a seguir mostra como o aplicativo do servidor da web é exposto à Inte
         Saída de exemplo:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
         ```
         {: screen}
 
@@ -353,7 +353,7 @@ Em seguida, é possível criar e aplicar políticas do Calico para incluir na li
 Agora você decide bloquear completamente o tráfego para o cluster da firma PR e testar o acesso incluindo na lista de desbloqueio somente o endereço IP de seu próprio computador.
 {: shortdesc}
 
-Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido para o NLB que está expondo o aplicativo. Em seguida, é possível criar uma política que inclua na lista de desbloqueio o endereço IP do sistema. No término da Lição 3, todo o tráfego para as portas de nó públicas e o NLB será bloqueado e somente o tráfego de seu IP do sistema incluído na lista de desbloqueio será permitido:
+Primeiro, além das portas de nó, deve-se bloquear todo o tráfego recebido para o NLB que está expondo o aplicativo. Em seguida, é possível criar uma política que inclua na lista de desbloqueio o endereço IP do sistema. No final da Lição 3, todo o tráfego para as portas do nó público e o NLB é bloqueado e apenas o tráfego de seu IP do sistema de lista de desbloqueio é permitido:
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="O aplicativo do servidor da web é exposto pelo NLB público somente para o IP de seu sistema." style="width:500px; border-style: none"/>
 
@@ -460,10 +460,10 @@ Neste ponto, todo o tráfego para as portas de nó públicas e o NLB está bloqu
 ## Lição 4: negue o tráfego de entrada de IPs incluídos na lista de bloqueio para o NLB
 {: #lesson4}
 
-Na lição anterior, você bloqueou todo o tráfego e incluiu na lista de desbloqueio somente alguns IPs. Esse cenário funciona bem para propósitos de teste quando você deseja limitar o acesso a somente alguns endereços IP de origem controlada. No entanto, a firma PR tem apps que precisam estar amplamente disponíveis para o público. É necessário certificar-se de que todo o tráfego seja permitido, exceto o tráfego incomum que você está vendo de alguns endereços IP. A listagem negra é útil em um cenário como este porque pode ajudar a evitar um ataque de um pequeno conjunto de endereços IP.
+Na lição anterior, você bloqueou todo o tráfego e incluiu na lista de desbloqueio somente alguns IPs. Esse cenário funciona bem para propósitos de teste quando você deseja limitar o acesso a somente alguns endereços IP de origem controlada. No entanto, a firma PR tem apps que precisam estar amplamente disponíveis para o público. É necessário certificar-se de que todo o tráfego seja permitido, exceto o tráfego incomum que você está vendo de alguns endereços IP. A lista de bloqueio é útil em um cenário como esse porque pode ajudá-lo a evitar um ataque de um pequeno conjunto de endereços IP.
 {: shortdesc}
 
-Nesta lição, você testará a listagem negra bloqueando o tráfego do endereço IP de origem de seu próprio sistema. No final da Lição 4, todo o tráfego para as portas de nó públicas será bloqueado e todo o tráfego para o NLB público será permitido. Somente o tráfego do IP do sistema incluído na lista de bloqueio para o NLB será bloqueado:
+Nessa lição, teste a lista de bloqueio bloqueando o tráfego por meio do endereço IP da origem do sistema. No final da Lição 4, todo o tráfego para as portas do nó público está bloqueado e todo o tráfego para o NLB público é permitido. Apenas o tráfego do IP do sistema da lista de bloqueio para o NLB está bloqueado:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="O app do servidor da web is exposto pelo NLB público na Internet. Somente o tráfego de seu IP do sistema está bloqueado." style="width:550px; border-style: none"/>
 
@@ -580,7 +580,7 @@ Em nosso cenário de exemplo, a firma PR na qual você trabalha deseja que você
       source:
         nets:
         - <client_address>/32
-    - action: Deny
+    - action: Log
       destination:
         nets:
         - <loadbalancer_IP>/32

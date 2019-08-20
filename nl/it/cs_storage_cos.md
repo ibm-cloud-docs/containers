@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,17 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Archiviazione dei dati su IBM Cloud Object Storage
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) è un'archiviazione persistente e altamente disponibile che puoi montare sulle applicazioni eseguite in un cluster Kubernetes utilizzando il plugin {{site.data.keyword.cos_full_notm}}. Il plugin è un plugin Kubernetes Flex-Volume che connette i bucket {{site.data.keyword.cos_short}} cloud ai pod nel tuo cluster. Le informazioni archiviate con {{site.data.keyword.cos_full_notm}} sono crittografate in transito e quando sono inattive, vengono diffuse tra più ubicazioni geografiche e vi si accede su HTTP utilizzando una API REST.
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage) è un'archiviazione persistente e altamente disponibile che puoi montare sulle applicazioni eseguite in un cluster Kubernetes utilizzando il plugin {{site.data.keyword.cos_full_notm}}. Il plugin è un plugin Kubernetes Flex-Volume che connette i bucket {{site.data.keyword.cos_short}} cloud ai pod nel tuo cluster. Le informazioni archiviate con {{site.data.keyword.cos_full_notm}} sono crittografate in transito e quando sono inattive, vengono diffuse tra più ubicazioni geografiche e vi si accede su HTTP utilizzando una API REST.
 {: shortdesc}
 
-Per stabilire una connessione a {{site.data.keyword.cos_full_notm}}, il tuo cluster richiede l'accesso alla rete pubblica per eseguire l'autenticazione presso {{site.data.keyword.Bluemix_notm}} Identity and Access Management. Se ha un cluster solo privato, puoi comunicare con l'endpoint del servizio privato di {{site.data.keyword.cos_full_notm}} se installi il plugin versione `1.0.3` o successive e configuri la tua istanza del servizio {{site.data.keyword.cos_full_notm}} per l'autenticazione HMAC. Se non desideri utilizzare l'autenticazione HMAC, devi aprire tutto il traffico di rete in uscita sulla porta 443 perché il plugin funzioni correttamente in un cluster privato.
+Per stabilire una connessione a {{site.data.keyword.cos_full_notm}}, il tuo cluster richiede l'accesso alla rete pubblica per eseguire l'autenticazione presso {{site.data.keyword.cloud_notm}} Identity and Access Management. Se ha un cluster solo privato, puoi comunicare con l'endpoint del servizio privato di {{site.data.keyword.cos_full_notm}} se installi il plugin versione `1.0.3` o successive e configuri la tua istanza del servizio {{site.data.keyword.cos_full_notm}} per l'autenticazione HMAC. Se non desideri utilizzare l'autenticazione HMAC, devi aprire tutto il traffico di rete in uscita sulla porta 443 perché il plugin funzioni correttamente in un cluster privato.
 {: important}
 
 Con la versione 1.0.5, il plug-in {{site.data.keyword.cos_full_notm}} viene rinominato da `ibmcloud-object-storage-plugin` a `ibm-object-storage-plugin`. Per installare la nuova versione del plug-in, devi [disinstallare la vecchia installazione del grafico Helm](#remove_cos_plugin) e [reinstallare il grafico Helm con la nuova versione del plug-in {{site.data.keyword.cos_full_notm}}](#install_cos).
+{: note}
+
+Con la versione 1.0.8, il grafico Helm del plugin {{site.data.keyword.cos_full_notm}} è ora disponibile nel repository Helm `ibm-charts`. Assicurati di recuperare la versione più recente del grafico Helm da questo repository. Per aggiungere il repository, esegui `helm repo add ibm-charts https://icr.io/helm/ibm-charts`.
 {: note}
 
 ## Creazione della tua istanza del servizio di archiviazione oggetti
@@ -70,7 +72,7 @@ Per accedere alla tua istanza del servizio {{site.data.keyword.cos_full_notm}} p
 
 Attieniti alla seguente procedura per creare un segreto Kubernetes per le credenziali di un'istanza del servizio {{site.data.keyword.cos_full_notm}}. Se intendi utilizzare un server Cloud Object Storage locale su un endpoint API s3 differente, crea un segreto Kubernetes con le credenziali appropriate.
 
-Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Richiama la **apikey**, oppure l'**access_key_id** e la **secret_access_key**, delle tue [credenziali del servizio {{site.data.keyword.cos_full_notm}}](#service_credentials).
 
@@ -125,18 +127,18 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
    ```
    {: pre}
 
-5. [Installa il plugin {{site.data.keyword.cos_full_notm}}](#install_cos) o, se lo hai già installato, [decidi in merito alla configurazione ]( #configure_cos) per il tuo bucket {{site.data.keyword.cos_full_notm}}.
+5. [Installa il plug-in {{site.data.keyword.cos_full_notm}}](#install_cos) o, se lo hai già installato, [decidi in merito alla configurazione ]( #configure_cos) per il tuo bucket {{site.data.keyword.cos_full_notm}}.
 
-## Installazione del plugin IBM Cloud Object Storage
+## Installazione del plug-in IBM Cloud Object Storage
 {: #install_cos}
 
-Installa il plugin {{site.data.keyword.cos_full_notm}} con un grafico Helm per configurare le classi di archiviazione predefinite per {{site.data.keyword.cos_full_notm}}. Puoi utilizzare queste classi di archiviazione per creare una PVC per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} per le tue applicazioni.
+Installa il plug-in {{site.data.keyword.cos_full_notm}} con un grafico Helm per configurare le classi di archiviazione predefinite per {{site.data.keyword.cos_full_notm}}. Puoi utilizzare queste classi di archiviazione per creare una PVC per eseguire il provisioning di {{site.data.keyword.cos_full_notm}} per le tue applicazioni.
 {: shortdesc}
 
-Cerchi le istruzioni su come aggiornare o rimuovere il plugin {{site.data.keyword.cos_full_notm}}? Vedi [Aggiornamento del plugin](#update_cos_plugin) e [Rimozione del plugin](#remove_cos_plugin).
+Cerchi le istruzioni su come aggiornare o rimuovere il plug-in {{site.data.keyword.cos_full_notm}}? Vedi [Aggiornamento del plug-in](#update_cos_plugin) e [Rimozione del plug-in](#remove_cos_plugin).
 {: tip}
 
-Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Assicurati che il tuo nodo di lavoro applichi la patch più recente per la tua versione secondaria.
    1. Elenca la versione patch corrente dei tuoi nodi di lavoro.
@@ -149,7 +151,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.8_1523*
       ```
       {: screen}
 
@@ -157,16 +159,16 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
    2. Esamina il [changelog di versione](/docs/containers?topic=containers-changelog#changelog) per trovare le modifiche incluse nella versione patch più recente.
 
-   3. Applica la versione patch più recente ricaricando il tuo nodo di lavoro. Segui le istruzioni nel [comando ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) per ripianificare correttamente qualsiasi pod in esecuzione sul tuo nodo di lavoro prima di ricaricare il nodo. Nota che durante il ricaricamento, la macchina del nodo di lavoro viene aggiornata con l'immagine più recente e i dati vengono eliminati se non sono [archiviati all'esterno del nodo di lavoro](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   3. Applica la versione patch più recente ricaricando il tuo nodo di lavoro. Segui le istruzioni nel [comando ibmcloud ks worker-reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) per ripianificare correttamente qualsiasi pod in esecuzione sul tuo nodo di lavoro prima di ricaricare il nodo. Nota che durante il ricaricamento, la macchina del nodo di lavoro viene aggiornata con l'immagine più recente e i dati vengono eliminati se non sono [archiviati all'esterno del nodo di lavoro](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  Scegli se vuoi installare il plug-in {{site.data.keyword.cos_full_notm}} con o senza il server Helm, Tiller. Quindi, [attieniti alle istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale e, se vuoi utilizzare Tiller, per installare Tiller con un account del servizio nel tuo cluster.
+2.  Scegli se vuoi installare il plug-in {{site.data.keyword.cos_full_notm}} con o senza il server Helm, Tiller. Quindi, [attieniti alle istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale e, facoltativamente, Tiller con un account del servizio nel tuo cluster. **Nota**: se usi Windows, devi installare Tiller.
 
 3. Se vuoi installare il plug-in con Tiller, verifica che Tiller sia installato con un account del servizio.
    ```
    kubectl get serviceaccount -n kube-system tiller
    ```
    {: pre}
-   
+
    Output di esempio:
    ```
    NAME                                 SECRETS   AGE
@@ -174,9 +176,9 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
    ```
    {: screen}
 
-4. Aggiungi il repository {{site.data.keyword.Bluemix_notm}} Helm al tuo cluster.
+4. Aggiungi il repository {{site.data.keyword.cloud_notm}} Helm al tuo cluster.
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -188,12 +190,12 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
 5. Scarica i grafici Helm e decomprimi i grafici nella directory corrente.
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
-7. Se utilizzi una distribuzione Linux oppure OS X, installa il plug-in Helm {{site.data.keyword.cos_full_notm}} `ibmc`. Il plugin viene utilizzato per richiamare automaticamente l'ubicazione del tuo cluster e per impostare l'endpoint API per i tuoi bucket {{site.data.keyword.cos_full_notm}} nelle tue classi di archiviazione. Se utilizzi Windows come sistema operativo, vai al passo successivo.
-   1. Installa il plugin Helm.
+7. Se utilizzi una distribuzione Linux oppure OS X, installa il plug-in Helm {{site.data.keyword.cos_full_notm}} `ibmc`. Il plug-in viene utilizzato per richiamare automaticamente l'ubicazione del tuo cluster e per impostare l'endpoint API per i tuoi bucket {{site.data.keyword.cos_full_notm}} nelle tue classi di archiviazione. Se utilizzi Windows come sistema operativo, vai al passo successivo.
+   1. Installa il plug-in Helm.
       ```
       helm plugin install ./ibm-object-storage-plugin/helm-ibmc
       ```
@@ -204,7 +206,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
       Installed plugin: ibmc
       ```
       {: screen}
-      
+
       Se vedi l'errore `Error: plugin already exists`, rimuovi il plug-in Helm `ibmc` eseguendo `rm -rf ~/.helm/plugins/helm-ibmc`.
       {: tip}
 
@@ -216,7 +218,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
       Output di esempio:
       ```
-      Installa o esegui l'upgrade dei grafici Helm in IKS (IBM K8S Service) e ICP (IBM Cloud Private)
+      Install or upgrade Helm charts in IBM K8S Service(IKS) and IBM Cloud Private(ICP)
 
       Available Commands:
          helm ibmc install [CHART][flags]                      Install a Helm chart
@@ -229,11 +231,11 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
       Example Usage:
          With Tiller:
-             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+             Install:   helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
          Without Tiller:
-             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
-             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
-             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+             Install:   helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template ibm-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
 
       Note:
          1. It is always recommended to install latest version of ibm-object-storage-plugin chart.
@@ -275,13 +277,13 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
      - Se hai tralasciato il passo precedente, installa senza una limitazione a specifici segreti Kubernetes.</br>
        **Senza Tiller**:
        ```
-       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
+
        **Con Tiller**:
        ```
-       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+       helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -292,7 +294,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
        helm ibmc template ./ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
+
        **Con Tiller**:
        ```
        cd ../..
@@ -315,39 +317,23 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
      3. Installa il grafico Helm.
         - Se hai tralasciato il passo precedente, installa senza una limitazione a specifici segreti Kubernetes.</br>
-       **Senza Tiller**:
           ```
-          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
-          ```
-          {: pre}
-          
-          **Con Tiller**:
-          ```
-          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+          helm install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
         - Se hai completato il passo precedente, installa con una limitazione a specifici segreti Kubernetes.</br>
-         **Senza Tiller**:
           ```
           cd ../..
-          helm ibmc template ./ibm-object-storage-plugin --apply
+          helm install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
-          
-          **Con Tiller**:
-          ```
-          cd ../..
-          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
-          ```
-          {: pre}
-
 
    Output di esempio per l'installazione senza Tiller:
    ```
    Rendering the Helm chart templates...
    DC: dal10
-   Chart: iks-charts/ibm-object-storage-plugin
+   Chart: ibm-charts/ibm-object-storage-plugin
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
@@ -392,7 +378,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
 
 10. Verifica che il plugin sia installato correttamente.
     ```
-    kubectl get pod -n kube-system -o wide | grep object
+    kubectl get pod -n default -o wide | grep object
     ```
     {: pre}
 
@@ -457,7 +443,7 @@ Puoi eseguire un upgrade del plugin {{site.data.keyword.cos_full_notm}} esistent
 
    3. Attieniti alla procedura in [Installazione del plug-in {{site.data.keyword.cos_full_notm}}](#install_cos) per installare la versione più recente del plug-in {{site.data.keyword.cos_full_notm}}.
 
-2. Aggiorna il repository Helm di {{site.data.keyword.Bluemix_notm}} per richiamare la versione più recente di tutti i grafici Helm in questo repository.
+2. Aggiorna il repository Helm di {{site.data.keyword.cloud_notm}} per richiamare la versione più recente di tutti i grafici Helm in questo repository.
    ```
    helm repo update
    ```
@@ -471,18 +457,18 @@ Puoi eseguire un upgrade del plugin {{site.data.keyword.cos_full_notm}} esistent
 
 4. Scarica il grafico Helm {{site.data.keyword.cos_full_notm}} più recente sulla tua macchina locale ed estrai il pacchetto per esaminare il file `release.md` per trovare le informazioni sulla release più aggiornate.
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
 5. Esegui l'upgrade del plug-in. </br>
-   **Senza Tiller**: 
+   **Senza Tiller**:
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --update
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
-     
-   **Con Tiller**: 
+
+   **Con Tiller**:
    1. Trova il nome di installazione del tuo grafico Helm.
       ```
       helm ls | grep ibm-object-storage-plugin
@@ -497,7 +483,7 @@ Puoi eseguire un upgrade del plugin {{site.data.keyword.cos_full_notm}} esistent
 
    2. Esegui l'upgrade del grafico Helm {{site.data.keyword.cos_full_notm}} alla versione più recente.
       ```   
-      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      helm ibmc upgrade <helm_chart_name> ibm-charts/ibm-object-storage-plugin --force --recreate-pods -f
       ```
       {: pre}
 
@@ -541,7 +527,7 @@ Prima di iniziare:
 Per rimuovere il plugin:
 
 1. Rimuovi il plug-in dal tuo cluster: </br>
-   **Con Tiller**: 
+   **Con Tiller**:
    1. Trova il nome di installazione del tuo grafico Helm.
       ```
       helm ls | grep object-storage-plugin
@@ -560,9 +546,9 @@ Per rimuovere il plugin:
       ```
       {: pre}
 
-   **Senza Tiller**: 
+   **Senza Tiller**:
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
@@ -672,7 +658,7 @@ Per rimuovere il plugin:
    <tbody>
    <tr>
    <td><code>ibm.io/chunk-size-mb</code></td>
-   <td>La dimensione del blocco di dati letta da o scritta in {{site.data.keyword.cos_full_notm}}, espressa in megabyte. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con 52 megabyte. Le classi di archiviazione senza <code>perf</code> nel loro nome utilizzano blocchi di 16 megabyte. Ad esempio, se vuoi leggere un file di 1GB, il plugin legge questo file in più blocchi di 16 o 52 megabyte. </td>
+   <td>La dimensione del blocco di dati letta da o scritta in {{site.data.keyword.cos_full_notm}}, espressa in megabyte. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con 52 megabyte. Le classi di archiviazione senza <code>perf</code> nel loro nome utilizzano blocchi di 16 megabyte. Ad esempio, se vuoi leggere un file che è `1GB`, il plugin legge questo file in più blocchi da 16 o 52 megabyte.</td>
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
@@ -684,7 +670,7 @@ Per rimuovere il plugin:
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>L'endpoint API per {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management). </td>
+   <td>L'endpoint API per {{site.data.keyword.cloud_notm}} IAM (Identity and Access Management). </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>
@@ -704,11 +690,11 @@ Per rimuovere il plugin:
    </tr>
    <tr>
    <td><code>ibm.io/parallel-count</code></td>
-   <td>Il numero massimo di richieste parallele che può essere inviato all'istanza del servizio {{site.data.keyword.cos_full_notm}} per una singola operazione di lettura o scrittura. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con un massimo di 20 richieste parallele. Le classi di archiviazione senza <code>perf</code> sono configurate con 2 richieste parallele per impostazione predefinita.  </td>
+   <td>Il numero massimo di richieste parallele che può essere inviato all'istanza del servizio {{site.data.keyword.cos_full_notm}} per una singola operazione di lettura o scrittura. Le classi di archiviazione con <code>perf</code> nel loro nome sono configurate con un massimo di 20 richieste parallele. Le classi di archiviazione senza <code>perf</code> sono configurate con due richieste parallele per impostazione predefinita.  </td>
    </tr>
    <tr>
    <td><code>ibm.io/s3fs-fuse-retry-count</code></td>
-   <td>Il numero massimo di nuovi tentativi per un'operazione di lettura o scrittura prima che l'operazione venga considerata non riuscita. Tutte le classi di archiviazione sono configurate con un massimo di 5 nuovi tentativi.  </td>
+   <td>Il numero massimo di nuovi tentativi per un'operazione di lettura o scrittura prima che l'operazione venga considerata non riuscita. Tutte le classi di archiviazione sono configurate con un massimo di cinque nuovi tentativi.  </td>
    </tr>
    <tr>
    <td><code>ibm.io/stat-cache-size</code></td>
@@ -716,7 +702,7 @@ Per rimuovere il plugin:
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>La suite di cifratura TLS che deve essere utilizzata quando viene stabilita una connessione a {{site.data.keyword.cos_full_notm}} tramite l'endpoint HTTPS. Il valore per la suite di cifratura deve rispettare il [formato OpenSSL ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). Tutte le classi di archiviazione utilizzano la suite di cifratura <strong><code>AESGCM</code></strong> per impostazione predefinita.  </td>
+   <td>La suite di cifratura TLS che deve essere utilizzata quando viene stabilita una connessione a {{site.data.keyword.cos_full_notm}} tramite l'endpoint HTTPS. Il valore per la suite di cifratura deve rispettare il [formato OpenSSL ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html). Se i tuoi nodi di lavoro eseguono un sistema operativo Ubuntu, le tue classi di archiviazione sono configurate per utilizzare la suite di cifratura <strong><code>AESGCM</code></strong> per impostazione predefinita. Per i nodi di lavoro che eseguono un sistema operativo Red Hat, viene utilizzata per impostazione predefinita la suite di cifratura <strong><code>ecdhe_rsa_aes_128_gcm_sha_256</code></strong>.    </td>
    </tr>
    </tbody>
    </table>
@@ -905,7 +891,7 @@ Per aggiungere {{site.data.keyword.cos_full_notm}} al tuo cluster:
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>Facoltativo: per eseguire l'applicazione con un utente non root in un cluster che esegue Kubernetes versione 1.12 o antecedenti, specifica il [contesto di sicurezza ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per il tuo pod definendo l'utente non root senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plugin {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e influisce sulle prestazioni. A seconda del numero di file che hai, l'aggiornamento delle autorizzazioni potrebbe impedire al tuo pod di avviarsi e di passare a uno stato di <code>Running</code>. </br></br>Se hai un cluster che esegue Kubernetes versione 1.13 o successive e il plugin {{site.data.keyword.Bluemix_notm}} Object Storage versione 1.0.4 o successive, puoi modificare il proprietario del punto di montaggio s3fs. Per modificare il proprietario, specifica il contesto di sicurezza impostando `runAsUser` e `fsGroup` sullo stesso ID utente non root che desideri possieda il punto di montaggio s3fs. Se questi due valori non corrispondono, il punto di montaggio appartiene automaticamente all'utente `root`.  </td>
+    <td>Facoltativo: per eseguire l'applicazione con un utente non root in un cluster che esegue Kubernetes versione 1.12 o antecedenti, specifica il [contesto di sicurezza ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) per il tuo pod definendo l'utente non root senza impostare al tempo stesso `fsGroup` nel tuo YAML di distribuzione. L'impostazione di `fsGroup` attiva il plugin {{site.data.keyword.cos_full_notm}} per aggiornare le autorizzazioni del gruppo per tutti i file in un bucket quando viene distribuito il pod. L'aggiornamento delle autorizzazioni è un'operazione di scrittura e influisce sulle prestazioni. A seconda del numero di file che hai, l'aggiornamento delle autorizzazioni potrebbe impedire al tuo pod di avviarsi e di passare a uno stato di <code>Running</code>. </br></br>Se hai un cluster che esegue Kubernetes versione 1.13 o successive e il plugin {{site.data.keyword.cloud_notm}} Object Storage versione 1.0.4 o successive, puoi modificare il proprietario del punto di montaggio s3fs. Per modificare il proprietario, specifica il contesto di sicurezza impostando `runAsUser` e `fsGroup` sullo stesso ID utente non root che desideri possieda il punto di montaggio s3fs. Se questi due valori non corrispondono, il punto di montaggio appartiene automaticamente all'utente `root`.  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -975,7 +961,7 @@ Per aggiungere {{site.data.keyword.cos_full_notm}} al tuo cluster:
 ## Utilizzo dell'archiviazione oggetti in una serie con stato
 {: #cos_statefulset}
 
-Se hai un'applicazione con stato, come ad esempio un database, puoi creare delle serie con stato che utilizzano {{site.data.keyword.cos_full_notm}} per memorizzare i dati della tua applicazione. In alternativa, puoi utilizzare un DBaaS (database-as-a-service) {{site.data.keyword.Bluemix_notm}}, come {{site.data.keyword.cloudant_short_notm}}, e memorizzare i tuoi dati sul cloud.
+Se hai un'applicazione con stato, come ad esempio un database, puoi creare delle serie con stato che utilizzano {{site.data.keyword.cos_full_notm}} per memorizzare i dati della tua applicazione. In alternativa, puoi utilizzare un DBaaS (database-as-a-service) {{site.data.keyword.cloud_notm}}, come {{site.data.keyword.cloudant_short_notm}}, e memorizzare i tuoi dati sul cloud.
 {: shortdesc}
 
 Prima di iniziare:
@@ -985,9 +971,9 @@ Prima di iniziare:
 
 Per distribuire una serie con stato che utilizza l'archiviazione oggetti:
 
-1. Crea un file di configurazione per la tua serie con stato e il servizio che utilizzi per esporre la serie con stato. I seguenti esempi mostrano come distribuire NGINX come serie con stato con 3 repliche con ciascuna replica che utilizza un bucket separato o con tutte le repliche che condividono lo stesso bucket.
+1. Crea un file di configurazione per la tua serie con stato e il servizio che utilizzi per esporre la serie con stato. I seguenti esempi mostrano come distribuire NGINX come una serie con stato con tre repliche, ciascuna delle quali con un bucket separato o condividendo lo stesso bucket.
 
-   **Esempio per creare una serie con stato con 3 repliche, dove ogni replica utilizza un bucket separato**:
+   **Esempio per creare una serie con stato con tre repliche, dove ogni replica utilizza un bucket separato**:
    ```
    apiVersion: v1
    kind: Service
@@ -1049,7 +1035,7 @@ Per distribuire una serie con stato che utilizza l'archiviazione oggetti:
    ```
    {: codeblock}
 
-   **Esempio per creare una serie con stato con 3 repliche che condividono tutte lo stesso bucket `mybucket`**:
+   **Esempio per creare una serie con stato con tre repliche che condividono lo stesso bucket `mybucket`**:
    ```
    apiVersion: v1
    kind: Service
@@ -1336,3 +1322,5 @@ Per distribuire una serie con stato che utilizza l'archiviazione oggetti:
 </tr>
 </tbody>
 </table>
+
+

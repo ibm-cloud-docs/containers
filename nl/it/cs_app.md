@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +45,7 @@ Scopri la procedura generale per distribuire le applicazioni facendo clic su un'
 ## Pianificazione per l'esecuzione di applicazioni nei cluster
 {: #plan_apps}
 
-Prima di distribuire un'applicazione in un cluster {{site.data.keyword.containerlong_notm}}, decidi come vuoi configurare la tua applicazione in modo che sia accessibile correttamente e sia integrata con altri servizi in {{site.data.keyword.Bluemix_notm}}.
+Prima di distribuire un'applicazione in un cluster {{site.data.keyword.containerlong_notm}}, decidi come vuoi configurare la tua applicazione in modo che sia accessibile correttamente e sia integrata con altri servizi in {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 ### Che tipo di oggetti Kubernetes posso creare per la mia applicazione?
@@ -132,7 +131,7 @@ Se vuoi esporre pubblicamente la tua applicazione, hai diverse opzioni che dipen
 *  **Cluster standard solo per VLAN privata**: puoi esporre la tua applicazione utilizzando un [servizio NodePort, programma di bilanciamento del carico o Ingress](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Devi anche aprire la porta per l'indirizzo IP privato del servizio nel tuo firewall.
 
 ### Dopo aver distribuito la mia applicazione, come posso monitorarne l'integrità?
-Puoi configurare la [registrazione e il monitoraggio](/docs/containers?topic=containers-health#health) di {{site.data.keyword.Bluemix_notm}} per il tuo cluster. Puoi anche scegliere di integrare un [servizio di registrazione o monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services) di terze parti.
+Puoi configurare [registrazione e monitoraggio](/docs/containers?topic=containers-health#health) di {{site.data.keyword.cloud_notm}} per il tuo cluster. Puoi anche scegliere di integrare un [servizio di registrazione o monitoraggio](/docs/containers?topic=containers-supported_integrations#health_services) di terze parti.
 {: shortdesc}
 
 ### Come posso mantenere aggiornata la mia applicazione?
@@ -145,7 +144,7 @@ Se vuoi gestire gli aggiornamenti alla tua applicazione, vedi [Gestione delle di
 Gli amministratori di account e di cluster possono controllare l'accesso su molti livelli diversi: cluster, spazio dei nomi Kubernetes, pod e contenitore.
 {: shortdesc}
 
-Con {{site.data.keyword.Bluemix_notm}} IAM, puoi assegnare autorizzazioni a singoli utenti, gruppi o account di servizio a livello di istanza del cluster.  Puoi ridurre ulteriormente l'accesso al cluster limitando gli utenti a determinati spazi dei nomi all'interno del cluster. Per ulteriori informazioni, vedi [Assegnazione dell'accesso al cluster](/docs/containers?topic=containers-users#users).
+Con {{site.data.keyword.cloud_notm}} IAM, puoi assegnare autorizzazioni a singoli utenti, gruppi o account di servizio a livello di istanza del cluster.  Puoi ridurre ulteriormente l'accesso al cluster limitando gli utenti a determinati spazi dei nomi all'interno del cluster. Per ulteriori informazioni, vedi [Assegnazione dell'accesso al cluster](/docs/containers?topic=containers-users#users).
 
 Per controllare l'accesso a livello di pod, puoi [configurare le politiche di sicurezza del pod con RBAC Kubernetes](/docs/containers?topic=containers-psp#psp).
 
@@ -168,8 +167,8 @@ Rivedi queste potenziali configurazioni delle applicazioni ordinate con diversi 
 ![Fasi di alta disponibilità per un'applicazione](images/cs_app_ha_roadmap-mz.png)
 
 1.  Una distribuzione con n+2 pod gestiti da una serie di repliche in un singolo nodo in un cluster a zona singola.
-2.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed estesi a più nodi (anti-affinità) in un cluster a zona singola.
-3.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed estesi a più nodi (anti-affinità) in un cluster multizona tra zone.
+2.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed distribuiti a più nodi (anti-affinità) in un cluster a zona singola.
+3.  Una distribuzione con n+2 pod gestiti da una serie di repliche ed distribuiti a più nodi (anti-affinità) in un cluster multizona tra zone.
 
 Puoi anche [collegare più cluster in regioni diverse con un programma di bilanciamento del carico globale](/docs/containers?topic=containers-ha_clusters#multiple_clusters) per aumentare l'alta disponibilità.
 
@@ -185,7 +184,7 @@ Considera le seguenti opzioni per aumentare la disponibilità della tua applicaz
     <p>Quando distribuisci più di un pod, viene creata automaticamente una serie di repliche per le tue distribuzioni che monitora i pod e assicura che il numero di pod specificato sia sempre in esecuzione. In caso di interruzione di un pod, la serie di repliche sostituisce il pod inattivo con uno nuovo.</p>
     <p>Puoi utilizzare una distribuzione per definire le strategie di aggiornamento per la tua applicazione, incluso il numero di pod da aggiungere durante un aggiornamento continuo e il numero di pod che possono non essere disponibili in un determinato momento. Quando effettui un aggiornamento continuo, la distribuzione controlla che la revisione funzioni e arresta il rollout quando vengono rilevati degli errori.</p>
     <p>Con le distribuzioni, puoi distribuire contemporaneamente più revisioni con indicatori diversi. Ad esempio, puoi verificare una distribuzione prima di decidere di metterla in produzione.</p>
-    <p>Attraverso le distribuzioni puoi tenere traccia delle revisioni distribuite. Puoi utilizzare questa cronologia per eseguire il rollback a una versione precedente nel caso in cui riscontri che gli aggiornamenti non funzionano come previsto.</p></dd>
+    <p>Utilizzando le distribuzioni, puoi tenere traccia delle eventuali revisioni distribuite. Puoi utilizzare questa cronologia per eseguire il rollback a una versione precedente nel caso in cui riscontri che gli aggiornamenti non funzionano come previsto.</p></dd>
   <dt>Includi repliche sufficienti per il carico di lavoro della tua applicazione, più due</dt>
     <dd>Per rendere la tua applicazione ancora più disponibile e più resiliente agli errori, valuta la possibilità di includere delle repliche aggiuntive rispetto al numero minimo per gestire il carico di lavoro previsto. Le repliche aggiuntive possono gestire il carico di lavoro se si verifica un arresto anomalo del pod e la serie di repliche non ha ancora ripristinato il pod arrestato. Per la protezione da due errori simultanei, includi due ulteriori repliche. Questa configurazione è un modello N+2, dove N è il numero di repliche per gestire il carico di lavoro in entrata e +2 sono le due repliche aggiuntive. Finché il tuo cluster ha spazio sufficiente, puoi avere quanti pod desideri.</dd>
   <dt>Espandi i pod tra più nodi (anti-affinità)</dt>
@@ -196,14 +195,14 @@ Considera le seguenti opzioni per aumentare la disponibilità della tua applicaz
     </dd>
 <dt>Distribuisci i pod tra più zone o regioni</dt>
   <dd><p>Per proteggere la tua applicazione da un malfunzionamento della zona, puoi creare più cluster in zone separate o aggiungere zone ad un pool di nodi di lavoro in un cluster multizona. I cluster multizona sono disponibili solo in [determinate aree metropolitane](/docs/containers?topic=containers-regions-and-zones#zones), ad esempio Dallas. Se crei più cluster in zone separate, devi [impostare un programma di bilanciamento del carico globale](/docs/containers?topic=containers-ha_clusters#multiple_clusters).</p>
-  <p>Quando usi una serie di repliche e specifichi l'anti-affinità pod, Kubernetes espande i pod dell'applicazione tra i nodi. Se i tuoi nodi si trovano in più zone, i pod vengono estesi tra le zone, aumentando la disponibilità della tua applicazione. Se vuoi limitare le tue applicazioni affinché vengano eseguite in una sola zona, puoi configurare l'affinità pod o creare ed etichettare un pool di nodi di lavoro in una zona. Per ulteriori informazioni, vedi [Alta disponibilità per i cluster multizona](/docs/containers?topic=containers-ha_clusters#ha_clusters).</p>
+  <p>Quando usi una serie di repliche e specifichi l'anti-affinità pod, Kubernetes espande i pod dell'applicazione tra i nodi. Se i tuoi nodi si trovano in più zone, i pod vengono distribuiti tra le zone, aumentando la disponibilità della tua applicazione. Se vuoi limitare le tue applicazioni affinché vengano eseguite in una sola zona, puoi configurare l'affinità pod o creare ed etichettare un pool di nodi di lavoro in una zona. Per ulteriori informazioni, vedi [Alta disponibilità per i cluster multizona](/docs/containers?topic=containers-ha_clusters#ha_clusters).</p>
   <p><strong>In una distribuzione cluster multizona, i miei pod dell'applicazione vengono distribuiti uniformemente tra i nodi?</strong></p>
   <p>I pod vengono distribuiti uniformemente tra le zone, ma non sempre tra i nodi. Ad esempio, se hai un cluster con un nodo in ciascuna delle tre zone e distribuisci una serie di repliche di sei pod, ciascun nodo ottiene due pod. Tuttavia, se hai un cluster con due nodi in ciascuna delle tre zone e distribuisci una serie di repliche di sei pod, ciascuna zona pianifica due pod e potrebbe pianificare o meno un solo pod per nodo. Per un maggiore controllo sulla pianificazione, puoi [impostare l'affinità pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node).</p>
   <p><strong>Se una zona si disattiva, in che modo i pod vengono ripianificati sui nodi rimanenti nelle altre zone?</strong></br>Dipende dalla politica di pianificazione che hai utilizzato nella distribuzione. Se hai incluso l'[affinità pod specifica del nodo ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature), i tuoi pod non verranno ripianificati. Se non l'hai inclusa, i pod verranno creati sui nodi di lavoro disponibili nelle altre zone, ma potrebbero non essere bilanciati. Ad esempio, due pod potrebbero essere distribuiti tra i due nodi disponibili oppure potrebbero essere entrambi pianificati su un unico nodo con capacità disponibile. Allo stesso modo, quando la zona non disponibile torna disponibile, i pod non vengono eliminati e ribilanciati automaticamente tra i nodi. Se vuoi che i pod vengano ribilanciati tra le zone una volta che la zona torna attiva, prendi in considerazione di utilizzare il [programma di annullamento della pianificazione (descheduler) Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-incubator/descheduler).</p>
   <p><strong>Suggerimento</strong>: nei cluster multizona, prova a tenere la capacità del tuo nodo di lavoro al 50% per ciascuna zona, in modo da avere capacità sufficiente per proteggere il tuo cluster da un malfunzionamento della zona.</p>
   <p><strong>Se voglio estendere la mia applicazione tra le regioni?</strong></br>Per proteggere la tua applicazione da un malfunzionamento della regione, crea un secondo cluster in un'altra regione, [imposta un programma di bilanciamento del carico globale](/docs/containers?topic=containers-ha_clusters#multiple_clusters) per connettere i tuoi cluster e usa file YAML di distribuzione per distribuire una serie di repliche duplicata con l'[anti-affinità pod ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) nella tua applicazione.</p>
   <p><strong>Se le mie applicazioni hanno bisogno di memoria persistente?</strong></p>
-  <p>Usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
+  <p>Usa un servizio cloud come [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
 ## Specifica dei requisiti della tua applicazione nel file YAML
@@ -637,7 +636,7 @@ Prima di iniziare:
 
 Per configurare i file di configurazione con Kustomize:
 1.  [Installa lo strumento `kustomize`![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
-    *   Se utilizzi MacOS, puoi utilizzare il gestore pacchetti `brew`.
+    *   Per macOS, puoi utilizzare il gestore pacchetti `brew`.
         ```
         brew install kustomize
         ```
@@ -660,7 +659,7 @@ Per configurare i file di configurazione con Kustomize:
     mkdir -p ~/<my_app>/overlay/prod
     ```
     {: pre}
-    
+
     Struttura repository di esempio:
     ```
     .
@@ -694,10 +693,10 @@ Per configurare i file di configurazione con Kustomize:
         - secret.yaml
         ```
         {: codeblock}
-        
+
         I nomi dei file YAML delle `resources` devono corrispondere a quelli degli altri file del repository `base`. Potresti includere più configurazioni nello stesso file, ma in questo esempio le configurazioni sono file distinti quali `deployment.yaml`, `service.yaml` e `pvc.yaml`.
-        
-    4.  Genera i file YAML delle risorse con le configurazioni che hai definito nel file YAML di base `kustomization`. Le risorse vengono create combinando le configurazioni del file `kustomization` e dei file YAML delle risorse. I file YAML combinati vengono restituiti in `stdout` nell'output del terminale. Utilizzare questo stesso comando per generare qualsiasi modifica successiva apporti al file YAML`kustomization`, quale l'aggiunta di una nuova etichetta.
+
+    4.  Genera i file YAML delle risorse con le configurazioni che hai definito nel file YAML di base `kustomization`. Le risorse vengono create combinando le configurazioni del file `kustomization` e dei file YAML delle risorse. I file YAML combinati vengono restituiti in `stdout` nell'output del terminale. Utilizzare questo stesso comando per generare qualsiasi modifica successiva apporti al file YAML`kustomization`, quale l'aggiunta di una etichetta.
         ```
         kustomize build
         ```
@@ -843,11 +842,14 @@ Per configurare i file di configurazione con Kustomize:
 ## Avvio del dashboard Kubernetes
 {: #cli_dashboard}
 
-Apri il dashboard Kubernetes nel tuo sistema locale per visualizzare le informazioni su un cluster e sui suoi nodi di lavoro. [Nella console {{site.data.keyword.Bluemix_notm}}](#db_gui), puoi accedere al dashboard con un solo clic. [Con la CLI](#db_cli), puoi accedere al dashboard o utilizzare la procedura in un processo di automazione come per una pipeline CI/CD.
+Apri il dashboard Kubernetes nel tuo sistema locale per visualizzare le informazioni su un cluster e sui suoi nodi di lavoro. [Nella console {{site.data.keyword.cloud_notm}}](#db_gui), puoi accedere al dashboard con un solo clic. [Con la CLI](#db_cli), puoi accedere al dashboard o utilizzare la procedura in un processo di automazione come per una pipeline CI/CD.
 {:shortdesc}
 
 Hai così tante risorse e utenti nel tuo cluster che il dashboard Kubernetes è un po' lento? Per i cluster che eseguono Kubernetes versione 1.12 o successive, il tuo amministratore cluster può ridimensionare la distribuzione di `kubernetes-dashboard` eseguendo `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
 {: tip}
+
+Per controllare i log per i singoli pod delle applicazioni, puoi eseguire `kubectl logs <pod name>`. Non utilizzare il dashboard Kubernetes per trasmettere i log per i tuoi pod poiché ciò potrebbe causare un'interruzione nel tuo accesso al dashboard Kubernetes.
+{: important}
 
 Prima di iniziare:
 * Assicurati che ti sia stato assegnato un [ruolo del servizio](/docs/containers?topic=containers-users#platform) che concede il ruolo RBAC Kubernetes appropriato in modo che tu possa lavorare con le risorse Kubernetes.
@@ -856,16 +858,15 @@ Prima di iniziare:
 
 Puoi utilizzare la porta predefinita o impostare una tua porta per avviare il dashboard Kubernetes per un cluster.
 
-**Avvio del dashboard Kubernetes dalla console {{site.data.keyword.Bluemix_notm}}**
+**Avvio del dashboard Kubernetes dalla console {{site.data.keyword.cloud_notm}}**
 {: #db_gui}
 
-1.  Accedi alla [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/).
+1.  Accedi alla [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/).
 2.  Dalla barra dei menu, seleziona l'account che vuoi utilizzare.
 3.  Dal menu ![Icona Menu](../icons/icon_hamburger.svg "Icona Menu"), fai clic su **Kubernetes**.
 4.  Nella pagina **Cluster**, fai clic sul cluster a cui vuoi accedere.
 5.  Dalla pagina dei dettagli del cluster, fai clic sul pulsante **Dashboard Kubernetes**.
 
-</br>
 </br>
 
 **Avvio del dashboard Kubernetes dalla CLI**
@@ -1032,7 +1033,7 @@ Per distribuire le applicazioni a specifici nodi di lavoro:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.8_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1293,7 +1294,7 @@ Per eseguire un carico di lavoro su una macchina GPU:
 Con Kubernetes, puoi abilitare il [ridimensionamento automatico pod orizzontale ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) per aumentare o ridurre automaticamente il numero di istanze delle tue applicazioni in base alla CPU.
 {:shortdesc}
 
-Cerchi informazioni sul ridimensionamento delle applicazioni Cloud Foundry? Controlla [IBM Auto-Scaling per {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Vuoi ridimensionare i tuoi nodi di lavoro anziché i tuoi pod? Controlla il [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
+Cerchi informazioni sul ridimensionamento delle applicazioni Cloud Foundry? Controlla [IBM Auto-Scaling per {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started). Vuoi ridimensionare i tuoi nodi di lavoro anziché i tuoi pod? Controlla il [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Prima di iniziare:
@@ -1322,7 +1323,7 @@ Passi:
     </tr>
     <tr>
     <td><code>--request=cpu</code></td>
-    <td>La CPU richiesta per il contenitore, specificata in milli-core. Ad esempio, <code>--requests=200m</code>.</td>
+    <td>La CPU richiesta per il contenitore, specificata in millicore. Ad esempio, <code>--requests=200m</code>.</td>
     </tr>
     <tr>
     <td><code>--expose</code></td>

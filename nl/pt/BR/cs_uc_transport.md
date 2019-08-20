@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de transporte para  {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong_notm}} podem
+Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong}} podem
 aproveitar as cadeias de ferramentas para rápidas atualizações de app e implementações multiregion no mundo inteiro. Ao mesmo tempo, essas cargas de trabalho podem se conectar a sistemas de backend existentes, usar o Watson AI para personalização e acessar dados IoT com o {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
@@ -35,7 +34,7 @@ aproveitar as cadeias de ferramentas para rápidas atualizações de app e imple
 ## A empresa de remessa aumenta a disponibilidade de sistemas mundiais para o ecossistema de parceiros de negócios
 {: #uc_shipping}
 
-Um executivo de TI tem sistemas de planejamento e de roteamento de remessa em todo o mundo com os quais os parceiros interagem Os parceiros requerem informações atualizadas desses sistemas que acessam dados do dispositivo IoT. Mas, esses sistemas não eram capazes de escalar no mundo inteiro com HA suficiente.
+Um executivo de TI tem sistemas de planejamento e de roteamento de remessa em todo o mundo com os quais os parceiros interagem Os parceiros requerem informações atualizadas desses sistemas que acessam dados do dispositivo IoT. Mas, esses sistemas não eram capazes de escalar no mundo inteiro com HA suficiente. 
 {: shortdesc}
 
 Por que o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} escala apps conteinerizados com cinco 9s de disponibilidade para atender às demandas crescentes. As implementações de app ocorrem 40 vezes diariamente quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente. A Plataforma IoT torna fácil o acesso a dados do IoT.
@@ -192,3 +191,5 @@ O {{site.data.keyword.containerlong_notm}} fornece recursos de cálculo escaláv
 * A autenticidade com a personalização no site abordou as expectativas de mudança da mão de obra da companhia aérea hoje.
 * As atualizações de última hora para o site de RH, incluindo aquelas que são guiadas pelas conversas de robô de bate-papo dos funcionários, entraram em ação rapidamente porque os Desenvolvedores estavam enviando por push as mudanças pelo menos 10 vezes diariamente.
 * Com o gerenciamento de infraestrutura resolvido pela IBM, a equipe de Desenvolvimento foi liberada para entregar o site em somente 3 semanas.
+
+

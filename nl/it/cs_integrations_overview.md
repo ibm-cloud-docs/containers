@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}f
+{:preview: .preview}
 
 
 # Integrazioni di terze parti e IBM Cloud supportate
@@ -56,7 +56,7 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tr>
 <td>{{site.data.keyword.Bluemix}} Block Storage</td>
 <td>Archiviazione blocchi</td>
-<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+<td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -76,12 +76,12 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tr>
 <td>{{site.data.keyword.datashield_full}} (Beta)</td>
 <td>Crittografia della memoria</td>
-<td>Puoi utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati. {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.Bluemix_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati.</td>
+<td>Puoi utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati. {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.cloud_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} File Storage</td>
 <td>Archiviazione file</td>
-<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+<td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -101,7 +101,7 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tr>
 <td>{{site.data.keyword.cos_full}}</td>
 <td>Archiviazione oggetti</td>
-<td>I dati memorizzati con {{site.data.keyword.cos_short}} vengono crittografati e diffusi tra più posizioni geografiche e vi si accede su HTTP utilizzando un'API REST. Puoi utilizzare l'[immagine ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) per configurare il servizio per creare backup monouso o pianificati per i dati nei tuoi cluster. Per ulteriori informazioni sul servizio, vedi la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">documentazione {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+<td>I dati memorizzati con {{site.data.keyword.cos_short}} vengono crittografati e diffusi tra più posizioni geografiche e vi si accede su HTTP utilizzando un'API REST. Puoi utilizzare l'[immagine ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) per configurare il servizio per creare backup monouso o pianificati per i dati nei tuoi cluster. Per ulteriori informazioni sul servizio, vedi la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">documentazione {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
 <tr>
 <td>Istio su {{site.data.keyword.containerlong_notm}}</td>
@@ -143,11 +143,11 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tbody>
 <tr>
 <td>{{site.data.keyword.cfee_full_notm}}</td>
-<td>Distribuisci e gestisci la tua piattaforma Cloud Foundry su un cluster Kubernetes per sviluppare, assemblare, distribuire e gestire applicazioni native del cloud e sfruttare l'ecosistema {{site.data.keyword.Bluemix_notm}} per associare ulteriori servizi alle tue applicazioni. Quando crei un'istanza {{site.data.keyword.cfee_full_notm}}, devi configurare il tuo cluster Kubernetes scegliendo il tipo di macchina e le VLAN per i tuoi nodi di lavoro. Il tuo cluster viene quindi fornito con {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cfee_full_notm}} viene distribuito automaticamente nel tuo cluster. Per ulteriori informazioni su come configurare {{site.data.keyword.cfee_full_notm}}, vedi l'[Esercitazione introduttiva](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
+<td>Distribuisci e gestisci la tua piattaforma Cloud Foundry su un cluster Kubernetes per sviluppare, assemblare, distribuire e gestire applicazioni native del cloud e sfruttare l'ecosistema {{site.data.keyword.cloud_notm}} per associare ulteriori servizi alle tue applicazioni. Quando crei un'istanza {{site.data.keyword.cfee_full_notm}}, devi configurare il tuo cluster Kubernetes scegliendo il profilo e le VLAN per i tuoi nodi di lavoro. Il tuo cluster viene quindi fornito con {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cfee_full_notm}} viene distribuito automaticamente nel tuo cluster. Per ulteriori informazioni su come configurare {{site.data.keyword.cfee_full_notm}}, vedi l'[Esercitazione introduttiva](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started). </td>
 </tr>
 <tr>
 <td>Codeship</td>
-<td>Puoi utilizzare <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per l'integrazione e la consegna continua dei contenitori. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+<td>Puoi utilizzare <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per l'integrazione e la fornitura continue dei contenitori. Per ulteriori informazioni, consulta <a href="https://www.ibm.com/blogs/bluemix/2017/10/using-codeship-pro-deploy-workloads-ibm-container-service/" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>Grafeas</td>
@@ -165,10 +165,7 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <td>Istio su {{site.data.keyword.containerlong_notm}}</td>
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> è un servizio open source che offre agli sviluppatori un modo per connettere, proteggere, gestire e monitorare una rete di microservizi, nota anche come rete (mesh) di servizi, su piattaforme di orchestrazione cloud. Istio su {{site.data.keyword.containerlong}} fornisce un'istallazione a fase unica di Istio nel tuo cluster tramite un componente aggiuntivo gestito. Con un solo clic, puoi attivare tutti i componenti core di Istio, ulteriori funzioni di traccia, monitoraggio e visualizzazione e l'applicazione di esempio BookInfo. Per iniziare, vedi [Utilizzo del componente aggiuntivo Istio gestito (beta)](/docs/containers?topic=containers-istio).</td>
 </tr>
-<tr>
-<td>Jenkins X</td>
-<td>Jenkins X è una piattaforma di integrazione e fornitura continua nativa di Kubernetes che puoi utilizzare per automatizzare il tuo processo di build. Per ulteriori informazioni su come installarlo su {{site.data.keyword.containerlong_notm}}, vedi [Introducing the Jenkins X open source project ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/).</td>
-</tr>
+
 <tr>
 <td>Knative</td>
 <td>[Knative ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/knative/docs) è una piattaforma open source che è stata sviluppata da IBM, Google, Pivotal, Red Hat, Cisco e altri con l'obiettivo di estendere le funzionalità di Kubernetes per aiutarti a creare applicazioni senza server e inserite in contenitori moderne e basate sul sorgente sul tuo cluster Kubernetes. La piattaforma utilizza un approccio congruente tra i linguaggi di programmazione e i framework per astrarre il carico operativo derivante dal creare, distribuire e gestire carichi di lavoro in Kubernetes in modo che gli sviluppatori possano concentrarsi su quello che conta di più per loro: il codice sorgente. Per ulteriori informazioni, vedi [Distribuzione di applicazioni senza server con Knative](/docs/containers?topic=containers-serverless-apps-knative). </td>
@@ -197,7 +194,7 @@ Puoi utilizzare vari servizi esterni e servizi di catalogo con un cluster Kubern
 <tbody>
   <tr>
     <td>{{site.data.keyword.BluDirectLink}}</td>
-    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) consente di creare una connessione privata diretta tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento sull'Internet pubblico. Le offerte {{site.data.keyword.Bluemix_notm}} Direct Link sono utili quando devi implementare carichi di lavoro ibridi, carichi di lavoro tra provider, trasferimenti di dati di grandi dimensioni o frequenti oppure carichi di lavoro privati. Per scegliere un'offerta {{site.data.keyword.Bluemix_notm}} Direct Link e configurare una connessione {{site.data.keyword.Bluemix_notm}} Direct Link, vedi [Introduzione a {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) nella documentazione di {{site.data.keyword.Bluemix_notm}} Direct Link.</td>
+    <td>Con [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), puoi creare una connessione privata diretta tra i tuoi ambienti di rete remoti e {{site.data.keyword.containerlong_notm}} senza instradamento sull'Internet pubblico. Le offerte {{site.data.keyword.cloud_notm}} Direct Link sono utili quando devi implementare carichi di lavoro ibridi, carichi di lavoro tra provider, trasferimenti di dati di grandi dimensioni o frequenti oppure carichi di lavoro privati. Per scegliere un'offerta {{site.data.keyword.cloud_notm}} Direct Link e configurare una connessione {{site.data.keyword.cloud_notm}} Direct Link, vedi [Introduzione a {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) nella documentazione di {{site.data.keyword.cloud_notm}} Direct Link.</td>
   </tr>
 <tr>
   <td>Servizio VPN IPSec strongSwan</td>
@@ -275,7 +272,7 @@ per la CPU e la memoria e inoltre fornisce strumenti per inserire ed eseguire in
 ## Servizi di sicurezza
 {: #security_services}
 
-Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.keyword.Bluemix_notm}} con il tuo cluster? Controlla l'[esercitazione su come applicare la sicurezza end-to-end a un'applicazione cloud](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
+Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.keyword.cloud_notm}} con il tuo cluster? Controlla l'[esercitazione su come applicare la sicurezza end-to-end a un'applicazione cloud](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
 {: shortdesc}
 
 <table summary="La tabella mostra i servizi disponibili che puoi aggiungere al tuo cluster per aggiungere ulteriori funzionalità di sicurezza. Le righe devono essere lette da sinistra a destra, con il nome del servizio nella colonna uno e una descrizione del servizio nella colonna due.">
@@ -293,7 +290,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>Come un supplemento al <a href="/docs/services/va?topic=va-va_index" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per migliorare la sicurezza delle distribuzioni del contenitore riducendo cosa è consentito fare alla tua applicazione. Per ulteriori informazioni, consulta <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
+  <td>Come un supplemento al <a href="/docs/services/va?topic=va-va_index" target="_blank">Controllo vulnerabilità</a>, puoi utilizzare <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per migliorare la sicurezza delle distribuzioni del contenitore riducendo cosa è consentito fare alla tua applicazione. Per ulteriori informazioni, consulta <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>. </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -301,7 +298,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
-  <td>Puoi utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati. {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.Bluemix_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati.</td>
+  <td>Puoi utilizzare <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per crittografare la tua memoria di dati. {{site.data.keyword.datashield_short}} è integrato con la tecnologia di Intel® Software Guard Extensions (SGX) e Fortanix® in modo che il codice e i dati dei carichi di lavoro del tuo contenitore {{site.data.keyword.cloud_notm}} siano protetti durante l'utilizzo. Il codice e i dati dell'applicazione vengono eseguiti in enclavi con protezione avanzata della CPU, che sono aree di memoria attendibili sul nodo di lavoro che proteggono aspetti critici dell'applicazione, aiutando a mantenere il codice e i dati riservati e invariati.</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -342,16 +339,16 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
   <td>Puoi utilizzare <a href="https://github.com/heptio/velero" target="_blank">Heptio Velero <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a> per eseguire il backup e il ripristino delle risorse del cluster e dei volumi persistenti. Per ulteriori informazioni, vedi Heptio Velero <a href="https://github.com/heptio/velero/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
 <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>{{site.data.keyword.cloud_notm}} Block Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) è un'archiviazione iSCSI persistente e ad alte prestazioni che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Utilizza l'archiviazione blocchi per distribuire applicazioni con stato in una singola zona o come archiviazione ad alte prestazioni per i singoli pod. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione blocchi nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>I dati memorizzati con {{site.data.keyword.cos_short}} vengono crittografati e diffusi tra più posizioni geografiche e vi si accede su HTTP utilizzando un'API REST. Puoi utilizzare l'[immagine ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) per configurare il servizio per creare backup monouso o pianificati per i dati nei tuoi cluster. Per ulteriori informazioni sul servizio, vedi la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">documentazione {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
+  <td>I dati memorizzati con {{site.data.keyword.cos_short}} vengono crittografati e diffusi tra più posizioni geografiche e vi si accede su HTTP utilizzando un'API REST. Puoi utilizzare l'[immagine ibm-backup-restore](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) per configurare il servizio per creare backup monouso o pianificati per i dati nei tuoi cluster. Per ulteriori informazioni sul servizio, vedi la <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">documentazione {{site.data.keyword.cos_short}} <img src="../icons/launch-glyph.svg" alt="Icona link esterno"></a>.</td>
 </tr>
   <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.Bluemix_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>{{site.data.keyword.cloud_notm}} File Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) è un'archiviazione file basata su NFS persistente, rapida, collegata alla rete e flessibile che puoi aggiungere alle tue applicazioni utilizzando i volumi persistenti (PV, persistent volume) Kubernetes. Puoi scegliere tra i livelli di archiviazione predefiniti con dimensioni in GB e IOPS che soddisfano i requisiti dei tuoi carichi di lavoro. Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione file nel tuo cluster, vedi [Archiviazione dei dati su {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -381,7 +378,7 @@ Vuoi una visione completa di come integrare i servizi di sicurezza {{site.data.k
   </tr>
 <tr>
   <td>Database cloud</td>
-  <td>Puoi scegliere tra vari servizi di database {{site.data.keyword.Bluemix_notm}}, come {{site.data.keyword.composeForMongoDB_full}} o {{site.data.keyword.cloudantfull}}, per distribuire soluzioni di database altamente disponibili e scalabili nel tuo cluster. Per un elenco di database cloud disponibili, consulta il [catalogo {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/catalog?category=databases).  </td>
+  <td>Puoi scegliere tra vari servizi di database {{site.data.keyword.cloud_notm}}, come {{site.data.keyword.composeForMongoDB_full}} o {{site.data.keyword.cloudantfull}}, per distribuire soluzioni di database altamente disponibili e scalabili nel tuo cluster. Per un elenco di database cloud disponibili, consulta il [catalogo {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/catalog?category=databases).  </td>
   </tr>
   </tbody>
   </table>

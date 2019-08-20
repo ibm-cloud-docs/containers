@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 Hier erfahren Sie, wie Sie mit {{site.data.keyword.containerlong}} eine containerisierte App bereitstellen, die den {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nutzt.
 {: shortdesc}
 
-In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.Bluemix_notm}}-Service, um Pressemitteilungen zu analysieren und Feedback zum Tenor in ihren Nachrichten zu erhalten.
+In diesem Szenario nutzt ein fiktives PR-Unternehmen den {{site.data.keyword.cloud_notm}}-Service, um Pressemitteilungen zu analysieren und Feedback zum Tenor in ihren Nachrichten zu erhalten.
 
 Der App-Entwickler des PR-Unternehmens verwendet den im vorherigen Lernprogramm erstellten Kubernetes-Cluster, um eine 'Hello World'-Version der App bereitzustellen. In den aufeinander aufbauenden Lerneinheiten dieses Lernprogramms stellt der App-Entwickler zunehmend komplexere Versionen derselben App bereit. Das folgende Diagramm zeigt die Komponenten der Bereitstellungen in den einzelnen Lerneinheiten.
 
@@ -42,7 +42,7 @@ Services fassen eine Gruppe von Pods zusammen und stellen diesen Pods eine Netzv
 
 Um die Verfügbarkeit Ihrer App noch weiter zu steigern, können Sie in Standardclustern einen Worker-Pool erstellen, der mehrere Zonen mit Workerknoten in jeder Zone umfasst, um eine noch größere Anzahl an Replikaten der App ausführen. Obwohl diese Task im vorliegenden Lernprogramm nicht behandelt wird, sollten Sie dieses Konzept im Hinterkopf behalten, wenn Sie zu einem späteren Zeitpunkt die Verfügbarkeit einer App weiter verbessern möchten.
 
-Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
+Die Integration eines {{site.data.keyword.cloud_notm}}-Service in eine App wird nur in einer Lerneinheit behandelt. Sie können Services jedoch mit so einfach oder so komplex konzipierten Apps verwenden, wie überhaupt vorstellbar.
 
 ## Ziele
 {: #apps_objectives}
@@ -52,7 +52,7 @@ Die Integration eines {{site.data.keyword.Bluemix_notm}}-Service in eine App wir
 * App öffentlich zugänglich machen
 * Einzelne Instanz einer App mit einem Kubernetes-Befehl und eine Script in einem Cluster bereitstellen
 * Mehrere Instanzen einer App in Containern bereitstellen, die bei Statusprüfungen neu erstellt werden
-* Eine App implementieren, die Funktionalität eines {{site.data.keyword.Bluemix_notm}}-Service verwendet
+* Eine App implementieren, die Funktionalität eines {{site.data.keyword.cloud_notm}}-Service verwendet
 
 ## Erforderlicher Zeitaufwand
 {: #apps_time}
@@ -242,7 +242,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -250,7 +250,6 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
 
     ```
     Hello world! Your app is up and running in a cluster!
-(Hallo Welt! Ihre App steht jetzt in einem Cluster für den Betrieb bereit!)
     ```
     {: screen}
 
@@ -259,7 +258,7 @@ Gehen Sie wie folgt vor, um die App bereitzustellen:
 
 11. [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.cloud_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 12. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.
@@ -439,7 +438,7 @@ Durch das Aufteilen der Komponenten auf verschiedene Container stellen Sie siche
 
 ![Konfiguration für die Bereitstellung](images/cs_app_tutorial_mz-components3.png)
 
-Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit erstellen Sie eine Instanz des {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto und konfigurieren zwei Bereitstellungen (eine Bereitstellung für jede Komponente der App). Jede Komponente wird in einem Kubernetes-Pod im Workerknoten implementiert. Um beide Komponenten öffentlich zu machen, erstellen Sie zudem für jede Komponente einen Kubernetes Service.
+Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen Cluster mit einem Workerknoten. In dieser Lerneinheit erstellen Sie eine Instanz des {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}-Service in Ihrem {{site.data.keyword.cloud_notm}}-Konto und konfigurieren zwei Bereitstellungen (eine Bereitstellung für jede Komponente der App). Jede Komponente wird in einem Kubernetes-Pod im Workerknoten implementiert. Um beide Komponenten öffentlich zu machen, erstellen Sie zudem für jede Komponente einen Kubernetes Service.
 
 
 ### Lerneinheit 3a: App '{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}' bereitstellen
@@ -538,7 +537,7 @@ Aus dem vorherigen Lernprogramm verfügen Sie bereits über ein Konto und einen 
         ```
         {: codeblock}
 
-    2.  Aktualisieren Sie im Datenträgerabschnitt ('volumes') der `watson-pod`-Bereitstellung den Namen des geheimen Schlüssels für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.Bluemix_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
+    2.  Aktualisieren Sie im Datenträgerabschnitt ('volumes') der `watson-pod`-Bereitstellung den Namen des geheimen Schlüssels für {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}, den Sie im vorherigen [Lernprogramm: Kubernetes-Cluster erstellen](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) erstellt haben. Wenn Sie den geheimen Kubernetes-Schlüssel als Datenträger an Ihre Bereitstellung anhängen, stellen Sie den {{site.data.keyword.cloud_notm}} IAM-API-Schüssel (Identity and Access Management) dem Container zur Verfügung, der in Ihrem Pod ausgeführt wird. Die {{site.data.keyword.watson}}-App-Komponenten in diesem Lernprogramm sind so konfiguriert, dass sie den API-Schlüssel unter Verwendung des Datenträgermountpfads suchen.
 
         ```
         volumes:

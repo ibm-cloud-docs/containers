@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,17 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de Uso de Varejo para  {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
-Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong_notm}} podem
+Esses casos de uso destacam como as cargas de trabalho no {{site.data.keyword.containerlong}} podem
 aproveitar de analítica para insights de mercado, implementações multiregion no mundo inteiro e gerenciamento de inventário com {{site.data.keyword.messagehub_full}} e armazenamento de objeto.
 {: shortdesc}
 
 ## Um varejista de loja física compartilha dados, usando APIs, com parceiros de negócios globais para impulsionar as vendas de omnichannel
 {: #uc_data-share}
 
-Um Exec de Linha de Negócios (LOB) precisa aumentar os canais de vendas, mas o sistema de varejo é encerrado em um data center no local. A concorrência tem parceiros de negócios globais para permutações de venda cruzada e ampliada de suas mercadorias em locais físico e on-line.
+Um Exec de Linha de Negócios (LOB) precisa aumentar os canais de vendas, mas o sistema de varejo é encerrado em um data center no local. A concorrência tem parceiros de negócios globais para permutações de venda cruzada e ampliada de suas mercadorias em locais físico e on-line. 
 {: shortdesc}
 
 Por que escolher o {{site.data.keyword.cloud_notm}}: o {{site.data.keyword.containerlong_notm}} fornece um ecossistema de nuvem pública, no qual os contêineres permitem que novos parceiros de negócios e outros agentes externos codesenvolvam aplicativos e dados por meio de APIs. Agora que o sistema de varejo está na nuvem pública, as APIs também aperfeiçoam o compartilhamento de dados e iniciam um novo desenvolvimento de aplicativo. As implementações de app aumentam quando os Desenvolvedores experimentam facilmente, enviando por push as mudanças para os sistemas de Desenvolvimento e Teste rapidamente com cadeias de ferramentas.
@@ -197,3 +196,5 @@ Solução Técnica:
 * O tráfego de clientes e as vendas aumentaram em lojas, tornando as próprias lojas um recurso diferenciado.
 * Ao mesmo tempo, novos insights de análise social e cognitiva melhoraram o inventário reduzido OpEx (despesas operacionais).
 * O compartilhamento social no app móvel também ajuda a identificar e comercializar para novos clientes.
+
+

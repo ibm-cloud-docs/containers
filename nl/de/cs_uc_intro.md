@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Übersicht über die Anwendungsfälle
 {: #cs_uc_intro}
 
-In einer Reihe von Anwendungsfällen werden die Stärken von {{site.data.keyword.containerlong_notm}} und der {{site.data.keyword.Bluemix_notm}}-Services verdeutlicht, wenn beides gemeinsam verwendet wird. In diesen Szenarios werden unterschiedliche Branchen und ihre verschiedenen Workload-Typen beleuchtet. In jedem einzelnen Anwendungsfall wird zwar eine Situation in einer bestimmten Branche beschrieben, die Workloads sind jedoch in vielen Branchen sehr ähnlich. Die Workloads betreffen unter anderem die folgenden Themen: 
+In einer Reihe von Anwendungsfällen werden die Stärken von {{site.data.keyword.containerlong_notm}} und der {{site.data.keyword.cloud_notm}}-Services verdeutlicht, wenn beides gemeinsam verwendet wird. In diesen Szenarios werden unterschiedliche Branchen und ihre verschiedenen Workload-Typen beleuchtet. In jedem einzelnen Anwendungsfall wird zwar eine Situation in einer bestimmten Branche beschrieben, die Workloads sind jedoch in vielen Branchen sehr ähnlich. Die Workloads betreffen unter anderem die folgenden Themen: 
 * Künstliche Intelligenz und maschinelles Lernen
 * Daten und Speicher
 * DevOps

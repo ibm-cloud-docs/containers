@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casi di utilizzo dei servizi finanziari per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
 
-Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
+Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong}} possano
 sfruttare l'alta disponibilità, il calcolo ad alte
 prestazione, la facile attivazione dei cluster per uno sviluppo più rapido e l'intelligenza artificiale di {{site.data.keyword.ibmwatson}}.
 {: shortdesc}
@@ -35,10 +34,10 @@ prestazione, la facile attivazione dei cluster per uno sviluppo più rapido e l'
 ## La società di prestiti riduce i costi e accelera la conformità normativa
 {: #uc_mortgage}
 
-Un VP per il Risk Management di una società di prestiti residenziali elabora 70 milioni di record al giorno, ma il sistema locale è lento e anche impreciso. Le spese IT sono aumentate vertiginosamente perché l'hardware è diventato rapidamente obsoleto e non è stato utilizzato pienamente. Nell'attesa del provisioning hardware, la conformità alle normative rallentava.
+Un VP per il Risk Management di una società di prestiti residenziali elabora 70 milioni di record al giorno, ma il sistema locale è lento e anche impreciso. Le spese IT sono aumentate vertiginosamente perché l'hardware è diventato rapidamente obsoleto e non è stato utilizzato pienamente. Nell'attesa del provisioning hardware, la conformità alle normative rallentava. 
 {: shortdesc}
 
-Perché {{site.data.keyword.Bluemix_notm}}: per migliorare l'analisi dei rischi, la società ha cercato i servizi {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic per ridurre i costi, aumentare la disponibilità a livello mondiale e infine accelerare la conformità alle normative. Con {{site.data.keyword.containerlong_notm}} in più regioni, le loro applicazioni di analisi possono essere inserite in un contenitore e distribuite in tutto il mondo, migliorando la disponibilità e rispondendo alle normative locali. Tali distribuzioni sono accelerate con strumenti familiari open source, già parte di {{site.data.keyword.containerlong_notm}}.
+Perché {{site.data.keyword.cloud_notm}}: per migliorare l'analisi dei rischi, la società ha cercato i servizi {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic per ridurre i costi, aumentare la disponibilità a livello mondiale e infine accelerare la conformità alle normative. Con {{site.data.keyword.containerlong_notm}} in più regioni, le loro applicazioni di analisi possono essere inserite in un contenitore e distribuite in tutto il mondo, migliorando la disponibilità e rispondendo alle normative locali. Tali distribuzioni sono accelerate con strumenti familiari open source, già parte di {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} e tecnologie chiave:
 * [Adattamento orizzontale](/docs/containers?topic=containers-app#highly_available_apps)
@@ -100,18 +99,20 @@ Questa soluzione offre il vantaggio immediato della scalabilità. Utilizzando la
 * I costi di report normativi sono stati ridotti con una serie di servizi di archiviazione e di calcolo coerente e scalabile offerta da {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cloudant}}.
 * Nel tempo, le applicazioni originali inizialmente migrate nel cloud sono state ri-progettate in microservizi cooperativi che vengono eseguiti su {{site.data.keyword.containerlong_notm}}. Questa azione ha ulteriormente accelerato lo sviluppo e il tempo di distribuzione e ha consentito ulteriori innovazioni grazie alla relativa facilità di sperimentazione. Hanno inoltre rilasciato applicazioni innovative con versioni più recenti dei microservizi per avvalersi delle condizioni di mercato e di business (ovvero, le applicazioni e i microservizi situazionali).
 
+
 ## La società di gestione dei pagamenti ottimizza la produttività degli sviluppatori, distribuendo ai loro partner strumenti abilitati all'intelligenza artificiale 4 volte più velocemente
 {: #uc_payment_tech}
 
 Un responsabile dello sviluppo ha sviluppatori che utilizzano gli strumenti tradizionali installati in loco che rallentano la prototipazione nell'attesa di acquisti hardware.
 {: shortdesc}
 
-Perché {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} fornisce l'attivazione di risorse di calcolo utilizzando la tecnologia standard open source. Una volta che la società è passata a {{site.data.keyword.containerlong_notm}}, gli sviluppatori hanno accesso agli strumenti compatibili DevOps, come i contenitori portatili e facilmente condivisibili.
+Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce l'attivazione di risorse di calcolo utilizzando la tecnologia standard open source. Una volta che la società è passata a {{site.data.keyword.containerlong_notm}}, gli sviluppatori hanno accesso agli strumenti compatibili DevOps, come i contenitori portatili e facilmente condivisibili.
 
-Quindi, gli sviluppatori possono sperimentare facilmente, distribuendo rapidamente le modifiche nei sistemi di sviluppo e test con toolchain aperte. I loro strumenti di sviluppo software tradizionali ottengono un nuovo aspetto quando aggiungono servizi cloud di intelligenza artificiale alle applicazioni con un clic.
+Quindi, gli sviluppatori possono sperimentare facilmente, distribuendo rapidamente le modifiche nei sistemi di sviluppo e test con toolchain aperte. I loro strumenti di sviluppo tradizionali acquisiscono un nuovo aspetto quando aggiungono servizi cloud di intelligenza artificiale alle applicazioni con un clic.
 
 Tecnologie chiave:
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Prevenzione frodi con 'intelligenza artificiale {{site.data.keyword.watson}}](https://www.ibm.com/cloud/watson-studio)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK per Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -157,17 +158,16 @@ Lo sviluppo accelerato è una vittoria fondamentale per il responsabile. Con l'u
 
 Inoltre, la registrazione e il monitoraggio per gli strumenti, in particolare dove è stato utilizzato {{site.data.keyword.watson}} AI, si integrano rapidamente nel sistema. Gli sviluppatori non sprecano a tempo a creare sistemi di registrazione complessi, solo per essere in grado di risolvere i problemi dei loro sistemi attivi. Un fattore chiave per la riduzione dei costi di personale è che IBM gestisce Kubernetes, quindi gli sviluppatori possono concentrarsi su strumenti di pagamento migliori.
 
-La sicurezza prima di tutto: con bare metal per {{site.data.keyword.containerlong_notm}}, gli strumenti di pagamento sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute che è in grado di verificare eventuali manomissioni dell'hardware sottostante. Le scansioni per vulnerabilità e malware vengono eseguite continuamente.
+La sicurezza prima di tutto: con bare metal per {{site.data.keyword.containerlong_notm}}, gli strumenti di pagamento sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Le scansioni per vulnerabilità e malware vengono eseguite continuamente.
 
 **Passo 1: migrazione al calcolo sicuro**
-* Le applicazioni che gestiscono dati altamente sensibili possono essere riospitate su {{site.data.keyword.containerlong_notm}} in esecuzione su bare metal per Trusted Compute. Trusted Compute può verificare eventuali manomissioni dell'hardware sottostante.
-* Migra le immagini della macchina virtuale nelle immagini del contenitore eseguite in {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} pubblico.
+* Migra le immagini della macchina virtuale nelle immagini del contenitore eseguite in {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.Bluemix_notm}} pubblico. 
 * Da tale nucleo, Vulnerability Advisor fornisce la scansione dei punti vulnerabili di immagini, politiche, contenitori e pacchetti per rilevare malware noti.
 * I costi capitali del data center privato/in loco sono notevolmente ridotti e sostituiti con un modello di calcolo a tempo che si adatta in base alla domanda di carico di lavoro.
 * Implementa in modo congruente l'autenticazione controllata dalle politiche ai tuoi servizi e alle tue API con una semplice annotazione Ingress. Con la sicurezza dichiarativa, puoi garantire l'autenticazione degli utenti e la convalida dei token utilizzando {{site.data.keyword.appid_short_notm}}.
 
 **Passo 2: operazioni e connessioni al back-end dei sistemi di pagamento esistenti**
-* Utilizza IBM {{site.data.keyword.SecureGateway}} per mantenere connessioni sicure ai sistemi di strumenti installati in loco.
+* Utilizza IBM {{site.data.keyword.SecureGateway}} per mantenere connessioni sicure ai restanti sistemi di strumenti installati in loco.
 * Fornisci procedure e dashboard DevOps standardizzati attraverso Kubernetes.
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei cluster di sviluppo e test, utilizzano le toolchain {{site.data.keyword.contdelivery_full}} per distribuire le applicazioni nei cluster di {{site.data.keyword.containerlong_notm}} in tutto il mondo.
 * Gli strumenti HA integrati in {{site.data.keyword.containerlong_notm}} bilanciano il carico di lavoro all'interno di ogni regione geografica, tra cui la riparazione automatica e il bilanciamento del carico.
@@ -182,3 +182,5 @@ La sicurezza prima di tutto: con bare metal per {{site.data.keyword.containerlon
 * In parallelo, il fornitore ha implementato semplici iterazioni a tempo fisso per ottenere la gestione del debito tecnico esistente.
 * Con il numero di transazioni che elaborano, possono ridimensionare le loro operazioni in modo esponenziale.
 * Allo stesso tempo, la nuova analisi delle frodi con {{site.data.keyword.watson}} ha aumentato la velocità di individuazione e prevenzione, riducendo le frodi 4 volte di più rispetto alla media della regione.
+
+

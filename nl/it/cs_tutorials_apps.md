@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -32,7 +32,7 @@ inserita nel contenitore che si avvale di {{site.data.keyword.watson}} {{site.da
 {: shortdesc}
 
 In questo scenario, una fittizia agenzia di PR
-utilizza il servizio {{site.data.keyword.Bluemix_notm}} per analizzare i propri comunicati stampa e ricevere feedback sul tono dei propri messaggi.
+utilizza il servizio {{site.data.keyword.cloud_notm}} per analizzare i propri comunicati stampa e ricevere feedback sul tono dei propri messaggi.
 
 Utilizzando il cluster Kubernetes creato nell'ultima esercitazione, lo sviluppatore dell'applicazione dell'agenzia di PR distribuisce una versione Hello World dell'applicazione. Completando ogni lezione in questa esercitazione, lo sviluppatore dell'applicazione distribuisce progressivamente versioni più complicate della stessa applicazione. Il seguente diagramma mostra i componenti di ogni distribuzione per lezione.
 
@@ -54,7 +54,7 @@ pubblica.
 Per aumentare ancora di più l'elevata disponibilità della tua applicazione, nei cluster standard puoi creare un pool di nodi di lavoro che si estende a più zone con dei nodi di lavoro in ciascuna zona per eseguire un numero ancora maggiore di repliche della tua applicazione. Questa attività non è trattata in questa esercitazione, ma tieni
 a mente questo concetto per futuri miglioramenti alla disponibilità di un'applicazione.
 
-Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword.Bluemix_notm}} in un'applicazione, ma puoi utilizzarle con un'applicazione tanto semplice come complessa.
+Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword.cloud_notm}} in un'applicazione, ma puoi utilizzarle con un'applicazione tanto semplice come complessa.
 
 ## Obiettivi
 {: #apps_objectives}
@@ -64,7 +64,7 @@ Solo una delle lezioni include l'integrazione di un servizio {{site.data.keyword
 * Rendere pubblicamente accessibile un'applicazione
 * Distribuire una singola istanza di un'applicazione in un cluster utilizzando un comando Kubernetes e uno script
 * Distribuire più istanze di un'applicazione in contenitori che vengono ricreati durante i controlli dell'integrità
-* Distribuire un'applicazione che utilizza funzionalità da un servizio {{site.data.keyword.Bluemix_notm}}
+* Distribuire un'applicazione che utilizza funzionalità da un servizio {{site.data.keyword.cloud_notm}}
 
 ## Tempo richiesto
 {: #apps_time}
@@ -256,7 +256,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -272,7 +272,7 @@ dell'immagine. **Nota**: acquisisci ulteriori informazioni sulla [protezione del
 
 11. [Avvia il dashboard Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    Se selezioni il tuo cluster nella [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
 12. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.
@@ -284,7 +284,7 @@ Troppi comandi in questa lezione? D'accordo. Come l'utilizzo di uno script di co
 <br />
 
 
-## Lezione 2: Distribuzione e aggiornamento delle applicazioni con elevata disponibilità
+## Lezione 2: Distribuzione e aggiornamento delle applicazioni con una maggiore disponibilità
 {: #cs_apps_tutorial_lesson2}
 
 In questa lezione, distribuisci tre istanze dell'applicazione Hello World in un cluster per una maggiore disponibilità rispetto alla prima versione dell'applicazione.
@@ -411,7 +411,7 @@ Come definito nello script di configurazione, Kubernetes può utilizzare un cont
 
        1.  [Avvia il dashboard Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
        2.  Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato. Da questa scheda, puoi continuamente aggiornare e visualizzare che il controllo di integrità stia funzionando. Nella sezione
-**Pod**, puoi visualizzare quante volte i pod sono riavviati quando
+**Pod**, puoi visualizzare quante volte i pod vengono riavviati quando
 i contenitori in essi vengono ricreati. Se ti capita di ricevere il seguente errore nel dashboard,
 questo messaggio indica che il controllo di integrità ha rilevato un problema. Attendi alcuni minuti e aggiorna di nuovo. Vedrai il numero di riavvio delle modifiche per ogni
 pod.
@@ -454,7 +454,7 @@ senza influenzare gli altri. Quindi, aggiorni l'applicazione per scalarla con pi
 
 ![Impostazioni di distribuzione](images/cs_app_tutorial_mz-components3.png)
 
-Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di lavoro. In questa lezione, crea un'istanza del servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nel tuo account {{site.data.keyword.Bluemix_notm}} e configura due distribuzioni, una per ogni componente dell'applicazione. Ogni componente viene distribuito in un pod Kubernetes nel nodo di lavoro. Per rendere entrambi questi componenti pubblicamente disponibili, crea anche un servizio Kubernetes per ogni componente.
+Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di lavoro. In questa lezione, crea un'istanza del servizio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} nel tuo account {{site.data.keyword.cloud_notm}} e configura due distribuzioni, una per ogni componente dell'applicazione. Ogni componente viene distribuito in un pod Kubernetes nel nodo di lavoro. Per rendere entrambi questi componenti pubblicamente disponibili, crea anche un servizio Kubernetes per ogni componente.
 
 
 ### Lezione 3a: Distribuzione dell'applicazione {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
@@ -553,7 +553,7 @@ Dall'esercitazione precedente, hai il tuo account e un cluster con un nodo di la
         ```
         {: codeblock}
 
-    2.  Nella sezione relativa ai volumi della distribuzione `watson-pod`, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} che hai creato nella precedente [esercitazione Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando il segreto Kubernetes come volume nella tua distribuzione, rendi la chiave API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponibile al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare la chiave API utilizzando il percorso di montaggio del volume.
+    2.  Nella sezione relativa ai volumi della distribuzione `watson-pod`, aggiorna il nome del segreto {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} che hai creato nella precedente [esercitazione Creazione dei cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando il segreto Kubernetes come volume nella tua distribuzione, rendi la chiave API {{site.data.keyword.cloud_notm}} IAM (Identity and Access Management) disponibile al contenitore che è in esecuzione nel tuo pod. I componenti dell'applicazione {{site.data.keyword.watson}} in questa esercitazione sono configurati per cercare la chiave API utilizzando il percorso di montaggio del volume.
 
         ```
         volumes:

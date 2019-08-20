@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -108,7 +108,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
     ```
     {:pre}
 
-3. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
+3. Nach einigen Minuten werden die Protokolle im Kibana-Dashboard angezeigt. Zum Zugriff auf das Kibana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.cloud_notm}}-Konto, in dem Sie den Cluster erstellt haben, auswählen. Wenn Sie beim Erstellen des Clusters einen Bereich angegeben haben, wechseln Sie stattdessen zu diesem Bereich.
     - Vereinigte Staaten (Süden) und Vereinigte Staaten (Osten): `https://logging.ng.bluemix.net`
     - Vereinigtes Königreich (Süden): `https://logging.eu-gb.bluemix.net`
     - Mitteleuropa: `https://logging.eu-fra.bluemix.net`
@@ -141,7 +141,7 @@ Löschen Sie den Pod `kube-dashboard`, um einen Neustart zu erzwingen. Der Pod w
 {: #quota}
 
 {: tsSymptoms}
-Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull}} weiterzuleiten. Wenn Sie Protokolle anzeigen, wird eine Fehlernachricht ähnlich der folgenden angezeigt: 
+Sie richten eine Protokollierungskonfiguration in Ihrem Cluster ein, um Protokolle an {{site.data.keyword.loganalysisfull}} weiterzuleiten. Wenn Sie Protokolle anzeigen, wird eine Fehlernachricht ähnlich der folgenden angezeigt:
 
 ```
 You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
@@ -199,13 +199,13 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
--   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/status?selected=status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
+-   [Überprüfen Sie auf der {{site.data.keyword.cloud_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/status?selected=status), ob {{site.data.keyword.cloud_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://cloud.ibm.com/kubernetes/slack) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
-von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
+von {{site.data.keyword.cloud_notm}} erkennbar zu machen.
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support?topic=get-support-getting-customer-support#using-avatar).

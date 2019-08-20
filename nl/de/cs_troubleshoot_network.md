@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ Haben Sie Schwierigkeiten, über Ingress eine Verbindung zu Ihrer App herzustell
 Bei der Fehlerbehebung können Sie [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) verwenden, um Tests durchzuführen und relevante Informationen zum Netzbetrieb sowie strongSwan-Informationen aus Ihrem Cluster zu erfassen.
 {: tip}
 
-## Verbindung mit einer App über einen Netzausgleichsfunktions- (NLB-) Service kann nicht hergestellt werden
+## Verbindung mit einer App über einen Services für Netzlastausgleichsfunktionen (NLBs) kann nicht hergestellt werden
 {: #cs_loadbalancer_fails}
 
 {: tsSymptoms}
@@ -62,9 +62,9 @@ Gehen Sie wie folgt vor, um Fehler in Ihrem NLB-Service zu beheben:
   ```
   {: pre}
 
-    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
+    Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) ein anderer Typ als **free** (frei) anzeigt wird.
 
-2. Für NLBs der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die NLB der Version 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision) erfüllen.
+2. Für NLBs der Version 2.0: Stellen Sie sicher, dass Sie die [Voraussetzungen für die NLB der Version 2.0](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision) erfüllen.
 
 3. Prüfen Sie die Richtigkeit der Konfigurationsdatei für Ihren NLB-Service.
     * NLBs der Version 2.0:
@@ -154,10 +154,13 @@ ibmcloud ks workers --cluster <clustername_oder_-id>
 ```
 {: pre}
 
-Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) etwas anderes als **free** (frei) anzeigt wird.
+Stellen Sie in Ihrer CLI-Ausgabe sicher, dass der **Status** Ihrer Workerknoten **Ready** (bereit) lautet und dass für **Machine Type** (Maschinentyp) ein anderer Typ als **free** (frei) anzeigt wird.
 
 * Wenn Ihr Standardcluster vollständig bereitgestellt ist und mindestens 2 Workerknoten pro Zone aufweist, aber keine **Ingress-Unterdomäne** verfügbar ist, finden Sie weitere Informationen hierzu im Abschnitt [Es kann keine Unterdomäne für die Ingress-ALB abgerufen werden](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * Bei anderen Problemen können Sie die Ingress-Konfigurationsfehler beheben, indem Sie die Schritte im Abschnitt [Debugging für Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) befolgen.
+
+Wenn Ihre ALB-Pods erst kürzlich erneut gestartet wurden oder wenn erst kürzlich eine Anwendungslastausgleichsfunktion (ALB = Application Load Balancer) aktiviert wurde, dann kann mit einer [Bereitschaftsprüfung](/docs/containers?topic=containers-ingress-settings#readiness-check) verhindert werden, dass ALB-Pods versuchen, die Datenverkehrsanforderungen weiterzuleiten, bevor alle Ingress-Ressourcendateien geparst wurden. Diese Bereitschaftsprüfung verhindert den Verlust von Anforderungen und kann bis zu fünf Minuten dauern.
+{: note}
 
 <br />
 
@@ -182,7 +185,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
  <tbody>
  <tr>
  <td>Sie verfügen nicht über die erforderlichen Zugriffsrollen für das Herunterladen und Aktualisieren von Zertifikatsdaten.</td>
- <td>Bitten Sie Ihren Kontoadministrator, Ihnen die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuzuweisen:<ul><li>Die Servicerollen **Manager** und **Schreibberechtigter** für Ihre {{site.data.keyword.cloudcerts_full_notm}}-Instanz. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}.</li><li>Die <a href="/docs/containers?topic=containers-users#platform">Plattformrolle **Administrator**</a> für den Cluster.</li></ul></td>
+ <td>Bitten Sie Ihren Kontoadministrator, Ihnen die folgenden {{site.data.keyword.cloud_notm}} IAM-Rollen zuzuweisen:<ul><li>Die Servicerollen **Manager** und **Schreibberechtigter** für Ihre {{site.data.keyword.cloudcerts_full_notm}}-Instanz. Weitere Informationen finden Sie unter <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Servicezugriff verwalten</a> für {{site.data.keyword.cloudcerts_short}}.</li><li>Die <a href="/docs/containers?topic=containers-users#platform">Plattformrolle **Administrator**</a> für den Cluster.</li></ul></td>
  </tr>
  <tr>
  <td>Die CRN des Zertifikats, die zum Zeitpunkt der Erstellung, Aktualisierung oder Entfernung angegeben wurde, gehört nicht zu demselben Konto wie der Cluster.</td>
@@ -224,7 +227,7 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
   public-cr96039a75fddb4ad1a09ced6699c88888-alb2    true       enabled    public    169.xx.xxx.xxx   dal12   ingress:411/ingress-auth:315   2234945
   ```
   {: screen}
-* Lastausgleichsfunktion kann nicht bereitgestellt werden: Beim Beschreiben (describe) der Konfigurationszuordnung `ibm-cloud-provider-vlan-ip-config` wird möglicherweise eine Fehlernachricht ähnlich der folgenden Beispielausgabe angezeigt. 
+* Lastausgleichsfunktion kann nicht bereitgestellt werden: Beim Beschreiben (describe) der Konfigurationszuordnung `ibm-cloud-provider-vlan-ip-config` wird möglicherweise eine Fehlernachricht ähnlich der folgenden Beispielausgabe angezeigt.
   ```
   kubectl get cm ibm-cloud-provider-vlan-ip-config
   ```
@@ -235,22 +238,22 @@ Beim Auflisten von Informationen zum geheimen Schlüssel der Lastausgleichsfunkt
   {: screen}
 
 {: tsCauses}
-Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, schlägt die Bereitstellung der **Ingress-Unterdomäne** oder der öffentlichen Ingress-ALB für die Zone möglicherweise fehl oder es ist möglicherweise keine portierbare öffentliche IP-Adresse zum Erstellen einer Netzlastausgleichsfunktion (NLB) verfügbar. 
+Wenn Sie bei Standardclustern in einer Zone zum ersten Mal einen Cluster erstellen, werden in dieser Zone automatisch ein öffentliches und ein privates VLAN für Sie in Ihrem Konto für die IBM Cloud-Infrastruktur bereitgestellt. In dieser Zone wird ein öffentliches portierbares Teilnetz für das von Ihnen angegebene öffentliche VLAN und ein privates portierbares Teilnetz für das von Ihnen angegebene private VLAN angefordert. Für {{site.data.keyword.containerlong_notm}} haben VLANs ein Limit von 40 Teilnetzen. Wenn das VLAN des Clusters dieses Limit in einer Zone bereits erreicht hat, schlägt die Bereitstellung der **Ingress-Unterdomäne** oder der öffentlichen Ingress-ALB für die Zone möglicherweise fehl oder es ist möglicherweise keine portierbare öffentliche IP-Adresse zum Erstellen einer Netzlastausgleichsfunktion (NLB) verfügbar.
 
 Gehen Sie wie folgt vor, um die Anzahl von Teilnetzen eines VLAN anzuzeigen:
-1.  Wählen Sie in der [IBM Cloud Infrastruktur-Konsole (SoftLayer)](https://cloud.ibm.com/classic?) die Optionen **Netz** > **IP-Management** > **VLANs** aus.
+1.  Wählen Sie in der [IBM Cloud Infrastruktur-Konsole](https://cloud.ibm.com/classic?) die Optionen **Netz** > **IP-Management** > **VLANs** aus.
 2.  Klicken Sie auf die **VLAN-Nummer** des VLANs, mit dem Sie Ihren Cluster erstellt haben. Überprüfen Sie den Abschnitt **Teilnetze**, um zu sehen, ob mehr als 40 Teilnetze vorhanden sind.
 
 {: tsResolve}
-Wenn Sie ein neues VLAN benötigen, fordern Sie eines an, indem Sie den [{{site.data.keyword.Bluemix_notm}}-Support kontaktieren](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). [Erstellen Sie dann einen Cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), der dieses neue VLAN verwendet.
+Wenn Sie ein neues VLAN benötigen, fordern Sie eines an, indem Sie den [{{site.data.keyword.cloud_notm}}-Support kontaktieren](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). [Erstellen Sie dann einen Cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), der dieses neue VLAN verwendet.
 
-Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN-Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+Wenn Sie bereits ein verfügbares VLAN haben, können Sie [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in Ihrem vorhandenen Cluster konfigurieren. Anschließend können Sie dem Cluster neue Workerknoten hinzufügen, die das andere VLAN mit verfügbaren Teilnetzen verwenden. Zum Prüfen, ob VLAN Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im VLAN wiederverwenden, indem Sie sie zu Ihrem Cluster hinzufügen.
 1. Prüfen Sie, ob das Teilnetz, das Sie verwenden möchten, verfügbar ist.
-  <p class="note">Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.Bluemix_notm}}-Konten gemeinsam verwendet. In diesem Fall können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.</p>
+  <p class="note">Das Infrastrukturkonto, das Sie verwenden, wird möglicherweise von mehreren {{site.data.keyword.cloud_notm}}-Konten gemeinsam verwendet. In diesem Fall können Sie nur Informationen zu Ihren Clustern anzeigen, selbst wenn Sie den Befehl `ibmcloud ks subnets` ausführen, um Teilnetze mit **gebundenen Clustern** zu sehen. Besprechen Sie sich mit dem Eigner des Infrastrukturkontos, um sicherzustellen, dass die Teilnetze verfügbar sind und nicht von einem anderen Konto oder Team verwendet werden.</p>
 
-2. Verwenden Sie den [Befehl `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add), um ein vorhandenes Teilnetz für Ihren Cluster verfügbar zu machen. 
+2. Verwenden Sie den [Befehl `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add), um ein vorhandenes Teilnetz für Ihren Cluster verfügbar zu machen.
 
 3. Überprüfen Sie, ob das Teilnetz erfolgreich erstellt und zu Ihrem Cluster hinzugefügt wurde. Das Teilnetz-CIDR wird im Abschnitt für **Teilnetz-VLANs** aufgeführt.
     ```
@@ -270,7 +273,7 @@ Wenn Sie nicht alle Teilnetze im VLAN verwenden, können Sie Teilnetze im VLAN w
 
 4. Stellen Sie sicher, dass die portierbaren IP-Adressen aus dem Teilnetz, das Sie hinzugefügt haben, für die ALBs oder Lastausgleichsfunktionen in Ihrem Cluster verwendet werden. Es kann mehrere Minuten dauern, bis die Services die portierbaren IP-Adressen aus dem neu hinzugefügten Teilnetz verwenden.
   * Keine Ingress-Unterdomäne: Führen Sie `ibmcloud ks cluster-get --cluster <cluster>` aus, um zu überprüfen, ob die **Ingress-Unterdomäne** gefüllt ist.
-  * ALB wird in einer Zone nicht bereitgestellt: Führen Sie `ibmcloud ks albs --cluster <cluster>` aus, um sicherzustellen, dass die fehlende ALB bereitgestellt wird. 
+  * ALB wird in einer Zone nicht bereitgestellt: Führen Sie `ibmcloud ks albs --cluster <cluster>` aus, um sicherzustellen, dass die fehlende ALB bereitgestellt wird.
   * Lastausgleichsfunktion kann nicht bereitgestellt werden: Führen Sie `kubectl get svc -n kube-system` aus, um sicherzustellen, dass die Lastausgleichsfunktion über eine **externe IP** verfügt.
 
 <br />
@@ -306,7 +309,7 @@ Gehen Sie wie folgt vor, um zu verhindern, dass die Verbindung nach 60 Sekunden 
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-Sie haben die Beibehaltung der Quellen-IP für den Service für die [Lastausgleichsfunktion der Version 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) oder für die [Ingress-ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) durch Ändern des Werts für `externalTrafficPolicy` in `Local` in der Konfigurationsdatei des Service aktiviert. An den Back-End-Service für die App wird jedoch kein Datenverkehr geleitet.
+Sie haben die Beibehaltung der Quellen-IP für den Service für die [Lastausgleichsfunktion der Version 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) oder für die [Ingress-ALB](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) durch Ändern des Werts für `externalTrafficPolicy` in `Local` in der Konfigurationsdatei des Service aktiviert. An den Back-End-Service für die App wird jedoch kein Datenverkehr geleitet.
 
 {: tsCauses}
 Wenn Sie die Beibehaltung der Quellen-IP für den Lastausgleichsservice oder für die Ingress-ALB (ALB - Lastausgleichsfunktion für Anwendungen) aktivieren, wird die Quellen-IP-Adresse der Clientanforderung beibehalten. Der Datenverkehr wird vom Service nur an App-Pods auf demselben Workerknoten weitergeleitet, um sicherzustellen, dass die IP-Adresse des Anforderungspakets nicht geändert wird. In der Regel werden Pods für den Lastausgleichsservice oder den Ingress-ALB-Service auf den Workerknoten bereitgestellt, auf denen die App-Pods bereitgestellt werden. Es kann jedoch vorkommen, dass die Service-Pods und die App-Pods nicht auf demselben Workerknoten geplant sind. Falls Sie auf den Workerknoten [Kubernetes-Taints ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) verwenden, wird dadurch verhindert, dass Pods ohne Tolerierungen auf Workerknoten mit beliebigen Bezeichnungen ausgeführt werden. Abhängig vom jeweils verwendeten Taint-Typ kann es vorkommen, dass die Beibehaltung der Quellen-IP nicht funktioniert:
@@ -342,6 +345,33 @@ Falls Sie eine der oben aufgeführten Optionen durchgeführt haben, die `keepali
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## DNS-Auflösung für Cluster-Service schlägt in bestimmten Fällen für CoreDNS, jedoch nicht für KubeDNS fehl
+{: #coredns_issues}
+
+{: tsSymptoms}
+Ihre App kann DNS-Namen für Cluster-Services in bestimmten Fällen nicht auflösen. Die Fehler treten nur auf, wenn CoreDNS als [DNS-Provider des Clusters konfiguriert](/docs/containers?topic=containers-cluster_dns) wurde. Bei Verwendung von KubeDNS treten keine Fehler auf. Möglicherweise werden die folgenden Fehlernachrichten angezeigt.
+
+```
+Name or service not known
+```
+{: screen}
+
+```
+No address associated with hostname or similar
+```
+{: screen}
+
+{: tsCauses}
+Das CoreDNS-Caching für Cluster-Services zeigt ein anderes Verhalten als dies beim vorherigen DNS-Provider für Cluster (KubeDNS) der Fall war. Dies kann zu Problemen für Apps führen, die mit einem älteren DNS-Client arbeiten.
+
+{: tsResolve}
+Aktualisieren Sie Ihre App, um einen neueren DNS-Client zu verwenden. Wenn Sie z. B. das App-Image für Ubuntu 14.04 verwenden, dann kommt es bei dem älteren DNS-Client regelmäßig zu Fehlern. Wenn Sie für das Image ein Update auf Ubuntu 16.04 durchführen, dann arbeitet der DNS-Client ordnungsgemäß.
+
+Sie können auch die Konfigurationen der Cache-Plug-ins aus der Konfigurationsübersicht (configmap) `coredns` im Namensbereich `kube-system` entfernen. Weitere Informationen zum Anpassen von CoreDNS finden Sie unter [Cluster-DNS-Provider anpassen](/docs/containers?topic=containers-cluster_dns#dns_customize).
 
 <br />
 
@@ -590,7 +620,7 @@ Gehen Sie wie folgt vor, um sicherzustellen, dass alle Calico-Faktoren aufeinand
 {: #suspended}
 
 {: tsSymptoms}
-Ihr {{site.data.keyword.Bluemix_notm}}-Konto wurde ausgesetzt oder alle Workerknoten in Ihrem Cluster wurden gelöscht. Nachdem der Reaktivierung des Kontos können Sie keine Workerknoten hinzufügen, wenn Sie versuchen, die Größe des Worker-Pools zu ändern oder seine Last auszugleichen. Es wird eine Fehlernachricht ähnlich der folgenden angezeigt:
+Ihr {{site.data.keyword.cloud_notm}}-Konto wurde ausgesetzt oder alle Workerknoten in Ihrem Cluster wurden gelöscht. Nachdem der Reaktivierung des Kontos können Sie keine Workerknoten hinzufügen, wenn Sie versuchen, die Größe des Worker-Pools zu ändern oder seine Last auszugleichen. Es wird eine Fehlernachricht ähnlich der folgenden angezeigt:
 
 ```
 SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
@@ -598,7 +628,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: screen}
 
 {: tsCauses}
-Wenn ein Konto ausgesetzt wird, werden die in dem Konto vorhandenen Workerknoten gelöscht. Wenn ein Cluster keine Workerknoten hat, fordert die IBM Cloud-Infrastruktur (SoftLayer) das zugeordnete öffentliche und private VLAN zurück. Der Worker-Pool des Clusters enthält jedoch noch die früheren VLAN-IDs in seinen Metadaten und verwendet diese nicht verfügbaren IDs, wenn Sie den Pool neu ausgleichen oder seine Größe ändern. Das Erstellen der Knoten schlägt fehl, weil die VLANs dem Cluster nicht mehr zugeordnet sind.
+Wenn ein Konto ausgesetzt wird, werden die in dem Konto vorhandenen Workerknoten gelöscht. Wenn ein Cluster keine Workerknoten hat, gibt die IBM Cloud-Infrastruktur das zugeordnete öffentliche und private VLAN frei. Der Worker-Pool des Clusters enthält jedoch noch die früheren VLAN-IDs in seinen Metadaten und verwendet diese nicht verfügbaren IDs, wenn Sie den Pool neu ausgleichen oder seine Größe ändern. Das Erstellen der Knoten schlägt fehl, weil die VLANs dem Cluster nicht mehr zugeordnet sind.
 
 {: tsResolve}
 
@@ -615,7 +645,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
     ```
     {: pre}
 
-2.  Rufen Sie für jede Zone, in der sich Ihr Cluster befindet, ein neues privates und ein öffentliches VLAN ab, indem Sie sich an den [den {{site.data.keyword.Bluemix_notm}}-Support](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) wenden.
+2.  Rufen Sie für jede Zone, in der sich Ihr Cluster befindet, ein neues privates und ein öffentliches VLAN ab, indem Sie sich an den [den {{site.data.keyword.cloud_notm}}-Support](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) wenden.
 
 3.  Notieren Sie die IDs des neuen privaten und des öffentlichen VLANs der einzelnen Zonen.
 
@@ -660,13 +690,13 @@ Haben Sie noch immer Probleme mit Ihrem Cluster?
 {: shortdesc}
 
 -  Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
--   [Überprüfen Sie auf der {{site.data.keyword.Bluemix_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/status?selected=status), ob {{site.data.keyword.Bluemix_notm}} verfügbar ist.
+-   [Überprüfen Sie auf der {{site.data.keyword.cloud_notm}}-Statusseite ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/status?selected=status), ob {{site.data.keyword.cloud_notm}} verfügbar ist.
 -   Veröffentlichen Sie eine Frage im [{{site.data.keyword.containerlong_notm}}-Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
-    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://bxcs-slack-invite.mybluemix.net/) zu diesem Slack an.
+    Wenn Sie keine IBM ID für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung](https://cloud.ibm.com/kubernetes/slack) zu diesem Slack an.
     {: tip}
 -   Suchen Sie in entsprechenden Foren, ob andere Benutzer auf das gleiche Problem
 gestoßen sind. Versehen Sie Ihre Fragen in den Foren mit Tags, um sie für das Entwicklungsteam
-von {{site.data.keyword.Bluemix_notm}} erkennbar zu machen.
+von {{site.data.keyword.cloud_notm}} erkennbar zu machen.
     -   Wenn Sie technische Fragen zur Entwicklung oder Bereitstellung von Clustern oder Apps mit {{site.data.keyword.containerlong_notm}} haben, veröffentlichen Sie Ihre Frage auf [Stack Overflow ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) und versehen Sie sie mit den Tags `ibm-cloud`, `kubernetes` und `containers`.
     -   Verwenden Sie bei Fragen zum Service und zu ersten Schritten das Forum [IBM Developer Answers ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Geben Sie die Tags `ibm-cloud` und `containers` an.
     Weitere Details zur Verwendung der Foren finden Sie unter [Hilfe anfordern](/docs/get-support?topic=get-support-getting-customer-support#using-avatar).

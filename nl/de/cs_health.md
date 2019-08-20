@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -65,8 +65,9 @@ Weitere Informationen zu den Typen von {{site.data.keyword.containerlong_notm}}-
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>Zum Erfassen, Weiterleiten und Anzeigen von Protokollen für den Kubernetes-Master Ihres Clusters können Sie zu einem beliebigen Zeitpunkt einen Snapshot Ihrer Master-Protokolle erstellen, die in einem {{site.data.keyword.cos_full_notm}}-Bucket erfasst werden sollen. Der Snapshot enthält alle Daten, die über den API-Server gesendet werden, zum Beispiel Pod-Planungen, Bereitstellungen oder RBAC-Richtlinien. Lesen Sie für den Einstieg die Informationen unter [Masterprotokolle erfassen](#collect_master).</dd>
 
-<dt>Services anderer Anbieter</dt>
-<dd>Wenn Sie besondere Anforderungen haben, können Sie eine eigene Protokollierungslösung einrichten. Lesen Sie die Informationen zu den Protokollierungsservices anderer Anbieter, die Sie Ihrem Cluster hinzufügen können, unter [Protokollierungs- und Überwachungsintegrationen](/docs/containers?topic=containers-supported_integrations#health_services). Sie können Containerprotokolle aus dem Pfad `/var/log/pods/` erfassen. </dd>
+<dt>Services anderer Anbieter oder Konfiguration einer eigenen Protokollierungslösung</dt>
+<dd>Wenn Sie besondere Anforderungen haben, können Sie eine eigene Protokollierungslösung einrichten. Lesen Sie die Informationen zu den Protokollierungsservices anderer Anbieter, die Sie Ihrem Cluster hinzufügen können, unter [Protokollierungs- und Überwachungsintegrationen](/docs/containers?topic=containers-supported_integrations#health_services). Um die Protokolle eines einzelnen Kubernetes-Pods oder anderer Ressourcen zu überprüfen, können Sie `kubectl logs<resource_name>` ausführen. Standardmäßig werden die Protokolle im Verzeichnis `/var/log` für den Namensbereich gespeichert. Sie können z. B. Containerprotokolle aus dem Pfad `/var/log/pods/` erfassen. Sie können ein Script schreiben, um Protokolle in eine persistente Speichereinheit zu exportieren, das Sie für die Analyse bei Ihrer eigenen Protokollierungslösung verwenden können. <p class="important">Um die Protokolle für einzelne App-Pods zu überprüfen, führen Sie `kubectl logs<pod name>` aus. Verwenden Sie das Kubernetes-Dashboard nicht, um Protokolle für Ihre Pods zu streamen, da dies Ihren Zugriff auf das Kubernetes-Dashboard beeinträchtigen könnte.
+</p></dd>
 
 </dl>
 
@@ -90,7 +91,7 @@ Zur Verwendung von {{site.data.keyword.la_full_notm}} müssen Sie einen Protokol
 Bisher konnten Sie eine Protokollierungskonfiguration für die Weiterleitung der von der Fluentd-Clusterkomponente erfassten Protokolle an {{site.data.keyword.loganalysisfull_notm}} erstellen. Seit dem 30. April 2019 ist {{site.data.keyword.loganalysisfull_notm}} veraltet. Sie können keine neuen {{site.data.keyword.loganalysisshort_notm}}-Instanzen bereitstellen und alle Lite-Planinstanzen werden gelöscht. Bestehende Instanzen des Premium-Plans werden bis zum 30. September 2019 unterstützt.
 {: deprecated}
 
-Für die weitere Erfassung von Protokollen für Ihren Cluster stehen Ihnen die folgenden Optionen zur Verfügung: 
+Für die weitere Erfassung von Protokollen für Ihren Cluster stehen Ihnen die folgenden Optionen zur Verfügung:
 * Richten Sie {{site.data.keyword.la_full_notm}} ein. Weitere Informationen finden Sie unter [Zu {{site.data.keyword.la_full_notm}} wechseln](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition).
 * [Ändern Sie Ihre Konfiguration so, dass Protokolle an einen externen Server weitergeleitet werden](#configuring).
 
@@ -172,7 +173,7 @@ In der folgenden Tabelle sind die verschiedenen Optionen aufgeführt, die Ihnen 
     </tr>
     <tr>
       <td><code><em>--type syslog</em></code></td>
-      <td>Bei Angabe des Werts <code>syslog</code> werden Ihre Protokolle an einen externen Server weitergeleitet. </p>
+      <td>Bei Angabe des Werts <code>syslog</code> werden Ihre Protokolle an einen externen Server weitergeleitet.</p>
       </dd></td>
     </tr>
     <tr>
@@ -235,7 +236,7 @@ Erstellen Sie eine Konfiguration für die Cluster- und App-Protokollierung. Sie 
 
 **Protokolle an Ihren eigenen Server über die Protokolle `udp` oder `tcp` weiterleiten**
 
-1. Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Editor** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben.
+1. Stellen Sie sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Editor** oder **Administrator**](/docs/containers?topic=containers-users#platform) innehaben.
 
 2. Für den Cluster, in dem sich die Protokollquelle befindet: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -249,7 +250,7 @@ Erstellen Sie eine Konfiguration für die Cluster- und App-Protokollierung. Sie 
 
 4. Erstellen Sie eine Konfiguration für die Protokollweiterleitung.
     ```
-    ibmcloud ks logging-config-create --cluster <clustername_oder_-id> --logsource <protokollquelle> --namespace <kubernetes-namensbereich> --hostname <hostname_oder_ip_des_protokollservers> --port <protokollserver-port> --type syslog --app-containers <container> --app-paths <pfade_zu_protokollen> --syslog-protocol <protokoll> --skip-validation
+    ibmcloud ks logging-config-create --cluster <clustername_oder_-id> --logsource <protokollquelle> --namespace <kubernetes-namensbereich> --hostname <hostname_oder_ip_des_protokollservers> --port <protokollserver-port> --type syslog --app-containers <container1,2> --app-paths <pfade_zu_protokollen> --syslog-protocol <protokoll> --skip-validation
     ```
     {: pre}
 
@@ -260,7 +261,7 @@ Erstellen Sie eine Konfiguration für die Cluster- und App-Protokollierung. Sie 
 Die folgenden Schritte sind allgemeine Anweisungen. Stellen Sie vor der Verwendung des Containers in einer Produktionsumgebung sicher, dass alle von Ihnen benötigten Sicherheitsanforderungen erfüllt sind.
 {: tip}
 
-1. Stellen Sie sicher, dass Sie die folgenden [{{site.data.keyword.Bluemix_notm}}-IAM-Rollen](/docs/containers?topic=containers-users#platform) innehaben:
+1. Stellen Sie sicher, dass Sie die folgenden [{{site.data.keyword.cloud_notm}} IAM-Rollen](/docs/containers?topic=containers-users#platform) innehaben:
     * Plattformrolle **Editor** oder **Administrator** für den Cluster
     * Servicerolle **Schreibberechtigter** oder **Manager** für den Namensbereich `kube-system`
 
@@ -296,7 +297,7 @@ Weitere Informationen zu Kubernetes-Auditprotokollen finden Sie im Thema zu <a h
 * Aktuell wird eine Standardauditrichtlinie für alle Cluster mit dieser Protokollierungskonfiguration verwendet.
 * Momentan werden Filter nicht unterstützt.
 * Es kann nur eine Konfiguration des Typs `kube-audit` pro Cluster vorhanden sein; Sie können jedoch Protokolle an {{site.data.keyword.cloudaccesstrailshort}} und an einen externen Server weiterleiten, indem Sie eine Protokollierungskonfiguration und einen Webhook erstellen.
-* Sie müssen die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
+* Sie müssen die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
 
 **Vorbereitende Schritte**
 
@@ -463,7 +464,7 @@ Sie können auswählen, welche Protokolle an den externen Server weitergeleitet 
 ### Protokollweiterleitung überprüfen, aktualisieren und löschen
 {: #verifying-log-forwarding}
 
-**ÜberprüfenVerifying**</br>
+**Überprüfen**</br>
 Sie können überprüfen, ob Ihre Konfiguration ordnungsgemäß eingerichtet ist. Dazu haben Sie zwei Möglichkeiten:
 
 * Gehen Sie wie folgt vor, um eine Liste aller Protokollierungskonfigurationen in einem Cluster anzuzeigen:
@@ -481,12 +482,12 @@ Sie können überprüfen, ob Ihre Konfiguration ordnungsgemäß eingerichtet ist
 **Aktualisieren**</br>
 Sie können eine Protokollierungskonfiguration aktualisieren, die Sie bereits erstellt haben:
 ```
-ibmcloud ks logging-config-update --cluster <clustername_oder_-id> --id <protokollkonfigurations-id> --namespace <namensbereich> --type <servertyp> --syslog-protocol <protokoll> --logsource <quelle> --hostname <hostname_oder_einpflege-url> --port <port> --space <clusterbereiche> --org <clusterorg> --app-containers <container> --app-paths <pfade_zu_protokollen>
+ibmcloud ks logging-config-update --cluster <clustername_oder_-id> --id <protokollkonfigurations-id> --namespace <namensbereich> --type <servertyp> --syslog-protocol <protokoll> --logsource <quelle> --hostname <hostname_oder_einpflege-url> --port <port> --space <clusterbereiche> --org <clusterorg> --app-containers <container1,2> --app-paths <pfade_zu_protokollen>
 ```
 {: pre}
 
 **Löschen**</br>
-Sie können die Weiterleitung von einem oder allen Protokollen der Protokollierungskonfiguration eines Clusters stoppen:
+Sie können die Weiterleitung von Protokollen durch das Löschen einer oder aller Protokollierungskonfigurationen eines Clusters stoppen:
 
 * Gehen Sie wie folgt vor, um eine Protokollierungskonfiguration zu löschen:
   ```
@@ -514,7 +515,7 @@ Weitere Informationen zu Kubernetes-Auditprotokollen finden Sie im Thema zu <a h
 * Aktuell wird eine Standardauditrichtlinie für alle Cluster mit dieser Protokollierungskonfiguration verwendet.
 * Momentan werden Filter nicht unterstützt.
 * Es kann nur eine Konfiguration des Typs `kube-audit` pro Cluster vorhanden sein; Sie können jedoch Protokolle an {{site.data.keyword.cloudaccesstrailshort}} und an einen externen Server weiterleiten, indem Sie eine Protokollierungskonfiguration und einen Webhook erstellen.
-* Sie müssen die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
+* Sie müssen die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
 
 {{site.data.keyword.containerlong_notm}} ist zurzeit nicht für die Verwendung von {{site.data.keyword.at_full}} konfiguriert. Zur Verwaltung von Kubernetes-API-Auditprotokollen verwenden Sie weiterhin {{site.data.keyword.cloudaccesstrailfull_notm}} mit LogAnalysis.
 {: note}
@@ -592,10 +593,10 @@ Weitere Informationen zu Kubernetes-Auditprotokollen finden Sie im Thema zu <a h
     {: screen}
 
 3. Gehen Sie wie folgt vor, um die Kubernetes-API-Auditereignisse anzuzeigen, die Sie weiterleiten:
-  1. Melden Sie sich bei Ihrem {{site.data.keyword.Bluemix_notm}}-Konto an.
+  1. Melden Sie sich bei Ihrem {{site.data.keyword.cloud_notm}}-Konto an.
   2. Stellen Sie über den Katalog eine Instanz des {{site.data.keyword.cloudaccesstrailshort}}-Service im selben Konto wie Ihre Instanz von {{site.data.keyword.containerlong_notm}} bereit.
   3. Wählen Sie in der Registerkarte **Verwalten** des {{site.data.keyword.cloudaccesstrailshort}}-Dashboards die Konto- oder Bereichsdomäne aus.
-    * **Kontoprotokolle:** Ereignisse der Clusterverwaltung und Ereignisse von Kubernetes-API-Serveraudits sind in der **Kontodomäne** für die {{site.data.keyword.Bluemix_notm}}-Region verfügbar, in der die Ereignisse generiert werden.
+    * **Kontoprotokolle:** Ereignisse der Clusterverwaltung und Ereignisse von Kubernetes-API-Serveraudits sind in der **Kontodomäne** für die {{site.data.keyword.cloud_notm}}-Region verfügbar, in der die Ereignisse generiert werden.
     * **Bereichsprotokolle:** Falls Sie einen Bereich angegeben haben, als Sie in Schritt 2 die Protokollierungskonfiguration angegeben haben, sind diese Ereignisse in der **Bereichsdomäne** verfügbar, die dem Cloud Foundry-Bereich zugeordnet ist, in dem der {{site.data.keyword.cloudaccesstrailshort}}-Service bereitgestellt wird.
   4. Klicken Sie auf **In Kibana anzeigen**.
   5. Legen Sie den Zeitrahmen fest, für den Sie Protokolle anzeigen möchten. Der Standardwert ist 24 Stunden.
@@ -617,12 +618,12 @@ Da die Kubernetes-API-Serverprotokolle automatisch gestreamt werden, werden sie 
 
 **Vorbereitende Schritte**
 
-* [Stellen Sie eine Instanz](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) von {{site.data.keyword.cos_short}} im {{site.data.keyword.Bluemix_notm}}-Katalog bereit.
-* Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
+* [Stellen Sie eine Instanz](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) von {{site.data.keyword.cos_short}} im {{site.data.keyword.cloud_notm}}-Katalog bereit.
+* Stellen Sie sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
 
 **Snapshot erstellen**
 
-1. Erstellen Sie über die {{site.data.keyword.Bluemix_notm}}-Konsole gemäß [diesem Lernprogramm zur Einführung](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets) einen Object Storage-Bucket.
+1. Erstellen Sie über die {{site.data.keyword.cloud_notm}}-Konsole gemäß [diesem Lernprogramm zur Einführung](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets) einen Object Storage-Bucket.
 
 2. Generieren Sie im soeben erstellten Bucket [HMAC-Serviceberechtigungsnachweise](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials).
   1. Klicken Sie in der Registerkarte **Serviceberechtigungsnachweise** des {{site.data.keyword.cos_short}}-Dashboards auf **Neuer Berechtigungsnachweis**.
@@ -676,7 +677,7 @@ Da die Kubernetes-API-Serverprotokolle automatisch gestreamt werden, werden sie 
   ```
   {: screen}
 
-4. Überprüfen Sie den Status der Anforderung. Die Ausführung des Snapshots kann einige Zeit dauern, Sie können jedoch überprüfen, ob die Anforderung erfolgreich ausgeführt wird. Sie können nach dem Namen der Datei suchen, in der die Masterprotokolle in der Antwort enthalten sind, und die Datei mithilfe der {{site.data.keyword.Bluemix_notm}}-Konsole herunterladen.
+4. Überprüfen Sie den Status der Anforderung. Die Ausführung des Snapshots kann einige Zeit dauern, Sie können jedoch überprüfen, ob die Anforderung erfolgreich ausgeführt wird. Sie können nach dem Namen der Datei suchen, in der die Masterprotokolle in der Antwort enthalten sind, und die Datei mithilfe der {{site.data.keyword.cloud_notm}}-Konsole herunterladen.
 
   ```
   ibmcloud ks logging-collect-status --cluster <clustername_oder_-id>
@@ -719,13 +720,13 @@ Stellen Sie sicher, dass die Cluster in den Ressourcengruppen und Regionen einde
   <dt>Kubernetes-Dashboard</dt>
     <dd>Das Kubernetes-Dashboard ist eine Webschnittstelle für die Verwaltung, über die Sie den Zustand Ihrer Workerknoten überprüfen, Kubernetes-Ressourcen suchen, containerisierte Apps bereitstellen und Fehler bei Apps mithilfe von Protokollierungs- und Überwachungsdaten suchen und beheben können. Weitere Informationen dazu, wie Sie auf das Kubernetes-Dashboard zugreifen, finden Sie unter [Kubernetes-Dashboard für {{site.data.keyword.containerlong_notm}} starten](/docs/containers?topic=containers-app#cli_dashboard).</dd>
 
-  <dt>Veraltet: Dashboard 'Metriken' in Clusterübersichtsseite der {{site.data.keyword.Bluemix_notm}}-Konsole und der Ausgabe von <code>ibmcloud ks cluster-get</code></dt>
-    <dd>{{site.data.keyword.containerlong_notm}} stellt Information zum Zustand und zur Kapazität Ihres Clusters sowie zur Nutzung Ihrer Clusterressourcen bereit. Über diese Konsole können Sie Ihren Cluster horizontal skalieren, mit dem persistenten Speicher arbeiten und weitere Funktionalität durch Binden von {{site.data.keyword.Bluemix_notm}}-Services zu Ihrem Cluster hinzufügen. Zum Anzeigen der Metriken rufen Sie **Kubernetes** und anschließend das Dashboard **Cluster** auf, wählen einen Cluster aus und klicken auf den Link **Metriken**.
-<p class="deprecated">Der Link zum Dashboard 'Metriken' in Clusterübersichtsseite der {{site.data.keyword.Bluemix_notm}}-Konsole und in der Ausgabe von `ibmcloud ks cluster-get` ist veraltet. Cluster, die nach dem 3. Mai 2019 erstellt werden, werden ohne den Link zum Dashboard 'Metriken' erstellt. Cluster, die am oder vor dem 3. Mai 2019 erstellt werden, verfügen weiterhin über den Link zum Dashboard 'Metriken'.</p></dd>
+  <dt>Veraltet: Dashboard 'Metriken' in Clusterübersichtsseite der {{site.data.keyword.cloud_notm}}-Konsole und der Ausgabe von <code>ibmcloud ks cluster-get</code></dt>
+    <dd>{{site.data.keyword.containerlong_notm}} stellt Information zum Zustand und zur Kapazität Ihres Clusters sowie zur Nutzung Ihrer Clusterressourcen bereit. Über diese Konsole können Sie Ihren Cluster horizontal skalieren, mit dem persistenten Speicher arbeiten und weitere Funktionalität durch Binden von {{site.data.keyword.cloud_notm}}-Services zu Ihrem Cluster hinzufügen. Zum Anzeigen der Metriken rufen Sie **Kubernetes** und anschließend das Dashboard **Cluster** auf, wählen einen Cluster aus und klicken auf den Link **Metriken**.
+  <p class="deprecated">Der Link zum Dashboard 'Metriken' in Clusterübersichtsseite der {{site.data.keyword.cloud_notm}}-Konsole und in der Ausgabe von `ibmcloud ks cluster-get` ist veraltet. Cluster, die nach dem 3. Mai 2019 erstellt werden, werden ohne den Link zum Dashboard 'Metriken' erstellt. Cluster, die am oder vor dem 3. Mai 2019 erstellt werden, verfügen weiterhin über den Link zum Dashboard 'Metriken'.</p></dd>
 
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>Metriken für Standardcluster befinden sich in dem {{site.data.keyword.Bluemix_notm}}-Konto, das angemeldet war, als der Kubernetes-Cluster erstellt wurde. Wenn Sie beim Erstellen des Clusters einen {{site.data.keyword.Bluemix_notm}}-Bereich angegeben haben, befinden sich die Metriken in diesem Bereich. Containermetriken werden automatisch für alle Container erfasst, die in einem Cluster bereitgestellt werden. Diese Metriken werden durch Grafana gesendet und verfügbar gemacht. Weitere Informationen zu Metriken finden Sie unter [Überwachung für {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
-    <p>Zum Zugriff auf das Grafana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.Bluemix_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.</p>
+    <dd><p>Metriken für Standardcluster befinden sich in dem {{site.data.keyword.cloud_notm}}-Konto, das angemeldet war, als der Kubernetes-Cluster erstellt wurde. Wenn Sie beim Erstellen des Clusters einen {{site.data.keyword.cloud_notm}}-Bereich angegeben haben, befinden sich die Metriken in diesem Bereich. Containermetriken werden automatisch für alle Container erfasst, die in einem Cluster bereitgestellt werden. Diese Metriken werden durch Grafana gesendet und verfügbar gemacht. Weitere Informationen zu Metriken finden Sie unter [Überwachung für {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
+    <p>Zum Zugriff auf das Grafana-Dashboard müssen Sie eine der folgenden URLs aufrufen und dann das {{site.data.keyword.cloud_notm}}-Konto oder den entsprechenden Bereich auswählen, in dem Sie den Cluster erstellt haben.</p>
     <table summary="Die erste Zeile in der Tabelle erstreckt sich über beide Spalten. Die verbleibenden Zeilen enthalten von links nach rechts die jeweilige Serverzone in der ersten Spalte und die entsprechenden IP-Adressen in der zweiten Spalte.">
       <caption>Zu öffnende IP-Adressen für die Überwachung von Datenverkehr</caption>
             <thead>
@@ -792,11 +793,11 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    <tbody>
 <tr>
    <td>`Aborted (Abgebrochen)`</td>
-   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+   <td>Das Löschen des Clusters wird vom Benutzer angefordert, bevor der Kubernetes Master bereitgestellt ist. Nachdem das Löschen des Clusters abgeschlossen ist, wird der Cluster aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
  <tr>
      <td>`Critical (Kritisch)`</td>
-     <td>Der Kubernetes-Master kann nicht erreicht werden oder alle Workerknoten in dem Cluster sind inaktiv. </td>
+     <td>Der Kubernetes-Master kann nicht erreicht werden oder alle Workerknoten in dem Cluster sind inaktiv. Wenn Sie {{site.data.keyword.keymanagementservicelong_notm}} in Ihrem Cluster aktiviert haben, kann der {{site.data.keyword.keymanagementserviceshort}}-Container die geheimen Schlüssel für den Cluster möglicherweise nicht verschlüsseln oder entschlüsseln. Wenn dies der Fall ist, können Sie eine Fehlernachricht mit weiteren Informationen anzeigen, wenn Sie `kubectl get secrets` ausführen.</td>
     </tr>
    <tr>
      <td>`Delete failed (Löschen fehlgeschlagen)`</td>
@@ -804,7 +805,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    </tr>
    <tr>
      <td>`Deleted (Gelöscht)`</td>
-     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Der Cluster wird gelöscht, aber noch nicht aus dem Dashboard entfernt. Wenn Ihr Cluster in diesem Status lange Zeit blockiert ist, öffnen Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>`Deleting (Löschen)`</td>
@@ -812,7 +813,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    </tr>
    <tr>
      <td>`Deploy failed (Bereitstellung fehlgeschlagen)`</td>
-     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help) öffnen.</td>
+     <td>Die Bereitstellung des Kubernetes-Masters konnte nicht abgeschlossen werden. Sie können diesen Status nicht auflösen. Wenden Sie sich an den Support für IBM Cloud, indem Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help) öffnen.</td>
    </tr>
      <tr>
        <td>`Deploying (Wird bereitgestellt)`</td>
@@ -828,7 +829,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
      </tr>
    <tr>
      <td>`Requested (Angefordert)`</td>
-     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Eine Anforderung zum Erstellen des Clusters und zum Bestellen der Infrastruktur für die Kubernetes Master- und Workerknoten wird gesendet. Wenn die Bereitstellung des Clusters gestartet wird, ändert sich der Clusterstatus in <code>Deploying</code> (Wird bereitgestellt). Wenn Ihr Cluster lange Zeit im Status <code>Requested</code> (Angefordert) blockiert ist, öffnen Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>`Updating (Aktualisierung)`</td>
@@ -836,11 +837,13 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
    </tr>
    <tr>
     <td>`Nicht unterstützt`</td>
-    <td>Die [Kubernetes-Version](/docs/containers?topic=containers-cs_versions#cs_versions), die der Cluster ausführt, wird nicht mehr unterstützt. Der Zustand des Clusters wird nicht mehr aktiv überwacht oder gemeldet. Darüber hinaus können Sie keine Workerknoten hinzufügen oder erneut laden. Um weiterhin wichtige Sicherheitsupdates und Unterstützung erhalten zu können, müssen Sie Ihren Cluster aktualisieren. Prüfen Sie die [Aktionen zum Vorbereiten der Versionsaktualisierung](/docs/containers?topic=containers-cs_versions#prep-up) und [aktualisieren Sie Ihren Cluster](/docs/containers?topic=containers-update#update) auf eine unterstützte Kubernetes-Version.<br><br><p class="note">Cluster mit einer Version, die drei oder mehr Versionen älter als die älteste unterstützte Version ist, können nicht aktualisiert werden. Zur Vermeidung dieser Situation können Sie den Cluster auf eine Kubernetes-Version aktualisieren, die der aktuellen Version weniger als drei Versionen voraus ist, wie zum Beipiel die Versionen 1.12 bis 1.14. Wenn Ihre Cluster Version 1.5, 1.7 oder 1.8 ausführt, ist die Version zu alt für eine Aktualisierung. Stattdessen müssen Sie [einen Cluster erstellen](/docs/containers?topic=containers-clusters#clusters) und [Ihre Apps für den Cluster bereitstellen](/docs/containers?topic=containers-app#app).</p></td>
+    <td>Die [Kubernetes-Version](/docs/containers?topic=containers-cs_versions#cs_versions), die der Cluster ausführt, wird nicht mehr unterstützt. Der Zustand des Clusters wird nicht mehr aktiv überwacht oder gemeldet. Darüber hinaus können Sie keine Workerknoten hinzufügen oder erneut laden. Um weiterhin wichtige Sicherheitsupdates und Unterstützung erhalten zu können, müssen Sie Ihren Cluster aktualisieren. Prüfen Sie die [Aktionen zum Vorbereiten der Versionsaktualisierung](/docs/containers?topic=containers-cs_versions#prep-up) und [aktualisieren Sie Ihren Cluster](/docs/containers?topic=containers-update#update) auf eine unterstützte Kubernetes-Version.<br><br><p class="note">Cluster mit einer Version, die drei oder mehr Versionen älter als die älteste unterstützte Version ist, können nicht aktualisiert werden. Zur Vermeidung dieser Situation können Sie den Cluster auf eine Kubernetes-Version aktualisieren, die der aktuellen Version weniger als drei Versionen voraus ist, wie zum Beispiel die Versionen 1.12 bis 1.14. Wenn Ihre Cluster Version 1.5, 1.7 oder 1.8 ausführt, ist die Version zu alt für eine Aktualisierung. Stattdessen müssen Sie [einen Cluster erstellen](/docs/containers?topic=containers-clusters#clusters) und [Ihre Apps für den Cluster bereitstellen](/docs/containers?topic=containers-app#app).</p></td>
    </tr>
     <tr>
        <td>`Warning (Warnung)`</td>
-       <td>Mindestens ein Workerknoten in dem Cluster ist nicht verfügbar, aber andere Workerknoten sind verfügbar und können die Workload übernehmen. </td>
+       <td><ul><li>Mindestens ein Workerknoten in dem Cluster ist nicht verfügbar, aber andere Workerknoten sind verfügbar und können die Workload übernehmen. Versuchen Sie, die nicht verfügbaren Workerknoten [erneut zu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</li>
+       <li>Ihr Cluster enthält keine Workerknoten, z. B. wenn Sie einen Cluster ohne Workerknoten erstellt oder alle Workerknoten manuell aus dem Cluster entfernt haben. [Ändern Sie die Größe der Worker-Pools](/docs/containers?topic=containers-add_workers#resize_pool), um Workerknoten hinzuzufügen, die aus einem Status `Warnung` wiederhergestellt werden sollen.</li>
+       <li>Eine Operation auf der Steuerebene für Ihren Cluster ist fehlgeschlagen. Zeigen Sie den Cluster in der Konsole an oder führen Sie `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` aus, um [den **Masterstatus** für das weitere Debugging zu überprüfen](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -848,7 +851,7 @@ Sie können den aktuellen Clusterstatus anzeigen, indem Sie den Befehl `ibmcloud
 
 
 
-### Masterstatus
+### Masterzustände
 {: #states_master}
 
 Ihre {{site.data.keyword.containerlong_notm}}-Instanz schließt einen IBM verwalteten Master mit Hochverfügbarkeitsreplikaten, für Sie angewendete automatische Sicherheitspatchaktualisierungen sowie Automatisierung zur Wiederherstellung nach einer Störung ein. Sie können den Zustand und den Status des Cluster-Masters überprüfen, indem Sie `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` ausführen.
@@ -920,9 +923,9 @@ Sie können den aktuellen Workerknotenzustand anzeigen, indem Sie den Befehl `ib
     <td>Ein Workerknoten kann aus vielen Gründen in einen kritischen Status wechseln: <ul><li>Sie haben einen Warmstart für Ihren Workerknoten eingeleitet, ohne den Workerknoten zu abzuriegeln und zu entleeren. Der Warmstart eines Workerknotens kann zu Datenverlust in <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code> und <code>calico</code> führen. </li>
     <li>Die Pods, die auf Ihrem Workerknoten bereitgestellt wurden, verwenden keine Ressourcengrenzen für [Speicher ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) und [CPU ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Ohne Ressourcengrenzen können die Pods alle verfügbaren Ressourcen in Anspruch nehmen und keine Ressourcen mehr für andere Pods übrig lassen, die auch auf diesem Workerknoten ausgeführt werden. Diese Überbelegung durch Workload führt dazu, dass der Workerknoten fehlschlägt. </li>
     <li><code>containerd</code>, <code>kubelet</code> oder <code>calico</code> geraten in einen nicht behebbaren kritischen Zustand, nachdem Hunderte oder Tausende von Containern ausgeführt wurden. </li>
-    <li>Sie haben eine Virtual Router Appliance für Ihren Workerknoten eingerichtet, die fehlschlug und die Kommunikation zwischen Ihrem Workerknoten und dem Kubernetes-Master unterbrochen hat. </li><li> Aktuelle Netzprobleme in {{site.data.keyword.containerlong_notm}} oder IBM Cloud Infrastructure (SoftLayer), die ein Fehlschlagen der Kommunikation zwischen Ihrem Workerknoten und dem Kubernetes-Master verursachen.</li>
+    <li>Sie haben eine Virtual Router Appliance für Ihren Workerknoten eingerichtet, die fehlschlug und die Kommunikation zwischen Ihrem Workerknoten und dem Kubernetes-Master unterbrochen hat. </li><li> Aktuelle Netzprobleme in {{site.data.keyword.containerlong_notm}} oder IBM Cloud Infrastructure, die ein Fehlschlagen der Kommunikation zwischen Ihrem Workerknoten und dem Kubernetes-Master verursachen.</li>
     <li>Ihr Workerknoten hat keine Kapazität mehr. Überprüfen Sie den <strong>Status</strong> des Workerknotens, um zu sehen, ob <strong>Out of disk</strong> (zu wenig Plattenspeicher) oder <strong>Out of memory</strong> (zu wenig Hauptspeicher) angezeigt wird. Wenn Ihr Workerknoten die Kapazitätsgrenze erreicht hat, können Sie entweder die Arbeitslast auf Ihrem Workerknoten reduzieren oder einen Workerknoten zu Ihrem Cluster hinzufügen und so den Lastausgleich verbessern.</li>
-    <li>Die Einheit wurde über die [Ressourcenliste der {{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/resources) ausgeschaltet. Öffnen Sie die Ressourcenliste und suchen Sie Ihre Workerknoten-ID in der Liste **Geräte**. Klicken Sie im Aktionsmenü auf die Option **Einschalten**.</li></ul>
+    <li>Die Einheit wurde über die [Ressourcenliste der {{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/resources) ausgeschaltet. Öffnen Sie die Ressourcenliste und suchen Sie Ihre Workerknoten-ID in der Liste **Geräte**. Klicken Sie im Aktionsmenü auf die Option **Einschalten**.</li></ul>
     In vielen Fällen kann ein [Neuladen](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) Ihres Workerknotens das Problem lösen. Wenn Sie Ihren Workerknoten neu laden, wird die aktuellste [Patchversion](/docs/containers?topic=containers-cs_versions#version_types) auf Ihren Workerknoten angewendet. Die Haupt- und Nebenversion werden nicht geändert. Bevor Sie Ihren Workerknoten erneut laden, stellen Sie sicher, dass Ihr Workerknoten abgeriegelt und entleert wurde, damit die vorhandenen Pods ordnungsgemäß beendet und auf den verbleibenden Workerknoten neu geplant werden können. </br></br> Wenn das Neuladen des Workerknotens das Problem nicht löst, wechseln Sie zum nächsten Schritt, um mit der Fehlerbehebung Ihrer Workerknoten fortzufahren. </br></br><strong>Tipp:</strong> Sie können [Statusprüfungen für Ihre Workerknoten konfigurieren und die automatische Wiederherstellung aktiveren](/docs/containers?topic=containers-health#autorecovery). Wenn die automatische Wiederherstellung basierend auf den konfigurierten Prüfungen einen nicht ordnungsgemäß funktionierenden Workerknoten erkennt, löst das System eine Korrekturmaßnahme, wie das erneute Laden des Betriebssystems, auf dem Workerknoten aus. Weitere Informationen zur Funktionsweise der automatischen Wiederherstellung finden Sie im [Blogbeitrag zur automatischen Wiederherstellung![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
     </td>
    </tr>
@@ -960,7 +963,7 @@ Sie können den aktuellen Workerknotenzustand anzeigen, indem Sie den Befehl `ib
     </tr>
     <tr>
      <td>`Unknown (Unbekannt)`</td>
-     <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden. Wenn der Workerknoten auch nach einer erfolgreichen Aktualisierung des Kubernetes-Masters für längere Zeit in diesem Status verbleibt, versuchen Sie, den Workerknoten [erneut zu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</li><li>Sie haben möglicherweise eine weitere Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.Bluemix_notm}}-Support, indem Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help) öffnen.</li></ul></td>
+     <td>Der Kubernetes-Master ist aus einem der folgenden Gründe nicht erreichbar:<ul><li>Sie haben ein Update Ihres Kubernetes-Masters angefordert. Der Status des Workerknotens kann während des Updates nicht abgerufen werden. Wenn der Workerknoten auch nach einer erfolgreichen Aktualisierung des Kubernetes-Masters für längere Zeit in diesem Status verbleibt, versuchen Sie, den Workerknoten [erneut zu laden](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</li><li>Sie haben möglicherweise eine weitere Firewall, die Ihre Workerknoten schützt, oder Sie haben die Firewalleinstellungen kürzlich geändert. {{site.data.keyword.containerlong_notm}} erfordert, dass bestimmte IP-Adressen und Ports geöffnet sind, damit die Kommunikation vom Workerknoten zum Kubernetes-Master und umgekehrt möglich ist. Weitere Informationen finden Sie in [Firewall verhindert Verbindung für Workerknoten](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Der Kubernetes-Master ist inaktiv. Wenden Sie sich an den {{site.data.keyword.cloud_notm}}-Support, indem Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help) öffnen.</li></ul></td>
 </tr>
    <tr>
       <td>`Warning (Warnung)`</td>
@@ -982,14 +985,14 @@ Für die automatische Wiederherstellung ist es erforderlich, dass mindestens ein
 {: note}
 
 Vorbereitende Schritte:
-- Stellen Sie sicher, dass Sie die folgenden [{{site.data.keyword.Bluemix_notm}}-IAM-Rollen](/docs/containers?topic=containers-users#platform) innehaben:
+- Stellen Sie sicher, dass Sie die folgenden [{{site.data.keyword.cloud_notm}} IAM-Rollen](/docs/containers?topic=containers-users#platform) innehaben:
     - Plattformrolle **Administrator** für den Cluster
     - Servicerolle **Schreibberechtigter** oder **Manager** für den Namensbereich `kube-system`
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Gehen Sie wie folgt vor, um die automatische Wiederherstellung zu konfigurieren:
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, Installieren des Helm-Servers (Tiller) mit einem Servicekonto und Hinzufügen des {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys.
+1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, Installieren des Helm-Servers (Tiller) mit einem Servicekonto und Hinzufügen des {{site.data.keyword.cloud_notm}}-Helm-Repositorys.
 
 2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
     ```
@@ -1004,9 +1007,7 @@ Gehen Sie wie folgt vor, um die automatische Wiederherstellung zu konfigurieren:
     ```
     {: screen}
 
-3. Erstellen Sie eine Konfigurationszuordnungsdatei, mit der die Prüfungen im JSON-Format definiert werden. In der folgenden YAML-Datei sind beispielsweise drei Prüfungen angegeben: eine HTTP-Prüfung und zwei Kubernetes-API-Serverprüfungen. In den Tabellen nach der YAML-Beispieldatei finden Sie Informationen zu den drei Arten von Überprüfungen und zu den einzelnen Komponenten dieser Überprüfungen.
-</br>
-   **Tipp:** Definieren Sie jede Prüfung als eindeutigen Schlüssel im Abschnitt `data` der Konfigurationszuordnung (ConfigMap).
+3. Erstellen Sie eine Konfigurationszuordnungsdatei, mit der die Prüfungen im JSON-Format definiert werden. In der folgenden YAML-Datei sind beispielsweise drei Prüfungen angegeben: eine HTTP-Prüfung und zwei Kubernetes-API-Serverprüfungen. In den Tabellen nach der YAML-Beispieldatei finden Sie Informationen zu den drei Arten von Überprüfungen und zu den einzelnen Komponenten dieser Überprüfungen.<p class="tip">*Definieren Sie jede Prüfung als eindeutigen Schlüssel im Abschnitt `data` der Konfigurationszuordnung (ConfigMap).</p>
 
    ```
    kind: ConfigMap

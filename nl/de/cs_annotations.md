@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -24,8 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-# Ingress mit Annotationen anpassen
+# Ingress-Routing mit Annotationen anpassen
 {: #ingress_annotation}
 
 Um Ihrer Lastausgleichsfunktion für Ingress-Anwendungen (ALB) Funktionalität hinzuzufügen, können Sie Annotationen als Metadaten in einer Ingress-Ressource angeben.
@@ -93,7 +92,7 @@ Bevor Sie Annotationen verwenden, stellen Sie sicher, dass Sie Ihre Ingress-Serv
   <tr>
   <td><a href="#keepalive-timeout">Keepalive-Zeitlimit</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Maximale Zeitspanne festlegen, die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.</td>
+  <td>Maximale Zeitspanne festlegen, für die eine Keepalive-Verbindung zwischen dem Client und dem ALB-Proxy-Server geöffnet bleibt.</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">Proxy zu nächstem Upstream</a></td>
@@ -114,6 +113,11 @@ Bevor Sie Annotationen verwenden, stellen Sie sicher, dass Sie Ihre Ingress-Serv
   <td><a href="#upstream-keepalive">Keepalive-Verbindungen für Upstream-Server</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>Maximale Anzahl der inaktiven Keepalive-Verbindungen für einen Upstream-Server festlegen.</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-keepalive-timeout">Upstream-Keepalive-Zeitlimit</a></td>
+  <td><code>upstream-keepalive-timeout</code></td>
+  <td>Maximale Zeitspanne festlegen, für die eine Keepalive-Verbindung zwischen dem ALB-Proxy-Server und dem Upstream-Server Ihrer App geöffnet bleibt.</td>
   </tr>
   <tr>
   <td><a href="#upstream-max-fails">Maximale Anzahl Upstream-Fehler</a></td>
@@ -183,7 +187,7 @@ Bevor Sie Annotationen verwenden, stellen Sie sicher, dass Sie Ihre Ingress-Serv
 <tr>
 <td><a href="#proxy-external-service">Externe Services</a></td>
 <td><code>proxy-external-service</code></td>
-<td>Pfaddefinitionen zu externen Services wie beispielsweise einem in {{site.data.keyword.Bluemix_notm}} gehosteten Service hinzufügen.</td>
+<td>Pfaddefinitionen zu externen Services wie beispielsweise einem in {{site.data.keyword.cloud_notm}} gehosteten Service hinzufügen.</td>
 </tr>
 <tr>
 <td><a href="#location-modifier">Positionsmodifikator</a></td>
@@ -712,7 +716,7 @@ spec:
 {: #keepalive-timeout}
 
 **Beschreibung**</br>
-Legt die maximale Zeitspanne fest, über die eine Keepalive-Verbindung auf dem Server geöffnet bleibt.
+Legt die maximale Zeitspanne fest, über die eine Keepalive-Verbindung zwischen dem Client und dem ALB-Proxy-Server geöffnet bleibt. Wenn Sie diese Annotation nicht verwenden, ist der Standardwert für das Zeitlimit `60s`.
 
 **YAML-Beispiel für eine Ingress-Ressource**</br>
 ```
@@ -1022,6 +1026,55 @@ spec:
 <br />
 
 
+### Upstream-Keepalive-Zeitlimit (`upstream-keepalive-timeout`)
+{: #upstream-keepalive-timeout}
+
+**Beschreibung**</br>
+Legt die maximale Zeitspanne fest, über die eine Keepalive-Verbindung zwischen dem ALB-Proxy-Server und dem Upstream-Server für Ihre Back-End-App geöffnet bleibt. Wenn Sie diese Annotation nicht verwenden, ist der Standardwert für das Zeitlimit `60s`.
+
+**YAML-Beispiel für eine Ingress-Ressource**</br>
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
+
+<table>
+<caption>Erklärung der Komponenten von Annotationen</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der Komponenten von Annotationen</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Ersetzen Sie <code>&lt;<em>mein_service</em>&gt;</code> durch den Namen des Kubernetes Service, den Sie für Ihre App erstellt haben. Dieser Parameter ist optional.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Ersetzen Sie <code>&lt;<em>zeit</em>&gt;</code> durch den Zeitraum in Sekunden. Beispiel:<code>timeout=20s</code>. Der Wert <code>0</code> inaktiviert die Keepalive-Verbindungen für den Client.</td>
+</tr>
+</tbody></table>
+
+<br />
+
+
 ### Maximale Anzahl Upstream-Fehler (`upstream-max-fails`)
 {: #upstream-max-fails}
 
@@ -1088,7 +1141,7 @@ Mithilfe von HTTPS- und TLS/SSL-Authentifizierungsannotationen können Sie Ihre 
 **Beschreibung**</br>
 Standardmäßig ist die Ingress-Lastausgleichsfunktion für Anwendungen (ALB) so konfiguriert, dass sie für eingehenden HTTP-Netzverkehr an Port 80 und für eingehenden HTTPS-Netzverkehr an Port 443 empfangsbereit ist. Sie können die Standardports ändern, um die Sicherheit der Domäne Ihrer Lastausgleichsfunktion für Anwendungen (ALB) zu verbessern oder um ausschließlich einen HTTPS-Port zu aktivieren.
 
-Um die gegenseitige Authentifizierung an einem Port zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](/docs/containers?topic=containers-ingress#opening_ingress_ports) und geben Sie den Port dann in der Annotation [`mutual-auth` an](#mutual-auth). Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.
+Um die gegenseitige Authentifizierung an einem Port zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) und geben Sie den Port dann in der Annotation [`mutual-auth` an](#mutual-auth). Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.
 {: note}
 
 **YAML-Beispiel für eine Ingress-Ressource**</br>
@@ -1153,7 +1206,7 @@ spec:
   {: pre}
 
 3. Fügen Sie die nicht dem Standard entsprechenden HTTP- und HTTPS-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie `<port>` durch den HTTP- oder HTTPS-Port, der geöffnet werden soll.
-  <p class="note">Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt [Ports für den Ingress-Lastenausgleich öffnen](/docs/containers?topic=containers-ingress#opening_ingress_ports).</p>
+  <p class="note">Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt [Ports für den Ingress-Lastenausgleich öffnen](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).</p>
   ```
   apiVersion: v1
   kind: ConfigMap
@@ -1308,7 +1361,7 @@ Die Annotation für gegenseitige Authentifizierung validiert Clientzertifikate. 
 **Voraussetzungen**</br>
 
 * Sie müssen über einen gültigen geheimen Schlüssel für die gegenseitige Authentifizierung verfügen, der das erforderliche Zertifikat `ca.crt` enthält. Informationen zum Erstellen eines geheimen Schlüssels für gegenseitige Authentifizierung finden Sie in den Schritten am Ende dieses Abschnitts.
-* Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](/docs/containers?topic=containers-ingress#opening_ingress_ports) und geben Sie den Port dann in dieser Annotation an. Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.
+* Um die gegenseitige Authentifizierung an einem anderen Port als 443 zu ermöglichen, [konfigurieren Sie die Lastausgleichsfunktion für Anwendungen (ALB) zum Öffnen des gültigen Ports](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) und geben Sie den Port dann in dieser Annotation an. Verwenden Sie die Annotation `custom-port` nicht, um einen Port für die gegenseitige Authentifizierung anzugeben.
 
 **YAML-Beispiel für eine Ingress-Ressource**</br>
 ```
@@ -1373,7 +1426,7 @@ spec:
    {: codeblock}
 4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1460,7 +1513,7 @@ spec:
 
 4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1484,7 +1537,7 @@ spec:
    {: codeblock}
 4. Erstellen Sie das Zertifikat als einen geheimen Kubernetes-Schlüssel.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1568,7 +1621,7 @@ spec:
   {: pre}
 
 3. Fügen Sie die TCP-Ports zur Konfigurationszuordnung hinzu. Ersetzen Sie `<port>` durch die TCP-Ports, die geöffnet werden sollen.
-  Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt [Ports für den Ingress-Lastenausgleich öffnen](/docs/containers?topic=containers-ingress#opening_ingress_ports).
+  Standardmäßig sind Port 80 und 443 geöffnet. Wenn Port 80 und 443 geöffnet bleiben sollen, müssen Sie sie neben allen anderen TCP-Ports einschließen, die Sie im Feld `public-ports` angegeben haben. Wenn Sie eine private Lastausgleichsfunktion für Anwendungen aktiviert haben, müssen Sie auch alle Ports im Feld `private-ports` angeben, die geöffnet bleiben sollen. Weitere Informationen finden Sie im Abschnitt [Ports für den Ingress-Lastenausgleich öffnen](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).
   {: note}
   ```
   apiVersion: v1
@@ -1619,7 +1672,7 @@ Die Ingress-ALB leitet Datenverkehr an die Pfade, über die die Back-End-Apps em
 ### Externe Services (`proxy-external-service`)
 {: #proxy-external-service}
 
-Hinzufügen von Pfaddefinitionen zu externen Services, wie beispielsweise in {{site.data.keyword.Bluemix_notm}} gehosteten Services.
+Hinzufügen von Pfaddefinitionen zu externen Services, wie beispielsweise in {{site.data.keyword.cloud_notm}} gehosteten Services.
 {:shortdesc}
 
 **Beschreibung**</br>
@@ -1893,7 +1946,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
+   ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
@@ -2117,7 +2170,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
+   ingress.bluemix.net/add-host-port: "enabled=true serviceName=<myservice>"
 spec:
  tls:
  - hosts:
@@ -2163,27 +2216,6 @@ Hinzufügen von zusätzlichen Headerinformationen zu einer Clientanforderung, be
 Die Ingress-Lastausgleichsfunktion für Anwendungen (Ingress-ALB) fungiert als Proxy zwischen der Client-App und Ihrer Back-End-App. Clientanforderungen, die an die Lastausgleichsfunktion für Anwendungen (ALB) gesendet werden, werden (als Proxy) verarbeitet und in eine neue Anforderung umgesetzt, die anschließend an Ihre Back-End-App gesendet wird. In ähnlicher Weise werden die an die ALB gesendeten Back-End-App-Antworten verarbeitet (als Proxy) und in eine neue Antwort gestellt, die dann an den Client gesendet wird. Beim Senden einer Anforderung als Proxy oder Antwort werden HTTP-Headerinformationen entfernt, z. B. der Benutzername, der ursprünglich vom Client oder der Back-End-App gesendet wurde.
 
 Wenn Ihre Back-End-App HTTP-Headerinformationen erfordert, können Sie die Annotation `proxy-add-headers` verwenden, um Headerinformationen zur Clientanforderung hinzuzufügen, bevor die Anforderung von der ALB an die Back-End-App weitergeleitet wird. Wenn die Client-Web-App HTTP-Headerinformationen erfordert, können Sie die Annotation `response-add-headers` verwenden, um Headerinformationen zur Antwort hinzuzufügen, bevor die  Antwort von der ALB an die Client-Web-App weitergeleitet wird.<br>
-
-Sie müssen möglicherweise die folgenden X-Forward-Headerinformationen zur Anforderung hinzufügen, bevor sie an Ihre App weitergeleitet wird.
-```
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-```
-{: screen}
-
-Verwenden Sie die Annotation `proxy-add-headers` wie folgt, um die X-Forward-Headerinformationen der Anforderung hinzuzufügen, die an Ihre App gesendet wurde:
-```
-ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
-  Host $host;
-  X-Real-IP $remote_addr;
-  X-Forwarded-Proto $scheme;
-  X-Forwarded-For $proxy_add_x_forwarded_for;
-  }
-```
-{: codeblock}
 
 </br>
 
@@ -2613,7 +2645,7 @@ Da die App {{site.data.keyword.appid_short_notm}} für die Authentifizierung ver
   ```
   {: screen}
 
-4. Rufen Sie den geheimer Schlüssel ab, der im Namensbereich Ihres Clusters erstellt wurde.
+4. Rufen Sie den geheimen Schlüssel ab, der im Namensbereich Ihres Clusters erstellt wurde.
   ```
   kubectl get secrets --namespace=<namensbereich>
   ```

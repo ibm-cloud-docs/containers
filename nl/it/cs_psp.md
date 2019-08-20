@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -35,13 +35,13 @@ Come amministratore cluster, vuoi controllare cosa succede nel tuo cluster, spec
 
 Con il controller di ammissione `PodSecurityPolicy`, non potrai creare alcun pod fino a quando non [autorizzerai le politiche](#customize_psp). L'impostazione delle politiche di sicurezza del pod può avere effetti secondari involontari, assicurati quindi di eseguire il test di una distribuzione una volta modificata la politica. Per distribuire le applicazioni, tutti gli account utente e di servizio devono essere autorizzati dalle politiche di sicurezza del pod necessarie per distribuire i pod. Ad esempio, se installi le applicazioni utilizzando [Helm](/docs/containers?topic=containers-helm#public_helm_install), il componente tiller di Helm crea i pod e quindi devi disporre della corretta autorizzazione della politica di sicurezza del pod.
 
-Stai provando a controllare quali utenti hanno accesso a {{site.data.keyword.containerlong_notm}}? Vedi [Assegnazione dell'accesso al cluster](/docs/containers?topic=containers-users#users) per impostare le autorizzazioni {{site.data.keyword.Bluemix_notm}} IAM e dell'infrastruttura.
+Stai provando a controllare quali utenti hanno accesso a {{site.data.keyword.containerlong_notm}}? Vedi [Assegnazione dell'accesso al cluster](/docs/containers?topic=containers-users#users) per impostare le autorizzazioni {{site.data.keyword.cloud_notm}} IAM e dell'infrastruttura.
 {: tip}
 
 **Ci sono politiche configurate per impostazione predefinita? Cosa posso aggiungere?**</br>
 Per impostazione predefinita, {{site.data.keyword.containerlong_notm}} configura il controller di ammissione `PodSecurityPolicy` con le [risorse per la gestione cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) che non puoi eliminare o modificare. Inoltre, non puoi disabilitare il controller di ammissione.
 
-Per impostazione predefinita, le azioni pod non possono essere bloccate. Due risorse RBAC (role-based access control) nel cluster autorizzano invece tutti gli amministratori, gli utenti, i servizi e i nodi a creare pod privilegiati e non privilegiati. Sono incluse ulteriori risorse RBAC per la portabilità con i pacchetti di {{site.data.keyword.Bluemix_notm}} Privato utilizzati per le [distribuzioni ibride](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+Per impostazione predefinita, le azioni pod non possono essere bloccate. Due risorse RBAC (role-based access control) nel cluster autorizzano invece tutti gli amministratori, gli utenti, i servizi e i nodi a creare pod privilegiati e non privilegiati. Sono incluse ulteriori risorse RBAC per la portabilità con i pacchetti di {{site.data.keyword.cloud_notm}} Privato utilizzati per le [distribuzioni ibride](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 Se vuoi impedire che determinati utenti creino o aggiornino i pod, puoi [modificare queste risorse RBAC oppure crearne di tue](#customize_psp).
 
@@ -78,7 +78,7 @@ Puoi modificare questi ruoli RBAC per rimuovere o aggiungere gli amministratori,
 Prima di iniziare:
 *  [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Comprendi l'utilizzo dei ruoli RBAC. Per ulteriori informazioni, vedi [Autorizzazione di utenti con ruoli personalizzati di RBAC Kubernetes](/docs/containers?topic=containers-users#rbac) o la [documentazione Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Assicurati di disporre del [ruolo di accesso del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
+* Assicurati di disporre del [ruolo di accesso del servizio {{site.data.keyword.cloud_notm}} IAM **Gestore**](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
 
 Quando modifichi la configurazione predefinita, puoi impedire l'esecuzione di azioni cluster importanti, ad esempio le distribuzioni pod o gli aggiornamenti cluster. Verifica le tue modifiche in un cluster non di produzione che non viene utilizzato dagli altri team.
 {: important}

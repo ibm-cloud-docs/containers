@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -53,7 +53,7 @@ O Knative é construído na parte superior do Istio para assegurar que as cargas
 Antes de iniciar:
 -  [Instale a CLI do IBM Cloud, o plug-in do {{site.data.keyword.containerlong_notm}} e a CLI do Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Certifique-se de instalar a versão da CLI `kubectl` que corresponde à versão do Kubernetes do seu cluster.
 -  [Crie um cluster padrão com pelo menos 3 nós do trabalhador, cada um contendo 4 núcleos e 16 GB de memória (`b3c.4x16`) ou mais](/docs/containers?topic=containers-clusters#clusters_ui). Além disso, os nós do cluster e do trabalhador devem executar pelo menos a versão mínima suportada do Kubernetes, que pode ser revisada executando `ibmcloud ks addon-versions --addon knative`.
--  Assegure-se de que tenha a [função de serviço **Gravador** ou **Gerenciador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.containerlong_notm}}.
+-  Assegure-se de que você tenha a [função de serviço **Gravador** ou **Gerenciador**do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o {{site.data.keyword.containerlong_notm}}.
 -  [Destino a CLI para seu cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 </br>
 
@@ -344,7 +344,7 @@ Por padrão, cada app é designado a um subdomínio público de seu subdomínio 
 1. Crie um domínio customizado. Para registrar seu domínio customizado, trabalhe com seu provedor Domain Name Service (DNS) ou [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configure seu domínio para rotear o tráfego de rede recebido para o gateway do Ingress fornecido pela IBM. Escolha entre estas opções:
    - Defina um alias para seu domínio customizado especificando o domínio fornecido pela IBM como um registro de Nome Canônico (CNAME). Para localizar o domínio do Ingress fornecido pela IBM, execute `ibmcloud ks cluster-get --cluster <cluster_name>` e procure o campo **Subdomínio do Ingress**. O uso de um CNAME é preferencial porque a IBM fornece verificações de funcionamento automáticas no subdomínio IBM e remove os IPs com falha da resposta de DNS.
-   - Mapeie seu domínio customizado para o endereço IP público móvel do gateway do Ingress incluindo o endereço IP como um registro. Para localizar o endereço IP público do gateway do Ingress, execute `nslookup <ingress_subdomain>`.
+   - Mapeie o seu domínio customizado para o endereço IP público móvel do gateway do Ingress incluindo o endereço IP como um registro A. Para localizar o endereço IP público do gateway do Ingress, execute `nslookup <ingress_subdomain>`.
 3. Compre um certificado TLS curinga oficial para seu domínio customizado. Se você desejar comprar múltiplos certificados TLS, certifique-se de que o [CN ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://support.dnsimple.com/articles/what-is-common-name/) seja diferente para cada certificado.
 4. Crie um segredo do Kubernetes para seu certificado e chave.
    1. Codifique o certificado e a chave na base 64 e salve o valor codificado na base 64 em um novo arquivo.
@@ -374,7 +374,7 @@ Por padrão, cada app é designado a um subdomínio público de seu subdomínio 
 
    4. Crie o certificado em seu cluster.
       ```
-      kubectl create -f secret.yaml
+      kubectl aplicar -f secret.yaml
       ```
       {: pre}
 

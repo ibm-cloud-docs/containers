@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-22"
 
 keywords: kubernetes, iks
 
@@ -23,24 +23,28 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
+
 # Ubicazioni
 {: #regions-and-zones}
 
-Puoi distribuire i cluster {{site.data.keyword.containerlong}} in tutto il mondo. Quando crei un cluster Kubernetes, le sue risorse rimangono nell'ubicazione in cui hai distribuito il cluster. Puoi accedere a {{site.data.keyword.containerlong_notm}} tramite un endpoint API globale per lavorare con il tuo cluster.
+Puoi distribuire i cluster OpenShift o Kubernetes della community in tutto il mondo utilizzando {{site.data.keyword.containerlong}} . Quando crei un cluster, le sue risorse rimangono nell'ubicazione a cui distribuisci il cluster. Per lavorare con il tuo cluster, puoi accedere a {{site.data.keyword.containershort_notm}} tramite un endpoint API globale.
 {:shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} - Ubicazioni](images/locations.png)
 
 _Ubicazioni {{site.data.keyword.containerlong_notm}}_
 
-Le risorse {{site.data.keyword.Bluemix_notm}} venivano di norma organizzate in regioni a cui si accedeva tramite [endpoint specifici per la regione](#bluemix_regions). Utilizza invece l'[endpoint globale](#endpoint).
+Le risorse {{site.data.keyword.cloud_notm}} venivano di norma organizzate in regioni a cui si accedeva tramite [endpoint specifici per la regione](#bluemix_regions). Utilizza invece l'[endpoint globale](#endpoint).
 {: deprecated}
 
 ## Ubicazioni {{site.data.keyword.containerlong_notm}}
 {: #locations}
 
-Le risorse {{site.data.keyword.Bluemix_notm}} sono organizzate in una gerarchia di ubicazioni geografiche. {{site.data.keyword.containerlong_notm}} è disponibile in un sottoinsieme di queste ubicazioni, incluse tutte e sei le regioni che supportano il multizona in tutto il mondo. I cluster gratuiti sono disponibili solo in determinate ubicazioni. Gli altri servizi {{site.data.keyword.Bluemix_notm}} potrebbero essere disponibili a livello globale o all'interno di un'ubicazione specifica.
+Le risorse {{site.data.keyword.cloud_notm}} sono organizzate in una gerarchia di ubicazioni geografiche. {{site.data.keyword.containerlong_notm}} è disponibile in un sottoinsieme di queste ubicazioni, incluse tutte e sei le regioni che supportano il multizona in tutto il mondo. I cluster gratuiti sono disponibili solo in determinate ubicazioni. Gli altri servizi {{site.data.keyword.cloud_notm}} potrebbero essere disponibili a livello globale o all'interno di un'ubicazione specifica.
 {: shortdesc}
+
+Utilizzo di [Red Hat OpenShift on IBM Cloud beta](/docs/openshift?topic=openshift-getting-started)? Puoi creare i cluster OpenShift in due aree metropolitane multizona: Washington DC e Londra. Le zone supportate sono wdc04, wdc06, wdc07, lon04, lon05 e lon06.
+{: preview}
 
 ### Ubicazioni disponibili
 {: #available-locations}
@@ -73,12 +77,12 @@ La seguente immagine viene utilizzata come esempio per spiegare come sono organi
     <tr>
       <td>Area metropolitana</td>
       <td>Città del Messico (`mex-cty`), Dallas (`dal`)</td>
-      <td>Il nome di una città in cui sono ubicati 1 o più data center (zone). Un'area metropolitana può essere una zona che supporta il multizona e avere data center che supportano il multizona, come Dallas, o può avere solo data center a zona singola, come Città del Messico. Se crei un cluster in un'area metropolitana che supporta il multizona, il master Kubernetes e i nodi di lavoro possono essere estesi tra le zone per garantire l'alta disponibilità.</td>
+      <td>Il nome di una città in cui sono ubicati 1 o più data center (zone). Un'area metropolitana può essere una zona che supporta il multizona e avere data center che supportano il multizona, come Dallas, o può avere solo data center a zona singola, come Città del Messico. Se crei un cluster in un'area metropolitana che supporta il multizona, il master Kubernetes e i nodi di lavoro possono essere distribuiti tra le zone per garantire l'alta disponibilità.</td>
     </tr>
     <tr>
       <td>Data center (zona)</td>
       <td>Dallas 12 (`dal12`)</td>
-      <td>Un'ubicazione fisica dell'infrastruttura di calcolo, di rete e di archiviazione e dei relativi sistemi di raffreddamento e alimentazione che ospitano servizi e applicazioni cloud. I cluster possono essere estesi tra i data center, o zone, in un'architettura multizona per l'alta disponibilità. Le zone sono isolate l'una dall'altra, il che garantisce che non ci sia alcun singolo punto di malfunzionamento condiviso.</td>
+      <td>Un'ubicazione fisica dell'infrastruttura di calcolo, di rete e di archiviazione e dei relativi sistemi di raffreddamento e alimentazione che ospitano servizi e applicazioni cloud. I cluster possono essere distribuiti tra i data center, o zone, in un'architettura multizona per l'alta disponibilità. Le zone sono isolate l'una dall'altra, il che garantisce che non ci sia alcun singolo punto di malfunzionamento condiviso.</td>
     </tr>
   </tbody>
   </table>
@@ -89,14 +93,13 @@ La seguente immagine viene utilizzata come esempio per spiegare come sono organi
 Le seguenti tabelle elencano le ubicazioni a zona singola e multizona in {{site.data.keyword.containerlong_notm}}. Nota che in alcune aree metropolitane, puoi eseguire il provisioning di un cluster come cluster a zona singola o cluster multizona. Inoltre, i cluster gratuiti sono disponibili solo in determinate aree geografiche e solo come cluster a zona singola con un unico nodo di lavoro.
 {: shortdesc}
 
-* **Multizona**: se crei un cluster in un'ubicazione metropolitana multizona, le repliche del tuo master Kubernetes altamente disponibile vengono estese tra le zone. Hai l'opzione di diffondere i tuoi nodi di lavoro tra le zone per proteggere le tue applicazioni dal malfunzionamento di una zona.
-* **Zona singola**: se crei un cluster in un'ubicazione a singolo data center, puoi creare più nodi di lavoro, ma non puoi estenderli tra le zone. Il master altamente disponibile include tre repliche su host separati, ma non viene esteso tra le zone.
+* **Multizona**: se crei un cluster in un'ubicazione metropolitana multizona, le repliche del tuo master Kubernetes altamente disponibile vengono distribuite tra le zone. Hai l'opzione di diffondere i tuoi nodi di lavoro tra le zone per proteggere le tue applicazioni dal malfunzionamento di una zona.
+* **Zona singola**: se crei un cluster in un'ubicazione a zona singola o data center, puoi creare più nodi di lavoro ma non puoi diffonderli tra le zone. Il master altamente disponibile include tre repliche su host separati, ma non viene distribuito tra le zone.
 
 Per determinare rapidamente se una zona supporta il multizona, puoi eseguire `ibmcloud ks supported-locations` e cercare il valore nella colonna `Multizone Metro`.
 {: tip}
 
-
-Le risorse {{site.data.keyword.Bluemix_notm}} venivano di norma organizzate in regioni a cui si accedeva tramite [endpoint specifici per la regione](#bluemix_regions). Le tabelle elencano le regioni precedenti a scopo informativo. In futuro, puoi utilizzare l'[endpoint globale](#endpoint) per spostarti verso un'architettura senza regioni.
+Le risorse {{site.data.keyword.cloud_notm}} venivano di norma organizzate in regioni a cui si accedeva tramite [endpoint specifici per la regione](#bluemix_regions). Le tabelle elencano le regioni precedenti a scopo informativo. In futuro, puoi utilizzare l'[endpoint globale](#endpoint) per spostarti verso un'architettura senza regioni.
 {: deprecated}
 
 **Ubicazioni metropolitane multizona**
@@ -311,7 +314,7 @@ Le risorse {{site.data.keyword.Bluemix_notm}} venivano di norma organizzate in r
   </tbody>
   </table>
 
-`*` lon05 sostituisce lon02. I nuovi cluster devono utilizzare lon05 e solo lon05 supporta i master altamente disponibili estesi tra le zone.
+`*` lon05 sostituisce lon02. I nuovi cluster devono utilizzare lon05, che supporta i master altamente disponibili distribuiti tra le zone.
 {: note}
 
 ### Cluster a zona singola
@@ -333,15 +336,15 @@ _Descrizione della posizione in cui risiedono le risorse del cluster a zona sing
 ### Cluster multizona
 {: #regions_multizone}
 
-In un cluster multizona, le risorse del tuo cluster vengono estese tra più zone per una maggiore disponibilità.
+In un cluster multizona, le risorse del tuo cluster vengono distribuite tra più zone per una maggiore disponibilità.
 {: shortdesc}
 
-1.  I nodi di lavoro vengono estesi tra più zone nell'ubicazione metropolitana per fornire una maggiore disponibilità per il tuo cluster. Anche le repliche del master Kubernetes vengono estese tra le zone. Quando avvii azioni di orchestrazione del contenitore locale, come i comandi `kubectl`, le informazioni vengono scambiate tra i tuoi nodi master e di lavoro tramite l'endpoint globale.
+1.  I nodi di lavoro vengono distribuiti tra più zone nell'ubicazione metropolitana per fornire una maggiore disponibilità per il tuo cluster. Anche le repliche del master Kubernetes vengono distribuite tra le zone. Quando avvii azioni di orchestrazione del contenitore locale, come i comandi `kubectl`, le informazioni vengono scambiate tra i tuoi nodi master e di lavoro tramite l'endpoint globale.
 
 2.  La modalità di distribuzione nelle zone nel tuo cluster multizona di altre risorse del cluster, quali l'archiviazione, la rete, il calcolo o le applicazioni in esecuzione nei pod, varia. Per ulteriori informazioni, consulta questi argomenti:
     *   Configurazione di [archiviazione file](/docs/containers?topic=containers-file_storage#add_file) e [archiviazione blocchi](/docs/containers?topic=containers-block_storage#add_block) nei cluster multizona o [scelta di una soluzione di archiviazione persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
     *   [Abilitazione dell'accesso pubblico o privato a un'applicazione utilizzando un servizio NLB (network load balancer) in un cluster multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
-    *   [Gestione del traffico di rete utilizzando Ingress](/docs/containers?topic=containers-ingress#planning).
+    *   [Gestione del traffico di rete utilizzando Ingress](/docs/containers?topic=containers-ingress-about).
     *   [Aumento della disponibilità della tua applicazione](/docs/containers?topic=containers-app#increase_availability).
 
 3.  Quando avvii azioni di gestione del cluster, utilizzando ad esempio i [comandi `ibmcloud ks`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), le informazioni di base sul cluster (come nome, ID, utente, comando) vengono instradate attraverso l'endpoint globale.
@@ -354,7 +357,10 @@ I cluster gratuiti sono limitati a ubicazioni specifiche.
 
 **Creazione di un cluster gratuito nella CLI**: prima di creare un cluster gratuito, devi specificare una regione eseguendo `ibmcloud ks region-set`. Il tuo cluster viene creato in un'area metropolitana all'interno della regione che hai specificato: l'area metropolitana Sydney in `ap-south`, l'area metropolitana Francoforte in `eu-central`, l'area metropolitana Londra in `uk-south` o l'area metropolitana Dallas in `us-south`. Nota che non puoi specificare una zona all'interno dell'area metropolitana.
 
-**Creazione di un cluster gratuito nella console {{site.data.keyword.Bluemix_notm}}**: quando utilizzi la console, puoi selezionare un'area geografica e un'ubicazione metropolitana di tale area. Puoi selezionare l'area metropolitana Dallas in Nord America, le aree metropolitane Francoforte o Londra in Europa o l'area metropolitana Sydney in Asia Pacifico. Il tuo cluster viene creato in una zona all'interno dell'area metropolitana da te scelta.
+**Creazione di un cluster gratuito nella console {{site.data.keyword.cloud_notm}}**: quando utilizzi la console, puoi selezionare un'area geografica e un'ubicazione metropolitana in tale area. Puoi selezionare l'area metropolitana Dallas in Nord America, le aree metropolitane Francoforte o Londra in Europa o l'area metropolitana Sydney in Asia Pacifico. Il tuo cluster viene creato in una zona all'interno dell'area metropolitana da te scelta.
+
+Per lavorare con un cluster gratuito nell'area metropolitana Londra, devi indicare come destinazione l'API regionale Europa centrale eseguendo `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
+{: important}
 
 <br />
 
@@ -362,16 +368,16 @@ I cluster gratuiti sono limitati a ubicazioni specifiche.
 ## Accesso all'endpoint globale
 {: #endpoint}
 
-Puoi organizzare le tue risorse tra i servizi {{site.data.keyword.Bluemix_notm}} utilizzando le ubicazioni {{site.data.keyword.Bluemix_notm}} (precedentemente chiamate regioni). Ad esempio, puoi creare un cluster Kubernetes utilizzando un'immagine Docker privata memorizzata nel tuo {{site.data.keyword.registryshort_notm}} della stessa ubicazione. Per accedere a queste risorse, puoi utilizzare gli endpoint globali e filtrare per ubicazione.
+Puoi organizzare le tue risorse tra i servizi {{site.data.keyword.cloud_notm}} utilizzando le ubicazioni {{site.data.keyword.cloud_notm}} (precedentemente chiamate regioni). Ad esempio, puoi creare un cluster Kubernetes utilizzando un'immagine Docker privata memorizzata nel tuo {{site.data.keyword.registryshort_notm}} della stessa ubicazione. Per accedere a queste risorse, puoi utilizzare gli endpoint globali e filtrare per ubicazione.
 {:shortdesc}
 
-### Accesso a {{site.data.keyword.Bluemix_notm}}
+### Accesso a {{site.data.keyword.cloud_notm}}
 {: #login-ic}
 
-Quando accedi alla riga di comando {{site.data.keyword.Bluemix_notm}} (`ibmcloud`), ti viene richiesto di selezionare una regione. Tuttavia, questa regione non influisce sull'endpoint del plugin {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`), che utilizza ancora l'endpoint globale. Tieni presente che devi ancora specificare il gruppo di risorse in cui si trova il tuo cluster se non si trova nel gruppo di risorse predefinito.
+Quando accedi alla riga di comando {{site.data.keyword.cloud_notm}} (`ibmcloud`), ti viene richiesto di selezionare una regione. Tuttavia, questa regione non influisce sull'endpoint del plugin {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`), che utilizza ancora l'endpoint globale. Tieni presente che devi ancora specificare il gruppo di risorse in cui si trova il tuo cluster se non si trova nel gruppo di risorse predefinito.
 {: shortdesc}
 
-Per eseguire l'accesso all'endpoint API globale {{site.data.keyword.Bluemix_notm}} e specificare il gruppo di risorse in cui si trova il tuo cluster:
+Per eseguire l'accesso all'endpoint API globale {{site.data.keyword.cloud_notm}} e specificare il gruppo di risorse in cui si trova il tuo cluster:
 ```
 ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 ```
@@ -380,7 +386,7 @@ ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 ### Accesso a {{site.data.keyword.containerlong_notm}}
 {: #login-iks}
 
-Quando esegui l'accesso a {{site.data.keyword.Bluemix_notm}}, puoi accedere a {{site.data.keyword.containershort_notm}}. Per aiutarti a iniziare, controlla le seguenti risorse per l'utilizzo della CLI e dell'API {{site.data.keyword.containerlong_notm}}.
+Quando esegui l'accesso a {{site.data.keyword.cloud_notm}}, puoi accedere a {{site.data.keyword.containershort_notm}}. Per aiutarti a iniziare, controlla le seguenti risorse per l'utilizzo della CLI e dell'API {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 **CLI {{site.data.keyword.containerlong_notm}}**:
@@ -439,16 +445,16 @@ Se devi specificare una regione in una chiamata API, rimuovi il parametro `/glob
 
 
 
-## Obsoleto: Precedente struttura di regioni e zone {{site.data.keyword.Bluemix_notm}}
+## Obsoleto: Precedente struttura di regioni e zone {{site.data.keyword.cloud_notm}}
 {: #bluemix_regions}
 
-In precedenza, le tue risorse {{site.data.keyword.Bluemix_notm}} erano organizzate in regioni. Le regioni sono uno strumento concettuale per organizzare le zone e possono includere zone (data center) in differenti paesi e aree geografiche. La seguente tabella associa le regioni {{site.data.keyword.Bluemix_notm}} precedenti, le regioni {{site.data.keyword.containerlong_notm}} e le zone {{site.data.keyword.containerlong_notm}}. Le zone che supportano il multizona sono in grassetto.
+In precedenza, le tue risorse {{site.data.keyword.cloud_notm}} erano organizzate in regioni. Le regioni sono uno strumento concettuale per organizzare le zone e possono includere zone (data center) in differenti paesi e aree geografiche. La seguente tabella associa le regioni {{site.data.keyword.cloud_notm}} precedenti, le regioni {{site.data.keyword.containerlong_notm}} e le zone {{site.data.keyword.containerlong_notm}}. Le zone che supportano il multizona sono in grassetto.
 {: shortdesc}
 
 Gli endpoint specifici per la regione sono stati dichiarati obsoleti. Utilizza invece l'[endpoint globale](#endpoint). Se devi utilizzare gli endpoint regionali, [imposta la variabile di ambiente `IKS_BETA_VERSION` nel plug-in {{site.data.keyword.containerlong_notm}} su `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).
 {: deprecated}
 
-| Regione {{site.data.keyword.containerlong_notm}} | Regioni {{site.data.keyword.Bluemix_notm}} corrispondenti | Zone disponibili nella regione |
+| Regione {{site.data.keyword.containerlong_notm}} | Regioni {{site.data.keyword.cloud_notm}} corrispondenti | Zone disponibili nella regione |
 | --- | --- | --- |
 | Asia Pacifico Nord (solo cluster standard) | Tokyo | che01, hkg02, seo01, sng01, **tok02, tok04, tok05** |
 | Asia Pacifico Sud | Sydney | mel01, **syd01, syd04, syd05** |
@@ -456,14 +462,14 @@ Gli endpoint specifici per la regione sono stati dichiarati obsoleti. Utilizza i
 | Regno Unito Sud | Londra | lon02, **lon04, lon05, lon06** |
 | Stati Uniti Est (solo cluster standard) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | Stati Uniti Sud | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
-{: caption="Regioni {{site.data.keyword.containershort_notm}} e {{site.data.keyword.Bluemix_notm}} corrispondenti, con le zone. Le zone che supportano il multizona sono in grassetto." caption-side="top"}
+{: caption="Regioni {{site.data.keyword.containershort_notm}} e {{site.data.keyword.cloud_notm}} corrispondenti, con le zone. Le zone che supportano il multizona sono in grassetto." caption-side="top"}
 
 Utilizzando le regioni {{site.data.keyword.containerlong_notm}}, puoi creare o accedere ai cluster Kubernetes in un'altra regione rispetto alla regione
-{{site.data.keyword.Bluemix_notm}} in cui hai eseguito l'accesso. Gli endpoint della regione {{site.data.keyword.containerlong_notm}} fanno riferimento nello specifico a
-{{site.data.keyword.containerlong_notm}}, non a {{site.data.keyword.Bluemix_notm}} nel suo insieme.
+{{site.data.keyword.cloud_notm}} in cui hai eseguito l'accesso. Gli endpoint della regione {{site.data.keyword.containerlong_notm}} fanno riferimento nello specifico a
+{{site.data.keyword.containerlong_notm}}, non a {{site.data.keyword.cloud_notm}} nel suo insieme.
 
 Potresti voler accedere a un'altra regione {{site.data.keyword.containerlong_notm}} per i seguenti motivi:
-  * Hai creato i servizi {{site.data.keyword.Bluemix_notm}} o le immagini Docker private in una regione e desideri utilizzarle con {{site.data.keyword.containerlong_notm}} in un'altra regione.
-  * Vuoi accedere a un cluster in una regione diversa dalla regione {{site.data.keyword.Bluemix_notm}} predefinita a cui hai eseguito l'accesso.
+  * Hai creato i servizi {{site.data.keyword.cloud_notm}} o le immagini Docker private in una regione e desideri utilizzarle con {{site.data.keyword.containerlong_notm}} in un'altra regione.
+  * Vuoi accedere a un cluster in una regione diversa dalla regione {{site.data.keyword.cloud_notm}} predefinita a cui hai eseguito l'accesso.
 
 Per spostarti rapidamente tra le regioni, utilizza il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set) `ibmcloud ks region-set`.

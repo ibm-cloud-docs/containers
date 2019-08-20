@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ Erfahren Sie mehr über die Zuständigkeiten und Nutzungsbedingungen bei der Clu
 ## Zuständigkeiten bei der Clusterverwaltung
 {: #responsibilities}
 
-IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps zusammen mit {{site.data.keyword.Bluemix_notm}} DevOps-, AI-, Daten- und Sicherheitsservices bereitstellen können. Sie selbst entscheiden, wie Sie Ihre Apps und Services in der Cloud einrichten, integrieren und betreiben.
+IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps zusammen mit {{site.data.keyword.cloud_notm}} DevOps-, AI-, Daten- und Sicherheitsservices bereitstellen können. Sie selbst entscheiden, wie Sie Ihre Apps und Services in der Cloud einrichten, integrieren und betreiben.
 {:shortdesc}
 
 <table summary="Die Tabelle zeigt die Verantwortlichkeiten von IBM und von Ihnen. Die Zeilen enthalten von links nach rechts gesehen Symbole für die jeweilige Verantwortlichkeit in Spalte eins und eine Beschreibung in Spalte zwei.">
@@ -47,7 +47,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
     <td>
     **Leistungsumfang**:
     <ul><li>Bereitstellung eines vollständig verwalteten, dedizierten Hochverfügbarkeits-Masters in einem sicheren Infrastrukturkonto, dessen Eigner IBM ist, für jeden Cluster.</li>
-    <li>Bereitstellung von Workerknoten in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer).</li>
+    <li>Bereitstellung von Workerknoten in Ihrem Konto der IBM Cloud-Infrastruktur.</li>
     <li>Einrichtung von Clusterverwaltungskomponenten wie VLANS und Lastausgleichsfunktionen.</li>
     <li>Erfüllen von Anforderungen nach weiterer Infrastruktur, wie z. B. zum Hinzufügen und Entfernen von Workerknoten, Erstellen von Standardteilnetzen und Bereitstellung von Speicherdatenträgern als Antwort auf Anforderungen für persistente Datenträger.</li>
     <li>Integration von bestellten Infrastrukturressourcen für die automatische Arbeit mit Ihrer Clusterarchitektur und Verfügbarkeit für Ihre bereitgestellten Apps und Workloads.</li></ul>
@@ -93,7 +93,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
       <li>Kontinuierliche Überwachung von Master- und Workerknoten-Images zur Erkennung von Sicherheitslücken und Fehlern bei der Einhaltung von Sicherheitsbestimmungen.</li>
       <li>Bereitstellung von Workerknoten mit zwei lokalen SSD-Datenpartitionen mit 256-Bit-AES-Verschlüsselung.</li>
       <li>Bereitstellung von Optionen für die Cluster-Netzkonnektivität, z. B. öffentliche und private Serviceendpunkte.</li>
-      <li>Bereitstellung von Optionen für die Berechnung der Isolation, z. B. dedizierte virtuelle Maschinen, Bare-Metal und Bare-Metal mit Trusted Compute.</li>
+      <li>Bereitstellung von Optionen für die Berechnung der Isolation, z. B. dedizierte virtuelle Maschinen oder Bare-Metal.</li>
       <li>Integration der rollenbasierten Zugriffssteuerung (RBAC) von Kubernetes mit {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
       </ul>
       <br><br>
@@ -112,7 +112,7 @@ IBM stellt Ihnen eine Cloudplattform für Unternehmen bereit, auf der Sie Apps z
         <li>Bereitstellung von Clustern mit installierten Kubernetes-Komponenten, sodass Sie auf die Kubernetes-API zugreifen können.</li>
         <li>Bereitstellung einer Anzahl verwalteter Add-ons zur Erweiterung der Fähigkeiten Ihrer App, z. B. [Istio](/docs/containers?topic=containers-istio#istio) oder [Knative](/docs/containers?topic=containers-serverless-apps-knative). Die Wartung wird für Sie vereinfacht, da IBM die Installation und Aktualisierungen für die verwalteten Add-ons bereitstellt.</li>
         <li>Bereitstellung der Clusterintegration mit ausgewählten Partnerschaftstechnologien von Drittanbietern, z. B. {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} oder Portworx.</li>
-        <li>Bereitstellung von Automatisierung, um die Servicebindung für andere {{site.data.keyword.Bluemix_notm}}-Services zu aktivieren</li>
+        <li>Bereitstellung von Automatisierung, um die Servicebindung für andere {{site.data.keyword.cloud_notm}}-Services zu aktivieren</li>
         <li>Erstellung von Clustern mit geheimen Schlüsseln für Image-Pull-Operationen, sodass Ihre Bereitstellungen im Kubernetes-Namensbereich `default` Images aus {{site.data.keyword.registrylong_notm}} extrahieren können.</li>
         <li>Bereitstellung von Speicherklassen und Plug-ins, um persistente Datenträger für die Verwendung mit Ihren Apps zu unterstützen.</li>
         <li>Erstellung von Clustern mit IP-Teilnetzadressen, die dafür reserviert sind, Anwendungen extern zugänglich zu machen.</li>
@@ -148,3 +148,5 @@ Ein unsachgemäßer Gebrauch umfasst:
 *   Verletzung von Rechten anderer Benutzer
 
 Alle Nutzungsbedingungen finden Sie unter [Bedingungen für Cloud-Services](/docs/overview/terms-of-use?topic=overview-terms#terms).
+
+

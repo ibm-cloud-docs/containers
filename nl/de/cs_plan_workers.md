@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -28,10 +28,10 @@ subcollection: containers
 # Konfiguration Ihres Workerknotens planen
 {: #planning_worker_nodes}
 
-Ein Kubernetes-Cluster besteht aus Workerknoten, die in Worker-Pools gruppiert sind und zentral vom Kubernetes-Master überwacht und verwaltet werden. Clusteradministratoren entscheiden, wie sie den Cluster aus Workerknoten einrichten, um sicherzustellen, dass den Clusterbenutzern alle Ressourcen für die Bereitstellung und Ausführung von Apps im Cluster zur Verfügung stehen.
+Ihr Community-Cluster (Kubernetes oder OpenShift) besteht aus Workerknoten, die in Worker-Pools gruppiert sind und zentral vom Kubernetes-Master überwacht und verwaltet werden. Clusteradministratoren entscheiden, wie sie den Cluster aus Workerknoten einrichten, um sicherzustellen, dass den Clusterbenutzern alle Ressourcen für die Bereitstellung und Ausführung von Apps im Cluster zur Verfügung stehen.
 {:shortdesc}
 
-Wenn Sie einen Standardcluster erstellen, werden die Workerknoten mit denselben Speicher-, CPU- und Plattenspeicherspezifikationen (Typ) in Ihrer IBM Cloud-Infrastruktur (SoftLayer) in Ihrem Namen bestellt und dem Standard-Worker-Pool in Ihrem Cluster hinzugefügt. Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach dem Erstellen des Clusters nicht geändert werden dürfen. Sie können zwischen virtuellen oder physischen Servern (Bare-Metal-Servern) wählen. Abhängig von dem ausgewählten Grad an Hardware-Isolation können virtuelle Workerknoten als gemeinsam genutzte oder als dedizierte Knoten eingerichtet werden. Wenn Sie Ihrem Cluster unterschiedliche Typen hinzufügen möchten, [erstellen Sie einen weiteren Worker-Pool](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
+Wenn Sie einen Standardcluster erstellen, werden die Workerknoten mit denselben Speicher-, CPU- und Plattenspeicherspezifikationen (Typ) in Ihrer IBM Cloud-Infrastruktur in Ihrem Namen bestellt und dem Standard-Worker-Pool in Ihrem Cluster hinzugefügt. Jedem Workerknoten werden eine eindeutige Workerknoten-ID und ein Domänenname zugewiesen, die nach dem Erstellen des Clusters nicht geändert werden dürfen. Sie können zwischen virtuellen oder physischen Servern (Bare-Metal-Servern) wählen. Abhängig von dem ausgewählten Grad an Hardware-Isolation können virtuelle Workerknoten als gemeinsam genutzte oder als dedizierte Knoten eingerichtet werden. Wenn Sie Ihrem Cluster unterschiedliche Typen hinzufügen möchten, [erstellen Sie einen weiteren Worker-Pool](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
 
 Kubernetes beschränkt die maximale Anzahl von Workerknoten, die in einem Cluster vorhanden sein können. Weitere Informationen finden Sie unter [Worker node and pod quotas ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/setup/cluster-large/).
 
@@ -45,17 +45,19 @@ Wollen Sie sichergehen, dass Sie immer ausreichend Workerknoten für Ihre Worklo
 ## Verfügbare Hardware für Workerknoten
 {: #shared_dedicated_node}
 
-Wenn Sie einen Standardcluster in {{site.data.keyword.Bluemix_notm}} erstellen, wählen Sie, ob Ihre Worker-Pools aus Workerknoten bestehen, die entweder physische Maschinen (Bare-Metal-Maschinen) sind oder die virtuelle Maschinen sind, die auf physischer Hardware ausgeführt werden. Sie wählen außerdem den Typ des Workerknotens oder die Kombination aus Speicher-, CPU- und anderen Maschinenspezifikationen (wie z. B. Plattenspeicher).
+Wenn Sie einen Standardcluster in {{site.data.keyword.cloud_notm}} erstellen, können Sie wählen, ob Ihre Worker-Pools aus Workerknoten bestehen, die entweder physische Maschinen (Bare-Metal-Maschinen) sind oder die virtuelle Maschinen sind, die auf physischer Hardware ausgeführt werden. Sie wählen außerdem den Typ des Workerknotens oder die Kombination aus Speicher-, CPU- und anderen Maschinenspezifikationen (wie z. B. Plattenspeicher).
 {:shortdesc}
 
 <img src="images/cs_clusters_hardware.png" width="700" alt="Hardwareoptionen für Workerknoten in einem Standardcluster" style="width:700px; border-style: none"/>
 
-Wenn Sie mehr als einen Typ des Workerknotens benötigen, müssen Sie für jeden Typ einen Worker-Pool erstellen. Sie können vorhandene Workerknoten in ihrer Größe nicht ändern, um andere Ressourcen wie CPU und Hauptspeicher zu erhalten. Wenn Sie einen kostenlosen Cluster erstellen, wird Ihr Workerknoten automatisch als gemeinsam genutzter, virtueller Knoten im Konto der IBM Cloud-Infrastruktur (SoftLayer) bereitgestellt. In Standardclustern können Sie den Typ der Maschine auswählen, der sich am besten für Ihre Workload eignet. Berücksichtigen Sie bei Ihrer Planung die [Reserven für Workerknotenressourcen](#resource_limit_node) bei der Gesamt-CPU und der Speicherkapazität.
+Wenn Sie mehr als einen Typ des Workerknotens benötigen, müssen Sie für jeden Typ einen Worker-Pool erstellen. Sie können vorhandene Workerknoten in ihrer Größe nicht ändern, um andere Ressourcen wie CPU und Hauptspeicher zu erhalten. Wenn Sie einen kostenlosen Cluster erstellen, wird Ihr Workerknoten automatisch als gemeinsam genutzter, virtueller Knoten im Konto der IBM Cloud-Infrastruktur bereitgestellt. In Standardclustern können Sie den Typ der Maschine auswählen, der sich am besten für Ihre Workload eignet. Berücksichtigen Sie bei Ihrer Planung die [Reserven für Workerknotenressourcen](#resource_limit_node) bei der Gesamt-CPU und der Speicherkapazität.
 
 Wählen Sie eine der folgenden Optionen aus, um zu entscheiden, welchen Typ von Worker-Pool Sie wünschen.
 * [Virtuelle Maschinen](#vm)
 * [Physische Maschinen (Bare-Metal-Maschinen)](#bm)
 * [SDS-Maschinen (Software-defined Storage)](#sds)
+
+
 
 ## Virtuelle Maschinen
 {: #vm}
@@ -81,7 +83,9 @@ Virtuelle Maschinen verwenden lokale Platten anstelle von SAN (Storage Area Netw
 Wenn Ihr Cluster über die veralteten `x1c`- (oder ältere) Ubuntu 16 `x2c`-Workerknoten-Typen verfügt, können Sie Ihren [Cluster auf Ubuntu 18 `x3c`-Workerknoten aktualisieren](/docs/containers?topic=containers-update#machine_type).
 
 **Welche Typen sind bei virtuellen Maschinen verfügbar?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können sich außerdem die verfügbaren [Bare-Metal](#bm)- oder [SDS](#sds)-Maschinentypen ansehen.
+Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Typen anzuzeigen, führen Sie den entsprechenden Befehl aus. Sie können sich außerdem die verfügbaren [Bare-Metal](#bm)- oder [SDS](#sds)-Maschinentypen ansehen.
+
+
 
 {: #vm-table}
 <table>
@@ -94,7 +98,7 @@ Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält
 </thead>
 <tbody>
 <tr>
-<td><strong>Virtuell, u3c.2x4</strong>: Verwenden Sie diese kompakte virtuelle Maschine für Schnelltests, Machbarkeitsnachweise und andere geringe Workloads.</td>
+<td><strong>Virtuell, u3c.2x4</strong>: Verwenden Sie diese kompakte virtuelle Maschine für Schnelltests, Machbarkeitsnachweise und andere geringe Workloads.<p class="note">Nur für Kubernetes-Cluster verfügbar. Nicht für OpenShift-Cluster verfügbar.</p></td>
 <td>2/4 GB</td>
 <td>25 GB/100 GB</td>
 <td>1000 Mbit/s</td>
@@ -173,27 +177,25 @@ Sie können Ihre Workerknoten als physischen Single-Tenant-Server bereitstellen,
 Mit Bare-Metal haben Sie direkten Zugriff auf die physischen Ressourcen auf der Maschine, wie z. B. Speicher oder CPU. Durch diese Konfiguration wird der Hypervisor der virtuellen Maschine entfernt, der physische Ressourcen zu virtuellen Maschinen zuordnet, die auf dem Host ausgeführt werden. Stattdessen sind alle Ressourcen der Bare-Metal-Maschine ausschließlich dem Worker gewidmet, also müssen Sie sich keine Sorgen machen, dass "lärmende Nachbarn" Ressourcen gemeinsam nutzen oder die Leistung verlangsamen. Physische Maschinentypen verfügen über einen größeren lokalen Speicher als virtuelle und einige verfügen zudem über RAID zur Steigerung der Datenverfügbarkeit. Der lokale Speicher auf dem Workerknoten ist nur für die kurzfristige Verarbeitung vorgesehen; die primäre und die sekundäre Platte werden gelöscht, wenn Sie den Workerknoten aktualisieren oder erneut laden. Informationen zu persistenten Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Bietet mir Bare-Metal mehr Möglichkeiten als VMs - abgesehen von besseren Spezifikationen für die Leistung?**</br>
-Ja. Mit Bare-Metal haben Sie die Möglichkeit, Trusted Compute zu aktivieren, um Ihre Workerknoten auf Manipulation zu überprüfen. Wenn Sie Trusted Compute während der Clustererstellung nicht aktivieren, dies jedoch später nachholen möchten, können Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) `ibmcloud ks feature-enable` verwenden. Nachdem Sie Trusted Compute aktiviert haben, können Sie es später nicht mehr inaktivieren. Sie können einen neuen Cluster ohne Trusted Compute erstellen. Weitere Informationen zur Funktionsweise von Trusted Compute während des Startprozesses für den Knoten finden Sie in [{{site.data.keyword.containerlong_notm}} mit Trusted Compute](/docs/containers?topic=containers-security#trusted_compute). Trusted Compute ist für bestimmte Bare-Metal-Maschinentypen verfügbar. Bei der Ausführung des [Befehls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) `ibmcloud ks machine-types <zone>` können Sie im Feld **Trustable** ablesen, welche Maschinen Trusted Compute unterstützen. Beispielsweise unterstützen die GPU-Typen `mgXc` Trusted Compute nicht.
+Ja, mit Bare-Metal-Worker-Knoten können Sie {{site.data.keyword.datashield_full}} verwenden. {{site.data.keyword.datashield_short}} ist in Intel® Software Guard Extensions (SGX) und Fortanix®-Technologie integriert, sodass der Workload-Code und die Daten Ihres {{site.data.keyword.Bluemix_notm}}-Containers während der Nutzung geschützt werden. Der App-Code und die Daten werden in CPU-Schutzenklaven ausgeführt. Dabei handelt es sich um vertrauenswürdige Speicherbereiche auf dem Workerknoten, die kritische Aspekte der App schützen und dabei helfen, Code und Daten vertraulich und unverändert zu halten. Wenn Sie oder Ihr Unternehmen aufgrund interner Richtlinien, behördlicher Regelungen oder branchenspezifischer Konformitätsanforderungen eine Sicherheitsstufe für Daten benötigen, kann Sie diese Lösung beim Wechsel zur Cloud unterstützen. Beispiele für Anwendungsfälle beziehen sich auf Finanzdienstleister und Einrichtungen des Gesundheitswesens oder auf Länder mit behördlichen Richtlinien, die eine On-Premises-Cloud-Lösung erfordern.
 
-Neben Trusted Compute können Sie auch {{site.data.keyword.datashield_full}} (Beta) nutzen. {{site.data.keyword.datashield_short}} ist in Intel® Software Guard Extensions (SGX) und Fortanix®-Technologie integriert, sodass der Workload-Code und die Daten Ihres {{site.data.keyword.Bluemix_notm}}-Containers während der Nutzung geschützt werden. Der App-Code und die Daten werden in speziellen CPU-Schutzenklaven ausgeführt. Dabei handelt es sich um vertrauenswürdige Speicherbereiche auf dem Workerknoten, die kritische Aspekte der App schützen und dabei helfen, Code und Daten vertraulich und unverändert zu halten. Wenn Sie oder Ihr Unternehmen aufgrund interner Richtlinien, behördlicher Regelungen oder branchenspezifischer Konformitätsanforderungen eine Sicherheitsstufe für Daten benötigen, kann Sie diese Lösung beim Wechsel zur Cloud unterstützen. Beispiele für Anwendungsfälle beziehen sich auf Finanzdienstleister und Einrichtungen des Gesundheitswesen oder auf Länder mit behördlichen Richtlinien, die eine On-Premises-Cloud-Lösung erfordern.
-
-**Bare-Metal scheint nur Vorteile zu bieten. Was könnte dagegen sprechen, diese Lösung zu bestellen?**</br>
+**Bare-Metal scheint nur Vorteile zu bieten. Was könnte dagegensprechen, diese Lösung zu bestellen?**</br>
 Die Nutzung von Bare-Metal-Servern ist teurer als die Nutzung virtueller Server. Bare-Metal-Server eignen sich für Hochleistungsanwendungen, die mehr Ressourcen und mehr Hoststeuerung benötigen.
 
-Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats in Rechnung gestellt. Nachdem Sie einen Bare-Metal-Server bestellt oder storniert haben, wird der Prozess manuell in Ihrem Konto für die IBM Cloud-Infrastruktur (SoftLayer) ausgeführt. Die Ausführung kann daher länger als einen Geschäftstag dauern.
+Die Abrechnung für Bare-Metal-Server erfolgt monatlich. Wenn Sie einen Bare-Metal-Server vor Monatsende stornieren, werden Ihnen die Kosten bis zum Ende dieses Monats in Rechnung gestellt. Nachdem Sie einen Bare-Metal-Server bestellt oder storniert haben, wird der Prozess manuell in Ihrem Konto für die IBM Cloud-Infrastruktur ausgeführt. Die Ausführung kann daher länger als einen Geschäftstag dauern.
 {: important}
 
 **Welche Bare-Metal-Typen kann ich bestellen?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können außerdem die verfügbaren [VM](#vm)- oder [SDS](#sds)-Maschinentypen ansehen.
+Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den entsprechenden Befehl aus. Sie können außerdem die verfügbaren [VM](#vm)- oder [SDS](#sds)-Maschinentypen ansehen.
 
 Bare-Metal-Maschinen sind für verschiedene Anwendungsfälle optimiert (z. B. für RAM-intensive, datenintensive oder GPU-intensive Workloads).
 
 Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um Ihre Workload zu unterstützen. Einige Typen verfügen über eine Kombination aus den folgenden Platten und Speicherkonfigurationen. Beispielsweise können bestimmte Typen über eine SATA-Primärplatte mit einer unformatierten SSD-Sekundärplatte verfügen.
 
 * **SATA**: Ein herkömmliches Magnetplattenspeichergerät, das häufig als primärer Datenträger des Workerknotens verwendet wird, auf dem das Dateisystem des Betriebssystems gespeichert ist.
-* **SSD**: Ein Solid-State-Speichergerät für hohe Leistungsdaten.
+* **SSD**: Ein Solid-State-Laufwerkspeichergerät für Hochleistungsdaten.
 * **Raw**: Das Speichergerät ist nicht formatiert und es steht die volle Kapazität zur Verfügung.
-* **RAID**: Das Speichergerät verteilt die Daten für Redundanz und Leistung, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
+* **RAID**: Ein Speichergerät, das die Daten für Redundanz und Leistung verteilt, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
 
 
 {: #bm-table}
@@ -237,7 +239,7 @@ Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um I
 <td>10000 Mbit/s</td>
 </tr>
 <tr>
-<td><strong>Ausgeglichen, Bare-Metal, mb3c.4x32</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, die mehr Ressourcen für die Datenverarbeitung benötigen, als virtuelle Maschinen bieten können. Dieser Typ kann auch mit Intel® Software Guard Extensions (SGX) eingerichtet werden, sodass Sie <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} (Beta)<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> zum Verschlüsseln Ihres Datenspeichers verwenden können.</td>
+<td><strong>Ausgeglichen, Bare-Metal, mb3c.4x32</strong>: Verwenden Sie diesen Typ für ausgeglichene Workloads, die mehr Ressourcen für die Datenverarbeitung benötigen, als virtuelle Maschinen bieten können. Dieser Typ kann auch mit Intel® Software Guard Extensions (SGX) eingerichtet werden, sodass Sie <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}}<img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> zum Verschlüsseln Ihres Datenspeichers verwenden können.</td>
 <td>4/32 GB</td>
 <td>2 TB SATA / 2 TB SATA</td>
 <td>10000 Mbit/s</td>
@@ -262,19 +264,19 @@ SDS-Typen (SDS = Software-Defined Storage) sind physische Maschinen, die mit ein
 Normalerweise verwenden Sie SDS-Maschinen in den folgenden Fällen:
 *  Wenn Sie ein SDS-Add-on wie [Portworx](/docs/containers?topic=containers-portworx#portworx) für den Cluster verwenden, verwenden Sie Sie eine SDS-Maschine.
 *  Wenn Ihre App ein [StatefulSet ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) ist, das lokalen Speicher voraussetzt, können Sie SDS-Maschinen verwenden und [lokale Kubernetes-PVs (Beta) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/blog/2018/04/13/local-persistent-volumes-beta/) einrichten.
-*  Möglicherweise verfügen Sie über angepasste Apps, die zusätzlichen unformatierten lokalen Speicher erfordern.
+*  Wenn Sie über angepasste Apps verfügen, die zusätzlichen unformatierten lokalen Speicher erfordern.
 
 Informationen zu weiteren Speicherlösungen finden Sie im Abschnitt [Persistenten Hochverfügbarkeitsspeicher planen](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **Welche SDS-Typen kann ich bestellen?**</br>
-Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Maschinentypen anzuzeigen, führen Sie den Befehl `ibmcloud ks machine-types <zone>` aus. Sie können außerdem die verfügbaren [Bare-Metal](#bm)- oder [VM](#vm)-Maschinentypen ansehen.
+Die Typen der Workerknoten variieren je nach Zone. Die folgende Tabelle enthält die neueste Version des jeweiligen Typs, z. B. `x3c` Ubuntu 18-Workerknoten-Typen, im Gegensatz zu den älteren `x2c` Ubuntu 16-Workerknoten-Typen. Um die in Ihrer Zone verfügbaren Typen anzuzeigen, führen Sie den entsprechenden Befehl aus. Sie können außerdem die verfügbaren [Bare-Metal](#bm)- oder [VM](#vm)-Maschinentypen ansehen.
 
 Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um Ihre Workload zu unterstützen. Einige Typen verfügen über eine Kombination aus den folgenden Platten und Speicherkonfigurationen. Beispielsweise können bestimmte Typen über eine SATA-Primärplatte mit einer unformatierten SSD-Sekundärplatte verfügen.
 
 * **SATA**: Ein herkömmliches Magnetplattenspeichergerät, das häufig als primärer Datenträger des Workerknotens verwendet wird, auf dem das Dateisystem des Betriebssystems gespeichert ist.
-* **SSD**: Ein Solid-State-Speichergerät für hohe Leistungsdaten.
+* **SSD**: Ein Solid-State-Laufwerkspeichergerät für Hochleistungsdaten.
 * **Raw**: Das Speichergerät ist nicht formatiert und es steht die volle Kapazität zur Verfügung.
-* **RAID**: Das Speichergerät verteilt die Daten für Redundanz und Leistung, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
+* **RAID**: Ein Speichergerät, das die Daten für Redundanz und Leistung verteilt, abhängig von der jeweiligen RAID-Stufe. Die nutzbare Plattenkapazität variiert daher.
 
 
 {: #sds-table}
@@ -322,7 +324,7 @@ Wählen Sie einen Maschinentyp mit der richtigen Speicherkonfiguration aus, um I
 ## Reserven für Workerknotenressourcen
 {: #resource_limit_node}
 
-{{site.data.keyword.containerlong_notm}} legt Reserven für Rechenressourcen fest, die die verfügbaren Rechenressourcen auf den einzelnen Workerknoten begrenzen. Reservierte Speicher- und CPU-Ressourcen können von Pods auf dem Workerknoten nicht verwendet werden. Auf diese Weise werden die zuordnungsfähigen Ressourcen auf den Workerknoten reduziert. Wenn Sie ursprünglich Pods bereitstellen, der Workerknoten aber nicht über ausreichend zuordnungsfähige Ressourcen verfügt, schlägt die Bereitstellung fehl. Und wenn Pods das Limit für Workerknotenressourcen überschreiten, werden die Pods entfernt. In Kubernetes wird dieses Limit als [harte Räumungsschwelle ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds) bezeichnet.
+{{site.data.keyword.containerlong_notm}} legt Reserven für Rechenressourcen fest, die die verfügbaren Rechenressourcen auf den einzelnen Workerknoten begrenzen. Reservierte Speicher- und CPU-Ressourcen können von Pods auf dem Workerknoten nicht verwendet werden. Auf diese Weise werden die zuordnungsfähigen Ressourcen auf den Workerknoten reduziert. Wenn Sie ursprünglich Pods bereitstellen, der Workerknoten aber nicht über ausreichend zuordnungsfähige Ressourcen verfügt, schlägt die Bereitstellung fehl. Und wenn Pods das Limit für Workerknotenressourcen überschreiten, werden die Pods entfernt. In Kubernetes wird dieses Limit als [Hard Eviction Threshold![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/#hard-eviction-thresholds) bezeichnet.
 {:shortdesc}
 
 Wenn weniger CPU oder Speicher verfügbar ist als der Workerknoten reserviert, beginnt Kubernetes damit, Pods zu entfernen, um ausreichend Rechenressourcen verfügbar zu machen. Wenn ein anderer Workerknoten verfügbar ist, wird die Planung für die Pods auf diesem Workerknoten neu erstellt. Wenn Ihre Pods häufig entfernt werden, fügen Sie zusätzliche Workerknoten zu Ihrem Cluster hinzu oder legen Sie [Ressourcenbegrenzungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) für die Pods fest.
@@ -332,102 +334,30 @@ Welche Ressourcen auf Ihrem Workerknoten reserviert werden, hängt von der Menge
 Um zu sehen, wie viele Rechenressourcen derzeit auf dem Workerknoten verwendet werden, führen Sie [`kubectl top node` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/kubectl/overview/#top) aus.
 {: tip}
 
-<table summary="Diese Tabelle enthält für Workerknoten reservierten Speicher nach Ebene.">
-<caption>Für Workerknoten reservierter Speicher nach Ebene</caption>
-<thead>
-<tr>
-  <th>Speicherebene</th>
-  <th>% oder Menge reserviert</th>
-  <th>`b3c.4x16` Workerknoten (16 GB), Beispiel</th>
-  <th>`mg1c.28x256` Workerknoten (256 GB), Beispiel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Erste 4 GB (0-4 GB)</td>
-  <td>25% des Speichers</td>
-  <td>1 GB</td>
-  <td>1 GB</td>
-</tr>
-<tr>
-  <td>Nächste 4 GB (5-8 GB)</td>
-  <td>20% des Speichers</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Nächste 8 GB (9-16 GB)</td>
-  <td>10 % des Speichers</td>
-  <td>0,8 GB</td>
-  <td>0,8 GB</td>
-</tr>
-<tr>
-  <td>Nächste 112 GB (17-128 GB)</td>
-  <td>6 % des Speichers</td>
-  <td>n.z.</td>
-  <td>6,72 GB</td>
-</tr>
-<tr>
-  <td>Die verbleibenden GB (129 GB+)</td>
-  <td>2 % des Speichers</td>
-  <td>n.z.</td>
-  <td>2,54 GB</td>
-</tr>
-<tr>
-  <td>Zusätzliche Reserve für [`kubelet`-Entfernung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/)</td>
-  <td>100 MB</td>
-  <td>100 MB (unstrukturierte Menge)</td>
-  <td>100 MB (unstrukturierte Menge)</td>
-</tr>
-<tr>
-  <td>**Insgesamt reserviert**</td>
-  <td>**(variiert)**</td>
-  <td>**2,7 GB von insgesamt 16 GB**</td>
-  <td>**11,96 GB von insgesamt 256 GB**</td>
-</tr>
-</tbody>
-</table>
+| Speicherebene | % oder Menge reserviert | <code>b3c.4x16</code> Workerknoten (16 GB), Beispiel | <code>mg1c.28x256</code> Workerknoten (256 GB), Beispiel |
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| Erste 4 GB (0 - 4 GB)| 25% des Speichers | 1 GB | 1 GB|
+| Nächste 4 GB (5 -8 GB)| 20% des Speichers | 0,8 GB | 0,8 GB|
+| Nächste 8 GB (9 -16 GB)| 10 % des Speichers | 0,8 GB | 0,8 GB|
+| Nächste 112 GB (17 -128 GB)| 6 % des Speichers | n.z. | 6,72 GB|
+| Die verbleibenden GB (129 GB+) | 2 % des Speichers | n.z. | 2,54 GB|
+|Zusätzliche Reserve für [`kubelet`-Entfernung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/out-of-resource/) | 100 MB | 100 MB (unstrukturierte Menge) | 100 MB (unstrukturierte Menge)|
+| **Insgesamt reserviert** | **(variiert)** | **2,7 GB von insgesamt 16 GB** | **11,96 GB von insgesamt 256 GB**|
+{: class="simple-tab-table"}
+{: caption="Für Workerknoten reservierter Speicher nach Ebene" caption-side="top"}
+{: #worker-memory-reserves}
+{: tab-title="Worker node memory reserves by tier"}
+{: tab-group="Worker Node"}
 
-<table summary="Diese Tabelle enthält die für Workerknoten reservierte CPU nach Ebene.">
-<caption>Für Workerknoten reservierte CPU nach Ebene</caption>
-<thead>
-<tr>
-  <th>CPU-Ebene</th>
-  <th>% reserviert</th>
-  <th>`b3c.4x16`-Workerknoten (4 Cores), Beispiel</th>
-  <th>`mg1c.28x256` Workerknoten (28 Cores), Beispiel</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>Erster Core (Core 1)</td>
-  <td>6 % Cores</td>
-  <td>0,06 Cores</td>
-  <td>0,06 Cores</td>
-</tr>
-<tr>
-  <td>Die nächsten 2 Cores (Cores 2-3)</td>
-  <td>1 % Cores</td>
-  <td>0,02 Cores</td>
-  <td>0,02 Cores</td>
-</tr>
-<tr>
-  <td>Die nächsten 2 Cores (Cores 4-5)</td>
-  <td>0,5 % Cores</td>
-  <td>0,005 Cores</td>
-  <td>0,01 Cores</td>
-</tr>
-<tr>
-  <td>Die verbleibenden Cores (Cores 6+)</td>
-  <td>0,25 % Cores</td>
-  <td>n.z.</td>
-  <td>0,0575 Cores</td>
-</tr>
-<tr>
-  <td>**Insgesamt reserviert**</td>
-  <td>**(variiert)**</td>
-  <td>**0,085 Cores von insgesamt 4 Cores**</td>
-  <td>**0,1475 Cores von insgesamt 28 Cores**</td>
-</tr>
-</tbody>
-</table>
+| CPU-Ebene | % oder Menge reserviert | <code>b3c.4x16</code> Workerknoten (vier Cores), Beispiel | <code>mg1c.28x256</code> Workerknoten (28 cores), Beispiel |
+|:-----------------|:-----------------|:-----------------|:-----------------|
+| Erster Core (Core 1) | 6 % Cores | 0,06 Cores | 0,06 Cores|
+| Nächste zwei Cores (Cores 2 - 3) | 1 % Cores | 0,02 Cores | 0,02 Cores|
+| Nächste zwei Cores (Cores 4 - 5) | 0,5 % Cores | 0,005 Cores | 0,01 Cores|
+| Die verbleibenden Cores (Cores 6+) | 0,25 % Cores | n.z. | 0,0575 Cores|
+| **Insgesamt reserviert** | **(variiert)** | **0,085 Cores von insgesamt vier Cores** | **0,1475 Cores von insgesamt 28 Cores**|
+{: class="simple-tab-table"}
+{: caption="Für Workerknoten reservierte CPU nach Ebene" caption-side="top"}
+{: #worker-cpu-reserves}
+{: tab-title="Worker node CPU reserves by tier"}
+{: tab-group="Worker Node"}

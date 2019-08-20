@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +45,7 @@ Aprenda as etapas gerais para implementar apps clicando em uma área da imagem a
 ## Planejamento para executar apps em clusters
 {: #plan_apps}
 
-Antes de implementar um app em um cluster do {{site.data.keyword.containerlong_notm}}, decida como deseja configurar seu app para que ele possa ser acessado corretamente e integrado a outros serviços no {{site.data.keyword.Bluemix_notm}}.
+Antes de implementar um app em um cluster do {{site.data.keyword.containerlong_notm}}, decida como deseja configurar seu app para que ele possa ser acessado corretamente e integrado a outros serviços no {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 ### Que tipo de objetos do Kubernetes posso fazer para meu app?
@@ -131,7 +130,7 @@ Se desejar expor publicamente seu app, você terá opções diferentes que depen
 *  **Cluster padrão somente de VLAN privada**: é possível expor seu app usando um [serviço NodePort, balanceador de carga ou Ingress](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Deve-se também abrir a porta para o endereço IP privado do serviço em seu firewall.
 
 ### Depois de implementar meu app, como posso monitorar seu funcionamento?
-É possível configurar [a criação de log e o monitoramento](/docs/containers?topic=containers-health#health) do {{site.data.keyword.Bluemix_notm}} para seu cluster. Também é possível escolher integrar a um [serviço de criação de log ou de monitoramento](/docs/containers?topic=containers-supported_integrations#health_services) de terceiros.
+É possível configurar a {{site.data.keyword.cloud_notm}}[criação de log e o monitoramento](/docs/containers?topic=containers-health#health) para o seu cluster. Também é possível escolher integrar a um [serviço de criação de log ou de monitoramento](/docs/containers?topic=containers-supported_integrations#health_services) de terceiros.
 {: shortdesc}
 
 ### Como posso manter meu app atualizado?
@@ -144,7 +143,7 @@ Se desejar gerenciar atualizações para seu app, veja [Gerenciando implementaç
 Os administradores de conta e de cluster podem controlar o acesso em muitos níveis diferentes: o cluster, o namespace do Kubernetes, o pod e o contêiner.
 {: shortdesc}
 
-Com o {{site.data.keyword.Bluemix_notm}} IAM, é possível designar permissões a usuários individuais, grupos ou contas de serviço no nível de instância de cluster.  É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](/docs/containers?topic=containers-users#users).
+Com o {{site.data.keyword.cloud_notm}} IAM, é possível designar permissões a usuários individuais, grupos ou contas de serviço no nível de instância de cluster.  É possível definir o escopo de acesso do cluster ainda mais, restringindo os usuários a namespaces específicos dentro do cluster. Para obter mais informações, veja [Designando acesso ao cluster](/docs/containers?topic=containers-users#users).
 
 Para controlar o acesso no nível de pod, é possível [configurar políticas de segurança de pod com o RBAC do Kubernetes](/docs/containers?topic=containers-psp#psp).
 
@@ -184,7 +183,7 @@ Considere as opções a seguir para aumentar a disponibilidade de seu app.
     <p>Ao implementar mais de um pod, um conjunto de réplicas é criado automaticamente para as suas implementações que monitora os pods e assegura que o número especificado de pods esteja em funcionamento em todos os momentos. Quando um pod fica inativo, o conjunto de réplicas substitui o pod não responsivo por um novo.</p>
     <p>É possível usar uma implementação para definir estratégias de atualização para seu app, incluindo o número de pods que você deseja incluir durante uma atualização contínua e o número de pods que podem estar indisponíveis por vez. Ao executar uma atualização contínua, a implementação verifica se a revisão está ou não funcionando e para o lançamento quando falhas são detectadas.</p>
     <p>Com as implementações, é possível implementar simultaneamente múltiplas revisões com diferentes sinalizações. Por exemplo, é possível testar uma implementação primeiro antes de decidir enviá-la por push para a produção.</p>
-    <p>Usando Implementações, é possível manter o controle de quaisquer revisões implementadas. Será possível usar esse histórico para recuperar uma versão anterior se você descobrir que as suas atualizações não estão funcionando conforme o esperado.</p></dd>
+    <p>Usando Implementações, é possível rastrear qualquer revisão implementada. Será possível usar esse histórico para recuperar uma versão anterior se você descobrir que as suas atualizações não estão funcionando conforme o esperado.</p></dd>
   <dt>Incluir réplicas suficientes para a carga de trabalho de seu app, mais duas</dt>
     <dd>Para tornar seu app ainda mais altamente disponível e mais resiliente à falha, considere a inclusão de réplicas extras, além do mínimo, para manipular a carga de trabalho esperada. As réplicas extras podem manipular a carga de trabalho no caso de um pod travar e o conjunto de réplicas ainda não ter recuperado o pod travado. Para proteção contra duas falhas simultâneas, inclua duas réplicas extras. Essa configuração é um padrão N + 2, em que N é o número de réplicas para manipular a carga de trabalho recebida e + 2 são duas réplicas extras. Desde que seu cluster tenha espaço suficiente, será possível ter tantos pods quantos você quiser.</dd>
   <dt>Difundir pods em múltiplos nós (antiafinidade)</dt>
@@ -202,7 +201,7 @@ Considere as opções a seguir para aumentar a disponibilidade de seu app.
   <p><strong>Dica</strong>: em clusters de multizona, tente manter sua capacidade de nó do trabalhador em 50% por zona, de forma que capacidade suficiente seja deixada para proteger seu cluster contra uma falha zonal.</p>
   <p><strong>E se eu desejar difundir meu aplicativo entre regiões?</strong></br>Para proteger seu aplicativo contra uma falha de região, crie um segundo cluster em outra região, [configure um balanceador de carga global](/docs/containers?topic=containers-ha_clusters#multiple_clusters) para conectar seus clusters e use um YAML de implementação para implementar um conjunto de réplicas duplicado com [antiafinidade de pod ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) para seu aplicativo.</p>
   <p><strong>E se meus apps precisarem de armazenamento persistente?</strong></p>
-  <p>Use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
+  <p>Use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou o [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
 ## Especificando os requisitos de app em seu arquivo YAML
@@ -424,7 +423,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Volumes Persistentes para Armazenamento de Contêiner</dt>
-<dd><p>Os volumes persistentes (PVs) fazem interface com o armazenamento físico para fornecer armazenamento de dados persistentes para as cargas de trabalho do contêiner. O exemplo a seguir mostra como é possível incluir armazenamento persistente em seu app. Para provisionar o armazenamento persistente, crie uma solicitação de volume persistente (PVC) para descrever o tipo e o tamanho do armazenamento de arquivo que você deseja ter. Depois de criar a PVC, o volume persistente e o armazenamento físico são criados automaticamente usando o [provisionamento dinâmico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). Referenciando o PVC em seu YAML de implementação, o armazenamento é montado automaticamente em seu pod de app. Quando o contêiner em seu pod grava dados no diretório de caminho de montagem `/test`, os dados são armazenados na instância de armazenamento de arquivo NFS.</p><ul><li>Para obter mais informações, veja [Entendendo os fundamentos básicos do armazenamento do Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Para obter opções sobre outros tipos de armazenamento que é possível provisionar, veja [Planejando o armazenamento persistente altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
+<dd><p>Os volumes persistentes (PVs) fazem interface com o armazenamento físico para fornecer armazenamento de dados persistentes para as cargas de trabalho do contêiner. O exemplo a seguir mostra como é possível incluir armazenamento persistente em seu app. Para provisionar o armazenamento persistente, crie uma solicitação de volume persistente (PVC) para descrever o tipo e o tamanho do armazenamento de arquivo que você deseja ter. Depois de criar o PVC, o volume persistente e o armazenamento físico são criados automaticamente usando o [provisionamento dinâmico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). Referenciando o PVC em seu YAML de implementação, o armazenamento é montado automaticamente em seu pod de app. Quando o contêiner em seu pod grava dados no diretório de caminho de montagem `/test`, os dados são armazenados na instância de armazenamento de arquivo NFS.</p><ul><li>Para obter mais informações, veja [Entendendo os fundamentos básicos do armazenamento do Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Para obter opções sobre outros tipos de armazenamento que é possível provisionar, veja [Planejando o armazenamento persistente altamente disponível](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 Tipo: implementação
 metadados:
@@ -634,7 +633,7 @@ Antes de iniciar:
 
 Para configurar arquivos de configuração com o Kustomize:
 1.  [Instale a ferramenta `kustomize` ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
-    *   Para MacOS, é possível usar o gerenciador de pacote `brew`.
+    *   Para macOS, é possível usar o gerenciador de pacotes `brew`.
         ```
         brew install kustomize
         ```
@@ -657,7 +656,7 @@ Para configurar arquivos de configuração com o Kustomize:
     mkdir -p ~/<my_app>/overlay/prod
     ```
     {: pre}
-    
+
     Exemplo de estrutura de repositório:
     ```
     .
@@ -691,10 +690,10 @@ Para configurar arquivos de configuração com o Kustomize:
         - secret.yaml
         ```
         {: codeblock}
-        
+
         Os nomes dos YAMLs `resources` devem corresponder aos nomes dos outros arquivos no repositório `base`. Você pode incluir múltiplas configurações no mesmo arquivo, mas, no exemplo, as configurações são arquivos separados, como `deployment.yaml`, `service.yaml` e `pvc.yaml`.
-        
-    4.  Construa seus arquivos YAML de recurso com as configurações que você definiu no arquivo YAML base `kustomization`. Os recursos são construídos combinando as configurações no `kustomization` e os YAMLs de recurso juntos. Os arquivos YAML combinados são retornados em `stdout` na saída de terminal. Use esse mesmo comando para construir quaisquer mudanças subsequentes que você fizer no YAML `kustomization`, incluindo um novo rótulo.
+
+    4.  Construa seus arquivos YAML de recurso com as configurações que você definiu no arquivo YAML base `kustomization`. Os recursos são construídos combinando as configurações no `kustomization` e os YAMLs de recurso juntos. Os arquivos YAML combinados são retornados em `stdout` na saída de terminal. Use esse mesmo comando para construir qualquer mudança subsequente que você fizer no YAML `kustomization`, como incluir um rótulo.
         ```
         kustomize build
         ```
@@ -840,11 +839,14 @@ Para configurar arquivos de configuração com o Kustomize:
 ## Ativando o painel do Kubernetes
 {: #cli_dashboard}
 
-Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador. [No console {{site.data.keyword.Bluemix_notm}}](#db_gui), é possível acessar o painel com um botão de um clique conveniente. [Com a CLI](#db_cli), é possível acessar o painel ou usar as etapas em um processo de automação, como para um pipeline CI/CD.
+Abra um painel do Kubernetes em seu sistema local para visualizar informações sobre um cluster e seus nós do trabalhador. [No console do {{site.data.keyword.cloud_notm}}](#db_gui), é possível acessar o painel com um conveniente botão de um clique. [Com a CLI](#db_cli), é possível acessar o painel ou usar as etapas em um processo de automação, como para um pipeline CI/CD.
 {:shortdesc}
 
 Você tem tantos recursos e usuários em seu cluster que o painel do Kubernetes está um pouco lento? Para clusters que executam o Kubernetes versão 1.12 ou mais recente, seu administrador de cluster pode escalar a implementação do `kubernetes-dashboard` executando `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
 {: tip}
+
+Para verificar os logs para os pods de aplicativo individuais, é possível executar o `kubectl logs <pod name>`. Não use o painel do Kubernetes para transmitir os logs para os seus pods, o que pode causar uma interrupção em seu acesso ao painel do Kubernetes.
+{: important}
 
 Antes de iniciar:
 * Certifique-se de que você esteja designado a uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função RBAC apropriada do Kubernetes para que seja possível trabalhar com recursos do Kubernetes.
@@ -853,16 +855,15 @@ Antes de iniciar:
 
 É possível usar a porta padrão ou configurar sua própria porta para ativar o painel do Kubernetes para um cluster.
 
-**Ativando o painel do Kubernetes por meio do console do {{site.data.keyword.Bluemix_notm}}**
+**Ativando o painel do Kubernetes por meio do console do {{site.data.keyword.cloud_notm}}**
 {: #db_gui}
 
-1.  Efetue login no  [ console do {{site.data.keyword.Bluemix_notm}}  ](https://cloud.ibm.com/).
+1.  Efetue login no [console do {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/).
 2.  Na barra de menus, selecione a conta que você deseja usar.
 3.  No menu ![Ícone de menu](../icons/icon_hamburger.svg "Ícone de menu"), clique em **Kubernetes**.
 4.  Na página **Clusters**, clique no cluster que você deseja acessar.
 5.  Na página de detalhes do cluster, clique no botão **Painel do Kubernetes**.
 
-</br>
 </br>
 
 **Ativando o painel do Kubernetes por meio da CLI**
@@ -1029,7 +1030,7 @@ Para implementar apps em nós do trabalhador específicos:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.8_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1279,7 +1280,7 @@ Para executar uma carga de trabalho em uma máquina de GPU:
 Com o Kubernetes, é possível ativar o [ajuste automático de escala de pod horizontal ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) para aumentar ou diminuir automaticamente o número de instâncias de seus apps com base na CPU.
 {:shortdesc}
 
-Procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Deseja escalar seus nós do trabalhador em vez de seus pods? Efetue check-out do  [ cluster autoscaler ](/docs/containers?topic=containers-ca#ca).
+Procurando informações sobre ajuste de escala de aplicativos Cloud Foundry? Confira [IBM Auto-Scaling for {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started). Deseja escalar seus nós do trabalhador em vez de seus pods? Efetue check-out do  [ cluster autoscaler ](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Antes de iniciar:
@@ -1364,7 +1365,7 @@ Deseja evitar o tempo de inatividade durante a atualização contínua? Certifiq
 
 Antes de iniciar:
 *   [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*   Crie uma  [ implementação ](#app_cli).
+*   Crie uma [implementação](#app_cli).
 *   Certifique-se de ter uma [função de serviço](/docs/containers?topic=containers-users#platform) que conceda a função de Kubernetes RBAC apropriada para que você possa trabalhar com recursos Kubernetes no espaço de nomes.
 
 Para gerenciar atualizações contínuas para seus apps:

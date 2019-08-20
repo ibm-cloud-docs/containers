@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -32,7 +32,7 @@ Sie können Ihrem Cluster komplexe Kubernetes-Apps mithilfe von Helm-Diagrammen 
 {: shortdesc}
 
 **Was ist Helm und wozu wird es verwendet?** </br>
-[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh) ist ein Kubernetes-Paketmananager, der mithilfe von Helm-Diagrammen komplexe Kubernetes-Apps in Ihrem Cluster definiert, installiert und aktualisiert. Helm-Diagramme verpacken die Spezifikationen zum Generieren von YAML-Dateien für Kubernetes-Ressourcen, die Ihre App erstellen. Diese Kubernetes-Ressourcen werden automatisch in Ihrem Cluster angewendet und Helm ordnet ihnen eine Version zu. Sie können Helm auch verwenden, um Ihre eigene App zu spezifizieren und zu packen und von Helm die YAML-Dateien für Ihre Kubernetes-Ressourcen generieren zu lassen.  
+[Helm ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://helm.sh) ist ein Kubernetes-Paketmanager, der mithilfe von Helm-Diagrammen komplexe Kubernetes-Apps in Ihrem Cluster definiert, installiert und aktualisiert. Helm-Diagramme verpacken die Spezifikationen zum Generieren von YAML-Dateien für Kubernetes-Ressourcen, die Ihre App erstellen. Diese Kubernetes-Ressourcen werden automatisch in Ihrem Cluster angewendet und Helm ordnet ihnen eine Version zu. Sie können Helm auch verwenden, um Ihre eigene App zu spezifizieren und zu packen und von Helm die YAML-Dateien für Ihre Kubernetes-Ressourcen generieren zu lassen.  
 
 Zum Verwenden von Helm in Ihrem Cluster müssen Sie die Helm-CLI auf Ihrer lokalen Maschine installieren und den Helm-Server Tiller in jedem Cluster installieren, in dem Sie Helm verwenden möchten.
 
@@ -40,11 +40,12 @@ Zum Verwenden von Helm in Ihrem Cluster müssen Sie die Helm-CLI auf Ihrer lokal
 Eine Übersicht über verfügbare Helm-Diagramme finden Sie im Abschnitt [Helm-Diagrammkatalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). Die in diesem Katalog aufgeführten Helm-Diagramme sind wie folgt gruppiert:
 
 - **iks-charts**: Helm-Diagramme, die für {{site.data.keyword.containerlong_notm}} genehmigt sind. Der Name des Repositorys wurde von `ibm` in `iks-charts` geändert.
-- **ibm-charts**: Helm-Diagramme, die für {{site.data.keyword.containerlong_notm}} und für {{site.data.keyword.Bluemix_notm}} Private-Cluster genehmigt wurden.
-- **kubernetes**: Helm-Diagramme, die von der Kubernetes-Community bereitgestellt werden und von der Community-Governance als `stabil` eingestuft wurden. Diese Diagramme werden nicht daraufhin überprüft, ob sie in {{site.data.keyword.containerlong_notm}}- oder in {{site.data.keyword.Bluemix_notm}} Private-Clustern funktionieren.
-- **kubernetes-incubator**: Helm-Diagramme, die von der Kubernetes-Community bereitgestellt werden und von der Community-Governance als `Inkubator` eingestuft wurden. Diese Diagramme werden nicht daraufhin überprüft, ob sie in {{site.data.keyword.containerlong_notm}}- oder in {{site.data.keyword.Bluemix_notm}} Private-Clustern funktionieren.
+- **ibm-charts**: Helm-Diagramme, die für {{site.data.keyword.containerlong_notm}} und für {{site.data.keyword.cloud_notm}} Private-Cluster genehmigt wurden.
+- **ibm-community**: Helm-Diagramme, die außerhalb von IBM entstanden sind, z. B. von [{{site.data.keyword.containerlong_notm}}-Partnern](/docs/containers?topic=containers-service-partners). Diese Diagramme werden von den Community-Partnern unterstützt und verwaltet.
+- **kubernetes**: Helm-Diagramme, die von der Kubernetes-Community bereitgestellt werden und von der Community-Governance als `stabil` eingestuft wurden. Diese Diagramme werden nicht daraufhin überprüft, ob sie in {{site.data.keyword.containerlong_notm}}- oder in {{site.data.keyword.cloud_notm}} Private-Clustern funktionieren.
+- **kubernetes-incubator**: Helm-Diagramme, die von der Kubernetes-Community bereitgestellt werden und von der Community-Governance als `Inkubator` eingestuft wurden. Diese Diagramme werden nicht daraufhin überprüft, ob sie in {{site.data.keyword.containerlong_notm}}- oder in {{site.data.keyword.cloud_notm}} Private-Clustern funktionieren.
 
-Helm-Diagramme aus den Repositorys **iks-charts** und **ibm-charts** sind vollständig in die {{site.data.keyword.Bluemix_notm}}-Unterstützungsorganisation integriert. Wenn Sie eine Frage oder ein Problem mit der Verwendung dieser Helm-Diagramme haben, können Sie einen der {{site.data.keyword.containerlong_notm}}-Unterstützungskanäle verwenden. Weitere Informationen finden Sie im Abschnitt [Hilfe und Unterstützung anfordern](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Helm-Diagramme aus den Repositorys **iks-charts** und **ibm-charts** sind vollständig in die {{site.data.keyword.cloud_notm}}-Unterstützungsorganisation integriert. Wenn Sie eine Frage oder ein Problem mit der Verwendung dieser Helm-Diagramme haben, können Sie einen der {{site.data.keyword.containerlong_notm}}-Unterstützungskanäle verwenden. Weitere Informationen finden Sie im Abschnitt [Hilfe und Unterstützung anfordern](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **Welches sind die Voraussetzungen für die Verwendung von Helm und wie kann ich Helm in einem privaten Cluster verwenden?** </br>
 Zum Bereitstellen von Helm-Diagrammen müssen Sie die Helm-CLI auf Ihrer lokalen Maschine installieren und den Helm-Server Tiller in Ihrem Cluster installieren. Das Image für Tiller ist in der öffentlichen Google-Container-Registry gespeichert. Für den Zugriff auf das Image während der Tiller-Installation muss Ihr Cluster öffentliche Netzkonnektivität zur öffentlichen Google-Container-Registry zulassen. Cluster, für die der öffentliche Serviceendpunkt aktiviert ist, können automatisch auf das Image zugreifen. Private Cluster, die durch eine angepasste Firewall geschützt werden, oder Cluster, für die nur der private Serviceendpunkt aktiviert ist, lassen keinen Zugriff auf das Tiller-Image zu. Stattdessen können Sie das [Image auf Ihre lokale Maschine extrahieren und durch eine Push-Operation in Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} übertragen](#private_local_tiller) oder [Helm-Diagramme ohne Tiller installieren](#private_install_without_tiller).
@@ -150,14 +151,19 @@ Gehen Sie wie folgt vor, um Helm in einem Cluster mit öffentlichem Zugriff zu i
         ```
         {: screen}
 
-4. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys hinzu.
+4. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.cloud_notm}}-Helm-Repositorys hinzu.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -167,7 +173,7 @@ Gehen Sie wie folgt vor, um Helm in einem Cluster mit öffentlichem Zugriff zu i
    ```
    {: pre}
 
-6. Listen Sie die aktuell in den {{site.data.keyword.Bluemix_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
+6. Listen Sie die aktuell in den {{site.data.keyword.cloud_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
    ```
    helm search iks-charts
    ```
@@ -175,6 +181,11 @@ Gehen Sie wie folgt vor, um Helm in einem Cluster mit öffentlichem Zugriff zu i
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 
@@ -191,15 +202,15 @@ Wenn Sie ein Helm-Diagramm ohne Verwendung von Tiller installieren möchten, fin
 {: tip}
 
 Vorbereitende Schritte:
-- Installieren Sie Docker auf Ihrer lokalen Maschine. Wenn Sie die [{{site.data.keyword.Bluemix_notm}}-CLI](/docs/cli?topic=cloud-cli-getting-started) installiert haben, ist Docker bereits installiert.
+- Installieren Sie Docker auf Ihrer lokalen Maschine. Wenn Sie die [{{site.data.keyword.cloud_notm}}-CLI](/docs/cli?topic=cloud-cli-getting-started) installiert haben, ist Docker bereits installiert.
 - [Installieren Sie das {{site.data.keyword.registryshort_notm}}-CLI-Plug-in und richten Sie einen Namensbereich ein](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - Wenn Sie Tiller mit einem Kubernetes Service-Konto und der Clusterrollenbindung im Namensbereich `kube-system` installieren möchten, müssen Sie über die Rolle [`cluster-admin`](/docs/containers?topic=containers-users#access_policies) verfügen.
 
 Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshort_notm}} zu installieren:
 
 1. Installieren Sie die <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm-CLI <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> auf Ihrer lokalen Maschine.
-2. Stellen Sie eine Verbindung zu Ihrem privaten Cluster durch den VPN-Tunnel für die {{site.data.keyword.Bluemix_notm}}-Infrastruktur her, den Sie eingerichtet haben.
-3. **Wichtig**: Zum Erhalten der Clustersicherheit erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine Kubernetes-RBAC-Clusterrollenbindung für den Pod `tiller-deploy`, indem Sie die folgende YAML-Datei aus dem [{{site.data.keyword.Bluemix_notm}}-Repository `kube-samples` anwenden](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
+2. Stellen Sie eine Verbindung zu Ihrem privaten Cluster durch den VPN-Tunnel für die {{site.data.keyword.cloud_notm}}-Infrastruktur her, den Sie eingerichtet haben.
+3. **Wichtig**: Zum Erhalten der Clustersicherheit erstellen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine Kubernetes-RBAC-Clusterrollenbindung für den Pod `tiller-deploy`, indem Sie die folgende YAML-Datei aus dem [{{site.data.keyword.cloud_notm}}-Repository `kube-samples` anwenden](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
     1. [Rufen Sie die YAML-Dateien für das Kubernetes Service-Konto und die Clusterrollenbindung ab ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
 
     2. Erstellen Sie Kubernetes-Ressourcen in Ihrem Cluster.
@@ -244,14 +255,19 @@ Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshor
    ```
    {: pre}
 
-9. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys hinzu.
+9. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.cloud_notm}}-Helm-Repositorys hinzu.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -261,7 +277,7 @@ Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshor
     ```
     {: pre}
 
-11. Listen Sie die aktuell in den {{site.data.keyword.Bluemix_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
+11. Listen Sie die aktuell in den {{site.data.keyword.cloud_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
     ```
     helm search iks-charts
     ```
@@ -269,6 +285,11 @@ Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshor
 
     ```
     helm search ibm-charts
+    ```
+    {: pre}
+    
+    ```
+    helm search ibm-community
     ```
     {: pre}
 
@@ -281,19 +302,24 @@ Gehen Sie wie folgt vor, um Tiller mithilfe von {{site.data.keyword.registryshor
 Wenn Sie Tiller in Ihrem privaten Cluster nicht installieren wollen, können Sie die YAML-Dateien des Helm-Diagramms manuell erstellen und mithilfe von `kubectl`-Befehlen anwenden.
 {: shortdesc}
 
-Die Schritte in diesem Beispiel demonstrieren, wie Helm-Diagramme aus den Repositorys für {{site.data.keyword.Bluemix_notm}}-Helm-Diagramme in Ihrem privaten Cluster installiert werden. Wenn Sie ein Helm-Diagramm installieren wollen, das nicht in einem der Repositorys für {{site.data.keyword.Bluemix_notm}}-Helm-Diagramme gespeichert ist, müssen Sie die Anweisungen in diesem Abschnitt ausführen, um die YAML-Dateien für Ihr Helm-Diagramm zu erstellen. Darüber hinaus müssen Sie das Helm-Diagramm-Image aus der öffentlichen Container-Registry herunterladen, in Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} durch eine Push-Operation übertragen und die Datei `values.yaml` aktualisieren, um das Image in {{site.data.keyword.registryshort_notm}} zu verwenden.
+Die Schritte in diesem Beispiel demonstrieren, wie Helm-Diagramme aus den Repositorys für {{site.data.keyword.cloud_notm}}-Helm-Diagramme in Ihrem privaten Cluster installiert werden. Wenn Sie ein Helm-Diagramm installieren wollen, das nicht in einem der Repositorys für {{site.data.keyword.cloud_notm}}-Helm-Diagramme gespeichert ist, müssen Sie die Anweisungen in diesem Abschnitt ausführen, um die YAML-Dateien für Ihr Helm-Diagramm zu erstellen. Darüber hinaus müssen Sie das Helm-Diagramm-Image aus der öffentlichen Container-Registry herunterladen, in Ihren Namensbereich in {{site.data.keyword.registryshort_notm}} durch eine Push-Operation übertragen und die Datei `values.yaml` aktualisieren, um das Image in {{site.data.keyword.registryshort_notm}} zu verwenden.
 {: note}
 
 1. Installieren Sie die <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm-CLI <img src="../icons/launch-glyph.svg" alt="Symbol für externen Link"></a> auf Ihrer lokalen Maschine.
-2. Stellen Sie eine Verbindung zu Ihrem privaten Cluster durch den VPN-Tunnel für die {{site.data.keyword.Bluemix_notm}}-Infrastruktur her, den Sie eingerichtet haben.
-3. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.Bluemix_notm}}-Helm-Repositorys hinzu.
+2. Stellen Sie eine Verbindung zu Ihrem privaten Cluster durch den VPN-Tunnel für die {{site.data.keyword.cloud_notm}}-Infrastruktur her, den Sie eingerichtet haben.
+3. Fügen Sie Ihrer Helm-Instanz die {{site.data.keyword.cloud_notm}}-Helm-Repositorys hinzu.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -303,7 +329,7 @@ Die Schritte in diesem Beispiel demonstrieren, wie Helm-Diagramme aus den Reposi
    ```
    {: pre}
 
-5. Listen Sie die aktuell in den {{site.data.keyword.Bluemix_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
+5. Listen Sie die aktuell in den {{site.data.keyword.cloud_notm}}-Repositorys verfügbaren Helm-Diagramme auf.
    ```
    helm search iks-charts
    ```
@@ -311,6 +337,11 @@ Die Schritte in diesem Beispiel demonstrieren, wie Helm-Diagramme aus den Reposi
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 

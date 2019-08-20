@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,14 +24,17 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # CLI-Änderungsprotokoll
 {: #cs_cli_changelog}
 
 Sie werden im Terminal benachrichtigt, wenn Aktualisierungen für die `ibmcloud`-CLI und -Plug-ins verfügbar sind. Halten Sie Ihre CLI stets aktuell, sodass Sie alle verfügbaren Befehle und Flags verwenden können.
 {:shortdesc}
 
-Informationen zum Installieren des CLI-Plug-ins von {{site.data.keyword.containerlong}} finden Sie im Abschnitt [CLI installieren](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+* **Community Kubernetes**: [Installieren Sie das CLI-Plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), das den Aliasnamen `ibmcloud ks` verwendet.
+* **OpenShift**: [Installieren Sie das CLI-Plug-in](/docs/openshift?topic=openshift-openshift-cli), das den Aliasnamen `ibmcloud oc` verwendet.
 
+<br>
 In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Befehlszeilenschnittstelle (CLI) von {{site.data.keyword.containerlong_notm}} zusammengefasst.
 
 <table summary="Übersicht über die Versionsänderungen für das {{site.data.keyword.containerlong_notm}}-CLI-Plug-in">
@@ -45,11 +48,49 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 </thead>
 <tbody>
 <tr>
+<td>0.3.95</td>
+<td>30, Juli 2019</td>
+<td>
+<ul>
+<li>Hinzufügen des Aliasnamens `ibmcloud oc` zum {{site.data.keyword.containershort_notm}}-Plug-in für das Management von Red Hat OpenShift on IBM Cloud-Clustern.</li>
+<li>Hinzufügen des Befehls [`ibmcloud ks cluster-subnet-detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach), um ein öffentliches oder privates portables Teilnetz in einem IBM Cloud-Infrastrukturkonto von einem Cluster abzuhängen.</li>
+<li>Umbenennen des Befehls `ibmcloud ks machine-types` in `ibmcloud ks flavors`. Sie können weiterhin den Aliasnamen `machine-types` verwenden.</li>
+<li>In der Ausgabe von `ibmcloud ks flavors (machine-types)` werden Typen (flavors) angegeben, die nur für {{site.data.keyword.containerlong_notm}} oder nur für Red Hat OpenShift on IBM Cloud unterstützt werden.</li>
+<li>In der Ausgabe von `ibmcloud ks cluster-get` wurde `Owner` in `Creator` geändert, um anzugeben, dass das Feld Informationen zu dem Benutzer zurückgibt, der den Cluster erstellt hat.</li>
+<li>Verbesserte Fehlerbehandlung bei `ibmcloud ks zone-add`.</li>
+<li>Aktualisiert Übersetzungen des Hilfetextes.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.3.58</td>
+<td>02. Juli 2019</td>
+<td><ul>
+<li>Korrigiert einen Programmfehler, sodass eine Nachricht zum Worker-Pool-Neuausgleich nicht zurückgegeben wird, wenn der Autoscaler des Clusters aktiviert ist.</li>
+<li>Korrigiert einen Programmfehler zur Unterstützung der Version des OpenShift-Standardclusters.</li>
+<li>Aktualisiert den Hilfetext für die Befehle `cluster-feature-enable private-service-endpoint` und `nlb-dns-monitor-configure`.</li>
+<li>Aktualisiert Übersetzungen des Hilfetextes.</li>
+</ul>
+</tr>
+<tr>
+<td>0.3.49</td>
+<td>18. Juni 2019</td>
+<td>Aktualisieren von Go auf Version 1.12.6.</td>
+</tr>
+<tr>
+<td>0.3.47</td>
+<td>15. Juni 2019</td>
+<td><ul>
+<li>Korrigiert einen Programmfehler, sodass leere Tabellen in der Ausgabe von `ibmcloud ks kube-versions` nicht zurückgegeben werden.</li>
+<li>Aktualisiert das NLB-DNS-Modell, sodass ein Bereich von NLB-IP-Adressen von `ibmcloud ks nlb-dnss` zurückgegeben wird.</li>
+<li>Ändert den Beschreibungstext für das {{site.data.keyword.containerlong_notm}}-CLI-Plug-in.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.3.34</td>
 <td>31. Mai 2019</td>
-<td>Hinzufügen von Unterstützung für das Erstellen von Red Hat OpenShift on IBM Cloud-Clustern.<ul>
-<li>Hinzufügen von Unterstützung für OpenShift-Versionen im Flag `--kube-version` des Befehls `cluster-create`. Wenn Sie z. B. einen OpenShift-Standardcluster erstellen wollen, können Sie `--kube-version 3.11_openshift` im Befehl `cluster-create` angeben. </li>
-<li>Hinzufügen des Befehls `versions` zum Auflisten aller unterstützten Kubernetes- und OpenShift-Versionen. </li>
+<td>Hinzufügen von Unterstützung für das Erstellen von Red Hat OpenShift on IBM Cloud-Clustern:<ul>
+<li>Hinzufügen von Unterstützung für OpenShift-Versionen im Flag `--kube-version` des Befehls `cluster-create`. Wenn Sie z. B. einen OpenShift-Standardcluster erstellen wollen, können Sie `--kube-version 3.11_openshift` im Befehl `cluster-create` angeben.</li>
+<li>Hinzufügen des Befehls `versions` zum Auflisten aller unterstützten Kubernetes- und OpenShift-Versionen.</li>
 <li>Befehl `kube-versions` ist veraltet.</li>
 </ul></td>
 </tr>
@@ -64,12 +105,12 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <tr>
 <td>0.3.28</td>
 <td>23. Mai 2019</td>
-<td><ul><li>Hinzufügen des Befehls [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) zum Erstellen von Ingress-ALBs. Weitere Informationen finden Sie unter [ALBs skalieren](/docs/containers?topic=containers-ingress#scale_albs).</li>
-<li>Hinzufügen des Befehls [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) zum Prüfen, ob in den Berechtigungsnachweisen für den [Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](/docs/containers?topic=containers-users#api_key) für die Zielregion und -ressourcengruppe vorgeschlagene oder erforderliche Infrastrukturberechtigungen fehlen.</li>
-<li>Hinzufügen des Flags <code>--private-only</code> zum Befehl `zone-network-set` zum Aufheben der Festlegung des öffentlichen VLAN für die Worker-Pool-Metadaten, sodass nachfolgende Workerknoten in dieser Worker-Pool-Zone nur mit einem privaten VLAN verbunden werden. </li>
-<li>Entfernen des Flags <code>--force-update</code> aus dem Befehl `worker-update`. </li>
-<li>Hinzufügen der Spalte **VLAN ID** in der Ausgabe der `albs`- und `alb-get`-Befehle. </li>
-<li>Hinzufügen der Spalte **Multizone Metro** in der Ausgabe des Befehls `supported-locations` zum Bezeichnen von mehrzonenfähigen Zonen. </li>
+<td><ul>
+<li>Hinzufügen des Befehls [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) zum Prüfen, ob in den Berechtigungsnachweisen für den [Zugriff auf das Portfolio der IBM Cloud-Infrastruktur](/docs/containers?topic=containers-users#api_key) für die Zielregion und -ressourcengruppe vorgeschlagene oder erforderliche Infrastrukturberechtigungen fehlen.</li>
+<li>Hinzufügen des Flags <code>--private-only</code> zum Befehl `zone-network-set` zum Aufheben der Festlegung des öffentlichen VLAN für die Worker-Pool-Metadaten. Nachfolgende Workerknoten werden in dieser Worker-Pool-Zone nur mit einem privaten VLAN verbunden.</li>
+<li>Entfernen des Flags <code>--force-update</code> aus dem Befehl `worker-update`.</li>
+<li>Hinzufügen der Spalte **VLAN ID** in der Ausgabe der `albs`- und `alb-get`-Befehle.</li>
+<li>Hinzufügen der Spalte **Multizone Metro** in der Ausgabe des Befehls `supported-locations` zum Bezeichnen von mehrzonenfähigen Zonen.</li>
 <li>Hinzufügen der Felder **Master State** und **Master Health** in der Ausgabe des Befehls `cluster-get`. Weitere Informationen finden Sie unter [Masterzustände](/docs/containers?topic=containers-health#states_master).</li>
 <li>Aktualisiert Übersetzungen des Hilfetextes.</li>
 </ul></td>
@@ -77,15 +118,15 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <tr>
 <td>0.3.8</td>
 <td>30. April 2019</td>
-<td>Hinzufügen der Unterstützung für die [globale Endpunktfunktionalität](/docs/containers?topic=containers-regions-and-zones#endpoint) in Version `0.3`. Sie können jetzt standardmäßig alle Ihre {{site.data.keyword.containerlong_notm}}-Ressourcen an allen Standorten anzeigen und verwalten. Sie brauchen keine Region als Ziel festzulegen, um mit Ressourcen zu arbeiten. </li>
-<ul><li>Hinzufügen des Befehls [<code>ibmcloud ks supported-locations</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) zum Auflisten aller von {{site.data.keyword.containerlong_notm}} unterstützten Standorte. </li>
-<li>Hinzufügen des Flags <code>--locations</code> zu den `clusters`- und `zones`-Befehlen, um Ressourcen nach einem oder mehreren Standorten zu filtern. </li>
-<li>Hinzufügen des Flags <code>--region</code> zu den Befehlen `credential-set/unset/get`, `api-key-reset` und `vlan-spanning-get`. Zum Ausführen dieser Befehle müssen Sie im Flag `--region` eine Region angeben. </li></ul></td>
+<td>Hinzufügen der Unterstützung für die [globale Endpunktfunktionalität](/docs/containers?topic=containers-regions-and-zones#endpoint) in Version `0.3`. Sie können jetzt standardmäßig alle Ihre {{site.data.keyword.containerlong_notm}}-Ressourcen an allen Standorten anzeigen und verwalten. Sie brauchen keine Region als Ziel festzulegen, um mit Ressourcen zu arbeiten.</li>
+<ul><li>Hinzufügen des Befehls [<code>ibmcloud ks supported-locations</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) zum Auflisten aller von {{site.data.keyword.containerlong_notm}} unterstützten Standorte.</li>
+<li>Hinzufügen des Flags <code>--locations</code> zu den `clusters`- und `zones`-Befehlen, um Ressourcen nach einem oder mehreren Standorten zu filtern.</li>
+<li>Hinzufügen des Flags <code>--region</code> zu den Befehlen `credential-set/unset/get`, `api-key-reset` und `vlan-spanning-get`. Zum Ausführen dieser Befehle müssen Sie im Flag `--region` eine Region angeben.</li></ul></td>
 </tr>
 <tr>
 <td>0.2.102</td>
 <td>15. April 2019</td>
-<td>Hinzufügen der Befehlsgruppe [`ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) zum Registrieren und Verwalten eines Hostnamens für IP-Adressen der Netzlastausgleichsfunktion (NLB) und der Befehlsgruppe [`ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor) zum Erstellen und Ändern von Statusprüfmonitoren für NLB-Hostnamen. Weitere Informationen finden Sie unter [NLB-IPs mit einem DNS-Hostnamen registrieren](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).
+<td>Hinzufügen der Befehlsgruppe [`ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) zum Registrieren und Verwalten eines Hostnamens für IP-Adressen der Netzlastausgleichsfunktion (NLB) und der Befehlsgruppe [`ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure) zum Erstellen und Ändern von Statusprüfmonitoren für NLB-Hostnamen. Weitere Informationen finden Sie unter [NLB-IPs mit einem DNS-Hostnamen registrieren](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns).
 </td>
 </tr>
 <tr>
@@ -113,7 +154,7 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.2.80</td>
 <td>19. März 2019</td>
 <td><ul>
-<li>Hinzufügen von Unterstützung zur Einrichtung der [Master-zu-Worker-Kommunikation mit Serviceendpunkten](/docs/containers?topic=containers-plan_clusters#workeruser-master) in Standardclustern, die Kubernetes Version 1.11 oder höher in [VRF-aktivierten Konten](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) ausführen.<ul>
+<li>Hinzufügen von Unterstützung zur Einrichtung der [Master-zu-Worker-Kommunikation mit Serviceendpunkten](/docs/containers?topic=containers-plan_clusters#workeruser-master) in Standardclustern, die Kubernetes Version 1.11 oder höher in [VRF-aktivierten Konten](/docs/resources?topic=resources-private-network-endpoints#getting-started) ausführen.<ul>
 <li>Hinzufügen der Flags `--private-service-endpoint` und `--public-service-endpoint` zum Befehl [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create).</li>
 <li>Hinzufügen der Felder **Public Service Endpoint URL** und **Private Service Endpoint URL** zur Ausgabe des Befehls <code>ibmcloud ks cluster-get</code>.</li>
 <li>Hinzufügen des Befehls [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable_private_service_endpoint).</li>
@@ -137,7 +178,7 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.2.61</td>
 <td>26. Februar 2019</td>
 <td><ul>
-<li>Hinzufügen des Befehls `cluster-pull-secret-apply`, der eine IAM-Service-ID für den Cluster, Richtlinien, einen API-Schlüssel und geheime Schlüssel für Image-Pull-Operationen erstellt, sodass Container, die im Kubernetes-Standardnamensbereich (`default`) ausgeführt werden, Images aus der IBM Cloud Container-Registry extrahieren können. Für neue Cluster werden standardmäßig geheime Schlüssel für Image-Pull-Operationen erstellt, die IAM-Berechtigungsnachweise verwenden. Verwenden Sie diesen Befehl, um vorhandene Cluster zu aktualisieren, oder wenn für Ihren Cluster bei der Erstellung ein Fehler mit einem Schlüssel für Image-Pull-Operationen auftritt. Weitere Informationen finden Sie in diesem [Dokument](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
+<li>Hinzufügen des Befehls `cluster-pull-secret-apply`, der eine IAM-Service-ID für den Cluster, Richtlinien, einen API-Schlüssel und geheime Schlüssel für Image-Pull-Operationen erstellt, sodass Container, die im Kubernetes-Standardnamensbereich (`default`) ausgeführt werden, Images aus der IBM Cloud Container-Registry extrahieren können. Für neue Cluster werden standardmäßig geheime Schlüssel für Image-Pull-Operationen erstellt, die IAM-Berechtigungsnachweise verwenden. Verwenden Sie diesen Befehl, um vorhandene Cluster zu aktualisieren, oder wenn für Ihren Cluster bei der Erstellung ein Fehler mit einem Schlüssel für Image-Pull-Operationen auftritt. Weitere Informationen finden Sie in diesem [Dokument](/docs/containers?topic=containers-images#cluster_registry_auth).</li>
 <li>Korrigieren eines Programmfehlers, durch den der Befehl `ibmcloud ks init` zur Ausgabe eines Hilfetexts führte.</li>
 </ul></td>
 </tr>
@@ -153,7 +194,7 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.2.44</td>
 <td>08. Februar 2019</td>
 <td><ul>
-<li>Hinzufügen der Option `--skip-rbac` zum Befehl `ibmcloud ks cluster-config`, um das Hinzufügen von RBAC-Rollen für Kubernetes auf der Basis der {{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrollen zur Clusterkonfiguration zu überspringen. Schließen Sie diese Option nur ein, wenn Sie [eigene RBAC-Rollen für Kubernetes verwalten](/docs/containers?topic=containers-users#rbac). Wenn Sie alle Ihre RBAC-Benutzer mit [{{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrollen](/docs/containers?topic=containers-access_reference#service) verwalten, geben Sie diese Option nicht an.</li>
+<li>Hinzufügen der Option `--skip-rbac` zum Befehl `ibmcloud ks cluster-config`, um das Hinzufügen von RBAC-Rollen für Kubernetes auf der Basis der {{site.data.keyword.cloud_notm}} IAM-Servicezugriffsrollen zur Clusterkonfiguration zu überspringen. Schließen Sie diese Option nur ein, wenn Sie [eigene RBAC-Rollen für Kubernetes verwalten](/docs/containers?topic=containers-users#rbac). Wenn Sie alle Ihre RBAC-Benutzer mit [{{site.data.keyword.cloud_notm}} IAM-Servicezugriffsrollen](/docs/containers?topic=containers-access_reference#service) verwalten, geben Sie diese Option nicht an.</li>
 <li>Aktualisieren von Go auf Version 1.11.5.</li>
 </ul></td>
 </tr>
@@ -192,7 +233,7 @@ In der folgenden Tabelle werden die Änderungen für jede Plug-in-Version der Be
 <td>0.1.638</td>
 <td>15. November 2018</td>
 <td>
-<ul><li>Hinzufügen des Alias [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) zum Befehl `apiserver-refresh`. </li>
+<ul><li>Hinzufügen des Alias [<code>ibmcloud ks cluster-refresh</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) zum Befehl `apiserver-refresh`.</li>
 <li>Hinzufügen des Namens der Ressourcengruppe zur Ausgabe von <code>ibmcloud ks cluster-get</code> und <code>ibmcloud ks clusters</code>.</li></ul>
 </td>
 </tr>

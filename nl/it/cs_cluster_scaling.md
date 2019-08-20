@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, node scaling
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 {:gif: data-image-type='gif'}
-
 
 
 # Ridimensionamento dei cluster
@@ -49,14 +48,14 @@ Il cluster autoscaler esegue periodicamente la scansione del cluster per regolar
 
 La scansione e l'ampliamento e riduzione avvengono a intervalli regolari nel tempo e, a seconda del numero di nodi di lavoro, queste operazioni potrebbero richiedere più tempo, ad esempio 30 minuti.
 
-Il cluster autoscaler regola il numero di nodi di lavoro considerando le [richieste di risorse ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) che definisci per le tue distribuzioni e non l'effettivo utilizzo del nodo di lavoro. Se i tuoi pod e le tue distribuzioni non richiedono quantità adeguate di risorse, devi regolare i relativi file di configurazione. Il cluster autoscaler non può regolarli per te.  Inoltre, tieni presente che i nodi di lavoro utilizzano alcune delle loro risorse di calcolo per le funzionalità di base del cluster, i [componenti aggiuntivi](/docs/containers?topic=containers-update#addons) predefiniti e personalizzati e le [riserve di risorse](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).
+Il cluster autoscaler regola il numero di nodi di lavoro considerando le [richieste di risorse ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/) che definisci per le tue distribuzioni e non l'effettivo utilizzo del nodo di lavoro. Se i tuoi pod e le tue distribuzioni non richiedono quantità adeguate di risorse, devi regolare i relativi file di configurazione. Il cluster autoscaler non può regolarli per te. Inoltre, tieni presente che i nodi di lavoro utilizzano alcune delle loro risorse di calcolo per le funzionalità di base del cluster, i [componenti aggiuntivi](/docs/containers?topic=containers-update#addons) predefiniti e personalizzati e le [riserve di risorse](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).
 {: note}
 
 <br>
 **Come si presentano l'ampliamento e la riduzione?**<br>
 In generale, il cluster autoscaler calcola il numero di nodi di lavoro di cui il tuo cluster ha bisogno per eseguire il proprio carico di lavoro. L'ampliamento o la riduzione del cluster dipendono da diversi fattori, compresi i seguenti.
 *   La dimensione minima e massima del nodo di lavoro per zona da te impostata.
-*   Le tue richieste di risorse del pod in sospeso e determinati metadati che associ al carico di lavoro, come anti-affinità, etichette per posizionare i pod solo su alcuni tipi di macchine o [PDB (pod disruption budget)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+*   Le tue richieste di risorse del pod in sospeso e determinati metadati che associ al carico di lavoro, come anti-affinità, etichette per posizionare i pod solo su alcuni profili o [PDB (pod disruption budget)![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   I pool di nodi di lavoro gestiti dal cluster autoscaler, potenzialmente tra le zone in un [cluster multizona](/docs/containers?topic=containers-ha_clusters#multizone).
 *   I [valori personalizzati del grafico Helm](#ca_chart_values) impostati, quale ad esempio la scelta di ignorare i nodi di lavoro per l'eliminazione se utilizzano l'archiviazione locale.
 
@@ -86,15 +85,15 @@ Considera la seguente immagine per un esempio di ampliamento e riduzione del clu
 _Figura: ampliamento e riduzione automatici di un cluster._
 ![GIF di ampliamento e riduzione automatici di un cluster](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  Il cluster ha quattro nodi di lavoro in due pool di nodi di lavoro che vengono estesi tra le zone. Ogni pool ha un nodo di lavoro per zona, ma il **Pool di nodi di lavoro A** ha una macchina di tipo `u2c.2x4` e il **Pool di nodi di lavoro B** ha una macchina di tipo `b2c.4x16`. Le tue risorse di calcolo totali sono circa 10 core (2 core x 2 nodi di lavoro per il **Pool di nodi di lavoro A** e 4 core x 2 nodi di lavoro per il **Pool di nodi di lavoro B**). Il tuo cluster esegue attualmente un carico di lavoro che richiede 6 di questi 10 core. Ulteriori risorse di calcolo vengono utilizzate su ciascun nodo di lavoro dalle [risorse riservate](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) necessarie per eseguire il cluster, i nodi di lavoro e qualsiasi componente aggiuntivo come, ad esempio, il cluster autoscaler.
+1.  Il cluster ha quattro nodi di lavoro in due pool di nodi di lavoro che vengono distribuiti tra le zone. Ogni pool ha un singolo nodo di lavoro per ogni zona, ma il **Pool di nodi di lavoro A** ha un profilo di `u2c.2x4` e il **Pool di nodi di lavoro B** ha un profilo di `b2c.4x16`. Le tue risorse di calcolo totali sono circa 10 core (2 core x 2 nodi di lavoro per il **Pool di nodi di lavoro A** e 4 core x 2 nodi di lavoro per il **Pool di nodi di lavoro B**). Il tuo cluster esegue attualmente un carico di lavoro che richiede 6 di questi 10 core. Ulteriori risorse di calcolo vengono utilizzate su ciascun nodo di lavoro dalle [risorse riservate](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) necessarie per eseguire il cluster, i nodi di lavoro e qualsiasi componente aggiuntivo come, ad esempio, il cluster autoscaler.
 2.  Il cluster autoscaler è configurato per gestire entrambi i pool di nodi di lavoro con le seguenti dimensioni minime e massime per zona:
     *  **Pool di nodi di lavoro A**: `minSize=1`, `maxSize=5`.
     *  **Pool di nodi di lavoro B**: `minSize=1`, `maxSize=2`.
 3.  Pianifichi le distribuzioni che richiedono 14 repliche di pod aggiuntive di un'applicazione che richiede un core di CPU per ogni replica. Una replica di pod può essere distribuita sulle risorse correnti, mentre le altre 13 sono in sospeso.
 4.  Il cluster autoscaler amplia i tuoi nodi di lavoro entro questi vincoli per supportare le ulteriori 13 repliche di pod richieste dalla risorsa.
     *  **Pool di nodi di lavoro A**: sette nodi di lavoro vengono aggiunti in un metodo round-robin il più uniformemente possibile tra le zone. I nodi di lavoro aumentano la capacità di calcolo del cluster di circa 14 core (2 core x 7 nodi di lavoro).
-    *  **Pool di nodi di lavoro B**: due nodi di lavoro vengono aggiunti uniformemente tra le zone, raggiungendo il valore `maxSize` di 2 nodi di lavoro per ogni zona. I nodi di lavoro aumentano la capacità del cluster di circa 8 core (4 core x 2 nodi di lavoro).
-5.  I 20 pod con richieste di 1 core vengono distribuiti come segue in tutti i nodi di lavoro. Poiché i nodi di lavoro hanno riserve di risorse e pod eseguiti per ricoprire le funzioni cluster predefinite, i pod per il tuo carico di lavoro non possono utilizzare tutte le risorse di calcolo disponibili di un nodo di lavoro. Ad esempio, sebbene i nodi di lavoro `b2c.4x16` abbiano quattro core, solo tre pod che richiedono un minimo di un core ciascuno possono essere pianificati sui nodi di lavoro.
+    *  **Pool di nodi di lavoro B**: due nodi di lavoro vengono aggiunti uniformemente tra le zone, raggiungendo il valore `maxSize` di due nodi di lavoro per ogni zona. I nodi di lavoro aumentano la capacità del cluster di circa 8 core (4 core x 2 nodi di lavoro).
+5.  I 20 pod con richieste di un core vengono distribuiti come segue in tutti i nodi di lavoro. Poiché i nodi di lavoro hanno riserve di risorse e pod eseguiti per ricoprire le funzioni cluster predefinite, i pod per il tuo carico di lavoro non possono utilizzare tutte le risorse di calcolo disponibili di un nodo di lavoro. Ad esempio, sebbene i nodi di lavoro `b2c.4x16` abbiano quattro core, solo tre pod che richiedono un minimo di un core ciascuno possono essere pianificati sui nodi di lavoro.
     <table summary="Una tabella che descrive la distribuzione del carico di lavoro nel cluster ridimensionato.">
     <caption>Distribuzione del carico di lavoro nel cluster ridimensionato.</caption>
     <thead>
@@ -208,14 +207,14 @@ Installa il plugin del cluster autoscaler di {{site.data.keyword.containerlong_n
 **Prima di iniziare**:
 
 1.  [Installa la CLI e i plugin richiesti](/docs/cli?topic=cloud-cli-getting-started):
-    *  CLI {{site.data.keyword.Bluemix_notm}} (`ibmcloud`)
+    *  CLI {{site.data.keyword.cloud_notm}} (`ibmcloud`)
     *  Plugin {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`)
     *  Plugin {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Crea un cluster standard](/docs/containers?topic=containers-clusters#clusters_ui) che esegue **Kubernetes versione 1.12 o successiva**.
 3.   [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Conferma che le tue credenziali di {{site.data.keyword.Bluemix_notm}} Identity and Access Management siano memorizzate nel cluster. Il cluster autoscaler utilizza questo segreto per autenticare le credenziali. Se il segreto manca, [crealo reimpostando le credenziali](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
+4.  Conferma che le tue credenziali di {{site.data.keyword.cloud_notm}} Identity and Access Management siano memorizzate nel cluster. Il cluster autoscaler utilizza questo segreto per autenticare le credenziali. Se il segreto manca, [crealo reimpostando le credenziali](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -403,12 +402,12 @@ Dopo aver modificato la mappa di configurazione per abilitare un pool di nodi di
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Nota**: il cluster autoscaler può ridimensionare solo i pool di nodi di lavoro che hanno l'etichetta `ibm-cloud.kubernetes.io/worker-pool-id`. Per controllare se il tuo pool di nodi di lavoro ha l'etichetta richiesta, esegui `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Se il tuo pool di nodi di lavoro non ha l'etichetta richiesta, [aggiungi un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool) e utilizza questo pool con il cluster autoscaler.</td>
+    <p class="note">Il cluster autoscaler può ridimensionare solo i pool di nodi di lavoro che hanno l'etichetta `ibm-cloud.kubernetes.io/worker-pool-id`. Per controllare se il tuo pool di nodi di lavoro ha l'etichetta richiesta, esegui `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Se il tuo pool di nodi di lavoro non ha l'etichetta richiesta, [aggiungi un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool) e utilizza questo pool con il cluster autoscaler.</p></td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
     <td headers="parameter-minsize parameter-with-description">Specifica il numero minimo di nodi di lavoro per ogni zona a cui il cluster autoscaler può ridurre il pool di nodi di lavoro. Il valore deve essere `2` o superiore in modo che i tuoi pod ALB possano essere diffusi per l'alta disponibilità. Se hai [disabilitato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) tutti gli ALB pubblici in ciascuna zona del tuo cluster standard, puoi impostare il valore su `1`.
-    <p class="note">L'impostazione di una `minSize` non attiva automaticamente un ampliamento. La dimensione minima (`minSize`) è una soglia che serve a fare in modo che il cluster autoscaler non esegua il ridimensionamento al di sotto di un certo numero di nodi di lavoro per ogni zona. Se il tuo cluster non ha ancora tale numero per ogni zona, il cluster autoscaler non esegue alcun ampliamento finché non hai richieste di risorse del carico di lavoro che richiedono ulteriori risorse. Ad esempio, se hai un pool di nodi di lavoro con un singolo nodo di lavoro per ogni tre zone (tre nodi di lavoro in totale) e imposti la dimensione minima (`minSize`) su `4` per ogni zona, il cluster autoscaler non esegue immediatamente il provisioning di tre nodi di lavoro aggiuntivi per ogni zona (12 nodi di lavoro in totale). L'ampliamento viene invece attivato dalle richieste di risorse. Se crei un carico di lavoro che richiede le risorse di 15 nodi di lavoro, il cluster autoscaler amplia il pool di nodi di lavoro per soddisfare questa richiesta. Ora, la `minSize` indica che il cluster autoscaler non esegue un ridimensionamento al di sotto di quattro nodi di lavoro per ogni zona anche se rimuovi il carico di lavoro che richiede tale quantità.Per ulteriori informazioni, vedi la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
+    <p class="note">L'impostazione di una `minSize` non attiva automaticamente un ampliamento. La dimensione minima (`minSize`) è una soglia che serve a fare in modo che il cluster autoscaler non esegua il ridimensionamento al di sotto di un certo numero di nodi di lavoro per ogni zona. Se il tuo cluster non ha ancora tale numero per ogni zona, il cluster autoscaler non esegue alcun ampliamento finché non hai richieste di risorse del carico di lavoro che richiedono ulteriori risorse. Ad esempio, se hai un pool di nodi di lavoro con un singolo nodo di lavoro per ogni tre zone (tre nodi di lavoro in totale) e imposti la dimensione minima (`minSize`) su `4` per ogni zona, il cluster autoscaler non esegue immediatamente il provisioning di tre nodi di lavoro aggiuntivi per ogni zona (12 nodi di lavoro in totale). L'ampliamento viene invece attivato dalle richieste di risorse. Se crei un carico di lavoro che richiede le risorse di 15 nodi di lavoro, il cluster autoscaler amplia il pool di nodi di lavoro per soddisfare questa richiesta. Ora, la `minSize` indica che il cluster autoscaler non esegue un ridimensionamento al di sotto di quattro nodi di lavoro per ogni zona anche se rimuovi il carico di lavoro che richiede tale quantità. Per ulteriori informazioni, vedi la [documentazione di Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#when-does-cluster-autoscaler-change-the-size-of-a-cluster).</p></td>
     </tr>
     <tr>
     <td id="parameter-maxsize" headers="parameter-with-default">`"maxSize": 2`</td>
@@ -489,7 +488,7 @@ Personalizza le impostazioni del cluster autoscaler come la quantità di tempo c
       withLocalStorage: true
       withSystemPods: true
     ```
-    {: codeblock}
+    {: screen}
 
     <table>
     <caption>Valori di configurazione del cluster autoscaler</caption>
@@ -614,7 +613,7 @@ Per limitare una distribuzione di pod a uno specifico pool di nodi di lavoro ges
 
 1.  Crea il pool di nodi di lavoro con l'etichetta che vuoi utilizzare. Ad esempio, la tua etichetta potrebbe essere `app: nginx`.
     ```
-    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
+    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Aggiungi il pool di nodi di lavoro alla configurazione di cluster autoscaler](#ca_cm).
@@ -664,7 +663,7 @@ Per limitare una distribuzione di pod a uno specifico pool di nodi di lavoro ges
 ## Ampliamento dei nodi di lavoro prima che il pool di nodi abbia risorse insufficienti
 {: #ca_scaleup}
 
-Come descritto nell'argomento [Informazioni su come funziona il cluster autoscaler](#ca_about) e nelle [domande frequenti (FAQ) su Kubernetes Cluster Autoscaler ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), il cluster autoscaler amplia i tuoi pool di nodi di lavoro in risposta alle tue risorse richieste del carico di lavoro rispetto alle risorse disponibili del pool di nodi di lavoro  Tuttavia, potresti volere che il cluster autoscaler esegua l'ampliamento dei nodi di lavoro prima che il pool di nodi di lavoro esaurisca le risorse. In questo caso, il tuo carico di lavoro non deve attendere il provisioning dei nodi di lavoro perché il pool di nodi di lavoro è già stato ampliato per soddisfare le richieste di risorse.
+Come descritto nell'argomento [Informazioni su come funziona il cluster autoscaler](#ca_about) e nelle [domande frequenti (FAQ) su Kubernetes Cluster Autoscaler ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md), il cluster autoscaler amplia i tuoi pool di nodi di lavoro in risposta alle tue risorse richieste del carico di lavoro rispetto alle risorse disponibili del pool di nodi di lavoro Tuttavia, potresti volere che il cluster autoscaler esegua l'ampliamento dei nodi di lavoro prima che il pool di nodi di lavoro esaurisca le risorse. In questo caso, il tuo carico di lavoro non deve attendere il provisioning dei nodi di lavoro perché il pool di nodi di lavoro è già stato ampliato per soddisfare le richieste di risorse.
 {: shortdesc}
 
 Il cluster autoscaler non supporta il ridimensionamento anticipato (overprovisioning) dei pool di nodi di lavoro. Tuttavia, puoi configurare altre risorse Kubernetes per lavorare con il cluster autoscaler per ottenere un ridimensionamento anticipato.
@@ -841,6 +840,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
     kind: ConfigMap
     ...
     ```
+    {: screen}
 2.  Elenca i tuoi grafici Helm esistenti e prendi nota del nome del cluster autoscaler.
     ```
     helm ls

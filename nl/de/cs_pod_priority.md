@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -94,7 +94,7 @@ Um die Podpriorität festzulegen, müssen Sie eine Prioritätsklasse verwenden.
 
 Vorbereitende Schritte:
 * [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` innehaben.
+* Stellen Sie sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` innehaben.
 * [Erstellen](/docs/containers?topic=containers-clusters#clusters_ui) oder [aktualisieren](/docs/containers?topic=containers-update#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 
 Gehen Sie wie folgt vor, um eine Prioritätsklasse zu verwenden:
@@ -176,7 +176,7 @@ Ordnen Sie Ihrer Podspezifikation eine Prioritätsklasse zu, um die Priorität d
 
 Vorbereitende Schritte:
 * [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Stellen Sie sicher, dass Sie die [ {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich innehaben, in dem Sie die Pods bereitstellen wollen.
+* Stellen Sie sicher, dass Sie die [ {{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich innehaben, in dem Sie die Pods bereitstellen wollen.
 * [Erstellen](/docs/containers?topic=containers-clusters#clusters_ui) oder [aktualisieren](/docs/containers?topic=containers-update#update) Sie den Cluster so, dass Kubernetes Version 1.11 oder eine höhere Version verwendet wird.
 * [Machen Sie sich damit vertraut, wie die Planung anhand der Priorität funktioniert](#priority_scheduling), da die Priorität die Zurückstellung vorhandener Pods bewirken und außerdem beeinflussen kann, wie die Ressourcen Ihres Clusters genutzt werden.
 

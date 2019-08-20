@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,17 +23,16 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Anwendungsfälle aus dem Einzelhandel für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
-Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong_notm}} von einer Analyse für Markterkenntnisse, Bereitstellungen in mehreren Regionen auf der Welt und einem Bestandsmanagement mit {{site.data.keyword.messagehub_full}} und Objektspeicher profitieren.
+Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong}} von einer Analyse für Markterkenntnisse, Bereitstellungen in mehreren Regionen auf der Welt und einem Bestandsmanagement mit {{site.data.keyword.messagehub_full}} und Objektspeicher profitieren.
 {: shortdesc}
 
 ## Traditionelles Einzelhandelsunternehmen nutzt Daten mithilfe von APIs gemeinsam mit globalen Geschäftspartnern zur Stärkung des Omni-Channel-Vertriebs
 {: #uc_data-share}
 
-Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhen, das Einzelhandelssystem ist jedoch in einem lokalen Rechenzentrum isoliert. Die Konkurrenz verfügt über globale Geschäftspartner für das Cross-Selling und Up-Selling ihrer Produkte: traditionell und online.
+Der Leiter eines Geschäftsbereichs muss die Anzahl der Vertriebskanäle erhöhen, das Einzelhandelssystem ist jedoch in einem lokalen Rechenzentrum isoliert. Die Konkurrenz verfügt über globale Geschäftspartner für das Cross-Selling und Up-Selling ihrer Produkte: traditionell und online. 
 {: shortdesc}
 
 Warum {{site.data.keyword.cloud_notm}}: Von {{site.data.keyword.containerlong_notm}} wird ein Ökosystem in der öffentlichen Cloud bereitgestellt, in dem neue Geschäftspartner und weitere externe Player über Container mithilfe von APIs gemeinsam Apps und Daten entwickeln können. Sobald sich das Einzelhandelssystem in der öffentlichen Cloud befindet, wird die gemeinsame Datennutzung optimiert und Entwicklung neuer Apps beschleunigt. Die Bereitstellungen der Apps nehmen zu, wenn die Entwickler ohne großen Aufwand experimentieren und mit Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen.
@@ -196,3 +195,5 @@ Technische Lösung:
 * Da das Kundenaufkommen und der Umsatz in den Geschäften steigen, werden die Geschäften selbst zu einem Unterscheidungsmerkmal.
 * Gleichzeitig führten neue Erkenntnisse aus der sozialen und kognitiven Analyse zu einer Senkung der Betriebsausgaben für den Lagerbestand.
 * Die soziale Teilhabe in der mobilen App trägt auch dazu bei, dass sich neue Kunden mit dem Geschäft identifizieren; sie helfen dem Geschäft auch beim Marketing gegenüber neuen Kunden.
+
+

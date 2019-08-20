@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Registrazione e monitoraggio di Ingress
 {: #ingress_health}
 
@@ -38,7 +39,7 @@ Se vuoi risolvere i problemi o monitorare l'attività di Ingress, puoi esaminare
 
 I log vengono raccolti automaticamente per i tuoi ALB Ingress Per visualizzare i log ALB, scegli tra due opzioni.
 * [Crea una configurazione di registrazione per il servizio Ingress](/docs/containers?topic=containers-health#configuring) nel tuo cluster.
-* Controlla i log dalla CLI. **Nota**: devi disporre almeno del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Lettore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
+* Controlla i log dalla CLI. **Nota**: devi disporre almeno del [ruolo del servizio {{site.data.keyword.cloud_notm}} **Lettore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
     1. Ottieni l'ID di un pod per un ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -70,7 +71,7 @@ I log vengono raccolti automaticamente per i tuoi ALB Ingress Per visualizzare i
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>L'indirizzo IP del pacchetto di richieste che il client ha inviato alla tua applicazione. Questo IP può cambiare in base alle seguenti situazioni:<ul><li>Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, la richiesta viene instradata a un pod per il servizio di programma di bilanciamento del carico che espone l'ALB. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto di richieste viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.</li><li>Se la [conservazione dell'IP di origine è abilitata](/docs/containers?topic=containers-ingress#preserve_source_ip), viene invece registrato l'indirizzo IP originale della richiesta client alla tua applicazione.</li></ul></td>
+<td>L'indirizzo IP del pacchetto di richieste che il client ha inviato alla tua applicazione. Questo IP può cambiare in base alle seguenti situazioni:<ul><li>Quando una richiesta client alla tua applicazione viene inviata al tuo cluster, la richiesta viene instradata a un pod per il servizio di programma di bilanciamento del carico che espone l'ALB. Se sullo stesso nodo di lavoro del pod del servizio del programma di bilanciamento del carico non esiste un pod dell'applicazione, il programma di bilanciamento inoltra la richiesta a un pod dell'applicazione su un nodo di lavoro diverso. L'indirizzo IP di origine del pacchetto di richieste viene modificato con l'indirizzo IP pubblico del nodo di lavoro su cui è in esecuzione il pod dell'applicazione.</li><li>Se la [conservazione dell'IP di origine è abilitata](/docs/containers?topic=containers-ingress-settings#preserve_source_ip), viene invece registrato l'indirizzo IP originale della richiesta client alla tua applicazione.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -117,15 +118,15 @@ I log vengono raccolti automaticamente per i tuoi ALB Ingress Per visualizzare i
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>Il tempo impiegato dall'ALB per ricevere la risposta dal server upstream per l'applicazione di back-end, misurato in secondi con una risoluzione di millisecondi. I tempi di diverse risposte sono separati da virgole e da due punti come indirizzi nella variabile <code>$upstream_addr</code>.</td>
+<td>Il tempo impiegato dall'ALB per ricevere la risposta dal server upstream per l'applicazione di back-end, che è misurato in secondi con una risoluzione di millisecondi. I tempi di diverse risposte sono separati da virgole e da caratteri due punti.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>Il tempo impiegato dall'ALB per stabilire una connessione con il server upstream per l'applicazione di back-end, misurato in secondi con una risoluzione di millisecondi. Se TLS/SSL è abilitato nella tua configurazione della risorsa Ingress, questo tempo include il tempo impiegato per l'handshake. I tempi di diverse connessioni sono separati da virgole e da due punti come indirizzi nella variabile <code>$upstream_addr</code> .</td>
+<td>Il tempo impiegato dall'ALB per stabilire una connessione con il server upstream per l'applicazione di back-end, che è misurato in secondi con una risoluzione di millisecondi. Se TLS/SSL è abilitato nella tua configurazione della risorsa Ingress, questo tempo include il tempo impiegato per l'handshake. I tempi di diverse connessioni sono separati da virgole e da caratteri due punti.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>Il tempo impiegato dall'ALB per ricevere l'intestazione della risposta dal server upstream per l'applicazione di back-end, misurato in secondi con una risoluzione di millisecondi. I tempi di diverse connessioni sono separati da virgole e da due punti come indirizzi nella variabile <code>$upstream_addr</code> .</td>
+<td>Il tempo impiegato dall'ALB per ricevere l'intestazione della risposta dal server upstream per l'applicazione di back-end, che è misurato in secondi con una risoluzione di millisecondi. I tempi di diverse connessioni sono separati da virgole e da caratteri due punti.</td>
 </tr>
 </tbody></table>
 
@@ -137,7 +138,7 @@ Puoi personalizzare il contenuto e il formato dei log raccolti per l'ALB Ingress
 
 Per impostazione predefinita, il formato dei log Ingress è JSON e mostrano i campi log comuni. Tuttavia, puoi anche creare un formato di log personalizzato scegliendo quali componenti di log vengono inoltrati e come sono disposti nell'output del log
 
-Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
+Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore** ](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
 
 1. Modifica il file di configurazione per la risorsa della mappa di configurazione `ibm-cloud-provider-ingress-cm`.
 
@@ -263,13 +264,11 @@ Installa il grafico Helm per l'exporter di metriche per monitorare un ALB nel tu
 I pod dell'exporter di metriche ALB devono essere distribuiti sugli stessi nodi di lavoro in cui sono distribuiti i tuoi ALB. Se i tuoi ALB vengono eseguiti su nodi di lavoro edge e tali nodi edge sono contaminati per evitare altre distribuzioni del carico di lavoro, i pod dell'exporter di metriche non possono essere pianificati. Devi rimuovere le contaminazioni eseguendo `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-1.  **Importante**: [segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere i repository Helm {{site.data.keyword.Bluemix_notm}}.
+1.  **Importante**: [segui le istruzioni](/docs/containers?topic=containers-helm#public_helm_install) per installare il client Helm sulla tua macchina locale, installare il server Helm (tiller) con un account di servizio e aggiungere i repository Helm {{site.data.keyword.cloud_notm}}.
 
-2. Installa il grafico Helm `ibmcloud-alb-metrics-exporter` sul tuo cluster. Questo grafico Helm distribuisce un exporter di metriche ALB e crea un account di servizio `alb-metrics-service-account` nello spazio dei nomi `kube-system`. Sostituisci <alb-ID> con l'ID dell'ALB per il quale vuoi raccogliere le metriche. Per visualizzare gli ID per gli ALB nel tuo cluster, esegui <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
-  Devi distribuire un grafico per ogni ALB che vuoi monitorare.
-  {: note}
+2. Installa il grafico Helm `ibmcloud-alb-metrics-exporter` sul tuo cluster. Questo grafico Helm distribuisce un exporter di metriche ALB e crea un account di servizio `alb-metrics-service-account` nello spazio dei nomi `kube-system`. Sostituisci `<zone>` con la zona dove esiste ALB e `<alb_ID>` con l'ID dell'ALB per cui vuoi raccogliere le metriche. Per visualizzare gli ID per gli ALB nel tuo cluster, esegui `ibmcloud ks albs --cluster <cluster_name>`.
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb_ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -294,12 +293,14 @@ I pod dell'exporter di metriche ALB devono essere distribuiti sugli stessi nodi 
   ```
   {:screen}
 
-5. Facoltativo: [installa l'agent Prometheus](#prometheus-agent) per raccogliere le metriche prodotte dall'exporter e rendere visibili le metriche su un dashboard Prometheus.
+5. Ripeti i passi da 2 a 4 per ogni ALB nel tuo cluster.
 
-### Installazione del grafico Helm per l'agente Prometheus
+6. Facoltativo: [installa l'agent Prometheus](#prometheus-agent) per raccogliere le metriche prodotte dall'exporter e rendere visibili le metriche su un dashboard Prometheus.
+
+### Installazione del grafico Helm per l'agent Prometheus
 {: #prometheus-agent}
 
-Una volta installato l'[exporter di metriche](#metrics-exporter), puoi installare il grafico Helm per l'agente Prometheus per acquisire le metriche prodotte dall'exporter e renderle visibili su un dashboard Prometheus.
+Una volta installato l'[exporter di metriche](#metrics-exporter), puoi installare il grafico Helm per l'agent Prometheus per acquisire le metriche prodotte dall'exporter e renderle visibili su un dashboard Prometheus.
 {: shortdesc}
 
 1. Scarica il file TAR per il grafico Helm per l'exporter di metriche da https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
@@ -412,7 +413,7 @@ La seguente tabella elenca i nomi di metrica ALB supportati con le etichette del
 ### Metriche del server
 {: #server_metrics}
 
-L'`alb-metrics-exporter` riformatta automaticamente ogni campo di dati nel file JSON in una metrica leggibile da Prometheus. Le metriche del server raccolgono i dati sul dominio secondario definito in una risorsa Ingress; ad esempio, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+L'`alb-metrics-exporter` riformatta automaticamente ogni campo di dati nel file JSON in una metrica leggibile da Prometheus. Le metriche del server raccolgono i dati sul dominio secondario che sono definiti in una risorsa Ingress, ad esempio `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
 {: shortdesc}
 
 Le metriche del server sono nel formato `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
@@ -449,7 +450,7 @@ Nell'esempio precedente, il sottotipo è <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche del server supportate". Nell'esempio precedente, il nome di metrica è <code>out</code>.</td>
+<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche del server supportate". Nell'esempio precedente, il nome della metrica è <code>out</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
@@ -577,7 +578,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche di upstream di tipo 1 supportate". Nell'esempio precedente, il nome di metrica è <code>in</code>.</td>
+<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche di upstream di tipo 1 supportate". Nell'esempio precedente, il nome della metrica è <code>in</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
@@ -655,11 +656,11 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 </tr>
 <tr>
 <td><code>&lt;POD\_IP&gt;</code></td>
-<td>L'indirizzo IP e la porta di uno specifico pod del servizio upstream. Per mantenere la compatibilità con Prometheus, i punti (<code>.</code>) e i due punti (<code>:</code>) vengono sostituiti da caratteri di sottolineatura <code>(_)</code>. Nell'esempio precedente, l'ID del pod upstream è <code>172_30_75_6_80</code>.</td>
+<td>L'indirizzo IP e la porta di uno specifico pod del servizio upstream. Per mantenere la compatibilità con Prometheus, i punti (<code>.</code>) e i due punti (<code>:</code>) vengono sostituiti da caratteri di sottolineatura <code>(_)</code>. Nell'esempio precedente, l'IP del pod upstream è <code>172_30_75_6_80</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche di upstream di tipo 2 supportate". Nell'esempio precedente, il nome di metrica è <code>requestMsec</code>.</td>
+<td>Il nome del tipo di metrica raccolto. Per un elenco di nomi di metrica, vedi la seguente tabella "Metriche di upstream di tipo 2 supportate". Nell'esempio precedente, il nome della metrica è <code>requestMsec</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
@@ -695,7 +696,7 @@ Le zone di memoria condivise sono definite in modo che i processi del nodo di la
 
 Nella mappa di configurazione Ingress `ibm-cloud-provider-ingress-cm`, il campo `vts-status-zone-size` imposta la dimensione della zona di memoria condivisa per la raccolta dei dati delle metriche. Per impostazione predefinita, `vts-status-zone-size` è impostato su `10m`. Se hai un ambiente di grandi dimensioni che richiede più memoria per la raccolta delle metriche, puoi sovrascrivere il valore predefinito invece di usare un valore più grande seguendo questa procedura.
 
-Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
+Prima di iniziare, assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore** ](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `kube-system`.
 
 1. Modifica il file di configurazione per la risorsa della mappa di configurazione `ibm-cloud-provider-ingress-cm`.
 

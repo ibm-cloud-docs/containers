@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Pianificazione di archiviazione persistente altamente disponibile
 {: #storage_planning}
 
 ## Scelta di una soluzione di archiviazione
 {: #choose_storage_solution}
 
-Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per te, devi capire i tuoi requisiti applicativi, il tipo di dati che vuoi archiviare e con che frequenza vuoi accedere a tali dati.
+Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per i tuoi cluster {{site.data.keyword.containerlong}}, devi capire i tuoi requisiti applicativi, il tipo di dati che vuoi archiviare e con che frequenza vuoi accedere a tali dati.
 {: shortdesc}
 
 1. Decidi se i tuoi dati devono essere archiviati in modo permanente o se possono essere rimossi in qualsiasi momento.
@@ -59,7 +57,7 @@ Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per t
    - **Solo lettura:** i tuoi dati sono di sola lettura. Non vuoi scrivere o modificare i tuoi dati.
    - **Lettura e scrittura:** vuoi leggere, scrivere e modificare i tuoi dati. Per i dati letti e scritti, è importante comprendere se le operazioni sono prevalentemente di lettura, prevalentemente di scrittura oppure bilanciate.
 
-4. Determina la frequenza con cui si accede ai tuoi dati. Comprendere la frequenza dell'accesso ai dati può aiutarti a comprendere le prestazioni di cui hai bisogno per la tua archiviazione. Ad esempio, i dati a cui si accede di frequente di norma si trovano nell'archiviazione veloce.
+5. Determina la frequenza con cui si accede ai tuoi dati. Comprendere la frequenza dell'accesso ai dati può aiutarti a comprendere le prestazioni di cui hai bisogno per la tua archiviazione. Ad esempio, i dati a cui si accede di frequente di norma si trovano nell'archiviazione veloce.
    - **Dati hot:** dati a cui si accede frequentemente. I casi d'uso comuni sono le applicazioni web o mobili.
    - **Dati cool o warm:** dati a cui si accede con scarsa frequenza, come ad esempio una volta al mese o meno. I casi d'uso comuni sono gli archivi, la conservazione di dati a breve termine o il ripristino d'emergenza.
    - **Dati cold:** i dati a cui si accede raramente, se non per nulla. I casi d'uso comuni sono gli archivi, i backup a lungo termine, i dati cronologici.
@@ -68,14 +66,14 @@ Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per t
    Se non puoi prevedere la frequenza oppure se essa non segue uno schema rigido, determina se i tuoi carichi di lavoro sono con un'elevata percentuale di lettura, un'elevata percentuale di scritture oppure bilanciati. Guarda quindi l'opzione di archiviazione adatta al tuo carico di lavoro e analizza quale livello di archiviazione ti dà la flessibilità di cui hai bisogno. Ad esempio, {{site.data.keyword.cos_full_notm}} fornisce una classe di archiviazione `flex` che valuta la frequenza con la quale si accede ai dati in un mese e tiene conto di tale misurazione per ottimizzare la tua fatturazione mensile.
    {: tip}
 
-5. Analizza se i tuoi dati devono essere condivisi tra più regioni, zone o istanze applicative.
+6. Analizza se i tuoi dati devono essere condivisi tra più regioni, zone o istanze applicative.
    - **Accesso tra i pod:** quando utilizzi i volumi persistenti Kubernetes per accedere alla tua archiviazione, puoi determinare il numero di pod che possono montare il volume contemporaneamente. Ad alcune soluzioni di archiviazione, come ad esempio l'archiviazione blocchi, può accedere un solo pod per volta. Con altre soluzioni di archiviazione, puoi condividere il volume su più pod.
    - **Accesso tra zone e regioni:** potresti aver bisogno che i tuoi dati siano accessibili tra zone o regioni. Alcune soluzioni di archiviazione, come l'archiviazione file e blocchi, sono specifiche per i data center e non possono essere condivise tra zone in una configurazione del cluster multizona.
 
    Se desideri rendere i tuoi dati accessibili tra zone o regioni, assicurati di consultare il tuo dipartimento legale per verificare che i tuoi dati possano essere archiviati in più zone o in un altro paese.
    {: note}
 
-6. Comprendi le altre caratteristiche di archiviazione che si ripercuotono sulla tua scelta.
+7. Comprendi le altre caratteristiche di archiviazione che si ripercuotono sulla tua scelta.
    - **Congruenza:** la garanzia che un'operazione di lettura restituisca la versione più recente di un file. Le soluzioni di archiviazione possono fornire una solida congruenza (`strong consistency`) quando ti viene garantito di ricevere sempre la versione più recente di un file oppure una eventuale congruenza (`eventual consistency`) quando l'operazione di lettura potrebbe non restituire la versione più recente. Trovi spesso un'eventuale congruenza nei sistemi geograficamente distribuiti in cui un'operazione di scrittura deve prima essere replicata su tutte le istanze.
    - **Prestazioni:** il tempo impiegato per completare un'operazione di lettura o scrittura.
    - **Durabilità:** la garanzia che un'operazione di scrittura di cui viene eseguito il commit alla tua archiviazione sopravviva permanentemente e non venga danneggiata né vada perduta, anche se nella tua archiviazione vengono scritti contemporaneamente gigabyte o terabyte di dati.
@@ -84,7 +82,7 @@ Prima di poter decidere quale tipo di archiviazione è la soluzione giusta per t
    - **Scalabilità:** la capacità di estendere la capienza e di personalizzare le prestazioni in base alle tue esigenze.
    - **Crittografia:** il mascheramento dei dati per evitare la visibilità quando un utente non autorizzato accede ai dati.
 
-7. [Esamina le soluzioni di archiviazione persistente disponibili](#persistent_storage_overview) e scegli la soluzione che risponde meglio ai tuoi requisiti applicativi e di dati.
+8. [Esamina le soluzioni di archiviazione persistente disponibili](#persistent_storage_overview) e scegli la soluzione che risponde meglio ai tuoi requisiti applicativi e di dati.
 
 ## Confronto di opzioni di archiviazione non persistente
 {: #non_persistent_overview}
@@ -156,7 +154,7 @@ La seguente immagine mostra le opzioni di archiviazione dati non persistente dis
 <tr>
 <td style="text-align:left">Durabilità</td>
 <td style="text-align:left">I dati vanno perduti quando si verifica un arresto anomalo del contenitore oppure quando esso viene rimosso. </td>
-<td style="text-align:left">I dati nei volumi <code>hostPath</code> o <code>emptyDir</code> vanno perduti quando: <ul><li>Il nodo di lavoro viene eliminato.</li><li>Il nodo di lavoro viene ricaricato o aggiornato.</li><li>Il cluster viene eliminato.</li><li>L'account {{site.data.keyword.Bluemix_notm}} raggiunge uno stato sospeso. </li></ul></p><p>Inoltre, i dati in un volume <code>emptyDir</code> vengono rimossi quando: <ul><li>Il pod assegnato
+<td style="text-align:left">I dati nei volumi <code>hostPath</code> o <code>emptyDir</code> vanno perduti quando: <ul><li>Il nodo di lavoro viene eliminato.</li><li>Il nodo di lavoro viene ricaricato o aggiornato.</li><li>Il cluster viene eliminato.</li><li>L'account {{site.data.keyword.cloud_notm}} raggiunge uno stato sospeso. </li></ul></p><p>Inoltre, i dati in un volume <code>emptyDir</code> vengono rimossi quando: <ul><li>Il pod assegnato
 viene eliminato definitivamente dal nodo di lavoro.</li><li>Il pod assegnato viene pianificato su un altro nodo di lavoro.</li></ul>
 </tr>
 <tr>
@@ -288,7 +286,7 @@ La seguente immagine mostra le opzioni a tua disposizione in {{site.data.keyword
 <th style="text-align:left">Caratteristiche</th>
 <th style="text-align:left">Oggetto</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">Database {{site.data.keyword.Bluemix_notm}}</th>
+<th style="text-align:left">Database {{site.data.keyword.cloud_notm}}</th>
 </thead>
 <tbody>
 <tr>
@@ -378,3 +376,6 @@ di archiviazione. Ogni nodo memorizza solo una parte dei dati. </td>
 </tr>
 </tbody>
 </table>
+
+
+

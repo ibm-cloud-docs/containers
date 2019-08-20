@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -24,14 +24,13 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-# Customizando o Ingresso com Anotações
+# Customizando o roteamento do Ingress com anotações
 {: #ingress_annotation}
 
 Para incluir recursos em seu application load balancer (ALB) de Ingresso, é possível especificar anotações como metadados em um recurso de Ingresso.
 {: shortdesc}
 
-Antes de usar anotações, certifique-se de ter definido adequadamente sua configuração de serviço do Ingress seguindo as etapas em [Balanceamento de carga HTTPS com balanceadores de carga do aplicativo (ALB) Ingress](/docs/containers?topic=containers-ingress). Assim que você tiver configurado o ALB do Ingress com uma configuração básica, será possível expandir os seus recursos incluindo anotações no arquivo do recurso Ingresso.
+Antes de usar as anotações, certifique-se de que tenha definido corretamente a configuração de serviço do Ingress seguindo as etapas em [Balanceamento de carga HTTPS com os balanceadores de carga de aplicativo (ALB) do Ingress](/docs/containers?topic=containers-ingress). Assim que você tiver configurado o ALB do Ingress com uma configuração básica, será possível expandir os seus recursos incluindo anotações no arquivo do recurso Ingresso.
 {: note}
 
 <table>
@@ -93,7 +92,7 @@ Antes de usar anotações, certifique-se de ter definido adequadamente sua confi
   <tr>
   <td><a href="#keepalive-timeout">Tempo limite de keep-alive</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>Configure o tempo máximo que uma conexão keep-alive permanece aberta no servidor.</td>
+  <td>Configure o tempo máximo que uma conexão keep-alive permanece aberta entre o cliente e o servidor proxy do ALB.</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">Próximo envio de dados do proxy</a></td>
@@ -114,6 +113,11 @@ Antes de usar anotações, certifique-se de ter definido adequadamente sua confi
   <td><a href="#upstream-keepalive">Envio de dados keep-alive</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>Configure o número máximo de conexões keep-alive inativas para um servidor de envio de dados.</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-keepalive-timeout">Tempo limite de keep-alive de envio de dados</a></td>
+  <td><code>upstream-keepalive-timeout</code></td>
+  <td>Configure o tempo máximo que uma conexão keep-alive permanece aberta entre o servidor proxy do ALB e o servidor de envio de dados do seu aplicativo.</td>
   </tr>
   <tr>
   <td><a href="#upstream-max-fails"> Máximo de falhas de envio de dados </a></td>
@@ -183,7 +187,7 @@ Antes de usar anotações, certifique-se de ter definido adequadamente sua confi
 <tr>
 <td><a href="#proxy-external-service">Serviços externos</a></td>
 <td><code>proxy-external-service</code></td>
-<td>Inclua definições de caminho para serviços externos, como um serviço hospedado no {{site.data.keyword.Bluemix_notm}}.</td>
+<td>Inclua definições de caminho para serviços externos, como um serviço hospedado no {{site.data.keyword.cloud_notm}}.</td>
 </tr>
 <tr>
 <td><a href="#location-modifier">Modificador de local</a></td>
@@ -605,7 +609,7 @@ Quando uma solicitação do cliente é enviada ao ALB do Ingress, uma conexão c
 
 Depois que o ALB é conectado ao app backend, os dados de resposta são lidos do app backend pelo ALB. Durante essa operação de leitura, o ALB aguarda um máximo de 60 segundos entre duas operações de leitura para receber dados do app backend. Se o app backend não enviar dados dentro de 60 segundos, a conexão com o app backend será encerrada e o app será considerado não disponível.
 
-Um tempo limite de conexão e de leitura de 60 segundos é o tempo limite padrão em um proxy e geralmente não deve ser mudado.
+Um tempo limite de conexão e um tempo limite de leitura de 60 segundos são os tempos limites padrão em um proxy e, geralmente, não devem ser mudados.
 
 Se a disponibilidade de seu app não for estável ou seu app estiver lento para responder em razão de altas cargas de trabalho, talvez você queira aumentar o tempo limite de conexão ou de leitura. Lembre-se de que aumentar o tempo limite afeta o desempenho do ALB porque a conexão com o app backend deve permanecer aberta até que o tempo limite seja atingido.
 
@@ -707,8 +711,7 @@ spec:
 ### Tempo limite de keep-alive (` keepalive-tempo limite `)
 {: #keepalive-timeout}
 
-**Descrição**</br>
-Configura o tempo máximo de abertura de uma conexão keep-alive no servidor.
+**Descrição**</br> Configura o tempo máximo que uma conexão keep-alive permanece aberta entre o cliente e o servidor proxy do ALB. Se você não usar essa anotação, o valor de tempo limite padrão será `60s`.
 
 **YAML de recurso do Ingresso de amostra**</br>
 ```
@@ -760,7 +763,7 @@ Configure quando o ALB pode passar uma solicitação para o próximo servidor de
 {:shortdesc}
 
 **Descrição**</br>
-O ALB do Ingress atua como um proxy entre o aplicativo cliente e o seu aplicativo. Algumas configurações de app requerem múltiplos servidores de envio de dados que manipulam solicitações de cliente recebidas do ALB. Às vezes, o servidor proxy usado pelo ALB não pode estabelecer uma conexão com um servidor de envio de dados que o app usa. O ALB poderá então tentar estabelecer uma conexão com o próximo servidor de envio de dados para passar a solicitação para ele, como alternativa. É possível usar a anotação `proxy-next-upstream-config` para configurar em que casos, quanto tempo e quantas vezes o ALB pode tentar passar uma solicitação para o próximo servidor de envio de dados.
+O ALB do Ingress atua como um proxy entre o aplicativo cliente e o seu aplicativo. Algumas configurações de app requerem múltiplos servidores de envio de dados que manipulam solicitações de cliente recebidas do ALB. Às vezes, o servidor proxy usado pelo ALB não pode estabelecer uma conexão com um servidor de envio de dados que o app usa. O ALB poderá então tentar estabelecer uma conexão com o próximo servidor de envio de dados para passar a solicitação para ele, como alternativa. É possível usar a anotação `proxy-next-upstream-config` para configurar em quais casos, por quanto tempo e quantas vezes o ALB pode tentar transmitir uma solicitação para o próximo servidor de envio de dados.
 
 O tempo limite é sempre configurado quando você usa `proxy-next-upstream-config`, portanto, não inclua `timeout=true` nessa anotação.
 {: note}
@@ -802,7 +805,7 @@ spec:
 </tr>
 <tr>
 <td><code>retries</code></td>
-<td>Substitua <code>&lt;<em>tries</em>&gt;</code> pela quantia máxima de vezes que o ALB tentará passar uma solicitação para o próximo servidor de envio de dados. Esse número inclui a solicitação original. Para desativar essa limitação, use <code>0</code>. Se você não especificar um valor, o valor padrão <code>0</code> será usado.
+<td>Substitua <code>&lt;<em>tries</em>&gt;</code> pelo número máximo de vezes que o ALB tenta passar uma solicitação para o próximo servidor de envio de dados. Esse número inclui a solicitação original. Para desativar essa limitação, use <code>0</code>. Se você não especificar um valor, o valor padrão <code>0</code> será usado.
 </td>
 </tr>
 <tr>
@@ -847,7 +850,7 @@ Use a anotação de cookie permanente para incluir a afinidade de sessão para o
 {:shortdesc}
 
 **Descrição**</br>
-Para obter alta disponibilidade, algumas configurações de aplicativo requerem que você implemente diversos servidores de envio de dados que manipulem solicitações do cliente recebidas. Quando um cliente se conecta ao app backend, é possível usar a afinidade de sessão para que um cliente seja atendido pelo mesmo servidor de envio de dados pela duração de uma sessão ou pelo tempo que leva para concluir uma tarefa. É possível configurar seu ALB para assegurar a afinidade de sessão sempre roteando o tráfego de rede recebido para o mesmo servidor de envio de dados.
+Para obter alta disponibilidade, algumas configurações de aplicativo requerem que você implemente diversos servidores de envio de dados que manipulem solicitações do cliente recebidas. Quando um cliente se conecta ao seu aplicativo back-end, é possível usar a afinidade de sessão para que um cliente seja atendido pelo mesmo servidor de envio de dados durante uma sessão ou durante o tempo decorrido para a conclusão de uma tarefa. É possível configurar seu ALB para assegurar a afinidade de sessão sempre roteando o tráfego de rede recebido para o mesmo servidor de envio de dados.
 
 Cada cliente que se conecta ao seu app backend é designado a um dos servidores de envio de dados disponíveis pelo ALB. O ALB cria um cookie de sessão que é armazenado no app do cliente, que está incluído nas informações do cabeçalho de cada solicitação entre o ALB e o cliente. As informações no cookie asseguram que todas as solicitações sejam manipuladas pelo mesmo servidor de envio de dados em toda a sessão.
 
@@ -1019,6 +1022,54 @@ spec:
 <br />
 
 
+### Tempo limite de keep-alive de envio de dados (`upstream-keepalive-timeout`)
+{: #upstream-keepalive-timeout}
+
+**Descrição**</br> Configura o tempo máximo que uma conexão keep-alive permanece aberta entre o servidor proxy do ALB e o servidor de envio de dados para o seu aplicativo back-end. Se você não usar essa anotação, o valor de tempo limite padrão será `60s`.
+
+**YAML de recurso do Ingresso de amostra**</br>
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
+
+<table>
+<caption>Entendendo os componentes de anotação</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Entendendo os componentes de anotação</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td>Substitua <code>&lt;<em>myservice</em>&gt;</code> pelo nome do serviço Kubernetes que você criou para o seu app. Este parâmetro é opcional.</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td>Substitua <code>&lt;<em>time</em>&gt;</code> por uma quantia de tempo em segundos. Exemplo:<code>timeout=20s</code>. Um valor <code>0</code> desativa as conexões do cliente keep-alive.</td>
+</tr>
+</tbody></table>
+
+<br />
+
+
 ### O máximo de fluxo de atualização falha (` upstream-max-falha `)
 {: #upstream-max-fails}
 
@@ -1085,7 +1136,7 @@ Mude as portas padrão para o tráfego de rede HTTP (porta 80) e HTTPS (porta 44
 **Descrição**</br>
 Por padrão, o ALB do Ingress é configurado para atender o tráfego de rede HTTP recebido na porta 80 e o tráfego de rede HTTPS recebido na porta 443. É possível mudar as portas padrão para incluir segurança em seu domínio do ALB ou para ativar somente uma porta HTTPS.
 
-Para ativar a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress#opening_ingress_ports) e, em seguida, especifique essa porta na anotação [`mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
+Para ativar a autenticação mútua em uma porta, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) e, em seguida, especifique essa porta na anotação [`mutual-auth`](#mutual-auth). Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
 {: note}
 
 **YAML de recurso do Ingresso de amostra**</br>
@@ -1149,7 +1200,7 @@ spec:
   {: pre}
 
 3. Inclua as portas HTTP e HTTPS não padrão no mapa de configuração. Substitua `<port>` pela porta HTTP ou HTTPS que deseja abrir.
-  <p class="note">Por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Quando se ativa um ALB privado, deve-se também especificar quaisquer portas que deseja manter abertas no campo `private-ports`. Para obter mais informações, veja [Abrindo portas no ALB do Ingress](/docs/containers?topic=containers-ingress#opening_ingress_ports).</p>
+  <p class="note">Por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Quando se ativa um ALB privado, deve-se também especificar quaisquer portas que deseja manter abertas no campo `private-ports`. Para obter mais informações, veja [Abrindo portas no ALB do Ingress](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).</p>
   ```
   apiVersion: v1
   kind: ConfigMap
@@ -1232,8 +1283,7 @@ spec:
 ### HTTP Strict Transport Security (`hsts`)
 {: #hsts}
 
-**Descrição**</br>
-O HSTS instrui o navegador a acessar um domínio apenas por meio de HTTPS. Mesmo se o usuário insere ou segue um link HTTP simples, o navegador faz upgrade estritamente da conexão com HTTPS.
+**Descrição**</br> O HSTS instrui o navegador a acessar um domínio usando apenas HTTPS. Mesmo se o usuário insere ou segue um link HTTP simples, o navegador faz upgrade estritamente da conexão com HTTPS.
 
 **YAML de recurso do Ingresso de amostra**</br>
 ```
@@ -1275,7 +1325,7 @@ spec:
 </tr>
 <tr>
 <td><code>maxAge</code></td>
-<td>Substitua <code>&lt;<em>31536000</em>&gt;</code> por um número inteiro representando quantos segundos um navegador armazenará em cache as solicitações de envio diretamente para HTTPS. O padrão é <code>31536000</code>, que é igual a 1 ano.</td>
+<td>Substitua <code>&lt;<em>31536000</em>&gt;</code> por um número inteiro que representa quantos segundos um navegador armazenará em cache solicitações de envio diretamente para HTTPS. O padrão é <code>31536000</code>, que é igual a 1 ano.</td>
 </tr>
 <tr>
 <td><code>includeSubdomains</code></td>
@@ -1303,7 +1353,7 @@ A anotação de autenticação mútua valida os certificados de cliente. Para en
 **Pré-requisitos**</br>
 
 * Deve-se ter um segredo de autenticação mútua válido que contenha o `ca.crt` necessário. Para criar um segredo de autenticação mútua, consulte as etapas no final desta seção.
-* Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress#opening_ingress_ports) e, em seguida, especifique essa porta nesta anotação. Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
+* Para ativar a autenticação mútua em uma porta diferente de 443, [configure o ALB para abrir a porta válida](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports) e, em seguida, especifique essa porta nesta anotação. Não use a anotação `custom-port` para especificar uma porta para autenticação mútua.
 
 **YAML de recurso do Ingresso de amostra**</br>
 ```
@@ -1352,10 +1402,10 @@ spec:
 **Para criar um segredo de autenticação mútua:**
 
 1. Gere um certificado de autoridade de certificação (CA) e a chave por meio do provedor de certificado. Se você tiver seu próprio domínio, compre um certificado TLS oficial para seu domínio. Certifique-se de que o [CN ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://support.dnsimple.com/articles/what-is-common-name/) seja diferente para cada certificado.
-    Para propósitos de teste, é possível criar um certificado auto-assinado usando o OpenSSL. Para obter mais informações, consulte este [tutorial de certificado SSL autoassinado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.akadia.com/services/ssh_test_certificate.html) ou este [tutorial de autenticação mútua que inclui a criação de sua própria CA ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    Para propósitos de teste, é possível criar um certificado auto-assinado usando o OpenSSL. Para obter mais informações, consulte este [tutorial de certificado SSL autoassinado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.akadia.com/services/ssh_test_certificate.html) ou este [tutorial de autenticação mútua, que inclui a criação de seu próprio CA ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Converta o certificado na base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/).
-3. Crie um arquivo do YAML secreto usando o cert.
+3. Crie um arquivo YAML secreto usando o certificado.
    ```
    apiVersion: v1
      kind: Secret
@@ -1368,7 +1418,7 @@ spec:
    {: codeblock}
 4. Crie o certificado como um segredo do Kubernetes.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1438,7 +1488,7 @@ spec:
 
 1. Obtenha a chave de autoridade de certificação (CA) e o certificado de seu servidor de envio de dados e um certificado de cliente SSL. O IBM ALB é baseado em NGINX, que requer o certificado raiz, o certificado intermediário e o certificado de backend. Para obter mais informações, consulte [Docs do NGINX ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/).
 2. [Converta o certificado na base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/).
-3. Crie um arquivo do YAML secreto usando o cert.
+3. Crie um arquivo YAML secreto usando o certificado.
    ```
    apiVersion: v1
      kind: Secret
@@ -1455,7 +1505,7 @@ spec:
 
 4. Crie o certificado como um segredo do Kubernetes.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1463,10 +1513,10 @@ spec:
 **Para criar um segredo de autenticação mútua:**
 
 1. Gere um certificado de autoridade de certificação (CA) e a chave por meio do provedor de certificado. Se você tiver seu próprio domínio, compre um certificado TLS oficial para seu domínio. Certifique-se de que o [CN ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://support.dnsimple.com/articles/what-is-common-name/) seja diferente para cada certificado.
-    Para propósitos de teste, é possível criar um certificado auto-assinado usando o OpenSSL. Para obter mais informações, consulte este [tutorial de certificado SSL autoassinado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.akadia.com/services/ssh_test_certificate.html) ou este [tutorial de autenticação mútua que inclui a criação de sua própria CA ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
+    Para propósitos de teste, é possível criar um certificado auto-assinado usando o OpenSSL. Para obter mais informações, consulte este [tutorial de certificado SSL autoassinado ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.akadia.com/services/ssh_test_certificate.html) ou este [tutorial de autenticação mútua, que inclui a criação de seu próprio CA ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://blog.codeship.com/how-to-set-up-mutual-tls-authentication/).
     {: tip}
 2. [Converta o certificado na base 64 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.base64encode.org/).
-3. Crie um arquivo do YAML secreto usando o cert.
+3. Crie um arquivo YAML secreto usando o certificado.
    ```
    apiVersion: v1
      kind: Secret
@@ -1479,7 +1529,7 @@ spec:
    {: codeblock}
 4. Crie o certificado como um segredo do Kubernetes.
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1562,7 +1612,7 @@ spec:
   {: pre}
 
 3. Inclua as portas TCP no mapa de configuração. Substitua `<port>` pelas portas TCP que deseja abrir.
-  Por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Quando se ativa um ALB privado, deve-se também especificar quaisquer portas que deseja manter abertas no campo `private-ports`. Para obter mais informações, veja [Abrindo portas no ALB do Ingress](/docs/containers?topic=containers-ingress#opening_ingress_ports).
+  Por padrão, as portas 80 e 443 ficam abertas. Se deseja manter a 80 e a 443 abertas, deve-se também incluí-las além de quaisquer outras portas TCP especificadas no campo `public-ports`. Se você ativou um ALB privado, deve-se também especificar quaisquer portas que você deseja manter abertas no campo `private-ports`. Para obter mais informações, veja [Abrindo portas no ALB do Ingress](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports).
   {: note}
   ```
   apiVersion: v1
@@ -1612,7 +1662,7 @@ O ALB do Ingress roteia o tráfego para os caminhos nos quais os aplicativos bac
 ### Serviços externos (` proxy-external-service `)
 {: #proxy-external-service}
 
-Inclua definições de caminho para serviços externos, como serviços hospedados no {{site.data.keyword.Bluemix_notm}}.
+Inclua definições de caminho para serviços externos, como serviços hospedados no {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 **Descrição**</br>
@@ -1694,15 +1744,15 @@ Para manipular caminhos de expressão regular (regex), essa anotação é necess
 <tbody>
 <tr>
 <td><code>=</code></td>
-<td>O modificador sinal de igual faz com que o ALB selecione somente as correspondências exatas. Quando uma correspondência exata é localizada, a procura para e o caminho correspondente é selecionado.<br>Por exemplo, se seu app atende em <code>/tea</code>, o ALB seleciona somente caminhos <code>/tea</code> exatos ao corresponder uma solicitação com seu app.</td>
+<td>O modificador sinal de igual faz com que o ALB selecione somente as correspondências exatas. Quando uma correspondência exata é localizada, a procura para e o caminho correspondente é selecionado.<br>Por exemplo, se o seu aplicativo atender em <code>/tea</code>, o ALB selecionará apenas os caminhos <code>/tea</code> exatos ao corresponder uma solicitação ao seu aplicativo.</td>
 </tr>
 <tr>
 <td><code>~</code></td>
-<td>O modificador til faz com que o ALB processe caminhos como caminhos regex com distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se seu app atende em <code>/coffee</code>, o ALB pode selecionar os caminhos <code>/ab/coffee</code> ou <code>/123/coffee</code> ao corresponder uma solicitação com seu app mesmo que os caminhos não estejam configurados explicitamente para seu app.</td>
+<td>O modificador til faz com que o ALB processe caminhos como caminhos regex com distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se o seu aplicativo atender em <code>/coffee</code>, o ALB poderá selecionar os caminhos <code>/ab/coffee</code> ou <code>/123/coffee</code> ao corresponder uma solicitação ao seu aplicativo, mesmo que os caminhos não estejam explicitamente configurados para o seu aplicativo.</td>
 </tr>
 <tr>
 <td><code>~\*</code></td>
-<td>O til seguido por um modificador asterisco faz com que o ALB processe caminhos como caminhos regex sem distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se seu app atende em <code>/coffee</code>, o ALB pode selecionar os caminhos <code>/ab/Coffee</code> ou <code>/123/COFFEE</code> ao corresponder uma solicitação com seu app mesmo que os caminhos não estejam configurados explicitamente para seu app.</td>
+<td>O modificador til que é seguido por um modificador asterisco faz com que o ALB processe caminhos como caminhos de expressão regular sem distinção entre maiúsculas e minúsculas durante a correspondência.<br>Por exemplo, se o seu aplicativo atender em <code>/coffee</code>, o ALB poderá selecionar os caminhos <code>/ab/Coffee</code> ou <code>/123/COFFEE</code> ao corresponder uma solicitação ao seu aplicativo, mesmo que os caminhos não estejam explicitamente configurados para o seu aplicativo.</td>
 </tr>
 <tr>
 <td><code>^~</code></td>
@@ -1811,7 +1861,7 @@ spec:
 ## Anotações de buffer de proxy
 {: #proxy-buffer}
 
-O ALB do Ingress age como um proxy entre seu app backend e o navegador da web do cliente. Com as anotações do buffer de proxy, é possível configurar como os dados são armazenados em buffer em seu ALB ao enviar ou receber pacotes de dados.  
+O ALB do Ingress age como um proxy entre seu app backend e o navegador da web do cliente. Com as anotações de buffer do proxy, é possível configurar como os dados são armazenados em buffer em seu ALB ao enviar ou receber pacotes de dados.  
 {: shortdesc}
 
 ### Buffers grandes de cabeçalho do cliente (`large-client-header-buffers`)
@@ -1821,7 +1871,7 @@ Configure o número e o tamanho máximo dos buffers que leem cabeçalhos de soli
 {:shortdesc}
 
 **Descrição**</br>
-Os buffers que leem cabeçalhos de solicitação do cliente grandes são alocados somente sob demanda: se uma conexão for transicionada para o estado keep-alive após o processamento de término da solicitação, eles serão liberados. Por padrão, os buffers e o tamanho do buffer `4` são iguais aos bytes `8K`. Se uma linha de solicitação exceder o tamanho máximo configurado de um buffer, o erro de HTTP `414 Request-URI Too Large` será retornado para o cliente. Além disso, se um campo de cabeçalho da solicitação excede o tamanho máximo configurado de um buffer, o erro `400 Bad Request` é retornado para o cliente. É possível ajustar o número máximo e o tamanho dos buffers que são usados para ler cabeçalhos da solicitação do cliente grandes.
+Os buffers que leem cabeçalhos de solicitação do cliente grandes são alocados somente sob demanda: se uma conexão for transicionada para o estado keep-alive após o processamento de término da solicitação, eles serão liberados. Por padrão, há `4` buffers e o tamanho do buffer é igual a `8K` bytes. Se uma linha de solicitação exceder o tamanho máximo configurado de um buffer, o erro de HTTP `414 Request-URI Too Large` será retornado para o cliente. Além disso, se um campo de cabeçalho da solicitação excede o tamanho máximo configurado de um buffer, o erro `400 Bad Request` é retornado para o cliente. É possível ajustar o número máximo e o tamanho dos buffers que são usados para ler cabeçalhos da solicitação do cliente grandes.
 
 **YAML de recurso do Ingresso de amostra**</br>
 ```
@@ -1885,7 +1935,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
+   ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
@@ -2109,7 +2159,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
+   ingress.bluemix.net/add-host-port: "enabled=true serviceName=<myservice>"
 spec:
  tls:
  - hosts:
@@ -2155,27 +2205,6 @@ Inclua informações extras do cabeçalho em uma solicitação do cliente antes 
 O ALB do Ingress atua como um proxy entre o aplicativo cliente e seu aplicativo de back-end. As solicitações do cliente que são enviadas para o ALB são processadas (por proxy) e colocadas em uma nova solicitação que é então enviada para seu app backend. Da mesma forma, as respostas de app de back-end que são enviadas para o ALB são processadas (proxy) e colocadas em uma nova resposta que é enviada para o cliente. O uso de proxy em uma solicitação ou resposta remove informações de cabeçalho HTTP, como o nome do usuário, que foram enviadas inicialmente do cliente ou app backend.
 
 Se o seu app backend requer informações do cabeçalho de HTTP, é possível usar a anotação `proxy-add-headers` para incluir informações do cabeçalho na solicitação do cliente antes que a solicitação seja encaminhada pelo ALB para o app backend. Se o app da web do cliente requer informações do cabeçalho de HTTP, é possível usar a anotação `response-add-headers` para incluir informações do cabeçalho na resposta antes que a resposta seja encaminhada pelo ALB para o app da web do cliente.<br>
-
-Por exemplo, talvez você precise incluir as informações do cabeçalho X-Forward a seguir na solicitação antes que ela seja encaminhada para o seu app:
-```
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-```
-{: screen}
-
-Para incluir as informações do cabeçalho X-Forward na solicitação que é enviada para seu app, use a anotação `proxy-add-headers` da maneira a seguir:
-```
-ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
-  Host $host;
-  X-Real-IP $remote_addr;
-  X-Forwarded-Proto $scheme;
-  X-Forwarded-For $proxy_add_x_forwarded_for;
-  }
-```
-{: codeblock}
 
 </br>
 
@@ -2548,7 +2577,7 @@ spec:
 <tbody>
 <tr>
 <td><code>bindSecret</code></td>
-<td>Substitua <em><code>&lt;bind_secret&gt;</code></em> pelo segredo do Kubernetes que armazena o segredo de ligação para sua instância de serviço do {{site.data.keyword.appid_short_notm}}.</td>
+<td>Substitua <em><code>&lt;bind_secret&gt;</code></em> pelo segredo do Kubernetes, que armazena o segredo de ligação para a sua instância de serviço do {{site.data.keyword.appid_short_notm}}.</td>
 </tr>
 <tr>
 <td><code> namespace</code></td>

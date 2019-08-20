@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +45,7 @@ Erfahren Sie mehr zu den allgemeinen Schritten zur Bereitstellung von Apps, inde
 ## Ausführen von Apps in Clustern planen
 {: #plan_apps}
 
-Bevor Sie eine App in einem {{site.data.keyword.containerlong_notm}}-Cluster bereitstellen, müssen Sie entscheiden, wie Sie Ihre App konfigurieren möchten, damit sie ordnungsgemäß aufgerufen und in andere Services in {{site.data.keyword.Bluemix_notm}} integriert werden kann.
+Bevor Sie eine App in einem {{site.data.keyword.containerlong_notm}}-Cluster bereitstellen, müssen Sie entscheiden, wie Sie Ihre App konfigurieren möchten, damit sie ordnungsgemäß aufgerufen und in andere Services in {{site.data.keyword.cloud_notm}} integriert werden kann.
 {:shortdesc}
 
 ### Welche Art von Kubernetes-Objekten kann ich für meine App erstellen?
@@ -131,7 +130,7 @@ Wenn Sie die App öffentlich zugänglich machen möchten, haben Sie verschiedene
 *  **Standardcluster für ausschließlich privates VLAN:** Sie können Ihre App mithilfe des [NodePort-Service, Lastausgleichsservice oder Ingress-Service verfügbar machen](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Sie müssen außerdem den Port für die private IP-Adresse des Service in der Firewall öffnen.
 
 ### Wie kann ich den Status meiner App nach ihrer Bereitstellung überwachen?
-Sie können die {{site.data.keyword.Bluemix_notm}}-[Protokollierung und -Überwachung](/docs/containers?topic=containers-health#health) für den Cluster konfigurieren. Sie können auch einen [Protokollierungs- oder Überwachungsservice](/docs/containers?topic=containers-supported_integrations#health_services) eines Drittanbieters integrieren.
+Sie können die {{site.data.keyword.cloud_notm}}-[Protokollierung und -Überwachung](/docs/containers?topic=containers-health#health) für den Cluster konfigurieren. Sie können auch einen [Protokollierungs- oder Überwachungsservice](/docs/containers?topic=containers-supported_integrations#health_services) eines Drittanbieters integrieren.
 {: shortdesc}
 
 ### Wie kann ich dafür sorgen, dass meine App aktuell bleibt?
@@ -144,7 +143,7 @@ Informationen zum Verwalten von Aktualisierungen für eine App finden Sie unter 
 Konto- und Clusteradministratoren können den Zugriff auf unterschiedlichen Ebenen steuern: Cluster, Kubernetes-Namensbereich, Pod und Container.
 {: shortdesc}
 
-Mit {{site.data.keyword.Bluemix_notm}} IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen.  Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
+Mit {{site.data.keyword.cloud_notm}} IAM können Sie Berechtigungen zu einzelnen Benutzern, Gruppen oder Servicekonten auf der Clusterinstanzebene zuordnen.  Sie können einen Bereich für den Clusterzugriff noch weiter definieren, indem Sie Benutzer auf bestimmte Namensbereiche im Cluster beschränken. Weitere Informationen finden Sie in [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
 
 Wenn Sie den Zugriff auf Podebene steuern möchten, können Sie [Podsicherheitsrichtlinien mit Kubernetes-RBAC konfigurieren](/docs/containers?topic=containers-psp#psp).
 
@@ -182,7 +181,7 @@ Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in
   <dt>Bereitstellungen und Replikatgruppen zum Bereitstellen Ihrer App und deren Abhängigkeiten verwenden</dt>
     <dd><p>Eine Bereitstellung ist eine Kubernetes-Ressource, mit der Sie alle Komponenten Ihrer App und deren Abhängigkeiten deklarieren können. Bei Bereitstellungen müssen Sie nicht alle Schritte niederschreiben und können sich stattdessen auf Ihre App konzentrieren.</p>
     <p>Wenn Sie mehrere Pods bereitstellen, wird für Ihre Bereitstellungen automatisch eine Replikatgruppe erstellt, mithilfe deren die Pods überwacht werden und sichergestellt wird, dass die angegebene Anzahl von Pods jederzeit betriebsbereit ist. Wird ein Pod inaktiv, so ersetzt die Replikatgruppe den inaktiven Pod durch einen neuen Pod.</p>
-    <p>Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter Anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit unverfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</p>
+    <p>Mit einer Bereitstellung können Sie Aktualisierungsstrategien für Ihre App definieren. Dabei können Sie unter anderem die Anzahl von Pods angeben, die Sie bei einer rollierenden Aktualisierung hinzufügen wollen, und festlegen, wie viele Pods zur gleichen Zeit unverfügbar sein dürfen. Wenn Sie eine rollierende Aktualisierung durchführen, prüft die Bereitstellung, ob die Überarbeitung funktioniert, und stoppt den Rollout, wenn Fehler erkannt werden.</p>
     <p>Sie können mehrere Revisionen mit unterschiedlichen Flags gleichzeitig bereitstellen. Sie können beispielsweise eine Bereitstellung zuerst testen, bevor Sie sich entschließen, sie per Push-Operation an die Produktion zu übertragen.</p>
     <p>Mithilfe von Bereitstellungen können Sie alle bereitgestellten Revisionen nachverfolgen. Sie können dieses Verlaufsprotokoll verwenden, um ein Rollback auf eine vorherige Version durchzuführen, falls Sie feststellen, dass Ihre Aktualisierungen nicht wie erwartet funktionieren.</p></dd>
   <dt>Ausreichende Anzahl von Replikaten für die Arbeitslast Ihrer App plus 2 einbeziehen</dt>
@@ -202,7 +201,7 @@ Ziehen Sie die folgenden Optionen zum Verbessern der Verfügbarkeit Ihrer App in
   <p><strong>Tipp</strong>: Versuchen Sie in Mehrzonenclustern, die Workerknotenkapazität bei 50 % pro Zone zu halten, damit ausreichend Kapazität übrig bleibt, um Ihren Cluster vor einem Zonenausfall zu schützen.</p>
   <p><strong>Wie gehe ich vor, um meine App über Regionen zu verteilen?</strong></br>Um Ihre App vor einem Regionsausfall zu schützen, erstellen Sie einen zweiten Cluster in einer anderen Region, [konfigurieren Sie eine globale Lastausgleichsfunktion ](/docs/containers?topic=containers-ha_clusters#multiple_clusters), um Ihre Cluster zu verbinden, und verwenden Sie eine YAML-Datei für die Bereitstellung, um eine duplizierte Replikatgruppe mit [Pod-Anti-Affinität ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) für Ihre App bereitzustellen.</p>
   <p><strong>Was ist, wenn meine Apps persistenten Speicher benötigen?</strong></p>
-  <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
+  <p>Verwenden Sie einen Cloud-Service wie [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) oder [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
 ## App-Anforderungen in YAML-Datei angeben
@@ -298,7 +297,7 @@ template:
   <p><ol><li>Überprüfen Sie, ob eine Ressourcenquote für einen Namensbereich festgelegt ist.<pre class="pre"><code>kubectl get quota --namespace=<namensbereich></code></pre></li>
   <li>Überprüfen Sie die Werte für die Größenbeschränkungen.<pre class="pre"><code>kubectl describe quota <quotenname> --namespace=<namensbereich></code></pre></li></ol></p>
   <p>Auch wenn keine Ressourcenquote festgelegt ist, können Sie Ressourcenanforderungen und -begrenzungen in die Bereitstellung einschließen, um die Verwaltung der Workerknotenressourcen zu verbessern.</p><p class="note">Wenn ein Container seinen Grenzwert überschreitet, kann der Container erneut gestartet werden oder fehlschlagen. Wenn ein Container eine Anforderung überschreitet, wird sein Pod möglicherweise entfernt, falls diese Ressource für den Workerknoten knapp wird. Fehlerbehebungsinformationen finden Sie unter [Neustarts von Pods schlagen wiederholt fehl oder Pods werden unerwartet entfernt](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail).</p>
-  <p>**Anforderung**: Die Mindestmenge der Ressource, die vom Scheduler für den zu verwendenden Container reserviert wird. Wenn die Menge mit dem Grenzwert übereinstimmt, wird die Anforderung garantiert. Wenn die Menge niedriger als die Grenzwert ist, wird die Anforderung auch garantiert, aber der Scheduler kann die Differenz zwischen der Anforderung und dem Grenzwert zum Erfüllen von Anforderungen für Ressourcen anderer Container verwenden.</p>
+  <p>**Anforderung**: Die Mindestmenge der Ressource, die vom Scheduler für den zu verwendenden Container reserviert wird. Wenn die Menge mit dem Grenzwert übereinstimmt, wird die Anforderung garantiert. Wenn die Menge niedriger als der Grenzwert ist, wird die Anforderung auch garantiert, aber der Scheduler kann die Differenz zwischen der Anforderung und dem Grenzwert zum Erfüllen von Anforderungen für Ressourcen anderer Container verwenden.</p>
   <p>**Grenzwert**: Die maximale Menge der Ressource, die der Container verbrauchen kann. Wenn die Gesamtmenge der Ressourcen, die für die Container verwendet wird, die auf dem Workerknoten verfügbare Menge überschreitet, können Container entfernt werden, um Speicherplatz frei zu machen. Wenn Sie eine Entfernung verhindern möchten, legen Sie fest, dass die Ressourcenanforderung mit dem Grenzwert des Containers identisch ist. Wenn kein Grenzwert angegeben ist, ist der Standardwert die Kapazität des Workerknotens.</p>
   <p>Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/).</p>
   <p><pre class="codeblock"><code>resources:
@@ -636,7 +635,7 @@ Vorbemerkungen:
 
 Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
 1.  [Installieren Sie das Tool `kustomize` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
-    *   Für MacOS können Sie den Paketmanager `brew` verwenden.
+    *   Für macOS können Sie den Paketmanager `brew` verwenden.
         ```
         brew install kustomize
         ```
@@ -659,7 +658,7 @@ Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
     mkdir -p ~/<my_app>/overlay/prod
     ```
     {: pre}
-    
+
     Beispiel-Repository-Struktur:
     ```
     .
@@ -693,10 +692,10 @@ Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
         - secret.yaml
         ```
         {: codeblock}
-        
+
         Die Namen der `resources`-YAML-Dateien müssen mit den Namen der anderen Dateien im Repository `base` übereinstimmen. Sie können mehrere Konfigurationen in derselben Datei einschließen, im Beispiel befinden sich die Konfigurationen jedoch in separaten Dateien, wie z. B. `deployment.yaml`, `service.yaml` und `pvc.yaml`.
-        
-    4.  Erstellen Sie Ihre YAML-Ressourcendateien mit den Konfigurationen, die Sie in der `kustomization`-YAML-Basisdatei definiert haben. Die Ressourcen werden durch Kombinieren der Konfigurationen in den `kustomization`-Dateien und in den YAML-Ressourcendateien erstellt. Die kombinierten YAML-Dateien werden in `stdout` in der Terminalausgabe zurückgegeben. Verwenden Sie denselben Befehl zum Erstellen nachfolgender Änderungen, die Sie an der `kustomization`-YAML-Datei vornehmen, wie z. B. Hinzufügen einer neuen Bezeichnung.
+
+    4.  Erstellen Sie Ihre YAML-Ressourcendateien mit den Konfigurationen, die Sie in der `kustomization`-YAML-Basisdatei definiert haben. Die Ressourcen werden durch Kombinieren der Konfigurationen in den `kustomization`-Dateien und in den YAML-Ressourcendateien erstellt. Die kombinierten YAML-Dateien werden in `stdout` in der Terminalausgabe zurückgegeben. Verwenden Sie denselben Befehl zum Erstellen nachfolgender Änderungen, die Sie an der `kustomization`-YAML-Datei vornehmen, wie z. B. Hinzufügen einer Bezeichnung.
         ```
         kustomize build
         ```
@@ -739,7 +738,7 @@ Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
         </tr>
         <tr>
         <td><code>patchesStrategicMerge</code></td>
-        <td>Listen Sie die YAML-Ressourcenkonfigurationsdateien auf, die Sie mit der `kustomization`-Basisdatei zusammenführen wollen. Sie müssen diese Dateien auch demselben Repository wie die `kustomization`-Datei hinzufügen, z. B. `overlay/staging`. Diese Ressourcenkonfigurationsdateien können kleine Änderungen enthalten, die in den Basiskonfigurationsdateien mit demselben Namen als Patch zusammengeführt werden. Die Ressource ruft alle Komponenten ab, die in der `base`-Konfigurationsdatei enthalten sind, plus weitere Komponenten, die Sie in der `overlay`-Konfigurationsdatei angeben. <br><br>Wenn die Konfiguration eine neue Datei ist, die sich nicht in 'base' befindet, müssen Sie den Dateinamen dem Feld `resources` hinzufügen.</td>
+        <td>Listen Sie die YAML-Ressourcenkonfigurationsdateien auf, die Sie mit der `kustomization`-Basisdatei zusammenführen wollen. Sie müssen diese Dateien auch demselben Repository wie die `kustomization`-Datei hinzufügen, z. B. `overlay/staging`. Diese Ressourcenkonfigurationsdateien können kleine Änderungen enthalten, die in den Basiskonfigurationsdateien mit demselben Namen als Patch zusammengeführt werden. Die Ressource ruft alle Komponenten ab, die in der `base`-Konfigurationsdatei enthalten sind, plus weitere Komponenten, die Sie in der `overlay`-Konfigurationsdatei angeben.<br><br>Wenn die Konfiguration eine neue Datei ist, die sich nicht in 'base' befindet, müssen Sie den Dateinamen dem Feld `resources` hinzufügen.</td>
         </tr>
         <tr>
         <td><code>resources</code></td>
@@ -755,10 +754,10 @@ Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
         kustomize build overlay/staging
         ```
         {: pre}
-    3.  Wiederholen Sie diese Schritte, um Ihre `kustomization`-Overlay-Datei für die Produktion und andere YAML-Konfigurationsdateien zu erstellen. Sie können beispielsweise die Anzahl der Replikate in Ihrer Datei `deployment.yaml` erhöhen, sodass Ihre Produktionsumgebung mehr Benutzeranforderungen verarbeiten kann. 
+    3.  Wiederholen Sie diese Schritte, um Ihre `kustomization`-Overlay-Datei für die Produktion und andere YAML-Konfigurationsdateien zu erstellen. Sie können beispielsweise die Anzahl der Replikate in Ihrer Datei `deployment.yaml` erhöhen, sodass Ihre Produktionsumgebung mehr Benutzeranforderungen verarbeiten kann.
     4.  Überprüfen Sie Ihre `kustomize`-Repository-Struktur, um sicherzustellen, dass sie alle YAML-Konfigurationsdateien enthält, die Sie benötigen. Die Struktur kann dem folgenden Beispiel ähneln.
         ```
-├── base
+        ├── base
         │   ├── configmap.yaml
         │   ├── deployment.yaml
         │   ├── kustomization.yaml
@@ -842,11 +841,14 @@ Gehen Sie wie folgt vor, um Konfigurationsdateien mit Kustomize einzurichten:
 ## Kubernetes-Dashboard starten
 {: #cli_dashboard}
 
-Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der {{site.data.keyword.Bluemix_notm}}-Konsole](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
+Öffnen Sie auf Ihrem lokalen System ein Kubernetes-Dashboard, um Informationen zu einem Cluster und seinen Workerknoten anzuzeigen. [In der {{site.data.keyword.cloud_notm}}-Konsole](#db_gui) können Sie über eine praktische Schaltfläche mit einem Mausklick auf das Dashboard zugreifen. [Bei der CLI](#db_cli) können Sie auf das Dashboard zugreifen oder die Schritte in einem Automatisierungsprozess wie für eine CI/CD-Pipeline verwenden.
 {:shortdesc}
 
 Sind in Ihrem Cluster so viele Ressourcen und Benutzer enthalten, dass das Kubernetes-Dashboard etwas langsam reagiert? Für Cluster, auf denen Kubernetes Version 1.12 oder höher ausgeführt wird, kann Ihr Clusteradministrator die Bereitstellung von `kubernetes-dashboard` skalieren, indem er `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` ausführt.
 {: tip}
+
+Um die Protokolle für einzelne App-Pods zu überprüfen, können Sie `kubectl logs<pod name>` ausführen. Verwenden Sie das Kubernetes-Dashboard nicht, um Protokolle für Ihre Pods zu streamen, da dies Ihren Zugriff auf das Kubernetes-Dashboard beeinträchtigen könnte.
+{: important}
 
 Vorbemerkungen:
 * Stellen Sie sicher, dass Ihnen eine [Servicerolle](/docs/containers?topic=containers-users#platform) zugeordnet ist, die Ihnen die entsprechende RBAC-Rolle für Kubernetes erteilt, um mit Kubernetes-Ressourcen arbeiten zu können.
@@ -855,16 +857,15 @@ Vorbemerkungen:
 
 Sie können den Standardport verwenden oder einen eigenen Port festlegen, um das Kubernetes-Dashboard für einen Cluster zu starten.
 
-**Kubernetes-Dashboard über die {{site.data.keyword.Bluemix_notm}}-Konsole starten**
+**Kubernetes-Dashboard über die {{site.data.keyword.cloud_notm}}-Konsole starten**
 {: #db_gui}
 
-1.  Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) an.
+1.  Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole](https://cloud.ibm.com/) an.
 2.  Wählen Sie in der Menüleiste das Konto aus, das Sie verwenden möchten.
 3.  Klicken Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") auf **Kubernetes**.
 4.  Klicken Sie auf der Seite **Cluster** auf den Cluster, auf den Sie zugreifen möchten.
 5.  Klicken Sie auf der Seite mit den Clusterdetails auf die Schaltfläche **Kubernetes-Dashboard**.
 
-</br>
 </br>
 
 **Kubernetes-Dashboard über die CLI starten**
@@ -1031,7 +1032,7 @@ Gehen Sie wie folgt vor, um Apps für bestimmte Workerknoten bereitzustellen:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.8_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1292,7 +1293,7 @@ Gehen Sie wie folgt vor, um eine Workload auf einer GPU-Maschine auszuführen:
 Mit Kubernetes können Sie die [horizontale Autoskalierung von Pods ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) aktivieren, um die Anzahl der Instanzen Ihrer Apps CPU-basiert automatisch zu erhöhen oder zu verringern.
 {:shortdesc}
 
-Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Möchten Sie Ihre Workerknoten anstelle Ihrer Pods skalieren? Probieren Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aus.
+Suchen Sie Informationen zum Skalieren von Cloud Foundry-Anwendungen? Lesen Sie den Abschnitt zur [IBM Autoskalierung für {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started). Möchten Sie Ihre Workerknoten anstelle Ihrer Pods skalieren? Probieren Sie den [Cluster-Autoscaler](/docs/containers?topic=containers-ca#ca) aus.
 {: tip}
 
 Vorbemerkungen:

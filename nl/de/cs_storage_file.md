@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Daten in IBM File Storage für IBM Cloud speichern
+# Daten in klassischer Version von IBM Cloud File Storage speichern
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage ist ein persistenter, schneller und flexibler, über ein Netz angeschlossener NFS-basierter Dateispeicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger (PVs) hinzufügen können. Sie können unter vordefinierten Speichertiers mit GB-Größen und E/A-Operationen pro Sekunde (IOPS) wählen, die die Anforderungen Ihrer Workloads erfüllen. Informationen zur Ermittlung, ob {{site.data.keyword.Bluemix_notm}} File Storage die richtige Speicheroption für Sie ist, finden Sie unter [Speicherlösung wählen](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Preisinformationen finden Sie unter [Abrechnung](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{{site.data.keyword.cloud_notm}} File Storage ist ein persistenter, schneller und flexibler, über ein Netz angeschlossener NFS-basierter Dateispeicher, den Sie Ihren Apps durch persistente Kubernetes-Datenträger (PVs) hinzufügen können. Sie können unter vordefinierten Speichertiers mit GB-Größen und E/A-Operationen pro Sekunde (IOPS) wählen, die die Anforderungen Ihrer Workloads erfüllen. Informationen zur Ermittlung, ob {{site.data.keyword.cloud_notm}} File Storage die richtige Speicheroption für Sie ist, finden Sie unter [Speicherlösung wählen](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Preisinformationen finden Sie unter [Abrechnung](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage für nur Standardcluster verfügbar, die mit öffentlicher Netzkonnektivität eingerichtet sind. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, können Sie Dateispeicher (File Storage) bereitstellen, sofern auf Ihrem Cluster Kubernetes Version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 oder höher ausgeführt wird. NFS-Dateispeicherinstanzen sind für eine einzelne Zone spezifisch. Wenn Sie einen Mehrzonencluster haben, ziehen Sie [Optionen für persistenten Speicher in mehreren Zonen](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) in Betracht.
+{{site.data.keyword.cloud_notm}} File Storage für nur Standardcluster verfügbar, die mit öffentlicher Netzkonnektivität eingerichtet sind. Wenn Ihr Cluster auf das öffentliche Netz nicht zugreifen kann, wie dies zum Beispiel bei einem privaten Cluster hinter einer Firewall oder bei einem Cluster mit nur einem aktivierten privaten Serviceendpunkt der Fall ist, können Sie Dateispeicher (File Storage) bereitstellen, sofern auf Ihrem Cluster Kubernetes Version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 oder höher ausgeführt wird. NFS-Dateispeicherinstanzen sind für eine einzelne Zone spezifisch. Wenn Sie einen Mehrzonencluster haben, ziehen Sie [Optionen für persistenten Speicher in mehreren Zonen](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) in Betracht.
 {: important}
 
 ## Dateispeicherkonfiguration festlegen
@@ -164,7 +162,7 @@ Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
          </tbody></table>
 
 5. Wählen Sie diese Option aus, wenn die Daten nach dem Löschen des Clusters oder des Persistent Volume Claim (PVC) beibehalten werden sollen.
-   - Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur (SoftLayer) und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Dateispeicher](#existing_file) ausführen.
+   - Wenn Sie die Daten aufbewahren möchten, dann wählen Sie eine Speicherklasse vom Typ `retain` aus. Beim Löschen des PVC wird nur der PVC gelöscht. Der persistente Datenträger, die physische Speichereinheit im Konto der IBM Cloud-Infrastruktur und Ihre Daten sind weiterhin vorhanden. Um den Speicher zurückzufordern und in Ihrem Cluster erneut zu verwenden, müssen Sie den persistenten Datenträger entfernen und die Schritte zum [Verwenden von vorhandenem Dateispeicher](#existing_file) ausführen.
    - Wenn Sie möchten, dass der persistente Datenträger, die Daten und Ihre physische Dateispeichereinheit beim Löschen des Persistent Volume Claim (PVC) gelöscht werden, müssen Sie eine Speicherklasse ohne `retain` auswählen.
 
 6. Wählen Sie aus, ob Sie die Abrechnung auf Stundenbasis oder monatlich erhalten möchten. Weitere Informationen finden Sie unter [Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing). Standardmäßig werden alle Dateispeichereinheiten mit dem Abrechnungstyp 'Stündlich' (hourly) bereitgestellt.
@@ -178,11 +176,11 @@ Gehen Sie wie folgt vor, um sich für eine Speicherkonfiguration zu entscheiden:
 ## Dateispeicher zu Apps hinzufügen
 {: #add_file}
 
-Erstellen Sie einen Persistent Volume Claim (PVC), um Dateispeicher für Ihren Cluster [dynamisch bereitzustellen](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die physische Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur (SoftLayer) bestellt.
+Erstellen Sie einen Persistent Volume Claim (PVC), um Dateispeicher für Ihren Cluster [dynamisch bereitzustellen](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). Mithilfe der dynamischen Bereitstellung wird der übereinstimmende persistente Datenträger (PV) automatisch erstellt und die physische Speichereinheit in Ihrem Konto der IBM Cloud-Infrastruktur bestellt.
 {:shortdesc}
 
 Vorbereitende Schritte:
-- Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](/docs/containers?topic=containers-firewall#pvc) für die IBM Cloud-Infrastruktur-IP-Bereiche (SoftLayer) der Zonen, in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims (PVCs) erstellen können.
+- Wenn Sie über eine Firewall verfügen, [gewähren Sie Egress-Zugriff](/docs/containers?topic=containers-firewall#pvc) für die IBM Cloud-Infrastruktur-IP-Bereiche der Zonen, in denen sich Ihre Cluster befinden, damit Sie Persistent Volume Claims (PVCs) erstellen können.
 - [Entscheiden Sie sich für eine vordefinierte Speicherklasse](#file_predefined_storageclass) oder erstellen Sie eine [angepasste Speicherklasse](#file_custom_storageclass).
 
 Möchten Sie den Dateispeicher in einer statusabhängigen Gruppe bereitstellen? Weitere Informationen finden Sie unter [Dateispeicher in statusabhängiger Gruppe verwenden](#file_statefulset).
@@ -482,7 +480,7 @@ Wenn Sie den in einem Cluster bereitgestellten Speicher auch in einem anderen Cl
 **Für persistenten Speicher, der außerhalb des Clusters bereitgestellt wurde:** </br>
 Wenn Sie bereits vorhandenen Speicher verwenden möchten, den Sie zuvor bereitgestellt, aber noch nie zuvor in Ihrem Cluster verwendet haben, müssen Sie den Speicher in demselben Teilnetz wie Ihre Workerknoten verfügbar machen.
 
-1.  {: #external_storage}Klicken Sie im [Portal der IBM Cloud-Infrastruktur (SoftLayer) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/classic?) auf **Speicher**.
+1.  {: #external_storage}Klicken Sie im [Portal der IBM Cloud-Infrastruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/classic?) auf **Speicher**.
 2.  Klicken Sie auf **Dateispeicher** und wählen Sie im Menü **Aktionen** die Option zum Autorisieren des Hosts**** aus.
 3.  Wählen Sie **Teilnetze** aus.
 4.  Wählen Sie in der Dropdown-Liste das private VLAN-Teilnetz aus, mit dem der Workerknoten verbunden ist. Um das Teilnetz Ihres Workerknotens zu ermitteln, führen Sie den Befehl `ibmcloud ks workers --cluster <clustername>` aus und vergleichen Sie den Wert für `Private IP` Ihres Workerknotens mit dem Teilnetz, das Sie in der Dropdown-Liste gefunden haben.
@@ -621,7 +619,7 @@ Sie haben erfolgreich ein PV (Persistent Volume) erstellt und an einen PVC (Pers
 ## Dateispeicher in statusabhängiger Gruppe verwenden
 {: #file_statefulset}
 
-Wenn Sie über eine statusabhängige App wie zum Beispiel eine Datenbank verfügen, können Sie statusabhängige Gruppen erstellen, von denen Dateispeicher zum Speichern der App-Daten verwendet wird. Alternativ können Sie eine {{site.data.keyword.Bluemix_notm}}-Database as a Service und die Daten in der Cloud speichern.
+Wenn Sie über eine statusabhängige App wie zum Beispiel eine Datenbank verfügen, können Sie statusabhängige Gruppen erstellen, von denen Dateispeicher zum Speichern der App-Daten verwendet wird. Alternativ können Sie eine {{site.data.keyword.cloud_notm}}-Database as a Service und die Daten in der Cloud speichern.
 {: shortdesc}
 
 **Worauf muss ich achten, wenn ich Dateispeicher zu einer statusabhängigen Gruppe hinzufüge?** </br>
@@ -825,9 +823,9 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
@@ -983,7 +981,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
 Wenn Sie die Speicherkapazität oder die Leistung erhöhen möchten, können Sie den vorhandenen Datenträger ändern.
 {: shortdesc}
 
-Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.Bluemix_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Dateifreigabekapazität erweitern](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
+Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.keyword.cloud_notm}}-Konsole zum Ändern Ihres Speichers finden Sie unter [Dateifreigabekapazität erweitern](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
 1. Listen Sie die PVCs in Ihrem Cluster auf und notieren Sie sich den Namen des zugehörigen persistenten Datenträgers in der Spalte **VOLUME**.
@@ -1023,7 +1021,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    ```
    {: screen}
 
-3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde Ihres Datenträgers in Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer).
+3. Ändern Sie die Größe oder die E/A-Operationen pro Sekunde (IOPS) Ihres Datenträgers in Ihrem Konto der IBM Cloud-Infrastruktur.
 
    Beispiel für einen Leistungsspeicher:
    ```
@@ -1038,7 +1036,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
    {: pre}
 
    <table>
-   <caption>Erklärung der Komponenten des Befehls</caption>
+   <caption>Erklärung der Befehlskomponenten</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Ideensymbol"/> Erklärung der YAML-Dateikomponenten</th>
    </thead>
@@ -1111,7 +1109,7 @@ Informationen zur Abrechnung und die Schritte zur Verwendung der {{site.data.key
 ## NFS-Standardversion ändern
 {: #nfs_version}
 
-Die Version des Dateispeichers bestimmt das Protokoll, das für die Kommunikation mit dem {{site.data.keyword.Bluemix_notm}}-Dateispeicherserver verwendet wird. Standardmäßig sind alle Dateispeicherinstanzen mit NFS Version 4 eingerichtet. Sie können das vorhandenen PV in eine ältere NFS-Version ändern, wenn Ihre App für einen ordnungsgemäßen Betrieb eine bestimmte Version benötigt.
+Die Version des Dateispeichers bestimmt das Protokoll, das für die Kommunikation mit dem {{site.data.keyword.cloud_notm}}-Dateispeicherserver verwendet wird. Standardmäßig sind alle Dateispeicherinstanzen mit NFS Version 4 eingerichtet. Sie können das vorhandenen PV in eine ältere NFS-Version ändern, wenn Ihre App für einen ordnungsgemäßen Betrieb eine bestimmte Version benötigt.
 {: shortdesc}
 
 Um die NFS-Standardversion zu ändern, können Sie entweder eine neue Speicherklasse erstellen, um den Dateispeicher dynamisch in Ihrem Cluster bereitzustellen, oder ändern Sie ein vorhandenes PV, der an den Pod angehängt ist.
@@ -1234,182 +1232,68 @@ Der Dateispeicher wird an derselben Position wie die Workerknoten in Ihrem Clust
 ## Speicherklassenreferenz
 {: #file_storageclass_reference}
 
-### Bronze
-{: #file_bronze}
+| Merkmale | Einstellung|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| Typ | [Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Dateisystem | NFS|
+| IOPS pro Gigabyte | 2|
+| Größenbereich in Gigabyte | 20-12000 Gi|
+| Festplatte | SSD|
+| Abrechnung | Stündlich|
+| Preisstruktur | [Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Dateispeicherklasse: bronze" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
-<table>
-<caption>Dateispeicherklasse: bronze</caption>
-<thead>
-<th>Merkmale</th>
-<th>Einstellung</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>Typ</td>
-<td>[Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Dateisystem</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS pro Gigabyte</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Größenbereich in Gigabyte</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Festplatte</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Abrechnung</td>
-<td>Stündlich</td>
-</tr>
-<tr>
-<td>Preisstruktur</td>
-<td>[Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Merkmale | Einstellung|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| Typ | [Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Dateisystem | NFS|
+| IOPS pro Gigabyte | 4|
+| Größenbereich in Gigabyte | 20-12000 Gi|
+| Festplatte | SSD|
+| Abrechnung | Stündlich|
+| Preisstruktur | [Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Dateispeicherklasse: silver" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| Merkmale | Einstellung|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| Typ | [Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Dateisystem | NFS|
+| IOPS pro Gigabyte | 10|
+| Größenbereich in Gigabyte | 20-4000 Gi|
+| Festplatte | SSD|
+| Abrechnung | Stündlich|
+| Preisstruktur | [Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Dateispeicherklasse: gold" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### Silver
-{: #file_silver}
-
-<table>
-<caption>Dateispeicherklasse: silver</caption>
-<thead>
-<th>Merkmale</th>
-<th>Einstellung</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>Typ</td>
-<td>[Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Dateisystem</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS pro Gigabyte</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Größenbereich in Gigabyte</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Festplatte</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Abrechnung</td>
-<td>Stündlich</li></ul></td>
-</tr>
-<tr>
-<td>Preisstruktur</td>
-<td>[Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Gold
-{: #file_gold}
-
-<table>
-<caption>Dateispeicherklasse: gold</caption>
-<thead>
-<th>Merkmale</th>
-<th>Einstellung</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>Typ</td>
-<td>[Endurance-Speicher](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Dateisystem</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS pro Gigabyte</td>
-<td>10</td>
-</tr>
-<tr>
-<td>Größenbereich in Gigabyte</td>
-<td>20-4000 Gi</td>
-</tr>
-<tr>
-<td>Festplatte</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Abrechnung</td>
-<td>Stündlich</li></ul></td>
-</tr>
-<tr>
-<td>Preisstruktur</td>
-<td>[Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Custom
-{: #file_custom}
-
-<table>
-<caption>Dateispeicherklasse: custom</caption>
-<thead>
-<th>Merkmale</th>
-<th>Einstellung</th>
-</thead>
-<tbody>
-<tr>
-<td>Name</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>Typ</td>
-<td>[Leistung](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>Dateisystem</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>E/A-Operationen pro Sekunde (IOPS) und Größe</td>
-<td><p><strong>Größenbereich in Gigabyte / IOPS-Bereich in Vielfachen von 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>Festplatte</td>
-<td>Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers. </br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul></td>
-</tr>
-<tr>
-<td>Abrechnung</td>
-<td>Stündlich</li></ul></td>
-</tr>
-<tr>
-<td>Preisstruktur</td>
-<td>[Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Merkmale | Einstellung|
+|:-----------------|:-----------------|
+| Name | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| Typ | [Leistung](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| Dateisystem | NFS|
+| E/A-Operationen pro Sekunde (IOPS) und Größe | <p><strong>Größenbereich in Gigabyte / IOPS-Bereich in Vielfachen von 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul>|
+| Festplatte | Das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde und Gigabyte bestimmt den Typ der Festplatte, die bereitgestellt wird. Um das Verhältnis zwischen der Anzahl E/A-Operationen pro Sekunde zu Gigabyte zu bestimmen, teilen Sie die Anzahl E/A-Operationen pro Sekunde durch die Größe Ihres Speichers. </br></br>Beispiel: </br>Sie wählen 500 Gigabyte (500Gi) Speicher mit 100 E/A-Operationen pro Sekunde. Ihr Verhältnis ist 0,2 (100 E/A-Operationen pro Sekunde/500 Gigabyte). </br></br><strong>Zuordnung Festplattentypen/Verhältnis – Übersicht:</strong><ul><li>Kleiner-gleich 0,3: SATA</li><li>Größer als 0,3: SSD</li></ul>|
+| Abrechnung | Stündlich|
+| Preisstruktur | [Informationen zur Preisstruktur ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Dateispeicherklasse: custom" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1602,3 +1486,6 @@ Mit der folgenden angepassten Speicherklasse können Sie die NFS-Version definie
    mountOptions: nfsvers=<nfs-version>
   ```
   {: codeblock}
+
+
+

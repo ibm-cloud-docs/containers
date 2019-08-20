@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -108,7 +108,7 @@ Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo d
     ```
     {:pre}
 
-3. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.Bluemix_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
+3. Dopo alcuni minuti, puoi visualizzare i tuoi log nel dashboard Kibana. Per accedere al dashboard Kibana, vai a uno dei seguenti URL e seleziona l'account {{site.data.keyword.cloud_notm}} in cui hai creato il cluster. Se hai specificato uno spazio durante la creazione del cluster, vai a tale spazio.
     - Stati Uniti Sud e Stati Uniti Est: `https://logging.ng.bluemix.net`
     - Regno Unito Sud: `https://logging.eu-gb.bluemix.net`
     - Europa centrale: `https://logging.eu-fra.bluemix.net`
@@ -199,11 +199,11 @@ Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
 -  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plugin e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
--   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
+-   Per vedere se {{site.data.keyword.cloud_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
-    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
+    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.cloud_notm}}, [richiedi un invito](https://cloud.ibm.com/kubernetes/slack) a questo Slack.
     {: tip}
--   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
+-   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.cloud_notm}}.
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
 {{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.

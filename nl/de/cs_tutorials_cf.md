@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ Dieses Lernprogramm richtet sich an Entwickler von Cloud Foundry-Apps.
 - [Erstellen Sie eine private Image-Registry in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Geben Sie als Ziel Ihrer CLI den Cluster an](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
+- Stellen Sie sicher, dass Sie über die folgenden {{site.data.keyword.cloud_notm}} IAM-Zugriffsrichtlinien für {{site.data.keyword.containerlong_notm}} verfügen:
     - [Beliebige Plattformrolle](/docs/containers?topic=containers-users#platform)
     - Die [Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform)
 - [Lernen Sie die Docker- und Kubernetes-Terminologie kennen](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
@@ -277,7 +277,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8
     ```
     {: screen}
 
@@ -287,7 +287,7 @@ Stellen Sie Ihre App als Container in einem Kubernetes-Cluster bereit.
 
 5.  [Starten Sie das Kubernetes-Dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Wenn Sie den Cluster in der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
+    Wenn Sie den Cluster in der [{{site.data.keyword.cloud_notm}}-Konsole](https://cloud.ibm.com/) auswählen, können Sie über die Schaltfläche **Kubernetes-Dashboard** das Dashboard mit einem einzigen Klick starten.
     {: tip}
 
 6. Auf der Registerkarte **Workloads** werden die von Ihnen erstellten Ressourcen angezeigt.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -35,13 +35,13 @@ Como um administrador de cluster, você deseja controlar o que acontece em seu c
 
 Com o controlador de admissão `PodSecurityPolicy`, nenhum pod pode ser criado até que você [autorize políticas](#customize_psp). A configuração de políticas de segurança de pod pode ter efeitos colaterais indesejados, portanto, certifique-se de testar uma implementação depois de mudar a política. Para implementar apps, as contas de usuário e de serviço devem ser todas autorizadas pelas políticas de segurança de pod que são necessárias para implementar pods. Por exemplo, se você instala apps usando [Helm](/docs/containers?topic=containers-helm#public_helm_install), o componente Helm tiller cria os pods e, portanto, deve-se ter a autorização de política de segurança de pod correta.
 
-Tentando controlar quais usuários têm acesso ao {{site.data.keyword.containerlong_notm}}? Consulte [Designando acesso ao cluster](/docs/containers?topic=containers-users#users) para configurar as permissões do {{site.data.keyword.Bluemix_notm}} IAM e de infraestrutura.
+Tentando controlar quais usuários têm acesso ao {{site.data.keyword.containerlong_notm}}? Consulte [Designando acesso ao cluster](/docs/containers?topic=containers-users#users) para configurar as permissões do {{site.data.keyword.cloud_notm}} IAM e de infraestrutura.
 {: tip}
 
 ** Há alguma política definida por padrão? O que posso incluir?**</br>
 Por padrão, o {{site.data.keyword.containerlong_notm}} configura o controlador de admissão `PodSecurityPolicy` com [recursos para o gerenciamento de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que não é possível excluir ou modificar. Também não é possível desativar o controlador de admissão.
 
-As ações de pod não são bloqueadas por padrão. Em vez disso, dois recursos de controle de acesso baseado em função (RBAC) no cluster autorizam todos os administradores, usuários, serviços e nós para criar pods privilegiados e não privilegiados. Os recursos RBAC adicionais são incluídos para portabilidade com pacotes do {{site.data.keyword.Bluemix_notm}} Private que são usados para [implementações híbridas](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+As ações de pod não são bloqueadas por padrão. Em vez disso, dois recursos de controle de acesso baseado em função (RBAC) no cluster autorizam todos os administradores, usuários, serviços e nós para criar pods privilegiados e não privilegiados. Os recursos RBAC adicionais são incluídos para portabilidade com pacotes do {{site.data.keyword.cloud_notm}} Private que são usados para [implementações híbridas](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 Se você deseja evitar que determinados usuários criem ou atualizem pods, é possível [modificar esses recursos RBAC ou criar o seu próprio](#customize_psp).
 
@@ -78,7 +78,7 @@ políticas permitem que os usuários criem e atualizem os pods privilegiados e n
 Antes de iniciar:
 *  [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Entender trabalhar com funções RBAC. Para obter mais informações, consulte [Autorizando usuários com funções RBAC customizadas do Kubernetes](/docs/containers?topic=containers-users#rbac) ou a [documentação do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Assegure-se de que você tenha a [função de acesso de serviço do **Manager** {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces.
+* Assegure-se de que você tenha a [função de acesso ao serviço **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para todos os namespaces.
 
 Quando você modifica a configuração padrão, é possível evitar ações de cluster importantes, como implementações de pod ou atualizações de cluster. Teste suas mudanças em um cluster não de produção do qual as outras equipes não dependem.
 {: important}

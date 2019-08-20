@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,25 +23,24 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Casi di utilizzo di governo per {{site.data.keyword.Bluemix_notm}}
+# Casi di utilizzo di governo per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
-Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} traggono vantaggio dal cloud pubblico. Questi carichi di lavoro sono isolati con Trusted Compute, si trovano in regioni globali per la sovranità dei dati, utilizzano il servizio di machine learning Watson invece di nuovo codice netto e si collegano ai database installati in loco.
+Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong}} traggono vantaggio dal cloud pubblico. Questi carichi di lavoro sono isolati in regioni globali per la sovranità dei dati, utilizzano il servizio di machine learning Watson invece di nuovo codice netto e si connettono ai database installati in loco.
 {: shortdesc}
 
 ## Il governo regionale migliora la collaborazione e la velocità con gli sviluppatori della comunità che combinano i dati pubblici e privati
 {: #uc_data_mashup}
 
-Un responsabile dei programmi OGD (Open-Government Data) deve condividere i dati pubblici con la comunità e il settore privato, ma i dati sono bloccati in un sistema monolitico installato in loco.
+Un responsabile dei programmi OGD (Open-Government Data) deve condividere i dati pubblici con la comunità e il settore privato, ma i dati sono bloccati in un sistema monolitico installato in loco. 
 {: shortdesc}
 
-Perché {{site.data.keyword.Bluemix_notm}}: con {{site.data.keyword.containerlong_notm}}, il responsabile fornisce il valore trasformativo dei dati pubblici e privati combinati. Allo stesso modo, il servizio fornisce la piattaforma cloud pubblica per il refactoring e l'esposizione di microservizi da applicazioni monolitiche in loco. Inoltre, il cloud pubblico consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione.
+Perché {{site.data.keyword.cloud_notm}}: con {{site.data.keyword.containerlong_notm}}, il responsabile fornisce il valore trasformativo dei dati pubblici e privati combinati. Allo stesso modo, il servizio fornisce la piattaforma cloud pubblica per il refactoring e l'esposizione di microservizi da applicazioni monolitiche in loco. Inoltre, il cloud pubblico consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione.
 
 Tecnologie chiave:    
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Strumenti nativi DevOps, incluse le toolchain aperte in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Fornisci l'accesso ai dati pubblici con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
+* [Fornisci l'accesso ai dati pubblici con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)
 * [Servizi IBM Cloud Analytics plug-and-play](https://www.ibm.com/cloud/analytics)
 
 **Contesto: il governo migliora la collaborazione e la velocità con gli sviluppatori della comunità che combinano i dati pubblici e privati**
@@ -69,7 +68,7 @@ Infine, le applicazioni basate su tali API condivise sono ospitate in {{site.dat
 * Monitoraggio dell'integrità e del recupero dei nodi di lavoro
 * Fornitura del calcolo globale, in modo che gli sviluppatori non debbano sostenere l'infrastruttura nelle regioni di tutto il mondo in cui necessitano di carichi di lavoro e dati
 
-Spostare i carichi di lavoro di calcolo in {{site.data.keyword.Bluemix_notm}} non è comunque sufficiente. Il governo deve anche passare attraverso una trasformazione di processi e metodi. Adottando le procedure di IBM Garage Method, il fornitore può implementare un processo di consegna agile e iterativo che supporta le moderne procedure di DevOps come CI/CD (Continuous Integration and Delivery).
+Spostare i carichi di lavoro di calcolo in {{site.data.keyword.cloud_notm}} non è comunque sufficiente. Il governo deve anche passare attraverso una trasformazione di processi e metodi. Adottando le procedure di IBM Garage Method, il fornitore può implementare un processo di consegna agile e iterativo che supporta le moderne procedure di DevOps come CI/CD (Continuous Integration and Delivery).
 
 Gran parte dello stesso processo CI/CD è automatizzato con {{site.data.keyword.contdelivery_full}} nel cloud. Il fornitore può definire toolchain del flusso di lavoro per preparare le immagini del contenitore, verificare la presenza di vulnerabilità e distribuirle nel cluster Kubernetes.
 
@@ -100,7 +99,7 @@ Soluzione tecnica:
 * Adotta le procedure di sviluppo agili e iterative di IBM Garage Method per consentire frequenti rilasci di funzioni, patch e correzioni senza tempi di inattività.
 * Sia che gli sviluppatori siano nel settore pubblico o privato, {{site.data.keyword.contdelivery_full}} li aiuta a fornire rapidamente una toolchain integrata, utilizzando template personalizzabili e condivisibili.
 * Dopo che gli sviluppatori hanno creato e testato le applicazioni nei propri cluster di sviluppo e test, utilizzano le toolchain {{site.data.keyword.contdelivery_full}} per distribuire le applicazioni nei cluster di produzione.
-* Con gli strumenti Watson di intelligenza artificiale, apprendimento automatico e apprendimento approfondito disponibili nel catalogo {{site.data.keyword.Bluemix_notm}}, gli sviluppatori si concentrano sui problemi di dominio. Invece del codice ML univoco personalizzato, la logica ML viene inserita nelle applicazioni con i bind dei servizi.
+* Con gli strumenti Watson di intelligenza artificiale, apprendimento automatico e apprendimento approfondito disponibili nel catalogo {{site.data.keyword.cloud_notm}}, gli sviluppatori si concentrano sui problemi di dominio. Invece del codice ML univoco personalizzato, la logica ML viene inserita nelle applicazioni con i bind dei servizi.
 
 **Risultati**
 * Le generalmente lente collaborazioni tra pubblico e privato adesso attivano le applicazioni rapidamente, in settimane invece che in mesi. Queste collaborazioni di sviluppo offrono ora funzioni e correzioni di bug fino a 10 volte a settimana.
@@ -114,7 +113,7 @@ Soluzione tecnica:
 I responsabili IT per una società di spedizione privata e il porto gestito dal governo devono connettersi, fornire visibilità e scambiare in modo sicuro le informazioni sui porti. Ma non esisteva un sistema unificato per collegare le informazioni sui porti pubbliche e i manifesti di carico privati.
 {: shortdesc}
 
-Perché {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione. I contenitori hanno fornito una piattaforma condivisibile in cui sia la società portuale che quella di spedizione avevano la garanzia che le informazioni condivise fossero ospitate su una piattaforma sicura. E tale piattaforma si ridimensiona quando si passa da piccoli sistemi di sviluppo e test a grandi sistemi di produzione. Le toolchain aperte hanno accelerato ulteriormente lo sviluppo mediante l'automazione di build, test e distribuzioni.
+Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} consente al governo e alle associazioni pubbliche di utilizzare servizi cloud esterni e strumenti open source adatti alla collaborazione. I contenitori hanno fornito una piattaforma condivisibile in cui sia la società portuale che quella di spedizione avevano la garanzia che le informazioni condivise fossero ospitate su una piattaforma sicura. E tale piattaforma si ridimensiona quando si passa da piccoli sistemi di sviluppo e test a grandi sistemi di produzione. Le toolchain aperte hanno accelerato ulteriormente lo sviluppo mediante l'automazione di build, test e distribuzioni.
 
 Tecnologie chiave:    
 * [Cluster che si adattano a diverse esigenze di CPU, RAM e archiviazione](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -140,7 +139,7 @@ Quindi creano una collaborazione dedicata alle soluzioni per il sistema commerci
 
 Gli sviluppatori hanno iniziato distribuendo le loro applicazioni in contenitori con {{site.data.keyword.containerlong_notm}}. Hanno creato cluster per un ambiente di sviluppo condiviso che consentono agli sviluppatori di tutto il mondo di distribuire rapidamente e in modo collaborativo i miglioramenti alle applicazioni. I contenitori consentono a ciascun team di sviluppo di utilizzare la lingua di loro scelta.
 
-La sicurezza prima di tutto: i responsabili IT hanno scelto Trusted Compute per bare metal per ospitare i cluster. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro doganali sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico. Bare metal fornisce Trusted Compute, che è in grado di verificare eventuali manomissioni dell'hardware sottostante.
+La sicurezza prima di tutto: i responsabili IT hanno scelto i cluster bare metal. Con bare metal per {{site.data.keyword.containerlong_notm}}, i carichi di lavoro doganali sensibili ora hanno un isolamento familiare ma all'interno della flessibilità del cloud pubblico.
 
 Poiché la società di spedizione vuole anche lavorare con altri porti, la sicurezza delle applicazioni è fondamentale. I manifesti di carico e le informazioni doganali sono altamente confidenziali. Da tale nucleo sicuro, Vulnerability Advisor fornisce le seguenti scansioni:
 * Scansioni dei punti vulnerabili delle immagini
@@ -150,14 +149,14 @@ Poiché la società di spedizione vuole anche lavorare con altri porti, la sicur
 
 Allo stesso tempo, {{site.data.keyword.iamlong}} aiuta a controllare chi ha accesso alle risorse e a quale livello.
 
-Gli sviluppatori si concentrano sui problemi di dominio, utilizzando gli strumenti esistenti: invece di scrivere un codice di registrazione e monitoraggio univoco, lo inseriscono nelle applicazioni, eseguendo il bind dei servizi {{site.data.keyword.Bluemix_notm}} nei cluster. Gli sviluppatori vengono inoltre liberati dalle attività di gestione dell'infrastruttura perché IBM si occupa di Kubernetes e degli aggiornamenti dell'infrastruttura, della sicurezza e altro ancora.
+Gli sviluppatori si concentrano sui problemi di dominio, utilizzando gli strumenti esistenti: invece di scrivere un codice di registrazione e monitoraggio univoco, lo inseriscono nelle applicazioni, eseguendo il bind dei servizi {{site.data.keyword.cloud_notm}} nei cluster. Gli sviluppatori vengono inoltre liberati dalle attività di gestione dell'infrastruttura perché IBM si occupa di Kubernetes e degli aggiornamenti dell'infrastruttura, della sicurezza e altro ancora.
 
 **Modello di soluzione**
 
 Kit starter Node, archiviazione e calcolo su richiesta eseguiti nel cloud pubblico con accesso sicuro ai dati di spedizione in tutto il mondo, a seconda delle necessità. Il calcolo nei cluster è a prova di manomissione e isolato su bare metal.  
 
 Soluzione tecnica:
-* {{site.data.keyword.containerlong_notm}} con Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * IBM {{site.data.keyword.SecureGateway}}
@@ -187,3 +186,5 @@ Soluzione tecnica:
 * I clienti di spedizione e i funzionari governativi hanno accesso ai dati dei manifesti di carico e possono condividere i dati doganali, rispettando al contempo le normative locali.
 * La società di spedizione beneficia di una migliore gestione logistica nella catena di fornitura: costi ridotti e tempi di sdoganamento più rapidi.
 * Il 99% sono dichiarazioni digitali e il 90% delle importazioni viene elaborato senza l'intervento umano.
+
+

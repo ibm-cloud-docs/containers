@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,7 +38,7 @@ Hai esposto pubblicamente la tua applicazione creando una risorsa Ingress per la
 Assicurati di definire un host in una sola risorsa Ingress. Se un host è definito in più risorse Ingress, l'ALB potrebbe non inoltrare correttamente il traffico e potresti riscontrare degli errori.
 {: tip}
 
-Prima di iniziare, assicurati di disporre delle seguenti [politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+Prima di iniziare, assicurati di disporre delle seguenti [politiche di accesso {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
   - Ruolo della piattaforma **Editor** o **Amministratore** per il cluster
   - Ruolo del servizio **Scrittore** o **Gestore**
 
@@ -133,6 +133,8 @@ Inizia controllando l'eventuale presenza di messaggi di errore negli eventi di d
         ibmcloud ks alb-configure --albID <ALB_ID> --enable
         ```
         {: pre}
+        Quando il pod viene riavviato, un [controllo della disponibilità](/docs/containers?topic=containers-ingress-settings#readiness-check) impedisce che il pod ALB provi a instradare le richieste di traffico fino a quando non vengono analizzati tutti i file di risorse Ingress. Il controllo della disponibilità impedisce la perdita di richieste e può impiegare, per impostazione predefinita, fino a 5 minuti.
+        {: note}
 
 3. Verifica i log del tuo ALB.
     1.  Ottieni gli ID dei pod ALB che sono in esecuzione nel tuo cluster.
@@ -185,7 +187,7 @@ Controlla la disponibilità del tuo dominio secondario Ingress e degli indirizzi
         * Se la CLI restituisce un timeout e hai un firewall personalizzato che sta proteggendo i tuoi di nodi di lavoro, assicurati di consentire ICMP nel tuo [firewall](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * Se non c'è alcun firewall che sta bloccando i ping e l'esecuzione dei ping continua comunque fino a una condizione di timeout, [controlla lo stato dei tuoi pod ALB](#check_pods).
 
-    * Solo cluster multizona: puoi utilizzare il controllo dell'integrità MZLB per determinare lo stato dei tuoi IP ALB. Per ulteriori informazioni sull'MZLB, vedi [Programma di bilanciamento del carico multizona (o MZLB, multizone load balancer)](/docs/containers?topic=containers-ingress#planning). Il controllo dell'integrità MZLB è disponibile solo per i cluster che hanno il nuovo dominio secondario Ingress nel formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se il tuo cluster utilizza ancora il formato meno recente di `<cluster_name>.<region>.containers.mybluemix.net`, [converti il tuo cluster a zona singola in multizona](/docs/containers?topic=containers-add_workers#add_zone). Al tuo cluster viene assegnato un dominio secondario con il nuovo formato ma può anche continuare a utilizzare il formato di dominio secondario meno recente. In alternativa, puoi ordinare un nuovo cluster a cui viene automaticamente assegnato il nuovo formato di dominio secondario.
+    * Solo cluster multizona: puoi utilizzare il controllo dell'integrità MZLB per determinare lo stato dei tuoi IP ALB. Per ulteriori informazioni sull'MZLB, vedi [Programma di bilanciamento del carico multizona (o MZLB, multizone load balancer)](/docs/containers?topic=containers-ingress-about#ingress_components). Il controllo dell'integrità MZLB è disponibile solo per i cluster che hanno il nuovo dominio secondario Ingress nel formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Se il tuo cluster utilizza ancora il formato meno recente di `<cluster_name>.<region>.containers.mybluemix.net`, [converti il tuo cluster a zona singola in multizona](/docs/containers?topic=containers-add_workers#add_zone). Al tuo cluster viene assegnato un dominio secondario con il nuovo formato ma può anche continuare a utilizzare il formato di dominio secondario meno recente. In alternativa, puoi ordinare un nuovo cluster a cui viene automaticamente assegnato il nuovo formato di dominio secondario.
 
     Il seguente comando HTTP cURL utilizza l'host `albhealth`, che è configurato da {{site.data.keyword.containerlong_notm}} per restituire lo stato `healthy` o `unhealthy` per un IP ALB.
         ```
@@ -430,11 +432,11 @@ Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
 -  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plugin e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
--   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
+-   Per vedere se {{site.data.keyword.cloud_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
-    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
+    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.cloud_notm}}, [richiedi un invito](https://cloud.ibm.com/kubernetes/slack) a questo Slack.
     {: tip}
--   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
+-   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.cloud_notm}}.
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
 {{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.

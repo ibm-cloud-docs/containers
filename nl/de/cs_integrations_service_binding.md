@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -28,43 +28,63 @@ subcollection: containers
 # Services durch Binden von IBM Cloud-Services hinzufügen
 {: #service-binding}
 
-Fügen Sie {{site.data.keyword.Bluemix_notm}}-Services hinzu, um Ihren Kubernetes-Cluster mit zusätzlichen Funktionen in Bereichen wie Watson AI, Daten, Sicherheit und Internet of Things (IoT) zu erweitern.
+Fügen Sie {{site.data.keyword.cloud_notm}}-Services hinzu, um Ihren Kubernetes-Cluster mit zusätzlichen Funktionen in Bereichen wie Watson AI, Daten, Sicherheit und Internet of Things (IoT) zu erweitern.
 {:shortdesc}
 
 **Welche Arten von Services kann ich an meinen Cluster binden?** </br>
-Wenn Sie {{site.data.keyword.Bluemix_notm}}-Services zu Ihrem Cluster hinzufügen, können Sie zwischen Services mit Fähigkeit für {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) und Services, die auf Cloud Foundry basieren, wählen. IAM-fähige Services bieten eine differenziertere Zugriffssteuerung und können in einer {{site.data.keyword.Bluemix_notm}}-Ressourcengruppe verwaltet werden. Cloud Foundry-Services müssen zu einer Cloud Foundry-Organisation und einem Bereich hinzugefügt werden und können keiner Ressourcengruppe hinzugefügt werden. Zum Steuern des Zugriffs auf Ihre Cloud Foundry-Serviceinstanz verwenden Sie Cloud Foundry-Rollen. Weitere Informationen zu IAM-fähigen Services und Cloud Foundry-Services finden Sie unter [Was ist eine Ressource?](/docs/resources?topic=resources-resource#resource).
+Wenn Sie {{site.data.keyword.cloud_notm}}-Services zu Ihrem Cluster hinzufügen, können Sie zwischen Services mit Fähigkeit für {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) und Services, die auf Cloud Foundry basieren, wählen. IAM-fähige Services bieten eine differenziertere Zugriffssteuerung und können in einer {{site.data.keyword.cloud_notm}}-Ressourcengruppe verwaltet werden. Cloud Foundry-Services müssen zu einer Cloud Foundry-Organisation und einem Bereich hinzugefügt werden und können keiner Ressourcengruppe hinzugefügt werden. Zum Steuern des Zugriffs auf Ihre Cloud Foundry-Serviceinstanz verwenden Sie Cloud Foundry-Rollen. Weitere Informationen zu IAM-fähigen Services und Cloud Foundry-Services finden Sie unter [Was ist eine Ressource?](/docs/resources?topic=resources-resource#resource).
 
-Eine Liste der unterstützten {{site.data.keyword.Bluemix_notm}}-Services finden Sie im [{{site.data.keyword.Bluemix_notm}}-Katalog](https://cloud.ibm.com/catalog).
+Eine Liste der unterstützten {{site.data.keyword.cloud_notm}}-Services finden Sie im [{{site.data.keyword.cloud_notm}}-Katalog](https://cloud.ibm.com/catalog).
 
-**Was ist eine {{site.data.keyword.Bluemix_notm}}-Servicebindung?**</br>
-Die Servicebindung ist eine schnelle Methode zum Erstellen von Serviceberechtigungsnachweisen für einen {{site.data.keyword.Bluemix_notm}}-Service und zum Speichern dieser Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in Ihrem Cluster. Zum Binden eines Service an Ihren Cluster müssen Sie zuerst eine Instanz des Service bereitstellen. Anschließend verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind`, um die Serviceberechtigungsnachweise und den geheimen Kubernetes-Schlüssel zu erstellen. Der geheime Kubernetes-Schlüssel wird automatisch in 'etcd' verschlüsselt, um Ihre Daten zu schützen.
+**Was ist eine {{site.data.keyword.cloud_notm}}-Servicebindung?**</br>
+Die Servicebindung ist eine schnelle Methode zum Erstellen von Serviceberechtigungsnachweisen für einen {{site.data.keyword.cloud_notm}}-Service unter Verwendung des zugehörigen öffentlichen Serviceendpunkts und zum Speichern dieser Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel in Ihrem Cluster. Zum Binden eines Service an Ihren Cluster müssen Sie zuerst eine Instanz des Service bereitstellen. Anschließend verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind`, um die Serviceberechtigungsnachweise und den geheimen Kubernetes-Schlüssel zu erstellen. Der geheime Kubernetes-Schlüssel wird automatisch in 'etcd' verschlüsselt, um Ihre Daten zu schützen.
 
-Sollen die geheimen Schlüssel noch sicherer werden? Wenden Sie sich zur [Aktivierung von {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) im Cluster an Ihren Clusteradministrator, um neue und vorhandene geheime Schlüssel zu verschlüsseln, zum Beispiel den geheimen Schlüssel, in dem die Berechtigungsnachweise der {{site.data.keyword.Bluemix_notm}}-Serviceinstanzen enthalten sind.
+Sollen die geheimen Schlüssel noch sicherer werden? Wenden Sie sich zur [Aktivierung von {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) im Cluster an Ihren Clusteradministrator, um neue und vorhandene geheime Schlüssel zu verschlüsseln, zum Beispiel den geheimen Schlüssel, in dem die Berechtigungsnachweise der {{site.data.keyword.cloud_notm}}-Serviceinstanzen enthalten sind.
 {: tip}
 
-**Kann ich alle {{site.data.keyword.Bluemix_notm}}-Services in meinem Cluster verwenden?**</br>
-Sie können die Servicebindung nur für Services verwenden, die Serviceschlüssel unterstützen, sodass die Serviceberechtigungsnachweise automatisch erstellt und in einem geheimen Kubernetes-Schlüssel gespeichert werden können. Eine Liste der Services, die Serviceschlüssel unterstützen, finden Sie im Abschnitt [Externen Apps die Verwendung von {{site.data.keyword.Bluemix_notm}}-Services ermöglichen](/docs/resources?topic=resources-externalapp#externalapp).
+**Ich habe bereits einen {{site.data.keyword.cloud_notm}}-Service. Kann ich die {{site.data.keyword.cloud_notm}}-Servicebindung trotzdem verwenden?**</br>
+Ja, Sie können Services verwenden, die den Namensanforderungen entsprechen, und die Serviceberechtigungsnachweise wiederverwenden. 
+
+* **Benennung**: Stellen Sie sicher, dass der Servicename im folgenden Regex-Format vorliegt. Beispiele für zulässige Namen sind `myservice` oder `example.com`. Zu den nicht zulässigen Zeichen gehören Leerzeichen und Unterstreichungszeichen.
+  ```
+  [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+  ```
+  {: screen}
+* **Serviceberechtigungsnachweise**: Wenn Sie Ihre vorhandenen Serviceberechtigungsnachweise verwenden möchten, geben Sie das Flag `--key` im Befehl `ibmcloud ks cluster-service-bind` an und geben Sie den Namen Ihrer Serviceberechtigungsnachweise an. Die {{site.data.keyword.cloud_notm}}-Servicebindung erstellt automatisch einen geheimen Kubernetes-Schlüssel mit Ihren bestehenden Serviceberechtigungsnachweisen. 
+
+**Was wäre, wenn ich Serviceberechtigungsnachweise nutzen möchte, die den privaten Serviceendpunkt verwenden?**</br>
+Der Befehl `ibmcloud ks cluster-service-bind` erstellt standardmäßig Serviceberechtigungsnachweise mit dem öffentlichen Serviceendpunkt. Wenn Sie den privaten Serviceendpunkt verwenden möchten, müssen Sie manuell Serviceberechtigungsnachweise für Ihren Service erstellen, die den privaten Serviceendpunkt verwenden, anschließend müssen Sie die Option `-- key` verwenden, um den Namen der bestehenden Serviceberechtigungsnachweise anzugeben.  
+
+Ihr Service unterstützt möglicherweise noch keine privaten Serviceendpunkte. Wenn Sie einen ausschließlich privaten Cluster (private-only) haben, müssen Sie Serviceberechtigungsnachweise nutzen, die den privaten Serviceendpunkt verwenden, oder Sie müssen die öffentliche IP-Adresse und den Port für die Verbindung zu Ihrem Service öffnen. 
+
+**Kann ich alle {{site.data.keyword.cloud_notm}}-Services in meinem Cluster verwenden?**</br>
+Sie können die Servicebindung nur für Services verwenden, die Serviceschlüssel unterstützen, sodass die Serviceberechtigungsnachweise automatisch erstellt und in einem geheimen Kubernetes-Schlüssel gespeichert werden können. Eine Liste der Services, die Serviceschlüssel unterstützen, finden Sie im Abschnitt [Externen Apps die Verwendung von {{site.data.keyword.cloud_notm}}-Services ermöglichen](/docs/resources?topic=resources-externalapp#externalapp).
 
 Services, die keine Serviceschlüssel unterstützen, stellen in der Regel eine API bereit, die Sie in Ihrer App verwenden können. Die Servicebindungsmethode konfiguriert den API-Zugriff für Ihre App nicht automatisch. Lesen Sie die API-Dokumentation zu Ihrem Service und implementieren Sie die API-Schnittstelle in Ihrer App.
 
 ## IBM Cloud-Services zu Clustern hinzufügen
 {: #bind-services}
 
-Verwenden Sie die {{site.data.keyword.Bluemix_notm}}-Servicebindung, um automatisch Serviceberechtigungsnachweise für Ihre {{site.data.keyword.Bluemix_notm}}-Services zu erstellen und diese in einem geheimen Kubernetes-Schlüssel zu speichern.
+Verwenden Sie die {{site.data.keyword.cloud_notm}}-Servicebindung, um automatisch Serviceberechtigungsnachweise für Ihre {{site.data.keyword.cloud_notm}}-Services zu erstellen und diese in einem geheimen Kubernetes-Schlüssel zu speichern.
 {: shortdesc}
 
 Vorbereitende Schritte:
 - Stellen Sie sicher, dass Sie die folgenden Rollen innehaben:
-    - [Die {{site.data.keyword.Bluemix_notm}} IAM-Plattform-Zugriffsrolle](/docs/containers?topic=containers-users#platform) **Editor** oder **Administrator** für den Cluster, in dem Sie einen Service binden möchten
-    - [Die {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle](/docs/containers?topic=containers-users#platform) **Schreibberechtigter** oder **Manager** für den Kubernetes-Namensbereich, in dem Sie den Service binden möchten
+    - [Die {{site.data.keyword.cloud_notm}} IAM-Plattform-Zugriffsrolle](/docs/containers?topic=containers-users#platform) **Editor** oder **Administrator** für den Cluster, in dem Sie einen Service binden möchten
+    - [Die {{site.data.keyword.cloud_notm}} IAM-Servicerolle](/docs/containers?topic=containers-users#platform) **Schreibberechtigter** oder **Manager** für den Kubernetes-Namensbereich, in dem Sie den Service binden möchten
     - Für Cloud Foundry-Services: [Die Cloud Foundry-Rolle](/docs/iam?topic=iam-mngcf#mngcf) **Entwickler** für den Bereich, in dem Sie den Service bereitstellen möchten
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm}}-Service hinzuzufügen:
+Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.cloud_notm}}-Service hinzuzufügen:
 
-1. [Erstellen Sie eine Instanz des {{site.data.keyword.Bluemix_notm}}-Service](/docs/resources?topic=resources-externalapp#externalapp).
-    * Bestimmte {{site.data.keyword.Bluemix_notm}}-Services sind nur in ausgewählten Regionen verfügbar. Sie können einen Service nur an Ihren Cluster binden, wenn der Service in derselben Region wie Ihr Cluster verfügbar ist. Wenn Sie eine Serviceinstanz in der Zone 'Washington DC' erstellen wollen, müssen Sie außerdem die CLI verwenden.
+1. [Erstellen Sie eine Instanz des {{site.data.keyword.cloud_notm}}-Service](/docs/resources?topic=resources-externalapp#externalapp).
+    * Bestimmte {{site.data.keyword.cloud_notm}}-Services sind nur in ausgewählten Regionen verfügbar. Sie können einen Service nur an Ihren Cluster binden, wenn der Service in derselben Region wie Ihr Cluster verfügbar ist. Wenn Sie eine Serviceinstanz in der Zone 'Washington DC' erstellen wollen, müssen Sie außerdem die CLI verwenden.
     * **Für IAM-fähige Services**: Sie müssen die Serviceinstanz in derselben Ressourcengruppe wie den Cluster erstellen. Ein Service kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich.
+    * Stellen Sie sicher, dass der Servicename im folgenden Regex-Format vorliegt. Beispiele für zulässige Namen sind `myservice` oder `example.com`. Zu den nicht zulässigen Zeichen gehören Leerzeichen und Unterstreichungszeichen.
+      ```
+      [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+      ```
+      {: screen}
 
 2. Überprüfen Sie den Servicetyp, den Sie erstellt haben, und notieren Sie die Serviceinstanz **Name**.
    - **Cloud Foundry-Services:**
@@ -80,7 +100,7 @@ Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm
      ```
      {: screen}
 
-  - **{{site.data.keyword.Bluemix_notm}}IAM-fähige Services:**
+  - **{{site.data.keyword.cloud_notm}}IAM-fähige Services:**
      ```
      ibmcloud resource service-instances
      ```
@@ -93,7 +113,7 @@ Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm
      ```
      {: screen}
 
-   Sie können die verschiedenen Servicetypen auch in Ihrem {{site.data.keyword.Bluemix_notm}}-Dashboard als **Cloud Foundry-Services** und **Services** sehen.
+   Sie können die verschiedenen Servicetypen auch in Ihrem {{site.data.keyword.cloud_notm}}-Dashboard als **Cloud Foundry-Services** und **Services** sehen.
 
 3. Geben Sie den Clusternamensbereich an, den Sie verwenden wollen, um Ihren Service hinzuzufügen.
    ```
@@ -101,7 +121,11 @@ Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm
    ```
    {: pre}
 
-4. Binden Sie den Service an Ihren Cluster, um die Serviceberechtigungsnachweise für Ihren Service zu erstellen und die Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel zu speichern. Wenn Sie bereits über Serviceberechtigungsnachweise verfügen, verwenden Sie das Flag `--key`, um die Berechtigungsnachweise anzugeben. Für IAM-fähige Services werden die Berechtigungsnachweise automatisch mit der Servicezugriffsrolle **Schreibberechtigter** erstellt. Sie können aber auch das Flag `--role` verwenden, um eine andere Servicezugriffsrolle anzugeben. Wenn Sie das Flag `--key` verwenden, geben Sie das Flag `--role` nicht an.
+4. Binden Sie den Service an Ihren Cluster, um Serviceberechtigungsnachweise für Ihren Service zu erstellen, die den öffentlichen Serviceendpunkt verwenden und die Berechtigungsnachweise in einem geheimen Kubernetes-Schlüssel speichern. Wenn Sie bereits über Serviceberechtigungsnachweise verfügen, verwenden Sie das Flag `--key`, um den Namen der Berechtigungsnachweise anzugeben. Für IAM-fähige Services werden die Berechtigungsnachweise automatisch mit der Servicezugriffsrolle **Schreibberechtigter** erstellt. Sie können aber auch das Flag `--role` verwenden, um eine andere Servicezugriffsrolle anzugeben. Wenn Sie das Flag `--key` verwenden, geben Sie das Flag `--role` nicht an.
+
+   Wenn Ihr Service private Serviceendpunkte unterstützt, können Sie die Serviceberechtigungsnachweise manuell mit dem privaten Serviceendpunkt erstellen und anschließend den Namen Ihrer Berechtigungsnachweise mit dem Flag `--key` angeben.
+   {: tip}
+   
    ```
    ibmcloud ks cluster-service-bind --cluster <clustername_oder-id> --namespace <namensbereich> --service <serviceinstanzname> [--key <serviceinstanzschlüssel>] [--role <iam-servicerolle>]
    ```
@@ -158,7 +182,7 @@ Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm
       ```
       {: screen}
 
-   3. Optional: Vergleichen Sie die Serviceberechtigungsnachweise, die Sie im vorherigen Schritt decodiert haben, mit den Serviceberechtigungsnachweisen, die Sie für Ihre Serviceinstanz im {{site.data.keyword.Bluemix_notm}}-Dashboard finden.
+   3. Optional: Vergleichen Sie die Serviceberechtigungsnachweise, die Sie im vorherigen Schritt decodiert haben, mit den Serviceberechtigungsnachweisen, die Sie für Ihre Serviceinstanz im {{site.data.keyword.cloud_notm}}-Dashboard finden.
 
 6. Ihr Service ist nun an Ihren Cluster gebunden und Sie müssen Ihre App für den [Zugriff auf die Serviceberechtigungsnachweise im geheimen Kubernetes-Schlüssel](#adding_app) konfigurieren.
 
@@ -166,7 +190,7 @@ Gehen Sie wie folgt vor, um Ihrem Cluster einen {{site.data.keyword.Bluemix_notm
 ## Über Apps auf Serviceberechtigungsnachweise zugreifen
 {: #adding_app}
 
-Um über Ihre App auf eine {{site.data.keyword.Bluemix_notm}}-Serviceinstanz zuzugreifen, müssen Sie die im geheimen Kubernetes-Schlüssel gespeicherten Serviceberechtigungsnachweise für Ihre App verfügbar machen.
+Um über Ihre App auf eine {{site.data.keyword.cloud_notm}}-Serviceinstanz zuzugreifen, müssen Sie die im geheimen Kubernetes-Schlüssel gespeicherten Serviceberechtigungsnachweise für Ihre App verfügbar machen.
 {: shortdesc}
 
 Die Berechtigungsnachweise einer Serviceinstanz sind Base64-codiert und werden in Ihrem geheimen Schlüssel im JSON-Format gespeichert. Wählen Sie eine der folgenden Optionen aus, um auf die Daten in Ihrem geheimen Schlüssel zuzugreifen:
@@ -175,14 +199,14 @@ Die Berechtigungsnachweise einer Serviceinstanz sind Base64-codiert und werden i
 <br>
 
 Vorbereitende Schritte:
--  Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
+-  Stellen Sie sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [Fügen Sie einen {{site.data.keyword.Bluemix_notm}}-Service zu Ihrem Cluster hinzu](#bind-services).
+- [Fügen Sie einen {{site.data.keyword.cloud_notm}}-Service zu Ihrem Cluster hinzu](#bind-services).
 
 ### Geheimen Schlüssel als Datenträger an Ihren Pod anhängen
 {: #mount_secret}
 
-Wenn Sie den geheimen Schlüssel als Datenträger an Ihren Pod anhängen, wird eine Datei mit dem Namen `binding` im Mountverzeichnis des Datenträgers gespeichert. Die Datei `binding` im JSON-Format enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.Bluemix_notm}}-Service zuzugreifen.
+Wenn Sie den geheimen Schlüssel als Datenträger an Ihren Pod anhängen, wird eine Datei mit dem Namen `binding` im Mountverzeichnis des Datenträgers gespeichert. Die Datei `binding` im JSON-Format enthält sämtliche Informationen und Berechtigungsnachweise, die Sie benötigen, um auf den {{site.data.keyword.cloud_notm}}-Service zuzugreifen.
 {: shortdesc}
 
 1.  Listen Sie die verfügbaren geheimen Schlüssel in Ihrem Cluster auf und notieren Sie den **Namen** Ihres geheimen Schlüssels. Suchen Sie nach einem Schlüssel des Typs **Opaque**. Sollten mehrere geheime Schlüssel vorhanden sein, wenden Sie sich an Ihren Clusteradministrator, damit dieser den geheimen Schlüssel für den gewünschten Service ermittelt.
@@ -312,7 +336,7 @@ Wenn Sie den geheimen Schlüssel als Datenträger an Ihren Pod anhängen, wird e
 ### Auf den geheimen Schlüssel in Umgebungsvariablen verweisen
 {: #reference_secret}
 
-Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare aus Ihrem geheimen Kubernetes-Schlüssel als Umgebungsvariablen zur Ihrer Bereitstellung hinzufügen.
+Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare aus Ihrem geheimen Kubernetes-Schlüssel als Umgebungsvariablen zu Ihrer Bereitstellung hinzufügen.
 {: shortdesc}
 
 1. Listen Sie die verfügbaren geheimen Schlüssel in Ihrem Cluster auf und notieren Sie den **Namen** Ihres geheimen Schlüssels. Suchen Sie nach einem Schlüssel des Typs **Opaque**. Sollten mehrere geheime Schlüssel vorhanden sein, wenden Sie sich an Ihren Clusteradministrator, damit dieser den geheimen Schlüssel für den gewünschten Service ermittelt.
@@ -438,7 +462,7 @@ Sie können die Serviceberechtigungsnachweise und andere Schlüssel/Wert-Paare a
 
       Beispielausgabe:
       ```
-      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      BINDING={"apikey":"<API_key>","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"<password>","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
       ```
       {: screen}
 

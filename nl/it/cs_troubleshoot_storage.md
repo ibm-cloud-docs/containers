@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,6 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
-
 # Risoluzione dei problemi dell'archiviazione cluster
 {: #cs_troubleshoot_storage}
 
@@ -41,56 +40,56 @@ Se hai un problema più generale, prova a [eseguire il debug del cluster](/docs/
 ## Debug di errori degli archivi permanenti
 {: #debug_storage}
 
-Rivedi le opzioni per eseguire il debug dell'archiviazione permanente e trovare le cause principali degli errori.
+Rivedi le opzioni per eseguire il debug dell'archiviazione persistente e trovare le cause principali degli errori.
 {: shortdesc}
 
-1. Accertati di utilizzare la versione più recente di {{site.data.keyword.Bluemix_notm}} e del plug-in {{site.data.keyword.containerlong_notm}}. 
+1. Accertati di utilizzare la versione più recente di {{site.data.keyword.cloud_notm}} e del plug-in {{site.data.keyword.containerlong_notm}}.
    ```
    ibmcloud update
    ```
    {: pre}
-   
+
    ```
    ibmcloud plugin repo-plugins
    ```
    {: pre}
 
-2. Verifica che la versione della CLI di `kubectl` eseguita sulla macchina locale corrisponda alla versione Kubernetes installata nel tuo cluster. 
+2. Verifica che la versione della CLI di `kubectl` eseguita sulla macchina locale corrisponda alla versione Kubernetes installata nel tuo cluster.
    1. Visualizza la versione della CLI di `kubectl` installata nel tuo cluster e la tua macchina locale.
       ```
       kubectl version
       ```
-      {: pre} 
-   
-      Output di esempio: 
+      {: pre}
+
+      Output di esempio:
       ```
       Client Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
       Server Version: version.Info{Major:"1", Minor:"13", GitVersion:"v1.13.5+IKS", GitCommit:"e15454c2216a73b59e9a059fd2def4e6712a7cf0", GitTreeState:"clean", BuildDate:"2019-04-01T10:08:07Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
       ```
       {: screen}
-    
+
       Le versioni delle CLI corrispondono se la versione visualizzata per il client e per il server in `GitVersion` è la stessa. Puoi ignorare la parte `+IKS` della versione del server.
-   2. Se le versioni della CLI di `kubectl` eseguita nella tua macchina locale e nel tuo cluster non corrispondono, [aggiorna il tuo cluster](/docs/containers?topic=containers-update) o [installa una versione diversa della CLI sulla tua macchina locale](/docs/containers?topic=containers-cs_cli_install#kubectl). 
+   2. Se le versioni della CLI di `kubectl` eseguita nella tua macchina locale e nel tuo cluster non corrispondono, [aggiorna il tuo cluster](/docs/containers?topic=containers-update) o [installa una versione diversa della CLI sulla tua macchina locale](/docs/containers?topic=containers-cs_cli_install#kubectl).
 
-3. Solo per l'archiviazione blocchi, l'archiviazione oggetti e Portworx: accertati di aver [installato il server Helm Tiller con un account di servizi Kubernetes](/docs/containers?topic=containers-helm#public_helm_install). 
+3. Solo per l'archiviazione blocchi, l'archiviazione oggetti e Portworx: accertati di aver [installato il server Helm Tiller con un account di servizi Kubernetes](/docs/containers?topic=containers-helm#public_helm_install).
 
-4. Solo per l'archiviazione blocchi, l'archiviazione oggetti e Portworx: accertati di aver installato l'ultima versione dei grafici Helm per il plug-in. 
-   
-   **Archiviazione blocchi e oggetti**: 
-   
+4. Solo per l'archiviazione blocchi, l'archiviazione oggetti e Portworx: accertati di aver installato l'ultima versione dei grafici Helm per il plug-in.
+
+   **Archiviazione blocchi e oggetti**:
+
    1. Aggiorna i tuoi repository di grafici Helm.
       ```
       helm repo update
       ```
       {: pre}
-      
+
    2. Elenca i grafici Helm del repository `iks-charts`.
       ```
       helm search iks-charts
       ```
       {: pre}
-      
-      Output di esempio: 
+
+      Output di esempio:
       ```
       iks-charts/ibm-block-storage-attacher          	1.0.2        A Helm chart for installing ibmcloud block storage attach...
       iks-charts/ibm-iks-cluster-autoscaler          	1.0.5        A Helm chart for installing the IBM Cloud cluster autoscaler
@@ -99,108 +98,108 @@ Rivedi le opzioni per eseguire il debug dell'archiviazione permanente e trovare 
       ...
       ```
       {: screen}
-      
+
    3. Elenca i grafici Helm installati nel tuo cluster e confronta la versione che hai installato con quella disponibile.
       ```
       helm ls
       ```
       {: pre}
-      
-   4. Se è disponibile una versione più recente, installarla. Per istruzioni, vedi [Aggiornamento del plug-in di archiviazione blocchi {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) e [Aggiornamento del plug-in {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#update_cos_plugin). 
-   
-   **Portworx**: 
-   
-   1. Trova l'[ultima versione del grafico Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/portworx/helm/tree/master/charts/portworx) disponibile. 
-   
+
+   4. Se è disponibile una versione più recente, installarla. Per istruzioni, vedi [Aggiornamento del plug-in di archiviazione blocchi {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in) e [Aggiornamento del plug-in {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#update_cos_plugin).
+
+   **Portworx**:
+
+   1. Trova l'[ultima versione del grafico Helm ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://github.com/portworx/helm/tree/master/charts/portworx) disponibile.
+
    2. Elenca i grafici Helm installati nel tuo cluster e confronta la versione che hai installato con quella disponibile.
       ```
       helm ls
       ```
       {: pre}
-   
-   3. Se è disponibile una versione più recente, installarla. Per istruzioni, vedi [Aggiornamento di Portworx nel tuo cluster](/docs/containers?topic=containers-portworx#update_portworx). 
-   
-5. Verifica che il driver di archiviazione e i pod del plug-in mostrino lo stato **Running** (In esecuzione). 
+
+   3. Se è disponibile una versione più recente, installarla. Per istruzioni, vedi [Aggiornamento di Portworx nel tuo cluster](/docs/containers?topic=containers-portworx#update_portworx).
+
+5. Verifica che il driver di archiviazione e i pod del plug-in mostrino lo stato **Running** (In esecuzione).
    1. Elenca i pod nello spazio dei nomi `kube-system`.
       ```
-      kubectl get pods -n kube-system 
+      kubectl get pods -n kube-system
       ```
       {: pre}
-      
+
    2. Se i pod non mostrano lo stato **Running**, ottieni ulteriori dettagli del pod per trovare la causa principale. A seconda dello stato del pod, potresti non essere in grado di eseguire tutti i comandi di seguito riportati.
       ```
       kubectl describe pod <pod_name> -n kube-system
       ```
       {: pre}
-      
+
       ```
       kubectl logs <pod_name> -n kube-system
       ```
       {: pre}
-      
-   3. Analizza la sezione **Events** (Eventi) dell'output della CLI del comando `kubectl describe pod` e i log più recenti per trovare la causa principale per l'errore. 
-   
-6. Verifica se il provisioning della tua PVC viene eseguito correttamente. 
+
+   3. Analizza la sezione **Events** (Eventi) dell'output della CLI del comando `kubectl describe pod` e i log più recenti per trovare la causa principale per l'errore.
+
+6. Verifica se il provisioning della tua PVC viene eseguito correttamente.
    1. Controlla lo stato della tua PVC. Il provisioning della PVC viene eseguito correttamente se lo stato della PVC è **Bound** (Collegato).
       ```
       kubectl get pvc
       ```
       {: pre}
-      
+
    2. Se lo stato della PVC è **Pending**, richiama l'errore per cui la PVC resta in sospeso.
       ```
       kubectl describe pvc <pvc_name>
       ```
       {: pre}
-      
-   3. Esamina gli errori comuni che possono verificarsi durante la creazione della PVC. 
+
+   3. Esamina gli errori comuni che possono verificarsi durante la creazione della PVC.
       - [Archiviazione file e archiviazione blocchi: la PVC resta in sospeso](#file_pvc_pending)
       - [Archiviazione oggetti: la PVC resta in sospeso](#cos_pvc_pending)
-   
-7. Controlla se il pod che monta la tua istanza di archiviazione viene distribuito correttamente. 
+
+7. Controlla se il pod che monta la tua istanza di archiviazione viene distribuito correttamente.
    1. Elenca i pod nel tuo cluster. Un pod è stato distribuito correttamente se lo stato del pod è **Running**.
       ```
       kubectl get pods
       ```
       {: pre}
-      
+
    2. Ottieni i dettagli del tuo pod e controlla se vengono visualizzati errori nella sezione **Events** dell'output della tua CLI.
       ```
       kubectl describe pod <pod_name>
       ```
       {: pre}
-   
+
    3. Richiama i log della tua applicazione e controlla se sono presenti messaggi di errore.
       ```
       kubectl logs <pod_name>
       ```
       {: pre}
-   
-   4. Esamina gli errori comuni che possono verificarsi quando monti una PVC nella tua applicazione. 
+
+   4. Esamina gli errori comuni che possono verificarsi quando monti una PVC nella tua applicazione.
       - [Archiviazione file: l'applicazione non riesce ad accedere alla PVC o a scrivere sulla PVC](#file_app_failures)
       - [Archiviazione blocchi: l'applicazione non riesce ad accedere alla PVC o a scrivere sulla PVC](#block_app_failures)
       - [Archiviazione oggetti: l'accesso ai file con un utente non root non riesce](#cos_nonroot_access)
-      
+
 
 ## Archiviazione file e archiviazione blocchi: la PVC resta in sospeso
 {: #file_pvc_pending}
 
 {: tsSymptoms}
-Quando crei una PVC ed esegui `kubectl get pvc <pvc_name>`, lo stato della tua PVC resta **Pending**, anche dopo un po' di tempo. 
+Quando crei una PVC ed esegui `kubectl get pvc <pvc_name>`, lo stato della tua PVC resta **Pending**, anche dopo un po' di tempo.
 
 {: tsCauses}
 Durante la creazione e il bind della PVC, il plug-in di archiviazione file e blocchi esegue varie attività. Ciascuna di esse può non riuscire e causare un messaggio di errore differente.
 
 {: tsResolve}
 
-1. Trova la causa principale per cui lo stato della PVC resta **Pending**. 
+1. Trova la causa principale per cui lo stato della PVC resta **Pending**.
    ```
    kubectl describe pvc <pvc_name> -n <namespace>
    ```
    {: pre}
-   
+
 2. Esamina le descrizioni e le soluzioni dei messaggi di errore comuni.
-   
+
    <table>
    <thead>
      <th>Messaggio di errore</th>
@@ -210,13 +209,13 @@ Durante la creazione e il bind della PVC, il plug-in di archiviazione file e blo
   <tbody>
     <tr>
       <td><code>User doesn't have permissions to create or manage Storage</code></br></br><code>Failed to find any valid softlayer credentials in configuration file</code></br></br><code>Storage with the order ID %d could not be created after retrying for %d seconds.</code></br></br><code>Unable to locate datacenter with name <datacenter_name>.</code></td>
-      <td>La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud (SoftLayer) archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione permanente. </td>
+      <td>La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione persistente.</td>
       <td>Vedi [Creazione della PVC non riuscita per autorizzazioni mancanti](#missing_permissions). </td>
     </tr>
     <tr>
       <td><code>Your order will exceed the maximum number of storage volumes allowed. Please contact Sales</code></td>
-      <td>Ogni account {{site.data.keyword.Bluemix_notm}} viene configurato con un numero massimo di istanze di archiviazione generabili. Con la creazione della PVC, superi il numero massimo di istanze di archiviazione. </td>
-      <td>Per creare una PVC, scegli tra le seguenti opzioni. <ul><li>Rimuovi i PVC inutilizzati.</li><li>Chiedi al proprietario dell'account {{site.data.keyword.Bluemix_notm}} di aumentare la tua quota di archiviazione [aprendo un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
+      <td>Ogni account {{site.data.keyword.cloud_notm}} viene configurato con un numero massimo di istanze di archiviazione generabili. Con la creazione della PVC, superi il numero massimo di istanze di archiviazione. </td>
+      <td>Per creare una PVC, scegli tra le seguenti opzioni. <ul><li>Rimuovi i PVC inutilizzati.</li><li>Chiedi al proprietario dell'account {{site.data.keyword.cloud_notm}} di aumentare la tua quota di archiviazione [aprendo un caso di supporto](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
     </tr>
     <tr>
       <td><code>Unable to find the exact ItemPriceIds(type|size|iops) for the specified storage</code> </br></br><code>Failed to place storage order with the storage provider</code></td>
@@ -230,13 +229,13 @@ Durante la creazione e il bind della PVC, il plug-in di archiviazione file e blo
     </tr>
     <tr>
   <td><code>Failed to place storage order with the storage provider</code></br></br><code>Storage with the order ID 12345 could not be created after retrying for xx seconds. </code></br></br><code>Failed to do subnet authorizations for the storage 12345.</code><code>Storage 12345 has ongoing active transactions and could not be completed after retrying for xx seconds.</code></td>
-  <td>La dimensione della memoria, gli IOPS e il tipo di archiviazione potrebbero essere incompatibili con la classe di archiviazione che hai scelto o l'endpoint dell'API dell'infrastruttura {{site.data.keyword.Bluemix_notm}} non è attualmente disponibile. </td>
+  <td>La dimensione della memoria, gli IOPS e il tipo di archiviazione potrebbero essere incompatibili con la classe di archiviazione che hai scelto o l'endpoint dell'API dell'infrastruttura {{site.data.keyword.cloud_notm}} non è attualmente disponibile. </td>
   <td>Consulta [Decisioni relative alla configurazione dell'archiviazione file](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) e [Decisioni relative alla configurazione dell'archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) per trovare le dimensioni di memoria supportate e gli IOPS per la classe e il tipo di archiviazione che vuoi utilizzare. Quindi, elimina la PVC e ricreala. </td>
   </tr>
   <tr>
   <td><code>Failed to find the storage with storage id 12345. </code></td>
   <td>Vuoi creare una PVC per un'istanza di archiviazione esistente utilizzando il provisioning statico di Kubernetes, ma l'istanza di archiviazione che hai specificato non è stata trovata. </td>
-  <td>Segui le istruzioni per eseguire il provisioning dell'[archiviazione file](/docs/containers?topic=containers-file_storage#existing_file) o dell'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#existing_block) esistente nel tuo cluster e assicurarsi di richiamare le informazioni corrette per l'istanza di archiviazione esistente. Quindi, elimina la PVC e ricreala.</td>
+  <td>Segui le istruzioni per eseguire il provisioning dell'[archiviazione file](/docs/containers?topic=containers-file_storage#existing_file) o dell'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#existing_block) esistente nel tuo cluster e assicurarsi di richiamare le informazioni corrette per l'istanza di archiviazione esistente. Quindi, elimina la PVC e ricreala.  </td>
   </tr>
   <tr>
   <td><code>Storage type not provided, expected storage type is `Endurance` or `Performance`. </code></td>
@@ -245,31 +244,31 @@ Durante la creazione e il bind della PVC, il plug-in di archiviazione file e blo
   </tr>
   </tbody>
   </table>
-  
+
 ## Archiviazione file: l'applicazione non riesce ad accedere alla PVC o a scrivere sulla PVC
 {: #file_app_failures}
 
 Quando monti una PVC nel tuo pod, potresti riscontrare errori nell'accesso alla PVC o nella scrittura nella PVC.
 {: shortdesc}
 
-1. Elenca i pod del tuo cluster e riesamina lo stato del pod. 
+1. Elenca i pod del tuo cluster e riesamina lo stato del pod.
    ```
    kubectl get pods
    ```
    {: pre}
-   
+
 2. Trova la causa principale per cui non è possibile accedere alla PVC o scrivervi.
    ```
    kubectl describe pod <pod_name>
    ```
    {: pre}
-   
+
    ```
    kubectl logs <pod_name>
    ```
    {: pre}
 
-3. Esamina gli errori comuni che possono verificarsi quando monti una PVC in un pod. 
+3. Esamina gli errori comuni che possono verificarsi quando monti una PVC in un pod.
    <table>
    <thead>
      <th>Sintomo o messaggio di errore</th>
@@ -279,7 +278,7 @@ Quando monti una PVC nel tuo pod, potresti riscontrare errori nell'accesso alla 
   <tbody>
     <tr>
       <td>Il tuo pod si blocca nello stato <strong>ContainerCreating</strong>. </br></br><code>MountVolume.SetUp failed for volume ... read-only file system</code></td>
-      <td>Si sono verificati problemi di rete nel backend dell'infrastruttura {{site.data.keyword.Bluemix_notm}}. Per proteggere i tuoi dati ed evitare la corruzione dei dati, {{site.data.keyword.Bluemix_notm}} ha disconnesso automaticamente il server di archiviazione file per impedire operazioni di scrittura su condivisioni file NFS.  </td>
+      <td>Si sono verificati problemi di rete nel backend dell'infrastruttura {{site.data.keyword.cloud_notm}}. Per proteggere i tuoi dati ed evitare la corruzione dei dati, {{site.data.keyword.cloud_notm}} ha disconnesso automaticamente il server di archiviazione file per impedire operazioni di scrittura su condivisioni file NFS.  </td>
       <td>Vedi [Archiviazione file: i file system per i nodi di lavoro diventano di sola lettura](#readonly_nodes)</td>
       </tr>
       <tr>
@@ -312,7 +311,7 @@ Il file system nel nodo di lavoro è in sola lettura.
 2.  Per una correzione a breve termine per il nodo di lavoro esistente, ricarica il nodo di lavoro.
     <pre class="pre"><code>ibmcloud ks worker-reload --cluster &lt;cluster_name&gt; --worker &lt;worker_ID&gt;</code></pre>
 
-Per una correzione a lungo termine, [aggiorna il tipo di macchina del tuo pool di nodi di lavoro](/docs/containers?topic=containers-update#machine_type).
+Per una correzione a lungo termine, [aggiorna il profilo del tuo pool di nodi di lavoro](/docs/containers?topic=containers-update#machine_type).
 
 <br />
 
@@ -322,7 +321,7 @@ Per una correzione a lungo termine, [aggiorna il tipo di macchina del tuo pool d
 {: #nonroot}
 
 {: tsSymptoms}
-Dopo aver [aggiunto l'archiviazione NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Quando richiami i log per il tuo contenitore, potresti vedere degli errori simili ai seguenti: Il pod genera un errore e si blocca in un ciclo di ricaricamento.
+Dopo aver [aggiunto l'archiviazione NFS](/docs/containers?topic=containers-file_storage#file_app_volume_mount) alla tua distribuzione, la distribuzione del tuo contenitore ha esito negativo. Quando richiami i log per il tuo contenitore, potresti vedere degli errori simili ai seguenti. Il pod genera un errore e si blocca in un ciclo di ricaricamento.
 
 ```
 write-permission
@@ -559,24 +558,24 @@ Rimuovi i campi `securityContext` della configurazione per `fsGroup` e `runAsUse
 Quando monti una PVC nel tuo pod, potresti riscontrare errori nell'accesso alla PVC o nella scrittura nella PVC.
 {: shortdesc}
 
-1. Elenca i pod del tuo cluster e riesamina lo stato del pod. 
+1. Elenca i pod del tuo cluster e riesamina lo stato del pod.
    ```
    kubectl get pods
    ```
    {: pre}
-   
+
 2. Trova la causa principale per cui non è possibile accedere alla PVC o scrivervi.
    ```
    kubectl describe pod <pod_name>
    ```
    {: pre}
-   
+
    ```
    kubectl logs <pod_name>
    ```
    {: pre}
 
-3. Esamina gli errori comuni che possono verificarsi quando monti una PVC in un pod. 
+3. Esamina gli errori comuni che possono verificarsi quando monti una PVC in un pod.
    <table>
    <thead>
      <th>Sintomo o messaggio di errore</th>
@@ -586,7 +585,7 @@ Quando monti una PVC nel tuo pod, potresti riscontrare errori nell'accesso alla 
   <tbody>
     <tr>
       <td>Il tuo pod è bloccato nello stato <strong>ContainerCreating</strong> o <strong>CrashLoopBackOff</strong>. </br></br><code>MountVolume.SetUp failed for volume ... read-only.</code></td>
-      <td>Si sono verificati problemi di rete nel backend dell'infrastruttura {{site.data.keyword.Bluemix_notm}}. Per proteggere i tuoi dati ed evitarne la corruzione, {{site.data.keyword.Bluemix_notm}} ha disconnesso automaticamente il server di archiviazione blocchi per impedire operazioni di scrittura su istanze di archiviazione blocchi.  </td>
+      <td>Si sono verificati problemi di rete nel backend dell'infrastruttura {{site.data.keyword.cloud_notm}}. Per proteggere i tuoi dati ed evitarne la corruzione, {{site.data.keyword.cloud_notm}} ha disconnesso automaticamente il server di archiviazione blocchi per impedire operazioni di scrittura su istanze di archiviazione blocchi.  </td>
       <td>Vedi [Archiviazione blocchi: l'archiviazione blocchi è modificata a sola lettura](#readonly_block)</td>
       </tr>
       <tr>
@@ -607,16 +606,16 @@ Potresti vedere i seguenti sintomi:
 read-only`.
 
 {: tsCauses}
-Se si verifica un errore di rete mentre un pod scrive su un volume, l'infrastruttura IBM Cloud (SoftLayer) protegge i dati sul volume per evitarne il danneggiamento modificando il volume a una modalità di sola lettura. I pod che utilizzano questo volume non possono continuare a scrivere sul volume e riscontrano una condizione di errore.
+Se si verifica un errore di rete mentre un pod scrive su un volume, l'infrastruttura IBM Cloud protegge i dati sul volume per evitarne il danneggiamento modificando il volume e impostandolo su una modalità di sola lettura. I pod che utilizzano questo volume non possono continuare a scrivere sul volume e riscontrano una condizione di errore.
 
 {: tsResolve}
-1. Controlla la versione del plugin {{site.data.keyword.Bluemix_notm}} Block Storage installato nel tuo cluster.
+1. Controlla la versione del plugin {{site.data.keyword.cloud_notm}} Block Storage installato nel tuo cluster.
    ```
    helm ls
    ```
    {: pre}
 
-2. Verifica che quella che utilizzi è la [versione più recente del plugin {{site.data.keyword.Bluemix_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). In caso contrario, [aggiorna il tuo plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
+2. Verifica che quella che utilizzi è la [versione più recente del plugin {{site.data.keyword.cloud_notm}} Block Storage](https://cloud.ibm.com/kubernetes/solutions/helm-charts/ibm/ibmcloud-block-storage-plugin). In caso contrario, [aggiorna il tuo plugin](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in).
 3. Se hai utilizzato una distribuzione Kubernetes per il tuo pod, riavvia il pod che sta riscontrando la condizione di errore rimuovendolo e lasciando che Kubernetes lo crei nuovamente. Se non hai utilizzato una distribuzione, richiama il file YAML che era stato utilizzato per creare il tuo pod eseguendo `kubectl get pod <pod_name> -o yaml >pod.yaml`. Quindi elimina e crea di nuovo manualmente il pod.
     ```
     kubectl delete pod <pod_name>
@@ -713,7 +712,7 @@ Aggiorna il file system nel PV esistente da `ext4` a `XFS`.
 {: tsSymptoms}
 Quando installi il plug-in Helm `ibmc` {{site.data.keyword.cos_full_notm}}, l'installazione non riesce, con uno dei seguenti errori:
 ```
-Error: symlink /Users/ibm/ibmcloud-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
+Error: symlink /Users/iks-charts/ibm-object-storage-plugin/helm-ibmc /Users/ibm/.helm/plugins/helm-ibmc: file exists
 ```
 {: screen}
 
@@ -725,11 +724,11 @@ Error: fork/exec /home/iksadmin/.helm/plugins/helm-ibmc/ibmc.sh: permission deni
 {: tsCauses}
 Quando il plugin Helm `ibmc` è installato, viene creato un collegamento simbolico dalla directory `./helm/plugins/helm-ibmc` alla directory dove si trova il plugin Helm `ibmc` sul tuo sistema locale, che è di norma in `./ibmcloud-object-storage-plugin/helm-ibmc`. Quando rimuovi il plugin Helm `ibmc` dal tuo sistema locale, o sposti la directory del plugin Helm `ibmc` in un'altra ubicazione, il collegamento simbolico non viene rimosso.
 
-Se visualizzi un errore `permission denied`, non possiedi la necessaria autorizzazione `read`, `write`ed `execute` sul file bash `ibmc.sh` che TI consente di eseguire i comandi del plug-in HELM `ibmc`. 
+Se visualizzi un errore `permission denied`, non possiedi la necessaria autorizzazione `read`, `write`ed `execute` sul file bash `ibmc.sh` che TI consente di eseguire i comandi del plug-in HELM `ibmc`.
 
 {: tsResolve}
 
-**Per gli errori symlink**: 
+**Per gli errori symlink**:
 
 1. Rimuovi il plugin Helm {{site.data.keyword.cos_full_notm}}.
    ```
@@ -739,21 +738,21 @@ Se visualizzi un errore `permission denied`, non possiedi la necessaria autorizz
 
 2. Segui la [documentazione](/docs/containers?topic=containers-object_storage#install_cos) per reinstallare il plug-in Helm `ibmc` e il plug-in {{site.data.keyword.cos_full_notm}}.
 
-**Per gli errori di autorizzazione**: 
+**Per gli errori di autorizzazione**:
 
-1. Modifica le autorizzazioni per il plug-in `ibmc`. 
+1. Modifica le autorizzazioni per il plug-in `ibmc`.
    ```
    chmod 755 ~/.helm/plugins/helm-ibmc/ibmc.sh
    ```
    {: pre}
-   
-2. Prova il plug-in Helm `ibm`. 
+
+2. Prova il plug-in Helm `ibm`.
    ```
    helm ibmc --help
    ```
    {: pre}
-   
-3. [Continua a installare il plug-in {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos). 
+
+3. [Continua a installare il plug-in {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#install_cos).
 
 
 <br />
@@ -763,21 +762,21 @@ Se visualizzi un errore `permission denied`, non possiedi la necessaria autorizz
 {: #cos_pvc_pending}
 
 {: tsSymptoms}
-Quando crei una PVC ed esegui `kubectl get pvc <pvc_name>`, lo stato della tua PVC resta **Pending**, anche dopo un po' di tempo. 
+Quando crei una PVC ed esegui `kubectl get pvc <pvc_name>`, lo stato della tua PVC resta **Pending**, anche dopo un po' di tempo.
 
 {: tsCauses}
 Durante la creazione e il bind della PVC, il plug-in {{site.data.keyword.cos_full_notm}} esegue varie attività. Ciascuna di esse può non riuscire e causare un messaggio di errore differente.
 
 {: tsResolve}
 
-1. Trova la causa principale per cui lo stato della PVC resta **Pending**. 
+1. Trova la causa principale per cui lo stato della PVC resta **Pending**.
    ```
    kubectl describe pvc <pvc_name> -n <namespace>
    ```
    {: pre}
-   
+
 2. Esamina le descrizioni e le soluzioni dei messaggi di errore comuni.
-   
+
    <table>
    <thead>
      <th>Messaggio di errore</th>
@@ -787,7 +786,7 @@ Durante la creazione e il bind della PVC, il plug-in {{site.data.keyword.cos_ful
   <tbody>
     <tr>
       <td>`User doesn't have permissions to create or manage Storage`</td>
-      <td>La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud (SoftLayer) archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione permanente. </td>
+      <td>La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione persistente.</td>
       <td>Vedi [Creazione della PVC non riuscita per autorizzazioni mancanti](#missing_permissions). </td>
     </tr>
     <tr>
@@ -797,7 +796,7 @@ Durante la creazione e il bind della PVC, il plug-in {{site.data.keyword.cos_ful
     </tr>
     <tr>
       <td>`cannot get credentials: Wrong Secret Type.Provided secret of type XXXX.Expected type ibm/ibmc-s3fs`</td>
-      <td>Il segreto Kubernetes che hai creato per la tua istanza di servizio {{site.data.keyword.cos_full_notm}} non include il `type: ibm/ibmc-s3fs`.</td>
+      <td>Il segreto Kubernetes che hai creato per la tua istanza del servizio {{site.data.keyword.cos_full_notm}} non include il `type: ibm/ibmc-s3fs`.</td>
       <td>Modifica il segreto Kubernetes che contiene le tue credenziali {{site.data.keyword.cos_full_notm}} per aggiungere o modificare il `type` in `ibm/ibmc-s3fs`. </td>
     </tr>
     <tr>
@@ -848,7 +847,7 @@ Durante la creazione e il bind della PVC, il plug-in {{site.data.keyword.cos_ful
         <tr>
           <td>`cannot access bucket <bucket_name>: Forbidden: Forbidden`</td>
           <td>Hai specificato `ibm.io/auto-create-bucket: false` e hai tentato di accedere a un bucket che non hai creato o la chiave di accesso al servizio o l'ID chiave di accesso delle tue credenziali HMAC {{site.data.keyword.cos_full_notm}} non sono corretti.  </td>
-          <td>Non puoi accedere a un bucket che non hai creato. Crea un nuovo bucket invece di impostare `ibm.io/auto-create-bucket: true` e `ibm.io/bucket: ""`. Se sei il proprietario del bucket, vedi [La creazione della PVC non riesce a causa di credenziali errate o di accesso rifiutato](#cred_failure) per controllare le tue credenziali. </td>
+          <td>Non puoi accedere a un bucket che non hai creato. Crea invece un bucket impostando `ibm.io/auto-create-bucket: true` e `ibm.io/bucket: ""`. Se sei il proprietario del bucket, vedi [La creazione della PVC non riesce a causa di credenziali errate o di accesso rifiutato](#cred_failure) per controllare le tue credenziali. </td>
         </tr>
         <tr>
           <td>`cannot create bucket <bucket_name>: AccessDenied: Access Denied`</td>
@@ -877,7 +876,7 @@ Durante la creazione e il bind della PVC, il plug-in {{site.data.keyword.cos_ful
         </tr>
   </tbody>
     </table>
-    
+
 
 ### Archiviazione oggetti: la creazione del pod o della PVC non riesce perché non è possibile trovare il segreto Kubernetes
 {: #cos_secret_access_fails}
@@ -901,7 +900,7 @@ Quando crei la tua PVC o distribuisci un pod che monta la PVC, la creazione o la
 Il segreto Kubernetes dove archivi le tue credenziali del servizio {{site.data.keyword.cos_full_notm}}, la PVC e il pod non si trovano tutti nello stesso spazio dei nomi Kubernetes, Quando il segreto viene distribuito a uno spazio dei nomi differente rispetto alla tua PVC o al tuo pod, non è possibile accedere al segreto.
 
 {: tsResolve}
-Questa attività richiede [**Scrittore** o **Gestore** come ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
+Questa attività richiede [**Scrittore** o **Gestore** come ruolo del servizio {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) per tutti gli spazi dei nomi.
 
 1. Elenca tutti i segreti nel tuo cluster e riesamina lo spazio dei nomi Kubernetes dove viene creato il segreto Kubernetes per la tua istanza del servizio {{site.data.keyword.cos_full_notm}}. Il segreto deve mostrare `ibm/ibmc-s3fs` come tipo (**Type**).
    ```
@@ -954,9 +953,9 @@ Le credenziali del servizio {{site.data.keyword.cos_full_notm}} che utilizzi per
 {: tsResolve}
 1. Nella navigazione nella pagina dei dettagli del servizio, fai clic su **Credenziali del servizio**.
 2. Trova le tue credenziali, quindi fai clic su **Visualizza credenziali**.
-3. Nella sezione **iam_role_crn**, verifica di avere il ruolo di scrittore (`Writer`) o di gestore (`Manager`). Se non hai il ruolo corretto, devi creare nuove credenziali del servizio {{site.data.keyword.cos_full_notm}} con l'autorizzazione corretta. 
-4. Se il ruolo è corretto, accertati di utilizzare l'**access_key_id** e la **secret_access_key** corretti nel tuo segreto Kubernetes. 
-5. [Crea un nuovo segreto con l'**access_key_id** e la **secret_access_key** aggiornati](/docs/containers?topic=containers-object_storage#create_cos_secret). 
+3. Nella sezione **iam_role_crn**, verifica di avere il ruolo di scrittore (`Writer`) o di gestore (`Manager`). Se non hai il ruolo corretto, devi creare nuove credenziali del servizio {{site.data.keyword.cos_full_notm}} con l'autorizzazione corretta.
+4. Se il ruolo è corretto, accertati di utilizzare l'**access_key_id** e la **secret_access_key** corretti nel tuo segreto Kubernetes.
+5. [Crea un nuovo segreto con l'**access_key_id** e la **secret_access_key** aggiornati](/docs/containers?topic=containers-object_storage#create_cos_secret).
 
 
 <br />
@@ -966,7 +965,7 @@ Le credenziali del servizio {{site.data.keyword.cos_full_notm}} che utilizzi per
 {: #cos_api_endpoint_failure}
 
 {: tsSymptoms}
-Quando crei la PVC, lo stato di quest'ultima resta in sospeso. Dopo aver eseguito il comando `kubectl describe pvc <pvc_name>`, visualizzi uno dei seguenti messaggi di errore: 
+Quando crei la PVC, lo stato di quest'ultima resta in sospeso. Dopo aver eseguito il comando `kubectl describe pvc <pvc_name>`, visualizzi uno dei seguenti messaggi di errore:
 
 ```
 Bad value for ibm.io/object-store-endpoint XXXX: scheme is missing. Must be of the form http://<hostname> or https://<hostname>
@@ -979,7 +978,7 @@ Bad value for ibm.io/iam-endpoint XXXX: scheme is missing. Must be of the form h
 {: screen}
 
 {: tsCauses}
-Il formato dell'endpoint API s3fs per il bucket che vuoi usare potrebbe essere errato o il tuo cluster viene distribuito in un'ubicazione supportata da {{site.data.keyword.containerlong_notm}}, ma non ancora dal plug-in {{site.data.keyword.cos_full_notm}}. 
+Il formato dell'endpoint API s3fs per il bucket che vuoi usare potrebbe essere errato o il tuo cluster viene distribuito in un'ubicazione supportata da {{site.data.keyword.containerlong_notm}}, ma non ancora dal plug-in {{site.data.keyword.cos_full_notm}}.
 
 {: tsResolve}
 1. Controlla l'endpoint API s3fs assegnato automaticamente dal plug-in Helm `ibmc` alle tue classi di archiviazione durante l'installazione del plug-in {{site.data.keyword.cos_full_notm}}. L'endpoint si basa sull'ubicazione in cui viene distribuito il tuo cluster.  
@@ -988,14 +987,14 @@ Il formato dell'endpoint API s3fs per il bucket che vuoi usare potrebbe essere e
    ```
    {: pre}
 
-   Se il comando restituisce `ibm.io/object-store-endpoint: NA`, il tuo cluster viene distribuito in un'ubicazione supportata da {{site.data.keyword.containerlong_notm}}, ma non ancora dal plug-in {{site.data.keyword.cos_full_notm}}. Per aggiungere l'ubicazione al {{site.data.keyword.containerlong_notm}}, pubblica una domanda nel nostro Slack pubblico o apri un caso di supporto {{site.data.keyword.Bluemix_notm}} . Per ulteriori informazioni, vedi [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). 
-   
-2. Se hai aggiunto manualmente l'endpoint API s3fs con l'annotazione `ibm.io/endpoint` o l'endpoint API IAM con l'annotazione`ibm.io/iam-endpoint` nella tua PVC, accertati di aver aggiunto gli endpoint in formato `https://<s3fs_api_endpoint>` e `https://<iam_api_endpoint>`. L'annotazione sovrascrive gli endpoint API impostati automaticamente dal plug-in `ibmc` nelle classi di archiviazione {{site.data.keyword.cos_full_notm}}. 
+   Se il comando restituisce `ibm.io/object-store-endpoint: NA`, il tuo cluster viene distribuito in un'ubicazione supportata da {{site.data.keyword.containerlong_notm}}, ma non ancora dal plug-in {{site.data.keyword.cos_full_notm}}. Per aggiungere l'ubicazione al {{site.data.keyword.containerlong_notm}}, pubblica una domanda nel nostro Slack pubblico o apri un caso di supporto {{site.data.keyword.cloud_notm}} . Per ulteriori informazioni, vedi [Come ottenere aiuto e supporto](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).
+
+2. Se hai aggiunto manualmente l'endpoint API s3fs con l'annotazione `ibm.io/endpoint` o l'endpoint API IAM con l'annotazione`ibm.io/iam-endpoint` nella tua PVC, accertati di aver aggiunto gli endpoint nel formato `https://<s3fs_api_endpoint>` e `https://<iam_api_endpoint>`. L'annotazione sovrascrive gli endpoint API impostati automaticamente dal plug-in `ibmc` nelle classi di archiviazione {{site.data.keyword.cos_full_notm}}.
    ```
    kubectl describe pvc <pvc_name>
    ```
    {: pre}
-   
+
 <br />
 
 
@@ -1011,14 +1010,14 @@ Failed to provision volume with StorageClass "ibmc-s3fs-standard-regional": pvc:
 {: screen}
 
 {: tsCauses}
-Potresti aver utilizzato la classe di archiviazione errata per accedere al tuo bucket esistente oppure hai tentato di accedere a un bucket che non hai creato. Non puoi accedere a un bucket che non hai creato. 
+Potresti aver utilizzato la classe di archiviazione errata per accedere al tuo bucket esistente oppure hai tentato di accedere a un bucket che non hai creato. Non puoi accedere a un bucket che non hai creato.
 
 {: tsResolve}
-1. Dal [dashboard {{site.data.keyword.Bluemix_notm}}![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/), seleziona la tua istanza del servizio {{site.data.keyword.cos_full_notm}}.
+1. Dal [dashboard {{site.data.keyword.cloud_notm}}![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/), seleziona la tua istanza del servizio {{site.data.keyword.cos_full_notm}}.
 2. Seleziona **Bucket**.
 3. Riesamina le informazioni su **Classe** e **Ubicazione** per il tuo bucket esistente.
 4. Scegli la [classe di archiviazione](/docs/containers?topic=containers-object_storage#cos_storageclass_reference) appropriata.
-5. Assicurati di impostare `ibm.io/auto-create-bucket: false` e di fornire il nome corretto del tuo bucket esistente. 
+5. Assicurati di impostare `ibm.io/auto-create-bucket: false` e di fornire il nome corretto del tuo bucket esistente.
 
 <br />
 
@@ -1030,7 +1029,7 @@ Potresti aver utilizzato la classe di archiviazione errata per accedere al tuo b
 Hai caricato dei file nella tua istanza del servizio {{site.data.keyword.cos_full_notm}} utilizzando la console o l'API REST. Quando provi ad accedere a questi file con un utente non root che hai definito con `runAsUser` nella tua distribuzione dell'applicazione, l'accesso ai file viene rifiutato.
 
 {: tsCauses}
-In Linux, un file o una directory hanno 3 gruppi di accesso: `Owner`, `Group` e `Other`. Quando carichi un file in {{site.data.keyword.cos_full_notm}} utilizzando la console o l'API REST, le autorizzazioni per `Owner`, `Group` e `Other` vengono rimosse. L'autorizzazione di ciascun file si presenta così:
+In Linux, un file o una directory hanno tre gruppi di accesso: `Owner`, `Group` e `Other`. Quando carichi un file in {{site.data.keyword.cos_full_notm}} utilizzando la console o l'API REST, le autorizzazioni per `Owner`, `Group` e `Other` vengono rimosse. L'autorizzazione di ciascun file si presenta così:
 
 ```
 d--------- 1 root root 0 Jan 1 1970 <file_name>
@@ -1178,12 +1177,12 @@ Dopo aver impostato le autorizzazioni file corrette nella tua istanza del serviz
 <br />
 
 
-   
+
 ## Creazione della PVC non riuscita per autorizzazioni mancanti
 {: #missing_permissions}
 
 {: tsSymptoms}
-Quando crei una PVC, quest'ultima resta in sospeso. Quando esegui `kubectl describe pvc <pvc_name>`, visualizzi un messaggio di errore simile al seguente: 
+Quando crei una PVC, quest'ultima resta in sospeso. Quando esegui `kubectl describe pvc <pvc_name>`, visualizzi un messaggio di errore simile al seguente:
 
 ```
 User doesn't have permissions to create or manage Storage
@@ -1191,16 +1190,16 @@ User doesn't have permissions to create or manage Storage
 {: screen}
 
 {: tsCauses}
-La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud (SoftLayer) archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione permanente. 
+La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster non dispone di tutte le autorizzazioni richieste per eseguire il provisioning dell'archiviazione persistente.
 
 {: tsResolve}
-1. Richiama la chiave IAM o la chiave API dell'infrastruttura IBM Cloud (SoftLayer) archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster e verifica che venga utilizzata la chiave API corretta. 
+1. Richiama la chiave IAM o la chiave API dell'infrastruttura IBM Cloud archiviata nel segreto Kubernetes `storage-secret-store` del tuo cluster e verifica che venga utilizzata la chiave API corretta.
    ```
    kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
    ```
    {: pre}
-   
-   Output di esempio: 
+
+   Output di esempio:
    ```
    [Bluemix]
    iam_url = "https://iam.bluemix.net"
@@ -1220,32 +1219,32 @@ La chiave API IAM o la chiave API dell'infrastruttura IBM Cloud (SoftLayer) arch
    softlayer_datacenter = "dal10"
    ```
    {: screen}
-   
-   La chiave API IAM è elencata nella sezione `Bluemix.iam_api_key` dell'output della tua CLI. Se la `Softlayer.softlayer_api_api_key` è al contempo vuota, la chiave API IAM viene utilizzata per determinare le autorizzazioni della tua infrastruttura. La chiave API IAM viene impostata automaticamente dall'utente che esegue la prima azione che richiede il ruolo della piattaforma**Amministratore** IAM in un gruppo di risorse e nella regione. Se in `Softlayer.softlayer_api_key` viene impostata una chiave differente, quest'ultima ha la precedenza rispetto alla chiave API IAM. La `Softlayer.softlayer_api_key` viene impostata quando un amministratore del cluster esegue il comando `ibmcloud ks credentials-set`. 
-   
-2. Se vuoi modificare le credenziali, aggiorna la chiave API utilizzata. 
-    1.  Per aggiornare la chiave API IAM, utilizza il[comando `ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). Per aggiornare la chiave dell'infrastruttura IBM Cloud (SoftLayer), utilizza il [comando `ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
-    2. Attendi circa 10-15 minuti l'aggiornamento del segreto Kubernetes `storage-secret-store`, quindi verifica che la chiave sia aggiornata.
+
+   La chiave API IAM è elencata nella sezione `Bluemix.iam_api_key` dell'output della tua CLI. Se la `Softlayer.softlayer_api_api_key` è al contempo vuota, la chiave API IAM viene utilizzata per determinare le autorizzazioni della tua infrastruttura. La chiave API IAM viene impostata automaticamente dall'utente che esegue la prima azione che richiede il ruolo della piattaforma**Amministratore** IAM in un gruppo di risorse e nella regione. Se in `Softlayer.softlayer_api_key` viene impostata una chiave differente, quest'ultima ha la precedenza rispetto alla chiave API IAM. La `Softlayer.softlayer_api_key` viene impostata quando un amministratore del cluster esegue il comando `ibmcloud ks credentials-set`.
+
+2. Se vuoi modificare le credenziali, aggiorna la chiave API utilizzata.
+    1.  Per aggiornare la chiave API IAM, utilizza il[comando `ibmcloud ks api-key-reset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). Per aggiornare la chiave dell'infrastruttura IBM Cloud, utilizza il [comando `ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
+    2. Attendi circa 10 - 15 minuti l'aggiornamento del segreto Kubernetes `storage-secret-store`, quindi verifica che la chiave sia aggiornata.
        ```
        kubectl get secret storage-secret-store -n kube-system -o yaml | grep slclient.toml: | awk '{print $2}' | base64 --decode
        ```
        {: pre}
-   
-3. Se la chiave API è corretta, verifica che abbia l'autorizzazione corretta per eseguire il provisioning dell'archiviazione permanente.
-   1. Contatta il proprietario dell'account per verificare l'autorizzazione della chiave API. 
-   2. Come proprietario dell'account, seleziona **Gestisci** > **Accesso (IAM)** dalla navigazione nella console {{site.data.keyword.Bluemix_notm}}.
-   3. Seleziona **Utenti** e cerca l'utente di cui vuoi usare la chiave API. 
-   4. Dal menu delle azioni, seleziona **Gestisci i dettagli utente**. 
-   5. Vai alla scheda **Infrastruttura classica**. 
-   6. Espandi la categoria **Account** e verifica che sia stata assegnata l'autorizzazione **Aggiungi/esegui upgrade dell'archiviazione (StorageLayer)** . 
-   7. Espandi la categoria **Servizi** e verifica che sia stata assegnata l'autorizzazione **Gestione archiviazione**. 
-4. Rimuovi la PVC con errori. 
+
+3. Se la chiave API è corretta, verifica che abbia l'autorizzazione corretta per eseguire il provisioning dell'archiviazione persistente.
+   1. Contatta il proprietario dell'account per verificare l'autorizzazione della chiave API.
+   2. Come proprietario dell'account, seleziona **Gestisci** > **Accesso (IAM)** dalla navigazione nella console {{site.data.keyword.cloud_notm}}.
+   3. Seleziona **Utenti** e cerca l'utente di cui vuoi usare la chiave API.
+   4. Dal menu delle azioni, seleziona **Gestisci i dettagli utente**.
+   5. Vai alla scheda **Infrastruttura classica**.
+   6. Espandi la categoria **Account** e verifica che sia stata assegnata l'autorizzazione **Aggiungi/esegui upgrade dell'archiviazione (StorageLayer)** .
+   7. Espandi la categoria **Servizi** e verifica che sia stata assegnata l'autorizzazione **Gestione archiviazione**.
+4. Rimuovi la PVC con errori.
    ```
    kubectl delete pvc <pvc_name>
    ```
    {: pre}
-   
-5. Ricrea la PVC. 
+
+5. Ricrea la PVC.
    ```
    kubectl apply -f pvc.yaml
    ```
@@ -1259,11 +1258,11 @@ Stai ancora avendo problemi con il tuo cluster?
 {: shortdesc}
 
 -  Nel terminale, ricevi una notifica quando sono disponibili degli aggiornamenti ai plugin e alla CLI `ibmcloud`. Assicurati di mantenere la tua CLI aggiornata in modo che tu possa utilizzare tutti i comandi e gli indicatori disponibili.
--   Per vedere se {{site.data.keyword.Bluemix_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.Bluemix_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
+-   Per vedere se {{site.data.keyword.cloud_notm}} è disponibile, [controlla la pagina sugli stati {{site.data.keyword.cloud_notm}} ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://cloud.ibm.com/status?selected=status).
 -   Pubblica una domanda in [{{site.data.keyword.containerlong_notm}} Slack ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://ibm-container-service.slack.com).
-    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.Bluemix_notm}}, [richiedi un invito](https://bxcs-slack-invite.mybluemix.net/) a questo Slack.
+    Se non stai utilizzando un ID IBM per il tuo account {{site.data.keyword.cloud_notm}}, [richiedi un invito](https://cloud.ibm.com/kubernetes/slack) a questo Slack.
     {: tip}
--   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.Bluemix_notm}}.
+-   Rivedi i forum per controllare se altri utenti hanno riscontrato gli stessi problemi. Quando utilizzi i forum per fare una domanda, contrassegna con una tag la tua domanda in modo che sia visualizzabile dai team di sviluppo {{site.data.keyword.cloud_notm}}.
     -   Se hai domande tecniche sullo sviluppo o la distribuzione di cluster o applicazioni con
 {{site.data.keyword.containerlong_notm}}, inserisci la tua domanda in
 [Stack Overflow ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e contrassegnala con le tag `ibm-cloud`, `kubernetes` e `containers`.

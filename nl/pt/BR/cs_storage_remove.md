@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,13 +22,11 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
-
+ 
 # Removendo o armazenamento persistente de um cluster
 {: #cleanup}
 
-Ao configurar o armazenamento persistente em seu cluster, você tem três componentes principais: o persistent volume claim (PVC) do Kubernetes que solicita armazenamento, o persistent volume (PV) do Kubernetes (PV) que é montado em um pod e descrito no PVC e a instância de infraestrutura do IBM Cloud (SoftLayer), como armazenamento de arquivo ou de bloco NFS. Dependendo de como você criou seu armazenamento, pode ser necessário excluir todos os três separadamente.
+Ao configurar o armazenamento persistente em seu cluster, você tem três componentes principais: a solicitação de volume persistente do Kubernetes (PVC) que solicita o armazenamento, o volume persistente do Kubernetes (PV) que é montado em um pod e descrito no PVC e a instância de infraestrutura do IBM Cloud, como arquivo NFS ou armazenamento de bloco. Dependendo de como você criou seu armazenamento, pode ser necessário excluir todos os três separadamente.
 {:shortdesc}
 
 ## Limpando o armazenamento persistente
@@ -37,18 +35,26 @@ Ao configurar o armazenamento persistente em seu cluster, você tem três compon
 Entendendo suas opções de exclusão:
 
 ** Eu excluo meu cluster. Preciso excluir alguma outra coisa para remover o armazenamento persistente?**</br>
-Depende. Quando você exclui um cluster, o PVC e o PV são excluídos. No entanto, você escolhe se deseja remover a instância de armazenamento associada na infraestrutura do IBM Cloud (SoftLayer). Se você escolheu não a remover, a instância de armazenamento ainda existe. Além disso, se você excluiu seu cluster em um estado não funcional, o armazenamento ainda poderá existir mesmo se você escolheu removê-lo. Siga as instruções, especialmente a etapa para [excluir sua instância de armazenamento](#sl_delete_storage) na infraestrutura do IBM Cloud (SoftLayer).
+Depende. Quando você exclui um cluster, o PVC e o PV são excluídos. No entanto, você escolhe se deve remover a instância de armazenamento associada na infraestrutura do IBM Cloud. Se você escolheu não a remover, a instância de armazenamento ainda existe. Além disso, se você excluiu seu cluster em um estado não funcional, o armazenamento ainda poderá existir mesmo se você escolheu removê-lo. Siga as instruções, particularmente a etapa para [excluir sua instância de armazenamento](#sl_delete_storage) na infraestrutura do IBM Cloud.
 
 **Posso excluir a PVC para remover todo o meu armazenamento?**</br>
-Às vezes. Se você [criar o armazenamento persistente dinamicamente](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selecionar uma classe de armazenamento sem `retain` em seu nome, então, quando excluir o PVC, o PV e a instância de armazenamento de infraestrutura do IBM Cloud (SoftLayer) também serão excluídos.
+Às vezes. Se você [criar o armazenamento persistente dinamicamente](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selecionar uma classe de armazenamento sem `retain` em seu nome, quando você excluir o PVC, o PV e a instância de armazenamento da infraestrutura do IBM Cloud também serão excluídos.
 
 Em todos os outros casos, siga as instruções para verificar o status de seu PVC, PV e o dispositivo de armazenamento físico e exclua-os separadamente, se necessário.
 
 **Ainda estou cobrado pelo armazenamento depois de excluí-lo?**</br>
-Depende do que você excluir e do tipo de faturamento. Se você excluir o PVC e o PV, mas não a instância em sua conta de infraestrutura do IBM Cloud (SoftLayer), essa instância ainda existirá e você será cobrado por ela. Deve-se excluir tudo para evitar encargos. Além disso, quando você especifica o `billingType` no PVC, é possível escolher `hourly` ou `monthly`. Se você escolheu `monthly`, sua instância será faturada mensalmente. Quando você excluir a instância, será cobrado pelo restante do mês.
+Depende do que você excluir e do tipo de faturamento. Se você excluir o PVC e o PV, mas não a instância em sua conta de infraestrutura do IBM Cloud, essa instância ainda existirá e você será cobrado por ela. Deve-se excluir tudo para evitar encargos. Além disso, quando você especifica o `billingType` no PVC, é possível escolher `hourly` ou `monthly`. Se você escolheu `monthly`, sua instância será faturada mensalmente. Quando você excluir a instância, será cobrado pelo restante do mês.
 
+Ao cancelar manualmente a instância de armazenamento persistente por meio do console de infraestrutura do IBM Cloud ou da CLI `ibmcloud sl`, o faturamento é interrompido da seguinte forma: 
+- **Armazenamento por hora**: o faturamento é interrompido imediatamente. Depois que seu armazenamento for cancelado, você ainda poderá ver sua instância de armazenamento no console por até 72 horas.  
+- **Armazenamento mensal**: é possível escolher entre **cancelamento imediato** ou **cancelamento na data do aniversário**. Se você escolher cancelamento imediato, seu armazenamento será removido imediatamente e não será mais possível usar seu armazenamento. Se você optar por cancelar seu armazenamento na data do próximo aniversário, suas instâncias de armazenamento permanecerão ativas até a data do próximo aniversário e você poderá continuar a usá-las até essa data. Em ambos os casos, o faturamento é interrompido para o próximo ciclo de faturamento, mas você ainda é faturado até o final do ciclo de faturamento atual. Depois que seu armazenamento for cancelado, você ainda poderá ver sua instância de armazenamento no console ou na CLI por até 72 horas.  
 
-<p class="important">Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_backup_restore) ou [armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
+Se você remover o armazenamento persistente com uma política de recuperação `Delete` que você provisionou dinamicamente excluindo o PVC, o armazenamento será removido imediatamente independentemente de você ter escolhido um tipo de faturamento por hora ou mensal. Após o armazenamento ser removido, você ainda poderá ver sua instância de armazenamento no console ou na CLI por até 72 horas. O armazenamento persistente que usa uma política de recuperação `Retain` não é removido e você ainda é cobrado por utilizá-lo. 
+
+<p class="important">Ao limpar o armazenamento persistente, você exclui todos os dados que estão armazenados nele. Se você precisar de uma cópia dos dados, faça um backup para o [armazenamento de arquivo](/docs/containers?topic=containers-file_storage#file_backup_restore) ou [armazenamento de bloco](/docs/containers?topic=containers-block_storage#block_backup_restore).  </p>
+
+**Eu excluí meu armazenamento. Por que ainda posso ver minhas instâncias?**</br>
+Depois de remover o armazenamento persistente, ele pode demorar até 72 horas para que a remoção seja completamente processada e para que o armazenamento desapareça do console ou da CLI de infraestrutura do IBM Cloud. 
 
 Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -156,7 +162,7 @@ Para limpar os dados persistentes:
    ```
    {: screen}
 
-   Entendendo as informações do campo do  ** Notes ** :
+   Entendendo as informações do campo do **Notas**:
    *  **`"plugin":"ibm-file-plugin-5b55b7b77b-55bb7"`**: o plug-in de armazenamento que o cluster usa.
    *  **`"region":"us-south"`**: a região em que seu cluster está.
    *  **`"cluster":"aa1a11a1a11b2b2bb22b22222c3c3333"`**: o ID do cluster que está associado à instância de armazenamento.
@@ -180,7 +186,10 @@ Para limpar os dados persistentes:
    ```
    {: pre}
 
-9. Verifique se a instância de armazenamento físico foi removida. O processo de exclusão pode levar até alguns dias para ser concluído.
+10. Verifique se a instância de armazenamento físico foi removida. 
+   
+   O processo de exclusão pode levar até 72 horas para ser concluído.
+   {: important}
 
    **Armazenamento de arquivo:**
    ```
@@ -192,3 +201,5 @@ Para limpar os dados persistentes:
    ibmcloud sl block volume-list
    ```
    {: pre}
+
+

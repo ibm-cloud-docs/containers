@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Wenn Sie bestimmte Voraussetzungen für die Leistungsoptimierung haben, können 
 
 Workerknoten werden automatisch mit optimierter Kerneloptimierung eingerichtet, aber Sie können die Standardeinstellungen ändern, indem Sie ein angepasstes [Kubernetes-Objekt des Typs `DaemonSet` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) auf Ihren Cluster anwenden. Die Dämongruppe (DaemonSet) ändert die Einstellungen für alle vorhandenen Workerknoten und wendet die Einstellungen auf alle neuen Workerknoten an, die im Cluster eingerichtet werden. Es sind keine Pods betroffen.
 
-Sie müssen die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche innehaben, um das Beispiel für den privilegierten `initContainer` ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Privilegien gelöscht.
+Sie müssen die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche innehaben, um das Beispiel für den privilegierten `initContainer` ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Privilegien gelöscht.
 {: note}
 
 1. Speichern Sie die folgende Dämongruppe (DaemonSet) in einer Datei mit dem Namen `worker-node-kernel-settings.yaml`. Fügen Sie im Abschnitt `spec.template.spec.initContainers` die Felder und Werte für die `sysctl`-Parameter hinzu, die Sie optimieren möchten. Dieses Beispiel für eine Dämongruppe ändert den Standardwert für die Anzahl Verbindungen, die maximal in der Umgebung zulässig sind, über die Einstellung `net.core.somaxconn` und den Bereich ephemerer Ports über die Einstellung `net.ipv4.ip_local_port_range`.
@@ -131,7 +131,7 @@ Wenn Sie bestimmte Anforderungen an die Workloadleistung haben, können Sie die 
 
 Um die Kerneleinstellungen für App-Pods zu optimieren, können Sie einen [`initContainer-Patch ` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) in die YAML-Datei `pod/ds/rs/deployment` für jede Bereitstellung einfügen. Der `initContainer` wird jeder App-Bereitstellung hinzugefügt, die sich in dem Pod-Netznamensbereich befindet, für den Sie die Leistung optimieren möchten.
 
-Sie müssen zunächst sicherstellen, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche innehaben, um das Beispiel für den privilegierten `initContainer` ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Privilegien gelöscht.
+Sie müssen zunächst sicherstellen, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche innehaben, um das Beispiel für den privilegierten `initContainer` ausführen zu können. Nachdem die Container für die Bereitstellungen initialisiert wurden, werden die Privilegien gelöscht.
 
 1. Speichern Sie das folgende `initContainer`-Patch in einer Datei mit dem Namen `pod-patch.yaml` und fügen Sie die Felder und Werte für die `sysctl`-Parameter hinzu, die Sie optimieren möchten. Dieses Beispiel für den `initContainer` ändert den Standardwert für die Anzahl Verbindungen, die maximal in der Umgebung zulässig sind, über die Einstellung `net.core.somaxconn` und den Bereich ephemerer Ports über die Einstellung `net.ipv4.ip_local_port_range`.
     ```

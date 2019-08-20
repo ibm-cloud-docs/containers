@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -33,9 +33,9 @@ Fügen Sie Ihrem Cluster mit verwalteten Add-ons im Handumdrehen Open-Source-Tec
 Verwaltete {{site.data.keyword.containerlong_notm}}-Add-ons sind eine einfache Möglichkeit, den Cluster mit Open-Source-Funktionen wie Istio oder Knative zu erweitern. Die Version des Open-Source-Tools, das Sie Ihrem Cluster hinzufügen, wird von IBM geprüft und für die Verwendung in {{site.data.keyword.containerlong_notm}} genehmigt.
 
 **Wie funktioniert die Abrechnung und Unterstützung für verwaltete Add-ons?** </br>
-Verwaltete Add-ons werden vollständig in die {{site.data.keyword.Bluemix_notm}}-Unterstützungsorganisation integriert. Wenn Sie eine Frage oder ein Problem mit der Verwendung der verwalteten Add-ons haben, können Sie einen der {{site.data.keyword.containerlong_notm}}-Unterstützungskanäle verwenden. Weitere Informationen finden Sie im Abschnitt [Hilfe und Unterstützung anfordern](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Verwaltete Add-ons werden vollständig in die {{site.data.keyword.cloud_notm}}-Unterstützungsorganisation integriert. Wenn Sie eine Frage oder ein Problem mit der Verwendung der verwalteten Add-ons haben, können Sie einen der {{site.data.keyword.containerlong_notm}}-Unterstützungskanäle verwenden. Weitere Informationen finden Sie im Abschnitt [Hilfe und Unterstützung anfordern](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Wenn das Tool, das Sie Ihrem Cluster hinzufügen, Kosten verursacht, werden diese automatisch integriert und als Teil Ihrer {{site.data.keyword.containerlong_notm}}-Abrechnung aufgeführt. Der Abrechnungszyklus wird von {{site.data.keyword.Bluemix_notm}} in Abhängigkeit vom Zeitpunkt der Aktivierung des Add-ons im Cluster bestimmt.
+Wenn das Tool, das Sie Ihrem Cluster hinzufügen, Kosten verursacht, werden diese automatisch integriert und als Teil Ihrer {{site.data.keyword.containerlong_notm}}-Abrechnung aufgeführt. Der Abrechnungszyklus wird von {{site.data.keyword.cloud_notm}} in Abhängigkeit vom Zeitpunkt der Aktivierung des Add-ons im Cluster bestimmt.
 
 **Welche Einschränkungen muss ich berücksichtigen?** </br>
 Wenn Sie den [Zugangscontroller zur Durchsetzung der Sicherheit von Container-Images](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in Ihrem Cluster installiert haben, können Sie in Ihrem Cluster keine verwalteten Add-ons aktivieren.
@@ -53,7 +53,7 @@ Weitere Informationen zu den Voraussetzungen für die einzelnen Add-ons finden S
 ## Verwaltete Add-ons aktualisieren
 {: #updating-managed-add-ons}
 
-Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.Bluemix_notm}} getestet und ihre Verwendung in {{site.data.keyword.containerlong_notm}} genehmigt. Verwenden Sie die folgenden Schritte, um die Komponenten eines Add-ons auf die aktuellste Version zu aktualisieren, die von {{site.data.keyword.containerlong_notm}} unterstützt wird.
+Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.cloud_notm}} getestet und ihre Verwendung in {{site.data.keyword.containerlong_notm}} genehmigt. Verwenden Sie die folgenden Schritte, um die Komponenten eines Add-ons auf die aktuellste Version zu aktualisieren, die von {{site.data.keyword.containerlong_notm}} unterstützt wird.
 {: shortdesc}
 
 1. Überprüfen Sie, ob Ihre Add-ons die neueste Version aufweisen. Add-ons, die mit `* (<version> latest)` gekennzeichnet sind, können aktualisiert werden.
@@ -66,8 +66,8 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -179,9 +179,9 @@ Die Versionen der einzelnen verwalteten Add-ons werden von {{site.data.keyword.B
        ```
        {: pre}
 
-13. Optional für Istio: Wenn Sie in Ihren Gateway-Konfigurationsdateien TLS-Abschnitte verwenden, müssen Sie die Gateways löschen und neu erstellen, damit Envoy auf die geheimen Schlüssel zugreifen kann. 
+13. Optional für Istio: Wenn Sie in Ihren Gateway-Konfigurationsdateien TLS-Abschnitte verwenden, müssen Sie die Gateways löschen und neu erstellen, damit Envoy auf die geheimen Schlüssel zugreifen kann.
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

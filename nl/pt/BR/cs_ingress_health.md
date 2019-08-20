@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Criação de Log e Monitoramento de Ingresso
 {: #ingress_health}
 
@@ -38,7 +39,7 @@ Se você desejar solucionar problemas do Ingress ou monitorar a atividade do Ing
 
 Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualizar os logs do ALB, escolha entre duas opções.
 * [Crie uma configuração de criação de log para o serviço Ingress](/docs/containers?topic=containers-health#configuring) em seu cluster.
-* Verifique os logs a partir da CLI. **Nota**: deve-se ter pelo menos a [função de serviço **Leitor** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
+* Verifique os logs a partir da CLI. **Nota**: deve-se ter pelo menos a [função de serviço **Leitor** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
     1. Obtenha o ID de um pod para um ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -70,7 +71,7 @@ Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualiza
 </tr>
 <tr>
 <td><code> "client": "$remote_addr" </code></td>
-<td>O endereço IP do pacote de solicitação que o cliente enviou ao seu app. Esse IP pode mudar com base nas situações a seguir:<ul><li>Quando uma solicitação do cliente para o seu app for enviada para o seu cluster, a solicitação será roteada para um pod para o serviço do balanceador de carga que expõe o ALB. Se nenhum pod de app existir no mesmo nó do trabalhador que o pod de serviço de balanceador de carga, o balanceador de carga encaminhará a solicitação para um pod de app em um nó do trabalhador diferente. O endereço IP de origem do pacote de solicitação é mudado para o endereço IP público do nó do trabalhador no qual o pod de app está em execução.</li><li>Se a [preservação de IP de origem estiver ativada](/docs/containers?topic=containers-ingress#preserve_source_ip), o endereço IP original da solicitação do cliente para seu app será registrado no lugar.</li></ul></td>
+<td>O endereço IP do pacote de solicitação que o cliente enviou ao seu app. Esse IP pode mudar com base nas situações a seguir:<ul><li>Quando uma solicitação do cliente para o seu app for enviada para o seu cluster, a solicitação será roteada para um pod para o serviço do balanceador de carga que expõe o ALB. Se nenhum pod de app existir no mesmo nó do trabalhador que o pod de serviço de balanceador de carga, o balanceador de carga encaminhará a solicitação para um pod de app em um nó do trabalhador diferente. O endereço IP de origem do pacote de solicitação é mudado para o endereço IP público do nó do trabalhador no qual o pod de app está em execução.</li><li>Se a [preservação de IP de origem estiver ativada](/docs/containers?topic=containers-ingress-settings#preserve_source_ip), o endereço IP original da solicitação do cliente para seu app será registrado no lugar.</li></ul></td>
 </tr>
 <tr>
 <td><code> "host": "$http_host" </code></td>
@@ -113,19 +114,19 @@ Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualiza
 </tr>
 <tr>
 <td><code> "request_time": $request_time </code></td>
-<td>O tempo de processamento da solicitação, medido em segundos com uma resolução de milissegundos. Esse tempo inicia quando o ALB lê os primeiros bytes da solicitação do cliente e para quando o ALB envia os últimos bytes da resposta para o cliente. O log será gravado imediatamente após o tempo de processamento da solicitação parar.</td>
+<td>O tempo de processamento da solicitação, que é medido em segundos com uma resolução de milissegundos. Esse tempo inicia quando o ALB lê os primeiros bytes da solicitação do cliente e para quando o ALB envia os últimos bytes da resposta para o cliente. O log será gravado imediatamente após o tempo de processamento da solicitação parar.</td>
 </tr>
 <tr>
 <td><code> "upstream_response_time": $upstream_response_time </code></td>
-<td>O tempo que leva o ALB para receber a resposta do servidor de envio de dados para o aplicativo back-end, medido em segundos com uma resolução de milissegundos. Os tempos de várias respostas são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+<td>O tempo decorrido para que o ALB receba a resposta do servidor de envio de dados para o aplicativo back-end, que é medido em segundos com uma resolução de milissegundos. Horários de várias respostas são separados por vírgulas e dois pontos.</td>
 </tr>
 <tr>
 <td><code> "upstream_connect_time": $upstream_connect_time </code></td>
-<td>O tempo que leva o ALB para estabelecer uma conexão com o servidor de envio de dados para o aplicativo back-end, medido em segundos com uma resolução de milissegundos. Se o TLS/SSL estiver ativado em sua configuração do recurso Ingress, esse tempo incluirá o tempo gasto no handshake. Os tempos de várias conexões são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+<td>O tempo que leva para o ALB estabelecer uma conexão com o servidor de envio de dados para o aplicativo back-end, que é medido em segundos com uma resolução de milissegundos. Se o TLS/SSL estiver ativado em sua configuração do recurso Ingress, esse tempo incluirá o tempo gasto no handshake. Os horários de várias conexões são separados por vírgulas e dois pontos.</td>
 </tr>
 <tr>
 <td><code> "upstream_header_time": $upstream_header_time </code></td>
-<td>O tempo que leva o ALB para receber o cabeçalho de resposta do servidor de envio de dados para o aplicativo backend, medido em segundos com uma resolução de milissegundos. Os tempos de várias conexões são separados por vírgulas e dois-pontos como endereços na variável <code>$upstream_addr</code>.</td>
+<td>O tempo que leva para o ALB receber o cabeçalho de resposta do servidor de envio de dados para o aplicativo back-end, que é medido em segundos com uma resolução de milissegundos. Os horários de várias conexões são separados por vírgulas e dois pontos.</td>
 </tr>
 </tbody></table>
 
@@ -137,7 +138,7 @@ Os logs são coletados automaticamente para seus ALBs do Ingress. Para visualiza
 
 Por padrão, os logs do Ingress são formatados em JSON e exibem campos de log comuns. No entanto, também é possível criar um formato de log customizado escolhendo quais componentes de log são encaminhados e como os componentes são organizados na saída de log
 
-Antes de iniciar, assegure-se de que tenha a [função de serviço **Gravador** ou **Gerenciador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
+Antes de iniciar, assegure-se de que você tenha a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
 
 1. Edite o arquivo de configuração para o recurso configmap `ibm-cloud-provider-ingress-cm`.
 
@@ -252,7 +253,7 @@ Antes de iniciar, assegure-se de que tenha a [função de serviço **Gravador** 
 Monitore seus ALBs implementando um exportador de métricas e o agente Prometheus em seu cluster.
 {: shortdesc}
 
-O exportador de métricas ALB usa a diretiva NGINX, `vhost_traf_status_zone`, para coletar dados de métricas do terminal `/status/format/json` em cada pod do ALB do Ingress. O exportador de métricas reformatará automaticamente cada campo de dados no arquivo JSON para uma métrica que seja legível para o Prometheus. Em seguida, um agente Prometheus seleciona as métricas produzidas pelo exportador e torna as métricas visíveis em um painel Prometheus.
+O exportador de métricas ALB usa a diretiva NGINX, `vhost_traf_status_zone`, para coletar dados de métricas do terminal `/status/format/json` em cada pod do ALB do Ingress. O exportador de métricas reformatará automaticamente cada campo de dados no arquivo JSON para uma métrica que seja legível para o Prometheus. Em seguida, um agente do Prometheus seleciona as métricas que são produzidas pelo exportador e torna as métricas visíveis em um painel do Prometheus.
 
 ### Instalando o gráfico do Helm do exportador de métricas
 {: #metrics-exporter}
@@ -263,13 +264,11 @@ Instale o gráfico do Helm do exportador de métricas para monitorar um ALB em s
 Os pods exportadores de métricas do ALB devem implementar nos mesmos nós do trabalhador para os quais seus ALBs são implementados. Se os seus ALBs são executados em nós do trabalhador de borda e esses nós de borda são contaminados para evitar outras implementações de carga de trabalho, os pods exportadores de métricas não poderão ser planejados. Deve-se remover as contaminações executando `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-1.  **Importante**: [siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente do Helm em sua máquina local e o servidor do Helm (tiller) com uma conta de serviço e incluir os repositórios do Helm do {{site.data.keyword.Bluemix_notm}}.
+1.  **Importante**: [siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente do Helm em sua máquina local e o servidor do Helm (tiller) com uma conta de serviço e incluir os repositórios do Helm do {{site.data.keyword.cloud_notm}}.
 
-2. Instale o gráfico do Helm `ibmcloud-alb-metrics-exporter` em seu cluster. Esse gráfico do Helm implementa um exportador de métricas do ALB e cria uma conta de serviço `alb-metrics-service-account` no namespace `kube-system`. Substitua <alb-ID > pelo ID do ALB para o qual você deseja coletar as métricas. Para visualizar os IDs para os ALBs em seu cluster, execute <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
-  Deve-se implementar um gráfico para cada ALB que será monitorado.
-  {: note}
+2. Instale o gráfico do Helm `ibmcloud-alb-metrics-exporter` em seu cluster. Esse gráfico do Helm implementa um exportador de métricas do ALB e cria uma conta de serviço `alb-metrics-service-account` no namespace `kube-system`. Substitua `<zone>` pela zona em que o ALB existe e `<alb_ID>` pelo ID do ALB para o qual você deseja coletar as métricas. Para visualizar os IDs para os ALBs em seu cluster, execute `ibmcloud ks albs --cluster <cluster_name>`.
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb_ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -294,12 +293,14 @@ Os pods exportadores de métricas do ALB devem implementar nos mesmos nós do tr
   ```
   {:screen}
 
-5. Opcional: [instale o agente do Prometheus](#prometheus-agent) para selecionar as métricas produzidas pelo exportador e torná-las visíveis em um painel do Prometheus.
+5. Repita as etapas 2 a 4 para cada ALB em seu cluster.
+
+6. Opcional: [instale o agente do Prometheus](#prometheus-agent) para selecionar as métricas que são produzidas pelo exportador e torná-las visíveis em um painel do Prometheus.
 
 ### Instalando o gráfico do Helm do agente do Prometheus
 {: #prometheus-agent}
 
-Depois de instalar o [exportador de métricas](#metrics-exporter), será possível instalar o gráfico do Helm do agente do Prometheus para selecionar as métricas produzidas pelo exportador e torná-las visíveis em um painel do Prometheus.
+Depois de instalar o [exportador de métricas](#metrics-exporter), é possível instalar o gráfico do Helm do agente do Prometheus para selecionar as métricas que são produzidas pelo exportador e torná-las visíveis em um painel do Prometheus.
 {: shortdesc}
 
 1. Faça download do arquivo TAR para o gráfico do Helm do exportador de métricas em https://icr.io/helm/iks-charts/charts/ibmcloud-alb-metrics-exporter-1.0.7.tgz
@@ -412,7 +413,7 @@ A tabela a seguir lista os nomes das métricas do ALB suportadas com os rótulos
 ### Métricas do servidor
 {: #server_metrics}
 
-O `alb-metrics-exporter` reformata automaticamente cada campo de dados no arquivo JSON em uma métrica que é legível pelo Prometheus. As métricas do servidor coletam dados no subdomínio definido em um recurso do Ingress; por exemplo, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+O `alb-metrics-exporter` reformata automaticamente cada campo de dados no arquivo JSON em uma métrica que é legível pelo Prometheus. As métricas do servidor coletam dados no subdomínio que são definidos em um recurso do Ingress. Por exemplo, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
 {: shortdesc}
 
 As métricas do servidor estão no formato `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
@@ -432,7 +433,7 @@ kube_system_public_public_cra6a6eb9e897e41c4a5e58f957b417aec_bytes {1}_us-south_
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>O ID do ALB. No exemplo acima, o ID do ALB é <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>O ID do ALB. No exemplo anterior, o ID de ALB é <code>public \_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;SUB-TYPE&gt; </code></td>
@@ -441,19 +442,19 @@ kube_system_public_public_cra6a6eb9e897e41c4a5e58f957b417aec_bytes {1}_us-south_
 <li><code>bytes</code> e <code>processing\_time</code> correspondem às métricas <code>in</code> e <code>out</code>.</li>
 <li><code>cache</code> corresponde às métricas <code>bypass</code>, <code>expired</code>, <code>hit</code>, <code>miss</code>, <code>revalidated</code>, <code>scare</code>, <code>stale</code> e <code>updating</code>.</li>
 <li><code>requests</code> corresponde às métricas <code>requestMsec</code>, <code>1xx</code>, <code>2xx</code>, <code>3xx</code>, <code>4xx</code>, <code>5xx</code> e <code>total</code>.</li></ul>
-No exemplo acima, o subtipo é <code>bytes</code>.</td>
+No exemplo anterior, o subtipo é <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;SERVER-NAME&gt; </code></td>
-<td>O nome do servidor que está definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados <code>(\_)</code>. No exemplo acima, o nome do servidor é <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
+<td>O nome do servidor que está definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados <code>(\_)</code>. No exemplo anterior, o nome do servidor é <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;METRIC_NAME&gt; </code></td>
-<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas do servidor suportadas". No exemplo acima, o nome da métrica é <code>out</code>.</td>
+<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas do servidor suportadas". No exemplo anterior, o nome da métrica é <code>out</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;VALUE&gt; </code></td>
-<td>O valor da métrica coletada. No exemplo acima, o valor é <code>22319</code>.</td>
+<td>O valor da métrica coletada. No exemplo anterior, o valor é <code>22319</code>.</td>
 </tr>
 </tbody></table>
 
@@ -537,7 +538,7 @@ A tabela a seguir lista os nomes de métrica do servidor suportados.
 ### Métricas de envio de dados
 {: #upstream_metrics}
 
-O `alb-metrics-exporter` reformata automaticamente cada campo de dados no arquivo JSON em uma métrica que é legível pelo Prometheus. As métricas de envio de dados coletam dados sobre o serviço de back-end definido em um recurso do Ingress.
+O `alb-metrics-exporter` reformata automaticamente cada campo de dados no arquivo JSON em uma métrica que é legível pelo Prometheus. As métricas de envio de dados coletam dados no serviço de back-end que é definido em um recurso do Ingress.
 {: shortdesc}
 
 As métricas de envio de dados são formatadas de duas maneiras.
@@ -565,23 +566,23 @@ kube_system_public_cra6a6eb9e897e41c4a5e58f957b417aec_bytes {1}{7}{2}.30.140.68:
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>O ID do ALB. No exemplo acima, o ID do ALB é <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
+<td>O ID do ALB. No exemplo anterior, o ID de ALB é <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;SUB-TYPE&gt; </code></td>
-<td>O subtipo da métrica. Os valores suportados são <code>bytes</code>, <code>processing\_time</code> e <code>requests</code>. No exemplo acima, o subtipo é <code>bytes</code>.</td>
+<td>O subtipo da métrica. Os valores suportados são <code>bytes</code>, <code>processing\_time</code> e <code>requests</code>. No exemplo anterior, o subtipo é <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;UPSTREAM-NAME&gt; </code></td>
-<td>O nome do serviço de envio de dados que é definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados <code>(\_)</code>. No exemplo acima, o nome do envio de dados é <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
+<td>O nome do serviço de envio de dados que é definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados <code>(\_)</code>. No exemplo anterior, o nome do envio de dados é <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;METRIC_NAME&gt; </code></td>
-<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas de tipo 1 de envio de dados suportadas". No exemplo acima, o nome da métrica é <code>in</code>.</td>
+<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas de tipo 1 de envio de dados suportadas". No exemplo anterior, o nome da métrica é <code>in</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;VALUE&gt; </code></td>
-<td>O valor da métrica coletada. No exemplo acima, o valor é <code>1227</code>.</td>
+<td>O valor da métrica coletada. No exemplo anterior, o valor é <code>1227</code>.</td>
 </tr>
 </tbody></table>
 
@@ -648,22 +649,22 @@ kube_system_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec {1}{7}{2}
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>O ID do ALB. No exemplo acima, o ID do ALB é <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>O ID do ALB. No exemplo anterior, o ID de ALB é <code>public \_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <td><code> &lt;UPSTREAM-NAME&gt; </code></td>
-<td>O nome do serviço de envio de dados que é definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados (<code>\_</code>). No exemplo acima, o nome do envio de dados é <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
+<td>O nome do serviço de envio de dados que é definido no recurso Ingress. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) são substituídos por sublinhados (<code>\_</code>). No exemplo anterior, o nome do subfluxo é <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
 </tr>
 <tr>
 <td><code> &lt; POD\_IP &gt; </code></td>
-<td>O endereço IP e a porta de um pod de serviço de envio de dados específico. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) e os dois-pontos (<code>:</code>) são substituídos por sublinhados <code>(_)</code>. No exemplo acima, o IP do pod de envio de dados é <code>172_30_75_6_80</code>.</td>
+<td>O endereço IP e a porta de um pod de serviço de envio de dados específico. Para manter a compatibilidade com o Prometheus, os pontos (<code>.</code>) e os dois-pontos (<code>:</code>) são substituídos por sublinhados <code>(_)</code>. No exemplo anterior, o IP do pod de envio de dados é <code>172_30_75_6_80</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;METRIC_NAME&gt; </code></td>
-<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas do tipo 2 de envio de dados suportadas". No exemplo acima, o nome da métrica é <code>requestMsec</code>.</td>
+<td>O nome do tipo de métrica coletado. Para obter uma lista de nomes de métricas, consulte a tabela a seguir "Métricas do tipo 2 de envio de dados suportadas". No exemplo anterior, o nome da métrica é <code>requestMsec</code>.</td>
 </tr>
 <tr>
 <td><code> &lt;VALUE&gt; </code></td>
-<td>O valor da métrica coletada. No exemplo acima, o valor é <code>40</code>.</td>
+<td>O valor da métrica coletada. No exemplo anterior, o valor é <code>40</code>.</td>
 </tr>
 </tbody></table>
 
@@ -695,7 +696,7 @@ As zonas de memória compartilhada são definidas para que os processos do traba
 
 No configmap do Ingresso `ibm-cloud-provider-ingress-cm`, o campo `vts-status-zone-size` configura o tamanho da zona de memória compartilhada para a coleta de dados de métrica. Por padrão, `vts-status-zone-size` é configurado como `10m`. Se você tiver um ambiente grande que requeira mais memória para coleta de métricas, será possível substituir o padrão para usar, como alternativa, um valor maior, seguindo estas etapas.
 
-Antes de iniciar, assegure-se de que tenha a [função de serviço **Gravador** ou **Gerenciador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
+Antes de iniciar, assegure-se de que você tenha a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `kube-system`.
 
 1. Edite o arquivo de configuração para o recurso configmap `ibm-cloud-provider-ingress-cm`.
 

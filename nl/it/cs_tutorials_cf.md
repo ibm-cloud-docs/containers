@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -55,7 +55,7 @@ Questa esercitazione è progettata per gli sviluppatori dell'applicazione Cloud 
 - [Crea un
 cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Indirizza la tua CLI al cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
+- Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.cloud_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
     - [Qualsiasi ruolo della piattaforma](/docs/containers?topic=containers-users#platform)
     - Il ruolo del servizio [**Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform)
 - [Acquisisci informazioni sulla terminologia Docker e Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
@@ -280,7 +280,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8
     ```
     {: screen}
 
@@ -290,7 +290,7 @@ Distribuisci la tua applicazione come un contenitore in un cluster Kubernetes.
 
 5.  [Avvia il dashboard Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se selezioni il tuo cluster nella [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
+    Se selezioni il tuo cluster nella [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), puoi utilizzare il pulsante **Dashboard Kubernetes** per avviare il tuo dashboard con un clic.
     {: tip}
 
 6. Nella scheda **Carichi di lavoro**, puoi visualizzare le risorse che hai creato.

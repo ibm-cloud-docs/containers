@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks, docker
+keywords: kubernetes, iks, docker, containers
 
 subcollection: containers
 
@@ -24,10 +24,9 @@ subcollection: containers
 {:preview: .preview}
 
 
-
 # {{site.data.keyword.containerlong_notm}}-Technologie
 
-Weitere Informationen zur Technologie hinter {{site.data.keyword.containerlong}}.
+Weitere Informationen zur Technologie von {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Docker-Container
@@ -42,7 +41,7 @@ Erfahren Sie mehr über einige grundlegende Docker-Konzepte:
 <dt>Image</dt>
 <dd>Die Basis jedes Containers, den Sie ausführen möchten, ist ein Containerimage. Container-Images werden auf der Grundlage einer Dockerfile erstellt, bei der es sich um eine Textdatei handelt, die definiert, wie das Image erstellt wird und welche Buildartefakte darin enthalten sein sollen, z. B. die App, die Konfiguration der App und ihre Abhängigkeiten. Images werden immer auf der Grundlage anderer Images erstellt, wodurch sie schneller konfiguriert werden können. So wird die Hauptarbeit für ein Image von jemand anderem ausgeführt und Sie müssen das Image nur noch für Ihre Nutzung optimieren.</dd>
 <dt>Registry</dt>
-<dd>In einer 'Image-Registry' werden Docker-Images gespeichert, abgerufen und gemeinsam genutzt. Die in einer Registry gespeicherten Images können öffentlich verfügbar sein (öffentliche Registry) oder aber für eine kleine Gruppe von Benutzern zugänglich sein (private Registry). {{site.data.keyword.containerlong_notm}} bietet öffentliches Images, z. B. 'ibmliberty', mit denen Sie Ihre erste containerisierte App erstellen können. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.Bluemix_notm}} bereitgestellte Registry) verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet werden.
+<dd>In einer 'Image-Registry' werden Docker-Images gespeichert, abgerufen und gemeinsam genutzt. Die in einer Registry gespeicherten Images können öffentlich verfügbar sein (öffentliche Registry) oder aber für eine kleine Gruppe von Benutzern zugänglich sein (private Registry). {{site.data.keyword.containerlong_notm}} bietet öffentliches Images, z. B. 'ibmliberty', mit denen Sie Ihre erste containerisierte App erstellen können. Was Unternehmensanwendungen betrifft, so sollten Sie jedoch eine private Registry (wie z. B. die von {{site.data.keyword.cloud_notm}} bereitgestellte Registry) verwenden, um zu verhindern, dass Ihre Images durch nicht berechtigte Benutzer verwendet werden.
 </dd>
 <dt>Container</dt>
 <dd>Jeder Container wird auf der Grundlage eines Images erstellt. Ein Container ist eine gepackte App mit den zugehörigen Abhängigkeiten, sodass die App in eine andere Umgebungen verlagert und dort ohne Änderungen ausgeführt werden kann. Im Unterschied zu virtuellen Maschinen virtualisieren Container keine Einheiten, die zugehörigen Betriebssysteme und die zugrunde liegende Hardware. Nur App-Code, Laufzeit, Systemtools, Bibliotheken und Einstellungen werden in dem Container gepackt. Container werden als isolierte Prozesse auf Ubuntu-Rechenhosts ausgeführt und nutzen dasselbe Hostbetriebssystem und dieselben Hardwareressourcen. Dadurch ist ein Container schlanker, leichter portierbar und effizienter als eine virtuelle Maschine.</dd>
@@ -88,7 +87,7 @@ Im folgenden Diagramm sind einige grundlegende Kubernetes-Konzepte veranschaulic
 
 <dl>
 <dt>Konto</dt>
-<dd>Das Konto bezieht sich auf Ihr {{site.data.keyword.Bluemix_notm}}-Konto.</dd>
+<dd>Das Konto bezieht sich auf Ihr {{site.data.keyword.cloud_notm}}-Konto.</dd>
 
 <dt>Cluster</dt>
 <dd>Ein Kubernetes-Cluster besteht aus einem oder mehreren Rechenhosts, die als Workerknoten bezeichnet werden. Workerknoten werden von einem Kubernetes-Master verwaltet, der alle Kubernetes-Ressourcen im Cluster zentral steuert und überwacht. Wenn Sie also die Ressourcen für eine containerisierte App bereitstellen, entscheidet der Kubernetes-Master, auf welchen Workerknoten diese Ressourcen bereitgestellt werden sollen, und zwar unter Berücksichtigung der Bereitstellungsanforderungen und der im Cluster verfügbaren Kapazität. Kubernetes-Ressourcen sind Services, Bereitstellungen und Pods.</dd>
@@ -123,7 +122,7 @@ Definieren Sie Aktualisierungsstrategien für Ihre App. Dabei können Sie unter 
 ## Servicearchitektur
 {: #architecture}
 
-In einem Kubernetes-Cluster, der auf {{site.data.keyword.containerlong_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Genauer genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Die Einrichtung der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten hängt davon ab, wie Sie Ihr IBM Cloud-Infrastrukturnetz (SoftLayer) einrichten: ein Konto mit einem öffentlichen Servicepunkt oder ein VRF-aktiviertes Konto mit öffentlichen und privaten Endpunkten.
+In einem Kubernetes-Cluster, der auf {{site.data.keyword.containerlong_notm}} ausgeführt wird, sind Ihre containerisierten Apps auf Rechenhosts gehostet, die als Workerknoten bezeichnet werden. Genauer genommen, werden die Apps auf Pods ausgeführt, die wiederum auf Workerknoten gehostet werden. Workerknoten werden vom Kubernetes-Master verwaltet. Die Einrichtung der Kommunikation zwischen dem Kubernetes-Master und den Workerknoten hängt davon ab, wie Sie Ihr IBM Cloud-Infrastrukturnetz einrichten: ein Konto mit einem öffentlichen Serviceendpunkt oder ein VRF-fähiges Konto mit öffentlichen und privaten Serviceendpunkten.
 {: shortdesc}
 
 Die folgende Abbildung zeigt die Komponenten Ihres Clusters und die Art und Weise ihrer Interaktion, wenn nur der [öffentliche Serviceendpunkt aktiviert ist](/docs/containers?topic=containers-plan_clusters#workeruser-master).
@@ -160,19 +159,19 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <td>Der Kubernetes-API-Server dient als Haupteinstiegspunkt für alle Anforderungen der Clusterverwaltung vom Workerknoten zum Kubernetes-Master. Der Kubernetes-API-Server validiert und verarbeitet Anforderungen, die den Status von Kubernetes-Ressourcen (z. B. Pods oder Services) ändern, und speichert diesen Status in 'etcd'.</td>
     </tr>
     <tr>
-    <td>openvpn-server</td>
+    <td>`openvpn-server`</td>
     <td>Der OpenVPN-Server arbeitet mit dem OpenVPN-Client zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'.</td>
     </tr>
     <tr>
-    <td>etcd</td>
-    <td>'etcd' ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, wie z. B. von Services, Implementierungen und Pods. Daten in 'etcd' werden in einer verschlüsselten Speicherinstanz gesichert, die von IBM verwaltet wird.</td>
+    <td>`etcd`</td>
+    <td>`etcd` ist ein hoch verfügbarer Schlüsselwertspeicher, in dem der Status aller Kubernetes-Ressourcen eines Clusters gespeichert ist, z. B. von Services, Bereitstellungen und Pods. Daten in 'etcd' werden in einer verschlüsselten Speicherinstanz gesichert, die von IBM verwaltet wird.</td>
     </tr>
     <tr>
-    <td>kube-scheduler</td>
+    <td>`kube-scheduler`</td>
     <td>Der Kubernetes-Scheduler überwacht neu erstellte Pods und entscheidet, wo sie auf der Basis von Kapazität, Leistungsbedarf, Richtlinienvorgaben, Anti-Affinitätsspezifikationen und Workloadanforderungen bereitgestellt werden. Wird kein Workerknoten gefunden, der mit den Anforderungen übereinstimmt, so wird der Pod nicht im Cluster bereitgestellt.</td>
     </tr>
     <tr>
-    <td>kube-controller-manager</td>
+    <td>`kube-controller-manager`</td>
     <td>Der Kubernetes-Controller-Manager ist ein Dämonprozess, der den Zustand von Clusterressourcen wie z. B. Replikatgruppen überwacht. Wenn sich der Zustand einer Ressource ändert, z. B. wenn ein Pod in einer Replikatgruppe inaktiv wird, leitet der Controller-Manager Korrekturmaßnahmen ein, um den erforderlichen Zustand zu erreichen.</td>
     </tr>
     </tbody></table></dd>
@@ -188,27 +187,27 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     <tbody>
     <tr>
     <td>`ibm-master-proxy`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>`ibm-master-proxy` leitet Anforderungen vom Workerknoten an die IP-Adressen der hoch verfügbaren Master-Replikate weiter. In Einzelzonenclustern verfügt der Master über drei Replikate auf separaten Hosts mit einer Master-IP-Adresse und einem Domänennamen. Für Cluster in einer mehrzonenfähigen Zone verfügt der Master über drei Replikate, die über Zonen verteilt sind. Jeder Master hat hier seine eigene IP-Adresse, die bei DNS registriert ist, und einen Domänennamen für den gesamten Cluster-Master.</td>
     </tr>
     <tr>
     <td>`openvpn-client`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Der OpenVPN-Client arbeitet mit dem OpenVPN-Server zusammen, um den Master sicher mit dem Workerknoten zu verbinden. Diese Verbindung unterstützt `apiserver proxy`-Aufrufe für Ihre Pods und Services sowie `kubectl exec`-, `attach`- und `logs`-Aufrufe für 'kubelet'.</td>
     </tr>
     <tr>
     <td>`kubelet`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Das 'kubelet' ist ein Pod, der auf allen Workerknoten ausgeführt wird und der für die Überwachung des Zustands der Pods verantwortlich ist, die auf dem Workerknoten aktiv sind, und für die Überwachung der Ereignisse, die der Kubernetes-API-Server sendet. Das 'kubelet' erstellt oder entfernt auf der Basis der Ereignisse Pods, stellt Aktivitäts- und Bereitschaftsprüfungen sicher und meldet dem Kubernetes-API-Server den Zustand der Pods.</td>
     </tr>
     <tr>
     <td>`coredns`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Kubernetes plant standardmäßig einen CoreDNS-Pod und -Service (bzw. KubeDNS-Pod in Version 1.12 und früher) auf dem Cluster. Container verwenden automatisch die IP des DNS-Service, um DNS-Namen bei der Suche nach weiteren Pods und Services aufzulösen.</td>
     </tr>
     <tr>
     <td>`calico`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Calico verwaltet die Netzrichtlinien für Ihren Cluster und besteht aus den folgenden Komponenten.
     <ul>
     <li>**`calico-cni`**: Die Container-Netzschnittstelle (CNI – Container Network Interface) von Calico verwaltet die Netzkonnektivität von Containern und entfernt zugeordnete Ressourcen, wenn ein Container gelöscht wird.</li>
@@ -218,42 +217,42 @@ Worin besteht der Unterschied zwischen dem Kubernetes-Master und einem Workerkno
     </tr>
     <tr>
     <td>`kube-proxy`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Der Kubernetes-Netzproxy ist ein Dämonprozess, der auf allen Workerknoten ausgeführt wird und der TCP- und UDP-Netzverkehr für im Cluster ausgeführte Services weiterleitet oder deren Last verteilt.</td>
     </tr>
     <tr>
     <td>`kube-dashboard`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Das Kubernetes-Dashboard ist eine webbasierte Benutzerschnittstelle, die es Benutzern ermöglicht, den Cluster und die Anwendungen, die im Cluster ausgeführt werden, zu verwalten und auftretende Fehler zu beheben.</td>
     </tr>
     <tr>
     <td>`heapster`</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Heapster ist ein clusterweiter Aggregator von Überwachungs- und Ereignisdaten. Der Heapster-Pod erkennt alle Knoten im Cluster und fragt bei den Kubelets der einzelnen Knoten die Nutzungsinformationen ab. Sie finden Nutzungsdiagramme im Kubernetes-Dashboard.</td>
     </tr>
     <tr>
     <td>Ingress-ALB</td>
-    <td>kube-system</td>
-    <td>Ingress ist ein Kubernetes Service, den Sie verwenden können, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
+    <td>`kube-system`</td>
+    <td>Ingress ist ein Kubernetes Service, den Sie verwenden können, um Netzverkehrworkloads in Ihrem Cluster auszugleichen, indem Sie öffentliche oder private Anforderungen an mehrere Apps in Ihrem Cluster weiterleiten. Um Ihre Apps über das öffentliche oder private Netz zugänglich zu machen, müssen Sie eine Ingress-Ressource erstellen, um Ihre Apps für die Ingress-ALB (ALB – Application Load Balancer, Lastausgleichsfunktion für Anwendungen) zu registrieren. Es kann dann mithilfe einer einzigen URL- oder IP-Adresse auf mehrere Apps zugegriffen werden.</td>
     </tr>
     <tr>
     <td>Storage Provider</td>
-    <td>kube-system</td>
+    <td>`kube-system`</td>
     <td>Jeder Cluster ist mit einem Plug-in für die Bereitstellung von Dateispeicher konfiguriert. Sie können auswählen, weitere Add-ons zu installieren, wie z. B. Blockspeicher.</td>
     </tr>
     <tr>
     <td>Protokollierung und Metriken</td>
-    <td>ibm-system</td>
+    <td>`ibm-system`</td>
     <td>Sie können die integrierten Services {{site.data.keyword.loganalysislong_notm}} und {{site.data.keyword.monitoringlong_notm}} verwenden, um Ihre Erfassungs- und Aufbewahrungsmöglichkeiten bei der Arbeit mit Protokollen und Metriken zu erweitern.</td>
     </tr>
     <tr>
     <td>Lastausgleichsfunktion</td>
-    <td>ibm-system</td>
-    <td>Eine Lastausgleichsfunktion ist ein Kubernetes Service, der verwendet werden kann, um Netzverkehr-Workloads in Ihrem Cluster auszugleichen, indem öffentliche oder private Anforderungen an eine App weitergeleitet werden.</td>
+    <td>`ibm-system`</td>
+    <td>Eine Lastausgleichsfunktion ist ein Kubernetes Service, der verwendet werden kann, um Netzverkehrsworkloads in Ihrem Cluster auszugleichen, indem öffentliche oder private Anforderungen an eine App weitergeleitet werden.</td>
     </tr>
     <tr>
     <td>App-Pods und -Services</td>
-    <td>default</td>
+    <td>`default`</td>
     <td>Im Namensbereich <code>default</code> oder in von Ihnen erstellten Namensbereichen können Sie Apps in Pods und Services bereitstellen, damit Sie mit diesen Pods kommunizieren können.</td>
     </tr>
     </tbody></table></dd>
@@ -268,6 +267,8 @@ Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Pro
 {{site.data.keyword.containerlong_notm}} und das Kubernetes-Open-Source-Projekt werden mit Standardeinstellungen und Standardeinschränkungen für Services bereitgestellt, um die Sicherheit, den Komfort und die Basisfunktionalität zu gewährleisten. Einige der Einschränkungen können Sie bei Bedarf ändern, sofern dies angegeben ist. Wenn Sie erwarten, dass Sie die folgenden {{site.data.keyword.containerlong_notm}}-Einschränkungen erreichen, wenden Sie sich an das IBM Team im [internen ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für internen Link")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) oder [externen Slack ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com).
 {: shortdesc}
 
+
+
 <table summary="Diese Tabelle enthält Informationen zu den {{site.data.keyword.containerlong_notm}}-Einschränkungen. Spalten sind von links nach rechts zu lesen. Die erste Spalte enthält den Typ und die zweite Spalte die Beschreibung der Einschränkung. ">
 <caption>{{site.data.keyword.containerlong_notm}}-Einschränkungen</caption>
 <thead>
@@ -279,35 +280,41 @@ Möchten Sie sehen, wie {{site.data.keyword.containerlong_notm}} mit anderen Pro
 <tbody>
   <tr>
     <td>Grenzwerte für API-Rate</td>
-    <td>100 Anforderungen in jeweils 10 Sekunden an die {{site.data.keyword.containerlong_notm}}-API für jede eindeutige Quellen-IP-Adresse. </td>
+    <td>100 Anforderungen in jeweils 10 Sekunden an die {{site.data.keyword.containerlong_notm}}-API für jede eindeutige Quellen-IP-Adresse.</td>
   </tr>
   <tr>
     <td>Workerknotenkapazität</td>
-    <td>Workerknoten sind in [ausgewählten Typen](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) der Rechenressourcen verfügbar. </td>
+    <td>Workerknoten sind in [ausgewählten Typen](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) der Rechenressourcen verfügbar.</td>
   </tr>
   <tr>
     <td>Zugriff auf Workerknotenhost</td>
-    <td>Aus Sicherheitsgründen können Sie nicht über SSH auf den Rechenhost des Workerknotens zugreifen. </td>
+    <td>Aus Sicherheitsgründen können Sie nicht über SSH auf den Rechenhost des Workerknotens zugreifen.</td>
   </tr>
   <tr>
     <td>Maximale Anzahl Workerknoten</td>
-    <td>Wenn Sie mehr als 900 Workerknoten pro Cluster erwarten, wenden Sie sich zuerst an das IBM Team im [internen ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für internen Link")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) oder [externen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com). <br><br>Bei einem Kapazitätslimit der IBM Cloud-Infrastruktur (SoftLayer) bezüglich der Anzahl der Instanzen pro Rechenzentrum oder der pro Monat bestellten Instanzen wenden Sie sich an den Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). </td>
+    <td>Wenn Sie mehr als 900 Workerknoten pro Cluster erwarten, wenden Sie sich zuerst an das {{site.data.keyword.containerlong_notm}}-Team im [internen ![Symbol für internen Link](../icons/launch-glyph.svg "Symbol für internen Link")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) oder [externen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com). <br><br>Bei einem Kapazitätslimit der IBM Cloud-Infrastruktur bezüglich der Anzahl der Instanzen pro Rechenzentrum oder der pro Monat bestellten Instanzen wenden Sie sich an den Ansprechpartner für die IBM Cloud-Infrastruktur.</td>
   </tr>
   <tr>
     <td>Maximale Anzahl Pods</td>
-    <td>110 pro Workerknoten.<br><br>Die Anzahl der Pods schließt `kube-system`- und `ibm-system`-Pods ein, die auf dem Workerknoten ausgeführt werden. Für eine verbesserte Leistung sollten Sie eine Begrenzung der Anzahl der Pods in Betracht ziehen, die Sie pro Rechenkern ausführen, damit Sie den Workerknoten nicht überlasten. Auf einem Workerknoten des Typs `b3c.4x16` beispielsweise können Sie 10 Pods pro Kern ausführen, die maximal 75 % der Gesamtkapazität des Workerknotens verwenden. </td>
+    <td>110 pro Workerknoten.<br><br>
+    **Für Workerknoten, die mit Kubernetes 1.13.7_1527, 1.14.3_1524 oder höher arbeiten**: Workerknoten mit mehr als elf CPU-Cores (Kernen) können zehn Pods pro Core unterstützen. Dies gilt bis zu einem Grenzwert von 250 Pods pro Workerknoten.
+    <br><br>Die Anzahl der Pods schließt `kube-system`- und `ibm-system`-Pods ein, die auf dem Workerknoten ausgeführt werden. Für eine verbesserte Leistung sollten Sie eine Begrenzung der Anzahl der Pods in Betracht ziehen, die Sie pro Rechenkern ausführen, damit Sie den Workerknoten nicht überlasten. Auf einem Workerknoten des Typs `b3c.4x16` beispielsweise können Sie 10 Pods pro Kern ausführen, die maximal 75 % der Gesamtkapazität des Workerknotens verwenden.</td>
   </tr>
   <tr>
     <td>Maximale Anzahl Kubernetes Services</td>
-    <td>65.000 IPs pro Cluster im 172.21.0.0/16-Bereich, die Sie Kubernetes Services im Cluster zuordnen können. </td>
+    <td>65.000 IPs pro Cluster im 172.21.0.0/16-Bereich, die Sie Kubernetes Services im Cluster zuordnen können.</td>
   </tr>
   <tr>
     <td>Datenverkehr der Ingress-Lastausgleichsfunktion für Anwendung (ALB)</td>
-    <td>32.768 Verbindungen pro Sekunde.<br><br>Wenn Ihr Ingress-Datenverkehr diesen Wert überschreitet, [skalieren Sie die Anzahl der ALB-Replikate](/docs/containers?topic=containers-ingress#scale_albs) in Ihrem Cluster nach oben, um der erhöhten Auslastung zu entsprechen.</td>
+    <td>32.768 Verbindungen pro Sekunde.</td>
   </tr>
   <tr>
     <td>Speicherdatenträger</td>
-    <td>Insgesamt 250 Datenträger für Datei- und Blockspeicherinstanzen der IBM Cloud-Infrastruktur (SoftLayer) pro Konto. <br><br>Wenn Sie mehr Datenträger anhängen, wird möglicherweise eine Nachricht zu einem Kapazitätsengpass (Out of Capacity) angezeigt, wenn Sie persistente Datenträger bereitstellen. Wenden Sie sich in diesem Fall an den Ansprechpartner für die IBM Cloud-Infrastruktur (SoftLayer). Weitere FAQs finden Sie in der Dokumentation zum [Datei-](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) und [Blockspeicher](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-). </td>
+    <td>Insgesamt 250 Datenträger für Datei- und Blockspeicherinstanzen der IBM Cloud-Infrastruktur pro Konto. <br><br>Wenn Sie mehr Datenträger anhängen, wird möglicherweise eine Nachricht zu einem Kapazitätsengpass (Out of Capacity) angezeigt, wenn Sie persistente Datenträger bereitstellen. Wenden Sie sich in diesem Fall an den Ansprechpartner für die IBM Cloud-Infrastruktur. Weitere FAQs finden Sie in der Dokumentation zum [Datei-](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) und [Blockspeicher](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-).</td>
+  </tr>
+  <tr>
+    <td>Kubernetes-Podprotokolle</td>
+    <td>Wenn Sie die Protokolle für einzelne App-Pods überprüfen möchten, können Sie das Terminal verwenden, um `kubectl logs <pod name>` auszuführen. Verwenden Sie das Kubernetes-Dashboard nicht, um Protokolle für Ihre Pods zu streamen, was zu einer Störung Ihres Zugriffs auf das Kubernetes-Dashboard führen könnte.</td>
   </tr>
 </tbody>
 </table>

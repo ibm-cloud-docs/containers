@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 É possível aprender como usar o {{site.data.keyword.containerlong}} para implementar um app conteinerizado que alavanca o {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
-Neste cenário, uma firma PR fictícia usa o serviço {{site.data.keyword.Bluemix_notm}} para analisar seus press releases e receber feedback no sinal de suas mensagens.
+Neste cenário, uma firma PR fictícia usa o serviço {{site.data.keyword.cloud_notm}} para analisar seus press releases e receber feedback no sinal de suas mensagens.
 
 Usando o cluster do Kubernetes que foi criado no último tutorial, o desenvolvedor de app da firma PR implementa uma versão Hello World do app. Construindo em cada lição neste tutorial, o desenvolvedor de aplicativo implementa versões progressivamente mais complicadas do mesmo app. O diagrama a seguir mostra os componentes de cada implementação por lição.
 
@@ -42,7 +42,7 @@ Os serviços agrupam um conjunto de cápsulas e fornecem conexão de rede a esse
 
 Para tornar seu app ainda mais altamente disponível, em clusters padrão, é possível criar um conjunto de trabalhadores que abrange múltiplas zonas com nós do trabalhador em cada zona para executar ainda mais réplicas de seu app. Essa tarefa não é coberta neste tutorial, mas mantenha esse conceito em mente para melhorias futuras na disponibilidade de um app.
 
-Somente uma das lições inclui a integração de um serviço do {{site.data.keyword.Bluemix_notm}} em um app, mas é possível usá-las com um app tão simples ou complexo quanto se possa imaginar.
+Somente uma das lições inclui a integração de um serviço do {{site.data.keyword.cloud_notm}} em um app, mas é possível usá-las com um app tão simples ou complexo quanto se possa imaginar.
 
 ## Objetivos
 {: #apps_objectives}
@@ -52,7 +52,7 @@ Somente uma das lições inclui a integração de um serviço do {{site.data.key
 * Tornar um app publicamente acessível
 * Implementar uma única instância de um app em um cluster usando um comando do Kubernetes e um script
 * Implementar múltiplas instâncias de um app em contêineres que são recriados durante as verificações de funcionamento
-* Implementar um app que use a funcionalidade de um serviço do {{site.data.keyword.Bluemix_notm}}
+* Implementar um app que use a funcionalidade de um serviço do {{site.data.keyword.cloud_notm}}
 
 ## Tempo Necessário
 {: #apps_time}
@@ -236,7 +236,7 @@ imagem. Para obter a região de registro em que você está atualmente, execute 
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -252,7 +252,7 @@ imagem. Para obter a região de registro em que você está atualmente, execute 
 
 11. [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar o painel com um clique.
     {: tip}
 
 12. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.
@@ -423,7 +423,7 @@ Separar os componentes em diferentes contêineres assegura que seja possível at
 
 ![Configuração de implementação](images/cs_app_tutorial_mz-components3.png)
 
-No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.Bluemix_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente.
+No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhador. Nesta lição, você cria uma instância do serviço {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} em sua conta do {{site.data.keyword.cloud_notm}} e configura duas implementações, uma implementação para cada componente do app. Cada componente é implementado em um pod do Kubernetes no nó do trabalhador. Para tornar ambos os componentes publicamente disponíveis, você também cria um serviço do Kubernetes para cada componente.
 
 
 ### Lição 3a: implementando o app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
@@ -522,7 +522,7 @@ No tutorial anterior, você tem a sua conta e um cluster com um nó do trabalhad
         ```
         {: codeblock}
 
-    2.  Na seção de volumes da implementação `watson-pod` atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior [Criando o cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
+    2.  Na seção de volumes da implementação `watson-pod` atualize o nome do segredo do {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} criado no tutorial anterior [Criando o cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). Montando o segredo do Kubernetes como um volume para a sua implementação, você torna a chave de API do {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) disponível para o contêiner que está em execução em seu pod. Os componentes do app do {{site.data.keyword.watson}} neste tutorial são configurados para consultar a chave de API usando o caminho de montagem do volume.
 
         ```
         volumes:

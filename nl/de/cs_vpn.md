@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ Um eine Verbindung Ihrer Workerknoten und Apps mit einem lokalen Rechenzentrum e
 
 - **strongSwan-IPSec-VPN-Service**: Sie können einen [strongSwan-IPSec-VPN-Service ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.strongswan.org/about.html) konfigurieren, der Ihren Kubernetes-Cluster sicher mit einem lokalen Netz verbindet. Der strongSwan-IPSec-VPN-Service stellt einen sicheren End-to-End-Kommunikationskanal über das Internet bereit, der auf der standardisierten IPSec-Protokollsuite (IPSec – Internet Protocol Security) basiert. Um eine sichere Verbindung zwischen Ihrem Cluster und einem lokalen Netz einzurichten, [konfigurieren und implementieren Sie den strongSwan-IPSec-VPN-Service](#vpn-setup) direkt in einem Pod in Ihrem Cluster.
 
-- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) ermöglicht es Ihnen, eine direkte, private Verbindung zwischen Ihren fernen Netzumgebungen und {{site.data.keyword.containerlong_notm}} ohne Routing über das öffentliche Internet zu erstellen. Die {{site.data.keyword.Bluemix_notm}} Direct Link-Angebote sind nützlich, wenn Sie Hybrid-Workloads, Cross-Provider-Workloads, große oder häufige Datenübertragungen oder private Workloads implementieren müssen. Informationen zum Auswählen eines {{site.data.keyword.Bluemix_notm}} Direct Link-Angebots und zum Einrichten einer {{site.data.keyword.Bluemix_notm}} Direct Link-Verbindung finden Sie unter [Einführung in IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in der {{site.data.keyword.Bluemix_notm}} Direct Link-Dokumentation.
+- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) ermöglicht es Ihnen, eine direkte, private Verbindung zwischen Ihren fernen Netzumgebungen und {{site.data.keyword.containerlong_notm}} ohne Routing über das öffentliche Internet zu erstellen. Die {{site.data.keyword.cloud_notm}} Direct Link-Angebote sind nützlich, wenn Sie Hybrid-Workloads, Cross-Provider-Workloads, große oder häufige Datenübertragungen oder private Workloads implementieren müssen. Informationen zum Auswählen eines {{site.data.keyword.cloud_notm}} Direct Link-Angebots und zum Einrichten einer {{site.data.keyword.cloud_notm}} Direct Link-Verbindung finden Sie unter [Einführung in IBM Cloud {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in der {{site.data.keyword.cloud_notm}} Direct Link-Dokumentation.
 
 - **Virtual Router Appliance (VRA) oder Fortigate Security Appliance (FSA)**: Sie können eine [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) oder [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) einrichten, um einen IPSec-VPN-Endpunkt zu konfigurieren. Diese Option ist hilfreich, wenn der Cluster größer ist, Sie über ein einzelnes VPN auf mehrere Cluster zugreifen möchten oder Sie ein routenbasiertes VPN benötigen. Informationen zum Konfigurieren einer VRA finden Sie unter [VPN-Konnektivität mit VRA konfigurieren](#vyatta).
 
@@ -111,6 +111,7 @@ Wenn die VPN-Verbindung aus dem Mehrzonencluster ausgeht, ist nur eine strongSwa
     - `zoneLoadBalancer`: Geben Sie eine öffentliche IP-Adresse für die Lastausgleichsfunktion für jede Zone an, in der Sie Workerknoten haben. [Sie können Ihre verfügbaren öffentlichen IP-Adressen zur Überprüfung anzeigen](/docs/containers?topic=containers-subnets#review_ip) oder [eine bereits verwendete IP-Adresse freigeben](/docs/containers?topic=containers-subnets#free). Da der strongSwan-VPN-Pod auf einem Workerknoten in einer beliebigen Zone geplant werden kann, stellt diese Liste von IP-Adressen sicher, dass eine IP-Adresse für die Lastausgleichsfunktion in jeder Zone verwendet werden kann, in der der VPN-Pod geplant wird.
     - `connectUsingLoadBalancerIP`: Setzen Sie den Wert auf `true`. Wenn der strongSwan-VPN-Pod auf einem Workerknoten geplant wird, wählt der strongSwan-Service die IP-Adresse der Lastausgleichsfunktion aus, die sich in derselben Zone befindet, und verwendet diese IP-Adresse, um eine ausgehende Verbindung herzustellen.
     - `local.id`: Geben Sie einen festen Wert an, der von Ihrem fernen VPN-Endpunkt unterstützt wird. Wenn der ferne VPN-Endpunkt erfordert, dass Sie die Option `local.id` (Wert für `leftid` in der Datei `ipsec.conf`) auf die öffentliche IP-Adresse des VPN-IPSec-Tunnels setzen, geben Sie für `local.id` den Wert `%loadBalancerIP` an. Dieser Wert konfiguriert automatisch den Wert für `leftid` in der Datei `ipsec.conf` mit der IP-Adresse der Lastausgleichsfunktion, die für die Verbindung verwendet wird.
+    - Optional: Verbergen Sie in jeder Zone alle Cluster-IP-Adressen hinter einer einzigen IP-Adresse, indem Sie für `enableSingleSourceIP` die Einstellung `true` festlegen. Diese Option stellt eine der sichersten Konfigurationen für die VPN-Verbindung bereit, da keine Verbindungen vom fernen Netz zurück in den Cluster zulässig sind. Des Weiteren müssen Sie für `local.subnet` die Variable `%zoneSubnet` festlegen und `local.zoneSubnet` verwenden, um eine IP-Adresse als /32-Teilnetz für jede Zone des Clusters anzugeben.
 
 2. Lassen Sie in der Ihrer fernen Netzfirewall eingehende IPSec-VPN-Verbindungen von den öffentlichen IP-Adressen zu, die Sie in der Einstellung `zoneLoadBalancer` aufgelistet haben.
 
@@ -168,7 +169,7 @@ Bevor Sie das strongSwan-Helm-Diagramm installieren, müssen Sie eine Entscheidu
 
 Vorbereitende Schritte:
 * Installieren Sie ein IPSec-VPN-Gateway in Ihrem lokalen Rechenzentrum.
-* Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` innehaben.
+* Stellen Sie sicher, dass Sie über die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `default` verfügen.
 * [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Hinweis:** Alle strongSwan-Konfigurationen werden in Standardclustern zugelassen. Wenn Sie einen kostenlosen Cluster verwenden, können Sie nur eine ausgehende VPN-Verbindung in [Schritt 3](#strongswan_3) auswählen. Eingehende VPN-Verbindungen erfordern eine Lastausgleichsfunktion im Cluster. Lastausgleichsfunktionen sind für kostenlose Cluster jedoch nicht verfügbar.
 
@@ -178,7 +179,7 @@ Vorbereitende Schritte:
 Installieren Sie Helm und holen Sie sich das strongSwan-Helm-Diagramm, um mögliche Konfigurationen anzuzeigen.
 {: shortdesc}
 
-1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (tiller) mit einem Servicekonto und fügen Sie das {{site.data.keyword.Bluemix_notm}}-Helm-Repository hinzu. Beachten Sie, dass Helm version 2.8 oder höher erforderlich ist.
+1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (tiller) mit einem Servicekonto und fügen Sie das {{site.data.keyword.cloud_notm}}-Helm-Repository hinzu. Beachten Sie, dass Helm version 2.8 oder höher erforderlich ist.
 
 2.  Überprüfen Sie, ob 'tiller' mit einem Servicekonto installiert ist.
 
@@ -282,7 +283,7 @@ Ermitteln Sie, welche Clusterressourcen für das ferne Netz über die VPN-Verbin
 3. Optional für strongSwan-Helm-Diagramme der Version 2.2.0 und höher: Verbergen Sie alle Cluster-IP-Adressen hinter einer einzigen IP-Adresse, indem Sie für `enableSingleSourceIP` die Einstellung `true` festlegen. Diese Option stellt eine der sichersten Konfigurationen für die VPN-Verbindung bereit, da keine Verbindungen vom fernen Netz zurück in den Cluster zulässig sind.
     <br>
     * Diese Einstellung erfordert, dass der gesamte Datenfluss über die VPN-Verbindung ausgehend sein muss; dies ist unabhängig davon, ob die VPN-Verbindung vom Cluster oder vom fernen Netz eingerichtet wird.
-    * Für `local.subnet` muss lediglich ein /32-Teilnetz festgelegt werden.
+    * Wenn Sie strongSwan in einem Einzelzonencluster installieren, dann müssen Sie für `local.subnet` eine einzelne IP-Adresse als /32-Teilnetz angeben. Wenn Sie strongSwan in einem Mehrzonencluster installieren, können Sie für `local.subnet` die Variable `%zoneSubnet` festlegen und `local.zoneSubnet` verwenden, um eine IP-Adresse als /32-Teilnetz für jede Zone des Clusters anzugeben.
 
 4. Optional für strongSwan-Helm-Diagramme der Version 2.2.0 und höher: Aktivieren Sie den strongSwan-Service, sodass eingehende Anforderungen des fernen Netzes an einen Service weitergeleitet werden, der sich außerhalb des Clusters befindet. Verwenden Sie dazu die Einstellung `localNonClusterSubnet`.
     <br>
@@ -678,7 +679,7 @@ Sie können die VPN-Verbindung inaktivieren, indem Sie das Helm-Diagramm lösche
 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) stellt das aktuelle Vyatta 5600-Betriebssystem für x86-Bare-Metal-Server bereit. Sie können eine VRA-Instanz als VPN-Gateway verwenden, um eine sichere Verbindung zu einem lokalen Netz herzustellen.
 {:shortdesc}
 
-Der gesamte öffentliche und private Netzverkehr, der in die Cluster-VLANs eintritt oder sie verlässt, wird über eine VRA geleitet. Sie können die VRA als VPN-Endpunkt einsetzen, um einen verschlüsselten IPSec-Tunnel zwischen Servern in IBM Cloud Infrastructure- (SoftLayer) und lokalen Ressourcen zu erstellen. Das folgende Diagramm zeigt beispielsweise, wie eine App auf einem ausschließlich privaten Workerknoten in {{site.data.keyword.containerlong_notm}} mit einem lokalen Server über eine VRA-VPN-Verbindung kommunizieren kann:
+Der gesamte öffentliche und private Netzverkehr, der in die Cluster-VLANs eintritt oder sie verlässt, wird über eine VRA geleitet. Sie können die VRA als VPN-Endpunkt einsetzen, um einen verschlüsselten IPSec-Tunnel zwischen Servern in der IBM Cloud-Infrastruktur und lokalen Ressourcen zu erstellen. Das folgende Diagramm zeigt beispielsweise, wie eine App auf einem ausschließlich privaten Workerknoten in {{site.data.keyword.containerlong_notm}} mit einem lokalen Server über eine VRA-VPN-Verbindung kommunizieren kann:
 
 <img src="images/cs_vpn_vyatta.png" width="725" alt="App in {{site.data.keyword.containerlong_notm}} mithilfe einer Lastausgleichsfunktion zugänglich machen" style="width:725px; border-style: none"/>
 
@@ -700,5 +701,5 @@ Führen Sie die folgenden Schritte aus, um eine Virtual Router Appliance einzuri
 
 3. Um eine VPN-Verbindung mithilfe der VRA zu aktivieren, [konfigurieren Sie VRRP auf der VRA](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-working-with-high-availability-and-vrrp#high-availability-vpn-with-vrrp).
 
-Wenn Sie über eine vorhandene Router Appliance verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN-Spanning aktivieren](/docs/containers?topic=containers-subnets#subnet-routing). Zum Prüfen, ob das VLAN-Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+Wenn Sie über eine vorhandene Router Appliance verfügen und dann einen Cluster hinzufügen, werden die neuen portierbaren Teilnetze, die für den Cluster bestellt sind, nicht in der Router Appliance konfiguriert. Um Netzservices verwenden zu können, müssen Sie die Weiterleitung zwischen Teilnetzen im selben VLAN aktivieren, indem Sie [VLAN Spanning aktivieren](/docs/containers?topic=containers-subnets#subnet-routing). Zum Prüfen, ob VLAN Spanning bereits aktiviert ist, verwenden Sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 {: important}

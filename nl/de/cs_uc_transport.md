@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,17 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Anwendungsfälle aus dem Transportwesen für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_transport}
 
-Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong_notm}} von Toolchains für schnelle App-Aktualisierungen und Bereitstellungen in mehreren Regionen auf der Welt profitieren können. Gleichzeitig können diese Workloads eine Verbindung zu vorhandenen Back-End-Systemen herstellen, Watson AI für die Personalisierung verwenden und mit {{site.data.keyword.messagehub_full}} auf IoT-Daten zugreifen.
+Anhand der folgenden Anwendungsfälle wird hervorgehoben, wie Workloads in {{site.data.keyword.containerlong}} von Toolchains für schnelle App-Aktualisierungen und Bereitstellungen in mehreren Regionen auf der Welt profitieren können. Gleichzeitig können diese Workloads eine Verbindung zu vorhandenen Back-End-Systemen herstellen, Watson AI für die Personalisierung verwenden und mit {{site.data.keyword.messagehub_full}} auf IoT-Daten zugreifen.
 
 {: shortdesc}
 
 ## Reederei erhöht die Verfügbarkeit weltweiter Systeme für Geschäftspartnernetzwerk
 {: #uc_shipping}
 
-Eine IT-Führungskraft ist für die weltweiten Streckenführungs- und Planungssysteme verantwortlich, mit denen die Partner interagieren. Die Partner benötigen von diesen Systemen, die auf IoT-Einheitendaten zugreifen, zeitnahe Informationen. Die Hochverfügbarkeit für diese Systeme konnte jedoch nicht weltweit skaliert werden.
+Eine IT-Führungskraft ist für die weltweiten Streckenführungs- und Planungssysteme verantwortlich, mit denen die Partner interagieren. Die Partner benötigen von diesen Systemen, die auf IoT-Einheitendaten zugreifen, zeitnahe Informationen. Die Hochverfügbarkeit für diese Systeme konnte jedoch nicht weltweit skaliert werden. 
 {: shortdesc}
 
 Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} skaliert containerisierte Apps mit extrem hoher Verfügbarkeit, um dem wachsenden Bedarf gerecht zu werden. Die App-Bereitstellungen werden 40 Mal pro Tag durchgeführt zu, wenn die Entwickler ohne großen Aufwand experimentieren; auf diese Art werden Änderungen schnell zu Bereitstellungs- und Testsystemen hinzugefügt. Die IoT-Plattform erleichtert den Zugriff auf IoT-Daten.
@@ -191,3 +190,5 @@ Mit {{site.data.keyword.containerlong_notm}} wurde die überdimensionierte Hardw
 * Die Authentizität und die benutzerspezifischen Anpassungen auf der Site haben den geänderten Erwartungen heutigen Fluglinienmitarbeiter Rechnung getragen.
 * Die in der letzten Minute noch vorgenommenen Aktualisierungen an der Human Resources-Site, einschließlich der Aktualisierungen durch die Chatbot-Gespräche der Mitarbeiter, verliefen schnell, weil die Entwickler mindestens 10 Mal täglich Änderungen vorgenommen hatten.
 * Da die Verwaltung der Infrastruktur von IBM übernommen wurde, hatte das Entwicklerteam mehr Zeit und konnte die Site in nur drei Wochen bereitstellen.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Persistenten Hochverfügbarkeitsspeicher planen
 {: #storage_planning}
 
 ## Speicherlösung wählen
 {: #choose_storage_solution}
 
-Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie ist, müssen Sie die Anforderungen Ihrer App, den Typ der Daten, die gespeichert werden sollen, und die erforderliche Zugriffshäufigkeit auf diese Daten kennen.
+Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Ihre {{site.data.keyword.containerlong}}-Cluster ist, müssen Sie die Anforderungen Ihrer App, den Typ der Daten, die gespeichert werden sollen, und die erforderliche Zugriffshäufigkeit auf diese Daten kennen.
 {: shortdesc}
 
 1. Entscheiden Sie, ob Ihre Daten dauerhaft gespeichert werden müssen oder ob sie bei Bedarf entfernt werden können.
@@ -59,7 +57,7 @@ Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie
    - **Lesezugriff:** Ihre Daten können nur gelesen werden. Sie möchten die Daten nicht schreiben oder ändern.
    - **Lese-/Schreibzugriff:** Sie möchten die Daten lesen, schreiben und ändern. Für Daten, die gelesen und geschrieben werden, ist es wichtig zu wissen, ob die Operationen leseintensiv, schreibintensiv oder ausgeglichen sind.
 
-4. Bestimmen Sie die Häufigkeit, mit der auf Ihre Daten zugegriffen wird. Wenn die Häufigkeit des Datenzugriffs bekannt ist, kann die erforderliche Speicherleistung ermittelt werden. Daten, auf die häufig zugegriffen wird, befinden sich in der Regel im Schnellzugriffsspeicher.
+5. Bestimmen Sie die Häufigkeit, mit der auf Ihre Daten zugegriffen wird. Wenn die Häufigkeit des Datenzugriffs bekannt ist, kann die erforderliche Speicherleistung ermittelt werden. Daten, auf die häufig zugegriffen wird, befinden sich in der Regel im Schnellzugriffsspeicher.
    - **Hot Data:** Daten, auf die häufig zugegriffen wird. Gängige Anwendungsfälle sind Web-Apps oder Mobile Apps.
    - **Cool Data oder Warm Data:** Daten, auf die selten zugegriffen wird, z. B. einmal im Monat oder seltener. Gängige Anwendungsfälle sind Archive, kurzfristige Datenaufbewahrung oder Disaster-Recovery.
    - **Cold Data:** Daten, auf die selten zugegriffen wird (wenn überhaupt). Gängige Anwendungsfälle sind Archive, langfristige Sicherung, Langzeitdaten.
@@ -68,14 +66,14 @@ Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie
    Wenn Sie die Häufigkeit nicht vorhersagen können oder wenn die Häufigkeit keinem bestimmten Muster folgt, ermitteln Sie, ob Ihre Workloads leseintensiv, schreibintensiv oder ausgeglichen sind. Sehen Sie sich dann die Speicheroption an, die Ihrer Workload entspricht, und untersuchen Sie, welche Speicherschicht (Storage Tier) Ihnen die erforderliche Flexibilität bietet. {{site.data.keyword.cos_full_notm}} bietet beispielsweise eine Speicherklasse `flex`, die berücksichtigt, wie häufig in einem Monat auf Daten zugegriffen wird, und optimiert die monatliche Abrechnung auf der Basis dieser Messung.
    {: tip}
 
-5. Untersuchen Sie, ob Ihre Daten über mehrere App-Instanzen, Zonen oder Regionen hinweg gemeinsam genutzt werden müssen.
-   - **Zugriff über mehrere Pods hinweg:** Wenn Sie persistente Kubernetes-Datenträger für den Zugriff auf Ihren Speicher verwenden, können Sie die Anzahl der Pods bestimmen, die den Datenträger gleichzeitig anhängen können. Bestimmte Speicherlösungen - wie z. B. Blockspeicher - können jeweils nur von einem Pod gleichzeitig aufgerufen werden. Mit anderen Speicherlösungen können Sie Datenträger podübergreifend gemeinsam nutzen. 
+6. Untersuchen Sie, ob Ihre Daten über mehrere App-Instanzen, Zonen oder Regionen hinweg gemeinsam genutzt werden müssen.
+   - **Zugriff über mehrere Pods hinweg:** Wenn Sie persistente Kubernetes-Datenträger für den Zugriff auf Ihren Speicher verwenden, können Sie die Anzahl der Pods bestimmen, die den Datenträger gleichzeitig anhängen können. Bestimmte Speicherlösungen - wie z. B. Blockspeicher - können jeweils nur von einem Pod gleichzeitig aufgerufen werden. Mit anderen Speicherlösungen können Sie Datenträger podübergreifend gemeinsam nutzen.
    - **Zugriff über mehrere Zonen und Regionen hinweg:** Möglicherweise müssen Sie Ihre Daten über mehrere Zonen oder Regionen hinweg zugänglich machen. Bestimmte Speicherlösungen - z. B. Datei- und Blockspeicher - sind spezifisch für Rechenzentren und können in einer Mehrzonenclusterkonfiguration nicht über mehrere Zonen hinweg gemeinsam genutzt werden.
 
    Wenn Sie Ihre Daten zonen- oder regionsübergreifend zugänglich machen möchten, sollten Sie Ihre Rechtsabteilung zu Rate ziehen, um sicherzustellen, dass Ihre Daten in mehreren Zonen oder einem anderen Land gespeichert werden können.
    {: note}
 
-6. Prüfen Sie andere Speichermerkmale, die Ihre Wahl beeinflussen.
+7. Prüfen Sie andere Speichermerkmale, die Ihre Wahl beeinflussen.
    - **Konsistenz:** Die Zuverlässigkeit, dass eine Leseoperation die neueste Version einer Datei zurückgibt. Speicherlösungen bieten `starke Konsistenz`, wenn sichergestellt ist, dass immer die neueste Version einer Datei zurückgegeben wird, oder `schwache Konsistenz`, wenn die Leseoperation nicht unbedingt die neueste Version zurückgibt. Häufig findet sich die schwache Konsistenz bei geografisch verteilten Systemen, in denen eine Schreiboperation zuerst repliziert werden muss.
    - **Leistung:** Die Zeit, die benötigt wird, um eine Lese- oder Schreiboperation auszuführen.
    - **Permanenz:** Die Zuverlässigkeit, dass eine Schreiboperation, die für Ihren Speicher festgeschrieben wurde, dauerhaft erhalten bleibt und nicht beschädigt wird oder verloren geht, selbst wenn sehr große Datenmengen (Gigabytes oder Terabytes) gleichzeitig in den Speicher geschrieben werden.
@@ -84,7 +82,7 @@ Bevor Sie entscheiden können, welcher Speichertyp die richtige Lösung für Sie
    - **Skalierbarkeit:** Die Fähigkeit, die Kapazität zu erweitern und die Leistung auf der Basis Ihrer Anforderungen anzupassen.
    - **Verschlüsselung:** Das Maskieren von Daten, um eine Einsicht durch unbefugte Benutzer zu verhindern.
 
-7. [Prüfen Sie die verfügbaren persistenten Speicherlösungen](#persistent_storage_overview) und wählen Sie die Lösung aus, die am besten für Ihre App- und Datenanforderungen geeignet ist.
+8. [Prüfen Sie die verfügbaren persistenten Speicherlösungen](#persistent_storage_overview) und wählen Sie die Lösung aus, die am besten für Ihre App- und Datenanforderungen geeignet ist.
 
 ## Vergleich nicht persistenter Speicheroptionen
 {: #non_persistent_overview}
@@ -156,7 +154,7 @@ Die folgende Abbildung zeigt die verfügbaren Optionen für nicht persistente Da
 <tr>
 <td style="text-align:left">Permanenz</td>
 <td style="text-align:left">Die Daten gehen verloren, wenn der Container abstürzt oder entfernt wird. </td>
-<td style="text-align:left">Die Daten auf den Datenträgern <code>hostPath</code> oder <code>emptyDir</code> gehen in folgenden Situationen verloren: <ul><li>Der Workerknoten wird gelöscht.</li><li>Der Workerknoten wird neu geladen oder aktualisiert.</li><li>Der Cluster wird gelöscht.</li><li>Das {{site.data.keyword.Bluemix_notm}}-Konto wird ausgesetzt. </li></ul></p><p>Zusätzlich werden Daten auf einem <code>emptyDir</code>-Datenträger in folgenden Situationen entfernt: <ul><li>Der zugewiesene Pod auf dem Workerknoten wird permanent gelöscht.</li><li>Der zugewiesene Pod wird auf einem anderen Workerknoten terminiert.</li></ul>
+<td style="text-align:left">Die Daten auf den Datenträgern <code>hostPath</code> oder <code>emptyDir</code> gehen in folgenden Situationen verloren: <ul><li>Der Workerknoten wird gelöscht.</li><li>Der Workerknoten wird neu geladen oder aktualisiert.</li><li>Der Cluster wird gelöscht.</li><li>Das {{site.data.keyword.cloud_notm}}-Konto wird ausgesetzt. </li></ul></p><p>Zusätzlich werden Daten auf einem <code>emptyDir</code>-Datenträger in folgenden Situationen entfernt: <ul><li>Der zugewiesene Pod auf dem Workerknoten wird permanent gelöscht.</li><li>Der zugewiesene Pod wird auf einem anderen Workerknoten terminiert.</li></ul>
 </tr>
 <tr>
 <td style="text-align:left">Allgemeine Anwendungsfälle</td>
@@ -287,7 +285,7 @@ Die folgende Abbildung zeigt die Optionen, die Sie in {{site.data.keyword.contai
 <th style="text-align:left">Merkmale</th>
 <th style="text-align:left">Objekt</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">{{site.data.keyword.Bluemix_notm}}-Datenbanken</th>
+<th style="text-align:left">{{site.data.keyword.cloud_notm}}-Datenbanken</th>
 </thead>
 <tbody>
 <tr>
@@ -376,3 +374,6 @@ Die folgende Abbildung zeigt die Optionen, die Sie in {{site.data.keyword.contai
 </tr>
 </tbody>
 </table>
+
+
+

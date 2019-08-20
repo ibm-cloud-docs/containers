@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ Per comprendere come la priorità dei pod e il programma di pianificazione funzi
 _Figura: scenari di priorità dei pod_
 <img src="images/pod-priority.png" width="500" alt="Scenari di priorità dei pod" style="width:500px; border-style: none"/>
 
-1.  Tre pod con priorità alta, media e bassa sono con la pianificazione in sospeso. Il programma di pianificazione trova un nodo di lavoro disponibile con spazio per tutti e 3 i pod e li pianifica in ordine di priorità con il pod con la priorità più alta pianificato per primo.
+1.  Tre pod con priorità alta, media e bassa sono con la pianificazione in sospeso. Il programma di pianificazione trova un nodo di lavoro disponibile con spazio per tutti e tre i pod e li pianifica in ordine di priorità con il pod con la priorità più alta pianificato per primo.
 2.  Tre pod con priorità alta, media e bassa sono con la pianificazione in sospeso. Il programma di pianificazione trova un nodo di lavoro disponibile ma il nodo di lavoro ha solo risorse sufficienti a supportare i pod con priorità alta e media. Il pod con bassa priorità non viene pianificato e rimane in sospeso.
 3.  Due pod con priorità alta e media sono in attesa di pianificazione. Un terzo pod con bassa priorità è presente su un nodo di lavoro disponibile. Tuttavia, il nodo di lavoro non ha risorse sufficienti per pianificare nessuno dei pod in sospeso. Il programma di pianificazione previene, o rimuove, il pod con bassa priorità, che riporta il pod a uno stato in sospeso. Quindi, il programma di pianificazione prova a pianificare il pod con alta priorità. Tuttavia, il nodo di lavoro non ha risorse sufficienti per pianificare il pod con alta priorità e pianifica invece il pod con media priorità.
 
@@ -94,7 +94,7 @@ Per impostare la priorità dei pod, devi utilizzare una classe di priorità.
 
 Prima di iniziare:
 * [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
+* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per lo spazio dei nomi `default`.
 * [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 
 Per utilizzare una classe di priorità:
@@ -144,7 +144,7 @@ Per utilizzare una classe di priorità:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo la classe di priorità 1 nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`)</br></br>.
+    <td>Facoltativo: imposta il campo su `true` per rendere questa classe di priorità il valore predefinito globale che viene applicato a ogni pod che viene pianificato senza un valore `priorityClassName`. Solo una classe di priorità nel tuo cluster può essere impostata come valore predefinito globale. Se non c'è alcun valore predefinito globale, i pod senza alcun `priorityClassName` specificato hanno una priorità pari a zero (`0`)</br></br>.
     Le [classi di priorità predefinite](#default_priority_class) non impostano un `globalDefault`. Se hai creato delle altri classi di priorità nel tuo cluster, puoi eseguire una verifica per assicurarti che non impostino un `globalDefault` eseguendo `kubectl describe priorityclass <name>`.</td>
     </tr>
     <tr>
@@ -176,7 +176,7 @@ Assegna una classe di priorità alla tua specifica di pod per impostare la prior
 
 Prima di iniziare:
 * [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) nello spazio dei nomi in cui vuoi distribuire i pod.
+* Assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) nello spazio dei nomi a cui vuoi distribuire i pod.
 * [Crea](/docs/containers?topic=containers-clusters#clusters_ui) o [aggiorna](/docs/containers?topic=containers-update#update) il tuo cluster a Kubernetes versione 1.11 o successiva.
 * [Comprendi come funziona la pianificazione delle priorità](#priority_scheduling), poiché la priorità può prevenire i pod esistenti e influenzare il modo in cui vengono utilizzate le risorse del tuo cluster.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Pianificazione della rete in cluster ed esterna per le applicazioni
@@ -120,7 +121,7 @@ La seguente tabella confronta le funzioni di ciascun tipo di servizio di rete.
 |Più applicazioni per servizio| | | |<img src="images/confirm.svg" width="32" alt="Funzione disponibile" style="width:32px;" />|
 {: caption="Caratteristiche dei tipi di servizio di rete Kubernetes" caption-side="top"}
 
-Per scegliere un modello di distribuzione per il bilanciamento del carico in base a uno o più di questi servizi di rete, vedi[Scelta di un pattern di distribuzione per il bilanciamento del carico esterno pubblico](#pattern_public) o [Scelta di un modello di distribuzione per il bilanciamento del carico esterno privato](#private_access).
+Per scegliere un modello di distribuzione per il bilanciamento del carico in base a uno o più di questi servizi di rete, vedi [Scelta di un modello di distribuzione per il bilanciamento del carico esterno pubblico](#pattern_public) o [Scelta di un modello di distribuzione per il bilanciamento del carico esterno privato](#private_access).
 
 <br />
 
@@ -171,17 +172,17 @@ Quando si tratta di esporre un'applicazione con un servizio di rete, puoi scegli
 <td>NLB v1.0 (+ nome host)</td>
 <td>Bilanciamento del carico di base che espone l'applicazione con un indirizzo IP o un nome host</td>
 <td>Esponi rapidamente un'applicazione al pubblico con un indirizzo IP o un nome host che supporta la terminazione SSL.</td>
-<td><ol><li>Crea un NLB (network load balancer) 1.0 pubblico in un cluster [a zona singola](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Facoltativamente, [registra](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nome host e controlli di integrità.</li></ol></td>
+<td><ol><li>Crea un NLB (network load balancer) 1.0 pubblico in un cluster [a zona singola](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Facoltativamente, [registra](/docs/containers?topic=containers-loadbalancer_hostname) un nome host e controlli di integrità.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ nome host)</td>
 <td>Bilanciamento del carico DSR che espone l'applicazione con un indirizzo IP o un nome host</td>
 <td>Esponi un'applicazione che potrebbe ricevere livelli elevati di traffico per il pubblico con un indirizzo IP o un nome host che supporti la terminazione SSL.</td>
-<td><ol><li>Completa i [prerequisiti](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Crea un NLB 2.0 pubblico in un cluster [a zona singola](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) o [multizona](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config).</li><li>Facoltativamente, [registra](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nome host e controlli di integrità.</li></ol></td>
+<td><ol><li>Completa i [prerequisiti](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Crea un NLB 2.0 pubblico in un cluster [a zona singola](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) o [multizona](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config).</li><li>Facoltativamente, [registra](/docs/containers?topic=containers-loadbalancer_hostname) un nome host e controlli di integrità.</li></ol></td>
 </tr><tr>
 <td>Istio + nome host NLB</td>
 <td>Bilanciamento del carico di base che espone l'applicazione con un nome host e utilizza le regole di instradamento Istio</td>
 <td>Implementa le regole di post-instradamento Istio, quali le regole per le diverse versioni di un unico microservizio dell'applicaione, ed esponiun'applicazione gestita da Istio con un nome host pubblico.</li></ol></td>
-<td><ol><li>Installa il [componente aggiuntivo gestito Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Includi la tua applicazione nella [rete di servizi Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registra il programma di bilanciamento del carico Istio predefinito con [un nome host](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
+<td><ol><li>Installa il [componente aggiuntivo gestito Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Includi la tua applicazione nella [rete di servizi Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registra il programma di bilanciamento del carico Istio predefinito con [un nome host](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
 </tr><tr>
 <td>ALB Ingress</td>
 <td>Bilanciamento del carico HTTPS che espone l'applicazione con un nome host e utilizza regole di instradamento personalizzate</td>
@@ -189,10 +190,10 @@ Quando si tratta di esporre un'applicazione con un servizio di rete, puoi scegli
 <td><ol><li>Crea un [servizio Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) per l'ALB pubblico.</li><li>Personalizza
 le regole di instradamento ALB con [annotazioni](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
 </tr><tr>
-<td>Usa il tuo controller Ingress + nome host ALB</td>
+<td>Usa il tuo controller Ingress + nome host NLB o ALB</td>
 <td>Il bilanciamento del carico HTTPS con un controller Ingress personalizzato che espone l'applicazione con il nome host ALB fornito da IBM e utilizza regole di instradamento personalizzate</td>
 <td>Implementa regole di instradamento personalizzate o altri requisiti specifici per l'ottimizzazione personalizzata per più applicazioni.</td>
-<td>[Distribuisci il tuo controller Ingress e sfrutta il nome host ALB fornito da IBM](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Distribuisci il tuo controller Ingress e avvaliti del nome host fornito da IBM](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>
@@ -213,10 +214,10 @@ Quando distribuisci un'applicazione in un cluster Kubernetes in {{site.data.keyw
 
 Ad esempio, poni di aver creato un NLB privato per la tua applicazione. Questo NLB privato è accessibile da:
 * Qualsiasi pod dello stesso cluster.
-* Qualsiasi pod in qualsiasi cluster dello stesso account {{site.data.keyword.Bluemix_notm}}.
-* Se hai [lo spanning della VLAN o VRF](/docs/containers?topic=containers-subnets#basics_segmentation) abilitati, qualsiasi sistema connesso a una qualsiasi delle VLAN private, nello stesso account {{site.data.keyword.Bluemix_notm}}.
-* Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se non sei nell'account {{site.data.keyword.Bluemix_notm}}, ma ancora dietro il firewall aziendale
-* Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se ti trovi in un account{{site.data.keyword.Bluemix_notm}} differente.
+* Qualsiasi pod in qualsiasi cluster dello stesso account {{site.data.keyword.cloud_notm}}.
+* Se hai [lo spanning della VLAN o VRF](/docs/containers?topic=containers-subnets#basics_segmentation) abilitati, qualsiasi sistema connesso a una qualsiasi delle VLAN private, nello stesso account {{site.data.keyword.cloud_notm}}.
+* Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se non sei nell'account {{site.data.keyword.cloud_notm}}, ma ancora dietro il firewall aziendale
+* Qualsiasi sistema tramite una connessione VPN alla sottorete su cui si trova l'IP dell'NLB, se ti trovi in un account{{site.data.keyword.cloud_notm}} differente.
 
 Per rendere un'applicazione disponibile solo su una rete privata, scegli un modello di distribuzione per il bilanciamento del carico in base alla configurazione della VLAN del cluster:
 * [Configurazione della VLAN pubblica e privata](#private_both_vlans)

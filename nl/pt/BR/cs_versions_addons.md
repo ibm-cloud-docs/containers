@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Log de mudanças do Fluentd e do ALB do Ingress
@@ -58,6 +59,51 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada constru�
 </thead>
 <tbody>
 <tr>
+<td>515 / 334</td>
+<td>30 de julho de 2019</td>
+<td><ul>
+<li>Inclui uma verificação de prontidão para reinicializações do pod ALB para evitar perda de solicitação. Os pods ALB são impedidos de tentar rotear solicitações de tráfego até que todos os arquivos de recursos de entrada sejam analisados, até um máximo padrão de 5 minutos. Para obter mais informações, incluindo etapas para mudar os valores de tempo limite padrão, consulte [Aumentando o tempo de verificação de prontidão de reinício para os pods ALB](/docs/containers?topic=containers-ingress-settings#readiness-check).</li>
+<li>Corrige vulnerabilidades `patch` do GNU para [CVE-2019-13636 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13636) e [CVE-2019-13638 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13638).</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>512 / 334</td>
+<td>17 de julho de 2019</td>
+<td><ul>
+<li>Corrige vulnerabilidades `rbash` para [CVE-2016-3189 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924).</li>
+<li>Remove os pacotes apt a seguir da imagem `nginx-ingress`: `curl`, `bash`, `vim`, `tcpdump` e `ca-certificates`.</li></ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>497 / 334</td>
+<td>14 de julho de 2019</td>
+<td><ul>
+<li>Inclui o [`upstream-keepalive-timeout`](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout) para configurar o tempo máximo que uma conexão keep-alive permanece aberta entre o servidor proxy ALB e o servidor de envio de dados para seu aplicativo de back-end.</li>
+<li>Inclui suporte para a diretiva [`reuse-port`](/docs/containers?topic=containers-ingress-settings#reuse-port) para aumentar o número de listeners de soquete ALB de um por cluster para um por nó do trabalhador.</li>
+<li>Remove a atualização redundante do balanceador de carga que expõe um ALB quando um número de porta é mudado.</li>
+<li>Corrige vulnerabilidades `bzip2` para [CVE-2016-3189 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3189) e [CVE-2019-12900 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900).</li>
+<li>Corrige vulnerabilidades de Expat para [CVE-2018-20843 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20843).</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>477 / 331</td>
+<td>24 de junho de 2019</td>
+<td>Corrige vulnerabilidades de SQLite para [CVE-2016-6153 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6153), [CVE-2017-10989 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-10989), [CVE-2017-13685 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-13685), [CVE-2017-2518 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2518), [CVE-2017-2519 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2519), [CVE-2017-2520 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2520), [CVE-2018-20346 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20346), [CVE-2018-20505 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20505), [CVE-2018-20506 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20506), [CVE-2019-8457 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457), [CVE-2019-9936 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9936) e [CVE-2019-9937 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9937).
+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>473 / 331</td>
+<td>18 de junho de 2019</td>
+<td><ul>
+<li>Corrige vulnerabilidades Vim para [CVE-2019-5953 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5953) e [CVE-2019-12735 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12735).</li>
+<li>Atualiza a versão NGINX de ALBs para 1.15.12.</li></ul>
+</td>
+<td>-</td>
+</tr>
+<tr>
 <td>470/330</td>
 <td>07 de junho de 2019</td>
 <td>Corrige as vulnerabilidades do BD Berkeley para [CVE-2019-8457 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457).
@@ -87,7 +133,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada constru�
 <tr>
 <td>457/329</td>
 <td>23 de maio de 2019</td>
-<td>Corrige vulnerabilidades do Go para varreduras de imagem.</td>
+<td>Corrige vulnerabilidades para o [CVE-2019-11841 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11841).</td>
 <td>-</td>
 </tr>
 <tr>
@@ -149,7 +195,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada constru�
 <li>Atualiza a diretiva de local do {{site.data.keyword.appid_short_notm}} para que a anotação `app-id` possa ser usada com as anotações `proxy-buffers`, `proxy-buffer-size` e `proxy-busy-buffer-size`.</li>
 <li>Corrige um erro para que os logs informativos não sejam rotulados como erros.</li>
 </ul></td>
-<td>Desativa o TLS 1.0 e 1.1 por padrão. Se os clientes que se conectarem a seus apps suportarem TLS 1.2, nenhuma ação será necessária. Se você ainda tiver clientes anteriores que requerem suporte do TLS 1.0 ou 1.1, ative manualmente as versões do TLS necessárias seguindo [estas etapas](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers). Para obter mais informações sobre como ver as versões do TLS que seus clientes usam para acessar seus apps, consulte esta [Postagem do blog do {{site.data.keyword.Bluemix_notm}}](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
+<td>Desativa o TLS 1.0 e 1.1 por padrão. Se os clientes que se conectarem a seus apps suportarem TLS 1.2, nenhuma ação será necessária. Se você ainda tiver clientes anteriores que requerem suporte do TLS 1.0 ou 1.1, ative manualmente as versões do TLS necessárias seguindo [estas etapas](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers). Para obter mais informações sobre como ver as versões do TLS que seus clientes usam para acessar seus aplicativos, consulte esta [postagem do blog do {{site.data.keyword.cloud_notm}}](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/).</td>
 </tr>
 <tr>
 <td>393 / 291</td>
@@ -202,6 +248,12 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada constru�
 <th>Mudanças disruptivas</th>
 </tr>
 </thead>
+<tr>
+<td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
+<td>22 de julho de 2019</td>
+<td>Atualiza os pacotes Alpine para [CVE-2019-8905 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905), [ CVE-2019-8906 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906) e [ CVE-2019-8907 ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>e7c10d74350dc64d4d92ba7f72bb4ff9219315d2</td>
 <td>30 de maio de 2019</td>
@@ -258,7 +310,7 @@ Consulte a tabela a seguir para obter um resumo das mudanças para cada constru�
 <td>01 de janeiro de 2019</td>
 <td><ul>
 <li>Ativa a codificação UTF-8 para o plug-in `in_tail` do Fluentd.</li>
-<li>Correções de erros menores.</li>
+<li>Correções de bugs menores.</li>
 </ul></td>
 <td>-</td>
 </tr>

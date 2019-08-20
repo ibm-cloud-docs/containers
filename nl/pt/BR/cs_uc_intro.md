@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Visão geral dos casos de uso
 {: #cs_uc_intro}
 
-Vários casos de uso mostram as intensidades dos serviços {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}} quando usados juntos. Essas histórias destacam várias indústrias, assim como tipos de cargas de trabalho. Embora cada caso de uso seja apresentado por meio das lentes de uma indústria específica, essas cargas de trabalho são típicas em várias indústrias. Você vê temas de carga de trabalho, tais como: 
+Vários casos de uso mostram as intensidades dos serviços {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cloud_notm}} quando usados juntos. Essas histórias destacam várias indústrias, assim como tipos de cargas de trabalho. Embora cada caso de uso seja apresentado por meio das lentes de uma indústria específica, essas cargas de trabalho são típicas em várias indústrias. Você vê temas de carga de trabalho, tais como: 
 * IA e aprendizado de máquina
 * Dados e armazenamento
 * DevOps

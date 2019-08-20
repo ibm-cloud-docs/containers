@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Clusterinterne und externe Vernetzung für Apps planen
@@ -164,27 +165,27 @@ Wenn es um die Bereitstellung einer App mit einem Netzservice geht, haben Sie me
 <td>NLB V1.0 (+ Hostname)</td>
 <td>Basislastausgleich, der die App mit einer IP-Adresse oder einem Hostnamen zugänglich macht</td>
 <td>Sie können eine App mit einer IP-Adresse oder einem Hostnamen, der die SSL-Terminierung unterstützt, schnell für die Öffentlichkeit zugänglich machen.</td>
-<td><ol><li>Erstellen Sie eine öffentliche Netzlastausgleichsfunktion (NLB) 1.0 in einem [Einzel](/docs/containers?topic=containers-loadbalancer#lb_config)- oder [Mehrzonen](/docs/containers?topic=containers-loadbalancer#multi_zone_config)-Cluster.</li><li>Optional [registrieren](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) Sie einen Hostnamen und Statusprüfungen.</li></ol></td>
+<td><ol><li>Erstellen Sie eine öffentliche Netzlastausgleichsfunktion (NLB) 1.0 in einem [Einzel](/docs/containers?topic=containers-loadbalancer#lb_config)- oder [Mehrzonen](/docs/containers?topic=containers-loadbalancer#multi_zone_config)-Cluster.</li><li>Optional [registrieren](/docs/containers?topic=containers-loadbalancer_hostname) Sie einen Hostnamen und Statusprüfungen.</li></ol></td>
 </tr><tr>
 <td>NLB V2.0 (+ Hostname)</td>
 <td>DSR-Lastausgleich, der die App mit einer IP-Adresse oder einem Hostnamen zugänglich macht</td>
 <td>Sie können eine App zugänglich machen, die ein hohes Maß an Datenverkehr für die Öffentlichkeit mit einer IP-Adresse oder einem Hostnamen, der die SSL-Terminierung unterstützt, empfangen kann.</td>
-<td><ol><li>Vervollständigen Sie die [Voraussetzungen](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Erstellen Sie eine öffentliche NLB 2.0 in einem [Einzel](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config)- oder [Mehrzonen](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config)-Cluster.</li><li>Optional [registrieren](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) Sie einen Hostnamen und Statusprüfungen.</li></ol></td>
+<td><ol><li>Vervollständigen Sie die [Voraussetzungen](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Erstellen Sie eine öffentliche NLB 2.0 in einem [Einzel](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)- oder [Mehrzonen](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)-Cluster.</li><li>Optional [registrieren](/docs/containers?topic=containers-loadbalancer_hostname) Sie einen Hostnamen und Statusprüfungen.</li></ol></td>
 </tr><tr>
 <td>Istio + NLB-Hostname</td>
 <td>Basislastausgleich, der die App mit einem Hostnamen zugänglich macht und Istio-Routing-Regeln verwendet</td>
 <td>Implementieren Sie Istio-Regeln nach dem Routing, z. B. Regeln für unterschiedliche Versionen eines App-Microservice, und machen Sie eine Istio-verwaltete App mit einem öffentlichen Hostnamen zugänglich.</li></ol></td>
-<td><ol><li>Installieren Sie das [verwaltete Istio-Add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Beziehen Sie Ihre App in das [Istio-Servicenetz](/docs/containers?topic=containers-istio#istio_sidecar) ein.</li><li>Registrieren Sie die standardmäßige Istio-Lastausgleichsfunktion mit [einem Hostnamen](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
+<td><ol><li>Installieren Sie das [verwaltete Istio-Add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Beziehen Sie Ihre App in das [Istio-Servicenetz](/docs/containers?topic=containers-istio#istio_sidecar) ein.</li><li>Registrieren Sie die standardmäßige Istio-Lastausgleichsfunktion mit [einem Hostnamen](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
 </tr><tr>
 <td>Ingress-ALB</td>
 <td>HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet</td>
 <td>Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.</td>
-<td><ol><li>Erstellen Sie einen [Ingress-Service](/docs/containers?topic=containers-ingress#ingress_expose_public) für die öffentliche ALB.</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation)an.</li></ol></td>
+<td><ol><li>Erstellen Sie einen [Ingress-Service](/docs/containers?topic=containers-ingress#ingress_expose_public) für die öffentliche ALB.</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation) an.</li></ol></td>
 </tr><tr>
-<td>Eigenen Ingress-Controller + ALB-Hostnamen verwenden</td>
+<td>Eigenen Ingress-Controller + ALB- oder NLB-Hostnamen verwenden</td>
 <td>HTTPS-Lastausgleich mit angepasstem Ingress-Controller, der die App mit einem von IBM bereitgestellten Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet</td>
 <td>Implementieren Sie angepasste Routing-Regeln oder andere spezifische Anforderungen für die angepasste Optimierung für mehrere Anwendungen.</td>
-<td>[Stellen Sie Ihren Ingress-Controller bereit und nutzen Sie den von IBM bereitgestellten ALB-Hostnamen](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Stellen Sie Ihren Ingress-Controller bereit und nutzen Sie den von IBM bereitgestellten Hostnamen](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>
@@ -205,10 +206,10 @@ Wenn Sie eine App in einem Kubernetes-Cluster in {{site.data.keyword.containerlo
 
 Nehmen Sie zum Beispiel an, dass Sie eine private NLB für Ihre App erstellt haben. Auf diese private NLB ist der Zugriff wie folgt möglich:
 * Von einem beliebigen Pod im selben Cluster.
-* Von einem beliebigen Pod in einem beliebigen Cluster im selben {{site.data.keyword.Bluemix_notm}}-Konto.
-* Von jedem System, das mit einem beliebigen der privaten VLANs im selben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist (wenn eine [VRF-Funktion oder VLAN-Spanning](/docs/containers?topic=containers-subnets#basics_segmentation) aktiviert ist).
-* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im {{site.data.keyword.Bluemix_notm}}-Konto, aber dennoch hinter der Unternehmensfirewall befinden).
-* Von einem beliebigen System über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im selben {{site.data.keyword.Bluemix_notm}}-Konto befinden).
+* Von einem beliebigen Pod in einem beliebigen Cluster im selben {{site.data.keyword.cloud_notm}}-Konto.
+* Von jedem System, das mit einem beliebigen der privaten VLANs im selben {{site.data.keyword.cloud_notm}}-Konto verbunden ist (wenn eine [VRF-Funktion oder VLAN-Spanning](/docs/containers?topic=containers-subnets#basics_segmentation) aktiviert ist).
+* Von allen Systemen über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im {{site.data.keyword.cloud_notm}}-Konto, aber dennoch hinter der Unternehmensfirewall befinden).
+* Von einem beliebigen System über eine VPN-Verbindung zu dem Teilnetz, auf dem sich die NLB-IP-Adresse befindet (wenn Sie sich nicht im selben {{site.data.keyword.cloud_notm}}-Konto befinden).
 
 Um eine App nur über ein privates Netz verfügbar zu machen, wählen Sie ein Bereitstellungsmuster für Lastausgleich basierend auf der VLAN-Konfiguration Ihres Clusters:
 * [Öffentliche und private VLAN-Konfiguration](#private_both_vlans)
@@ -231,7 +232,7 @@ Da die Standard-Calico-Netzrichtlinien eingehenden öffentlichen Datenverkehr an
 |NodePort|Port auf einem Worker-Knoten, der die App für die private IP-Adresse des Workers verfügbar macht|Testen Sie den privaten Zugriff auf eine App oder bieten Sie Zugriff nur für kurze Zeit.|<ol><li>[Erstellen Sie einen NodePort-Service](/docs/containers?topic=containers-nodeport).</li><li>Ein NodePort-Service öffnet einen Port auf einem Workerknoten sowohl über die private als auch über die öffentliche IP-Adresse des Workerknotens. Sie müssen eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress) verwenden, um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
 |NLB V1.0|Basislastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Schnelles Zugänglichmachen von nur einer App in einem privaten Netzwerk mit einer privaten IP-Adresse.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Eine NLB mit einer portierbaren privaten IP-Adresse verfügt weiterhin auf jedem Workerknoten über einen offenen öffentlichen Knotenport (NodePort). Erstellen Sie eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress), um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
 |NLB V2.0|DSR-Lastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Sie können eine App zugänglich machen, die ein hohes Maß an Datenverkehr für ein privates Netz mit einer IP-Adresse empfangen kann.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Eine NLB mit einer portierbaren privaten IP-Adresse verfügt weiterhin auf jedem Workerknoten über einen offenen öffentlichen Knotenport (NodePort). Erstellen Sie eine [Calico-PreDNAT-Netzrichtlinie](/docs/containers?topic=containers-network_policies#block_ingress), um Datenverkehr zu den öffentlichen Knotenports zu blockieren.</li></ol>|
-|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>[Inaktivieren Sie die öffentliche ALB.](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation)an.</li></ol>|
+|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>[Inaktivieren Sie die öffentliche ALB.](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure)</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#ingress_expose_private).</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation) an.</li></ol>|
 {: caption="Merkmale von Netzbereitstellungsmustern für die öffentliche und private VLAN-Konfiguration" caption-side="top"}
 
 <br />
@@ -252,5 +253,5 @@ Wenn Ihr Cluster nur mit einem privaten VLAN verbunden ist und Sie die Kommunika
 |NodePort|Port auf einem Worker-Knoten, der die App für die private IP-Adresse des Workers verfügbar macht|Testen Sie den privaten Zugriff auf eine App oder bieten Sie Zugriff nur für kurze Zeit.|<ol><li>[Erstellen Sie einen NodePort-Service](/docs/containers?topic=containers-nodeport).</li><li>Öffnen Sie in der Firewall den Port, den Sie bei der Bereitstellung des Service an den privaten IP-Adressen für alle Workerknoten konfiguriert haben, mit denen Datenverkehr möglich sein soll. Führen Sie `kubectl get svc` aus, um den Port zu suchen. Der Port liegt im Bereich 20000-32000.</li></ol>|
 |NLB V1.0|Basislastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Schnelles Zugänglichmachen von nur einer App in einem privaten Netzwerk mit einer privaten IP-Adresse.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Öffnen Sie in der privaten Firewall den Port, den Sie bei der Bereitstellung des Service an der privaten NLB-IP-Adresse konfiguriert haben.</li></ol>|
 |NLB V2.0|DSR-Lastausgleich, der die App mit einer privaten IP-Adresse zugänglich macht|Sie können eine App zugänglich machen, die ein hohes Maß an Datenverkehr für ein privates Netz mit einer IP-Adresse empfangen kann.|<ol><li>[Erstellen Sie einen privaten NLB-Service](/docs/containers?topic=containers-loadbalancer).</li><li>Öffnen Sie in der privaten Firewall den Port, den Sie bei der Bereitstellung des Service an der privaten NLB-IP-Adresse konfiguriert haben.</li></ol>|
-|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>Konfigurieren Sie einen [DNS-Service, der für das private Netz verfügbar ist![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Öffnen Sie in Ihrer privaten Firewall Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die private ALB.</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation)an.</li></ol>|
+|Ingress-ALB|HTTPS-Lastausgleich, der die App mit einem Hostnamen zugänglich macht und angepasste Routing-Regeln verwendet|Implementieren Sie angepasste Routing-Regeln und die SSL-Terminierung für mehrere Apps.|<ol><li>Konfigurieren Sie einen [DNS-Service, der für das private Netz verfügbar ist![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).</li><li>[Aktivieren Sie die private ALB und erstellen Sie eine Ingress-Ressource](/docs/containers?topic=containers-ingress#private_ingress).</li><li>Öffnen Sie in Ihrer privaten Firewall Port 80 für HTTP oder Port 443 für HTTPS an der IP-Adresse für die private ALB.</li><li>Passen Sie die ALB-Routing-Regeln mit [Annotationen](/docs/containers?topic=containers-ingress_annotation) an.</li></ol>|
 {: caption="Merkmale von Netzbereitstellungsmustern nur für private VLAN-Konfiguration" caption-side="top"}

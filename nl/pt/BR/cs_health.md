@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -38,7 +38,7 @@ O monitoramento e a criação de log contínuos são a chave para detectar ataqu
 Por padrão, os logs são gerados e gravados localmente para todos os seguintes componentes de cluster do {{site.data.keyword.containerlong_notm}}: nós do trabalhador, contêineres, aplicativos, armazenamento persistente, balanceador de carga do aplicativo Ingress, API do Kubernetes e o namespace `kube-system`. Várias soluções de criação de log estão disponíveis para coletar, encaminhar e visualizar esses logs.
 {: shortdesc}
 
-É possível escolher sua solução de criação de log com base em quais componentes de cluster você precisa para coletar logs. Uma implementação comum é escolher um serviço de criação de log que você prefira com base em seus recursos de análise e interface, como o {{site.data.keyword.loganalysisfull}}, o {{site.data.keyword.la_full}} ou um serviço de terceiro. Em seguida, é possível usar o {{site.data.keyword.cloudaccesstrailfull}} para auditar a atividade do usuário no cluster e fazer backup de logs do cluster mestre no {{site.data.keyword.cos_full}}. **Nota**: Para configurar a criação de log, você deve ter um cluster Kubernetes padrão.
+É possível escolher sua solução de criação de log com base em quais componentes de cluster você precisa para coletar logs. Uma implementação comum é escolher um serviço de criação de log que você prefira com base em seus recursos de análise e interface, como o {{site.data.keyword.loganalysisfull}}, o {{site.data.keyword.la_full}} ou um serviço de terceiro. Em seguida, é possível usar o {{site.data.keyword.cloudaccesstrailfull}} para auditar a atividade do usuário no cluster e fazer backup de logs do cluster mestre no {{site.data.keyword.cos_full}}. **Nota**: Para configurar a criação de log, deve-se ter um cluster Kubernetes padrão.
 
 <dl>
 
@@ -65,8 +65,8 @@ Para obter mais informações sobre os tipos de eventos do {{site.data.keyword.c
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>Para coletar, encaminhar e visualizar logs para o mestre do Kubernetes do cluster, é possível obter uma captura instantânea dos logs do mestre em qualquer momento para coletar em um depósito do {{site.data.keyword.cos_full_notm}}. A captura instantânea inclui qualquer coisa que é enviada por meio do servidor de API, como planejamento de pod, implementações ou políticas RBAC. Para iniciar, consulte [Coletando logs do mestre](#collect_master).</dd>
 
-<dt>Serviços de terceiros</dt>
-<dd>Se você tiver requisitos especiais, será possível configurar sua própria solução de criação de log. Confira os serviços de criação de log de terceiros que podem ser incluídos em seu cluster em [Integrações de criação de log e monitoramento](/docs/containers?topic=containers-supported_integrations#health_services). É possível coletar logs de contêiner por meio do caminho `/var/log/pods/`.</dd>
+<dt>Serviços de terceiro ou configure a sua própria criação de log</dt>
+<dd>Se você tiver requisitos especiais, será possível configurar sua própria solução de criação de log. Confira os serviços de criação de log de terceiros que podem ser incluídos em seu cluster em [Integrações de criação de log e monitoramento](/docs/containers?topic=containers-supported_integrations#health_services). Para verificar os logs de um pod individual Kubernetes ou outro recurso, é possível executar o `kubectl logs <resource_name>`. Por padrão, os logs são armazenados em `/var/log` para o namespace. Por exemplo, é possível coletar logs de contêiner por meio do caminho `/var/log/pods/`. É possível gravar um script para exportar logs para um dispositivo de armazenamento persistente que pode ser usado para análise com a sua própria solução de criação de log.<p class="important">Para verificar os logs para pods de aplicativo individuais, execute `kubectl logs <pod name>`. Não use o painel do Kubernetes para transmitir os logs para os seus pods, o que pode causar uma interrupção em seu acesso ao painel do Kubernetes.</p></dd>
 
 </dl>
 
@@ -235,7 +235,7 @@ Crie uma configuração para a criação de log de cluster e de app. É possíve
 
 **Encaminhando logs para seu próprio servidor sobre os protocolos `udp` ou `tcp`**
 
-1. Assegure-se de que você tenha a [função da plataforma **Editor** ou **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+1. Assegure-se de que você tenha a [função da plataforma **Editor** ou **Administrador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform).
 
 2. Para o cluster no qual a origem de log está localizada: [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -249,7 +249,7 @@ Crie uma configuração para a criação de log de cluster e de app. É possíve
 
 4. Crie uma configuração de encaminhamento de log.
     ```
-    ibmcloud ks logging-config-create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ibmcloud ks logging-config-create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
     {: pre}
 
@@ -260,7 +260,7 @@ Crie uma configuração para a criação de log de cluster e de app. É possíve
 As etapas a seguir são instruções gerais. Antes de usar o contêiner em um ambiente de produção, certifique-se de que quaisquer requisitos de segurança necessários sejam atendidos.
 {: tip}
 
-1. Assegure-se de que tenha as [funções do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) a seguir:
+1. Assegure-se de que você tenha as seguintes [funções do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
     * A função da plataforma **Editor** ou **Administrador** para o cluster
     * Função de serviço **Gravador** ou **Gerenciador** para o namespace `kube-system`
 
@@ -296,7 +296,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 * Atualmente, uma política de auditoria padrão é usada para todos os clusters com essa configuração de criação de log.
 * Atualmente, os filtros não são suportados.
 * Pode haver somente uma configuração `kube-audit` por cluster, mas é possível encaminhar logs para o {{site.data.keyword.cloudaccesstrailshort}} e um servidor externo criando uma configuração de criação de log e um webhook.
-* Deve-se ter a [função de plataforma **Administrador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o cluster.
+* Deve-se ter a [função da plataforma **Administrador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 
 **Antes de começar**
 
@@ -481,12 +481,11 @@ Para encaminhar logs de auditoria da API do Kubernetes:
 **Atualizando**</br>
 É possível atualizar uma configuração de criação de log que você já criou:
 ```
-ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
 ```
 {: pre}
 
-**Excluindo**</br>
-É possível parar o encaminhamento de logs em uma ou todas as configurações de criação de log para um cluster:
+**Excluindo**</br> É possível parar o encaminhamento de logs ao excluir uma ou todas as configurações de criação de log para um cluster:
 
 * Para excluir uma configuração de criação de log:
   ```
@@ -514,7 +513,7 @@ Para obter mais informações sobre logs de auditoria do Kubernetes, consulte o 
 * Atualmente, uma política de auditoria padrão é usada para todos os clusters com essa configuração de criação de log.
 * Atualmente, os filtros não são suportados.
 * Pode haver somente uma configuração `kube-audit` por cluster, mas é possível encaminhar logs para o {{site.data.keyword.cloudaccesstrailshort}} e um servidor externo criando uma configuração de criação de log e um webhook.
-* Deve-se ter a [função de plataforma **Administrador** do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) para o cluster.
+* Deve-se ter a [função da plataforma **Administrador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 
 O {{site.data.keyword.containerlong_notm}} atualmente não está configurado para usar o {{site.data.keyword.at_full}}. Para gerenciar os logs de auditoria da API do Kubernetes, continue a usar o {{site.data.keyword.cloudaccesstrailfull_notm}} com LogAnalysis.
 {: note}
@@ -592,10 +591,10 @@ O {{site.data.keyword.containerlong_notm}} atualmente não está configurado par
     {: screen}
 
 3. Para visualizar os eventos de auditoria da API do Kubernetes que você encaminha:
-  1. Efetue login em sua conta do  {{site.data.keyword.Bluemix_notm}} .
+  1. Efetue login em sua conta do  {{site.data.keyword.cloud_notm}} .
   2. No catálogo, provisione uma instância do serviço {{site.data.keyword.cloudaccesstrailshort}} na mesma conta que sua instância do {{site.data.keyword.containerlong_notm}}.
   3. Na guia **Gerenciar** do painel do {{site.data.keyword.cloudaccesstrailshort}}, selecione o domínio de conta ou de espaço.
-    * **Logs de conta**: os eventos de gerenciamento de cluster e os eventos de auditoria do servidor de API do Kubernetes estão disponíveis no **domínio de contas** para a região do {{site.data.keyword.Bluemix_notm}} em que os eventos são gerados.
+    * **Logs de conta**: os eventos de gerenciamento de cluster e os eventos de auditoria do servidor de API do Kubernetes estão disponíveis no **domínio de contas** para a região do {{site.data.keyword.cloud_notm}} em que os eventos são gerados.
     * **Logs de espaço**: se você especificou um espaço quando definiu a configuração de criação de log na etapa 2, esses eventos estarão disponíveis no **domínio de espaço** que está associado ao espaço do Cloud Foundry em que o serviço {{site.data.keyword.cloudaccesstrailshort}} é provisionado.
   4. Clique em  ** Visualizar no Kibana **.
   5. Configure o prazo durante o qual deseja visualizar os logs. O padrão é 24 horas.
@@ -617,12 +616,12 @@ Como os logs do servidor de API do Kubernetes são transmitidos automaticamente,
 
 **Antes de começar**
 
-* [Provisione uma instância](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) do {{site.data.keyword.cos_short}} por meio do catálogo do {{site.data.keyword.Bluemix_notm}}.
-* Assegure-se de que você tenha a [função da plataforma **Administrador** do {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
+* [Provisione uma instância](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) do {{site.data.keyword.cos_short}} por meio do catálogo do {{site.data.keyword.cloud_notm}}.
+* Assegure-se de que você tenha a [função da plataforma **Administrador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o cluster.
 
 ** Criando uma Captura Instantânea
 
-1. Crie um depósito de Object Storage por meio do console do {{site.data.keyword.Bluemix_notm}}, seguindo [este tutorial de introdução](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
+1. Crie um depósito de Object Storage por meio do console do {{site.data.keyword.cloud_notm}}, seguindo [este tutorial de introdução](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets).
 
 2. Gere [credenciais de serviço HMAC](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) no bucket que você criou.
   1. Na guia **Credenciais de serviço** do painel do {{site.data.keyword.cos_short}}, clique em **Nova credencial**.
@@ -674,7 +673,7 @@ Como os logs do servidor de API do Kubernetes são transmitidos automaticamente,
   ```
   {: screen}
 
-4. Verifique o status de sua solicitação. Pode levar algum tempo para que a captura instantânea seja concluída, mas é possível verificar se a solicitação está sendo concluída com êxito ou não. É possível localizar o nome do arquivo que contém os logs principais na resposta e usar o console do {{site.data.keyword.Bluemix_notm}} para fazer download do arquivo.
+4. Verifique o status de sua solicitação. Pode levar algum tempo para que a captura instantânea seja concluída, mas é possível verificar se a solicitação está sendo concluída com êxito ou não. É possível localizar o nome do arquivo que contém os logs principais na resposta e usar o console do {{site.data.keyword.cloud_notm}} para fazer download do arquivo.
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -717,14 +716,14 @@ Para evitar conflitos ao usar serviços de métricas, certifique-se de que os cl
   <dt>Painel do Kubernetes</dt>
     <dd>O painel do Kubernetes é uma interface administrativa da web na qual é possível revisar o funcionamento de seus nós do trabalhador, localizar recursos do Kubernetes, implementar apps conteinerizados e solucionar problemas de apps com informações de criação de log e de monitoramento. Para obter mais informações sobre como acessar o painel do Kubernetes, veja [Ativando o painel do Kubernetes para o {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>
 
-  <dt>Descontinuado: painel Métricas na página de visão geral do cluster do console do {{site.data.keyword.Bluemix_notm}} e saída de <code>ibmcloud ks cluster-get</code></dt>
+  <dt>Descontinuado: painel Métricas na página de visão geral do cluster do console do {{site.data.keyword.cloud_notm}} e saída de <code>ibmcloud ks cluster-get</code></dt>
     <dd>O {{site.data.keyword.containerlong_notm}} fornece informações sobre o
-funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar esse console para ampliar a escala do cluster, trabalhar com seu armazenamento persistente e incluir mais recursos no cluster por meio da ligação de serviços do {{site.data.keyword.Bluemix_notm}}. Para visualizar métricas, acesse o painel **Kubernetes** > **Clusters**, selecione um cluster e clique no link **Métricas**.
-  <p class="deprecated">O link para o painel de métricas na página de visão geral do cluster do console do {{site.data.keyword.Bluemix_notm}} e na saída de `ibmcloud ks cluster-get` foi descontinuado. Os clusters que forem criados após 03 de maio de 2019 não serão criados com o link do painel de métricas. Os clusters que forem criados em ou antes de 03 de maio de 2019 continuarão a ter o link para o painel de métricas.</p></dd>
+funcionamento e a capacidade do cluster e o uso dos recursos de cluster. É possível usar esse console para ampliar a escala do cluster, trabalhar com seu armazenamento persistente e incluir mais recursos no cluster por meio da ligação de serviços do {{site.data.keyword.cloud_notm}}. Para visualizar métricas, acesse o painel **Kubernetes** > **Clusters**, selecione um cluster e clique no link **Métricas**.
+  <p class="deprecated">O link para o painel de métricas na página de visão geral do cluster do console do {{site.data.keyword.cloud_notm}} e na saída de `ibmcloud ks cluster-get` foi descontinuado. Os clusters que forem criados após 03 de maio de 2019 não serão criados com o link do painel de métricas. Os clusters que forem criados em ou antes de 03 de maio de 2019 continuarão a ter o link para o painel de métricas.</p></dd>
 
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>As métricas para clusters padrão estão localizadas na conta do {{site.data.keyword.Bluemix_notm}} para a qual o login foi efetuado quando o cluster do Kubernetes foi criado. Se você especificou um espaço do {{site.data.keyword.Bluemix_notm}} quando criou o cluster, as métricas estão localizadas nesse espaço. As métricas do contêiner são coletadas automaticamente para todos os contêineres que são implementados em um cluster. Essas métricas são enviadas e disponibilizadas por meio de Grafana. Para obter mais informações sobre métricas, veja [Monitoramento para o {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
-    <p>Para acessar o painel Grafana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.Bluemix_notm}} no qual você criou o cluster.</p>
+    <dd><p>As métricas para clusters padrão estão localizadas na conta do {{site.data.keyword.cloud_notm}} para a qual o login foi efetuado quando o cluster do Kubernetes foi criado. Se você especificou um espaço do {{site.data.keyword.cloud_notm}} quando criou o cluster, as métricas estão localizadas nesse espaço. As métricas do contêiner são coletadas automaticamente para todos os contêineres que são implementados em um cluster. Essas métricas são enviadas e disponibilizadas por meio de Grafana. Para obter mais informações sobre métricas, veja [Monitoramento para o {{site.data.keyword.containerlong_notm}}](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov).</p>
+    <p>Para acessar o painel Grafana, acesse uma das URLs a seguir e selecione a conta ou o espaço do {{site.data.keyword.cloud_notm}} no qual você criou o cluster.</p>
     <table summary="A primeira linha na tabela abrange ambas as colunas. O restante das linhas deve ser lido da esquerda para a direita, com a zona do servidor na coluna um e os endereços IP para corresponder na coluna dois.">
     <caption>Endereços IP a serem abertos para o tráfego de monitoramento</caption>
             <thead>
@@ -791,11 +790,11 @@ Para visualizar informações sobre um cluster específico, como suas zonas, URL
    <tbody>
 <tr>
    <td>`Interrompido`</td>
-   <td>A exclusão do cluster é solicitada pelo usuário antes da implementação do mestre do Kubernetes. Depois que a exclusão do cluster é concluída, o cluster é removido do painel. Se o seu cluster estiver preso nesse estado por um longo tempo, abra um [caso de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+   <td>A exclusão do cluster é solicitada pelo usuário antes da implementação do mestre do Kubernetes. Depois que a exclusão do cluster é concluída, o cluster é removido do painel. Se seu cluster estiver preso nesse estado por um longo tempo, abra um [caso de suporte do {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
  <tr>
      <td>`Crítico`</td>
-     <td>O mestre do Kubernetes não pode ser atingido ou todos os nós do trabalhador no cluster estão inativos. </td>
+     <td>O mestre do Kubernetes não pode ser atingido ou todos os nós do trabalhador no cluster estão inativos. Se você ativou o {{site.data.keyword.keymanagementservicelong_notm}} em seu cluster, o contêiner do {{site.data.keyword.keymanagementserviceshort}} poderá falhar ao criptografar ou decriptografar seus segredos de cluster. Se sim, é possível visualizar um erro com mais informações ao executar `kubectl get secrets`.</td>
     </tr>
    <tr>
      <td>`Exclusão com falha`</td>
@@ -803,7 +802,7 @@ Para visualizar informações sobre um cluster específico, como suas zonas, URL
    </tr>
    <tr>
      <td>`Excluído`</td>
-     <td>O cluster foi excluído, mas ainda não foi removido de seu painel. Se o seu cluster estiver preso nesse estado por um longo tempo, abra um [caso de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>O cluster foi excluído, mas ainda não foi removido de seu painel. Se seu cluster estiver preso nesse estado por um longo tempo, abra um [caso de suporte do {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>`Exclusão`</td>
@@ -811,7 +810,7 @@ Para visualizar informações sobre um cluster específico, como suas zonas, URL
    </tr>
    <tr>
      <td>`Implementação com falha`</td>
-     <td>A implementação do mestre do Kubernetes não pôde ser concluída. Não é possível resolver esse estado. Entre em contato com o suporte do IBM Cloud abrindo um [caso de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>A implementação do mestre do Kubernetes não pôde ser concluída. Não é possível resolver esse estado. Entre em contato com o suporte do IBM Cloud, abrindo um [caso de suporte do {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
    </tr>
      <tr>
        <td>`Implementando`</td>
@@ -827,7 +826,7 @@ Para visualizar informações sobre um cluster específico, como suas zonas, URL
      </tr>
    <tr>
      <td>`Solicitado`</td>
-     <td>Uma solicitação para criar o cluster e pedir a infraestrutura para os nós principal e do trabalhador do Kubernetes é enviada. Quando a implementação do cluster é iniciada, o estado do cluster muda para <code>Deploying</code>. Se o seu cluster estiver preso no estado <code>Requested</code> por um longo tempo, abra um [caso de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Uma solicitação para criar o cluster e pedir a infraestrutura para os nós principal e do trabalhador do Kubernetes é enviada. Quando a implementação do cluster é iniciada, o estado do cluster muda para <code>Deploying</code>. Se o seu cluster estiver preso no estado <code>Requested</code> por um longo tempo, abra um [caso de suporte do {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>`Atualizando`</td>
@@ -839,7 +838,9 @@ Para visualizar informações sobre um cluster específico, como suas zonas, URL
    </tr>
     <tr>
        <td>`Avisar`</td>
-       <td>Pelo menos um nó do trabalhador no cluster não está disponível, mas outros nós do trabalhador estão disponíveis e podem assumir o controle da carga de trabalho. </td>
+       <td><ul><li>Pelo menos um nó do trabalhador no cluster não está disponível, mas outros nós do trabalhador estão disponíveis e podem assumir o controle da carga de trabalho. Tente [recarregar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) os nós do trabalhador indisponíveis.</li>
+       <li>Seu cluster não tem nenhum nó do trabalhador, como se você tivesse criado um cluster sem nenhum nó do trabalhador ou removido manualmente todos os nós do trabalhador do cluster. [Redimensione o seu conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#resize_pool) para incluir nós do trabalhador a recuperar de um estado `Warning`.</li>
+       <li>Uma operação do plano de controle para seu cluster falhou. Visualize o cluster no console ou execute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` para [verificar o **Status do mestre** para depurar mais](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -919,9 +920,9 @@ O **Status do mestre** fornece detalhes sobre qual operação do estado do mestr
     <td>Um nó do trabalhador pode entrar em um estado Crítico por muitas razões: <ul><li>Você iniciou uma reinicialização para seu nó do trabalhador sem bloquear e drenar seu nó do trabalhador. Reinicializar um nó do trabalhador pode causar distorção de dados em <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code> e <code>calico</code>. </li>
     <li>Os pods que são implementados em seu nó do trabalhador não usam os limites de recurso para [memória ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) e [CPU ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Sem limites de recurso, os pods podem consumir todos os recursos disponíveis, sem deixar recursos para outros pods executarem nesse nó do trabalhador. Esse supercomprometimento de carga de trabalho faz com que o nó do trabalhador falhe. </li>
     <li>O <code>containerd</code>, <code>kubelet</code> ou <code>calico</code> entrou em um estado irrecuperável depois que ele executou centenas ou milhares de contêineres ao longo do tempo. </li>
-    <li>Você configurou um Virtual Router Appliance para seu nó do trabalhador que ficou inativo e cortou a comunicação entre o seu nó do trabalhador e o mestre do Kubernetes. </li><li> Problemas da rede atual no {{site.data.keyword.containerlong_notm}} ou na infraestrutura do IBM Cloud (SoftLayer) que fazem com que a comunicação entre o nó do trabalhador e o mestre do Kubernetes falhe.</li>
+    <li>Você configurou um Virtual Router Appliance para seu nó do trabalhador que ficou inativo e cortou a comunicação entre o seu nó do trabalhador e o mestre do Kubernetes. </li><li> Problemas de rede atuais no {{site.data.keyword.containerlong_notm}} ou na infraestrutura do IBM Cloud que faz com que a comunicação entre o nó do trabalhador e o mestre do Kubernetes falhe.</li>
     <li>O nó do trabalhador ficou sem capacidade. Verifique o <strong>Status</strong> do nó do trabalhador para ver se ele mostra <strong>Sem disco</strong> ou <strong>Sem memória</strong>. Se o nó do trabalhador está fora de capacidade, considere reduzir a carga de trabalho em seu nó do trabalhador ou incluir um nó do trabalhador em seu cluster para ajudar no balanceamento de carga da carga de trabalho.</li>
-    <li>O dispositivo foi desligado por meio da lista de recursos do console do [{{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/resources). Abra a lista de recursos e localize o ID do nó do trabalhador na lista **Dispositivos**. No menu Ação, clique em **Ligar**.</li></ul>
+    <li>O dispositivo foi desligado da [lista de recursos do console do {{site.data.keyword.cloud_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/resources). Abra a lista de recursos e localize o ID do nó do trabalhador na lista **Dispositivos**. No menu Ação, clique em **Ligar**.</li></ul>
     Em muitos casos, [recarregar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) seu nó do trabalhador pode resolver o problema. Ao
 recarregar o nó do trabalhador, a [versão de correção](/docs/containers?topic=containers-cs_versions#version_types) mais recente é aplicada ao nó do trabalhador. As versões principal e secundária não mudam. Antes de recarregar seu nó do trabalhador, certifique-se de encadeá-lo e drená-lo para garantir que os pods existentes sejam finalizados normalmente e reprogramados para os nós do trabalhador restantes. </br></br> Se o recarregamento do nó do trabalhador não resolver o problema, acesse a próxima etapa para continuar a resolução de problemas de seu nó do trabalhador. </br></br><strong>Dica:</strong> é possível [configurar verificações de funcionamento para seu nó do trabalhador e ativar a Recuperação automática](/docs/containers?topic=containers-health#autorecovery). Se a Recuperação automática detecta um nó do trabalhador não funcional com base nas verificações configuradas, a Recuperação automática aciona uma ação corretiva como um recarregamento do S.O. no nó do trabalhador. Para obter mais informações sobre como a Recuperação automática funciona, veja o [blog de Recuperação automática ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
     </td>
@@ -960,7 +961,7 @@ recarregar o nó do trabalhador, a [versão de correção](/docs/containers?topi
     </tr>
     <tr>
      <td>`Desconhecido`</td>
-     <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização. Se o nó do trabalhador permanecer nesse estado por um período de tempo estendido mesmo depois que o mestre do Kubernetes for atualizado com sucesso, tente [recarregar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) o nó do trabalhador.</li><li>Você pode ter outro firewall que está protegendo seus nós do trabalhador ou mudado as configurações de firewall recentemente. O {{site.data.keyword.containerlong_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.Bluemix_notm}} abrindo um [caso de suporte do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
+     <td>O mestre do Kubernetes não está acessível por um dos motivos a seguir:<ul><li>Você solicitou uma atualização do mestre do Kubernetes. O estado do nó do trabalhador não pode ser recuperado durante a atualização. Se o nó do trabalhador permanecer nesse estado por um período de tempo estendido mesmo depois que o mestre do Kubernetes for atualizado com sucesso, tente [recarregar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) o nó do trabalhador.</li><li>Você pode ter outro firewall que está protegendo seus nós do trabalhador ou mudado as configurações de firewall recentemente. O {{site.data.keyword.containerlong_notm}} requer que determinados endereços IP e portas sejam abertos para permitir a comunicação do nó do trabalhador com o mestre do Kubernetes e vice-versa. Para obter mais informações, veja [O firewall evita que os nós do trabalhador se conectem](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>O mestre do Kubernetes está inativo. Entre em contato com o suporte do {{site.data.keyword.cloud_notm}} abrindo um [caso de suporte do {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
 </tr>
    <tr>
       <td>`Avisar`</td>
@@ -982,14 +983,14 @@ A recuperação automática requer pelo menos um nó funcional para funcionar co
 {: note}
 
 Antes de iniciar:
-- Assegure-se de que tenha as [funções do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) a seguir:
+- Assegure-se de que você tenha as seguintes [funções do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
     - Função de plataforma ** Administrador **  para o cluster
     - Função de serviço **Gravador** ou **Gerenciador** para o namespace `kube-system`
 - [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para configurar a Autorização Automática:
 
-1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local, instale o servidor Helm (tiller) com uma conta do serviço e inclua o repositório Helm do {{site.data.keyword.Bluemix_notm}}.
+1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local, instale o servidor Helm (tiller) com uma conta do serviço e inclua o repositório Helm do {{site.data.keyword.cloud_notm}}.
 
 2.  Verifique se o tiller está instalado com uma conta do serviço.
     ```
@@ -1003,9 +1004,7 @@ Para configurar a Autorização Automática:
     ```
     {: screen}
 
-3. Crie um arquivo de mapa de configuração que define suas verificações no formato JSON. Por exemplo, o arquivo YAML a seguir define três verificações: uma verificação de HTTP e duas verificações do servidor da API do Kubernetes. Consulte as tabelas após o arquivo YAML de exemplo para obter informações sobre os três tipos de verificações e informações sobre os componentes individuais das verificações.
-</br>
-   **Dica:** defina cada verificação como uma chave exclusiva na seção `data` do mapa de configuração.
+3. Crie um arquivo de mapa de configuração que define suas verificações no formato JSON. Por exemplo, o arquivo YAML a seguir define três verificações: uma verificação de HTTP e duas verificações do servidor da API do Kubernetes. Consulte as tabelas após o arquivo YAML de exemplo para obter informações sobre os três tipos de verificações e informações sobre os componentes individuais das verificações.<p class="tip">*Defina cada verificação como uma chave exclusiva na seção `data` do mapa de configuração.</p>
 
    ```
    kind: ConfigMap

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Planejando a rede no cluster e externa para apps
@@ -49,7 +50,7 @@ A descoberta de serviço do Kubernetes fornece aplicativos com uma conexão de r
 Todos os pods que são implementados em um nó do trabalhador têm um endereço IP privado designado a eles no intervalo 172.30.0.0/16 e são roteados somente entre nós do trabalhador. Para evitar conflitos, não use esse intervalo de IPs em quaisquer nós que se comunicam com os nós do trabalhador. Os nós do trabalhador e os pods podem se comunicar com segurança na rede privada usando endereços IP privados. No entanto, quando um pod trava ou um nó do trabalhador precisa ser recriado, um novo endereço IP privado
 é designado.
 
-Em vez de tentar rastrear a mudança de endereços IP privados para aplicativos que devem estar altamente disponíveis, é possível usar recursos de descoberta de serviço integrados do Kubernetes para expor aplicativos como serviços. Um serviço do Kubernetes agrupa um conjunto de pods e fornece uma conexão de rede para esses pods. O serviço seleciona os pods de destino para os quais roteia o tráfego por meio de rótulos.
+Em vez de tentar rastrear a mudança de endereços IP privados para aplicativos que devem estar altamente disponíveis, é possível usar recursos de descoberta de serviço integrados do Kubernetes para expor aplicativos como serviços. Um serviço do Kubernetes agrupa um conjunto de pods e fornece uma conexão de rede para esses pods. O serviço seleciona os pods de destino que roteia o tráfego para via etiquetas.
 
 Um serviço fornece conectividade entre seus pods de aplicativo e outros serviços no cluster sem expor o endereço IP privado real de cada pod. Um endereço IP dentro do cluster é designado aos serviços, o `clusterIP`, que é acessível somente dentro do cluster. Esse endereço IP é vinculado ao serviço por seu tempo de vida inteiro e não muda enquanto o serviço existe.
 * Clusters mais recentes: em clusters criados após fevereiro de 2018 na zona dal13 ou após outubro de 2017 em qualquer outra zona, um IP é designado aos serviços de um dos 65.000 IPs no intervalo de 172.21.0.0/16.
@@ -115,7 +116,7 @@ A tabela a seguir compara os recursos de cada tipo de serviço de rede.
 |Diversos aplicativos por serviço| | | |<img src="images/confirm.svg" width="32" alt="Recurso disponível" style="width:32px;" />|
 {: caption="Características de tipos de serviço de rede do Kubernetes" caption-side="top"}
 
-Para escolher um padrão de implementação de balanceamento de carga com base em um ou mais desses serviços de rede, consulte [Escolhendo um padrão de implementação para o balanceamento de carga externa público](#pattern_public) ou [Escolhendo um padrão de implementação para o balanceamento de carga externa privado](#private_access).
+Para escolher um padrão de implementação de balanceamento de carga com base em um ou mais desses serviços de rede, consulte [Escolhendo um padrão de implementação para balanceamento de carga externo público](#pattern_public) ou [Escolhendo um padrão de implementação para balanceamento de carga externo privado](#private_access).
 
 <br />
 
@@ -126,11 +127,11 @@ Para escolher um padrão de implementação de balanceamento de carga com base e
 Exponha publicamente um aplicativo em seu cluster para a Internet.
 {: shortdesc}
 
-Quando você cria um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}, é possível conectar o cluster a uma VLAN pública. A VLAN pública determina o endereço IP público que é designado a cada nó do trabalhador, que fornece a cada nó do trabalhador uma interface de rede pública. Os serviços de rede pública se conectam a essa interface de rede pública, fornecendo ao seu aplicativo um endereço IP público e, opcionalmente, uma URL pública. Quando um aplicativo é publicamente exposto, qualquer pessoa que tenha o endereço IP de serviço público ou a URL configurada para ele pode enviar uma solicitação para seu aplicativo. Por isso, exponha o número mínimo possível de aplicativos. Somente exponha um aplicativo ao público quando estiver pronto para aceitar o tráfego de clientes ou usuários externos da web.
+Quando você cria um cluster do Kubernetes no {{site.data.keyword.containerlong_notm}}, é possível conectar o cluster a uma VLAN pública. A VLAN pública determina o endereço IP público que é designado a cada nó do trabalhador, que fornece a cada nó do trabalhador uma interface de rede pública. Os serviços de rede pública se conectam a essa interface de rede pública, fornecendo ao seu aplicativo um endereço IP público e, opcionalmente, uma URL pública. Quando um aplicativo é publicamente exposto, qualquer pessoa que tenha o endereço IP de serviço público ou a URL configurada para ele pode enviar uma solicitação para seu aplicativo. Por essa razão, exponha o mínimo de aplicativos possível. Exponha um aplicativo para o público apenas quando estiver pronto para aceitar o tráfego de clientes ou usuários externos da web.
 
 A interface de rede pública para os nós do trabalhador é protegida por [configurações de política de rede do Calico predefinidas](/docs/containers?topic=containers-network_policies#default_policy) que são configuradas em cada nó do trabalhador durante a criação do cluster. Por padrão, todo o tráfego de rede de saída é permitido para todos os nós do trabalhador. O tráfego de rede de entrada está bloqueado, exceto para algumas portas. Essas portas são abertas para que a IBM possa monitorar o tráfego de rede e instalar automaticamente as atualizações de segurança para o mestre do Kubernetes e para que as conexões possam ser estabelecidas para os serviços NodePort, LoadBalancer e Ingress. Para obter mais informações sobre essas políticas, incluindo como modificá-las, veja [Políticas de rede](/docs/containers?topic=containers-network_policies#network_policies).
 
-Para tornar um aplicativo publicamente disponível para a Internet, escolha um padrão de implementação de balanceamento de carga para ele criar serviços públicos NodePort, LoadBalancer ou Ingress.
+Para tornar um aplicativo publicamente disponível para a Internet, escolha um padrão de implementação de balanceamento de carga para o seu aplicativo para criar serviços públicos NodePort, LoadBalancer ou Ingress.
 
 ### Escolhendo um padrão de implementação para o balanceamento de carga externa público
 {: #pattern_public}
@@ -165,33 +166,33 @@ Para expor um aplicativo com um serviço de rede, você tem diversas opções pa
 </tr><tr>
 <td>NLB v1.0 (+ nome de host)</td>
 <td>Balanceamento de carga básico que expõe o aplicativo com um endereço IP ou nome de host</td>
-<td>Exponha rapidamente um aplicativo para o público com um endereço IP ou um nome de host que suporte a finalização de SSL.</td>
-<td><ol><li>Crie um balanceador de carga de rede (NLB) pública 1.0 em um cluster [de zona única](/docs/containers?topic=containers-loadbalancer#lb_config) ou [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registre](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) um nome do host e verificações de funcionamento.</li></ol></td>
+<td>Exponha rapidamente um aplicativo para o público com um endereço IP ou um nome do host que suporte a finalização de SSL.</td>
+<td><ol><li>Crie um balanceador de carga de rede (NLB) pública 1.0 em um cluster [de zona única](/docs/containers?topic=containers-loadbalancer#lb_config) ou [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registre](/docs/containers?topic=containers-loadbalancer_hostname) um nome do host e verificações de funcionamento.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ nome de host)</td>
 <td>Balanceamento de carga DSR que expõe o aplicativo com um endereço IP ou nome de host</td>
 <td>Exponha um aplicativo que possa receber altos níveis de tráfego para o público com um endereço IP ou nome de host que suporte a finalização de SSL.</td>
-<td><ol><li>Atenda aos [pré-requisitos](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Crie um NLB 2.0 público em um cluster [de zona única](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) ou [multizona](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config).</li><li>Opcionalmente, [registre](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) um nome do host e verificações de funcionamento.</li></ol></td>
+<td><ol><li>Atenda aos [pré-requisitos](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Crie um NLB 2.0 público em um cluster [de zona única](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) ou [multizona](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config).</li><li>Opcionalmente, [registre](/docs/containers?topic=containers-loadbalancer_hostname) um nome do host e verificações de funcionamento.</li></ol></td>
 </tr><tr>
 <td>Nome do host do Istio + NLB</td>
 <td>Balanceamento de carga básico que expõe o aplicativo com um nome de host e usa regras de roteamento do Istio</td>
 <td>Implemente regras de pós-roteamento do Istio, como regras para diferentes versões de um microsserviço de aplicativo, e exponha um aplicativo gerenciado pelo Istio com um nome de host público.</li></ol></td>
-<td><ol><li>Instale o [complemento gerenciado do Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Inclua seu aplicativo na [malha de serviços do Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registre o balanceador de carga padrão do Istio com [um nome de host](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
+<td><ol><li>Instale o [complemento gerenciado do Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Inclua seu aplicativo na [malha de serviços do Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registre o balanceador de carga padrão do Istio com [um nome de host](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
 </tr><tr>
 <td>ALB do Ingress</td>
 <td>Balanceamento de carga do HTTPS que expõe o app com um nome de host e usa regras de roteamento customizadas</td>
 <td>Implemente regras de roteamento customizadas e finalização de SSL para múltiplos apps.</td>
 <td><ol><li>Crie um [Serviço do Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) para o ALB público.</li><li>Customize regras de roteamento do ALB com [anotações](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
 </tr><tr>
-<td>Traga o seu próprio nome do host do controlador do Ingress + ALB</td>
+<td>Traga seu próprio controlador do Ingress + o nome do host do ALB ou NLB</td>
 <td>Balanceamento de carga HTTPS com um controlador customizado do Ingress que expõe o aplicativo com o nome de host de ALB fornecido pela IBM e usa regras de roteamento customizadas</td>
 <td>Implemente regras de roteamento customizadas ou outros requisitos específicos para ajustar diversos aplicativos de forma customizada.</td>
-<td>[Implemente seu controlador do Ingress e utilize o nome de host de ALB fornecido pela IBM](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Implemente o seu controlador do Ingress e aproveite um nome de host fornecido pela IBM](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>
 
-Ainda deseja obter mais detalhes sobre os padrões de implementação de balanceamento de carga disponíveis no {{site.data.keyword.containerlong_notm}}? Verifiqe esta [postagem do blog![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+Ainda deseja obter mais detalhes sobre os padrões de implementação de balanceamento de carga que estão disponíveis no {{site.data.keyword.containerlong_notm}}? Verifiqe esta [postagem do blog![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
 {: tip}
 
 <br />
@@ -207,12 +208,12 @@ Quando você implementa um aplicativo em um cluster Kubernetes no {{site.data.ke
 
 Como um exemplo, suponha que você crie um NLB privado para seu aplicativo. Esse NLB privado poderá ser acessado por:
 * Qualquer pod no mesmo cluster.
-* Qualquer pod em qualquer cluster na mesma conta do {{site.data.keyword.Bluemix_notm}}.
-* Se você tiver o [VRF ou VLAN Spanning](/docs/containers?topic=containers-subnets#basics_segmentation) ativado, qualquer sistema que esteja conectado a qualquer uma das VLANs privadas na mesma conta do {{site.data.keyword.Bluemix_notm}}.
-* Se não estiver na conta do {{site.data.keyword.Bluemix_notm}}, mas ainda estiver atrás do firewall da empresa, qualquer sistema por meio de uma conexão VPN com a sub-rede na qual o IP do NLB está.
-* Se estiver em uma conta diferente do {{site.data.keyword.Bluemix_notm}}, qualquer sistema por meio de uma conexão VPN com a sub-rede na qual o IP do NLB está.
+* Qualquer pod em qualquer cluster na mesma conta do {{site.data.keyword.cloud_notm}}.
+* Se você tiver o [VRF ou VLAN Spanning](/docs/containers?topic=containers-subnets#basics_segmentation) ativado, qualquer sistema que esteja conectado a qualquer uma das VLANs privadas na mesma conta do {{site.data.keyword.cloud_notm}}.
+* Se não estiver na conta do {{site.data.keyword.cloud_notm}}, mas ainda estiver atrás do firewall da empresa, qualquer sistema por meio de uma conexão VPN com a sub-rede na qual o IP do NLB está.
+* Se estiver em uma conta diferente do {{site.data.keyword.cloud_notm}}, qualquer sistema por meio de uma conexão VPN com a sub-rede na qual o IP do NLB está.
 
-Para tornar um aplicativo disponível apenas em uma rede privada, escolha um padrão de implementação de balanceamento de carga com base na configuração de VLAN de seu cluster:
+Para tornar um aplicativo disponível apenas em uma rede privada, escolha um padrão de implementação de balanceamento de carga com base na configuração de VLAN do cluster:
 * [Configuração de VLAN pública e privada](#private_both_vlans)
 * [Configuração somente de VLAN privada](#plan_private_vlan)
 
@@ -226,7 +227,7 @@ A interface de rede pública para os nós do trabalhador é protegida por [confi
 
 Como as políticas de rede padrão do Calico permitem o tráfego público de entrada para esses serviços, é possível criar políticas do Calico para, em vez disso, bloquear todo o tráfego público para os serviços. Por exemplo, um serviço NodePort abre uma porta em um nó trabalhador por meio do endereço IP privado e público do nó do trabalhador. Um serviço NLB com um endereço IP privado móvel abre um NodePort público em cada nó trabalhador. Deve-se criar uma [política de rede preDNAT do Calico](/docs/containers?topic=containers-network_policies#block_ingress) para bloquear os NodePorts públicos.
 
-Efetue check-out dos padrões de implementação de balanceamento de carga a seguir para rede privada:
+Consulte os seguintes padrões de implementação de balanceamento de carga para rede privada:
 
 |Nome|Método de balanceamento de carga|Caso de uso|Implementação|
 |----|---------------------|--------|--------------|
@@ -247,7 +248,7 @@ Quando os nós do trabalhador são conectados somente a uma VLAN privada, é pos
 
 Se o seu cluster estiver conectado somente a uma VLAN privada e você ativar os nós principal e do trabalhador para se comunicar por meio de um terminal de serviço somente privado, não será possível expor automaticamente seus aplicativos a uma rede privada. Deve-se configurar um dispositivo de gateway, como um [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou um [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para agir como o firewall e bloquear ou permitir o tráfego. Como os nós do trabalhador não estão conectados a uma VLAN pública, nenhum tráfego público será roteado para os serviços NodePort, LoadBalancer ou Ingress. No entanto, deve-se abrir as portas necessárias e os endereços IP no firewall do dispositivo de gateway para permitir o tráfego de entrada para esses serviços.
 
-Efetue check-out dos padrões de implementação de balanceamento de carga a seguir para rede privada:
+Consulte os seguintes padrões de implementação de balanceamento de carga para rede privada:
 
 |Nome|Método de balanceamento de carga|Caso de uso|Implementação|
 |----|---------------------|--------|--------------|

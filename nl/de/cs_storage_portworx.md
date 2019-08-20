@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -40,7 +40,7 @@ Portworx fasst verfügbaren Speicher, der Ihren Workerknoten zugeordnet ist, zus
 Darüber hinaus wird Portworx mit zusätzlichen Funktionen bereitgestellt, die Sie für Ihre statusabhängigen Apps nutzen können, wie zum Beispiel Datenträgersnapshots, Datenträgerverschlüsselung und Isolation. Und schließlich lässt sich durch die integrierte Funktionalität von Storage Orchestrator for Kubernetes (Stork) die optimale Platzierung von Datenträgern im Cluster sicherstellen. Weitere Informationen finden Sie in der [Portworx-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/).
 
 **Welcher Workerknotentyp in {{site.data.keyword.containerlong_notm}} ist für Portworx geeignet?** </br>
-{{site.data.keyword.containerlong_notm}} stellt Typen von Bare-Metal-Workerknoten bereit, die zur [Verwendung für softwaredefinierten Speicher (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds) optimiert sind und mit einem oder mehreren unaufbereiteten, unformatierten und nicht angehängten lokalen Platten zur Verfügung gestellt werden, die Sie für Ihre Portworx-Speicherebene verwenden können. Portworx bietet die beste Leistung, wenn Sie SDS-Workerknotenmaschinen mit einer Netzgeschwindigkeit von 10 Gb/s einsetzen.
+{{site.data.keyword.containerlong_notm}} stellt Typen von Bare-Metal-Workerknoten bereit, die zur [Verwendung für softwaredefinierten Speicher (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds) optimiert sind. Diese Typen werden auch mit einem oder mehreren unaufbereiteten, unformatierten und nicht angehängten lokalen Platten zur Verfügung gestellt, die Sie für Ihre Portworx-Speicherebene verwenden können. Portworx bietet die beste Leistung, wenn Sie SDS-Workerknotenmaschinen mit einer Netzgeschwindigkeit von 10 Gb/s einsetzen.
 
 **Lässt sich Portworx auch auf anderen Workerknoten als SDS-Workerknoten verwenden?** </br>
 Sie können Portworx auf anderen Workerknotentypen als SDS-Typen installieren, allerdings werden möglicherweise nicht die Leistungsvorteile erzielt, die für Ihre App erforderlich sind. Nicht-SDS-Workerknoten können virtuelle Workerknoten oder Bare-Metal-Workerknoten sein. Wenn Sie virtuelle Maschinen verwenden, verwenden Sie mindestens den Workerknotentyp `b2c.16x64` oder einen besseren. Virtuelle Maschinen der Typen `b3c.4x16` oder `u3c.2x4` stellen nicht die für eine ordnungsgemäße Funktion von Portworx erforderlichen Ressourcen bereit. Beachten Sie, dass virtuelle Maschinen mit einer Geschwindigkeit von 1000 Mb/s bereitgestellt werden, die für eine ideale Leistung von Portworx nicht ausreicht. Bare-Metal-Maschinen verfügen über ausreichend Rechenressourcen und Netzgeschwindigkeit für Portworx, jedoch müssen Sie [unaufbereiteten, unformatierten und nicht angehängten Blockspeicher hinzufügen](#create_block_storage), bevor Sie solche Maschinen verwenden können.
@@ -56,7 +56,7 @@ Sie können auch nur eine Untergruppe von Workerknoten für Ihre Portworx-Speich
 **Was ist zur Bereitstellung von Portworx erforderlich?** </br>
 {{site.data.keyword.containerlong}} stellt Typen von Workerknoten bereit, die zur Verwendung für softwaredefinierten Speicher (SDS) optimiert sind und mit einem oder mehreren unaufbereiteten, unformatierten und nicht angehängten lokalen Platten zur Verfügung gestellt werden, die Sie zum Speichern Ihrer Daten verwenden können. Portworx bietet die beste Leistung, wenn Sie [SDS-Workerknotenmaschinen](/docs/containers?topic=containers-planning_worker_nodes#sds) mit einer Netzgeschwindigkeit von 10 Gb/s einsetzen. Sie können Portworx jedoch auf anderen Workerknotentypen als SDS-Typen installieren, allerdings werden möglicherweise nicht die Leistungsvorteile erzielt, die für Ihre App erforderlich sind. Zu den Mindestvoraussetzungen für eine erfolgreiche Ausführung von Portworx gehören die folgenden:
 - 4 CPU-Cores (Kerne)
-- 4 GB Hauptspeicher
+- 4 GB Speicher
 - 128 GB unaufbereiteter, unformatierter Speicher
 - 10 Gb/s Netzgeschwindigkeit
 
@@ -72,13 +72,13 @@ Alle Fragen beantwortet? Starten Sie also nun, indem Sie einen [Cluster mit eine
 Portworx funktioniert am besten, wenn Sie Workerknotentypen verwenden, die zur [Verwendung von softwaredefiniertem Speicher (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds) optimiert sind. Wenn Sie jedoch keine SDS-Workerknoten verwenden können oder wollen, können Sie Portworx auf anderen Typen von Workerknoten als SDS installieren. Beachten Sie dabei, dass Nicht-SDS-Workerknoten nicht für Portworx optimiert sind und möglicherweise nicht die Leistungsvorteile bieten, die Ihre App benötigt.
 {: shortdesc}
 
-Wenn Sie Nicht-SDS-Workerknoten in Ihren Portworx-Cluster einschließen wollen, müssen Sie Ihren Workerknoten unaufbereitete, unformatierte und nicht angehängte Blockspeichereinheiten durch Verwendung des {{site.data.keyword.Bluemix_notm}}-Plug-ins 'Block Volume Attacher' hinzufügen. Unaufbereiteter Blockspeicher kann nicht durch Anforderungen persistenter Datenträger (PVCs - Persistent Volume Claims) von Kubernetes bereitgestellt werden, da die Blockspeichereinheit automatisch von {{site.data.keyword.containerlong_notm}} formatiert wird. Portworx unterstützt ausschließlich Blockspeicher. Nicht-SDS-Workerknoten, die Datei- oder Objektspeicher anhängen, können für die Portworx-Datenebene nicht verwendet werden.
+Wenn Sie Nicht-SDS-Workerknoten in Ihren Portworx-Cluster einschließen wollen, müssen Sie Ihren Workerknoten unaufbereitete, unformatierte und nicht angehängte Blockspeichereinheiten durch Verwendung des {{site.data.keyword.cloud_notm}}-Plug-ins 'Block Volume Attacher' hinzufügen. Unaufbereiteter Blockspeicher kann nicht durch Anforderungen persistenter Datenträger (PVCs - Persistent Volume Claims) von Kubernetes bereitgestellt werden, da die Blockspeichereinheit automatisch von {{site.data.keyword.containerlong_notm}} formatiert wird. Portworx unterstützt ausschließlich Blockspeicher. Nicht-SDS-Workerknoten, die Datei- oder Objektspeicher anhängen, können für die Portworx-Datenebene nicht verwendet werden.
 
 Wenn Sie SDS-Workerknotentypen in Ihrem Cluster haben und diese Workerknoten nur zum Erstellen Ihrer Portworx-Speicherebene verwenden wollen, können Sie diesen gesamten Schritt überspringen und mit dem [Einrichten der Portworx-Datenbank](#portworx_database) fortfahren.
 {: note}
 
-1. [Installieren Sie das {{site.data.keyword.Bluemix_notm}}-Plug-in 'Block Volume Attacher'](/docs/containers?topic=containers-utilities#block_storage_attacher).
-2. Wenn Sie allen Ihren Workerknoten Blockspeicher mit derselben Konfiguration hinzufügen wollen, [fügen Sie Blockspeicher automatisch](/docs/containers?topic=containers-utilities#automatic_block) mit dem {{site.data.keyword.Bluemix_notm}}-Plug-in 'Block Volume Attacher' hinzu. Wollen Sie Blockspeicher mit unterschiedlicher Konfiguration hinzufügen, fügen Sie Blockspeicher nur einer Untergruppe der Workerknoten hinzu oder, wenn Sie mehr Kontrolle über den Bereitstellungsprozess haben möchten, [fügen Sie Blockspeicher manuell hinzu](/docs/containers?topic=containers-utilities#manual_block).
+1. [Installieren Sie das {{site.data.keyword.cloud_notm}}-Plug-in 'Block Volume Attacher'](/docs/containers?topic=containers-utilities#block_storage_attacher).
+2. Wenn Sie allen Ihren Workerknoten Blockspeicher mit derselben Konfiguration hinzufügen wollen, [fügen Sie Blockspeicher automatisch](/docs/containers?topic=containers-utilities#automatic_block) mit dem {{site.data.keyword.cloud_notm}}-Plug-in 'Block Volume Attacher' hinzu. Wollen Sie Blockspeicher mit unterschiedlicher Konfiguration hinzufügen, fügen Sie Blockspeicher nur einer Untergruppe der Workerknoten hinzu oder, wenn Sie mehr Kontrolle über den Bereitstellungsprozess haben möchten, [fügen Sie Blockspeicher manuell hinzu](/docs/containers?topic=containers-utilities#manual_block).
 3. [Schließen Sie den Blockspeicher](/docs/containers?topic=containers-utilities#attach_block) an Ihre Workerknoten an.
 
 ## Portworx-Lizenz abrufen
@@ -92,7 +92,7 @@ Weitere Informationen zu verfügbaren Lizenztypen sowie zum Upgrade Ihrer Testli
 ## Datenbank für Portworx-Metadaten einrichten
 {: #portworx_database}
 
-Richten Sie einen {{site.data.keyword.Bluemix_notm}}-Datenbankservice ein, wie zum Beispiel [Databases for etcd](#databaseetcd) oder [{{site.data.keyword.composeForEtcd}}](#compose), um einen Schlüssel/Wert-Speicher für die Portworx-Clustermetadaten zu erstellen.
+Richten Sie einen {{site.data.keyword.cloud_notm}}-Datenbankservice ein, wie zum Beispiel [Databases for etcd](#databaseetcd) oder [{{site.data.keyword.composeForEtcd}}](#compose), um einen Schlüssel/Wert-Speicher für die Portworx-Clustermetadaten zu erstellen.
 {: shortdesc}
 
 Der Portworx-Schlüssel/Wert-Speicher dient als einzelne Wissensressource für Ihren Portworx-Cluster. Wenn der Schlüssel/Wert-Speicher nicht verfügbar ist, können Sie nicht mit Ihrem Portworx-Cluster arbeiten, um auf Ihre Daten zuzugreifen oder sie zu speichern. Vorhandene Daten werden nicht geändert oder entfernt, wenn die Portworx-Datenbank nicht verfügbar ist.
@@ -104,7 +104,7 @@ Databases for etcd ist ein verwalteter Etcd-Service, der Ihre Daten sicher über
 
 Die folgenden Schritte erläutern, wie eine Databases for etcd-Serviceinstanz für Portworx bereitgestellt und eingerichtet wird.
 
-1. Stellen Sie sicher, dass Sie über die [Plattformzugriffsrolle `Administrator` in {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser) für den Databases for etcd-Service verfügen.  
+1. Stellen Sie sicher, dass Sie über die [Plattformzugriffsrolle `Administrator` in {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser) für den Databases for etcd-Service verfügen.  
 
 2. Stellen Sie Ihre Databases for etcd-Serviceinstanz bereit.
    1. Öffnen Sie die [Katalogseite für Databases for etcd](https://cloud.ibm.com/catalog/services/databases-for-etcd).
@@ -210,7 +210,7 @@ Die folgenden Schritte erläutern, wie der {{site.data.keyword.composeForEtcd}}-
 ## Portworx im Cluster installieren
 {: #install_portworx}
 
-Installieren Sie Portworx mit einem Helm-Diagramm. Das Helm-Diagramm stellt eine Testversion der Portworx Enterprise Edition `px-enterprise` bereit, die Sie 30 Tage lang verwenden können. Darüber hinaus wird auch [Stork ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) in Ihrem Kubernetes-Cluster installiert. Stork ist der Portworx-Speicherscheduler, mit dem Sie Pods mit ihren Daten zusammen platzieren sowie Snapshots von Portworx-Datenträgern erstellen und wiederherstellen können.
+Installieren Sie Portworx mit einem Helm-Diagramm. Das Helm-Diagramm stellt eine Testversion der Portworx Enterprise Edition `px-enterprise` bereit, die Sie 30 Tage lang verwenden können. Darüber hinaus wird auch [Stork ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) in Ihrem Kubernetes-Cluster installiert. Stork ist der Portworx-Speicherscheduler. Mit Stork können Sie Pods mit ihren Daten zusammen platzieren sowie Snapshots von Portworx-Datenträgern erstellen und wiederherstellen.
 {: shortdesc}
 
 Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen von Portworx? Siehe [Portworx aktualisieren](#update_portworx) und [Portworx entfernen](#remove_portworx).
@@ -605,7 +605,7 @@ Die folgende Abbildung veranschaulicht den Ablauf der Entschlüsselung in Portwo
 Führen Sie die folgenden Schritte aus, um die Verschlüsselung für Ihre Portworx-Datenträger mit {{site.data.keyword.keymanagementservicelong_notm}} einzurichten.
 {: shortdesc}
 
-1. Stellen Sie sicher, dass Ihnen die [Plattformrolle `Editor` und die Servicezugriffsrolle `Writer`](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) in {{site.data.keyword.Bluemix_notm}} Identity and Access Management für {{site.data.keyword.keymanagementservicelong_notm}} zugeordnet sind.
+1. Stellen Sie sicher, dass Ihnen die [Plattformzugriffsrolle `Editor` und die Servicezugriffsrolle `Writer`](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) in {{site.data.keyword.cloud_notm}} Identity and Access Management für {{site.data.keyword.keymanagementservicelong_notm}} zugeordnet sind.
 
 2. Erstellen Sie eine {{site.data.keyword.keymanagementservicelong_notm}}-Serviceinstanz.
    1. Öffnen Sie die [{{site.data.keyword.keymanagementservicelong_notm}}-Katalogseite](https://cloud.ibm.com/catalog/services/key-protect).
@@ -892,7 +892,7 @@ Zur Anforderung von Speicher aus Ihrem Portworx-Cluster und zur Verwendung diese
    </tr>
    <tr>
    <td><code>parameters.repl</code></td>
-   <td>Geben Sie die Anzahl der Replikate für Ihre Daten ein, die Sie auf verschiedenen Workerknoten speichern wollen. Zulässige Anzahlen sind`1`,`2` oder `3`. Beispiel: Wenn Sie `3` eingeben, werden Ihre Daten auf drei verschiedene Workerknoten in Ihrem Portworx-Cluster repliziert. Zur hoch verfügbaren Speicherung Ihrer Daten verwenden Sie einen Mehrzonencluster und replizieren Ihre Daten auf drei Workerknoten in verschiedenen Zonen. <strong>Hinweis:</strong> Sie müssen über genügend Workerknoten verfügen, um Ihre Replikationsanforderung zu erfüllen. Wenn Sie zum Beispiel zwei Workerknoten haben, jedoch drei Replikate angeben, schlägt die Erstellung des PVC mit dieser Speicherklasse fehl. </td>
+   <td>Geben Sie die Anzahl der Replikate für Ihre Daten ein, die Sie auf verschiedenen Workerknoten speichern wollen. Zulässige Anzahlen sind `1`, `2` oder `3`. Beispiel: Wenn Sie `3` eingeben, werden Ihre Daten auf drei verschiedene Workerknoten in Ihrem Portworx-Cluster repliziert. Zur hoch verfügbaren Speicherung Ihrer Daten verwenden Sie einen Mehrzonencluster und replizieren Ihre Daten auf drei Workerknoten in verschiedenen Zonen. <strong>Hinweis:</strong> Sie müssen über genügend Workerknoten verfügen, um Ihre Replikationsanforderung zu erfüllen. Wenn Sie zum Beispiel zwei Workerknoten haben, jedoch drei Replikate angeben, schlägt die Erstellung des PVC mit dieser Speicherklasse fehl. </td>
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
@@ -900,7 +900,7 @@ Zur Anforderung von Speicher aus Ihrem Portworx-Cluster und zur Verwendung diese
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Geben Sie die Portworx-E/A-Priorität ein, die Sie für Ihre Daten anfordern wollen. Verfügbare Optionen: `high`, `medium` und `low`. Während der Einrichtung Ihres Portworx-Clusters wird jede Platte untersucht, um das Leistungsprofil der Einheit zu bestimmen. Die Profilklassifikation hängt von der Netzbandbreite Ihres Workerknotens sowie vom Typ der verwendeten Speichereinheit ab. Platten von SDS-Workerknoten werden mit `high` (hoch) klassifiziert. Wenn Sie Platten manuell einem virtuellen Workerknoten zuordnen, werden diese Platten aufgrund der niedrigeren Netzgeschwindigkeit von virtuellen Workerknoten mit `low` (niedrig) klassifiziert. </br><br> Wenn Sie einen PVC mit einer Speicherklasse erstellen, hat die Anzahl Replikate, die Sie in <code>parameters/repl</code> angeben, Vorrang vor der E/A-Priorität. Wenn Sie zum Beispiel 3 Replikate angeben, die Sie auf Hochgeschwindigkeitsplatten speichern möchten, jedoch nur einen Workerknoten mit einer Hochgeschwindigkeitsplatte in Ihrem Cluster haben, wird der PVC trotzdem erfolgreich erstellt. Ihre Daten werden sowohl auf Hochgeschwindigkeitsplatten als auch auf Niedergeschwindigkeitsplatten repliziert. </td>
+   <td>Geben Sie die Portworx-E/A-Priorität ein, die Sie für Ihre Daten anfordern wollen. Verfügbare Optionen: `high`, `medium` und `low`. Während der Einrichtung Ihres Portworx-Clusters wird jede Platte untersucht, um das Leistungsprofil der Einheit zu bestimmen. Die Profilklassifikation hängt von der Netzbandbreite Ihres Workerknotens sowie vom Typ der verwendeten Speichereinheit ab. Platten von SDS-Workerknoten werden mit `high` (hoch) klassifiziert. Wenn Sie Platten manuell einem virtuellen Workerknoten zuordnen, werden diese Platten aufgrund der niedrigeren Netzgeschwindigkeit von virtuellen Workerknoten mit `low` (niedrig) klassifiziert. </br><br> Wenn Sie einen PVC mit einer Speicherklasse erstellen, hat die Anzahl Replikate, die Sie in <code>parameters/repl</code> angeben, Vorrang vor der E/A-Priorität. Wenn Sie zum Beispiel drei Replikate angeben, die Sie auf Hochgeschwindigkeitsplatten speichern möchten, jedoch nur einen Workerknoten mit einer Hochgeschwindigkeitsplatte in Ihrem Cluster haben, wird der PVC trotzdem erfolgreich erstellt. Ihre Daten werden sowohl auf Hochgeschwindigkeitsplatten als auch auf Niedergeschwindigkeitsplatten repliziert. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
@@ -1043,7 +1043,8 @@ Damit Ihre App auf den Speicher zugreifen kann, müssen Sie den PVC an Ihre App 
       </tr>
     <tr>
     <td><code>spec.schedulerName</code></td>
-    <td>Verwenden Sie [Stork ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) als Scheduler für Ihren Portworx-Cluster. Stork ermöglicht es, die Pods mit ihren Daten zusammen zu platzieren, stellt eine nahtlose Migration von Pods bei Speicherfehlern zur Verfügung und erleichtert die Erstellung und Wiederherstellung von Snapshots von Portworx-Datenträgern. </td>
+    <td>Verwenden Sie [Stork ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) als Scheduler für Ihren Portworx-Cluster. Mit Stork können Sie Pods mit ihren Daten zusammen platzieren, eine nahtlose Migration von Pods bei Speicherfehlern zur Verfügung stellen sowie Snapshots von Portworx-Datenträgern auf einfache Weise erstellen und wiederherstellen.
+</td>
     </tr>
     <tr>
     <td><code>spec.containers.image</code></td>
@@ -1257,4 +1258,4 @@ Durch das Entfernen des Portworx-Clusters werden alle Daten aus Ihrem Portworx-C
 ## Hilfe und Unterstützung anfordern
 {: #portworx_help}
 
-Wenn ein Problem bei der Verwendung von Portworx auftritt oder Sie zu Fragen der Portworx-Konfiguration für Ihren speziellen Anwendungsfall chatten möchten, posten Sie eine Frage über den Kanal `portworx-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) ein. Melden Sie bei Slack mit Ihrer IBM ID an. Wenn Sie keine IBM ID für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
+Wenn ein Problem bei der Verwendung von Portworx auftritt oder Sie zu Fragen der Portworx-Konfiguration für Ihren speziellen Anwendungsfall chatten möchten, posten Sie eine Frage über den Kanal `portworx-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) ein. Melden Sie bei Slack mit Ihrer IBM ID an. Wenn Sie keine IBM ID für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -43,8 +43,8 @@ _Abbildung: Übersicht über die Datenverschlüsselung in einem Cluster_
 
 1.  **etcd**: etcd ist die Komponente des Masters, in der die Daten Ihrer Kubernetes-Ressourcen gespeichert werden, z. B. die `.yaml`-Dateien und geheimen Schlüssel der Objektkonfiguration. Daten in etcd werden auf dem lokalen Datenträger des Kubernetes-Masters gespeichert und in {{site.data.keyword.cos_full_notm}} gesichert. Daten werden während des Transits an {{site.data.keyword.cos_full_notm}} verschlüsselt und wenn sie ruhen. Sie können die Verschlüsselung für Ihre etcd-Daten auf der lokalen Festplatte Ihres Kubernetes-Masters aktivieren, indem Sie für Ihren Cluster die [{{site.data.keyword.keymanagementservicelong_notm}}-Verschlüsselung aktivieren](#keyprotect). Die etcd-Daten in Clustern, auf denen eine frühere Version von Kubernetes ausgeführt wird, werden auf einem verschlüsselten Datenträger gespeichert, der von IBM verwaltet und täglich gesichert wird. Wenn etcd-Daten an einen Pod gesendet werden, werden sie über TLS verschlüsselt, um den Datenschutz und die Datenintegrität sicherzustellen.
 2.  **Sekundäre Platte des Workerknotens**: Auf der sekundären Platte Ihres Workerknotens werden das Containerdateisystem und lokal extrahierte Images gespeichert. Die Platte wird mit 256-Bit-AES und mit einem LUKS-Verschlüsselungsschlüssel mit verschlüsselt, der auf dem Workerknoten eindeutig ist und als geheimer Schlüssel in etcd gespeichert ist, verwaltet von IBM. Wenn Sie Ihre Workerknoten erneut laden oder aktualisieren, werden die LUKS-Schlüssel turnusmäßig gewechselt.
-3.  **Speicher**: Sie können Daten speichern, indem Sie [persistenten Datei-, Block- oder Objektspeicher einrichten](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Die Speicherinstanzen der IBM Cloud-Infrastruktur (SoftLayer) speichern die Daten auf verschlüsselten Festplatten, sodass Ihre ruhenden Daten verschlüsselt sind. Und wenn Sie sich für Objektspeicher entscheiden, werden Ihre Daten auch während des Transits verschlüsselt.
-4.  **{{site.data.keyword.Bluemix_notm}}-Services**: Sie können [{{site.data.keyword.Bluemix_notm}}-Services in Ihren Cluster integrieren](/docs/containers?topic=containers-service-binding#bind-services), zum Beispiel {{site.data.keyword.registryshort_notm}} oder {{site.data.keyword.watson}}. Die Serviceberechtigungsnachweise werden in einem geheimen Schlüssel in etcd gespeichert. Ihre App kann auf den geheimen Schlüssel zugreifen, indem der geheime Schlüssel als Datenträger angehängt wird oder indem er als Umgebungsvariable in [Ihrer Implementierung](/docs/containers?topic=containers-app#secret) angegeben wird.
+3.  **Speicher**: Sie können Daten speichern, indem Sie [persistenten Datei-, Block- oder Objektspeicher einrichten](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Die Speicherinstanzen der IBM Cloud-Infrastruktur speichern die Daten auf verschlüsselten Festplatten, sodass Ihre ruhenden Daten verschlüsselt sind. Und wenn Sie sich für Objektspeicher entscheiden, werden Ihre Daten auch während des Transits verschlüsselt.
+4.  **{{site.data.keyword.cloud_notm}}-Services**: Sie können [{{site.data.keyword.cloud_notm}}-Services in Ihren Cluster integrieren](/docs/containers?topic=containers-service-binding#bind-services), zum Beispiel {{site.data.keyword.registryshort_notm}} oder {{site.data.keyword.watson}}. Die Serviceberechtigungsnachweise werden in einem geheimen Schlüssel in etcd gespeichert. Ihre App kann auf diese Berechtigungsnachweise zugreifen, indem der geheime Schlüssel als Datenträger angehängt wird oder indem er als Umgebungsvariable in [Ihrer Implementierung](/docs/containers?topic=containers-app#secret) angegeben wird.
 5.  **{{site.data.keyword.keymanagementserviceshort}}**: Wenn Sie [{{site.data.keyword.keymanagementserviceshort}}](#keyprotect) in Ihrem Cluster aktivieren, wird ein eingeschlossener Datenverschlüsselungsschlüssel in etcd gespeichert. Der Datenverschlüsselungsschlüssel verschlüsselt die geheimen Schlüssel in Ihrem Cluster, einschließlich der Serviceberechtigungsnachweise und des LUKS-Schlüssels. Da sich der Rootschlüssel in Ihrer {{site.data.keyword.keymanagementserviceshort}}-Instanz befindet, haben Sie die Kontrolle über den Zugriff auf Ihre verschlüsselten geheimen Schlüssel. Die {{site.data.keyword.keymanagementserviceshort}}-Schlüssel werden durch mit FIPS 140-2 Level 2 zertifizierte Hardwaresicherheitsmodule (HSM) gesichert, die gegen Informationsdiebstahl schützen. Weitere Informationen zur Funktionsweise der {{site.data.keyword.keymanagementserviceshort}}-Verschlüsselung finden Sie unter [Umschlagverschlüsselung](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption).
 
 ## Erläuterungen zur Verwendung von geheimen Schlüsseln
@@ -58,7 +58,7 @@ Geheime Kubernetes-Schlüssel stellen eine sichere Methode zum Speichern vertrau
 ### Service zu einem Cluster hinzufügen
 {: #secrets_service}
 
-Wenn Sie einen Service an einen Cluster binden, müssen Sie keinen geheimen Schlüssel erstellen, um die Serviceberechtigungsnachweise zu speichern. Ein geheimer Schlüssel wird automatisch für Sie erstellt. Weitere Informationen hierzu finden Sie unter [{{site.data.keyword.Bluemix_notm}}-Services zu Clustern hinzufügen](/docs/containers?topic=containers-service-binding#bind-services).
+Wenn Sie einen Service an einen Cluster binden, müssen Sie keinen geheimen Schlüssel erstellen, um die Serviceberechtigungsnachweise zu speichern. Ein geheimer Schlüssel wird automatisch für Sie erstellt. Weitere Informationen finden Sie unter [Clustern {{site.data.keyword.cloud_notm}}-Services hinzufügen](/docs/containers?topic=containers-service-binding#bind-services).
 {: shortdesc}
 
 ### Datenverkehr zur App mit geheimen TLS-Schlüsseln verschlüsseln
@@ -74,7 +74,7 @@ Wenn Sie außerdem über Apps verfügen, für die das HTTPS-Protokoll erforderli
 
 Wenn Sie einen Cluster erstellen, werden die geheimen Schlüssel für die {{site.data.keyword.registrylong}}-Berechtigungsnachweise automatisch im Kubernetes-Namensbereich `default` erstellt. Sie müssen jedoch einen [eigenen geheimen Schlüssel für Image-Pull-Operationen für den Cluster erstellen](/docs/containers?topic=containers-images#other), wenn Sie in den folgenden Situationen einen Container bereitstellen möchten.
 * Auf der Grundlage eines Image in der {{site.data.keyword.registryshort_notm}}-Registry für einen anderen Kubernetes-Namensbereich als `default`.
-* Auf der Grundlage eines Image in der {{site.data.keyword.registryshort_notm}}-Registry, die in einer abweichenden {{site.data.keyword.Bluemix_notm}}-Region oder in einem anderem {{site.data.keyword.Bluemix_notm}}-Konto gespeichert ist.
+* Auf der Grundlage eines Image in der {{site.data.keyword.registryshort_notm}}-Registry, die in einer abweichenden {{site.data.keyword.cloud_notm}}-Region oder in einem anderem {{site.data.keyword.cloud_notm}}-Konto gespeichert ist.
 * Auf der Grundlage eines Image, das in einer externen privaten Registry gespeichert ist.
 
 <br />
@@ -96,7 +96,7 @@ Löschen Sie keine Rootschlüssel in Ihrer {{site.data.keyword.keymanagementserv
 Vorbereitende Schritte:
 * [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Stellen Sie sicher, dass im Cluster die Kubernetes-Version 1.11.3_1521 oder höher ausgeführt wird; setzen Sie hierzu `ibmcloud ks cluster-get --cluster <clustername_oder_-id>` ab und überprüfen Sie das Feld **Version**.
-* Stellen Sie sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
+* Stellen Sie sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Administrator**](/docs/containers?topic=containers-users#platform) für den Cluster innehaben.
 * Stellen Sie sicher, dass der API-Schlüssel, der für die Region festgelegt ist, in der sich der Cluster befindet, zur Verwendung von Key Protect berechtigt ist. Führen Sie zum Überprüfen des API-Schlüsseleigners, dessen Berechtigungsnachweise für die Region gespeichert sind, den Befehl `ibmcloud ks api-key-info --cluster <clustername_oder_-id>` aus.
 
 Gehen Sie wie folgt vor, um {{site.data.keyword.keymanagementserviceshort}} zu aktivieren oder die Instanz bzw. den Rootschlüssel zu aktualisieren, von der bzw. dem die geheimen Schlüssel im Cluster verschlüsselt werden:
@@ -165,14 +165,14 @@ Löschen Sie keine Rootschlüssel in Ihrer {{site.data.keyword.keymanagementserv
 {: important}
 
 
-## Daten mit IBM Cloud Data Shield verschlüsseln (Beta)
+## Daten mit IBM Cloud Data Shield verschlüsseln
 {: #datashield}
 
-{{site.data.keyword.datashield_short}} ist in Intel® Software Guard Extensions (SGX) und Fortanix®-Technologie integriert, sodass der Workload-Code und die Daten Ihres {{site.data.keyword.Bluemix_notm}}-Containers während der Nutzung geschützt werden. Der App-Code und die Daten werden in speziellen CPU-Schutzenklaven ausgeführt. Dabei handelt es sich um vertrauenswürdige Speicherbereiche auf dem Workerknoten, die kritische Aspekte der App schützen und dabei helfen, Code und Daten vertraulich und unverändert zu halten.
+{{site.data.keyword.datashield_short}} ist in Intel® Software Guard Extensions (SGX) und Fortanix®-Technologie integriert, sodass der Workload-Code und die Daten Ihres {{site.data.keyword.cloud_notm}}-Containers während der Nutzung geschützt werden. Der App-Code und die Daten werden in speziellen CPU-Schutzenklaven ausgeführt. Dabei handelt es sich um vertrauenswürdige Speicherbereiche auf dem Workerknoten, die kritische Aspekte der App schützen und dabei helfen, Code und Daten vertraulich und unverändert zu halten.
 {: shortdesc}
 
-Wenn es um den Schutz von Daten geht, gehört Verschlüsselung zu den gängigsten und wirksamsten Kontrollmechanismen. Allerdings müssen die Daten bei jedem Schritt ihres Lebenszyklus verschlüsselt werden. Daten durchlaufen in ihrem Lebenszyklus drei Phasen: als ruhende Daten, als bewegte Daten und als Daten im Gebrauch. Als ruhende und bewegte Daten werden Daten gemeinhin bezeichnet, wenn sie als gespeicherte Daten und als Daten während des Transports geschützt werden. Um diesen Schutz noch um einen Schritt zu erweitern, können Sie Daten jetzt im Gebrauch verschlüsseln.
+Wenn es um den Schutz von Daten geht, gehört Verschlüsselung zu den gängigsten und wirksamsten Kontrollmechanismen. Allerdings müssen die Daten bei jedem Schritt ihres Lebenszyklus verschlüsselt werden, damit die Daten auch tatsächlich sicher sind. Daten durchlaufen in ihrem Lebenszyklus drei Phasen: als ruhende Daten, als bewegte Daten und als Daten im Gebrauch. Wenn es um Datensicherheit geht, sind meist die ruhenden Daten und die bewegten Daten im Blick. Beim Starten der Ausführung einer Anwendung sind jedoch besonders die Daten, die von der CPU und dem Speicher verwendet werden, für verschiedene Angriffe anfällig. Für solche Angriffe verantwortlich sind möglicherweise böswillige Insider, Rootbenutzer, bekannt gewordene Berechtigungsnachweise, OS Zero-Day, Netzeindringlinge usw. Um diesen Schutz noch um einen Schritt zu erweitern, können Sie Daten jetzt im Gebrauch verschlüsseln.
 
 Wenn Sie oder Ihr Unternehmen aufgrund interner Richtlinien, behördlicher Regelungen oder branchenspezifischer Konformitätsanforderungen eine Sicherheitsstufe für Daten benötigen, kann Sie diese Lösung beim Wechsel zur Cloud unterstützen. Beispiele für Lösungen beziehen sich auf Finanzdienstleister und Einrichtungen des Gesundheitswesen oder auf Länder mit behördlichen Richtlinien, die eine On-Premises-Cloud-Lösung erfordern.
 
-Stellen Sie für den Einstieg einen SGX-fähigen Bare-Metal-Worker-Cluster mit dem Maschinentyp 'mb2c.4x32' bereit und machen Sie sich mit den Informationen in der [Dokumentation zu {{site.data.keyword.datashield_short}}](/docs/services/data-shield?topic=data-shield-getting-started#getting-started) vertraut.
+Stellen Sie für den Einstieg einen SGX-fähigen Bare-Metal-Worker-Cluster mit dem Maschinentyp 'mb2c.4x32' bereit und machen Sie sich mit den Informationen in der [Dokumentation zu {{site.data.keyword.datashield_short}} vertraut](/docs/services/data-shield?topic=data-shield-getting-started).

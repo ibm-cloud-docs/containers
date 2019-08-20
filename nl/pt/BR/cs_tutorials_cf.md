@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ Este tutorial é destinado a desenvolvedores de apps Cloud Foundry.
 - [Criar um registro de imagem privada no {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Criar um cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Destinar sua CLI para o cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Assegure-se de que tenha as políticas de acesso do IAM do {{site.data.keyword.Bluemix_notm}} para o {{site.data.keyword.containerlong_notm}}:
+- Assegure-se de que tenha as políticas de acesso do {{site.data.keyword.cloud_notm}} IAM para o {{site.data.keyword.containerlong_notm}}:
     - [Qualquer função da plataforma](/docs/containers?topic=containers-users#platform)
     - A função de serviço  [ ** Writer **  ou  ** Manager **  ](/docs/containers?topic=containers-users#platform)
 - [Conhecer a terminologia do Docker e do Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
@@ -279,7 +279,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8
     ```
     {: screen}
 
@@ -289,7 +289,7 @@ Implemente seu app como um contêiner em um cluster do Kubernetes.
 
 5.  [ Ativar o painel do Kubernetes ](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Se você selecionar seu cluster no [console do {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar seu painel com um clique.
+    Se você selecionar seu cluster no [console do {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), será possível usar o botão **Painel do Kubernetes** para ativar o painel com um clique.
     {: tip}
 
 6. Na guia **Cargas de trabalho**, é possível ver os recursos que você criou.

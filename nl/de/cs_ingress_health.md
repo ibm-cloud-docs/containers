@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Protokollierung und Überwachung von Ingress
 {: #ingress_health}
 
@@ -38,7 +39,7 @@ Wenn Sie Ingress-Fehler beheben oder die Ingress-Aktivität überwachen wollen, 
 
 Für Ihre Ingress-ALBs werden automatisch Protokolle erfasst. Um die ALB-Protokolle anzuzeigen, können Sie zwischen zwei Optionen wählen.
 * [Erstellen Sie eine Protokollierungskonfiguration für den Ingress-Service](/docs/containers?topic=containers-health#configuring) in Ihrem Cluster.
-* Überprüfen Sie die Protokolle über die CLI. **Hinweis:** Sie müssen mindestens über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Leseberechtigter**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` verfügen.
+* Überprüfen Sie die Protokolle über die CLI. **Hinweis:** Sie müssen mindestens über die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Leseberechtigter**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` verfügen.
     1. Rufen Sie die ID eines Pods für eine ALB ab.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -70,7 +71,7 @@ Für Ihre Ingress-ALBs werden automatisch Protokolle erfasst. Um die ALB-Protoko
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>Die IP-Adresse des Anforderungspakets, das der Client an Ihre App gesendet hat. Diese IP kann sich in folgenden Situationen ändern:<ul><li>Wenn an Ihren Cluster eine Clientanforderung für Ihre App gesendet wird, wird die Anforderung an einen Pod für den Lastausgleichsservice weitergeleitet, der die Lastausgleichsfunktion zugänglich macht. Wenn ein App-Pod nicht auf demselben Workerknoten vorhanden ist wie der Lastausgleichsservice-Pod, leitet die Lastausgleichsfunktion die Anforderung an einen App-Pod auf einem anderen Workerknoten weiter. Die Quellen-IP-Adresse des Anforderungspakets wird in die öffentliche IP-Adresse des Workerknotens geändert, auf dem der App-Pod ausgeführt wird.</li><li>Wenn die [Beibehaltung der Quellen-IP aktiviert ist](/docs/containers?topic=containers-ingress#preserve_source_ip), wird stattdessen die ursprüngliche IP-Adresse der Clientanforderung an Ihre App aufgezeichnet.</li></ul></td>
+<td>Die IP-Adresse des Anforderungspakets, das der Client an Ihre App gesendet hat. Diese IP kann sich in folgenden Situationen ändern:<ul><li>Wenn an Ihren Cluster eine Clientanforderung für Ihre App gesendet wird, wird die Anforderung an einen Pod für den Lastausgleichsservice weitergeleitet, der die Lastausgleichsfunktion zugänglich macht. Wenn ein App-Pod nicht auf demselben Workerknoten vorhanden ist wie der Lastausgleichsservice-Pod, leitet die Lastausgleichsfunktion die Anforderung an einen App-Pod auf einem anderen Workerknoten weiter. Die Quellen-IP-Adresse des Anforderungspakets wird in die öffentliche IP-Adresse des Workerknotens geändert, auf dem der App-Pod ausgeführt wird.</li><li>Wenn die [Beibehaltung der Quellen-IP aktiviert ist](/docs/containers?topic=containers-ingress-settings#preserve_source_ip), wird stattdessen die ursprüngliche IP-Adresse der Clientanforderung an Ihre App aufgezeichnet.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -113,19 +114,19 @@ Für Ihre Ingress-ALBs werden automatisch Protokolle erfasst. Um die ALB-Protoko
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
-<td>Die Anforderungsverarbeitungszeit, gemessen in Sekunden mit einer Millisekundenauflösung. Diese Zeit beginnt, wenn die ALB die ersten Bytes der Clientanforderung liest, und sie endet, wenn die ALB die letzten Bytes der Antwort an den Client sendet. Das Protokoll wird unmittelbar nach dem Ende der Anforderungsverarbeitungszeit geschrieben.</td>
+<td>Die Anforderungsverarbeitungszeit (gemessen in Sekunden mit einer Millisekundenauflösung). Diese Zeit beginnt, wenn die ALB die ersten Bytes der Clientanforderung liest, und sie endet, wenn die ALB die letzten Bytes der Antwort an den Client sendet. Das Protokoll wird unmittelbar nach dem Ende der Anforderungsverarbeitungszeit geschrieben.</td>
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>Die Zeit, die die ALB benötigt, um die Antwort vom Upstream-Server für die Back-End-App zu empfangen (gemessen in Sekunden mit Millisekundenauflösung). Zeitangaben mehrerer Antworten werden durch Kommas und Doppelpunkte wie Adressen in der Variablen <code>$upstream_addr</code> voneinander getrennt.</td>
+<td>Die Zeit, die die ALB benötigt, um die Antwort vom Upstream-Server für die Back-End-App zu empfangen (gemessen in Sekunden mit Millisekundenauflösung). Zeitangaben mehrerer Antworten werden durch Kommas und Doppelpunkte voneinander getrennt.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>Die Zeit, die die ALB benötigt, um eine Verbindung mit dem Upstream-Server für die Back-End-App herzustellen (gemessen in Sekunden mit Millisekundenauflösung). Wenn TLS/SSL in Ihrer Ingress-Ressourcenkonfiguration aktiviert ist, beinhaltet diese Zeit auch die Zeit, die für den Handshake benötigt wird. Zeitangaben mehrerer Verbindungen werden durch Kommas und Doppelpunkte wie Adressen in der Variablen <code>$upstream_addr</code> voneinander getrennt.</td>
+<td>Die Zeit, die die ALB benötigt, um eine Verbindung mit dem Upstream-Server für die Back-End-App herzustellen (gemessen in Sekunden mit Millisekundenauflösung). Wenn TLS/SSL in Ihrer Ingress-Ressourcenkonfiguration aktiviert ist, beinhaltet diese Zeit auch die Zeit, die für den Handshake benötigt wird. Zeitangaben mehrerer Verbindungen werden durch Kommas und Doppelpunkte voneinander getrennt.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>Die Zeit, die die ALB benötigt, um den Antwortheader vom Upstream-Server für die Back-End-App zu empfangen (gemessen in Sekunden mit Millisekundenauflösung). Zeitangaben mehrerer Verbindungen werden durch Kommas und Doppelpunkte wie Adressen in der Variablen <code>$upstream_addr</code> voneinander getrennt.</td>
+<td>Die Zeit, die die ALB benötigt, um den Antwortheader vom Upstream-Server für die Back-End-App zu empfangen (gemessen in Sekunden mit Millisekundenauflösung). Zeitangaben mehrerer Verbindungen werden durch Kommas und Doppelpunkte voneinander getrennt.</td>
 </tr>
 </tbody></table>
 
@@ -137,7 +138,7 @@ Sie können den Inhalt und das Format von Protokollen anpassen, die für die Ing
 
 Standardmäßig sind Ingress-Protokolle in JSON formatiert und zeigen allgemeine Protokollfelder an. Sie können jedoch auch ein angepasstes Protokollformat erstellen, indem Sie auswählen, welche Protokollkomponenten weitergeleitet und wie die Komponenten in der Protokollausgabe angeordnet werden.
 
-Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
+Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
 
 1. Bearbeiten Sie die Konfigurationsdatei für die Konfigurationszuordnungsressource (Configmap) `ibm-cloud-provider-ingress-cm`.
 
@@ -263,13 +264,11 @@ Installieren Sie das Helm-Diagramm für Metriken-Exportfunktionen, um eine ALB i
 Die Pods mit der Exportfunktion für ALB-Metriken müssen in denselben Workerknoten bereitgestellt werden, in denen auch Ihre ALBs bereitgestellt sind. Wenn Ihre ALBs in Edge-Workerknoten ausgeführt werden und diese Edge-Workerknoten mit Taints versehen sind, um andere Workloadbereitstellungen zu verhindern, können die Pods mit den Exportfunktionen für Metriken nicht geplant werden. Sie müssen die Taints entfernen, indem Sie den Befehl `kubectl taint node <knotenname> dedicated:NoSchedule- dedicated:NoExecute-` ausführen.
 {: note}
 
-1.  **Wichtig:** [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zur Installation des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (Tiller) mit einem Servicekonto und fügen Sie die {{site.data.keyword.Bluemix_notm}} Helm-Repositorys hinzu.
+1.  **Wichtig:** [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zur Installation des Helm-Clients auf Ihrer lokalen Maschine, installieren Sie den Helm-Server (Tiller) mit einem Servicekonto und fügen Sie die {{site.data.keyword.cloud_notm}}-Helm-Repositorys hinzu.
 
-2. Installieren Sie das Helm-Diagramm `ibmcloud-alb-metrics-exporter` in Ihrem Cluster. Dieses Helm-Diagramm stellt eine Exportfunktion für ALB-Metriken bereit und erstellt das Servicekonto `alb-metrics-service-account` im Namensbereich `kube-system`. Ersetzen Sie <alb-id> durch die ID der ALB, für die Sie Metriken erfassen wollen. Zum Anzeigen der IDs für die ALBs in Ihrem Cluster führen Sie den Befehl <code>ibmcloud ks albs --cluster &lt;clustername&gt;</code> aus.
-  Sie müssen für jede zu überwachende ALB ein Diagramm bereitstellen.
-  {: note}
+2. Installieren Sie das Helm-Diagramm `ibmcloud-alb-metrics-exporter` in Ihrem Cluster. Dieses Helm-Diagramm stellt eine Exportfunktion für ALB-Metriken bereit und erstellt das Servicekonto `alb-metrics-service-account` im Namensbereich `kube-system`. Ersetzen Sie `<zone>` durch die Zone, in der die ALB enthalten ist, und `<alb_ID>` durch die ID der ALB, für die Sie Metriken erfassen wollen. Zum Anzeigen der IDs für die ALBs in Ihrem Cluster führen Sie den Befehl `ibmcloud ks albs --cluster <cluster_name>` aus.
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb-ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -294,7 +293,9 @@ Die Pods mit der Exportfunktion für ALB-Metriken müssen in denselben Workerkno
   ```
   {:screen}
 
-5. Optional: [Installieren Sie den Prometheus-Agenten](#prometheus-agent), der die von der Exportfunktion generierten Metriken aufnimmt und in einem Prometheus-Dashboard darstellt.
+5. Wiederholen Sie die Schritte 2 bis 4 für jede ALB in Ihrem Cluster.
+
+6. Optional: [Installieren Sie den Prometheus-Agenten](#prometheus-agent), der die von der Exportfunktion generierten Metriken aufnimmt und in einem Prometheus-Dashboard darstellt.
 
 ### Helm-Diagramm für Prometheus-Agenten installieren
 {: #prometheus-agent}
@@ -432,7 +433,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>Die ALB-ID. Im obigen Beispiel ist die ALB-ID <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>Die ALB-ID. Im vorherigen Beispiel ist die ALB-ID <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SUBTYP&gt;</code></td>
@@ -441,19 +442,19 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <li><code>bytes</code> und <code>processing\_time</code> entsprechen den Metriken <code>in</code> und <code>out</code>.</li>
 <li><code>cache</code> entspricht den Metriken <code>bypass</code>, <code>expired</code>, <code>hit</code>, <code>miss</code>, <code>revalidated</code>, <code>scare</code>, <code>stale</code> und <code>updating</code>.</li>
 <li><code>requests</code> entspricht den Metriken <code>requestMsec</code>, <code>1xx</code>, <code>2xx</code>, <code>3xx</code>, <code>4xx</code>, <code>5xx</code> und <code>total</code>.</li></ul>
-Im obigen Beispiel ist der Subtyp <code>bytes</code>.</td>
+Im vorherigen Beispiel ist der Subtyp <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SERVERNAME&gt;</code></td>
-<td>Der Name des Servers, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen <code>(\_)</code> ersetzt. Im obigen Beispiel ist der Servername <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
+<td>Der Name des Servers, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen <code>(\_)</code> ersetzt. Im vorherigen Beispiel ist der Servername <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIKNAME&gt;</code></td>
-<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Servermetriken". Im obigen Beispiel ist der Metrikname <code>out</code>.</td>
+<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Servermetriken". Im vorherigen Beispiel ist der Metrikname <code>out</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;WERT&gt;</code></td>
-<td>Der Wert der erfassten Metrik. Im obigen Beispiel ist der Wert <code>22319</code>.</td>
+<td>Der Wert der erfassten Metrik. Im vorherigen Beispiel ist der Wert <code>22319</code>.</td>
 </tr>
 </tbody></table>
 
@@ -565,23 +566,23 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>Die ALB-ID. Im obigen Beispiel ist die ALB-ID <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
+<td>Die ALB-ID. Im vorherigen Beispiel ist die ALB-ID <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;SUBTYP&gt;</code></td>
-<td>Der Subtyp der Metrik. Unterstützte Werte sind <code>bytes</code>, <code>processing\_time</code> und <code>requests</code>. Im obigen Beispiel ist der Subtyp <code>bytes</code>.</td>
+<td>Der Subtyp der Metrik. Unterstützte Werte sind <code>bytes</code>, <code>processing\_time</code> und <code>requests</code>. Im vorherigen Beispiel ist der Subtyp <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Der Name des Upstream-Service, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen <code>(\_)</code> ersetzt. Im obigen Beispiel ist der Upstream-Name <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
+<td>Der Name des Upstream-Service, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen <code>(\_)</code> ersetzt. Im vorherigen Beispiel ist der Upstream-Name <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIKNAME&gt;</code></td>
-<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Upstream-Metriken vom Typ 1". Im obigen Beispiel ist der Metrikname <code>in</code>.</td>
+<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Upstream-Metriken vom Typ 1". Im vorherigen Beispiel ist der Metrikname <code>in</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;WERT&gt;</code></td>
-<td>Der Wert der erfassten Metrik. Im obigen Beispiel ist der Wert <code>1227</code>.</td>
+<td>Der Wert der erfassten Metrik. Im vorherigen Beispiel ist der Wert <code>1227</code>.</td>
 </tr>
 </tbody></table>
 
@@ -648,22 +649,22 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>Die ALB-ID. Im obigen Beispiel ist die ALB-ID <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
+<td>Die ALB-ID. Im vorherigen Beispiel ist die ALB-ID <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code>.</td>
 </tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Der Name des Upstream-Service, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen (<code>\_</code>) ersetzt. Im obigen Beispiel ist der Upstream-Name <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
+<td>Der Name des Upstream-Service, der in der Ingress-Ressource definiert ist. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) durch Unterstreichungszeichen (<code>\_</code>) ersetzt. Im vorherigen Beispiel ist der Upstream-Name <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;POD-IP&gt;</code></td>
-<td>Die IP-Adresse und der Port eines bestimmten Upstream-Service-Pods. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) und Doppelpunkte (<code>:</code>) durch Unterstreichungszeichen <code>(_)</code> ersetzt. Im obigen Beispiel ist die IP-Adresse des Upstream-Pods <code>172_30_75_6_80</code>.</td>
+<td>Die IP-Adresse und der Port eines bestimmten Upstream-Service-Pods. Aus Gründen der Kompatibilität mit Prometheus werden Punkte (<code>.</code>) und Doppelpunkte (<code>:</code>) durch Unterstreichungszeichen <code>(_)</code> ersetzt. Im vorherigen Beispiel ist die IP-Adresse des Upstream-Pods <code>172_30_75_6_80</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIKNAME&gt;</code></td>
-<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Upstream-Metriken vom Typ 2". Im obigen Beispiel ist der Metrikname <code>requestMsec</code>.</td>
+<td>Der Name des erfassten Metriktyps. Eine Liste der Metriknamen finden Sie in der folgenden Tabelle "Unterstützte Upstream-Metriken vom Typ 2". Im vorherigen Beispiel ist der Metrikname <code>requestMsec</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;WERT&gt;</code></td>
-<td>Der Wert der erfassten Metrik. Im obigen Beispiel ist der Wert <code>40</code>.</td>
+<td>Der Wert der erfassten Metrik. Im vorherigen Beispiel ist der Wert <code>40</code>.</td>
 </tr>
 </tbody></table>
 
@@ -695,7 +696,7 @@ Gemeinsam genutzte Speicherzonen sind so definiert, dass Workerprozesse Informat
 
 In der Ingress-Konfigurationszuordnung `ibm-cloud-provider-ingress-cm` legt das Feld `vts-status-zone-size` die Größe der gemeinsam genutzten Speicherzone für die Messdatenerfassung fest. Standardmäßig ist der Wert für `vts-status-zone-size` auf `10m` gesetzt. Wenn Sie über eine große Umgebung verfügen, die mehr Speicher für die Erfassung von Messwerten benötigt, können Sie den Standardwert überschreiben, um stattdessen einen größeren Wert zu verwenden, indem Sie die folgenden Schritte ausführen.
 
-Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
+Stellen Sie zunächst sicher, dass Sie die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für den Namensbereich `kube-system` innehaben.
 
 1. Bearbeiten Sie die Konfigurationsdatei für die Konfigurationszuordnungsressource (Configmap) `ibm-cloud-provider-ingress-cm`.
 

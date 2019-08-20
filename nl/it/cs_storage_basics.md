@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Descrizione dei principi di base dell'archiviazione Kubernetes
 {: #kube_concepts}
 
@@ -34,15 +32,15 @@ subcollection: containers
 Prima di iniziare con il provisioning di archiviazione, è importante comprendere i concetti Kubernetes di volume persistente e di attestazione del volume persistente (o PVC, persistent volume claim) e come funzionano insieme in un cluster.
 {: shortdesc}
 
-La seguente immagine mostra i componenti di archiviazione in un cluster Kubernetes.
+La seguente immagine mostra i componenti di archiviazione in un cluster.
 
 <img src="images/cs_storage_pvc_pv.png" alt="Componenti di archiviazione in un cluster" width="275" style="width: 275px; border-style: none"/>
 
 - **Cluster**</br> Per impostazione predefinita, ogni cluster è configurato con un plugin per [eseguire il provisioning di archiviazione file](/docs/containers?topic=containers-file_storage#add_file). Puoi scegliere di installare altri componenti aggiuntivi, come quello per l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage). Per utilizzare l'archiviazione in un cluster, devi creare una attestazione del volume persistente (o PVC, persistent volume claim), un volume persistente e un'istanza di archiviazione fisica. Quando elimini il cluster, hai l'opzione di eliminare le istanze di archiviazione correlate.
 - **Applicazione**</br> Per leggere dalla, e scrivere nella, tua istanza di archiviazione, devi montare l'attestazione del volume persistente (o PVC, persistent volume claim) nella tua applicazione. Tipi di archiviazione differenti hanno regole di lettura-scrittura differenti. Ad esempio, puoi montare più pod nella stessa PVC per l'archiviazione file. L'archiviazione blocchi è fornita con una modalità di accesso RWO (ReadWriteOnce) e quindi puoi montare l'archiviazione solo in un singolo pod.
-- **Attestazione del volume persistente (o PVC, persistent volume claim)** </br> una PVC è una richiesta di eseguire il provisioning dell'archiviazione persistente con un tipo e a una configurazione specifici. Per specificare la varietà di archiviazione persistente che desideri, utilizzi le [classi di archiviazione Kubernetes](#storageclasses). L'amministratore del cluster può definire le classi di archiviazione oppure puoi scegliere da una delle classi di archiviazione predefinite in {{site.data.keyword.containerlong_notm}}. Quando crei una PVC, la richiesta viene inviata al provider di archiviazione {{site.data.keyword.Bluemix}}. A seconda della configurazione definita nella classe di archiviazione, il dispositivo di archiviazione fisico viene ordinato e ne viene eseguito il provisioning nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Se la configurazione richiesta non esiste, l'archiviazione non viene creata.
-- **Volume persistente (o PV, Persistent Volume)** </br> un PV è un'istanza di archiviazione virtuale che viene aggiunta come un volume al cluster. Il PV punta a un dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) e astrae l'API utilizzata per comunicare con il dispositivo di archiviazione. Per montare un PV in un'applicazione, devi disporre di una PVC corrispondente. I PV montati si presentano come una cartella all'interno del file system del contenitore.
-- **Archiviazione fisica** </br> Un'istanza di archiviazione fisica che puoi utilizzare per conservare in modo persistente i tuoi dati. Degli esempi di archiviazione fisica in {{site.data.keyword.Bluemix_notm}} includono [File Storage](/docs/containers?topic=containers-file_storage#file_storage), [Block Storage](/docs/containers?topic=containers-block_storage#block_storage), [Object Storage](/docs/containers?topic=containers-object_storage#object_storage) e l'archiviazione di nodo di lavoro locale che puoi utilizzare come un'archiviazione SDS con [Portworx](/docs/containers?topic=containers-portworx#portworx). {{site.data.keyword.Bluemix_notm}} fornisce l'alta disponibilità per le istanze di archiviazione fisica. Tuttavia, dei dati archiviati in un'istanza di archiviazione fisica non viene eseguito il backup automaticamente. A seconda del tipo di archiviazione che usi, esistono metodi differenti per configurare le soluzioni di backup e ripristino.
+- **Attestazione del volume persistente (o PVC, persistent volume claim)** </br> una PVC è una richiesta di eseguire il provisioning dell'archiviazione persistente con un tipo e a una configurazione specifici. Per specificare il profilo di archiviazione persistente che desideri, utilizzi le [classi di archiviazione Kubernetes](#storageclasses). L'amministratore del cluster può definire le classi di archiviazione oppure puoi scegliere da una delle classi di archiviazione predefinite in {{site.data.keyword.containerlong_notm}}. Quando crei una PVC, la richiesta viene inviata al provider di archiviazione {{site.data.keyword.Bluemix}}. A seconda della configurazione definita nella classe di archiviazione, il dispositivo di archiviazione fisico viene ordinato e ne viene eseguito il provisioning nel tuo account dell'infrastruttura IBM Cloud. Se la configurazione richiesta non esiste, l'archiviazione non viene creata.
+- **Volume persistente (o PV, Persistent Volume)** </br> un PV è un'istanza di archiviazione virtuale che viene aggiunta come un volume al cluster. Il PV punta a un dispositivo di archiviazione fisico nel tuo account dell'infrastruttura IBM Cloud e astrae l'API utilizzata per comunicare con il dispositivo di archiviazione. Per montare un PV in un'applicazione, devi disporre di una PVC corrispondente. I PV montati si presentano come una cartella all'interno del file system del contenitore.
+- **Archiviazione fisica** </br> Un'istanza di archiviazione fisica che puoi utilizzare per conservare in modo persistente i tuoi dati. Degli esempi di archiviazione fisica in {{site.data.keyword.cloud_notm}} includono [File Storage](/docs/containers?topic=containers-file_storage#file_storage), [Block Storage](/docs/containers?topic=containers-block_storage#block_storage), [Object Storage](/docs/containers?topic=containers-object_storage#object_storage) e l'archiviazione di nodo di lavoro locale che puoi utilizzare come un'archiviazione SDS con [Portworx](/docs/containers?topic=containers-portworx#portworx). {{site.data.keyword.cloud_notm}} fornisce l'alta disponibilità per le istanze di archiviazione fisica. Tuttavia, dei dati archiviati in un'istanza di archiviazione fisica non viene eseguito il backup automaticamente. A seconda del tipo di archiviazione che usi, esistono metodi differenti per configurare le soluzioni di backup e ripristino.
 
 Per ulteriori informazioni su come creare e utilizzare le PVC, i PV e il dispositivo di archiviazione fisica, consulta:
 - [Provisioning dinamico](#dynamic_provisioning)
@@ -67,8 +65,8 @@ La seguente immagine mostra come viene eseguito il provisioning dinamico dell'ar
 <img src="images/cs_storage_dynamic.png" alt="Flusso di esempio per il provisioning dinamico di archiviazione file in un cluster " width="500" style="width: 500px; border-style: none"/>
 
 1. L'utente crea una attestazione del volume persistente (o PVC, persistent volume claim) che specifica il tipo di archiviazione, la classe di archiviazione, la dimensione in gigabyte, il numero di IOPS e il tipo di fatturazione. La classe di archiviazione determina il tipo di archiviazione di cui viene eseguito il provisioning e gli intervalli consentiti per dimensione e IOPS. La creazione di una PVC in un cluster attiva automaticamente il plugin di archiviazione per il tipo di archiviazione richiesto per eseguire il provisioning dell'archiviazione con la specifica fornita.
-2. Il dispositivo di archiviazione viene ordinato e ne viene eseguito il provisioning automaticamente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer). Viene avviato il ciclo di fatturazione per il tuo dispositivo di archiviazione.
-3. Il plugin di archiviazione crea automaticamente un volume persistente (o PV, persistent volume) nel cluster, un dispositivo di archiviazione virtuale che punta al dispositivo di archiviazione effettivo nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+2. Il dispositivo di archiviazione viene ordinato e ne viene eseguito il provisioning automaticamente nel tuo account dell'infrastruttura IBM Cloud. Viene avviato il ciclo di fatturazione per il tuo dispositivo di archiviazione.
+3. Il plugin di archiviazione crea automaticamente un volume persistente (o PV, persistent volume) nel cluster, un dispositivo di archiviazione virtuale che punta al dispositivo di archiviazione effettivo nel tuo account dell'infrastruttura IBM Cloud.
 4. La PVC e il PC sono automaticamente connessi tra loro. Lo stato della PVC e del PV viene modificato in `Bound`. Puoi ora utilizzare la PVC per montare l'archiviazione persistente nella tua applicazione. Se elimini la PVC, vengono eliminati anche il PV e l'istanza di archiviazione correlata. </br>
 
 **Quando utilizzo il provisioning dinamico?**</br>
@@ -85,7 +83,7 @@ Per ulteriori informazioni su come eseguire dinamicamente il provisioning dell'a
 ## Provisioning statico
 {: #static_provisioning}
 
-Se hai un dispositivo di archiviazione persistente esistente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer), puoi utilizzare il provisioning statico per rendere disponibile l'istanza di archiviazione per il tuo cluster.
+Se hai un dispositivo di archiviazione persistente esistente nel tuo account dell'infrastruttura IBM Cloud, puoi utilizzare il provisioning statico per rendere disponibile l'istanza di archiviazione per il tuo cluster.
 {: shortdesc}
 
 **Come funziona?**</br>
@@ -101,15 +99,15 @@ La seguente immagine mostra come eseguire in modo statico il provisioning di arc
 <img src="images/cs_storage_static.png" alt="Flusso di esempio per eseguire in modo statico il provisioning di archiviazione file in un cluster" width="500" style="width: 500px; border-style: none"/>
 
 1. L'amministratore del cluster raccoglie tutti i dettagli relativi al dispositivo di archiviazione esistente e crea un volume persistente (o PV, persistent volume) nel cluster.
-2. In base ai dettagli di archiviazione nel PV, il plugin di archiviazione connette il PV al dispositivo di archiviazione nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+2. In base ai dettagli di archiviazione nel PV, il plugin di archiviazione connette il PV al dispositivo di archiviazione nel tuo account dell'infrastruttura IBM Cloud.
 3. L'amministratore del cluster o uno sviluppatore creano una PVC. Poiché il PV e il dispositivo di archiviazione già esistono, non viene specificata alcuna classe di archiviazione nella PVC.
 4. Dopo che la PVC è stata creata, il plugin di archiviazione prova a mettere in corrispondenza la PVC con un PV esistente. La PVC e il PV corrispondono quando in entrambi vengono utilizzati gli stessi valori per la dimensione, l'IOPS e la modalità di accesso. Quando la PVC e il PV corrispondono, lo stato della PVC e del PV viene modificato in `Bound`. Puoi ora utilizzare la PVC per montare l'archiviazione persistente nella tua applicazione. Quando elimini la PVC, il PV e l'istanza di archiviazione fisica non vengono rimossi. Devi rimuovere separatamente la PVC, il PV e l'istanza di archiviazione fisica. </br>
 
 **Quando utilizzo il provisioning statico?**</br>
 
 Esamina i seguenti casi di utilizzo comuni per il provisioning statico di archiviazione persistente:
-1. **Rendi disponibili i dati conservati per il cluster:** hai eseguito il provisioning dell'archiviazione persistente con una classe di archiviazione retain utilizzando il provisioning dinamico. Hai rimosso la PVC ma il PV, l'archiviazione fisica nell'infrastruttura IBM Cloud (SoftLayer) e i dati continuano ad esistere. Vuoi accedere ai dati conservati da un'applicazione nel tuo cluster.
-2. **Utilizza un dispositivo di archiviazione esistente:** hai eseguito il provisioning dell'archiviazione persistente direttamente nel tuo account dell'infrastruttura IBM Cloud (SoftLayer) e vuoi utilizzare questo dispositivo di archiviazione nel tuo cluster.
+1. **Rendi disponibili i dati conservati per il cluster:** hai eseguito il provisioning dell'archiviazione persistente con una classe di archiviazione retain utilizzando il provisioning dinamico. Hai rimosso la PVC ma il PV, l'archiviazione fisica nell'infrastruttura IBM Cloud e i dati continuano ad esistere. Vuoi accedere ai dati conservati da un'applicazione nel tuo cluster.
+2. **Utilizza un dispositivo di archiviazione esistente:** hai eseguito il provisioning dell'archiviazione persistente direttamente nel tuo account dell'infrastruttura IBM Cloud e vuoi utilizzare questo dispositivo di archiviazione nel tuo cluster.
 3. **Condividi l'archiviazione persistente tra i cluster nella stessa zona:** hai eseguito il provisioning dell'archiviazione persistente per il tuo cluster. Per condividere la stessa istanza di archiviazione persistente con altri cluster nella stessa zona, devi creare manualmente il PV e la PVC corrispondente nell'altro cluster. **Nota:** la condivisione dell'archiviazione persistente tra i cluster è disponibile solo se il cluster e l'istanza di archiviazione si trovano nella stessa zona.
 4. **Condividi l'archiviazione persistente tra gli spazi dei nomi nello stesso cluster:** hai eseguito il provisioning dell'archiviazione persistente in uno spazio dei nomi del tuo cluster. Vuoi utilizzare la stessa istanza di archiviazione per un pod dell'applicazione distribuito in uno spazio dei nomi differente nel tuo cluster.
 
@@ -123,7 +121,7 @@ Per ulteriori informazioni su come eseguire il provisioning dell'archiviazione i
 Per eseguire il provisioning dell'archiviazione persistente in modo dinamico, devi definire il tipo e la configurazione dell'archiviazione che desideri.
 {: shortdesc}
 
-Una [classe di archiviazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/storage-classes/) viene utilizzata per astrarre la piattaforma di archiviazione sottostante supportata in {{site.data.keyword.Bluemix_notm}} in modo che non sia necessario conoscere tutti i dettagli relativi alle dimensioni, all'IOPS o alle politiche di conservazione supportati per eseguire correttamente il provisioning dell'archiviazione persistente in un cluster. {{site.data.keyword.containerlong_notm}} fornisce classi di archiviazione predefinite per ogni tipo di archiviazione supportato. Ogni classe di archiviazione è progettata per astrarre il livello di archiviazione supportato fornendoti al tempo stesso la possibilità di decidere la dimensione, l'IOPS e la politica di conservazione che desideri.
+Una [classe di archiviazione Kubernetes![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/storage/storage-classes/) viene utilizzata per astrarre la piattaforma di archiviazione sottostante supportata in {{site.data.keyword.cloud_notm}} in modo che non sia necessario conoscere tutti i dettagli relativi alle dimensioni, all'IOPS o alle politiche di conservazione supportati per eseguire correttamente il provisioning dell'archiviazione persistente in un cluster. {{site.data.keyword.containerlong_notm}} fornisce classi di archiviazione predefinite per ogni tipo di archiviazione supportato. Ogni classe di archiviazione è progettata per astrarre il livello di archiviazione supportato fornendoti al tempo stesso la possibilità di decidere la dimensione, l'IOPS e la politica di conservazione che desideri.
 
 Per le specifiche della classe di archiviazione predefinite, vedi:
 - [Archiviazione file](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
@@ -211,8 +209,7 @@ Utilizza uno script per trovare tutti i PV nel tuo cluster e applicare le etiche
 Prima di iniziare:
 - [Indirizza la CLI Kubernetes al
 cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
-
+- Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Per controllare se una VRF è già abilitata, utilizza il comando `ibmcloud account show`. Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando `ibmcloud ks vlan-spanning-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 Per aggiornare i PV esistenti:
 
@@ -286,3 +283,5 @@ Per aggiornare i PV esistenti:
 Ora che hai etichettato i tuoi PV esistenti, puoi montare il PV al tuo cluster multizona. Per ulteriori informazioni, vedi i seguenti link.
 - Utilizza l'[archiviazione file NFS esistente](/docs/containers?topic=containers-file_storage#existing_file)
 - Utilizza l'[archiviazione blocchi esistente](/docs/containers?topic=containers-block_storage#existing_block)
+
+

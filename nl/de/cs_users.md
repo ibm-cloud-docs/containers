@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, access, permissions, api key
 
 subcollection: containers
 
@@ -23,34 +23,30 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Clusterzugriff zuweisen
 {: #users}
 
-Als Clusteradministrator können Sie Zugriffsrichtlinien für den {{site.data.keyword.containerlong}}-Cluster definieren, um verschiedene Zugriffsebenen für unterschiedliche Benutzer zu erstellen. Sie können beispielsweise bestimmte Benutzer autorisieren, mit Clusterinfrastrukturressourcen und anderen Ressourcen zu arbeiten, um nur Container bereitzustellen.
+Als Clusteradministrator können Sie Zugriffsrichtlinien für {{site.data.keyword.containerlong}}-Cluster definieren, um verschiedene Zugriffsebenen für unterschiedliche Benutzer zu erstellen. Sie können beispielsweise bestimmte Benutzer autorisieren, mit Clusterinfrastrukturressourcen und anderen Ressourcen zu arbeiten, um nur Container bereitzustellen.
 {: shortdesc}
-
-Seit dem 30. Januar 2019 arbeitet {{site.data.keyword.containerlong_notm}} mit einer neuen Methode zur Berechtigung von Benutzern für {{site.data.keyword.Bluemix_notm}} IAM: [Servicezugriffsrollen](/docs/containers?topic=containers-access_reference#service). Durch diese Servicerollen wird der Zugriff auf Ressourcen im Cluster, wie zum Beispiel auf Kubernetes-Namensbereiche, erteilt. Weitere Informationen finden Sie im folgenden Blog: [Introducing service roles and namespaces in IAM for more granular control of cluster access ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
 
 ## Erklärung der Zugriffsrichtlinien und Rollen
 {: #access_policies}
 
-Zugriffsrichtlinien legen die Zugriffsebene fest, über die Benutzer in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto auf Ressourcen auf der gesamten {{site.data.keyword.Bluemix_notm}}-Plattform verfügen. Eine Richtlinie ordnet einem Benutzer mindestens eine Rolle zu, die den Geltungsbereich des Zugriffs auf einen einzelnen Service oder eine Gruppe von Services und Ressourcen definiert, die in einer Ressourcengruppe zusammengefasst sind. Für jeden Service in {{site.data.keyword.Bluemix_notm}} ist möglicherweise eine eigene Gruppe von Zugriffsrichtlinien erforderlich.
+Zugriffsrichtlinien legen die Zugriffsebene fest, über die Benutzer in Ihrem {{site.data.keyword.cloud_notm}}-Konto auf Ressourcen auf der gesamten {{site.data.keyword.cloud_notm}}-Plattform verfügen. Eine Richtlinie ordnet einem Benutzer mindestens eine Rolle zu, die den Geltungsbereich des Zugriffs für einen einzelnen Service oder eine Gruppe von Services und Ressourcen definiert, die in einer Ressourcengruppe zusammengefasst sind. Für jeden Service in {{site.data.keyword.cloud_notm}} ist möglicherweise eine eigene Gruppe von Zugriffsrichtlinien erforderlich.
 {: shortdesc}
 
 Wenn Sie einen Plan zur Verwaltung des Benutzerzugriffs entwickeln, beachten Sie die folgenden allgemeinen Schritte:
 1.  [Wählen Sie die richtige Zugriffsrichtlinie und Rolle für die Benutzer aus.](#access_roles)
-2.  [Ordnen Sie den einzelnen Benutzern oder Benutzergruppen in {{site.data.keyword.Bluemix_notm}} IAM Zugriffsrollen zu.](#iam_individuals_groups)
-3.  [Definieren Sie den Bereich für den Benutzerzugriff auf Clusterinstanzen, Kubernetes-Namensbereiche oder Ressourcengruppen.](#resource_groups)
+2.  [Ordnen Sie den einzelnen Benutzern oder Benutzergruppen in {{site.data.keyword.cloud_notm}} IAM Zugriffsrollen zu.](#iam_individuals_groups)
+3.  [Definieren Sie den Bereich für den Benutzerzugriff auf Clusterinstanzen, Kubernetes-Namensbereiche (Projekte in OpenShift) oder Ressourcengruppen.](#resource_groups)
 
 Wenn Sie mit der Verwaltung von Rollen, Benutzern und Ressourcen im Konto vertraut sind, finden Sie eine Checkliste zur Konfiguration des Zugriffs unter [Zugriff auf Cluster konfigurieren](#access-checklist).
+
 
 ### Richtige Zugriffsrichtlinie und Rolle für Benutzer auswählen
 {: #access_roles}
 
-Sie müssen Zugriffsrichtlinien für jeden Benutzer definieren, der mit {{site.data.keyword.containerlong_notm}} arbeitet. Der Geltungsbereich einer Zugriffsrichtlinie basiert auf benutzerdefinierten Rollen, die die Aktionen bestimmen, die die Benutzer ausführen können. dürfen. Einige Richtlinien sind vordefiniert, andere können jedoch angepasst werden. Es wird dieselbe Richtlinie umgesetzt, unabhängig davon, ob der Benutzer eine Anforderung über die {{site.data.keyword.containerlong_notm}}-Konsole oder über die CLI startet. Dies gilt auch dann, wenn die Aktionen in IBM Cloud Infrastructure (SoftLayer) ausgeführt werden.
+Sie müssen Zugriffsrichtlinien für jeden Benutzer definieren, der mit {{site.data.keyword.containerlong_notm}} arbeitet. Der Geltungsbereich einer Zugriffsrichtlinie basiert auf den definierten Rollen des Benutzers, die die Aktionen bestimmen, die der Benutzer ausführen kann. Einige Richtlinien sind vordefiniert, andere können jedoch angepasst werden. Es wird dieselbe Richtlinie umgesetzt, unabhängig davon, ob der Benutzer eine Anforderung über die {{site.data.keyword.containerlong_notm}}-Konsole oder über die CLI startet. Dies gilt auch dann, wenn die Aktionen in der IBM Cloud-Infrastruktur ausgeführt werden.
 {: shortdesc}
 
 Die folgende Abbildung zeigt die unterschiedlichen Typen von Berechtigungen und Rollen, mit welcher Rolle welche Arten von Aktionen ausgeführt werden können und wie die Rollen zueinander in Beziehung stehen.
@@ -61,35 +57,35 @@ Wenn Sie die spezifischen {{site.data.keyword.containerlong_notm}}-Berechtigunge
 {: tip}
 
 <dl>
-<dt><a href="#platform">{{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen und -Servicerollen</a></dt>
-<dd>{{site.data.keyword.containerlong_notm}} verwendet Plattform- und Servicerollen von {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), um Benutzern Zugriff auf Cluster zu erteilen.
-<ul><li>**Plattform:** Plattformrollen bestimmen die Aktionen, die Benutzer an der Clusterinfrastruktur über die {{site.data.keyword.containerlong_notm}}-API, die Konsole und die CLI (`ibmcloud ks`) ausführen können. Plattformrollen erteilen keinen Zugriff auf die Kubernetes-API. Sie können die Richtlinien für diese Rollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Plattformrollen berechtigen zwar zur Ausführung von Infrastrukturaktionen am Cluster, jedoch erteilen sie keinen Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer). Der Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) ergibt sich aus dem [API-Schlüssel, der für die Region festgelegt ist](#api_key). Beispiele für Aktionen, zu denen die Plattformrollen berechtigen, sind das Erstellen oder Entfernen von Clustern, das Binden von Services an einen Cluster, das Verwalten von Netz- und Speicherressourcen oder das Hinzufügen zusätzlicher Workerknoten.<br><br>Wenn Sie Benutzern nur Plattformrollen zuweisen, können sie nicht mit Kubernetes-Ressourcen im Cluster interagieren. Sie können trotzdem den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen. In diesem Fall können Sie die Benutzer durch [angepasste RBAC-Richtlinien](/docs/containers?topic=containers-users#role-binding) berechtigen, ausgewählte Kubernetes-Aktionen auszuführen. Sie könnten dies zum Beispiel tun, wenn Ihre Organisation zurzeit angepasste RBAC-Richtlinien verwendet, um den Kubernetes-Zugriff zu steuern, und plant, auch weiterhin angepasste RBAC-Richtlinien anstelle von Servicerollen zu verwenden.</li>
+<dt><a href="#platform">{{site.data.keyword.cloud_notm}} IAM-Plattformrollen und -Servicerollen</a></dt>
+<dd>{{site.data.keyword.containerlong_notm}} verwendet Plattform- und Servicerollen von {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM), um Benutzern Zugriff auf Cluster zu erteilen.
+<ul><li>**Plattform:** Plattformrollen bestimmen die Aktionen, die Benutzer an der Clusterinfrastruktur über die {{site.data.keyword.containerlong_notm}}-API, die Konsole und die CLI (`ibmcloud ks`) ausführen können. Plattformrollen erteilen keinen Zugriff auf die Kubernetes-API. Sie können die Richtlinien für diese Rollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Plattformrollen berechtigen zwar zur Ausführung von Infrastrukturaktionen im Cluster, jedoch erteilen sie keinen Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur. Der Zugriff auf die Ressourcen der IBM Cloud-Infrastruktur ergibt sich aus dem [API-Schlüssel, der für die Region festgelegt ist](#api_key). Beispiele für Aktionen, zu denen die Plattformrollen berechtigen, sind das Erstellen oder Entfernen von Clustern, das Binden von Services an einen Cluster, das Verwalten von Netz- und Speicherressourcen oder das Hinzufügen zusätzlicher Workerknoten.<br><br>Wenn Sie Benutzern nur Plattformrollen zuweisen, können sie nicht mit Kubernetes-Ressourcen im Cluster interagieren. Sie können trotzdem den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen. In diesem Fall können Sie die Benutzer durch [angepasste RBAC-Richtlinien](/docs/containers?topic=containers-users#role-binding) berechtigen, ausgewählte Kubernetes-Aktionen auszuführen. Sie könnten dies zum Beispiel tun, wenn Ihre Organisation zurzeit angepasste RBAC-Richtlinien verwendet, um den Kubernetes-Zugriff zu steuern, und plant, auch weiterhin angepasste RBAC-Richtlinien anstelle von Servicerollen zu verwenden.</li>
 <li>**Service**: Servicerollen berechtigen mit den entsprechenden Kubernetes-RBAC-Richtlinien, die einem Benutzer in einem Cluster gegeben werden. Servicerollen erteilen an sich Zugriff auf die Kubernetes-API, das Dashboard und die CLI (`kubectl`). Sie können den Bereich (Scope) der Richtlinie für Servicerollen nach Ressourcengruppe, Region oder Clusterinstanz festlegen. Darüber hinaus können Sie den Bereich von Servicerollen auf Kubernetes-Namensbereiche festlegen, die sich in allen, einzelnen oder regionsweiten Clustern befinden. Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen. Beispiele für Aktionen, zu denen Servicerollen berechtigen, sind das Erstellen von App-Bereitstellungen, das Hinzufügen von Namensbereichen oder das Einrichten von Konfigurationszuordnungen (Configmaps).<br><br>Wenn Sie Benutzern nur Servicerollen zuweisen, können diese keine der {{site.data.keyword.containerlong_notm}}-Ressourcen anzeigen oder mit diesen interagieren. Damit Benutzer auf den Cluster zugreifen und die Kubernetes-Ressourcen des Clusters verwenden können, müssen Sie den Benutzern den Clusternamen und die ID geben, sodass sie den [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) `ibmcloud ks cluster-config` ausführen und anschließend das [Kubernetes-Dashboard über die CLI starten](/docs/containers?topic=containers-app#db_cli) können. Wenn diese Benutzer weiterhin auf die {{site.data.keyword.containerlong_notm}}-Cluster-Konsole zugreifen sowie Cluster und andere Infrastrukturressourcen über die CLI auflisten können sollen, geben Sie den Benutzern die Plattformrolle **Anzeigeberechtigter**.</li></ul></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>In Kubernetes ist eine rollenbasierte Zugriffssteuerung (Role-Based Access Control, RBAC) eine Möglichkeit zum Sichern der Ressourcen im Cluster. Von den RBAC-Rollen hängt ab, welche Kubernetes-Aktionen Benutzer für diese Ressourcen ausführen können. Jedem Benutzer, dem eine Servicerolle zugeordnet ist, wird automatisch eine entsprechende RBAC-Clusterrolle zugeordnet. Diese RBAC-Clusterrolle wird abhängig davon, ob Sie den Bereich der Richtlinie für einen Namensbereich definieren, entweder in einem bestimmten Namensbereich oder in allen Namensbereichen angewendet.</br></br>
 Beispiele für Aktionen, zu denen RBAC-Rollen berechtigen, sind das Erstellen von Objekten wie Pods oder das Lesen von Pod-Protokollen.</dd>
-<dt><a href="#api_key">Infrastruktur</a></dt>
-<dd>Infrastrukturrollen ermöglichen den Zugriff auf Ressourcen der IBM Cloud-Infrastruktur (SoftLayer). Richten Sie einen Benutzer mit der Infrastrukturrolle **Superuser** ein und speichern Sie die Infrastrukturberechtigungsnachweise dieses Benutzers in einem API-Schlüssel. Legen Sie anschließend den API-Schlüssel in jeder Region fest, in der Sie Cluster erstellen möchten. Nachdem Sie den API-Schlüssel eingerichtet haben, benötigen andere Benutzer, denen Sie Zugriff auf {{site.data.keyword.containerlong_notm}} erteilt haben, keine Infrastrukturrollen, da der API-Schlüssel von allen Benutzern in der Region gemeinsam genutzt wird. Stattdessen legen die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen die Infrastrukturaktionen fest, die Benutzer ausführen dürfen. Wenn Sie den API-Schlüssel nicht mit vollständiger <strong>Superuser</strong>-Infrastruktur festlegen oder für Benutzer Zugriff auf bestimmte Geräte festlegen müssen, können Sie [Infrastrukturberechtigungen anpassen](#infra_access). </br></br>
+<dt><a href="#api_key">Klassische Infrastruktur</a></dt>
+<dd>Die Rollen der klassischen Infrastruktur ermöglichen den Zugriff auf Ressourcen der IBM Cloud-Infrastruktur. Richten Sie einen Benutzer mit der Infrastrukturrolle **Superuser** ein und speichern Sie die Infrastrukturberechtigungsnachweise dieses Benutzers in einem API-Schlüssel. Legen Sie anschließend den API-Schlüssel in jeder Region und Ressourcengruppe fest, in der Sie Cluster erstellen möchten. Nachdem Sie den API-Schlüssel eingerichtet haben, benötigen andere Benutzer, denen Sie Zugriff auf {{site.data.keyword.containerlong_notm}} erteilt haben, keine Infrastrukturrollen, da der API-Schlüssel von allen Benutzern in der Region gemeinsam genutzt wird. Stattdessen legen die {{site.data.keyword.cloud_notm}} IAM-Plattformrollen die Infrastrukturaktionen fest, die Benutzer ausführen dürfen. Wenn Sie den API-Schlüssel nicht mit vollständiger <strong>Superuser</strong>-Infrastruktur festlegen oder für Benutzer Zugriff auf bestimmte Geräte festlegen müssen, können Sie [Infrastrukturberechtigungen anpassen](#infra_access). </br></br>
 Beispiele für Aktionen, die Infrastrukturrollen ermöglichen, sind das Anzeigen der Details von Workerknotenmaschinen in einem Cluster oder das Bearbeiten der Netzbetriebs- und Speicherressourcen.</dd>
 <dt>Cloud Foundry</dt>
-<dd>Nicht alle Services können mit {{site.data.keyword.Bluemix_notm}} IAM verwaltet werden. Wenn Sie einen dieser Services nutzen, können Sie weiterhin die Cloud Foundry-Benutzerrollen verwenden, um den Zugriff auf diese Services zu steuern. Cloud Foundry-Rollen gewähren Zugriff für Organisationen und Bereiche innerhalb des Kontos. Zum Anzeigen der Liste von Cloud Foundry-basierten Services in {{site.data.keyword.Bluemix_notm}} führen Sie <code>ibmcloud service list</code> aus.</br></br>
-Beispiele für Aktionen, zu denen Cloud Foundry-Rollen berechtigen, sind das Erstellen einer neuen Cloud Foundry-Serviceinstanzen und das Binden einer Cloud Foundry-Serviceinstanz an einen Cluster. Weitere Informationen finden Sie unter den verfügbaren [Organisations- und Benutzerrollen](/docs/iam?topic=iam-cfaccess) oder in den Schritten unter [Cloud Foundry-Zugriff verwalten](/docs/iam?topic=iam-mngcf) in der Dokumentation zu {{site.data.keyword.Bluemix_notm}} Identity and Access Management.</dd>
+<dd>Nicht alle Services können mit {{site.data.keyword.cloud_notm}} IAM verwaltet werden. Wenn Sie einen dieser Services nutzen, können Sie weiterhin die Cloud Foundry-Benutzerrollen verwenden, um den Zugriff auf diese Services zu steuern. Cloud Foundry-Rollen gewähren Zugriff für Organisationen und Bereiche innerhalb des Kontos. Zum Anzeigen der Liste von Cloud Foundry-basierten Services in {{site.data.keyword.cloud_notm}} führen Sie <code>ibmcloud service list</code> aus.</br></br>
+Beispiele für Aktionen, zu denen Cloud Foundry-Rollen berechtigen, sind das Erstellen einer neuen Cloud Foundry-Serviceinstanzen und das Binden einer Cloud Foundry-Serviceinstanz an einen Cluster. Weitere Informationen finden Sie unter den verfügbaren [Organisations- und Benutzerrollen](/docs/iam?topic=iam-cfaccess) oder in den Schritten unter [Cloud Foundry-Zugriff verwalten](/docs/iam?topic=iam-mngcf) in der Dokumentation zu {{site.data.keyword.cloud_notm}} Identity and Access Management.</dd>
 </dl>
 
-### Einzelnen Benutzern oder Benutzergruppen in {{site.data.keyword.Bluemix_notm}} IAM Zugriffsrollen zuordnen
+### Einzelnen Benutzern oder Benutzergruppen in {{site.data.keyword.cloud_notm}} IAM Zugriffsrollen zuordnen
 {: #iam_individuals_groups}
 
-Wenn Sie {{site.data.keyword.Bluemix_notm}} IAM-Richtlinien festlegen, können Sie einem einzelnen Benutzer oder einer Benutzergruppe Rollen zuordnen.
+Wenn Sie {{site.data.keyword.cloud_notm}} IAM-Richtlinien festlegen, können Sie einem einzelnen Benutzer oder einer Benutzergruppe Rollen zuordnen.
 {: shortdesc}
 
 <dl>
 <dt>Einzelne Benutzer</dt>
-<dd>Es kann vorkommen, dass ein bestimmter Benutzer mehr oder weniger Berechtigungen als der Rest des Teams benötigt. Sie können die Berechtigungen individuell anpassen, sodass jede Person über die Berechtigungen verfügt, die sie zur Ausführung ihrer Aufgaben benötigt. Sie können jedem Benutzer mehrere {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuordnen.</dd>
+<dd>Es kann vorkommen, dass ein bestimmter Benutzer mehr oder weniger Berechtigungen als der Rest des Teams benötigt. Sie können die Berechtigungen individuell anpassen, sodass jede Person über die Berechtigungen verfügt, die sie zur Ausführung ihrer Aufgaben benötigt. Sie können jedem Benutzer mehrere {{site.data.keyword.cloud_notm}} IAM-Rollen zuordnen.</dd>
 <dt>Mehrere Benutzer in einer Zugriffsgruppe</dt>
-<dd>Sie können eine Benutzergruppe erstellen und dann dieser Gruppe Berechtigungen zuweisen. Sie können zum Beispiel alle Teamleiter zusammenfassen und der Gruppe Administratorzugriff erteilen. Anschließend können Sie alle Entwickler zusammenfassen und dieser Gruppe nur Schreibzugriff erteilen. Sie können jeder Zugriffsgruppe mehrere {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuordnen. Wenn Sie einer Gruppe Berechtigungen zuordnen, ist jeder Benutzer betroffen, der dieser Gruppe hinzugefügt oder aus dieser Gruppe entfernt wird. Wenn Sie der Gruppe Benutzer hinzufügen, verfügen diese Benutzer auch über den zusätzlichen Zugriff. Werden sie entfernt, wird ihr Zugriff widerrufen.</dd>
+<dd>Sie können eine Benutzergruppe erstellen und dann dieser Gruppe Berechtigungen zuweisen. Sie können zum Beispiel alle Teamleiter zusammenfassen und der Gruppe Administratorzugriff erteilen. Anschließend können Sie alle Entwickler zusammenfassen und dieser Gruppe nur Schreibzugriff erteilen. Sie können jeder Zugriffsgruppe mehrere {{site.data.keyword.cloud_notm}} IAM-Rollen zuordnen. Wenn Sie einer Gruppe Berechtigungen zuordnen, ist jeder Benutzer betroffen, der dieser Gruppe hinzugefügt oder aus dieser Gruppe entfernt wird. Wenn Sie der Gruppe Benutzer hinzufügen, verfügen diese Benutzer auch über den zusätzlichen Zugriff. Werden sie entfernt, wird ihr Zugriff widerrufen.</dd>
 </dl>
 
-{{site.data.keyword.Bluemix_notm}} IAM-Rollen können keinem Servicekonto zugeordnet werden. Stattdessen können Sie [Servicekonten direkt RBAC-Rollen zuordnen](#rbac).
+{{site.data.keyword.cloud_notm}} IAM-Rollen können keinem Servicekonto zugeordnet werden. Stattdessen können Sie [Servicekonten direkt RBAC-Rollen zuordnen](#rbac).
 {: tip}
 
 Sie müssen außerdem angeben, ob Benutzer über Zugriff auf einen Cluster in einer Ressourcengruppe, auf alle Cluster in einer Ressourcengruppe oder auf alle Cluster in allen Ressourcengruppen im Konto verfügen.
@@ -97,28 +93,28 @@ Sie müssen außerdem angeben, ob Benutzer über Zugriff auf einen Cluster in ei
 ### Bereich des Benutzerzugriffs auf Clusterinstanzen, Namensbereiche oder Ressourcengruppen festlegen
 {: #resource_groups}
 
-In {{site.data.keyword.Bluemix_notm}} IAM können Sie Ressourceninstanzen, Kubernetes-Namensbereichen oder Ressourcengruppen Benutzerzugriffsrollen zuordnen.
+In {{site.data.keyword.cloud_notm}} IAM können Sie Ressourceninstanzen, Kubernetes-Namensbereichen (Projekten in OpenShift) oder Ressourcengruppen Benutzerzugriffsrollen zuordnen.
 {: shortdesc}
 
-Wenn Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto erstellen, wird automatisch die Standardressourcengruppe erstellt. Wenn Sie bei der Erstellung einer Ressource keine Ressourcengruppe angeben, gehören die Ressourceninstanzen (Cluster) zur Standardressourcengruppe. In {{site.data.keyword.Bluemix_notm}} IAM ist ein Kubernetes-Namensbereich ein Ressourcentyp einer Ressourceninstanz (Cluster). Wenn Sie in Ihrem Konto eine Ressourcengruppe hinzufügen möchten, finden Sie Informationen hierzu unter [Bewährte Verfahren beim Einrichten des Kontos](/docs/account?topic=account-account_setup) und [Ressourcengruppen einrichten](/docs/resources?topic=resources-bp_resourcegroups#setuprgs).
+Wenn Sie Ihr {{site.data.keyword.cloud_notm}}-Konto erstellen, wird automatisch die Standardressourcengruppe erstellt. Wenn Sie bei der Erstellung einer Ressource keine Ressourcengruppe angeben, gehören die Ressourceninstanzen (Cluster) zur Standardressourcengruppe. In {{site.data.keyword.cloud_notm}} IAM ist ein Kubernetes-Namensbereich ein Ressourcentyp einer Ressourceninstanz (Cluster). Wenn Sie in Ihrem Konto eine Ressourcengruppe hinzufügen möchten, finden Sie Informationen hierzu unter [Bewährte Verfahren beim Einrichten des Kontos](/docs/account?topic=account-account_setup) und [Ressourcengruppen einrichten](/docs/resources?topic=resources-bp_resourcegroups#setuprgs).
 
 <dl>
 <dt>Ressourceninstanz</dt>
-  <dd><p>Jeder {{site.data.keyword.Bluemix_notm}}-Service im Konto ist eine Ressource, die über Instanzen verfügt. Die Instanzen sind von Service zu Service unterschiedlich. In {{site.data.keyword.containerlong_notm}} ist die Instanz zum Beispiel ein Cluster, in {{site.data.keyword.cloudcerts_long_notm}} ist die Instanz jedoch ein Zertifikat. Ressourcen gehören standardmäßig auch zur Standardressourcengruppe im Konto. Einem Benutzer können Sie eine Zugriffsrolle für eine Ressourceninstanz für die folgenden Szenarios zuordnen.
-  <ul><li>Alle {{site.data.keyword.Bluemix_notm}} IAM-Services im Konto, einschließlich aller Cluster in {{site.data.keyword.containerlong_notm}} und Images in {{site.data.keyword.registrylong_notm}}.</li>
+  <dd><p>Jeder {{site.data.keyword.cloud_notm}}-Service im Konto ist eine Ressource, die über Instanzen verfügt. Die Instanzen sind von Service zu Service unterschiedlich. In {{site.data.keyword.containerlong_notm}} ist die Instanz zum Beispiel ein Cluster, in {{site.data.keyword.cloudcerts_long_notm}} ist die Instanz jedoch ein Zertifikat. Ressourcen gehören standardmäßig auch zur Standardressourcengruppe im Konto. Einem Benutzer können Sie eine Zugriffsrolle für eine Ressourceninstanz für die folgenden Szenarios zuordnen.
+  <ul><li>Alle {{site.data.keyword.cloud_notm}} IAM-Services im Konto, einschließlich aller Cluster in {{site.data.keyword.containerlong_notm}} und Images in {{site.data.keyword.registrylong_notm}}.</li>
   <li>Alle Instanzen in einem Service, zum Beispiel alle Cluster in {{site.data.keyword.containerlong_notm}}.</li>
   <li>Alle Instanzen in einer Region eines Service, zum Beispiel alle Cluster in der Region **Vereinigte Staaten (Süden)** von {{site.data.keyword.containerlong_notm}}.</li>
   <li>Eine einzelne Instanz, zum Beispiel einen Cluster.</li></ul></dd>
-<dt>Kubernetes-Namensbereich</dt>
-  <dd><p>Als Teil von Clusterressourceinstanzen in {{site.data.keyword.Bluemix_notm}} IAM können Sie Benutzern Servicezugriffsrollen für Kubernetes-Namensbereiche in Ihren Clustern zuweisen.</p>
+<dt>Kubernetes-Namensbereich (Projekte in OpenShift)</dt>
+  <dd><p>Als Teil von Clusterressourceinstanzen in {{site.data.keyword.cloud_notm}} IAM können Sie Benutzern Servicezugriffsrollen für Namensbereiche in Ihren Clustern zuweisen.</p>
   <p>Wenn Sie Zugriff auf einen Namensbereich erteilen, gilt die Richtlinie für alle aktuellen und zukünftigen Instanzen des Namensbereichs in allen Clustern, die Sie berechtigen. Beispiel: Sie möchten, dass eine Benutzergruppe `dev` Kubernetes-Ressourcen in einem Namensbereich `test` in allen Ihren Clustern in der Region 'Asien-Pazifik (Norden)' bereitstellen kann. Wenn Sie der Zugriffsgruppe `dev` die Servicezugriffsrolle **Schreibberechtigter** für den Kubernetes-Namensbereich 'test' in allen Clustern in der Region 'Asien-Pazifik (Norden)' in der Ressourcengruppe `default` zuweisen, kann die Gruppe `dev` auf den Namensbereich `test` in einem beliebigen Cluster der Region 'Asien-Pazifik (Norden)' in der Ressourcengruppe `default` zugreifen, die zurzeit einen Namensbereich 'test' enthält oder in Zukunft enthalten wird.</p>
   <p class="important">Wenn Sie den Bereich einer Servicerolle auf einen Namensbereich festlegen, können Sie die Richtlinie nicht gleichzeitig auf eine Ressourcengruppe anwenden oder ihr eine Plattformrolle zuordnen.</p></dd>
 <dt>Ressourcengruppe</dt>
   <dd><p>Sie können Ihre Kontoressourcen in anpassbaren Gruppierungen zusammenfassen, sodass Sie einzelnen Benutzern oder Benutzergruppen schnell Zugriff auf mehrere Ressourcen gleichzeitig zuordnen können. Mit Ressourcengruppen können Operatoren und Administratoren Ressourcen filtern, um ihre aktuelle Verwendung anzuzeigen, Fehler zu beheben und Teams zu verwalten.</p>
-  <p class="important">Ein Cluster kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich. Wenn Sie einen Cluster in der falschen Ressourcengruppe erstellen, müssen Sie den Cluster löschen und in der richtigen Ressourcengruppe erneut erstellen. Wenn Sie außerdem den [Befehl](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` verwenden müssen, um eine [Integration mit einem {{site.data.keyword.Bluemix_notm}}-Service durchzuführen](/docs/containers?topic=containers-service-binding#bind-services), muss sich dieser Service in derselben Ressourcengruppe befinden wie der Cluster. Services, die keine Ressourcengruppen verwenden, wie {{site.data.keyword.registrylong_notm}}, oder die keine Servicebindung benötigen, wie {{site.data.keyword.la_full_notm}}, funktionieren auch dann, wenn sich der Cluster in einer anderen Ressourcengruppe befindet.</p>
+  <p class="important">Ein Cluster kann in nur einer Ressourcengruppe erstellt werden; eine Änderung ist danach nicht mehr möglich. Wenn Sie einen Cluster in der falschen Ressourcengruppe erstellen, müssen Sie den Cluster löschen und in der richtigen Ressourcengruppe erneut erstellen. Wenn Sie außerdem den [Befehl](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` verwenden müssen, um eine [Integration mit einem {{site.data.keyword.cloud_notm}}-Service durchzuführen](/docs/containers?topic=containers-service-binding#bind-services), muss sich dieser Service in derselben Ressourcengruppe befinden wie der Cluster. Services, die keine Ressourcengruppen verwenden, wie {{site.data.keyword.registrylong_notm}}, oder die keine Servicebindung benötigen, wie {{site.data.keyword.la_full_notm}}, funktionieren auch dann, wenn sich der Cluster in einer anderen Ressourcengruppe befindet.</p>
   <p>Wenn Sie beabsichtigen, [{{site.data.keyword.monitoringlong_notm}} für Metriken](/docs/containers?topic=containers-health#view_metrics) zu verwenden, achten Sie darauf, für jeden Cluster einen Namen festzulegen, der in allen Ressourcengruppen und Regionen des Kontos eindeutig ist, um Konflikte bei Metriknamen zu vermeiden. Sie können einen Cluster nicht umbenennen.</p>
   <p>Einem Benutzer können Sie eine Zugriffsrolle für eine Ressourcengruppe für die folgenden Szenarios zuordnen. Beachten Sie, dass Sie im Gegensatz zu Ressourceninstanzen nicht Zugriff auf eine einzelne Instanz innerhalb einer Ressourcengruppe erteilen können.</p>
-  <ul><li>Alle {{site.data.keyword.Bluemix_notm}} IAM-Services in der Ressourcengruppe, einschließlich aller Cluster in {{site.data.keyword.containerlong_notm}} und Images in {{site.data.keyword.registrylong_notm}}.</li>
+  <ul><li>Alle {{site.data.keyword.cloud_notm}} IAM-Services in der Ressourcengruppe, einschließlich aller Cluster in {{site.data.keyword.containerlong_notm}} und Images in {{site.data.keyword.registrylong_notm}}.</li>
   <li>Alle Instanzen in einem Service in der Ressourcengruppe, zum Beispiel alle Cluster in {{site.data.keyword.containerlong_notm}}.</li>
   <li>Alle Instanzen in einer Region eines Service in einer Ressourcengruppe, zum Beispiel alle Cluster in der Region **Vereinigte Staaten (Süden)** von {{site.data.keyword.containerlong_notm}}.</li></ul></dd>
 </dl>
@@ -132,12 +128,12 @@ Wenn Sie Ihr {{site.data.keyword.Bluemix_notm}}-Konto erstellen, wird automatisc
 Nachdem Sie [sich damit vertraut gemacht haben, wie Rollen, Benutzer und Ressourcen im Konto](#access_policies) verwaltet werden können, verwenden Sie die folgende Checkliste zum Konfigurieren des Benutzerzugriffs im Cluster.
 {: shortdesc}
 
-<p class="tip">Weisen Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen nicht gleichzeitig mit einer Servicerolle zu. Sie müssen Plattform- und Servicerollen separat zuweisen.</p>
+<p class="tip">Weisen Sie {{site.data.keyword.cloud_notm}} IAM-Plattformrollen nicht gleichzeitig mit einer Servicerolle zu. Sie müssen Plattform- und Servicerollen separat zuweisen.</p>
 
 1. [Legen Sie den API-Schlüssel](#api_key) für alle Regionen und Ressourcengruppen fest, in denen Sie Cluster erstellen möchten.
-2. Laden Sie Benutzer zu Ihrem Konto ein und [ordnen Sie ihnen {{site.data.keyword.Bluemix_notm}} IAM-Rollen](#platform) für {{site.data.keyword.containerlong_notm}} zu. 
+2. Laden Sie Benutzer zu Ihrem Konto ein und [ordnen Sie ihnen {{site.data.keyword.cloud_notm}} IAM-Rollen](#platform) für {{site.data.keyword.containerlong_notm}} zu. 
 3. Um Benutzern das Binden von Services an den Cluster oder das Anzeigen von Protokollen zu ermöglichen, die von Clusterprotokollierungskonfigurationen weitergeleitet werden, [erteilen Sie den Benutzern Cloud Foundry-Rollen](/docs/iam?topic=iam-mngcf) für die Organisation und den Bereich, in der bzw. dem die Services bereitgestellt werden oder die Protokolle erfasst werden.
-4. Wenn Sie Kubernetes-Namensbereiche verwenden, um Ressourcen im Cluster zu isolieren, erteilen Sie Zugriff auf Namensbereiche, indem Sie [Benutzern {{site.data.keyword.Bluemix_notm}} IAM-Servicerollen für Namensbereiche zuordnen](#platform).
+4. Wenn Sie Kubernetes-Namensbereiche verwenden, um Ressourcen im Cluster zu isolieren, erteilen Sie Zugriff auf Namensbereiche, indem Sie [Benutzern {{site.data.keyword.cloud_notm}} IAM-Servicerollen für Namensbereiche zuordnen](#platform).
 5. Legen Sie für alle Automatisierungstools, wie zum Beispiel die CI/CD-Pipeline, Servicekonten fest und [ordnen Sie den Servicekonten Kubernetes-RBAC-Berechtigungen zu](#rbac).
 6. Weitere erweiterte Konfigurationen zum Steuern des Zugriffs auf die Clusterressourcen auf Pod-Ebene finden Sie unter [Sicherheit für Pods konfigurieren](/docs/containers?topic=containers-psp).
 
@@ -152,10 +148,10 @@ Weitere Informationen zum Konfigurieren des Kontos und der Ressourcen finden Sie
 ## API-Schlüssel für Aktivierung des Zugriffs auf Infrastrukturportfolio konfigurieren
 {: #api_key}
 
-Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie sicherstellen, dass Ihr {{site.data.keyword.Bluemix_notm}}-Konto in allen Ressourcengruppen und Regionen, in denen sich Ihre Cluster befinden, korrekt für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) konfiguriert wurde.
+Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie sicherstellen, dass Ihr {{site.data.keyword.cloud_notm}}-Konto in allen Ressourcengruppen und Regionen, in denen sich Ihre Cluster befinden, korrekt für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur konfiguriert wurde.
 {: shortdesc}
 
-**Meiste Fälle:** Das nutzungsabhängige {{site.data.keyword.Bluemix_notm}}-Konto verfügt bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer). Um für {{site.data.keyword.containerlong_notm}} Zugriff auf das Portfolio zu konfigurieren, muss der **Kontoeigner** den API-Schlüssel für die Region und die Ressourcengruppe festlegen.
+**Meiste Fälle:** Das nutzungsabhängige {{site.data.keyword.cloud_notm}}-Konto verfügt bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur. Um für {{site.data.keyword.containerlong_notm}} Zugriff auf das Portfolio zu konfigurieren, muss der **Kontoeigner** den API-Schlüssel für die Region und die Ressourcengruppe festlegen.
 
 1. Melden Sie sich als Kontoeigner am Terminal an.
     ```
@@ -183,21 +179,23 @@ Um erfolgreich Cluster bereitzustellen und mit diesen zu arbeiten, müssen Sie s
 
 5. Wiederholen Sie die Schritte für jede Region und Ressourcengruppe, in der Sie Cluster erstellen möchten.
 
-**Alternative Optionen und weitere Informationen:** Informationen zu weiteren Möglichkeiten für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) finden Sie in den folgenden Abschnitten.
-* Wenn Sie sich nicht sicher sind, ob Ihr Konto bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verfügt, lesen Sie den Abschnitt [Informationen zum Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](#understand_infra).
+**Alternative Optionen und weitere Informationen:** Informationen zu weiteren Möglichkeiten für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur finden Sie in den folgenden Abschnitten.
+* Wenn Sie sich nicht sicher sind, ob Ihr Konto bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur verfügt, lesen Sie den Abschnitt [Informationen zum Zugriff auf das Portfolio der Infrastruktur](#understand_infra).
 * Wenn der Kontoeigner keinen API-Schlüssel festlegt, [stellen Sie sicher, dass der Benutzer, der den API-Schlüssel festlegt, über die passenden Berechtigungen verfügt](#owner_permissions).
-* Weitere Informationen zur Verwendung des Standardkontos zum Festlegen des API-Schlüssels finden Sie im Abschnitt [Mit nutzungsabhängigem {{site.data.keyword.Bluemix_notm}}-Standardkonto auf Infrastrukturportfolio zugreifen](#default_account).
-* Falls Sie nicht über ein nutzungsabhängiges Standardkonto verfügen oder ein abweichendes Konto der IBM Cloud-Infrastruktur (SoftLayer) verwenden müssen, finden Sie Informationen im Abschnitt [Auf anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) zugreifen](#credentials).
+* Weitere Informationen zur Verwendung des Standardkontos zum Festlegen des API-Schlüssels finden Sie im Abschnitt [Mit nutzungsabhängigem {{site.data.keyword.cloud_notm}}-Standardkonto auf Portfolio der Infrastruktur zugreifen](#default_account).
+* Falls Sie nicht über ein nutzungsabhängiges Standardkonto verfügen oder ein abweichendes Konto der IBM Cloud-Infrastruktur verwenden müssen, finden Sie Informationen im Abschnitt [Auf anderes Konto der IBM Cloud-Infrastruktur zugreifen](#credentials).
 
-### Informationen zum Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)
+### Informationen zum Zugriff auf das Portfolio der Infrastruktur
 {: #understand_infra}
 
-Stellen Sie fest, ob Ihr Konto über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verfügt und machen Sie sich damit vertraut, wie der API-Schlüssel von {{site.data.keyword.containerlong_notm}} für den Zugriff auf das Portfolio verwendet wird.
+Stellen Sie fest, ob Ihr Konto über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur verfügt und machen Sie sich damit vertraut, wie der API-Schlüssel von {{site.data.keyword.containerlong_notm}} für den Zugriff auf das Portfolio verwendet wird.
 {: shortdesc}
 
-**Verfügt mein Konto bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)?**</br>
 
-Für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwenden Sie ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto. Wenn Sie über einen anderen Kontotyp verfügen, finden Sie Ihre Optionen in der folgenden Tabelle.
+
+**Verfügt mein Konto bereits über Zugriff auf das Portfolio der IBM Cloud-Infrastruktur?**</br>
+
+Für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur verwenden Sie ein nutzungsabhängiges {{site.data.keyword.cloud_notm}}-Konto. Wenn Sie über einen anderen Kontotyp verfügen, finden Sie Ihre Optionen in der folgenden Tabelle.
 
 <table summary="In der Tabelle werden die Standardoptionen für die Clustererstellung nach Kontotyp angezeigt. Die Zeilen sind von links nach rechts zu lesen, mit der Kontobeschreibung in Spalte eins und den Optionen zum Erstellen eines Standardclusters in Spalte 2.">
 <caption>Erstellungsoptionen für Standardcluster nach Kontotyp</caption>
@@ -208,49 +206,50 @@ Für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwe
   <tbody>
     <tr>
       <td>Mit **Lite-Konten** können keine Cluster bereitgestellt werden.</td>
-      <td>[Führen Sie für Ihr Lite-Konto ein Upgrade auf ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto durch](/docs/account?topic=account-accounts#paygo).</td>
+      <td>[Führen Sie für Ihr Lite-Konto ein Upgrade auf ein nutzungsabhängiges {{site.data.keyword.cloud_notm}}-Konto durch](/docs/account?topic=account-accounts#paygo).</td>
     </tr>
     <tr>
       <td>**Nutzungsabhängige Konten** werden mit Zugriff auf das Infrastruktur-Portfolio geliefert.</td>
       <td>Sie können Standardcluster erstellen. Verwenden Sie einen API-Schlüssel, um die Infrastrukturberechtigungen für die Cluster einzurichten.</td>
     </tr>
     <tr>
-      <td>**Abonnementkonten** werden ohne Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet.</td>
-      <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account?topic=account-accounts#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.Bluemix_notm}}-Konten und -Abrechnungen.</p><p>Wenn Sie Ihr Abonnementkonto weiterhin verwenden möchten, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel in der IBM Cloud-Infrastruktur (SoftLayer) generieren. Anschließend müssen Sie für Ihr Abonnementkonto den API-Schlüssel der IBM Cloud-Infrastruktur (SoftLayer) manuell festlegen. Beachten Sie, dass Ressourcen der IBM Cloud-Infrastruktur (SoftLayer) über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur (SoftLayer) haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) für Ihr {{site.data.keyword.Bluemix_notm}}-Konto manuell festlegen.</p><p class="note">Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur (SoftLayer) herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur (SoftLayer) spezifische Aktion in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](/docs/containers?topic=containers-users#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p></td>
+      <td>**Abonnementkonten** werden ohne Zugriff auf das Portfolio der IBM Cloud-Infrastruktur eingerichtet.</td>
+      <td><p><strong>Option 1:</strong> [Erstellen Sie ein neues nutzungsabhängiges Konto](/docs/account?topic=account-accounts#paygo), das mit Zugriff auf das Portfolio der IBM Cloud-Infrastruktur eingerichtet wird. Wenn Sie diese Option auswählen, erhalten Sie zwei separate {{site.data.keyword.cloud_notm}}-Konten und -Abrechnungen.</p><p>Wenn Sie Ihr Abonnementkonto weiterhin verwenden möchten, können Sie mit Ihrem neuen nutzungsabhängigen Konto einen API-Schlüssel in der IBM Cloud-Infrastruktur generieren. Anschließend müssen Sie für Ihr Abonnementkonto den API-Schlüssel der IBM Cloud-Infrastruktur manuell festlegen. Beachten Sie, dass Ressourcen der IBM Cloud-Infrastruktur über Ihr neues nutzungsabhängiges Konto in Rechnung gestellt werden.</p><p><strong>Option 2:</strong> Wenn Sie bereits ein Konto der IBM Cloud-Infrastruktur haben, das Sie verwenden möchten, können Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur für Ihr {{site.data.keyword.cloud_notm}}-Konto manuell festlegen.</p><p class="note">Wenn Sie eine manuelle Verknüpfung zu einem Konto der IBM Cloud-Infrastruktur herstellen, werden die Berechtigungsnachweise für jede für die IBM Cloud-Infrastruktur spezifische Aktion in Ihrem {{site.data.keyword.cloud_notm}}-Konto verwendet. Sie müssen sicherstellen, dass der von Ihnen angegebene API-Schlüssel über [ausreichende Infrastrukturberechtigungen](/docs/containers?topic=containers-users#infra_access) verfügt, damit die Benutzer Cluster erstellen und mit diesen arbeiten können.</p></td>
     </tr>
     <tr>
-      <td>**Konten der IBM Cloud-Infrastruktur (SoftLayer)**, kein {{site.data.keyword.Bluemix_notm}}-Konto</td>
-      <td><p>[Erstellen Sie ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto](/docs/account?topic=account-accounts#paygo). Sie verfügen über zwei separate Konten der IBM Cloud-Infrastruktur (SoftLayer) und jeweils separate Abrechnungen.</p><p>Ihr neues {{site.data.keyword.Bluemix_notm}}-Konto verwendet standardmäßig das neue Infrastrukturkonto. Wenn Sie das alte Infrastrukturkonto weiter verwenden möchten, legen Sie die Berechtigungsnachweise manuell fest.</p></td>
+      <td>**Konten der IBM Cloud-Infrastruktur**, kein {{site.data.keyword.cloud_notm}}-Konto</td>
+      <td><p>[Erstellen Sie ein nutzungsabhängiges {{site.data.keyword.cloud_notm}}-Konto](/docs/account?topic=account-accounts#paygo). Sie verfügen über zwei separate Konten der IBM Cloud-Infrastruktur und jeweils separate Abrechnungen.</p><p>Ihr neues {{site.data.keyword.cloud_notm}}-Konto verwendet standardmäßig das neue Infrastrukturkonto. Wenn Sie das alte Infrastrukturkonto weiter verwenden möchten, legen Sie die Berechtigungsnachweise manuell fest.</p></td>
     </tr>
   </tbody>
   </table>
 
 **Das Infrastrukturportfolio ist jetzt eingerichtet. Wie wird von {{site.data.keyword.containerlong_notm}} auf das Portfolio zugegriffen?**</br>
 
-{{site.data.keyword.containerlong_notm}} greift über einen API-Schlüssel auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu. Im API-Schlüssel werden die Berechtigungsnachweise eines Benutzers mit Zugriff auf ein Konto der IBM Cloud-Infrastruktur (SoftLayer) gespeichert. API-Schlüssel werden nach Region in einer Ressourcengruppe festgelegt und von den Benutzern in dieser Region gemeinsam genutzt. 
-Damit alle Benutzer auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zugreifen können, muss der Benutzer, dessen Berechtigungsnachweise im API-Schlüssel gespeichert sind, über [die Infrastrukturrolle **Superuser** und die Plattformrolle **Administrator** für {{site.data.keyword.containerlong_notm}} und für {{site.data.keyword.registryshort_notm}}](#owner_permissions) im {{site.data.keyword.Bluemix_notm}}-Konto verfügen.Danach kann dieser Benutzer die erste Administratoraktion in einer Region und einer Ressourcengruppe ausführen. Die Berechtigungsnachweise des Benutzers für die Infrastruktur werden in einem API-Schlüssel für diese Region und Ressourcengruppe gespeichert.
+{{site.data.keyword.containerlong_notm}} greift über einen API-Schlüssel auf das Portfolio der IBM Cloud-Infrastruktur zu. Im API-Schlüssel werden die Berechtigungsnachweise eines Benutzers mit Zugriff auf ein Konto der IBM Cloud-Infrastruktur gespeichert. API-Schlüssel werden nach Region in einer Ressourcengruppe festgelegt und von den Benutzern in dieser Region gemeinsam genutzt. 
+Damit alle Benutzer auf das Portfolio der IBM Cloud-Infrastruktur zugreifen können, muss der Benutzer, dessen Berechtigungsnachweise im API-Schlüssel gespeichert sind, über [die Infrastrukturrolle **Superuser** und die Plattformrolle **Administrator** für {{site.data.keyword.containerlong_notm}} und für {{site.data.keyword.registryshort_notm}}](#owner_permissions) im {{site.data.keyword.cloud_notm}}-Konto verfügen.Danach kann dieser Benutzer die erste Administratoraktion in einer Region und einer Ressourcengruppe ausführen. Die Berechtigungsnachweise des Benutzers für die Infrastruktur werden in einem API-Schlüssel für diese Region und Ressourcengruppe gespeichert.
 
-Andere Benutzer innerhalb des Kontos nutzen den API-Schlüssel für den Zugriff auf die Infrastruktur gemeinsam. Wenn Benutzer sich beim {{site.data.keyword.Bluemix_notm}}Konto anmelden, wird ein {{site.data.keyword.Bluemix_notm}} IAM-Token, das auf dem API-Schlüssel basiert, für die CLI-Sitzung generiert und ermöglicht die Ausführung von infrastrukturbezogenen Befehlen in einem Cluster.
+Andere Benutzer innerhalb des Kontos nutzen den API-Schlüssel für den Zugriff auf die Infrastruktur gemeinsam. Wenn Benutzer sich beim {{site.data.keyword.cloud_notm}}Konto anmelden, wird ein {{site.data.keyword.cloud_notm}} IAM-Token, das auf dem API-Schlüssel basiert, für die CLI-Sitzung generiert und ermöglicht die Ausführung von infrastrukturbezogenen Befehlen in einem Cluster.
 
-Um das {{site.data.keyword.Bluemix_notm}} IAM-Token für eine CLI-Sitzung anzuzeigen, können Sie `ibmcloud iam oauth-tokens` ausführen. {{site.data.keyword.Bluemix_notm}} IAM-Tokens können auch verwendet werden, um [die {{site.data.keyword.containerlong_notm}}-API direkt aufzurufen](/docs/containers?topic=containers-cs_cli_install#cs_api).
+Um das {{site.data.keyword.cloud_notm}} IAM-Token für eine CLI-Sitzung anzuzeigen, können Sie `ibmcloud iam oauth-tokens` ausführen. {{site.data.keyword.cloud_notm}} IAM-Tokens können auch verwendet werden, um [die {{site.data.keyword.containerlong_notm}}-API direkt aufzurufen](/docs/containers?topic=containers-cs_cli_install#cs_api).
 {: tip}
 
-**Wie kann ich einschränken, welche Befehle Benutzer ausführen können, wenn diese über ein {{site.data.keyword.Bluemix_notm}} IAM-Token Zugriff auf das Portfolio haben?**
+**Wie kann ich einschränken, welche Befehle Benutzer ausführen können, wenn diese über ein {{site.data.keyword.cloud_notm}} IAM-Token Zugriff auf das Portfolio haben?**
 
-Nachdem Sie den Zugriff auf das Portfolio für Benutzer in Ihrem Konto eingerichtet haben, können Sie steuern, welche Infrastrukturaktionen die Benutzer ausführen können, indem Sie die entsprechende [Plattformrolle](#platform) zuordnen. Indem Sie Benutzern {{site.data.keyword.Bluemix_notm}} IAM-Rollen zuordnen, schränken Sie ein, welche Befehle die Benutzer in einem Cluster ausführen können. Beispiel: Da der API-Schlüsseleigner die Infrastrukturrolle **Superuser** innehat, können alle infrastrukturbezogenen Befehle in einem Cluster ausgeführt werden. Aber abhängig von der {{site.data.keyword.Bluemix_notm}} IAM-Rolle, die einem Benutzer zugeordnet ist, kann er nur manche dieser infrastrukturbezogenen Befehle ausführen.
+Nachdem Sie den Zugriff auf das Portfolio für Benutzer in Ihrem Konto eingerichtet haben, können Sie steuern, welche Infrastrukturaktionen die Benutzer ausführen können, indem Sie die entsprechende [Plattformrolle](#platform) zuordnen. Indem Sie Benutzern {{site.data.keyword.cloud_notm}} IAM-Rollen zuordnen, schränken Sie ein, welche Befehle die Benutzer in einem Cluster ausführen können. Beispiel: Da der Eigner des API-Schlüssels über alle erforderlichen Infrastrukturrollen verfügt, können alle infrastrukturbezogenen Befehle in einem Cluster ausgeführt werden. Aber abhängig von der {{site.data.keyword.cloud_notm}} IAM-Rolle, die einem Benutzer zugeordnet ist, kann er nur manche dieser infrastrukturbezogenen Befehle ausführen.
 
-Wenn Sie beispielsweise einen Cluster in einer neuen Region erstellen möchten, stellen Sie sicher, dass der erste Cluster von einem Benutzer mit der Infrastrukturrolle **Superuser** erstellt wird, zum Beispiel dem Kontoeigner. Anschließend können Sie einzelne Benutzer oder Benutzer in {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsgruppen in diese Region einladen, indem Sie die Plattformverwaltungsrichtlinien für sie in dieser Region festlegen. Ein Benutzer mit der Plattformrolle **Anzeigeberechtigter** ist nicht berechtigt, einen Workerknoten hinzuzufügen. Daher schlägt die Aktion `worker-add` fehl, auch wenn der API-Schlüssel über die richtigen Infrastrukturberechtigungen verfügt. Wenn Sie die Plattformrolle des Benutzers in **Operator** ändern, ist der Benutzer berechtigt, einen Workerknoten hinzuzufügen. Die Aktion `worker-add` ist erfolgreich, weil der Benutzer berechtigt und der API-Schlüssel korrekt definiert ist. Sie müssen die Berechtigungen des Benutzers für die IBM Cloud-Infrastruktur (SoftLayer) nicht bearbeiten.
+Wenn Sie beispielsweise einen Cluster in einer neuen Region erstellen möchten, stellen Sie sicher, dass der erste Cluster von einem Benutzer mit der Infrastrukturrolle **Superuser** erstellt wird, zum Beispiel dem Kontoeigner. Anschließend können Sie einzelne Benutzer oder Benutzer in {{site.data.keyword.cloud_notm}} IAM-Zugriffsgruppen in diese Region einladen, indem Sie die Plattformverwaltungsrichtlinien für sie in dieser Region festlegen. Ein Benutzer mit der Plattformrolle **Anzeigeberechtigter** ist nicht berechtigt, einen Workerknoten hinzuzufügen. Daher schlägt die Aktion `worker-add` fehl, auch wenn der API-Schlüssel über die richtigen Infrastrukturberechtigungen verfügt. Wenn Sie die Plattformrolle des Benutzers in **Operator** ändern, ist der Benutzer berechtigt, einen Workerknoten hinzuzufügen. Die Aktion `worker-add` ist erfolgreich, weil der Benutzer berechtigt und der API-Schlüssel korrekt definiert ist. Sie müssen die Berechtigungen des Benutzers für die IBM Cloud-Infrastruktur nicht bearbeiten.
+
 
 Wenn Sie prüfen möchten, was für Aktionen Benutzer in Ihrem Konto ausführen, können Sie mit [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events) alle clusterbezogenen Ereignisse anzeigen.
 {: tip}
 
 **Was kann ich tun, wenn ich dem Eigner des API-Schlüssels oder der Berechtigungsnachweise nicht die Infrastrukturrolle eines Superusers zuweisen möchte?**</br>
 
-Es kann vorkommen, dass Compliance-, Sicherheits- oder Abrechnungsgründe dagegen sprechen, die Infrastrukturrolle **Superuser** dem Benutzer zuzuweisen, der den API-Schlüssel festlegt oder dessen Berechtigungsnachweise mit dem Befehl `ibmcloud ks credential-set` festgelegt werden. Wenn dieser Benutzer jedoch nicht über die Rolle **Superuser** verfügt, können infrastrukturbezogene Aktionen, wie zum Beispiel das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen. Anstatt {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen zu verwenden, um den Infrastrukturzugriff der Benutzer zu steuern, müssen Sie für die Benutzer [spezifische Berechtigungen für die IBM Cloud-Infrastruktur (SoftLayer) festlegen](#infra_access).
+Es kann vorkommen, dass Compliance-, Sicherheits- oder Abrechnungsgründe dagegen sprechen, die Infrastrukturrolle **Superuser** dem Benutzer zuzuweisen, der den API-Schlüssel festlegt oder dessen Berechtigungsnachweise mit dem Befehl `ibmcloud ks credential-set` festgelegt werden. Wenn dieser Benutzer jedoch nicht über die Rolle **Superuser** verfügt, können infrastrukturbezogene Aktionen, wie zum Beispiel das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen. Anstatt {{site.data.keyword.cloud_notm}} IAM-Plattformrollen zu verwenden, um den Infrastrukturzugriff der Benutzer zu steuern, müssen Sie für die Benutzer [spezifische Berechtigungen für die IBM Cloud-Infrastruktur festlegen](#infra_access).
 
 **Was passiert, wenn der Benutzer, der den API-Schlüssel für eine Region oder Ressourcengruppe festgelegt hat, das Unternehmen verlässt?**
 
-Wenn der Benutzer Ihr Unternehmen verlässt, kann der {{site.data.keyword.Bluemix_notm}}-Kontoeigner die Berechtigungen des Benutzers entfernen. Bevor Sie jedoch die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Benutzer selbst vollständig aus Ihrem Konto entfernen, müssen Sie den API-Schlüssel mit den Infrastrukturberechtigungsnachweisen eines anderen Benutzers zurücksetzen. Andernfalls verlieren die anderen Benutzer in dem Konto möglicherweise den Zugriff auf die IBM Cloud-Infrastruktur (SoftLayer) oder die infrastrukturbezogenen Befehle schlagen fehl. Weitere Informationen finden Sie unter [Benutzerberechtigungen entfernen](#removing).
+Wenn der Benutzer Ihr Unternehmen verlässt, kann der {{site.data.keyword.cloud_notm}}-Kontoeigner die Berechtigungen des Benutzers entfernen. Bevor Sie jedoch die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Benutzer selbst vollständig aus Ihrem Konto entfernen, müssen Sie den API-Schlüssel mit den Infrastrukturberechtigungsnachweisen eines anderen Benutzers zurücksetzen. Andernfalls verlieren die anderen Benutzer in dem Konto möglicherweise den Zugriff auf das Portal der IBM Cloud-Infrastruktur und die infrastrukturbezogenen Befehle schlagen fehl. Weitere Informationen finden Sie unter [Benutzerberechtigungen entfernen](#removing).
 
 **Wie kann ich meinen Cluster sperren, wenn mein API-Schlüssel kompromittiert wird?**
 
@@ -258,9 +257,9 @@ Wenn ein API-Schlüssel, der für eine Region oder Ressourcengruppe in Ihrem Clu
 
 **Wie lege ich den API-Schlüssel für meinen Cluster fest?**</br>
 
-Das hängt davon ab, welchen Kontotyp Sie für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwenden:
-* [Ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto](#default_account)
-* [Ein anderes Konto der IBM Cloud-Infrastruktur (SoftLayer), das nicht mit dem nutzungsabhängigen {{site.data.keyword.Bluemix_notm}}-Standardkonto verknüpft ist](#credentials)
+Das hängt davon ab, welchen Kontotyp Sie für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur verwenden:
+* [Ein nutzungsabhängiges {{site.data.keyword.cloud_notm}}-Konto](#default_account)
+* [Ein anderes Konto der IBM Cloud-Infrastruktur, das nicht mit dem nutzungsabhängigen {{site.data.keyword.cloud_notm}}-Standardkonto verknüpft ist](#credentials)
 
 ### Sicherstellen, dass der Eigner des API-Schlüssels oder der Infrastrukturberechtigungsnachweise über die passenden Berechtigungen verfügt
 {: #owner_permissions}
@@ -268,9 +267,9 @@ Das hängt davon ab, welchen Kontotyp Sie für den Zugriff auf das Portfolio der
 Um sicherzustellen, dass alle infrastrukturbezogenen Aktionen im Cluster erfolgreich ausgeführt werden können, muss der Benutzer, dessen Berechtigungsnachweise Sie für den API-Schlüssel festlegen möchten, über die entsprechenden Berechtigungen verfügen.
 {: shortdesc}
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an.
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an.
 
-2. Überprüfen Sie, ob der Benutzer über die passenden {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen verfügt, um sicherzustellen, dass alle kontenbezogenen Aktionen erfolgreich ausgeführt werden können.
+2. Überprüfen Sie, ob der Benutzer über die passenden {{site.data.keyword.cloud_notm}} IAM-Plattformrollen verfügt, um sicherzustellen, dass alle kontenbezogenen Aktionen erfolgreich ausgeführt werden können.
     1. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus und klicken Sie auf die Seite **Benutzer**.
     2. Klicken Sie auf den Namen des Benutzers, für den Sie den API-Schlüssel festlegen möchten oder dessen Berechtigungsnachweise Sie für den API-Schlüssel festlegen möchten, und klicken Sie auf die Registerkarte **Zugriffsrichtlinien**.
     3. Wenn der Benutzer nicht über die Plattformrolle **Administrator** für alle {{site.data.keyword.containerlong_notm}}-Cluster in allen Regionen verfügt, [ordnen Sie dem Benutzer diese Plattformrolle zu](#platform).
@@ -284,10 +283,10 @@ Um sicherzustellen, dass alle infrastrukturbezogenen Aktionen im Cluster erfolgr
     4. Klicken Sie auf die Registerkarte **Klassische Infrastruktur** und klicken Sie anschließend auf die Registerkarte **Berechtigungen**.
     5. Wenn für den Benutzer nicht jede Kategorie ausgewählt ist, können Sie ihm über die Dropdown-Liste **Berechtigungssets** die Rolle **Superuser** zuordnen. Oder Sie können jede Kategorie erweitern und dem Benutzer die erforderlichen [Infrastrukturberechtigungen](/docs/containers?topic=containers-access_reference#infra) erteilen.
 
-### Mit nutzungsabhängigem {{site.data.keyword.Bluemix_notm}}-Standardkonto auf Infrastrukturportfolio zugreifen
+### Mit nutzungsabhängigem {{site.data.keyword.cloud_notm}}-Standardkonto auf Infrastrukturportfolio zugreifen
 {: #default_account}
 
-Wenn Sie über ein nutzungsabhängiges {{site.data.keyword.Bluemix_notm}}-Konto verfügen, haben Sie standardmäßig Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer). Der API-Schlüssel wird verwendet, um Infrastrukturressourcen aus dem Portfolio der IBM Cloud-Infrastruktur (SoftLayer) zu bestellen, zum Beispiel neue Workerknoten oder VLANs.
+Wenn Sie über ein nutzungsabhängiges {{site.data.keyword.cloud_notm}}-Konto verfügen, haben Sie standardmäßig Zugriff auf ein verknüpftes Portfolio der IBM Cloud-Infrastruktur. Der API-Schlüssel wird verwendet, um Infrastrukturressourcen aus dem Portfolio der IBM Cloud-Infrastruktur zu bestellen, zum Beispiel neue Workerknoten oder VLANs.
 {: shortdec}
 
 Sie können den aktuellen API-Schlüsseleigner finden, indem Sie [`ibmcloud ks api-key-info --cluster <cluster>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info) ausführen. Wenn Sie feststellen, dass Sie den API-Schlüssel aktualisieren müssen, der für eine Region gespeichert ist, können Sie dies mit dem Befehl [`ibmcloud ks api-key-reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) tun. Dieser Befehl erfordert die {{site.data.keyword.containerlong_notm}}-Administratorzugriffsrichtlinie und speichert den API-Schlüssel des Benutzers, der diesen Befehl ausführt, im Konto.
@@ -299,7 +298,7 @@ Stellen Sie sicher, dass Sie den Schlüssel zurücksetzen möchten und die Auswi
 - Wenn der Kontoeigner keinen API-Schlüssel festlegt, [stellen Sie sicher, dass der Benutzer, der den API-Schlüssel festlegt, über die passenden Berechtigungen verfügt](#owner_permissions).
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festzulegen:
+Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur festzulegen:
 
 1.  Legen Sie für die Region und Ressourcengruppe, in der sich der Cluster befindet, den API-Schlüssel fest.
     1.  Melden Sie sich bei dem Terminal als der Benutzer an, dessen Infrastrukturberechtigungen Sie verwenden möchten.
@@ -321,28 +320,30 @@ Gehen Sie wie folgt vor, um den API-Schlüssel für den Zugriff auf das Portfoli
 
 2. [Erstellen Sie einen Cluster](/docs/containers?topic=containers-clusters). Zum Erstellen des Clusters werden die Berechtigungsnachweise für den API-Schlüssel verwendet, die Sie für die Region und die Ressourcengruppe festgelegt haben.
 
-### Auf anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) zugreifen
+### Auf anderes Konto der klassischen Infrastruktur zugreifen
 {: #credentials}
 
-Anstatt das verknüpfte Standardkonto der IBM Cloud-Infrastruktur (SoftLayer) zu verwenden, um Infrastruktur für Cluster in einer Region zu bestellen, möchten Sie vielleicht ein anderes Konto der IBM Cloud-Infrastruktur (SoftLayer) verwenden, das über das Sie bereits verfügen. Sie können dieses Infrastrukturkonto mit Ihrem {{site.data.keyword.Bluemix_notm}}-Konto verbinden, indem Sie den Befehl [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) verwenden. Die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) werden anstatt der Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet, die für die Region gespeichert sind.
+Anstatt das verknüpfte Standardkonto der IBM Cloud-Infrastruktur zu verwenden, um Infrastruktur für Cluster in einer Region zu bestellen, möchten Sie vielleicht ein anderes Konto der IBM Cloud-Infrastruktur verwenden, das über das Sie bereits verfügen. Sie können dieses Infrastrukturkonto mit Ihrem {{site.data.keyword.cloud_notm}}-Konto verbinden, indem Sie den Befehl [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) verwenden. Die Berechtigungsnachweise für die IBM Cloud-Infrastruktur werden anstatt der Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet, die für die Region gespeichert sind.
 {: shortdesc}
 
-Die Berechtigungsnachweise der IBM Cloud-Infrastruktur (SoftLayer), die unter Verwendung des Befehls `ibmcloud ks credential-set` festgelegt wurden, bleiben nach dem Ende der Sitzung bestehen. Wenn Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur (SoftLayer) entfernen, die manuell mit dem Befehl [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) festgelegt wurden, werden die Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet. Eine solche Änderung der Berechtigungsnachweise für Infrastrukturkonten kann jedoch zu [verwaisten Clustern](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned) führen.
+
+
+Die Berechtigungsnachweise der IBM Cloud-Infrastruktur, die unter Verwendung des Befehls `ibmcloud ks credential-set` festgelegt wurden, bleiben nach dem Ende der Sitzung bestehen. Wenn Sie die Berechtigungsnachweise für die IBM Cloud-Infrastruktur entfernen, die manuell mit dem Befehl [`ibmcloud ks credential-unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) festgelegt wurden, werden die Berechtigungsnachweise für das nutzungsabhängige Standardkonto verwendet. Eine solche Änderung der Berechtigungsnachweise für Infrastrukturkonten kann jedoch zu [verwaisten Clustern](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned) führen.
 {: important}
 
 **Vorbereitende Schritte**:
 - Wenn Sie nicht die Berechtigungsnachweise des Kontoeigners verwenden, [stellen Sie sicher, dass der Benutzer, dessen Berechtigungsnachweise Sie für den API-Schlüssel festlegen möchten, über die passenden Berechtigungen verfügt](#owner_permissions).
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-Gehen Sie wie folgt vor, um die Berechtigungsnachweise für das Infrastrukturkonto für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) festzulegen:
+Gehen Sie wie folgt vor, um die Berechtigungsnachweise für das Infrastrukturkonto für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur festzulegen:
 
-1. Rufen Sie das Infrastrukturkonto ab, das Sie für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer) verwenden möchten. Sie haben verschiedene Optionen, die sich nach Ihrem [aktuellen Kontotyp](#understand_infra) richten.
+1. Rufen Sie das Infrastrukturkonto ab, das Sie für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur verwenden möchten. Sie haben verschiedene Optionen, die sich nach Ihrem [aktuellen Kontotyp](#understand_infra) richten.
 
 2.  Legen Sie die Infrastruktur-API-Berechtigungsnachweise mit dem richtigen Benutzer für das Konto fest.
 
     1.  Rufen Sie die Infrastruktur-API-Berechtigungsnachweise des Benutzers ab. Die Berechtigungsnachweise lauten anders als die IBMid.
 
-        1.  Wählen Sie in der Konsole von [{{site.data.keyword.Bluemix_notm}} ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) die Tabelle unter **Verwalten** > **Zugriff (IAM)** > **Benutzer** aus und klicken Sie auf den Benutzernamen.
+        1.  Wählen Sie in der Konsole von [{{site.data.keyword.cloud_notm}} ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) die Tabelle unter **Verwalten** > **Zugriff (IAM)** > **Benutzer** aus und klicken Sie auf den Benutzernamen.
 
         2.  Suchen Sie im Abschnitt **API-Schlüssel** einen API-Schlüssel für klassische Infrastruktur oder erstellen Sie einen solchen API-Schlüssel.   
 
@@ -372,26 +373,26 @@ Gehen Sie wie folgt vor, um die Berechtigungsnachweise für das Infrastrukturkon
 <br />
 
 
-## Benutzern Zugriff auf Cluster über {{site.data.keyword.Bluemix_notm}} IAM erteilen
+## Benutzern Zugriff auf Cluster über {{site.data.keyword.cloud_notm}} IAM erteilen
 {: #platform}
 
-Definieren Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformverwaltungsrichtlinien und -Servicezugriffsrichtlinien über die [{{site.data.keyword.Bluemix_notm}}-Konsole](#add_users) oder über die [Befehlszeilenschnittstelle (CLI)](#add_users_cli), damit Benutzer mit Clustern in {{site.data.keyword.containerlong_notm}} arbeiten können. Lesen Sie vor Beginn die [Erklärung der Zugriffsrichtlinien und Rollen](#access_policies), um zu überprüfen, was Richtlinien sind, wem Sie Richtlinien zuordnen können und für welche Ressourcen Richtlinien erteilt werden können.
+Definieren Sie {{site.data.keyword.cloud_notm}} IAM-Plattformverwaltungsrichtlinien und -Servicezugriffsrichtlinien über die [{{site.data.keyword.cloud_notm}}-Konsole](#add_users) oder über die [Befehlszeilenschnittstelle (CLI)](#add_users_cli), damit Benutzer mit Clustern in {{site.data.keyword.containerlong_notm}} arbeiten können. Lesen Sie vor Beginn die [Erklärung der Zugriffsrichtlinien und Rollen](#access_policies), um zu überprüfen, was Richtlinien sind, wem Sie Richtlinien zuordnen können und für welche Ressourcen Richtlinien erteilt werden können.
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} IAM-Rollen können keinem Servicekonto zugeordnet werden. Stattdessen können Sie [Servicekonten direkt RBAC-Rollen zuordnen](#rbac).
+{{site.data.keyword.cloud_notm}} IAM-Rollen können keinem Servicekonto zugeordnet werden. Stattdessen können Sie [Servicekonten direkt RBAC-Rollen zuordnen](#rbac).
 {: tip}
 
-### {{site.data.keyword.Bluemix_notm}} IAM-Rollen über die Konsole zuweisen
+### {{site.data.keyword.cloud_notm}} IAM-Rollen über die Konsole zuweisen
 {: #add_users}
 
-Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformmanagementrollen und -Servicezugriffsrollen über die {{site.data.keyword.Bluemix_notm}}-Konsole zuweisen.
+Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.cloud_notm}} IAM-Plattformmanagementrollen und -Servicezugriffsrollen über die {{site.data.keyword.cloud_notm}}-Konsole zuweisen.
 {: shortdesc}
 
 <p class="tip">Weisen Sie keine Plattformrollen zur selben Zeit wie eine Servicerolle zu. Sie müssen Plattform- und Servicerollen separat zuweisen.</p>
 
-Bevor Sie damit beginnen, vergewissern Sie sich, dass Ihnen die Plattformrolle **Administrator** für das {{site.data.keyword.Bluemix_notm}}-Konto zugeordnet ist, in dem Sie arbeiten.
+Bevor Sie damit beginnen, vergewissern Sie sich, dass Ihnen die Plattformrolle **Administrator** für das {{site.data.keyword.cloud_notm}}-Konto zugeordnet ist, in dem Sie arbeiten.
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 
 2. Wählen Sie die Benutzer einzeln aus oder erstellen Sie eine Zugriffsgruppe für Benutzer.
     * **Gehen Sie wie folgt vor, um einem einzelnen Benutzer Rollen zuzuordnen:**
@@ -440,25 +441,25 @@ Bevor Sie damit beginnen, vergewissern Sie sich, dass Ihnen die Plattformrolle *
 
 5.  Damit der Benutzer hinzugefügt werden kann, müssen die RBAC-Berechtigungen mit dem Cluster synchronisiert werden. Der Benutzer, dem der Zugriff erteilt wird, muss das [Kubernetes-Dashboard starten](/docs/containers?topic=containers-app#db_gui), um die Synchronisation einzuleiten. RBAC-Berechtigungen werden im Cache gespeichert, sodass die Synchronisation möglicherweise nicht sofort umgesetzt wird.
 
-### {{site.data.keyword.Bluemix_notm}} IAM-Rollen über die Befehlszeilenschnittstelle zuweisen
+### {{site.data.keyword.cloud_notm}} IAM-Rollen über die Befehlszeilenschnittstelle zuweisen
 {: #add_users_cli}
 
-Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.Bluemix_notm}} IAM-Plattformmanagementrollen und -Seervicezugriffsrollen über die CLI zuweisen.
+Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.cloud_notm}} IAM-Plattformmanagementrollen und -Seervicezugriffsrollen über die CLI zuweisen.
 {: shortdesc}
 
 **Vorbereitende Schritte**:
 
-- Vergewissern Sie sich, dass Ihnen die {{site.data.keyword.Bluemix_notm}} IAM-Plattformrolle `cluster-admin` (Clusteradministrator) für das {{site.data.keyword.Bluemix_notm}}-Konto zugeordnet ist, in dem Sie arbeiten.
+- Vergewissern Sie sich, dass Ihnen die {{site.data.keyword.cloud_notm}} IAM-Plattformrolle `cluster-admin` für das {{site.data.keyword.cloud_notm}}-Konto zugeordnet ist, in dem Sie arbeiten.
 - Stellen Sie sicher, dass der Benutzer dem Konto hinzugefügt wurde. Wenn der Benutzer nicht hinzugefügt wurde, laden Sie den Benutzer in Ihr Konto ein, indem Sie `ibmcloud account user-invite<user@email.com>` ausführen.
 - [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Entscheiden Sie, ob Rollen für den [Plattform- oder Servicezugriff](/docs/containers?topic=containers-users#access_policies) zugewiesen werden sollen. Die CLI-Schritte variieren abhängig von der Zugriffsrolle, die Sie zuweisen möchten:
   * [Plattformrollen über die CLI zuweisen](#add_users_cli_platform)
   * [Servicerollen über die CLI zuweisen](#add_users_cli_service)
 
-**Vorgehensweise zum Zuweisen von {{site.data.keyword.Bluemix_notm}} IAM-_Plattform_-Rollen über die CLI:**
+**Vorgehensweise zum Zuweisen von {{site.data.keyword.cloud_notm}} IAM-_Plattform_-Rollen über die CLI:**
 {: #add_users_cli_platform}
 
-1.  Erstellen Sie eine {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsrichtlinie, um Berechtigungen für {{site.data.keyword.containerlong_notm}} (**`--service-name container-kubernetes`**) festzulegen. Legen Sie den Bereich der Zugriffsrichtlinie entsprechend den Komponenten fest, auf die Sie Zugriff zuweisen wollen.
+1.  Erstellen Sie eine {{site.data.keyword.cloud_notm}} IAM-Zugriffsrichtlinie, um Berechtigungen für {{site.data.keyword.containerlong_notm}} (**`--service-name container-kubernetes`**) festzulegen. Legen Sie den Bereich der Zugriffsrichtlinie entsprechend den Komponenten fest, auf die Sie Zugriff zuweisen wollen.
 
     <table summary="In der Tabelle werden die Zugriffsbereiche beschrieben, auf die Sie die Richtlinie mithilfe von CLI-Flags festlegen können. Die Zeilen sind von links nach rechts zu lesen, wobei der Bereich in Spalte 1, das CLI-Flag in Spalte 2 und die Beschreibung in Spalte 3 enthalten sind.">
     <caption>Optionen zum Festlegen eines Bereichs für die Zugriffsrichtlinie</caption>
@@ -545,7 +546,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
 <br>
 <br>
 
-**Sie weisen {{site.data.keyword.Bluemix_notm}} IAM-_Service_-Rollen über die CLI zu:**
+**Sie weisen {{site.data.keyword.cloud_notm}} IAM-_Service_-Rollen über die CLI zu:**
 {: #add_users_cli_service}
 
 1.  Rufen Sie die Benutzerinformationen für den einzelnen Benutzer oder die Zugriffsgruppe ab, dem bzw. der Sie die Servicerolle zuweisen möchten.
@@ -619,7 +620,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
       <tbody>
         <tr>
         <td>`subjects.attributes`</td>
-        <td>Geben Sie die {{site.data.keyword.Bluemix_notm}} IAM-Details für den einzelnen Benutzer oder die Zugriffsgruppe ein, die Sie zuvor abgerufen haben.
+        <td>Geben Sie die {{site.data.keyword.cloud_notm}} IAM-Details für den einzelnen Benutzer oder die Zugriffsgruppe ein, die Sie zuvor abgerufen haben.
         <ul><li>Legen Sie für einzelne Benutzer den Wert `iam_id` im Feld `name` fest. Geben Sie die zuvor abgerufene **ibmUniqueId** für das Feld `value` ein.</li>
         <li>Legen Sie für Zugriffsgruppen den Wert `access_group_id` im Feld `name` fest. Geben Sie die zuvor abgerufene **ID** im Feld `value` ein.</li></ul></td>
         </tr>
@@ -633,7 +634,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
         <tr>
         <td>`resources.attributes`</td>
         <td>Konfigurieren Sie den Geltungsbereich der Richtlinie für Ihr Konto, den Cluster und den Namensbereich. Belassen Sie die Felder für `"name"` wie im Beispiel angegeben und geben Sie bestimmte `"value"`-Felder wie folgt ein.
-        <ul><li>**Für `"accountId"`**: Geben Sie Ihre {{site.data.keyword.Bluemix_notm}}-Konto-ID ein, die Sie zuvor abgerufen haben.</li>
+        <ul><li>**Für `"accountId"`**: Geben Sie Ihre {{site.data.keyword.cloud_notm}}-Konto-ID ein, die Sie zuvor abgerufen haben.</li>
         <li>**Für `"serviceName"`**: Belassen Sie den Servicenamen wie angegeben: `containers-kubernetes`.</li>
         <li>**Für `"serviceInstance"`**: Geben Sie Ihre Cluster-ID ein. Bei mehreren Clustern trennen Sie die IDs mit Kommas. Führen Sie den Befehl `ibmcloud ks clusters` aus, um Ihre Cluster-ID abzurufen.</li>
         <li>**Für `"namespace"`**: Geben Sie einen Kubernetes-Namensbereich in Ihren Cluster ein. Zum Auflisten der Namensbereiche in Ihrem Cluster führen Sie `kubectl get namespaces` aus. <p class="note">Zum Zuweisen der Zugriffsrichtlinie zu allen Namensbereichen in einem Cluster entfernen Sie den gesamten Eintrag `{"name": "namespace", "value": "<namespace_name"}`.</p></li></td>
@@ -641,7 +642,7 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
       </tbody>
       </table>
 
-3.  Wenden Sie die {{site.data.keyword.Bluemix_notm}}-IAM-Richtlinie auf einen einzelnen Benutzer oder eine Zugriffsgruppe an.
+3.  Wenden Sie die {{site.data.keyword.cloud_notm}} IAM-Richtlinie auf einen einzelnen Benutzer oder eine Zugriffsgruppe an.
     *   Für einzelne Benutzer:
         ```
         ibmcloud iam user-policy-create <user@email.com> --file <filepath>/policy.json
@@ -685,7 +686,6 @@ Erteilen Sie Benutzern Zugriff auf Ihre Cluster, indem Sie {{site.data.keyword.B
         {: pre}
 
     **Beispielausgabe**: Sie erhalten die folgende Beispielausgabe, wenn Sie dem Benutzer `user@email.com` und der Zugriffsgruppe `team1` die Servicerolle **Reader** (Leseberechtigter) zuweisen und anschließend den Befehl `kubectl get rolebinding ibm-view -o yaml -n default` ausführen.
-    
 
     ```
     apiVersion: rbac.authorization.k8s.io/v1
@@ -729,18 +729,20 @@ Von Rollenbindungen werden RBAC-Rollen oder Clusterrollen auf einen bestimmten N
 Von Clusterrollenbindungen werden RBAC-Clusterrollen auf alle Namensbereiche im Cluster angewendet. Wenn Sie eine Clusterrollenbindung verwenden, um eine Clusterrolle anzuwenden, erteilen Sie einem Benutzer Zugriff auf clusterweite Ressourcen wie Workerknoten oder auf namensbereichsorientierte Ressourcen in jedem Namensbereich, wie zum Beispiel Pods.
 
 **Wie werden diese Rollen in meinem Cluster dargestellt?**</br>
-Wenn Benutzer innerhalb eines Clusters mit Kubernetes-Ressourcen interagieren können sollen, müssen Sie den Benutzerzugriff auf einen oder mehrere Namensbereiche durch [{{site.data.keyword.Bluemix_notm}} IAM-Servicerollen](#platform) zuordnen. Jedem Benutzer, dem eine Servicerolle zugeordnet ist, wird automatisch eine entsprechende RBAC-Clusterrolle zugeordnet. Diese RBAC-Clusterrollen sind vordefiniert und ermöglichen es Benutzern, mit Kubernetes-Ressourcen im Cluster zu interagieren. Darüber hinaus wird entweder eine Rollenbindung erstellt, um die Clusterrolle auf einen bestimmten Namensbereich anzuwenden, oder eine Clusterrollenbindung wird erstellt, um die Clusterrolle auf alle Namensbereiche anzuwenden.
+Wenn Benutzer innerhalb eines Clusters mit Kubernetes-Ressourcen interagieren können sollen, müssen Sie den Benutzerzugriff auf einen oder mehrere Namensbereiche durch [{{site.data.keyword.cloud_notm}} IAM-Servicerollen](#platform) zuordnen. Jedem Benutzer, dem eine Servicerolle zugeordnet ist, wird automatisch eine entsprechende RBAC-Clusterrolle zugeordnet. Diese RBAC-Clusterrollen sind vordefiniert und ermöglichen es Benutzern, mit Kubernetes-Ressourcen im Cluster zu interagieren. Darüber hinaus wird entweder eine Rollenbindung erstellt, um die Clusterrolle auf einen bestimmten Namensbereich anzuwenden, oder eine Clusterrollenbindung wird erstellt, um die Clusterrolle auf alle Namensbereiche anzuwenden.
 
-Weitere Informationen zu den Aktionen, die durch die einzelnen RBAC-Rollen zugelassen werden, finden Sie im Referenzabschnitt zu [{{site.data.keyword.Bluemix_notm}} IAM-Servicerollen](/docs/containers?topic=containers-access_reference#service). Informationen zu den Berechtigungen, die durch die einzelnen RBAC-Rollen für einzelne Kubernetes-Ressourcen erteilt werden, finden Sie im Abschnitt zu den [Kubernetes-Ressourcenberechtigungen für RBAC-Rollen](/docs/containers?topic=containers-access_reference#rbac_ref).
-{: tip}
+Weitere Informationen zu den Aktionen, die durch die einzelnen RBAC-Rollen zugelassen werden, finden Sie im Referenzabschnitt zu [{{site.data.keyword.cloud_notm}} IAM-Servicerollen](/docs/containers?topic=containers-access_reference#service). Informationen zu den Berechtigungen, die durch die einzelnen RBAC-Rollen für einzelne Kubernetes-Ressourcen erteilt werden, finden Sie im Abschnitt zu den [Kubernetes-Ressourcenberechtigungen für RBAC-Rollen](/docs/containers?topic=containers-access_reference#rbac_ref).
+
+**Nur OpenShift-Cluster**: Alle Benutzer eines OpenShift-Clusters werden zu den folgenden RBAC-Gruppen von OpenShift hinzugefügt: `basic-users` und `self-provisioners`.
+{: note}
 
 **Kann ich angepasste Rollen oder Clusterrollen erstellen?**
-Die Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) sind vordefinierte Rollen, die automatisch erstellt werden, wenn Sie einem Benutzer die entsprechende {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle zuordnen. Wenn Sie andere Kubernetes-Berechtigungen erteilen möchten, können Sie [angepasste RBAC-Berechtigungen erstellen](#rbac). Angepasste RBAC-Rollen sind zusätzliche Rollen und ändern oder überschreiben keine der RBAC-Rollen, die Sie vielleicht durch Servicezugriffsrollen zugeordnet haben. Beachten Sie, dass Sie zum Erstellen angepasster RBAC-Berechtigungen die IAM-Servicezugriffsrolle **Manager** haben müssen, die Ihnen die Kubernetes-RBAC-Rolle `cluster-admin` (Clusteradministrator) gibt. Die anderen Benutzer benötigen jedoch keine IAM-Servicezugriffsrolle, wenn Sie Ihre eigenen angepassten Kubernetes-RBAC-Rollen verwalten.
+Die Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) sind vordefinierte Rollen, die automatisch erstellt werden, wenn Sie einem Benutzer die entsprechende {{site.data.keyword.cloud_notm}} IAM-Servicerolle zuordnen. Wenn Sie andere Kubernetes-Berechtigungen erteilen möchten, können Sie [angepasste RBAC-Berechtigungen erstellen](#rbac). Angepasste RBAC-Rollen sind zusätzliche Rollen und ändern oder überschreiben keine der RBAC-Rollen, die Sie vielleicht durch Servicezugriffsrollen zugeordnet haben. Beachten Sie, dass Sie zum Erstellen angepasster RBAC-Berechtigungen die IAM-Servicezugriffsrolle **Manager** haben müssen, die Ihnen die Kubernetes-RBAC-Rolle `cluster-admin` (Clusteradministrator) gibt. Die anderen Benutzer benötigen jedoch keine IAM-Servicezugriffsrolle, wenn Sie eigene angepasste Kubernetes-RBAC-Rollen verwalten.
 
 Erstellen Sie eigene angepasste RBAC-Richtlinien? Stellen Sie sicher, dass Sie keine der vorhandenen IBM Rollenbindungen, die sich in einem Cluster befinden, bearbeiten oder neue Rollenbindungen mit dem Namen einer vorhandenen Rollenbindung versehen. Alle Änderungen an von IBM bereitgestellten RBAC-Rollenbindungen werden in regelmäßigen Abständen überschrieben. Erstellen Sie stattdessen eigene Rollenbindungen.
 {: tip}
 
-**Wann muss ich Clusterrollenbindungen und Rollenbindungen verwenden, die nicht an die {{site.data.keyword.Bluemix_notm}} IAM-Berechtigungen gebunden sind, die ich festgelegt habe?**
+**Wann muss ich Clusterrollenbindungen und Rollenbindungen verwenden, die nicht an die {{site.data.keyword.cloud_notm}} IAM-Berechtigungen gebunden sind, die ich festgelegt habe?**
 Es kann sinnvoll sein, Personen Berechtigungen zuzuordnen, die Pods im Cluster erstellen und aktualisieren. Mit [Sicherheitsrichtlinien für Pods](/docs/containers?topic=containers-psp#psp) können Sie vorhandene Clusterrollenbindungen verwenden, die im Cluster enthalten sind, oder können eigene Bindungen erstellen.
 
 Es kann auch sinnvoll sein, Add-ons in den Cluster zu integrieren. Wenn Sie beispielsweise [Helm im Cluster konfigurieren](/docs/containers?topic=containers-helm#public_helm_install), müssen Sie ein Servicekonto für Tiller im Namensbereich `kube-system` und eine Kubernetes-RBAC-Clusterrollenbindung für den Pod `tiller-deploy` erstellen.
@@ -748,14 +750,14 @@ Es kann auch sinnvoll sein, Add-ons in den Cluster zu integrieren. Wenn Sie beis
 ### Angepasste RBAC-Berechtigungen für Benutzer, Gruppen oder Servicekonten erstellen
 {: #rbac}
 
-Die Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) werden automatisch erstellt, wenn Sie die entsprechende {{site.data.keyword.Bluemix_notm}} IAM-Servicerolle zuordnen. Müssen die Clusterzugriffsrichtlinien differenzierter sein, als dies anhand der vordefinierten Berechtigungen möglich ist? Kein Problem. Sie können angepasste RBAC-Rollen und Clusterrollen erstellen.
+Die Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) werden automatisch erstellt, wenn Sie die entsprechende {{site.data.keyword.cloud_notm}} IAM-Servicerolle zuordnen. Müssen die Clusterzugriffsrichtlinien differenzierter sein, als dies anhand der vordefinierten Berechtigungen möglich ist? Kein Problem. Sie können angepasste RBAC-Rollen und Clusterrollen erstellen.
 {: shortdesc}
 
 Sie können einzelnen Benutzern, Benutzergruppen (in Clustern, in denen Kubernetes Version 1.11 oder höher ausgeführt wird) oder Servicekonten angepasste RBAC-Rollen und Clusterrollen zuordnen. Wenn für eine Gruppe eine Bindung erstellt wird, wirkt sich dies auf alle Benutzer aus, die dieser Gruppe hinzugefügt oder die aus dieser Gruppe entfernt werden. Wenn Sie Benutzer zu einer Gruppe hinzufügen, erhalten diese zusätzlich zu den individuellen Zugriffsberechtigungen, die Sie ihnen gewähren, die Zugriffsberechtigungen der Gruppe. Werden sie entfernt, wird ihr Zugriff widerrufen. Beachten Sie, dass Sie Zugriffsgruppen keine Servicekonten hinzufügen können.
 
 Wenn Sie Zugriff auf einen Prozess (zum Beispiel eine Continuous Delivery-Toolchain), der in Pods ausgeführt wird, zuweisen möchten, können Sie [Kubernetes-`Servicekonten` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/) verwenden. Wenn Sie ein Lernprogramm durcharbeiten möchten, in dem die Einrichtung von Servicekonten für Travis und Jenkins und die Zuordnung von angepassten RBAC-Rollen zu den Servicekonten demonstriert wird, lesen Sie den Blogbeitrag zu [Kubernetes Service-Konten (`ServiceAccounts)` zur Verwendung in automatisierten Systemen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automated-systems-515297974982).
 
-Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) ändern. Angepasste RBAC-Rollen sind zusätzliche Rollen und ändern oder überschreiben keine der RBAC-Rollen, die Sie vielleicht durch {{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrollen zugeordnet haben.
+Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten Clusterrollen `view` (Anzeigen), `edit` (Bearbeiten), `admin` (Administrator) und `cluster-admin` (Clusteradministrator) ändern. Angepasste RBAC-Rollen sind zusätzliche Rollen und ändern oder überschreiben keine der RBAC-Rollen, die Sie vielleicht durch {{site.data.keyword.cloud_notm}} IAM-Servicezugriffsrollen zugeordnet haben.
 {: important}
 
 **Soll ich eine Rolle oder Clusterrolle erstellen? Soll sie mit einer Rollenbindung oder einer Clusterrollenbindung angewendet werden?**
@@ -768,8 +770,8 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
 **Vorbereitende Schritte**:
 
 - Wählen Sie Ihr Cluster als Ziel Ihrer [Kubernetes-CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) aus.
-- Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
-- Wenn Sie einzelnen Benutzern oder Benutzern in einer Zugriffsgruppe Zugriff erteilen möchten, stellen Sie sicher, dass dem Benutzter oder der Gruppe mindestens eine [{{site.data.keyword.Bluemix_notm}}IAM-Plattformrolle](#platform) auf der {{site.data.keyword.containerlong_notm}}-Serviceebene zugewiesen wurde.
+- Stellen Sie sicher, dass Sie über die [ {{site.data.keyword.cloud_notm}} IAM-Servicerolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
+- Wenn Sie einzelnen Benutzern oder Benutzern in einer Zugriffsgruppe Zugriff erteilen möchten, stellen Sie sicher, dass dem Benutzter oder der Gruppe mindestens eine [{{site.data.keyword.cloud_notm}}IAM-Plattformrolle](#platform) auf der {{site.data.keyword.containerlong_notm}}-Serviceebene zugewiesen wurde.
 
 **Gehen Sie wie folgt vor, um angepasste RBAC-Berechtigungen zu erstellen:**
 
@@ -903,13 +905,13 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
               <td><code>subjects.kind</code></td>
               <td>Geben Sie für 'kind' eine der folgenden Optionen an:
               <ul><li>`User`: Binden Sie die RBAC-Rolle oder Clusterrolle an einen einzelnen Benutzer im Konto.</li>
-              <li>`Group`: Für Cluster, die Kubernetes 1.11 oder höher ausführen, müssen Sie die RBAC-Rolle bzw. Clusterrolle an eine [{{site.data.keyword.Bluemix_notm}}IAM-Zugriffsgruppe](/docs/iam?topic=iam-groups#groups) in Ihrem Konto binden.</li>
+              <li>`Group`: Für Cluster, die Kubernetes 1.11 oder höher ausführen, müssen Sie die RBAC-Rolle bzw. Clusterrolle an eine [{{site.data.keyword.cloud_notm}}IAM-Zugriffsgruppe](/docs/iam?topic=iam-groups#groups) in Ihrem Konto binden.</li>
               <li>`ServiceAccount`: Binden Sie die RBAC-Rolle bzw. Clusterrolle an ein Servicekonto in einem Namensbereich in Ihrem Cluster.</li></ul></td>
             </tr>
             <tr>
               <td><code>subjects.name</code></td>
               <td><ul><li>Für `User`: Hängen Sie die E-Mail-Adresse des einzelnen Benutzers wie folgt an `IAM#` an: <code>IAM#user@email.com</code>.</li>
-              <li>Für `Group`: Für Cluster, in denen Kubernetes 1.11 oder höher ausgeführt wird, geben Sie den Namen der [{{site.data.keyword.Bluemix_notm}}IAM-Zugriffsgruppe](/docs/iam?topic=iam-groups#groups) in Ihrem Konto an.</li>
+              <li>Für `Group`: Für Cluster, in denen Kubernetes 1.11 oder höher ausgeführt wird, geben Sie den Namen der [{{site.data.keyword.cloud_notm}}IAM-Zugriffsgruppe](/docs/iam?topic=iam-groups#groups) in Ihrem Konto an.</li>
               <li>Für `ServiceAccount`: Geben Sie den Namen des Servicekontos an.</li></ul></td>
             </tr>
             <tr>
@@ -963,7 +965,7 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
         ```
         {: pre}
 
-    2. Überprüfen Sie, dass die Bindung kopiert wurde. Wenn Sie eine {{site.data.keyword.Bluemix_notm}} IAM-Zugriffsgruppe zu der Rollenbindung hinzugefügt haben, wird jeder Benutzer in dieser Gruppe einzeln hinzugefügt, nicht als Zugriffsgruppen-ID.
+    2. Überprüfen Sie, dass die Bindung kopiert wurde. Wenn Sie eine {{site.data.keyword.cloud_notm}} IAM-Zugriffsgruppe zu der Rollenbindung hinzugefügt haben, wird jeder Benutzer in dieser Gruppe einzeln hinzugefügt, nicht als Zugriffsgruppen-ID.
         ```
         kubectl get rolebinding -n <namensbereich_2>
         ```
@@ -971,16 +973,16 @@ Zur Vermeidung unterbrechender Änderungen sollten Sie keine der vordefinierten 
 
 Fahren Sie jetzt, nachdem Sie eine angepasste Kubernetes-RBAC-Rolle oder -Clusterrolle erstellt und gebunden haben, mit den Benutzern fort. Bitten Sie sie, eine Aktion auszuführen, für deren Ausführung sie die Berechtigung aufgrund Ihrer Rolle haben. Zum Beispiel das Löschen eines Pods.
 
-### Vorhandene Berechtigungen durch Aggregieren von Clusterrollen erweitern 
+### Vorhandene Berechtigungen durch Aggregieren von Clusterrollen erweitern
 {: #rbac_aggregate}
 
-Sie können die vorhandenen Berechtigungen Ihrer Benutzer erweitern, indem Sie Clusterrollen mit anderen Clusterrollen aggregieren oder kombinieren. Wenn Sie einem Benutzer eine {{site.data.keyword.Bluemix_notm}}-Servicerolle zuweisen, wird der Benutzer einer [entsprechenden Kubernetes-RBAC-Clusterrolle](/docs/containers?topic=containers-access_reference#service) hinzugefügt. Möglicherweise möchten Sie jedoch bestimmten Benutzern die Ausführung weiterer Operationen erlauben.
+Sie können die vorhandenen Berechtigungen Ihrer Benutzer erweitern, indem Sie Clusterrollen mit anderen Clusterrollen aggregieren oder kombinieren. Wenn Sie einem Benutzer eine {{site.data.keyword.cloud_notm}}-Servicerolle zuweisen, wird der Benutzer einer [entsprechenden Kubernetes-RBAC-Clusterrolle](/docs/containers?topic=containers-access_reference#service) hinzugefügt. Möglicherweise möchten Sie jedoch bestimmten Benutzern die Ausführung weiterer Operationen erlauben.
 {: shortdesc}
 
 Beispiel: Ein Benutzer mit der namensbereichsorientierten Clusterrolle `admin` kann den Befehl `kubectl top pods` nicht verwenden, um Podmetriken für alle Pods im Namensbereich anzuzeigen. Sie können eine Clusterrolle aggregieren, sodass Benutzer in der Clusterrolle `admin` berechtigt sind, den Befehl `top pods` auszuführen. Weitere Informationen enthält die [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#aggregated-clusterroles).
 
 **Was sind Beispiele für gängige Operationen, für die ich die Berechtigungen für eine Standardclusterrolle möglicherweise erweitern möchte?**<br>
-Lesen Sie den Abschnitt zu den [Operationen, die für die einzelnen RBAC-Standardclusterrollen zulässig sind](/docs/containers?topic=containers-access_reference#rbac_ref), um eine gute Vorstellung davon zu erhalten, was Ihre Benutzer tun können, und vergleichen Sie die zulässigen Operationen mit den Operationen, die Ihre Benutzer ausführen können sollen. 
+Lesen Sie den Abschnitt zu den [Operationen, die für die einzelnen RBAC-Standardclusterrollen zulässig sind](/docs/containers?topic=containers-access_reference#rbac_ref), um eine gute Vorstellung davon zu erhalten, was Ihre Benutzer tun können, und vergleichen Sie die zulässigen Operationen mit den Operationen, die Ihre Benutzer ausführen können sollen.
 
 Wenn Ihre Benutzer in derselben Clusterrolle Fehler wie den folgenden für denselben Operationstyp erhalten, können Sie die Clusterrolle erweitern, um diese Operation einzuschließen.
 
@@ -1010,7 +1012,7 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
       - list
     ```
     {: codeblock}
-    
+
     <table>
     <caption>Erklärung der Komponenten der YAML-Datei</caption>
       <thead>
@@ -1053,43 +1055,44 @@ Vorbereitende Schritte: [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern an
 <br />
 
 
-## Infrastrukturberechtigungen anpassen
+## Berechtigungen für klassische Infrastruktur anpassen
 {: #infra_access}
 
-Wenn Sie dem Administrator, der den API-Schlüssel festlegt oder dessen Infrastrukturberechtigungsnachweise festgelegt werden, die Infrastrukturrolle **Superuser** zuordnen, nutzen andere Benutzer im Konto den API-Schlüssel oder die Berechtigungsnachweise gemeinsam für die Ausführung von Infrastrukturaktionen. Sie können dann steuern, welche Infrastrukturaktionen die Benutzer ausführen können, indem Sie die entsprechende [{{site.data.keyword.Bluemix_notm}}IAM-Plattformrolle](#platform) zuordnen. Sie müssen die Berechtigungen des Benutzers für die IBM Cloud-Infrastruktur (SoftLayer) nicht bearbeiten.
+Wenn Sie dem Administrator, der den API-Schlüssel festlegt oder dessen Infrastrukturberechtigungsnachweise festgelegt werden, die Infrastrukturrolle **Superuser** zuordnen, nutzen andere Benutzer im Konto den API-Schlüssel oder die Berechtigungsnachweise gemeinsam für die Ausführung von Infrastrukturaktionen. Sie können dann steuern, welche Infrastrukturaktionen die Benutzer ausführen können, indem Sie die entsprechende [{{site.data.keyword.cloud_notm}}IAM-Plattformrolle](#platform) zuordnen. Sie müssen die Berechtigungen des Benutzers für die IBM Cloud-Infrastruktur nicht bearbeiten.
 {: shortdesc}
 
-Es kann vorkommen, dass Compliance-, Sicherheits- oder Abrechnungsgründe dagegen sprechen, die Infrastrukturrolle **Superuser** dem Benutzer zuzuweisen, der den API-Schlüssel festlegt oder dessen Berechtigungsnachweise mit dem Befehl `ibmcloud ks credential-set` festgelegt werden. Wenn dieser Benutzer jedoch nicht über die Rolle **Superuser** verfügt, können infrastrukturbezogene Aktionen, wie zum Beispiel das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen. Anstatt {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen zu verwenden, um den Infrastrukturzugriff der Benutzer zu steuern, müssen Sie für die Benutzer bestimmte Berechtigungen für die IBM Cloud-Infrastruktur (SoftLayer) festlegen.
 
-Wenn Ihr Konto beispielsweise nicht VFR-fähig ist, muss der Eigner Ihres Kontos für die IBM Cloud-Infrastruktur (SoftLayer) das VLAN-Spanning aktivieren. Der Kontoeigner kann einem Benutzer auch die Berechtigung **Netz > VLAN-Spanning für das Netz verwalten** zuweisen, damit der Benutzer das VLAN-Spanning aktivieren kann. Weitere Informationen finden Sie unter [VLAN-Spanning für VLAN-übergreifende Kommunikation](/docs/containers?topic=containers-subnets#basics_segmentation).
 
-<p class="tip">Sie haben die Infrastrukturberechtigungsnachweise bereits mit dem Befehl `ibmcloud ks credential-set` festgelegt? Sie können prüfen, ob den Berechtigungsnachweisen vorgeschlagene oder erforderliche Infrastrukturberechtigungen fehlen, indem Sie den [Befehl `ibmcloud ks infra-permissions-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) ausführen. Wenn vorgeschlagene oder erforderliche Berechtigungen in der Ausgabe fehlen, können Sie die Schritte in diesem Abschnitt verwenden, um den erforderlichen Zugriff zuzuordnen.</p>
+Es kann vorkommen, dass Compliance-, Sicherheits- oder Abrechnungsgründe dagegen sprechen, die Infrastrukturrolle **Superuser** dem Benutzer zuzuweisen, der den API-Schlüssel festlegt oder dessen Berechtigungsnachweise mit dem Befehl `ibmcloud ks credential-set` festgelegt werden. Wenn dieser Benutzer jedoch nicht über die Rolle **Superuser** verfügt, können infrastrukturbezogene Aktionen, wie zum Beispiel das Erstellen eines Clusters oder das erneute Laden eines Workerknotens, fehlschlagen. Anstatt {{site.data.keyword.cloud_notm}} IAM-Plattformrollen zu verwenden, um den Infrastrukturzugriff der Benutzer zu steuern, müssen Sie für die Benutzer bestimmte Berechtigungen für die IBM Cloud-Infrastruktur festlegen.
 
-Stellen Sie zunächst sicher, dass Sie der Kontoeigner sind oder über die Zugriffsberechtigung **Superuser** sowie Zugriff auf alle Geräte verfügen. Sie können nicht einen Benutzerzugriff erteilen, über den Sie selbst nicht verfügen.
+Wenn Ihr Konto beispielsweise nicht VFR-fähig ist, muss der Eigner Ihres Kontos für die IBM Cloud-Infrastruktur VLAN Spanning aktivieren. Der Kontoeigner kann einem Benutzer auch die Berechtigung **Netz > VLAN Spanning für das Netz verwalten** zuweisen, damit der Benutzer VLAN Spanning aktivieren kann. Weitere Informationen finden Sie unter [VLAN Spanning für VLAN-übergreifende Kommunikation](/docs/containers?topic=containers-subnets#basics_segmentation).
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+Vorbereitende Schritte:
+*   Stellen Sie sicher, dass Sie der Kontoeigner sind oder über die Zugriffsberechtigung **Superuser** sowie Zugriff auf alle Einheiten verfügen. Sie können nicht einen Benutzerzugriff erteilen, über den Sie selbst nicht verfügen.
+*   Überprüfen Sie die [erforderlichen und vorgeschlagenen Berechtigungen für die klassische Infrastruktur](/docs/containers?topic=containers-access_reference#infra).
 
+Der Zugriff für die klassische Infrastruktur kann über die [Konsole](#infra_console) oder die [CLI](#infra_cli) erteilt werden.
+
+### Zugriff auf Infrastruktur über Konsole zuweisen
+{: #infra_console}
+
+
+
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 2. Klicken Sie auf die Seite **Benutzer** und anschließend auf den Namen des Benutzers, für den Sie Berechtigungen festlegen möchten.
-
 3. Klicken Sie auf die Registerkarte **Klassische Infrastruktur** und klicken Sie anschließend auf die Registerkarte **Berechtigungen**.
-
 4. Passen Sie den Zugriff des Benutzers an. Welche Berechtigungen die Benutzer benötigen, ist davon abhängig, welche Infrastrukturressourcen sie verwenden müssen. Sie haben zwei Möglichkeiten für die Zuordnung des Zugriffs:
     * Verwenden Sie die Dropdown-Liste **Berechtigungssets**, um eine der folgenden vordefinierten Rollen zuzuweisen. Klicken Sie nach der Auswahl einer Rolle auf **Festlegen**.
         * **Nur anzeigen** erteilt dem Benutzer nur die Berechtigungen zum Anzeigen von Infrastrukturdetails.
         * **Basisbenutzer** erteilt dem Benutzer einige, aber nicht alle Infrastrukturberechtigungen.
         * **Superuser** erteilt dem Benutzer alle Infrastrukturberechtigungen.
     * Wählen Sie einzelne Berechtigungen für jede Kategorie aus. Informationen zum Überprüfen von Berechtigungen, die für die Ausführung allgemeiner Tasks in {{site.data.keyword.containerlong_notm}} erforderlich sind, finden Sie im Abschnitt [Benutzerzugriffsberechtigungen](/docs/containers?topic=containers-access_reference#infra).
-
 5.  Klicken Sie auf **Speichern**.
-
 6.  Wählen Sie auf der Registerkarte **Gerät** die Geräte aus, auf die Zugriff erteilt werden soll.
-
-    * In der Gruppe **Typ auswählen** können Sie Zugriff auf alle Bare-Metal-Server, dedizierten Server und virtuellen Server erteilten, sodass Benutzer mit allen [Maschinentypen für Workerknoten](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) arbeiten können.
+    * In der Gruppe **Typ auswählen** können Sie Zugriff auf alle Bare-Metal-Server, dedizierten Server und virtuellen Server erteilten, sodass Benutzer mit allen [Typen für Workerknoten](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) arbeiten können.
     * In der Gruppe **Späteren Zugriff aktivieren** können Sie dem Benutzer Zugriff auf alle zukünftigen Bare-Metal-Server, dedizierten Server und virtuellen Server erteilen.
     * Stellen Sie in der Tabelle der Geräte sicher, dass die entsprechenden Geräte ausgewählt sind.
-
 7. Klicken Sie zum Speichern Ihrer Änderungen auf **Festlegen**.
-
 8. **Wichtig**: Wenn Sie Berechtigungen zuweisen, sodass ein Benutzer Cluster und Workerknoten verwalten kann, müssen Sie dem Benutzer Zugriff für die Arbeit mit Supportfällen zuweisen.
   1. Klicken Sie auf die Registerkarte **Zugriffsrichtlinien** und anschließend auf **Zugriff zuweisen**.
   2. Klicken Sie auf die Karte **Zugriff auf Kontoverwaltungsservices zuweisen** .
@@ -1100,16 +1103,78 @@ Stellen Sie zunächst sicher, dass Sie der Kontoeigner sind oder über die Zugri
 Laden Sie gerade Berechtigungen herunter? Die Ausführung dieser Aktion kann einige Minuten in Anspruch nehmen.
 {: tip}
 
+### Zugriff auf Infrastruktur über CLI zuweisen
+{: #infra_cli}
+
+
+
+1.  Überprüfen Sie, ob in den Berechtigungsnachweisen für den Zugriff auf die klassische Infrastruktur für {{site.data.keyword.containerlong_notm}} in der Region und der Ressourcengruppe erforderliche oder empfohlene Berechtigungen fehlen.
+    ```
+    ibmcloud ks infra-permissions-get --region <region>
+    ```
+    {: pre}
+
+    Beispielausgabe, wenn der Zugriff auf die klassische Infrastruktur auf einem API-Schlüssel basiert.
+    ```
+    ...with infrastructure access set up by linked account API key.
+    ```
+    {: screen}
+
+    Beispielausgabe, wenn der Zugriff auf die klassische Infrastruktur auf manuell definierten Berechtigungsnachweisen basiert.
+    ```
+    ...with infrastructure access set up by manually-set IaaS credentials.
+    ```
+    {: screen}
+
+2.  Rufen Sie den Benutzer ab, dessen Berechtigungsnachweise für die klassische Infrastruktur verwendet werden sollen.
+    *   **API-Schlüssel**: Überprüfen Sie den verwendeten API-Schlüssel auf die Angaben zur Region und Ressourcengruppe des Clusters. Notieren Sie die Werte für **Name** und **E-Mail** für den Eigner des API-Schlüssels in der Ausgabe des folgenden Befehls.
+        ```
+        ibmcloud ks api-key-info --cluster <clustername_oder_-id>
+        ```
+        {: pre}
+    *  **Manuell definierte Berechtigungsnachweise**: Entnehmen Sie den Benutzernamen der Ausgabe des folgenden Befehls.    
+        ```
+        ibmcloud ks credential-get --region <region>
+        ```
+        {: pre}
+
+    Möchten Sie den Eigner der Berechtigungsnachweise für die Infrastruktur ändern? Lesen Sie die Informationen zum [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) `ibmcloud ks api-key-reset` oder zum [Befehl](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) `ibmcloud ks credential-set`.
+    {: tip}
+
+3.  Listen Sie die Benutzer in Ihrem Konto der klassischen Infrastruktur auf und notieren Sie den Wert für **id** des Benutzers, dessen Berechtigungsnachweise manuell oder mithilfe des API-Schlüssels festgelegt wurden.
+    ```
+    ibmcloud sl user list
+    ```
+    {: pre}
+4.  Listen Sie die aktuellen Berechtigungen für die klassische Infrastruktur auf, die dem Benutzer zugeordnet wurden. Notieren Sie den Wert für **KeyName** der Berechtigung, die Sie ändern möchten.
+    ```
+    ibmcloud sl user permissions <benutzer-id>
+    ```
+    {: pre}
+5.  Bearbeiten Sie die Berechtigung des Benutzers. Geben Sie für das Flag `--enable` die Einstellung `true` ein, um die Berechtigung zuzuweisen, oder geben Sie `false` ein, um die Berechtigung zu entfernen.
+    ```
+    ibmcloud sl user permission-edit <benutzer-id> --permission <schlüsselname_berechtigung> --enable (true|false)
+    ```
+    {: pre}
+
+    Gehen Sie wie folgt vor, um den Benutzerzugriff auf alle Berechtigungen zuzuweisen oder zu entfernen:
+    ```
+    ibmcloud sl user permission-edit <benutzer-id> --permission ALL --enable (true|false)
+    ```
+    {: pre}
+
+6.  Informationen zu einzelnen erforderlichen oder empfohlenen Berechtigungen finden Sie in der Tabelle [Infrastrukturrollen](/docs/containers?topic=containers-access_reference#infra).
+
 <br />
 
 
 ## Benutzerzugriffsberechtigungen entfernen
 {: #removing}
 
-Wenn ein Benutzer keine spezifischen Zugriffsberechtigungen mehr braucht oder wenn er Ihr Unternehmen verlässt, kann der {{site.data.keyword.Bluemix_notm}}-Kontoeigner die Berechtigungen des Benutzers entfernen.
+Wenn ein Benutzer keine spezifischen Zugriffsberechtigungen mehr braucht oder wenn er Ihr Unternehmen verlässt, kann der {{site.data.keyword.cloud_notm}}-Kontoeigner die Berechtigungen des Benutzers entfernen.
 {: shortdesc}
 
-Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Benutzer selbst vollständig aus Ihrem Konto entfernen, müssen Sie sicherstellen, dass die Infrastrukturberechtigungsnachweise des Benutzers nicht verwendet werden, um den API-Schlüssel festzulegen oder den Befehl `ibmcloud ks credential-set` auszuführen. Andernfalls verlieren die anderen Benutzer in dem Konto möglicherweise den Zugriff auf die IBM Cloud-Infrastruktur (SoftLayer) oder die infrastrukturbezogenen Befehle schlagen fehl.
+Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Benutzer selbst vollständig aus Ihrem Konto entfernen, müssen Sie sicherstellen, dass die Infrastrukturberechtigungsnachweise des Benutzers nicht verwendet werden, um den API-Schlüssel festzulegen oder den Befehl `ibmcloud ks credential-set` auszuführen. Andernfalls verlieren die anderen Benutzer in dem Konto möglicherweise den Zugriff auf das Portal der IBM Cloud-Infrastruktur und die infrastrukturbezogenen Befehle schlagen fehl.
 {: important}
 
 1. Geben Sie für Ihren CLI-Kontext eine Zielregion oder Zielressourcengruppe an, in der Sie über Cluster verfügen.
@@ -1119,12 +1184,12 @@ Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Ben
     {: pre}
 
 2. Überprüfen Sie den Eigner der API-Schlüssels oder der Infrastrukturberechtigungsnachweise, die für diese Region und Ressourcengruppe festgelegt wurden.
-    * Wenn Sie den [API-Schlüssel für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](#default_account) verwenden:
+    * Wenn Sie den [API-Schlüssel für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur](#default_account) verwenden:
         ```
         ibmcloud ks api-key-info --cluster <clustername_oder_-id>
         ```
         {: pre}
-    * Wenn Sie [Infrastrukturberechtigungsnachweise für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur (SoftLayer)](#credentials) festlegen:
+    * Wenn Sie [Infrastrukturberechtigungsnachweise für den Zugriff auf das Portfolio der IBM Cloud-Infrastruktur](#credentials) festlegen:
         ```
         ibmcloud ks credential-get --region <region>
         ```
@@ -1151,14 +1216,14 @@ Bevor Sie die spezifischen Zugriffsberechtigungen eines Benutzers oder einen Ben
 ### Benutzer aus Ihrem Konto entfernen
 {: #remove_user}
 
-Wenn ein Benutzer in Ihrem Konto Ihre Organisation verlässt, müssen Sie die Berechtigungen für diesen Benutzer sorgfältig entfernen, um sicherzustellen, dass Sie keine Cluster oder anderen Ressourcen verwaisen lassen. Anschließend können Sie den Benutzer aus Ihrem {{site.data.keyword.Bluemix_notm}}-Konto entfernen.
+Wenn ein Benutzer in Ihrem Konto Ihre Organisation verlässt, müssen Sie die Berechtigungen für diesen Benutzer sorgfältig entfernen, um sicherzustellen, dass Sie keine Cluster oder anderen Ressourcen verwaisen lassen. Nachdem Sie die Berechtigungen entfernt haben, können Sie auch den Benutzer aus Ihrem {{site.data.keyword.cloud_notm}}-Konto entfernen.
 {: shortdesc}
 
 Vorbereitende Schritte:
 - [Stellen Sie sicher, dass die Infrastrukturberechtigungsnachweise des Benutzers nicht verwendet werden, um den API-Schlüssel festzulegen oder den Befehl `ibmcloud ks credential-set` auszuführen](#removing).
-- Wenn andere Serviceinstanzen in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto vorhanden sind, die der Benutzer unter Umständen bereitgestellt hat, lesen Sie in der Dokumentation für diese Services nach, ob bestimmte Schritte ausgeführt werden müssen, bevor Sie den Benutzer aus dem Konto entfernen.
+- Wenn andere Serviceinstanzen in Ihrem {{site.data.keyword.cloud_notm}}-Konto vorhanden sind, die der Benutzer unter Umständen bereitgestellt hat, lesen Sie in der Dokumentation für diese Services nach, ob bestimmte Schritte ausgeführt werden müssen, bevor Sie den Benutzer aus dem Konto entfernen.
 
-Vor dem Verlassen des Benutzers muss der {{site.data.keyword.Bluemix_notm}}-Kontoeigner die folgenden Schritte ausführen, um unterbrechende Änderungen in {{site.data.keyword.containerlong_notm}} zu vermeiden.
+Vor dem Verlassen des Benutzers muss der {{site.data.keyword.cloud_notm}}-Kontoeigner die folgenden Schritte ausführen, um unterbrechende Änderungen in {{site.data.keyword.containerlong_notm}} zu vermeiden.
 
 1. Bestimmen Sie, welche Cluster der Benutzer erstellt hat.
     1.  Melden Sie sich bei der [{{site.data.keyword.containerlong_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/clusters) an.
@@ -1176,12 +1241,12 @@ Vor dem Verlassen des Benutzers muss der {{site.data.keyword.Bluemix_notm}}-Kont
         * Wenn der Benutzer nicht Eigner des Infrastrukturkontos ist, haben andere Benutzer Zugriff auf dieses Infrastrukturkonto und es bleibt nach dem Verlassen des Benutzers erhalten. Sie können die Arbeit mit diesen Clustern in Ihrem Konto fortsetzen. Stellen Sie sicher, dass mindestens ein anderer Benutzer über die [Plattformrolle **Administrator**](#platform) für die Cluster verfügt.
         * Wenn der Benutzer Eigner des Infrastrukturkontos ist, wird das Infrastrukturkonto beim Verlassen des Benutzers gelöscht. Sie können die Arbeit mit diesen Clustern nicht fortsetzen. Um zu vermeiden, dass Cluster verwaisen, muss der Benutzer die Cluster vor dem Verlassen löschen. Wenn der Benutzer die Organisation verlassen hat, aber die Cluster nicht gelöscht wurden, müssen Sie den Befehl `ibmcloud ks credential-set` verwenden, um Ihre Infrastrukturberechtigungsnachweise in das Konto zu ändern, in dem die Workerknoten des Clusters bereitgestellt werden, und den Cluster löschen. Weitere Informationen finden Sie unter [Ändern oder Löschen der Infrastruktur in verwaistem Cluster nicht möglich](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
-3. Entfernen Sie den Benutzer aus dem {{site.data.keyword.Bluemix_notm}}-Konto.
+3. Entfernen Sie den Benutzer aus dem {{site.data.keyword.cloud_notm}}-Konto.
     1. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus. Klicken Sie dann auf die Seite **Benutzer**.
     2. Klicken Sie auf den Benutzernamen des Benutzers.
-    3. Klicken Sie im Tabelleneintrag für den Benutzer auf **Aktionsmenü** ![Symbol für Aktionsmenü](../icons/action-menu-icon.svg "Symbol für Aktionsmenü") **> Benutzer entfernen**. Wenn Sie einen Benutzer entfernen, werden die ihm zugeordneten {{site.data.keyword.Bluemix_notm}} IAM-Plattformrollen, Cloud Foundry-Rollen und IBM Cloud-Infrastrukturrollen (SoftLayer) automatisch entfernt.
+    3. Klicken Sie im Tabelleneintrag für den Benutzer auf **Aktionsmenü** ![Symbol für Aktionsmenü](../icons/action-menu-icon.svg "Symbol für Aktionsmenü") **> Benutzer entfernen**. Wenn Sie einen Benutzer entfernen, werden die ihm zugeordneten {{site.data.keyword.cloud_notm}} IAM-Plattformrollen, Cloud Foundry-Rollen und IBM Cloud-Infrastrukturrollen automatisch entfernt.
 
-4.  Wenn {{site.data.keyword.Bluemix_notm}} IAM-Plattformberechtigungen entfernt werden, werden die Berechtigungen des Benutzers auch automatisch aus den zugeordneten vordefinierten RBAC-Rollen entfernt. Wenn Sie jedoch angepasste RBAC-Rollen oder Clusterrollen erstellt haben, [entfernen Sie den Benutzer aus diesen RBAC-Rollenbindungen oder Clusterrollenbindungen](#remove_custom_rbac).<p class="note">Der Prozess zum Entfernen von {{site.data.keyword.Bluemix_notm}} IAM-Berechtigungen wird asynchron ausgeführt und kann einige Zeit dauern.</p>
+4.  Wenn {{site.data.keyword.cloud_notm}} IAM-Plattformberechtigungen entfernt werden, werden die Berechtigungen des Benutzers auch automatisch aus den zugeordneten vordefinierten RBAC-Rollen entfernt. Wenn Sie jedoch angepasste RBAC-Rollen oder Clusterrollen erstellt haben, [entfernen Sie den Benutzer aus diesen RBAC-Rollenbindungen oder Clusterrollenbindungen](#remove_custom_rbac).<p class="note">Der Prozess zum Entfernen von {{site.data.keyword.cloud_notm}} IAM-Berechtigungen wird asynchron ausgeführt und kann einige Zeit dauern.</p>
 
 
 ### Bestimmte Berechtigungen entfernen
@@ -1190,9 +1255,9 @@ Vor dem Verlassen des Benutzers muss der {{site.data.keyword.Bluemix_notm}}-Kont
 Wenn Sie bestimmte Berechtigungen für einen Benutzer entfernen möchten, können Sie einzelne Zugriffsrichtlinien entfernen, die dem Benutzer zugeordnet wurden.
 {: shortdesc}
 
-[Stellen Sie zunächst sicher, dass die Infrastrukturberechtigungsnachweise des Benutzers nicht verwendet werden, um den API-Schlüssel festzulegen oder den Befehl `ibmcloud ks credential-set` auszuführen](#removing). Anschließend können Sie Folgendes entfernen:
+[Stellen Sie zunächst sicher, dass die Infrastrukturberechtigungsnachweise des Benutzers nicht verwendet werden, um den API-Schlüssel festzulegen oder den Befehl `ibmcloud ks credential-set` auszuführen](#removing). Nach der Überprüfung können Sie Folgendes entfernen:
 * [Einen Benutzer aus einer Zugriffsgruppe](#remove_access_group)
-* [Die {{site.data.keyword.Bluemix_notm}} IAM-Plattformberechtigungen und zugeordneten RBAC-Berechtigungen eines Benutzers](#remove_iam_rbac)
+* [Die {{site.data.keyword.cloud_notm}} IAM-Plattformberechtigungen und zugeordneten RBAC-Berechtigungen eines Benutzers](#remove_iam_rbac)
 * [Die angepassten RBAC-Berechtigungen eines Benutzers](#remove_custom_rbac)
 * [Die Cloud Foundry-Berechtigungen eines Benutzers](#remove_cloud_foundry)
 * [Die Infrastrukturberechtigungen eines Benutzers](#remove_infra)
@@ -1200,18 +1265,18 @@ Wenn Sie bestimmte Berechtigungen für einen Benutzer entfernen möchten, könne
 #### Benutzer aus einer Zugriffsgruppe entfernen
 {: #remove_access_group}
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 2. Klicken Sie auf die Seite **Benutzer** und anschließend auf den Namen des Benutzers, für den Sie Berechtigungen entfernen möchten.
 3. Klicken Sie auf die Registerkarte **Zugriffsgruppe**.
 4. Klicken Sie im Tabelleneintrag für die Zugriffsgruppe auf **Aktionsmenü** ![Symbol für Aktionsmenü](../icons/action-menu-icon.svg "Symbol für Aktionsmenü") **> Benutzer entfernen**. Wenn der Benutzer entfernt wird, werden alle Rollen, die der Zugriffsgruppe zugeordnet wurden, von dem Benutzer entfernt.
 
-#### {{site.data.keyword.Bluemix_notm}} IAM-Plattformberechtigungen und zugeordnete vordefinierte RBAC-Berechtigungen entfernen
+#### {{site.data.keyword.cloud_notm}} IAM-Plattformberechtigungen und zugeordnete vordefinierte RBAC-Berechtigungen entfernen
 {: #remove_iam_rbac}
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 2. Klicken Sie auf die Seite **Benutzer** und anschließend auf den Namen des Benutzers, für den Sie Berechtigungen entfernen möchten.
 3. Klicken Sie im Tabelleneintrag für den Benutzer auf **Aktionsmenü** ![Symbol für Aktionsmenü](../icons/action-menu-icon.svg "Symbol für Aktionsmenü") **> Benutzer entfernen**.
-5. Wenn {{site.data.keyword.Bluemix_notm}} IAM-Plattformberechtigungen entfernt werden, werden die Berechtigungen des Benutzers auch automatisch aus den zugeordneten vordefinierten RBAC-Rollen entfernt. Um die RBAC-Rollen mit den Änderungen zu aktualisieren, führen Sie `ibmcloud ks cluster-config` aus. Wenn Sie jedoch [angepasste RBAC-Rollen oder Clusterrollen](#rbac) erstellt haben, müssen Sie den Benutzer aus den `.yaml`-Dateien für diese RBAC-Rollenbindungen oder Clusterrollenbindungen entfernen. Im Folgenden finden Sie Schritte zum Entfernen angepasster RBAC-Berechtigungen.
+5. Wenn {{site.data.keyword.cloud_notm}} IAM-Plattformberechtigungen entfernt werden, werden die Berechtigungen des Benutzers auch automatisch aus den zugeordneten vordefinierten RBAC-Rollen entfernt. Um die RBAC-Rollen mit den Änderungen zu aktualisieren, führen Sie `ibmcloud ks cluster-config` aus. Wenn Sie jedoch [angepasste RBAC-Rollen oder Clusterrollen](#rbac) erstellt haben, müssen Sie den Benutzer aus den `.yaml`-Dateien für diese RBAC-Rollenbindungen oder Clusterrollenbindungen entfernen. Im nächsten Abschnitt finden Sie die Schritte zum Entfernen angepasster RBAC-Berechtigungen.
 
 #### Angepasste RBAC-Berechtigungen entfernen
 {: #remove_custom_rbac}
@@ -1231,10 +1296,10 @@ Wenn Sie keine angepassten RBAC-Berechtigungen mehr benötigen, können Sie sie 
 #### Cloud Foundry-Berechtigungen entfernen
 {: #remove_cloud_foundry}
 
-Um alle Cloud Foundry-Berechtigungen eines Benutzers zu entfernen, können Sie die Organisationsrollen des Benutzers entfernen. Wenn Sie lediglich die Fähigkeit eines Benutzers, beispielsweise Services in einem Cluster zu binden, entfernen möchten, entfernen Sie die Bereichsrollen des Benutzers.
+Um alle Cloud Foundry-Berechtigungen eines Benutzers zu entfernen, können Sie die Organisationsrollen des Benutzers entfernen. Wenn Sie lediglich die Fähigkeit eines Benutzers (z. B. zum Binden von Services in einem Cluster) entfernen möchten, entfernen Sie ausschließlich die Bereichsrollen des Benutzers.
 {: shortdesc}
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 2. Klicken Sie auf die Seite **Benutzer** und anschließend auf den Namen des Benutzers, für den Sie Berechtigungen entfernen möchten.
 3. Klicken Sie auf die Registerkarte **Cloud Foundry-Zugriff**.
     * Gehen Sie wie folgt vor, um die Bereichsrolle eines Benutzers zu entfernen:
@@ -1249,14 +1314,18 @@ Um alle Cloud Foundry-Berechtigungen eines Benutzers zu entfernen, können Sie d
         4. Um alle Organisationsrollen zu löschen, wählen Sie in der Dropdown-Liste **Keine Organisationsrolle** aus.
         5. Klicken Sie auf **Rolle speichern**.
 
-#### IBM Cloud-Infrastrukturberechtigungen (SoftLayer) entfernen
+#### Berechtigungen für klassische Infrastruktur entfernen
 {: #remove_infra}
 
-Sie können IBM Cloud-Infrastrukturberechtigungen (SoftLayer) für einen Benutzer über die {{site.data.keyword.Bluemix_notm}}-Konsole entfernen.
+Sie können IBM Cloud-Infrastrukturberechtigungen für einen Benutzer über die {{site.data.keyword.cloud_notm}}-Konsole entfernen.
 {: shortdesc}
 
-1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
+
+
+1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. Wählen Sie in der Menüleiste **Verwalten > Zugriff (IAM)** aus.
 2. Klicken Sie auf die Seite **Benutzer** und anschließend auf den Namen des Benutzers, für den Sie Berechtigungen entfernen möchten.
-4. Klicken Sie auf die Registerkarte **Klassische Infrastruktur** und klicken Sie anschließend auf die Registerkarten **Berechtigungen, Geräte oder VPN-Teilnetze**.
-5. Wählen Sie auf den einzelnen Registerkarten bestimmte Berechtigungen ab.
-6. Klicken Sie zum Speichern Ihrer Änderungen auf **Festlegen** und **Speichern**. Berechtigungen werden nach wenigen Minuten herabgestuft.
+3. Klicken Sie auf die Registerkarte **Klassische Infrastruktur** und klicken Sie anschließend auf die Registerkarten **Berechtigungen, Geräte oder VPN-Teilnetze**.
+4. Wählen Sie auf den einzelnen Registerkarten bestimmte Berechtigungen ab.
+5. Klicken Sie zum Speichern Ihrer Änderungen auf **Festlegen** und **Speichern**. Berechtigungen werden nach wenigen Minuten herabgestuft.
+
+

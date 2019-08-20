@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -24,10 +24,11 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Planejando seu cluster para alta disponibilidade
 {: #ha_clusters}
 
-Projete seu cluster padrão para máxima disponibilidade e capacidade para seu app com o {{site.data.keyword.containerlong}}.
+Projete o seu cluster Kubernetes ou OpenShift da comunidade padrão para obter a máxima disponibilidade e capacidade para o seu aplicativo com o {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 Seus usuários são menos propensos a experienciar o tempo de inatividade quando você distribui seus apps em múltiplos nós do trabalhador, zonas e clusters. Recursos integrados, como balanceamento de carga e isolamento, aumentam a resiliência com relação a potenciais
@@ -107,17 +108,17 @@ Não reinicie ou reinicialize um nó do trabalhador durante uma indisponibilidad
 Para proteger seu cluster contra uma falha do principal do Kubernetes ou em regiões em que os clusters de multizona não estão disponíveis, é possível [configurar múltiplos clusters que estão conectados a VLANs públicas e privadas e conectá-los a um balanceador de carga global](#multiple_clusters).
 
 **Preciso fazer algo para que o principal possa se comunicar com os trabalhadores nas zonas?**</br>
-Sim. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region<region>`.
+Sim. Se você tiver múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou em um cluster multizona, você deverá ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud para que os nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o seu representante de conta de infraestrutura do IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se a ampliação de VLAN já está ativada, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 **Como posso permitir que meus usuários acessem meu aplicativo por meio da Internet pública?**</br>
 É possível expor seus apps usando um balanceador de carga do aplicativo (ALB) do Ingress ou um serviço de balanceador de carga.
 
-- **Balanceador de carga do aplicativo (ALB) do Ingress** Por padrão, os ALBs públicos são automaticamente criados e ativados em cada zona em seu cluster. Um multizone load balancer (MZLB) do Cloudflare para seu cluster também é criado e implementado automaticamente para que exista 1 MZLB para cada região. O MZLB coloca os endereços IP de seus ALBs atrás do mesmo nome do host e ativa as verificações de funcionamento nesses endereços IP para determinar se eles estão disponíveis ou não. Por exemplo, se você tiver nós do trabalhador em 3 zonas na região Leste dos EUA, o nome do host `yourcluster.us-east.containers.appdomain.cloud` terá 3 endereços IP de ALB. O funcionamento do MZLB verifica o IP do ALB público em cada zona de uma região e mantém os resultados de consulta de DNS atualizados com base nessas verificações de funcionamento. Para obter mais informações, consulte [Componentes e arquitetura do Ingress](/docs/containers?topic=containers-ingress#planning).
+- **Balanceador de carga do aplicativo (ALB) do Ingress** Por padrão, os ALBs públicos são automaticamente criados e ativados em cada zona em seu cluster. Um multizone load balancer (MZLB) do Cloudflare para seu cluster também é criado e implementado automaticamente para que exista 1 MZLB para cada região. O MZLB coloca os endereços IP de seus ALBs atrás do mesmo nome do host e ativa as verificações de funcionamento nesses endereços IP para determinar se eles estão disponíveis ou não. Por exemplo, se você tiver nós do trabalhador em 3 zonas na região Leste dos EUA, o nome do host `yourcluster.us-east.containers.appdomain.cloud` terá 3 endereços IP de ALB. O funcionamento do MZLB verifica o IP do ALB público em cada zona de uma região e mantém os resultados de consulta de DNS atualizados com base nessas verificações de funcionamento. Para obter mais informações, consulte [Componentes e arquitetura do Ingress](/docs/containers?topic=containers-ingress-about#ingress_components).
 
 - **Serviços do balanceador de carga:** os serviços do balanceador de carga são configurados em somente uma zona. As solicitações recebidas para seu app são roteadas dessa zona para todas as instâncias do app em outras zonas. Se essa zona se tornar indisponível, seu app poderá não ser acessível por meio da Internet. É possível configurar serviços adicionais de balanceador de carga em outras zonas para considerar uma falha de zona única. Para obter mais informações, consulte [serviços de balanceador de carga](/docs/containers?topic=containers-loadbalancer#multi_zone_config) altamente disponíveis.
 
 **Posso configurar o armazenamento persistente para meu cluster multizona?**</br>
-Para o armazenamento persistente altamente disponível, use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about). Também é possível tentar uma solução de armazenamento definida por software (SDS), como a [Portworx](/docs/containers?topic=containers-portworx#portworx), que usa [máquinas SDS](/docs/containers?topic=containers-planning_worker_nodes#sds). Para obter mais informações, consulte [Comparação de opções de armazenamento persistente para clusters de múltiplas zonas](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+Para o armazenamento persistente altamente disponível, use um serviço de nuvem como o [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage). Também é possível tentar uma solução de armazenamento definida por software (SDS), como a [Portworx](/docs/containers?topic=containers-portworx#portworx), que usa [máquinas SDS](/docs/containers?topic=containers-planning_worker_nodes#sds). Para obter mais informações, consulte [Comparação de opções de armazenamento persistente para clusters de múltiplas zonas](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 O arquivo NFS e o armazenamento de bloco não são compartilháveis entre as zonas. Os volumes persistentes podem ser usados somente na zona na qual o dispositivo de armazenamento real está localizado. Se você tem armazenamento de arquivo ou de bloco do NFS existente em seu cluster que deseja continuar a usar, deve-se aplicar rótulos de região e zona aos volumes persistentes existentes. Esses rótulos ajudam o kube-scheduler a determinar onde planejar um app que usa o volume persistente. Execute o comando a seguir e substitua `<mycluster>` pelo nome do seu cluster.
 
@@ -147,7 +148,7 @@ A tabela a seguir compara os métodos antigos e novos para algumas ações comun
     <tr>
     <td>Inclua nós do trabalhador no cluster.</td>
     <td><p class="deprecated"><code>ibmcloud ks worker-add</code> para incluir nós do trabalhador independentes.</p></td>
-    <td><ul><li>Para incluir tipos de máquina diferentes do seu conjunto existente, crie um novo conjunto de trabalhadores: [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
+    <td><ul><li>Para incluir diferentes tipos de máquina além do seu conjunto existente, crie um novo conjunto de trabalhadores: [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create) <code>ibmcloud ks worker-pool-create</code>.</li>
     <li>Para incluir nós do trabalhador em um conjunto existente, redimensiona o número de nós por zona no conjunto: [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) <code>ibmcloud ks worker-pool-resize</code>.</li></ul></td>
     </tr>
     <tr>
@@ -186,31 +187,31 @@ Semelhante ao uso de [3 zonas em clusters de multizona](#multizone), é possíve
 **Para configurar um balanceador de carga global para múltiplos clusters:**
 
 1. [Crie clusters](/docs/containers?topic=containers-clusters#clusters) em múltiplas zonas ou regiões.
-2. Se você tem múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou um cluster de múltiplas zonas, deve-se ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud (SoftLayer) para que seus nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o representante de conta da infraestrutura do IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se o VLAN Spanning já está ativado, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region<region>`.
-3. Em cada cluster, exponha seu app usando um [balanceador de carga do aplicativo (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) ou um [serviço de balanceador de carga](/docs/containers?topic=containers-loadbalancer).
-4. Para cada cluster, liste os endereços IP públicos para os seus ALBs ou serviços de balanceador de carga.
+2. Se você tiver múltiplas VLANs para um cluster, múltiplas sub-redes na mesma VLAN ou em um cluster multizona, você deverá ativar um [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para sua conta de infraestrutura do IBM Cloud para que os nós do trabalhador possam se comunicar entre si na rede privada. Para ativar o VRF, [entre em contato com o seu representante de conta de infraestrutura do IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se não for possível ou você não desejar ativar o VRF, ative o [VLAN Spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para executar essa ação, você precisa da [permissão de infraestrutura](/docs/containers?topic=containers-users#infra_access) **Rede > Gerenciar a rede VLAN Spanning** ou é possível solicitar ao proprietário da conta para ativá-la. Para verificar se a ampliação de VLAN já está ativada, use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+3. Em cada cluster, exponha o seu aplicativo usando um serviço [balanceador de carga de aplicativo (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) ou [balanceador de carga de rede (NLB)](/docs/containers?topic=containers-loadbalancer).
+4. Para cada cluster, liste os endereços IP públicos para os seus ALBs ou serviços NLB.
    - Para listar o endereço IP de todos os ALBs ativados públicos em seu cluster:
      ```
      ibmcloud ks albs --cluster <cluster_name_or_id>
      ```
      {: pre}
 
-   - Para listar o endereço IP para o seu serviço de balanceador de carga:
+   - Para listar o endereço IP para seu serviço NLB:
      ```
      kubectl describe service <myservice>
      ```
      {: pre}
 
-     O endereço IP do **Ingresso do balanceador de carga** é o endereço IP móvel que foi designado a seu serviço de balanceador de carga.
+     O endereço IP do **Ingress do balanceador de carga** é o endereço IP móvel que foi designado para o seu serviço NLB.
 
-4.  Configure um balanceador de carga global usando o {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) ou configure seu próprio balanceador de carga global.
+4.  Configure um balanceador de carga global usando o {{site.data.keyword.cloud_notm}} Internet Services (CIS) ou configure seu próprio balanceador de carga global.
 
     **Para usar um balanceador de carga global do CIS**:
-    1.  Configure o serviço seguindo as etapas de 1 a 5 em [Introdução ao {{site.data.keyword.Bluemix_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Essas etapas o guiam pelo fornecimento da instância de serviço, incluindo seu domínio do app, configurando seus servidores de nomes e criando registros DNS. Crie um registro de DNS para cada ALB ou endereço IP do balanceador de carga que você coletou. Esses registros do DNS mapeiam seu domínio de app para todos os ALBs ou balanceadores de carga do cluster e asseguram que as solicitações para seu domínio de app sejam encaminhadas para seus clusters em um ciclo round-robin.
-    2. [Inclua verificações de funcionamento](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) para os ALBs ou balanceadores de carga. É possível usar a mesma verificação de funcionamento para os ALBs ou balanceadores de carga em todos os seus clusters ou criar verificações de funcionamento específicas para usar para clusters específicos.
-    3. [Inclua um conjunto de origem](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) para cada cluster incluindo os IPs do ALB ou do balanceador de carga do cluster. Por exemplo, se você tiver 3 clusters que cada um tenha dois ALBs, crie três conjuntos de origem que cada um tenha dois endereços IP do ALB. Inclua uma verificação de funcionamento em cada conjunto de origem que você criar.
+    1.  Configure o serviço seguindo as etapas de 1 a 5 em [Introdução ao {{site.data.keyword.cloud_notm}} Internet Services (CIS)](/docs/infrastructure/cis?topic=cis-getting-started#getting-started). Essas etapas o guiam pelo fornecimento da instância de serviço, incluindo seu domínio do app, configurando seus servidores de nomes e criando registros DNS. Crie um registro de DNS para cada ALB ou endereço IP NLB que você coletou. Esses registros de DNS mapeiam seu domínio de aplicativo para todos os ALBs ou NLBs do cluster e asseguram que as solicitações para o seu domínio do aplicativo sejam encaminhadas para seus clusters em um ciclo de round-robin.
+    2. [Inclua verificações de funcionamento](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check) para os ALBs ou NLBs. É possível usar a mesma verificação de funcionamento para os ALBs ou NLBs em todos os seus clusters ou criar verificações de funcionamento específicas a serem usadas para clusters específicos.
+    3. [Inclua um conjunto de origem](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool) para cada cluster incluindo os IPs de ALB ou NLB do cluster. Por exemplo, se você tiver 3 clusters que cada um tenha dois ALBs, crie três conjuntos de origem que cada um tenha dois endereços IP do ALB. Inclua uma verificação de funcionamento em cada conjunto de origem que você criar.
     4. [ Inclua um balanceador de carga global ](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers).
 
     **Para usar seu próprio balanceador de carga global**:
-    1. Configure seu domínio para rotear o tráfego recebido para seu ALB ou serviços de balanceador de carga, incluindo os endereços IP de todos os ALBs ativados públicos e serviços de balanceador de carga para seu domínio.
+    1. Configure seu domínio para rotear o tráfego de entrada para seus serviços ALB ou NLB, incluindo os endereços IP de todos os serviços ALBs e NLB ativados públicos para seu domínio.
     2. Para cada endereço IP, ative uma verificação de funcionamento baseada em ping para que seu provedor DNS possa detectar endereços IP não funcionais. Se um endereço IP não funcional for detectado, o tráfego não será mais roteado para esse endereço IP.

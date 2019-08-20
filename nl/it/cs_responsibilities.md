@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ Ulteriori informazioni sulle responsabilità di gestione del cluster e sui termi
 ## Responsabilità di gestione del cluster
 {: #responsibilities}
 
-IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire le applicazioni insieme a servizi di sicurezza, {{site.data.keyword.Bluemix_notm}} DevOps, AI e dati. Puoi scegliere come configurare, integrare e utilizzare le tue applicazioni e i tuoi servizi nel cloud.
+IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire le applicazioni insieme a servizi di sicurezza, {{site.data.keyword.cloud_notm}} DevOps, AI e dati. Puoi scegliere come configurare, integrare e utilizzare le tue applicazioni e i tuoi servizi nel cloud.
 {:shortdesc}
 
 <table summary="La tabella mostra le responsabilità di IBM e le tue. Le righe devono essere lette da sinistra a destra; le icone rappresentano ciascuna responsabilità nella colonna uno e la descrizione è contenuta nella colonna due.">
@@ -47,7 +47,7 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
     <td>
     **Responsabilità di IBM**:
     <ul><li>Distribuire un master dedicato altamente disponibile e pienamente gestito in un account protetto dell'infrastruttura di proprietà di IBM per ciascun cluster.</li>
-    <li>Eseguire il provisioning dei nodi di lavoro nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).</li>
+    <li>Eseguire il provisioning dei nodi di lavoro nel tuo account dell'infrastruttura IBM Cloud.</li>
     <li>Configurare i componenti di gestione del cluster, come le VLAN e i programmi di bilanciamento del carico.</li>
     <li>Soddisfare le richieste di ulteriore infrastruttura, come ad esempio l'aggiunta e la rimozione di nodi di lavoro, la creazione di sottoreti predefinite e il provisioning di volumi di archiviazione in risposta alle attestazioni del volume persistente (o PVC, persistent volume claim).</li>
     <li>Integrare le risorse dell'infrastruttura ordinate in modo che funzionino automaticamente con l'architettura del tuo cluster e diventino disponibili per le tue applicazioni distribuite e i tuoi carichi di lavoro.</li></ul>
@@ -93,7 +93,7 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
       <li>Monitorare in modo continuo le immagini di nodo di lavoro e master per rilevare problemi di vulnerabilità e conformità alla sicurezza.</li>
       <li>Eseguire il provisioning ai nodi di lavoro di due partizioni di dati crittografate a 256 bit SSD e AES.</li>
       <li>Fornire le opzioni per la connettività di rete del cluster, come ad esempio gli endpoint del servizio pubblico e privato.</li>
-      <li>Fornire le opzioni per l'isolamento del calcolo, come ad esempio delle macchine virtuali dedicate, bare metal e bare metal con Trusted Compute.</li>
+      <li>Fornire le opzioni per l'isolamento del calcolo, come ad esempio delle macchine virtuali dedicate o bare metal.</li>
       <li>Integrare RBAC (role-based access control) Kubernetes con {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management).</li>
       </ul>
       <br><br>
@@ -112,7 +112,7 @@ IBM ti fornisce una piattaforma cloud enterprise per consentirti di distribuire 
         <li>Eseguire il provisioning ai cluster dei componenti Kubernetes installati in modo da consentirti di accedere all'API Kubernetes.</li>
         <li>Fornire diversi componenti aggiuntivi gestiti per estendere le funzionalità della tua applicazione, come ad esempio [Istio](/docs/containers?topic=containers-istio#istio) e [Knative](/docs/containers?topic=containers-serverless-apps-knative). La manutenzione, per te, è semplificata poiché IBM fornisce l'installazione e gli aggiornamenti per i componenti aggiuntivi gestiti.</li>
         <li>Fornire l'integrazione cluster con tecnologie di partenariato di terze parti selezionate, come ad esempio {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} e Portworx.</li>
-        <li>Fornire l'automazione per abilitare l'associazione mediante bind dei servizi ad altri servizi {{site.data.keyword.Bluemix_notm}}.</li>
+        <li>Fornire l'automazione per abilitare l'associazione mediante bind dei servizi ad altri servizi {{site.data.keyword.cloud_notm}}.</li>
         <li>Creare dei cluster con i segreti di pull dell'immagine in modo che le tue distribuzioni nello spazio dei nomi Kubernetes `default` possano eseguire il pull di immagini da {{site.data.keyword.registrylong_notm}}.</li>
         <li>Fornire classi di archiviazione e plug-in per supportare i volumi persistenti per l'utilizzo con le tue applicazioni.</li>
         <li>Creare dei cluster con gli indirizzi IP di sottorete riservati da utilizzare per esporre le applicazioni esternamente.</li>
@@ -150,3 +150,5 @@ con l'utilizzo di {{site.data.keyword.containerlong_notm}}
 
 Per i termini generali di utilizzo, consulta [Termini dei
 servizi cloud](/docs/overview/terms-of-use?topic=overview-terms#terms).
+
+

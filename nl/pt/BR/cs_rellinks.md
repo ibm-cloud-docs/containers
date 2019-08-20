@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -86,7 +86,7 @@ subcollection: containers
 
 **Glossários**
 
-- [{{site.data.keyword.Bluemix_notm}} glossário](/docs/overview/glossary?topic=overview-glossary#glossary)
+- [{{site.data.keyword.cloud_notm}} glossário](/docs/overview/glossary?topic=overview-glossary#glossary)
 - [Glossário do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Glossário do Docker ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://docs.docker.com/glossary/)
 
@@ -96,7 +96,7 @@ subcollection: containers
 ## {{site.data.keyword.registryshort_notm}}
 {: #registry}
 
-- [{{site.data.keyword.registryshort_notm}} documentação](/docs/services/Registry?topic=registry-getting-started)
+- [Documentação do {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started)
 - [API de REST do {{site.data.keyword.registryshort_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry)
 - [API de REST do Vulnerability Advisor ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://{DomainName}/apidocs/container-registry/va)
 

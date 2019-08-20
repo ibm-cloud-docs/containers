@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ Saiba mais sobre as responsabilidades de gerenciamento de cluster e termos e con
 ## Responsabilidades de gerenciamento de cluster
 {: #responsibilities}
 
-A IBM fornece uma plataforma de nuvem corporativa para a implementação de aplicativos com os serviços do {{site.data.keyword.Bluemix_notm}} DevOps, de IA, de dados e de segurança. Você escolhe como configurar, integrar e operar seus aplicativos e serviços na nuvem.
+A IBM fornece uma plataforma de nuvem corporativa para a implementação de aplicativos com os serviços do {{site.data.keyword.cloud_notm}} DevOps, de IA, de dados e de segurança. Você escolhe como configurar, integrar e operar seus aplicativos e serviços na nuvem.
 {:shortdesc}
 
 <table summary="A tabela mostra as suas responsabilidades e as da IBM. As linhas devem ser lidas da esquerda para a direita, com os ícones representando cada responsabilidade na coluna um e a descrição na coluna dois.">
@@ -47,7 +47,7 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
     <td>
     **Responsabilidades da IBM**:
     <ul><li>Implemente um principal dedicado e totalmente gerenciado e disponível em uma conta segura de uma infraestrutura da IBM para cada cluster.</li>
-    <li>Provisione nós do trabalhador em sua conta da infraestrutura do IBM Cloud (SoftLayer).</li>
+    <li>Provisione nós do trabalhador em sua conta de infraestrutura do IBM Cloud.</li>
     <li>Configure os componentes de gerenciamento de cluster, como VLANs e balanceadores de carga.</li>
     <li>Atenda a solicitações de mais infraestrutura, como a inclusão e a remoção de nós do trabalhador, a criação de sub-redes padrão e o fornecimento de volumes de armazenamento em resposta a solicitações de volume persistente.</li>
     <li>Integre recursos de infraestrutura ordenados para trabalhar automaticamente com sua arquitetura de cluster e se tornar disponíveis para seus aplicativos e cargas de trabalho implementados.</li></ul>
@@ -92,8 +92,8 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
       <li>Forneça imagens Linux compatíveis com o CIS para os sistemas operacionais do nó do trabalhador.</li>
       <li>Monitore continuamente as imagens do nó principal e do trabalhador para detectar problemas de conformidade de vulnerabilidade e segurança.</li>
       <li>Provisione nós do trabalhador com duas partições de dados SSD locais criptografadas de AES de 256 bits.</li>
-      <li>Forneça opções para a conectividade de rede de cluster, como terminais de serviço público e privado.</li>
-      <li>Forneça opções de isolamento de cálculo, como máquinas virtuais dedicadas, bare metal e bare metal com Trusted Compute.</li>
+      <li>Provisione opções para a conectividade de rede de cluster, como terminais em serviço público e privado.</li>
+      <li>Provisione opções de isolamento de cálculo, como máquinas virtuais dedicadas ou bare metal.</li>
       <li>Integre o controle de acesso baseado em função (RBAC) do Kubernetes com o {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
       </ul>
       <br><br>
@@ -111,8 +111,8 @@ A IBM fornece uma plataforma de nuvem corporativa para a implementação de apli
         <ul>
         <li>Provisione clusters com componentes do Kubernetes instalados para que seja possível acessar a API do Kubernetes.</li>
         <li>Forneça um número de complementos gerenciados para estender os recursos de seu aplicativo, como o [Istio](/docs/containers?topic=containers-istio#istio) e o [Knative](/docs/containers?topic=containers-serverless-apps-knative). A manutenção é simplificada para você porque a IBM fornece a instalação e as atualizações para os complementos gerenciados.</li>
-        <li>Fornecer a integração do cluster com as tecnologias de parceria de terceiros selecionadas, tais como {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} e Portworx.</li>
-        <li>Forneça a automação para ativar a ligação de serviços para outros serviços do {{site.data.keyword.Bluemix_notm}}.</li>
+        <li>Provisione integração de cluster com tecnologias de parceria de terceiro selecionadas, como o {{site.data.keyword.la_short}}, o {{site.data.keyword.mon_short}} e o Portworx.</li>
+        <li>Forneça a automação para ativar a ligação de serviços para outros serviços do {{site.data.keyword.cloud_notm}}.</li>
         <li>Crie clusters com segredos de pull de imagem para que suas implementações no namespace `default` do Kubernetes possam fazer pull de imagens do {{site.data.keyword.registrylong_notm}}.</li>
         <li>Forneça classes de armazenamento e plug-ins para suportar volumes persistentes para uso com seus aplicativos.</li>
         <li>Crie clusters com endereços IP de sub-rede reservados para o uso de exposição externa de aplicativos.</li>
@@ -150,3 +150,5 @@ uso de alguém do {{site.data.keyword.containerlong_notm}}
 
 Veja [Termos dos serviços
 de nuvem](/docs/overview/terms-of-use?topic=overview-terms#terms) para obter os termos gerais de uso.
+
+

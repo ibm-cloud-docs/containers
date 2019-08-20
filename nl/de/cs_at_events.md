@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, audit
 
@@ -28,7 +28,7 @@ subcollection: containers
 # {{site.data.keyword.cloudaccesstrailshort}}-Ereignisse
 {: #at_events}
 
-Mithilfe des {{site.data.keyword.cloudaccesstrailshort}}-Service können Sie vom Benutzer initiierte Aktivitäten in Ihrem {{site.data.keyword.containerlong_notm}}-Cluster anzeigen, verwalten und prüfen.
+Mithilfe des {{site.data.keyword.cloudaccesstrailshort}}-Service können Sie vom Benutzer initiierte Aktivitäten in Ihrem {{site.data.keyword.containerlong}}-Community-Cluster (Kubernetes oder OpenShift) anzeigen, verwalten und prüfen.
 {: shortdesc}
 
 Von {{site.data.keyword.containershort_notm}} werden zwei Typen von {{site.data.keyword.cloudaccesstrailshort}}-Ereignissen generiert:
@@ -54,10 +54,10 @@ Sie können die Aktivitäten in Ihrem Cluster überwachen, indem Sie sich die Pr
 
 So überwachen Sie die Verwaltungsaktivität:
 
-1. Melden Sie sich bei Ihrem {{site.data.keyword.Bluemix_notm}}-Konto an.
+1. Melden Sie sich bei Ihrem {{site.data.keyword.cloud_notm}}-Konto an.
 2. Stellen Sie über den Katalog eine Instanz des {{site.data.keyword.cloudaccesstrailshort}}-Service im selben Konto wie Ihre Instanz von {{site.data.keyword.containerlong_notm}} bereit.
 3. Wählen Sie in der Registerkarte **Verwalten** des {{site.data.keyword.cloudaccesstrailshort}}-Dashboards die Konto- oder Bereichsdomäne aus.
-  * **Kontoprotokolle:** Ereignisse der Clusterverwaltung und Ereignisse von Kubernetes-API-Serveraudits sind in der **Kontodomäne** für die {{site.data.keyword.Bluemix_notm}}-Region verfügbar, in der die Ereignisse generiert werden.
+  * **Kontoprotokolle:** Ereignisse der Clusterverwaltung und Ereignisse von Kubernetes-API-Serveraudits sind in der **Kontodomäne** für die {{site.data.keyword.cloud_notm}}-Region verfügbar, in der die Ereignisse generiert werden.
   * **Bereichsprotokolle:** Falls Sie einen Bereich angegeben haben, als Sie für den Cluster konfiguriert haben, dass Ereignisse von Kubernetes-API-Serveraudits weitergeleitet werden sollen, sind diese Ereignisse in der **Bereichsdomäne** verfügbar, die dem Cloud Foundry-Bereich zugeordnet ist, in dem der {{site.data.keyword.cloudaccesstrailshort}}-Service bereitgestellt wird.
 4. Klicken Sie auf **In Kibana anzeigen**.
 5. Legen Sie den Zeitrahmen fest, für den Sie Protokolle anzeigen möchten. Der Standardwert ist 24 Stunden.
@@ -93,7 +93,7 @@ In der folgenden Tabelle finden Sie eine Liste der Ereignisse der Clusterverwalt
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>Ein Cluster wird gelöscht.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>Ein Feature, wie z. B. 'Trusted Compute' für Bare-Metal-Workerknoten, wird in einem Cluster aktiviert.</td></tr><tr>
+<td>Ein Feature, wie z. B. der öffentliche oder private Serviceendpunkt, wird in einem Cluster aktiviert.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>Informationen zu einem Cluster werden angezeigt.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
@@ -125,7 +125,7 @@ In der folgenden Tabelle finden Sie eine Liste der Ereignisse der Clusterverwalt
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>Die Bindung eines Service an einen Cluster wird aufgehoben.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Ein vorhandenes Teilnetz der IBM Cloud-Infrastruktur (SoftLayer) wird zum Cluster hinzugefügt.</td></tr><tr>
+<td>Ein vorhandenes Teilnetz der IBM Cloud-Infrastruktur wird zum Cluster hinzugefügt.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>Ein Teilnetz wird erstellt.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>

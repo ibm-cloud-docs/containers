@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,25 +23,24 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Anwendungsfälle für Behörden für {{site.data.keyword.Bluemix_notm}}
+# Anwendungsfälle für Behörden für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 
-Diese Anwendungsfälle verdeutlichen, wie Workloads mithilfe von {{site.data.keyword.containerlong_notm}} von der öffentlichen Cloud profitieren. Diese Workloads verfügen über eine Isolation mit Trusted Compute, befinden sich zur Sicherung der Datenhoheit in globalen Regionen, verwenden das maschinelle Lernen von Watson anstatt neuen Code zu entwickeln und stellen eine Verbindung zu lokalen Datenbanken her.
+Diese Anwendungsfälle verdeutlichen, wie Workloads mithilfe von {{site.data.keyword.containerlong}} von der öffentlichen Cloud profitieren. Diese Workloads werden zur Sicherung der Datenhoheit in globalen Regionen isoliert, verwenden das maschinelle Lernen von Watson anstatt neuen Code zu entwickeln und stellen eine Verbindung zu lokalen Datenbanken her.
 {: shortdesc}
 
 ## Regionale Behörden verbessern Zusammenarbeit und Geschwindigkeit mit Entwicklergemeinschaft, die öffentliche und private Daten kombiniert
 {: #uc_data_mashup}
 
-Der Leiter eines Open Government-Programms muss öffentliche Daten gemeinsam mit dem kommunalen und privaten Sektor nutzen, aber die Daten sind in einem monolithischen lokalen System blockiert.
+Der Leiter eines Open Government-Programms muss öffentliche Daten gemeinsam mit dem kommunalen und privaten Sektor nutzen, aber die Daten sind in einem monolithischen lokalen System blockiert. 
 {: shortdesc}
 
-Warum {{site.data.keyword.Bluemix_notm}}: Mit {{site.data.keyword.containerlong_notm}} stellt der Leiter den transformativen Wert der kombinierten öffentlich/privaten Daten bereit. Analog stellt der Service eine öffentliche Cloudplattform bereit, auf der für Microservices ein Refactoring ausgeführt werden kann und die Microservices aus den monolithischen lokalen Apps zugänglich gemacht werden können. Darüber hinaus ermöglicht eine öffentliche Cloud Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen.
+Warum {{site.data.keyword.cloud_notm}}: Mit {{site.data.keyword.containerlong_notm}} stellt der Leiter den transformativen Wert der kombinierten öffentlich/privaten Daten bereit. Analog stellt der Service eine öffentliche Cloudplattform bereit, auf der für Microservices ein Refactoring ausgeführt werden kann und die Microservices aus den monolithischen lokalen Apps zugänglich gemacht werden können. Darüber hinaus ermöglicht eine öffentliche Cloud Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen.
 
 Schlüsseltechnologien:    
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Bereitstellung von Zugriff auf öffentliche Daten mit {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
+* [Bereitstellung von Zugriff auf öffentliche Daten mit {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)
 * [IBM Cloud Analytics-Plug-and-play-Services](https://www.ibm.com/cloud/analytics)
 
 **Kontext: Behörden verbessern Zusammenarbeit und Geschwindigkeit mit Entwicklergemeinschaft, die öffentliche und private Daten kombiniert**
@@ -69,7 +68,7 @@ Da die Apps schließlich auf der Basis dieser gemeinsam genutzten APIs in {{site
 * Überwachen von Status und Wiederherstellung für Workerknoten
 * Bereitstellung globaler Rechenleistung, damit Entwickler weltweit keine Infrastruktur in den Regionen bereitstellen müssen, in denen Workloads und Daten bereitgestellt werden müssen
 
-Das Verschieben der Rechenworkloads in {{site.data.keyword.Bluemix_notm}} reicht nicht aus. Die Behörden müssen auch eine Umwandlung für Prozesse und Methoden durchführen. Bei Übernahme der Verfahren von IBM Garage Method kann der Anbieter einen agilen und iterantiven Bereitstellungsprozess implementieren, von dem moderne DevOps-Verfahren wie Continuous Integration and Delivery (CI/CD) unterstützt werden.
+Das Verschieben der Rechenworkloads in {{site.data.keyword.cloud_notm}} reicht nicht aus. Die Behörden müssen auch eine Umwandlung für Prozesse und Methoden durchführen. Bei Übernahme der Verfahren von IBM Garage Method kann der Anbieter einen agilen und iterantiven Bereitstellungsprozess implementieren, von dem moderne DevOps-Verfahren wie Continuous Integration and Delivery (CI/CD) unterstützt werden.
 
 Ein großer Teil des CI/CD-Prozesses wird in der Cloud mit {{site.data.keyword.contdelivery_full}} automatisiert. Der Anbieter kann die Workflow-Toolchains zum Vorbereiten der Container-Images definieren, eine Überprüfung auf Schwachstellen durchführen und eine Bereitstellung im Kubernetes-Cluster ausführen.
 
@@ -100,7 +99,7 @@ Technische Lösung:
 * Übernehmen Sie die agilen und iterativen Entwicklungsverfahren von IBM Garage Method, um häufige Releases der Funktionen, Patches und Korrekturen ohne Ausfallzeit zu ermöglichen.
 * Unabhängig davon, ob die Entwickler im öffentlichen oder privaten Sektor arbeiten, erleichtert {{site.data.keyword.contdelivery_full}} die schnelle Bereitstellung einer integrierten Toolchain mit anpassbaren gemeinsam nutzbaren Vorlagen.
 * Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die {{site.data.keyword.contdelivery_full}}-Toolchains zum Bereitstellen von Apps in Produktionsclustern.
-* Mit Watson AI, maschinellem Lernen (ML) und Tools für tiefes Lernen, die über den {{site.data.keyword.Bluemix_notm}}-Katalog verfügbar sind, konzentrieren sich die Entwickler auf Domänenprobleme. Anstatt angepasstem eindeutigem ML-Code wird die ML-Logik in Apps mit Servicebindungen integriert.
+* Mit Watson AI, maschinellem Lernen (ML) und Tools für tiefes Lernen, die über den {{site.data.keyword.cloud_notm}}-Katalog verfügbar sind, konzentrieren sich die Entwickler auf Domänenprobleme. Anstatt angepasstem eindeutigem ML-Code wird die ML-Logik in Apps mit Servicebindungen integriert.
 
 **Ergebnisse**
 * Von normalerweise langsamen öffentlich-privaten Partnerschaften wird der Betrieb der Apps jetzt schnell in Wochen anstatt Monaten aufgenommen. Von solchen Entwicklungspartnerschaften werden jetzt neue Funktionen und Fehlerkorrekturen bis zu zehn Mal pro Woche bereitgestellt.
@@ -114,7 +113,7 @@ Technische Lösung:
 Eine IT-Führungskraft einer privaten Reederei und ein öffentlich geführter Hafen müssen Verbindungen aufbauen, Anzeigen bereitstellen und die Hafeninformationen sicher austauschen. Für einen Verbindungsaufbau zum Austauschen öffentlicher Hafeninformationen und privater Frachtlisten war jedoch kein einheitliches System vorhanden.
 {: shortdesc}
 
-Warum {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} ermöglicht Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen. Von den Containern wurde eine gemeinsam genutzte Plattform bereitgestellt, auf der sowohl der Hafen als auch die Reederei sicher sind, dass die gemeinsamen genutzten Informationen auf einer sicheren Plattform gehostet wurden. Und diese Plattform lässt sich skalieren, vom kleinen System für Entwicklungstests bis zum großen Produktionssystem. Offene Toolchains beschleunigen die Entwicklung durch die Automatisierung der Erstellungen, Tests und Bereitstellungen.
+Warum {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} ermöglicht Partnerschaften aus Behörden und Öffentlichkeit die Nutzung externer Cloud-Services und Open-Source-Tools, die die Zusammenarbeit begünstigen. Von den Containern wurde eine gemeinsam genutzte Plattform bereitgestellt, auf der sowohl der Hafen als auch die Reederei sicher sind, dass die gemeinsamen genutzten Informationen auf einer sicheren Plattform gehostet wurden. Und diese Plattform lässt sich skalieren, vom kleinen System für Entwicklungstests bis zum großen Produktionssystem. Offene Toolchains beschleunigen die Entwicklung durch die Automatisierung der Erstellungen, Tests und Bereitstellungen.
 
 Schlüsseltechnologien:    
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -140,7 +139,7 @@ Deswegen wird eine Partnerschaft gegründet, die Lösungen für das Handelssyste
 
 Die Entwickler begannen mit dem Bereitstellen der Apps in Containern mit {{site.data.keyword.containerlong_notm}}. Sie erstellten Cluster für eine gemeinsame Entwicklungsumgebung, die es den weltweiten Entwicklern ermöglicht, die App-Verbesserungen schnell gemeinsam zu bereitzustellen. Die Container ermöglichen es jedem Entwicklerteam, die Sprache seiner Wahl zu verwenden.
 
-Sicherheit zuerst: Die IT-Führungskräfte wählten Trusted Compute für Bare-Metal zum Hosten der Cluster. Bei Verwendung von Bare-Metal für {{site.data.keyword.containerlong_notm}} verfügen die sensiblen Zoll-Workloads jetzt über die bekannte Isolation, gleichzeitig aber auch über die Flexibilität der öffentlichen Cloud. Von Bare-Metal wird Trusted Compute zur Überprüfung der zugrunde liegenden Hardware auf Manipulationen bereitgestellt.
+Sicherheit zuerst: Die IT-Führungskräfte wählten Bare-Metal-Cluster aus. Bei Verwendung von Bare-Metal-Systemen für {{site.data.keyword.containerlong_notm}} verfügen die sensiblen Zollworkloads jetzt über die bekannte Isolation, gleichzeitig aber auch über die Flexibilität der öffentlichen Cloud.
 
 Da die Reederei auch mit anderen Häfen arbeiten möchte, ist die App-Sicherheit von entscheidender Bedeutung. Frachtlisten und Zollinformationen sind streng vertraulich. Zur Gewährleistung der Sicherheit werden von Vulnerability Advisor folgende Scans bereitgestellt:
 * Scans auf Sicherheitslücken für Images
@@ -150,14 +149,14 @@ Da die Reederei auch mit anderen Häfen arbeiten möchte, ist die App-Sicherheit
 
 Gleichzeitig kann mit {{site.data.keyword.iamlong}} gesteuert werden, wer über welche Zugriffsberechtigungen auf die Ressourcen verfügt.
 
-Die Entwickler konzentrieren sich mithilfe der vorhandenen Tools auf Domänenprobleme: Anstatt eindeutigen Protokollierungs- und Überwachungscode zu schreiben, integrieren Sie ihn in Apps, indem Sie {{site.data.keyword.Bluemix_notm}}-Services an Cluster binden. Die Entwickler brauchen sich auch nicht mehr um Infrastrukturmanagementaufgaben kümmern, da Kubernetes- und Infrastruktur-Upgrades, die Sicherheit und vieles mehr von IBM verwaltet werden.
+Die Entwickler konzentrieren sich mithilfe der vorhandenen Tools auf Domänenprobleme: Anstatt eindeutigen Protokollierungs- und Überwachungscode zu schreiben, integrieren Sie ihn in Apps, indem Sie {{site.data.keyword.cloud_notm}}-Services an Cluster binden. Die Entwickler brauchen sich auch nicht mehr um Infrastrukturmanagementaufgaben kümmern, da Kubernetes- und Infrastruktur-Upgrades, die Sicherheit und vieles mehr von IBM verwaltet werden.
 
 **Lösungsmodell**
 
 Bedarfsgerechte Rechenkapazität, Speicherkapazität und Node-Starter-Kits, die nach Bedarf in einer öffentlichen Cloud mit sicherem Zugriff auf die Frachtdaten auf der ganzen Welt ausgeführt werden. Die Berechnung in Clustern ist manipulationssicher und durch Bare-Metal isoliert.  
 
 Technische Lösung:
-* {{site.data.keyword.containerlong_notm}} mit Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * IBM {{site.data.keyword.SecureGateway}}
@@ -187,3 +186,5 @@ Technische Lösung:
 * Die Reedereikunden und die Verwaltungsbeamten verfügen über Zugriff auf die Daten der Frachtlisten und können die Zolldaten gemeinsam nutzen, während diese den lokalen Regulierungen entsprechen.
 * Die Reederei profitiert von der verbesserten logistischen Verwaltung in der Lieferkette: die Kosten sind niedriger und die Umschlagzeiten kürzer.
 * 99 % der Zollanmeldungen sind digital und 90 % der Importe werden ohne Bedienereingriff verarbeitet.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-07"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,22 +23,20 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Apertura delle porte e degli indirizzi IP necessari nel tuo firewall
 {: #firewall}
 
-Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e indirizzi IP specifici nei tuoi firewall per {{site.data.keyword.containerlong}}.
+Riesamina le seguenti situazioni in cui potresti aver bisogno di aprire porte e indirizzi IP specifici nei tuoi firewall per i tuoi cluster {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 * [Per eseguire i comandi `ibmcloud` e `ibmcloud ks`](#firewall_bx) dal tuo sistema locale quando le politiche di rete aziendali impediscono l'accesso agli endpoint di rete pubblici tramite proxy o firewall.
 * [Per eseguire i comandi `kubectl`](#firewall_kubectl) dal tuo sistema locale quando le politiche di rete aziendali impediscono l'accesso agli endpoint di rete pubblici tramite proxy o firewall.
 * [Per eseguire i comandi `calicoctl`](#firewall_calicoctl) dal tuo sistema locale quando le politiche di rete aziendali impediscono l'accesso agli endpoint di rete pubblici tramite proxy o firewall.
-* [Per consentire le comunicazioni tra il master Kubernetes e i nodi di lavoro](#firewall_outbound) quando è configurato un firewall per i nodi di lavoro o le impostazioni del firewall sono personalizzate nel tuo account dell'infrastruttura IBM Cloud (SoftLayer).
+* [Per consentire le comunicazioni tra il master e i nodi di lavoro](#firewall_outbound) quando è configurato un firewall per i nodi di lavoro o le impostazioni del firewall sono personalizzate nel tuo account dell'infrastruttura IBM Cloud.
 * [Per consentire al cluster di accedere alle risorse su un firewall sulla rete privata](#firewall_private).
-* [Per consentire al cluster di accedere alle risorse quando le politiche di rete Calico bloccano l'uscita del nodo di lavoro](#firewall_calico_egress).
+* [Per consentire al cluster di accedere alle risorse quando le politiche di rete Calico bloccano l'uscita del nodo di lavoro pubblico o privato](#firewall_calico_egress).
 * [Per accedere al servizio NodePort, al servizio del programma di bilanciamento del carico o a Ingress dall'esterno del cluster](#firewall_inbound).
-* [Per consentire al cluster di accedere a servizi eseguiti all'interno o all'esterno di {{site.data.keyword.Bluemix_notm}} o in loco e che sono protetti da un firewall](#whitelist_workers).
+* [Per consentire al cluster di accedere a servizi eseguiti all'interno o all'esterno di {{site.data.keyword.cloud_notm}} o in loco e che sono protetti da un firewall](#whitelist_workers).
 
 <br />
 
@@ -46,11 +44,11 @@ Controlla le seguenti situazioni in cui potresti aver bisogno di aprire porte e 
 ## Esecuzione dei comandi `ibmcloud` e `ibmcloud ks` da dietro un firewall
 {: #firewall_bx}
 
-Se le politiche di rete aziendali impediscono l'accesso dal tuo sistema locale agli endpoint pubblici tramite i proxy o i firewall, per eseguire i comandi `ibmcloud` e `ibmcloud ks`, devi consentire l'accesso TCP per {{site.data.keyword.Bluemix_notm}} e {{site.data.keyword.containerlong_notm}}.
+Se le politiche di rete aziendali impediscono l'accesso dal tuo sistema locale agli endpoint pubblici tramite i proxy o i firewall, per eseguire i comandi `ibmcloud` e `ibmcloud ks`, devi consentire l'accesso TCP per {{site.data.keyword.cloud_notm}} e {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 1. Consenti l'accesso a `cloud.ibm.com` sulla porta 443 nel tuo firewall.
-2. Verifica la tua connessione accedendo a {{site.data.keyword.Bluemix_notm}} tramite questo endpoint API.
+2. Verifica la tua connessione accedendo a {{site.data.keyword.cloud_notm}} tramite questo endpoint API.
   ```
   ibmcloud login -a https://cloud.ibm.com/
   ```
@@ -91,7 +89,7 @@ Prima di cominciare, consenti l'accesso a [eseguire i comandi `ibmcloud ks`](#fi
 
 Per concedere l'accesso per un cluster specifico:
 
-1. Accedi alla CLI {{site.data.keyword.Bluemix_notm}}. Immetti le tue credenziali {{site.data.keyword.Bluemix_notm}} quando richiesto. Se hai un account federato, includi l'opzione `--sso`.
+1. Accedi alla CLI {{site.data.keyword.cloud_notm}}. Immetti le tue credenziali {{site.data.keyword.cloud_notm}} quando richiesto. Se hai un account federato, includi l'opzione `--sso`.
 
    ```
    ibmcloud login [--sso]
@@ -112,9 +110,9 @@ Per concedere l'accesso per un cluster specifico:
    {: pre}
 
 5. Richiama gli URL degli endpoint del servizio per il tuo cluster.
- * Se viene popolato solo il campo **Public Service Endpoint URL**, ottieni questo URL. Gli utenti del cluster autorizzati possono accedere al master Kubernetes tramite questo endpoint sulla rete pubblica.
- * Se viene popolato solo il campo **Private Service Endpoint URL**, ottieni questo URL. Gli utenti del cluster autorizzati possono accedere al master Kubernetes tramite questo endpoint sulla rete privata.
- * Se vengono popolati entrambi i campi **Public Service Endpoint URL** e **Private Service Endpoint URL**, ottieni i due URL. Gli utenti del cluster autorizzati possono accedere al master Kubernetes tramite l'endpoint pubblico sulla rete pubblica o l'endpoint privato sulla rete privata.
+ * Se viene popolato solo il campo **Public Service Endpoint URL**, ottieni questo URL. I tuoi utenti del cluster autorizzati possono accedere al master tramite questo endpoint sulla rete pubblica.
+ * Se viene popolato solo il campo **Private Service Endpoint URL**, ottieni questo URL. I tuoi utenti del cluster autorizzati possono accedere al master tramite questo endpoint sulla rete privata.
+ * Se vengono popolati entrambi i campi **Public Service Endpoint URL** e **Private Service Endpoint URL**, ottieni i due URL. I tuoi utenti del cluster autorizzati possono accedere al master tramite l'endpoint pubblico sulla rete pubblica o l'endpoint privato sulla rete privata.
 
   ```
   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
@@ -160,7 +158,7 @@ Per concedere l'accesso per un cluster specifico:
    }
     ```
     {: screen}
-  * Se è abilitato l'endpoint del servizio privato, devi trovarti nella tua rete privata {{site.data.keyword.Bluemix_notm}} o connetterti alla rete privata attraverso una connessione VPN per verificare la tua connessione al master. Nota: devi [esporre l'endpoint master tramite un programma di bilanciamento del carico privato](/docs/containers?topic=containers-clusters#access_on_prem) in modo che gli utenti possano accedere al master tramite una VPN o una connessione {{site.data.keyword.BluDirectLink}}.
+  * Se è abilitato l'endpoint del servizio privato, devi trovarti nella tua rete privata {{site.data.keyword.cloud_notm}} o connetterti alla rete privata attraverso una connessione VPN per verificare la tua connessione al master. **Nota**: devi [esporre l'endpoint master tramite un programma di bilanciamento del carico privato](/docs/containers?topic=containers-clusters#access_on_prem) in modo che gli utenti possano accedere al master tramite una VPN o una connessione {{site.data.keyword.BluDirectLink}}.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -218,8 +216,11 @@ Prima di cominciare, consenti l'accesso a eseguire i comandi [`ibmcloud`](#firew
 ## Concessione al cluster dell'accesso alle risorse dell'infrastruttura e ad altri servizi su un firewall pubblico
 {: #firewall_outbound}
 
-Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttura da dietro un firewall pubblico, come ad esempio per le regioni {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, gli IP privati dell'infrastruttura IBM Cloud (SoftLayer) e il traffico in uscita per le attestazioni del volume persistente.
+Permetti al tuo cluster di accedere ai servizi e alle risorse dell'infrastruttura da dietro un firewall pubblico, come ad esempio per le regioni {{site.data.keyword.containerlong_notm}}, {{site.data.keyword.registrylong_notm}}, {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM), {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, gli IP privati dell'infrastruttura IBM Cloud e il traffico in uscita per le attestazioni del volume persistente.
 {:shortdesc}
+
+Vuoi utilizzare le politiche Calico perché fungano da tuo firewall del cluster invece di un firewall del dispositivo gateway? Vedi [Isolamento dei cluster sulla rete pubblica](/docs/containers?topic=containers-network_policies#isolate_workers_public).
+{: tip}
 
 A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gli indirizzi IP pubblici, privati o entrambi. Se hai un cluster con nodi di lavoro su VLAN pubbliche e private dietro un firewall sia per le reti pubbliche che private, devi aprire la connessione per gli indirizzi IP pubblici e privati. Se il tuo cluster ha nodi di lavoro solo sulla VLAN privata dietro un firewall, puoi aprire la connessione solo agli indirizzi IP privati.
 {: note}
@@ -233,7 +234,7 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
 
 2.  Consenti il traffico di rete in uscita da <em>&lt;each_worker_node_publicIP&gt;</em> di origine alle porte TCP/UDP di destinazione comprese nell'intervallo 20000-32767 e alla porta 443, e ai seguenti indirizzi IP e gruppi di reti. Questi indirizzi IP consentono ai nodi di lavoro di comunicare con il master cluster. Se hai un firewall aziendale che impedisce alla tua macchina locale di accedere agli endpoint internet pubblici, esegui questa operazione anche per la tua macchina locale in modo da poter accedere al master cluster.
 
-    Devi consentire il traffico in uscita alla porta 443 per tutte le zone all'interno della regione, per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster si trova negli Stati Uniti Sud, devi consentire il traffico dagli IP pubblici su ciascuno dei tuoi nodi di lavoro alla porta 443 dell'indirizzo IP per tutte le zone.
+    Devi consentire il traffico in uscita alla porta 443 per tutte le zone all'interno della regione per bilanciare il carico durante il processo di avvio. Ad esempio, se il tuo cluster si trova negli Stati Uniti Sud, devi consentire il traffico dagli IP pubblici su ciascuno dei tuoi nodi di lavoro alla porta 443 dell'indirizzo IP per tutte le zone.
     {: important}
 
     {: #master_ips}
@@ -341,37 +342,39 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
       </tbody>
     </table>
 
-4. Facoltativo: consenti il traffico di rete in uscita dai nodi di lavoro ai servizi {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig e LogDNA:
+4. Consenti il traffico di rete in uscita dal tuo nodo di lavoro a {{site.data.keyword.cloud_notm}} IAM (Identity and Access Management). Il tuo firewall deve essere di livello 7 per inserire in whitelist il nome dominio IAM. IAM non ha specifici indirizzi IP che puoi inserire in whitelist. Se il tuo firewall non supporta il livello 7, puoi consentire tutto il traffico di rete HTTPS sulla porta 443.
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
+    - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
+
+5. Facoltativo: consenti il traffico di rete in uscita dai nodi di lavoro ai servizi {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig e LogDNA:
     *   **{{site.data.keyword.monitoringlong_notm}}**:
         <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
         Sostituisci <em>&lt;monitoring_subnet&gt;</em> con le sottoreti per le regioni di monitoraggio per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con la zona server nella colonna uno e gli indirizzi IP corrispondenti nella colonna due.">
-  <caption>Gli indirizzi IP da aprire per il traffico di monitoraggio</caption>
-        <thead>
-        <th>Regione {{site.data.keyword.containerlong_notm}}</th>
-        <th>Indirizzo di monitoraggio</th>
-        <th>Sottoreti di monitoraggio</th>
-        </thead>
-      <tbody>
-        <tr>
-         <td>Europa Centrale</td>
-         <td><code>metrics.eu-de.bluemix.net</code></td>
-         <td><code>158.177.65.80/30</code></td>
-        </tr>
-        <tr>
-         <td>Regno Unito Sud</td>
-         <td><code>metrics.eu-gb.bluemix.net</code></td>
-         <td><code>169.50.196.136/29</code></td>
-        </tr>
-        <tr>
-          <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord, Asia Pacifico Sud</td>
-          <td><code>metrics.ng.bluemix.net</code></td>
-          <td><code>169.47.204.128/29</code></td>
-         </tr>
-         
-        </tbody>
-      </table>
-</p>
+          <caption>Gli indirizzi IP da aprire per il traffico di monitoraggio</caption>
+                <thead>
+                <th>Regione {{site.data.keyword.containerlong_notm}}</th>
+                <th>Indirizzo di monitoraggio</th>
+                <th>Sottoreti di monitoraggio</th>
+                </thead>
+              <tbody>
+                <tr>
+                 <td>Europa Centrale</td>
+                 <td><code>metrics.eu-de.bluemix.net</code></td>
+                 <td><code>158.177.65.80/30</code></td>
+                </tr>
+                <tr>
+                 <td>Regno Unito Sud</td>
+                 <td><code>metrics.eu-gb.bluemix.net</code></td>
+                 <td><code>169.50.196.136/29</code></td>
+                </tr>
+                <tr>
+                  <td>Stati Uniti Est, Stati Uniti Sud, Asia Pacifico Nord, Asia Pacifico Sud</td>
+                  <td><code>metrics.ng.bluemix.net</code></td>
+                  <td><code>169.47.204.128/29</code></td>
+                 </tr>
+                </tbody>
+              </table></p>
     *   **{{site.data.keyword.mon_full_notm}}**:
         <pre class="screen">TCP port 443, port 6443 FROM &lt;each_worker_node_public_IP&gt; TO &lt;sysdig_public_IP&gt;</pre>
         Sostituisci `<sysdig_public_IP>` con gli [indirizzi IP Sysdig](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network).
@@ -379,45 +382,44 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
         <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
         Sostituisci <em>&lt;logging_public_IP&gt;</em> con tutti gli indirizzi delle regioni di registrazione per cui desideri consentire il traffico:
         <p><table summary="La prima riga nella tabella si estende su entrambe le colonne. Le righe rimanenti devono essere lette da sinistra a destra, con la zona server nella colonna uno e gli indirizzi IP corrispondenti nella colonna due.">
-<caption>Gli indirizzi IP da aprire per il traffico di registrazione</caption>
-        <thead>
-        <th>Regione {{site.data.keyword.containerlong_notm}}</th>
-        <th>Indirizzo di registrazione</th>
-        <th>Indirizzi IP di registrazione</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Stati Uniti Est, Stati Uniti Sud</td>
-            <td><code>ingest.logging.ng.bluemix.net</code></td>
-            <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-          </tr>
-          <tr>
-           <td>Regno Unito Sud</td>
-           <td><code>ingest.logging.eu-gb.bluemix.net</code></td>
-           <td><code>169.50.115.113</code></td>
-          </tr>
-          <tr>
-           <td>Europa Centrale</td>
-           <td><code>ingest-eu-fra.logging.bluemix.net</code></td>
-           <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
-          </tr>
-          <tr>
-           <td>Asia Pacifico Sud, Asia Pacifico Nord</td>
-           <td><code>ingest-au-syd.logging.bluemix.net</code></td>
-           <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
-          </tr>
-         </tbody>
-       </table>
-</p>
+        <caption>Gli indirizzi IP da aprire per il traffico di registrazione</caption>
+                <thead>
+                <th>Regione {{site.data.keyword.containerlong_notm}}</th>
+                <th>Indirizzo di registrazione</th>
+                <th>Indirizzi IP di registrazione</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Stati Uniti Est, Stati Uniti Sud</td>
+                    <td><code>ingest.logging.ng.bluemix.net</code></td>
+                    <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
+                  </tr>
+                  <tr>
+                   <td>Regno Unito Sud</td>
+                   <td><code>ingest.logging.eu-gb.bluemix.net</code></td>
+                   <td><code>169.50.115.113</code></td>
+                  </tr>
+                  <tr>
+                   <td>Europa Centrale</td>
+                   <td><code>ingest-eu-fra.logging.bluemix.net</code></td>
+                   <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
+                  </tr>
+                  <tr>
+                   <td>Asia Pacifico Sud, Asia Pacifico Nord</td>
+                   <td><code>ingest-au-syd.logging.bluemix.net</code></td>
+                   <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
+                  </tr>
+                 </tbody>
+               </table></p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Sostituisci `<logDNA_public_IP>` con gli [indirizzi IP LogDNA](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
 
-5. Se utilizzi i servizi del programma di bilanciamento del carico, assicurati che tutti il traffico che utilizza il protocollo VRRP sia consentito tra i nodi di lavoro sulle interfacce pubbliche e private. {{site.data.keyword.containerlong_notm}} utilizza il protocollo VRRP per gestire gli indirizzi IP per i programmi di bilanciamento del carico pubblici e privati.
+6. Se utilizzi i servizi del programma di bilanciamento del carico, assicurati che tutto il traffico che utilizza il protocollo VRRP sia consentito tra i nodi di lavoro sulle interfacce pubbliche e private. {{site.data.keyword.containerlong_notm}} utilizza il protocollo VRRP per gestire gli indirizzi IP per i programmi di bilanciamento del carico pubblici e privati.
 
-6. {: #pvc}Per creare le attestazioni del volume persistente in un cluster privato, assicurati che il tuo cluster sia configurato con la seguente versione di Kubernetes o con le seguenti versioni del plugin di archiviazione {{site.data.keyword.Bluemix_notm}}. Queste versioni abilitano le comunicazioni di rete privata dal tuo cluster alle istanze di archiviazione persistente.
+7. {: #pvc}Per creare le attestazioni del volume persistente in un cluster privato, assicurati che il tuo cluster sia configurato con la seguente versione di Kubernetes o con le seguenti versioni del plugin di archiviazione {{site.data.keyword.cloud_notm}}. Queste versioni abilitano le comunicazioni di rete privata dal tuo cluster alle istanze di archiviazione persistente.
     <table>
-    <caption>Panoramica delle versioni di Kubernetes o del plugin di archiviazione {{site.data.keyword.Bluemix_notm}} richieste per i cluster privati</caption>
+    <caption>Panoramica delle versioni di Kubernetes o del plugin di archiviazione {{site.data.keyword.cloud_notm}} richieste per i cluster privati</caption>
     <thead>
       <th>Tipo di archiviazione</th>
       <th>Versione richiesta</th>
@@ -429,7 +431,7 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
      </tr>
      <tr>
        <td>Archiviazione blocchi</td>
-       <td>Plugin {{site.data.keyword.Bluemix_notm}} Block Storage versione 1.3.0 o successive</td>
+       <td>Plugin {{site.data.keyword.cloud_notm}} Block Storage versione 1.3.0 o successive</td>
      </tr>
      <tr>
        <td>Archiviazione oggetti</td>
@@ -438,9 +440,9 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
    </tbody>
    </table>
 
-   Se devi utilizzare una versione Kubernetes o una versione del plugin di archiviazione {{site.data.keyword.Bluemix_notm}} che non supporta le comunicazioni di rete sulla rete privata o se vuoi utilizzare {{site.data.keyword.cos_full_notm}} senza l'autenticazione HMAC, consenti l'accesso in uscita tramite il tuo firewall all'infrastruttura IBM Cloud (SoftLayer) e a {{site.data.keyword.Bluemix_notm}} Identity and Access Management:
+   Se devi utilizzare una versione Kubernetes o una versione del plugin di archiviazione {{site.data.keyword.cloud_notm}} che non supporta le comunicazioni di rete sulla rete privata o se vuoi utilizzare {{site.data.keyword.cos_full_notm}} senza l'autenticazione HMAC, consenti l'accesso in uscita tramite il tuo firewall all'infrastruttura IBM Cloud e a {{site.data.keyword.cloud_notm}} Identity and Access Management:
    - Consenti tutto il traffico di rete in uscita sulla porta TCP 443.
-   - Consenti l'accesso all'intervallo di IP dell'infrastruttura IBM Cloud (SoftLayer) per la zona in cui si trova il tuo cluster sia per la [**Rete di front-end (pubblica)**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) che per la [**Rete di back-end (privata)**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). Per trovare la zona del tuo cluster, esegui `ibmcloud ks clusters`.
+   - Consenti l'accesso all'intervallo di IP dell'infrastruttura IBM Cloud per la zona in cui si trova il tuo cluster sia per la [**Rete di front-end (pubblica)**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) che per la [**Rete di back-end (privata)**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). Per trovare la zona del tuo cluster, esegui `ibmcloud ks clusters`.
 
 
 <br />
@@ -452,13 +454,16 @@ A seconda della configurazione del tuo cluster, accedi ai servizi utilizzando gl
 Se hai un firewall sulla rete privata, consenti le comunicazioni tra i nodi di lavoro e consenti al tuo cluster l'accesso alle risorse dell'infrastruttura sulla rete privata.
 {:shortdesc}
 
+Vuoi utilizzare le politiche Calico perché fungano da tuo firewall del cluster invece di un firewall del dispositivo gateway? Vedi [Isolamento dei cluster sulla rete privata](/docs/containers?topic=containers-network_policies#isolate_workers).
+{: tip}
+
 1. Consenti tutto il traffico tra i nodi di lavoro.
     1. Consenti tutto il traffico TCP, UDP, VRRP e IPEncap tra i nodi di lavoro sulle interfacce pubbliche e private. {{site.data.keyword.containerlong_notm}} utilizza il protocollo VRRP per gestire gli indirizzi IP per i programmi di bilanciamento del carico privati e il protocollo IPEncap per consentire il traffico tra i pod nelle sottoreti.
     2. Se utilizzi le politiche Calico, o se hai dei firewall in ciascuna zona di un cluster multizona, un firewall potrebbe bloccare le comunicazioni tra i nodi di lavoro. Devi aprire tutti i nodi di lavoro nel cluster tra di loro utilizzando le porte e gli indirizzi IP privati dei nodi di lavoro oppure l'etichetta di nodo di lavoro Calico.
 
-2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) in modo da poter creare nodi di lavoro nel tuo cluster.
-    1. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) appropriati. Vedi [Rete di backend (privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
-    2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud (SoftLayer) per tutte le [zone](/docs/containers?topic=containers-regions-and-zones#zones) che stai utilizzando. Nota: devi aggiungere gli IP per le zone `dal01`, `dal10` e `wdc04` e, se il tuo cluster si trova nell'area geografica Europa, per la zona `ams01`. Vedi [Rete del servizio (nella rete di backend/privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
+2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud in modo da poter creare nodi di lavoro nel tuo cluster.
+    1. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud appropriati. Vedi [Rete di backend (privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network).
+    2. Consenti gli intervalli di IP privati dell'infrastruttura IBM Cloud per tutte le [zone](/docs/containers?topic=containers-regions-and-zones#zones) che stai utilizzando. **Nota**: devi aggiungere gli IP per le zone `dal01`, `dal10` e `wdc04` e, se il tuo cluster si trova nell'area geografica Europa, per la zona `ams01`. Vedi [Rete del servizio (nella rete di backend/privata)](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#service-network-on-backend-private-network-).
 
 3. Apri le seguenti porte:
     - Consenti connessioni TCP e UDP in uscita dai nodi di lavoro alle porte 80 e 443 per consentire gli aggiornamenti e i ricaricamenti dei nodi di lavoro.
@@ -476,72 +481,15 @@ Se hai un firewall sulla rete privata, consenti le comunicazioni tra i nodi di l
 Calico
 {: #firewall_calico_egress}
 
-Se utilizzi le [politiche di rete Calico](/docs/containers?topic=containers-network_policies) come firewall per limitare tutti i nodi di lavoro pubblici in uscita, devi consentire ai tuoi nodi di lavoro di accedere ai proxy locali per il server API master e l'etcd.
+Se utilizzi le [politiche di rete Calico](/docs/containers?topic=containers-network_policies) perché fungano da firewall per limitare tutta l'uscita di nodo di lavoro pubblico, devi consentire ai tuoi nodi di lavoro di accedere alle sottoreti necessarie per il funzionamento del cluster.
 {: shortdesc}
 
-1. [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Includi le opzioni `--admin` e `--network` con il comando `ibmcloud ks cluster-config`. `--admin` scarica le chiavi per accedere al tuo portfolio dell'infrastruttura ed eseguire i comandi Calico sui tuoi nodi di lavoro. `--network` scarica il file di configurazione Calico per eseguire tutti i comandi di Calico.
-  ```
-  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
-  ```
-  {: pre}
+Per utilizzare le politiche Calico perché fungano da tuo firewall del cluster sulla rete pubblica, devi applicare le politiche in [Isolamento dei cluster sulla rete pubblica](/docs/containers?topic=containers-network_policies#isolate_workers_public).
 
-2. Crea una politica di rete Calico che consente il traffico pubblico dal tuo cluster a 172.20.0.1:2040 e 172.21.0.1:443 per il proxy locale del server API e a 172.20.0.1:2041 per il proxy locale etcd.
-  ```
-  apiVersion: projectcalico.org/v3
-  kind: GlobalNetworkPolicy
-  metadata:
-    name: allow-master-local
-  spec:
-    egress:
-    - action: Allow
-      destination:
-        ports:
-        - 2040:2041
-        nets:
-        - 172.20.0.1/32
-        protocol: UDP
-    - action: Allow
-      destination:
-        ports:
-        - 2040:2041
-        nets:
-        - 172.20.0.1/32
-        protocol: TCP
-    - action: Allow
-      destination:
-        ports:
-        - 443
-        nets:
-        - 172.21.0.1/32
-        protocol: UDP
-    - action: Allow
-      destination:
-        ports:
-        - 443
-        nets:
-        - 172.21.0.1/32
-        protocol: TCP
-    order: 1500
-    selector: ibm.role == 'worker_public'
-    types:
-    - Egress
-  ```
-  {: codeblock}
+Per utilizzare le politiche Calico perché fungano da tuo firewall del cluster sulla rete privata, devi applicare le politiche in [Isolamento dei cluster sulla rete privata](/docs/containers?topic=containers-network_policies#isolate_workers).
 
-3. Applica la politica al cluster.
-    - Linux e OS X:
+<br />
 
-      ```
-      calicoctl apply -f allow-master-local.yaml
-      ```
-      {: pre}
-
-    - Windows:
-
-      ```
-      calicoctl apply -f filepath/allow-master-local.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
 
 ## Accesso ai servizi NodePort, programma di bilanciamento del carico e Ingress dall'esterno del cluster
 {: #firewall_inbound}
@@ -564,27 +512,27 @@ Puoi ora consentire l'accesso in entrata ai servizi NodePort, programma di bilan
 ## Inserimento in whitelist del tuo cluster nei firewall di altri servizi o nei firewall in loco
 {: #whitelist_workers}
 
-Se vuoi accedere a servizi eseguiti all'interno o all'esterno di {{site.data.keyword.Bluemix_notm}} o in loco e che sono protetti da un firewall, puoi aggiungere gli indirizzi IP dei tuoi nodi di lavoro in tale firewall per consentire il traffico di rete in uscita verso il tuo cluster. Ad esempio, potresti voler leggere i dati da un database {{site.data.keyword.Bluemix_notm}} protetto da un firewall o inserire nella whitelist le sottoreti del nodo di lavoro in un firewall in loco per consentire il traffico di rete dal tuo cluster.
+Se vuoi accedere a servizi eseguiti all'interno o all'esterno di {{site.data.keyword.cloud_notm}} o in loco e che sono protetti da un firewall, puoi aggiungere gli indirizzi IP dei tuoi nodi di lavoro in tale firewall per consentire il traffico di rete in uscita verso il tuo cluster. Ad esempio, potresti voler leggere i dati da un database {{site.data.keyword.cloud_notm}} protetto da un firewall o inserire nella whitelist le sottoreti del nodo di lavoro in un firewall in loco per consentire il traffico di rete dal tuo cluster.
 {:shortdesc}
 
 1.  [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 2. Ottieni le sottoreti o gli indirizzi IP del nodo di lavoro.
   * **Sottoreti del nodo di lavoro**: se prevedi di modificare frequentemente il numero di nodi di lavoro nel tuo cluster, ad esempio se abiliti il [cluster autoscaler](/docs/containers?topic=containers-ca#ca), potresti non voler aggiornare il firewall per ogni nuovo nodo di lavoro. Puoi invece inserire nella whitelist le sottoreti VLAN utilizzate dal cluster. Tieni presente che la sottorete VLAN potrebbe essere condivisa da nodi di lavoro in altri cluster.
-    <p class="note">Le **sottoreti pubbliche primarie** di cui {{site.data.keyword.containerlong_notm}} esegue il provisioning per il tuo cluster vengono fornite con 14 indirizzi IP disponibili e possono essere condivise da altri cluster sulla stessa VLAN. Se hai più di 14 nodi di lavoro, viene ordinata un'altra sottorete, per cui le sottoreti che devi inserire nella whitelist possono cambiare. Per ridurre la frequenza delle modifiche, crea pool di nodi di lavoro con varietà di nodi di lavoro con risorse CPU e memoria più elevate in modo da non dover aggiungere nodi tanto spesso.</p>
+    <p class="note">Le **sottoreti pubbliche primarie** di cui {{site.data.keyword.containerlong_notm}} esegue il provisioning per il tuo cluster vengono fornite con 14 indirizzi IP disponibili e possono essere condivise da altri cluster sulla stessa VLAN. Se hai più di 14 nodi di lavoro, viene ordinata un'altra sottorete, per cui le sottoreti che devi inserire nella whitelist possono cambiare. Per ridurre la frequenza delle modifiche, crea pool di nodi di lavoro con profili di nodi di lavoro con risorse CPU e memoria più elevate in modo da non dover aggiungere nodi tanto spesso.</p>
     1. Elenca i nodi di lavoro nel tuo cluster.
       ```
       ibmcloud ks workers --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
-    2. Dall'output del passo precedente, prendi nota di tutti gli ID di rete univoci (primi 3 ottetti) dell'**IP pubblico** per i nodi di lavoro nel tuo cluster. Se vuoi inserire in whitelist un cluster solo privato, prendi invece nota dell'**IP privato** . Nel seguente output, gli ID di rete univoci sono `169.xx.178` e `169.xx.210`.
+    2. Dall'output del passo precedente, prendi nota di tutti gli ID di rete univoci (primi tre ottetti) dell'**IP pubblico** per i nodi di lavoro nel tuo cluster. Se vuoi inserire in whitelist un cluster solo privato, prendi invece nota dell'**IP privato** . Nel seguente output, gli ID di rete univoci sono `169.xx.178` e `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.6  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.6  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.8   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.13.8  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.8   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.13.8  
         ```
         {: screen}
     3.  Elenca le sottoreti VLAN per ogni ID di rete univoco.
@@ -603,10 +551,12 @@ Se vuoi accedere a servizi eseguiti all'interno o all'esterno di {{site.data.key
     4.  Richiama l'indirizzo di sottorete. Nell'output, trova il numero di **IP**. Quindi, eleva `2` alla potenza di `n` uguale al numero di IP. Ad esempio, se il numero di IP è `16`, `2` viene elevato alla potenza di `4` (`n`) uguale a `16`. Ora ottieni il CIDR della sottorete sottraendo il valore di `n` da `32` bit. Ad esempio, se `n` è uguale a `4`, il CIDR è `28` (dall'equazione `32 - 4 = 28`). Combina la maschera dell'**identificativo** con il valore CIDR per ottenere l'indirizzo completo della sottorete. Nell'output precedente, gli indirizzi di sottorete sono:
         *   `169.xx.210.xxx/28`
         *   `169.xx.178.xxx/28`
-  * **Indirizzi IP dei singoli nodi di lavoro**: se hai un numero ridotto di nodi di lavoro che eseguono solo un'applicazione e non è necessario ridimensionarlo o se vuoi inserire nella whitelist solo un nodo di lavoro, elenca tutti i nodi di lavoro nel tuo cluster e prendi nota degli indirizzi **IP pubblici**. Se i tuoi nodi di lavoro sono connessi solo a una rete privata e vuoi connetterti ai servizi {{site.data.keyword.Bluemix_notm}} utilizzando l'endpoint del servizio privato, prendi nota degli indirizzi **IP privati**. Nota che solo questi nodi di lavoro sono inseriti nella whitelist. Se elimini o aggiungi nodi di lavoro nel cluster, devi aggiornare il tuo firewall di conseguenza.
+  * **Indirizzi IP dei singoli nodi di lavoro**: se hai un numero ridotto di nodi di lavoro che eseguono solo un'applicazione e non richiedono un ridimensionamento o se vuoi inserire nella whitelist solo un nodo di lavoro, elenca tutti i nodi di lavoro nel tuo cluster e prendi nota degli indirizzi **IP pubblici**. Se i tuoi nodi di lavoro sono connessi solo a una rete privata e vuoi connetterti ai servizi {{site.data.keyword.cloud_notm}} utilizzando l'endpoint del servizio privato, prendi nota degli indirizzi **IP privati**. Solo questi nodi di lavoro sono inseriti nella whitelist. Se elimini o aggiungi nodi di lavoro nel cluster, devi aggiornare il tuo firewall di conseguenza.
     ```
     ibmcloud ks workers --cluster <cluster_name_or_ID>
     ```
     {: pre}
 4.  Aggiungi il CIDR della sottorete o gli indirizzi IP al firewall del tuo servizio per il traffico in uscita o al firewall in loco per il traffico in entrata.
 5.  Ripeti questi passi per ciascun cluster che vuoi inserire nella whitelist.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Limitazione del traffico di rete ai nodi di lavoro edge
 {: #edge}
 
-I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster Kubernetes consentendo a un minor numero di nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete in {{site.data.keyword.containerlong}}.
+I nodi di lavoro edge possono migliorare la sicurezza del tuo cluster {{site.data.keyword.containerlong}} consentendo a un minor numero di nodi di lavoro di essere accessibili esternamente e isolando il carico di lavoro della rete.
 {:shortdesc}
 
 Quando questi nodi di lavoro sono contrassegnati solo per la rete, gli altri carichi di lavoro non possono consumare la CPU o la memoria del nodo di lavoro e interferire con la rete.
@@ -41,20 +40,20 @@ Se hai un cluster multizona e vuoi limitare il traffico di rete ai nodi di lavor
 Aggiungi l'etichetta `dedicated=edge` a due o più nodi di lavoro su ogni VLAN pubblica o privata nel tuo cluster per garantire che gli NLB (network load balancer) e gli ALB (application load balancer) Ingress vengano distribuiti solo a quei nodi di lavoro.
 {:shortdesc}
 
-In Kubernetes 1.14 e versioni successive, è possibile distribuire gli NLB e gli ALB sia pubblici che privati ai nodi di lavoro edge. In Kubernetes 1.13 e versioni precedenti, gli ALB pubblici e privati e gli NLB pubblici possono essere distribuiti ai nodi edge, ma gli NLB privati devono essere distribuiti solo ai nodi di lavoro non edge nel tuo cluster.
+**Cluster Kubernetes della community**: in Kubernetes 1.14 e versioni successive, è possibile distribuire gli NLB e gli ALB sia pubblici che privati ai nodi di lavoro edge. In Kubernetes 1.13 e versioni precedenti, gli ALB pubblici e privati e gli NLB pubblici possono essere distribuiti ai nodi edge, ma gli NLB privati devono essere distribuiti solo ai nodi di lavoro non edge nel tuo cluster.
 {: note}
 
 Prima di iniziare:
 
-* Assicurati di disporre dei seguenti [ruoli {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+* Assicurati di disporre dei seguenti [ruoli {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
   * Qualsiasi ruolo della piattaforma per il cluster
   * Ruolo del servizio **Scrittore** o **Gestore** per tutti gli spazi dei nomi
 * [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Per etichettare i nodi di lavoro come nodi edge:
 
-1. [Crea un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool) che si estenda su tutte le zone del tuo cluster e che abbia almeno due nodi di lavoro per zona. Nel comando `ibmcloud ks worker-pool-create`, includi l'indicatore `--labels dedicated=edge` per etichettare tutti i nodi di lavoro nel pool. Tutti i nodi di lavoro in questo pool, inclusi i nodi di lavoro che aggiungi in seguito, vengono etichettati come nodi edge.
-  <p class="tip">Se vuoi utilizzare un pool di nodi di lavoro esistente, il pool deve estendersi su tutte le zone del tuo cluster e avere almeno due nodi di lavoro per zona. Puoi etichettare il pool di nodi di lavoro con `dedicated=edge` utilizzando l'[API del pool di nodi di lavoro PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). Nel corpo della richiesta, passa il seguente JSON. Una volta che il pool di nodi di lavoro è contrassegnato con `dedicated=edge`, tutti i nodi di lavoro esistenti e successivi ottengono questa etichetta e i servizi Ingress e di programma di bilanciamento del carico vengono distribuiti su un nodo di lavoro edge.
+1. [Crea un nuovo pool di nodi di lavoro](/docs/containers?topic=containers-add_workers#add_pool) che si estenda su tutte le zone del tuo cluster e che abbia almeno due nodi di lavoro per zona. Nel comando `ibmcloud ks worker-pool-create`, includi l'indicatore `--labels dedicated=edge` per etichettare tutti i nodi di lavoro nel pool. Tutti i nodi di lavoro in questo pool, inclusi i nodi di lavoro che aggiungi in seguito, vengono etichettati come nodi edge. Una volta che il pool di nodi di lavoro è contrassegnato con `dedicated=edge`, tutti i nodi di lavoro esistenti e successivi ottengono questa etichetta e i servizi Ingress e di programma di bilanciamento del carico vengono distribuiti su un nodo di lavoro edge.
+  <p class="tip">Se vuoi utilizzare un pool di nodi di lavoro esistente, il pool deve estendersi su tutte le zone del tuo cluster e avere almeno due nodi di lavoro per zona. Puoi etichettare il pool di nodi di lavoro con `dedicated=edge` utilizzando l'[API del pool di nodi di lavoro PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). Nel corpo della richiesta, passa il seguente JSON.
       <pre class="screen">
       {
         "labels": {"dedicated":"edge"},
@@ -85,14 +84,14 @@ Prima di iniziare:
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
   default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
   kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  1h
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  57m
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
   ```
   {: screen}
 
 4. Utilizzando l'output dal passo precedente, immetti il seguente comando per ogni NLB e ALB. Questo comando ridistribuisce l'NLB o l'ALB a un nodo di lavoro edge.
 
-  Se il tuo cluster esegue Kubernetes 1.14 o versioni successive, puoi distribuire gli NLB e gli ALB sia pubblici che privati ai nodi di lavoro edge. In Kubernetes 1.13 e versioni precedenti, solo gli ALB pubblici e privati e gli NLB pubblici possono essere distribuiti ai nodi edge, pertanto non ridistribuire i servizi NLB privati.
+  **Cluster Kubernetes della community**: se il tuo cluster esegue Kubernetes 1.14 o versioni successive, puoi distribuire gli NLB e gli ALB sia pubblici che privati ai nodi di lavoro edge. In Kubernetes 1.13 e versioni precedenti, solo gli ALB pubblici e privati e gli NLB pubblici possono essere distribuiti ai nodi edge, pertanto non ridistribuire i servizi NLB privati.
   {: note}
 
   ```
@@ -189,7 +188,7 @@ Uno dei vantaggi dei nodi di lavoro edge è che possono essere specificati per e
 L'utilizzo della tolleranza `dedicated=edge` indica che tutti i servizi NLB (network load balancer) e ALB (application load balancer) Ingress vengono distribuiti solo ai nodi di lavoro etichettati. Tuttavia, per impedire che altri carichi di lavoro vengano eseguiti sui nodi di lavoro edge e consumino le risorse dei nodi di lavoro, devi utilizzare le [contaminazioni Kubernetes ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 Prima di iniziare:
-- Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Gestore** per tutti gli spazi dei nomi](/docs/containers?topic=containers-users#platform).
+- Assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Gestore** per tutti gli spazi dei nomi](/docs/containers?topic=containers-users#platform).
 - [Accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Per impedire l'esecuzione di altri carichi di lavoro sui nodi di lavoro edge:
@@ -223,3 +222,5 @@ Prima di iniziare:
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
+

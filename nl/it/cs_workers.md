@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -32,12 +32,12 @@ subcollection: containers
 Per incrementare la disponibilità delle tue applicazioni, puoi aggiungere i nodi di lavoro a una zona esistente o a più zone esistenti nel tuo cluster. Per un supporto nella protezione delle tue applicazioni dai malfunzionamenti della zona, puoi aggiungere le zone al tuo cluster.
 {:shortdesc}
 
-Quando crei un cluster, viene eseguito il provisioning dei nodi di lavoro in un pool di nodi di lavoro. Dopo aver creato il cluster, puoi aggiungere altri nodi di lavoro a un pool ridimensionandolo o aggiungendo altro pool di nodi di lavoro. Per impostazione predefinita, il pool di nodi di lavoro esiste in un'unica zona. I cluster che hanno un pool di nodi di lavoro in un'unica zona sono denominati cluster a zona singola. Quando aggiungi altre zone al cluster, il pool di nodi di lavoro esiste tra le zone. I cluster che hanno un pool di nodi di lavoro esteso tra più di una zona sono denominati cluster multizona.
+Quando crei un cluster, viene eseguito il provisioning dei nodi di lavoro in un pool di nodi di lavoro. Dopo aver creato il cluster, puoi aggiungere altri nodi di lavoro a un pool ridimensionandolo o aggiungendo altro pool di nodi di lavoro. Per impostazione predefinita, il pool di nodi di lavoro esiste in un'unica zona. I cluster che hanno un pool di nodi di lavoro in un'unica zona sono denominati cluster a zona singola. Quando aggiungi altre zone al cluster, il pool di nodi di lavoro esiste tra le zone. I cluster che hanno un pool di nodi di lavoro distribuito tra più di una zona sono denominati cluster multizona.
 
-Se hai un cluster multizona, mantieni bilanciate le sue risorse del nodo di lavoro. Assicurati che tutti i pool di nodi di lavoro vengano estesi tra le stesse zone e aggiungi o rimuovi i nodi di lavoro ridimensionando i pool invece di aggiungere singoli nodi.
+Se hai un cluster multizona, mantieni bilanciate le sue risorse del nodo di lavoro. Assicurati che tutti i pool di nodi di lavoro vengano distribuiti tra le stesse zone e aggiungi o rimuovi i nodi di lavoro ridimensionando i pool invece di aggiungere singoli nodi.
 {: tip}
 
-Prima di iniziare, assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.Bluemix_notm}} IAM **Operatore** o **Amministratore**](/docs/containers?topic=containers-users#platform). Quindi, scegli una delle seguenti sezioni:
+Prima di iniziare, assicurati di disporre del [ruolo della piattaforma {{site.data.keyword.cloud_notm}} IAM **Operatore** o **Amministratore** ](/docs/containers?topic=containers-users#platform). Quindi, scegli una delle seguenti sezioni:
   * [Aggiungere nodi di lavoro ridimensionando un pool di nodi di lavoro esistente nel tuo cluster](#resize_pool)
   * [Aggiungere nodi di lavoro aggiungendo un pool di nodi di lavoro al tuo cluster](#add_pool)
   * [Aggiungere una zona al tuo cluster e replicare i nodi di lavoro nei tuoi pool di nodi di lavoro tra più zone](#add_zone)
@@ -49,7 +49,7 @@ Dopo aver configurato il tuo pool di nodi di lavoro, puoi [configurare il cluste
 ## Aggiunta di nodi di lavoro ridimensionando un pool di nodi di lavoro esistente
 {: #resize_pool}
 
-Puoi aggiungere o ridurre il numero di nodi di lavoro nel tuo cluster ridimensionando un pool di nodi di lavoro esistente, indipendentemente dal fatto che il pool di nodi di lavoro si trovi in un'unica zona o sia esteso tra più zone.
+Puoi aggiungere o ridurre il numero di nodi di lavoro nel tuo cluster ridimensionando un pool di nodi di lavoro esistente, indipendentemente dal fatto che il pool di nodi di lavoro si trovi in un'unica zona o sia distribuito tra più zone.
 {: shortdesc}
 
 Ad esempio, prendi in considerazione un cluster con un pool di nodi di lavoro che ha tre nodi di lavoro per ogni zona.
@@ -95,7 +95,7 @@ Per ridimensionare il pool di nodi di lavoro, modifica il numero di nodi di lavo
 Puoi aggiungere nodi di lavoro al tuo cluster creando un nuovo pool di nodi di lavoro.
 {:shortdesc}
 
-1. Richiama le **Worker Zones** del tuo cluster e scegli la zona in cui vuoi distribuire i nodi di lavoro nel tuo pool di nodi di lavoro. Se hai un cluster a zona singola, devi utilizzare la zona visualizzata nel campo **Worker Zones**. Per i cluster multizona, puoi scegliere una qualsiasi delle **Worker Zones** esistenti del tuo cluster o aggiungere una delle [località metropolitane multizona](/docs/containers?topic=containers-regions-and-zones#zones) per la regione in cui si trova il tuo cluster. Puoi elencare le zone disponibili eseguendo `ibmcloud ks zones`.
+1. Richiama le **Worker Zones** del tuo cluster e scegli la zona a cui vuoi distribuire i nodi di lavoro nel tuo pool di nodi di lavoro. Se hai un cluster a zona singola, devi utilizzare la zona visualizzata nel campo **Worker Zones**. Per i cluster multizona, puoi scegliere una qualsiasi delle **Worker Zones** esistenti del tuo cluster o aggiungere una delle [località metropolitane multizona](/docs/containers?topic=containers-regions-and-zones#zones) per la regione in cui si trova il tuo cluster. Puoi elencare le zone disponibili eseguendo `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -161,11 +161,11 @@ Puoi estendere il tuo cluster tra più zone all'interno di una regione aggiungen
 
 Quando aggiungi una zona a un pool di nodi di lavoro, viene eseguito il provisioning dei nodi di lavoro definiti nel tuo pool di nodi di lavoro nella nuova zona e vengono considerati per una pianificazione futura del carico di lavoro. {{site.data.keyword.containerlong_notm}} aggiunge automaticamente l'etichetta `failure-domain.beta.kubernetes.io/region` per la regione e l'etichetta `failure-domain.beta.kubernetes.io/zone` per la zona a ciascun nodo di lavoro. Il programma di pianificazione (scheduler) Kubernetes usa queste tabelle per estendere i pod tra le zone all'interno della stessa regione.
 
-Se hai più pool di nodi di lavoro nel tuo cluster, aggiungi la zona a tutti i pool in modo che i nodi di lavoro vengano estesi in modo uniforme nel tuo cluster.
+Se hai più pool di nodi di lavoro nel tuo cluster, aggiungi la zona a tutti i pool in modo che i nodi di lavoro vengano distribuiti in modo uniforme nel tuo cluster.
 
 Prima di iniziare:
 *  Per aggiungere una zona al tuo pool di nodi di lavoro, il tuo pool di nodi di lavoro deve trovarsi in una [zona che supporta il multizona](/docs/containers?topic=containers-regions-and-zones#zones). Se il tuo pool di nodi di lavoro non si trova in una zona che supporta il multizona, prendi in considerazione di [creare un nuovo pool di nodi di lavoro](#add_pool).
-*  Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud (SoftLayer) in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, usa il [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+*  Se hai più VLAN per un cluster, più sottoreti sulla stessa VLAN o un cluster multizona, devi abilitare una [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) per il tuo account dell'infrastruttura IBM Cloud in modo che i tuoi nodi di lavoro possano comunicare tra loro sulla rete privata. Per abilitare VRF, [contatta il tuo rappresentante dell'account dell'infrastruttura IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Se non puoi o non vuoi abilitare VRF, abilita lo [spanning della VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Per eseguire questa azione, ti serve l'[autorizzazione dell'infrastruttura](/docs/containers?topic=containers-users#infra_access) **Rete > Gestisci il VLAN Spanning di rete** oppure puoi richiedere al proprietario dell'account di abilitarlo. Per controllare se lo spanning della VLAN è già abilitato, utilizza il [comando `ibmcloud ks vlan-spanning-get --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 Per aggiungere una zona con nodi di lavoro al tuo pool di nodi di lavoro:
 
@@ -317,7 +317,7 @@ Dopo che hai etichettato il tuo pool di nodi di lavoro, puoi utilizzare l'[etich
 ## Autorecovery per i tuoi nodi di lavoro
 {: #planning_autorecovery}
 
-I componenti critici, come `containerd`, `kubelet`, `kube-proxy` e `calico`, devono funzionare correttamente per avere un nodo di lavoro Kubernetes integro. Con il passare del tempo questi componenti possono rompersi e lasciare il tuo nodo di lavoro in uno stato non funzionale. I nodi di lavoro non funzionali riducono la capacità totale del cluster e possono causare tempi di inattività per la tua applicazione.
+I componenti critici, come `containerd`, `kubelet`, `kube-proxy` e `calico`, devono funzionare correttamente per avere un nodo di lavoro Kubernetes integro. Con il passare del tempo questi componenti possono danneggiarsi e lasciare il tuo nodo di lavoro in uno stato non funzionale. I nodi di lavoro non funzionali riducono la capacità totale del cluster e possono causare tempi di inattività per la tua applicazione.
 {:shortdesc}
 
 Puoi [configurare i controlli dell'integrità per il nodo di lavoro e abilitare l'Autorecovery](/docs/containers?topic=containers-health#autorecovery). Se Autorecovery rileva un nodo di lavoro non integro in base ai controlli configurati, attiva un'azione correttiva come un ricaricamento del sistema operativo sul nodo di lavoro. Per ulteriori informazioni su come funziona Autorecovery, vedi il [blog Autorecovery ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).

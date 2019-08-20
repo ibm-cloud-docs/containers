@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ Para conectar seus nós do trabalhador e apps a um data center no local, é poss
 
 - **Serviço de VPN IPSec strongSwan**: é possível configurar um [Serviço de VPN IPSec strongSwan ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://www.strongswan.org/about.html) que conecte de forma segura seu cluster do Kubernetes a uma rede no local. O serviço de VPN do IPSec do strongSwan fornece um canal de comunicação seguro de ponta a ponta sobre a Internet que é baseado no conjunto de protocolos padrão de mercado da Internet Protocol Security (IPSec). Para configurar uma conexão segura entre seu cluster e uma rede no local, [configure e implemente o serviço VPN IPSec do strongSwan](#vpn-setup) diretamente em um pod no cluster.
 
-- **{{site.data.keyword.BluDirectLink}}**: o [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) permite criar uma conexão direta e privada entre seus ambientes de rede remota e o {{site.data.keyword.containerlong_notm}} sem rotear pela Internet pública. As ofertas do {{site.data.keyword.Bluemix_notm}} Direct Link são úteis quando se deve implementar cargas de trabalho híbridas, cargas de trabalho entre provedores, transferências de dados grandes ou frequentes ou cargas de trabalho privadas. Para escolher uma oferta do {{site.data.keyword.Bluemix_notm}} Direct Link e configurar uma conexão do {{site.data.keyword.Bluemix_notm}} Direct Link, consulte [Introdução ao IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) na documentação do {{site.data.keyword.Bluemix_notm}} Direct Link.
+- **{{site.data.keyword.BluDirectLink}}**: o [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) permite criar uma conexão direta e privada entre seus ambientes de rede remota e o {{site.data.keyword.containerlong_notm}} sem rotear pela Internet pública. As ofertas do {{site.data.keyword.cloud_notm}} Direct Link são úteis quando se deve implementar cargas de trabalho híbridas, cargas de trabalho entre provedores, transferências de dados grandes ou frequentes ou cargas de trabalho privadas. Para escolher uma oferta do {{site.data.keyword.cloud_notm}} Direct Link e configurar uma conexão do {{site.data.keyword.cloud_notm}} Direct Link, consulte [Introdução ao IBM Cloud {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) na documentação do {{site.data.keyword.cloud_notm}} Direct Link.
 
 - **Virtual Router Appliance (VRA) ou Fortigate Security Appliance (FSA)**: é possível optar por configurar um [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou um [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) para configurar um terminal VPN do IPSec. Essa opção é útil quando você tem um cluster maior, deseja acessar múltiplos clusters por meio de uma única VPN ou precisa de uma VPN baseada em rota. Para configurar um VRA, veja [Configurando a conectividade VPN com o VRA](#vyatta).
 
@@ -85,7 +85,7 @@ Os clusters com múltiplas zonas fornecem alta disponibilidade para apps no even
 {: shortdesc}
 
 Antes de configurar o strongSwan em um cluster com múltiplas zonas, primeiro tente implementar um gráfico do Helm do strongSwan em um cluster de zona única. Ao estabelecer uma conexão VPN pela primeira vez entre um cluster de zona única e uma rede no local, é possível determinar mais facilmente as configurações de firewall de rede remota que são importantes para uma configuração do strongSwan com múltiplas zonas:
-* Alguns terminais de VPN remotos têm configurações como `leftid` ou `rightid` no arquivo `ipsec.conf`. Se você tiver essas configurações, verifique se você deve configurar o `leftid` para o endereço IP do túnel VPN IPSec.
+* Alguns terminais de VPN remotos têm configurações como `leftid` ou `rightid` no arquivo `ipsec.conf`. Se você tiver essas configurações, verifique se deve-se configurar o `leftid` para o endereço IP do túnel VPN IPSec.
 *	Se a conexão for de entrada para o cluster por meio da rede remota, verifique se o terminal VPN remoto pode restabelecer a conexão VPN com um endereço IP diferente em caso de falha do balanceador de carga em uma zona.
 
 Para iniciar com o strongSwan em um cluster com múltiplas zonas, escolha uma das opções a seguir.
@@ -111,6 +111,7 @@ Quando a conexão VPN é saída do cluster com múltiplas zonas, somente uma imp
     - `zoneLoadBalancer`: especifique um endereço IP do balanceador de carga público para cada zona na qual você tem nós do trabalhador. [É possível verificar seus endereços IP públicos disponíveis](/docs/containers?topic=containers-subnets#review_ip) ou [liberar um endereço IP usado](/docs/containers?topic=containers-subnets#free). Como o pod VPN forte pode ser planejado para um nó trabalhador em qualquer zona, essa lista de IPs assegura que um IP do balanceador de carga possa ser usado em qualquer zona em que o pod VPN esteja planejado.
     - ` connectUsingLoadBalancerIP `: configurado como  ` true `. Quando o pod da VPN do strongSwan é planejado em um nó trabalhador, o serviço strongSwan seleciona o endereço IP do balanceador de carga que está na mesma zona e usa esse IP para estabelecer a conexão de saída.
     - `local.id`: especifique um valor fixo que seja suportado pelo terminal VPN remoto. Se o terminal VPN remoto requerer que você configure a opção `local.id` (valor `leftid` em `ipsec.conf`) para o endereço IP público do túnel VPN IPSec, configure `local.id` para `%loadBalancerIP `. Esse valor configura automaticamente o valor `leftid` em `ipsec.conf` para o endereço IP do balanceador de carga que é usado para a conexão.
+    - Opcional: oculte todos os endereços IP do cluster por trás de um único endereço IP em cada zona, configurando `enableSingleSourceIP` como `true`. Essa opção fornece uma das configurações mais seguras para a conexão VPN porque nenhuma conexão da rede remota de volta para o cluster é permitida. Também deve-se configurar `local.subnet` para a variável `%zoneSubnet` e usar `local.zoneSubnet` para especificar um endereço IP como uma sub-rede /32 para cada zona do cluster.
 
 2. Em seu firewall de rede remota, permita conexões VPN IPSec de entrada por meio dos endereços IP públicos listados na configuração `zoneLoadBalancer`.
 
@@ -168,7 +169,7 @@ Antes de instalar o gráfico Helm do strongSwan, deve-se decidir sobre a configu
 
 Antes de iniciar:
 * Instale um gateway de VPN IPSec em seu data center no local.
-* Assegure-se de que você tenha a [função de **Gravador** ou **Gerenciador** do serviço {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
+* Certifique-se de ter a [função de serviço **Gravador** ou **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para o namespace `default`.
 * [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Nota**: todas as configurações do strongSwan são permitidas em clusters padrão. Se você usar um cluster grátis, será possível escolher apenas uma conexão VPN de saída na [Etapa 3](#strongswan_3). Conexões VPN de entrada requerem um balanceador de carga no cluster e os balanceadores de carga não estão disponíveis para clusters grátis.
 
@@ -178,7 +179,7 @@ Antes de iniciar:
 Instale o Helm e obterá o gráfico Helm do strongSwan para visualizar as configurações possíveis.
 {: shortdesc}
 
-1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local, instale o servidor Helm (tiller) com uma conta do serviço e inclua o repositório Helm do {{site.data.keyword.Bluemix_notm}}. Observe que o Helm versão 2.8 ou mais recente é necessário.
+1.  [Siga as instruções](/docs/containers?topic=containers-helm#public_helm_install) para instalar o cliente Helm em sua máquina local, instale o servidor Helm (tiller) com uma conta do serviço e inclua o repositório Helm do {{site.data.keyword.cloud_notm}}. Observe que o Helm versão 2.8 ou mais recente é necessário.
 
 2.  Verifique se o tiller está instalado com uma conta do serviço.
 
@@ -281,7 +282,7 @@ Determine quais recursos do cluster devem ser acessíveis pela rede remota por m
 3. Opcional para gráficos Helm do strongSwan da versão 2.2.0 e mais recente: oculte todos os endereços IP do cluster atrás de um único endereço IP configurando `enableSingleSourceIP` como `true`. Essa opção fornece uma das configurações mais seguras para a conexão VPN porque nenhuma conexão da rede remota de volta para o cluster é permitida.
     <br>
     * Essa configuração requer que todo fluxo de dados sobre a conexão VPN seja de saída, independentemente se a conexão VPN é estabelecida por meio do cluster ou da rede remota.
-    * O `local.subnet` deve ser configurado para somente uma sub-rede /32.
+    * Se você instalar o strongSwan em um cluster de zona única, deverá configurar `local.subnet` para apenas um endereço IP como uma sub-rede /32. Se você instalar o strongSwan em um cluster multizona, será possível configurar `local.subnet` para a variável `%zoneSubnet` e usar `local.zoneSubnet` para especificar um endereço IP como uma sub-rede /32 para cada zona do cluster.
 
 4. Opcional para gráficos Helm do strongSwan da versão 2.2.0 e mais recente: ative o serviço strongSwan para rotear as solicitações recebidas da rede remota para um serviço que exista fora do cluster usando a configuração `localNonClusterSubnet`.
     <br>
@@ -673,7 +674,7 @@ Para fazer upgrade de seu gráfico Helm do strongSwan para a versão mais recent
 O [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) fornece o sistema operacional Vyatta 5600 mais recente para servidores bare metal x86. É possível usar um VRA como um gateway de VPN para se conectar com segurança a uma rede no local.
 {:shortdesc}
 
-Todo o tráfego de rede pública e privada que entra ou sai das VLANs do cluster é roteado por meio de um VRA. É possível usar o VRA como um terminal de VPN para criar um túnel IPSec criptografado entre servidores na infraestrutura do IBM Cloud (SoftLayer) e recursos no local. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containerlong_notm}} pode se comunicar com um servidor no local por meio de uma conexão VPN do VRA:
+Todo o tráfego de rede pública e privada que entra ou sai das VLANs do cluster é roteado por meio de um VRA. É possível usar o VRA como um terminal VPN para criar um túnel IPSec criptografado entre servidores na infraestrutura do IBM Cloud e nos recursos no local. Por exemplo, o diagrama a seguir mostra como um app em um nó do trabalhador somente privado no {{site.data.keyword.containerlong_notm}} pode se comunicar com um servidor no local por meio de uma conexão VPN do VRA:
 
 <img src="images/cs_vpn_vyatta.png" width="725" alt="Expor um app no {{site.data.keyword.containerlong_notm}} usando um balanceador de carga" style="width:725px; border-style: none"/>
 

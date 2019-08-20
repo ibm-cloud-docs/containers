@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Panoramica dei casi di utilizzo
 {: #cs_uc_intro}
 
-Vari casi di utilizzo mostrano i punti di forza dell'utilizzo congiunto dei servizi {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.Bluemix_notm}}. Queste storie evidenziano diversi settori e tipi di carichi di lavoro. Anche se ogni caso viene presentato attraverso l'obiettivo di un particolare settore, questi carichi di lavoro sono tipici di vari settori. Vengono mostrati temi quali: 
+Vari casi di utilizzo mostrano i punti di forza dell'utilizzo congiunto dei servizi {{site.data.keyword.containerlong_notm}} e {{site.data.keyword.cloud_notm}}. Queste storie evidenziano diversi settori e tipi di carichi di lavoro. Anche se ogni caso viene presentato attraverso l'obiettivo di un particolare settore, questi carichi di lavoro sono tipici di vari settori. Vengono mostrati temi quali: 
 * Intelligenza artificiale e machine learning
 * Dati e archiviazione
 * DevOps

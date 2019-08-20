@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -31,14 +31,14 @@ subcollection: containers
 ## IBM Cloud Block Storage Attacher-Plug-in installieren (Beta)
 {: #block_storage_attacher}
 
-Mithilfe des Plug-ins für {{site.data.keyword.Bluemix_notm}} Block Storage Attacher können Sie unaufbereiteten, unformatierten und nicht angehängten Blockspeicher einem Workerknoten in Ihrem Cluster zuordnen.  
+Mithilfe des Plug-ins für {{site.data.keyword.cloud_notm}} Block Storage Attacher können Sie unaufbereiteten, unformatierten und nicht angehängten Blockspeicher einem Workerknoten in Ihrem Cluster zuordnen.  
 {: shortdesc}
 
-Sie wollen zum Beispiel Ihre Daten mit einer SDS-Lösung (SDS - Software Defined Storage, softwaredefinierter Speicher) wie [Portworx](/docs/containers?topic=containers-portworx) speichern, dazu jedoch keine Bare-Metal-Workerknoten verwenden, die für die SDS-Nutzung optimiert sind und mit zusätzlichen lokalen Platten bereitgestellt werden. Wenn Sie Ihrem Nicht-SDS-Workerknoten lokale Platten hinzufügen wollen, müssen Sie Ihre Blockspeichereinheiten manuell in Ihrem {{site.data.keyword.Bluemix_notm}}-Infrastrukturkonto erstellen und den Speicher mithilfe von {{site.data.keyword.Bluemix_notm}} Block Volume Attacher Ihrem Nicht-SDS-Workerknoten zuordnen.
+Sie wollen zum Beispiel Ihre Daten mit einer SDS-Lösung (SDS - Software Defined Storage, softwaredefinierter Speicher) wie [Portworx](/docs/containers?topic=containers-portworx) speichern, dazu jedoch keine Bare-Metal-Workerknoten verwenden, die für die SDS-Nutzung optimiert sind und mit zusätzlichen lokalen Platten bereitgestellt werden. Wenn Sie Ihrem Nicht-SDS-Workerknoten lokale Platten hinzufügen wollen, müssen Sie Ihre Blockspeichereinheiten manuell in Ihrem Konto der {{site.data.keyword.cloud_notm}}-Infrastruktur erstellen und den Speicher mithilfe von {{site.data.keyword.cloud_notm}} Block Volume Attacher Ihrem Nicht-SDS-Workerknoten zuordnen.
 
-Das {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-in erstellt Pods auf jedem Workerknoten in Ihrem Cluster als Teil einer Dämongruppe und richtet eine Kubernetes-Speicherklasse ein, die Sie später zum Zuordnen der Blockspeichereinheit zu Ihren Nicht-SDS-Workerknoten verwenden können.
+Das {{site.data.keyword.cloud_notm}} Block Volume Attacher-Plug-in erstellt Pods auf jedem Workerknoten in Ihrem Cluster als Teil einer Dämongruppe und richtet eine Kubernetes-Speicherklasse ein, die Sie später zum Zuordnen der Blockspeichereinheit zu Ihren Nicht-SDS-Workerknoten verwenden können.
 
-Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-ins? Weitere Informationen hierzu finden Sie in den Abschnitten [Plug-in aktualisieren](#update_block_attacher) und [Plug-in entfernen](#remove_block_attacher).
+Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.keyword.cloud_notm}} Block Volume Attacher-Plug-ins? Weitere Informationen hierzu finden Sie in den Abschnitten [Plug-in aktualisieren](#update_block_attacher) und [Plug-in entfernen](#remove_block_attacher).
 {: tip}
 
 1.  [Befolgen Sie die Anweisungen](/docs/containers?topic=containers-helm#public_helm_install) zum Installieren des Helm-Clients auf Ihrer lokalen Maschine und installieren Sie den Helm-Server (tiller) mit einem Servicekonto in Ihrem Cluster.
@@ -64,7 +64,7 @@ Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.key
    ```
    {: pre}
 
-4. Installieren Sie das {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-in. Wenn Sie das Plug-in installieren, werden Ihrem Cluster vordefinierte Blockspeicherklassen hinzugefügt.
+4. Installieren Sie das {{site.data.keyword.cloud_notm}} Block Volume Attacher-Plug-in. Wenn Sie das Plug-in installieren, werden Ihrem Cluster vordefinierte Blockspeicherklassen hinzugefügt.
    ```
    helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
@@ -106,7 +106,7 @@ Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.key
    ```
    {: screen}
 
-5. Überprüfen Sie, ob die {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Dämongruppe erfolgreich installiert wurde.
+5. Überprüfen Sie, ob die {{site.data.keyword.cloud_notm}} Block Volume Attacher-Dämongruppe erfolgreich installiert wurde.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -120,7 +120,7 @@ Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.key
 
    Die Installation war erfolgreich, wenn ein oder mehrere Pods des Typs **ibmcloud-block-storage-attacher** angezeigt werden. Die Anzahl der Pods entspricht der Anzahl der Workerknoten in Ihrem Cluster. Alle Pods müssen den Status **Running** (Aktiv) aufweisen.
 
-6. Überprüfen Sie, ob die Speicherklasse für {{site.data.keyword.Bluemix_notm}} Block Volume Attacher erfolgreich erstellt wurde.
+6. Überprüfen Sie, ob die Speicherklasse für {{site.data.keyword.cloud_notm}} Block Volume Attacher erfolgreich erstellt wurde.
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -135,7 +135,7 @@ Suchen Sie nach Anweisungen zum Aktualisieren oder Entfernen des {{site.data.key
 ### IBM Cloud Block Storage Attacher-Plug-in aktualisieren
 {: #update_block_attacher}
 
-Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-ins auf die aktuelle Version durchführen.
+Sie können ein Upgrade des vorhandenen {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-ins auf die aktuelle Version durchführen.
 {: shortdesc}
 
 1. Aktualisieren Sie das Helm-Repository, um die aktuelle Version aller Helm-Diagramme in diesem Repository abzurufen.
@@ -150,7 +150,7 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}} Block
    ```
    {: pre}
 
-3. Ermitteln Sie den Namen des Helm-Diagramms für das {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-in.
+3. Ermitteln Sie den Namen des Helm-Diagramms für das {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-in.
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -162,7 +162,7 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}} Block
    ```
    {: screen}
 
-4. Führen Sie ein Upgrade von {{site.data.keyword.Bluemix_notm}} Block Storage Attacher auf die aktuelle Version durch.
+4. Führen Sie ein Upgrade von {{site.data.keyword.cloud_notm}} Block Storage Attacher auf die aktuelle Version durch.
    ```
    helm upgrade --force --recreate-pods <helm-diagrammname> ibm-block-storage-attacher
    ```
@@ -171,10 +171,10 @@ Sie können ein Upgrade des vorhandenen {{site.data.keyword.Bluemix_notm}} Block
 ### IBM Cloud Block Volume Attacher-Plug-in entfernen
 {: #remove_block_attacher}
 
-Wenn Sie in Ihrem Cluster das {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-in nicht bereitstellen und verwenden wollen, können Sie das Helm-Diagramm deinstallieren.
+Wenn Sie in Ihrem Cluster das {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-in nicht bereitstellen und verwenden wollen, können Sie das Helm-Diagramm deinstallieren.
 {: shortdesc}
 
-1. Ermitteln Sie den Namen des Helm-Diagramms für das {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-in.
+1. Ermitteln Sie den Namen des Helm-Diagramms für das {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-in.
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -186,13 +186,13 @@ Wenn Sie in Ihrem Cluster das {{site.data.keyword.Bluemix_notm}} Block Storage A
    ```
    {: screen}
 
-2. Löschen Sie das {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-in, indem Sie das Helm-Diagramm entfernen.
+2. Löschen Sie das {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-in, indem Sie das Helm-Diagramm entfernen.
    ```
    helm delete <helm-diagrammname> --purge
    ```
    {: pre}
 
-3. Überprüfen Sie, ob die Pods für das {{site.data.keyword.Bluemix_notm}} Block Storage Attacher-Plug-in entfernt wurden.
+3. Überprüfen Sie, ob die Pods für das {{site.data.keyword.cloud_notm}} Block Storage Attacher-Plug-in entfernt wurden.
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -200,7 +200,7 @@ Wenn Sie in Ihrem Cluster das {{site.data.keyword.Bluemix_notm}} Block Storage A
 
    Das Entfernen der Pods war erfolgreich, wenn in Ihrer CLI-Ausgabe keine Pods angezeigt werden.
 
-4. Überprüfen Sie, ob die Speicherklasse für {{site.data.keyword.Bluemix_notm}} Block Storage Attacher entfernt wurde.
+4. Überprüfen Sie, ob die Speicherklasse für {{site.data.keyword.cloud_notm}} Block Storage Attacher entfernt wurde.
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -211,22 +211,22 @@ Wenn Sie in Ihrem Cluster das {{site.data.keyword.Bluemix_notm}} Block Storage A
 ## Unformatierten Blockspeicher automatisch bereitstellen und Workerknoten für den Zugriff auf den Speicher berechtigen
 {: #automatic_block}
 
-Mithilfe des {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-ins können Sie allen Workerknoten in Ihrem Cluster automatisch unaufbereiteten, unformatierten und nicht angehängten Blockspeicher mit derselben Konfiguration hinzufügen.
+Mithilfe des {{site.data.keyword.cloud_notm}} Block Volume Attacher-Plug-ins können Sie allen Workerknoten in Ihrem Cluster automatisch unaufbereiteten, unformatierten und nicht angehängten Blockspeicher mit derselben Konfiguration hinzufügen.
 {: shortdesc}
 
-Der Container `mkpvyaml`, der im {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Plug-in enthalten ist, ist dazu konfiguriert, ein Script auszuführen, das alle Workerknoten in Ihrem Cluster sucht, unaufbereiteten Blockspeicher im {{site.data.keyword.Bluemix_notm}}-Infrastrukturportal erstellt und dann die Workerknoten zum Zugriff auf den Speicher berechtigt.
+Der Container `mkpvyaml`, der im {{site.data.keyword.cloud_notm}} Block Volume Attacher-Plug-in enthalten ist, ist dazu konfiguriert, ein Script auszuführen, das alle Workerknoten in Ihrem Cluster sucht, unaufbereiteten Blockspeicher im {{site.data.keyword.cloud_notm}}-Infrastrukturportal erstellt und dann die Workerknoten zum Zugriff auf den Speicher berechtigt.
 
 Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fügen Sie den Blockspeicher nur einer Untergruppe der Workerknoten hinzu oder, wenn Sie mehr Kontrolle über den Bereitstellungsprozess haben möchten, [fügen Sie Blockspeicher manuell hinzu](#manual_block).
 {: tip}
 
 
-1. Melden Sie sich bei {{site.data.keyword.Bluemix_notm}} an und definieren Sie die Ressourcengruppe, in der sich Ihr Cluster befindet, als Ziel
+1. Melden Sie sich bei {{site.data.keyword.cloud_notm}} an und definieren Sie die Ressourcengruppe, in der sich Ihr Cluster befindet, als Ziel
    ```
    ibmcloud login
    ```
    {: pre}
 
-2.  Klonen Sie das Repository von {{site.data.keyword.Bluemix_notm}} Storage Utilities.
+2.  Klonen Sie das Repository von {{site.data.keyword.cloud_notm}} Storage Utilities.
     ```
     git clone https://github.com/IBM/ibmcloud-storage-utilities.git
     ```
@@ -288,8 +288,8 @@ Wenn Sie unterschiedliche Blockspeicherkonfigurationen hinzufügen möchten, fü
    </tbody>
    </table>  
 
-5. Rufen Sie den Benutzernamen und den API-Schlüssel für Ihre IBM Cloud-Infrastruktur (SoftLayer) ab. Der Benutzername und der API-Schlüssel werden vom Script `mkpvyaml` für den Zugriff auf den Cluster verwendet.
-   1. Melden Sie sich bei der [{{site.data.keyword.Bluemix_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an.
+5. Rufen Sie den Benutzernamen und den API-Schlüssel für Ihre IBM Cloud-Infrastruktur ab. Der Benutzername und der API-Schlüssel werden vom Script `mkpvyaml` für den Zugriff auf den Cluster verwendet.
+   1. Melden Sie sich bei der [{{site.data.keyword.cloud_notm}}-Konsole ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/) an. 
    2. Wählen Sie im Menü ![Menüsymbol](../icons/icon_hamburger.svg "Menüsymbol") die Option **Infrastruktur** aus.
    3. Wählen Sie in der Menüleiste **Konto** > **Benutzer** > **Benutzerliste** aus.
    4. Suchen Sie den Benutzer, dessen Benutzernamen und API-Schlüssel Sie abrufen wollen.
@@ -499,7 +499,7 @@ Verwenden Sie diese Option, wenn Sie unterschiedliche Blockspeicherkonfiguration
 ## Unaufbereiteten Blockspeicher Nicht-SDS-Workerknoten zuordnen
 {: #attach_block}
 
-Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müssen Sie einen persistenten Datenträger (PV - Persistent Volume) mit der {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Speicherklasse und den Details Ihrer Blockspeichereinheit erstellen.
+Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müssen Sie einen persistenten Datenträger (PV - Persistent Volume) mit der {{site.data.keyword.cloud_notm}} Block Volume Attacher-Speicherklasse und den Details Ihrer Blockspeichereinheit erstellen.
 {: shortdesc}
 
 **Vorbereitende Schritte**:
@@ -565,11 +565,11 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
-        <td>Geben Sie den Benutzernamen für die IBM Cloud-Infrastruktur (SoftLayer) ein, den Sie zuvor abgerufen haben. </td>
+        <td>Geben Sie den Benutzernamen für die IBM Cloud-Infrastruktur ein, den Sie zuvor abgerufen haben. </td>
         </tr>
         <tr>
         <td><code>ibm.io/password</code></td>
-        <td>Geben Sie das Kennwort für die IBM Cloud-Infrastruktur (SoftLayer) ein, das Sie zuvor abgerufen haben. </td>
+        <td>Geben Sie das Kennwort für die IBM Cloud-Infrastruktur ein, das Sie zuvor abgerufen haben. </td>
         </tr>
         <tr>
         <td><code>ibm.io/targetip</code></td>
@@ -645,7 +645,7 @@ Für die Zuordnung der Blockspeichereinheit zu einem Nicht-SDS-Workerknoten müs
 
    Die Blockspeichereinheit wurde erfolgreich zugeordnet, wenn **ibm.io/dm** auf eine Geräte-ID gesetzt wurde, wie zum Beispiel `/dev/dm/1`, und im Abschnitt **Annotations** Ihrer CLI-Ausgabe die Angabe **ibm.io/attachstatus=attached** angezeigt wird.
 
-Wenn Sie die Zuordnung eines Datenträgers aufheben wollen, löschen Sie den PV. Es ist weiterhin ein bestimmter Workerknoten berechtigt, auf solche freigegebene Datenträger zuzugreifen. Freigegebene Datenträger werden erneut zugeordnet, wenn Sie einen neuen PV mit der {{site.data.keyword.Bluemix_notm}} Block Volume Attacher-Speicherklasse erstellen, um einen anderen Datenträger demselben Workerknoten zuzuordnen. Zur Vermeidung einer erneuten Zuordnung des alten, freigegebenen Datenträgers entziehen Sie dem Workerknoten die Berechtigung zum Zugriff auf den freigegebenen Datenträger, indem Sie den Befehl `ibmcloud sl block access-revoke` verwenden. Durch die Freigabe des Datenträgers wird der Datenträger selbst nicht aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernt. Zur Stornierung der Rechnungsstellung für Ihren Datenträger müssen Sie [den Speicher manuell aus Ihrem IBM Cloud-Infrastrukturkonto (SoftLayer) entfernen](/docs/containers?topic=containers-cleanup).
+Wenn Sie die Zuordnung eines Datenträgers aufheben wollen, löschen Sie den PV. Es ist weiterhin ein bestimmter Workerknoten berechtigt, auf solche freigegebene Datenträger zuzugreifen. Freigegebene Datenträger werden erneut zugeordnet, wenn Sie einen neuen PV mit der {{site.data.keyword.cloud_notm}} Block Volume Attacher-Speicherklasse erstellen, um einen anderen Datenträger demselben Workerknoten zuzuordnen. Zur Vermeidung einer erneuten Zuordnung des alten, freigegebenen Datenträgers entziehen Sie dem Workerknoten die Berechtigung zum Zugriff auf den freigegebenen Datenträger, indem Sie den Befehl `ibmcloud sl block access-revoke` verwenden. Durch die Freigabe des Datenträgers wird der Datenträger selbst nicht aus Ihrem Konto der IBM Cloud-Infrastruktur entfernt. Zur Stornierung der Abrechnung für Ihren Datenträger müssen Sie [den Speicher manuell aus Ihrem Konto der IBM Cloud-Infrastruktur entfernen](/docs/containers?topic=containers-cleanup).
 {: note}
 
 

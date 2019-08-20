@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, vlan
 
 subcollection: containers
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Mudando terminais em serviço ou conexões VLAN
 {: #cs_network_cluster}
 
@@ -38,11 +39,11 @@ Em clusters que executam o Kubernetes versão 1.11 ou mais recente, ative ou des
 
 O terminal em serviço privado torna seu mestre do Kubernetes acessível privadamente. Os nós do trabalhador e seus usuários de cluster autorizados podem se comunicar com o mestre do Kubernetes sobre a rede privada. Para determinar se é possível ativar o terminal em serviço privado, consulte [Comunicação de trabalhador para principal e de usuário para principal](/docs/containers?topic=containers-plan_clusters#internet-facing). Observe que não é possível desativar o terminal em serviço privado depois de ativá-lo.
 
-Você criou um cluster com somente um terminal em serviço privado antes de ativar sua conta para [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e [terminais em serviço](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)? Tente [configurar o terminal em serviço público](#set-up-public-se) para que seja possível usar seu cluster até que seus casos de suporte sejam processados para atualizar sua conta.
+Você criou um cluster com somente um terminal em serviço privado antes de ativar sua conta para [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) e [terminais em serviço](/docs/resources?topic=resources-private-network-endpoints#getting-started)? Tente [configurar o terminal em serviço público](#set-up-public-se) para que seja possível usar seu cluster até que seus casos de suporte sejam processados para atualizar sua conta.
 {: tip}
 
-1. Ative o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) em sua conta de infraestrutura do IBM Cloud (SoftLayer).
-2. [Ative sua conta do {{site.data.keyword.Bluemix_notm}} para usar os terminais em serviço](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Ative o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) em sua conta de infraestrutura do IBM Cloud. Para verificar se um VRF já está ativado, use o comando `ibmcloud account show`.
+2. [Ative sua conta do {{site.data.keyword.cloud_notm}} para usar os terminais em serviço](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Ative o terminal em serviço privado.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -65,13 +66,12 @@ Você criou um cluster com somente um terminal em serviço privado antes de ativ
 
 8. Se o cluster estiver em um ambiente atrás de um firewall:
   * [Permita que os usuários de cluster autorizados executem comandos `kubectl` para acessar o mestre por meio do terminal em serviço privado. ](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * [Permita o tráfego de rede de saída para os IPs privados](/docs/containers?topic=containers-firewall#firewall_outbound) para recursos de infraestrutura e para os serviços do {{site.data.keyword.Bluemix_notm}} que você planeja usar.
+  * [Permita o tráfego de rede de saída para os IPs privados](/docs/containers?topic=containers-firewall#firewall_outbound) para recursos de infraestrutura e para os serviços do {{site.data.keyword.cloud_notm}} que você planeja usar.
 
-9. Opcional: para usar o terminal em serviço privado apenas, desative o terminal em serviço público.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+9.  Opcional: para usar somente o terminal em serviço privado:
+    1.  [Desative o terminal em serviço público](#disable-public-se).
+    2.  [Configure o acesso ao mestre no terminal em serviço privado](/docs/containers?topic=containers-clusters#access_on_prem).
+
 
 <br />
 
@@ -96,35 +96,34 @@ Se você desativou anteriormente o terminal público, será possível reativá-l
    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   </br>
-
-**Etapas para a desativação**</br>
-Para desativar o terminal de serviço público, deve-se primeiro ativar o terminal de serviço privado para que os nós do trabalhador possam se comunicar com o principal do Kubernetes.
-1. Ative o terminal em serviço privado.
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. Atualize o servidor de API do mestre do Kubernetes para usar o terminal em serviço privado, seguindo o prompt da CLI ou executando manualmente o comando a seguir.
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
 3. [Crie um configmap](/docs/containers?topic=containers-update#worker-up-configmap) para controlar o número máximo de nós do trabalhador que podem estar indisponíveis por vez em seu cluster. Quando você atualiza seus nós do trabalhador, o configmap ajuda a evitar o tempo de inatividade para seus apps, pois os apps são reagendados de forma ordenada em nós do trabalhador disponíveis.
-
-4. Atualize todos os nós do trabalhador em seu cluster para selecionar a configuração de terminal em serviço privado.
-
-   <p class="important">Emitindo o comando de atualização, os nós do trabalhador são recarregados para selecionar a configuração de terminal em serviço. Se nenhuma atualização do trabalhador está disponível, deve-se [recarregar os nós do trabalhador manualmente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). Se você recarregar, certifique-se de bloquear, drenar e gerenciar o pedido para controlar o número máximo de nós do trabalhador que estão indisponíveis por vez.</p>
+4. Atualize todos os nós do trabalhador em seu cluster para remover a configuração do terminal em serviço público.<p class="important">Emitindo o comando de atualização, os nós do trabalhador são recarregados para selecionar a configuração de terminal em serviço. Se nenhuma atualização do trabalhador estiver disponível, você deverá recarregar os nós do trabalhador manualmente com o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Se você recarregar, certifique-se de bloquear, drenar e gerenciar o pedido para controlar o número máximo de nós do trabalhador que estão indisponíveis por vez.</p>
    ```
    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
    ```
   {: pre}
-5. Desativar o terminal em serviço público.
+   </br>
+
+{: #disable-public-se}
+**Etapas para a desativação**</br>
+Para desativar o terminal de serviço público, deve-se primeiro ativar o terminal de serviço privado para que os nós do trabalhador possam se comunicar com o principal do Kubernetes.
+1. [Ative o terminal em serviço privado](#set-up-private-se).
+2. Desativar o terminal em serviço público.
    ```
    ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
+3. Atualize o servidor de API do mestre do Kubernetes para remover o terminal em serviço público, seguindo o prompt da CLI ou executando manualmente o comando a seguir.
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. [Crie um configmap](/docs/containers?topic=containers-update#worker-up-configmap) para controlar o número máximo de nós do trabalhador que podem estar indisponíveis por vez em seu cluster. Quando você atualiza seus nós do trabalhador, o configmap ajuda a evitar o tempo de inatividade para seus apps, pois os apps são reagendados de forma ordenada em nós do trabalhador disponíveis.
+5. Atualize todos os nós do trabalhador em seu cluster para remover a configuração do terminal em serviço público.<p class="important">Emitindo o comando de atualização, os nós do trabalhador são recarregados para selecionar a configuração de terminal em serviço. Se nenhuma atualização do trabalhador estiver disponível, você deverá recarregar os nós do trabalhador manualmente com o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Se você recarregar, certifique-se de bloquear, drenar e gerenciar o pedido para controlar o número máximo de nós do trabalhador que estão indisponíveis por vez.</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
 
 ## Alternando do terminal em serviço público para o terminal em serviço privado
 {: #migrate-to-private-se}
@@ -138,8 +137,8 @@ Todos os clusters que estão conectados a uma VLAN pública e privada usam o ter
 
 Observe que não é possível desativar o terminal em serviço privado depois de ativá-lo.
 
-1. Ative o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) em sua conta de infraestrutura do IBM Cloud (SoftLayer).
-2. [Ative sua conta do {{site.data.keyword.Bluemix_notm}} para usar os terminais em serviço](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Ative o [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) em sua conta de infraestrutura do IBM Cloud. Para verificar se um VRF já está ativado, use o comando `ibmcloud account show`.
+2. [Ative sua conta do {{site.data.keyword.cloud_notm}} para usar os terminais em serviço](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Ative o terminal em serviço privado.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -160,11 +159,13 @@ Observe que não é possível desativar o terminal em serviço privado depois de
     ```
     {: pre}
 
-7. Opcional: desative o terminal em serviço público.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+7.  Opcional: para usar somente o terminal em serviço privado:
+    1.  Desativar o terminal em serviço público.
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [Configure o acesso ao mestre no terminal em serviço privado](/docs/containers?topic=containers-clusters#access_on_prem).
 
 <br />
 
@@ -216,7 +217,7 @@ Para mudar as VLANs que um conjunto de trabalhadores usa para fornecer nós do t
      ```
      {: screen}
 
-  3. Se você precisar pedir uma nova VLAN pública ou privada para a zona, será possível pedir no console do [{{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) ou use o comando a seguir. Lembre-se de que as VLANs devem ser compatíveis, com os IDs de pod correspondentes do **Roteador** como na etapa anterior. Se você estiver criando um par de novas VLANs públicas e privadas, elas deverão ser compatíveis uma com a outra.
+  3. Se for necessário pedir uma nova VLAN pública ou privada para a zona, será possível pedir no [console do {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) ou usar o comando a seguir. Lembre-se de que as VLANs devem ser compatíveis, com os IDs de pod correspondentes do **Roteador** como na etapa anterior. Se você estiver criando um par de novas VLANs públicas e privadas, elas deverão ser compatíveis uma com a outra.
      ```
      ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
      ```
@@ -236,7 +237,7 @@ Para mudar as VLANs que um conjunto de trabalhadores usa para fornecer nós do t
       ```
       {: pre}
 
-    * Exemplo para incluir apenas uma VLAN privada, como mudar de VLANs públicas e privadas para somente privadas quando há uma [conta ativada para VRF que usa terminais em serviço](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started):
+    * Exemplo para incluir apenas uma VLAN privada, como mudar de VLANs públicas e privadas para somente privadas quando há uma [conta ativada para VRF que usa terminais em serviço](/docs/resources?topic=resources-private-network-endpoints#getting-started):
       ```
       ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
       ```
@@ -248,7 +249,7 @@ Para mudar as VLANs que um conjunto de trabalhadores usa para fornecer nós do t
    ```
    {: pre}
 
-   Se você desejar remover nós do trabalhador que usam os metadados de rede anteriores, mude o número de trabalhadores por zona para duplicar a quantia anterior de trabalhadores por zona. Posteriormente nessas etapas, é possível unir, drenar e remover os nós do trabalhador anteriores.
+   Se você desejar remover nós do trabalhador que usam os metadados de rede anteriores, mude o número de trabalhadores por zona para duplicar o número anterior de trabalhadores por zona. Posteriormente nessas etapas, é possível unir, drenar e remover os nós do trabalhador anteriores.
   {: tip}
 
 6. Verifique se os novos nós do trabalhador são criados com o **IP público** e **IP privado** apropriados na saída. Por exemplo, se você mudar o conjunto de trabalhadores de uma VLAN pública e privada para somente privada, os novos nós do trabalhador terão apenas um IP privado. Se você mudar o conjunto de trabalhadores de VLANs somente privadas para públicas e privadas, os novos nós do trabalhador terão IPs públicos e privados.
@@ -289,4 +290,4 @@ Para mudar as VLANs que um conjunto de trabalhadores usa para fornecer nós do t
 
 8. Opcional: é possível repetir as etapas de 2 a 7 para cada conjunto de trabalhadores em seu cluster. Depois de concluir essas etapas, todos os nós do trabalhador em seu cluster são configurados com as novas VLANs.
 
-9. Os ALBs padrão em seu cluster ainda estão ligados à VLAN antiga porque seus endereços IP são de uma sub-rede na VLAN. Como os ALBs não podem ser movidos através de VLANs, é possível, em vez disso, [criar ALBs nas novas VLANs e desativar ALBs nas VLANs antigas](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+10. Opcional: se você não precisar mais das sub-redes nas VLANs antigas, será possível [removê-las](/docs/containers?topic=containers-subnets#remove-subnets).

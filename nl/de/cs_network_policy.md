@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,33 +23,23 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Datenverkehr mit Netzrichtlinien steuern
 {: #network_policies}
 
-Jeder Kubernetes-Cluster wird mit einem Netz-Plug-in namens Calico eingerichtet. Standardnetzrichtlinien werden zum Schutz der öffentlichen Netzschnittstelle der einzelnen Workerknoten in {{site.data.keyword.containerlong}} eingerichtet.
+Jeder {{site.data.keyword.containerlong}}-Cluster wird mit einem Netz-Plug-in namens Calico eingerichtet. Standardnetzrichtlinien werden zum Schutz der öffentlichen Netzschnittstelle der einzelnen Workerknoten im Cluster eingerichtet.
 {: shortdesc}
 
 Wenn Sie spezielle Sicherheitsanforderungen haben oder über einen Mehrfachzonencluster mit aktiviertem VLAN-Spanning verfügen, können Sie Calico und Kubernetes zum Erstellen von Netzrichtlinien für einen Cluster verwenden. Mit Kubernetes-Netzrichtlinien können Sie den Netzverkehr angeben, den Sie zu und von einem Pod in einem Cluster zulassen oder blockieren möchten. Um erweiterte Netzrichtlinien einzurichten, beispielsweise zum Blockieren von eingehendem Datenverkehr (Ingress) an Netzausgleichsfunktions- (NLB-) Services, verwenden Sie Calico-Netzrichtlinien.
 
-<ul>
-  <li>
-  [Kubernetes-Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): Diese Richtlinien geben an, wie Pods mit anderen Pods und externen Endpunkten kommunizieren können. Ab Kubernetes Version 1.8 kann eingehender und abgehender Datenverkehr basierend auf Protokoll, Port, IP-Quellenadressen oder -Zieladressen erlaubt oder blockiert werden. Der Datenverkehr kann zudem anhand von Pod- und Namensbereichsbezeichnungen gefiltert werden. Kubernetes-Netzrichtlinien werden mithilfe von `kubectl`-Befehlen oder den Kubernetes-APIs angewendet. Werden diese Richtlinien angewendet, werden sie automatisch in Calico-Netzrichtlinien konvertiert und Calico erzwingt sie.
-  </li>
-  <li>
-  [Calico-Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/): Diese Richtlinien sind eine übergeordnete Gruppe der Kubernetes-Netzrichtlinien und werden mithilfe von `calicoctl`-Befehlen angewendet. Im Rahmen von Calico-Richtlinien werden die folgenden Features hinzugefügt.
-    <ul>
-    <li>Zulassen oder Blockieren von Netzverkehr in bestimmten Netzschnittstellen, unabhängig von der IP-Quellenadresse oder -Zieladresse von Kubernetes-Pods oder vom CIDR.</li>
-    <li>Zulassen oder Blockieren von Netzverkehr für Pods über Namensbereiche hinweg.</li>
-    <li>[Blockieren von eingehendem Datenverkehr (Ingress) an die LoadBalancer- oder NodePort-Services von Kubernetes](#block_ingress).</li>
-    </ul>
-  </li>
-  </ul>
+* [Kubernetes-Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/network-policies/): Diese Richtlinien geben an, wie Pods mit anderen Pods und externen Endpunkten kommunizieren können. Ab Kubernetes Version 1.8 kann eingehender und abgehender Datenverkehr basierend auf Protokoll, Port, IP-Quellenadressen oder -Zieladressen erlaubt oder blockiert werden. Der Datenverkehr kann zudem anhand von Pod- und Namensbereichsbezeichnungen gefiltert werden. Kubernetes-Netzrichtlinien werden mithilfe von `kubectl`-Befehlen oder den Kubernetes-APIs angewendet. Werden diese Richtlinien angewendet, werden sie automatisch in Calico-Netzrichtlinien konvertiert und Calico erzwingt sie.
+* [Calico-Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/): Diese Richtlinien sind eine übergeordnete Gruppe der Kubernetes-Netzrichtlinien und werden mithilfe von `calicoctl`-Befehlen angewendet. Im Rahmen von Calico-Richtlinien werden die folgenden Features hinzugefügt.
+  * Zulassen oder Blockieren von Netzverkehr in bestimmten Netzschnittstellen, unabhängig von der IP-Quellenadresse oder -Zieladresse von Kubernetes-Pods oder vom CIDR.
+  * Zulassen oder Blockieren von Netzverkehr für Pods über Namensbereiche hinweg.
+  * [Blockieren von eingehendem Datenverkehr an die LoadBalancer- oder NodePort-Services von Kubernetes](#block_ingress).
 
 Calico erzwingt diese Richtlinien, einschließlich aller Kubernetes-Netzrichtlinien, die automatisch in Calico-Richtlinien konvertiert werden, indem 'Iptables'-Regeln von Linux in den Kubernetes-Workerknoten konfiguriert werden. 'Iptables'-Regeln dienen als Firewall für den Workerknoten, um die Merkmale zu definieren, die der Netzverkehr erfüllen muss, damit er an die Zielressource weitergeleitet wird.
 
-Um die Services NLB (Netzlastausgleichsfunktion) und Ingress-ALB (Ingress-Lastausgleichsfunktion für Anwendungen) zu verwenden, verwalten Sie Netzverkehr in und aus Ihrem Cluster mithilfe von Calico- und Kubernetes-Richtlinien. Verwenden Sie keine [Sicherheitsgruppen](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) der IBM Cloud-Infrastruktur (SoftLayer). Die Sicherheitsgruppen der IBM Cloud-Infrastruktur (SoftLayer) werden auf die Netzschnittstelle eines einzelnen virtuellen Servers angewendet, um den Datenverkehr auf Hypervisor-Ebene zu filtern. Sicherheitsgruppen unterstützen jedoch nicht das VRRP-Protokoll (VRRP – Virtual Router Redundancy Protocol), das von {{site.data.keyword.containerlong_notm}} zur Verwaltung der ALB- und NLB-IP-Adressen verwendet wird. Wenn das VRRP-Protokoll nicht für die Verwaltung der IP vorhanden ist, funktionieren die ALB- und NLB-Services nicht ordnungsgemäß.
+Um die Services NLB (Netzlastausgleichsfunktion) und Ingress-ALB (Ingress-Lastausgleichsfunktion für Anwendungen) zu verwenden, verwalten Sie Netzverkehr in und aus Ihrem Cluster mithilfe von Calico- und Kubernetes-Richtlinien. Verwenden Sie keine [Sicherheitsgruppen](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) der IBM Cloud-Infrastruktur. Sicherheitsgruppen der IBM Cloud-Infrastruktur werden auf die Netzschnittstelle eines einzelnen virtuellen Servers angewendet, um den Datenverkehr auf Hypervisor-Ebene zu filtern. Sicherheitsgruppen unterstützen jedoch nicht das VRRP-Protokoll (VRRP – Virtual Router Redundancy Protocol), das von {{site.data.keyword.containerlong_notm}} zur Verwaltung der ALB- und NLB-IP-Adressen verwendet werden muss. Wenn das VRRP-Protokoll nicht für die Verwaltung der IP vorhanden ist, funktionieren die ALB- und NLB-Services nicht ordnungsgemäß.
 {: tip}
 
 <br />
@@ -61,7 +51,7 @@ Um die Services NLB (Netzlastausgleichsfunktion) und Ingress-ALB (Ingress-Lastau
 Wenn ein Cluster mit einem öffentlichen VLAN erstellt wird, wird für jeden Workerknoten und die entsprechende öffentliche Netzschnittstelle automatisch eine Host-Endpunkt-Ressource (`HostEndpoint`) mit der Bezeichnung `ibm.role: worker_public` erstellt. Um die öffentliche Netzschnittstelle eines Workerknotens zu schützen, werden Calico-Standardrichtlinien auf alle Host-Endpunkte mit der Bezeichnung `ibm.role: worker_public` angewendet.
 {:shortdesc}
 
-Diese standardmäßigen Calico-Hostrichtlinien lassen sämtlichen ausgehenden und eingehenden Netzdatenverkehr zu bestimmten Clusterkomponenten, wie NodePort-, LoadBalancer- und Ingress-Services von Kubernetes, zu. Jeglicher eingehender Netzdatenverkehr aus dem Internet zu den Workerknoten, der nicht in den Standardrichtlinien festgelegt ist, wird blockiert. Die Standardrichtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus.
+Diese standardmäßigen Calico-Hostrichtlinien lassen sämtlichen ausgehenden und eingehenden Netzverkehr zu bestimmten Clusterkomponenten, wie NodePort-, LoadBalancer- und Ingress-Services von Kubernetes, zu. Jeglicher eingehender Netzverkehr aus dem Internet zu den Workerknoten, der nicht in den Standardrichtlinien festgelegt ist, wird blockiert. Die Standardrichtlinien wirken sich nicht auf Datenverkehr zwischen Pods aus.
 
 Sehen Sie sich die folgenden standardmäßigen Calico-Hostrichtlinien an, die automatisch auf Ihren Cluster angewendet werden.
 
@@ -92,7 +82,7 @@ Entfernen Sie keine Richtlinien, die auf einen Host-Endpunkt angewendet sind, es
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Lässt eingehende Verbindungen für bestimmte Systeme der IBM Cloud-Infrastruktur (SoftLayer) zu, die zum Verwalten der Workerknoten verwendet werden.</td>
+      <td>Lässt eingehende Verbindungen für bestimmte Systeme der IBM Cloud-Infrastruktur zu, die zum Verwalten der Workerknoten verwendet werden.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
@@ -111,7 +101,7 @@ Eine Kubernetes-Standardrichtlinie, die den Zugriff auf das Kubernetes-Dashboard
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td>Im <code>kube-system</code>-Namensbereich bereitgestellt: blockiert für alle Pods den Zugriff auf das Kubernetes-Dashboard. Diese Richtlinie hat keinerlei Auswirkungen auf den Zugriff auf das Dashboard über die {{site.data.keyword.Bluemix_notm}}-Konsole oder mithilfe von <code>kubectl proxy</code>. Wenn ein Pod Zugriff auf das Dashboard benötigt, stellen Sie den Pod in einem Namensbereich mit der Bezeichnung <code>kubernetes-dashboard-policy: allow</code> bereit.</td>
+  <td>Im <code>kube-system</code>-Namensbereich bereitgestellt: blockiert für alle Pods den Zugriff auf das Kubernetes-Dashboard. Diese Richtlinie hat keinerlei Auswirkungen auf den Zugriff auf das Dashboard über die {{site.data.keyword.cloud_notm}}-Konsole oder mithilfe von <code>kubectl proxy</code>. Wenn ein Pod Zugriff auf das Dashboard benötigt, stellen Sie den Pod in einem Namensbereich mit der Bezeichnung <code>kubernetes-dashboard-policy: allow</code> bereit.</td>
  </tr>
 </tbody>
 </table>
@@ -147,7 +137,7 @@ Installieren und konfigurieren Sie die Calico-CLI zum Anzeigen, Verwalten und Hi
 
 4. [Laden Sie die Calico-CLI ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/projectcalico/calicoctl/releases) herunter.
 
-    Wenn Sie OS X verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.Bluemix_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. Stellen Sie sicher, dass die Datei als `calicoctl.exe` gespeichert wird.
+    Wenn Sie OS X verwenden, laden Sie die Version `-darwin-amd64` herunter. Wenn Sie Windows verwenden, installieren Sie die Calico-CLI in demselben Verzeichnis wie die {{site.data.keyword.cloud_notm}}-CLI. Diese Konfiguration erspart Ihnen bei der späteren Ausführung von Befehlen einige Dateipfadänderungen. Stellen Sie sicher, dass die Datei als `calicoctl.exe` gespeichert wird.
     {: tip}
 
 5. OS X- und Linux-Benutzer müssen die folgenden Schritte ausführen:
@@ -188,7 +178,7 @@ X:
     - Windows: Verwenden Sie das Flag `--config`, um auf die Netzkonfigurationsdatei zu verweisen, die Sie in Schritt 1 abgerufen haben. Schließen Sie dieses Flag bei jeder Ausführung eines `calicoctl`-Befehls ein.
 
       ```
-      calicoctl get nodes --config=filepath/calicoctl.cfg
+      calicoctl get nodes --config=<dateipfad>/calicoctl.cfg
       ```
       {: pre}
 
@@ -222,13 +212,13 @@ Vorbereitende Schritte:
 
 **Gehen Sie wie folgt vor, um Netzrichtlinien in Clustern anzuzeigen:**
 
-Linux- und Mac-Benutzer müssen das Flag `--config=filepath/calicoctl.cfg` nicht in Befehle des Typs `calicoctl` einschließen.
+Linux- und Mac-Benutzer müssen das Flag `--config=<filepath>/calicoctl.cfg` nicht in Befehle des Typs `calicoctl` einschließen.
 {: tip}
 
 1. Zeigen Sie den Calico-Host-Endpunkt an.
 
     ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get hostendpoint -o yaml --config=<dateipfad>/calicoctl.cfg
     ```
     {: pre}
 
@@ -236,27 +226,27 @@ Linux- und Mac-Benutzer müssen das Flag `--config=filepath/calicoctl.cfg` nicht
 
     [Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) beziehen sich auf bestimmte Namensbereiche:
     ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy --all-namespaces -o wide --config=<dateipfad>/calicoctl.cfg
     ```
     {:pre}
 
     [Globale Netzrichtlinien ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) beziehen sich nicht auf bestimmte Namensbereiche:
     ```
-    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o wide --config=<dateipfad>/calicoctl.cfg
     ```
     {: pre}
 
 3. Zeigen Sie Details für ein Netzrichtlinie an.
 
     ```
-    calicoctl get NetworkPolicy -o yaml <richtlinienname> --namespace <namensbereich_für_richtlinie> --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy -o yaml <richtlinienname> --namespace <namensbereich_für_richtlinie> --config=<dateipfad>/calicoctl.cfg
     ```
     {: pre}
 
 4. Zeigen Sie die Details aller globalen Netzrichtlinien für den Cluster an.
 
     ```
-    calicoctl get GlobalNetworkPolicy -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o yaml --config=<dateipfad>/calicoctl.cfg
     ```
     {: pre}
 
@@ -294,7 +284,7 @@ Um Calico-Richtlinien zu erstellen, führen Sie die folgenden Schritte aus.
     - Windows:
 
       ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f filepath/policy.yaml --config=<dateipfad>/calicoctl.cfg
       ```
       {: pre}
 
@@ -332,7 +322,7 @@ Gehen Sie wie folgt vor, um Pre-DNAT-Richtlinie zu erstellen:
 
 1. Definieren Sie eine Calico-Netzrichtlinie des Typs Pre-DNAT für den Ingress-Zugriff (eingehenden Datenverkehr) auf Kubernetes Services.
     * Verwenden Sie die [Calico V3-Richtliniensyntax ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy).
-    * Wenn Sie Datenverkehr an eine [NLB 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) verwalten, müssen Sie die Felder `applyOnForward: true` und `doNotTrack: true` in den Abschnitt `spec` der Richtlinie einbeziehen.
+    * Wenn Sie Datenverkehr an eine [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs) verwalten, müssen Sie die Felder `applyOnForward: true` und `doNotTrack: true` in den Abschnitt `spec` der Richtlinie einbeziehen.
 
         Beispielressource, von der alle Knotenports blockiert werden:
 
@@ -432,31 +422,82 @@ Gehen Sie wie folgt vor, um Pre-DNAT-Richtlinie zu erstellen:
   - Windows:
 
     ```
-    calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
+    calicoctl apply -f filepath/deny-nodeports.yaml --config=<dateipfad>/calicoctl.cfg
     ```
     {: pre}
 
 3. Optional: In Mehrzonenclustern werden vom Status der Lastausgleichsfunktion für mehrere Zonen (MZLB-Status) die Ingress-Lastausgleichsfunktionen für Anwendungen (Ingress-ALBs) in jeder Zone des Clusters überprüft und die Ergebnisse der DNS-Suche auf der Basis dieser Statusprüfungen aktualisiert. Wenn Sie die Pre-DNAT-Richtlinien verwenden, um den gesamten eingehenden Datenverkehr zu Ingress-Services zu blockieren, müssen Sie auch die [Cloudflare-IPv4-IPs ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.cloudflare.com/ips/), die zur Überprüfung des Status Ihrer ALBs verwendet werden, in die Whitelist stellen. Informationen zum Erstellen einer Calico-preDNAT-Richtlinie für die Whitelist für diese IPs finden Sie in der Lerneinheit 3 des [Lernprogramms zur Calico-Netzrichtlinie](/docs/containers?topic=containers-policy_tutorial#lesson3).
 
+## Cluster im öffentlichen Netz isolieren
+{: #isolate_workers_public}
+
+Sie können Ihren Cluster im öffentlichen Netz mithilfe von [Calico-Richtlinien für öffentliche Netze ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation) isolieren.
+{: shortdesc}
+
+Diese Gruppe von Calico-Richtlinien blockiert in Kombination mit den [Calico-Standardrichtlinien](#default_policy) den größten Teil des öffentlichen Netzverkehrs eines Clusters und ermöglicht gleichzeitig die Kommunikation, die für das Funktionieren des Clusters für bestimmte Teilnetze erforderlich ist. Eine Liste der Ports, die von diesen Richtlinien geöffnet werden, und eine Liste der enthaltenen Richtlinien finden Sie unter [README for the Calico public network policies ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/public-network-isolation/README.md).
+
+Wenn Sie die Egress-Pod-Richtlinien anwenden, die in diesem Richtliniensatz enthalten sind, ist nur der Netzverkehr mit den in den Pod-Richtlinien angegebenen Teilnetzen und Ports zulässig. Der gesamte Datenverkehr an Teilnetze und Ports, die nicht in diesen Richtlinien angegeben sind, wird für alle Pods in allen Namensbereichen blockiert. Da in diesen Richtlinien nur die Ports und Teilnetze angegeben sind, die erforderlich sind, damit die Pods in {{site.data.keyword.containerlong_notm}} funktionieren, können Ihre Pods den Netzverkehr erst dann über das Internet senden, wenn Sie die Calico-Richtlinie hinzugefügt oder geändert haben, um ihnen die entsprechende Berechtigung zu geben.
+{: important}
+
+Vorbereitende Schritte:
+1. [Installieren und konfigurieren Sie die Calico-CLI.](#cli_install)
+2. [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Schließen Sie die Optionen `--admin` und `--network` in den Befehl `ibmcloud ks cluster-config` ein. Durch `--admin` werden die Schlüssel für den Zugriff auf Ihr Infrastrukturportfolio und zum Ausführen von Calico-Befehlen auf Ihren Workerknoten heruntergeladen. Durch `--network` wird die Calico-Konfigurationsdatei für die Ausführung aller Calico-Befehle heruntergeladen.
+  ```
+  ibmcloud ks cluster-config --cluster <clustername_oder_-id> --admin --network
+  ```
+  {: pre}
+
+Gehen Sie wie folgt vor, um Ihren Cluster mithilfe von Calico-Richtlinien im öffentlichen Netz zu schützen:
+
+1. Klonen Sie das Repository `IBM-Cloud/kube-samples`.
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
+
+2. Navigieren Sie zu dem öffentlichen Richtlinienverzeichnis für die Region, in der sich Ihr Cluster befindet. Beispielbefehl für einen Cluster in der Region 'Vereinigte Staaten (Süden)':
+  ```
+  cd <dateipfad>/IBM-Cloud/kube-samples/calico-policies/public-network-isolation/us-south
+  ```
+  {: pre}
+
+3. Wenden Sie die Richtlinien an.
+  ```
+  calicoctl apply -f allow-egress-pods-public.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-public.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-public-service-endpoint.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f deny-all-outbound.yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
+
+4. Optional: Um Ihren Workerknoten den Zugriff auf andere {{site.data.keyword.Bluemix_notm}}-Services über das öffentliche Netz zu ermöglichen, wenden Sie die Richtlinien `allow-public-services.yaml` und `allow-public-services-pods.yaml` an. Die Richtlinie ermöglicht den Zugriff auf die IP-Adressen für {{site.data.keyword.registryshort_notm}} und wenn die Services in der Region verfügbar sind ({{site.data.keyword.la_full_notm}} und {{site.data.keyword.mon_full_notm}}). Um auf andere IBM Cloud-Services zuzugreifen, müssen Sie die Teilnetze für diese Services manuell zu der Richtlinie hinzufügen.
+  ```
+  calicoctl apply -f allow-public-services.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-public-services-pods.yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
+
+5. Stellen Sie sicher, dass die Richtlinien angewendet werden.
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
+
 ## Cluster im privaten Netz isolieren
 {: #isolate_workers}
 
-Wenn Sie einen Mehrzonencluster, mehrere VLANs für einen Einzelzonencluster oder mehrere Teilnetze in demselben VLAN haben, müssen Sie eine VRF-Funktion oder VLAN-Spanning aktivieren, damit Ihre Workerknoten miteinander im privaten Netz kommunizieren können. Wenn eine VRF-Funktion oder das VLAN-Spanning aktiviert ist, kann jedes System, das mit einem der privaten VLANs in demselben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist, mit Workerknoten kommunizieren.
+Sie können Ihren Cluster von anderen Systemen im privaten Netz mithilfe von [Calico-Richtlinien für private Netze ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3) isolieren.
 {: shortdesc}
 
-Sie können Ihren Cluster von anderen Systemen im privaten Netz mithilfe von [Calico-Richtlinien für private Netze ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation) isolieren. Diese Gruppe von Calico-Richtlinien und -Hostendpunkten isoliert den privaten Netzdatenverkehr eines Clusters von anderen Ressourcen im privaten Netz des Kontos.
+Diese Gruppe von Calico-Richtlinien und -Hostendpunkten kann den privaten Netzverkehr eines Clusters von anderen Ressourcen im privaten Netz des Kontos isolieren und gleichzeitig die Kommunikation im privaten Netz zulassen, die für das Funktionieren des Clusters erforderlich ist. Wenn Sie beispielsweise das [VRF- oder VLAN-Spanning](/docs/containers?topic=containers-plan_clusters#worker-worker) aktivieren, damit Workerknoten in dem privaten Netz miteinander kommunizieren können, kann jede Instanz, die mit einem der privaten VLANs im selben {{site.data.keyword.Bluemix_notm}}-Konto verbunden ist, mit Workerknoten kommunizieren.
 
-Die Richtlinien zielen auf die private Schnittstelle des Workerknotens (eth0) und das Podnetz eines Clusters ab.
+Eine Liste der Ports, die von diesen Richtlinien geöffnet werden, und eine Liste der enthaltenen Richtlinien finden Sie unter [README for the Calico public network policies ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/private-network-isolation/README.md).
 
-**Workerknoten**
-
-* Abgehender Datenverkehr (Egress) an der privaten Schnittstelle ist nur für Pod-IPs, Workers in diesem Cluster, den UPD/TCP-Port 53, Port 2049 für die Kommunikation mit NFS-Dateiservern und die Ports 443 und 3260 für die Kommunikation mit Blockspeicher zulässig.
-* Eingehender Datenverkehr an der privaten Schnittstelle ist nur von Workern in dem Cluster und nur an DNS, kubelet, ICMP und VRRP zulässig.
-
-**Pods**
-
-* Der gesamte eingehende Datenverkehr an Pods von den Workern im Cluster ist zulässig.
-* Der abgehende Datenverkehr von Pods wird nur auf öffentliche IPs, DNS, kubelet und andere Pods im Cluster beschränkt.
+Wenn Sie die Egress-Pod-Richtlinien anwenden, die in diesem Richtliniensatz enthalten sind, ist nur der Netzverkehr mit den in den Pod-Richtlinien angegebenen Teilnetzen und Ports zulässig. Der gesamte Datenverkehr an Teilnetze und Ports, die nicht in diesen Richtlinien angegeben sind, wird für alle Pods in allen Namensbereichen blockiert. Da in diesen Richtlinien nur die Ports und Teilnetze angegeben sind, die erforderlich sind, damit die Pods in {{site.data.keyword.containerlong_notm}} funktionieren, können Ihre Pods den Netzverkehr erst dann über das Internet senden, wenn Sie die Calico-Richtlinie hinzugefügt oder geändert haben, um ihnen die entsprechende Berechtigung zu geben.
+{: important}
 
 Vorbereitende Schritte:
 1. [Installieren und konfigurieren Sie die Calico-CLI.](#cli_install)
@@ -470,56 +511,66 @@ Vorbereitende Schritte:
 Gehen Sie wie folgt vor, um Ihren Cluster mithilfe von Calico-Richtlinien im privaten Netz zu isolieren:
 
 1. Klonen Sie das Repository `IBM-Cloud/kube-samples`.
-    ```
-    git clone https://github.com/IBM-Cloud/kube-samples.git
-    ```
-    {: pre}
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
 
-2. Navigieren Sie zum Verzeichnis mit den Richtlinien für private Netze für die Calico-Version, mit der Ihre Clusterversion kompatibel ist.
-   ```
-   cd <dateipfad>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-   ```
-   {: pre}
+2. Navigieren Sie zu dem privaten Richtlinienverzeichnis `calico-v3` für die Region, in der sich Ihr Cluster befindet. Beispielbefehl für einen Cluster in der Region 'Vereinigte Staaten (Süden)':
+  ```
+  cd <dateipfad>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3/us-south
+  ```
+  {: pre}
 
-3. Richten Sie eine Richtlinie für den privaten Hostendpunkt ein.
-    1. Öffnen Sie die Richtlinie `generic-privatehostendpoint.yaml`.
-    2. Ersetzen Sie `<workername>` durch den Namen eines Workerknotens. **Wichtig:** Einige Workerknoten müssen für Calico-Richtlinien einer anderen Benennungsstruktur folgen. Sie müssen den Namen eines Workerknotens in dem Format verwenden, in dem er durch den folgenden Befehl zurückgegeben wird.
-      ```
-      calicoctl get nodes --config==filepath/calicoctl.cfg
-      ```
-      {: pre}
-    3. Ersetzen Sie `<private_ip-adresse_des_workerknotens>` durch die private IP-Adresse für den Workerknoten. Wenn Sie die privaten IPs Ihrer Workerknoten anzeigen wollen, führen Sie `ibmcloud ks workers --cluster <mein_cluster>` aus.
-    4. Wiederholen Sie diese Gruppe von Schritten in einem neuen Abschnitt für jeden Workerknoten in Ihrem Cluster. **Hinweis:** Jedes Mal, wenn Sie einem Cluster einen Workerknoten hinzufügen, müssen Sie die Hostendpunktdatei mit den neuen Einträgen aktualisieren.
+3. Richten Sie private Hostendpunkte für Ihre Workerknoten ein. Wenn Ihre Workerknoten private Hostendpunkte haben, zielen die Richtlinien, die Sie in den nächsten Schritten anwenden, auf die private Schnittstelle des Workerknotens (eth0) und das Podnetz eines Clusters ab.
+  1. Öffnen Sie die Richtlinie `generic-privatehostendpoint.yaml`.
+  2. Ersetzen Sie `<workername>` durch den Namen eines Workerknotens.
+    <p class="note">Einige Workerknoten müssen für Calico-Richtlinien einer anderen Benennungsstruktur folgen. Sie müssen den Namen verwenden, der zurückgegeben wird, wenn Sie `calicoctl get nodes --config=<filepath>/calicoctl.cfg` ausführen.</p>
+  3. Ersetzen Sie `<private_ip-adresse_des_workerknotens>` durch die private IP-Adresse für den Workerknoten. Wenn Sie die privaten IPs Ihrer Workerknoten anzeigen wollen, führen Sie `ibmcloud ks workers --cluster <mein_cluster>` aus.
+  4. Wiederholen Sie für jeden Workerknoten in Ihrem Cluster diese Schritte in einem separaten Eintrag in der Datei.
+    <p class="important">Jedes Mal, wenn Sie einem Cluster einen Workerknoten hinzufügen, müssen Sie die Hostendpunktdatei mit den neuen Einträgen aktualisieren.</p>
+  5. Speichern Sie die Richtlinie.
 
-4. Wenden Sie alle Richtlinien auf Ihren Cluster an.
-    - Linux und OS X:
+4. Wenden Sie die Richtlinien an.
+  ```
+  calicoctl apply -f generic-privatehostendpoint.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-all-workers-private.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-egress-pods-private.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-private.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-icmp-private.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-private-service-endpoint.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-sys-mgmt-private.yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml
-      calicoctl apply -f allow-ibm-ports-private.yaml
-      calicoctl apply -f allow-egress-pods.yaml
-      calicoctl apply -f allow-icmp-private.yaml
-      calicoctl apply -f allow-vrrp-private.yaml
-      calicoctl apply -f generic-privatehostendpoint.yaml
-      ```
-      {: pre}
+5. Optional: Wenn Sie Ihren Workern und Pods den Zugriff auf {{site.data.keyword.registryshort_notm}} über das private Netz ermöglichen möchten, wenden Sie die Richtlinien `allow-private-services.yaml` und `allow-private-services-pods.yaml` an. Um auf andere IBM Cloud-Services zuzugreifen, die private Serviceendpunkte unterstützen, müssen Sie die Teilnetze für diese Services manuell zu dieser Richtlinie hinzufügen.
+  ```
+  calicoctl apply -f allow-private-services.yaml --config=<dateipfad>/calicoctl.cfg
+  calicoctl apply -f allow-private-services-pods.yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
 
-    - Windows:
+6. Optional: Wenn Sie Ihre Apps mit privaten NLBs (Netzlastausgleichsfunktionen) oder Ingress-ALBs (Lastausgleichsfunktionen für Anwendungen) zugänglich machen möchten, müssen Sie das VRRP-Protokoll öffnen, indem Sie die Richtlinie `allow-vrrp-private` anwenden.
+  ```
+  calicoctl apply -f allow-vrrp-private.yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
+  Sie können den Zugriff auf Netzservices weiter steuern, indem Sie [Pre-DNAT-Richtlinien von Calico](/docs/containers?topic=containers-network_policies#block_ingress) erstellen. Stellen Sie sicher, dass Sie in der Pre-DNAT-Richtlinie `selector: ibm.role=='worker_private'` verwenden, um die Richtlinie auf die privaten Hostendpunkte der Worker anzuwenden.
+  {: tip}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-ibm-ports-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+7. Stellen Sie sicher, dass die Richtlinien angewendet werden.
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<dateipfad>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
 
 ## Datenverkehr zwischen Pods steuern
 {: #isolate_services}
 
-Kubernetes-Richtlinien schützen Pods vor internem Netzdatenverkehr. Sie können einfache Kubernetes-Netzrichtlinien erstellen, um die App-Microservices innerhalb eines Namensbereichs oder über Namensbereiche hinweg voneinander zu trennen.
+Kubernetes-Richtlinien schützen Pods vor internem Netzverkehr. Sie können einfache Kubernetes-Netzrichtlinien erstellen, um die App-Microservices innerhalb eines Namensbereichs oder über Namensbereiche hinweg voneinander zu trennen.
 {: shortdesc}
 
 Weitere Informationen darüber, wie Kubernetes-Netzrichtlinien Pod-zu-Pod-Datenverkehr steuern, sowie weitere Beispielrichtlinien finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
@@ -730,7 +781,7 @@ Gehen Sie wie folgt vor, um verweigerten Datenverkehr zu protokollieren:
    </tr>
    <tr>
     <td><code>selector</code></td>
-    <td>Ersetzen Sie &lt;selector&gt; durch denselben Selektor im Feld `spec.selector`, den Sie in Ihrer Richtlinie aus Schritt 1 verwendet haben. Wenn Sie beispielsweise den Selektor<code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code> verwenden, wird die Regel dieser Richtlinie zu derselben 'Iptables'-Kette hinzugefügt wie die Kubernetes-Beispielnetzrichtlinie <code>access-nginx</code> in Schritt 1. Diese Richtlinie gilt nur für den eingehenden Netzdatenverkehr an Pods, die dieselbe Pod-Selektorbezeichnung verwenden.</td>
+    <td>Ersetzen Sie &lt;selector&gt; durch denselben Selektor im Feld `spec.selector`, den Sie in Ihrer Richtlinie aus Schritt 1 verwendet haben. Wenn Sie beispielsweise den Selektor<code>selector: projectcalico.org/orchestrator == 'k8s' && run == 'nginx'</code> verwenden, wird die Regel dieser Richtlinie zu derselben 'Iptables'-Kette hinzugefügt wie die Kubernetes-Beispielnetzrichtlinie <code>access-nginx</code> in Schritt 1. Diese Richtlinie gilt nur für den eingehenden Netzverkehr an Pods, die dieselbe Pod-Selektorbezeichnung verwenden.</td>
    </tr>
    <tr>
     <td><code>order</code></td>
@@ -747,10 +798,13 @@ Gehen Sie wie folgt vor, um verweigerten Datenverkehr zu protokollieren:
 
 4. Generieren Sie Protokolleinträge, indem Sie Anforderungen senden, die von der in Schritt 1 erstellten Richtlinie nicht zugelassen werden. Versuchen Sie beispielsweise, den Pod mit Ping zu überprüfen, der durch die Netzrichtlinie von einem nicht zulässigen Pod oder einer nicht zulässigen IP-Adresse geschützt ist.
 
-5. Suchen Sie nach Protokolleinträgen, die in den Pfad `/var/log/syslog` geschrieben werden. Beachten Sie, dass die DST- (Ziel-) oder SRC- (Quellen-) IP-Adressen im Protokolleintrag aufgrund von Proxys, Network Address Translation (NAT) und anderen Netzprozessen von den erwarteten Werten abweichen können. Der Protokolleintrag ähnelt dem folgenden.
+5. Suchen Sie nach Protokolleinträgen, die in den Pfad `/var/log/syslog` geschrieben werden. Die DST- (Ziel-) oder SRC- (Quellen-) IP-Adressen im Protokolleintrag können aufgrund von Proxys, Network Address Translation (NAT) und anderen Netzprozessen von den erwarteten Werten abweichen. Der Protokolleintrag ähnelt dem folgenden.
   ```
   Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
   ```
   {: screen}
 
 6. Optional: [Leiten Sie die Protokolle](/docs/containers?topic=containers-health#configuring) von `/var/log/syslog` an einen externen Syslog-Server weiter.
+
+
+

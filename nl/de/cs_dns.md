@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -37,7 +37,7 @@ Jedem Service in Ihrem {{site.data.keyword.containerlong}}-Cluster wird ein DNS-
 {: caption="Standard-Cluster-DNS-Provider nach Kubernetes-Version" caption-side="top"}
 
 **Welche Vorteile bietet die Verwendung von CoreDNS im Vergleich zu KubeDNS?**<br>
-CoreDNS ist der standardmäßig unterstützte Cluster-DNS-Provider für Kubernetes Version 1.13 und höher und wurde vor Kurzem zu einem [CNCF-Projekt (Cloud Native Computing Foundation) des Typs 'graduated' hochgestuft![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.cncf.io/projects/). Ein Projekt des Typs 'graduated' wurde gründlich getestet und permanent gespeichert und kann auf breiter Basis im Produktionsbetrieb eingesetzt werden. 
+CoreDNS ist der standardmäßig unterstützte Cluster-DNS-Provider für Kubernetes Version 1.13 und höher und wurde vor Kurzem zu einem [CNCF-Projekt (Cloud Native Computing Foundation) des Typs 'graduated' hochgestuft![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://www.cncf.io/projects/). Ein Projekt des Typs 'graduated' wurde gründlich getestet und permanent gespeichert und kann auf breiter Basis im Produktionsbetrieb eingesetzt werden.
 
 Wie in der [Kubernetes-Ankündigung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/blog/2018/12/03/kubernetes-1-13-release-announcement/) angegeben, ist CoreDNS ein autoritativer, vielseitig einsetzbarer DNS-Server, der die abwärtskompatible, aber erweiterbare Integration in Kubernetes ermöglicht. Da CoreDNS eine einzelne ausführbare Funktion und ein einzelner Prozess ist, weist CoreDNS weniger Abhängigkeiten und bewegliche Teile auf als der bisherige Cluster-DNS-Provider und ist damit weniger fehleranfällig. Das Projekt wurde außerdem in derselben Sprache, `Go`, wie das Kubernetes-Projekt geschrieben, was den Schutz des Speichers erleichtert. Schließlich unterstützt CoreDNS flexiblere Anwendungsfälle als KubeDNS, da Sie angepasste DNS-Einträge wie die [gängigen Konfigurationen in der CoreDNS-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://coredns.io/manual/toc/#setups) erstellen können.
 
@@ -203,7 +203,7 @@ Sie können CoreDNS anstelle von KubeDNS als Cluster-DNS-Provider einrichten.
 
 1.  Wenn Sie die Konfigurationszuordnung für den KubeDNS-Provider oder die Konfigurationszuordnung für die automatische KubeDNS-Skalierung angepasst haben, übertragen Sie alle Anpassungen auf die CoreDNS-Konfigurationszuordnungen.
     *   Übertragen Sie für die Konfigurationszuordnung `kube-dns` im Namensbereich `kube-system` alle [DNS-Anpassungen ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) auf die Konfigurationszuordnung `coredns` im Namensbereich `kube-system`. Die Syntax der Konfigurationszuordnungen `kube-dns` und `coredns` ist unterschiedlich. Ein Beispiel dazu finden Sie in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns).
-    *   Übertragen Sie für die Konfigurationszuordnung `kube-dns-autoscaler` im Namensbereich `kube-system` alle [Anpassungen der automatischen DNS-Skalierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) auf die Konfigurationszuordnung `coredns-autoscaler` im Namensbereich `kube-system`. Die Anpassungssyntax ist für beide identisch. 
+    *   Übertragen Sie für die Konfigurationszuordnung `kube-dns-autoscaler` im Namensbereich `kube-system` alle [Anpassungen der automatischen DNS-Skalierung ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) auf die Konfigurationszuordnung `coredns-autoscaler` im Namensbereich `kube-system`. Die Anpassungssyntax ist für beide identisch.
 2.  Skalieren Sie die KubeDNS-Bereitstellung für automatische Skalierung nach unten.
     ```
     kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler

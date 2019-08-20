@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,13 +22,11 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
-
+ 
 # Rimozione dell'archiviazione persistente da un cluster
 {: #cleanup}
 
-Quando configuri l'archiviazione persistente nel tuo cluster, hai tre componenti principali: l'attestazione del volume persistente (o PVC, persistent volume claim) Kubernetes che richiede l'archiviazione, il volume persistente (o PV, persistent volume) montato in un pod e descritto nella PVC e l'istanza dell'infrastruttura IBM Cloud (SoftLayer), come l'archiviazione blocchi o file NFS. A seconda di come hai eseguito la creazione della tua archiviazione, potresti dover eliminare tutti e tre separatamente.
+Quando configuri l'archiviazione persistente nel tuo cluster, hai tre componenti principali: l'attestazione del volume persistente (o PVC, persistent volume claim) Kubernetes che richiede l'archiviazione, il volume persistente (o PV, persistent volume) montato in un pod e descritto nella PVC e l'istanza dell'infrastruttura IBM Cloud, come l'archiviazione blocchi o file NFS. A seconda di come hai eseguito la creazione della tua archiviazione, potresti dover eliminare tutti e tre separatamente.
 {:shortdesc}
 
 ## Ripulitura dell'archiviazione persistente
@@ -37,20 +35,28 @@ Quando configuri l'archiviazione persistente nel tuo cluster, hai tre componenti
 Descrizione delle tue opzioni di eliminazione:
 
 **Ho eliminato il mio cluster. Devo eliminare qualcos'altro per rimuovere l'archiviazione persistente?**</br>
-Dipende. Quando elimini un cluster, la PVC e il PV vengono eliminati. Tuttavia, scegli se rimuovere l'istanza di archiviazione associata nell'infrastruttura IBM Cloud (SoftLayer). Se scegli di non rimuoverla, l'istanza di archiviazione permane. Tuttavia, se hai eliminato il tuo cluster in uno stato non integro, l'archiviazione potrebbe permanere anche se hai scelto di rimuoverla. Attieniti alle istruzioni, in particolare il passo per [eliminare la tua istanza di archiviazione](#sl_delete_storage) nell'infrastruttura IBM Cloud (SoftLayer).
+Dipende. Quando elimini un cluster, la PVC e il PV vengono eliminati. Tuttavia, tu scegli se rimuovere l'istanza di archiviazione associata nell'infrastruttura IBM Cloud. Se scegli di non rimuoverla, l'istanza di archiviazione permane. Tuttavia, se hai eliminato il tuo cluster in uno stato non integro, l'archiviazione potrebbe permanere anche se hai scelto di rimuoverla. Attieniti alle istruzioni, in particolare il passo per [eliminare la tua istanza di archiviazione](#sl_delete_storage) nell'infrastruttura IBM Cloud.
 
 **Posso eliminare la PVC per rimuovere tutta la mia archiviazione?**</br>
-In alcuni casi. Se [crei l'archiviazione persistente in modo dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selezioni una classe di archiviazione senza `retain` nel suo nome, quando elimini la PVC, vengono eliminati anche il PV e l'istanza di archiviazione dell'infrastruttura IBM Cloud (SoftLayer).
+In alcuni casi. Se [crei l'archiviazione persistente in modo dinamico](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) e selezioni una classe di archiviazione senza `retain` nel suo nome, quando elimini la PVC vengono eliminati anche il PV e l'istanza di archiviazione dell'infrastruttura IBM Cloud.
 
 In tutti gli altri casi, attieniti alle istruzioni per controllare lo stato della PVC, del PV e del dispositivo di archiviazione fisico ed eliminali separatamente, se necessario.
 
 **Continuo a incorrere in addebiti per l'archiviazione dopo che l'ho eliminata?**</br>
-Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma non l'istanza nel tuo account dell'infrastruttura IBM Cloud (SoftLayer), tale istanza permane e incorri in addebiti per essa. Devi eliminare tutto, per evitare addebiti. Inoltre, quando specifichi il tipo di fatturazione (`billingType`) nella PVC, puoi scegliere `hourly` o `monthly`. Se hai scelto `monthly`, la tua istanza viene fatturata mensilmente. Quando elimini l'istanza, ti viene addebitato il resto del mese.
+Dipende da cosa elimini e dal tipo di fatturazione. Se elimini la PVC e il PV ma non l'istanza nel tuo account dell'infrastruttura IBM Cloud, tale istanza permane e incorri in addebiti per essa. Devi eliminare tutto, per evitare addebiti. Inoltre, quando specifichi il tipo di fatturazione (`billingType`) nella PVC, puoi scegliere `hourly` o `monthly`. Se hai scelto `monthly`, la tua istanza viene fatturata mensilmente. Quando elimini l'istanza, ti viene addebitato il resto del mese.
 
+Quando annulli manualmente l'istanza di archiviazione persistente dalla console dell'infrastruttura IBM Cloud o dalla CLI `ibmcloud sl`, la fatturazione viene arrestata nel seguente modo: 
+- **Archiviazione oraria**: la fatturazione viene arrestata immediatamente. Dopo che la tua archiviazione è stata annullata, potresti ancora vedere la tua istanza di archiviazione nella console per un massimo di 72 ore.  
+- **Archiviazione mensile**: puoi scegliere tra l'**annullamento immediato** o l'**annullamento alla data di anniversario**. Se scegli un annullamento immediato, la tua archiviazione viene rimossa immediatamente e non puoi utilizzare più la tua archiviazione. Se scegli di annullare la tua archiviazione alla successiva data di anniversario, le tue istanze dell'archiviazione rimangono attive fino alla successiva data di anniversario e puoi continuare a utilizzarle fino a questa data. In entrambi i casi, la fatturazione viene arrestata per il successivo ciclo di fatturazione ma ti viene comunque addebitato in fattura il ciclo di fatturazione corrente fino alla sua fine. Dopo che la tua archiviazione è stata annullata, potresti ancora vedere la tua istanza di archiviazione nella console o nella CLI per un massimo di 72 ore.  
 
-<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
+Se rimuovi l'archiviazione persistente con una politica di riacquisizione `Delete` di cui avevi eseguito dinamicamente il provisioning eliminando la PVC, l'archiviazione viene rimossa indipendentemente dal fatto che tu abbia scelto un tipo di fatturazione orario o mensile. Dopo che la tua archiviazione è stata rimossa, potresti ancora vedere la tua istanza di archiviazione nella console o nella CLI per un massimo di 72 ore. L'archiviazione persistente che utilizza una politica di riacquisizione `Retain` non viene rimossa e te ne viene comunque addebitato in fattura il suo utilizzo. 
 
-Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+<p class="important">Quando ripulisci l'archiviazione persistente, elimini tutti i dati in essa archiviati. Se hai bisogno di una copia dei dati, crea un backup per l'[archiviazione file](/docs/containers?topic=containers-file_storage#file_backup_restore) o l'[archiviazione blocchi](/docs/containers?topic=containers-block_storage#block_backup_restore).  </p>
+
+**Ho eliminato la mia archiviazione. Perché posso ancora vedere le mie istanze?** </br>
+Dopo che hai rimosso l'archiviazione persistente, ci possono volere 72 ore perché la rimozione venga elaborata completamente e perché l'archiviazione scompaia dalla CLI o dalla console dell'infrastruttura IBM Cloud. 
+
+Prima di iniziare: [accedi al tuo account. Se applicabile, specifica il gruppo di risorse appropriato. Imposta il contesto per il tuo cluster:](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Per ripulire i dati persistenti:
 
@@ -180,7 +186,10 @@ Per ripulire i dati persistenti:
    ```
    {: pre}
 
-9. Verifica che l'istanza di archiviazione fisica venga rimossa. Il completamento del processo di eliminazione potrebbe richiedere alcuni giorni.
+10. Verifica che l'istanza di archiviazione fisica venga rimossa. 
+   
+   Il completamento del processo di eliminazione potrebbe impiegare fino a 72 ore.
+   {: important}
 
    **Archiviazione file:**
    ```
@@ -192,3 +201,5 @@ Per ripulire i dati persistenti:
    ibmcloud sl block volume-list
    ```
    {: pre}
+
+

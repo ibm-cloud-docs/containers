@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -34,7 +34,7 @@ Knative nutzt ein konsistentes, programmiersprachen- und frameworkübergreifende
 **Wie funktioniert Knative?**</br>
 Knative wird mit drei Hauptkomponenten oder _Basiskomponenten_ ('Primitives') bereitgestellt, die Sie beim Erstellen (Build), Bereitstellen (Deploy) und Verwalten Ihrer serverunabhängigen Apps in Ihrem Kubernetes-Cluster unterstützen.
 
-- **Build:** Die Basiskomponente `Build` unterstützt das Erstellen einer Reihe von Schritten, um Ihre App aus Quellcode als Container-Image zu erstellen. Stellen Sie sich vor, Sie verwenden eine einfache Buildvorlage, in der Sie das Quellenrepository zum Auffinden Ihres App-Codes und die gewünschte Container-Registry für das Hosting des Image angeben. Durch einen einzigen Befehl können Sie Knative anweisen, diese Buildvorlage zu verwenden, den Quellcode zu extrahieren, das Image zu erstellen und das Image durch eine Push-Operation in Ihre Container-Registry einzufügen, sodass Sie das Image in Ihrem Container verwenden können.
+- **Build:** Die Basiskomponente `Build` unterstützt das Erstellen einer Reihe von Schritten, um Ihre App aus Quellcode als Container-Image zu erstellen. Stellen Sie sich vor, Sie verwenden eine einfache Buildvorlage, in der Sie das Quellenrepository zum Auffinden Ihres App-Codes und die gewünschte Container-Registry für das Hosting des Images angeben. Durch einen einzigen Befehl können Sie Knative anweisen, diese Buildvorlage zu verwenden, den Quellcode zu extrahieren, das Image zu erstellen und das Image durch eine Push-Operation in Ihre Container-Registry einzufügen, sodass Sie das Image in Ihrem Container verwenden können.
 - **Serving:** Die Basiskomponente `Serving` unterstützt Sie bei der Bereitstellung serverunabhängiger Apps als Knative-Services sowie bei der automatischen Skalierung dieser Services, sogar bis auf null Instanzen herab. Knative verwendet Istio zum Bereitstellen Ihrer serverunabhängigen und containerisierten Workloads. Wenn Sie das verwaltete Knative-Add-on installieren, wird das verwaltete Istio-Add-on automatisch mitinstalliert. Durch die Nutzung der Istio-Funktionalität für Datenverkehrsmanagement und intelligentes Routing können Sie steuern, welcher Datenverkehr an eine bestimmte Version Ihres Service geleitet wird, sodass ein Entwickler eine neue App-Version ohne großen Aufwand testen und implementieren kann oder A-B-Tests durchführen kann.
 - **Eventing:** Mit der Basiskomponente `Eventing` können Sie Auslöser (Trigger) oder Ereignisströme erstellen, die andere Services abonnieren können. Sie wollen zum Beispiel immer dann einen neuen Build Ihrer App starten, wenn Code durch eine Push-Operation in Ihr GitHub-Master-Repository übertragen wird. Oder Sie möchten eine serverunabhängige App nur ausführen, wenn die Temperatur unter den Gefrierpunkt fällt. Zum Beispiel kann die Basiskomponente `Eventing` in Ihre CI/CD-Pipeline integriert werden, um den Build und die Bereitstellung von Apps zu automatisieren, wenn ein bestimmtes Ereignis auftritt.
 
@@ -53,7 +53,7 @@ Knative baut auf Istio auf, um sicherzustellen, dass Ihre serverunabhängigen un
 Vorbereitende Schritte:
 -  [Installieren Sie die IBM Cloud-CLI, das {{site.data.keyword.containerlong_notm}}-Plug-in und die Kubernetes-CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Stellen Sie sicher, dass Sie die CLI-Version von `kubectl` installieren, die der Kubernetes-Version Ihres Clusters entspricht.
 -  [Erstellen Sie einen Standardcluster mit mindestens drei Workerknoten, die jeweils vier Cores und 16 GB Hauptspeicher (`b3c.4x16`) oder mehr haben](/docs/containers?topic=containers-clusters#clusters_ui). Darüber hinaus müssen der Cluster und die Workerknoten mindestens die unterstützte, mindestens erforderliche Version von Kubernetes ausführen. Dies können Sie durch Ausführen von `ibmcloud ks addon-versions -- addon knative` überprüfen.
--  Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}}-IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für {{site.data.keyword.containerlong_notm}} verfügen.
+-  Stellen Sie sicher, dass Sie über die [{{site.data.keyword.cloud_notm}} IAM-Servicerolle **Schreibberechtigter** oder **Manager**](/docs/containers?topic=containers-users#platform) für {{site.data.keyword.containerlong_notm}} verfügen.
 -  [Definieren Sie Ihren Cluster als Ziel der CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 </br>
 
@@ -128,7 +128,7 @@ Nachdem Sie Knative in Ihrem Cluster eingerichtet haben, können Sie Ihre server
 Zum Bereitstellen einer App mit Knative müssen Sie eine Knative-`Serviceressource` angeben. Ein Knative-Service wird von der Knative-Basiskomponente `Serving` verwaltet und ist für die Verwaltung des gesamten Lebenszyklus der Workload verantwortlich. Wenn Sie den Service erstellen, erstellt die Knative-Basiskomponente `Serving` automatisch eine Version für Ihre serverunabhängige App und fügt diese Version dem Revisionsprotokoll des Service hinzu. Ihrer serverunabhängigen App wird eine öffentliche URL aus Ihrer Ingress-Unterdomäne im Format `<knative-servicename>.<namensbereich>.<ingress-unterdomäne>` zugeordnet, durch die Sie über das Internet auf die App zugreifen können. Außerdem wird Ihrer App ein privater Hostname im Format `<knative-servicename>.<namensbereich>.cluster.local` zugeordnet, durch den Sie über den Cluster auf Ihre App zugreifen können.
 
 **Was passiert im Hintergrund, wenn ich den Knative-Service erstelle?**</br>
-Wenn Sie einen Knative-Service erstellen, wird Ihre App automatisch als Kubernetes-Pod in Ihrem Cluster bereitgestellt und über einen Kubernetes Service zugänglich gemacht. Knative verwendet die von IBM bereitgestellte Ingress-Unterdomäne und das zugehörige TLS-Zertifikat zum Zuordnen des öffentlichen Hostnamens. Eingehender Netzverkehr wird auf der Basis der von IBM bereitgestellten Ingress-Standard-Routing-Regeln weitergeleitet. 
+Wenn Sie einen Knative-Service erstellen, wird Ihre App automatisch als Kubernetes-Pod in Ihrem Cluster bereitgestellt und über einen Kubernetes Service zugänglich gemacht. Knative verwendet die von IBM bereitgestellte Ingress-Unterdomäne und das zugehörige TLS-Zertifikat zum Zuordnen des öffentlichen Hostnamens. Eingehender Netzverkehr wird auf der Basis der von IBM bereitgestellten Ingress-Standard-Routing-Regeln weitergeleitet.
 
 **Wie kann ich eine neue Version meiner App implementieren?**</br>
 Wenn Sie Ihren Knative-Service aktualisieren, wird eine neue Version Ihrer serverunabhängigen App erstellt. Dieser Version werden dieselben öffentlichen und privaten Hostnamen wie der vorherigen Version zugeordnet. Standardmäßig wird der gesamte eingehende Netzverkehr an die neueste Version Ihrer App weitergeleitet. Sie können jedoch angeben, welcher Prozentsatz des eingehenden Netzverkehrs an eine bestimmte App-Version weitergeleitet werden soll, damit Sie A-B-Tests durchführen können. Sie können den eingehenden Netzverkehr gleichzeitig zwischen zwei App-Versionen aufteilen: die aktuelle Version Ihrer Version und die neue Version, die Sie implementieren wollen.  
@@ -344,7 +344,7 @@ Standardmäßig wird jeder App eine öffentliche Unterdomäne aus Ihrer Ingress-
 1. Erstellen Sie eine angepasste Domäne. Arbeiten Sie mit Ihrem DNS-Provider (Domain Name Service) oder [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started), um Ihre angepasste Domäne zu registrieren.
 2. Konfigurieren Sie Ihre Domäne, um eingehenden Netzverkehr an das von IBM bereitgestellte Ingress-Gateway weiterzuleiten. Wählen Sie zwischen diesen Optionen:
    - Definieren Sie einen Alias für Ihre angepasste Domäne, indem Sie die von IBM bereitgestellte Domäne als kanonischen Namensdatensatz (CNAME) angeben. Zum Ermitteln der von IBM bereitgestellten Ingress-Domäne führen Sie den Befehl `ibmcloud ks cluster-get --cluster <clustername>` aus. Suchen Sie nach dem Feld für die Ingress-Unterdomäne (**Ingress subdomain**). Die Verwendung eines CNAME wird bevorzugt, weil IBM automatische Zustandsprüfungen für die IBM Unterdomäne ermöglicht und alle fehlgeschlagenen IPs aus der DNS-Antwort entfernt.
-   - Ordnen Sie Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse des Ingress-Gateways zu, indem Sie die IP-Adresse als Datensatz hinzufügen. Führen Sie `nslookup <ingress-unterdomäne>` aus, um die öffentliche IP-Adresse des Ingress-Gateways zu suchen.
+   - Ordnen Sie Ihre angepasste Domäne der portierbaren öffentlichen IP-Adresse des Ingress-Gateways zu, indem Sie die IP-Adresse als A-Datensatz hinzufügen. Führen Sie `nslookup <ingress-unterdomäne>` aus, um die öffentliche IP-Adresse des Ingress-Gateways zu suchen.
 3. Kaufen Sie ein offizielles TLS-Platzhalterzertifikat für Ihre angepasste Domäne. Wenn Sie mehrere TLS-Zertifikate kaufen wollen, stellen Sie sicher, dass der [allgemeine Name (CN, Common Name) ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://support.dnsimple.com/articles/what-is-common-name/) für jedes Zertifikat anders ist.
 4. Erstellen Sie einen geheimen Kubernetes-Schlüssel (Secret) für Ihr Zertifikat und den Schlüssel.
    1. Verschlüsseln Sie das Zertifikat und den Schlüssel in Base-64 und speichern Sie den mit Base-64 verschlüsselten Wert in einer neuen Datei.
@@ -374,7 +374,7 @@ Standardmäßig wird jeder App eine öffentliche Unterdomäne aus Ihrer Ingress-
 
    4. Erstellen Sie das Zertifikat in Ihrem Cluster.
       ```
-      kubectl create -f secret.yaml
+      kubectl apply -f secret.yaml
       ```
       {: pre}
 
@@ -540,7 +540,7 @@ spec:
 <tbody>
 <tr>
 <td><code>autoscaling.knative.dev/minScale</code></td>
-<td>Geben Sie die Mindestanzahl von Pods ein, die in Ihrem Cluster ausgeführt werden sollen. Knative kann für Ihre App kein Scale-down auf eine Anzahl durchführen, die kleiner als die von Ihnen festgelegte Anzahl ist, auch wenn von Ihrer App kein Netzverkehr empfangen wird. Die Standardanzahl Pods ist Null. </td>
+<td>Geben Sie die Mindestanzahl von Pods ein, die in Ihrem Cluster ausgeführt werden sollen. Knative kann für Ihre App kein Scale-down auf eine Anzahl durchführen, die kleiner als die von Ihnen festgelegte Anzahl ist, auch wenn von Ihrer App kein Netzverkehr empfangen wird. Die Standardanzahl Pods ist Null.  </td>
 </tr>
 <tr>
 <td><code>autoscaling.knative.dev/maxScale</code></td>
@@ -552,7 +552,7 @@ spec:
 ### Maximale Anzahl Anforderungen pro Pod angeben
 {: #max-request-per-pod}
 
-Sie können die maximale Anzahl Anforderungen angeben, die eine App-Instanz empfangen und verarbeiten kann, bevor Knative ein Scale-up für Ihre App-Instanzem durchführt. Wenn Sie beispielsweise die maximale Anzahl Anforderungen auf 1 setzen, kann Ihre App-Instanz jeweils nur eine Anforderung empfangen. Wenn eine zweite Anforderung eingeht, bevor die erste vollständig verarbeitet wurde, führt Knative eine Scale-up um eine weitere Instanz durch.
+Sie können die maximale Anzahl Anforderungen angeben, die eine App-Instanz empfangen und verarbeiten kann, bevor Knative ein Scale-up für Ihre App-Instanzen durchführt. Wenn Sie beispielsweise die maximale Anzahl Anforderungen auf 1 setzen, kann Ihre App-Instanz jeweils nur eine Anforderung empfangen. Wenn eine zweite Anforderung eingeht, bevor die erste vollständig verarbeitet wurde, führt Knative eine Scale-up um eine weitere Instanz durch.
 
 ```
 apiVersion: serving.knative.dev/v1alpha1
@@ -579,7 +579,7 @@ spec:
 <tbody>
 <tr>
 <td><code>containerConcurrency</code></td>
-<td>Geben Sie die maximale Anzahl Anforderungen ein, die eine App-Instanz gleichzeitig empfangen kann, bevor Knative ein Scale-up für Ihre App-Instanzem durchführt. </td>
+<td>Geben Sie die maximale Anzahl Anforderungen ein, die eine App-Instanz gleichzeitig empfangen kann, bevor Knative ein Scale-up für Ihre App-Instanzen durchführt.  </td>
 </tr>
 </tbody>
 </table>
@@ -616,7 +616,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serving.knative.dev/visibility</code></td>
-  <td>Wenn Sie die Bezeichnung <code>serving.knative.dev/visibility: cluster-local</code> hinzufügen, wird Ihrem Service nur eine private Route im Format <code>&lt;servicename&gt;.&lt;namensbereich&gt;.cluster.local</code> zugeordnet. Sie können den privaten Hostnamen für den Zugriff auf Ihren Service von innerhalb des Clusters aus verwenden, Sie können aber nicht über das öffentliche Netz auf Ihren Service zugreifen. </td>
+  <td>Wenn Sie die Bezeichnung <code>serving.knative.dev/visibility: cluster-local</code> hinzufügen, wird Ihrem Service nur eine private Route im Format <code>&lt;servicename&gt;.&lt;namensbereich&gt;.cluster.local</code> zugeordnet. Sie können den privaten Hostnamen für den Zugriff auf Ihren Service von innerhalb des Clusters aus verwenden, Sie können aber nicht über das öffentliche Netz auf Ihren Service zugreifen.  </td>
 </tr>
 </tbody>
 </table>

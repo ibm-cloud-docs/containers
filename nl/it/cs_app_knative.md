@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -53,7 +53,7 @@ Knative si basa su Istio per garantire che i tuoi carichi di lavoro senza server
 Prima di iniziare:
 -  [Installa la CLI IBM Cloud, il plugin {{site.data.keyword.containerlong_notm}} e la CLI Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Assicurati di installare la versione della CLI `kubectl` che corrisponde alla versione Kubernetes del tuo cluster.
 -  [Crea un cluster standard con almeno 3 nodi di lavoro, ciascuno dei quali con 4 core e 16 GB di memoria (`b3c.4x16`) o più](/docs/containers?topic=containers-clusters#clusters_ui). Inoltre, il cluster e i nodi di lavoro devono eseguire almeno la versione minima supportata di Kubernetes, verificabile eseguendo `addon-versions --addon knative`.
--  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.Bluemix_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per {{site.data.keyword.containerlong_notm}}.
+-  Assicurati di disporre del [ruolo del servizio {{site.data.keyword.cloud_notm}} IAM **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform) per {{site.data.keyword.containerlong_notm}}.
 -  [Indirizza la CLI al tuo cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 </br>
 
@@ -128,7 +128,7 @@ Una volta configurato Knative nel tuo cluster, puoi distribuire la tua applicazi
 Per distribuire un'applicazione con Knative, devi specificare una risorsa `Service` Knative. Un servizio Knative è gestito dalla primitiva `Serving` di Knative ed è a capo della gestione dell'intero ciclo di vita del carico di lavoro. Quando crei il servizio, la primitiva`Serving` di Knative crea automaticamente una versione per la tua applicazione senza server e la aggiunge alla cronologia delle revisioni del servizio. Alla tua applicazione senza server viene assegnato dal tuo dominio secondario Ingress un URL pubblico in formato `<knative_service_name>.<namespace>.<ingress_subdomain>` che puoi utilizzare per accedere all'applicazione da internet. Inoltre, alla tua applicazione viene assegnato un nome host privato in formato `<knative_service_name>.<namespace>.cluster.local`, che puoi utilizzare per accedere alla tua applicazione dall'interno del cluster.
 
 **Cosa accade dietro le quinte quando creo un servizio Knative?**</br>
-Quando crei un servizio Knative, la tua applicazione viene distribuita automaticamente come pod Kubernetes nel tuo cluster ed esposta utilizzando un servizio Kubernetes. Per assegnare il nome host pubblico, Knative utilizza il certificato TLS e il sottodominio Ingress fornito da IBM. Il traffico di rete in entrata viene instradato in base alle regole di instradamento Ingress predefinite fornite da IBM.
+Quando crei un servizio Knative, la tua applicazione viene distribuita automaticamente come pod Kubernetes nel tuo cluster ed esposta utilizzando un servizio Kubernetes. Per assegnare il nome host pubblico, Knative utilizza il certificato TLS e il dominio secondario Ingress fornito da IBM. Il traffico di rete in entrata viene instradato in base alle regole di instradamento Ingress predefinite fornite da IBM.
 
 **Come posso distribuire una nuova versione della mia applicazione?**</br>
 Quando aggiorni il tuo servizio Knative, viene creata una nuova versione della tua applicazione senza server. A questa versione vengono assegnati gli stessi nomi host pubblico e privato della tua versione precedente. Per impostazione predefinita, tutto il traffico di rete in entrata viene instradato all'ultima versione della tua applicazione. Tuttavia, puoi specificare anche la percentuale di traffico di rete in entrata che vuoi instradare a una versione specifica dell'applicazione, in modo da poter eseguire i test A-B. Puoi suddividere il traffico di rete in entrata tra due versioni dell'applicazione alla volta: la versione corrente della tua applicazione e la nuova versione che vuoi aggiungere.  
@@ -344,7 +344,7 @@ Per impostazione predefinita, a ciascuna applicazione viene assegnato dal tuo do
 1. Crea un dominio personalizzato. Per registrare il tuo dominio personalizzato, utilizza il provider DNS (Domain Name Service) o il [DNS IBM Cloud](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configura il tuo dominio per instradare il traffico di rete in entrata al gateway Ingress fornito da IBM. Scegli tra queste opzioni:
    - Definisci un alias per il tuo dominio personalizzato specificando il dominio fornito da IBM come un record di nome canonico (CNAME). Per trovare il dominio Ingress fornito da IBM, esegui `ibmcloud ks cluster-get --cluster <cluster_name>` e cerca il campo **Dominio secondario Ingress**. L'utilizzo di un CNAME è preferito perché IBM fornisce dei controlli dell'integrità automatici sul dominio secondario IBM e rimuove gli eventuali IP malfunzionanti dalla risposta DNS.
-   - Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile del gateway Ingress aggiungendo l'indirizzo IP come record. Per trovare l'indirizzo IP pubblico del gateway Ingress, esegui `nslookup <ingress_subdomain>`.
+   - Associa il tuo dominio personalizzato all'indirizzo IP pubblico portatile del controller Ingress fornito da IBM aggiungendo l'indirizzo IP come un record A. Per trovare l'indirizzo IP pubblico del gateway Ingress, esegui `nslookup <ingress_subdomain>`.
 3. Acquista un certificato TLS jolly ufficiale per il tuo dominio personalizzato. Se vuoi acquistare più certificati TLS, assicurati che il [CN ![Icona link esterno](../icons/launch-glyph.svg "Icona link esterno")](https://support.dnsimple.com/articles/what-is-common-name/) sia diverso per ciascun certificato.
 4. Crea un segreto Kubernetes per la tua chiave e il tuo certificato.
    1. Codifica il certificato e la chiave in base64 e salva il valore con codifica base64 in un nuovo file.
@@ -374,7 +374,7 @@ Per impostazione predefinita, a ciascuna applicazione viene assegnato dal tuo do
 
    4. Crea il certificato nel tuo cluster.
       ```
-      kubectl create -f secret.yaml
+      kubectl apply -f secret.yaml
       ```
       {: pre}
 
@@ -579,7 +579,7 @@ spec:
 <tbody>
 <tr>
 <td><code>containerConcurrency</code></td>
-<td>Immetti il numero massimo di richieste che un'istanza dell'applicazione può ricevere alla volta prima che Knative valuti la possibilità di ampliare le istanze dell'applicazione.</td>
+<td>Immetti il numero massimo di richieste che un'istanza dell'applicazione può ricevere alla volta prima che Knative valuti la possibilità di ampliare le istanze dell'applicazione.  </td>
 </tr>
 </tbody>
 </table>

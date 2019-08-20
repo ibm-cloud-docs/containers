@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,17 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casi di utilizzo di vendita al dettaglio per {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
-Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong_notm}} possano
+Questi casi di utilizzo evidenziano come i carichi di lavoro su {{site.data.keyword.containerlong}} possano
 avvalersi delle analisi relative a conoscenze di mercato, distribuzioni multiregione in tutto il mondo e gestione degli inventari con {{site.data.keyword.messagehub_full}} e l'archiviazione oggetti.
 {: shortdesc}
 
 ## Il rivenditore tradizionale condivide i dati, utilizzando le API con i business partner globali per promuovere le vendite omnicanale
 {: #uc_data-share}
 
-Un responsabile della linea di business deve aumentare i canali di vendita, ma il sistema di vendita al dettaglio è isolato in un data center in loco. La competizione ha business partner globali per la vendita incrociata e incrementale di permutazioni delle loro merci, attraverso siti fisici e online.
+Un responsabile della linea di business deve aumentare i canali di vendita, ma il sistema di vendita al dettaglio è isolato in un data center in loco. La competizione ha business partner globali per la vendita incrociata e incrementale di permutazioni delle loro merci, attraverso siti fisici e online. 
 {: shortdesc}
 
 Perché {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} fornisce un ecosistema di cloud pubblico, in cui i contenitori consentono a nuovi business partner e altri soggetti esterni di co-sviluppare applicazioni e dati, tramite le API. Ora che il sistema di vendita al dettaglio è sul cloud pubblico, le API semplificano anche la condivisione dei dati e lanciano il nuovo sviluppo di applicazioni. Le distribuzioni di applicazioni aumentano quando gli sviluppatori sperimentano facilmente, distribuendo rapidamente le modifiche ai sistemi di sviluppo e test con le toolchain.
@@ -197,3 +196,5 @@ Soluzione tecnica:
 * Il traffico e le vendite dei clienti sono aumentati nei negozi rendendo gli stessi negozi una risorsa di differenziazione.
 * Allo stesso tempo, le nuove informazioni dall'analisi sociale e cognitiva migliorata hanno ridotto le spese operative di inventario.
 * La condivisione sociale nell'applicazione mobile aiuta anche a identificare e vendere ai nuovi clienti.
+
+

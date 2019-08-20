@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, node scaling
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 {:gif: data-image-type='gif'}
-
 
 
 # Clusters de Escalação
@@ -56,7 +55,7 @@ O escalador automático de cluster ajusta o número de nós do trabalhador consi
 **O que é escalonamento para cima e para baixo?**<br>
 Em geral, o escalador automático de cluster calcula o número de nós do trabalhador que seu cluster precisa para executar sua carga de trabalho. Aumentar ou reduzir a escala do cluster depende de muitos fatores, incluindo os apresentados a seguir.
 *   O tamanho mínimo e máximo do nó do trabalhador por zona que você configurou.
-*   Suas solicitações de recurso de pod pendentes e determinados metadados que você associa com a carga de trabalho, como antiafinidade, rótulos para colocar os pods apenas em determinados tipos de máquina ou [orçamentos de interrupção do pod![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+*   Suas solicitações de recursos de pod pendentes e determinados metadados associados à carga de trabalho, como antiafinidade, rótulos para colocar os pods apenas em determinados tipos ou [orçamentos de interrupção de pod![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   Os conjuntos de trabalhadores que o escalador automático de cluster gerencia, potencialmente entre as zonas em um [cluster de múltiplas zonas](/docs/containers?topic=containers-ha_clusters#multizone).
 *   Os [valores customizados do gráfico do Helm](#ca_chart_values) configurados, como ignorar nós do trabalhador para a exclusão se usarem o armazenamento local.
 
@@ -86,15 +85,15 @@ Considere a imagem a seguir para obter um exemplo de aumento e diminuição de c
 _Figura: Aumentando e diminuindo automaticamente a capacidade de um cluster._
 ![GIF de aumento e diminuição automáticos da capacidade de um cluster](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  O cluster tem quatro nós do trabalhador em dois conjuntos de trabalhadores que são difundidos entre duas zonas. Cada conjunto tem um nó do trabalhador por zona, mas o **Conjunto de trabalhadores A** tem um tipo de máquina `u2c.2x4` e o **Conjunto de trabalhadores B** tem um tipo de máquina `b2c.4x16`. Seu total de recursos de cálculo é aproximadamente 10 núcleos (2 núcleos x 2 nós do trabalhador para o **Conjunto de trabalhadores A** e 4 núcleos x 2 nós do trabalhador para o **Conjunto de trabalhadores B**). Seu cluster atualmente executa uma carga de trabalho que solicita 6 desses 10 núcleos. Os recursos de cálculo adicionais são consumidos em cada nó do trabalhador pelos [recursos reservados](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) que são necessários para executar o cluster, nós do trabalhador e quaisquer complementos, tais como o ajustador automático de escala do cluster.
+1.  O cluster tem quatro nós do trabalhador em dois conjuntos de trabalhadores que são difundidos entre duas zonas. Cada conjunto tem um nó do trabalhador por zona, mas o **Conjunto de trabalhadores A** tem um tipo de `u2c.2x4` e o **Conjunto de trabalhadores B** tem um tipo de `b2c.4x16`. Seu total de recursos de cálculo é aproximadamente 10 núcleos (2 núcleos x 2 nós do trabalhador para o **Conjunto de trabalhadores A** e 4 núcleos x 2 nós do trabalhador para o **Conjunto de trabalhadores B**). Seu cluster atualmente executa uma carga de trabalho que solicita 6 desses 10 núcleos. Os recursos de cálculo adicionais são consumidos em cada nó do trabalhador pelos [recursos reservados](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) que são necessários para executar o cluster, nós do trabalhador e quaisquer complementos, tais como o ajustador automático de escala do cluster.
 2.  O escalador automático de cluster está configurado para gerenciar ambos os conjuntos de trabalhadores com os seguintes tamanhos mínimo e máximo por zona:
     *  ** Conjunto A do Trabalhador A **:  ` minSize=1 `,  ` maxSize=5 `.
     *  ** Conjunto do Trabalhador B **:  ` minSize=1 `,  ` maxSize=2 `.
 3.  Você planeja implementações que requerem 14 réplicas de pod adicionais de um app que solicita um núcleo de CPU por réplica. Uma réplica de pod pode ser implementada nos recursos atuais, mas as outras 13 estão pendentes.
 4.  O escalador automático de cluster aumenta a capacidade de seus nós do trabalhador dentro dessas restrições para suportar as 13 solicitações de recurso de réplicas de pod adicionais.
     *  **Conjunto de trabalhadores A**: sete nós do trabalhador são incluídos em um método round-robin tão uniformemente quanto possível entre as zonas. Os nós do trabalhador aumentam a capacidade de cálculo do cluster em aproximadamente 14 núcleos (2 núcleos x 7 nós do trabalhador).
-    *  **Conjunto de trabalhadores B**: dois nós do trabalhador são incluídos uniformemente entre as zonas, atingindo o `maxSize` de 2 nós do trabalhador por zona. Os nós do trabalhador aumentam a capacidade do cluster em aproximadamente 8 núcleos (4 núcleos x 2 nós do trabalhador).
-5.  As 20 cápsulas com solicitações de 1 núcleo são distribuídas conforme a seguir nos nós do trabalhador. Como os nós do trabalhador têm reservas de recursos, bem como pods que são executados para cobrir os recursos de cluster padrão, os pods para sua carga de trabalho não podem usar todos os recursos de cálculo disponíveis de um nó do trabalhador. Por exemplo, embora os nós do trabalhador `b2c.4x16` tenham quatro núcleos, somente três pods que solicitam um mínimo de um núcleo cada podem ser planejados para os nós do trabalhador.
+    *  **Conjunto de trabalhadores B**: dois nós do trabalhador são incluídos uniformemente entre as zonas, atingindo o `maxSize` de dois nós do trabalhador por zona. Os nós do trabalhador aumentam a capacidade do cluster em aproximadamente 8 núcleos (4 núcleos x 2 nós do trabalhador).
+5.  Os 20 pods com solicitações de um núcleo são distribuídos conforme a seguir nos nós do trabalhador. Como os nós do trabalhador têm reservas de recursos, bem como pods que são executados para cobrir os recursos de cluster padrão, os pods para sua carga de trabalho não podem usar todos os recursos de cálculo disponíveis de um nó do trabalhador. Por exemplo, embora os nós do trabalhador `b2c.4x16` tenham quatro núcleos, somente três pods que solicitam um mínimo de um núcleo cada podem ser planejados para os nós do trabalhador.
     <table summary="Uma tabela que descreve a distribuição da carga de trabalho em cluster escalado.">
     <caption>Distribuição de carga de trabalho no cluster escalado.</caption>
     <thead>
@@ -179,14 +178,14 @@ Sim, é possível incluir diversos recursos do Kubernetes em sua implementação
 Como as contaminações não podem ser aplicadas no nível do conjunto de trabalhadores, não [contamine os nós do trabalhador](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) para evitar resultados inesperados. Por exemplo, ao implementar uma carga de trabalho que não é tolerada pelos nós do trabalhador contaminados, eles não são considerados para a ampliação do dimensionamento e mais nós do trabalhador podem ser solicitados, mesmo que o cluster tenha capacidade suficiente. No entanto, os nós do trabalhador contaminados ainda são identificados como subutilizados se tiverem menos do que o limite (por padrão, 50%) de seus recursos utilizados e, portanto, são considerados para a redução do dimensionamento.
 {: shortdesc}
 
-### Por que meus conjuntos de trabalhadores com ajuste automático de escala estão desbalanceados?
+### Por que meus conjuntos de trabalhadores escalados automaticamente não estão balanceados?
 {: #scalable-practices-unbalanced}
 
 Durante uma ampliação de dimensionamento, o dimensionador automático de cluster balanceia os nós nas zonas, com uma diferença permitida de um nó do trabalhador a mais ou a menos (+/-1). Suas cargas de trabalho pendentes podem não solicitar capacidade suficiente para tornar cada zona balanceada. Nesse caso, se você desejar balancear manualmente os conjuntos de trabalhadores, [atualize o configmap do escalador automático de cluster](#ca_cm) para remover o conjunto de trabalhadores não balanceado. Em seguida, execute o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) `ibmcloud ks worker-pool-rebalance` e inclua o conjunto de trabalhadores novamente no configmap do ajustador automático de escala do cluster.
 {: shortdesc}
 
 
-### Por que não posso redimensionar nem rebalancear meu conjunto de trabalhadores?
+### Por que não posso redimensionar ou rebalancear meu conjunto de trabalhadores?
 {: #scalable-practices-resize}
 
 Quando o escalador automático de cluster está ativado para um conjunto de trabalhadores, não é possível [redimensionar](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) ou [rebalancear](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) seus conjuntos de trabalhadores. Deve-se [editar o configmap](#ca_cm) para mudar o tamanho mínimo ou máximo do conjunto de trabalhadores ou desativar a escalação automática de cluster para esse conjunto de trabalhadores. Não use o [comando](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) `ibmcloud ks worker-rm` para remover nós do trabalhador individuais de seu conjunto de trabalhadores, o que pode desbalancear o conjunto de trabalhadores.
@@ -206,14 +205,14 @@ Instale o plug-in do escalador automático de cluster do {{site.data.keyword.con
 ** Antes de iniciar **:
 
 1.  [ Instale a CLI e os plug-ins necessários ](/docs/cli?topic=cloud-cli-getting-started):
-    *  {{site.data.keyword.Bluemix_notm}}  CLI (` ibmcloud `)
+    *  {{site.data.keyword.cloud_notm}}  CLI (` ibmcloud `)
     *  Plug-in do {{site.data.keyword.containerlong_notm}}  (` ibmcloud ks `)
     *  Plug-in do {{site.data.keyword.registrylong_notm}}  (` ibmcloud cr `)
     *  Kubernetes (` kubectl `)
     *  Helm (` helm `)
 2.  [Crie um cluster padrão](/docs/containers?topic=containers-clusters#clusters_ui) que execute **Kubernetes versão 1.12 ou mais recente**.
 3.   [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirme se suas credenciais do {{site.data.keyword.Bluemix_notm}} Identity and Access Management estão armazenadas no cluster. O ajustador automático de escala usa esse segredo para autenticar credenciais. Se o segredo estiver ausente, [crie-o reconfigurando credenciais](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
+4.  Confirme se suas credenciais do {{site.data.keyword.cloud_notm}} Identity and Access Management estão armazenadas no cluster. O ajustador automático de escala usa esse segredo para autenticar credenciais. Se o segredo estiver ausente, [crie-o reconfigurando credenciais](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -397,7 +396,7 @@ Depois de editar o configmap para ativar um conjunto de trabalhadores, o ajustad
      {1}, "maxSize": 2, "enabled" :false },
      {2}", "minSize": 2, "maxSize": 5, "enabled" :true }
     ]</pre><br><br>
-    **Nota**: o escalador automático de cluster pode escalar apenas os conjuntos de trabalhadores que têm o rótulo `ibm-cloud.kubernetes.io/worker-pool-id`. Para verificar se o conjunto do trabalhador tem o rótulo necessário, execute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Se o seu conjunto de trabalhadores não tiver o rótulo necessário, [inclua um novo conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#add_pool) e use esse conjunto de trabalhadores com o ajustador automático de escala do cluster.</td>
+    <p class="note">O escalador automático de cluster pode escalar apenas os conjuntos de trabalhadores que têm o rótulo `ibm-cloud.kubernetes.io/worker-pool-id`. Para verificar se o conjunto do trabalhador tem o rótulo necessário, execute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Se o seu conjunto de trabalhadores não tiver o rótulo necessário, [inclua um novo conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#add_pool) e use esse conjunto de trabalhadores com o ajustador automático de escala do cluster.</p></td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">` "minSize": 1 `</td>
@@ -481,7 +480,7 @@ Customize as configurações do escalador automático de cluster, como a quantia
       withLocalStorage: true
       withSystemPods: true
     ```
-    {: codeblock}
+    {: screen}
 
     <table>
     <caption>Valores de Configuração do Autoscaler do Cluster</caption>
@@ -606,7 +605,7 @@ Para limitar uma implementação de pod a um conjunto de trabalhadores específi
 
 1.  Crie o conjunto de trabalhadores com o rótulo que você deseja usar. Por exemplo, seu rótulo pode ser `app: nginx`.
     ```
-    ibmcloud ks-pool-create -- name < name>-- cluster < cluster_name_or_ID>-- machine-type < machine_type>--size-per-zone < number_of_worker_nodes>-- etiquetas < key>= < value>
+    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Inclua o conjunto de trabalhadores na configuração do escalador automático de cluster](#ca_cm).
@@ -721,10 +720,10 @@ Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo d
 
     Saída de exemplo:
     ```
-    Nome: iks-ca-configmap
-    Namespace: kube-system
-    Rótulos: < none>
-    Anotações: kubectl.kubernetes.io/last-appliation={"apiVersion" :"v1" ,"data" :{"workerPoolsConfig.json" :"[\n { \" nome \": \" docs \": 1, \" maxSize \": 3, \" enabled \" :true } \n "}, "kind": "ConfigMap": "ConfigMap": "
+    Name:         iks-ca-configmap
+    Namespace:    kube-system
+    Labels:       <none>
+    Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","data":{"workerPoolsConfig.json":"[\n {\"name\": \"docs\",\"minSize\": 1,\"maxSize\": 3,\"enabled\":true}\n]\n"},"kind":"ConfigMap",...
 
     Data
     ====
@@ -827,6 +826,7 @@ Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo d
         ]
     kind: ConfigMap...
     ```
+    {: screen}
 2.  Liste os gráficos do Helm existentes e anote o nome do escalador automático de cluster.
     ```
     helm ls

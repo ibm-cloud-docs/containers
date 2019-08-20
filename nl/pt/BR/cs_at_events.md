@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, audit
 
@@ -28,10 +28,10 @@ subcollection: containers
 # {{site.data.keyword.cloudaccesstrailshort}} events
 {: #at_events}
 
-É possível visualizar, gerenciar e auditar atividades iniciadas pelo usuário em seu cluster do {{site.data.keyword.containerlong_notm}} usando o serviço {{site.data.keyword.cloudaccesstrailshort}}.
+É possível visualizar, gerenciar e auditar as atividades iniciadas pelo usuário em seu cluster OpenShift ou comunidade do Kubernetes do {{site.data.keyword.containerlong}} usando o serviço {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
-O  {{site.data.keyword.containershort_notm}}  gera dois tipos de eventos do  {{site.data.keyword.cloudaccesstrailshort}} :
+O {{site.data.keyword.containershort_notm}} gera dois tipos de eventos do {{site.data.keyword.cloudaccesstrailshort}}:
 
 * ** Eventos de gerenciamento de cluster **:
     * Esses eventos são gerados e encaminhados automaticamente para o {{site.data.keyword.cloudaccesstrailshort}}.
@@ -54,10 +54,10 @@ O {{site.data.keyword.containerlong_notm}} atualmente não está configurado par
 
 Para monitorar a atividade administrativa:
 
-1. Efetue login em sua conta do  {{site.data.keyword.Bluemix_notm}} .
+1. Efetue login em sua conta do  {{site.data.keyword.cloud_notm}} .
 2. No catálogo, provisione uma instância do serviço {{site.data.keyword.cloudaccesstrailshort}} na mesma conta que sua instância do {{site.data.keyword.containerlong_notm}}.
 3. Na guia **Gerenciar** do painel do {{site.data.keyword.cloudaccesstrailshort}}, selecione o domínio de conta ou de espaço.
-  * **Logs de conta**: os eventos de gerenciamento de cluster e os eventos de auditoria do servidor de API do Kubernetes estão disponíveis no **domínio de contas** para a região do {{site.data.keyword.Bluemix_notm}} em que os eventos são gerados.
+  * **Logs de conta**: os eventos de gerenciamento de cluster e os eventos de auditoria do servidor de API do Kubernetes estão disponíveis no **domínio de contas** para a região do {{site.data.keyword.cloud_notm}} em que os eventos são gerados.
   * **Logs de espaço**: se você especificou um espaço quando configurou seu cluster para encaminhar eventos de auditoria do servidor de API do Kubernetes, esses eventos estarão disponíveis no **domínio de espaço** que está associado ao espaço do Cloud Foundry no qual o serviço {{site.data.keyword.cloudaccesstrailshort}} é provisionado.
 4. Clique em  ** Visualizar no Kibana **.
 5. Configure o prazo durante o qual deseja visualizar os logs. O padrão é 24 horas.
@@ -93,7 +93,7 @@ Verifique a lista a seguir dos eventos de gerenciamento de cluster que são envi
 <td><code> containers-kubernetes.cluster.delete </code></td>
 <td>Um cluster é excluído.</td></tr><tr>
 <td><code> containers-kubernetes.cluster-feature.enable </code></td>
-<td>Um recurso, como o Cálculo confiável para nós do trabalhador bare metal, está ativado em um cluster.</td></tr><tr>
+<td>Um recurso, tal como o terminal em serviço público ou privado, é ativado em um cluster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>As informações do cluster são visualizadas.</td></tr><tr>
 <td><code> containers-kubernetes.logging-config.create </code></td>
@@ -125,7 +125,7 @@ Verifique a lista a seguir dos eventos de gerenciamento de cluster que são envi
 <td><code> containers-kubernetes.service.unbind </code></td>
 <td>Um serviço está desvinculado de um cluster.</td></tr><tr>
 <td><code> containers-kubernetes.subnet.add </code></td>
-<td>Uma sub-rede de infraestrutura do IBM Cloud (SoftLayer) existente é incluída em um cluster.</td></tr><tr>
+<td>Uma sub-rede de infraestrutura do IBM Cloud existente é incluída em um cluster.</td></tr><tr>
 <td><code> containers-kubernetes.subnet.create </code></td>
 <td>Uma sub-rede é criada.</td></tr><tr>
 <td><code> containers-kubernetes.usersubnet.add </code></td>
@@ -244,7 +244,7 @@ Antes de iniciar: certifique-se de que seu cluster esteja configurado para encam
     <td><code> ingresses.create </code></td>
     <td>Um ALB do Ingress é criado.</td></tr><tr>
     <td><code>ingresses.delete</code></td>
-    <td>Um ALB do Ingress é excluído.</td></tr><tr>
+    <td>Um ALB de Ingress é excluído.</td></tr><tr>
     <td><code> ingresses.patch </code></td>
     <td>Um ALB do Ingress é corrigido.</td></tr><tr>
     <td><code> ingresses.update </code></td>
@@ -406,9 +406,9 @@ Antes de iniciar: certifique-se de que seu cluster esteja configurado para encam
     <td><code> secrets.updated </code></td>
     <td>Um segredo é atualizado.</td></tr><tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>Uma revisão de acesso de autoassunto é criada.</td></tr><tr>
+    <td>Uma revisão de acesso do próprio sujeito é criada.</td></tr><tr>
     <td><code> selfsubjectrouesreviews.create </code></td>
-    <td>Uma revisão de regras de autoassunto é criada.</td></tr><tr>
+    <td>Uma revisão de regras do próprio sujeito é criada.</td></tr><tr>
     <td><code> subjectaccessreviewreviews.create </code></td>
     <td>Uma revisão de acesso de assunto é criada.</td></tr><tr>
     <td><code>serviceaccounts.create</code></td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -66,7 +66,7 @@ Revise as razões a seguir para saber o motivo de os logs do cluster não aparec
   </tr>
   <tr>
     <td>A cota de armazenamento de log foi atendida.</td>
-    <td>Para aumentar seus limites de armazenamento de log, consulte a <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
+    <td>Para aumentar os limites de armazenamento de log, consulte a <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">documentação do {{site.data.keyword.loganalysislong_notm}}</a>.</td>
   </tr>
   <tr>
     <td>Se você especificou um espaço na criação do cluster, o proprietário da conta não tem permissões de Gerenciador, Desenvolvedor ou Auditor para esse espaço.</td>
@@ -108,7 +108,7 @@ Antes de iniciar: [Efetue login em sua conta. Se aplicável, direcione o grupo d
     ```
     {:pre}
 
-3. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.Bluemix_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.
+3. Após alguns minutos, é possível visualizar seus logs no painel do Kibana. Para acessar o painel do Kibana, acesse uma das URLs a seguir e selecione a conta do {{site.data.keyword.cloud_notm}} na qual você criou o cluster. Se você especificou um espaço na criação do cluster, acesse esse espaço.
     - US-Sul e EUA/Leste:  ` https://logging.ng.bluemix.net `
     - UK-Sul:  ` https://logging.eu-gb.bluemix.net `
     - UE-Central:  ` https://logging.eu-fra.bluemix.net `
@@ -199,11 +199,11 @@ Ainda está tendo problemas com o seu cluster?
 {: shortdesc}
 
 -  No terminal, você é notificado quando atualizações para a CLI `ibmcloud` e plug-ins estão disponíveis. Certifique-se de manter sua CLI atualizada para que seja possível usar todos os comandos e sinalizações disponíveis.
--   Para ver se o {{site.data.keyword.Bluemix_notm}} está disponível, [verifique a página de status do {{site.data.keyword.Bluemix_notm}} ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/status?selected=status).
+-   Para ver se o {{site.data.keyword.cloud_notm}} está disponível, [verifique a {{site.data.keyword.cloud_notm}} página de status ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://cloud.ibm.com/status?selected=status).
 -   Poste uma pergunta no [{{site.data.keyword.containerlong_notm}} Slack ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://ibm-container-service.slack.com).
-    Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.Bluemix_notm}}, [solicite um convite](https://bxcs-slack-invite.mybluemix.net/) para essa Folga.
+    Se você não estiver usando um IBMid para a sua conta do {{site.data.keyword.cloud_notm}}, [solicite um convite](https://cloud.ibm.com/kubernetes/slack) para essa Folga.
     {: tip}
--   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.Bluemix_notm}}.
+-   Revise os fóruns para ver se outros usuários tiveram o mesmo problema. Ao usar os fóruns para fazer uma pergunta, marque sua pergunta para que ela seja vista pelas equipes de desenvolvimento do {{site.data.keyword.cloud_notm}}.
     -   Se você tiver questões técnicas sobre como desenvolver ou implementar clusters ou apps com o {{site.data.keyword.containerlong_notm}}, poste sua pergunta no [Stack Overflow ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo") ](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) e identifique-a com `ibm-cloud`, `kubernetes` e `containers`.
     -   Para perguntas sobre o serviço e instruções de introdução, use o fórum do [IBM Developer Answers ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Inclua as tags `ibm-cloud` e `containers`.
     Consulte

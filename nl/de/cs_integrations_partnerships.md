@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -30,12 +30,12 @@ subcollection: containers
 IBM ist bestrebt, {{site.data.keyword.containerlong_notm}} zum besten Kubernetes Service für das Migrieren, Bearbeiten und Verwalten Ihrer Kubernetes-Workloads zu machen. Um Ihnen alle Funktionen zur Verfügung zu stellen, die Sie für die Ausführung von Produktionsworkloads in der Cloud benötigen, wird {{site.data.keyword.containerlong_notm}} über Partnerschaften zusammen mit Services anderer Provider verwendet und kann Ihren Cluster so um erstklassige Protokollierungs-, Überwachungs- und Speichertools erweitern.
 {: shortdesc}
 
-Prüfen Sie unsere Partner und die Vorteile der von ihnen bereitgestellten Lösungen. Informationen zu anderen proprietären Open-Source-Services von {{site.data.keyword.Bluemix_notm}} und anderen Anbietern, die Sie in Ihrem Cluster verwenden können, finden Sie unter [Integration von {{site.data.keyword.Bluemix_notm}} und Produkten anderer Anbieter](/docs/containers?topic=containers-ibm-3rd-party-integrations).
+Prüfen Sie unsere Partner und die Vorteile der von ihnen bereitgestellten Lösungen. Informationen zu anderen proprietären Open-Source-Services von {{site.data.keyword.cloud_notm}} und anderen Anbietern, die Sie in Ihrem Cluster verwenden können, finden Sie unter [Integration von {{site.data.keyword.cloud_notm}} und Produkten anderer Anbieter](/docs/containers?topic=containers-ibm-3rd-party-integrations).
 
 ## LogDNA
 {: #logdna-partner}
 
-{{site.data.keyword.la_full_notm}} stellt [LogDNA ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://logdna.com/) als Service eines anderen Anbieters bereit, mit dem Sie Ihrem Cluster und Ihren Apps intelligente Protokollierungsfunktionen hinzufügen können. 
+{{site.data.keyword.la_full_notm}} stellt [LogDNA ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://logdna.com/) als Service eines anderen Anbieters bereit, mit dem Sie Ihrem Cluster und Ihren Apps intelligente Protokollierungsfunktionen hinzufügen können.
 
 ### Vorteile
 {: #logdna-benefits}
@@ -54,17 +54,17 @@ In der folgenden Tabelle finden Sie eine Liste der Hauptvorteile, die sich für 
 ### Integration mit {{site.data.keyword.containerlong_notm}}
 {: #logdna-integration}
 
-LogDNA wird von {{site.data.keyword.la_full_notm}} bereitgestellt, einem {{site.data.keyword.Bluemix_notm}}-Plattformservice, den Sie mit Ihrem Cluster verwenden können. {{site.data.keyword.la_full_notm}} wird von LogDNA in Partnerschaft mit IBM betrieben.
+LogDNA wird von {{site.data.keyword.la_full_notm}} bereitgestellt, einem {{site.data.keyword.cloud_notm}}-Plattformservice, den Sie mit Ihrem Cluster verwenden können. {{site.data.keyword.la_full_notm}} wird von LogDNA in Partnerschaft mit IBM betrieben.
 {: shortdesc}
 
-Um LogDNA in Ihrem Cluster verwenden zu können, müssen Sie eine Instanz von {{site.data.keyword.la_full_notm}} in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto bereitstellen und Ihre Kubernetes-Cluster als Protokollquelle konfigurieren. Nach der Konfiguration des Clusters werden Protokolle automatisch erfasst und an Ihre {{site.data.keyword.la_full_notm}}-Serviceinstanz weitergeleitet. Sie können das {{site.data.keyword.la_full_notm}}-Dashboard verwenden, um auf Ihre Protokolle zuzugreifen.   
+Um LogDNA in Ihrem Cluster verwenden zu können, müssen Sie eine Instanz von {{site.data.keyword.la_full_notm}} in Ihrem {{site.data.keyword.cloud_notm}}-Konto bereitstellen und Ihre Kubernetes-Cluster als Protokollquelle konfigurieren. Nach der Konfiguration des Clusters werden Protokolle automatisch erfasst und an Ihre {{site.data.keyword.la_full_notm}}-Serviceinstanz weitergeleitet. Sie können das {{site.data.keyword.la_full_notm}}-Dashboard verwenden, um auf Ihre Protokolle zuzugreifen.   
 
 Weitere Informationen finden Sie unter [Kubernetes-Cluster-Protokolle mit {{site.data.keyword.la_full_notm}} verwalten](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube).
 
 ### Abrechnung und Unterstützung
 {: #logdna-billing-support}
 
-{{site.data.keyword.la_full_notm}} ist vollständig in das {{site.data.keyword.Bluemix_notm}}-Unterstützungssystem integriert. Wenn ein Problem bei der Verwendung von {{site.data.keyword.la_full_notm}} auftritt, posten Sie eine Frage im Kanal `logdna-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) oder öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
+{{site.data.keyword.la_full_notm}} ist vollständig in das {{site.data.keyword.cloud_notm}}-Unterstützungssystem integriert. Wenn ein Problem bei der Verwendung von {{site.data.keyword.la_full_notm}} auftritt, posten Sie eine Frage im Kanal `logdna-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) oder öffnen Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
 
 ## Sysdig
 {: #sydig-partner}
@@ -80,7 +80,7 @@ In der folgenden Tabelle finden Sie eine Liste der Hauptvorteile, die sich für 
 
 |Vorteil|Beschreibung|
 |-------------|------------------------------|
-|Automatischer Zugriff auf cloudnative und angepasste Prometheus-Metriken|Wählen Sie aus einer Vielzahl von vordefinierten cloudnativen und angepassten Prometheus-Metriken aus, um einen Einblick in die Leistung und den Status Ihrer Rechenhosts, Apps, Container und Netze zu erhalten. |
+|Automatischer Zugriff auf cloudnative und angepasste Prometheus-Metriken|Wählen Sie aus einer Vielzahl von vordefinierten cloudnativen und angepassten Prometheus-Metriken aus, um einen Einblick in die Leistung und den Status Ihrer Rechenhosts, Apps, Container und Netze zu erhalten.|
 |Fehlerbehebung mit erweiterten Filtern|Sysdig Monitor erstellt Netztopologien, die zeigen, wie Ihre Workerknoten verbunden sind und wie Ihre Kubernetes Services miteinander kommunizieren. Sie können von Ihren Workerknoten zu Containern und einzelnen Systemaufrufen navigieren und dabei wichtige Metriken für die einzelnen Ressourcen gruppieren und anzeigen. Verwenden Sie diese Metriken zum Beispiel, um Services, die die meisten Anforderungen empfangen, oder Services mit langsamen Abfragen und langen Antwortzeiten zu finden. Sie können diese Daten mit Kubernetes-Ereignissen, angepassten CI/CD-Ereignissen oder Code-Commits kombinieren.
 |Automatische Anomalieerkennung und angepasste Alerts|Definieren Sie Regeln und Schwellenwerte für den Zeitpunkt, an dem Sie benachrichtigt werden möchten, um Anomalien in Ihren Cluster- oder Gruppenressourcen zu erkennen, und um sich von Sysdig benachrichtigen zu lassen, wenn eine Ressource anders agiert als die anderen. Sie können diese Alerts an nachgeordnete Tools senden, z. B. ServiceNow, PagerDuty, Slack, VictorOps oder E-Mail.|
 |Standarddashboards oder angepasste Dashboards|Sie können zwischen einer Vielzahl vorhandener Dashboards wählen oder ein eigenes Dashboard erstellen, um Metriken Ihrer Microservices so zu visualisieren, wie Sie es benötigen. |
@@ -89,19 +89,19 @@ In der folgenden Tabelle finden Sie eine Liste der Hauptvorteile, die sich für 
 ### Integration mit {{site.data.keyword.containerlong_notm}}
 {: #sysdig-integration}
 
-Sysdig Monitor wird von {{site.data.keyword.mon_full_notm}} bereitgestellt, einem {{site.data.keyword.Bluemix_notm}}-Plattformservice, den Sie mit Ihrem Cluster verwenden können. {{site.data.keyword.mon_full_notm}} wird von Sysdig in Partnerschaft mit IBM betrieben.
+Sysdig Monitor wird von {{site.data.keyword.mon_full_notm}} bereitgestellt, einem {{site.data.keyword.cloud_notm}}-Plattformservice, den Sie mit Ihrem Cluster verwenden können. {{site.data.keyword.mon_full_notm}} wird von Sysdig in Partnerschaft mit IBM betrieben.
 {: shortdesc}
 
-Um Sysdig Monitor in Ihrem Cluster verwenden zu können, müssen Sie eine Instanz von {{site.data.keyword.mon_full_notm}} in Ihrem {{site.data.keyword.Bluemix_notm}}-Konto bereitstellen und Ihre Kubernetes-Cluster als Metrikquelle konfigurieren. Nach der Konfiguration des Clusters werden Metriken automatisch erfasst und an Ihre {{site.data.keyword.mon_full_notm}}-Serviceinstanz weitergeleitet. Sie können das {{site.data.keyword.mon_full_notm}}-Dashboard verwenden, um auf Ihre Metriken zuzugreifen.   
+Um Sysdig Monitor in Ihrem Cluster verwenden zu können, müssen Sie eine Instanz von {{site.data.keyword.mon_full_notm}} in Ihrem {{site.data.keyword.cloud_notm}}-Konto bereitstellen und Ihre Kubernetes-Cluster als Metrikquelle konfigurieren. Nach der Konfiguration des Clusters werden Metriken automatisch erfasst und an Ihre {{site.data.keyword.mon_full_notm}}-Serviceinstanz weitergeleitet. Sie können das {{site.data.keyword.mon_full_notm}}-Dashboard verwenden, um auf Ihre Metriken zuzugreifen.   
 
 Weitere Informationen finden Sie unter [Metriken für eine App analysieren, die in einem Kubernetes-Cluster bereitgestellt wurde](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster).
 
 ### Abrechnung und Unterstützung
 {: #sysdig-billing-support}
 
-Da Sysdig Monitor von {{site.data.keyword.mon_full_notm}} bereitgestellt wird, ist Ihre Nutzung in der {{site.data.keyword.Bluemix_notm}}-Rechnung für Plattformservices enthalten. Preisinformationen finden Sie in den verfügbaren Plänen im [{{site.data.keyword.Bluemix_notm}}-Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/observe/monitoring/create).
+Da Sysdig Monitor von {{site.data.keyword.mon_full_notm}} bereitgestellt wird, ist Ihre Nutzung in der {{site.data.keyword.cloud_notm}}-Rechnung für Plattformservices enthalten. Preisinformationen finden Sie in den verfügbaren Plänen im [{{site.data.keyword.cloud_notm}}-Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/observe/monitoring/create).
 
-{{site.data.keyword.mon_full_notm}} ist voll in das {{site.data.keyword.Bluemix_notm}}-Unterstützungssystem integriert. Wenn ein Problem bei der Verwendung von {{site.data.keyword.mon_full_notm}} auftritt, posten Sie eine Frage im Kanal `sysdig-monitoring` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) oder öffnen Sie einen [{{site.data.keyword.Bluemix_notm}}-Supportfall](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
+{{site.data.keyword.mon_full_notm}} ist vollständig in das {{site.data.keyword.cloud_notm}}-Unterstützungssystem integriert. Wenn ein Problem bei der Verwendung von {{site.data.keyword.mon_full_notm}} auftritt, posten Sie eine Frage im Kanal `sysdig-monitoring` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/) oder öffnen Sie einen [{{site.data.keyword.cloud_notm}}-Supportfall](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
 
 ## Portworx
 {: #portworx-parter}
@@ -120,7 +120,7 @@ In der folgenden Tabelle finden Sie eine Liste der Hauptvorteile, die sich für 
 
 |Vorteil|Beschreibung|
 |-------------|------------------------------|
-|Cloudnatives Speicher- und Datenmanagement für statusabhängige Apps|Portworx fasst verfügbaren lokalen Speicher, der Ihren Workerknoten zugeordnet ist und bezüglich Größe oder Typ variieren kann, zusammen und schafft eine einheitliche persistente Speicherebene für containerisierte Datenbanken und andere statusabhängige Apps, die in dem Cluster ausgeführt werden sollen. Durch die Verwendung von Kubernetes-PVCs (Persistent Volume Claims) können Sie Ihren Apps lokalen persistenten Speicher zum Speichern von Daten hinzufügen. |
+|Cloudnatives Speicher- und Datenmanagement für statusabhängige Apps|Portworx fasst verfügbaren lokalen Speicher, der Ihren Workerknoten zugeordnet ist und bezüglich Größe oder Typ variieren kann, zusammen und schafft eine einheitliche persistente Speicherebene für containerisierte Datenbanken und andere statusabhängige Apps, die in dem Cluster ausgeführt werden sollen. Durch die Verwendung von Kubernetes-PVCs (Persistent Volume Claims) können Sie Ihren Apps lokalen persistenten Speicher zum Speichern von Daten hinzufügen.|
 |Hoch verfügbare Daten mit Datenträgerreplikation|Portworx repliziert Daten in Ihren Datenträgern automatisch workerknoten- und zonenübergreifend in Ihrem Cluster, sodass Sie jederzeit auf Ihre Daten zugreifen können und Ihre statusabhängige App im Fall eines Workerknotenfehlers oder -warmstarts für die erneute Ausführung auf einem anderen Workerknoten geplant werden kann. |
 |Unterstützung für die Ausführung von `hyper-converged`|Portworx kann für die Ausführung von [`hyper-converged` ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/) konfiguriert werden, um sicherzustellen, dass Ihre Rechenressourcen und der Speicher immer auf demselben Workerknoten platziert werden. Wenn Ihre App zur erneuten Ausführung geplant werden muss, verlegt Portworx Ihre App auf einen Workerknoten, auf dem sich eines Ihrer Datenträgerreplikate befindet, um die Zugriffsgeschwindigkeit lokaler Festplattenzugriffe und hohe Leistung für Ihre statusabhängige App sicherzustellen. |
 |Daten mit {{site.data.keyword.keymanagementservicelong_notm}} verschlüsseln|Sie können zum Schutz der Daten auf Ihren Datenträgern [{{site.data.keyword.keymanagementservicelong_notm}}-Verschlüsselungsschlüssel konfigurieren](/docs/containers?topic=containers-portworx#encrypt_volumes), die durch cloudbasierte, mit FIPS 140-2 Level 2 zertifizierte Hardwaresicherheitsmodule (HSMs) gesichert sind. Sie können zwischen nur einem Verschlüsselungsschlüssel zur Verschlüsselung aller Datenträger in einem Cluster oder je einem Verschlüsselungsschlüssel für jeden Datenträger wählen. Portworx verwendet diesen Schlüssel, um ruhende Daten und Daten bei der Übertragung zu verschlüsseln, wenn sie an einen anderen Workerknoten gesendet werden.|
@@ -143,7 +143,7 @@ Weitere Informationen zum Installieren und Verwenden von Portworx mit {{site.dat
 ### Abrechnung und Unterstützung
 {: #portworx-billing-support}
 
-SDS-Workerknotenmaschinen, die mit lokalen Festplatten geliefert werden, und virtuelle Maschinen, die Sie für Portworx verwenden, sind in Ihrer monatlichen {{site.data.keyword.containerlong_notm}}-Rechnung enthalten. Preisinformationen finden Sie im [{{site.data.keyword.Bluemix_notm}}-Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/catalog/cluster). Die Kosten der Portworx-Lizenz fallen separat an und sind in Ihrer monatlichen Rechnung nicht enthalten.
+SDS-Workerknotenmaschinen, die mit lokalen Festplatten geliefert werden, und virtuelle Maschinen, die Sie für Portworx verwenden, sind in Ihrer monatlichen {{site.data.keyword.containerlong_notm}}-Rechnung enthalten. Preisinformationen finden Sie im [{{site.data.keyword.cloud_notm}}-Katalog ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://cloud.ibm.com/kubernetes/catalog/cluster). Die Kosten der Portworx-Lizenz fallen separat an und sind in Ihrer monatlichen Rechnung nicht enthalten.
 {: shortdesc}
 
-Wenn ein Problem bei der Verwendung von Portworx auftritt oder Sie zu Fragen der Portworx-Konfiguration für Ihren speziellen Anwendungsfall chatten möchten, posten Sie eine Frage über den Kanal `portworx-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.Bluemix_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.
+Wenn ein Problem bei der Verwendung von Portworx auftritt oder Sie zu Fragen der Portworx-Konfiguration für Ihren speziellen Anwendungsfall chatten möchten, posten Sie eine Frage über den Kanal `portworx-on-iks` in [{{site.data.keyword.containerlong_notm}} Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://ibm-container-service.slack.com/). Melden Sie bei Slack mit Ihrer IBMid an. Wenn Sie keine IBMid für Ihr {{site.data.keyword.cloud_notm}}-Konto verwenden, [fordern Sie eine Einladung in diesen Slack ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://bxcs-slack-invite.mybluemix.net/) an.

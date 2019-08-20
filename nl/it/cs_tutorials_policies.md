@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -58,7 +58,7 @@ Questa esercitazione è destinata agli sviluppatori di software e agli amministr
 cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Indirizza la tua CLI al cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Installa e configura la CLI Calico](/docs/containers?topic=containers-network_policies#cli_install).
-- Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.Bluemix_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
+- Assicurati di disporre delle seguenti politiche di accesso {{site.data.keyword.cloud_notm}} IAM per {{site.data.keyword.containerlong_notm}}:
     - [Qualsiasi ruolo della piattaforma](/docs/containers?topic=containers-users#platform)
     - [Il ruolo del servizio **Scrittore** o **Gestore**](/docs/containers?topic=containers-users#platform)
 
@@ -71,7 +71,7 @@ cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 La prima lezione ti mostra in che modo la tua applicazione viene esposta da molteplici indirizzi IP e porte e da dove proviene il traffico pubblico nel tuo cluster.
 {: shortdesc}
 
-Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il server web `echoserver` mostra i dati sulla connessione che si sta stabilendo al cluster dal client e puoi testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio NLB (network load balancer) 1.0. Un servizio NLB 1.0 rende la tua applicazione disponibile sia sull'indirizzo IP dell'NLB che sulle porte del nodo dei nodi di lavoro.
+Inizia distribuendo un'applicazione webserver di esempio da utilizzare in tutta l'esercitazione. Il server web `echoserver` mostra i dati sulla connessione che si stabilisce al cluster dal client e puoi testare l'accesso al cluster della società di PR. Esponi quindi l'applicazione creando un servizio NLB (network load balancer) 1.0. Un servizio NLB 1.0 rende la tua applicazione disponibile sia sull'indirizzo IP dell'NLB che sulle porte del nodo dei nodi di lavoro.
 
 Vuoi utilizzare un ALB (application load balancer) Ingress? Invece di creare un NLB nei passi 3 e 4, [crea un servizio per ciascuna applicazione server web](/docs/containers?topic=containers-ingress#public_inside_1) e [crea una risorsa Ingress per l'applicazione server web](/docs/containers?topic=containers-ingress#public_inside_4). Ottieni quindi gli IP pubblici dei tuoi ALB eseguendo `ibmcloud ks albs --cluster <cluster_name>` e utilizza questi IP in tutta l'esercitazione al posto di `<loadbalancer_IP>.`
 {: tip}
@@ -198,9 +198,9 @@ La seguente immagine mostra in che modo l'applicazione server web è esposta a i
         Output di esempio:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
         ```
         {: screen}
 
@@ -360,7 +360,7 @@ Ora puoi creare e applicare le politiche Calico per inserire in whitelist il tra
 Ora decidi di bloccare completamente il traffico al cluster dell'agenzia di PR e di testare l'accesso inserendo in whitelist solo l'indirizzo IP del tuo computer.
 {: shortdesc}
 
-Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata all'NLB che espone l'applicazione. Puoi quindi creare una politica che inserisce in whitelist l'indirizzo IP del tuo sistema. Alla fine della Lezione 3, tutto il traffico all'NLB e alle porte del nodo pubblici sarà bloccato e sarà consentito solo il traffico dal tuo IP di sistema inserito in whitelist:
+Per prima cosa, oltre alle NodePort, devi bloccare tutto il traffico in entrata all'NLB che espone l'applicazione. Puoi quindi creare una politica che inserisce in whitelist l'indirizzo IP del tuo sistema. Alla fine della Lezione 3, tutto il traffico all'NLB e alle porte del nodo pubblici è bloccato ed è consentito solo il traffico dal tuo IP di sistema inserito in whitelist:
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="L'applicazione webserver è esposta dall'NLB pubblico solo al tuo IP di sistema." style="width:500px; border-style: none"/>
 
@@ -483,7 +483,7 @@ A questo punto, tutto il traffico all'NLB e alle porte del nodo pubblici è bloc
 Nella lezione precedente, hai bloccato tutto il traffico e inserito in whitelist solo alcuni IP. Tale scenario funziona bene per scopi di test quando vuoi limitare l'accesso solo a pochi indirizzi IP di origine controllati. Tuttavia, l'agenzia di PR ha delle applicazioni che devono essere ampiamente disponibili per il pubblico. Devi assicurarti che sia consentito tutto il traffico, fatta eccezione per il traffico insolito che vedi da qualche indirizzo IP. L'inserimento in blacklist è utile in uno scenario come questo perché può aiutare ad evitare un attacco da un piccolo insieme di indirizzi IP,
 {: shortdesc}
 
-In questa lezione, farai un test dell'inserimento in blacklist bloccando il traffico dall'indirizzo IP di origine del tuo sistema. Alla fine della Lezione 4, tutto il traffico alle porte del nodo pubblico sarà bloccato e tutto il traffico all'NLB pubblico sarà consentito. Sarà bloccato solo il traffico dal tuo IP di sistema inserito in blacklist all'NLB:
+In questa lezione, esegui un test dell'inserimento in blacklist bloccando il traffico dall'indirizzo IP di origine del tuo sistema. Alla fine della Lezione 4, tutto il traffico alle porte del nodo pubblico è bloccato e tutto il traffico all'NLB pubblico è consentito. Viene bloccato solo il traffico dal tuo IP di sistema inserito in blacklist all'NLB:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'applicazione webserver è esposta dall'NLB pubblico a internet. Solo il traffico dal tuo IP di sistema è bloccato." style="width:550px; border-style: none"/>
 
@@ -600,7 +600,7 @@ Nel nostro scenario di esempio, l'agenzia di PR per cui lavori desidera configur
       source:
         nets:
         - <client_address>/32
-    - action: Deny
+    - action: Log
       destination:
         nets:
         - <loadbalancer_IP>/32

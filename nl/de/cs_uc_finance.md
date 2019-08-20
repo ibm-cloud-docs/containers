@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,20 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Anwendungsfälle aus der Finanzdienstleistungsbranche für {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
 
-Anhand der folgenden Anwendungsfälle wird veranschaulicht, wie Workloads in {{site.data.keyword.containerlong_notm}} von den Vorteilen der hohen Verfügbarkeit, leistungsfähiger Rechenkapazität, einfacher Einrichtung der Cluster zur schnelleren Bereitstellung und der künstlichen Intelligenz von {{site.data.keyword.ibmwatson}} profitieren können.
+Anhand der folgenden Anwendungsfälle wird veranschaulicht, wie Workloads in {{site.data.keyword.containerlong}} von den Vorteilen der hohen Verfügbarkeit, leistungsfähiger Rechenkapazität, einfacher Einrichtung der Cluster zur schnelleren Bereitstellung und der künstlichen Intelligenz von {{site.data.keyword.ibmwatson}} profitieren können.
 {: shortdesc}
 
 ## Hypothekenbank friert Kosten ein und beschleunigt Einhaltung gesetzlicher Vorschriften
 {: #uc_mortgage}
 
-Der Risk Management VP eines Unternehmens für Wohnbauhypotheken ist für die Verarbeitung von 70 Millionen Datensätzen pro Tage verantwortlich, aber das lokale System ist langsam und auch ungenau. Die IT-Ausgaben sind deutlich gestiegen, weil die Hardware schnell veraltet war und nicht vollständig verwendet wurde. Während das Unternehmen auf die Bereitstellung der Hardware wartete, verlangsamte sich die Einhaltung der gesetzlicher Bestimmungen.
+Der Risk Management VP eines Unternehmens für Wohnbauhypotheken ist für die Verarbeitung von 70 Millionen Datensätzen pro Tage verantwortlich, aber das lokale System ist langsam und auch ungenau. Die IT-Ausgaben sind deutlich gestiegen, weil die Hardware schnell veraltet war und nicht vollständig verwendet wurde. Während das Unternehmen auf die Bereitstellung der Hardware wartete, verlangsamte sich die Einhaltung der gesetzlicher Bestimmungen. 
 {: shortdesc}
 
-Warum {{site.data.keyword.Bluemix_notm}}: Zum Verbessern der Risikoanalyse setzte das Unternehmen auf {{site.data.keyword.containerlong_notm}} und IBM Cloud Analytics-Services, um die Kosten zu reduzieren, die weltweite Verfügbarkeit zu erhöhen und schließlich die Einhaltung gesetzlicher Bestimmungen zu beschleunigen. Bei Verwendung von {{site.data.keyword.containerlong_notm}} in mehreren Regionen können die Analyse-Apps containerisiert und auf dem gesamten Globus bereitgestellt werden, was die Verfügbarkeit verbessert und die Umsetzung lokaler Regelungen beschleunigt. Die Bereitstellungen werden mit gängigen Open-Source-Tools beschleunigt, die Bestandteil von {{site.data.keyword.containerlong_notm}} sind.
+Warum {{site.data.keyword.cloud_notm}}: Zum Verbessern der Risikoanalyse setzte das Unternehmen auf {{site.data.keyword.containerlong_notm}} und IBM Cloud Analytics-Services, um die Kosten zu reduzieren, die weltweite Verfügbarkeit zu erhöhen und schließlich die Einhaltung gesetzlicher Bestimmungen zu beschleunigen. Bei Verwendung von {{site.data.keyword.containerlong_notm}} in mehreren Regionen können die Analyse-Apps containerisiert und auf dem gesamten Globus bereitgestellt werden, was die Verfügbarkeit verbessert und die Umsetzung lokaler Regelungen beschleunigt. Die Bereitstellungen werden mit gängigen Open-Source-Tools beschleunigt, die Bestandteil von {{site.data.keyword.containerlong_notm}} sind.
 
 {{site.data.keyword.containerlong_notm}} und Schlüsseltechnologien:
 * [Horizontale Skalierung](/docs/containers?topic=containers-app#highly_available_apps)
@@ -98,18 +97,20 @@ Diese Lösung bietet den unmittelbaren Vorteil der Skalierbarkeit. Mithilfe der 
 * Die Kosten für die Berichterstellung zur Einhaltung gesetzlicher Vorschriften werden durch eine konsistente, skalierbare Menge an Speicher- und Rechenservices reduziert werden, die mit {{site.data.keyword.containerlong_notm}} und {{site.data.keyword.cloudant}} bereitgestellt werden.
 * Nach und nach wurde die Architektur der ursprünglichen Apps, die anfangs mit Lift-and-shift in der Cloud bereitgestellt wurden, in kooperative Microservices geändert, die mithilfe von {{site.data.keyword.containerlong_notm}} ausgeführt werden. Hierdurch wurden die Entwicklung beschleunigt, die Bereitstellungszeit verkürzt und mehr Innovation ermöglicht, weil das Experimentieren einfach geworden war. Außerdem wurden innovative Apps mit neueren Versionen der Microservices freigegeben, um die Vorteile der Markt- und Geschäftsbedingungen (sogenannte situationsbezogene Apps und Microservices) zu nutzen.
 
+
 ## Payment-Technology-Unternehmen vervierfacht Entwicklerproduktivität durch Bereitstellung KI-fähiger Tools für Partner
 {: #uc_payment_tech}
 
 In der Entwicklungsabteilung arbeiten Entwickler mit lokalen konventionellen Tools, was die Prototyperstellung verlangsamt, da sie auf die Bereitstellung der Hardware warten müssen.
 {: shortdesc}
 
-Warum {{site.data.keyword.Bluemix_notm}}: Bei Verwendung von {{site.data.keyword.containerlong_notm}} werden Berechnungen mit Open-Source-Standardtechnologien durchgeführt. Nach dem Wechsel des Unternehmens zu {{site.data.keyword.containerlong_notm}} können die Entwickler auf DevOps-kompatible Tools zugreifen, zum Beispiel portierbare und einfach gemeinsam nutzbare Container.
+Warum {{site.data.keyword.cloud_notm}}: Bei Verwendung von {{site.data.keyword.containerlong_notm}} werden Berechnungen mit Open-Source-Standardtechnologien durchgeführt. Nach dem Wechsel des Unternehmens zu {{site.data.keyword.containerlong_notm}} können die Entwickler auf DevOps-kompatible Tools zugreifen, zum Beispiel portierbare und einfach gemeinsam nutzbare Container.
 
-Somit können die Entwickler ohne großen Aufwand experimentieren und mit offenen Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. Die herkömmlichen Softwareentwicklungstools erhalten ein neues Aussehen, wenn sie Cloud-Services mit künstlicher Intelligenz mit einem Klick zu den Apps hinzufügen.
+Somit können die Entwickler ohne großen Aufwand experimentieren und mit offenen Toolchains schneller Änderungen zu Bereitstellungs- und Testsystemen hinzufügen. Die herkömmlichen Entwicklungstools erhalten ein neues Aussehen, wenn sie Cloud-Services mit künstlicher Intelligenz mit einem Klick zu den Apps hinzufügen.
 
 Schlüsseltechnologien:
 * [Cluster, die den unterschiedlichen Anforderungen an CPU, RAM und Speicher entsprechen](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Betrugsprävention mit {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [Native DevOps-Tools, einschließlich offener Toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK für Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -155,18 +156,17 @@ Für die Unternehmensleitung ist die beschleunigte Entwicklung eine bedeutende V
 
 Außerdem wurde schnell eine Protokollierung und Überwachung für die Tools in das System integriert, besonders bei Verwendung von {{site.data.keyword.watson}} AI. Die Entwickler verschwenden ihre Zeit nicht mit dem Erstellen komplexer Protokollierungssysteme, nur um in der Lage zu sein, Fehler in den aktiven Systemen zu beheben. Ein wichtiger Faktor zur Reduzierung des Personalaufwands ist, dass Kubernetes von IBM verwaltet wird und sich die Entwickler deswegen auf die Arbeit an besseren Zahlungstools konzentrieren können.
 
-Sicherheit zuerst: Bei Verwendung von Bare-Metal für {{site.data.keyword.containerlong_notm}} verfügen die sensiblen Zahlungstools jetzt über die bekannte Isolation, gleichzeitig aber auch über die Flexibilität der öffentlichen Cloud. Von Bare-Metal wird Trusted Compute zur Überprüfung der zugrunde liegenden Hardware auf Manipulationen bereitgestellt. Suchvorgänge zur Ermittlung von Sicherheitslücken und Malware werden kontinuierlich durchgeführt.
+Sicherheit zuerst: Bei Verwendung von Bare-Metal für {{site.data.keyword.containerlong_notm}} verfügen die sensiblen Zahlungstools jetzt über die bekannte Isolation, gleichzeitig aber auch über die Flexibilität der öffentlichen Cloud. Suchvorgänge zur Ermittlung von Sicherheitslücken und Malware werden kontinuierlich durchgeführt.
 
 **Schritt 1: Lift-and-shift zum Sichern der Rechenleistung**
-* Apps, die hochsensible Daten verwalten, können in {{site.data.keyword.containerlong_notm}} mithilfe von Bare Metal für Trusted Compute ausgeführt werden. Mit Trusted Compute kann die zugrunde liegende Hardware auf Manipulationen überprüft werden.
-* Migrieren Sie die Images der virtuellen Maschine auf Container-Images, die in {{site.data.keyword.containerlong_notm}} in der öffentlichen {{site.data.keyword.Bluemix_notm}}-Instanz ausgeführt werden.
+* Migrieren Sie die Images der virtuellen Maschine auf Container-Images, die in {{site.data.keyword.containerlong_notm}} in der öffentlichen {{site.data.keyword.Bluemix_notm}}-Instanz ausgeführt werden. 
 * Auf dieser Grundlage werden von Vulnerability Advisor Schwachstellensuchen für Images, Richtlinien, Container und Paketierung auf bekannte Malware durchgeführt.
 * Die Kosten für private Rechenzentren bzw. Investitionen vor Ort werden erheblich reduziert und durch ein Modell für Utility-Computing ersetzt, das abhängig vom Workloadbedarf skaliert wird.
 * Sie können eine richtlinienbasierte Authentifizierung für Ihre Services und APIs durch eine einfache Ingress-Annotation konsistent durchsetzen. Durch deklarative Sicherheit können Sie die Benutzerauthentifizierung und die Tokenvalidierung mithilfe von {{site.data.keyword.appid_short_notm}} sicherstellen.
 
 **Schritt 2: Operationen und Verbindungen zum Back-End vorhandener Zahlungssysteme**
-* Verwenden Sie IBM {{site.data.keyword.SecureGateway}} zur Verwaltung der sicheren Verbindungen zu lokalen Toolsystemen
-* Stellen Sie standardisierte DevOps-Dashboards und -Verfahren über Kubernetes bereit
+* Verwenden Sie IBM {{site.data.keyword.SecureGateway}} zur Verwaltung der sicheren Verbindungen zu den verbleibenden lokalen Toolsystemen.
+* Stellen Sie standardisierte DevOps-Dashboards und -Verfahren über Kubernetes bereit.
 * Nachdem die Entwickler die Apps in den Entwicklungs- und Testclustern erstellt und getestet haben, verwenden Sie die {{site.data.keyword.contdelivery_full}}-Toolchains zum Bereitstellen von Apps in {{site.data.keyword.containerlong_notm}}-Clustern auf der ganzen Welt.
 * Die in {{site.data.keyword.containerlong_notm}} integrierten Hochverfügbarkeitstools gleichen die Workload in jeder geografischen Region aus; hierbei sind auch automatische Fehlerbehebung und Lastverteilung eingeschlossen.
 
@@ -180,3 +180,5 @@ Sicherheit zuerst: Bei Verwendung von Bare-Metal für {{site.data.keyword.contai
 * Parallel dazu implementierte der Anbieter in bestimmten Zeitfenstern einfache Iterationen, um Beeinträchtigungen durch unzulängliche technische Umstände zu minimieren.
 * Abhängig von der jeweiligen Anzahl an verarbeiteten Transaktionen können die zugehörigen Operationen exponentiell skaliert werden.
 * Gleichzeitig wurde durch den Einsatz neuer Betrugsanalysen mit {{site.data.keyword.watson}} die Geschwindigkeit bei der Erkennung und Vermeidung erhöht; dies hatte zur Folge, dass Betrugsfälle vier Mal häufiger als im Durchschnitt in der Region reduziert wurden.
+
+

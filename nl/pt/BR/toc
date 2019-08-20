@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
+{: .toc subcollection="containers" category="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud
 Kubernetes
 Service
@@ -33,14 +33,13 @@ Service
 
     {: .topicgroup}
     Tutoriais
+        cs_tutorials_ov.md
         cs_tutorials.md
-        cs_tutorial_rhos.md
-        cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Tutorial: mover um aplicativo baseado na VM para o Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [Tutorial: criar um cluster multiregion usando o Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [Tutorial: configurar uma integração contínua e um pipeline de entrega para apps conteinerizados que são executados no Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Tutorial: mover uma aplicação baseado em VM para Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [Tutorial: criar um cluster com múltiplas regiões usando o Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [Tutorial: configurar uma integração contínua e pipeline de entrega para aplicativos conteinerizados para executam no Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -48,11 +47,11 @@ Service
 
     {: .topicgroup}
     Configurando clusters
-        cs_clusters_planning.md
-        cs_plan_ha.md
-        cs_plan_workers.md
+        cs_cluster_plan_network.md
+        cs_cluster_plan_ha.md
+        cs_worker_plan.md
         cs_clusters.md
-        cs_workers.md
+        cs_worker_add.md
 
     {: .topicgroup}
     Administrando clusters
@@ -77,18 +76,29 @@ Service
         cs_network_cluster.md
         cs_dns.md
 
-    cs_images.md
-    cs_app.md
-    cs_app_knative.md
-
     {: .topicgroup}
-    Rede para expor apps
+    Implementando aplicativos
+        cs_images.md
+        cs_app.md
+        cs_app_knative.md
         cs_network_planning.md
         cs_nodeport.md
+
+    {: .topicgroup}
+    Balanceamento de carga básico e DSR com balanceadores de carga de rede (NLB)
+        cs_loadbalancer_about.md
         cs_loadbalancer.md
+        cs_loadbalancer_v2.md
+        cs_loadbalancer_dns.md
+
+    {: .topicgroup}
+    Balanceamento de carga HTTPS com os balanceadores de carga do aplicativo Ingress (ALB)
+        cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_settings.md
         cs_ingress_health.md
+        cs_ingress_user_managed.md
 
     {: .topicgroup}
     Armazenando dados em armazenamento persistente
@@ -116,17 +126,24 @@ Service
     cs_hybrid.md
 
     {: .topicgroup}
-    Referência de plug-in da CLI do IBM Cloud Kubernetes Service
+    Referência de plug-in da CLI
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
-    Versões do IBM Cloud Kubernetes Service
+    Histórico de versão
         cs_versions.md
         cs_versions_changelog.md
         cs_versions_addons.md
 
-    cs_regions.md
+    {: .topicgroup}
+    Referência de API
+        [API do IBM Cloud Kubernetes Service](https://containers.cloud.ibm.com/global/swagger-global-api/)
+        [API JSON do IBM Cloud Kubernetes Service](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+        [API do IBM Cloud Container Registry](https://cloud.ibm.com/apidocs/container-registry)
+        [API do IBM Cloud Vulnerability Advisor](https://cloud.ibm.com/apidocs/container-registry/va)
+
+    cs_locations.md
     cs_integrations_overview.md
     cs_access_reference.md
     {: .navgroup-end}
@@ -144,7 +161,8 @@ Service
         cs_troubleshoot_network.md
 
     release_notes.md
-    cs_rellinks.md
     cs_sitemap.md
-    {: .navgroup-end}
+    {: .navgroup-end} 
 
+    cs_tutorials_apps.md
+    cs_rellinks.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Restringindo o tráfego de rede para os nós do trabalhador de borda
 {: #edge}
 
-Os nós do trabalhador de borda podem melhorar a segurança de seu cluster do Kubernetes, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede no {{site.data.keyword.containerlong}}.
+Os nós do trabalhador de borda podem melhorar a segurança de seu cluster do {{site.data.keyword.containerlong}}, permitindo que menos nós do trabalhador sejam acessados externamente e isolando a carga de trabalho de rede.
 {:shortdesc}
 
 Quando esses nós do trabalhador são marcados somente para rede, outras cargas de trabalho não podem consumir a CPU ou memória do nó do trabalhador e interferir na rede.
@@ -41,20 +40,20 @@ Se você tiver um cluster de multizona e desejar restringir o tráfego de rede p
 Inclua o rótulo `dedicated=edge` em dois ou mais nós do trabalhador em cada VLAN pública ou privada em seu cluster para assegurar que os balanceadores de carga de rede (NLBs) e os balanceadores de carga do aplicativo (ALBs) do Ingress sejam implementados somente nesses nós do trabalhador.
 {:shortdesc}
 
-No Kubernetes 1.14 e mais recente, os NLBs e ALBs públicos e privados podem ser implementados em nós do trabalhador de borda. No Kubernetes 1.13 e anteriores, os ALBs públicos e privados e os NLBs públicos podem ser implementados em nós de borda, mas os NLBs privados devem ser implementados em nós do trabalhador que não são de borda somente em seu cluster.
+**Clusters Kubernetes da comunidade**: no Kubernetes 1.14 e mais recente, os NLBs e os ALBs privados e privados podem ser implementados nos nós do trabalhador de borda. No Kubernetes 1.13 e anteriores, os ALBs públicos e privados e os NLBs públicos podem ser implementados em nós de borda, mas os NLBs privados devem ser implementados em nós do trabalhador que não são de borda somente em seu cluster.
 {: note}
 
 Antes de iniciar:
 
-* Assegure-se de que tenha as [funções do IAM do {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-users#platform) a seguir:
+* Assegure-se de que você tenha as seguintes [funções do {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
   * Qualquer função da plataforma para o cluster
   * Função de serviço **Gravador** ou **Gerenciador** para todos os namespaces
 * [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Para rotular nós do trabalhador como nós de borda:
 
-1. [Crie um novo conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#add_pool) que abranja todas as zonas em seu cluster e tenha pelo menos dois trabalhadores por zona. No comando `ibmcloud ks worker-pool-create`, inclua a sinalização `--labels dedicated=edge` para rotular todos os nós do trabalhador no conjunto. Todos os nós do trabalhador nesse conjunto, incluindo quaisquer nós do trabalhador que forem incluídos posteriormente, serão rotulados como nós de borda.
-  <p class="tip">Se você desejar usar um conjunto de trabalhadores existente, o conjunto deverá abranger todas as zonas em seu cluster e ter pelo menos dois trabalhadores por zona. É possível rotular o conjunto de trabalhadores com `dedicated=edge` usando a [API do conjunto de trabalhadores PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). No corpo da solicitação, passe o JSON a seguir. Após o conjunto de trabalhadores ser marcado com `dedicated=edge`, todos os nós do trabalhador existentes e subsequentes obterão esse rótulo e o Ingress e os balanceadores de carga serão implementados em um nó do trabalhador de borda.
+1. [Crie um novo conjunto de trabalhadores](/docs/containers?topic=containers-add_workers#add_pool) que abranja todas as zonas em seu cluster e tenha pelo menos dois trabalhadores por zona. No comando `ibmcloud ks worker-pool-create`, inclua a sinalização `--labels dedicated=edge` para rotular todos os nós do trabalhador no conjunto. Todos os nós do trabalhador nesse conjunto, incluindo quaisquer nós do trabalhador que forem incluídos posteriormente, serão rotulados como nós de borda. Após o conjunto de trabalhadores ser marcado com `dedicated=edge`, todos os nós do trabalhador existentes e subsequentes obterão esse rótulo e o Ingress e os balanceadores de carga serão implementados em um nó do trabalhador de borda.
+  <p class="tip">Se você desejar usar um conjunto de trabalhadores existente, o conjunto deverá abranger todas as zonas em seu cluster e ter pelo menos dois trabalhadores por zona. É possível rotular o conjunto de trabalhadores com `dedicated=edge` usando a [API do conjunto de trabalhadores PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). No corpo da solicitação, passe o JSON a seguir.
       <pre class="screen">
       {
         "labels": {"dedicated":"edge"},
@@ -85,14 +84,14 @@ Antes de iniciar:
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
   default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
   kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  1h
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  57m
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
   ```
   {: screen}
 
 4. Usando a saída da etapa anterior, execute o comando a seguir para cada NLB e ALB. Esse comando reimplementa o NLB ou ALB em um nó do trabalhador de borda.
 
-  Se o seu cluster executar o Kubernetes 1.14 ou mais recente, será possível implementar NLBs e ALBs públicos e privados nos nós do trabalhador de borda. No Kubernetes 1.13 e anterior, somente os ALBs públicos e privados e os NLBs públicos podem ser implementados em nós de borda, portanto, não reimplemente os serviços NLB privados.
+  **Clusters Kubernetes da comunidade**: se o seu cluster executar o Kubernetes 1.14 ou mais recente, será possível implementar NLBs e ALBs públicos e privados para os nós do trabalhador de borda. No Kubernetes 1.13 e anterior, somente os ALBs públicos e privados e os NLBs públicos podem ser implementados em nós de borda, portanto, não reimplemente os serviços NLB privados.
   {: note}
 
   ```
@@ -189,7 +188,7 @@ Um benefício de nós do trabalhador de borda é que eles podem ser especificado
 Usar a tolerância `dedicated=edge` significa que todos os serviços de balanceador de carga de rede (NLB) e balanceador de carga do aplicativo (ALB) do Ingress são implementados somente nos nós do trabalhador rotulados. No entanto, para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda e consumam recursos do nó do trabalhador, deve-se usar [contaminações do Kubernetes ![Ícone de link externo](../icons/launch-glyph.svg "Ícone de link externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 Antes de iniciar:
-- Assegure-se de que você tenha a [função do serviço do {{site.data.keyword.Bluemix_notm}} IAM **Gerenciador** para todos os namespaces](/docs/containers?topic=containers-users#platform).
+- Assegure-se de que você tenha a [função de serviço **Gerenciador** do {{site.data.keyword.cloud_notm}} IAM para todos os namespaces](/docs/containers?topic=containers-users#platform).
 - [Efetue login em sua conta. Se aplicável, direcione o grupo de recursos apropriado. Configure o contexto para o seu cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Para evitar que outras cargas de trabalho sejam executadas em nós do trabalhador de borda:
@@ -223,3 +222,5 @@ Antes de iniciar:
     kubectl taint node < node_name> dedicado: NoSchedule- dedicado: NoExecute-
     ```
     {: pre}
+
+

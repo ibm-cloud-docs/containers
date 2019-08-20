@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,13 +34,13 @@ Als Clusteradministrator möchten Sie steuern, was in Ihrem Cluster passiert, in
 
 Mit dem Zugangscontroller `PodSecurityPolicy` können Pods erst nach der [Autorisierung von Richtlinien](#customize_psp) erstellt werden. Die Konfiguration von Pod-Sicherheitsrichtlinien kann unbeabsichtigte Nebeneffekte haben. Deshalb sollten Sie eine Implementierung nach dem Ändern der Richtlinie testen. Um Apps bereitstellen zu können, müssen die entsprechenden Benutzer- und Servicekonten alle durch die Pod-Sicherheitsrichtlinien autorisiert sein, die für die Bereitstellung von Pods erforderlich sind. Wenn Sie beispielsweise Apps mithilfe von [Helm](/docs/containers?topic=containers-helm#public_helm_install) installieren, werden durch die Tiller-Komponente von Helm Pods erstellt. Sie müssen daher über die Autorisierung der richtigen Pod-Sicherheitsrichtlinie verfügen.
 
-Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.Bluemix_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
+Sie möchten steuern, welche Benutzer Zugriff auf {{site.data.keyword.containerlong_notm}} haben? Informationen zum Festlegen von {{site.data.keyword.cloud_notm}} IAM- und Infrastrukturberechtigungen finden Sie im Abschnitt [Clusterzugriff zuweisen](/docs/containers?topic=containers-users#users).
 {: tip}
 
 **Gibt es Richtlinien, die standardmäßig festgelegt werden? Was kann ich hinzufügen?**</br>
 Standardmäßig konfiguriert {{site.data.keyword.containerlong_notm}} den Zugangscontroller `PodSecurityPolicy` mit [Ressourcen für die {{site.data.keyword.IBM_notm}} Clusterverwaltung](#ibm_psp), den Sie nicht löschen oder ändern können. Sie können den Zugangscontroller auch nicht inaktivieren.
 
-Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.Bluemix_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp) verwendet werden.
+Pod-Aktionen sind standardmäßig nicht gesperrt. Stattdessen autorisieren zwei rollenbasierte Zugriffssteuerungsressourcen (RBAC, Role-Based Access Control) im Cluster alle Administratoren, Benutzer, Services und Knoten, um privilegierte und nicht privilegierte Pods zu erstellen. Zusätzliche RBAC-Ressourcen sind für die Portierbarkeit mit privaten {{site.data.keyword.cloud_notm}}-Paketen eingeschlossen, die für [Hybridbereitstellungen](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp) verwendet werden.
 
 Wenn Sie bestimmte Benutzer daran hindern möchten, Pods zu erstellen oder zu aktualisieren, können Sie [diese RBAC-Ressourcen ändern oder eigene Ressourcen erstellen](#customize_psp).
 
@@ -77,7 +77,7 @@ Sie können diese RBAC-Rollen ändern, um Administratoren, Benutzer, Services od
 Vorbereitende Schritte:
 *  [Melden Sie sich an Ihrem Konto an. Geben Sie, sofern anwendbar, die richtige Ressourcengruppe als Ziel an. Legen Sie den Kontext für den Cluster fest.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Verstehen Sie die Funktionsweise von RBAC-Rollen. Weitere Informationen hierzu finden Sie im Abschnitt [Benutzer mit angepassten Kubernetes-RBAC-Rollen berechtigen](/docs/containers?topic=containers-users#rbac) oder in der [Kubernetes-Dokumentation ![Symbol für externen Link](../icons/launch-glyph.svg "Symbol für externen Link")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Stellen Sie sicher, dass Sie über die [{{site.data.keyword.Bluemix_notm}} IAM-Servicezugriffsrolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
+* Stellen Sie sicher, dass Sie über die [{{site.data.keyword.cloud_notm}} IAM-Servicezugriffsrolle **Manager**](/docs/containers?topic=containers-users#platform) für alle Namensbereiche verfügen.
 
 Wenn Sie die Standardkonfiguration ändern, können Sie wichtige Clusteraktionen, wie Podbereitstellungen oder Clusteraktualisierungen, verhindern. Testen Sie Ihre Änderungen in einem Cluster, der sich nicht in einer Produktionsumgebung befindet und für andere Teams nicht wichtig ist.
 {: important}
