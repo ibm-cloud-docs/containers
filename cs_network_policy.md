@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -28,6 +28,8 @@ subcollection: containers
 
 Every {{site.data.keyword.containerlong}} cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in the cluster.
 {: shortdesc}
+
+
 
 If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to network load balancer (NLB) services, use Calico network policies.
 
@@ -556,13 +558,13 @@ To isolate your cluster on the private network by using Calico policies:
 
 4. Apply the policies.
   ```
-  calicoctl apply -f generic-privatehostendpoint.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-all-workers-private.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-egress-pods-private.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-ibm-ports-private.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-icmp-private.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-private-service-endpoint.yaml --config=<filepath>/calicoctl.cfg
   calicoctl apply -f allow-sys-mgmt-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f generic-privatehostendpoint.yaml --config=<filepath>/calicoctl.cfg
   ```
   {: pre}
 
