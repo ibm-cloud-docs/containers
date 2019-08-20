@@ -345,7 +345,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-   my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.9      Default
+   my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.14.5      Default
    ```
    {: screen}
 
@@ -361,7 +361,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
    ```
    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-   kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.13.9      Default
+   kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.14.5      Default
    ```
    {: screen}
 
@@ -513,7 +513,7 @@ To create a VPC on Classic cluster:
     When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After the Kubernetes master is ready, your worker nodes are set up.
     ```
     Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.13.9      Default
+    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.14.5      Default
     ```
     {: screen}
 
@@ -529,7 +529,7 @@ To create a VPC on Classic cluster:
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the worker node status is **Ready**, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    ```
    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-   kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.13.9      Default
+   kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.14.5      Default
    ```
    {: screen}
 
@@ -765,8 +765,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.13.9
-  Server Version: v1.13.9
+  Client Version: v1.14.5
+  Server Version: v1.14.5
   ```
   {: screen}
 
