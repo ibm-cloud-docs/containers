@@ -138,7 +138,7 @@ To make your apps externally accessible from the public internet, you can create
 
 
 ## Example scenarios for VPC cluster network setups
-{: #classic-scenarios}
+{: #vpc-scenarios}
 
 Now that you understand the basics of cluster networking, check out some example scenarios in which various VPC cluster network setups can meet your workload needs.
 {: shortdesc}
