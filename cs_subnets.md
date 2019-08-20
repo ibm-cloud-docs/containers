@@ -31,6 +31,7 @@ Change the pool of available portable public or private IP addresses for network
 
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC on Classic clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
+{: note}
 
 
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
