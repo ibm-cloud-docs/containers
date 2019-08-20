@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -161,7 +161,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`zones`](#cs_datacenters)</li></ul></td>
    <td>Required. Uses the v2 API.<ul>
    <li>[`subnets`](#cs_subnets)</li>
-   <li>[`zones`](#cs_datacenters)</li></ul></td> 
+   <li>[`zones`](#cs_datacenters)</li></ul></td>
  </tr>
  <tr>
    <td colspan="3">**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** The commands use and return the v1 API responses.</td>
@@ -508,6 +508,7 @@ ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
 </dl>
 
 </br>
+
 
 ### `ibmcloud ks cluster-addon-enable`
 {: #cs_cluster_addon_enable}
@@ -2080,7 +2081,6 @@ Enable or disable an ALB in your standard cluster.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For VPC on Classic clusters, use the [`ibmcloud ks alb-configure-vpc-classic` command](#cli_alb-configure-vpc-classic) instead.
-{: note}
 
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
@@ -2145,7 +2145,6 @@ Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb-configure-classic` command](#cs_alb_configure) instead.
-{: note}
 
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
@@ -4842,7 +4841,7 @@ ibmcloud ks worker-pool-get --worker-pool pool1 --cluster my_cluster
   Workers per zone:   3
   Machine type:       b3c.4x16.encrypted
   Labels:             -
-  Version:            1.13.9_1512
+  Version:            1.14.5_1512
   ```
   {: screen}
 

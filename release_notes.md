@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,7 +45,11 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
- <tr>
+<tr>
+  <td>20 August 2019</td>
+  <td><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 519](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for a `custom-ports` bug fix.</td>
+</tr>
+<tr>
   <td>19 August 2019</td>
   <td><ul>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! Virtual Private Cloud</strong>: You can create standard Kubernetes clusters on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Classic on VPC clusters are available for only standard, Kubernetes clusters (not free or OpenShift clusters).<br><br>
@@ -56,19 +60,17 @@ The following icons are used to indicate if a release note applies only to a cer
     <li>[Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics)</li></ul>
     Ready to get started? Try out the [Creating a classic cluster in your VPC tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).</li>
     <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1514](/docs/containers?topic=containers-changelog#1152_1514_worker), [1.14.5_1530](/docs/containers?topic=containers-changelog#1145_1530_worker), [1.13.9_1533](/docs/containers?topic=containers-changelog#1139_1533_worker), and [1.12.10_1564](/docs/containers?topic=containers-changelog#11210_1564_worker) worker node fix pack updates.</li>
-  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for worker node fix pack [3.11.135_1521_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1521_worker).</li></ul></td>
-  </tr>  
-  </ul>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for worker node fix pack [3.11.135_1521_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1521_worker).</li></ul>
   </td>
-  </tr>
-  <tr>
+</tr>
+<tr>
   <td>17 August 2019</td>
   <td><ul>
   <li><strong>{{site.data.keyword.at_full}}</strong>: The [{{site.data.keyword.at_full_notm}} service](/docs/containers?topic=containers-at_events) is now supported for you to view, manage, and audit user-initiated activities in your clusters.</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.2_1514](/docs/containers?topic=containers-changelog#1152_1514), [1.14.5_1530](/docs/containers?topic=containers-changelog#1145_1530), [1.13.9_1533](/docs/containers?topic=containers-changelog#1139_1533), and [1.12.10_1564](/docs/containers?topic=containers-changelog#11210_1564) master fix pack updates.</li>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for master fix pack [3.11.135_1521_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1521_master).</li></ul></td>
-  </tr>
-  <tr>
+</tr>
+<tr>
   <td>15 August 2019</td>
   <td><ul>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>App deployments</strong>: Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-app#copy_apps_cluster).</li>
@@ -82,7 +84,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>12 August 2019</td>
   <td><ul>
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.103](/docs/containers?topic=containers-cs_cli_changelog).</li>
-  <li><strong>Ingress ALB changelog</strong>: Updated the ALB `nginx-ingress` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul></td>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB `ingress-auth` image to build 335 for [`musl libc` vulnerabilities](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul></td>
 </tr>
 <tr>
   <td>05 August 2019</td>

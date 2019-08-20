@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-16"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -29,6 +29,9 @@ subcollection: containers
 Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your {{site.data.keyword.containerlong}} cluster.
 {:shortdesc}
 
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC on Classic clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
+{: note}
 
 
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
@@ -80,7 +83,7 @@ In {{site.data.keyword.containerlong_notm}}, VLANs have a limit of 40 subnets. I
 {: note}
 
 **Do the IP address for my worker nodes change?**</br>
-Your worker node is assigned an IP address on the public or private VLANs that your cluster uses. After the worker node is provisioned, the IP addresses do not change. For example, the worker node IP addresses persist across `reload`, `reboot`, and `update` operations. Additionally, the private IP address of the worker node is used for the worker node identity in most `kubectl` commands. If you change the VLANs that the worker pool uses, new worker nodes that are provisioned in that pool use the new VLANs for their IP addresses. Existing worker node IP addresses do not change, but you can choose to remove the worker nodes that use the old VLANs.
+Your worker node is assigned an IP address on the public or private VLANs that your cluster uses. After the worker node is provisioned, the worker node IP address persists across `reboot` and `update` operations, but the worker node IP address changes after a `replace` operation. Additionally, the private IP address of the worker node is used for the worker node identity in most `kubectl` commands. If you change the VLANs that the worker pool uses, new worker nodes that are provisioned in that pool use the new VLANs for their IP addresses. Existing worker node IP addresses do not change, but you can choose to remove the worker nodes that use the old VLANs.
 
 ### Network segmentation
 {: #basics_segmentation}
@@ -165,7 +168,7 @@ Before you begin:
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.9      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.14.5      Default
     ```
     {: screen}
 
@@ -180,7 +183,7 @@ Before you begin:
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.9
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.14.5
     ```
     {: screen}
 

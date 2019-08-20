@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-15"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -60,6 +60,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>519 / 335</td>
+<td>20 Aug 2019</td>
+<td>Fixes a bug so that [specifying custom ports](/docs/containers?topic=containers-ingress_annotation#custom-port) is now functional for VPC on Classic clusters.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>515 / 335</td>
 <td>12 Aug 2019</td>

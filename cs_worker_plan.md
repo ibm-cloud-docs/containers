@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-14"
+lastupdated: "2019-08-20"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -33,7 +33,7 @@ A worker node flavor describes the compute resources, such as CPU, memory, and d
 
 ## Available hardware for worker nodes
 {: #shared_dedicated_node}
-The worker node flavors and isolation levels that are available to you depend on your container platform, cluster type, and the {{site.data.keyword.containerlong_notm}} location where you want to create your cluster.
+The worker node flavors and isolation levels that are available to you depend on your container platform, cluster type, the infrastructure provider that you want to use, and the {{site.data.keyword.containerlong_notm}} location where you want to create your cluster.
 {: shortdesc}
 
 <img src="images/cs_clusters_hardware.png" width="700" alt="Hardware options for worker nodes in a standard cluster" style="width:700px; border-style: none"/>
@@ -41,7 +41,7 @@ The worker node flavors and isolation levels that are available to you depend on
 **What flavors are available to me?** </br>
 Classic standard clusters can be created on [virtual](#vm) and [bare metal](#bm) worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for [software-defined storage](#sds) solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes. If you create a free classic cluster, your cluster is provisioned with the smallest virtual worker node flavor on shared infrastructure.
 
-
+VPC on Classic clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone-capable metro cities](/docs/containers?topic=containers-regions-and-zones#zones). Free VPC on Classic clusters are not supported.
 
 **Can I combine different flavors in a cluster?** </br>
 Yes. To add different flavors to your cluster, you must [create another worker pool](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create). You cannot resize existing worker pools to have different compute resources such as CPU or memory.
@@ -52,7 +52,7 @@ See [updating flavors](/docs/containers?topic=containers-update#machine_type).
 **How do I manage my worker nodes?** </br>
 Worker nodes in classic clusters are provisioned into your {{site.data.keyword.cloud_notm}} account. You can manage your worker nodes by using {{site.data.keyword.containerlong_notm}}, but you can also use the [classic infrastructure dashboard](https://cloud.ibm.com/classic/) in the {{site.data.keyword.cloud_notm}} console to work with your worker node directly.  
 
-
+Unlike classic clusters, the worker nodes of your VPC on Classic cluster are not listed in the [VPC infrastructure dashboard](https://cloud.ibm.com/vpc/overview). Instead, you manage your worker nodes with {{site.data.keyword.containerlong_notm}} only. However, your worker nodes might be connected to other VPC infrastructure resources, such as VPC subnets or VPC Block Storage. These resources are included in the VPC infrastructure dashboard and can be managed separately from there. 
 
 **What limitations do I need to be aware of?** </br>
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/cluster-large/) for more information.
@@ -69,108 +69,65 @@ With VMs, you get greater flexibility, quicker provisioning times, and more auto
 {: shortdesc}
 
 **Do I want to use shared or dedicated hardware?**</br>
-When you create a standard classic cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy). 
+When you create a standard classic cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy). VPC on Classic standard clusters can be provisioned on shared infrastructure (multi tenancy) only.
 
 * **In a multi-tenant, shared hardware setup**: Physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
 * **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant setup, the hypervisor assures that every worker node gets its share of the available physical resources.
 
 Shared nodes are usually less costly than dedicated nodes because the costs for the underlying hardware are shared among multiple customers. However, when you decide between shared and dedicated nodes, you might want to check with your legal department to discuss the level of infrastructure isolation and compliance that your app environment requires.
 
-Some classic worker node flavors are available for only one type of tenancy setup. For example, `m3c` VMs can be provisioned in a shared tenancy setup only.
+Some classic worker node flavors are available for only one type of tenancy setup. For example, `m3c` VMs can be provisioned in a shared tenancy setup only. Additionally, VPC clusters are available as only shared virtual machines.
 {: note}
 
 **What are the general features of VMs?**</br>
 Virtual machines use local disks instead of storage area networking (SAN) for reliability. Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. Every VM comes with 1000 Mbps networking speed, 25 GB primary local disk storage for the OS file system, and 100 GB secondary local disk storage for data such as the container runtime and the `kubelet`. Local storage on the worker node is for short-term processing only, and the primary and secondary disks are wiped when you update or reload the worker node. For persistent storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What virtual machine flavors are available?**</br>
-The following table shows available worker node flavors for classic clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, and container platform. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
+The following table shows available worker node flavors for classic and VPC on Classic clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
 
 If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
 
 
 
+| Name and use case | Cores/ Memory | Primary/ Secondary disk | Network speed |
+|:-----------------|:-----------------|:------------------|:-------------|
+| **Virtual, u3c.2x4**: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.<p class="note">Available for only Kubernetes clusters. Not available for OpenShift clusters. </p> | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, b3c.4x16**: Select this balanced VM for testing and development, and other light workloads. | 4 / 16 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, b3c.16x64**: Select this balanced VM for mid-sized workloads. | 16 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, b3c.32x128**: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users. | 32 / 128 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c3c.16x16**: Use this flavor when you want an even balance of compute resources from the worker node for light workloads. | 16 / 16 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c3c.16x32**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads. | 16 / 32 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c3c.32x32**: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads. | 32 / 32 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c3c.32x64**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads. | 32 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, m3c.8x64**: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy. | 8 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, m3c.16x128**: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy. | 16 / 128 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, m3c.30x240**: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy. | 30 / 240 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, z1.2x4**: se this flavor when you want a worker node to be created on Hyper Protect Containers on IBM Z Systems. | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
+{: class="simple-tab-table"}
+{: caption="Available worker node flavors for classic clusters" caption-side="top"}
+{: #classic-worker-vm-flavors}
+{: tab-title="Classic clusters"}
+{: tab-group="vm-worker-flavors"}
 
 
-{: #vm-table}
-<table>
-<caption>Available virtual flavors in {{site.data.keyword.containerlong_notm}}.</caption>
-<thead>
-<th>Name and use case</th>
-<th>Cores / Memory</th>
-<th>Primary / Secondary disk</th>
-<th>Network speed</th>
-</thead>
-<tbody>
-<tr>
-<td><strong>Virtual, u3c.2x4</strong>: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.<p class="note">Available for only Kubernetes clusters. Not available for OpenShift clusters.</p></td>
-<td>2 / 4 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.4x16</strong>: Select this balanced VM for testing and development, and other light workloads.</td>
-<td>4 / 16 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.16x64</strong>: Select this balanced VM for mid-sized workloads.</td></td>
-<td>16 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, b3c.32x128</strong>: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users.</td>
-<td>32 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, c3c.16x16</strong>: Use this flavor when you want an even balance of compute resources from the worker node for light workloads.</td>
-<td>16 / 16 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.16x32</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light to mid-sized workloads.</td>
-<td>16 / 32 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x32</strong>: Use this flavor when you want an even balance of compute resources from the worker node for mid-sized workloads.</td>
-<td>32 / 32 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, c3c.32x64</strong>: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads.</td>
-<td>32 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, m3c.8x64</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for light to mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>8 / 64 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.16x128</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>16 / 128 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr><tr>
-<td><strong>Virtual, m3c.30x240</strong>: Use this flavor when you want a 1:8 ratio of CPU and memory resources for mid to large-sized workloads that require more memory, similar to databases such as {{site.data.keyword.Db2_on_Cloud_short}}. Available only in Dallas and as `--hardware shared` tenancy.</td>
-<td>30 / 240 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-<tr>
-<td><strong>Virtual, z1.2x4</strong>: Use this flavor when you want a worker node to be created on Hyper Protect Containers on IBM Z Systems.</td>
-<td>2 / 4 GB</td>
-<td>25 GB / 100 GB</td>
-<td>1000 Mbps</td>
-</tr>
-</tbody>
-</table>
+| Name and use case | Cores/ Memory | Primary/ Secondary disk | Network speed |
+|:-----------------|:-----------------|:------------------|:-------------|
+| **Virtual, b2.4x16**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for testing, development, and other light workloads. | 4 / 16 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, b2.8x32**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for light to mid-sized workloads. | 8 / 32 GB | 25 GB / 100 GB | 1000 Mbps
+| **Virtual, b2.16x64**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for mid-sized workloads.  | 16 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, b2.32x128**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for large-sized workloads.| 32 / 128 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c2.2x4**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light-sized workloads. | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c2.16x32**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads. | 16 / 32 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, c2.32x64**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid to large-sized workloads. | 32 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, m2.8x64**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for light to mid-sized workloads that require more memory. | 8 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, m2.16x128**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for mid to large-sized workloads that require more memory. | 16 / 128 GB | 25 GB / 100 GB | 1000 Mbps |
+{: class="simple-tab-table"}
+{: caption="Available worker node flavors for VPC on Classic clusters" caption-side="top"}
+{: #vpc-classic-worker-vm-flavors}
+{: tab-title="VPC on Classic clusters"}
+{: tab-group="vm-worker-flavors"}
+
 
 
 
@@ -180,6 +137,9 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 You can provision your worker node as a single-tenant physical server, also referred to as bare metal.
 {: shortdesc}
 
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Physical machines are available for classic clusters only and are not supported in VPC on Classic clusters.
+{: note}
 
 
 **How is bare metal different than VMs?**</br>
@@ -197,7 +157,7 @@ Bare metal servers are billed monthly. If you cancel a bare metal server before 
 {: important}
 
 **What bare metal flavors can I order?**</br>
-Worker node flavors vary by cluster type, the zone where you want to create the cluster, and container platform. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`. You can also review available [VM](#vm) or [SDS](#sds) flavors.
+Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`. You can also review available [VM](#vm) or [SDS](#sds) flavors.
 
 Bare metal machines are optimized for different use cases such as RAM-intensive, data-intensive, or GPU-intensive workloads.
 
@@ -271,6 +231,9 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 {: shortdesc}
 
 
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Software-defined storage flavor are available for classic clusters only and are not supported in VPC on Classic clusters.
+{: note}
+
 
 **When do I use SDS flavors?**</br>
 You typically use SDS machines in the following cases:
@@ -281,7 +244,7 @@ You typically use SDS machines in the following cases:
 For more storage solutions, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
 **What SDS flavors can I order?**</br>
-Worker node flavors vary by cluster type, the zone where you want to create the cluster, and container platform. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) flavors.
+Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`. You can also review available [bare metal](#bm) or [VM](#vm) flavors.
 
 Choose a flavor with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
