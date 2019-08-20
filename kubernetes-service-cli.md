@@ -509,6 +509,7 @@ ibmcloud ks cluster-addon-disable kube-terminal --cluster CLUSTER
 
 </br>
 
+
 ### `ibmcloud ks cluster-addon-enable`
 {: #cs_cluster_addon_enable}
 
