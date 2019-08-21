@@ -202,6 +202,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 ## Limitations
 {: #lbaas_limitations}
 
+* VPC load balancers do not currently support UDP.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.
 * The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster.
 * When you define the configuration YAML file for a Kubernetes `LoadBalancer` service, the following annotations and settings are not supported:
