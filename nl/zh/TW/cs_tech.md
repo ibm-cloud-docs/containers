@@ -26,6 +26,7 @@ subcollection: containers
 
 
 # {{site.data.keyword.containerlong_notm}} 技術
+{: #ibm-cloud-kubernetes-service-technology}
 
 進一步瞭解 {{site.data.keyword.containerlong}} 背後的技術。
 {:shortdesc}
