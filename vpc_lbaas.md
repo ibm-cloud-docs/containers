@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-21"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -131,7 +131,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
 4. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the service is created, the **LoadBalancer Ingress** field is populated with a host name that is assigned by the VPC load balancer.
 
-  **The VPC load balancer takes a few minutes to provision in your VPC account.** You cannot access your app by using the host name of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
+  **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access your app by using the host name of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
   {: note}
   ```
   kubectl describe svc myloadbalancer

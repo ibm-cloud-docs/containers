@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-21"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -56,11 +56,14 @@ When you create your cluster, you must choose a networking setup so that certain
 Before you create a VPC cluster for the first time, you must [create a VPC subnet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/network) in the 10.0.0.0 – 10.255.255.255 IP address range in each zone where you want to deploy worker nodes. A VPC subnet consists of a specified private IP address range (CIDR block) and configures a group of worker nodes and pods as if they were attached to the same physical wire.
 {: shortdesc}
 
-When you create a cluster, you can specify only one existing VPC subnet for each zone. Each worker node that you add in a cluster is deployed with a private IP address from the VPC subnet in that zone. After the worker node is provisioned, the worker node IP address persists after a `reboot` operation, but the worker node IP address changes after `replace` and `update` operations.
+When you create a cluster, you can specify only one existing VPC subnet for each zone. Each worker node that you add in a cluster is deployed with a private IP address from the VPC subnet in that zone. For a list of IP address ranges per VPC zone, see [VPC default address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#default-vpc-address-prefixes). After the worker node is provisioned, the worker node IP address persists after a `reboot` operation, but the worker node IP address changes after `replace` and `update` operations.
 
 Subnets provide a channel for connectivity among the worker nodes within the cluster. Additionally, any system that is connected to any of the private subnets in the same VPC can communicate with workers. For example, all subnets in one VPC can communicate through private layer 3 routing with a built-in VPC router. If you have multiple clusters that must communicate with each other, you can create the clusters in the same VPC. However, if your clusters do not need to communicate, you can achieve better network segmentation by creating the clusters in separate VPCs. You can also create [access control lists (ACLs)](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) for your VPC subnets to mediate traffic on the private network. ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for each VPC subnet.
 
 If your worker nodes must access a public endpoint outside of the cluster, you can enable a public gateway on the VPC subnet that the worker nodes are deployed to. A public gateway can be attached to or detached from a subnet at any time.
+
+Need to create your cluster by using custom-range subnets? Check out this guidance on [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui).
+{: tip}
 
 When you create VPC subnets for your clusters, keep in mind the following features and limitations. For more information about VPC subnets, see [Characteristics of subnets in the VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#characteristics-of-subnets).
 * The default CIDR size of each VPC subnet is `/24`, which can support up to 253 worker nodes. If you plan to deploy more than 250 worker nodes per zone in one cluster, consider creating a subnet of a larger size.
@@ -117,7 +120,9 @@ To connect an entire VPC to another VPC in your account, you can use the {{site.
 **Communication with {{site.data.keyword.cloud_notm}} classic resources**</br>
 If you need to connect your cluster to resources in your {{site.data.keyword.cloud_notm}} classic infrastructure, you can set up access between one VPC in each region to one {{site.data.keyword.cloud_notm}} classic infrastructure account. You must enable the VPC for classic access when you create the VPC, and you cannot convert an existing VPC to use classic access. To get started, see [Setting up access to your Classic Infrastructure from VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 
-Want to use [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}}? First, create a VPC with classic infrastructure access. Then, you can set up a Direct Link connection between your classic infrastructure and your remote networks. Any clusters that you create in the VPC with classic infrastructure access can access the Direct Link connection.
+When you create a VPC with classic infrastructure access, you can set up a [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection between your classic infrastructure and your remote networks. Any clusters that you create in the VPC with classic infrastructure access can access the Direct Link connection.
+
+If you plan to connect your cluster to on-premises networks, you might have subnet conflicts with the IBM-provided default 172.30.0.0/16 range for pods and 172.21.0.0/16 range for services. You can avoid subnet conflicts when you [create a cluster in the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) by specifying a custom subnet CIDR for pods in the `--pod-subnet` flag and a custom subnet CIDR for services in the `--service-subnet` flag.
 {: tip}
 
 </br>
@@ -129,10 +134,18 @@ Allow private or public traffic requests from outside the cluster to your apps t
 {: shortdesc}
 
 **Private traffic to cluster apps**</br>
-When you deploy an app in your cluster, you might want to make the app accessible to only users and services that are on the same private network as your cluster. Private load balancing is ideal for making your app available to requests from outside the cluster without exposing the app to the general public. You can also use private load balancing to test access, request routing, and other configurations for your app before you later expose your app to the public with public network services. To allow private traffic requests from outside the cluster to your apps, you can create private Kubernetes networking services, such as private NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). You can then create access control lists (ACLs) for your VPC subnets that include inbound rules to allow ingress from specified sources. For more information, see [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
+When you deploy an app in your cluster, you might want to make the app accessible to only users and services that are on the same private network as your cluster. Private load balancing is ideal for making your app available to requests from outside the cluster without exposing the app to the general public. You can also use private load balancing to test access, request routing, and other configurations for your app before you later expose your app to the public with public network services.
+
+To allow private network traffic requests from outside the cluster to your apps, you can use private Kubernetes networking services, such as creating [`LoadBalancer` services](/docs/containers?topic=containers-vpc-lbaas) or using your cluster's private [Ingress application load balancers (ALBs)](/docs/containers?topic=containers-ingress-about). For example, when you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. NodePorts are also automatically opened on the worker nodes in your cluster. The load balancer is multizonal and routes requests for your app through the NodePorts on your worker nodes. You can then create access control lists (ACLs) for your VPC subnets to allow inbound network traffic requests from specified sources.
+
+For more information, see [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
 
 **Public traffic to cluster apps**</br>
-To make your apps externally accessible from the public internet, you can create public NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). Public networking services connect to this public network interface by providing your app with a public IP address and optionally, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. You can then create access control lists (ACLs) for your VPC subnets that include inbound rules to allow ingress from specified sources. Note that a public gateway is not required on your subnets to allow inbound traffic from the internet to NLBs or ALBs. Public gateways are required only to allow worker nodes to make outbound requests to public endpoints. For more information, see [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
+To make your apps accessible from the public internet, you can use public networking services. Public networking services connect to a public network interface by providing your app with a public IP address and optionally, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app.
+
+You can create public Kubernetes [`LoadBalancer` services](/docs/containers?topic=containers-vpc-lbaas) or use the default public [Ingress application load balancers (ALBs)](/docs/containers?topic=containers-ingress-about). For example, when you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. NodePorts are also automatically opened on the worker nodes in your cluster. The load balancer is multizonal and routes requests for your app through the NodePorts on your worker nodes. You can then create access control lists (ACLs) for your VPC subnets to allow inbound network traffic requests from specified sources.
+
+Note that a public gateway is not required on your subnets to allow inbound network traffic from the internet to `LoadBalancer` services or ALBs. Public gateways are required only to allow worker nodes to make outbound requests to public endpoints. For more information, see [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
 
 <br />
 
@@ -149,7 +162,12 @@ Now that you understand the basics of cluster networking, check out some example
 In this scenario, you run workloads in a VPC on Classic cluster that are accessible to requests from the Internet. Public access is controlled by ACLs so that end users can access your apps while unwanted public requests to your apps are denied. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that support private service endpoints.
 {: shortdesc}
 
-
+<p>
+<figure>
+ <img src="images/images/vpc_no_pgw.png" width="700" style="width:700px; border-style: none" alt="Network setup for a VPC on Classic cluster that runs internet-facing app workloads"/>
+ <figcaption>Network setup for a VPC on Classic cluster that runs internet-facing app workloads</figcaption>
+</figure>
+</p>
 
 **Worker-to-worker communication**
 
@@ -167,7 +185,7 @@ If your app workload requires other {{site.data.keyword.cloud_notm}} services, y
 
 **External communication to apps that run on worker nodes**
 
-After you test your app, you can expose it to the internet by creating a public network load balancer (NLB) or Ingress application load balancer (ALB) service. You can improve the security of your cluster and control public traffic to NLBs or ALBs by creating access control lists (ACLs). ACLs consist of rules that define which inbound traffic is permitted for the VPC subnets that your worker nodes are connected to. You might need to allow access to the private IP addresses of the services that you want to use in these rules.
+After you test your app, you can expose it to the internet by creating a public Kubernetes `LoadBalancer` service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public network traffic to your apps by creating access control lists (ACLs). ACLs consist of rules that define which inbound traffic is permitted for the VPC subnets that your worker nodes are connected to.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC on Classic clusters](/docs/containers?topic=containers-clusters).
 
@@ -180,7 +198,12 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 In this scenario, you run workloads in a VPC on Classic cluster that are accessible to requests from the Internet. Public access is controlled so that end users can access your apps while unwanted public requests to your apps are denied. However, you might need to also provide limited public egress from your worker nodes to a public endpoint, and want to ensure that this public egress is controlled and isolated in your cluster. For example, you might need your app pods to access an {{site.data.keyword.cloud_notm}} service that does not support private service endpoints, and must be accessed over the public network.
 {: shortdesc}
 
-
+<p>
+<figure>
+ <img src="images/images/cs_org_ov_vpc.png" width="800" style="width:800px; border-style: none" alt="Network setup for a VPC on Classic cluster that allows limited, secure public access"/>
+ <figcaption>Network setup for a VPC on Classic cluster that allows limited, secure public access</figcaption>
+</figure>
+</p>
 
 **Worker-to-worker communication**
 
@@ -200,7 +223,7 @@ If your app workload requires other {{site.data.keyword.cloud_notm}} services th
 
 **External communication to apps that run on worker nodes**
 
-After you test your app, you can expose it to the internet by creating a public network load balancer (NLB) or Ingress application load balancer (ALB) service. You can improve the security of your cluster by creating access control lists (ACLs). ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for the VPC subnets that your worker nodes are connected to. For example, you can use inbound rules to control incoming public traffic to your apps through NLBs or ALBs, and outbound rules to control outgoing requests from your apps through the public gateway.
+After you test your app, you can expose it to the internet by creating a public Kubernetes `LoadBalancer` service or using the default public Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. You can improve the security of your cluster and control public traffic apps by creating access control lists (ACLs). ACLs consist of rules that define which inbound traffic is permitted for the VPC subnets that your worker nodes are connected to. For example, you can use inbound rules to control incoming public traffic to your apps through the VPC load balancer, and outbound rules to control outgoing requests from your apps through the public gateway.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC on Classic clusters](/docs/containers?topic=containers-clusters).
 
@@ -213,11 +236,18 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 In this scenario, you run workloads in a VPC on Classic cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your private networks in an on-premises data center. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network.
 {: shortdesc}
 
-
+<p>
+<figure>
+ <img src="images/images/vpc_extend.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC on Classic cluster that extends an on-prem data center"/>
+ <figcaption>Network setup for a VPC on Classic cluster that extends an on-prem data center</figcaption>
+</figure>
+</p>
 
 **Worker-to-worker communication**
 
 To achieve this setup, you create VPC subnets in each zone where you want to deploy worker nodes. No public gateways are required for these subnets. Then, you create a VPC on Classic cluster that uses these VPC subnets.
+
+Note that you might have subnet conflicts between the default ranges for workers nodes, pods, and services, and the subnets in your on-premises networks. When you create your VPC subnets, you can choose [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui) and the create your cluster by using these subnets. Additionally, you can specify a custom subnet CIDR for pods and services by using the `--pod-subnet` and `--service-subnet` flags in the `ibmcloud ks cluster create` command when you create your cluster.
 
 **Worker-to-master and user-to-master communication**
 
@@ -225,13 +255,11 @@ When you create the cluster, you enable private service endpoint only to allow w
 
 **Worker communication to other services or networks**
 
-To connect your cluster with your on-premises data center, you can set up the VPC VPN service. The {{site.data.keyword.vpc_short}} VPN connects your entire VPC to an on-premises data center. After you test your app, you can expose it to the private network by creating a private network load balancer (NLB) or Ingress application load balancer (ALB) service. These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the VPC subnet that the NLB IP is on can access the app.
-
-If your app workload requires other {{site.data.keyword.cloud_notm}} services that support private service endpoints, your worker nodes can automatically, securely communicate with these services over the private VPC network.
+To connect your cluster with your on-premises data center, you can set up the VPC VPN service. The {{site.data.keyword.vpc_short}} VPN connects your entire VPC to an on-premises data center. If your app workload requires other {{site.data.keyword.cloud_notm}} services that support private service endpoints, your worker nodes can automatically, securely communicate with these services over the private VPC network.
 
 **External communication to apps that run on worker nodes**
 
-Finally, you can improve the security of your cluster and control private network traffic to NLBs or ALBs by creating access control lists (ACLs). ACLs consist of rules that define which inbound traffic is permitted for the VPC subnets that your worker nodes are connected to. You might need to allow access to the private IP addresses of the services that you want to use in these rules.
+After you test your app, you can expose it to the private network by creating a private Kubernetes `LoadBalancer` service or using the default private Ingress application load balancers (ALBs). The VPC load balancer that is automatically created in your VPC outside of your cluster when you use one of these services routes traffic to your app. Note that the VPC load balancer exposes your app to the private network only so that any on-premises system with a connection to the VPC subnet can access the app. You can improve the security of your cluster and control public traffic apps by creating access control lists (ACLs). ACLs consist of rules that define which inbound traffic is permitted for the VPC subnets that your worker nodes are connected to.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC on Classic clusters](/docs/containers?topic=containers-clusters).
 
@@ -254,11 +282,14 @@ When you create a classic cluster, the cluster's worker nodes are connected auto
 {: shortdesc}
 
 **VLAN connections for worker nodes**</br>
-All worker nodes must be connected to a private VLAN so that each worker node can send and receive information to other worker nodes. When you create a cluster with worker nodes that are also connected to a public VLAN, your worker nodes can communicate with the Kubernetes master automatically over the public VLAN and over the private VLAN if you enable private service endpoint. The public VLAN also provides public network connectivity so that you can expose apps in your cluster to the internet. However, if you need to secure your apps from the public interface, several options are available to secure your cluster such as using Calico network policies or isolating external network workload to edge worker nodes.
+All worker nodes must be connected to a private VLAN so that each worker node can send information to and receive information from other worker nodes. The private VLAN provides private subnets that are used to assign private IP addresses to your worker nodes and private app services. You can create a cluster with worker nodes that are also connected to a public VLAN. The private VLAN provides public subnets that are used to assign public IP addresses to your worker nodes and public app services. However, if you need to secure your apps from the public network interface, several options are available to secure your cluster such as using [Calico network policies](/docs/containers?topic=containers-network_policies) or isolating external network workloads to [edge worker nodes](/docs/containers?topic=containers-edge).
 * Free clusters: In free clusters, the cluster's worker nodes are connected to an IBM-owned public VLAN and private VLAN by default. Because IBM controls the VLANs, subnets, and IP addresses, you cannot create multizone clusters or add subnets to your cluster, and can use only NodePort services to expose your app.</dd>
 * Standard clusters: In standard clusters, the first time that you create a cluster in a zone, a public VLAN, and a private VLAN in that zone are automatically provisioned for you in your IBM Cloud infrastructure account. If you specify that worker nodes must be connected to a private VLAN only, then a private VLAN only in that zone is automatically provisioned. For every subsequent cluster that you create in that zone, you can specify the VLAN pair that you want to use. You can reuse the same public and private VLANs that were created for you because multiple clusters can share VLANs.
 
 For more information about VLANs, subnets, and IP addresses, see [Overview of networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics).
+
+Need to create your cluster by using custom subnets? Check out [Using existing subnets to create a cluster](/docs/containers?topic=containers-subnets#subnets_custom).
+{: tip}
 
 **Worker node communication across subnets and VLANs**</br>
 In several situations, components in your cluster must be permitted to communicate across multiple private VLANs. For example, if you want to create a multizone cluster, if you have multiple VLANs for a cluster, or if you have multiple subnets on the same VLAN, the worker nodes on different subnets in the same VLAN or in different VLANs cannot automatically communicate with each other. You must enable either Virtual Routing and Forwarding (VRF) or VLAN spanning for your IBM Cloud infrastructure account.
@@ -315,6 +346,9 @@ To connect your cluster with your on-premises data center, such as with {{site.d
 * Worker nodes that are connected to public and private VLANs: Set up a [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html) directly in your cluster. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.
 * Worker nodes connected to a private VLAN only: Set up an IPSec VPN endpoint on a gateway device, such as a Virtual Router Appliance (Vyatta). Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway. If you do not want to use strongSwan, you can [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
 
+Standard clusters that run Kubernetes 1.15 or later: If you plan to connect your cluster to on-premises networks, you might have subnet conflicts with the IBM-provided default 172.30.0.0/16 range for pods and 172.21.0.0/16 range for services. You can avoid subnet conflicts when you [create a cluster in the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) by specifying a custom subnet CIDR for pods in the `--pod-subnet` flag and a custom subnet CIDR for services in the `--service-subnet` flag.
+{: tip}
+
 </br>
 
 ### External communication to apps that run on worker nodes
@@ -353,7 +387,7 @@ In this scenario, you want to run workloads in a classic cluster that are access
 <p>
 <figure>
  <img src="images/cs_clusters_planning_internet.png" alt="Architecture image for a cluster that runs internet-facing workloads"/>
- <figcaption>Architecture for a cluster that runs internet-facing workloads</figcaption>
+ <figcaption>Network setup for a cluster that runs internet-facing workloads</figcaption>
 </figure>
 </p>
 
@@ -402,7 +436,7 @@ Allow limited public connectivity to your classic cluster by using edge nodes as
 <p>
 <figure>
  <img src="images/cs_clusters_planning_calico.png" alt="Architecture image for a cluster that uses edge nodes and Calico network policies for secure public access"/>
- <figcaption>Architecture for a cluster that uses edge nodes and Calico network policies for secure public access</figcaption>
+ <figcaption>Network setup for a cluster that uses edge nodes and Calico network policies for secure public access</figcaption>
 </figure>
 </p>
 
@@ -439,7 +473,7 @@ Allow limited public connectivity to your classic cluster by configuring a gatew
 <p>
 <figure>
  <img src="images/cs_clusters_planning_gateway.png" alt="Architecture image for a cluster that uses a gateway device for secure public access"/>
- <figcaption>Architecture for a cluster that uses a gateway device for secure public access</figcaption>
+ <figcaption>Network setup for a cluster that uses a gateway device for secure public access</figcaption>
 </figure>
 </p>
 
@@ -473,13 +507,15 @@ In this scenario, you want to run workloads in a classic cluster. However, you w
 <p>
 <figure>
  <img src="images/cs_clusters_planning_extend.png" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
- <figcaption>Architecture for a cluster that connects to an on-premises data center on the private network</figcaption>
+ <figcaption>Network setup for a cluster that connects to an on-premises data center on the private network</figcaption>
 </figure>
 </p>
 
 **Worker-to-worker communication**
 
 To achieve this setup, you create a cluster by connecting worker nodes to a private VLAN only. To provide connectivity between the cluster master and worker nodes over the private network through the private service endpoint only, your account must be enabled with VRF and enabled to use service endpoints. Because your cluster is visible to any resource on the private network when VRF is enabled, you can isolate your cluster from other systems on the private network by applying Calico private network policies.
+
+Note that you might have subnet conflicts between the default ranges for workers nodes, pods, and services, and the subnets in your on-premises networks. You create your cluster without IBM-provided subnets by including the `--no-subnet` flag. After the cluster is created, you can [add custom subnets](/docs/containers?topic=containers-subnets#subnets_custom) to your cluster. Additionally, you can specify a custom subnet CIDR for pods and services by using the `--pod-subnet` and `--service-subnet` flags in the `ibmcloud ks cluster create` command when you create your cluster.
 
 **Worker-to-master and user-to-master communication**
 
