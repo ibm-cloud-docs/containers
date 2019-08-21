@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-21"
 
-keywords: kubernetes, iks, compliance, security standards, faq
+keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
 subcollection: containers
 
@@ -206,6 +206,12 @@ For an overview of supported {{site.data.keyword.containerlong_notm}} offerings,
 If you do not want to move your apps into {{site.data.keyword.cloud_notm}} Public but you still want to leverage the features of {{site.data.keyword.containerlong_notm}}, you can install {{site.data.keyword.cloud_notm}} Private. {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines and that you can use for developing and managing on-prem, containerized apps in your own controlled environment behind a firewall.
 
 For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+
+## Where can I find more information about IBM Cloud Kubernetes Service pricing models? 
+{: #pricing}
+{: faq} 
+
+To find detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/container-service/pricing). You can also review what components you are [charged for when you use {{site.data.keyword.containerlong_notm}}](#charges) or [estimate your costs](#cost_estimate). 
 
 ## What am I charged for when I use IBM Cloud Kubernetes Service?
 {: #charges}
