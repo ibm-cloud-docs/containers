@@ -26,6 +26,7 @@ subcollection: containers
 
 
 # {{site.data.keyword.containerlong_notm}} 기술
+{: #ibm-cloud-kubernetes-service-technology}
 
 {{site.data.keyword.containerlong}}의 기술에 대해 자세히 알아보십시오.
 {:shortdesc}
