@@ -915,30 +915,30 @@ ibmcloud ks cluster-create-vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 
 <dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with one worker node is created. This value is optional.
-<p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd></dl>
+<p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
-**<code>--disable-public-service-endpoint</code>**</br>
-To ensure that worker nodes and authorized cluster users communicate with the master through the private service endpoint only, include this flag to create the cluster without the public service endpoint.
-{: #pod-subnet}
+<dt><code>--disable-public-service-endpoint</code></dt>
+<dd>To ensure that worker nodes and authorized cluster users communicate with the master through the private service endpoint only, include this flag to create the cluster without the public service endpoint.</dd>
 
-**<code>--pod-subnet <em>SUBNET</em></code>**</br>
-All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
+<dt><code>--pod-subnet <em>SUBNET</em></code></dt>
+<dd>All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p>
-{: #service-subnet}
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
 
-**<code>--service-subnet <em>SUBNET</em></code>**</br>
-All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
+<dt><code>--service-subnet <em>SUBNET</em></code></dt>
+<dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p>
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
 
-**<code>-s</code>**</br>
-Do not show the message of the day or update reminders. This value is optional.
+<dt><code>-s</code>**</dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+</dl>
 
 **Example**:
 ```
