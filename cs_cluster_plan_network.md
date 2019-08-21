@@ -164,7 +164,7 @@ In this scenario, you run workloads in a VPC on Classic cluster that are accessi
 
 <p>
 <figure>
- <img src="images/images/vpc_no_pgw.png" width="700" style="width:700px; border-style: none" alt="Network setup for a VPC on Classic cluster that runs internet-facing app workloads"/>
+ <img src="images/vpc_no_pgw.png" width="700" style="width:700px; border-style: none" alt="Network setup for a VPC on Classic cluster that runs internet-facing app workloads"/>
  <figcaption>Network setup for a VPC on Classic cluster that runs internet-facing app workloads</figcaption>
 </figure>
 </p>
@@ -200,7 +200,7 @@ In this scenario, you run workloads in a VPC on Classic cluster that are accessi
 
 <p>
 <figure>
- <img src="images/images/cs_org_ov_vpc.png" width="800" style="width:800px; border-style: none" alt="Network setup for a VPC on Classic cluster that allows limited, secure public access"/>
+ <img src="images/cs_org_ov_vpc.png" width="800" style="width:800px; border-style: none" alt="Network setup for a VPC on Classic cluster that allows limited, secure public access"/>
  <figcaption>Network setup for a VPC on Classic cluster that allows limited, secure public access</figcaption>
 </figure>
 </p>
@@ -238,7 +238,7 @@ In this scenario, you run workloads in a VPC on Classic cluster. However, you wa
 
 <p>
 <figure>
- <img src="images/images/vpc_extend.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC on Classic cluster that extends an on-prem data center"/>
+ <img src="images/vpc_extend.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC on Classic cluster that extends an on-prem data center"/>
  <figcaption>Network setup for a VPC on Classic cluster that extends an on-prem data center</figcaption>
 </figure>
 </p>
