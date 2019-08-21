@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-21"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -25,6 +25,7 @@ subcollection: containers
 
 
 # {{site.data.keyword.containerlong_notm}} technology
+{: #ibm-cloud-kubernetes-service-technology}
 
 Learn more about the technology behind {{site.data.keyword.containerlong}}.
 {:shortdesc}
