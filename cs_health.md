@@ -857,7 +857,7 @@ Before you begin:
     - **Writer** or **Manager** service role for the `kube-system` namespace
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To configure Autorecovery:
+To configure Autorecovery: 
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repository.
 
