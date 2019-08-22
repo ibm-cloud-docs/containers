@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +45,7 @@ subcollection: containers
 ## クラスターでアプリを実行する計画
 {: #plan_apps}
 
-アプリを {{site.data.keyword.containerlong_notm}} クラスターにデプロイする前に、アプリの適切な利用を可能にして、アプリと {{site.data.keyword.Bluemix_notm}} の他のサービスの統合も可能にするセットアップを決定しておく必要があります。
+アプリを {{site.data.keyword.containerlong_notm}} クラスターにデプロイする前に、アプリの適切な利用を可能にして、アプリと {{site.data.keyword.cloud_notm}} の他のサービスの統合も可能にするセットアップを決定しておく必要があります。
 {:shortdesc}
 
 ### どのようなタイプの Kubernetes オブジェクトをアプリ用に作成できますか?
@@ -131,7 +130,7 @@ YAML ファイルにデータをハードコーディングするのではなく
 *  **プライベート VLAN 専用標準クラスター**: [NodePort サービス、ロード・バランサー・サービス、または Ingress サービス ](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)を使用することによって、アプリを公開できます。 同時に、ファイアウォールで、サービスのプライベート IP アドレス用のポートを開く必要もあります。
 
 ### アプリをデプロイした後、どうすればその正常性をモニターできますか?
-クラスターの {{site.data.keyword.Bluemix_notm}} [ロギングおよびモニタリング](/docs/containers?topic=containers-health#health)をセットアップできます。 サード・パーティーの[ロギング・サービスまたはモニタリング・サービス](/docs/containers?topic=containers-supported_integrations#health_services)と統合することを選択することもできます。
+クラスターの {{site.data.keyword.cloud_notm}} [ロギングおよびモニタリング](/docs/containers?topic=containers-health#health)をセットアップできます。 サード・パーティーの[ロギング・サービスまたはモニタリング・サービス](/docs/containers?topic=containers-supported_integrations#health_services)と統合することを選択することもできます。
 {: shortdesc}
 
 ### どうすればアプリを最新の状態にしておくことができますか?
@@ -144,7 +143,7 @@ YAML ファイルにデータをハードコーディングするのではなく
 アカウント管理者とクラスター管理者は、さまざまなレベル (クラスター、Kubernetes 名前空間、ポッド、コンテナー) でアクセス権限を制御できます。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} IAM を使用すれば、個々のユーザー、グループ、またはサービス・アカウントに、クラスター・インスタンス・レベルで許可を割り当てることができます。  クラスター内の特定の名前空間にユーザーを制限することによって、クラスター・アクセス権限の適用範囲をさらに絞り込むことができます。 詳しくは、[クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)を参照してください。
+{{site.data.keyword.cloud_notm}} IAM を使用すれば、個々のユーザー、グループ、またはサービス・アカウントに、クラスター・インスタンス・レベルで許可を割り当てることができます。  クラスター内の特定の名前空間にユーザーを制限することによって、クラスター・アクセス権限の適用範囲をさらに絞り込むことができます。 詳しくは、[クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)を参照してください。
 
 ポッド・レベルでアクセス権限を制御するには、[Kubernetes RBAC でポッドのセキュリティー・ポリシーを構成](/docs/containers?topic=containers-psp#psp)します。
 
@@ -182,11 +181,11 @@ YAML ファイルにデータをハードコーディングするのではなく
   <dt>デプロイメントとレプリカ・セットを使用してアプリとその依存項目をデプロイする</dt>
     <dd><p>デプロイメントとは、アプリのすべてのコンポーネントとその依存項目を宣言するために使用できる Kubernetes リソースのことです。 デプロイメントでは、すべての手順を記述する必要はなく、アプリに集中できます。</p>
     <p>複数のポッドをデプロイすると、デプロイメントのレプリカ・セットが自動的に作成されます。そのレプリカ・セットによってポッドがモニターされ、いつでも指定された数のポッドが稼働状態になります。 ポッドがダウンすると、応答しなくなったポッドがレプリカ・セットによって新しいポッドに置き換えられます。</p>
-    <p>デプロイメントを使用して、ローリング更新中に追加するポッドの数や、一度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。</p>
-    <p>デプロイメントでは、異なるフラグを使用して同時に複数のリビジョンをデプロイできます。例えば、実稼働環境にプッシュする前に、デプロイメントをテストすることができます。</p>
+    <p>デプロイメントを使用して、ローリング更新中に追加するポッドの数や、一度に使用不可にできるポッドの数など、アプリの更新戦略を定義できます。 ローリング更新の実行時には、デプロイメントによって、リビジョンが動作しているかどうかが確認され、障害が検出されるとロールアウトが停止されます。</p>
+    <p>デプロイメントでは、異なるフラグを使用して同時に複数のリビジョンをデプロイできます。 例えば、実稼働環境にプッシュする前に、デプロイメントをテストすることができます。</p>
     <p>デプロイメントを使用することによって、デプロイしたリビジョンを追跡できます。更新が期待どおりに機能しない場合に、この履歴を使用して以前のバージョンにロールバックすることができます。</p></dd>
   <dt>アプリのワークロードに十分なレプリカ数、プラス 2 を組み込む</dt>
-    <dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。 ポッドがクラッシュし、そのポッドがレプリカ・セットによってリカバリーされなかった場合に、予備のレプリカでワークロードを処理できます。2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。 この構成は N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。 クラスターに十分なスペースがある限り、必要な数のポッドを作成できます。</dd>
+    <dd>アプリの可用性と耐障害性を高めるために、予想されるワークロードを処理する最低限の数のレプリカに加えて予備のレプリカを組み込むことを検討してください。 ポッドがクラッシュし、そのポッドがレプリカ・セットによってリカバリーされなかった場合に、予備のレプリカでワークロードを処理できます。 2 つが同時に障害を発生した場合に対応できるようにするには、2 つ余分にレプリカを組み込みます。 この構成は N+2 パターンです。N は着信ワークロードを処理するレプリカの数、+2 は追加の 2 つのインスタンスです。 クラスターに十分なスペースがある限り、必要な数のポッドを作成できます。</dd>
   <dt>複数のノードにポッドを分散させる (アンチアフィニティー)</dt>
     <dd><p>デプロイメントを作成するときに、各ポッドを同じワーカー・ノードにデプロイすることもできます。 これは、アフィニティーまたはコロケーションとして知られています。 ワーカー・ノードの障害からアプリを保護するには、標準クラスターで <code>podAntiAffinity</code> オプションを使用して、複数のワーカー・ノードにポッドを分散させるようにデプロイメントを構成します。 「優先」と「必須」という 2 つのタイプのポッド・アンチアフィニティーを定義できます。
       <p>詳しくは、Kubernetes の資料 <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">Assigning Pods to Nodes</a> を参照してください。</p>
@@ -197,12 +196,12 @@ YAML ファイルにデータをハードコーディングするのではなく
   <dd><p>ゾーン障害からアプリを保護するには、別々のゾーンに複数のクラスターを作成するか、または複数ゾーン・クラスター内のワーカー・プールにゾーンを追加することができます。 複数ゾーン・クラスターは、[特定のメトロ領域](/docs/containers?topic=containers-regions-and-zones#zones) (ダラスなど) でのみ使用可能です。 複数のクラスターを別々のゾーンに作成する場合は、[グローバル・ロード・バランサーをセットアップする](/docs/containers?topic=containers-ha_clusters#multiple_clusters)必要があります。</p>
   <p>レプリカ・セットを使用し、ポッドのアンチアフィニティーを指定すると、Kubernetes はアプリ・ポッドをノード間で分散させます。 複数のゾーンにノードがある場合、ポッドはゾーン間で分散され、アプリの可用性が向上します。 アプリを 1 つのゾーンのみで実行するように制限する場合は、ポッドのアフィニティーを構成するか、または 1 つのゾーン内にワーカー・プールを作成してラベル付けすることができます。 詳しくは、[複数ゾーン・クラスターの高可用性](/docs/containers?topic=containers-ha_clusters#ha_clusters)を参照してください。</p>
   <p><strong>複数ゾーン・クラスター・デプロイメントでは、アプリ・ポッドはノード間で均等に分散されますか?</strong></p>
-  <p>ポッドはゾーン間で均等に分散されますが、ノード間では必ずしも均等になるとは限りません。 例えば、3 つの各ゾーンにノードが 1 つずつあるクラスターがある場合、6 つのポッドからなるレプリカ・セットをデプロイすると、ポッドは各ノードに 2 つずつ配分されます。 しかし、3 つの各ゾーンにノードが 2 つずつあるクラスターの場合は、6 つのポッドからなるレプリカ・セットをデプロイすると、各ゾーンに 2 つのポッドがスケジュールされますが、必ずしもノードごとに 1 つのポッドがスケジュールされるとは限りません。スケジューリングをより細かく制御するには、[ポッドのアフィニティーを設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node) することができます。</p>
+  <p>ポッドはゾーン間で均等に分散されますが、ノード間では必ずしも均等になるとは限りません。 例えば、3 つの各ゾーンにノードが 1 つずつあるクラスターがある場合、6 つのポッドからなるレプリカ・セットをデプロイすると、ポッドは各ノードに 2 つずつ配分されます。 しかし、3 つの各ゾーンにノードが 2 つずつあるクラスターの場合は、6 つのポッドからなるレプリカ・セットをデプロイすると、各ゾーンに 2 つのポッドがスケジュールされますが、必ずしもノードごとに 1 つのポッドがスケジュールされるとは限りません。 スケジューリングをより細かく制御するには、[ポッドのアフィニティーを設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node) することができます。</p>
   <p><strong>あるゾーンがダウンした場合、ポッドは他のゾーンにある残りのノードにどのようにスケジュール変更されますか?</strong></br>それはデプロイメントに使用されているスケジューリング・ポリシーによって異なります。 [ノード固有のポッド・アフィニティー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) を組み込んだ場合、ポッドはスケジュール変更されません。 そうしていない場合、ポッドは他のゾーンの使用可能なワーカー・ノード上に作成されますが、バランスが取れていない可能性があります。 例えば、2 つのポッドが使用可能な 2 つのノードに分散される場合もあれば、使用可能な容量がある 1 つのノードに両方のポッドがスケジュールされる場合もあります。 同様に、使用不可になっていたゾーンが回復した場合も、ポッドが自動的に削除されて、ノード間でリバランスされるわけではありません。 ゾーンが回復した後に、ゾーン間でポッドをリバランスする場合は、[Kubernetes デスケジューラー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/descheduler) の使用を検討してください。</p>
   <p><strong>ヒント</strong>: 複数ゾーン・クラスターでは、ワーカー・ノードの容量をゾーン当たり 50% に保ち、ゾーン障害時にクラスターを保護するために十分な容量が確保されるようにしてください。</p>
   <p><strong>アプリを複数の地域に分散させるにはどうすればよいですか?</strong></br>地域の障害からアプリを保護するには、別の地域に 2 番目のクラスターを作成し、[グローバル・ロード・バランサーをセットアップ](/docs/containers?topic=containers-ha_clusters#multiple_clusters)してクラスター同士を接続し、デプロイメント YAML を使用して、アプリ用に[ポッドのアンチアフィニティー ![外部リンク・リンク](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) を設定した複製レプリカ・セットをデプロイします。</p>
   <p><strong>アプリに永続ストレージが必要な場合はどうすればよいですか?</strong></p>
-  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)などのクラウド・サービスを使用します。</p></dd>
+  <p>[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)などのクラウド・サービスを使用します。</p></dd>
 </dl>
 
 ## YAML ファイルでのアプリ要件の指定
@@ -255,9 +254,9 @@ template:
       app: wasliberty</pre></code></p></dd>
 
 <dt id="affinity">アフィニティー</dt>
-  <dd><p>ポッドがスケジュールされるワーカー・ノードをより詳細に制御したい場合は、アフィニティー (コロケーション) を指定します。 アフィニティーはスケジューリング時にのみポッドに影響を与えます。例えば、同じノードにポッドがスケジュールされるようにするのではなく、各ワーカー・ノード全体にデプロイメントを分散させるには、標準クラスターで <code>podAntiAffinity</code> オプションを使用します。 「優先」と「必須」という 2 つのタイプのポッド・アンチアフィニティーを定義できます。</p>
+  <dd><p>ポッドがスケジュールされるワーカー・ノードをより詳細に制御したい場合は、アフィニティー (コロケーション) を指定します。 アフィニティーはスケジューリング時にのみポッドに影響を与えます。 例えば、同じノードにポッドがスケジュールされるようにするのではなく、各ワーカー・ノード全体にデプロイメントを分散させるには、標準クラスターで <code>podAntiAffinity</code> オプションを使用します。 「優先」と「必須」という 2 つのタイプのポッド・アンチアフィニティーを定義できます。</p>
   <p>詳しくは、Kubernetes の資料 <a href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">Assigning Pods to Nodes</a> を参照してください。</p>
-  <ul><li><strong>必須アンチアフィニティー</strong>: ワーカー・ノードと同数のレプリカのみをデプロイできます。例えば、クラスターに 3 つのワーカー・ノードがある場合は、YAML ファイルに 5 つのレプリカを定義しても、3 つのレプリカしかデプロイされません。 各レプリカは異なるワーカー・ノード上に存在します。 残りの 2 つのレプリカは保留中のままです。 別のワーカー・ノードをクラスターに追加すると、残りのレプリカのうち 1 つが新しいワーカー・ノードに自動的にデプロイされます。 ワーカー・ノードに障害が発生しても、アフィニティー・ポリシーが必要になるため、ポッドはスケジュール変更されません。 必須が定義された YAML の例については、<a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">必須のポッド・アンチアフィニティーを使用する Liberty アプリ</a>を参照してください。</li>
+  <ul><li><strong>必須アンチアフィニティー</strong>: ワーカー・ノードと同数のレプリカのみをデプロイできます。 例えば、クラスターに 3 つのワーカー・ノードがある場合は、YAML ファイルに 5 つのレプリカを定義しても、3 つのレプリカしかデプロイされません。 各レプリカは異なるワーカー・ノード上に存在します。 残りの 2 つのレプリカは保留中のままです。 別のワーカー・ノードをクラスターに追加すると、残りのレプリカのうち 1 つが新しいワーカー・ノードに自動的にデプロイされます。 ワーカー・ノードに障害が発生しても、アフィニティー・ポリシーが必要になるため、ポッドはスケジュール変更されません。 必須が定義された YAML の例については、<a href="https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/liberty_requiredAntiAffinity.yaml" rel="external" target="_blank" title="(新しいタブまたはウィンドウで開く)">必須のポッド・アンチアフィニティーを使用する Liberty アプリ</a>を参照してください。</li>
   <li><strong>優先アンチアフィニティー</strong>: 使用可能なキャパシティーを備えたノードにポッドをデプロイできるので、ワークロードの柔軟性が向上します。 ポッドはそれぞれ、できるだけ異なるワーカー・ノードにスケジュールされます。 例えば、十分なキャパシティーを備えたワーカー・ノードがクラスターに 3 つある場合は、これらのノード全体に 5 つのレプリカ・ポッドをスケジュールできます。 ただし、さらに 2 つのワーカー・ノードをクラスターに追加しても、既存のノードで実行されている 2 つの余分なポッドがアフィニティー・ルールによって強制的にフリー・ノードにスケジュール変更されることはありません。</li>
   <li><strong>ワーカー・ノード・アフィニティー</strong>: ベアメタルなどの特定のワーカー・ノードでのみ実行されるようにデプロイメントを構成できます。 詳しくは、[ラベルを使用した特定のワーカー・ノードへのアプリのデプロイ](/docs/containers?topic=containers-app#node_affinity)を参照してください。</li></ul>
   <p>優先アンチアフィニティーの例</p>
@@ -474,7 +473,7 @@ spec:
 ### 完全なデプロイメント YAML の例
 {: #yaml-example}
 
-以下の例は、[既にセクションごとに解説](#app_yaml)されているデプロイメント YAML のコピーです。[GitHub から YAML をダウンロードする](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)こともできます。
+以下の例は、[既にセクションごとに解説](#app_yaml)されているデプロイメント YAML のコピーです。 [GitHub から YAML をダウンロードする](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/deploy_wasliberty.yaml)こともできます。
 {: shortdesc}
 
 YAML を適用するには、以下のようにします。
@@ -624,10 +623,10 @@ spec:
 ## Kustomize を使用した、複数環境での再利用のための Kubernetes 構成ファイルの管理
 {: #kustomize}
 
-[Twelve-Factor ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://12factor.net/) クラウド・ネイティブ・アプリの一部として、共通のバージョン管理されたコードベース・ソースを使用する、継続的な開発とデリバリーのパイプラインをセットアップすることにより、開発と本番の一致を維持します。コードベース・リポジトリーには、Kubernetes リソース構成マニフェスト・ファイルが、多くの場合、YAML 形式で保管されます。Kubernetes プロジェクト [Kustomize ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kustomize.io/) を使用すると、デプロイメントを複数の環境にわたって標準化したりカスタマイズしたりできます。
+[Twelve-Factor ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://12factor.net/) クラウド・ネイティブ・アプリの一部として、共通のバージョン管理されたコードベース・ソースを使用する、継続的な開発とデリバリーのパイプラインをセットアップすることにより、開発と本番の一致を維持します。 コードベース・リポジトリーには、Kubernetes リソース構成マニフェスト・ファイルが、多くの場合、YAML 形式で保管されます。 Kubernetes プロジェクト [Kustomize ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kustomize.io/) を使用すると、デプロイメントを複数の環境にわたって標準化したりカスタマイズしたりできます。
 {: shortdesc}
 
-例えば、基本 `kustomization` YAML をセットアップして、開発環境、テスト環境、および実稼働環境で共有される、デプロイメントや PVC などの Kubernetes オブジェクトを宣言できます。次に、実稼働環境のレプリカをテスト環境よりも多くするなど、環境ごとに構成をカスタマイズした別個の `kustomization` YAML をセットアップできます。これらのカスタマイズ YAML は、共有される基本 YAML をオーバーレイすることも、基本 YAML を基にして作成することもでき、ソース制御するいくつかのオーバーレイ構成の相違点を除いて、ほとんど同じ環境を管理できます。用語集や FAQ など、Kustomize について詳しくは、[Kustomize 資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs) を参照してください。
+例えば、基本 `kustomization` YAML をセットアップして、開発環境、テスト環境、および実稼働環境で共有される、デプロイメントや PVC などの Kubernetes オブジェクトを宣言できます。 次に、実稼働環境のレプリカをテスト環境よりも多くするなど、環境ごとに構成をカスタマイズした別個の `kustomization` YAML をセットアップできます。 これらのカスタマイズ YAML は、共有される基本 YAML をオーバーレイすることも、基本 YAML を基にして作成することもでき、ソース制御するいくつかのオーバーレイ構成の相違点を除いて、ほとんど同じ環境を管理できます。 用語集や FAQ など、Kustomize について詳しくは、[Kustomize 資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs) を参照してください。
 
 開始前に、以下のことを行います。
 *   Kubernetes バージョン 1.14 以降を実行するクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはそのバージョンに[更新](/docs/containers?topic=containers-update)します。
@@ -651,7 +650,7 @@ Kustomize を使用して構成ファイルをセットアップするには、�
     git init ~/<my_app>
     ```
     {: pre}
-3.  `kustomize` の [`base` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#base) ディレクトリー、[`overlay`](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#overlay) ディレクトリー、およびステージングや実動などの環境ディレクトリーのためのリポジトリー構造を作成します。以降のステップでは、`kustomize` で使用するこれらのリポジトリーをセットアップします。
+3.  `kustomize` の [`base` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#base) ディレクトリー、[`overlay`](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/glossary.md#overlay) ディレクトリー、およびステージングや実動などの環境ディレクトリーのためのリポジトリー構造を作成します。 以降のステップでは、`kustomize` で使用するこれらのリポジトリーをセットアップします。
     ```
     mkdir -p ~/<my_app>/base &&
     mkdir -p ~/<my_app>/overlay &&
@@ -659,7 +658,7 @@ Kustomize を使用して構成ファイルをセットアップするには、�
     mkdir -p ~/<my_app>/overlay/prod
     ```
     {: pre}
-    
+
     リポジトリー構造の例:
     ```
     .
@@ -675,8 +674,8 @@ Kustomize を使用して構成ファイルをセットアップするには、�
         cd ~/<my_app>/base
         ```
         {: pre}
-    2.  アプリ・デプロイメント用の Kubernetes 構成 YAML ファイルの初期セットを作成します。`wasliberty` [YAML サンプル](#yaml-example)を使用して、デプロイメント、サービス、構成マップ、および永続ボリューム請求を作成できます。
-    3.  環境全体に適用される基本構成を指定する [`kustomization` ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) を作成します。`kustomization` ファイルには、同じ `base` リポジトリーに保管されている Kubernetes リソース構成 YAML のリストが含まれている必要があります。`kustomization` ファイルでは、すべてのリソース名に追加される接頭部や接尾部、ラベル、すべてのリソースが作成される既存の名前空間、シークレット、構成マップなど、base リポジトリー内のすべてのリソース YAML に適用される構成を追加することもできます。
+    2.  アプリ・デプロイメント用の Kubernetes 構成 YAML ファイルの初期セットを作成します。 `wasliberty` [YAML サンプル](#yaml-example)を使用して、デプロイメント、サービス、構成マップ、および永続ボリューム請求を作成できます。
+    3.  環境全体に適用される基本構成を指定する [`kustomization` ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) を作成します。 `kustomization` ファイルには、同じ `base` リポジトリーに保管されている Kubernetes リソース構成 YAML のリストが含まれている必要があります。 `kustomization` ファイルでは、すべてのリソース名に追加される接頭部や接尾部、ラベル、すべてのリソースが作成される既存の名前空間、シークレット、構成マップなど、base リポジトリー内のすべてのリソース YAML に適用される構成を追加することもできます。
         ```
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
@@ -693,16 +692,16 @@ Kustomize を使用して構成ファイルをセットアップするには、�
         - secret.yaml
         ```
         {: codeblock}
-        
-        `resources` YAML の名前は、`base` リポジトリー内の他のファイルの名前と一致する必要があります。同じファイルに複数の構成を含める場合もありますが、この例では、構成は `deployment.yaml`、`service.yaml`、`pvc.yaml` などのファイルに分離されています。
-        
-    4.  `kustomization` 基本 YAML ファイルで定義した構成を使用して、リソース YAML ファイルを作成します。リソースは、`kustomization` YAML とリソース YAML の構成を結合して作成されます。結合された YAML ファイルは、端末出力の `stdout` に返されます。新規ラベルを追加するなど、`kustomization` YAML に行う以降の変更は、この同じコマンドを使用して作成します。
+
+        `resources` YAML の名前は、`base` リポジトリー内の他のファイルの名前と一致する必要があります。 同じファイルに複数の構成を含める場合もありますが、この例では、構成は `deployment.yaml`、`service.yaml`、`pvc.yaml` などのファイルに分離されています。
+
+    4.  `kustomization` 基本 YAML ファイルで定義した構成を使用して、リソース YAML ファイルを作成します。 リソースは、`kustomization` YAML とリソース YAML の構成を結合して作成されます。 結合された YAML ファイルは、端末出力の `stdout` に返されます。 ラベルを追加するなど、`kustomization` YAML に行う以降の変更は、この同じコマンドを使用して作成します。
         ```
         kustomize build
         ```
         {: pre}
 5.  ステージングや実動などの環境ごとに、固有の `kustomization` YAML ファイルを使用して overlay リポジトリーをセットアップします。
-    1.  staging リポジトリーに `kustomization.yaml` ファイルを作成します。ラベル、イメージ・タグ、テストする新規コンポーネントの YAML など、ステージングに固有の構成を追加します。
+    1.  staging リポジトリーに `kustomization.yaml` ファイルを作成します。 ラベル、イメージ・タグ、テストする新規コンポーネントの YAML など、ステージングに固有の構成を追加します。
         ```
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
@@ -735,15 +734,15 @@ Kustomize を使用して構成ファイルをセットアップするには、�
         </tr>
         <tr>
         <td><code>bases</code></td>
-        <td>基本 `kustomization` ファイルを含むリモート・リポジトリーのディレクトリーまたは URL への相対パスを追加します。この例では、相対パスは、前に作成した `base` リポジトリー内の基本 `kustomization` ファイルを指しています。このフィールドは、オーバーレイ `kustomization` では必須です。</td>
+        <td>基本 `kustomization` ファイルを含むリモート・リポジトリーのディレクトリーまたは URL への相対パスを追加します。 この例では、相対パスは、前に作成した `base` リポジトリー内の基本 `kustomization` ファイルを指しています。 このフィールドは、オーバーレイ `kustomization` では必須です。</td>
         </tr>
         <tr>
         <td><code>patchesStrategicMerge</code></td>
-        <td>基本 `kustomization` にマージするリソース構成 YAML ファイルをリストします。また、これらのファイルは、`kustomization` ファイルと同じリポジトリー (`overlay/staging` など) に追加する必要があります。これらのリソース構成ファイルには、パッチと同じ名前の基本構成ファイルにマージされる少量の変更を含めることができます。リソースには、`base` 構成ファイルにあるすべてのコンポーネントと、`overlay` 構成ファイルで指定する追加のコンポーネントが取得されます。<br><br>構成が base 内にない新規ファイルの場合は、`resources` フィールドにファイル名も追加する必要があります。</td>
+        <td>基本 `kustomization` にマージするリソース構成 YAML ファイルをリストします。 また、これらのファイルは、`kustomization` ファイルと同じリポジトリー (`overlay/staging` など) に追加する必要があります。 これらのリソース構成ファイルには、パッチと同じ名前の基本構成ファイルにマージされる少量の変更を含めることができます。 リソースには、`base` 構成ファイルにあるすべてのコンポーネントと、`overlay` 構成ファイルで指定する追加のコンポーネントが取得されます。<br><br>構成が base 内にない新規ファイルの場合は、`resources` フィールドにファイル名も追加する必要があります。</td>
         </tr>
         <tr>
         <td><code>リソース</code></td>
-        <td>staging リポジトリーに固有で、base リポジトリーに含まれていないリソース構成 YAML ファイルをすべてリストします。これらのファイルは、`patchesStrategicMerge` フィールドにも含め、`kustomization` ファイルと同じリポジトリー (`overlay/staging` など) にも追加する必要があります。</td>
+        <td>staging リポジトリーに固有で、base リポジトリーに含まれていないリソース構成 YAML ファイルをすべてリストします。 これらのファイルは、`patchesStrategicMerge` フィールドにも含め、`kustomization` ファイルと同じリポジトリー (`overlay/staging` など) にも追加する必要があります。</td>
         </tr>
         <tr>
         <td>その他の設定可能な構成</td>
@@ -755,8 +754,8 @@ Kustomize を使用して構成ファイルをセットアップするには、�
         kustomize build overlay/staging
         ```
         {: pre}
-    3.  これらのステップを繰り返して、実動のオーバーレイ `kustomization` およびその他の構成 YAML ファイルを作成します。例えば、`deployment.yaml` でレプリカの数を増やすと、実稼働環境でより多くのユーザー要求を処理できます。
-    4.  `kustomize` リポジトリー構造を調べて、すべての必要な YAML 構成ファイルが含まれていることを確認します。構造は、以下の例のようになります。
+    3.  これらのステップを繰り返して、実動のオーバーレイ `kustomization` およびその他の構成 YAML ファイルを作成します。 例えば、`deployment.yaml` でレプリカの数を増やすと、実稼働環境でより多くのユーザー要求を処理できます。
+    4.  `kustomize` リポジトリー構造を調べて、すべての必要な YAML 構成ファイルが含まれていることを確認します。 構造は、以下の例のようになります。
         ```
         ├── base
         │   ├── configmap.yaml
@@ -776,13 +775,13 @@ Kustomize を使用して構成ファイルをセットアップするには、�
                 └── new_staging_resource.yaml
         ```
         {: screen}
-6.  デプロイする環境の Kubernetes リソースを適用します。以下の例では、staging リポジトリーを使用します。
-    1.  ステージングのオーバーレイ・ディレクトリーに移動します。前のステップでリソースを作成していない場合は、ここで作成します。
+6.  デプロイする環境の Kubernetes リソースを適用します。 以下の例では、staging リポジトリーを使用します。
+    1.  ステージングのオーバーレイ・ディレクトリーに移動します。 前のステップでリソースを作成していない場合は、ここで作成します。
         ```
         cd overlay/staging && kustomize build
         ```
         {: pre}
-    2.  クラスターに Kubernetes リソースを適用します。`-k` フラグと、`kustomization` ファイルがあるディレクトリーを含めます。例えば、既にステージング・ディレクトリーで作業している場合は、`../staging` を含めてディレクトリーへのパスをマークします。
+    2.  クラスターに Kubernetes リソースを適用します。 `-k` フラグと、`kustomization` ファイルがあるディレクトリーを含めます。 例えば、既にステージング・ディレクトリーで作業している場合は、`../staging` を含めてディレクトリーへのパスをマークします。
         ```
         kubectl apply -k ../staging
         ```
@@ -796,7 +795,7 @@ Kustomize を使用して構成ファイルをセットアップするには、�
         job.batch/staging-pi created
         persistentvolumeclaim/staging-kustomtest-pvc-v2 created
         ```
-    3.  ステージング固有の変更が適用されていることを確認します。例えば、`staging-` 接頭部を追加した場合、作成されるポッドおよびその他のリソースの名前にはこの接頭部が含まれます。
+    3.  ステージング固有の変更が適用されていることを確認します。 例えば、`staging-` 接頭部を追加した場合、作成されるポッドおよびその他のリソースの名前にはこの接頭部が含まれます。
         ```
         kubectl get -k ../staging
         ```
@@ -842,11 +841,14 @@ Kustomize を使用して構成ファイルをセットアップするには、�
 ## Kubernetes ダッシュボードの起動
 {: #cli_dashboard}
 
-ローカル・システムで Kubernetes ダッシュボードを開くと、クラスターとそのすべてのワーカー・ノードに関する情報が表示されます。 [{{site.data.keyword.Bluemix_notm}} コンソールでは](#db_gui)、便利なワンクリック・ボタンでダッシュボードにアクセスできます。 [CLI を使用すると](#db_cli)、ダッシュボードにアクセスしたり、CI/CD パイプラインなどの自動化プロセスのステップを使用したりできます。
+ローカル・システムで Kubernetes ダッシュボードを開くと、クラスターとそのすべてのワーカー・ノードに関する情報が表示されます。 [{{site.data.keyword.cloud_notm}} コンソールでは](#db_gui)、便利なワンクリック・ボタンでダッシュボードにアクセスできます。 [CLI を使用すると](#db_cli)、ダッシュボードにアクセスしたり、CI/CD パイプラインなどの自動化プロセスのステップを使用したりできます。
 {:shortdesc}
 
 クラスター内のリソースやユーザーが多すぎて Kubernetes ダッシュボードが少し遅くなっていますか? Kubernetes バージョン 1.12 以降を実行するクラスターの場合、クラスター管理者は `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3` を実行して `kubernetes-dashboard` デプロイメントをスケーリングできます。
 {: tip}
+
+個々のアプリ・ポッドのログを確認するには、`kubectl logs <pod name>` を実行します。Kubernetes ダッシュボードを使用してポッドのログのストリーミングをしないでください。Kubernetes ダッシュボードへのアクセスが中断される可能性があります。
+{: important}
 
 開始前に、以下のことを行います。
 * Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
@@ -855,16 +857,15 @@ Kustomize を使用して構成ファイルをセットアップするには、�
 
 クラスターの Kubernetes ダッシュボードを起動するために、デフォルトのポートを使用するか、独自のポートを設定できます。
 
-**{{site.data.keyword.Bluemix_notm}} コンソールからの Kubernetes ダッシュボードの起動**
+**{{site.data.keyword.cloud_notm}} コンソールからの Kubernetes ダッシュボードの起動**
 {: #db_gui}
 
-1.  [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) にログインします。
+1.  [{{site.data.keyword.cloud_notm}} コンソール](https://cloud.ibm.com/) にログインします。
 2.  メニュー・バーから、使用するアカウントを選択します。
 3.  メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から、**「Kubernetes」**をクリックします。
 4.  **「クラスター」**ページで、アクセスするクラスターをクリックします。
 5.  クラスターの詳細ページで、**「Kubernetes Dashboard」**ボタンをクリックします。
 
-</br>
 </br>
 
 **CLI からの Kubernetes ダッシュボードの起動**
@@ -985,7 +986,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 ## ラベルを使用した特定のワーカー・ノードへのアプリのデプロイ
 {: #node_affinity}
 
-アプリをデプロイすると、アプリ・ポッドが、クラスター内のさまざまなワーカー・ノードに無差別にデプロイされます。 場合に応じて、アプリ・ポッドがデプロイされるワーカー・ノードを制限することもできます。 例えば、特定のワーカー・プールのワーカー・ノードがベア・メタル・マシン上にあるため、これらのワーカー・ノードにのみアプリ・ポッドがデプロイされるようにしたいとします。 アプリ・ポッドをデプロイするワーカー・ノードを指定するには、アプリのデプロイメントにアフィニティー・ルールを追加します。
+アプリをデプロイすると、アプリ・ポッドが、クラスター内のさまざまなワーカー・ノードに無差別にデプロイされます。 場合に応じて、アプリ・ポッドがデプロイされるワーカー・ノードを制限することもできます。 例えば、特定のワーカー・プールのワーカー・ノードがベアメタル・マシン上にあるため、これらのワーカー・ノードにのみアプリ・ポッドがデプロイされるようにしたいとします。 アプリ・ポッドをデプロイするワーカー・ノードを指定するには、アプリのデプロイメントにアフィニティー・ルールを追加します。
 {:shortdesc}
 
 開始前に、以下のことを行います。
@@ -1031,7 +1032,7 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.8_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1120,13 +1121,13 @@ Kubernetes ダッシュボードを使用してアプリをクラスターにデ
 ## GPU マシンへのアプリのデプロイ
 {: #gpu_app}
 
-[ベア・メタル・グラフィックス処理装置 (GPU) マシン・タイプ](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)がある場合は、数理計算主体のワークロードをワーカー・ノードにスケジュールできます。 例えば、Compute Unified Device Architecture (CUDA) プラットフォームを使用する 3D アプリを実行して GPU と CPU 間で処理負荷を分担し、パフォーマンスを向上させることができます。
+[ベアメタル・グラフィックス処理装置 (GPU) マシン・タイプ](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)がある場合は、数理計算主体のワークロードをワーカー・ノードにスケジュールできます。 例えば、Compute Unified Device Architecture (CUDA) プラットフォームを使用する 3D アプリを実行して GPU と CPU 間で処理負荷を分担し、パフォーマンスを向上させることができます。
 {:shortdesc}
 
 以下のステップは、GPU を必要とするワークロードをデプロイする方法を示しています。 GPU と CPU の両方にわたってワークロードを処理する必要はない[アプリをデプロイする](#app_ui)こともできます。 後で、[この Kubernetes デモ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/pachyderm/pachyderm/tree/master/examples/ml/tensorflow) を使用して、[TensorFlow ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.tensorflow.org/) 機械学習フレームワークなどの数理計算主体のワークロードを試してみることをお勧めします。
 
 開始前に、以下のことを行います。
-* [ベア・メタル GPU マシン・タイプを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。 この処理は、完了するまでに 1 営業日以上かかる場合があります。
+* [ベアメタル GPU マシン・タイプを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。 この処理は、完了するまでに 1 営業日以上かかる場合があります。
 * 名前空間内の Kubernetes リソースを処理できる適切な Kubernetes RBAC 役割を付与する、[サービス役割](/docs/containers?topic=containers-users#platform)が自分に割り当てられていることを確認します。
 
 GPU マシンでワークロードを実行するには、以下のようにします。
@@ -1292,7 +1293,7 @@ GPU マシンでワークロードを実行するには、以下のようにし�
 Kubernetes では、[ポッドの自動水平スケーリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) を有効にして、CPU に基づいてアプリのインスタンス数を自動的に増減できます。
 {:shortdesc}
 
-Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started) を確認してください。 ポッドではなく、ワーカー・ノードのスケーリングが必要ですか? [cluster autoscaler](/docs/containers?topic=containers-ca#ca) を確認してください。
+Cloud Foundry アプリケーションのスケーリングに関する情報をお探しですか? [IBM Auto-Scaling for {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started) を確認してください。 ポッドではなく、ワーカー・ノードのスケーリングが必要ですか? [cluster autoscaler](/docs/containers?topic=containers-ca#ca) を確認してください。
 {: tip}
 
 開始前に、以下のことを行います。
@@ -1430,7 +1431,7 @@ Cloud Foundry アプリケーションのスケーリングに関する情報を
     </tr>
     <tr>
     <td><code>spec.strategy.rollingUpdate.maxSurge</code></td>
-    <td>ロールアウト中にデプロイメントで使用できる追加のリソース数を数値 (`2`) またはパーセンテージ (`50%`) で設定します。例えば、`10` レプリカが指定されたデプロイメントで、`maxSurge` を `2` に設定した場合、ロールアウト中に 2 つの新規レプリカが作成されます。この時点で、12 のレプリカ (既存 10、新規 2) があります。 2 つの新規レプリカの準備が整うと、指定された 10 レプリカに合わせて、デプロイメントがスケール・ダウンして、古いレプリカが 8 つになります。 このプロセスは、ロールアウトが完了して、10 レプリカすべてが新規バージョンで実行されるまで続きます。<p class="tip">blue-green 即時切り替えスタイルの更新を実行する場合は、`maxSurge` を `100%` に設定します。デプロイメントでは、すべての新規必須レプリカを作成した後、古いバージョンのレプリカを 0 にスケール・ダウンします。</p></td>
+    <td>ロールアウト中にデプロイメントで使用できる追加のリソース数を数値 (`2`) またはパーセンテージ (`50%`) で設定します。例えば、`10` レプリカが指定されたデプロイメントで、`maxSurge` を `2` に設定した場合、ロールアウト中に 2 つの新規レプリカが作成されます。 この時点で、12 のレプリカ (既存 10、新規 2) があります。 2 つの新規レプリカの準備が整うと、指定された 10 レプリカに合わせて、デプロイメントがスケール・ダウンして、古いレプリカが 8 つになります。 このプロセスは、ロールアウトが完了して、10 レプリカすべてが新規バージョンで実行されるまで続きます。<p class="tip">blue-green 即時切り替えスタイルの更新を実行する場合は、`maxSurge` を `100%` に設定します。デプロイメントでは、すべての新規必須レプリカを作成した後、古いバージョンのレプリカを 0 にスケール・ダウンします。</p></td>
     </tr>
     </tbody></table>
 

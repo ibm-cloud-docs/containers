@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -37,7 +37,7 @@ subcollection: containers
 複数ゾーン・クラスターの場合は、そのワーカー・ノードのリソースをバランスが取れた状態に維持してください。 すべてのワーカー・プールが同じゾーン間に分散されていることを確認し、ワーカーの追加/削除を行う場合は、個々のノードを追加するのではなく、プールのサイズを変更してください。
 {: tip}
 
-始める前に、[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。 次に、以下のいずれかのセクションを選択してください。
+始める前に、[**オペレーター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。 次に、以下のいずれかのセクションを選択してください。
   * [クラスター内の既存のワーカー・プールのサイズを変更してワーカー・ノードを追加する](#resize_pool)
   * [ワーカー・プールをクラスターに追加してワーカー・ノードを追加する](#add_pool)
   * [ゾーンをクラスターに追加し、複数のゾーン間でワーカー・プール内のワーカー・ノードを複製する](#add_zone)
@@ -121,7 +121,7 @@ subcollection: containers
     ```
     {: pre}
 
-4. ワーカー・プールを作成します。 `--labels` オプションを指定して、プール内のワーカー・ノードにラベル `key=value` を自動的に付けます。ベアメタル・ワーカー・プールをプロビジョンする場合は、`--hardware dedicated` を指定します。
+4. ワーカー・プールを作成します。 `--labels` オプションを指定して、プール内のワーカー・ノードにラベル `key=value` を自動的に付けます。 ベアメタル・ワーカー・プールをプロビジョンする場合は、`--hardware dedicated` を指定します。
    ```
    ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone> --hardware <dedicated_or_shared> --labels <key=value>
    ```
@@ -165,7 +165,7 @@ subcollection: containers
 
 開始前に、以下のことを行います。
 *  ワーカー・プールにゾーンを追加するには、そのワーカー・プールが[複数ゾーン対応ゾーン](/docs/containers?topic=containers-regions-and-zones#zones)内になければなりません。 ワーカー・プールが複数ゾーン対応ゾーン内にない場合は、[新しいワーカー・プールを作成](#add_pool)することを検討してください。
-*  1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
+*  1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー・アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 ゾーンをワーカー・ノードと一緒にワーカー・プールに追加するには、次のようにします。
 
@@ -273,17 +273,17 @@ Resource Group Name:            Default
 ## 既存のワーカー・プールへのラベルの追加
 {: #worker_pool_labels}
 
-ワーカー・プールのラベルは、[ワーカー・プールの作成](#add_pool)時に割り当てるか、後で以下のステップに従って割り当てることができます。ワーカー・プールにラベルが付けられると、既存のワーカー・ノードと後続のワーカー・ノードのすべてにこのラベルが割り当てられます。ラベルを使用して、特定のワークロードをワーカー・プール内のワーカー・ノード ([ロード・バランサー・ネットワーク・トラフィック用のエッジ・ノード](/docs/containers?topic=containers-edge)など) にのみデプロイできます。
+ワーカー・プールのラベルは、[ワーカー・プールの作成](#add_pool)時に割り当てるか、後で以下のステップに従って割り当てることができます。 ワーカー・プールにラベルが付けられると、既存のワーカー・ノードと後続のワーカー・ノードのすべてにこのラベルが割り当てられます。 ラベルを使用して、特定のワークロードをワーカー・プール内のワーカー・ノード ([ロード・バランサー・ネットワーク・トラフィック用のエッジ・ノード](/docs/containers?topic=containers-edge)など) にのみデプロイできます。
 {: shortdesc}
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  クラスター内のワーカー・プールをリストします。
-      ```
+    ```
     ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
     ```
     {: pre}
-2.  `key=value` ラベルを使用してワーカー・プールにラベルを付けるには、[PATCH ワーカー・プール API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool) を使用します。以下の JSON の例のように要求の本文をフォーマットします。
+2.  `key=value` ラベルを使用してワーカー・プールにラベルを付けるには、[PATCH ワーカー・プール API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool) を使用します。 以下の JSON の例のように要求の本文をフォーマットします。
     ```
     {
       "labels": {"key":"value"},

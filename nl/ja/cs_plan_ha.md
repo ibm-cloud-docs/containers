@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -24,10 +24,11 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # 高可用性のためのクラスターの計画
 {: #ha_clusters}
 
-{{site.data.keyword.containerlong}} を使用して、アプリの可用性と容量を最大化できるように標準クラスターを設計します。
+{{site.data.keyword.containerlong}} を使用して、アプリの可用性とキャパシティーが最大化されるように標準のコミュニティー Kubernetes クラスターまたは OpenShift クラスターを設計します。
 {: shortdesc}
 
 アプリを複数のワーカー・ノード、ゾーン、クラスターに分散させると、ユーザーがダウン時間を経験する可能性が低くなります。 ロード・バランシングや負荷の分離などの組み込み機能により、ホスト、ネットワーク、アプリで想定される障害に対する回復力を強化できます。 クラスターのセットアップ方法を以下にまとめます。下に行くほど可用性が高くなります。
@@ -106,17 +107,17 @@ subcollection: containers
 Kubernetes マスターの障害からクラスターを保護する場合や、複数ゾーン・クラスターを使用できない地域の場合は、[パブリック VLAN およびプライベート VLAN に接続されている複数クラスターをセットアップし、これらのクラスターをグローバル・ロード・バランサーを使用して接続します](#multiple_clusters)。
 
 **複数のゾーンにまたがるワーカーとマスター間の通信を可能にするために何かする必要がありますか?**</br>
-はい。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
+はい。 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー・アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 **公共のインターネットからユーザーがアプリにアクセスするにはどうしたらよいですか?**</br>
 Ingress アプリケーション・ロード・バランサー (ALB) またはロード・バランサー・サービスを使用して、アプリケーションを公開できます。
 
-- **Ingress アプリケーション・ロード・バランサー (ALB):** デフォルトでは、パブリック ALB がクラスター内の各ゾーンに自動的に作成されて有効になります。 地域ごとに 1 つの MZLB が存在するように、クラスター用の Cloudflare 複数ゾーン・ロード・バランサー (MZLB) も自動的に作成され、デプロイされます。 MZLB は、ALB の IP アドレスを同じホスト名の背後に配置し、これらの IP アドレスが使用可能かどうかを判別するためにこれらのアドレスに対してヘルス・チェックを有効にします。 例えば、米国東部地域の 3 つのゾーンにワーカー・ノードがある場合、ホスト名 `yourcluster.us-east.containers.appdomain.cloud` には 3 つの ALB IP アドレスがあります。 MZLB は、地域の各ゾーンのパブリック ALB IP をヘルス・チェックし、そのヘルス・チェックに基づいて DNS 参照の結果を最新の状態に保ちます。 詳しくは、[Ingress のコンポーネントとアーキテクチャー](/docs/containers?topic=containers-ingress#planning)を参照してください。
+- **Ingress アプリケーション・ロード・バランサー (ALB):** デフォルトでは、パブリック ALB がクラスター内の各ゾーンに自動的に作成されて有効になります。 地域ごとに 1 つの MZLB が存在するように、クラスター用の Cloudflare 複数ゾーン・ロード・バランサー (MZLB) も自動的に作成され、デプロイされます。 MZLB は、ALB の IP アドレスを同じホスト名の背後に配置し、これらの IP アドレスが使用可能かどうかを判別するためにこれらのアドレスに対してヘルス・チェックを有効にします。 例えば、米国東部地域の 3 つのゾーンにワーカー・ノードがある場合、ホスト名 `yourcluster.us-east.containers.appdomain.cloud` には 3 つの ALB IP アドレスがあります。 MZLB は、地域の各ゾーンのパブリック ALB IP をヘルス・チェックし、そのヘルス・チェックに基づいて DNS 参照の結果を最新の状態に保ちます。 詳しくは、[Ingress のコンポーネントとアーキテクチャー](/docs/containers?topic=containers-ingress-about#ingress_components)を参照してください。
 
 - **ロード・バランサー・サービス:** ロード・バランサー・サービスは、1 つのゾーンにのみセットアップされます。 アプリに対する着信要求は、この 1 つのゾーンから他のゾーンのすべてのアプリ・インスタンスに転送されます。 このゾーンが使用不可になると、インターネットからアプリにアクセスできなくなる可能性があります。 他のゾーンに追加のロード・バランサー・サービスをセットアップすることで、単一ゾーンの障害に対応できます。 詳しくは、可用性の高い[ロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer#multi_zone_config)を参照してください。
 
 **複数ゾーン・クラスターの永続ストレージはセットアップできますか?**</br>
-可用性の高い永続ストレージの場合は、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) などのクラウド・サービスを使用します。 [SDS マシン](/docs/containers?topic=containers-planning_worker_nodes#sds)を使用する [Portworx](/docs/containers?topic=containers-portworx#portworx) などのソフトウェア定義ストレージ (SDS) ソリューションを試すこともできます。 詳しくは、[複数ゾーン・クラスターの永続ストレージ・オプションの比較](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を参照してください。
+可用性の高い永続ストレージの場合は、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage) などのクラウド・サービスを使用します。 [SDS マシン](/docs/containers?topic=containers-planning_worker_nodes#sds)を使用する [Portworx](/docs/containers?topic=containers-portworx#portworx) などのソフトウェア定義ストレージ (SDS) ソリューションを試すこともできます。 詳しくは、[複数ゾーン・クラスターの永続ストレージ・オプションの比較](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を参照してください。
 
 NFS ファイルおよびブロック・ストレージは、ゾーン間で共有できません。 永続ボリュームは、実際のストレージ・デバイスが存在するゾーンでのみ使用できます。 使用を継続するクラスター内に既存の NFS ファイルまたはブロック・ストレージがある場合は、地域とゾーンのラベルを既存の永続ボリュームに適用する必要があります。 これらのラベルにより、kube-scheduler は永続ボリュームを使用するアプリのスケジュール先を決定できます。 `<mycluster>` をクラスター名に置き換えて、以下のコマンドを実行します。
 
@@ -185,31 +186,31 @@ Kubernetes マスターの障害からアプリを保護したい場合や、複
 **複数のクラスターに対してグローバル・ロード・バランサーをセットアップするには、以下のようにします。**
 
 1. 複数のゾーンまたは地域で[クラスターを作成](/docs/containers?topic=containers-clusters#clusters)します。
-2. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
-3. 各クラスターで、[アプリケーション・ロード・バランサー (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) または[ロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer)を使用して、アプリを公開します。
-4. クラスターごとに、ALB またはロード・バランサー・サービスのパブリック IP アドレスをリストします。
+2. 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー・アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
+3. 各クラスターで、[アプリケーション・ロード・バランサー (ALB)](/docs/containers?topic=containers-ingress#ingress_expose_public) または[ネットワーク・ロード・バランサー (NLB)](/docs/containers?topic=containers-loadbalancer) のサービスを使用して、アプリを公開します。
+4. クラスターごとに、ALB または NLB サービスのパブリック IP アドレスをリストします。
    - クラスター内のすべてのパブリック対応 ALB の IP アドレスをリストするには、以下のようにします。
      ```
      ibmcloud ks albs --cluster <cluster_name_or_id>
      ```
      {: pre}
 
-   - ロード・バランサー・サービスの IP アドレスをリストするには、以下のようにします。
+   - NLB サービスの IP アドレスをリストするには、以下のようにします。
      ```
      kubectl describe service <myservice>
      ```
      {: pre}
 
-     **Load Balancer Ingress** IP アドレスが、ロード・バランサー・サービスに割り当てられたポータブル・パブリック IP アドレスです。
+     **Load Balancer Ingress** IP アドレスが、NLB サービスに割り当てられたポータブル・パブリック IP アドレスです。
 
-4.  {{site.data.keyword.Bluemix_notm}} Internet Services (CIS) を使用してグローバル・ロード・バランサーをセットアップするか、独自のグローバル・ロード・バランサーをセットアップします。
+4.  {{site.data.keyword.cloud_notm}} Internet Services (CIS) を使用してグローバル・ロード・バランサーをセットアップするか、独自のグローバル・ロード・バランサーをセットアップします。
 
     **CIS グローバル・ロード・バランサーを使用するには、以下のようにします**。
-    1.  [{{site.data.keyword.Bluemix_notm}} Internet Services (CIS) の概説](/docs/infrastructure/cis?topic=cis-getting-started#getting-started)のステップ 1 から 5 に従って、サービスをセットアップします。 この手順で、サービス・インスタンスをプロビジョニングし、アプリ・ドメインを追加し、ネーム・サーバーを構成し、DNS レコードを作成します。 集めた ALB またはロード・バランサーの IP アドレスごとに DNS レコードを作成します。 これらの DNS レコードにより、アプリ・ドメインをクラスターの ALB またはロード・バランサーのすべてにマップし、アプリ・ドメインへの要求がラウンドロビン・サイクルでクラスターに転送されるようになります。
-    2. ALB またはロード・バランサーの[ヘルス・チェックを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check)します。 すべてのクラスター内の ALB またはロード・バランサーに同じヘルス・チェックを使用することも、特定のクラスターで使用する特定のヘルス・チェックを作成することもできます。
-    3. 各クラスターの ALB またはロード・バランサーの IP を追加して、クラスターごとに[起点プールを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool)します。 例えば、3 つのクラスターがあり、各クラスターに 2 つの ALB がある場合、それぞれ 2 つの ALB IP アドレスを含む起点プールを 3 つ作成します。 作成した起点プールごとにヘルス・チェックを追加します。
+    1.  [{{site.data.keyword.cloud_notm}} Internet Services (CIS) の概説](/docs/infrastructure/cis?topic=cis-getting-started#getting-started)のステップ 1 から 5 に従って、サービスをセットアップします。 この手順で、サービス・インスタンスをプロビジョニングし、アプリ・ドメインを追加し、ネーム・サーバーを構成し、DNS レコードを作成します。 集めた ALB または NLB の IP アドレスごとに DNS レコードを作成します。 これらの DNS レコードにより、アプリ・ドメインをクラスターの ALB または NLB のすべてにマップし、アプリ・ドメインへの要求がラウンドロビン・サイクルでクラスターに転送されるようになります。
+    2. ALB または NLB の[ヘルス・チェックを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-health-check)します。 すべてのクラスター内の ALB または NLB に同じヘルス・チェックを使用することも、特定のクラスターで使用する特定のヘルス・チェックを作成することもできます。
+    3. 各クラスターの ALB または NLB の IP を追加して、クラスターごとに[起点プールを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#add-a-pool)します。 例えば、3 つのクラスターがあり、各クラスターに 2 つの ALB がある場合、それぞれ 2 つの ALB IP アドレスを含む起点プールを 3 つ作成します。 作成した起点プールごとにヘルス・チェックを追加します。
     4. [グローバル・ロード・バランサーを追加](/docs/infrastructure/cis?topic=cis-set-up-and-configure-your-load-balancers#set-up-and-configure-your-load-balancers)します。
 
     **独自のグローバル・ロード・バランサーを使用するには、以下のようにします**。
-    1. すべてのパブリック対応の ALB やロード・バランサー・サービスの IP アドレスをドメインに追加して、着信トラフィックを ALB またはロード・バランサー・サービスに転送するようにドメインを構成します。
+    1. すべてのパブリック対応の ALB や NLB サービスの IP アドレスをドメインに追加して、着信トラフィックを ALB または NLB サービスに転送するようにドメインを構成します。
     2. DNS プロバイダーが正常でない IP アドレスを検出できるように、IP アドレスごとに ping ベースのヘルス・チェックを有効にします。 正常でない IP アドレスが検出されると、トラフィックはその IP アドレスに転送されなくなります。

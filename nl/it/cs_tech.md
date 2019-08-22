@@ -25,7 +25,6 @@ subcollection: containers
 
 
 # Tecnologia {{site.data.keyword.containerlong_notm}}
-{: #ibm-cloud-kubernetes-service-technology}
 
 Scopri di più sulla tecnologia che sta dietro {{site.data.keyword.containerlong}}.
 {:shortdesc}

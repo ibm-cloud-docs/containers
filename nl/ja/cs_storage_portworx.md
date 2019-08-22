@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -40,7 +40,7 @@ Portworx は、ワーカー・ノードに接続された使用可能なスト�
 Portworx は、ステートフル・アプリ用に使用できる追加機能も備えています。これらの機能としては、ボリューム・スナップショット、ボリューム暗号化、分離、クラスター内の最適なボリューム配置を実現する統合された Storage Orchestrator for Kubernetes (Stork) などが挙げられます。 詳しくは、[Portworx の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/) を参照してください。
 
 **Portworx にとって適切な {{site.data.keyword.containerlong_notm}} 内のワーカー・ノード・フレーバーはどれですか?** </br>
-{{site.data.keyword.containerlong_notm}} で提供されるベア・メタル・ワーカー・ノード・フレーバーには、[ソフトウェア定義ストレージ (SDS) の使用](/docs/containers?topic=containers-planning_worker_nodes#sds)向けに最適化されているものと、Portworx ストレージ層用に使用できる 1 台以上の未フォーマットおよび未マウントのロー・ローカル・ディスクを備えているものがあります。 Portworx が最高のパフォーマンスを発揮するのは、10 Gbps のネットワーク速度に対応した SDS ワーカー・ノード・マシンを使用している場合です。
+{{site.data.keyword.containerlong_notm}} は、[ソフトウェア定義ストレージ (SDS) の使用](/docs/containers?topic=containers-planning_worker_nodes#sds)向けに最適化されたベアメタル・ワーカー・ノード・フレーバーを提供しています。これらのフレーバーには、Portworx ストレージ層に使用できる 1 台以上の未フォーマットおよび未マウントのロー・ローカル・ディスクも付属しています。Portworx が最高のパフォーマンスを発揮するのは、10 Gbps のネットワーク速度に対応した SDS ワーカー・ノード・マシンを使用している場合です。
 
 **非 SDS ワーカー・ノード上で Portworx を実行した場合はどうなりますか?** </br>
 Portworx を非 SDS ワーカー・ノード・フレーバーにインストールできますが、ご使用のアプリで要求されるパフォーマンス上の利点は得られない可能性があります。 非 SDS ワーカー・ノードは仮想であってもベア・メタルであってもかまいません。 仮想マシンを使用する場合は、`b2c.16x64` 以上のワーカー・ノード・フレーバーを使用してください。 `b3c.4x16` または `u3c.2x4` というフレーバーを使用した仮想マシンでは、Portworx が適切に機能するために必要なリソースが提供されません。 仮想マシンでサポートされている 1000 Mbps というネットワーク速度は、Portworx の理想的なパフォーマンスを発揮するためには不十分であることに留意してください。 ベア・メタル・マシンは Portworx にとって十分なコンピュート・リソースとネットワーク速度を提供できますが、これらのマシンを使用するには、まず[未フォーマットおよび未マウントのロー・ブロック・ストレージを追加](#create_block_storage)する必要があります。
@@ -72,13 +72,13 @@ Portworx は、パブリック・ネットワークに接続できるように�
 Portworx の実行が最適化されるのは、[ソフトウェア定義ストレージ (SDS) の使用](/docs/containers?topic=containers-planning_worker_nodes#sds)向けに最適化されたワーカー・ノード・フレーバーを使用している場合です。 ただし、SDS ワーカー・ノードを使用できない場合や使用しない場合は、非 SDS ワーカー・ノード・フレーバーに Portworx をインストールできます。 ただし、非 SDS ワーカー・ノードは Portworx 向けに最適化されていないため、ご使用のアプリで要求されるパフォーマンス上の利点を提供できない可能性があります。
 {: shortdesc}
 
-非 SDS ワーカー・ノードを Portworx クラスターに含めるには、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージ・デバイスをワーカー・ノードに追加する必要があります。 Kubernetes 永続ボリューム請求 (PVC) を使用してロー・ブロック・ストレージをプロビジョンすることはできません。このブロック・ストレージ・デバイスは {{site.data.keyword.containerlong_notm}} によって自動的にフォーマットされるからです。 Portworx はブロック・ストレージのみをサポートしています。 ファイル・ストレージまたはオブジェクト・ストレージをマウントする非 SDS ワーカー・ノードを Portworx データ層向けに使用することはできません。
+非 SDS ワーカー・ノードを Portworx クラスターに含めるには、{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージ・デバイスをワーカー・ノードに追加する必要があります。 Kubernetes 永続ボリューム請求 (PVC) を使用してロー・ブロック・ストレージをプロビジョンすることはできません。このブロック・ストレージ・デバイスは {{site.data.keyword.containerlong_notm}} によって自動的にフォーマットされるからです。 Portworx はブロック・ストレージのみをサポートしています。 ファイル・ストレージまたはオブジェクト・ストレージをマウントする非 SDS ワーカー・ノードを Portworx データ層向けに使用することはできません。
 
 SDS ワーカー・ノード・フレーバーがクラスター内にある場合に、Portworx ストレージ層を作成するためだけにこれらのワーカー・ノードを使用する場合は、このステップ全体をスキップして、[Portworx データベースのセットアップ](#portworx_database)に進むことができます。
 {: note}
 
-1. [{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインをインストールします](/docs/containers?topic=containers-utilities#block_storage_attacher)。
-2. 同じ構成のブロック・ストレージをすべてのワーカー・ノードに追加する場合は、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインを使用して[ブロック・ストレージを自動的に追加](/docs/containers?topic=containers-utilities#automatic_block)してください。 異なる構成のブロック・ストレージを追加するには、ワーカー・ノードのサブセットのみにブロック・ストレージを追加します。または、プロビジョニング・プロセスをより細かく制御するには、[ブロック・ストレージを手動で追加](/docs/containers?topic=containers-utilities#manual_block)します。
+1. [{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインをインストールします](/docs/containers?topic=containers-utilities#block_storage_attacher)。
+2. 同じ構成のブロック・ストレージをすべてのワーカー・ノードに追加する場合は、{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインを使用して[ブロック・ストレージを自動的に追加](/docs/containers?topic=containers-utilities#automatic_block)してください。 異なる構成のブロック・ストレージを追加するには、ワーカー・ノードのサブセットのみにブロック・ストレージを追加します。または、プロビジョニング・プロセスをより細かく制御するには、[ブロック・ストレージを手動で追加](/docs/containers?topic=containers-utilities#manual_block)します。
 3. ワーカー・ノードに[ブロック・ストレージを接続](/docs/containers?topic=containers-utilities#attach_block)します。
 
 ## Portworx ライセンスの取得
@@ -92,7 +92,7 @@ SDS ワーカー・ノード・フレーバーがクラスター内にある場�
 ## Portworx メタデータ用のデータベースのセットアップ
 {: #portworx_database}
 
-{{site.data.keyword.Bluemix_notm}} のデータベース・サービス ([Databases for etcd](#databaseetcd) や [{{site.data.keyword.composeForEtcd}}](#compose) など) をセットアップして、Portworx クラスター・メタデータ用のキー/値ストアを作成します。
+{{site.data.keyword.cloud_notm}} のデータベース・サービス ([Databases for etcd](#databaseetcd) や [{{site.data.keyword.composeForEtcd}}](#compose) など) をセットアップして、Portworx クラスター・メタデータ用のキー/値ストアを作成します。
 {: shortdesc}
 
 Portworx のキー/値ストアは、Portworx クラスターの実態に関する唯一の情報源です。 このキー/値ストアを使用できない場合は、Portworx クラスターを操作してデータにアクセスしたりデータを保管したりすることはできません。 Portworx データベースを使用できない場合は、既存のデータは変更も削除もされません。
@@ -104,7 +104,7 @@ Databases for etcd は、3 つのストレージ・インスタンスにまた�
 
 以下のステップでは、Portworx 用の Databases for etcd サービス・インスタンスをプロビジョンおよびセットアップする方法を示しています。
 
-1. Databases for etcd サービスに対する [{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) 内の `Administrator` プラットフォーム・アクセス役割](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)を持っていることを確認します。  
+1. Databases for etcd サービスに対する [{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) 内の `Administrator` プラットフォーム・アクセス役割](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)を持っていることを確認します。  
 
 2. Databases for etcd サービス・インスタンスをプロビジョンします。
    1. [Databases for etcd カタログ・ページ](https://cloud.ibm.com/catalog/services/databases-for-etcd)を開きます。
@@ -210,7 +210,7 @@ Databases for etcd は、3 つのストレージ・インスタンスにまた�
 ## クラスターへの Portworx のインストール
 {: #install_portworx}
 
-Helm チャートを使用して Portworx をインストールします。 この Helm チャートによって、30 日間使用できる Portworx エンタープライズ・エディション `px-enterprise` の評価版がデプロイされます。 さらに、[Stork ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) も Kubernetes クラスターにインストールされます。 Portworx ストレージ・スケジューラーである Stork を使用すると、ポッドをそのポッドのデータと同じ場所に配置できるとともに、Portworx ボリュームのスナップショットを作成およびリストアできます。
+Helm チャートを使用して Portworx をインストールします。 この Helm チャートによって、30 日間使用できる Portworx エンタープライズ・エディション `px-enterprise` の評価版がデプロイされます。 さらに、[Stork ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) も Kubernetes クラスターにインストールされます。 Stork とは Portworx ストレージのスケジューラーです。Stork を使用すれば、ポッドをそのポッドのデータと同じ場所に配置でき、また Portworx ボリュームのスナップショットを作成およびリストアできます。
 {: shortdesc}
 
 Portworx の更新方法と削除方法については、 [Portworx の更新](#update_portworx)および [Portworx の削除](#remove_portworx)を参照してください。
@@ -605,7 +605,7 @@ Portworx ボリューム内のデータを保護するには、{{site.data.keywo
 以下のステップに従って、{{site.data.keyword.keymanagementservicelong_notm}} を使用した Portworx ボリュームの暗号化をセットアップします。
 {: shortdesc}
 
-1. {{site.data.keyword.Bluemix_notm}} Identity and Access Management 内で {{site.data.keyword.keymanagementservicelong_notm}} に対する [`Editor` プラットフォーム・アクセス役割と `Writer` サービス・アクセス役割が自身に割り当てられている](/docs/services/key-protect?topic=key-protect-manage-access#manage-access)ことを確認します。
+1. {{site.data.keyword.cloud_notm}} Identity and Access Management 内で {{site.data.keyword.keymanagementservicelong_notm}} に対する [`Editor` プラットフォーム・アクセス役割と `Writer` サービス・アクセス役割が自身に割り当てられている](/docs/services/key-protect?topic=key-protect-manage-access#manage-access)ことを確認します。
 
 2. {{site.data.keyword.keymanagementservicelong_notm}} サービス・インスタンスを作成します。
    1. [{{site.data.keyword.keymanagementservicelong_notm}} カタログ・ページ](https://cloud.ibm.com/catalog/services/key-protect)を開きます。
@@ -900,7 +900,7 @@ Portworx クラスターに対してストレージを要求してアプリで�
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>データについて要求する Portworx の入出力優先度を入力します。 指定可能な値は、`high`、`medium`、および `low` です。 Portworx クラスターのセットアップ時に、すべてのディスクが検査されて、そのデバイスのパフォーマンス・プロファイルが決定されます。 このプロファイル分類は、ワーカー・ノードのネットワーク帯域幅と、使用しているストレージ・デバイスのタイプによって決まります。 SDS ワーカー・ノードのディスクは、`high` として分類されます。 ディスクを仮想ワーカー・ノードに手動で接続した場合は、これらのディスクは `low` として分類されます。仮想ワーカー・ノードは低いネットワーク速度にしか対応していないからです。 </br><br> ストレージ・クラスを使用して PVC を作成する場合は、<code>parameters/repl</code> で指定するレプリカの数は入出力優先度より優先されます。 例えば、高速ディスクに保管するレプリカの数として 3 を指定した場合に、高速ディスクを備えたワーカー・ノードがクラスター内に 1 つしかない場合でも、PVC は正常に作成されます。 データは高速ディスクと低速ディスクの両方にまたがって複製されます。 </td>
+   <td>データについて要求する Portworx の入出力優先度を入力します。 指定可能な値は、`high`、`medium`、および `low` です。 Portworx クラスターのセットアップ時に、すべてのディスクが検査されて、そのデバイスのパフォーマンス・プロファイルが決定されます。 このプロファイル分類は、ワーカー・ノードのネットワーク帯域幅と、使用しているストレージ・デバイスのタイプによって決まります。 SDS ワーカー・ノードのディスクは、`high` として分類されます。 ディスクを仮想ワーカー・ノードに手動で接続した場合は、これらのディスクは `low` として分類されます。仮想ワーカー・ノードは低いネットワーク速度にしか対応していないからです。 </br><br> ストレージ・クラスを使用して PVC を作成する場合は、<code>parameters/repl</code> で指定するレプリカの数は入出力優先度より優先されます。 例えば、高速ディスクに保管するレプリカの数として 3 を指定した場合に、高速ディスクを備えたワーカー・ノードがクラスター内に 1 つしかない場合でも、PVC は正常に作成されます。データは高速ディスクと低速ディスクの両方にまたがって複製されます。 </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
@@ -1043,7 +1043,7 @@ Portworx クラスターに対してストレージを要求してアプリで�
       </tr>
     <tr>
     <td><code>spec.schedulerName</code></td>
-    <td>Portworx クラスター用のスケジューラーとして [Stork ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) を使用します。 Stork を使用すると、ポッドとそのポッドのデータを同じ場所に配置でき、ストレージのエラーが発生した場合にポッドをシームレスにマイグレーションでき、Portworx ボリュームのスナップショットを簡単に作成およびリストアできます。 </td>
+    <td>Portworx クラスター用のスケジューラーとして [Stork ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) を使用します。 Stork を使用すれば、ポッドとそのポッドのデータを同じ場所に配置でき、ストレージのエラーが発生した場合にポッドをシームレスにマイグレーションでき、Portworx ボリュームのスナップショットを簡単に作成およびリストアできます。</td>
     </tr>
     <tr>
     <td><code>spec.containers.image</code></td>
@@ -1257,4 +1257,4 @@ Portworx クラスターを削除すると、Portworx クラスター内のす�
 ## ヘルプとサポートの取得
 {: #portworx_help}
 
-Portworx の使用に関する問題が発生した場合や、特定のユース・ケースでの Portworx 構成についてチャットを希望する場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `portworx-on-iks` チャネルに質問を投稿してください。 IBM ID を使用して Slack にログインします。 自身の {{site.data.keyword.Bluemix_notm}} アカウントで IBM ID を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
+Portworx の使用に関する問題が発生した場合や、特定のユース・ケースでの Portworx 構成についてチャットを希望する場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `portworx-on-iks` チャネルに質問を投稿してください。 IBM ID を使用して Slack にログインします。 自身の {{site.data.keyword.cloud_notm}} アカウントで IBM ID を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。

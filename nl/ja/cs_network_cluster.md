@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, vlan
 
 subcollection: containers
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # サービス・エンドポイントまたは VLAN 接続の変更
 {: #cs_network_cluster}
 
@@ -36,13 +37,13 @@ subcollection: containers
 Kubernetes バージョン 1.11 以降を実行するクラスターでは、クラスターのプライベート・サービス・エンドポイントを有効/無効にできます。
 {: shortdesc}
 
-プライベート・サービス・エンドポイントがあれば、Kubernetes マスターにプライベートからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、プライベート・ネットワーク経由で Kubernetes マスターと通信できます。 プライベート・サービス・エンドポイントを有効にできるかどうかを判別するには、[ワーカーとマスターおよびユーザーとマスターの間の通信](/docs/containers?topic=containers-plan_clusters#internet-facing)を参照してください。プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
+プライベート・サービス・エンドポイントがあれば、Kubernetes マスターにプライベートからアクセスできます。 ワーカー・ノードと許可されたクラスター・ユーザーは、プライベート・ネットワーク経由で Kubernetes マスターと通信できます。 プライベート・サービス・エンドポイントを有効にできるかどうかを判別するには、[ワーカーとマスターおよびユーザーとマスターの間の通信](/docs/containers?topic=containers-plan_clusters#internet-facing)を参照してください。 プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
 
-[VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) および[サービス・エンドポイント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)のアカウントを有効にする前に、プライベート・サービス・エンドポイントのみを含むクラスターを作成しましたか? [パブリック・サービス・エンドポイントのセットアップ](#set-up-public-se)を試行して、サポート・ケースが処理されてアカウントが更新されるまで、クラスターを使用できるようにします。
+[VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) および[サービス・エンドポイント](/docs/resources?topic=resources-private-network-endpoints#getting-started)のアカウントを有効にする前に、プライベート・サービス・エンドポイントのみを含むクラスターを作成しましたか? [パブリック・サービス・エンドポイントのセットアップ](#set-up-public-se)を試行して、サポート・ケースが処理されてアカウントが更新されるまで、クラスターを使用できるようにします。
 {: tip}
 
-1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
+1. ご使用の IBM Cloud インフラストラクチャー・アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。 VRF が既に有効になっているかどうかを確認するには、`ibmcloud account show` コマンドを使用します。
+2. [{{site.data.keyword.cloud_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/resources?topic=resources-private-network-endpoints#getting-started)。
 3. プライベート・サービス・エンドポイントを有効にします。
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -65,13 +66,12 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、ク
 
 8. クラスターがファイアウォールの内側の環境にある場合:
   * [許可されたクラスター・ユーザーに対して、`kubectl` コマンドの実行を許可し、プライベート・サービス・エンドポイントを介してマスターにアクセスできるようにします。](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * 使用する予定のインフラストラクチャー・リソースや {{site.data.keyword.Bluemix_notm}} サービスの[プライベート IP へのアウトバウンド・ネットワーク・トラフィックを許可](/docs/containers?topic=containers-firewall#firewall_outbound)します。
+  * 使用する予定のインフラストラクチャー・リソースや {{site.data.keyword.cloud_notm}} サービスの[プライベート IP へのアウトバウンド・ネットワーク・トラフィックを許可](/docs/containers?topic=containers-firewall#firewall_outbound)します。
 
-9. オプション: プライベート・サービス・エンドポイントのみを使用するには、パブリック・サービス・エンドポイントを無効にします。
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+9.  オプション: プライベート・サービス・エンドポイントのみを使用するには、次のようにします。
+    1.  [パブリック・サービス・エンドポイントを無効にします](#disable-public-se)。
+    2.  [プライベート・サービス・エンドポイント上のマスターへのアクセスをセットアップします](/docs/containers?topic=containers-clusters#access_on_prem)。
+
 
 <br />
 
@@ -96,35 +96,34 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、ク
    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   </br>
-
-**無効にする手順**</br>
-パブリック・サービス・エンドポイントを無効にするには、まず、ワーカー・ノードが Kubernetes マスターと通信できるように、プライベート・サービス・エンドポイントを有効にする必要があります。
-1. プライベート・サービス・エンドポイントを有効にします。
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. プライベート・サービス・エンドポイントを使用するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
 3. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
-
-4. クラスター内のすべてのワーカー・ノードを更新して、プライベート・サービス・エンドポイント構成を反映させます。
-
-   <p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、[手動でワーカー・ノードを再ロードする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)必要があります。 再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
+4. クラスター内のすべてのワーカー・ノードを更新して、パブリック・サービス・エンドポイント構成を削除します。<p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)を使用してワーカー・ノードを手動で再ロードする必要があります。再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
    ```
    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
    ```
   {: pre}
-5. パブリック・サービス・エンドポイントを無効にします。
+   </br>
+
+{: #disable-public-se}
+**無効にする手順**</br>
+パブリック・サービス・エンドポイントを無効にするには、まず、ワーカー・ノードが Kubernetes マスターと通信できるように、プライベート・サービス・エンドポイントを有効にする必要があります。
+1. [プライベート・サービス・エンドポイントを有効にします](#set-up-private-se)。
+2. パブリック・サービス・エンドポイントを無効にします。
    ```
    ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
+3. パブリック・サービス・エンドポイントを削除するには、CLI プロンプトに従うか、または以下のコマンドを手動で実行して、Kubernetes マスター API サーバーをリフレッシュします。
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. 一度に使用不可にできるクラスター内のワーカー・ノードの最大数を制御する[構成マップを作成](/docs/containers?topic=containers-update#worker-up-configmap)します。 この構成マップによって、ワーカー・ノードを更新するときに、使用可能なワーカー・ノードに順番にアプリが再スケジュールされるので、アプリのダウン時間の発生を回避できます。
+5. クラスター内のすべてのワーカー・ノードを更新して、パブリック・サービス・エンドポイント構成を削除します。<p class="important">update コマンドを発行することで、ワーカー・ノードが再ロードされてサービス・エンドポイント構成が反映されます。 ワーカーを更新できない場合は、`ibmcloud ks worker-reload` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)を使用してワーカー・ノードを手動で再ロードする必要があります。再ロードする場合は、一度に使用不可にできるワーカー・ノードの最大数を制御するために、ワーカー・ノードの閉鎖、排出、順番の管理を確実に行ってください。</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
 
 ## パブリック・サービス・エンドポイントからプライベート・サービス・エンドポイントへの切り替え
 {: #migrate-to-private-se}
@@ -138,8 +137,8 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
 
 プライベート・サービス・エンドポイントは、いったん有効にしたら無効にすることはできないので注意してください。
 
-1. ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。
-2. [{{site.data.keyword.Bluemix_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)。
+1. ご使用の IBM Cloud インフラストラクチャー・アカウントで [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にします。 VRF が既に有効になっているかどうかを確認するには、`ibmcloud account show` コマンドを使用します。
+2. [{{site.data.keyword.cloud_notm}} アカウントでサービス・エンドポイントを使用できるようにします](/docs/resources?topic=resources-private-network-endpoints#getting-started)。
 3. プライベート・サービス・エンドポイントを有効にします。
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -160,11 +159,13 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
     ```
     {: pre}
 
-7. オプション: パブリック・サービス・エンドポイントを無効にします。
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+7.  オプション: プライベート・サービス・エンドポイントのみを使用するには、次のようにします。
+    1.  パブリック・サービス・エンドポイントを無効にします。
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [プライベート・サービス・エンドポイント上のマスターへのアクセスをセットアップします](/docs/containers?topic=containers-clusters#access_on_prem)。
 
 <br />
 
@@ -216,7 +217,7 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
      ```
      {: screen}
 
-  3. ゾーンに新しいパブリックまたはプライベート VLAN を注文する必要がある場合は、[{{site.data.keyword.Bluemix_notm}} コンソール](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)または以下のコマンドを使用して注文できます。 前の手順で示したように、プライベート VLAN とパブリック VLAN は、同じ **Router** のポッド ID を持つ、対応した VLAN でなければならないことを忘れないでください。 新しいパブリック VLAN とプライベート VLAN をペアにする場合は、それらの VLAN が対応していなければなりません。
+  3. ゾーンに新しいパブリックまたはプライベート VLAN を注文する必要がある場合は、[{{site.data.keyword.cloud_notm}} コンソール](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)または以下のコマンドを使用して注文できます。 前の手順で示したように、プライベート VLAN とパブリック VLAN は、同じ **Router** のポッド ID を持つ、対応した VLAN でなければならないことを忘れないでください。 新しいパブリック VLAN とプライベート VLAN をペアにする場合は、それらの VLAN が対応していなければなりません。
      ```
      ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
      ```
@@ -236,7 +237,7 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
       ```
       {: pre}
 
-    * プライベート VLAN のみを追加する例 ([VRF を有効にしたアカウントで複数のサービス・エンドポイントを使用している場合](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)に、パブリックとプライベートの両方の VLAN からプライベートのみの VLAN に変更する場合など)
+    * プライベート VLAN のみを追加する例 ([VRF を有効にしたアカウントで複数のサービス・エンドポイントを使用している場合](/docs/resources?topic=resources-private-network-endpoints#getting-started)に、パブリックとプライベートの両方の VLAN からプライベートのみの VLAN に変更する場合など)
       ```
       ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
       ```
@@ -248,7 +249,7 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
    ```
    {: pre}
 
-   前のネットワーク・メタデータを使用するワーカー・ノードを削除するには、ゾーンごとのワーカー数を変更して、前のゾーンごとのワーカー数の 2 倍になるようにします。 この手順の後半に、前のワーカー・ノードを閉鎖、排出、そして削除できます。
+   前のネットワーク・メタデータを使用するワーカー・ノードを削除するには、ゾーンごとのワーカー数を変更して、前のゾーンごとのワーカー数の 2 倍になるようにします。この手順の後半に、前のワーカー・ノードを閉鎖、排出、そして削除できます。
   {: tip}
 
 6. 出力で、適切な **パブリック IP** と **プライベート IP** を持つ新しいワーカー・ノードが作成されていることを確認します。 例えば、パブリックとプライベートの両方の VLAN からプライベートのみの VLAN にワーカー・プールを変更した場合は、新しいワーカー・ノードはプライベート IP のみを持ちます。 ワーカー・プールをプライベートのみの VLAN からパブリックとプライベートの両方の VLAN に変更した場合は、新しいワーカー・ノードはパブリック IP とプライベート IP の両方を持ちます。
@@ -289,4 +290,4 @@ Kubernetes バージョン 1.11 以降を実行するクラスターでは、プ
 
 8. オプション: クラスター内の各ワーカー・プールについて、手順 2 から 7 までを繰り返すことができます。 これらの手順が完了すると、クラスター内のすべてのワーカー・ノードに新しい VLAN がセットアップされます。
 
-9. クラスター内のデフォルトの ALB は、その IP アドレスが古い VLAN 上のサブネットからのものであるため、引き続きその VLAN にバインドされます。 ALB を VLAN 間で移動することはできないため、代わりに、[新しい VLAN 上に ALB を作成し、古い VLAN 上の ALB を無効化](/docs/containers?topic=containers-ingress#migrate-alb-vlan)できます。
+10. オプション: 古い VLAN 上のサブネットが不要になった場合は、[それらを削除](/docs/containers?topic=containers-subnets#remove-subnets)できます。

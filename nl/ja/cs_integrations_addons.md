@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -33,9 +33,9 @@ subcollection: containers
 管理対象 {{site.data.keyword.containerlong_notm}} アドオンを使用すると、Istio や Knative などのオープン・ソース機能を使用してクラスターを簡単に強化できます。 クラスターに追加するオープン・ソース・ツールのバージョンは、IBM によってテストされて、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。
 
 **管理対象アドオンの課金とサポートはどのような仕組みになっていますか?** </br>
-管理対象アドオンは、{{site.data.keyword.Bluemix_notm}} のサポート組織に完全に統合されています。 管理対象アドオンの使用に関する質問や問題がある場合は、いずれかの {{site.data.keyword.containerlong_notm}} サポート・チャネルを使用できます。 詳しくは、[ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)を参照してください。
+管理対象アドオンは、{{site.data.keyword.cloud_notm}} のサポート組織に完全に統合されています。 管理対象アドオンの使用に関する質問や問題がある場合は、いずれかの {{site.data.keyword.containerlong_notm}} サポート・チャネルを使用できます。 詳しくは、[ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)を参照してください。
 
-クラスターに追加するツールについて費用が生じる場合は、これらの費用は自動的に統合されて、{{site.data.keyword.containerlong_notm}} に関する課金の一部としてリストされます。 課金サイクルは、クラスター内でそのアドオンを有効にしたタイミングに応じて {{site.data.keyword.Bluemix_notm}} 側で決定されます。
+クラスターに追加するツールについて費用が生じる場合は、これらの費用は自動的に統合されて、{{site.data.keyword.containerlong_notm}} に関する課金の一部としてリストされます。 課金サイクルは、クラスター内でそのアドオンを有効にしたタイミングに応じて {{site.data.keyword.cloud_notm}} 側で決定されます。
 
 **どのような制限事項を考慮する必要がありますか?** </br>
 [Container Image Security Enforcer アドミッション・コントローラー](/docs/services/Registry?topic=registry-security_enforce#security_enforce)をクラスター内にインストールした場合は、そのクラスター内で管理対象アドオンを有効にすることはできません。
@@ -53,7 +53,7 @@ subcollection: containers
 ## 管理対象アドオンの更新
 {: #updating-managed-add-ons}
 
-各管理対象アドオンのバージョンは、{{site.data.keyword.Bluemix_notm}} によってテストされており、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。 アドオンのコンポーネントを {{site.data.keyword.containerlong_notm}} でサポートされている最新バージョンに更新するには、以下の手順を使用します。
+各管理対象アドオンのバージョンは、{{site.data.keyword.cloud_notm}} によってテストされており、{{site.data.keyword.containerlong_notm}} で使用することが承認されています。 アドオンのコンポーネントを {{site.data.keyword.containerlong_notm}} でサポートされている最新バージョンに更新するには、以下の手順を使用します。
 {: shortdesc}
 
 1. 対象のアドオンが最新バージョンかどうかを確認します。 `* (<version> latest)` が付いているアドオンはすべて更新できます。
@@ -66,8 +66,8 @@ subcollection: containers
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -87,7 +87,7 @@ subcollection: containers
 
    2. これらの CRD から作成されたすべてのリソースを保存します。
 
-4. Knative の場合のオプション: 以下のいずれかのリソースを変更した場合は、YAML ファイルを取得して、ローカル・マシンに保存してください。 これらのリソースのいずれかを変更した場合に、インストール済みのデフォルトを代わりに使用する場合は、そのリソースを削除してかまいません。数分後に、そのリソースはインストール済みデフォルト値を使用して再作成されます。
+4. Knative の場合のオプション: 以下のいずれかのリソースを変更した場合は、YAML ファイルを取得して、ローカル・マシンに保存してください。 これらのリソースのいずれかを変更した場合に、インストール済みのデフォルトを代わりに使用する場合は、そのリソースを削除してかまいません。 数分後に、そのリソースはインストール済みデフォルト値を使用して再作成されます。
   <table summary="Knative リソースの表">
   <caption>Knative リソース</caption>
   <thead><tr><th>リソース名</th><th>リソース・タイプ</th><th>名前空間</th></tr></thead>
@@ -182,6 +182,6 @@ subcollection: containers
 13. Istio の場合のオプション: ゲートウェイ構成ファイルで TLS セクションを使用する場合は、Envoy がシークレットにアクセスできるように、ゲートウェイを削除して再作成する必要があります。
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

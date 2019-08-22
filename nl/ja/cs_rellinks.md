@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -85,7 +85,7 @@ subcollection: containers
 
 **用語集**
 
-- [{{site.data.keyword.Bluemix_notm}} 用語集](/docs/overview/glossary?topic=overview-glossary#glossary)
+- [{{site.data.keyword.cloud_notm}} 用語集](/docs/overview/glossary?topic=overview-glossary#glossary)
 - [Kubernetes 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Docker 用語集![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/glossary/)
 

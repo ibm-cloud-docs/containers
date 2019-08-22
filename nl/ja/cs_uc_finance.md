@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,20 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # {{site.data.keyword.cloud_notm}} の金融サービス・ユース・ケース
 {: #cs_uc_finance}
 
-以下のユース・ケースでは、{{site.data.keyword.containerlong_notm}} のワークロードを使用することによって、高可用性、高性能コンピュート、{{site.data.keyword.ibmwatson}} の AI といった特徴を活用する方法や、クラスターを簡単に開始して開発を加速する方法を中心に説明します。
+以下のユース・ケースでは、{{site.data.keyword.containerlong}} のワークロードを使用することによって、高可用性、高性能コンピュート、{{site.data.keyword.ibmwatson}} の AI といった特徴を活用する方法や、クラスターを簡単に開始して開発を加速する方法を中心に説明します。
 {: shortdesc}
 
 ## 住宅ローン会社がコストを削減して法規制への適合を加速する
 {: #uc_mortgage}
 
-ある住宅ローン会社のリスク管理 VP は、1 日あたり 7,000 万件のレコードを処理しますが、オンプレミス・システムは低速で不正確なものでした。 ハードウェアはすぐに旧式となり、十分に活用されていなかったため、IT 費用が上昇していました。 ハードウェアの敷設を待っているうちに、法規制への準拠に遅れが出ていました。
+ある住宅ローン会社のリスク管理 VP は、1 日あたり 7,000 万件のレコードを処理しますが、オンプレミス・システムは低速で不正確なものでした。 ハードウェアはすぐに旧式となり、十分に活用されていなかったため、IT 費用が上昇していました。 ハードウェアの敷設を待っているうちに、法規制への準拠に遅れが出ていました。 
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} を使用する理由: 同社はリスク分析を改善するために {{site.data.keyword.containerlong_notm}} と IBM Cloud アナリティクス・サービスを採用することによって、コストの削減や世界規模での可用性の向上を実現し、最終的に法規制への適合を加速させました。 複数の地域で {{site.data.keyword.containerlong_notm}} を使用し、分析アプリをコンテナー化して世界中にデプロイした結果、可用性が高まり、現地の規制に対応できるようになりました。 これらのデプロイメントは、{{site.data.keyword.containerlong_notm}} に既に配備されている使い慣れたオープン・ソース・ツールを使うことで加速します。
+{{site.data.keyword.cloud_notm}} を使用する理由: 同社はリスク分析を改善するために {{site.data.keyword.containerlong_notm}} と IBM Cloud アナリティクス・サービスを採用することによって、コストの削減や世界規模での可用性の向上を実現し、最終的に法規制への適合を加速させました。 複数の地域で {{site.data.keyword.containerlong_notm}} を使用し、分析アプリをコンテナー化して世界中にデプロイした結果、可用性が高まり、現地の規制に対応できるようになりました。 これらのデプロイメントは、{{site.data.keyword.containerlong_notm}} に既に配備されている使い慣れたオープン・ソース・ツールを使うことで加速します。
 
 {{site.data.keyword.containerlong_notm}} と主要なテクノロジー:
 * [水平スケーリング](/docs/containers?topic=containers-app#highly_available_apps)
@@ -98,18 +97,20 @@ subcollection: containers
 * {{site.data.keyword.containerlong_notm}} と {{site.data.keyword.cloudant}} で提供される、スケーラブルで一貫性のある一連のストレージ・サービスとコンピュート・サービスにより、規制レポート作成のコストが削減されました。
 * 元のアプリは当初はクラウドに「リフト・アンド・シフト」されましたが、その後再設計されて、{{site.data.keyword.containerlong_notm}} 上で実行される連携マイクロサービスとなりました。 この処置により、開発とデプロイ所要時間はさらに短縮され、実験を比較的容易にできるのでさらなる革新が可能になりました。 同社はまた、市場やビジネスの状況を活用するために、より新しいバージョンのマイクロサービスを使用する革新的なアプリ (いわゆる、状況認識アプリとマイクロサービス) をリリースしました。
 
+
 ## 決済技術会社が開発者の生産性を合理化し、パートナーへの AI 対応ツールのデプロイ時間を 4 分の 1 に短縮
 {: #uc_payment_tech}
 
 ある開発責任者の下で働く開発者は、従来型のオンプレミス・ツールを使用しているため、プロトタイピングに遅延が生じている一方で、ハードウェアの調達を待っています。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} は、オープン・ソース・スタンダード・テクノロジーを使用してコンピュートを開始します。 この会社が {{site.data.keyword.containerlong_notm}} に移行した後、開発者は、DevOps に適したツール (ポータブル・コンテナーや、簡単に共有できるコンテナーなど) にアクセスできるようになりました。
+{{site.data.keyword.cloud_notm}} を使用する理由: {{site.data.keyword.containerlong_notm}} は、オープン・ソース・スタンダード・テクノロジーを使用してコンピュートを開始します。 この会社が {{site.data.keyword.containerlong_notm}} に移行した後、開発者は、DevOps に適したツール (ポータブル・コンテナーや、簡単に共有できるコンテナーなど) にアクセスできるようになりました。
 
-それ以降、開発者は実験を簡単にできるようになり、オープン・ツールチェーンを使用して開発とテスト用のシステムの変更を素早くプッシュできるようになりました。 従来型のソフトウェア開発ツールは、ワンクリックで AI クラウド・サービスをアプリに追加すると、一新されます。
+それ以降、開発者は実験を簡単にできるようになり、オープン・ツールチェーンを使用して開発とテスト用のシステムの変更を素早くプッシュできるようになりました。 従来型の開発ツールは、ワンクリックで AI クラウド・サービスをアプリに追加すると、一新されます。
 
 主要なテクノロジー:
 * [多様な CPU、RAM、ストレージ必要量に適合するクラスター](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.watson}} AI を使用した不正防止機能](https://www.ibm.com/cloud/watson-studio)
 * [{{site.data.keyword.contdelivery_full}} のオープン・ツールチェーンを含む DevOps ネイティブ・ツール](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -155,17 +156,16 @@ subcollection: containers
 
 また、ツールのロギングとモニタリングは、特に {{site.data.keyword.watson}} AI が使用されていたものについては、システムに迅速に統合されます。 開発者は、時間をかけて複雑なロギング・システムをビルドしなくても、稼働中のシステムをトラブルシューティングすることができます。 人件費削減の鍵となる要因は、IBM が Kubernetes を管理していることです。これにより開発者は、決済ツールの改良に注意を集中できるようになりました。
 
-セキュリティーを最優先: {{site.data.keyword.containerlong_notm}} のベアメタルを使用することで、機密性の高い決済ツールは、従来から備えていた独立性と、パブリック・クラウドの柔軟性とを兼ね備えるようになりました。 ベアメタルは、基盤となるハードウェアが悪用されていないことを検証できるトラステッド・コンピューティングを提供します。 脆弱性とマルウェアのスキャンは継続的に実行されます。
+セキュリティーを最優先: {{site.data.keyword.containerlong_notm}} のベアメタルを使用することで、機密性の高い決済ツールは、従来から備えていた独立性と、パブリック・クラウドの柔軟性とを兼ね備えるようになりました。 脆弱性とマルウェアのスキャンは継続的に実行されます。
 
 **ステップ 1: セキュアなコンピューティングにリフト・アンド・シフトする**
-* 非常に機密性の高いデータを管理するアプリは、トラステッド・コンピューティングのためにベアメタル上で実行される {{site.data.keyword.containerlong_notm}} 上で再ホストすることができます。 トラステッド・コンピューティングでは、基盤となるハードウェアが悪用されていないことを検証できます。
-* パブリック {{site.data.keyword.Bluemix_notm}} 内の {{site.data.keyword.containerlong_notm}} で実行されるコンテナー・イメージに仮想マシン・イメージをマイグレーションします。
+* パブリック {{site.data.keyword.Bluemix_notm}} 内の {{site.data.keyword.containerlong_notm}} で実行されるコンテナー・イメージに仮想マシン・イメージをマイグレーションします。 
 * そのコアから、脆弱性アドバイザーが既知のマルウェアを対象に、イメージ、ポリシー、コンテナー、パッケージの脆弱性スキャンを行います。
 * プライベート・データ・センターやオンプレミスの資本コストは大幅に削減され、ワークロード需要に基づいてスケーリングされるユーティリティー・コンピューティング・モデルに置き換えられます。
 * シンプルな Ingress アノテーションを使用して、サービスと API に対するポリシー駆動型の認証を一貫して実施します。 宣言型セキュリティーでは、{{site.data.keyword.appid_short_notm}} を使用してユーザー認証とトークン検証を保証できます。
 
 **ステップ 2: バックエンドの既存決済システムに接続して運用する**
-* IBM {{site.data.keyword.SecureGateway}} を使用して、オンプレミスのツール・システムへのセキュア接続を維持します。
+* IBM {{site.data.keyword.SecureGateway}} を使用して、残っているオンプレミスのツール・システムへのセキュア接続を維持します。
 * 標準化された DevOps のダッシュボードとプラクティスを Kubernetes を介して提供します。
 * 開発者は、開発とテスト用のクラスターでアプリを構築してテストを実施した後、{{site.data.keyword.contdelivery_full}} ツールチェーンを使用して、世界中の {{site.data.keyword.containerlong_notm}} クラスターにアプリをデプロイします。
 * {{site.data.keyword.containerlong_notm}} に組み込まれた HA ツールは、自己修復やロード・バランシングなどを行いながら、各地域内でワークロードのバランスを取ります。
@@ -180,3 +180,5 @@ subcollection: containers
 * それと同時にこの会社は、既存の技術的負債に対処するために、単純な反復バージョンを開発するタイム・ボックス方式を採用しました。
 * 処理されるトランザクションの数に応じて、指数関数的に運用をスケーリングすることができます。
 * 同時に、{{site.data.keyword.watson}} による新たな不正行為分析で、検出と予防が加速され、地域の平均と比較して 4 倍も不正行為が減少しました。
+
+

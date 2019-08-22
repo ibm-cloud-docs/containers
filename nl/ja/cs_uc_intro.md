@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # ユース・ケースの概要
 {: #cs_uc_intro}
 
-{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.Bluemix_notm}} サービスを一緒に使用した場合の強みをさまざまなユース・ケースで示します。これらの事例では、複数の業種とワークロードのタイプに焦点を当てています。 各ユース・ケースは特定の業種の視点で示されていますが、これらのワークロードはさまざまな業種にわたって典型的なものとなります。以下のようなワークロードのテーマについて説明しています。 
+{{site.data.keyword.containerlong_notm}} と {{site.data.keyword.cloud_notm}} サービスを一緒に使用した場合の強みをさまざまなユース・ケースで示します。 これらの事例では、複数の業種とワークロードのタイプに焦点を当てています。 各ユース・ケースは特定の業種の視点で示されていますが、これらのワークロードはさまざまな業種にわたって典型的なものとなります。 以下のようなワークロードのテーマについて説明しています。 
 * AI と機械学習
 * データとストレージ
 * DevOps

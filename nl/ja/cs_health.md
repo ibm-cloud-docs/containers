@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -47,11 +47,11 @@ subcollection: containers
 </dd>
 
 <dt>Fluentd と {{site.data.keyword.loganalysisfull_notm}} の組み合わせ</dt>
-<dd><p class="deprecated">以前は、Fluentd クラスター・コンポーネントによって収集されたログを {{site.data.keyword.loganalysisfull_notm}} に転送するためのロギング構成を作成できました。2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。 既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。 クラスターのログの収集を継続するには、{{site.data.keyword.la_full_notm}} をセットアップするか、ログを外部サーバーに転送するように構成を変更する必要があります。</p>
+<dd><p class="deprecated">以前は、Fluentd クラスター・コンポーネントによって収集されたログを {{site.data.keyword.loganalysisfull_notm}} に転送するためのロギング構成を作成できました。 2019 年 4 月 30 日をもって、新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。 既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。 クラスターのログの収集を継続するには、{{site.data.keyword.la_full_notm}} をセットアップするか、ログを外部サーバーに転送するように構成を変更する必要があります。</p>
 </dd>
 
 <dt>Fluentd と外部サーバーの組み合わせ</dt>
-<dd>クラスター・コンポーネントのログの収集、転送、表示のために、Fluentd を使用してロギング構成を作成できます。 ロギング構成を作成すると、[Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) クラスター・コンポーネントが、指定されたソースのパスからログを収集します。その後 Fluentd は、syslog プロトコルを受け入れる外部サーバーにこれらのログを転送できます。始めに、[クラスターとアプリのログの syslog への転送について](#logging)を参照してください。
+<dd>クラスター・コンポーネントのログの収集、転送、表示のために、Fluentd を使用してロギング構成を作成できます。 ロギング構成を作成すると、[Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) クラスター・コンポーネントが、指定されたソースのパスからログを収集します。 その後 Fluentd は、syslog プロトコルを受け入れる外部サーバーにこれらのログを転送できます。 始めに、[クラスターとアプリのログの syslog への転送について](#logging)を参照してください。
 </dd>
 
 <dt>{{site.data.keyword.cloudaccesstrailfull_notm}}</dt>
@@ -59,14 +59,15 @@ subcollection: containers
 <ul><li>クラスター管理イベントは自動的に生成され、{{site.data.keyword.cloudaccesstrailshort}} に転送されます。</li>
 <li>Kubernetes API サーバー監査イベントは自動的に生成されますが、そのログを Fluentd で {{site.data.keyword.cloudaccesstrailshort}} に転送するには、[ロギング構成を作成](#api_forward)する必要があります。</li></ul>
 追跡できる {{site.data.keyword.containerlong_notm}} イベントのタイプについて詳しくは、[Activity Tracker イベント](/docs/containers?topic=containers-at_events)を参照してください。 このサービスについて詳しくは、[Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) の資料を参照してください。
-  <p class="note">{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。クラスター管理イベントと Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。</p>
+<p class="note">{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。 クラスター管理イベントと Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。</p>
 </dd>
 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>クラスターの Kubernetes マスターのログを収集し、転送して表示するために、任意の時点のマスター・ログのスナップショットを取得して {{site.data.keyword.cos_full_notm}} バケット内に収集することができます。 このスナップショットには、ポッドのスケジューリング、デプロイメント、RBAC ポリシーなどの、API サーバー経由で送信されるすべてのものが含まれます。 始めに、[マスター・ログの収集](#collect_master)を参照してください。</dd>
 
-<dt>サード・パーティー・サービス</dt>
-<dd>特別な要件がある場合は、独自のロギング・ソリューションをセットアップできます。 クラスターに追加できるサード・パーティー・ロギング・サービスを[ロギングとモニタリングの統合](/docs/containers?topic=containers-supported_integrations#health_services)で確認してください。 `/var/log/pods/` パスからコンテナー・ログを収集できます。</dd>
+<dt>サード・パーティー・サービスまたは独自のロギングの構成</dt>
+<dd>特別な要件がある場合は、独自のロギング・ソリューションをセットアップできます。 クラスターに追加できるサード・パーティー・ロギング・サービスを[ロギングとモニタリングの統合](/docs/containers?topic=containers-supported_integrations#health_services)で確認してください。 個々の Kubernetes ポッドまたはその他のリソースのログを確認するには、`kubectl logs <resource_name>` を実行します。デフォルトでは、ログは名前空間の `/var/log` に保管されます。例えば、`/var/log/pods/` パスからコンテナー・ログを収集できます。独自のロギング・ソリューションでの分析に使用できる、永続ストレージ・デバイスに、ログをエクスポートするスクリプトを作成できます。<p class="important">個々のアプリ・ポッドのログを確認するには、`kubectl logs <pod name>` を実行します。Kubernetes ダッシュボードを使用してポッドのログのストリーミングをしないでください。Kubernetes ダッシュボードへのアクセスが中断される可能性があります。
+</p></dd>
 
 </dl>
 
@@ -87,11 +88,11 @@ subcollection: containers
 ## 非推奨: クラスターとアプリのログおよび Kubernetes API 監査ログの {{site.data.keyword.loganalysisfull_notm}} への転送
 {: #loga}
 
-以前は、Fluentd クラスター・コンポーネントによって収集されたログを {{site.data.keyword.loganalysisfull_notm}} に転送するためのロギング構成を作成できました。2019 年 4 月 30 日をもって、{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。 既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。
+以前は、Fluentd クラスター・コンポーネントによって収集されたログを {{site.data.keyword.loganalysisfull_notm}} に転送するためのロギング構成を作成できました。 2019 年 4 月 30 日をもって、{{site.data.keyword.loganalysisfull_notm}} は非推奨になりました。 新しい {{site.data.keyword.loganalysisshort_notm}} インスタンスをプロビジョンできなくなり、すべてのライト・プラン・インスタンスは削除されます。 既存のプレミアム・プラン・インスタンスは 2019 年 9 月 30 日までサポートされます。
 {: deprecated}
 
 クラスターのログの収集を継続するには、以下のオプションがあります。
-* {{site.data.keyword.la_full_notm}} をセットアップします。詳しくは、[{{site.data.keyword.la_full_notm}} への移行](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition)を参照してください。
+* {{site.data.keyword.la_full_notm}} をセットアップします。 詳しくは、[{{site.data.keyword.la_full_notm}} への移行](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition)を参照してください。
 * [ログを外部サーバーに転送するように構成を変更](#configuring)します。
 
 既存の {{site.data.keyword.loganalysisshort_notm}} インスタンスについて詳しくは、[{{site.data.keyword.loganalysisshort_notm}} の資料](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs)を参照してください。
@@ -108,7 +109,7 @@ subcollection: containers
 ### 外部サーバーへのログ転送について
 {: #logging}
 
-デフォルトでは、ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソース (コンテナーなど) に対してロギング構成を作成すると、Fluentd によってそのソースのパスから収集されたログは外部サーバーに転送されます。ソースからロギング・サービスの取り込みポートへのトラフィックは暗号化されます。
+デフォルトでは、ログはクラスター内の [Fluentd ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.fluentd.org/) アドオンによって収集されます。 クラスター内のソース (コンテナーなど) に対してロギング構成を作成すると、Fluentd によってそのソースのパスから収集されたログは外部サーバーに転送されます。 ソースからロギング・サービスの取り込みポートへのトラフィックは暗号化されます。
 {: shortdesc}
 
 **ログ転送を構成できるソースは何ですか?**
@@ -123,7 +124,7 @@ subcollection: containers
 
 2. `container`: 実行中のコンテナーによってログに記録される情報。</br>**Paths**: `STDOUT` または `STDERR` に出力される任意の情報。
 
-3. `アプリケーション`: アプリケーション・レベルで発生するイベントに関する情報。 これは、ログインの成功、ストレージに関する警告、アプリ・レベルで実行できるその他の操作などのイベントが発生したという通知である可能性があります。</br>**パス**: ログの転送先にするパスを設定できます。ただし、ログを送信するには、ロギング構成で絶対パスを使用する必要があります。そうしないとログは読み取られません。 パスがワーカー・ノードにマウントされている場合は、シンボリック・リンクが作成されている可能性があります。 例: 指定されたパスが `/usr/local/spark/work/app-0546/0/stderr` であるのに、実際にはログが `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr` に送信されている場合、ログは読み取れません。
+3. `アプリケーション`: アプリケーション・レベルで発生するイベントに関する情報。 これは、ログインの成功、ストレージに関する警告、アプリ・レベルで実行できるその他の操作などのイベントが発生したという通知である可能性があります。</br>**パス**: ログの転送先にするパスを設定できます。 ただし、ログを送信するには、ロギング構成で絶対パスを使用する必要があります。そうしないとログは読み取られません。 パスがワーカー・ノードにマウントされている場合は、シンボリック・リンクが作成されている可能性があります。 例: 指定されたパスが `/usr/local/spark/work/app-0546/0/stderr` であるのに、実際にはログが `/usr/local/spark-1.0-hadoop-1.2/work/app-0546/0/stderr` に送信されている場合、ログは読み取れません。
 
 4. `ストレージ`: クラスター内にセットアップされた永続ストレージに関する情報。 ストレージ・ログは、DevOps パイプラインおよび製品リリースの一部として問題判別ダッシュボードおよびアラートをセットアップするのに役立ちます。 `注**: パス **/var/log/kubelet.log` および `/var/log/syslog` にもストレージ・ログが含まれていますが、これらのパスにあるログは `kubernetes` および `worker` ログ・ソースによって収集されます。</br>**パス**:
     * `/var/log/ibmc-s3fs.log`
@@ -218,7 +219,7 @@ subcollection: containers
 
 **Fluentd は自分で更新し続ける必要がありますか?**
 
-ロギングやフィルターの構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](/docs/containers?topic=containers-update#logging-up)を参照してください。
+ロギングやフィルターの構成を変更するには、Fluentd ロギング・アドオンが最新バージョンである必要があります。 デフォルトでは、このアドオンに対する自動更新が有効になっています。 自動更新を使用不可にするには、[クラスターのアドオンの更新: ロギング用の Fluentd](/docs/containers?topic=containers-update#logging-up)を参照してください。
 
 **クラスター内の 1 つのソースから、一部のログだけを転送し、その他のログは転送しないようにすることは可能ですか?**
 
@@ -230,12 +231,12 @@ subcollection: containers
 ### クラスターとアプリのログの転送
 {: #enable-forwarding}
 
-クラスターとアプリのロギングの構成を作成します。フラグを使用することによって、異なるロギング・オプションを区別できます。
+クラスターとアプリのロギングの構成を作成します。 フラグを使用することによって、異なるロギング・オプションを区別できます。
 {: shortdesc}
 
 **`udp` または `tcp` プロトコルを介してユーザー自身のサーバーにログを転送する**
 
-1. [**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+1. [**エディター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 2. ログ・ソースがあるクラスターの場合: [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -249,7 +250,7 @@ subcollection: containers
 
 4. ログ転送構成を作成します。
     ```
-    ibmcloud ks logging-config-create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <containers> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ibmcloud ks logging-config-create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
     {: pre}
 
@@ -260,7 +261,7 @@ subcollection: containers
 以下のステップは、一般的な説明です。 実稼働環境でコンテナーを使用する前に、必要なセキュリティー条件を満たしていることを確認してください。
 {: tip}
 
-1. 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+1. 以下の [{{site.data.keyword.cloud_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
     * クラスターに対する**エディター**または**管理者**のプラットフォーム役割
     * `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
 
@@ -296,7 +297,7 @@ Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="h
 * 現在は、このロギング構成のすべてのクラスターで、デフォルトの監査ポリシーが使用されます。
 * 現在、フィルターはサポートされていません。
 * クラスターごとに 1 つの `kube-audit` 構成しか設定できませんが、ロギング構成と Webhook を作成することで、{{site.data.keyword.cloudaccesstrailshort}} と外部サーバーにログを転送できます。
-* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
+* クラスターに対する[**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 
 **始める前に**
 
@@ -382,7 +383,7 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
 ### 転送されるログのフィルタリング
 {: #filter-logs}
 
-一定期間における特定のログをフィルターで除外することで、外部サーバーに転送するログを選択できます。フラグを使用することによって、異なるフィルター操作オプションを区別できます。
+一定期間における特定のログをフィルターで除外することで、外部サーバーに転送するログを選択できます。 フラグを使用することによって、異なるフィルター操作オプションを区別できます。
 {: shortdesc}
 
 <table>
@@ -481,7 +482,7 @@ Kubernetes API 監査ログを転送するには、以下のようにします�
 **更新**</br>
 既に作成したロギング構成を更新できます。
 ```
-ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <containers> --app-paths <paths_to_logs>
+ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
 ```
 {: pre}
 
@@ -514,9 +515,9 @@ Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="h
 * 現在は、このロギング構成のすべてのクラスターで、デフォルトの監査ポリシーが使用されます。
 * 現在、フィルターはサポートされていません。
 * クラスターごとに 1 つの `kube-audit` 構成しか設定できませんが、ロギング構成と Webhook を作成することで、{{site.data.keyword.cloudaccesstrailshort}} と外部サーバーにログを転送できます。
-* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
+* クラスターに対する[**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)が必要です。
 
-{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。
+{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。 Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。
 {: note}
 
 **始める前に**
@@ -592,10 +593,10 @@ Kubernetes 監査ログについて詳しくは、Kubernetes 資料の<a href="h
     {: screen}
 
 3. 転送する Kubernetes API 監査イベントを表示するには、以下のようにします。
-  1. {{site.data.keyword.Bluemix_notm}} アカウントにログインします。
+  1. {{site.data.keyword.cloud_notm}} アカウントにログインします。
   2. カタログから、{{site.data.keyword.containerlong_notm}} のインスタンスと同じアカウントで、{{site.data.keyword.cloudaccesstrailshort}} サービスのインスタンスをプロビジョンします。
   3. {{site.data.keyword.cloudaccesstrailshort}} ダッシュボードの**「管理」**タブで、アカウント・ドメインまたはスペース・ドメインを選択します。
-    * **アカウント・ログ**: クラスター管理イベントと Kubernetes API サーバー監査イベントは、イベントが生成される {{site.data.keyword.Bluemix_notm}} 地域の**アカウント・ドメイン**で参照できます。
+    * **アカウント・ログ**: クラスター管理イベントと Kubernetes API サーバー監査イベントは、イベントが生成される {{site.data.keyword.cloud_notm}} 地域の**アカウント・ドメイン**で参照できます。
     * **スペース・ログ**: ステップ 2 でロギング構成を構成したときにスペースを指定した場合は、{{site.data.keyword.cloudaccesstrailshort}} サービスがプロビジョンされている Cloud Foundry スペースに関連付けられた**スペース・ドメイン**で、これらのイベントを参照できます。
   4. **「Kibana で表示」**をクリックします。
   5. ログを表示する時間フレームを設定します。 デフォルトは 24 時間です。
@@ -617,12 +618,12 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
 
 **始める前に**
 
-* {{site.data.keyword.Bluemix_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev)。
-* クラスターに対する[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+* {{site.data.keyword.cloud_notm}} カタログから {{site.data.keyword.cos_short}} の[インスタンスをプロビジョンします](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev)。
+* クラスターに対する[**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 **スナップショットの作成**
 
-1. [この入門チュートリアル](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets)に従って、{{site.data.keyword.Bluemix_notm}} コンソールを使用して Object Storage バケットを作成します。
+1. [この入門チュートリアル](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started#gs-create-buckets)に従って、{{site.data.keyword.cloud_notm}} コンソールを使用して Object Storage バケットを作成します。
 
 2. 作成したバケット内で [HMAC サービス資格情報](/docs/services/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials)を生成します。
   1. {{site.data.keyword.cos_short}} ダッシュボードの**「サービス資格情報」**タブで、**「新規資格情報」**をクリックします。
@@ -652,7 +653,7 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
       </tr>
       <tr>
         <td><code>--cos-endpoint <em>&lt;location_of_COS_bucket&gt;</em></code></td>
-        <td>ログの保管場所となるバケットの {{site.data.keyword.cos_short}} エンドポイント (地域のエンドポイント、複数の地域にまたがるエンドポイント、または単一データ・センターのエンドポイント)。使用可能なエンドポイントについては、{{site.data.keyword.cos_short}} の資料で [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) を参照してください。</td>
+        <td>ログの保管場所となるバケットの {{site.data.keyword.cos_short}} エンドポイント (地域のエンドポイント、複数の地域にまたがるエンドポイント、または単一データ・センターのエンドポイント)。 使用可能なエンドポイントについては、{{site.data.keyword.cos_short}} の資料で [Endpoints and storage locations](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints) を参照してください。</td>
       </tr>
       <tr>
         <td><code>--hmac-key-id <em>&lt;HMAC_access_key_ID&gt;</em></code></td>
@@ -676,7 +677,7 @@ Kubernetes API サーバー・ログは自動的にストリーミングされ�
   ```
   {: screen}
 
-4. 要求の状況を確認します。 スナップショットが完了するまでには多少時間を要することがありますが、要求が正常に完了するかどうかを確認できます。 マスター・ログが含まれるファイルの名前が応答の中で見つかります。{{site.data.keyword.Bluemix_notm}} コンソールを使用してこのファイルをダウンロードできます。
+4. 要求の状況を確認します。 スナップショットが完了するまでには多少時間を要することがありますが、要求が正常に完了するかどうかを確認できます。 マスター・ログが含まれるファイルの名前が応答の中で見つかります。{{site.data.keyword.cloud_notm}} コンソールを使用してこのファイルをダウンロードできます。
 
   ```
   ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
@@ -719,13 +720,13 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
   <dt>Kubernetes ダッシュボード</dt>
     <dd>Kubernetes ダッシュボードは、ワーカー・ノードの正常性の確認、Kubernetes リソースの検索、コンテナー化アプリのデプロイ、ロギングとモニタリング情報を使用したアプリのトラブルシューティングを行える管理 Web インターフェースです。 Kubernetes ダッシュボードにアクセスする方法について詳しくは、[{{site.data.keyword.containerlong_notm}} での Kubernetes ダッシュボードの起動](/docs/containers?topic=containers-app#cli_dashboard)を参照してください。</dd>
 
-  <dt>非推奨: {{site.data.keyword.Bluemix_notm}} コンソールのクラスター概要ページ内および <code>ibmcloud ks cluster-get</code> の出力内のメトリック・ダッシュボード</dt>
-    <dd>{{site.data.keyword.containerlong_notm}} には、クラスターの正常性と能力、そしてクラスター・リソースの使用方法に関する情報が表示されます。 このコンソールを使用して、クラスターのスケールアウト、永続ストレージの作業、{{site.data.keyword.Bluemix_notm}} サービス・バインディングによるクラスターへの機能の追加を行うことができます。 メトリックを表示するには、**「Kubernetes」**>**「クラスター」**ダッシュボードに移動して、クラスターを選択して、**「メトリック」**リンクをクリックします。
-<p class="deprecated">{{site.data.keyword.Bluemix_notm}} コンソールのクラスター概要ページ内および `ibmcloud ks cluster-get` の出力内のメトリック・ダッシュボードへのリンクは非推奨になりました。2019 年 5 月 4 日以降に作成されたクラスターは、メトリック・ダッシュボード・リンク付きでは作成されません。 2019 年 5 月 3 日以前に作成されたクラスターには、引き続きメトリック・ダッシュボードへのリンクが含まれます。</p></dd>
+  <dt>非推奨: {{site.data.keyword.cloud_notm}} コンソールのクラスター概要ページ内および <code>ibmcloud ks cluster-get</code> の出力内のメトリック・ダッシュボード</dt>
+    <dd>{{site.data.keyword.containerlong_notm}} には、クラスターの正常性と能力、そしてクラスター・リソースの使用方法に関する情報が表示されます。 このコンソールを使用して、クラスターのスケールアウト、永続ストレージの作業、{{site.data.keyword.cloud_notm}} サービス・バインディングによるクラスターへの機能の追加を行うことができます。 メトリックを表示するには、**「Kubernetes」**>**「クラスター」**ダッシュボードに移動して、クラスターを選択して、**「メトリック」**リンクをクリックします。
+  <p class="deprecated">{{site.data.keyword.cloud_notm}} コンソールのクラスター概要ページ内および `ibmcloud ks cluster-get` の出力内のメトリック・ダッシュボードへのリンクは非推奨になりました。 2019 年 5 月 4 日以降に作成されたクラスターは、メトリック・ダッシュボード・リンク付きでは作成されません。 2019 年 5 月 3 日以前に作成されたクラスターには、引き続きメトリック・ダッシュボードへのリンクが含まれます。</p></dd>
 
   <dt>{{site.data.keyword.monitoringlong_notm}}</dt>
-    <dd><p>標準クラスターのメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.Bluemix_notm}} アカウントにあります。 クラスターの作成時に {{site.data.keyword.Bluemix_notm}} スペースを指定した場合、メトリックはそのスペースに配置されます。 コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。 これらのメトリックが送信され、Grafana で使用できるようになります。 メトリックについて詳しくは、[{{site.data.keyword.containerlong_notm}}　のモニター](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov)を参照してください。</p>
-    <p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.Bluemix_notm}} アカウントまたはスペースを選択します。</p>
+    <dd><p>標準クラスターのメトリックは、Kubernetes クラスターを作成したときにログインした {{site.data.keyword.cloud_notm}} アカウントにあります。 クラスターの作成時に {{site.data.keyword.cloud_notm}} スペースを指定した場合、メトリックはそのスペースに配置されます。 コンテナーのメトリックはクラスターにデプロイされたすべてのコンテナーについて自動的に収集されます。 これらのメトリックが送信され、Grafana で使用できるようになります。 メトリックについて詳しくは、[{{site.data.keyword.containerlong_notm}}　のモニター](/docs/services/cloud-monitoring/containers?topic=cloud-monitoring-monitoring_bmx_containers_ov#monitoring_bmx_containers_ov)を参照してください。</p>
+    <p>Grafana ダッシュボードにアクセスするには、以下のいずれかの URL にアクセスし、クラスターを作成した {{site.data.keyword.cloud_notm}} アカウントまたはスペースを選択します。</p>
     <table summary="表の 1 行目は両方の列にまたがっています。残りの行は左から右に読みます。1 列目はサーバー・ゾーン、2 列目は対応する IP アドレスです。">
       <caption>モニター・トラフィック用に開く IP アドレス</caption>
             <thead>
@@ -773,9 +774,9 @@ Kubernetes マスターはすべて IBM によって継続的にモニターさ�
 Kubernetes クラスターの状態を確認して、そのクラスターの可用性と容量、発生する可能性のある問題に関する情報を取得します。
 {:shortdesc}
 
-特定のクラスターに関する情報 (そのクラスターのゾーン、サービス・エンドポイント URL、Ingress サブドメイン、バージョン、所有者など) を表示するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)を使用します。`--showResources` フラグを指定すると、ストレージ・ポッドのアドオンやパブリック IP とプライベート IP のサブネット VLAN など、さらに多くのクラスター・リソースを表示できます。
+特定のクラスターに関する情報 (そのクラスターのゾーン、サービス・エンドポイント URL、Ingress サブドメイン、バージョン、所有者など) を表示するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)を使用します。 `--showResources` フラグを指定すると、ストレージ・ポッドのアドオンやパブリック IP とプライベート IP のサブネット VLAN など、さらに多くのクラスター・リソースを表示できます。
 
-クラスター全体、IBM 管理のマスター、およびワーカー・ノードに関する情報を確認できます。クラスターとワーカー・ノードのトラブルシューティングを行うには、[クラスターのトラブルシューティング ](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters)を参照してください。
+クラスター全体、IBM 管理のマスター、およびワーカー・ノードに関する情報を確認できます。 クラスターとワーカー・ノードのトラブルシューティングを行うには、[クラスターのトラブルシューティング ](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters)を参照してください。
 
 ### クラスターの状態
 {: #states_cluster}
@@ -792,11 +793,11 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
    <tbody>
 <tr>
    <td>`Aborted`</td>
-   <td>Kubernetes マスターがデプロイされる前にユーザーからクラスターの削除が要求されました。 クラスターの削除が完了すると、クラスターはダッシュボードから除去されます。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。</td>
+   <td>Kubernetes マスターがデプロイされる前にユーザーからクラスターの削除が要求されました。 クラスターの削除が完了すると、クラスターはダッシュボードから除去されます。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。</td>
    </tr>
  <tr>
      <td>`Critical`</td>
-     <td>Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。 </td>
+     <td>Kubernetes マスターにアクセスできないか、クラスター内のワーカー・ノードがすべてダウンしています。 クラスターで {{site.data.keyword.keymanagementservicelong_notm}} が有効な場合、{{site.data.keyword.keymanagementserviceshort}} コンテナーがクラスター・シークレットの暗号化または復号に失敗することがあります。その場合、`kubectl get secrets` を実行すると、エラーとともに詳細情報を表示できます。</td>
     </tr>
    <tr>
      <td>`Delete failed`</td>
@@ -804,7 +805,7 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
    </tr>
    <tr>
      <td>`Deleted`</td>
-     <td>クラスターは削除されましたが、まだダッシュボードからは除去されていません。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。 </td>
+     <td>クラスターは削除されましたが、まだダッシュボードからは除去されていません。 クラスターが長時間この状態になっている場合は、[{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。</td>
    </tr>
    <tr>
    <td>`Deleting`</td>
@@ -812,7 +813,7 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
    </tr>
    <tr>
      <td>`Deploy failed`</td>
-     <td>Kubernetes マスターのデプロイメントを完了できませんでした。 この状態はお客様には解決できません。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いて、IBM Cloud サポートに連絡してください。</td>
+     <td>Kubernetes マスターのデプロイメントを完了できませんでした。 この状態はお客様には解決できません。 [{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いて、IBM Cloud サポートに連絡してください。</td>
    </tr>
      <tr>
        <td>`Deploying`</td>
@@ -828,7 +829,7 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
      </tr>
    <tr>
      <td>`Requested`</td>
-     <td>クラスターを作成し、Kubernetes マスターとワーカー・ノードのインフラストラクチャーを注文するための要求が送信されました。 クラスターのデプロイメントが開始されると、クラスターの状態は「<code>Deploying</code>」に変わります。 クラスターが長時間「<code>Requested</code>」状態になっている場合は、[{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。 </td>
+     <td>クラスターを作成し、Kubernetes マスターとワーカー・ノードのインフラストラクチャーを注文するための要求が送信されました。 クラスターのデプロイメントが開始されると、クラスターの状態は「<code>Deploying</code>」に変わります。 クラスターが長時間「<code>Requested</code>」状態になっている場合は、[{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いてください。 </td>
    </tr>
    <tr>
      <td>`Updating`</td>
@@ -836,11 +837,13 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
    </tr>
    <tr>
     <td>`Unsupported`</td>
-    <td>クラスターで実行される [Kubernetes バージョン](/docs/containers?topic=containers-cs_versions#cs_versions)はサポートされなくなりました。クラスターの正常性は、アクティブにモニターされなくなり、報告もされなくなりました。また、ワーカー・ノードを追加したり再ロードしたりすることはできません。重要なセキュリティー更新およびサポートを引き続き受けるには、クラスターを更新する必要があります。[バージョン更新の準備アクション](/docs/containers?topic=containers-cs_versions#prep-up)を確認してから、サポートされている Kubernetes バージョンに[クラスターを更新](/docs/containers?topic=containers-update#update)します。<br><br><p class="note">最も古いサポート対象バージョンより 3 バージョン以上古いバージョンのクラスターを更新することはできません。この状況を回避するには、現行バージョンより 1 バージョンまたは 2 バージョンだけ新しい Kubernetes バージョンに (1.12 から 1.14 へなど) クラスターを更新します。さらに、クラスターでバージョン 1.5、1.7、または 1.8 が実行されている場合、そのバージョンは古すぎるため更新できません。代わりに、[クラスターを作成](/docs/containers?topic=containers-clusters#clusters)して、そのクラスターに[アプリをデプロイ](/docs/containers?topic=containers-app#app)する必要があります。</p></td>
+    <td>クラスターで実行される [Kubernetes バージョン](/docs/containers?topic=containers-cs_versions#cs_versions)はサポートされなくなりました。 クラスターの正常性は、アクティブにモニターされなくなり、報告もされなくなりました。 また、ワーカー・ノードを追加したり再ロードしたりすることはできません。 重要なセキュリティー更新およびサポートを引き続き受けるには、クラスターを更新する必要があります。 [バージョン更新の準備アクション](/docs/containers?topic=containers-cs_versions#prep-up)を確認してから、サポートされている Kubernetes バージョンに[クラスターを更新](/docs/containers?topic=containers-update#update)します。<br><br><p class="note">最も古いサポート対象バージョンより 3 バージョン以上古いバージョンのクラスターを更新することはできません。 この状況を回避するには、現行バージョンより 1 バージョンまたは 2 バージョンだけ新しい Kubernetes バージョンに (1.12 から 1.14 へなど) クラスターを更新します。 さらに、クラスターでバージョン 1.5、1.7、または 1.8 が実行されている場合、そのバージョンは古すぎるため更新できません。 代わりに、[クラスターを作成](/docs/containers?topic=containers-clusters#clusters)して、そのクラスターに[アプリをデプロイ](/docs/containers?topic=containers-app#app)する必要があります。</p></td>
    </tr>
     <tr>
        <td>`Warning`</td>
-       <td>クラスター内の 1 つ以上のワーカー・ノードが使用不可です。ただし、他のワーカー・ノードが使用可能であるため、ワークロードを引き継ぐことができます。 </td>
+       <td><ul><li>クラスター内の 1 つ以上のワーカー・ノードが使用不可です。ただし、他のワーカー・ノードが使用可能であるため、ワークロードを引き継ぐことができます。 使用不可のワーカー・ノードの[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)を試してみてください。</li>
+       <li>クラスターにワーカー・ロードがありません (ワーカー・ノードなしでクラスターを作成した場合や、クラスターからすべてのワーカー・ノードを手動で削除した場合など)。[ワーカー・プールのサイズを変更](/docs/containers?topic=containers-add_workers#resize_pool)してワーカー・ノードを追加することにより `Warning` 状態からリカバリーしてください。</li>
+       <li>クラスターのコントロール・プレーン操作に失敗しました。コンソールで対象クラスターを表示するか、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行して、[詳細なデバッグのために**「マスター状況」**を確認](/docs/containers?topic=containers-cs_troubleshoot#debug_master)してください。</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -851,18 +854,18 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
 ### Master state
 {: #states_master}
 
-{{site.data.keyword.containerlong_notm}} には可用性の高いレプリカを備えた IBM 管理のマスターが含まれ、このマスターには、セキュリティー・パッチ更新を自動的に適用する機能と、インシデントの発生時に自動的にリカバリーする機能があります。このクラスター・マスターの正常性、状況、および状態を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行します。
+{{site.data.keyword.containerlong_notm}} には可用性の高いレプリカを備えた IBM 管理のマスターが含まれ、このマスターには、セキュリティー・パッチ更新を自動的に適用する機能と、インシデントの発生時に自動的にリカバリーする機能があります。 このクラスター・マスターの正常性、状況、および状態を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` を実行します。
 {: shortdesc} 
 
 **Master Health**<br>
-**Master Health** にはマスター・コンポーネントの状態が反映され、対処が必要な場合に通知します。health (正常性) は次のいずれかになります。
-*   `error`: マスターは作動不可です。IBM は自動的に通知を受け、この問題を解決するためのアクションを実行します。マスターが `normal` になるまで、正常性のモニタリングを続行できます。
-*   `normal`: マスターは作動可能で、正常です。アクションは不要です。
-*   `unavailable`: マスターがアクセス不能になっている可能性があります。その場合は、ワーカー・プールのサイズ変更などのいくつかのアクションを一時的に実行できません。IBM は自動的に通知を受け、この問題を解決するためのアクションを実行します。マスターが `normal` になるまで、正常性のモニタリングを続行できます。 
-*   `unsupported`: マスターでは、サポートされないバージョンの Kubernetes が実行されています。マスターの正常性を `normal` に戻すには、[クラスターを更新](/docs/containers?topic=containers-update)する必要があります。
+**Master Health** にはマスター・コンポーネントの状態が反映され、対処が必要な場合に通知します。 health (正常性) は次のいずれかになります。
+*   `error`: マスターは作動不可です。 IBM は自動的に通知を受け、この問題を解決するためのアクションを実行します。 マスターが `normal` になるまで、正常性のモニタリングを続行できます。
+*   `normal`: マスターは作動可能で、正常です。 アクションは不要です。
+*   `unavailable`: マスターがアクセス不能になっている可能性があります。その場合は、ワーカー・プールのサイズ変更などのいくつかのアクションを一時的に実行できません。 IBM は自動的に通知を受け、この問題を解決するためのアクションを実行します。 マスターが `normal` になるまで、正常性のモニタリングを続行できます。 
+*   `unsupported`: マスターでは、サポートされないバージョンの Kubernetes が実行されています。 マスターの正常性を `normal` に戻すには、[クラスターを更新](/docs/containers?topic=containers-update)する必要があります。
 
 **Master Status (状況) と Master State (状態)**<br>
-**Master Status** には、master state からどの操作が進行中であるかについて、詳細が示されます。この status (状況) には、マスターが同じ state (状態) で保たれた期間を示すタイム・スタンプが含まれます (例: `Ready (1 month ago)`)。**Master State** には、マスター上で実行できる操作 (デプロイ、更新、削除など) のライフサイクルが反映されます。次の表では、各状態について説明しています。
+**Master Status** には、master state からどの操作が進行中であるかについて、詳細が示されます。 この status (状況) には、マスターが同じ state (状態) で保たれた期間を示すタイム・スタンプが含まれます (例: `Ready (1 month ago)`)。 **Master State** には、マスター上で実行できる操作 (デプロイ、更新、削除など) のライフサイクルが反映されます。 次の表では、各状態について説明しています。
 
 <table summary="表の行はすべて左から右に読みます。1 列目は master state、2 列目は説明です。">
 <caption>Master state</caption>
@@ -873,28 +876,28 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
    <tbody>
 <tr>
    <td>`deployed`</td>
-   <td>マスターは正常にデプロイされています。状況をチェックして、マスターが `Ready` であることを確認するか、更新を利用可能かどうかを確認します。</td>
+   <td>マスターは正常にデプロイされています。 状況をチェックして、マスターが `Ready` であることを確認するか、更新を利用可能かどうかを確認します。</td>
    </tr>
  <tr>
      <td>`deploying`</td>
-     <td>マスターは現在デプロイ中です。クラスターに対するワーカー・ノードの追加などの操作は、状態が `deployed` になった後に行ってください。</td>
+     <td>マスターは現在デプロイ中です。 クラスターに対するワーカー・ノードの追加などの操作は、状態が `deployed` になった後に行ってください。</td>
     </tr>
    <tr>
      <td>`deploy_failed`</td>
-     <td>マスターをデプロイできませんでした。IBM サポートが通知を受けて、問題の解決に取り組みます。**Master Status** フィールドで詳細情報を確認するか、状態が `deployed` になるまで待ちます。</td>
+     <td>マスターをデプロイできませんでした。 IBM サポートが通知を受けて、問題の解決に取り組みます。 **Master Status** フィールドで詳細情報を確認するか、状態が `deployed` になるまで待ちます。</td>
    </tr>
    <tr>
    <td>`deleting`</td>
-   <td>クラスターを削除したため、マスターは現在削除中です。削除を元に戻すことはできません。クラスターを削除すると、クラスターは完全に除去されるため、マスターの状態を確認できなくなります。</td>
+   <td>クラスターを削除したため、マスターは現在削除中です。 削除を元に戻すことはできません。 クラスターを削除すると、クラスターは完全に除去されるため、マスターの状態を確認できなくなります。</td>
    </tr>
      <tr>
        <td>`delete_failed`</td>
-       <td>マスターを削除できませんでした。IBM サポートが通知を受けて、問題の解決に取り組みます。クラスターの再削除を試行しても、この問題を解決することはできません。代わりに、**Master Status** フィールドで詳細情報を確認するか、クラスターの削除を待ちます。</td>
+       <td>マスターを削除できませんでした。 IBM サポートが通知を受けて、問題の解決に取り組みます。 クラスターの再削除を試行しても、この問題を解決することはできません。 代わりに、**Master Status** フィールドで詳細情報を確認するか、クラスターの削除を待ちます。</td>
       </tr>
       <tr>
        <td>`updating`</td>
-       <td>マスターの Kubernetes バージョンを更新中です。この更新は、自動的に適用されるパッチ更新であるか、クラスターを更新することで手動で適用したマイナー・バージョンまたはメジャー・バージョンである可能性があります。この更新中に、高可用性マスターは要求の処理を続行でき、アプリのワークロードとワーカー・ノードは引き続き実行されます。マスターの更新が完了したら、[ワーカー・ノードを更新](/docs/containers?topic=containers-update#worker_node)できます。<br><br>
-       更新が失敗すると、マスターは `deployed` 状態に戻り、前のバージョンの実行を続行します。IBM サポートが通知を受けて、問題の解決に取り組みます。**Master Status** フィールドで、更新が失敗したかどうかを確認できます。</td>
+       <td>マスターの Kubernetes バージョンを更新中です。 この更新は、自動的に適用されるパッチ更新であるか、クラスターを更新することで手動で適用したマイナー・バージョンまたはメジャー・バージョンである可能性があります。 この更新中に、高可用性マスターは要求の処理を続行でき、アプリのワークロードとワーカー・ノードは引き続き実行されます。 マスターの更新が完了したら、[ワーカー・ノードを更新](/docs/containers?topic=containers-update#worker_node)できます。<br><br>
+       更新が失敗すると、マスターは `deployed` 状態に戻り、前のバージョンの実行を続行します。 IBM サポートが通知を受けて、問題の解決に取り組みます。 **Master Status** フィールドで、更新が失敗したかどうかを確認できます。</td>
     </tr>
    </tbody>
  </table>
@@ -920,9 +923,9 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
     <td>ワーカー・ノードは、次のようなさまざまな理由で Critical 状態になることがあります。 <ul><li>閉鎖と排出を行わずに、ワーカー・ノードのリブートを開始した。。 ワーカー・ノードをリブートすると、<code>containerd</code>、<code>kubelet</code>、<code>kube-proxy</code>、および <code>calico</code> でデータ破損が発生する可能性があります。 </li>
     <li>ワーカー・ノードにデプロイしたポッドが、[メモリー ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) と [CPU ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/) のリソース制限を使用していない。 リソース制限を使用しないと、ポッドが、使用可能なリソースをすべて使い果たして、このワーカー・ノード上の他のポッドを実行するためのリソースがなくなる可能性があります。 この過剰なワークロードにより、ワーカー・ノードに障害が発生します。 </li>
     <li>数百、数千ものコンテナーを長時間実行した後、<code>containerd</code>、<code>kubelet</code>、または <code>calico</code> がリカバリー不能な状態になった。 </li>
-    <li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャー (SoftLayer) の現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li>
+    <li>ワーカー・ノード用にセットアップした Virtual Router Appliance が停止したために、ワーカー・ノードと Kubernetes マスターの間の通信が切断された。 </li><li> {{site.data.keyword.containerlong_notm}} または IBM Cloud インフラストラクチャーの現在のネットワーキングの問題によって、ワーカー・ノードと Kubernetes マスターが通信できなくなっている。</li>
     <li>ワーカー・ノードが容量を使い尽くした。 ワーカー・ノードの <strong>Status</strong> に <strong>Out of disk</strong> または <strong>Out of memory</strong> と表示されていないか確認します。 ワーカー・ノードが容量を使い尽くしている場合は、ワーカー・ノードのワークロードを減らすか、ワークロードの負荷を分散できるようにクラスターにワーカー・ノードを追加してください。</li>
-    <li>デバイスが [{{site.data.keyword.Bluemix_notm}} コンソールのリソース・リスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/resources) で電源オフにされた。 リソース・リストを開き、**「デバイス」**リストでワーカー・ノード ID を見つけます。 アクション・メニューで、**「パワーオン」**をクリックします。</li></ul>
+    <li>デバイスが [{{site.data.keyword.cloud_notm}} コンソールのリソース・リスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/resources) で電源オフにされた。 リソース・リストを開き、**「デバイス」**リストでワーカー・ノード ID を見つけます。 アクション・メニューで、**「パワーオン」**をクリックします。</li></ul>
     多くの場合、ワーカー・ノードを[再ロードする](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)と問題を解決できます。 ワーカー・ノードを再ロードすると、最新の[パッチ・バージョン](/docs/containers?topic=containers-cs_versions#version_types)がワーカー・ノードに適用されます。 メジャー・バージョンとマイナー・バージョンは変更されません。 必ず、ワーカー・ノードを再ロードする前に、ワーカー・ノードを閉鎖して排出してください。これにより、既存のポッドが正常終了し、残りのワーカー・ノードに再スケジュールされます。 </br></br> ワーカー・ノードを再ロードしても問題が解決しない場合は、次の手順に進み、ワーカー・ノードのトラブルシューティングを続けてください。 </br></br><strong>ヒント:</strong> [ワーカー・ノードのヘルス・チェックを構成し、Autorecovery を有効にする](/docs/containers?topic=containers-health#autorecovery)ことができます。 Autorecovery は、構成された検査に基づいて正常でないワーカー・ノードを検出すると、ワーカー・ノードの OS の再ロードのような修正アクションをトリガーします。 Autorecovery の仕組みについて詳しくは、[Autorecovery のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/) を参照してください。
     </td>
    </tr>
@@ -960,7 +963,7 @@ Kubernetes クラスターの状態を確認して、そのクラスターの可
     </tr>
     <tr>
      <td>`Unknown`</td>
-     <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。 Kubernetes マスターが正常に更新された後でもワーカー・ノードが長期間この状態のままである場合は、ワーカー・ノードの[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)を試行してください。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いて、{{site.data.keyword.Bluemix_notm}} サポートに連絡してください。</li></ul></td>
+     <td>次のいずれかの理由で、Kubernetes マスターにアクセスできません。<ul><li>Kubernetes マスターの更新を要求しました。 更新中は、ワーカー・ノードの状態を取得できません。 Kubernetes マスターが正常に更新された後でもワーカー・ノードが長期間この状態のままである場合は、ワーカー・ノードの[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)を試行してください。</li><li>ワーカー・ノードを保護している別のファイアウォールが存在するか、最近ファイアウォールの設定を変更した可能性があります。 {{site.data.keyword.containerlong_notm}} では、ワーカー・ノードと Kubernetes マスター間で通信を行うには、特定の IP アドレスとポートが開いている必要があります。 詳しくは、[ファイアウォールがあるためにワーカー・ノードが接続しない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)を参照してください。</li><li>Kubernetes マスターがダウンしています。 [{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)を開いて、{{site.data.keyword.cloud_notm}} サポートに連絡してください。</li></ul></td>
 </tr>
    <tr>
       <td>`Warning`</td>
@@ -982,14 +985,14 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
 {: note}
 
 開始前に、以下のことを行います。
-- 以下の [{{site.data.keyword.Bluemix_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
+- 以下の [{{site.data.keyword.cloud_notm}} IAM 役割](/docs/containers?topic=containers-users#platform)があることを確認します。
     - クラスターに対する**管理者**のプラットフォーム役割
     - `kube-system` 名前空間に対する**ライター**または**管理者**のサービス役割
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 自動リカバリーを構成するには、以下のようにします。
 
-1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.cloud_notm}} Helm リポジトリーを追加します。
 
 2.  tiller がサービス・アカウントでインストールされていることを確認します。
     ```
@@ -1004,9 +1007,7 @@ Autorecovery が正常に機能するためには、1 つ以上の正常なノ�
     ```
     {: screen}
 
-3. 検査を JSON 形式で定義する構成マップ・ファイルを作成します。 例えば、次の YAML ファイルでは、3 つの検査 (1 つの HTTP 検査と 2 つの Kubernetes API サーバー検査) を定義しています。 この 3 種類の検査とそれらの検査の個々の構成要素については、YAML ファイルの例に続く表を参照してください。
-</br>
-   **ヒント:** 構成マップの `data` セクションに、各検査を固有キーとして定義します。
+3. 検査を JSON 形式で定義する構成マップ・ファイルを作成します。 例えば、次の YAML ファイルでは、3 つの検査 (1 つの HTTP 検査と 2 つの Kubernetes API サーバー検査) を定義しています。 この 3 種類の検査とそれらの検査の個々の構成要素については、YAML ファイルの例に続く表を参照してください。<p class="tip">*構成マップの `data` セクションに、各検査を固有キーとして定義します。</p>
 
    ```
    kind: ConfigMap

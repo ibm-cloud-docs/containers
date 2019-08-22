@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -28,43 +28,63 @@ subcollection: containers
 # IBM Cloud サービス・バインディングを使用したサービスの追加
 {: #service-binding}
 
-{{site.data.keyword.Bluemix_notm}} サービスを追加して、Watson AI、データ、セキュリティー、モノのインターネット (IoT) などの領域の追加機能によって Kubernetes クラスターを拡張します。
+{{site.data.keyword.cloud_notm}} サービスを追加して、Watson AI、データ、セキュリティー、モノのインターネット (IoT) などの領域の追加機能によって Kubernetes クラスターを拡張します。
 {:shortdesc}
 
 **どのようなタイプのサービスをクラスターにバインドできますか?** </br>
-{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加する際は、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) に対応しているサービスと、Cloud Foundry に基づくサービスのいずれかを選択できます。 IAM 対応サービスは、より細かいアクセス制御を可能にし、{{site.data.keyword.Bluemix_notm}} リソース・グループ内で管理できます。 Cloud Foundry サービスは、Cloud Foundry の組織とスペースに追加する必要があり、リソース・グループに追加することはできません。 Cloud Foundry サービス・インスタンスへのアクセスを制御するには、Cloud Foundry の役割を使用します。 IAM 対応サービスと Cloud Foundry サービスについて詳しくは、[リソースとは](/docs/resources?topic=resources-resource#resource)を参照してください。
+{{site.data.keyword.cloud_notm}} サービスをクラスターに追加する際は、{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) に対応しているサービスと、Cloud Foundry に基づくサービスのいずれかを選択できます。 IAM 対応サービスは、より細かいアクセス制御を可能にし、{{site.data.keyword.cloud_notm}} リソース・グループ内で管理できます。 Cloud Foundry サービスは、Cloud Foundry の組織とスペースに追加する必要があり、リソース・グループに追加することはできません。 Cloud Foundry サービス・インスタンスへのアクセスを制御するには、Cloud Foundry の役割を使用します。 IAM 対応サービスと Cloud Foundry サービスについて詳しくは、[リソースとは](/docs/resources?topic=resources-resource#resource)を参照してください。
 
-サポートされている {{site.data.keyword.Bluemix_notm}} サービスのリストについては、[{{site.data.keyword.Bluemix_notm}} のカタログ](https://cloud.ibm.com/catalog)を参照してください。
+サポートされている {{site.data.keyword.cloud_notm}} サービスのリストについては、[{{site.data.keyword.cloud_notm}} のカタログ](https://cloud.ibm.com/catalog)を参照してください。
 
-**{{site.data.keyword.Bluemix_notm}} サービス・バインディングとは何ですか?**</br>
-サービス・バインディングは、{{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報を作成して、これらの資格情報をクラスター内の Kubernetes シークレットに保管するための迅速な方法です。 クラスターにサービスをバインドするには、まずそのサービスのインスタンスをプロビジョンする必要があります。 次に、`ibmcloud ks cluster-service-bind` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)を使用して、サービス資格情報と Kubernetes シークレットを作成します。 この Kubernetes シークレットは、データを保護するために、etcd 内で自動的に暗号化されます。
+**{{site.data.keyword.cloud_notm}} サービス・バインディングとは何ですか?**</br>
+サービス・バインディングは、{{site.data.keyword.cloud_notm}} サービスのサービス資格情報を迅速に作成できる方法です。そのパブリック・サービス・エンドポイントを使用して、クラスターの Kubernetes シークレット内にこれらの資格情報を保管することにより作成します。クラスターにサービスをバインドするには、まずそのサービスのインスタンスをプロビジョンする必要があります。 次に、`ibmcloud ks cluster-service-bind` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind)を使用して、サービス資格情報と Kubernetes シークレットを作成します。 この Kubernetes シークレットは、データを保護するために、etcd 内で自動的に暗号化されます。
 
-シークレットをさらに保護したいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](/docs/containers?topic=containers-encryption#keyprotect)もらい、{{site.data.keyword.Bluemix_notm}} サービス・インスタンスの資格情報を保管するシークレットなどの、新しいシークレットと既存のシークレットを暗号化します。
+シークレットをさらに保護したいですか? クラスター管理者に連絡してクラスター内の [{{site.data.keyword.keymanagementservicefull}} を有効にして](/docs/containers?topic=containers-encryption#keyprotect)もらい、{{site.data.keyword.cloud_notm}} サービス・インスタンスの資格情報を保管するシークレットなどの、新しいシークレットと既存のシークレットを暗号化します。
 {: tip}
 
-**すべての {{site.data.keyword.Bluemix_notm}} サービスをクラスター内で使用できますか?**</br>
-サービス・バインディングを使用できるのは、サービス・キーをサポートしているサービスのみに対してです。サービス・キーがサポートされている場合は、そのサービスの資格情報を自動的に作成して Kubernetes シークレットに保管できます。 サービス・キーをサポートしているサービスのリストを確認するには、[{{site.data.keyword.Bluemix_notm}} サービスを使用するための外部アプリの使用可能化](/docs/resources?topic=resources-externalapp#externalapp)を参照してください。
+**すでに {{site.data.keyword.cloud_notm}} サービスがあります。それでも {{site.data.keyword.cloud_notm}} サービス・バインディングを使用できますか?**</br>
+はい。命名要件を満たすサービスを使用し、サービス資格情報を再利用できます。 
+
+* **命名**: サービス名が以下の正規表現形式であることを確認します。許可される名前の例として、`myservice` や `example.com` などがあります。許可されない文字には、スペースや下線などがあります。
+  ```
+  [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+  ```
+  {: screen}
+* **サービス資格情報**: 既存のサービス資格情報を使用するには、`ibmcloud ks cluster-service-bind` コマンドに `--key` フラグを指定して、サービス資格情報の名前を指定します。{{site.data.keyword.cloud_notm}} サービス・バインディングは、既存のサービス資格情報を使用して Kubernetes シークレットを自動的に作成します。 
+
+**プライベート・サービス・エンドポイントを使用するサービス資格情報を使用する場合はどうすればよいですか?**</br>
+デフォルトでは、`ibmcloud ks cluster-service-bind` コマンドは、パブリック・サービス・エンドポイントを使用してサービス資格情報を作成します。プライベート・サービス・エンドポイントを使用するには、プライベート・サービス・エンドポイントを使用するサービスのサービス資格情報を手動で作成してから、`--key` オプションを使用して既存のサービス資格情報の名前を指定する必要があります。  
+
+使用しているサービスが、まだプライベート・サービス・エンドポイントをサポートしていない可能性もあります。 プライベート専用クラスターがある場合は、プライベート・サービス・エンドポイントを使用するサービス資格情報を使用するか、パブリック IP アドレスとポートを開いてサービスに接続する必要があります。 
+
+**すべての {{site.data.keyword.cloud_notm}} サービスをクラスター内で使用できますか?**</br>
+サービス・バインディングを使用できるのは、サービス・キーをサポートしているサービスのみに対してです。サービス・キーがサポートされている場合は、そのサービスの資格情報を自動的に作成して Kubernetes シークレットに保管できます。 サービス・キーをサポートしているサービスのリストを確認するには、[{{site.data.keyword.cloud_notm}} サービスを使用するための外部アプリの使用可能化](/docs/resources?topic=resources-externalapp#externalapp)を参照してください。
 
 サービス・キーをサポートしていないサービスでは、通常、アプリで使用できる API が提供されます。 サービス・バインディング方式では、アプリに対する API アクセスは自動的にセットアップされません。 必ず、ご使用のサービスの API 資料を参照して、アプリに API インターフェースを実装してください。
 
 ## IBM Cloud サービスをクラスターに追加する
 {: #bind-services}
 
-{{site.data.keyword.Bluemix_notm}} サービス・バインディングを使用して、ご使用の {{site.data.keyword.Bluemix_notm}} サービスのサービス資格情報を自動的に作成して、これらの資格情報を Kubernetes シークレットに保管します。
+{{site.data.keyword.cloud_notm}} サービス・バインディングを使用して、ご使用の {{site.data.keyword.cloud_notm}} サービスのサービス資格情報を自動的に作成して、これらの資格情報を Kubernetes シークレットに保管します。
 {: shortdesc}
 
 開始前に、以下のことを行います。
 - 以下の役割があることを確認してください。
-    - サービスをバインドするクラスターに対する[**エディター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム・アクセス役割](/docs/containers?topic=containers-users#platform)
-    - サービスをバインドする Kubernetes 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)
+    - サービスをバインドするクラスターに対する[**エディター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム・アクセス役割](/docs/containers?topic=containers-users#platform)
+    - サービスをバインドする Kubernetes 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)
     - Cloud Foundry サービスの場合: サービスをプロビジョンするスペースに対する[**開発者**の Cloud Foundry 役割](/docs/iam?topic=iam-mngcf#mngcf)
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-クラスターに {{site.data.keyword.Bluemix_notm}} サービスを追加するには、以下の手順を実行します。
+クラスターに {{site.data.keyword.cloud_notm}} サービスを追加するには、以下の手順を実行します。
 
-1. [{{site.data.keyword.Bluemix_notm}} サービスのインスタンスを作成します](/docs/resources?topic=resources-externalapp#externalapp)。
-    * 一部の {{site.data.keyword.Bluemix_notm}} サービスは、選択された地域でのみ使用可能です。 サービスがクラスターと同じ地域で使用可能な場合にのみ、サービスをクラスターにバインドできます。 さらに、ワシントン DC ゾーンでサービス・インスタンスを作成する場合は、CLI を使用する必要があります。
+1. [{{site.data.keyword.cloud_notm}} サービスのインスタンスを作成します](/docs/resources?topic=resources-externalapp#externalapp)。
+    * 一部の {{site.data.keyword.cloud_notm}} サービスは、選択された地域でのみ使用可能です。 サービスがクラスターと同じ地域で使用可能な場合にのみ、サービスをクラスターにバインドできます。 さらに、ワシントン DC ゾーンでサービス・インスタンスを作成する場合は、CLI を使用する必要があります。
     * **IAM 対応サービスの場合**: クラスターと同じリソース・グループ内にサービス・インスタンスを作成する必要があります。 サービスは 1 つのリソース・グループ内にしか作成できず、作成後にそのリソース・グループを変更することはできません。
+    * サービス名が次の正規表現形式になっていることを確認してください。許可される名前の例として、`myservice` や `example.com` などがあります。許可されない文字には、スペースや下線などがあります。
+      ```
+      [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+      ```
+      {: screen}
 
 2. 作成したサービスのタイプを確認し、サービス・インスタンスの**名前**をメモします。
    - **Cloud Foundry サービス:**
@@ -80,7 +100,7 @@ subcollection: containers
      ```
      {: screen}
 
-  - **{{site.data.keyword.Bluemix_notm}}IAM 対応サービス:**
+  - **{{site.data.keyword.cloud_notm}}IAM 対応サービス:**
      ```
      ibmcloud resource service-instances
      ```
@@ -93,7 +113,7 @@ subcollection: containers
      ```
      {: screen}
 
-   {{site.data.keyword.Bluemix_notm}} ダッシュボードに異なるサービス・タイプが**「Cloud Foundry サービス」**および**「サービス」**として表示される場合もあります。
+   {{site.data.keyword.cloud_notm}} ダッシュボードに異なるサービス・タイプが**「Cloud Foundry サービス」**および**「サービス」**として表示される場合もあります。
 
 3. サービスを追加するために使用するクラスターの名前空間を識別します。
    ```
@@ -101,7 +121,11 @@ subcollection: containers
    ```
    {: pre}
 
-4. サービスをクラスターにバインドして、サービスのサービス資格情報を作成して、それらの資格情報を Kubernetes シークレットに保管します。 既存のサービス資格情報がある場合は、`--key` フラグを使用してそれらの資格情報を指定します。 IAM 対応サービスの場合は、これらの資格情報は**ライター**のサービス・アクセス役割を使用して自動的に作成されますが、`--role` フラグを使用して異なるサービス・アクセス役割を指定できます。 `--key` フラグを使用する場合は、`--role` フラグを組み込まないでください。
+4. サービスをクラスターにバインドして、パブリック・サービス・エンドポイントを使用するサービスのサービス資格情報を作成して、それらの資格情報を Kubernetes シークレットに保管します。既存のサービス資格情報がある場合は、`--key` フラグを使用してそれらの資格情報の名前を指定します。IAM 対応サービスの場合は、これらの資格情報は**ライター**のサービス・アクセス役割を使用して自動的に作成されますが、`--role` フラグを使用して異なるサービス・アクセス役割を指定できます。 `--key` フラグを使用する場合は、`--role` フラグを組み込まないでください。
+
+   サービスがプライベート・サービス・エンドポイントをサポートしている場合は、プライベート・サービス・エンドポイントを使用してサービス資格情報を手動で作成してから、`--key` フラグを使用して資格情報の名前を指定できます。
+   {: tip}
+   
    ```
    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
    ```
@@ -158,7 +182,7 @@ subcollection: containers
       ```
       {: screen}
 
-   3. オプション: 前のステップでデコードしたサービス資格情報を、{{site.data.keyword.Bluemix_notm}} ダッシュボードのサービス・インスタンスで検索したサービス資格情報と比較します。
+   3. オプション: 前のステップでデコードしたサービス資格情報を、{{site.data.keyword.cloud_notm}} ダッシュボードのサービス・インスタンスで検索したサービス資格情報と比較します。
 
 6. これでサービスがクラスターにバインドされたため、[Kubernetes シークレットのサービス資格情報にアクセスする](#adding_app)ために、アプリを構成する必要があります。
 
@@ -166,7 +190,7 @@ subcollection: containers
 ## アプリからのサービス資格情報へのアクセス
 {: #adding_app}
 
-アプリから {{site.data.keyword.Bluemix_notm}} サービス・インスタンスにアクセスするには、Kubernetes シークレットに保管されているサービス資格情報をアプリで使用可能にする必要があります。
+アプリから {{site.data.keyword.cloud_notm}} サービス・インスタンスにアクセスするには、Kubernetes シークレットに保管されているサービス資格情報をアプリで使用可能にする必要があります。
 {: shortdesc}
 
 サービス・インスタンスの資格情報は base64 エンコードであり、JSON 形式でシークレットの内部に保管されます。 シークレットにあるデータにアクセスするには、次のオプションの中から選択します。
@@ -175,14 +199,14 @@ subcollection: containers
 <br>
 
 開始前に、以下のことを行います。
--  `kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+-  `kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加します](#bind-services)。
+- [{{site.data.keyword.cloud_notm}} サービスをクラスターに追加します](#bind-services)。
 
 ### シークレットをボリュームとしてポッドにマウントする
 {: #mount_secret}
 
-シークレットをボリュームとしてポッドにマウントすると、`binding` という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。 JSON 形式の `binding` ファイルには、{{site.data.keyword.Bluemix_notm}} サービスにアクセスするために必要なすべての情報と資格情報が格納されます。
+シークレットをボリュームとしてポッドにマウントすると、`binding` という名前のファイルがボリューム・マウント・ディレクトリーに保管されます。 JSON 形式の `binding` ファイルには、{{site.data.keyword.cloud_notm}} サービスにアクセスするために必要なすべての情報と資格情報が格納されます。
 {: shortdesc}
 
 1.  クラスター内の使用可能なシークレットをリストし、シークレットの **name** をメモします。 **Opaque** タイプのシークレットを探します。 複数のシークレットが存在する場合は、クラスター管理者に連絡して、サービスに対応する正しいシークレットを確認してください。
@@ -438,7 +462,7 @@ Kubernetes シークレットのサービス資格情報およびその他のキ
 
       出力例:
       ```
-      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      BINDING={"apikey":"<API_key>","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"<password>","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
       ```
       {: screen}
 

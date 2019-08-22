@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Ingress のロギングとモニタリング
 {: #ingress_health}
 
@@ -38,7 +39,7 @@ Ingress をトラブルシューティングしたり Ingress アクティビテ
 
 Ingress ALB のログは自動的に収集されます。 ALB ログを表示するには、次の 2 つの方法から選択します。
 * クラスターで [Ingress サービスのロギング構成を作成します](/docs/containers?topic=containers-health#configuring)。
-* CLI からログを確認します。 **注**: 少なくとも、`kube-system` 名前空間に対する [**リーダー**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)が必要です。
+* CLI からログを確認します。 **注**: 少なくとも、`kube-system` 名前空間に対する [**リーダー**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)が必要です。
     1. ALB のポッドの ID を取得します。
         ```
         kubectl get pods -n kube-system | grep alb
@@ -70,7 +71,7 @@ Ingress ALB のログは自動的に収集されます。 ALB ログを表示す
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>クライアントがアプリに送信した要求パッケージの IP アドレス。 この IP は、以下の状況に基づいて変更されることがあります。<ul><li>アプリへのクライアント要求がクラスターに送信されると、その要求は、ALB を公開しているロード・バランサー・サービス・ポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、ロード・バランサーは異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 要求パッケージのソース IP アドレスが、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。</li><li>[ソース IP の保持が有効な場合](/docs/containers?topic=containers-ingress#preserve_source_ip)、アプリへのクライアント要求の元の IP アドレスが代わりに記録されます。</li></ul></td>
+<td>クライアントがアプリに送信した要求パッケージの IP アドレス。 この IP は、以下の状況に基づいて変更されることがあります。<ul><li>アプリへのクライアント要求がクラスターに送信されると、その要求は、ALB を公開しているロード・バランサー・サービス・ポッドに転送されます。 ロード・バランサー・サービス・ポッドと同じワーカー・ノードにアプリ・ポッドが存在しない場合、ロード・バランサーは異なるワーカー・ノード上のアプリ・ポッドに要求を転送します。 要求パッケージのソース IP アドレスが、アプリ・ポッドが実行されているワーカー・ノードのパブリック IP アドレスに変更されます。</li><li>[ソース IP の保持が有効な場合](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)、アプリへのクライアント要求の元の IP アドレスが代わりに記録されます。</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -113,19 +114,19 @@ Ingress ALB のログは自動的に収集されます。 ALB ログを表示す
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
-<td>要求処理時間 (ミリ秒分解能の秒単位で測定)。 この時間は、ALB がクライアント要求の最初のバイトを読み取ったときに開始され、ALB が応答の最後のバイトをクライアントに送信するときに停止されます。 ログは、要求処理時間が停止した直後に書き込まれます。</td>
+<td>要求処理時間 (ミリ秒分解能の秒単位で測定)。この時間は、ALB がクライアント要求の最初のバイトを読み取ったときに開始され、ALB が応答の最後のバイトをクライアントに送信するときに停止されます。 ログは、要求処理時間が停止した直後に書き込まれます。</td>
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>ALB がバックエンド・アプリのアップストリーム・サーバーから応答を受信するのにかかる時間 (ミリ秒分解能の秒単位で測定)。 いくつかの応答の時間は、<code>$upstream_addr</code> 変数のアドレスのようにコンマとコロンで区切られます。</td>
+<td>ALB がバックエンド・アプリのアップストリーム・サーバーから応答を受信するのにかかる時間 (ミリ秒分解能の秒単位で測定)。いくつかの応答の時間は、コンマとコロンで区切られます。</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>ALB がバックエンド・アプリのアップストリーム・サーバーとの接続を確立するのにかかる時間 (ミリ秒分解能の秒単位で測定)。 Ingress リソース構成で TLS/SSL が有効になっている場合、この時間にはハンドシェークに費やされた時間が含まれます。 いくつかの接続の時間は、<code>$upstream_addr</code> 変数のアドレスのようにコンマとコロンで区切られます。</td>
+<td>ALB がバックエンド・アプリのアップストリーム・サーバーとの接続を確立するのにかかる時間 (ミリ秒分解能の秒単位で測定)。Ingress リソース構成で TLS/SSL が有効になっている場合、この時間にはハンドシェークに費やされた時間が含まれます。 いくつかの接続の時間は、コンマとコロンで区切られます。</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>ALB がバックエンド・アプリのアップストリーム・サーバーから応答ヘッダーを受信するのにかかる時間 (ミリ秒分解能の秒単位で測定)。 いくつかの接続の時間は、<code>$upstream_addr</code> 変数のアドレスのようにコンマとコロンで区切られます。</td>
+<td>ALB がバックエンド・アプリのアップストリーム・サーバーから応答ヘッダーを受信するのにかかる時間 (ミリ秒分解能の秒単位で測定)。いくつかの接続の時間は、コンマとコロンで区切られます。</td>
 </tr>
 </tbody></table>
 
@@ -137,7 +138,7 @@ Ingress ALB に関して収集されるログの内容とフォーマットを�
 
 デフォルトでは、Ingress ログは JSON 形式にフォーマットされ、一般的なログ・フィールドが示されます。 ただし、ログのどの構成要素を転送するか、各構成要素をログ出力中にどう配置するかを選択して、カスタム・ログ形式を作成することも可能です。
 
-始める前に、`kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+始める前に、`kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応する構成ファイルを編集します。
 
@@ -263,13 +264,11 @@ ALB メトリック・エクスポーターは、NGINX ディレクティブ `vh
 ALB メトリック・エクスポーターのポッドは、ALB がデプロイされた同じワーカー・ノードにデプロイされる必要があります。 エッジ・ワーカー・ノードで ALB を実行していて、そのエッジ・ノードに他のワークロードのデプロイを回避するテイントが適用されていると、メトリック・エクスポーターのポッドをスケジュールできません。 `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-` を実行して、そのテイントを解除する必要があります。
 {: note}
 
-1.  **重要**: [こちらの指示に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をインストールして、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。
+1.  **重要**: [こちらの指示に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をインストールして、{{site.data.keyword.cloud_notm}} Helm リポジトリーを追加します。
 
-2. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。 この Helm チャートによって、ALB メトリック・エクスポーターがデプロイされて、`alb-metrics-service-account` サービス・アカウントが `kube-system` 名前空間内に作成されます。 <alb-ID> は、メトリックを収集する ALB の ID に置き換えてください。 クラスター内の ALB の ID を表示するには、<code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code> を実行します。
-  モニターする ALB ごとに 1 つのチャートをデプロイする必要があります。
-  {: note}
+2. Helm チャート `ibmcloud-alb-metrics-exporter` をクラスターにインストールします。 この Helm チャートによって、ALB メトリック・エクスポーターがデプロイされて、`alb-metrics-service-account` サービス・アカウントが `kube-system` 名前空間内に作成されます。 `<zone>` を ALB が存在するゾーンに置き換え、`<alb_ID>` をメトリックを収集する ALB の ID に置き換えます。クラスター内の ALB の ID を表示するには、`ibmcloud ks albs --cluster <cluster_name>` を実行します。
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb_ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -294,7 +293,9 @@ ALB メトリック・エクスポーターのポッドは、ALB がデプロイ
   ```
   {:screen}
 
-5. オプション: [Prometheus エージェントをインストール](#prometheus-agent)することで、エクスポーターによって作成されたメトリックを取り込んで、これらのメトリックを Prometheus ダッシュボードに表示します。
+5. クラスター内の ALB ごとに、ステップ 2 から 4 を繰り返します。
+
+6. オプション: [Prometheus エージェントをインストール](#prometheus-agent)することで、エクスポーターによって作成されたメトリックを取り込んで、これらのメトリックを Prometheus ダッシュボードに表示します。
 
 ### Prometheus エージェントの Helm チャートのインストール
 {: #prometheus-agent}
@@ -432,7 +433,7 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>ALB ID。 上の例では、ALB ID は <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code> です。</td>
+<td>ALB ID。 前述の例では、ALB ID は <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
@@ -441,19 +442,19 @@ kube_system_server_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId="d
 <li><code>bytes</code> と <code>processing\_time</code> は、メトリック <code>in</code> と <code>out</code> に対応します。</li>
 <li><code>cache</code> は、メトリック <code>bypass</code>、<code>expired</code>、<code>hit</code>、<code>miss</code>、<code>revalidated</code>、<code>scare</code>、<code>stale</code>、<code>updating</code> に対応します。</li>
 <li><code>requests</code> は、メトリック <code>requestMsec</code>、<code>1xx</code>、<code>2xx</code>、<code>3xx</code>、<code>4xx</code>、<code>5xx</code>、<code>total</code> に対応します。</li></ul>
-上の例では、サブタイプは <code>bytes</code> です。</td>
+前述の例では、サブタイプは <code>bytes</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;SERVER-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているサーバーの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 上の例では、サーバー名は <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code> です。</td>
+<td>Ingress リソースに定義されているサーバーの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 前述の例では、サーバー名は <code>dev_demostg1_stg_us_south_containers_appdomain_cloud</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているサーバー・メトリック」の表を参照してください。 上の例では、メトリック名は <code>out</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているサーバー・メトリック」の表を参照してください。 前述の例では、メトリック名は <code>out</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。 上の例では、値は <code>22319</code> です。</td>
+<td>収集するメトリックの値。 前述の例では、値は <code>22319</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -565,23 +566,23 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>ALB ID。 上の例では、ALB ID は <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code> です。</td>
+<td>ALB ID。 前述の例では、ALB ID は <code>public\_crf02710f54fcc40889c301bfd6d5b77fe\_alb1</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;SUB-TYPE&gt;</code></td>
-<td>メトリックのサブタイプ。 サポートされている値は、<code>bytes</code>、<code>processing\_time</code>、<code>requests</code> です。 上の例では、サブタイプは <code>bytes</code> です。</td>
+<td>メトリックのサブタイプ。 サポートされている値は、<code>bytes</code>、<code>processing\_time</code>、<code>requests</code> です。 前述の例では、サブタイプは <code>bytes</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 上の例では、アップストリーム名は <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code> です。</td>
+<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 <code>(\_)</code> に置き換えます。 前述の例では、アップストリーム名は <code>default-cafe-ingress-dev_demostg1_us-south_containers_appdomain_cloud-coffee-svc</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 1 のアップストリーム・メトリック」の表を参照してください。 上の例では、メトリック名は <code>in</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 1 のアップストリーム・メトリック」の表を参照してください。 前述の例では、メトリック名は <code>in</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。 上の例では、値は <code>1227</code> です。</td>
+<td>収集するメトリックの値。 前述の例では、値は <code>1227</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -648,22 +649,22 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 <tbody>
 <tr>
 <td><code>&lt;ALB-ID&gt;</code></td>
-<td>ALB ID。 上の例では、ALB ID は <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code> です。</td>
+<td>ALB ID。 前述の例では、ALB ID は <code>public\_cra6a6eb9e897e41c4a5e58f957b417aec\_alb1</code> です。</td>
 </tr>
 <td><code>&lt;UPSTREAM-NAME&gt;</code></td>
-<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 (<code>\_</code>) に置き換えます。 上の例では、アップストリーム名は <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code> です。</td>
+<td>Ingress リソースに定義されているアップストリーム・サービスの名前。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) を下線 (<code>\_</code>) に置き換えます。 前述の例では、アップストリーム名は <code>demostg1\_stg\_us\_south\_containers\_appdomain\_cloud\_tea\_svc</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;POD\_IP&gt;</code></td>
-<td>特定のアップストリーム・サービス・ポッドの IP アドレスとポート。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) とコロン (<code>:</code>) を下線 <code>(_)</code> に置き換えます。 上の例では、アップストリーム・ポッド IP は <code>172_30_75_6_80</code> です。</td>
+<td>特定のアップストリーム・サービス・ポッドの IP アドレスとポート。 Prometheus との互換性を維持するために、ピリオド (<code>.</code>) とコロン (<code>:</code>) を下線 <code>(_)</code> に置き換えます。 前述の例では、アップストリーム・ポッド IP は <code>172_30_75_6_80</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 2 のアップストリーム・メトリック」の表を参照してください。 上の例では、メトリック名は <code>requestMsec</code> です。</td>
+<td>収集されたメトリック・タイプの名前。 メトリック名のリストについては、下記の「サポートされているタイプ 2 のアップストリーム・メトリック」の表を参照してください。 前述の例では、メトリック名は <code>requestMsec</code> です。</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>収集するメトリックの値。 上の例では、値は <code>40</code> です。</td>
+<td>収集するメトリックの値。 前述の例では、値は <code>40</code> です。</td>
 </tr>
 </tbody></table>
 
@@ -695,7 +696,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 
 `ibm-cloud-provider-ingress-cm` Ingress 構成マップの `vts-status-zone-size` フィールドで、メトリック・データ収集の共有メモリー・ゾーンのサイズを設定します。 デフォルトでは、`vts-status-zone-size` は `10m` に設定されます。 大きな環境で、メトリックを収集するためにさらに多くのメモリーが必要な場合は、以下の手順に従って、デフォルトをオーバーライドして大きい値を使用することができます。
 
-始める前に、`kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+始める前に、`kube-system` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 
 1. `ibm-cloud-provider-ingress-cm` 構成マップ・リソースに対応する構成ファイルを編集します。
 

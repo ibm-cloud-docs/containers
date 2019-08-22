@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 - [プライベート・イメージ・レジストリーを {{site.data.keyword.registrylong_notm}} に作成します](/docs/services/Registry?topic=registry-getting-started)。
 - [クラスターを作成します](/docs/containers?topic=containers-clusters#clusters_ui)。
 - [CLI のターゲットを自分のクラスターに設定します](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)。
-- {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシーがあることを確認します。
+- {{site.data.keyword.containerlong_notm}}に対する以下の {{site.data.keyword.cloud_notm}} IAM アクセス・ポリシーがあることを確認します。
     - [任意のプラットフォーム役割](/docs/containers?topic=containers-users#platform)
     - [**ライター**または**管理者**のサービス役割](/docs/containers?topic=containers-users#platform)
 - [Docker および Kubernetes の用語について学習します](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)。
@@ -277,7 +277,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8
     ```
     {: screen}
 
@@ -287,7 +287,7 @@ Cloud Foundry を使用して以前にデプロイしたアプリを取得し、
 
 5.  [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.cloud_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 6. **「ワークロード」**タブで、作成したリソースを表示します。

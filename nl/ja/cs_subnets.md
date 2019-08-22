@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,21 +23,18 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# クラスター用のサブネットの構成
+# クラスター用のサブネットと IP アドレスの構成
 {: #subnets}
 
-Kubernetes クラスターにサブネットを追加して、ネットワーク・ロード・バランサー (NLB) サービス用の使用可能なポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスのプールを変更します。
+{{site.data.keyword.containerlong}} クラスターにサブネットを追加して、ネットワーク・ロード・バランサー (NLB) サービス用の使用可能なポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスのプールを変更します。
 {:shortdesc}
-
-
 
 ## {{site.data.keyword.containerlong_notm}} でのネットワーキングの概要
 {: #basics}
 
-{{site.data.keyword.containerlong_notm}} クラスターでのネットワーキングの基本概念について説明します。{{site.data.keyword.containerlong_notm}} は VLAN、サブネット、IP アドレスを使用してクラスター・コンポーネントのネットワーク接続を実現しています。
+{{site.data.keyword.containerlong_notm}} クラスターでのネットワーキングの基本概念について説明します。 {{site.data.keyword.containerlong_notm}} は VLAN、サブネット、IP アドレスを使用してクラスター・コンポーネントのネットワーク接続を実現しています。
 {: shortdesc}
+
 
 ### VLAN
 {: #basics_vlans}
@@ -49,12 +46,12 @@ Kubernetes クラスターにサブネットを追加して、ネットワーク
 <dt>フリー・クラスター用の VLAN</dt>
 <dd>フリー・クラスターでは、クラスターのワーカー・ノードは、IBM 所有のパブリック VLAN とプライベート VLAN にデフォルトで接続されます。 IBM が VLAN、サブネット、および IP アドレスを制御するので、ユーザーは複数ゾーン・クラスターを作成することも、クラスターにサブネットを追加することもできません。また、アプリを公開するには NodePort サービスだけを使用できます。</dd>
 <dt>標準クラスター用の VLAN</dt>
-<dd>標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。 それ以降、そのゾーンにクラスターを作成するたびに、そのゾーンで使用したい VLAN のペアを指定する必要があります。 VLAN は複数のクラスターで共有できるので、お客様用に作成された同一のパブリック VLAN とプライベート VLAN を何度も使用することができます。</br>
+<dd>標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー・アカウントで自動的にプロビジョンされます。 それ以降、そのゾーンにクラスターを作成するたびに、そのゾーンで使用したい VLAN のペアを指定する必要があります。 VLAN は複数のクラスターで共有できるので、お客様用に作成された同一のパブリック VLAN とプライベート VLAN を何度も使用することができます。</br>
 </br>ワーカー・ノードをパブリック VLAN とパブリック VLAN の両方に接続することも、プライベート VLAN だけに接続することもできます。 ワーカー・ノードをプライベート VLAN にのみ接続する場合は、既存のプライベート VLAN の ID を使用することもできますし、[プライベート VLAN を作成し](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create)、クラスター作成時にその ID を使用することもできます。</dd></dl>
 
 ご使用のアカウントの各ゾーンにプロビジョン済みの VLAN を確認するには、`ibmcloud ks vlans --zone <zone>` を実行します。 あるクラスターがプロビジョンされている VLAN を確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` を実行して **Subnet VLANs** セクションを探します。
 
-IBM Cloud インフラストラクチャー (SoftLayer) は、ゾーンに最初のクラスターを作成する際に自動的にプロビジョンされる VLAN を管理します。 VLAN からすべてのワーカー・ノードを削除した場合などのように、VLAN を未使用の状態にすると、IBM Cloud インフラストラクチャー (SoftLayer) は VLAN を再利用します。 その後、新規 VLAN が必要な場合は、[{{site.data.keyword.Bluemix_notm}} サポートにお問い合わせください](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)。
+IBM Cloud インフラストラクチャーは、ゾーンに最初のクラスターを作成する際に自動的にプロビジョンされる VLAN を管理します。 VLAN からすべてのワーカー・ノードを削除した場合などのように、VLAN を未使用の状態にすると、IBM Cloud インフラストラクチャーは VLAN を再利用します。 その後、新規 VLAN が必要な場合は、[{{site.data.keyword.cloud_notm}} サポートにお問い合わせください](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)。
 
 **VLAN の決定を後で変更できますか?**</br>
 クラスターのワーカー・プールを変更することで、VLAN セットアップを変更できます。 詳しくは、[ワーカー・ノードの VLAN 接続を変更する](/docs/containers?topic=containers-cs_network_cluster#change-vlans)を参照してください。
@@ -69,15 +66,15 @@ IBM Cloud インフラストラクチャー (SoftLayer) は、ゾーンに最初
 
 **パブリック VLAN サブネット**
 * 1 次パブリック・サブネットでは、クラスター作成時にワーカー・ノードに割り当てられるパブリック IP アドレスを決定します。 同じ VLAN に参加している複数のクラスターでは、1 つの 1 次パブリック・サブネットを共有することができます。
-* ポータブル・パブリック・サブネットは 1 つのクラスターだけにバインドされ、そのクラスターに 8 つのパブリック IP アドレスを提供します。 IBM Cloud インフラストラクチャー (SoftLayer) の機能のために 3 つの IP が予約されています。 1 つの IP がデフォルトのパブリック Ingress ALB によって使用され、4 つの IP を、パブリック・ネットワーク・ロード・バランサー (NLB) サービスまたは追加のパブリック ALB を作成するために使用できます。ポータブル・パブリック IP は固定された永続的な IP アドレスであり、このアドレスを使用して、インターネットを介して NLB または ALB にアクセスできます。NLB または ALB に 4 つを超える IP が必要な場合は、[ポータブル IP アドレスの追加](/docs/containers?topic=containers-subnets#adding_ips)を参照してください。
+* ポータブル・パブリック・サブネットは 1 つのクラスターだけにバインドされ、そのクラスターに 8 つのパブリック IP アドレスを提供します。 IBM Cloud インフラストラクチャーの機能のために 3 つの IP が予約されています。 1 つの IP がデフォルトのパブリック Ingress ALB によって使用され、4 つの IP を、パブリック・ネットワーク・ロード・バランサー (NLB) サービスまたは追加のパブリック ALB を作成するために使用できます。 ポータブル・パブリック IP は固定された永続的な IP アドレスであり、このアドレスを使用して、インターネットを介して NLB または ALB にアクセスできます。 NLB または ALB に 4 つを超える IP が必要な場合は、[ポータブル IP アドレスの追加](/docs/containers?topic=containers-subnets#adding_ips)を参照してください。
 
 **プライベート VLAN サブネット**
 * 1 次プライベート・サブネットでは、クラスター作成時にワーカー・ノードに割り当てられるプライベート IP アドレスを決定します。 同じ VLAN に参加している複数のクラスターでは、1 つの 1 次プライベート・サブネットを共有することができます。
-* ポータブル・プライベート・サブネットは 1 つのクラスターだけにバインドされ、そのクラスターに 8 つのプライベート IP アドレスを提供します。 IBM Cloud インフラストラクチャー (SoftLayer) の機能のために 3 つの IP が予約されています。 1 つの IP がデフォルトのプライベート Ingress ALB によって使用され、4 つの IP を、プライベート・ネットワーク・ロード・バランサー (NLB) サービスまたは追加のプライベート ALB を作成するために使用できます。ポータブル・プライベート IP は固定された永続的な IP アドレスであり、このアドレスを使用して、プライベート・ネットワークを介して NLB または ALB にアクセスできます。プライベート NLB または ALB に 4 つを超える IP が必要な場合は、[ポータブル IP アドレスの追加](/docs/containers?topic=containers-subnets#adding_ips)を参照してください。
+* ポータブル・プライベート・サブネットは 1 つのクラスターだけにバインドされ、そのクラスターに 8 つのプライベート IP アドレスを提供します。 IBM Cloud インフラストラクチャーの機能のために 3 つの IP が予約されています。 1 つの IP がデフォルトのプライベート Ingress ALB によって使用され、4 つの IP を、プライベート・ネットワーク・ロード・バランサー (NLB) サービスまたは追加のプライベート ALB を作成するために使用できます。 ポータブル・プライベート IP は固定された永続的な IP アドレスであり、このアドレスを使用して、プライベート・ネットワークを介して NLB または ALB にアクセスできます。 プライベート NLB または ALB に 4 つを超える IP が必要な場合は、[ポータブル IP アドレスの追加](/docs/containers?topic=containers-subnets#adding_ips)を参照してください。
 
 ご使用のアカウントでプロビジョンされたすべてのサブネットを確認するには、`ibmcloud ks subnets` を実行します。 あるクラスターにバインドされているパブリックとプライベートのポータブル・サブネットを確認するには、`ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` を実行して **Subnet VLANs** セクションを探します。
 
-{{site.data.keyword.containerlong_notm}} では、VLAN のサブネット数の上限は 40 です。 この制限に達したら、まず [その VLAN 内にあるサブネットを再利用して新規クラスターを作成](/docs/containers?topic=containers-subnets#subnets_custom)できるかどうかを確認します。 新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)。
+{{site.data.keyword.containerlong_notm}} では、VLAN のサブネット数の上限は 40 です。 この制限に達したら、まず [その VLAN 内にあるサブネットを再利用して新規クラスターを作成](/docs/containers?topic=containers-subnets#subnets_custom)できるかどうかを確認します。 新規 VLAN が必要な場合、[{{site.data.keyword.cloud_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)。
 {: note}
 
 **ワーカー・ノードの IP アドレスは変更されますか?**</br>
@@ -89,20 +86,20 @@ IBM Cloud インフラストラクチャー (SoftLayer) は、ゾーンに最初
 ネットワーク・セグメンテーションとは、1 つのネットワークを複数のサブネットワークに分割する方式を表すものです。 あるサブネットワーク内で実行されるアプリは、別のサブネットワーク内のアプリを認識することも、アクセスすることもできません。 ネットワーク・セグメンテーションのオプションおよび VLAN との関係について詳しくは、[クラスターのセキュリティーに関するこちらのトピック](/docs/containers?topic=containers-security#network_segmentation)を参照してください。
 {: shortdesc}
 
-ただし、状況によっては、クラスターのコンポーネントに、複数のプライベート VLAN をまたぐ通信を許可しなければならない場合があります。 例えば、複数ゾーン・クラスターを作成する場合や、1 つのクラスターに複数の VLAN が存在する場合、同じ VLAN 上に複数のサブネットが存在する場合は、同じ VLAN 上にあってもサブネットが異なるワーカー・ノード、または異なる VLAN 上にあるワーカー・ノードは、そのままでは相互通信することができません。 ユーザーが IBM Cloud インフラストラクチャー (SoftLayer) アカウントで仮想ルーター機能 (VRF) または VLAN スパンニングを有効にする必要があります。
+ただし、状況によっては、クラスターのコンポーネントに、複数のプライベート VLAN をまたぐ通信を許可しなければならない場合があります。 例えば、複数ゾーン・クラスターを作成する場合や、1 つのクラスターに複数の VLAN が存在する場合、同じ VLAN 上に複数のサブネットが存在する場合は、同じ VLAN 上にあってもサブネットが異なるワーカー・ノード、または異なる VLAN 上にあるワーカー・ノードは、そのままでは相互通信することができません。 ユーザーが IBM Cloud インフラストラクチャー・アカウントで仮想ルーター機能 (VRF) または VLAN スパンニングを有効にする必要があります。
 
 **仮想ルーター機能 (VRF) および VLAN スパンニングとは何ですか?**</br>
 
 <dl>
 <dt>[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
-<dd>VRF を使用すると、インフラストラクチャー・アカウント内のすべての VLAN およびサブネットが相互通信できるようになります。 また、プライベート・サービス・エンドポイントを介してワーカーとマスターを通信させる場合も VRF が必要です。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF を有効にすることで、アカウントの VLAN スパンニングのオプションがなくなることに注意してください。これは、トラフィックを管理するゲートウェイ・デバイスを構成していない限り、すべての VLAN が通信できるようになるためです。</dd>
+<dd>VRF を使用すると、インフラストラクチャー・アカウント内のすべての VLAN およびサブネットが相互通信できるようになります。 また、プライベート・サービス・エンドポイントを介してワーカーとマスターを通信させる場合も VRF が必要です。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF が既に有効になっているかどうかを確認するには、`ibmcloud account show` コマンドを使用します。 VRF を有効にすることで、アカウントの VLAN スパンニングのオプションがなくなることに注意してください。これは、トラフィックを管理するゲートウェイ・デバイスを構成していない限り、すべての VLAN が通信できるようになるためです。</dd>
 <dt>[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>VRF の有効化が不可能または不要な場合は、VLAN スパンニングを有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。 VRF の代わりに VLAN スパンニングを有効にすることを選択した場合は、プライベート・サービス・エンドポイントを有効にできないことに注意してください。</dd>
 </dl>
 
 **VRF または VLAN スパンニングがネットワーク・セグメンテーションに与える影響**</br>
 
-VRF または VLAN スパンニングを有効にすると、同じ {{site.data.keyword.Bluemix_notm}} アカウントのプライベート VLAN に接続されているすべてのシステムが、ワーカーと通信できるようになります。 [Calico プライベート・ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#isolate_workers)を適用すれば、クラスターをプライベート・ネットワーク上の他のシステムから切り離せます。 また、{{site.data.keyword.containerlong_notm}} は、すべての [IBM Cloud インフラストラクチャー (SoftLayer) ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) と一緒に使用可能です。 [仮想ルーター・アプライアンス](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra)などのファイアウォールにカスタム・ネットワーク・ポリシーをセットアップして、標準クラスターのために専用のネットワーク・セキュリティーを装備し、ネットワーク侵入を検出して対処することができます。
+VRF または VLAN スパンニングを有効にすると、同じ {{site.data.keyword.cloud_notm}} アカウントのプライベート VLAN に接続されているすべてのシステムが、ワーカーと通信できるようになります。 [Calico プライベート・ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#isolate_workers)を適用すれば、クラスターをプライベート・ネットワーク上の他のシステムから切り離せます。 また、{{site.data.keyword.containerlong_notm}} は、すべての [IBM Cloud インフラストラクチャー・ファイアウォール・オファリング ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud-computing/bluemix/network-security) と一緒に使用可能です。 [仮想ルーター・アプライアンス](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra)などのファイアウォールにカスタム・ネットワーク・ポリシーをセットアップして、標準クラスターのために専用のネットワーク・セキュリティーを装備し、ネットワーク侵入を検出して対処することができます。
 
 <br />
 
@@ -111,26 +108,25 @@ VRF または VLAN スパンニングを有効にすると、同じ {{site.data.
 ## 既存のサブネットを使用したクラスターの作成
 {: #subnets_custom}
 
-標準クラスターを作成すると、サブネットが自動的に作成されます。 ただし、自動的にプロビジョンされるサブネットを使用する代わりに、ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントから既存のポータブル・サブネットを使用したり、削除したクラスターのサブネットを再利用したりできます。
+標準クラスターを作成すると、サブネットが自動的に作成されます。 ただし、自動的にプロビジョンされるサブネットを使用する代わりに、ご使用の IBM Cloud インフラストラクチャー・アカウントから既存のポータブル・サブネットを使用したり、削除したクラスターのサブネットを再利用したりできます。
 {:shortdesc}
 
-このオプションは、クラスターの削除や作成が行われても変わらない静的 IP アドレスを保持する場合や、より大きな IP アドレス・ブロックを注文する場合に利用してください。 代わりに、独自のオンプレミス・ネットワーク・サブネットを使用して、クラスターのネットワーク・ロード・バランサー (NLB) サービス用の追加のポータブル・プライベート IP アドレスを取得することを希望する場合は、[ユーザー管理サブネットをプライベート VLAN に追加することによるポータブル・プライベート IP の追加](#subnet_user_managed)を参照してください。
+このオプションは、クラスターの削除や作成が行われても変わらない静的 IP アドレスを保持する場合や、より大きな IP アドレス・ブロックを注文する場合に利用してください。 あるいは、ポータブル・パブリック IP アドレスやポータブル・プライベート IP アドレスをさらに取得して、ネットワーク・ロード・バランサー (NLB) サービスまたは Ingress アプリケーション・ロード・バランサー (ALB) サービスを作成する場合には、[ポータブル IP アドレスの追加](#adding_ips)を参照してください。
 
-ポータブル・パブリック IP アドレスは、月単位で課金されます。 クラスターをプロビジョンした後にポータブル・パブリック IP アドレスを削除した場合、短時間しか使用していなくても月額料金を支払う必要があります。
+クラスターの作成時に自動的に注文されたすべてのサブネットはクラスターを削除するとすぐに削除されるので、新しいクラスターを作成するためにそれらのサブネットを再使用することはできません。ただし、[独自のサブネットをクラスターに手動で追加した](#subnet_user_managed)場合、クラスターを削除してもそれらのサブネットは削除されません。それらのサブネットは、新しいクラスターを作成するために再使用できます。
 {: note}
 
 開始前に、以下のことを行います。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- 不要になったクラスターのサブネットを再使用する場合は、不要なクラスターを削除します。 新規クラスターをすぐに作成します。これは、サブネットを再利用しない場合、サブネットが 24 時間以内に削除されるためです。
-
+- 不要になったクラスターのユーザー管理プライベート・サブネットを再使用する場合は、不要なクラスターを削除します。
    ```
    ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-</br>IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにある既存のサブネットを使用するには、以下のようにします。
+</br>既存のサブネットを使用してクラスターを作成するには、以下のようにします。
 
-1. 使用するサブネットの ID と、そのサブネットが存在する VLAN の ID を取得します。
+1. サブネット ID と、そのサブネットが存在する VLAN の ID を取得します。
 
     ```
     ibmcloud ks subnets
@@ -147,7 +143,7 @@ VRF または VLAN スパンニングを有効にすると、同じ {{site.data.
     ```
     {: screen}
 
-2. 特定した VLAN ID を使用して、[CLI でクラスターを作成](/docs/containers?topic=containers-clusters#clusters_cli_steps)します。新しいポータブル・パブリック IP サブネットと新しいポータブル・プライベート IP サブネットが自動的に作成されないようにするため、`--no-subnet` フラグを指定します。
+2. 特定した VLAN ID を使用して、[CLI でクラスターを作成](/docs/containers?topic=containers-clusters#clusters_cli_steps)します。 新しいポータブル・パブリック IP サブネットと新しいポータブル・プライベート IP サブネットが自動的に作成されないようにするため、`--no-subnet` フラグを指定します。
 
     ```
     ibmcloud ks cluster-create --zone dal10 --machine-type b3c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
@@ -167,7 +163,7 @@ VRF または VLAN スパンニングを有効にすると、同じ {{site.data.
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.6      Default
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.8      Default
     ```
     {: screen}
 
@@ -182,24 +178,44 @@ VRF または VLAN スパンニングを有効にすると、同じ {{site.data.
 
     ```
     ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.6
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.8
     ```
     {: screen}
 
 5.  サブネット ID を指定してクラスターにサブネットを追加します。 クラスターでサブネットを使用できるようにすると、使用できるすべての使用可能なポータブル・パブリック IP アドレスが含まれた Kubernetes の構成マップが作成されます。 そのサブネットの VLAN が配置されたゾーンに Ingress ALB が存在しない場合、そのゾーンにパブリック ALB とプライベート ALB を作成するために、1 つのポータブル・パブリック IP アドレスと 1 つのポータブル・プライベート IP アドレスが自動的に使用されます。 そのサブネットからの他のすべてのポータブル・パブリック IP アドレスとポータブル・プライベート IP アドレスは、アプリの NLB サービスの作成に使用できます。
+  * IBM Cloud インフラストラクチャー・アカウントに存在するサブネットを追加するには、以下のようにします。
+      ```
+      ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+      ```
+      {: pre}
 
-  ```
-  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
-  ```
-  {: pre}
+      コマンド例:
+      ```
+      ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
+      ```
+      {: screen}
 
-  コマンド例:
-  ```
-  ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
-  ```
-  {: screen}
+  * オンプレミス・ネットワークからユーザー管理プライベート・サブネットを追加するには、以下のようにします。
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
+      ```
+      {: pre}
 
-6. **重要**: 同じ VLAN 上の別のサブネットにあるワーカー間の通信を可能にするには、[その同じ VLAN 上のサブネット間のルーティングを有効にする](#subnet-routing)必要があります。
+      コマンド例:
+
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster mycluster --subnet-cidr 10.xxx.xx.xxx/24 --private-vlan 2234947
+      ```
+      {: pre}
+
+6. サブネットがクラスターに追加されたことを確認します。
+
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name>
+    ```
+    {: pre}
+
+7. **重要**: 同じ VLAN 上の別のサブネットにあるワーカー間の通信を可能にするには、[その同じ VLAN 上のサブネット間のルーティングを有効にする](#subnet-routing)必要があります。
 
 <br />
 
@@ -207,7 +223,7 @@ VRF または VLAN スパンニングを有効にすると、同じ {{site.data.
 ## 既存のポータブル IP アドレスの管理
 {: #managing_ips}
 
-デフォルトでは、4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスを使用して、 [ネットワーク・ロード・バランサー (NLB) サービスを作成する](/docs/containers?topic=containers-loadbalancer)か、[追加の Ingress アプリケーション・ロード・バランサー (ALB) を作成する](/docs/containers?topic=containers-ingress#scale_albs)ことによって、パブリック・ネットワークまたはプライベート・ネットワークに単一アプリを公開することができます。NLB または ALB サービスを作成するには、使用できる正しいタイプのポータブル IP アドレスが少なくとも 1 つ必要です。使用できるポータブル IP アドレスを表示することも、使用されているポータブル IP アドレスを解放することもできます。
+デフォルトでは、4 つのポータブル・パブリック IP アドレスと 4 つのポータブル・プライベート IP アドレスを使用して、[ネットワーク・ロード・バランサー (NLB) サービスを作成する](/docs/containers?topic=containers-loadbalancer)ことによって、単一アプリをパブリック・ネットワークまたはプライベート・ネットワークに公開することができます。 NLB<staging create-alb> または ALB</staging create-alb> サービスを作成するには、使用できる正しいタイプのポータブル IP アドレスが少なくとも 1 つ必要です。使用できるポータブル IP アドレスを表示することも、使用されているポータブル IP アドレスを解放することもできます。
 {: shortdesc}
 
 ### 使用可能なポータブル・パブリック IP アドレスの表示
@@ -224,7 +240,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 パブリック NLB または追加のパブリック ALB の作成に使用できるポータブル・パブリック IP アドレスだけをリスト表示するには、次の手順を使用できます。
 
 開始前に、以下のことを行います。
--  `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+-  `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 使用可能なポータブル・パブリック IP アドレスをリスト表示するには、以下のようにします。
@@ -285,7 +301,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 {:shortdesc}
 
 開始前に、以下のことを行います。
--  `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+-  `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 NLB を削除する場合、または ALB を無効にする場合は、以下のようにします。
@@ -323,14 +339,14 @@ NLB を削除する場合、または ALB を無効にする場合は、以下�
 ### サブネットをさらにオーダーしてポータブル IP を追加する
 {: #request}
 
-NLB サービス用にさらにポータブル IP を取得できます。この取得は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントで新規サブネットを作成し、指定したクラスターでそのサブネットを使用できるようにすることで行います。
+NLB サービス用にさらにポータブル IP を取得できます。この取得は、IBM Cloud インフラストラクチャー・アカウントで新規サブネットを作成し、指定したクラスターでそのサブネットを使用できるようにすることで行います。
 {:shortdesc}
 
 ポータブル・パブリック IP アドレスは、月単位で課金されます。 サブネットをプロビジョンした後にポータブル・パブリック IP アドレスを削除した場合、短時間しか使用していなくても月額料金を支払う必要があります。
 {: note}
 
 開始前に、以下のことを行います。
--  クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+-  クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 サブネットを注文するには、以下のようにします。
@@ -354,18 +370,18 @@ NLB サービス用にさらにポータブル IP を取得できます。この
     </tr>
     <tr>
     <td><code><em>&lt;subnet_size&gt;</em></code></td>
-    <td><code>&lt;subnet_size&gt;</code> を、ポータブル・サブネットで作成する IP アドレスの数に置き換えます。受け入れられる値は 8、16、32、64 です。 <p class="note"> サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されます。 これらの 3 つの IP アドレスは、Ingress アプリケーション・ロード・バランサー (ALBs) で使用したり、ネットワーク・ロード・バランサー (NLB) サービスを作成するために使用したりすることはできません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。</p> </td>
+    <td><code>&lt;subnet_size&gt;</code> を、ポータブル・サブネットで作成する IP アドレスの数に置き換えます。 受け入れられる値は 8、16、32、64 です。 <p class="note"> サブネットのポータブル IP アドレスを追加する場合、3 つの IP アドレスはクラスター内ネットワークの確立のために使用されます。 これらの 3 つの IP アドレスは、Ingress アプリケーション・ロード・バランサー (ALBs) で使用したり、ネットワーク・ロード・バランサー (NLB) サービスを作成するために使用したりすることはできません。 例えば、8 個のポータブル・パブリック IP アドレスを要求する場合は、そのうちの 5 個を、アプリをパブリックに公開するために使用できます。</p> </td>
     </tr>
     <tr>
     <td><code><em>&lt;VLAN_ID&gt;</em></code></td>
-    <td><code>&lt;VLAN_ID&gt;</code> を、ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリック VLAN またはプライベート VLAN の ID に置き換えます。 既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。ワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行して、出力で <strong>Subnet VLANs</strong> セクションを探します。サブネットは、VLAN が存在するゾーンにプロビジョンされます。</td>
+    <td><code>&lt;VLAN_ID&gt;</code> を、ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリック VLAN またはプライベート VLAN の ID に置き換えます。 既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。 ワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を確認するには、<code>ibmcloud ks cluster-get --cluster &lt;cluster&gt; --showResources</code> を実行して、出力で <strong>Subnet VLANs</strong> セクションを探します。 サブネットは、VLAN が存在するゾーンにプロビジョンされます。</td>
     </tr>
     </tbody></table>
 
 2. クラスターにサブネットが正常に作成されて追加されたことを確認します。 サブネットの CIDR は **Subnet VLANs** セクションにリストされます。
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
     ```
     {: pre}
 
@@ -381,7 +397,75 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 
 3. **重要**: 同じ VLAN 上の別のサブネットにあるワーカー間の通信を可能にするには、[その同じ VLAN 上のサブネット間のルーティングを有効にする](#subnet-routing)必要があります。
 
+### 既存のサブネットをクラスターに追加してポータブル IP を追加する
+{: #add-existing}
+
+IBM Cloud インフラストラクチャー・アカウント内の既存のサブネットをクラスターで使用できるようにすることによって、NLB サービス用にさらにポータブル IP を取得できます。。
+{:shortdesc}
+
+開始前に、以下のことを行います。
+-  クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+- [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+サブネットをクラスターで使用できるようにするには、以下のようにします。
+
+1. ポータブル・パブリック IP アドレスまたはポータブル・プライベート IP アドレスの割り振り先となるパブリックまたはプライベートの VLAN ID を確認します。既存のワーカー・ノードが接続されているパブリック VLAN またはプライベート VLAN を選択する必要があります。
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_id> --showResources
+  ```
+  {: pre}
+
+  出力の **Subnet VLANs** セクションで、**VLAN ID** を探します。出力例:
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+2. 使用するサブネットの ID を取得します。前のステップで見つけた VLAN ID のいずれかにサブネットがあること、またサブネットが既に別のクラスターにバインドされていないことを確かめます。
+  ```
+  ibmcloud ks subnets
+  ```
+  {: pre}
+
+  次の出力例では、サブネット ID は `1602829` で、それが存在する VLAN ID は `2234945` です。
+  ```
+  Getting subnet list...
+    OK
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
+  ```
+  {: screen}
+
+3. サブネットをクラスターで使用できるようにします。
+  ```
+  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+4. クラスターにサブネットが正常に作成されて追加されたことを確認します。 サブネットの CIDR は **Subnet VLANs** セクションにリストされます。
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  次の例の出力では、2 番目のサブネットがパブリック VLAN の `2234945` に追加されています。
+  ```
+  Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+  ```
+  {: screen}
+
+5. **重要**: 同じ VLAN 上の別のサブネットにあるワーカー間の通信を可能にするには、[その同じ VLAN 上のサブネット間のルーティングを有効にする](#subnet-routing)必要があります。
+
 <br />
+
 
 
 ### ユーザー管理サブネットをプライベート VLAN に追加することによるポータブル・プライベート IP の追加
@@ -390,7 +474,7 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 ネットワーク・ロード・バランサー (NLB) サービス用にさらにポータブル・プライベート IP を取得できます。この取得は、クラスターでオンプレミス・ネットワークからのサブネットを使用できるようにすることで行います。
 {:shortdesc}
 
-代わりに IBM Cloud インフラストラクチャー (SoftLayer) アカウントで既存のポータブル・サブネットを再利用する場合は、 [カスタムまたは既存の IBM Cloud インフラストラクチャー (SoftLayer) サブネットを使用したクラスターの作成](#subnets_custom)を参照してください。
+代わりに IBM Cloud インフラストラクチャー・アカウント内の既存のポータブル・サブネットを再利用する場合は、[カスタムまたは既存の IBM Cloud インフラストラクチャー・サブネットを使用したクラスターの作成](#subnets_custom)を参照してください。
 {: tip}
 
 要件:
@@ -400,8 +484,8 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 
 開始前に、以下のことを行います。
 - 外部サブネットとのネットワーク・トラフィックの出入りのルーティングを構成します。
-- プライベート・ネットワーク Virtual Router Appliance またはクラスター内で実行されている strongSwan VPN サービスのいずれかと、オンプレミス・データ・センター・ネットワーク・ゲートウェイとの間に VPN 接続があることを確認してください。 詳しくは、[VPN 接続のセットアップ](/docs/containers?topic=containers-vpn)を参照してください。
--  クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+- プライベート・ネットワーク Virtual Router Appliance またはクラスター内で実行されている strongSwan VPN サービスのいずれかと、オンプレミス・データ・センター・ネットワーク・ゲートウェイとの間に VPN 接続があることを確認してください。 または、クラスターとオンプレミス・データ・センター・ネットワーク間で DirectLink 接続がセットアップされていることを確かめます。詳しくは、[VPN 接続のセットアップ](/docs/containers?topic=containers-vpn)を参照してください。
+-  クラスターに対する[**オペレーター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 - [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
@@ -410,7 +494,7 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 1. クラスターのプライベート VLAN の ID を表示します。 **Subnet VLANs** セクションを見つけます。 **User-managed** フィールドで、_false_ となっている VLAN ID を見つけます。
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name>
+    ibmcloud ks cluster-get --cluster <cluster_name> --showResources <cluster_name>
     ```
     {: pre}
 
@@ -455,7 +539,7 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 
 4. [同じ VLAN 上のサブネット間のルーティングを有効にします](#subnet-routing)。
 
-5. プライベート・ネットワークを介してアプリにアクセスするために、[プライベート・ネットワーク・ロード・バランサー (NLB) サービス](/docs/containers?topic=containers-loadbalancer)を追加するか、または[プライベート Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress) を有効にします。 追加したサブネットからのプライベート IP アドレスを使用するには、サブネット CIDR からの IP アドレスを指定する必要があります。 使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー (SoftLayer) サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。
+5. プライベート・ネットワークを介してアプリにアクセスするために、[プライベート・ネットワーク・ロード・バランサー (NLB) サービス](/docs/containers?topic=containers-loadbalancer)を追加するか、または[プライベート Ingress ALB](/docs/containers?topic=containers-ingress#private_ingress) を有効にします。 追加したサブネットからのプライベート IP アドレスを使用するには、サブネット CIDR からの IP アドレスを指定する必要があります。 使用しない場合は、IP アドレスは IBM Cloud インフラストラクチャー・サブネット、またはプライベート VLAN 上のユーザー提供のサブネットからランダムに選択されます。
 
 <br />
 
@@ -463,9 +547,12 @@ NLB サービス用にさらにポータブル IP を取得できます。この
 ## サブネットのルーティングの管理
 {: #subnet-routing}
 
-1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
+1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー・アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF が既に有効になっているかどうかを確認するには、`ibmcloud account show` コマンドを使用します。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 VLAN のスパンニングも必要になる、次の各シナリオを検討してください。
+
+VLAN スパンニング・オプションは、VRF 対応アカウントで作成されるクラスターでは無効になっています。VRF が有効であれば、自動的にアカウント内のすべての VLAN がプライベート・ネットワーク経由で相互に通信できることになります。詳しくは、[クラスター・ネットワークのセットアップの計画: ワーカー間の通信](/docs/containers?topic=containers-plan_clusters#worker-worker)を参照してください。
+{: note}
 
 ### 同一 VLAN 上の 1 次サブネット間のルーティングを有効にする
 {: #vlan-spanning}
@@ -490,3 +577,117 @@ VLAN スパンニングが既に有効になっているかどうかを確認す
 
 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 {: tip}
+
+<br />
+
+
+## クラスターからのサブネットの削除
+{: #remove-subnets}
+
+サブネットが不要になった場合、クラスターから削除できます。クラスターからサブネットをデタッチできるのは、そのサブネット範囲から派生した IP アドレスがクラスターで使用されていない場合のみです。
+{: shortdesc}
+
+### IBM Cloud インフラストラクチャー・アカウントのサブネットのクラスターからの削除
+{: #remove-sl-subnets}
+
+IBM Cloud インフラストラクチャー・アカウントにあるサブネットをクラスターから削除します。サブネットを削除した後は、そのサブネットは、クラスターで使用できなくなりますが、IBM Cloud クラウド・インフラストラクチャー・アカウントには引き続き存在しています。
+{: shortdesc}
+
+<p class="note">クラスターからサブネットをデタッチできるのは、そのサブネット範囲から派生した IP アドレスがクラスターで使用されていない場合のみです。</br></br>ポータブル・パブリック IP アドレスは月単位で課金されます。サブネットを削除する場合、短期間しか使用していない場合でも、IP アドレスの月額料金を支払う必要があります。</p>
+
+1. 削除するサブネットの CIDR を見つけます。
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name> --showResources <cluster_name>
+  ```
+  {: pre}
+
+  この出力例では、削除するサブネットの CIDR は `169.1.1.1/29` です。
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR          Public   User-managed
+  2234947   10.xxx.xx.xxx/29     false    false
+  2234945   169.xx.xxx.xxx/29    true     false
+  2234945   169.1.1.1/29         true     false
+  ```
+  {: screen}
+
+2. 前のステップで見つけた CIDR を使用して、削除するサブネットの ID を取得します。
+  ```
+  ibmcloud ks subnets
+  ```
+  {: pre}
+
+  この出力例では、CIDR が `169.1.1.1/29` であるサブネットの ID は `1602829` です。
+  ```
+  ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+  ...
+  1602829   169.1.1.1/29        169.1.1.2        2234945   public    df253b6025d64944ab99ed63bb4567b6
+  ```
+  {: screen}
+
+3. サブネットをクラスターからデタッチします。このサブネットは、その後も IBM Cloud インフラストラクチャー・アカウント内に、使用可能な状態で残ります。
+  ```
+  ibmcloud ks cluster-subnet-detach --cluster <cluster_name_or_ID> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+
+4. サブネットがクラスターにもうバインドされていないことを確認します。
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name>
+  ```
+  {: pre}
+
+  この出力例では、CIDR が `169.1.1.1/29` であるサブネットが削除されています。
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+### オンプレミス・ネットワークのサブネットのクラスターからの削除
+{: #remove-user-subnets}
+
+オンプレミス・ネットワークにあるプライベート・サブネットをクラスターから削除します。サブネットを削除した後は、そのサブネットは、クラスターで使用できなくなりますが、オンプレミス・ネットワークには引き続き存在しています。
+{: shortdesc}
+
+1. 削除するサブネットの CIDR と VLAN ID を見つけます。
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name> --showResources
+  ```
+  {: pre}
+
+  この出力例では、削除するサブネットの CIDR は `10.1.1.1/24` で、VLAN ID は `2234947` です。
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR       Public   User-managed
+  2234947   10.xxx.xx.xxx/29  false    false
+  2234945   169.xx.xxx.xxx/29 true     false
+  2234947   10.1.1.1/24       false    true
+  ```
+  {: screen}
+
+2. 前のステップで見つけた CIDR と VLAN ID を使用して、クラスターからサブネットを削除します。
+  ```
+  ibmcloud ks cluster-user-subnet-rm --cluster <cluster_name_or_ID> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN_ID>
+  ```
+  {: pre}
+
+3. サブネットがクラスターにもうバインドされていないことを確認します。
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name>
+  ```
+  {: pre}
+
+  この出力例では、CIDR が `10.1.1.1/24` であるサブネットが削除されています。
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+

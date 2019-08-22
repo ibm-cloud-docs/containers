@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,21 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# IBM Cloud の IBM ブロック・ストレージへのデータの保管
+# クラシック IBM Cloud Block Storage へのデータの保管
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} のブロック・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能な永続 iSCSI ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.Bluemix_notm}} のブロック・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 価格情報については、[課金](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing)を参照してください。
+{{site.data.keyword.cloud_notm}} のブロック・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能な永続 iSCSI ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.cloud_notm}} のブロック・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 料金について詳しくは、[課金](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing)を参照してください。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} のブロック・ストレージは、標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、プライベート・ネットワークを介してブロック・ストレージ・インスタンスに接続するために、{{site.data.keyword.Bluemix_notm}} Block Storage プラグイン・バージョン 1.3.0 以降をインストールしていることを確認してください。 ブロック・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
+{{site.data.keyword.cloud_notm}} のブロック・ストレージは、標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、プライベート・ネットワークを介してブロック・ストレージ・インスタンスに接続するために、{{site.data.keyword.cloud_notm}} Block Storage プラグイン・バージョン 1.3.0 以降をインストールしていることを確認してください。 ブロック・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
 {: important}
 
-## クラスターでの {{site.data.keyword.Bluemix_notm}} Block Storage プラグインのインストール
+## クラスターでの {{site.data.keyword.cloud_notm}} Block Storage プラグインのインストール
 {: #install_block}
 
-ブロック・ストレージ用に事前定義されたストレージ・クラスをセットアップするには、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインと Helm チャートをインストールします。 これらのストレージ・クラスを使用すると、アプリ用にブロック・ストレージをプロビジョンするための PVC を作成できます。
+ブロック・ストレージ用に事前定義されたストレージ・クラスをセットアップするには、{{site.data.keyword.cloud_notm}} Block Storage プラグインと Helm チャートをインストールします。 これらのストレージ・クラスを使用すると、アプリ用にブロック・ストレージをプロビジョンするための PVC を作成できます。
 {: shortdesc}
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -53,7 +51,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.8_1523*
       ```
       {: screen}
 
@@ -61,14 +59,14 @@ subcollection: containers
 
    2. [version changelog](/docs/containers?topic=containers-changelog#changelog) を参照して、最新のパッチ・バージョンに含まれる変更内容を確認してください。
 
-   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
+   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
 
-2.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (Tiller) をクラスター内にインストールします。
+1.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (Tiller) をクラスター内にインストールします。
 
     Helm サーバー Tiller をインストールするには、パブリック Google Container Registry へのパブリック・ネットワーク接続が必要です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、[Tiller イメージをローカル・マシンにプルして、そのイメージを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](/docs/containers?topic=containers-helm#private_local_tiller)のか、[Tiller を使用せずに Helm チャートをインストールする](/docs/containers?topic=containers-helm#private_install_without_tiller)のかを選択できます。
     {: note}
 
-3.  Tiller がサービス・アカウントでインストールされていることを確認します。
+2.  Tiller がサービス・アカウントでインストールされていることを確認します。
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -83,19 +81,19 @@ subcollection: containers
     ```
     {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを使用するクラスターに {{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーを追加します。
+3. {{site.data.keyword.cloud_notm}} Block Storage プラグインを使用するクラスターに {{site.data.keyword.cloud_notm}} Helm チャート・リポジトリーを追加します。
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
-5. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+4. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
    {: pre}
 
-6. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
+5. {{site.data.keyword.cloud_notm}} Block Storage プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
    ```
    helm install iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -145,7 +143,7 @@ subcollection: containers
    ```
    {: screen}
 
-7. 正常にインストールされたことを確認します。
+6. 正常にインストールされたことを確認します。
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -160,7 +158,7 @@ subcollection: containers
 
    1 つの `ibmcloud-block-storage-plugin` ポッドと 1 つ以上の `ibmcloud-block-storage-driver` ポッドが表示されたら、インストールは成功しています。 `ibmcloud-block-storage-driver` ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 すべてのポッドが **Running** 状態である必要があります。
 
-8. ブロック・ストレージのストレージ・クラスがクラスターに追加されたことを確認します。
+7. ブロック・ストレージのストレージ・クラスがクラスターに追加されたことを確認します。
    ```
    kubectl get storageclasses | grep block
    ```
@@ -179,13 +177,13 @@ subcollection: containers
    ```
    {: screen}
 
-9. ブロック・ストレージをプロビジョンするすべてのクラスターに対して、上記の手順を繰り返します。
+8. ブロック・ストレージをプロビジョンするすべてのクラスターに対して、上記の手順を繰り返します。
 
 これで、アプリ用にブロック・ストレージをプロビジョンするための [PVC の作成](#add_block)に進むことができます。
 
 
-### {{site.data.keyword.Bluemix_notm}} Block Storage プラグインの更新
-既存の {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを最新バージョンにアップグレードできます。
+### {{site.data.keyword.cloud_notm}} Block Storage プラグインの更新
+既存の {{site.data.keyword.cloud_notm}} Block Storage プラグインを最新バージョンにアップグレードできます。
 {: shortdesc}
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -214,7 +212,7 @@ subcollection: containers
    ```
    {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを最新バージョンにアップグレードします。
+4. {{site.data.keyword.cloud_notm}} Block Storage プラグインを最新バージョンにアップグレードします。
    ```
    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -227,8 +225,8 @@ subcollection: containers
    {: pre}
 
 
-### {{site.data.keyword.Bluemix_notm}} Block Storage プラグインの削除
-クラスターで {{site.data.keyword.Bluemix_notm}} Block Storage をプロビジョンして使用する必要がない場合は、Helm チャートをアンインストールできます。
+### {{site.data.keyword.cloud_notm}} Block Storage プラグインの削除
+クラスターで {{site.data.keyword.cloud_notm}} Block Storage をプロビジョンして使用する必要がない場合は、Helm チャートをアンインストールできます。
 {: shortdesc}
 
 このプラグインを削除しても、既存の PVC、PV、データは削除されません。 このプラグインを削除すると、関連するすべてのポッドとデーモン・セットがクラスターから削除されます。 このプラグインを削除した後は、新しいブロック・ストレージをクラスターにプロビジョンしたり、既存のブロック・ストレージの PVC と PV を使用したりできません。
@@ -252,7 +250,7 @@ subcollection: containers
    ```
    {: screen}
 
-2. {{site.data.keyword.Bluemix_notm}} Block Storage プラグインを削除します。
+2. {{site.data.keyword.cloud_notm}} Block Storage プラグインを削除します。
    ```
    helm delete <helm_chart_name>
    ```
@@ -265,7 +263,7 @@ subcollection: containers
    {: pre}
    CLI 出力にポッドが表示されていなければ、ポッドは正常に削除されています。
 
-4. ブロック・ストレージのストレージ・クラスが削除されたことを確認します。
+4. ブロック・ストレージ・クラスが削除されたことを確認します。
    ```
    kubectl get storageclasses | grep block
    ```
@@ -318,7 +316,7 @@ subcollection: containers
    {: tip}
 
 3. プロビジョンするブロック・ストレージのタイプを選択します。
-   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance)をプロビジョンします。 エンデュランス・ストレージの場合、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
+   - **ブロンズ、シルバー、ゴールドのストレージ・クラス:** これらのストレージ・クラスは[エンデュランス・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance)をプロビジョンします。 エンデュランス・ストレージを使用する場合は、事前定義された IOPS ティアでストレージのサイズ (ギガバイト単位) を選択できます。
    - **カスタム・ストレージ・クラス:** このストレージ・クラスは[パフォーマンス・ストレージ](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provperformance)をプロビジョンします。 パフォーマンス・ストレージの場合は、より柔軟にストレージのサイズと IOPS を選択できます。
 
 4. ブロック・ストレージのサイズと IOPS を選択します。 IOPS のサイズと数値によって、合計 IOPS (1 秒あたりの入出力操作数) が決まります。これは、ストレージの速度を示す指標となります。 ストレージの合計 IOPS が多いほど、読み取り/書き込み操作の処理が高速になります。
@@ -402,7 +400,7 @@ subcollection: containers
          </tbody></table>
 
 5. クラスターまたは永続ボリューム請求 (PVC) が削除された後もデータを保持するかどうかを選択します。
-   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のブロック・ストレージを使用する](#existing_block)手順に従う必要があります。
+   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー・アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のブロック・ストレージを使用する](#existing_block)手順に従う必要があります。
    - PVC を削除するときに PV、データ、物理ブロック・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。
 
 6. 時間単位と月単位のどちらの課金方法にするかを選択します。 詳しくは、[料金設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/block-storage/pricing) を参照してください。 デフォルトでは、すべてのブロック・ストレージ・デバイスが時間単位の課金タイプでプロビジョンされます。
@@ -414,15 +412,15 @@ subcollection: containers
 ## アプリへのブロック・ストレージの追加
 {: #add_block}
 
-ブロック・ストレージをクラスターに[動的にプロビジョン](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントで実際のストレージ・デバイスが注文されます。
+ブロック・ストレージをクラスターに[動的にプロビジョン](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、IBM Cloud インフラストラクチャー・アカウントで実際のストレージ・デバイスが注文されます。
 {:shortdesc}
 
 ブロック・ストレージは、`ReadWriteOnce` アクセス・モードです。 これは、一度にクラスター内の 1 つのワーカー・ノードの 1 つのポッドにのみマウントできます。
 {: note}
 
 開始前に、以下のことを行います。
-- ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲に[発信アクセスを許可](/docs/containers?topic=containers-firewall#pvc)し、PVC を作成できるようにします。
-- [{{site.data.keyword.Bluemix_notm}} Block Storage プラグイン](#install_block)をインストールします。
+- ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャーの IP 範囲に[発信アクセスを許可](/docs/containers?topic=containers-firewall#pvc)し、PVC を作成できるようにします。
+- [{{site.data.keyword.cloud_notm}} Block Storage プラグイン](#install_block)をインストールします。
 - [事前定義されたストレージ・クラスを選択する](#block_predefined_storageclass)か、または[カスタマイズしたストレージ・クラス](#block_custom_storageclass)を作成します。
 
 ステートフル・セットにブロック・ストレージをデプロイしようとお考えですか? 詳しくは、[ステートフル・セットでのブロック・ストレージの使用](#block_statefulset)を参照してください。
@@ -670,12 +668,12 @@ subcollection: containers
 ### ステップ 1: 既存のブロック・ストレージの情報を取得する
 {: #existing-block-1}
 
-1.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API キーを取得または生成します。
-    1. [IBM Cloud インフラストラクチャー (SoftLayer) ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/classic?) にログインします。
+1.  IBM Cloud インフラストラクチャー・アカウントの API キーを取得または生成します。
+    1. [IBM Cloud インフラストラクチャー・ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/classic?) にログインします。
     2. **「アカウント」**、**「ユーザー」**、**「ユーザー・リスト」**の順に選択します。
     3. 自分のユーザー ID を見つけます。
     4. **「API キー」**列で、**「生成」**をクリックして API キーを生成するか、または**「表示」**をクリックして既存の API キーを表示します。
-2.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントの API ユーザー名を取得します。
+2.  IBM Cloud インフラストラクチャー・アカウントの API ユーザー名を取得します。
     1. **「ユーザー・リスト」**メニューで、自分のユーザー ID を選択します。
     2. **「API アクセス情報」**セクションで、自分の**「API ユーザー名」**を見つけます。
 3.  IBM Cloud インフラストラクチャー CLI プラグインにログインします。
@@ -684,7 +682,7 @@ subcollection: containers
     ```
     {: pre}
 
-4.  IBM Cloud インフラストラクチャー (SoftLayer) アカウントのユーザー名と API キーを使用して認証を受けることを選択します。
+4.  IBM Cloud インフラストラクチャー・アカウントのユーザー名と API キーを使用して認証を受けることを選択します。
 5.  前の手順で取得したユーザー名と API キーを入力します。
 6.  使用可能なブロック・ストレージ・デバイスをリストします。
     ```
@@ -860,7 +858,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## ステートフル・セットでのブロック・ストレージの使用
 {: #block_statefulset}
 
-データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ブロック・ストレージを使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.Bluemix_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
+データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ブロック・ストレージを使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.cloud_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
 {: shortdesc}
 
 **ブロック・ストレージをステートフル・セットに追加する場合、どんな点に留意する必要がありますか?** </br>
@@ -1065,11 +1063,11 @@ PV が正常に作成され、PVC にバインドされました。 これで、
              - containerPort: 80
              name: web
            volumeMounts:
-             - name: www
-              mountPath: /usr/share/nginx/html
-             - name: wwwww
-              mountPath: /tmp1
-      volumeClaimTemplates:
+             - name: myvol1
+               mountPath: /usr/share/nginx/html
+             - name: myvol2
+               mountPath: /tmp1
+       volumeClaimTemplates:
        - metadata:
           name: myvol1
         spec:
@@ -1222,7 +1220,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ストレージ容量またはパフォーマンスを向上させるために既存のボリュームを変更することができます。
 {: shortdesc}
 
-課金方法について不明な点がある場合や {{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ブロック・ストレージ容量の拡張](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity)および [IOPS の調整](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)を参照してください。 コンソールから行った更新は、永続ボリューム (PV) には反映されません。 この情報を PV に追加するには、`kubectl patch pv <pv_name>` を実行し、PV の **Labels** セクションと **Annotation** セクションで、サイズと IOPS を手動で更新します。
+課金方法について不明な点がある場合や {{site.data.keyword.cloud_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ブロック・ストレージ容量の拡張](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity)および [IOPS の調整](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS)を参照してください。 コンソールから行った更新は、永続ボリューム (PV) には反映されません。 この情報を PV に追加するには、`kubectl patch pv <pv_name>` を実行し、PV の **Labels** セクションと **Annotation** セクションで、サイズと IOPS を手動で更新します。
 {: tip}
 
 1. クラスターの PVC をリストし、**VOLUME** 列に表示される関連 PV の名前をメモします。
@@ -1379,7 +1377,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>課金</td>
-<td>デフォルトの課金タイプは、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
+<td>デフォルトの課金タイプは、{{site.data.keyword.cloud_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
 </tr>
 <tr>
 <td>料金設定</td>
@@ -1425,7 +1423,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>課金</td>
-<td>デフォルトの課金タイプは、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
+<td>デフォルトの課金タイプは、{{site.data.keyword.cloud_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
 </tr>
 <tr>
 <td>料金設定</td>
@@ -1470,7 +1468,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>課金</td>
-<td>デフォルトの課金タイプは、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
+<td>デフォルトの課金タイプは、{{site.data.keyword.cloud_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
 </tr>
 <tr>
 <td>料金設定</td>
@@ -1511,7 +1509,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 </tr>
 <tr>
 <td>課金</td>
-<td>デフォルトの課金タイプは、{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
+<td>デフォルトの課金タイプは、{{site.data.keyword.cloud_notm}} Block Storage プラグインのバージョンに応じて異なります。 <ul><li> バージョン 1.0.1 以上: 時間単位</li><li>バージョン 1.0.0 以下: 月単位</li></ul></td>
 </tr>
 <tr>
 <td>料金設定</td>
@@ -1541,7 +1539,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 
 ポッドの制約事項を知らずにブロック・ストレージ・インスタンスを作成すると、望ましくない結果が生じる可能性があります。 例えば、ご使用のストレージと同じワーカー・ノードに対してポッドをスケジュールできない場合があります。その理由は、そのワーカー・ノードのリソースが不十分であるか、そのワーカー・ノードにテイントが適用されているためそのワーカー・ノードではそのポッドのスケジューリングが許可されないからです。 トポロジー対応ボリューム・スケジューリングを使用すると、該当ストレージを使用する最初のポッドが作成されるまで、ブロック・ストレージ・インスタンスが遅延されます。
 
-トポロジー対応ボリューム・スケジューリングは、Kubernetes バージョン 1.12 以降を実行しているクラスターのみでサポートされています。 この機能を使用するには、{{site.data.keyword.Bluemix_notm}} Block Storage プラグイン・バージョン 1.2.0 以降をインストールしている必要があります。
+トポロジー対応ボリューム・スケジューリングは、Kubernetes バージョン 1.12 以降を実行しているクラスターのみでサポートされています。 この機能を使用するには、{{site.data.keyword.cloud_notm}} Block Storage プラグイン・バージョン 1.2.0 以降をインストールしている必要があります。
 {: note}
 
 次の例では、当該ストレージを使用する最初のポッドがスケジュール可能になるまで、ブロック・ストレージ・インスタンスの作成を遅延させるストレージ・クラスを作成する方法を示しています。 作成を遅延させるには、`volumeBindingMode: WaitForFirstConsumer` オプションを含める必要があります。 このオプションを含めない場合は、`volumeBindingMode` は自動的に `Immediate` に設定されて、PVC の作成時にブロック・ストレージ・インスタンスが作成されます。
@@ -1601,7 +1599,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 特定のゾーン内でブロック・ストレージを作成する場合は、カスタマイズされたストレージ・クラス内でそのゾーンと地域を指定できます。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage プラグインのバージョン 1.0.0 を使用する場合、または特定のゾーンで[ブロック・ストレージを静的にプロビジョンする](#existing_block)場合には、カスタマイズ・ストレージ・クラスを使用します。 その他の場合は、[PVC で直接ゾーンを指定してください](#add_block)。
+{{site.data.keyword.cloud_notm}} Block Storage プラグインのバージョン 1.0.0 を使用する場合、または特定のゾーンで[ブロック・ストレージを静的にプロビジョンする](#existing_block)場合には、カスタマイズ・ストレージ・クラスを使用します。 その他の場合は、[PVC で直接ゾーンを指定してください](#add_block)。
 {: note}
 
 次の `.yaml` ファイルでカスタマイズしているストレージ・クラスは、非 retain の `ibm-block-silver` ストレージ・クラスに基づいています。`type` は `"Endurance"`、`iopsPerGB` は `4`、`sizeRange` は `"[20-12000]Gi"`、`reclaimPolicy` の設定は `"Delete"` です。 ゾーンは `dal12` と指定しています。 別のストレージ・クラスをベースとして使用するには、[ストレージ・クラス・リファレンス](#block_storageclass_reference)を参照してください。
@@ -1709,4 +1707,6 @@ PV が正常に作成され、PVC にバインドされました。 これで、
   {: codeblock}
 
 <br />
+
+
 

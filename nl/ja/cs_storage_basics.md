@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Kubernetes ストレージの基本について
 {: #kube_concepts}
 
@@ -34,15 +32,15 @@ subcollection: containers
 ストレージのプロビジョニングを開始する前に、Kubernetes の永続ボリュームと永続ボリューム請求という概念と、それらのクラスター内での機能を理解することが重要です。
 {: shortdesc}
 
-Kubernetes クラスターのストレージ構成要素を以下の図に示しています。
+クラスターのストレージ構成要素を以下の図に示しています。
 
 <img src="images/cs_storage_pvc_pv.png" alt="クラスター内のストレージ・コンポーネント" width="275" style="width: 275px; border-style: none"/>
 
 - **クラスター**</br> デフォルトで、[ファイル・ストレージをプロビジョン](/docs/containers?topic=containers-file_storage#add_file)するためのプラグインが、どのクラスターにもセットアップされます。 他のアドオン ([ブロック・ストレージ](/docs/containers?topic=containers-block_storage)用のものなど) をインストールすることも可能です。 クラスターでストレージを使用するには、永続ボリューム請求、永続ボリューム、物理ストレージ・インスタンスを作成する必要があります。 クラスターを削除するときには、関連するストレージ・インスタンスを削除することを選択できます。
 - **アプリ**</br> ストレージ・インスタンスとの間で読み書きを行うには、永続ボリューム請求 (PVC) をアプリにマウントする必要があります。 ストレージ・タイプごとに読み取り/書き込みのルールがあります。 例えば、ファイル・ストレージの場合は、同じ PVC に複数のポッドをマウントできます。 ブロック・ストレージは、RWO (ReadWriteOnce) アクセス・モードであるため、1 つのポッドにしかマウントできません。
-- **永続ボリューム請求 (PVC)** </br> PVC は、特定のタイプや構成で永続ストレージをプロビジョンするための要求です。 永続ストレージのフレーバーを指定するには、[Kubernetes ストレージ・クラス](#storageclasses)を使用します。 クラスター管理者がストレージ・クラスを定義することも、{{site.data.keyword.containerlong_notm}} の事前定義ストレージ・クラスの中から選択することも可能です。 PVC を作成すると、要求が {{site.data.keyword.Bluemix}} ストレージ・プロバイダーに送信されます。 ストレージ・クラスで定義されている構成に応じて、物理ストレージ・デバイスが注文され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 要求対象の構成が存在しなければ、ストレージは作成されません。
-- **永続ボリューム (PV)** </br> PV は、クラスターにボリュームとして追加される仮想ストレージ・インスタンスです。 PV は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの物理ストレージ・デバイスを参照し、そのストレージ・デバイスとの通信のために使用する API を抽象化します。 PV をアプリにマウントするには、対応する PVC が必要です。 マウントした PV は、コンテナーのファイル・システム内でフォルダーとして表示されます。
-- **物理ストレージ** </br> データを永続化するために使用できる物理ストレージ・インスタンス。 {{site.data.keyword.Bluemix_notm}} 内の物理ストレージの例としては、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)、[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_storage)、[オブジェクト・ストレージ](/docs/containers?topic=containers-object_storage#object_storage)、[Portworx](/docs/containers?topic=containers-portworx#portworx) で SDS ストレージとして使用できるローカル・ワーカー・ノード・ストレージなどがあります。 {{site.data.keyword.Bluemix_notm}} には、物理ストレージ・インスタンスの高可用性機能が用意されています。 ただし、物理ストレージ・インスタンスに保管したデータの自動バックアップ機能はありません。 バックアップ/リストア・ソリューションをセットアップする方法は、使用するストレージのタイプによって異なります。
+- **永続ボリューム請求 (PVC)** </br> PVC は、特定のタイプや構成で永続ストレージをプロビジョンするための要求です。 永続ストレージのフレーバーを指定するには、[Kubernetes ストレージ・クラス](#storageclasses)を使用します。 クラスター管理者がストレージ・クラスを定義することも、{{site.data.keyword.containerlong_notm}} の事前定義ストレージ・クラスの中から選択することも可能です。 PVC を作成すると、要求が {{site.data.keyword.Bluemix}} ストレージ・プロバイダーに送信されます。 ストレージ・クラスで定義されている構成に応じて、物理ストレージ・デバイスが注文され、IBM Cloud インフラストラクチャー・アカウントにプロビジョンされます。 要求対象の構成が存在しなければ、ストレージは作成されません。
+- **永続ボリューム (PV)** </br> PV は、クラスターにボリュームとして追加される仮想ストレージ・インスタンスです。 PV は、IBM Cloud インフラストラクチャー・アカウントの物理ストレージ・デバイスを参照し、そのストレージ・デバイスとの通信のために使用する API を抽象化します。 PV をアプリにマウントするには、対応する PVC が必要です。 マウントした PV は、コンテナーのファイル・システム内でフォルダーとして表示されます。
+- **物理ストレージ** </br> データを永続化するために使用できる物理ストレージ・インスタンス。 {{site.data.keyword.cloud_notm}} 内の物理ストレージの例としては、[ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storage)、[ブロック・ストレージ](/docs/containers?topic=containers-block_storage#block_storage)、[オブジェクト・ストレージ](/docs/containers?topic=containers-object_storage#object_storage)、[Portworx](/docs/containers?topic=containers-portworx#portworx) で SDS ストレージとして使用できるローカル・ワーカー・ノード・ストレージなどがあります。 {{site.data.keyword.cloud_notm}} には、物理ストレージ・インスタンスの高可用性機能が用意されています。 ただし、物理ストレージ・インスタンスに保管したデータの自動バックアップ機能はありません。 バックアップ/リストア・ソリューションをセットアップする方法は、使用するストレージのタイプによって異なります。
 
 PVC、PV、物理ストレージ・デバイスを作成して使用する方法の詳細については、以下を参照してください。
 - [動的プロビジョニング](#dynamic_provisioning)
@@ -67,8 +65,8 @@ PVC、PV、物理ストレージ・デバイスを作成して使用する方法
 <img src="images/cs_storage_dynamic.png" alt="クラスター内でのファイル・ストレージの動的プロビジョンのサンプル・フロー" width="500" style="width: 500px; border-style: none"/>
 
 1. ユーザーが、ストレージ・タイプ、ストレージ・クラス、サイズ (ギガバイト)、IOPS 数、課金タイプを指定した永続ボリューム請求 (PVC) を作成します。 ストレージ・クラスによって、プロビジョンするストレージのタイプと、サイズや IOPS の対応範囲が決まります。 クラスターに PVC を作成すると、要求したストレージ・タイプのストレージ・プラグインによって、指定したストレージのプロビジョンが自動的に開始されます。
-2. ストレージ・デバイスが自動的に注文され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントにプロビジョンされます。 ストレージ・デバイスの課金サイクルが開始されます。
-3. ストレージ・プラグインによって、自動的にクラスターに永続ボリューム (PV) が作成され、IBM Cloud インフラストラクチャー (SoftLayer) アカウントの実際のストレージ・デバイスを参照する仮想ストレージ・デバイスが作成されます。
+2. ストレージ・デバイスが自動的に注文され、IBM Cloud インフラストラクチャー・アカウントにプロビジョンされます。 ストレージ・デバイスの課金サイクルが開始されます。
+3. ストレージ・プラグインによって、自動的にクラスターに永続ボリューム (PV) が作成され、IBM Cloud インフラストラクチャー・アカウントの実際のストレージ・デバイスを参照する仮想ストレージ・デバイスが作成されます。
 4. PVC と PV の相互接続が自動的に確立されます。 PVC と PV の状況が `Bound` に変わります。 PVC を使用して永続ストレージをアプリにマウントできるようになります。 PVC を削除すると、PV と関連ストレージ・インスタンスも削除されます。 </br>
 
 **動的プロビジョニングの使用例**</br>
@@ -85,7 +83,7 @@ PVC、PV、物理ストレージ・デバイスを作成して使用する方法
 ## 静的プロビジョニング
 {: #static_provisioning}
 
-IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存の永続ストレージ・デバイスがある場合は、静的プロビジョニングを使用してクラスターでストレージ・インスタンスを使用可能にすることができます。
+IBM Cloud インフラストラクチャー・アカウントに既存の永続ストレージ・デバイスがある場合は、静的プロビジョニングを使用してクラスターでストレージ・インスタンスを使用可能にすることができます。
 {: shortdesc}
 
 **機能**</br>
@@ -101,15 +99,15 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存
 <img src="images/cs_storage_static.png" alt="クラスター内でのファイル・ストレージの静的プロビジョンのサンプル・フロー" width="500" style="width: 500px; border-style: none"/>
 
 1. クラスター管理者が、既存のストレージ・デバイスに関するすべての情報を集め、クラスターに永続ボリューム (PV) を作成します。
-2. ストレージ・プラグインが、PV のストレージ詳細情報に基づいて、IBM Cloud インフラストラクチャー (SoftLayer) アカウントのストレージ・デバイスに PV を接続します。
+2. ストレージ・プラグインが、PV のストレージ詳細情報に基づいて、IBM Cloud インフラストラクチャー・アカウントのストレージ・デバイスに PV を接続します。
 3. クラスター管理者または開発者が PVC を作成します。 PV とストレージ・デバイスが既に存在するので、ストレージ・クラスは PVC に指定しません。
 4. PVC を作成すると、ストレージ・プラグインによって、PVC と既存の PV のマッチングが試みられます。 PVC と PV の両方でサイズ、IOPS、アクセス・モードの値が同じであれば、マッチングが成立します。 マッチングが成立すると、PVC と PV の状況が `Bound` に変わります。 PVC を使用して永続ストレージをアプリにマウントできるようになります。 PVC を削除しても、PV と物理ストレージ・インスタンスは削除されません。 PVC、PV、物理ストレージ・インスタンスを個々に削除する必要があります。  </br>
 
 **静的プロビジョニングの使用例**</br>
 
 永続ストレージの静的プロビジョニングの一般的なユース・ケースを次に示します。
-1. **保存データをクラスター内で使用できるようにする:** 動的プロビジョニングで、保存ストレージ・クラスを使用して永続ストレージをプロビジョンしました。 PVC を削除しましたが、PV、IBM Cloud インフラストラクチャー (SoftLayer) 内の物理ストレージ、データはまだ存在しています。 この機能を使用すれば、その保存データにクラスター内のアプリからアクセスできます。
-2. **既存のストレージ・デバイスを使用する:** IBM Cloud インフラストラクチャー (SoftLayer) アカウントに永続ストレージを直接プロビジョンしている場合に、この機能を使用すれば、そのストレージ・デバイスをクラスター内で使用できます。
+1. **保存データをクラスター内で使用できるようにする:** 動的プロビジョニングで、保存ストレージ・クラスを使用して永続ストレージをプロビジョンしました。 PVC を削除しましたが、PV、IBM Cloud インフラストラクチャー内の物理ストレージ、データはまだ存在しています。 この機能を使用すれば、その保存データにクラスター内のアプリからアクセスできます。
+2. **既存のストレージ・デバイスを使用する:** IBM Cloud インフラストラクチャー・アカウントに永続ストレージを直接プロビジョンしている場合に、この機能を使用すれば、そのストレージ・デバイスをクラスター内で使用できます。
 3. **同じゾーン内のクラスター間で永続ストレージを共有する:** クラスターの永続ストレージをプロビジョンしました。 同じゾーン内の他のクラスターとの間でその永続ストレージ・インスタンスを共有するには、他のクラスターで PV とそれに対応する PVC を手動で作成する必要があります。 **注:** クラスター間で永続ストレージを共有できるのは、クラスターとストレージ・インスタンスが同じゾーン内にある場合に限られます。
 4. **同じクラスター内の名前空間の間で永続ストレージを共有する:** クラスターの名前空間に永続ストレージをプロビジョンしました。 この機能を使用すれば、クラスター内の別の名前空間にデプロイしたアプリ・ポッドで同じストレージ・インスタンスを使用できます。
 
@@ -123,7 +121,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存
 永続ストレージを動的にプロビジョンするには、ストレージのタイプと構成を定義する必要があります。
 {: shortdesc}
 
-[Kubernetes ストレージ・クラス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/storage-classes/) を使用して、{{site.data.keyword.Bluemix_notm}} でサポートされる基礎のストレージ・プラットフォームを抽象化しておけば、サポートされるサイズ、IOPS、保存ポリシーについて詳しく知らなくても、永続ストレージをクラスターに正常にプロビジョンできます。 {{site.data.keyword.containerlong_notm}} には、サポートされるストレージ・タイプごとに、事前定義のストレージ・クラスが用意されています。 各ストレージ・クラスは、サポートされているストレージ層を抽象化した設計になっていますが、サイズや IOPS や保存ポリシーを選択することも可能です。
+[Kubernetes ストレージ・クラス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/storage/storage-classes/) を使用して、{{site.data.keyword.cloud_notm}} でサポートされる基礎のストレージ・プラットフォームを抽象化しておけば、サポートされるサイズ、IOPS、保存ポリシーについて詳しく知らなくても、永続ストレージをクラスターに正常にプロビジョンできます。 {{site.data.keyword.containerlong_notm}} には、サポートされるストレージ・タイプごとに、事前定義のストレージ・クラスが用意されています。 各ストレージ・クラスは、サポートされているストレージ層を抽象化した設計になっていますが、サイズや IOPS や保存ポリシーを選択することも可能です。
 
 事前定義ストレージ・クラスの仕様については、以下を参照してください。
 - [ファイル・ストレージ](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
@@ -210,7 +208,7 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存
 
 開始前に、以下のことを行います。
 - [クラスターを Kubernetes CLI のターゲットとして設定](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)します。
-- 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー (SoftLayer) アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャー (SoftLayer) のアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_vlan_spanning_get)を使用します。
+- 1 つのクラスターに複数の VLAN がある場合、同じ VLAN 上に複数のサブネットがある場合、または複数ゾーン・クラスターがある場合は、IBM Cloud インフラストラクチャー・アカウントに対して[仮想ルーター機能 (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) を有効にして、ワーカー・ノードがプライベート・ネットワーク上で相互に通信できるようにする必要があります。 VRF を有効にするには、[IBM Cloud インフラストラクチャーのアカウント担当者に連絡してください](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion)。 VRF が既に有効になっているかどうかを確認するには、`ibmcloud account show` コマンドを使用します。 VRF の有効化が不可能または不要な場合は、[VLAN スパンニング](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)を有効にしてください。 この操作を実行するには、**「ネットワーク」>「ネットワーク VLAN スパンニングの管理」**で設定する[インフラストラクチャー権限](/docs/containers?topic=containers-users#infra_access)が必要です。ない場合は、アカウント所有者に対応を依頼してください。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 既存の PV を更新するには、以下のようにします。
 
@@ -284,3 +282,5 @@ IBM Cloud インフラストラクチャー (SoftLayer) アカウントに既存
 既存の PV にラベルを付けたので、その PV を複数ゾーン・クラスターにマウントできるようになりました。 詳細については、以下のリンクを参照してください。
 - [既存の NFS ファイル・ストレージ](/docs/containers?topic=containers-file_storage#existing_file)の使用
 - [既存のブロック・ストレージ](/docs/containers?topic=containers-block_storage#existing_block)の使用
+
+

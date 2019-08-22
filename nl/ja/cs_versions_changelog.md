@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,31 +24,260 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # バージョンの変更ログ
 {: #changelog}
 
-{{site.data.keyword.containerlong}} Kubernetes クラスターに利用可能なメジャー、マイナー、パッチの更新に関するバージョン変更の情報を表示します。 変更には、Kubernetes および {{site.data.keyword.Bluemix_notm}} Provider コンポーネントへの更新が含まれます。
+{{site.data.keyword.containerlong}} Kubernetes クラスターに利用可能なメジャー、マイナー、パッチの更新に関するバージョン変更の情報を表示します。 変更には、Kubernetes および {{site.data.keyword.cloud_notm}} Provider コンポーネントへの更新が含まれます。
 {:shortdesc}
 
-変更ログに特に記載がない限り、{{site.data.keyword.containerlong_notm}} プロバイダー・バージョンでは、ベータ版の Kubernetes API および機能が有効です。変更される可能性のある Kubernetes アルファ機能は無効になっています。
+変更ログに特に記載がない限り、{{site.data.keyword.containerlong_notm}} プロバイダー・バージョンでは、ベータ版の Kubernetes API および機能が有効です。 変更される可能性のある Kubernetes アルファ機能は無効になっています。
 
 メジャー・バージョン、マイナー・バージョン、パッチ・バージョンについてと、マイナー・バージョン間の準備アクションについて詳しくは、[Kubernetes のバージョン](/docs/containers?topic=containers-cs_versions)を参照してください。
 {: tip}
 
 前のバージョンからの変更点については、以下の変更ログを参照してください。
--  バージョン 1.14 [変更ログ](#114_changelog)。
--  バージョン 1.13 [変更ログ](#113_changelog)。
--  バージョン 1.12 [変更ログ](#112_changelog)。
--  **非推奨**: バージョン 1.11 [変更ログ](#111_changelog)。
--  非サポートのバージョンの変更ログの[アーカイブ](#changelog_archive)。
+- バージョン 1.14 [変更ログ](#114_changelog)。
+- バージョン 1.13 [変更ログ](#113_changelog)。
+- バージョン 1.12 [変更ログ](#112_changelog)。
+- 非サポートのバージョンの変更ログの[アーカイブ](#changelog_archive)。
 
 一部の変更ログは_ワーカー・ノード・フィックスパック_ に関するものであり、ワーカー・ノードにのみ適用されます。 [これらのパッチを適用して](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update)、ワーカー・ノードのセキュリティー・コンプライアンスを確実にする必要があります。 このようなワーカー・ノード・フィックスパックのバージョンはマスターよりも高くなることがあります。ワーカー・ノードに固有のビルド・フィックスパックがあるからです。 他の変更ログは_マスター・フィックスパック_ に関するものであり、クラスター・マスターにのみ適用されます。 マスターのフィックスパックは自動的に適用されない場合があります。 [これらを手動で適用](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update)することもできます。 パッチのタイプについて詳しくは、[更新タイプ](/docs/containers?topic=containers-cs_versions#update_types)を参照してください。
 {: note}
 
 </br>
 
+
 ## バージョン 1.14 変更ログ
 {: #114_changelog}
+
+### ワーカー・ノード・フィックスパック 1.14.4_1526 (2019 年 7 月 22 日リリース) の変更ログ
+{: #1144_1526_worker}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.14.4_1526 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.3_1525 からの変更点">
+<caption>バージョン 1.14.3_1525 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.3</td>
+<td>v1.14.4</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4) を参照してください。</td>
+</tr>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[CVE-2019-13012 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) および [CVE-2019-7307 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html) への対策として、パッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### マスター・フィックスパック 1.14.4_1526 (2019 年 7 月 15 日リリース) の変更ログ
+{: #1144_1526}
+
+以下の表に、マスターのフィックスパック 1.14.4_1526 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.3_1525 からの変更点">
+<caption>バージョン 1.14.3_1525 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.6.1</td>
+<td>v3.6.4</td>
+<td>[Calico リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.6/release-notes/) を参照してください。 更新により、[TTA-2019-001![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001) が解決されます。</td>
+</tr>
+<tr>
+<td>CoreDNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kubernetes` ゾーン内の DNS レコードの TTL についての CoreDNS のデフォルト構成を、5 秒から 30 秒に変更。これは、KubeDNS のデフォルト構成に合わせた変更です。既存の CoreDNS 構成は変更されません。CoreDNS 構成の変更について詳しくは、[クラスター DNS プロバイダーのカスタマイズ](/docs/containers?topic=containers-cluster_dns#dns_customize)を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>基本イメージのパッケージを更新。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.3</td>
+<td>v1.14.4</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4) を参照してください。 </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.3-113</td>
+<td>v1.14.4-139</td>
+<td>Kubernetes 1.14.4 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.6.4 に更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.14.3_1525 (2019 年 7 月 8 日リリース) の変更ログ
+{: #1143_1525}
+
+以下の表に、ワーカー・ノードのパッチ 1.14.3_1525 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.3_1524 からの変更点">
+<caption>バージョン 1.14.3_1524 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### ワーカー・ノード・フィックスパック 1.14.3_1524 (2019 年 6 月 24 日リリース) の変更ログ
+{: #1143_1524}
+
+以下の表に、ワーカー・ノードのパッチ 1.14.3_1524 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.3_1523 からの変更点">
+<caption>バージョン 1.14.3_1523 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.2.7) を参照してください。</td>
+</tr>
+<tr>
+<td>最大ポッド数</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>11 個を超える CPU コアを持つワーカー・ノードのポッド数の上限を、コアあたり 10 個のポッド (ワーカー・ノードあたり最大 250 個のポッド) に引き上げ。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.14.3_1523 (2019 年 6 月 17 日リリース) の変更ログ
+{: #1143_1523}
+
+以下の表に、パッチ 1.14.3_1523 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.14.2_1521 からの変更点">
+<caption>バージョン 1.14.2_1521 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>[CVE-2019-8457 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457) への対策としてイメージが更新されました。 GPU ドライバーが [430.14 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/Download/driverResults.aspx/147582/) に更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
+<td>346</td>
+<td>347</td>
+<td>IAM API キーを暗号化または暗号化解除できるように更新。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.2-100</td>
+<td>v1.14.3-113</td>
+<td>Kubernetes 1.14.3 リリースをサポートするように更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.2</td>
+<td>v1.14.3</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.3) を参照してください。</td>
+</tr>
+<tr>
+<td>Kubernetes 機能ゲートの構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>オペレーティング・システムおよび Kubernetes コンポーネントで使用するプロセス ID (PID) を予約するための `SupportNodePidsLimit=true` 構成を追加。CPU スロットルの問題を軽減するための `CustomCPUCFSQuotaPeriod=true` 構成を追加。</td>
+</tr>
+<tr>
+<td>Kubernetes マスターのパブリック・サービス・エンドポイント</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[パブリック・サービス・エンドポイントの有効化](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)に関連した問題を修正。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 1.14.2_1521 (2019 年 6 月 4 日リリース) の変更ログ
 {: #1142_1521}
@@ -89,10 +318,10 @@ subcollection: containers
 <td>GPU デバイスのプラグインおよびインストーラー</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.14.1-71</td>
 <td>v1.14.2-100</td>
 <td>Kubernetes 1.14.2 リリースをサポートするように更新されました。</td>
@@ -113,7 +342,7 @@ subcollection: containers
 <td>トラステッド・コンピューティング・エージェント</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 </tbody>
 </table>
@@ -177,7 +406,7 @@ subcollection: containers
 <td>Kubernetes 構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。 さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
 </tr>
 <tr>
 <td>OpenVPN クライアント構成</td>
@@ -221,7 +450,7 @@ subcollection: containers
 <td>CoreDNS</td>
 <td>1.2.6</td>
 <td>1.3.1</td>
-<td>[CoreDNS リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/2019/01/13/coredns-1.3.1-release/) を参照してください。 更新には、クラスター DNS サービスの[メトリック・ポート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/plugins/metrics/) の追加が含まれます。<br><br>CoreDNS がサポートされる唯一のクラスター DNS プロバイダーになりました。クラスターを旧バージョンから Kubernetes バージョン 1.14 に更新し、KubeDNS を使用していた場合、KubeDNS はクラスター更新時に自動的に CoreDNS に移行されます。詳細および更新前に CoreDNS をテストする方法については、[クラスター DNS プロバイダーの構成](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns)を参照してください。</td>
+<td>[CoreDNS リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/2019/01/13/coredns-1.3.1-release/) を参照してください。 更新には、クラスター DNS サービスの[メトリック・ポート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/plugins/metrics/) の追加が含まれます。 <br><br>CoreDNS がサポートされる唯一のクラスター DNS プロバイダーになりました。 クラスターを旧バージョンから Kubernetes バージョン 1.14 に更新し、KubeDNS を使用していた場合、KubeDNS はクラスター更新時に自動的に CoreDNS に移行されます。 詳細および更新前に CoreDNS をテストする方法については、[クラスター DNS プロバイダーの構成](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns)を参照してください。</td>
 </tr>
 <tr>
 <td>GPU デバイスのプラグインおよびインストーラー</td>
@@ -230,10 +459,10 @@ subcollection: containers
 <td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.5-107</td>
 <td>v1.14.1-71</td>
-<td>Kubernetes 1.14.1 リリースをサポートするように更新されました。さらに、`calicoctl` バージョンが 3.6.1 に更新されました。ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新が修正されました。プライベート・ロード・バランサーは、[プライベート・エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge#edge)での実行をサポートするようになりました。</td>
+<td>Kubernetes 1.14.1 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.6.1 に更新されました。 ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ネットワーク・ロード・バランサー (NLB) に対する更新が修正されました。プライベート・ロード・バランサーは、[プライベート・エッジ・ワーカー・ノード](/docs/containers?topic=containers-edge#edge)での実行をサポートするようになりました。</td>
 </tr>
 <tr>
 <td>IBM ポッド・セキュリティー・ポリシー</td>
@@ -251,7 +480,7 @@ subcollection: containers
 <td>Kubernetes</td>
 <td>v1.13.5</td>
 <td>v1.14.1</td>
-<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) および [Kubernetes 1.14 のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/) を参照してください。<br><br>Kubernetes のデフォルトの役割ベースのアクセス制御 (RBAC) ポリシーで、[非認証ユーザーに対するディスカバリー API および許可確認 API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles) へのアクセスが認可されなくなりました。この変更は、新規バージョン 1.14 のクラスターにのみ適用されます。以前のバージョンからクラスターを更新した場合、非認証ユーザーはディスカバリー API および許可確認 API に引き続きアクセスできます。</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.1) および [Kubernetes 1.14 のブログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2019/03/25/kubernetes-1-14-release-announcement/) を参照してください。<br><br>Kubernetes のデフォルトの役割ベースのアクセス制御 (RBAC) ポリシーで、[非認証ユーザーに対するディスカバリー API および許可確認 API ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles) へのアクセスが認可されなくなりました。 この変更は、新規バージョン 1.14 のクラスターにのみ適用されます。 以前のバージョンからクラスターを更新した場合、非認証ユーザーはディスカバリー API および許可確認 API に引き続きアクセスできます。</td>
 </tr>
 <tr>
 <td>Kubernetes アドミッション・コントローラーの構成</td>
@@ -259,7 +488,7 @@ subcollection: containers
 <td>該当なし</td>
 <td><ul>
 <li>クラスターの Kubernetes API サーバーの `--enable-admission-plugins` オプションに `NodeRestriction` が追加され、このセキュリティー強化をサポートするようにクラスター・リソースが構成されました。</li>
-<li>クラスターの Kubernetes API サーバーについて、`--enable-admission-plugins` オプションから `Initializers` が削除され、`--runtime-config` オプションから `admissionregistration.k8s.io/v1alpha1=true` が削除されました。これらの API がサポートされなくなったためです。代わりに、[Kubernetes アドミッション Webhook ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) を使用できます。</li></ul></td>
+<li>クラスターの Kubernetes API サーバーについて、`--enable-admission-plugins` オプションから `Initializers` が削除され、`--runtime-config` オプションから `admissionregistration.k8s.io/v1alpha1=true` が削除されました。これらの API がサポートされなくなったためです。 代わりに、[Kubernetes アドミッション Webhook ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) を使用できます。</li></ul></td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>
@@ -273,7 +502,7 @@ subcollection: containers
 <td>該当なし</td>
 <td><ul>
   <li>コンテナー・ランタイム構成の選択を無効にするために、`RuntimeClass=false` が追加されました。</li>
-  <li>`scheduler.alpha.kubernetes.io/critical-pod` ポッド・アノテーションがサポートされなくなったため、`ExperimentalCriticalPodAnnotation=true` が削除されました。代わりに、[Kubernetes のポッドの優先度 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority) を使用できます。</li></ul></td>
+  <li>`scheduler.alpha.kubernetes.io/critical-pod` ポッド・アノテーションがサポートされなくなったため、`ExperimentalCriticalPodAnnotation=true` が削除されました。 代わりに、[Kubernetes のポッドの優先度 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority) を使用できます。</li></ul></td>
 </tr>
 <tr>
 <td>トラステッド・コンピューティング・エージェント</td>
@@ -289,6 +518,230 @@ subcollection: containers
 
 ## バージョン 1.13 変更ログ
 {: #113_changelog}
+
+バージョン 1.13 の変更ログをまとめます。
+{: shortdesc}
+
+### ワーカー・ノード・フィックスパック 1.13.8_1529 (2019 年 7 月 22 日リリース) の変更ログ
+{: #1138_1529_worker}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.13.8_1529 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.7_1528 からの変更点">
+<caption>バージョン 1.13.7_1528 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.7</td>
+<td>v1.13.8</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8) を参照してください。</td>
+</tr>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[CVE-2019-13012 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) および [CVE-2019-7307 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html) への対策として、パッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### マスター・フィックスパック 1.13.8_1529 (2019 年 7 月 15 日リリース) の変更ログ
+{: #1138_1529}
+
+以下の表に、マスターのフィックスパック 1.13.8_1529 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.7_1528 からの変更点">
+<caption>バージョン 1.13.7_1528 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.4.4</td>
+<td>v3.6.4</td>
+<td>[Calico リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.6/release-notes/) を参照してください。 更新により、[TTA-2019-001![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001) が解決されます。</td>
+</tr>
+<tr>
+<td>CoreDNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kubernetes` ゾーン内の DNS レコードの TTL についての CoreDNS のデフォルト構成を、5 秒から 30 秒に変更。これは、KubeDNS のデフォルト構成に合わせた変更です。既存の CoreDNS 構成は変更されません。CoreDNS 構成の変更について詳しくは、[クラスター DNS プロバイダーのカスタマイズ](/docs/containers?topic=containers-cluster_dns#dns_customize)を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>基本イメージのパッケージを更新。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.7</td>
+<td>v1.13.8</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8) を参照してください。 </td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.7-162</td>
+<td>v1.13.8-188</td>
+<td>Kubernetes 1.13.8 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.6.4 に更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.13.7_1528 (2019 年 7 月 8 日リリース) の変更ログ
+{: #1137_1528}
+
+以下の表に、ワーカー・ノードのパッチ 1.13.7_1528 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.7_1527 からの変更点">
+<caption>バージョン 1.13.7_1527 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### ワーカー・ノード・フィックスパック 1.13.7_1527 (2019 年 6 月 24 日リリース) の変更ログ
+{: #1137_1527}
+
+以下の表に、ワーカー・ノードのパッチ 1.13.7_1527 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.7_1526 からの変更点">
+<caption>バージョン 1.13.7_1526 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.2.7) を参照してください。</td>
+</tr>
+<tr>
+<td>最大ポッド数</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>11 個を超える CPU コアを持つワーカー・ノードのポッド数の上限を、コアあたり 10 個のポッド (ワーカー・ノードあたり最大 250 個のポッド) に引き上げ。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.13.7_1526 (2019 年 6 月 17 日リリース) の変更ログ
+{: #1137_1526}
+
+以下の表に、パッチ 1.13.7_1526 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.13.6_1524 からの変更点">
+<caption>バージョン 1.13.6_1524 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>[CVE-2019-8457 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457) への対策としてイメージが更新されました。 GPU ドライバーが [430.14 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/Download/driverResults.aspx/147582/) に更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
+<td>346</td>
+<td>347</td>
+<td>IAM API キーを暗号化または暗号化解除できるように更新。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.6-139</td>
+<td>v1.13.7-162</td>
+<td>Kubernetes 1.13.7 リリースをサポートするように更新されました。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.6</td>
+<td>v1.13.7</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.7) を参照してください。</td>
+</tr>
+<td>Kubernetes マスターのパブリック・サービス・エンドポイント</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[パブリック・サービス・エンドポイントの有効化](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)に関連した問題を修正。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 1.13.6_1524 (2019 年 6 月 4 日リリース) の変更ログ
 {: #1136_1524}
@@ -329,7 +782,7 @@ subcollection: containers
 <td>GPU デバイスのプラグインおよびインストーラー</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
 <td>Kubernetes Metrics Server</td>
@@ -341,7 +794,7 @@ subcollection: containers
 <td>トラステッド・コンピューティング・エージェント</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 </tbody>
 </table>
@@ -408,10 +861,10 @@ subcollection: containers
 <td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.5-107</td>
 <td>v1.13.6-139</td>
-<td>Kubernetes 1.13.6 リリースをサポートするように更新されました。ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新プロセスが修正されました。</td>
+<td>Kubernetes 1.13.6 リリースをサポートするように更新されました。 さらに、ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ネットワークのロード・バランサーに対する更新のプロセスが修正されました。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -423,7 +876,7 @@ subcollection: containers
 <td>Kubernetes 構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。 さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
 </tr>
 <tr>
 <td>OpenVPN クライアント構成</td>
@@ -528,7 +981,7 @@ subcollection: containers
 <td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2018-0732 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)、および [CVE-2019-1559 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559) が解決されます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.4-86</td>
 <td>v1.13.5-107</td>
 <td>Kubernetes 1.13.5 リリースおよび Calico 3.4.4 リリースをサポートするように更新されました。</td>
@@ -610,7 +1063,7 @@ subcollection: containers
 <td>クラスター DNS プロバイダーの CoreDNS への切り替えによって更新されないように、Kubernetes バージョン 1.11 からの更新プロセスが修正されました。 引き続き更新後に、[CoreDNS をクラスター DNS プロバイダーとしてセットアップ](/docs/containers?topic=containers-cluster_dns#set_coredns)できます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>345</td>
 <td>346</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -622,7 +1075,7 @@ subcollection: containers
 <td>Kubernetes シークレットを管理するための `context deadline exceeded` および `timeout` で断続的に発生するエラーが修正されました。 また、既存の Kubernetes シークレットが暗号化されないままになることがある鍵管理サービスの更新も修正されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>143</td>
 <td>146</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -678,7 +1131,7 @@ subcollection: containers
 <td>GPU ドライバーが [418.43 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/object/unix.html) に更新されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>344</td>
 <td>345</td>
 <td>[プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)のサポートが追加されました。</td>
@@ -734,13 +1187,13 @@ subcollection: containers
 <td>[CVE-2019-6454 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.13.2-62</td>
 <td>v1.13.4-86</td>
-<td>Kubernetes 1.13.4 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したバージョン 1.0 のロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.Bluemix_notm}} ドキュメント・リンクを使用するようにロード・バランサーのバージョン 1.0 および 2.0 のイベントが更新されました。</td>
+<td>Kubernetes 1.13.4 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したバージョン 1.0 のロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.cloud_notm}} ドキュメント・リンクを使用するようにロード・バランサーのバージョン 1.0 および 2.0 のイベントが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>342</td>
 <td>344</td>
 <td>イメージの基本オペレーティング・システムが Fedora から Alpine に変更されました。 [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -764,7 +1217,7 @@ subcollection: containers
 <td>`--feature-gates` オプションに `ExperimentalCriticalPodAnnotation=true` が追加されました。 この設定は、ポッドを非推奨の `scheduler.alpha.kubernetes.io/critical-pod` アノテーションから [Kubernetes ポッドの優先度のサポート](/docs/containers?topic=containers-pod_priority#pod_priority)に移行するのに役立ちます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>132</td>
 <td>143</td>
 <td>[CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -902,13 +1355,13 @@ subcollection: containers
 <td>[CVE-2019-3462 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) および [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.4-118</td>
 <td>v1.13.2-62</td>
-<td>Kubernetes 1.13.2 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.4.0 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ロード・バランサーに対して行われていた不要な構成更新が修正されました。</td>
+<td>Kubernetes 1.13.2 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.4.0 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ネットワークのロード・バランサーに対して行われていた不必要な構成の更新が修正されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>338</td>
 <td>342</td>
 <td>ファイル・ストレージ・プラグインが次のように更新されました。
@@ -967,11 +1420,215 @@ subcollection: containers
 <br />
 
 
+
 ## バージョン 1.12 変更ログ
 {: #112_changelog}
 
 バージョン 1.12 の変更ログをまとめます。
 {: shortdesc}
+
+### ワーカー・ノード・フィックスパック 1.12.10_1560 (2019 年 7 月 22 日リリース) の変更ログ
+{: #11210_1560_worker}
+
+以下の表に、ワーカー・ノードのフィックスパック 1.12.10_1560 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.9_1559 からの変更点">
+<caption>バージョン 1.12.9_1559 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.9</td>
+<td>v1.12.10</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10) を参照してください。</td>
+</tr>
+<tr>
+<td>Ubuntu パッケージ</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[CVE-2019-13012 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) および [CVE-2019-7307 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html) への対策として、パッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+
+### マスター・フィックスパック 1.12.10_1560 (2019 年 7 月 15 日リリース) の変更ログ
+{: #11210_1560}
+
+以下の表に、マスターのフィックスパック 1.12.10_1560 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.9_1559 からの変更点">
+<caption>バージョン 1.12.9_1559 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.3.6</td>
+<td>v3.6.4</td>
+<td>[Calico リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.6/release-notes/) を参照してください。 更新により、[TTA-2019-001![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001) が解決されます。
+</td>
+</tr>
+<tr>
+<td>CoreDNS 構成</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>`kubernetes` ゾーン内の DNS レコードの TTL についての CoreDNS のデフォルト構成を、5 秒から 30 秒に変更。これは、KubeDNS のデフォルト構成に合わせた変更です。既存の CoreDNS 構成は変更されません。CoreDNS 構成の変更について詳しくは、[クラスター DNS プロバイダーのカスタマイズ](/docs/containers?topic=containers-cluster_dns#dns_customize)を参照してください。</td>
+</tr>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>5d34347</td>
+<td>a7e8ece</td>
+<td>基本イメージのパッケージを更新。</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.12.9</td>
+<td>v1.12.10</td>
+<td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10) を参照してください。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.12.9-227</td>
+<td>v1.12.10-259</td>
+<td>Kubernetes 1.12.10 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.6.4 に更新されました。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.12.9_1559 (2019 年 7 月 8 日リリース) の変更ログ
+{: #1129_1559}
+
+以下の表に、ワーカー・ノードのパッチ 1.12.9_1559 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.9_1558 からの変更点">
+<caption>バージョン 1.12.9_1558 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+### ワーカー・ノード・フィックスパック 1.12.9_1558 (2019 年 6 月 24 日リリース) の変更ログ
+{: #1129_1558}
+
+以下の表に、ワーカー・ノードのパッチ 1.12.9_1558 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.9_1557 からの変更点">
+<caption>バージョン 1.12.9_1557 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>1.2.6</td>
+<td>1.2.7</td>
+<td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.2.7) を参照してください。</td>
+</tr>
+</tbody>
+</table>
+
+### 1.12.9_1557 (2019 年 6 月 17 日リリース) の変更ログ
+{: #1129_1557}
+
+以下の表に、パッチ 1.12.9_1557 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.12.9_1555 からの変更点">
+<caption>バージョン 1.12.9_1555 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPU デバイスのプラグインおよびインストーラー</td>
+<td>32257d3</td>
+<td>5d34347</td>
+<td>[CVE-2019-8457 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457) への対策としてイメージが更新されました。 GPU ドライバーが [430.14 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/Download/driverResults.aspx/147582/) に更新されました。</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
+<td>346</td>
+<td>347</td>
+<td>IAM API キーを暗号化または暗号化解除できるように更新。</td>
+</tr>
+<td>Kubernetes マスターのパブリック・サービス・エンドポイント</td>
+<td>該当なし</td>
+<td>該当なし</td>
+<td>[パブリック・サービス・エンドポイントの有効化](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)に関連した問題を修正。</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
 
 ### 1.12.9_1555 (2019 年 6 月 4 日リリース) の変更ログ
 {: #1129_1555}
@@ -1012,10 +1669,10 @@ subcollection: containers
 <td>GPU デバイスのプラグインおよびインストーラー</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.8-210</td>
 <td>v1.12.9-227</td>
 <td>Kubernetes 1.12.9 リリースをサポートするように更新されました。</td>
@@ -1036,7 +1693,7 @@ subcollection: containers
 <td>トラステッド・コンピューティング・エージェント</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 </tbody>
 </table>
@@ -1103,10 +1760,10 @@ subcollection: containers
 <td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.7-180</td>
 <td>v1.12.8-210</td>
-<td>Kubernetes 1.12.8 リリースをサポートするように更新されました。 ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ロード・バランサーに対する更新プロセスが修正されました。</td>
+<td>Kubernetes 1.12.8 リリースをサポートするように更新されました。 さらに、ロード・バランサー・ポッドに使用可能なワーカー・ノードが 1 つのみのバージョン 2.0 ネットワークのロード・バランサーに対する更新のプロセスが修正されました。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -1118,7 +1775,7 @@ subcollection: containers
 <td>Kubernetes 構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。 さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
 </tr>
 <tr>
 <td>OpenVPN クライアント構成</td>
@@ -1224,7 +1881,7 @@ subcollection: containers
 <td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2018-0732 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)、および [CVE-2019-1559 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559) が解決されます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.6-157</td>
 <td>v1.12.7-180</td>
 <td>Kubernetes 1.12.7 リリースおよび Calico 3.3.6 リリースをサポートするように更新されました。</td>
@@ -1301,7 +1958,7 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>345</td>
 <td>346</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -1313,7 +1970,7 @@ subcollection: containers
 <td>Kubernetes シークレットを管理するための `context deadline exceeded` および `timeout` で断続的に発生するエラーが修正されました。 また、既存の Kubernetes シークレットが暗号化されないままになることがある鍵管理サービスの更新も修正されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>143</td>
 <td>146</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -1363,7 +2020,7 @@ subcollection: containers
 <td>GPU ドライバーが [418.43 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/object/unix.html) に更新されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>344</td>
 <td>345</td>
 <td>[プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)のサポートが追加されました。</td>
@@ -1419,13 +2076,13 @@ subcollection: containers
 <td>[CVE-2019-6454 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.5-137</td>
 <td>v1.12.6-157</td>
-<td>Kubernetes 1.12.6 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したバージョン 1.0 のロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.Bluemix_notm}} ドキュメント・リンクを使用するようにロード・バランサーのバージョン 1.0 および 2.0 のイベントが更新されました。</td>
+<td>Kubernetes 1.12.6 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したバージョン 1.0 のロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.cloud_notm}} ドキュメント・リンクを使用するようにロード・バランサーのバージョン 1.0 および 2.0 のイベントが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>342</td>
 <td>344</td>
 <td>イメージの基本オペレーティング・システムが Fedora から Alpine に変更されました。 [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -1449,7 +2106,7 @@ subcollection: containers
 <td>`--feature-gates` オプションに `ExperimentalCriticalPodAnnotation=true` が追加されました。 この設定は、ポッドを非推奨の `scheduler.alpha.kubernetes.io/critical-pod` アノテーションから [Kubernetes ポッドの優先度のサポート](/docs/containers?topic=containers-pod_priority#pod_priority)に移行するのに役立ちます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>132</td>
 <td>143</td>
 <td>[CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -1563,13 +2220,13 @@ subcollection: containers
 <td>[CVE-2019-3462 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) および [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.4-118</td>
 <td>v1.12.5-137</td>
-<td>Kubernetes 1.12.5 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.3.1 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ロード・バランサーに対して行われていた不要な構成更新が修正されました。</td>
+<td>Kubernetes 1.12.5 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.3.1 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ネットワークのロード・バランサーに対して行われていた不必要な構成の更新が修正されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>338</td>
 <td>342</td>
 <td>ファイル・ストレージ・プラグインが次のように更新されました。
@@ -1663,7 +2320,7 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.3-91</td>
 <td>v1.12.4-118</td>
 <td>Kubernetes 1.12.4 リリースをサポートするように更新されました。</td>
@@ -1766,7 +2423,7 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.12.2-68</td>
 <td>v1.12.3-91</td>
 <td>Kubernetes 1.12.3 リリースをサポートするように更新されました。</td>
@@ -1958,13 +2615,13 @@ subcollection: containers
 <td>[Kubernetes Metrics Server リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.1) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.3-118</td>
 <td>v1.12.2-68</td>
 <td>Kubernetes 1.12 リリースをサポートするように更新されました。 その他の変更には、次のようなものがあります。
 <ul><li>ロード・バランサー・ポッド (`ibm-system` 名前空間の `ibm-cloud-provider-ip-*` ポッド) で、CPU とメモリーのリソース要求を設定するようになりました。</li>
 <li>ロード・バランサー・サービスのデプロイ先の VLAN を指定する `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` アノテーションが追加されました。 クラスター内の使用可能な VLAN を表示するには、`ibmcloud ks vlans --zone <zone>` を実行します。</li>
-<li>新しい[ロード・バランサー 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs) がベータ版として提供されています。</li></ul></td>
+<li>新しい[ロード・バランサー 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs) がベータ版として提供されています。</li></ul></td>
 </tr>
 <tr>
 <td>OpenVPN クライアント構成</td>
@@ -1975,16 +2632,155 @@ subcollection: containers
 </tbody>
 </table>
 
-## 非推奨: バージョン 1.11 変更ログ
+
+## アーカイブ
+{: #changelog_archive}
+
+サポートされない Kubernetes バージョン:
+*  [バージョン 1.11](#111_changelog)
+*  [バージョン 1.10](#110_changelog)
+*  [バージョン 1.9](#19_changelog)
+*  [バージョン 1.8](#18_changelog)
+*  [バージョン 1.7](#17_changelog)
+
+### バージョン 1.11 の変更ログ (2019 年 7 月 20 日付けでサポート対象外)
 {: #111_changelog}
 
 バージョン 1.11 の変更ログをまとめます。
 {: shortdesc}
 
-Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 6 月 27 日 (暫定) に非サポート・バージョンになります。各 Kubernetes バージョンの更新が[与える可能性のある影響を確認](/docs/containers?topic=containers-cs_versions#cs_versions)したうえで、少なくとも 1.12 にただちに[クラスターを更新](/docs/containers?topic=containers-update#update)してください。
-{: deprecated}
+*   [ワーカー・ノード・フィックスパック 1.11.10_1564 (2019 年 7 月 8 日リリース) の変更ログ](#11110_1564)
+*   [ワーカー・ノード・フィックスパック 1.11.10_1563 (2019 年 6 月 24 日リリース) の変更ログ](#11110_1563)
+*   [ワーカー・ノード・フィックスパック 1.11.10_1562 (2019 年 6 月 17 日リリース) の変更ログ](#11110_1562)
+*   [1.11.10_1561 (2019 年 6 月 4 日リリース) の変更ログ](#11110_1561)
+*   [ワーカー・ノード・フィックスパック 1.11.10_1559 (2019 年 5 月 20 日リリース) の変更ログ](#11110_1559)
+*   [1.11.10_1558 (2019 年 5 月 13 日リリース) の変更ログ](#11110_1558)
+*   [ワーカー・ノード・フィックスパック 1.11.9_1556 (2019 年 4 月 29 日リリース) の変更ログ](#1119_1556)
+*   [ワーカー・ノード・フィックスパック 1.11.9_1555 (2019 年 4 月 15 日リリース) の変更ログ](#1119_1555)
+*   [1.11.9_1554 (2019 年 4 月 8 日リリース) の変更ログ](#1119_1554)
+*   [ワーカー・ノード・フィックスパック 1.11.8_1553 (2019 年 4 月 1 日リリース) の変更ログ](#1118_1553)
+*   [マスター・フィックスパック 1.11.8_1552 (2019 年 3 月 26 日リリース) の変更ログ](#1118_1552)
+*   [1.11.8_1550 (2019 年 3 月 20 日リリース) の変更ログ](#1118_1550)
+*   [1.11.8_1547 (2019 年 3 月 4 日リリース) の変更ログ](#1118_1547)
+*   [ワーカー・ノード・フィックスパック 1.11.7_1546 (2019 年 2 月 27 日リリース) の変更ログ](#1117_1546)
+*   [ワーカー・ノード・フィックスパック 1.11.7_1544 (2019 年 2 月 15 日リリース) の変更ログ](#1117_1544)
+*   [1.11.7_1543 (2019 年 2 月 5 日リリース) の変更ログ](#1117_1543)
+*   [ワーカー・ノード・フィックスパック 1.11.6_1541 (2019 年 1 月 28 日リリース) の変更ログ](#1116_1541)
+*   [1.11.6_1540 (2019 年 1 月 21 日リリース) の変更ログ](#1116_1540)
+*   [ワーカー・ノード・フィックスパック 1.11.5_1539 (2019 年 1 月 7 日リリース) の変更ログ](#1115_1539)
+*   [ワーカー・ノード・フィックスパック 1.11.5_1538 (2018 年 12 月 17 日リリース) の変更ログ](#1115_1538)
+*   [1.11.5_1537 (2018 年 12 月 5 日リリース) の変更ログ](#1115_1537)
+*   [ワーカー・ノード・フィックスパック 1.11.4_1536 (2018 年 12 月 4 日リリース) の変更ログ](#1114_1536)
+*   [1.11.4_1535 (2018 年 11 月 27 日リリース) の変更ログ](#1114_1535)
+*   [ワーカー・ノード・フィックスパック 1.11.3_1534 (2018 年 11 月 19 日リリース) の変更ログ](#1113_1534)
+*   [1.11.3_1533 (2018 年 11 月 7 日リリース) の変更ログ](#1113_1533)
+*   [マスター・フィックスパック 1.11.3_1531 (2018 年 11 月 1 日リリース) の変更ログ](#1113_1531_ha-master)
+*   [ワーカー・ノード・フィックスパック 1.11.3_1531 (2018 年 10 月 26 日リリース) の変更ログ](#1113_1531)
+*   [マスター・フィックスパック 1.11.3_1527 (2018 年 10 月 15 日リリース) の変更ログ](#1113_1527)
+*   [ワーカー・ノード・フィックスパック 1.11.3_1525 (2018 年 10 月 10 日リリース) の変更ログ](#1113_1525)
+*   [1.11.3_1524 (2018 年 10 月 2 日リリース) の変更ログ](#1113_1524)
+*   [1.11.3_1521 (2018 年 9 月 20 日リリース) の変更ログ](#1113_1521)
+*   [1.11.2_1516 (2018 年 9 月 4 日リリース) の変更ログ](#1112_1516)
+*   [ワーカー・ノード・フィックスパック 1.11.2_1514 (2018 年 8 月 23 日リリース) の変更ログ](#1112_1514)
+*   [1.11.2_1513 (2018 年 8 月 14 日リリース) の変更ログ](#1112_1513)
 
-### 1.11.10_1561 (2019 年 6 月 4 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.10_1564 (2019 年 7 月 8 日リリース) の変更ログ
+{: #11110_1564}
+
+以下の表に、ワーカー・ノードのパッチ 1.11.10_1564 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.10_1563 からの変更点">
+<caption>バージョン 1.11.10_1563 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-151-generic</td>
+<td>4.4.0-154-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-52-generic</td>
+<td>4.15.0-54-generic</td>
+<td>[CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) および [CVE-2019-11479 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+#### ワーカー・ノード・フィックスパック 1.11.10_1563 (2019 年 6 月 24 日リリース) の変更ログ
+{: #11110_1563}
+
+以下の表に、ワーカー・ノードのパッチ 1.11.10_1563 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.10_1562 からの変更点">
+<caption>バージョン 1.11.10_1562 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-150-generic</td>
+<td>4.4.0-151-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-51-generic</td>
+<td>4.15.0-52-generic</td>
+<td>[CVE-2019-11477 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) および [CVE-2019-11478 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+#### ワーカー・ノード・フィックスパック 1.11.10_1562 (2019 年 6 月 17 日リリース) の変更ログ
+{: #11110_1562}
+
+以下の表に、ワーカー・ノードのパッチ 1.11.10_1562 に含まれる変更内容を示します。
+{: shortdesc}
+
+<table summary="バージョン 1.11.10_1561 からの変更点">
+<caption>バージョン 1.11.10_1561 からの変更点</caption>
+<thead>
+<tr>
+<th>コンポーネント</th>
+<th>以前</th>
+<th>現在</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 カーネル</td>
+<td>4.4.0-148-generic</td>
+<td>4.4.0-150-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 カーネル</td>
+<td>4.15.0-50-generic</td>
+<td>4.15.0-51-generic</td>
+<td>[CVE-2019-10906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470) への対策として、カーネル更新とパッケージ更新によりワーカー・ノード・イメージを更新。</td>
+</tr>
+</tbody>
+</table>
+
+#### 1.11.10_1561 (2019 年 6 月 4 日リリース) の変更ログ
 {: #11110_1561}
 
 以下の表に、パッチ 1.11.10_1561 に含まれる変更内容を示します。
@@ -2017,18 +2813,18 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>GPU デバイスのプラグインおよびインストーラー</td>
 <td>55c1f66</td>
 <td>32257d3</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
 <td>トラステッド・コンピューティング・エージェント</td>
 <td>13c7ef0</td>
 <td>e8c6d72</td>
-<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
+<td>[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846)、[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-9893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9893)、[CVE-2019-5435 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5435)、および [CVE-2019-5436 ![外部リンク・ アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5436) への対策としてイメージが更新されました。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.10_1559 (2019 年 5 月 20 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.10_1559 (2019 年 5 月 20 日リリース) の変更ログ
 {: #11110_1559}
 
 以下の表に、パッチ・パック 1.11.10_1559 に含まれる変更内容を示します。
@@ -2060,7 +2856,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.10_1558 (2019 年 5 月 13 日リリース) の変更ログ
+#### 1.11.10_1558 (2019 年 5 月 13 日リリース) の変更ログ
 {: #11110_1558}
 
 以下の表に、パッチ 1.11.10_1558 に含まれる変更内容を示します。
@@ -2090,7 +2886,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.9-241</td>
 <td>v1.11.10-270</td>
 <td>Kubernetes 1.11.10 リリースをサポートするように更新されました。</td>
@@ -2105,7 +2901,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Kubernetes 構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
+<td>Kubernetes API サーバーの監査ポリシー構成が更新され、`/openapi/v2*` 読み取り専用 URL がログに記録されなくなりました。 さらに、Kubernetes コントローラー・マネージャーの構成により、署名済み `kubelet` 証明書の有効期間が 1 年から 3 年に延長されました。</td>
 </tr>
 <tr>
 <td>OpenVPN クライアント構成</td>
@@ -2122,7 +2918,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.9_1556 (2019 年 4 月 29 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.9_1556 (2019 年 4 月 29 日リリース) の変更ログ
 {: #1119_1556}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.9_1556 に含まれる変更内容を示します。
@@ -2155,7 +2951,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### ワーカー・ノード・フィックスパック 1.11.9_1555 (2019 年 4 月 15 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.9_1555 (2019 年 4 月 15 日リリース) の変更ログ
 {: #1119_1555}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.9_1555 に含まれる変更内容を示します。
@@ -2181,7 +2977,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.9_1554 (2019 年 4 月 8 日リリース) の変更ログ
+#### 1.11.9_1554 (2019 年 4 月 8 日リリース) の変更ログ
 {: #1119_1554}
 
 以下の表に、パッチ 1.11.9_1554 に含まれる変更内容を示します。
@@ -2211,7 +3007,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[HAProxy リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.haproxy.org/download/1.9/src/CHANGELOG) を参照してください。 更新により、[CVE-2018-0732 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0732)、[CVE-2018-0734 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0734)、[CVE-2018-0737 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-0737)、[CVE-2018-5407 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-5407)、[CVE-2019-1543 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1543)、および [CVE-2019-1559 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1559) が解決されます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.8-219</td>
 <td>v1.11.9-241</td>
 <td>Kubernetes 1.11.9 リリースおよび Calico 3.3.6 リリースをサポートするように更新されました。</td>
@@ -2249,7 +3045,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.8_1553 (2019 年 4 月 1 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.8_1553 (2019 年 4 月 1 日リリース) の変更ログ
 {: #1118_1553}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.8_1553 に含まれる変更内容を示します。
@@ -2275,7 +3071,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### マスター・フィックスパック 1.11.8_1552 (2019 年 3 月 26 日リリース) の変更ログ
+#### マスター・フィックスパック 1.11.8_1552 (2019 年 3 月 26 日リリース) の変更ログ
 {: #1118_1552}
 
 以下の表に、マスターのフィックスパック 1.11.8_1552 に含まれる変更内容を示します。
@@ -2293,7 +3089,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>345</td>
 <td>346</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -2305,7 +3101,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Kubernetes シークレットを管理するための `context deadline exceeded` および `timeout` で断続的に発生するエラーが修正されました。 また、既存の Kubernetes シークレットが暗号化されないままになることがある鍵管理サービスの更新も修正されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>143</td>
 <td>146</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -2313,7 +3109,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.8_1550 (2019 年 3 月 20 日リリース) の変更ログ
+#### 1.11.8_1550 (2019 年 3 月 20 日リリース) の変更ログ
 {: #1118_1550}
 
 以下の表に、パッチ 1.11.8_1550 に含まれる変更内容を示します。
@@ -2343,7 +3139,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>GPU ドライバーが [418.43 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/object/unix.html) に更新されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>344</td>
 <td>345</td>
 <td>[プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)のサポートが追加されました。</td>
@@ -2369,7 +3165,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.8_1547 (2019 年 3 月 4 日リリース) の変更ログ
+#### 1.11.8_1547 (2019 年 3 月 4 日リリース) の変更ログ
 {: #1118_1547}
 
 以下の表に、パッチ 1.11.8_1547 に含まれる変更内容を示します。
@@ -2393,13 +3189,13 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[CVE-2019-6454 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.7-198</td>
 <td>v1.11.8-219</td>
-<td>Kubernetes 1.11.8 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.Bluemix_notm}} ドキュメント・リンクを使用するようにロード・バランサーのイベントが更新されました。</td>
+<td>Kubernetes 1.11.8 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.cloud_notm}} ドキュメント・リンクを使用するようにロード・バランサーのイベントが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>342</td>
 <td>344</td>
 <td>イメージの基本オペレーティング・システムが Fedora から Alpine に変更されました。 [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -2429,7 +3225,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>より多くのクラスター・サービスを処理するために、Kubernetes DNS ポッドのメモリー制限が `170 Mi` から `400 Mi` に増えました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>132</td>
 <td>143</td>
 <td>[CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -2449,7 +3245,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.7_1546 (2019 年 2 月 27 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.7_1546 (2019 年 2 月 27 日リリース) の変更ログ
 {: #1117_1546}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.7_1546 に含まれる変更内容を示します。
@@ -2475,7 +3271,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.7_1544 (2019 年 2 月 15 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.7_1544 (2019 年 2 月 15 日リリース) の変更ログ
 {: #1117_1544}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.7_1544 に含まれる変更内容を示します。
@@ -2513,7 +3309,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.7_1543 (2019 年 2 月 5 日リリース) の変更ログ
+#### 1.11.7_1543 (2019 年 2 月 5 日リリース) の変更ログ
 {: #1117_1543}
 
 以下の表に、パッチ 1.11.7_1543 に含まれる変更内容を示します。
@@ -2543,13 +3339,13 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[CVE-2019-3462 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) および [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.6-180</td>
 <td>v1.11.7-198</td>
-<td>Kubernetes 1.11.7 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.3.1 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ロード・バランサーに対して行われていた不要な構成更新が修正されました。</td>
+<td>Kubernetes 1.11.7 リリースをサポートするように更新されました。 さらに、`calicoctl` バージョンが 3.3.1 に更新されました。 ワーカー・ノードの状況変化時にバージョン 2.0 ネットワークのロード・バランサーに対して行われていた不必要な構成の更新が修正されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>338</td>
 <td>342</td>
 <td>ファイル・ストレージ・プラグインが次のように更新されました。
@@ -2598,7 +3394,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.6_1541 (2019 年 1 月 28 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.6_1541 (2019 年 1 月 28 日リリース) の変更ログ
 {: #1116_1541}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.6_1541 に含まれる変更内容を示します。
@@ -2624,7 +3420,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.6_1540 (2019 年 1 月 21 日リリース) の変更ログ
+#### 1.11.6_1540 (2019 年 1 月 21 日リリース) の変更ログ
 {: #1116_1540}
 
 以下の表に、パッチ 1.11.6_1540 に含まれる変更内容を示します。
@@ -2642,7 +3438,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.5-152</td>
 <td>v1.11.6-180</td>
 <td>Kubernetes 1.11.6 リリースをサポートするように更新されました。</td>
@@ -2674,7 +3470,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.5_1539 (2019 年 1 月 7 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.5_1539 (2019 年 1 月 7 日リリース) の変更ログ
 {: #1115_1539}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.5_1539 に含まれる変更内容を示します。
@@ -2700,7 +3496,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.5_1538 (2018 年 12 月 17 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.5_1538 (2018 年 12 月 17 日リリース) の変更ログ
 {: #1115_1538}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.5_1538 に含まれる変更内容を示します。
@@ -2726,7 +3522,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.5_1537 (2018 年 12 月 5 日リリース) の変更ログ
+#### 1.11.5_1537 (2018 年 12 月 5 日リリース) の変更ログ
 {: #1115_1537}
 
 以下の表に、パッチ 1.11.5_1537 に含まれる変更内容を示します。
@@ -2744,7 +3540,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.4-142</td>
 <td>v1.11.5-152</td>
 <td>Kubernetes 1.11.5 リリースをサポートするように更新されました。</td>
@@ -2758,7 +3554,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.4_1536 (2018 年 12 月 4 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.4_1536 (2018 年 12 月 4 日リリース) の変更ログ
 {: #1114_1536}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.4_1536 に含まれる変更内容を示します。
@@ -2784,7 +3580,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.4_1535 (2018 年 11 月 27 日リリース) の変更ログ
+#### 1.11.4_1535 (2018 年 11 月 27 日リリース) の変更ログ
 {: #1114_1535}
 
 以下の表に、パッチ 1.11.4_1535 に含まれる変更内容を示します。
@@ -2814,7 +3610,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.5) を参照してください。 [ポッドの終了を妨げるデッドロック ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/issues/2744) が起きないように containerd が更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.3-127</td>
 <td>v1.11.4-142</td>
 <td>Kubernetes 1.11.4 リリースをサポートするように更新されました。</td>
@@ -2834,7 +3630,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.3_1534 (2018 年 11 月 19 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.3_1534 (2018 年 11 月 19 日リリース) の変更ログ
 {: #1113_1534}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.3_1534 に含まれる変更内容を示します。
@@ -2861,7 +3657,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.11.3_1533 (2018 年 11 月 7 日リリース) の変更ログ
+#### 1.11.3_1533 (2018 年 11 月 7 日リリース) の変更ログ
 {: #1113_1533}
 
 以下の表に、パッチ 1.11.3_1533 に含まれる変更内容を示します。
@@ -2885,7 +3681,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>`initializerconfigurations`、`mutatingwebhookconfigurations`、`validatingwebhookconfigurations` などのアドミッション Webhook を使用するクラスターの高可用性 (HA) マスターに対する更新を修正しました。 これらの Webhook を、[Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce) などのために Helm チャートで使用することもできます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.3-100</td>
 <td>v1.11.3-127</td>
 <td>ロード・バランサー・サービスのデプロイ先の VLAN を指定する `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` アノテーションが追加されました。 クラスター内の使用可能な VLAN を表示するには、`ibmcloud ks vlans --zone <zone>` を実行します。</td>
@@ -2894,12 +3690,12 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks flavors --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
 
-### マスター・フィックスパック 1.11.3_1531 (2018 年 11 月 1 日リリース) の変更ログ
+#### マスター・フィックスパック 1.11.3_1531 (2018 年 11 月 1 日リリース) の変更ログ
 {: #1113_1531_ha-master}
 
 以下の表に、マスターのフィックスパック 1.11.3_1531 に含まれる変更内容を示します。
@@ -2920,12 +3716,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>クラスター・マスター</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>クラスター・マスターの構成が更新され、高可用性 (HA) が向上しました。 現在のクラスターは、3 台の Kubernetes マスター・レプリカがそれぞれ別の物理ホスト上にデプロイされる高可用性 (HA) 構成でセットアップされるようになりました。 さらに、クラスターが複数ゾーン対応ゾーンにある場合は、それらのマスターがゾーン間に分散されます。<br>実行する必要があるアクションについては、[高可用性クラスター・マスターへの更新](/docs/containers?topic=containers-cs_versions#ha-masters)を参照してください。 これらの準備アクションは、以下の場合に適用されます。<ul>
-<li>ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。</li>
-<li>ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。</li>
-<li>マスターへのクラスター内アクセス用にクラスターのマスター IP アドレスを使用していた場合。</li>
-<li>Calico ポリシーの作成などのために、Calico API または CLI (`calicoctl`) を呼び出す自動化機能がある場合。</li>
-<li>Kubernetes または Calico ネットワーク・ポリシーを使用して、ポッドからマスターへの発信アクセスを制御している場合。</li></ul></td>
+<td>クラスター・マスターの構成が更新され、高可用性 (HA) が向上しました。 現在のクラスターは、3 台の Kubernetes マスター・レプリカがそれぞれ別の物理ホスト上にデプロイされる高可用性 (HA) 構成でセットアップされるようになりました。</td>
 </tr>
 <tr>
 <td>クラスター・マスター HA プロキシー</td>
@@ -2948,7 +3739,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.3_1531 (2018 年 10 月 26 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.3_1531 (2018 年 10 月 26 日リリース) の変更ログ
 {: #1113_1531}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.3_1531 に含まれる変更内容を示します。
@@ -2974,7 +3765,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### マスター・フィックスパック 1.11.3_1527 (2018 年 10 月 15 日リリース) の変更ログ
+#### マスター・フィックスパック 1.11.3_1527 (2018 年 10 月 15 日リリース) の変更ログ
 {: #1113_1527}
 
 以下の表に、マスターのフィックスパック 1.11.3_1527 に含まれる変更内容を示します。
@@ -3006,7 +3797,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.3_1525 (2018 年 10 月 10 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.3_1525 (2018 年 10 月 10 日リリース) の変更ログ
 {: #1113_1525}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.3_1525 に含まれる変更内容を示します。
@@ -3039,7 +3830,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </table>
 
 
-### 1.11.3_1524 (2018 年 10 月 2 日リリース) の変更ログ
+#### 1.11.3_1524 (2018 年 10 月 2 日リリース) の変更ログ
 {: #1113_1524}
 
 以下の表に、パッチ 1.11.3_1524 に含まれる変更内容を示します。
@@ -3063,7 +3854,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[containerd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.4) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.3-91</td>
 <td>v1.11.3-100</td>
 <td>ロード・バランサーのエラー・メッセージ内の文書リンクが更新されました。</td>
@@ -3078,7 +3869,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.3_1521 (2018 年 9 月 20 日リリース) の変更ログ
+#### 1.11.3_1521 (2018 年 9 月 20 日リリース) の変更ログ
 {: #1113_1521}
 
 以下の表に、パッチ 1.11.3_1521 に含まれる変更内容を示します。
@@ -3096,7 +3887,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.2-71</td>
 <td>v1.11.3-91</td>
 <td>Kubernetes 1.11.3 リリースをサポートするように更新されました。</td>
@@ -3153,7 +3944,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.2_1516 (2018 年 9 月 4 日リリース) の変更ログ
+#### 1.11.2_1516 (2018 年 9 月 4 日リリース) の変更ログ
 {: #1112_1516}
 
 以下の表に、パッチ 1.11.2_1516 に含まれる変更内容を示します。
@@ -3183,21 +3974,21 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[`containerd` リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.3) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.11.2-60</td>
 <td>v1.11.2-71</td>
 <td>`externalTrafficPolicy` が `local` に設定されて、ロード・バランサー・サービスの更新をより良好に処理できるようにクラウド・プロバイダー構成が変更されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン構成</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャー (SoftLayer) の NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
+<td>IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャーの NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
 </tr>
 </tbody>
 </table>
 
-### ワーカー・ノード・フィックスパック 1.11.2_1514 (2018 年 8 月 23 日リリース) の変更ログ
+#### ワーカー・ノード・フィックスパック 1.11.2_1514 (2018 年 8 月 23 日リリース) の変更ログ
 {: #1112_1514}
 
 以下の表に、ワーカー・ノードのフィックスパック 1.11.2_1514 に含まれる変更内容を示します。
@@ -3229,7 +4020,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </tbody>
 </table>
 
-### 1.11.2_1513 (2018 年 8 月 14 日リリース) の変更ログ
+#### 1.11.2_1513 (2018 年 8 月 14 日リリース) の変更ログ
 {: #1112_1513}
 
 以下の表に、パッチ 1.11.2_1513 に含まれる変更内容を示します。
@@ -3250,13 +4041,13 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>containerd</td>
 <td>該当なし</td>
 <td>1.1.2</td>
-<td>`containerd` は、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。 [`containerd` リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.2) を参照してください。 実行する必要があるアクションについては、[コンテナー・ランタイムとしての `containerd` への更新](/docs/containers?topic=containers-cs_versions#containerd)を参照してください。</td>
+<td>`containerd` は、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。 [`containerd` リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/containerd/containerd/releases/tag/v1.1.2) を参照してください。</td>
 </tr>
 <tr>
 <td>Docker</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>`containerd` は、パフォーマンスを向上させるために、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。 実行する必要があるアクションについては、[コンテナー・ランタイムとしての `containerd` への更新](/docs/containers?topic=containers-cs_versions#containerd)を参照してください。</td>
+<td>`containerd` は、パフォーマンスを向上させるために、Kubernetes の新しいコンテナー・ランタイムとして Docker を置き換えるものです。</td>
 </tr>
 <tr>
 <td>etcd</td>
@@ -3265,13 +4056,13 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[etcd リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/coreos/etcd/releases/v3.2.18) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.5-118</td>
 <td>v1.11.2-60</td>
 <td>Kubernetes 1.11 リリースをサポートするように更新されました。 さらに、ロード・バランサー・ポッドで、新しいポッドの優先度クラス `ibm-app-cluster-critical` が使用されるようになりました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>334</td>
 <td>338</td>
 <td>`incubator` のバージョンが 1.8 に更新されました。 ファイル・ストレージは、選択した特定のゾーンにプロビジョンされます。 複数ゾーン・クラスターを使用しており、[地域とゾーンのラベルを追加](/docs/containers?topic=containers-kube_concepts#storage_multizone)する必要がある場合を除いて、既存の (静的) PV インスタンスのラベルを更新することはできません。</td>
@@ -3286,8 +4077,8 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Kubernetes 構成</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>クラスターの Kubernetes API サーバーの OpenID Connect 構成が、{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) アクセス・グループをサポートするように更新されました。 クラスターの Kubernetes API サーバーの `--enable-admission-plugins` オプションに `Priority` が追加され、ポッドの優先度をサポートするようにクラスターが構成されるようになりました。 詳しくは、以下を参照してください。
-<ul><li>[{{site.data.keyword.Bluemix_notm}}IAM アクセス・グループ](/docs/containers?topic=containers-users#rbac)</li>
+<td>クラスターの Kubernetes API サーバーの OpenID Connect 構成が、{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) アクセス・グループをサポートするように更新されました。 クラスターの Kubernetes API サーバーの `--enable-admission-plugins` オプションに `Priority` が追加され、ポッドの優先度をサポートするようにクラスターが構成されるようになりました。 詳しくは、以下を参照してください。
+<ul><li>[{{site.data.keyword.cloud_notm}}IAM アクセス・グループ](/docs/containers?topic=containers-users#rbac)</li>
 <li>[ポッドの優先度の構成](/docs/containers?topic=containers-pod_priority#pod_priority)</li></ul></td>
 </tr>
 <tr>
@@ -3308,14 +4099,6 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <br />
 
 
-## アーカイブ
-{: #changelog_archive}
-
-サポートされない Kubernetes バージョン:
-*  [バージョン 1.10](#110_changelog)
-*  [バージョン 1.9](#19_changelog)
-*  [バージョン 1.8](#18_changelog)
-*  [バージョン 1.7](#17_changelog)
 
 ### バージョン 1.10 の変更ログ (2019 年 5 月 16 日付けでサポート対象外)
 {: #110_changelog}
@@ -3531,7 +4314,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>345</td>
 <td>346</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -3543,7 +4326,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Kubernetes シークレットを管理するための `context deadline exceeded` および `timeout` で断続的に発生するエラーが修正されました。 また、既存の Kubernetes シークレットが暗号化されないままになることがある鍵管理サービスの更新も修正されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>143</td>
 <td>146</td>
 <td>[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9741) への対策としてイメージが更新されました。</td>
@@ -3581,7 +4364,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>GPU ドライバーが [418.43 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.nvidia.com/object/unix.html) に更新されました。 更新には、[CVE-2019-9741 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html) の修正が含まれます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>344</td>
 <td>345</td>
 <td>[プライベート・サービス・エンドポイント](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)のサポートが追加されました。</td>
@@ -3631,13 +4414,13 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[CVE-2019-6454 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6454) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.12-252</td>
 <td>v1.10.13-288</td>
-<td>Kubernetes 1.10.13 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.Bluemix_notm}} ドキュメント・リンクを使用するようにロード・バランサーのイベントが更新されました。</td>
+<td>Kubernetes 1.10.13 リリースをサポートするように更新されました。 `externalTrafficPolicy` を `local` に設定したロード・バランサーに定期的に発生していた接続の問題が修正されました。 最新の {{site.data.keyword.cloud_notm}} ドキュメント・リンクを使用するようにロード・バランサーのイベントが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>342</td>
 <td>344</td>
 <td>イメージの基本オペレーティング・システムが Fedora から Alpine に変更されました。 [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -3661,7 +4444,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>より多くのクラスター・サービスを処理するために、Kubernetes DNS ポッドのメモリー制限が `170 Mi` から `400 Mi` に増えました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
+<td>{{site.data.keyword.cloud_notm}} プロバイダー用のロード・バランサーとロード・バランサー・モニター</td>
 <td>132</td>
 <td>143</td>
 <td>[CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
@@ -3769,7 +4552,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[CVE-2019-3462 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3462) および [CVE-2019-6486 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) への対策としてイメージが更新されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>338</td>
 <td>342</td>
 <td>ファイル・ストレージ・プラグインが次のように更新されました。
@@ -3856,7 +4639,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.11-219</td>
 <td>v1.10.12-252</td>
 <td>Kubernetes 1.10.12 リリースをサポートするように更新されました。</td>
@@ -3965,7 +4748,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[Calico リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.3/releases/#v331) を参照してください。 更新により、[Tigera Technical Advisory TTA-2018-001 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.projectcalico.org/security-bulletins/) が解決されます。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.8-197</td>
 <td>v1.10.11-219</td>
 <td>Kubernetes 1.10.11 リリースをサポートするように更新されました。</td>
@@ -4064,12 +4847,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>クラスター・マスター</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>クラスター・マスターの構成が更新され、高可用性 (HA) が向上しました。 現在のクラスターは、3 台の Kubernetes マスター・レプリカがそれぞれ別の物理ホスト上にデプロイされる高可用性 (HA) 構成でセットアップされるようになりました。 さらに、クラスターが複数ゾーン対応ゾーンにある場合は、それらのマスターがゾーン間に分散されます。<br>実行する必要があるアクションについては、[高可用性クラスター・マスターへの更新](/docs/containers?topic=containers-cs_versions#ha-masters)を参照してください。 これらの準備アクションは、以下の場合に適用されます。<ul>
-<li>ファイアウォールまたはカスタム Calico ネットワーク・ポリシーがある場合。</li>
-<li>ワーカー・ノードでホスト・ポート `2040` または `2041` を使用している場合。</li>
-<li>マスターへのクラスター内アクセス用にクラスターのマスター IP アドレスを使用していた場合。</li>
-<li>Calico ポリシーの作成などのために、Calico API または CLI (`calicoctl`) を呼び出す自動化機能がある場合。</li>
-<li>Kubernetes または Calico ネットワーク・ポリシーを使用して、ポッドからマスターへの発信アクセスを制御している場合。</li></ul></td>
+<td>クラスター・マスターの構成が更新され、高可用性 (HA) が向上しました。 現在のクラスターは、3 台の Kubernetes マスター・レプリカがそれぞれ別の物理ホスト上にデプロイされる高可用性 (HA) 構成でセットアップされるようになりました。 さらに、クラスターが複数ゾーン対応ゾーンにある場合は、それらのマスターがゾーン間に分散されます。</td>
 </tr>
 <tr>
 <td>クラスター・マスター HA プロキシー</td>
@@ -4090,7 +4868,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>以前は、etcd データは、保存時に暗号化が行われるマスターの NFS ファイル・ストレージ・インスタンスに保管されていました。 現在は、etcd データはマスターのローカル・ディスクに保管され、{{site.data.keyword.cos_full_notm}} にバックアップされます。 {{site.data.keyword.cos_full_notm}} に転送中のデータも保存されたデータも暗号化されています。 しかし、マスターのローカル・ディスク上の etcd データは暗号化されません。 マスターのローカル etcd データを暗号化する場合は、[クラスター内で {{site.data.keyword.keymanagementservicelong_notm}} を有効にします](/docs/containers?topic=containers-encryption#keyprotect)。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.8-172</td>
 <td>v1.10.8-197</td>
 <td>ロード・バランサー・サービスのデプロイ先の VLAN を指定する `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan` アノテーションが追加されました。 クラスター内の使用可能な VLAN を表示するには、`ibmcloud ks vlans --zone <zone>` を実行します。</td>
@@ -4099,7 +4877,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks flavors --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
@@ -4231,7 +5009,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[Kubernetes DNS autoscaler リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.2.0) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.7-146</td>
 <td>v1.10.8-172</td>
 <td>Kubernetes 1.10.8 リリースをサポートするように更新されました。 また、ロード・バランサーのエラー・メッセージ内の文書リンクが更新されました。</td>
@@ -4293,7 +5071,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>該当なし</td>
 <td>デフォルトの Docker ブリッジが無効にされたため、`172.17.0.0/16` IP 範囲がプライベート経路で使用されるようになりました。 ホストで `docker` コマンドを直接実行することによって、または Docker ソケットをマウントするポッドを使用することによって、ワーカー・ノードで Docker コンテナーを作成している場合は、以下のオプションから選択してください。<ul><li>コンテナー作成時に外部ネットワーク接続を確実にするため、`docker build . --network host` を実行します。</li>
 <li>コンテナー作成時に使用するネットワークを明示的に作成するため、`docker network create` を実行して、このネットワークを使用します。</li></ul>
-**注**: Docker ソケットまたは Docker に直接依存していますか? [コンテナー・ランタイムとして `docker` の代わりに `containerd` を使用するように更新](/docs/containers?topic=containers-cs_versions#containerd)して、クラスターで Kubernetes バージョン 1.11 以降を実行できるようにしてください。</td>
+**注**: Docker ソケットまたは Docker に直接依存していますか? コンテナー・ランタイムとして `docker` の代わりに `containerd` を使用するように更新して、クラスターで Kubernetes バージョン 1.11 以降を実行できるようにしてください。</td>
 </tr>
 </tbody>
 </table>
@@ -4322,16 +5100,16 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Calico [リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.2/releases/#v321) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.5-118</td>
 <td>v1.10.7-146</td>
 <td>Kubernetes 1.10.7 リリースをサポートするように更新されました。 さらに、`externalTrafficPolicy` が `local` に設定されて、ロード・バランサー・サービスの更新をより良好に処理できるようにクラウド・プロバイダー構成が変更されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>334</td>
 <td>338</td>
-<td>incubator のバージョンが 1.8 に更新されました。 ファイル・ストレージは、選択した特定のゾーンにプロビジョンされます。 複数ゾーン・クラスターを使用しており、地域とゾーンのラベルを追加する必要がある場合を除いて、既存の (静的) PV インスタンスのラベルを更新することはできません。<br><br> IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャー (SoftLayer) の NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
+<td>incubator のバージョンが 1.8 に更新されました。 ファイル・ストレージは、選択した特定のゾーンにプロビジョンされます。 複数ゾーン・クラスターを使用しており、地域とゾーンのラベルを追加する必要がある場合を除いて、既存の (静的) PV インスタンスのラベルを更新することはできません。<br><br> IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャーの NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -4431,16 +5209,16 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Calico [リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.projectcalico.org/v3.1/releases/#v313) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.3-85</td>
 <td>v1.10.5-118</td>
 <td>Kubernetes 1.10.5 リリースをサポートするように更新されました。 また、LoadBalancer サービス `create failure` イベントで、ポータブル・サブネット・エラーが含まれるようになりました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>320</td>
 <td>334</td>
-<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
+<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー・アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -4511,7 +5289,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Docker</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>非暗号化マシン・タイプの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
+<td>非暗号化フレーバーの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
 </tr>
 </tbody>
 </table>
@@ -4552,7 +5330,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>`kubelet` HTTPS エンドポイントを認証する API ベアラー・トークンとサービス・アカウント・トークンをサポートするため、`--authentication-token-webhook` オプションが使用可能になりました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.10.1-52</td>
 <td>v1.10.3-85</td>
 <td>Kubernetes 1.10.3 リリースをサポートするように更新されました。</td>
@@ -4674,7 +5452,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Kubernetes DNS [リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/dns/releases/tag/1.14.10) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.7-102</td>
 <td>v1.10.1-52</td>
 <td>Kubernetes 1.10 リリースをサポートするように更新されました。</td>
@@ -4683,7 +5461,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>GPU サポート</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>スケジューリングおよび実行で、[グラフィックス・プロセッシング・ユニット (GPU) コンテナー・ワークロード](/docs/containers?topic=containers-app#gpu_app)がサポートされるようになりました。 使用可能な GPU マシン・タイプのリストについては、[ワーカー・ノード用のハードウェア](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を参照してください。 詳しくは、[GPU のスケジュール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) に関する Kubernetes の資料を参照してください。</td>
+<td>スケジューリングおよび実行で、[グラフィックス・プロセッシング・ユニット (GPU) コンテナー・ワークロード](/docs/containers?topic=containers-app#gpu_app)がサポートされるようになりました。 使用可能な GPU フレーバーのリストについては、[ワーカー・ノード用のハードウェア](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)を参照してください。 詳しくは、[GPU のスケジュール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/manage-gpus/scheduling-gpus/) に関する Kubernetes の資料を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -4833,7 +5611,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.9.11) を参照してください。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}}</td>
+<td>{{site.data.keyword.cloud_notm}}</td>
 <td>v1.9.10-219</td>
 <td>v1.9.11-249</td>
 <td>Kubernetes 1.9.11 リリースをサポートするように更新されました。</td>
@@ -4868,7 +5646,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>TPM 対応カーネル</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks machine-types --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
+<td>トラステッド・コンピューティング用の TPM チップを搭載したベアメタルのワーカー・ノードでは、トラストを有効にするまで、デフォルトの Ubuntu カーネルが使用されます。 既存のクラスターで[トラストを有効にした](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable)場合には、TPM チップを搭載した既存のベアメタルのワーカー・ノードを[再ロード](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)する必要があります。 ベアメタルのワーカー・ノードに TPM チップが搭載されているかどうかを確認するには、 `ibmcloud ks flavors --zone` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)の実行後に、**Trustable** フィールドを確認します。</td>
 </tr>
 </tbody>
 </table>
@@ -4976,7 +5754,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.10-192</td>
 <td>v1.9.10-219</td>
 <td>ロード・バランサーのエラー・メッセージ内の文書リンクが更新されました。</td>
@@ -5038,7 +5816,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>該当なし</td>
 <td>デフォルトの Docker ブリッジが無効にされたため、`172.17.0.0/16` IP 範囲がプライベート経路で使用されるようになりました。 ホストで `docker` コマンドを直接実行することによって、または Docker ソケットをマウントするポッドを使用することによって、ワーカー・ノードで Docker コンテナーを作成している場合は、以下のオプションから選択してください。<ul><li>コンテナー作成時に外部ネットワーク接続を確実にするため、`docker build . --network host` を実行します。</li>
 <li>コンテナー作成時に使用するネットワークを明示的に作成するため、`docker network create` を実行して、このネットワークを使用します。</li></ul>
-**注**: Docker ソケットまたは Docker に直接依存していますか? [コンテナー・ランタイムとして `docker` の代わりに `containerd` を使用するように更新](/docs/containers?topic=containers-cs_versions#containerd)して、クラスターで Kubernetes バージョン 1.11 以降を実行できるようにしてください。</td>
+**注**: Docker ソケットまたは Docker に直接依存していますか? コンテナー・ランタイムとして `docker` の代わりに `containerd` を使用するように更新して、クラスターで Kubernetes バージョン 1.11 以降を実行できるようにしてください。</td>
 </tr>
 </tbody>
 </table>
@@ -5061,16 +5839,16 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.9-167</td>
 <td>v1.9.10-192</td>
 <td>Kubernetes 1.9.10 リリースをサポートするように更新されました。 さらに、`externalTrafficPolicy` が `local` に設定されて、ロード・バランサー・サービスの更新をより良好に処理できるようにクラウド・プロバイダー構成が変更されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>334</td>
 <td>338</td>
-<td>incubator のバージョンが 1.8 に更新されました。 ファイル・ストレージは、選択した特定のゾーンにプロビジョンされます。 複数ゾーン・クラスターを使用しており、地域とゾーンのラベルを追加する必要がある場合を除いて、既存の (静的) PV インスタンスのラベルを更新することはできません。<br><br>IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャー (SoftLayer) の NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
+<td>incubator のバージョンが 1.8 に更新されました。 ファイル・ストレージは、選択した特定のゾーンにプロビジョンされます。 複数ゾーン・クラスターを使用しており、地域とゾーンのラベルを追加する必要がある場合を除いて、既存の (静的) PV インスタンスのラベルを更新することはできません。<br><br>IBM 提供のファイル・ストレージ・クラスのマウント・オプションから、デフォルトの NFS バージョンが削除されました。 ホストのオペレーティング・システムによって、NFS バージョンが、IBM Cloud インフラストラクチャーの NFS サーバーとネゴシエーションされるようになりました。 特定の NFS バージョンを手動で設定する場合、またはホストのオペレーティング・システムによってネゴシエーションされた PV の NFS バージョンを変更する場合は、[デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version_class)を参照してください。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5164,16 +5942,16 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.8-141</td>
 <td>v1.9.9-167</td>
 <td>Kubernetes 1.9.9 リリースをサポートするように更新されました。 また、LoadBalancer サービス `create failure` イベントで、ポータブル・サブネット・エラーが含まれるようになりました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>320</td>
 <td>334</td>
-<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
+<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー・アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5244,7 +6022,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Docker</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>非暗号化マシン・タイプの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
+<td>非暗号化フレーバーの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
 </tr>
 </tbody>
 </table>
@@ -5402,7 +6180,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>クラスターの Kubernetes API サーバーの `--runtime-config` オプションに `admissionregistration.k8s.io/v1alpha1=true` が追加されました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
 <td>`NodePort` と `LoadBalancer` サービスは、`service.spec.externalTrafficPolicy` を `Local` に設定すると、[クライアント・ソース IP の保持](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)をサポートするようになりました。</td>
@@ -5545,16 +6323,16 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 </thead>
 <tbody>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.8.13-176</td>
 <td>v1.8.15-204</td>
 <td>Kubernetes 1.8.15 リリースをサポートするように更新されました。 また、LoadBalancer サービス `create failure` イベントで、ポータブル・サブネット・エラーが含まれるようになりました。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} File Storage プラグイン</td>
+<td>{{site.data.keyword.cloud_notm}} File Storage プラグイン</td>
 <td>320</td>
 <td>334</td>
-<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー (SoftLayer) アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
+<td>永続ボリューム作成のタイムアウトが 15 分から 30 分に増やされました。 デフォルトの請求タイプが `hourly` に変更されました。 事前定義ストレージ・クラスにマウント・オプションが追加されました。 IBM Cloud インフラストラクチャー・アカウントの NFS ファイル・ストレージ・インスタンスで、**「メモ」**フィールドが JSON 形式に変更され、PV がデプロイされる Kubernetes 名前空間が追加されました。 マルチゾーン・クラスターをサポートするため、永続ボリュームにゾーンと地域のラベルが追加されました。</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -5619,7 +6397,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>Docker</td>
 <td>該当なし</td>
 <td>該当なし</td>
-<td>非暗号化マシン・タイプの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
+<td>非暗号化フレーバーの場合、ワーカー・ノードを再ロードまたは更新するときに新しいファイル・システムを取得することによって、2 次ディスクがクリーンアップされるようになりました。</td>
 </tr>
 </tbody>
 </table>
@@ -5764,7 +6542,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>継承したオーファン・ゾンビ・プロセスを削除します。</td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
 <td>`NodePort` と `LoadBalancer` サービスは、`service.spec.externalTrafficPolicy` を `Local` に設定すると、[クライアント・ソース IP の保持](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)をサポートするようになりました。</td>
@@ -5881,7 +6659,7 @@ Kubernetes バージョン 1.11 は非推奨バージョンであり、2019 年 
 <td>v1.7.16	</td>
 <td><p>[Kubernetes リリース・ノート ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/kubernetes/kubernetes/releases/tag/v1.7.16) を参照してください。 このリリースで、[CVE-2017-1002101 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002101) および [CVE-2017-1002102 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-1002102) の脆弱性に対応しています。</p><p>`secret`、`configMap`、`downwardAPI`、投影ボリュームは、読み取り専用としてマウントされるようになります。 これまでは、システムによって自動的に元の状態に戻されることがあるこれらのボリュームに、アプリがデータを書き込むことができました。 アプリが以前の非セキュアな動作に依存している場合は、適切に変更してください。</p></td>
 </tr>
-<td>{{site.data.keyword.Bluemix_notm}} Provider</td>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
 <td>`NodePort` と `LoadBalancer` サービスは、`service.spec.externalTrafficPolicy` を `Local` に設定すると、[クライアント・ソース IP の保持](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)をサポートするようになりました。</td>

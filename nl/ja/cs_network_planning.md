@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # アプリのクラスターの内部ネットワークおよび外部ネットワークの計画
@@ -152,7 +153,7 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 <col width="25%">
 <thead>
 <th>名前</th>
-<th>ロード・バランシングの方法</th>
+<th>ロード・バランシング方式</th>
 <th>ユース・ケース</th>
 <th>実装</th>
 </thead>
@@ -166,28 +167,28 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 <td>NLB v1.0 (+ ホスト名)</td>
 <td>IP アドレスまたはホスト名を使用してアプリを公開する基本ロード・バランシング</td>
 <td>SSL 終端をサポートする IP アドレスまたはホスト名を使用して 1 つのアプリをパブリックに素早く公開します。</td>
-<td><ol><li>[単一ゾーン](/docs/containers?topic=containers-loadbalancer#lb_config)・クラスターまたは[複数ゾーン](/docs/containers?topic=containers-loadbalancer#multi_zone_config)・クラスターでパブリック・ネットワーク・ロード・バランサー (NLB) 1.0 を作成します。</li><li>オプションでホスト名およびヘルス・チェックを[登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)します。</li></ol></td>
+<td><ol><li>[単一ゾーン](/docs/containers?topic=containers-loadbalancer#lb_config)・クラスターまたは[複数ゾーン](/docs/containers?topic=containers-loadbalancer#multi_zone_config)・クラスターでパブリック・ネットワーク・ロード・バランサー (NLB) 1.0 を作成します。</li><li>オプションでホスト名およびヘルス・チェックを[登録](/docs/containers?topic=containers-loadbalancer_hostname)します。</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ ホスト名)</td>
 <td>IP アドレスまたはホスト名を使用してアプリを公開する DSR ロード・バランシング</td>
 <td>SSL 終端をサポートする IP アドレスまたはホスト名を使用して、ハイレベルのトラフィックを受信する可能性があるアプリをパブリックに公開します。</td>
-<td><ol><li>すべての[前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)を満たします。</li><li>[単一ゾーン](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config)・クラスターまたは[複数ゾーン](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config)・クラスターでパブリック NLB 2.0 を作成します。</li><li>オプションでホスト名およびヘルス・チェックを[登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)します。</li></ol></td>
+<td><ol><li>すべての[前提条件](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)を満たします。</li><li>[単一ゾーン](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)・クラスターまたは[複数ゾーン](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)・クラスターでパブリック NLB 2.0 を作成します。</li><li>オプションでホスト名およびヘルス・チェックを[登録](/docs/containers?topic=containers-loadbalancer_hostname)します。</li></ol></td>
 </tr><tr>
 <td>Istio + NLB
 ホスト名</td>
 <td>ホスト名を使用してアプリを公開し、Istio ルーティング・ルールを使用する基本ロード・バランシング</td>
 <td>あるアプリ・マイクロサービスの複数の異なるバージョンに関するルールなどの、Istio ルーティング後ルールを実装し、パブリック・ホスト名を使用して Istio 管理のアプリを公開します。</li></ol></td>
-<td><ol><li>[管理対象 Istio アドオン](/docs/containers?topic=containers-istio#istio_install)をインストールします。</li><li>[Istio サービス・メッシュ](/docs/containers?topic=containers-istio#istio_sidecar)にアプリを含めます。</li><li>デフォルトの Istio ロード・バランサーを[ホスト名](/docs/containers?topic=containers-istio#istio_expose_link)に登録します。</li></ol></td>
+<td><ol><li>[管理対象 Istio アドオン](/docs/containers?topic=containers-istio#istio_install)をインストールします。</li><li>[Istio サービス・メッシュ](/docs/containers?topic=containers-istio#istio_sidecar)にアプリを含めます。</li><li>デフォルトの Istio ロード・バランサーを[ホスト名](/docs/containers?topic=containers-istio#istio_expose)に登録します。</li></ol></td>
 </tr><tr>
 <td>Ingress ALB</td>
 <td>ホスト名を使用してアプリを公開し、カスタム・ルーティング・ルールを使用する HTTPS ロード・バランシング</td>
 <td>複数のアプリのカスタム・ルーティング・ルールおよび SSL 終端を実装します。</td>
 <td><ol><li>パブリック ALB の [Ingress サービス](/docs/containers?topic=containers-ingress#ingress_expose_public)を作成します。</li><li>[アノテーション](/docs/containers?topic=containers-ingress_annotation)を使用して、ALB ルーティング・ルールをカスタマイズします。</li></ol></td>
 </tr><tr>
-<td>自分の Ingress コントローラーの持ち込み + ALB ホスト名</td>
+<td>自分の Ingress コントローラーの持ち込み + ALB または NLB ホスト名</td>
 <td>IBM 提供の ALB ホスト名を使用してアプリを公開し、カスタム・ルーティング・ルールを使用するカスタム Ingress コントローラーを使用する HTTPS ロード・バランシング</td>
 <td>カスタム・ルーティング・ルールや、複数のアプリをカスタム調整するための他の特定の要件を実装します。</td>
-<td>[独自 Ingress コントローラーをデプロイし、IBM 提供の ALB ホスト名を活用します](/docs/containers?topic=containers-ingress#user_managed)。</td>
+<td>[独自 Ingress コントローラーをデプロイし、IBM 提供のホスト名を活用します](/docs/containers?topic=containers-ingress-user_managed)。</td>
 </tr>
 </tbody>
 </table>
@@ -208,10 +209,10 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 
 例えば、アプリのプライベート NLB を作成したとします。 このプライベート NLB には、以下がアクセスできます。
 * 同じクラスター内のポッド。
-* 同じ {{site.data.keyword.Bluemix_notm}} アカウント内のクラスター内のポッド。
-* [VRF または VLAN スパンニング](/docs/containers?topic=containers-subnets#basics_segmentation)が有効になっている場合、同じ {{site.data.keyword.Bluemix_notm}} アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステム。
-* {{site.data.keyword.Bluemix_notm}} アカウントに含まれていないが、会社のファイアウォールの背後にある場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム
-* 異なる {{site.data.keyword.Bluemix_notm}} アカウントに含まれている場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム。
+* 同じ {{site.data.keyword.cloud_notm}} アカウント内のクラスター内のポッド。
+* [VRF または VLAN スパンニング](/docs/containers?topic=containers-subnets#basics_segmentation)が有効になっている場合、同じ {{site.data.keyword.cloud_notm}} アカウント内のいずれかのプライベート VLAN に接続されているすべてのシステム。
+* {{site.data.keyword.cloud_notm}} アカウントに含まれていないが、会社のファイアウォールの背後にある場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム
+* 異なる {{site.data.keyword.cloud_notm}} アカウントに含まれている場合は、NLB IP があるサブネットへの VPN 接続を介するすべてのシステム。
 
 アプリをプライベート・ネットワークでのみ使用可能にするには、クラスターの VLAN セットアップに基づいてロード・バランシングのデプロイメント・パターンを選択します。
 * [パブリックおよびプライベートの VLAN セットアップ](#private_both_vlans)
@@ -229,7 +230,7 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 
 以下のプライベート・ネットワーキングのロード・バランシングのデプロイメント・パターンを確認してください。
 
-|名前|ロード・バランシングの方法|ユース・ケース|実装|
+|名前|ロード・バランシング方式|ユース・ケース|実装|
 |----|---------------------|--------|--------------|
 |NodePort|ワーカーのプライベート IP アドレスでアプリを公開するワーカー・ノードのポート|1 つのアプリへのプライベート・アクセスをテストしたり、短時間のみのアクセスを提供したりします。|<ol><li>[NodePort サービスを作成します](/docs/containers?topic=containers-nodeport)。</li><li>NodePort サービスは、ワーカー・ノードのプライベート IP アドレスとパブリック IP アドレスの両方に対して、ワーカー・ノード上のポートを開きます。 [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を使用してパブリック NodePort へのトラフィックをブロックする必要があります。</li></ol>|
 |NLB v1.0|プライベート IP アドレスを使用してアプリを公開する基本ロード・バランシング|プライベート IP アドレスを使用して 1 つのアプリをプライベート・ネットワークに素早く公開します。|<ol><li>[プライベート NLB サービスを作成します](/docs/containers?topic=containers-loadbalancer)。</li><li>ポータブル・プライベート IP アドレスを使用する NLB では、すべてのワーカー・ノードでパブリック・ノード・ポートも開いています。 パブリック NodePort へのトラフィックをブロックする [Calico preDNAT ネットワーク・ポリシー](/docs/containers?topic=containers-network_policies#block_ingress)を作成します。</li></ol>|
@@ -250,7 +251,7 @@ Kubernetes では、ネットワーク・サービスの 4 つの基本タイプ
 
 以下のプライベート・ネットワーキングのロード・バランシングのデプロイメント・パターンを確認してください。
 
-|名前|ロード・バランシングの方法|ユース・ケース|実装|
+|名前|ロード・バランシング方式|ユース・ケース|実装|
 |----|---------------------|--------|--------------|
 |NodePort|ワーカーのプライベート IP アドレスでアプリを公開するワーカー・ノードのポート|1 つのアプリへのプライベート・アクセスをテストしたり、短時間のみのアクセスを提供したりします。|<ol><li>[NodePort サービスを作成します](/docs/containers?topic=containers-nodeport)。</li><li>プライベート・ファイアウォールで、すべてのワーカー・ノードのプライベート IP アドレスにサービスをデプロイしたときに構成したポートを開き、トラフィックを許可します。 ポートを見つけるには、`kubectl get svc` を実行します。 ポートの範囲は 20000 から 32000 までです。</li></ol>|
 |NLB v1.0|プライベート IP アドレスを使用してアプリを公開する基本ロード・バランシング|プライベート IP アドレスを使用して 1 つのアプリをプライベート・ネットワークに素早く公開します。|<ol><li>[プライベート NLB サービスを作成します](/docs/containers?topic=containers-loadbalancer)。</li><li>プライベート・ファイアウォールで、NLB のプライベート IP アドレスにサービスをデプロイしたときに構成したポートを開きます。</li></ol>|

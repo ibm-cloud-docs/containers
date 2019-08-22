@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -39,36 +39,36 @@ subcollection: containers
 
 このタスクには、次の CLI とプラグインをインストールするための情報が含まれています。
 
--   {{site.data.keyword.Bluemix_notm}} CLI
+-   {{site.data.keyword.cloud_notm}} CLI
 -   {{site.data.keyword.containerlong_notm}} プラグイン
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 
-{{site.data.keyword.Bluemix_notm}} コンソールを代わりに使用する場合は、クラスターが作成された後、[Kubernetes Terminal](#cli_web) の Web ブラウザーから直接 CLI コマンドを実行できます。
+{{site.data.keyword.cloud_notm}} コンソールを代わりに使用する場合は、クラスターが作成された後、[Kubernetes Terminal](#cli_web) の Web ブラウザーから直接 CLI コマンドを実行できます。
 {: tip}
 
 <br>
 CLI をインストールするには、以下のことを行います。
 
-1.  [{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](/docs/cli?topic=cloud-cli-getting-started#idt-prereq)。 このインストールには、以下が含まれます。
-    -   基本 {{site.data.keyword.Bluemix_notm}} CLI (`ibmcloud`)。
+1.  [{{site.data.keyword.cloud_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストールします](/docs/cli?topic=cloud-cli-getting-started#idt-prereq)。 このインストールには、以下が含まれます。
+    -   基本 {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`)。
     -   {{site.data.keyword.containerlong_notm}} プラグイン (`ibmcloud ks`)。
-    -   {{site.data.keyword.registryshort_notm}} プラグイン (`ibmcloud cr`)。このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。
-    -   デフォルト・バージョン 1.13.6 に一致する Kubernetes CLI (`kubectl`)。<p class="note">別のバージョンを実行するクラスターを使用する予定の場合は、[そのバージョンの Kubernetes CLI を別個にインストール](#kubectl)する必要があります。(OpenShift) クラスターがある場合は、[`oc` CLI と `kubectl` CLI を一緒にインストールします](#cli_oc)。</p>
-    -   Helm CLI (`helm`)。パッケージ・マネージャーとして Helm を使用し、Helm チャートを介してクラスターに {{site.data.keyword.Bluemix_notm}} サービスおよび複雑なアプリをインストールできます。ただし、Helm を使用する各クラスターで [Helm をセットアップ](/docs/containers?topic=containers-helm)する必要があります。
+    -   {{site.data.keyword.registryshort_notm}} プラグイン (`ibmcloud cr`)。 このプラグインを使用して、IBM がホストするマルチテナントで可用性が高く拡張可能なプライベート・イメージ・レジストリー内に独自の名前空間をセットアップし、Docker イメージを保管して他のユーザーと共有します。 クラスターにコンテナーをデプロイするためには、Docker イメージが必要です。
+    -   デフォルト・バージョン 1.13.8 に一致する Kubernetes CLI (`kubectl`)。<p class="note">別のバージョンを実行するクラスターを使用する予定の場合は、[そのバージョンの Kubernetes CLI を別個にインストール](#kubectl)する必要があります。 (OpenShift) クラスターがある場合は、[`oc` CLI と `kubectl` CLI を一緒にインストールします](/docs/openshift?topic=openshift-openshift-cli)。</p>
+    -   Helm CLI (`helm`)。 パッケージ・マネージャーとして Helm を使用し、Helm チャートを介してクラスターに {{site.data.keyword.cloud_notm}} サービスおよび複雑なアプリをインストールできます。 ただし、Helm を使用する各クラスターで [Helm をセットアップ](/docs/containers?topic=containers-helm)する必要があります。
 
-    CLI を多用する計画ですか? [{{site.data.keyword.Bluemix_notm}} CLI の shell オートコンプリート機能の有効化 (Linux/MacOS のみ)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux) を試してみてください。
+    CLI を頻繁に使用する予定である場合は、[{{site.data.keyword.cloud_notm}} CLI の shell オートコンプリート機能の有効化 (Linux/MacOS のみ)](/docs/cli/reference/ibmcloud?topic=cloud-cli-shell-autocomplete#shell-autocomplete-linux) を試してみてください。
     {: tip}
 
-2.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
+2.  {{site.data.keyword.cloud_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.cloud_notm}} 資格情報を入力します。
     ```
     ibmcloud login
     ```
     {: pre}
 
-    フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+    フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.cloud_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
     {: tip}
 
-3.  {{site.data.keyword.containerlong_notm}} プラグインと {{site.data.keyword.registryshort_notm}} プラグインが正しくインストールされていることを確認します。
+4.  {{site.data.keyword.containerlong_notm}} プラグインと {{site.data.keyword.registryshort_notm}} プラグインが正しくインストールされていることを確認します。
     ```
     ibmcloud plugin list
     ```
@@ -93,23 +93,23 @@ CLI をインストールするには、以下のことを行います。
 ## Kubernetes CLI (`kubectl`) のインストール
 {: #kubectl}
 
-Kubernetes ダッシュボードのローカル・バージョンを表示して、クラスターにアプリをデプロイするには、Kubernetes CLI (`kubectl`) をインストールします。最新の安定したバージョンの `kubectl` が基本 {{site.data.keyword.Bluemix_notm}} CLI でインストールされます。 ただし、クラスターを処理するには、使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンを代わりにインストールする必要があります。 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 例えば、サーバー・バージョンから 2 つ以上離れた (n +/- 2) バージョンの `kubectl` クライアント・バージョンは、[Kubernetes ではサポートされません ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/setup/version-skew-policy/)。Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
+Kubernetes ダッシュボードのローカル・バージョンを表示して、クラスターにアプリをデプロイするには、Kubernetes CLI (`kubectl`) をインストールします。 最新の安定したバージョンの `kubectl` が基本 {{site.data.keyword.cloud_notm}} CLI でインストールされます。 ただし、クラスターを処理するには、使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンを代わりにインストールする必要があります。 少なくともクラスターの `major.minor` バージョンと同じ `kubectl` CLI バージョンを使用しないと、予期しない結果になる可能性があります。 例えば、サーバー・バージョンから 2 つ以上離れた (n +/- 2) バージョンの `kubectl` クライアント・バージョンは、[Kubernetes ではサポートされません ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/setup/version-skew-policy/)。 Kubernetes クラスターと CLI のバージョンを最新の状態に保つようにしてください。
 {: shortdesc}
 
-OpenShift クラスターを使用しますか? その場合は、`kubectl` に付属している OpenShift Origin CLI (`oc`) を代わりにインストールします。Red Hat OpenShift on IBM Cloud と Ubuntu ネイティブの両方の {{site.data.keyword.containershort_notm}} クラスターがある場合、クラスターの `major.minor` Kubernetes バージョンと一致する `kubectl` バイナリー・ファイルを必ず使用してください。
+OpenShift クラスターを使用しますか? [OpenShift Origin CLI (`oc`) をインストールします](/docs/openshift?topic=openshift-openshift-cli)。Red Hat OpenShift on IBM Cloud とコミュニティー {{site.data.keyword.containershort_notm}} の両方のクラスターがある場合は、必ずクラスターの `major.minor` Kubernetes バージョン                                                            と一致する `kubectl` バイナリー・ファイルを使用してください。さまざまな `kubectl` バージョンを整理するためにローカル・マシン上に複数のディレクトリーをセットアップし、端末でのそれらのディレクトリーの別名を作成することができます。
 {: tip}
 
 1.  既にクラスターがある場合は、クライアント `kubectl` CLI のバージョンがクラスター API サーバーのバージョンと一致することを確認してください。
     1.  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-    2.  クライアントとサーバーのバージョンを比較します。クライアントとサーバーが一致しない場合は、次のステップに進んでください。バージョンが一致する場合は、適切なバージョンの `kubectl` が既にインストールされています。
+    2.  クライアントとサーバーのバージョンを比較します。 クライアントとサーバーが一致しない場合は、次のステップに進んでください。 バージョンが一致する場合は、適切なバージョンの `kubectl` が既にインストールされています。
         ```
         kubectl version  --short
         ```
         {: pre}
-2.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.13.6 です。
-    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/darwin/amd64/kubectl)
-    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/linux/amd64/kubectl)
-    -   **Windows**: Kubernetes CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。 [https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.6/bin/windows/amd64/kubectl.exe)
+2.  使用する予定の Kubernetes クラスターの `major.minor` バージョンと一致する Kubernetes CLI の `major.minor` バージョンをダウンロードします。 現在の {{site.data.keyword.containerlong_notm}} のデフォルト Kubernetes バージョンは 1.13.8 です。
+    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/darwin/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/darwin/amd64/kubectl)
+    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/linux/amd64/kubectl ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/linux/amd64/kubectl)
+    -   **Windows**: Kubernetes CLI を {{site.data.keyword.cloud_notm}} CLI と同じディレクトリーにインストールします。 このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。 [https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/windows/amd64/kubectl.exe ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://storage.googleapis.com/kubernetes-release/release/v1.13.8/bin/windows/amd64/kubectl.exe)
 
 3.  OS X または Linux を使用している場合、以下のステップを実行します。
     1.  実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
@@ -134,52 +134,12 @@ OpenShift クラスターを使用しますか? その場合は、`kubectl` に�
         chmod +x /usr/local/bin/kubectl
         ```
         {: pre}
-4.  **オプション**: [`kubectl` コマンドのオートコンプリートを有効にします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。ステップは、使用するシェルによって異なります。
+4.  さまざまなバージョンの Kubernetes (1.15.1 や 1.14.4など) を実行するクラスターがある場合は、`kubectl` バージョンの各バイナリー・ファイルを別のディレクトリーにダウンロードします。その後、使用するクラスターの `kubectl` バージョンと一致する `kubectl` バイナリー・ファイル・ディレクトリーを指す別名をローカル端末プロファイル内でセットアップするか、[コンテナーから CLI を実行します](#cs_cli_container)。
+5.  **オプション**: [`kubectl` コマンドのオートコンプリートを有効にします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。 ステップは、使用するシェルによって異なります。
 
 次に、[{{site.data.keyword.containerlong_notm}} における CLI からの Kubernetes クラスターの作成](/docs/containers?topic=containers-clusters#clusters_cli_steps)を開始します。
 
 Kubernetes CLI について詳しくは、[`kubectl` のリファレンス資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) を参照してください。
-{: note}
-
-<br />
-
-
-## OpenShift Origin CLI (`oc`) プレビュー・ベータのインストール
-{: #cli_oc}
-
-[Red Hat OpenShift on IBM Cloud](/docs/containers?topic=containers-openshift_tutorial) は、OpenShift クラスターをテストするためのベータ版として使用できます。
-{: preview}
-
-OpenShift ダッシュボードのローカル・バージョンを表示して、Red Hat OpenShift on IBM Cloud クラスターにアプリをデプロイするには、OpenShift Origin CLI (`oc`) をインストールします。`oc` CLI には Kubernetes CLI (`kubectl`) の一致するバージョンが含まれています。詳しくは、[OpenShift の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.openshift.com/container-platform/3.11/cli_reference/get_started_cli.html) を参照してください。
-{: shortdesc}
-
-Red Hat OpenShift on IBM Cloud と Ubuntu ネイティブの両方の {{site.data.keyword.containershort_notm}} クラスターを使用しますか? `oc` CLI は、`oc` バイナリーと `kubectl` バイナリーの両方に付属していますが、クラスターごとに異なるバージョンの Kubernetes (例えば、OpenShift では 1.11、Ubuntu では 1.13.6) が実行されている場合があります。クラスターの `major.minor` Kubernetes バージョンと一致する `kubectl` バイナリーを必ず使用してください。
-{: note}
-
-1.  使用しているローカル・オペレーティング・システムおよび OpenShift バージョン用の [OpenShift Origin CLI をダウンロードします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.okd.io/download.html)。現在のデフォルト OpenShift バージョンは 3.11 です。
-
-2.  Mac OS または Linux を使用している場合は、以下のステップを実行して、バイナリーを `PATH` システム変数に追加します。Windows を使用している場合は、`oc` CLI を {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールします。このようにセットアップすると、後でコマンドを実行するとき、ファイル・パスの変更を行う手間がいくらか少なくなります。
-    1.  `oc` 実行可能ファイルと `kubectl` 実行可能ファイルを `/usr/local/bin` ディレクトリーに移動します。
-        ```
-        mv /<filepath>/oc /usr/local/bin/oc && mv /<filepath>/kubectl /usr/local/bin/kubectl
-        ```
-        {: pre}
-
-    2.  `/usr/local/bin` が `PATH` システム変数にリストされていることを確認します。 `PATH` 変数には、オペレーティング・システムが実行可能ファイルを見つけることのできるすべてのディレクトリーが含まれています。 `PATH` 変数にリストされた複数のディレクトリーには、それぞれ異なる目的があります。 `/usr/local/bin` は実行可能ファイルを保管するために使用されますが、保管対象となるのは、オペレーティング・システムの一部ではなく、システム管理者によって手動でインストールされたソフトウェアです。
-        ```
-        echo $PATH
-        ```
-        {: pre}
-        CLI 出力例:
-        ```
-        /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-        ```
-        {: screen}
-3.  **オプション**: [`kubectl` コマンドのオートコンプリートを有効にします ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion)。ステップは、使用するシェルによって異なります。このステップを繰り返して、`oc` コマンドのオートコンプリートを有効にすることができます。例えば、Linux の bash では、`kubectl completion bash >/etc/bash_completion.d/kubectl` の代わりに、`oc completion bash >/etc/bash_completion.d/oc_completion` を実行できます。
-
-次に、[Red Hat OpenShift on IBM Cloud クラスター (プレビュー) の作成](/docs/containers?topic=containers-openshift_tutorial)を開始します。
-
-OpenShift Origin CLI について詳しくは、[`oc` コマンドの資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.openshift.com/container-platform/3.11/cli_reference/basic_cli_operations.html) を参照してください。
 {: note}
 
 <br />
@@ -191,7 +151,7 @@ OpenShift Origin CLI について詳しくは、[`oc` コマンドの資料 ![�
 コンピューターに個別に各 CLI をインストールする代わりに、コンピューター上で実行するコンテナーに CLI をインストールすることができます。
 {:shortdesc}
 
-始めに、[Docker をインストール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.docker.com/community-edition#/download) し、ローカルにイメージをビルドして実行します。 Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
+始めに、[Docker for Mac ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/docker-for-mac/install/) または [Docker for Windows ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") をインストール](https://docs.docker.com/docker-for-windows/install/)し、ローカルにイメージをビルドして実行します。Windows 8 以前を使用している場合、代わりに [Docker Toolbox ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.docker.com/toolbox/toolbox_install_windows/) をインストールしてください。
 
 1. 提供された Dockerfile からイメージを作成します。
 
@@ -216,10 +176,10 @@ OpenShift Origin CLI について詳しくは、[`oc` コマンドの資料 ![�
 ## `kubectl` を実行するように CLI を構成する
 {: #cs_cli_configure}
 
-Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理することができます。
+Kubernetes CLI に用意されているコマンドを使用して、{{site.data.keyword.cloud_notm}} のクラスターを管理することができます。
 {:shortdesc}
 
-Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.Bluemix_notm}} 内のクラスターでの使用がサポートされます。クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを操作することができます。
+Kubernetes 1.13.8 内で使用できるすべての `kubectl` コマンドは、{{site.data.keyword.cloud_notm}} 内のクラスターでの使用がサポートされます。 クラスターを作成したら、環境変数を使用してローカル CLI のコンテキストをそのクラスターに設定します。 その後、Kubernetes のさまざまな `kubectl` コマンドを実行して、{{site.data.keyword.cloud_notm}} のクラスターを操作することができます。
 
 `kubectl` コマンドを実行するためには、その前に以下のようにします。
 * [必要な CLI をインストールします](#cs_cli_install)。
@@ -228,17 +188,17 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
 
 `kubectl` コマンドを使用するには、以下のようにします。
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
+1.  {{site.data.keyword.cloud_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.cloud_notm}} 資格情報を入力します。
 
     ```
     ibmcloud login
     ```
     {: pre}
 
-    フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+    フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.cloud_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
     {: tip}
 
-2.  {{site.data.keyword.Bluemix_notm}} アカウントを選択します。 複数の {{site.data.keyword.Bluemix_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.Bluemix_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
+2.  {{site.data.keyword.cloud_notm}} アカウントを選択します。 複数の {{site.data.keyword.cloud_notm}} の組織が割り当てられている場合は、対象クラスターが作成されている組織を選択してください。 クラスターは組織に固有のものですが、{{site.data.keyword.cloud_notm}} スペースからは独立しています。 そのため、スペースを選択する必要はありません。
 
 3.  デフォルト以外のリソース・グループにクラスターを作成して操作するには、そのリソース・グループをターゲットとして設定します。 各クラスターが属するリソース・グループを表示するには、`ibmcloud ks clusters` を実行します。 **注**: そのリソース・グループに対する [**Viewer** アクセス権限](/docs/containers?topic=containers-users#platform)が必要です。
     ```
@@ -246,15 +206,17 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
     ```
     {: pre}
 
-4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。 {{site.data.keyword.Bluemix_notm}} IAM サービス役割しかないために、クラスターを表示できない場合は、クラスター管理者に依頼して、IAM プラットフォームの**ビューアー**役割を付与してもらうか、クラスター名とクラスター ID を取得してください。
+4.  クラスターの名前を取得するために、アカウントに含まれているすべてのクラスターのリストを出力します。 {{site.data.keyword.cloud_notm}} IAM サービス役割しかないために、クラスターを表示できない場合は、クラスター管理者に依頼して、IAM プラットフォームの**ビューアー**役割を付与してもらうか、クラスター名とクラスター ID を取得してください。
 
     ```
     ibmcloud ks clusters
     ```
     {: pre}
 
+     ロンドン・メトロのロケーションのフリー・クラスターを操作するには、`ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com` を実行して中欧の地域 API をターゲットにする必要があります。{: note}
+
 5.  作成したクラスターを、このセッションのコンテキストとして設定します。 次の構成手順は、クラスターの操作時に毎回行ってください。
-    1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。<p class="tip">Windows PowerShell を使用していますか? Windows PowerShell 形式の環境変数を取得するには、`--powershell` フラグを含めます。</p>
+    1.  環境変数を設定して Kubernetes 構成ファイルをダウンロードするためのコマンドを取得します。 <p class="tip">Windows PowerShell を使用していますか? Windows PowerShell 形式の環境変数を取得するには、`--powershell` フラグを含めます。</p>
         ```
         ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
         ```
@@ -265,7 +227,7 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
         例:
 
         ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
@@ -285,11 +247,12 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
 
         出力:
         ```
-        /Users/<user_name>/.bluemix/plugins/container-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
         {: screen}
 
-6.  Kubernetes CLI サーバーのバージョンを調べて、ご使用のクラスターで `kubectl` コマンドが正常に実行されることを確認します。
+6.  Kubernetes CLI サーバーのバージョンを調べて、クラスターで `kubectl` コマンドが正常に実行されることを確認します。
+        
 
     ```
     kubectl version  --short
@@ -299,19 +262,17 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
     出力例:
 
     ```
-    Client Version: v1.13.6
-    Server Version: v1.13.6
+    Client Version: v1.13.8
+  Server Version: v1.13.8
     ```
     {: screen}
 
-これで、`kubectl` のコマンドを実行して、{{site.data.keyword.Bluemix_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) を参照してください。
+これで、`kubectl` のコマンドを実行して、{{site.data.keyword.cloud_notm}} のクラスターを管理できるようになりました。 すべてのコマンドのリストについては、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubectl.docs.kubernetes.io/) を参照してください。
 
-**ヒント:** Windows を使用している場合、Kubernetes CLI が {{site.data.keyword.Bluemix_notm}} CLI と同じディレクトリーにインストールされていなければ、`kubectl` コマンドを正常に実行するために、Kubernetes CLI のインストール先パスにディレクトリーを変更する必要があります。
+**ヒント:** Windows を使用している場合、Kubernetes CLI が {{site.data.keyword.cloud_notm}} CLI と同じディレクトリーにインストールされていなければ、`kubectl` コマンドを正常に実行するために、Kubernetes CLI のインストール先パスにディレクトリーを変更する必要があります。
 
 
 <br />
-
-
 
 
 ## CLI の更新
@@ -322,31 +283,31 @@ Kubernetes 1.13.6 内で使用できるすべての `kubectl` コマンドは、
 
 このタスクには、これらの CLI を更新するための情報が含まれています。
 
--   {{site.data.keyword.Bluemix_notm}} CLI バージョン 0.8.0 以降
+-   {{site.data.keyword.cloud_notm}} CLI バージョン 0.8.0 以降
 -   {{site.data.keyword.containerlong_notm}} プラグイン
--   Kubernetes CLI バージョン 1.13.6 以降
+-   Kubernetes CLI バージョン 1.13.8 以降
 -   {{site.data.keyword.registryshort_notm}} プラグイン
 
 <br>
 CLI を更新するには、以下のようにします。
 
-1.  {{site.data.keyword.Bluemix_notm}} CLI を更新します。 [最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/cli?topic=cloud-cli-getting-started) をダウンロードし、インストーラーを実行します。
+1.  {{site.data.keyword.cloud_notm}} CLI を更新します。 [最新バージョン ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/cli?topic=cloud-cli-getting-started) をダウンロードし、インストーラーを実行します。
 
-2. {{site.data.keyword.Bluemix_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.Bluemix_notm}} 資格情報を入力します。
+2. {{site.data.keyword.cloud_notm}} CLI にログインします。 プロンプトが出されたら、{{site.data.keyword.cloud_notm}} 資格情報を入力します。
 
     ```
     ibmcloud login
     ```
     {: pre}
 
-     フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.Bluemix_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
+     フェデレーテッド ID がある場合は、`ibmcloud login --sso` を使用して、{{site.data.keyword.cloud_notm}} CLI にログインします。 ユーザー名を入力し、CLI 出力に示された URL を使用して、ワンタイム・パスコードを取得してください。 `--sso` なしではログインに失敗し、`--sso` オプションを指定すると成功する場合、フェデレーテッド ID があることがわかります。
      {: tip}
 
 3.  {{site.data.keyword.containerlong_notm}} プラグインを更新します。
-    1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
+    1.  {{site.data.keyword.cloud_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
-        ibmcloud plugin update container-service 
+        ibmcloud plugin update kubernetes-service 
         ```
         {: pre}
 
@@ -357,7 +318,7 @@ CLI を更新するには、以下のようにします。
         ```
         {: pre}
 
-        {{site.data.keyword.containerlong_notm}} プラグインは container-service として結果に表示されます。
+        {{site.data.keyword.containerlong_notm}} プラグインは kubernetes-service として結果に表示されます。
 
     3.  CLI を初期化します。
 
@@ -369,7 +330,7 @@ CLI を更新するには、以下のようにします。
 4.  [Kubernetes CLI を更新します](#kubectl)。
 
 5.  {{site.data.keyword.registryshort_notm}} プラグインを更新します。
-    1.  {{site.data.keyword.Bluemix_notm}} プラグイン・リポジトリーからアップデートをインストールします。
+    1.  {{site.data.keyword.cloud_notm}} プラグイン・リポジトリーからアップデートをインストールします。
 
         ```
         ibmcloud plugin update container-registry 
@@ -406,7 +367,7 @@ CLI をアンインストールするには、以下のようにします。
 1.  {{site.data.keyword.containerlong_notm}} プラグインをアンインストールします。
 
     ```
-    ibmcloud plugin uninstall container-service
+    ibmcloud plugin uninstall kubernetes-service
     ```
     {: pre}
 
@@ -424,7 +385,7 @@ CLI をアンインストールするには、以下のようにします。
     ```
     {: pre}
 
-    container-service プラグインと container-registry プラグインは結果に表示されません。
+    kubernetes-service プラグインと container-registry プラグインは結果に表示されません。
 
 <br />
 
@@ -432,20 +393,20 @@ CLI をアンインストールするには、以下のようにします。
 ## Web ブラウザーでの Kubernetes Terminal (ベータ版) の使用
 {: #cli_web}
 
-Kubernetes Terminal を使用すると、Web ブラウザーから直接 {{site.data.keyword.Bluemix_notm}} CLI を使用してクラスターを管理できます。
+Kubernetes Terminal を使用すると、Web ブラウザーから直接 {{site.data.keyword.cloud_notm}} CLI を使用してクラスターを管理できます。
 {: shortdesc}
 
 Kubernetes Terminal は、ベータ版の {{site.data.keyword.containerlong_notm}} アドオンとしてリリースされており、ユーザーのフィードバックや今後のテストによって変更される場合があります。 予期しない副次作用を避けるため、この機能は実動クラスターで使用しないでください。
 {: important}
 
-{{site.data.keyword.Bluemix_notm}} コンソールでクラスター・ダッシュボードを使用してクラスターを管理する場合、より高度な構成変更を迅速に行うために、Kubernetes Terminal の Web ブラウザーから直接 CLI コマンドを実行できます。 Kubernetes Terminal は、基本 [{{site.data.keyword.Bluemix_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/cli?topic=cloud-cli-getting-started)、{{site.data.keyword.containerlong_notm}} プラグイン、および {{site.data.keyword.registryshort_notm}} プラグインで有効です。 また、作業しているクラスターに対してターミナル・コンテキストが既に設定されているため、Kubernetes `kubectl` コマンドを実行してクラスターを処理できます。
+{{site.data.keyword.cloud_notm}} コンソールでクラスター・ダッシュボードを使用してクラスターを管理する場合、より高度な構成変更を迅速に行うために、Kubernetes Terminal の Web ブラウザーから直接 CLI コマンドを実行できます。 Kubernetes Terminal は、基本 [{{site.data.keyword.cloud_notm}} CLI ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](/docs/cli?topic=cloud-cli-getting-started)、{{site.data.keyword.containerlong_notm}} プラグイン、および {{site.data.keyword.registryshort_notm}} プラグインで有効です。 また、作業しているクラスターに対してターミナル・コンテキストが既に設定されているため、Kubernetes `kubectl` コマンドを実行してクラスターを処理できます。
 
 YAML ファイルなどの、ローカルにダウンロードして編集したファイルは、Kubernetes Terminal に一時的に格納されますが、複数セッションをまたいでは持続しません。
 {: note}
 
 Kubernetes Terminal をインストールして起動するには、以下のようにします。
 
-1.  [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) にログインします。
+1.  [{{site.data.keyword.cloud_notm}} コンソール](https://cloud.ibm.com/) にログインします。
 2.  メニュー・バーから、使用するアカウントを選択します。
 3.  メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から、**「Kubernetes」**をクリックします。
 4.  **「クラスター」**ページで、アクセスするクラスターをクリックします。
@@ -466,7 +427,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
 
 {{site.data.keyword.containerlong_notm}} API にはヘッダー情報が必要です。これは、API 要求に指定する必要があります。また、使用する API に応じて異なる場合があります。 使用する API に必要なヘッダー情報を調べるには、[{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://us-south.containers.cloud.ibm.com/swagger-api) を参照してください。
 
-{{site.data.keyword.containerlong_notm}} で認証を受けるために、{{site.data.keyword.Bluemix_notm}} 資格情報を使用して生成した {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) トークン (クラスターの作成に使用した {{site.data.keyword.Bluemix_notm}} アカウント ID が入っているもの) を渡す必要があります。 {{site.data.keyword.Bluemix_notm}} での認証方法に応じて、{{site.data.keyword.Bluemix_notm}} IAM トークンの作成を自動化するための次のオプションから選択できます。
+{{site.data.keyword.containerlong_notm}} で認証を受けるために、{{site.data.keyword.cloud_notm}} 資格情報を使用して生成した {{site.data.keyword.cloud_notm}} IAM (ID およびアクセス管理) トークン (クラスターの作成に使用した {{site.data.keyword.cloud_notm}} アカウント ID が入っているもの) を渡す必要があります。 {{site.data.keyword.cloud_notm}} での認証方法に応じて、{{site.data.keyword.cloud_notm}} IAM トークンの作成を自動化するための次のオプションから選択できます。
 
 [API Swagger JSON ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json) を使用して、自動化作業の一部として API と対話可能なクライアントを生成することもできます。
 {: tip}
@@ -474,24 +435,24 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
 <table summary="ID タイプとオプション、1 列目は入力パラメーター、2 列目は値です。">
 <caption>ID タイプとオプション</caption>
 <thead>
-<th>{{site.data.keyword.Bluemix_notm}} ID</th>
+<th>{{site.data.keyword.cloud_notm}} ID</th>
 <th>選択オプション</th>
 </thead>
 <tbody>
 <tr>
 <td>非フェデレーテッド ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API キーの生成:</strong> {{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードを使用する代わりに、<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API キーを使用</a>することができます。 {{site.data.keyword.Bluemix_notm}} API キーは、その生成対象の {{site.data.keyword.Bluemix_notm}} アカウントに依存しています。 {{site.data.keyword.Bluemix_notm}} API キーと別のアカウント ID を同一の {{site.data.keyword.Bluemix_notm}} IAM トークンで結合することはできません。 {{site.data.keyword.Bluemix_notm}} API キーの基となっているアカウント以外のアカウントを使用して作成されたクラスターにアクセスするには、そのアカウントにログインして新しい API キーを生成する必要があります。</li>
-<li><strong>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワード:</strong> このトピックに記載されたステップに従って、{{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンの作成を完全に自動化できます。</li></ul>
+<td><ul><li><strong>{{site.data.keyword.cloud_notm}} API キーの生成:</strong> {{site.data.keyword.cloud_notm}} ユーザー名とパスワードを使用する代わりに、<a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.cloud_notm}} API キーを使用</a>することができます。 {{site.data.keyword.cloud_notm}} API キーは、その生成対象の {{site.data.keyword.cloud_notm}} アカウントに依存しています。 {{site.data.keyword.cloud_notm}} API キーと別のアカウント ID を同一の {{site.data.keyword.cloud_notm}} IAM トークンで結合することはできません。 {{site.data.keyword.cloud_notm}} API キーの基となっているアカウント以外のアカウントを使用して作成されたクラスターにアクセスするには、そのアカウントにログインして新しい API キーを生成する必要があります。</li>
+<li><strong>{{site.data.keyword.cloud_notm}} ユーザー名とパスワード:</strong> このトピックに記載されたステップに従って、{{site.data.keyword.cloud_notm}} IAM アクセス・トークンの作成を完全に自動化できます。</li></ul>
 </tr>
 <tr>
 <td>フェデレーテッド ID</td>
-<td><ul><li><strong>{{site.data.keyword.Bluemix_notm}} API キーの生成:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.Bluemix_notm}} API キー</a>は、その生成対象の {{site.data.keyword.Bluemix_notm}} アカウントに依存しています。 {{site.data.keyword.Bluemix_notm}} API キーと別のアカウント ID を同一の {{site.data.keyword.Bluemix_notm}} IAM トークンで結合することはできません。 {{site.data.keyword.Bluemix_notm}} API キーの基となっているアカウント以外のアカウントを使用して作成されたクラスターにアクセスするには、そのアカウントにログインして新しい API キーを生成する必要があります。</li>
-<li><strong>ワンタイム・パスコードの使用: </strong>ワンタイム・パスコードを使用して {{site.data.keyword.Bluemix_notm}} で認証する場合、{{site.data.keyword.Bluemix_notm}} IAM トークンの作成を完全に自動化することはできません。ワンタイム・パスコードを取得するには、Web ブラウザーとの手動対話が必要になるためです。 {{site.data.keyword.Bluemix_notm}} IAM トークンの作成を完全に自動化するには、代わりに {{site.data.keyword.Bluemix_notm}} API キーを作成する必要があります。</ul></td>
+<td><ul><li><strong>{{site.data.keyword.cloud_notm}} API キーの生成:</strong> <a href="/docs/iam?topic=iam-userapikey#create_user_key" target="_blank">{{site.data.keyword.cloud_notm}} API キー</a>は、その生成対象の {{site.data.keyword.cloud_notm}} アカウントに依存しています。 {{site.data.keyword.cloud_notm}} API キーと別のアカウント ID を同一の {{site.data.keyword.cloud_notm}} IAM トークンで結合することはできません。 {{site.data.keyword.cloud_notm}} API キーの基となっているアカウント以外のアカウントを使用して作成されたクラスターにアクセスするには、そのアカウントにログインして新しい API キーを生成する必要があります。</li>
+<li><strong>ワンタイム・パスコードの使用: </strong>ワンタイム・パスコードを使用して {{site.data.keyword.cloud_notm}} で認証する場合、{{site.data.keyword.cloud_notm}} IAM トークンの作成を完全に自動化することはできません。ワンタイム・パスコードを取得するには、Web ブラウザーとの手動対話が必要になるためです。 {{site.data.keyword.cloud_notm}} IAM トークンの作成を完全に自動化するには、代わりに {{site.data.keyword.cloud_notm}} API キーを作成する必要があります。</ul></td>
 </tr>
 </tbody>
 </table>
 
-1.  {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンを作成します。 要求に含まれる本文情報は、使用する {{site.data.keyword.Bluemix_notm}} 認証方式によって異なります。
+1.  {{site.data.keyword.cloud_notm}} IAM アクセス・トークンを作成します。 要求に含まれる本文情報は、使用する {{site.data.keyword.cloud_notm}} 認証方式によって異なります。
 
     ```
     POST https://iam.bluemix.net/identity/token
@@ -511,27 +472,27 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
     </td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username`: {{site.data.keyword.Bluemix_notm}} ユーザー名。</li>
-    <li>`password`: {{site.data.keyword.Bluemix_notm}} パスワード。</li>
+    <li>`username`: {{site.data.keyword.cloud_notm}} ユーザー名。</li>
+    <li>`password`: {{site.data.keyword.cloud_notm}} パスワード。</li>
     <li>`uaa_client_id: cf`</li>
     <li>`uaa_client_secret:`</br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li></ul></td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} API キーの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} API キーの本文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey`: {{site.data.keyword.Bluemix_notm}} API キー</li>
+    <li>`apikey`: {{site.data.keyword.cloud_notm}} API キー</li>
     <li>`uaa_client_id: cf`</li>
     <li>`uaa_client_secret:` </br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li></ul></td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} ワンタイム・パスコードの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} ワンタイム・パスコードの本文</td>
       <td><ul><li><code>grant_type: urn:ibm:params:oauth:grant-type:passcode</code></li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode`: {{site.data.keyword.Bluemix_notm}} ワンタイム・パスコード。 `ibmcloud login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。</li>
+    <li>`passcode`: {{site.data.keyword.cloud_notm}} ワンタイム・パスコード。 `ibmcloud login --sso` を実行し、CLI 出力の説明に従って、Web ブラウザーを使用してワンタイム・パスコードを取得します。</li>
     <li>`uaa_client_id: cf`</li>
     <li>`uaa_client_secret:` </br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li></ul>
     </td>
@@ -556,17 +517,17 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
     ```
     {: screen}
 
-    {{site.data.keyword.Bluemix_notm}} IAM トークンは、API 出力の **access_token** フィールドで確認できます。 次のステップでさらにヘッダー情報を取得するため、{{site.data.keyword.Bluemix_notm}} IAM トークンをメモしておきます。
+    {{site.data.keyword.cloud_notm}} IAM トークンは、API 出力の **access_token** フィールドで確認できます。 次のステップでさらにヘッダー情報を取得するため、{{site.data.keyword.cloud_notm}} IAM トークンをメモしておきます。
 
-2.  作業する {{site.data.keyword.Bluemix_notm}} アカウントの ID を取得します。 `<iam_access_token>` を、前の手順で API 出力の **access_token** フィールドから取得した {{site.data.keyword.Bluemix_notm}} IAM トークンに置き換えます。 API 出力の **resources.metadata.guid** フィールドで {{site.data.keyword.Bluemix_notm}} アカウントの ID を確認できます。
+2.  作業する {{site.data.keyword.cloud_notm}} アカウントの ID を取得します。 `<iam_access_token>` を、前の手順で API 出力の **access_token** フィールドから取得した {{site.data.keyword.cloud_notm}} IAM トークンに置き換えます。 API 出力の **resources.metadata.guid** フィールドで {{site.data.keyword.cloud_notm}} アカウントの ID を確認できます。
 
     ```
     GET https://accountmanagement.ng.bluemix.net/v1/accounts
     ```
     {: codeblock}
 
-    <table summary="{{site.data.keyword.Bluemix_notm}} アカウント ID を取得するための入力パラメーター、1 列目は入力パラメーター、2 列目は値です。">
-    <caption>{{site.data.keyword.Bluemix_notm}} アカウント ID を取得するための入力パラメーター。</caption>
+    <table summary=" {{site.data.keyword.cloud_notm}}アカウント ID を取得するための入力パラメーター。1 列目は入力パラメーターで、2 列目は値。">
+    <caption>{{site.data.keyword.cloud_notm}} アカウント ID を取得するための入力パラメーター。</caption>
     <thead>
   	<th>入力パラメーター</th>
   	<th>値</th>
@@ -601,9 +562,9 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
     ```
     {: screen}
 
-3.  {{site.data.keyword.Bluemix_notm}} 資格情報と、作業するアカウント ID が含まれる、新しい {{site.data.keyword.Bluemix_notm}} IAM トークンを生成します。
+3.  {{site.data.keyword.cloud_notm}} 資格情報と、作業するアカウント ID が含まれる、新しい {{site.data.keyword.cloud_notm}} IAM トークンを生成します。
 
-    {{site.data.keyword.Bluemix_notm}} API キーを使用する場合、API キーの作成対象となった {{site.data.keyword.Bluemix_notm}} アカウント ID を使用する必要があります。 他のアカウントのクラスターにアクセスするには、そのアカウントにログインし、このアカウントに基づく {{site.data.keyword.Bluemix_notm}} API キーを作成します。
+    {{site.data.keyword.cloud_notm}} API キーを使用する場合、API キーの作成対象となった {{site.data.keyword.cloud_notm}} アカウント ID を使用する必要があります。 他のアカウントのクラスターにアクセスするには、そのアカウントにログインし、このアカウントに基づく {{site.data.keyword.cloud_notm}} API キーを作成します。
     {: note}
 
     ```
@@ -624,34 +585,34 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
     </td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} ユーザー名とパスワードの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} ユーザー名とパスワードの本文</td>
     <td><ul><li>`grant_type: password`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`username`: {{site.data.keyword.Bluemix_notm}} ユーザー名。 </li>
-    <li>`password`: {{site.data.keyword.Bluemix_notm}} パスワード。 </li>
+    <li>`username`: {{site.data.keyword.cloud_notm}} ユーザー名。 </li>
+    <li>`password`: {{site.data.keyword.cloud_notm}} パスワード。 </li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:` </br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li>
-    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.Bluemix_notm}} アカウント ID。</li></ul>
+    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.cloud_notm}} アカウント ID。</li></ul>
     </td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} API キーの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} API キーの本文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey`: {{site.data.keyword.Bluemix_notm}} API キー。</li>
+    <li>`apikey`: {{site.data.keyword.cloud_notm}} API キー。</li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:` </br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li>
-    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.Bluemix_notm}} アカウント ID。</li></ul>
+    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.cloud_notm}} アカウント ID。</li></ul>
       </td>
     </tr>
     <tr>
-    <td>{{site.data.keyword.Bluemix_notm}} ワンタイム・パスコードの本文</td>
+    <td>{{site.data.keyword.cloud_notm}} ワンタイム・パスコードの本文</td>
     <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:passcode`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`passcode`: {{site.data.keyword.Bluemix_notm}} パスコード。 </li>
+    <li>`passcode`: {{site.data.keyword.cloud_notm}} パスコード。 </li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:` </br><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</li>
-    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.Bluemix_notm}} アカウント ID。</li></ul></td>
+    <li>`bss_account`: 前の手順で取得した {{site.data.keyword.cloud_notm}} アカウント ID。</li></ul></td>
     </tr>
     </tbody>
     </table>
@@ -670,7 +631,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
     ```
     {: screen}
 
-    API 出力の **access_token** フィールドに {{site.data.keyword.Bluemix_notm}} IAM トークンがあり、**refresh_token** フィールドにリフレッシュ・トークンがあります。
+    API 出力の **access_token** フィールドに {{site.data.keyword.cloud_notm}} IAM トークンがあり、**refresh_token** フィールドにリフレッシュ・トークンがあります。
 
 4.  有効な {{site.data.keyword.containerlong_notm}} 地域をリストして、作業する地域を選択します。 前の手順の IAM アクセス・トークンとリフレッシュ・トークンを使用して、ヘッダー情報を作成します。
     ```
@@ -774,9 +735,9 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
 以下の手順では、Kubernetes マスターのパブリック・サービス・エンドポイントに接続するために、クラスターのパブリック・ネットワーク・アクセスが必要です。
 {: note}
 
-1. [API を使用したクラスターのデプロイメントの自動化](#cs_api)の手順に従って、{{site.data.keyword.Bluemix_notm}} IAM アクセス・トークン、リフレッシュ・トークン、Kubernetes API 要求を実行するクラスターの ID、クラスターが配置されている {{site.data.keyword.containerlong_notm}} 地域を取得します。
+1. [API を使用したクラスターのデプロイメントの自動化](#cs_api)の手順に従って、{{site.data.keyword.cloud_notm}} IAM アクセス・トークン、リフレッシュ・トークン、Kubernetes API 要求を実行するクラスターの ID、クラスターが配置されている {{site.data.keyword.containerlong_notm}} 地域を取得します。
 
-2. {{site.data.keyword.Bluemix_notm}} IAM 委任リフレッシュ・トークンを取得します。
+2. {{site.data.keyword.cloud_notm}} IAM 委任リフレッシュ・トークンを取得します。
    ```
    POST https://iam.bluemix.net/identity/token
    ```
@@ -799,7 +760,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
    <td><ul><li>`delegated_refresh_token_expiry: 600`</li>
    <li>`receiver_client_ids: kube`</li>
    <li>`response_type: delegated_refresh_token` </li>
-   <li>`refresh_token`: {{site.data.keyword.Bluemix_notm}} IAM リフレッシュ・トークン。 </li>
+   <li>`refresh_token`: {{site.data.keyword.cloud_notm}} IAM リフレッシュ・トークン。 </li>
    <li>`grant_type: refresh_token`</li></ul></td>
    </tr>
    </tbody>
@@ -813,7 +774,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
    ```
    {: screen}
 
-3. 前の手順の委任リフレッシュ・トークンを使用して、{{site.data.keyword.Bluemix_notm}} IAM ID、IAM アクセス、および IAM リフレッシュ・トークンを取得します。 API 出力では、**id_token** フィールドに IAM ID トークン、**access_token** フィールドに IAM アクセス・トークン、**refresh_token** フィールドに IAM リフレッシュ・トークンがあります。
+3. 前の手順の委任リフレッシュ・トークンを使用して、{{site.data.keyword.cloud_notm}} IAM ID、IAM アクセス、および IAM リフレッシュ・トークンを取得します。 API 出力では、**id_token** フィールドに IAM ID トークン、**access_token** フィールドに IAM アクセス・トークン、**refresh_token** フィールドに IAM リフレッシュ・トークンがあります。
    ```
    POST https://iam.bluemix.net/identity/token
    ```
@@ -833,7 +794,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
    </tr>
    <tr>
    <td>本文</td>
-   <td><ul><li>`refresh_token`: {{site.data.keyword.Bluemix_notm}} IAM 委任リフレッシュ・トークン。 </li>
+   <td><ul><li>`refresh_token`: {{site.data.keyword.cloud_notm}} IAM 委任リフレッシュ・トークン。 </li>
    <li>`grant_type: urn:ibm:params:oauth:grant-type:delegated-refresh-token`</li></ul></td>
    </tr>
    </tbody>
@@ -868,7 +829,7 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
    <tbody>
    <tr>
    <td>ヘッダー</td>
-     <td><ul><li>`Authorization`: {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークン。</li><li>`X-Auth-Refresh-Token`: {{site.data.keyword.Bluemix_notm}} IAM リフレッシュ・トークン。</li><li>`X-Region`: [API を使用したクラスターのデプロイメントの自動化](#cs_api)の `GET https://containers.cloud.ibm.com/v1/clusters` API で取得したクラスターの {{site.data.keyword.containerlong_notm}} 地域。 </li></ul>
+     <td><ul><li>`Authorization`: {{site.data.keyword.cloud_notm}} IAM アクセス・トークン。</li><li>`X-Auth-Refresh-Token`: {{site.data.keyword.cloud_notm}} IAM リフレッシュ・トークン。</li><li>`X-Region`: [API を使用したクラスターのデプロイメントの自動化](#cs_api)の `GET https://containers.cloud.ibm.com/v1/clusters` API で取得したクラスターの {{site.data.keyword.containerlong_notm}} 地域。 </li></ul>
    </td>
    </tr>
    <tr>
@@ -945,32 +906,32 @@ Kubernetes Terminal をインストールして起動するには、以下のよ
 6. [Kubernetes API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/kubernetes-api/) を参照して、最新の Kubernetes バージョンでサポートされている API のリストを確認します。 必ず、ご使用のクラスターの Kubernetes バージョンに一致する API 資料を使用してください。 最新の Kubernetes バージョンを使用していない場合は、URL の最後にご使用のバージョンを追加してください。 例えば、バージョン 1.12 の API 資料にアクセスするには、`v1.12` を追加します。
 
 
-## API を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
+## API を使用した {{site.data.keyword.cloud_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
 {: #cs_api_refresh}
 
-API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) アクセス・トークンは、1 時間後に有効期限が切れます。 {{site.data.keyword.Bluemix_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。 同じ手順を使用して、新しいリフレッシュ・トークンを取得できます。
+API を介して発行されるすべての {{site.data.keyword.cloud_notm}} IAM (ID およびアクセス管理) アクセス・トークンは、1 時間後に有効期限が切れます。 {{site.data.keyword.cloud_notm}} API へのアクセスを確保するには、アクセス・トークンを定期的にリフレッシュする必要があります。 同じ手順を使用して、新しいリフレッシュ・トークンを取得できます。
 {:shortdesc}
 
-まず始めに、新しいアクセス・トークンを要求するために使用できる {{site.data.keyword.Bluemix_notm}} IAM リフレッシュ・トークンまたは {{site.data.keyword.Bluemix_notm}} API キーを用意してください。
-- **リフレッシュ・トークン:** [{{site.data.keyword.Bluemix_notm}} API を使用したクラスターの作成と管理のプロセスの自動化](#cs_api) の説明に従います。
-- **API キー:** 次のように [{{site.data.keyword.Bluemix_notm}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) API キーを取得します。
+まず始めに、新しいアクセス・トークンを要求するために使用できる {{site.data.keyword.cloud_notm}} IAM リフレッシュ・トークンまたは {{site.data.keyword.cloud_notm}} API キーを用意してください。
+- **リフレッシュ・トークン:** [{{site.data.keyword.cloud_notm}} API を使用したクラスターの作成と管理のプロセスの自動化](#cs_api) の説明に従います。
+- **API キー:** 次のように [{{site.data.keyword.cloud_notm}} ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) API キーを取得します。
    1. メニュー・バーから、**「管理」** > **「アクセス (IAM)」**をクリックします。
    2. **「ユーザー」**ページをクリックして、自分を選択します。
    3. **「API キー」**ペインで、**「IBM Cloud API キーの作成」**をクリックします。
    4. API キーの**「名前」**と**「説明」**を入力し、**「作成」**をクリックします。
    4. **「表示」**をクリックして、生成された API キーを確認します。
-   5. API キーをコピーして、新しい {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンを取得できるようにします。
+   5. API キーをコピーして、新しい {{site.data.keyword.cloud_notm}} IAM アクセス・トークンを取得できるようにします。
 
-{{site.data.keyword.Bluemix_notm}} IAM トークンを作成する場合、または新しいリフレッシュ・トークンを取得する場合は、以下の手順を使用します。
+{{site.data.keyword.cloud_notm}} IAM トークンを作成する場合、または新しいリフレッシュ・トークンを取得する場合は、以下の手順を使用します。
 
-1.  リフレッシュ・トークンまたは {{site.data.keyword.Bluemix_notm}} API キーを使用して、新しい {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンを生成します。
+1.  リフレッシュ・トークンまたは {{site.data.keyword.cloud_notm}} API キーを使用して、新しい {{site.data.keyword.cloud_notm}} IAM アクセス・トークンを生成します。
     ```
     POST https://iam.bluemix.net/identity/token
     ```
     {: codeblock}
 
     <table summary="新しい IAM トークンのための入力パラメーター、1 列目は入力パラメーター、2 列目は値です。">
-    <caption>新しい {{site.data.keyword.Bluemix_notm}} IAM トークンのための入力パラメーター</caption>
+    <caption>新しい {{site.data.keyword.cloud_notm}} IAM トークンのための入力パラメーター</caption>
     <thead>
     <th>入力パラメーター</th>
     <th>値</th>
@@ -985,16 +946,16 @@ API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} I
     <td>リフレッシュ・トークン使用時の本体</td>
     <td><ul><li>`grant_type: refresh_token`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`refresh_token:` {{site.data.keyword.Bluemix_notm}} IAM リフレッシュ・トークン。 </li>
+    <li>`refresh_token:` {{site.data.keyword.cloud_notm}} IAM リフレッシュ・トークン。 </li>
     <li>`uaa_client_ID: cf`</li>
     <li>`uaa_client_secret:`</li>
-    <li>`bss_account:` {{site.data.keyword.Bluemix_notm}} アカウント ID。 </li></ul><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
+    <li>`bss_account:` {{site.data.keyword.cloud_notm}} アカウント ID。 </li></ul><strong>注</strong>: <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
     <tr>
-      <td>{{site.data.keyword.Bluemix_notm}} API キー使用時の本体</td>
+      <td>{{site.data.keyword.cloud_notm}} API キー使用時の本体</td>
       <td><ul><li>`grant_type: urn:ibm:params:oauth:grant-type:apikey`</li>
     <li>`response_type: cloud_iam uaa`</li>
-    <li>`apikey:` {{site.data.keyword.Bluemix_notm}} API キー。 </li>
+    <li>`apikey:` {{site.data.keyword.cloud_notm}} API キー。 </li>
     <li>`uaa_client_ID: cf`</li>
         <li>`uaa_client_secret:`</li></ul><strong>注:</strong> <code>uaa_client_secret</code> キーは値を指定せずに追加します。</td>
     </tr>
@@ -1017,19 +978,22 @@ API を介して発行されるすべての {{site.data.keyword.Bluemix_notm}} I
     ```
     {: screen}
 
-    API 出力の **access_token** フィールドに新しい {{site.data.keyword.Bluemix_notm}} IAM トークンがあり、**refresh_token** フィールドにリフレッシュ・トークンがあります。
+    API 出力の **access_token** フィールドに新しい {{site.data.keyword.cloud_notm}} IAM トークンがあり、**refresh_token** フィールドにリフレッシュ・トークンがあります。
 
 2.  前の手順のトークンを使用して、[{{site.data.keyword.containerlong_notm}} API の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://containers.cloud.ibm.com/global/swagger-global-api) の作業を進めます。
 
 <br />
 
 
-## CLI を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
+## CLI を使用した {{site.data.keyword.cloud_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得
 {: #cs_cli_refresh}
 
-新しい CLI セッションを開始する場合、または現在の CLI セッションで 24 時間が経過した場合は、`ibmcloud ks cluster-config --cluster <cluster_name>` を実行してクラスターのコンテキストを設定する必要があります。このコマンドでクラスターのコンテキストを設定すると、Kubernetes クラスターの `kubeconfig` ファイルがダウンロードされます。 さらに、認証を提供するために、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) ID トークンおよびリフレッシュ・トークンが発行されます。
+新しい CLI セッションを開始する場合、または現在の CLI セッションで 24 時間が経過した場合は、`ibmcloud ks cluster-config --cluster <cluster_name>` を実行してクラスターのコンテキストを設定する必要があります。 このコマンドでクラスターのコンテキストを設定すると、Kubernetes クラスターの `kubeconfig` ファイルがダウンロードされます。 さらに、認証を提供するために、{{site.data.keyword.cloud_notm}} IAM (ID およびアクセス管理) ID トークンおよびリフレッシュ・トークンが発行されます。
 {: shortdesc}
 
 **ID トークン**: CLI を介して発行されるすべての IAM ID トークンは、1 時間後に有効期限が切れます。 ID トークンの有効期限が切れると、リフレッシュ・トークンがトークン・プロバイダーに送信され、ID トークンがリフレッシュされます。 認証がリフレッシュされ、クラスターに対して引き続きコマンドを実行できるようになります。
 
-**リフレッシュ・トークン**: リフレッシュ・トークンは 30 日ごとに有効期限が切れます。 リフレッシュ・トークンの有効期限が切れると、ID トークンをリフレッシュできなくなるので、CLI でコマンドの実行を続けられなくなります。 `ibmcloud ks cluster-config --cluster <cluster_name>` を実行すると、新しいリフレッシュ・トークンを取得できます。このコマンドは ID トークンもリフレッシュします。
+**リフレッシュ・トークン**: リフレッシュ・トークンは 30 日ごとに有効期限が切れます。 リフレッシュ・トークンの有効期限が切れると、ID トークンをリフレッシュできなくなるので、CLI でコマンドの実行を続けられなくなります。 `ibmcloud ks cluster-config --cluster <cluster_name>` を実行すると、新しいリフレッシュ・トークンを取得できます。 このコマンドは ID トークンもリフレッシュします。
+
+
+

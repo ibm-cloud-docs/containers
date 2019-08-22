@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,14 +24,17 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # CLI の変更ログ
 {: #cs_cli_changelog}
 
 `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
 {:shortdesc}
 
-{{site.data.keyword.containerlong}} CLI プラグインをインストールするには、[CLI のインストール](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)を参照してください。
+* **コミュニティー Kubernetes**: [CLI プラグインをインストールします](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps)。このプラグインは `ibmcloud ks` 別名を使用します。
+* **OpenShift**: [CLI プラグインをインストールします](/docs/openshift?topic=openshift-openshift-cli)。このプラグインは `ibmcloud oc` 別名を使用します。
 
+<br>
 {{site.data.keyword.containerlong_notm}} CLI プラグインの各バージョンにおける変更の要約については、以下の表を参照してください。
 
 <table summary="{{site.data.keyword.containerlong_notm}} CLI プラグインのバージョン変更の概要">
@@ -45,10 +48,48 @@ subcollection: containers
 </thead>
 <tbody>
 <tr>
+<td>0.3.95</td>
+<td>2019 年 7 月 30 日</td>
+<td>
+<ul>
+<li>Red Hat OpenShift on IBM Cloud クラスターを管理するための `ibmcloud oc` 別名が {{site.data.keyword.containershort_notm}} プラグインに追加されました。</li>
+<li>IBM Cloud インフラストラクチャー・アカウント内のパブリックまたはプライベートのポータブル・サブネットをクラスターから切り離すための、[`ibmcloud ks cluster-subnet-detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) コマンドが追加されました。</li>
+<li>`ibmcloud ks machine-types` コマンドが `ibmcloud ks flavors` に名前変更されました。`machine-types` 別名は引き続き使用できます。</li>
+<li>`ibmcloud ks flavors (machine-types)` の出力に、{{site.data.keyword.containerlong_notm}} のみまたは Red Hat OpenShift on IBM Cloud のみでサポートされているフレーバーが示されるようになりました。</li>
+<li>`ibmcloud ks cluster-get` の出力の中の`「所有者」` という言葉を`「作成者」` に変更しました (このフィールドが、クラスターを作成したユーザーについての情報が返されるフィールドであることを理解できるようにするためです)。</li>
+<li>`ibmcloud ks zone-add` のエラー処理が改善されました。</li>
+<li>ヘルプ・テキストの翻訳を更新しました。</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.3.58</td>
+<td>2019 年 7 月 2 日</td>
+<td><ul>
+<li>バグが修正され、クラスター自動スケーリングが有効である場合に、ワーカー・プール・リバランス・メッセージが返されないようになりました。</li>
+<li>バグが修正され、デフォルトの OpenShift クラスター・バージョンがサポートされるようになりました。</li>
+<li>`cluster-feature-enable private-service-endpoint` コマンドおよび `nlb-dns-monitor-configure` コマンドのヘルプ・テキストが更新されました。</li>
+<li>ヘルプ・テキストの翻訳を更新しました。</li>
+</ul>
+</tr>
+<tr>
+<td>0.3.49</td>
+<td>2019 年 6 月 18 日</td>
+<td>Go バージョンが 1.12.6 に更新されました。</td>
+</tr>
+<tr>
+<td>0.3.47</td>
+<td>2019 年 6 月 15 日</td>
+<td><ul>
+<li>バグが修正され、`ibmcloud ks kube-versions` の出力で空の表が返されないようになりました。</li>
+<li>NLB DNS モデルが更新され、`ibmcloud ks nlb-dnss` によって NLB IP アドレスの配列が返されるようになりました。</li>
+<li>{{site.data.keyword.containerlong_notm}} CLI プラグインの説明テキストが変更されました。</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.3.34</td>
 <td>2019 年 5 月 31 日</td>
-<td>IBM Cloud クラスターで Red Hat OpenShift を作成するためのサポートが追加されました。<ul>
-<li>`cluster-create` コマンドの `--kube-version` フラグで OpenShift バージョンのサポートが追加されました。例えば、標準の OpenShift クラスターを作成するには、`cluster-create` コマンドで `--kube-version 3.11_openshift` と入力します。</li>
+<td>Red Hat OpenShift on IBM Cloud クラスターの作成のサポートが追加されました。<ul>
+<li>`cluster-create` コマンドの `--kube-version` フラグで OpenShift バージョンのサポートが追加されました。 例えば、標準の OpenShift クラスターを作成するには、`cluster-create` コマンドで `--kube-version 3.11_openshift` と入力します。</li>
 <li>サポートされるすべての Kubernetes バージョンと OpenShift バージョンをリストする `versions` コマンドが追加されました。</li>
 <li>`kube-versions` コマンドが非推奨になりました。</li>
 </ul></td>
@@ -58,34 +99,34 @@ subcollection: containers
 <td>2019 年 5 月 30 日</td>
 <td><ul>
 <li>Kubernetes 環境変数を Windows PowerShell 形式で取得するため、`cluster-config` コマンドに <code>--powershell</code> フラグが追加されました。</li>
-<li>`region-get` コマンド、`region-set` コマンド、および `regions` コマンドが非推奨になりました。詳しくは、[グローバル・エンドポイント機能](/docs/containers?topic=containers-regions-and-zones#endpoint)を参照してください。</li>
+<li>`region-get` コマンド、`region-set` コマンド、および `regions` コマンドが非推奨になりました。 詳しくは、[グローバル・エンドポイント機能](/docs/containers?topic=containers-regions-and-zones#endpoint)を参照してください。</li>
 </ul></td>
 </tr>
 <tr>
 <td>0.3.28</td>
 <td>2019 年 5 月 23 日</td>
-<td><ul><li>Ingress ALB を作成するための [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) コマンドが追加されました。詳しくは、[ALB のスケーリング](/docs/containers?topic=containers-ingress#scale_albs)を参照してください。</li>
-<li>ターゲットになっているリソース・グループと地域の [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセス](/docs/containers?topic=containers-users#api_key)できるようにする資格情報に、推奨または必須のインフラストラクチャー許可の欠落がないかどうかを確認するための [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) コマンドが追加されました。</li>
-<li>ワーカー・プール・メタデータのパブリック VLAN を設定解除し、そのワーカー・プール・ゾーン内の後続のワーカー・ノードがプライベート VLAN にのみ接続されるようにするため、`zone-network-set` コマンドに <code>--private-only</code> フラグが追加されました。</li>
+<td><ul>
+<li>ターゲットになっているリソース・グループと地域の [IBM Cloud インフラストラクチャー・ポートフォリオにアクセス](/docs/containers?topic=containers-users#api_key)できるようにする資格情報に、推奨または必須のインフラストラクチャー許可の欠落がないかどうかを確認するための [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) コマンドが追加されました。</li>
+<li>`zone-network-set` コマンドに、ワーカー・プール・メタデータのパブリック VLAN を設定解除する <code>--private-only</code> フラグが追加されました。そのワーカー・プール・ゾーン内のそれ以後のワーカー・ノードは、プライベート VLAN にのみ接続されます。</li>
 <li>`worker-update` コマンドから <code>--force-update</code> フラグが削除されました。</li>
 <li>`albs` コマンドと `alb-get` コマンドの出力に **VLAN ID** 列が追加されました。</li>
 <li>複数ゾーン対応のゾーンを指定するため、`supported-locations` コマンドの出力に **Multizone Metro** 列が追加されました。</li>
-<li>`cluster-get` コマンドの出力に **Master State** フィールドと **Master Health** フィールドが追加されました。詳しくは、[マスターの状態](/docs/containers?topic=containers-health#states_master)を参照してください。</li>
+<li>`cluster-get` コマンドの出力に **Master State** フィールドと **Master Health** フィールドが追加されました。 詳しくは、[マスターの状態](/docs/containers?topic=containers-health#states_master)を参照してください。</li>
 <li>ヘルプ・テキストの翻訳を更新しました。</li>
 </ul></td>
 </tr>
 <tr>
 <td>0.3.8</td>
 <td>2019 年 4 月 30 日</td>
-<td>[グローバル・エンドポイント機能](/docs/containers?topic=containers-regions-and-zones#endpoint)のサポートがバージョン `0.3` で追加されました。デフォルトで、すべてのロケーションのすべての {{site.data.keyword.containerlong_notm}} リソースを表示および管理できるようになりました。リソースを操作するために地域をターゲットにする必要はありません。</li>
+<td>[グローバル・エンドポイント機能](/docs/containers?topic=containers-regions-and-zones#endpoint)のサポートがバージョン `0.3` で追加されました。 デフォルトで、すべてのロケーションのすべての {{site.data.keyword.containerlong_notm}} リソースを表示および管理できるようになりました。 リソースを操作するために地域をターゲットにする必要はありません。</li>
 <ul><li>{{site.data.keyword.containerlong_notm}} でサポートされるすべてのロケーションをリストするための [<code>ibmcloud ks supported-locations</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) コマンドが追加されました。</li>
 <li>リソースを 1 つ以上のロケーションによってフィルターに掛けるため、`clusters` コマンドと `zones` コマンドに <code>--locations</code> フラグが追加されました。</li>
-<li>`credential-set/unset/get` コマンド、`api-key-reset` コマンド、および `vlan-spanning-get` コマンドに <code>--region</code> フラグが追加されました。これらのコマンドを実行するには、`--region` フラグで地域を指定する必要があります。</li></ul></td>
+<li>`credential-set/unset/get` コマンド、`api-key-reset` コマンド、および `vlan-spanning-get` コマンドに <code>--region</code> フラグが追加されました。 これらのコマンドを実行するには、`--region` フラグで地域を指定する必要があります。</li></ul></td>
 </tr>
 <tr>
 <td>0.2.102</td>
 <td>2019 年 4 月 15 日</td>
-<td>ネットワーク・ロード・バランサー (NLB) IP アドレスのホスト名を登録および管理する [`ibmcloud ks nlb-dns` コマンド・グループ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)と NLB ホスト名のヘルス・チェック・モニターを作成および変更する [`ibmcloud ks nlb-dns-monitor` コマンド・グループ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor)が追加されました。 詳しくは、[DNS ホスト名への NLB IP の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)を参照してください。
+<td>ネットワーク・ロード・バランサー (NLB) IP アドレスのホスト名を登録および管理する [`ibmcloud ks nlb-dns` コマンド・グループ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)と NLB ホスト名のヘルス・チェック・モニターを作成および変更する [`ibmcloud ks nlb-dns-monitor` コマンド・グループ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)が追加されました。 詳しくは、[DNS ホスト名への NLB IP の登録](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)を参照してください。
 </td>
 </tr>
 <tr>
@@ -113,7 +154,7 @@ subcollection: containers
 <td>0.2.80</td>
 <td>2019 年 3 月 19 日</td>
 <td><ul>
-<li>[VRF 対応アカウント](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスターで、[サービス・エンドポイントを使用したマスターからワーカーへの通信](/docs/containers?topic=containers-plan_clusters#workeruser-master)を有効にするためのサポートが追加されました。<ul>
+<li>[VRF 対応アカウント](/docs/resources?topic=resources-private-network-endpoints#getting-started)で Kubernetes バージョン 1.11 以降を実行する標準クラスターで、[サービス・エンドポイントを使用したマスターからワーカーへの通信](/docs/containers?topic=containers-plan_clusters#workeruser-master)を有効にするためのサポートが追加されました。<ul>
 <li>`--private-service-endpoint` フラグと `--public-service-endpoint` フラグを [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) コマンドに追加。</li>
 <li>**Public Service Endpoint URL** フィールドと **Private Service Endpoint URL** フィールドを <code>ibmcloud ks cluster-get</code> の出力に追加。</li>
 <li>[<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable_private_service_endpoint) コマンドを追加します。</li>
@@ -137,7 +178,7 @@ subcollection: containers
 <td>0.2.61</td>
 <td>2019 年 2 月 26 日</td>
 <td><ul>
-<li>`cluster-pull-secret-apply` コマンドが追加されました。このコマンドは、クラスターの IAM サービス ID、ポリシー、API キー、イメージ・プル・シークレットを作成して、`default` Kubernetes 名前空間で実行されるコンテナーが IBM Cloud Container Registry からイメージをプルできるようにします。 新規クラスターの場合、デフォルトで、IAM 資格情報を使用するイメージ・プル・シークレットが作成されます。 既存のクラスターを更新する際、またはクラスターで作成時にイメージ・プル・シークレット・エラーが発生した場合に、このコマンドを使用してください。 詳しくは、[資料](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</li>
+<li>`cluster-pull-secret-apply` コマンドが追加されました。このコマンドは、クラスターの IAM サービス ID、ポリシー、API キー、イメージ・プル・シークレットを作成して、`default` Kubernetes 名前空間で実行されるコンテナーが IBM Cloud Container Registry からイメージをプルできるようにします。 新規クラスターの場合、デフォルトで、IAM 資格情報を使用するイメージ・プル・シークレットが作成されます。 既存のクラスターを更新する際、またはクラスターで作成時にイメージ・プル・シークレット・エラーが発生した場合に、このコマンドを使用してください。 詳しくは、[資料](/docs/containers?topic=containers-images#cluster_registry_auth)を参照してください。</li>
 <li>`ibmcloud ks init` の失敗によってヘルプ出力が表示されるバグを修正しました。</li>
 </ul></td>
 </tr>
@@ -153,7 +194,7 @@ subcollection: containers
 <td>0.2.44</td>
 <td>2019 年 2 月 8 日</td>
 <td><ul>
-<li>`--skip-rbac` オプションが `ibmcloud ks cluster-config` コマンドに追加されました。このオプションにより、{{site.data.keyword.Bluemix_notm}}IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理が省略されます。 [独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。 [{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</li>
+<li>`--skip-rbac` オプションが `ibmcloud ks cluster-config` コマンドに追加されました。このオプションにより、{{site.data.keyword.cloud_notm}}IAM サービス・アクセス役割に基づくユーザー Kubernetes RBAC 役割をクラスター構成に追加する処理が省略されます。 [独自の Kubernetes RBAC 役割を管理](/docs/containers?topic=containers-users#rbac)する場合にのみ、このオプションを組み込んでください。 [{{site.data.keyword.cloud_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-access_reference#service)を使用してすべての RBAC ユーザーを管理する場合は、このオプションを組み込まないでください。</li>
 <li>Go バージョンを 1.11.5 に更新しました。</li>
 </ul></td>
 </tr>

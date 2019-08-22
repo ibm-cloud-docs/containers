@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 {{site.data.keyword.containerlong}} を使用して、{{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} を利用するコンテナー化アプリをデプロイする方法について説明します。
 {: shortdesc}
 
-このシナリオでは、架空の PR 会社が {{site.data.keyword.Bluemix_notm}} サービスを使用して自社のプレス・リリースを分析し、自社のメッセージのトーンに関するフィードバックを受け取ります。
+このシナリオでは、架空の PR 会社が {{site.data.keyword.cloud_notm}} サービスを使用して自社のプレス・リリースを分析し、自社のメッセージのトーンに関するフィードバックを受け取ります。
 
 PR 会社のアプリ開発者が、直前のチュートリアルで作成した Kubernetes クラスターを使用して、Hello World バージョンのアプリをデプロイします。 このチュートリアルの各レッスンを基に、アプリ開発者は同じアプリを段階的に複雑にした各バージョンをデプロイします。 次の図は、各デプロイメントのコンポーネントをレッスン別に示しています。
 
@@ -42,7 +42,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 標準クラスターでアプリの可用性をさらに高めるために、各ゾーンにワーカー・ノードを持つ複数のゾーンにまたがるワーカー・プールを作成して、アプリのレプリカをさらに多く実行することができます。 このチュートリアルではそのような作業を取り上げませんが、いつかアプリの可用性を改善する必要が生じたときのために、そのような概念を頭に入れておいてください。
 
-{{site.data.keyword.Bluemix_notm}} サービスをアプリに統合する作業は 1 つのレッスンでしか取り上げていませんが、そのサービスは、アプリがどれほど単純でもどれほど複雑でも利用できます。
+{{site.data.keyword.cloud_notm}} サービスをアプリに統合する作業は 1 つのレッスンでしか取り上げていませんが、そのサービスは、アプリがどれほど単純でもどれほど複雑でも利用できます。
 
 ## 達成目標
 {: #apps_objectives}
@@ -52,7 +52,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 * アプリへのパブリック・アクセスを構成します
 * 1 つの Kubernetes コマンドと 1 つのスクリプトを使用して、アプリの 1 つのインスタンスをクラスターにデプロイします
 * ヘルス・チェック時に再作成されるコンテナーにアプリの複数インスタンスをデプロイします
-* {{site.data.keyword.Bluemix_notm}} サービスの機能を使用するアプリをデプロイします
+* {{site.data.keyword.cloud_notm}} サービスの機能を使用するアプリをデプロイします
 
 ## 所要時間
 {: #apps_time}
@@ -242,7 +242,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -258,7 +258,7 @@ PR 会社のアプリ開発者が、直前のチュートリアルで作成し�
 
 11. [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
-    [{{site.data.keyword.Bluemix_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
+    [{{site.data.keyword.cloud_notm}} コンソール](https://cloud.ibm.com/) でクラスターを選択した場合は、**「Kubernetes ダッシュボード (Kubernetes Dashboard)」**ボタンを使用して、1 回のクリックでダッシュボードを起動できます。
     {: tip}
 
 12. **「ワークロード」**タブで、作成したリソースを表示します。
@@ -324,7 +324,8 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  **Deployment** セクションにある `replicas` の値に注目します。 replicas の値は、アプリのインスタンスの数です。 3 つのインスタンスを実行すれば、インスタンスが 1 つだけの場合よりもアプリの可用性がさらに高くなります。
+    2.  **Deployment** セクションにある `replicas` の値に注目します。 replicas の値は、アプリのインスタンスの数です。 3 つのインスタンスを実行すれば、インスタンスが 1 つだけの場合よりもアプリの可用性は高くなります。
+        
 
         ```
         replicas: 3
@@ -435,7 +436,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
 
 ![デプロイメントのセットアップ](images/cs_app_tutorial_mz-components3.png)
 
-直前のチュートリアルから引き継いで使用するアカウントと、1 つのワーカー・ノードを持つクラスターがあります。 このレッスンでは、{{site.data.keyword.Bluemix_notm}} アカウントに {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスのインスタンスを作成し、2 つのデプロイメント (アプリのコンポーネントごとに 1 つのデプロイメント) を構成します。 各コンポーネントは、ワーカー・ノード内の Kubernetes ポッドにデプロイされます。 それら両方のコンポーネントをだれでも利用できるようにするために、コンポーネントごとに Kubernetes サービスも作成します。
+直前のチュートリアルから引き継いで使用するアカウントと、1 つのワーカー・ノードを持つクラスターがあります。 このレッスンでは、{{site.data.keyword.cloud_notm}} アカウントに {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} サービスのインスタンスを作成し、2 つのデプロイメント (アプリのコンポーネントごとに 1 つのデプロイメント) を構成します。 各コンポーネントは、ワーカー・ノード内の Kubernetes ポッドにデプロイされます。 それら両方のコンポーネントをだれでも利用できるようにするために、コンポーネントごとに Kubernetes サービスも作成します。
 
 
 ### レッスン 3a: {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} アプリをデプロイする
@@ -534,7 +535,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
         ```
         {: codeblock}
 
-    2.  `watson-pod` デプロイメントの volumes セクションで、前の [Kubernetes クラスターの作成チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)で作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.Bluemix_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
+    2.  `watson-pod` デプロイメントの volumes セクションで、前の [Kubernetes クラスターの作成チュートリアル](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)で作成した {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} のシークレットの名前を更新します。 Kubernetes シークレットをボリュームとしてデプロイメントにマウントすると、{{site.data.keyword.cloud_notm}} IAM (ID およびアクセス管理) の API キーを、ポッドで実行されるコンテナーから使用できるようになります。 このチュートリアルの {{site.data.keyword.watson}} アプリ・コンポーネントは、ボリューム・マウント・パスを使用して API キーを検索するように構成されています。
 
         ```
         volumes:
@@ -608,7 +609,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     ```
     {: screen}
 
-    入力したテキストに関する JSON 応答がブラウザーに表示されます。
+    入力したテキストに対する JSON 応答がブラウザーに表示されます。
 
 10. [Kubernetes ダッシュボードを起動](/docs/containers?topic=containers-app#cli_dashboard)します。
 
@@ -629,7 +630,7 @@ Kubernetes では、構成スクリプトで定義する可用性検査を使用
     ```
     {: pre}
 
-    オペレーティング・システムの種類によって、vi エディターかテキスト・エディターのいずれかが開きます。
+    オペレーティング・システムの種類に応じて、vi エディターかテキスト・エディターのいずれかが開きます。
 
 2.  イメージの名前を ibmliberty イメージに変更します。
 

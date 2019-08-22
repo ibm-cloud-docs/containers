@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,26 +23,21 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # ユーザー・アクセス許可
 {: #access_reference}
 
 [クラスター許可を割り当てる](/docs/containers?topic=containers-users)とき、ユーザーにどの役割を割り当てる必要があるか判断が難しい場合があります。 以下のセクションの表を使用して、{{site.data.keyword.containerlong}} で一般的な作業を実行するために最低限必要な許可レベルを判別してください。
 {: shortdesc}
 
-2019 年 1 月 30 日現在、{{site.data.keyword.containerlong_notm}} には、{{site.data.keyword.Bluemix_notm}} IAM: [サービス・アクセス役割](#service)を使用した新しいユーザー許可方法があります。 これらのサービス役割は、Kubernetes 名前空間など、クラスター内のリソースにアクセス権限を付与する場合に使用します。 詳しくは、ブログ [Introducing service roles and namespaces in IAM for more granular control of cluster access ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/) を参照してください。
-{: note}
-
-## {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割
+## {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.Bluemix_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって、クラスター、ワーカー・ノード、および Ingress アプリケーション・ロード・バランサー (ALB) などの {{site.data.keyword.Bluemix_notm}} リソースでユーザーが実行できるアクションが決まります。 また、{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可も自動的に設定されます。 プラットフォーム役割を設定するには、[{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可の割り当て](/docs/containers?topic=containers-users#platform)を参照してください。
+{{site.data.keyword.containerlong_notm}} は、{{site.data.keyword.cloud_notm}} の IAM (ID およびアクセス管理) 役割を使用するように構成されています。 {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割によって、クラスター、ワーカー・ノード、および Ingress アプリケーション・ロード・バランサー (ALB) などの {{site.data.keyword.cloud_notm}} リソースでユーザーが実行できるアクションが決まります。 また、{{site.data.keyword.cloud_notm}} IAM プラットフォーム役割により、ユーザーの基本的なインフラストラクチャー許可も自動的に設定されます。 プラットフォーム役割を設定するには、[{{site.data.keyword.cloud_notm}} IAM プラットフォーム許可の割り当て](/docs/containers?topic=containers-users#platform)を参照してください。
 {: shortdesc}
 
-<p class="tip">{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。 プラットフォーム役割とサービス役割は別々に割り当てる必要があります。</p>
+<p class="tip">{{site.data.keyword.cloud_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。 プラットフォーム役割とサービス役割は別々に割り当てる必要があります。</p>
 
-以下の各セクションの表に、各 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割が付与するクラスター管理許可、ロギング許可、および Ingress 許可が示されています。 表は CLI コマンド名のアルファベット順に編成されています。
+以下の各セクションの表に、各 {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割が付与するクラスター管理許可、ロギング許可、および Ingress 許可が示されています。 表は CLI コマンド名のアルファベット順に編成されています。
 
 * [許可を必要としないアクション](#none-actions)
 * [ビューアーのアクション](#view-actions)
@@ -90,8 +85,8 @@ subcollection: containers
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
-<td>ワーカー・ノードのために使用できるマシン・タイプのリストを表示します。</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td>ワーカー・ノードのために使用できるフレーバーのリストを表示します。</td>
+<td><code>[ibmcloud ks flavors](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types)</code></td>
 <td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
@@ -121,7 +116,7 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}} でサポートされているバージョンのリストを表示します。</td>
-<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -163,7 +158,7 @@ subcollection: containers
 <td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
 <tr>
-<td>リソース・グループおよび地域の {{site.data.keyword.Bluemix_notm}} IAM API キーの所有者の名前と E メール・アドレスを表示します。</td>
+<td>リソース・グループおよび地域の {{site.data.keyword.cloud_notm}} IAM API キーの所有者の名前と E メール・アドレスを表示します。</td>
 <td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
 <td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
 </tr>
@@ -188,12 +183,11 @@ subcollection: containers
 <td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
-<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントに対して設定されているインフラストラクチャー資格情報を取得します。</td>
-<td><code>[        ibmcloud ks credential-get
-        ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
+<td>別の IBM Cloud インフラストラクチャー・ポートフォリオにアクセスするための {{site.data.keyword.cloud_notm}} アカウントに対して設定されているインフラストラクチャー資格情報を取得します。</td>
+<td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
-<td>ターゲットになっている地域とリソース・グループの IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスできるようにする資格情報に、推奨または必須のインフラストラクチャー許可の欠落がないかどうかを確認します。</td>
+<td>ターゲットになっている地域とリソース・グループの IBM Cloud インフラストラクチャー・ポートフォリオにアクセスできるようにする資格情報に、推奨または必須のインフラストラクチャー許可の欠落がないかどうかを確認します。</td>
 <td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
 <td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
 </tr>
@@ -226,6 +220,11 @@ subcollection: containers
 <td>特定の名前空間にバインドされているすべてのサービスをリストします。</td>
 <td>-</td>
 <td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>クラスターにバインドされているすべての IBM Cloud インフラストラクチャー・サブネットをリストします。</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterSubnets)</code></td>
 </tr>
 <tr>
 <td>クラスターにバインドされているすべてのユーザー管理サブネットをリストします。</td>
@@ -310,11 +309,6 @@ subcollection: containers
 <td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) および [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
 </tr>
 <tr>
-<td>Ingress ALB を作成します。</td>
-<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
-<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
-</tr>
-<tr>
 <td>Ingress ALB アドオン更新を、以前 ALB ポッドが実行されていたビルドにロールバックします。</td>
 <td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
 <td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
@@ -392,52 +386,52 @@ subcollection: containers
 <tr>
 <td>既存の NLB ホスト名に NLB IP アドレスを追加します。</td>
 <td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UpdateDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>NLB IP アドレスを登録する DNS ホスト名を作成します。</td>
 <td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/RegisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>クラスターに登録されている NLB ホスト名および IP アドレスをリストします。</td>
 <td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/ListNLBIPsForSubdomain)</code></td>
 </tr>
 <tr>
 <td>ホスト名から NLB IP アドレスを削除します。</td>
 <td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UnregisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>クラスター内の既存の NLB ホスト名に対するヘルス・チェック・モニターを構成し、オプションとして有効にします。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/AddNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>既存のヘルス・チェック・モニターの設定を表示します。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/GetNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>クラスター内のホスト名に対する既存のヘルス・チェック・モニターを無効にします。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>構成した既存のヘルス・チェック・モニターを有効にします。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>クラスター内の NLB ホスト名ごとのヘルス・チェック・モニターの設定をリストします。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitors)</code></td>
 </tr>
 <tr>
 <td>クラスター内の NLB ホスト名に登録されている各 IP アドレスのヘルス・チェック状況をリストします。</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitorStatus)</code></td>
 </tr>
 <tr>
 <td>クラスター内に Web フックを作成します。</td>
@@ -467,7 +461,7 @@ subcollection: containers
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
-<td>クラスターの {{site.data.keyword.Bluemix_notm}} IAM サービス ID を作成し、{{site.data.keyword.registrylong_notm}} で**リーダー**・サービス・アクセス役割を割り当てるサービス ID のポリシーを作成してから、サービス ID の API キーを作成します。</td>
+<td>クラスターの {{site.data.keyword.cloud_notm}} IAM サービス ID を作成し、{{site.data.keyword.registrylong_notm}} で**リーダー**・サービス・アクセス役割を割り当てるサービス ID のポリシーを作成してから、サービス ID の API キーを作成します。</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
@@ -480,6 +474,11 @@ subcollection: containers
 <td>サブネットを作成してクラスターに追加します。</td>
 <td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>クラスターからサブネットを切り離します。</td>
+<td><code>[ibmcloud ks cluster-subnet-detach](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/DetachClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>クラスターを更新します。</td>
@@ -576,17 +575,17 @@ subcollection: containers
 <tr>
 <td>ベータ版: {{site.data.keyword.cloudcerts_long_notm}} インスタンスから ALB への証明書をデプロイまたは更新します。</td>
 <td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) または [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) または [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/UpdateALBSecret)</code></td>
 </tr>
 <tr>
 <td>ベータ版: クラスター内の ALB シークレットの詳細を表示します。</td>
 <td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/ViewClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>ベータ版: クラスターから ALB シークレットを削除します。</td>
 <td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>クラスター内のすべての ALB シークレットをリストします。</td>
@@ -594,7 +593,7 @@ subcollection: containers
 <td>-</td>
 </tr>
 <tr>
-<td>リンクされた IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントの API キーを設定します。</td>
+<td>リンクされた IBM Cloud インフラストラクチャー・ポートフォリオにアクセスするための {{site.data.keyword.cloud_notm}} アカウントの API キーを設定します。</td>
 <td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
 <td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
@@ -634,12 +633,12 @@ subcollection: containers
 <td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
-<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報を設定します。</td>
+<td>別の IBM Cloud インフラストラクチャー・ポートフォリオにアクセスするための {{site.data.keyword.cloud_notm}} アカウントのインフラストラクチャー資格情報を設定します。</td>
 <td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
 <td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
-<td>別の IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオにアクセスするための {{site.data.keyword.Bluemix_notm}} アカウントのインフラストラクチャー資格情報を削除します。</td>
+<td>別の IBM Cloud インフラストラクチャー・ポートフォリオにアクセスするための {{site.data.keyword.cloud_notm}} アカウントのインフラストラクチャー資格情報を削除します。</td>
 <td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
@@ -684,13 +683,13 @@ subcollection: containers
 <br />
 
 
-## {{site.data.keyword.Bluemix_notm}} IAM サービス役割
+## {{site.data.keyword.cloud_notm}} IAM サービス役割
 {: #service}
 
-{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、特定の名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 サービス・アクセス役割について詳しくは、[{{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を参照してください。 {{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。 プラットフォーム役割とサービス役割は別々に割り当てる必要があります。
+{{site.data.keyword.cloud_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、特定の名前空間での対応する Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 サービス・アクセス役割について詳しくは、[{{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を参照してください。 {{site.data.keyword.cloud_notm}} IAM プラットフォーム役割は、サービス役割と同時に割り当てないでください。 プラットフォーム役割とサービス役割は別々に割り当てる必要があります。
 {: shortdesc}
 
-RBAC を介して各サービス役割が付与する Kubernetes アクションについて詳しくは、 [RBAC 役割ごとの Kubernetes リソース許可](#rbac_ref)を参照してください。 RBAC 役割について詳しくは、[RBAC 許可の割り当て](/docs/containers?topic=containers-users#role-binding)および[クラスター役割の集約による既存の許可の拡張](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)を参照してください。
+RBAC を介して各サービス役割が付与する Kubernetes アクションについて詳しくは、 [RBAC 役割ごとの Kubernetes リソース許可](#rbac_ref)を参照してください。 RBAC 役割について詳しくは、[RBAC 許可の割り当て](/docs/containers?topic=containers-users#role-binding)および[クラスター役割の集約による既存の許可の拡張](/docs/containers?topic=containers-users#rbac_aggregate)を参照してください。
 {: tip}
 
 以下の表は、各サービス役割およびそれに対応する RBAC 役割によって付与される Kubernetes リソース許可を示しています。
@@ -735,6 +734,14 @@ RBAC を介して各サービス役割が付与する Kubernetes アクション
         <li><code>kubectl top pods</code>、<code>kubectl top nodes</code>、または <code>kubectl get nodes</code> コマンドを使用した場合などのクラスター・メトリックを確認する</li></ul>
     </td>
   </tr>
+    <tr>
+    <td>任意のサービス役割</td>
+    <td>**OpenShift クラスターのみ**: OpenShift クラスターのすべてのユーザーに、`basic-users` および `self-provisioners` クラスター役割バインディングによって適用される `basic-users` および `self-provisioners` クラスター役割が付与されます。</td>
+    <td><ul>
+      <li>ユーザーがアクセスできるプロジェクトに関する基本情報を取得します。</li>
+      <li>ユーザーがアクセスできるプロジェクトに許可リソースを作成します。</li>
+      <li>詳しくは、[OpenShift の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_rbac.html) を参照してください。</li></ul></td>
+  </tr>
 </tbody>
 </table>
 
@@ -744,7 +751,7 @@ RBAC を介して各サービス役割が付与する Kubernetes アクション
 ## RBAC 役割ごとの Kubernetes リソース許可
 {: #rbac_ref}
 
-{{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、対応する事前定義の Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 独自のカスタム Kubernetes RBAC 役割を管理する場合は、[ユーザー、グループ、またはサービス・アカウントに対するカスタム RBAC 許可の作成](/docs/containers?topic=containers-users#rbac)を参照してください。
+{{site.data.keyword.cloud_notm}} IAM サービス・アクセス役割が割り当てられたユーザーには必ず、対応する事前定義の Kubernetes 役割ベース・アクセス制御 (RBAC) 役割も自動的に割り当てられます。 独自のカスタム Kubernetes RBAC 役割を管理する場合は、[ユーザー、グループ、またはサービス・アカウントに対するカスタム RBAC 許可の作成](/docs/containers?topic=containers-users#rbac)を参照してください。
 {: shortdesc}
 
 名前空間内のリソースに対して特定の `kubectl` コマンドを実行する正しい許可があるかどうか不明な場合は、 [`kubectl auth can-i` コマンド ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-) を試行してください。
@@ -1016,7 +1023,7 @@ RBAC を介して各サービス役割が付与する Kubernetes アクション
 ## Cloud Foundry の役割
 {: #cloud-foundry}
 
-Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。 {{site.data.keyword.Bluemix_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。 詳しくは、{{site.data.keyword.Bluemix_notm}} IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam?topic=iam-cfaccess)、または [Cloud Foundry アクセス権限を管理する](/docs/iam?topic=iam-mngcf)ためのステップを参照してください。
+Cloud Foundry の役割は、このアカウントに属する組織およびスペースにアクセス権限を付与します。 {{site.data.keyword.cloud_notm}} の Cloud Foundry ベースのサービスのリストを表示するには、`ibmcloud service list` を実行します。 詳しくは、{{site.data.keyword.cloud_notm}} IAM 資料に記載されている、使用可能なすべての[組織およびスペース役割](/docs/iam?topic=iam-cfaccess)、または [Cloud Foundry アクセス権限を管理する](/docs/iam?topic=iam-mngcf)ためのステップを参照してください。
 {: shortdesc}
 
 次の表は、クラスター・アクション許可に必要な Cloud Foundry 役割を示しています。
@@ -1030,107 +1037,71 @@ Cloud Foundry の役割は、このアカウントに属する組織およびス
   <tbody>
   <tr>
     <td>スペースの役割: 管理者</td>
-    <td>{{site.data.keyword.Bluemix_notm}} スペースに対するユーザー・アクセスを管理する</td>
+    <td>{{site.data.keyword.cloud_notm}} スペースに対するユーザー・アクセスを管理する</td>
   </tr>
   <tr>
     <td>スペースの役割: 開発者</td>
     <td>
-      <ul><li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスを作成する</li>
-      <li>{{site.data.keyword.Bluemix_notm}} サービス・インスタンスをクラスターにバインドする</li>
+      <ul><li>{{site.data.keyword.cloud_notm}} サービス・インスタンスを作成する</li>
+      <li>{{site.data.keyword.cloud_notm}} サービス・インスタンスをクラスターにバインドする</li>
       <li>クラスターのログ転送構成からのログをスペース・レベルで表示する</li></ul>
     </td>
   </tr>
   </tbody>
 </table>
 
-## インフラストラクチャー役割
+## クラシック・インフラストラクチャーの役割
 {: #infra}
 
-**スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](/docs/containers?topic=containers-users#api_key)と、インフラストラクチャー・アクションを実行できます ([手動で別のアカウント資格情報を設定する](/docs/containers?topic=containers-users#credentials)場合もわずかにあります)。その後、アカウント内の他のユーザーが実行できるインフラストラクチャー・アクションは、{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割によって許可されます。他のユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可を編集する必要はありません。 API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合にのみ、以下の表を使用して、ユーザーの IBM Cloud インフラストラクチャー (SoftLayer) 許可をカスタマイズしてください。許可の割り当てについて詳しくは、[インフラストラクチャー許可のカスタマイズ](/docs/containers?topic=containers-users#infra_access)を参照してください。
+**スーパーユーザー**・インフラストラクチャー・アクセス役割を持つユーザーが[地域とリソース・グループの API キーを設定する](/docs/containers?topic=containers-users#api_key)と、インフラストラクチャー・アクションを実行できます ([手動で別のアカウント資格情報を設定する](/docs/containers?topic=containers-users#credentials)場合もわずかにあります)。 その後、アカウント内の他のユーザーが実行できるインフラストラクチャー・アクションは、{{site.data.keyword.cloud_notm}} IAM プラットフォーム役割によって許可されます。 他のユーザーのクラシック・インフラストラクチャー許可を編集する必要はありません。API キーを設定するユーザーに**スーパーユーザー**を割り当てることができない場合にのみ、以下の表を使用して、ユーザーのクラシック・インフラストラクチャー許可をカスタマイズしてください。許可の割り当てについて詳しくは、[インフラストラクチャー許可のカスタマイズ](/docs/containers?topic=containers-users#infra_access)を参照してください。
 {: shortdesc}
 
 
 
-次の表は、一般的な作業グループを完了するために必要なインフラストラクチャー許可を示しています。
+API キーまたは手動で設定された資格情報に、必要なインフラストラクチャー許可と推奨されるインフラストラクチャー許可があることを確認する必要がある場合は、`ibmcloud ks infra-permissions-get` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)使用してください。
+{: tip}
 
-<table>
-<caption>一般的に必要な {{site.data.keyword.containerlong_notm}} のインフラストラクチャー許可</caption>
-<thead>
-  <th>{{site.data.keyword.containerlong_notm}} の一般的な作業</th>
-  <th>必要なインフラストラクチャー許可 (カテゴリー別)</th>
-</thead>
-<tbody>
-<tr>
-<td>
-  <strong>最小許可</strong>: <ul>
-  <li>クラスターを作成します。</li></ul></td>
-<td>
-<strong>アカウント</strong>: <ul>
-<li>サーバーの追加</li></ul>
-  <strong>デバイス</strong>:<ul>
-  <li>ベアメタル・ワーカー・ノードの場合: ハードウェア詳細の表示</li>
-  <li>IPMI リモート管理</li>
-  <li>OS の再ロードとカーネルのレスキュー</li>
-  <li>VM ワーカー・ノードの場合: 仮想サーバー詳細の表示</li></ul></td>
-</tr>
-<tr>
-<td>
-<strong>クラスター管理</strong>:<ul>
-  <li>クラスターを作成、更新、削除する。</li>
-  <li>ワーカー・ノードを追加、再ロード、リブートする。</li>
-  <li>VLAN を表示する。</li>
-  <li>サブネットを作成する。</li>
-  <li>ポッドとロード・バランサー・サービスをデプロイする。</li></ul>
-  </td><td>
-<strong>アカウント</strong>:<ul>
-  <li>サーバーの追加</li>
-  <li>サーバーのキャンセル</li></ul>
-<strong>デバイス</strong>:<ul>
-  <li>ベアメタル・ワーカー・ノードの場合: ハードウェア詳細の表示</li>
-  <li>IPMI リモート管理</li>
-  <li>OS の再ロードとカーネルのレスキュー</li>
-  <li>VM ワーカー・ノードの場合: 仮想サーバー詳細の表示</li></ul>
-<strong>ネットワーク</strong>:<ul>
-  <li>パブリック・ネットワーク・ポートのコンピュートを追加</li></ul>
-<p class="important">サポート・ケースを管理する権限もユーザーに割り当てる必要があります。[インフラストラクチャー許可のカスタマイズ](/docs/containers?topic=containers-users#infra_access)のステップ 8 を参照してください。</p>
-</td>
-</tr>
-<tr>
-<td>
-  <strong>ストレージ</strong>: <ul>
-  <li>永続ボリューム請求を作成して永続ボリュームをプロビジョンする。</li>
-  <li>ストレージ・インフラストラクチャー・リソースを作成および管理する。</li></ul></td>
-<td>
-<strong>アカウント</strong>:<ul>
-  <li>ストレージの追加/アップグレード (StorageLayer)</li></ul>
-<strong>サービス</strong>:<ul>
-  <li>ストレージ管理</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>プライベート・ネットワーキング</strong>: <ul>
-  <li>クラスター内ネットワーキング用プライベート VLAN を管理する。</li>
-  <li>プライベート・ネットワークへの VPN 接続をセットアップする。</li></ul></td>
-<td>
-  <strong>ネットワーク</strong>:<ul>
-  <li>ネットワーク・サブネット経路の管理</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>パブリック・ネットワーキング</strong>:<ul>
-  <li>アプリを公開するためにパブリック・ロード・バランサーまたは Ingress ネットワーキングをセットアップする。</li></ul></td>
-<td>
-<strong>デバイス</strong>:<ul>
-<li>ポート・コントロールの管理</li>
-  <li>ホスト名/ドメインの編集</li></ul>
-<strong>ネットワーク</strong>:<ul>
-  <li>IP アドレスの追加</li>
-  <li>ネットワーク・サブネット経路の管理</li>
-  <li>パブリック・ネットワーク・ポートのコンピュートを追加</li></ul>
-<strong>サービス</strong>:<ul>
-  <li>DNS の管理</li>
-  <li>証明書 (SSL) の表示</li>
-  <li>証明書 (SSL) の管理</li></ul></td>
-</tr>
-</tbody>
-</table>
+地域およびリソース・グループの資格情報に盛り込むことができる、クラスターの作成やその他の一般的なユース・ケースのためのクラシック・インフラストラクチャー許可を次の表に示します。説明には、{{site.data.keyword.cloud_notm}} IAM クラシック・インフラストラクチャー・コンソールまたは `ibmcloud sl` コマンドで許可を割り当てる方法が含まれています。詳しくは、[コンソール](/docs/containers?topic=containers-users#infra_console)または [CLI](/docs/containers?topic=containers-users#infra_cli) についての説明を参照してください。 
+*   **クラスターの作成**: クラスターを作成するために必要なクラシック・インフラストラクチャーの許可。`ibmcloud ks infra-permissions-get` を実行すると、これらの許可が **「必須」**としてリストされます。
+*   **その他の一般的なユース・ケース**: 他の一般的なシナリオで必要なクラシック・インフラストラクチャーの許可。クラスターを作成するための許可があっても、それだけではまだ、いくらかの制限が適用される可能性があります。例えば、ベアメタル・ワーカー・ノードまたはパブリック IP アドレスを持つクラスターを作成または処理できない場合があります。クラスターの作成後、ネットワーク・リソースやストレージ・リソースを追加するステップが失敗することもあります。`ibmcloud ks infra-permissions-get`を実行すると、これらの許可が **「推奨」**としてリストされます。
+
+| 許可 | 説明 | IAM 割り当てポリシー・コンソール | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| IPMI リモート管理 | ワーカー・ノードを管理します。|「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission REMOTE_MANAGEMENT --enable true</code></pre> |
+| サーバーの追加 | ワーカー・ノードを追加します。 パブリック IP アドレスを持つワーカー・ノードの場合は、**「パブリック・ネットワーク・ポートでのコンピュートの追加」**の許可も必要です。|「クラシック・インフラストラクチャー」>「許可」>「アカウント」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_ADD --enable true</code></pre>  |
+| サーバーのキャンセル | ワーカー・ノードを削除します。|「クラシック・インフラストラクチャー」>「許可」>「アカウント」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_CANCEL --enable true</code></pre>  |
+| OS の再ロードとカーネルのレスキュー | ワーカー・ノードを更新、リブート、および再ロードします。|「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_RELOAD --enable true</code></pre>  |
+| Virtual Server の詳細の表示 | クラスターに VM ワーカー・ノードがある場合は必須です。VM ワーカー・ノードの詳細をリストおよび取得します。|「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission VIRTUAL_GUEST_VIEW --enable true</code></pre>  |
+| ハードウェアの詳細の表示 | クラスターにベアメタル・ワーカー・ノードがある場合は必須です。ベアメタル・ワーカー・ノードの詳細をリストおよび取得します。|「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HARDWARE_VIEW --enable true</code></pre>  |
+| サポート・ケースの追加 | クラスター作成自動化の一環として、クラスター・インフラストラクチャーをプロビジョンするためにサポート・ケースが開かれます。|「アカウント管理サービスへのアクセスの割り当て」>「サポート・センター」>「管理者」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_ADD --enable true</code></pre>  |
+| サポート・ケースの編集 | クラスター作成自動化の一環として、クラスター・インフラストラクチャーをプロビジョンするためにサポート・ケースが更新されます。|「アカウント管理サービスへのアクセスの割り当て」>「サポート・センター」>「管理者」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_EDIT --enable true</code></pre>  |
+| サポート・ケースの表示 | クラスター作成自動化の一環として、クラスター・インフラストラクチャーをプロビジョンするためにサポート・ケースが使用されます。|「アカウント管理サービスへのアクセスの割り当て」>「サポート・センター」>「管理者」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_VIEW --enable true</code></pre>  |
+{: class="simple-tab-table"}
+{: caption="必須のクラシック・インフラストラクチャー許可" caption-side="top"}
+{: #classic-permissions-required}
+{: tab-title="Create clusters"}
+{: tab-group="Classic infrastructure permissions"}
+
+| 許可 | 説明 | IAM 割り当てポリシー・コンソール | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| すべての仮想にアクセス (Access All Virtual) | すべての VM ワーカー・ノードへのアクセスを指定します。この許可がないと、1 つのクラスターを作成するユーザーは、そのクラスターと別のクラスターの両方に対する IAM アクセス権限を持っていても、別のクラスターの VM ワーカー・ノードを表示できない場合があります。| 「クラシック・インフラストラクチャー」>「デバイス」>「すべての仮想サーバーの検査 (Check All virtual servers)」および「仮想サーバーへの自動アクセス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_GUEST --enable true</code></pre> |
+| すべてのハードウェアへのアクセス | すべてのベアメタル・ワーカー・ノードへのアクセスを指定します。この許可がないと、1 つのクラスターを作成するユーザーは、そのクラスターと別のクラスターの両方に対する IAM アクセス権限を持っていても、別のクラスターのベアメタル・ワーカー・ノードを表示できない場合があります。| 「クラシック・インフラストラクチャー」>「デバイス」>「すべての仮想サーバーの検査 (Check All virtual servers)」および「仮想サーバーへの自動アクセス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_HARDWARE --enable true</code></pre> |
+| パブリック・ネットワーク・ポートのコンピュートを追加 | ワーカー・ノードがパブリック・ネットワーク上でアクセス可能なポートを持つようにします。|「クラシック・インフラストラクチャー」>「許可」>「ネットワーク」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PUBLIC_NETWORK_COMPUTE --enable true</code></pre> |
+| DNS の管理 | アプリを公開するためにパブリック・ロード・バランサーまたは Ingress ネットワーキングをセットアップする。 |「クラシック・インフラストラクチャー」>「許可」>「サービス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission DNS_MANAGE --enable true</code></pre> |
+| ホスト名/ドメインの編集 | アプリを公開するためにパブリック・ロード・バランサーまたは Ingress ネットワーキングをセットアップする。 |「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HOSTNAME_EDIT --enable true</code></pre> |
+| IP アドレスの追加 | クラスター・ロード・バランシングに使用するパブリック・サブネットまたはプライベート・サブネットに IP アドレスを追加します。|「クラシック・インフラストラクチャー」>「許可」>「ネットワーク」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission IP_ADD --enable true</code></pre> |
+| ネットワーク・サブネット経路の管理 | クラスター・ロード・バランシングに使用するパブリックまたはプライベートの VLAN およびサブネットを管理します。|「クラシック・インフラストラクチャー」>「許可」>「ネットワーク」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NETWORK_ROUTE_MANAGE --enable true</code></pre> |
+| ポート・コントロールの管理 | アプリのロード・バランシングに使用するポートを管理します。|「クラシック・インフラストラクチャー」>「許可」>「デバイス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PORT_CONTROL --enable true</code></pre> |
+| 証明書 (SSL) の管理 | クラスター・ロード・バランシングに使用する証明書をセットアップします。|「クラシック・インフラストラクチャー」>「許可」>「サービス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre>  |
+| 証明書 (SSL) の表示 | クラスター・ロード・バランシングに使用する証明書をセットアップします。|「クラシック・インフラストラクチャー」>「許可」>「サービス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre> |
+| ストレージの追加/アップグレード (StorageLayer) |データを永続的に保管するためのボリュームとしてアプリに接続する {{site.data.keyword.cloud_notm}} ファイル・ストレージ・インスタンスまたはブロック・ストレージ・インスタンスを作成します。|「クラシック・インフラストラクチャー」>「許可」>「アカウント」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ADD_SERVICE_STORAGE --enable true</code></pre>  |
+| ストレージ管理 | データを永続的に保管するためのボリュームとしてアプリに接続された {{site.data.keyword.cloud_notm}} ファイル・ストレージ・インスタンスまたはブロック・ストレージ・インスタンスを管理します。 |「クラシック・インフラストラクチャー」>「許可」>「サービス」|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NAS_MANAGE --enable true</code></pre> |
+{: class="simple-tab-table"}
+{: caption="推奨されているクラシック・インフラストラクチャー許可" caption-side="top"}
+{: #classic-permissions-suggested}
+{: tab-title="Other common use cases"}
+{: tab-group="Classic infrastructure permissions"}
+
+
+
+

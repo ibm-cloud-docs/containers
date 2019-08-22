@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}フィ
+{:preview: .preview}
 
 
 # サポートされる IBM Cloud とサード・パーティーの統合
@@ -56,7 +56,7 @@ subcollection: containers
 <tr>
 <td>{{site.data.keyword.Bluemix}} Block Storage</td>
 <td>ブロック・ストレージ</td>
-<td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。 　ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。 クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
+<td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。 　ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。 クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.cloud_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -76,12 +76,12 @@ subcollection: containers
 <tr>
 <td>{{site.data.keyword.datashield_full}} (ベータ版)</td>
 <td>メモリー暗号化</td>
-<td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。 {{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。</td>
+<td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。 {{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.cloud_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} File Storage</td>
 <td>ファイル・ストレージ</td>
-<td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
+<td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.cloud_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.keymanagementservicefull}}</td>
@@ -101,7 +101,7 @@ subcollection: containers
 <tr>
 <td>{{site.data.keyword.cos_full}}</td>
 <td>オブジェクト・ストレージ</td>
-<td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。 サービスについて詳しくは、<a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}}の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+<td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。 サービスについて詳しくは、<a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}}の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}} 上での Istio</td>
@@ -111,7 +111,7 @@ subcollection: containers
 <tr>
 <td>Knative</td>
 <td>サーバーレス・アプリ</td>
-<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。 このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。 詳しくは、[Knative を使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative)を参照してください。</td>
+<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。 このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。 詳しくは、[Knative を使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative)を参照してください。 </td>
 </tr>
 <tr>
 <td>Portworx</td>
@@ -121,7 +121,7 @@ subcollection: containers
 <tr>
 <td>Razee</td>
 <td>デプロイメント自動化</td>
-<td>[Razee ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://razee.io/) は、クラスター、環境、およびクラウド・プロバイダー間で Kubernetes リソースのデプロイメントを自動化して管理するオープン・ソース・プロジェクトであり、ロールアウト・プロセスをモニターしてより素早くデプロイメントに関する問題を検出できるよう、リソースのデプロイメント情報を視覚化するのに役立ちます。Razee およびクラスターで Razee をセットアップしてデプロイメント・プロセスを自動化する方法については、[Razee の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/razee-io/Razee) を参照してください。</td>
+<td>[Razee ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://razee.io/) は、クラスター、環境、およびクラウド・プロバイダー間で Kubernetes リソースのデプロイメントを自動化して管理するオープン・ソース・プロジェクトであり、ロールアウト・プロセスをモニターしてより素早くデプロイメントに関する問題を検出できるよう、リソースのデプロイメント情報を視覚化するのに役立ちます。 Razee およびクラスターで Razee をセットアップしてデプロイメント・プロセスを自動化する方法については、[Razee の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/razee-io/Razee) を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -143,7 +143,7 @@ subcollection: containers
 <tbody>
 <tr>
 <td>{{site.data.keyword.cfee_full_notm}}</td>
-<td>Kubernetes クラスターの上に独自の Cloud Foundry プラットフォームをデプロイして管理できます。これにより、クラウド・ネイティブ・アプリを開発、パッケージ、デプロイ、管理し、{{site.data.keyword.Bluemix_notm}} エコシステムを活用して追加のサービスをアプリにバインドできるようになります。 {{site.data.keyword.cfee_full_notm}} インスタンスを作成するときは、ワーカー・ノードのマシン・タイプと VLAN を選択して Kubernetes クラスターを構成する必要があります。 こうすることで、クラスターに {{site.data.keyword.containerlong_notm}} がプロビジョンされ、{{site.data.keyword.cfee_full_notm}} が自動的にクラスターにデプロイされます。 {{site.data.keyword.cfee_full_notm}} のセットアップ方法について詳しくは、[入門チュートリアル](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started)を参照してください。 </td>
+<td>Kubernetes クラスターの上に独自の Cloud Foundry プラットフォームをデプロイして管理できます。これにより、クラウド・ネイティブ・アプリを開発、パッケージ、デプロイ、管理し、{{site.data.keyword.cloud_notm}} エコシステムを活用して追加のサービスをアプリにバインドできるようになります。 {{site.data.keyword.cfee_full_notm}} インスタンスを作成するときは、ワーカー・ノードのフレーバーと VLAN を選択して Kubernetes クラスターを構成する必要があります。 こうすることで、クラスターに {{site.data.keyword.containerlong_notm}} がプロビジョンされ、{{site.data.keyword.cfee_full_notm}} が自動的にクラスターにデプロイされます。 {{site.data.keyword.cfee_full_notm}} のセットアップ方法について詳しくは、[入門チュートリアル](/docs/cloud-foundry?topic=cloud-foundry-getting-started#getting-started)を参照してください。 </td>
 </tr>
 <tr>
 <td>Codeship</td>
@@ -159,23 +159,20 @@ subcollection: containers
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
-<td>アプリのビルドと Kubernetes クラスターへのコンテナーのデプロイメントを、ツールチェーンを使用して自動化します。 セットアップについて詳しくは、<a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> というブログを参照してください。</td>
+<td>アプリのビルドと Kubernetes クラスターへのコンテナーのデプロイメントを、ツールチェーンを使用して自動化します。 セットアップについて詳しくは、<a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> というブログを参照してください。 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.containerlong_notm}} 上での Istio</td>
 <td><a href="https://www.ibm.com/cloud/info/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> は 、クラウド・オーケストレーション・プラットフォームでマイクロサービス・ネットワーク (別名、サービス・メッシュ) の接続、保護、管理、モニターを行うための方法を開発者に提供するオープン・ソース・サービスです。 {{site.data.keyword.containerlong}} 上の Istio は、管理対象アドオンを介したクラスターへの Istio のワンステップ・インストールを提供します。 ワンクリックですべての Istio コア・コンポーネントを取得し、追加のトレース、モニタリング、視覚化を行い、BookInfo サンプル・アプリを稼働状態にすることができます。 開始するには、[管理対象 Istio アドオン (ベータ版) の使用](/docs/containers?topic=containers-istio) を参照してください。</td>
 </tr>
-<tr>
-<td>Jenkins X</td>
-<td>Jenkins X は Kubernetes ネイティブの継続的統合と継続的デリバリーのプラットフォームであり、これを使用してビルド・プロセスを自動化できます。 {{site.data.keyword.containerlong_notm}} へのインストール方法について詳しくは、[Introducing the Jenkins X open source project ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/blogs/bluemix/2018/08/installing-jenkins-x-on-ibm-cloud-kubernetes-service/) を参照してください。</td>
-</tr>
+
 <tr>
 <td>Knative</td>
-<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。 このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。 詳しくは、[Knative を使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative)を参照してください。</td>
+<td>[Knative ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/knative/docs) は IBM、Google、Pivotal、Red Hat、Cisco などによって開発されたオープン・ソースのプラットフォームであり、Kubernetes の機能を拡張して Kubernetes クラスター上にソース中心の最新のコンテナー化サーバーレス・アプリを作成できるようにすることを目的としています。 このプラットフォームは、Kubernetes におけるビルドの操作負担およびワークロードのデプロイと管理の抽象化に関して、さまざまなプログラミング言語とフレームワークに対して一貫性のあるアプローチを取っているので、開発者は最も重要なもの、つまりソース・コードに集中することができます。 詳しくは、[Knative を使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative)を参照してください。 </td>
 </tr>
 <tr>
 <td>Razee</td>
-<td>[Razee ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://razee.io/) は、クラスター、環境、およびクラウド・プロバイダー間で Kubernetes リソースのデプロイメントを自動化して管理するオープン・ソース・プロジェクトであり、ロールアウト・プロセスをモニターしてより素早くデプロイメントに関する問題を検出できるよう、リソースのデプロイメント情報を視覚化するのに役立ちます。Razee およびクラスターで Razee をセットアップしてデプロイメント・プロセスを自動化する方法については、[Razee の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/razee-io/Razee) を参照してください。</td>
+<td>[Razee ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://razee.io/) は、クラスター、環境、およびクラウド・プロバイダー間で Kubernetes リソースのデプロイメントを自動化して管理するオープン・ソース・プロジェクトであり、ロールアウト・プロセスをモニターしてより素早くデプロイメントに関する問題を検出できるよう、リソースのデプロイメント情報を視覚化するのに役立ちます。 Razee およびクラスターで Razee をセットアップしてデプロイメント・プロセスを自動化する方法については、[Razee の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://github.com/razee-io/Razee) を参照してください。</td>
 </tr>
 </tbody>
 </table>
@@ -197,7 +194,7 @@ subcollection: containers
 <tbody>
   <tr>
     <td>{{site.data.keyword.BluDirectLink}}</td>
-    <td>[{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間にプライベート接続を直接作成できます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングは、ハイブリッド・ワークロード、プロバイダー間ワークロード、大規模なデータ転送や頻繁なデータ転送、またはプライベート・ワークロードを実装する必要がある場合に役立ちます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングを選択し、{{site.data.keyword.Bluemix_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.Bluemix_notm}} Direct Link の資料の [{{site.data.keyword.Bluemix_notm}}Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。</td>
+    <td>[{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間に直接のプライベート接続を作成できます。 {{site.data.keyword.cloud_notm}} Direct Link オファリングは、ハイブリッド・ワークロード、プロバイダー間ワークロード、大規模なデータ転送や頻繁なデータ転送、またはプライベート・ワークロードを実装する必要がある場合に役立ちます。 {{site.data.keyword.cloud_notm}} Direct Link オファリングを選択し、{{site.data.keyword.cloud_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.cloud_notm}} Direct Link の資料の [{{site.data.keyword.cloud_notm}}Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。</td>
   </tr>
 <tr>
   <td>strongSwan IPSec VPN サービス</td>
@@ -274,7 +271,7 @@ subcollection: containers
 ## セキュリティー・サービス
 {: #security_services}
 
-{{site.data.keyword.Bluemix_notm}} セキュリティー・サービスをクラスターと統合する方法の包括的な説明が必要ですか? [Apply end-to-end security to a cloud application チュートリアル](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security)を確認してください。
+{{site.data.keyword.cloud_notm}} セキュリティー・サービスをクラスターと統合する方法の包括的な説明が必要ですか? [Apply end-to-end security to a cloud application チュートリアル](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security)を確認してください。
 {: shortdesc}
 
 <table summary="この表は、クラスターに追加してさらにセキュリティー機能を追加するために使用できるサービスを示しています。行は左から右に読み、1 列目はサービスの名前、2 列目はサービスの説明です。">
@@ -292,7 +289,7 @@ subcollection: containers
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td><a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリで実行できる動作を減らすことで、コンテナー・デプロイメントのセキュリティーを強化できます。 詳しくは、<a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.Bluemix_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
+  <td><a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a> を補完するために、<a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、アプリで実行できる動作を減らすことで、コンテナー・デプロイメントのセキュリティーを強化できます。 詳しくは、<a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。 </td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
@@ -300,7 +297,7 @@ subcollection: containers
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (ベータ版)</td>
-  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。 {{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.Bluemix_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。</td>
+  <td><a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、データ・メモリーを暗号化できます。 {{site.data.keyword.datashield_short}} は、インテル® Software Guard Extensions (SGX) および Fortanix® テクノロジーと統合されているため、使用中の {{site.data.keyword.cloud_notm}} コンテナーのワークロードのコードとデータを保護できます。 アプリのコードとデータは、CPU で保護されたエンクレーブで実行されます。エンクレーブは、ワーカー・ノード上の信頼できるメモリー領域であり、ここでアプリの重要な側面を保護することで、コードとデータの機密を保ち、改ざんを防止できます。</td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
@@ -341,16 +338,16 @@ subcollection: containers
   <td><a href="https://github.com/heptio/velero" target="_blank">Heptio Velero <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を使用して、クラスター・リソースと永続ボリュームのバックアップとリストアを実行できます。 詳しくは、Heptio Velero の <a href="https://github.com/heptio/velero/blob/release-0.9/docs/use-cases.md" target="_blank">Use cases for disaster recovery and cluster migration <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
 <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} Block Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。 　ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。 クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
+  <td>{{site.data.keyword.cloud_notm}} Block Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) は、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高性能永続 iSCSI ストレージです。 　ブロック・ストレージは、単一ゾーンにステートフル・アプリをデプロイする場合に使用したり、単一ポッド用の高性能ストレージとして使用したりします。 クラスターにブロック・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.cloud_notm}} Block Storage にデータを格納する](/docs/containers?topic=containers-block_storage#block_storage) を参照してください。</td>
   </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。 サービスについて詳しくは、<a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about" target="_blank">{{site.data.keyword.cos_short}}の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
+  <td>{{site.data.keyword.cos_short}} で保管するデータは、暗号化され、複数の地理的ロケーションに分散され、REST API を使用して HTTP によってアクセスされます。 [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) を使用して、クラスターのデータの一回限りのバックアップ、またはスケジュールしたバックアップを実行するようにサービスを構成できます。 サービスについて詳しくは、<a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage" target="_blank">{{site.data.keyword.cos_short}}の資料 <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> を参照してください。</td>
 </tr>
   <tr>
-  <td>{{site.data.keyword.Bluemix_notm}} File Storage</td>
-  <td>[{{site.data.keyword.Bluemix_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.Bluemix_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
+  <td>{{site.data.keyword.cloud_notm}} File Storage</td>
+  <td>[{{site.data.keyword.cloud_notm}} File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) は、NFS ベースの高速で柔軟なネットワーク接続型永続ファイル・ストレージであり、Kubernetes 永続ボリュームを使用してアプリに追加することができます。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 クラスターにファイル・ストレージをプロビジョンする方法について詳しくは、[{{site.data.keyword.cloud_notm}} File Storage にデータを格納する](/docs/containers?topic=containers-file_storage#file_storage) を参照してください。</td>
   </tr>
   <tr>
     <td>Portworx</td>
@@ -380,7 +377,7 @@ subcollection: containers
   </tr>
 <tr>
   <td>クラウド・データベース</td>
-  <td>{{site.data.keyword.composeForMongoDB_full}} や {{site.data.keyword.cloudantfull}} などのさまざまな {{site.data.keyword.Bluemix_notm}} データベース・サービスの中から選択して、可用性の高いスケーラブルなデータベース・ソリューションをクラスターにデプロイできます。 使用可能なクラウド・データベースのリストについては、[{{site.data.keyword.Bluemix_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog?category=databases) を参照してください。  </td>
+  <td>{{site.data.keyword.composeForMongoDB_full}} や {{site.data.keyword.cloudantfull}} などのさまざまな {{site.data.keyword.cloud_notm}} データベース・サービスの中から選択して、可用性の高いスケーラブルなデータベース・ソリューションをクラスターにデプロイできます。 使用可能なクラウド・データベースのリストについては、[{{site.data.keyword.cloud_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/catalog?category=databases) を参照してください。  </td>
   </tr>
   </tbody>
   </table>

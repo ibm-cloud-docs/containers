@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -32,7 +32,7 @@ Helm チャートを使用して、複雑な Kubernetes アプリをクラスタ
 {: shortdesc}
 
 **Helm とは何ですか? どのようにして使用しますか?** </br>
-[Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh) は Kubernetes パッケージ・マネージャーであり、Helm チャートを使用してクラスター内の複雑な Kubernetes アプリを定義、インストール、およびアップグレードします。 Helm チャートには、アプリを作成する Kubernetes リソースの YAML ファイルを生成するための指定内容がパッケージ化されています。 これらの Kubernetes リソースはクラスター内で自動的に適用され、Helm によってバージョンを割り当てられます。Helm を使用して独自のアプリを指定およびパッケージ化して、Kubernetes リソースの YAML ファイルを Helm に生成させることもできます。  
+[Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh) は Kubernetes パッケージ・マネージャーであり、Helm チャートを使用してクラスター内の複雑な Kubernetes アプリを定義、インストール、およびアップグレードします。 Helm チャートには、アプリを作成する Kubernetes リソースの YAML ファイルを生成するための指定内容がパッケージ化されています。 これらの Kubernetes リソースはクラスター内で自動的に適用され、Helm によってバージョンを割り当てられます。 Helm を使用して独自のアプリを指定およびパッケージ化して、Kubernetes リソースの YAML ファイルを Helm に生成させることもできます。  
 
 クラスターで Helm を使用するには、Helm CLI をローカル・マシンにインストールして、Helm を使用するすべてのクラスターに Helm サーバー Tiller をインストールする必要があります。
 
@@ -40,14 +40,15 @@ Helm チャートを使用して、複雑な Kubernetes アプリをクラスタ
 使用可能な Helm チャートの概要については、[Helm チャートのカタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) を参照してください。 このカタログにリストされている Helm チャートは、以下のようにグループ分けされています。
 
 - **iks-charts**: これらの Helm チャートは、{{site.data.keyword.containerlong_notm}} 用として承認されています。 このリポジトリーの名前は、`ibm` から `iks-charts` に変更されました。
-- **ibm-charts**: これらの Helm チャートは、{{site.data.keyword.containerlong_notm}} 用および {{site.data.keyword.Bluemix_notm}} Private クラスター用として承認されています。
-- **kubernetes**: これらの Helm チャートは Kubernetes コミュニティーによって提供されており、コミュニティー・ガバナンスによって `stable` と見なされています。 これらのチャートは、{{site.data.keyword.containerlong_notm}} や {{site.data.keyword.Bluemix_notm}} Private クラスターで機能することが確認されていません。
-- **kubernetes-incubator**: これらの Helm チャートは Kubernetes コミュニティーによって提供されており、コミュニティー・ガバナンスによって `incubator` と見なされています。 これらのチャートは、{{site.data.keyword.containerlong_notm}} や {{site.data.keyword.Bluemix_notm}} Private クラスターで機能することが確認されていません。
+- **ibm-charts**: これらの Helm チャートは、{{site.data.keyword.containerlong_notm}} 用および {{site.data.keyword.cloud_notm}} Private クラスター用として承認されています。
+- **ibm-community**: [{{site.data.keyword.containerlong_notm}} パートナー](/docs/containers?topic=containers-service-partners)によって作成されたものなど、IBM 外で作成された Helm チャート。これらのチャートは、コミュニティー・パートナーによってサポートおよび保守されます。
+- **kubernetes**: これらの Helm チャートは Kubernetes コミュニティーによって提供されており、コミュニティー・ガバナンスによって `stable` と見なされています。 これらのチャートは、{{site.data.keyword.containerlong_notm}} や {{site.data.keyword.cloud_notm}} Private クラスターで機能することが確認されていません。
+- **kubernetes-incubator**: これらの Helm チャートは Kubernetes コミュニティーによって提供されており、コミュニティー・ガバナンスによって `incubator` と見なされています。 これらのチャートは、{{site.data.keyword.containerlong_notm}} や {{site.data.keyword.cloud_notm}} Private クラスターで機能することが確認されていません。
 
-**iks-charts** リポジトリー内と **ibm-charts** リポジトリー内の Helm チャートは、{{site.data.keyword.Bluemix_notm}} のサポート組織に完全に統合されています。 これらの Helm チャートの使用に関する質問や問題がある場合は、いずれかの {{site.data.keyword.containerlong_notm}} サポート・チャネルを使用できます。 詳しくは、[ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)を参照してください。
+**iks-charts** リポジトリー内と **ibm-charts** リポジトリー内の Helm チャートは、{{site.data.keyword.cloud_notm}} のサポート組織に完全に統合されています。 これらの Helm チャートの使用に関する質問や問題がある場合は、いずれかの {{site.data.keyword.containerlong_notm}} サポート・チャネルを使用できます。 詳しくは、[ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)を参照してください。
 
 **Helm を使用するための前提条件は何ですか? プライベート・クラスターで Helm を使用できますか?** </br>
-Helm チャートをデプロイするためには、ローカル・マシンに Helm CLI をインストールし、クラスターに Helm サーバー Tiller をインストールする必要があります。 Tiller のイメージはパブリック Google Container Registry に保管されます。 Tiller のインストール時にイメージにアクセスするためには、パブリック Google Container Registry へのパブリック・ネットワーク接続がクラスターで許可されていなければなりません。 パブリック・サービス・エンドポイントが有効になっているクラスターは、自動的にイメージにアクセスできます。カスタム・ファイアウォールで保護されているプライベート・クラスターや、プライベート・サービス・エンドポイントのみを有効にしているクラスターでは、Tiller イメージへのアクセスが許可されません。代わりに、[イメージをローカル・マシンにプルしてそれを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](#private_local_tiller)か、[Tiller を使用せずに Helm チャートをインストールする](#private_install_without_tiller)ことができます。
+Helm チャートをデプロイするためには、ローカル・マシンに Helm CLI をインストールし、クラスターに Helm サーバー Tiller をインストールする必要があります。 Tiller のイメージはパブリック Google Container Registry に保管されます。 Tiller のインストール時にイメージにアクセスするためには、パブリック Google Container Registry へのパブリック・ネットワーク接続がクラスターで許可されていなければなりません。 パブリック・サービス・エンドポイントが有効になっているクラスターは、自動的にイメージにアクセスできます。 カスタム・ファイアウォールで保護されているプライベート・クラスターや、プライベート・サービス・エンドポイントのみを有効にしているクラスターでは、Tiller イメージへのアクセスが許可されません。 代わりに、[イメージをローカル・マシンにプルしてそれを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュする](#private_local_tiller)か、[Tiller を使用せずに Helm チャートをインストールする](#private_install_without_tiller)ことができます。
 
 
 ## パブリック・アクセスが可能なクラスターでの Helm のセットアップ
@@ -150,14 +151,19 @@ Helm チャートをデプロイするためには、ローカル・マシンに
         ```
         {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加します。
+4. {{site.data.keyword.cloud_notm}} Helm リポジトリーを Helm インスタンスに追加します。
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -167,7 +173,7 @@ Helm チャートをデプロイするためには、ローカル・マシンに
    ```
    {: pre}
 
-6. {{site.data.keyword.Bluemix_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
+6. {{site.data.keyword.cloud_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
    ```
    helm search iks-charts
    ```
@@ -175,6 +181,11 @@ Helm チャートをデプロイするためには、ローカル・マシンに
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 
@@ -191,15 +202,15 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
 {: tip}
 
 開始前に、以下のことを行います。
-- ローカル・マシンに Docker をインストールします。 [{{site.data.keyword.Bluemix_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started) がインストールされていれば、Docker は既にインストールされています。
+- ローカル・マシンに Docker をインストールします。 [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started) がインストールされていれば、Docker は既にインストールされています。
 - [{{site.data.keyword.registryshort_notm}} CLI プラグインをインストールして、名前空間をセットアップします](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install)。
 - Kubernetes サービス・アカウントとクラスター役割バインディングを使用して Tiller を `kube-system` 名前空間にインストールするには、[`cluster-admin` 役割](/docs/containers?topic=containers-users#access_policies)を持っていることを確認してください。
 
 {{site.data.keyword.registryshort_notm}} を使用して Tiller をインストールするには、以下のようにします。
 
 1. ローカル・マシンに <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をインストールします。
-2. セットアップした {{site.data.keyword.Bluemix_notm}} インフラストラクチャー VPN トンネルを使用して、プライベート・クラスターに接続します。
-3. **重要**: クラスターのセキュリティーを維持するためには、[{{site.data.keyword.Bluemix_notm}}`kube-samples` リポジトリー](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml)から以下の YAML ファイルを適用することによって、Tiller のサービス・アカウントを `kube-system` 名前空間内に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。
+2. セットアップした {{site.data.keyword.cloud_notm}} インフラストラクチャー VPN トンネルを使用して、プライベート・クラスターに接続します。
+3. **重要**: クラスターのセキュリティーを維持するためには、[{{site.data.keyword.cloud_notm}} `kube-samples` リポジトリー](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml)から以下の YAML ファイルを適用することによって、Tiller のサービス・アカウントを `kube-system` 名前空間内に作成し、`tiller-deploy` ポッドに対する Kubernetes RBAC クラスター役割バインディングを作成します。
     1. [Kubernetes サービス・アカウントとクラスター役割バインディングの YAML ファイル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を取得します](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml)。
 
     2. クラスター内に Kubernetes リソースを作成します。
@@ -244,14 +255,19 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
    ```
    {: pre}
 
-9. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加します。
+9. {{site.data.keyword.cloud_notm}} Helm リポジトリーを Helm インスタンスに追加します。
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -261,7 +277,7 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
     ```
     {: pre}
 
-11. {{site.data.keyword.Bluemix_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
+11. {{site.data.keyword.cloud_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
     ```
     helm search iks-charts
     ```
@@ -269,6 +285,11 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
 
     ```
     helm search ibm-charts
+    ```
+    {: pre}
+    
+    ```
+    helm search ibm-community
     ```
     {: pre}
 
@@ -281,19 +302,24 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
 プライベート・クラスターに Tiller をインストールしない場合は、Helm チャートの YAML ファイルを手動で作成し、`kubectl` コマンドを使用してそれらの YAML ファイルを適用できます。
 {: shortdesc}
 
-この例のステップは、{{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーからプライベート・クラスターに Helm チャートをインストールする方法を示しています。 {{site.data.keyword.Bluemix_notm}} Helm チャート・リポジトリーのいずれにも保管されていない Helm チャートをインストールする場合は、このトピックの手順に従って Helm チャート用の YAML ファイルを作成する必要があります。 さらに、パブリック・コンテナー・リポジトリーから Helm チャート・イメージをダウンロードし、それを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュして、{{site.data.keyword.registryshort_notm}} 内のイメージを使用するように `values.yaml` ファイルを更新する必要があります。
+この例のステップは、{{site.data.keyword.cloud_notm}} Helm チャート・リポジトリーからプライベート・クラスターに Helm チャートをインストールする方法を示しています。 {{site.data.keyword.cloud_notm}} Helm チャート・リポジトリーのいずれにも保管されていない Helm チャートをインストールする場合は、このトピックの手順に従って Helm チャート用の YAML ファイルを作成する必要があります。 さらに、パブリック・コンテナー・リポジトリーから Helm チャート・イメージをダウンロードし、それを {{site.data.keyword.registryshort_notm}} 内の名前空間にプッシュして、{{site.data.keyword.registryshort_notm}} 内のイメージを使用するように `values.yaml` ファイルを更新する必要があります。
 {: note}
 
 1. ローカル・マシンに <a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="外部リンク・アイコン"></a> をインストールします。
-2. セットアップした {{site.data.keyword.Bluemix_notm}} インフラストラクチャー VPN トンネルを使用して、プライベート・クラスターに接続します。
-3. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを Helm インスタンスに追加します。
+2. セットアップした {{site.data.keyword.cloud_notm}} インフラストラクチャー VPN トンネルを使用して、プライベート・クラスターに接続します。
+3. {{site.data.keyword.cloud_notm}} Helm リポジトリーを Helm インスタンスに追加します。
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -303,7 +329,7 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
    ```
    {: pre}
 
-5. {{site.data.keyword.Bluemix_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
+5. {{site.data.keyword.cloud_notm}} リポジトリーで現在使用可能な Helm チャートをリストします。
    ```
    helm search iks-charts
    ```
@@ -311,6 +337,11 @@ Tiller を使用せずに Helm チャートをインストールする場合は�
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 

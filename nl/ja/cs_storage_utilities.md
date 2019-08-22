@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -31,14 +31,14 @@ subcollection: containers
 ## IBM Cloud Block Storage Attacher プラグイン (ベータ) のインストール
 {: #block_storage_attacher}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のワーカー・ノードに接続します。  
+{{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインを使用して、未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のワーカー・ノードに接続します。  
 {: shortdesc}
 
-例えば、[Portworx](/docs/containers?topic=containers-portworx) などのソフトウェア定義ストレージ・ソリューション (SDS) を使用してデータを保管することを希望しているが、SDS の使用向けに最適化されている、追加のローカル・ディスクを備えたベア・メタル・ワーカー・ノードの使用を希望していない場合があります。 非 SDS ワーカー・ノードにローカル・ディスクを追加するには、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・アカウント内でブロック・ストレージ・デバイスを手動で作成して、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher を使用してそのストレージを非 SDS ワーカー・ノードに接続する必要があります。
+例えば、[Portworx](/docs/containers?topic=containers-portworx) などのソフトウェア定義ストレージ・ソリューション (SDS) を使用してデータを保管することを希望しているが、SDS の使用向けに最適化されている、追加のローカル・ディスクを備えたベア・メタル・ワーカー・ノードの使用を希望していない場合があります。 非 SDS ワーカー・ノードにローカル・ディスクを追加するには、{{site.data.keyword.cloud_notm}} インフラストラクチャー・アカウント内でブロック・ストレージ・デバイスを手動で作成して、{{site.data.keyword.cloud_notm}} Block Volume Attacher を使用してそのストレージを非 SDS ワーカー・ノードに接続する必要があります。
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインは、デーモン・セットの一部としてクラスター内のすべてのワーカー・ノード上にポッドを作成して、後でブロック・ストレージ・デバイスを非 SDS ワーカー・ノードに接続するために使用する Kubernetes ストレージ・クラスをセットアップします。
+{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインは、デーモン・セットの一部としてクラスター内のすべてのワーカー・ノード上にポッドを作成して、後でブロック・ストレージ・デバイスを非 SDS ワーカー・ノードに接続するために使用する Kubernetes ストレージ・クラスをセットアップします。
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインの更新方法と削除方法については、 [IBM Cloud Object Storage プラグインの更新](#update_block_attacher)と [IBM Cloud Object Storage プラグインの削除](#remove_block_attacher)を参照してください。
+{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインの更新方法と削除方法については、 [IBM Cloud Object Storage プラグインの更新](#update_block_attacher)と [IBM Cloud Object Storage プラグインの削除](#remove_block_attacher)を参照してください。
 {: tip}
 
 1.  [こちらの手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、Helm クライアントをローカル・マシンにインストールして、サービス・アカウントを使用して Helm サーバー (tiller) をクラスター内にインストールします。
@@ -64,7 +64,7 @@ subcollection: containers
    ```
    {: pre}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
+4. {{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインをインストールします。 このプラグインをインストールすると、事前定義されたブロック・ストレージ・クラスがクラスターに追加されます。
    ```
    helm install iks-charts/ibm-block-storage-attacher --name block-attacher
    ```
@@ -106,7 +106,7 @@ subcollection: containers
    ```
    {: screen}
 
-5. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher デーモン・セットが正常にインストールされていることを確認します。
+5. {{site.data.keyword.cloud_notm}} Block Volume Attacher デーモン・セットが正常にインストールされていることを確認します。
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -120,7 +120,7 @@ subcollection: containers
 
    正常にインストールされている場合は、1 つ以上の **ibmcloud-block-storage-attacher** ポッドが表示されます。 ポッドの数は、クラスター内のワーカー・ノードの数と等しくなります。 すべてのポッドが **Running** 状態である必要があります。
 
-6. {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスが正常に作成されていることを確認します。
+6. {{site.data.keyword.cloud_notm}} Block Volume Attacher のストレージ・クラスが正常に作成されていることを確認します。
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -135,7 +135,7 @@ subcollection: containers
 ### IBM Cloud Block Storage Attacher プラグインの更新
 {: #update_block_attacher}
 
-既存の {{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインを最新バージョンにアップグレードできます。
+既存の {{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインを最新バージョンにアップグレードできます。
 {: shortdesc}
 
 1. Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
@@ -150,7 +150,7 @@ subcollection: containers
    ```
    {: pre}
 
-3. {{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインの Helm チャートの名前を確認します。
+3. {{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインの Helm チャートの名前を確認します。
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -162,7 +162,7 @@ subcollection: containers
    ```
    {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Block Storage Attacher を最新バージョンにアップグレードします。
+4. {{site.data.keyword.cloud_notm}} Block Storage Attacher を最新バージョンにアップグレードします。
    ```
    helm upgrade --force --recreate-pods <helm_chart_name> ibm-block-storage-attacher
    ```
@@ -171,10 +171,10 @@ subcollection: containers
 ### IBM Cloud Block Volume Attacher プラグインの削除
 {: #remove_block_attacher}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインをクラスター内でプロビジョンして使用することを希望しない場合は、Helm チャートをアンインストールできます。
+{{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインをクラスター内でプロビジョンして使用することを希望しない場合は、Helm チャートをアンインストールできます。
 {: shortdesc}
 
-1. {{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインの Helm チャートの名前を確認します。
+1. {{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインの Helm チャートの名前を確認します。
    ```
    helm ls | grep ibm-block-storage-attacher
    ```
@@ -186,13 +186,13 @@ subcollection: containers
    ```
    {: screen}
 
-2. Helm チャートを削除することで、{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインを削除します。
+2. Helm チャートを削除することで、{{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインを削除します。
    ```
    helm delete <helm_chart_name> --purge
    ```
    {: pre}
 
-3. {{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインのポッドが削除されたことを確認します。
+3. {{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインのポッドが削除されたことを確認します。
    ```
    kubectl get pod -n kube-system -o wide | grep attacher
    ```
@@ -200,7 +200,7 @@ subcollection: containers
 
    CLI 出力にポッドが表示されていなければ、ポッドは正常に削除されています。
 
-4. {{site.data.keyword.Bluemix_notm}} Block Storage Attacher のストレージ・クラスが削除されたことを確認します。
+4. {{site.data.keyword.cloud_notm}} Block Storage Attacher のストレージ・クラスが削除されたことを確認します。
    ```
    kubectl get storageclasses | grep attacher
    ```
@@ -211,22 +211,22 @@ subcollection: containers
 ## フォーマットされていないブロック・ストレージの自動プロビジョニングと、ワーカー・ノードからストレージへのアクセスの許可
 {: #automatic_block}
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインを使用して、同じ構成の未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のすべてのワーカー・ノードに追加できます。
+{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインを使用して、同じ構成の未フォーマットおよび未マウントのロー・ブロック・ストレージをクラスター内のすべてのワーカー・ノードに追加できます。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインに含まれている `mkpvyaml` コンテナーはスクリプトを実行するように構成されており、このスクリプトによって、クラスター内のすべてのワーカー・ノードが検出されて、{{site.data.keyword.Bluemix_notm}} インフラストラクチャー・ポータル内にロー・ブロック・ストレージが作成されて、これらのワーカー・ノードがこのストレージにアクセスすることが許可されます。
+{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインに含まれている `mkpvyaml` コンテナーはスクリプトを実行するように構成されており、このスクリプトによって、クラスター内のすべてのワーカー・ノードが検出されて、{{site.data.keyword.cloud_notm}} インフラストラクチャー・ポータル内にロー・ブロック・ストレージが作成されて、これらのワーカー・ノードがこのストレージにアクセスすることが許可されます。
 
 異なるブロック・ストレージ構成を追加するには、ワーカー・ノードのサブセットのみにブロック・ストレージを追加します。または、プロビジョニング・プロセスをより細かく制御するには、[ブロック・ストレージを手動で追加](#manual_block)します。
 {: tip}
 
 
-1. {{site.data.keyword.Bluemix_notm}} にログインして、ご使用のクラスターが含まれているリソース・グループをターゲットにします。
+1. {{site.data.keyword.cloud_notm}} にログインして、ご使用のクラスターが含まれているリソース・グループをターゲットにします。
    ```
    ibmcloud login
    ```
    {: pre}
 
-2.  {{site.data.keyword.Bluemix_notm}} ストレージ・ユーティリティーのリポジトリーを複製します。
+2.  {{site.data.keyword.cloud_notm}} ストレージ・ユーティリティーのリポジトリーを複製します。
     ```
     git clone https://github.com/IBM/ibmcloud-storage-utilities.git
     ```
@@ -288,8 +288,8 @@ subcollection: containers
    </tbody>
    </table>  
 
-5. IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名と API キーを取得します。 このユーザー名と API キーは、`mkpvyaml` スクリプトによってクラスターにアクセスするために使用されます。
-   1. [{{site.data.keyword.Bluemix_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) にログインします。
+5. IBM Cloud インフラストラクチャーのユーザー名と API キーを取得します。 このユーザー名と API キーは、`mkpvyaml` スクリプトによってクラスターにアクセスするために使用されます。
+   1. [{{site.data.keyword.cloud_notm}} コンソール ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/) にログインします。
    2. メニュー ![メニュー・アイコン](../icons/icon_hamburger.svg "メニュー・アイコン") から、**「インフラストラクチャー」**を選択します。
    3. メニュー・バーから、**「アカウント」** > **「ユーザー」** > **「ユーザー・リスト」**を選択します。
    4. 取得するユーザー名と API キーを持つユーザーを確認します。
@@ -499,7 +499,7 @@ subcollection: containers
 ## 非 SDS ワーカー・ノードへのロー・ブロック・ストレージの接続
 {: #attach_block}
 
-ブロック・ストレージ・デバイスを非 SDS ワーカー・ノードに接続するには、{{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスとブロック・ストレージ・デバイスの詳細を使用して、永続ボリューム (PV) を作成する必要があります。
+ブロック・ストレージ・デバイスを非 SDS ワーカー・ノードに接続するには、{{site.data.keyword.cloud_notm}} Block Volume Attacher のストレージ・クラスとブロック・ストレージ・デバイスの詳細を使用して、永続ボリューム (PV) を作成する必要があります。
 {: shortdesc}
 
 **始める前に**:
@@ -565,11 +565,11 @@ subcollection: containers
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
-        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のユーザー名を入力します。 </td>
+        <td>既に取得した IBM Cloud インフラストラクチャーのユーザー名を入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/password</code></td>
-        <td>既に取得した IBM Cloud インフラストラクチャー (SoftLayer) のパスワードを入力します。 </td>
+        <td>既に取得した IBM Cloud インフラストラクチャーのパスワードを入力します。 </td>
         </tr>
         <tr>
         <td><code>ibm.io/targetip</code></td>
@@ -645,7 +645,7 @@ subcollection: containers
 
    ブロック・ストレージ・デバイスが正常に接続された場合は、**ibm.io/dm** がデバイス ID (`/dev/dm/1` など) に設定され、CLI 出力の **Annotations** セクションに **ibm.io/attachstatus=attached** と表示されます。
 
-ボリュームを切り離す場合は、PV を削除します。 切り離されたボリュームは、特定のワーカー・ノードによるアクセスが引き続き許可されて、異なるボリュームを同じワーカー・ノードに接続するために {{site.data.keyword.Bluemix_notm}} Block Volume Attacher のストレージ・クラスを使用して新しい PV を作成したときに再接続されます。 元の切り離されたボリュームが再接続されることを回避するには、`ibmcloud sl block access-revoke` コマンドを使用して、ワーカー・ノードが切り離されたボリュームにアクセスすることを禁止してください。 ボリュームを切り離しても、そのボリュームは IBM Cloud インフラストラクチャー (SoftLayer) アカウントから削除されません。 ボリュームの課金をキャンセルするには、[該当ストレージを IBM Cloud インフラストラクチャー (SoftLayer) アカウントから手動で削除する必要があります](/docs/containers?topic=containers-cleanup)。
+ボリュームを切り離す場合は、PV を削除します。 切り離されたボリュームは、特定のワーカー・ノードによるアクセスが引き続き許可されて、異なるボリュームを同じワーカー・ノードに接続するために {{site.data.keyword.cloud_notm}} Block Volume Attacher のストレージ・クラスを使用して新しい PV を作成したときに再接続されます。 元の切り離されたボリュームが再接続されることを回避するには、`ibmcloud sl block access-revoke` コマンドを使用して、ワーカー・ノードが切り離されたボリュームにアクセスすることを禁止してください。 ボリュームを切り離しても、そのボリュームは IBM Cloud インフラストラクチャー・アカウントから削除されません。 ボリュームの課金をキャンセルするには、[該当ストレージを IBM Cloud インフラストラクチャー・アカウントから手動で削除する必要があります](/docs/containers?topic=containers-cleanup)。
 {: note}
 
 

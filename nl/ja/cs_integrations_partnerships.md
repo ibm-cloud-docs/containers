@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -30,7 +30,7 @@ subcollection: containers
 IBM は、{{site.data.keyword.containerlong_notm}} を Kubernetes ワークロードのマイグレーション、操作、および管理に役立つ最良の Kubernetes サービスにすることを目的としています。 クラウドで実動ワークロードを実行するのに必要なすべての機能を提供するために、{{site.data.keyword.containerlong_notm}} パートナーは、その他のサード・パーティー・サービス・プロバイダーと連携し、最高のロギング、モニタリング、およびストレージの各ツールでクラスターを拡張します。
 {: shortdesc}
 
-パートナーおよび提供される各ソリューションの利点を確認します。 クラスターで使用可能な他の独自開発の {{site.data.keyword.Bluemix_notm}} およびサード・パーティーのオープン・ソース・サービスを見つけるには、[{{site.data.keyword.Bluemix_notm}} とサード・パーティーの統合について](/docs/containers?topic=containers-ibm-3rd-party-integrations)を参照してください。
+パートナーおよび提供される各ソリューションの利点を確認します。 クラスターで使用可能な他の独自開発の {{site.data.keyword.cloud_notm}} およびサード・パーティーのオープン・ソース・サービスを見つけるには、[{{site.data.keyword.cloud_notm}} とサード・パーティーの統合について](/docs/containers?topic=containers-ibm-3rd-party-integrations)を参照してください。
 
 ## LogDNA
 {: #logdna-partner}
@@ -54,17 +54,17 @@ LogDNA を使用して得られる主な利点のリストについては、以�
 ### {{site.data.keyword.containerlong_notm}} との統合
 {: #logdna-integration}
 
-LogDNA は、{{site.data.keyword.la_full_notm}} (クラスターで使用可能な {{site.data.keyword.Bluemix_notm}} プラットフォーム・サービス) によって提供されます。 {{site.data.keyword.la_full_notm}} は、IBM とのパートナーシップにより LogDNA によって運用されます。
+LogDNA は、{{site.data.keyword.la_full_notm}} (クラスターで使用可能な {{site.data.keyword.cloud_notm}} プラットフォーム・サービス) によって提供されます。 {{site.data.keyword.la_full_notm}} は、IBM とのパートナーシップにより LogDNA によって運用されます。
 {: shortdesc}
 
-クラスターで LogDNA を使用するには、{{site.data.keyword.Bluemix_notm}} アカウントに {{site.data.keyword.la_full_notm}} のインスタンスをプロビジョンし、ログ・ソースとして Kubernetes クラスターを構成する必要があります。 クラスターが構成されると、ログが自動的に収集され、{{site.data.keyword.la_full_notm}} サービス・インスタンスに転送されます。 {{site.data.keyword.la_full_notm}} ダッシュボードを使用して、ログにアクセスできます。   
+クラスターで LogDNA を使用するには、{{site.data.keyword.cloud_notm}} アカウントに {{site.data.keyword.la_full_notm}} のインスタンスをプロビジョンし、ログ・ソースとして Kubernetes クラスターを構成する必要があります。 クラスターが構成されると、ログが自動的に収集され、{{site.data.keyword.la_full_notm}} サービス・インスタンスに転送されます。 {{site.data.keyword.la_full_notm}} ダッシュボードを使用して、ログにアクセスできます。   
 
 詳しくは、[{{site.data.keyword.la_full_notm}} による Kubernetes クラスター・ログの管理](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube)を参照してください。
 
 ### 課金とサポート
 {: #logdna-billing-support}
 
-{{site.data.keyword.la_full_notm}} は、{{site.data.keyword.Bluemix_notm}} サポート・システムに完全に統合されています。 {{site.data.keyword.la_full_notm}} の使用に関する問題が発生した場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `logdna-on-iks` チャネルに質問を投稿するか、または [{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を開きます。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.Bluemix_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
+{{site.data.keyword.la_full_notm}} は、{{site.data.keyword.cloud_notm}} サポート・システムに完全に統合されています。 {{site.data.keyword.la_full_notm}} の使用に関する問題が発生した場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `logdna-on-iks` チャネルに質問を投稿するか、または [{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を開きます。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.cloud_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
 
 ## Sysdig
 {: #sydig-partner}
@@ -89,19 +89,19 @@ Sysdig を使用して得られる主な利点のリストについては、以�
 ### {{site.data.keyword.containerlong_notm}} との統合
 {: #sysdig-integration}
 
-Sysdig Monitor は、{{site.data.keyword.mon_full_notm}} (クラスターで使用可能な {{site.data.keyword.Bluemix_notm}} プラットフォーム・サービス) によって提供されます。 {{site.data.keyword.mon_full_notm}} は、IBM とのパートナーシップにより Sysdig によって運用されます。
+Sysdig Monitor は、{{site.data.keyword.mon_full_notm}} (クラスターで使用可能な {{site.data.keyword.cloud_notm}} プラットフォーム・サービス) によって提供されます。 {{site.data.keyword.mon_full_notm}} は、IBM とのパートナーシップにより Sysdig によって運用されます。
 {: shortdesc}
 
-クラスターで Sysdig Monitor を使用するには、{{site.data.keyword.Bluemix_notm}} アカウントに {{site.data.keyword.mon_full_notm}} のインスタンスをプロビジョンし、メトリック・ソースとして Kubernetes クラスターを構成する必要があります。 クラスターが構成されると、メトリックが自動的に収集され、{{site.data.keyword.mon_full_notm}} サービス・インスタンスに転送されます。 {{site.data.keyword.mon_full_notm}} ダッシュボードを使用して、メトリックにアクセスできます。   
+クラスターで Sysdig Monitor を使用するには、{{site.data.keyword.cloud_notm}} アカウントに {{site.data.keyword.mon_full_notm}} のインスタンスをプロビジョンし、メトリック・ソースとして Kubernetes クラスターを構成する必要があります。 クラスターが構成されると、メトリックが自動的に収集され、{{site.data.keyword.mon_full_notm}} サービス・インスタンスに転送されます。 {{site.data.keyword.mon_full_notm}} ダッシュボードを使用して、メトリックにアクセスできます。   
 
 詳しくは、[Kubernetes クラスターにデプロイされたアプリのメトリックの分析方法](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster)を参照してください。
 
 ### 課金とサポート
 {: #sysdig-billing-support}
 
-Sysdig Monitor は {{site.data.keyword.mon_full_notm}} によって提供されるため、その使用は、プラットフォーム・サービスの {{site.data.keyword.Bluemix_notm}} の課金に含まれます。 価格情報については、[{{site.data.keyword.Bluemix_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/observe/monitoring/create) の使用可能なプランを参照してください。
+Sysdig Monitor は {{site.data.keyword.mon_full_notm}} によって提供されるため、その使用は、プラットフォーム・サービスの {{site.data.keyword.cloud_notm}} の課金に含まれます。 価格情報については、[{{site.data.keyword.cloud_notm}} カタログ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/observe/monitoring/create) の使用可能なプランを参照してください。
 
-{{site.data.keyword.mon_full_notm}} は、{{site.data.keyword.Bluemix_notm}} サポート・システムに完全に統合されています。 {{site.data.keyword.mon_full_notm}} の使用に関する問題が発生した場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `sysdig-monitoring` チャネルに質問を投稿するか、または [{{site.data.keyword.Bluemix_notm}} サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を開きます。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.Bluemix_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
+{{site.data.keyword.mon_full_notm}} は、{{site.data.keyword.cloud_notm}} サポート・システムに完全に統合されています。 {{site.data.keyword.mon_full_notm}} の使用に関する問題が発生した場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `sysdig-monitoring` チャネルに質問を投稿するか、または [{{site.data.keyword.cloud_notm}} サポート・ケース](/docs/get-support?topic=get-support-getting-customer-support#getting-customer-support)を開きます。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.cloud_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
 
 ## Portworx
 {: #portworx-parter}
@@ -143,7 +143,7 @@ Portworx を {{site.data.keyword.containerlong_notm}} でインストールお�
 ### 課金とサポート
 {: #portworx-billing-support}
 
-ローカル・ディスクに付属する SDS ワーカー・ノード・マシン、および Portworx 用に使用する仮想マシンは、月単位の {{site.data.keyword.containerlong_notm}} 課金に含まれます。価格情報については、[{{site.data.keyword.Bluemix_notm}} カタログ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/catalog/cluster) を参照してください。 Portworx ライセンスは個別のコストであり、月単位の課金には含まれません。
+ローカル・ディスクに付属する SDS ワーカー・ノード・マシン、および Portworx 用に使用する仮想マシンは、月単位の {{site.data.keyword.containerlong_notm}} 課金に含まれます。価格情報については、[{{site.data.keyword.cloud_notm}} カタログ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/catalog/cluster) を参照してください。 Portworx ライセンスは個別のコストであり、月単位の課金には含まれません。
 {: shortdesc}
 
-Portworx の使用に関する問題が発生した場合や、特定のユース・ケースでの Portworx 構成についてチャットを希望する場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `portworx-on-iks` チャネルに質問を投稿してください。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.Bluemix_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。
+Portworx の使用に関する問題が発生した場合や、特定のユース・ケースでの Portworx 構成についてチャットを希望する場合は、[{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com/) で `portworx-on-iks` チャネルに質問を投稿してください。 IBMid を使用して Slack にログインします。 自身の {{site.data.keyword.cloud_notm}} アカウントで IBMid を使用していない場合は、[この Slack への招待を要請してください ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://bxcs-slack-invite.mybluemix.net/)。

@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
+{: .toc subcollection="containers" category="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 IBM Cloud Kubernetes Service
 
     {: .navgroup id="learn"}
@@ -31,9 +31,8 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     チュートリアル
+        cs_tutorials_ov.md
         cs_tutorials.md
-        cs_tutorial_rhos.md
-        cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         [チュートリアル: VM ベース・アプリケーションの Kubernetes への移行](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
@@ -46,11 +45,11 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     クラスターのセットアップ
-        cs_clusters_planning.md
-        cs_plan_ha.md
-        cs_plan_workers.md
+        cs_cluster_plan_network.md
+        cs_cluster_plan_ha.md
+        cs_worker_plan.md
         cs_clusters.md
-        cs_workers.md
+        cs_worker_add.md
 
     {: .topicgroup}
     クラスターの管理
@@ -75,18 +74,29 @@ IBM Cloud Kubernetes Service
         cs_network_cluster.md
         cs_dns.md
 
-    cs_images.md
-    cs_app.md
-    cs_app_knative.md
-
     {: .topicgroup}
-    アプリを公開するネットワーキング
+    アプリのデプロイ
+        cs_images.md
+        cs_app.md
+        cs_app_knative.md
         cs_network_planning.md
         cs_nodeport.md
+
+    {: .topicgroup}
+    ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング
+        cs_loadbalancer_about.md
         cs_loadbalancer.md
+        cs_loadbalancer_v2.md
+        cs_loadbalancer_dns.md
+
+    {: .topicgroup}
+    Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング
+        cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_settings.md
         cs_ingress_health.md
+        cs_ingress_user_managed.md
 
     {: .topicgroup}
     永続ストレージへのデータの保管
@@ -114,17 +124,24 @@ IBM Cloud Kubernetes Service
     cs_hybrid.md
 
     {: .topicgroup}
-    IBM Cloud Kubernetes Service CLI プラグインのリファレンス
+    CLI プラグイン解説書
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
-    IBM Cloud Kubernetes Service のバージョン
+    バージョン履歴
         cs_versions.md
         cs_versions_changelog.md
         cs_versions_addons.md
 
-    cs_regions.md
+    {: .topicgroup}
+    API リファレンス
+        [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+        [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+        [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
+        [IBM Cloud 脆弱性アドバイザー API](https://cloud.ibm.com/apidocs/container-registry/va)
+
+    cs_locations.md
     cs_integrations_overview.md
     cs_access_reference.md
     {: .navgroup-end}
@@ -142,7 +159,8 @@ IBM Cloud Kubernetes Service
         cs_troubleshoot_network.md
 
     release_notes.md
-    cs_rellinks.md
     cs_sitemap.md
-    {: .navgroup-end}
+    {: .navgroup-end} 
 
+    cs_tutorials_apps.md
+    cs_rellinks.md

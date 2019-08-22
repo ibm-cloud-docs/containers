@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, audit
 
@@ -28,7 +28,7 @@ subcollection: containers
 # {{site.data.keyword.cloudaccesstrailshort}} イベント
 {: #at_events}
 
-{{site.data.keyword.cloudaccesstrailshort}} サービスを使用して、{{site.data.keyword.containerlong_notm}} クラスター内でユーザーによって開始されたアクティビティーを表示、管理、および監査することができます。
+{{site.data.keyword.cloudaccesstrailshort}} サービスを使用することにより、{{site.data.keyword.containerlong}} コミュニティー Kubernetes または OpenShift クラスター内でユーザーによって開始されたアクティビティーを表示、管理、および監査することができます。
 {: shortdesc}
 
 {{site.data.keyword.containershort_notm}} は、以下の 2 つのタイプの {{site.data.keyword.cloudaccesstrailshort}} イベントを生成します。
@@ -43,7 +43,7 @@ subcollection: containers
 
 サービスの仕組みについて詳しくは、[{{site.data.keyword.cloudaccesstrailshort}} の資料](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started)を参照してください。 追跡される Kubernetes アクションについて詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/home/) を参照してください。
 
-{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。クラスター管理イベントと Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。
+{{site.data.keyword.containerlong_notm}} は現在 {{site.data.keyword.at_full}} を使用するように構成されていません。 クラスター管理イベントと Kubernetes API 監査ログを管理するには、引き続き {{site.data.keyword.cloudaccesstrailfull_notm}} を LogAnalysis と組み合わせて使用します。
 {: note}
 
 ## イベントの情報の検出
@@ -54,10 +54,10 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
 
 管理アクティビティーをモニターするには、次の手順を実行します。
 
-1. {{site.data.keyword.Bluemix_notm}} アカウントにログインします。
+1. {{site.data.keyword.cloud_notm}} アカウントにログインします。
 2. カタログから、{{site.data.keyword.containerlong_notm}} のインスタンスと同じアカウントで、{{site.data.keyword.cloudaccesstrailshort}} サービスのインスタンスをプロビジョンします。
 3. {{site.data.keyword.cloudaccesstrailshort}} ダッシュボードの**「管理」**タブで、アカウント・ドメインまたはスペース・ドメインを選択します。
-  * **アカウント・ログ**: クラスター管理イベントと Kubernetes API サーバー監査イベントは、イベントが生成される {{site.data.keyword.Bluemix_notm}} 地域の**アカウント・ドメイン**で参照できます。
+  * **アカウント・ログ**: クラスター管理イベントと Kubernetes API サーバー監査イベントは、イベントが生成される {{site.data.keyword.cloud_notm}} 地域の**アカウント・ドメイン**で参照できます。
   * **スペース・ログ**: Kubernetes API サーバー監査イベントを転送するようにクラスターを構成するときにスペースを指定した場合、これらのイベントは、{{site.data.keyword.cloudaccesstrailshort}} サービスがプロビジョンされている Cloud Foundry スペースに関連付けられた**スペース・ドメイン**で参照できます。
 4. **「Kibana で表示」**をクリックします。
 5. ログを表示する時間フレームを設定します。 デフォルトは 24 時間です。
@@ -93,7 +93,7 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>クラスターが削除されます。</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>ベアメタル・ワーカー・ノードのトラステッド・コンピューティングなどの機能がクラスターで有効になります。</td></tr><tr>
+<td>パブリック・サービス・エンドポイントやプライベート・サービス・エンドポイントなどの機能がクラスターで有効になります。</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>クラスター情報が表示されます。</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
@@ -125,7 +125,7 @@ Kibana ダッシュボードでログを参照して、クラスター内のア�
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>サービスがクラスターからアンバインドされます。</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>既存の IBM Cloud インフラストラクチャー (SoftLayer) サブネットがクラスターに追加されます。</td></tr><tr>
+<td>既存の IBM Cloud インフラストラクチャー・サブネットがクラスターに追加されます。</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>サブネットが作成されます。</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>

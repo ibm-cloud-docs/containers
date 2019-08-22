@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -30,26 +30,26 @@ lastupdated: "2019-06-11"
 
 | Kubernetes バージョン | 新規クラスターのデフォルト | 説明 |
 |---|---|---|
-| 1.14 以降 | CoreDNS | クラスターが KubeDNS を使用し、以前のバージョンからバージョン 1.14 以降に更新された場合、クラスターの更新中にクラスター DNS プロバイダーが KubeDNS から CoreDNS に自動的にマイグレーションされます。クラスター DNS プロバイダーを KubeDNS に戻すことはできません。|
-| 1.13 | CoreDNS | 以前のバージョンから 1.13 に更新されたクラスターは、更新時に使用していた DNS プロバイダーをそのまま使用します。別のプロバイダーを使用するには、[DNS プロバイダーを切り替え](#dns_set)ます。 |
+| 1.14 以降 | CoreDNS | クラスターが KubeDNS を使用し、以前のバージョンからバージョン 1.14 以降に更新された場合、クラスターの更新中にクラスター DNS プロバイダーが KubeDNS から CoreDNS に自動的にマイグレーションされます。 クラスター DNS プロバイダーを KubeDNS に戻すことはできません。 |
+| 1.13 | CoreDNS | 以前のバージョンから 1.13 に更新されたクラスターは、更新時に使用していた DNS プロバイダーをそのまま使用します。 別のプロバイダーを使用するには、[DNS プロバイダーを切り替え](#dns_set)ます。 |
 | 1.12 | KubeDNS | 代わりに CoreDNS を使用するには、[DNS プロバイダーを切り替え](#set_coredns)ます。 |
 | 1.11 以前 | KubeDNS | DNS プロバイダーを CoreDNS に切り替えることはできません。 |
 {: caption="Kubernetes バージョン別のデフォルトのクラスター DNS プロバイダー" caption-side="top"}
 
 **KubeDNS ではなく CoreDNS を使用する利点**<br>
-CoreDNS は、Kubernetes バージョン 1.13 以降でサポートされるデフォルトのクラスター DNS プロバイダーで、最近、[段階的 Cloud Native Computing Foundation (CNCF) プロジェクト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.cncf.io/projects/) になりました。段階的プロジェクトは、徹底的にテストおよび強化され、幅広いスケールでの実動レベルの採用の準備が整っています。
+CoreDNS は、Kubernetes バージョン 1.13 以降でサポートされるデフォルトのクラスター DNS プロバイダーで、最近、[段階的 Cloud Native Computing Foundation (CNCF) プロジェクト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.cncf.io/projects/) になりました。 段階的プロジェクトは、徹底的にテストおよび強化され、幅広いスケールでの実動レベルの採用の準備が整っています。
 
-[Kubernetes の告知 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2018/12/03/kubernetes-1-13-release-announcement/) に記載されているように、CoreDNS は、Kubernetes との後方互換性があり、拡張可能な統合を提供する、汎用の権限のある DNS サーバーです。CoreDNS は単一の実行可能な単一プロセスであるため、以前のクラスター DNS プロバイダーよりも、問題が発生する可能性のある依存関係および移動パーツが少なくなっています。また、このプロジェクトは Kubernetes プロジェクトと同じ言語である `Go` で記述されています。このことは、メモリーの保護に役立ちます。最後に、[CoreDNS 文書内の共通セットアップ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/manual/toc/#setups) などのカスタム DNS エントリーを作成できるため、CoreDNS は KubeDNS よりも柔軟なユース・ケースをサポートします。
+[Kubernetes の告知 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/blog/2018/12/03/kubernetes-1-13-release-announcement/) に記載されているように、CoreDNS は、Kubernetes との後方互換性があり、拡張可能な統合を提供する、汎用の権限のある DNS サーバーです。 CoreDNS は単一の実行可能な単一プロセスであるため、以前のクラスター DNS プロバイダーよりも、問題が発生する可能性のある依存関係および移動パーツが少なくなっています。 また、このプロジェクトは Kubernetes プロジェクトと同じ言語である `Go` で記述されています。このことは、メモリーの保護に役立ちます。 最後に、[CoreDNS 文書内の共通セットアップ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://coredns.io/manual/toc/#setups) などのカスタム DNS エントリーを作成できるため、CoreDNS は KubeDNS よりも柔軟なユース・ケースをサポートします。
 
 ## クラスター DNS プロバイダーの自動スケーリング
 {: #dns_autoscale}
 
-デフォルトでは、{{site.data.keyword.containerlong_notm}} のクラスター DNS プロバイダーには、クラスター内のワーカー・ノードとコアの数に応じて DNS ポッドを自動スケーリングするためのデプロイメントが含まれています。 DNS 自動スケーリング機能のパラメーターを微調整するには、DNS 自動スケーリング機能の構成マップを編集します。 例えば、アプリでクラスター DNS プロバイダーを頻繁に使用している場合は、アプリをサポートするために DNS ポッドの最小数を増やす必要があります。詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) を参照してください。
+デフォルトでは、{{site.data.keyword.containerlong_notm}} のクラスター DNS プロバイダーには、クラスター内のワーカー・ノードとコアの数に応じて DNS ポッドを自動スケーリングするためのデプロイメントが含まれています。 DNS 自動スケーリング機能のパラメーターを微調整するには、DNS 自動スケーリング機能の構成マップを編集します。 例えば、アプリでクラスター DNS プロバイダーを頻繁に使用している場合は、アプリをサポートするために DNS ポッドの最小数を増やす必要があります。 詳しくは、[Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) を参照してください。
 {: shortdesc}
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  クラスター DNS プロバイダーのデプロイメントが使用可能であることを確認します。 クラスターには、KubeDNS、CoreDNS、または両方の DNS プロバイダーの自動スケーリング機能がインストールされている可能性があります。 両方の DNS の自動スケーリング機能がインストールされている場合は、CLI 出力の **AVAILABLE** 列を調べて、どちらが使用中であるかを確認します。使用中のデプロイメントは、使用可能なデプロイメントが 1 と表示されます。
+1.  クラスター DNS プロバイダーのデプロイメントが使用可能であることを確認します。 クラスターには、KubeDNS、CoreDNS、または両方の DNS プロバイダーの自動スケーリング機能がインストールされている可能性があります。 両方の DNS の自動スケーリング機能がインストールされている場合は、CLI 出力の **AVAILABLE** 列を調べて、どちらが使用中であるかを確認します。 使用中のデプロイメントは、使用可能なデプロイメントが 1 と表示されます。
     ```
     kubectl get deployment -n kube-system | grep dns-autoscaler
     ```
@@ -92,7 +92,7 @@ CoreDNS は、Kubernetes バージョン 1.13 以降でサポートされるデ�
 
 開始前に、以下のことを行います。 [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  クラスター DNS プロバイダーのデプロイメントが使用可能であることを確認します。 KubeDNS、CoreDNS、または両方の DNS プロバイダー用の DNS クラスター・プロバイダーがクラスターにインストールされている可能性があります。 両方の DNS プロバイダーがインストールされている場合は、CLI 出力の **AVAILABLE** 列を調べて、どちらが使用中であるかを確認します。使用中のデプロイメントは、使用可能なデプロイメントが 1 と表示されます。
+1.  クラスター DNS プロバイダーのデプロイメントが使用可能であることを確認します。 KubeDNS、CoreDNS、または両方の DNS プロバイダー用の DNS クラスター・プロバイダーがクラスターにインストールされている可能性があります。 両方の DNS プロバイダーがインストールされている場合は、CLI 出力の **AVAILABLE** 列を調べて、どちらが使用中であるかを確認します。 使用中のデプロイメントは、使用可能なデプロイメントが 1 と表示されます。
     ```
     kubectl get deployment -n kube-system -l k8s-app=kube-dns
     ```
@@ -173,7 +173,7 @@ CoreDNS は、Kubernetes バージョン 1.13 以降でサポートされるデ�
 {{site.data.keyword.containerlong_notm}} クラスターで Kubernetes バージョン 1.12 または 1.13 を実行する場合は、クラスター DNS プロバイダーとして Kubernetes DNS (KubeDNS) と CoreDNS のどちらを使用するかを選択できます。
 {: shortdesc}
 
-他の Kubernetes バージョンを実行するクラスターは、クラスター DNS プロバイダーを設定できません。バージョン 1.11 以前は KubeDNS のみをサポートし、バージョン 1.14 以降は CoreDNS のみをサポートします。
+他の Kubernetes バージョンを実行するクラスターは、クラスター DNS プロバイダーを設定できません。 バージョン 1.11 以前は KubeDNS のみをサポートし、バージョン 1.14 以降は CoreDNS のみをサポートします。
 {: note}
 
 **始める前に**:
@@ -202,7 +202,7 @@ CoreDNS は、Kubernetes バージョン 1.13 以降でサポートされるデ�
 {: shortdesc}
 
 1.  KubeDNS プロバイダーの構成マップまたは KubeDNS 自動スケーリング機能の構成マップをカスタマイズした場合は、それらのカスタマイズ内容をすべて CoreDNS の構成マップに移します。
-    *   `kube-system` 名前空間の `kube-dns` 構成マップについては、すべての [DNS カスタマイズ内容 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) を `kube-system` 名前空間の `coredns` 構成マップに移します。 `kube-dns` 構成マップと `coredns` 構成マップの構文は異なります。例については、[Kubernetes 資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns) を参照してください。
+    *   `kube-system` 名前空間の `kube-dns` 構成マップについては、すべての [DNS カスタマイズ内容 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/) を `kube-system` 名前空間の `coredns` 構成マップに移します。 `kube-dns` 構成マップと `coredns` 構成マップの構文は異なります。 例については、[Kubernetes 資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns) を参照してください。
     *   `kube-system` 名前空間の `kube-dns-autoscaler` 構成マップについては、すべての [DNS 自動スケーリング機能のカスタマイズ内容 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/) を `kube-system` 名前空間の `coredns-autoscaler` 構成マップに移します。 カスタマイズの構文は、どちらの場合も同じです。
 2.  KubeDNS autoscaler デプロイメントをスケールダウンします。
     ```

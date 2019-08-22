@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,17 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # IBM Cloud Object Storage へのデータの保管
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。 このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。 {{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage) は、{{site.data.keyword.cos_full_notm}} プラグインを使用することで Kubernetes クラスター内で実行されているアプリにマウントできる永続的な高可用性ストレージです。 このプラグインは、Cloud {{site.data.keyword.cos_short}} バケットをクラスター内のポッドに接続する Kubernetes Flex-Volume プラグインです。 {{site.data.keyword.cos_full_notm}} を使用して保管される情報は、暗号化された状態で転送および保存され、複数の地理的位置にまたがって分散されて、REST API を使用して HTTP 経由でアクセスされます。
 {: shortdesc}
 
-{{site.data.keyword.cos_full_notm}} に接続するには、ご使用のクラスターは {{site.data.keyword.Bluemix_notm}} Identity and Access Management から認証を受けるためにパブリック・ネットワークにアクセスできる必要があります。 プライベート専用クラスターを使用している場合は、{{site.data.keyword.cos_full_notm}} のプライベート・サービス・エンドポイントと通信するには、プラグイン・バージョン `1.0.3` 以降をインストールして、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを HMAC 認証に対応するようにセットアップする必要があります。 HMAC 認証の使用を希望しない場合は、このプラグインがプライベート・クラスター内で適切に機能するために、ポート 443 上のすべてのアウトバウンド・ネットワーク・トラフィックを開放する必要があります。
+{{site.data.keyword.cos_full_notm}} に接続するには、ご使用のクラスターは {{site.data.keyword.cloud_notm}} Identity and Access Management から認証を受けるためにパブリック・ネットワークにアクセスできる必要があります。 プライベート専用クラスターを使用している場合は、{{site.data.keyword.cos_full_notm}} のプライベート・サービス・エンドポイントと通信するには、プラグイン・バージョン `1.0.3` 以降をインストールして、{{site.data.keyword.cos_full_notm}} サービス・インスタンスを HMAC 認証に対応するようにセットアップする必要があります。 HMAC 認証の使用を希望しない場合は、このプラグインがプライベート・クラスター内で適切に機能するために、ポート 443 上のすべてのアウトバウンド・ネットワーク・トラフィックを開放する必要があります。
 {: important}
 
 バージョン 1.0.5 では、{{site.data.keyword.cos_full_notm}} プラグインの名前が `ibmcloud-object-storage-plugin` から `ibm-object-storage-plugin` に変更されました。 新しいバージョンのプラグインをインストールするには、[古い Helm チャート・インストールをアンインストール](#remove_cos_plugin)し、[{{site.data.keyword.cos_full_notm}} プラグインの新しいバージョンで Helm チャートを再インストール](#install_cos)する必要があります。
+{: note}
+
+バージョン 1.0.8 では、{{site.data.keyword.cos_full_notm}} プラグイン Helm チャートが `ibm-charts` Helm リポジトリー内に用意されるようになっています。このリポジトリーから最新バージョンの Helm チャートをフェッチしてください。リポジトリーを追加するには、`helm repo add ibm-charts https://icr.io/helm/ibm-charts` を実行します。
 {: note}
 
 ## オブジェクト・ストレージ・サービス・インスタンスの作成
@@ -149,7 +151,7 @@ subcollection: containers
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.8_1523*
       ```
       {: screen}
 
@@ -157,16 +159,16 @@ subcollection: containers
 
    2. [version changelog](/docs/containers?topic=containers-changelog#changelog) を参照して、最新のパッチ・バージョンに含まれる変更内容を確認してください。
 
-   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
+   3. ワーカー・ノードを再ロードして、最新のパッチ・バージョンを適用します。 [ibmcloud ks worker-reload コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload)の説明に従って、ワーカー・ノード上で実行されているポッドを安全な方法でスケジュール変更した後に、ワーカー・ノードを再ロードしてください。 再ロード中に、ワーカー・ノード・マシンが最新のイメージで更新されるので、[ワーカー・ノードの外部に保管](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)していないデータは削除されることに注意してください。
 
-2.  {{site.data.keyword.cos_full_notm}} プラグインを Helm サーバー (Tiller) を使用してインストールするか、使用せずにインストールするかを選択します。 次に、[手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシン上に Helm クライアントをインストールし、Tiller を使用する場合には、サービス・アカウントで Tiller をクラスター内にインストールします。
+2.  {{site.data.keyword.cos_full_notm}} プラグインを Helm サーバー (Tiller) を使用してインストールするか、使用せずにインストールするかを選択します。 その後、[この手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシン上に Helm クライアントをインストールし、オプションでサービス・アカウントを使用して Tiller をクラスター内にインストールします。**注**: Windows を使用している場合は、Tiller をインストールする必要があります。
 
 3. Tiller を使用してプラグインをインストールする場合は、Tiller がサービス・アカウントでインストールされていることを確認します。
    ```
    kubectl get serviceaccount -n kube-system tiller
    ```
    {: pre}
-   
+
    出力例:
    ```
    NAME                                 SECRETS   AGE
@@ -174,9 +176,9 @@ subcollection: containers
    ```
    {: screen}
 
-4. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーをクラスターに追加します。
+4. {{site.data.keyword.cloud_notm}} Helm リポジトリーをクラスターに追加します。
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add ibm-charts https://icr.io/helm/ibm-charts
    ```
    {: pre}
 
@@ -188,7 +190,7 @@ subcollection: containers
 
 5. Helm チャートをダウンロードして、現行ディレクトリーにチャートをアンパックします。
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
@@ -204,7 +206,7 @@ subcollection: containers
       Installed plugin: ibmc
       ```
       {: screen}
-      
+
       エラー `Error: plugin already exists` が表示された場合は、`rm -rf ~/.helm/plugins/helm-ibmc` を実行して、`ibmc` Helm プラグインを削除します。
       {: tip}
 
@@ -229,11 +231,11 @@ subcollection: containers
 
       Example Usage:
          With Tiller:
-             Install:   helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+             Install:   helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
          Without Tiller:
-             Install:   helm ibmc template iks-charts/ibm-object-storage-plugin --apply
-             Dry-run:   helm ibmc template iks-charts/ibm-object-storage-plugin
-             Uninstall: helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+             Install:   helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
+             Dry-run:   helm ibmc template ibm-charts/ibm-object-storage-plugin
+             Uninstall: helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
 
       注:
          1. 常に、最新バージョンの ibm-object-storage-plugin チャートをインストールすることをお勧めします。
@@ -275,13 +277,13 @@ subcollection: containers
      - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。</br>
        **Tiller なし**:
        ```
-       helm ibmc template iks-charts/ibm-object-storage-plugin --apply
+       helm ibmc template ibm-charts/ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
+
        **Tiller あり**:
        ```
-       helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+       helm ibmc install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
        ```
        {: pre}
 
@@ -289,10 +291,10 @@ subcollection: containers
        **Tiller なし**:
        ```
        cd ../..
-       helm ibmc template ./ibm-object-storage-plugin --apply 
+       helm ibmc template ./ibm-object-storage-plugin --apply
        ```
        {: pre}
-       
+
        **Tiller あり**:
        ```
        cd ../..
@@ -315,39 +317,23 @@ subcollection: containers
 
      3. Helm チャートをインストールします。
         - 前述のステップをスキップした場合は、特定の Kubernetes シークレットに制限せずにインストールします。</br>
-          **Tiller なし**:
           ```
-          helm ibmc template iks-charts/ibm-object-storage-plugin --apply
-          ```
-          {: pre}
-          
-          **Tiller あり**:
-          ```
-          helm ibmc install iks-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
+          helm install ibm-charts/ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
 
         - 前述のステップを完了した場合は、特定の Kubernetes シークレットに制限してインストールします。</br>
-          **Tiller なし**:
           ```
           cd ../..
-          helm ibmc template ./ibm-object-storage-plugin --apply 
+          helm install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
           ```
           {: pre}
-          
-          **Tiller あり**:
-          ```
-          cd ../..
-          helm ibmc install ./ibm-object-storage-plugin --name ibm-object-storage-plugin
-          ```
-          {: pre}
-
 
    Tiller なしでインストールする場合の出力例:
    ```
    Rendering the Helm chart templates...
    DC: dal10
-   Chart: iks-charts/ibm-object-storage-plugin
+   Chart: ibm-charts/ibm-object-storage-plugin
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-cross-region.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-cold-regional.yaml
    wrote object-storage-templates/ibm-object-storage-plugin/templates/ibmc-s3fs-flex-cross-region.yaml
@@ -392,7 +378,7 @@ subcollection: containers
 
 10. プラグインが正しくインストールされていることを確認します。
     ```
-    kubectl get pod -n kube-system -o wide | grep object
+    kubectl get pod -n default -o wide | grep object
     ```
     {: pre}
 
@@ -457,7 +443,7 @@ subcollection: containers
 
    3. [{{site.data.keyword.cos_full_notm}} プラグインのインストール](#install_cos)の手順に従って、最新バージョンの {{site.data.keyword.cos_full_notm}} プラグインをインストールします。
 
-2. {{site.data.keyword.Bluemix_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
+2. {{site.data.keyword.cloud_notm}} Helm リポジトリーを更新して、このリポジトリーにあるすべての Helm チャートの最新バージョンを取得します。
    ```
    helm repo update
    ```
@@ -471,18 +457,18 @@ subcollection: containers
 
 4. 最新の {{site.data.keyword.cos_full_notm}} Helm チャートをローカル・マシンにダウンロードしてパッケージを解凍して、`release.md` ファイルを参照して最新のリリース情報を確認します。
    ```
-   helm fetch --untar iks-charts/ibm-object-storage-plugin
+   helm fetch --untar ibm-charts/ibm-object-storage-plugin
    ```
    {: pre}
 
 5. プラグインをアップグレードします。 </br>
-   **Tiller なし**: 
+   **Tiller なし**:
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --update
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --update
    ```
    {: pre}
-     
-   **Tiller あり**: 
+
+   **Tiller あり**:
    1. Helm チャートのインストール名を検索します。
       ```
       helm ls | grep ibm-object-storage-plugin
@@ -497,7 +483,7 @@ subcollection: containers
 
    2. {{site.data.keyword.cos_full_notm}} Helm チャートを最新バージョンにアップグレードします。
       ```   
-      helm ibmc upgrade <helm_chart_name> iks-charts/ibm-object-storage-plugin --force --recreate-pods -f
+      helm ibmc upgrade <helm_chart_name> ibm-charts/ibm-object-storage-plugin --force --recreate-pods -f
       ```
       {: pre}
 
@@ -541,7 +527,7 @@ subcollection: containers
 プラグインを削除するには、以下のようにします。
 
 1. クラスターからプラグインを削除します。 </br>
-   **Tiller あり**: 
+   **Tiller あり**:
    1. Helm チャートのインストール名を検索します。
       ```
       helm ls | grep object-storage-plugin
@@ -560,9 +546,9 @@ subcollection: containers
       ```
       {: pre}
 
-   **Tiller なし**: 
+   **Tiller なし**:
    ```
-   helm ibmc template iks-charts/ibm-object-storage-plugin --delete
+   helm ibmc template ibm-charts/ibm-object-storage-plugin --delete
    ```
    {: pre}
 
@@ -672,7 +658,7 @@ subcollection: containers
    <tbody>
    <tr>
    <td><code>ibm.io/chunk-size-mb</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} に対して読み取りまたは書き込みが行われるデータ・チャンクのサイズ (メガバイト単位)。 名前に <code>perf</code> が指定されたストレージ・クラスは、52 メガバイトでセットアップされます。 名前に <code>perf</code> が指定されていないストレージ・クラスは、16 メガバイトのチャンクを使用します。 例えば、1 GB のファイルを読み取る場合、プラグインは、このファイルを複数の 16 メガバイトまたは 52 メガバイトのチャンクで読み取ります。 </td>
+   <td>{{site.data.keyword.cos_full_notm}} に対して読み取りまたは書き込みが行われるデータ・チャンクのサイズ (メガバイト単位)。 名前に <code>perf</code> が指定されたストレージ・クラスは、52 メガバイトでセットアップされます。 名前に <code>perf</code> が指定されていないストレージ・クラスは、16 メガバイトのチャンクを使用します。 例えば、`1GB` のファイルを読み取る場合、プラグインは、このファイルを複数の 16 メガバイトまたは 52 メガバイトのチャンクで読み取ります。 </td>
    </tr>
    <tr>
    <td><code>ibm.io/curl-debug</code></td>
@@ -684,7 +670,7 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>ibm.io/iam-endpoint</code></td>
-   <td>{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) の API エンドポイント。 </td>
+   <td>{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) の API エンドポイント。 </td>
    </tr>
    <tr>
    <td><code>ibm.io/kernel-cache</code></td>
@@ -716,7 +702,7 @@ subcollection: containers
    </tr>
    <tr>
    <td><code>ibm.io/tls-cipher-suite</code></td>
-   <td>{{site.data.keyword.cos_full_notm}} への接続が HTTPS エンドポイント経由で確立されるときに使用する必要がある TLS 暗号スイート。 暗号スイートの値は [OpenSSL 形式 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html) に従う必要があります。 すべてのストレージ・クラスで、デフォルトで <strong><code>AESGCM</code></strong> 暗号スイートが使用されます。  </td>
+   <td>{{site.data.keyword.cos_full_notm}} への接続が HTTPS エンドポイント経由で確立されるときに使用する必要がある TLS 暗号スイート。 暗号スイートの値は [OpenSSL 形式 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.openssl.org/docs/man1.0.2/apps/ciphers.html) に従う必要があります。 ワーカー・ノードで Ubuntu オペレーティング・システムが実行されている場合、ストレージ・クラスはデフォルトで <strong><code>AESGCM</code></strong> 暗号スイートを使用するようにセットアップされます。Red Hat オペレーティング・システムが実行されているワーカー・ノードの場合、デフォルトでは <strong><code>ecdhe_rsa_aes_128_gcm_sha_256</code></strong> 暗号スイートが使用されます。</td>
    </tr>
    </tbody>
    </table>
@@ -905,7 +891,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
     </tr>
     <tr>
     <td><code>spec.containers.securityContext.runAsUser</code></td>
-    <td>オプション: Kubernetes バージョン 1.12 以前が実行されているクラスター内で非 root ユーザーとしてアプリを実行するには、デプロイメント YAML で同時に `fsGroup` を設定せずに非 root ユーザーを定義して、ポッドの[セキュリティー・コンテキスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) を指定します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、パフォーマンスに影響を与えます。 所有するファイルの数によっては、権限を更新すると、ポッドが起動しなくなり、<code>Running</code> 状態にならなくなる場合があります。 </br></br>クラスターで Kubernetes バージョン 1.13 以降および {{site.data.keyword.Bluemix_notm}} Object Storage プラグインのバージョン 1.0.4 以降を実行する場合は、s3fs マウント・ポイントの所有者を変更できます。 所有者を変更するには、`runAsUser` および `fsGroup` を s3fs マウント・ポイントを所有する同じ非 root ユーザーの ID に設定して、セキュリティー・コンテキストを指定します。 これら 2 つの値が一致しない場合、マウント・ポイントは自動的に `root` ユーザーが所有します。  </td>
+    <td>オプション: Kubernetes バージョン 1.12 以前が実行されているクラスター内で非 root ユーザーとしてアプリを実行するには、デプロイメント YAML で同時に `fsGroup` を設定せずに非 root ユーザーを定義して、ポッドの[セキュリティー・コンテキスト ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) を指定します。 `fsGroup` を設定すると、ポッドのデプロイ時に、{{site.data.keyword.cos_full_notm}} プラグインによるバケット内のすべてのファイルのグループ権限の更新がトリガーされます。 権限の更新は書き込み操作であり、パフォーマンスに影響を与えます。 所有するファイルの数によっては、権限を更新すると、ポッドが起動しなくなり、<code>Running</code> 状態にならなくなる場合があります。 </br></br>クラスターで Kubernetes バージョン 1.13 以降および {{site.data.keyword.cloud_notm}} Object Storage プラグインのバージョン 1.0.4 以降を実行する場合は、s3fs マウント・ポイントの所有者を変更できます。 所有者を変更するには、`runAsUser` および `fsGroup` を s3fs マウント・ポイントを所有する同じ非 root ユーザーの ID に設定して、セキュリティー・コンテキストを指定します。 これら 2 つの値が一致しない場合、マウント・ポイントは自動的に `root` ユーザーが所有します。  </td>
     </tr>
     <tr>
     <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -975,7 +961,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 ## ステートフル・セットでのオブジェクト・ストレージの使用
 {: #cos_statefulset}
 
-データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、{{site.data.keyword.cos_full_notm}} を使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.Bluemix_notm}} Database as a Service ({{site.data.keyword.cloudant_short_notm}} など) を使用し、クラウドにデータを保管することもできます。
+データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、{{site.data.keyword.cos_full_notm}} を使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.cloud_notm}} Database as a Service ({{site.data.keyword.cloudant_short_notm}} など) を使用し、クラウドにデータを保管することもできます。
 {: shortdesc}
 
 開始前に、以下のことを行います。
@@ -985,7 +971,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 
 オブジェクト・ストレージを使用するステートフル・セットをデプロイするには、以下のようにします。
 
-1. ステートフル・セットと、そのステートフル・セットを公開するために使用するサービスに関する、構成ファイルを作成します。 下記の例は、3 つのレプリカを伴うステートフル・セットとして NGINX をデプロイする方法を示しています。レプリカごとに別個のバケットを使用する場合と、すべてのレプリカで同じバケットを共有する場合を示します。
+1. ステートフル・セットと、そのステートフル・セットを公開するために使用するサービスに関する、構成ファイルを作成します。 次の例は、3 つのレプリカからなるステートフル・セットとして NGINX をデプロイする方法を示しています。レプリカごとに別個のバケットを使用する場合と、すべてのレプリカで同じバケットを共有する場合の例を示しています。
 
    **レプリカごとに別個のバケットを使用する、3 つのレプリカを伴うステートフル・セットを作成する例**:
    ```
@@ -1049,7 +1035,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
    ```
    {: codeblock}
 
-   **すべてのレプリカで同じバケット `mybucket`** を共有する、3 つのレプリカを伴うステートフル・セットを作成する例:
+   **`mybucket` という 1 つのバケットを共有する、3 つのレプリカからなるステートフル・セットを作成する例**:
    ```
    apiVersion: v1
    kind: Service
@@ -1205,7 +1191,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 </tr>
 <tr>
 <td>デフォルトの回復力エンドポイント</td>
-<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。 </td>
+<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。</td>
 </tr>
 <tr>
 <td>チャンク・サイズ</td>
@@ -1242,7 +1228,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 </tr>
 <tr>
 <td>デフォルトの回復力エンドポイント</td>
-<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。 </td>
+<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。</td>
 </tr>
 <tr>
 <td>チャンク・サイズ</td>
@@ -1279,7 +1265,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 </tr>
 <tr>
 <td>デフォルトの回復力エンドポイント</td>
-<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。 </td>
+<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。</td>
 </tr>
 <tr>
 <td>チャンク・サイズ</td>
@@ -1316,7 +1302,7 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 </tr>
 <tr>
 <td>デフォルトの回復力エンドポイント</td>
-<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。 </td>
+<td>回復力エンドポイントは、クラスターの場所に基づいて自動的に設定されます。 詳しくは、[地域とエンドポイント](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints)を参照してください。</td>
 </tr>
 <tr>
 <td>チャンク・サイズ</td>
@@ -1336,3 +1322,5 @@ PVC で選択した設定に応じて、以下の方法で {{site.data.keyword.c
 </tr>
 </tbody>
 </table>
+
+

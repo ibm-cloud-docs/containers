@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ subcollection: containers
 ## クラスター管理の責任
 {: #responsibilities}
 
-IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、およびセキュリティー・サービスとともに、アプリをデプロイするためのエンタープライズ・クラウド・プラットフォームを提供します。 クラウドでのアプリおよびサービスのセットアップ、統合、および操作方法を選択します。
+IBM は、{{site.data.keyword.cloud_notm}} DevOps、AI、データ、およびセキュリティー・サービスとともに、アプリをデプロイするためのエンタープライズ・クラウド・プラットフォームを提供します。 クラウドでのアプリおよびサービスのセットアップ、統合、および操作方法を選択します。
 {:shortdesc}
 
 <table summary="この表は、IBM とお客様の責任を示しています。行は左から右に読みます。1 列目は各責任を表すアイコン、2 列目は説明です。">
@@ -47,7 +47,7 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
     <td>
     **IBM の責任**:
     <ul><li>各クラスターの保護された IBM 所有のインフラストラクチャー・アカウントに完全に管理された可用性の高い専用マスターをデプロイします。</li>
-    <li>ご使用の IBM Cloud インフラストラクチャー (SoftLayer) アカウントでワーカー・ノードをプロビジョンします。</li>
+    <li>ご使用の IBM Cloud インフラストラクチャー・アカウントでワーカー・ノードをプロビジョンします。</li>
     <li>VLAN やロード・バランサーなどのクラスター管理コンポーネントをセットアップします。</li>
     <li>ワーカー・ノードの追加と削除、デフォルトのサブネットの作成、永続ボリューム請求に対応するためのストレージ・ボリュームのプロビジョニングなど、インフラストラクチャーの追加要求を満たします。</li>
     <li>注文したインフラストラクチャー・リソースを統合して、ご使用のクラスター・アーキテクチャーで自動的に機能し、デプロイしたアプリおよびワークロードで使用できるようにします。</li></ul>
@@ -93,7 +93,7 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
       <li>マスターおよびワーカー・ノードのイメージを継続的にモニターして、脆弱性およびセキュリティー・コンプライアンス上の問題を検出します。</li>
       <li>ワーカー・ノードを 2 つのローカル SSD、AES 256 ビット暗号化データ・パーティションでプロビジョンします。</li>
       <li>パブリックおよびプライベートのサービス・エンドポイントなど、クラスターのネットワークの接続に関するオプションを提供します。</li>
-      <li>専用仮想マシン、ベアメタル、トラステッド・コンピューティングを含むベアメタルなど、コンピュートの分離のためのオプションを提供します。</li>
+      <li>専用仮想マシンやベアメタルなど、コンピュートの分離のためのオプションを提供します。</li>
       <li>Kubernetes 役割ベース・アクセス制御 (RBAC) を {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) と統合します。</li>
       </ul>
       <br><br>
@@ -112,7 +112,7 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
         <li>Kubernetes API にアクセスできるように、インストールされた Kubernetes コンポーネントでクラスターをプロビジョンします。</li>
         <li>[Istio](/docs/containers?topic=containers-istio#istio) や [Knative](/docs/containers?topic=containers-serverless-apps-knative) など、多くの管理対象アドオンを提供して、アプリの機能を拡張します。 IBM によって管理対象アドオンのインストールおよび更新が提供されるため、保守が簡素化されます。</li>
         <li>{{site.data.keyword.la_short}}、{{site.data.keyword.mon_short}}、Portworx など、選択したサード・パーティーのパートナーシップ・テクノロジーとのクラスター統合を提供します。</li>
-        <li>他の {{site.data.keyword.Bluemix_notm}} サービスへのサービス・バインディングを可能にする自動化を提供します。</li>
+        <li>他の {{site.data.keyword.cloud_notm}} サービスへのサービス・バインディングを可能にする自動化を提供します。</li>
         <li>`default` Kubernetes 名前空間でのデプロイメントが {{site.data.keyword.registrylong_notm}} からイメージをプルできるように、イメージ・プル・シークレットを使用してクラスターを作成します。</li>
         <li>ご使用のアプリで使用する永続ボリュームをサポートするストレージ・クラスおよびプラグインを提供します。</li>
         <li>アプリを外部から公開する場合に使用するために予約されているサブネット IP アドレスを使用してクラスターを作成します。</li>
@@ -148,3 +148,5 @@ IBM は、{{site.data.keyword.Bluemix_notm}} DevOps、AI、データ、および
 *   他のお客様の権利を侵害すること
 
 すべての使用条件については、[クラウド・サービスのご利用条件](/docs/overview/terms-of-use?topic=overview-terms#terms)を参照してください。
+
+

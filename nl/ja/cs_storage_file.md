@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# IBM Cloud の IBM ファイル・ストレージへのデータの保管
+# クラシック IBM Cloud File Storage へのデータの保管
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高速で柔軟なネットワーク接続型の永続的 NFS ベース・ファイル・ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.Bluemix_notm}} のファイル・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 価格情報については、[課金](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)を参照してください。
+{{site.data.keyword.cloud_notm}} のファイル・ストレージは、Kubernetes 永続ボリューム (PV) を使用してアプリに追加できる高速で柔軟なネットワーク接続型の永続的 NFS ベース・ファイル・ストレージです。 ワークロードの要件を満たす GB サイズと IOPS を考慮して、事前定義されたストレージ層の中から選択できます。 {{site.data.keyword.cloud_notm}} のファイル・ストレージが適切なストレージ・オプションかどうかを確認するには、[ストレージ・ソリューションの選択](/docs/containers?topic=containers-storage_planning#choose_storage_solution)を参照してください。 価格情報については、[課金](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing)を参照してください。
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、クラスターで Kubernetes バージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、またはそれ以降が実行されていると、ファイル・ストレージをプロビジョンできます。 NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
+{{site.data.keyword.cloud_notm}} のファイル・ストレージは、パブリック・ネットワークに接続できるようにセットアップされた標準クラスター専用です。 ご使用のクラスターがパブリック・ネットワークにアクセスできない場合は (ファイアウォール保護下のプライベート・クラスターや、プライベート・サービス・エンドポイントのみが有効化されているクラスターなど)、クラスターで Kubernetes バージョン 1.13.4_1513、1.12.6_1544、1.11.8_1550、またはそれ以降が実行されていると、ファイル・ストレージをプロビジョンできます。 NFS ファイル・ストレージ・インスタンスは、単一のゾーンに固有のものです。 マルチゾーン・クラスターを使用している場合は、[マルチゾーン永続ストレージ・オプション](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)を検討してください。
 {: important}
 
 ## ファイル・ストレージ構成の決定
@@ -164,7 +162,7 @@ subcollection: containers
          </tbody></table>
 
 5. クラスターまたは永続ボリューム請求 (PVC) が削除された後もデータを保持するかどうかを選択します。
-   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー (SoftLayer) アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のファイル・ストレージを使用する](#existing_file)手順に従う必要があります。
+   - データを保持する場合、`retain` ストレージ・クラスを選択します。 PVC を削除すると、PVC のみが削除されます。 PV と、IBM Cloud インフラストラクチャー・アカウント内の物理ストレージ・デバイスと、データは残ります。 ストレージを回収し、クラスターで再使用するには、PV を削除し、[既存のファイル・ストレージを使用する](#existing_file)手順に従う必要があります。
    - PVC を削除するときに PV、データ、物理ファイル・ストレージ・デバイスが削除されるようにするには、`retain` なしのストレージ・クラスを選択します。
 
 6. 時間単位と月単位のどちらの課金方法にするかを選択します。 詳しくは、[料金設定 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing) を参照してください。 デフォルトでは、すべてのファイル・ストレージ・デバイスが時間単位の課金タイプでプロビジョンされます。
@@ -178,11 +176,11 @@ subcollection: containers
 ## ファイル・ストレージをアプリに追加する
 {: #add_file}
 
-ファイル・ストレージをクラスターに[動的にプロビジョン](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、お客様の IBM Cloud インフラストラクチャー (SoftLayer) アカウントで物理ストレージ・デバイスが注文されます。
+ファイル・ストレージをクラスターに[動的にプロビジョン](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning)するために、永続ボリューム請求 (PVC) を作成します。 動的プロビジョニングでは、対応する永続ボリューム (PV) が自動的に作成され、お客様の IBM Cloud インフラストラクチャー・アカウントで物理ストレージ・デバイスが注文されます。
 {:shortdesc}
 
 開始前に、以下のことを行います。
-- ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャー (SoftLayer) の IP 範囲に[発信アクセスを許可](/docs/containers?topic=containers-firewall#pvc)し、PVC を作成できるようにします。
+- ファイアウォールがある場合は、クラスターのあるゾーンの IBM Cloud インフラストラクチャーの IP 範囲に[発信アクセスを許可](/docs/containers?topic=containers-firewall#pvc)し、PVC を作成できるようにします。
 - [事前定義されたストレージ・クラスを選択する](#file_predefined_storageclass)か、または[カスタマイズしたストレージ・クラス](#file_custom_storageclass)を作成します。
 
 ステートフル・セットにファイル・ストレージをデプロイしようとお考えですか? 詳しくは、[ステートフル・セットでのファイル・ストレージの使用](#file_statefulset)を参照してください。
@@ -482,7 +480,7 @@ subcollection: containers
 **クラスターの外部にプロビジョンされた永続ストレージの場合** </br>
 以前にプロビジョンして、まだクラスターで使用したことがない既存のストレージを使用するには、そのストレージをワーカー・ノードと同じサブネットで使用できるようにする必要があります。
 
-1.  {: #external_storage}[IBM Cloud インフラストラクチャー (SoftLayer) ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/classic?) で、**「ストレージ」**をクリックします。
+1.  {: #external_storage}[IBM Cloud インフラストラクチャー・ポータル ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/classic?) で、**「ストレージ」**をクリックします。
 2.  **「File Storage」**をクリックして、**「アクション」**メニューから**「ホストの許可」**を選択します。
 3.  **「サブネット」**を選択します。
 4.  ドロップダウン・リストから、ワーカー・ノードが接続されているプライベート VLAN サブネットを選択します。 ワーカー・ノードのサブネットを確認するには、`ibmcloud ks workers --cluster <cluster_name>` を実行して、ワーカー・ノードの `Private IP` をドロップダウン・リストにあるサブネットと比較します。
@@ -621,7 +619,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## ステートフル・セットでのファイル・ストレージの使用
 {: #file_statefulset}
 
-データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ファイル・ストレージを使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.Bluemix_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
+データベースなどのステートフルなアプリがある場合は、そのアプリのデータを保管するために、ファイル・ストレージを使用するステートフル・セットを作成することができます。 別の方法として、{{site.data.keyword.cloud_notm}} Database as a Service を使用し、クラウドにデータを保管することもできます。
 {: shortdesc}
 
 **ファイル・ストレージをステートフル・セットに追加する場合、どんな点に留意する必要がありますか?** </br>
@@ -825,11 +823,11 @@ PV が正常に作成され、PVC にバインドされました。 これで、
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
-              mountPath: /usr/share/nginx/html
-            - name: wwwww
-              mountPath: /tmp1
-      volumeClaimTemplates:
+            - name: myvol1
+               mountPath: /usr/share/nginx/html
+            - name: myvol2
+               mountPath: /tmp1
+       volumeClaimTemplates:
       - metadata:
           name: myvol1
         spec:
@@ -983,7 +981,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ストレージ容量またはパフォーマンスを向上させるために既存のボリュームを変更することができます。
 {: shortdesc}
 
-課金方法について不明な点がある場合や、{{site.data.keyword.Bluemix_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ファイル共有容量の拡張](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity)を参照してください。
+課金方法について不明な点がある場合や、{{site.data.keyword.cloud_notm}} コンソールを使用してストレージを変更する手順を調べたい場合は、[ファイル共有容量の拡張](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity)を参照してください。
 {: tip}
 
 1. クラスターの PVC をリストし、**VOLUME** 列に表示される関連 PV の名前をメモします。
@@ -1023,7 +1021,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    ```
    {: screen}
 
-3. IBM Cloud インフラストラクチャー (SoftLayer) アカウントでボリュームのサイズまたは IOPS を変更します。
+3. IBM Cloud インフラストラクチャー・アカウントでボリュームのサイズまたは IOPS を変更します。
 
    パフォーマンス・ストレージの例:
    ```
@@ -1038,7 +1036,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    {: pre}
 
    <table>
-   <caption>コマンドのコンポーネントについて</caption>
+   <caption>コマンドの構成要素について</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/> YAML ファイルの構成要素について</th>
    </thead>
@@ -1111,7 +1109,7 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## デフォルトの NFS バージョンの変更
 {: #nfs_version}
 
-ファイル・ストレージのバージョンによって、{{site.data.keyword.Bluemix_notm}} ファイル・ストレージ・サーバーとの通信に使用されるプロトコルが決まります。 デフォルトでは、すべてのファイル・ストレージ・インスタンスは NFS バージョン 4 でセットアップされます。アプリが正しく機能するために特定のバージョンが必要な場合は、既存の PV を古い NFS バージョンに変更できます。
+ファイル・ストレージのバージョンによって、{{site.data.keyword.cloud_notm}} ファイル・ストレージ・サーバーとの通信に使用されるプロトコルが決まります。 デフォルトでは、すべてのファイル・ストレージ・インスタンスは NFS バージョン 4 でセットアップされます。アプリが正しく機能するために特定のバージョンが必要な場合は、既存の PV を古い NFS バージョンに変更できます。
 {: shortdesc}
 
 デフォルトの NFS バージョンを変更するには、新規ストレージ・クラスを作成してクラスター内のファイル・ストレージを動的にプロビジョンするか、ポッドにマウントされている既存の PV を変更します。
@@ -1233,182 +1231,68 @@ PV が正常に作成され、PVC にバインドされました。 これで、
 ## ストレージ・クラス・リファレンス
 {: #file_storageclass_reference}
 
-### ブロンズ
-{: #file_bronze}
+| 特性 | 設定|
+|:-----------------|:-----------------|
+| 名前 | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| タイプ | [エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| ファイル・システム | NFS|
+| IOPS/GB | 2|
+| サイズの範囲 (ギガバイト単位) | 20 から 12000 Gi|
+| ハード・ディスク | SSD|
+| 課金 | 時間単位|
+| 料金設定 | [料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="ファイル・ストレージ・クラス: ブロンズ" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
-<table>
-<caption>ファイル・ストレージ・クラス: ブロンズ</caption>
-<thead>
-<th>特性</th>
-<th>設定</th>
-</thead>
-<tbody>
-<tr>
-<td>名前</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>タイプ</td>
-<td>[エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>ファイル・システム</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS/GB</td>
-<td>2</td>
-</tr>
-<tr>
-<td>サイズの範囲 (ギガバイト単位)</td>
-<td>20 から 12000 Gi</td>
-</tr>
-<tr>
-<td>ハード・ディスク</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>課金</td>
-<td>時間単位</td>
-</tr>
-<tr>
-<td>料金設定</td>
-<td>[料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| 特性 | 設定|
+|:-----------------|:-----------------|
+| 名前 | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| タイプ | [エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| ファイル・システム | NFS|
+| IOPS/GB | 4|
+| サイズの範囲 (ギガバイト単位) | 20 から 12000 Gi|
+| ハード・ディスク | SSD|
+| 課金 | 時間単位|
+| 料金設定 | [料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="ファイル・ストレージ・クラス: シルバー" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| 特性 | 設定|
+|:-----------------|:-----------------|
+| 名前 | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| タイプ | [エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| ファイル・システム | NFS|
+| IOPS/GB | 10|
+| サイズの範囲 (ギガバイト単位) | 20 から 4000 Gi|
+| ハード・ディスク | SSD|
+| 課金 | 時間単位|
+| 料金設定 | [料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="ファイル・ストレージ・クラス: ゴールド" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### シルバー
-{: #file_silver}
-
-<table>
-<caption>ファイル・ストレージ・クラス: シルバー</caption>
-<thead>
-<th>特性</th>
-<th>設定</th>
-</thead>
-<tbody>
-<tr>
-<td>名前</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>タイプ</td>
-<td>[エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>ファイル・システム</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS/GB</td>
-<td>4</td>
-</tr>
-<tr>
-<td>サイズの範囲 (ギガバイト単位)</td>
-<td>20 から 12000 Gi</td>
-</tr>
-<tr>
-<td>ハード・ディスク</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>課金</td>
-<td>時間単位</li></ul></td>
-</tr>
-<tr>
-<td>料金設定</td>
-<td>[料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### ゴールド
-{: #file_gold}
-
-<table>
-<caption>ファイル・ストレージ・クラス: ゴールド</caption>
-<thead>
-<th>特性</th>
-<th>設定</th>
-</thead>
-<tbody>
-<tr>
-<td>名前</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>タイプ</td>
-<td>[エンデュランス・ストレージ](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>ファイル・システム</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS/GB</td>
-<td>10</td>
-</tr>
-<tr>
-<td>サイズの範囲 (ギガバイト単位)</td>
-<td>20 から 4000 Gi</td>
-</tr>
-<tr>
-<td>ハード・ディスク</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>課金</td>
-<td>時間単位</li></ul></td>
-</tr>
-<tr>
-<td>料金設定</td>
-<td>[料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### カスタム
-{: #file_custom}
-
-<table>
-<caption>ファイル・ストレージ・クラス: カスタム</caption>
-<thead>
-<th>特性</th>
-<th>設定</th>
-</thead>
-<tbody>
-<tr>
-<td>名前</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>タイプ</td>
-<td>[パフォーマンス](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>ファイル・システム</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS とサイズ</td>
-<td><p><strong>サイズの範囲 (ギガバイト単位) / IOPS の範囲 (100 の倍数)</strong></p><ul><li>20 から 39 Gi / 100 から 1000 IOPS</li><li>40 から 79 Gi / 100 から 2000 IOPS</li><li>80 から 99 Gi / 100 から 4000 IOPS</li><li>100 から 499 Gi / 100 から 6000 IOPS</li><li>500 から 999 Gi / 100 から 10000 IOPS</li><li>1000 から 1999 Gi / 100 から 20000 IOPS</li><li>2000 から 2999 Gi / 200 から 40000 IOPS</li><li>3000 から 3999 Gi / 200 から 48000 IOPS</li><li>4000 から 7999 Gi / 300 から 48000 IOPS</li><li>8000 から 9999 Gi / 500 から 48000 IOPS</li><li>10000 から 12000 Gi / 1000 から 48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>ハード・ディスク</td>
-<td>ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプが決まります。 ギガバイトに対する IOPS の比率を求めるには、IOPS をストレージ・サイズで除算します。 </br></br>例: </br>100 IOPS で 500Gi のストレージを選択しました。 比率は 0.2 です (100 IOPS/500Gi)。 </br></br><strong>比率に応じた大まかなハード・ディスクのタイプ</strong><ul><li>0.3 以下: SATA</li><li>0.3 より大: SSD</li></ul></td>
-</tr>
-<tr>
-<td>課金</td>
-<td>時間単位</li></ul></td>
-</tr>
-<tr>
-<td>料金設定</td>
-<td>[料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| 特性 | 設定|
+|:-----------------|:-----------------|
+| 名前 | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| タイプ | [パフォーマンス](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| ファイル・システム | NFS|
+| IOPS とサイズ | <p><strong>サイズの範囲 (ギガバイト単位) / IOPS の範囲 (100 の倍数)</strong></p><ul><li>20 から 39 Gi / 100 から 1000 IOPS</li><li>40 から 79 Gi / 100 から 2000 IOPS</li><li>80 から 99 Gi / 100 から 4000 IOPS</li><li>100 から 499 Gi / 100 から 6000 IOPS</li><li>500 から 999 Gi / 100 から 10000 IOPS</li><li>1000 から 1999 Gi / 100 から 20000 IOPS</li><li>2000 から 2999 Gi / 200 から 40000 IOPS</li><li>3000 から 3999 Gi / 200 から 48000 IOPS</li><li>4000 から 7999 Gi / 300 から 48000 IOPS</li><li>8000 から 9999 Gi / 500 から 48000 IOPS</li><li>10000 から 12000 Gi / 1000 から 48000 IOPS</li></ul>|
+| ハード・ディスク | ギガバイトに対する IOPS の比率によって、プロビジョンされるハード・ディスクのタイプが決まります。 ギガバイトに対する IOPS の比率を求めるには、IOPS をストレージ・サイズで除算します。 </br></br>例: </br>100 IOPS で 500Gi のストレージを選択しました。 比率は 0.2 です (100 IOPS/500Gi)。 </br></br><strong>比率に応じた大まかなハード・ディスクのタイプ</strong><ul><li>0.3 以下: SATA</li><li>0.3 より大: SSD</li></ul>|
+| 課金 | 時間単位|
+| 料金設定 | [料金情報 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="ファイル・ストレージ・クラス: カスタム" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1601,3 +1485,6 @@ PV が正常に作成され、PVC にバインドされました。 これで、
    mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
+
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,7 +38,7 @@ subcollection: containers
 1 つのホストは、必ず 1 つの Ingress リソースだけに定義するようにしてください。 1 つのホストが複数の Ingress リソースに定義された場合、ALB はトラフィックを正しく転送しないことがあり、その場合エラーが発生する場合があります。
 {: tip}
 
-始めに、以下の [{{site.data.keyword.Bluemix_notm}} IAM アクセス・ポリシー](/docs/containers?topic=containers-users#platform)があることを確認してください。
+始めに、以下の [{{site.data.keyword.cloud_notm}} IAM アクセス・ポリシー](/docs/containers?topic=containers-users#platform)があることを確認してください。
   - クラスターに対する**エディター**または**管理者**のプラットフォーム役割
   - **ライター**または**管理者**のサービス役割
 
@@ -133,6 +133,7 @@ subcollection: containers
         ibmcloud ks alb-configure --albID <ALB_ID> --enable
         ```
         {: pre}
+        ポッドが再始動すると、[準備状況検査](/docs/containers?topic=containers-ingress-settings#readiness-check)が実施され、そのために、すべての Ingress リソース・ファイルが解析されるまで、ALB ポッドはトラフィック要求のルーティングを試行できなくなります。この準備状況検査は、要求が失われることを防止します。この検査は、デフォルトで最大 5 分かかります。        {: note}
 
 3. ALB のログを確認します。
     1.  クラスター内で稼働している ALB ポッドの ID を取得します。
@@ -185,7 +186,7 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
         * CLI がタイムアウトを返し、ワーカー・ノードを保護するカスタム・ファイアウォールがある場合は、[ファイアウォール](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)で ICMP を許可していることを確認します。
         * ping をブロックしているファイアウォールがなく、引き続き ping がタイムアウトになる場合は、[ALB ポッドの状況を確認](#check_pods)します。
 
-    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](/docs/containers?topic=containers-ingress#planning) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](/docs/containers?topic=containers-add_workers#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
+    * 複数ゾーン・クラスターのみの場合: MZLB ヘルス・チェックを使用して、ALB IP の状況を確認できます。 MZLB について詳しくは、[複数ゾーン・ロード・バランサー (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components) を参照してください。 MZLB ヘルス・チェックは、`<cluster_name>.<region_or_zone>.containers.appdomain.cloud` の形式の新しい Ingress サブドメインを持つクラスターのみに使用できます。 クラスターでまだ `<cluster_name>.<region>.containers.mybluemix.net` の古い形式を使用している場合は、[単一ゾーン・クラスターを複数ゾーンに変換](/docs/containers?topic=containers-add_workers#add_zone)します。 クラスターに新しい形式のサブドメインが割り当てられますが、古いサブドメイン形式も引き続き使用できます。 別の方法として、新しいサブドメイン形式が自動的に割り当てられた新しいクラスターを注文することもできます。
 
     以下の HTTP cURL コマンドは、`albhealth` ホストを使用します。このホストは、{{site.data.keyword.containerlong_notm}} によって構成され、ALB IP の `healthy` または `unhealthy` の状況を返します。
         ```
@@ -430,11 +431,11 @@ Ingress サブドメインと ALB のパブリック IP アドレスの可用性
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
+-   {{site.data.keyword.cloud_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.cloud_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
-    {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
+    {{site.data.keyword.cloud_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://cloud.ibm.com/kubernetes/slack)してください。
     {: tip}
--   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
+-   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.cloud_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。

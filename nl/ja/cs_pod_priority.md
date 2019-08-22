@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -56,7 +56,7 @@ _図: ポッドの優先度のシナリオ_
 **詳細情報**: [ポッドの優先度および回避 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/) に関する Kubernetes の資料を参照してください。
 
 **ポッドの優先度のアドミッション・コントローラーを無効にできるかどうか**</br>
-いいえ。ポッドの優先度を使用しない場合は、`globalDefault` を設定したりポッドのデプロイメントに優先度クラスを含めたりしないでください。 IBM が[デフォルトの優先度クラス](#default_priority_class)を使用してデプロイするクラスターに不可欠なポッドを除き、すべてのポッドのデフォルトはゼロです。 ポッドの優先度は相対的であるため、この基本セットアップにより、クラスターに不可欠なポッドがリソースについて優先度付けされ、配置されている既存のスケジューリング・ポリシーに従ってその他のポッドがスケジュールされます。
+いいえ。ポッドの優先度を使用しない場合は、`globalDefault` を設定したりポッドのデプロイメントに優先度クラスを含めたりしないでください。 IBM が[デフォルトの優先度クラス](#default_priority_class)を使用してデプロイするクラスターに不可欠なポッドを除き、すべてのポッドのデフォルトはゼロです。 ポッドの優先度は相対的なものであるため、この基本セットアップでは、クラスターに不可欠なポッドがリソースを優先的に使用できるようにされ、その他のポッドは設定されている既存のスケジューリング・ポリシーに従ってスケジュールされます。
 
 **リソース割り当てがポッドの優先度に与える影響**</br>
 ポッドの優先度は、リソース割り当て (Kubernetes 1.12 以降を実行するクラスター用の[割り当てスコープ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) を含む) と組み合わせて使用できます。 割り当てスコープを使用すると、ポッドの優先度を考慮してリソース割り当てを設定できます。 優先度の高いポッドは、優先度の低いポッドより先に、リソース割り当てによって制限されているシステム・リソースを消費できます。
@@ -94,7 +94,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 開始前に、以下のことを行います。
 * [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+* `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 
 優先度クラスを使用する場合:
@@ -176,7 +176,7 @@ kubectl get pods --all-namespaces -o custom-columns=NAME:.metadata.name,PRIORITY
 
 開始前に、以下のことを行います。
 * [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* ポッドをデプロイする名前空間に対して[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
+* ポッドをデプロイする名前空間に対して[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
 * Kubernetes バージョン 1.11 以降のクラスターを[作成](/docs/containers?topic=containers-clusters#clusters_ui)するか、またはクラスターを Kubernetes バージョン 1.11 以降に[更新](/docs/containers?topic=containers-update#update)します。
 * 優先度によって既存のポッドが回避され、クラスターのリソースの消費方法に影響を与える可能性があるため、[優先度スケジューリングの仕組みを理解](#priority_scheduling)します。
 

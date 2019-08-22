@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -24,10 +24,11 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Fluentd および Ingress ALB の変更ログ
 {: #cluster-add-ons-changelog}
 
-{{site.data.keyword.containerlong}} クラスターには、IBM によって自動的に更新される Fluentd や Ingress ALB などのコンポーネントが付属しています。一部のコンポーネントは、自動更新を無効にして、マスター・ノードおよびワーカー・ノードとは別に手動で更新することもできます。各バージョンの変更の要約について、以下のセクションの表にまとめます。
+{{site.data.keyword.containerlong}} クラスターには、IBM によって自動的に更新される Fluentd や Ingress ALB などのコンポーネントが付属しています。 一部のコンポーネントは、自動更新を無効にして、マスター・ノードおよびワーカー・ノードとは別に手動で更新することもできます。 各バージョンの変更の要約について、以下のセクションの表にまとめます。
 {: shortdesc}
 
 Fluentd および Ingress ALB の更新の管理について詳しくは、[クラスター・コンポーネントの更新](/docs/containers?topic=containers-update#components)を参照してください。
@@ -38,7 +39,7 @@ Fluentd および Ingress ALB の更新の管理について詳しくは、[ク�
 {{site.data.keyword.containerlong_notm}} クラスター内の Ingress アプリケーション・ロード・バランサー (ALB) のビルド・バージョンの変更内容を示します。
 {:shortdesc}
 
-Ingress ALB コンポーネントが更新されると、すべての ALB ポッド内の `nginx-ingress` と `ingress-auth` のコンテナーが最新のビルド・バージョンに更新されます。デフォルトでは、このコンポーネントに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。詳しくは、[Ingress アプリケーション・ロード・バランサーの更新](/docs/containers?topic=containers-update#alb)を参照してください。
+Ingress ALB コンポーネントが更新されると、すべての ALB ポッド内の `nginx-ingress` と `ingress-auth` のコンテナーが最新のビルド・バージョンに更新されます。 デフォルトでは、このコンポーネントに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。 詳しくは、[Ingress アプリケーション・ロード・バランサーの更新](/docs/containers?topic=containers-update#alb)を参照してください。
 
 Ingress ALB コンポーネントのビルドごとの変更の要約については、以下の表を参照してください。
 
@@ -58,6 +59,52 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 </thead>
 <tbody>
 <tr>
+<td>515 / 334</td>
+<td>2019 年 7 月 30 日</td>
+<td><ul>
+<li>要求が失われることを防止するための、ALB ポッド再始動の準備状況検査を追加。ALB ポッドは、すべての Ingress リソース・ファイルが解析されるまで (デフォルトで最大 5 分)、トラフィック要求のルーティングを試行しません。デフォルトのタイムアウト値の変更手順などの詳細については、[ALB ポッドの再始動準備状況検査時間を増やす](/docs/containers?topic=containers-ingress-settings#readiness-check)を参照してください。</li>
+<li>[CVE-2019-13636 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13636) および [CVE-2019-13638 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13638) の GNU `パッチ`の脆弱性を修正。</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>512 / 334</td>
+<td>2019 年 7 月 17 日</td>
+<td><ul>
+<li>[CVE-2016-3189![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9924) の `rbash` の脆弱性を修正。</li>
+<li>apt パッケージ `curl`、`bash`、`vim`、`tcpdump`、および `ca-certificates` から、`nginx-ingress` イメージを削除。</li></ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>497 / 334</td>
+<td>2019 年 7 月 14 日</td>
+<td><ul>
+<li>ALB プロキシー・サーバーとバックエンド・アプリのアップストリーム・サーバーとの間でキープアライブ接続が開いたままになる最大時間を設定するための [`upstream-keepalive-timeout`](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout) を追加。</li>
+<li>ALB ソケット・リスナーの数を「クラスターごとに 1 つ」から「ワーカー・ノードごとに 1 つ」に増やすための [`reuse-port`](/docs/containers?topic=containers-ingress-settings#reuse-port) ディレクティブのサポートを追加。</li>
+<li>ポート番号が変更されたときに ALB を公開するロード・バランサーの冗長更新を削除。</li>
+<li>[CVE-2016-3189 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3189) および [CVE-2019-12900 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900) の `bzip2` の脆弱性を修正。</li>
+<li>[CVE-2018-20843 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20843) の Expat の脆弱性を修正。</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
+<td>477 / 331</td>
+<td>2019 年 6 月 24 日</td>
+<td>[CVE-2016-6153 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-6153)、[CVE-2017-10989 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-10989)、[CVE-2017-13685 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-13685)、[CVE-2017-2518 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2518)、[CVE-2017-2519 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2519)、[CVE-2017-2520 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-2520)、[CVE-2018-20346 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20346)、[CVE-2018-20505 ![外部アイコン・リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20505)、[CVE-2018-20506 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20506)、[CVE-2019-8457 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457)、[CVE-2019-9936 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9936)、および [CVE-2019-9937 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9937) の SQLite の脆弱性を修正。
+
+</td>
+<td>-</td>
+</tr>
+<tr>
+<td>473 / 331</td>
+<td>2019 年 6 月 18 日</td>
+<td><ul>
+<li>[CVE-2019-5953 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5953) および [CVE-2019-12735 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12735) の Vim の脆弱性を修正。</li>
+<li>ALB の NGINX バージョンが 1.15.12 に更新されました。</li></ul>
+</td>
+<td>-</td>
+</tr>
+<tr>
 <td>470 / 330</td>
 <td>2019 年 6 月 7 日</td>
 <td>[CVE-2019-8457 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8457) のバークレー DB の脆弱性が修正されました。
@@ -74,7 +121,7 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 <tr>
 <td>467 / 329</td>
 <td>2019 年 6 月 3 日</td>
-<td>[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-3893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3893)、[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、および [CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846) の GnuTLS の脆弱性が修正されました。
+<td>[CVE-2019-3829 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3829)、[CVE-2019-3836 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3836)、[CVE-2019-3893 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3893)、[CVE-2018-10844 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10845)、[CVE-2018-10845 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10844)、および [CVE-2018-10846 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-10846) の GnuTLS の脆弱性を修正。
 </td>
 <td>-</td>
 </tr>
@@ -87,7 +134,7 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 <tr>
 <td>457 / 329</td>
 <td>2019 年 5 月 23 日</td>
-<td>イメージ・スキャンの Go の脆弱性が修正されました。</td>
+<td>[CVE-2019-11841 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11841) の Go の脆弱性を修正。</td>
 <td>-</td>
 </tr>
 <tr>
@@ -121,7 +168,7 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 <td>408 / 304</td>
 <td>2019 年 3 月 5 日</td>
 <td>-</td>
-<td>ログアウト機能、トークンの有効期限、および `OAuth` 許可コールバックに関連する許可統合のバグが修正されました。これらの修正は、[`appid-auth`](/docs/containers?topic=containers-ingress_annotation#appid-auth) アノテーションを使用して {{site.data.keyword.appid_full_notm}} 許可を有効にした場合にのみ実装されます。 これらの修正を実装するために追加ヘッダーが導入されるので、合計ヘッダー・サイズが大きくなります。 独自ヘッダーのサイズと応答の合計サイズによっては、使用する[プロキシー・バッファー・アノテーション](/docs/containers?topic=containers-ingress_annotation#proxy-buffer)の調整が必要になる可能性があります。</td>
+<td>ログアウト機能、トークンの有効期限、および `OAuth` 許可コールバックに関連する許可統合のバグが修正されました。 これらの修正は、[`appid-auth`](/docs/containers?topic=containers-ingress_annotation#appid-auth) アノテーションを使用して {{site.data.keyword.appid_full_notm}} 許可を有効にした場合にのみ実装されます。 これらの修正を実装するために追加ヘッダーが導入されるので、合計ヘッダー・サイズが大きくなります。 独自ヘッダーのサイズと応答の合計サイズによっては、使用する[プロキシー・バッファー・アノテーション](/docs/containers?topic=containers-ingress_annotation#proxy-buffer)の調整が必要になる可能性があります。</td>
 </tr>
 <tr>
 <td>406 / 301</td>
@@ -149,7 +196,7 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 <li>{{site.data.keyword.appid_short_notm}} の場所ディレクティブが更新され、`app-id` アノテーションを、`proxy-buffers`、`proxy-buffer-size`、および `proxy-busy-buffer-size` アノテーションと一緒に使用できるようになりました。</li>
 <li>バグが修正され、情報ログにエラーのラベルが付かないようになりました。</li>
 </ul></td>
-<td>TLS 1.0 と 1.1 がデフォルトで無効になります。 アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。 TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、[この手順](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)に従って必要な TLS バージョンを手動で有効にしてください。 アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.Bluemix_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。</td>
+<td>TLS 1.0 と 1.1 がデフォルトで無効になります。 アプリに接続するクライアントが TLS 1.2 に対応していれば、何の対処も必要ありません。 TLS 1.0 または 1.1 のサポートを必要とする既存のクライアントをまだ使用する場合は、[この手順](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)に従って必要な TLS バージョンを手動で有効にしてください。 アプリへのアクセスにクライアントで使用している TLS バージョンを確認する方法について詳しくは、こちらの [{{site.data.keyword.cloud_notm}} のブログ投稿](https://www.ibm.com/blogs/bluemix/2018/11/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default/)を参照してください。</td>
 </tr>
 <tr>
 <td>393 / 291</td>
@@ -184,7 +231,7 @@ Ingress ALB コンポーネントのビルドごとの変更の要約につい�
 {{site.data.keyword.containerlong_notm}} クラスター内のロギング用 Fluentd コンポーネントのビルド・バージョンの変更内容を示します。
 {:shortdesc}
 
-デフォルトでは、このコンポーネントに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。詳しくは、[Fluentd の自動更新の管理](/docs/containers?topic=containers-update#logging-up)を参照してください。
+デフォルトでは、このコンポーネントに対する自動更新は有効になっていますが、自動更新を無効にして手動で更新することもできます。 詳しくは、[Fluentd の自動更新の管理](/docs/containers?topic=containers-update#logging-up)を参照してください。
 
 Fluentd コンポーネントのビルドごとの変更の要約については、以下の表を参照してください。
 
@@ -202,6 +249,12 @@ Fluentd コンポーネントのビルドごとの変更の要約については
 <th>抜本的な変更</th>
 </tr>
 </thead>
+<tr>
+<td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
+<td>2019 年 7 月 22 日</td>
+<td>[CVE-2019-8905 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8905)、[CVE-2019-8906 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8906)、および [CVE-2019-8907 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-8907) への対策として Alpine パッケージを更新。</td>
+<td>-</td>
+</tr>
 <tr>
 <td>e7c10d74350dc64d4d92ba7f72bb4ff9219315d2</td>
 <td>2019 年 5 月 30 日</td>

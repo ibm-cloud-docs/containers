@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, containers
 
 subcollection: containers
 
@@ -30,23 +30,23 @@ subcollection: containers
 {{site.data.keyword.containerlong}} を使用すると、実動しているアプリのコンテナー・ワークロードを素早く安全にデプロイできます。 クラスター戦略を計画する場合は、詳細情報を確認して、[Kubernetes![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/) によって自動化されたデプロイ、スケーリング、およびオーケストレーションの管理機能を最大限に活用するようにセットアップを最適化してください。
 {:shortdesc}
 
-## {{site.data.keyword.Bluemix_notm}} へのワークロードの移動
+## {{site.data.keyword.cloud_notm}} へのワークロードの移動
 {: #cloud_workloads}
 
-ワークロードを {{site.data.keyword.Bluemix_notm}} に移動する理由はさまざまですが、その例としては、総所有コストの削減、各種の要件に準拠しているセキュアな環境でのアプリの可用性向上、ユーザーの要求に応じたスケールアップとスケールダウンなどが挙げられます。 {{site.data.keyword.containerlong_notm}} では、コンテナー・テクノロジーとオープン・ソース・ツール (Kubernetes など) を組み合わせているため、異なるクラウド環境間でマイグレーションできるクラウド・ネイティブ・アプリを作成して、ベンダーの囲い込みを回避できます。
+ワークロードを {{site.data.keyword.cloud_notm}} に移動する理由はさまざまですが、その例としては、総所有コストの削減、各種の要件に準拠しているセキュアな環境でのアプリの可用性向上、ユーザーの要求に応じたスケールアップとスケールダウンなどが挙げられます。 {{site.data.keyword.containerlong_notm}} では、コンテナー・テクノロジーとオープン・ソース・ツール (Kubernetes など) を組み合わせているため、異なるクラウド環境間でマイグレーションできるクラウド・ネイティブ・アプリを作成して、ベンダーの囲い込みを回避できます。
 {:shortdesc}
 
 では、どのようにクラウドを導入しますか? そこに至る過程で、どのようなオプションがあるでしょうか? そして、クラウドの導入後にワークロードをどのようにして管理しますか?
 
-このページでは、{{site.data.keyword.containerlong_notm}} 上の Kubernetes デプロイメントに関するいくつかの戦略について説明します。 いつでも、[Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) を通じて IBM のチームと自由にやり取りしてください。
+このページでは、{{site.data.keyword.containerlong_notm}} 上の Kubernetes デプロイメントに関するいくつかの戦略について説明します。 いつでも、[Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-kubernetes-service.slack.com) を通じて IBM のチームと自由にやり取りしてください。
 
 Slack をまだご利用でない場合は、 [招待を要求してください。](https://bxcs-slack-invite.mybluemix.net/)
 {: tip}
 
-### {{site.data.keyword.Bluemix_notm}} には何を移動できますか?
+### {{site.data.keyword.cloud_notm}} には何を移動できますか?
 {: #move_to_cloud}
 
-{{site.data.keyword.Bluemix_notm}} を使用すると、[オフプレミス、オンプレミス、またはハイブリッド・クラウドの各環境](/docs/containers?topic=containers-cs_ov#differentiation)で、Kubernetes クラスターを柔軟に作成できます。 次の表では、ユーザーがさまざまなタイプのクラウドに一般に移動するワークロードのタイプを例示しています。 両方の環境でクラスターが実行されるハイブリッド・アプローチを選択することもできます。
+{{site.data.keyword.cloud_notm}} を使用すると、[オフプレミス、オンプレミス、またはハイブリッド・クラウドの各環境](/docs/containers?topic=containers-cs_ov#differentiation)で、Kubernetes クラスターを柔軟に作成できます。 次の表では、ユーザーがさまざまなタイプのクラウドに一般に移動するワークロードのタイプを例示しています。 　両方の環境でクラスターが実行されるハイブリッド・アプローチを選択することもできます。
 {: shortdesc}
 
 | ワークロード | {{site.data.keyword.containershort_notm}} オフプレミス | on-prem |
@@ -58,20 +58,19 @@ Slack をまだご利用でない場合は、 [招待を要求してください
 | E メールなどのコラボレーション・ツールとソーシャル・ツール | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> | |
 | Linux と x86 のワークロード | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> | |
 | ベアメタルおよび GPU のコンピュート・リソース | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
-| PCI 準拠および HIPAA 準拠のワークロード | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
+| PCI および HIPAA 準拠のワークロード | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
 | プラットフォームやインフラストラクチャーに関する制約や依存関係のあるレガシー・アプリ | | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
 | 厳格な設計、ライセンス交付、または厳しい規制を伴う独自開発アプリ | | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
-| パブリック・クラウド内のアプリのスケーリングと、オンサイト・プライベート・データベースとの間のデータの同期 | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" />  | <img src="images/confirm.svg" width="32" alt="機能は使用可能" style="width:32px;" /> |
-{: caption="{{site.data.keyword.Bluemix_notm}} の実装ではワークロードがサポートされています" caption-side="top"}
+{: caption="{{site.data.keyword.cloud_notm}} の実装ではワークロードがサポートされています" caption-side="top"}
 
 **{{site.data.keyword.containerlong_notm}} でワークロードをオフプレミスで実行する準備は整いましたか?**</br>
 ここまでに、既にパブリック・クラウドの資料をお読みいただいています。 さらに読み続けてその他の戦略アイデアを確認するか、[今すぐクラスターを作成](/docs/containers?topic=containers-getting-started)して作業を開始してください。
 
 **オンプレミス・クラウドに関心をお持ちですか?**</br>
-[{{site.data.keyword.Bluemix_notm}} Private の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html) を参照してください。 WebSphere Application Server や Liberty などの IBM テクノロジーに既に多大な投資をしている場合は、各種のツールを使用して {{site.data.keyword.Bluemix_notm}} Private のモダナイズ戦略を最適化できます。
+[{{site.data.keyword.cloud_notm}} Private の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.1/kc_welcome_containers.html) を参照してください。 WebSphere Application Server や Liberty などの IBM テクノロジーに既に多大な投資をしている場合は、各種のツールを使用して {{site.data.keyword.cloud_notm}} Private のモダナイズ戦略を最適化できます。
 
 **オンプレミスとオフプレミスの両方のクラウドでワークロードを実行しますか?**</br>
-まず {{site.data.keyword.Bluemix_notm}} Private アカウントをセットアップしてください。 次に、[{{site.data.keyword.Bluemix_notm}} Private と組み合わせた {{site.data.keyword.containerlong_notm}} の使用](/docs/containers?topic=containers-hybrid_iks_icp)を参照して、使用する {{site.data.keyword.Bluemix_notm}} Private 環境を {{site.data.keyword.Bluemix_notm}} Public 内のクラスターと接続します。 複数のクラウド Kubernetes クラスターを管理するには ({{site.data.keyword.Bluemix_notm}} Public と {{site.data.keyword.Bluemix_notm}} Private にまたがる場合など)、[IBM Multicloud Manager ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html) を確認してください。
+まず {{site.data.keyword.cloud_notm}} Private アカウントをセットアップしてください。 次に、[{{site.data.keyword.cloud_notm}} Private と組み合わせた {{site.data.keyword.containerlong_notm}} の使用](/docs/containers?topic=containers-hybrid_iks_icp)を参照して、使用する {{site.data.keyword.cloud_notm}} Private 環境を {{site.data.keyword.cloud_notm}} Public 内のクラスターと接続します。 複数のクラウド Kubernetes クラスターを管理するには ({{site.data.keyword.cloud_notm}} Public と {{site.data.keyword.cloud_notm}} Private にまたがる場合など)、[IBM Multicloud Manager ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html) を確認してください。
 
 ### {{site.data.keyword.containerlong_notm}} ではどのようなアプリを実行できますか?
 {: #app_types}
@@ -136,7 +135,7 @@ Kubernetes は、クラスター管理者とアプリ開発者という 2 人の
 {: shortdesc}
 
 **クラスター管理者のメインタスクと技術知識は何ですか?** </br>
-クラスター管理者は、クラスターの {{site.data.keyword.Bluemix_notm}} インフラストラクチャーのセットアップ、操作、保護、および管理を担当します。 標準的なタスクは、以下のとおりです。
+クラスター管理者は、クラスターの {{site.data.keyword.cloud_notm}} インフラストラクチャーのセットアップ、操作、保護、および管理を担当します。 標準的なタスクは、以下のとおりです。
 - ワークロードに十分な容量を提供できるよう、クラスターのサイズを設定します。
 - 高可用性、災害復旧、および会社のコンプライアンスの規格を満たすよう、クラスターを設計します。
 - コンピュート・リソース、ネットワーク、およびデータを保護するためにユーザー許可をセットアップし、クラスター内の操作を制限することで、クラスターを保護します。
@@ -192,10 +191,9 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
 
 ワークロードがどのようなものか把握したので、推定される使用状況を使用可能なクラスター構成に対応付けましょう。
 
-1.  ワーカー・ノードの最大容量を推定します。これは、使用するクラスターのタイプによって異なります。 負荷の急増などの一時イベントが発生した場合に、ワーカー・ノード容量の上限に達しないようにしてください。
     *  **単一ゾーン・クラスター**: 少なくとも 3 つのワーカー・ノードをクラスター内に配置することを計画します。 さらに、余分の 1 ノード分の CPU とメモリーの容量をクラスター内に確保することをお勧めします。
     *  **複数ゾーン・クラスター**: ゾーンあたり少なくとも 2 つのワーカー・ノードを配置することを計画します。したがって、3 つのゾーンにまたがって合計 6 つのノードを配置することになります。 さらに、クラスターの合計容量が、必要な合計ワークロード容量の 150% 以上になるように計画します。そうすることで、1 つのゾーンがダウンした場合でも、ワークロードを維持するためのリソースが使用可能になります。
-2.  アプリのサイズとワーカー・ノードの容量を、[使用可能なワーカー・ノード・フレーバー](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)の 1 つと合致させます。 ゾーン内で使用可能なフレーバーを表示するには、`ibmcloud ks machine-types <zone>` コマンドを実行します。
+2.  アプリのサイズとワーカー・ノードの容量を、[使用可能なワーカー・ノード・フレーバー](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)の 1 つと合致させます。 ゾーン内で使用可能なフレーバーを表示するには、`ibmcloud ks flavors --zone <zone>` コマンドを実行します。
     *   **ワーカー・ノードを過負荷にしないこと**: ポッドが CPU に対して競合したり、非効率的に実行されたりしないようにするには、必要なワーカー・ノードの数を計画できるように、アプリが必要とするリソースを把握する必要があります。 例えば、アプリで必要なリソースが、ワーカー・ノード上で使用可能なリソースより少ない場合は、1 つのワーカー・ノードにデプロイするポッドの数を制限できます。 ワーカー・ノードを約 75% の容量で維持することで、スケジュールされる必要が生じる可能性のある他のポッド用のスペースを残しておいてください。 アプリで必要なリソースが、ワーカー・ノード上で使用可能なリソースより多い場合は、これらの要件を満たすことができる異なるワーカー・ノード・フレーバーを使用してください。 ワーカー・ノードによって `NotReady` という状況が頻繁に報告されたり、メモリーなどのリソース不足が原因でワーカー・ノードによってポッドが頻繁に強制除去されたりする場合は、ワーカー・ノードが過負荷になっていることがわかります。
     *   **大規模および小規模のワーカー・ノード・フレーバー**: 大規模ノードは小規模ノードよりもコスト効率が高くなることがあります。特に、高性能マシン上での処理時に効率化されるように設計されているワークロードにこのことが当てはまります。 ただし、大規模ワーカー・ノードがダウンした場合は、すべてのワークロード・ポッドをクラスター内の他のワーカー・ノードに移すスケジュール変更を正常に行うために十分な能力をクラスターが備えていることを確認する必要があります。 小規模ワーカーは、より安全にスケーリングするために役立ちます。
     *   **アプリのレプリカ**: 必要となるワーカー・ノードの数を決定するために、実行するアプリ・レプリカの数を検討することもできます。 例えば、ワークロードで 32 基の CPU コアが必要となることがわかっており、16 個のアプリ・レプリカを実行することを計画している場合は、各レプリカ・ポッドに 2 基の CPU コアが必要となります。 ワーカー・ノードあたり 1 つのアプリ・ポッドのみを実行する場合は、使用するクラスター・タイプでこの構成をサポートするための適切な数のワーカー・ノードを注文できます。
@@ -208,13 +206,13 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
 ## Kubernetes 環境の構造化
 {: #kube_env}
 
-{{site.data.keyword.containerlong_notm}} は、1 つの IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオのみにリンクされています。 自分のアカウント内で、1 つのマスターと各種のワーカー・ノードで構成されるクラスターを作成できます。 マスターは IBM によって管理され、ユーザーは、同じフレーバー (または同じメモリー仕様と CPU 仕様) の個別マシンをまとめてプールするワーカー・プールの組み合わせを作成できます。 クラスター内で、名前空間とラベルを使用することによって、リソースをさらに細かく編成できます。 自分のチームとワークロードが必要なリソースを確実に得られるように、クラスター、マシン・タイプ、および編成戦略の適切な組み合わせを選択してください。
+{{site.data.keyword.containerlong_notm}} は、1 つの IBM Cloud インフラストラクチャー・ポートフォリオのみにリンクされています。 自分のアカウント内で、1 つのマスターと各種のワーカー・ノードで構成されるクラスターを作成できます。 マスターは IBM によって管理され、ユーザーは、同じフレーバー (または同じメモリー仕様と CPU 仕様) の個別マシンをまとめてプールするワーカー・プールの組み合わせを作成できます。 クラスター内で、名前空間とラベルを使用することによって、リソースをさらに細かく編成できます。 自分のチームとワークロードが必要なリソースを確実に得られるように、クラスター、フレーバー、および編成戦略の適切な組み合わせを選択してください。
 {:shortdesc}
 
-### どのようなタイプのクラスターとマシン・タイプを取得する必要がありますか?
+### どのようなタイプのクラスターとフレーバーを取得する必要がありますか?
 {: #env_flavors}
 
-**クラスターのタイプ**: [単一ゾーン・クラスター・セットアップ、複数ゾーン・クラスター・セットアップ、または複数クラスター・セットアップ](/docs/containers?topic=containers-ha_clusters#ha_clusters)のどれにするかを決定します。 複数ゾーン・クラスターは、[世界各国にまたがる {{site.data.keyword.Bluemix_notm}} の 6 大都市地域のすべて](/docs/containers?topic=containers-regions-and-zones#zones)で使用できます。 また、ワーカー・ノードはゾーンごとに異なることも留意してください。
+**クラスターのタイプ**: [単一ゾーン・クラスター・セットアップ、複数ゾーン・クラスター・セットアップ、または複数クラスター・セットアップ](/docs/containers?topic=containers-ha_clusters#ha_clusters)のどれにするかを決定します。 複数ゾーン・クラスターは、[世界各国にまたがる {{site.data.keyword.cloud_notm}} の 6 大都市地域のすべて](/docs/containers?topic=containers-regions-and-zones#zones)で使用できます。 また、ワーカー・ノードはゾーンごとに異なることも留意してください。
 
 **ワーカー・ノードのタイプ**: 一般的に、集中型のワークロードはベアメタルの物理マシン上で実行することが適する一方、コスト効率が高いテスト作業や開発作業には、共有ハードウェアまたは専用の共有ハードウェア上の仮想マシンを選択します。 ベアメタルのワーカー・ノードを使用すると、クラスターは、その10 Gbps のネットワーク速度とハイパー・スレッディング対応コアによってスループットが向上します。 仮想マシンは、1 Gbps のネットワーク速度と、ハイパー・スレッディングに対応していない標準コアをサポートしています。 [マシンの分離と使用可能なフレーバーを確認してください](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)。
 
@@ -229,7 +227,7 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
 *  別の地域のアプリが含まれたクラスターを作成することで、その地域のユーザーにさらに高いパフォーマンスを提供する。
 *  名前空間レベルでクラスター内でアクセスを制御するための複数の RBAC ポリシーをカスタマイズおよび管理する代わりに、クラスター・インスタンス・レベルでユーザー・アクセスを構成する。
 
-**少数または単一のクラスター**: クラスター数が少ないほど、固定されたリソースのクラスターあたりのコストと運用労力を低減しやすくなります。 より多くのクラスターを作成する代わりに、使用するアプリとサービス・コンポーネントで使用できるコンピューティング・リソースのさまざまなマシン・タイプ用にワーカー・プールを追加できます。 アプリを開発する際は、そのアプリで使用されるリソースは同じゾーン内にあるか、そうでない場合はマルチゾーン内で緊密に接続されているため、待ち時間、帯域幅、または相関関係のある複数の障害に関して推測できます。 ただし、名前空間、リソース割り当て、およびラベルを使用してクラスターを編成することがさらに重要になります。
+**少数または単一のクラスター**: クラスター数が少ないほど、固定されたリソースのクラスターあたりのコストと運用労力を低減しやすくなります。 より多くのクラスターを作成する代わりに、使用するアプリとサービス・コンポーネントで使用できるコンピューティング・リソースのさまざまなフレーバー用にワーカー・プールを追加できます。 アプリを開発する際は、そのアプリで使用されるリソースは同じゾーン内にあるか、そうでない場合はマルチゾーン内で緊密に接続されているため、待ち時間、帯域幅、または相関関係のある複数の障害に関して推測できます。 ただし、名前空間、リソース割り当て、およびラベルを使用してクラスターを編成することがさらに重要になります。
 
 ### どうすればクラスター内のリソースをセットアップできますか?
 {: #env_resources}
@@ -242,7 +240,7 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
   <li><strong>クラスターの帯域幅を使い切らない</strong>: スケーリングされる仮想マシン上のネットワーク帯域幅は約 1000 Mbps であることに留意してください。 1 つのクラスター内に何百ものワーカー・ノードが必要になる場合は、そのクラスターを複数のクラスターに分割して各クラスター内のノード数を減らすか、ベアメタル・ノードを注文してください。</li>
   <li><strong>サービスを整理する</strong>: デプロイ前に、ワークロードに必要なサービスの数を綿密に計画します。 ネットワーキングとポート転送の規則は Iptables に配置されます。 サービスの数がさらに多くなることが予想される場合は (5,000を超えるサービスなど)、クラスターを複数のクラスターに分割します。</li></ul></dd>
 <dt>各種コンピューティング・リソースの組み合わせに対してさまざまなタイプのマシンをプロビジョンする</dt>
-  <dd>誰もが選択することを好みます。 {{site.data.keyword.containerlong_notm}} では、集中型のワークロード向けのベアメタルや、迅速なスケーリングに対応できる仮想マシンを含む、[各種マシン・タイプを組み合わせて](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)デプロイできます。 ラベルや名前空間を使用して、マシンへのデプロイメントを編成します。 デプロイメントを作成するときには、適切な組み合わせのリソースを備えたマシンにのみ、アプリのポッドがデプロイされるように制限してください。 例えば、`md1c.28x512.4x4tb` のように大容量のローカル・ディスク・ストレージを備えたベアメタル・マシンにのみ、データベース・アプリケーションがデプロイされるように制限することをお勧めします。</dd>
+  <dd>誰もが選択することを好みます。 {{site.data.keyword.containerlong_notm}} では、集中型のワークロード向けのベアメタルや、迅速なスケーリングに対応できる仮想マシンを含む、[各種フレーバーを組み合わせて](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)デプロイできます。 ラベルや名前空間を使用して、マシンへのデプロイメントを編成します。 デプロイメントを作成するときには、適切な組み合わせのリソースを備えたマシンにのみ、アプリのポッドがデプロイされるように制限してください。 例えば、`md1c.28x512.4x4tb` のように大容量のローカル・ディスク・ストレージを備えたベアメタル・マシンにのみ、データベース・アプリケーションがデプロイされるように制限することをお勧めします。</dd>
 <dt>クラスターを共有している複数のチームとプロジェクトがある場合は、複数の名前空間をセットアップする</dt>
   <dd><p>名前空間は、クラスター内のクラスターのようなものです。 これらは、[リソース割り当て ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) と [デフォルト制限 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/) を使用してクラスターのリソースを配分するための手段となります。 新しい名前空間を作成するときには、アクセスを制御するために、必ず、適切な [RBAC ポリシー](/docs/containers?topic=containers-users#rbac)をセットアップしてください。 詳しくは、Kubernetes の資料内の [Share a cluster with namespaces ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) を参照してください。</p>
   <p>クラスターが小規模で、ユーザーが数十人、かつリソースが類似している (同じソフトウェアのバージョン違いなど) 場合は、複数の名前空間は必要ない可能性があります。 代わりに、ラベルを使用することで対応できます。</p></dd>
@@ -250,7 +248,7 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
   <dd>サービスをクラスターにデプロイしてアプリを実行するために必要なリソースがすべてのチームに与えられるように、すべての名前空間に[リソース割り当て量](https://kubernetes.io/docs/concepts/policy/resource-quotas/) をセットアップする必要があります。 リソース割り当て量により、デプロイ可能な Kubernetes リソースの数、それらのリソースで消費できる CPU とメモリーの量など、名前空間のデプロイメント制約が決まります。 割り当て量を設定すると、ユーザーは、そのデプロイメントにリソース要求と制限を含める必要があります。</dd>
 <dt>ラベルを使用して Kubernetes オブジェクトを編成する</dt>
   <dd><p>`pods` や `nodes` などの Kubernetes リソースを編成および選択するには、[Kubernetes ラベルを使用します ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)。 デフォルトでは、{{site.data.keyword.containerlong_notm}} によっていくつかのラベル (`arch`、`os`、`region`、`zone`、`machine-type` など) が適用されます。</p>
-  <p>ラベルのユース・ケースとしては、[ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限](/docs/containers?topic=containers-edge) する場合、[アプリを GPU マシンにデプロイ](/docs/containers?topic=containers-app#gpu_app)する場合、特定のマシン・タイプや SDS 性能に適合するワーカー・ノード (ベアメタル・ワーカー・ノードなど) 上で [アプリのワークロードを実行するように制限 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) する場合などが挙げられます。 任意のリソースに既に適用されているラベルを確認するには、<code>kubectl get</code> コマンドを <code>--show-labels</code> フラグ付きで使用します。 以下に例を示します。</p>
+  <p>ラベルのユース・ケースとしては、[ネットワーク・トラフィックをエッジ・ワーカー・ノードに制限](/docs/containers?topic=containers-edge) する場合、[アプリを GPU マシンにデプロイ](/docs/containers?topic=containers-app#gpu_app)する場合、特定のフレーバーや SDS 性能に適合するワーカー・ノード (ベアメタル・ワーカー・ノードなど) 上で [アプリのワークロードを実行するように制限 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) する場合などが挙げられます。 任意のリソースに既に適用されているラベルを確認するには、<code>kubectl get</code> コマンドを <code>--show-labels</code> フラグ付きで使用します。 以下に例を示します。</p>
   <p><pre class="pre"><code>kubectl get node &lt;node_ID&gt; --show-labels</code></pre></p>
   ワーカー・ノードにラベルを適用するには、ラベルを使用して[ワーカー・プールを作成](/docs/containers?topic=containers-add_workers#add_pool)するか、または[既存のワーカー・プールを更新](/docs/containers?topic=containers-add_workers#worker_pool_labels)します。</dd>
 </dl>
@@ -272,7 +270,7 @@ Kubernetes および {{site.data.keyword.containerlong_notm}} では、[アプ�
 * [複数ゾーン・クラスターの作成](/docs/containers?topic=containers-ha_clusters#ha_clusters)。
 * 複数のゾーンにまたがってレプリカ・セットやポッドのアンチアフィニティーなどの機能を使用する[高可用性デプロイメントの計画](/docs/containers?topic=containers-app#highly_available_apps)。
 * [クラウド・ベース・パブリック・レジストリー内のイメージに基づくコンテナーの実行](/docs/containers?topic=containers-images)。
-* [データ・ストレージの計画](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。 特に複数ゾーン・クラスターについては、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about) などのクラウド・サービスの使用を検討してください。
+* [データ・ストレージの計画](/docs/containers?topic=containers-storage_planning#persistent_storage_overview)。 特に複数ゾーン・クラスターについては、[{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) や [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage) などのクラウド・サービスの使用を検討してください。
 * 複数ゾーン・クラスターについては、[ロード・バランサー・サービス](/docs/containers?topic=containers-loadbalancer#multi_zone_config)または Ingress [マルチゾーン・ロード・バランサー](/docs/containers?topic=containers-ingress#ingress)を有効にして、アプリをパブリックに公開してください。
 
 <br />
@@ -306,7 +304,7 @@ Kubernetes クラスター内の各ポッドには IP アドレスが割り当�
 
 デフォルトでは、ポッドはクラスター内の他のポッドと通信できますが、ネットワーク・ポリシーに基づいて特定のポッドや名前空間へのトラフィックをブロックできます。 さらに、NodePort、ロード・バランサー、または Ingress サービスを使用してアプリを外部に公開する場合は、高度なネットワーク・ポリシーをセットアップしてトラフィックをブロックすることをお勧めします。 {{site.data.keyword.containerlong_notm}} では、Calico を使用して、Kubernetes と Calico の[ネットワーク・ポリシーを管理してトラフィックを制御](/docs/containers?topic=containers-network_policies#network_policies)できます。
 
-ネットワーク・トラフィックを接続、管理、および保護する必要のある複数のプラットフォームにまたがって実行されるさまざまなマイクロサービスを使用している場合は、[管理対象 Istio アドオン](/docs/containers?topic=containers-istio)などのサービス・メッシュ・ツールを使用することを検討してください。
+ネットワーク・トラフィックを接続、管理、および保護する必要のある複数のプラットフォームで実行される各種のマイクロサービスがある場合は、[管理対象 Istio アドオン](/docs/containers?topic=containers-istio)などのサービス・メッシュ・ツールを使用することを検討してください。
 
 [エッジ・ノードをセットアップ](/docs/containers?topic=containers-edge#edge)して、ネットワーキングのワークロードを特定のワーカー・ノードに制限することで、クラスターのセキュリティーと分離を強化することもできます。
 
@@ -436,16 +434,16 @@ YAML ファイル内では、デプロイメントを管理するためのメタ
 ## アプリケーションのパッケージ化
 {: #packaging}
 
-複数のクラスター、パブリック環境とプライベート環境、または複数のクラウド・プロバイダーでアプリを実行する場合は、これらの環境を横断してデプロイメント戦略をどのように成功させるかが課題となります。 {{site.data.keyword.Bluemix_notm}} および他のオープン・ソース・ツールを使用すると、アプリケーションをパッケージ化してデプロイメントの自動化に役立てることができます。
+複数のクラスター、パブリック環境とプライベート環境、または複数のクラウド・プロバイダーでアプリを実行する場合は、これらの環境を横断してデプロイメント戦略をどのように成功させるかが課題となります。 {{site.data.keyword.cloud_notm}} および他のオープン・ソース・ツールを使用すると、アプリケーションをパッケージ化してデプロイメントの自動化に役立てることができます。
 {: shortdesc}
 
 <dl>
 <dt>インフラストラクチャーの自動化</dt>
-  <dd>オープン・ソースの [Terraform](/docs/terraform?topic=terraform-getting-started#getting-started) ツールを使用して、Kubernetes クラスターを含めた {{site.data.keyword.Bluemix_notm}} インフラストラクチャーのプロビジョニングを自動化できます。 こちらのチュートリアルに従って、[デプロイメント環境を計画、作成、および更新](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)してください。 クラスターを作成した後に、[{{site.data.keyword.containerlong_notm}} クラスター自動スケーリング機能](/docs/containers?topic=containers-ca)をセットアップすることで、ワークロードのリソース要求に応じて、ワーカー・プールによってワーカー・ノードがスケールアップおよびスケールダウンされるように設定できます。</dd>
+  <dd>オープン・ソースの [Terraform](/docs/terraform?topic=terraform-getting-started#getting-started) ツールを使用して、Kubernetes クラスターを含めた {{site.data.keyword.cloud_notm}} インフラストラクチャーのプロビジョニングを自動化できます。 こちらのチュートリアルに従って、[デプロイメント環境を計画、作成、および更新](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments)してください。 クラスターを作成した後に、[{{site.data.keyword.containerlong_notm}} クラスター自動スケーリング機能](/docs/containers?topic=containers-ca)をセットアップすることで、ワークロードのリソース要求に応じて、ワーカー・プールによってワーカー・ノードがスケールアップおよびスケールダウンされるように設定できます。</dd>
 <dt>継続的な統合とデリバリー (CI/CD) パイプラインのセットアップ</dt>
   <dd>アプリの構成ファイルが Git などのソース制御管理システムで編成されている場合は、パイプラインを構築することで、コードをテストして、`test` や `prod` などの別々の環境にデプロイできます。 [Kubernetes への継続的なデプロイメントに関するこちらのチュートリアル](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)をご覧ください。</dd>
 <dt>アプリ構成ファイルのパッケージ化</dt>
-  <dd>Kubernetes パッケージ・マネージャーである [Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh/docs/) を使用すると、アプリが必要とするすべての Kubernetes リソースを Helm チャート内で指定できます。 次に、Helm を使用して YAML 構成ファイルを作成して、これらのファイルをクラスターにデプロイできます。 [{{site.data.keyword.Bluemix_notm}} 側で提供されている Helm チャートを統合 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) することで、Block Storage プラグインなどを使用してクラスターの機能を拡張することもできます。<p class="tip">YAML ファイルのテンプレートを簡単に作成するには、 Helm を使用するか、[`ytt` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://get-ytt.io/) などの他のコミュニティー・ツールをお試しください。</p></dd>
+  <dd>Kubernetes パッケージ・マネージャーである [Helm ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://helm.sh/docs/) を使用すると、アプリが必要とするすべての Kubernetes リソースを Helm チャート内で指定できます。 次に、Helm を使用して YAML 構成ファイルを作成して、これらのファイルをクラスターにデプロイできます。 [{{site.data.keyword.cloud_notm}} 側で提供されている Helm チャートを統合 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) することで、Block Storage プラグインなどを使用してクラスターの機能を拡張することもできます。<p class="tip">YAML ファイルのテンプレートを簡単に作成するには、 Helm を使用するか、[`ytt` ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://get-ytt.io/) などの他のコミュニティー・ツールをお試しください。</p></dd>
 </dl>
 
 <br />
@@ -454,7 +452,7 @@ YAML ファイル内では、デプロイメントを管理するためのメタ
 ## アプリの最新状態の維持
 {: #updating}
 
-新バージョンのアプリに向けて準備するために、多大な労力が費やされます。 {{site.data.keyword.Bluemix_notm}} と Kubernetes の更新ツールを使用すると、保護されたクラスター環境でアプリが実行されることが保証されると同時に、アプリのさまざまなバージョンをロールアウトできます。
+新バージョンのアプリに向けて準備するために、多大な労力が費やされます。 {{site.data.keyword.cloud_notm}} と Kubernetes の更新ツールを使用すると、保護されたクラスター環境でアプリが実行されることが保証されると同時に、アプリのさまざまなバージョンをロールアウトできます。
 {: shortdesc}
 
 ### どうすればクラスターをサポート対象の状態に維持できますか?
@@ -465,7 +463,7 @@ YAML ファイル内では、デプロイメントを管理するためのメタ
 ### アプリの更新戦略としては、どのようなものを使用できますか?
 {: #updating_apps}
 
-アプリを更新するには、以下のようなさまざまな戦略から選択できます。 最初はローリング・デプロイメントや即時切り替えから始めて、その後で複雑なカナリア・デプロイメントに進むことができます。
+アプリを更新するには、以下のようなさまざまな戦略から選択できます。最初はローリング・デプロイメントや即時切り替えから始めて、その後で複雑なカナリア・デプロイメントに進むことができます。
 
 <dl>
 <dt>ローリング・デプロイメント</dt>
@@ -492,7 +490,7 @@ YAML ファイル内では、デプロイメントを管理するためのメタ
   <dd>Kubernetes に含まれている Metrics Server は、基本的なクラスター・レベルのパフォーマンスの判定に役立ちます。 これらのメトリックを確認するには、[Kubernetes ダッシュボード](/docs/containers?topic=containers-app#cli_dashboard)を参照するか、端末で `kubectl top (pods | nodes)` コマンドを実行します。 これらのコマンドを自動化処理に含めることができます。<br><br>
   ログ解析ツールにログを転送して、後でログを解析できるようにします。 記録するログの冗長性とレベルを定義することで、必要以上の量のログが保管されることを防止します。 ログは短期間で大量のストレージを消費する可能性があり、その結果として、アプリのパフォーマンスが低下したり、ログの解析が難しくなったりする可能性があります。</dd>
 <dt>アプリのパフォーマンスをテストする</dt>
-  <dd>ロギングとモニタリングをセットアップした後に、パフォーマンス・テストを実行してください。 テスト環境で、さまざまな非理想的なシナリオを意図的に作成します。例えば、ゾーン内のすべてのワーカー・ノードを削除することでゾーン障害を再現します。 ログとメトリックを参照して、アプリがどのように復旧するかを確認します。</dd>
+  <dd>ロギングとモニタリングをセットアップした後に、パフォーマンス・テストを実行してください。 テスト環境で、さまざまな非理想的なシナリオを意図的に作成します。例えば、ゾーン内のすべてのワーカー・ノードを削除することでゾーン障害を再現します。ログとメトリックを参照して、アプリがどのように復旧するかを確認します。</dd>
 <dt>監査に向けて準備する</dt>
   <dd>アプリのログおよびクラスターのメトリックに加えて、アクティビティー追跡をセットアップして、誰がどのようなクラスター操作や Kubernetes 操作を実行したかに関する監査可能な記録を収集することをお勧めします。 詳しくは、[{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events#at_events)を参照してください。</dd>
 </dl>

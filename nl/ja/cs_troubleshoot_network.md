@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -62,9 +62,9 @@ NLB サービスのトラブルシューティングを行うには、以下の�
   ```
   {: pre}
 
-    CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
+    CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のフレーバーが表示されていることを確認します。
 
-2. バージョン 2.0 NLB の場合: [NLB 2.0 の前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)を満たしていることを確認します。
+2. バージョン 2.0 NLB の場合: [NLB 2.0 の前提条件](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)を満たしていることを確認します。
 
 3. NLB サービスの構成ファイルが正しいことを確認します。
     * バージョン 2.0 NLB:
@@ -154,10 +154,13 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のマシン・タイプが表示されていることを確認します。
+CLI 出力で、ワーカー・ノードの **Status** に **Ready** と表示され、**Machine Type** に **free** 以外のフレーバーが表示されていることを確認します。
 
 * 標準クラスターが完全にデプロイされており、ゾーンごとに 2 つ以上のワーカー・ノードがあるが、使用可能な **Ingress サブドメイン**がない場合は、[Ingress ALB のサブドメインを取得できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)を参照してください。
 * その他の問題については、[Ingress のデバッグ](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)のステップに従って、Ingress のセットアップをトラブルシューティングします。
+
+最近 ALB ポッドを再始動したか、ALB を有効化した場合は、[準備状況検査](/docs/containers?topic=containers-ingress-settings#readiness-check)が実施されているために、すべての Ingressリソース・ファイルが解析されるまで、ALB ポッドはトラフィック要求をルーティングできません。この準備状況検査は、要求が失われることを防止します。この検査は、最大 5 分かかります。
+{: note}
 
 <br />
 
@@ -182,7 +185,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
  <tbody>
  <tr>
  <td>証明書データのダウンロードやアップデートに必要なアクセス役割を持っていない。</td>
- <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.Bluemix_notm}} IAM 役割を割り当てるように依頼してください。<ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="/docs/containers?topic=containers-users#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
+ <td>アカウント管理者に問い合わせて、以下の {{site.data.keyword.cloud_notm}} IAM 役割を割り当てるように依頼してください。<ul><li>{{site.data.keyword.cloudcerts_full_notm}} インスタンスに対する**管理者**と**ライター**のサービス役割。 詳しくは、{{site.data.keyword.cloudcerts_short}} の <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">サービス・アクセスの管理</a>を参照してください。</li><li>クラスターに対する<a href="/docs/containers?topic=containers-users#platform">**管理者**のプラットフォーム役割</a>。</li></ul></td>
  </tr>
  <tr>
  <td>作成時、更新時、または削除時に提供された証明書 CRN が、クラスターと同じアカウントに属していない。</td>
@@ -214,7 +217,7 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
 
 {: tsSymptoms}
 * Ingress サブドメインなし: `ibmcloud ks cluster-get --cluster <cluster>` を実行すると、クラスターが `normal` 状態であるのに、使用可能な **Ingress サブドメイン**がありません。
-* ALB がゾーンにデプロイされない: 複数ゾーン・クラスターがある場合、`ibmcloud ks albs --cluster <cluster>` を実行しても、ALB はゾーンにデプロイされません。例えば、3 つのゾーンにワーカー・ノードがある場合、パブリック ALB が 3 番目のゾーンにデプロイされなかった次のような出力が表示される場合があります。
+* ALB がゾーンにデプロイされない: 複数ゾーン・クラスターがある場合、`ibmcloud ks albs --cluster <cluster>` を実行しても、ALB はゾーンにデプロイされません。 例えば、3 つのゾーンにワーカー・ノードがある場合、パブリック ALB が 3 番目のゾーンにデプロイされなかった次のような出力が表示される場合があります。
   ```
   ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
   private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
@@ -235,20 +238,20 @@ ALB シークレットに関する情報をリストすると、状況は `*_fai
   {: screen}
 
 {: tsCauses}
-標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー (SoftLayer) アカウントで自動的にプロビジョンされます。 そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress サブドメイン**のプロビジョンが失敗するか、そのゾーン用のパブリック Ingress ALB のプロビジョンが失敗するか、ポータブル・パブリック IP アドレスをネットワーク・ロード・バランサー (NLB) の作成に使用できない可能性があります。
+標準クラスターでは、あるゾーンで初めてクラスターを作成したときに、そのゾーン内のパブリック VLAN とプライベート VLAN が IBM Cloud インフラストラクチャー・アカウントで自動的にプロビジョンされます。 そのゾーンでは、指定したパブリック VLAN 上に 1 つのパブリック・ポータブル・サブネットが要求され、指定したプライベート VLAN 上に 1 つのプライベート・ポータブル・サブネットが要求されます。 {{site.data.keyword.containerlong_notm}} の場合、VLAN のサブネット数の上限は 40 個です。 ゾーン内のクラスターの VLAN が既にその上限に達している場合、**Ingress サブドメイン**のプロビジョンが失敗するか、そのゾーン用のパブリック Ingress ALB のプロビジョンが失敗するか、ポータブル・パブリック IP アドレスをネットワーク・ロード・バランサー (NLB) の作成に使用できない可能性があります。
 
 VLAN のサブネット数を表示するには、以下のようにします。
-1.  [IBM Cloud インフラストラクチャー (SoftLayer) コンソール](https://cloud.ibm.com/classic?)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
+1.  [IBM Cloud インフラストラクチャー・コンソール](https://cloud.ibm.com/classic?)から、**「ネットワーク」**>**「IP 管理 (IP Management)」**>**「VLAN」**の順に選択します。
 2.  クラスターの作成に使用した VLAN の **「VLAN の数 (VLAN Number)」**をクリックします。 **「サブネット」**セクションで、サブネットが 40 個以上存在するかどうかを確認します。
 
 {: tsResolve}
-新規 VLAN が必要な場合、[{{site.data.keyword.Bluemix_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)。
+新規 VLAN が必要な場合、[{{site.data.keyword.cloud_notm}} サポートに連絡して](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)注文してください。 その後、その新規 VLAN を使用する[クラスターを作成します](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)。
 
 使用可能な別の VLAN がある場合は、既存のクラスターで [VLAN スパンニングをセットアップ](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)できます。 その後、使用可能なサブネットがある他の VLAN を使用する新規ワーカー・ノードをクラスターに追加できます。 VLAN スパンニングが既に有効になっているかどうかを確認するには、`ibmcloud ks vlan-spanning-get<region>` [コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)を使用します。
 
 VLAN に使用していないサブネットがある場合、クラスターに追加することで、VLAN のサブネットを再利用できます。
 1. 使用したいサブネットが使用可能であることを確認します。
-  <p class="note">使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.Bluemix_notm}} アカウントで共有されている場合があります。 この場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報のみが表示されます。サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。</p>
+  <p class="note">使用しているインフラストラクチャー・アカウントが、複数の {{site.data.keyword.cloud_notm}} アカウントで共有されている場合があります。 この場合、**バインドされたクラスター**があるサブネットを表示するために `ibmcloud ks subnets` コマンドを実行しても、自分のクラスターの情報のみが表示されます。 サブネットが使用可能であり、他のアカウントやチームで使用されていないことをインフラストラクチャー・アカウント所有者に確認してください。</p>
 
 2. [`ibmcloud ks cluster-subnet-add` コマンド](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add)を使用して、クラスターで既存のサブネットを使用できるようにします。
 
@@ -268,7 +271,7 @@ VLAN に使用していないサブネットがある場合、クラスターに
     ```
     {: screen}
 
-4. 追加したサブネットからのポータブル IP アドレスが、クラスター内の ALB またはロード・バランサーに使用されていることを確認します。新しく追加されたサブネットからのポータブル IP アドレスがサービスで使用されるまでに数分かかる場合があります。
+4. 追加したサブネットからのポータブル IP アドレスが、クラスター内の ALB またはロード・バランサーに使用されていることを確認します。 新しく追加されたサブネットからのポータブル IP アドレスがサービスで使用されるまでに数分かかる場合があります。
   * Ingress サブドメインなし: `ibmcloud ks cluster-get --cluster <cluster>` を実行して、**Ingress サブドメイン**にデータが設定されていることを確認します。
   * ALB がゾーンにデプロイされない: `ibmcloud ks albs --cluster <cluster>` を実行して、欠落している ALB がデプロイされていることを確認します。
   * ロード・バランサーをデプロイできない: `kubectl get svc -n kube-system` を実行して、ロード・バランサーに **EXTERNAL-IP** があることを確認します。
@@ -306,7 +309,7 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)・サービスまたは [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) サービスのソース IP 保持を有効にしました。 しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
+サービス構成ファイルの `externalTrafficPolicy` を `Local` に変更して、[バージョン 1.0 ロード・バランサー](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)・サービスまたは [Ingress ALB](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) サービスのソース IP 保持を有効にしました。しかし、トラフィックがアプリのバックエンド・サービスに到達しません。
 
 {: tsCauses}
 ロード・バランサー・サービスまたは Ingress ALB サービスのソース IP 保持を有効にすると、クライアント要求のソース IP アドレスは保持されます。 これらのサービスは、要求パケットの IP アドレスが変更されないようにするために、同じワーカー・ノード上の各アプリ・ポッドにのみトラフィックを転送します。 通常、ロード・バランサーまたは Ingress ALB のサービス・ポッドは、各アプリ・ポッドがデプロイされたワーカー・ノードと同じワーカー・ノードにデプロイされます。 しかし、次のように、サービス・ポッドとアプリ・ポッドが同じワーカー・ノードにスケジュールされない状況もあります。 ワーカー・ノードで [Kubernetes テイント ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) を使用している場合、テイントの耐障害性がないポッドはすべて、テイント適用ワーカー・ノードでの実行が阻止されます。 ソース IP 保持が、次に示すように、使用しているテイントのタイプに基づいて動作していない可能性があります。
@@ -342,6 +345,33 @@ Ingress サービスによって、WebSocket を使用するアプリが公開�
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## KubeDNS ではなく CoreDNS が構成されていると、クラスター・サービス DNS 解決が失敗することがある
+{: #coredns_issues}
+
+{: tsSymptoms}
+アプリでクラスター・サービスの DNS 名の解決に失敗することがあります。この失敗は、[クラスター DNS プロバイダー](/docs/containers?topic=containers-cluster_dns)として KubeDNS ではなく CoreDNS が構成されている場合にのみ生じます。次のようなエラー・メッセージが表示される可能性があります。
+
+```
+Name or service not known
+```
+{: screen}
+
+```
+No address associated with hostname or similar
+```
+{: screen}
+
+{: tsCauses}
+クラスター・サービスの CoreDNS キャッシングは、以前のクラスター DNS プロバイダーである KubeDNS とは動作が異なります。このことが原因で、古い DNS クライアントを使用するアプリで問題が生じることがあります。
+
+{: tsResolve}
+新しい DNS クライアントを使用するようにアプリを更新します。例えば、アプリ・イメージが Ubuntu 14.04 であると、古い DNS クライアントで断続的な障害が発生します。イメージを Ubuntu 16.04 に更新すると、DNS クライアントは正常に機能するようになります。
+
+また、`kube-system` 名前空間の `coredns` 構成マップからキャッシュ・プラグイン構成を削除することもできます。CoreDNS のカスタマイズについて詳しくは、[クラスター DNS プロバイダーのカスタマイズ](/docs/containers?topic=containers-cluster_dns#dns_customize)を参照してください。
 
 <br />
 
@@ -590,7 +620,7 @@ v3.3 以降の Calico CLI、`calicoctl.cfg` v3 構成ファイル構文、およ
 {: #suspended}
 
 {: tsSymptoms}
-ご使用の {{site.data.keyword.Bluemix_notm}} アカウントが一時停止されたか、クラスター内のすべてのワーカー・ノードが削除されました。 アカウントが再アクティブ化された後、ワーカー・プールのサイズ変更または再バランス化を試みた場合、ワーカー・ノードを追加することはできません。 次のようなエラー・メッセージが表示されます。
+ご使用の {{site.data.keyword.cloud_notm}} アカウントが一時停止されたか、クラスター内のすべてのワーカー・ノードが削除されました。 アカウントが再アクティブ化された後、ワーカー・プールのサイズ変更または再バランス化を試みた場合、ワーカー・ノードを追加することはできません。 次のようなエラー・メッセージが表示されます。
 
 ```
 SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
@@ -598,7 +628,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: screen}
 
 {: tsCauses}
-アカウントが一時停止されると、アカウント内のワーカー・ノードは削除されます。 クラスターにワーカー・ノードがない場合、IBM Cloud インフラストラクチャー (SoftLayer) は、関連付けられたパブリック VLAN とプライベート VLAN を再利用します。 ただし、クラスターのワーカー・プールのメタデータには前の VLAN ID があり、プールの再バランス化またはサイズ変更時にこれらの使用不可の ID が使用されます。 各 VLAN は既にこのクラスターに関連付けられていないため、ノードを作成できません。
+アカウントが一時停止されると、アカウント内のワーカー・ノードは削除されます。 クラスターにワーカー・ノードがない場合、IBM Cloud インフラストラクチャーは、関連付けられたパブリック VLAN とプライベート VLAN を再利用します。 ただし、クラスターのワーカー・プールのメタデータには前の VLAN ID があり、プールの再バランス化またはサイズ変更時にこれらの使用不可の ID が使用されます。 各 VLAN は既にこのクラスターに関連付けられていないため、ノードを作成できません。
 
 {: tsResolve}
 
@@ -615,7 +645,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
     ```
     {: pre}
 
-2.  [{{site.data.keyword.Bluemix_notm}} サポートに連絡する](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)ことによって、クラスターが含まれているゾーンごとに新しいプライベート VLAN とパブリック VLAN を取得します。
+2.  [{{site.data.keyword.cloud_notm}} サポートに連絡する](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans)ことによって、クラスターが含まれているゾーンごとに新しいプライベート VLAN とパブリック VLAN を取得します。
 
 3.  ゾーンごとの新しいプライベート VLAN ID と新しいパブリック VLAN ID をメモします。
 
@@ -660,11 +690,11 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: shortdesc}
 
 -  `ibmcloud` CLI およびプラグインの更新が使用可能になると、端末に通知が表示されます。 使用可能なすべてのコマンドおよびフラグを使用できるように、CLI を最新の状態に保つようにしてください。
--   {{site.data.keyword.Bluemix_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.Bluemix_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
+-   {{site.data.keyword.cloud_notm}} が使用可能かどうかを確認するために、[{{site.data.keyword.cloud_notm}} 状況ページ ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン") を確認します](https://cloud.ibm.com/status?selected=status)。
 -   [{{site.data.keyword.containerlong_notm}} Slack ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://ibm-container-service.slack.com) に質問を投稿します。
-    {{site.data.keyword.Bluemix_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://bxcs-slack-invite.mybluemix.net/)してください。
+    {{site.data.keyword.cloud_notm}} アカウントに IBM ID を使用していない場合は、この Slack への[招待を要求](https://cloud.ibm.com/kubernetes/slack)してください。
     {: tip}
--   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.Bluemix_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
+-   フォーラムを確認して、同じ問題が他のユーザーで起こっているかどうかを調べます。 フォーラムを使用して質問するときは、{{site.data.keyword.cloud_notm}} 開発チームの目に止まるように、質問にタグを付けてください。
     -   {{site.data.keyword.containerlong_notm}} を使用したクラスターまたはアプリの開発やデプロイに関する技術的な質問がある場合は、[Stack Overflow![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) に質問を投稿し、`ibm-cloud`、`kubernetes`、`containers` のタグを付けてください。
     -   サービスや概説の説明について質問がある場合は、[IBM Developer Answers Answers ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) フォーラムを使用してください。 `ibm-cloud` と `containers` のタグを含めてください。
     フォーラムの使用について詳しくは、[ヘルプの取得](/docs/get-support?topic=get-support-getting-customer-support#using-avatar)を参照してください。

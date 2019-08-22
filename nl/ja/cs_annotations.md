@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, ingress
 
@@ -24,8 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-
-# アノテーションを使用した Ingress のカスタマイズ
+# アノテーションを使用した Ingress ルーティングのカスタマイズ
 {: #ingress_annotation}
 
 Ingress アプリケーション・ロード・バランサー (ALB) に機能を追加するため、Ingress リソースにメタデータとしてアノテーションを指定できます。
@@ -93,7 +92,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
   <tr>
   <td><a href="#keepalive-timeout">キープアライブ・タイムアウト</a></td>
   <td><code>keepalive-timeout</code></td>
-  <td>サーバー上でキープアライブ接続を開いた状態で保つ最大時間を設定します。</td>
+  <td>クライアントと ALB プロキシー・サーバーの間でキープアライブ接続を開いた状態で保つ最大時間を設定します。</td>
   </tr>
   <tr>
   <td><a href="#proxy-next-upstream-config">次のアップストリームにプロキシー</a></td>
@@ -114,6 +113,11 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
   <td><a href="#upstream-keepalive">アップストリーム・キープアライブ</a></td>
   <td><code>upstream-keepalive</code></td>
   <td>アップストリーム・サーバーのアイドル・キープアライブ接続の最大数を設定します。</td>
+  </tr>
+  <tr>
+  <td><a href="#upstream-keepalive-timeout">アップストリーム・キープアライブ・タイムアウト</a></td>
+  <td><code>upstream-keepalive-timeout</code></td>
+  <td>ALB プロキシー・サーバーとアプリのアップストリーム・サーバーの間でキープアライブ接続を開いた状態に保つ最大時間を設定します。</td>
   </tr>
   <tr>
   <td><a href="#upstream-max-fails">アップストリーム失敗最大回数</a></td>
@@ -183,7 +187,7 @@ Ingress アプリケーション・ロード・バランサー (ALB) に機能�
 <tr>
 <td><a href="#proxy-external-service">外部サービス</a></td>
 <td><code>proxy-external-service</code></td>
-<td>{{site.data.keyword.Bluemix_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。</td>
+<td>{{site.data.keyword.cloud_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。</td>
 </tr>
 <tr>
 <td><a href="#location-modifier">ロケーション修飾子</a></td>
@@ -712,7 +716,7 @@ spec:
 {: #keepalive-timeout}
 
 **説明**</br>
-サーバー上でキープアライブ接続を開いた状態に保つ最大時間を設定します。
+クライアントと ALB プロキシー・サーバーの間でキープアライブ接続を開いた状態に保つ最大時間を設定します。このアノテーションを使用しない場合は、デフォルトのタイムアウト値は `60 秒`です。
 
 **サンプル Ingress リソース YAML**</br>
 ```
@@ -806,7 +810,7 @@ spec:
 </tr>
 <tr>
 <td><code>retries</code></td>
-<td><code>&lt;<em>tries</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行回数に置き換えます。 この回数には元の要求が含まれます。 この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
+<td><code>&lt;<em>tries</em>&gt;</code> を、ALB が要求を次のアップストリーム・サーバーに渡そうとする最大試行回数に置き換えます。この回数には元の要求が含まれます。 この制限を無効にするには、<code>0</code> を使用します。値を指定しなかった場合は、デフォルト値 <code>0</code> が使用されます。
 </td>
 </tr>
 <tr>
@@ -851,7 +855,7 @@ spec:
 {:shortdesc}
 
 **説明**</br>
-高可用性にするためには、アプリのセットアップによっては、着信クライアント要求を処理する複数のアップストリーム・サーバーをデプロイする必要があります。 クライアントがバックエンド・アプリに接続したら、セッション期間中またはタスクが完了するまでの間、1 つのクライアントに同じアップストリーム・サーバーがサービスを提供するように、セッション・アフィニティーを使用することができます。 着信ネットワーク・トラフィックを常に同じアップストリーム・サーバーにルーティングしてセッション・アフィニティーを保つように、ALB を構成することができます。
+高可用性にするためには、アプリのセットアップによっては、着信クライアント要求を処理する複数のアップストリーム・サーバーをデプロイする必要があります。 クライアントがバックエンド・アプリに接続したら、セッション・アフィニティーを使用して、セッション中またはタスクが完了するまでの間、1 つのクライアントに同じアップストリーム・サーバーがサービスを提供するようにすることができます。着信ネットワーク・トラフィックを常に同じアップストリーム・サーバーにルーティングしてセッション・アフィニティーを保つように、ALB を構成することができます。
 
 バックエンド・アプリに接続した各クライアントは、ALB によって、使用可能なアップストリーム・サーバーのいずれかに割り当てられます。 ALB は、クライアントのアプリに保管されるセッション Cookie を作成します。そのセッション Cookie は、ALB とクライアントの間でやり取りされるすべての要求のヘッダー情報に含められます。 この Cookie の情報により、同一セッションのすべての要求を同じアップストリーム・サーバーで処理することができます。
 
@@ -1022,6 +1026,54 @@ spec:
 <br />
 
 
+### アップストリーム・キープアライブ・タイムアウト (`upstream-keepalive-timeout`)
+{: #upstream-keepalive-timeout}
+
+**説明**</br> ALB プロキシー・サーバーとバックエンド・アプリケーションのアップストリーム・サーバーの間でキープアライブ接続を開いた状態に保つ最大時間を設定します。このアノテーションを使用しない場合は、デフォルトのタイムアウト値は `60 秒`です。
+
+**サンプル Ingress リソース YAML**</br>
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: myingress
+ annotations:
+   ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=<myservice> timeout=<time>s"
+spec:
+ tls:
+ - hosts:
+   - mydomain
+   secretName: mytlssecret
+ rules:
+ - host: mydomain
+   http:
+     paths:
+     - path: /
+       backend:
+         serviceName: myservice
+         servicePort: 8080
+```
+{: codeblock}
+
+<table>
+<caption>アノテーションの構成要素について</caption>
+<thead>
+<th colspan=2><img src="images/idea.png" alt="アイデア・アイコン"/>アノテーションの構成要素について</th>
+</thead>
+<tbody>
+<tr>
+<td><code>serviceName</code></td>
+<td><code>&lt;<em>myservice</em>&gt;</code> を、アプリ用に作成した Kubernetes サービスの名前に置き換えます。 このパラメーターはオプションです。</td>
+</tr>
+<tr>
+<td><code>timeout</code></td>
+<td><code>&lt;<em>time</em>&gt;</code> を時間の長さ (秒単位) に置き換えます。 例: <code>timeout=20s</code>。 値を <code>0</code> に設定すると、キープアライブ・クライアント接続が無効になります。</td>
+</tr>
+</tbody></table>
+
+<br />
+
+
 ### アップストリーム失敗最大回数 (`upstream-max-fails`)
 {: #upstream-max-fails}
 
@@ -1088,7 +1140,7 @@ HTTP (ポート 80) および HTTPS (ポート 443) ネットワーク・トラ�
 **説明**</br>
 デフォルトで、Ingress ALB は、ポート 80 上の着信 HTTP ネットワーク・トラフィックとポート 443 上の着信 HTTPS ネットワーク・トラフィックを listen するように構成されています。 ALB ドメインのセキュリティーを強化するため、または HTTPS ポートだけを有効にするために、デフォルト・ポートを変更できます。
 
-ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
+ポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)、そのポートを [`mutual-auth` アノテーション](#mutual-auth)で指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
 {: note}
 
 **サンプル Ingress リソース YAML**</br>
@@ -1153,7 +1205,7 @@ spec:
   {: pre}
 
 3. 非デフォルトの HTTP および HTTPS ポートを構成マップに追加します。 `<port>` を、開く HTTP または HTTPS のポートに置き換えます。
-  <p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress#opening_ingress_ports)を参照してください。</p>
+  <p class="note">デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)を参照してください。</p>
   ```
   apiVersion: v1
   kind: ConfigMap
@@ -1309,7 +1361,7 @@ Ingress ALB のダウンストリーム・トラフィックの相互認証を�
 **前提条件**</br>
 
 * 必要な `ca.crt` が含まれた有効な相互認証シークレットが必要です。 相互認証シークレットを作成するには、このセクションの終わりに記載されているステップを参照してください。
-* 443 以外のポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress#opening_ingress_ports)、そのポートをこのアノテーションで指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
+* 443 以外のポートでの相互認証を有効にするには、[有効なポートを開くように ALB を構成し](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)、そのポートをこのアノテーションで指定します。 相互認証のポートを指定するために `custom-port` アノテーションを使用しないでください。
 
 **サンプル Ingress リソース YAML**</br>
 ```
@@ -1374,7 +1426,7 @@ spec:
    {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1461,7 +1513,7 @@ spec:
 
 4. 証明書を Kubernetes シークレットとして作成します。
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1485,7 +1537,7 @@ spec:
    {: codeblock}
 4. 証明書を Kubernetes シークレットとして作成します。
    ```
-   kubectl create -f ssl-my-test
+   kubectl apply -f ssl-my-test
    ```
    {: pre}
 
@@ -1569,7 +1621,7 @@ spec:
   {: pre}
 
 3. TCP ポートを構成マップに追加します。 `<port>` を、開く TCP ポートに置き換えます。
-  デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress#opening_ingress_ports)を参照してください。
+  デフォルトでは、ポート 80 と 443 が開きます。 80 と 443 を開いたままにしておく場合は、指定する他の TCP ポートに加えて、それらのポートも `public-ports` フィールドに含める必要があります。 プライベート ALB を有効にした場合は、開いたままにしておくポートも `private-ports` フィールドで指定する必要があります。 詳しくは、[Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)を参照してください。
   {: note}
   ```
   apiVersion: v1
@@ -1620,7 +1672,7 @@ Ingress ALB は、バックエンド・アプリが listen するパスにトラ
 ### 外部サービス (`proxy-external-service`)
 {: #proxy-external-service}
 
-{{site.data.keyword.Bluemix_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。
+{{site.data.keyword.cloud_notm}} でホストされるサービスなどの外部サービスへのパス定義を追加します。
 {:shortdesc}
 
 **説明**</br>
@@ -1710,7 +1762,7 @@ ALB が要求 URI とアプリ・パスを突き合わせる方法を変更し�
 </tr>
 <tr>
 <td><code>~\*</code></td>
-<td>波形記号の後にアスタリスクが続く修飾子では、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/Coffee</code> パスまたは <code>/123/COFFEE</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
+<td>波形記号修飾子の後にアスタリスク修飾子が続くと、マッチング時に ALB はパスを大/小文字を区別しない正規表現パスとして処理します。<br>例えば、アプリが <code>/coffee</code> で listen する場合、ALB はアプリへの要求を突き合わせるときに、<code>/ab/Coffee</code> パスまたは <code>/123/COFFEE</code> パスを選択できます (これらのパスがアプリ用に明示的に設定されていなくてもかまいません)。</td>
 </tr>
 <tr>
 <td><code>^~</code></td>
@@ -1894,7 +1946,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/proxy-buffering: "enabled=<false> serviceName=<myservice1>"
+   ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=<myservice1>"
 spec:
  tls:
  - hosts:
@@ -2118,7 +2170,7 @@ kind: Ingress
 metadata:
  name: myingress
  annotations:
-   ingress.bluemix.net/add-host-port: "enabled=<true> serviceName=<myservice>"
+   ingress.bluemix.net/add-host-port: "enabled=true serviceName=<myservice>"
 spec:
  tls:
  - hosts:
@@ -2164,27 +2216,6 @@ spec:
 Ingress ALB は、クライアント・アプリとバックエンド・アプリの間のプロキシーとして機能します。 ALB に送信されたクライアント要求は、処理 (プロキシー処理) され、新しい要求に入れられた後に、バックエンド・アプリに送信されます。 同様に、ALB に送信されたバックエンド・アプリ応答も処理 (プロキシー処理) され、新しい応答に入れられた後に、クライアントに送信されます。 要求または応答のプロキシー処理によって、クライアントまたはバックエンド・アプリから最初に送信された HTTP ヘッダー情報 (ユーザー名など) は削除されます。
 
 バックエンド・アプリに HTTP ヘッダー情報が必要な場合は、`proxy-add-headers` アノテーションを使用して、ALB がクライアント要求をバックエンド・アプリに転送する前に、ヘッダー情報をクライアント要求に追加できます。 クライアント Web アプリに HTTP ヘッダー情報が必要な場合は、`response-add-headers` アノテーションを使用して、ALB が応答をクライアント Web アプリに転送する前に、ヘッダー情報を応答に追加できます。<br>
-
-例えば、要求がアプリに転送される前に、次の X-Forward ヘッダー情報を要求に追加する必要があるとします。
-```
-proxy_set_header Host $host;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-Proto $scheme;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-```
-{: screen}
-
-X-Forward ヘッダー情報をアプリに送信される要求に追加するには、`proxy-add-headers` アノテーションを以下のように使用します。
-```
-ingress.bluemix.net/proxy-add-headers: |
-  serviceName=<myservice1> {
-  Host $host;
-  X-Real-IP $remote_addr;
-  X-Forwarded-Proto $scheme;
-  X-Forwarded-For $proxy_add_x_forwarded_for;
-  }
-```
-{: codeblock}
 
 </br>
 
@@ -2374,7 +2405,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serviceName</code></td>
-<td>オプション: クライアント本体の最大サイズを特定のサービスに適用するには、<code>&lt;<em>myservice</em>&gt;</code> をサービスの名前に置き換えます。サービス名を指定しない場合は、サイズはすべてのサービスに適用されます。この YAML の例の形式 <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> では、最初のサイズは <code>myservice</code> サービスに適用され、2 番目のサイズは他のすべてのサービスに適用されます。</li>
+<td>オプション: クライアント本体の最大サイズを特定のサービスに適用するには、<code>&lt;<em>myservice</em>&gt;</code> をサービスの名前に置き換えます。 サービス名を指定しない場合は、サイズはすべてのサービスに適用されます。 この YAML の例の形式 <code>"serviceName=&lt;myservice&gt; size=&lt;size&gt;; size=&lt;size&gt;"</code> では、最初のサイズは <code>myservice</code> サービスに適用され、2 番目のサイズは他のすべてのサービスに適用されます。</li>
 </tr>
 <td><code>&lt;size&gt;</code></td>
 <td>クライアント応答本体の最大サイズ。 例えば、最大サイズを 200 M バイトに設定するには、<code>200m</code> と定義します。 サイズを 0 に設定すると、クライアント要求の本体サイズの検査を無効にすることができます。</td>
@@ -2593,7 +2624,7 @@ spec:
 
 2. アプリのリダイレクト URL を追加します。 リダイレクト URL は、アプリのコールバック・エンドポイントです。 フィッシング攻撃を防止するため、アプリ ID では、リダイレクト URL のホワイトリストを使用して要求 URL が検証されます。
   1. {{site.data.keyword.appid_short_notm}} 管理コンソールで、**「認証の管理 (Manage Authentication)」**にナビゲートします。
-  2. **「ID プロバイダー**タブで、ID プロバイダーが選択されていることを確認します。ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
+  2. **「ID プロバイダー**タブで、ID プロバイダーが選択されていることを確認します。 ID プロバイダーが選択されていない場合、ユーザーは認証されませんが、アプリへの匿名アクセス用のアクセス・トークンが発行されます。
   3. **「認証設定 (Authentication settings)」**タブで、アプリのリダイレクト URL を形式 `http://<hostname>/<app_path>/appid_callback` または `https://<hostname>/<app_path>/appid_callback` で追加します。
 
     {{site.data.keyword.appid_full_notm}} はログアウト機能を提供します。`/logout` が {{site.data.keyword.appid_full_notm}} パスに存在する場合は、Cookie が削除され、ユーザーはログイン・ページに戻されます。 この機能を使用するには、`/appid_logout` を `https://<hostname>/<app_path>/appid_logout` の形式でドメインに付加し、この URL をリダイレクト URL リストに含める必要があります。

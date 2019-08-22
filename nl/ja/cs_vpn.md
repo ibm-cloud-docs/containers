@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ VPN 接続を使用すると、{{site.data.keyword.containerlong}} 上の Kubern
 
 - **strongSwan IPSec VPN サービス**: Kubernetes クラスターをオンプレミス・ネットワークとセキュアに接続する [strongSwan IPSec VPN サービス ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://www.strongswan.org/about.html) をセットアップできます。 strongSwan IPSec VPN サービスは、業界標準の Internet Protocol Security (IPSec) プロトコル・スイートに基づき、インターネット上にセキュアなエンドツーエンドの通信チャネルを確立します。 クラスターとオンプレミス・ネットワークの間にセキュアな接続をセットアップするためには、クラスター内のポッドに直接、[strongSwan IPSec VPN サービスを構成してデプロイします](#vpn-setup)。
 
-- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間の直接のプライベート接続を作成できます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングは、ハイブリッド・ワークロード、プロバイダー間ワークロード、大規模なデータ転送や頻繁なデータ転送、またはプライベート・ワークロードを実装する必要がある場合に役立ちます。{{site.data.keyword.Bluemix_notm}} Direct Link オファリングを選択し、{{site.data.keyword.Bluemix_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.Bluemix_notm}} Direct Link の資料の [IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。
+- **{{site.data.keyword.BluDirectLink}}**: [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) を使用すると、パブリック・インターネット経由でルーティングせずに、リモート・ネットワーク環境と {{site.data.keyword.containerlong_notm}} の間の直接のプライベート接続を作成できます。 {{site.data.keyword.cloud_notm}} Direct Link オファリングは、ハイブリッド・ワークロード、プロバイダー間ワークロード、大規模なデータ転送や頻繁なデータ転送、またはプライベート・ワークロードを実装する必要がある場合に役立ちます。 {{site.data.keyword.cloud_notm}} Direct Link オファリングを選択し、{{site.data.keyword.cloud_notm}} Direct Link 接続をセットアップするには、{{site.data.keyword.cloud_notm}} Direct Link の資料の [IBM Cloud {{site.data.keyword.cloud_notm}} Direct Link での作業の開始](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-)を参照してください。
 
 - **Virtual Router Appliance (VRA) または Fortigate Security Appliance (FSA)**: [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) または [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) をセットアップして、IPSec VPN エンドポイントを構成することもできます。 このオプションは、クラスターが大きい場合、単一の VPN で複数のクラスターにアクセスする場合、ルート・ベース VPN が必要な場合に役立ちます。 VRA を構成するには、[Vyatta を使用した VRA 接続のセットアップ](#vyatta)を参照してください。
 
@@ -72,7 +72,7 @@ strongSwan Helm チャートを使用する前に、以下の考慮事項や制�
 * strongSwan Helm チャートでは、IPSec トンネル・エンドポイントとして単一の VPN ポッドが実行されます。 ポッドに障害が発生すると、クラスターはポッドを再始動します。 ただし、新しいポッドが開始され、VPN 接続が再確立されるまで、わずかなダウン時間が発生する場合があります。 より迅速なエラー・リカバリーやより精緻な高可用性ソリューションが必要な場合は、クラスター外部の専用ハードウェアで実行される VPN ソリューションを使用することを考慮してください。
 * strongSwan Helm チャートでは、VPN 接続を介して流れるネットワーク・トラフィックのメトリックまたはモニターは提供されません。 サポートされるモニター・ツールのリストについては、[サービスのロギングとモニタリング](/docs/containers?topic=containers-supported_integrations#health_services)を参照してください。
 
-クラスター・ユーザーは、strongSwan VPN サービスを使用して、プライベート・サービス・エンドポイントを介して Kubernetes マスターに接続できます。ただし、プライベート・サービス・エンドポイントを介した Kubernetes マスターとの通信は、VPN 接続からルーティングできない <code>166.X.X.X</code> IP アドレス範囲を経由する必要があります。[プライベート・ネットワーク・ロード・バランサー (NLB) を使用して](/docs/containers?topic=containers-clusters#access_on_prem)、クラスター・ユーザーのマスターのプライベート・サービス・エンドポイントを公開できます。プライベート NLB は、strongSwan VPN ポッドがアクセスできる内部の `172.21.x.x` クラスター IP アドレスとして、マスターのプライベート・サービス・エンドポイントを公開します。プライベート・サービス・エンドポイントのみを有効にする場合は、Kubernetes ダッシュボードを使用するか、パブリック・サービス・エンドポイントを一時的に有効にして、プライベート NLB を作成できます。
+クラスター・ユーザーは、strongSwan VPN サービスを使用して、プライベート・サービス・エンドポイントを介して Kubernetes マスターに接続できます。 ただし、プライベート・サービス・エンドポイントを介した Kubernetes マスターとの通信は、VPN 接続からルーティングできない <code>166.X.X.X</code> IP アドレス範囲を経由する必要があります。 [プライベート・ネットワーク・ロード・バランサー (NLB) を使用して](/docs/containers?topic=containers-clusters#access_on_prem)、クラスター・ユーザーのマスターのプライベート・サービス・エンドポイントを公開できます。 プライベート NLB は、strongSwan VPN ポッドがアクセスできる内部の `172.21.x.x` クラスター IP アドレスとして、マスターのプライベート・サービス・エンドポイントを公開します。 プライベート・サービス・エンドポイントのみを有効にする場合は、Kubernetes ダッシュボードを使用するか、パブリック・サービス・エンドポイントを一時的に有効にして、プライベート NLB を作成できます。
 {: tip}
 
 <br />
@@ -111,6 +111,7 @@ VPN 接続がマルチゾーン・クラスターからのアウトバウンド�
     - `zoneLoadBalancer`: ワーカー・ノードがある各ゾーンのパブリック・ロード・バランサーの IP アドレスを指定します。 [使用可能なパブリック IP アドレスを確認](/docs/containers?topic=containers-subnets#review_ip)したり、[使用されている IP アドレスを解放](/docs/containers?topic=containers-subnets#free)したりすることができます。 strongSwan VPN ポッドはどのゾーンのワーカー・ノードにもスケジュールされる可能性があるので、この IP のリストを指定することで、どのゾーンに VPN ポッドがスケジュールされてもロード・バランサー IP を使用できるようにします。
     - `connectUsingLoadBalancerIP`: `true` に設定します。 strongSwan VPN ポッドがワーカー・ノードにスケジュールされると、strongSwan サービスは同じゾーンのロード・バランサーの IP アドレスを選択し、その IP を使用してアウトバウンド接続を確立します。
     - `local.id`: リモート VPN エンドポイントが対応できる固定値を指定します。 `local.id` オプション (`ipsec.conf` の `leftid` 値) に VPN IPSec トンネルのパブリック IP アドレスを設定する必要があるリモート VPN エンドポイントの場合は、`local.id` に `%loadBalancerIP` を設定してください。この値にすると、`ipsec.conf` の `leftid` 値に、接続に使用されたロード・バランサーの IP アドレスが自動的に構成されます。
+    - オプション: `enableSingleSourceIP` を `true` に設定して、各ゾーンの単一 IP アドレスの背後にあるすべてのクラスター IP アドレスを非表示にします。このオプションによって、リモート・ネットワークからクラスターへのすべての接続が許可されなくなるため、非常に安全な VPN 接続の構成が提供されます。 また、`local.subnet` を `%zoneSubnet` 変数に設定し、`local.zoneSubnet` を使用してクラスターの各ゾーンの /32 サブネットとして IP アドレスを指定する必要もあります。
 
 2. リモートのネットワーク・ファイアウォールで、`zoneLoadBalancer` 設定に指定したパブリック IP アドレスからの着信 IPSec VPN接続を許可します。
 
@@ -168,7 +169,7 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 
 開始前に、以下のことを行います。
 * オンプレミス・データ・センターに IPSec VPN ゲートウェイをインストールします。
-* `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
+* `default` 名前空間に対する[**ライター**または**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-users#platform)があることを確認してください。
 * [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **注意**: 標準クラスターでは、すべての strongSwan 構成を使用できます。 フリー・クラスターを使用する場合は、[ステップ 3](#strongswan_3) のアウトバウンド VPN 接続のみを選択できます。インバウンド VPN 接続のためには、クラスター内にロード・バランサーが必要ですが、フリー・クラスターではロード・バランサーは利用できません。
 
@@ -178,7 +179,7 @@ strongSwan Helm チャートをインストールする前に、strongSwan 構�
 Helm をインストールし、strongSwan Helm チャートを取得して、設定可能な構成を確認します。
 {: shortdesc}
 
-1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.Bluemix_notm}} Helm リポジトリーを追加します。 Helm バージョン 2.8 以降が必要です。
+1.  [手順に従って](/docs/containers?topic=containers-helm#public_helm_install)、ローカル・マシンに Helm クライアントをインストールし、サービス・アカウントで Helm サーバー (tiller) をインストールし、{{site.data.keyword.cloud_notm}} Helm リポジトリーを追加します。 Helm バージョン 2.8 以降が必要です。
 
 2.  tiller がサービス・アカウントでインストールされていることを確認します。
 
@@ -282,7 +283,7 @@ VPN 接続を介してリモート・ネットワークがアクセスできる�
 3. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `enableSingleSourceIP` を `true` に設定して、単一 IP アドレスの背後にあるすべてのクラスター IP アドレスを非表示にします。 このオプションによって、リモート・ネットワークからクラスターへのすべての接続が許可されなくなるため、非常に安全な VPN 接続の構成が提供されます。
     <br>
     * この設定では、VPN 接続を経由するすべてのデータ・フローは、VPN 接続がクラスターまたはリモート・ネットワークから確立されているかどうかに関係なく、アウトバウンドでなければなりません。
-    * `local.subnet` は、1 つの /32 サブネットにのみ設定する必要があります。
+    * strongSwan を単一ゾーン・クラスターにインストールする場合は、`local.subnet` に /32 サブネットとして 1 つの IP アドレスのみを設定する必要があります。複数ゾーン・クラスターに strongSwan をインストールする場合、`local.subnet` に `%zoneSubnet` 変数を設定し、`local.zoneSubnet` を使用してクラスターの各ゾーンの /32 サブネットとして IP アドレスを指定する必要があります。
 
 4. バージョン 2.2.0 以降の strongSwan Helm チャートのオプション: `localNonClusterSubnet` 設定を使用して、strongSwan サービスで、リモート・ネットワークからの着信要求をクラスター外部にあるサービスに経路指定できるようにします。
     <br>
@@ -678,7 +679,7 @@ Helm チャートを削除して、VPN 接続を無効にすることができ�
 [Virtual Router Appliance (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) は、x86 ベアメタル・サーバーに対応した最新の Vyatta 5600 オペレーティング・システムを提供します。 VRA を VPN ゲートウェイとして使用して、オンプレミス・ネットワークにセキュアに接続できます。
 {:shortdesc}
 
-クラスター VLAN に出入りするすべてのパブリックおよびプライベートのネットワーク・トラフィックは、VRA を介して転送されます。 VRA を VPN エンドポイントとして使用して、IBM Cloud インフラストラクチャー (SoftLayer) 内のサーバーとオンプレミス・リソースの間に暗号化された IPSec トンネルを作成できます。 例えば、以下の図は、{{site.data.keyword.containerlong_notm}} 内のプライベート専用ワーカー・ノードにあるアプリがオンプレミス・サーバーと VRA VPN 接続を介して通信する方法を示しています。
+クラスター VLAN に出入りするすべてのパブリックおよびプライベートのネットワーク・トラフィックは、VRA を介して転送されます。 VRA を VPN エンドポイントとして使用して、IBM Cloud インフラストラクチャー内のサーバーとオンプレミス・リソースの間に暗号化された IPSec トンネルを作成できます。 例えば、以下の図は、{{site.data.keyword.containerlong_notm}} 内のプライベート専用ワーカー・ノードにあるアプリがオンプレミス・サーバーと VRA VPN 接続を介して通信する方法を示しています。
 
 <img src="images/cs_vpn_vyatta.png" width="725" alt="ロード・バランサーを使用して {{site.data.keyword.containerlong_notm}} のアプリを公開する" style="width:725px; border-style: none"/>
 

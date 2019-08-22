@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -18,6 +18,7 @@ lastupdated: "2019-06-12"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # サイト・マップ
@@ -49,23 +50,23 @@ lastupdated: "2019-06-12"
 
 [ユース・ケースの概要](/docs/containers?topic=containers-cs_uc_intro#cs_uc_intro)
 
-[{{site.data.keyword.Bluemix_notm}} の金融サービス・ユース・ケース](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
+[{{site.data.keyword.cloud_notm}} の金融サービス・ユース・ケース](/docs/containers?topic=containers-cs_uc_finance#cs_uc_finance)
 * [住宅ローン会社がコストを削減して法規制への適合を加速する](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)
 * [決済技術会社が開発者の生産性を合理化し、パートナーへの AI 対応ツールのデプロイ時間を 4 分の 1 に短縮](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)
 
-[{{site.data.keyword.Bluemix_notm}} の医療ユース・ケース](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
+[{{site.data.keyword.cloud_notm}} の医療ユース・ケース](/docs/containers?topic=containers-cs_uc_health#cs_uc_health)
 * [医療機関が、報告システムと患者システムのワークロードを、効率の悪い VM から Ops 対応コンテナーにマイグレーションする](/docs/containers?topic=containers-cs_uc_health#uc_migrate)
 * [非営利研究機関が、パートナーとの研究を進めながら、機密データを安全にホストする](/docs/containers?topic=containers-cs_uc_health#uc_research)
 
-[{{site.data.keyword.Bluemix_notm}} の小売向けユース・ケース](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
+[{{site.data.keyword.cloud_notm}} の小売向けユース・ケース](/docs/containers?topic=containers-cs_uc_retail#cs_uc_retail)
 * [ブリック・アンド・モルタル型小売業が API を介してグローバル・パートナーとデータを共有することによりオムニチャネル販売を促進](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)
 * [デジタル洞察による従来型の食料品店でのカスタマー・トラフィックと売上の増大](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)
 
-[{{site.data.keyword.Bluemix_notm}} の運輸向けユース・ケース](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
+[{{site.data.keyword.cloud_notm}} の運輸向けユース・ケース](/docs/containers?topic=containers-cs_uc_transport#cs_uc_transport)
 * [輸送会社によるビジネス・パートナー・エコシステム用の世界規模のシステム可用性の向上](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)
 * [航空会社による 3 週間未満での革新的な人事 (HR) 福利厚生サイトの配信](/docs/containers?topic=containers-cs_uc_transport#uc_airline)
 
-[{{site.data.keyword.Bluemix_notm}} の自治体ユース・ケース](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
+[{{site.data.keyword.cloud_notm}} の自治体ユース・ケース](/docs/containers?topic=containers-cs_uc_gov#cs_uc_gov)
 * [地方自治体は、公用データと民間データを組み合わせる地域の開発者とのコラボレーションを促進し、加速化しています](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
 * [大規模な公共港湾施設は、公共機関や民間組織に接続する港湾データと積荷目録を安全に交換します](/docs/containers?topic=containers-cs_uc_gov#uc_port)
 
@@ -93,8 +94,8 @@ lastupdated: "2019-06-12"
 * [{{site.data.keyword.containerlong_notm}} の潜在的な障害点の概要](/docs/containers?topic=containers-ha#fault_domains)
 
 [Kubernetes 戦略の定義](/docs/containers?topic=containers-strategy#strategy)
-* [{{site.data.keyword.Bluemix_notm}} へのワークロードの移動](/docs/containers?topic=containers-strategy#cloud_workloads)
-  * [{{site.data.keyword.Bluemix_notm}} には何を移動できますか?](/docs/containers?topic=containers-strategy#move_to_cloud)
+* [{{site.data.keyword.cloud_notm}} へのワークロードの移動](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [{{site.data.keyword.cloud_notm}} には何を移動できますか?](/docs/containers?topic=containers-strategy#move_to_cloud)
   * [{{site.data.keyword.containerlong_notm}} ではどのようなアプリを実行できますか?](/docs/containers?topic=containers-strategy#app_types)
     * [ステートレスなクラウド・ネイティブ・アプリを開発するためのガイドラインはどのようなものですか?](/docs/containers?topic=containers-strategy#12factor)
     * [既にアプリがあります。 どうすれば {{site.data.keyword.containerlong_notm}} にマイグレーションできますか?](/docs/containers?topic=containers-strategy#migrate_containerize)
@@ -104,7 +105,7 @@ lastupdated: "2019-06-12"
   * [どのようなタイプの可用性がワークロードに必要ですか?](/docs/containers?topic=containers-strategy#sizing_availability)
   * [ワークロードを処理するには、いくつのワーカー・ノードが必要ですか?](/docs/containers?topic=containers-strategy#sizing_workers)
 * [Kubernetes 環境の構造化](/docs/containers?topic=containers-strategy#kube_env)
-  * [どのようなタイプのクラスターとマシン・タイプを取得する必要がありますか?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [どのようなタイプのクラスターとフレーバーを取得する必要がありますか?](/docs/containers?topic=containers-strategy#env_flavors)
   * [複数のクラスターを使用しますか? または既存のクラスターに単にワーカーを追加しますか?](/docs/containers?topic=containers-strategy#env_multicluster)
   * [どうすればクラスター内のリソースをセットアップできますか?](/docs/containers?topic=containers-strategy#env_resources)
 * [リソースの可用性向上](/docs/containers?topic=containers-strategy#kube_ha)
@@ -127,28 +128,27 @@ lastupdated: "2019-06-12"
 ## チュートリアル
 {: #sitemap-tutorials}
 
+[チュートリアルの概要](/docs/containers?topic=containers-tutorials-ov)
+* [クラスターの作成および最初のアプリのデプロイ](/docs/containers?topic=containers-tutorials-ov#tutorials-create-cluster-deploy-app)
+* [クラスターへのアプリのデプロイ](/docs/containers?topic=containers-tutorials-ov#tutorials-deploy-app)
+* [高可用性とセキュリティーのセットアップ](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-ha-network-security)
+* [アプリとクラスターのデプロイメントの自動化](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-app-cluster-deployments)
+* [クラスター・アクティビティーのモニターおよびログ記録](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-monitor-log)
+* [クラウドへのアプリのマイグレーション](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-migrate-apps)
+
 [チュートリアル: Kubernetes クラスターの作成](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * [達成目標](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
 * [所要時間](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_time)
 * [対象読者](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
 * [前提条件](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-* [レッスン 1: クラスターを作成して CLI をセットアップする](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-* [レッスン 2: プライベート・レジストリーをセットアップする](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-* [レッスン 3: クラスター環境をセットアップする](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-* [レッスン 4: クラスターにサービスを追加する](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [レッスン 1: クラスター環境をセットアップする](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+* [レッスン 2: クラスターに IBM Cloud サービスを追加する](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+* [レッスン 3: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+* [レッスン 4: 可用性を高めたアプリをデプロイして更新する](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [レッスン 5: Watson Tone Analyzer アプリをデプロイして更新する](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+  * [レッスン 5a: Watson Tone Analyzer アプリをデプロイする](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+  * [レッスン 5b: 稼働中の Watson Tone Analyzer デプロイメントを更新する](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [次の作業](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
-
-[チュートリアル: Kubernetes クラスターにアプリをデプロイする方法](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial)
-* [達成目標](/docs/containers?topic=containers-cs_apps_tutorial#apps_objectives)
-* [所要時間](/docs/containers?topic=containers-cs_apps_tutorial#apps_time)
-* [対象者](/docs/containers?topic=containers-cs_apps_tutorial#apps_audience)
-* [前提条件](/docs/containers?topic=containers-cs_apps_tutorial#apps_prereqs)
-* [レッスン 1: アプリの 1 つのインスタンスを Kubernetes クラスターにデプロイする](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson1)
-* [レッスン 2: 可用性を高めたアプリをデプロイして更新する](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson2)
-* [レッスン 3: Watson Tone Analyzer アプリをデプロイして更新する](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial_lesson3)
-  * [レッスン 3a: Watson Tone Analyzer アプリをデプロイする](/docs/containers?topic=containers-cs_apps_tutorial#lesson3a)
-  * [レッスン 3b: 稼働中の Watson Tone Analyzer デプロイメントを更新する](/docs/containers?topic=containers-cs_apps_tutorial#lesson3b)
-* [次の作業](/docs/containers?topic=containers-cs_apps_tutorial#apps_next)
 
 [チュートリアル: Calico ネットワーク・ポリシーを使用したトラフィックのブロック](/docs/containers?topic=containers-policy_tutorial#policy_tutorial)
 * [達成目標](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
@@ -188,8 +188,8 @@ lastupdated: "2019-06-12"
 * [Web ブラウザーでの Kubernetes Terminal (ベータ版) の使用](/docs/containers?topic=containers-cs_cli_install#cli_web)
 * [API を使用したクラスターのデプロイメントの自動化](/docs/containers?topic=containers-cs_cli_install#cs_api)
 * [Kubernetes API を使用したクラスターの処理](/docs/containers?topic=containers-cs_cli_install#kube_api)
-* [API を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
-* [CLI を使用した {{site.data.keyword.Bluemix_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
+* [API を使用した {{site.data.keyword.cloud_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得](/docs/containers?topic=containers-cs_cli_install#cs_api_refresh)
+* [CLI を使用した {{site.data.keyword.cloud_notm}} IAM アクセス・トークンのリフレッシュと新しいリフレッシュ・トークンの取得](/docs/containers?topic=containers-cs_cli_install#cs_cli_refresh)
 
 ## クラスターのセットアップ
 {: #sitemap-setup-clusters}
@@ -198,7 +198,7 @@ lastupdated: "2019-06-12"
 * [クラスター・ネットワークの基本について](/docs/containers?topic=containers-plan_clusters#plan_basics)
   * [ワーカー間通信](/docs/containers?topic=containers-plan_clusters#worker-worker)
   * [マスター間通信](/docs/containers?topic=containers-plan_clusters#workeruser-master)
-  * [他の {{site.data.keyword.Bluemix_notm}} サービスまたはオンプレミス・ネットワークへのワーカー通信](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
+  * [他の {{site.data.keyword.cloud_notm}} サービスまたはオンプレミス・ネットワークへのワーカー通信](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
   * [ワーカー・ノード上で実行されているアプリへの外部通信](docs/containers?topic=containers-plan_clusters#external-workers)
 * [シナリオ: クラスター内のインターネット向けアプリ・ワークロードの実行](/docs/containers?topic=containers-plan_clusters#internet-facing)
 * [シナリオ: プライベート・ネットワーク上のクラスターへのオンプレミス・データ・センターの拡張および制限されたパブリック・アクセスの追加](/docs/containers?topic=containers-plan_clusters#internet-facing)
@@ -263,7 +263,7 @@ lastupdated: "2019-06-12"
 * [Kubernetes マスターの更新](/docs/containers?topic=containers-update#master)
 * [ワーカー・ノードの更新](/docs/containers?topic=containers-update#worker_node)
   * [コンソールでのワーカー・ノードの更新](/docs/containers?topic=containers-update#worker_up_console)
-* [マシン・タイプの更新](/docs/containers?topic=containers-update#machine_type)
+* [フレーバーの更新](/docs/containers?topic=containers-update#machine_type)
 * [クラスター・コンポーネントの更新](/docs/containers?topic=containers-update#components)
   * [ロギング用 Fluentd アドオンの自動更新の管理](/docs/containers?topic=containers-update#logging-up)
   * [Ingress ALB アドオンの自動更新の管理](/docs/containers?topic=containers-update#alb)
@@ -273,17 +273,17 @@ lastupdated: "2019-06-12"
 [クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)
 * [アクセス・ポリシーと役割について](/docs/containers?topic=containers-users#access_policies)
   * [ユーザーに対する適切なアクセス・ポリシーと役割の選出](/docs/containers?topic=containers-users#access_roles)
-  * [{{site.data.keyword.Bluemix_notm}} IAM での個別ユーザーまたはユーザー・グループへのアクセス役割の割り当て](/docs/containers?topic=containers-users#iam_individuals_groups)
+  * [{{site.data.keyword.cloud_notm}} IAM での個別ユーザーまたはユーザー・グループへのアクセス役割の割り当て](/docs/containers?topic=containers-users#iam_individuals_groups)
   * [クラスター・インスタンス、名前空間、またはリソース・グループへのユーザー・アクセスの有効範囲設定](/docs/containers?topic=containers-users#resource_groups)
 * [クラスターへのアクセス権限のセットアップ](/docs/containers?topic=containers-users#access-checklist)
 * [API キーのセットアップによるインフラストラクチャー・ポートフォリオへのアクセスの有効化](/docs/containers?topic=containers-users#api_key)
-  * [IBM Cloud インフラストラクチャー (SoftLayer) ポートフォリオへのアクセスについて](/docs/containers?topic=containers-users#understand_infra)
+  * [IBM Cloud インフラストラクチャー・ポートフォリオへのアクセスについて](/docs/containers?topic=containers-users#understand_infra)
   * [API キーまたはインフラストラクチャー資格情報の所有者に正しい許可があることの確認](/docs/containers?topic=containers-users#owner_permissions)
-  * [デフォルトの {{site.data.keyword.Bluemix_notm}} 従量課金アカウントでのインフラストラクチャー・ポートフォリオへのアクセス](/docs/containers?topic=containers-users#default_account)
-  * [別の IBM Cloud インフラストラクチャー (SoftLayer) アカウントへのアクセス](/docs/containers?topic=containers-users#credentials)
-* [{{site.data.keyword.Bluemix_notm}} IAM によるユーザーへのクラスター・アクセス権限の付与](/docs/containers?topic=containers-users#platform)
-  * [コンソールを使用した {{site.data.keyword.Bluemix_notm}} IAM 役割の割り当て](/docs/containers?topic=containers-users#add_users)
-  * [CLI を使用した {{site.data.keyword.Bluemix_notm}} IAM 役割の割り当て](/docs/containers?topic=containers-users#add_users_cli)
+  * [デフォルトの {{site.data.keyword.cloud_notm}} 従量課金アカウントでのインフラストラクチャー・ポートフォリオへのアクセス](/docs/containers?topic=containers-users#default_account)
+  * [別の IBM Cloud インフラストラクチャー・アカウントへのアクセス](/docs/containers?topic=containers-users#credentials)
+* [{{site.data.keyword.cloud_notm}} IAM によるユーザーへのクラスター・アクセス権限の付与](/docs/containers?topic=containers-users#platform)
+  * [コンソールを使用した {{site.data.keyword.cloud_notm}} IAM 役割の割り当て](/docs/containers?topic=containers-users#add_users)
+  * [CLI を使用した {{site.data.keyword.cloud_notm}} IAM 役割の割り当て](/docs/containers?topic=containers-users#add_users_cli)
 * [RBAC 許可の割り当て](/docs/containers?topic=containers-users#role-binding)
   * [ユーザー、グループ、またはサービス・アカウントに対するカスタム RBAC 許可の作成](/docs/containers?topic=containers-users#rbac)
 * [インフラストラクチャー許可のカスタマイズ](/docs/containers?topic=containers-users#infra_access)
@@ -291,10 +291,10 @@ lastupdated: "2019-06-12"
   * [アカウントからのユーザーの削除](/docs/containers?topic=containers-users#remove_user)
   * [特定の許可の削除](/docs/containers?topic=containers-users#remove_permissions)
     * [アクセス・グループからユーザーを削除します](/docs/containers?topic=containers-users#remove_access_group)
-    * [{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム許可や関連付けられている事前定義 RBAC 許可の削除](/docs/containers?topic=containers-users#remove_iam_rbac)
+    * [{{site.data.keyword.cloud_notm}} IAM プラットフォーム許可や関連付けられている事前定義 RBAC 許可の削除](/docs/containers?topic=containers-users#remove_iam_rbac)
     * [カスタム RBAC 許可の削除](/docs/containers?topic=containers-users#remove_custom_rbac)
     * [Cloud Foundry 許可の削除](/docs/containers?topic=containers-users#remove_cloud_foundry)
-    * [IBM Cloud インフラストラクチャー (SoftLayer) 許可の削除](/docs/containers?topic=containers-users#remove_infra)
+    * [IBM Cloud インフラストラクチャー許可の削除](/docs/containers?topic=containers-users#remove_infra)
 
 [クラスターでの機密情報の保護](/docs/containers?topic=containers-encryption#encryption)
 * [シークレットを使用するケースについて](/docs/containers?topic=containers-encryption#secrets)
@@ -370,24 +370,25 @@ lastupdated: "2019-06-12"
   * [Istio とは?](/docs/containers?topic=containers-istio#istio_ov_what_is)
   * [{{site.data.keyword.containerlong_notm}} 上の Istio (ベータ版) とは?](/docs/containers?topic=containers-istio#istio_ov_addon)
 * [何をインストールできますか?](/docs/containers?topic=containers-istio#istio_components)
-* [{{site.data.keyword.containerlong_notm}} での Istio のインストール](/docs/containers?topic=containers-istio#istio_install)
-  * [CLI での管理対象 Istio アドオンのインストール](/docs/containers?topic=containers-istio#istio_install_cli)
-  * [UI での管理対象 Istio アドオンのインストール](/docs/containers?topic=containers-istio#istio_install_ui)
+* [Istio アドオンのインストール](/docs/containers?topic=containers-istio#istio_install)
+  * [コンソールからの管理対象 Istio アドオンのインストール](/docs/containers?topic=containers-istio#istio_install_ui)
+    * [CLI からの管理対象 Istio アドオンのインストール](/docs/containers?topic=containers-istio#istio_install_cli)
 * [BookInfo サンプル・アプリを試してみる](/docs/containers?topic=containers-istio#istio_bookinfo)
+  * [BookInfo へのパブリック・アクセス](/docs/containers?topic=containers-istio#istio_access_bookinfo)
+  * [IBM 提供のホスト名を使用した BookInfo の公開](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
   * [何が起きたかを理解する](/docs/containers?topic=containers-istio#istio_bookinfo_understanding)
 * [{{site.data.keyword.containerlong_notm}} 上の Istio のロギング、モニタリング、トレース、視覚化](/docs/containers?topic=containers-istio#istio_health)
   * [Grafana、Jaeger、Kiali のダッシュボードの起動](/docs/containers?topic=containers-istio#istio_health_extras)
   * [{{site.data.keyword.la_full_notm}} を使用するロギングのセットアップ](/docs/containers?topic=containers-istio#istio_health_logdna)
   * [{{site.data.keyword.mon_full_notm}} を使用するモニタリングのセットアップ](/docs/containers?topic=containers-istio#istio_health_sysdig)
-* [アプリのためのサイドカー注入のセットアップ](/docs/containers?topic=containers-istio#istio_sidecar)
+* [サイドカー注入のセットアップによる Istio サービス・メッシュ内へのアプリの組み込み](/docs/containers?topic=containers-istio#istio_sidecar)
   * [自動サイドカー注入の有効化](/docs/containers?topic=containers-istio#istio_sidecar_automatic)
   * [サイドカーの手動注入](/docs/containers?topic=containers-istio#istio_sidecar_manual)
 * [IBM 提供のホスト名を使用した Istio 管理対象アプリの公開](/docs/containers?topic=containers-istio#istio_expose)
-  * [例: IBM 提供のホスト名を使用した BookInfo の公開](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
-  * [IBM 提供のホスト名を使用した Istio 管理対象アプリのパブリック公開](/docs/containers?topic=containers-istio#istio_expose_link)
-* [{{site.data.keyword.containerlong_notm}} での Istio のアンインストール](/docs/containers?topic=containers-istio#istio_uninstall)
-  * [CLI での管理対象 Istio アドオンのアンインストール](/docs/containers?topic=containers-istio#istio_uninstall_cli)
-  * [UI での管理対象 Istio アドオンのアンインストール](/docs/containers?topic=containers-istio#istio_uninstall_ui)
+* [Istio アドオンの更新](/docs/containers?topic=containers-istio#istio_update)
+* [Istio のアンインストール](/docs/containers?topic=containers-istio#istio_uninstall)
+  * [コンソールからの管理対象 Istio アドオンのアンインストール](/docs/containers?topic=containers-istio#istio_uninstall_ui)
+  * [CLI からの管理対象 Istio アドオンのアンインストール](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [クラスター内にインストールされている他の Istio のアンインストール](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [次の作業](/docs/containers?topic=containers-istio#istio_next)
 
@@ -402,10 +403,14 @@ lastupdated: "2019-06-12"
   * [使用されている IP アドレスの解放](/docs/containers?topic=containers-subnets#free)
 * [ポータブル IP アドレスの追加](/docs/containers?topic=containers-subnets#adding_ips)
   * [サブネットをさらにオーダーしてポータブル IP を追加する](/docs/containers?topic=containers-subnets#request)
+  * [既存のサブネットをクラスターに追加することによるポータブル IP の追加](/docs/containers?topic=containers-subnets#add-existing)
   * [ユーザー管理のサブネットを使用したポータブル・プライベート IP の追加](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [サブネットのルーティングの管理](/docs/containers?topic=containers-subnets#subnet-routing)
   * [同一 VLAN 上の 1 次サブネット間のルーティングを有効にする](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [ゲートウェイ・デバイス用のサブネットのルーティングの管理](/docs/containers?topic=containers-subnets#vra-routing)
+* [クラスターからのサブネットの削除](/docs/containers?topic=containers-subnets#remove-subnets)
+  * [IBM Cloud インフラストラクチャー・アカウント内のサブネットのクラスターからの削除](/docs/containers?topic=containers-subnets#remove-sl-subnets)
+  * [オンプレミス・ネットワークのサブネットのクラスターからの削除](/docs/containers?topic=containers-subnets#remove-user-subnets)
 
 [サービス・エンドポイントまたは VLAN 接続の変更](/docs/containers?topic=containers-cs_network_cluster)
 * [プライベート・サービス・エンドポイントのセットアップ](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
@@ -443,25 +448,28 @@ lastupdated: "2019-06-12"
 * [strongSwan IPSec VPN サービスの無効化](/docs/containers?topic=containers-vpn#disabling-the-strongswan-ipsec-vpn-service)
 * [Virtual Router Appliance の使用](/docs/containers?topic=containers-vpn#vyatta)
 
-## イメージからのコンテナーのビルド
+## アプリのデプロイ
 {: #sitemap-images}
 
 [イメージからのコンテナーのビルド](/docs/containers?topic=containers-images#images)
 * [イメージ・レジストリーの計画](/docs/containers?topic=containers-images#planning_images)
 * [コンテナー・イメージのための信頼できるコンテンツのセットアップ](/docs/containers?topic=containers-images#trusted_images)
 * [{{site.data.keyword.registryshort_notm}} イメージからデフォルトの Kubernetes 名前空間へのコンテナーのデプロイ](/docs/containers?topic=containers-images#namespace)
-* [イメージ・プル・シークレットを使用して、他の Kubernetes 名前空間、他の {{site.data.keyword.Bluemix_notm}} アカウント、または外部プライベート・レジストリーにアクセスする](/docs/containers?topic=containers-images#other)
+* [{{site.data.keyword.registryshort_notm}} からイメージをプルする権限をクラスターに付与する方法](/docs/containers?topic=containers-images#cluster_registry_auth)
+* [API キーのイメージ・プル・シークレットを使用するように既存のクラスターを更新する](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key)
+* [イメージ・プル・シークレットを使用して、他の Kubernetes 名前空間、他の {{site.data.keyword.cloud_notm}} アカウント、または外部プライベート・レジストリーにアクセスする](/docs/containers?topic=containers-images#other)
   * [デフォルトの名前空間からクラスターの他の名前空間へのイメージ・プル・シークレットのコピー](/docs/containers?topic=containers-images#copy_imagePullSecret)
-  * [イメージ・プル・シークレットを作成して、他の {{site.data.keyword.Bluemix_notm}} アカウント内のイメージにアクセスしたり IAM ポリシーを使用してレジストリー・アクセスを制限したりする](/docs/containers?topic=containers-images#other_registry_accounts)
+  * [イメージ・プル・シークレットを作成して、他の {{site.data.keyword.cloud_notm}} アカウント内のイメージにアクセスしたり IAM ポリシーを使用してレジストリー・アクセスを制限したりする](/docs/containers?topic=containers-images#other_registry_accounts)
   * [他のプライベート・レジストリー内に保管されているイメージへのアクセス](/docs/containers?topic=containers-images#private_images)
-* [作成済みイメージ・プル・シークレットを使用したコンテナーのデプロイ](/docs/containers?topic=containers-images#use_imagePullSecret)
+* [イメージ・プル・シークレットを使用したコンテナーのデプロイ](/docs/containers?topic=containers-images#use_imagePullSecret)
   * [ポッド・デプロイメントでイメージ・プル・シークレットを参照する](/docs/containers?topic=containers-images#pod_imagePullSecret)
   * [選択した名前空間の Kubernetes サービス・アカウントにイメージ・プル・シークレットを保管する](/docs/containers?topic=containers-images#store_imagePullSecret)
+* [非推奨: レジストリー・トークンを使用して {{site.data.keyword.registryshort_notm}} イメージからコンテナーをデプロイする方法](/docs/containers?topic=containers-images#namespace_token)
+  * [非推奨: レジストリー・トークンを使用して Kubernetes 名前空間 default にイメージをデプロイする方法](/docs/containers?topic=containers-images#token_default_namespace)
+  * [非推奨: クラスターの default 名前空間からその他の名前空間にトークン・ベースのイメージ・プル・シークレットをコピーする方法](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
+  * [非推奨: 他の {{site.data.keyword.cloud_notm}} 地域やアカウントのイメージにアクセスするためにトークン・ベースのイメージ・プル・シークレットを作成する方法](/docs/containers?topic=containers-images#token_other_regions_accounts)
 
-## アプリをクラスターにデプロイする
-{: #sitemap-apps}
-
-[アプリをクラスターにデプロイする](/docs/containers?topic=containers-app#app)
+[Kubernetes ネイティブ・アプリをクラスターにデプロイする](/docs/containers?topic=containers-app)
 * [クラスターでアプリを実行する計画](/docs/containers?topic=containers-app#plan_apps)
   * [どのようなタイプの Kubernetes オブジェクトをアプリ用に作成できますか?](/docs/containers?topic=containers-app#object)
   * [どうすれば Kubernetes アプリ構成に機能を追加できますか?](/docs/containers?topic=containers-app#how-can-i-add-capabilities-to-my-kubernetes-app-configuration-)
@@ -484,8 +492,17 @@ lastupdated: "2019-06-12"
 * [アプリのスケーリング](/docs/containers?topic=containers-app#app_scaling)
 * [アプリを更新するためのローリング・デプロイメントの管理](/docs/containers?topic=containers-app#app_rolling)
 
-## アプリを公開するネットワーキング
-{: #sitemap-apps-networking}
+[Knative を使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative)
+* [クラスターでの Knative のセットアップ](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
+* [Knative サービスを使用したサーバーレス・アプリのデプロイ](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
+* [カスタム・ドメイン・ネームおよび証明書のセットアップ](/docs/containers?topic=containers-serverless-apps-knative#knative-custom-domain-tls)
+* [別の Knative サービスからの Knative サービスへのアクセス](/docs/containers?topic=containers-serverless-apps-knative#knative-access-service)
+* [一般的な Knative サービスの設定](/docs/containers?topic=containers-serverless-apps-knative#knative-service-settings)
+  * [ポッドの最小数と最大数の設定](/docs/containers?topic=containers-serverless-apps-knative#knative-min-max-pods)
+  * [ポッドごとの要求最大数の指定](/docs/containers?topic=containers-serverless-apps-knative#max-request-per-pod)
+  * [プライベート専用サーバーレス・アプリの作成](/docs/containers?topic=containers-serverless-apps-knative#knative-private-only)
+  * [Knative サービスでのコンテナー・イメージの再プルの強制](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
+* [関連リンク](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
 [クラスター内ネットワーキングと外部ネットワーキングを使用してアプリを公開するための計画](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
 * [Kubernetes サービスを使用してクラスター内のトラフィックにアプリを公開する](/docs/containers?topic=containers-cs_network_planning#in-cluster)
@@ -498,39 +515,53 @@ lastupdated: "2019-06-12"
 * [NodePort を使用してネットワーク・トラフィックを管理する](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [NodePort サービスを使用してアプリへのアクセスを有効にする](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング](/docs/containers?topic=containers-loadbalancer#loadbalancer)
-* [概要](/docs/containers?topic=containers-loadbalancer#lb_overview)
-* [バージョン 1.0 と 2.0 のロード・バランサーの比較](/docs/containers?topic=containers-loadbalancer#comparison)
-* [v2.0: コンポーネントとアーキテクチャー (ベータ版)](/docs/containers?topic=containers-loadbalancer#planning_ipvs)
-  * [単一ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer#ipvs_single)
-  * [複数ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer#ipvs_multi)
-* [v2.0: 前提条件](/docs/containers?topic=containers-loadbalancer#ipvs_provision)
-* [v2.0: 複数ゾーン・クラスターでのロード・バランサー 2.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config)
-* [v2.0: 単一ゾーン・クラスターでのロード・バランサー 2.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config)
-* [v2.0: スケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer#scheduling)
-  * [サポートされるスケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer#scheduling_supported)
-  * [サポートされないスケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer#scheduling_unsupported)
-* [v1.0: コンポーネントとアーキテクチャー](/docs/containers?topic=containers-loadbalancer#v1_planning)
-  * [単一ゾーン・クラスターでのトラフィック・フロー](/docs/containers?topic=containers-loadbalancer#v1_single)
-  * [複数ゾーン・クラスターでのトラフィック・フロー](/docs/containers?topic=containers-loadbalancer#v1_multi)
-* [v1.0: 複数ゾーン・クラスターでのロード・バランサー 1.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
-* [v1.0: 単一ゾーン・クラスターでのロード・バランサー 1.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#lb_config)
-* [v1.0: ソース IP 保持の有効化](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
+## ネットワーク・ロード・バランサー (NLB) を使用した基本ロード・バランシングと DSR ロード・バランシング
+{: #sitemap-nlb}
+
+[NLB について](/docs/containers?topic=containers-loadbalancer-about)
+* [バージョン 1.0 と 2.0 の NLB での基本ロード・バランシングと DSR ロード・バランシングの比較](/docs/containers?topic=containers-loadbalancer-about#comparison)
+* [NLB 1.0 のコンポーネントとアーキテクチャー](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
+  * [単一ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer-about#v1_single)
+  * [複数ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
+* [NLB 2.0 (ベータ版) のコンポーネントとアーキテクチャー](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+  * [単一ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
+  * [複数ゾーン・クラスター内のトラフィック・フロー](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
+
+[NLB 1.0 のセットアップ](/docs/containers?topic=containers-loadbalancer)
+* [複数ゾーン・クラスターでの NLB 1.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
+* [単一ゾーン・クラスター内での NLB 1.0 のセットアップ](/docs/containers?topic=containers-loadbalancer#lb_config)
+* [ソース IP 保持の有効化](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
   * [エッジ・ノードのアフィニティー・ルールと耐障害性を追加する](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [複数のパブリック VLAN またはプライベート VLAN にアフィニティー・ルールを追加する](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
-* [ロード・バランサーのホスト名の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname)
-  * [DNS ホスト名へのロード・バランサー IP の登録](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns)
-  * [ホスト名のフォーマットについて](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_format)
-  * [ヘルス・モニターを作成して、ホスト名に対するヘルス・チェックを有効にする](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_monitor)
-  * [ホスト名の IP およびモニターの更新と削除](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_delete)
 
-[Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング](/docs/containers?topic=containers-ingress#ingress)
+[NLB 2.0 (ベータ版) のセットアップ](/docs/containers?topic=containers-loadbalancer-v2)
+* [前提条件](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
+* [複数ゾーン・クラスターでの NLB 2.0 のセットアップ](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
+* [単一ゾーン・クラスターでの NLB 2.0 のセットアップ](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
+* [スケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer-v2#scheduling)
+  * [サポートされるスケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
+  * [サポートされないスケジューリング・アルゴリズム](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
+
+[NLB ホスト名の登録](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+* [DNS ホスト名へのロード・バランサー IP の登録](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
+* [ホスト名のフォーマットについて](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
+* [ヘルス・モニターを作成して、ホスト名に対するヘルス・チェックを有効にする](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
+  * [ホスト名の IP およびモニターの更新と削除](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+
+## Ingress アプリケーション・ロード・バランサー (ALB) を使用した HTTPS ロード・バランシング
+{: #sitemap-ingress}
+
+[Ingress および ALB について](/docs/containers?topic=containers-ingress-about)
+* [Ingress に含まれるもの](/docs/containers?topic=containers-ingress-about#ingress_components)
+  * [Ingress リソース](/docs/containers?topic=containers-ingress-about#ingress-resource)
+  * [アプリケーション・ロード・バランサー (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
+  * [複数ゾーン・ロード・バランサー (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
+* [IP を Ingress ALB に割り当てる方法](/docs/containers?topic=containers-ingress-about#ips)
+* [単一ゾーン・クラスターで Ingress を使用して要求をアプリに届ける方法](/docs/containers?topic=containers-ingress-about#architecture-single)
+* [複数ゾーン・クラスターで Ingress を使用して要求をアプリに届ける方法](/docs/containers?topic=containers-ingress-about#architecture-multi)
+
+[Ingress のセットアップ](/docs/containers?topic=containers-ingress)
 * [サンプル YAML](/docs/containers?topic=containers-ingress#sample_ingress)
-* [Ingress とは?](/docs/containers?topic=containers-ingress#planning)
-  * [Ingress に含まれるもの](/docs/containers?topic=containers-ingress#ingress_components)
-  * [IP を Ingress ALB に割り当てる方法](/docs/containers?topic=containers-ingress#ips)
-    * [単一ゾーン・クラスターで Ingress を使用して要求をアプリに届ける方法](/docs/containers?topic=containers-ingress#architecture-single)
-    * [複数ゾーン・クラスターで Ingress を使用して要求をアプリに届ける方法](/docs/containers?topic=containers-ingress#architecture-multi)
 * [前提条件](/docs/containers?topic=containers-ingress#config_prereqs)
 * [1 つの名前空間を使用する場合と複数の名前空間を使用する場合のネットワーキングの計画](/docs/containers?topic=containers-ingress#multiple_namespaces)
   * [1 つの名前空間にすべてのアプリを入れる場合](/docs/containers?topic=containers-ingress#one-ns)
@@ -550,18 +581,8 @@ lastupdated: "2019-06-12"
   * [ステップ 4: TLS 終端を選択する](/docs/containers?topic=containers-ingress#private_4)
   * [ステップ 5: Ingress リソースを作成する](/docs/containers?topic=containers-ingress#private_5)
   * [ステップ 6: プライベート・ネットワークからアプリにアクセスする](/docs/containers?topic=containers-ingress#private_6)
-* [アノテーションを使用した Ingress リソースのカスタマイズ](/docs/containers?topic=containers-ingress#annotations)
-* [Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress#opening_ingress_ports)
-* [ソース IP アドレスの保持](/docs/containers?topic=containers-ingress#preserve_source_ip)
-* [HTTP レベルで SSL プロトコルと SSL 暗号を構成する](/docs/containers?topic=containers-ingress#ssl_protocols_ciphers)
-* [ALB のパフォーマンスの調整](/docs/containers?topic=containers-ingress#perf_tuning)
-  * [ログ・バッファリングとフラッシュ・タイムアウトの有効化](/docs/containers?topic=containers-ingress#access-log)
-  * [キープアライブ接続の数または期間の変更](/docs/containers?topic=containers-ingress#keepalive_time)
-  * [保留中の接続のバックログの変更](/docs/containers?topic=containers-ingress#backlog)
-  * [カーネルのパフォーマンスの調整](/docs/containers?topic=containers-ingress#ingress_kernel)
-* [自分の Ingress コントローラーを持ち込む](/docs/containers?topic=containers-ingress#user_managed)
 
-[アノテーションを使用した Ingress のカスタマイズ](/docs/containers?topic=containers-ingress_annotation#ingress_annotation)
+[アノテーションを使用した Ingress ルーティングのカスタマイズ](/docs/containers?topic=containers-ingress_annotation)
 * [一般的なアノテーション](/docs/containers?topic=containers-ingress_annotation#general)
   * [カスタム・エラー・アクション (custom-errors、custom-error-actions)](/docs/containers?topic=containers-ingress_annotation#custom-errors)
   * [ロケーション・スニペット (location-snippets)](/docs/containers?topic=containers-ingress_annotation#location-snippets)
@@ -604,7 +625,17 @@ lastupdated: "2019-06-12"
 * [ユーザー認証アノテーション](/docs/containers?topic=containers-ingress_annotation#user-authentication)
   * [アプリ ID 認証 (appid-auth)](/docs/containers?topic=containers-ingress_annotation#appid-auth)
 
-[Ingress のロギングとモニタリング](/docs/containers?topic=containers-ingress_health#ingress_health)
+[デフォルトの Ingress の動作の変更](/docs/containers?topic=containers-ingress-settings)
+* [Ingress ALB でポートを開く](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
+* [ソース IP アドレスの保持](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)
+* [HTTP レベルで SSL プロトコルと SSL 暗号を構成する](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)
+* [ALB のパフォーマンスの調整](/docs/containers?topic=containers-ingress-settings#perf_tuning)
+* [ログ・バッファリングとフラッシュ・タイムアウトの有効化](/docs/containers?topic=containers-ingress-settings#access-log)
+* [キープアライブ接続の数または期間の変更](/docs/containers?topic=containers-ingress-settings#keepalive_time)
+* [保留中の接続のバックログの変更](/docs/containers?topic=containers-ingress-settings#backlog)
+* [カーネルのパフォーマンスの調整](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
+
+[Ingress のロギングとモニタリング](/docs/containers?topic=containers-ingress_health)
 * [Ingress ログの表示](/docs/containers?topic=containers-ingress_health#ingress_logs)
 * [Ingress ログの内容とフォーマットをカスタマイズする](/docs/containers?topic=containers-ingress_health#ingress_log_format)
 * [Ingress ALB のモニタリング](/docs/containers?topic=containers-ingress_health#ingress_monitoring)
@@ -614,6 +645,10 @@ lastupdated: "2019-06-12"
       * [タイプ 1 アップストリーム・メトリック](/docs/containers?topic=containers-ingress_health#type_one)
       * [タイプ 2 アップストリーム・メトリック](/docs/containers?topic=containers-ingress_health#type_two)
 * [Ingress メトリックの収集に関する共有メモリー・ゾーン・サイズの引き上げ](/docs/containers?topic=containers-ingress_health#vts_zone_size)
+
+[自分の Ingress コントローラーを持ち込む](/docs/containers?topic=containers-ingress-user_managed)
+* [NLB とホスト名を作成して Ingress コントローラーを公開する](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [既存のロード・バランサーおよび Ingress サブドメインを使用して Ingress コントローラーを公開する](/docs/containers?topic=containers-ingress-user_managed#user_managed_alb)
 
 ## 永続ストレージへのデータの保管
 {: #sitemap-storage}
@@ -646,10 +681,6 @@ lastupdated: "2019-06-12"
 * [デフォルトの NFS バージョンの変更](/docs/containers?topic=containers-file_storage#nfs_version)
 * [データのバックアップとリストア](/docs/containers?topic=containers-file_storage#file_backup_restore)
 * [ストレージ・クラス・リファレンス](/docs/containers?topic=containers-file_storage#file_storageclass_reference)
-  * [ブロンズ](/docs/containers?topic=containers-file_storage#file_bronze)
-  * [シルバー](/docs/containers?topic=containers-file_storage#file_silver)
-  * [ゴールド](/docs/containers?topic=containers-file_storage#file_gold)
-  * [カスタム](/docs/containers?topic=containers-file_storage#file_custom)
 * [ストレージ・クラスのカスタマイズ例](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
   * [トポロジー対応ストレージの作成](/docs/containers?topic=containers-file_storage#file-topology)
   * [複数ゾーン・クラスターのゾーンを指定する](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
@@ -718,10 +749,10 @@ lastupdated: "2019-06-12"
   * [Portworx クラスターからのワーカー・ノードの削除、または Portworx クラスター全体の削除](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
 * [ヘルプとサポートの取得](/docs/containers?topic=containers-portworx#portworx_help)
 
-[{{site.data.keyword.Bluemix_notm}} ストレージ・ユーティリティー](/docs/containers?topic=containers-utilities#utilities)
-* [{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグイン (ベータ版) のインストール](/docs/containers?topic=containers-utilities#block_storage_attacher)
-  * [{{site.data.keyword.Bluemix_notm}} Block Storage Attacher プラグインの更新](/docs/containers?topic=containers-utilities#update_block_attacher)
-  * [{{site.data.keyword.Bluemix_notm}} Block Volume Attacher プラグインの削除](/docs/containers?topic=containers-utilities#remove_block_attacher)
+[{{site.data.keyword.cloud_notm}} ストレージ・ユーティリティー](/docs/containers?topic=containers-utilities#utilities)
+* [{{site.data.keyword.cloud_notm}} Block Storage Attacher プラグイン (ベータ版) のインストール](/docs/containers?topic=containers-utilities#block_storage_attacher)
+  * [{{site.data.keyword.cloud_notm}} Block Storage Attacher プラグインの更新](/docs/containers?topic=containers-utilities#update_block_attacher)
+  * [{{site.data.keyword.cloud_notm}} Block Volume Attacher プラグインの削除](/docs/containers?topic=containers-utilities#remove_block_attacher)
 * [不定形式のブロック・ストレージの自動プロビジョニングと、ワーカー・ノードがストレージにアクセスすることの許可](/docs/containers?topic=containers-utilities#automatic_block)
 * [特定のワーカー・ノードへのブロック・ストレージの手動追加](/docs/containers?topic=containers-utilities#manual_block)
 * [非 SDS ワーカー・ノードへの未加工ブロック・ストレージの付加](/docs/containers?topic=containers-utilities#attach_block)
@@ -731,6 +762,29 @@ lastupdated: "2019-06-12"
 
 ## 統合を使用したクラスター機能の拡張
 {: #sitemap-integrations}
+
+[{{site.data.keyword.containerlong_notm}} パートナー](/docs/containers?topic=containers-service-partners)
+* [LogDNA](/docs/containers?topic=containers-service-partners#logdna-partner)
+  * [利点](/docs/containers?topic=containers-service-partners#logdna-benefits)
+  * [統合](/docs/containers?topic=containers-service-partners#logdna-integration)
+  * [課金とサポート](/docs/containers?topic=containers-service-partners#logdna-billing-support)
+* [Sysdig](/docs/containers?topic=containers-service-partners#sydig-partner)
+  * [利点](/docs/containers?topic=containers-service-partners#sydig-benefits)
+  * [統合](/docs/containers?topic=containers-service-partners#sysdig-integration)
+  * [課金とサポート](/docs/containers?topic=containers-service-partners#sysdig-billing-support)
+* [Portworx](/docs/containers?topic=containers-service-partners#portworx-parter)
+  * [利点](/docs/containers?topic=containers-service-partners#portworx-benefits)
+  * [統合](/docs/containers?topic=containers-service-partners#portworx-integration)
+  * [課金とサポート](/docs/containers?topic=containers-service-partners#portworx-billing-support)
+
+[{{site.data.keyword.cloud_notm}} サービスとサード・パーティーの統合](/docs/containers?topic=containers-ibm-3rd-party-integrations)
+* [{{site.data.keyword.cloud_notm}} サービス](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
+  * [{{site.data.keyword.cloud_notm}} プラットフォーム・サービス](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
+  * [{{site.data.keyword.cloud_notm}} インフラストラクチャー・サービス](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+* [Kubernetes コミュニティーとオープン・ソースの統合](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
+  * [パートナーシップで運用される統合](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
+  * [管理対象アドオン](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
+  * [他のサード・パーティー統合](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-helm)
 
 [管理対象アドオンを使用したサービスの追加](/docs/containers?topic=containers-managed-addons#managed-addons)
 * [管理対象アドオンの追加](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
@@ -742,8 +796,8 @@ lastupdated: "2019-06-12"
 * [プライベート・クラスター: Tiller を使用せずに Helm チャートをインストールする](/docs/containers?topic=containers-helm#private_install_without_tiller)
 * [Helm の関連リンク](/docs/containers?topic=containers-helm#helm_links)
 
-[{{site.data.keyword.Bluemix_notm}} サービス・バインディングを使用したサービスの追加](/docs/containers?topic=containers-service-binding#service-binding)
-* [{{site.data.keyword.Bluemix_notm}} サービスをクラスターに追加する](/docs/containers?topic=containers-service-binding#bind-services)
+[{{site.data.keyword.cloud_notm}} サービス・バインディングを使用したサービスの追加](/docs/containers?topic=containers-service-binding#service-binding)
+* [{{site.data.keyword.cloud_notm}} サービスをクラスターに追加する](/docs/containers?topic=containers-service-binding#bind-services)
 * [アプリからのサービス資格情報へのアクセス](/docs/containers?topic=containers-service-binding#adding_app)
     * [シークレットをボリュームとしてポッドにマウントする](/docs/containers?topic=containers-service-binding#mount_secret)
     * [環境変数でシークレットを参照する](/docs/containers?topic=containers-service-binding#reference_secret)
@@ -759,29 +813,24 @@ lastupdated: "2019-06-12"
 ## 非推奨: 専用クラウド
 {: #sitemap-dedicated}
 
-[非推奨: {{site.data.keyword.Bluemix_dedicated_notm}}](/docs/containers?topic=containers-dedicated#dedicated) でのクラスターの概説
+[非推奨: 専用クラウド](/docs/containers?topic=containers-dedicated#dedicated)
 * [Dedicated クラウド環境について](/docs/containers?topic=containers-dedicated#dedicated_environment)
 * [クラウド環境間のクラスター管理の違い](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
   * [サービス・アーキテクチャー](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
 * [Dedicated での {{site.data.keyword.containerlong_notm}} のセットアップ](/docs/containers?topic=containers-dedicated#dedicated_setup)
 * [クラスターの作成](/docs/containers?topic=containers-dedicated#dedicated_administering)
-  * [{{site.data.keyword.Bluemix_notm}} コンソールでのクラスターの作成](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
+  * [{{site.data.keyword.cloud_notm}} コンソールでのクラスターの作成](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
   * [CLI でのクラスターの作成](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
   * [ワーカー・ノードの追加](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
   * [プライベートとパブリックのイメージ・レジストリーの使用](/docs/containers?topic=containers-dedicated#dedicated_images)
   * [クラスターへのサブネットの追加](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
-      * [ユーザー管理サブネットと IP アドレスを Kubernetes クラスターにさらに追加する](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
+      * [ユーザー管理サブネットと IP アドレスをクラスターにさらに追加する](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
   * [その他のクラスター構成](/docs/containers?topic=containers-dedicated#dedicated_other)
 * [アプリをクラスターにデプロイする](/docs/containers?topic=containers-dedicated#dedicated_apps)
   * [アプリへのパブリック・アクセスを許可する方法](/docs/containers?topic=containers-dedicated#dedicated_apps_public)
   * [ロード・バランサー・タイプのサービスを使用してアプリへのアクセスを構成する方法](/docs/containers?topic=containers-dedicated#dedicated_apps_public_load_balancer)
       * [Ingress を使用してアプリへのパブリック・アクセスを構成する方法](/docs/containers?topic=containers-dedicated#dedicated_apps_public_ingress)
   * [永続ストレージの作成](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
-
-## 非推奨: 単一コンテナーとスケーラブル・コンテナーの実行
-{: #sitemap-singlescalable}
-
-[非推奨: 単一コンテナーとスケーラブル・コンテナーの実行](https://github.com/IBM-Bluemix-Docs/containers/raw/master/Running_single_and_scalable_containers_in_IBM_Cloud_Container_Service.zip)
 
 ## ハイブリッド・クラウド
 {: #sitemap-hybrid}
@@ -790,7 +839,7 @@ lastupdated: "2019-06-12"
 * [strongSwan VPN でのパブリック・クラウドとプライベート・クラウドの接続](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 * [パブリック Kubernetes コンテナーでの {{site.data.keyword.icpfull_notm}} イメージの実行](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
-## {{site.data.keyword.containerlong_notm}} CLI プラグイン解説書
+## CLI プラグイン解説書
 {: #sitemap-cli-plugin}
 
 [コマンド解説書](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
@@ -809,7 +858,7 @@ lastupdated: "2019-06-12"
 
 [CLI の変更ログ](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
-## {{site.data.keyword.containerlong_notm}} のバージョン
+## バージョン・ヒストリー
 {: #sitemap-versions}
 
 [バージョン情報および更新操作](/docs/containers?topic=containers-cs_versions#cs_versions)
@@ -823,13 +872,8 @@ lastupdated: "2019-06-12"
 * [バージョン 1.12](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [マスターの前に行う更新](/docs/containers?topic=containers-cs_versions#112_before)
   * [マスターの後に行う更新](/docs/containers?topic=containers-cs_versions#112_after)
-* [バージョン 1.11](/docs/containers?topic=containers-cs_versions#cs_v111)
-  * [マスターの前に行う更新](/docs/containers?topic=containers-cs_versions#111_before)
-  * [マスターの後に行う更新](/docs/containers?topic=containers-cs_versions#111_after)
-    * [Kubernetes 1.11 の高可用性クラスター・マスターへの更新](/docs/containers?topic=containers-cs_versions#ha-masters)
-  * [コンテナー・ランタイムとしての containerd への更新](/docs/containers?topic=containers-cs_versions#containerd)
-  * [Calico v3 への更新の準備](/docs/containers?topic=containers-cs_versions#111_calicov3)
 * [アーカイブ](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [バージョン 1.11 (サポート対象外)](/docs/containers?topic=containers-cs_versions#cs_v111)
   * [バージョン 1.10 (サポート対象外)](/docs/containers?topic=containers-cs_versions#cs_v110)
   * [バージョン 1.9 (サポート対象外)](/docs/containers?topic=containers-cs_versions#cs_v19)
   * [バージョン 1.8 (サポート対象外)](/docs/containers?topic=containers-cs_versions#cs_v18)
@@ -956,31 +1000,39 @@ lastupdated: "2019-06-12"
 * [Fluentd アドオンの変更ログ](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 * [Ingress ALB アドオンの変更ログ](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 
+## API リファレンス
+{: #sitemap-apis}
+
+* [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+* [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+* [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
+* [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
+
 ## ロケーション
 {: #sitemap-locations}
 
 [ロケーション](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+* [{{site.data.keyword.containerlong_notm}} ロケーション](/docs/containers?topic=containers-regions-and-zones#locations)
   * [使用可能なロケーション](/docs/containers?topic=containers-regions-and-zones#available-locations)
   * [{{site.data.keyword.containerlong_notm}} での単一ゾーンおよび複数ゾーンのロケーション](/docs/containers?topic=containers-regions-and-zones#zones)
   * [単一ゾーンのクラスター](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
   * [複数ゾーン・クラスター](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 * [グローバル・エンドポイントへのアクセス](/docs/containers?topic=containers-regions-and-zones#endpoint)
-  * [{{site.data.keyword.Bluemix_notm}} へのログイン](/docs/containers?topic=containers-regions-and-zones#login-ic)
+  * [{{site.data.keyword.cloud_notm}} へのログイン](/docs/containers?topic=containers-regions-and-zones#login-ic)
   * [{{site.data.keyword.containerlong_notm}} へのログイン](/docs/containers?topic=containers-regions-and-zones#login-iks)
-* [非推奨: 以前の {{site.data.keyword.Bluemix_notm}} 地域およびゾーン構造](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+* [非推奨: 以前の {{site.data.keyword.cloud_notm}} 地域およびゾーン構造](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 ## ユーザー・アクセス許可
 {: #sitemap-user-access}
 
 [ユーザー・アクセス許可](/docs/containers?topic=containers-access_reference)
-* [{{site.data.keyword.Bluemix_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-access_reference#iam_platform)
+* [{{site.data.keyword.cloud_notm}} IAM プラットフォーム役割](/docs/containers?topic=containers-access_reference#iam_platform)
   * [許可が不要なアクション](/docs/containers?topic=containers-access_reference#none-actions)
   * [ビューアーのアクション](/docs/containers?topic=containers-access_reference#view-actions)
   * [エディターのアクション](/docs/containers?topic=containers-access_reference#editor-actions)
   * [オペレーターのアクション](/docs/containers?topic=containers-access_reference#operator-actions)
   * [管理者のアクション](/docs/containers?topic=containers-access_reference#admin-actions)
-* [{{site.data.keyword.Bluemix_notm}} IAM サービス役割](/docs/containers?topic=containers-access_reference#service)
+* [{{site.data.keyword.cloud_notm}} IAM サービス役割](/docs/containers?topic=containers-access_reference#service)
 * [RBAC 役割ごとの Kubernetes リソース許可](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry の役割](/docs/containers?topic=containers-access_reference#cloud-foundry)
 * [インフラストラクチャー役割](/docs/containers?topic=containers-access_reference#infra)
@@ -1011,8 +1063,8 @@ lastupdated: "2019-06-12"
 * [このサービスは、どの Kubernetes バージョンをサポートしていますか?](/docs/containers?topic=containers-faqs#supported_kube_versions)
 * [このサービスはどの地域で利用できますか?](/docs/containers?topic=containers-faqs#supported_regions)
 * [サービスはどのような標準に準拠していますか?](/docs/containers?topic=containers-faqs#standards)
-* [{{site.data.keyword.Bluemix_notm}} と他のサービスをクラスターで使用できますか?](/docs/containers?topic=containers-faqs#faq_integrations)
-* [{{site.data.keyword.Bluemix_notm}} Public のクラスターを、オンプレミス・データ・センターで実行されるアプリと接続できますか?](/docs/containers?topic=containers-faqs#hybrid)
+* [{{site.data.keyword.cloud_notm}} と他のサービスをクラスターで使用できますか?](/docs/containers?topic=containers-faqs#faq_integrations)
+* [{{site.data.keyword.cloud_notm}} Public のクラスターを、オンプレミス・データ・センターで実行されるアプリと接続できますか?](/docs/containers?topic=containers-faqs#hybrid)
 * [独自のデータ・センターに {{site.data.keyword.containerlong_notm}} をデプロイできますか?](/docs/containers?topic=containers-faqs#private)
 * [{{site.data.keyword.containerlong_notm}} 使用時の課金内容は?](/docs/containers?topic=containers-faqs#charges)
 * [使用するプラットフォームおよびインフラストラクチャーのリソースの請求は 1 つにまとめられますか?](/docs/containers?topic=containers-faqs#bill)
@@ -1038,6 +1090,7 @@ lastupdated: "2019-06-12"
 * [SSH によるワーカー・ノードへのアクセスが失敗する](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [ベアメタルのインスタンス ID がワーカー・レコードと不整合](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [孤立クラスターのインフラストラクチャーを変更または削除できない](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
+* [`kubectl` コマンドが機能しない](/docs/containers?topic=containers-cs_troubleshoot_clusters#kubectl_fails)
 * [`kubectl` コマンドがタイムアウトする](/docs/containers?topic=containers-cs_troubleshoot_clusters#exec_logs_fail)
 * [サービスをクラスターにバインドすると同名エラーが発生する](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_services)
 * [サービスをクラスターにバインドすると、サービスが見つからないというエラーが発生する](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_not_found_services)
@@ -1046,25 +1099,32 @@ lastupdated: "2019-06-12"
 * [新しいワーカー・ノード上のポッドへのアクセスがタイムアウトで失敗する](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
 * [ポッド・セキュリティー・ポリシーが原因でポッドをデプロイできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp)
 * [クラスターが保留状態のままである](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_cluster_pending)
+* [クラスター作成エラーにより、レジストリーからイメージをプルできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#ts_image_pull_create)
+* [ImagePullBackOff または許可エラーにより、レジストリーからイメージをプルできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#ts_image_pull)
 * [ポッドが保留状態のままである](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_pods_pending)
 * [コンテナーが開始しない](/docs/containers?topic=containers-cs_troubleshoot_clusters#containers_do_not_start)
 * [ポッドの再始動が繰り返し失敗するまたはポッドが予期せず除去される](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail)
 * [更新した構成値で Helm チャートをインストールできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_helm_install)
+* [クラスターで Helm tiller をインストールできないまたはパブリック・イメージからコンテナーをデプロイできない](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_tiller_install)
 * [ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help)
 
 [クラスターのストレージのトラブルシューティング](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
 * [永続ストレージの障害のデバッグ](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
-* [許可がないことが原因で PVC の作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
-* [ファイル・ストレージ: ワーカー・ノードのファイル・システムが読み取り専用に変更される](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)
-* [ファイル・ストレージ: 非 root ユーザーが NFS ファイル・ストレージのマウント・パスを所有しているとアプリが失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)
-* [ファイル・ストレージ: 永続ストレージに対する非 root ユーザー・アクセスの追加が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
-* [ブロック・ストレージ: ブロック・ストレージが読み取り専用に変更される](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_block)
-* [ブロック・ストレージ: ファイル・システムが正しくないため、既存のブロック・ストレージをポッドにマウントできない](/docs/containers?topic=containers-cs_troubleshoot_storage#block_filesystem)
-* [オブジェクト・ストレージ: {{site.data.keyword.cos_full_notm}} ibmcloud Helm プラグインのインストールが失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
-* [オブジェクト・ストレージ: Kubernetes シークレットが見つからないため、PVC またはポッドの作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)
-* [オブジェクト・ストレージ: 資格情報が正しくないかアクセスが拒否されたために PVC の作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
-* [オブジェクト・ストレージ: 既存のバケットにアクセスできない](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
+* [ファイル・ストレージおよびブロック・ストレージ: PVC が保留状態のままになる](/docs/containers?topic=containers-cs_troubleshoot_storage#file_pvc_pending)
+  * [ファイル・ストレージ: ワーカー・ノードのファイル・システムが読み取り専用に変更される](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)
+  * [ファイル・ストレージ: 非 root ユーザーが NFS ファイル・ストレージのマウント・パスを所有しているとアプリが失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)
+  * [ファイル・ストレージ: 永続ストレージに対する非 root ユーザー・アクセスの追加が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
+* [ブロック・ストレージ: アプリケーションが PVC へのアクセスまたは書き込みを行うことができない](/docs/containers?topic=containers-cs_troubleshoot_storage#block_app_failures)
+  * [ブロック・ストレージ: ブロック・ストレージが読み取り専用に変更される](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_block)
+  * [ブロック・ストレージ: ファイル・システムが正しくないため、既存のブロック・ストレージをポッドにマウントできない](/docs/containers?topic=containers-cs_troubleshoot_storage#block_filesystem)
+* [オブジェクト・ストレージ: {{site.data.keyword.cos_full_notm}} `ibmc` Helm プラグインのインストールが失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
+* [オブジェクト・ストレージ: PVC が保留状態のままになる](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_pvc_pending)
+  * [オブジェクト・ストレージ: Kubernetes シークレットが見つからないため、PVC またはポッドの作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)
+  * [オブジェクト・ストレージ: 資格情報が正しくないかアクセスが拒否されたために PVC の作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
+  * [オブジェクト・ストレージ: 誤った s3fs API エンドポイントまたは IAM API エンドポイントが原因で PVC の作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_api_endpoint_failure)
+  * [オブジェクト・ストレージ: 既存のバケットにアクセスできない](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
 * [オブジェクト・ストレージ: 非 root ユーザーとしてのファイルへのアクセスが失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
+* [許可がないことが原因で PVC の作成が失敗する](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_storage#storage_getting_help)
 
 [ロギングとモニタリングのトラブルシューティング](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health)
@@ -1083,11 +1143,10 @@ lastupdated: "2019-06-12"
 * [ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_getting_help)
 
 [クラスターのネットワーキングのトラブルシューティング](/docs/containers?topic=containers-cs_troubleshoot_network#cs_troubleshoot_network)
-* [ロード・バランサー・サービス経由でアプリに接続できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_loadbalancer_fails)
+* [ネットワーク・ロード・バランサー (NLB) サービス経由でアプリに接続できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_loadbalancer_fails)
 * [Ingress 経由でアプリに接続できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_fails)
-* [Ingress アプリケーション・ロード・バランサーのシークレットの問題](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
-* [Ingress ALB のサブドメインを取得できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
-* [Ingress ALB がゾーンにデプロイされない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
+* [Ingress アプリケーション・ロード・バランサー (ALB) のシークレットの問題](/docs/containers?topic=containers-cs_troubleshoot_network#cs_albsecret_fails)
+* [Ingress ALB のサブドメインを取得できない、ALB がゾーンにデプロイされない、またはロード・バランサーをデプロイできない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit)
 * [WebSocket を介した接続が 60 秒後に閉じる](/docs/containers?topic=containers-cs_troubleshoot_network#cs_ingress_websocket)
 * [テイント適用ノードの使用時にソース IP 保持が失敗する](/docs/containers?topic=containers-cs_troubleshoot_network#cs_source_ip_fails)
 * [strongSwan Helm チャートとの VPN 接続を確立できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails)
@@ -1096,11 +1155,3 @@ lastupdated: "2019-06-12"
 * [Calico ネットワーク・ポリシーを取得できない](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
 * [無効な VLAN ID が原因でワーカー・ノードを追加できない](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
 * [ヘルプとサポートの取得](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
-
-## 関連リンク
-{: #sitemap-rellinks}
-
-[関連リンク](/docs/containers?topic=containers-cs_rellinks#cs_rellinks)
-* [{{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_rellinks#containers)
-* [{{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-cs_rellinks#registry)
-* [フォローする](/docs/containers?topic=containers-cs_rellinks#follow)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -35,13 +35,13 @@ subcollection: containers
 
 `PodSecurityPolicy` アドミッション・コントローラーにより、クラスター管理者が[ポリシーを許可](#customize_psp)しないとポッドは作成できません。 ポッド・セキュリティー・ポリシーをセットアップすると意図しない副次的影響が生じる可能性があるため、ポリシーを変更した後は、必ず、デプロイメントをテストしてください。 アプリをデプロイするには、ポッドをデプロイするために必要なポッド・セキュリティー・ポリシーで、ユーザーおよびサービス・アカウントをすべて許可しておく必要があります。 例えば、[Helm](/docs/containers?topic=containers-helm#public_helm_install) を使用してアプリをインストールするには、Helm tiller コンポーネントがポッドを作成するので、ポッド・セキュリティー・ポリシーで正しい許可を受けておく必要があります。
 
-{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)を参照して、{{site.data.keyword.Bluemix_notm}} IAM とインフラストラクチャーの権限を設定してください。
+{{site.data.keyword.containerlong_notm}} にアクセスするユーザーを制御しようとしていますか? [クラスター・アクセス権限の割り当て](/docs/containers?topic=containers-users#users)を参照して、{{site.data.keyword.cloud_notm}} IAM とインフラストラクチャーの権限を設定してください。
 {: tip}
 
 **デフォルトで設定されているポリシーはあります? 何を追加できますか? **</br>
 デフォルトで、{{site.data.keyword.containerlong_notm}} は、削除も変更もできない [{{site.data.keyword.IBM_notm}} クラスター管理のためのリソース](#ibm_psp)を `PodSecurityPolicy` アドミッション・コントローラーに構成しています。 アドミッション・コントローラーを無効にすることもできません。
 
-デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 [ハイブリッド・デプロイメント](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)に使用される {{site.data.keyword.Bluemix_notm}} Private パッケージの移植性のために、追加の RBAC リソースが含められています。
+デフォルトでは、ポッド操作はロックされていません。 代わりに、クラスターには役割ベース・アクセス制御 (RBAC) のリソースが 2 つあり、これらのリソースにより、すべての管理者、ユーザー、サービス、ノードに特権ポッドと非特権ポッドの作成が許可されています。 [ハイブリッド・デプロイメント](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)に使用される {{site.data.keyword.cloud_notm}} Private パッケージの移植性のために、追加の RBAC リソースが含められています。
 
 特定のユーザーにポッドの作成または更新を禁止したい場合は、[これらの RBAC リソースを変更するか、独自のリソースを作成する](#customize_psp)ことができます。
 
@@ -76,7 +76,7 @@ subcollection: containers
 開始前に、以下のことを行います。
 *  [アカウントにログインします。 該当する場合は、適切なリソース・グループをターゲットにします。 クラスターのコンテキストを設定します。](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  RBAC 役割の使用方法を理解します。 詳しくは、[カスタム Kubernetes RBAC 役割によるユーザーの許可](/docs/containers?topic=containers-users#rbac)または [Kubernetes の資料 ![外部リンク・アイコン](../icons/launch-glyph.svg "外部リンク・アイコン")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview) を参照してください。
-* すべての名前空間に対して[**管理者**の {{site.data.keyword.Bluemix_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
+* すべての名前空間に対して[**管理者**の {{site.data.keyword.cloud_notm}} IAM サービス・アクセス役割](/docs/containers?topic=containers-users#platform)を持っていることを確認してください。
 
 デフォルト構成を変更すると、ポッドのデプロイメントやクラスターの更新などの重要なクラスター操作を禁止できます。 他のチームが依存していない非実稼働クラスターで変更内容をテストしてください。
 {: important}
