@@ -282,7 +282,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
 1. Get the public address for your cluster.
-    * Classic clusters:
+    * **Classic clusters**:
       1. Set the Istio ingress host.
          ```
          export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -301,7 +301,7 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
          ```
          {: pre}
 
-    * VPC clusters: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
+    * **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
       ```
       export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
       ```
@@ -754,7 +754,7 @@ In the following steps, you set up a host name through which your users can acce
   {: pre}
 
 5. Get the host name for the `istio-ingressgateway` load balancer.
-  * Classic clusters: Register a DNS host name for the `istio-ingressgateway` load balancer. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
+  * **Classic clusters**: Register a DNS host name for the `istio-ingressgateway` load balancer. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
       1. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
         ```
         kubectl get svc -n istio-system
@@ -789,7 +789,7 @@ In the following steps, you set up a host name through which your users can acce
         ```
         {: screen}
 
-  * VPC clusters: The `istio-ingressgateway` load balancer is automatically assigned a host name instead of an IP address by the VPC load balancer for your cluster. Get the host name for `istio-ingressgateway` and look for the **EXTERNAL-IP** in the output.
+  * **VPC clusters**: The `istio-ingressgateway` load balancer is automatically assigned a host name instead of an IP address by the VPC load balancer for your cluster. Get the host name for `istio-ingressgateway` and look for the **EXTERNAL-IP** in the output.
     ```
     kubectl -n istio-system get service istio-ingressgateway -o wide
     ```
