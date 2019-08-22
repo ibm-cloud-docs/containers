@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-13"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks, help, debug
 
@@ -31,12 +31,12 @@ subcollection: containers
 # Debugging your cluster
 {: #cs_troubleshoot}
 
-As you use {{site.data.keyword.containerlong}}, consider these techniques for general troubleshooting and debugging your community Kubernetes or OpenShift clusters. You can also check the [status of the {{site.data.keyword.cloud_notm}} system ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/bluemix/support/#status).
+As you use {{site.data.keyword.containerlong}}, consider these techniques for general troubleshooting and debugging your community Kubernetes or OpenShift clusters. You can also check the [status of the {{site.data.keyword.cloud_notm}} system ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?selected=status).
 {: shortdesc}
 
 You can take these general steps to ensure that your clusters are up-to-date:
 - Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).
-- [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default version for [community Kubernetes](/docs/containers?topic=containers-cs_versions) or [OpenShift](/docs/containers?topic=containers-cs_versions).<p class="important">Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).</p>
+- [Update your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) to the latest default version for [community Kubernetes](/docs/containers?topic=containers-cs_versions) or [OpenShift](/docs/containers?topic=containers-cs_versions).<p class="important">Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).</p>
 
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
