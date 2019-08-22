@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks, networking
 
@@ -193,7 +193,7 @@ When it comes to exposing an app with a network service, you have several choice
 </tbody>
 </table>
 
-Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/bluemix/2018/10/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability/).
+Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/new-builders/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability).
 {: tip}
 
 <br />
