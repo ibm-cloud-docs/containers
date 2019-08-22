@@ -799,7 +799,7 @@ In the following steps, you set up a host name through which your users can acce
     NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)                                                                                                                                      AGE       SELECTOR
     istio-ingressgateway   LoadBalancer   172.21.101.250   6639a113-us-south.lb.appdomain.cloud   15020:32377/TCP,80:31380/TCP,443:31390/TCP,31400:31400/TCP,15029:31360/TCP,15030:31563/TCP,15031:32157/TCP,15032:31072/TCP,15443:31458/TCP   20m       app=istio-ingressgateway,istio=ingressgateway,release=istio
     ```
-    {: pre}
+    {: screen}
 
 6. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
