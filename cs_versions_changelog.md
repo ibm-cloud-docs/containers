@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-21"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks, versions, update
 
@@ -707,7 +707,7 @@ The following table shows the changes that are included in the patch 1.14.2_1521
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -1342,7 +1342,7 @@ The following table shows the changes that are included in the patch 1.13.6_1524
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -1912,7 +1912,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -2386,7 +2386,7 @@ The following table shows the changes that are included in the patch 1.12.9_1555
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -2934,7 +2934,7 @@ The following table shows the changes that are included in the patch 1.12.5_1537
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -3530,7 +3530,7 @@ The following table shows the changes that are included in the patch 1.11.10_156
 <td>etcd</td>
 <td>v3.3.11</td>
 <td>v3.3.13</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.13).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.13).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -4053,7 +4053,7 @@ The following table shows the changes that are included in the patch 1.11.7_1543
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -4451,7 +4451,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>etcd</td>
 <td>v3.2.18</td>
 <td>v3.3.1</td>
-<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1).</td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
@@ -4776,7 +4776,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>etcd</td>
 <td>v3.2.14</td>
 <td>v3.2.18</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.2.18).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.2.18).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
@@ -5266,7 +5266,7 @@ The following table shows the changes that are included in the patch 1.10.12_154
 <td>etcd</td>
 <td>v3.3.1</td>
 <td>v3.3.11</td>
-<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
+<td>See the [etcd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.11). Additionally, the supported cipher suites to etcd are now restricted to a subset with high strength encryption (128 bits or more).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -5582,7 +5582,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>etcd</td>
 <td>v3.2.18</td>
 <td>v3.3.1</td>
-<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/etcd/releases/v3.3.1).</td>
+<td>See the [etcd release notes![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.1).</td>
 </tr>
 <tr>
 <td>Encrypting data in etcd</td>
@@ -6154,7 +6154,7 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 <td>Kubernetes Heapster</td>
 <td>v1.5.0</td>
 <td>v1.5.2</td>
-<td>See the Kubernetes Heapster [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster/releases/tag/v1.5.2).</td>
+<td>See the Kubernetes Heapster [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-retired/heapster/releases/tag/v1.5.2).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
