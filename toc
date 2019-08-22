@@ -171,4 +171,3 @@ IBM Cloud Kubernetes Service
     {: .navgroup-end}
 
     cs_tutorials_apps.md
-    cs_rellinks.md
