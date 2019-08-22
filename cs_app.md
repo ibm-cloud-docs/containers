@@ -675,7 +675,7 @@ To set up configuration files with Kustomize:
         ```
         {: pre}
     2.  Create an initial set of Kubernetes configuration YAML files for your app deployment. You might use the `wasliberty` [YAML example](#yaml-example) to create a deployment, service, config map, and persistent volume claim.
-    3.  Create a [`kustomization` file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) that specifies the base configuration to be applied across environments. The `kustomization` file must include the list of Kubernetes resource configuration YAMLs that are stored in the same `base` repo. In the `kustomization` file, you can also add configurations that apply to all the resource YAMLs in the base repo, such as a prefix or suffix that is appended to all the resource names, a label, the existing namespace all the resources are created in, secrets, configmaps, and more.
+    3.  Create a [`kustomization` file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file) that specifies the base configuration to be applied across environments. The `kustomization` file must include the list of Kubernetes resource configuration YAMLs that are stored in the same `base` repo. In the `kustomization` file, you can also add configurations that apply to all the resource YAMLs in the base repo, such as a prefix or suffix that is appended to all the resource names, a label, the existing namespace all the resources are created in, secrets, configmaps, and more.
         ```
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
@@ -746,7 +746,7 @@ To set up configuration files with Kustomize:
         </tr>
         <tr>
         <td>Other possible configurations</td>
-        <td>For more configurations that you might add to your file, see the [`kustomization` YAML example ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml).</td>
+        <td>For more configurations that you might add to your file, see the [Make a `kustomization` file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file).</td>
         </tr>
         </tbody></table>
     2.  Build your staging overlay configuration files.
@@ -1192,7 +1192,7 @@ To execute a workload on a GPU machine:
     </tr>
     <tr>
     <td><code>resources.limits</code></td>
-    <td>For GPU machines, you must specify the resource limit. The Kubernetes [Device Plug-in![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/cluster-administration/device-plugins/) sets the default resource request to match the limit.
+    <td>For GPU machines, you must specify the resource limit. The Kubernetes [Device Plug-in![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/) sets the default resource request to match the limit.
     <ul><li>You must specify the key as <code>nvidia.com/gpu</code>.</li>
     <li>Enter the whole number of GPUs that you request, such as <code>2</code>. <strong>Note</strong>: Container pods do not share GPUs and GPUs cannot be overcommitted. For example, if you have only 1 `mg1c.16x128` machine, then you have only 2 GPUs in that machine and can specify a maximum of `2`.</li></ul></td>
     </tr>
