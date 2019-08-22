@@ -1,3 +1,4 @@
+https://c3,
 https://jp-tok.containers.cloud.ibm.com,
 https://au-syd.containers.cloud.ibm.com,
 https://console.test.cloud.ibm.com/docs/,
