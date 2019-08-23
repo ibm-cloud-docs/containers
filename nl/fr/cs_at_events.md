@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, audit
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Evénements {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
-Vous pouvez afficher et gérer des activités initiées par l'utilisateur ou effectuer un audit de ces activités dans votre cluster {{site.data.keyword.containerlong_notm}} en utilisant le service {{site.data.keyword.cloudaccesstrailshort}}.
+Vous pouvez afficher et gérer des activités initiées par l'utilisateur ou effectuer un audit de ces activités dans votre cluster OpenShift ou votre cluster Kubernetes de communauté {{site.data.keyword.containerlong}} en utilisant le service {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
 {{site.data.keyword.containershort_notm}} génère deux types d'événements {{site.data.keyword.cloudaccesstrailshort}} :
@@ -54,10 +54,10 @@ Vous pouvez surveiller les activités de votre cluster en examinant les journaux
 
 Pour surveiller les activités d'administration :
 
-1. Connectez-vous à votre compte {{site.data.keyword.Bluemix_notm}}.
+1. Connectez-vous à votre compte {{site.data.keyword.cloud_notm}}.
 2. Dans le catalogue, mettez à disposition une instance du service {{site.data.keyword.cloudaccesstrailshort}} dans le même compte que votre instance {{site.data.keyword.containerlong_notm}}.
 3. Dans l'onglet **Gérer** du tableau de bord {{site.data.keyword.cloudaccesstrailshort}}, sélectionnez le compte ou le domaine d'espace.
-  * **Journaux du compte** : les événements de gestion de cluster et d'audit de serveur d'API Kubernetes sont disponibles dans le **domaine du compte** pour la région {{site.data.keyword.Bluemix_notm}} où ces événements sont générés.
+  * **Journaux du compte** : les événements de gestion de cluster et d'audit de serveur d'API Kubernetes sont disponibles dans le **domaine du compte** pour la région {{site.data.keyword.cloud_notm}} où ces événements sont générés.
   * **Journaux d'espace** : si vous avez indiqué un espace lorsque vous avez configuré votre cluster pour transmettre les événements d'audit de serveur d'API Kubernetes, ces événements sont disponibles dans le **domaine d'espace** associé à l'espace Cloud Foundry dans lequel le service {{site.data.keyword.cloudaccesstrailshort}} est mis à disposition.
 4. Cliquez sur **Afficher dans Kibana**.
 5. Définissez la période pour laquelle vous désirez consulter les journaux. La valeur par défaut est 24 heures.
@@ -93,7 +93,7 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>Un cluster est supprimé.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>Une fonction, telle que le calcul sécurisé pour les noeuds worker bare metal, est activée sur un cluster.</td></tr><tr>
+<td>Une fonction, telle que le noeud final de service public ou privé, est activée sur un cluster. </td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>Les informations sur le cluster sont consultées.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
@@ -125,7 +125,7 @@ Consultez la liste suivante d'événements de gestion de cluster envoyés à {{s
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>Un service est dissocié d'un cluster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Un sous-réseau existant de l'infrastructure IBM Cloud (SoftLayer) est ajouté dans un cluster.</td></tr><tr>
+<td>Un sous-réseau d'infrastructure IBM Cloud existant est ajouté à un cluster. </td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>Un sous-réseau est créé.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
@@ -246,9 +246,9 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
     <td><code>ingresses.delete</code></td>
     <td>Un équilibreur de charge d'application (ALB) Ingress est supprimé.</td></tr><tr>
     <td><code>ingresses.patch</code></td>
-    <td>Un correctif est appliqué à un équilibreur de charge d'application (ALB) Ingress.</td></tr><tr>
+    <td>Un correctif est appliqué à un équilibreur de charge d'application (ALB) Ingress. </td></tr><tr>
     <td><code>ingresses.update</code></td>
-    <td>Un équilibreur de charge d'application (ALB) Ingress est mis à jour.</td></tr><tr>
+    <td>Un équilibreur de charge d'application (ALB) Ingress est mis à jour. </td></tr><tr>
     <td><code>jobs.create</code></td>
     <td>Un travail est créé.</td></tr><tr>
     <td><code>jobs.delete</code></td>
@@ -268,13 +268,13 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
     <td><code>limitranges.update</code></td>
     <td>Une limite de plage est mise à jour.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.create</code></td>
-    <td>Une configuration de webhook de mutation est créée. </td></tr><tr>
+    <td>Une configuration de webhook de mutation est créée.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.delete</code></td>
-    <td>Une configuration de webhook de mutation est supprimée. </td></tr><tr>
+    <td>Une configuration de webhook de mutation est supprimée.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.patch</code></td>
-    <td>Un correctif est appliqué à une configuration de webhook de mutation. </td></tr><tr>
+    <td>Un correctif est appliqué à une configuration de webhook de mutation.</td></tr><tr>
     <td><code>mutatingwebhookconfigurations.update</code></td>
-    <td>Une configuration de webhook de mutation est mise à jour. </td></tr><tr>
+    <td>Une configuration de webhook de mutation est mise à jour.</td></tr><tr>
     <td><code>namespaces.create</code></td>
     <td>Un espace de nom est créé.</td></tr><tr>
     <td><code>namespaces.delete</code></td>
@@ -396,19 +396,19 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
     <td><code>roles.updated</code></td>
     <td>Un rôle est mis à jour.</td></tr><tr>
     <td><code>secrets.create</code></td>
-    <td>Une valeur confidentielle (secret) est créée.</td></tr><tr>
+    <td>Un secret est créé.</td></tr><tr>
     <td><code>secrets.deleted</code></td>
-    <td>Une valeur confidentielle (secret) est supprimée.</td></tr><tr>
+    <td>Un secret est supprimé.</td></tr><tr>
     <td><code>secrets.get</code></td>
-    <td>Une valeur confidentielle (secret) est consultée.</td></tr><tr>
+    <td>Un secret est consulté. </td></tr><tr>
     <td><code>secrets.patch</code></td>
-    <td>Un correctif est appliqué à une valeur confidentielle (secret).</td></tr><tr>
+    <td>Un correctif est appliqué à un secret.</td></tr><tr>
     <td><code>secrets.updated</code></td>
-    <td>Une valeur confidentielle (secret) est mise à jour.</td></tr><tr>
+    <td>Un secret est mis à jour.</td></tr><tr>
     <td><code>selfsubjectaccessreviews.create</code></td>
-    <td>Une révision d'accès de type SelfSubjectAccessReview est créée.</td></tr><tr>
+    <td>Une révision d'accès de type SelfSubjectAccessReview est créée. </td></tr><tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>Une révision d'accès de type SelfSubjectRulesReview est créée.</td></tr><tr>
+    <td>Une révision de règle de type SelfSubjectRulesReview est créée. </td></tr><tr>
     <td><code>subjectaccessreviews.create</code></td>
     <td>Une révision d'accès de type SubjectAccessReview est créée.</td></tr><tr>
     <td><code>serviceaccounts.create</code></td>
@@ -438,11 +438,11 @@ Avant de commencer : veillez à ce que votre cluster soit configuré pour transf
     <td><code>tokenreviews.create</code></td>
     <td>Une révision de jeton est créée.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.create</code></td>
-    <td>Une validation de configuration de webhook est créée. </td></tr><tr>
+    <td>Une validation de configuration de webhook est créée.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.delete</code></td>
-    <td>Une validation de configuration de webhook est supprimée. </td></tr><tr>
+    <td>Une validation de configuration de webhook est supprimée.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.patch</code></td>
-    <td>Un correctif est appliqué à une validation de configuration de webhook. </td></tr><tr>
+    <td>Un correctif est appliqué à une validation de configuration de webhook.</td></tr><tr>
     <td><code>validatingwebhookconfigurations.update</code></td>
-    <td>Une validation de configuration de webhook est mise à jour. </td></tr>
+    <td>Une validation de configuration de webhook est mise à jour.</td></tr>
 </table>

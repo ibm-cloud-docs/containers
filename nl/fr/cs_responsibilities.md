@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -33,7 +33,7 @@ Prenez connaissance des responsabilités qui vous incombent en matière de gesti
 ## Responsabilités en matière de gestion de cluster
 {: #responsibilities}
 
-IBM fournit une plateforme cloud d'entreprise destinée à vous permettre de déployer des applications en même temps qu'{{site.data.keyword.Bluemix_notm}} DevOps, l'intelligence artificielle, des données et des services de sécurité. Vous choisissez comment configurer, intégrer et utiliser vos applications et services dans le cloud.
+IBM fournit une plateforme cloud d'entreprise destinée à vous permettre de déployer des applications en même temps qu'{{site.data.keyword.cloud_notm}} DevOps, l'intelligence artificielle, des données et des services de sécurité. Vous choisissez comment configurer, intégrer et utiliser vos applications et services dans le cloud.
 {:shortdesc}
 
 <table summary="Le tableau présente les responsabilités d'IBM et les vôtres. La lecture des lignes s'effectue de gauche à droite, avec des icônes représentant chaque responsabilité dans la colonne 1 et la description correspondante dans la colonne 2.">
@@ -47,7 +47,7 @@ IBM fournit une plateforme cloud d'entreprise destinée à vous permettre de dé
     <td>
     **Responsabilités d'IBM** :
     <ul><li>Déployer un maître dédié hautement disponible entièrement géré dans un compte d'infrastructure appartenant à IBM et sécurisé pour chaque cluster.</li>
-    <li>Mettre à disposition des noeuds worker dans votre compte d'infrastructure IBM Cloud (SoftLayer).</li>
+    <li>Mettre à disposition des noeuds worker dans votre compte d'infrastructure IBM Cloud. </li>
     <li>Configurer des composants de gestion de cluster, par exemple, des VLAN et des équilibreurs de charge.</li>
     <li>Répondre aux demandes relatives à davantage d'infrastructure, par exemple, l'ajout et le retrait de noeuds worker, la création de sous-réseaux par défaut et la mise à disposition de volumes de stockage en réponse à des réservations de volume persistant.</li>
     <li>Intégrer des ressources d'infrastructure commandées qui fonctionneront automatiquement avec votre architecture de cluster et qui deviendront disponibles sur vos applications et charges de travail déployées.</li></ul>
@@ -93,7 +93,7 @@ IBM fournit une plateforme cloud d'entreprise destinée à vous permettre de dé
       <li>Surveiller en continu les images de maître et de noeud worker afin de détecter tout problème de conformité pour les vulnérabilités et la sécurité.</li>
       <li>Mettre à disposition des noeuds worker avec deux partitions de données SSD locales chiffrées avec AES 256 bits.</li>
       <li>Fournir des options pour la connectivité de réseau du cluster, par exemple, des noeuds finaux de service publics et privés.</li>
-      <li>Fournir des options pour l'isolement de traitement, par exemple, des machines virtuelles dédiées, bare metal et bare metal avec la fonction de calcul sécurisé (Trusted Compute).</li>
+      <li>Fournir des options pour l'isolement de traitement, par exemple, des machines virtuelles dédiées ou bare metal. </li>
       <li>Intégrer un contrôle d'accès à base de rôles (RBAC) Kubernetes à {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM).</li>
       </ul>
       <br><br>
@@ -112,8 +112,8 @@ IBM fournit une plateforme cloud d'entreprise destinée à vous permettre de dé
         <li>Mettre à disposition des clusters avec des composants Kubernetes installés de sorte que vous puissiez accéder à l'API Kubernetes.</li>
         <li>Fournir un certain nombre de modules complémentaires gérés afin d'étendre les fonctions de votre application, par exemple, [Istio](/docs/containers?topic=containers-istio#istio) et [Knative](/docs/containers?topic=containers-serverless-apps-knative). La maintenance est simplifiée car IBM fournit l'installation et les mises à jour pour les modules complémentaires gérés.</li>
         <li>Fournir une intégration de cluster avec des technologies de partenariat tierces, par exemple {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}} et Portworx.</li>
-        <li>Fournir une automatisation afin d'activer une liaison de service à d'autres services {{site.data.keyword.Bluemix_notm}} .</li>
-        <li>Créer des clusters avec des valeurs confidentielles d'extraction d'image de sorte que vos déploiements dans l'espace de nom Kubernetes `default` puissent extraire des images d'{{site.data.keyword.registrylong_notm}}.</li>
+        <li>Fournir une automatisation afin d'activer une liaison de service à d'autres services {{site.data.keyword.cloud_notm}} .</li>
+        <li>Créer des clusters avec des secrets d'extraction d'image de sorte que vos déploiements dans l'espace de nom Kubernetes `default` puissent extraire des images d'{{site.data.keyword.registrylong_notm}}.</li>
         <li>Fournir des classes de stockage et des plug-ins pour prendre en charge les volumes persistants qui seront utilisés avec vos applications.</li>
         <li>Créer des clusters avec des adresses IP de sous-réseau réservées pour exposer des applications de façon externe.</li>
         <li>Prendre en charge des équilibreurs de charge publics et privés Kubernetes natifs et des routes Ingress pour exposer des services de façon externe.</li>
@@ -148,3 +148,5 @@ L'utilisation à mauvais escient inclut :
 *   Violation des droits d'autrui
 
 Voir [Dispositions des services cloud](/docs/overview/terms-of-use?topic=overview-terms#terms) pour prendre connaissance des conditions générales d'utilisation.
+
+

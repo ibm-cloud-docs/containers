@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -57,7 +57,7 @@ Ce tutoriel est destiné aux développeurs de logiciel et aux administrateurs r�
 - [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Ciblez votre interface CLI sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Installez et configurez l'interface de ligne de commande de Calico](/docs/containers?topic=containers-network_policies#cli_install).
-- Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM suivantes pour {{site.data.keyword.containerlong_notm}} :
+- Vérifiez que vous disposez des règles d'accès {{site.data.keyword.cloud_notm}} IAM suivantes pour {{site.data.keyword.containerlong_notm}} :
     - [N'importe quel rôle de plateforme](/docs/containers?topic=containers-users#platform)
     - [Rôle de service **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform)
 
@@ -126,7 +126,7 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
     ```
     {: pre}
 
-5. Vérifiez que vous disposez d'un accès public à l'application qui est exposée par l'équilibreur de charge de réseau à partir de votre ordinateur. 
+5. Vérifiez que vous disposez d'un accès public à l'application qui est exposée par l'équilibreur de charge de réseau à partir de votre ordinateur.
 
     1. Procurez-vous l'adresse **EXTERNAL-IP** de l'équilibreur de charge de réseau.
         ```
@@ -197,9 +197,9 @@ L'image suivante montre comment l'application de serveur Web est exposée sur In
         Exemple de sortie :
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
         ```
         {: screen}
 
@@ -249,7 +249,7 @@ L'image suivante montre comment le trafic est autorisé vers l'équilibreur de c
 
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="A la fin de la leçon 2, l'application de serveur Web est exposée sur Internet uniquement par l'équilibreur de charge de réseau public." style="width:425px; border-style: none"/>
 
-1. Dans un éditeur de texte, créez une règle Pre-DAT de poids fort nommée `deny-nodeports.yaml` pour refuser le trafic entrant TCP et UDP provenant d'une adresse IP source vers tous les ports de noeud.
+1. Dans un éditeur de texte, créez une règle Pre-DNAT de poids fort nommée `deny-nodeports.yaml` pour refuser le trafic entrant TCP et UDP provenant d'une adresse IP source vers tous les ports de noeud.
     ```
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -359,7 +359,7 @@ Ensuite, vous pouvez créer et appliquer des règles Calico pour inscrire sur li
 A présent, vous décidez de bloquer l'intégralité du trafic vers le cluster de l'entreprise de relations publiques et de tester l'accès en inscrivant uniquement l'adresse IP de votre ordinateur sur liste blanche.
 {: shortdesc}
 
-Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entrant vers l'équilibreur de charge de réseau qui expose l'application. Ensuite, vous pouvez créer une règle pour inscrire l'adresse IP de votre système sur liste blanche. A la fin de la leçon 3, tout le trafic vers les ports de noeud et l'équilibreur de charge de réseau publics sera bloqué et seul le trafic en provenance de l'adresse IP de votre système sur liste blanche sera autorisé :
+Tout d'abord, en plus des ports de noeud, vous devez bloquer tout le trafic entrant vers l'équilibreur de charge de réseau qui expose l'application. Ensuite, vous pouvez créer une règle pour inscrire l'adresse IP de votre système sur liste blanche. A la fin de la leçon 3, tout le trafic vers les ports de noeud et l'équilibreur de charge de réseau publics sera bloqué et seul le trafic en provenance de l'adresse IP de votre système sur liste blanche sera autorisé : 
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="L'application de serveur Web est exposée par l'équilibreur de charge de réseau public uniquement sur votre adresse IP de système." style="width:500px; border-style: none"/>
 
@@ -482,7 +482,7 @@ A ce stade, tout le trafic vers les ports de noeud publics et l'équilibreur de 
 Dans la leçon précédente, vous avez bloqué tout le trafic et inscrit uniquement quelques adresses IP sur liste blanche. Ce scénario fonctionne bien à des fins de test lorsque vous voulez limiter l'accès à quelques adresses IP source contrôlées. Cependant, l'entreprise de relations publiques dispose d'applications qui nécessitent une plus grande ouverture au public. Vous devez veiller à ce que tout le trafic soit autorisé sauf le trafic inhabituel que vous voyez en provenance de quelques adresses IP. L'utilisation d'une liste noire est utile dans un scénario de ce type car elle vous permet d'éviter toute attaque en provenance d'un petit groupe d'adresses IP.
 {: shortdesc}
 
-Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloquer le trafic en provenance de l'adresse IP source de votre propre système. A la fin de la leçon 4, tout le trafic vers les ports de noeud publics sera bloqué et tout le trafic vers l'équilibreur de charge de réseau public sera autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge de réseau sera bloqué :
+Dans cette leçon, vous testez l'utilisation d'une liste noire pour bloquer le trafic en provenance de l'adresse IP source de votre propre système. A la fin de la leçon 4, tout le trafic vers les ports de noeud publics sera bloqué et tout le trafic vers l'équilibreur de charge de réseau public sera autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge de réseau sera bloqué :
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="L'application de serveur Web est exposée par le NLB public sur Internet. Seul le trafic à partir de l'adresse IP de votre système est bloqué." style="width:550px; border-style: none"/>
 
@@ -569,7 +569,7 @@ Dans cette leçon, vous allez tester l'utilisation d'une liste noire pour bloque
     {: pre}
     A ce stade, tout le trafic vers les ports de noeud publics est bloqué et tout le trafic vers l'équilibreur de charge de réseau public est autorisé. Seul le trafic en provenance de l'adresse IP de votre système sur liste noire vers l'équilibreur de charge de réseau est bloqué.
 
-Parfait ! Vous avez réussi à contrôler le trafic dans votre application en utilisant des règles Calico Pre-DNAT pour placer des adresses IP source sur liste noire. 
+Parfait ! Vous avez réussi à contrôler le trafic dans votre application en utilisant des règles Calico Pre-DNAT pour placer des adresses IP source sur liste noire.
 
 ## Leçon 5 : Consignation du trafic bloqué en provenance d'adresses IP sur liste noire vers l'équilibreur de charge de réseau
 {: #lesson5}
@@ -599,7 +599,7 @@ Dans notre exemple de scénario, l'entreprise de relations publiques pour laquel
       source:
         nets:
         - <client_address>/32
-    - action: Deny
+    - action: Log
       destination:
         nets:
         - <loadbalancer_IP>/32
@@ -634,7 +634,7 @@ Dans notre exemple de scénario, l'entreprise de relations publiques pour laquel
   ```
   {: screen}
 
-Bien ! Vous avez configuré la consignation de sorte que le trafic inscrit sur liste noire puisse être surveillé plus facilement. 
+Bien ! Vous avez configuré la consignation de sorte que le trafic inscrit sur liste noire puisse être surveillé plus facilement.
 
 Si vous souhaitez nettoyer les règles de liste noire et de journal :
 1. Nettoyez la règle de liste noire.

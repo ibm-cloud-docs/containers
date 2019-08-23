@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -37,7 +37,7 @@ Lorsque vous créez un cluster, les noeuds worker sont mis à disposition dans u
 Si vous disposez d'un cluster à zones multiples, conservez les ressources des noeuds worker associés équilibrées. Assurez-vous que tous les pools de noeuds worker sont répartis sur les mêmes zones et ajoutez ou supprimez des noeuds worker en redimensionnant les pools au lieu d'ajouter des noeuds individuels.
 {: tip}
 
-Avant de commencer, assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). Ensuite, choisissez l'une des sections suivantes :
+Avant de commencer, vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). Ensuite, choisissez l'une des sections suivantes :
   * [Ajouter des noeuds worker en redimensionnant un pool de noeuds worker existant dans votre cluster](#resize_pool)
   * [Ajouter des noeuds worker en ajoutant un pool de noeuds worker dans votre cluster](#add_pool)
   * [Ajouter une zone dans votre cluster et répliquer les noeuds worker de vos pools de noeuds worker dans plusieurs zones](#add_zone)
@@ -95,7 +95,7 @@ Pour redimensionner le pool de noeuds worker, modifiez le nombre de noeuds worke
 Vous pouvez ajouter des noeuds worker dans votre cluster en créant un nouveau pool de noeuds worker.
 {:shortdesc}
 
-1. Extrayez les zones de noeud worker (**Worker Zones**) de votre cluster et choisissez la zone dans laquelle vous souhaitez déployer les noeuds worker dans votre pool de noeuds worker. Si vous avez un cluster à zone unique, vous devez utiliser la zone que vous voyez dans la zone **Worker Zones**. Pour les clusters à zones multiples, vous pouvez choisir l'une des **zones de noeud worker** de votre cluster, ou ajouter l'une des [agglomérations à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones) de la région dans laquelle se trouve votre cluster. Vous pouvez obtenir la liste des zones disponibles en exécutant la commande `ibmcloud ks zones`.
+1. Extrayez les zones de noeud worker (**Worker Zones**) de votre cluster et choisissez la zone dans laquelle vous souhaitez déployer les noeuds worker dans votre pool de noeuds worker. Si vous avez un cluster à zone unique, vous devez utiliser la zone que vous voyez dans la zone **Worker Zones**. Pour les clusters à zones multiples, vous pouvez choisir l'une des **zones de noeud worker** de votre cluster, ou ajouter l'une des [métropoles à zones multiples](/docs/containers?topic=containers-regions-and-zones#zones) de la région dans laquelle se trouve votre cluster. Vous pouvez obtenir la liste des zones disponibles en exécutant la commande `ibmcloud ks zones`.
    ```
    ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
    ```
@@ -165,7 +165,8 @@ Si vous disposez de plusieurs pools de noeuds worker dans votre cluster, ajoutez
 
 Avant de commencer :
 *  Pour ajouter une zone à votre pool de noeuds worker, ce pool doit se trouver dans une [zone compatible avec plusieurs zones](/docs/containers?topic=containers-regions-and-zones#zones). Si ce n'est pas le cas, envisagez la [création d'un nouveau pool de noeuds worker](#add_pool).
-*  Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`. 
+*  Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud de sorte que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+
 
 Pour ajouter une zone avec des noeuds worker dans votre pool de noeuds worker :
 
@@ -187,7 +188,7 @@ Pour ajouter une zone avec des noeuds worker dans votre pool de noeuds worker :
    ```
    {: pre}
 
-4. Ajoutez la zone dans votre pool de noeuds worker. Si vous disposez de plusieurs pools de noeuds worker, ajoutez la zone à tous vos pools, pour que votre cluster soit équilibré dans toutes les zones. Remplacez `<pool1_id_or_name,pool2_id_or_name,...>` par les noms de tous vos pools worker dans une liste séparée par des virgules.
+4. Ajoutez la zone dans votre pool de noeuds worker. Si vous disposez de plusieurs pools de noeuds worker, ajoutez la zone à tous vos pools, pour que votre cluster soit équilibré dans toutes les zones. Remplacez `<pool1_id_or_name,pool2_id_or_name,...>` par les noms de tous vos pools de noeuds worker dans une liste séparée par des virgules.
 
     Un VLAN privé et un VLAN public doivent exister avant d'ajouter une zone à plusieurs pools de noeuds worker. Si vous ne disposez pas de VLAN privé et public dans cette zone, ajoutez d'abord la zone à un pool de noeuds worker pour que ces VLAN soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker en spécifiant le VLAN privé et le VLAN public créés pour vous.
     {: note}
@@ -270,7 +271,7 @@ Si vous disposez d'un cluster qui a été créé après l'introduction des pools
 <br />
 
 
-## Ajout de libellés à des pools worker existants
+## Ajout de libellés à des pools de noeuds worker existants
 {: #worker_pool_labels}
 
 Vous pouvez affecter un libellé à un pool de noeuds worker lorsque vous [créez le pool de noeuds worker](#add_pool), ou ultérieurement en suivant ces étapes. Une fois qu'un pool de noeuds worker est libellé, tous les noeuds worker existants et suivants prennent ce libellé. Vous pouvez utiliser des libellés pour déployer des charges de travail spécifiques uniquement sur les noeuds worker présents dans le pool, par exemple, des [noeuds de périphérique pour un trafic réseau d'équilibreur de charge](/docs/containers?topic=containers-edge).
@@ -291,7 +292,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
     }
     ```
     {: codeblock}
-3.  Vérifiez que le pool de noeuds worker et le noeud worker comportent le libellé `key=value` que vous avez affecté. 
+3.  Vérifiez que le pool de noeuds worker et le noeud worker comportent le libellé `key=value` que vous avez affecté.
     *   Pour vérifier les pools de noeuds worker :
         ```
         ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
@@ -309,7 +310,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
             ```
             {: pre}
 
-Une fois que vous avez libellé votre pool de noeuds worker, vous pouvez utiliser le [libellé dans vos déploiements d'application](/docs/containers?topic=containers-app#label) pour que vos charges de travail exécutent uniquement ces noeuds worker, ou des [annotations taint ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) pour empêcher les déploiements de s'exécuter sur ces noeuds worker. 
+Une fois que vous avez libellé votre pool de noeuds worker, vous pouvez utiliser le [libellé dans vos déploiements d'application](/docs/containers?topic=containers-app#label) pour que vos charges de travail exécutent uniquement ces noeuds worker, ou des [annotations taint ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) pour empêcher les déploiements de s'exécuter sur ces noeuds worker.
 
 <br />
 

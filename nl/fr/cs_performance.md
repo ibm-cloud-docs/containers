@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ Si vous avez des exigences spécifiques en termes d'optimisation des performance
 
 Les noeuds worker sont automatiquement mis à disposition avec des performances de noyau optimisées, mais vous pouvez modifier les paramètres par défaut en appliquant un objet [Kubernetes `DaemonSet` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) personnalisé dans votre cluster. Cet objet modifie les paramètres de tous les noeuds worker existants et appliquent les paramètres à tous les nouveaux noeuds worker mis à disposition dans le cluster. Aucun pod n'est affecté.
 
-Vous devez disposer du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom pour exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Vous devez disposer du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom afin d'exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 {: note}
 
 1. Sauvegardez l'ensemble de démons (DaemonSet) suivant dans un fichier nommé `worker-node-kernel-settings.yaml`. Dans la section `spec.template.spec.initContainers`, ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'ensemble de démons modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
@@ -131,7 +131,7 @@ Si vous avez des exigences spécifiques en termes de charges de travail pour les
 
 Pour optimiser les paramètres du noyau pour les pods d'application, vous pouvez insérer un correctif [`initContainer ` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) dans le fichier YAML `pod/ds/rs/deployment` pour chaque déploiement. L'élément `initContainer` est ajouté à chaque déploiement d'application figurant dans l'espace de nom du réseau de pods dont vous souhaitez optimiser les performances.
 
-Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom pour exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
+Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) **Responsable** pour tous les espaces de nom afin d'exécuter l'exemple de commande `initContainer` avec privileged. Une fois que les conteneurs pour les déploiements sont initialisés, les privilèges sont supprimés.
 
 1. Sauvegardez le correctif `initContainer` suivant dans un fichier nommé `pod-patch.yaml` et ajoutez les zones et les valeurs pour les paramètres `sysctl` que vous désirez optimiser. Cet exemple d'élément `initContainer` modifie le nombre maximal par défaut de connexions autorisées dans l'environnement via le paramètre `net.core.somaxconn` et la plage de ports éphémères via le paramètre `net.ipv4.ip_local_port_range`.
     ```

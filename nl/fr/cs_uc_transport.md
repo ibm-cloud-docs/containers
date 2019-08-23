@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans le domaine des transports
 {: #cs_uc_transport}
 
-Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong_notm}} peuvent
+Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong}} peuvent
 tirer parti des chaînes d'outils pour effectuer rapidement des mises à jour d'application et des déploiements interrégionaux dans le monde entier. En même temps, ces charges de travail peuvent se connecter aux systèmes de back-end existants, utiliser Watson AI pour la personnalisation et accéder aux données IoT avec {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
@@ -35,7 +34,7 @@ tirer parti des chaînes d'outils pour effectuer rapidement des mises à jour d'
 ## Une compagnie maritime augmente la disponibilité des systèmes dans le monde entier pour son écosystème de partenaires commerciaux
 {: #uc_shipping}
 
-Un responsable informatique dispose de systèmes de routage et de planification de transport au niveau mondial, avec lesquels des partenaires peuvent interagir. Les partenaires nécessitent des informations à la minute près pour ces systèmes qui ont accès aux données de terminaux IoT. Mais ces systèmes n'étaient pas en mesure de s'adapter à l'échelle internationale avec une haute disponibilité suffisante.
+Un responsable informatique dispose de systèmes de routage et de planification de transport au niveau mondial, avec lesquels des partenaires peuvent interagir. Les partenaires nécessitent des informations à la minute près pour ces systèmes qui ont accès aux données de terminaux IoT. Mais ces systèmes n'étaient pas en mesure de s'adapter à l'échelle internationale avec une haute disponibilité suffisante. 
 {: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} adapte les applications conteneurisées en garantissant 99,999 % de disponibilité pour répondre aux exigences croissantes. Les déploiements d'application ont lieu 40 fois par jour lorsque les développeurs expérimentent l'application rapide et facile des changements dans des environnements de développement et de test. La plateforme IoT facilite l'accès aux données IoT.
@@ -192,3 +191,5 @@ Avec {{site.data.keyword.containerlong_notm}}, ils passent d'un matériel sursol
 * L'authenticité associée à la personnalisation du site a répondu aux nouvelles attentes du personnel de la compagnie aérienne d'aujourd'hui.
 * Les mises à jour de dernière minute du site RH, en particulier celles qui ont été mises en place suite aux discussions des employés avec l'agent conversationnel, sont rapidement opérationnelles car les développeurs intègrent désormais les changements au moins 10 fois par jour.
 * Avec une gestion de l'infrastructure assurée par IBM, l'équipe de développement a pu fournir le site en moins de 3 semaines.
+
+

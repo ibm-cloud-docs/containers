@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -62,9 +62,9 @@ Pour identifier et résoudre les problèmes liés à votre service NLB :
   ```
   {: pre}
 
-    Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
+    Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**. 
 
-2. Pour les NLB version 2.0 : vérifiez que vous avez rempli les [prérequis pour les NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Pour les NLB version 2.0 : vérifiez que vous avez rempli les [prérequis pour les NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).
 
 3. Vérifiez que le fichier de configuration du service NLB est correct.
     * NLB version 2.0 :
@@ -129,7 +129,7 @@ Pour identifier et résoudre les problèmes liés à votre service NLB :
     <li>Si au moins deux noeuds worker disponibles sont trouvés, affichez les détails de ces noeuds worker.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
     <li>Vérifiez que les ID des VLAN privé et public pour les noeuds worker renvoyés par les commandes <code>kubectl get nodes</code> et <code>ibmcloud ks worker-get</code> correspondent.</li></ol></li></ul>
 
-4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service NLB, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service NLB. 
+4.  Si vous utilisez un domaine personnalisé pour vous connecter à votre service NLB, assurez-vous que votre domaine personnalisé est mappé à l'adresse IP publique de votre service NLB.
     1.  Identifiez l'adresse IP publique de votre service NLB.
         ```
         kubectl describe service <service_name> | grep "LoadBalancer Ingress"
@@ -154,10 +154,13 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**
+Dans la sortie générée par votre interface de ligne de commande, vérifiez que la valeur **Ready** apparaît dans la zone **Status** pour vos noeuds worker et qu'une autre valeur que **free** est spécifiée dans la zone **Machine Type**. 
 
 * Si votre cluster standard est entièrement déployé et comporte au moins 2 noeuds worker par zone, mais qu'aucun **sous-domaine Ingress** n'est disponible, voir [Impossible d'obtenir un sous-domaine pour l'équilibreur de charge d'application (ALB) Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * Pour résoudre d'autres problèmes, traitez les incidents relatifs à votre configuration Ingress en suivant les étapes indiquées dans la section [Débogage d'Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
+
+Si vous avez récemment redémarré vos pods d'ALB ou activé un ALB, une [vérification de disponibilité](/docs/containers?topic=containers-ingress-settings#readiness-check) empêche les pods d'ALB de tenter d'acheminer les demandes de trafic tant que les fichiers de ressources Ingress n'ont pas tous été analysés. Cette vérification de disponibilité empêche toute perte de demande et peut durer jusqu'à 5 minutes.
+{: note}
 
 <br />
 
@@ -166,15 +169,15 @@ Dans la sortie générée par votre interface de ligne de commande, vérifiez qu
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-Une fois que vous avez déployé une valeur confidentielle d'équilibreur de charge ALB Ingress dans votre cluster en utilisant la commande `ibmcloud ks alb-cert-deploy`, la zone `Description` n'est pas actualisée avec le nom de valeur confidentielle lorsque vous affichez votre certificat dans {{site.data.keyword.cloudcerts_full_notm}}.
+Une fois que vous avez déployé un secret d'équilibreur de charge ALB Ingress dans votre cluster en utilisant la commande `ibmcloud ks alb-cert-deploy`, la zone `Description` n'est pas actualisée avec le nom de secret lorsque vous affichez votre certificat dans {{site.data.keyword.cloudcerts_full_notm}}.
 
-Lorsque vous listez les informations sur la valeur confidentielle de l'équilibreur de charge ALB, son statut indique `*_failed` (Echec). Par exemple, `create_failed`, `update_failed`, `delete_failed`.
+Lorsque vous listez les informations sur le secret de l'équilibreur de charge ALB, son statut indique `*_failed` (Echec). Par exemple, `create_failed`, `update_failed`, `delete_failed`.
 
 {: tsResolve}
-Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équilibreur de charge ALB peut échouer, ainsi que les étapes de résolution correspondantes :
+Ci-dessous figurent les motifs pour lesquels le secret de l'équilibreur de charge ALB peut échouer, ainsi que les étapes de résolution correspondantes :
 
 <table>
-<caption>Traitement des incidents liés aux valeurs confidentielles de l'équilibreur de charge d'application Ingress</caption>
+<caption>Traitement des incidents liés aux secrets de l'équilibreur de charge d'application Ingress</caption>
  <thead>
  <th>Motifs</th>
  <th>Procédure de résolution du problème</th>
@@ -182,7 +185,7 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  <tbody>
  <tr>
  <td>Les rôles d'accès requis pour télécharger et mettre à jour des données de certificat ne vous ont pas été attribués.</td>
- <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles {{site.data.keyword.Bluemix_notm}} IAM suivants :<ul><li>Les rôles de service **Responsable** et **Auteur** pour votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus d'informations, voir la rubrique sur la <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</li><li>Le <a href="/docs/containers?topic=containers-users#platform">rôle de plateforme **Administrateur**</a> pour le cluster.</li></ul></td>
+ <td>Contactez l'administrateur de votre compte afin qu'il vous affecte les rôles {{site.data.keyword.cloud_notm}} IAM suivants :<ul><li>Les rôles de service **Responsable** et **Auteur** pour votre instance {{site.data.keyword.cloudcerts_full_notm}}. Pour plus d'informations, voir la rubrique sur la <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">gestion des rôles d'accès au service</a> pour {{site.data.keyword.cloudcerts_short}}.</li><li>Le <a href="/docs/containers?topic=containers-users#platform">rôle de plateforme **Administrateur**</a> pour le cluster.</li></ul></td>
  </tr>
  <tr>
  <td>Le CRN de certificat indiqué lors de la création, de la mise à jour ou de la suppression ne relève pas du même compte que le cluster.</td>
@@ -190,19 +193,19 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
  </tr>
  <tr>
  <td>Le CRN de certificat fourni lors de la création est incorrect.</td>
- <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN du certificat est exact, essayez de mettre à jour la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Si cette commande indique le statut <code>update_failed</code>, supprimez la valeur confidentielle : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN du certificat est exact, essayez de mettre à jour le secret : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Si cette commande indique le statut <code>update_failed</code>, supprimez le secret : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau le secret : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>Le CRN de certificat soumis lors de la mise à jour est incorrect.</td>
- <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN de certificat est exact, supprimez la valeur confidentielle : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Essayez de mettre à jour la valeur confidentielle : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Vérifiez l'exactitude de la chaîne de CRN de certificat soumise.</li><li>Si le CRN de certificat est exact, supprimez le secret : <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Déployez à nouveau le secret : <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Essayez de mettre à jour le secret : <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>Le service {{site.data.keyword.cloudcerts_long_notm}} est confronté à un temps d'indisponibilité.</td>
  <td>Vérifiez que votre service {{site.data.keyword.cloudcerts_short}} est opérationnel.</td>
  </tr>
  <tr>
- <td>La valeur confidentielle que vous avez importée porte le même nom que la valeur confidentielle d'Ingress fournie par IBM.</td>
- <td>Renommez votre valeur confidentielle. Vous pouvez vérifier le nom de la valeur confidentielle Ingress fournie par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
+ <td>Le secret que vous avez importé porte le même nom que le secret Ingress fourni par IBM.</td>
+ <td>Renommez votre secret. Vous pouvez vérifier le nom du secret Ingress fourni par IBM en exécutant la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
  </tbody></table>
 
@@ -213,7 +216,7 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-* Aucun sous-domaine Ingress : lorsque vous exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>`, votre cluster est à l'état `normal` mais aucun **sous-domaine Ingress** n'est disponible. 
+* Aucun sous-domaine Ingress : lorsque vous exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>`, votre cluster est à l'état `normal` mais aucun **sous-domaine Ingress** n'est disponible.
 * Un ALB n'est pas déployé dans une zone : lorsque vous disposez d'un cluster à zones multiples et que vous exécutez la commande `ibmcloud ks albs <cluster>`, aucun ALB n'est déployé dans une zone. Par exemple, si vous disposez de noeuds worker dans 3 zones différentes, vous pouvez voir une sortie similaire à ce qui suit, où un ALB public ne s'est pas déployé dans la troisième zone.
   ```
   ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
@@ -235,22 +238,22 @@ Ci-dessous figurent les motifs pour lesquels la valeur confidentielle de l'équi
   {: screen}
 
 {: tsCauses}
-Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud (SoftLayer). Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition ou il se peut qu'aucune adresse IP publique portable ne soit disponible pour créer un équilibreur de charge de réseau.
+Dans les clusters standard, la première fois que vous créez un cluster dans une zone, un VLAN public et un VLAN privé sont automatiquement mis à votre disposition dans cette zone dans votre compte d'infrastructure IBM Cloud. Dans cette zone, 1 sous-réseau portable est demandé sur le VLAN public que vous spécifiez et 1 sous-réseau portable privé est demandé sur le VLAN privé que vous spécifiez. Pour {{site.data.keyword.containerlong_notm}}, les VLAN sont limités à 40 sous-réseaux. Si le VLAN du cluster d'une zone a déjà atteint cette limite, le **sous-domaine Ingress** ne peut pas être mis à disposition, l'équilibreur de charge d'application (ALB) Ingress public pour cette zone ne peut pas être mis à disposition ou il se peut qu'aucune adresse IP publique portable ne soit disponible pour créer un équilibreur de charge de réseau.
 
 Pour afficher le nombre de sous-réseaux d'un VLAN :
-1.  Dans la [console de l'infrastructure IBM Cloud (SoftLayer)](https://cloud.ibm.com/classic?), sélectionnez **Réseau** > **Gestion IP** > **VLAN**.
+1.  Dans la [console de l'infrastructure IBM Cloud](https://cloud.ibm.com/classic?), sélectionnez **Réseau** > **Gestion IP** > **VLAN**. 
 2.  Cliquez sur le **Numéro de VLAN** du VLAN que vous avez utilisé pour créer votre cluster. Examinez la section **Sous-réseaux** pour voir s'il existe 40 sous-réseaux ou plus.
 
 {: tsResolve}
-Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Ensuite, [créez un cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) qui utilise ce nouveau VLAN.
+Si vous avez besoin d'un nouveau VLAN, commandez-en un en [contactant le support {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Ensuite, [créez un cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) qui utilise ce nouveau VLAN.
 
-Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`. 
+Si vous avez un autre VLAN disponible, vous pouvez [configurer le spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) dans votre cluster existant. Vous pouvez ensuite ajouter de nouveaux noeuds worker au cluster qui utilise l'autre VLAN avec les sous-réseaux disponibles. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser des sous-réseaux sur le VLAN en les ajoutant au cluster.
 1. Vérifiez que le sous-réseau que vous souhaitez utiliser est disponible.
-  <p class="note">Le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.Bluemix_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.</p>
+  <p class="note">Le compte d'infrastructure que vous utilisez peut être partagé entre plusieurs comptes {{site.data.keyword.cloud_notm}}. Dans ce cas, même si vous exécutez la commande `ibmcloud ks subnets` pour voir les sous-réseaux avec les clusters liés (**Bound Clusters**), vous ne pourrez voir que les informations concernant vos clusters. Vérifiez avec le propriétaire du compte d'infrastructure que les sous-réseaux sont disponibles et qu'ils ne sont pas utilisés par un autre compte ou une autre équipe.</p>
 
-2. Utilisez la se the [commande `ibmcloud ks cluster-subnet-add` ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) pour faire en sorte qu'un sous-réseau existant soit disponible pour votre cluster. 
+2. Utilisez la se the [commande `ibmcloud ks cluster-subnet-add` ](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) pour faire en sorte qu'un sous-réseau existant soit disponible pour votre cluster.
 
 3. Vérifiez que le sous-réseau a bien été créé et ajouté à votre cluster. Le CIDR du sous-réseau est répertorié dans la section **Subnet VLANs**.
     ```
@@ -268,9 +271,9 @@ Si vous n'utilisez pas tous les sous-réseaux du VLAN, vous pouvez réutiliser d
     ```
     {: screen}
 
-4. Vérifiez que les adresses IP portables issues du sous-réseau que vous avez ajouté soient utilisées pour les ALB ou les équilibreurs de charge dans votre cluster. Il peut s'écouler plusieurs minutes avant que les services n'utilisent les adresses IP portables issues du sous-réseau nouvellement ajouté. 
-  * Aucun sous-domaine Ingress : exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>` pour vérifier que la zone **Sous-domaine Ingress** est renseignée. 
-  * Un ALB n'est pas déployé dans une zone : exécutez la commande `ibmcloud ks albs --cluster <cluster>` pour vérifier que l'ALB manquant est déployé. 
+4. Vérifiez que les adresses IP portables issues du sous-réseau que vous avez ajouté soient utilisées pour les ALB ou les équilibreurs de charge dans votre cluster. Il peut s'écouler plusieurs minutes avant que les services n'utilisent les adresses IP portables issues du sous-réseau nouvellement ajouté.
+  * Aucun sous-domaine Ingress : exécutez la commande `ibmcloud ks cluster-get --cluster <cluster>` pour vérifier que la zone **Sous-domaine Ingress** est renseignée.
+  * Un ALB n'est pas déployé dans une zone : exécutez la commande `ibmcloud ks albs --cluster <cluster>` pour vérifier que l'ALB manquant est déployé.
   * Impossible de déployer un équilibreur de charge : exécutez la commande `kubectl get svc -n kube-system` pour vérifier que l'équilibreur de charge est doté d'une adresse IP externe (valeur **EXTERNAL-IP**).
 
 <br />
@@ -306,7 +309,7 @@ Pour empêcher l'interruption de la connexion au bout de 60 secondes d'inactivit
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-Vous avez activé la conservation de l'adresse IP source pour un service [d'équilibreur de charge version 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) ou [d'ALB Ingress](/docs/containers?topic=containers-ingress#preserve_source_ip) en remplaçant `externalTrafficPolicy` par `Local` dans le fichier de configuration du service. Cependant, aucun trafic n'atteint le service de back end de votre application.
+Vous avez activé la conservation de l'adresse IP source pour un service [d'équilibreur de charge version 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) ou [d'ALB Ingress](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) en remplaçant `externalTrafficPolicy` par `Local` dans le fichier de configuration du service. Cependant, aucun trafic n'atteint le service de back end de votre application.
 
 {: tsCauses}
 Lorsque vous activez la conservation de l'adresse IP source pour les services d'équilibreur de charge ou d'ALB Ingress, l'adresse IP source de la demande client est conservée. Le service achemine le trafic vers les pods d'application sur le même noeud worker uniquement pour garantir que l'adresse du paquet de demandes n'est pas modifiée. En principe, des pods de service d'équilibreur de charge ou d'ALB Ingress sont déployés sur les mêmes noeuds worker où sont déployés les pods d'application. Il existe cependant des situations où les pods de service et les pods d'application ne sont pas forcément planifiés sur le même noeud worker. Si vous utilisez des [éléments taint de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) sur des noeuds worker, l'exécution des pods qui n'ont pas d'élément toleration taint est bloquée sur les noeuds worker avec taint. La conservation de l'adresse IP source peut ne pas fonctionner suivant le type d'élément taint que vous avez utilisé :
@@ -342,6 +345,33 @@ Si vous exécutez l'une des options ci-dessus mais que les pods `keepalived` ne 
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## La résolution DNS d'un service de cluster échoue parfois avec CoreDNS mais pas avec KubeDNS
+{: #coredns_issues}
+
+{: tsSymptoms}
+Parfois, votre application ne parvient pas à résoudre les noms DNS des services de cluster. Ces échecs se produisent uniquement lorsque CoreDNS, et non KubeDNS, est le [fournisseur DNS de cluster configuré](/docs/containers?topic=containers-cluster_dns). Vous pouvez obtenir des messages d'erreur semblables à ceux présentés ci-dessous : 
+
+```
+Name or service not known
+```
+{: screen}
+
+```
+No address associated with hostname or similar
+```
+{: screen}
+
+{: tsCauses}
+La mise en cache CoreDNS pour les services de cluster se comporte différemment par rapport au précédent fournisseur DNS de cluster, KubeDNS, ce qui peut provoquer des problèmes pour les applications qui utilisent un client DNS plus ancien. 
+
+{: tsResolve}
+Mettez à jour votre application pour qu'elle utilise un client DNS plus récent. Par exemple, si votre image d'application est Ubuntu 14.04, le client DNS plus ancien échoue périodiquement. Lorsque vous mettez à jour l'image vers Ubuntu 16.04, le client DNS fonctionne. 
+
+Vous pouvez également retirer les configurations de plug-in de cache de l'élément configmap `coredns` dans l'espace de nom `kube-system`. Pour plus d'informations sur la personnalisation de CoreDNS, voir [Personnalisation du fournisseur DNS de cluster](/docs/containers?topic=containers-cluster_dns#dns_customize). 
 
 <br />
 
@@ -590,7 +620,7 @@ Pour vous assurer que tous les facteurs Calico sont en phase :
 {: #suspended}
 
 {: tsSymptoms}
-Votre compte {{site.data.keyword.Bluemix_notm}} a été suspendu ou tous les noeuds worker de votre cluster ont été supprimés. Une fois le compte réactivé, vous ne pouvez pas ajouter de noeuds worker lorsque vous tentez de redimensionner ou de rééquilibrer votre pool de noeuds worker. Vous voyez un message d'erreur de ce type :
+Votre compte {{site.data.keyword.cloud_notm}} a été suspendu ou tous les noeuds worker de votre cluster ont été supprimés. Une fois le compte réactivé, vous ne pouvez pas ajouter de noeuds worker lorsque vous tentez de redimensionner ou de rééquilibrer votre pool de noeuds worker. Vous voyez un message d'erreur de ce type :
 
 ```
 SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
@@ -598,7 +628,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: screen}
 
 {: tsCauses}
-Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte sont supprimés. S'il n'y a aucun noeud worker dans un cluster, l'infrastructure IBM Cloud (SoftLayer) récupère les VLAN public et privé associés. Cependant, le pool de noeuds worker dispose toujours des ID de VLAN précédents parmi ses métadonnées et il utilise ces deux ID qui ne sont plus disponibles lors du rééquilibrage ou du redimensionnement du pool. Les noeuds ne parviennent pas à être créés car ces VLAN ne sont plus associés au cluster.
+Lorsqu'un compte est suspendu, les noeuds worker qui figuraient dans le compte sont supprimés. S'il n'y a aucun noeud worker dans un cluster, l'infrastructure IBM Cloud récupère les VLAN public et privé associés. Cependant, le pool de noeuds worker dispose toujours des ID de VLAN précédents parmi ses métadonnées et il utilise ces deux ID qui ne sont plus disponibles lors du rééquilibrage ou du redimensionnement du pool. Les noeuds ne parviennent pas à être créés car ces VLAN ne sont plus associés au cluster.
 
 {: tsResolve}
 
@@ -615,7 +645,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
     ```
     {: pre}
 
-2.  Obtenez un nouveau VLAN privé et un nouveau VLAN public pour chaque zone dans laquelle réside votre cluster en [contactant le support {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+2.  Obtenez un nouveau VLAN privé et un nouveau VLAN public pour chaque zone dans laquelle réside votre cluster en [contactant le support {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). 
 
 3.  Notez les ID des nouveaux VLAN privé et VLAN public pour chaque zone.
 
@@ -626,7 +656,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
     ```
     {: pre}
 
-5.  Utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` pour modifier les métadonnées de réseau du pool de noeuds worker. 
+5.  Utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` pour modifier les métadonnées de réseau du pool de noeuds worker.
 
     ```
     ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
@@ -660,11 +690,11 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
--   Pour voir si {{site.data.keyword.Bluemix_notm}} est disponible, [vérifiez la page Statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status).
+-   Pour déterminer si {{site.data.keyword.cloud_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.cloud_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status). 
 -   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
-    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
+    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.cloud_notm}}, [demandez une invitation](https://cloud.ibm.com/kubernetes/slack) sur ce site Slack.
     {: tip}
--   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
+-   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.cloud_notm}} la voient.
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.

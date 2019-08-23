@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,16 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Planification de stockage persistant à haute disponibilité
 {: #storage_planning}
 
 ## Choix d'une solution de stockage
 {: #choose_storage_solution}
 
-Avant de décider du type de stockage qui vous convient le mieux, vous devez connaître les conditions requises par votre application, le type de données que vous souhaitez stocker et la fréquence à laquelle vous souhaitez accéder à ces données.
+Avant de décider du type de stockage qui convient le mieux pour vos clusters {{site.data.keyword.containerlong}}, vous devez connaître les conditions requises par votre application, le type de données que vous souhaitez stocker et la fréquence à laquelle vous souhaitez accéder à ces données.
 {: shortdesc}
 
-1. Déterminez si vos données doivent faire l'objet d'un stockage permanent ou si elles peuvent être retirées à tout moment. 
+1. Déterminez si vos données doivent faire l'objet d'un stockage permanent ou si elles peuvent être retirées à tout moment.
    - **Stockage persistant :** vos données doivent toujours être disponibles, même en cas de retrait du conteneur, du noeud worker ou du cluster. Utilisez le stockage persistant dans les scénarios suivants :
        - Applications avec état
        - Données métier stratégiques
@@ -59,7 +57,7 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
    - **Lecture seule :** vos données sont en lecture seule. Vous ne voulez pas écrire ou modifier de données.
    - **Lecture et écriture :** vous voulez lire, écrire et modifier vos données. Pour les données lues et écrites, il est important de savoir si les opérations sont plutôt des opérations de lecture ou des opérations d'écriture ou si les deux types d'opérations sont équilibrés.
 
-4. Déterminez la fréquence d'accès à vos données. Connaître la fréquence d'accès aux données peut vous aider à appréhender les performances dont vous avez besoin pour votre stockage. Par exemple, les données à accès fréquent résident en principe sur du stockage rapide.
+5. Déterminez la fréquence d'accès à vos données. Connaître la fréquence d'accès aux données peut vous aider à appréhender les performances dont vous avez besoin pour votre stockage. Par exemple, les données à accès fréquent résident en principe sur du stockage rapide.
    - **Données les plus sollicitées :** données à accès fréquent. Les cas d'utilisation courants sont les applications Web ou mobiles.
    - **Données à accès moins ou moyennement fréquent :** données dont l'accès n'est pas très fréquent, par exemple une fois par mois ou moins. Les cas d'utilisation courants sont les archives, la conservation à court-terme des données ou la reprise après incident.
    - **Données à accès peu fréquent :** données dont l'accès est plutôt rare voire inexistant. Les cas d'utilisation courants sont les archives, les sauvegardes à long terme, les données d'historique.
@@ -68,14 +66,14 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
    Si vous ne pouvez pas prévoir la fréquence ou si la fréquence ne suit pas un pattern strict, déterminez si vos charges de travail utilisent de nombreuses accès en lecture, en écriture ou si elles sont équilibrées. Ensuite, examinez l'option de stockage qui convient à votre charge de travail et recherchez le niveau de stockage qui vous offre la flexibilité dont vous avez besoin. Par exemple, {{site.data.keyword.cos_full_notm}} fournit la classe de stockage `flex` qui prend en considération la fréquence d'accès aux données sur un mois et tient compte de cette mesure pour optimiser votre facturation mensuelle.
    {: tip}
 
-5. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions.
-   - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. Avec d'autres solutions de stockage, vous pouvez partager un volume entre plusieurs pods. 
+6. Déterminez si vos données doivent être partagées entre plusieurs instances d'application, plusieurs zones ou plusieurs régions.
+   - **Accès entre les pods :** lorsque vous utilisez des volumes persistants Kubernetes pour accéder à votre stockage, vous pouvez déterminer le nombre de pods pouvant monter le volume en même temps. Certaines solutions de stockage, telles que le stockage par blocs, sont accessibles à un pod à la fois uniquement. Avec d'autres solutions de stockage, vous pouvez partager un volume entre plusieurs pods.
    - **Accès entre les zones et les régions :** vos données devront parfois être accessibles entre plusieurs zones ou régions. Certaines solutions de stockage, par exemple le stockage de fichiers ou le stockage par blocs, sont spécifiques à un centre de données et ne peuvent pas être partagées entre plusieurs zones dans une configuration de cluster à zones multiples.
 
    Si vous souhaitez rendre vos données accessibles dans les différentes zones ou régions, veillez à consulter votre service juridique pour vérifier que vos données peuvent être stockées dans plusieurs zones ou dans un autre pays.
    {: note}
 
-6. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.
+7. Familiarisez-vous avec d'autres caractéristiques de stockage pouvant influencer votre choix.
    - **Cohérence :** garantie qu'une opération de lecture renvoie la dernière version d'un fichier. Les solutions de stockage peuvent apporter une cohérence forte (`strong consistency`) qui vous garantit de recevoir la dernière version d'un fichier ou une cohérence finale (`eventual consistency`) lorsque l'opération de lecture ne garantit pas le renvoi de la dernière version. Vous obtenez souvent une cohérence finale dans les systèmes répartis géographiquement dans lesquels une opération d'écriture doit d'abord être répliquée sur toutes les instances.
    - **Performances :** temps nécessaire pour exécuter une opération de lecture ou d'écriture.
    - **Durabilité :** garantie qu'une opération d'écriture validée dans votre stockage survive de manière permanente sans subir de dommages ou de perte, même si les gigaoctets ou téraoctets de données sont écrits dans votre stockage au même moment.
@@ -84,7 +82,7 @@ Avant de décider du type de stockage qui vous convient le mieux, vous devez con
    - **Evolutivité :** possibilité d'augmenter la capacité et de personnaliser les performances en fonction de vos besoins.
    - **Chiffrement :** masquer les données permet d'empêcher leur visibilité en cas d'accès par un utilisateur non autorisé.
 
-7. [Passez en revue les solutions de stockage persistant](#persistent_storage_overview) et sélectionnez la solution qui convient le mieux aux besoins de votre application et de vos données.
+8. [Passez en revue les solutions de stockage persistant](#persistent_storage_overview) et sélectionnez la solution qui convient le mieux aux besoins de votre application et de vos données.
 
 ## Comparaison des options de stockage non persistant
 {: #non_persistent_overview}
@@ -156,7 +154,7 @@ L'image suivante présente les options de stockage de données non persistant di
 <tr>
 <td style="text-align:left">Durabilité</td>
 <td style="text-align:left">Les données sont perdues en cas de panne ou de retrait du conteneur. </td>
-<td style="text-align:left">Les données dans les volumes <code>hostPath</code> ou <code>emptyDir</code> sont perdues si : <ul><li>Le noeud worker est supprimé.</li><li>Le noeud worker est rechargé ou mis à jour.</li><li>Le cluster est supprimé.</li><li>Le compte {{site.data.keyword.Bluemix_notm}} passe à un état 'suspendu'. </li></ul></p><p>Par ailleurs, les données d'un volume <code>emptyDir</code> sont supprimées dans les cas suivants : <ul><li>Le pod affecté est supprimé définitivement du noeud worker.</li><li>Le pod affecté est planifié pour opérer sur un autre noeud worker.</li></ul>
+<td style="text-align:left">Les données dans les volumes <code>hostPath</code> ou <code>emptyDir</code> sont perdues si : <ul><li>Le noeud worker est supprimé.</li><li>Le noeud worker est rechargé ou mis à jour.</li><li>Le cluster est supprimé.</li><li>Le compte {{site.data.keyword.cloud_notm}} passe à un état 'suspendu'. </li></ul></p><p>Par ailleurs, les données d'un volume <code>emptyDir</code> sont supprimées dans les cas suivants : <ul><li>Le pod affecté est supprimé définitivement du noeud worker.</li><li>Le pod affecté est planifié pour opérer sur un autre noeud worker.</li></ul>
 </tr>
 <tr>
 <td style="text-align:left">Cas d'utilisation courants</td>
@@ -287,7 +285,7 @@ L'image suivante présente les options disponibles dans {{site.data.keyword.cont
 <th style="text-align:left">Caractéristiques</th>
 <th style="text-align:left">Stockage d'objets</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">Bases de données {{site.data.keyword.Bluemix_notm}}</th>
+<th style="text-align:left">Bases de données {{site.data.keyword.cloud_notm}}</th>
 </thead>
 <tbody>
 <tr>
@@ -377,3 +375,6 @@ de stockage. Chaque noeud stocke uniquement une partie des données. </td>
 </tr>
 </tbody>
 </table>
+
+
+

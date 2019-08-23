@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -53,7 +53,7 @@ Knative s'appuie sur Istio pour garantir que vos charges de travail sans serveur
 Avant de commencer :
 -  [Installez l'interface de ligne de commande d'IBM Cloud, le plug-in {{site.data.keyword.containerlong_notm}} et l'interface de ligne de commande de Kubernetes](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Veillez à installer la version de l'interface CLI `kubectl` correspondant à la version Kubernetes de votre cluster.
 -  [Créez un cluster standard avec au moins trois noeuds worker ayant chacun 4 coeurs et 16 Go de mémoire (`b3c.4x16`) ou plus](/docs/containers?topic=containers-clusters#clusters_ui). En outre, le cluster et les noeuds worker doivent au moins exécuter la version minimale prise en charge de Kubernetes, que vous pouvez consulter en exécutant la commande `ibmcloud ks addon-versions --addon knative`.
--  Vérifiez que vous disposez du [rôle de service **Writer** ou **Manager** d'{{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) pour {{site.data.keyword.containerlong_notm}}.
+-  Vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour {{site.data.keyword.containerlong_notm}}. 
 -  [Ciblez l'interface CLI sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 </br>
 
@@ -125,13 +125,13 @@ Une fois que vous avez configuré Knative dans votre cluster, vous pouvez déplo
 {: shortdesc}
 
 **Qu'est-ce qu'un service Knative ?** </br>
-Pour déployer une application avec Knative, vous devez spécifier une ressource `Service` Knative. Un service Knative est géré par la primitive `Serving` de Knative et est chargé de gérer le cycle de vie complet de la charge de travail. Lorsque vous créez le service, la primitive `Serving` de Knative crée automatiquement une version pour votre application sans serveur et ajoute cette version à l'historique de révision du service. Une URL publique est affectée à votre application sans serveur à partir de votre sous-domaine Ingress, au format `<knative_service_name>.<namespace>.<ingress_subdomain>` Vous pouvez utiliser ce sous-domaine pour accéder à l'application depuis Internet. En outre, un nom d'hôte privé est affecté à votre application au format `<knative_service_name>.<namespace>.cluster.local` et vous pouvez l'utiliser pour accéder à votre application depuis le cluster. 
+Pour déployer une application avec Knative, vous devez spécifier une ressource `Service` Knative. Un service Knative est géré par la primitive `Serving` de Knative et est chargé de gérer le cycle de vie complet de la charge de travail. Lorsque vous créez le service, la primitive `Serving` de Knative crée automatiquement une version pour votre application sans serveur et ajoute cette version à l'historique de révision du service. Une URL publique est affectée à votre application sans serveur à partir de votre sous-domaine Ingress, au format `<knative_service_name>.<namespace>.<ingress_subdomain>` Vous pouvez utiliser ce sous-domaine pour accéder à l'application depuis Internet. En outre, un nom d'hôte privé est affecté à votre application au format `<knative_service_name>.<namespace>.cluster.local` et vous pouvez l'utiliser pour accéder à votre application depuis le cluster.
 
 **Que se passe-t-il en coulisse lorsque je crée le service Knative ?**</br>
-Lorsque vous créez un service Knative, votre application est automatiquement déployée en tant que pod Kubernetes dans votre cluster et exposée à l'aide d'un service Kubernetes. Pour affecter le nom d'hôte public, Knative utilise le sous-domaine Ingress et le certificat TLS fournis par IBM. Le trafic réseau entrant est routé en fonction des règles de routage Ingress fournies par IBM. 
+Lorsque vous créez un service Knative, votre application est automatiquement déployée en tant que pod Kubernetes dans votre cluster et exposée à l'aide d'un service Kubernetes. Pour affecter le nom d'hôte public, Knative utilise le sous-domaine Ingress et le certificat TLS fournis par IBM. Le trafic réseau entrant est routé en fonction des règles de routage Ingress fournies par IBM.
 
 **Comment puis-je déployer une nouvelle version de mon application ?**</br>
-Lorsque vous mettez à jour votre service Knative, une nouvelle version de votre application sans serveur est créée. Les mêmes noms d'hôte privé et public que votre version précédente sont affectés à cette version. Par défaut, l'ensemble du trafic réseau entrant est routé vers la version la plus récente de votre application. Toutefois, vous pouvez également spécifier le pourcentage de trafic réseau entrant que vous souhaitez router vers une version d'application spécifique afin de pouvoir effectuer des tests A/B. Vous pouvez répartir le trafic réseau entrant sur deux versions d'application, la version en cours de votre application et la nouvelle version vers laquelle vous souhaitez effectuer le déploiement.   
+Lorsque vous mettez à jour votre service Knative, une nouvelle version de votre application sans serveur est créée. Les mêmes noms d'hôte privé et public que votre version précédente sont affectés à cette version. Par défaut, l'ensemble du trafic réseau entrant est routé vers la version la plus récente de votre application. Toutefois, vous pouvez également spécifier le pourcentage de trafic réseau entrant que vous souhaitez router vers une version d'application spécifique afin de pouvoir effectuer des tests A/B. Vous pouvez répartir le trafic réseau entrant sur deux versions d'application, la version en cours de votre application et la nouvelle version vers laquelle vous souhaitez effectuer le déploiement.  
 
 **Puis-je utiliser mon propre domaine personnalisé et mon propre certificat TLS ?** </br>
 Vous pouvez modifier l'objet ConfigMap de votre passerelle Ingress Istio et les règles de routage Ingress afin d'utiliser votre nom de domaine et votre certificat TLS personnalisés lorsque vous affectez un nom d'hôte à votre application sans serveur. Pour plus d'informations, voir [Configuration de noms de domaine et de certificats personnalisés](#knative-custom-domain-tls).
@@ -195,7 +195,7 @@ Pour déployer votre application sans serveur en tant que service Knative :
    ```
    {: screen}
 
-3. Vérifiez que votre service Knative a bien été créé. Dans votre sortie CLI, vous pouvez voir le domaine (**DOMAIN**) public qui est affecté à votre application sans serveur. Les colonnes **LATESTCREATED** et **LATESTREADY** affichent la version de votre application qui a été créée en dernier et qui est actuellement déployée au format `<knative_service_name>-<version>`. La version qui est affectée à votre application est une valeur de chaîne aléatoire. Dans cet exemple, la version de votre application sans serveur est `rjmwt`. Lorsque vous mettez à jour le service, une nouvelle version de votre application est créée et une nouvelle chaîne aléatoire lui est affectée.   
+3. Vérifiez que votre service Knative a bien été créé. Dans votre sortie CLI, vous pouvez voir le domaine (**DOMAIN**) public qui est affecté à votre application sans serveur. Les colonnes **LATESTCREATED** et **LATESTREADY** affichent la version de votre application qui a été créée en dernier et qui est actuellement déployée au format `<knative_service_name>-<version>`. La version qui est affectée à votre application est une valeur de chaîne aléatoire. Dans cet exemple, la version de votre application sans serveur est `rjmwt`. Lorsque vous mettez à jour le service, une nouvelle version de votre application est créée et une nouvelle chaîne aléatoire lui est affectée.  
    ```
    kubectl get ksvc/kn-helloworld
    ```
@@ -208,7 +208,7 @@ Pour déployer votre application sans serveur en tant que service Knative :
    ```
    {: screen}
 
-4. Essayez votre application `Hello World` en envoyant une demande à l'URL publique qui est affectée à votre application. 
+4. Essayez votre application `Hello World` en envoyant une demande à l'URL publique qui est affectée à votre application.
    ```
    curl -v <public_app_url>
    ```
@@ -283,13 +283,13 @@ Pour déployer votre application sans serveur en tant que service Knative :
    ```
    {: codeblock}
 
-8. Appliquez les modifications à votre service. Lorsque vous modifiez la configuration, Knative crée automatiquement une nouvelle version de votre application. 
+8. Appliquez les modifications à votre service. Lorsque vous modifiez la configuration, Knative crée automatiquement une nouvelle version de votre application.
    ```
    kubectl apply -f service.yaml
    ```
    {: pre}
 
-9. Assurez-vous qu'une nouvelle version de votre application est déployée. Dans votre sortie CLI, vous pouvez voir la nouvelle version de votre application dans la colonne **LATESTCREATED**. Lorsque vous voyez la même version d'application dans la colonne **LATESTREADY**, la configuration de votre application est terminée et celle-ci est prête à recevoir le trafic réseau entrant sur l'URL public affectée. 
+9. Assurez-vous qu'une nouvelle version de votre application est déployée. Dans votre sortie CLI, vous pouvez voir la nouvelle version de votre application dans la colonne **LATESTCREATED**. Lorsque vous voyez la même version d'application dans la colonne **LATESTREADY**, la configuration de votre application est terminée et celle-ci est prête à recevoir le trafic réseau entrant sur l'URL public affectée.
    ```
    kubectl get ksvc/kn-helloworld
    ```
@@ -339,14 +339,14 @@ Pour déployer votre application sans serveur en tant que service Knative :
 Vous pouvez configurer Knative pour affecter des noms d'hôte à partir de votre propre domaine personnalisé que vous avez configuré avec TLS.
 {: shortdesc}
 
-Par défaut, un sous-domaine public est affecté à chaque application à partir de votre sous-domaine Ingress, au format `<knative_service_name>.<namespace>.<ingress_subdomain>`. Vous pouvez utiliser ce sous-domaine pour accéder à l'application depuis Internet. En outre, un nom d'hôte privé est affecté à votre application au format `<knative_service_name>.<namespace>.cluster.local` et vous pouvez l'utiliser pour accéder à votre application depuis le cluster. Si vous souhaitez affecter des noms d'hôte à partir d'un domaine personnalisé que vous possédez, vous pouvez modifier l'objet ConfigMap Knative pour utiliser le domaine personnalisé à la place. 
+Par défaut, un sous-domaine public est affecté à chaque application à partir de votre sous-domaine Ingress, au format `<knative_service_name>.<namespace>.<ingress_subdomain>`. Vous pouvez utiliser ce sous-domaine pour accéder à l'application depuis Internet. En outre, un nom d'hôte privé est affecté à votre application au format `<knative_service_name>.<namespace>.cluster.local` et vous pouvez l'utiliser pour accéder à votre application depuis le cluster. Si vous souhaitez affecter des noms d'hôte à partir d'un domaine personnalisé que vous possédez, vous pouvez modifier l'objet ConfigMap Knative pour utiliser le domaine personnalisé à la place.
 
 1. Créez un domaine personnalisé. Pour enregistrer votre domaine personnalisé, travaillez en collaboration avec votre fournisseur DNS (Domain Name Service) ou le [DNS IBM Cloud](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configurez votre domaine pour acheminer le trafic réseau entrant vers la passerelle Ingress fournie par IBM. Sélectionnez l'une des options suivantes :
    - Définir un alias pour votre domaine personnalisé en spécifiant le domaine fourni par IBM sous forme d'enregistrement de nom canonique (CNAME). Pour identifier le domaine Ingress fourni par IBM, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name>` et recherchez la zone **Sous-domaine Ingress**. L'utilisation de CNAME est privilégiée car IBM fournit des diagnostics d'intégrité automatiques sur le sous-domaine IBM et retire toutes les adresses IP défaillantes dans la réponse DNS.
-   - Mappez votre domaine personnalisé à l'adresse IP privée portable de la passerelle Ingress en ajoutant l'adresse IP en tant qu'enregistrement. Pour trouver l'adresse IP publique de la passerelle Ingress, exécutez la commande `nslookup <ingress_subdomain>`.
-3. Achetez un certificat TLS générique officiel pour votre domaine personnalisé. Si vous souhaitez acheter plusieurs certificats TLS, assurez-vous que le [nom usuel ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://support.dnsimple.com/articles/what-is-common-name/) est différent pour chaque certificat. 
-4. Créez une valeur confidentielle Kubernetes pour votre certificat et votre clé.
+   - Mappez votre domaine personnalisé à l'adresse IP publique portable de la passerelle Ingress en ajoutant l'adresse IP en tant qu'enregistrement A. Pour trouver l'adresse IP publique de la passerelle Ingress, exécutez la commande `nslookup <ingress_subdomain>`.
+3. Achetez un certificat TLS générique officiel pour votre domaine personnalisé. Si vous souhaitez acheter plusieurs certificats TLS, assurez-vous que le [nom usuel ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://support.dnsimple.com/articles/what-is-common-name/) est différent pour chaque certificat.
+4. Créez un secret Kubernetes pour votre certificat et votre clé.
    1. Codez le certificat et la clé en base 64 et sauvegardez la valeur codée en base 64 dans un nouveau fichier.
       ```
       openssl base64 -in tls.key -out tls.key.base64
@@ -359,8 +359,8 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
       ```
       {: pre}
 
-   3. Créez un fichier YAML de valeur confidentielle YAML en utilisant le certificat et la clé.
-     ```
+   3. Créez un fichier YAML de secret YAML en utilisant le certificat et la clé.
+      ```
       apiVersion: v1
       kind: Secret
       metadata:
@@ -373,12 +373,12 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
       {: codeblock}
 
    4. Créez le certificat dans votre cluster.
-    ```
-      kubectl create -f secret.yaml
+      ```
+      kubectl apply -f secret.yaml
       ```
       {: pre}
 
-5. Ouvrez la ressource Ingress `iks-knative-ingress` dans l'espace de nom `istio-system` de votre cluster pour commencer à l'éditer. 
+5. Ouvrez la ressource Ingress `iks-knative-ingress` dans l'espace de nom `istio-system` de votre cluster pour commencer à l'éditer.
    ```
    kubectl edit ingress iks-knative-ingress -n istio-system
    ```
@@ -386,7 +386,7 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
 
 6. Modifiez les règles de routage par défaut pour votre Ingress.
    - Ajoutez votre domaine générique personnalisé à la section `spec.rules.host` de sorte que l'ensemble du trafic réseau entrant à partir de votre domaine personnalisé et de n'importe quel sous-domaine soit acheminé vers `istio-ingressgateway`.
-   - Configurez tous les hôtes de votre domaine générique personnalisé pour qu'ils utilisent la valeur confidentielle TLS que vous avez créée précédemment dans la section `spec.tls.hosts`.
+   - Configurez tous les hôtes de votre domaine générique personnalisé pour qu'ils utilisent le secret TLS que vous avez créé précédemment dans la section `spec.tls.hosts`.
 
    Exemple Ingress :
    ```
@@ -411,9 +411,10 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
    ```
    {: codeblock}
 
-   Les sections `spec.rules.host` et `spec.tls.hosts` sont des listes et elles peuvent inclure plusieurs domaines et certificats TLS personnalisés.   {: tip}
+   Les sections `spec.rules.host` et `spec.tls.hosts` sont des listes et elles peuvent inclure plusieurs domaines et certificats TLS personnalisés.
+   {: tip}
 
-7. Modifiez l'objet ConfigMap `config-domain` Knative pour utiliser votre domaine personnalisé afin d'affecter des noms d'hôte aux nouveaux services Knative. 
+7. Modifiez l'objet ConfigMap `config-domain` Knative pour utiliser votre domaine personnalisé afin d'affecter des noms d'hôte aux nouveaux services Knative.
    1. Ouvrez l'objet ConfigMap `config-domain` pour commencer à l'éditer.
       ```
       kubectl edit configmap config-domain -n knative-serving
@@ -433,7 +434,7 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
         ```
         {: codeblock}
 
-        Lorsque vous ajoutez `""` à votre domaine personnalisé, tous les services Knative que vous créez se voient affecter un nom d'hôte issu de votre domaine personnalisé.   
+        Lorsque vous ajoutez `""` à votre domaine personnalisé, tous les services Knative que vous créez se voient affecter un nom d'hôte issu de votre domaine personnalisé.  
 
       - **Exemple d'affectation d'un nom d'hôte à partir de votre domaine personnalisé pour certains services Knative sélectionnés** :
         ```
@@ -450,10 +451,10 @@ Par défaut, un sous-domaine public est affecté à chaque application à partir
         ```
         {: codeblock}
 
-        Pour affecter un nom d'hôte à partir de votre domaine personnalisé uniquement à certains services Knative sélectionnés, ajoutez une clé de libellé `data.selector` à votre objet ConfigMap. Dans cet exemple, tous les services ayant le libellé `app: sample` se voient affecter un nom d'hôte issu de votre domaine personnalisé. Assurez-vous de disposer également d'un nom de domaine à affecter à toutes les autres applications qui n'ont pas le libellé `app: sample`. Dans cet exemple, le domaine fourni par défaut par IBM, `mycluster.us-south.containers.appdomain.cloud`, est utilisé. 
+        Pour affecter un nom d'hôte à partir de votre domaine personnalisé uniquement à certains services Knative sélectionnés, ajoutez une clé de libellé `data.selector` à votre objet ConfigMap. Dans cet exemple, tous les services ayant le libellé `app: sample` se voient affecter un nom d'hôte issu de votre domaine personnalisé. Assurez-vous de disposer également d'un nom de domaine à affecter à toutes les autres applications qui n'ont pas le libellé `app: sample`. Dans cet exemple, le domaine fourni par défaut par IBM, `mycluster.us-south.containers.appdomain.cloud`, est utilisé.
     3. Sauvegardez vos modifications.
 
-Vos règles de routage Ingress et vos objets ConfigMap Knative étant tous configurés, vous pouvez créer des services Knative avec votre domaine et votre certificat TLS personnalisés. 
+Vos règles de routage Ingress et vos objets ConfigMap Knative étant tous configurés, vous pouvez créer des services Knative avec votre domaine et votre certificat TLS personnalisés.
 
 ## Accès à un service Knative à partir d'un autre service Knative
 {: #knative-access-service}
@@ -467,7 +468,7 @@ Vous pouvez accéder à votre service Knative à partir d'un autre service Knati
    ```
    {: pre}
 
-2. Extrayez le domaine (**DOMAIN**) qui est affecté à votre service Knative. 
+2. Extrayez le domaine (**DOMAIN**) qui est affecté à votre service Knative.
    ```
    kubect get ksvc/<knative_service_name>
    ```
@@ -480,7 +481,7 @@ Vous pouvez accéder à votre service Knative à partir d'un autre service Knati
    ```
    {: screen}
 
-3. Utilisez le nom de domaine pour implémenter un appel d'API REST afin d'accéder à votre service Knative. Cet appel d'API REST doit faire partie de l'application pour laquelle vous créez un service Knative. Si le service Knative auquel vous souhaitez accéder se voit affecter une adresse URL locale au format `<service_name>.<namespace>.svc.cluster.local`, Knative conserve la demande d'API REST dans le réseau interne du cluster. 
+3. Utilisez le nom de domaine pour implémenter un appel d'API REST afin d'accéder à votre service Knative. Cet appel d'API REST doit faire partie de l'application pour laquelle vous créez un service Knative. Si le service Knative auquel vous souhaitez accéder se voit affecter une adresse URL locale au format `<service_name>.<namespace>.svc.cluster.local`, Knative conserve la demande d'API REST dans le réseau interne du cluster.
 
    Exemple de fragment de code en Go :
    ```go
@@ -539,11 +540,11 @@ spec:
 <tbody>
 <tr>
 <td><code>autoscaling.knative.dev/minScale</code></td>
-<td>Entrez le nombre minimal de pods que vous voulez exécuter dans le cluster. Knative ne peut pas réduire la taille de votre application à un seuil inférieur au nombre que vous définissez, même si aucun trafic réseau n'est reçu par votre application. Le nombre par défaut de pods es zéro.</td>
+<td>Entrez le nombre minimal de pods que vous voulez exécuter dans le cluster. Knative ne peut pas réduire la taille de votre application à un seuil inférieur au nombre que vous définissez, même si aucun trafic réseau n'est reçu par votre application. Le nombre par défaut de pods es zéro.  </td>
 </tr>
 <tr>
 <td><code>autoscaling.knative.dev/maxScale</code></td>
-<td>Entrez le nombre maximal de pods que vous voulez exécuter dans le cluster. Knative ne peut pas augmenter la taille de votre application à un seuil supérieur au nombre que vous définissez, même si vous avez plus de demandes que vos instances d'application en cours ne peuvent gérer. </td>
+<td>Entrez le nombre maximal de pods que vous voulez exécuter dans le cluster. Knative ne peut pas augmenter la taille de votre application à un seuil supérieur au nombre que vous définissez, même si vous avez plus de demandes que vos instances d'application en cours ne peuvent gérer.</td>
 </tr>
 </tbody>
 </table>
@@ -578,7 +579,7 @@ spec:
 <tbody>
 <tr>
 <td><code>containerConcurrency</code></td>
-<td>Entrez le nombre maximal de demandes qu'une instance d'application peut recevoir à la fois avant que Knative envisage d'augmenter vos instances d'application. </td>
+<td>Entrez le nombre maximal de demandes qu'une instance d'application peut recevoir à la fois avant que Knative envisage d'augmenter vos instances d'application.  </td>
 </tr>
 </tbody>
 </table>
@@ -615,7 +616,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serving.knative.dev/visibility</code></td>
-  <td>Si vous ajoutez le libellé <code>serving.knative.dev/visibility: cluster-local</code>, votre service se voit affecter une route privée uniquement, au format <code>&lt;service_name&gt;.&lt;namespace&gt;.cluster.local</code>. Vous pouvez utiliser le nom d'hôte privé pour accéder à votre service à partir du cluster, mais vous ne pouvez pas accéder à votre service à partir du réseau public. </td>
+  <td>Si vous ajoutez le libellé <code>serving.knative.dev/visibility: cluster-local</code>, votre service se voit affecter une route privée uniquement, au format <code>&lt;service_name&gt;.&lt;namespace&gt;.cluster.local</code>. Vous pouvez utiliser le nom d'hôte privé pour accéder à votre service à partir du cluster, mais vous ne pouvez pas accéder à votre service à partir du réseau public.  </td>
 </tr>
 </tbody>
 </table>
@@ -625,7 +626,7 @@ spec:
 
 L'implémentation en cours de Knative ne fournit pas un moyen standard de forcer le composant `Serving` de Knative à extraire à nouveau une image de conteneur. Pour extraire à nouveau une image à partir de votre registre, sélectionnez l'une des options suivantes:
 
-- **Modifiez le modèle de révision (`revisionTemplate`**) d'un service Knative : Le modèle de révision (`revisionTemplate`) d'un service Knative permet de créer une révision de votre service Knative. Si vous modifiez ce modèle de révision et par exemple, vous ajoutez l'annotation `repullFlag`, Knative doit créer une nouvelle révision pour votre application. Dans le cadre de la création de la révision, Knative doit rechercher des mises à jour d'image de conteneur. Lorsque vous définissez `imagePullPolicy: Always`, Knative ne peut pas utiliser le cache d'image dans le cluster, mais en revanche, il doit extraire l'image de votre registre de conteneur. 
+- **Modifiez le modèle de révision (`revisionTemplate`**) d'un service Knative : Le modèle de révision (`revisionTemplate`) d'un service Knative permet de créer une révision de votre service Knative. Si vous modifiez ce modèle de révision et par exemple, vous ajoutez l'annotation `repullFlag`, Knative doit créer une nouvelle révision pour votre application. Dans le cadre de la création de la révision, Knative doit rechercher des mises à jour d'image de conteneur. Lorsque vous définissez `imagePullPolicy: Always`, Knative ne peut pas utiliser le cache d'image dans le cluster, mais en revanche, il doit extraire l'image de votre registre de conteneur.
    ```
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -645,10 +646,10 @@ L'implémentation en cours de Knative ne fournit pas un moyen standard de forcer
     ```
     {: codeblock}
 
-    Vous devez modifier la valeur `repullFlag` à chaque fois que vous souhaitez créer une nouvelle révision de votre service qui extrait la version d'image la plus récente à partir de votre registre de conteneur. Prenez soin d'utiliser une valeur unique pour chaque révision afin d'éviter que Knative utilise une ancienne version d'image en raison de deux configurations de service Knative identiques.   
+    Vous devez modifier la valeur `repullFlag` à chaque fois que vous souhaitez créer une nouvelle révision de votre service qui extrait la version d'image la plus récente à partir de votre registre de conteneur. Prenez soin d'utiliser une valeur unique pour chaque révision afin d'éviter que Knative utilise une ancienne version d'image en raison de deux configurations de service Knative identiques.  
     {: note}
 
-- **Utilisez des balises pour créer des images de conteneur uniques** : Vous pouvez utiliser des balises uniques pour chaque image de conteneur que vous créez, puis référencer cette image dans la configuration `container.image` de votre service Knative. Dans l'exemple suivant, `v1` est utilisé comme balise d'image. Pour forcer Knative à extraire une nouvelle image à partir de votre conteneur du registre, vous devez modifier la balise d'image. Par exemple, utilisez `v2` comme nouvelle balise d'image. 
+- **Utilisez des balises pour créer des images de conteneur uniques** : Vous pouvez utiliser des balises uniques pour chaque image de conteneur que vous créez, puis référencer cette image dans la configuration `container.image` de votre service Knative. Dans l'exemple suivant, `v1` est utilisé comme balise d'image. Pour forcer Knative à extraire une nouvelle image à partir de votre conteneur du registre, vous devez modifier la balise d'image. Par exemple, utilisez `v2` comme nouvelle balise d'image.
   ```
   apiVersion: serving.knative.dev/v1alpha1
   kind: Service

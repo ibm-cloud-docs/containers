@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,12 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Restriction du trafic réseau aux noeuds worker de périphérie
 {: #edge}
 
-Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster en limitant les accès aux noeuds worker en externe et en isolant la charge de travail du réseau dans {{site.data.keyword.containerlong}}.
-{:shortdesc}
+Les noeuds worker de périphérie peuvent améliorer la sécurité de votre cluster {{site.data.keyword.containerlong}} en limitant les accès aux noeuds worker depuis l'extérieur et en isolant la charge de travail du réseau. {:shortdesc}
 
 Lorsque ces noeuds worker sont marqués pour mise en réseau uniquement, les autres charges de travail ne peuvent pas consommer d'unité centrale ou de mémoire ni interférer avec le réseau.
 
@@ -41,28 +39,27 @@ Si vous disposez d'un cluster à zones multiples et que vous voulez limiter le t
 Ajoutez l'étiquette `dedicated=edge` à au moins deux noeuds worker sur chaque VLAN public ou privé de votre cluster par garantir qu'Ingress et les équilibreurs de charge de réseau (NLB) sont déployés uniquement sur ces noeuds worker.
 {:shortdesc}
 
-Dans Kubernetes versions 1.14 et ultérieures, vous pouvez déployer des NLB et des ALB publics et privés sur des noeuds worker de périphérie.
-Dans Kubernetes versions 1.13 et précédentes, les ALB publics et privés et les NLB publics peuvent être déployés sur des noeuds de périphérie, mais les NLB privés doivent être déployés sur des noeuds worker autres que des noeuds de périphérie dans votre cluster uniquement.
+**Clusters Kubernetes de communauté** : dans Kubernetes versions 1.14 et ultérieures, vous pouvez déployer des NLB et des ALB publics et privés sur des noeuds worker de périphérie. Dans Kubernetes versions 1.13 et précédentes, les ALB publics et privés et les NLB publics peuvent être déployés sur des noeuds de périphérie, mais les NLB privés doivent être déployés sur des noeuds worker autres que des noeuds de périphérie dans votre cluster uniquement.
 {: note}
 
 Avant de commencer :
 
-* Vérifiez que vous disposez des [rôles {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) suivants :
+* Vérifiez que vous disposez des [rôles {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) suivants :
   * N'importe quel rôle de plateforme
   * Rôle de service **Auteur** ou **Responsable** pour tous les espaces de nom
 * [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Pour libeller des noeuds worker en tant que noeuds de périphérie :
 
-1. [Créez un nouveau pool de noeuds worker](/docs/containers?topic=containers-add_workers#add_pool) couvrant toutes les zones de votre cluster et comportant au moins deux noeuds worker par zone. Dans la commande `ibmcloud ks worker-pool-create`, ajoutez l'indicateur `--labels dedicated=edge` pour étiqueter tous les noeuds de périphérie du pool. Tous les noeuds worker de ce pool, y compris les noeuds worker que vous ajoutez ultérieurement, sont étiquetés en tant que noeuds de périphérie. 
+1. [Créez un nouveau pool de noeuds worker](/docs/containers?topic=containers-add_workers#add_pool) couvrant toutes les zones de votre cluster et comportant au moins deux noeuds worker par zone. Dans la commande `ibmcloud ks worker-pool-create`, ajoutez l'indicateur `--labels dedicated=edge` pour étiqueter tous les noeuds de périphérie du pool. Tous les noeuds worker de ce pool, y compris les noeuds worker que vous ajoutez ultérieurement, sont étiquetés en tant que noeuds de périphérie. Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les noeuds worker existants et suivants prennent ce libellé et les services d'équilibreur de charge et Ingress sont déployés sur un noeud worker de périphérie.
   <p class="tip">Si vous souhaitez utiliser un pool de noeuds worker existant, celui-ci doit couvrir toutes les zones de votre cluster et comporter au moins deux noeuds worker par zone. Vous pouvez affecter au pool de noeuds le libellé `dedicated=edge` à l'aide de l'[API de pool de noeuds worker PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). Dans le corps de la demande, utilisez le format JSON ci-après.
-    Une fois qu'un noeud worker est marqué avec `dedicated=edge`, tous les noeuds worker existants et suivants prennent ce libellé et les services d'équilibreur de charge et Ingress sont déployés sur un noeud worker de périphérie.<pre class="screen">
+      <pre class="screen">
       {
         "labels": {"dedicated":"edge"},
         "state": "labels"
       }</pre></p>
 
-2. Vérifiez que le pool de noeuds worker et les noeuds worker comportent le libellé `dedicated=edge`. 
+2. Vérifiez que le pool de noeuds worker et les noeuds worker comportent le libellé `dedicated=edge`.
   * Pour vérifier le pool de noeuds worker :
     ```
     ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
@@ -81,19 +78,19 @@ Avant de commencer :
   ```
   {: pre}
 
-  Dans la sortie, notez l'espace de nom (**Namespace**) et le nom (**Name**) de chaque service d'équilibreur de charge. Par exemple, dans la sortie suivante, il y a quatre services d'équilibreur de charge : un NLB public dans l'espace de nom `default` et un ALB privé et deux ALB publics dans l'espace de nom `kube-system`. 
+  Dans la sortie, notez l'espace de nom (**Namespace**) et le nom (**Name**) de chaque service d'équilibreur de charge. Par exemple, dans la sortie suivante, il y a quatre services d'équilibreur de charge : un NLB public dans l'espace de nom `default` et un ALB privé et deux ALB publics dans l'espace de nom `kube-system`.
   ```
   NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
   default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
   kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  1h
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  57m
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
   ```
   {: screen}
 
-4. A partir de la sortie de l'étape précédente, exécutez la commande suivante pour chaque NLB et ALB. Cette commande redéploie le NLB ou l'ALB sur un noeud worker de périphérie. 
+4. A partir de la sortie de l'étape précédente, exécutez la commande suivante pour chaque NLB et ALB. Cette commande redéploie le NLB ou l'ALB sur un noeud worker de périphérie.
 
-  Si votre cluster exécute Kubernetes versions 1.14 ou ultérieures, vous pouvez déployer des NLB et des ALB publics et privés sur les noeuds de périphérie. Dans Kubernetes versions 1.13 et antérieures, seuls les ALB publics et privés et les NLB publics peuvent être déployés sur des noeuds de périphérie, par conséquent, ne redéployez pas de services NLB privés.
+  **Clusters Kubernetes de communauté** : si votre cluster exécute Kubernetes versions 1.14 et ultérieures, vous pouvez déployer des NLB et des ALB publics et privés sur des noeuds worker de périphérie. Dans Kubernetes versions 1.13 et antérieures, seuls les ALB publics et privés et les NLB publics peuvent être déployés sur des noeuds de périphérie, par conséquent, ne redéployez pas de services NLB privés.
   {: note}
 
   ```
@@ -128,10 +125,10 @@ Avant de commencer :
       ```
       {: pre}
       * Si les pods NLB sont correctement déployés sur des noeuds de périphérie, aucun pod NLB n'est renvoyé. Vos NLB sont replanifiés uniquement sur des noeuds worker de périphérie.
-      * Si des pods NLB sont renvoyés, passez à l'étape suivante. 
+      * Si des pods NLB sont renvoyés, passez à l'étape suivante.
 
-  * Pods ALB :
-    1. Vérifiez que tous les pods ALB sont déployés sur des noeuds de périphérie. Recherchez le mot clé `alb`. Chaque ALB public et privé comporte deux pods. Exemple :
+  * pods d'ALB :
+    1. Vérifiez que tous les pods d'ALB sont déployés sur des noeuds de périphérie. Recherchez le mot clé `alb`. Chaque ALB public et privé comporte deux pods. Exemple :
       ```
       kubectl describe nodes -l dedicated=edge | grep alb
       ```
@@ -148,15 +145,15 @@ Avant de commencer :
       ```
       {: screen}
 
-    2. Vérifiez qu'aucun pod ALB n'est déployé sur des noeuds autres que des noeuds de périphérie. Exemple :
+    2. Vérifiez qu'aucun pod d'ALB n'est déployé sur des noeuds autres que des noeuds de périphérie. Exemple :
       ```
       kubectl describe nodes -l dedicated!=edge | grep alb
       ```
       {: pre}
-      * Si les pods ALB sont correctement déployés sur des noeuds de périphérie, aucun pod ALB n'est renvoyé. Vos NLB sont replanifiés uniquement sur des noeuds worker de périphérie.
-      * Si des pods ALB sont renvoyés, passez à l'étape suivante. 
+      * Si les pods d'ALB sont correctement déployés sur des noeuds de périphérie, aucun pod d'ALB n'est renvoyé. Vos NLB sont replanifiés uniquement sur des noeuds worker de périphérie.
+      * Si des pods d'ALB sont renvoyés, passez à l'étape suivante.
 
-6. Si des pods NLB ou ALB sont encore déployés sur des noeuds autres que des noeuds de périphérie, vous pouvez supprimer les pods afin qu'ils soient redéployés sur des noeuds de périphérie. **Important** : supprimez un pod à la fois et vérifiez que le pod est replanifié sur un noeud de périphérie avant de supprimer d'autres pods. 
+6. Si des pods NLB ou ALB sont encore déployés sur des noeuds autres que des noeuds de périphérie, vous pouvez supprimer les pods afin qu'ils soient redéployés sur des noeuds de périphérie. **Important** : supprimez un pod à la fois et vérifiez que le pod est replanifié sur un noeud de périphérie avant de supprimer d'autres pods.
   1. Supprimez un pod. Exemple illustrant un cas où l'un des pods NLB `webserver-lb` n'a pas été planifié sur un noeud de périphérie :
     ```
     kubectl delete pod ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg
@@ -164,9 +161,9 @@ Avant de commencer :
     {: pre}
 
   2. Vérifiez que le pod est replanifié sur un noeud worker de périphérie. La replanification est automatique, mais peut durer quelques minutes. Exemple illustrant le NLB `webserver-lb` dont l'adresse IP externe est `169.46.17.2` :
-      ```
-      kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
-      ```
+    ```
+    kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
+    ```
     {: pre}
 
     Exemple de sortie :
@@ -190,7 +187,7 @@ Un avantage des noeuds worker de périphérie est le fait qu'ils peuvent être d
 La tolérance `dedicated=edge` implique que tous les services NLB et tous les services ALB Ingress sont déployés uniquement sur les noeuds worker libellés. Toutefois, pour empêcher d'autres charges de travail de s'exécuter sur des noeuds worker de périphérie et de consommer des ressources de noeud worker, vous devez utiliser une [annotation Kubernetes taints![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 Avant de commencer :
-- Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Responsable** pour tous les espaces de nom](/docs/containers?topic=containers-users#platform).
+- Vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Responsable** pour tous les espaces de nom](/docs/containers?topic=containers-users#platform). 
 - [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Pour empêcher l'exécution d'autres charges de travail sur des noeuds worker de périphérie :
@@ -202,7 +199,7 @@ Avant de commencer :
   {: pre}
   Maintenant, seuls les pods ayant la tolérance `dedicated=edge` sont déployés sur vos noeuds worker de périphérie.
 
-2. Vérifiez que vos noeuds de périphérie comportent des annotations taint. 
+2. Vérifiez que vos noeuds de périphérie comportent des annotations taint.
   ```
   kubectl describe nodes -l dedicated=edge | grep "Taint|Hostname"
   ```
@@ -224,3 +221,5 @@ Avant de commencer :
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
+

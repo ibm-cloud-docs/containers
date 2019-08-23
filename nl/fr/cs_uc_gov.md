@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,25 +23,24 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Cas d'utilisation d'{{site.data.keyword.Bluemix_notm}} dans l'administration
+# Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans l'administration
 {: #cs_uc_gov}
 
-Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong_notm}} bénéficient du cloud public. Ces charges de travail sont isolées avec la fonction de calcul sécurisé, se trouvent dans des régions globales pour la souveraineté des données, utilisent l'apprentissage automatique de Watson au lieu de nouveau code et se connectent à des bases de données locales.
+Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong}} bénéficient du cloud public. Ces charges de travail sont isolées dans des régions globales pour la souveraineté des données, utilisent l'apprentissage automatique de Watson au lieu de nouveau code et se connectent à des bases de données locales.
 {: shortdesc}
 
 ## L'administration régionale améliore la collaboration et la rapidité d'exécution avec des développeurs de la communauté qui combinent des données publiques et privées
 {: #uc_data_mashup}
 
-Un responsable du programme d'ouverture des données de l'administration (Open-Government Data Program) doit partager des données publiques avec la communauté et le secteur privé, mais  ces données sont verrouillées au sein d'un système monolithique local.
+Un responsable du programme d'ouverture des données de l'administration (Open-Government Data Program) doit partager des données publiques avec la communauté et le secteur privé, mais  ces données sont verrouillées au sein d'un système monolithique local. 
 {: shortdesc}
 
-Pourquoi {{site.data.keyword.Bluemix_notm}} ? Avec {{site.data.keyword.containerlong_notm}}, ce responsable peut fournir la valeur de transformation de la combinaison de données publiques et privées. De la même manière, le service fournit la plateforme de cloud public pour restructurer et exposer des microservices à partir d'applications monolithiques sur site. Le cloud public permet également à l'administration et aux partenariats publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif.
+Pourquoi {{site.data.keyword.cloud_notm}} ? Avec {{site.data.keyword.containerlong_notm}}, ce responsable peut fournir la valeur de transformation de la combinaison de données publiques et privées. De la même manière, le service fournit la plateforme de cloud public pour restructurer et exposer des microservices à partir d'applications monolithiques sur site. Le cloud public permet également à l'administration et aux partenariats publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif.
 
 Technologies clés :    
 * [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Outils natifs DevOps, notamment des chaînes d'outils ouvertes dans {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
+* [Accès aux données publiques avec {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)
 * [Services IBM Cloud Analytics prêts à l'emploi](https://www.ibm.com/cloud/analytics)
 
 **L'administration améliore la collaboration et la rapidité d'exécution avec des développeurs de la communauté qui combinent des données publiques et privées**
@@ -69,7 +68,7 @@ Enfin, les applications basées sur ces API partagées sont hébergées dans {{s
 * Gestion de l'état de santé et de la reprise des noeuds worker
 * Offre de calcul à l'échelle mondiale de sorte que les développeurs n'aient plus à soutenir l'infrastructure dans les régions du monde où ils nécessitent que leurs charges de travail et leurs données soient hébergées
 
-Transférer les charges de travail de calcul sur {{site.data.keyword.Bluemix_notm}} ne suffit pas. L'administration doit également passer par une transformation des processus et des méthodes. En adoptant les pratiques d'IBM Garage Method, le fournisseur peut implémenter un processus de livraison agile et itératif qui prend en charge les pratiques modernes de DevOps telles que l'intégration continue et la distribution continue (CI/CD).
+Transférer les charges de travail de calcul sur {{site.data.keyword.cloud_notm}} ne suffit pas. L'administration doit également passer par une transformation des processus et des méthodes. En adoptant les pratiques d'IBM Garage Method, le fournisseur peut implémenter un processus de livraison agile et itératif qui prend en charge les pratiques modernes de DevOps telles que l'intégration continue et la distribution continue (CI/CD).
 
 Le processus CI/CD est en grande partie automatisé avec {{site.data.keyword.contdelivery_full}} dans le cloud. Le fournisseur peut définir des chaînes d'outils de flux de travaux pour préparer les images de conteneur, rechercher les vulnérabilités et déployer les images sur le cluster Kubernetes.
 
@@ -100,7 +99,7 @@ Solution technique :
 * Adopter les pratiques de développement agile et itératif d'IBM Garage Method pour permettre la publication fréquente de fonctions, modules de correction et correctifs sans susciter d'indisponibilité.
 * Que les développeurs appartiennent au secteur public ou privé, {{site.data.keyword.contdelivery_full}} les aide à mettre à disposition rapidement une chaîne d'outils intégrée, en utilisant des modèles pouvant être personnalisés et partagés.
 * Une fois que les développeurs ont construit et testé leurs applications dans leurs clusters de développement et de test, ils utilisent les chaînes d'outils d'{{site.data.keyword.contdelivery_full}} pour déployer des applications dans les clusters de production.
-* Avec les outils d'intelligence artificielle (AI), d'apprentissage automatique (Machine Learning) et d'apprentissage en profondeur (Deep Learning) de Watson disponibles dans le catalogue d'{{site.data.keyword.Bluemix_notm}}, les développeurs se concentrent sur les problèmes de domaine. Au lieu d'un code d'apprentissage automatique (ML) unique personnalisé, la logique ML est intégrée dans les applications avec des liaisons de service.
+* Avec les outils d'intelligence artificielle (AI), d'apprentissage automatique (Machine Learning) et d'apprentissage en profondeur (Deep Learning) de Watson disponibles dans le catalogue d'{{site.data.keyword.cloud_notm}}, les développeurs se concentrent sur les problèmes de domaine. Au lieu d'un code d'apprentissage automatique (ML) unique personnalisé, la logique ML est intégrée dans les applications avec des liaisons de service.
 
 **Résultats**
 * Normalement, les partenariats publics ou privés qui prennent du temps font désormais tourner des applications en quelques semaines au lieu de mois entiers. Ces partenariats de développement peuvent maintenant fournir des fonctions et des correctifs d'erreur à un rythme pouvant aller jusqu'à 10 fois par semaine.
@@ -114,7 +113,7 @@ Solution technique :
 Les responsables informatiques d'une compagnie maritime privée et le port administré par les autorités publiques doivent connecter, fournir la visibilité et échanger en toute sécurité des informations portuaires. Mais il n'existe aucun système unifié pour connecter les informations portuaires publiques et les manifestes de transport maritime privés.
 {: shortdesc}
 
-Pourquoi {{site.data.keyword.Bluemix_notm}} ?  {{site.data.keyword.containerlong_notm}} permet à l'administration et aux partenaires publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif. Les conteneurs offrent une plateforme pouvant être partagée où les autorités portuaires et la compagnie maritime ont l'assurance que les informations partagées sont hébergées sur une plateforme sécurisée. Par ailleurs, cette plateforme évolue lorsqu'ils passent des petits systèmes de développement et de test à des systèmes de production beaucoup plus importants. Des chaînes d'outils ouvertes contribuent à accélérer le développement en automatisant la réalisation, les tests et les déploiements.
+Pourquoi {{site.data.keyword.cloud_notm}} ?  {{site.data.keyword.containerlong_notm}} permet à l'administration et aux partenaires publics d'utiliser des services de cloud externes et des outils open source facilitant le travail collaboratif. Les conteneurs offrent une plateforme pouvant être partagée où les autorités portuaires et la compagnie maritime ont l'assurance que les informations partagées sont hébergées sur une plateforme sécurisée. Par ailleurs, cette plateforme évolue lorsqu'ils passent des petits systèmes de développement et de test à des systèmes de production beaucoup plus importants. Des chaînes d'outils ouvertes contribuent à accélérer le développement en automatisant la réalisation, les tests et les déploiements.
 
 Technologies clés :    
 * [Clusters adaptés aux différents besoins en matière de stockage, d'UC et de mémoire RAM](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -140,7 +139,7 @@ Ils créent alors un partenariat dédié aux solutions commerciales :
 
 Les développeurs ont commencé par déployer leurs applications dans des conteneurs avec {{site.data.keyword.containerlong_notm}}. Ils ont créé des clusters pour un environnement de développement partagé leur permettant de déployer rapidement des améliorations pour leurs applications. Les conteneurs permettent à chaque équipe de développement d'utiliser le langage qui leur convient.
 
-La sécurité d'abord : les responsables informatiques ont choisi la fonction de calcul sécurisé pour bare metal pour l'hébergement des clusters. Avec la technologie bare metal pour {{site.data.keyword.containerlong_notm}}, les charges de travail sensibles des douanes disposent désormais d'un isolement standard mais dans le cadre de la flexibilité du cloud public. La technologie bare metal fournit une fonction de calcul sécurisé qui peut vérifier que le matériel sous-jacent ne fait pas l'objet de falsification.
+La sécurité d'abord : les responsables informatiques ont choisi des clusters bare metal. Avec la technologie bare metal pour {{site.data.keyword.containerlong_notm}}, les charges de travail sensibles des douanes disposent désormais d'un isolement standard mais dans le cadre de la flexibilité du cloud public.
 
 Comme la compagnie maritime envisage également d'utiliser d'autres ports, la sécurité des applications est fondamentale. Les manifestes de transport maritime et les informations douanières sont des documents hautement confidentiels. Sur cette base sécuritaire, Vulnerability Advisor offre les fonctionnalités d'analyse suivantes :
 * Analyses de vulnérabilité des images
@@ -150,14 +149,14 @@ Comme la compagnie maritime envisage également d'utiliser d'autres ports, la s�
 
 En même temps, {{site.data.keyword.iamlong}} aide à contrôler les personnes ayant le niveau d'accès aux ressources.
 
-Les développeurs se concentrent sur les problèmes de domaine en utilisant des outils existants : au lieu d'écrire un code unique pour les opérations de consignation et de surveillance, ils l'intègrent dans les applications via une liaison de services {{site.data.keyword.Bluemix_notm}} aux clusters. Les développeurs sont également libérés des tâches de gestion d'infrastructure car IBM se charge de Kubernetes et des mises à niveau d'infrastructure, de la sécurité, etc.
+Les développeurs se concentrent sur les problèmes de domaine en utilisant des outils existants : au lieu d'écrire un code unique pour les opérations de consignation et de surveillance, ils l'intègrent dans les applications via une liaison de services {{site.data.keyword.cloud_notm}} aux clusters. Les développeurs sont également libérés des tâches de gestion d'infrastructure car IBM se charge de Kubernetes et des mises à niveau d'infrastructure, de la sécurité, etc.
 
 **Modèle de solution**
 
 Des kits de démarrage de calcul, de stockage et Node.js à la demande s'exécutent dans le cloud public avec un accès sécurisé aux données de transport maritime dans le monde entier, selon les besoins. Les calculs dans les clusters sont protégés contre toute falsification et isolés avec la technologie bare metal.  
 
 Solution technique :
-* {{site.data.keyword.containerlong_notm}} avec fonction de calcul sécurisé
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * IBM {{site.data.keyword.SecureGateway}}
@@ -187,3 +186,5 @@ Solution technique :
 * Les clients de la compagnie maritime et les autorités gouvernementales ont accès aux données de manifeste et peuvent partager les données douanières tout en se conformant à la réglementation locale en vigueur.
 * La compagnie maritime tire parti de l'amélioration de la gestion logistique dans la chaîne d'approvisionnement : coûts réduit et délais de dédouanement plus rapides.
 * 99 % des déclarations sont numériques et 90 % des importations sont traitées sans intervention humaine.
+
+

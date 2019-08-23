@@ -2,10 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
-
 subcollection: containers
 
 ---
@@ -31,12 +30,12 @@ subcollection: containers
 # Débogage de votre cluster
 {: #cs_troubleshoot}
 
-Lorsque vous utilisez {{site.data.keyword.containerlong}}, tenez compte des techniques décrites ci-dessous pour identifier et résoudre les incidents d'ordre général et déboguer vos clusters. Vous pouvez également vérifier le [statut du système {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
+Lorsque vous utilisez {{site.data.keyword.containerlong}}, tenez compte des techniques décrites ci-dessous pour identifier et résoudre les incidents d'ordre général et déboguer vos clusters Kubernetes de communauté ou OpenShift. Vous pouvez également vérifier le [statut du système {{site.data.keyword.cloud_notm}} system ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/bluemix/support/#status).
 {: shortdesc}
 
 Vous pouvez effectuer ces étapes générales pour vérifier que vos clusters sont à jour :
 - Vérifiez tous les mois les mises à jour de sécurité et de système d'exploitation disponibles pour [mettre à jour vos noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update).
-- [Mettez à jour votre cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) à la [version de Kubernetes](/docs/containers?topic=containers-cs_versions) par défaut la plus récente pour {{site.data.keyword.containerlong_notm}}<p class="important">Assurez-vous que [votre client CLI `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) correspond à la version Kubernetes de votre serveur en cluster. [Kubernetes ne prend pas en charge les ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")versions client de ](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` qui diffèrent d'au moins deux niveaux par rapport à la version du serveur (n +/- 2).</p>
+- [Mettez à jour votre cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) vers la dernière version par défaut pour les clusters [Kubernetes de communauté](/docs/containers?topic=containers-cs_versions) ou [OpenShift](/docs/containers?topic=containers-cs_versions). <p class="important">Assurez-vous que [votre client CLI `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) correspond à la version Kubernetes de votre serveur en cluster. [Kubernetes ne prend pas en charge les ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")versions client de ](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` qui diffèrent d'au moins deux niveaux par rapport à la version du serveur (n +/- 2).</p>
 
 ## Exécution de tests avec l'outil de débogage et de diagnostic d'{{site.data.keyword.containerlong_notm}}
 {: #debug_utility}
@@ -49,10 +48,9 @@ Lorsque vous traitez les incidents, vous pouvez utiliser l'outil de débogage et
 
 2. Installez la charte Helm dans votre cluster.
   ```
-  helm install ibm/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
   ```
   {: pre}
-
 
 3. Démarrez un serveur proxy pour afficher l'interface de l'outil de débogage.
   ```
@@ -96,11 +94,11 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
    <tbody>
 <tr>
    <td>`Aborted`</td>
-   <td>La suppression du cluster est demandée par l'utilisateur avant le déploiement du maître Kubernetes. Une fois supprimé, le cluster est retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+   <td>La suppression du cluster est demandée par l'utilisateur avant le déploiement du maître Kubernetes. Une fois supprimé, le cluster est retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
  <tr>
      <td>`Critical`</td>
-     <td>Le maître Kubernetes est inaccessible ou tous les noeuds worker du cluster sont arrêtés. </td>
+     <td>Le maître Kubernetes est inaccessible ou tous les noeuds worker du cluster sont arrêtés. Si vous avez activé {{site.data.keyword.keymanagementservicelong_notm}} dans votre cluster, il se peut que le conteneur {{site.data.keyword.keymanagementserviceshort}} ne parvienne pas à chiffrer ou à déchiffrer vos secrets de cluster. Si tel est le cas, vous pouvez afficher une erreur avec davantage d'informations lorsque vous exécutez `kubectl get secrets`. </td>
     </tr>
    <tr>
      <td>`Delete failed`</td>
@@ -108,7 +106,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
    </tr>
    <tr>
      <td>`Deleted`</td>
-     <td>Le cluster a bien été supprimé mais n'est pas encore retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Le cluster a bien été supprimé mais n'est pas encore retiré de votre tableau de bord. Si votre cluster est bloqué dans cet état depuis longtemps, ouvrez un [cas de support {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
    <td>`Deleting`</td>
@@ -116,7 +114,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
    </tr>
    <tr>
      <td>`Deploy failed`</td>
-     <td>Le déploiement du maître Kubernetes n'a pas abouti. Vous ne pouvez pas résoudre cet état. Contactez le support IBM Cloud en ouvrant un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</td>
+     <td>Le déploiement du maître Kubernetes n'a pas abouti. Vous ne pouvez pas résoudre cet état. Contactez le support IBM Cloud en ouvrant un [cas de support {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
      <tr>
        <td>`Deploying`</td>
@@ -132,7 +130,7 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
      </tr>
    <tr>
      <td>`Requested`</td>
-     <td>Une demande de création du cluster et d'organisation de l'infrastructure du maître Kubernetes et des noeuds worker est envoyée. Lorsque le déploiement du cluster commence, l'état du cluster passe à <code>Deploying</code>. Si votre cluster est bloqué à l'état <code>Requested</code> depuis longtemps, ouvrez un [cas de support {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
+     <td>Une demande de création du cluster et d'organisation de l'infrastructure du maître Kubernetes et des noeuds worker est envoyée. Lorsque le déploiement du cluster commence, l'état du cluster passe à <code>Deploying</code>. Si votre cluster est bloqué à l'état <code>Requested</code> depuis longtemps, ouvrez un [cas de support {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </td>
    </tr>
    <tr>
      <td>`Updating`</td>
@@ -140,11 +138,13 @@ Passez en revue les options permettant de déboguer vos clusters et d'identifier
    </tr>
    <tr>
     <td>`Unsupported`</td>
-    <td>La [version de Kubernetes](/docs/containers?topic=containers-cs_versions#cs_versions) exécutée par le cluster n'est plus prise en charge. L'état de santé de votre cluster ne fait plus l'objet d'une surveillance ou d'une génération de rapports active. De plus, vous ne pouvez pas ajouter ou recharger des noeuds worker. Pour continuer à recevoir des mises à jour de sécurité importantes et le support, vous devez mettre à jour votre cluster. Passez en revue les [actions de préparation à la mise à jour de version](/docs/containers?topic=containers-cs_versions#prep-up), puis [mettez à jour votre cluster](/docs/containers?topic=containers-update#update) vers une version Kubernetes mise à jour. <br><br><p class="note">Les clusters dont la version est antérieure d'au moins trois niveaux à la plus ancienne version prise en charge ne peuvent pas être mis à jour. Pour éviter cela, vous pouvez mettre à jour le cluster vers une version de Kubernetes antérieure à trois niveaux par rapport à la version actuelle, par exemple en passant de la version 1.12 à 1.14. De plus, si votre cluster exécute la version 1.5, 1.7, ou 1.8, la version est trop éloignée pour qu'une mise à jour soit possible. A la place, vous devez [créer un cluster](/docs/containers?topic=containers-clusters#clusters) et [déployer vos applications](/docs/containers?topic=containers-app#app) vers le cluster.</p></td>
+    <td>La [version de Kubernetes](/docs/containers?topic=containers-cs_versions#cs_versions) exécutée par le cluster n'est plus prise en charge. L'état de santé de votre cluster ne fait plus l'objet d'une surveillance ou d'une génération de rapports active. De plus, vous ne pouvez pas ajouter ou recharger des noeuds worker. Pour continuer à recevoir des mises à jour de sécurité importantes et le support, vous devez mettre à jour votre cluster. Passez en revue les [actions de préparation à la mise à jour de version](/docs/containers?topic=containers-cs_versions#prep-up), puis [mettez à jour votre cluster](/docs/containers?topic=containers-update#update) vers une version Kubernetes mise à jour.<br><br><p class="note">Les clusters dont la version est antérieure d'au moins trois niveaux à la plus ancienne version prise en charge ne peuvent pas être mis à jour. Pour éviter cela, vous pouvez mettre à jour le cluster vers une version de Kubernetes antérieure à trois niveaux par rapport à la version actuelle, par exemple en passant de la version 1.12 à 1.14. De plus, si votre cluster exécute la version 1.5, 1.7, ou 1.8, la version est trop éloignée pour qu'une mise à jour soit possible. A la place, vous devez [créer un cluster](/docs/containers?topic=containers-clusters#clusters) et [déployer vos applications](/docs/containers?topic=containers-app#app) vers le cluster.</p></td>
    </tr>
     <tr>
        <td>`Warning`</td>
-       <td>Au moins un noeud worker du cluster n'est pas disponible. Cela dit, les autres noeuds worker sont disponibles et peuvent prendre le relais pour la charge de travail. </td>
+       <td><ul><li>Au moins un noeud worker du cluster n'est pas disponible. Cela dit, les autres noeuds worker sont disponibles et peuvent prendre le relais pour la charge de travail. Essayez de [recharger](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) les noeuds worker disponibles. </li>
+       <li>Votre cluster ne possède pas de noeuds worker, par exemple si vous avez créé un cluster sans noeud worker ou retiré manuellement tous les noeuds worker du cluster. [Redimensionnez votre pool de noeuds worker](/docs/containers?topic=containers-add_workers#resize_pool) pour ajouter des noeuds worker afin d'effectuer une reprise à partir d'un état `Warning`. </li>
+       <li>Une opération de plan de contrôle de votre cluster a échoué. Affichez le cluster dans la console ou exécutez `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` pour [vérifier le **statut du maître** afin d'effectuer un débogage plus approfondi](/docs/containers?topic=containers-cs_troubleshoot#debug_master). </li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -180,9 +180,9 @@ Passez en revue les options permettant de déboguer vos noeuds worker et d'ident
     <td>Un noeud worker peut passer à l'état critique (Critical) pour de nombreuses raisons : <ul><li>Vous avez lancé un réamorçage de votre noeud worker sans avoir exécuté les commandes cordon et drain sur votre noeud worker. Le réamorçage d'un noeud worker peut entraîner des altérations de données dans <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code> et <code>calico</code>. </li>
     <li>Les pods qui sont déployés sur votre noeud worker n'utilisent pas de limites de ressources de [mémoire ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) et d'[UC ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Sans limite de ressources, les pods peuvent consommer toutes les ressources disponibles, sans en laisser pour l'exécution d'autres pods sur ce noeud worker. Cette sursollicitation de charge de travail entraîne l'échec du noeud worker. </li>
     <li><code>containerd</code>, <code>kubelet</code> ou <code>calico</code> sont passés dans un état irrémédiable après avoir exécuté des centaines ou des milliers de conteneurs à la longue. </li>
-    <li>Vous avez configuré un dispositif de routeur virtuel (VRA) pour votre noeud worker qui n'est plus opérationnel et a interrompu la communication entre votre noeud worker et le maître Kubernetes. </li><li> Des problèmes réseau dans {{site.data.keyword.containerlong_notm}} ou dans l'infrastructure IBM Cloud (SoftLayer) qui entraînent une coupure de communication entre votre noeud worker et le maître Kubernetes.</li>
+    <li>Vous avez configuré un dispositif de routeur virtuel (VRA) pour votre noeud worker qui n'est plus opérationnel et a interrompu la communication entre votre noeud worker et le maître Kubernetes. </li><li> Des problèmes réseau dans {{site.data.keyword.containerlong_notm}} ou dans l'infrastructure IBM Cloud qui entraînent une coupure de communication entre votre noeud worker et le maître Kubernetes.</li>
     <li>La capacité de votre noeud worker a été dépassée. Vérifiez l'état (<strong>Status</strong>) du noeud worker pour voir s'il indique un espace disque insuffisant (<strong>Out of disk</strong>) ou une mémoire insuffisante (<strong>Out of memory</strong>). Si votre noeud worker n'a plus de capacité disponible, envisagez de réduire la charge de travail sur ce noeud ou ajoutez un noeud worker à votre cluster pour mieux équilibrer la charge de travail.</li>
-    <li>Le périphérique est hors tension dans la [liste de ressources de la console {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/resources). Ouvrez la liste de ressources et recherchez l'ID de votre noeud worker dans la liste **Périphériques**. Dans le menu Actions, cliquez sur **Mettre sous tension**.</li></ul>
+    <li>Le périphérique est hors tension dans la [liste de ressources de la console {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/resources). Ouvrez la liste de ressources et recherchez l'ID de votre noeud worker dans la liste **Périphériques**. Dans le menu Actions, cliquez sur **Mettre sous tension**.</li></ul>
     Dans de nombreux cas, [recharger](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) votre noeud worker peut résoudre le problème. Lorsque vous rechargez votre noeud worker, la [version de correctif](/docs/containers?topic=containers-cs_versions#version_types) la plus récente est appliquée à votre noeud worker. La version principale et secondaire reste inchangée. Avant de recharger votre noeud worker, assurez-vous d'effectuer les opérations cordon et drain sur le noeud pour garantir l'interruption en douceur des pods existants et leur replanification sur les noeuds worker restants. </br></br> Si le rechargement du noeud worker ne résout pas le problème, passez à l'étape suivante pour poursuivre l'identification et la résolution des problèmes de votre noeud worker. </br></br><strong>Astuce :</strong> vous pouvez [configurer des diagnostics d'intégrité de votre noeud worker et activer la reprise automatique](/docs/containers?topic=containers-health#autorecovery). Si le système de reprise automatique détecte un mauvais état de santé d'un noeud worker d'après les vérifications configurées, il déclenche une mesure corrective (par exemple, un rechargement du système d'exploitation) sur le noeud worker. Pour plus d'informations sur le fonctionnement de la reprise automatique, consultez le [blogue Autorecovery ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/).
     </td>
    </tr>
@@ -220,7 +220,7 @@ Passez en revue les options permettant de déboguer vos noeuds worker et d'ident
     </tr>
     <tr>
      <td>`Unknown`</td>
-     <td>Le maître Kubernetes est inaccessible pour l'une des raisons suivantes :<ul><li>Vous avez demandé une mise à jour de votre maître Kubernetes. L'état du noeud worker ne peut pas être extrait lors de la mise à jour. Si le noeud worker reste dans cet état sur une période prolongée même une fois que la mise à jour du maître Kubernetes a abouti, essayez de [recharger](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) le noeud worker.</li><li>Peut-être possédez-vous un autre pare-feu qui protège vos noeuds worker ou avez-vous récemment modifié vos paramètres de pare-feu. {{site.data.keyword.containerlong_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Pour plus d'informations, voir [Pare-feu empêchant la connexion des noeuds worker](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Le maître Kubernetes est arrêté. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [cas de support {{site.data.keyword.Bluemix_notm}}e](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
+     <td>Le maître Kubernetes est inaccessible pour l'une des raisons suivantes :<ul><li>Vous avez demandé une mise à jour de votre maître Kubernetes. L'état du noeud worker ne peut pas être extrait lors de la mise à jour. Si le noeud worker reste dans cet état sur une période prolongée même une fois que la mise à jour du maître Kubernetes a abouti, essayez de [recharger](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) le noeud worker.</li><li>Peut-être possédez-vous un autre pare-feu qui protège vos noeuds worker ou avez-vous récemment modifié vos paramètres de pare-feu. {{site.data.keyword.containerlong_notm}} requiert que certaines adresses IP et certains ports soient ouverts pour permettre la communication entre le noeud worker et le maître Kubernetes et inversement. Pour plus d'informations, voir [Pare-feu empêchant la connexion des noeuds worker](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).</li><li>Le maître Kubernetes est arrêté. Contactez le support {{site.data.keyword.cloud_notm}} en ouvrant un [cas de support {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help). </li></ul></td>
 </tr>
    <tr>
       <td>`Warning`</td>
@@ -229,7 +229,7 @@ Passez en revue les options permettant de déboguer vos noeuds worker et d'ident
   </tbody>
 </table>
 </p></li>
-<li>Affichez la liste des détails relatifs à votre noeud worker. Si les détails comprennent un message d'erreur, consultez la liste des [messages d'erreur courants concernant les noeuds worker](#common_worker_nodes_issues) pour savoir comment résoudre le problème.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></li>
+<li>Affichez la liste des détails relatifs à votre noeud worker. Si les détails comprennent un message d'erreur, consultez la liste des [messages d'erreur courants concernant les noeuds worker](#common_worker_nodes_issues) pour savoir comment résoudre le problème.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
 </ol>
 
 <br />
@@ -248,55 +248,54 @@ Passez en revue les messages d'erreurs courantes et apprenez à résoudre les pr
     </thead>
     <tbody>
       <tr>
-        <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : votre compte n'est pas autorisé à réserver des instances de traitement pour l'instant.</td>
-        <td>La réservation de ressources de traitement par votre compte d'infrastructure IBM Cloud (SoftLayer) n'est peut-être pas possible. Contactez le support {{site.data.keyword.Bluemix_notm}} en ouvrant un [cas de support {{site.data.keyword.Bluemix_notm}}](#ts_getting_help).</td>
+        <td>Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : votre compte n'est pas autorisé à commander des instances de calcul pour l'instant.</td>
+        <td>La commande de ressources de calcul par votre compte d'infrastructure IBM Cloud n'est peut-être pas possible. Contactez le support {{site.data.keyword.cloud_notm}} en ouvrant un [cas de support {{site.data.keyword.cloud_notm}}](#ts_getting_help). </td>
       </tr>
       <tr>
-      <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : impossible de passer une commande.<br><br>
-      Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : impossible de passer la commande. Les ressources derrière le routeur 'router_name' ne sont pas suffisantes pour satisfaire la demande pour les invités suivants : 'worker_id'.</td>
-      <td>La zone que vous avez sélectionnée ne dispose peut-être pas de la capacité d'infrastructure suffisante pour mettre à disposition vos noeuds worker. Ou, il se peut que vous ayez dépassé une limite dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour y remédier, essayez l'une des options suivantes :
+      <td>Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : impossible de passer une commande. <br><br>
+      Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : impossible de passer une commande. Les ressources derrière le routeur 'router_name' ne sont pas suffisantes pour satisfaire la demande pour les invités suivants : 'worker_id'.</td>
+      <td>La zone que vous avez sélectionnée ne dispose peut-être pas de la capacité d'infrastructure suffisante pour mettre à disposition vos noeuds worker. Ou, il se peut que vous ayez dépassé une limite dans votre compte d'infrastructure IBM Cloud. Pour y remédier, essayez l'une des options suivantes :
       <ul><li>La disponibilité des ressources de l'infrastructure dans les zones peut souvent varier. Patientez quelques minutes et réessayez.</li>
       <li>Pour un cluster à zone unique, créez le cluster dans une autre zone. Pour un cluster à zones multiples, ajoutez une zone dans le cluster.</li>
-      <li>Indiquez une paire de VLAN public et privé différente pour vos noeuds worker dans votre compte d'infrastructure IBM Cloud (SoftLayer). Pour les noeuds worker inclus dans un pool de noeuds worker, vous pouvez utiliser la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>. </li>
-      <li>Contactez votre chargé de compte d'infrastructure IBM Cloud (SoftLayer) pour vérifier que vous ne dépassez pas une limite, par exemple un quota global.</li>
-      <li>Ouvrez un [cas de support IBM Cloud infrastructure (SoftLayer)](#ts_getting_help)</li></ul></td>
+      <li>Indiquez une paire de VLAN public et privé différente pour vos noeuds worker dans votre compte d'infrastructure IBM Cloud. Pour les noeuds worker inclus dans un pool de noeuds worker, vous pouvez utiliser la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) <code>ibmcloud ks zone-network-set</code>.</li>
+      <li>Contactez votre gestionnaire de compte d'infrastructure IBM Cloud pour vérifier que vous ne dépassez pas une limite, par exemple un quota global. </li>
+      <li>Ouvrez un [cas de support IBM Cloud infrastructure](#ts_getting_help). </li></ul></td>
       </tr>
       <tr>
-        <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : impossible d'obtenir le réseau local virtuel avec l'ID : <code>&lt;vlan id&gt;</code>.</td>
-        <td>Votre noeud worker n'a pas pu être mis à disposition car l'ID de réseau local virtuel sélectionné est introuvable pour l'une des raisons suivantes :<ul><li>Vous avez indiqué le numéro de réseau local virtuel au lieu de l'ID de réseau local virtuel. Le numéro de réseau local virtuel est composé de 3 ou 4 chiffres, tandis que l'ID de réseau local virtuel est composé de 7 chiffres. Exécutez la commande <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> pour extraire l'ID du réseau local virtuel.<li>L'ID de réseau local virtuel (VLAN) n'est peut-être pas associé au compte d'infrastructure IBM Cloud (SoftLayer) que vous utilisez. Exécutez la commande <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> pour afficher la liste des ID de VLAN disponibles pour votre compte. Pour changer de compte d'infrastructure IBM Cloud (SoftLayer), voir la commande [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
+        <td>Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : impossible d'obtenir le VLAN dont l'ID est <code>&lt;vlan id&gt;</code>. </td>
+        <td>Votre noeud worker n'a pas pu être mis à disposition car l'ID de réseau local virtuel sélectionné est introuvable pour l'une des raisons suivantes :<ul><li>Vous avez indiqué le numéro de réseau local virtuel au lieu de l'ID de réseau local virtuel. Le numéro de réseau local virtuel est composé de 3 ou 4 chiffres, tandis que l'ID de réseau local virtuel est composé de 7 chiffres. Exécutez la commande <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> pour extraire l'ID du réseau local virtuel.<li>L'ID VLAN n'est peut-être pas associé au compte d'infrastructure IBM Cloud que vous utilisez. Exécutez la commande <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> pour afficher la liste des ID de VLAN disponibles pour votre compte. Pour changer de compte d'infrastructure IBM Cloud, voir la commande [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation : l'emplacement fourni pour cette commande n'est pas valide. (HTTP 500)</td>
-        <td>L'infrastructure IBM Cloud (SoftLayer) n'est pas configurée pour commander des ressources de traitement dans le centre de données sélectionné. Contactez le [support {{site.data.keyword.Bluemix_notm}}](#ts_getting_help) pour vérifier que votre compte est configuré correctement.</td>
+        <td>L'infrastructure IBM Cloud n'est pas configurée pour commander des ressources de calcul dans le centre de données sélectionné. Contactez le [support {{site.data.keyword.cloud_notm}}](#ts_getting_help) pour vérifier que votre compte est configuré correctement. </td>
        </tr>
        <tr>
-        <td>Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : l'utilisateur ne dispose pas des droits sur l'infrastructure {{site.data.keyword.Bluemix_notm}} nécessaires pour ajouter des serveurs
+        <td>Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : l'utilisateur ne dispose pas des droits sur l'infrastructure classique {{site.data.keyword.cloud_notm}} qui sont nécessaires pour ajouter des serveurs
        </br></br>
-        Exception liée à l'infrastructure {{site.data.keyword.Bluemix_notm}} : des droits sont nécessaires pour réserver 'Item'.
+        Exception liée à l'infrastructure classique {{site.data.keyword.cloud_notm}} : des droits sont nécessaires pour commander 'Item'.
         </br></br>
-        Les données d'identification de l'infrastructure {{site.data.keyword.Bluemix_notm}} n'ont pas pu être validées.</td>
-        <td>Vous ne disposez peut-être pas des droits nécessaires pour effectuer cette action dans votre portefeuille d'infrastructure IBM Cloud (SoftLayer) ou vous utilisez des données d'identification d'infrastructure incorrectes. Voir [Configuration de la clé d'API pour activer l'accès au portefeuille de l'infrastructure](/docs/containers?topic=containers-users#api_key).</td>
+        Les données d'identification de l'infrastructure classique {{site.data.keyword.cloud_notm}} n'ont pas pu être validées. </td>
+        <td>Vous ne disposez peut-être pas des droits nécessaires pour effectuer cette action dans votre portefeuille d'infrastructure IBM Cloud ou vous utilisez des données d'identification d'infrastructure incorrectes. Voir [Configuration de la clé d'API pour activer l'accès au portefeuille de l'infrastructure](/docs/containers?topic=containers-users#api_key).</td>
       </tr>
       <tr>
        <td>Le noeud worker ne parvient pas à communiquer avec les serveurs {{site.data.keyword.containerlong_notm}}. Vérifiez si la configuration de votre pare-feu autorise le trafic à partir de ce noeud worker.
        <td><ul><li>Si vous disposez d'un pare-feu, [configurez les paramètres de votre pare-feu de sorte à autoriser le trafic sortant vers les ports et les adresses IP appropriés](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Déterminez si votre cluster n'a pas une adresse IP publique en exécutant la commande `ibmcloud ks workers --cluster &lt;mycluster&gt;`. Si aucune adresse IP publique n'est répertoriée, votre cluster ne dispose que de réseaux locaux virtuels (VLAN) privés.
+       <li>Déterminez si votre cluster n'a pas une adresse IP publique en exécutant la commande `ibmcloud ks workers --cluster <mycluster>`. Si aucune adresse IP publique n'est répertoriée, votre cluster ne dispose que de réseaux locaux virtuels (VLAN) privés.
        <ul><li>Si vous voulez que le cluster ne dispose que de VLAN privés, configurez votre [connexion de réseau local virtuel (VLAN)](/docs/containers?topic=containers-plan_clusters#private_clusters) et votre [pare-feu](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Si vous avez créé un cluster avec un noeud final de service privé uniquement avant d'activer votre compte pour [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et les [noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started), vos noeuds worker ne peuvent pas se connecter au maître. Essayez de [configurer le noeud final de service public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) de manière à pouvoir utiliser votre cluster jusqu'à ce que vos cas de support soient traités pour mettre à jour votre compte.
-Si vous souhaitez tout de même avoir un noeud final de service privé uniquement après la mise à jour de votre compte, vous pouvez désactiver le noeud final de service public. </li>
+       <li>Si vous avez créé un cluster avec un noeud final de service privé uniquement avant d'activer votre compte pour [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et les [noeuds finaux de service](/docs/resources?topic=resources-private-network-endpoints#getting-started), vos noeuds worker ne peuvent pas se connecter au maître. Essayez de [configurer le noeud final de service public](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) de manière à pouvoir utiliser votre cluster jusqu'à ce que vos cas de support soient traités pour mettre à jour votre compte. Si vous souhaitez tout de même avoir un noeud final de service privé uniquement après la mise à jour de votre compte, vous pouvez désactiver le noeud final de service public.</li>
        <li>Si vous voulez que votre cluster dispose d'une adresse IP publique, [ajoutez de nouveaux noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) avec à la fois des VLAN publics et privés.</li></ul></li></ul></td>
      </tr>
       <tr>
-  <td>Impossible de créer un jeton de portail IMS, car aucun compte IMS n'est lié au compte BSS sélectionné</br></br>Utilisateur indiqué introuvable ou actif</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus : Le statut actuel du compte utilisateur est cancel_pending.</br></br>En attente de la visibilité de la machine pour l'utilisateur</td>
-  <td>Le propriétaire de la clé d'API utilisée pour accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer) ne dispose pas des droits nécessaires pour effectuer l'action ou est peut-être en attente de suppression. </br></br><strong>En tant qu'utilisateur</strong>, procédez comme suit :
+  <td>Impossible de créer un jeton de portail IMS, car aucun compte IMS n'est lié au compte BSS sélectionné</br></br>Utilisateur indiqué introuvable ou inactif</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus : Le statut actuel du compte utilisateur est cancel_pending.</br></br>Noeud worker introuvable. Passez en revue les droits utilisateur de l'infrastructure classique {{site.data.keyword.cloud_notm}}. </td>
+  <td>Le propriétaire de la clé d'API utilisée pour accéder au portefeuille d'infrastructure IBM Cloud ne dispose pas des droits nécessaires pour effectuer l'action ou est peut-être en attente de suppression. </br></br><strong>En tant qu'utilisateur</strong>, procédez comme suit :
   <ol><li>Si vous avez accès à plusieurs comptes, assurez-vous d'être connecté au compte que vous souhaitez utiliser avec {{site.data.keyword.containerlong_notm}}. </li>
-  <li>Exécutez la commande <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> pour afficher le propriétaire de la clé d'API utilisée pour accéder au portefeuille d'infrastructure IBM Cloud (SoftLayer). </li>
-  <li>Exécutez la commande <code>ibmcloud account list</code> pour afficher le propriétaire du compte {{site.data.keyword.Bluemix_notm}} que vous utilisez actuellement. </li>
-  <li>Contactez le propriétaire du compte {{site.data.keyword.Bluemix_notm}} et signalez que le propriétaire de la clé d'API ne dispose pas des droits requis dans l'infrastructure IBM Cloud (SoftLayer) ou est peut-être en attente de suppression. </li></ol>
+  <li>Exécutez <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> pour afficher le propriétaire de la clé d'API utilisée pour accéder au portefeuille d'infrastructure IBM Cloud. </li>
+  <li>Exécutez la commande <code>ibmcloud account list</code> pour afficher le propriétaire du compte {{site.data.keyword.cloud_notm}} que vous utilisez actuellement. </li>
+  <li>Contactez le propriétaire du compte {{site.data.keyword.cloud_notm}} et signalez que le propriétaire de la clé d'API ne dispose pas des droits requis dans l'infrastructure IBM Cloud ou est peut-être en attente de suppression. </li></ol>
   </br><strong>En tant que propriétaire du compte</strong>, procédez comme suit :
-  <ol><li>Consultez les [droits requis dans l'infrastructure IBM Cloud (SoftLayer)](/docs/containers?topic=containers-users#infra_access) pour effectuer l'action qui a échoué. </li>
+  <ol><li>Consultez les [droits requis dans l'infrastructure IBM Cloud](/docs/containers?topic=containers-users#infra_access) pour effectuer l'action qui a échoué. </li>
   <li>Définissez les droits du propriétaire de la clé d'API ou créez une nouvelle clé d'API en exécutant la commande [<code>ibmcloud ks api-key-reset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset). </li>
-  <li>Si vous ou un autre administrateur de compte avez défini manuellement des données d'identification de l'infrastructure IBM Cloud (SoftLayer) dans votre compte, exécutez la commande [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) pour retirer les données d'identification de votre compte. </li></ol></td>
+  <li>Si vous ou un autre administrateur de compte avez défini manuellement des données d'identification de l'infrastructure IBM Cloud dans votre compte, exécutez la commande [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) pour retirer les données d'identification de votre compte. </li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -311,11 +310,11 @@ Si vous souhaitez tout de même avoir un noeud final de service privé uniquemen
 {: shortdesc} 
 
 **Santé du maître**<br>
-La zone **Santé du maître** reflète l'état des composants du maître et vous informe si un événement nécessite votre attention. Cette zone peut afficher l'une des valeurs suivantes : 
+La zone **Santé du maître** reflète l'état des composants du maître et vous informe si un événement nécessite votre attention. Cette zone peut afficher l'une des valeurs suivantes :
 *   `erreur` : le maître n'est pas opérationnel. IBM est automatiquement averti et prend les mesures nécessaires pour résoudre ce problème. Vous pouvez continuer à surveiller la santé jusqu'à ce que le maître passe à l'état `normal`.
 *   `normal` : le maître est opérationnel et sain. Aucune action n'est requise.
 *   `non disponible` : le maître peut ne pas être accessible, ce qui signifie que certaines actions comme le redimensionnement d'un pool de noeuds worker sont temporairement indisponibles. IBM est automatiquement averti et prend les mesures nécessaires pour résoudre ce problème. Vous pouvez continuer à surveiller la santé jusqu'à ce que le maître passe à l'état `normal`. 
-*   `non pris en charge` : le maître exécute une version de Kubernetes qui n'est pas prise en charge. Vous devez [mettre à jour votre cluster](/docs/containers?topic=containers-update) pour que le maître repasse à l'état de santé `normal`. 
+*   `non pris en charge` : le maître exécute une version de Kubernetes qui n'est pas prise en charge. Vous devez [mettre à jour votre cluster](/docs/containers?topic=containers-update) pour que le maître repasse à l'état de santé `normal`.
 
 **Statut et état du maître**<br>
 La zone **Statut du maître** fournit des détails sur l'opération en cours d'exécution à partir de l'état du maître. Le statut inclut un horodatage indiquant depuis combien de temps le maître est dans le même état, par exemple, `Prêt (Il y a 1 mois)`. La zone **Etat du maître** reflète le cycle de vie des opérations possibles qui peuvent être effectuées sur le maître, par exemple, le déploiement, la mise à jour et la suppression. Chaque état est décrit dans le tableau suivant :
@@ -341,15 +340,15 @@ La zone **Statut du maître** fournit des détails sur l'opération en cours d'e
    </tr>
    <tr>
    <td>`suppression`</td>
-   <td>Le maître est en cours de suppression car vous avez supprimé le cluster. Vous ne pouvez pas annuler une suppression. Une fois le cluster supprimé, vous ne pouvez plus vérifier l'état du maître car le cluster a été entièrement retiré. </td>
+   <td>Le maître est en cours de suppression car vous avez supprimé le cluster. Vous ne pouvez pas annuler une suppression. Une fois le cluster supprimé, vous ne pouvez plus vérifier l'état du maître car le cluster a été entièrement retiré.</td>
    </tr>
      <tr>
        <td>`échec de la suppression`</td>
-       <td>La suppression du maître a échoué. Le support IBM a été averti et s'emploie à résoudre le problème. Vous ne pouvez pas résoudre le problème en tentant de supprimer à nouveau le cluster. A la place, vérifiez la zone **Statut du maître** pour obtenir plus d'informations ou attendez que le cluster soit supprimé. </td>
+       <td>La suppression du maître a échoué. Le support IBM a été averti et s'emploie à résoudre le problème. Vous ne pouvez pas résoudre le problème en tentant de supprimer à nouveau le cluster. A la place, vérifiez la zone **Statut du maître** pour obtenir plus d'informations ou attendez que le cluster soit supprimé.</td>
       </tr>
       <tr>
        <td>`updating`</td>
-       <td>Le maître est en train de mettre à jour sa version Kubernetes. La mise à jour peut être une mise à jour de correctif qui s'applique automatiquement ou une version principale ou secondaire que vous avez appliquée en mettant à jour le cluster. Durant la mise à jour, votre maître hautement disponible peut continuer de traiter les demandes et vos charges de travail d'application et vos noeuds worker continuent de s'exécuter. Lorsque la mise à jour du maître est terminée, vous pouvez [mettre à jour vos noeuds worker](/docs/containers?topic=containers-update#worker_node). <br><br>
+       <td>Le maître est en train de mettre à jour sa version Kubernetes. La mise à jour peut être une mise à jour de correctif qui s'applique automatiquement ou une version principale ou secondaire que vous avez appliquée en mettant à jour le cluster. Durant la mise à jour, votre maître hautement disponible peut continuer de traiter les demandes et vos charges de travail d'application et vos noeuds worker continuent de s'exécuter. Lorsque la mise à jour du maître est terminée, vous pouvez [mettre à jour vos noeuds worker](/docs/containers?topic=containers-update#worker_node).<br><br>
        Si la mise à jour échoue, le maître repasse à l'état `déployé` et continue à exécuter la version précédente. Le support IBM a été averti et s'emploie à résoudre le problème. Vous pouvez vérifier si la mise à jour a échoué en consultant la zone **Statut du maître** .</td>
     </tr>
    </tbody>
@@ -365,7 +364,7 @@ La zone **Statut du maître** fournit des détails sur l'opération en cours d'e
 
 Passez en revue les options dont vous disposez pour déboguer vos déploiements d'application et identifier les causes premières des échecs.
 
-Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom dans lequel est déployée votre application.
+Avant de commencer, vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom dans lequel est déployée votre application. 
 
 1. Recherchez les anomalies dans les ressources de service ou de déploiement en exécutant la commande `describe`.
 
@@ -411,11 +410,11 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
--   Pour voir si {{site.data.keyword.Bluemix_notm}} est disponible, [vérifiez la page Statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status).
+-   Pour déterminer si {{site.data.keyword.cloud_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.cloud_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status). 
 -   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
-    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
+    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.cloud_notm}}, [demandez une invitation](https://cloud.ibm.com/kubernetes/slack) sur ce site Slack.
     {: tip}
--   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
+-   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.cloud_notm}} la voient.
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.

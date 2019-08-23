@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -71,13 +71,13 @@ Ci-dessous figurent les motifs pour lesquels les journaux de votre cluster peuve
   <tr>
     <td>Si vous avez spécifié un espace lors de la création du cluster, les droits d'accès Responsable, Développeur ou Auditeur n'ont pas été affectés au propriétaire du compte sur cet espace.</td>
       <td>Pour modifier les droits d'accès du propriétaire du compte :
-      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>. </li>
+      <ol><li>Pour identifier le propriétaire du compte pour le cluster, exécutez la commande <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>Pour attribuer au propriétaire du compte les droits d'accès Responsable, Développeur ou Auditeur dans {{site.data.keyword.containerlong_notm}} sur cet espace, voir <a href="/docs/containers?topic=containers-users">Gestion de l'accès au cluster</a>.</li>
       <li>Pour actualiser le jeton de journalisation après une modification des droits d'accès, exécutez la commande <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>Vous avez une configuration de consignation pour votre application avec un lien symbolique dans le chemin de votre application.</td>
-      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut créer un lien symbolique. </p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
+      <td><p>Pour que les journaux soient envoyés, vous devez utiliser un chemin absolu dans votre configuration de consignation autrement vos journaux ne pourront pas être lus. Si votre chemin est monté sur votre noeud worker, il peut créer un lien symbolique.</p> <p>Exemple : si le chemin spécifié est <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> mais que les journaux sont acheminés vers <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, les journaux ne pourront pas être lus.</p></td>
     </tr>
   </tbody>
 </table>
@@ -108,7 +108,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
     ```
     {:pre}
 
-3. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.Bluemix_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
+3. Au bout de quelques minutes, vos journaux s'affichent dans le tableau de bord Kibana. Pour accéder au tableau de bord Kibana, accédez à l'une des URL suivantes et sélectionnez le compte {{site.data.keyword.cloud_notm}} dans lequel vous avez créé le cluster. Si vous avez spécifié un espace lors de la création du cluster, accédez à la place à cet espace.
     - Sud et Est des Etats-Unis : `https://logging.ng.bluemix.net`
     - Sud du Royaume-Uni : `https://logging.eu-gb.bluemix.net`
     - Europe centrale : `https://logging.eu-fra.bluemix.net`
@@ -199,11 +199,11 @@ Vous avez encore des problèmes avec votre cluster ?
 {: shortdesc}
 
 -  Dans le terminal, vous êtes averti des mises à jour disponibles pour l'interface de ligne de commande `ibmcloud` et les plug-ins. Veillez à maintenir votre interface de ligne de commande à jour pour pouvoir utiliser l'ensemble des commandes et des indicateurs.
--   Pour voir si {{site.data.keyword.Bluemix_notm}} est disponible, [vérifiez la page Statut d'{{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status).
+-   Pour déterminer si {{site.data.keyword.cloud_notm}} est disponible, [consultez la page de statut d'{{site.data.keyword.cloud_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/status?selected=status). 
 -   Publiez une question sur le site [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com).
-    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation](https://bxcs-slack-invite.mybluemix.net/) sur ce site Slack.
+    Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.cloud_notm}}, [demandez une invitation](https://cloud.ibm.com/kubernetes/slack) sur ce site Slack.
     {: tip}
--   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.Bluemix_notm}} la voient.
+-   Consultez les forums pour établir si d'autres utilisateurs ont rencontré le même problème. Lorsque vous utilisez les forums pour poser une question, balisez votre question de sorte que les équipes de développement {{site.data.keyword.cloud_notm}} la voient.
     -   Si vous avez des questions d'ordre technique sur le développement ou le déploiement de clusters ou d'applications à l'aide d'{{site.data.keyword.containerlong_notm}}, publiez-les sur le site [Stack Overflow ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) en leur adjoignant les balises `ibm-cloud`, `kubernetes` et `containers`.
     -   Pour toute question sur le service et les instructions de mise en route, utilisez le forum [IBM Developer Answers ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluez les balises `ibm-cloud` et `containers`.
     Voir [Comment obtenir de l'aide](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) pour plus d'informations sur l'utilisation des forums.

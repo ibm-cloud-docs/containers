@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -33,9 +33,9 @@ Ajoutez rapidement des technologies open source à votre cluster à l'aide de mo
 Les modules complémentaires {{site.data.keyword.containerlong_notm}} gérés permettent d'améliorer facilement votre cluster avec des fonctions open source, telles que Istio ou Knative. La version de l'outil open source que vous ajoutez à votre cluster est testée par IBM et approuvée pour être utilisée dans {{site.data.keyword.containerlong_notm}}.
 
 **Comment la facturation et le support fonctionnent-ils pour les modules complémentaires gérés ?** </br>
-Les modules complémentaires gérés sont entièrement intégrés dans l'organisation de support {{site.data.keyword.Bluemix_notm}}. Pour toute question ou problématique relative à l'utilisation des modules complémentaires gérés, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Les modules complémentaires gérés sont entièrement intégrés dans l'organisation de support {{site.data.keyword.cloud_notm}}. Pour toute question ou problématique relative à l'utilisation des modules complémentaires gérés, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Si l'outil que vous ajoutez à votre cluster entraîne des coûts, ceux-ci sont automatiquement intégrés et répertoriés dans le cadre de votre facturation {{site.data.keyword.containerlong_notm}}. Le cycle de facturation est déterminé par {{site.data.keyword.Bluemix_notm}} en fonction du moment où vous activez le module complémentaire dans votre cluster.
+Si l'outil que vous ajoutez à votre cluster entraîne des coûts, ceux-ci sont automatiquement intégrés et répertoriés dans le cadre de votre facturation {{site.data.keyword.containerlong_notm}}. Le cycle de facturation est déterminé par {{site.data.keyword.cloud_notm}} en fonction du moment où vous activez le module complémentaire dans votre cluster.
 
 **Quelles sont les limitations à prendre en compte ?** </br>
 Si vous avez installé le [contrôleur d'admission Container Image Security Enforcer](/docs/services/Registry?topic=registry-security_enforce#security_enforce) dans votre cluster, vous ne pouvez pas activer les modules complémentaires gérés dans votre cluster.
@@ -53,7 +53,7 @@ Pour plus d'informations sur les prérequis pour chaque module complémentaire, 
 ## Mise à jour des modules complémentaires gérés
 {: #updating-managed-add-ons}
 
-Les versions de chaque module complémentaire géré sont testées par {{site.data.keyword.Bluemix_notm}} et approuvées pour être utilisées dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour les composants d'un module complémentaire vers la dernière version prise en charge par {{site.data.keyword.containerlong_notm}}, procédez comme indiqué ci-après.
+Les versions de chaque module complémentaire géré sont testées par {{site.data.keyword.cloud_notm}} et approuvées pour être utilisées dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour les composants d'un module complémentaire vers la dernière version prise en charge par {{site.data.keyword.containerlong_notm}}, procédez comme indiqué ci-après.
 {: shortdesc}
 
 1. Vérifiez si la version de vos modules complémentaires est la plus récente. Les modules complémentaires signalés par `* (<version> latest)` peuvent être mis à jour.
@@ -66,8 +66,8 @@ Les versions de chaque module complémentaire géré sont testées par {{site.da
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -159,7 +159,8 @@ Les versions de chaque module complémentaire géré sont testées par {{site.da
     ```
     {: pre}
 
-11. Facultatif pour Knative : si vous avez sauvegardé l'une quelconque des ressources à l'étape 3, réappliquez-les. Exemple de commande :
+11. Facultatif pour Knative : si vous avez sauvegardé l'une quelconque des ressources à l'étape 3, réappliquez-les.
+    Exemple de commande :
     ```
     kubectl apply -f config-autoscaler.yaml -n knative-serving
     ```
@@ -178,9 +179,9 @@ Les versions de chaque module complémentaire géré sont testées par {{site.da
        ```
        {: pre}
 
-13. Facultatif pour Istio : si vous utilisez des sections TLS dans vos fichiers de configuration de passerelle, vous devez supprimer et recréer les passerelles de sorte que Envoy puisse accéder aux valeurs confidentielles. 
+13. Facultatif pour Istio : si vous utilisez des sections TLS dans vos fichiers de configuration de passerelle, vous devez supprimer et recréer les passerelles de sorte que Envoy puisse accéder aux secrets.
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

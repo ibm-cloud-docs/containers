@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-10"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,7 +34,7 @@ Pour connecter vos noeuds worker et vos applications à un centre de données su
 
 - **Service VPN IPSec strongSwan** : vous pouvez définir un [service VPN IPSec strongSwan ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.strongswan.org/about.html) connectant de manière sécurisée votre cluster Kubernetes avec un réseau sur site. Le service VPN IPSec strongSwan fournit un canal de communication de bout en bout sécurisé sur Internet, basé sur l'ensemble de protocoles IPSec (Internet Protocol Security) aux normes de l'industrie. Pour configurer une connexion sécurisée entre votre cluster et un réseau sur site, [configurez et déployez le service VPN IPSec strongSwan](#vpn-setup) directement dans un pod de votre cluster.
 
-- **{{site.data.keyword.BluDirectLink}}** : [{{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) vous permet de créer une connexion privée directe entre vos environnements de réseau distants et {{site.data.keyword.containerlong_notm}} sans routage sur l'Internet public. Les offres {{site.data.keyword.Bluemix_notm}} Direct Link sont utiles lorsque vous devez implémenter des charges de travail hybrides, des charges de travail inter-fournisseur, des transferts de données volumineux ou fréquents ou des charges de travail privées. Pour choisir une offre {{site.data.keyword.Bluemix_notm}} Direct Link et configurer une connexion {{site.data.keyword.Bluemix_notm}} Direct Link, voir [Initiation à IBM Cloud {{site.data.keyword.Bluemix_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) dans la documentation {{site.data.keyword.Bluemix_notm}} Direct Link. 
+- **{{site.data.keyword.BluDirectLink}}** : [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link) vous permet de créer une connexion privée directe entre vos environnements de réseau distants et {{site.data.keyword.containerlong_notm}} sans routage sur l'Internet public. Les offres {{site.data.keyword.cloud_notm}} Direct Link sont utiles lorsque vous devez implémenter des charges de travail hybrides, des charges de travail inter-fournisseur, des transferts de données volumineux ou fréquents ou des charges de travail privées. Pour choisir une offre {{site.data.keyword.cloud_notm}} Direct Link et configurer une connexion {{site.data.keyword.cloud_notm}} Direct Link, voir [Initiation à IBM Cloud {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) dans la documentation {{site.data.keyword.cloud_notm}} Direct Link.
 
 - **Dispositif de routeur virtuel (VRA) ou dispositif de sécurité Fortigate (FSA)** : vous pouvez choisir de configurer un dispositif [VRA (Vyatta)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) ou [FSA](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) pour configurer un point de terminaison VPN IPSec. Cette option est pratique si vous disposez d'un cluster plus important, si vous souhaitez accéder à plusieurs clusters via un seul réseau privé virtuel (VPN) ou si vous avez besoin d'un VPN à base de routes. Pour configurer un dispositif de routeur virtuel (VRA), voir la rubrique sur la [configuration d'une connectivité VPN avec un dispositif VRA](#vyatta).
 
@@ -111,6 +111,7 @@ Lorsqu'il s'agit d'une connexion VPN sortante dans votre cluster à zones multip
     - `zoneLoadBalancer` : spécifiez une adresse IP d'équilibreur de charge public pour chaque zone dans laquelle vous avez des noeuds worker. [Vous pouvez vérifier quelles sont vos adresses IP publiques disponibles](/docs/containers?topic=containers-subnets#review_ip) ou [libérer une adresse IP utilisée](/docs/containers?topic=containers-subnets#free). Comme le pod du VPN strongSwan peut être planifié sur un noeud worker dans n'importe quelle zone, cette liste d'adresses IP permet de garantir qu'une adresse IP d'équilibreur de charge peut être utilisée dans n'importe quelle zone où est planifié un pod VPN.
     - `connectUsingLoadBalancerIP` : défini sur `true`. Lorsque le pod VPN strongSwan est planifié sur un noeud worker, le service strongSwan sélectionne l'adresse IP de l'équilibreur de charge qui se trouve dans la même zone et utilise cette adresse IP pour établir la connexion sortante.
     - `local.id` : indiquez une valeur fixe prise en charge par votre point de terminaison VPN distant. Si ce point de terminaison nécessite que vous définissiez l'option `local.id` (valeur de `leftid` dans le fichier `ipsec.conf`) avec l'adresse IP publique du tunnel VPN IPSec, définissez `local.id` avec la valeur `%loadBalancerIP`. Cette valeur configure automatiquement la valeur de `leftid` dans le fichier `ipsec.conf` avec l'adresse IP de l'équilibreur de charge utilisée pour la connexion.
+    - Facultatif : masquez toutes les adresses IP du cluster derrière une seule adresse IP dans chaque zone en affectant au paramètre `enableSingleSourceIP` la valeur `true`. Cette option offre l'une des configurations les plus sécurisées pour la connexion VPN car aucune connexion de réseau distant revenant vers le cluster n'est autorisée. Vous devez également affecter au paramètre `local.subnet` la variable `%zoneSubnet` et utiliser `local.zoneSubnet` pour spécifier une adresse IP sous la forme d'un sous-réseau /32 pour chaque zone du cluster. 
 
 2. Dans votre pare-feu de réseau distant, autorisez les connexions VPN IPSec entrantes en provenance des adresses IP publiques que vous avez répertoriées dans le paramètre `zoneLoadBalancer`.
 
@@ -167,8 +168,8 @@ Avant d'installer la charte Helm strongSwan, vous devez déterminer la configura
 {: shortdesc}
 
 Avant de commencer :
-* Installez une passerelle VPN IPSec dans votre centre de données sur site. 
-* Vérifiez que vous disposez du [rôle de service {{site.data.keyword.Bluemix_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`.
+* Installez une passerelle VPN IPSec dans votre centre de données sur site.
+* Vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour l'espace de nom `default`. 
 * [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
   * **Remarque** : toutes les configurations de strongSwan sont admises dans les clusters standard. Si vous utilisez un cluster gratuit, vous ne pouvez choisir qu'une connexion VPN sortante de l'[étape 3](#strongswan_3). Les connexions VPN entrantes nécessitent un équilibreur de charge dans le cluster, et les équilibreurs de charge ne sont pas disponibles pour les clusters gratuits.
 
@@ -178,7 +179,7 @@ Avant de commencer :
 Installez Helm et récupérez la charge Helm strongSwan pour afficher les configurations possibles.
 {: shortdesc}
 
-1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez le référentiel Helm {{site.data.keyword.Bluemix_notm}}. Notez que la version Helm 2.8 ou ultérieure est requise.
+1.  [Suivez les instructions](/docs/containers?topic=containers-helm#public_helm_install) d'installation du client Helm sur votre machine locale, installez le serveur Helm (Tiller) avec un compte de service et ajoutez le référentiel Helm {{site.data.keyword.cloud_notm}}. Notez que la version Helm 2.8 ou ultérieure est requise.
 
 2.  Vérifiez que Tiller est installé avec un compte de service.
 
@@ -224,7 +225,7 @@ Pour plus d'informations sur chacun de ces paramètres, lisez la documentation f
     * Si vous laissez ce paramètre vide, les algorithmes strongSwan par défaut `aes128-sha1-modp2048,3des-sha1-modp1536` sont utilisés pour la connexion.
 4. Remplacez la valeur de `local.id` par une chaîne de votre choix que vous voulez utiliser pour identifier le côté du cluster Kubernetes local utilisé par votre point de terminaison de tunnel VPN. La valeur par défaut est `ibm-cloud`. Certaines mises en oeuvre de VPN nécessitent l'utilisation de l'adresse IP publique du point de terminaison local.
 5. Remplacez la valeur de `remote.id` par une chaîne de votre choix que vous voulez utiliser pour identifier le côté du site distant utilisé par votre point de terminaison de tunnel VPN. La valeur par défaut est `on-prem`. Certaines mises en oeuvre de VPN nécessitent l'utilisation de l'adresse IP publique du point de terminaison distant.
-6. Remplacez la valeur `preshared.secret` par la valeur confidentielle pré-partagée que votre passerelle de point de terminaison de tunnel VPN utilise pour la connexion. Cette valeur est stockée dans `ipsec.secrets`.
+6. Remplacez la valeur `preshared.secret` par le secret pré-partagé que votre passerelle de point de terminaison de tunnel VPN utilise pour la connexion. Cette valeur est stockée dans `ipsec.secrets`.
 7. Facultatif : définissez `remote.privateIPtoPing` avec une adresse IP privée du sous-réseau distant à interroger par commande ping dans le cadre du test de validation de connectivité Helm.
 
 ### Etape 3 : Sélectionnez une connexion VPN entrante ou sortante
@@ -282,7 +283,7 @@ Déterminez les ressources du cluster qui doivent être accessibles au réseau d
 3. Facultatif pour les chartes Helm strongSwan à partir de la version 2.2.0 : masquez toutes les adresses IP du cluster derrière une seule adresse IP en définissant la paramètre `enableSingleSourceIP` avec la valeur `true`. Cette option offre l'une des configurations les plus sécurisées pour la connexion VPN car aucune connexion de réseau distant revenant vers le cluster n'est autorisée.
     <br>
     * Ce paramètre nécessite que tous les flux de données passant par la connexion VPN soient sortants quelle que soit la connexion VPN établie depuis le cluster ou le réseau distant.
-    * `local.subnet` doit être défini uniquement à un sous-réseau /32.
+    * Si vous installez strongSwan dans un cluster à zone unique, vous devez affecter au paramètre `local.subnet` une seule adresse IP en tant que sous-réseau /32. Si vous installez strongSwan dans un cluster à zones multiples, vous pouvez affecter au paramètre `local.subnet` la variable `%zoneSubnet` et utiliser `local.zoneSubnet` pour spécifier une adresse IP en tant que sous-réseau /32 pour chacune des zones du cluster. 
 
 4. Facultatif pour les chartes Helm strongSwan à partir de la version 2.2.0 : activez le service strongSwan pour acheminer les demandes entrantes du réseau distant vers un service externe au cluster en utilisant le paramètre `localNonClusterSubnet`.
     <br>
@@ -678,7 +679,7 @@ Vous pouvez désactiver la connexion VPN en supprimant la charte Helm.
 Le [dispositif de routeur virtuel (VRA)](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) fournit le système d'exploitation Vyatta 5600 le plus récent pour serveurs bare metal x86. Vous pouvez utiliser un dispositif VRA comme passerelle VPN pour vous connecter de manière sécurisée à un réseau sur site.
 {:shortdesc}
 
-Tout le trafic réseau public et privé qui entre ou sort des VLAN du cluster est acheminé via le dispositif VRA. Vous pouvez utiliser le dispositif VRA comme point de terminaison VPN pour créer un tunnel IPSec chiffré entre les serveurs dans l'infrastructure IBM Cloud (SoftLayer) et les ressources sur site. Par exemple, le diagramme suivant illustre comment une application sur un noeud worker uniquement privé dans {{site.data.keyword.containerlong_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN VRA :
+Tout le trafic réseau public et privé qui entre ou sort des VLAN du cluster est acheminé via le dispositif VRA. Vous pouvez utiliser le dispositif VRA comme noeud final VPN pour créer un tunnel IPSec chiffré entre les serveurs dans l'infrastructure IBM Cloud et les ressources sur site. Par exemple, le diagramme suivant montre comment une application sur un noeud worker uniquement privé dans {{site.data.keyword.containerlong_notm}} peut communiquer avec un serveur sur site par le biais d'une connexion VPN VRA :
 
 <img src="images/cs_vpn_vyatta.png" width="725" alt="Exposition d'une application dans {{site.data.keyword.containerlong_notm}} en utilisant un équilibreur de charge" style="width:725px; border-style: none"/>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,17 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Cas d'utilisation d'{{site.data.keyword.cloud_notm}} dans la distribution
 {: #cs_uc_retail}
 
-Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong_notm}} peuvent
+Ces cas d'utilisation mettent en évidence comment les charges de travail sur {{site.data.keyword.containerlong}} peuvent
 tirer parti des fonctions d'analyse pour obtenir des connaissances sur le marché, les déploiements interrégionaux dans le monde entier et la gestion des stocks avec {{site.data.keyword.messagehub_full}} et le stockage d'objets.
 {: shortdesc}
 
 ## Une enseigne partage des données à l'aide d'API avec des partenaires commerciaux mondiaux pour gérer les ventes omnicanal
 {: #uc_data-share}
 
-Un dirigeant dans ce secteur d'activité doit augmenter les canaux de distribution mais le système de distribution est confiné dans un centre de données local. La concurrence dispose de partenaires commerciaux mondiaux pour les ventes croisées et les permutations des ventes à plus haute valeur unitaire de leurs marchandises, dans les magasins et sur les sites en ligne.
+Un dirigeant dans ce secteur d'activité doit augmenter les canaux de distribution mais le système de distribution est confiné dans un centre de données local. La concurrence dispose de partenaires commerciaux mondiaux pour les ventes croisées et les permutations des ventes à plus haute valeur unitaire de leurs marchandises, dans les magasins et sur les sites en ligne. 
 {: shortdesc}
 
 Pourquoi {{site.data.keyword.cloud_notm}} ? {{site.data.keyword.containerlong_notm}} offre un écosystème sur cloud public, dans lequel des conteneurs permettent à de nouveaux partenaires commerciaux et à d'autres acteurs externes de développer ensemble des applications et des données à l'aide d'API. Comme ce système de distribution est sur le cloud public, les API rationalisent le partage des données et relancent le développement de nouvelles applications. Les déploiements d'applications augmentent lorsque les développeurs expérimentent l'intégration facile et rapide de changements dans les systèmes de développement et de test avec des chaînes d'outils.
@@ -197,3 +196,5 @@ Solution technique :
 * La fréquentation des clients et les ventes ont augmenté dans les magasins devenus eux-mêmes un atout majeur de différenciation.
 * En même temps, de nouvelles connaissances issues d'analyses sociales et cognitives ont contribué à réduire les dépenses d'exploitation (OpEx) liées aux stocks.
 * Le partage social dans l'application mobile a également contribué à identifier et cibler de nouveaux clients.
+
+

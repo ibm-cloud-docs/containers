@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -30,14 +30,14 @@ Un nom DNS (Domain Name System) est affecté à chaque service dans votre cluste
 
 | Version Kubernetes | Valeur par défaut pour les nouveaux clusters | Description |
 |---|---|---|
-| 1.14 et ultérieure | CoreDNS | Si un cluster utilise KubeDNS et est mis à jour vers la version 1.14 ou une version ultérieure, le fournisseur DNS de cluster est migré automatiquement depuis KubeDNS vers CoreDNS durant la mise à jour du cluster.  Vous ne pouvez pas changer de fournisseur DNS pour revenir à KubeDNS. |
+| 1.14 et ultérieure | CoreDNS | Si un cluster utilise KubeDNS et est mis à jour vers la version 1.14 ou une version ultérieure, le fournisseur DNS de cluster est migré automatiquement depuis KubeDNS vers CoreDNS durant la mise à jour du cluster. Vous ne pouvez pas changer de fournisseur DNS pour revenir à KubeDNS. |
 | 1.13 | CoreDNS | Les clusters qui mis à jour vers la version 1.13 à partir d'une version antérieure conservent le fournisseur DNS qu'ils utilisaient au moment de la mise à jour. Si vous souhaitez en utiliser un autre, [changez de fournisseur DNS](#dns_set). |
 | 1.12 | KubeDNS | Pour utiliser CoreDNS à la place, [changez de fournisseur DNS](#set_coredns). |
 | 1.11 ou antérieure | KubeDNS | Vous ne pouvez pas changer de fournisseur DNS pour passer à CoreDNS. |
 {: caption="Fournisseur DNS de cluster par défaut en fonction des versions de Kubernetes" caption-side="top"}
 
 **Quels sont les avantages liés à l'utilisation de CoreDNS au lieu de KubeDNS ?**<br>
-CoreDNS est le fournisseur DNS de cluster pris en charge par défaut pour Kubernetes version 1.13 et versions ultérieures, et il est récemment devenu un [projet Cloud Native Computing Foundation (CNCF) gradué ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cncf.io/projects/). Un projet gradué est minutieusement testé, renforcé et il est prêt pour une adoption au niveau de la production. 
+CoreDNS est le fournisseur DNS de cluster pris en charge par défaut pour Kubernetes version 1.13 et versions ultérieures, et il est récemment devenu un [projet Cloud Native Computing Foundation (CNCF) gradué ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cncf.io/projects/). Un projet gradué est minutieusement testé, renforcé et il est prêt pour une adoption au niveau de la production.
 
 Comme mentionné dans l'[annonce Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/blog/2018/12/03/kubernetes-1-13-release-announcement/), CoreDNS est un serveur DNS à usage général faisant autorité qui fournit une intégration à Kubernetes compatible avec les versions antérieures et extensible. Etant donné que CoreDNS est un simple fichier exécutable et un processus unique, il a moins de dépendances et de pièces mobiles susceptibles de présenter des problèmes que le précédent fournisseur DSN de cluster. Le projet est également écrit dans le même langage que le projet Kubernetes, `Go`, ce qui contribue à protéger la mémoire. Enfin, CoreDNS prend en charge des cas d'utilisation plus souples que KubeDNS car vous pouvez créer des entrées DNS personnalisées, telles que des [configurations communes dans la documentation CoreDNS ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://coredns.io/manual/toc/#setups).
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 Découvrez comment utiliser {{site.data.keyword.containerlong}} afin de déployer une application conteneurisée tirant parti de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
-Dans ce scénario, une entreprise de RP fictive utilise le service {{site.data.keyword.Bluemix_notm}} pour analyser ses communiqués de presse et recevoir un retour d'informations sur le ton de ses messages.
+Dans ce scénario, une entreprise de RP fictive utilise le service {{site.data.keyword.cloud_notm}} pour analyser ses communiqués de presse et recevoir un retour d'informations sur le ton de ses messages.
 
 En utilisant le cluster Kubernetes qui a été créé dans le dernier tutoriel, le développeur d'applications de l'entreprise de RP déploie une version Hello World de l'application. En s'appuyant sur chaque leçon du tutoriel, le développeur déploie progressivement des versions plus complexes de la même application. Le diagramme ci-après décrit les composants de chaque déploiement d'après la leçon.
 
@@ -42,7 +42,7 @@ Les services regroupent un ensemble de pods et fournissent une connexion réseau
 
 Pour rendre votre application encore plus disponible, dans les clusters standard, vous pouvez créer un pool de noeuds worker couvrant plusieurs zones avec des noeuds worker dans chaque zone, pour pouvoir exécuter encore plus de répliques de votre application. Cette tâche n'est pas couverte par le tutoriel, mais envisagez-la en vue d'améliorer la disponibilité d'une application par la suite.
 
-Une seule leçon couvre l'intégration d'un service {{site.data.keyword.Bluemix_notm}} dans une application, mais vous pouvez l'utiliser qu'il s'agisse d'une application toute simple, ou aussi complexe que vous pouvez imaginer.
+Une seule leçon couvre l'intégration d'un service {{site.data.keyword.cloud_notm}} dans une application, mais vous pouvez l'utiliser qu'il s'agisse d'une application toute simple, ou aussi complexe que vous pouvez imaginer.
 
 ## Objectifs
 {: #apps_objectives}
@@ -52,7 +52,7 @@ Une seule leçon couvre l'intégration d'un service {{site.data.keyword.Bluemix_
 * Rendre une application accessible au public
 * Déployer une instance unique d'une application dans un cluster à l'aide d'une commande Kubernetes et d'un script
 * Déployer plusieurs instances d'une application dans des conteneurs recréés lors des diagnostics d'intégrité
-* Déployer une application utilisant des fonctionnalités d'un service {{site.data.keyword.Bluemix_notm}}
+* Déployer une application utilisant des fonctionnalités d'un service {{site.data.keyword.cloud_notm}}
 
 ## Durée
 {: #apps_time}
@@ -101,7 +101,7 @@ Pour déployer l'application :
 
 3. [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-5.  Connectez-vous à l'interface de ligne de commande d'{{site.data.keyword.registryshort_notm}}.
+5.  Connectez-vous à l'interface de ligne de commande {{site.data.keyword.registryshort_notm}}. 
 
     ```
     ibmcloud cr login
@@ -242,7 +242,7 @@ Pour déployer l'application :
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -258,7 +258,7 @@ Pour déployer l'application :
 
 11. [Lancez le tableau de bord Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), vous pouvez utiliser le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), vous pouvez utiliser le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
     {: tip}
 
 12. Vous pouvez examiner dans l'onglet **Charges de travail** les ressources que vous avez créées.
@@ -282,7 +282,7 @@ Une plus haute disponibilité signifie que l'accès utilisateur est réparti sur
 
 Au cours du tutoriel précédent, vous avez créé votre compte et un cluster avec un noeud worker unique. Dans cette leçon, vous configurez un déploiement et déployez trois instances de l'application Hello world. Chaque instance est déployée dans un pod Kubernetes dans le cadre d'un jeu de répliques dans le noeud worker. Pour une disponibilité publique, vous créez également un service Kubernetes.
 
-Comme défini dans le script de configuration, Kubernetes peut utiliser une vérification de la disponibilité pour déterminer si un conteneur dans un pod est en opération ou non. Ces vérifications peuvent, par exemple, identifier des interblocages, où une application est opérationnelle, mais ne parvient pas à progresser. Le redémarrage d'un conteneur dans cette situation peut aider à rendre l'application disponible malgré les bogues. Kubernetes utilise ensuite une vérification de l'état de préparation du conteneur pour déterminer à quel moment il est à nouveau prêt à accepter le trafic. Un pod est considéré comme prêt quand son conteneur est lui-même prêt. Une fois le pod prêt, il est redémarré. Dans cette version de l'application, son délai d'attente expire toutes les 15 secondes. Lorsqu'un diagnostic d'intégrité est configuré dans le script de configuration, les conteneurs sont recréés si cette vérification détecte un problème affectant une application.
+Comme défini dans le script de configuration, Kubernetes peut utiliser une vérification de la disponibilité pour déterminer si un conteneur dans un pod est en opération ou non. Ces vérifications peuvent, par exemple, identifier des interblocages, où une application est opérationnelle, mais ne parvient pas à progresser. Le redémarrage d'un conteneur dans cette situation peut aider à rendre l'application disponible malgré les bogues. Kubernetes utilise ensuite une vérification de disponibilité pour déterminer à quel moment un conteneur est prêt à accepter le trafic. Un pod est considéré comme prêt quand son conteneur est lui-même prêt. Une fois le pod prêt, il est redémarré. Dans cette version de l'application, son délai d'attente expire toutes les 15 secondes. Lorsqu'un diagnostic d'intégrité est configuré dans le script de configuration, les conteneurs sont recréés si cette vérification détecte un problème affectant une application.
 
 1.  Depuis une interface CLI, accédez au répertoire `Lab 2`.
 
@@ -435,7 +435,7 @@ La dispersion des composants dans des conteneurs différents permet de mettre à
 
 ![Configuration de déploiement](images/cs_app_tutorial_mz-components3.png)
 
-Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous allez créer une instance du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} dans votre compte {{site.data.keyword.Bluemix_notm}} et configurer deux déploiements, un pour chaque composant de l'application. Chaque composant est déployé dans un pod Kubernetes dans le noeud worker. Pour que ces deux composants soient publics, vous créez également un service Kubernetes pour chaque composant.
+Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster contenant un noeud worker. Dans cette leçon, vous allez créer une instance du service {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} dans votre compte {{site.data.keyword.cloud_notm}} et configurer deux déploiements, un pour chaque composant de l'application. Chaque composant est déployé dans un pod Kubernetes dans le noeud worker. Pour que ces deux composants soient publics, vous créez également un service Kubernetes pour chaque composant.
 
 
 ### Leçon 3a : Déploiement de l'application {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
@@ -534,7 +534,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
         ```
         {: codeblock}
 
-    2.  Dans la section volumes du déploiement `watson-pod`, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que vous avez créée dans le [tutoriel de création d'un cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). En montant la valeur confidentielle Kubernetes en tant que volume dans votre déploiement, vous rendez la clé d'API {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) disponible dans le conteneur qui s'exécute dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher la clé d'API en utilisant le chemin de montage du volume.
+    2.  Dans la section volumes du déploiement `watson-pod`, mettez à jour le nom de la clé confidentielle {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que vous avez créée dans le [tutoriel de création d'un cluster Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4). En montant le secret Kubernetes en tant que volume dans votre déploiement, vous rendez la clé d'API {{site.data.keyword.cloud_notm}} IAM (Identity and Access Management) disponible dans le conteneur qui s'exécute dans votre pod. Les composants de l'application {{site.data.keyword.watson}} de ce tutoriel sont configurés pour rechercher la clé d'API en utilisant le chemin de montage du volume.
 
         ```
         volumes:
@@ -545,7 +545,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
         ```
         {: codeblock}
 
-        Si vous avez oublié le nom de la valeur confidentielle, exécutez la commande suivante.
+        Si vous avez oublié le nom du secret, exécutez la commande suivante.
 
         ```
         kubectl get secrets --namespace=default
@@ -561,7 +561,7 @@ Depuis le tutoriel précédent, vous disposez de votre compte et d'un cluster co
   ```
   {: pre}
 
-8.  Facultatif : vérifiez que la valeur confidentielle de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} est montée en tant que volume sur le pod.
+8.  Facultatif : vérifiez que le secret de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} est monté en tant que volume sur le pod.
 
     1.  Pour identifier le nom d'un pod Watson, exécutez la commande suivante.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -35,13 +35,13 @@ En tant qu'administrateur de cluster, vous désirez contrôler ce qui se passe d
 
 Avec le contrôleur d'admission `PodSecurityPolicy`, aucun pod ne peut être créé tant que vous n'avez pas [autorisé de politiques](#customize_psp). La configuration des politiques de sécurité de pod peut avoir des effets secondaires indésirables, par conséquent veillez à tester un déploiement après avoir modifié une politique. Pour déployer des applications, les comptes utilisateur et les comptes de service doivent tous être autorisés par les politiques de sécurité de pod requises à déployer des pods. Par exemple, si vous installez des applications en utilisant [Helm](/docs/containers?topic=containers-helm#public_helm_install), le composant Helm tiller crée des pods, et vous devez donc disposer de l'autorisation de politique de sécurité adéquate.
 
-Vous essayez de contrôler quels sont les utilisateurs pouvant accéder à {{site.data.keyword.containerlong_notm}} ? Voir [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users) pour définir les droits IAM et les droits de l'infrastructure {{site.data.keyword.Bluemix_notm}}.
+Vous essayez de contrôler quels sont les utilisateurs pouvant accéder à {{site.data.keyword.containerlong_notm}} ? Voir [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users) pour définir les droits IAM et les droits de l'infrastructure {{site.data.keyword.cloud_notm}}.
 {: tip}
 
 **Existent-ils des politiques définies par défaut ? Que puis-je ajouter ?**</br>
 Par défaut, {{site.data.keyword.containerlong_notm}} configure le contrôleur d'admission `PodSecurityPolicy` avec des [ressources de gestion de cluster {{site.data.keyword.IBM_notm}}](#ibm_psp) que vous ne pouvez pas supprimer ou modifier. Vous ne pouvez pas non plus désactiver le contrôleur d'admission.
 
-Les actions de pod ne sont pas verrouillées par défaut. A la place, deux ressources RBAC (Role-Based Access Control) figurant dans le cluster autorisent tous les administrateurs, utilisateurs, services et noeuds à créer des pods privilégiés et non privilégiés. D'autres ressources RBAC sont incluses pour la portabilité avec les packages {{site.data.keyword.Bluemix_notm}} Private utilisés pour les [déploiements hybrides](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+Les actions de pod ne sont pas verrouillées par défaut. A la place, deux ressources RBAC (Role-Based Access Control) figurant dans le cluster autorisent tous les administrateurs, utilisateurs, services et noeuds à créer des pods privilégiés et non privilégiés. D'autres ressources RBAC sont incluses pour la portabilité avec les packages {{site.data.keyword.cloud_notm}} Private utilisés pour les [déploiements hybrides](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 Pour empêcher certains utilisateurs de créer ou de mettre à jour des pods, vous pouvez [modifier ces ressources RBAC ou créer vos propres ressources](#customize_psp).
 
@@ -53,7 +53,7 @@ Lorsque vous créez un pod en utilisant un contrôleur de ressource, tel qu'un d
 Pour connaître les messages d'erreur courants, voir la rubrique [Les pods ne parviennent pas à se déployer en raison d'une politique de sécurité de pod](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_psp).
 
 **Pour quelle raison puis-je toujours créer des pods privilégiés lorsque je ne fais pas partie de la liaison de rôle de cluster `privileged-psp-user` ?**<br>
-D'autres liaisons de rôle de cluster ou liaisons de rôle propres à un espace de nom peuvent vous fournir d'autres politiques de sécurité de pod qui vous autorisent à créer des pods privilégiés. En outre, par défaut, les administrateurs de cluster ont accès à toutes les ressources, y compris aux politiques de sécurité de pod, par conséquent, ils peuvent s'ajouter eux-mêmes à ces règles ou créer des ressources privilégiées. 
+D'autres liaisons de rôle de cluster ou liaisons de rôle propres à un espace de nom peuvent vous fournir d'autres politiques de sécurité de pod qui vous autorisent à créer des pods privilégiés. En outre, par défaut, les administrateurs de cluster ont accès à toutes les ressources, y compris aux politiques de sécurité de pod, par conséquent, ils peuvent s'ajouter eux-mêmes à ces règles ou créer des ressources privilégiées.
 
 ## Personnalisation des politiques de sécurité de pod
 {: #customize_psp}
@@ -78,7 +78,7 @@ Vous pouvez modifier ces rôles RBAC pour retirer ou ajouter des administrateurs
 Avant de commencer :
 *  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Familiarisez-vous avec l'utilisation des rôles RBAC. Pour plus d'informations, voir [Autorisation des utilisateurs avec des rôles RBAC Kubernetes personnalisés](/docs/containers?topic=containers-users#rbac) ou la [documentation de Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Vérifiez que vous disposez du [rôle d'accès au service {{site.data.keyword.Bluemix_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom.
+* Vérifiez que vous disposez du [rôle d'accès au service {{site.data.keyword.cloud_notm}} IAM **Responsable**](/docs/containers?topic=containers-users#platform) pour tous les espaces de nom. 
 
 Lorsque vous modifiez la configuration par défaut, vous pouvez empêcher l'exécution d'actions importantes sur le cluster, comme par exemple les déploiements de pod ou les mises à jour de cluster. Testez vos modifications dans un cluster hors production qui n'est pas utilisé par d'autres équipes.
 {: important}

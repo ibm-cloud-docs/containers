@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -40,11 +40,12 @@ Pour utiliser Helm dans votre cluster, vous devez installer l'interface de ligne
 Pour obtenir une présentation des chartes Helm disponibles, voir le [catalogue de chartes Helm ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/solutions/helm-charts). Les chartes Helm répertoriées dans ce catalogue sont regroupées comme suit :
 
 - **iks-charts** : chartes Helm qui sont approuvées pour {{site.data.keyword.containerlong_notm}}. Le nom de ce référentiel, `ibm`, a été remplacé par `iks-charts`.
-- **ibm-charts** : chartes Helm qui sont approuvées pour les clusters {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} Private.
-- **kubernetes** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `stable` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié.
-- **kubernetes-incubator** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `incubator` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.Bluemix_notm}} Private n'est pas vérifié.
+- **ibm-charts** : chartes Helm qui sont approuvées pour les clusters {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.cloud_notm}} Private.
+- **ibm-community** : chartes Helm qui proviennent de l'extérieur d'IBM, par exemple de [partenaires {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners). Ces chartes sont prises en charge et gérées par les partenaires de la communauté. 
+- **kubernetes** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `stable` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.cloud_notm}} Private n'est pas vérifié.
+- **kubernetes-incubator** : chartes Helm qui sont fournies par la communauté Kubernetes et considérées comme étant de type `incubator` par la gouvernance de communauté. Le fonctionnement de ces chartes dans les clusters {{site.data.keyword.containerlong_notm}} ou {{site.data.keyword.cloud_notm}} Private n'est pas vérifié.
 
-Les chartes Helm des référentiels **iks-charts** et **ibm-charts** sont entièrement intégrées dans l'organisation de support {{site.data.keyword.Bluemix_notm}}. Pour toute question ou problématique relative à l'utilisation de ces chartes Helm, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Les chartes Helm des référentiels **iks-charts** et **ibm-charts** sont entièrement intégrées dans l'organisation de support {{site.data.keyword.cloud_notm}}. Pour toute question ou problématique relative à l'utilisation de ces chartes Helm, vous pouvez utiliser l'un des canaux de support {{site.data.keyword.containerlong_notm}}. Pour plus d'informations, voir [Aide et assistance](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **Quels sont les prérequis pour l'utilisation de Helm et puis-je utiliser Helm dans un cluster privé ?** </br>
 Pour déployer des chartes Helm, vous devez installer l'interface de ligne de commande (CLI) Helm sur votre machine locale et installer le serveur Helm Tiller dans votre cluster. L'image de Tiller est stockée dans le registre public Google Container Registry. Pour accéder à l'image lors de l'installation de Tiller, votre cluster doit autoriser la connectivité de réseau public au registre public Google Container Registry. Les clusters qui activent le noeud final de service public peuvent accéder automatiquement à l'image. Les clusters privés protégés avec un pare-feu personnalisé ou les clusters ayant activé le noeud final de service privé uniquement, n'autorisent pas l'accès à l'image de Tiller. Vous pouvez à la place [extraire l'image sur votre machine locale et l'insérer dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}](#private_local_tiller) ou [installer des chartes Helm sans utiliser le serveur Tiller](#private_install_without_tiller).
@@ -150,14 +151,19 @@ Pour installer Helm dans un cluster avec un accès public :
         ```
         {: screen}
 
-4. Ajoutez les référentiels Helm d'{{site.data.keyword.Bluemix_notm}} dans votre instance Helm.
+4. Ajoutez les référentiels Helm d'{{site.data.keyword.cloud_notm}} dans votre instance Helm.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -167,7 +173,7 @@ Pour installer Helm dans un cluster avec un accès public :
    ```
    {: pre}
 
-6. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.Bluemix_notm}}.
+6. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.cloud_notm}}.
    ```
    helm search iks-charts
    ```
@@ -175,6 +181,11 @@ Pour installer Helm dans un cluster avec un accès public :
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 
@@ -191,15 +202,15 @@ Si vous souhaitez installer une charte Helm sans utiliser Tiller, voir [Clusters
 {: tip}
 
 Avant de commencer :
-- Installez Docker sur votre machine locale. Si vous avez installé l'[interface de ligne de commande {{site.data.keyword.Bluemix_notm}}](/docs/cli?topic=cloud-cli-getting-started), Docker est déjà installé.
+- Installez Docker sur votre machine locale. Si vous avez installé l'[interface de ligne de commande {{site.data.keyword.cloud_notm}}](/docs/cli?topic=cloud-cli-getting-started), Docker est déjà installé. 
 - [Installez le plug-in de l'interface de ligne de commande {{site.data.keyword.registryshort_notm}} et configurez un espace de nom](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - Pour installer Tiller avec un compte de service Kubernetes et la liaison de rôle de cluster dans l'espace de nom `kube-system`, vous devez disposer du [rôle `cluster-admin`](/docs/containers?topic=containers-users#access_policies).
 
 Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande (CLI) Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> sur votre machine locale.
-2. Connectez-vous à votre cluster privé à l'aide du tunnel VPN de l'infrastructure {{site.data.keyword.Bluemix_notm}} que vous avez configuré.
-3. **Important** : pour assurer la sécurité du cluster, créez un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy` en appliquant le fichier YAML suivant à partir du [référentiel `kube-samples` d'{{site.data.keyword.Bluemix_notm}}](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
+2. Connectez-vous à votre cluster privé à l'aide du tunnel VPN de l'infrastructure {{site.data.keyword.cloud_notm}} que vous avez configuré.
+3. **Important** : pour assurer la sécurité du cluster, créez un compte de service pour Tiller dans l'espace de nom `kube-system` et une liaison de rôle de cluster RBAC Kubernetes pour le pod `tiller-deploy` en appliquant le fichier YAML suivant à partir du [référentiel `kube-samples` d'{{site.data.keyword.cloud_notm}}](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml). 
     1. [Procurez-vous le fichier YAML du compte de service et de liaison de rôle de cluster Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
 
     2. Créez les ressources Kubernetes dans votre cluster.
@@ -236,7 +247,7 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 
 6. [Insérez l'image de Tiller dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing).
 
-7. Pour accéder à l'image qui se trouve dans {{site.data.keyword.registryshort_notm}} à partir de votre cluster, [copiez la valeur confidentielle d'extraction d'image depuis l'espace de nom par défaut vers l'espace de nom `kube-system`](/docs/containers?topic=containers-images#copy_imagePullSecret).
+7. Pour accéder à l'image qui se trouve dans {{site.data.keyword.registryshort_notm}} à partir de votre cluster, [copiez le secret d'extraction d'image depuis l'espace de nom par défaut vers l'espace de nom `kube-system`](/docs/containers?topic=containers-images#copy_imagePullSecret).
 
 8. Installez Tiller dans votre cluster privé en utilisant l'image que vous avez stockée dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}.
    ```
@@ -244,14 +255,19 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
    ```
    {: pre}
 
-9. Ajoutez les référentiels Helm d'{{site.data.keyword.Bluemix_notm}} dans votre instance Helm.
+9. Ajoutez les référentiels Helm d'{{site.data.keyword.cloud_notm}} dans votre instance Helm.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -261,7 +277,7 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
     ```
     {: pre}
 
-11. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.Bluemix_notm}}.
+11. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.cloud_notm}}.
     ```
     helm search iks-charts
     ```
@@ -270,6 +286,11 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
     ```
     helm search ibm-charts
     ```
+    {: pre}
+    
+    ```
+   helm search ibm-community
+   ```
     {: pre}
 
 12. Identifiez la charte Helm que vous voulez installer et suivez les instructions indiquées dans le fichier `README` de la charte pour installer la charte Helm dans votre cluster.
@@ -281,19 +302,24 @@ Pour installer Tiller en utilisant {{site.data.keyword.registryshort_notm}} :
 Si vous ne souhaitez pas installer Tiller dans votre cluster privé, vous pouvez créer manuellement les fichiers YAML de la charte Helm et les appliquer en utilisant des commandes `kubectl`.
 {: shortdesc}
 
-Les étapes indiquées dans cet exemple montrent comment installer des chartes Helm à partir des référentiels de chartes Helm d'{{site.data.keyword.Bluemix_notm}} dans votre cluster privé. Si vous voulez installer une charte Helm qui n'est pas stockée dans l'un des référentiels de chartes Helm d'{{site.data.keyword.Bluemix_notm}}, vous devez suivre les instructions de cette rubrique pour créer les fichiers YAML pour votre charte Helm. Par ailleurs, vous devez télécharger l'image de la charte Helm à partir du registre de conteneur public, l'insérer dans votre espace de nom dans {{site.data.keyword.registryshort_notm}} et mettre à jour le fichier `values.yaml` pour utiliser cette image dans {{site.data.keyword.registryshort_notm}}.
+Les étapes indiquées dans cet exemple montrent comment installer des chartes Helm à partir des référentiels de chartes Helm d'{{site.data.keyword.cloud_notm}} dans votre cluster privé. Si vous voulez installer une charte Helm qui n'est pas stockée dans l'un des référentiels de chartes Helm d'{{site.data.keyword.cloud_notm}}, vous devez suivre les instructions de cette rubrique pour créer les fichiers YAML pour votre charte Helm. Par ailleurs, vous devez télécharger l'image de la charte Helm à partir du registre de conteneur public, l'insérer dans votre espace de nom dans {{site.data.keyword.registryshort_notm}} et mettre à jour le fichier `values.yaml` pour utiliser cette image dans {{site.data.keyword.registryshort_notm}}.
 {: note}
 
 1. Installez l'<a href="https://docs.helm.sh/using_helm/#installing-helm" target="_blank">interface de ligne de commande (CLI) Helm <img src="../icons/launch-glyph.svg" alt="Icône de lien externe"></a> sur votre machine locale.
-2. Connectez-vous à votre cluster privé à l'aide du tunnel VPN de l'infrastructure {{site.data.keyword.Bluemix_notm}} que vous avez configuré.
-3. Ajoutez les référentiels Helm d'{{site.data.keyword.Bluemix_notm}} dans votre instance Helm.
+2. Connectez-vous à votre cluster privé à l'aide du tunnel VPN de l'infrastructure {{site.data.keyword.cloud_notm}} que vous avez configuré.
+3. Ajoutez les référentiels Helm d'{{site.data.keyword.cloud_notm}} dans votre instance Helm.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
    ```
-   helm repo add ibm-charts https://icr.io/helm/ibm-charts
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+   
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
 
@@ -303,7 +329,7 @@ Les étapes indiquées dans cet exemple montrent comment installer des chartes H
    ```
    {: pre}
 
-5. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.Bluemix_notm}}.
+5. Répertoriez les chartes Helm actuellement disponibles dans les référentiels {{site.data.keyword.cloud_notm}}.
    ```
    helm search iks-charts
    ```
@@ -311,6 +337,11 @@ Les étapes indiquées dans cet exemple montrent comment installer des chartes H
 
    ```
    helm search ibm-charts
+   ```
+   {: pre}
+   
+   ```
+   helm search ibm-community
    ```
    {: pre}
 

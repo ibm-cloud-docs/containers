@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -40,13 +40,13 @@ Portworx regroupe le stockage disponible lié à vos noeuds worker pour créer u
 Portworx fournit également d'autres fonctions que vous pouvez utiliser pour vos applications avec état, par exemple les images instantanées de volume, le chiffrement de volume, l'isolation, ainsi que l'environnement d'exécution Storage Orchestrator for Kubernetes (Stork) afin d'assurer le positionnement optimal des volumes dans le cluster. Pour plus d'informations, voir la [documentation Portworx ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/).
 
 **Quelle version de noeud worker dans {{site.data.keyword.containerlong_notm}} convient le mieux à Portworx ?** </br>
-{{site.data.keyword.containerlong_notm}} fournit des versions de noeud worker bare metal optimisées en vue d'une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds) et qui sont accompagnées d'un ou plusieurs disques locaux de type RAW, non formatés et non montés que vous pouvez utiliser pour votre couche de stockage Portworx. Portworx offre des performances optimales avec des machines de noeud worker SDS d'un débit réseau de 10 Gbit/s.
+{{site.data.keyword.containerlong_notm}} fournit des versions de noeud worker bare metal qui sont optimisées pour une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds). Ces versions sont accompagnées d'un ou plusieurs disques locaux de type RAW, non formatés et non montés que vous pouvez utiliser pour votre couche de stockage Portworx. Portworx offre des performances optimales avec des machines de noeud worker SDS d'un débit réseau de 10 Gbit/s. 
 
 **Et si j'envisage d'exécuter Portworx sur des noeuds worker non SDS ?** </br>
-Vous pouvez installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. Les noeuds worker non SDS peuvent être de type virtuel ou bare metal. Si vous voulez utiliser des machines virtuelles, utilisez un modèle de noeud worker `b2c.16x64` ou supérieur. Les machines virtuelles de modèle `b3c.4x16` ou `u3c.2x4` n'offrent pas les ressources nécessaires au bon fonctionnement de Portworx. N'oubliez pas que les machines virtuelles offrent un débit de 1000 Mbit/s, ce qui n'est pas suffisant pour obtenir les performances idéales de Portworx. Les machines bare metal sont fournies avec suffisamment de ressources de calcul et de vitesse réseau pour Portworx, mais vous devez [ajouter du stockage par blocs brut, non formaté et non monté](#create_block_storage) avant d'utiliser ces machines.
+Vous pouvez installer Portworx sur des versions non SDS de noeud worker, mais vous risquez de ne pas obtenir les performances requises par votre application. Les noeuds worker non SDS peuvent être de type virtuel ou bare metal. Si vous voulez utiliser des machines virtuelles, utilisez un modèle de noeud worker `b2c.16x64` ou supérieur. Les machines virtuelles de modèle `b3c.4x16` ou `u3c.2x4` n'offrent pas les ressources nécessaires au bon fonctionnement de Portworx. N'oubliez pas que les machines virtuelles offrent un débit de 1 000 Mbit/s, ce qui n'est pas suffisant pour obtenir les performances idéales de Portworx. Les machines bare metal sont fournies avec suffisamment de ressources de calcul et de vitesse réseau pour Portworx, mais vous devez [ajouter du stockage par blocs brut, non formaté et non monté](#create_block_storage) avant d'utiliser ces machines.
 
 **Comment puis-je m'assurer que le mode de stockage de mes données est à haute disponibilité ?** </br>
-Vous devez disposer d'au moins 3 noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-ha_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans au moins 3 zones.
+Vous devez disposer d'au moins trois noeuds worker dans votre cluster Portworx pour que Portworx puisse répliquer vos données sur plusieurs noeuds. En répliquant vos données sur plusieurs noeuds worker, Portworx peut garantir que votre application avec état peut être replanifiée sur un autre noeud worker en cas de défaillance sans perte de données. Pour une disponibilité accrue, utilisez un [cluster à zones multiples](/docs/containers?topic=containers-ha_clusters#multizone) et répliquez vos volumes sur des noeuds worker SDS dans au moins 3 zones.
 
 **Quelle topologie de volume offre les meilleures performances pour mes pods ?** </br>
 L'un des défis majeurs lors de l'exécution d'applications avec état dans un cluster consiste à garantir que votre conteneur puisse être replanifié sur un autre hôte en cas de défaillance du conteneur ou de l'hôte dans son ensemble. Dans Docker, lorsqu'un conteneur doit être replanifié sur un autre hôte, le volume n'est pas transféré sur le nouvel hôte. Portworx peut être configuré pour s'exécuter en mode hyperconvergé (`hyper-converged`) pour garantir que vos ressources de calcul et le stockage résident toujours sur le même noeud worker. Lorsque votre application doit être replanifiée, Portworx la transfère sur un noeud worker où se trouve l'une de vos répliques de volume pour garantir la vitesse d'accès au disque local et les meilleures performances pour votre application avec état. L'exécution en mode `hyper-converged` offre les meilleures performances pour vos pods, mais nécessite que le stockage soit disponible sur tous les noeuds worker dans votre cluster.
@@ -61,10 +61,10 @@ Vous pouvez également choisir de n'utiliser qu'un sous-ensemble de noeuds worke
 - 10 Gbit/s de vitesse réseau
 
 **Quelles sont les limitations que je dois prévoir ?** </br>
-Portworx est disponible pour des clusters standard configurés avec une connectivité de réseau public. Si votre cluster ne peut pas accéder au réseau public, par exemple si vous disposez d'un cluster privé protégé derrière un pare-feu ou d'un cluster où seul le noeud final de service privé est activé, vous ne pouvez pas utiliser Portworx dans votre cluster, sauf si vous ouvrez tout le trafic réseau sortant sur le port TCP 443 ou si vous activez le noeud final de service public.
+Portworx est disponible pour des clusters standard configurés avec une connectivité de réseau public. Si votre cluster ne peut pas accéder au réseau public, par exemple si vous disposez d'un cluster privé protégé derrière un pare-feu ou d'un cluster où seul le noeud final de service privé est activé, vous ne pouvez pas utiliser Portworx dans votre cluster, sauf si vous ouvrez tout le trafic réseau sortant sur le port TCP 443 ou si vous activez le noeud final de service public. 
 
 
-Tout est prêt ? Commençons par [créer un cluster avec un pool de noeuds worker SDS comportant au moins 3 noeuds worker](/docs/containers?topic=containers-clusters#clusters_ui). Si vous souhaitez inclure des noeuds worker non SDS dans votre cluster Portworx, [ajoutez du stockage par blocs brut](#create_block_storage) à chaque noeud worker. Une fois votre cluster préparé, passez à l'[installation de la charte Helm Portworx](#install_portworx) dans votre cluster et à la création de votre cluster de stockage hyperconvergé.  
+Tout est prêt ? Commençons par [créer un cluster avec un pool de noeuds worker SDS comportant au moins trois noeuds worker](/docs/containers?topic=containers-clusters#clusters_ui). Si vous souhaitez inclure des noeuds worker non SDS dans votre cluster Portworx, [ajoutez du stockage par blocs brut](#create_block_storage) à chaque noeud worker. Une fois votre cluster préparé, passez à l'[installation de la charte Helm Portworx](#install_portworx) dans votre cluster et à la création de votre cluster de stockage hyperconvergé.  
 
 ## Création de stockage par blocs brut, non formaté et non monté pour les noeuds worker non SDS
 {: #create_block_storage}
@@ -72,13 +72,13 @@ Tout est prêt ? Commençons par [créer un cluster avec un pool de noeuds worke
 Portworx s'exécute mieux lorsque vous utilisez des versions de noeud worker optimisées pour une [utilisation avec SDS (Software-Defined Storage)](/docs/containers?topic=containers-planning_worker_nodes#sds). Cependant, si vous ne pouvez ou ne voulez pas utiliser des noeuds worker SDS, vous pouvez opter pour l'installation de Portworx sur des versions de noeud worker non SDS. N'oubliez pas que les noeuds worker non SDS ne sont pas optimisés pour Portworx et risquent de ne pas offrir les performances requises par votre application.
 {: shortdesc}
 
-Pour inclure des noeuds worker non SDS dans votre cluster Portworx, vous devez ajouter à vos noeuds worker des unités de stockage par blocs brutes, non formatées et non montées en utilisant le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Le stockage par blocs brut ne peut pas être provisionné avec des réservations de volume persistant (PVC) Kubernetes car l'unité de stockage par blocs est automatiquement formatée par {{site.data.keyword.containerlong_notm}}. Portworx ne prend en charge que le stockage par blocs. Les noeuds worker non SDS qui montent du stockage de fichiers ou d'objets ne peuvent pas être utilisés pour la couche de données Portworx.
+Pour inclure des noeuds worker non SDS dans votre cluster Portworx, vous devez ajouter à vos noeuds worker des unités de stockage par blocs brutes, non formatées et non montées en utilisant le plug-in {{site.data.keyword.cloud_notm}} Block Volume Attacher. Le stockage par blocs brut ne peut pas être provisionné avec des réservations de volume persistant (PVC) Kubernetes car l'unité de stockage par blocs est automatiquement formatée par {{site.data.keyword.containerlong_notm}}. Portworx ne prend en charge que le stockage par blocs. Les noeuds worker non SDS qui montent du stockage de fichiers ou d'objets ne peuvent pas être utilisés pour la couche de données Portworx.
 
 Si vous disposez de versions de noeud worker SDS dans votre cluster et que vous voulez utiliser uniquement ces noeuds worker pour créer votre couche de stockage Portworx, vous pouvez complètement ignorer cette étape et passer à la [configuration de votre base de données Portworx](#portworx_database).
 {: note}
 
-1. [Installez le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher](/docs/containers?topic=containers-utilities#block_storage_attacher).
-2. Pour ajouter du stockage par blocs avec la même configuration à tous vos noeuds worker, [ajoutez automatiquement du stockage par blocs](/docs/containers?topic=containers-utilities#automatic_block) avec le plug-in {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Pour ajouter du stockage par blocs avec une autre configuration, ajoutez le stockage par blocs uniquement à un sous-ensemble de noeuds worker, ou pour avoir davantage de contrôle sur le processus de mise à disposition, [ajoutez du stockage par blocs manuellement](/docs/containers?topic=containers-utilities#manual_block).
+1. [Installez le plug-in {{site.data.keyword.cloud_notm}} Block Volume Attacher](/docs/containers?topic=containers-utilities#block_storage_attacher).
+2. Pour ajouter du stockage par blocs avec la même configuration à tous vos noeuds worker, [ajoutez automatiquement du stockage par blocs](/docs/containers?topic=containers-utilities#automatic_block) avec le plug-in {{site.data.keyword.cloud_notm}} Block Volume Attacher. Pour ajouter du stockage par blocs avec une autre configuration, ajoutez le stockage par blocs uniquement à un sous-ensemble de noeuds worker, ou pour avoir davantage de contrôle sur le processus de mise à disposition, [ajoutez du stockage par blocs manuellement](/docs/containers?topic=containers-utilities#manual_block).
 3. [Reliez le stockage par blocs](/docs/containers?topic=containers-utilities#attach_block) à vos noeuds worker.
 
 ## Obtention d'une licence Portworx
@@ -92,7 +92,7 @@ Pour plus d'informations sur les types de licence disponibles et savoir comment 
 ## Configuration d'une base de données pour les métadonnées Portworx
 {: #portworx_database}
 
-Configurez un service de base de données {{site.data.keyword.Bluemix_notm}}, tel que [Databases for etcd](#databaseetcd) ou [{{site.data.keyword.composeForEtcd}}](#compose) pour créer un stockage de valeurs de clés (KVS) pour les métadonnées du cluster Portworx.
+Configurez un service de base de données {{site.data.keyword.cloud_notm}}, tel que [Databases for etcd](#databaseetcd) ou [{{site.data.keyword.composeForEtcd}}](#compose) pour créer un stockage de valeurs de clés (KVS) pour les métadonnées du cluster Portworx.
 {: shortdesc}
 
 Le stockage de valeurs de clés Portworx sert de source unique de données de référence pour votre cluster Portworx. Si ce stockage n'est pas disponible, vous ne pouvez pas utiliser votre cluster Portworx pour accéder à vos données ou les stocker. Les données existantes ne sont pas modifiées ou supprimées lorsque la base de données Portworx n'est pas disponible.
@@ -104,7 +104,7 @@ Databases for etcd est un service etcd géré qui permet de stocker et réplique
 
 La procédure suivante montre comment mettre à disposition et configurer une instance de service Databases for etcd pour Portworx.
 
-1. Vérifiez que vous disposez du [rôle d'accès à la plateforme `Administrator` dans {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)  pour le service Databases for etcd.  
+1. Vérifiez que vous disposez du [rôle d'accès à la plateforme `Administrator` dans {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)  pour le service Databases for etcd.   
 
 2. Mettez à disposition votre instance de service Databases for etcd.
    1. Ouvrez la [page du catalogue Databases for etcd](https://cloud.ibm.com/catalog/services/databases-for-etcd)
@@ -147,8 +147,8 @@ La procédure suivante montre comment mettre à disposition et configurer une in
       ```
       {: screen}
 
-5. Créez une valeur confidentielle (secret) Kubernetes pour votre certificat.
-   1. Créez un fichier de configuration pour votre valeur confidentielle.
+5. Créez un secret Kubernetes pour votre certificat.
+   1. Créez un fichier de configuration pour votre secret.
       ```
       apiVersion: v1
       kind: Secret
@@ -163,7 +163,7 @@ La procédure suivante montre comment mettre à disposition et configurer une in
       ```
       {: codeblock}
 
-   2. Créez la valeur confidentielle dans votre cluster.
+   2. Créez le secret dans votre cluster.
       ```
       kubectl apply -f secret.yaml
       ```
@@ -210,7 +210,7 @@ La procédure suivante montre comment mettre à disposition et configurer le ser
 ## Installation de Portworx dans votre cluster
 {: #install_portworx}
 
-Installez Portworx avec une charte Helm. La charte Helm déploie une version d'évaluation de l'édition Portworx enterprise `px-enterprise` que vous pouvez utiliser pendant 30 jours. De plus, [Stork ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) est également installé sur votre cluster Kubernetes. Stork est le planificateur de stockage de Portworx qui vous permet de colocaliser les pods avec leurs données, ainsi que de créer et restaurer les images instantanées des volumes Portworx.
+Installez Portworx avec une charte Helm. La charte Helm déploie une version d'évaluation de l'édition Portworx enterprise `px-enterprise` que vous pouvez utiliser pendant 30 jours. De plus, [Stork ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) est également installé sur votre cluster Kubernetes. Stork est le planificateur de stockage de Portworx. Il vous permet de colocaliser les pods avec leurs données, ainsi que de créer et restaurer les images instantanées des volumes Portworx.
 {: shortdesc}
 
 Vous recherchez les instructions pour mettre à jour ou supprimer Portworx ? Voir [Mise à jour de Portworx](#update_portworx) et [Suppression de Portworx](#remove_portworx).
@@ -220,7 +220,7 @@ Avant de commencer :
 - [Créez un cluster ou utilisez un cluster existant](/docs/containers?topic=containers-clusters#clusters_ui).
 - Si vous souhaitez utiliser des noeuds worker non SDS pour votre couche de stockage Portworx, [ajoutez une unité de stockage par blocs non formatée à votre noeud worker non SDS](#create_block_storage).
 - Créez une [instance de service {{site.data.keyword.composeForEtcd}}](#portworx_database) pour stocker la configuration et les métadonnées de Portworx.
-- Déterminez si vous souhaitez chiffrer vos volumes Portworx avec {{site.data.keyword.keymanagementservicelong_notm}}. Pour chiffrer vos volumes, vous devez [configurer une instance de service {{site.data.keyword.keymanagementservicelong_notm}} et stocker les informations du service dans une valeur confidentielle (secret) Kubernetes](#encrypt_volumes).
+- Déterminez si vous souhaitez chiffrer vos volumes Portworx avec {{site.data.keyword.keymanagementservicelong_notm}}. Pour chiffrer vos volumes, vous devez [configurer une instance de service {{site.data.keyword.keymanagementservicelong_notm}} et stocker les informations du service dans un secret Kubernetes](#encrypt_volumes).
 - [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour installer Portworx :
@@ -580,7 +580,7 @@ L'image suivante illustre le flux de travail de chiffrement dans Portworx avec {
 <img src="images/cs_portworx_volume_encryption.png" alt="Chiffrement de volumes Portworx en utilisant {{site.data.keyword.keymanagementservicelong_notm}}" width="600" style="width: 600px; border-style: none"/>
 
 1. L'utilisateur crée une réservation de volume persistant (PVC) avec une classe de stockage Portworx et demande que le stockage soit chiffré.
-2. Portworx appelle l'API {{site.data.keyword.keymanagementservicelong_notm}} `WrapCreateDEK` pour créer une phrase passe en utilisant la clé racine du client (CRK) qui est stockée dans la valeur confidentielle (secret) Portworx.
+2. Portworx appelle l'API {{site.data.keyword.keymanagementservicelong_notm}} `WrapCreateDEK` pour créer une phrase passe en utilisant la clé racine du client (CRK) qui est stockée dans le secret (secret) Portworx.
 3. L'instance de service {{site.data.keyword.keymanagementservicelong_notm}} génère une phrase passe de 256 bits et l'encapsule dans la clé de chiffrement de données (DEK). La clé DEK est renvoyée au cluster Portworx.
 4. Le cluster Portworx utilise la phrase passe pour chiffrer le volume.
 5. Le cluster Portworx stocke la clé DEK en texte en clair dans la base de données etcd Portworx, associe l'ID du volume à la clé DEK et supprime la phrase passe de sa mémoire.
@@ -595,7 +595,7 @@ L'image suivante illustre le flux de travail de déchiffrement dans Portworx ave
 1. Kubernetes envoie une demande de déchiffrement d'un volume chiffré.
 2. Portworx demande la clé DEK correspondant au volume dans la base de données etcd Portworx.
 3. La base de données etcd Portworx recherche la clé DEK et la renvoie au cluster Portworx.
-4. Le cluster Portworx appelle l'API {{site.data.keyword.keymanagementservicelong_notm}} `UnWrapDEK` en fournissant la clé DEK et la clé racine (CRK) qui est stockée dans la valeur confidentielle (secret) Portworx.
+4. Le cluster Portworx appelle l'API {{site.data.keyword.keymanagementservicelong_notm}} `UnWrapDEK` en fournissant la clé DEK et la clé racine (CRK) qui est stockée dans le secret (secret) Portworx.
 5. {{site.data.keyword.keymanagementservicelong_notm}} désencapsule la clé DEK pour extraire la phrase passe et renvoie la phrase passe au cluster Portworx.
 6. Le cluster Portworx utilise la phrase passe pour déchiffrer le volume. Une fois le volume déchiffré, la phrase passe est retirée du cluster Portworx.  
 
@@ -605,7 +605,7 @@ L'image suivante illustre le flux de travail de déchiffrement dans Portworx ave
 Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.keymanagementservicelong_notm}}, procédez comme suit :
 {: shortdesc}
 
-1. Assurez-vous que le [rôle d'accès à la plateforme `Editor` et que le rôle d'accès au service `Writer` vous ont été affectés](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) dans {{site.data.keyword.Bluemix_notm}} Identity and Access Management pour le service {{site.data.keyword.keymanagementservicelong_notm}}.
+1. Assurez-vous que le [rôle d'accès à la plateforme `Editor` et que le rôle d'accès au service `Writer` vous ont été affectés](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) dans {{site.data.keyword.cloud_notm}} Identity and Access Management pour le service {{site.data.keyword.keymanagementservicelong_notm}}.
 
 2. Créez une instance de service {{site.data.keyword.keymanagementservicelong_notm}}.
    1. Ouvrez la [page du catalogue {{site.data.keyword.keymanagementservicelong_notm}}](https://cloud.ibm.com/catalog/services/key-protect).
@@ -663,7 +663,7 @@ Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.
    ```
    {: pre}
 
-10. Créez un espace de nom nommé `portworx` dans votre cluster et autorisez Portworx à accéder à toutes les valeurs confidentielles (secrets) de Kubernetes qui sont stockées dans cet espace de nom.
+10. Créez un espace de nom nommé `portworx` dans votre cluster et autorisez Portworx à accéder à tous les secrets Kubernetes qui sont stockés dans cet espace de nom.
     ```
     apiVersion: v1
     kind: Namespace
@@ -698,8 +698,8 @@ Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.
     ```
     {: codeblock}
 
-11. Créez une valeur confidentielle Kubernetes nommée `px-ibm` dans l'espace de nom `portworx` de votre cluster pour stocker vos informations {{site.data.keyword.keymanagementservicelong_notm}}.
-   1. Créez un fichier de configuration pour votre valeur confidentielle Kubernetes avec le contenu suivant.
+11. Créez un secret Kubernetes nommé `px-ibm` dans l'espace de nom `portworx` de votre cluster pour stocker vos informations {{site.data.keyword.keymanagementservicelong_notm}}.
+   1. Créez un fichier de configuration pour votre secret Kubernetes avec le contenu suivant.
       ```
       apiVersion: v1
       kind: Secret
@@ -723,7 +723,7 @@ Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.
       <tbody>
       <tr>
       <td><code>metadata.name</code></td>
-      <td>Entrez <code>px-ibm</code> comme nom de votre valeur confidentielle Kubernetes. Si vous utilisez un autre nom, Portworx ne reconnaît pas la valeur confidentielle lors de l'installation. </td>
+      <td>Entrez <code>px-ibm</code> comme nom de votre secret Kubernetes. Si vous utilisez un autre nom, Portworx ne reconnaît pas le secret lors de l'installation. </td>
       </tr>
       <tr>
       <td><code>data.IBM_SERVICE_API_KEY</code></td>
@@ -744,13 +744,13 @@ Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.
       </tbody>
       </table>
 
-   2. Créez la valeur confidentielle dans l'espace de nom `portworx` de votre cluster.
+   2. Créez le secret dans l'espace de nom `portworx` de votre cluster.
       ```
       kubectl apply -f secret.yaml
       ```
       {: pre}
 
-   3. Vérifiez que la valeur confidentielle a été créée.
+   3. Vérifiez que le secret a été créé.
       ```
       kubectl get secrets -n portworx
       ```
@@ -838,13 +838,13 @@ Pour configurer le chiffrement de vos volumes Portworx avec {{site.data.keyword.
 
    6. Quittez le pod.
 
-Vérifiez comment [chiffrer les valeurs confidentielles dans votre cluster Kubernetes](/docs/containers?topic=containers-encryption#keyprotect), y compris la valeur confidentielle dans laquelle vous avez stockée la clé CRK {{site.data.keyword.keymanagementserviceshort}} pour votre cluster de stockage Portworx.
+Vérifiez comment [chiffrer les secrets dans votre cluster Kubernetes](/docs/containers?topic=containers-encryption#keyprotect), y compris le secret dans lequel vous avez stocké la clé CRK {{site.data.keyword.keymanagementserviceshort}} pour votre cluster de stockage Portworx.
 {: tip}
 
 ## Ajout de stockage de votre cluster Portworx à des applications
 {: #add_portworx_storage}
 
-Maintenant que votre cluster Portworx est fin prêt, vous pouvez commencer à créer des volumes Portworx en utilisant le [provisionnement dynamique de Kubernetes](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
+Maintenant que votre cluster Portworx est fin prêt, vous pouvez commencer à créer des volumes Portworx en utilisant la [mise à disposition dynamique de Kubernetes](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
 {: shortdesc}
 
 ### Etape 1 : Création d'une classe de stockage ou utilisation d'une classe de stockage existante pour votre réservation de volume persistant (PVC)
@@ -892,19 +892,19 @@ Pour solliciter du stockage de votre cluster Portworx et l'utiliser dans votre a
    </tr>
    <tr>
    <td><code>parameters.repl</code></td>
-   <td>Entrez le nombre de répliques de vos données que vous voulez stocker sur différents noeuds worker. Les nombres admis sont `1`,`2` ou `3`. Par exemple, si vous entrez `3`, vos données sont répliquées sur 3 noeuds worker différents dans votre cluster Portworx. Pour le stockage de vos données à haute disponibilité, utilisez un cluster à zones multiples et répliquez vos données sur 3 noeuds worker dans des zones différentes. <strong>Remarque : </strong>vous devez disposer de suffisamment de noeuds worker pour répondre aux exigences de votre réplication. Par exemple, si vous disposez de deux noeuds worker, mais que vous indiquez trois répliques, la création de la réservation de volume persistant avec cette classe de stockage échouera. </td>
+   <td>Entrez le nombre de répliques de vos données que vous voulez stocker sur différents noeuds worker. Les nombres admis sont `1`,`2` ou `3`. Par exemple, si vous entrez `3`, vos données sont répliquées sur trois noeuds worker différents dans votre cluster Portworx. Pour le stockage de vos données à haute disponibilité, utilisez un cluster à zones multiples et répliquez vos données sur trois noeuds worker dans des zones différentes. <strong>Remarque : </strong>vous devez disposer de suffisamment de noeuds worker pour répondre aux exigences de votre réplication. Par exemple, si vous disposez de deux noeuds worker, mais que vous indiquez trois répliques, la création de la réservation de volume persistant avec cette classe de stockage échouera. </td>
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
-   <td>Spécifiez si vous voulez chiffrer les données dans votre volume avec {{site.data.keyword.keymanagementservicelong_notm}}. Sélectionnez l'une des options suivantes : <ul><li><strong>true</strong> : entrez <code>true</code> pour activer le chiffrement de vos volumes Portworx. Pour chiffrer les volumes, vous devez avoir une instance de service {{site.data.keyword.keymanagementservicelong_notm}} et une valeur confidentielle (secret) Kubernetes contenant votre clé racine. Pour plus d'information sur la configuration du chiffrement pour les volumes Portworx, voir [Chiffrement de vos volumes Portworx](#encrypt_volumes). </li><li><strong>false</strong> : lorsque vous entrez <code>false</code>, vos volumes Portworx ne sont pas chiffrés. </li></ul> Si vous n'indiquez pas cette option, vos volumes Portworx ne sont pas chiffrés par défaut. <strong>Remarque :</strong> vous pouvez choisir d'activer le chiffrement des volumes dans votre réservation de volume persistant (PVC), même si vous avez désactivé le chiffrement dans votre classe de stockage. La valeur que vous créez dans la PVC est prioritaire sur les valeurs indiquées dans la classe de stockage.  </td>
+   <td>Spécifiez si vous voulez chiffrer les données dans votre volume avec {{site.data.keyword.keymanagementservicelong_notm}}. Sélectionnez l'une des options suivantes : <ul><li><strong>true</strong> : entrez <code>true</code> pour activer le chiffrement de vos volumes Portworx. Pour chiffrer les volumes, vous devez avoir une instance de service {{site.data.keyword.keymanagementservicelong_notm}} et un secret Kubernetes contenant votre clé racine. Pour plus d'information sur la configuration du chiffrement pour les volumes Portworx, voir [Chiffrement de vos volumes Portworx](#encrypt_volumes). </li><li><strong>false</strong> : lorsque vous entrez <code>false</code>, vos volumes Portworx ne sont pas chiffrés. </li></ul> Si vous n'indiquez pas cette option, vos volumes Portworx ne sont pas chiffrés par défaut. <strong>Remarque :</strong> vous pouvez choisir d'activer le chiffrement des volumes dans votre réservation de volume persistant (PVC), même si vous avez désactivé le chiffrement dans votre classe de stockage. La valeur que vous créez dans la PVC est prioritaire sur les valeurs indiquées dans la classe de stockage.  </td>
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Entrez la priorité d'E-S de Portworx que vous souhaitez solliciter pour vos données. Les options disponibles sont `high`, `medium` et `low`. Lors de la configuration de votre cluster Portworx, tous les disques sont inspectés afin de déterminer leur profil de performance. La classification du profil dépend de la bande passante du réseau de votre noeud worker et du type d'unité de stockage dont vous disposez. Les disques de noeuds worker SDS sont classifiés avec `high`. Si vous connectez manuellement des disques sur un noeud worker virtuel, ces disques sont classifiés avec `low` car les noeuds worker virtuels ont une vitesse réseau plus lente. </br><br> Lorsque vous créez une PVC avec une classe de stockage, le nombre de répliques que vous spécifiez dans <code>parameters/repl</code> est prioritaire sur la priorité d'E-S. Par exemple, lorsque vous spécifiez 3 répliques que vous voulez stocker sur des disques à grande vitesse, mais que vous ne disposez que d'un seul noeud worker avec un disque à grande vitesse dans votre cluster, la création de votre PVC aboutira quand même. Vos données sont répliquées sur le disque à grande vitesse et sur le disque lent. </td>
+   <td>Entrez la priorité d'E-S de Portworx que vous souhaitez solliciter pour vos données. Les options disponibles sont `high`, `medium` et `low`. Lors de la configuration de votre cluster Portworx, tous les disques sont inspectés afin de déterminer leur profil de performance. La classification du profil dépend de la bande passante du réseau de votre noeud worker et du type d'unité de stockage dont vous disposez. Les disques de noeuds worker SDS sont classifiés avec `high`. Si vous connectez manuellement des disques sur un noeud worker virtuel, ces disques sont classifiés avec `low` car les noeuds worker virtuels ont une vitesse réseau plus lente. </br><br> Lorsque vous créez une PVC avec une classe de stockage, le nombre de répliques que vous spécifiez dans <code>parameters/repl</code> est prioritaire sur la priorité d'E-S. Par exemple, lorsque vous spécifiez trois répliques que vous voulez stocker sur des disques à grande vitesse, mais que vous ne disposez que d'un seul noeud worker avec un disque à grande vitesse dans votre cluster, la création de votre PVC aboutira quand même. Vos données sont répliquées sur le disque à grande vitesse et sur le disque lent. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
-   <td>Définissez si vous souhaitez autoriser plusieurs pods à accéder au même volume. Sélectionnez l'une des options suivantes : <ul><li><strong>True : </strong>si vous définissez cette option sur <code>true</code>, vous pouvez accéder au même volume via plusieurs pods répartis sur des noeuds worker dans des zones différentes. </li><li><strong>False : </strong>si vous définissez cette option sur <code>false</code>, vous pouvez accéder au volume à partir de plusieurs pods uniquement si ces pods sont déployés sur le noeud worker relié au disque physique assurant la sauvegarde du volume. Si votre pod est déployé sur un autre noeud worker, il ne pourra pas accéder au volume.</li></ul></td>
+   <td>Indiquez si vous souhaitez autoriser plusieurs pods à accéder au même volume. Sélectionnez l'une des options suivantes : <ul><li><strong>True : </strong>si vous définissez cette option sur <code>true</code>, vous pouvez accéder au même volume via plusieurs pods répartis sur des noeuds worker dans des zones différentes. </li><li><strong>False : </strong>si vous définissez cette option sur <code>false</code>, vous pouvez accéder au volume à partir de plusieurs pods uniquement si ces pods sont déployés sur le noeud worker relié au disque physique assurant la sauvegarde du volume. Si votre pod est déployé sur un autre noeud worker, il ne pourra pas accéder au volume.</li></ul></td>
    </tr>
    </tbody>
    </table>
@@ -1257,4 +1257,4 @@ La suppression du cluster Portworx supprime toutes les données figurant dans ce
 ## Aide et assistance
 {: #portworx_help}
 
-Si vous rencontrez un problème lors de l'utilisation de Portworx ou si vous voulez discuter des configurations de Portworx pour votre cas particulier, publiez une question sur la chaîne `portworx-on-iks` dans [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com/). Connectez-vous à Slack en utilisant votre ID IBM. Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.Bluemix_notm}}, [demandez une invitation à Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://bxcs-slack-invite.mybluemix.net/).
+Si vous rencontrez un problème lors de l'utilisation de Portworx ou si vous voulez discuter des configurations de Portworx pour votre cas particulier, publiez une question sur la chaîne `portworx-on-iks` dans [{{site.data.keyword.containerlong_notm}} Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://ibm-container-service.slack.com/). Connectez-vous à Slack en utilisant votre ID IBM. Si vous n'utilisez pas un ID IBM pour votre compte {{site.data.keyword.cloud_notm}}, [demandez une invitation à Slack ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://bxcs-slack-invite.mybluemix.net/).

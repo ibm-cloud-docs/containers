@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Présentation des cas d'utilisation
 {: #cs_uc_intro}
 
-Divers cas d'utilisation témoignent de la puissance des services {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.Bluemix_notm}} lorsqu'ils sont utilisés ensemble. Ces scénarios mettent en avant plusieurs secteurs d'activité et différents types de charge de travail. Même si chaque cas d'utilisation est présenté sous l'angle d'un secteur d'activité particulier, ces charges de travail sont standard dans divers secteurs. Vous constaterez des schémas de charge de travail de ce type : 
+Divers cas d'utilisation témoignent de la puissance des services {{site.data.keyword.containerlong_notm}} et {{site.data.keyword.cloud_notm}} lorsqu'ils sont utilisés ensemble. Ces scénarios mettent en avant plusieurs secteurs d'activité et différents types de charge de travail. Même si chaque cas d'utilisation est présenté sous l'angle d'un secteur d'activité particulier, ces charges de travail sont standard dans divers secteurs. Vous constaterez des schémas de charge de travail de ce type : 
 * Intelligence artificielle (AI) et apprentissage automatique (ML)
 * Données et stockage
 * DevOps

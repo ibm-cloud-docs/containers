@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ Ce tutoriel s'adresse aux développeurs d'applications Cloud Foundry.
 - [Créez un registre d'images privé dans {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started).
 - [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Ciblez votre interface CLI sur le cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- Vérifiez que vous disposez des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
+- Vérifiez que vous disposez des règles d'accès {{site.data.keyword.cloud_notm}} IAM pour {{site.data.keyword.containerlong_notm}} :
     - [N'importe quel rôle de plateforme](/docs/containers?topic=containers-users#platform)
     - [Rôle de service **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform)
 - [Familiarisez-vous avec la terminologie de Docker et Kubernetes](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
@@ -277,7 +277,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8
     ```
     {: screen}
 
@@ -287,7 +287,7 @@ Déployez votre application sous forme de conteneur dans un cluster Kubernetes.
 
 5.  [Lancez le tableau de bord Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), vous pouvez utiliser le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
+    Si vous sélectionnez votre cluster dans la [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), vous pouvez utiliser le bouton **Tableau de bord Kubernetes** pour lancer votre tableau de bord en un seul clic.
     {: tip}
 
 6. Dans l'onglet **Charges de travail**, vous pouvez examiner les ressources que vous avez créées.

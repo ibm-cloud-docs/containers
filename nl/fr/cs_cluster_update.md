@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,18 +34,18 @@ Vous pouvez installer des mises à jour pour maintenir vos clusters Kubernetes �
 ## Mise à jour du maître Kubernetes
 {: #master}
 
-Régulièrement, Kubernetes publie des [mises à jour principales, secondaires ou des correctifs](/docs/containers?topic=containers-cs_versions#version_types). Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes. IBM met à jour la version de correctif, mais vous devez mettre à jour les versions principales et secondaires.
+Régulièrement, le projet Kubernetes publie des [mises à jour principales, secondaires ou des correctifs](/docs/containers?topic=containers-cs_versions#version_types). Les mises à jour peuvent affecter la version du serveur d'API Kubernetes ou d'autres composants dans le maître Kubernetes. IBM met à jour la version de correctif, mais vous devez mettre à jour les versions principales et secondaires.
 {:shortdesc}
 
 **Comment savoir à quel moment effectuer la mise à jour du maître ?**</br>
-Dès que des mises à jour sont disponibles, vous recevez une notification dans l'interface de ligne de commande et dans la console {{site.data.keyword.Bluemix_notm}}, et vous pouvez également consulter la page des [versions prises en charge](/docs/containers?topic=containers-cs_versions).
+Dès que des mises à jour sont disponibles, vous recevez une notification dans l'interface de ligne de commande et dans la console {{site.data.keyword.cloud_notm}}, et vous pouvez également consulter la page des [versions prises en charge](/docs/containers?topic=containers-cs_versions).
 
 **Combien de versions peut avoir le maître derrière la version la plus récente ?**</br>
 En principe, IBM prend en charge trois versions de Kubernetes à un moment donné. Vous ne pouvez pas mettre à jour le serveur d'API Kubernetes vers une version deux fois supérieure à sa version actuelle.
 
-Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.11 et que vous voulez le mettre à jour vers la version 1.14, vous devez d'abord effectuer une mise à jour vers la version 1.12. 
+Par exemple, si la version actuelle de votre serveur d'API Kubernetes est 1.11 et que vous voulez le mettre à jour vers la version 1.14, vous devez d'abord effectuer une mise à jour vers la version 1.12.
 
-Si votre cluster exécute une version Kubernetes non prise en charge, suivez les [instructions d'archivage de version](/docs/containers?topic=containers-cs_versions#k8s_version_archive). Pour éviter que le cluster ne se retrouve dans un état non pris en charge et pour éviter tout impact opérationnel, maintenez votre cluster à jour. 
+Si votre cluster exécute une version Kubernetes non prise en charge, suivez les [instructions d'archivage de version](/docs/containers?topic=containers-cs_versions#k8s_version_archive). Pour éviter que le cluster ne se retrouve dans un état non pris en charge et pour éviter tout impact opérationnel, maintenez votre cluster à jour.
 
 **Mes noeuds worker peuvent-ils s'exécuter avec une version ultérieure à celle du maître ?**</br>
 Vos noeuds worker ne peuvent pas s'exécuter sur une version `principale.secondaire` plus récente que le maître. Commencez par [mettre à jour votre maître](#update_master) à la dernière version de Kubernetes. Ensuite, [mettez à jour les noeuds worker](#worker_node) dans votre cluster.
@@ -73,19 +73,19 @@ Le diagramme suivant illustre la procédure que vous pouvez suivre pour mettre �
 Figure 1. Diagramme de la procédure de mise à jour du maître Kubernetes
 
 {: #update_master}
-Avant de commencer, assurez-vous de disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). 
+Avant de commencer, vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). 
 
 Pour mettre à jour la version _principale_ ou _secondaire_ du maître Kubernetes :
 
 1.  Passez en revue les [modifications de Kubernetes](/docs/containers?topic=containers-cs_versions) et effectuez les mises à jour marquées _Mise à jour avant le maître_.
 
-2.  Mettez à jour le serveur d'API Kubernetes et les composants associés du maître Kubernetes en utilisant la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/login) ou en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) `ibmcloud ks cluster-update` de l'interface de ligne de commande.
+2.  Mettez à jour le serveur d'API et les composants du maître qui lui sont associés en utilisant la [console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/login) ou en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) `ibmcloud ks cluster-update` de l'interface de ligne de commande. 
 
-3.  Patientez quelques minutes, puis confirmez que la mise à jour est terminée. Examinez la version du serveur d'API Kubernetes sur le tableau de bord Clusters d'{{site.data.keyword.Bluemix_notm}} ou exécutez la commande `ibmcloud ks clusters`.
+3.  Patientez quelques minutes, puis confirmez que la mise à jour est terminée. Examinez la version du serveur d'API sur le tableau de bord Clusters d'{{site.data.keyword.cloud_notm}} ou exécutez la commande `ibmcloud ks clusters`. 
 
-4.  Installez la version de l'interface CLI [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) qui correspond à la version du serveur d'API qui s'exécute sur le maître Kubernetes. [Kubernetes ne prend pas en charge les versions client de ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` qui diffèrent d'au moins deux niveaux par rapport à la version du serveur (n +/- 2).
+4.  Installez la version de l'[interface CLI `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) correspondant à la version de serveur d'API qui s'exécute dans le maître. [Kubernetes ne prend pas en charge les versions client de ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/setup/version-skew-policy/) `kubectl` qui diffèrent d'au moins deux niveaux par rapport à la version du serveur (n +/- 2).
 
-Lorsque la mise à jour du serveur d'API Kubernetes est terminée, vous pouvez mettre à jour vos noeuds worker.
+Une fois la mise à jour du maître terminée, vous pouvez mettre à jour vos noeuds worker. 
 
 <br />
 
@@ -93,7 +93,7 @@ Lorsque la mise à jour du serveur d'API Kubernetes est terminée, vous pouvez m
 ## Mise à jour des noeuds worker
 {: #worker_node}
 
-Vous avez reçu une notification vous invitant à mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Comme les mises à jour de sécurité et les correctifs sont mis en place pour le serveur d'API Kubernetes et d'autres composants du maître Kubernetes, vous devez vérifier que les noeuds worker soient toujours synchronisés.
+Vous avez reçu une notification vous invitant à mettre à jour vos noeuds worker. Qu'est-ce que cela signifie ? Comme les mises à jour de sécurité et les correctifs sont mis en place pour le serveur d'API et d'autres composants du maître, vous devez vérifier que les noeuds worker soient toujours synchronisés.
 {: shortdesc}
 
 **Qu'advient-il de mes applications au cours d'une mise à jour ?**</br>
@@ -109,10 +109,10 @@ Lorsque la mappe de configuration n'est pas définie, la valeur par défaut est 
 
 **Avant de commencer** :
 - [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
-- Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](/docs/containers?topic=containers-cs_versions).
-- Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). </br>
+- [Mettez à jour le maître](#master). La version du noeud worker ne peut pas être supérieure à celle du serveur d'API qui s'exécute sur votre maître Kubernetes. 
+- Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ dans les guides de préparation de version des [clusters Kubernetes](/docs/containers?topic=containers-cs_versions) ou des [clusters OpenShift](/docs/openshift?topic=openshift-openshift_versions). 
+- Pour appliquer une mise à jour de module de correction, consultez le journal des modifications de version des [clusters Kubernetes](/docs/containers?topic=containers-changelog#changelog) ou des [clusters OpenShift](/docs/openshift?topic=openshift-openshift_versions). 
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). </br>
 
 Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
@@ -270,41 +270,41 @@ Etapes suivantes :
 ### Mise à jour des noeuds worker dans la console
 {: #worker_up_console}
 
-Après avoir configuré la mappe de configuration pour la première fois, vous pouvez effectuer la mise à jour des noeuds worker en utilisant la console {{site.data.keyword.Bluemix_notm}}.
+Après avoir configuré la mappe de configuration pour la première fois, vous pouvez effectuer la mise à jour des noeuds worker en utilisant la console {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
 Avant de commencer :
-*   [Configurez une mappe de configuration](#worker_node) pour contrôler le mode de mise à jour de vos noeuds worker.
-*   [Mettez à jour le maître Kubernetes](#master). La version Kubernetes du noeud worker ne peut pas être supérieure à celle du serveur d'API Kubernetes qui s'exécute sur votre maître Kubernetes.
-*   Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ sur la page des [modifications de Kubernetes](/docs/containers?topic=containers-cs_versions).
-*   Pour appliquer une mise à jour de module de correction, consultez le [journal des modifications de version de Kubernetes](/docs/containers?topic=containers-changelog#changelog).
-*   Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). </br>
+- [Configurez une mappe de configuration](#worker_node) pour contrôler le mode de mise à jour de vos noeuds worker.
+- [Mettez à jour le maître](#master). La version du noeud worker ne peut pas être supérieure à celle du serveur d'API qui s'exécute sur votre maître Kubernetes. 
+- Apportez toutes les modifications indiquées dans _Mise à jour après le maître_ dans les guides de préparation de version des [clusters Kubernetes](/docs/containers?topic=containers-cs_versions) ou des [clusters OpenShift](/docs/openshift?topic=openshift-openshift_versions). 
+- Pour appliquer une mise à jour de module de correction, consultez le journal des modifications de version des [clusters Kubernetes](/docs/containers?topic=containers-changelog#changelog) ou des [clusters OpenShift](/docs/openshift?topic=openshift-openshift_versions). 
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur** ou **Administrateur**.](/docs/containers?topic=containers-users#platform). </br>
 
 Les mises à jour des noeuds worker peuvent provoquer l'indisponibilité de vos services et applications. La machine de votre noeud worker est réimagée et les données sont supprimées si elles ne sont pas [stockées hors du pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 Pour mettre à jour les noeuds worker à partir de la console :
-1.  Dans le menu de la [console {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/) ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Kubernetes**.
+1.  A partir du [menu de la console {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/) ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Kubernetes**. 
 2.  Sur la page **Clusters**, cliquez sur votre cluster.
 3.  Dans l'onglet **Noeuds worker**, sélectionnez la case à cocher de chaque noeud worker que vous désirez mettre à jour. Une barre d'actions s'affiche sur la ligne d'en-tête du tableau.
-4.  Dans cette barre d'actions, cliquez sur **Mettre à jour Kubernetes**.
+4.  Dans la barre de menus, cliquez sur **Mettre à jour**. 
 
 <br />
 
 
 
-## Mise à jour des types de machine
+## Mise à jour des versions (types de machine) 
 {: #machine_type}
 
-Vous pouvez mettre à jour les types de machine de vos noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si votre cluster a des versions de noeud worker `x1c` obsolètes ou Ubuntu 16 `x2c` plus anciennes, créez des noeuds worker Ubuntu 18 qui utilisent des types de machine dont le nom comprend `x3c`.
+Vous pouvez mettre à jour versions, ou types de machine, de vos noeuds worker en ajoutant de nouveaux noeuds worker et en supprimant les anciens. Par exemple, si votre cluster a des versions de noeud worker `x1c` obsolètes ou Ubuntu 16 `x2c` plus anciennes, créez des noeuds worker Ubuntu 18 qui utilisent des versions dont le nom comprend `x3c`.
 {: shortdesc}
 
 Avant de commencer :
 - [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - Si vous stockez des données sur votre noeud worker, les données sont supprimées si elles ne sont pas [stockées hors du noeud worker](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform).
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform). 
 
-Pour mettre à jour les types de machine :
+Pour mettre à jour les versions :
 
 1. Affichez la liste des noeuds worker disponibles et notez leur adresse IP privée.
    - **Pour les noeuds worker figurant dans un pool de noeuds worker** :
@@ -314,7 +314,7 @@ Pour mettre à jour les types de machine :
         ```
         {: pre}
 
-     2. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker.
+     2. Affichez la liste des noeuds worker figurant dans le pool de noeuds worker. Notez les valeurs des zones **ID** et **Adresse IP privée**.
         ```
         ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
         ```
@@ -327,21 +327,21 @@ Pour mettre à jour les types de machine :
         {: pre}
 
    - **Déprécié : pour les noeuds worker autonomes** :
-     1. Affichez la liste des noeuds worker disponibles.
+     1. Affichez la liste des noeuds worker disponibles. Notez les valeurs des zones **ID** et **Adresse IP privée**.
         ```
         ibmcloud ks workers --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
-     2. Obtenez les détails d'un noeud worker et notez la zone, ainsi que l'ID du VLAN privé et du VLAN public.
+     2. Obtenez les détails d'un noeud worker et notez la zone, ainsi que l'ID du VLAN privé et l'ID du VLAN public.
         ```
         ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
         {: pre}
 
-2. Affichez la liste des types de machine disponibles dans la zone.
+2. Répertoriez les versions disponibles dans la zone. 
    ```
-   ibmcloud ks machine-types <zone>
+   ibmcloud ks flavors --zone <zone>
    ```
    {: pre}
 
@@ -349,7 +349,7 @@ Pour mettre à jour les types de machine :
    - **Pour les noeuds worker figurant dans un pool de noeuds worker** :
      1. Créez un pool de noeuds worker avec le nombre de noeuds worker que vous désirez remplacer.
         ```
-        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+        ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
         ```
         {: pre}
 
@@ -367,19 +367,32 @@ Pour mettre à jour les types de machine :
 
    - **Déprécié : pour les noeuds worker autonomes** :
        ```
-       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <machine_type> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ibmcloud ks worker-add --cluster <cluster_name> --machine-type <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
        ```
        {: pre}
 
-4. Patientez jusqu'à la fin du déploiement des noeuds worker.
+4. Patientez jusqu'à la fin du déploiement des noeuds worker. Lorsque l'état des noeuds worker passe à **Normal**, le déploiement est terminé.
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   Lorsque l'état des noeuds worker passe à **Normal**, le déploiement est terminé.
-
-5. Supprimez l'ancien noeud worker. **Remarque** : si vous supprimez un type de machine qui est facturé au mois (par exemple bare metal), vous êtes facturé pour le mois complet.
+5.  Pour empêcher toute indisponibilité, replanifiez les applications à partir des anciens noeuds worker avant de supprimer ces derniers. 
+    1.  Marquez le noeud worker comme non planifiable dans un processus désigné par cordon. Lorsque vous exécutez ce processus sur un noeud worker, vous le rendez indisponible pour toute planification de pod ultérieure. Utilisez l'**adresse IP privée** du noeud worker que vous avez extrait précédemment ; il s'agit du nom de noeud worker dans Kubernetes.
+```
+        kubectl cordon <private_IP_address_of_worker_node>
+        ```
+        {: pre}
+    2.  Vérifiez que la planification de pod est désactivée pour votre noeud worker en vous assurant que le statut est **SchedulingDisabled**.
+      ```
+        kubectl get nodes
+        ```
+        {: pre}
+    3.  Imposez le retrait des pods de votre noeud worker et leur replanification sur les noeuds worker restants dans le cluster. Ce processus peut prendre quelques minutes.
+        ```
+        kubectl drain <worker_name>
+        ```
+        {: pre}
+6. Supprimez l'ancien noeud worker. **Remarque** : si vous retirez une version qui est facturée au mois (par exemple bare metal), vous êtes facturé pour le mois complet. 
    - **Pour les noeuds worker figurant dans un pool de noeuds worker** :
      1. Supprimez le pool de noeuds worker associé à l'ancien type de machine. Cette opération supprime tous les noeuds worker qui se trouvent dans le pool dans toutes les zones. L'exécution de ce processus peut prendre quelques minutes.
         ```
@@ -399,13 +412,13 @@ Pour mettre à jour les types de machine :
       ```
       {: pre}
 
-6. Vérifiez que les noeuds worker ont été supprimés de votre cluster.
+7. Vérifiez que les noeuds worker ont été supprimés de votre cluster.
    ```
    ibmcloud ks workers --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-7. Répétez ces étapes pour mettre à jour d'autres pools de noeuds worker ou d'autres noeuds worker autonomes sur différents types de machine.
+8. Répétez ces étapes pour mettre à jour d'autres pools de noeuds worker ou d'autres noeuds worker autonomes vers différentes versions. 
 
 ## Mise à jour des composants de cluster
 {: #components}
@@ -450,10 +463,10 @@ Oui. {{site.data.keyword.containerlong_notm}} offre d'autres plug-in et modules 
 Pour que des modifications puissent être apportées à vos configurations de consignation ou de filtrage, le composant Fluentd doit être au niveau de version le plus récent. Par défaut, les mises à jour automatiques du composant sont activées.
 {: shortdesc}
 
-Vous pouvez gérer les mises à jour automatiques du composant Fluentd de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster.
+Vous pouvez gérer les mises à jour automatiques du composant Fluentd de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster. 
 
-* Vérifiez si les mises à jour automatiques sont activées en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`. 
-* Désactivez les mises à jour automatiques en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`. 
+* Vérifiez si les mises à jour automatiques sont activées en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get) `ibmcloud ks logging-autoupdate-get --cluster <cluster_name_or_ID>`.
+* Désactivez les mises à jour automatiques en exécutant la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable) `ibmcloud ks logging-autoupdate-disable`.
 * Si les mises à jour automatiques sont désactivées et que vous devez modifier votre configuration, il y a deux options possibles :
     * Activez les mises à jour automatiques pour vos pods Fluentd.
         ```
@@ -474,7 +487,8 @@ Vous pouvez gérer les mises à jour automatiques du composant Fluentd de plusie
 Contrôlez à quel moment doit s'effectuer la mise à jour du composant d'équilibreur de charge d'application (ALB) Ingress.
 {: shortdesc}
 
-Lorsque le composant ALB Ingress est mis à jour, les conteneurs `nginx-ingress` et `ingress-auth` figurant dans tous les pods d'ALB sont mis à jour à la dernière version. Par défaut, les mises à jour automatiques des ALB sont activées. Les mises à jour sont effectuées en continu de sorte que vos équilibreurs de charge ALB n'encourent jamais d'indisponibilité.
+Lorsque le composant ALB Ingress est mis à jour, les conteneurs `nginx-ingress` et `ingress-auth` figurant dans tous les pods d'ALB sont mis à jour à la dernière version. Par défaut, les mises à jour automatiques des ALB sont activées. Les mises à jour sont effectuées en continu de sorte que vos équilibreurs de charge ALB n'encourent jamais d'indisponibilité. Lorsque le pod redémarre, une [vérification de disponibilité](/docs/containers?topic=containers-ingress-settings#readiness-check) empêche le pod d'ALB de tenter d'acheminer les demandes de trafic tant que les fichiers de ressources Ingress n'ont pas tous été analysés. Cette vérification de disponibilité empêche toute perte de demande durant les mises à jour de pod d'ALB et peut durer jusqu'à 5 minutes.
+
 
 Si vous désactivez les mises à jour automatiques, vous êtes chargé de mettre à jour vos ALB. Dès que des mises à jour sont disponibles, vous en êtes averti dans l'interface de ligne de commande lorsque vous exécutez les commandes `ibmcloud ks albs` ou `alb-autoupdate-get`.
 
@@ -513,7 +527,7 @@ Avant de commencer :
     ```
     {: screen}
 
-3. Vérifiez la version (**Build**) de vos pods ALB.
+3. Vérifiez la version (**Build**) de vos pods d'ALB.
     ```
     ibmcloud ks albs --cluster <cluster_name_or_ID>
     ```
@@ -529,7 +543,7 @@ Avant de commencer :
     ```
     {: screen}
 
-Vous pouvez gérer les mises à jour automatiques du composant ALB Ingress de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Editeur** ou **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster.
+Vous pouvez gérer les mises à jour automatiques du composant ALB Ingress de plusieurs manières indiquées ci-après. **Remarque** : pour exécuter les commandes suivantes, vous devez disposer du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Editeur**](/docs/containers?topic=containers-users#platform) ou **Administrateur** pour le cluster. 
 * Désactivez les mises à jour automatiques.
     ```
     ibmcloud ks alb-autoupdate-disable --cluster <cluster_name_or_ID>
@@ -537,17 +551,17 @@ Vous pouvez gérer les mises à jour automatiques du composant ALB Ingress de pl
     {: pre}
 * Mettez à jour manuellement vos ALB Ingress.
     1. Si une mise à jour est disponible et que vous souhaitez mettre à jour vos ALB, consultez d'abord le [journal des modifications de la dernière version du composant ALB Ingress](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) pour vérifier les effets négatifs qu'elle pourrait avoir.
-    2. Forcez une mise à jour unique de vos pods ALB. Tous les pods ALB dans votre cluster sont mis à jour à la dernière version. Vous ne pouvez pas mettre à jour un ALB individuel ou choisir la version vers laquelle mettre à jour les ALB. Les mises à jour automatiques restent désactivées.
+    2. Forcez une mise à jour unique de vos pods d'ALB. Tous les pods d'ALB dans votre cluster sont mis à jour vers la dernière version. Vous ne pouvez pas mettre à jour un ALB individuel ou choisir la version vers laquelle mettre à jour les ALB. Les mises à jour automatiques restent désactivées.
         ```
         ibmcloud ks alb-update --cluster <cluster_name_or_ID>
         ```
         {: pre}
-* Si vos pods ALB ont été récemment mis à jour, mais qu'une configuration personnalisée de vos ALB est affectée par la dernière version, vous pouvez rétromigrer la mise à jour à la version que vos pods ALB utilisaient avant. **Remarque** : après avoir annulé une mise à jour, les mises à jour automatiques des pods ALB sont désactivées.
+* Si vos pods d'ALB ont été récemment mis à jour, mais qu'une configuration personnalisée de vos ALB est affectée par la dernière version, vous pouvez rétromigrer la mise à jour vers la version que vos pods d'ALB utilisaient auparavant. **Remarque** : après avoir annulé une mise à jour, les mises à jour automatiques des pods d'ALB sont désactivées.
     ```
     ibmcloud ks alb-rollback --cluster <cluster_name_or_ID>
     ```
     {: pre}
-* Réactivez les mises à jour automatiques. Dès que la version suivante est disponible, les pods ALB sont automatiquement mis à jour à la dernière version.
+* Réactivez les mises à jour automatiques. Dès que la version suivante est disponible, les pods d'ALB sont automatiquement mis à jour vers la dernière version.
     ```
     ibmcloud ks alb-autoupdate-enable --cluster <cluster_name_or_ID>
     ```
@@ -560,6 +574,9 @@ Vous pouvez gérer les mises à jour automatiques du composant ALB Ingress de pl
 {: #addons}
 
 Les modules complémentaires {{site.data.keyword.containerlong_notm}} gérés permettent d'améliorer facilement votre cluster avec des fonctions open source, telles que Istio ou Knative. La version de l'outil open source que vous ajoutez à votre cluster est testée par IBM et approuvée pour être utilisée dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour vers la dernière version des modules complémentaires gérés que vous avez activés dans votre cluster, voir [Mise à jour des modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+
+
+
 
 ## Mise à jour pour passer des noeuds worker autonomes aux pools de noeuds worker
 {: #standalone_to_workerpool}
@@ -577,7 +594,7 @@ Examinez l'image suivante pour voir comment évolue la configuration de votre cl
 <img src="images/cs_cluster_migrate.png" alt="Mise à jour de votre cluster pour passer des noeuds worker autonomes aux pools de noeuds worker" width="600" style="width:600px; border-style: none"/>
 
 Avant de commencer :
-- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur** ou **Administrateur**](/docs/containers?topic=containers-users#platform) pour le cluster.
+- Vérifiez que vous disposez du [rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur**](/docs/containers?topic=containers-users#platform) ou **Administrateur** pour le cluster. 
 - [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour mettre à jour les noeuds worker autonomes pour passer aux pools de noeuds worker :
@@ -588,9 +605,9 @@ Pour mettre à jour les noeuds worker autonomes pour passer aux pools de noeuds 
    ```
    {: pre}
 
-2. Créez un pool de noeuds worker et déterminez le type de machine et le nombre de noeuds worker que vous souhaitez ajouter dans ce pool.
+2. Créez un pool de noeuds worker et déterminez la version et le nombre de noeuds worker que vous souhaitez ajouter à ce pool. 
    ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
@@ -615,8 +632,8 @@ Pour mettre à jour les noeuds worker autonomes pour passer aux pools de noeuds 
       ```
       {: pre}
 
-   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker. </br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud (SoftLayer) pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
-      ```
+   2. **Pour ajouter la zone dans plusieurs pools de noeuds worker** : ajoutez plusieurs pools de noeuds worker dans la commande `ibmcloud ks zone-add`. Pour ajouter plusieurs pools de noeuds worker dans une zone, vous devez déjà disposer de VLAN privé et public dans cette zone. Si vous ne disposez pas de VLAN public et privé dans cette zone, envisagez d'ajouter d'abord la zone à un pool de noeuds worker pour qu'un VLAN public et un VLAN privé soient créés pour vous. Ensuite, vous pouvez ajouter cette zone à d'autres pools de noeuds worker. </br></br>Il est important que les noeuds worker de tous vos pools de noeuds worker soient mis à disposition dans toutes les zones pour que votre cluster soit équilibré entre les zones. Si vous souhaitez utiliser des VLAN différents pour des pools de noeuds worker différents, répétez cette commande avec les VLAN que vous souhaitez utiliser pour votre pool de noeuds worker. Si vous disposez de plusieurs VLAN pour un cluster, de plusieurs sous-réseaux sur le même VLAN ou d'un cluster à zones multiples, vous devez activer une fonction [VRF (Virtual Router Function)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) pour votre compte d'infrastructure IBM Cloud de sorte que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Pour activer la fonction VRF, [contactez le représentant de votre compte d'infrastructure IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Pour vérifier si la fonction VRF est déjà activée, utilisez la commande `ibmcloud account show`. Si vous ne parvenez pas à activer la fonction VRF ou si vous ne souhaitez pas le faire, activez la fonction [Spanning VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Pour effectuer cette action, vous devez disposer du [droit d'infrastructure](/docs/containers?topic=containers-users#infra_access) **Réseau > Gérer le spanning VLAN pour réseau**, ou vous pouvez demander au propriétaire du compte de l'activer. Pour vérifier si le spanning VLAN est déjà activé, utilisez la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+```
       ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name1,pool_name2,pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
       {: pre}

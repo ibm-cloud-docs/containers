@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Planification de réseaux au sein du cluster et en externe pour des applications
@@ -48,9 +49,9 @@ La reconnaissance de service Kubernetes fournit une connexion réseau aux applic
 **Services**</br>
 Tous les pods qui sont déployés sur un noeud worker bénéficient d'une adresse IP privée dans la plage 172.30.0.0/16 et sont uniquement acheminés entre des noeuds worker. Pour éviter des conflits, n'utilisez pas cette plage d'adresses IP sur des noeuds qui communiquent avec vos noeuds worker. Les noeuds worker et les pods peuvent communiquer de manière sécurisée sur le réseau privé en utilisant des adresses IP privées. Toutefois, lorsqu'un pod tombe en panne ou qu'un noeud worker a besoin d'être recréé, une nouvelle adresse IP privée lui est affectée.
 
-Au lieu d'essayer de suivre les adresses IP privées fluctuantes pour des applications qui doivent être hautement disponibles, vous pouvez utiliser les fonctions de reconnaissance de service Kubernetes intégrées pour exposer les applications sous forme de services. Un service Kubernetes regroupe un ensemble de pods et procure une connexion réseau vers ces pods. Le service sélectionne les pods ciblés vers lesquels il achemine le trafic via des libellés.
+Au lieu d'essayer de suivre les adresses IP privées fluctuantes pour des applications qui doivent être hautement disponibles, vous pouvez utiliser les fonctions de reconnaissance de service Kubernetes intégrées pour exposer les applications sous forme de services. Un service Kubernetes regroupe un ensemble de pods et procure une connexion réseau vers ces pods. Le service sélectionne les pods ciblés vers lesquels il achemine le trafic via des libellés. 
 
-Un service fournit la connectivité entre vos pods d'application et d'autres services dans le cluster sans exposer l'adresse IP privée réelle de chaque pod. Les services se voient affecter une adresse IP interne, `clusterIP`, accessible uniquement au sein du cluster. Cette adresse IP est liée au service pendant l'intégralité de son cycle de vie et ne change pas tant que le service existe. 
+Un service fournit la connectivité entre vos pods d'application et d'autres services dans le cluster sans exposer l'adresse IP privée réelle de chaque pod. Les services se voient affecter une adresse IP interne, `clusterIP`, accessible uniquement au sein du cluster. Cette adresse IP est liée au service pendant l'intégralité de son cycle de vie et ne change pas tant que le service existe.
 * Clusters plus récents : dans les clusters créés après février 2018 dans la zone dal13 ou après octobre 2017 dans les autres zones, les services se voient affecter une adresse IP parmi les 65 000 adresses IP dans la plage 172.21.0.0/16.
 * Clusters plus anciens : dans les clusters créés avant février 2018 dans la zone dal13 ou avant octobre 2017 dans les autres zones, les services se voient affecter une adresse IP parmi les 254 adresses IP dans la plage 10.10.10.0/24. Si vous atteignez la limite de 254 services et que vous avez besoin d'autres services, vous devez créer un nouveau cluster.
 
@@ -114,7 +115,7 @@ Le tableau suivant compare les fonctions de chaque type de service réseau :
 |Plusieurs applications par service| | | |<img src="images/confirm.svg" width="32" alt="Fonction disponible" style="width:32px;" />|
 {: caption="Caractéristiques des types de service réseau Kubernetes" caption-side="top"}
 
-Pour choisir un modèle de déploiement d'équilibrage de charge basé sur un ou plusieurs services réseau, voir [Choix d'un modèle de déploiement pour équilibrage de charge externe public](#pattern_public) ou [Choix d'un modèle de déploiement pour équilibrage de charge externe privé](#private_access).
+Pour choisir un modèle de déploiement d'équilibrage de charge basé sur un ou plusieurs services réseau, voir [Choix d'un modèle de déploiement pour équilibrage de charge externe public](#pattern_public) ou [Choix d'un modèle de déploiement pour équilibrage de charge externe privé](#private_access). 
 
 <br />
 
@@ -125,11 +126,11 @@ Pour choisir un modèle de déploiement d'équilibrage de charge basé sur un ou
 Exposez au public une application de votre cluster sur Internet.
 {: shortdesc}
 
-Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, vous pouvez connecter le cluster à un VLAN public. Le VLAN public détermine l'adresse IP publique qui est affectée à chaque noeud worker, ce qui offre à chaque noeud worker une interface réseau publique. Les services de mise en réseau public se connectent à cette interface de réseau public en fournissant à votre application une adresse IP publique et, le cas échéant, une URL publique. Lorsqu'une application est exposée au public, quiconque disposant de l'adresse IP de service public ou de l'URL que vous avez configurée pour votre application peut envoyer une demande à cette dernière. C'est pourquoi, il est recommandé d'exposer le moins d'applications possible. Exposez uniquement une application au public lorsque vous êtes prêt à accepter du trafic provenant de clients ou d'utilisateurs Web externes.
+Lorsque vous créez un cluster Kubernetes dans {{site.data.keyword.containerlong_notm}}, vous pouvez connecter le cluster à un VLAN public. Le VLAN public détermine l'adresse IP publique qui est affectée à chaque noeud worker, ce qui offre à chaque noeud worker une interface réseau publique. Les services de mise en réseau public se connectent à cette interface de réseau public en fournissant à votre application une adresse IP publique et, le cas échéant, une URL publique. Lorsqu'une application est exposée au public, quiconque disposant de l'adresse IP de service public ou de l'URL que vous avez configurée pour votre application peut envoyer une demande à cette dernière. C'est pourquoi il est recommandé d'exposer le moins d'applications possible. Exposez uniquement une application au public lorsque vous êtes prêt à accepter du trafic provenant de clients ou d'utilisateurs Web externes. 
 
 L'interface réseau publique des noeuds worker est protégée par des [paramètres de règles réseau Calico prédéfinis](/docs/containers?topic=containers-network_policies#default_policy) qui sont configurés sur tous les noeuds worker lors de la création du cluster. Par défaut, tout le trafic réseau sortant est autorisé pour tous les noeuds worker. Le trafic réseau entrant est bloqué à l'exception de quelques ports. Ces ports sont ouverts de sorte qu'IBM puisse surveiller le trafic réseau et installer automatiquement les mises à jour de sécurité pour le maître Kubernetes et que les connexions puissent être établies avec les services NodePort, LoadBalancer et Ingress. Pour plus d'informations sur ces règles, y compris comment les modifier, voir [Règles réseau](/docs/containers?topic=containers-network_policies#network_policies).
 
-Pour rendre une application accessible au public sur Internet, choisissez un modèle de déploiement d'équilibrage de charge pour votre application afin de créer des services NodePort, LoadBalancer ou Ingress publics.
+Pour rendre une application accessible au public sur Internet, choisissez un modèle de déploiement d'équilibrage de charge pour votre application afin de créer des services NodePort, LoadBalancer ou Ingress publics. 
 
 ### Choix d'un modèle de déploiement pour équilibrage de charge externe public
 {: #pattern_public}
@@ -153,7 +154,7 @@ Lorsqu'il s'agit d'exposer une application à un service réseau, vous avec le c
 <th>Nom</th>
 <th>Méthode d'équilibrage de charge</th>
 <th>Cas d'utilisation</th>
-<th>implémentation</th>
+<th>Implémentation</th>
 </thead>
 <tbody>
 <tr>
@@ -164,28 +165,28 @@ Lorsqu'il s'agit d'exposer une application à un service réseau, vous avec le c
 </tr><tr>
 <td>NLB v1.0 (+ nom d'hôte)</td>
 <td>Equilibrage de charge de base qui expose l'application avec une adresse IP ou un nom d'hôte.</td>
-<td>Exposer rapidement une application au public avec une adresse IP ou un nom d'hôte qui prend en charge l'arrêt SSL.</td>
-<td><ol><li>Créez un équilibreur de charge de réseau public (NLB) 1.0 dans un cluster [à zone unique](/docs/containers?topic=containers-loadbalancer#lb_config) ou[à zones multiples](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Le cas échéant, [enregistrez](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nom d'hôte et des diagnostics d'intégrité.</li></ol></td>
+<td>Exposer rapidement une application au public avec une adresse IP ou un nom d'hôte qui prend en charge l'arrêt SSL. </td>
+<td><ol><li>Créez un équilibreur de charge de réseau public (NLB) 1.0 dans un cluster [à zone unique](/docs/containers?topic=containers-loadbalancer#lb_config) ou[à zones multiples](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Le cas échéant, [enregistrez](/docs/containers?topic=containers-loadbalancer_hostname) un nom d'hôte et des diagnostics d'intégrité.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ nom d'hôte)</td>
 <td>Equilibrage de charge DSR qui expose l'application avec une adresse IP ou un nom d'hôte.</td>
 <td>Exposer au public une application qui peut recevoir des niveaux élevés de trafic avec une adresse IP ou un nom d'hôte qui prend en charge l'arrêt SSL.</td>
-<td><ol><li>Effectuez les [tâches prérequises](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Créez un NLB 2.0 public dans un cluster [à zone unique](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) ou [à zones multiples](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config).</li><li>Le cas échéant, [enregistrez](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nom d'hôte et des diagnostics d'intégrité.</li></ol></td>
+<td><ol><li>Effectuez les [tâches prérequises](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Créez un NLB 2.0 public dans un cluster [à zone unique](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) ou [à zones multiples](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config).</li><li>Le cas échéant, [enregistrez](/docs/containers?topic=containers-loadbalancer_hostname) un nom d'hôte et des diagnostics d'intégrité.</li></ol></td>
 </tr><tr>
 <td>Istio + nom d'hôte NLB</td>
 <td>Equilibrage de charge de base qui expose l'application avec un nom d'hôte et utilise les règles de routage Istio.</td>
 <td>Implémenter des règles de post-routage Istio, par exemple des règles pour différentes versions d'un microservice d'applications et exposer une application gérée par Istio avec un nom d'hôte public.</li></ol></td>
-<td><ol><li>Installez le [module complémentaire Istio géré](/docs/containers?topic=containers-istio#istio_install).</li><li>Incluez votre application dans le [maillage de service Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Enregistrez l'équilibreur de charge Istio par défaut avec [un nom d'hôte](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
+<td><ol><li>Installez le [module complémentaire Istio géré](/docs/containers?topic=containers-istio#istio_install).</li><li>Incluez votre application dans le [maillage de service Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Enregistrez l'équilibreur de charge Istio par défaut avec [un nom d'hôte](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
 </tr><tr>
 <td>ALB Ingress</td>
 <td>Equilibrage de charge HTTPS qui expose l'application avec un nom d'hôte et utilise des règles de routage personnalisées.</td>
 <td>Implémenter des règles de routage personnalisées et l'arrêt SSL pour plusieurs applications.</td>
 <td><ol><li>Créez un [service Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) pour l'ALB public.</li><li>Personnalisez des règles de routage ALB avec des [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
 </tr><tr>
-<td>Utilisation de votre propre contrôleur Ingress + nom d'hôte ALB</td>
+<td>Utilisation de votre propre contrôleur Ingress + nom d'hôte ALB ou NLB</td>
 <td>Equilibrage de charge HTTPS avec un contrôleur Ingress personnalisé qui expose l'application avec un nom d'hôte ALB fourni par IBM et utilise des règles de routage personnalisées.</td>
 <td>Implémenter des règles de routage personnalisées ou d'autres exigences spécifiques pour le réglage personnalisé pour plusieurs applications.</td>
-<td>[Déployez votre contrôleur Ingress et optimisez le nom d'hôte ALB fourni par IBM](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Déployee votre contrôleur Ingress et optimisez le nom d'hôte fourni par IBM](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>
@@ -206,10 +207,10 @@ Lorsque vous déployez une application dans un cluster Kubernetes dans {{site.da
 
 A titre d'exemple, admettons que vous ayez créé un équilibreur de charge de réseau privé pour votre application. Cet équilibreur de charge de réseau privé est accessible à :
 * Tout pod figurant dans le même cluster.
-* Tout pod figurant dans n'importe quel cluster dans le même compte {{site.data.keyword.Bluemix_notm}}.
-* Si la fonction [VRF ou Spanning VLAN](/docs/containers?topic=containers-subnets#basics_segmentation) est activée, tout système connecté à n'importe lequel des VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}}. 
-* Si vous n'êtes pas dans le compte {{site.data.keyword.Bluemix_notm}} mais toujours derrière le pare-feu de l'entreprise, tout système via une connexion VPN au sous-réseau sur lequel figure l'adresse IP de l'équilibreur de charge de réseau.
-* Si vous êtes dans un autre compte {{site.data.keyword.Bluemix_notm}}, tout système via une connexion VPN au sous-réseau sur lequel figure l'adresse IP de l'équilibreur de charge de réseau.
+* Tout pod figurant dans n'importe quel cluster dans le même compte {{site.data.keyword.cloud_notm}}.
+* Si la fonction [VRF ou Spanning VLAN](/docs/containers?topic=containers-subnets#basics_segmentation) est activée, tout système connecté à n'importe lequel des VLAN privés dans le même compte {{site.data.keyword.cloud_notm}}.
+* Si vous n'êtes pas dans le compte {{site.data.keyword.cloud_notm}} mais toujours derrière le pare-feu de l'entreprise, tout système via une connexion VPN au sous-réseau sur lequel figure l'adresse IP de l'équilibreur de charge de réseau.
+* Si vous êtes dans un autre compte {{site.data.keyword.cloud_notm}}, tout système via une connexion VPN au sous-réseau sur lequel figure l'adresse IP de l'équilibreur de charge de réseau.
 
 Pour rendre une application disponible sur un réseau privé uniquement, choisissez un modèle de déploiement d'équilibrage de charge basé sur la configuration VLAN de votre cluster :
 * [Configuration de VLAN public et privé](#private_both_vlans)
@@ -227,7 +228,7 @@ Etant donné que les règles réseau Calico par défaut autorisent le trafic pub
 
 Découvrez les modèles de déploiement d'équilibrage de charge suivants pour un réseau privé :
 
-|Nom|Méthode d'équilibrage de charge|Cas d'utilisation|implémentation|
+|Nom|Méthode d'équilibrage de charge|Cas d'utilisation|Implémentation|
 |----|---------------------|--------|--------------|
 |NodePort|Port sur un noeud worker qui expose l'application sur l'adresse IP privée du noeud worker.|Tester l'accès privé sur une application ou fournir un accès pendant une courte période.|<ol><li>[Créez un service NodePort](/docs/containers?topic=containers-nodeport).</li><li>Un service NodePort ouvre un port sur un noeud worker via à la fois l'adresse IP privée et l'adresse IP publique du noeud worker. Vous devez utiliser une [règle réseau Calico preDNAT](/docs/containers?topic=containers-network_policies#block_ingress) pour bloquer le trafic vers les ports de noeud publics.</li></ol>|
 |NLB v1.0|Equilibrage de charge de base qui expose l'application avec une adresse IP privée.|Exposer rapidement une application à un réseau privé avec une adresse IP privée.|<ol><li>[Créez un service NLB privé](/docs/containers?topic=containers-loadbalancer).</li><li>Un service d'équilibreur de charge avec une adresse IP privée portable dispose toujours d'un port de noeud public ouvert sur chaque noeud worker. Créez une [règle réseau Calico preDNAT](/docs/containers?topic=containers-network_policies#block_ingress) pour bloquer le trafic vers les ports de noeud publics.</li></ol>|
@@ -248,7 +249,7 @@ Si votre cluster est connecté à un VLAN privé uniquement et que vous permette
 
 Découvrez les modèles de déploiement d'équilibrage de charge suivants pour un réseau privé :
 
-|Nom|Méthode d'équilibrage de charge|Cas d'utilisation|implémentation|
+|Nom|Méthode d'équilibrage de charge|Cas d'utilisation|Implémentation|
 |----|---------------------|--------|--------------|
 |NodePort|Port sur un noeud worker qui expose l'application sur l'adresse IP privée du noeud worker.|Tester l'accès privé sur une application ou fournir un accès pendant une courte période.|<ol><li>[Créez un service NodePort](/docs/containers?topic=containers-nodeport).</li><li>Dans votre pare-feu privé, ouvrez le port que vous avez configuré lorsque vous avez déployé le service sur les adresses IP privées pour tous les noeuds worker vers lesquels autoriser le trafic. Pour identifier le port, exécutez la commande `kubectl get svc`. Le port est compris dans une plage de 20000 à 32000.</li></ol>|
 |NLB v1.0|Equilibrage de charge de base qui expose l'application avec une adresse IP privée.|Exposer rapidement une application à un réseau privé avec une adresse IP privée.|<ol><li>[Créez un service NLB privé](/docs/containers?topic=containers-loadbalancer).</li><li>Dans votre pare-feu privé, ouvrez le port que vous avez configuré lorsque vous avez déployé le service en indiquant l'adresse IP privée du service d'équilibreur de charge de réseau.</li></ol>|

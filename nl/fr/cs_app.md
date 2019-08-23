@@ -2,7 +2,6 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -46,7 +45,7 @@ Découvrez les étapes générales de déploiement d'applications en cliquant su
 ## Planification de l'exécution d'applications dans les clusters
 {: #plan_apps}
 
-Avant de déployer une application dans un cluster {{site.data.keyword.containerlong_notm}}, déterminez de quelle manière vous souhaitez configurer votre application pour qu'elle soit accessible correctement et puisse s'intégrer à d'autres services dans {{site.data.keyword.Bluemix_notm}}.
+Avant de déployer une application dans un cluster {{site.data.keyword.containerlong_notm}}, déterminez de quelle manière vous souhaitez configurer votre application pour qu'elle soit accessible correctement et puisse s'intégrer à d'autres services dans {{site.data.keyword.cloud_notm}}.
 {:shortdesc}
 
 ### Quel type d'objets Kubernetes puis-je créer pour mon application ?
@@ -101,12 +100,12 @@ Ces deux ressources définissent des paires clé-valeur, mais vous les utilisez 
 <li><strong>Argument de ligne de commande</strong> : définissez l'argument de ligne de commande utilisé dans une spécification de conteneur.</li></ul></dd>
 
 <dt>Secret</dt>
-<dd>Fournit les informations sensibles suivantes relatives à vos charges de travail. D'autres utilisateurs du cluster peuvent avoir accès à la valeur confidentielle (secret), donc n'oubliez pas que les informations qu'elle contient peuvent être partagées avec ces utilisateurs.
-<ul><li><strong>Informations identifiant la personne (PII)</strong> : stockez les informations sensibles, telles que les adresses e-mail ou d'autres types d'informations requises pour la conformité de l'entreprise ou pour la réglementation officielle dans les valeurs confidentielles (secret).</li>
-<li><strong>Données d'identification</strong> : insérez les données d'identification, telles que les mots de passe, les clés et les jetons dans une valeur confidentielle (secret) pour réduire le risque d'exposition accidentelle. Par exemple, lorsque vous [liez un service](/docs/containers?topic=containers-service-binding#bind-services) à votre cluster, les données d'identification sont stockées dans une valeur confidentielle (secret).</li></ul></dd>
+<dd>Fournit les informations sensibles suivantes relatives à vos charges de travail. D'autres utilisateurs du cluster peuvent avoir accès au secret, donc n'oubliez pas que les informations qu'elle contient peuvent être partagées avec ces utilisateurs.
+<ul><li><strong>Informations identifiant la personne (PII)</strong> : stockez les informations sensibles, telles que les adresses e-mail ou d'autres types d'informations requises pour la conformité de l'entreprise ou pour la réglementation officielle dans les secrets. </li>
+<li><strong>Données d'identification</strong> : insérez les données d'identification, telles que les mots de passe, les clés et les jetons dans un secret pour réduire le risque d'exposition accidentelle. Par exemple, lorsque vous [liez un service](/docs/containers?topic=containers-service-binding#bind-services) à votre cluster, les données d'identification sont stockées dans un secret. </li></ul></dd>
 </dl>
 
-Vous voulez sécuriser davantage vos valeurs confidentielles ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les valeurs confidentielles qu'elles soient nouvelles ou existantes.
+Vous voulez sécuriser davantage vos secrets ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les secrets qu'ils soient nouveaux ou existants.
 {: tip}
 
 ### Comment ajouter des services IBM, tels que Watson, à mon application ?
@@ -131,7 +130,7 @@ Pour exposer votre application au public, vous disposez de différentes options 
 *  **Cluster standard de VLAN privé uniquement** : vous pouvez exposer votre application en utilisant un [service NodePort, LoadBalancer ou Ingress](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). Vous devez également ouvrir le port de l'adresse IP privée du service dans votre pare-feu.
 
 ### Après avoir déployé mon application, comment en surveiller l'état de santé ?
-Vous pouvez configurer la [consignation et la surveillance](/docs/containers?topic=containers-health#health) {{site.data.keyword.Bluemix_notm}} pour votre cluster. Vous pouvez également choisir d'intégrer un [service de consignation ou de surveillance](/docs/containers?topic=containers-supported_integrations#health_services) tiers.
+Vous pouvez configurer la [consignation et la surveillance](/docs/containers?topic=containers-health#health) {{site.data.keyword.cloud_notm}} pour votre cluster. Vous pouvez également choisir d'intégrer un [service de consignation ou de surveillance](/docs/containers?topic=containers-supported_integrations#health_services) tiers.
 {: shortdesc}
 
 ### Comment maintenir mon application à jour ?
@@ -144,7 +143,7 @@ Si vous souhaitez gérer les mises à jour de votre application, voir [Gestion d
 Les administrateurs de compte et de cluster peuvent contrôler l'accès à de nombreux niveaux distincts : le cluster, l'espace de nom Kubernetes, le pod et le conteneur.
 {: shortdesc}
 
-Avec {{site.data.keyword.Bluemix_notm}} IAM, vous pouvez affecter des droits à des utilisateurs individuels, des groupes ou des comptes de service au niveau de l'instance du cluster.  Vous pouvez davantage restreindre l'accès au cluster en limitant les utilisateurs à certains espaces de nom au sein du cluster. Pour plus d'informations, voir [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users).
+Avec {{site.data.keyword.cloud_notm}} IAM, vous pouvez affecter des droits à des utilisateurs individuels, des groupes ou des comptes de service au niveau de l'instance du cluster.  Vous pouvez davantage restreindre l'accès au cluster en limitant les utilisateurs à certains espaces de nom au sein du cluster. Pour plus d'informations, voir [Affectation d'accès au cluster](/docs/containers?topic=containers-users#users).
 
 Pour contrôler l'accès au niveau du pod, vous pouvez [configurer des politiques de sécurité de pod avec Kubernetes RBAC](/docs/containers?topic=containers-psp#psp).
 
@@ -202,7 +201,7 @@ Tenez compte des options suivantes pour une disponibilité accrue de votre appli
   <p><strong>Astuce</strong> : dans les clusters à zones multiples, tâchez de maintenir la capacité de vos noeuds worker à 50 % par zone de manière à disposer d'une capacité disponible suffisante pour protéger votre cluster en cas de défaillance de zone.</p>
   <p><strong>Comment faire pour répartir mon application dans des régions ?</strong></br>Pour protéger votre application en cas de défaillance de zone, créez un deuxième cluster dans une autre région, [configurez un équilibreur de charge global](/docs/containers?topic=containers-ha_clusters#multiple_clusters) pour connecter vos clusters, et utilisez un fichier YAML de déploiement pour déployer un jeu de répliques dupliqué avec [anti-affinité de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) pour votre application.</p>
   <p><strong>Que faire si mes applications nécessitent du stockage persistant ?</strong></p>
-  <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about).</p></dd>
+  <p>Utilisez un service de cloud, comme par exemple [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) ou [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage).</p></dd>
 </dl>
 
 ## Spécification des exigences relatives à votre application dans votre fichier YAML
@@ -242,7 +241,7 @@ metadata:
 
 <dt id="label">Libellés</dt>
   <dd><p>Avec les [libellés](/docs/containers?topic=containers-strategy#deploy_organize), vous pouvez marquer différents types de ressources dans votre cluster avec la même paire clé-valeur (`key: value`). Vous pouvez ensuite indiquer le sélecteur pour correspondre au libellé de sorte que vous puissiez créer ces autres ressources par dessus. Si vous envisagez d'exposer votre application au public, vous devez utiliser un libellé qui corresponde au sélecteur que vous spécifiez dans le service. Dans l'exemple, la spécification (spec) de déploiement utilise un modèle qui correspond au libellé `app: wasliberty`.</p>
-  <p>Vous pouvez extraire des objets labellisés dans votre cluster, pour voir des composants `staging` ou `production`. Par exemple, répertoriez toutes les ressources avec le libellé `env: production` sur tous les espaces de nom dans le cluster. <strong>Remarque :</strong> vous devez accéder à tous les espaces de nom pour exécuter cette commande. <pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
+  <p>Vous pouvez extraire des objets labellisés dans votre cluster, pour voir des composants `staging` ou `production`. Par exemple, répertoriez toutes les ressources avec le libellé `env: production` sur tous les espaces de nom dans le cluster. <strong>Remarque :</strong> vous devez accéder à tous les espaces de nom pour exécuter cette commande.<pre class="pre"><code>kubectl get all -l env=production --all-namespaces</code></pre></p>
   <ul><li>Pour plus d'informations sur les libellés, voir la [documentation Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).</li>
   <li>Pour appliquer des libellés à des noeuds worker, [créez votre pool de noeuds worker](/docs/containers?topic=containers-add_workers#add_pool) avec des libellés ou [mettez à jour un pool de noeuds worker existant](/docs/containers?topic=containers-add_workers#worker_pool_labels)</li>
   <li>Pour obtenir un exemple plus détaillé, voir [Déploiement d'applications sur des noeuds worker spécifiques à l'aide de libellés](/docs/containers?topic=containers-app#node_affinity).</li></ul>
@@ -296,7 +295,7 @@ template:
 
 <dt id="resourcereq">Demandes et limites de ressources</dt>
   <dd><p>En tant qu'administrateur de cluster, vous pouvez vérifier que toutes les équipes partageant un cluster ne consomment pas plus que leur juste part de ressources de calcul (mémoire et processeur) en créant un [objet <code>ResourceQuota</code> ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) pour chaque espace de nom Kubernetes dans le cluster. Si l'administrateur du cluster définit un quota de ressources de calcul, chaque conteneur dans le modèle de déploiement doit spécifier des demandes et des limites de ressources pour la mémoire et le nombre de processeurs, autrement la création de pod échouera.</p>
-  <p><ol><li>Vérifiez si un quota de ressources est défini pour un espace de nom. <pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
+  <p><ol><li>Vérifiez si un quota de ressources est défini pour un espace de nom.<pre class="pre"><code>kubectl get quota --namespace=<namespace></code></pre></li>
   <li>Examinez quelles sont les limites du quota.<pre class="pre"><code>kubectl describe quota <quota_name> --namespace=<namespace></code></pre></li></ol></p>
   <p>Même si aucun quota de ressources n'est défini, vous pouvez inclure des demandes et des limites de ressources dans votre déploiement pour une meilleure gestion des ressources de noeuds worker.</p><p class="note">Si un conteneur dépasse ses limites, il peut être redémarré ou risque d'échouer. Si un conteneur dépasse une demande, son pod peut être expulsé si le noeud worker est à cours de la ressource demandée qui fait l'objet du dépassement. Pour plus d'informations sur le traitement des incidents, voir [Les pods ne parviennent pas à redémarrer à plusieurs reprises ou sont retirés de manière imprévisible](/docs/containers?topic=containers-cs_troubleshoot_clusters#pods_fail).</p>
   <p>**Demande** : quantité minimale de ressources réservée par le planificateur à l'usage du conteneur. Si cette quantité est égale à la limite, la demande est assurée. Si la quantité est inférieure à la limite, la demande est toujours assurée mais le planificateur peut utiliser le différentiel entre la demande et la limite pour compléter les ressources d'autres conteneurs.</p>
@@ -386,7 +385,7 @@ data:
   LANGUAGE: en</pre></code></p></dd>
 
   <dt id="secret">Objets Secret pour les variables d'environnement de conteneur</dt>
-  <dd><p>Les objets Secret fournissent des informations de configuration sensibles telles que des mots de passe pour vos charges de travail de déploiement. L'exemple suivant illustre comment référencer des valeurs de votre valeur confidentielle en tant que variables d'environnement dans la section de spécification (spec) de conteneurs de votre fichier YAML de déploiement. Vous pouvez également monter l'objet Secret en tant que volume. En référençant des valeurs à partir de votre objet Secret, vous pouvez découpler ces informations dans votre déploiement pour que votre application conteneurisée soit toujours portable.<ul><li>[Aidez-moi à déterminer si je dois utiliser un objet ConfigMap ou Secret pour les variables](#variables).</li>
+  <dd><p>Les objets Secret fournissent des informations de configuration sensibles telles que des mots de passe pour vos charges de travail de déploiement. L'exemple suivant illustre comment référencer des valeurs de votre secret en tant que variables d'environnement dans la section de spécification (spec) de conteneurs de votre fichier YAML de déploiement. Vous pouvez également monter l'objet Secret en tant que volume. En référençant des valeurs à partir de votre objet Secret, vous pouvez découpler ces informations dans votre déploiement pour que votre application conteneurisée soit toujours portable.<ul><li>[Aidez-moi à déterminer si je dois utiliser un objet ConfigMap ou Secret pour les variables](#variables).</li>
   <li>Pour plus d'informations, voir [Comprendre dans quels cas utiliser des objets Secret](/docs/containers?topic=containers-encryption#secrets).</li></ul></p>
   <p><pre class="codeblock"><code>apiVersion: apps/v1
   kind: Deployment
@@ -426,7 +425,7 @@ data:
     password: cGFzc3dvcmQ=</pre></code></p></dd>
 
 <dt id="pv">Volumes persistants pour le stockage de conteneur</dt>
-<dd><p>Les volumes persistants (PV) interagissent avec le stockage physique pour offrir un stockage de données persistant pour vos charges de travail de conteneur. L'exemple suivant illustre comment ajouter du stockage persistant à votre application. Pour mettre à disposition du stockage persistant, vous créez une réservation de volume persistant (PVC) pour décrire le type et la taille du stockage de fichiers dont vous voulez disposer. Après que vous avez créé la PVC, le volume persistant et le stockage physique sont automatiquement créés à l'aide du [provisionnement dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). En référençant la PVC avec votre fichier YAML de déploiement, le stockage est automatiquement monté sur votre pod d'application. Lorsque le conteneur de votre pod écrit des données dans le répertoire du chemin de montage `/test`, les données sont stockées sur l'instance de stockage de fichiers NFS.</p><ul><li>Pour plus d'informations, voir [Description des concepts de base du stockage Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Pour connaître les options d'autres types de stockage que vous pouvez mettre à disposition, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
+<dd><p>Les volumes persistants (PV) interagissent avec le stockage physique pour offrir un stockage de données persistant pour vos charges de travail de conteneur. L'exemple suivant illustre comment ajouter du stockage persistant à votre application. Pour mettre à disposition du stockage persistant, vous créez une réservation de volume persistant (PVC) pour décrire le type et la taille du stockage de fichiers dont vous voulez disposer. Après que vous avez créé la PVC, le volume persistant et le stockage physique sont automatiquement créés à l'aide de la [mise à disposition dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning). En référençant la PVC avec votre fichier YAML de déploiement, le stockage est automatiquement monté sur votre pod d'application. Lorsque le conteneur de votre pod écrit des données dans le répertoire du chemin de montage `/test`, les données sont stockées sur l'instance de stockage de fichiers NFS.</p><ul><li>Pour plus d'informations, voir [Description des concepts de base du stockage Kubernetes](/docs/containers?topic=containers-kube_concepts#kube_concepts).</li><li>Pour connaître les options d'autres types de stockage que vous pouvez mettre à disposition, voir [Planification de stockage persistant à haute disponibilité](/docs/containers?topic=containers-storage_planning#storage_planning).</li></ul>
 <p><pre class="codeblock"><code>apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -631,13 +630,13 @@ Dans le cadre d'une application native cloud [à douze facteurs ![Icône de lien
 Par exemple, vous pouvez configurer un fichier YAML `kustomization` de base pour déclarer des objets Kubernetes, tels que des déploiements et des PVC qui sont partagés dans vos environnements de développement, de test et de production. Ensuite, vous pouvez configurer des fichiers YAML `kustomization` distincts qui ont des configurations personnalisées pour chaque environnement, par exemple, davantage de répliques en environnement de production qu'en environnement de test. Ces fichiers YAML personnalisés peuvent ensuite chevaucher ou être utilisés pour générer le fichier YAML de base partagé de manière à vous permettre de gérer des environnements qui sont pour la plupart identiques, à l'exception de quelques différences de configuration de chevauchement dont vous contrôlez la source. Pour plus d'informations sur Kustomize, par exemple, un glossaire ou des foires aux questions, voir la [documentation Kustomize ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-sigs/kustomize/tree/master/docs).
 
 Avant de commencer :
-*   [Créez](/docs/containers?topic=containers-clusters#clusters_ui) ou [mettez à jour](/docs/containers?topic=containers-update) un cluster qui exécute Kubernetes version 1.14 ou ultérieure. 
-*   Assurez-vous que votre [version `kubectl` ](/docs/containers?topic=containers-cs_cli_install#kubectl) correspond à la version de votre cluster. 
+*   [Créez](/docs/containers?topic=containers-clusters#clusters_ui) ou [mettez à jour](/docs/containers?topic=containers-update) un cluster qui exécute Kubernetes version 1.14 ou ultérieure.
+*   Assurez-vous que votre [version `kubectl` ](/docs/containers?topic=containers-cs_cli_install#kubectl) correspond à la version de votre cluster.
 *   [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Pour configurer des fichiers de configuration avec Kustomize :
 1.  [Installez l'outil `kustomize` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/INSTALL.md).
-    *   Pour MacOS, vous pouvez utiliser le gestionnaire de package `brew`.
+    *   Pour macOS, vous pouvez utiliser le gestionnaire de package `brew`.
         ```
         brew install kustomize
         ```
@@ -660,7 +659,7 @@ Pour configurer des fichiers de configuration avec Kustomize :
     mkdir -p ~/<my_app>/overlay/prod
     ```
     {: pre}
-    
+
     Exemple de structure de référentiels :
     ```
     .
@@ -670,14 +669,14 @@ Pour configurer des fichiers de configuration avec Kustomize :
         └── staging
     ```
     {: screen}
-4.  Configurez le référentiel `base`. 
+4.  Configurez le référentiel `base`.
     1.  Accédez au référentiel base.
         ```
         cd ~/<my_app>/base
         ```
         {: pre}
-    2.  Créez un ensemble initial de fichiers YAML de configuration Kubernetes pour votre déploiement d'application. Vous pouvez utiliser l'[exemple de fichier YAML](#yaml-example) `wasliberty` pour créer un déploiement, un service, un objet ConfigMap et une réservation de volume persistant. 
-    3.  Créez un fichier [`kustomization` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) qui spécifie la configuration de base à appliquer aux environnements. Le fichier `kustomization` doit inclure la liste de fichiers YAML de configuration de ressource Kubernetes qui sont stockés dans le même référentiel `base`. Dans le fichier `kustomization`, vous pouvez également ajouter des configurations qui s'appliquent à tous les fichiers YAML de ressource dans le référentiel de base, par exemple, un préfixe ou un suffixe qui est ajouté à tous les noms de ressource, un libellé, l'espace de nom existant dans lequel les ressources sont créées, des valeurs confidentielles, des objets ConfigMap, etc.
+    2.  Créez un ensemble initial de fichiers YAML de configuration Kubernetes pour votre déploiement d'application. Vous pouvez utiliser l'[exemple de fichier YAML](#yaml-example) `wasliberty` pour créer un déploiement, un service, un objet ConfigMap et une réservation de volume persistant.
+    3.  Créez un fichier [`kustomization` ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/kustomization.yaml) qui spécifie la configuration de base à appliquer aux environnements. Le fichier `kustomization` doit inclure la liste de fichiers YAML de configuration de ressource Kubernetes qui sont stockés dans le même référentiel `base`. Dans le fichier `kustomization`, vous pouvez également ajouter des configurations qui s'appliquent à tous les fichiers YAML de ressource dans le référentiel de base, par exemple, un préfixe ou un suffixe qui est ajouté à tous les noms de ressource, un libellé, l'espace de nom existant dans lequel les ressources sont créées, des secrets, des objets ConfigMap, etc.
         ```
         apiVersion: kustomize.config.k8s.io/v1beta1
         kind: Kustomization
@@ -694,10 +693,10 @@ Pour configurer des fichiers de configuration avec Kustomize :
         - secret.yaml
         ```
         {: codeblock}
-        
+
         Les noms des fichiers YAML `resource` doivent correspondre aux noms des autres fichiers dans le référentiel `base`. Vous pouvez inclure plusieurs configurations dans le même fichier, mais dans l'exemple, les configurations sont des fichiers distincts, par exemple, `deployment.yaml`, `service.yaml` et `pvc.yaml`.
-        
-    4.  Générez vos fichiers YAML resource avec les configurations que vous avez définies dans le fichier YAML de base `kustomization`. Les ressources sont générées en combinant les configurations dans les fichiers YAML `kustomization` et resource. Les fichiers YAML combinés sont renvoyés dans `stdout` dans la sortie de terminal. Utilisez cette même commande pour générer les modifications ultérieures que vous apportez au fichier YAML `kustomization`, telles que l'ajout d'un nouveau libellé.
+
+    4.  Générez vos fichiers YAML resource avec les configurations que vous avez définies dans le fichier YAML de base `kustomization`. Les ressources sont générées en combinant les configurations dans les fichiers YAML `kustomization` et resource. Les fichiers YAML combinés sont renvoyés dans `stdout` dans la sortie de terminal. Utilisez cette même commande pour générer les modifications ultérieures que vous apportez au fichier YAML `kustomization`, telles que l'ajout d'un libellé.
         ```
         kustomize build
         ```
@@ -732,15 +731,15 @@ Pour configurer des fichiers de configuration avec Kustomize :
         </tr>
         <tr>
         <td><code>commonLabels</code></td>
-        <td>Ajoutez des libellés qui sont uniques aux objets de préproduction, par exemple, l'environnement de préproduction et l'équipe responsable. </td>
+        <td>Ajoutez des libellés qui sont uniques aux objets de préproduction, par exemple, l'environnement de préproduction et l'équipe responsable.</td>
         </tr>
         <tr>
         <td><code>bases</code></td>
-        <td>Ajoutez un chemin relatif à un répertoire ou une URL vers un référentiel distant qui contient un fichier `kustomization` base. Dans cet exemple, le chemin relatif pointe vers le fichier `kustomization` base dans le référentiel `base` que vous avez créé précédemment. Cette zone est obligatoire pour un fichier `kustomization` overlay. </td>
+        <td>Ajoutez un chemin relatif à un répertoire ou une URL vers un référentiel distant qui contient un fichier `kustomization` base. Dans cet exemple, le chemin relatif pointe vers le fichier `kustomization` base dans le référentiel `base` que vous avez créé précédemment. Cette zone est obligatoire pour un fichier `kustomization` overlay.</td>
         </tr>
         <tr>
         <td><code>patchesStrategicMerge</code></td>
-        <td>Répertoriez les fichiers YAML de configuration ressource que vous souhaitez fusionner dans le fichier `kustomization` base. Vous devez également ajouter ces fichiers au même référentiel que le fichier `kustomization`, par exemple, `overlay/staging`. Ces fichiers de configuration resource peuvent contenir de petites modifications qui sont fusionnées avec les fichiers de configuration base de même nom sous forme de correctif. La ressource récupère tous les composants qui se trouvent dans le fichier de configuration `base`, plus les composants supplémentaires que vous spécifiez dans le fichier de configuration `overlay`. <br><br>Si la configuration est un nouveau fichier qui ne se trouve pas dans la  base, vous devez également ajouter le nom de fichier à la zone `resources`. </td>
+        <td>Répertoriez les fichiers YAML de configuration ressource que vous souhaitez fusionner dans le fichier `kustomization` base. Vous devez également ajouter ces fichiers au même référentiel que le fichier `kustomization`, par exemple, `overlay/staging`. Ces fichiers de configuration resource peuvent contenir de petites modifications qui sont fusionnées avec les fichiers de configuration base de même nom sous forme de correctif. La ressource récupère tous les composants qui se trouvent dans le fichier de configuration `base`, plus les composants supplémentaires que vous spécifiez dans le fichier de configuration `overlay`.<br><br>Si la configuration est un nouveau fichier qui ne se trouve pas dans la  base, vous devez également ajouter le nom de fichier à la zone `resources`.</td>
         </tr>
         <tr>
         <td><code>resources</code></td>
@@ -756,7 +755,7 @@ Pour configurer des fichiers de configuration avec Kustomize :
         kustomize build overlay/staging
         ```
         {: pre}
-    3.  Répétez ces étapes pour créer votre fichier `kustomization` prod/overlay et d'autres fichiers YAML de configuration. Par exemple, vous pouvez augmenter le nombre de répliques dans votre fichier `deployment.yaml` de sorte que votre environnement de production puisse gérer davantage de demandes utilisateur. 
+    3.  Répétez ces étapes pour créer votre fichier `kustomization` prod/overlay et d'autres fichiers YAML de configuration. Par exemple, vous pouvez augmenter le nombre de répliques dans votre fichier `deployment.yaml` de sorte que votre environnement de production puisse gérer davantage de demandes utilisateur.
     4.  Passez en revue votre structure de référentiel `kustomize` pour vous assurer qu'elle contient tous les fichiers de configuration YAML dont vous avez besoin. La structure peut se présenter comme suit :
         ```
         ├── base
@@ -777,7 +776,7 @@ Pour configurer des fichiers de configuration avec Kustomize :
                 └── new_staging_resource.yaml
         ```
         {: screen}
-6.  Appliquez les ressources Kubernetes pour l'environnement que vous souhaitez déployer. L'exemple ci-après utilise le référentiel staging. 
+6.  Appliquez les ressources Kubernetes pour l'environnement que vous souhaitez déployer. L'exemple ci-après utilise le référentiel staging.
     1.  Accédez au répertoire overlay/staging. Si vous n'avez pas créé vos ressources lors de l'étape précédente, créez-les maintenant.
         ```
         cd overlay/staging && kustomize build
@@ -823,7 +822,7 @@ Pour configurer des fichiers de configuration avec Kustomize :
         persistentvolumeclaim/staging-kustomtest-pvc-v2   Pending                                      ibmc-file-bronze   90s
         ```
         {: screen}
-    4.  Répétez ces étapes pour chaque environnement que vous souhaitez créer. 
+    4.  Répétez ces étapes pour chaque environnement que vous souhaitez créer.
 7.  **Facultatif** : nettoyez votre environnement en retirant toutes les ressources que vous avez appliquées avec Kustomize.
     ```
     kubectl delete -k <directory>
@@ -843,11 +842,14 @@ Pour configurer des fichiers de configuration avec Kustomize :
 ## Lancement du tableau de bord Kubernetes
 {: #cli_dashboard}
 
-Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et les noeuds worker associés. [Dans la console {{site.data.keyword.Bluemix_notm}}](#db_gui), vous pouvez accéder au tableau de bord par simple clic sur un bouton. [Avec l'interface de ligne de commande (CLI)](#db_cli), vous pouvez accéder au tableau de bord ou utiliser les étapes d'un processus automatique, comme pour un pipeline CI/CD.
+Ouvrez un tableau de bord Kubernetes sur votre système local pour consulter des informations sur un cluster et les noeuds worker associés. [Dans la console {{site.data.keyword.cloud_notm}}](#db_gui), vous pouvez accéder au tableau de bord par simple clic sur un bouton. [Avec l'interface de ligne de commande (CLI)](#db_cli), vous pouvez accéder au tableau de bord ou utiliser les étapes d'un processus automatique, comme pour un pipeline CI/CD.
 {:shortdesc}
 
 Votre cluster comporte tellement de ressources et d'utilisateurs que votre tableau de bord Kubernetes est un peu lent ? Pour les clusters qui exécutent Kubernetes version 1.12 ou ultérieure, votre administrateur de cluster peut ajuster le déploiement de `kubernetes-dashboard` en exécutant la commande `kubectl -n kube-system scale deploy kubernetes-dashboard --replicas=3`.
 {: tip}
+
+Pour vérifier les journaux des pods d'application individuels, vous pouvez exécuter `kubectl logs <pod name>`. N'utilisez pas le tableau de bord Kubernetes pour diffuser les journaux de vos pods, car cela pourrait entraîner une interruption de l'accès au tableau de bord de Kubernetes.
+{: important}
 
 Avant de commencer :
 * Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes.
@@ -856,16 +858,15 @@ Avant de commencer :
 
 Vous pouvez utiliser le port par défaut ou définir votre propre port pour lancer le tableau de bord Kubernetes d'un cluster.
 
-**Lancement du tableau de bord Kubernetes à partir de la console {{site.data.keyword.Bluemix_notm}}**
+**Lancement du tableau de bord Kubernetes à partir de la console {{site.data.keyword.cloud_notm}}**
 {: #db_gui}
 
-1.  Connectez-vous à la [console{{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/).
+1.  Connectez-vous à la [console{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/). 
 2.  Dans la barre de menu, sélectionnez le compte que vous souhaitez utiliser.
 3.  Dans le menu ![Icône de menu](../icons/icon_hamburger.svg "Icône de menu"), cliquez sur **Kubernetes**.
 4.  Sur la page **Clusters**, cliquez sur le cluster auquel vous souhaitez accéder.
 5.  Sur la page des détails du cluster, cliquez sur le bouton **Tableau de bord Kubernetes**.
 
-</br>
 </br>
 
 **Lancement du tableau de bord Kubernetes à partir de l'interface de ligne de commande (CLI)**
@@ -1032,7 +1033,7 @@ Pour déployer des applications sur des noeuds worker spécifiques :
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.13.6_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.13.8_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1128,7 +1129,6 @@ Dans les étapes suivantes, vous apprendrez à déployer des charges de travail 
 
 Avant de commencer :
 * [Créez un type de machine GPU bare metal](/docs/containers?topic=containers-clusters#clusters_ui). Ce processus peut prendre plus d'un jour ouvrable.
-
 * Vérifiez que vous disposez d'un [rôle de service](/docs/containers?topic=containers-users#platform) qui vous octroie le rôle Kubernetes RBAC approprié pour travailler avec des ressources Kubernetes dans l'espace de nom.
 
 Pour exécuter une charge de travail sur une machine GPU :
@@ -1199,7 +1199,7 @@ Pour exécuter une charge de travail sur une machine GPU :
     </tr>
     <tr>
     <td><code>volumeMounts</code></td>
-    <td>Nom du volume monté sur le conteneur, par exemple <code>nvidia0</code>. Indiquez le chemin de montage (<code>mountPath</code>) du volume sur le conteneur. Dans cet exemple, le chemin <code>/usr/test</code> correspond au chemin utilisé dans la commande container du travail. </td>
+    <td>Nom du volume monté sur le conteneur, par exemple <code>nvidia0</code>. Indiquez le chemin de montage (<code>mountPath</code>) du volume sur le conteneur. Dans cet exemple, le chemin <code>/usr/test</code> correspond au chemin utilisé dans la commande container du travail.</td>
     </tr>
     <tr>
     <td><code> volumes</code></td>
@@ -1294,7 +1294,7 @@ Pour exécuter une charge de travail sur une machine GPU :
 Avec Kubernetes, vous pouvez activer la [mise à l'échelle automatique horizontale de pod ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) pour augmenter ou diminuer automatiquement le nombre d'instances de vos applications en fonction de l'UC.
 {:shortdesc}
 
-Vous recherchez des informations sur la mise à l'échelle des applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.Bluemix_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling%20-get-started). Vous voulez plutôt mettre à l'échelle vos noeuds worker à la place de vos pods ? Découvrez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca).
+Vous recherchez des informations sur la mise à l'échelle des applications Cloud Foundry ? Consultez [IBM - Mise à l'échelle automatique pour {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started). Vous voulez plutôt mettre à l'échelle vos noeuds worker à la place de vos pods ? Découvrez le [programme de mise à l'échelle automatique de cluster (cluster autoscaler)](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Avant de commencer :
@@ -1323,7 +1323,7 @@ Etapes :
     </tr>
     <tr>
     <td><code>--request=cpu</code></td>
-    <td>UC requise pour le conteneur, exprimée en milli-coeurs. Par exemple, <code>--requests=200m</code>.</td>
+    <td>UC requise pour le conteneur, exprimée en millicoeurs. Par exemple, <code>--requests=200m</code>.</td>
     </tr>
     <tr>
     <td><code>--expose</code></td>

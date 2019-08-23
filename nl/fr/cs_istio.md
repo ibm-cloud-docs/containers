@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 ---
 
@@ -20,14 +20,13 @@ lastupdated: "2019-06-11"
 {:preview: .preview}
 
 
-
 # Utilisation du module complémentaire Istio géré (bêta)
 {: #istio}
 
 Istio sur {{site.data.keyword.containerlong}} offre une installation transparente d'Istio, des mises à jour automatiques et la gestion du cycle de vie des composants du plan de contrôle Istio, ainsi que l'intégration aux outils de surveillance et de consignation de la plateforme.
 {: shortdesc}
 
-En un seul clic, vous pouvez obtenir tous les composants de base d'Istio, des fonctions de suivi, de surveillance et de visualisation supplémentaires, ainsi que le modèle opérationnel d'application BookInfo. Istio sur {{site.data.keyword.containerlong_notm}} est proposé en tant que module complémentaire géré, de sorte qu'{{site.data.keyword.Bluemix_notm}} puisse conserver automatiquement tous vos composants Istio à jour.
+En un seul clic, vous pouvez obtenir tous les composants de base d'Istio, des fonctions de suivi, de surveillance et de visualisation supplémentaires, ainsi que le modèle opérationnel d'application BookInfo. Istio sur {{site.data.keyword.containerlong_notm}} est proposé en tant que module complémentaire géré, de sorte qu'{{site.data.keyword.cloud_notm}} puisse conserver automatiquement tous vos composants Istio à jour.
 
 ## Description d'Istio sur {{site.data.keyword.containerlong_notm}}
 {: #istio_ov}
@@ -61,9 +60,9 @@ Le module complémentaire Istio géré est classifié en tant que fonction bêta
 Lorsque vous installez le module complémentaire Istio, les plans de contrôle et de données utilisent les réseaux locaux virtuels (VLAN) auxquels votre cluster est déjà connecté. Le trafic de la configuration circule sur le réseau privé au sein de votre cluster et ne nécessite pas l'ouverture de ports ou d'adresses supplémentaires dans votre pare-feu. Si vous exposez vos applications gérées par Istio avec une passerelle Istio, les demandes de trafic externe effectuées auprès des applications transitent via le VLAN public.
 
 **Comment fonctionne le processus de mise à jour ?**</br>
-La version Istio incluse dans le module complémentaire géré est testée par {{site.data.keyword.Bluemix_notm}} et approuvée en vue de son utilisation dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour vos composants Istio vers la version la plus récente d'Istio prise en charge par {{site.data.keyword.containerlong_notm}}, vous pouvez procéder comme indiqué dans la rubrique [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
+La version Istio incluse dans le module complémentaire géré est testée par {{site.data.keyword.cloud_notm}} et approuvée en vue de son utilisation dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour vos composants Istio vers la version la plus récente d'Istio prise en charge par {{site.data.keyword.containerlong_notm}}, vous pouvez procéder comme indiqué dans la rubrique [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
 
-Si vous devez utiliser la version la plus récente d'Istio ou personnaliser votre installation Istio, vous pouvez installer la version open source d'Istio en suivant la procédure indiquée dans le [tutoriel de démarrage rapide avec {{site.data.keyword.Bluemix_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
+Si vous devez utiliser la version la plus récente d'Istio ou personnaliser votre installation Istio, vous pouvez installer la version open source d'Istio en suivant la procédure indiquée dans le [tutoriel de démarrage rapide avec {{site.data.keyword.cloud_notm}} ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
 {: tip}
 
 **Y a-t-il des limitations ?** </br>
@@ -106,40 +105,55 @@ ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
 <br />
 
 
-## Installation d'Istio sur {{site.data.keyword.containerlong_notm}}
+## Installation des modules complémentaires Istio
 {: #istio_install}
 
 Installez les modules complémentaires gérés Istio dans un cluster existant.
 {: shortdesc}
 
 **Avant de commencer**</br>
-* Vérifiez que vous disposez du [rôle de service **Writer** ou **Manager** d'{{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) pour {{site.data.keyword.containerlong_notm}}.
+* Vérifiez que vous disposez du [rôle de service {{site.data.keyword.cloud_notm}} IAM **Auteur** ou **Responsable**](/docs/containers?topic=containers-users#platform) pour {{site.data.keyword.containerlong_notm}}. 
 * [Créez ou utilisez un cluster standard existant avec au moins trois noeuds worker ayant chacun 4 coeurs et 16 Go de mémoire (`b3c.4x16`) ou plus](/docs/containers?topic=containers-clusters#clusters_ui). En outre, le cluster et les noeuds worker doivent au moins exécuter la version minimale prise en charge de Kubernetes, que vous pouvez consulter en exécutant la commande `ibmcloud ks addon-versions --addon istio`.
-* [Ciblez l'interface CLI sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 * Si vous utilisez un cluster existant et que vous avez déjà installé Istio dans le cluster à l'aide de la charte Helm IBM ou via une autre méthode, [nettoyez cette installation Istio](#istio_uninstall_other).
 
-### Installation des modules complémentaires Istio dans l'interface de ligne de commande
+### Installation des modules complémentaires Istio gérés à partir de la console
+{: #istio_install_ui}
+
+1. Dans le [tableau de bord de votre cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/clusters), cliquez sur le nom du cluster sur lequel vous souhaitez installer les modules complémentaires Istio. 
+
+2. Cliquez sur l'onglet **Modules complémentaires**.
+
+3. Sur la carte Istio géré, cliquez sur **Installer**. 
+
+4. Cochez la case **Istio** et éventuellement les cases à cocher **Compléments Istio** et **Exemple d'Istio**. 
+
+5. Cliquez sur **Installer**.
+
+6. Sur la carte Istio géré, vérifiez que les modules complémentaires que vous avez activés sont répertoriés. 
+
+### Installation des modules complémentaires Istio gérés à partir de l'interface CLI
 {: #istio_install_cli}
 
-1. Activez le module complémentaire `istio`.
-  ```
-  ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+1. [Ciblez l'interface CLI sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Facultatif : activez le module complémentaire `istio-extras`.
-  ```
-  ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+2. Activez le module complémentaire `istio` et éventuellement les modules complémentaires `istio-extras` et `istio-sample-bookinfo`. 
+  * `istio` :
+    ```
+    ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+  * `istio-extras` :
+    ```
+    ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+  * `istio-sample-bookinfo` :
+    ```
+    ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-3. Facultatif : activez le module complémentaire `istio-sample-bookinfo`.
-  ```
-  ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
-
-4. Vérifiez que les modules complémentaires Istio gérés que vous avez installés sont activés dans ce cluster.
+3. Vérifiez que les modules complémentaires Istio gérés que vous avez installés sont activés dans ce cluster.
   ```
   ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
   ```
@@ -148,13 +162,13 @@ Installez les modules complémentaires gérés Istio dans un cluster existant.
   Exemple de sortie :
   ```
   Name                      Version
-  istio                     1.1.5
-  istio-extras              1.1.5
-  istio-sample-bookinfo     1.1.5
+  istio                     1.2.2
+  istio-extras              1.2.2
+  istio-sample-bookinfo     1.2.2
   ```
   {: screen}
 
-5. Vous pouvez également consulter les composants individuels de chaque module complémentaire dans votre cluster.
+4. Vous pouvez également consulter les composants individuels de chaque module complémentaire dans votre cluster.
   - Composants d'`istio` et `istio-extras` : vérifiez que les services Istio et les pods correspondants sont déployés.
     ```
     kubectl get svc -n istio-system
@@ -236,23 +250,6 @@ Installez les modules complémentaires gérés Istio dans un cluster existant.
     ```
     {: screen}
 
-### Installation des modules complémentaires Istio gérés dans l'interface utilisateur
-{: #istio_install_ui}
-
-1. Dans le [tableau de bord de votre cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/clusters), cliquez sur le nom d'un cluster.
-
-2. Cliquez sur l'onglet **Modules complémentaires**.
-
-3. Sur la carte Istio, cliquez sur **Installer**.
-
-4. La case à cocher **Istio** est déjà sélectionnée. Pour installer également les modules complémentaires Istio extras et l'application modèle BookInfo, sélectionnez les cases à cocher **Istio Extras** et **Istio Sample**.
-
-5. Cliquez sur **Installer**.
-
-6. Sur la carte Istio, vérifiez que les modules complémentaires que vous avez activés sont répertoriés.
-
-Vous pouvez ensuite tester les fonctions d'Istio en expérimentant le [modèle d'application BookInfo](#istio_bookinfo).
-
 <br />
 
 
@@ -274,6 +271,9 @@ Le microservice `reviews` comporte plusieurs versions :
 * `v3` appelle le microservice `ratings` et affiche le classement sous forme d'étoiles rouges de 1 à 5.
 
 Les fichiers YAML de déploiement de chacun de ces microservices sont modifiés pour les proxys sidecar Envoy soient pré-injectés sous forme de conteneurs dans les pods des microservices avant d'être déployés. Pour plus d'informations sur l'injection manuelle de composants sidecar, voir la [documentation Istio ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). L'application BookInfo est déjà exposé sur une adresse IP publique Ingress par une passerelle Istio. Bien que l'application BookInfo puisse vous aider à démarrer, cette application n'est pas conçue pour être utilisée en production.
+
+### Accès public à BookInfo
+{: #istio_access_bookinfo}
 
 Avant de commencer, [installez les modules complémentaires gérés `istio`, `istio-extras` et `istio-sample-bookinfo`](#istio_install) dans un cluster.
 
@@ -318,6 +318,40 @@ Avant de commencer, [installez les modules complémentaires gérés `istio`, `is
 
 4. Essayez d'actualiser la page plusieurs fois. Différentes versions de la section reviews affichent des étoiles rouges, des étoiles noires, ou pas d'étoiles.
 
+### Exposition de l'application BookInfo à l'aide d'un nom d'hôte fourni par IBM
+{: #istio_expose_bookinfo}
+
+Lorsque vous activez le module complémentaire BookInfo dans votre cluster, la passerelle Istio `bookinfo-gateway` est créée pour vous. Cette passerelle utilise le service virtuel et les règles de destination Istio pour configurer un équilibreur de charge, `istio-ingressgateway`, qui expose l'application BookInfo au public. Dans les étapes suivantes, vous allez créer un nom d'hôte pour l'adresse IP d'équilibreur de charge `istio-ingressgateway` par l'intermédiaire de laquelle vous pouvez accéder publiquement à l'application BookInfo.
+{: shortdesc}
+
+1. Enregistrez l'adresse IP de l'équilibreur de charge `istio-ingressgateway` en créant un nom d'hôte DNS. 
+  ```
+  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip $INGRESS_HOST
+  ```
+  {: pre}
+
+2. Vérifiez que le nom d'hôte est créé.
+  ```
+  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Exemple de sortie :
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+3. Dans un navigateur Web, ouvrez la page de produit BookInfo.
+  ```
+  http://<host_name>/productpage
+  ```
+  {: codeblock}
+
+4. Essayez d'actualiser la page plusieurs fois. Les demandes adressées à `http://<host_name>/productpage` sont reçues par l'ALB et transmises à l'équilibreur de charge de la passerelle Istio. Les différentes versions du microservice `reviews` sont toujours renvoyées de manière aléatoire car la passerelle Istio gère les règles de service virtuel et de routage de destination pour les microservices.
+
+
 ### Comprendre ce qui se passe
 {: #istio_bookinfo_understanding}
 
@@ -342,8 +376,6 @@ Le modèle d'application BookInfo illustre comment trois composants de gestion d
 </dl>
 
 </br>
-
-Vous pouvez ensuite [exposer BookInfo en utilisant le sous-domaine Ingress fourni par IBM](#istio_expose_bookinfo) ou [consigner, surveiller, suivre et visualiser](#istio_health) le maillage de services de l'application BookInfo.
 
 <br />
 
@@ -371,7 +403,9 @@ Avant de commencer, [installez les modules complémentaires gérés `istio` et `
 
 2. Pour ouvrir le tableau de bord Grafana d'Istio, accédez à l'URL suivante : http://localhost:3000/dashboard/db/istio-mesh-dashboard. Si vous avez installé le [module complémentaire BookInfo](#istio_bookinfo), le tableau de bord Istio affiche les métriques du trafic que vous avez généré lorsque vous avez actualisé plusieurs fois la page de produit. Pour plus d'informations sur l'utilisation du tableau de bord Grafana d'Istio, voir [Viewing the Istio Dashboard ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) dans la documentation open source d'Istio.
 
+</br>
 **Jaeger**</br>
+
 1. Par défaut, Istio génère des intervalles de trace de 1 pour 100 demandes, ce qui correspond à une fréquence d'échantillonnage de 1 %. Vous devez envoyer au moins 100 demandes pour que la première trace soit visible. Pour envoyer 100 demandes au service `productpage` du [module complémentaire BookInfo](#istio_bookinfo), exécutez la commande suivante :
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
@@ -388,7 +422,9 @@ Avant de commencer, [installez les modules complémentaires gérés `istio` et `
 
 4. Si vous avez installé le module complémentaire BookInfo, vous pouvez sélectionner `productpage` dans la liste **Service** et cliquer sur **Find Traces**. Les traces du trafic que vous avez générées lorsque vous avez actualisé plusieurs fois la page de produit s'affichent. Pour plus d'informations sur l'utilisation de Jaeger avec Istio, voir [Generating traces using the BookInfo sample ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) dans la documentation open source d'Istio.
 
+</br>
 **Kiali**</br>
+
 1. Démarrez l'acheminement du port Kubernetes pour le tableau de bord Kiali.
   ```
   kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001 &
@@ -418,7 +454,7 @@ Pour commencer, configurez LogDNA pour votre cluster en suivant la procédure in
 Obtenez davantage de visibilité sur les performances et l'état de santé de vos applications gérées par Istio en déployant Sysdig sur vos noeuds worker afin de transférer des métriques à {{site.data.keyword.monitoringlong}}.
 {: shortdesc}
 
-Avec Istio sur {{site.data.keyword.containerlong_notm}}, le module complémentaire `istio` géré installe Prometheus sur votre cluster. Les pods `istio-mixer-telemetry` de votre cluster sont annotés avec un noeud final Prometheus pour que Prometheus puisse rassembler toutes les données télémétriques pour vos pods. Lorsque vous déployez un agent Sysdig sur tous les noeuds worker de votre cluster, Sysdig est déjà automatiquement activé pour détecter et décomposer les données à partir de ces noeuds finaux Prometheus afin de les afficher dans votre tableau de bord de surveillance {{site.data.keyword.Bluemix_notm}}.
+Avec Istio sur {{site.data.keyword.containerlong_notm}}, le module complémentaire `istio` géré installe Prometheus sur votre cluster. Les pods `istio-mixer-telemetry` de votre cluster sont annotés avec un noeud final Prometheus pour que Prometheus puisse rassembler toutes les données télémétriques pour vos pods. Lorsque vous déployez un agent Sysdig sur tous les noeuds worker de votre cluster, Sysdig est déjà automatiquement activé pour détecter et décomposer les données à partir de ces noeuds finaux Prometheus afin de les afficher dans votre tableau de bord de surveillance {{site.data.keyword.cloud_notm}}.
 
 Comme tout le travail de Prometheus est déjà réalisé, tout ce qui vous reste à faire est de déployer Sysdig dans votre cluster.
 
@@ -435,7 +471,7 @@ Pour plus d'informations sur les références liées aux métriques et aux table
 <br />
 
 
-## Configuration de l'injection de composants sidecar pour vos applications
+## Ajout d'applications dans le maillage de service Istio en configurant une injection de composants sidecar
 {: #istio_sidecar}
 
 Prêt à gérer vos propres applications avec Istio ? Avant de déployer votre application, vous devez d'abord déterminer si vous voulez injecter des proxys sidecar Envoy sur les pods d'application.
@@ -517,18 +553,18 @@ Les pods d'application sont désormais intégrés dans votre maillage de service
 ### Injection manuelle de composants sidecar
 {: #istio_sidecar_manual}
 
-Si vous ne souhaitez pas activer l'injection automatique de composants sidecar sur un espace de nom, vous pouvez effectuer l'injection manuellement dans un fichier YAML de déploiement. Injectez des composants sidecar manuellement lorsque les applications s'exécutent dans des espaces de nom aux côtés d'autres déploiements dans lesquels vous ne voulez pas que les composants sidecar soient ajoutés automatiquement.
+Si vous ne souhaitez pas activer l'injection automatique de composants sidecar pour un espace de nom, vous pouvez effectuer l'injection manuellement dans un fichier YAML de déploiement. Injectez des composants sidecar manuellement lorsque les applications s'exécutent dans des espaces de nom aux côtés d'autres déploiements dans lesquels vous ne voulez pas que les composants sidecar soient ajoutés automatiquement.
 
 Pour injecter manuellement des composants sidecar dans un déploiement :
 
 1. Téléchargez le client `istioctl`.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.1.5 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.2 sh -
   ```
 
 2. Accédez au répertoire du package Istio.
   ```
-  cd istio-1.1.5
+  cd istio-1.2.2
   ```
   {: pre}
 
@@ -590,70 +626,13 @@ Les pods d'application sont désormais intégrés dans votre maillage de service
 ## Exposition d'applications gérées par Istio à l'aide d'un nom d'hôte fourni par IBM
 {: #istio_expose}
 
-Après avoir [configuré l'injection de proxy sidecar Envoy](#istio_sidecar) et déployé vos applications dans le maillage de services Istio, vous pouvez exposer vos applications gérées par Istio aux demandes publiques en utilisant le nom d'hôte fourni par IBM.
+Exposez publiquement vos applications gérées par Istio en créant une entrée DNS pour l'équilibreur de charge `istio-ingressgateway` et en configurant l'équilibreur de charge pour acheminer le trafic vers votre application.
 {: shortdesc}
 
-Istio utilise des [passerelles ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) et des [services virtuels![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/) pour contrôler le routage du trafic vers vos applications. Une passerelle configure un équilibreur de charge, `istio-ingressgateway`, qui fait office de point d'entrée pour vos applications gérées par Istio. Vous pouvez exposer vos applications gérés par Istio en enregistrant l'adresse IP externe de l'équilibreur de charge `istio-ingressgateway` avec une entrée DNS et un nom d'hôte. 
-
-Vous pouvez d'abord tester l'[exemple d'exposition de l'application BookInfo](#istio_expose_bookinfo) ou [exposer au public vos propres applications gérées par Istio](#istio_expose_link).
-
-### Exemple : Exposition de l'application BookInfo à l'aide d'un nom d'hôte fourni par IBM
-{: #istio_expose_bookinfo}
-
-Lorsque vous activez le module complémentaire BookInfo dans votre cluster, la passerelle Istio `bookinfo-gateway` est créée pour vous. Cette passerelle utilise le service virtuel et les règles de destination Istio pour configurer un équilibreur de charge, `istio-ingressgateway`, qui expose l'application BookInfo au public. Dans les étapes suivantes, vous allez créer un nom d'hôte pour l'adresse IP d'équilibreur de charge `istio-ingressgateway` par l'intermédiaire de laquelle vous pouvez accéder publiquement à l'application BookInfo.
-{: shortdesc}
-
-Avant de commencer, [activez le module complémentaire géré `istio-sample-bookinfo`](#istio_install) dans un cluster.
-
-1. Procurez-vous l'adresse **EXTERNAL-IP** pour l'équilibreur de charge `istio-ingressgateway`.
-  ```
-  kubectl get svc -n istio-system
-  ```
-  {: pre}
-
-  Dans l'exemple suivant, la valeur de **EXTERNAL-IP** est `168.1.1.1`.
-  ```
-  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-  ...
-  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-  ```
-  {: screen}
-
-2. Enregistrez l'adresse IP en créant un nom d'hôte DNS.
-  ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
-  ```
-  {: pre}
-
-3. Vérifiez que le nom d'hôte est créé.
-  ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
-  ```
-  {: pre}
-
-  Exemple de sortie :
-  ```
-  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-  ```
-  {: screen}
-
-4. Dans un navigateur Web, ouvrez la page de produit BookInfo.
-  ```
-  https://<host_name>/productpage
-  ```
-  {: codeblock}
-
-5. Essayez d'actualiser la page plusieurs fois. Les demandes adressées à `http://<host_name>/productpage` sont reçues par l'ALB et transmises à l'équilibreur de charge de la passerelle Istio. Les différentes versions du microservice `reviews` sont toujours renvoyées de manière aléatoire car la passerelle Istio gère les règles de service virtuel et de routage de destination pour les microservices.
-
-Pour plus d'informations sur la passerelle, les règles de service virtuel et les règles de destination pour l'application BookInfo, voir [Comprendre ce qui se passe](#istio_bookinfo_understanding). Pour plus d'informations sur l'enregistrement de noms d'hôte DNS dans {{site.data.keyword.containerlong_notm}}, voir [Enregistrement d'un nom d'hôte NLB](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
-
-### Exposition publique d'applications gérées par Istio à l'aide d'un nom d'hôte fourni par IBM
-{: #istio_expose_link}
-
-Exposez publiquement vos applications gérées par Istio en créant une passerelle Istio, un service virtuel qui définit les règles de gestion de trafic pour vos services gérés par Istio et un nom d'hôte DNS pour l'adresse IP externe de l'équilibreur de charge `istio-ingressgateway`.
-{: shortdesc}
+Dans les étapes suivantes, vous allez configurer un nom d'hôte permettant à vos utilisateurs d'accéder à votre application en créant les ressources suivantes :
+* Une passerelle nommée `my-gateway`. Cette passerelle agit en tant que point d'entrée public sur votre application et utilise le service d'équilibreur de charge `istio-ingressgateway` existant pour exposer votre application. 
+* Un service virtuel nommé `my-virtual-service`. `my-gateway` utilise les règles que vous définissez dans `my-virtual-service` pour router le trafic vers votre application. 
+* Un nom d'hôte pour l'équilibreur de charge `istio-ingressgateway`. Toutes les demandes utilisateur adressées au nom d'hôte sont transmises à votre application selon vos règles de routage `my-virtual-service`. Pour plus d'informations sur l'enregistrement de noms d'hôte DNS dans {{site.data.keyword.containerlong_notm}}, y compris les informations sur la configuration des diagnostics d'intégrité personnalisés pour les noms d'hôte, voir [Enregistrement d'un nom d'hôte NLB](/docs/containers?topic=containers-loadbalancer_hostname).
 
 **Avant de commencer :**
 1. [Installez le module complémentaire géré `istio`](#istio_install) dans un cluster.
@@ -664,7 +643,7 @@ Exposez publiquement vos applications gérées par Istio en créant une passerel
     ```
   2. Accédez au répertoire du package Istio.
     ```
-    cd istio-1.1.5
+    cd istio-1.2.2
     ```
     {: pre}
 3. [Configurez l'injection de composants sidecar pour vos microservices d'application, déployez les microservices d'application dans un espace de nom et créez des services Kubernetes pour les microservices d'application pour qu'ils soient inclus dans le maillage de services Istio](#istio_sidecar).
@@ -789,13 +768,11 @@ Exposez publiquement vos applications gérées par Istio en créant une passerel
   ```
   {: screen}
 
-7. Dans un navigateur Web, vérifiez que ce trafic est acheminé vers vos microservices gérés par Istio en entrant l'URL du microservice d'application auquel accéder.
+8. Dans un navigateur Web, vérifiez que ce trafic est acheminé vers vos microservices gérés par Istio en entrant l'URL du microservice d'application. 
   ```
   http://<host_name>/<service_path>
   ```
   {: codeblock}
-
-En résumé, vous avez créé une passerelle nommée `my-gateway`. Cette passerelle utilise le service d'équilibreur de charge `istio-ingressgateway` existant pour exposer votre application. L'équilibreur de charge `istio-ingressgateway` utilise les règles que vous avez définies dans le service virtuel `my-virtual-service` pour router le trafic vers votre application. Enfin, vous avez créé un nom d'hôte pour l'équilibreur de charge `istio-ingressgateway`. Toutes les demandes utilisateur adressées au nom d'hôte sont transmises à votre application selon vos règles de routage Istio. Pour plus d'informations sur l'enregistrement de noms d'hôte DNS dans {{site.data.keyword.containerlong_notm}}, y compris les informations sur la configuration des diagnostics d'intégrité personnalisés pour les noms d'hôte, voir [Enregistrement d'un nom d'hôte NLB](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname).
 
 Vous avez besoin d'un contrôle plus fin sur le routage ? Pour créer des règles appliquées après le routage du trafic vers chaque microservice par l'équilibreur de charge, par exemple les règles d'envoi du trafic à différentes versions d'un microservice, vous pouvez créer et appliquer des [règles de destination (`DestinationRules`) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/reference/config/networking/v1alpha3/destination-rule/).
 {: tip}
@@ -803,13 +780,21 @@ Vous avez besoin d'un contrôle plus fin sur le routage ? Pour créer des règle
 <br />
 
 
-## Mise à jour d'Istio sur {{site.data.keyword.containerlong_notm}}
+## Sécurisation des applications gérées par Istio à l'aide d'{{site.data.keyword.appid_short_notm}}
+{: #app-id}
+
+L'adaptateur App Identity and Access vous permet de centraliser toute votre gestion des identités avec une seule instance d'{{site.data.keyword.appid_full}}. L'adaptateur peut être configuré pour fonctionner avec tout fournisseur d'identité compatible OIDC, ce qui lui permet de contrôler les règles d'authentification et d'autorisation dans tous les environnements, y compris les applications de front-end et les applications de back-end. Pour utiliser cette fonction, vous n'avez pas besoin de modifier votre code ou de redéployer votre application. Pour commencer, reportez-vous à la rubrique [Sécurisation d'applications multicloud à l'aide d'Istio](/docs/services/appid?topic=appid-istio-adapter) dans la documentation {{site.data.keyword.appid_short_notm}}. 
+
+<br />
+
+
+## Mise à jour des modules complémentaires Istio
 {: #istio_update}
 
-La version Istio incluse dans le module complémentaire Istio géré est testée par {{site.data.keyword.Bluemix_notm}} et approuvée en vue de son utilisation dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour vos composants Istio vers la version la plus récente d'Istio prise en charge par {{site.data.keyword.containerlong_notm}}, voir la rubrique [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+La version Istio incluse dans le module complémentaire Istio géré est testée par {{site.data.keyword.cloud_notm}} et approuvée en vue de son utilisation dans {{site.data.keyword.containerlong_notm}}. Pour mettre à jour vos composants Istio vers la version la plus récente d'Istio prise en charge par {{site.data.keyword.containerlong_notm}}, voir la rubrique [Mise à jour de modules complémentaires gérés](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 {: shortdesc}
 
-## Désinstallation d'Istio sur {{site.data.keyword.containerlong_notm}}
+## Désinstallation d'Istio
 {: #istio_uninstall}
 
 Si vous n'utilisez plus Istio, vous pouvez nettoyer les ressources Istio dans votre cluster en désinstallant les modules complémentaires Istio.
@@ -835,7 +820,20 @@ Le module complémentaire `istio` est une dépendance pour les modules `istio-ex
 
    2. Sauvegardez les ressources créées à partir de ces CRD.
 
-### Désinstallation des modules complémentaires Istio gérés dans l'interface de ligne de commande
+ ### Désinstallation des modules complémentaires Istio gérés à partir de la console
+ {: #istio_uninstall_ui}
+
+ 1. Dans le [tableau de bord de votre cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/clusters), cliquez sur le nom du cluster dont vous souhaitez retirer les modules complémentaires Istio. 
+
+ 2. Cliquez sur l'onglet **Modules complémentaires**.
+
+ 3. Sur la carte Istio géré, cliquez sur l'icône du menu Action. 
+
+ 4. Cliquez sur **Désinstaller**. Tous les modules complémentaires Istio gérés sont désactivés dans ce cluster et toutes les ressources Istio dans ce cluster sont supprimées.
+
+ 5. Sur la carte Istio géré, vérifiez que les modules complémentaires que vous avez désinstallés ne sont plus répertoriés. 
+
+### Désinstallation des modules complémentaires Istio gérés à partir de l'interface CLI
 {: #istio_uninstall_cli}
 
 1. Désactivez le module complémentaire `istio-sample-bookinfo`.
@@ -862,25 +860,6 @@ Le module complémentaire `istio` est une dépendance pour les modules `istio-ex
   ```
   {: pre}
 
-### Désinstallation des modules complémentaires Istio gérés dans l'interface utilisateur
-{: #istio_uninstall_ui}
-
-1. Dans le [tableau de bord de votre cluster ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/kubernetes/clusters), cliquez sur le nom d'un cluster.
-
-2. Cliquez sur l'onglet **Modules complémentaires**.
-
-3. Sur la carte Istio, cliquez sur l'icône de menu.
-
-4. Désinstallez des modules complémentaires Istio individuels ou tous les modules complémentaires Istio.
-  - Modules complémentaires Istio individuels :
-    1. Cliquez sur **Manage**.
-    2. Désélectionnez les cases à cocher correspondant aux modules complémentaires que vous souhaitez désactiver. Si vous désélectionnez un module, les autres modules nécessitant ce module comme dépendance peuvent être automatiquement désélectionnés.
-    3. Cliquez sur **Manage**. Les modules complémentaires Istio sont désactivés et les ressources de ces modules sont supprimées de ce cluster.
-  - Tous les modules complémentaires Istio :
-    1. Cliquez sur **Désinstaller**. Tous les modules complémentaires Istio gérés sont désactivés dans ce cluster et toutes les ressources Istio dans ce cluster sont supprimées.
-
-5. Sur la carte Istio, vérifiez que les modules complémentaires que vous avez désinstallés ne sont plus répertoriés.
-
 <br />
 
 
@@ -890,7 +869,7 @@ Le module complémentaire `istio` est une dépendance pour les modules `istio-ex
 Si vous aviez déjà installé Istio dans le cluster en utilisant la charte Helm IBM ou une autre méthode, nettoyez cette installation Istio avant d'activer les modules complémentaires Istio gérés dans le cluster. Pour vérifier si Istio figure déjà dans un cluster, exécutez la commande `kubectl get namespaces` et recherchez l'espace de nom `istio-system` dans la sortie.
 {: shortdesc}
 
-- Si vous avez installé Istio en utilisant la Charte Helm Istio d'{{site.data.keyword.Bluemix_notm}} :
+- Si vous avez installé Istio en utilisant la Charte Helm Istio d'{{site.data.keyword.cloud_notm}} :
   1. Désinstallez le déploiement Helm Istio.
     ```
     helm del istio --purge
@@ -903,11 +882,11 @@ Si vous aviez déjà installé Istio dans le cluster en utilisant la charte Helm
     ```
     {: pre}
 
-- Si vous avez installé Istio manuellement ou via la charte Helm de la communauté Istio, voir la [documentation sur la désinstallation d'Istio  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components).
+- Si vous avez installé Istio manuellement ou via la charte Helm de communauté Istio, voir la [documentation sur la désinstallation d'Istio  ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://istio.io/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components).
 * Si vous avez déjà installé BookInfo dans le cluster, nettoyez les ressources correspondantes.
   1. Changez de répertoire pour accéder à l'emplacement du fichier Istio.
     ```
-    cd <filepath>/istio-1.1.5
+    cd <filepath>/istio-1.2.2
     ```
     {: pre}
 

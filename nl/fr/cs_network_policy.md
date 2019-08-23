@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,33 +23,23 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Contrôle du trafic à l'aide de règles de réseau
 {: #network_policies}
 
-Chaque cluster Kubernetes est configuré avec un plug-in réseau nommé Calico. Des règles de réseau par défaut sont mises en place pour sécuriser l'interface réseau publique de chaque noeud worker dans {{site.data.keyword.containerlong}}.
+Chaque cluster {{site.data.keyword.containerlong}} est configuré avec un plug-in réseau nommé Calico. Des règles de réseau par défaut sont configurées pour sécuriser l'interface de réseau public de chaque noeud worker dans le cluster.
 {: shortdesc}
 
 Si vous avez des exigences particulières en matière de sécurité ou si vous disposez d'un cluster à zones multiples avec la fonction Spanning VLAN activée, vous pouvez utiliser Calico et Kubernetes afin de créer des règles de réseau pour un cluster. Avec les règles réseau Kubernetes, vous pouvez spécifier le trafic réseau que vous désirez autoriser ou bloquer vers et depuis un pod au sein d'un cluster. Pour définir des règles réseau plus avancées, par exemple le blocage de trafic entrant (ingress) vers les services d'équilibreur de charge de réseau (NLB), utilisez des règles réseau Calico.
 
-<ul>
-  <li>
-  [Règles réseau Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) : ces règles indiquent comment les pods communiquent avec d'autres pods et avec des noeuds finaux externes. A partir de Kubernetes version 1.8, le trafic réseau entrant et sortant peut être autorisé ou bloqué selon le protocole, le port et les adresses IP source et de destination. Le trafic peut également être filtré en fonction des libellés de pod et d'espace de nom. Les règles réseau Kubernetes sont appliquées à l'aide de commandes `kubectl` ou d'API Kubernetes. Lorsque ces règles sont appliquées, elles sont automatiquement converties en règles réseau Calico et Calico les met en oeuvre.
-  </li>
-  <li>
-  [Règles réseau Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/) : ces règles sont un sur-ensemble des règles réseau Kubernetes et sont appliquées à l'aide de commandes `calicoctl`. Les règles Calico ajoutent les fonctions suivantes.
-    <ul>
-    <li>Autorisation ou blocage du trafic réseau sur des interfaces réseau spécifiques, sans tenir compte de la source de pod Kubernetes, de l'adresse IP de destination ou du routage CIDR.</li>
-    <li>Autorisation ou blocage du trafic réseau pour les pods entre les espaces de nom.</li>
-    <li>[Blocage de trafic entrant (ingress) vers les services LoadBalancer ou NodePort de Kubernetes](#block_ingress).</li>
-    </ul>
-  </li>
-  </ul>
+* [Règles réseau Kubernetes ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/services-networking/network-policies/) : ces règles indiquent comment les pods communiquent avec d'autres pods et avec des noeuds finaux externes. A partir de Kubernetes version 1.8, le trafic réseau entrant et sortant peut être autorisé ou bloqué selon le protocole, le port et les adresses IP source et de destination. Le trafic peut également être filtré en fonction des libellés de pod et d'espace de nom. Les règles réseau Kubernetes sont appliquées à l'aide de commandes `kubectl` ou d'API Kubernetes. Lorsque ces règles sont appliquées, elles sont automatiquement converties en règles réseau Calico et Calico les met en oeuvre.
+* [Règles réseau Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/getting-started/bare-metal/policy/) : ces règles sont un sur-ensemble des règles réseau Kubernetes et sont appliquées à l'aide de commandes `calicoctl`. Les règles Calico ajoutent les fonctions suivantes.
+  * Autorisation ou blocage du trafic réseau sur des interfaces réseau spécifiques, sans tenir compte de la source de pod Kubernetes, de l'adresse IP de destination ou du routage CIDR.
+  * Autorisation ou blocage du trafic réseau pour les pods entre les espaces de nom.
+  * [Blocage de trafic entrant vers les services LoadBalancer ou NodePort de Kubernetes](#block_ingress).
 
 Calico applique ces règles, y compris les éventuelles règles réseau Kubernetes converties automatiquement en règles Calico, en configurant des règles Linux Iptables sur les noeuds worker Kubernetes. Les règles Iptables font office de pare-feu pour le noeud worker en définissant les caractéristiques que le trafic réseau doit respecter pour être acheminé vers la ressource ciblée.
 
-Pour avoir recours aux services ALB Ingress et NLB, utilisez des règles Calico et Kubernetes pour gérer le trafic réseau en provenance et à destination de votre cluster. N'utilisez pas les [groupes de sécurité](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) de l'infrastructure IBM Cloud (SoftLayer). Ces groupes de sécurité sont appliqués à l'interface réseau d'un serveur virtuel unique pour filtrer le trafic au niveau de l'hyperviseur. Toutefois, les groupes de sécurité ne prennent pas en charge le protocole VRRP, qui est utilisé par {{site.data.keyword.containerlong_notm}} pour gérer les adresses IP ALB et NLB. Si le protocole VRRP n'est pas présent pour gérer l'adresse IP, les services ALB et NLB ne fonctionnent pas correctement.
+Pour avoir recours aux services ALB Ingress et NLB, utilisez des règles Calico et Kubernetes pour gérer le trafic réseau en provenance et à destination de votre cluster. N'utilisez pas les [groupes de sécurité](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) de l'infrastructure IBM Cloud. Ces groupes de sécurité sont appliqués à l'interface réseau d'un serveur virtuel unique pour filtrer le trafic au niveau de l'hyperviseur. Toutefois, les groupes de sécurité ne prennent pas en charge le protocole VRRP, qui doit être utilisé par {{site.data.keyword.containerlong_notm}} pour gérer les adresses IP ALB et NLB. Si le protocole VRRP n'est pas présent pour gérer l'adresse IP, les services ALB et NLB ne fonctionnent pas correctement.
 {: tip}
 
 <br />
@@ -92,16 +82,16 @@ Ne supprimez pas de règle appliquée à un noeud final d'hôte à moins de comp
    </tr>
    <tr>
       <td><code>allow-sys-mgmt</code></td>
-      <td>Autorise les connexions entrantes pour des systèmes d'infrastructure IBM Cloud (SoftLayer) spécifiques utilisés pour gérer les noeuds worker.</td>
+      <td>Autorise les connexions entrantes pour des systèmes d'infrastructure IBM Cloud spécifiques utilisés pour gérer les noeuds worker.</td>
    </tr>
    <tr>
     <td><code>allow-vrrp</code></td>
-    <td>Autorise les paquets VRRP utilisés pour le suivi et le déplacement d'adresses IP virtuelles entre les noeuds worker.</td>
+    <td>Autorise les paquets VRRP, qui sont utilisés pour le suivi et le déplacement d'adresses IP virtuelles entre les noeuds worker.</td>
    </tr>
   </tbody>
 </table>
 
-Une règle Kubernetes par défaut limitant l'accès au tableau de bord Kubernetes est également créée. Les règles Kubernetes ne s'appliquent pas au noeud final d'hôte, mais au pod `kube-dashboard` à la place. Cette règle s'applique aux clusters connectés uniquement à un VLAN privé et aux clusters connectés à un VLAN public et privé.
+Une règle Kubernetes par défaut limitant l'accès au tableau de bord Kubernetes est également créée. Les règles Kubernetes ne s'appliquent pas au noeud final d'hôte, mais au pod `kube-dashboard` à la place. Cette règle s'applique aux clusters qui sont connectés uniquement à un VLAN privé et aux clusters qui sont connectés à un VLAN public et à un VLAN privé. 
 
 <table>
 <caption>Règles Kubernetes par défaut pour chaque cluster</caption>
@@ -111,7 +101,7 @@ Une règle Kubernetes par défaut limitant l'accès au tableau de bord Kubernete
 <tbody>
  <tr>
   <td><code>kubernetes-dashboard</code></td>
-  <td>Fournie dans l'espace de nom <code>kube-system</code> : bloque l'accès de tous les pods au tableau de bord Kubernetes. Cette règle n'affecte pas l'accès au tableau de bord à partir de la console {{site.data.keyword.Bluemix_notm}} ou via <code>kubectl proxy</code>. Si un pod nécessite l'accès au tableau de bord, déployez-le dans un espace de nom ayant le libellé <code>kubernetes-dashboard-policy: allow</code>.</td>
+  <td>Fournie dans l'espace de nom <code>kube-system</code> : bloque l'accès de tous les pods au tableau de bord Kubernetes. Cette règle n'affecte pas l'accès au tableau de bord à partir de la console {{site.data.keyword.cloud_notm}} ou via <code>kubectl proxy</code>. Si un pod nécessite l'accès au tableau de bord, déployez-le dans un espace de nom ayant le libellé <code>kubernetes-dashboard-policy: allow</code>.</td>
  </tr>
 </tbody>
 </table>
@@ -147,7 +137,7 @@ Pour afficher, gérer et ajouter des règles Calico, installez et configurez l'i
 
 4. [Téléchargez l'interface CLI de Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/projectcalico/calicoctl/releases).
 
-    Si vous utilisez OS X, téléchargez la version `-darwin-amd64`. Si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que celle d'{{site.data.keyword.Bluemix_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécutez des commandes par la suite. Veillez à sauvegarder le fichier sous `calicoctl.exe`.
+    Si vous utilisez OS X, téléchargez la version `-darwin-amd64`. Si vous utilisez Windows, installez l'interface CLI de Calico dans le même répertoire que celle d'{{site.data.keyword.cloud_notm}}. Cette configuration vous évite diverses modifications de chemin de fichier lorsque vous exécutez des commandes par la suite. Veillez à sauvegarder le fichier sous `calicoctl.exe`.
     {: tip}
 
 5. Pour les utilisateurs OS X et Linux, procédez comme suit.
@@ -187,7 +177,7 @@ Pour afficher, gérer et ajouter des règles Calico, installez et configurez l'i
     - Windows : utilisez l'indicateur `--config` pour pointer vers le fichier de configuration réseau que vous avez obtenu à l'étape 1. Incluez cet indicateur chaque fois que vous exécutez une commande `calicoctl`.
 
       ```
-      calicoctl get nodes --config=filepath/calicoctl.cfg
+      calicoctl get nodes --config=<filepath>/calicoctl.cfg
       ```
       {: pre}
 
@@ -221,13 +211,13 @@ Avant de commencer :
 
 **Pour afficher des règles réseau dans les clusters** :
 
-Les utilisateurs de Linux et de Mac n'ont pas besoin d'inclure l'indicateur `--config=filepath/calicoctl.cfg` dans les commandes `calicoctl`.
+Les utilisateurs de Linux et de Mac n'ont pas besoin d'inclure l'option `--config=<filepath>/calicoctl.cfg` dans les commandes `calicoctl`.
 {: tip}
 
 1. Examinez le noeud final d'hôte Calico.
 
     ```
-    calicoctl get hostendpoint -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get hostendpoint -o yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
@@ -235,27 +225,27 @@ Les utilisateurs de Linux et de Mac n'ont pas besoin d'inclure l'indicateur `--c
 
     [Les règles réseau ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy) sont limitées à des espaces de nom spécifiques :
     ```
-    calicoctl get NetworkPolicy --all-namespaces -o wide --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy --all-namespaces -o wide --config=<filepath>/calicoctl.cfg
     ```
     {:pre}
 
     [Les règles réseau globales ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy) ne sont pas limitées à des espaces de nom spécifiques :
     ```
-    calicoctl get GlobalNetworkPolicy -o wide --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o wide --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
 3. Affichez les informations détaillées d'une règle réseau.
 
     ```
-    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace> --config=filepath/calicoctl.cfg
+    calicoctl get NetworkPolicy -o yaml <policy_name> --namespace <policy_namespace> --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
 4. Affichez les informations détaillées de toutes les règles réseau globales pour le cluster.
 
     ```
-    calicoctl get GlobalNetworkPolicy -o yaml --config=filepath/calicoctl.cfg
+    calicoctl get GlobalNetworkPolicy -o yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
@@ -293,7 +283,7 @@ Pour créer des règles Calico, procédez comme suit :
     - Windows :
 
       ```
-      calicoctl apply -f filepath/policy.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f filepath/policy.yaml --config=<filepath>/calicoctl.cfg
       ```
       {: pre}
 
@@ -329,9 +319,9 @@ Avant de commencer :
 
 Pour créer une règle pre-DNAT :
 
-1. Définissez une règle réseau pre-DNAT de Calico pour l'accès entrant (trafic entrant) vers les services Kubernetes.
+1. Définissez une règle réseau Pre-DNAT Calico pour l'accès entrant (trafic entrant) vers les services Kubernetes.
     * Utilisez la [syntaxe de règle Calico v3![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy).
-    * Si vous gérez le trafic vers un [NLB 2.0](/docs/containers?topic=containers-loadbalancer#planning_ipvs), vous devez inclure les zones `applyOnForward: true` et `doNotTrack: true` dans la section `spec` de la règle.
+    * Si vous gérez le trafic vers un [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs), vous devez inclure les zones `applyOnForward: true` et `doNotTrack: true` dans la section `spec` de la règle.
 
         Exemple de ressource qui bloque tous les ports de noeud :
 
@@ -432,31 +422,82 @@ soient appliquées dans tout le cluster.
   - Windows :
 
     ```
-    calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
+    calicoctl apply -f filepath/deny-nodeports.yaml --config=<filepath>/calicoctl.cfg
     ```
     {: pre}
 
-3. Facultatif : dans les clusters à zones multiples, l'équilibreur de charge pour zones multiples (MZLB) effectue un diagnostic d'intégrité des équilibreurs de charge d'application (ALB) Ingress dans chaque zone de votre cluster et conserve les résultats de recherche DNS mis à jour en fonction de ces diagnostics. Si vous utilisez des règles pre-DNAT pour bloquer tout le trafic entrant vers les services Ingress, vous devez également inclure dans la liste blanche les [adresses IP IPv4 de Cloudflare ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cloudflare.com/ips/) utilisées pour effectuer des diagnostics d'intégrité de vos équilibreurs de charge d'application (ALB). Pour obtenir les étapes nécessaires permettant de créer une règle pre-DAT Calico pour mettre ces adresses IP sur liste blanche, voir la leçon 3 du [Tutoriel sur les règles réseau de Calico](/docs/containers?topic=containers-policy_tutorial#lesson3).
+3. Facultatif : dans les clusters à zones multiples, l'équilibreur de charge pour zones multiples (MZLB) effectue un diagnostic d'intégrité des équilibreurs de charge d'application (ALB) Ingress dans chaque zone de votre cluster et conserve les résultats de recherche DNS mis à jour en fonction de ces diagnostics. Si vous utilisez des règles pre-DNAT pour bloquer tout le trafic entrant vers les services Ingress, vous devez également inclure dans la liste blanche les [adresses IP IPv4 de Cloudflare ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.cloudflare.com/ips/) utilisées pour effectuer des diagnostics d'intégrité de vos équilibreurs de charge d'application (ALB). Pour obtenir les étapes nécessaires permettant de créer une règle Pre-DNAT Calico pour mettre ces adresses IP sur liste blanche, voir la leçon 3 du [Tutoriel sur les règles réseau de Calico](/docs/containers?topic=containers-policy_tutorial#lesson3).
+
+## Isolement de clusters sur le réseau public
+{: #isolate_workers_public}
+
+Vous pouvez isoler votre cluster sur le réseau public en appliquant des [règles de réseau public Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation).
+{: shortdesc}
+
+Cet ensemble de règles Calico fonctionne conjointement avec les [règles Calico par défaut](#default_policy) pour bloquer la plupart du trafic réseau public d'un cluster tout en autorisant la communication qui est nécessaire pour permettre au cluster de fonctionner sur des sous-réseaux spécifiques. Pour afficher la liste des ports qui sont ouverts par ces règles et une liste des règles qui sont incluses, voir le [fichier README pour les règles réseau public Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/public-network-isolation/README.md). 
+
+Lorsque vous appliquez les règles de pod de sortie qui sont incluses dans cet ensemble de règles, seul le trafic réseau vers les sous-réseaux et les ports qui sont spécifiés dans les règles de pod est autorisé. Tout le trafic vers des sous-réseaux ou des ports qui ne sont pas spécifiés dans les règles est bloqué pour tous les pods dans tous les espaces de nom. Etant donné que seuls les ports et les sous-réseaux nécessaires au fonctionnement des pods dans {{site.data.keyword.containerlong_notm}} sont spécifiés dans ces règles, vos pods ne peuvent pas envoyer de trafic réseau via Internet tant que vous n'ajoutez ou ne modifiez pas la règle Calico pour les autoriser.
+{: important}
+
+Avant de commencer :
+1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
+2. [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Incluez les options `--admin` et `--network` avec la commande `ibmcloud ks cluster-config`. L'option `--admin` permet de télécharger les clés pour accéder à votre portefeuille d'infrastructure et exécuter des commandes Calico sur vos noeuds worker. L'option `--network` permet de télécharger le fichier de configuration pour exécuter toutes les commandes Calico.
+  ```
+  ibmcloud ks cluster-config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+Pour protéger votre cluster sur le réseau public en utilisant des règles Calico :
+
+1. Clonez le référentiel `IBM-Cloud/kube-samples`.
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
+
+2. Accédez au répertoire de règles publiques pour la région dans laquelle se trouve votre cluster. Exemple de commande pour un cluster dans la région du sud des Etats-Unis :
+  ```
+  cd <filepath>/IBM-Cloud/kube-samples/calico-policies/public-network-isolation/us-south
+  ```
+  {: pre}
+
+3. Appliquez les règles. 
+  ```
+  calicoctl apply -f allow-egress-pods-public.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-public.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-public-service-endpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f deny-all-outbound.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+4. Facultatif : pour permettre à vos noeuds worker d'accéder à d'autres services {{site.data.keyword.Bluemix_notm}} via le réseau public, appliquez les règles `allow-public-services.yaml` et `allow-public-services-pods.yaml`. La règle permet d'accéder aux adresses IP pour {{site.data.keyword.registryshort_notm}}, et si les services sont disponibles dans la région, pour {{site.data.keyword.la_full_notm}} et {{site.data.keyword.mon_full_notm}}. Pour accéder à d'autres services IBM Cloud, vous devez ajouter manuellement à cette règle les sous-réseaux pour ces services. 
+  ```
+  calicoctl apply -f allow-public-services.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-public-services-pods.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+5. Vérifiez que les règles sont appliquées. 
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
 
 ## Isolement de vos clusters sur le réseau privé
 {: #isolate_workers}
 
-Si vous disposez d'un cluster à zones multiples, de plusieurs VLAN pour un cluster à zone unique ou de plusieurs sous-réseaux sur le même VLAN, vous devez activer une fonction VRF ou spanning VLAN pour que vos noeuds worker puissent communiquer entre eux sur le réseau privé. Toutefois, lorsqu'une fonction VRF ou Spanning VLAN est activée, tout système connecté à l'un des VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}} peut communiquer avec des noeuds worker.
+Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3).
 {: shortdesc}
 
-Vous pouvez isoler votre cluster des autres systèmes sur le réseau privé en appliquant des [règles de réseau privé Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation). Cet ensemble de règles Calico et de noeuds finaux d'hôte isole le trafic du réseau privé d'un cluster des autres ressources dans le réseau privé du compte.
+Cet ensemble de règles Calico et de noeuds finaux d'hôte peut isoler le trafic du réseau privé d'un cluster des autres ressources dans le réseau privé du compte tout en autorisant la communication sur le réseau privé qui est nécessaire pour permettre au cluster de fonctionner. Par exemple, lorsque vous activez la fonction [VRF ou Spanning VLAN](/docs/containers?topic=containers-plan_clusters#worker-worker) pour permettre aux noeuds worker de communiquer entre eux sur le réseau privé, toute instance qui est connectée à l'un des VLAN privés dans le même compte {{site.data.keyword.Bluemix_notm}} peut communiquer avec d'autres noeuds worker. 
 
-Les règles ciblent l'interface privée des noeuds worker (eth0) et le réseau de pods d'un cluster.
+Pour afficher la liste des ports qui sont ouverts par ces règles et une liste des règles qui sont incluses, voir le [fichier README pour les règles réseau public Calico ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/private-network-isolation/README.md). 
 
-**Noeuds worker**
-
-* Le trafic sortant de l'interface privée est autorisé uniquement pour les adresses IP de pod, les noeuds worker figurant dans ce cluster et le port UDP/TCP 53 pour l'accès DNS, le port 2049 pour la communication avec les serveurs de fichiers NFS et les ports 443 et 3260 pour la communication avec le stockage par blocs.
-* Le trafic entrant de l'interface privée est autorisé uniquement à partir des noeuds worker du cluster et uniquement vers le DNS, Kubelet, ICMP et VRRP.
-
-**Pods**
-
-* Tout trafic entrant vers les pods est autorisé à partir des noeuds worker du cluster.
-* Tout trafic sortant depuis les pods est réservé uniquement à ces éléments : adresses IP publiques, DNS, kubelet et autres pods figurant dans le cluster.
+Lorsque vous appliquez les règles de pod de sortie qui sont incluses dans cet ensemble de règles, seul le trafic réseau vers les sous-réseaux et les ports qui sont spécifiés dans les règles de pod est autorisé. Tout le trafic vers des sous-réseaux ou des ports qui ne sont pas spécifiés dans les règles est bloqué pour tous les pods dans tous les espaces de nom. Etant donné que seuls les ports et les sous-réseaux nécessaires au fonctionnement des pods dans {{site.data.keyword.containerlong_notm}} sont spécifiés dans ces règles, vos pods ne peuvent pas envoyer de trafic réseau via le réseau privé tant que vous n'ajoutez ou ne modifiez pas la règle Calico pour les autoriser.
+{: important}
 
 Avant de commencer :
 1. [Installez et configurez l'interface CLI de Calico.](#cli_install)
@@ -467,54 +508,64 @@ Avant de commencer :
   ```
   {: pre}
 
-Pour isoler votre cluster sur le réseau privé en utilisant des règles Calico :
+Pour isoler votre cluster sur le réseau privé en utilisant les règles Calico :
 
 1. Clonez le référentiel `IBM-Cloud/kube-samples`.
-    ```
-    git clone https://github.com/IBM-Cloud/kube-samples.git
-    ```
-    {: pre}
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
 
-2. Accédez au répertoire des règles privées pour la version de Calico compatible avec la version de votre cluster.
-   ```
-   cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3
-   ```
-   {: pre}
+2. Accédez au répertoire de règles privées `calico-v3` pour la région dans laquelle se trouve votre cluster. Exemple de commande pour un cluster dans la région du sud des Etats-Unis :
+  ```
+  cd <filepath>/IBM-Cloud/kube-samples/calico-policies/private-network-isolation/calico-v3/us-south
+  ```
+  {: pre}
 
-3. Configurez une règle pour le noeud final de l'hôte privé.
-    1. Ouvrez la règle `generic-privatehostendpoint.yaml`.
-    2. Remplacez `<worker_name>` par le nom d'un noeud worker. **Important** : certains noeuds worker doivent suivre une structure de désignation différente pour les règles Calico. Vous devez utiliser le nom d'un noeud worker au format renvoyé par la commande suivante.
-      ```
-      calicoctl get nodes --config==filepath/calicoctl.cfg
-      ```
-      {: pre}
-    3. Remplacez `<worker-node-private-ip>` par l'adresse IP privée pour le noeud worker. Pour voir les adresses IP privées de vos noeuds worker, exécutez la commande `ibmcloud ks workers --cluster <my_cluster>`.
-    4. Répétez cette série d'étapes dans une nouvelle section pour chaque noeud worker de votre cluster. **Remarque** : chaque fois que vous ajoutez un noeud worker dans un cluster, vous devez mettre à jour le fichier des noeuds finaux de l'hôte avec les nouvelles entrées.
+3. Configurez les noeuds finaux d'hôte privés pour vos noeuds worker. Lorsque vos noeuds worker possèdent des noeuds finaux d'hôte privé, les règles que vous appliquez au cours des étapes suivantes peuvent cibler l'interface privée des noeuds worker (eth0) et le réseau de pods d'un cluster.
+  1. Ouvrez la règle `generic-privatehostendpoint.yaml`.
+  2. Remplacez `<worker_name>` par le nom d'un noeud worker.
+    <p class="note">Certains noeuds worker doivent suivre une structure de désignation différente pour les règles Calico. Vous devez utiliser le nom qui est renvoyé lorsque vous exécutez `calicoctl get nodes -- config=<filepath>/calicoctl.cfg`. </p>
+  3. Remplacez `<worker-node-private-ip>` par l'adresse IP privée pour le noeud worker. Pour voir les adresses IP privées de vos noeuds worker, exécutez la commande `ibmcloud ks workers --cluster <my_cluster>`.
+  4. Pour chaque noeud worker contenu dans votre cluster, répétez ces étapes dans une entrée distincte du fichier.
+    <p class="important">Chaque fois que vous ajoutez un noeud worker à un cluster, vous devez mettre à jour le fichier des noeuds finaux de l'hôte avec les nouvelles entrées.</p>
+  5. Sauvegardez la règle.
 
-4. Appliquez l'ensemble des règles dans votre cluster.
-    - Linux et OS X :
+4. Appliquez les règles. 
+  ```
+  calicoctl apply -f generic-privatehostendpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-all-workers-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-egress-pods-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-ibm-ports-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-icmp-private.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-private-service-endpoint.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-sys-mgmt-private.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml
-      calicoctl apply -f allow-ibm-ports-private.yaml
-      calicoctl apply -f allow-egress-pods.yaml
-      calicoctl apply -f allow-icmp-private.yaml
-      calicoctl apply -f allow-vrrp-private.yaml
-      calicoctl apply -f generic-privatehostendpoint.yaml
-      ```
-      {: pre}
+5. Facultatif : pour permettre à vos noeuds worker et à vos pods d'accéder à {{site.data.keyword.registryshort_notm}} via le réseau privé, appliquez les règles `allow-private-services.yaml` et `allow-private-services-pods.yaml`. Pour accéder à d'autres services IBM Cloud qui prennent en charge les noeuds finaux de service privé, vous devez ajouter manuellement à cette règle les sous-réseaux pour ces services. 
+  ```
+  calicoctl apply -f allow-private-services.yaml --config=<filepath>/calicoctl.cfg
+  calicoctl apply -f allow-private-services-pods.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
 
-    - Windows :
+6. Facultatif : pour exposer vos applications avec des équilibreurs de charge de réseau (NLB) privé ou des équilibreurs de charge d'application (ALB) Ingress, vous devez ouvrir le protocole VRRP en appliquant la règle `allow-vrrp-private`. 
+  ```
+  calicoctl apply -f allow-vrrp-private.yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+  Vous pouvez renforcer le contrôle de l'accès aux services de réseau en créant des [règles pre-DNAT Calico](/docs/containers?topic=containers-network_policies#block_ingress). Dans la règle pre-DNAT, prenez soin d'utiliser `selector: ibm.role=='worker_private'` pour appliquer la règle aux noeuds finaux d'hôte privé des noeuds worker.
+  {: tip}
 
-      ```
-      calicoctl apply -f allow-all-workers-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-ibm-ports-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-egress-pods.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-icmp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f allow-vrrp-private.yaml --config=filepath/calicoctl.cfg
-      calicoctl apply -f generic-privatehostendpoint.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+7. Vérifiez que les règles sont appliquées. 
+  ```
+  calicoctl get GlobalNetworkPolicies -o yaml --config=<filepath>/calicoctl.cfg
+  ```
+  {: pre}
+
+<br />
+
 
 ## Contrôle du trafic entre les pods
 {: #isolate_services}
@@ -589,7 +640,7 @@ Le trafic peut désormais circuler du service de front end vers le service de ba
 
 Le scénario suivant illustre comment gérer le trafic entre les microservices d'application entre plusieurs espaces de nom.
 
-Les services détenus par plusieurs équipes subalternes doivent communiquer mais ces services sont déployés dans différents espaces de nom au sein du même cluster. L'équipe Accounts déploie des services de front end, de back end et de base de données pour l'application app Srv1 dans l'espace de nom Accounts. L'équipe Finance déploie des services de front end, de back end et de base de données pour l'application app Srv2 dans l'espace de nom Finance. Ces deux équipes étiquettent chaque service avec le libellé `app: Srv1` ou `app: Srv2` et le libellé `tier: frontend`, `tier: backend` ou `tier: db`. Elles étiquettent également les espaces de nom avec le libellé `usage: accounts` ou `usage: finance`.
+Les services qui sont détenus par plusieurs équipes subalternes doivent communiquer mais ces services sont déployés dans différents espaces de nom au sein du même cluster. L'équipe Accounts déploie des services de front end, de back end et de base de données pour l'application app Srv1 dans l'espace de nom Accounts. L'équipe Finance déploie des services de front end, de back end et de base de données pour l'application app Srv2 dans l'espace de nom Finance. Ces deux équipes étiquettent chaque service avec le libellé `app: Srv1` ou `app: Srv2` et le libellé `tier: frontend`, `tier: backend` ou `tier: db`. Elles étiquettent également les espaces de nom avec le libellé `usage: accounts` ou `usage: finance`.
 
 <img src="images/cs_network_policy_multi_ns.png" width="475" alt="Utilisation d'une règle réseau pour gérer le trafic entre différents espaces de nom." style="width:475px; border-style: none"/>
 
@@ -734,7 +785,7 @@ Pour consigner du trafic rejeté :
    </tr>
    <tr>
     <td><code>order</code></td>
-    <td>Les règles Calico ont un ordre qui détermine à quel moment elles sont appliquées aux paquets de demandes entrantes. Les règles avec les ordres les moins élevés, par exemple <code>1000</code>, sont appliquées en premier. Les règles avec les ordres les plus élevés sont appliquées après les règles dont les ordres sont plus faibles. Par exemple, une règle avec un ordre très élevé, par exemple <code>3000</code>, est effectivement appliquée en dernier, une fois que toutes les règles d'ordre plus faible ont été appliquées. </br></br>Les paquets de demandes entrantes passent par la chaîne de règles Iptables et tentent d'abord de correspondre aux règles d'ordre moins élevé. Si un paquet correspond à une règle, le paquet est accepté. Toutefois, si un paquet ne correspond à aucune règle, il arrive à la dernière règle de la chaîne de règles Iptables avec l'ordre le plus élevé. Pour garantir qu'il s'agit de la dernière règle dans la chaîne, utilisez un ordre beaucoup plus élevé, par exemple <code>3000</code>, que la règle que vous avez créée à l'étape 1.</td>
+    <td>Les règles Calico ont un ordre qui détermine à quel moment elles sont appliquées aux paquets de demandes entrantes. Les règles avec les ordres les moins élevés, par exemple <code>1000</code>, sont appliquées en premier. Les règles avec les ordres les plus élevés sont appliquées après les règles dont les ordres sont plus faibles. Par exemple, une règle avec un ordre très élevé, par exemple <code>3000</code>, est effectivement appliquée en dernier, une fois que toutes les règles d'ordre plus faible ont été appliquées. </br></br>Les paquets de demandes entrantes passent par la chaîne de règles Iptables et tentent d'abord de correspondre aux règles d'ordre moins élevé. Si un paquet correspond à une règle, le paquet est accepté. Toutefois, si un paquet ne correspond à aucune règle, il arrive à la dernière règle de la chaîne de règles Iptables avec l'ordre le plus élevé. Pour garantir qu'il s'agit de la dernière règle dans la chaîne, utilisez un ordre beaucoup plus élevé, par exemple <code>3000</code>, par rapport à celui de la règle que vous avez créée à l'étape 1. </td>
    </tr>
   </tbody>
   </table>
@@ -747,10 +798,13 @@ Pour consigner du trafic rejeté :
 
 4. Générez des entrées de journal en envoyant des demandes qui ne sont pas autorisées par la règle que vous avez créée à l'étape 1. Par exemple, essayez d'exécuter une commande PING vers le pod qui est protégé par la règle de réseau à partir d'un pod ou d'une adresse IP non admis.
 
-5. Recherchez les entrées de journal qui sont écrites dans le chemin `/var/log/syslog`. Notez que les adresses IP DST (destination) ou SRC (source) dans l'entrée de journal peuvent être différentes de celles prévues en raison des proxy, de la conversion d'adresses réseau et d'autres processus réseau. L'entrée de journal se présente comme suit :
+5. Recherchez les entrées de journal qui sont écrites dans le chemin `/var/log/syslog`. Les adresses IP DST (destination) ou SRC (source) dans l'entrée de journal peuvent être différentes de celles prévues en raison des proxy, de la conversion d'adresses réseau et d'autres processus réseau. L'entrée de journal se présente comme suit :
   ```
   Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
   ```
   {: screen}
 
 6. Facultatif : [Acheminez les journaux ](/docs/containers?topic=containers-health#configuring) from `/var/log/syslog` vers un serveur syslog externe.
+
+
+

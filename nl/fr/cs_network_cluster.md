@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, vlan
 
 subcollection: containers
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Modification des noeuds finaux de service ou des connexions VLAN
 {: #cs_network_cluster}
 
@@ -38,11 +39,11 @@ Dans les clusters exécutant Kubernetes version 1.11 ou ultérieure, activez ou 
 
 Le noeud final de service privé rend votre maître Kubernetes accessible en privé. Vos noeuds worker et vos utilisateurs de cluster autorisés peuvent communiquer avec le maître Kubernetes sur le réseau privé. Pour déterminer si vous pouvez activer le noeud final de service privé, voir [Communication entre les noeuds worker et le maître et entre les utilisateurs et le maître](/docs/containers?topic=containers-plan_clusters#internet-facing). Notez que vous ne pouvez pas désactiver le noeud final de service privé une fois que vous l'avez activé.
 
-Avez-vous créé un cluster avec un noeud final de service privé uniquement lorsque vous avez activé votre compte pour [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et les [noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)? Essayez de [configurer le noeud final de service public](#set-up-public-se) de manière à pouvoir utiliser votre cluster jusqu'à ce que vos cas de support soient traités pour mettre à jour votre compte.
+Avez-vous créé un cluster avec un noeud final de service privé uniquement lorsque vous avez activé votre compte pour [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) et les [noeuds finaux de service](/docs/resources?topic=resources-private-network-endpoints#getting-started)? Essayez de [configurer le noeud final de service public](#set-up-public-se) de manière à pouvoir utiliser votre cluster jusqu'à ce que vos cas de support soient traités pour mettre à jour votre compte.
 {: tip}
 
-1. Activez [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-2. [Activez votre compte {{site.data.keyword.Bluemix_notm}} pour utiliser des noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Activez [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) dans votre compte d'infrastructure IBM Cloud. Pour vérifier si la fonction VRF est déjà activée, utilisez la commande `ibmcloud account show`. 
+2. [Activez votre compte {{site.data.keyword.cloud_notm}} pour utiliser des noeuds finaux de service](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Activez le noeud final de service privé.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -65,13 +66,12 @@ Avez-vous créé un cluster avec un noeud final de service privé uniquement lor
 
 8. Si le cluster se trouve dans un environnement protégé par un pare-feu :
   * [Autorisez vos utilisateurs de cluster autorisés à exécuter des commandes `kubectl` pour accéder au maître via le noeud final de service privé.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * [Autorisez le trafic réseau sortant sur les adresses IP privées](/docs/containers?topic=containers-firewall#firewall_outbound) pour les ressources d'infrastructure et les services {{site.data.keyword.Bluemix_notm}} que vous envisagez d'utiliser.
+  * [Autorisez le trafic réseau sortant sur les adresses IP privées](/docs/containers?topic=containers-firewall#firewall_outbound) pour les ressources d'infrastructure et les services {{site.data.keyword.cloud_notm}} que vous envisagez d'utiliser.
 
-9. Facultatif : pour utiliser le noeud final de service privé uniquement, désactivez le noeud final de service public.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+9.  Facultatif : pour utiliser le noeud final de service privé uniquement : 
+    1.  [Désactivez le noeud final de service public](#disable-public-se). 
+    2.  [Configurez l'accès au maître sur le noeud final de service privé](/docs/containers?topic=containers-clusters#access_on_prem). 
+
 
 <br />
 
@@ -85,7 +85,7 @@ Activez ou désactivez le noeud final de service public pour votre cluster.
 Le noeud final de service public rend votre maître Kubernetes accessible au public. Vos noeuds worker et vos utilisateurs de cluster autorisés peuvent communiquer de manière sécurisée avec le maître Kubernetes sur le réseau public. Pour plus d'informations, voir [Communication entre les noeuds worker et le maître et entre les utilisateurs et le maître](/docs/containers?topic=containers-plan_clusters#internet-facing).
 
 **Procédure d'activation**</br>
-Si vous avez précédemment désactivé le noeud final public, vous pouvez le réactiver. 
+Si vous avez précédemment désactivé le noeud final public, vous pouvez le réactiver.
 1. Activez le noeud final de service public.
    ```
    ibmcloud ks cluster-feature-enable public-service-endpoint --cluster <cluster_name_or_ID>
@@ -96,35 +96,34 @@ Si vous avez précédemment désactivé le noeud final public, vous pouvez le r�
    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   </br>
-
-**Procédure de désactivation**</br>
-Pour désactiver le noeud final de service public, vous devez d'abord activer le noeud final de service privé pour que vos noeuds worker puissent communiquer avec le maître Kubernetes.
-1. Activez le noeud final de service privé.
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. Actualisez le serveur d'API du maître Kubernetes pour l'utilisation du noeud final de service privé à l'invite de l'interface de ligne de commande ou en exécutant la commande suivante.
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
 3. [Créez une mappe de configuration (configmap)](/docs/containers?topic=containers-update#worker-up-configmap) pour contrôler le nombre maximal de noeuds worker pouvant être indisponibles à moment donné dans votre cluster. Lorsque vous mettez à jour vos noeuds worker, la mappe de configuration permet d'éviter l'interruption de vos applications car les applications sont replanifiées dans l'ordre sur les noeuds worker disponibles.
-
-4. Mettez à jour tous les noeuds worker de votre cluster pour récupérer la configuration du noeud final de service privé.
-
-   <p class="important">En émettant la commande de mise à jour, les noeuds worker sont rechargés pour récupérer la configuration du noeud final de service. Si aucun noeud worker n'est disponible, vous devez [recharger manuellement les noeuds worker](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). Dans ce cas, veillez à effectuer les opérations cordon, drain et à gérer l'ordre pour contrôler le nombre maximal de noeuds worker indisponibles à moment donné.</p>
+4. Mettez à jour tous les noeuds worker de votre cluster pour retirer la configuration du noeud final de service public. <p class="important">En émettant la commande de mise à jour, les noeuds worker sont rechargés pour récupérer la configuration du noeud final de service. Si aucun noeud worker n'est disponible, vous devez recharger manuellement les noeuds worker à l'aide de la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Dans ce cas, veillez à effectuer les opérations cordon, drain et à gérer l'ordre pour contrôler le nombre maximal de noeuds worker indisponibles à moment donné.</p>
    ```
    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
    ```
   {: pre}
-5. Désactivez le noeud final de service public.
+   </br>
+
+{: #disable-public-se}
+**Procédure de désactivation**</br>
+Pour désactiver le noeud final de service public, vous devez d'abord activer le noeud final de service privé pour que vos noeuds worker puissent communiquer avec le maître Kubernetes.
+1. [Activez le noeud final de service privé](#set-up-private-se). 
+2. Désactivez le noeud final de service public.
    ```
    ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
+3. Actualisez le serveur d'API du maître Kubernetes pour retirer le noeud final de service public en utilisant l'interface de ligne de commande ou en exécutant la commande suivante :
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. [Créez une mappe de configuration (configmap)](/docs/containers?topic=containers-update#worker-up-configmap) pour contrôler le nombre maximal de noeuds worker pouvant être indisponibles à moment donné dans votre cluster. Lorsque vous mettez à jour vos noeuds worker, la mappe de configuration permet d'éviter l'interruption de vos applications car les applications sont replanifiées dans l'ordre sur les noeuds worker disponibles.
+5. Mettez à jour tous les noeuds worker de votre cluster pour retirer la configuration du noeud final de service public. <p class="important">En émettant la commande de mise à jour, les noeuds worker sont rechargés pour récupérer la configuration du noeud final de service. Si aucun noeud worker n'est disponible, vous devez recharger manuellement les noeuds worker à l'aide de la [commande](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Dans ce cas, veillez à effectuer les opérations cordon, drain et à gérer l'ordre pour contrôler le nombre maximal de noeuds worker indisponibles à moment donné.</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
 
 ## Passage du noeud final de service public au noeud final de service privé
 {: #migrate-to-private-se}
@@ -138,8 +137,8 @@ Tous les clusters connectés à un VLAN public et un VLAN privé utilisent le no
 
 Notez que vous ne pouvez pas désactiver le noeud final de service privé une fois que vous l'avez activé.
 
-1. Activez [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) dans votre compte d'infrastructure IBM Cloud (SoftLayer).
-2. [Activez votre compte {{site.data.keyword.Bluemix_notm}} pour utiliser des noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Activez [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) dans votre compte d'infrastructure IBM Cloud. Pour vérifier si la fonction VRF est déjà activée, utilisez la commande `ibmcloud account show`. 
+2. [Activez votre compte {{site.data.keyword.cloud_notm}} pour utiliser des noeuds finaux de service](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Activez le noeud final de service privé.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -160,11 +159,13 @@ Notez que vous ne pouvez pas désactiver le noeud final de service privé une fo
     ```
     {: pre}
 
-7. Facultatif : désactivez le noeud final de service public.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+7.  Facultatif : pour utiliser le noeud final de service privé uniquement : 
+    1.  Désactivez le noeud final de service public.
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [Configurez l'accès au maître sur le noeud final de service privé](/docs/containers?topic=containers-clusters#access_on_prem). 
 
 <br />
 
@@ -216,7 +217,7 @@ Pour modifier les VLAN utilisés par un pool de noeuds worker pour mettre à dis
      ```
      {: screen}
 
-  3. Si vous devez commander un nouveau VLAN public et un nouveau VLAN privé, vous pouvez le faire dans la [console {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) ou utiliser la commande suivante. N'oubliez pas que les VLAN doivent être compatibles, avec des ID de pod de **Router** correspondants, comme indiqué à l'étape précédente. Si vous créez une paire de nouveaux VLAN public-privé, ces VLAN doivent être compatibles.
+  3. Si vous devez commander un nouveau VLAN public et un nouveau VLAN privé, vous pouvez le faire dans la [console {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) ou utiliser la commande suivante. N'oubliez pas que les VLAN doivent être compatibles, avec des ID de pod de **Router** correspondants, comme indiqué à l'étape précédente. Si vous créez une paire de nouveaux VLAN public-privé, ces VLAN doivent être compatibles.
      ```
      ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
      ```
@@ -236,7 +237,7 @@ Pour modifier les VLAN utilisés par un pool de noeuds worker pour mettre à dis
       ```
       {: pre}
 
-    * Exemple pour ajouter uniquement un VLAN privé, comme si vous passiez d'une paire de VLAN public-privé à un VLAN privé uniquement lorsque vous avez un [compte avec la fonction VRF activée qui utilise des noeuds finaux de service](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started) :
+    * Exemple pour ajouter uniquement un VLAN privé, comme si vous passiez d'une paire de VLAN public-privé à un VLAN privé uniquement lorsque vous avez un [compte avec la fonction VRF activée qui utilise des noeuds finaux de service](/docs/resources?topic=resources-private-network-endpoints#getting-started) :
       ```
       ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
       ```
@@ -289,4 +290,4 @@ Pour modifier les VLAN utilisés par un pool de noeuds worker pour mettre à dis
 
 8. Facultatif : vous pouvez répéter les étapes 2 à 7 pour chaque pool de noeuds worker dans votre cluster. Lorsque vous avez terminé, tous les noeuds worker de votre cluster sont configurés avec les nouveaux VLAN.
 
-9. Les ALB par défaut dans votre cluster sont toujours liés à l'ancien VLAN car leurs adresses IP proviennent d'un sous-réseau de ce VLAN. Les ALB pouvant être déplacés d'un VLAN à un autre, vous pouvez à la place [créer des ALB sur les nouveaux VLAN et désactiver les ALB sur les anciens VLAN](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+10. Facultatif : si vous n'avez plus besoin des sous-réseaux sur les anciens VLAN, vous pouvez [les retirer](/docs/containers?topic=containers-subnets#remove-subnets). 

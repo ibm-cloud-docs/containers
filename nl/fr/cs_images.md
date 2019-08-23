@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -47,7 +47,7 @@ Vous pouvez utiliser plusieurs registres avec {{site.data.keyword.containerlong_
 |Registre|Description|Avantage|
 |--------|-----------|-------|
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|Cette option vous permet de mettre en place votre propre référentiel d'images Docker sécurisé dans {{site.data.keyword.registryshort_notm}} où vous pourrez stocker en sécurité vos images et les partager avec les autres utilisateurs du cluster.|<ul><li>Gestion de l'accès aux images dans votre compte.</li><li>Utilisation d'images et de modèles d'application fournis par {{site.data.keyword.IBM_notm}}, comme {{site.data.keyword.IBM_notm}} Liberty,  en tant qu'image parent à laquelle vous ajouterez votre propre code d'application.</li><li>Analyse automatique des images pour détection de vulnérabilités potentielles par Vulnerability Advisor et soumission de recommandations spécifiques au système d'exploitation pour les corriger.</li></ul>|
-|Tout autre registre privé|Connexion de n'importe quel registre privé existant à votre cluster en créant une [valeur confidentielle d'extraction d'image ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/containers/images/). Cette valeur est utilisée pour enregistrer de manière sécurisée l'URL de votre registre et les données d'identification dans une valeur confidentielle Kubernetes.|<ul><li>Utilisation de registres privés existants indépendamment de leur source (Docker Hub, registres dont l'organisation est propriétaire, autres registres Cloud privés).</li></ul>|
+|Tout autre registre privé|Connexion de n'importe quel registre privé existant à votre cluster en créant un [secret d'extraction d'image ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/containers/images/). Ce secret est utilisé pour enregistrer de manière sécurisée l'URL de votre registre et les données d'identification dans un secret Kubernetes.|<ul><li>Utilisation de registres privés existants indépendamment de leur source (Docker Hub, registres dont l'organisation est propriétaire, autres registres Cloud privés).</li></ul>|
 |[Docker Hub public![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://hub.docker.com/){: #dockerhub}|Utilisez cette option pour utiliser des images publiques Docker Hub existantes directement dans votre [déploiement Kubernetes![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) lorsqu'il n'y a pas besoin d'effectuer des modifications dans Dockerfile. <p>**Remarque :** gardez à l'esprit que cette option peut ne pas satisfaire les exigences de sécurité de votre organisation (par exemple, en matière de gestion des accès, d'analyse des vulnérabilités ou de protection des données confidentielles de l'application).</p>|<ul><li>Aucune configuration supplémentaire du cluster n'est nécessaire.</li><li>Inclut un certain nombre d'applications en code source ouvert.</li></ul>|
 {: caption="Options de registre d'images public et privé" caption-side="top"}
 
@@ -68,7 +68,7 @@ Vous pouvez générer des conteneurs à partir d'images sécurisées qui sont si
 2.  Pour imposer une règle stipulant que seules des images signées peuvent être utilisées pour générer des conteneurs dans votre cluster, [ajoutez Container Image Security Enforcement (bêta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce).
 3.  Déployez votre application.
     1. [Déploiement dans l'espace de nom Kubernetes `default`](#namespace).
-    2. [Déploiement dans un autre espace de nom Kubernetes ou à partir d'une autre région ou d'un autre compte {{site.data.keyword.Bluemix_notm}}](#other).
+    2. [Déploiement dans un autre espace de nom Kubernetes ou à partir d'une autre région ou d'un autre compte {{site.data.keyword.cloud_notm}}](#other). 
 
 <br />
 
@@ -130,80 +130,80 @@ Pour déployer un conteneur dans l'espace de nom **default** de votre cluster :
 ## Comment autoriser votre cluster à extraire des images d'un registre ?
 {: #cluster_registry_auth}
 
-Pour extraire des images d'un registre, votre cluster {{site.data.keyword.containerlong_notm}} utilise un type spécial de secret Kubernetes, un `imagePullSecret`. Cette valeur confidentielle d'extraction d'image stocke les données d'identification permettant d'accéder à un registre de conteneur. Le registre de conteneur peut être votre espace de nom dans {{site.data.keyword.registrylong_notm}}, un espace de nom dans {{site.data.keyword.registrylong_notm}} qui appartient à un autre compte {{site.data.keyword.Bluemix_notm}} ou n'importe quel autre registre privé, tel que Docker. Votre cluster est configuré pour extraire des images de votre espace de nom dans {{site.data.keyword.registrylong_notm}} et déployer des conteneurs à partir de ces images dans l'espace de nom kubernetes `default` dans votre cluster. Si vous devez extraire des images dans d'autres espaces de nom Kubernetes de cluster ou d'autres registres, vous devez configurer la valeur confidentielle d'extraction d'image.
+Pour extraire des images d'un registre, votre cluster {{site.data.keyword.containerlong_notm}} utilise un type spécial de secret Kubernetes, un `imagePullSecret`. Ce secret d'extraction d'image stocke les données d'identification permettant d'accéder à un registre de conteneur. Le registre de conteneur peut être votre espace de nom dans {{site.data.keyword.registrylong_notm}}, un espace de nom dans {{site.data.keyword.registrylong_notm}} qui appartient à un autre compte {{site.data.keyword.cloud_notm}} ou n'importe quel autre registre privé, tel que Docker. Votre cluster est configuré pour extraire des images de votre espace de nom dans {{site.data.keyword.registrylong_notm}} et déployer des conteneurs à partir de ces images dans l'espace de nom kubernetes `default` dans votre cluster. Si vous devez extraire des images dans d'autres espaces de nom Kubernetes de cluster ou d'autres registres, vous devez configurer le secret d'extraction d'image.
 {:shortdesc}
 
 **Comment mon cluster est-il configuré pour extraire des images de l'espace de nom Kubernetes `default` ?**<br>
-Lorsque vous créez un cluster, il dispose d'un ID de service {{site.data.keyword.Bluemix_notm}} IAM associé à une règle de rôle d'accès au service **Reader** IAM dans {{site.data.keyword.registrylong_notm}}. Les données d'identification de l'ID de service sont représentées dans une clé d'API qui n'expire jamais et qui est stockée dans des valeurs confidentielles d'extraction d'image dans votre cluster. Ces valeurs confidentielles sont ajoutées dans l'espace de nom Kubernetes `default` et la liste de ces valeurs dans le compte de service `default` correspondant à cet espace de nom. En utilisant des valeurs confidentielles d'extraction d'image, vos déploiements peuvent extraire des images (avec accès en lecture seule) dans votre [registre global et régional](/docs/services/Registry?topic=registry-registry_overview#registry_regions) pour générer des conteneurs dans l'espace de nom Kubernetes `default`. Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke vos propres images Docker privées de manière sécurisée.
+Lorsque vous créez un cluster, il dispose d'un ID de service {{site.data.keyword.cloud_notm}} IAM associé à une règle de rôle d'accès au service **Reader** IAM dans {{site.data.keyword.registrylong_notm}}. Les données d'identification de l'ID de service sont représentées dans une clé d'API qui n'expire jamais et qui est stockée dans des secrets d'extraction d'image dans votre cluster. Ces secrets sont ajoutés dans l'espace de nom Kubernetes `default` et la liste de ces secrets dans le compte de service `default` correspondant à cet espace de nom. En utilisant des secrets d'extraction d'image, vos déploiements peuvent extraire des images (avec accès en lecture seule) dans votre [registre global et régional](/docs/services/Registry?topic=registry-registry_overview#registry_regions) pour générer des conteneurs dans l'espace de nom Kubernetes `default`. Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke vos propres images Docker privées de manière sécurisée.
 
 **Puis-je restreindre l'accès pour l'extraction à un registre régional particulier ?**<br>
-Oui, vous pouvez [editer la règle IAM existante de l'ID de service](/docs/iam?topic=iam-serviceidpolicy#access_edit) qui limite le rôle d'accès au service **Lecteur** à ce registre régional ou à une ressource de registre, comme par exemple, un espace de nom. Avant de personnaliser des règles IAM de registre, vous devez [activer les règles {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
+Oui, vous pouvez [editer la règle IAM existante de l'ID de service](/docs/iam?topic=iam-serviceidpolicy#access_edit) qui limite le rôle d'accès au service **Lecteur** à ce registre régional ou à une ressource de registre, comme par exemple, un espace de nom. Avant de personnaliser des règles IAM de registre, vous devez [activer les règles {{site.data.keyword.cloud_notm}} IAM pour {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
 
-  Vous voulez sécuriser davantage les données d'identification de votre registre ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les valeurs confidentielles Kubernetes, telles que `imagePullSecret` qui stocke les données d'identification de votre registre.
+  Vous voulez sécuriser davantage les données d'identification de votre registre ? Demandez à l'administrateur de votre cluster d'[activer {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) dans votre cluster pour chiffrer les secrets Kubernetes, tels que `imagePullSecret` qui stocke les données d'identification de votre registre.
   {: tip}
 
 **Puis-je extraire des images dans des espaces de nom Kubernetes autres que `default` ?**<br>
-Par défaut, non. Avec la configuration de cluster par défaut, vous pouvez déployer des conteneurs depuis n'importe quelle image qui est stockée dans votre espace de nom {{site.data.keyword.registrylong_notm}} dans l'espace de nom Kubernetes `default` de votre cluster. Pour utiliser ces images dans d'autres espaces de nom Kubernetes ou d'autres comptes {{site.data.keyword.Bluemix_notm}}, [vous pouvez copier ou créer votre propre valeur confidentielle d'extraction d'image](#other).
+Par défaut, non. Avec la configuration de cluster par défaut, vous pouvez déployer des conteneurs depuis n'importe quelle image qui est stockée dans votre espace de nom {{site.data.keyword.registrylong_notm}} dans l'espace de nom Kubernetes `default` de votre cluster. Pour utiliser ces images dans d'autres espaces de nom Kubernetes ou d'autres comptes {{site.data.keyword.cloud_notm}}, [vous pouvez copier ou créer votre propre secret d'extraction d'image](#other).
 
-**Puis-je extraire des images d'un autre compte {{site.data.keyword.Bluemix_notm}} ?**<br>
-Oui, créez une clé d'API dans le compte {{site.data.keyword.Bluemix_notm}} que vous souhaitez utiliser. Ensuite, créez une valeur confidentielle d'extraction d'image qui stocke ces données d'identification de clé d'API dans chaque cluster et espace de nom de cluster à partir desquels vous souhaitez effectuer les extractions. [Suivez cet exemple qui utilise une clé d'API d'ID de service autorisé](#other_registry_accounts).
+**Puis-je extraire des images d'un autre compte {{site.data.keyword.cloud_notm}} ?**<br>
+Oui, créez une clé d'API dans le compte {{site.data.keyword.cloud_notm}} que vous souhaitez utiliser. Ensuite, créez un secret d'extraction d'image qui stocke ces données d'identification de clé d'API dans chaque cluster et espace de nom de cluster à partir desquels vous souhaitez effectuer les extractions. [Suivez cet exemple qui utilise une clé d'API d'ID de service autorisé](#other_registry_accounts).
 
-Pour utiliser un registre non {{site.data.keyword.Bluemix_notm}}, tel que Docker, voir [Accès aux images stockées dans d'autres registres privés](#private_images).
+Pour utiliser un registre non {{site.data.keyword.cloud_notm}}, tel que Docker, voir [Accès aux images stockées dans d'autres registres privés](#private_images).
 
 **La clé d'API doit-elle exister pour un ID de service ? Que se passe-t-il si j'atteins la limite d'ID de service pour mon compte ?**<br>
-La configuration de cluster par défaut crée un ID de service pour stocker les données d'identification de clé d'API {{site.data.keyword.Bluemix_notm}} IAM dans la valeur confidentielle d'extraction d'image. Cependant, vous pouvez également créer une clé d'API pour un utilisateur individuel et stocker ces données d'identification dans une valeur confidentielle d'extraction d'image. Si vous atteignez la [limite IAM d'ID de service](/docs/iam?topic=iam-iam_limits#iam_limits), votre cluster est créé sans l'ID de service et la valeur confidentielle d'extraction d'image et ne peut pas extraire des images des domaines de registre `icr.io` par défaut. Vous devez [créer votre propre valeur confidentielle d'extraction d'image](#other_registry_accounts), mais en utilisant une clé d'API pour un utilisateur individuel, tel qu'un ID fonctionnel, pas un ID de service {{site.data.keyword.Bluemix_notm}} IAM.
+La configuration de cluster par défaut crée un ID de service pour stocker les données d'identification de clé d'API {{site.data.keyword.cloud_notm}} IAM dans le secret d'extraction d'image. Cependant, vous pouvez également créer une clé d'API pour un utilisateur individuel et stocker ces données d'identification dans un secret d'extraction d'image. Si vous atteignez la [limite IAM d'ID de service](/docs/iam?topic=iam-iam_limits#iam_limits), votre cluster est créé sans l'ID de service et le secret d'extraction d'image et ne peut pas extraire des images des domaines de registre `icr.io` par défaut. Vous devez [créer votre propre secret d'extraction d'image](#other_registry_accounts), mais en utilisant une clé d'API pour un utilisateur individuel, tel qu'un ID fonctionnel, pas un ID de service {{site.data.keyword.cloud_notm}} IAM.
 
-**La valeur confidentielle d'extraction d'image de mon cluster utilise un jeton de registre. Un jeton fonctionne-t-il encore ?**<br>
+**Le secret d'extraction d'image de mon cluster utilise un jeton de registre. Un jeton fonctionne-t-il encore ?**<br>
 
-La méthode précédente qui consistait à autoriser l'accès d'un cluster à {{site.data.keyword.registrylong_notm}} par la création automatique d'un [jeton](/docs/services/Registry?topic=registry-registry_access#registry_tokens) et en stockant ce jeton dans une valeur confidentielle d'extraction d'image est prise en charge mais dépréciée.
+La méthode précédente qui consistait à autoriser l'accès d'un cluster à {{site.data.keyword.registrylong_notm}} via des [jetons](/docs/services/Registry?topic=registry-registry_access#registry_tokens) est prise en charge mais dépréciée.
 {: deprecated}
 
-Les jetons autorisent l'accès aux domaines de registre `registry.bluemix.net` obsolètes, tandis que les clés d'API autorisent l'accès aux domaines de registre `icr.io`. Durant la période de transition de l'authentification basée sur les jetons à l'authentification basée sur clés d'API, les jetons et les valeurs confidentielles d'extraction d'image basées sur les clés d'API sont créés pour un certain temps. Avec des jetons et des valeurs confidentielles d'extraction d'image basées sur des clés d'API, votre cluster peut extraire des images des domaines `registry.bluemix.net` ou `icr.io` dans l'espace de nom Kubernetes `default`.
+Les jetons autorisent l'accès aux domaines de registre `registry.bluemix.net` obsolètes, tandis que les clés d'API autorisent l'accès aux domaines de registre `icr.io`. Les clusters existants peuvent comporter à la fois des jetons et des secrets d'extraction d'image basés sur API, mais les nouveaux clusters utilisent uniquement des clés d'API. Par conséquent, les nouveaux clusters ne peuvent extraire des images qu'à partir des domaines `icr.io` dans l'espace de nom `default`. 
 
-Avant que les jetons obsolètes et les domaines `registry.bluemix.net` ne soient plus pris en charge, mettez à jour vos valeurs confidentielles d'extraction d'image de cluster qui utilisent la méthode de clé d'API pour l'[espace de nom Kubernetes `default`](#imagePullSecret_migrate_api_key) et [n'importe quels autres espaces de nom ou comptes](#other) que vous êtes susceptible d'utiliser. Ensuite, mettez à jour vos déploiements pour effectuer des extractions à partir des domaines de registre `icr.io`.
+Avant que les jetons obsolètes et les domaines `registry.bluemix.net` ne soient plus pris en charge, mettez à jour vos secrets d'extraction d'image de cluster qui utilisent la méthode de clé d'API pour l'[espace de nom Kubernetes `default`](#imagePullSecret_migrate_api_key) et [n'importe quels autres espaces de nom ou comptes](#other) que vous êtes susceptible d'utiliser. Ensuite, mettez à jour vos déploiements pour effectuer des extractions à partir des domaines de registre `icr.io`.
 
-**Une fois que j'ai copié ou créé une valeur confidentielle d'extraction d'image dans un autre espace de nom Kubernetes, ai-je terminé ?**<br>
-Pas tout à fait. Vos conteneurs doivent être autorisés à extraire des images à l'aide de la valeur confidentielle que vous avez créée. Vous pouvez ajouter la valeur confidentielle d'extraction d'image au compte de service pour l'espace de nom ou faire référence à la valeur confidentielle dans chaque déploiement. Pour obtenir des instructions, voir [Utilisation de valeur confidentielle d'extraction d'image pour déployer des conteneurs](/docs/containers?topic=containers-images#use_imagePullSecret).
+**Une fois que j'ai copié ou créé un secret d'extraction d'image dans un autre espace de nom Kubernetes, ai-je terminé ?**<br>
+Pas tout à fait. Vos conteneurs doivent être autorisés à extraire des images à l'aide du secret que vous avez créé. Vous pouvez ajouter le secret d'extraction d'image au compte de service pour l'espace de nom ou faire référence au secret dans chaque déploiement. Pour obtenir des instructions, voir [Utilisation de secret d'extraction d'image pour déployer des conteneurs](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 <br />
 
 
-## Mise à jour de clusters existants pour utiliser la valeur confidentielle d'extraction d'image de la clé d'API
+## Mise à jour de clusters existants pour utiliser le secret d'extraction d'image de la clé d'API
 {: #imagePullSecret_migrate_api_key}
 
-Les nouveaux clusters {{site.data.keyword.containerlong_notm}} stockent une clé d'API dans une [valeur confidentielle d'extraction d'image pour autoriser l'accès à {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth). Avec ces valeurs confidentielles d'extraction d'image, vous pouvez déployer des conteneurs à partir d'images stockées dans les domaines de registre `icr.io`. Pour les clusters créés avant le **25 février 2019**, vous devez mettre à jour votre cluster pour stocker une clé d'API au lieu d'un jeton de registre dans la valeur confidentielle d'extraction d'image.
+Les nouveaux clusters {{site.data.keyword.containerlong_notm}} stockent une clé d'API dans un [secret d'extraction d'image pour autoriser l'accès à {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth). Avec ces secrets d'extraction d'image, vous pouvez déployer des conteneurs à partir d'images stockées dans les domaines de registre `icr.io`. Pour les clusters créés avant le **25 février 2019**, vous devez mettre à jour votre cluster pour stocker une clé d'API au lieu d'un jeton de registre dans le secret d'extraction d'image.
 {: shortdesc}
 
 **Avant de commencer** :
 *   [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Vérifiez que vous disposez des droits suivants :
-    *   Rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Opérateur ou Administrateur** pour {{site.data.keyword.containerlong_notm}}. Le propriétaire de compte peut vous accorder le rôle en exécutant la commande suivante :
+    *   Rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Opérateur ou Administrateur** pour {{site.data.keyword.containerlong_notm}}. Le propriétaire de compte peut vous accorder le rôle en exécutant la commande suivante :
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   Rôle de plateforme {{site.data.keyword.Bluemix_notm}} IAM **Administrateur** pour {{site.data.keyword.registrylong_notm}}, sur toutes les régions et tous les groupes de ressources. Le propriétaire de compte peut vous accorder le rôle en exécutant la commande suivante :
+    *   Rôle de plateforme {{site.data.keyword.cloud_notm}} IAM **Administrateur** pour {{site.data.keyword.registrylong_notm}}, sur toutes les régions et tous les groupes de ressources. Le propriétaire de compte peut vous accorder le rôle en exécutant la commande suivante :
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
         {: pre}
 
-**Pour mettre à jour votre valeur confidentielle d'extraction d'image dans l'espace de nom Kubernetes `default`** :
+**Pour mettre à jour votre secret d'extraction d'image dans l'espace de nom Kubernetes `default`** :
 1.  Obtenez l'ID de votre cluster.
     ```
     ibmcloud ks clusters
     ```
     {: pre}
-2.  Exécutez la commande suivante pour créer un ID de service pour le cluster, affecter l'ID de service à un rôle de service IAM **Lecteur** pour {{site.data.keyword.registrylong_notm}}, créer une clé d'API pour représenter les données d'identification de l'ID de service et stocker la clé d'API dans une valeur confidentielle d'extraction d'image Kubernetes dans le cluster. Cette valeur confidentielle d'extraction d'image se trouve dans l'espace de nom Kubernetes `default`.
+2.  Exécutez la commande suivante pour créer un ID de service pour le cluster, affecter l'ID de service à un rôle de service IAM **Lecteur** pour {{site.data.keyword.registrylong_notm}}, créer une clé d'API pour représenter les données d'identification de l'ID de service et stocker la clé d'API dans un secret d'extraction d'image Kubernetes dans le cluster. Ce secret d'extraction d'image se trouve dans l'espace de nom Kubernetes `default`.
     ```
     ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-    Lorsque vous exécutez cette commande, la création de données d'identification IAM et de valeurs confidentielles d'extraction d'image est initiée et peut prendre un certain temps. Vous ne pouvez pas déployer de conteneurs qui extraient une image des domaines {{site.data.keyword.registrylong_notm}} `icr.io` tant que les valeurs confidentielles d'extraction d'image ne sont pas créées.
+    Lorsque vous exécutez cette commande, la création de données d'identification IAM et de secrets d'extraction d'image est initiée et peut prendre un certain temps. Vous ne pouvez pas déployer de conteneurs qui extraient une image des domaines {{site.data.keyword.registrylong_notm}} `icr.io` tant que les secrets d'extraction d'image ne sont pas créés.
     {: important}
 
-3.  Vérifiez que les valeurs confidentielles d'extraction d'image sont créées dans votre cluster. Notez que vous disposez de valeurs confidentielles distinctes pour chaque région {{site.data.keyword.registrylong_notm}}.
+3.  Vérifiez que les secrets d'extraction d'image sont créés dans votre cluster. Notez que vous disposez de secrets distincts pour chaque région {{site.data.keyword.registrylong_notm}}.
     ```
     kubectl get secrets
     ```
@@ -222,45 +222,45 @@ Les nouveaux clusters {{site.data.keyword.containerlong_notm}} stockent une clé
 5.  Facultatif : si vous disposez d'un pare-feu, veillez à [autoriser le trafic réseau sortant vers les sous-réseaux de registre](/docs/containers?topic=containers-firewall#firewall_outbound) pour les domaines que vous utilisez.
 
 **Etape suivante ?**
-*   Pour extraire des images dans d'autres espaces de nom Kubernetes que `default` ou à partir d'autres comptes {{site.data.keyword.Bluemix_notm}}, [copiez ou créez une autre valeur confidentielle d'extraction d'image](/docs/containers?topic=containers-images#other).
-*   Pour limiter l'accès de la valeur confidentielle d'extraction d'image à des ressources de registre particulières, par exemple des espaces de nom ou des régions :
-    1.  Vérifiez que les [règles {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.registrylong_notm}} sont activées](/docs/services/Registry?topic=registry-user#existing_users).
-    2.  [Editez les règles {{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit) pour l'ID de service, ou [créez une autre valeur confidentielle d'extraction d'image](/docs/containers?topic=containers-images#other_registry_accounts).
+*   Pour extraire des images dans d'autres espaces de nom Kubernetes que `default` ou à partir d'autres comptes {{site.data.keyword.cloud_notm}}, [copiez ou créez un autre secret d'extraction d'image](/docs/containers?topic=containers-images#other).
+*   Pour limiter l'accès du secret d'extraction d'image à des ressources de registre particulières, par exemple des espaces de nom ou des régions :
+    1.  Vérifiez que les [règles {{site.data.keyword.cloud_notm}} IAM pour {{site.data.keyword.registrylong_notm}} sont activées](/docs/services/Registry?topic=registry-user#existing_users). 
+    2.  [Editez les règles {{site.data.keyword.cloud_notm}} IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit) pour l'ID de service, ou [créez un autre secret d'extraction d'image](/docs/containers?topic=containers-images#other_registry_accounts).
 
 <br />
 
 
-## Utilisation d'une valeur confidentielle d'extraction d'image pour accéder à d'autres espaces de nom Kubernetes de cluster, d'autres comptes {{site.data.keyword.Bluemix_notm}} ou à des registres privés externes
+## Utilisation d'un secret d'extraction d'image pour accéder à d'autres espaces de nom Kubernetes de cluster, d'autres comptes {{site.data.keyword.cloud_notm}} ou à des registres privés externes
 {: #other}
 
-Configurez votre propre valeur confidentielle d'extraction d'image pour déployer des conteneurs dans d'autres espaces de nom Kubernetes que `default`, utiliser des images stockées dans d'autres comptes {{site.data.keyword.Bluemix_notm}} ou utiliser des images stockées dans des registres privés externes. Par ailleurs, vous pouvez créer votre propre valeur confidentielle d'extraction d'image pour appliquer des règles d'accès IAM limitant les droits à des espaces de nom d'image de registre ou des actions (telles que `push` ou `pull`) spécifiques.
+Configurez votre propre secret d'extraction d'image pour déployer des conteneurs dans d'autres espaces de nom Kubernetes que `default`, utiliser des images stockées dans d'autres comptes {{site.data.keyword.cloud_notm}} ou utiliser des images stockées dans des registres privés externes. Par ailleurs, vous pouvez créer votre propre secret d'extraction d'image pour appliquer des règles d'accès IAM limitant les droits à des espaces de nom d'image de registre ou des actions (telles que `push` ou `pull`) spécifiques.
 {:shortdesc}
 
-Une fois que vous avez créé la valeur confidentielle d'extraction d'image, vous conteneurs doivent utiliser la valeur confidentielle pour être autorisés à extraire une image du registre. Vous pouvez ajouter la valeur confidentielle d'extraction d'image au compte de service pour l'espace de nom ou faire référence à la valeur confidentielle dans chaque déploiement. Pour obtenir des instructions, voir [Utilisation de valeur confidentielle d'extraction d'image pour déployer des conteneurs](/docs/containers?topic=containers-images#use_imagePullSecret).
+Une fois que vous avez créé le secret d'extraction d'image, vous conteneurs doivent utiliser le secret pour être autorisés à extraire une image du registre. Vous pouvez ajouter le secret d'extraction d'image au compte de service pour l'espace de nom ou faire référence au secret dans chaque déploiement. Pour obtenir des instructions, voir [Utilisation de secret d'extraction d'image pour déployer des conteneurs](/docs/containers?topic=containers-images#use_imagePullSecret).
 
-Les valeurs confidentielles d'extraction d'image sont valides uniquement pour les espaces de nom Kubernetes pour lesquels elles ont été créées. Répétez ces étapes pour chaque espace de nom dans lequel vous désirez déployer des conteneurs. Les images de [DockerHub](#dockerhub) ne nécessitent pas de valeurs confidentielles d'extraction d'image.
+Les secrets d'extraction d'image sont valides uniquement pour les espaces de nom Kubernetes pour lesquels elles ont été créées. Répétez ces étapes pour chaque espace de nom dans lequel vous désirez déployer des conteneurs. Les images de [DockerHub](#dockerhub) ne nécessitent pas de secrets d'extraction d'image.
 {: tip}
 
 Avant de commencer :
 
 1.  [Configurez un espace de nom dans {{site.data.keyword.registryshort_notm}} et envoyez des images dans cet espace de nom](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2.  [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
-3.  Si vous utilisez un cluster créé avant le **25 février 2019**, [mettez à jour votre cluster pour utiliser la valeur confidentielle d'extraction d'image de clé d'API](#imagePullSecret_migrate_api_key).
+3.  Si vous utilisez un cluster créé avant le **25 février 2019**, [mettez à jour votre cluster pour utiliser le secret d'extraction d'image de clé d'API](#imagePullSecret_migrate_api_key).
 4.  [Connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 <br/>
-Pour utiliser votre propre valeur confidentielle d'extraction d'image, choisissez parmi les options suivantes :
-- [Copier la valeur confidentielle d'extraction d'image](#copy_imagePullSecret) de l'espace de nom Kubernetes default dans d'autres espaces de nom de votre cluster.
-- [Créer de nouvelles données d'identification de clé d'API IAM et les stocker dans une valeur confidentielle d'extraction d'image](#other_registry_accounts) pour accéder à des images dans d'autres comptes {{site.data.keyword.Bluemix_notm}} ou our appliquer des règles IAM limitant l'accès à certains domaines ou espaces de nom de registre.
-- [Créer une valeur confidentielle d'extraction d'image pour accéder aux images dans des registres privés externes](#private_images).
+Pour utiliser votre propre secret d'extraction d'image, choisissez parmi les options suivantes :
+- [Copier le secret d'extraction d'image](#copy_imagePullSecret) de l'espace de nom Kubernetes default dans d'autres espaces de nom de votre cluster.
+- [Créer de nouvelles données d'identification de clé d'API IAM et les stocker dans un secret d'extraction d'image](#other_registry_accounts) pour accéder à des images dans d'autres comptes {{site.data.keyword.cloud_notm}} ou our appliquer des règles IAM limitant l'accès à certains domaines ou espaces de nom de registre.
+- [Créer un secret d'extraction d'image pour accéder aux images dans des registres privés externes](#private_images).
 
 <br/>
-Si vous avez déjà créé une valeur confidentielle d'extraction d'image dans votre espace de nom et que vous voulez utiliser cette valeur dans votre déploiement, voir [Déploiement de conteneurs en utilisant la valeur confidentielle `imagePullSecret` créée](#use_imagePullSecret).
+Si vous avez déjà créé un secret d'extraction d'image dans votre espace de nom et que vous voulez utiliser cette valeur dans votre déploiement, voir [Déploiement de conteneurs en utilisant le secret `imagePullSecret` créé](#use_imagePullSecret).
 
-### Copie d'une valeur confidentielle d'extraction d'image
+### Copie d'un secret d'extraction d'image
 {: #copy_imagePullSecret}
 
-Vous pouvez copier une valeur confidentielle d'extraction d'image, telle que celle qui est créée automatiquement pour l'espace de nom Kubernetes `default` dans d'autres espaces de nom de votre cluster. Si vous souhaitez utiliser d'autres données d'identification de clé d'API {{site.data.keyword.Bluemix_notm}} IAM pour cet espace de nom, par exemple, pour limiter l'accès à certains espaces de nom ou pour extraire des images d'autres comptes {{site.data.keyword.Bluemix_notm}}, [créez une valeur confidentielle d'extraction d'image](#other_registry_accounts) à la place.
+Vous pouvez copier un secret d'extraction d'image, tel que celui qui est créé automatiquement pour l'espace de nom Kubernetes `default` dans d'autres espaces de nom de votre cluster. Si vous souhaitez utiliser d'autres données d'identification de clé d'API {{site.data.keyword.cloud_notm}} IAM pour cet espace de nom, par exemple, pour limiter l'accès à certains espaces de nom ou pour extraire des images d'autres comptes {{site.data.keyword.cloud_notm}}, [créez un secret d'extraction d'image](#other_registry_accounts) à la place.
 {: shortdesc}
 
 1.  Répertoriez les espaces de nom Kubernetes disponibles dans votre cluster ou créez un espace de nom à utiliser.
@@ -285,7 +285,7 @@ Vous pouvez copier une valeur confidentielle d'extraction d'image, telle que cel
     kubectl create namespace <namespace_name>
     ```
     {: pre}
-2.  Répertoriez les valeurs confidentielles d'extraction d'image (secrets) dans les espaces de nom Kubernetes `default` pour {{site.data.keyword.registrylong_notm}}.
+2.  Répertoriez les secrets d'extraction d'image dans les espaces de nom Kubernetes `default` pour {{site.data.keyword.registrylong_notm}}.
     ```
     kubectl get secrets -n default | grep icr
     ```
@@ -300,7 +300,7 @@ Vous pouvez copier une valeur confidentielle d'extraction d'image, telle que cel
     default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
-3.  Copiez chaque valeur confidentielle d'extraction d'image de l'espace de nom `default` vers les espaces de nom de votre choix. Les nouvelles valeurs confidentielles d'extraction d'image sont nommées `<namespace_name>-icr-<region>-io`.
+3.  Copiez chaque secret d'extraction d'image de l'espace de nom `default` vers les espaces de nom de votre choix. Les nouveaux secrets d'extraction d'image sont nommés `<namespace_name>-icr-<region>-io`.
     ```
     kubectl get secret default-us-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
@@ -325,22 +325,22 @@ Vous pouvez copier une valeur confidentielle d'extraction d'image, telle que cel
     kubectl get secret default-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
-4.  Vérifiez que la création des valeurs confidentielles a abouti.
+4.  Vérifiez que la création des secrets a abouti.
     ```
     kubectl get secrets -n <namespace_name>
     ```
     {: pre}
-5.  [Ajoutez une valeur confidentielle d'extraction d'image à un compte de service Kubernetes pour qu'un pod de l'espace de nom puisse utiliser cette valeur confidentielle lorsque vous déployez un conteneur](#use_imagePullSecret).
+5.  [Ajoutez un secret d'extraction d'image à un compte de service Kubernetes pour qu'un pod de l'espace de nom puisse utiliser ce secret lorsque vous déployez un conteneur](#use_imagePullSecret).
 
-### Création d'une valeur confidentielle d'extraction d'image avec d'autres données d'identification de clé d'API IAM pour plus de contrôle ou pour accéder à des images dans d'autres comptes {{site.data.keyword.Bluemix_notm}}
+### Création d'un secret d'extraction d'image avec d'autres données d'identification de clé d'API IAM pour plus de contrôle ou pour accéder à des images dans d'autres comptes {{site.data.keyword.cloud_notm}}
 {: #other_registry_accounts}
 
-Vous pouvez affecter des règles d'accès {{site.data.keyword.Bluemix_notm}} IAM à des utilisateurs ou à un ID de service pour limiter les droits à des espaces de nom d'images de registre ou des actions (telles que `push` ou `pull`) spécifiques. Ensuite, créez une clé d'API et stockez ces données d'identification de registre dans une valeur confidentielle d'extraction d'image pour votre cluster.
+Vous pouvez affecter des règles d'accès {{site.data.keyword.cloud_notm}} IAM à des utilisateurs ou à un ID de service pour limiter les droits à des espaces de nom d'images de registre ou des actions (telles que `push` ou `pull`) spécifiques. Ensuite, créez une clé d'API et stockez ces données d'identification de registre dans un secret d'extraction d'image pour votre cluster.
 {: shortdesc}
 
-Par exemple, pour accéder à des images dans d'autres comptes {{site.data.keyword.Bluemix_notm}}, créez une clé d'API qui stocke les données d'identification {{site.data.keyword.registryshort_notm}} d'un utilisateur ou d'un ID de service dans ce compte. Ensuite, dans le compte de votre cluster, sauvegardez les données d'identification de la clé d'API dans une valeur confidentielle d'extraction d'image pour chaque cluster et espace de nom de cluster.
+Par exemple, pour accéder à des images dans d'autres comptes {{site.data.keyword.cloud_notm}}, créez une clé d'API qui stocke les données d'identification {{site.data.keyword.registryshort_notm}} d'un utilisateur ou d'un ID de service dans ce compte. Ensuite, dans le compte de votre cluster, sauvegardez les données d'identification de la clé d'API dans un secret d'extraction d'image pour chaque cluster et espace de nom de cluster.
 
-La procédure suivante permet de créer une clé d'API qui stocke les données d'identification d'un ID de service {{site.data.keyword.Bluemix_notm}} IAM. Au lieu d'utiliser un ID de service, vous envisagerez peut-être de créer une clé d'API pour un ID utilisateur disposant d'une règle d'accès au service {{site.data.keyword.Bluemix_notm}} IAM pour {{site.data.keyword.registryshort_notm}}. Cependant, assurez-vous que l'utilisateur correspond à un ID fonctionnel ou dispose d'un plan au cas où il partirait, afin que le cluster puisse toujours accéder au registre.
+La procédure suivante permet de créer une clé d'API qui stocke les données d'identification d'un ID de service {{site.data.keyword.cloud_notm}} IAM. Au lieu d'utiliser un ID de service, vous envisagerez peut-être de créer une clé d'API pour un ID utilisateur disposant d'une règle d'accès au service {{site.data.keyword.cloud_notm}} IAM pour {{site.data.keyword.registryshort_notm}}. Cependant, assurez-vous que l'utilisateur correspond à un ID fonctionnel ou dispose d'un plan au cas où il partirait, afin que le cluster puisse toujours accéder au registre.
 {: note}
 
 1.  Répertoriez les espaces de nom Kubernetes disponibles dans votre cluster ou créez un espace de nom à utiliser pour y déployer les conteneurs à partir de vos images de registre.
@@ -365,12 +365,12 @@ La procédure suivante permet de créer une clé d'API qui stocke les données d
     kubectl create namespace <namespace_name>
     ```
     {: pre}
-2.  Créez un ID de service {{site.data.keyword.Bluemix_notm}} IAM pour votre cluster qui sera utilisé pour les règles IAM et les données d'identification de clé d'API dans la valeur confidentielle d'extraction d'image. Veillez à indiquer une description pour l'ID de service, qui vous aidera à retrouver cet ID par la suite, par exemple en y incluant le nom du cluster et de l'espace de nom.
+2.  Créez un ID de service {{site.data.keyword.cloud_notm}} IAM pour votre cluster qui sera utilisé pour les règles IAM et les données d'identification de clé d'API dans le secret d'extraction d'image. Veillez à indiquer une description pour l'ID de service, qui vous aidera à retrouver cet ID par la suite, par exemple en y incluant le nom du cluster et de l'espace de nom.
     ```
     ibmcloud iam service-id-create <cluster_name>-<kube_namespace>-id --description "Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>"
     ```
     {: pre}
-3.  Créez une règle {{site.data.keyword.Bluemix_notm}} IAM personnalisée pour l'ID de service de votre cluster qui autorise l'accès à {{site.data.keyword.registryshort_notm}}.
+3.  Créez une règle {{site.data.keyword.cloud_notm}} IAM personnalisée pour l'ID de service de votre cluster qui autorise l'accès à {{site.data.keyword.registryshort_notm}}.
     ```
     ibmcloud iam service-policy-create <cluster_service_ID> --roles <service_access_role> --service-name container-registry [--region <IAM_region>] [--resource-type namespace --resource <registry_namespace>]
     ```
@@ -420,7 +420,7 @@ La procédure suivante permet de créer une clé d'API qui stocke les données d
     UUID          ApiKey-222nn2n2-o3o3-3o3o-4p44-oo444o44o4o4   
     ```
     {: screen}
-6.  Créez une valeur confidentielle d'extraction d'image Kubernetes pour stocker les données d'identification de la clé d'API dans l'espace de nom du cluster. Répétez cette étape pour chaque domaine `icr.io`, espace de nom Kubernetes et cluster dont vous voulez extraire des images du registre avec les données d'identification IAM de cet ID de service.
+6.  Créez un secret d'extraction d'image Kubernetes pour stocker les données d'identification de la clé d'API dans l'espace de nom du cluster. Répétez cette étape pour chaque domaine `icr.io`, espace de nom Kubernetes et cluster dont vous voulez extraire des images du registre avec les données d'identification IAM de cet ID de service.
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name> --docker-server=<registry_URL> --docker-username=iamapikey --docker-password=<api_key_value> --docker-email=<docker_email>
     ```
@@ -438,7 +438,7 @@ La procédure suivante permet de créer une clé d'API qui stocke les données d
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Obligatoire. Entrez le nom de votre valeur confidentielle d'extraction d'image.</td>
+    <td>Obligatoire. Entrez le nom de votre secret d'extraction d'image.</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
@@ -459,21 +459,21 @@ La procédure suivante permet de créer une clé d'API qui stocke les données d
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, entrez une adresse e-mail fictive, par exemple `a@b.c`. Cette adresse e-mail est obligatoire pour créer une valeur confidentielle (secret) Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, entrez une adresse e-mail fictive, par exemple `a@b.c`. Cette adresse e-mail est obligatoire pour créer un secret Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
     </tr>
     </tbody></table>
-7.  Vérifiez que la création de la valeur confidentielle a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom dans lequel vous avez créé la valeur confidentielle d'extraction d'image.
+7.  Vérifiez que la création du secret a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom dans lequel vous avez créé le secret d'extraction d'image.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
-8.  [Ajoutez une valeur confidentielle d'extraction d'image à un compte de service Kubernetes pour qu'un pod de l'espace de nom puisse utiliser cette valeur confidentielle lorsque vous déployez un conteneur](#use_imagePullSecret).
+8.  [Ajoutez un secret d'extraction d'image à un compte de service Kubernetes pour qu'un pod de l'espace de nom puisse utiliser ce secret lorsque vous déployez un conteneur](#use_imagePullSecret).
 
 ### Accès aux images stockées dans d'autres registres privés
 {: #private_images}
 
-Si vous disposez déjà d'un registre privé, vous devez stocker les données d'identification du registre dans une valeur confidentielle d'extraction d'image Kubernetes et référencez cette valeur dans votre fichier de configuration.
+Si vous disposez déjà d'un registre privé, vous devez stocker les données d'identification du registre dans un secret d'extraction d'image Kubernetes et référencez ce secret dans votre fichier de configuration.
 {:shortdesc}
 
 Avant de commencer :
@@ -481,9 +481,9 @@ Avant de commencer :
 1.  [Créez un cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 2.  [Ciblez votre interface CLI sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-Pour créer une valeur confidentielle d'extraction d'image :
+Pour créer un secret d'extraction d'image :
 
-1.  Créez la valeur confidentielle Kubernetes pour stocker vos données d'identification de registre privé.
+1.  Créez le secret Kubernetes pour stocker vos données d'identification de registre privé.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=<docker_username> --docker-password=<docker_password> --docker-email=<docker_email>
@@ -498,7 +498,7 @@ Pour créer une valeur confidentielle d'extraction d'image :
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser la valeur confidentielle et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td>
+    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser le secret et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
@@ -518,44 +518,44 @@ Pour créer une valeur confidentielle d'extraction d'image :
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, entrez une adresse e-mail fictive, par exemple `a@b.c`. Cette adresse e-mail est obligatoire pour créer une valeur confidentielle (secret) Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, entrez une adresse e-mail fictive, par exemple `a@b.c`. Cette adresse e-mail est obligatoire pour créer un secret Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
     </tr>
     </tbody></table>
 
-2.  Vérifiez que la création de la valeur confidentielle a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par le nom de l'espace de nom dans lequel vous avez créé la valeur confidentielle `imagePullSecret`.
+2.  Vérifiez que la création du secret a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par le nom de l'espace de nom dans lequel vous avez créé le secret `imagePullSecret`.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-3.  [Créez un pod faisant référence à la valeur confidentielle d'extraction d'image](#use_imagePullSecret).
+3.  [Créez un pod faisant référence au secret d'extraction d'image](#use_imagePullSecret).
 
 <br />
 
 
-## Utilisation de valeur confidentielle d'extraction d'image pour déployer des conteneurs
+## Utilisation de secret d'extraction d'image pour déployer des conteneurs
 {: #use_imagePullSecret}
 
-Vous pouvez définir une valeur confidentielle d'extraction d'image dans votre déploiement de pod ou stocker la valeur confidentielle d'extraction d'image dans votre compte de service Kubernetes de sorte à ce qu'elle soit disponible pour tous les déploiements sans compte de service spécifié.
+Vous pouvez définir un secret d'extraction d'image dans votre déploiement de pod ou stocker le secret d'extraction d'image dans votre compte de service Kubernetes de sorte qu'il soit disponible pour tous les déploiements sans compte de service spécifié.
 {: shortdesc}
 
 Sélectionnez l'une des options suivantes :
-* [Référencer la valeur confidentielle d'extraction d'image dans votre déploiement de pod](#pod_imagePullSecret) : utilisez cette option si, par défaut, vous ne souhaitez pas octroyer l'accès à votre registre pour tous les pods de votre espace de nom.
-* [Stocker la valeur confidentielle d'extraction d'image dans le compte de service Kubernetes](#store_imagePullSecret) : utilisez cette option pour octroyer l'accès aux images de votre registre pour tous les déploiements dans les espaces de nom Kubernetes sélectionnés.
+* [Référencer le secret d'extraction d'image dans votre déploiement de pod](#pod_imagePullSecret) : utilisez cette option si, par défaut, vous ne souhaitez pas octroyer l'accès à votre registre pour tous les pods de votre espace de nom.
+* [Stocker le secret d'extraction d'image dans le compte de service Kubernetes](#store_imagePullSecret) : utilisez cette option pour octroyer l'accès aux images de votre registre pour tous les déploiements dans les espaces de nom Kubernetes sélectionnés.
 
 Avant de commencer :
-* [Créez une valeur confidentielle d'extraction d'image](#other) pour accéder aux images dans d'autres registres ou dans d'autres espaces de nom Kubernetes que `default`.
+* [Créez un secret d'extraction d'image](#other) pour accéder aux images dans d'autres registres ou dans d'autres espaces de nom Kubernetes que `default`.
 * [Ciblez votre interface CLI sur votre cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-### Référencer la valeur confidentielle d'extraction d'image dans votre déploiement de pod
+### Référencer le secret d'extraction d'image dans votre déploiement de pod
 {: #pod_imagePullSecret}
 
-Lorsque vous référencez la valeur confidentielle d'extraction d'image dans un déploiement de pod, cette valeur n'est valide que pour ce pod et ne peut pas être partagée entre les pods de cet espace de nom.
+Lorsque vous référencez le secret d'extraction d'image dans un déploiement de pod, cette valeur n'est valide que pour ce pod et ne peut pas être partagée entre les pods de cet espace de nom.
 {:shortdesc}
 
 1.  Créez un fichier de configuration de pod nommé `mypod.yaml`.
-2.  Définissez le pod et la valeur confidentielle d'extraction d'image pour accéder aux images dans {{site.data.keyword.registrylong_notm}}.
+2.  Définissez le pod et le secret d'extraction d'image pour accéder aux images dans {{site.data.keyword.registrylong_notm}}.
 
     Pour accéder à une image privée :
     ```
@@ -572,7 +572,7 @@ Lorsque vous référencez la valeur confidentielle d'extraction d'image dans un 
     ```
     {: codeblock}
 
-    Pour accéder à une image publique {{site.data.keyword.Bluemix_notm}} :
+    Pour accéder à une image publique {{site.data.keyword.cloud_notm}} :
     ```
     apiVersion: v1
     kind: Pod
@@ -603,7 +603,7 @@ Lorsque vous référencez la valeur confidentielle d'extraction d'image dans un 
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>Nom de l'image à utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.Bluemix_notm}}, exécutez la commande `ibmcloud cr image-list`.</td>
+    <td>Nom de l'image à utiliser. Pour répertorier les images disponibles dans un compte {{site.data.keyword.cloud_notm}}, exécutez la commande `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -611,7 +611,7 @@ Lorsque vous référencez la valeur confidentielle d'extraction d'image dans un 
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Nom de la valeur confidentielle d'extraction d'image que vous avez créée précédemment.</td>
+    <td>Nom du secret d'extraction d'image que vous avez créé précédemment.</td>
     </tr>
     </tbody></table>
 
@@ -622,30 +622,30 @@ Lorsque vous référencez la valeur confidentielle d'extraction d'image dans un 
     ```
     {: pre}
 
-### Stocker une valeur confidentielle d'extraction d'image dans le compte de service Kubernetes pour l'espace de nom sélectionné
+### Stocker un secret d'extraction d'image dans le compte de service Kubernetes pour l'espace de nom sélectionné
 {:#store_imagePullSecret}
 
-Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vous pouvez ajouter la  valeur confidentielle d'extraction d'image dans ce compte de service pour octroyer l'accès aux images de votre registre. Les déploiements pour lesquels aucun compte de service n'est spécifié utilisent automatiquement le compte de service `default` pour cet espace de nom.
+Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vous pouvez ajouter le secret d'extraction d'image dans ce compte de service pour octroyer l'accès aux images de votre registre. Les déploiements pour lesquels aucun compte de service n'est spécifié utilisent automatiquement le compte de service `default` pour cet espace de nom.
 {:shortdesc}
 
-1. Vérifiez s'il existe déjà une valeur confidentielle d'extraction d'image pour le compte de service default.
+1. Vérifiez s'il existe déjà un secret d'extraction d'image pour le compte de service default.
    ```
    kubectl describe serviceaccount default -n <namespace_name>
    ```
    {: pre}
-   Lorsque `<none>` est affiché dans l'entrée **ImagePullSecrets**, il n'existe aucune valeur confidentielle d'extraction d'image.  
-2. Ajoutez la  valeur confidentielle d'extraction d'image dans le compte de service default.
-   - **Pour ajouter la  valeur confidentielle d'extraction d'image lorsqu'aucune valeur de ce type n'est définie :**
+   Lorsque `<none>` est affiché dans l'entrée **ImagePullSecrets**, il n'existe aucun secret d'extraction d'image.  
+2. Ajoutez le secret d'extraction d'image dans le compte de service default.
+   - **Pour ajouter le secret d'extraction d'image lorsqu'aucune valeur de ce type n'est définie :**
        ```
        kubectl patch -n <namespace_name> serviceaccount/default -p '{"imagePullSecrets":[{"name": "<image_pull_secret_name>"}]}'
        ```
        {: pre}
-   - **Pour ajouter la  valeur confidentielle d'extraction d'image lorsqu'une valeur de ce type est déjà définie :**
+   - **Pour ajouter le secret d'extraction d'image lorsqu'une valeur de ce type est déjà définie :**
        ```
        kubectl patch -n <namespace_name> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/-","value":{"name":"<image_pull_secret_name>"}}]'
        ```
        {: pre}
-3. Vérifiez que la  valeur confidentielle d'extraction d'image a été ajoutée dans le compte de service default.
+3. Assurez-vous que le secret d'extraction d'image a été ajouté dans le compte de service default.
    ```
    kubectl describe serviceaccount default -n <namespace_name>
    ```
@@ -686,32 +686,34 @@ Tous les espaces de nom ont un compte de service Kubernetes nommé `default`. Vo
 <br />
 
 
+
+
 ## Déprécié : Utilisation d'un jeton de registre pour déployer des conteneurs à partir d'une image {{site.data.keyword.registrylong_notm}}
 {: #namespace_token}
 
-Vous pouvez déployer dans votre cluster des conteneurs depuis une image fournie par IBM ou depuis une image privée stockée dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}. Les clusters existants utilisent un [jeton](/docs/services/Registry?topic=registry-registry_access#registry_tokens) de registre stocké dans la valeur confidentielle d'extraction d'image `imagePullSecret` d'un cluster pour autoriser l'accès permettant d'extraire des images dans les noms de domaine `registry.bluemix.net`.
+Vous pouvez déployer dans votre cluster des conteneurs depuis une image fournie par IBM ou depuis une image privée stockée dans votre espace de nom dans {{site.data.keyword.registryshort_notm}}. Les clusters existants utilisent un [jeton](/docs/services/Registry?topic=registry-registry_access#registry_tokens) de registre stocké dans le secret d'extraction d'image `imagePullSecret` d'un cluster pour autoriser l'accès permettant d'extraire des images dans les noms de domaine `registry.bluemix.net`.
 {:shortdesc}
 
-Lorsque vous créez un cluster, des jetons de registre sans date d'expiration et des valeurs confidentielles sont créés automatiquement pour le [registre régional le plus proche, tout comme pour le registre global](/docs/services/Registry?topic=registry-registry_overview#registry_regions). Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke vos propres images Docker privées de manière sécurisée. Les jetons sont utilisés pour autoriser un accès en lecture seule aux espaces de nom que vous avez configurés dans {{site.data.keyword.registryshort_notm}} pour pouvoir utiliser ces images publiques (registre global) et privées (registre régional).
+Pour les clusters ayant été créés avant le **1er juillet 2019**, des jetons de registre sans date d'expiration et des secrets sont créés automatiquement pour [registre régional le plus proche, tout comme pour le registre global](/docs/services/Registry?topic=registry-registry_overview#registry_regions). Le registre global stocke de manière sécurisée des images publiques fournies par IBM auxquelles vous pouvez vous référer dans vos déploiements au lieu d'utiliser des références différentes pour les images stockées dans chaque registre régional. Le registre régional stocke vos propres images Docker privées de manière sécurisée. Les jetons sont utilisés pour autoriser un accès en lecture seule aux espaces de nom que vous avez configurés dans {{site.data.keyword.registryshort_notm}} pour pouvoir utiliser ces images publiques (registre global) et privées (registre régional).
 
-Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containerlong_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des valeurs confidentielles Kubernetes pour extraction d'images. Les valeurs confidentielles d'extraction d'image sont ajoutées à l'espace de nom Kubernetes `default`, à l'espace de nom `kube-system` et la liste des valeurs confidentielles dans le compte de service `default` correspondant à ces espaces de nom.
+Chaque jeton doit être stocké dans un élément Kubernetes `imagePullSecret` de sorte à être accessible à un cluster Kubernetes lorsque vous déployez une application conteneurisée. Lorsque votre cluster est créé, {{site.data.keyword.containerlong_notm}} stocke automatiquement les jetons pour le registre global (images publiques fournies par IBM) et pour les registres régionaux dans des secrets Kubernetes pour extraction d'images. Les secrets d'extraction d'image sont ajoutés à l'espace de nom Kubernetes `default`, à l'espace de nom `kube-system` et la liste des secrets dans le compte de service `default` correspondant à ces espaces de nom.
 
-Cette méthode consistant à utiliser un jeton pour autoriser l'accès du cluster à {{site.data.keyword.registrylong_notm}} est prise en charge pour les noms de domaine `registry.bluemix.net` mais elle est dépréciée. [Utilisez à la place la méthode de clé d'API](#cluster_registry_auth) pour autoriser l'accès au cluster aux nouveaux noms de domaine de registre `icr.io`.
+La méthode consistant à utiliser un jeton pour autoriser l'accès du cluster à {{site.data.keyword.registrylong_notm}} pour les noms de domaine `registry.bluemix.net` est dépréciée. Avant que les jetons ne soient plus pris en charge, mettez à jour vos déploiements pour [utiliser la méthode de clé d'API](#cluster_registry_auth) afin d'autoriser l'accès du cluster aux nouveaux noms de domaine de registre `icr.io`.
 {: deprecated}
 
 En fonction de l'emplacement de l'image et du conteneur, vous devez déployer les conteneurs en suivant différentes étapes.
 *   [Déployer un conteneur dans l'espace de nom Kubernetes `default` avec une image qui se trouve dans la même région que votre cluster](#token_default_namespace)
 *   [Déployer un conteneur dans un autre espace de nom Kubernetes que `default`](#token_copy_imagePullSecret)
-*   [Déployer un conteneur avec une image qui se trouve dans une autre région ou un autre compte {{site.data.keyword.Bluemix_notm}} que votre cluster](#token_other_regions_accounts)
+*   [Déployer un conteneur avec une image qui se trouve dans une autre région ou un autre compte {{site.data.keyword.cloud_notm}} que votre cluster](#token_other_regions_accounts)
 *   [Déployer un conteneur avec une image provenant d'un registre privé qui n'est pas un registre IBM](#private_images)
 
-Avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.Bluemix_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.Bluemix_notm}} ou un autre compte {{site.data.keyword.Bluemix_notm}}, vous devez [créer votre propre valeur confidentielle d'extraction d'image pour votre cluster](#other).
+Avec cette configuration initiale, vous pouvez déployer des conteneurs depuis n'importe quelle image disponible dans un espace de nom dans votre compte {{site.data.keyword.cloud_notm}} vers l'espace de nom nommé **default** de votre cluster. Pour déployer un conteneur dans d'autres espaces de nom de votre cluster ou utiliser une image stockée dans une autre région {{site.data.keyword.cloud_notm}} ou un autre compte {{site.data.keyword.cloud_notm}}, vous devez [créer votre propre secret d'extraction d'image pour votre cluster](#other).
 {: note}
 
 ### Déprécié : Déployer des images vers les espaces de nom `default` avec un jeton de registre
 {: #token_default_namespace}
 
-Avec le jeton de registre stocké dans la valeur confidentielle d'extraction d'image, vous pouvez déployer un conteneur à partir de n'importe quelle image disponible dans votre registre régional {{site.data.keyword.registrylong_notm}} dans l'espace de nom **default** de votre cluster.
+Avec le jeton de registre stocké dans le secret d'extraction d'image, vous pouvez déployer un conteneur à partir de n'importe quelle image disponible dans votre registre régional {{site.data.keyword.registrylong_notm}} dans l'espace de nom **default** de votre cluster.
 {: shortdesc}
 
 Avant de commencer :
@@ -763,10 +765,10 @@ Pour déployer un conteneur dans l'espace de nom **default** de votre cluster, c
     ```
     {: pre}
 
-### Déprécié : Copier la valeur confidentielle d'extraction d'image de l'espace de nom default dans d'autres espaces de nom de votre cluster
+### Déprécié : Copier le secret d'extraction d'image de l'espace de nom default dans d'autres espaces de nom de votre cluster
 {: #token_copy_imagePullSecret}
 
-Vous pouvez copier la valeur confidentielle d'extraction d'image contenant les données d'identification du jeton de registre, qui est créée automatiquement pour l'espace de nom Kubernetes `default` dans d'autres espaces de nom de votre cluster.
+Vous pouvez copier le secret d'extraction d'image contenant les données d'identification du jeton de registre, qui est créé automatiquement pour l'espace de nom Kubernetes `default` dans d'autres espaces de nom de votre cluster.
 {: shortdesc}
 
 1. Répertoriez les espaces de nom disponibles dans votre cluster.
@@ -792,7 +794,7 @@ Vous pouvez copier la valeur confidentielle d'extraction d'image contenant les d
    ```
    {: pre}
 
-3. Copiez les valeurs confidentielles d'extraction d'image de l'espace de nom `default` vers les espaces de nom de votre choix. Les nouvelles valeurs confidentielles d'extraction d'image sont nommées `bluemix-<namespace_name>-secret-regional` et `bluemix-<namespace_name>-secret-international`.
+3. Copiez les secrets d'extraction d'image de l'espace de nom `default` vers les espaces de nom de votre choix. Les nouveaux secrets d'extraction d'image sont nommés `bluemix-<namespace_name>-secret-regional` et `bluemix-<namespace_name>-secret-international`.
    ```
    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
    ```
@@ -803,31 +805,33 @@ Vous pouvez copier la valeur confidentielle d'extraction d'image contenant les d
    ```
    {: pre}
 
-4.  Vérifiez que la création des valeurs confidentielles a abouti.
+4.  Vérifiez que la création des secrets a abouti.
     ```
     kubectl get secrets --namespace <namespace_name>
     ```
     {: pre}
 
-5. [Déployez un conteneur à l'aide de la valeur confidentielle `imagePullSecret`](#use_imagePullSecret) dans votre espace de nom.
+5. [Déployez un conteneur à l'aide du secret `imagePullSecret`](#use_imagePullSecret) dans votre espace de nom.
 
 
-### Déprécié : Créer une valeur confidentielle d'extraction d'image basée sur un jeton pour accéder à des images dans d'autres régions et comptes {{site.data.keyword.Bluemix_notm}}
+### Déprécié : Accès aux images autorisées par un jeton figurant dans d'autres régions ou comptes {{site.data.keyword.cloud_notm}}
 {: #token_other_regions_accounts}
 
-Pour accéder à des images figurant dans d'autres régions ou comptes {{site.data.keyword.Bluemix_notm}}, vous devez créer un jeton de registre et sauvegarder vos données d'identification dans une valeur confidentielle d'extraction d'image.
+Pour accéder à des images figurant dans d'autres régions ou comptes {{site.data.keyword.cloud_notm}}, vous devez créer un jeton de registre et sauvegarder vos données d'identification dans un secret d'extraction d'image.
 {: shortdesc}
 
-1.  Si vous ne possédez pas de jeton, [créez un jeton pour le registre auquel vous souhaitez accéder. ](/docs/services/Registry?topic=registry-registry_access#registry_tokens_create)
-2.  Répertoriez les jetons dans votre compte {{site.data.keyword.Bluemix_notm}}.
+Les jetons qui autorisent l'accès aux domaines `registry.<region>.bluemix.net` sont dépréciés. Vous ne pouvez plus créer de nouveaux jetons. A la place, créez des secrets d'extraction d'image de cluster qui utilisent des [données d'identification de clé d'API](#imagePullSecret_migrate_api_key) pour extraire des images des domaines de registre `icr.io`.
+{: deprecated}
+
+1.  Répertoriez les jetons dans votre compte {{site.data.keyword.cloud_notm}}.
 
     ```
     ibmcloud cr token-list
     ```
     {: pre}
 
-3.  Notez l'ID du jeton que vous désirez utiliser.
-4.  Extrayez la valeur de ce jeton. Remplacez <em>&lt;token_ID&gt;</em> par l'ID du jeton que vous avez récupéré à l'étape précédente.
+2.  Notez l'ID du jeton que vous désirez utiliser.
+3.  Extrayez la valeur de ce jeton. Remplacez <em>&lt;token_ID&gt;</em> par l'ID du jeton que vous avez récupéré à l'étape précédente.
 
     ```
     ibmcloud cr token-get <token_id>
@@ -836,7 +840,7 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
 
     La valeur de ce jeton est affichée dans la zone **Token** de la sortie de votre interface CLI.
 
-5.  Créez la valeur confidentielle Kubernetes pour stocker votre information de jeton.
+4.  Créez le secret Kubernetes pour stocker votre information de jeton.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -851,11 +855,11 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     <tbody>
     <tr>
     <td><code>--namespace <em>&lt;kubernetes_namespace&gt;</em></code></td>
-    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser la valeur confidentielle et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td>
+    <td>Obligatoire. Espace de nom Kubernetes de votre cluster dans lequel vous désirez utiliser le secret et déployer des conteneurs. Exécutez la commande <code>kubectl get namespaces</code> pour répertorier tous les espaces de nom dans votre cluster.</td>
     </tr>
     <tr>
     <td><code><em>&lt;secret_name&gt;</em></code></td>
-    <td>Obligatoire. Nom que vous désirez utiliser comme valeur confidentielle d'extraction d'image .</td>
+    <td>Obligatoire. Nom que vous désirez utiliser comme secret d'extraction d'image .</td>
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
@@ -871,15 +875,15 @@ Pour accéder à des images figurant dans d'autres régions ou comptes {{site.da
     </tr>
     <tr>
     <td><code>--docker-email <em>&lt;docker-email&gt;</em></code></td>
-    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cette adresse e-mail est obligatoire pour créer une valeur confidentielle (secret) Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
+    <td>Obligatoire. Si vous en avez une, entrez votre adresse e-mail Docker. A défaut, indiquez une adresse e-mail fictive (par exemple, a@b.c). Cette adresse e-mail est obligatoire pour créer un secret Kubernetes, mais n'est plus utilisée une fois la valeur créée.</td>
     </tr>
     </tbody></table>
 
-6.  Vérifiez que la création de la valeur confidentielle a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom dans lequel vous avez créé la valeur confidentielle d'extraction d'image.
+5.  Vérifiez que la création du secret a abouti. Remplacez <em>&lt;kubernetes_namespace&gt;</em> par l'espace de nom dans lequel vous avez créé le secret d'extraction d'image.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-7.  [Déployez un conteneur à l'aide de la valeur confidentielle d'extraction d'image](#use_imagePullSecret) dans votre espace de nom.
+6.  [Déployez un conteneur à l'aide du secret d'extraction d'image](#use_imagePullSecret) dans votre espace de nom.

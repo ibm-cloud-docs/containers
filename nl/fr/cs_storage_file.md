@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Stockage de données sur IBM File Storage pour IBM Cloud
+# Stockage de données avec l'option classique IBM Cloud File Storage
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants (PV) Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour déterminer si {{site.data.keyword.Bluemix_notm}} File Storage est l'option de stockage qui vous convient le mieux, voir [Choix d'une solution de stockage](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Pour obtenir les informations de tarification, voir [Facturation](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{{site.data.keyword.cloud_notm}} File Storage est une solution de stockage de fichiers NFS persistant, rapide et flexible en réseau que vous pouvez ajouter à vos applications en utilisant des volumes persistants (PV) Kubernetes. Vous pouvez choisir entre des niveaux de stockage prédéfinis avec des tailles en gigaoctets (Go) et un nombre d'opérations d'entrée-sortie par seconde (IOPS) répondant aux exigences de vos charges de travail. Pour déterminer si {{site.data.keyword.cloud_notm}} File Storage est l'option de stockage qui vous convient le mieux, voir [Choix d'une solution de stockage](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Pour obtenir les informations de tarification, voir [Facturation](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage est disponible uniquement pour les clusters standard qui sont configurés avec une connectivité de réseau public. Si votre cluster n'a pas accès au réseau public, par exemple s'il s'agit d'un cluster privé derrière un pare-feu ou d'un cluster avec uniquement le noeud final de service privé activé, vous pouvez mettre à disposition du stockage de fichiers si votre cluster exécute Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 ou plus. Les instances de stockage de fichiers NFS sont spécifiques à une seule zone. Si vous disposez d'un cluster à zones multiples, tenez compte des [options de stockage persistant dans les zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} File Storage est disponible uniquement pour les clusters standard qui sont configurés avec une connectivité de réseau public. Si votre cluster n'a pas accès au réseau public, par exemple s'il s'agit d'un cluster privé derrière un pare-feu ou d'un cluster avec uniquement le noeud final de service privé activé, vous pouvez mettre à disposition du stockage de fichiers si votre cluster exécute Kubernetes version 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 ou plus. Les instances de stockage de fichiers NFS sont spécifiques à une seule zone. Si vous disposez d'un cluster à zones multiples, tenez compte des [options de stockage persistant dans les zones multiples](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Détermination de la configuration de stockage de fichiers
@@ -164,7 +162,7 @@ Pour déterminer une configuration de stockage :
          </tbody></table>
 
 5. Déterminez si vous voulez conserver vos données après la suppression du cluster ou de la réservation de volume persistant (PVC).
-   - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, seule la PVC est supprimée. Le volume persistant (PV), l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer), ainsi que vos données existent toujours. Pour récupérer le stockage et l'utiliser à nouveau dans votre cluster, vous devez supprimer le volume persistant et suivre les étapes pour [utiliser du stockage de fichiers existant](#existing_file).
+   - Pour conserver vos données, choisissez une classe de stockage `retain`. Lorsque vous supprimez la réservation PVC, seule la PVC est supprimée. Le volume persistant (PV), l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud, ainsi que vos données existent toujours. Pour récupérer le stockage et l'utiliser à nouveau dans votre cluster, vous devez supprimer le volume persistant et suivre les étapes pour [utiliser du stockage de fichiers existant](#existing_file).
    - Si vous souhaitez que le volume persistant, les données et votre unité de stockage de fichiers physique soient supprimés en même temps que la réservation PVC, choisissez une classe de stockage sans `retain`.
 
 6. Choisissez une facturation à l'heure ou mensuelle. Pour plus d'informations, consultez la [tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing). Par défaut, toutes les unités de stockage de fichiers sont mises à disposition avec une facturation à l'heure.
@@ -178,11 +176,11 @@ Pour déterminer une configuration de stockage :
 ## Ajout de stockage de fichiers à des applications
 {: #add_file}
 
-Créez une réservation de volume persistant (PVC) pour le [provisionnement dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) de stockage de fichiers pour votre cluster. Le provisionnement dynamique crée automatiquement le volume persistant (PV) correspondant et commande l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud (SoftLayer).
+Créez une réservation de volume persistant (PVC) pour le [mettre à disposition dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) de stockage de fichiers pour votre cluster. La mise à disposition dynamique crée automatiquement le volume persistant (PV) correspondant et commande l'unité de stockage physique dans votre compte d'infrastructure IBM Cloud.
 {:shortdesc}
 
 Avant de commencer :
-- Si vous disposez d'un pare-feu, [autorisez l'accès sortant](/docs/containers?topic=containers-firewall#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud (SoftLayer) des zones dans lesquelles résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC).
+- Si vous disposez d'un pare-feu, [autorisez l'accès sortant](/docs/containers?topic=containers-firewall#pvc) pour les plages d'adresses IP de l'infrastructure IBM Cloud des zones dans lesquelles résident vos clusters, de manière à pouvoir créer des réservations de volume persistant (PVC). 
 - [Optez pour une classe de stockage prédéfinie](#file_predefined_storageclass) ou créez une [classe de stockage personnalisée](#file_custom_storageclass).
 
 Vous cherchez à déployer du stockage de fichiers dans un ensemble avec état (StatefulSet) ? Voir [Utilisation de stockage de fichiers dans un ensemble avec état](#file_statefulset) pour plus d'informations.
@@ -482,7 +480,7 @@ Pour utiliser du stockage existant dans un cluster différent de celui où vous 
 **Pour le stockage persistant qui a été mis à disposition en dehors du cluster:** </br>
 Si vous envisagez d'utiliser du stockage existant que vous avez mis à disposition auparavant mais que vous n'avez encore jamais utilisé dans votre cluster, vous devez le rendre accessible dans le même sous-réseau que vos noeuds worker.
 
-1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud (SoftLayer) ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/classic?), cliquez sur **Stockage**.
+1.  {: #external_storage}Dans le [portail de l'infrastructure IBM Cloud ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://cloud.ibm.com/classic?), cliquez sur **Stockage**. 
 2.  Cliquez sur **Stockage de fichiers** et, dans le menu **Actions**, sélectionnez **Autoriser l'hôte**.
 3.  Sélectionnez **Sous-réseaux**.
 4.  Dans la liste déroulante, sélectionnez le sous-réseau de VLAN privé auquel est connecté votre noeud worker. Pour trouver le sous-réseau de votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name>` et comparez l'`adresse IP privée` de votre noeud worker à celle du sous-réseau que vous avez trouvé dans liste déroulante.
@@ -621,7 +619,7 @@ Vous venez de créer un volume persistant que vous avez lié à une réservation
 ## Utilisation de stockage de fichiers dans un ensemble avec état (StatefulSet)
 {: #file_statefulset}
 
-Si vous disposez d'une application avec état, telle qu'une base de données, vous pouvez créer des ensembles avec état utilisant du stockage de fichiers pour stocker les données de votre application. Sinon, vous pouvez utiliser {{site.data.keyword.Bluemix_notm}} DaaS (Database-as-a-Service) et stocker vos données dans le cloud.
+Si vous disposez d'une application avec état, telle qu'une base de données, vous pouvez créer des ensembles avec état utilisant du stockage de fichiers pour stocker les données de votre application. Sinon, vous pouvez utiliser {{site.data.keyword.cloud_notm}} DaaS (Database-as-a-Service) et stocker vos données dans le cloud.
 {: shortdesc}
 
 **De quoi dois-je tenir compte en ajoutant du stockage de fichiers dans un ensemble avec état ?** </br>
@@ -825,9 +823,9 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
@@ -983,7 +981,7 @@ Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez l
 Si vous envisagez d'augmenter la capacité de stockage ou les performances, vous pouvez modifier votre volume existant.
 {: shortdesc}
 
-Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.Bluemix_notm}}, voir [Extension de la capacité de partage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
+Pour toute question concernant la facturation ou la procédure à suivre pour modifier votre stockage en utilisant la console {{site.data.keyword.cloud_notm}}, voir [Extension de la capacité de partage de fichiers](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
 1. Répertoriez les réservations de volume persistant (PVC) et notez le nom du volume persistant (PV) associé indiqué dans la colonne **VOLUME**.
@@ -1023,22 +1021,22 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
    ```
    {: screen}
 
-3. Modifiez la taille ou le nombre d'IOPS de votre volume dans votre compte d'infrastructure IBM Cloud (SoftLayer).
+3. Modifiez la taille ou le nombre d'IOPS de votre volume dans votre compte d'infrastructure IBM Cloud. 
 
-   Exemple pour du stockage Performance :
+   Exemple relatif au stockage Performance :
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-iops <iops>
    ```
    {: pre}
 
-   Exemple pour du stockage Endurance :
+   Exemple relatif au stockage Endurance :
    ```
    ibmcloud sl file volume-modify <volume_ID> --new-size <size> --new-tier <iops>
    ```
    {: pre}
 
    <table>
-   <caption>Description des composants de la commande</caption>
+   <caption>Description des composantes de la commande</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Icône Idée"/> Description des composants du fichier YAML</th>
    </thead>
@@ -1111,7 +1109,7 @@ Pour toute question concernant la facturation ou la procédure à suivre pour mo
 ## Modification de la version NFS par défaut
 {: #nfs_version}
 
-La version de stockage de fichiers détermine le protocole utilisé pour communiquer avec le serveur de stockage de fichiers {{site.data.keyword.Bluemix_notm}}. Par défaut, toutes les instances de stockage de fichiers sont configurées avec NFS version 4. Vous pouvez modifier votre volume persistant en passant à une version NFS antérieure si votre application nécessite une version particulière pour fonctionner correctement.
+La version de stockage de fichiers détermine le protocole utilisé pour communiquer avec le serveur de stockage de fichiers {{site.data.keyword.cloud_notm}}. Par défaut, toutes les instances de stockage de fichiers sont configurées avec NFS version 4. Vous pouvez modifier votre volume persistant en passant à une version NFS antérieure si votre application nécessite une version particulière pour fonctionner correctement.
 {: shortdesc}
 
 Pour modifier la version NFS par défaut, vous pouvez créer une nouvelle classe de stockage pour mettre à disposition du stockage de fichiers de manière dynamique dans votre cluster ou opter pour modifier un volume persistant existant monté sur votre pod.
@@ -1218,7 +1216,7 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
   <p>Pour rendre vos données hautement disponibles et protéger votre application en cas de défaillance d'une zone, configurez une deuxième instance {{site.data.keyword.cos_full}} et répliquez les données entre les différentes zones. Si vous devez restaurer des données à partir de votre instance {{site.data.keyword.cos_full}}, utilisez le script de restauration fourni avec l'image.</p></dd>
 <dt>Copier les données depuis et vers des pods et des conteneurs</dt>
 <dd><p>Vous pouvez utiliser la [commande![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) `kubectl cp` pour copier des fichiers et des répertoires depuis et vers des pods ou des conteneurs spécifiques dans votre cluster.</p>
-<p>Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod.</p>
+<p>Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Si vous n'indiquez pas de conteneur avec <code>-c</code>, la commande utilise le premier conteneur disponible dans le pod. </p>
 <p>Vous pouvez utiliser la commande de plusieurs manières :</p>
 <ul>
 <li>Copier les données de votre machine locale vers un pod dans votre cluster : <pre class="pre"><code>kubectl cp <var>&lt;local_filepath&gt;/&lt;filename&gt;</var> <var>&lt;namespace&gt;/&lt;pod&gt;:&lt;pod_filepath&gt;</var></code></pre></li>
@@ -1233,182 +1231,68 @@ Passez en revue les options de sauvegarde et restauration suivantes pour votre s
 ## Référence des classes de stockage
 {: #file_storageclass_reference}
 
-### Bronze
-{: #file_bronze}
+| Caractéristiques | Paramètre|
+|:-----------------|:-----------------|
+| Nom | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| Type | [Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Système de fichiers | NFS|
+| IOPS par gigaoctet | 2|
+| Plage de tailles en gigaoctets | 20-12000 Gi|
+| Disque dur | SSD|
+| Facturation | A l'heure|
+| Tarification | [Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe de stockage de fichiers : bronze" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
-<table>
-<caption>Classe de stockage de fichiers : bronze</caption>
-<thead>
-<th>Caractéristiques</th>
-<th>Paramètre</th>
-</thead>
-<tbody>
-<tr>
-<td>Nom</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Système de fichiers</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS par gigaoctet</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Plage de tailles en gigaoctets</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disque dur</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturation</td>
-<td>A l'heure</td>
-</tr>
-<tr>
-<td>Tarification</td>
-<td>[Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Caractéristiques | Paramètre|
+|:-----------------|:-----------------|
+| Nom | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| Type | [Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Système de fichiers | NFS|
+| IOPS par gigaoctet | 4|
+| Plage de tailles en gigaoctets | 20-12000 Gi|
+| Disque dur | SSD|
+| Facturation | A l'heure|
+| Tarification | [Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe de stockage de fichiers : silver" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| Caractéristiques | Paramètre|
+|:-----------------|:-----------------|
+| Nom | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| Type | [Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Système de fichiers | NFS|
+| IOPS par gigaoctet | 10|
+| Plage de tailles en gigaoctets | 20-4000 Gi|
+| Disque dur | SSD|
+| Facturation | A l'heure|
+| Tarification | [Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe de stockage de fichiers : gold" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### Silver
-{: #file_silver}
-
-<table>
-<caption>Classe de stockage de fichiers : silver</caption>
-<thead>
-<th>Caractéristiques</th>
-<th>Paramètre</th>
-</thead>
-<tbody>
-<tr>
-<td>Nom</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Système de fichiers</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS par gigaoctet</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Plage de tailles en gigaoctets</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disque dur</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturation</td>
-<td>A l'heure</li></ul></td>
-</tr>
-<tr>
-<td>Tarification</td>
-<td>[Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Gold
-{: #file_gold}
-
-<table>
-<caption>Classe de stockage de fichiers : gold</caption>
-<thead>
-<th>Caractéristiques</th>
-<th>Paramètre</th>
-</thead>
-<tbody>
-<tr>
-<td>Nom</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Stockage Endurance](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Système de fichiers</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS par gigaoctet</td>
-<td>10</td>
-</tr>
-<tr>
-<td>Plage de tailles en gigaoctets</td>
-<td>20-4000 Gi</td>
-</tr>
-<tr>
-<td>Disque dur</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturation</td>
-<td>A l'heure</li></ul></td>
-</tr>
-<tr>
-<td>Tarification</td>
-<td>[Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Custom
-{: #file_custom}
-
-<table>
-<caption>Classe de stockage de fichiers : custom</caption>
-<thead>
-<th>Caractéristiques</th>
-<th>Paramètre</th>
-</thead>
-<tbody>
-<tr>
-<td>Nom</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>Type</td>
-<td>[Performances](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>Système de fichiers</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS et taille</td>
-<td><p><strong>Plage de tailles en gigaoctets / plage d'IOPS en multiples de 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>Disque dur</td>
-<td>Rapport IOPS/gigaoctet qui détermine le type de disque dur mis à disposition. Pour déterminer ce rapport, divisez la valeur des IOPS par la taille de votre stockage. </br></br>Exemple : </br>Vous avez choisi 500Gi de stockage avec 100 IOPS. Votre rapport est 0,2 (100 IOPS/500Gi). </br></br><strong>Présentation des types de disque dur en fonction du rapport :</strong><ul><li>Inférieur ou égal à 0,3 : SATA</li><li>Supérieur à 0,3 : SSD</li></ul></td>
-</tr>
-<tr>
-<td>Facturation</td>
-<td>A l'heure</li></ul></td>
-</tr>
-<tr>
-<td>Tarification</td>
-<td>[Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Caractéristiques | Paramètre|
+|:-----------------|:-----------------|
+| Nom | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| Type | [Performances](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| Système de fichiers | NFS|
+| IOPS et taille | <p><strong>Plage de tailles en gigaoctets / plage d'IOPS en multiples de 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul>|
+| Disque dur | Rapport IOPS/gigaoctet qui détermine le type de disque dur mis à disposition. Pour déterminer ce rapport, divisez la valeur des IOPS par la taille de votre stockage. </br></br>Exemple : </br>Vous avez choisi 500Gi de stockage avec 100 IOPS. Votre rapport est 0,2 (100 IOPS/500Gi). </br></br><strong>Présentation des types de disque dur en fonction du rapport :</strong><ul><li>Inférieur ou égal à 0,3 : SATA</li><li>Supérieur à 0,3 : SSD</li></ul>|
+| Facturation | A l'heure|
+| Tarification | [Informations de tarification ![Icône de lien externe](../icons/launch-glyph.svg "Icône de lien externe")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Classe de stockage de fichiers : custom" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1436,7 +1320,7 @@ La planification de volume tenant compte de la topologie est prise en charge uni
 
 Les exemples suivants montrent comment créer des classes de stockage qui retardent la création de l'instance de stockage de fichiers jusqu'à ce que le premier pod utilisant ce stockage soit prêt à être planifié. Pour différer la création, vous devez inclure l'option `volumeBindingMode: WaitForFirstConsumer`. Si vous omettez cette option, le paramètre `volumeBindingMode` est automatiquement défini avec `Immediate` et l'instance de stockage de fichiers est créée lorsque vous créez la PVC.
 
-- **Exemple pour du stockage de fichiers de type Endurance :**
+- **Exemple relatif au stockage de fichiers de type Endurance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1454,7 +1338,7 @@ Les exemples suivants montrent comment créer des classes de stockage qui retard
   ```
   {: codeblock}
 
-- **Exemple pour du stockage de fichiers de type Performance :**
+- **Exemple relatif au stockage de fichiers de type Performance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1495,7 +1379,7 @@ Utilisez la classe de stockage personnalisée si vous souhaitez [effectuer une m
 
 Lorsque vous créez la classe de stockage personnalisée, indiquez la même région et la même zone dans lesquelles se trouvent votre cluster et les noeuds worker. Pour obtenir la région dans laquelle se trouve votre cluster, exécutez la commande `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` et recherchez le préfixe de la région dans la zone **Master URL**, par exemple `eu-de` dans l'URL `https://c2.eu-de.containers.cloud.ibm.com:11111`. Pour obtenir la zone dans laquelle se trouve votre noeud worker, exécutez la commande `ibmcloud ks workers --cluster <cluster_name_or_ID>`.
 
-- **Exemple pour du stockage de fichiers de type Endurance :**
+- **Exemple relatif au stockage de fichiers de type Endurance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1517,7 +1401,7 @@ Lorsque vous créez la classe de stockage personnalisée, indiquez la même rég
   ```
   {: codeblock}
 
-- **Exemple pour du stockage de fichiers de type Performance :**
+- **Exemple relatif au stockage de fichiers de type Performance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1555,7 +1439,7 @@ Lorsque vous créez la classe de stockage personnalisée, indiquez la même rég
 La classe de stockage personnalisée suivante vous permet de définir la version NFS que vous désirez mettre à disposition. Par exemple, pour mettre à disposition NFS version 3.0, remplacez `<nfs_version>` par **3.0**.
 {: shortdesc}
 
-- **Exemple pour du stockage de fichiers de type Endurance :**
+- **Exemple relatif au stockage de fichiers de type Endurance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1574,7 +1458,7 @@ La classe de stockage personnalisée suivante vous permet de définir la version
   ```
   {: codeblock}
 
-- **Exemple pour du stockage de fichiers de type Performance :**
+- **Exemple relatif au stockage de fichiers de type Performance :**
   ```
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
@@ -1601,3 +1485,6 @@ La classe de stockage personnalisée suivante vous permet de définir la version
    mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
+
+
+

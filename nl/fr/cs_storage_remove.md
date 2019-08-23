@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,13 +22,11 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
-
+ 
 # Suppression de stockage persistant dans un cluster
 {: #cleanup}
 
-Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC, et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer), comme par exemple du stockage de fichiers NFS ou du stockage par blocs. Selon comment vous avez créé votre stockage, il vous faudra peut-être les supprimer tous les trois séparément.
+Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez de trois composants principaux : la réservation de volume persistant (PVC) Kubernetes qui sollicite le stockage, le volume persistant (PV) Kubernetes monté sur un pod et décrit dans la PVC, et l'instance de stockage de l'infrastructure IBM Cloud, comme par exemple du stockage de fichiers NFS ou du stockage par blocs. Selon comment vous avez créé votre stockage, il vous faudra peut-être les supprimer tous les trois séparément.
 {:shortdesc}
 
 ## Nettoyage de stockage persistant
@@ -37,18 +35,26 @@ Lorsque vous configurez du stockage persistant dans votre cluster, vous disposez
 Description de vos options de suppression :
 
 **J'ai supprimé mon cluster. Dois-je supprimer autre chose pour supprimer du stockage persistant ?**</br>
-Ça dépend. Lorsque vous supprimez un cluster, la réservation de volume persistant (PVC) et le volume persistant (PV) sont supprimés. Cependant, c'est à vous de choisir si vous supprimez l'instance de stockage associée dans l'infrastructure IBM Cloud (SoftLayer). Si vous choisissez de ne pas la supprimer, elle existe toujours. Par ailleurs, si vous avez supprimé votre cluster alors qu'il n'était pas à l'état sain, le stockage peut encore exister, même si vous choisissez de le supprimer. Suivez les instructions, notamment l'étape permettant de [supprimer votre instance de stockage](#sl_delete_storage) dans l'infrastructure IBM Cloud (SoftLayer).
+Ça dépend. Lorsque vous supprimez un cluster, la réservation de volume persistant (PVC) et le volume persistant (PV) sont supprimés. Cependant, c'est à vous de choisir si vous supprimez l'instance de stockage associée dans l'infrastructure IBM Cloud. Si vous choisissez de ne pas la supprimer, elle existe toujours. Par ailleurs, si vous avez supprimé votre cluster alors qu'il n'était pas à l'état sain, le stockage peut encore exister, même si vous choisissez de le supprimer. Suivez les instructions, notamment l'étape permettant de [supprimer votre instance de stockage](#sl_delete_storage) dans l'infrastructure IBM Cloud. 
 
 **Puis-je supprimer la PVC pour supprimer l'intégralité de mon stockage ?**</br>
-C'est possible. Si vous [créez le stockage persistant de manière dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) et que vous sélectionnez une classe de stockage dont le nom ne contient pas `retain`, lorsque vous supprimez la PVC, le volume persistant et l'instance de stockage de l'infrastructure IBM Cloud (SoftLayer) sont également supprimés.
+C'est possible. Si vous [créez le stockage persistant de manière dynamique](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) et que vous sélectionnez une classe de stockage dont le nom ne contient pas `retain`, lorsque vous supprimez la PVC, le volume persistant et l'instance de stockage de l'infrastructure IBM Cloud sont également supprimés.
 
 Dans tous les autres cas, suivez les instructions permettant de vérifier le statut de la réservation de volume persistant (PVC), du volume persistant (PV) et de l'unité de stockage physique et supprimez-les séparément si nécessaire.
 
 **Suis-je facturé pour le stockage après que je l'ai supprimé ?**</br>
-Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprimez la réservation de volume persistant et le volume persistant, mais pas l'instance dans votre compte d'infrastructure IBM Cloud (SoftLayer), cette instance continue à exister et vous êtes facturé pour son utilisation. Vous devez tout supprimer pour ne plus être facturé. De plus, lorsque vous spécifiez le type de facturation (`billingType`) dans la PVC, vous pouvez choisir entre une facturation à l'heure (`hourly`) ou au mois (`monthly`). Si vous avez choisi `monthly`, votre instance est facturée tous les mois. Lorsque vous supprimez l'instance, vous êtes facturé jusqu'à la fin du mois en cours.
+Tout dépend de ce que vous supprimez et du type de facturation. Si vous supprimez la réservation de volume persistant et le volume persistant, mais pas l'instance dans votre compte d'infrastructure IBM Cloud, cette instance continue à exister et vous êtes facturé pour son utilisation. Vous devez tout supprimer pour ne plus être facturé. De plus, lorsque vous spécifiez le type de facturation (`billingType`) dans la PVC, vous pouvez choisir entre une facturation à l'heure (`hourly`) ou au mois (`monthly`). Si vous avez choisi `monthly`, votre instance est facturée tous les mois. Lorsque vous supprimez l'instance, vous êtes facturé jusqu'à la fin du mois en cours.
 
+Lorsque vous annulez manuellement l'instance de stockage persistant à partir de la console d'infrastructure IBM Cloud ou de l'interface de ligne de commande `ibmcloud sl`, la facturation cesse, selon les spécifications suivantes :  
+- **Stockage horaire** : la facturation cesse immédiatement. Une fois votre stockage annulé, il se peut que votre instance de stockage soit toujours visible dans la console pendant une durée maximale de 72 heures.   
+- **Stockage mensuel** : vous pouvez choisir l'option **Annulation immédiate** ou **Annulation à la date anniversaire**. Si vous choisissez l'option Annulation immédiate, votre stockage est immédiatement retiré et vous ne pouvez plus utiliser votre stockage. Si vous choisissez d'annuler votre stockage à la date anniversaire suivante, vos instances de stockage restent actives jusqu'à cette date et vous pouvez continuer de les utiliser jusqu'à cette date. Dans les deux cas, la facturation cesse pour le cycle de facturation suivant, mais vous êtes toujours facturé jusqu'à la fin du cycle de facturation en cours. Une fois votre stockage annulé, il se peut que votre instance de stockage soit toujours visible dans la console ou l'interface de ligne de commande pendant une durée maximale de 72 heures.   
 
-<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
+Si vous retirez le stockage persistant à l'aide d'une politique de récupération `Delete` que vous avez mise à disposition de façon dynamique en supprimant la PVC, le stockage est immédiatement retiré, quel que soit le type de facturation, horaire ou mensuel, que vous choisissez. Une fois votre stockage retiré, il se peut que votre instance de stockage soit toujours visible dans la console pendant une durée maximale de 72 heures. Le stockage persistant qui utilise une politique de récupération `Retain` n'est pas retiré et vous êtes toujours facturé pour son utilisation.  
+
+<p class="important">Lorsque vous nettoyez du stockage persistant, vous supprimez toutes les données qui y sont stockées. Si vous avez besoin d'une copie des données, effectuez une sauvegarde de [stockage de fichiers](/docs/containers?topic=containers-file_storage#file_backup_restore) ou de [stockage par blocs](/docs/containers?topic=containers-block_storage#block_backup_restore).  </p>
+
+**J'ai supprimé mon stockage. Pour quelle raison mes instances sont-elles toujours visibles ?** </br>
+Une fois que vous avez retiré le stockage persistant, il peut s'écouler jusqu'à 72 heures avant que le retrait soit total et que le stockage disparaisse de votre console d'infrastructure IBM Cloud ou de votre interface de ligne de commande.  
 
 Avant de commencer : [connectez-vous à votre compte. Le cas échéant, ciblez le groupe de ressources approprié. Définissez le contexte pour votre cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -80,8 +86,8 @@ Pour nettoyer des données persistantes :
    Si vous êtes facturé tous les mois pour le stockage, vous êtes redevable pour le mois complet, même si vous supprimez le stockage avant la fin du cycle de facturation.
    {: important}
 
-3. Supprimez les pods qui montent la réservation de volume persistant. 
-   1. Répertoriez les pods qui montent la réservation de volume persistant.
+3. Supprimez les pods qui montent la réservation de volume persistant.
+   1. Répertoriez les pods sur lesquels est montée la PVC.
       ```
       kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
       ```
@@ -180,7 +186,9 @@ Pour nettoyer des données persistantes :
    ```
    {: pre}
 
-9. Vérifiez que l'instance de stockage physique est supprimée. L'exécution du processus de suppression peut prendre quelques jours.
+10. Vérifiez que l'instance de stockage physique est supprimée. 
+   
+   L'exécution du processus de suppression peut durer jusqu'à 72 heures. {: important}
 
    **Stockage de fichiers :**
    ```
@@ -192,3 +200,5 @@ Pour nettoyer des données persistantes :
    ibmcloud sl block volume-list
    ```
    {: pre}
+
+
