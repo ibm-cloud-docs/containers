@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks
 
@@ -25,7 +25,7 @@ subcollection: containers
 
 
 
-# Tutorial: Creating Kubernetes clusters
+# Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
 
 With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Follow along with a fictional public relations firm to learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster that integrate with other cloud services such as {{site.data.keyword.ibmwatson}}.
