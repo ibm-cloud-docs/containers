@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Tutorial: Deploying apps into Kubernetes clusters
+# Deploying apps into Kubernetes clusters
 {: #cs_apps_tutorial}
 
 You can learn how to use {{site.data.keyword.containerlong}} to deploy a containerized app that leverages {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
