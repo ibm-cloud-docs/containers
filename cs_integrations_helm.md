@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -34,8 +34,6 @@ You can add complex Kubernetes apps to your cluster by using Helm charts.
 **What is Helm and how do I use it?** </br>
 [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and assigned a version by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.  
 
-To use Helm in your cluster, you must install the Helm CLI on your local machine and the Helm server Tiller in every cluster where you want to use Helm.
-
 **What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?** </br>
 For an overview of available Helm charts, see the [Helm charts catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm). The Helm charts that are listed in this catalog are grouped as follows:
 
@@ -48,20 +46,20 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 Helm charts from the **iks-charts** and **ibm-charts** repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
-To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Clusters that enable the public service endpoint can automatically access the image. Private clusters that are protected with a custom firewall, or clusters that enabled the private service endpoint only, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
+To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
 
 
 ## Setting up Helm in a cluster with public access
 {: #public_helm_install}
 
-If your cluster enabled the public service endpoint, you can install the Helm server Tiller by using the public image in the Google Container Registry.
+If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gatway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
 {: shortdesc}
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
-To install Helm in a cluster with public access:
+To install Helm in a cluster with public network access:
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 
@@ -209,7 +207,7 @@ Before you begin:
 To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
-2. Connect to your private cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up.
+2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
 3. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following YAML file from the [{{site.data.keyword.cloud_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
     1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
 
@@ -306,7 +304,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 {: note}
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
-2. Connect to your private cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up.
+2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
 3. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
