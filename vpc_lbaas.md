@@ -53,7 +53,7 @@ A request to your app uses the host name that is assigned to the Kubernetes `Loa
 
 
 ## Setting up a Load Balancer for VPC
-{: #vpc_ks_vpc_lb}
+{: #setup_vpc_ks_vpc_lb}
 
 Expose your app to the public or to the private network by setting up a Kubernetes `LoadBalancer` service in your cluster. When you expose your app, a Load Balancer for VPC that routes requests to your app is automatically created for you in your VPC outside of your cluster.
 {: shortdesc}
