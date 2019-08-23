@@ -535,26 +535,41 @@ If you do not want to use an {{site.data.keyword.cloud_notm}} service that you b
    If your CLI output is empty, no pods exist in your cluster that mount the secret. 
    
 4. If you have pods that mount the secret, either remove the pod or the deployment that manages the pod, or update the pod and deployment YAML to use a different secret instead. 
-   - To remove a pod or deployment: 
+   - **To remove a pod or deployment**: 
      ```
      kubectl delete pod <pod_name> -n <namespace>
      ```
      {: pre}
      
-   - To update an existing pod or deployment: 
+     ```
+     kubectl delete deployment <deployment_name> -n <namespace>
+     ```
+     {: pre}
+     
+   - **To update an existing pod or deployment**: 
      1. Get the pod or deployment YAML file. 
         ```
         kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+        
+        ```
         kubectl get deployment <deployment_name> -o yaml
         ```
         {: pre}
         
-     2. In the `spec.volumes` section, change the name of the secret that you want to use. 
+     2. Copy the YAML file and in the `spec.volumes` section, change the name of the secret that you want to use. 
      3. Apply the change in your cluster. 
         ```
         kubectl apply -f pod.yaml
         ```
         {: pre}
+        
+        ```
+        kubectl apply -f deployment.yaml
+        ```
+        {: pre}
+        
      4. Verify that a new pod is created with the updated volume specification. 
         ```
         kubectl get pods
