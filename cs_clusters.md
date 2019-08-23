@@ -127,7 +127,7 @@ After you set up your account to create clusters, decide on the setup for your c
 
 <img src="cluster-plan-dt.png" usemap="#image-map">
 
-<img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt.png" width="556" alt="This image walks you through choosing the setup that you want for your cluster." style="width:556px;" />
+<img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt.png" alt="This image walks you through choosing the setup that you want for your cluster."/>
 <map name="cluster-plan-map">
     <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="114,24,1470,430" shape="rect">
     <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes" coords="395,497,1784,878" shape="rect">
