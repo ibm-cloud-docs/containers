@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-21"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -36,7 +36,8 @@ Set up a Load Balancer for VPC to expose your app on the public or private netwo
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
 
-When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc) is automatically created for you. The load balancer routes incoming requests to the pods of your Kubernetes `LoadBalancer` service by using one of the node ports that are opened on the worker node during the VPC load balancer creation. The load balancer is multizonal and can route requests to all worker nodes across all VPC subnets that your worker nodes are attached to.
+When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc) is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes.
+{: shortdesc}
 
 The VPC load balancer serves as the external entry point for incoming requests for the app.
 * If you create a public Kubernetes `LoadBalancer` service, you can access your app from the internet through the host name that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.

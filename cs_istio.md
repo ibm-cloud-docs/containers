@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -809,6 +809,9 @@ In the following steps, you set up a host name through which your users can acce
 
 ### Exposing Istio-managed apps with TLS termination
 {: #tls}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can assign a host name with TLS to apps only in classic clusters. To expose an app with an IBM-provided host name in a VPC cluster, see [Exposing Istio-managed apps without TLS termination](#no-tls).
+{: note}
 
 **Before you begin:**
 
