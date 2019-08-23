@@ -128,20 +128,18 @@ After you set up your account to create clusters, decide on the setup for your c
 <img src="cluster-plan-dt.png" usemap="#image-map">
 
 <img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt.png" alt="This image walks you through choosing the setup that you want for your cluster."/>
-<map name="cluster-plan-map">
-    <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="114,24,1470,430" shape="rect">
-    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes" coords="395,497,1784,878" shape="rect">
-    <area target="" alt="VPC and classic infrastructure comparison" title="VPC and classic infrastructure comparison" href="/docs/containers?topic=containers-infrastructure_providers" coords="212,1043,1543,1344" shape="rect">
-    <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="383,1434,1153,1660" shape="rect">
-    <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="1411,1440,2171,1762" shape="rect">
-    <area target="" alt="VM table" title="VM table" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="389,1864,1148,1972" shape="rect">
-    <area target="" alt="VM table" title="VM table" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="2171,2063,1419,1866" shape="rect">
-    <area target="" alt="BM " title="BM " href="/docs/containers?topic=containers-planning_worker_nodes#bm" coords="1417,2090,2167,2179" shape="rect">
-    <area target="" alt="VPC scenarios" title="VPC scenarios" href="/docs/containers?topic=containers-plan_clusters#classic-scenarios" coords="393,2285,1144,2597" shape="rect">
-    <area target="" alt="Classic scenarios" title="Classic scenarios" href="/docs/containers?topic=containers-plan_clusters#classic-scenarios" coords="1419,2283,2165,2597" shape="rect">
-    <area target="" alt="Classic firewalls" title="Classic firewalls" href="/docs/containers?topic=containers-firewall" coords="1417,2617,2171,2701" shape="rect">
-    <area target="" alt="VPC firewalls" title="VPC firewalls" href="/docs/containers?topic=containers-firewall" coords="393,2609,1144,2703" shape="rect">
-    <area target="" alt="Estimate costs (cluster create page)" title="Estimate costs (cluster create page)" href="https://cloud.ibm.com/kubernetes/catalog/cluster/create" coords="963,2835,1637,2978" shape="rect">
+<map name="image-map">
+    <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="43,9,361,106" shape="rect">
+    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes" coords="110,128,467,224" shape="rect">
+    <area target="" alt="VPC and classic infrastructure comparison" title="VPC and classic infrastructure comparison" href="/docs/containers?topic=containers-infrastructure_providers" coords="" shape="rect">
+    <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="101,377,564,456" shape="rect">
+    <area target="" alt="Virtual Machines" title="Virtual Machines" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="105,488,564,538" shape="rect">
+    <area target="" alt="Bare metal machines" title="Bare metal machines" href="/docs/containers?topic=containers-planning_worker_nodes#bm" coords="566,569,372,546" shape="rect">
+    <area target="" alt="VPC scenarios" title="VPC scenarios" href="/docs/containers?topic=containers-plan_clusters#classic-scenarios" coords="104,597,298,675" shape="rect">
+    <area target="" alt="Classic scenarios" title="Classic scenarios" href="/docs/containers?topic=containers-plan_clusters#classic-scenarios" coords="369,596,566,674" shape="rect">
+    <area target="" alt="Classic firewall" title="Classic firewall" href="/docs/containers?topic=containers-firewall" coords="369,681,564,704" shape="rect">
+    <area target="" alt="VPC ACLs and firewall" title="VPC ACLs and firewall" href="/docs/containers?topic=containers-firewall" coords="103,680,298,704" shape="rect">
+    <area target="" alt="Estimate costs (cluster create page)" title="Estimate costs (cluster create page)" href="https://cloud.ibm.com/kubernetes/catalog/cluster/create" coords="248,732,426,776" shape="rect">
 </map>
 
 <br />
