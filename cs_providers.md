@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -45,7 +45,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
    <td>Generally available now, your clusters on IBM Cloud infrastructure Classic include all of the {{site.data.keyword.containerlong_notm}} mature and robust features for compute, networking, and storage. To get started, create a [Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial) or [OpenShift](/docs/openshift?topic=openshift-openshift_tutorial) cluster.</td>
    <td>With the VPC on Classic, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. To get started, try out the [VPC on Classic cluster tutorial](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_tutorial).</td>
  </tr>
-  <tr>
+ <tr>
   <td>Doc icons</td>
   <td><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="25" style="width:25px; border-style: none"/> Throughout the documentation, pages and topics might include a note that the content applies only to the classic infrastructure provider.</td>
   <td><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="25" style="width:25px; border-style: none"/> Throughout the documentation, pages and topics might include a note that the content applies only to the VPC infrastructure provider.</td>
@@ -123,9 +123,6 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  </tbody>
 </table>
-
-
-
 
 
 

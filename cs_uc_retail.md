@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks
 
@@ -127,7 +127,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 Key technologies:    
 * [Horizontal scaling to accelerate development](/docs/containers?topic=containers-app#highly_available_apps)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
-* [Insights to market trends with Watson Discovery](https://www.ibm.com/watson/services/discovery/)
+* [Insights to market trends with Watson Discovery](https://www.ibm.com/cloud/watson-discovery)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/services/EventStreams?topic=eventstreams-about#about)
 

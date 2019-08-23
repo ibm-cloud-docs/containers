@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-21"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -874,7 +874,7 @@ Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: Free clu
 <p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To create a classic cluster, use the [`ibmcloud ks cluster-create-classic` command](#cs_cluster_create) instead.</p>
 
 ```
-ibmcloud ks cluster-create-vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --provider VPC-CLASSIC --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [-s]
+ibmcloud ks cluster-create-vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --provider VPC-CLASSIC --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
 ```
 {: pre}
 
@@ -920,7 +920,22 @@ ibmcloud ks cluster-create-vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dt><code>--disable-public-service-endpoint</code></dt>
 <dd>To ensure that worker nodes and authorized cluster users communicate with the master through the private service endpoint only, include this flag to create the cluster without the public service endpoint.</dd>
 
-<dt><code>-s</code>
+<dt><code>--pod-subnet <em>SUBNET</em></code></dt>
+<dd>All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
+<p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
+<p>The subnet cannot be in the following reserved ranges:
+<ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.20.&#42;.&#42;</code></li>
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+
+<dt><code>--service-subnet <em>SUBNET</em></code></dt>
+<dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
+<p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
+<ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.20.&#42;.&#42;</code></li>
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+
+<dt><code>-s</code>**</dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
 </dl>

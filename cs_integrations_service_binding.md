@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -493,3 +493,115 @@ You can add the service credentials and other key value pairs from your Kubernet
    }
    ```
    {: codeblock}
+   
+## Removing a service from a cluster
+{: #unbind-service}
+
+If you do not want to use an {{site.data.keyword.cloud_notm}} service that you bound to your cluster, you can manually remove the Kubernetes secret and the pods that access the secret from your cluster. 
+{: shortdesc}
+
+1. List the services that are bound to your cluster and note the name of your service and the namespace that the service is bound to. 
+   ```
+   ibmcloud ks cluster-services --cluster 
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   OK
+   Service   Instance GUID                          Key                                                                  Namespace   
+   myservice 12345ab1-1234-1abc-a12b-12abc12a12ab   kube-a1a12abcd12a123abc1a12ab1a1234ab7.abcdefg0p1abcd123lgg.default   default  
+   ```
+   {: screen}
+   
+2. List the Kubernetes secrets in the namespace that your service is bound to and look for the secret with a name that follows the `binding-<service_name>` format. 
+   ```
+   kubectl get secrets -n <namespace> | grep Opaque
+   ```
+   {: pre}
+   
+   Example output: 
+   ```
+   binding-myservice   Opaque     1      3d23h
+   ```
+   {: screen}
+   
+3. Retrieve all the pods that access the secret. 
+   ```
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.secret.secretName}{" "}{end}{end}' | grep "<secret_name>"
+   ```
+   {: pre}
+   
+   If your CLI output is empty, no pods exist in your cluster that mount the secret. 
+   
+4. If you have pods that mount the secret, either remove the pod or the deployment that manages the pod, or update the pod and deployment YAML to use a different secret instead. 
+   - **To remove a pod or deployment**: 
+     ```
+     kubectl delete pod <pod_name> -n <namespace>
+     ```
+     {: pre}
+     
+     ```
+     kubectl delete deployment <deployment_name> -n <namespace>
+     ```
+     {: pre}
+     
+   - **To update an existing pod or deployment**: 
+     1. Get the pod or deployment YAML file. 
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+        
+        ```
+        kubectl get deployment <deployment_name> -o yaml
+        ```
+        {: pre}
+        
+     2. Copy the YAML file and in the `spec.volumes` section, change the name of the secret that you want to use. 
+     3. Apply the change in your cluster. 
+        ```
+        kubectl apply -f pod.yaml
+        ```
+        {: pre}
+        
+        ```
+        kubectl apply -f deployment.yaml
+        ```
+        {: pre}
+        
+     4. Verify that a new pod is created with the updated volume specification. 
+        ```
+        kubectl get pods
+        ```
+        {: pre}
+        
+        ```
+        kubectl describe pod <pod_name>
+        ```
+        {: pre}
+   
+5. Remove the secret. 
+   ```
+   kubectl delete secret <secret_name> -n <namespace>
+   ```
+   {: pre}
+   
+6. Verify that your secret is removed. 
+   ```
+   kubectl get secrets -n <namespace>
+   ```
+   {: pre}
+   
+7. Optional. Remove the {{site.data.keyword.cloud_notm}} service instance. 
+   - **{{site.data.keyword.cloud_notm}} IAM-enabled services:**
+     ```
+     ibmcloud resource service-instance-delete <service_name>
+     ```
+     {: pre}
+     
+   - **Cloud Foundry services:**
+     ```
+     ibmcloud service delete <service_name>
+     ```
+     {: pre}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -133,7 +133,7 @@ You can run select licensed IBM products that were packaged for {{site.data.keyw
 {: shortdesc}
 
 
-Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
+Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
 
 The following table is an overview of available {{site.data.keyword.cloud_notm}} Private products that you can use in your cluster in {{site.data.keyword.cloud_notm}} Public.
 
@@ -171,4 +171,4 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
 
     - [IBM Db2 Direct Advanced Edition Server ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html)
     - [IBM MQ Advanced ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
-    - [IBM WebSphere Application Server Liberty ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/was900_welcome_liberty.html)
+    - [IBM WebSphere Application Server Liberty ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/welcome_liberty.html)

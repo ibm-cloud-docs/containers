@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-22"
 
 ---
 
@@ -197,7 +197,7 @@ lastupdated: "2019-08-19"
   * [Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker)
   * [Master-to-worker communication](/docs/containers?topic=containers-plan_clusters#workeruser-master)
   * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](/docs/containers?topic=containers-plan_clusters#worker-services-onprem)
-  * [External communication to apps running on worker nodes](docs/containers?topic=containers-plan_clusters#external-workers)
+  * [External communication to apps running on worker nodes](/docs/containers?topic=containers-plan_clusters#external-workers)
 * [Scenario: Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
 * [Scenario: Extend your on-premises datacenter to a cluster on the private network and add limited public access](/docs/containers?topic=containers-plan_clusters#internet-facing)
   * [Using edge nodes and Calico network policies](/docs/containers?topic=containers-plan_clusters#internet-facing)

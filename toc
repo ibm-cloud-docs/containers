@@ -37,9 +37,9 @@ IBM Cloud Kubernetes Service
         cs_tutorial_vpc.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Tutorial: Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [Tutorial: Create a multi-region cluster using Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [Tutorial: Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Move a VM-based application to Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [Create a multi-region cluster using Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -171,4 +171,3 @@ IBM Cloud Kubernetes Service
     {: .navgroup-end}
 
     cs_tutorials_apps.md
-    cs_rellinks.md

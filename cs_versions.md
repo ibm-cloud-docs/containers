@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-22"
 
 keywords: kubernetes, iks, versions, update
 
@@ -581,7 +581,7 @@ The following table shows the actions that you must take after you update the Ku
 <td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. If you run more than 30 pods per worker node in your cluster, [adjust the `metrics-server` configuration for performance](/docs/containers?topic=containers-kernel#metrics).
 <p>The Kubernetes dashboard does not work with the `metrics-server`. If you want to display metrics in a dashboard, choose from the following options.</p>
 <ul><li>[Set up Grafana to analyze metrics](/docs/services/cloud-monitoring/tutorials?topic=cloud-monitoring-container_service_metrics#container_service_metrics) by using the Cluster Monitoring Dashboard.</li>
-<li>Deploy [Heapster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/heapster) to your cluster.
+<li>Deploy [Heapster ![External link icon](../icons/launch-glyph.svg "External link icon")](	https://github.com/kubernetes/heapster) to your cluster.
 <ol><li>Copy the `heapster-rbac` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/heapster-rbac.yaml), `heapster-service` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-service.yaml), and `heapster-controller` [YAML ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/release-1.12/cluster/addons/cluster-monitoring/standalone/heapster-controller.yaml) files.</li>
 <li>Edit the `heapster-controller` YAML by replacing the following strings.
 <ul><li>Replace `{{ nanny_memory }}` with `90Mi`</li>

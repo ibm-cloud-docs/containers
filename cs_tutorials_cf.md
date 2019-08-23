@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Tutorial: Migrating an app from Cloud Foundry to a cluster
+# Migrating an app from Cloud Foundry to a cluster
 {: #cf_tutorial}
 
 You can take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.

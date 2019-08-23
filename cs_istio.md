@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-16"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -38,7 +38,7 @@ With one click, you can get all Istio core components, additional tracing, monit
 ### What is Istio?
 {: #istio_ov_what_is}
 
-[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/info/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
+[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 When you shift monolith applications to a distributed microservice architecture, a set of new challenges arises such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by so that you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
@@ -61,12 +61,12 @@ The managed Istio add-on is classified as beta and might be unstable or change f
 {: note}
 
 **What does this look like in my cluster?**</br>
-When you install the Istio add-on, the Istio control and data planes use the VLANs that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flow over the public VLAN.
+When you install the Istio add-on, the Istio control and data planes use the network interfaces that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flow over the public network interface.
 
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start-ibm/).
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/install/platform/ibm/).
 {: tip}
 
 **Are there any limitations?** </br>
@@ -274,7 +274,7 @@ The `reviews` microservice has multiple versions:
 * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
 * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/). The BookInfo app is also already exposed on a public IP ingress address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
+The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/). The BookInfo app is also already exposed on a public IP address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
 
 ### Publicly accessing BookInfo
 {: #istio_access_bookinfo}
@@ -282,23 +282,30 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
 1. Get the public address for your cluster.
-  1. Set the ingress host.
-    ```
-    export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-    ```
-    {: pre}
+    * **Classic clusters**:
+      1. Set the Istio ingress host.
+         ```
+         export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+         ```
+         {: pre}
 
-  2. Set the ingress port.
-    ```
-    export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-    ```
-    {: pre}
+      2. Set the Istio ingress port.
+         ```
+         export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+         ```
+         {: pre}
 
-  3. Create a `GATEWAY_URL` environment variable that uses the ingress host and port.
-     ```
-     export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
-     ```
-     {: pre}
+      3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
+         ```
+         export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
+         ```
+         {: pre}
+
+    * **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
+      ```
+      export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+      ```
+      {: pre}
 
 2. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
    ```
@@ -327,6 +334,9 @@ Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookin
 
 When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a host name for the `istio-ingressgateway` load balancer IP address through which you can publicly access BookInfo.
 {: shortdesc}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following steps are supported for classic clusters only. In VPC clusters, the `istio-ingressgateway` is already assigned a host name instead of an IP address by the VPC load balancer for your cluster. You can see the host name by running `kubectl -n istio-system get service istio-ingressgateway -o wide` and looking for the **EXTERNAL-IP** in the output. Then, access BookInfo by opening `http://<host_name>/productpage` in a browser.
+{: note}
 
 1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS host name.
   ```
@@ -364,7 +374,7 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 
 <dl>
 <dt>`Gateway`</dt>
-<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the ingress entry point for HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
+<dd>The `bookinfo-gateway` [Gateway ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/) describes a load balancer, the `istio-ingressgateway` service in the `istio-system` namespace that acts as the entry point for inbound HTTP/TCP traffic for BookInfo. Istio configures the load balancer to listen for incoming requests to Istio-managed apps on the ports that are defined in the gateway configuration file.
 </br></br>To see the configuration file for the BookInfo gateway, run the following command.
 <pre class="pre"><code>kubectl get gateway bookinfo-gateway -o yaml</code></pre></dd>
 
@@ -405,7 +415,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
   ```
   {: pre}
 
-2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/using-istio-dashboard/) in the Istio open source documentation.
+2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/) in the Istio open source documentation.
 
 </br>
 **Jaeger**</br>
@@ -481,7 +491,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 Ready to manage your own apps by using Istio? Before you deploy your app, you must first decide how you want to inject the Envoy proxy sidecars into app pods.
 {: shortdesc}
 
-Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure that sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/sidecar-injection/).
+Each app pod must be running an Envoy proxy sidecar so that the microservices can be included in the service mesh. You can make sure that sidecars are injected into each app pod automatically or manually. For more information about sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/).
 
 ### Enabling automatic sidecar injection
 {: #istio_sidecar_automatic}
@@ -514,7 +524,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
     ```
@@ -565,6 +575,7 @@ To manually inject sidecars into a deployment:
   ```
   curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.4 sh -
   ```
+  {: pre}
 
 2. Navigate to the Istio package directory.
   ```
@@ -584,7 +595,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/spec-requirements/).
+5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
     ```
@@ -636,7 +647,7 @@ Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-i
 In the following steps, you set up a host name through which your users can access your app by creating the following resources:
 * A gateway that is called `my-gateway`. This gateway acts as the public entry point to your apps and uses the existing `istio-ingressgateway` load balancer service to expose your app. The gateway can optionally be configured for TLS termination.
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
-* A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
+* A host name for the `istio-ingressgateway` load balancer. All user requests to the host name are forwarded to your app according to your `my-virtual-service` routing rules.
 
 ### Exposing Istio-managed apps without TLS termination
 {: #no-tls}
@@ -649,6 +660,7 @@ In the following steps, you set up a host name through which your users can acce
     ```
     curl -L https://git.io/getLatestIstio | sh -
     ```
+    {: pre}
   2. Navigate to the Istio package directory.
     ```
     cd istio-1.2.4
@@ -741,41 +753,55 @@ In the following steps, you set up a host name through which your users can acce
   ```
   {: pre}
 
-5. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
-  ```
-  kubectl get svc -n istio-system
-  ```
-  {: pre}
+5. Get the host name for the `istio-ingressgateway` load balancer.
+  * **Classic clusters**: Register a DNS host name for the `istio-ingressgateway` load balancer. For more information about registering DNS host names in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for host names, see [Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
+      1. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
+        ```
+        kubectl get svc -n istio-system
+        ```
+        {: pre}
 
-  In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
-  ```
-  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-  ...
-  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                            8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-  ```
-  {: screen}
+        In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
+        ```
+        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+        ...
+        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                                  8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+        ```
+        {: screen}
 
-6. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
-  ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
-  ```
-  {: pre}
+      2. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
+        ```
+        ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+        ```
+        {: pre}
 
-7. Verify that the host name is created.
-  ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
-  ```
-  {: pre}
+      3. Verify that the host name is created.
+        ```
+        ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+        ```
+        {: pre}
 
-  Example output:
-  ```
-  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-  ```
-  {: screen}
+        Example output:
+        ```
+        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+        ```
+        {: screen}
 
-8. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+  * **VPC clusters**: The `istio-ingressgateway` load balancer is automatically assigned a host name instead of an IP address by the VPC load balancer for your cluster. Get the host name for `istio-ingressgateway` and look for the **EXTERNAL-IP** in the output.
+    ```
+    kubectl -n istio-system get service istio-ingressgateway -o wide
+    ```
+    {: pre}
+    In this example output, the host name is `6639a113-us-south.lb.appdomain.cloud`:
+    ```
+    NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)                                                                                                                                      AGE       SELECTOR
+    istio-ingressgateway   LoadBalancer   172.21.101.250   6639a113-us-south.lb.appdomain.cloud   15020:32377/TCP,80:31380/TCP,443:31390/TCP,31400:31400/TCP,15029:31360/TCP,15030:31563/TCP,15031:32157/TCP,15032:31072/TCP,15443:31458/TCP   20m       app=istio-ingressgateway,istio=ingressgateway,release=istio
+    ```
+    {: screen}
+
+6. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
   http://<host_name>/<service_path>
   ```
@@ -783,6 +809,9 @@ In the following steps, you set up a host name through which your users can acce
 
 ### Exposing Istio-managed apps with TLS termination
 {: #tls}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can assign a host name with TLS to apps only in classic clusters. To expose an app with an IBM-provided host name in a VPC cluster, see [Exposing Istio-managed apps without TLS termination](#no-tls).
+{: note}
 
 **Before you begin:**
 
@@ -792,6 +821,7 @@ In the following steps, you set up a host name through which your users can acce
     ```
     curl -L https://git.io/getLatestIstio | sh -
     ```
+    {: pre}
   2. Navigate to the Istio package directory.
     ```
     cd istio-1.2.4
@@ -1204,7 +1234,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
     ```
     {: pre}
 
-- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/quick-start/#uninstall-istio-core-components).
+- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/install/kubernetes/#uninstall-istio-core-components).
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```

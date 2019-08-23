@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, containers
 
@@ -89,14 +89,14 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
   <div class="solutionBox">
    <a href = "#clusters_gs">
     <div>
-         <h2 style="margin: 10px 10px 10px 10px;"><img class="icon" src="/images/icon-classic.png"> Classic clusters</h2>
+         <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters</h2>
          <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support, and choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
     </div>
 </div>
   <div class="solutionBox">
    <a href = "#vpc-classic-gs">
     <div>
-         <h2 style="margin: 10px 10px 10px 10px;"><img class="icon" src="/images/icon-vpc.png"> VPC on Classic</h2>
+         <h2 style="margin: 10px 10px 10px 10px;">[{icon_vpc}] VPC on Classic</h2>
          <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Use security groups, and network access control lists to control network traffic.   </p>
      </div>
 </div>
@@ -127,7 +127,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create your cluster of co
 [Classic clusters](#clusters_gs) are created on virtual or bare metal worker nodes that are connected to VLANs. In a classic cluster, you can choose from a variety of virtual and bare metal worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
 
-VPC on Classic clusters are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use security groups as your virtual firewalls for instance-level protection, and network access control lists to protect the subnets that your worker nodes are connected to. VPC on Classic clusters can be provisioned on shared virtual infrastructure only.
+[VPC on Classic clusters](#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use security groups as your virtual firewalls for instance-level protection, and network access control lists to protect the subnets that your worker nodes are connected to. VPC on Classic clusters can be provisioned on shared virtual infrastructure only.
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
 

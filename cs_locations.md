@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -94,7 +94,7 @@ The following tables list the available single and multizone locations in {{site
 {: shortdesc}
 
 * **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure.
-* **Single zone**: If you create a cluster in a single zone, or data center, location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+* **Single zone**: If you create a cluster in a single zone (data center) location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 * **VPC regions and zones**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
 
 To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks supported-locations` and look for the value in the `Multizone Metro` column.
@@ -154,7 +154,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | North America | United States | Dallas | us-south | us-south-1<br>us-south-2<br>us-south-3 | Dallas 1<br>Dallas 2<br>Dallas 3|
 {: class="simple-tab-table"}
 {: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
-{: #locationtabtablemulti}
+{: #locationtabtablemultivpc}
 {: tab-title="Multizone metros for VPC clusters"}
 {: tab-group="location-multi-single"}
 

@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-20"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, vpc
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Tutorial: Creating a classic cluster in your Virtual Private Cloud (VPC)
+# Creating a classic cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 
 With the **{{site.data.keyword.containerlong}} clusters in VPC on Classic**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC on Classic.
@@ -381,7 +381,7 @@ To deploy the app:
 Set up a VPC load balancer to expose your app on the public network.
 {: shortdesc}
 
-When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC account outside of your cluster. NodePorts are also automatically opened on the worker nodes in your cluster. The load balancer is multizonal and routes requests for your app through the NodePorts on your worker nodes. The following diagram illustrates how a user accesses an app's services through the load balancer, even though your worker node is connected to only a private subnet.
+When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's services through the load balancer, even though your worker node is connected to only a private subnet.
 
 <img src="images/vpc_tutorial_lesson4_lb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
 
@@ -430,7 +430,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     </tr>
     </tbody></table>
 
-2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the Kubernetes `LoadBalancer` service is created, the **LoadBalancer Ingress** field is populated with a host name that is assigned by the VPC load balancer that is automatically created.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC account. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its host name.</p>
+2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the Kubernetes `LoadBalancer` service is created, the **LoadBalancer Ingress** field is populated with a host name that is assigned by the VPC load balancer that is automatically created.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its host name.</p>
 
     ```
     kubectl describe service hw-lb-svc
@@ -461,7 +461,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: screen}
 
-3.  Verify that the VPC load balancer is created successfully in your VPC account. In the output, verify that the VPC load balancer has an **Operating Status** of `online` and a **Provision Status** of `active`.
+3.  Verify that the VPC load balancer is created successfully in your VPC. In the output, verify that the VPC load balancer has an **Operating Status** of `online` and a **Provision Status** of `active`.
 
     The VPC load balancer is named in the format `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. To see your cluster ID, run `ibmcloud ks cluster-get --cluster <cluster_name>`. To see the Kubernetes `LoadBalancer` service UID, run `kubectl get svc hw-lb-svc -o yaml` and look for the **metadata.uid** field in the output.
     {: tip}
@@ -506,5 +506,5 @@ Now that you have a VPC cluster, learn more about what you can do.
 
 Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.
 
-If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://bxcs-slack-invite.mybluemix.net/) to this Slack.
+If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
 {: tip}

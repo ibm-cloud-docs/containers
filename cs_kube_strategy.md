@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, containers
 
@@ -40,7 +40,7 @@ But how do you get to the cloud? What are your options along the way? And how do
 
 Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack. ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-kubernetes-service.slack.com)
 
-Not on slack yet? [Request an invite!](https://bxcs-slack-invite.mybluemix.net/)
+Not on slack yet? [Request an invite!](https://cloud.ibm.com/kubernetes/slack)
 {: tip}
 
 ### What can I move to the {{site.data.keyword.cloud_notm}}?
@@ -101,7 +101,7 @@ Check out the [Twelve-Factor App ![External link icon](../icons/launch-glyph.svg
 7.  **Port binding**: Port bindings are self-contained and provide a service endpoint on well-defined host and port.
 8.  **Concurrency**: Manage and scale your app through process instances such as replicas and horizontal scaling. Set resource requests and limits for your deployments. Note that Calico network policies cannot limit bandwidth. Instead, consider [Istio](/docs/containers?topic=containers-istio).
 9.  **Disposability**: Design your app to be disposable, with minimal startup, graceful shutdown, and toleration for abrupt process terminations. Remember, containers, pods, and even worker nodes are meant to be disposable, so plan your app accordingly.
-10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/content/code/practice_continuous_integration/) and [continuous delivery](https://www.ibm.com/cloud/garage/content/deliver/practice_continuous_delivery/) pipeline for your app, with minimal difference between the app in development and the app in prod.
+10.  **Dev-to-prod parity**: Set up a [continuous integration](https://www.ibm.com/cloud/garage/practices/code/practice_continuous_integration) and [continuous delivery](https://www.ibm.com/cloud/garage/practices/deliver/practice_continuous_delivery) pipeline for your app, with minimal difference between the app in development and the app in prod.
 11.  **Logs**: Treat logs as event streams: the outer or hosting environment processes and routes log files. **Important**: In {{site.data.keyword.containerlong_notm}}, logs are not turned on by default. To enable, see [Configuring log forwarding](/docs/containers?topic=containers-health#configuring).
 12.  **Admin processes**: Keep any one-time admin scripts with your app and run them as a [Kubernetes Job object ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/) to ensure that the admin scripts run with the same environment as the app itself. For orchestration of larger packages that you want to run in your Kubernetes clusters, consider using a package manager such as [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/).
 
@@ -242,7 +242,7 @@ The number of clusters that you create depends on your workload, company policie
 <dt>Provision different types of machines for a mix of computing resources.</dt>
   <dd>Everyone likes choices, right? With {{site.data.keyword.containerlong_notm}}, you have [a mix of flavors](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that you can deploy: from bare metal for intensive workloads to virtual machines for rapid scaling. Use labels or namespaces to organize deployments to your machines. When you create a deployment, limit it so that your app's pod deploys only on machines with the right mix of resources. For example, you might want to limit a database application to a bare metal machine with a significant amount of local disk storage like the `md1c.28x512.4x4tb`.</dd>
 <dt>Set up multiple namespaces when you have multiple teams and projects that share the cluster.</dt>
-  <dd><p>Namespaces are kind of like a cluster within the cluster. They are a way to divide up cluster resources by using [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [default limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/memory-default-namespace/). When you make new namespaces, be sure to set up proper [RBAC policies](/docs/containers?topic=containers-users#rbac) to control access. For more information, see [Share a cluster with namespaces ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) in the Kubernetes documentation.</p>
+  <dd><p>Namespaces are kind of like a cluster within the cluster. They are a way to divide up cluster resources by using [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [default limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/). When you make new namespaces, be sure to set up proper [RBAC policies](/docs/containers?topic=containers-users#rbac) to control access. For more information, see [Share a cluster with namespaces ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) in the Kubernetes documentation.</p>
   <p>If you have a small cluster, a couple dozen users, and resources that are similar (such as different versions of the same software), you probably don't need multiple namespaces. You can use labels instead.</p></dd>
 <dt>Set resource quotas so that users in your cluster must use resource requests and limits</dt>
   <dd>To ensure that every team has the necessary resources to deploy services and run apps in the cluster, you must set up [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for every namespace. Resource quotas determine the deployment constraints for a namespace, such as the number of Kubernetes resources that you can deploy, and the amount of CPU and memory that can be consumed by those resources. After you set a quota, users must include resource requests and limits in their deployments.</dd>
@@ -270,7 +270,7 @@ Review more information about making resources highly available.
 * [Create multizone clusters](/docs/containers?topic=containers-ha_clusters#ha_clusters).
 * [Plan highly available deployments](/docs/containers?topic=containers-app#highly_available_apps) that use features such as replica sets and pod anti-affinity across multizones.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
-* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage).
+* [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started).
 * For multizone clusters, enable a [load balancer service](/docs/containers?topic=containers-loadbalancer#multi_zone_config) or the Ingress [multizone load balancer](/docs/containers?topic=containers-ingress#ingress) to expose your apps publicly.
 
 <br />
@@ -442,7 +442,7 @@ If you want to run your app in multiple clusters, public and private environment
 <dt>Set up a continuous integration and delivery (CI/CD) pipeline</dt>
   <dd>With your app configuration files organized in a source control management system such as Git, you can build your pipeline to test and deploy code to different environments, such as `test` and `prod`. Check out [this tutorial on Continuous Deployment to Kubernetes](/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes).</dd>
 <dt>Package your app configuration files</dt>
-  <dd>With the [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/) Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/solutions/helm-charts) to extend your cluster's capabilities, such as with a block storage plug-in.<p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
+  <dd>With the [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/) Kubernetes package manager, you can specify all Kubernetes resources that your app requires in a Helm chart. Then, you can use Helm to create the YAML configuration files and deploy these files in your cluster. You can also [integrate {{site.data.keyword.cloud_notm}}-provided Helm charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm) to extend your cluster's capabilities, such as with a block storage plug-in.<p class="tip">Are you just looking for an easy way to create YAML file templates? Some people use Helm to do just that, or you might try out other community tools such as [`ytt` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://get-ytt.io/).</p></dd>
 </dl>
 
 <br />
