@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks
 
@@ -272,7 +272,7 @@ The ALB metrics exporter pods must deploy to the same worker nodes that your ALB
   ```
   {: pre}
 
-3. Check the chart deployment status. When the chart is ready, the **STATUS** field near the top of the output has a value of `DEPLOYED`.
+3. Check the chart deployment status. When the chart is ready, the **STATUS** field near the beginning of the output has a value of `DEPLOYED`.
   ```
   helm status ibmcloud-alb-metrics-exporter
   ```
@@ -317,7 +317,7 @@ After you install the [metrics exporter](#metrics-exporter), you can install the
   ```
   {: pre}
 
-4. Check the chart deployment status. When the chart is ready, the **STATUS** field near the top of the output has a value of `DEPLOYED`.
+4. Check the chart deployment status. When the chart is ready, the **STATUS** field near the beginning of the output has a value of `DEPLOYED`.
     ```
     helm status prometheus
     ```
@@ -450,7 +450,7 @@ In the previous example, the subtype is <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported server metrics". In the previous example, the metric name is <code>out</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table for supported server metrics. In the previous example, the metric name is <code>out</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
@@ -578,7 +578,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 1 metrics". In the previous example, the metric name is <code>in</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table for supported upstream type 1 metrics. In the previous example, the metric name is <code>in</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
@@ -660,7 +660,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 </tr>
 <tr>
 <td><code>&lt;METRIC_NAME&gt;</code></td>
-<td>The name of the collected metric type. For a list of metric names, see the following table "Supported upstream type 2 metrics". In the previous example, the metric name is <code>requestMsec</code>.</td>
+<td>The name of the collected metric type. For a list of metric names, see the following table for Supported upstream type 2 metrics. In the previous example, the metric name is <code>requestMsec</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>

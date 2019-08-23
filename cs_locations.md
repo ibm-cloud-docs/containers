@@ -154,7 +154,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | North America | United States | Dallas | us-south | us-south-1<br>us-south-2<br>us-south-3 | Dallas 1<br>Dallas 2<br>Dallas 3|
 {: class="simple-tab-table"}
 {: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
-{: #locationtabtablemulti}
+{: #locationtabtablemultivpc}
 {: tab-title="Multizone metros for VPC clusters"}
 {: tab-group="location-multi-single"}
 

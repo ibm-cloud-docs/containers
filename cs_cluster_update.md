@@ -374,7 +374,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
 7.  Optional: After the replaced worker nodes are in a **Ready** status, [resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to meet the cluster capacity that you want.
 
 ### Updating VPC worker nodes in the console
-{: #vpc_worker_cli}
+{: #vpc_worker_ui}
 
 You can update your VPC worker nodes in the console. Before you begin, consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) to the cluster and [draining ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) the worker node before you replace, to help avoid downtime for your apps.
 {: shortdesc}
