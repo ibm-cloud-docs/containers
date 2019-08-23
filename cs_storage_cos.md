@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 
-[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage) is persistent, highly available storage that you can mount to your apps. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
+[{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started) is persistent, highly available storage that you can mount to your apps. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
 {: shortdesc}
 
 {{site.data.keyword.cos_full_notm}} is supported in classic {{site.data.keyword.containerlong_notm}} clusters or classic {{site.data.keyword.openshiftlong}} clusters, and is not supported in VPC on Classic clusters. To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public network access to authenticate with {{site.data.keyword.cloud_notm}} Identity and Access Management. If you have a private-only cluster, you can communicate with the {{site.data.keyword.cos_full_notm}} private service endpoint if you install the plug-in version `1.0.3` or later, and set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
