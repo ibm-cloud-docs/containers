@@ -386,37 +386,37 @@ If you have an existing physical VPC Block Storage device that you want to use i
    {: codeblock}
 
    <table>
-    <caption>Understanding the YAML file components</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>metadata.name</code></td>
-    <td>Enter a name for your PV. </td>
-      </tr>
-      <tr>
-        <td><code>spec.capacity.storage</td>
-        <td>Enter the size of your VPC Block Storage volume in gigabytes (Gi) that you retrieved earlier. For example, if the size of your device is 100 GB, enter <code>100Gi</code>.  </td>
-      </tr>
-      <tr>
-         <td><code>spec.csi.volumeAttributes.iops</code></td>
-         <td>Enter the Max IOPS of the VPC Block Storage volume that you retrieved earlier.</td>
-      </tr>
-      <tr>
-         <td><code>spec.csi.volumeAttributes.zone</code></td>
-         <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region).</td>
-       </tr>
-      <tr>
-        <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
-        <td>Enter the ID of the VPC Block Storage volume that you retrieved earlier. </td>
-        </tr>
-        <tr>
+   <caption>Understanding the YAML file components</caption>
+   <thead>
+   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td><code>metadata.name</code></td>
+   <td>Enter a name for your PV. </td>
+   </tr>
+   <tr>
+   <td><code>spec.capacity.storage</td>
+   <td>Enter the size of your VPC Block Storage volume in gigabytes (Gi) that you retrieved earlier. For example, if the size of your device is 100 GB, enter <code>100Gi</code>.  </td>
+   </tr>
+   <tr>
+   <td><code>spec.csi.volumeAttributes.iops</code></td>
+   <td>Enter the Max IOPS of the VPC Block Storage volume that you retrieved earlier.</td>
+   </tr>
+   <tr>
+   <td><code>spec.csi.volumeAttributes.zone</code></td>
+   <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region).</td>
+   </tr>
+   <tr>
+   <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
+   <td>Enter the ID of the VPC Block Storage volume that you retrieved earlier. </td>
+   </tr>
+   <tr>
    <td><code>spec.storageClassName</code></td>
    <td>For the storage class name, enter an empty string.</td>
    </tr>
-        </tbody>
-        </table>
+   </tbody>
+   </table>
 
 5. Create the PV in your cluster.
    ```
@@ -537,24 +537,24 @@ You can create a customized storage class to provision VPC Block Storage with a 
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
     <tbody>
-        <tr>
-           <td><code>metadata.name</code></td>
-           <td>Enter a name for your storage class.</td>
-       </tr>
-       <tr>
-          <td><code>parameters.cs.storage.k8s.io/fstype</code></td>
-          <td>Enter the file system for your VPC Block Storage instance. Choose `xfs` or `ext3`.</td>
-       </tr>
-       <tr>
-          <td><code>reclaimPolicy</code></td>
-          <td>Enter the reclaim policy for your storage class. Choose `Retain` or `Delete`.</td>
-       </tr>
-       <tr>
-          <td><code>volumeBindingMode</code></td>
-          <td>Choose if you want to delay the creation of the VPC Block Storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, enter `WaitForFirstConsumer`. To create the VPC Block Storage instance when you create the PVC, enter `Immediate`.</td>
-       </tr>
-       </tbody>
-       </table>
+    <tr>
+    <td><code>metadata.name</code></td>
+    <td>Enter a name for your storage class.</td>
+    </tr>
+    <tr>
+    <td><code>parameters.cs.storage.k8s.io/fstype</code></td>
+    <td>Enter the file system for your VPC Block Storage instance. Choose `xfs` or `ext3`.</td>
+    </tr>
+    <tr>
+    <td><code>reclaimPolicy</code></td>
+    <td>Enter the reclaim policy for your storage class. Choose `Retain` or `Delete`.</td>
+    </tr>
+    <tr>
+    <td><code>volumeBindingMode</code></td>
+    <td>Choose if you want to delay the creation of the VPC Block Storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, enter `WaitForFirstConsumer`. To create the VPC Block Storage instance when you create the PVC, enter `Immediate`.</td>
+    </tr>
+    </tbody>
+    </table>
 
 3. Create the customized storage class in your cluster.
    ```
@@ -715,20 +715,20 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
     <tbody>
-        <tr>
-           <td><code>metadata.name</code></td>
-           <td>Enter a name for your storage class.</td>
-       </tr>
-       <tr>
-          <td><code>parameters.encrypted</code></td>
-          <td>Enter <strong>true</strong> to create a storage class that sets up encryption for VPC Block Storage. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>.</td>
-       </tr>
-       <tr>
-          <td><code>parameters.encryptionKey</code></td>
-          <td>Enter the root key CRN that you retrieved earlier.</td>
-       </tr>
-       </tbody>
-       </table>
+    <tr>
+    <td><code>metadata.name</code></td>
+    <td>Enter a name for your storage class.</td>
+    </tr>
+    <tr>
+    <td><code>parameters.encrypted</code></td>
+    <td>Enter <strong>true</strong> to create a storage class that sets up encryption for VPC Block Storage. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>.</td>
+    </tr>
+    <tr>
+    <td><code>parameters.encryptionKey</code></td>
+    <td>Enter the root key CRN that you retrieved earlier.</td>
+    </tr>
+    </tbody>
+    </table>
 
 8. Create the customized storage class in your cluster.
     ```
