@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-08-23"
 
 keywords: kubernetes, iks, vpc
 
@@ -135,10 +135,12 @@ Choose your VPC Block Storage profile and create a persistent volume claim to dy
    {: note}
 
    <table>
+   <caption>Overview of VPC Block Storage profiles</caption>
    <thead>
      <th>VPC Block Storage profile</th>
      <th>Corresponding storage class</th>
    </thead>
+   <tbody>
    <tr>
     <td> 10 IOPS/GB </td>
     <td> <code>ibmc-vpc-block-10iops-tier</code></br><code>ibmc-vpc-block-retain-10iops-tier</code></td>
@@ -276,14 +278,14 @@ Choose your VPC Block Storage profile and create a persistent volume claim to dy
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
    </thead>
    <tbody>
-       <tr>
+   <tr>
    <td><code>metadata.labels.app</code></td>
    <td>Enter a label for the deployment.</td>
-     </tr>
-     <tr>
-       <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
-       <td>Enter a label for your app.</td>
-     </tr>
+   </tr>
+   <tr>
+   <td><code>spec.selector.matchLabels.app</code> <br/> <code>spec.template.metadata.labels.app</code></td>
+   <td>Enter a label for your app.</td>
+   </tr>
    <tr>
    <td><code>spec.containers.image</code></td>
    <td>Specify the name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
@@ -389,7 +391,7 @@ If you have an existing physical VPC Block Storage device that you want to use i
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
     </thead>
     <tbody>
-        <tr>
+    <tr>
     <td><code>metadata.name</code></td>
     <td>Enter a name for your PV. </td>
       </tr>
@@ -400,10 +402,11 @@ If you have an existing physical VPC Block Storage device that you want to use i
       <tr>
          <td><code>spec.csi.volumeAttributes.iops</code></td>
          <td>Enter the Max IOPS of the VPC Block Storage volume that you retrieved earlier.</td>
-      <tr>
+      </tr>
       <tr>
          <td><code>spec.csi.volumeAttributes.zone</code></td>
          <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region).</td>
+       </tr>
       <tr>
         <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
         <td>Enter the ID of the VPC Block Storage volume that you retrieved earlier. </td>
