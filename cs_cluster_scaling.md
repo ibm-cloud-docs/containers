@@ -259,13 +259,22 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     helm repo update
     ```
     {: pre}
-4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster.
-
-    During the installation, you can further [customize the cluster autoscaler settings](#ca_chart_values), such as the amount of time it waits before scaling worker nodes up or down.
-    {: tip}
-
+3.  Decide if you want to [customize the cluster autoscaler settings](#ca_chart_values), such as the worker pools that are autoscaled, or the amount of time that the cluster autoscaler waits before scaling worker nodes up or down. You can customize your settings by using the `--set` flag in the `helm install` command. Depending on the settings that you want to customize, you might need to prepare multiple `--set` flags before you can install the Helm chart. For example, you might want to autoscale your default worker pool by preparing the following `--set` flag.
     ```
-    helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler
+    --set workerpools[0].<pool_name>.max=<number_of_workers>,workerpools[0].<pool_name>.min=<number_of_workers>,workerpools[0].<pool_name>.enabled=(true|false)
+    ```
+    {: screen}
+
+    Understanding the `--set workerpools` options:
+    * **`workerpools[0]`**: The first worker pool to enable or disable for autoscaling. You must include three parameters for each worker pool for the command to succeed: the maximum number of worker nodes (`max`), the minimum number of worker nodes (`min`), and whether you want to enable (`true`) or disable (`false`) autoscaling for this worker pool. To include multiple worker pools, include a comma-separated list and increase the number in brackets, such as: `workerpools[0].default...,workerpools[1].pool1...,workerpools[2].pool2...`.
+    * **`<pool_name>`**: The name or ID of the worker pool that you want to enable or disable for autoscaling. To list available worker pools, run `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.
+    * **`max=<number_of_workers>`**: Specify the maximum number of worker nodes per zone that the cluster autoscaler can scale up to. The value must be equal to or greater than the value that you set for the `min=<number_of_workers>` size.
+    * **`min=<number_of_workers>`**: Specify the minimum number of worker nodes per zone that the cluster autoscaler can scale down to. The value must be `2` or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) all public ALBs in each zone of your standard cluster, you can set the value to `1`.<p class="note">Keep in mind that setting a `min` size does not automatically trigger a scale-up. The `min` size is a threshold so that the cluster autoscaler does not scale below this minimum number of worker nodes per zone. If your cluster does not have this number of worker nodes per zone yet, the cluster autoscaler does not scale up until you have workload resource requests that require more resources.</p>
+    * **`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.
+
+4.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the default worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
+    ```
+    helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set workerpools[0].default.max=2,workerpools[0].default.min=1,workerpools[0].default.enabled=true
     ```
     {: pre}
 
@@ -338,10 +347,34 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
         ibm-iks-cluster-autoscaler   ClusterIP   172.21.xxx.xx    <none>        8085/TCP        9m
         ```
         {: screen}
+    3.  Optional: If you enabled autoscaling for a worker pool during the Helm chart installation, verify that the config map is correct by checking that the `workerPoolsConfig.json` field is updated and that the `workerPoolsConfigStatus` field shows a `SUCCESS` message.
+        ```
+        kubectl get cm iks-ca-configmap -n kube-system -o yaml
+        ```
+        {: pre}
+
+        Example output where the default worker pool is enabled for autoscaling:
+        ```
+        apiVersion: v1
+        data:
+          workerPoolsConfig.json: |
+            [{"name": "default", "minSize": 1, "maxSize": 2, "enabled": true }]
+        kind: ConfigMap
+        metadata:
+          annotations:
+            workerPoolsConfigStatus: '{"1:2:default":"SUCCESS"}'
+          creationTimestamp: "2019-08-23T14:26:54Z"
+          name: iks-ca-configmap
+          namespace: kube-system
+          resourceVersion: "12757878"
+          selfLink: /api/v1/namespaces/kube-system/configmaps/iks-ca-configmap
+          uid: bd661f95-35ef-433d-97e0-5d1ac092eafb
+        ```
+        {: screen}
 
 6.  Repeat these steps for every cluster where you want to provision the cluster autoscaler.
 
-7.  To start scaling your worker pools, see [Updating the cluster autoscaler configuration](#ca_cm).
+7.  Optional: If you did not set any worker pools for autoscaling with the installation, you can [Update the cluster autoscaler configuration](#ca_cm).
 
 <br />
 
@@ -444,6 +477,8 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
     ```
     {: screen}
 
+<p class="note">If you enable a worker pool for autoscaling and then later add a zone to this worker pool, restart the cluster autoscaler pod so that it picks up this change: `kubectl delete pod -n kube-system <cluster_autoscaler_pod>`.</p>
+
 ## Customizing the cluster autoscaler Helm chart configuration values
 {: #ca_chart_values}
 
@@ -485,6 +520,15 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     skipNodes:
       withLocalStorage: true
       withSystemPods: true
+    workerpools:
+    - default:
+        enabled: true
+        max: 2
+        min: 1
+    - pool1:
+        enabled: false
+        max: 5
+        min: 3
     ```
     {: screen}
 
@@ -577,11 +621,24 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>When set to `true`, worker nodes that have `kube-system` pods are not scaled down. Do not set the value to `false` because scaling down `kube-system` pods might have unexpected results.</td>
     <td>`true`</td>
     </tr>
+     <tr>
+    <td>`workerpools` parameter</td>
+    <td>The worker pools that you want to autoscale, including their minimum and maximum number of worker nodes per zone. These settings are mirrored in the [cluster autoscaler config map](#ca_cm). To set the worker pool, format the option as as follows:<p class="pre">--set workerpools[0].<pool_name>.max=<number_of_workers>,workerpools[0].<pool_name>.min=<number_of_workers>,workerpools[0].<pool_name>.enabled=(true|false)</p>
+    Understanding the `--set workerpools` options:
+      <ul><li>**`workerpools[0]`**: The first worker pool to enable or disable for autoscaling. You must include three parameters for each worker pool for the command to succeed: the maximum number of worker nodes (`max`), the minimum number of worker nodes (`min`), and whether you want to enable (`true`) or disable (`false`) autoscaling for this worker pool. To include multiple worker pools, include a comma-separated list and increase the number in brackets, such as: `workerpools[0].default...,workerpools[1].pool1...,workerpools[2].pool2...`.</li>
+      <li>**`<pool_name>`**: The name or ID of the worker pool that you want to enable or disable for autoscaling. To list available worker pools, run `ibmcloud ks worker-pools --cluster <cluster_name_or_ID>`.<li>
+      <li>**`max=<number_of_workers>`**: Specify the maximum number of worker nodes per zone that the cluster autoscaler can scale up to. The value must be equal to or greater than the value that you set for the `min=<number_of_workers>` size.<li>
+      <li>**`min=<number_of_workers>`**: Specify the minimum number of worker nodes per zone that the cluster autoscaler can scale down to. The value must be `2` or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) all public ALBs in each zone of your standard cluster, you can set the value to `1`.<p class="note">Keep in mind that setting a `min` size does not automatically trigger a scale-up. The `min` size is a threshold so that the cluster autoscaler does not scale below this minimum number of worker nodes per zone. If your cluster does not have this number of worker nodes per zone yet, the cluster autoscaler does not scale up until you have workload resource requests that require more resources.</p><li>
+      <li>**`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.<li></ul>
+      <p class="note">If you enable a worker pool for autoscaling and then later add a zone to this worker pool, restart the cluster autoscaler pod so that it picks up this change: `kubectl delete pod -n kube-system <cluster_autoscaler_pod>`.</p>
+      <br><br>By default, the `default` worker pool is **not** enabled, with a `max` value of `2` and a `min` value of `1`.</td>
+    <td>Disabled</td>
+    </tr>
     </tbody>
     </table>
-2.  To change any of the cluster autoscaler configuration values, update the Helm chart with the new values. Include the `--recreate-pods` flag so that any existing cluster autoscaler pods are recreated to pick up the custom setting changes.
+2.  To change any of the cluster autoscaler configuration values, update the Helm chart with the new values. Include the `--recreate-pods` flag so that any existing cluster autoscaler pods are recreated to pick up the custom setting changes. The following example command changes the scan interval to `2m` and enables autoscaling for the `default` worker pool, with a maximum of `5` and minimum of `3` worker nodes per zone.
     ```
-    helm upgrade --set scanInterval=2m ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods
+    helm upgrade --set scanInterval=2m --set workerpools[0].default.max=5,workerpools[0].default.min=3,workerpools[0].default.enabled=true ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler -i --recreate-pods --namespace kube-system
     ```
     {: pre}
 
