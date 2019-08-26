@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-08-26"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -52,7 +52,7 @@ To deploy Helm charts, you must install the Helm CLI on your local machine and i
 ## Setting up Helm in a cluster with public access
 {: #public_helm_install}
 
-If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gatway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
+If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gateway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
 {: shortdesc}
 
 Before you begin:
