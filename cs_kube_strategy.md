@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-08-26"
 
 keywords: kubernetes, iks, containers
 
@@ -191,6 +191,7 @@ Don't forget that you want your workload to be up as much as possible!
 
 Now that you have a good idea of what your workload looks like, let's map the estimated usage onto your available cluster configurations.
 
+1.  Estimate the max worker node capacity, which depends on what type of cluster you have. You don't want to max out worker node capacity in case a surge or other temporary event happens.
     *  **Single zone clusters**: Plan to have at least three worker nodes in your cluster. Further, you want one extra node's worth of CPU and memory capacity available within the cluster.
     *  **Multizone clusters**: Plan to have at least two worker nodes per zone, so six nodes across three zones in total. Additionally, plan for the total capacity of your cluster to be at least 150% of your total workload's required capacity, so that if one zone goes down, you have resources available to maintain the workload.
 2.  Align the app size and worker node capacity with one of the [available worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes). To see available flavors in a zone, run `ibmcloud ks flavors --zone <zone>`.
