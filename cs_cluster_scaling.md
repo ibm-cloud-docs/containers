@@ -532,6 +532,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     ```
     {: screen}
 
+    Understanding the parameters and default values:
     <table>
     <caption>Cluster autoscaler configuration values</caption>
     <thead>
