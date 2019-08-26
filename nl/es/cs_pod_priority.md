@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ Para entender cómo la prioridad de pod y el planificador trabajan juntos, tenga
 _Figura: casos de ejemplo de prioridad de pod_
 <img src="images/pod-priority.png" width="500" alt="Casos de ejemplo de prioridad de pod" style="width:500px; border-style: none"/>
 
-1.  Tres pods con prioridad alta, media y baja están pendientes de planificación. El planificador encuentra un nodo trabajador disponible con espacio para los 3 pods, y los planifica en orden de prioridad, con el pod de prioridad más alto planificado primero.
+1.  Tres pods con prioridad alta, media y baja están pendientes de planificación. El planificador encuentra un nodo trabajador disponible con espacio para los tres pods, y los planifica en orden de prioridad, con el pod de prioridad más alto planificado primero.
 2.  Tres pods con prioridad alta, media y baja están pendientes de planificación. El planificador encuentra un nodo trabajador disponible, pero el nodo trabajador sólo tiene recursos suficientes para admitir los pods de prioridad alta y media. El pod de prioridad baja no está planificado y se queda pendiente.
 3.  Dos pods con prioridad alta y media están pendientes de planificación. Existe un tercer pod con una prioridad baja en un nodo trabajador disponible. Sin embargo, el nodo trabajador no tiene recursos suficientes para planificar ninguno de los pods pendientes. El planificador evita, o elimina, el pod de baja prioridad, que devuelve el pod a un estado pendiente. A continuación, el planificador intenta planificar el pod de prioridad alta. Sin embargo, el nodo trabajador no tiene suficientes recursos para planificar el pod de prioridad alta y, en su lugar, el planificador planifica el pod de prioridad media.
 
@@ -95,7 +95,7 @@ Para establecer la prioridad de pod, tiene que utilizar una clase de prioridad.
 
 Antes de empezar:
 * [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
+* Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
 * [Cree](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice](/docs/containers?topic=containers-update#update) su clúster a Kubernetes versión 1.11 o posterior.
 
 Para utilizar una clase de prioridad:
@@ -177,7 +177,7 @@ Asigne una clase de prioridad a su especificación de pod para establecer la pri
 
 Antes de empezar:
 * [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres en el que desea desplegar los pods.
+* Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres en el que desea desplegar los pods.
 * [Cree](/docs/containers?topic=containers-clusters#clusters_ui) o [actualice](/docs/containers?topic=containers-update#update) su clúster a Kubernetes versión 1.11 o posterior.
 * [Comprenda cómo funciona la planificación de prioridad](#priority_scheduling), ya que la prioridad puede evitar los pods existentes y afectar a la forma en que se consumen los recursos del clúster.
 

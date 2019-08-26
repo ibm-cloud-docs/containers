@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -40,13 +40,13 @@ Portworx agrega el almacenamiento disponible que está conectado a los nodos tra
 Portworx también viene con características adicionales que puede utilizar para sus apps con estado, como instantáneas de volumen, cifrado de volumen, aislamiento y un organizador de almacenamiento integrado para Kubernetes (Stork) que garantiza la ubicación óptima de los volúmenes en el clúster. Para obtener más información, consulte la [documentación de Portworx ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/).
 
 **¿Qué tipo de nodo trabajador de {{site.data.keyword.containerlong_notm}} es el más adecuado para Portworx?** </br>
-{{site.data.keyword.containerlong_notm}} proporciona tipos de nodos trabajadores nativos que están optimizados para el [uso de almacenamiento definido por software (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds) y que vienen con uno o varios discos locales sin formatear que puede utilizar para la capa de almacenamiento de Portworx. Portworx ofrece el mejor rendimiento cuando se utilizan máquinas de nodo trabajador SDS con una velocidad de red de 10 Gbps.
+{{site.data.keyword.containerlong_notm}} proporciona versiones del nodo trabajador nativo optimizadas para [uso de almacenamiento definido por software (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds). Estas versiones también vienen con uno o más discos locales sin procesar, sin formato y sin montar que puede utilizar para su capa de almacenamiento Portworx. Portworx ofrece el mejor rendimiento cuando se utilizan máquinas de nodo trabajador SDS con una velocidad de red de 10 Gbps.
 
 **¿Qué ocurre si quiero ejecutar Portworx en nodos trabajadores que no son SDS?** </br>
 Puede instalar Portworx en tipos de nodos trabajadores que no sean SDS, pero es posible que no obtenga las ventajas de rendimiento que requiere la app. Los nodos trabajadores que no son SDS pueden ser virtuales o nativos. Si desea utilizar máquinas virtuales, utilice el tipo de nodo trabajador `b2c.16x64` o uno mejor. Las máquinas virtuales con el tipo `b3c.4x16` o con el tipo `u3c.2x4` no proporcionan los recursos necesarios para que Portworx funcione correctamente. Tenga en cuenta que las máquinas virtuales vienen con 1000 Mbps, lo que no es suficiente para conseguir el rendimiento óptimo de Portworx. Las máquinas nativas vienen con suficientes recursos de cálculo y velocidad de red para Portworx, pero debe [añadir almacenamiento en bloque sin formato y sin montar](#create_block_storage) para poder utilizar estas máquinas.
 
 **¿Cómo puedo asegurarme de que mis datos se almacenan con alta disponibilidad?** </br>
-Necesita al menos 3 nodos trabajadores en el clúster de Portworx para que Portworx pueda replicar los datos entre nodos. Al replicar los datos en los nodos trabajadores, Portworx le puede garantizar que la app con estado se puede volver a planificar en otro nodo trabajador en caso de que se produzca una anomalía sin que se pierdan datos. Para obtener una disponibilidad aún más mayor, utilice un [clúster multizona](/docs/containers?topic=containers-ha_clusters#multizone) y duplique los volúmenes entre nodos trabajadores SDS en 3 o más zonas.
+Necesita al menos tres nodos trabajadores en el clúster de Portworx para que Portworx pueda replicar los datos entre nodos. Al replicar los datos en los nodos trabajadores, Portworx le puede garantizar que la app con estado se puede volver a planificar en otro nodo trabajador en caso de que se produzca una anomalía sin que se pierdan datos. Para obtener una disponibilidad aún más mayor, utilice un [clúster multizona](/docs/containers?topic=containers-ha_clusters#multizone) y duplique los volúmenes entre nodos trabajadores SDS en 3 o más zonas.
 
 **¿Qué topología de volumen ofrece el mejor rendimiento para mis pods?** </br>
 Uno de los mayores desafíos cuando se ejecutan apps con estado en un clúster es asegurarse de que el contenedor se puede volver a planificar en otro host si falla el contenedor o el host completo. En Docker, cuando un contenedor se debe volver a planificar en otro host, el volumen no se mueve al nuevo host. Portworx se puede configurar de modo que ejecute `hyper-converged` para garantizar que los recursos de cálculo y el almacenamiento siempre se colocan en el mismo nodo trabajador. Cuando se debe volver a planificar la app, Portworx mueve la app a un nodo trabajador en el que reside una de las réplicas de volumen para garantizar la velocidad de acceso al disco local y el mejor rendimiento para la app con estado. El hecho de ejecutar `hyper-converged` ofrece el mejor rendimiento para los pods, pero requiere que el almacenamiento esté disponible en todos los nodos trabajadores del clúster.
@@ -57,14 +57,14 @@ También puede optar por utilizar solo un subconjunto de nodos trabajadores para
 {{site.data.keyword.containerlong}} proporciona tipos de nodos trabajadores optimizados para el uso de SDS y que vienen con uno o varios discos locales sin formato y sin montar que puede utilizar para almacenar los datos. Portworx ofrece el mejor rendimiento cuando se utilizan [máquinas de nodo trabajador SDS](/docs/containers?topic=containers-planning_worker_nodes#sds) con una velocidad de red de 10 Gbps. Sin embargo, puede instalar Portworx en tipos de nodos trabajadores que no sean SDS, pero es posible que no obtenga las ventajas de rendimiento que requiere la app. Los requisitos mínimos de un nodo trabajador para ejecutar correctamente Portworx incluyen los siguientes:
 - 4 núcleos de CPU
 - 4 GB de memoria
-- 128 GB de almacenamiento sin formato
+- 128 GB de almacenamiento sin formato sin procesar
 - 10 Gbps de velocidad de red
 
 **¿Cuáles son las limitaciones que debo planificar?** </br>
-Portworx está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, no puede utilizar Portworx en el clúster, a no ser que abra todo el tráfico de red de salida en el puerto TCP 443 o habilite el punto final de servicio público.
+Portworx está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado que hay habilitado, no puede utilizar Portworx en el clúster, a no ser que abra todo el tráfico de red de salida en el puerto TCP 443 o habilite el punto final de servicio público.
 
 
-¿Todo listo? Vamos a empezar por [crear un clúster con una agrupación de nodos trabajadores SDS de al menos 3 nodos trabajadores](/docs/containers?topic=containers-clusters#clusters_ui). Si desea incluir nodos trabajadores no SDS en el clúster Portworx, [añada almacenamiento en bloque sin formato](#create_block_storage) a cada nodo trabajador. Después de preparar el clúster, [instale el diagrama de Helm de Portworx](#install_portworx) en el clúster y cree el primer clúster de almacenamiento hiperconvergente.  
+¿Todo listo? Vamos a empezar por [crear un clúster con una agrupación de nodos trabajadores SDS de al menos tres nodos trabajadores](/docs/containers?topic=containers-clusters#clusters_ui). Si desea incluir nodos trabajadores no SDS en el clúster Portworx, [añada almacenamiento en bloque sin formato](#create_block_storage) a cada nodo trabajador. Después de preparar el clúster, [instale el diagrama de Helm de Portworx](#install_portworx) en el clúster y cree el primer clúster de almacenamiento hiperconvergente.  
 
 ## Creación de almacenamiento en bloque sin formato y sin montar para nodos trabajadores no SDS
 {: #create_block_storage}
@@ -72,13 +72,13 @@ Portworx está disponible para los clústeres estándares configurados con conec
 Portworx funciona mejor si utiliza tipos de nodos trabajadores nativos que estén optimizados para el [uso de almacenamiento definido por software (SDS)](/docs/containers?topic=containers-planning_worker_nodes#sds). Sin embargo, si no puede o no desea utilizar nodos trabajadores SDS, puede optar por instalar Portworx en los tipos de nodos trabajadores no SDS. Tenga en cuenta que los nodos trabajadores no SDS no están optimizados para Portworx y es posible que no ofrezcan las ventajas de rendimiento que requiere la app.
 {: shortdesc}
 
-Para incluir nodos trabajadores no SDS en el clúster Portworx, debe añadir dispositivos de almacenamiento en bloque sin formato y sin montar a los nodos trabajadores mediante el plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. El almacenamiento en bloque sin formato no se puede suministrar mediante reclamaciones de volumen persistente (PVC) de Kubernetes, ya que {{site.data.keyword.containerlong_notm}} formatea automáticamente el dispositivo de almacenamiento en bloque. Portworx solo da soporte al almacenamiento en bloque. Los nodos trabajadores no SDS que montan almacenamiento de archivos o de objetos no se pueden utilizar para la capa de datos Portworx.
+Para incluir nodos trabajadores no SDS en el clúster Portworx, debe añadir dispositivos de almacenamiento en bloque sin formato y sin montar a los nodos trabajadores mediante el plugin {{site.data.keyword.cloud_notm}} Block Volume Attacher. El almacenamiento en bloque sin formato no se puede suministrar mediante reclamaciones de volumen persistente (PVC) de Kubernetes, ya que {{site.data.keyword.containerlong_notm}} formatea automáticamente el dispositivo de almacenamiento en bloque. Portworx solo da soporte al almacenamiento en bloque. Los nodos trabajadores no SDS que montan almacenamiento de archivos o de objetos no se pueden utilizar para la capa de datos Portworx.
 
 Si tiene tipos de nodos trabajadores SDS en el clúster y desea utilizar estos nodos trabajadores solo para crear la capa de almacenamiento de Portworx, puede saltarse este paso entero y continuar en el apartado [Configuración de la base de datos de Portworx](#portworx_database).
 {: note}
 
-1. [Instale el plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher](/docs/containers?topic=containers-utilities#block_storage_attacher).
-2. Si desea añadir almacenamiento en bloque con la misma configuración a todos los nodos trabajadores, [añada automáticamente almacenamiento en bloque](/docs/containers?topic=containers-utilities#automatic_block) con el plugin {{site.data.keyword.Bluemix_notm}} Block Volume Attacher. Para añadir almacenamiento en bloque con otra configuración, añada almacenamiento en bloque únicamente a un subconjunto de nodos trabajadores, o, si desea tener más control sobre el proceso de suministro, [añada manualmente almacenamiento en bloque](/docs/containers?topic=containers-utilities#manual_block).
+1. [Instale el plugin {{site.data.keyword.cloud_notm}} Block Volume Attacher](/docs/containers?topic=containers-utilities#block_storage_attacher).
+2. Si desea añadir almacenamiento en bloque con la misma configuración a todos los nodos trabajadores, [añada automáticamente almacenamiento en bloque](/docs/containers?topic=containers-utilities#automatic_block) con el plugin {{site.data.keyword.cloud_notm}} Block Volume Attacher. Para añadir almacenamiento en bloque con otra configuración, añada almacenamiento en bloque únicamente a un subconjunto de nodos trabajadores, o, si desea tener más control sobre el proceso de suministro, [añada manualmente almacenamiento en bloque](/docs/containers?topic=containers-utilities#manual_block).
 3. [Conecte el almacenamiento en bloque](/docs/containers?topic=containers-utilities#attach_block) a los nodos trabajadores.
 
 ## Obtención de una licencia de Portworx
@@ -92,7 +92,7 @@ Para obtener más información sobre los tipos de licencias disponibles y sobre 
 ## Configuración de una base de datos para metadatos de Portworx
 {: #portworx_database}
 
-Configure un servicio de base de datos de {{site.data.keyword.Bluemix_notm}}, como por ejemplo [Databases for etcd](#databaseetcd) o [{{site.data.keyword.composeForEtcd}}](#compose) para crear un almacén de claves y valores para los metadatos del clúster de Portworx.
+Configure un servicio de base de datos de {{site.data.keyword.cloud_notm}}, como por ejemplo [Databases for etcd](#databaseetcd) o [{{site.data.keyword.composeForEtcd}}](#compose) para crear un almacén de claves y valores para los metadatos del clúster de Portworx.
 {: shortdesc}
 
 El almacén de claves y valores de Portworx sirve como única fuente fiable para el clúster de Portworx. Si el almacén de claves y valores no está disponible, no puede trabajar con el clúster de Portworx para acceder a los datos ni para almacenarlos. Los datos existentes no se modifican ni se eliminan cuando la base de datos de Portworx no está disponible.
@@ -104,7 +104,7 @@ Databases for etcd es un servicio de etcd gestionado que almacena y duplica de f
 
 En los pasos siguientes se muestra cómo suministrar y configurar una instancia del servicio Databases for etc para Portworx.
 
-1. Asegúrese de que tiene el rol de acceso a la plataforma de [`Administrador` en {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser) para el servicio Databases for etcd.  
+1. Asegúrese de que tiene el rol de acceso a la plataforma de [`Administrador` en {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser) para el servicio Databases for etcd.  
 
 2. Suministre su instancia de servicio de Databases for etcd.
    1. Abra la [página del catálogo de Databases for etcd](https://cloud.ibm.com/catalog/services/databases-for-etcd)
@@ -182,7 +182,7 @@ En los pasos siguientes se muestra cómo suministrar y configurar el servicio de
 1. Asegúrese de que tiene el rol de [`Desarrollador` de Cloud Foundry para el espacio](/docs/iam?topic=iam-mngcf#mngcf) en el que desea crear el servicio de base de datos de {{site.data.keyword.composeForEtcd}}.
 
 2. Suministre una instancia de servicio de {{site.data.keyword.composeForEtcd}}.
-   1. Abra la [página de catálogo de {{site.data.keyword.composeForEtcd}}](https://cloud.ibm.com/catalog/services/compose-for-etcd)
+   1. Abra la [página del catálogo de {{site.data.keyword.composeForEtcd}}](https://cloud.ibm.com/catalog/services/compose-for-etcd)
    2. Especifique un nombre para la instancia de servicio, como por ejemplo `px-etcd`.
    3. Seleccione la región en la que desea desplegar la instancia de servicio. Para conseguir un rendimiento óptimo, seleccione la región en la que está el clúster.
    4. Seleccione una organización y un espacio de Cloud Foundry.
@@ -210,7 +210,7 @@ En los pasos siguientes se muestra cómo suministrar y configurar el servicio de
 ## Instalación de Portworx en el clúster
 {: #install_portworx}
 
-Instale Portworx con un diagrama de Helm. El diagrama de Helm despliega una versión de prueba de la edición `px-enterprise` de Portwork que puede utilizar durante 30 días. Además, también se instala [Stork ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) en el clúster de Kubernetes. Stork es el planificador de almacenamiento de Portworx y le permite localizar los pods con sus datos y crear y restaurar instantáneas de volúmenes de Portworx.
+Instale Portworx con un diagrama de Helm. El diagrama de Helm despliega una versión de prueba de la edición `px-enterprise` de Portwork que puede utilizar durante 30 días. Además, también se instala [Stork ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) en el clúster de Kubernetes. Stork es el planificador de almacenamiento de Portworx. Con Stork, puede coubicar pods con sus datos, y crear y restaurar instantáneas de volúmenes de Portworx.
 {: shortdesc}
 
 ¿Está buscando instrucciones sobre cómo actualizar o eliminar Portworx? Consulte los apartados sobre [Actualización de Portworx](#update_portworx) y [Eliminación de Portworx](#remove_portworx).
@@ -605,10 +605,10 @@ En la imagen siguiente se muestra el flujo de trabajo de descifrado de Portworx 
 Siga estos pasos para configurar el cifrado para los volúmenes de Portworx con {{site.data.keyword.keymanagementservicelong_notm}}.
 {: shortdesc}
 
-1. Asegúrese de que tiene [asignado el rol de acceso de plataforma de `Editor` y el rol de acceso al servicio de `Escritor`](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) en {{site.data.keyword.Bluemix_notm}} Identity and Access Management sobre {{site.data.keyword.keymanagementservicelong_notm}}.
+1. Asegúrese de que tiene [asignado el rol de acceso de plataforma de `Editor` y el rol de acceso al servicio de `Escritor`](/docs/services/key-protect?topic=key-protect-manage-access#manage-access) en {{site.data.keyword.cloud_notm}} Identity and Access Management sobre {{site.data.keyword.keymanagementservicelong_notm}}.
 
 2. Cree una instancia de servicio de {{site.data.keyword.keymanagementservicelong_notm}}.
-   1. Abra la [página de catálogo de {{site.data.keyword.keymanagementservicelong_notm}}](https://cloud.ibm.com/catalog/services/key-protect).
+   1. Abra la [página del catálogo de {{site.data.keyword.keymanagementservicelong_notm}}](https://cloud.ibm.com/catalog/services/key-protect).
    2. En el campo **Nombre de servicio**, especifique un nombre para la instancia de servicio.
    3. Seleccione la región en la que desea desplegar la instancia de servicio. Para conseguir un rendimiento óptimo, seleccione la región en la que está el clúster.
    4. Seleccione el grupo de recursos en el que está el clúster.
@@ -892,7 +892,7 @@ Para solicitar almacenamiento del clúster de Portworx y utilizarlo en su app, d
    </tr>
    <tr>
    <td><code>parameters.repl</code></td>
-   <td>Especifique el número de réplicas de los datos que desea almacenar en distintos nodos trabajadores. Los números permitidos son `1`,`2` o `3`. Por ejemplo, si especifica `3`, los datos se duplican en 3 nodos trabajadores diferentes en el clúster de Portworx. Para almacenar sus datos de alta disponibilidad, utilice un clúster multizona y duplique los datos entre 3 nodos trabajadores de distintas zonas. <strong>Nota: </strong> Debe tener suficientes nodos trabajadores para cumplir con el requisito de réplica. Por ejemplo, si tiene dos nodos trabajadores, pero especifica tres réplicas, la creación de la PVC con esta clase de almacenamiento falla. </td>
+   <td>Especifique el número de réplicas de los datos que desea almacenar en distintos nodos trabajadores. Los números permitidos son `1`,`2` o `3`. Por ejemplo, si especifica `3`, los datos se duplican en tres nodos trabajadores diferentes en el clúster de Portworx. Para almacenar sus datos de alta disponibilidad, utilice un clúster multizona y duplique los datos entre tres nodos trabajadores de distintas zonas. <strong>Nota: </strong> Debe tener suficientes nodos trabajadores para cumplir con el requisito de réplica. Por ejemplo, si tiene dos nodos trabajadores, pero especifica tres réplicas, la creación de la PVC con esta clase de almacenamiento falla. </td>
    </tr>
    <tr>
    <td><code>parameters.secure</code></td>
@@ -900,7 +900,7 @@ Para solicitar almacenamiento del clúster de Portworx y utilizarlo en su app, d
    </tr>
    <tr>
    <td><code>parameters.priority_io</code></td>
-   <td>Especifique la prioridad de E/S de Portworx que desea solicitar para los datos. Las opciones disponibles son `high`, `medium` y `low`. Durante la configuración del clúster de Portworx, se inspecciona cada disco para determinar el perfil de rendimiento del dispositivo. La clasificación de perfil depende del ancho de banda de red del nodo trabajador y del tipo de dispositivo de almacenamiento que tenga. Los discos de los nodos trabajadores SDS se clasifican como `high`. Si conecta manualmente discos a un nodo trabajador virtual, estos discos se clasifican como `low` debido a la velocidad de red inferior que se proporciona con nodos trabajadores virtuales. </br><br> Cuando se crea una PVC con una clase de almacenamiento, el número de réplicas que especifique en <code>parameters/repl</code> prevalece sobre la prioridad de E/S. Por ejemplo, si especifica 3 réplicas que desea almacenar en discos de alta velocidad, pero solo tiene un nodo trabajador con un disco de alta velocidad en el clúster, la creación de la PVC se ejecuta correctamente. Los datos se replican en discos de alta velocidad y de baja velocidad. </td>
+   <td>Especifique la prioridad de E/S de Portworx que desea solicitar para los datos. Las opciones disponibles son `high`, `medium` y `low`. Durante la configuración del clúster de Portworx, se inspecciona cada disco para determinar el perfil de rendimiento del dispositivo. La clasificación de perfil depende del ancho de banda de red del nodo trabajador y del tipo de dispositivo de almacenamiento que tenga. Los discos de los nodos trabajadores SDS se clasifican como `high`. Si conecta manualmente discos a un nodo trabajador virtual, estos discos se clasifican como `low` debido a la velocidad de red inferior que se proporciona con nodos trabajadores virtuales. </br><br> Cuando se crea una PVC con una clase de almacenamiento, el número de réplicas que especifique en <code>parameters/repl</code> prevalece sobre la prioridad de E/S. Por ejemplo, cuando especifique tres réplicas que quiera almacenar en discos de alta velocidad, pero solo tiene un nodo trabajador con un disco de alta velocidad en su clúster, la creación de su PVC aún será correcta. Los datos se replican en discos de alta velocidad y de baja velocidad. </td>
    </tr>
    <tr>
    <td><code>parameters.shared</code></td>
@@ -1043,7 +1043,7 @@ Para acceder al almacenamiento desde la app, debe montar la PVC en la app.
       </tr>
     <tr>
     <td><code>spec.schedulerName</code></td>
-    <td>Utilice [Stork ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) como planificador para el clúster de Portworx. Stork le permite coubicar pods con sus datos, proporciona una migración sencilla de pods en el caso de que se produzcan errores de almacenamiento y facilita la creación y restauración de instantáneas de volúmenes de Portworx. </td>
+    <td>Utilice [Stork ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/) como planificador para el clúster de Portworx. Con Stork puede coubicar pods con sus datos, proporciona una migración sencilla de pods en el caso de que se produzcan errores de almacenamiento y facilita la creación y restauración de instantáneas de volúmenes de Portworx. </td>
     </tr>
     <tr>
     <td><code>spec.containers.image</code></td>
@@ -1257,4 +1257,4 @@ Al eliminar el clúster de Portworx se eliminan todos los datos del clúster de 
 ## Obtención de ayuda y soporte
 {: #portworx_help}
 
-Si tiene un problema con el uso de Portworx o desea conversar sobre las configuraciones de Portworx para el caso de uso específico, publique una pregunta en el canal `portworx-on-iks` en el [Slack de {{site.data.keyword.containerlong_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com/). Inicie una sesión en Slack con el ID de IBM. Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación a este Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://bxcs-slack-invite.mybluemix.net/).
+Si tiene un problema con el uso de Portworx o desea conversar sobre las configuraciones de Portworx para el caso de uso específico, publique una pregunta en el canal `portworx-on-iks` en el [Slack de {{site.data.keyword.containerlong_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com/). Inicie una sesión en Slack con el ID de IBM. Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.cloud_notm}}, [solicite una invitación a este Slack ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://bxcs-slack-invite.mybluemix.net/).

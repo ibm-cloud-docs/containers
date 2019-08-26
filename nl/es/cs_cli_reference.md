@@ -3790,7 +3790,7 @@ Puede utilizar este mandato para crear y habilitar un supervisor de comprobació
 <dd>El tiempo de espera, en segundos, antes de considerar la IP en mal estado. Valor predeterminado: <code>5</code></dd>
 
 <dt><code>--retries <em>RETRIES</em></code></dt>
-<dd>Cuando se excede el tiempo de espera, el número de reintentos ´llevarán a cabo antes de considerar la IP en mal estado. Los reintentos se realizan inmediatamente. Valor predeterminado: <code>2</code></dd>
+<dd>Cuando se excede el tiempo de espera, el número de reintentos llevarán a cabo antes de considerar la IP en mal estado. Los reintentos se realizan inmediatamente. Valor predeterminado: <code>2</code></dd>
 
 <dt><code>--interval <em>INTERVAL</em></code></dt>
 <dd>El intervalo, en segundos, entre cada comprobación de estado. Los intervalos cortos pueden mejorar el tiempo de migración tras error, pero aumentar la carga en los IP. Valor predeterminado: <code>60</code></dd>

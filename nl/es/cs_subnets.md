@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,21 +23,18 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Configuración de subredes para clústeres
+# Configuración de subredes y direcciones IP para clústeres
 {: #subnets}
 
-Cambie la agrupación de las direcciones IP públicas o privadas portátiles disponibles para los servicios del equilibrador de carga de red (NLB) añadiendo subredes a su clúster de Kubernetes.
+Cambie la agrupación de las direcciones IP públicas o privadas portátiles disponibles para los servicios del equilibrador de carga de red (NLB) añadiendo subredes a su clúster de {{site.data.keyword.containerlong}}.
 {:shortdesc}
-
-
 
 ## Visión general de la red en {{site.data.keyword.containerlong_notm}}
 {: #basics}
 
 Comprenda los conceptos básicos de la red en los clústeres de {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.containerlong_notm}} utiliza VLAN, subredes y direcciones IP para la conectividad de red de los componentes del clúster.
 {: shortdesc}
+
 
 ### VLAN
 {: #basics_vlans}
@@ -49,12 +46,12 @@ Cuando se crea un clúster, los nodos trabajadores del clúster se conectan auto
 <dt>VLAN para clústeres gratuitos</dt>
 <dd>En los clústeres gratuitos, los nodos trabajadores del clúster se conectan de forma predeterminada a una VLAN pública y VLAN privada propiedad de IBM. Puesto que IBM controla las VLAN, las subredes y las direcciones IP, no puede crear clústeres multizona ni añadir subredes a un clúster, y solo puede utilizar servicios NodePort para exponer la app.</dd>
 <dt>VLAN para clústeres estándares</dt>
-<dd>En los clústeres estándares, la primera vez que crea un clúster en una zona, se suministra automáticamente una VLAN pública y una VLAN privada en dicha zona en su cuenta de infraestructura de IBM Cloud (SoftLayer). Para los demás clústeres que cree en dicha zona, debe especificar el par de VLAN que desee utilizar en la zona. Puede reutilizar las mismas VLAN pública y privada que se han creado porque varios clústeres pueden compartir las VLAN.</br>
+<dd>En los clústeres estándares, la primera vez que crea un clúster en una zona, se suministra automáticamente una VLAN pública y una VLAN privada en dicha zona en su cuenta de infraestructura de IBM Cloud. Para los demás clústeres que cree en dicha zona, debe especificar el par de VLAN que desee utilizar en la zona. Puede reutilizar las mismas VLAN pública y privada que se han creado porque varios clústeres pueden compartir las VLAN.</br>
 </br>Puede conectar los nodos trabajadores tanto a una VLAN pública y a la VLAN privada, o solo a la VLAN privada. Si desea conectar sus nodos trabajadores únicamente a una VLAN privada, utilice el ID de una VLAN privada existente o [cree una VLAN privada](/docs/cli/reference/ibmcloud?topic=cloud-cli-manage-classic-vlans#sl_vlan_create) y utilice el ID durante la creación del clúster.</dd></dl>
 
 Para ver las VLAN que se suministran en cada zona para su cuenta, ejecute `ibmcloud ks vlans --zone <zone>.` Para ver las VLAN en las que se ha suministrado un clúster, ejecute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` y busque el campo **Subdominio de Ingress**.
 
-La infraestructura de IBM Cloud (SoftLayer) gestiona las VLAN que se suministran automáticamente cuando crea el primer clúster en una zona. Si deja que una VLAN quede sin utilizar, por ejemplo eliminando todos los nodos trabajadores de una VLAN, la infraestructura de IBM Cloud (SoftLayer) reclama la VLAN. Después, si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+La infraestructura de IBM Cloud gestiona las VLAN que se suministran automáticamente cuando crea el primer clúster en una zona. Si deja que una VLAN quede sin utilizar, por ejemplo eliminando todos los nodos trabajadores de una VLAN, la infraestructura de IBM Cloud reclama la VLAN. Después, si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 **¿Puedo cambiar mi decisión sobre VLAN más adelante?**</br>
 Puede cambiar la configuración de la VLAN modificando las agrupaciones de nodos trabajadores del clúster. Para obtener más información, consulte [Cambio de las conexiones de VLAN de nodo trabajador](/docs/containers?topic=containers-cs_network_cluster#change-vlans).
@@ -69,15 +66,15 @@ Las subredes siguientes se suministran automáticamente en las VLAN públicas y 
 
 **Subredes VLAN públicas**
 * La subred pública primaria determina las direcciones IP públicas que se asignan a los nodos trabajadores durante la creación del clúster. Varios clústeres en la misma VLAN pueden compartir una subred pública primaria.
-* La subred pública portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP públicas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). El ALB de Ingress público predeterminado utiliza 1 IP y se pueden utilizar 4 IP para crear servicios de equilibrador de carga de red pública (NLB) o más ALB públicos. Las IP públicas portátiles son direcciones IP fijas y permanentes que se pueden utilizar para acceder a los NLB y a los ALB por internet. Si necesita más de 4 IP para los NLB o los ALB, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
+* La subred pública portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP públicas. Hay 3 IP reservadas para las funciones de la infraestructura IBM Cloud. El ALB de Ingress público predeterminado utiliza 1 IP y se pueden utilizar 4 IP para crear servicios de equilibrador de carga de red pública (NLB) o más ALB públicos. Las IP públicas portátiles son direcciones IP fijas y permanentes que se pueden utilizar para acceder a los NLB y a los ALB por internet. Si necesita más de 4 IP para los NLB o los ALB, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
 
 **Subredes VLAN privadas**
 * La subred privada primaria determina las direcciones IP privadas que se asignan a los nodos trabajadores durante la creación del clúster. Varios clústeres en la misma VLAN pueden compartir una subred privada primaria.
-* La subred privada portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP privadas. 3 IP están reservadas para las funciones de la infraestructura IBM Cloud (SoftLayer). El ALB de Ingress privado predeterminado utiliza 1 IP y se pueden utilizar 4 IP para crear servicios de equilibrador de carga de red privada (NLB) o más ALB privados. Las IP privadas portátiles son direcciones IP fijas y permanentes, que se pueden utilizar para acceder a los NLB o ALB por una red privada. Si necesita más de 4 IP para los NLB o los ALB privados, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
+* La subred privada portátil está enlazada a un solo clúster y proporciona al clúster 8 direcciones IP privadas. Hay 3 IP reservadas para las funciones de la infraestructura IBM Cloud. El ALB de Ingress privado predeterminado utiliza 1 IP y se pueden utilizar 4 IP para crear servicios de equilibrador de carga de red privada (NLB) o más ALB privados. Las IP privadas portátiles son direcciones IP fijas y permanentes, que se pueden utilizar para acceder a los NLB o ALB por una red privada. Si necesita más de 4 IP para los NLB o los ALB privados, consulte [Adición de direcciones IP portátiles](/docs/containers?topic=containers-subnets#adding_ips).
 
 Para ver todas las subredes que se suministran en su cuenta, ejecute `ibmcloud ks subnets`. Para ver las subredes privadas portátiles y públicas portátiles que están enlazadas a un clúster, ejecute `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources` y busque la sección **Subnet VLANs**.
 
-En {{site.data.keyword.containerlong_notm}}, las VLAN tienen un límite de 40 subredes. Si alcanza este límite, compruebe en primer lugar si puede [reutilizar subredes en la VLAN para crear nuevos clústeres](/docs/containers?topic=containers-subnets#subnets_custom). Si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) para solicitar una. A continuación, [cree un clúster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) que utilice esta nueva VLAN.
+En {{site.data.keyword.containerlong_notm}}, las VLAN tienen un límite de 40 subredes. Si alcanza este límite, compruebe en primer lugar si puede [reutilizar subredes en la VLAN para crear nuevos clústeres](/docs/containers?topic=containers-subnets#subnets_custom). Si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) para solicitar una. A continuación, [cree un clúster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) que utilice esta nueva VLAN.
 {: note}
 
 **¿Cambia la dirección IP de mis nodos trabajadores?**</br>
@@ -89,20 +86,20 @@ A su nodo trabajador se le asigna una dirección IP en las VLAN públicas o priv
 La segmentación de red describe el enfoque para dividir una red en varias subredes. Las apps que se ejecutan en una subred no pueden ver ni acceder a las apps de otra subred. Para obtener más información sobre las opciones de segmentación de red y sobre cómo se relacionan con las VLAN, consulte [este tema sobre la seguridad del clúster](/docs/containers?topic=containers-security#network_segmentation).
 {: shortdesc}
 
-Sin embargo, en varias situaciones, los componentes del clúster deben poder comunicarse entre varias VLAN privadas. Por ejemplo, si desea crear un clúster multizona, si tiene varias VLAN para un clúster o si tiene varias subredes en la misma VLAN, los nodos trabajadores de distintas subredes de la misma VLAN o de distintas VLAN no se pueden comunicar automáticamente entre sí. Debe habilitar una función de direccionador virtual (VRF) o una distribución de VLAN para la cuenta de infraestructura de IBM Cloud (SoftLayer).
+Sin embargo, en varias situaciones, los componentes del clúster deben poder comunicarse entre varias VLAN privadas. Por ejemplo, si desea crear un clúster multizona, si tiene varias VLAN para un clúster o si tiene varias subredes en la misma VLAN, los nodos trabajadores de distintas subredes de la misma VLAN o de distintas VLAN no se pueden comunicar automáticamente entre sí. Debe habilitar una función de direccionador virtual (VRF) o una distribución de VLAN para la cuenta de infraestructura de IBM Cloud.
 
 **¿Qué son las funciones de direccionador virtual (VRF) y la distribución de VLAN?**</br>
 
 <dl>
 <dt>[Función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud)</dt>
-<dd>Una VRF permite que todas las VLAN y subredes de la cuenta de la infraestructura se comuniquen entre sí. Además, se necesita una VRF para permitir que los trabajadores y el maestro se comuniquen a través del punto final de servicio privado. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Tenga en cuenta que VRF elimina la opción de distribución de VLAN para la cuenta, ya que todas las VLAN pueden comunicarse a menos que configure un dispositivo de pasarela para gestionar el tráfico.</dd>
+<dd>Una VRF permite que todas las VLAN y subredes de la cuenta de la infraestructura se comuniquen entre sí. Además, se necesita una VRF para permitir que los trabajadores y el maestro se comuniquen a través del punto final de servicio privado. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Para comprobar si un VRF ya está habilitado, utilice el mandato `ibmcloud account show`. Tenga en cuenta que VRF elimina la opción de distribución de VLAN para la cuenta, ya que todas las VLAN pueden comunicarse a menos que configure un dispositivo de pasarela para gestionar el tráfico.</dd>
 <dt>[Distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning)</dt>
 <dd>Si no puede o no desea habilitar VRF, habilite la distribución de VLAN. Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`. Tenga en cuenta que no puede habilitar el punto final de servicio privado si elige habilitar la distribución de VLAN en lugar de una VRF.</dd>
 </dl>
 
 **¿Cómo afecta VRF o la distribución de VLAN a la segmentación de red?**</br>
 
-Cuando se habilita la VRF o la distribución de VLAN, cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.Bluemix_notm}} se puede comunicar con los nodos trabajadores. Puede aislar el clúster de otros sistemas de la red privada aplicando [Políticas de red privada de Calico](/docs/containers?topic=containers-network_policies#isolate_workers). {{site.data.keyword.containerlong_notm}} también es compatible con todas las [ofertas de cortafuegos de infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). Puede configurar un cortafuegos, como por ejemplo un [dispositivo de direccionamiento virtual](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster estándar y para detectar y solucionar problemas de intrusión en la red.
+Cuando se habilita la VRF o la distribución de VLAN, cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.cloud_notm}} se puede comunicar con los nodos trabajadores. Puede aislar el clúster de otros sistemas de la red privada aplicando [Políticas de red privada de Calico](/docs/containers?topic=containers-network_policies#isolate_workers). {{site.data.keyword.containerlong_notm}} también es compatible con todas las [ofertas de cortafuegos de infraestructura de IBM Cloud ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud-computing/bluemix/network-security). Puede configurar un cortafuegos, como por ejemplo un [dispositivo de direccionamiento virtual](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), con políticas de red personalizadas para proporcionar seguridad de red dedicada para el clúster estándar y para detectar y solucionar problemas de intrusión en la red.
 
 <br />
 
@@ -111,26 +108,25 @@ Cuando se habilita la VRF o la distribución de VLAN, cualquier sistema que est�
 ## Utilización de subredes existentes para crear un clúster
 {: #subnets_custom}
 
-Cuando se crea un clúster estándar, se crean subredes automáticamente. Sin embargo, en lugar de utilizar las subredes suministradas automáticamente, puede utilizar subredes portátiles existentes de la cuenta de infraestructura de IBM Cloud (SoftLayer) o reutilizar las subredes de un clúster suprimido.
+Cuando se crea un clúster estándar, se crean subredes automáticamente. Sin embargo, en lugar de utilizar las subredes suministradas automáticamente, puede utilizar subredes portátiles existentes de la cuenta de infraestructura de IBM Cloud o reutilizar las subredes de un clúster suprimido.
 {:shortdesc}
 
-Esta opción permite retener las direcciones IP estáticas estables al crear, eliminar o solicitar bloques grandes de direcciones de IP. Si, en su lugar, desea obtener más direcciones IP privadas portátiles para los servicios de equilibrador de carga de red (NLB) del clúster utilizando su propia subred local, consulte [Adición de IP privadas portátiles mediante la adición de subredes gestionadas por el usuario a VLAN privadas](#subnet_user_managed).
+Esta opción permite retener las direcciones IP estáticas estables al crear, eliminar o solicitar bloques grandes de direcciones de IP. Si, en su lugar, desea obtener más direcciones IP públicas o privadas portátiles para crear servicios de equilibrador de carga de red (NLB) o de equilibrador de carga de aplicación (ALB) de Ingress, consulte [Adición de direcciones IP portátiles](#adding_ips).
 
-Las direcciones IP públicas portátiles se facturan mensualmente. Si elimina direcciones IP públicas portátiles una vez suministrado el clúster, todavía tendrá que pagar el cargo mensual, aunque solo las haya utilizado un breve periodo de tiempo.
+Todas las subredes que se solicitaron automáticamente durante la creación del clúster se suprimen inmediatamente después de suprimir un clúster y no se pueden reutilizar las subredes para crear un nuevo clúster. Sin embargo, si [ha añadido manualmente sus propias subredes al clúster](#subnet_user_managed), las subredes no se suprimen cuando se suprime el clúster. Puede reutilizar las subredes para crear un nuevo clúster.
 {: note}
 
 Antes de empezar:
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- Para reutilizar las subredes de un clúster que ya no necesita, suprima el clúster innecesario. Cree el nuevo clúster inmediatamente porque las subredes se suprimen en un plazo de 24 horas si no se reutilizan.
-
+- Para reutilizar las subredes privadas gestionadas por el usuario desde un clúster que ya no necesita, suprima el clúster innecesario.
    ```
    ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-</br>Para utilizar una subred existente en su portafolio de infraestructura de IBM Cloud (SoftLayer):
+</br>Para crear un clúster utilizando subredes existentes:
 
-1. Obtenga el ID de la subred a utilizar y el ID de la VLAN en la que se encuentra la subred.
+1. Obtenga el ID de subred y el ID de la VLAN en la que se encuentra la subred.
 
     ```
     ibmcloud ks subnets
@@ -166,8 +162,8 @@ Antes de empezar:
     Cuando el clúster se haya suministrado por completo, el **Estado (State)** cambia a `deployed`.
 
     ```
-    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.6      Default
+    Nombre       ID                                   Estado     Creación         Trabajad.  Zona      Versión     Nombre grupo recursos
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.13.8      Default
     ```
     {: screen}
 
@@ -181,25 +177,45 @@ Antes de empezar:
     Antes de continuar con el paso siguiente, los nodos trabajadores deben estar preparados. El **Estado (State)** cambia a `normal` y el **Estatus (Status)** es `Ready`.
 
     ```
-    ID                                                  Public IP        Private IP     Machine Type   State      Status   Zone     Version
-    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.6
+    ID                                                  IP pública       IP privada     Tipo máquina   Estado     Estado   Zona     Versión
+    prod-dal10-pa8dfcc5223804439c87489886dbbc9c07-w1    169.xx.xxx.xxx   10.xxx.xx.xxx  free           normal     Ready    dal10      1.13.8
     ```
     {: screen}
 
 5.  Añada la subred al clúster especificando el ID de subred. Cuando pone una subred a disponibilidad de un clúster, se crea automáticamente una correlación de configuración de Kubernetes que incluye todas las direcciones IP públicas portátiles disponibles que puede utilizar. Si no existe ningún ALB de Ingress en la zona en la que se encuentra la VLAN de la subred, se utiliza automáticamente una dirección IP pública portátil y una dirección IP privada portátil para crear los ALB públicos y privados para dicha zona. Puede utilizar el resto de las direcciones IP públicas y privadas portátiles para crear servicios de NLB para las apps.
+  * Para añadir una subred que exista en su cuenta de infraestructura de IBM Cloud:
+      ```
+      ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+      ```
+      {: pre}
 
-  ```
-  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
-  ```
-  {: pre}
+      Mandato de ejemplo:
+      ```
+      ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
+      ```
+      {: screen}
 
-  Mandato de ejemplo:
-  ```
-  ibmcloud ks cluster-subnet-add --cluster mycluster --subnet-id 807861
-  ```
-  {: screen}
+  * Para añadir una subred privada gestionada por el usuario desde una red local:
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
+      ```
+      {: pre}
 
-6. **Importante**: para habilitar la comunicación entre nodos trabajadores que están en distintas subredes en la misma VLAN, debe [habilitar el direccionamiento entre subredes en la misma VLAN](#subnet-routing).
+      Mandato de ejemplo:
+
+      ```
+      ibmcloud ks cluster-user-subnet-add --cluster mycluster --subnet-cidr 10.xxx.xx.xxx/24 --private-vlan 2234947
+      ```
+      {: pre}
+
+6. Verifique que la subred se ha añadido al clúster.
+
+    ```
+    ibmcloud ks cluster-get --showResources <cluster_name>
+    ```
+    {: pre}
+
+7. **Importante**: para habilitar la comunicación entre nodos trabajadores que están en distintas subredes en la misma VLAN, debe [habilitar el direccionamiento entre subredes en la misma VLAN](#subnet-routing).
 
 <br />
 
@@ -207,7 +223,7 @@ Antes de empezar:
 ## Gestión de las direcciones IP portátiles existentes
 {: #managing_ips}
 
-De forma predeterminada, se pueden utilizar 4 direcciones IP públicas portátiles y 4 direcciones IP privadas portátiles para exponer apps individuales a la red privada o pública mediante la [creación de un servicio de equilibrador de carga de red (NLB)](/docs/containers?topic=containers-loadbalancer) o la [creación de equilibradores de carga de aplicación (ALB) de Ingress adicionales](/docs/containers?topic=containers-ingress#scale_albs). Para crear un servicio de NLB o ALB, debe tener disponible al menos una dirección IP portátil del tipo correcto. Puede ver las direcciones IP portátiles disponibles o puede liberar una dirección IP portátil utilizada.
+De forma predeterminada, se pueden utilizar 4 direcciones IP públicas portátiles y 4 direcciones IP privadas portátiles para exponer apps individuales a la red privada o pública mediante la [creación de un servicio de equilibrador de carga de red (NLB)](/docs/containers?topic=containers-loadbalancer). Para crear un servicio de <staging create-alb> o ALB</staging create-alb>, debe tener disponible al menos una dirección IP portátil del tipo correcto. Puede ver las direcciones IP portátiles disponibles o puede liberar una dirección IP portátil utilizada.
 {: shortdesc}
 
 ### Visualización de direcciones IP públicas portátiles disponibles
@@ -224,7 +240,7 @@ kubectl get cm ibm-cloud-provider-vlan-ip-config -n kube-system -o yaml
 Para obtener una lista solo de las direcciones IP públicas portátiles disponibles para crear NLB o más ALB públicos, puede seguir los pasos siguientes:
 
 Antes de empezar:
--  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
+-  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para ver una lista de las direcciones IP públicas portátiles disponibles:
@@ -285,7 +301,7 @@ Puede liberar una dirección IP portátil utilizada suprimiendo el servicio de e
 {:shortdesc}
 
 Antes de empezar:
--  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
+-  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `default`.
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para suprimir un NLB o para inhabilitar un ALB:
@@ -323,14 +339,14 @@ Cuando pone una subred a disponibilidad de un clúster, las direcciones IP de es
 ### Adición de direcciones IP portátiles mediante la solicitud de más subredes
 {: #request}
 
-Puede obtener más IP portátiles para los servicios de NLB creando una nueva subred en una cuenta de infraestructura de IBM Cloud (SoftLayer) y poniéndola a disposición del clúster especificado.
+Puede obtener más IP portátiles para los servicios de NLB creando una nueva subred en una cuenta de infraestructura de IBM Cloud y poniéndola a disposición del clúster especificado.
 {:shortdesc}
 
 Las direcciones IP públicas portátiles se facturan mensualmente. Si elimina direcciones IP públicas portátiles una vez suministrada la subred, todavía tendrá que pagar el cargo mensual, aunque solo las haya utilizado un breve periodo de tiempo.
 {: note}
 
 Antes de empezar:
--  Asegúrese de tener el [rol de plataforma **Operador** o **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+-  Asegúrese de tener el [rol de plataforma **Operador** o **Administrador** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Para solicitar una subred:
@@ -365,7 +381,7 @@ Para solicitar una subred:
 2. Compruebe que la subred se haya creado y añadido correctamente al clúster. El CIDR de subred se muestra en la sección **Subnet VLANs**.
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> --showResources
     ```
     {: pre}
 
@@ -381,7 +397,75 @@ Para solicitar una subred:
 
 3. **Importante**: para habilitar la comunicación entre nodos trabajadores que están en distintas subredes en la misma VLAN, debe [habilitar el direccionamiento entre subredes en la misma VLAN](#subnet-routing).
 
+### Adición de IP portátiles añadiendo subredes existentes a su clúster
+{: #add-existing}
+
+Puede obtener más IP portátiles para servicios de NLB mediante la creación de una subred existente en una cuenta de infraestructura de IBM Cloud disponible para su clúster.
+{:shortdesc}
+
+Antes de empezar:
+-  Asegúrese de tener el [rol de plataforma **Operador** o **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+- [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+Para hacer que una subred esté disponible en el clúster:
+
+1. Revise los ID de las VLAN públicas o privadas en las que desea asignar las direcciones IP públicas o privadas portátiles. Debe seleccionar una VLAN pública o privada a la que está conectado el nodo trabajador existente.
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name_or_id> --showResources
+  ```
+  {: pre}
+
+  En la salida, busque los **ID de VLAN** en la sección **VLAN de subred**. Salida de ejemplo:
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+2. Obtenga el ID de la subred que se va a utilizar. Asegúrese de que la subred está en uno de los ID de VLAN que ha encontrado en el paso anterior, y que la subred ya no esté enlazada a otro clúster.
+  ```
+  ibmcloud ks subnets
+  ```
+  {: pre}
+
+  En este ejemplo, el ID de subred es `1602829`, que está en el ID de VLAN `2234945`:
+  ```
+  Getting subnet list...
+    OK
+    ID        Network             Gateway          VLAN ID   Type      Bound Cluster
+    1550165   10.xxx.xx.xxx/26    10.xxx.xx.xxx    2234947   private
+    1602829   169.xx.xxx.xxx/28   169.xx.xxx.xxx   2234945   public
+  ```
+  {: screen}
+
+3. Haga que la subred esté disponible para su clúster.
+  ```
+  ibmcloud ks cluster-subnet-add --cluster <cluster_name_or_id> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+4. Compruebe que la subred se haya creado y añadido correctamente al clúster. El CIDR de subred se muestra en la sección **Subnet VLANs**.
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, se ha añadido una segunda subred a la VLAN pública `2234945`:
+  ```
+  Subnet VLANs
+    VLAN ID   Subnet CIDR          Public   User-managed
+    2234947   10.xxx.xx.xxx/29     false    false
+    2234945   169.xx.xxx.xxx/29    true     false
+    2234945   169.xx.xxx.xxx/29    true     false
+  ```
+  {: screen}
+
+5. **Importante**: para habilitar la comunicación entre nodos trabajadores que están en distintas subredes en la misma VLAN, debe [habilitar el direccionamiento entre subredes en la misma VLAN](#subnet-routing).
+
 <br />
+
 
 
 ### Adición de IP privadas portátiles mediante la adición de subredes gestionadas por el usuario a VLAN privadas
@@ -390,7 +474,7 @@ Para solicitar una subred:
 Puede obtener más IP privadas portátiles para los servicios de equilibrador de carga de red (NLB) creando una subred desde una red local disponible para el clúster.
 {:shortdesc}
 
-¿Desea reutilizar las subredes portátiles existentes en la cuenta de infraestructura de IBM Cloud (SoftLayer) en su lugar? Consulte [Utilización de subredes de la infraestructura de IBM Cloud (SoftLayer) personalizadas o existentes para crear un clúster](#subnets_custom).
+¿Desea reutilizar las subredes portátiles existentes en la cuenta de infraestructura de IBM Cloud en su lugar? Consulte [Utilización de subredes de la infraestructura de IBM Cloud personalizadas o existentes para crear un clúster](#subnets_custom).
 {: tip}
 
 Requisitos:
@@ -400,8 +484,8 @@ Requisitos:
 
 Antes de empezar:
 - Configure el direccionamiento del tráfico de red de entrada y de salida de la subred externa.
-- Confirme que tiene conectividad de VPN entre la pasarela de red del centro de datos local y el Virtual Router Appliance de red privada o el servicio de VPN strongSwan que se ejecuta en el clúster. Para obtener más información, consulte [Configuración de la conectividad de VPN](/docs/containers?topic=containers-vpn).
--  Asegúrese de tener el [rol de plataforma **Operador** o **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+- Confirme que tiene conectividad de VPN entre la pasarela de red del centro de datos local y el Virtual Router Appliance de red privada o el servicio de VPN strongSwan que se ejecuta en el clúster. De forma alternativa, asegúrese de que tiene una conexión DirectLink establecida entre el clúster y la red del centro de datos local. Para obtener más información, consulte [Configuración de la conectividad de VPN](/docs/containers?topic=containers-vpn).
+-  Asegúrese de tener el [rol de plataforma **Operador** o **Administrador** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 
@@ -410,7 +494,7 @@ Para añadir una subred desde una red local:
 1. Vea el ID de la VLAN privada del clúster. Localice la sección **Subnet VLANs**. En el campo **User-managed**, identifique el ID de VLAN con _false_.
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name>
+    ibmcloud ks cluster-get --cluster <cluster_name> --showResources <cluster_name>
     ```
     {: pre}
 
@@ -455,7 +539,7 @@ Para añadir una subred desde una red local:
 
 4. [Habilite el direccionamiento entre subredes en la misma VLAN](#subnet-routing).
 
-5. Añada un [servicio de equilibrador de carga de red (NLB) privado](/docs/containers?topic=containers-loadbalancer) o habilite un [ALB de Ingress privado](/docs/containers?topic=containers-ingress#private_ingress) para acceder a la app a través de la red privada. Para utilizar una dirección IP privada de la subred que ha añadido, debe especificar una dirección IP del CIDR de la subred. De lo contrario, se elige una dirección IP aleatoria de las subredes de infraestructura de IBM Cloud (SoftLayer) o las subredes proporcionadas por el usuario en la VLAN privada.
+5. Añada un [servicio de equilibrador de carga de red (NLB) privado](/docs/containers?topic=containers-loadbalancer) o habilite un [ALB de Ingress privado](/docs/containers?topic=containers-ingress#private_ingress) para acceder a la app a través de la red privada. Para utilizar una dirección IP privada de la subred que ha añadido, debe especificar una dirección IP del CIDR de la subred. De lo contrario, se elige una dirección IP aleatoria de las subredes de infraestructura de IBM Cloud o las subredes proporcionadas por el usuario en la VLAN privada.
 
 <br />
 
@@ -463,9 +547,12 @@ Para añadir una subred desde una red local:
 ## Gestión del direccionamiento de subred
 {: #subnet-routing}
 
-Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Para comprobar si un VRF ya está habilitado, utilice el mandato `ibmcloud account show`. Si no puede o no desea habilitar VRF, habilite la [distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmCloud ks vlan-spanning-get --region <region>`.
 
 Revise los siguientes casos de ejemplo en los que también es necesaria la distribución de VLAN.
+
+La opción de expansión de VLAN está inhabilitada para los clústeres que se crean en una cuenta habilitada para VRF. Cuando VRF está habilitado, todas las VLAN de la cuenta se pueden comunicar automáticamente entre sí a través de la red privada. Para obtener más información, consulte [Planificación de su configuración de red en clúster: comunicación trabajador-a-trabajador](/docs/containers?topic=containers-plan_clusters#worker-worker).
+{: note}
 
 ### Habilitación del direccionamiento entre subredes primarias en la misma VLAN
 {: #vlan-spanning}
@@ -490,3 +577,117 @@ Sin embargo, si tiene un dispositivo direccionador existente, como por ejemplo u
 
 Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 {: tip}
+
+<br />
+
+
+## Eliminación de subredes de un clúster
+{: #remove-subnets}
+
+Si ya no necesita subredes, puede eliminarlas del clúster. Las subredes solo se pueden desconectar de un clúster si no se utilizan en el clúster ninguna de las direcciones IP derivadas de dicho rango de subred.
+{: shortdesc}
+
+### Eliminación de una subred en una cuenta de infraestructura de IBM Cloud de un clúster
+{: #remove-sl-subnets}
+
+Eliminar una subred que esté en la cuenta de infraestructura de IBM Cloud desde un clúster. Después de eliminar la subred, ya no está disponible para el clúster, pero todavía existe en la cuenta de infraestructura de IBM Cloud.
+{: shortdesc}
+
+<p class="note">Las subredes solo se pueden desconectar de un clúster si no se utiliza ninguna de las direcciones IP derivadas de ese rango de subred en el clúster.</br></br>Las direcciones IP públicas portátiles se cargan mensualmente. Si elimina la subred, todavía debe pagar el cargo mensual para las direcciones IP, incluso si las ha utilizado solo durante un breve periodo de tiempo.</p>
+
+1. Busque el CIDR de la subred que quiera eliminar.
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name> --showResources <cluster_name>
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, el CIDR de la subred que se va a eliminar es `169.1.1.1/29`.
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR          Public   User-managed
+  2234947   10.xxx.xx.xxx/29     false    false
+  2234945   169.xx.xxx.xxx/29    true     false
+  2234945   169.1.1.1/29         true     false
+  ```
+  {: screen}
+
+2. Utilizando el CIDR que ha encontrado en el paso anterior, obtenga el ID de la subred que desea eliminar.
+  ```
+  ibmcloud ks subnets
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, la subred con el CIDR de `169.1.1.1/29` tiene el ID `1602829`.
+  ```
+  ID        Red                 Pasarela         ID VLAN   Tipo      Clúster enlazado
+  ...
+  1602829   169.1.1.1/29        169.1.1.2        2234945   public    df253b6025d64944ab99ed63bb4567b6
+  ```
+  {: screen}
+
+3. Desconectar la subred del clúster. La subred sigue estando disponible en su cuenta de infraestructura de IBM Cloud.
+  ```
+  ibmcloud ks cluster-subnet-detach --cluster <cluster_name_or_ID> --subnet-id <subnet_ID>
+  ```
+  {: pre}
+
+
+4. Verifique que la subred ya no está enlazada con su clúster.
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name>
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, la subred con el CIDR de `169.1.1.1/29` se elimina.
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+### Eliminación de una subred en una red local de un clúster
+{: #remove-user-subnets}
+
+Elimine una subred privada que esté en una red local de un clúster. Después de eliminar la subred, ya no está disponible para el clúster, pero todavía existe en la cuenta de infraestructura de su red local.
+{: shortdesc}
+
+1. Busque el CIDR y el ID de VLAN de la subred que quiera eliminar.
+  ```
+  ibmcloud ks cluster-get --cluster <cluster_name> --showResources
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, el CIDR de la subred que se va a eliminar es `10.1.1.1/24` y el ID de VLAN es `2234947`.
+  ```
+  VLAN de subred
+  ID VLAN   CIDR de subred    Pública  Gest.por usuario
+  2234947   10.xxx.xx.xxx/29  false    false
+  2234945   169.xx.xxx.xxx/29 true     false
+  2234947   10.1.1.1/24       false    true
+  ```
+  {: screen}
+
+2. Utilizando el CIDR y el ID de VLAN que ha encontrado en el paso anterior, elimine la subred de su clúster.
+  ```
+  ibmcloud ks cluster-user-subnet-rm --cluster <cluster_name_or_ID> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN_ID>
+  ```
+  {: pre}
+
+3. Verifique que la subred ya no está enlazada con su clúster.
+  ```
+  ibmcloud ks cluster-get --showResources <cluster_name>
+  ```
+  {: pre}
+
+  En esta salida de ejemplo, la subred con el CIDR de `10.1.1.1/24` se elimina.
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  2234947   10.xxx.xx.xxx/29    false    false
+  2234945   169.xx.xxx.xxx/29  true    false
+  ```
+  {: screen}
+
+

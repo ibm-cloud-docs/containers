@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Planificación de almacenamiento persistente altamente disponible
 {: #storage_planning}
 
 ## Elección de una solución de almacenamiento
 {: #choose_storage_solution}
 
-Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted, debe conocer los requisitos de la app, el tipo de datos que desea almacenar y la frecuencia con la que desea acceder a estos datos.
+Antes de poder decidir qué tipo de almacenamiento es la solución correcta para los clústeres de {{site.data.keyword.containerlong}}, debe conocer los requisitos de la app, el tipo de datos que desea almacenar y la frecuencia con la que desea acceder a estos datos.
 {: shortdesc}
 
 1. Decida si sus datos deben estar permanentemente almacenados o si se pueden eliminar en un momento determinado.
@@ -59,7 +57,7 @@ Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted
    - **Sólo lectura:** los datos son de sólo lectura. No desea escribir ni cambiar los datos.
    - **Lectura y escritura:** desea leer, escribir y cambiar los datos. Para los datos que se leen y se escriben, es importante saber si las operaciones presentan mucha actividad de lectura, mucha actividad de escritura o una actividad equilibrada.
 
-4. Determine la frecuencia a la que se accede a los datos. Conocer la frecuencia del acceso a datos permite saber el rendimiento que se necesita para el almacenamiento. Por ejemplo, los datos a los que se accede con frecuencia suelen residir en el almacenamiento rápido.
+5. Determine la frecuencia a la que se accede a los datos. Conocer la frecuencia del acceso a datos permite saber el rendimiento que se necesita para el almacenamiento. Por ejemplo, los datos a los que se accede con frecuencia suelen residir en el almacenamiento rápido.
    - **Datos calientes:** datos a los que se accede con frecuencia. Las apps web o móviles son ejemplos habituales de este caso.
    - **Datos fríos o templados:** datos a los que se accede con poca frecuencia, como una vez al mes o menos. El archivado, la retención de datos a corto plazo o la recuperación tras desastre son ejemplos habituales de este caso.
    - **Datos fríos:** datos a los que se accede con muy poca frecuencia o nunca. Los archivados, las copias de seguridad a largo plazo o los datos históricos son ejemplos habituales de este caso.
@@ -68,14 +66,14 @@ Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted
    Si no puede predecir la frecuencia o si la frecuencia no permite un patrón estricto, determine si las cargas de trabajo son de lectura pesada, de escritura pesada o equilibradas. A continuación, busque la opción de almacenamiento que se ajuste a su carga de trabajo e investigue qué nivel de almacenamiento le proporciona la flexibilidad que necesita. Por ejemplo, {{site.data.keyword.cos_full_notm}} proporciona una clase de almacenamiento `flexible` que tiene en cuenta la frecuencia con la que se accede a los datos en un mes y se basa en esta medida para optimizar la facturación mensual.
    {: tip}
 
-5. Investigue si los datos se deben compartir entre varias instancias de app, zonas o regiones.
+6. Investigue si los datos se deben compartir entre varias instancias de app, zonas o regiones.
    - **Acceso en varios pods:** si utiliza volúmenes persistentes de Kubernetes para acceder al almacenamiento, puede determinar el número de pods que pueden montar el volumen al mismo tiempo. Hay algunas soluciones de almacenamiento, como el almacenamiento en bloque, a las que solo puede acceder un pod al mismo tiempo. Con otras soluciones de almacenamiento, puede compartir el volumen entre varios pods.
    - **Acceso en varias zonas y regiones:** puede que necesite que los datos sean accesibles desde varias zonas o regiones. Algunas soluciones de almacenamiento, como el almacenamiento de archivos y en bloque, son específicas del centro de datos y no se pueden compartir entre varias zonas en una configuración de clúster multizona.
 
    Si desea hacer que sus datos sean accesibles a través de zonas y regiones, asegúrese de consultar a su departamento legal para verificar que los datos se puedan almacenar en varias zonas o en otro país.
    {: note}
 
-6. Conozca otras características de almacenamiento que afectan a su elección.
+7. Conozca otras características de almacenamiento que afectan a su elección.
    - **Coherencia:** la garantía de que una operación de lectura devuelva la última versión de un archivo. Las soluciones de almacenamiento pueden proporcionar una `coherencia potente` cuando se garantiza que siempre se recibirá la última versión de un archivo, o una `coherencia eventual` cuando puede que la operación de lectura no devuelva la última versión. La coherencia eventual se suele dar en sistemas distribuidos geográficamente, donde una operación de escritura primero se debe replicar en todas las instancias.
    - **Rendimiento:** el tiempo que se tarda en completar una operación de lectura o escritura.
    - **Durabilidad:** la garantía de que una operación de escritura que se confirme en el almacenamiento sobreviva permanentemente y no se dañe ni se pierda, aunque se escriban gigabytes o terabytes de datos en el almacenamiento de una sola vez.
@@ -84,7 +82,7 @@ Antes de decidir qué tipo de almacenamiento es la solución adecuada para usted
    - **Escalabilidad:** la capacidad de ampliar la capacidad y personalizar el rendimiento en función de sus necesidades.
    - **Cifrado:** el enmascaramiento de datos para evitar la visibilidad cuando un usuario no autorizado accede a los datos.
 
-7. [Revise las soluciones de almacenamiento persistente disponibles](#persistent_storage_overview) y elija la solución que mejor se adapte a sus requisitos de datos y app.
+8. [Revise las soluciones de almacenamiento persistente disponibles](#persistent_storage_overview) y elija la solución que mejor se adapte a sus requisitos de datos y app.
 
 ## Comparación de opciones de almacenamiento no persistente
 {: #non_persistent_overview}
@@ -156,7 +154,7 @@ La siguiente imagen muestra las opciones de datos no persistentes disponibles en
 <tr>
 <td style="text-align:left">Durabilidad</td>
 <td style="text-align:left">Los datos se pierden cuando el contenedor se cuelga o se elimina. </td>
-<td style="text-align:left">Los datos de los volúmenes <code>hostPath</code> o <code>emptyDir</code> se pierden cuando: <ul><li>El nodo trabajador se suprime.</li><li>El nodo trabajador se vuelve a cargar o actualizar.</li><li>El clúster se suprime.</li><li>La cuenta de {{site.data.keyword.Bluemix_notm}} alcanza un estado suspendido. </li></ul></p><p>Además, los datos de un volumen <code>emptyDir</code> se eliminan cuando: <ul><li>El pod asignado se suprime de forma permanente del nodo trabajador.</li><li>El pod asignado se planifica en otro nodo trabajador.</li></ul>
+<td style="text-align:left">Los datos de los volúmenes <code>hostPath</code> o <code>emptyDir</code> se pierden cuando: <ul><li>El nodo trabajador se suprime.</li><li>El nodo trabajador se vuelve a cargar o actualizar.</li><li>El clúster se suprime.</li><li>La cuenta de {{site.data.keyword.cloud_notm}} alcanza un estado suspendido. </li></ul></p><p>Además, los datos de un volumen <code>emptyDir</code> se eliminan cuando: <ul><li>El pod asignado se suprime de forma permanente del nodo trabajador.</li><li>El pod asignado se planifica en otro nodo trabajador.</li></ul>
 </tr>
 <tr>
 <td style="text-align:left">Casos de uso comunes</td>
@@ -287,7 +285,7 @@ En la imagen siguiente se muestran las opciones que tiene en {{site.data.keyword
 <th style="text-align:left">Características</th>
 <th style="text-align:left">Objeto</th>
 <th style="text-align:left">SDS (Portworx)</th>
-<th style="text-align:left">Bases de datos de {{site.data.keyword.Bluemix_notm}}</th>
+<th style="text-align:left">Bases de datos de {{site.data.keyword.cloud_notm}}</th>
 </thead>
 <tbody>
 <tr>
@@ -376,3 +374,6 @@ En la imagen siguiente se muestran las opciones que tiene en {{site.data.keyword
 </tr>
 </tbody>
 </table>
+
+
+

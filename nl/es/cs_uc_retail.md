@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,17 +23,16 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector minorista
 {: #cs_uc_retail}
 
-En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo de {{site.data.keyword.containerlong_notm}} las analíticas para obtener información sobre el mercado, realizar despliegues en varias regiones en todo el mundo y gestionar el inventario con {{site.data.keyword.messagehub_full}} y almacenamiento de objetos.
+En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo de {{site.data.keyword.containerlong}} las analíticas para obtener información sobre el mercado, realizar despliegues en varias regiones en todo el mundo y gestionar el inventario con {{site.data.keyword.messagehub_full}} y almacenamiento de objetos.
 {: shortdesc}
 
 ## Los minoristas con establecimiento físico comparten datos mediante el uso de API con asociados comerciales globales para realizar ventas a través de varios canales
 {: #uc_data-share}
 
-Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas, pero el sistema de ventas al por menor se limita a un centro de datos local. La competencia tiene asociados comerciales globales para realizar ventas cruzadas y ascendentes de sus productos: tanto en tiendas físicas como en sitios en línea.
+Un ejecutivo de línea de negocio (LOB) necesita aumentar los canales de ventas, pero el sistema de ventas al por menor se limita a un centro de datos local. La competencia tiene asociados comerciales globales para realizar ventas cruzadas y ascendentes de sus productos: tanto en tiendas físicas como en sitios en línea. 
 {: shortdesc}
 
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} proporciona un ecosistema de nube pública cuyos contenedores permiten a otros asociados comerciales y a participantes externos desarrollar conjuntamente apps y datos a través de las API. Ahora que el sistema minorista está en la nube pública, las API también simplifican la compartición de datos y agilizan el desarrollo de nuevas apps. Los despliegues de apps aumentan cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente con cadenas de herramientas.
@@ -63,7 +62,7 @@ La solución consta de estos componentes principales:
 
 Para que el minorista trabaje con asociados comerciales globales, las API de inventario requieren cambios para que se ajusten a las preferencias de idioma y de mercado de cada región. {{site.data.keyword.containerlong_notm}} ofrece cobertura en varias regiones, que incluyen Norteamérica, Europa, Asia y Australia, de modo que las API reflejen las necesidades de cada país y se garantice una latencia baja para las llamadas de API.
 
-Otro requisito es que los datos de inventario se deben poder compartir con los asociados comerciales y los clientes de la empresa. Con las API de inventario, los desarrolladores pueden mostrar información en apps, como apps de inventario móvil o soluciones de comercio electrónico en la web. Los desarrolladores también están ocupados con la creación y el mantenimiento del sitio de comercio electrónico primario. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura.
+Otro requisito es que los datos de inventario se deben poder compartir con los asociados comerciales y los clientes de la empresa. Con las API de inventario, los desarrolladores pueden mostrar información en apps, como apps de inventario móvil o soluciones de comercio electrónico en la web. Los desarrolladores también están ocupados con la creación y el mantenimiento del sitio de comercio electrónico primario. En resumen, tienen que centrarse en escribir código en lugar de en gestionar la infraestructura.
 
 Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
@@ -160,7 +159,7 @@ La analítica de redes sociales con Watson Discovery (datos sobre personalidad y
 
 La app móvil de fidelización proporciona información de personalización detallada, especialmente cuando los clientes utilizan sus funciones de compartición en redes social, como por ejemplo para publicar recetas.
 
-Además de la app móvil, los desarrolladores están ocupados con la creación y el mantenimiento de la app de fidelización existente, que está vinculada a los tradicionales cupones de caja. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
+Además de la app móvil, los desarrolladores están ocupados con la creación y el mantenimiento de la app de fidelización existente, que está vinculada a los tradicionales cupones de caja. En resumen, tienen que centrarse en escribir código en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
 * Supervisión del estado y la recuperación de los nodos trabajadores
 * Suministro de cálculo global, para que los desarrolladores no sean los responsables de configurar la infraestructura en los centros de datos
@@ -196,3 +195,5 @@ Solución técnica:
 * El tráfico de clientes y las ventas se incrementaron en las tiendas, convirtiendo las propias tiendas en un activo diferenciador.
 * Al mismo tiempo, la información extraída de redes sociales y análisis reducen los gastos operativos (OpEx) de inventario.
 * La compartición en redes sociales de la app móvil también ayuda a identificar y comercializar a nuevos clientes.
+
+

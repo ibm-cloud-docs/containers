@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
+{: .toc subcollection="containers" category="containers" audience="compute" arm="1680717" href="/docs/containers?topic=containers-getting-started" path="containers"}
 Servicio Kubernetes de IBM Cloud
 
     {: .navgroup id="learn"}
@@ -31,14 +31,13 @@ Servicio Kubernetes de IBM Cloud
 
     {: .topicgroup}
     Guías de aprendizaje
+        cs_tutorials_ov.md
         cs_tutorials.md
-        cs_tutorial_rhos.md
-        cs_tutorials_apps.md
         cs_tutorials_policies.md
         cs_tutorials_cf.md
-        [Guía de aprendizaje: Traslado de una aplicación basada en VM a Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
-        [Guía de aprendizaje: Creación de un clúster de varias regiones mediante Cloud Internet Services](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
-        [Guía de aprendizaje: Configuración de integración continua y conducto de entrega para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
+        [Guía de aprendizaje: Mover una aplicación basada en VM a Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes)
+        [Guía de aprendizaje: Crear un clúster multiregión usando los servicios de Internet de la nube](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [Guía de aprendizaje: Configurar un conducto continuo de integración y entrega para apps contenerizadas que se ejecutan en Kubernetes](https://cloud.ibm.com/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -46,11 +45,11 @@ Servicio Kubernetes de IBM Cloud
 
     {: .topicgroup}
     Configuración de clústeres
-        cs_clusters_planning.md
-        cs_plan_ha.md
-        cs_plan_workers.md
+        cs_cluster_plan_network.md
+        cs_cluster_plan_ha.md
+        cs_worker_plan.md
         cs_clusters.md
-        cs_workers.md
+        cs_worker_add.md
 
     {: .topicgroup}
     Administración de clústeres
@@ -75,18 +74,29 @@ Servicio Kubernetes de IBM Cloud
         cs_network_cluster.md
         cs_dns.md
 
-    cs_images.md
-    cs_app.md
-    cs_app_knative.md
-
     {: .topicgroup}
-    Sistema de red para exponer apps
+    Despliegue de apps
+        cs_images.md
+        cs_app.md
+        cs_app_knative.md
         cs_network_planning.md
         cs_nodeport.md
+
+    {: .topicgroup}
+    Equilibrio de carga básico y de DSR con equilibradores de carga de red (NLB)
+        cs_loadbalancer_about.md
         cs_loadbalancer.md
+        cs_loadbalancer_v2.md
+        cs_loadbalancer_dns.md
+
+    {: .topicgroup}
+    Equilibrio de carga HTTPS con equilibradores de carga de aplicación (ALB) de Ingress
+        cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_settings.md
         cs_ingress_health.md
+        cs_ingress_user_managed.md
 
     {: .topicgroup}
     Almacenamiento de datos en almacenamiento persistente
@@ -114,17 +124,24 @@ Servicio Kubernetes de IBM Cloud
     cs_hybrid.md
 
     {: .topicgroup}
-    Consulta del plugin de la CLI del servicio Kubernetes de IBM Cloud
+    Referencia de plugins de la CLI
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
 
     {: .topicgroup}
-    Versiones de IBM Cloud Kubernetes Service
+    Historial de versiones
         cs_versions.md
         cs_versions_changelog.md
         cs_versions_addons.md
 
-    cs_regions.md
+    {: .topicgroup}
+    Referencia de API
+        [API de IBM Cloud Kubernetes Service](https://containers.cloud.ibm.com/global/swagger-global-api/)
+        [JSON de API de IBM Cloud Kubernetes Service](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+        [API de IBM Cloud Container Registry ](https://cloud.ibm.com/apidocs/container-registry)
+        [API de IBM Cloud Vulnerability Advisor](https://cloud.ibm.com/apidocs/container-registry/va)
+
+    cs_locations.md
     cs_integrations_overview.md
     cs_access_reference.md
     {: .navgroup-end}
@@ -142,7 +159,8 @@ Servicio Kubernetes de IBM Cloud
         cs_troubleshoot_network.md
 
     release_notes.md
-    cs_rellinks.md
     cs_sitemap.md
-    {: .navgroup-end}
+    {: .navgroup-end} 
 
+    cs_tutorials_apps.md
+    cs_rellinks.md

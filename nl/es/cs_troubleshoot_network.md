@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -62,9 +62,9 @@ Para resolver problemas del servicio de NLB:
   ```
   {: pre}
 
-    En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
+    En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre una versión que no sea **gratuita (free)**.
 
-2. Para los NLB versión 2.0: asegúrese de completar los [requisitos previos del NLB 2.0](/docs/containers?topic=containers-loadbalancer#ipvs_provision).
+2. Para los NLB versión 2.0: asegúrese de completar los [requisitos previos del NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).
 
 3. Compruebe la precisión del archivo de configuración del servicio de NLB.
     * NLB versión 2.0:
@@ -155,10 +155,13 @@ ibmcloud ks workers --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
-En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre un tipo de máquina que no sea **gratuito (free)**.
+En la salida de la CLI, asegúrese de que el **Estado** de los nodos trabajadores sea **Listo** y que el **Tipo de máquina** muestre una versión que no sea **gratuita (free)**.
 
 * Si el clúster estándar está totalmente desplegado y tiene al menos 2 nodos trabajadores por zona, pero no hay ningún **subdominio de Ingress** disponible, consulte [No se puede obtener un subdominio para el ALB de Ingress](/docs/containers?topic=containers-cs_troubleshoot_network#cs_subnet_limit).
 * Para otros problemas, solucione la configuración de Ingress siguiendo los pasos de [Depuración de Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
+
+Si ha reiniciado recientemente los pods de ALB o ha habilitado un ALB, una [comprobación de preparación](/docs/containers?topic=containers-ingress-settings#readiness-check) impide que los pods de ALB intenten direccionar las solicitudes de tráfico hasta que se analizan todos los archivos de recursos de Ingress. Esta comprobación de preparación evita la pérdida de solicitud y puede tardar hasta 5 minutos.
+{: note}
 
 <br />
 
@@ -183,7 +186,7 @@ Revise los motivos siguientes por los que puede fallar el secreto del ALB y los 
  <tbody>
  <tr>
  <td>No dispone de los roles de acceso necesarios para descargar y actualizar los datos de certificado.</td>
- <td>Solicite al administrador de la cuenta que le asigne los roles de {{site.data.keyword.Bluemix_notm}} IAM siguientes:<ul><li>Los roles de servicio **Gestor** y **Escritor** para la instancia de
+ <td>Solicite al administrador de la cuenta que le asigne los roles de {{site.data.keyword.cloud_notm}} IAM siguientes:<ul><li>Los roles de servicio **Gestor** y **Escritor** para la instancia de
 {{site.data.keyword.cloudcerts_full_notm}}. Para obtener más información, consulte <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Gestión del acceso del servicio</a> para {{site.data.keyword.cloudcerts_short}}.</li><li>El <a href="/docs/containers?topic=containers-users#platform">rol de plataforma **Administrador**</a> para el clúster.</li></ul></td>
  </tr>
  <tr>
@@ -237,20 +240,20 @@ Revise los motivos siguientes por los que puede fallar el secreto del ALB y los 
   {: screen}
 
 {: tsCauses}
-En los clústeres estándares, la primera vez que crea un clúster en una zona, se suministra automáticamente una VLAN pública y una VLAN privada en dicha zona en su cuenta de infraestructura de IBM Cloud (SoftLayer). En dicha zona, se solicita una subred pública portátil en la VLAN pública que especifique y una subred privada portátil en la VLAN privada que especifique. En {{site.data.keyword.containerlong_notm}}, las VLAN tienen un límite de 40 subredes. Si la VLAN del clúster de una zona ya ha alcanzado ese límite, el **subdominio de Ingress** no se suministra, el ALB de Ingress público para dicha zona no se suministra o bien no tiene una dirección IP pública portátil disponible para crear un equilibrador de carga de red (NLB).
+En los clústeres estándares, la primera vez que crea un clúster en una zona, se suministra automáticamente una VLAN pública y una VLAN privada en dicha zona en su cuenta de infraestructura de IBM Cloud. En dicha zona, se solicita una subred pública portátil en la VLAN pública que especifique y una subred privada portátil en la VLAN privada que especifique. En {{site.data.keyword.containerlong_notm}}, las VLAN tienen un límite de 40 subredes. Si la VLAN del clúster de una zona ya ha alcanzado ese límite, el **subdominio de Ingress** no se suministra, el ALB de Ingress público para dicha zona no se suministra o bien no tiene una dirección IP pública portátil disponible para crear un equilibrador de carga de red (NLB).
 
 Para ver cuántas subredes tiene una VLAN:
-1.  En la [consola (SoftLayer) de la infraestructura de IBM Cloud](https://cloud.ibm.com/classic?), seleccione **Red** > **Gestión de IP** > **VLAN**.
+1.  En la [consola de la infraestructura de IBM Cloud](https://cloud.ibm.com/classic?), seleccione **Red** > **Gestión de IP** > **VLAN**.
 2.  Pulse el **Número de VLAN** de la VLAN que utilizó para crear el clúster. Revise la sección **Subnets** para ver si hay 40 o más subredes.
 
 {: tsResolve}
-Si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) para solicitar una. A continuación, [cree un clúster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) que utilice esta nueva VLAN.
+Si necesita una nueva VLAN, [póngase en contacto con el equipo de soporte de {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) para solicitar una. A continuación, [cree un clúster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) que utilice esta nueva VLAN.
 
 Si tiene otra VLAN que esté disponible, puede [configurar la expansión de la VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) en el clúster existente. Después, puede añadir nuevos nodos trabajadores al clúster que utilicen otra VLAN con subredes disponibles. Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
 
 Si no utiliza todas las subredes de la VLAN, puede reutilizar subredes de la VLAN añadiéndolas al clúster.
 1. Compruebe que la subred que desea utilizar está disponible.
-  <p class="note">La cuenta de infraestructura que utiliza podría compartirse entre varias cuentas de {{site.data.keyword.Bluemix_notm}}. En este caso, aunque ejecute el mandato `ibmcloud ks subnets` para ver subredes con **Clústeres enlazados**, solo puede ver información de sus clústeres. Compruebe con el propietario de la cuenta de infraestructura para asegurarse de que las subredes están disponibles y que no las estén utilizando otra cuenta o equipo.</p>
+  <p class="note">La cuenta de infraestructura que utiliza podría compartirse entre varias cuentas de {{site.data.keyword.cloud_notm}}. En este caso, aunque ejecute el mandato `ibmcloud ks subnets` para ver subredes con **Clústeres enlazados**, solo puede ver información de sus clústeres. Compruebe con el propietario de la cuenta de infraestructura para asegurarse de que las subredes están disponibles y que no las estén utilizando otra cuenta o equipo.</p>
 
 2. Utilice el [mandato `ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) para poner una subred existente a disposición del clúster.
 
@@ -308,7 +311,7 @@ Para evitar que la conexión se cierre después de 60 segundos de inactividad:
 {: #cs_source_ip_fails}
 
 {: tsSymptoms}
-Ha habilitado la conservación de IP de origen para un servicio [equilibrador de carga versión 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) o [Ingress ALB](/docs/containers?topic=containers-ingress#preserve_source_ip) cambiando `externalTrafficPolicy` por `Local` en el archivo de configuración del servicio. Sin embargo, no hay tráfico que llegue al servicio de fondo para su app.
+Ha habilitado la conservación de IP de origen para un servicio [equilibrador de carga versión 1.0](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) o [Ingress ALB](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) cambiando `externalTrafficPolicy` por `Local` en el archivo de configuración del servicio. Sin embargo, no hay tráfico que llegue al servicio de fondo para su app.
 
 {: tsCauses}
 Cuando habilita la conservación de IP para los servicios equilibrador de carga o Ingress ALB, la dirección IP de origen de la solicitud de cliente se conserva. El servicio reenvía el tráfico a los pods de app del mismo nodo trabajador solo para asegurarse de que la dirección IP del paquete de solicitud no se cambia. Generalmente, los pods del servicio equilibrador de carga o de Ingress ALB se despliegan en los nodos trabajadores donde se despliegan los pods de app. Sin embargo, existen algunas situaciones donde los pods de servicio y los pods de app podrían no planificarse en los mismos nodos trabajadores. Si ve [nodos antagónicos de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) en nodos trabajadores, se impide que los pods que no tienen tolerancia a antagonismo se ejecuten en los nodos trabajadores antagónicos. Es posible que la conservación de IP de origen no esté funcionando dependiendo del tipo de antagonismo que utilice:
@@ -344,6 +347,33 @@ Si selecciona una de las opciones anteriores, pero los pods `keepalived` siguen 
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## La resolución de DNS de servicio de clúster a veces falla con CoreDNS pero no con KubeDNS
+{: #coredns_issues}
+
+{: tsSymptoms}
+A veces, la app no puede resolver los nombres DNS para los servicios de clúster. Las anomalías se producen solo cuando CoreDNS, no KubeDNS, es el [proveedor de DNS de clúster configurado](/docs/containers?topic=containers-cluster_dns). Es posible que vea mensajes de error similares a los siguientes.
+
+```
+Nombre o servicio no conocido
+```
+{: screen}
+
+```
+No hay ninguna dirección asociada con nombre de host o similar
+```
+{: screen}
+
+{: tsCauses}
+La memoria caché de CoreDNS para los servicios de clúster se comporta de forma distinta que el proveedor DNS de clúster anterior, KubeDNS, que puede provocar problemas para las apps que utilizan un cliente DNS antiguo.
+
+{: tsResolve}
+Actualice la app para que utilice un cliente DNS más reciente. Por ejemplo, si la imagen de la app es Ubuntu 14.04, el cliente DNS antiguo tendrá anomalías periódicas. Cuando se actualiza la imagen a Ubuntu 16.04, el cliente DNS funciona.
+
+También puede eliminar las configuraciones de plug-in de memoria caché de la correlación de configuración `coredns` en el espacio de nombres `kube-system`. Para obtener más información sobre cómo personalizar CoreDNS, consulte [Personalización del proveedor de DNS de clúster](/docs/containers?topic=containers-cluster_dns#dns_customize).
 
 <br />
 
@@ -592,7 +622,7 @@ Para asegurarse de que se han alineado todos los factores de Calico:
 {: #suspended}
 
 {: tsSymptoms}
-Su cuenta de {{site.data.keyword.Bluemix_notm}} ha sido suspendida, o bien se han suprimido todos los nodos trabajadores del clúster. Después de que se reactive la cuenta, no puede añadir nodos trabajadores cuando intenta cambiar el tamaño de la agrupación de nodo trabajadores o cuando intenta volverla a equilibrar. Aparece un mensaje de error similar al siguiente:
+Su cuenta de {{site.data.keyword.cloud_notm}} ha sido suspendida, o bien se han suprimido todos los nodos trabajadores del clúster. Después de que se reactive la cuenta, no puede añadir nodos trabajadores cuando intenta cambiar el tamaño de la agrupación de nodo trabajadores o cuando intenta volverla a equilibrar. Aparece un mensaje de error similar al siguiente:
 
 ```
 SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
@@ -600,7 +630,7 @@ SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN wit
 {: screen}
 
 {: tsCauses}
-Cuando se suspende una cuenta, se suprimen los nodos trabajadores de la cuenta. Si un clúster no tiene nodos trabajadores, la infraestructura de IBM Cloud (SoftLayer) reclama las VLAN públicas y privadas asociadas. Sin embargo, la agrupación de nodos trabajadores del clúster todavía tiene los ID de VLAN anteriores en sus metadatos y utiliza estos ID no disponibles cuando se reequilibra o se redimensiona la agrupación. Los nodos no se pueden crear porque las VLAN ya no están asociadas al clúster.
+Cuando se suspende una cuenta, se suprimen los nodos trabajadores de la cuenta. Si un clúster no tiene nodos trabajadores, la infraestructura de IBM Cloud reclama las VLAN públicas y privadas asociadas. Sin embargo, la agrupación de nodos trabajadores del clúster todavía tiene los ID de VLAN anteriores en sus metadatos y utiliza estos ID no disponibles cuando se reequilibra o se redimensiona la agrupación. Los nodos no se pueden crear porque las VLAN ya no están asociadas al clúster.
 
 {: tsResolve}
 
@@ -617,7 +647,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
     ```
     {: pre}
 
-2.  Obtenga una nueva VLAN privada y pública para cada zona en la que esté el clúster; para ello, [póngase en contacto con el servicio de soporte de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+2.  Obtenga una nueva VLAN privada y pública para cada zona en la que esté el clúster; para ello, [póngase en contacto con el servicio de soporte de {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 3.  Anote los nuevos ID de VLAN privada y pública para cada zona.
 
@@ -631,7 +661,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 5.  Utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) `zone-network-set` para cambiar los metadatos de red de la agrupación de nodos trabajadores.
 
     ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
+    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
     ```
     {: pre}
 
@@ -662,11 +692,11 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
--   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
+-   Para ver si {{site.data.keyword.cloud_notm}} está disponible, [compruebe la página de estado de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
 -   Publique una pregunta en [Slack de {{site.data.keyword.containerlong_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
+    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.cloud_notm}}, [solicite una invitación](https://cloud.ibm.com/kubernetes/slack) a este Slack.
     {: tip}
--   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
+-   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.cloud_notm}}.
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.

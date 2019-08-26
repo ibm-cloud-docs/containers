@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -28,43 +28,63 @@ subcollection: containers
 # Adición de servicios utilizando enlaces de servicios de IBM Cloud
 {: #service-binding}
 
-Añada servicios de {{site.data.keyword.Bluemix_notm}} para mejorar el clúster de Kubernetes con prestaciones adicionales en áreas como, por ejemplo, Watson AI, datos, seguridad e Internet de las cosas (IoT).
+Añada servicios de {{site.data.keyword.cloud_notm}} para mejorar el clúster de Kubernetes con prestaciones adicionales en áreas como, por ejemplo, Watson AI, datos, seguridad e Internet de las cosas (IoT).
 {:shortdesc}
 
 **¿Qué tipos de servicios puedo enlazar a mi clúster?** </br>
-Cuando añade servicios de {{site.data.keyword.Bluemix_notm}} a su clúster, puede elegir entre servicios habilitados para {{site.data.keyword.Bluemix_notm}} IAM (Identity and Access Management) y servicios basados en Cloud Foundry. Los servicios habilitados para IAM ofrecen un control de acceso más preciso y se pueden gestionar en un grupo de recursos de {{site.data.keyword.Bluemix_notm}}. Los servicios de Cloud Foundry deben añadirse a una organización y un espacio de Cloud Foundry, y no se pueden añadir a un grupo de recursos. Para controlar el acceso a la instancia de servicio de Cloud Foundry, se deban utilizar roles de Cloud Foundry. Para obtener más información acerca de los servicios habilitados para IAM y los servicios de Cloud Foundry, consulte [¿Qué es un recurso?](/docs/resources?topic=resources-resource#resource).
+Cuando añade servicios de {{site.data.keyword.cloud_notm}} a su clúster, puede elegir entre servicios habilitados para {{site.data.keyword.cloud_notm}} IAM (Identity and Access Management) y servicios basados en Cloud Foundry. Los servicios habilitados para IAM ofrecen un control de acceso más preciso y se pueden gestionar en un grupo de recursos de {{site.data.keyword.cloud_notm}}. Los servicios de Cloud Foundry deben añadirse a una organización y un espacio de Cloud Foundry, y no se pueden añadir a un grupo de recursos. Para controlar el acceso a la instancia de servicio de Cloud Foundry, se deban utilizar roles de Cloud Foundry. Para obtener más información acerca de los servicios habilitados para IAM y los servicios de Cloud Foundry, consulte [¿Qué es un recurso?](/docs/resources?topic=resources-resource#resource).
 
-Para obtener una lista de los servicios de {{site.data.keyword.Bluemix_notm}} admitidos, consulte el [catálogo de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/catalog).
+Para buscar una lista de servicios de {{site.data.keyword.cloud_notm}} admitidos, consulte el [catálogo de {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/catalog).
 
-**¿Qué es el enlace de servicios de {{site.data.keyword.Bluemix_notm}}?**</br>
-El enlace de servicios es una forma rápida de crear credenciales de servicio para un servicio de {{site.data.keyword.Bluemix_notm}} y almacenar estas credenciales en un secreto de Kubernetes en el clúster. Para enlazar un servicio al clúster, primero debe suministrar una instancia del servicio. A continuación, debe utilizar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para crear las credenciales de servicio y el secreto de Kubernetes. El secreto de Kubernetes se cifra automáticamente en etcd para proteger los datos.
+**¿Qué es el enlace de servicios de {{site.data.keyword.cloud_notm}}?**</br>
+El enlace de servicios es una forma rápida de crear credenciales de servicio para un servicio de {{site.data.keyword.cloud_notm}} utilizando su punto final de servicio público y almacenando estas credenciales en un secreto de Kubernetes en el clúster. Para enlazar un servicio al clúster, primero debe suministrar una instancia del servicio. A continuación, debe utilizar el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) `ibmcloud ks cluster-service-bind` para crear las credenciales de servicio y el secreto de Kubernetes. El secreto de Kubernetes se cifra automáticamente en etcd para proteger los datos.
 
-¿Desea proteger aún más sus secretos? Solicite al administrador del clúster que [habilite {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) en el clúster para cifrar los secretos nuevos y existentes, como el secreto que almacena las credenciales de las instancias de servicio de {{site.data.keyword.Bluemix_notm}}.
+¿Desea proteger aún más sus secretos? Solicite al administrador del clúster que [habilite {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) en el clúster para cifrar los secretos nuevos y existentes, como el secreto que almacena las credenciales de las instancias de servicio de {{site.data.keyword.cloud_notm}}.
 {: tip}
 
-**¿Puedo utilizar todos los servicios de {{site.data.keyword.Bluemix_notm}} en mi clúster?**</br>
-Puede utilizar el enlace de servicios sólo para los servicios que admiten claves de servicio de forma que las credenciales de servicio se puedan crear y almacenar automáticamente en un secreto de Kubernetes. Para consultar una lista de servicios que admiten claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
+**Ya tengo un servicio de {{site.data.keyword.cloud_notm}}. ¿Puedo utilizar el enlace de servicio {{site.data.keyword.cloud_notm}}?**</br>
+Sí, puede utilizar servicios que cumplan los requisitos de denominación y reutilicen las credenciales de servicio. 
+
+* **Denominación**: asegúrese de que el nombre de servicio está en el formato de expresión regular siguiente. Nombres permitidos de ejemplo son `myservice` o `example.com`. Los caracteres no permitidos incluyen espacios y subrayados.
+  ```
+  [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+  ```
+  {: screen}
+* **Credenciales de servicio**: Para utilizar las credenciales de servicio existentes, especifique el distintivo `--key` en el mandato `ibmcloud ks cluster-service-bind` y proporcione el nombre de las credenciales de servicio. El enlace de servicio de {{site.data.keyword.cloud_notm}} crea automáticamente un secreto de Kubernetes con las credenciales de servicio existentes. 
+
+**¿Qué pasa si quiero utilizar las credenciales de servicio que usan el punto final de servicio privado?**</br>
+De forma predeterminada, el mandato `ibmcloud ks cluster-service-bind` crea credenciales de servicio con el punto final de servicio público. Para utilizar el punto final de servicio privado, debe crear manualmente las credenciales de servicio para el servicio que utiliza el punto final de servicio privado y, a continuación, utilizar la opción `--key` para especificar el nombre de las credenciales de servicio existentes.  
+
+Es posible que el servicio aún no admita puntos finales de servicio privados. Si tiene un clúster de sólo privado, debe utilizar las credenciales de servicio que utilizan el punto final de servicio privado o abrir la dirección IP pública y el puerto para conectar con el servicio. 
+
+**¿Puedo utilizar todos los servicios de {{site.data.keyword.cloud_notm}} en mi clúster?**</br>
+Puede utilizar el enlace de servicios sólo para los servicios que admiten claves de servicio de forma que las credenciales de servicio se puedan crear y almacenar automáticamente en un secreto de Kubernetes. Para consultar una lista de servicios que admiten claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.cloud_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
 
 Los servicios que no admiten claves de servicio suelen proporcionar una API que puede utilizar en la app. El método de enlace de servicios no configura automáticamente el acceso de API para la app. Asegúrese de revisar la documentación de la API del servicio e implementar la interfaz de API en la app.
 
 ## Adición de servicios de IBM Cloud a clústeres
 {: #bind-services}
 
-Utilice el enlace de servicios de {{site.data.keyword.Bluemix_notm}} para crear automáticamente credenciales de servicio para los servicios de {{site.data.keyword.Bluemix_notm}} y almacene estas credenciales en un secreto de Kubernetes.
+Utilice el enlace de servicios de {{site.data.keyword.cloud_notm}} para crear automáticamente credenciales de servicio para los servicios de {{site.data.keyword.cloud_notm}} y almacene estas credenciales en un secreto de Kubernetes.
 {: shortdesc}
 
 Antes de empezar:
 - Asegúrese de que tiene los roles siguientes:
-    - [Rol de acceso a la plataforma de {{site.data.keyword.Bluemix_notm}} IAM de **Editor** o **Administrador**](/docs/containers?topic=containers-users#platform) para el clúster donde desea enlazar un servicio
-    - [Rol de servicio de {{site.data.keyword.Bluemix_notm}} IAM de **Escritor** o **Gestor**](/docs/containers?topic=containers-users#platform) para el espacio de nombres de Kubernetes donde desea enlazar el servicio
+    - [Rol de acceso a la plataforma de {{site.data.keyword.cloud_notm}} IAM de **Editor** o **Administrador**](/docs/containers?topic=containers-users#platform) para el clúster donde desea enlazar un servicio
+    - [Rol de servicio de {{site.data.keyword.cloud_notm}} IAM de **Escritor** o **Gestor**](/docs/containers?topic=containers-users#platform) para el espacio de nombres de Kubernetes donde desea enlazar el servicio
     - Para los servicios Cloud Foundry: [Rol de Cloud Foundry de **Desarrollador**](/docs/iam?topic=iam-mngcf#mngcf) para el espacio donde desea suministrar el servicio
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
+Para añadir un servicio {{site.data.keyword.cloud_notm}} al clúster:
 
-1. [Cree una instancia del servicio {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
-    * Algunos servicios de {{site.data.keyword.Bluemix_notm}} solo están disponibles en determinadas regiones. Puede enlazar un servicio con el clúster sólo si el servicio está disponible en la misma región que el clúster. Además, si desea crear una instancia de servicio en la zona de Washington DC, debe utilizar la CLI.
+1. [Cree una instancia del servicio {{site.data.keyword.cloud_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
+    * Algunos servicios de {{site.data.keyword.cloud_notm}} solo están disponibles en determinadas regiones. Puede enlazar un servicio con el clúster sólo si el servicio está disponible en la misma región que el clúster. Además, si desea crear una instancia de servicio en la zona de Washington DC, debe utilizar la CLI.
     * **Para los servicios habilitados para IAM**: Debe crear la instancia de servicio en el mismo grupo de recursos que el clúster. Un servicio solo se puede crear en un grupo de recursos y no se puede cambiar después.
+    * Asegúrese de que el nombre de servicio está en el formato de expresión regular siguiente. Nombres permitidos de ejemplo son `myservice` o `example.com`. Los caracteres no permitidos incluyen espacios y subrayados.
+      ```
+      [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
+      ```
+      {: screen}
 
 2. Compruebe el tipo de servicio que ha creado y tome nota del **Nombre** de la instancia de servicio.
    - **Servicios de Cloud Foundry:**
@@ -80,7 +100,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
      ```
      {: screen}
 
-  - **Servicios habilitados para {{site.data.keyword.Bluemix_notm}} IAM:**
+  - **Servicios habilitados para {{site.data.keyword.cloud_notm}} IAM:**
      ```
      ibmcloud resource service-instances
      ```
@@ -93,7 +113,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
      ```
      {: screen}
 
-   También puede ver los distintos tipos de servicio en el panel de control de {{site.data.keyword.Bluemix_notm}} como **Servicios de Cloud Foundry** y **Servicios**.
+   También puede ver los distintos tipos de servicio en el panel de control de {{site.data.keyword.cloud_notm}} como **Servicios de Cloud Foundry** y **Servicios**.
 
 3. Identifique el espacio de nombres del clúster que desea utilizar para añadir el servicio.
    ```
@@ -101,7 +121,11 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
    ```
    {: pre}
 
-4. Enlace el servicio a su clúster para crear las credenciales de servicio para el servicio y almacene las credenciales en un secreto de Kubernetes. Si tiene credenciales de servicio existentes, utilice el distintivo `--key` para especificar las credenciales. Para los servicios habilitados para IAM, las credenciales se crean automáticamente con el rol de acceso al servicio de **Escritor**, pero puede utilizar el distintivo `--role` para especificar otro rol de acceso al servicio distinto. Si utiliza el distintivo `--key`, no incluya el distintivo `--role`.
+4. Enlace el servicio a su clúster para crear credenciales de servicio para el servicio que utilicen el punto final de servicio público y almacenen las credenciales en un secreto de Kubernetes. Si tiene credenciales de servicio existentes, utilice el distintivo `--key` para especificar el nombre las credenciales. Para los servicios habilitados para IAM, las credenciales se crean automáticamente con el rol de acceso al servicio de **Escritor**, pero puede utilizar el distintivo `--role` para especificar otro rol de acceso al servicio distinto. Si utiliza el distintivo `--key`, no incluya el distintivo `--role`.
+
+   Si el servicio da soporte a puntos finales de servicio privados, puede crear manualmente las credenciales de servicio para el servicio que utiliza el punto final de servicio privado y, a continuación, utilizar la opción `--key` para especificar el nombre de las credenciales de servicio existentes. 
+   {: tip}
+   
    ```
    ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
    ```
@@ -158,7 +182,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
       ```
       {: screen}
 
-   3. Opcional: compare las credenciales de servicio que ha descodificado en el paso anterior con las credenciales de servicio que encuentre para la instancia de servicio en el panel de control de {{site.data.keyword.Bluemix_notm}}.
+   3. Opcional: compare las credenciales de servicio que ha descodificado en el paso anterior con las credenciales de servicio que encuentre para la instancia de servicio en el panel de control de {{site.data.keyword.cloud_notm}}.
 
 6. Ahora que el servicio está enlazado con el clúster, debe configurar la app para que [acceda a las credenciales de servicio en el secreto de Kubernetes](#adding_app).
 
@@ -166,7 +190,7 @@ Para añadir un servicio {{site.data.keyword.Bluemix_notm}} al clúster:
 ## Acceso a las credenciales de servicio desde las apps
 {: #adding_app}
 
-Para acceder a una instancia de servicio de {{site.data.keyword.Bluemix_notm}} desde la app, debe permitir que la app acceda a las credenciales de servicio almacenadas en el secreto de Kubernetes.
+Para acceder a una instancia de servicio de {{site.data.keyword.cloud_notm}} desde la app, debe permitir que la app acceda a las credenciales de servicio almacenadas en el secreto de Kubernetes.
 {: shortdesc}
 
 Las credenciales de una instancia de servicio están codificadas como base64 y se almacenan en el secreto en formato JSON. Para acceder a los datos del secreto, elija una de las opciones siguientes:
@@ -175,14 +199,14 @@ Las credenciales de una instancia de servicio están codificadas como base64 y s
 <br>
 
 Antes de empezar:
--  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+-  Asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- [Añada un servicio de {{site.data.keyword.Bluemix_notm}} a su clúster](#bind-services).
+- [Añada un servicio de {{site.data.keyword.cloud_notm}} a su clúster](#bind-services).
 
 ### Montaje del secreto como un volumen en el pod
 {: #mount_secret}
 
-Cuando monta el secreto como volumen en el pod, un archivo denominado `binding` se almacena en el directorio de montaje del volumen. El archivo `binding` en formato JSON incluye toda la información y las credenciales que necesita para acceder al servicio de {{site.data.keyword.Bluemix_notm}}.
+Cuando monta el secreto como volumen en el pod, un archivo denominado `binding` se almacena en el directorio de montaje del volumen. El archivo `binding` en formato JSON incluye toda la información y las credenciales que necesita para acceder al servicio de {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
 1.  Liste los secretos disponibles en el clúster y anote el **nombre** del secreto. Busque un secreto de tipo **opaco**. Si existen varios secretos, póngase en contacto con el administrador del clúster para identificar el secreto correcto del servicio.
@@ -438,7 +462,7 @@ Puede añadir las credenciales de servicio y otros pares de valores de clave del
 
       Salida de ejemplo:
       ```
-      BINDING={"apikey":"KL34Ys893284NGJEPFjgrioJ12NElpow","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"jfiavhui12484fnivhuo472nvei23913c3ff","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
+      BINDING={"apikey":"<API_key>","host":"98765aab-9ce1-7tr3-ba87-bfbab6e6d9d6-bluemix.cloudant.com","iam_apikey_description":"Auto generated apikey during resource-key operation for Instance - crn:v1:bluemix:public:cloudantnosqldb:us-south:a/1234g56789cfe8e6388dd2ec098:98746cw-43d7-49ce-947a-d8fe3eebb381::","iam_apikey_name":"auto-generated-apikey-1234abcde-987f-3t64-9d96-d13775ec5663","iam_role_crn":"crn:v1:bluemix:public:iam::::serviceRole:Writer","iam_serviceid_crn":"crn:v1:bluemix:public:iam-identity::a/1234567890brasge5htn2ec098::serviceid:ServiceId-12345vgh-6c4c-ytr12-af6b-467d30d6ef44","password":"<password>","port":443,"url":"https://25c73aac-9ce1-4c24-ba98-bfbab6e6d9d6-bluemix:ugvioev823inreuiegn43donvri29989wiu9t22@25c73aac-9ce1-4c24-ba98-abdrjio123562lnsb-bluemix.cloudant.com","username":"123b45da-9ce1-4c24-ab12-rinwnwub1294-bluemix"}
       ```
       {: screen}
 

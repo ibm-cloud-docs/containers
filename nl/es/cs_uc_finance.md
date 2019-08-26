@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,20 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector de servicios financieros
 {: #cs_uc_finance}
 
-En estos casos de uso se muestra cómo las cargas de trabajo de {{site.data.keyword.containerlong_notm}} pueden aprovechar la alta disponibilidad, el cálculo de alto rendimiento, la agilización de los clústeres para facilitar su desarrollo y la IA de {{site.data.keyword.ibmwatson}}.
+En estos casos de uso se muestra cómo las cargas de trabajo de {{site.data.keyword.containerlong}} pueden aprovechar la alta disponibilidad, el cálculo de alto rendimiento, fácil aumento de los clústeres para agilizar el desarrollo y la IA de {{site.data.keyword.ibmwatson}}.
 {: shortdesc}
 
 ## Una empresa hipotecaria recorta los costes y acelera la conformidad normativa
 {: #uc_mortgage}
 
-El responsable de gestión de riesgos de una empresa hipotecaria procesa 70 millones de registros al día, pero el sistema local era lento y también inexacto. Los gastos de TI se dispararon porque el hardware se quedó obsoleto y no se sacaba el máximo provecho del mismo. Mientras esperaban el suministro de hardware, el cumplimiento con las normativas se ralentizó.
+El responsable de gestión de riesgos de una empresa hipotecaria procesa 70 millones de registros al día, pero el sistema local era lento y también inexacto. Los gastos de TI se dispararon porque el hardware se quedó obsoleto y no se sacaba el máximo provecho del mismo. Mientras esperaban el suministro de hardware, el cumplimiento con las normativas se ralentizó. 
 {: shortdesc}
 
-Por qué {{site.data.keyword.Bluemix_notm}}: para mejorar el análisis de riesgos, la empresa examinó los servicios {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reducir costes, para aumentar la disponibilidad a nivel mundial y, en última instancia, para acelerar el cumplimiento de normativas. Con {{site.data.keyword.containerlong_notm}} en varias regiones, sus apps de análisis se pueden contenerizar y desplegar en todo el mundo, mejorando la disponibilidad y atendiendo las regulaciones locales. Estos despliegues se aceleran con herramientas de código abierto ampliamente conocidas, que ya forman parte de {{site.data.keyword.containerlong_notm}}.
+Por qué {{site.data.keyword.cloud_notm}}: para mejorar el análisis de riesgos, la empresa examinó los servicios {{site.data.keyword.containerlong_notm}} e IBM Cloud Analytic para reducir costes, para aumentar la disponibilidad a nivel mundial y, en última instancia, para acelerar el cumplimiento de normativas. Con {{site.data.keyword.containerlong_notm}} en varias regiones, sus apps de análisis se pueden contenerizar y desplegar en todo el mundo, mejorando la disponibilidad y atendiendo las regulaciones locales. Estos despliegues se aceleran con herramientas de código abierto ampliamente conocidas, que ya forman parte de {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} y tecnologías clave:
 * [Escalado horizontal](/docs/containers?topic=containers-app#highly_available_apps)
@@ -98,18 +97,20 @@ Se utiliza {{site.data.keyword.SecureGateway}} para crear una interconexión seg
 * Los costes de informes reglamentarios se han reducido con un conjunto coherente y escalable de servicios de almacenamiento y de cálculo que incorporan {{site.data.keyword.containerlong_notm}} y {{site.data.keyword.cloudant}}.
 * Con el tiempo, las apps originales que inicialmente se transferían a la nube se han reorganizado en microservicios cooperativos que se ejecutan en {{site.data.keyword.containerlong_notm}}. Esta acción ha acelerado aún más el desarrollo y el tiempo de despliegue y ha facilitado la innovación gracias a su relativa facilidad de experimentación. También publicaron apps innovadoras con nuevas versiones de microservicios para aprovechar las condiciones del mercado y del negocio (es decir, las llamadas apps situacionales y microservicios).
 
+
 ## Una empresa tecnológica de pagos agiliza la productividad del desarrollador, desplegando herramientas habilitadas para IA para sus socios 4 veces más rápido
 {: #uc_payment_tech}
 
 Un ejecutivo de desarrollo tiene desarrolladores que utilizan herramientas locales tradicionales que ralentizan la creación de prototipos mientras esperan la adquisición de hardware.
 {: shortdesc}
 
-Por qué {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} facilita el uso de la capacidad de cálculo mediante el uso de tecnología estándar de código abierto. Después de que la empresa realizar la transición a {{site.data.keyword.containerlong_notm}}, los desarrolladores tienen acceso a herramientas que facilitan DevOps, como por ejemplo contenedores portátiles y de fácil compartición.
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} facilita el aumento de la capacidad de cálculo mediante el uso de tecnología estándar de código abierto. Después de que la empresa realizar la transición a {{site.data.keyword.containerlong_notm}}, los desarrolladores tienen acceso a herramientas que facilitan DevOps, como por ejemplo contenedores portátiles y de fácil compartición.
 
-Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo aspecto cuando agregan servicios de nube de IA a apps con una simple pulsación.
+Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo adquieren un nuevo aspecto cuando agregan servicios de nube de IA a apps con una simple pulsación.
 
 Tecnologías clave:
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
+* [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [Prevención de fraudes con {{site.data.keyword.watson}} AI](https://www.ibm.com/cloud/watson-studio)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
@@ -155,17 +156,16 @@ El desarrollo acelerado constituye una victoria clave para el ejecutivo. Con el 
 
 Además, el registro y la supervisión de las herramientas, especialmente si utilizan {{site.data.keyword.watson}} AI, se integran rápidamente en el sistema. Los desarrolladores no pierdan el tiempo creando sistemas de registro complejos, solo para poder solucionar los problemas de los sistemas activos. Un factor clave para reducir los costes de personal es que IBM gestiona Kubernetes, por lo que los desarrolladores pueden centrarse en crear mejores herramientas de pago.
 
-La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las herramientas de pago sensibles ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. El entorno nativo proporciona Trusted Compute, que verifica el hardware subyacente para protegerlo frente a una posible manipulación. Constantemente se ejecutan exploraciones en busca de vulnerabilidades y programas maliciosos.
+La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las herramientas de pago sensibles ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. Constantemente se ejecutan exploraciones en busca de vulnerabilidades y programas maliciosos.
 
 **Paso 1: Adopción de un sistema de cálculo seguro**
-* Las apps que gestionan datos altamente confidenciales se pueden realojar en {{site.data.keyword.containerlong_notm}} que se ejecuta en un entorno nativo para Trusted Compute. Trusted Compute puede verificar el hardware subyacente para protegerlo frente a una posible manipulación.
-* Migre las imágenes de máquina virtual a imágenes de contenedor que se ejecutan en {{site.data.keyword.containerlong_notm}} en {{site.data.keyword.Bluemix_notm}} público.
+* Migre las imágenes de máquina virtual a imágenes de contenedor que se ejecutan en {{site.data.keyword.containerlong_notm}} en {{site.data.keyword.Bluemix_notm}} público. 
 * Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de vulnerabilidades de imágenes, políticas, contenedores y paquetes en busca de software malicioso conocido.
 * Los costes del centro de datos privado y de capital local se reducen enormemente y se sustituyen por un modelo de cálculo de utilidad que se basa en la demanda de la carga de trabajo.
 * Aplique de forma coherente la autenticación controlada por políticas a los servicios y las API con una anotación de Ingress simple. Con la seguridad declarativa, puede garantizar la autenticación de usuarios y la validación de señales mediante {{site.data.keyword.appid_short_notm}}.
 
 **Paso 2: Operaciones y conexiones con sistemas de fondo de pago existentes**
-* Utilice IBM {{site.data.keyword.SecureGateway}} para mantener conexiones seguras con sistemas de herramientas locales.
+* Utilice IBM {{site.data.keyword.SecureGateway}} para mantener conexiones seguras con los sistemas de herramientas locales restantes.
 * Proporcionar paneles de control de DevOps estandarizados y prácticas a través de Kubernetes.
 * Después de que los desarrolladores creen y prueben las apps en sus clústeres de desarrollo y prueba, utilizan las cadenas de herramientas de {{site.data.keyword.contdelivery_full}} para desplegar las apps en clústeres de {{site.data.keyword.containerlong_notm}} en todo el mundo.
 * Las herramientas de alta disponibilidad integradas en {{site.data.keyword.containerlong_notm}} equilibran la carga de trabajo dentro de cada región geográfica e incluyen reparación automática y equilibrio de carga.
@@ -180,3 +180,5 @@ La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.conta
 * Paralelamente, el proveedor implementó iteraciones sencillas para controlar la deuda técnica existente.
 * Con el número de transacciones que procesan, pueden escalar sus operaciones de forma exponencial.
 * Al mismo tiempo, un nuevo análisis de fraude con {{site.data.keyword.watson}} ha aumentado la velocidad del proceso de detección y prevención, reduciendo el fraude 4 veces más que la media de la región.
+
+

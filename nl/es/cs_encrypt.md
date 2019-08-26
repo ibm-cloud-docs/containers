@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -45,8 +45,8 @@ _Figura: visión general del cifrado de datos en un clúster_
 1.  **etcd**: etcd es el componente del maestro que almacena los datos de los recursos de Kubernetes, como los secretos y archivos `.yaml` de configuración de objetos. Los datos de etcd se almacenan en el disco local del maestro de Kubernetes y se realiza una copia de seguridad en
 {{site.data.keyword.cos_full_notm}}. Los datos se cifran durante el tránsito a {{site.data.keyword.cos_full_notm}} y en reposo. Puede optar por habilitar el cifrado de los datos de etcd en el disco local del maestro de Kubernetes mediante la [habilitación del cifrado de {{site.data.keyword.keymanagementservicelong_notm}}](#keyprotect) para el clúster. Los datos de etcd de los clústeres que ejecutan una versión anterior de Kubernetes, de los que se hace una copia de seguridad diaria, se almacenan en un disco cifrado gestionado por IBM. Cuando los datos de etcd se envían a un pod, los datos se cifran mediante TLS para garantizar la protección y la integridad de los datos.
 2.  **Disco secundario del nodo trabajador**: el disco secundario del nodo trabajador es donde se almacenan el sistema de archivos del contenedor y las imágenes extraídas localmente. El disco se cifra con AES de 256 bits con una clave de cifrado LUKS que es exclusiva para el nodo trabajador y se almacena como un secreto en etcd, gestionado por IBM. Al volver a cargar o actualizar los nodos trabajadores, se rotan las claves LUKS.
-3.  **Almacenamiento**: puede elegir almacenar los datos mediante la [configuración de almacenamiento persistente de archivos, bloques u objetos](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Las instancias de almacenamiento de la infraestructura de IBM Cloud (SoftLayer) guardan los datos en discos cifrados, por lo que los datos en reposo se cifran. Además, si opta por el almacenamiento de objetos, también se cifrarán los datos en tránsito.
-4.  **Servicios de {{site.data.keyword.Bluemix_notm}}**: puede [integrar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/containers?topic=containers-service-binding#bind-services), como {{site.data.keyword.registryshort_notm}} o {{site.data.keyword.watson}}, con el clúster. Las credenciales del servicio se almacenan en un secreto que se guarda en etcd, al que puede acceder la app montando el secreto como un volumen o especificando el secreto como una variable de entorno en [el despliegue](/docs/containers?topic=containers-app#secret).
+3.  **Almacenamiento**: puede elegir almacenar los datos mediante la [configuración de almacenamiento persistente de archivos, bloques u objetos](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Las instancias de almacenamiento de la infraestructura de IBM Cloud guardan los datos en discos cifrados, por lo que los datos en reposo se cifran. Además, si opta por el almacenamiento de objetos, también se cifrarán los datos en tránsito.
+4.  **Servicios de {{site.data.keyword.cloud_notm}}**: puede [integrar servicios de {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-service-binding#bind-services), como {{site.data.keyword.registryshort_notm}} o {{site.data.keyword.watson}}, con el clúster. Las credenciales de servicio se almacenan en un secreto que se guarda en etcd. Su app puede acceder a estas credenciales montando el secreto como un volumen o especificando el secreto como una variable de entorno en [el despliegue](/docs/containers?topic=containers-app#secret).
 5.  **{{site.data.keyword.keymanagementserviceshort}}**: cuando [habilita {{site.data.keyword.keymanagementserviceshort}}](#keyprotect) en el clúster, se almacena una clave de cifrado de datos (DEK) empaquetada en etcd. La DEK cifra los secretos del clúster, incluyendo las credenciales de servicio y la clave LUKS. Debido a que la clave raíz está en la instancia de {{site.data.keyword.keymanagementserviceshort}}, controlará el acceso a sus secretos cifrados. Las claves de {{site.data.keyword.keymanagementserviceshort}} están protegidas por módulos de seguridad de hardware basados en la nube certificados por FIPS 140-2 Nivel 2 que protegen contra el robo de información. Para obtener más información sobre cómo funciona el cifrado de {{site.data.keyword.keymanagementserviceshort}}, consulte [Cifrado de sobre](/docs/services/key-protect/concepts?topic=key-protect-envelope-encryption#envelope-encryption).
 
 ## Cuándo utilizar secretos
@@ -60,7 +60,7 @@ Revise las siguientes tareas que requieren secretos.
 ### Adición de un servicio a un clúster
 {: #secrets_service}
 
-Cuando enlaza un servicio a un clúster, no tiene que crear un secreto para almacenar las credenciales de servicio. El secreto se crea automáticamente. Para obtener más información, consulte [Adición de servicios de {{site.data.keyword.Bluemix_notm}} a clústeres](/docs/containers?topic=containers-service-binding#bind-services).
+Cuando enlaza un servicio a un clúster, no tiene que crear un secreto para almacenar las credenciales de servicio. El secreto se crea automáticamente. Para obtener más información, consulte [Adición de servicios de {{site.data.keyword.cloud_notm}} a clústeres](/docs/containers?topic=containers-service-binding#bind-services).
 {: shortdesc}
 
 ### Cifrado del tráfico destinado a sus apps con secretos de TLS
@@ -71,13 +71,13 @@ El ALB equilibra carga de tráfico de red HTTP para las apps en su clúster. Par
 
 Además, si tiene apps que requieren el protocolo HTTPS y necesitan que el tráfico permanezca cifrado, puede utilizar secretos de autenticación mutua o unidireccional con la anotación `ssl-services`. Para obtener más información, consulte la [documentación sobre anotaciones de Ingress](/docs/containers?topic=containers-ingress_annotation#ssl-services).
 
-### Acceso a su registro con las credenciales almacenadas en un secreto de extracción de imágenes de Kubernetes
+### Acceso a su registro con las credenciales que se almacenan en un secreto de extracción de imágenes de Kubernetes
 {: #imagepullsecret}
 
 Cuando crea un clúster, los secretos correspondientes a sus credenciales de {{site.data.keyword.registrylong}} se crean automáticamente en el espacio de nombres `default` de Kubernetes. Sin embargo, debe [crear su propio secreto de extracción de imágenes para el clúster](/docs/containers?topic=containers-images#other) si
 desea desplegar un contenedor en las situaciones siguientes.
 * Desde una imagen del registro de {{site.data.keyword.registryshort_notm}} en un espacio de nombres de Kubernetes que no sea `default`.
-* Desde una imagen del registro de {{site.data.keyword.registryshort_notm}} almacenado en otra región de {{site.data.keyword.Bluemix_notm}} o cuenta de {{site.data.keyword.Bluemix_notm}}.
+* Desde una imagen del registro de {{site.data.keyword.registryshort_notm}} almacenado en otra región de {{site.data.keyword.cloud_notm}} o cuenta de {{site.data.keyword.cloud_notm}}.
 * Desde una imagen almacenada en un registro privado externo.
 
 <br />
@@ -101,7 +101,7 @@ No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagement
 Antes de empezar:
 * [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * Compruebe que el clúster ejecuta Kubernetes versión 1.11.3_1521 o posterior ejecutando `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` y comprobando el campo **Version**.
-* Asegúrese de que tiene el [rol de plataforma **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+* Asegúrese de que tiene el [rol de plataforma **Administrador** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 * Asegúrese de que la clave de API establecida para la región en la que está el clúster está autorizada para utilizar la protección por clave. Para comprobar el propietario de la clave de API cuyas credenciales están almacenadas para la región, ejecute `ibmcloud ks api-key-info --cluster <cluster_name_or_ID>`.
 
 Para habilitar {{site.data.keyword.keymanagementserviceshort}} o para actualizar la instancia o clave raíz que cifra los secretos del clúster:
@@ -170,15 +170,16 @@ No suprima las claves raíz de la instancia de {{site.data.keyword.keymanagement
 {: important}
 
 
-## Cifrado de datos mediante el uso de IBM Cloud Data Shield (Beta)
+## Cifrado de datos mediante el uso de IBM Cloud Data Shield
 {: #datashield}
 
-{{site.data.keyword.datashield_short}} se integra con la tecnología Intel® Software Guard Extensions (SGX) y la tecnología Fortanix® para que el código de carga de trabajo del contenedor de {{site.data.keyword.Bluemix_notm}} esté protegido mientras se utiliza. El código de la app y los datos se ejecutan en enclaves de CPU, que son áreas de confianza de la memoria en el nodo trabajador que protegen aspectos críticos de la app, lo que ayuda a mantener la confidencialidad del código y de los datos y evita su modificación.
+{{site.data.keyword.datashield_short}} se integra con la tecnología Intel® Software Guard Extensions (SGX) y la tecnología Fortanix® para que el código de carga de trabajo del contenedor de {{site.data.keyword.cloud_notm}} esté protegido mientras se utiliza. El código de la app y los datos se ejecutan en enclaves de CPU, que son áreas de confianza de la memoria en el nodo trabajador que protegen aspectos críticos de la app, lo que ayuda a mantener la confidencialidad del código y de los datos y evita su modificación.
 {: shortdesc}
 
-Cuando se trata de proteger los datos, el cifrado es uno de los controles más populares y eficaces. Sin embargo, los datos se deben cifrar en cada paso de su ciclo de vida. Los datos pasan por tres fases durante su ciclo de vida: datos en reposo, datos en movimiento y datos en uso. Los datos en reposo y en movimiento se suelen utilizar para proteger los datos cuando se almacenan y cuando se transportan. Un paso más con respecto a esta protección consiste en cifrar los datos que se utilizan.
+Cuando se trata de proteger los datos, el cifrado es uno de los controles más populares y eficaces. Sin embargo, los datos se deben cifrar en cada paso de su ciclo de vida para que estén realmente seguros. Durante su ciclo de vida, los datos tienen tres fases. Pueden estar en reposo, en movimiento o en uso. Los datos en reposo y en movimiento son, en general, el área en la que hay que centrarse cuando se piensa en proteger los datos. Sin embargo, después de que se inicie la ejecución de una aplicación, los datos que están en uso por parte de la CPU y la memoria son vulnerables a varios ataques. Los ataques pueden venir de internos con malas intenciones, usuarios root, credenciales comprometidas,
+ataques de cero días, intrusos en la red, etc. Un paso más con respecto a esta protección consiste en cifrar los datos que se utilizan.
 
 Si usted o su empresa necesitan mantener la confidencialidad de los datos debido a políticas internas, regulaciones gubernamentales o requisitos de conformidad del sector, esta solución podría ayudarle a moverse a la nube. Las soluciones de ejemplo incluyen instituciones financieras y sanitarias,
 o países con políticas centrales que requieren soluciones de nube local.
 
-Para empezar, suministre un clúster de nodos trabajadores nativos habilitado para SGX con el tipo de máquina mb2c.4x32 y consulte la [documentación de {{site.data.keyword.datashield_short}}.](/docs/services/data-shield?topic=data-shield-getting-started#getting-started).
+Para empezar, suministre un clúster de nodos trabajadores nativos habilitado para SGX con el tipo de máquina mb2c.4x32 y consulte [la documentación de {{site.data.keyword.datashield_short}}](/docs/services/data-shield?topic=data-shield-getting-started).

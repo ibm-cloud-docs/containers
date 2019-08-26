@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, helm
 
@@ -33,9 +33,9 @@ Puede añadir rápidamente tecnologías de código abierto a su clúster con com
 Los complementos gestionados de {{site.data.keyword.containerlong_notm}} son una forma sencilla de mejorar el clúster con prestaciones de código abierto, como por ejemplo, Istio o Knative. La versión de la herramienta de código abierto que añade al clúster se prueba en IBM y se aprueba para ser utilizada en {{site.data.keyword.containerlong_notm}}.
 
 **¿Cómo funciona la facturación y el soporte para los complementos gestionados?** </br>
-Los complementos gestionados se integran completamente en la organización de soporte de {{site.data.keyword.Bluemix_notm}}. Si tiene alguna pregunta o algún problema con el uso de los complementos gestionados, puede utilizar uno de los canales de soporte de {{site.data.keyword.containerlong_notm}}. Para obtener más información, consulte [Obtención de ayuda y soporte](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Los complementos gestionados se integran completamente en la organización de soporte de {{site.data.keyword.cloud_notm}}. Si tiene alguna pregunta o algún problema con el uso de los complementos gestionados, puede utilizar uno de los canales de soporte de {{site.data.keyword.containerlong_notm}}. Para obtener más información, consulte [Obtención de ayuda y soporte](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-Si la herramienta que añade a su clúster implica costes, estos costes se integran automáticamente y se listan como parte de la facturación de {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.Bluemix_notm}} determina el ciclo de facturación según cuándo haya habilitado el complemento en el clúster.
+Si la herramienta que añade a su clúster implica costes, estos costes se integran automáticamente y se listan como parte de la facturación de {{site.data.keyword.containerlong_notm}}. {{site.data.keyword.cloud_notm}} determina el ciclo de facturación según cuándo haya habilitado el complemento en el clúster.
 
 **¿Qué limitaciones debo considerar?** </br>
 Si ha instalado el [controlador de admisiones del gestor de seguridad de imágenes de contenedor](/docs/services/Registry?topic=registry-security_enforce#security_enforce) en el clúster, no puede habilitar los complementos gestionados en el clúster.
@@ -53,7 +53,7 @@ Para obtener más información sobre los requisitos previos de cada complemento,
 ## Actualización de complementos gestionados
 {: #updating-managed-add-ons}
 
-Las versiones de cada complemento gestionado se prueban en {{site.data.keyword.Bluemix_notm}} y se aprueban para su uso en {{site.data.keyword.containerlong_notm}}. Para actualizar los componentes de un complemento a la versión más reciente soportada por {{site.data.keyword.containerlong_notm}}, siga los pasos siguientes.
+Las versiones de cada complemento gestionado se prueban en {{site.data.keyword.cloud_notm}} y se aprueban para su uso en {{site.data.keyword.containerlong_notm}}. Para actualizar los componentes de un complemento a la versión más reciente soportada por {{site.data.keyword.containerlong_notm}}, siga los pasos siguientes.
 {: shortdesc}
 
 1. Compruebe si tiene la última versión de los complementos. Se pueden actualizar todos los complementos marcados con `* (<version> latest)`.
@@ -66,8 +66,8 @@ Las versiones de cada complemento gestionado se prueban en {{site.data.keyword.B
    ```
    OK
    Name      Version
-   istio     1.1.5
-   knative   0.5.2
+   istio     1.2.2
+   knative   0.7.1
    ```
    {: screen}
 
@@ -182,6 +182,6 @@ Las versiones de cada complemento gestionado se prueban en {{site.data.keyword.B
 13. Opcional para Istio: si utiliza secciones de TLS en los archivos de configuración de pasarela, debe suprimir y volver a crear las pasarelas para que Envoy pueda acceder a los secretos.
   ```
   kubectl delete gateway mygateway
-  kubectl create -f mygateway.yaml
+  kubectl apply -f mygateway.yaml
   ```
   {: pre}

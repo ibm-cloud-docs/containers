@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,25 +23,25 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Casos de uso de {{site.data.keyword.Bluemix_notm}} en el entorno gubernamental
+# Casos de uso de {{site.data.keyword.cloud_notm}} en el entorno gubernamental
 {: #cs_uc_gov}
 
-En estos casos de uso se describe cómo las cargas de trabajo de {{site.data.keyword.containerlong_notm}} se benefician de la nube pública. Estas cargas de trabajo tienen aislamiento con Trusted Compute, se encuentran en regiones globales para la soberanía de datos, utilizan machine learning de Watson en lugar del código net-new y se conectan a bases de datos locales.
+En estos casos de uso se describe cómo las cargas de trabajo de {{site.data.keyword.containerlong}} se benefician de la nube pública. Estas cargas de trabajo tienen aislamiento en regiones globales para la soberanía de datos, utilizan aprendizaje automático (machine learning)
+de Watson en lugar del código net-new y se conectan a bases de datos locales.
 {: shortdesc}
 
 ## El gobierno regional mejora la colaboración y la velocidad de desarrolladores de la comunidad que combinan datos públicos y privados
 {: #uc_data_mashup}
 
-Un ejecutivo de un programa de datos de gobierno abierto necesita compartir datos públicos con la comunidad y con el sector privado, pero los datos están bloqueados en un sistema monolítico local.
+Un ejecutivo de un programa de datos de gobierno abierto necesita compartir datos públicos con la comunidad y con el sector privado, pero los datos están bloqueados en un sistema monolítico local. 
 {: shortdesc}
 
-Por qué {{site.data.keyword.Bluemix_notm}}: con {{site.data.keyword.containerlong_notm}}, el ejecutivo proporciona el valor transformador de los datos públicos y privados combinados. Paralelamente, el servicio ofrece una plataforma de nube pública para refactorizar y exponer los microservicios de las apps locales monolíticas. Además, la nube pública permite a los gobiernos y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración.
+Por qué {{site.data.keyword.cloud_notm}}: con {{site.data.keyword.containerlong_notm}}, el ejecutivo proporciona el valor transformador de los datos públicos y privados combinados. Paralelamente, el servicio ofrece una plataforma de nube pública para refactorizar y exponer los microservicios de las apps locales monolíticas. Además, la nube pública permite a los gobiernos y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración.
 
 Tecnologías clave:    
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [Se proporciona acceso a datos públicos con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about)
+* [Se proporciona acceso a datos públicos con {{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-about-ibm-cloud-object-storage)
 * [Servicios IBM Cloud Analytics de tipo conectar y usar](https://www.ibm.com/cloud/analytics)
 
 **Contexto: el gobierno mejora la colaboración y la velocidad con los desarrolladores de la comunidad que combinan datos públicos y privados**
@@ -58,18 +58,18 @@ Para reducir la burocracia y transformar la relación del gobierno con su electo
 
 * DATOS ABIERTOS - almacén de datos en el que ciudadanos, agencias gubernamentales y empresas acceden, comparten y mejoran datos libremente
 * API ABIERTAS – una plataforma de desarrollo en la que todos los participantes de la comunidad contribuyen y reutilizan las API
-* INNOVACIÓN ABIERTA - un conjunto de servicios en la nube que permiten a los desarrolladores incorporar innovación en lugar de tenerla que codificar manualmente
+* INNOVACIÓN ABIERTA - un conjunto de servicios en la nube que permiten a los desarrolladores incorporar innovación en lugar de tenerla que programar manualmente
 
 Para empezar, el gobierno utiliza {{site.data.keyword.cos_full_notm}} para almacenar sus datos públicos en la nube. Este almacén es de uso y reutilización libres, lo puede compartir cualquiera y solo está sujeto a atribuciones y comparticiones similares. Los datos confidenciales se limpian antes de que se coloquen en la nube. Además, se configuran controles de acceso de forma que la nube limite el nuevo almacén de datos, en el que la comunidad puede mostrar pruebas de concepto de mejora de los datos existentes.
 
 El siguiente paso del gobierno en lo referente a la combinación de datos públicos y privados consiste en establecer una economía de API alojada en {{site.data.keyword.apiconnect_long}}. Allí la comunidad y los desarrolladores de las empresas facilitar el acceso a los datos en forma de API. Sus objetivos son disponer de API REST públicas para permitir la interoperatividad y para acelerar la integración de apps. Utilizan IBM {{site.data.keyword.SecureGateway}} para volver a conectar con fuentes de datos privadas locales.
 
-Por último, las apps basadas en estas API compartidas se alojan en {{site.data.keyword.containerlong_notm}}, donde resulta fácil utilizar clústeres. Con este entorno, desarrolladores de la comunidad, del sector privado y del gobierno pueden crear fácilmente apps en colaboración. En resumen, los desarrolladores tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
+Por último, las apps basadas en estas API compartidas se alojan en {{site.data.keyword.containerlong_notm}}, donde resulta fácil utilizar clústeres. Con este entorno, desarrolladores de la comunidad, del sector privado y del gobierno pueden crear fácilmente apps en colaboración. En resumen, los desarrolladores tienen que centrarse en escribir código en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
 * Supervisión del estado y la recuperación de los nodos trabajadores
 * Suministro de cálculo global, para que los desarrolladores no tengan que hacer frente a la infraestructura de las regiones de todo el mundo donde necesitan que se encuentren las cargas de trabajo y los datos
 
-Sin embargo, el traslado de las cargas de trabajo de cálculo a {{site.data.keyword.Bluemix_notm}} no es suficiente. El gobierno también debe transformar métodos y procesos. Mediante la adopción de las prácticas del método IBM Garage Method, el proveedor puede implementar un proceso de entrega ágil e iterativo que dé soporte a las prácticas modernas de DevOps, como Continuous Integration and Delivery (CI/CD).
+Sin embargo, el traslado de las cargas de trabajo de cálculo a {{site.data.keyword.cloud_notm}} no es suficiente. El gobierno también debe transformar métodos y procesos. Mediante la adopción de las prácticas del método IBM Garage Method, el proveedor puede implementar un proceso de entrega ágil e iterativo que dé soporte a las prácticas modernas de DevOps, como Continuous Integration and Delivery (CI/CD).
 
 Gran parte del propio proceso de CI/CD se automatiza con {{site.data.keyword.contdelivery_full}} en la nube. El proveedor puede definir cadenas de herramientas de flujos de trabajo para preparar imágenes de contenedor, comprobar si hay vulnerabilidades y desplegarlas en el clúster de Kubernetes.
 
@@ -100,7 +100,7 @@ Solución técnica:
 * Adoptar las prácticas de desarrollo ágiles e iterativas de IBM Garage Method para permitir releases frecuentes de características, parches y arreglos sin ocasionar tiempos de inactividad.
 * Tanto si los desarrolladores pertenecen al sector público como si son del sector privado, {{site.data.keyword.contdelivery_full}} les ayuda a suministrar rápidamente una cadena de herramientas integrada utilizando plantillas que se pueden personalizar y compartir.
 * Después de que los desarrolladores creen y prueben las apps en sus clústeres de desarrollo y prueba, utilizan las cadenas de herramientas de {{site.data.keyword.contdelivery_full}} para desplegar las apps en clústeres de producción.
-* Con Watson AI, machine learning y las herramientas de deep learning disponibles en el catálogo de {{site.data.keyword.Bluemix_notm}}, los desarrolladores se centran en los problemas del dominio. En lugar de un código ML exclusivo personalizado, se incorpora a las apps lógica ML con enlaces a servicios.
+* Con Watson AI, machine learning y las herramientas de deep learning disponibles en el catálogo de {{site.data.keyword.cloud_notm}}, los desarrolladores se centran en los problemas del dominio. En lugar de un código ML exclusivo personalizado, se incorpora a las apps lógica ML con enlaces a servicios.
 
 **Resultados**
 * La coordinación entre el sector público y privado, que suele ser un proceso lento, permite el desarrollo de apps en semanas en lugar de en meses. Estas asociaciones de desarrollo ahora ofrecen funciones y correcciones de errores hasta 10 veces por semana.
@@ -114,7 +114,7 @@ Solución técnica:
 Los ejecutivos de TI de una compañía naviera privada y el puerto, cuyo funcionamiento controla el gobierno, tienen que conectar, proporcionar visibilidad e intercambiar de forma segura información portuaria. Pero no existía ningún sistema unificado para conectar la información del puerto público y los manifiestos de transporte marítimo privados.
 {: shortdesc}
 
-Por qué {{site.data.keyword.Bluemix_notm}}: {{site.data.keyword.containerlong_notm}} permite al gobierno y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración. Los contenedores proporcionaron una plataforma compartible en la que tanto el puerto como la compañía naviera confiaban y sabían que la información compartida estaba alojada en una plataforma segura. Y dicha plataforma se puede escalar cuando se pasa de pequeños sistemas de desarrollo y prueba a sistemas de producción. Las cadenas de herramientas abiertas también aceleraron el desarrollo mediante la automatización de los procesos de creación, prueba y despliegue.
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} permite al gobierno y a las asociaciones públicas utilizar servicios de nube externos y herramientas de código abierto que facilitan la colaboración. Los contenedores proporcionaron una plataforma compartible en la que tanto el puerto como la compañía naviera confiaban y sabían que la información compartida estaba alojada en una plataforma segura. Y dicha plataforma se puede escalar cuando se pasa de pequeños sistemas de desarrollo y prueba a sistemas de producción. Las cadenas de herramientas abiertas también aceleraron el desarrollo mediante la automatización de los procesos de creación, prueba y despliegue.
 
 Tecnologías clave:    
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -140,7 +140,7 @@ Por lo tanto, crean una asociación dedicada a soluciones para el sistema de com
 
 Los desarrolladores comenzaron por desplegar sus apps en contenedores con {{site.data.keyword.containerlong_notm}}. Crearon clústeres para un entorno de desarrollo compartido que permiten a los desarrolladores de todo el mundo desplegar de forma colaborativa mejoras de apps rápidamente. Los contenedores permiten que cada equipo de desarrollo utilice el lenguaje que desee.
 
-La seguridad es lo primero: el ejecutivo de TI eligió Trusted Compute para el servidor nativo donde alojar los clústeres. Con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo con datos confidenciales ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. El entorno nativo proporciona Trusted Compute, que verifica el hardware subyacente para protegerlo frente a una posible manipulación.
+La seguridad es lo primero: los ejecutivos de TI eligieron clústeres nativos de bajo nivel. Con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo con datos confidenciales ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública.
 
 Debido a que la compañía naviera también quiere trabajar con otros puertos, la seguridad de las apps resulta crucial. Los manifiestos de transporte marítimo la información aduanera son altamente confidenciales. Desde el punto de vista de la seguridad, Vulnerability Advisor ofrece los siguientes escaneos:
 * Escaneos de vulnerabilidad de imágenes
@@ -150,14 +150,14 @@ Debido a que la compañía naviera también quiere trabajar con otros puertos, l
 
 Paralelamente, {{site.data.keyword.iamlong}} ayuda a controlar quién tiene nivel de acceso a los recursos.
 
-Los desarrolladores se centran en los problemas del dominio, utilizando las herramientas existentes: los desarrolladores, en lugar de escribir código de registro y supervisión exclusivo, incorporan apps enlazando los servicios de {{site.data.keyword.Bluemix_notm}} a los clústeres. Los desarrolladores también se liberan de las tareas de gestión de la infraestructura, ya que IBM se ocupa de las actualizaciones de Kubernetes y de la infraestructura, de la seguridad y de más.
+Los desarrolladores se centran en los problemas del dominio, utilizando las herramientas existentes: los desarrolladores, en lugar de escribir código de registro y supervisión exclusivo, incorporan apps enlazando los servicios de {{site.data.keyword.cloud_notm}} a los clústeres. Los desarrolladores también se liberan de las tareas de gestión de la infraestructura, ya que IBM se ocupa de las actualizaciones de Kubernetes y de la infraestructura, de la seguridad y de más.
 
 **Modelo de solución**
 
 Cálculo según demanda, almacenamiento y kits de inicio de nodos que se ejecutan en la nube pública con acceso seguro a los datos de transporte marítimo en todo el mundo, según sea necesario. El cálculo de los clústeres es a prueba de manipulaciones y está aislado en entornos nativos.  
 
 Solución técnica:
-* {{site.data.keyword.containerlong_notm}} con Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * IBM {{site.data.keyword.SecureGateway}}
@@ -187,3 +187,5 @@ Solución técnica:
 * Los clientes de transporte marítimo y los funcionarios del gobierno tienen acceso a datos de manifiesto y pueden compartir datos de aduanas, a la vez que cumplen con las regulaciones locales.
 * La compañía naviera se beneficia de una mejor gestión de la logística en la cadena de suministro: reducción de costes y autorizaciones rápidas.
 * El 99% son declaraciones digitales y el 90% de las importaciones se procesan sin intervención humana.
+
+

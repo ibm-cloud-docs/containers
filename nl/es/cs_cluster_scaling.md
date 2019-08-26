@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, node scaling
 
@@ -23,7 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 {:gif: data-image-type='gif'}
-
 
 
 # Escalado de clústeres
@@ -56,7 +55,7 @@ El programa de escalado automático de clústeres ajusta el número de nodos tra
 **¿Cómo funciona el escalado?**<br>
 En general, el programa de escalado automático de clústeres calcula el número de nodos trabajadores que necesita el clúster para ejecutar su carga de trabajo. El escalado del clúster depende de muchos factores, incluidos los siguientes.
 *   El tamaño de nodo trabajador mínimo y máximo por zona que se ha establecido.
-*   Las solicitudes de recursos de pod pendientes y determinados metadatos que el usuario asocia con la carga de trabajo, como por ejemplo antiafinidad, etiquetas para colocar pods únicamente en determinados tipos de máquina o [presupuestos de interrupción de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
+*   Las solicitudes de recursos de pod pendientes y determinados metadatos que el usuario asocia con la carga de trabajo, como por ejemplo antiafinidad, etiquetas para colocar pods únicamente en determinadas versiones o [presupuestos de interrupción de pod ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/).
 *   Las agrupaciones de nodos trabajadores que gestiona el programa de escalado automático de clústeres, potencialmente en las zonas de un [clúster multizona](/docs/containers?topic=containers-ha_clusters#multizone).
 *   Los [valores de diagrama de Helm personalizados](#ca_chart_values) que hay establecidos, como por ejemplo omitir nodos trabajadores para su supresión si utilizan almacenamiento local.
 
@@ -86,14 +85,14 @@ Examine la imagen siguiente para ver un ejemplo de aumento o reducción de núme
 _Figura: Escalado automático de un clúster._
 ![GIF de escalado automático de un clúster](images/cluster-autoscaler-x3.gif){: gif}
 
-1.  El clúster tiene cuatro nodos trabajadores en dos agrupaciones de nodos trabajadores distribuidas en dos zonas. Cada agrupación tiene un nodo trabajador por zona, pero la **Agrupación de nodos trabajadores A** tiene el tipo de máquina `u2c.2x4` y la **Agrupación de nodos trabajadores B** tiene el tipo de máquina `b2c.4x16`. Los recursos totales de cálculo son de aproximadamente 10 núcleos (2 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores A** y 4 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores B**). Actualmente el clúster ejecuta una carga de trabajo que solicita 6 de estos 10 núcleos. Los recursos de cálculo adicionales se toman en cada nodo trabajador por medio de los [recursos reservados](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) necesarios para ejecutar el clúster, los nodos trabajadores y cualquier complemento, como por ejemplo el programa de escalado automático de clústeres.
+1.  El clúster tiene cuatro nodos trabajadores en dos agrupaciones de nodos trabajadores distribuidas en dos zonas. Cada agrupación tiene un nodo trabajador por zona, pero la **Agrupación de nodos trabajadores A** tiene la versión `u2c.2x4` y la **Agrupación de nodos trabajadores B** tiene la versión `b2c.4x16`. Los recursos totales de cálculo son de aproximadamente 10 núcleos (2 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores A** y 4 núcleos x 2 nodos trabajadores para la **Agrupación de nodos trabajadores B**). Actualmente el clúster ejecuta una carga de trabajo que solicita 6 de estos 10 núcleos. Los recursos de cálculo adicionales se toman en cada nodo trabajador por medio de los [recursos reservados](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) necesarios para ejecutar el clúster, los nodos trabajadores y cualquier complemento, como por ejemplo el programa de escalado automático de clústeres.
 2.  El programa de escalado automático de clústeres está configurado para gestionar ambas agrupaciones de nodos trabajadores con el siguiente tamaño mínimo y máximo por zona:
     *  **Agrupación de nodos trabajadores A**: `minSize=1`, `maxSize=5`.
     *  **Agrupación de nodos trabajadores B**: `minSize=1`, `maxSize=2`.
 3.  El usuario planifica despliegues que requieran 14 réplicas adicionales de pod de una app que solicita un núcleo de CPU por réplica. Se puede desplegar una réplica de pod en los recursos actuales, pero los otros 13 están pendientes.
 4.  El programa de escalado automático de clústeres aumenta el número de nodos trabajadores dentro de estas restricciones para dar soporte a las solicitudes de recursos de las 13 réplicas de pod adicionales.
     *  **Agrupación de nodos trabajadores A**: Se añaden siete nodos trabajadores en un método round robin de la forma más uniforme posible entre las zonas. Los nodos trabajadores aumentan la capacidad de cálculo del clúster en aproximadamente 14 núcleos (2 núcleos x 7 nodos trabajadores).
-    *  **Agrupación de nodos trabajadores B**: Se añaden dos nodos trabajadores de forma uniforme entre las zonas, con lo que se alcanza el `maxSize` de 2 nodos trabajadores por zona. Los nodos trabajadores aumentan la capacidad del clúster en aproximadamente 8 núcleos (4 núcleos x 2 nodos trabajadores).
+    *  **Agrupación de nodos trabajadores B**: Se añaden dos nodos trabajadores de forma uniforme entre las zonas, con lo que se alcanza el `maxSize` de dos nodos trabajadores por zona. Los nodos trabajadores aumentan la capacidad del clúster en aproximadamente 8 núcleos (4 núcleos x 2 nodos trabajadores).
 5.  Las solicitudes de los 20 con 1 núcleo se distribuyen del siguiente modo entre los nodos trabajadores. Debido a que los nodos trabajadores tienen reservas de recursos, así como pods que se ejecutan para cubrir las características predeterminadas del clúster, los pods correspondientes a la carga de trabajo no pueden utilizar todos los recursos de cálculo disponibles de un nodo trabajador. Por ejemplo, aunque los nodos trabajadores `b2c.4x16` tienen cuatro núcleos, solo se pueden planificar en los nodos trabajadores tres pods que solicitan un mínimo de un núcleo cada uno.
     <table summary="Una tabla en la que se describe la distribución de la carga de trabajo en un clúster escalado.">
     <caption>Distribución de la carga de trabajo en un clúster escalado.</caption>
@@ -208,14 +207,14 @@ Instale el plugin del programa de escalado automático de clústeres de {{site.d
 **Antes de empezar**:
 
 1.  [Instale los plugins necesarios y la CLI](/docs/cli?topic=cloud-cli-getting-started):
-    *  CLI de {{site.data.keyword.Bluemix_notm}} (`ibmcloud`)
+    *  CLI de {{site.data.keyword.cloud_notm}} (`ibmcloud`)
     *  Plugin {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`)
     *  Plugin {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`)
     *  Kubernetes (`kubectl`)
     *  Helm (`helm`)
 2.  [Cree un clúster estándar](/docs/containers?topic=containers-clusters#clusters_ui) que ejecute **Kubernetes versión 1.12 o posterior**.
 3.   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-4.  Confirme que las credenciales de {{site.data.keyword.Bluemix_notm}} Identity and Access Management están almacenadas en el clúster. El programa de escalado automático de clústeres utiliza este secreto para autenticar las credenciales. Si falta el secreto, [créelo restableciendo las credenciales](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
+4.  Confirme que las credenciales de {{site.data.keyword.cloud_notm}} Identity and Access Management están almacenadas en el clúster. El programa de escalado automático de clústeres utiliza este secreto para autenticar las credenciales. Si falta el secreto, [créelo restableciendo las credenciales](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions).
     ```
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
@@ -404,7 +403,7 @@ primero deberá inhabilitar cada agrupación de nodos trabajadores en el mapa de
      {"name": "default","minSize": 1,"maxSize": 2,"enabled":false},
      {"name": "Pool2","minSize": 2,"maxSize": 5,"enabled":true}
     ]</pre><br><br>
-    **Nota**: El programa de escalado automático de clústeres solo puede escalar las agrupaciones de nodo trabajadores que tienen la etiqueta `ibm-cloud.kubernetes.io/worker-pool-id`. Para comprobar si la agrupación de nodos trabajadores tiene la etiqueta necesaria, ejecute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.</td>
+    <p class="note">El programa de escalado automático de clústeres solo puede escalar las agrupaciones de nodo trabajadores que tienen la etiqueta `ibm-cloud.kubernetes.io/worker-pool-id`. Para comprobar si la agrupación de nodos trabajadores tiene la etiqueta necesaria, ejecute `ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels`. Si la agrupación de nodos trabajadores no tiene la etiqueta necesaria, [añada una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) y utilice esta agrupación de nodos trabajadores con el programa de escalado automático de clústeres.</p></td>
     </tr>
     <tr>
     <td id="parameter-minsize" headers="parameter-with-default">`"minSize": 1`</td>
@@ -491,7 +490,7 @@ Personalice los valores del programa de escalado automático de clústeres, como
       withLocalStorage: true
       withSystemPods: true
     ```
-    {: codeblock}
+    {: screen}
 
     <table>
     <caption>Valores de configuración del programa de escalado automático de clústeres</caption>
@@ -616,7 +615,7 @@ Para limitar un despliegue de pod a una agrupación de trabajadores específica 
 
 1.  Cree la agrupación de nodos trabajadores con la etiqueta que desea utilizar. Por ejemplo, la etiqueta podría ser `app: nginx`.
     ```
-    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <machine_type> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
+    ibmcloud ks worker-pool-create --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --labels <key>=<value>
     ```
     {: pre}
 2.  [Añada la agrupación de nodos trabajadores a la configuración del programa de escalado automático de clústeres](#ca_cm).
@@ -845,6 +844,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
     kind: ConfigMap
     ...
     ```
+    {: screen}
 2.  Obtenga una lista de los diagramas de Helm existentes y anote el nombre del programa de escalado automático de clústeres.
     ```
     helm ls

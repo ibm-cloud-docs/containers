@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 
 # Planificación de redes internas y externas del clúster para las apps
@@ -48,7 +49,7 @@ El descubrimiento de servicios de Kubernetes proporciona apps con conexión de r
 **Servicios**</br>
 A todas las pods que se despliegan en un nodo trabajador se les asigna una dirección IP privada dentro del rango 172.30.0.0/16 y se direccionan únicamente entre nodos trabajadores. Para evitar conflictos, no utilice este rango de IP en ningún otro nodo que se vaya a comunicar con los nodos trabajadores. Los nodos trabajadores y los pods pueden comunicarse de forma segura a través de la red privada utilizando direcciones IP privadas. Sin embargo, cuando un pod se cuelga o cuando es necesario volver a crear un nodo trabajador, se signa una nueva dirección IP privada.
 
-En lugar de intentar realizar un seguimiento de direcciones IP privadas cambiantes para las apps que deben ofrecer una alta disponibilidad, puede utilizar funciones integradas de descubrimiento de servicios de Kubernetes para exponer las apps como servicios. Un servicio de Kubernetes agrupa un conjunto de pods y proporciona una conexión de red a estos pods. El servicio selecciona los pods de destino a los que direcciona el tráfico a través de etiquetas.
+En lugar de intentar realizar un seguimiento de direcciones IP privadas cambiantes para las apps que deben ofrecer una alta disponibilidad, puede utilizar funciones integradas de descubrimiento de servicios de Kubernetes para exponer las apps como servicios. Un servicio de Kubernetes agrupa un conjunto de pods y proporciona una conexión de red a estos pods. El servicio selecciona los pods de destino a los que direcciona el tráfico, a través de etiquetas.
 
 Un servicio proporciona conectividad entre los pods de app y los demás servicios del clúster sin exponer la dirección IP privada real de cada pod. A los servicios se les asigna una dirección IP interna, la `clusterIP`, a la que solo se puede acceder dentro del clúster. Esta dirección IP está vinculada al servicio durante toda su vida útil y no cambia mientras existe el servicio.
 * Clústeres más recientes: en los clústeres creados después de febrero de 2018 en la zona dal13 o después de octubre de 2017 en cualquier otra zona, a los servicios se les asigna una IP de las 65.000 dentro del rango 172.21.0.0/16.
@@ -166,27 +167,27 @@ En el momento de exponer una app con un servicio de red, dispone de distintas op
 <td>NLB v1.0 (+ nombre de host)</td>
 <td>Equilibrio de carga básico que expone la app con una dirección IP o un nombre de host</td>
 <td>Exponer rápidamente una app al público con una dirección IP o un nombre de host que admita terminación SSL.</td>
-<td><ol><li>Crear un equilibrador de carga de red pública (NLB) 1.0 en un clúster [de una sola zona](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
+<td><ol><li>Crear un equilibrador de carga de red pública (NLB) 1.0 en un clúster [de una sola zona](/docs/containers?topic=containers-loadbalancer#lb_config) o [multizona](/docs/containers?topic=containers-loadbalancer#multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
 </tr><tr>
 <td>NLB v2.0 (+ nombre de host)</td>
 <td>Equilibrio de carga de DSR que expone la app con una dirección IP o un nombre de host</td>
 <td>Exponer una app que pueda recibir altos niveles de tráfico al público con una dirección IP o un nombre de host que admita terminación SSL.</td>
-<td><ol><li>Completar los [requisitos previos](/docs/containers?topic=containers-loadbalancer#ipvs_provision).</li><li>Crear un NLB 2.0 público en un clúster [de una sola zona](/docs/containers?topic=containers-loadbalancer#ipvs_single_zone_config) o [multizona](/docs/containers?topic=containers-loadbalancer#ipvs_multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
+<td><ol><li>Completar los [requisitos previos](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Crear un NLB 2.0 público en un clúster [de una sola zona](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) o [multizona](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config).</li><li>Opcionalmente, [registrar](/docs/containers?topic=containers-loadbalancer_hostname) un nombre de host y comprobaciones de estado.</li></ol></td>
 </tr><tr>
 <td>Istio + nombre de host NLB</td>
 <td>Equilibrio de carga básico que expone la app con un nombre de host y utiliza reglas de direccionamiento de Istio</td>
 <td>Implementar reglas postdireccionamiento de Istio, como por ejemplo reglas para versiones distintas de un microservicio de app y exponer una app gestionada por Istio con un nombre de host público.</li></ol></td>
-<td><ol><li>Instalar el [complemento gestionado de Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Incluir la app en el [red de servicios de Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registrar el equilibrador de carga de Istio predeterminado con [un nombre de host](/docs/containers?topic=containers-istio#istio_expose_link).</li></ol></td>
+<td><ol><li>Instalar el [complemento gestionado de Istio](/docs/containers?topic=containers-istio#istio_install).</li><li>Incluir la app en el [red de servicios de Istio](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Registrar el equilibrador de carga de Istio predeterminado con [un nombre de host](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
 </tr><tr>
 <td>ALB de Ingress</td>
 <td>Equilibrio de carga HTTPS que expone la app con un nombre de host y utiliza reglas de direccionamiento personalizadas</td>
 <td>Implementar reglas de direccionamiento personalizadas y terminación de SSL para varias apps.</td>
 <td><ol><li>Crear un [servicio de Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) para el ALB público.</li><li>Personalizar las reglas de direccionamiento de ALB con [anotaciones](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
 </tr><tr>
-<td>Traiga su propio controlador de Ingress + nombre de host ALB</td>
+<td>Traiga su propio controlador de Ingress + nombre de host ALB o NLB</td>
 <td>Equilibrio de carga HTTPS con un controlador de Ingress personalizado que expone la app con el nombre de host de ALB proporcionado por IBM y utiliza reglas de direccionamiento personalizadas</td>
 <td>Implementar reglas de direccionamiento personalizadas u otros requisitos específicos para el ajuste personalizado para varias apps.</td>
-<td>[Desplegar el controlador de Ingress y optimizar el nombre de host de ALB proporcionado por IBM](/docs/containers?topic=containers-ingress#user_managed).</td>
+<td>[Desplegar el controlador de Ingress y optimizar el nombre de host proporcionado por IBM](/docs/containers?topic=containers-ingress-user_managed).</td>
 </tr>
 </tbody>
 </table>
@@ -207,10 +208,10 @@ Al desplegar una app en un clúster de Kubernetes en {{site.data.keyword.contain
 
 Como ejemplo, supongamos que ha creado un NLB privado para la app. A este NLB privado se puede acceder mediante:
 * Cualquier pod en ese mismo clúster.
-* Cualquier pod en cualquier clúster de la misma cuenta de {{site.data.keyword.Bluemix_notm}}.
-* Si tiene habilitado [VRF o la distribución de VLAN](/docs/containers?topic=containers-subnets#basics_segmentation), cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.Bluemix_notm}}.
-* Si no está en la cuenta de {{site.data.keyword.Bluemix_notm}} sino todavía detrás del cortafuegos de la empresa, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
-* Si está en una cuenta de {{site.data.keyword.Bluemix_notm}} distinta, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
+* Cualquier pod en cualquier clúster de la misma cuenta de {{site.data.keyword.cloud_notm}}.
+* Si tiene habilitado [VRF o la distribución de VLAN](/docs/containers?topic=containers-subnets#basics_segmentation), cualquier sistema que esté conectado a cualquiera de las VLAN privadas de la misma cuenta de {{site.data.keyword.cloud_notm}}.
+* Si no está en la cuenta de {{site.data.keyword.cloud_notm}} sino todavía detrás del cortafuegos de la empresa, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
+* Si está en una cuenta de {{site.data.keyword.cloud_notm}} distinta, cualquier sistema a través de una conexión VPN a la subred donde se encuentra la IP del NLB.
 
 Para hacer que una app esté disponible sólo a través de una red privada, elija un patrón de despliegue de equilibrio de carga en base a la configuración de VLAN del clúster:
 * [Configuración de VLAN pública y privada](#private_both_vlans)

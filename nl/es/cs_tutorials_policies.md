@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -57,7 +57,7 @@ Esta guía de aprendizaje está destinada a los desarrolladores de software y ad
 - [Cree un clúster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Defina su clúster como destino de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Instale y configure la CLI de Calico](/docs/containers?topic=containers-network_policies#cli_install).
-- Asegúrese de tener las políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM siguientes para
+- Asegúrese de tener las políticas de acceso de {{site.data.keyword.cloud_notm}} IAM siguientes para
 {{site.data.keyword.containerlong_notm}}:
     - [Cualquier rol de plataforma](/docs/containers?topic=containers-users#platform)
     - [El rol de servicio de **Escritor** o de **Gestor**](/docs/containers?topic=containers-users#platform)
@@ -198,9 +198,9 @@ En la siguiente imagen se muestra cómo la app de servidor web se expone a Inter
         Salida de ejemplo:
         ```
         ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
-        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.6_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.176.48.67   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w2   169.xx.xxx.xxx   10.176.48.79   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
+        kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w3   169.xx.xxx.xxx   10.176.48.78   u3c.2x4.encrypted   normal   Ready    dal10   1.13.8_1513*   
         ```
         {: screen}
 
@@ -360,7 +360,7 @@ A continuación, puede crear y aplicar políticas de Calico al tráfico de la li
 Supongamos que ahora decide bloquear por completo el tráfico al clúster de la empresa PR y probar el acceso colocando en la lista blanca la dirección IP de su propio sistema.
 {: shortdesc}
 
-En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico entrante al NLB que expone la app. A continuación, puede crear una política que contenga la dirección IP de su sistema en la lista blanca. Al final de la Lección 3, todo el tráfico dirigido a los puertos de nodo públicos y al NLB se bloqueará y solo se permitirá el tráfico desde la IP del sistema de la lista blanca:
+En primer lugar, además de los puertos de nodo, debe bloquear todo el tráfico entrante al NLB que expone la app. A continuación, puede crear una política que contenga la dirección IP de su sistema en la lista blanca. Al final de la Lección 3, todo el tráfico dirigido a los puertos de nodo públicos y al NLB se bloquea y solo se permite el tráfico desde la IP del sistema de la lista blanca:
 
 <img src="images/cs_tutorial_policies_L3.png" width="550" alt="La app de servidor web se expone sólo mediante el NLB público a la IP del sistema." style="width:500px; border-style: none"/>
 
@@ -480,10 +480,10 @@ En este punto, todo el tráfico dirigido al NLB y a los puertos de nodo público
 ## Lección 4: Denegar el tráfico de entrada al NLB procedente de las IP de la lista negra
 {: #lesson4}
 
-En la lección anterior, ha bloqueado todo el tráfico y solo ha colocado en la lista blanca unas pocas IP. Este caso de ejemplo funciona bien para fines de prueba cuando se desea limitar el acceso a unas pocas direcciones IP de origen controladas. Sin embargo, la empresa PR tiene apps que tienen que estar ampliamente disponibles para el público. Debe asegurarse de que se permita todo el tráfico, excepto el tráfico inusual que ve desde unas pocas direcciones IP. La creación de una lista negra resulta útil en un escenario como este, porque puede ayudarle a evitar un ataque desde un pequeño conjunto de direcciones IP.
+En la lección anterior, ha bloqueado todo el tráfico y solo ha colocado en la lista blanca unas pocas IP. Este caso de ejemplo funciona bien para fines de prueba cuando se desea limitar el acceso a unas pocas direcciones IP de origen controladas. Sin embargo, la empresa PR tiene apps que tienen que estar ampliamente disponibles para el público. Debe asegurarse de que se permita todo el tráfico, excepto el tráfico inusual que ve desde unas pocas direcciones IP. La creación de una lista negra resulta útil en una situación como esta, porque puede ayudarle a evitar un ataque desde un pequeño conjunto de direcciones IP.
 {: shortdesc}
 
-En esta lección, probará la creación de una lista negra que bloquee el tráfico procedente de la dirección IP de origen de su propio sistema. Al final de la Lección 4, todo el tráfico dirigido a los puertos de nodo públicos se bloqueará y se permitirá todo el tráfico dirigido al NLB. Solo se bloqueará el tráfico procedente de la IP del sistema en la lista negra al NLB:
+En esta lección, se prueba la creación de una lista negra que bloquee el tráfico procedente de la dirección IP de origen de su propio sistema. Al final de la Lección 4, todo el tráfico dirigido a los puertos de nodo públicos se bloquea y se permite todo el tráfico dirigido al NLB. Solo se bloquea el tráfico procedente de la IP del sistema en la lista negra al NLB:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="La app de webserver se expone a internet mediante el NLB público. Solo se bloquea el tráfico procedente de la IP del sistema." style="width:550px; border-style: none"/>
 
@@ -600,7 +600,7 @@ En nuestro ejemplo de ejemplo, la empresa PR donde trabaja quiere configurar un 
       source:
         nets:
         - <client_address>/32
-    - action: Deny
+    - action: Log
       destination:
         nets:
         - <loadbalancer_IP>/32

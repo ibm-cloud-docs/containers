@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -43,7 +43,7 @@ subcollection: containers
 **API REST**
 
 - [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/)
-- [API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+- [JSON de API REST para clústeres ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
 
 <br />
 
@@ -85,7 +85,7 @@ subcollection: containers
 
 **Glosarios**
 
-- [Glosario de {{site.data.keyword.Bluemix_notm}}](/docs/overview/glossary?topic=overview-glossary#glossary)
+- [Glosario de {{site.data.keyword.cloud_notm}}](/docs/overview/glossary?topic=overview-glossary#glossary)
 - [Glosario de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/glossary/?fundamental=true)
 - [Glosario de Docker ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.docker.com/glossary/)
 

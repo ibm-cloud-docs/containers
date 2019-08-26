@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -30,7 +30,7 @@ subcollection: containers
 Puede aprender a utilizar {{site.data.keyword.containerlong}} para desplegar una app contenerizada que aproveche {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}.
 {: shortdesc}
 
-En este escenario, una empresa PR ficticia utiliza el servicio {{site.data.keyword.Bluemix_notm}} para analizar sus notas de prensa y recibir comentarios sobre el tono de sus mensajes.
+En este escenario, una empresa PR ficticia utiliza el servicio {{site.data.keyword.cloud_notm}} para analizar sus notas de prensa y recibir comentarios sobre el tono de sus mensajes.
 
 Mediante el clúster de Kubernetes creado en la última guía de aprendizaje, el desarrollador de apps de la empresa PR despliega una versión de Hello World de la app. Basándose en cada lección de esta guía, el desarrollador de apps despliega versiones cada vez más complicadas de la misma app. El siguiente diagrama muestra los componentes de cada despliegue por lección.
 
@@ -42,7 +42,7 @@ Los servicios agrupan un conjunto de pods y proporciona conexión de red a estos
 
 Para hacer que la app esté aún más disponible, en los clústeres estándares puede crear una agrupación de nodos trabajadores que abarque varias zonas con nodos trabajadores en cada zona para ejecutar incluso más réplicas de la app. Esta tarea no se trata en esta guía de aprendizaje, pero tenga en cuenta este concepto para futuras mejoras de la disponibilidad de una app.
 
-Solo una de las lecciones incluye la integración de un servicio de {{site.data.keyword.Bluemix_notm}} en una app, pero puede utilizarlo para apps tan sencillas o complejas como pueda imaginar.
+Solo una de las lecciones incluye la integración de un servicio de {{site.data.keyword.cloud_notm}} en una app, pero puede utilizarlo para apps tan sencillas o complejas como pueda imaginar.
 
 ## Objetivos
 {: #apps_objectives}
@@ -52,7 +52,7 @@ Solo una de las lecciones incluye la integración de un servicio de {{site.data.
 * Asignación de acceso público a una app
 * Despliegue de una sola instancia de una app en un clúster utilizando un mandato de Kubernetes y un script
 * Despliegue de varias instancias de una app en contenedores que se vuelven a crear durante comprobaciones de estado
-* Despliegue de una app que utilice funcionalidad de un servicio de {{site.data.keyword.Bluemix_notm}}
+* Despliegue de una app que utilice funcionalidad de un servicio de {{site.data.keyword.cloud_notm}}
 
 ## Tiempo necesario
 {: #apps_time}
@@ -244,7 +244,7 @@ dentro del rango 30000-32767. En este ejemplo, el NodePort es 30872.
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.6
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.13.8
         ```
         {: screen}
 
@@ -261,7 +261,7 @@ dicho URL en un navegador, verá un mensaje parecido al siguiente.
 
 11. [Inicie el panel de control de Kubernetes](/docs/containers?topic=containers-app#cli_dashboard).
 
-    Si selecciona su clúster en la [consola de {{site.data.keyword.Bluemix_notm}}](https://cloud.ibm.com/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
+    Si selecciona su clúster en la [consola de {{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/), utilice el botón del **Panel de control de Kubernetes** para iniciar el panel de control con una pulsación.
     {: tip}
 
 12. En el separador **Cargas de trabajo**, verá los recursos que ha creado.
@@ -438,7 +438,7 @@ La separación de componentes en distintos contenedores garantiza que puede actu
 
 ![Configuración del despliegue](images/cs_app_tutorial_mz-components3.png)
 
-En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, creará una instancia del servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} en su cuenta de {{site.data.keyword.Bluemix_notm}} y configurará dos despliegues, uno para cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente.
+En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un nodo trabajador. En esta lección, creará una instancia del servicio {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} en su cuenta de {{site.data.keyword.cloud_notm}} y configurará dos despliegues, uno para cada componente de la app. Cada componente se despliega en un pod de Kubernetes del nodo trabajador. Para hacerlos accesibles a nivel público, también puede crear un servicio Kubernetes para cada componente.
 
 
 ### Lección 3a: Despliegue de la app {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}}
@@ -538,7 +538,7 @@ En la guía de aprendizaje anterior, ha creado una cuenta y un clúster con un n
         {: codeblock}
 
     2.  En la sección volumes del despliegue de `watson-pod`, actualice el nombre del secreto de {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} que ha creado en la [guía de aprendizaje sobre cómo crear un clúster de Kubernetes](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4) anterior. Al montar el secreto de Kubernetes como un volumen en el despliegue, establecerá la clave de API de
-{{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) como disponible para el contenedor que se ejecuta en el pod. Los componentes
+{{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) como disponible para el contenedor que se ejecuta en el pod. Los componentes
 de la app {{site.data.keyword.watson}} de esta guía de aprendizaje están configurados para buscar la clave de API utilizando la vía de acceso de montaje del volumen.
 
         ```

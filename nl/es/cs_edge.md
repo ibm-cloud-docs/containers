@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Restricción del tráfico de red para los nodos trabajadores de extremo
 {: #edge}
 
-Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de Kubernetes al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red en {{site.data.keyword.containerlong}}.
+Los nodos trabajadores de extremo pueden mejorar la seguridad de su clúster de {{site.data.keyword.containerlong}} al permitir el acceso externo a un número inferior de nodos trabajadores y aislar la carga de trabajo en red.
 {:shortdesc}
 
 Cuando estos nodos trabajadores se marcan solo para trabajo en red, las demás cargas de trabajo no pueden consumir la CPU ni la memoria del nodo trabajador ni interferir con la red.
@@ -41,20 +40,20 @@ Si tiene un clúster multizona y desea restringir el tráfico de red a los nodos
 Añada la etiqueta `dedicated=edge` a dos o más nodos trabajadores en cada VLAN pública o privada en el clúster para garantizar que los equilibradores de carga de red (NLB) y los equilibradores de carga de aplicación (ALB) de Ingress están desplegados solo en los nodos trabajadores.
 {:shortdesc}
 
-En Kubernetes 1.14 y posteriores, puede desplegar NLB y ALB públicos y privados en los nodos de extremo. En Kubernetes 1.13 y anteriores, se pueden desplegar ALB públicos y privados y NLB públicos en nodos de extremo, pero los NLB privados solo deben desplegarse en nodos trabajadores que no sean de extremo en el clúster.
+**Clústeres de la comunidad Kubernetes**: En Kubernetes 1.14 y posteriores, puede desplegar NLB y ALB públicos y privados en los nodos de extremo. En Kubernetes 1.13 y anteriores, se pueden desplegar ALB públicos y privados y NLB públicos en nodos de extremo, pero los NLB privados solo deben desplegarse en nodos trabajadores que no sean de extremo en el clúster.
 {: note}
 
 Antes de empezar:
 
-* Asegúrese de que tiene los siguientes [roles de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform):
+* Asegúrese de que tiene los siguientes [roles de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform):
   * Cualquier rol de plataforma para el clúster
   * Rol de servicio **Escritor** o **Gestor** sobre todos los espacios de nombres
 * [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Para etiquetar nodos trabajadores como nodos extremos:
 
-1. [Cree una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) que abarque todas las zonas del clúster y que tenga al menos dos nodos trabajadores por zona. En el mandato `ibmcloud ks worker-pool-create`, incluya el distintivo `--labels dedicated=edge` para etiquetar todos los nodos trabajadores de la agrupación. Todos los nodos trabajadores de esta agrupación, incluidos los nodos trabajadores que añada posteriormente, se etiquetan como nodos de extremo.
-  <p class="tip">Si desea utilizar una agrupación de nodos trabajadores existente, la agrupación debe abarcar todas las zonas del clúster y tener al menos dos trabajadores por zona. Puede etiquetar la agrupación de nodos trabajadores con `dedicated=edge` utilizando la [API de agrupación de trabajadores PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). En el cuerpo de la solicitud, pase el JSON siguiente. Después de que la agrupación de nodos trabajadores se marque con `dedicated=edge`, todos los nodos trabajadores existentes y posteriores obtienen esta etiqueta y los equilibradores de carga e Ingress se despliegan en un nodo trabajador de extremo.
+1. [Cree una nueva agrupación de nodos trabajadores](/docs/containers?topic=containers-add_workers#add_pool) que abarque todas las zonas del clúster y que tenga al menos dos nodos trabajadores por zona. En el mandato `ibmcloud ks worker-pool-create`, incluya el distintivo `--labels dedicated=edge` para etiquetar todos los nodos trabajadores de la agrupación. Todos los nodos trabajadores de esta agrupación, incluidos los nodos trabajadores que añada posteriormente, se etiquetan como nodos de extremo. Después de que la agrupación de nodos trabajadores se marque con `dedicated=edge`, todos los nodos trabajadores existentes y posteriores obtienen esta etiqueta y los equilibradores de carga e Ingress se despliegan en un nodo trabajador de extremo.
+  <p class="tip">Si desea utilizar una agrupación de nodos trabajadores existente, la agrupación debe abarcar todas las zonas del clúster y tener al menos dos trabajadores por zona. Puede etiquetar la agrupación de nodos trabajadores con `dedicated=edge` utilizando la [API de agrupación de trabajadores PATCH](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). En el cuerpo de la solicitud, pase el JSON siguiente.
       <pre class="screen">
       {
         "labels": {"dedicated":"edge"},
@@ -82,17 +81,16 @@ Antes de empezar:
 
   En la salida, anote el valor de **Namespace** y de **Name** de cada servicio de equilibrador de carga. Por ejemplo, en la siguiente salida, hay cuatro servicios de equilibrador de carga: un NLB público en el espacio de nombres `default` y un ALB privado y dos públicos en el espacio de nombres `kube-system`.
   ```
-  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
-  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                10m
   kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  1h
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  57m
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
   ```
   {: screen}
 
 4. Utilizando la salida del paso anterior, ejecute el mandato siguiente para cada NLB y ALB. Este mandato vuelve a desplegar el NLB o el ALB en un nodo trabajador de extremo.
 
-  Si el clúster ejecuta Kubernetes 1.14 o posterior, puede desplegar NLB y ALB públicos y privados en los nodos trabajadores de extremo. En Kubernetes 1.13 y anteriores, solo se pueden desplegar ALB públicos y privados y NLB públicos en los nodos de extremo, por lo que no debe volver a desplegar los servicios NLB privados.
+  **Clústeres de la comunidad Kubernetes**: Si el clúster ejecuta Kubernetes 1.14 o posterior, puede desplegar NLB y ALB públicos y privados en los nodos trabajadores de extremo. En Kubernetes 1.13 y anteriores, solo se pueden desplegar ALB públicos y privados y NLB públicos en los nodos de extremo, por lo que no debe volver a desplegar los servicios NLB privados.
   {: note}
 
   ```
@@ -189,7 +187,7 @@ Una ventaja de los nodos trabajadores extremos es que se puede especificar que s
 Utilizar la tolerancia `dedicated=edge` significa que todos los servicios de equilibrador de carga de red (NLB) y de equilibrador de carga de aplicación (ALB) de Ingress se despliegan únicamente en los nodos trabajadores etiquetados. Sin embargo, para evitar que se ejecuten otras cargas de trabajo en los nodos trabajadores de extremo y consuman recursos de los nodos trabajadores, se deben utilizar [antagonismos de Kubernetes ![Enlace de icono externo](../icons/launch-glyph.svg "Enlace de icono externo")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 Antes de empezar:
-- Asegúrese de que tiene el [rol de servicio de {{site.data.keyword.Bluemix_notm}} IAM de **Gestor** sobre todos los espacios de nombres](/docs/containers?topic=containers-users#platform).
+- Asegúrese de tener el [rol de servicio **Gestor** de {{site.data.keyword.cloud_notm}} IAM sobre todos los espacios de nombres](/docs/containers?topic=containers-users#platform).
 - [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>Para evitar la ejecución de otras cargas de trabajo en los nodos trabajadores de extremo:
@@ -223,3 +221,5 @@ Antes de empezar:
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, audit
 
@@ -28,7 +28,7 @@ subcollection: containers
 # Sucesos de {{site.data.keyword.cloudaccesstrailshort}}
 {: #at_events}
 
-Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de {{site.data.keyword.containerlong_notm}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.
+Puede ver, gestionar y auditar las actividades que ha realizado el usuario en el clúster de OpenShift o de la comunidad de Kubernetes de {{site.data.keyword.containerlong}} mediante el servicio {{site.data.keyword.cloudaccesstrailshort}}.
 {: shortdesc}
 
 {{site.data.keyword.containershort_notm}} genera dos tipos de sucesos de {{site.data.keyword.cloudaccesstrailshort}}:
@@ -54,10 +54,10 @@ Puede supervisar las actividades del clúster consultando los registros en el pa
 
 Para supervisar la actividad administrativa:
 
-1. Inicie sesión en su cuenta de {{site.data.keyword.Bluemix_notm}}.
+1. Inicie sesión en su cuenta de {{site.data.keyword.cloud_notm}}.
 2. Desde el catálogo, suministre una instancia del servicio {{site.data.keyword.cloudaccesstrailshort}} en la misma cuenta que la instancia de {{site.data.keyword.containerlong_notm}}.
 3. En el separador **Gestión** del panel de control de {{site.data.keyword.cloudaccesstrailshort}}, seleccione la cuenta o el dominio de espacio.
-  * **Registros de cuenta**: los sucesos de gestión de clúster y los sucesos de auditoría de servidor de API de Kubernetes están disponibles en el **dominio de cuenta** para la región de {{site.data.keyword.Bluemix_notm}} donde se generan los sucesos.
+  * **Registros de cuenta**: los sucesos de gestión de clúster y los sucesos de auditoría de servidor de API de Kubernetes están disponibles en el **dominio de cuenta** para la región de {{site.data.keyword.cloud_notm}} donde se generan los sucesos.
   * **Registros de espacio**: si ha especificado un espacio al configurar el clúster para reenviar sucesos de auditoría de servidor de API de Kubernetes, estos sucesos están disponibles en el **dominio de espacio** asociado al espacio de Cloud Foundry donde se ha suministrado el servicio {{site.data.keyword.cloudaccesstrailshort}}.
 4. Pulse **Ver en Kibana**.
 5. Establezca el intervalo de tiempo para el que desea ver los registros. El valor predeterminado es 24 horas.
@@ -93,7 +93,7 @@ Consulte la lista siguiente de sucesos de gestión de clústeres que se envían 
 <td><code>containers-kubernetes.cluster.delete</code></td>
 <td>Se suprime un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
-<td>Se habilita en un clúster una característica, como por ejemplo el cálculo de confianza para los nodos trabajadores nativos.</td></tr><tr>
+<td>Se habilita en un clúster una característica, como el punto final de servicio privado o público.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.get</code></td>
 <td>Se visualiza información del clúster.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
@@ -125,7 +125,7 @@ Consulte la lista siguiente de sucesos de gestión de clústeres que se envían 
 <td><code>containers-kubernetes.service.unbind</code></td>
 <td>Se desenlaza un servicio de un clúster.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.add</code></td>
-<td>Se añade a un clúster una subred de la infraestructura de IBM Cloud (SoftLayer) existente.</td></tr><tr>
+<td>Se añade a un clúster una subred de la infraestructura de IBM Cloud existente.</td></tr><tr>
 <td><code>containers-kubernetes.subnet.create</code></td>
 <td>Se crea una subred.</td></tr><tr>
 <td><code>containers-kubernetes.usersubnet.add</code></td>
@@ -246,9 +246,9 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
     <td><code>ingresses.delete</code></td>
     <td>Se suprime un ALB Ingress.</td></tr><tr>
     <td><code>ingresses.patch</code></td>
-    <td>Se aplica un parche a un ALB Ingress.</td></tr><tr>
+    <td>Se parchea un ALB de Ingress.</td></tr><tr>
     <td><code>ingresses.update</code></td>
-    <td>Se actualiza un ALB Ingress.</td></tr><tr>
+    <td>Se actualiza un ALB de Ingress.</td></tr><tr>
     <td><code>jobs.create</code></td>
     <td>Se crea un trabajo.</td></tr><tr>
     <td><code>jobs.delete</code></td>
@@ -408,7 +408,7 @@ Antes de empezar: asegúrese de que el clúster está configurado para reenviar 
     <td><code>selfsubjectaccessreviews.create</code></td>
     <td>Se crea una revisión de acceso de asunto propio.</td></tr><tr>
     <td><code>selfsubjectrulesreviews.create</code></td>
-    <td>Se crea una revisión de reglas de asuntos propios.</td></tr><tr>
+    <td>Se crea una revisión de reglas de asunto propio.</td></tr><tr>
     <td><code>subjectaccessreviews.create</code></td>
     <td>Se crea una revisión de acceso de asunto.</td></tr><tr>
     <td><code>serviceaccounts.create</code></td>

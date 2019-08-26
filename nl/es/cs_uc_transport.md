@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,18 +23,17 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector transportes
 {: #cs_uc_transport}
 
-En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo de {{site.data.keyword.containerlong_notm}} las cadenas de herramientas para actualizar apps rápidamente y para realizar despliegues en diversas regiones de todo el mundo. Al mismo tiempo, estas cargas de trabajo se pueden conectar a sistemas de fondo existentes, utilizar Watson AI para la personalización y acceder a los datos de IOT con {{site.data.keyword.messagehub_full}}.
+En estos casos de uso se muestra cómo pueden aprovechar las cargas de trabajo de {{site.data.keyword.containerlong}} las cadenas de herramientas para actualizar apps rápidamente y para realizar despliegues en diversas regiones de todo el mundo. Al mismo tiempo, estas cargas de trabajo se pueden conectar a sistemas de fondo existentes, utilizar Watson AI para la personalización y acceder a los datos de IOT con {{site.data.keyword.messagehub_full}}.
 
 {: shortdesc}
 
 ## Una empresa transportista aumenta la disponibilidad de los sistemas en todo el mundo en el ecosistema de asociados
 {: #uc_shipping}
 
-Un ejecutivo de TI dispone de sistemas de direccionamiento y de planificación de envíos a nivel mundial con los que interactúan sus asociados. Los asociados necesitan información de última hora de estos sistemas que acceden a datos de dispositivos IoT. Sin embargo, estos sistemas no podían escalarse en todo el mundo y ofrecer la alta disponibilidad necesaria.
+Un ejecutivo de TI dispone de sistemas de direccionamiento y de planificación de envíos a nivel mundial con los que interactúan sus asociados. Los asociados necesitan información de última hora de estos sistemas que acceden a datos de dispositivos IoT. Sin embargo, estos sistemas no podían escalarse en todo el mundo y ofrecer la alta disponibilidad necesaria. 
 {: shortdesc}
 
 Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} permite escalar las apps contenerizadas con una disponibilidad del 99,999 % para satisfacer las crecientes demandas. Se producen despliegues de apps 40 veces al día cuando los desarrolladores pueden experimentar con facilidad, enviando cambios a los sistemas de desarrollo y de prueba rápidamente. La plataforma IoT facilita el acceso a los datos de IoT.
@@ -67,7 +66,7 @@ Los dispositivos IoT obtienen los datos que {{site.data.keyword.messagehub_full}
 
 Cuando los sucesos están en {{site.data.keyword.messagehub_full}}, se guardan de forma permanente para su uso inmediato en las apps de tránsito de los puertos y en cualquier momento futuro. Las apps que requieren la latencia más baja se consumen directamente en tiempo real en la secuencia de sucesos ({{site.data.keyword.messagehub_full}}). Otras apps futuras, como las herramientas de análisis, pueden optar por consumir en una modalidad de proceso por lotes desde el almacén de sucesos con {{site.data.keyword.cos_full}}.
 
-Puesto que los datos de los envíos se comparten con los clientes de la empresa, los desarrolladores garantizan que los clientes pueden utilizar las API para ofrecer datos de envíos en sus propias apps. Las apps de seguimiento móvil o las soluciones de comercio electrónico en la web son ejemplos de estas apps. Los desarrolladores también están ocupados con la creación y el mantenimiento de apps de puertos regionales que captan y distribuyen los registros de aduanas y los manifiestos de los envíos. En resumen, tienen que centrarse en la codificación en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
+Puesto que los datos de los envíos se comparten con los clientes de la empresa, los desarrolladores garantizan que los clientes pueden utilizar las API para ofrecer datos de envíos en sus propias apps. Las apps de seguimiento móvil o las soluciones de comercio electrónico en la web son ejemplos de estas apps. Los desarrolladores también están ocupados con la creación y el mantenimiento de apps de puertos regionales que captan y distribuyen los registros de aduanas y los manifiestos de los envíos. En resumen, tienen que centrarse en escribir código en lugar de en gestionar la infraestructura. Por lo tanto, eligieron {{site.data.keyword.containerlong_notm}} porque IBM simplifica la gestión de la infraestructura:
 * Gestión de nodo maestro de Kubernetes, IaaS y componentes operativos, como Ingress y almacenamiento
 * Supervisión del estado y la recuperación de los nodos trabajadores
 * Suministro de cálculo global, de modo que los desarrolladores no son los responsables de la infraestructura en las regiones en las que residen las cargas de trabajo y los datos
@@ -126,7 +125,7 @@ Solución técnica:
 Un ejecutivo de RR.HH. (CHRO) necesita un nuevo sitio de beneficios de RR.HH. con un chatbot innovador, pero con sus herramientas de desarrollo y su plataforma actuales el tiempo que se tarda en activar las apps es demasiado largo. Esta situación incluye esperas largas para la adquisición de hardware.
 {: shortdesc}
 
-Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} agiliza y simplifica el desarrollo de cálculo. Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo impulso cuando se incorpora IBM Watson Assistant. El nuevo sitio de beneficios se creó en menos de 3 semanas.
+Por qué {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} facilita el aumento de la capacidad de cálculo. Los desarrolladores pueden experimentar fácilmente, impulsando cambios en los sistemas de desarrollo y prueba rápidamente con las cadenas de herramientas abiertas. Sus herramientas tradicionales de desarrollo de software adquieren un nuevo impulso cuando se incorpora IBM Watson Assistant. El nuevo sitio de beneficios se creó en menos de 3 semanas.
 
 Tecnologías clave:    
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
@@ -191,3 +190,5 @@ Con {{site.data.keyword.containerlong_notm}}, pasaron de un hardware sobredimens
 * La autenticidad junto con la personalización en el sitio satisface las expectativas actuales de los empleados de la línea aérea.
 * Se pueden implantar rápidamente actualizaciones de última hora en el sitio de RR.HH., incluidas las impulsadas por las conversaciones de chatbot de los empleados, porque los desarrolladores envían cambios al menos 10 veces al día.
 * Con la gestión de la infraestructura en manos de IBM, el equipo de desarrollo dispuso del tiempo necesario para implantar el sitio en solo 3 semanas.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-12"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,27 +23,21 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Permisos de acceso de usuario
 {: #access_reference}
 
 Cuando [asigna permisos de clúster](/docs/containers?topic=containers-users), puede resultar difícil saber qué rol tiene que asignar a un usuario. Utilice las tablas de las secciones siguientes para determinar el nivel mínimo de permisos necesarios para realizar tareas comunes en {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-A partir del 30 de enero de 2019, {{site.data.keyword.containerlong_notm}} tiene una nueva forma de autorizar a los usuarios con {{site.data.keyword.Bluemix_notm}} IAM: [roles de acceso al servicio](#service). Estos roles de servicio se utilizan para otorgar acceso a recursos dentro del clúster como, por ejemplo, espacios de nombres de Kubernetes. Para obtener más información, consulte el blog de [Introducción
-de roles de servicio y de espacios de nombres en IAM para obtener un control más granular del acceso de clúster ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/blogs/bluemix/2019/02/introducing-service-roles-and-namespaces-in-iam-for-more-granular-control-of-cluster-access/).
-{: note}
-
-## Roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM
+## Roles de plataforma de {{site.data.keyword.cloud_notm}} IAM
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} está configurado para que utilice roles de Identity and Access Management (IAM) de {{site.data.keyword.Bluemix_notm}}. Los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM determinan las acciones que pueden realizar los usuarios sobre recursos de {{site.data.keyword.Bluemix_notm}}, como clústeres, nodos trabajadores y equilibradores de carga de aplicación (ALB) de Ingress. Los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM también establecen automáticamente permisos básicos de infraestructura para usuarios. Para definir roles, consulte [Asignación de permisos de plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform).
+{{site.data.keyword.containerlong_notm}} está configurado para que utilice roles de Identity and Access Management (IAM) de {{site.data.keyword.cloud_notm}}. Los roles de plataforma de {{site.data.keyword.cloud_notm}} IAM determinan las acciones que pueden realizar los usuarios sobre recursos de {{site.data.keyword.cloud_notm}}, como clústeres, nodos trabajadores y equilibradores de carga de aplicación (ALB) de Ingress. Los roles de plataforma de {{site.data.keyword.cloud_notm}} IAM también establecen automáticamente permisos básicos de infraestructura para usuarios. Para definir roles, consulte [Asignación de permisos de plataforma de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
-<p class="tip">No asigne los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM al mismo tiempo que un rol de servicio. Los roles de plataforma y de servicio se deben asignar por separado.</p>
+<p class="tip">No asigne los roles de plataforma de {{site.data.keyword.cloud_notm}} IAM al mismo tiempo que un rol de servicio. Los roles de plataforma y de servicio se deben asignar por separado.</p>
 
-En cada una de las secciones siguientes, las tablas muestran los permisos de gestión de clústeres, de registro y de Ingress otorgados por cada rol de plataforma de {{site.data.keyword.Bluemix_notm}} IAM. Las tablas están ordenadas alfabéticamente por nombre de mandato de CLI.
+En cada una de las secciones siguientes, las tablas muestran los permisos de gestión de clústeres, de registro y de Ingress otorgados por cada rol de plataforma de {{site.data.keyword.cloud_notm}} IAM. Las tablas están ordenadas alfabéticamente por nombre de mandato de CLI.
 
 * [Acciones que no requieren ningún permiso](#none-actions)
 * [Acciones de Visor](#view-actions)
@@ -91,8 +85,8 @@ Cualquier usuario de la cuenta que ejecute el mandato de CLI o que realice la ll
 <td><code>[GET /v1/kube-versions](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions)</code></td>
 </tr>
 <tr>
-<td>Ver una lista de los tipos de máquinas disponibles para sus nodos trabajadores.</td>
-<td><code>[ibmcloud ks machine-types](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)</code></td>
+<td>Ver una lista de los tipos disponibles para sus nodos trabajadores.</td>
+<td><code>[ibmcloud ks flavors](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types)</code></td>
 <td><code>[GET /v1/datacenters/{datacenter}/machine-types](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetDatacenterMachineTypes)</code></td>
 </tr>
 <tr>
@@ -122,7 +116,7 @@ Cualquier usuario de la cuenta que ejecute el mandato de CLI o que realice la ll
 </tr>
 <tr>
 <td>Ver una lista de las versiones soportadas en {{site.data.keyword.containerlong_notm}}.</td>
-<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions)</code></td>
+<td><code>[ibmcloud ks versions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)</code></td>
 <td>-</td>
 </tr>
 <tr>
@@ -163,7 +157,7 @@ El rol de plataforma de **Visor** incluye las [acciones que no requieren ningún
 <td><code>[GET /clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetClusterALBs)</code></td>
 </tr>
 <tr>
-<td>Ver el nombre y la dirección de correo electrónico del propietario de la clave de API de {{site.data.keyword.Bluemix_notm}} IAM para un grupo de recursos y una región.</td>
+<td>Ver el nombre y la dirección de correo electrónico del propietario de la clave de API de {{site.data.keyword.cloud_notm}} IAM para un grupo de recursos y una región.</td>
 <td><code>[ibmcloud ks api-key-info](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_info)</code></td>
 <td><code>[GET /v1/logging/{idOrName}/clusterkeyowner](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/GetClusterKeyOwner)</code></td>
 </tr>
@@ -188,11 +182,11 @@ El rol de plataforma de **Visor** incluye las [acciones que no requieren ningún
 <td><code>[GET /v1/clusters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusters)</code></td>
 </tr>
 <tr>
-<td>Obtener las credenciales de infraestructura que se han establecido para la cuenta de {{site.data.keyword.Bluemix_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud (SoftLayer).</td>
+<td>Obtener las credenciales de infraestructura que se han establecido para la cuenta de {{site.data.keyword.cloud_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud.</td>
 <td><code>[ibmcloud ks credential-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credential_get)</code></td><td><code>[GET /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Comprobar si en las credenciales que permiten el acceso al portafolio de la infraestructura de IBM Cloud (SoftLayer) para la región y el grupo de recursos de destino faltan permisos recomendados o necesarios de la infraestructura.</td>
+<td>Comprobar si en las credenciales que permiten el acceso al portafolio de la infraestructura de IBM Cloud para la región y el grupo de recursos de destino faltan permisos recomendados o necesarios de la infraestructura.</td>
 <td><code>[ibmcloud ks infra-permissions-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get)</code></td>
 <td><code>[GET /v1/infra-permissions](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/GetInfraPermissions)</code></td>
 </tr>
@@ -225,6 +219,11 @@ El rol de plataforma de **Visor** incluye las [acciones que no requieren ningún
 <td>Listar todos los servicios vinculados a un espacio de nombres específico.</td>
 <td>-</td>
 <td><code>[GET /v1/clusters/{idOrName}/services/{namespace}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ListServicesInNamespace)</code></td>
+</tr>
+<tr>
+<td>Listar todas las subredes de infraestructura de IBM Cloud que están enlazadas a un clúster.</td>
+<td>-</td>
+<td><code>[GET /v1/clusters/{idOrName}/subnets](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterSubnets)</code></td>
 </tr>
 <tr>
 <td>Listar todas las subredes gestionadas por el usuario que están vinculadas a un clúster.</td>
@@ -309,11 +308,6 @@ El rol de plataforma de **Editor** incluye los permisos otorgados por **Visor**,
 <td><code>[POST /albs](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) y [DELETE /albs/{albId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</code></td>
 </tr>
 <tr>
-<td>Crear un ALB de Ingress.</td>
-<td><code>[ibmcloud ks alb-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create)</code></td>
-<td><code>[POST /clusters/{idOrName}/zone/{zoneId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB)</code></td>
-</tr>
-<tr>
 <td>Retrotraer la actualización del complemento ALB de Ingress a la compilación que ejecutaban anteriormente los pods de ALB.</td>
 <td><code>[ibmcloud ks alb-rollback](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback)</code></td>
 <td><code>[PUT /clusters/{idOrName}/updaterollback](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate)</code></td>
@@ -391,52 +385,52 @@ El rol de plataforma de **Editor** incluye los permisos otorgados por **Visor**,
 <tr>
 <td>Añadir una dirección IP de NLB a un nombre de host de NLB existente.</td>
 <td><code>[ibmcloud ks nlb-dns-add](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add)</code></td>
-<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UpdateDNSWithIP)</code></td>
+<td><code>[PUT /clusters/{idOrName}/add](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UpdateDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Crear un nombre de host de DNS para registrar una dirección IP de NLB.</td>
 <td><code>[ibmcloud ks nlb-dns-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create)</code></td>
-<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/RegisterDNSWithIP)</code></td>
+<td><code>[POST /clusters/{idOrName}/register](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/RegisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Enumerar los nombres de host y las direcciones IP de NLB que hay registrados en un clúster.</td>
 <td><code>[ibmcloud ks nlb-dnss](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls)</code></td>
-<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/ListNLBIPsForSubdomain)</code></td>
+<td><code>[GET /clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/ListNLBIPsForSubdomain)</code></td>
 </tr>
 <tr>
 <td>Eliminar una dirección IP de NLB de un nombre de host.</td>
 <td><code>[ibmcloud ks nlb-dns-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45dns/UnregisterDNSWithIP)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns-beta/UnregisterDNSWithIP)</code></td>
 </tr>
 <tr>
 <td>Configurar y habilitar opcionalmente un supervisor de comprobación de estado para un nombre de host de NLB existente en un clúster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-configure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure)</code></td>
-<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/AddNlbDNSHealthMonitor)</code></td>
+<td><code>[POST /health/clusters/{idOrName}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/AddNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Ver los valores de un supervisor de comprobación de estado existente.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/GetNlbDNSHealthMonitor)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/host/{nlbHost}/config](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/GetNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Inhabilitar un supervisor de comprobación de estado existente para un nombre de host en un clúster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Habilitar un supervisor de comprobación de estado que haya configurado.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable)</code></td>
-<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/UpdateNlbDNSHealthMonitor)</code></td>
+<td><code>[PUT /clusters/{idOrName}/health](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/UpdateNlbDNSHealthMonitor)</code></td>
 </tr>
 <tr>
 <td>Listar los valores del supervisor de comprobación de estado para cada nombre de host de NLB en un clúster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-ls](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitors)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/list](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitors)</code></td>
 </tr>
 <tr>
 <td>Listar el estado de comprobación de estado de cada dirección IP que esté registrada con un nombre de host de NLB en un clúster.</td>
 <td><code>[ibmcloud ks nlb-dns-monitor-status](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status)</code></td>
-<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb45health45monitor/ListNlbDNSHealthMonitorStatus)</code></td>
+<td><code>[GET /health/clusters/{idOrName}/status](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor-beta/ListNlbDNSHealthMonitorStatus)</code></td>
 </tr>
 <tr>
 <td>Cree un webhook en un clúster.</td>
@@ -466,7 +460,7 @@ El rol de plataforma de **Operador** incluye los permisos otorgados por **Visor*
 <td><code>[PUT /v1/clusters/{idOrName}/masters](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer)</code></td>
 </tr>
 <tr>
-<td>Crear un ID de servicio de {{site.data.keyword.Bluemix_notm}} IAM para el clúster, crear una política para el ID de servicio que signa el rol de **Lector** de acceso al servicio en {{site.data.keyword.registrylong_notm}} y crear una clave de API para el ID de servicio.</td>
+<td>Crear un ID de servicio de {{site.data.keyword.cloud_notm}} IAM para el clúster, crear una política para el ID de servicio que signa el rol de **Lector** de acceso al servicio en {{site.data.keyword.registrylong_notm}} y crear una clave de API para el ID de servicio.</td>
 <td><code>[ibmcloud ks cluster-pull-secret-apply](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply)</code></td>
 <td>-</td>
 </tr>
@@ -479,6 +473,11 @@ El rol de plataforma de **Operador** incluye los permisos otorgados por **Visor*
 <td>Crear una subred y añadirla a un clúster.</td>
 <td><code>[ibmcloud ks cluster-subnet-create](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create)</code></td>
 <td><code>[POST /v1/clusters/{idOrName}/vlans/{vlanId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet)</code></td>
+</tr>
+<tr>
+<td>Desconectar una subred de un clúster.</td>
+<td><code>[ibmcloud ks cluster-subnet-detach](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach)</code></td>
+<td><code>[DELETE /v1/clusters/{idOrName}/subnets/{subnetId}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/DetachClusterSubnet)</code></td>
 </tr>
 <tr>
 <td>Actualizar un clúster.</td>
@@ -575,17 +574,17 @@ El rol de plataforma de **Administrador** incluye todos los permisos otorgados p
 <tr>
 <td>Beta: desplegar o actualizar un certificado desde la instancia de {{site.data.keyword.cloudcerts_long_notm}} en un ALB.</td>
 <td><code>[ibmcloud ks alb-cert-deploy](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy)</code></td>
-<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) o [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBSecret)</code></td>
+<td><code>[POST /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALBSecret) o [PUT /albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/UpdateALBSecret)</code></td>
 </tr>
 <tr>
 <td>Beta: ver detalles de un secreto de ALB en un clúster.</td>
 <td><code>[ibmcloud ks alb-cert-get](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get)</code></td>
-<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/ViewClusterALBSecrets)</code></td>
+<td><code>[GET /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/ViewClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>Beta: eliminar un secreto de ALB de un clúster.</td>
 <td><code>[ibmcloud ks alb-cert-rm](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm)</code></td>
-<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/DeleteClusterALBSecrets)</code></td>
+<td><code>[DELETE /clusters/{idOrName}/albsecrets](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets)</code></td>
 </tr>
 <tr>
 <td>Obtener una lista de todos los secretos de ALB de un clúster.</td>
@@ -593,7 +592,7 @@ El rol de plataforma de **Administrador** incluye todos los permisos otorgados p
 <td>-</td>
 </tr>
 <tr>
-<td>Definir la clave de API para la cuenta de {{site.data.keyword.Bluemix_notm}} para acceder al portafolio de infraestructura de IBM Cloud (SoftLayer) enlazada.</td>
+<td>Definir la clave de API para la cuenta de {{site.data.keyword.cloud_notm}} para acceder al portafolio de infraestructura de IBM Cloud enlazada.</td>
 <td><code>[ibmcloud ks api-key-reset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset)</code></td>
 <td><code>[POST /v1/keys](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey)</code></td>
 </tr>
@@ -633,12 +632,12 @@ El rol de plataforma de **Administrador** incluye todos los permisos otorgados p
 <td><code>[DELETE /v1/clusters/{idOrName}](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveCluster)</code></td>
 </tr>
 <tr>
-<td>Definir las credenciales de infraestructura para la cuenta de {{site.data.keyword.Bluemix_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud (SoftLayer).</td>
+<td>Definir las credenciales de infraestructura para la cuenta de {{site.data.keyword.cloud_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud.</td>
 <td><code>[ibmcloud ks credential-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set)</code></td>
 <td><code>[POST /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/StoreUserCredentials)</code></td>
 </tr>
 <tr>
-<td>Eliminar las credenciales de infraestructura para la cuenta de {{site.data.keyword.Bluemix_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud (SoftLayer).</td>
+<td>Eliminar las credenciales de infraestructura para la cuenta de {{site.data.keyword.cloud_notm}} para acceder a otro portafolio de la infraestructura de IBM Cloud.</td>
 <td><code>[ibmcloud ks credential-unset](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset)</code></td>
 <td><code>[DELETE /v1/credentials](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/accounts/RemoveUserCredentials)</code></td>
 </tr>
@@ -683,13 +682,13 @@ El rol de plataforma de **Administrador** incluye todos los permisos otorgados p
 <br />
 
 
-## Roles de servicio de {{site.data.keyword.Bluemix_notm}} IAM
+## Roles de servicio de {{site.data.keyword.cloud_notm}} IAM
 {: #service}
 
-A cada usuario que tiene asignado un rol de acceso al servicio de {{site.data.keyword.Bluemix_notm}} IAM también se le asigna automáticamente un rol de control de acceso basado en rol (RBAC) de Kubernetes correspondiente en un espacio de nombres específico. Para obtener más información sobre los roles de acceso al servicio, consulte [Roles de servicio de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform). No asigne los roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM al mismo tiempo que un rol de servicio. Los roles de plataforma y de servicio se deben asignar por separado.
+A cada usuario que tiene asignado un rol de acceso al servicio de {{site.data.keyword.cloud_notm}} IAM también se le asigna automáticamente un rol de control de acceso basado en rol (RBAC) de Kubernetes correspondiente en un espacio de nombres específico. Para obtener más información sobre los roles de acceso al servicio, consulte [Roles de servicio de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform). No asigne los roles de plataforma de {{site.data.keyword.cloud_notm}} IAM al mismo tiempo que un rol de servicio. Los roles de plataforma y de servicio se deben asignar por separado.
 {: shortdesc}
 
-¿Está buscando qué acciones de Kubernetes otorga cada rol de servicio a través de RBAC? Consulte [Permisos de recursos de Kubernetes por rol de RBAC](#rbac_ref). Para obtener más información sobre los roles de RBAC, consulte los apartados sobre [Asignación de permisos de RBAC](/docs/containers?topic=containers-users#role-binding) y [Ampliación de los permisos existentes mediante la agregación de roles de clúster](https://cloud.ibm.com/docs/containers?topic=containers-users#rbac_aggregate)
+¿Está buscando qué acciones de Kubernetes otorga cada rol de servicio a través de RBAC? Consulte [Permisos de recursos de Kubernetes por rol de RBAC](#rbac_ref). Para obtener más información sobre los roles de RBAC, consulte [Asignación de permisos de RBAC](/docs/containers?topic=containers-users#role-binding) y [Ampliación de los permisos existentes mediante la agregación de roles de clúster](/docs/containers?topic=containers-users#rbac_aggregate).
 {: tip}
 
 En la tabla siguiente se muestran los permisos de recursos de Kubernetes que asigna cada rol de servicio y su rol de RBAC correspondiente.
@@ -721,7 +720,7 @@ En la tabla siguiente se muestran los permisos de recursos de Kubernetes que asi
   </tr>
   <tr>
     <td id="service-role-manager" headers="service-role">Rol de Gestor</td>
-    <td headers="service-role-manager rbac-role">Cuando se limita a un espacio de nombres: Rol de clúster <strong><code>admin</code></strong> aplicado por la vinculación de rol <strong><code>ibm-operate</code></strong> en dicho espacio de nombres</br><br>Cuando se aplica a todos los espacios de nombres: Rol de clúster <strong><code>cluster-admin</code></strong> aplicado por la vinculación de rol de clúster <strong><code>ibm-admin</code></strong></td> que se aplica a todos los espacios de nombres
+    <td headers="service-role-manager rbac-role">Cuando se limita a un espacio de nombres: Rol de clúster <strong><code>admin</code></strong> aplicado por la vinculación de rol <strong><code>ibm-operate</code></strong> en dicho espacio de nombres</br><br>Cuando se limita a todos los espacios de nombres: el rol de clúster <strong><code>cluster-admin</code></strong> aplicado por el enlace de rol de clúster <strong><code>ibm-admin</code></strong> que se aplica a todos los espacios de nombres</td>
     <td headers="service-role-manager kube-perm">Cuando se limita a un espacio de nombres:
       <ul><li>Acceso de lectura/escritura a todos los recursos de un espacio de nombres, pero no a la cuota de recursos ni al propio espacio de nombres</li>
       <li>Crear roles de RBAC y vinculaciones de rol en un espacio de nombres</li>
@@ -734,6 +733,14 @@ En la tabla siguiente se muestran los permisos de recursos de Kubernetes que asi
         <li>Revisar las métricas del clúster, como por ejemplo con los mandatos <code>kubectl top pods</code>, <code>kubectl top nodes</code> o <code>kubectl get nodes</code></li></ul>
     </td>
   </tr>
+    <tr>
+    <td>Cualquier rol de servicio</td>
+    <td>**Sólo clústeres de OpenShift**: todos los usuarios de un clúster de OpenShift reciben los roles de clúster `basic-users` y `self-provisioners` tal como se aplican mediante los enlaces de rol de clúster `basic-users` y `self-provisioners`.</td>
+    <td><ul>
+      <li>Obtenga información básica sobre los proyectos a los que tiene acceso el usuario.</li>
+      <li>Cree recursos autorizados en los proyectos a los que tiene acceso el usuario.</li>
+      <li>Para obtener más información, consulte la [documentación de OpenShift ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://docs.openshift.com/container-platform/3.11/admin_guide/manage_rbac.html).</li></ul></td>
+  </tr>
 </tbody>
 </table>
 
@@ -743,7 +750,7 @@ En la tabla siguiente se muestran los permisos de recursos de Kubernetes que asi
 ## Permisos de recursos de Kubernetes por rol de RBAC
 {: #rbac_ref}
 
-A cada usuario que tiene asignado un rol de acceso al servicio de {{site.data.keyword.Bluemix_notm}} IAM también se le asigna automáticamente un rol de control de acceso basado en rol (RBAC) de Kubernetes predefinido correspondiente. Si tiene intención de gestionar sus propios roles personalizados de RBAC de Kubernetes, consulte el apartado sobre [Creación de permisos de RBAC personalizados para usuarios, grupos o cuentas de servicio](/docs/containers?topic=containers-users#rbac).
+A cada usuario que tiene asignado un rol de acceso al servicio de {{site.data.keyword.cloud_notm}} IAM también se le asigna automáticamente un rol de control de acceso basado en rol (RBAC) de Kubernetes predefinido correspondiente. Si tiene intención de gestionar sus propios roles personalizados de RBAC de Kubernetes, consulte el apartado sobre [Creación de permisos de RBAC personalizados para usuarios, grupos o cuentas de servicio](/docs/containers?topic=containers-users#rbac).
 {: shortdesc}
 
 ¿Se pregunta si tiene los permisos correctos para ejecutar un determinado mandato `kubectl` en un recurso de un espacio de nombres? Pruebe el [mandato `kubectl auth can-i`![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-can-i-em-).
@@ -1015,7 +1022,7 @@ En la tabla siguiente se muestran los permisos que otorga cada rol de RBAC a rec
 ## Roles de Cloud Foundry
 {: #cloud-foundry}
 
-Los roles de Cloud Foundry otorgan acceso a las organizaciones y espacios dentro de la cuenta. Para ver la lista de servicios basados en Cloud Foundry de {{site.data.keyword.Bluemix_notm}}, ejecute `ibmcloud service list`. Para obtener más información, consulte todos los [roles de espacio y organización](/docs/iam?topic=iam-cfaccess) disponibles o los pasos para [gestionar el acceso a Cloud Foundry](/docs/iam?topic=iam-mngcf) en la documentación de {{site.data.keyword.Bluemix_notm}} IAM.
+Los roles de Cloud Foundry otorgan acceso a las organizaciones y espacios dentro de la cuenta. Para ver la lista de servicios basados en Cloud Foundry de {{site.data.keyword.cloud_notm}}, ejecute `ibmcloud service list`. Para obtener más información, consulte todos los [roles de espacio y organización](/docs/iam?topic=iam-cfaccess) disponibles o los pasos para [gestionar el acceso a Cloud Foundry](/docs/iam?topic=iam-mngcf) en la documentación de {{site.data.keyword.cloud_notm}} IAM.
 {: shortdesc}
 
 En la tabla siguiente se muestran los roles de Cloud Foundry necesarios para los permisos de acción de clúster.
@@ -1029,107 +1036,71 @@ En la tabla siguiente se muestran los roles de Cloud Foundry necesarios para los
   <tbody>
   <tr>
     <td>Rol de espacio: Gestor</td>
-    <td>Gestionar el acceso de los usuarios a un espacio de {{site.data.keyword.Bluemix_notm}}</td>
+    <td>Gestionar el acceso de los usuarios a un espacio de {{site.data.keyword.cloud_notm}}</td>
   </tr>
   <tr>
     <td>Rol del espacio: Desarrollador</td>
     <td>
-      <ul><li>Crear instancias de servicio de {{site.data.keyword.Bluemix_notm}}</li>
-      <li>Enlazar instancias de servicio de {{site.data.keyword.Bluemix_notm}} a clústeres</li>
+      <ul><li>Crear instancias de servicio de {{site.data.keyword.cloud_notm}}</li>
+      <li>Enlazar instancias de servicio de {{site.data.keyword.cloud_notm}} a clústeres</li>
       <li>Ver registros de la configuración de reenvío de registros de un clúster a nivel de espacio</li></ul>
     </td>
   </tr>
   </tbody>
 </table>
 
-## Roles de la infraestructura
+## Roles de infraestructura clásica
 {: #infra}
 
-Un usuario con el rol de acceso de infraestructura de **Superusuario** [establece la clave de API para una región y un grupo de recursos](/docs/containers?topic=containers-users#api_key) para que se puedan realizar acciones de infraestructura (o, con menor frecuencia, [establece manualmente distintas credenciales de cuenta](/docs/containers?topic=containers-users#credentials)). A continuación, las acciones de infraestructura que pueden realizar otros usuarios de la cuenta se autorizan mediante roles de plataforma de {{site.data.keyword.Bluemix_notm}} IAM. No es necesario que edite los permisos de la infraestructura de IBM Cloud (SoftLayer) de otros usuarios. Utilice la tabla siguiente para personalizar los permisos de la infraestructura de IBM Cloud (SoftLayer) de los usuarios solo cuando no pueda asignar el rol de **Superusuario** al usuario que establece la clave de API. Para ver instrucciones para asignar permisos, consulte [Personalización de permisos de la infraestructura](/docs/containers?topic=containers-users#infra_access).
+Un usuario con el rol de acceso de infraestructura de **Superusuario** [establece la clave de API para una región y un grupo de recursos](/docs/containers?topic=containers-users#api_key) para que se puedan realizar acciones de infraestructura (o, con menor frecuencia, [establece manualmente distintas credenciales de cuenta](/docs/containers?topic=containers-users#credentials)). A continuación, las acciones de infraestructura que pueden realizar otros usuarios de la cuenta se autorizan mediante roles de plataforma de {{site.data.keyword.cloud_notm}} IAM. No es necesario que edite los permisos de infraestructura clásica de otros usuarios. Utilice la tabla siguiente para personalizar los permisos de la infraestructura clásica de los usuarios solo cuando no pueda asignar el rol de **Superusuario** al usuario que establece la clave de API. Para ver instrucciones para asignar permisos, consulte [Personalización de permisos de la infraestructura](/docs/containers?topic=containers-users#infra_access).
 {: shortdesc}
 
 
 
-En la tabla siguiente se muestran los permisos de la infraestructura necesarios para completar grupos de tareas comunes.
+¿Necesita comprobar que la clave de API o las credenciales establecidas manualmente tienen los permisos de infraestructura necesarios o recomendados? Utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) `ibmcloud ks infra-permissions-get`.
+{: tip}
 
-<table>
-<caption>Permisos de infraestructura necesarios habitualmente para {{site.data.keyword.containerlong_notm}}</caption>
-<thead>
-  <th>Tareas comunes en {{site.data.keyword.containerlong_notm}}</th>
-  <th>Permisos de infraestructura necesarios por categoría</th>
-</thead>
-<tbody>
-<tr>
-<td>
-  <strong>Permisos mínimos</strong>: <ul>
-  <li>Cree un clúster.</li></ul></td>
-<td>
-<strong>Cuenta</strong>: <ul>
-<li>Añadir servidor</li></ul>
-  <strong>Dispositivos</strong>:<ul>
-  <li>Para los nodos trabajadores nativos: ver detalles de hardware</li>
-  <li>Gestión remota de IPMI</li>
-  <li>Kernel de rescate y de recarga de sistema operativo</li>
-  <li>Para los nodos trabajadores de VM: ver detalles de servidores virtuales</li></ul></td>
-</tr>
-<tr>
-<td>
-<strong>Administración de clúster</strong>:<ul>
-  <li>Crear, actualizar y suprimir clústeres.</li>
-  <li>Añadir, cargar y rearrancar nodos trabajadores.</li>
-  <li>Ver VLAN.</li>
-  <li>Crear subredes.</li>
-  <li>Desplegar pods y servicios del equilibrador de carga.</li></ul>
-  </td><td>
-<strong>Cuenta</strong>:<ul>
-  <li>Añadir servidor</li>
-  <li>Cancelar servidor</li></ul>
-<strong>Dispositivos</strong>:<ul>
-  <li>Para los nodos trabajadores nativos: ver detalles de hardware</li>
-  <li>Gestión remota de IPMI</li>
-  <li>Kernel de rescate y de recarga de sistema operativo</li>
-  <li>Para los nodos trabajadores de VM: ver detalles de servidores virtuales</li></ul>
-<strong>Red</strong>:<ul>
-  <li>Añadir sistema con puerto de red pública</li></ul>
-<p class="important">También debe asignar al usuario la capacidad de gestionar casos de soporte. Consulte el paso 8 del tema [Personalización de permisos de la infraestructura](/docs/containers?topic=containers-users#infra_access).</p>
-</td>
-</tr>
-<tr>
-<td>
-  <strong>Almacenamiento</strong>: <ul>
-  <li>Crear reclamaciones de volumen persistente para suministrar volúmenes persistentes.</li>
-  <li>Crear y gestionar recursos de infraestructura de almacenamiento.</li></ul></td>
-<td>
-<strong>Cuenta</strong>:<ul>
-  <li>Añadir/actualizar almacenamiento (StorageLayer)</li></ul>
-<strong>Servicios</strong>:<ul>
-  <li>Gestión de almacenamiento</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Gestión de redes privadas</strong>: <ul>
-  <li>Gestionar VLAN privadas para redes en clúster.</li>
-  <li>Configurar conectividad de VPN en redes privadas.</li></ul></td>
-<td>
-  <strong>Red</strong>:<ul>
-  <li>Gestionar rutas de subredes de la red</li></ul></td>
-</tr>
-<tr>
-<td>
-  <strong>Gestión de redes públicas</strong>:<ul>
-  <li>Configurar las redes públicas de Ingress y del equilibrador de carga para exponer apps.</li></ul></td>
-<td>
-<strong>Dispositivos</strong>:<ul>
-<li>Gestionar control de puertos</li>
-  <li>Editar nombre de host/dominio</li></ul>
-<strong>Red</strong>:<ul>
-  <li>Añadir direcciones IP</li>
-  <li>Gestionar rutas de subredes de la red</li>
-  <li>Añadir sistema con puerto de red pública</li></ul>
-<strong>Servicios</strong>:<ul>
-  <li>Gestionar DNS</li>
-  <li>Ver certificados (SSL)</li>
-  <li>Gestionar certificados (SSL)</li></ul></td>
-</tr>
-</tbody>
-</table>
+En la tabla siguiente se muestran los permisos de infraestructura clásica que las credenciales de una región y el grupo de recursos pueden tener para crear clústeres y otros casos de uso comunes. La descripción incluye cómo puede asignar el permiso en la consola de infraestructura de {{site.data.keyword.cloud_notm}} IAM Classic o en el mandato `ibmcloud sl`. Para obtener más información, consulte las instrucciones para la [consola](/docs/containers?topic=containers-users#infra_console) o la [CLI](/docs/containers?topic=containers-users#infra_cli).
+*   **Crear clústeres**: Permisos de infraestructura clásica que debe tener para crear un clúster. Cuando ejecuta `ibmcloud ks infra-permissions-get`, estos permisos se listan como **Obligatorios**.
+*   **Otros casos de uso común**: Permisos de infraestructura clásica que debe tener para otros casos de ejemplo comunes. Incluso si tiene permiso para crear un clúster, es posible que se apliquen algunas limitaciones. Por ejemplo, es posible que no sea capaz de crear o trabajar con un clúster con nodos trabajadores nativos o con una dirección IP pública. Después de la creación del clúster, es posible que fallen más pasos para añadir recursos de red o de almacenamiento. Cuando ejecuta `ibmcloud ks infra-permissions-get`, estos permisos se listan como **Recomendados**.
+
+| Permiso | Descripción | Consola Asignar política de IAM | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| Gestión remota de IPMI | Gestionar nodos trabajadores.|Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission REMOTE_MANAGEMENT --enable true</code></pre> |
+| Añadir servidor | Añadir nodos trabajadores. Para los nodos trabajadores que tienen direcciones IP públicas, también necesita el permiso **Añadir cálculo con puerto de red pública**. | Infraestructura clásica > Permisos > Cuenta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_ADD --enable true</code></pre>  |
+| Cancelar servidor | Suprimir nodos trabajadores. | Infraestructura clásica > Permisos > Cuenta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_CANCEL --enable true</code></pre>  |
+| Kernel de rescate y de recarga de sistema operativo | Actualice, rearranque y vuelva a cargar los nodos trabajadores. | Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SERVER_RELOAD --enable true</code></pre>  |
+| Ver detalles de servidores virtuales | Obligatorio si el clúster tiene nodos trabajadores de máquina virtual. Listar y obtener detalles de los nodos trabajadores de la VM. | Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission VIRTUAL_GUEST_VIEW --enable true</code></pre>  |
+| Ver detalles de hardware | Obligatorio si el clúster tiene nodos trabajadores nativos. Listar y obtener detalles de los nodos trabajadores nativos. | Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HARDWARE_VIEW --enable true</code></pre>  |
+| Añadir caso de soporte | Como parte de la automatización de la creación del clúster, se abren casos de soporte para suministrar la infraestructura del clúster. | Asignar acceso a servicios de gestión de cuentas > Centro de soporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_ADD --enable true</code></pre>  |
+| Editar caso de soporte | Como parte de la automatización de la creación del clúster, se actualizan casos de soporte para suministrar la infraestructura del clúster. | Asignar acceso a servicios de gestión de cuentas > Centro de soporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_EDIT --enable true</code></pre>  |
+| Ver caso de soporte | Como parte de la automatización de la creación del clúster, se utilizan casos de soporte para suministrar la infraestructura del clúster. | Asignar acceso a servicios de gestión de cuentas > Centro de soporte > Administrador|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission TICKET_VIEW --enable true</code></pre>  |
+{: class="simple-tab-table"}
+{: caption="Permisos de infraestructura clásica necesarios" caption-side="top"}
+{: #classic-permissions-required}
+{: tab-title="Create clusters"}
+{: tab-group="Classic infrastructure permissions"}
+
+| Permiso | Descripción | Consola Asignar política de IAM | CLI |
+|:-----------------|:-----------------|:---------------|:----|
+| Acceder a todo virtual | Designar acceso a todos los nodos trabajadores de la VM. Sin este permiso, es posible que un usuario que crea un clúster no pueda ver los nodos trabajadores de la máquina virtual de otro clúster incluso si el usuario tiene acceso de IAM a ambos clústeres. | Infraestructura clásica > Dispositivos > Comprobar todos los servidores virtuales y el acceso al servidor virtual automático|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_GUEST --enable true</code></pre> |
+| Acceso a todo el hardware | Designe el acceso a todos los nodos trabajadores nativos.  Sin este permiso, es posible que un usuario que crea un clúster no pueda ver los nodos trabajadores nativos de otro clúster incluso si el usuario tiene acceso de IAM a ambos clústeres. | Infraestructura clásica > Dispositivos > Comprobar todos los servidores virtuales y el acceso al servidor virtual automático|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ACCESS_ALL_HARDWARE --enable true</code></pre> |
+| Añadir sistema con puerto de red pública | Permita que los nodos trabajadores tengan un puerto que pueda ser accesible en la red pública. | Infraestructura clásica > Permisos > Red|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PUBLIC_NETWORK_COMPUTE --enable true</code></pre> |
+| Gestionar DNS | Configurar las redes públicas de Ingress y del equilibrador de carga para exponer apps. | Infraestructura clásica > Permisos > Servicios|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission DNS_MANAGE --enable true</code></pre> |
+| Editar nombre de host/dominio | Configurar las redes públicas de Ingress y del equilibrador de carga para exponer apps. | Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission HOSTNAME_EDIT --enable true</code></pre> |
+| Añadir direcciones IP | Añadir direcciones IP a subredes públicas o privadas que se utilizan para el equilibrio de carga de clústeres. | Infraestructura clásica > Permisos > Red|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission IP_ADD --enable true</code></pre> |
+| Gestionar rutas de subredes de la red | Gestione las VLAN públicas y privadas y las subredes que se utilizan para el equilibrio de carga de clúster. | Infraestructura clásica > Permisos > Red|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NETWORK_ROUTE_MANAGE --enable true</code></pre> |
+| Gestionar control de puertos | Gestionar puertos que se utilizan para el equilibrio de carga de apps. | Infraestructura clásica > Permisos > Dispositivos|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission PORT_CONTROL --enable true</code></pre> |
+| Gestionar certificados (SSL) | Configure los certificados que se utilizan para el equilibrio de carga de clúster. | Infraestructura clásica > Permisos > Servicios|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre>  |
+| Ver certificados (SSL) | Configure los certificados que se utilizan para el equilibrio de carga de clúster. | Infraestructura clásica > Permisos > Servicios|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission SECURITY_CERTIFICATE_MANAGE --enable true</code></pre> |
+| Añadir/actualizar almacenamiento (StorageLayer) | Cree instancias de almacenamiento File o Block (archivo o bloque) de {{site.data.keyword.cloud_notm}} para adjuntar como volúmenes a sus apps como almacén persistente de datos. | Infraestructura clásica > Permisos > Cuenta|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission ADD_SERVICE_STORAGE --enable true</code></pre>  |
+| Gestión de almacenamiento | Gestione instancias de almacenamiento File o Block (archivo o bloque) de {{site.data.keyword.cloud_notm}} que están conectadas como volúmenes a sus apps como almacén persistente de datos. | Infraestructura clásica > Permisos > Servicios|<pre class="pre"><code>ibmcloud sl user permission-edit &lt;user_id&gt; --permission NAS_MANAGE --enable true</code></pre> |
+{: class="simple-tab-table"}
+{: caption="Permisos de infraestructura clásica sugeridos" caption-side="top"}
+{: #classic-permissions-suggested}
+{: tab-title="Other common use cases"}
+{: tab-group="Classic infrastructure permissions"}
+
+
+
+

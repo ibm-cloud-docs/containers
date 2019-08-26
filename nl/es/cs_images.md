@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-04"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -68,7 +68,7 @@ Puede crear contenedores a partir de imágenes de confianza que están firmadas 
 2.  Para imponer una política en la que únicamente se pueden utilizar imágenes firmadas para crear contenedores en su clúster, [añada Container Image Security Enforcement (beta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce).
 3.  Despliegue la app.
     1. [Despliegue en el espacio de nombres `default` de Kubernetes](#namespace).
-    2. [Despliegue en un espacio de nombres de Kubernetes diferente, o desde una cuenta o región diferente de {{site.data.keyword.Bluemix_notm}}](#other).
+    2. [Despliegue en un espacio de nombres de Kubernetes diferente, o desde una cuenta o región diferente de {{site.data.keyword.cloud_notm}}](#other).
 
 <br />
 
@@ -130,37 +130,37 @@ Para desplegar un contenedor en el espacio de nombres **predeterminado** del cl�
 ## Cómo autorizar al clúster para que puede extraer imágenes de un registro
 {: #cluster_registry_auth}
 
-Para extraer imágenes de un registro, su clúster de {{site.data.keyword.containerlong_notm}} utiliza un tipo especial de Kubernetes secret, un `imagePullSecret`. Este secreto de extracción de imágenes almacena las credenciales para acceder a un registro de contenedor. El registro de contenedor puede ser su espacio de nombres en {{site.data.keyword.registrylong_notm}}, un espacio de nombres de {{site.data.keyword.registrylong_notm}} que pertenece a una cuenta distinta de {{site.data.keyword.Bluemix_notm}} o cualquier otro registro privado como, por ejemplo, Docker. Su clúster está configurado para extraer imágenes del espacio de nombres en {{site.data.keyword.registrylong_notm}} y desplegar los contenedores de estas imágenes en el espacio de nombres `default` de Kubernetes en el clúster. Si tiene que extraer imágenes en otros espacios de nombres de Kubernetes de clúster o de otros registros, debe configurar el secreto de extracción de imágenes.
+Para extraer imágenes de un registro, su clúster de {{site.data.keyword.containerlong_notm}} utiliza un tipo especial de Kubernetes secret, un `imagePullSecret`. Este secreto de extracción de imágenes almacena las credenciales para acceder a un registro de contenedor. El registro de contenedor puede ser su espacio de nombres en {{site.data.keyword.registrylong_notm}}, un espacio de nombres de {{site.data.keyword.registrylong_notm}} que pertenece a una cuenta distinta de {{site.data.keyword.cloud_notm}} o cualquier otro registro privado como, por ejemplo, Docker. Su clúster está configurado para extraer imágenes del espacio de nombres en {{site.data.keyword.registrylong_notm}} y desplegar los contenedores de estas imágenes en el espacio de nombres `default` de Kubernetes en el clúster. Si tiene que extraer imágenes en otros espacios de nombres de Kubernetes de clúster o de otros registros, debe configurar el secreto de extracción de imágenes.
 {:shortdesc}
 
 **¿Cómo se configura el clúster para extraer imágenes del espacio de nombres `default` de Kubernetes?**<br>
-Cuando se crea un clúster, este tiene un ID de servicio de {{site.data.keyword.Bluemix_notm}} IAM al que se otorga a una política de rol de acceso al servicio de IAM de **Lector** sobre {{site.data.keyword.registrylong_notm}}. Las credenciales de ID de servicio se copian en una clave de API que no caduca y que se guarda en secretos de extracción de imágenes en el clúster. Los secretos de extracción de imágenes se añaden al espacio de nombres `default` de Kubernetes y la lista de secretos en la cuenta de servicio `default` para este espacio de nombres. Mediante el uso de secretos de extracción de imágenes, los despliegues pueden extraer imágenes (acceso de solo lectura) en el [registro global y regional](/docs/services/Registry?topic=registry-registry_overview#registry_regions) para crear contenedores en el espacio de nombres `default` de Kubernetes. El registro global almacena de forma segura imágenes públicas proporcionadas por IBM a las que puede hacer referencia en sus despliegues en lugar de tener referencias distintas para las imágenes que se almacenan en cada registro regional. El registro regional almacena de forma segura sus imágenes de Docker privadas.
+Cuando se crea un clúster, este tiene un ID de servicio de {{site.data.keyword.cloud_notm}} IAM al que se otorga a una política de rol de acceso al servicio de IAM de **Lector** sobre {{site.data.keyword.registrylong_notm}}. Las credenciales de ID de servicio se copian en una clave de API que no caduca y que se guarda en secretos de extracción de imágenes en el clúster. Los secretos de extracción de imágenes se añaden al espacio de nombres `default` de Kubernetes y la lista de secretos en la cuenta de servicio `default` para este espacio de nombres. Mediante el uso de secretos de extracción de imágenes, los despliegues pueden extraer imágenes (acceso de solo lectura) en el [registro global y regional](/docs/services/Registry?topic=registry-registry_overview#registry_regions) para crear contenedores en el espacio de nombres `default` de Kubernetes. El registro global almacena de forma segura imágenes públicas proporcionadas por IBM a las que puede hacer referencia en sus despliegues en lugar de tener referencias distintas para las imágenes que se almacenan en cada registro regional. El registro regional almacena de forma segura sus imágenes de Docker privadas.
 
 **¿Puedo restringir el acceso de obtención a un determinado registro regional?**<br>
-Sí, puede [editar la política de IAM existente del ID de servicio](/docs/iam?topic=iam-serviceidpolicy#access_edit) que restringe el rol de acceso al servicio de **Lector** a dicho registro regional o a un recurso del registro, como por ejemplo un espacio de nombres. Para poder personalizar las políticas de IAM de registro, debe [habilitar las políticas de {{site.data.keyword.Bluemix_notm}} IAM para {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
+Sí, puede [editar la política de IAM existente del ID de servicio](/docs/iam?topic=iam-serviceidpolicy#access_edit) que restringe el rol de acceso al servicio de **Lector** a dicho registro regional o a un recurso del registro, como por ejemplo un espacio de nombres. Para poder personalizar las políticas de IAM de registro, debe [habilitar las políticas de {{site.data.keyword.cloud_notm}} IAM para {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-user#existing_users).
 
   ¿Desea proteger aún más sus credenciales de registro? Solicite al administrador del clúster que [habilite {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) en
 el clúster para cifrar los secretos de Kubernetes en el clúster, como por ejemplo el `imagePullSecret` que almacena las credenciales de registro.
   {: tip}
 
 **¿Puedo extraer imágenes en espacios de nombres de Kubernetes que no sean `default`?**<br>
-No de forma predeterminada. Utilizando la configuración de clúster predeterminada, puede desplegar contenedores desde cualquier imagen almacenada en su espacio de nombres de {{site.data.keyword.registrylong_notm}} al espacio de nombres `default` de Kubernetes de su clúster. Para utilizar estas imágenes en otros espacios de nombres de Kubernetes o en otras cuentas de {{site.data.keyword.Bluemix_notm}}, [tiene la opción de copiar o crear su propio secreto de extracción de imágenes](#other).
+No de forma predeterminada. Utilizando la configuración de clúster predeterminada, puede desplegar contenedores desde cualquier imagen almacenada en su espacio de nombres de {{site.data.keyword.registrylong_notm}} al espacio de nombres `default` de Kubernetes de su clúster. Para utilizar estas imágenes en otros espacios de nombres de Kubernetes o en otras cuentas de {{site.data.keyword.cloud_notm}}, [tiene la opción de copiar o crear su propio secreto de extracción de imágenes](#other).
 
-**¿Puedo extraer imágenes de una cuenta de {{site.data.keyword.Bluemix_notm}} distinta?**<br>
-Sí, cree una clave de API en la cuenta de {{site.data.keyword.Bluemix_notm}} que desea utilizar. A continuación, cree un secreto de extracción de imágenes que almacene las credenciales de clave de API en cada clúster y en cada espacio de nombres de clúster y de los que desee extraer. [Siga el este ejemplo que utiliza una clave de API de ID de servicio autorizada](#other_registry_accounts).
+**¿Puedo extraer imágenes de una cuenta de {{site.data.keyword.cloud_notm}} distinta?**<br>
+Sí, cree una clave de API en la cuenta de {{site.data.keyword.cloud_notm}} que desea utilizar. A continuación, cree un secreto de extracción de imágenes que almacene las credenciales de clave de API en cada clúster y en cada espacio de nombres de clúster y de los que desee extraer. [Siga el este ejemplo que utiliza una clave de API de ID de servicio autorizada](#other_registry_accounts).
 
-Para utilizar un registro que no sea de {{site.data.keyword.Bluemix_notm}}, como por ejemplo Docker, consulte [Acceso a imágenes almacenadas en otros registros privados](#private_images).
+Para utilizar un registro que no sea de {{site.data.keyword.cloud_notm}}, como por ejemplo Docker, consulte [Acceso a imágenes almacenadas en otros registros privados](#private_images).
 
 **¿La clave de API tiene que ser para un ID de servicio? ¿Qué ocurre si alcanzo el límite de ID de servicio para mi cuenta?**<br>
-La configuración de clúster predeterminada crea un ID de servicio para almacenar las credenciales de clave de API de {{site.data.keyword.Bluemix_notm}} IAM en el secreto de extracción de imágenes. No obstante, también puede crear una clave de API para un usuario individual y almacenar esas credenciales en un secreto de extracción de imágenes. Si alcanza el [límite de IAM para los ID de servicio](/docs/iam?topic=iam-iam_limits#iam_limits), el clúster se crea sin el ID de servicio ni el secreto de extracción de imágenes y no puede extraer las imágenes de los dominios del registro `icr.io` de forma predeterminada. Debe [crear su propio secreto de extracción de imágenes](#other_registry_accounts), pero utilizando una clave de API para un usuario individual como, por ejemplo, un ID funcional, no un ID de servicio de {{site.data.keyword.Bluemix_notm}} IAM.
+La configuración de clúster predeterminada crea un ID de servicio para almacenar las credenciales de clave de API de {{site.data.keyword.cloud_notm}} IAM en el secreto de extracción de imágenes. No obstante, también puede crear una clave de API para un usuario individual y almacenar esas credenciales en un secreto de extracción de imágenes. Si alcanza el [límite de IAM para los ID de servicio](/docs/iam?topic=iam-iam_limits#iam_limits), el clúster se crea sin el ID de servicio ni el secreto de extracción de imágenes y no puede extraer las imágenes de los dominios del registro `icr.io` de forma predeterminada. Debe [crear su propio secreto de extracción de imágenes](#other_registry_accounts), pero utilizando una clave de API para un usuario individual como, por ejemplo, un ID funcional, no un ID de servicio de {{site.data.keyword.cloud_notm}} IAM.
 
 **El secreto de extracción de imágenes de mi clúster utiliza una señal de registro. ¿Todavía funciona una señal?**<br>
 
-El método anterior de autorizar el acceso del clúster {{site.data.keyword.registrylong_notm}} mediante la creación automática de una [señal](/docs/services/Registry?topic=registry-registry_access#registry_tokens)
-y el almacenamiento de la señal en un secreto de extracción de imágenes recibe soporte, pero ha quedado en desuso.
+Aún se admite el método anterior de autorización del acceso a clúster a {{site.data.keyword.registrylong_notm}} por medio de [tokens](/docs/services/Registry?topic=registry-registry_access#registry_tokens),
+pero está en desuso.
 {: deprecated}
 
-Las señales autorizan el acceso a los dominios del registro `registry.bluemix.net` en desuso, mientras que las claves de API autorizan el acceso a los dominios del registro `icr.io`. Durante el periodo de transición de la autenticación basada en señales a la basada en claves de API, durante un periodo de tiempo se crearán tanto secretos de obtención de imágenes basados en señales como basados en claves de API. Si tiene secretos de obtención de imágenes basados tanto en señales como en claves de API, su clúster podrá extraer imágenes tanto del dominio `registry.bluemix.net` como del dominio `icr.io` en el espacio de nombres `default` de Kubernetes.
+Las señales autorizan el acceso a los dominios del registro `registry.bluemix.net` en desuso, mientras que las claves de API autorizan el acceso a los dominios del registro `icr.io`. Es posible que los clústeres existentes tengan tanto señales (tokens) como los secretos de obtención de imágenes basadas en claves de API, pero los nuevos clústeres solo utilizan claves de API. Por lo tanto, de forma predeterminada, los nuevos clústeres solo pueden extraer imágenes de dominios `icr.io` en el espacio de nombres de Kubernetes `default`.
 
 Antes de que las señales y dominios de `registry.bluemix.net` en desuso dejen de estar soportados, actualice los secretos de extracción de imágenes para que utilicen el método de claves de API para el espacio de nombres [`default` de Kubernetes namespace](#imagePullSecret_migrate_api_key) y [cualquier otro espacio de nombres o cuenta](#other) que utilice. A continuación, actualice los despliegues para extraer de los dominios del registro `icr.io`.
 
@@ -179,12 +179,12 @@ Los nuevos clústeres de {{site.data.keyword.containerlong_notm}} almacenan una 
 **Antes de empezar**:
 *   [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Asegúrese de que tiene los siguientes permisos:
-    *   Rol de plataforma **Operador o Administrador** de {{site.data.keyword.Bluemix_notm}} IAM para {{site.data.keyword.containerlong_notm}}. El propietario de la cuenta puede otorgarle el rol ejecutando:
+    *   Rol de plataforma **Operador o Administrador** de {{site.data.keyword.cloud_notm}} IAM para {{site.data.keyword.containerlong_notm}}. El propietario de la cuenta puede otorgarle el rol ejecutando:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles Administrator,Operator
         ```
         {: pre}
-    *   Rol de plataforma **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM para {{site.data.keyword.registrylong_notm}}, en todas las regiones y grupos de recursos. El propietario de la cuenta puede otorgarle el rol ejecutando:
+    *   Rol de plataforma **Administrador** de {{site.data.keyword.cloud_notm}} IAM para {{site.data.keyword.registrylong_notm}}, en todas las regiones y grupos de recursos. El propietario de la cuenta puede otorgarle el rol ejecutando:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
@@ -225,18 +225,18 @@ Los nuevos clústeres de {{site.data.keyword.containerlong_notm}} almacenan una 
 5.  Opcional: Si tiene un cortafuegos, asegúrese de que [permite el tráfico de red de salida a las subredes de registro](/docs/containers?topic=containers-firewall#firewall_outbound) para los dominios que utiliza.
 
 **¿Qué es lo siguiente?**
-*   Para extraer imágenes en espacios de nombres de Kubernetes que no sean `default` o de otras cuentas de {{site.data.keyword.Bluemix_notm}}, [copie o cree otro secreto de extracción de imágenes](/docs/containers?topic=containers-images#other).
+*   Para extraer imágenes en espacios de nombres de Kubernetes que no sean `default` o de otras cuentas de {{site.data.keyword.cloud_notm}}, [copie o cree otro secreto de extracción de imágenes](/docs/containers?topic=containers-images#other).
 *   Para restringir el acceso al secreto de extracción de imágenes a determinados recursos de registro, como por ejemplo espacios de nombres o regiones:
-    1.  Asegúrese de que [las políticas de {{site.data.keyword.Bluemix_notm}} IAM para {{site.data.keyword.registrylong_notm}} están habilitadas](/docs/services/Registry?topic=registry-user#existing_users).
-    2.  [Edite las políticas de {{site.data.keyword.Bluemix_notm}} IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit) para el ID de servicio o [cree otro secreto de extracción de imágenes](/docs/containers?topic=containers-images#other_registry_accounts).
+    1.  Asegúrese de que [las políticas de {{site.data.keyword.cloud_notm}} IAM para {{site.data.keyword.registrylong_notm}} están habilitadas](/docs/services/Registry?topic=registry-user#existing_users).
+    2.  [Edite las políticas de {{site.data.keyword.cloud_notm}} IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit) para el ID de servicio o [cree otro secreto de extracción de imágenes](/docs/containers?topic=containers-images#other_registry_accounts).
 
 <br />
 
 
-## Utilización de un secreto de extracción de imágenes para acceder a otros espacios de nombres de Kubernetes del clúster, otras cuentas de {{site.data.keyword.Bluemix_notm}} o registros privados externos
+## Utilización de un secreto de extracción de imágenes para acceder a otros espacios de nombres de Kubernetes del clúster, otras cuentas de {{site.data.keyword.cloud_notm}} o registros privados externos
 {: #other}
 
-Configure su propio secreto de extracción de imágenes en su clúster para desplegar contenedores en espacios de nombres de Kubernetes que no sean `default`, para utilizar imágenes almacenadas en otras cuentas de {{site.data.keyword.Bluemix_notm}} o para utilizar imágenes almacenadas en registros privados externos. Además, puede crear su propio secreto de extracción de imágenes para aplicar políticas de acceso de IAM que restrinjan los permisos a determinados espacios de nombres de imágenes de registro o acciones (como por ejemplo `push` o `pull`).
+Configure su propio secreto de extracción de imágenes en su clúster para desplegar contenedores en espacios de nombres de Kubernetes que no sean `default`, para utilizar imágenes almacenadas en otras cuentas de {{site.data.keyword.cloud_notm}} o para utilizar imágenes almacenadas en registros privados externos. Además, puede crear su propio secreto de extracción de imágenes para aplicar políticas de acceso de IAM que restrinjan los permisos a determinados espacios de nombres de imágenes de registro o acciones (como por ejemplo `push` o `pull`).
 {:shortdesc}
 
 Después de crear el secreto de extracción de imágenes, los contenedores deben utilizar el secreto para que reciban autorización para extraer una imagen del registro. Puede añadir el secreto de extracción de imágenes a la cuenta de servicio para el espacio de nombres, o bien puede hacer referencia al secreto en cada despliegue. Para obtener instrucciones, consulte [Utilización del secreto de extracción de imágenes para desplegar contenedores](/docs/containers?topic=containers-images#use_imagePullSecret).
@@ -254,7 +254,7 @@ Antes de empezar:
 <br/>
 Para utilizar su propio secreto de extracción de imágenes, elija una de las opciones siguientes:
 - [Copie el secreto de extracción de imágenes](#copy_imagePullSecret) del espacio de nombres predeterminado de Kubernetes a otros espacios de nombres de su clúster.
-- [Cree nuevas credenciales de API de IAM y almacénelas en un secreto de obtención de imágenes](#other_registry_accounts) para acceder a las imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}} o para aplicar políticas IAM que restrinjan el acceso a determinados dominios de registro o espacios de nombres.
+- [Cree nuevas credenciales de API de IAM y almacénelas en un secreto de obtención de imágenes](#other_registry_accounts) para acceder a las imágenes de otras cuentas de {{site.data.keyword.cloud_notm}} o para aplicar políticas IAM que restrinjan el acceso a determinados dominios de registro o espacios de nombres.
 - [Crear un secreto de extracción de imágenes para acceder a imágenes en registros privados externos](#private_images).
 
 <br/>
@@ -263,7 +263,7 @@ Si ya ha creado un secreto de extracción de imágenes en el espacio de nombres 
 ### Copiar un secreto de extracción de imágenes existente
 {: #copy_imagePullSecret}
 
-Puede copiar un secreto de extracción de imágenes, como el que se crea automáticamente para el espacio de nombres `default` de Kubernetes, a otros espacios de nombres en el clúster. Pero si desea utilizar diferentes credenciales de clave de API de {{site.data.keyword.Bluemix_notm}} IAM para este espacio de nombres, como por ejemplo para restringir el acceso a espacios de nombres específicos o para extraer imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}}, se recomienda que [cree un secreto de extracción de imágenes](#other_registry_accounts).
+Puede copiar un secreto de extracción de imágenes, como el que se crea automáticamente para el espacio de nombres `default` de Kubernetes, a otros espacios de nombres en el clúster. Pero si desea utilizar diferentes credenciales de clave de API de {{site.data.keyword.cloud_notm}} IAM para este espacio de nombres, como por ejemplo para restringir el acceso a espacios de nombres específicos o para extraer imágenes de otras cuentas de {{site.data.keyword.cloud_notm}}, se recomienda que [cree un secreto de extracción de imágenes](#other_registry_accounts).
 {: shortdesc}
 
 1.  Obtenga una lista de los espacios de nombres de Kubernetes disponibles en el clúster, o cree un espacio de nombres que utilizar.
@@ -335,15 +335,15 @@ Puede copiar un secreto de extracción de imágenes, como el que se crea automá
     {: pre}
 5.  [Añada el secreto de extracción de imágenes a una cuenta de servicio de Kubernetes para que cualquier pod del espacio de nombres pueda utilizar el secreto de extracción de imágenes cuando despliegue un contenedor](#use_imagePullSecret).
 
-### Creación de un secreto de extracción de imágenes con credenciales de clave de API de IAM distintas para tener un mayor control o acceso a las imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}}
+### Creación de un secreto de extracción de imágenes con credenciales de clave de API de IAM distintas para tener un mayor control o acceso a las imágenes de otras cuentas de {{site.data.keyword.cloud_notm}}
 {: #other_registry_accounts}
 
-Puede asignar políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM a usuarios o a un ID de servicio para restringir los permisos a determinados espacios de nombres de imágenes de registro o acciones (como por ejemplo `push` o `pull`). A continuación, cree una clave de API y almacene estas credenciales de registro en un secreto de extracción de imágenes para el clúster.
+Puede asignar políticas de acceso de {{site.data.keyword.cloud_notm}} IAM a usuarios o a un ID de servicio para restringir los permisos a determinados espacios de nombres de imágenes de registro o acciones (como por ejemplo `push` o `pull`). A continuación, cree una clave de API y almacene estas credenciales de registro en un secreto de extracción de imágenes para el clúster.
 {: shortdesc}
 
-Por ejemplo, para acceder a las imágenes de otras cuentas de {{site.data.keyword.Bluemix_notm}}, cree una clave de API que almacene las credenciales de {{site.data.keyword.registryshort_notm}} de un usuario o un ID de servicio en dicha cuenta. A continuación, en la cuenta de su clúster, guarde las credenciales de clave de API en un secreto de extracción de imágenes para cada clúster y cada espacio de nombres de clúster.
+Por ejemplo, para acceder a las imágenes de otras cuentas de {{site.data.keyword.cloud_notm}}, cree una clave de API que almacene las credenciales de {{site.data.keyword.registryshort_notm}} de un usuario o un ID de servicio en dicha cuenta. A continuación, en la cuenta de su clúster, guarde las credenciales de clave de API en un secreto de extracción de imágenes para cada clúster y cada espacio de nombres de clúster.
 
-En los pasos siguientes se crea una clave de API que almacena las credenciales de un ID de servicio de {{site.data.keyword.Bluemix_notm}} IAM. En lugar de utilizar un ID de servicio, es posible que desee crear una clave de API para un ID de usuario que tenga una política de acceso al servicio de {{site.data.keyword.Bluemix_notm}} IAM sobre {{site.data.keyword.registryshort_notm}}. Sin embargo, asegúrese de que el usuario sea un ID funcional o tenga un plan para que el clúster pueda acceder al registro en el caso de que el usuario se vaya.
+En los pasos siguientes se crea una clave de API que almacena las credenciales de un ID de servicio de {{site.data.keyword.cloud_notm}} IAM. En lugar de utilizar un ID de servicio, es posible que desee crear una clave de API para un ID de usuario que tenga una política de acceso al servicio de {{site.data.keyword.cloud_notm}} IAM sobre {{site.data.keyword.registryshort_notm}}. Sin embargo, asegúrese de que el usuario sea un ID funcional o tenga un plan para que el clúster pueda acceder al registro en el caso de que el usuario se vaya.
 {: note}
 
 1.  Obtenga una lista de los espacios de nombres de Kubernetes disponibles en el clúster, o cree un espacio de nombres para utilizar donde desea desplegar los contenedores desde las imágenes de registro.
@@ -368,12 +368,12 @@ En los pasos siguientes se crea una clave de API que almacena las credenciales d
     kubectl create namespace <namespace_name>
     ```
     {: pre}
-2.  Cree un ID de servicio de {{site.data.keyword.Bluemix_notm}} IAM para el clúster que se utiliza para las políticas de IAM y las credenciales de clave de API en el secreto de extracción de imágenes. Asegúrese de proporcionar al ID de servicio una descripción que le ayude a recuperar el ID de servicio posteriormente; por ejemplo, puede incluir el nombre del clúster y el del espacio de nombres.
+2.  Cree un ID de servicio de {{site.data.keyword.cloud_notm}} IAM para el clúster que se utiliza para las políticas de IAM y las credenciales de clave de API en el secreto de extracción de imágenes. Asegúrese de proporcionar al ID de servicio una descripción que le ayude a recuperar el ID de servicio posteriormente; por ejemplo, puede incluir el nombre del clúster y el del espacio de nombres.
     ```
     ibmcloud iam service-id-create <cluster_name>-<kube_namespace>-id --description "Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>"
     ```
     {: pre}
-3.  Cree una política de {{site.data.keyword.Bluemix_notm}} IAM personalizada para el ID de servicio del clúster que otorgue acceso a {{site.data.keyword.registryshort_notm}}.
+3.  Cree una política de {{site.data.keyword.cloud_notm}} IAM personalizada para el ID de servicio del clúster que otorgue acceso a {{site.data.keyword.registryshort_notm}}.
     ```
     ibmcloud iam service-policy-create <cluster_service_ID> --roles <service_access_role> --service-name container-registry [--region <IAM_region>] [--resource-type namespace --resource <registry_namespace>]
     ```
@@ -575,7 +575,7 @@ Cuando haga referencia al secreto de extracción de imágenes en un despliegue d
     ```
     {: codeblock}
 
-    Para acceder a una imagen pública de {{site.data.keyword.Bluemix_notm}}:
+    Para acceder a una imagen pública de {{site.data.keyword.cloud_notm}}:
     ```
     apiVersion: v1
     kind: Pod
@@ -606,7 +606,7 @@ Cuando haga referencia al secreto de extracción de imágenes en un despliegue d
     </tr>
     <tr>
     <td><code><em>&lt;image_name&gt;</em></code></td>
-    <td>El nombre de la imagen a utilizar. Para ver una lista de todas las imágenes disponibles en una cuenta de {{site.data.keyword.Bluemix_notm}}, ejecute `ibmcloud cr image-list`.</td>
+    <td>El nombre de la imagen a utilizar. Para ver una lista de todas las imágenes disponibles en una cuenta de {{site.data.keyword.cloud_notm}}, ejecute `ibmcloud cr image-list`.</td>
     </tr>
     <tr>
     <td><code><em>&lt;tag&gt;</em></code></td>
@@ -689,26 +689,28 @@ Cada espacio de nombres tiene una cuenta de servicio de Kubernetes que se denomi
 <br />
 
 
+
+
 ## En desuso: Utilización de una señal de registro para desplegar contenedores de una imagen de {{site.data.keyword.registrylong_notm}}
 {: #namespace_token}
 
 Puede desplegar contenedores en su clúster desde una imagen pública proporcionada por IBM o desde una imagen privada almacenada en el espacio de nombres de {{site.data.keyword.registryshort_notm}}. Los clústeres existentes utilizan una [señal](/docs/services/Registry?topic=registry-registry_access#registry_tokens) de registro que se almacena en un `imagePullSecret` del clúster para autorizar el acceso para extraer imágenes de los nombres de dominio `registry.bluemix.net`.
 {:shortdesc}
 
-Cuando crea un clúster, se crean automáticamente señales y secretos tanto para [el registro regional más cercano y el registro global](/docs/services/Registry?topic=registry-registry_overview#registry_regions). El registro global almacena de forma segura imágenes públicas proporcionadas por IBM a las que puede hacer referencia en sus despliegues en lugar de tener referencias distintas para las imágenes que se almacenan en cada registro regional. El registro regional almacena de forma segura sus imágenes de Docker privadas. Las señales se utilizan para autorizar el acceso de solo lectura a cualquiera de los espacios de nombres que configure en {{site.data.keyword.registryshort_notm}} para que pueda trabajar con estas imágenes públicas (registro global) y privadas (registros regionales).
+Para los clústeres que se han creado antes del **1 de julio de 2019**, se han creado automáticamente señales y secretos de registro que no caducan, tanto para el [registro regional más cercano como para el registro global](/docs/services/Registry?topic=registry-registry_overview#registry_regions). El registro global almacena de forma segura imágenes públicas proporcionadas por IBM a las que puede hacer referencia en sus despliegues en lugar de tener referencias distintas para las imágenes que se almacenan en cada registro regional. El registro regional almacena de forma segura sus imágenes de Docker privadas. Las señales se utilizan para autorizar el acceso de solo lectura a cualquiera de los espacios de nombres que configure en {{site.data.keyword.registryshort_notm}} para que pueda trabajar con estas imágenes públicas (registro global) y privadas (registros regionales).
 
 Cada señal se debe guardar en `imagePullSecret` de Kubernetes para que resulte accesible para un clúster de Kubernetes cuando se despliegue una app contenerizada. Cuando se crea el clúster, {{site.data.keyword.containerlong_notm}} almacena automáticamente las señales para los registros global (imágenes públicas proporcionadas por IBM) y regionales en los secretos de extracción de imágenes de Kubernetes. Los secretos de extracción de imágenes se añaden al espacio de nombres `default` de Kubernetes, al espacio de nombres `kube-system` y a la lista de secretos de la cuenta de servicio `default` correspondiente a estos espacios de nombres.
 
-Este método de utilizar una señal para autorizar el acceso del clúster a {{site.data.keyword.registrylong_notm}} recibe soporte para los nombres de dominio `registry.bluemix.net`, pero está en desuso. En su lugar, [utilice el método de clave de API](#cluster_registry_auth) para autorizar el acceso del clúster a los nuevos nombres de dominio de registro de `icr.io`.
+Este método de utilizar una señal para autorizar el acceso del clúster a {{site.data.keyword.registrylong_notm}} para los nombres de dominio `registry.bluemix.net` está en desuso. Antes de que termine el soporte para las señales (tokens), actualice los despliegues para que [utilicen el método de clave de API](#cluster_registry_auth) para autorizar el acceso del clúster a los nuevos nombres de dominio de registro de `icr.io`.
 {: deprecated}
 
 En función de dónde esté la imagen y de dónde esté el contenedor, debe desplegar contenedores siguiendo distintos pasos.
 *   [Despliegue un contenedor en el espacio de nombres `default` de Kubernetes con una imagen que se encuentre en la misma región que el clúster](#token_default_namespace)
 *   [Despliegue un contenedor en un espacio de nombres de Kubernetes que no sea `default`](#token_copy_imagePullSecret)
-*   [Despliegue un contenedor con una imagen que esté en otra región o en otra cuenta de {{site.data.keyword.Bluemix_notm}} distinta a la de su clúster](#token_other_regions_accounts)
+*   [Despliegue un contenedor con una imagen que esté en otra región o en otra cuenta de {{site.data.keyword.cloud_notm}} distinta a la de su clúster](#token_other_regions_accounts)
 *   [Despliegue un contenedor con una imagen que sea de un registro privado, no de IBM](#private_images)
 
-Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.Bluemix_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o para utilizar una imagen almacenada en otra región de {{site.data.keyword.Bluemix_notm}} o en otra cuenta de {{site.data.keyword.Bluemix_notm}}, debe [crear su propio secreto de extracción de imágenes para el clúster](#other).
+Con esta configuración inicial, puede desplegar contenedores desde cualquier imagen disponible en un espacio de nombres de la cuenta de {{site.data.keyword.cloud_notm}} en el espacio de nombres **default** del clúster. Para desplegar un contenedor en otros espacios de nombres del clúster, o para utilizar una imagen almacenada en otra región de {{site.data.keyword.cloud_notm}} o en otra cuenta de {{site.data.keyword.cloud_notm}}, debe [crear su propio secreto de extracción de imágenes para el clúster](#other).
 {: note}
 
 ### En desuso: Despliegue de imágenes en el espacio de nombres `default` de Kubernetes con una señal de registro
@@ -815,22 +817,24 @@ Puede copiar el secreto de extracción de imágenes con las credenciales de señ
 5. [Despliegue un contenedor utilizando el `imagePullSecret`](#use_imagePullSecret) en su espacio de nombres.
 
 
-### En desuso: Creación de un secreto de extracción de imágenes basado en señal para acceder a imágenes de otras regiones y cuentas de {{site.data.keyword.Bluemix_notm}}
+### En desuso: Acceso a imágenes autorizadas por señales en otras regiones y cuentas de {{site.data.keyword.cloud_notm}}
 {: #token_other_regions_accounts}
 
-Para acceder a imágenes de otras regiones o cuentas de {{site.data.keyword.Bluemix_notm}}, debe crear una señal de registro y guardar sus credenciales en un secreto de extracción de imágenes.
+Para acceder a imágenes de otras regiones o cuentas de {{site.data.keyword.cloud_notm}}, debe crear una señal de registro y guardar sus credenciales en un secreto de extracción de imágenes.
 {: shortdesc}
 
-1.  Si no tiene una señal, [cree una señal para el registro al que desea acceder.](/docs/services/Registry?topic=registry-registry_access#registry_tokens_create)
-2.  Obtenga una lista de las señales en la cuenta de {{site.data.keyword.Bluemix_notm}}.
+Las señales que autorizan el acceso a los dominios de `registry.<region>.bluemix.net` están en desuso. Ya no puede crear señales (tokens) nuevos. En su lugar, cree secretos de obtención de imágenes de clúster que utilicen [credenciales de clave de API](#imagePullSecret_migrate_api_key) para extraer imágenes de los dominios de registro `icr.io`.
+{: deprecated}
+
+1.  Obtenga una lista de las señales en la cuenta de {{site.data.keyword.cloud_notm}}.
 
     ```
     ibmcloud cr token-list
     ```
     {: pre}
 
-3.  Anote el ID de la señal que desea utilizar.
-4.  Recupere el valor de la señal. Sustituya <em>&lt;token_ID&gt;</em> por el ID de la señal que ha recuperado en el paso anterior.
+2.  Anote el ID de la señal que desea utilizar.
+3.  Recupere el valor de la señal. Sustituya <em>&lt;token_ID&gt;</em> por el ID de la señal que ha recuperado en el paso anterior.
 
     ```
     ibmcloud cr token-get <token_id>
@@ -839,7 +843,7 @@ Para acceder a imágenes de otras regiones o cuentas de {{site.data.keyword.Blue
 
     El valor de la señal se muestra en el campo **Token** de la salida de la CLI.
 
-5.  Cree el secreto de Kubernetes para almacenar la información de la señal.
+4.  Cree el secreto de Kubernetes para almacenar la información de la señal.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -878,11 +882,11 @@ Para acceder a imágenes de otras regiones o cuentas de {{site.data.keyword.Blue
     </tr>
     </tbody></table>
 
-6.  Verifique que el secreto se haya creado correctamente. Sustituya <em>&lt;kubernetes_namespace&gt;</em> por el espacio de nombres en el que ha creado el secreto de extracción de imágenes.
+5.  Verifique que el secreto se haya creado correctamente. Sustituya <em>&lt;kubernetes_namespace&gt;</em> por el espacio de nombres en el que ha creado el secreto de extracción de imágenes.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-7.  [Despliegue un contenedor utilizando el secreto de extracción de imágenes](#use_imagePullSecret) en el espacio de nombres.
+6.  [Despliegue un contenedor utilizando el secreto de extracción de imágenes](#use_imagePullSecret) en el espacio de nombres.

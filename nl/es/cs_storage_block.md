@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-03"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,21 +23,19 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Almacenamiento de datos en IBM Block Storage for IBM Cloud
+# Almacenamiento de datos en el almacenamiento de bloques clásico de IBM Cloud
 {: #block_storage}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage es un almacenamiento iSCSI persistente y de alto rendimiento que puede añadir a las apps mediante volúmenes persistentes (PV) de Kubernetes. Puede elegir los niveles de almacenamiento predefinidos con tamaños de GB e IOPS que cumplan los requisitos de sus cargas de trabajo. Para averiguar si {{site.data.keyword.Bluemix_notm}} Block Storage es la opción de almacenamiento adecuada para usted, consulte [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obtener información sobre los precios, consulte [Facturación](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
+{{site.data.keyword.cloud_notm}} Block Storage es un almacenamiento iSCSI persistente y de alto rendimiento que puede añadir a las apps mediante volúmenes persistentes (PV) de Kubernetes. Puede elegir los niveles de almacenamiento predefinidos con tamaños de GB e IOPS que cumplan los requisitos de sus cargas de trabajo. Para averiguar si {{site.data.keyword.cloud_notm}} Block Storage es la opción de almacenamiento adecuada para usted, consulte [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obtener más información sobre precios, consulte [Facturación](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} Block Storage solo está disponible para clústeres estándares. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, asegúrese de que ha instalado el plugin {{site.data.keyword.Bluemix_notm}} Block Storage versión 1.3.0 o posterior para conectarse a la instancia de almacenamiento en bloque a través de la red privada. Las instancias de almacenamiento en bloque son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} Block Storage solo está disponible para clústeres estándares. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado que hay habilitado, asegúrese de que ha instalado el plugin {{site.data.keyword.cloud_notm}} Block Storage versión 1.3.0 o posterior para conectarse a la instancia de almacenamiento en bloque a través de la red privada. Las instancias de almacenamiento en bloque son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
-## Instalación del plugin {{site.data.keyword.Bluemix_notm}} Block Storage en el clúster
+## Instalación del plugin {{site.data.keyword.cloud_notm}} Block Storage en el clúster
 {: #install_block}
 
-Instale el plugin {{site.data.keyword.Bluemix_notm}} Block Storage con un diagrama de Helm para configurar las clases de almacenamiento predefinidas para el almacenamiento en bloque. Utilice estas clases de almacenamiento para crear una PVC para suministrar almacenamiento en bloque para sus apps.
+Instale el plugin {{site.data.keyword.cloud_notm}} Block Storage con un diagrama de Helm para configurar las clases de almacenamiento predefinidas para el almacenamiento en bloque. Utilice estas clases de almacenamiento para crear una PVC para suministrar almacenamiento en bloque para sus apps.
 {: shortdesc}
 
 Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -53,7 +51,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.6_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.13.8_1523*
       ```
       {: screen}
 
@@ -61,14 +59,14 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 
    2. Revise el [registro de cambios de versión](/docs/containers?topic=containers-changelog#changelog) para encontrar los cambios que se incluyen en la última versión del parche.
 
-   3. Aplique la versión de parche más reciente volviendo a cargar el nodo trabajador. Siga las instrucciones del [mandato ibmcloud ks worker-reload](/docs/containers?topic=containers-cs_cli_reference#cs_worker_reload) para volver a planificar correctamente cualquier pod en ejecución en el nodo trabajador antes de volver a cargar el nodo trabajador. Tenga en cuenta que, durante la recarga, la máquina del nodo trabajador se actualizará con la imagen más reciente y se suprimirán los datos si no se han [almacenado fuera del nodo trabajador](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+   3. Aplique la versión de parche más reciente volviendo a cargar el nodo trabajador. Siga las instrucciones del [mandato ibmcloud ks worker-reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) para volver a planificar correctamente cualquier pod en ejecución en el nodo trabajador antes de volver a cargar el nodo trabajador. Tenga en cuenta que, durante la recarga, la máquina del nodo trabajador se actualizará con la imagen más reciente y se suprimirán los datos si no se han [almacenado fuera del nodo trabajador](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
-2.  [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente Helm en la máquina local e instale el servidor Helm (Tiller) con una cuenta de servicio en el clúster.
+1.  [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente Helm en la máquina local e instale el servidor Helm (Tiller) con una cuenta de servicio en el clúster.
 
-    La instalación del tiller del servidor Helm requiere una conexión de red pública con el registro de contenedor de Google público. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede optar por [extraer la imagen de Tiller en la máquina local y enviar por push la imagen a su espacio de nombres en {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), o bien por [instalar el diagrama de Helm sin utilizar Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
+    La instalación del tiller del servidor Helm requiere una conexión de red pública con el registro de contenedor de Google público. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado que hay habilitado, puede optar por [extraer la imagen de Tiller en la máquina local y enviar por push la imagen a su espacio de nombres en {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller), o bien por [instalar el diagrama de Helm sin utilizar Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
-3.  Verifique que el Tiller se ha instalado con una cuenta de servicio.
+2.  Verifique que el Tiller se ha instalado con una cuenta de servicio.
 
     ```
     kubectl get serviceaccount -n kube-system tiller
@@ -83,19 +81,19 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
     ```
     {: screen}
 
-4. Añada el repositorio de diagramas de Helm de {{site.data.keyword.Bluemix_notm}} al clúster donde desee utilizar el plugin de Almacenamiento en bloque de {{site.data.keyword.Bluemix_notm}}.
+3. Añada el repositorio de diagramas de Helm de {{site.data.keyword.cloud_notm}} al clúster donde desee utilizar el plugin de Almacenamiento en bloque de {{site.data.keyword.cloud_notm}}.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
-5. Actualice el repositorio de Helm para recuperar la última versión de todos los diagramas de Helm de este repositorio.
+4. Actualice el repositorio de Helm para recuperar la última versión de todos los diagramas de Helm de este repositorio.
    ```
    helm repo update
    ```
    {: pre}
 
-6. Instale el plugin {{site.data.keyword.Bluemix_notm}} Block Storage. Cuando instala el plugin, se añaden a su clúster las clases de almacenamiento de almacenamiento en bloque predefinidas.
+5. Instale el plugin {{site.data.keyword.cloud_notm}} Block Storage. Cuando instala el plugin, se añaden a su clúster las clases de almacenamiento de almacenamiento en bloque predefinidas.
    ```
    helm install iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -145,7 +143,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
    ```
    {: screen}
 
-7. Verifique que la instalación ha sido satisfactoria.
+6. Verifique que la instalación ha sido satisfactoria.
    ```
    kubectl get pod -n kube-system | grep block
    ```
@@ -160,7 +158,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 
    La instalación es satisfactoria si ve un pod `ibmcloud-block-storage-plugin` y uno o varios pods `ibmcloud-block-storage-driver`. El número de pods `ibmcloud-block-storage-driver` corresponde al número de nodos trabajadores de su clúster. Todos los pods deben estar en un estado **Running**.
 
-8. Verifique que las clases de almacenamiento para el almacenamiento en bloque se añaden a su clúster.
+7. Verifique que las clases de almacenamiento para el almacenamiento en bloque se añaden a su clúster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -179,13 +177,13 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
    ```
    {: screen}
 
-9. Repita estos pasos para cada clúster donde desea suministrar almacenamiento en bloques.
+8. Repita estos pasos para cada clúster donde desea suministrar almacenamiento en bloques.
 
 Ahora puede seguir para [crear una PVC](#add_block) para suministrar almacenamiento en bloque a la app.
 
 
-### Actualización del plugin {{site.data.keyword.Bluemix_notm}} Block Storage
-Actualice el plugin {{site.data.keyword.Bluemix_notm}} Block Storage existente a la última versión.
+### Actualización del plugin {{site.data.keyword.cloud_notm}} Block Storage
+Actualice el plugin {{site.data.keyword.cloud_notm}} Block Storage existente a la última versión.
 {: shortdesc}
 
 Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -215,7 +213,7 @@ para ver la información de release más reciente.
    ```
    {: screen}
 
-4. Actualice el plugin {{site.data.keyword.Bluemix_notm}} Block Storage a la última versión.
+4. Actualice el plugin {{site.data.keyword.cloud_notm}} Block Storage a la última versión.
    ```
    helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
    ```
@@ -228,8 +226,8 @@ para ver la información de release más reciente.
    {: pre}
 
 
-### Eliminación del plugin {{site.data.keyword.Bluemix_notm}} Block Storage
-Si no desea suministrar y utilizar {{site.data.keyword.Bluemix_notm}} Block Storage en el clúster, puede desinstalar el diagrama de Helm.
+### Eliminación del plugin {{site.data.keyword.cloud_notm}} Block Storage
+Si no desea suministrar y utilizar {{site.data.keyword.cloud_notm}} Block Storage en el clúster, puede desinstalar el diagrama de Helm.
 {: shortdesc}
 
 Al eliminar el plugin no elimina los datos, las PVC o los PV. Cuando se elimina el plugin, se eliminan del clúster todos los conjuntos de daemons y pods relacionados. No puede suministrar nuevo almacenamiento en bloque para el clúster o utilizar PV o PVC de almacenamiento en bloque existente después de eliminar el plugin.
@@ -253,7 +251,7 @@ Para eliminar el plugin:
    ```
    {: screen}
 
-2. Suprima el plugin {{site.data.keyword.Bluemix_notm}} Block Storage.
+2. Suprima el plugin {{site.data.keyword.cloud_notm}} Block Storage.
    ```
    helm delete <helm_chart_name>
    ```
@@ -319,7 +317,7 @@ Asegúrese de elegir la configuración de almacenamiento cuidadosamente para ten
    {: tip}
 
 3. Elija el tipo de almacenamiento en bloque que desea suministrar.
-   - **Clases de almacenamiento de bronce, plata y oro:** estas clases de almacenamiento suministran [almacenamiento resistente](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance). El almacenamiento resistente le permite elegir el tamaño del almacenamiento en gigabytes en los niveles de IOPS predefinidos.
+   - **Clases de almacenamiento de bronce, plata y oro:** estas clases de almacenamiento suministran [almacenamiento resistente](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provendurance). Con almacenamiento Endurance, puede elegir el tamaño del almacenamiento en gigabytes según los niveles de IOPS predefinidos.
    - **Clase de almacenamiento personalizada:** esta clase de almacenamiento contiene [almacenamiento de rendimiento](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#provperformance). Con el almacenamiento de rendimiento, tiene más control sobre el tamaño del almacenamiento y de IOPS.
 
 4. Elija el tamaño e IOPS para el almacenamiento en bloque. El tamaño y el número de IOPS definen el número total de IOPS (operaciones de entrada/salida por segundo), lo que sirve como indicador de la rapidez del almacenamiento. Cuantas más IOPS tenga el almacenamiento, más rápido se procesarán las operaciones de entrada y salida.
@@ -403,7 +401,7 @@ Asegúrese de elegir la configuración de almacenamiento cuidadosamente para ten
          </tbody></table>
 
 5. Decida si desea conservar los datos después de que se suprima el clúster o la reclamación de volumen persistente (PVC).
-   - Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Cuando se suprime la PVC, únicamente ésta se suprime. El PV, el dispositivo de almacenamiento físico de la cuenta de infraestructura de IBM Cloud (SoftLayer) y los datos seguirán existiendo. Para reclamar el almacenamiento y volverlo a utilizar en el clúster, debe eliminar el PV y seguir los pasos de [utilización de almacenamiento en bloque existente](#existing_block).
+   - Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Cuando se suprime la PVC, únicamente ésta se suprime. El PV, el dispositivo de almacenamiento físico de la cuenta de infraestructura de IBM Cloud y los datos seguirán existiendo. Para reclamar el almacenamiento y volverlo a utilizar en el clúster, debe eliminar el PV y seguir los pasos de [utilización de almacenamiento en bloque existente](#existing_block).
    - Si desea que el PV, los datos y el dispositivo físico de almacenamiento en bloques se supriman cuando suprima la PVC, elija una clase de almacenamiento sin la opción `retain`.
 
 6. Decida si desea que se le facture por horas o por meses. Consulte las [tarifas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/block-storage/pricing) para obtener más información. De forma predeterminada, todos los dispositivos de almacenamiento en bloque se suministran con un tipo de facturación por hora.
@@ -415,18 +413,19 @@ Asegúrese de elegir la configuración de almacenamiento cuidadosamente para ten
 ## Adición de almacenamiento en bloques a apps
 {: #add_block}
 
-Cree una reclamación de volumen persistente (PVC) para [suministrar de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) almacenamiento en bloque para el clúster. El suministro dinámico crea automáticamente el volumen persistente (PV) adecuado y solicita el dispositivo de almacenamiento real en la cuenta de infraestructura de IBM Cloud (SoftLayer).
+Cree una reclamación de volumen persistente (PVC) para [suministrar de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) almacenamiento en bloque para el clúster. El suministro dinámico crea automáticamente el volumen persistente (PV) adecuado y solicita el dispositivo de almacenamiento real en la cuenta de infraestructura de IBM Cloud.
 {:shortdesc}
 
 El almacenamiento en bloque se suministra con la modalidad de acceso `ReadWriteOnce`. Solo puede montarlo en un pod en un nodo trabajador en el clúster al mismo tiempo.
 {: note}
 
 Antes de empezar:
-- Si tiene un cortafuegos, [permita el acceso de salida](/docs/containers?topic=containers-firewall#pvc) para los rangos de IP de la infraestructura de IBM Cloud (SoftLayer) de las zonas en las que están en los clústeres, de modo que pueda crear las PVC.
-- Instale el [plugin de almacenamiento en bloque de {{site.data.keyword.Bluemix_notm}}](#install_block).
+- Si tiene un cortafuegos, [permita el acceso de salida](/docs/containers?topic=containers-firewall#pvc) para los rangos de IP de la infraestructura de IBM Cloud de las zonas en las que están en los clústeres, de modo que pueda crear las PVC.
+- Instale el [plugin de almacenamiento de bloques de {{site.data.keyword.cloud_notm}}](#install_block).
 - [Decida si desea utilizar una clase de almacenamiento predefinida](#block_predefined_storageclass) o crear una [clase de almacenamiento personalizada](#block_custom_storageclass).
 
-¿Desea desplegar almacenamiento en bloque en un conjunto con estado? Consulte [Utilización del almacenamiento en bloque en un conjunto con estado](#block_statefulset) para obtener más información.
+¿Desea desplegar almacenamiento en bloque en un conjunto con estado? Para obtener más información, consulte
+[Uso del almacenamiento por bloques en un conjunto con estado](#block_statefulset).
 {: tip}
 
 Para añadir almacenamiento en bloque:
@@ -671,12 +670,12 @@ Antes de empezar a montar el almacenamiento existente en una app, debe recuperar
 ### Paso 1: Recuperación de la información del almacenamiento en bloque existente
 {: #existing-block-1}
 
-1.  Recupere o genere una clave de API para su cuenta (SoftLayer) de infraestructura de IBM Cloud.
-    1. Inicie sesión en el [portal de la infraestructura de IBM Cloud (SoftLayer) ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?).
+1.  Recupere o genere una clave de API para su cuenta de infraestructura de IBM Cloud.
+    1. Inicie sesión en el [portal de la infraestructura de IBM Cloud ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?).
     2. Seleccione **Cuenta**, **Usuarios** y, a continuación, **Lista de usuarios**.
     3. Encuentre su ID de usuario.
     4. En la columna de **Clave de API**, pulse **Generar** para generar una clave de API o **Ver** para ver su clave de API existente.
-2.  Recupere el nombre de usuario de API de su cuenta (SoftLayer) de infraestructura de IBM Cloud.
+2.  Recupere el nombre de usuario de API de su cuenta de infraestructura de IBM Cloud.
     1. Desde el menú **Lista de usuarios**, seleccione su ID de usuario.
     2. En la sección **Información de acceso de API**, busque su **Nombre de usuario de API**.
 3.  Inicie una sesión en el plugin de CLI de la infraestructura de IBM Cloud.
@@ -685,7 +684,7 @@ Antes de empezar a montar el almacenamiento existente en una app, debe recuperar
     ```
     {: pre}
 
-4.  Elija autenticarse utilizando el nombre de usuario y la clave de API de su cuenta (SoftLayer) de infraestructura de IBM Cloud.
+4.  Elija autenticarse utilizando el nombre de usuario y la clave de API de su cuenta de infraestructura de IBM Cloud.
 5.  Especifique el nombre de usuario y la clave de API que recuperó en los pasos anteriores.
 6.  Obtenga una lista de los dispositivos de almacenamiento en bloque disponibles.
     ```
@@ -861,7 +860,7 @@ Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del
 ## Utilización del almacenamiento en bloque en un conjunto con estado
 {: #block_statefulset}
 
-Si tiene una app con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento en bloque para almacenar los datos de la app. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.Bluemix_notm}} y almacenar los datos en la nube.
+Si tiene una app con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento en bloque para almacenar los datos de la app. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.cloud_notm}} y almacenar los datos en la nube.
 {: shortdesc}
 
 **¿Qué debo tener en cuenta cuando añada almacenamiento en bloque a un conjunto con estado?** </br>
@@ -935,7 +934,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 
    - **Ejemplo de conjunto con estado que especifica una zona:**
 
-     En el ejemplo siguiente se muestra cómo desplegar NGINX como un conjunto con estado con 3 réplicas. Para cada réplica, se proporciona un dispositivo de almacenamiento en bloque de 20 gigabytes en función de las especificaciones definidas en la clase de almacenamiento `ibmc-block-retain-bronze`. Todos los dispositivos de almacenamiento se suministran en la zona `dal10`. Puesto que no se puede acceder al almacenamiento en bloque desde otras zonas, todas las réplicas del conjunto de estado también se despliegan en un nodo trabajador que se encuentra en `dal10`.
+     En el ejemplo siguiente se muestra cómo desplegar NGINX como un conjunto con estado con tres réplicas. Para cada réplica, se proporciona un dispositivo de almacenamiento en bloque de 20 gigabytes en función de las especificaciones definidas en la clase de almacenamiento `ibmc-block-retain-bronze`. Todos los dispositivos de almacenamiento se suministran en la zona `dal10`. Puesto que no se puede acceder al almacenamiento en bloque desde otras zonas, todas las réplicas del conjunto de estado también se despliegan en un nodo trabajador que se encuentra en `dal10`.
 
      ```
      apiVersion: v1
@@ -999,7 +998,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
 
    - **Ejemplo de conjunto con estado con regla de antiafinidad y creación retrasada de almacenamiento en bloque:**
 
-     En el ejemplo siguiente se muestra cómo desplegar NGINX como un conjunto con estado con 3 réplicas. El conjunto con estado no especifica la región y la zona en las que se ha creado el almacenamiento en bloque. En su lugar, el conjunto con estado utiliza una regla de antiafinidad para asegurarse de que los pods se distribuyen entre nodos trabajadores y zonas. Al definir `topologykey: failure-domain.beta.kubernetes.io/zone`, el planificador de Kubernetes no puede planificar un pod en un nodo trabajador si el nodo trabajador se encuentra en la misma zona que un pod que tiene la etiqueta `app: nginx`. Para cada pod de conjunto con estado, se crean dos PVC definidas en la sección `volumeClaimTemplates`, pero la creación de las instancias de almacenamiento en bloque se retrasa hasta que se planifica un pod de conjunto con estado que utiliza el almacenamiento. Esta configuración se conoce como [planificación de volúmenes que tienen en cuenta la topología](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
+     En el ejemplo siguiente se muestra cómo desplegar NGINX como un conjunto con estado con tres réplicas. El conjunto con estado no especifica la región y la zona en las que se ha creado el almacenamiento en bloque. En su lugar, el conjunto con estado utiliza una regla de antiafinidad para asegurarse de que los pods se distribuyen entre nodos trabajadores y zonas. Al definir `topologykey: failure-domain.beta.kubernetes.io/zone`, el planificador de Kubernetes no puede planificar un pod en un nodo trabajador si el nodo trabajador se encuentra en la misma zona que un pod que tiene la etiqueta `app: nginx`. Para cada pod de conjunto con estado, se crean dos PVC definidas en la sección `volumeClaimTemplates`, pero la creación de las instancias de almacenamiento en bloque se retrasa hasta que se planifica un pod de conjunto con estado que utiliza el almacenamiento. Esta configuración se conoce como [planificación de volúmenes que tienen en cuenta la topología](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
 
      ```
      apiVersion: storage.k8s.io/v1
@@ -1066,9 +1065,9 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
              - containerPort: 80
                name: web
              volumeMounts:
-             - name: www
+             - name: myvol1
                mountPath: /usr/share/nginx/html
-             - name: wwwww
+             - name: myvol2
                mountPath: /tmp1
        volumeClaimTemplates:
        - metadata:
@@ -1112,7 +1111,7 @@ Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo d
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.podManagementPolicy</code></td>
-     <td style="text-align:left">Especifique la política de gestión de pod que desea utilizar para su conjunto con estado. Seleccione una de las opciones siguientes: <ul><li><strong>`OrderedReady`: </strong>con esta opción, las réplicas del conjunto con estado se despliegan una después de otra. Por ejemplo, si ha especificado 3 réplicas, Kubernetes crea la PVC para la primera réplica, espera hasta que la PVC esté enlazada, despliegue la réplica del conjunto con estado y monta la PVC en la réplica. Una vez que haya finalizado el despliegue, se despliega la segunda réplica. Para obtener más información sobre esta opción, consulte [Gestión de pod `OrderedReady` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>con esta opción, el despliegue de todas las réplicas del conjunto con estado comienza a la vez. Si la app da soporte al despliegue de réplicas en paralelo, utilice esta opción para ahorrar tiempo de despliegue para las PVC y las réplicas de conjuntos con estado. </li></ul></td>
+     <td style="text-align:left">Especifique la política de gestión de pod que desea utilizar para su conjunto con estado. Seleccione una de las opciones siguientes: <ul><li><strong>`OrderedReady`: </strong>con esta opción, las réplicas del conjunto con estado se despliegan una después de otra. Por ejemplo, si ha especificado tres réplicas, Kubernetes crea el PVC para la primera réplica, espera hasta que el PVC esté enlazado, despliegue la réplica del conjunto con estado y monta el PVC en la réplica. Una vez que haya finalizado el despliegue, se despliega la segunda réplica. Para obtener más información sobre esta opción, consulte [Gestión de pod `OrderedReady` ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#orderedready-pod-management). </li><li><strong>Parallel: </strong>con esta opción, el despliegue de todas las réplicas del conjunto con estado comienza a la vez. Si la app da soporte al despliegue de réplicas en paralelo, utilice esta opción para ahorrar tiempo de despliegue para las PVC y las réplicas de conjuntos con estado. </li></ul></td>
      </tr>
      <tr>
      <td style="text-align:left"><code>spec.selector.matchLabels</code></td>
@@ -1175,7 +1174,7 @@ del conjunto con estado, como por ejemplo `nginxvol`.
    - **`<statefulset_name>`**: utilice el nombre que desea especificar en la sección `metadata.name` del conjunto con estado, como por ejemplo `nginx_statefulset`.
    - **`<replica_number>`**: especifique el número de la réplica empezando por 0.
 
-   Por ejemplo, si tiene que crear 3 réplicas del conjunto con estado, cree 3 PVC con los siguientes nombres: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1` y `nginxvol-nginx_statefulset-2`.  
+   Por ejemplo, si tiene que crear tres réplicas del conjunto con estado, cree tres PVC con los siguientes nombres: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1` y `nginxvol-nginx_statefulset-2`.  
 
    ¿Está buscando crear un PVC y un PV para un dispositivo de almacenamiento existente? Cree la PVC y el PV mediante [suministro estático](#existing_block).
 
@@ -1225,7 +1224,7 @@ Si desea aumentar la capacidad de almacenamiento o el rendimiento, puede modific
 {: shortdesc}
 
 Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utilizar la consola de
-{{site.data.keyword.Bluemix_notm}} para modificar el almacenamiento, consulte
+{{site.data.keyword.cloud_notm}} para modificar el almacenamiento, consulte
 [Ampliación de la capacidad de almacenamiento en bloque](/docs/infrastructure/BlockStorage?topic=BlockStorage-expandingcapacity#expandingcapacity) y [Ajuste de IOPS](/docs/infrastructure/BlockStorage?topic=BlockStorage-adjustingIOPS). Las actualizaciones que realice desde la consola no se reflejan en el volumen persistente (PV). Para añadir esta información al PV, ejecute `kubectl patch pv <pv_name>` y actualice manualmente el tamaño e IOPS en la sección **Labels** y **Annotation** del PV.
 {: tip}
 
@@ -1383,7 +1382,7 @@ Para aumentar la alta disponibilidad de los datos y proteger la app ante un erro
 </tr>
 <tr>
 <td>Facturación</td>
-<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.Bluemix_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
+<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.cloud_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
 </tr>
 <tr>
 <td>Tarifas</td>
@@ -1429,7 +1428,7 @@ Para aumentar la alta disponibilidad de los datos y proteger la app ante un erro
 </tr>
 <tr>
 <td>Facturación</td>
-<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.Bluemix_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
+<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.cloud_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
 </tr>
 <tr>
 <td>Tarifas</td>
@@ -1474,7 +1473,7 @@ Para aumentar la alta disponibilidad de los datos y proteger la app ante un erro
 </tr>
 <tr>
 <td>Facturación</td>
-<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.Bluemix_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
+<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.cloud_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
 </tr>
 <tr>
 <td>Tarifas</td>
@@ -1515,7 +1514,7 @@ Para aumentar la alta disponibilidad de los datos y proteger la app ante un erro
 </tr>
 <tr>
 <td>Facturación</td>
-<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.Bluemix_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
+<td>El tipo de facturación predeterminado depende de la versión del plugin {{site.data.keyword.cloud_notm}} Block Storage: <ul><li> Versión 1.0.1 y superiores: por hora</li><li>Versión 1.0.0 e inferiores: mensualmente</li></ul></td>
 </tr>
 <tr>
 <td>Tarifas</td>
@@ -1546,7 +1545,7 @@ Para utilizar el almacenamiento en bloque en un clúster multizona, su pod debe 
 
 La creación de la instancia de almacenamiento en bloque sin conocer las restricciones del pod puede llevar a resultados no deseados. Por ejemplo, es posible que el pod no pueda planificarse en el mismo nodo trabajador que el almacenamiento porque el nodo trabajador no tiene recursos suficientes o porque el nodo trabajador es antagónico y no permite que se planifique el pod. Con la planificación de volumen que tiene en cuenta la topología, la instancia de almacenamiento en bloque se retrasa hasta que se crea el primer pod que utiliza el almacenamiento.
 
-La planificación de volúmenes que tienen en cuenta la topología recibe solo soporte en clústeres que ejecutan Kubernetes versión 1.12 o posteriores. Para utilizar esta característica, asegúrese de que ha instalado el plugin {{site.data.keyword.Bluemix_notm}} Block Storage versión 1.2.0 o posterior.
+La planificación de volúmenes que tienen en cuenta la topología recibe solo soporte en clústeres que ejecutan Kubernetes versión 1.12 o posteriores. Para utilizar esta característica, asegúrese de que ha instalado el plugin {{site.data.keyword.cloud_notm}} Block Storage versión 1.2.0 o posterior.
 {: note}
 
 En los siguientes ejemplos se muestra cómo crear clases de almacenamiento que retrasan la creación de la instancia de almacenamiento en bloque hasta que el primer pod que utiliza este almacenamiento esté listo para ser planificado. Para retrasar la creación, debe incluir la opción `volumeBindingMode: WaitForFirstConsumer`. Si no incluye esta opción, `volumeBindingMode` se establece automáticamente en `Immediate` y la instancia de almacenamiento en bloque se crea cuando se crea la PVC.
@@ -1606,7 +1605,7 @@ En los siguientes ejemplos se muestra cómo crear clases de almacenamiento que r
 Si desea crear el almacenamiento en bloque en una zona específica, puede especificar la zona y la región en una clase de almacenamiento personalizada.
 {: shortdesc}
 
-Utilice la clase de almacenamiento personalizada si utiliza el plugin {{site.data.keyword.Bluemix_notm}} Block Storage versión 1.0.0 o si desea [suministrar almacenamiento en bloque de forma estática](#existing_block) en una zona específica. En todos los demás casos, [especifique la zona directamente en la PVC](#add_block).
+Utilice la clase de almacenamiento personalizada si utiliza el plugin {{site.data.keyword.cloud_notm}} Block Storage versión 1.0.0 o si desea [suministrar almacenamiento en bloque de forma estática](#existing_block) en una zona específica. En todos los demás casos, [especifique la zona directamente en la PVC](#add_block).
 {: note}
 
 El siguiente archivo `.yaml` personaliza una clase de almacenamiento que se basa en la clase de almacenamiento sin retención `ibm-block-silver`: el valor de `type` es `"Endurance"`, el valor de `iopsPerGB` es `4`, el valor de `sizeRange` es `"[20-12000]Gi"` y el valor de `reclaimPolicy` está establecido en `"Delete"`. La zona especificada es `dal12`. Para utilizar otra clase de almacenamiento como base, consulte la [Referencia de clases de almacenamiento](#block_storageclass_reference).
@@ -1714,4 +1713,6 @@ En los ejemplos siguientes se crea una clase de almacenamiento que proporciona a
   {: codeblock}
 
 <br />
+
+
 

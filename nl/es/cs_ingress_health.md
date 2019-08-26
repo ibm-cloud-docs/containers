@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Registro y supervisión de Ingress
 {: #ingress_health}
 
@@ -38,7 +39,7 @@ Si desea resolver problemas de Ingress o supervisar la actividad de Ingress, pue
 
 Los registros se recopilan automáticamente para los ALB de Ingress. Para ver los registros de ALB, elija entre dos opciones.
 * [Cree una configuración de registro para el servicio Ingress](/docs/containers?topic=containers-health#configuring) en el clúster.
-* Consulte los registros desde la CLI. **Nota**: Debe tener al menos el [rol de servicio **Lector** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+* Consulte los registros desde la CLI. **Nota**: Debe tener al menos el [rol de servicio **Lector** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
     1. Obtenga el ID de un pod para un ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -70,7 +71,7 @@ Los registros se recopilan automáticamente para los ALB de Ingress. Para ver lo
 </tr>
 <tr>
 <td><code>"client": "$remote_addr"</code></td>
-<td>La dirección IP del paquete de la solicitud que el cliente ha enviado a la app. Esta dirección IP puede cambiar en función de las situaciones siguientes:<ul><li>Cuando una solicitud de cliente para su app se envía a su clúster, la solicitud se direcciona a un pod para el servicio de equilibrador de carga que expone el ALB. Si no existen pods de app en el mismo nodo trabajador que el pod del servicio equilibrador de carga, el equilibrador de carga reenvía las solicitudes a un pod de app en un nodo trabajador diferente. La dirección IP de origen del paquete de la solicitud se cambia por la dirección IP pública del nodo trabajador en el que se ejecuta el pod de la app.</li><li>Si [la conservación de IP de origen está habilitada](/docs/containers?topic=containers-ingress#preserve_source_ip), en su lugar se registra la dirección IP original de la solicitud de cliente a la app.</li></ul></td>
+<td>La dirección IP del paquete de la solicitud que el cliente ha enviado a la app. Esta dirección IP puede cambiar en función de las situaciones siguientes:<ul><li>Cuando una solicitud de cliente para su app se envía a su clúster, la solicitud se direcciona a un pod para el servicio de equilibrador de carga que expone el ALB. Si no existen pods de app en el mismo nodo trabajador que el pod del servicio equilibrador de carga, el equilibrador de carga reenvía las solicitudes a un pod de app en un nodo trabajador diferente. La dirección IP de origen del paquete de la solicitud se cambia por la dirección IP pública del nodo trabajador en el que se ejecuta el pod de la app.</li><li>Si [la conservación de IP de origen está habilitada](/docs/containers?topic=containers-ingress-settings#preserve_source_ip), en su lugar se registra la dirección IP original de la solicitud de cliente a la app.</li></ul></td>
 </tr>
 <tr>
 <td><code>"host": "$http_host"</code></td>
@@ -113,19 +114,19 @@ Los registros se recopilan automáticamente para los ALB de Ingress. Para ver lo
 </tr>
 <tr>
 <td><code>"request_time": $request_time</code></td>
-<td>El tiempo de proceso de la solicitud, medido en segundos con una resolución de milisegundos. Este tiempo empieza cuando el ALB lee los primeros bytes de la solicitud de cliente y se detiene cuando el ALB envía los últimos bytes de la respuesta al cliente. El registro se escribe inmediatamente después de que se detenga el tiempo de proceso de la solicitud.</td>
+<td>El tiempo de proceso de la solicitud, que se mide en segundos con una resolución de milisegundos. Este tiempo empieza cuando el ALB lee los primeros bytes de la solicitud de cliente y se detiene cuando el ALB envía los últimos bytes de la respuesta al cliente. El registro se escribe inmediatamente después de que se detenga el tiempo de proceso de la solicitud.</td>
 </tr>
 <tr>
 <td><code>"upstream_response_time": $upstream_response_time</code></td>
-<td>El tiempo que tarda el ALB en recibir la respuesta del servidor en sentido ascendente para la app de fondo, medido en segundos con una resolución de milisegundos. Los tiempos de varias respuestas se separan mediante comas y puntos, como las direcciones en la variable <code>$upstream_addr</code>.</td>
+<td>El tiempo que tarda el ALB en recibir la respuesta del servidor en sentido ascendente para la app de fondo, que se mide en segundos con una resolución de milisegundos. Los tiempos de varias respuestas se separan mediante comas y puntos.</td>
 </tr>
 <tr>
 <td><code>"upstream_connect_time": $upstream_connect_time</code></td>
-<td>El tiempo que tarda el ALB en establecer una conexión con el servidor en sentido ascendente para la app de fondo, medido en segundos con una resolución de milisegundos. Si TLS/SSL está habilitado en la configuración de recursos de Ingress, este tiempo incluye el tiempo empleado en el reconocimiento. Los tiempos de varias conexiones se separan mediante comas y puntos, como las direcciones en la variable <code>$upstream_addr</code>.</td>
+<td>El tiempo que tarda el ALB en establecer una conexión con el servidor en sentido ascendente para la app de fondo, que se mide en segundos con una resolución de milisegundos. Si TLS/SSL está habilitado en la configuración de recursos de Ingress, este tiempo incluye el tiempo empleado en el reconocimiento. Los tiempos de varias conexiones se separan mediante comas y puntos.</td>
 </tr>
 <tr>
 <td><code>"upstream_header_time": $upstream_header_time</code></td>
-<td>El tiempo que tarda el ALB en recibir la cabecera de respuesta del servidor en sentido ascendente para la app de fondo, medido en segundos con una resolución de milisegundos. Los tiempos de varias conexiones se separan mediante comas y puntos, como las direcciones en la variable <code>$upstream_addr</code>.</td>
+<td>El tiempo que tarda el ALB en recibir la cabecera de respuesta del servidor en sentido ascendente para la app de fondo, que se mide en segundos con una resolución de milisegundos. Los tiempos de varias conexiones se separan mediante comas y puntos.</td>
 </tr>
 </tbody></table>
 
@@ -137,7 +138,7 @@ Existe la posibilidad de personalizar el contenido y los formatos de los registr
 
 De forma predeterminada, los registros de Ingress están en formato JSON y visualizan los campos más comunes del registro. Sin embargo, también puede crear un formato de registro personalizado eligiendo los componentes de registro que se reenvían y cómo se disponen los componentes en la salida de registro
 
-Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
 
 1. Edite el archivo de configuración del recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`.
 
@@ -263,13 +264,11 @@ Instale el diagrama de Helm de exportador de métricas para supervisar un ALB en
 Las pods del exportador de métricas de ALB se deben desplegar en los mismos nodos trabajadores en los que se han desplegado los ALB. Si los ALB se ejecutan en nodos trabajadores de extremo, y dichos nodos de extremo se han definido como antagónicos para evitar otros despliegues de carga de trabajo, no se pueden planificar los pods del exportador de métricas. Debe eliminar los antagonismos con el mandato `kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-`.
 {: note}
 
-1.  **Importante**: [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente de Helm en la máquina local, instale el servidor Helm (tiller) con una cuenta de servicio y añada los repositorios de Helm de {{site.data.keyword.Bluemix_notm}}.
+1.  **Importante**: [Siga las instrucciones](/docs/containers?topic=containers-helm#public_helm_install) para instalar el cliente de Helm en la máquina local, instale el servidor Helm (tiller) con una cuenta de servicio y añada los repositorios de Helm de {{site.data.keyword.cloud_notm}}.
 
-2. Instale el diagrama de Helm `ibmcloud-alb-metrics-exporter` en el clúster. Este diagrama de Helm despliega un exportador de métricas de ALB y crea una cuenta de servicio `alb-metrics-service-account` en el espacio de nombres `kube-system`. Sustituya <alb-ID> por el ID del ALB para el que desea recopilar métricas. Para ver los ID de los ALB del clúster, ejecute <code>ibmcloud ks albs --cluster &lt;cluster_name&gt;</code>.
-  Debe desplegar un gráfico para cada ALB que desee supervisar.
-  {: note}
+2. Instale el diagrama de Helm `ibmcloud-alb-metrics-exporter` en el clúster. Este diagrama de Helm despliega un exportador de métricas de ALB y crea una cuenta de servicio `alb-metrics-service-account` en el espacio de nombres `kube-system`. Sustituya `<zone>` por la zona donde existe el ALB y `<alb_ID>` con el ID de ALB para la que desea recopilar métricas. Para ver los ID de los ALB del clúster, ejecute `ibmcloud ks albs --cluster <cluster_name>`.
   ```
-  helm install iks-charts/ibmcloud-alb-metrics-exporter --name ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set albId=<alb-ID>
+  helm install iks-charts/ibmcloud-alb-metrics-exporter --set metricsNameSpace=kube-system --set name=alb-<zone>-metrics-exporter --set albId=<alb_ID> --set albZone=<zone>
   ```
   {: pre}
 
@@ -294,7 +293,9 @@ Las pods del exportador de métricas de ALB se deben desplegar en los mismos nod
   ```
   {:screen}
 
-5. Opcional: [Instale el agente Prometheus](#prometheus-agent) para recopilar las métricas generadas por el exportador y hacer que sean visibles en un panel de control de Prometheus.
+5. Repita los pasos del 2 al 4 para cada ALB de su clúster.
+
+6. Opcional: [Instale el agente Prometheus](#prometheus-agent) para recopilar las métricas generadas por el exportador y hacer que sean visibles en un panel de control de Prometheus.
 
 ### Instalación del diagrama de Helm del agente Prometheus
 {: #prometheus-agent}
@@ -412,7 +413,7 @@ En la tabla siguiente se muestran los nombres de las métricas de ALB admitidas 
 ### Métricas de servidor
 {: #server_metrics}
 
-`alb-metrics-exporter` reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. Las métricas de servidor recopilan datos del subdominio definido en un recurso de Ingress; por ejemplo, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
+`alb-metrics-exporter` reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. Las métricas de servidor recopilan datos del subdominio que se definen en un recurso de Ingress; por ejemplo, `dev.demostg1.stg.us.south.containers.appdomain.cloud`.
 {: shortdesc}
 
 Las métricas de servidor están en el formato `kube_system_server_<ALB-ID>_<SUB-TYPE>_<SERVER-NAME>_<METRIC-NAME> <VALUE>`.
@@ -453,7 +454,7 @@ En el ejemplo anterior, el subtipo es <code>bytes</code>.</td>
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>El valor de la métrica recopilada. En el ejemplo anterior, el subtipo es <code>22319</code>.</td>
+<td>El valor de la métrica recopilada. En el ejemplo anterior, el valor es <code>22319</code>.</td>
 </tr>
 </tbody></table>
 
@@ -537,7 +538,7 @@ En la tabla siguiente se muestran los nombres de las métricas de servidor admit
 ### Métricas en sentido ascendente
 {: #upstream_metrics}
 
-`alb-metrics-exporter` reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. Las métricas en sentido ascendente recopilan datos del servicio de fondo definido en un recurso de Ingress.
+`alb-metrics-exporter` reformatea automáticamente cada campo de datos del archivo JSON en una métrica que pueda leer Prometheus. Las métricas en sentido ascendente recopilan datos del servicio de fondo que se define en un recurso de Ingress.
 {: shortdesc}
 
 Las métricas en sentido ascendente se formatean de dos maneras.
@@ -581,7 +582,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_bytes{albId=
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>El valor de la métrica recopilada. En el ejemplo anterior, el subtipo es <code>1227</code>.</td>
+<td>El valor de la métrica recopilada. En el ejemplo anterior, el valor es <code>1227</code>.</td>
 </tr>
 </tbody></table>
 
@@ -663,7 +664,7 @@ kube_system_upstream_public_cra6a6eb9e897e41c4a5e58f957b417aec_alb1_requestMsec{
 </tr>
 <tr>
 <td><code>&lt;VALUE&gt;</code></td>
-<td>El valor de la métrica recopilada. En el ejemplo anterior, el subtipo es <code>40</code>.</td>
+<td>El valor de la métrica recopilada. En el ejemplo anterior, el valor es <code>40</code>.</td>
 </tr>
 </tbody></table>
 
@@ -695,7 +696,7 @@ Las zonas de memoria compartida se definen de forma que los procesos de los nodo
 
 En el mapa de configuración de Ingress `ibm-cloud-provider-ingress-cm`, el campo `vts-status-zone-size` define el tamaño de la zona de memoria compartida para la recopilación de datos de métricas. De forma predeterminada, `vts-status-zone-size` se establece en `10m`. Si tiene un entorno grande que requiere más memoria para la recopilación de métricas, puede modificar el valor predeterminado para utilizar en su lugar un valor mayor siguiendo estos pasos.
 
-Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
+Antes de empezar, asegúrese de que tiene el [rol de servicio **Escritor** o **Gestor** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre el espacio de nombres `kube-system`.
 
 1. Edite el archivo de configuración del recurso del mapa de configuración `ibm-cloud-provider-ingress-cm`.
 

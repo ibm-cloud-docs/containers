@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,7 +38,7 @@ Ha expuesto a nivel público la app creando un recurso de Ingress para la app en
 Asegúrese de definir un host solo en un recurso de Ingress. Si se define un host en varios recursos de Ingress, el ALB no puede reenviar el tráfico correctamente y puede que se produzcan errores.
 {: tip}
 
-Antes de empezar, asegúrese de tener las [políticas de acceso de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) siguientes:
+Antes de empezar, asegúrese de tener las [políticas de acceso de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) siguientes:
   - Rol de plataforma **Editor** o **Administrador** para el clúster
   - Rol de servicio de **Escritor** o de **Gestor**
 
@@ -133,6 +133,8 @@ En primer lugar, compruebe si hay mensajes de error en los registros de pod de A
         ibmcloud ks alb-configure --albID <ALB_ID> --enable
         ```
         {: pre}
+        Cuando se reinicia el pod, una [comprobación de preparación](/docs/containers?topic=containers-ingress-settings#readiness-check) impide que el pod de ALB intente direccionar las solicitudes de tráfico hasta que se analizan todos los archivos de recursos de Ingress. Esta comprobación de preparación evita la pérdida de solicitud y puede tardar hasta 5 minutos.
+        {: note}
 
 3. Compruebe los registros para su ALB.
     1.  Obtenga los ID de los pods de ALB que se ejecutan en el clúster.
@@ -185,7 +187,7 @@ Compruebe la disponibilidad del subdominio de Ingress y las direcciones IP públ
         * Si la CLI devuelve un tiempo de espera y tiene un cortafuegos personalizado que protege los nodos trabajadores, asegúrese de permitir ICMP en el [cortafuegos](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall).
         * Si no hay ningún cortafuegos que esté bloqueando los pings y los pings siguen ejecutándose con el tiempo de espera, [compruebe el estado de los pods de ALB](#check_pods).
 
-    * Solo clústeres multizona: puede utilizar la comprobación de estado de MZLB para determinar el estado de las IP de ALB. Para obtener más información sobre el MZLB, consulte [Equilibrador de carga multizona (MZLB)](/docs/containers?topic=containers-ingress#planning). La comprobación de estado de MZLB solo está disponible para los clústeres que tienen el nuevo subdominio de Ingress en el formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si el clúster sigue utilizando el formato antiguo de `<cluster_name>.<region>.containers.mybluemix.net`, [convierta el clúster de una sola zona en multizona](/docs/containers?topic=containers-add_workers#add_zone). Se asigna al clúster un subdominio con el nuevo formato, pero también puede continuar utilizando el formato del subdominio antiguo. Como alternativa, puede solicitar un nuevo clúster al que se asigne automáticamente el nuevo formato de subdominio.
+    * Solo clústeres multizona: puede utilizar la comprobación de estado de MZLB para determinar el estado de las IP de ALB. Para obtener más información sobre el MZLB, consulte [Equilibrador de carga multizona (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). La comprobación de estado de MZLB solo está disponible para los clústeres que tienen el nuevo subdominio de Ingress en el formato `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. Si el clúster sigue utilizando el formato antiguo de `<cluster_name>.<region>.containers.mybluemix.net`, [convierta el clúster de una sola zona en multizona](/docs/containers?topic=containers-add_workers#add_zone). Se asigna al clúster un subdominio con el nuevo formato, pero también puede continuar utilizando el formato del subdominio antiguo. Como alternativa, puede solicitar un nuevo clúster al que se asigne automáticamente el nuevo formato de subdominio.
 
     El siguiente mandato cURL de HTTP utiliza el host `albhealth`, que está configurado por {{site.data.keyword.containerlong_notm}} para devolver los valores de estado `healthy` o `unhealthy` para una IP de ALB.
         ```
@@ -430,11 +432,11 @@ Por ejemplo, supongamos que tiene un clúster multizona en 2 zonas y los 2 ALB p
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
--   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
+-   Para ver si {{site.data.keyword.cloud_notm}} está disponible, [compruebe la página de estado de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
 -   Publique una pregunta en [Slack de {{site.data.keyword.containerlong_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
+    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.cloud_notm}}, [solicite una invitación](https://cloud.ibm.com/kubernetes/slack) a este Slack.
     {: tip}
--   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
+-   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.cloud_notm}}.
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.

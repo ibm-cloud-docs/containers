@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
-# Almacenamiento de datos en IBM File Storage for IBM Cloud
+# Almacenamiento de datos en el almacenamiento de archivos clásico de IBM Cloud
 {: #file_storage}
 
-{{site.data.keyword.Bluemix_notm}} File Storage es un almacenamiento de archivos basado en NFS persistente, rápido, flexible y conectado a la red que puede añadir a sus apps mediante volúmenes persistentes de Kubernetes. Puede elegir los niveles de almacenamiento predefinidos con tamaños de GB e IOPS que cumplan los requisitos de sus cargas de trabajo. Para averiguar si {{site.data.keyword.Bluemix_notm}} File Storage es la opción de almacenamiento adecuada para usted, consulte [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obtener información sobre los precios, consulte [Facturación](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
+{{site.data.keyword.cloud_notm}} File Storage es un almacenamiento de archivos basado en NFS persistente, rápido, flexible y conectado a la red que puede añadir a sus apps mediante volúmenes persistentes de Kubernetes. Puede elegir los niveles de almacenamiento predefinidos con tamaños de GB e IOPS que cumplan los requisitos de sus cargas de trabajo. Para averiguar si {{site.data.keyword.cloud_notm}} File Storage es la opción de almacenamiento adecuada para usted, consulte [Elección de una solución de almacenamiento](/docs/containers?topic=containers-storage_planning#choose_storage_solution). Para obtener información sobre los precios, consulte [Facturación](/docs/infrastructure/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.Bluemix_notm}} File Storage solo está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede suministrar almacenamiento de archivos en su clúster si éste ejecuta Kubernetes versión 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 o posterior. Las instancias de almacenamiento de archivos NFS son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} File Storage solo está disponible para los clústeres estándares configurados con conectividad de red pública. Si el clúster no puede acceder a la red pública, como por ejemplo un clúster privado detrás de un cortafuegos o un clúster con solo el punto final de servicio privado habilitado, puede suministrar almacenamiento de archivos en su clúster si éste ejecuta Kubernetes versión 1.13.4_1513, 1.12.6_1544, 1.11.8_1550 o posterior. Las instancias de almacenamiento de archivos NFS son específicas de una sola zona. Si tiene un clúster multizona, tenga en cuenta las [opciones de almacenamiento persistente multizona](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Cómo decidir la configuración del almacenamiento de archivos
@@ -164,7 +162,7 @@ Para elegir una configuración de almacenamiento:
          </tbody></table>
 
 5. Decida si desea conservar los datos después de que se suprima el clúster o la reclamación de volumen persistente (PVC).
-   - Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Cuando se suprime la PVC, únicamente ésta se suprime. El PV, el dispositivo de almacenamiento físico de la cuenta de infraestructura de IBM Cloud (SoftLayer) y los datos seguirán existiendo. Para reclamar el almacenamiento y volverlo a utilizar en el clúster, debe eliminar el PV y seguir los pasos de [utilización de almacenamiento de archivos existente](#existing_file).
+   - Si desea conservar los datos, seleccione la clase de almacenamiento `retain`. Cuando se suprime la PVC, únicamente ésta se suprime. El PV, el dispositivo de almacenamiento físico de la cuenta de infraestructura de IBM Cloud y los datos seguirán existiendo. Para reclamar el almacenamiento y volverlo a utilizar en el clúster, debe eliminar el PV y seguir los pasos de [utilización de almacenamiento de archivos existente](#existing_file).
    - Si desea que el PV, los datos y el dispositivo físico de almacenamiento de archivos se supriman cuando suprima la PVC, elija una clase de almacenamiento sin la opción `retain`.
 
 6. Decida si desea que se le facture por horas o por meses. Consulte las [tarifas ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing) para obtener más información. De forma predeterminada, todos los dispositivos de almacenamiento de archivos se suministran con un tipo de facturación por hora.
@@ -178,11 +176,11 @@ Para elegir una configuración de almacenamiento:
 ## Adición de almacenamiento de archivos a apps
 {: #add_file}
 
-Cree una reclamación de volumen persistente (PVC) para [suministrar de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) almacenamiento de archivos para el clúster. El suministro dinámico crea automáticamente el volumen persistente (PV) adecuado y solicita el dispositivo de almacenamiento físico en la cuenta de infraestructura de IBM Cloud (SoftLayer).
+Cree una reclamación de volumen persistente (PVC) para [suministrar de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) almacenamiento de archivos para el clúster. El suministro dinámico crea automáticamente el volumen persistente (PV) adecuado y solicita el dispositivo de almacenamiento físico en la cuenta de infraestructura de IBM Cloud.
 {:shortdesc}
 
 Antes de empezar:
-- Si tiene un cortafuegos, [permita el acceso de salida](/docs/containers?topic=containers-firewall#pvc) para los rangos de IP de la infraestructura de IBM Cloud (SoftLayer) de las zonas en las que están en los clústeres, de modo que pueda crear las PVC.
+- Si tiene un cortafuegos, [permita el acceso de salida](/docs/containers?topic=containers-firewall#pvc) para los rangos de IP de la infraestructura de IBM Cloud de las zonas en las que están en los clústeres, de modo que pueda crear las PVC.
 - [Decida si desea utilizar una clase de almacenamiento predefinida](#file_predefined_storageclass) o crear una [clase de almacenamiento personalizada](#file_custom_storageclass).
 
 ¿Desea desplegar almacenamiento de archivos en un conjunto con estado? Consulte [Utilización del almacenamiento de archivos en un conjunto con estado](#file_statefulset) para obtener más información.
@@ -483,7 +481,7 @@ Para utilizar el almacenamiento existente en un clúster distinto de aquel en el
 **Para el almacenamiento persistente que se ha suministrado fuera del clúster:** </br>
 Si desea utilizar el almacenamiento existente que ha suministrado anteriormente, pero nunca antes se ha utilizado en el clúster, debe hacer que el almacenamiento esté disponible en la misma subred que los nodos trabajadores.
 
-1.  {: #external_storage}En el [portal de la infraestructura de IBM Cloud (SoftLayer)![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?), pulse **Almacenamiento**.
+1.  {: #external_storage}En el [portal de la infraestructura de IBM Cloud ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/classic?), pulse **Almacenamiento**.
 2.  Pulse **Almacenamiento de archivos** y, en el menú **Acciones**, seleccione **Autorizar host**.
 3.  Seleccione **Subredes**.
 4.  En la lista desplegable, seleccione la subred VLAN privada a la que está conectado el nodo trabajador. Para localizar la subred de su nodo trabajador, ejecute `ibmcloud ks workers --cluster <cluster_name>` y compare la `IP privada` del nodo trabajador con la subred que ha encontrado en la lista desplegable.
@@ -622,7 +620,7 @@ Ha creado correctamente un PV y lo ha enlazado a una PVC. Ahora los usuarios del
 ## Utilización del almacenamiento de archivos en un conjunto con estado
 {: #file_statefulset}
 
-Si tiene una app con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento de archivos para almacenar los datos de la app. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.Bluemix_notm}} y almacenar los datos en la nube.
+Si tiene una app con estado como, por ejemplo, una base de datos, puede crear conjuntos con estado que utilicen el almacenamiento de archivos para almacenar los datos de la app. Como alternativa, puede utilizar una base de datos como servicio de {{site.data.keyword.cloud_notm}} y almacenar los datos en la nube.
 {: shortdesc}
 
 **¿Qué debo tener en cuenta cuando añada almacenamiento de archivos a un conjunto con estado?** </br>
@@ -827,9 +825,9 @@ restringe aún más esta regla antiafinidad y evita que el pod se planifique en 
             - containerPort: 80
               name: web
             volumeMounts:
-            - name: www
+            - name: myvol1
               mountPath: /usr/share/nginx/html
-            - name: wwwww
+            - name: myvol2
               mountPath: /tmp1
       volumeClaimTemplates:
       - metadata:
@@ -938,7 +936,7 @@ del conjunto con estado, como por ejemplo `nginxvol`.
 
    Por ejemplo, si tiene que crear 3 réplicas del conjunto con estado, cree 3 PVC con los siguientes nombres: `nginxvol-nginx_statefulset-0`, `nginxvol-nginx_statefulset-1` y `nginxvol-nginx_statefulset-2`.  
 
-   ¿Desea crear una PVC y un PV para un dispositivo de almacenamiento existente? Cree la PVC y el PV mediante [suministro estático](#existing_file).
+   ¿Desea crear una PVC y un PV para una instancia de almacenamiento de archivos existente? Cree la PVC y el PV mediante [suministro estático](#existing_file).
    {: tip}
 
 2. Siga los pasos de [Suministro dinámico: Creación de la PVC al crear un conjunto con estado](#file_dynamic_statefulset) para crear el conjunto con estado. El nombre de la PVC sigue el formato `<volume_name>-<statefulset_name>-<replica_number>`. Asegúrese de utilizar los siguientes valores de nombre de PVC en la especificación del conjunto con estado:
@@ -987,7 +985,7 @@ Si desea aumentar la capacidad de almacenamiento o el rendimiento, puede modific
 {: shortdesc}
 
 Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utilizar la consola de
-{{site.data.keyword.Bluemix_notm}} para modificar el almacenamiento, consulte
+{{site.data.keyword.cloud_notm}} para modificar el almacenamiento, consulte
 [Ampliación de la capacidad de compartición de archivos](/docs/infrastructure/FileStorage?topic=FileStorage-expandCapacity#expandCapacity).
 {: tip}
 
@@ -1029,7 +1027,7 @@ Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utili
    ```
    {: screen}
 
-3. Modifique el tamaño o las IOPS del volumen en su cuenta de infraestructura de IBM Cloud (SoftLayer).
+3. Modifique el tamaño o las IOPS del volumen en su cuenta de infraestructura de IBM Cloud.
 
    Ejemplo para almacenamiento de rendimiento:
    ```
@@ -1044,7 +1042,7 @@ Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utili
    {: pre}
 
    <table>
-   <caption>Explicación de los componentes del mandato</caption>
+   <caption>Componentes de mandatos</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Icono Idea"/> Visión general de los componentes del archivo YAML</th>
    </thead>
@@ -1120,7 +1118,7 @@ Para ver preguntas sobre la facturación y encontrar los pasos sobre cómo utili
 ## Cambio de la versión predeterminada de NFS
 {: #nfs_version}
 
-La versión del almacenamiento de archivos determina el protocolo que se utiliza para comunicarse con el servidor de almacenamiento de archivos de {{site.data.keyword.Bluemix_notm}}. De forma predeterminada, todas las instancias de almacenamiento de archivos se configuran con la versión 4 de NFS. Puede cambiar su PV existente a una versión anterior de NFS si una app requiere una versión específica para funcionar correctamente.
+La versión del almacenamiento de archivos determina el protocolo que se utiliza para comunicarse con el servidor de almacenamiento de archivos de {{site.data.keyword.cloud_notm}}. De forma predeterminada, todas las instancias de almacenamiento de archivos se configuran con la versión 4 de NFS. Puede cambiar su PV existente a una versión anterior de NFS si una app requiere una versión específica para funcionar correctamente.
 {: shortdesc}
 
 Para cambiar la versión predeterminada de NFS, puede crear una nueva clase de almacenamiento para suministrar de forma dinámica el almacenamiento de archivos en su clúster o elegir cambiar un PV existente que esté montado en el pod.
@@ -1241,182 +1239,68 @@ Consulte las opciones siguientes de copia de seguridad y restauración para el a
 ## Referencia de clases de almacenamiento
 {: #file_storageclass_reference}
 
-### Bronce
-{: #file_bronze}
+| Características | Valor|
+|:-----------------|:-----------------|
+| Nombre | <code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code>|
+| Tipo | [Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Sistema de archivos | NFS|
+| IOPS por gigabyte | 2|
+| Rango de tamaño en gigabytes | 20-12000 Gi|
+| Disco duro | SSD|
+| Facturación | Por hora|
+| Tarifas | [Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Clase de almacenamiento de archivos: bronce" caption-side="top"}
+{: #simpletabtable1}
+{: tab-title="Bronze"}
+{: tab-group="File storage class"}
 
-<table>
-<caption>Clase de almacenamiento de archivos: bronce</caption>
-<thead>
-<th>Características</th>
-<th>Valor</th>
-</thead>
-<tbody>
-<tr>
-<td>Nombre</td>
-<td><code>ibmc-file-bronze</code></br><code>ibmc-file-retain-bronze</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Sistema de archivos</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS por gigabyte</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Rango de tamaño en gigabytes</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disco duro</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturación</td>
-<td>Por hora</td>
-</tr>
-<tr>
-<td>Tarifas</td>
-<td>[Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Características | Valor|
+|:-----------------|:-----------------|
+| Nombre | <code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code>|
+| Tipo | [Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Sistema de archivos | NFS|
+| IOPS por gigabyte | 4|
+| Rango de tamaño en gigabytes | 20-12000 Gi|
+| Disco duro | SSD|
+| Facturación | Por hora|
+| Tarifas | [Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Clase de almacenamiento de archivos: plata" caption-side="top"}
+{: #simpletabtable2}
+{: tab-title="Silver"}
+{: tab-group="File storage class"}
 
+| Características | Valor|
+|:-----------------|:-----------------|
+| Nombre | <code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code>|
+| Tipo | [Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)|
+| Sistema de archivos | NFS|
+| IOPS por gigabyte | 10|
+| Rango de tamaño en gigabytes | 20-4000 Gi|
+| Disco duro | SSD|
+| Facturación | Por hora|
+| Tarifas | [Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Clase de almacenamiento de archivos: oro" caption-side="top"}
+{: #simpletabtable3}
+{: tab-title="Gold"}
+{: tab-group="File storage class"}
 
-### Plata
-{: #file_silver}
-
-<table>
-<caption>Clase de almacenamiento de archivos: plata</caption>
-<thead>
-<th>Características</th>
-<th>Valor</th>
-</thead>
-<tbody>
-<tr>
-<td>Nombre</td>
-<td><code>ibmc-file-silver</code></br><code>ibmc-file-retain-silver</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Sistema de archivos</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS por gigabyte</td>
-<td>4</td>
-</tr>
-<tr>
-<td>Rango de tamaño en gigabytes</td>
-<td>20-12000 Gi</td>
-</tr>
-<tr>
-<td>Disco duro</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturación</td>
-<td>Por hora</li></ul></td>
-</tr>
-<tr>
-<td>Tarifas</td>
-<td>[Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Oro
-{: #file_gold}
-
-<table>
-<caption>Clase de almacenamiento de archivos: oro</caption>
-<thead>
-<th>Características</th>
-<th>Valor</th>
-</thead>
-<tbody>
-<tr>
-<td>Nombre</td>
-<td><code>ibmc-file-gold</code></br><code>ibmc-file-retain-gold</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Almacenamiento resistente](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-endurance-tiers)</td>
-</tr>
-<tr>
-<td>Sistema de archivos</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS por gigabyte</td>
-<td>10</td>
-</tr>
-<tr>
-<td>Rango de tamaño en gigabytes</td>
-<td>20-4000 Gi</td>
-</tr>
-<tr>
-<td>Disco duro</td>
-<td>SSD</td>
-</tr>
-<tr>
-<td>Facturación</td>
-<td>Por hora</li></ul></td>
-</tr>
-<tr>
-<td>Tarifas</td>
-<td>[Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
-
-### Personalizada
-{: #file_custom}
-
-<table>
-<caption>Clase de almacenamiento de archivos: personalizada</caption>
-<thead>
-<th>Características</th>
-<th>Valor</th>
-</thead>
-<tbody>
-<tr>
-<td>Nombre</td>
-<td><code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code></td>
-</tr>
-<tr>
-<td>Tipo</td>
-<td>[Rendimiento](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)</td>
-</tr>
-<tr>
-<td>Sistema de archivos</td>
-<td>NFS</td>
-</tr>
-<tr>
-<td>IOPS y tamaño</td>
-<td><p><strong>Rango de tamaños en gigabytes / Rango de IOPS en múltiplos de 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul></td>
-</tr>
-<tr>
-<td>Disco duro</td>
-<td>La proporción entre IOPS y gigabytes determina el tipo de disco duro que se suministra. Para determinar la proporción entre IOPS y gigabytes, divida el número de IOPS por el tamaño de su almacenamiento. </br></br>Ejemplo: </br>Supongamos que elige 500 Gi de almacenamiento con 100 IOPS. La proporción es de 0,2 (100 IOPS/500 Gi). </br></br><strong>Visión general de los tipos de disco duro por proporción:</strong><ul><li>Menor o igual que 0,3: SATA</li><li>Mayor que 0,3: SSD</li></ul></td>
-</tr>
-<tr>
-<td>Facturación</td>
-<td>Por hora</li></ul></td>
-</tr>
-<tr>
-<td>Tarifas</td>
-<td>[Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)</td>
-</tr>
-</tbody>
-</table>
+| Características | Valor|
+|:-----------------|:-----------------|
+| Nombre | <code>ibmc-file-custom</code></br><code>ibmc-file-retain-custom</code>|
+| Tipo | [Rendimiento](/docs/infrastructure/FileStorage?topic=FileStorage-about#provisioning-with-performance)|
+| Sistema de archivos | NFS|
+| IOPS y tamaño | <p><strong>Rango de tamaños en gigabytes / Rango de IOPS en múltiplos de 100</strong></p><ul><li>20-39 Gi / 100-1000 IOPS</li><li>40-79 Gi / 100-2000 IOPS</li><li>80-99 Gi / 100-4000 IOPS</li><li>100-499 Gi / 100-6000 IOPS</li><li>500-999 Gi / 100-10000 IOPS</li><li>1000-1999 Gi / 100-20000 IOPS</li><li>2000-2999 Gi / 200-40000 IOPS</li><li>3000-3999 Gi / 200-48000 IOPS</li><li>4000-7999 Gi / 300-48000 IOPS</li><li>8000-9999 Gi / 500-48000 IOPS</li><li>10000-12000 Gi / 1000-48000 IOPS</li></ul>|
+| Disco duro | La proporción entre IOPS y gigabytes determina el tipo de disco duro que se suministra. Para determinar la proporción entre IOPS y gigabytes, divida el número de IOPS por el tamaño de su almacenamiento. </br></br>Ejemplo: </br>Supongamos que elige 500 Gi de almacenamiento con 100 IOPS. La proporción es de 0,2 (100 IOPS/500 Gi). </br></br><strong>Visión general de los tipos de disco duro por proporción:</strong><ul><li>Menor o igual que 0,3: SATA</li><li>Mayor que 0,3: SSD</li></ul>|
+| Facturación | Por hora|
+| Tarifas | [Información de precios ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://www.ibm.com/cloud/file-storage/pricing)|
+{: class="simple-tab-table"}
+{: caption="Clase de almacenamiento de archivos: personalizada" caption-side="top"}
+{: #simpletabtable4}
+{: tab-title="Custom"}
+{: tab-group="File storage class"}
 
 <br />
 
@@ -1610,3 +1494,6 @@ La siguiente clase de almacenamiento personalizada le permite definir la versió
    mountOptions: nfsvers=<nfs_version>
   ```
   {: codeblock}
+
+
+

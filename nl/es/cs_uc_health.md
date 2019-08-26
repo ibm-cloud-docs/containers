@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-05-31"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -23,34 +23,34 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Casos de uso de {{site.data.keyword.cloud_notm}} en el sector sanitario
 {: #cs_uc_health}
 
-En estos casos de uso se describe cómo las cargas de trabajo de {{site.data.keyword.containerlong_notm}} se benefician de la nube pública. Disponen de cálculo seguro en un entorno nativo aislado, utilización sencilla de clústeres para un desarrollo más rápido, migración desde máquinas virtuales y compartición de datos en las bases de datos de la nube.
+En estos casos de uso se describe cómo las cargas de trabajo de {{site.data.keyword.containerlong}} se benefician de la nube pública. Ofrecen cálculo seguro en un entorno nativo aislado, fácil aumento de clústeres para un desarrollo más rápido, migración desde máquinas virtuales y compartición de datos en las bases de datos de la nube.
 {: shortdesc}
+
 
 ## Un proveedor de atención sanitaria migra cargas de trabajo desde máquinas virtuales ineficaces a contenedores que facilitan el funcionamiento para sistemas de informes y pacientes
 {: #uc_migrate}
 
-Un ejecutivo de TI de un proveedor de atención sanitaria tiene sistemas locales de informes del negocio y de pacientes. Estos sistemas pasan por ciclos lentos de mejora, lo que hace que se estanquen los niveles de servicio al paciente.
+Un ejecutivo de TI de un proveedor de atención sanitaria tiene sistemas locales de informes del negocio y de pacientes. Estos sistemas pasan por ciclos lentos de mejora, lo que hace que se estanquen los niveles de servicio al paciente. 
 {: shortdesc}
 
-Por qué {{site.data.keyword.cloud_notm}}: para mejorar el servicio al paciente, el proveedor pensó en {{site.data.keyword.containerlong_notm}} y {{site.data.keyword.contdelivery_full}} para reducir el gasto en TI y acelerar el desarrollo, todo ello en una plataforma segura. Los sistemas SaaS del proveedor, que albergaban tanto los sistemas de registros de pacientes como las apps de informes de la empresa, necesitaban actualizaciones frecuentes. Sin embargo, el entorno local obstaculiza el desarrollo ágil. El proveedor también quería reducir los crecientes costes laborales y el presupuesto.
+Por qué {{site.data.keyword.cloud_notm}}: para mejorar el servicio al paciente, el proveedor pensó en {{site.data.keyword.containerlong_notm}} y {{site.data.keyword.contdelivery_full}} para reducir el gasto en TI y acelerar el desarrollo, todo ello en una plataforma segura. Los sistemas SaaS del proveedor, que albergaban tanto los sistemas de registros de pacientes como las apps de informes de la empresa, necesitaban actualizaciones frecuentes. Sin embargo, el entorno local obstaculiza el desarrollo ágil.  El proveedor también quería reducir los crecientes costes laborales y el presupuesto.
 
 Tecnologías clave:
 * [Clústeres que se adaptan a las diversas necesidades de CPU, RAM y almacenamiento](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Escalado horizontal](/docs/containers?topic=containers-app#highly_available_apps)
-* [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security)
+* [Seguridad y aislamiento de contenedores](/docs/containers?topic=containers-security#security) 
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
 * [Capacidad de inicio de sesión sin cambiar el código de la app mediante {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
 
-Empezaron por contenerizar sus sistemas SaaS y colocarlos en la nube. Desde este primer paso, pasaron de un hardware sobredimensionado en un centro de datos privado a un cálculo personalizable que reduce las operaciones de TI, el mantenimiento y la energía. Para alojar los sistemas SaaS, diseñaron fácilmente clústeres de Kubernetes que se ajustaran a sus necesidades de CPU, RAM y almacenamiento. Otro factor para reducir los costes de personal es que IBM gestiona Kubernetes, de modo que el proveedor puede centrarse en ofrecer un mejor servicio al cliente.
+Empezaron por contenerizar sus sistemas SaaS y colocarlos en la nube. Desde este primer paso, pasaron de un hardware sobredimensionado en un centro de datos privado a un cálculo personalizable que reduce las operaciones de TI, el mantenimiento y la energía. Para alojar las apps SaaS, diseñaron fácilmente clústeres de Kubernetes que se ajustaran a sus necesidades de CPU, RAM y almacenamiento.  Otro factor para reducir los costes de personal es que IBM gestiona Kubernetes, de modo que el proveedor puede centrarse en ofrecer un mejor servicio al cliente. 
 
 El desarrollo acelerado constituye una victoria clave para el ejecutivo de TI. Con el traslado a la nube pública, los desarrolladores pueden experimentar fácilmente con SDK Node.js, enviando los cambios a los sistemas de desarrollo y prueba, escalados en clústeres separados. Esos envíos se han automatizado con cadenas de herramientas abiertas y {{site.data.keyword.contdelivery_full}}. Las actualizaciones del sistema SaaS ya no pasan por procesos de compilación lentos y propensos a errores. Los desarrolladores distribuir actualizaciones incrementales a sus usuarios, a diario o incluso con mayor frecuencia.  Además, el registro y la supervisión de los sistemas SaaS, especialmente en lo referente a la interacción entre los sistemas de informes internos y externos de los pacientes, se integran rápidamente en el sistema. Los desarrolladores no pierdan el tiempo creando sistemas de registro complejos, solo para poder solucionar los problemas de los sistemas activos.
 
-La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo confidenciales de los pacientes ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. El entorno nativo proporciona Trusted Compute, que verifica el hardware subyacente para protegerlo frente a una posible manipulación. Desde el punto de vista de la seguridad, Vulnerability Advisor ofrece los siguientes escaneos:
+La seguridad es lo primero: con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo confidenciales de los pacientes ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. Desde el punto de vista de la seguridad, Vulnerability Advisor ofrece los siguientes escaneos:
 * Escaneo de vulnerabilidad de imágenes
 * Escaneo de políticas basadas en ISO 27k
 * Escaneo de contenedores
@@ -72,8 +72,6 @@ Los datos protegidos de los pacientes se traducen en pacientes satisfechos.
 Servicios de cálculo según demanda, almacenamiento y E/S que se ejecutan en la nube pública con acceso seguro a los activos locales de la empresa. Implementar un proceso CI/CD y otros elementos de IBM Garage Method para acortar significativamente los ciclos de entrega.
 
 **Paso 1: Proteger la plataforma de cálculo**
-* Las apps que gestionan datos muy confidenciales de los pacientes se pueden realojar en {{site.data.keyword.containerlong_notm}} que se ejecuta en un entorno nativo para Trusted Compute.
-* Trusted Compute puede verificar el hardware subyacente para protegerlo frente a una posible manipulación.
 * Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de imágenes, políticas, contenedores y vulnerabilidades de exploración de paquetes en busca de software malicioso conocido.
 * Aplique de forma coherente la autenticación controlada por políticas a los servicios y las API con una anotación de Ingress simple. Con la seguridad declarativa, puede garantizar la autenticación de usuarios y la validación de señales mediante {{site.data.keyword.appid_short_notm}}.
 
@@ -91,12 +89,12 @@ Servicios de cálculo según demanda, almacenamiento y E/S que se ejecutan en la
 * Adoptar las prácticas de desarrollo ágiles e iterativas de IBM Garage Method para permitir releases frecuentes de funciones, parches y arreglos sin ocasionar tiempos de inactividad.
 
 **Solución técnica**
-* {{site.data.keyword.containerlong_notm}}
+* {{site.data.keyword.containerlong_notm}} 
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
 * {{site.data.keyword.appid_short_notm}}
 
-Para las cargas de trabajo más confidenciales, los clústeres se pueden alojar en {{site.data.keyword.containerlong_notm}} para el entorno nativo.  Proporciona una plataforma de cálculo fiable que explora automáticamente el hardware y el código de tiempo de ejecución para detectar vulnerabilidades. Mediante el uso de la tecnología contenedores estándar del sector, las apps se pueden realojar inicialmente en {{site.data.keyword.containerlong_notm}} de forma rápida sin tener que realizar cambios arquitectónicos importantes. Este cambio proporciona la ventaja inmediata de la escalabilidad.
+Para las cargas de trabajo más confidenciales, los clústeres se pueden alojar en {{site.data.keyword.containerlong_notm}} para el entorno nativo. Mediante el uso de la tecnología contenedores estándar del sector, las apps se pueden realojar inicialmente en {{site.data.keyword.containerlong_notm}} de forma rápida sin tener que realizar cambios arquitectónicos importantes. Este cambio proporciona la ventaja inmediata de la escalabilidad.
 
 Pueden duplicar y escalar las apps mediante el uso de reglas definidas y el orquestador automático de Kubernetes. {{site.data.keyword.containerlong_notm}} proporciona recursos de cálculo escalables y los paneles de control de DevOps asociados para crear, escalar y eliminar apps y servicios según demanda. Gracias al despliegue de Kubernetes y a los objetos de tiempo de ejecución, el proveedor puede supervisar y gestionar las actualizaciones de las apps de forma fiable.
 
@@ -109,8 +107,8 @@ Sin embargo, el traslado de las cargas de trabajo de cálculo a {{site.data.keyw
 Gran parte del propio proceso de CI/CD se automatiza con el servicio Continuous Delivery de IBM en la nube. El proveedor puede definir cadenas de herramientas de flujos de trabajo para preparar imágenes de contenedor, comprobar si hay vulnerabilidades y desplegarlas en el clúster de Kubernetes.
 
 **Resultados**
-* El traslado de las VM monolíticas existentes a contenedores alojados en la nube fue un primer paso que permitió al proveedor ahorrar en costes de capital y comenzar a modernizar las prácticas de DevOps.
-* La reestructuración de apps monolíticas en un conjunto de microservicios personalizados redujo significativamente el tiempo de entrega de parches, arreglos y nuevas funciones.
+* El traslado de las VM monolíticas existentes a contenedores alojados en la nube fue un primer paso que permitió al proveedor ahorrar en costes de capital y comenzar a modernizar las prácticas de DevOps. 
+* La reestructuración de apps monolíticas clave en un conjunto de microservicios personalizados redujo significativamente el tiempo de entrega de parches, arreglos y nuevas funciones.
 * Paralelamente, el proveedor implementó iteraciones sencillas para controlar la deuda técnica existente.
 
 ## Una empresa de investigación sin ánimo de lucro aloja datos confidenciales, al tiempo que aumenta la investigación con asociados
@@ -126,7 +124,7 @@ Tecnologías clave:
 * [{{site.data.keyword.cloudant}} para almacenar datos de forma permanente y sincronizarlos entre apps](/docs/services/Cloudant?topic=cloudant-getting-started#getting-started)
 * [Exploración y aislamiento de vulnerabilidades de las cargas de trabajo](/docs/services/Registry?topic=va-va_index#va_index)
 * [Herramientas nativas de DevOps, que incluyen cadenas de herramientas abiertas en {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
-* [{{site.data.keyword.openwhisk}} para sanear los datos y notificar a los investigadores sobre cambios en la estructura de datos](/docs/openwhisk?topic=cloud-functions-openwhisk_cloudant#openwhisk_cloudant)
+* [{{site.data.keyword.openwhisk}} para sanear los datos y notificar a los investigadores sobre cambios en la estructura de datos](/docs/openwhisk?topic=cloud-functions-pkg_cloudant#openwhisk_cloudant)
 
 **Contexto: alojamiento y compartición seguros de datos sobre enfermedades para la organización de investigación sin ánimo de lucro**
 
@@ -164,7 +162,7 @@ La organización sin ánimo de lucro también proporciona apps que se ejecutan e
 
 Los desarrolladores comenzaron por desplegar sus apps SaaS para compartir investigaciones en contenedores con {{site.data.keyword.containerlong_notm}}. Crearon clústeres para un entorno de desarrollo compartido que permiten a los desarrolladores de todo el mundo desplegar de forma colaborativa mejoras de apps rápidamente.
 
-La seguridad es lo primero: el ejecutivo de desarrollo eligió Trusted Compute para el servidor nativo donde alojar los clústeres de investigación. Con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo confidenciales de investigación ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. El entorno nativo proporciona Trusted Compute, que verifica el hardware subyacente para protegerlo frente a una posible manipulación. Puesto que la organización sin ánimo de lucro tiene vínculos con empresas farmacéuticas, la seguridad de las apps resulta crucial. La competencia es feroz, y ahí tiene cabida el espionaje corporativo. Desde el punto de vista de la seguridad, Vulnerability Advisor ofrece los siguientes escaneos:
+La seguridad es lo primero: Los ejecutivos de desarrollo eligieron sistemas nativos donde alojar los clústeres de investigación. Con el entorno nativo para {{site.data.keyword.containerlong_notm}}, las cargas de trabajo confidenciales de investigación ahora tienen un aislamiento familiar, pero dentro de la flexibilidad de la nube pública. Puesto que la organización sin ánimo de lucro tiene vínculos con empresas farmacéuticas, la seguridad de las apps resulta crucial. La competencia es feroz, y ahí tiene cabida el espionaje corporativo. Desde el punto de vista de la seguridad, Vulnerability Advisor ofrece los siguientes escaneos:
 * Escaneo de vulnerabilidad de imágenes
 * Escaneo de políticas basadas en ISO 27k
 * Escaneo de contenedores
@@ -181,7 +179,7 @@ Los desarrolladores se centran en los problemas del dominio, utilizando las herr
 Cálculo según demanda, almacenamiento y kits de inicio de nodos que se ejecutan en la nube pública con acceso seguro a los datos de investigación de todo el mundo, según sea necesario. El cálculo de los clústeres es a prueba de manipulaciones y está aislado en entornos nativos.
 
 Solución técnica:
-* {{site.data.keyword.containerlong_notm}} con Trusted Compute
+* {{site.data.keyword.containerlong_notm}}
 * {{site.data.keyword.openwhisk}}
 * {{site.data.keyword.cloudant}}
 * {{site.data.keyword.SecureGatewayfull}}
@@ -196,8 +194,7 @@ Solución técnica:
 
 **Paso 2: Utilizar un sistema cálculo seguro y de alto rendimiento**
 * Las apps ML que requieren un cálculo de mayor rendimiento están alojadas en {{site.data.keyword.containerlong_notm}} en el entorno nativo. Este clúster ML está centralizado, por lo que cada clúster regional no incurre en el gasto de los nodos trabajadores nativos; los despliegues de Kubernetes también resultan más sencillos.
-* Las apps que procesan datos clínicos altamente confidenciales se pueden alojar en {{site.data.keyword.containerlong_notm}} que se ejecuta en un entorno nativo para Trusted Compute.
-* Trusted Compute puede verificar el hardware subyacente para protegerlo frente a una posible manipulación. Desde ese punto de partida, Vulnerability Advisor proporciona funciones de exploración de imágenes, políticas, contenedores y vulnerabilidades de exploración de paquetes en busca de software malicioso conocido.
+* Vulnerability Advisor proporciona funciones de exploración de imágenes, políticas, contenedores y vulnerabilidades de exploración de paquetes en busca de software malicioso conocido.
 
 **Paso 3: Garantizar la disponibilidad global**
 * Después de que los desarrolladores crean y prueban las apps en sus clústeres de desarrollo y prueba, utilizan las cadenas de herramientas de CI/CD de IBM para desplegar las apps en clústeres de todo el mundo.
@@ -216,3 +213,5 @@ Solución técnica:
 * Los microservicios reducen significativamente el tiempo de entrega de parches, correcciones de errores y funciones nuevas. El desarrollo inicial es rápido y se ofrecen actualizaciones frecuentes.
 * Los investigadores tienen acceso a datos clínicos y pueden compartir datos clínicos, a la vez que cumplen con las normativas locales.
 * Los pacientes que participan en la investigación de enfermedades se sienten seguros de que sus datos están protegidos, lo que marca una gran diferencia cuando los datos se comparten con grandes equipos de investigación.
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -34,13 +34,13 @@ Como administrador del clúster, desea controlar lo que sucede en el clúster, e
 
 Con el controlador de admisiones `PodSecurityPolicy`, no se pueden crear pods hasta después de [autorizar políticas](#customize_psp). La configuración de políticas de seguridad de pod puede tener efectos secundarios no deseados, por lo tanto asegúrese de probar un despliegue después de cambiar la política. Para desplegar apps, las cuentas de usuario y de servicio deben estar autorizadas por las políticas de seguridad de pod necesarias para desplegar pods. Por ejemplo, si instala apps utilizando [Helm](/docs/containers?topic=containers-helm#public_helm_install), el componente tiller de Helm crea pods y, por lo tanto, debe tener la autorización de política de seguridad de pod correcta.
 
-¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](/docs/containers?topic=containers-users#users) para establecer los permisos de {{site.data.keyword.Bluemix_notm}} IAM y de infraestructura.
+¿Está intentando controlar qué usuarios tienen acceso a {{site.data.keyword.containerlong_notm}}? Consulte [Asignación de acceso de clúster](/docs/containers?topic=containers-users#users) para establecer los permisos de {{site.data.keyword.cloud_notm}} IAM y de infraestructura.
 {: tip}
 
 **¿Hay políticas predeterminadas establecidas? ¿Qué puedo añadir?**</br>
 De forma predeterminada, {{site.data.keyword.containerlong_notm}} configura el controlador de admisiones `PodSecurityPolicy` con [recursos para la gestión de clústeres de {{site.data.keyword.IBM_notm}}](#ibm_psp) que no puede suprimir ni modificar. Tampoco puede inhabilitar el controlador de admisiones.
 
-Las acciones de pod no están bloqueadas de forma predeterminada. En su lugar, dos recursos de control de acceso basados en rol (RBAC) del clúster autorizan a todos los administradores, usuarios, servicios y nodos a crear pods privilegiados y sin privilegios. Se incluyen recursos de RBAC adicionales para la portabilidad con paquetes de {{site.data.keyword.Bluemix_notm}} privado que se utilizan para [despliegues híbridos](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
+Las acciones de pod no están bloqueadas de forma predeterminada. En su lugar, dos recursos de control de acceso basados en rol (RBAC) del clúster autorizan a todos los administradores, usuarios, servicios y nodos a crear pods privilegiados y sin privilegios. Se incluyen recursos de RBAC adicionales para la portabilidad con paquetes de {{site.data.keyword.cloud_notm}} privado que se utilizan para [despliegues híbridos](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 Si desea evitar que determinados usuarios creen o actualicen pods, puede [modificar estos recursos de RBAC o crear el suyo propio su propio](#customize_psp).
 
@@ -74,7 +74,7 @@ Puede modificar estos roles de RBAC para eliminar o añadir administradores, usu
 Antes de empezar:
 *  [Inicie una sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *  Comprende cómo se trabaja con los roles de RBAC. Para obtener más información, consulte [Autorización de usuarios con roles de RBAC personalizados de Kubernetes](/docs/containers?topic=containers-users#rbac) o la [documentación de Kubernetes ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
-* Asegúrese de tener el [rol de **Gestor** de acceso al servicio {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre todos los espacios de nombres.
+* Asegúrese de tener el [rol de **Gestor** de acceso al servicio {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) sobre todos los espacios de nombres.
 
 Si modifica la configuración predeterminada, puede evitar acciones de clúster importantes, como despliegues de pod o actualizaciones de clúster. Pruebe sus cambios en un clúster que no sea de producción y en el que no confíen otros equipos.
 {: important}

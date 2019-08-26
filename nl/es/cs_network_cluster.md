@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, vlan
 
 subcollection: containers
 
@@ -24,6 +24,7 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Cambio de puntos finales de servicio o de conexiones de VLAN
 {: #cs_network_cluster}
 
@@ -38,11 +39,11 @@ En los clústeres que ejecutan Kubernetes versión 1.11 o posteriores, habilite 
 
 El punto final de servicio privado hace que el maestro de Kubernetes sea de acceso privado. Los nodos trabajadores y los usuarios autorizados del clúster se pueden comunicar con el maestro de Kubernetes a través de la red privada. Para determinar si puede habilitar el punto final de servicio privado, consulte [Comunicación entre nodo trabajador y maestro y entre usuario y maestro](/docs/containers?topic=containers-plan_clusters#internet-facing). Tenga en cuenta que no puede inhabilitar el punto final de servicio privado después de habilitarlo.
 
-¿Ha creado un clúster solo con un punto final de servicio privado antes de habilitar la cuenta para [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) y [puntos finales de servicio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started)? Intente [configurar el punto final de servicio público](#set-up-public-se) de modo que pueda utilizar el clúster hasta que se procesen los casos de soporte para actualizar la cuenta.
+¿Ha creado un clúster solo con un punto final de servicio privado antes de habilitar la cuenta para [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) y [puntos finales de servicio](/docs/resources?topic=resources-private-network-endpoints#getting-started)? Intente [configurar el punto final de servicio público](#set-up-public-se) de modo que pueda utilizar el clúster hasta que se procesen los casos de soporte para actualizar la cuenta.
 {: tip}
 
-1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
-2. [Habilite la cuenta de {{site.data.keyword.Bluemix_notm}} para que utilice puntos finales de servicio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) en la cuenta de la infraestructura de IBM Cloud. Para comprobar si un VRF ya está habilitado, utilice el mandato `ibmcloud account show`.
+2. [Habilite la cuenta de {{site.data.keyword.cloud_notm}} para que utilice puntos finales de servicio](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Habilite el punto final de servicio privado.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -65,13 +66,12 @@ El punto final de servicio privado hace que el maestro de Kubernetes sea de acce
 
 8. Si el clúster se encuentra en un entorno detrás de un cortafuegos:
   * [Permita a los usuarios autorizados del clúster ejecutar mandatos `kubectl` para acceder al maestro a través del punto final de servicio privado.](/docs/containers?topic=containers-firewall#firewall_kubectl)
-  * [Permita el tráfico de red de salida a las IP privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los recursos de la infraestructura y para los servicios de {{site.data.keyword.Bluemix_notm}} que tiene previsto utilizar.
+  * [Permita el tráfico de red de salida a las IP privadas](/docs/containers?topic=containers-firewall#firewall_outbound) para los recursos de la infraestructura y para los servicios de {{site.data.keyword.cloud_notm}} que tiene previsto utilizar.
 
-9. Opcional: Para utilizar solo el punto final de servicio privado, inhabilite el punto final de servicio público.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+9.  Opcional: para utilizar sólo el punto final de servicio privado:
+    1.  [Inhabilite el punto final de servicio público](#disable-public-se).
+    2.  [Configure el acceso al maestro en el punto final de servicio privado](/docs/containers?topic=containers-clusters#access_on_prem).
+
 
 <br />
 
@@ -96,35 +96,34 @@ Si ya ha inhabilitado el punto final público, puede volver a habilitarlo.
    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
-
-   </br>
-
-**Pasos para inhabilitar**</br>
-Para inhabilitar el punto final de servicio público, primero debe habilitar el punto final de servicio privado para que los nodos trabajadores se puedan comunicar con el maestro de Kubernetes.
-1. Habilite el punto final de servicio privado.
-   ```
-   ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-2. Renueve el servidor de API del maestro de Kubernetes para que utilice el punto final de servicio privado siguiendo la indicación de la CLI o ejecutando manualmente el mandato siguiente.
-   ```
-   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
 3. [Cree un mapa de configuración](/docs/containers?topic=containers-update#worker-up-configmap) para controlar el número máximo de nodos trabajadores que pueden no estar disponibles a la vez en el clúster. Cuando actualiza los nodos trabajadores, el mapa de correlación ayuda a evitar tiempo de inactividad para las apps a medida que las apps se replanifican de forma ordenada en los nodos trabajadores disponibles.
-
-4. Actualice todos los nodos trabajadores del clúster para que adopten la configuración de punto final de servicio privado.
-
-   <p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de nodo trabajador disponible, debe [volver a cargar manualmente los nodos trabajadores](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
+4. Actualice todos los nodos trabajadores del clúster para eliminar la configuración de punto final de servicio público.<p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de trabajador disponible, debe volver a cargar manualmente los nodos trabajadores con el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
    ```
    ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
    ```
   {: pre}
-5. Inhabilite el punto final de servicio público.
+   </br>
+
+{: #disable-public-se}
+**Pasos para inhabilitar**</br>
+Para inhabilitar el punto final de servicio público, primero debe habilitar el punto final de servicio privado para que los nodos trabajadores se puedan comunicar con el maestro de Kubernetes.
+1. [Habilite el punto final de servicio privado](#set-up-private-se).
+2. Inhabilite el punto final de servicio público.
    ```
    ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
+3. Renueve el servidor de API del maestro de Kubernetes para eliminar el punto final de servicio público siguiendo la indicación de la CLI o ejecutando manualmente el mandato siguiente.
+   ```
+   ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+4. [Cree un mapa de configuración](/docs/containers?topic=containers-update#worker-up-configmap) para controlar el número máximo de nodos trabajadores que pueden no estar disponibles a la vez en el clúster. Cuando actualiza los nodos trabajadores, el mapa de correlación ayuda a evitar tiempo de inactividad para las apps a medida que las apps se replanifican de forma ordenada en los nodos trabajadores disponibles.
+5. Actualice todos los nodos trabajadores del clúster para eliminar la configuración de punto final de servicio público.<p class="important">Con el siguiente mandato de actualización, los nodos trabajadores se vuelven a cargar para que adopten la configuración de punto final de servicio. Si no hay ninguna actualización de trabajador disponible, debe volver a cargar manualmente los nodos trabajadores con el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) `ibmcloud ks worker-reload`. Si los vuelve a cargar, asegúrese de delimitar, drenar y gestionar el orden para controlar el número máximo de nodos trabajadores que no están disponibles a la vez.</p>
+   ```
+   ibmcloud ks worker-update --cluster <cluster_name_or_ID> --workers <worker1,worker2>
+   ```
+  {: pre}
 
 ## Cómo pasar de un punto final de servicio público a un punto final de servicio privado
 {: #migrate-to-private-se}
@@ -138,8 +137,8 @@ Todos los clústeres que están conectados a una VLAN pública y a una privada u
 
 Tenga en cuenta que no puede inhabilitar el punto final de servicio privado después de habilitarlo.
 
-1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) en la cuenta de la infraestructura de IBM Cloud (SoftLayer).
-2. [Habilite la cuenta de {{site.data.keyword.Bluemix_notm}} para que utilice puntos finales de servicio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).
+1. Habilite [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) en la cuenta de la infraestructura de IBM Cloud. Para comprobar si un VRF ya está habilitado, utilice el mandato `ibmcloud account show`.
+2. [Habilite la cuenta de {{site.data.keyword.cloud_notm}} para que utilice puntos finales de servicio](/docs/resources?topic=resources-private-network-endpoints#getting-started).
 3. Habilite el punto final de servicio privado.
    ```
    ibmcloud ks cluster-feature-enable private-service-endpoint --cluster <cluster_name_or_ID>
@@ -160,11 +159,13 @@ Tenga en cuenta que no puede inhabilitar el punto final de servicio privado desp
     ```
     {: pre}
 
-7. Opcional: Inhabilite el punto final de servicio público.
-   ```
-   ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+7.  Opcional: para utilizar sólo el punto final de servicio privado:
+    1.  Inhabilite el punto final de servicio público.
+        ```
+        ibmcloud ks cluster-feature-disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  [Configure el acceso al maestro en el punto final de servicio privado](/docs/containers?topic=containers-clusters#access_on_prem).
 
 <br />
 
@@ -216,7 +217,7 @@ Para cambiar las VLAN que utiliza una agrupación de nodos trabajadores para sum
      ```
      {: screen}
 
-  3. Si necesita solicitar una nueva VLAN pública o privada para la zona, puede hacerlo en la [consola de {{site.data.keyword.Bluemix_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) o puede utilizar el mandato siguiente. Recuerde que las VLAN deben ser compatibles, con ID de pod de **Router** coincidentes como en el paso anterior. Si va a crear un par de nuevas VLAN pública y privada, estas deben ser compatibles entre sí.
+  3. Si necesita solicitar una nueva VLAN pública o privada para la zona, puede hacerlo en la [consola de {{site.data.keyword.cloud_notm}}](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans) o puede utilizar el mandato siguiente. Recuerde que las VLAN deben ser compatibles, con ID de pod de **Router** coincidentes como en el paso anterior. Si va a crear un par de nuevas VLAN pública y privada, estas deben ser compatibles entre sí.
      ```
      ibmcloud sl vlan create -t [public|private] -d <zone> -r <compatible_router>
      ```
@@ -236,7 +237,7 @@ Para cambiar las VLAN que utiliza una agrupación de nodos trabajadores para sum
       ```
       {: pre}
 
-    * Ejemplo para añadir solo una VLAN privada, como en el caso de que se pase de VLAN pública y privada a solo privada cuando se dispone de una [cuenta habilitada para VRF que utiliza puntos finales de servicio](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started):
+    * Ejemplo para añadir solo una VLAN privada, como en el caso de que se pase de VLAN pública y privada a solo privada cuando se dispone de una [cuenta habilitada para VRF que utiliza puntos finales de servicio](/docs/resources?topic=resources-private-network-endpoints#getting-started):
       ```
       ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
       ```
@@ -289,4 +290,4 @@ Para cambiar las VLAN que utiliza una agrupación de nodos trabajadores para sum
 
 8. Opcional: Puede repetir los pasos del 2 al 7 correspondientes a cada agrupación de nodos trabajadores del clúster. Después de completar estos pasos, todos los nodos trabajadores del clúster estarán configurados con las nuevas VLAN.
 
-9. Los ALB predeterminados del clúster siguen enlazados a la VLAN antigua porque sus direcciones IP proceden de una subred de dicha VLAN. Como los ALB no se pueden mover entre distintas VLAN, puede [crear ALB en las nuevas VLAN e inhabilitar los ALB de las VLAN antiguas](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+10. Opcional: si ya no necesita las subredes en las VLAN antiguas, puede [eliminarlas](/docs/containers?topic=containers-subnets#remove-subnets).

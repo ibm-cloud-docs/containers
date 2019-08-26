@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-05"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -24,14 +24,17 @@ subcollection: containers
 {:preview: .preview}
 
 
+
 # Registro de cambios de CLI
 {: #cs_cli_changelog}
 
 En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
 {:shortdesc}
 
-Para instalar el plugin de CLI de {{site.data.keyword.containerlong}}, consulte [Instalación de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+* **Comunidad Kubernetes**: [Instale el plugin de la CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), que utiliza el alias `ibmcloud ks`.
+* **OpenShift**: [Instale el plugin de la CLI](/docs/openshift?topic=openshift-openshift-cli), que utiliza el alias `ibmcloud oc`.
 
+<br>
 Consulte la tabla siguiente para ver un resumen de los cambios para cada versión del plugin de CLI de {{site.data.keyword.containerlong_notm}}.
 
 <table summary="Visión general de los cambios de versión del plugin de CLI de {{site.data.keyword.containerlong_notm}} ">
@@ -45,9 +48,47 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 </thead>
 <tbody>
 <tr>
+<td>0.3.95</td>
+<td>30 de julio de 2019</td>
+<td>
+<ul>
+<li>Añade el alias de `ibmcloud oc` al plugin de {{site.data.keyword.containershort_notm}} para la gestión de clústeres de Red Hat OpenShift on IBM Cloud.</li>
+<li>Añade el mandato [`ibmcloud ks cluster-subnet-detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) para desconectar una subred portátil pública o privada en una cuenta de infraestructura de IBM Cloud de un clúster.</li>
+<li>Renombra el mandato `ibmcloud ks machine-types` a `ibmcloud ks flavors`. Todavía puede utilizar el alias `machine-types`.</li>
+<li>En la salida de `ibmcloud ks flavors (machine-types)`, indica las versiones que solo se admiten para {{site.data.keyword.containerlong_notm}} o solo para Red Hat OpenShift on IBM Cloud.</li>
+<li>En la salida de `ibmcloud ks cluster-get`, cambia el término `Owner` a `Creator` para que refleje que el campo devuelve información sobre el usuario que ha creado el clúster.</li>
+<li>Mejora la gestión de errores para `ibmcloud ks zone-add`.</li>
+<li>Actualiza las traducciones del texto de ayuda.</li>
+</ul></td>
+</tr>
+<tr>
+<td>0.3.58</td>
+<td>02 de julio de 2019</td>
+<td><ul>
+<li>Corrige un error para que no se devuelva un mensaje de reequilibrio de agrupación de nodos trabajadores cuando el escalador automático del clúster está habilitado.</li>
+<li>Corrige un error para dar soporte a la versión de clúster de OpenShift predeterminada.</li>
+<li>Actualiza el texto de ayuda para los mandatos `cluster-feature-enable private-service-endpoint` y `nlb-dns-monitor-configure`.</li>
+<li>Actualiza las traducciones del texto de ayuda.</li>
+</ul>
+</tr>
+<tr>
+<td>0.3.49</td>
+<td>18 de junio de 2019</td>
+<td>Actualiza la versión de Go a 1.12.6.</td>
+</tr>
+<tr>
+<td>0.3.47</td>
+<td>15 de junio de 2019</td>
+<td><ul>
+<li>Corrige un error para que no se devuelvan tablas vacías en la salida de `ibmcloud ks kube-versions`.</li>
+<li>Actualiza el modelo de DNS de NLB para que `ibmcloud ks nlb-dnss` devuelva una matriz de direcciones IP NLB.</li>
+<li>Cambia el texto de descripción para el plug-in de CLI de {{site.data.keyword.containerlong_notm}}.</li>
+</ul></td>
+</tr>
+<tr>
 <td>0.3.34</td>
 <td>31 de mayo de 2019</td>
-<td>Añade soporte para crear clústeres de Red Hat OpenShift on IBM Cloud.<ul>
+<td>Añade soporte para crear clústeres de Red Hat OpenShift on IBM Cloud:<ul>
 <li>Añade soporte para versiones de OpenShift en el distintivo `--kube-version` del mandato `cluster-create`. Por ejemplo, para crear un clúster de OpenShift estándar, puede pasar `--kube-version 3.11_openshift` en el mandato `cluster-create`.</li>
 <li>Añade el mandato `versions` para obtener una lista de todas las versiones soportadas de Kubernetes y de OpenShift.</li>
 <li>El mandato `kube-versions` queda en desuso.</li>
@@ -64,9 +105,9 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 <tr>
 <td>0.3.28</td>
 <td>23 de mayo de 2019</td>
-<td><ul><li>Añade el mandato [<code>ibmcloud ks alb-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) para crear los ALB de Ingress. Para obtener más información, consulte [Escalado de ALB](/docs/containers?topic=containers-ingress#scale_albs).</li>
-<li>Añade el mandato [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) para comprobar si a las credenciales que permiten el [acceso al portafolio de la infraestructura de IBM Cloud (SoftLayer)](/docs/containers?topic=containers-users#api_key) para el grupo de recursos y la región de destino les faltan permisos recomendados o necesarios de la infraestructura.</li>
-<li>Añade el distintivo <code>--private-only</code> al mandato `zone-network-set` para desconfigurar la VLAN pública para los metadatos de la agrupación de nodos trabajadores de modo que los nodos trabajadores posteriores de dicha zona de agrupación de nodos trabajadores estén conectados únicamente a una VLAN privada.</li>
+<td><ul>
+<li>Añade el mandato [<code>ibmcloud ks infra-permissions-get</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) para comprobar si a las credenciales que permiten el [acceso al portafolio de la infraestructura de IBM Cloud](/docs/containers?topic=containers-users#api_key) para el grupo de recursos y la región de destino les faltan permisos recomendados o necesarios de la infraestructura.</li>
+<li>Añade el distintivo <code>--private-only</code> al mandato `zone-network-set` para desconfigurar la VLAN pública para los metadatos de la agrupación de nodos trabajadores. Los nodos trabajadores posteriores de dicha zona de agrupación de nodos trabajadores están conectados únicamente a una VLAN privada.</li>
 <li>Elimina el distintivo <code>--force-update</code> del mandato `worker-update`.</li>
 <li>Añade la columna **ID de VLAN** a la salida de los mandatos `albs` y `alb-get`.</li>
 <li>Añade la columna **Multizone Metro** a la salida del mandato `supported-locations` para indicar las zonas con capacidad multizona.</li>
@@ -85,7 +126,7 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 <tr>
 <td>0.2.102</td>
 <td>15 de abril de 2019</td>
-<td>Añade el [grupo de mandatos `ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) para registrar y gestionar un nombre de host para direcciones IP del equilibrador de carga de la red (NLB) y el [grupo de mandatos `ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor) para crear y modificar supervisores de comprobación de estado para nombres de host de NLB. Para obtener más información, consulte [Registro de los IP de NLB en un nombre de host DNS](/docs/containers?topic=containers-loadbalancer#loadbalancer_hostname_dns).
+<td>Añade el [grupo de mandatos `ibmcloud ks nlb-dns`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns) para registrar y gestionar un nombre de host para direcciones IP del equilibrador de carga de la red (NLB) y el [grupo de mandatos `ibmcloud ks nlb-dns-monitor`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure) para crear y modificar supervisores de comprobación de estado para nombres de host de NLB. Para obtener más información, consulte [Registro de los IP de NLB en un nombre de host DNS](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns).
 </td>
 </tr>
 <tr>
@@ -113,7 +154,7 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 <td>0.2.80</td>
 <td>19 de marzo de 2019</td>
 <td><ul>
-<li>Incorpora soporte para habilitar la [comunicación entere maestro y trabajador con puntos finales de servicio](/docs/containers?topic=containers-plan_clusters#workeruser-master) en clústeres estándares que ejecutan Kubernetes versión 1.11 o posterior en [cuentas habilitadas para VRF](/docs/services/service-endpoint?topic=service-endpoint-getting-started#getting-started).<ul>
+<li>Incorpora soporte para habilitar la [comunicación entere maestro y trabajador con puntos finales de servicio](/docs/containers?topic=containers-plan_clusters#workeruser-master) en clústeres estándares que ejecutan Kubernetes versión 1.11 o posterior en [cuentas habilitadas para VRF](/docs/resources?topic=resources-private-network-endpoints#getting-started).<ul>
 <li>Incorpora los distintivos `--private-service-endpoint` y `--public-service-endpoint` al mandato [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create).</li>
 <li>Incorpora los campos **Public Service Endpoint URL** (URL de punto final de servicio público) y **Private Service Endpoint URL** (URL de punto final de servicio privado) a la salida de <code>ibmcloud ks cluster-get</code>.</li>
 <li>Incorpora el mandato [<code>ibmcloud ks cluster-feature-enable private-service-endpoint</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable_private_service_endpoint).</li>
@@ -137,7 +178,7 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 <td>0.2.61</td>
 <td>26 de febrero de 2019</td>
 <td><ul>
-<li>Incorpora el mandato `cluster-pull-secret-apply`, que crea un ID de servicio de IAM para el clúster, políticas, clave de API y secretos de extracción de imágenes para que los contenedores que se ejecutan en el espacio de nombres `default` de Kubernetes puedan extraer imágenes del registro de IBM Cloud Container. Para los clústeres nuevos, los secretos de extracción de imágenes que utilizan las credenciales de IAM se crean de forma predeterminada. Utilice este mandato para actualizar los clústeres existentes o si el clúster tiene un error secreto de obtención de imagen durante la creación. Para obtener más información, consulte [la documentación](https://test.cloud.ibm.com/docs/containers?topic=containers-images#cluster_registry_auth).</li>
+<li>Incorpora el mandato `cluster-pull-secret-apply`, que crea un ID de servicio de IAM para el clúster, políticas, clave de API y secretos de extracción de imágenes para que los contenedores que se ejecutan en el espacio de nombres `default` de Kubernetes puedan extraer imágenes de IBM Cloud Container Registry. Para los clústeres nuevos, los secretos de extracción de imágenes que utilizan las credenciales de IAM se crean de forma predeterminada. Utilice este mandato para actualizar los clústeres existentes o si el clúster tiene un error secreto de obtención de imagen durante la creación. Para obtener más información, consulte [la documentación](/docs/containers?topic=containers-images#cluster_registry_auth).</li>
 <li>Arregla un error por el que las anomalías de `ibmcloud ks init` hacían que se imprimiese la salida de la ayuda.</li>
 </ul></td>
 </tr>
@@ -153,7 +194,7 @@ Consulte la tabla siguiente para ver un resumen de los cambios para cada versió
 <td>0.2.44</td>
 <td>8 de febrero de 2019</td>
 <td><ul>
-<li>Incorpora la opción `--skip-rbac` al mandato `ibmcloud ks cluster-config` para omitir la adición de roles RBAC de usuario de Kubernetes en función de los roles de acceso al servicio de {{site.data.keyword.Bluemix_notm}} IAM sobre la configuración del clúster. Incluya esta opción solo si [gestiona sus propios roles RBAC de Kubernetes](/docs/containers?topic=containers-users#rbac). Si utiliza [Roles de acceso al servicio de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-access_reference#service) para gestionar todos los usuarios de RBAC, no incluya esta opción.</li>
+<li>Incorpora la opción `--skip-rbac` al mandato `ibmcloud ks cluster-config` para omitir la adición de roles RBAC de usuario de Kubernetes en función de los roles de acceso al servicio de {{site.data.keyword.cloud_notm}} IAM sobre la configuración del clúster. Incluya esta opción solo si [gestiona sus propios roles RBAC de Kubernetes](/docs/containers?topic=containers-users#rbac). Si utiliza [Roles de acceso al servicio de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access_reference#service) para gestionar todos los usuarios de RBAC, no incluya esta opción.</li>
 <li>Actualiza la versión de Go a 1.11.5.</li>
 </ul></td>
 </tr>

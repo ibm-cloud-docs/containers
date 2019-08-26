@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-11"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks
 
@@ -22,13 +22,11 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
-
+ 
 # Eliminación del almacenamiento persistente de un clúster
 {: #cleanup}
 
-Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en la PVC y la instancia de infraestructura de IBM Cloud (SoftLayer), como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo haya creado el almacenamiento, es posible que los tenga que suprimir por separado.
+Cuando configura el almacenamiento persistente en el clúster, tiene tres componentes principales: la reclamación de volumen persistente (PVC) de Kubernetes que solicita almacenamiento, el volumen persistente (PV) de Kubernetes que se monta en un pod y se describe en el PVC y la instancia de infraestructura de IBM Cloud, como por ejemplo un archivo NFS o almacenamiento en bloque. En función de cómo haya creado el almacenamiento, es posible que los tenga que suprimir por separado.
 {:shortdesc}
 
 ## Limpieza del almacenamiento persistente
@@ -37,18 +35,26 @@ Cuando configura el almacenamiento persistente en el clúster, tiene tres compon
 Varias opciones de supresión:
 
 **He suprimido mi clúster. ¿Tengo que suprimir algo más para eliminar el almacenamiento persistente?**</br>
-Depende. Cuando se suprime un clúster, se suprimen la PVC y el PV. Sin embargo, puede elegir si desea eliminar la instancia de almacenamiento asociada en la infraestructura de IBM Cloud (SoftLayer). Si ha elegido no eliminarla, la instancia de almacenamiento seguirá existiendo. Además, si ha suprimido el clúster en un estado no saludable, es posible que el almacenamiento siga existiendo incluso si ha elegido eliminarlo. Siga las instrucciones, en particular el paso para [suprimir la instancia de almacenamiento](#sl_delete_storage) en la infraestructura de IBM Cloud (SoftLayer).
+Depende. Cuando se suprime un clúster, se suprimen la PVC y el PV. Sin embargo, puede elegir si desea eliminar la instancia de almacenamiento asociada en la infraestructura de IBM Cloud. Si ha elegido no eliminarla, la instancia de almacenamiento seguirá existiendo. Además, si ha suprimido el clúster en un estado no saludable, es posible que el almacenamiento siga existiendo incluso si ha elegido eliminarlo. Siga las instrucciones, en particular el paso para [suprimir la instancia de almacenamiento](#sl_delete_storage) en la infraestructura de IBM Cloud.
 
 **¿Puedo suprimir la PVC para eliminar todo mi almacenamiento?**</br>
-A veces. Si [cree el almacenamiento persistente de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud (SoftLayer).
+A veces. Si [cree el almacenamiento persistente de forma dinámica](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) y seleccione una clase de almacenamiento sin la opción `retain` en su nombre, cuando suprima la PVC, también se suprimirán el PV y la instancia de almacenamiento de la infraestructura de IBM Cloud.
 
 En los demás casos, siga las instrucciones para comprobar el estado de su PVC, PV y del dispositivo de almacenamiento físico y suprímalos por separado si hace falta.
 
 **¿Se me seguirá cobrando el almacenamiento después de que lo suprima?**</br>
-Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud (SoftLayer), dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en la PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
+Depende de lo que suprima y del tipo de facturación. Si suprime la PVC y el PV, pero no la instancia de la cuenta de infraestructura de IBM Cloud, dicha instancia seguirá existiendo y se le facturará por ella. Debe suprimir todo para evitar cargos. Además, cuando especifique el tipo de facturación (`billingType`) en la PVC, puede elegir por hora (`hourly`) o mensual (`monthly`). Si elige `monthly`, la instancia se facturará mensualmente. Cuando se suprime la instancia, se le facturará durante el resto del mes.
 
+Cuando cancela manualmente la instancia de almacenamiento persistente desde la consola de infraestructura de IBM Cloud o desde la CLI de `ibmcloud sl`, la facturación se detiene de la forma siguiente: 
+- **Almacenamiento por hora**: la facturación se detiene inmediatamente. Una vez que se haya cancelado el almacenamiento, es posible que siga viendo la instancia de almacenamiento en la consola durante 72 horas más.  
+- **Almacenamiento mensual**: puede elegir entre **cancelación inmediata** o **cancelación al cumplirse el año**. Si selecciona la cancelación inmediata, el almacenamiento se elimina inmediatamente y ya no puede utilizarlo. Si elige cancelar el almacenamiento cuando se cumpla el año siguiente, las instancias de almacenamiento permanecen activas hasta la fecha del siguiente aniversario y se pueden seguir utilizando hasta esta fecha. En ambos casos, la facturación se detiene para el siguiente ciclo de facturación, pero aún se le seguirá facturando hasta el final del ciclo de facturación actual. Una vez que se haya cancelado el almacenamiento, es posible que siga viendo la instancia de almacenamiento en la consola o la CLI durante 72 horas más.  
+
+Si elimina el almacenamiento persistente con una política de reclamación de `Suprimir` que ha suministrado dinámicamente suprimiendo la PVC, el almacenamiento se elimina inmediatamente, independientemente de si elige un tipo de facturación mensual o por hora. Una vez que se haya eliminado el almacenamiento, es posible que siga viendo la instancia de almacenamiento en la consola o la CLI durante 72 horas más. El almacenamiento persistente que utiliza una política de reclamación de `Retener` no se elimina y se le sigue cobrando por utilizarlo. 
 
 <p class="important">Cuando se limpia el almacenamiento persistente, se suprimen todos los datos almacenados en el mismo. Si necesita una copia de los datos, realice una copia de seguridad del [almacenamiento de archivos](/docs/containers?topic=containers-file_storage#file_backup_restore) o del [almacenamiento en bloque](/docs/containers?topic=containers-block_storage#block_backup_restore).</p>
+
+**He suprimido mi almacenamiento. ¿Por qué puedo ver aún mis instancias?** </br>
+Después de eliminar el almacenamiento persistente, puede tardar hasta 72 horas para que la eliminación se procese por completo y para que el almacenamiento desaparezca de la consola de infraestructura de IBM Cloud o la CLI. 
 
 Antes de empezar: [Inicie la sesión en su cuenta. Si procede, apunte al grupo de recursos adecuado. Establezca el contexto para el clúster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -180,7 +186,10 @@ Para limpiar los datos persistentes:
    ```
    {: pre}
 
-9. Verifique que se ha eliminado la instancia de almacenamiento físico. El proceso de supresión puede tardar unos días en completarse.
+10. Verifique que se ha eliminado la instancia de almacenamiento físico. 
+   
+   El proceso de supresión puede tardar hasta 72 horas en completarse.
+   {: important}
 
    **Almacenamiento de archivos:**
    ```
@@ -192,3 +201,5 @@ Para limpiar los datos persistentes:
    ibmcloud sl block volume-list
    ```
    {: pre}
+
+

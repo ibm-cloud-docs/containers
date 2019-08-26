@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-06-06"
+lastupdated: "2019-07-31"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image,
 
@@ -27,6 +27,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 
 
+
 # Resolución de problemas con clústeres y nodos trabajadores
 {: #cs_troubleshoot_clusters}
 
@@ -48,23 +49,23 @@ Intenta gestionar nodos trabajadores para un clúster nuevo o existente ejecutan
 Pero recibe un mensaje de error parecido al siguiente.
 
 ```
-No se ha podido conectar con la cuenta de IBM infraestructura de Cloud (SoftLayer).
-Para crear un clúster estándar, debe tener una cuenta de Pago según uso enlazada a una cuenta de infraestructura de IBM Cloud (SoftLayer) o debe haber utilizado la CLI de {{site.data.keyword.containerlong_notm}} para configurar las claves de API de la infraestructura de {{site.data.keyword.Bluemix_notm}}.
+No hemos podido conectar con la cuenta de infraestructura de IBM Cloud.
+Para crear un clúster estándar, debe tener una cuenta de Pago según uso enlazada a una cuenta de infraestructura de IBM Cloud o debe haber utilizado la CLI de {{site.data.keyword.containerlong_notm}} para configurar las claves de API de la infraestructura de {{site.data.keyword.cloud_notm}}.
 ```
 {: screen}
 
 ```
-Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El elemento 'Item' se debe solicitar con permiso.
+Excepción de infraestructura de {{site.data.keyword.cloud_notm}}: El elemento 'Item' se debe solicitar con permiso.
 ```
 {: screen}
 
 ```
-No se ha encontrado el nodo trabajador. Revise los permisos de infraestructura de {{site.data.keyword.Bluemix_notm}}.
+No se ha encontrado el nodo trabajador. Revise los permisos de infraestructura de {{site.data.keyword.cloud_notm}}.
 ```
 {: screen}
 
 ```
-Excepción de infraestructura de {{site.data.keyword.Bluemix_notm}}: El usuario no tiene los permisos necesarios de la infraestructura de {{site.data.keyword.Bluemix_notm}} para añadir servidores
+Excepción de infraestructura de {{site.data.keyword.cloud_notm}}: El usuario no tiene los permisos necesarios de la infraestructura de {{site.data.keyword.cloud_notm}} para añadir servidores
 ```
 {: screen}
 
@@ -79,7 +80,7 @@ El clúster no se ha podido configurar con el registro. Asegúrese de que tiene 
 {: screen}
 
 {: tsCauses}
-A las credenciales de infraestructura que se han establecido para la región y al grupo de recursos le faltan los [permisos de infraestructura](/docs/containers?topic=containers-access_reference#infra) adecuados. Los permisos de infraestructura del usuario se suelen guardar como una [clave de API](/docs/containers?topic=containers-users#api_key) para la región y el grupo de recursos. Menos habitualmente, si utiliza un [tipo de cuenta de {{site.data.keyword.Bluemix_notm}} diferente](/docs/containers?topic=containers-users#understand_infra), es posible que tenga [establecer manualmente las credenciales de la infraestructura](/docs/containers?topic=containers-users#credentials). Si utiliza una infraestructura de IBM Cloud (SoftLayer) distinta para suministrar recursos de infraestructura, es posible que tenga también [clústeres huérfanos](#orphaned) en la cuenta.
+A las credenciales de infraestructura que se han establecido para la región y al grupo de recursos le faltan los [permisos de infraestructura](/docs/containers?topic=containers-access_reference#infra) adecuados. Los permisos de infraestructura del usuario se suelen guardar como una [clave de API](/docs/containers?topic=containers-users#api_key) para la región y el grupo de recursos. Menos habitualmente, si utiliza un [tipo de cuenta de {{site.data.keyword.cloud_notm}} diferente](/docs/containers?topic=containers-users#understand_infra), es posible que tenga [establecer manualmente las credenciales de la infraestructura](/docs/containers?topic=containers-users#credentials). Si utiliza una infraestructura de IBM Cloud distinta para suministrar recursos de infraestructura, es posible que tenga también [clústeres huérfanos](#orphaned) en la cuenta.
 
 {: tsResolve}
 El propietario de la cuenta debe configurar correctamente las credenciales de la cuenta de infraestructura. Las credenciales dependen del tipo de cuenta de infraestructura que esté utilizando.
@@ -101,7 +102,7 @@ Antes de empezar, [inicie la sesión en su cuenta. Si procede, apunte al grupo d
         <user_name>         <name@email.com>
         ```
         {: screen}
-    2.  Compruebe si la cuenta de la infraestructura para la región y el grupo de recursos se ha establecido manualmente de modo que utilice otra cuenta de infraestructura de IBM Cloud (SoftLayer).
+    2.  Compruebe si la cuenta de la infraestructura para la región y el grupo de recursos se ha establecido manualmente de modo que utilice otra cuenta de infraestructura de IBM Cloud.
         ```
         ibmcloud ks credential-get --region <us-south>
         ```
@@ -126,6 +127,10 @@ Antes de empezar, [inicie la sesión en su cuenta. Si procede, apunte al grupo d
         ibmcloud ks infra-permissions-get --region <region>
         ```
         {: pre}
+
+        Para los mandatos de consola y CLI para asignar estos permisos, consulte [Roles de infraestructura clásica](/docs/containers?topic=containers-access_reference#infra).
+        {: tip}
+
     2.  Asegúrese de que el [propietario de las credenciales de infraestructura para la clave de API o la cuenta definida manualmente tiene los permisos correctos](/docs/containers?topic=containers-users#owner_permissions).
     3.  Si es necesario, puede modificar la [clave de API](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) o el propietario de las credenciales de infraestructura [establecido manualmente](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) para la región y el grupo de recursos.
 3.  Pruebe que los permisos modificados permiten a los usuarios autorizados realizar operaciones de infraestructura para el clúster.
@@ -153,6 +158,59 @@ Antes de empezar, [inicie la sesión en su cuenta. Si procede, apunte al grupo d
 <br />
 
 
+## No se puede crear un clúster o gestionar nodos trabajadores debido a un error de cuenta de pago
+{: #cs_totp}
+
+{: tsSymptoms}
+Intenta gestionar nodos trabajadores para un clúster nuevo o existente ejecutando uno de los mandatos siguientes.
+* Suministro de clústeres y trabajadores: `ibmcloud ks cluster-create`, `ibmcloud ks worker-pool-rebalance` o `ibmcloud ks worker-pool-resize`
+* Volver a cargar nodos trabajadores: `ibmcloud ks worker-reload` o `ibmcloud ks worker-update`
+* Reiniciar nodos trabajadores: `ibmcloud ks worker-reboot`
+* Suprimir clústeres y trabajadores: `ibmcloud ks cluster-rm`, `ibmcloud ks worker-rm`, `ibmcloud ks worker-pool-rebalance` o `ibmcloud ks worker-pool-resize`
+
+Pero recibe un mensaje de error parecido al siguiente.
+```
+No se puede conectar a la cuenta de IBM Cloud. Asegúrese de que dispone de una cuenta de pago.
+```
+{: screen}
+
+{: tsCauses}
+La cuenta de {{site.data.keyword.cloud_notm}} utiliza su propia infraestructura enlazada automáticamente a través de una cuenta de pago por uso. Sin embargo, el administrador de la cuenta ha habilitado la opción de código de acceso puntual (TOTP) basada en el tiempo, de modo que se solicita a los usuarios un código de acceso puntual (TOTP) basado en el tiempo al iniciar sesión. Este tipo de [autenticación multifactor (MFA)](/docs/iam?topic=iam-types#account-based) se basa en cuenta y afecta a todo el acceso a la cuenta. TOTP MFA también afecta al acceso que {{site.data.keyword.containerlong_notm}} requiere para realizar llamadas a la infraestructura de {{site.data.keyword.cloud_notm}}. Si TOTP está habilitado para su cuenta, no puede crear y gestionar clústeres y nodos trabajadores en {{site.data.keyword.containerlong_notm}}.
+
+{: tsResolve}
+El propietario de la cuenta de {{site.data.keyword.cloud_notm}} o un administrador de cuenta debe:
+* Inhabilite TOTP para la cuenta, y continúe utilizando las credenciales de infraestructura enlazadas automáticamente para {{site.data.keyword.containerlong_notm}}.
+* Continúe utilizando TOTP, pero cree una clave de API de infraestructura que {{site.data.keyword.containerlong_notm}} pueda utilizar para realizar llamadas directas a la API de infraestructura de {{site.data.keyword.cloud_notm}}.
+
+
+**Para inhabilitar TOTP MFA para la cuenta:**
+1. Inicie sesión en la [consola de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/). En la barra de menús, seleccione **Gestionar > Acceso (IAM)**.
+2. En el panel de navegación de la izquierda, pulse la página **Valores**.
+3. En **Autenticación multifactor**, pulse **Editar**.
+4. Seleccione **Ninguno** y pulse **Actualizar**.
+
+**Para utilizar TOTP MFA y crear una clave de API de infraestructura para {{site.data.keyword.containerlong_notm}}:**
+1. En la consola [{{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/), seleccione **Gestionar** > **Acceso (IAM)** > **Usuarios** y pulse en el nombre del propietario de la cuenta. **Nota**: si no utiliza las credenciales del propietario de la cuenta, antes [debe asegurarse de que el usuario cuyas credenciales utiliza tiene los permisos correctos](/docs/containers?topic=containers-users#owner_permissions).
+2. En la sección **Claves de API**, busque o cree una clave de API de la infraestructura clásica.   
+3. Utilice la clave de API de infraestructura para establecer las credenciales de API de infraestructura para {{site.data.keyword.containerlong_notm}}. Repita este mandato para cada región en la que cree clústeres.
+    ```
+    ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+    ```
+    {: pre}
+4. Verifique que se han establecido las credenciales correctas.
+    ```
+    ibmcloud ks credential-get --region <region>
+    ```
+    Salida de ejemplo:
+    ```
+    Infrastructure credentials for user name user@email.com set for resource group default.
+    ```
+    {: screen}
+5. Para asegurarse de que los clústeres existentes utilizan las credenciales de API de infraestructura actualizadas, ejecute `ibmcloud ks api-key-reset --region <region>` en cada región en la que tenga clústeres.
+
+<br />
+
+
 ## El cortafuegos impide ejecutar mandatos de CLI
 {: #ts_firewall_clis}
 
@@ -163,7 +221,7 @@ Cuando ejecuta los mandatos `ibmcloud`, `kubectl` o `calicoctl` desde la CLI, fa
 Puede que tenga políticas de red corporativas que impidan el acceso desde el sistema local a los puntos finales públicos mediante proxies o cortafuegos.
 
 {: tsResolve}
-[Permita el acceso TCP para que funciones los mandatos de CLI](/docs/containers?topic=containers-firewall#firewall_bx). Esta tarea requiere el [rol de plataforma **Administrador** de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
+[Permita el acceso TCP para que funciones los mandatos de CLI](/docs/containers?topic=containers-firewall#firewall_bx). Esta tarea requiere el [rol de plataforma **Administrador** de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para el clúster.
 
 
 ## No puedo acceder a los recursos de mi clúster
@@ -202,7 +260,7 @@ Cuando los nodos trabajadores del clúster no se pueden comunicar en la red priv
 
 
 {: tsCauses}
-Para acceder a los recursos del clúster, los nodos trabajadores deben poder comunicarse en la red privada. Es posible que tenga Vyatta u otro cortafuegos configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud (SoftLayer). {{site.data.keyword.containerlong_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Si los nodos trabajadores están distribuidos en varias zonas, debe permitir la comunicación de red privada habilitando la distribución de VLAN. Es posible que no se puede establecer comunicación entre nodos trabajadores si los nodos trabajadores están bloqueados en un bucle de recarga.
+Para acceder a los recursos del clúster, los nodos trabajadores deben poder comunicarse en la red privada. Es posible que tenga Vyatta u otro cortafuegos configurado o que se hayan personalizado los valores existentes del cortafuegos en la cuenta de infraestructura de IBM Cloud. {{site.data.keyword.containerlong_notm}} requiere que determinadas direcciones IP y puertos estén abiertos para permitir la comunicación entre el nodo trabajador y el maestro de Kubernetes y viceversa. Si los nodos trabajadores están distribuidos en varias zonas, debe permitir la comunicación de red privada habilitando la distribución de VLAN. Es posible que no se puede establecer comunicación entre nodos trabajadores si los nodos trabajadores están bloqueados en un bucle de recarga.
 
 {: tsResolve}
 1. Obtenga una lista de los nodos trabajadores del clúster y verifique que los nodos trabajadores no están bloqueados en el estado `Reloading` (recargando).
@@ -227,7 +285,7 @@ Para acceder a los recursos del clúster, los nodos trabajadores deben poder com
 
 
 {: tsCauses}
-En {{site.data.keyword.Bluemix_notm}}, cada recurso debe estar en un grupo de recursos. Por ejemplo, es posible que el clúster `mycluster` exista en el grupo de recursos `default`. Cuando el propietario de la cuenta le da acceso a los recursos asignándole un rol de plataforma de {{site.data.keyword.Bluemix_notm}} IAM, el acceso puede ser para un recurso específico o para el grupo de recursos. Cuando se le da acceso a un recurso específico, no tiene acceso al grupo de recursos. En este caso, no es necesario que tenga como destino un grupo de recursos para trabajar con los clústeres a los que tiene acceso. Si tiene como destino un grupo de recursos distinto al del grupo en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar. Por el contrario, si se le da acceso a un recurso como parte de su acceso a un grupo de recursos, debe elegir como destino un grupo de recursos para poder trabajar con un clúster de dicho grupo. Si no elige como destino de la sesión de CLI el grupo de recursos en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar.
+En {{site.data.keyword.cloud_notm}}, cada recurso debe estar en un grupo de recursos. Por ejemplo, es posible que el clúster `mycluster` exista en el grupo de recursos `default`. Cuando el propietario de la cuenta le da acceso a los recursos asignándole un rol de plataforma de {{site.data.keyword.cloud_notm}} IAM, el acceso puede ser para un recurso específico o para el grupo de recursos. Cuando se le da acceso a un recurso específico, no tiene acceso al grupo de recursos. En este caso, no es necesario que tenga como destino un grupo de recursos para trabajar con los clústeres a los que tiene acceso. Si tiene como destino un grupo de recursos distinto al del grupo en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar. Por el contrario, si se le da acceso a un recurso como parte de su acceso a un grupo de recursos, debe elegir como destino un grupo de recursos para poder trabajar con un clúster de dicho grupo. Si no elige como destino de la sesión de CLI el grupo de recursos en el que se encuentra el clúster, las acciones sobre dicho clúster pueden fallar.
 
 Si no encuentra o no puede trabajar con un clúster, es posible que esté experimentando uno de los problemas siguientes:
 * Tiene acceso al clúster y al grupo de recursos en el que se encuentra el clúster, pero la sesión de CLI no tiene como destino el grupo de recursos en el que se encuentra el clúster.
@@ -326,7 +384,7 @@ Para comprobar sus permisos de acceso de usuario:
         {: pre}
 
     * Si no tiene acceso al clúster:
-        1. Solicite al propietario de la cuenta que le asigne un [rol de plataforma de {{site.data.keyword.Bluemix_notm}} IAM](/docs/containers?topic=containers-users#platform) para dicho clúster.
+        1. Solicite al propietario de la cuenta que le asigne un [rol de plataforma de {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform) para dicho clúster.
         2. No elija como destino un grupo de recursos. Si ya ha elegido como destino un grupo de recursos, elimínelo como destino:
           ```
           ibmcloud target --unset-resource-group
@@ -368,7 +426,7 @@ ID de instancia incoherente con los registros del nodo trabajador
 {: screen}
 
 {: tsCauses}
-El ID de máquina puede ser incoherente con el registro del nodo trabajador de {{site.data.keyword.containerlong_notm}} si la máquina experimenta problemas de hardware. Cuando IBM Cloud infraestructura (SoftLayer) soluciona este problema, es posible que un componente cambie dentro del sistema que el servicio no identifica.
+El ID de máquina puede ser incoherente con el registro del nodo trabajador de {{site.data.keyword.containerlong_notm}} si la máquina experimenta problemas de hardware. Cuando IBM Cloud infraestructura soluciona este problema, es posible que un componente cambie dentro del sistema que el servicio no identifica.
 
 {: tsResolve}
 Para que {{site.data.keyword.containerlong_notm}} pueda volver a identificar la máquina, [vuelva a cargar el nodo trabajador nativo](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). **Nota**: al volver a cargar, también se actualiza la [versión de parche](/docs/containers?topic=containers-changelog) de la máquina.
@@ -388,17 +446,17 @@ No puede ejecutar mandatos relacionados con la infraestructura en el clúster, c
 * Redimensionamiento de agrupaciones de nodos trabajadores
 * Actualización del clúster
 
-No puede ver los nodos trabajadores del clúster en la cuenta de infraestructura de IBM Cloud (SoftLayer). Sin embargo, puede actualizar y gestionar otros clústeres de la cuenta.
+No puede ver los nodos trabajadores del clúster en la cuenta de infraestructura de IBM Cloud. Sin embargo, puede actualizar y gestionar otros clústeres de la cuenta.
 
 Además, ha verificado que tiene las [credenciales de infraestructura adecuadas](#cs_credentials).
 
 {: tsCauses}
-Es posible que el clúster se suministre en una cuenta de infraestructura de IBM Cloud (SoftLayer) que ya no esté enlazada a la cuenta {{site.data.keyword.containerlong_notm}}. El clúster está huérfano. Puesto que los recursos se encuentran en otra cuenta, no tiene las credenciales de la infraestructura para modificar los recursos.
+Es posible que el clúster se suministre en una cuenta de infraestructura de IBM Cloud que ya no esté enlazada a la cuenta {{site.data.keyword.containerlong_notm}}. El clúster está huérfano. Puesto que los recursos se encuentran en otra cuenta, no tiene las credenciales de la infraestructura para modificar los recursos.
 
 Tenga en cuenta el caso de ejemplo siguiente para entender cómo se pueden quedar huérfanas los clústeres.
-1.  Tiene una cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}.
+1.  Tiene una cuenta de pago según uso de {{site.data.keyword.cloud_notm}}.
 2.  Crea un clúster llamado `Cluster1`. Los nodos trabajadores y otros recursos de la infraestructura se suministran en la cuenta de infraestructura que viene con su cuenta de pago según uso.
-3.  Más adelante, averigua que su equipo utiliza una cuenta de infraestructura de IBM Cloud (SoftLayer) heredada o compartida. Utiliza el mandato `ibmcloud ks credential-set` para cambiar las credenciales de la infraestructura de IBM Cloud (SoftLayer) para utilizar la cuenta del equipo.
+3.  Más adelante, averigua que su equipo utiliza una cuenta de infraestructura de IBM Cloud heredada o compartida. Utiliza el mandato `ibmcloud ks credential-set` para cambiar las credenciales de la infraestructura de IBM Cloud para utilizar la cuenta del equipo.
 4.  Crea otro clúster llamado `Cluster2`. Los nodos trabajadores y otros recursos de la infraestructura se suministran en la cuenta de infraestructura del equipo.
 5.  Observa que `Cluster1` necesita una actualización del nodo trabajador, o una recarga del nodo trabajador o simplemente desea limpiarlo antes de suprimirlo. Sin embargo, como `Cluster1` se ha suministrado en otra cuenta de infraestructura, no puede modificar sus recursos de la infraestructura. `Cluster1` es huérfano.
 6.  Sigue los pasos de resolución de la sección siguiente, pero no restablece las credenciales de la infraestructura en la cuenta de equipo. Puede suprimir `Cluster1`, pero ahora `Cluster2` es huérfano.
@@ -420,12 +478,47 @@ Tenga en cuenta el caso de ejemplo siguiente para entender cómo se pueden queda
     4.  Busque el ID de nodo trabajador que ha anotado anteriormente.
     5.  Si no encuentra el ID del nodo trabajador, significa que el nodo trabajador no se suministra en esta cuenta de infraestructura. Cambie a otra cuenta de infraestructura y vuélvalo a intentar.
 3.  Utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) `ibmcloud ks credential-set` para cambiar las credenciales de infraestructura por la cuenta en la que se han suministrado los nodos trabajadores del clúster, que ha encontrado en el paso anterior.
-    Si ya no tiene acceso y no puede obtener las credenciales de la infraestructura, debe abrir un caso de soporte de {{site.data.keyword.Bluemix_notm}} para eliminar el clúster huérfano.
+    Si ya no tiene acceso y no puede obtener las credenciales de la infraestructura, debe abrir un caso de soporte de {{site.data.keyword.cloud_notm}} para eliminar el clúster huérfano.
     {: note}
 4.  [Suprima el clúster](/docs/containers?topic=containers-remove).
 5.  Si lo desea, restablezca las credenciales de la infraestructura de la cuenta anterior. Tenga en cuenta que si ha creado clústeres con una cuenta de infraestructura distinta de la cuenta a la que conmuta, es posible que deje huérfanos dichos clústeres.
     * Para establecer las credenciales en otra cuenta de infraestructura, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) `ibmcloud ks credential-set`.
-    * Para utilizar las credenciales predeterminadas que se suministran con la cuenta de pago según uso de {{site.data.keyword.Bluemix_notm}}, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) `ibmcloud ks credential-unset --region <region>`.
+    * Para utilizar las credenciales predeterminadas que se suministran con la cuenta de pago según uso de {{site.data.keyword.cloud_notm}}, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) `ibmcloud ks credential-unset --region <region>`.
+
+<br />
+
+
+## Los mandatos `kubectl` no funcionan
+{: #kubectl_fails}
+
+{: tsSymptoms}
+Cuando se ejecutan mandatos `kubectl` en el clúster, los mandatos fallan con un mensaje de error similar al siguiente.
+
+```
+No se han encontrado recursos.
+Error del servidor (NotAcceptable): unknown (get nodes)
+```
+{: screen}
+
+```
+el objeto no válido no tiene propiedades adicionales
+```
+{: screen}
+
+```
+error: No se ha encontrado ningún proveedor de autorización para el nombre "oidc"
+```
+{: screen}
+
+{: tsCauses}
+Tiene una versión distinta de `kubectl` que la versión del clúster. [Kubernetes no da soporte a las ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://kubernetes.io/docs/setup/version-skew-policy/) versiones de cliente de `kubectl` que difieran en dos o más versiones con respecto a la versión del servidor (n +/- 2). También es posible que tenga la versión OpenShift de `kubectl`, que no funciona con clústeres de la comunidad Kubernetes.
+
+Para comprobar la versión de `kubectl` del cliente frente a la versión del servidor de clúster, ejecute `kubectl version --short`.
+
+{: tsResolve}
+[Instale la versión de `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) que coincida con la versión de Kubernetes de su clúster.
+
+Si tiene varios clústeres en distintas versiones de Kubernetes o en distintas plataformas de contenedor, como OpenShift, descargue cada archivo binario de la versión `kubectl` en un directorio independiente. A continuación, puede configurar un alias en el perfil de terminal local para que haga referencia al directorio binario de `kubectl` que coincida con la versión de `kubectl` del clúster con el que desea trabajar, o puede utilizar una herramienta como, por ejemplo, `brew switch kubernetes-cli <major.minor>`.
 
 <br />
 
@@ -445,7 +538,7 @@ Si ejecuta mandatos como `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kub
 La conexión OpenVPN entre el nodo maestro y los nodos trabajadores no está funcionando correctamente.
 
 {: tsResolve}
-1. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud (SoftLayer) para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud (SoftLayer)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Si no puede o no desea habilitar VRF, habilite la [distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la distribución de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmcloud ks vlan-spanning-get --region <region>`.
+1. Si tiene varias VLAN para un clúster, varias subredes en la misma VLAN o un clúster multizona, debe habilitar la [función de direccionador virtual (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) para la cuenta de infraestructura de IBM Cloud para que los nodos trabajadores puedan comunicarse entre sí en la red privada. Para habilitar VRF, [póngase en contacto con el representante de su cuenta de la infraestructura de IBM Cloud](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). Para comprobar si un VRF ya está habilitado, utilice el mandato `ibmcloud account show`. Si no puede o no desea habilitar VRF, habilite la [distribución de VLAN](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). Para llevar a cabo esta acción, necesita el [permiso de la infraestructura](/docs/containers?topic=containers-users#infra_access) **Red > Gestionar distribución de VLAN de red** o bien puede solicitar al propietario de la cuenta que lo habilite. Para comprobar si la expansión de VLAN ya está habilitada, utilice el [mandato](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get) `ibmCloud ks vlan-spanning-get --region <region>`.
 2. Reinicie el pod de cliente de OpenVPN.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -474,7 +567,7 @@ Varias instancias de servicio pueden tener el mismo nombre en distintas regiones
 {: tsResolve}
 Utilice el GUID de servicio en lugar del nombre de instancia de servicio en el mandato `ibmcloud ks cluster-service-bind`.
 
-1. [Inicie una sesión en la región de {{site.data.keyword.Bluemix_notm}} que incluye la instancia de servicio que desea enlazar.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
+1. [Inicie una sesión en la región de {{site.data.keyword.cloud_notm}} que incluye la instancia de servicio que desea enlazar.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 2. Obtenga el GUID de la instancia de servicio.
   ```
@@ -512,13 +605,13 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de {{site.data.keyword.Bluemix_notm}} IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio.
+Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador de Cloud Foundry para el espacio de nombres donde se ha suministrado la instancia de servicio. Además, debe tener acceso de editor de {{site.data.keyword.cloud_notm}} IAM a {{site.data.keyword.containerlong}}. Para acceder a la instancia de servicio, debe haber iniciado una sesión en el espacio en el que se ha suministrado la instancia de servicio.
 
 {: tsResolve}
 
 **Como usuario:**
 
-1. Inicie una sesión en {{site.data.keyword.Bluemix_notm}}.
+1. Inicie una sesión en {{site.data.keyword.cloud_notm}}.
    ```
    ibmcloud login
    ```
@@ -548,7 +641,7 @@ Para enlazar servicios a un clúster, debe tener el rol de usuario desarrollador
 
 4. Espere unos minutos y, a continuación, deje que el usuario intente enlazar el servicio de nuevo.
 
-5. Si esto no resuelve el problema, entonces los permisos de {{site.data.keyword.Bluemix_notm}} IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el equipo de soporte de IBM](/docs/get-support?topic=get-support-getting-customer-support) abriendo un caso de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio.
+5. Si esto no resuelve el problema, entonces los permisos de {{site.data.keyword.cloud_notm}} IAM no están sincronizados y no podrá resolver el problema usted mismo. [Póngase en contacto con el equipo de soporte de IBM](/docs/get-support?topic=get-support-getting-customer-support) abriendo un caso de soporte. Asegúrese de proporcionar el ID de clúster, el ID de usuario y el ID de instancia de servicio.
    1. Recupere el ID de clúster.
       ```
       ibmcloud ks clusters
@@ -577,7 +670,7 @@ Este servicio no admite la creación de claves
 {: screen}
 
 {: tsCauses}
-Algunos servicios de {{site.data.keyword.Bluemix_notm}}, como {{site.data.keyword.keymanagementservicelong}} no admiten la creación de credenciales de servicio, también conocidas como claves de servicio. Si no se admiten las claves de servicio, el servicio no se puede enlazar a un clúster. Para consultar una lista de servicios que admiten la creación de claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.Bluemix_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
+Algunos servicios de {{site.data.keyword.cloud_notm}}, como {{site.data.keyword.keymanagementservicelong}} no admiten la creación de credenciales de servicio, también conocidas como claves de servicio. Si no se admiten las claves de servicio, el servicio no se puede enlazar a un clúster. Para consultar una lista de servicios que admiten la creación de claves de servicio, consulte [Habilitación de apps externas para utilizar servicios de {{site.data.keyword.cloud_notm}}](/docs/resources?topic=resources-externalapp#externalapp).
 
 {: tsResolve}
 Para integrar servicios que no admiten claves de servicio, compruebe si el servicio proporciona una API que puede utilizar para acceder al servicio directamente desde la app. Por ejemplo, si desea utilizar {{site.data.keyword.keymanagementservicelong}}, consulte la [Referencia de API ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/apidocs/kms?language=curl).
@@ -626,8 +719,8 @@ Actualice manualmente la referencia a la dirección IP privada de modo que apunt
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.6
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.6
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.13.8
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.13.8
   ```
   {: screen}
 
@@ -790,7 +883,9 @@ Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401
 
 {: tsCauses}
 El clúster utiliza una clave de API o una señal que se almacena en un [secreto
-de extracción de imágenes](/docs/containers?topic=containers-images#cluster_registry_auth) para autorizar al clúster a extraer las imágenes de {{site.data.keyword.registrylong_notm}}. De forma predeterminada, los nuevos clústeres tienen secretos de extracción de imágenes que utilizan claves de API para que el clúster pueda extraer imágenes de cualquier registro regional icr.io para contenedores que desplegados en el espacio de nombres default de Kubernetes. Si el clúster tiene un secreto de extracción de imágenes que utiliza una señal, el acceso predeterminado a {{site.data.keyword.registrylong_notm}} se limita aún más a determinados registros regionales que utilizan los dominios de <region>.registry.bluemix.net en desuso.
+de extracción de imágenes](/docs/containers?topic=containers-images#cluster_registry_auth) para autorizar al clúster a extraer las imágenes de {{site.data.keyword.registrylong_notm}}. De forma predeterminada, los nuevos clústeres tienen secretos de extracción de imágenes que utilizan claves de API para que el clúster pueda extraer imágenes de cualquier registro regional icr.io para contenedores que desplegados en el espacio de nombres default de Kubernetes.
+
+Para los clústeres creados antes del **1 de julio de 2019**, es posible que el clúster tenga un secreto de extracción de imagen que utilice una señal (token). Las señales otorgan acceso a {{site.data.keyword.registrylong_notm}} solo para determinados registros regionales que utilizan los dominios `<region>.registry.bluemix.net` en desuso.
 
 {: tsResolve}
 
@@ -822,9 +917,14 @@ de extracción de imágenes](/docs/containers?topic=containers-images#cluster_re
     ```
     {: screen}
 3.  Si no se muestra ningún secreto de extracción de imágenes en la lista, configure el secreto de extracción de imágenes en el espacio de nombres.
-    1.  [Copie los secretos de extracción de imágenes del espacio de nombres de Kubernetes `default` en el espacio de nombres en el que desea desplegar la carga de trabajo](/docs/containers?topic=containers-images#copy_imagePullSecret).
-    2.  [Añada el secreto de extracción de imágenes a la cuenta de servicio para este espacio de nombres de Kubernetes](/docs/containers?topic=containers-images#store_imagePullSecret) para que todos los pods del espacio de nombres puedan utilizar las credenciales secretas de obtención de imágenes.
-4.  Si aparecen en la lista secretos de extracción de imágenes, determine el tipo de credenciales que utiliza para acceder al registro de contenedor.
+    1.  Compruebe que el espacio de nombres predeterminado `default` tiene secretos de extracción de imagen `icr-io` para cada registro regional que quiera utilizar. Si en el espacio de nombres no se listan secretos de `icr-io`, [utilice el mandato `ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>`](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) para crear los secretos de obtención de la imagen en el espacio de nombres `default`.
+        ```
+        kubectl get secrets -n default | grep "icr-io"
+        ```
+        {: pre}
+    2.  [Copie los secretos de extracción de imágenes del espacio de nombres de Kubernetes `default` en el espacio de nombres en el que desea desplegar la carga de trabajo](/docs/containers?topic=containers-images#copy_imagePullSecret).
+    3.  [Añada el secreto de extracción de imágenes a la cuenta de servicio para este espacio de nombres de Kubernetes](/docs/containers?topic=containers-images#store_imagePullSecret) para que todos los pods del espacio de nombres puedan utilizar las credenciales secretas de obtención de imágenes.
+4.  Si los secretos de extracción de imágenes se listan en el pod, determine el tipo de credenciales que utiliza para acceder a {{site.data.keyword.registrylong_notm}}.
     *   **En desuso**: Si el nombre del secreto contiene `bluemix`, significa que utiliza una señal de registro para autenticarse con nombres de dominio `registry.<region>.bluemix.net` en desuso. Continúe en el apartado [Resolución de problemas de secretos de extracción de imágenes que utilizan señales](#ts_image_pull_token).
     *   Si el nombre del secreto contiene `icr`, significa que utiliza una clave de API para autenticarse con los nombres de dominio `icr.io`. Continúe en el apartado [Resolución de problemas de secretos de extracción de imágenes que utilizan claves de API](#ts_image_pull_apikey).
     *   Si tiene ambos tipos de secretos, utilice los dos métodos de autenticación. Utilice los nombres de dominio `icr.io` en los archivos YAML de despliegue correspondientes a la imagen de contenedor. Continúe en el apartado [Resolución de problemas de secretos de extracción de imágenes que utilizan claves de API](#ts_image_pull_apikey).
@@ -838,10 +938,10 @@ de extracción de imágenes](/docs/containers?topic=containers-images#cluster_re
 Si la configuración de pod tiene un secreto de extracción de imágenes que utiliza una clave de API, compruebe que las credenciales de clave de API se han configurado correctamente.
 {: shortdesc}
 
-En los pasos siguientes se presupone que la clave de API almacena las credenciales de un ID de servicio. Si configura el secreto de extracción de imágenes de modo que utilice una clave de API de un usuario individual, debe verificar los permisos y las credenciales de {{site.data.keyword.Bluemix_notm}} IAM de dicho usuario.
+En los pasos siguientes se presupone que la clave de API almacena las credenciales de un ID de servicio. Si configura el secreto de extracción de imágenes de modo que utilice una clave de API de un usuario individual, debe verificar los permisos y las credenciales de {{site.data.keyword.cloud_notm}} IAM de dicho usuario.
 {: note}
 
-1.  Localice el ID de servicio que utiliza la clave de API para el secreto de extracción de imágenes en la **Descripción**. El ID de servicio que se crea con el clúster indica `ID for <cluster_name>` y se utiliza en el espacio de nombres de Kubernetes `default`. Si ha creado otro ID de servicio, como por ejemplo para acceder a otro espacio de nombres de Kubernetes o para modificar los permisos de {{site.data.keyword.Bluemix_notm}} IAM, ha personalizado la descripción.
+1.  Localice el ID de servicio que utiliza la clave de API para el secreto de extracción de imágenes en la **Descripción**. El ID de servicio que se crea con el clúster indica `ID for <cluster_name>` y se utiliza en el espacio de nombres de Kubernetes `default`. Si ha creado otro ID de servicio, como por ejemplo para acceder a otro espacio de nombres de Kubernetes o para modificar los permisos de {{site.data.keyword.cloud_notm}} IAM, ha personalizado la descripción.
     ```
     ibmcloud iam service-ids
     ```
@@ -854,7 +954,7 @@ En los pasos siguientes se presupone que la clave de API almacena las credencial
     ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
     ```
     {: screen}
-2.  Verifique que el ID de servicio tiene asignado como mínimo una [Política de rol de acceso al servicio para {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#create) de **Lector** de {{site.data.keyword.Bluemix_notm}} IAM. Si el ID de servicio no tiene el rol de servicio de **Lector**, [edite las políticas de IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit). Si las políticas son correctas, continúe con el paso siguiente para ver si las credenciales son válidas.
+2.  Verifique que el ID de servicio tiene asignado como mínimo una [Política de rol de acceso al servicio para {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-user#create) de **Lector** de {{site.data.keyword.cloud_notm}} IAM. Si el ID de servicio no tiene el rol de servicio de **Lector**, [edite las políticas de IAM](/docs/iam?topic=iam-serviceidpolicy#access_edit). Si las políticas son correctas, continúe con el paso siguiente para ver si las credenciales son válidas.
     ```
     ibmcloud iam service-policies <service_ID_name>
     ```
@@ -904,14 +1004,14 @@ En los pasos siguientes se presupone que la clave de API almacena las credencial
         docker login -u iamapikey -p <password_string> <region>.icr.io
         ```
         {: pre}
-        1.  Vuelva a crear el ID de servicio de clúster, las políticas de {{site.data.keyword.Bluemix_notm}} IAM, la clave de API y los secretos de extracción de imágenes para contenedores que se ejecuten en el espacio de nombres `default` de Kubernetes.
+        1.  Vuelva a crear el ID de servicio de clúster, las políticas de {{site.data.keyword.cloud_notm}} IAM, la clave de API y los secretos de extracción de imágenes para contenedores que se ejecuten en el espacio de nombres `default` de Kubernetes.
             ```
             ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
             ```
             {: pre}
-        2.  Vuelva a crear el despliegue en el espacio de nombres de Kubernetes `default`. Si sigue viendo un mensaje de error de autorización, repita los pasos 1-5 con los nuevos secretos de extracción de imágenes. Si aún no puede iniciar la sesión, [póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.Bluemix_notm}}](#clusters_getting_help).
+        2.  Vuelva a crear el despliegue en el espacio de nombres de Kubernetes `default`. Si sigue viendo un mensaje de error de autorización, repita los pasos 1-5 con los nuevos secretos de extracción de imágenes. Si aún no puede iniciar la sesión, [póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.cloud_notm}}](#clusters_getting_help).
     6.  Si inicia la sesión correctamente, extraiga una imagen localmente. Si el mandato falla con un error de `acceso denegado`,
-la cuenta de registro se encuentra en una cuenta de {{site.data.keyword.Bluemix_notm}} distinta de la cuenta en el que se encuentra el clúster. [Cree un secreto de extracción de imágenes para acceder a imágenes de otra cuenta](/docs/containers?topic=containers-images#other_registry_accounts). Si puede extraer una imagen a su máquina local, significa que la clave de API tiene los derechos adecuados, pero que la configuración de API en el clúster no es correcta. No puede resolver este problema. [Póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.Bluemix_notm}}](#clusters_getting_help).
+la cuenta de registro se encuentra en una cuenta de {{site.data.keyword.cloud_notm}} distinta de la cuenta en el que se encuentra el clúster. [Cree un secreto de extracción de imágenes para acceder a imágenes de otra cuenta](/docs/containers?topic=containers-images#other_registry_accounts). Si puede extraer una imagen a su máquina local, significa que la clave de API tiene los derechos adecuados, pero que la configuración de API en el clúster no es correcta. No puede resolver este problema. [Póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.cloud_notm}}](#clusters_getting_help).
         ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```
@@ -926,7 +1026,7 @@ la cuenta de registro se encuentra en una cuenta de {{site.data.keyword.Bluemix_
 Si la configuración de pod tiene un secreto de extracción de imágenes que utiliza una señal, compruebe que las credenciales de la señal sean válidas.
 {: shortdesc}
 
-Este método de utilizar una señal para autorizar el acceso del clúster a {{site.data.keyword.registrylong_notm}} recibe soporte para los nombres de dominio `registry.bluemix.net`, pero está en desuso. En su lugar, [utilice el método de clave de API](/docs/containers?topic=containers-images#cluster_registry_auth) para autorizar el acceso del clúster a los nuevos nombres de dominio de registro de `icr.io`.
+Este método de utilizar una señal para autorizar el acceso del clúster a {{site.data.keyword.registrylong_notm}} para los nombres de dominio `registry.bluemix.net` está en desuso. Antes de que termine el soporte para las señales (tokens), actualice los despliegues para que [utilicen el método de clave de API](/docs/containers?topic=containers-images#cluster_registry_auth) para autorizar el acceso del clúster a los nuevos nombres de dominio de registro de `icr.io`.
 {: deprecated}
 
 1.  Obtenga la configuración del secreto de extracción de imágenes. Si el pod no está en el espacio de nombres `default`, incluya el distintivo `-n`.
@@ -956,13 +1056,13 @@ Este método de utilizar una señal para autorizar el acceso del clúster a {{si
     {: screen}
 4.  Compare el nombre de dominio de registro con el nombre de dominio que ha especificado en la imagen del contenedor. Por ejemplo, si el secreto de extracción de imágenes autoriza el acceso al dominio `registry.ng.bluemix.net` pero
 ha especificado una imagen que se almacena en `registry.eu-de.bluemix.net`, debe [crear una señal que utilizará en un secreto de extracción de imágenes](/docs/containers?topic=containers-images#token_other_regions_accounts) para `registry.eu-de.bluemix.net`.
-5.  Inicie una sesión en el registro desde la máquina local utilizando los valores de `username` y `password` del secreto de extracción de imágenes. Si no puede iniciar la sesión, la señal tiene un problema que no puede resolver. [Póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.Bluemix_notm}}](#clusters_getting_help).
+5.  Inicie una sesión en el registro desde la máquina local utilizando los valores de `username` y `password` del secreto de extracción de imágenes. Si no puede iniciar la sesión, la señal tiene un problema que no puede resolver. [Póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.cloud_notm}}](#clusters_getting_help).
     ```
     docker login -u token -p <password_string> registry.<region>.bluemix.net
     ```
     {: pre}
 6.  Si inicia la sesión correctamente, extraiga una imagen localmente. Si el mandato falla con un error de `acceso denegado`,
-la cuenta de registro se encuentra en una cuenta de {{site.data.keyword.Bluemix_notm}} distinta de la cuenta en el que se encuentra el clúster. [Cree un secreto de extracción de imágenes para acceder a imágenes de otra cuenta](/docs/containers?topic=containers-images#token_other_regions_accounts). Si el mandato se ejecuta correctamente, [póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.Bluemix_notm}}](#clusters_getting_help).
+la cuenta de registro se encuentra en una cuenta de {{site.data.keyword.cloud_notm}} distinta de la cuenta en el que se encuentra el clúster. [Cree un secreto de extracción de imágenes para acceder a imágenes de otra cuenta](/docs/containers?topic=containers-images#token_other_regions_accounts). Si el mandato se ejecuta correctamente, [póngase en contacto con el equipo de IBM en Slack o abra un caso de soporte de {{site.data.keyword.cloud_notm}}](#clusters_getting_help).
     ```
     docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
     ```
@@ -985,7 +1085,7 @@ Si este clúster ya existe:
 *  Es posible que el pod haya superado una solicitud o límite de recursos.
 
 {: tsResolve}
-Esta tarea requiere el [rol de plataforma de **Administrador**](/docs/containers?topic=containers-users#platform) de {{site.data.keyword.Bluemix_notm}} IAM para el clúster y el [rol de servicio de **Gestor**](/docs/containers?topic=containers-users#platform) sobre todos los espacios de nombres.
+Esta tarea requiere el [rol de plataforma **Administrador**](/docs/containers?topic=containers-users#platform) de {{site.data.keyword.cloud_notm}} IAM para el clúster y el [rol de servicio de **Gestor**](/docs/containers?topic=containers-users#platform) sobre todos los espacios de nombres.
 
 Si acaba de crear el clúster de Kubernetes, ejecute el siguiente mandato y espere que se hayan inicializado los nodos trabajadores.
 
@@ -1014,7 +1114,7 @@ Si este clúster ya existe, compruebe la capacidad del clúster.
 
 4.  Si no tiene suficiente capacidad en el clúster, cambie el tamaño de la agrupación de nodos trabajadores para añadir más nodos.
 
-    1.  Revise los tamaños y los tipos de máquina actuales de las agrupaciones de nodos trabajadores para decidir cuál va a redimensionar.
+    1.  Revise los tamaños y los tipos actuales de las agrupaciones de nodos trabajadores para decidir cuál va a redimensionar.
 
         ```
         ibmcloud ks worker-pools
@@ -1133,10 +1233,10 @@ Para ver si su pod ha sido sustituido por pods de prioridad más alta:
 {: #cs_helm_install}
 
 {: tsSymptoms}
-Cuando intenta instalar un diagrama de Helm actualizado ejecutando `helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>`, obtiene el mensaje de error `Error: failed to download "ibm/<chart_name>"`.
+Cuando intenta instalar un diagrama de Helm actualizado ejecutando `helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>`, obtiene el mensaje de error `Error: failed to download "iks-charts/<chart_name>"`.
 
 {: tsCauses}
-El URL del repositorio de {{site.data.keyword.Bluemix_notm}} en la instancia de Helm podría ser incorrecto.
+El URL del repositorio de {{site.data.keyword.cloud_notm}} en la instancia de Helm podría ser incorrecto.
 
 {: tsResolve}
 Para resolver el problema del diagrama de Helm:
@@ -1148,7 +1248,7 @@ Para resolver el problema del diagrama de Helm:
     ```
     {: pre}
 
-2. En la salida, verifique que el URL del repositorio de {{site.data.keyword.Bluemix_notm}}, `ibm`, es `https://icr.io/helm/iks-charts`.
+2. En la salida, verifique que el URL del repositorio de {{site.data.keyword.cloud_notm}}, `ibm`, es `https://icr.io/helm/iks-charts`.
 
     ```
     NAME    URL
@@ -1160,14 +1260,14 @@ Para resolver el problema del diagrama de Helm:
 
     * Si el URL es incorrecto:
 
-        1. Elimine el repositorio de {{site.data.keyword.Bluemix_notm}}.
+        1. Elimine el repositorio de {{site.data.keyword.cloud_notm}}.
 
             ```
             helm repo remove ibm
             ```
             {: pre}
 
-        2. Añada el repositorio de {{site.data.keyword.Bluemix_notm}} de nuevo.
+        2. Añada el repositorio de {{site.data.keyword.cloud_notm}} de nuevo.
 
             ```
             helm repo add iks-charts https://icr.io/helm/iks-charts
@@ -1184,7 +1284,7 @@ Para resolver el problema del diagrama de Helm:
 3. Instale el diagrama de Helm con las actualizaciones.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> ibm/<chart_name>
+    helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>
     ```
     {: pre}
 
@@ -1220,11 +1320,11 @@ Es posible que haya configurado un cortafuegos personalizado, que haya especific
 {: shortdesc}
 
 -  En el terminal, se le notifica cuando están disponibles las actualizaciones de la CLI y los plugins de `ibmcloud`. Asegúrese de mantener actualizada la CLI para poder utilizar todos los mandatos y distintivos disponibles.
--   Para ver si {{site.data.keyword.Bluemix_notm}} está disponible, [consulte la página de estado de {{site.data.keyword.Bluemix_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
+-   Para ver si {{site.data.keyword.cloud_notm}} está disponible, [compruebe la página de estado de {{site.data.keyword.cloud_notm}} ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://cloud.ibm.com/status?selected=status).
 -   Publique una pregunta en [Slack de {{site.data.keyword.containerlong_notm}}![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://ibm-container-service.slack.com).
-    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.Bluemix_notm}}, [solicite una invitación](https://bxcs-slack-invite.mybluemix.net/) a este Slack.
+    Si no utiliza un ID de IBM para la cuenta de {{site.data.keyword.cloud_notm}}, [solicite una invitación](https://cloud.ibm.com/kubernetes/slack) a este Slack.
     {: tip}
--   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.Bluemix_notm}}.
+-   Revise los foros para ver si otros usuarios se han encontrado con el mismo problema. Cuando utiliza los foros para formular una pregunta, etiquete la pregunta para que la puedan ver los equipos de desarrollo de {{site.data.keyword.cloud_notm}}.
     -   Si tiene preguntas técnicas sobre el desarrollo o despliegue de clústeres o apps con {{site.data.keyword.containerlong_notm}}, publique su pregunta en [Stack Overflow ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://stackoverflow.com/questions/tagged/ibm-cloud+containers) y etiquete su pregunta con `ibm-cloud`, `kubernetes` y `containers`.
     -   Para formular preguntas sobre el servicio y obtener instrucciones de iniciación, utilice el foro [IBM Developer Answers ![Icono de enlace externo](../icons/launch-glyph.svg "Icono de enlace externo")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix). Incluya las etiquetas `ibm-cloud` y `containers`.
     Consulte [Obtención de ayuda](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) para obtener más detalles sobre cómo utilizar los foros.
