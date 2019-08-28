@@ -111,7 +111,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019
+### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019 . 
 {: #1152_1514_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.15.2_1514.
