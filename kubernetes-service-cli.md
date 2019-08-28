@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-21"
+lastupdated: "2019-08-28"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -41,7 +41,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 ## Using the beta {{site.data.keyword.containerlong_notm}} plug-in
 {: #cs_beta}
 
-A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure. Additionally, beginning with beta version `0.3` (default), new [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) is available.
+A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from the hyphenated structure to a spaced structure. Additionally, beginning with beta version `0.3` (default), new [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) is available.
 {: shortdesc}
 
 The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available.
@@ -3536,15 +3536,15 @@ Use this group of commands to create and manage host names for network load bala
 ### `ibmcloud ks nlb-dns-add`
 {: #cs_nlb-dns-add}
 
-Add a network load balancer (NLB) IP to an existing host name that you created with the [`ibmcloud ks nlb-dns-create` command](#cs_nlb-dns-create).
+Add one or more network load balancer (NLB) IP addresses to an existing host name that you created with the [`ibmcloud ks nlb-dns-create` command](#cs_nlb-dns-create).
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
-For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register an NLB IP in one zone with a host name by running `ibmcloud ks nlb-dns-create`, so now you can add the NLB IPs from the other zones to this existing host name. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB. Note that you must run the following command for each IP address that you want to add.
+For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register the NLB IPs with a host name by running `ibmcloud ks nlb-dns-create`. Later, you add another zone to your cluster and another NLB for that zone. You can use this command to add the new NLB IP to this existing host name. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.
 
 ```
-ibmcloud ks nlb-dns-add --cluster CLUSTER --ip NLB_IP --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns-add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_IP ...] --nlb-host HOST_NAME [--json] [-s]
 ```
 {: pre}
 
@@ -3556,7 +3556,7 @@ ibmcloud ks nlb-dns-add --cluster CLUSTER --ip NLB_IP --nlb-host HOST_NAME [--js
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--ip <em>NLB_IP</em></code></dt>
-<dd>The NLB IP address that you want to add to the host name. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
+<dd>The NLB IP address(es) that you want to add to the host name. To see your NLB IPs, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
 
 <dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
 <dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dnss</code>.</dd>
@@ -3584,7 +3584,7 @@ Publicly expose your app by creating a DNS host name to register a network load 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns-create --cluster CLUSTER --ip NLB_IP [--json] [-s]
+ibmcloud ks nlb-dns-create --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--json] [-s]
 ```
 {: pre}
 
@@ -3596,7 +3596,7 @@ ibmcloud ks nlb-dns-create --cluster CLUSTER --ip NLB_IP [--json] [-s]
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--ip <em>IP</em></code></dt>
-<dd>The network load balancer IP address that you want to register. To see your NLB IP addresses, run <code>kubectl get svc</code>. You can initially create the host name with only one IP address. If you have NLBs in each zone of a multizone cluster that expose one app, you can add the IPs of the other NLBs to the host name by running the [`ibmcloud ks nlb-dns-add` command](#cs_nlb-dns-add).</dd>
+<dd>The network load balancer IP address that you want to register. To see your NLB IP addresses, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -5066,7 +5066,7 @@ After you create a cluster or worker pool, you can add a zone. When you add a zo
 <p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To add a zone to worker pools in a classic cluster, use the [`ibmcloud ks zone-add-classic` command](#cs_zone_add) instead.</p>
 
 ```
-ibmcloud ks zone-add-vpc-classic --zone ZONE --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] [--json] [-s]
+ibmcloud ks zone-add-vpc-classic --zone ZONE --subnet-id SUBNET_ID --cluster CLUSTER --worker-pools WORKER_POOL1[,WORKER_POOL2] [--json] [-s]
 ```
 {: pre}
 
@@ -5076,6 +5076,9 @@ ibmcloud ks zone-add-vpc-classic --zone ZONE --cluster CLUSTER --worker-pools WO
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zones --provider vpc-classic`. This value is required.</dd>
+
+<dt><code>--subnet-id <em>SUBNET_ID</em></code></dt>
+<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic --vpc-d <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a VPC subnet with enough IP addresses, such as 256. This value is required.</dd>
 
 <dt><code>--cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks clusters --provider vpc-classic`. This value is required.</dd>
