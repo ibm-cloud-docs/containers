@@ -23,7 +23,7 @@ subcollection: containers
 {:note: .note}
 
 
-# Version information and update actions
+# Version information and update actions   
 {: #cs_versions}
 
 ## Kubernetes version types
