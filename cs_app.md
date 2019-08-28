@@ -22,7 +22,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Deploying Kubernetes-native apps in clusters
 {: #app}
 
@@ -128,6 +127,8 @@ If you want to expose your app publicly, you have different options that depend 
 *  **Standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#external).
 *  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
 *  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). You also must open the port for the service's private IP address in your firewall.
+
+
 
 ### After I deploy my app, how can I monitor its health?
 You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
@@ -1032,7 +1033,7 @@ To deploy apps to specific worker nodes:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.14.5_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.14.6_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -1509,6 +1510,8 @@ To manage rolling updates to your apps:
         {: pre}
 
 <br />
+
+
 
 
 ## Copying deployments to another cluster
