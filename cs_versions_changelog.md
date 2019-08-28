@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-08-28"
 
 keywords: kubernetes, iks, versions, update
 
@@ -49,6 +49,68 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 ## Version 1.15 changelog
 {: #115_changelog}
 
+### Changelog for master fix pack 1.15.3_1515, released 28 August 2019
+{: #1153_1515}
+
+The following table shows the changes that are included in the master fix pack 1.15.3_1515.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.2_1514">
+<caption>Changes since version 1.15.2_1514</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`etcd`</td>
+<td>v3.3.13</td>
+<td>v3.3.15</td>
+<td>See the [`etcd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>07c9b67</td>
+<td>de13f2a</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>348</td>
+<td>349</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.15.2-94</td>
+<td>v1.15.3-112</td>
+<td>Updated to support the Kubernetes 1.15.3 release.</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>207</td>
+<td>212</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.15.2</td>
+<td>v1.15.3</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>147</td>
+<td>148</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019
 {: #1152_1514_worker}
 
@@ -67,10 +129,10 @@ The following table shows the changes that are included in the worker node fix p
 </thead>
 <tbody>
 <tr>
-<td>Cluster master HA proxy</td>
+<td>Cluster master HA Proxy</td>
 <td>2.0.1-alpine</td>
 <td>1.8.21-alpine</td>
-<td>Moved to HA proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA proxy. For more information, see [HA proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
+<td>Moved to HA Proxy 1.8 to fix [socket leak in HA proxy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/haproxy/haproxy/issues/136). Also added a liveliness check to monitor the health of HA Proxy. For more information, see [HA Proxy release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.haproxy.org/download/1.8/src/CHANGELOG).</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
@@ -275,6 +337,68 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for master fix pack 1.14.6_1531, released 28 August 2019
+{: #1146_1531}
+
+The following table shows the changes that are included in the master fix pack 1.14.6_1531.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.5_1530">
+<caption>Changes since version 1.14.5_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`etcd`</td>
+<td>v3.3.13</td>
+<td>v3.3.15</td>
+<td>See the [`etcd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>07c9b67</td>
+<td>de13f2a</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>348</td>
+<td>349</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.5-160</td>
+<td>v1.14.6-172</td>
+<td>Updated to support the Kubernetes 1.14.6 release.</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>207</td>
+<td>212</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.5</td>
+<td>v1.14.6</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>147</td>
+<td>148</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019
 {: #1145_1530_worker}
@@ -916,6 +1040,68 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.13.10_1534, released 28 August 2019
+{: #11310_1534}
+
+The following table shows the changes that are included in the master fix pack 1.13.10_1534.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.9_1533">
+<caption>Changes since version 1.13.9_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`etcd`</td>
+<td>v3.3.13</td>
+<td>v3.3.15</td>
+<td>See the [`etcd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>07c9b67</td>
+<td>de13f2a</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>348</td>
+<td>349</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.9-209</td>
+<td>v1.13.10-221</td>
+<td>Updated to support the Kubernetes 1.13.10 release.</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>207</td>
+<td>212</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.9</td>
+<td>v1.13.10</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>147</td>
+<td>148</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.9_1533, released 19 August 2019
 {: #1139_1533_worker}
@@ -1991,6 +2177,56 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.12.10_1565, released 28 August 2019
+{: #11210_1565}
+
+The following table shows the changes that are included in the master fix pack 1.12.10_1565.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1564">
+<caption>Changes since version 1.12.10_1564</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`etcd`</td>
+<td>v3.3.13</td>
+<td>v3.3.15</td>
+<td>See the [`etcd` release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases/v3.3.15). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>GPU device plug-in and installer</td>
+<td>07c9b67</td>
+<td>de13f2a</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809). Updated the GPU drivers to [430.40 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/Download/driverResults.aspx/149138/).</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
+<td>348</td>
+<td>349</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>207</td>
+<td>212</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
+<td>147</td>
+<td>148</td>
+<td>Image updated for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.10_1564, released 19 August 2019
 {: #11210_1564_worker}
