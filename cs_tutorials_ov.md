@@ -210,6 +210,21 @@ subcollection: containers
         </div>
     </div>
     </a>
+    <a href = "/docs/containers?topic=containers-tutorial-starterkit-kube">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Deploy a starter kit app to a cluster
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br> <p>Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain. </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src="/images/starterkit-app.png" alt="Logistics Wizard architecture overview" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
 </div>
 
 
