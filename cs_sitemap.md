@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-08-28"
 
 ---
 
@@ -656,7 +656,6 @@ lastupdated: "2019-08-22"
 * [Storage classes](/docs/containers?topic=containers-kube_concepts#storageclasses)
   * [Customizing a storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass)
   * [Changing or updating to a different storage class](/docs/containers?topic=containers-kube_concepts#update_storageclass)
-* [Preparing existing storage for multizone usage with Kubernetes labels](/docs/containers?topic=containers-kube_concepts#storage_multizone)
 
 [Storing data on {{site.data.keyword.filestorage_full_notm}}](/docs/containers?topic=containers-file_storage#file_storage)
 * [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
