@@ -219,7 +219,7 @@ subcollection: containers
                   </br> <p>Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="/images/starterkit-app.png" alt="Logistics Wizard architecture overview" />
+                    <img class="architectureDiagram" src="images/starterkit-app.png" alt="Starter kit app flow" />
                 </div>
             </div>
         </div>
