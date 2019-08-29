@@ -47,7 +47,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>29 August 2019</td>
-  <td><strong>Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}</strong>: Added steps [create an audit webhook in your cluster](docs/containers?topic=containers-health#webhook_logdna) to collect Kubernetes API audit logs from your cluster and forward them to {{site.data.keyword.la_full_notm}}.</td>
+  <td><strong>Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}</strong>: Added steps [create an audit webhook in your cluster](/docs/containers?topic=containers-health#webhook_logdna) to collect Kubernetes API audit logs from your cluster and forward them to {{site.data.keyword.la_full_notm}}.</td>
 </tr>
 <tr>
   <td>28 August 2019</td>
