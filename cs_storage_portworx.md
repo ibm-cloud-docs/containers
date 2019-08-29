@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-08-29"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -95,20 +95,15 @@ When you [install Portworx with a Helm chart](#install_portworx), you get the Po
 
 For more information about available license types and how to upgrade your Trial license, see [Portworx Licensing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/knowledge-base/px-licensing/). IBM employees must order a Portworx license by following [this process](https://github.ibm.com/alchemy-containers/armada-storage/blob/master/portworx/px-license.md).
 
-## Setting up a database for Portworx metadata
+## Setting up a Databases for etcd service instance for Portworx metadata
 {: #portworx_database}
 
-Set up an {{site.data.keyword.cloud_notm}} database service, such as [Databases for etcd](#databaseetcd) or [{{site.data.keyword.composeForEtcd}}](#compose) to create a key-value store for the Portworx cluster metadata.
+Set up a [Databases for etcd](#databaseetcd) service instance to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
 The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
 
-### Setting up a Databases for etcd service instance
-{: #databaseetcd}
-
 Databases for etcd is a managed etcd service that securely stores and replicates your data across three storage instances to provide high availability and resiliency for your data. For more information, see the [Databases for etcd getting started tutorial](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started#getting-started).
-
-The following steps show how to provision and set up a Databases for etcd service instance for Portworx.
 
 1. Make sure that you have the [`Administrator` platform access role in {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM)](/docs/iam?topic=iam-iammanidaccser#iammanidaccser)  for the Databases for etcd service.  
 
@@ -177,42 +172,6 @@ The following steps show how to provision and set up a Databases for etcd servic
 6. [Install Portworx in your cluster](#install_portworx).
 
 
-### Setting up a Compose for etcd service instance
-{: #compose}
-
-{{site.data.keyword.composeForEtcd}} comes with the option to set up your database as part of a cloud storage cluster that offers high availability and resiliency in case of a zone failure. For more information, see the {{site.data.keyword.composeForEtcd}} [Getting Started tutorial](/docs/services/ComposeForEtcd?topic=compose-for-etcd-getting-started-tutorial#getting-started-tutorial).
-{: shortdesc}
-
-The following steps show how to provision and set up the {{site.data.keyword.composeForEtcd}} database service for Portworx.
-
-1. Make sure that you have the [`Developer` Cloud Foundry role for the space](/docs/iam?topic=iam-mngcf#mngcf) where you want to create your {{site.data.keyword.composeForEtcd}} database service.
-
-2. Provision a {{site.data.keyword.composeForEtcd}} service instance.
-   1. Open the [{{site.data.keyword.composeForEtcd}} catalog page](https://cloud.ibm.com/catalog/services/compose-for-etcd)
-   2. Enter a name for your service instance, such as `px-etcd`.
-   3. Select the region where you want to deploy your service instance. For optimal performance, choose the region that your cluster is in.
-   4. Select a Cloud Foundry org and space.
-   5. Review the pricing plans and select the one that you want.
-   6. Click **Create** to start setting up your service instance. When the setup is finished, the service details page opens.
-3. {: #etcd_credentials}Retrieve the {{site.data.keyword.composeForEtcd}} service credentials.
-   1. In the navigation on the service details page, click **Manage**.
-   2. Go to the **Overview** tab.
-   3. In the **Connection Strings** section, select **Command Line**.
-   4. Note the value of the `--endpoints` and `--user` parameters.
-      Example output for `--endpoints`:
-      ```
-      --endpoints=https://portal-ssl123-34.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345,https://portal-ssl123-35.bmix-dal-yp-12a23b5c-123a-12ab-a1b2-1a2bc3d34567.1234567890.composedb.com:12345
-      ```
-      {: screen}
-
-      Example output for `--user`:
-      ```
-      --user=root:ABCDEFGHIJKLMNOP
-      ```
-      {: screen}
-   5. Use these service credentials when you [install Portworx in your cluster](#install_portworx).
-
-
 ## Installing Portworx in your cluster
 {: #install_portworx}
 
@@ -225,7 +184,7 @@ Looking for instructions about how to update or remove Portworx? See [Updating P
 Before you begin:
 - [Create or use an existing cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#create_block_storage).
-- Create a [{{site.data.keyword.composeForEtcd}} service instance](#portworx_database) to store the Portworx configuration and metadata.
+- Create a [Databases for etcd service instance](#portworx_database) to store the Portworx configuration and metadata.
 - Decide whether you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -248,34 +207,34 @@ To install Portworx:
     ```
     {: screen}
 
-3. Retrieve the etcd endpoint, user name, and password of the Portworx database that you set up earlier. Depending on the type of database service that you used, see [{{site.data.keyword.composeForEtcd}}](#etcd_credentials) or [Databases for etcd](#databases_credentials).
+3. [Retrieve the etcd endpoint, user name, and password of the Databases for etcd service instance that you set up earlier](#databases_credentials). 
 
 4. Download the Portworx Helm chart.
    ```
-   git clone https://github.com/portworx/helm.git
+   git clone https://github.com/IBM/charts.git
    ```
    {: pre}
 
 5. Open the `values.yaml` file with your preferred editor. This example uses the `nano` editor.
    ```
-   nano helm/charts/portworx/values.yaml
+   nano charts/community/portworx/values.yaml
    ```
    {: pre}
 
 6. Update the following values and save your changes.
-   - **`etcdEndPoint`**: Add the endpoint of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`etcdEndPoint`**: Add the etcd endpoint of your Databases for etcd service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
     - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
    - **`clusterName`**: Enter the name of the cluster where you want to install Portworx.
    - **`usedrivesAndPartitions`**: Enter `true` to let Portworx find unmounted hard drives and partitions.
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
-   - **`etcd.credentials`**: Enter the user name and password of your {{site.data.keyword.composeForEtcd}} service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter the path where the certificate for your database service instance is stored. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
-   - **`etcd.ca`**: Enter the path to the Certificate Authority (CA) file. If you set up a Databases for etcd service instance, enter `/etc/pwx/etcdcerts/ca.pem`. For {{site.data.keyword.composeForEtcd}}, enter `none`.
+   - **`etcd.credentials`**: Enter the user name and password of your Databases for etcd service instance that you retrieved earlier in the format `<user_name>:<password>`.
+   - **`etcd.certPath`**: Enter `/etc/pwx/etcdcerts` for the path where the certificate of your Databases for etcd service instance is stored.
+   - **`etcd.ca`**: Enter `/etc/pwx/etcdcerts/ca.pem` for the path to the Certificate Authority (CA) file.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
-   Example `values.yaml` file for Databases for etcd:
+   Example `values.yaml` file:
    ```
    # Please uncomment and specify values for these options as per your requirements.
 
@@ -331,7 +290,7 @@ To install Portworx:
 
 7. Install the Portworx Helm chart.
    ```
-   helm install ./helm/charts/portworx/ --debug --name portworx
+   helm install ./charts/community/portworx/ --debug --name portworx
    ```
    {: pre}
 
@@ -528,7 +487,7 @@ You can upgrade Portworx to the latest version.
 
 3. Update your Portworx Helm chart.
    ```
-   helm upgrade <helm_chart_name> ./helm/charts/portworx/
+   helm upgrade <helm_chart_name> ./charts/community/portworx/
    ```
    {: pre}
 
