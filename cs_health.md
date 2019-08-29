@@ -88,7 +88,7 @@ To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to ev
 To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and automatically forwards these event logs to [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). In addition to the cluster management events, you can also collect and forward any events that are passed through your Kubernetes API server to {{site.data.keyword.at_full_notm}}. To set up your cluster to forward audit logs to {{site.data.keyword.at_full_notm}}, you can create a Kubernetes audit system by using the provided image and deployment.
 {: shortdesc}
 
-The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and container, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that  that is exposed only on the private network. The service receives the logs from the webhook and temporarily stores the logs in a container. Finally, the logging agent forwards the logs to {{site.data.keyword.at_full_notm}}, where you can view the logs.
+The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and webserver app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from a image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP webserver app that that is exposed only on the private network. The webserver app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the webserver app to {{site.data.keyword.at_full_notm}}, where you can view the logs.
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
@@ -98,12 +98,12 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the {{site.data.keyword.containerlong_notm}} cluster.
   * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/iam?topic=iam-userroles) for {{site.data.keyword.at_full_notm}}.
 * For the cluster that you want to collect API server audit logs from: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* If you have an existing cluster that was created before 25 February 2019, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key).
-* Keep in mind that only one audit webhook can be created in a cluster.
+* If you have an existing cluster that was created before 25 February 2019, verify that the `default-icr-io` secret exists in your cluster by running `kubectl get secrets`. If the `default-icr-io` secret is not listed in the output, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key).
+* Keep in mind that only one audit webhook can be created in a cluster. You can set up an audit webhook to forward logs to {{site.data.keyword.at_full_notm}} or to forward logs to an external syslog server, but not both.
 
 **To forward Kubernetes API audit logs to {{site.data.keyword.at_full_notm}}:**
 
-1. Target the global registry for public {{site.data.keyword.cloud_notm}} images.
+1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
   ```
   ibmcloud cr region-set global
   ```
@@ -155,7 +155,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   ```
   {: codeblock}
 
-4. Create the deployment in your cluster.
+4. Create the deployment in the `default` namespace of your cluster.
   ```
   kubectl create -f ibmcloud-kube-audit.yaml
   ```
@@ -208,11 +208,11 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 9. Apply the webhook to your Kubernetes API server by refreshing the cluster master. It might take several minutes for the master to refresh.
   ```
-  ibmcloud ks cluster-refresh --cluster <cluster_name_or_ID>
+  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.at_full_notm}} service.
 
 11. After the master refresh completes and the logging agents are running on your worker nodes, you can [view your Kubernetes API audit logs in {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started#gs_step4).
 
@@ -410,9 +410,8 @@ To audit any events that are passed through your Kubernetes API server, you can 
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
-* A default audit policy is used for all clusters with this logging configuration.
 * [Filters](#filter-logs) are not supported.
-* Only one audit webhook can be created in a cluster.
+* Keep in mind that only one audit webhook can be created in a cluster. You can set up an audit webhook to forward logs to {{site.data.keyword.at_full_notm}} or to forward logs to an external syslog server, but not both.
 * You must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Before you begin**
