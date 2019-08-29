@@ -249,7 +249,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     tiller                               1         2m
     ```
     {: screen}
-3.  Add and update the Helm repo where the cluster autoscaler Helm chart is.
+4.  Add and update the Helm repo where the cluster autoscaler Helm chart is.
     ```
     helm repo add iks-charts https://icr.io/helm/iks-charts
     ```
@@ -258,7 +258,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     helm repo update
     ```
     {: pre}
-4.  Decide if you want to [customize the cluster autoscaler settings](#ca_chart_values), such as the worker pools that are autoscaled, or the amount of time that the cluster autoscaler waits before scaling worker nodes up or down. You can customize your settings by using the `--set` flag in the `helm install` command. Depending on the settings that you want to customize, you might need to prepare multiple `--set` flags before you can install the Helm chart. For example, you might want to autoscale your default worker pool by preparing the following `--set` flag.
+5.  Decide if you want to [customize the cluster autoscaler settings](#ca_chart_values), such as the worker pools that are autoscaled, or the amount of time that the cluster autoscaler waits before scaling worker nodes up or down. You can customize your settings by using the `--set` flag in the `helm install` command. Depending on the settings that you want to customize, you might need to prepare multiple `--set` flags before you can install the Helm chart. For example, you might want to autoscale your default worker pool by preparing the following `--set` flag.
     ```
     --set workerpools[0].<pool_name>.max=<number_of_workers>,workerpools[0].<pool_name>.min=<number_of_workers>,workerpools[0].<pool_name>.enabled=(true|false)
     ```
@@ -271,7 +271,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     * **`min=<number_of_workers>`**: Specify the minimum number of worker nodes per zone that the cluster autoscaler can scale down to. The value must be `2` or greater so that your ALB pods can be spread for high availability. If you [disabled](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) all public ALBs in each zone of your standard cluster, you can set the value to `1`.<p class="note">Keep in mind that setting a `min` size does not automatically trigger a scale-up. The `min` size is a threshold so that the cluster autoscaler does not scale below this minimum number of worker nodes per zone. If your cluster does not have this number of worker nodes per zone yet, the cluster autoscaler does not scale up until you have workload resource requests that require more resources.</p>
     * **`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.
 
-5.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the default worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
+6.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the default worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
     ```
     helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set workerpools[0].default.max=2,workerpools[0].default.min=1,workerpools[0].default.enabled=true
     ```
@@ -324,7 +324,7 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
     ```
     {: screen}
 
-6.  Verify that the installation is successful.
+7.  Verify that the installation is successful.
 
     1.  Check that the cluster autoscaler pod is in a **Running** state.
         ```
@@ -371,9 +371,9 @@ Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in 
         ```
         {: screen}
 
-7.  Repeat these steps for every cluster where you want to provision the cluster autoscaler.
+8.  Repeat these steps for every cluster where you want to provision the cluster autoscaler.
 
-8.  Optional: If you did not set any worker pools for autoscaling with the installation, you can [Update the cluster autoscaler configuration](#ca_cm).
+9.  Optional: If you did not set any worker pools for autoscaling with the installation, you can [Update the cluster autoscaler configuration](#ca_cm).
 
 <br />
 
