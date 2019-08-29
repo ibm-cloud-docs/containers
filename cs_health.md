@@ -71,24 +71,27 @@ You can choose your logging solution based on which cluster components you need 
 <br />
 
 
-## Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}
+## Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
 {: #logdna}
 
-Manage pod container logs by deploying LogDNA as a third-party service to your cluster.
+Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
 
-To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+### Forwarding cluster and app logs
+{: #app_logdna}
 
-<br />
-
-
-## Forwarding Kubernetes API audit logs to {{site.data.keyword.at_full_notm}}
-{: #webhook_at}
-
-To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and automatically forwards these event logs to [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). In addition to the cluster management events, you can also collect and forward any events that are passed through your Kubernetes API server to {{site.data.keyword.at_full_notm}}. To set up your cluster to forward audit logs to {{site.data.keyword.at_full_notm}}, you can create a Kubernetes audit system by using the provided image and deployment.
+To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster.
 {: shortdesc}
 
-The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and webserver app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from a image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP webserver app that that is exposed only on the private network. The webserver app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the webserver app to {{site.data.keyword.at_full_notm}}, where you can view the logs.
+This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+
+### Forwarding Kubernetes API audit logs
+{: #webhook_logdna}
+
+To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and automatically forwards these event logs to [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). In addition to the cluster management events, you can also collect and forward any events that are passed through your Kubernetes API server to {{site.data.keyword.la_full_notm}}. To set up your cluster to forward audit logs to {{site.data.keyword.la_full_notm}}, you can create a Kubernetes audit system by using the provided image and deployment.
+{: shortdesc}
+
+The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and webserver app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from a image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP webserver app that is exposed only on the private network. The webserver app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the webserver app to {{site.data.keyword.la_full_notm}}, where you can view the logs.
 
 For more information about Kubernetes audit logs, see the <a href="https://kubernetes.io/docs/tasks/debug-application-cluster/audit/" target="blank">auditing topic <img src="../icons/launch-glyph.svg" alt="External link icon"></a> in the Kubernetes documentation.
 
@@ -96,12 +99,12 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 * You must have the following permissions:
   * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the {{site.data.keyword.containerlong_notm}} cluster.
-  * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/iam?topic=iam-userroles) for {{site.data.keyword.at_full_notm}}.
+  * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/iam?topic=iam-userroles) for {{site.data.keyword.la_full_notm}}.
 * For the cluster that you want to collect API server audit logs from: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * If you have an existing cluster that was created before 25 February 2019, verify that the `default-icr-io` secret exists in your cluster by running `kubectl get secrets`. If the `default-icr-io` secret is not listed in the output, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key).
-* Keep in mind that only one audit webhook can be created in a cluster. You can set up an audit webhook to forward logs to {{site.data.keyword.at_full_notm}} or to forward logs to an external syslog server, but not both.
+* Keep in mind that only one audit webhook can be created in a cluster. You can set up an audit webhook to forward logs to {{site.data.keyword.la_full_notm}} or to forward logs to an external syslog server, but not both.
 
-**To forward Kubernetes API audit logs to {{site.data.keyword.at_full_notm}}:**
+**To forward Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}:**
 
 1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
   ```
@@ -122,11 +125,17 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   metadata:
     name: ibmcloud-kube-audit
   items:
-    - apiVersion: extensions/v1beta1
+    - apiVersion: apps/v1
       kind: Deployment
       metadata:
-        name: ibmcloud-kube-audit-deployment
+        name: ibmcloud-kube-audit
+        labels:
+          app: ibmcloud-kube-audit
       spec:
+        replicas: 1
+        selector:
+          matchLabels:
+            app: ibmcloud-kube-audit
         template:
           metadata:
             labels:
@@ -134,16 +143,15 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
           spec:
             containers:
               - name: ibmcloud-kube-audit
-                image: 'icr.io/ibm/kube-audit-to-logdna:latest'
-                resources:
-                  requests:
-                    memory: "100Mi"
+                image: 'icr.io/ibm/ibmcloud-kube-audit-to-logdna:latest'
                 ports:
                   - containerPort: 3000
     - apiVersion: v1
       kind: Service
       metadata:
         name: ibmcloud-kube-audit-service
+        labels:
+          app: ibmcloud-kube-audit
       spec:
         selector:
           app: ibmcloud-kube-audit
@@ -212,9 +220,9 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   ```
   {: pre}
 
-10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.at_full_notm}} service.
+10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.la_full_notm}} service.
 
-11. After the master refresh completes and the logging agents are running on your worker nodes, you can [view your Kubernetes API audit logs in {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started#gs_step4).
+11. After the master refresh completes and the logging agents are running on your worker nodes, you can [view your Kubernetes API audit logs in {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube_step4).
 
 <br />
 
