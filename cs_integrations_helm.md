@@ -388,6 +388,8 @@ The steps in this example show how to install Helm charts from the {{site.data.k
     ```
     {: pre}
 
+
+
 ## Related Helm links
 {: #helm_links}
 
