@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-26"
+lastupdated: "2019-08-29"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -22,8 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
-
 
 # Fluentd and Ingress ALB changelog
 {: #cluster-add-ons-changelog}
@@ -65,7 +63,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>26 Aug 2019</td>
 <td><ul><li>Fixes a bug in the deployment for the readiness check for ALB pod restarts in some older images.</li>
 <li>Fixes `golang` vulnerabilities for [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512) and [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514).</li></ul></td>
-<td>-</td>
+<td>Updates the deployment for Ingress ALBs. If you use edge nodes in your cluster, [redeploy your ALBs to your edge nodes (step 4)](/docs/containers?topic=containers-edge#edge_nodes).</td>
 </tr>
 <tr>
 <td>519 / 335</td>

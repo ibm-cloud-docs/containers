@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-26"
+lastupdated: "2019-08-29"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -208,23 +208,8 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
-3. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following YAML file from the [{{site.data.keyword.cloud_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
-    1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
-
-    2. Create the Kubernetes resources in your cluster.
-       ```
-       kubectl apply -f service-account.yaml
-       ```
-       {: pre}
-
-       ```
-       kubectl apply -f cluster-role-binding.yaml
-       ```
-       {: pre}
-
-4. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that you want to install in your cluster. If you do not need a specific version, use the latest one.
-
-5. Pull the Tiller image from the public Google Container Registry to your local machine.
+3. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that you want to install in your cluster. If you do not need a specific version, use the latest one. In the digest image row, click the vertical ellipsis action menu, and then click **Show Pull Command** to copy the pull command.
+4. Pull the Tiller image from the public Google Container Registry to your local machine.
    ```
    docker pull gcr.io/kubernetes-helm/tiller:v2.11.0
    ```
@@ -242,11 +227,20 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    Status: Downloaded newer image for gcr.io/kubernetes-helm/tiller:v2.13.0
    ```
    {: screen}
+5. [Push the Tiller image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing).
+6. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
+7. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod by applying the following YAML file from the [{{site.data.keyword.cloud_notm}} `kube-samples` repository](https://github.com/IBM-Cloud/kube-samples/blob/master/rbac/serviceaccount-tiller.yaml).
+    1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
+    2. Create the Kubernetes resources in your cluster.
+       ```
+       kubectl apply -f service-account.yaml
+       ```
+       {: pre}
 
-6. [Push the Tiller image to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing).
-
-7. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
-
+       ```
+       kubectl apply -f cluster-role-binding.yaml
+       ```
+       {: pre}
 8. Install Tiller in your private cluster by using the image that you stored in your namespace in {{site.data.keyword.registryshort_notm}}.
    ```
    helm init --tiller-image <region>.icr.io/<mynamespace>/<myimage>:<tag> --service-account tiller
@@ -393,6 +387,8 @@ The steps in this example show how to install Helm charts from the {{site.data.k
     kubectl delete --recursive --filename ./output
     ```
     {: pre}
+
+
 
 ## Related Helm links
 {: #helm_links}
