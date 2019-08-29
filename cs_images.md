@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-26"
+lastupdated: "2019-08-29"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -234,7 +234,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.cloud_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
 {:shortdesc}
 
-After you create the image pull secret, your containers your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
+After you create the image pull secret, your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
 
 Image pull secrets are valid only for the Kubernetes namespaces that they were created for. Repeat these steps for every namespace where you want to deploy containers. Images from [DockerHub](#dockerhub) do not require image pull secrets.
 {: tip}
