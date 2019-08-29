@@ -621,6 +621,21 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     <td>When set to `true`, worker nodes that have `kube-system` pods are not scaled down. Do not set the value to `false` because scaling down `kube-system` pods might have unexpected results.</td>
     <td>`true`</td>
     </tr>
+    <tr>
+    <td>`ignoreDaemonSetsUtilization`</td>
+    <td>When set to `true`, the cluster autoscaler ignores DaemonSet pods when it calculates resource utilization for scale-down.</td>
+    <td>`false`</td>
+    </tr>
+    <tr>
+    <td>`maxBulkSoftTaintCount`</td>
+    <td>Set the maximum number of worker nodes that can be tainted or untainted with `PreferNoSchedule` at the same time. To disable this feature, set to `0`.</td> 
+    <td>`0`</td>
+    </tr>
+    <tr>
+    <td>`maxBulkSoftTaintTime` </td>
+    <td>Set the maximum amount of time that worker nodes can be tainted or untainted with `PreferNoSchedule` at the same time.</td>
+    <td>`10m`</td>
+    </tr>
      <tr>
     <td>`workerpools` parameter</td>
     <td>The worker pools that you want to autoscale, including their minimum and maximum number of worker nodes per zone. These settings are mirrored in the [cluster autoscaler config map](#ca_cm). To set the worker pool, format the option as as follows: <code>--set workerpools[0].<pool_name>.max=<number_of_workers>,workerpools[0].<pool_name>.min=<number_of_workers>,workerpools[0].<pool_name>.enabled=(true|false)</code><br><br>
