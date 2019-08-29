@@ -220,7 +220,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   ```
   {: pre}
 
-10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.la_full_notm}} service.
+10. While the master refreshes, [provision an instance of {{site.data.keyword.la_full_notm}} and deploy a logging agent to every worker node in your cluster](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube). The logging agent is required to forward logs from inside your cluster to the {{site.data.keyword.la_full_notm}} service. If you already set up logging agents in your cluster, you can skip this step.
 
 11. After the master refresh completes and the logging agents are running on your worker nodes, you can [view your Kubernetes API audit logs in {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube_step4).
 
