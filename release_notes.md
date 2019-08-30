@@ -27,7 +27,7 @@ subcollection: containers
 # Release notes
 {: #iks-release}
 
-Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month. 
 {:shortdesc}
 
 The following icons are used to indicate if a release note applies only to a certain container platform. If no icon is used, the release note applies to both community Kubernetes and OpenShift clusters.<br>
