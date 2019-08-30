@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-08-30"
 
 keywords: kubernetes, iks, networking
 
@@ -247,6 +247,7 @@ As an example, say that you create a private load balancer for your app. This pr
 * In VPC clusters:
   * If traffic is permitted between VPC subnets, any system in the same VPC.
   * If traffic is permitted between VPCs, any system that has access to the VPC that the cluster is in.
+
 ### Choosing a deployment pattern for classic clusters
 {: #pattern_private_classic}
 

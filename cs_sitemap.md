@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-08-30"
 
 ---
 
@@ -18,6 +18,7 @@ lastupdated: "2019-08-28"
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
 
 # Site map
 {: #cs_sitemap}
@@ -719,8 +720,6 @@ lastupdated: "2019-08-28"
 * [Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Getting a Portworx license](/docs/containers?topic=containers-portworx#portworx_license)
 * [Setting up a database for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
-* [Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databaseetcd)
-  * [Setting up a Compose for etcd service instance](/docs/containers?topic=containers-portworx#compose)
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)

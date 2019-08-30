@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-08-30"
 
 keywords: kubernetes, iks, versions, update
 
@@ -111,7 +111,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019 . 
+### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019 .
 {: #1152_1514_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.15.2_1514.
@@ -537,7 +537,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tr>
 </tbody>
 </table>
-  
+
 ### Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019
 {: #1144_1527_worker}
 
@@ -1241,7 +1241,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tr>
 </tbody>
 </table>
-  
+
 ### Changelog for worker node fix pack 1.13.8_1530, released 5 August 2019
 {: #1138_1530_worker}
 
@@ -5024,7 +5024,7 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>334</td>
 <td>338</td>
-<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels, unless you are using a multizone cluster and need to [add the region the zone labels](/docs/containers?topic=containers-kube_concepts#storage_multizone).</td>
+<td>Updated `incubator` version to 1.8. File storage is provisioned to the specific zone that you select. You cannot update an existing (static) PV instance labels.</td>
 </tr>
 <tr>
 <td>Kubernetes</td>
