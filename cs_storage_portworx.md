@@ -24,7 +24,6 @@ subcollection: containers
 {:preview: .preview}
 
 
-
 # Storing data on software-defined storage (SDS) with Portworx
 {: #portworx}
 
