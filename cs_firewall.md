@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-08-30"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -435,8 +435,8 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
 
 3.  To allow worker nodes to communicate with the cluster master over the private service endpoint, allow outgoing network traffic from the source <em>&lt;each_worker_node_privateIP&gt;</em> to the destination TCP/UDP port range 20000-32767 and port 443, and the following IP addresses and network groups.
     - `TCP/UDP port range 20000-32767, port 443 FROM <each_worker_node_privateIP> TO <private_IPs>`
-    -  Replace <em>&lt;private_IPs&gt;</em> with the private IP addresses of the zones in the region that your cluster is located.<p class="important">You must allow outgoing traffic to port 443 for **all of the zones within the region** to balance the load during the bootstrapping process.</p>
-    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
+    -  Replace <em>&lt;private_IPs&gt;</em> with the private IP addresses of the zones in the region where your cluster is located.<p class="important">You must allow outgoing traffic to port 443 for **all of the zones within the region** to balance the load during the bootstrapping process.</p>
+    <table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the region in column one, the zone in column two, and IP addresses to match in column three.">
       <caption>IP addresses to open for outgoing traffic</caption>
           <thead>
           <th>Region</th>
@@ -643,6 +643,9 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     {: pre}
 4.  Add the subnet CIDR or IP addresses to your service's firewall for outbound traffic or your on-premises firewall for inbound traffic.
 5.  Repeat these steps for each cluster that you want to whitelist.
+
+<br />
+
 
 
 
