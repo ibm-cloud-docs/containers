@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-08-30"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -98,7 +98,7 @@ For more information about available license types and how to upgrade your Trial
 ## Setting up a Databases for etcd service instance for Portworx metadata
 {: #portworx_database}
 
-Set up a [Databases for etcd](#databaseetcd) service instance to create a key-value store for the Portworx cluster metadata.
+Set up a [Databases for etcd](/docs/services/databases-for-etcd?topic=databases-for-etcd-getting-started) service instance to create a key-value store for the Portworx cluster metadata.
 {: shortdesc}
 
 The Portworx key-value store serves as the single source of truth for your Portworx cluster. If the key-value store is not available, then you cannot work with your Portworx cluster to access or store your data. Existing data is not changed or removed when the Portworx database is unavailable.
