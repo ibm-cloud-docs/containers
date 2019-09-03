@@ -160,9 +160,9 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`zone add classic`](#cs_zone_add)</li></ul>
    </td>
    <td>Uses the v2 API.<ul>
-   <li>[`alb configure vpc-classic`](#cli_alb configure vpc-classic)</li>
+   <li>[`alb configure vpc-classic`](#cli_alb_configure_vpc_classic)</li>
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
-   <li>[`worker-pool create vpc-classic`](#cli_worker-pool create vpc-classic)</li>
+   <li>[`worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic)</li>
    <li>[`zone add vpc-classic`](#cli_zone-add-vpc-classic)</li></ul></ul></td>
  </tr>
  <tr>
@@ -1188,7 +1188,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [--kube-version MAJOR.MINOR.
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks ](#cs_kube_versions). This value is optional.</dd>
+<dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command). This value is optional.</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Attempt the update even if the change is greater than two minor versions from the worker node version. This value is optional.</dd>
@@ -1612,7 +1612,7 @@ View and modify worker nodes for a cluster.
 Add stand-alone worker nodes to a cluster.
 {: shortdesc}
 
-This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create) or [`ibmcloud ks worker-pool create vpc-classic](#cli_worker-pool create vpc-classic), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
+This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create) or [`ibmcloud ks worker-pool create vpc-classic](#cli_worker_pool_create_vpc_classic), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
 {: deprecated}
 
 ```
@@ -2150,7 +2150,7 @@ View and modify worker pools for a cluster.
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the flavors for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker-pool create vpc-classic) instead.</p>
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker_pool_create_vpc_classic) instead.</p>
 
 ```
 ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1] [-s] [--json]
@@ -2199,7 +2199,7 @@ ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --mac
 
 
 ### `ibmcloud ks worker-pool create vpc-classic`
-{: #cli_worker-pool create vpc-classic}
+{: #cli_worker_pool_create_vpc_classic}
 
 Add a worker pool to a VPC on Classic cluster. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool.
 {: shortdesc}
@@ -3034,7 +3034,7 @@ ibmcloud ks alb cert rm --cluster my_cluster --cert-crn crn:v1:staging:public:cl
 Enable or disable an ALB in your standard cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For VPC on Classic clusters, use the [`ibmcloud ks alb configure vpc-classic` command](#cli_alb configure vpc-classic) instead.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For VPC on Classic clusters, use the [`ibmcloud ks alb configure vpc-classic` command](#cli_alb_configure_vpc_classic) instead.
 
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
@@ -3093,7 +3093,7 @@ ibmcloud ks alb configure classic --alb-id public-cr18a61a63a6a94b658596aa93a087
 </br>
 
 ### ibmcloud ks alb configure vpc-classic
-{: #cli_alb configure vpc-classic}
+{: #cli_alb_configure_vpc_classic}
 
 Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
