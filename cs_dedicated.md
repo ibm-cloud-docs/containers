@@ -334,7 +334,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     Example:
 
     ```
-    ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --name <cluster_name> --workers <number>
+    ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
@@ -353,7 +353,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>Enter the {{site.data.keyword.cloud_notm}} zone ID that your Dedicated environment is configured to use.</td>
     </tr>
     <tr>
-    <td><code>--flavor <em>&lt;flavor&gt;</em></code></td>
+    <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
     <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
     </tr>
     <tr>

@@ -130,7 +130,7 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
    ```
-   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--label <key=value>]
+   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--label <key=value>]
    ```
    {: pre}
 
@@ -199,12 +199,12 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
    * Classic clusters:
      ```
-     ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
+     ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
      ```
      {: pre}
    * VPC clusters:
      ```
-     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
+     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
      ```
      {: pre}
 
@@ -424,7 +424,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 4. Add stand-alone worker nodes to the cluster. For bare metal flavors, specify `dedicated`.
    ```
-   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --flavor <flavor> --hardware <shared_or_dedicated>
+   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <flavor> --hardware <shared_or_dedicated>
    ```
    {: pre}
 

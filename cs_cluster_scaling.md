@@ -683,7 +683,7 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 
 1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
     ```
-    ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+    ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
