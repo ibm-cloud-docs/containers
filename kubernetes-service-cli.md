@@ -51,7 +51,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     ```
     {: pre}
 
-Have scripts that you want to update to use the beta formats? Check out the [`ibmcloud ks script update` command](#script_update).
+Have scripts that you want to update to use the beta formatting? Check out the [`ibmcloud ks script update` command](#script_update).
 {: tip}
 
 Check out the following changes between each version of the CLI plug-in:
