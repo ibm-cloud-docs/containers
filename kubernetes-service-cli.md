@@ -754,7 +754,7 @@ Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: Free clu
 <p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To create a classic cluster, use the [`ibmcloud ks cluster create classic` command](#cs_cluster_create) instead.</p>
 
 ```
-ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --machine-type WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --provider VPC-CLASSIC --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
+ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --provider VPC-CLASSIC --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
 ```
 {: pre}
 
@@ -787,7 +787,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.
 </dd>
 
-<dt><code>--machine-type <em>FLAVOR</em></code></dt>
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
 
 <dt><code>--provider <em>VPC-CLASSIC</em></code></dt>
@@ -822,7 +822,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 
 **Example**:
 ```
-ibmcloud ks cluster create vpc-classic --name mycluster --zone us-east-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --machine-type b2.4x16 --workers 3
+ibmcloud ks cluster create vpc-classic --name mycluster --zone us-east-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor b2.4x16 --workers 3
 ```
 {: pre}
 
@@ -2207,7 +2207,7 @@ Add a worker pool to a VPC on Classic cluster. No worker nodes are created until
 <p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To create a worker pool in a classic cluster, use the [`ibmcloud ks worker-pool create classic` command](#cs_worker_pool_create) instead.</p>
 
 ```
-ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <cluster_name_or_ID> --machine-type <flavor> --vpc-id <VPC ID> --size-per-zone <number_of_workers_per_zone> [--hardware (public|private)] [--label KEY1=VALUE1] [--disable-disk-encrypt] [-s] [--json]
+ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <cluster_name_or_ID> --flavor <flavor> --vpc-id <VPC ID> --size-per-zone <number_of_workers_per_zone> [--hardware (public|private)] [--label KEY1=VALUE1] [--disable-disk-encrypt] [-s] [--json]
 ```
 {: pre}
 
@@ -2228,7 +2228,7 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 <dt><code>--size-per-zone <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool. This value is required, and must be 1 or greater.</dd>
 
-<dt><code>--machine-type <em>FLAVOR</em></code></dt>
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
 
 <dt><code>--hardware <em>PUBLIC|PRIVATE</em></code></dt>
@@ -2249,7 +2249,7 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 
 **Example**:
 ```
-ibmcloud ks worker-pool create vpc-classic --name my_pool --cluster my_cluster --machine-type b2.4x16 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --size-per-zone 3
+ibmcloud ks worker-pool create vpc-classic --name my_pool --cluster my_cluster --flavor b2.4x16 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --size-per-zone 3
 ```
 {: pre}
 

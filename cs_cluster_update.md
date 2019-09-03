@@ -451,7 +451,7 @@ To update flavors:
           {: pre}
         * VPC clusters:
           ```
-          ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
+          ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
           ```
           {: pre}
 
@@ -717,7 +717,7 @@ To update stand-alone worker nodes to worker pools:
 
 2. Create a worker pool and decide on the flavor and the number of worker nodes that you want to add to the pool.
    ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 

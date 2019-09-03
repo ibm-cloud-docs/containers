@@ -130,7 +130,7 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
    ```
-   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--label <key=value>]
+   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--label <key=value>]
    ```
    {: pre}
 
@@ -204,7 +204,7 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
      {: pre}
    * VPC clusters:
      ```
-     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
+     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
      ```
      {: pre}
 
