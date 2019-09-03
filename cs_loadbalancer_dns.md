@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
 
@@ -45,7 +45,7 @@ Note that you currently cannot create host names for private NLBs.</dd>
 
 You can see all host names that are registered for NLB IPs in your cluster by running the following command.
 ```
-ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
 ```
 {: pre}
 
@@ -83,13 +83,13 @@ To create a host name for one or more NLB IP addresses:
 
 2. Register the IP by creating a DNS host name. To specify multiple IP addresses, use multiple `--ip` flags.
   ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
+  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
   ```
   {: pre}
 
 3. Verify that the host name is created.
   ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -173,7 +173,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 1. Get the name of your host name. In the output, note that the host has a monitor **Status** of `Unconfigured`.
   ```
-  ibmcloud ks nlb-dns-monitor-ls --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dns monitor ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -186,7 +186,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 2. Create a health check monitor for the host name. If you do not include a configuration parameter, the default value is used.
   ```
-  ibmcloud ks nlb-dns-monitor-configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
+  ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
   ```
   {: pre}
 
@@ -197,7 +197,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   </thead>
   <tbody>
   <tr>
-  <td><code>--cluster &lt;cluster_name_or_ID&gt;</code></td>
+  <td><code>-c, --cluster &lt;cluster_name_or_ID&gt;</code></td>
   <td>Required: The name or ID of the cluster where the host name is registered.</td>
   </tr>
   <tr>
@@ -261,13 +261,13 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
   Example command:
   ```
-  ibmcloud ks nlb-dns-monitor-configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+  ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
   ```
   {: pre}
 
 3. Verify that the health check monitor is configured with the correct settings.
   ```
-  ibmcloud ks nlb-dns-monitor-get --cluster <cluster_name_or_id> --nlb-host <host_name>
+  ibmcloud ks nlb-dns monitor get --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
   {: pre}
 
@@ -279,7 +279,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 4. View the health check status of the NLB IPs that are behind your host name.
   ```
-  ibmcloud ks nlb-dns-monitor-status --cluster <cluster_name_or_id> --nlb-host <host_name>
+  ibmcloud ks nlb-dns monitor status --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
   {: pre}
 
@@ -303,13 +303,13 @@ You can add and remove NLB IP addresses from host names that you have generated.
 
 If you later add more NLBs in other zones of your cluster to expose the same app, you can add the NLB IPs to the existing host name.
 ```
-ibmcloud ks nlb-dns-add --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ... --nlb-host <host_name>
+ibmcloud ks nlb-dns add --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ... --nlb-host <host_name>
 ```
 {: pre}
 
 You can also remove IP addresses of NLBs that you no longer want to be registered with a host name. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it.
 ```
-ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
+ibmcloud ks nlb-dns rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```
 {: pre}
 
@@ -319,18 +319,18 @@ ibmcloud ks nlb-dns-rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host 
 
 If you need to change your health monitor configuration, you can change specific settings. Include only the flags for the settings that you want to change.
 ```
-ibmcloud ks nlb-dns-monitor-configure --cluster <cluster_name_or_id> --nlb-host <host_name> --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
+ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
 ```
 {: pre}
 
 You can disable the health check monitor for a host name at any time by running the following command:
 ```
-ibmcloud ks nlb-dns-monitor-disable --cluster <cluster_name_or_id> --nlb-host <host_name>
+ibmcloud ks nlb-dns monitor disable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```
 {: pre}
 
 To re-enable a monitor for a host name, run the following command:
 ```
-ibmcloud ks nlb-dns-monitor-enable --cluster <cluster_name_or_id> --nlb-host <host_name>
+ibmcloud ks nlb-dns monitor enable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```
 {: pre}

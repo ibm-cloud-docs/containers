@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, help, debug
 
@@ -77,13 +77,13 @@ Review the options to debug your clusters and find the root causes for failures.
 1.  List your cluster and find the `State` of the cluster.
 
   ```
-  ibmcloud ks clusters
+  ibmcloud ks cluster ls
   ```
   {: pre}
 
 2.  Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](#debug_worker_nodes).
 
-    You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. 
+    You can view the current cluster state by running the `ibmcloud ks cluster ls` command and locating the **State** field. 
 {: shortdesc}
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
@@ -145,7 +145,7 @@ Review the options to debug your clusters and find the root causes for failures.
        <td>`Warning`</td>
        <td><ul><li>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the unavailable worker nodes.</li>
        <li>Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. [Resize your worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to add worker nodes to recover from a `Warning` state.</li>
-       <li>A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` to [check the **Master Status** for further debugging](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
+       <li>A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` to [check the **Master Status** for further debugging](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -165,8 +165,8 @@ Do not restart or reboot a worker node during a master outage. This action remov
 
 Review the options to debug your worker nodes and find the root causes for failures.
 
-<ol><li>If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.<p class="pre">ibmcloud ks workers --cluster <cluster_name_or_id></p></li>
-<li>Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
+<ol><li>If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.<p class="pre">ibmcloud ks worker ls --cluster <cluster_name_or_id></p></li>
+<li>Review the **State** and **Status** field for every worker node in your CLI output.<p>You can view the current worker node state by running the `ibmcloud ks worker ls --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
 {: shortdesc}
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
@@ -230,7 +230,7 @@ Review the options to debug your worker nodes and find the root causes for failu
   </tbody>
 </table>
 </p></li>
-<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker-get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
+<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
 </ol>
 
 <br />
@@ -258,13 +258,13 @@ Review common error messages and learn how to resolve them.
       <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or, you might have exceeded a limit in your IBM Cloud infrastructure account. To resolve, try one of the following options:
       <ul><li>Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.</li>
       <li>For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.</li>
-      <li>Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the <code>ibmcloud ks zone-network-set</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set).</li>
+      <li>Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the <code>ibmcloud ks zone network-set</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set).</li>
       <li>Contact your IBM Cloud infrastructure account manager to verify that you do not exceed an account limit, such as a global quota.</li>
       <li>Open an [IBM Cloud infrastructure support case](#ts_getting_help)</li></ul></td>
       </tr>
       <tr>
         <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
-        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. Run <code>ibmcloud ks vlans --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential-set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
+        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. Run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
       </tr>
       <tr>
         <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
@@ -281,26 +281,26 @@ Review common error messages and learn how to resolve them.
       <tr>
        <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
        <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
-       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks workers --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
+       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
        <ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_clusters#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
        <li>If you created the cluster with only the private service endpoint before you enabled your account for [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/resources?topic=resources-private-network-endpoints#getting-started), your workers cannot connect to the master. Try [setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private service endpoint only cluster after your account is updated, you can then disable the public service endpoint.</li>
        <li>If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
      </tr>
   <tr>
     <td>Worker not responding to soft reboot.</td>
-    <td>Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker-reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
+    <td>Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
   </tr>
       <tr>
   <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Worker not found. Review {{site.data.keyword.cloud_notm}} classic infrastructure user permissions</td>
   <td>The owner of the API key that is used to access the IBM Cloud infrastructure portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps:
   <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
-  <li>Run <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code> to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio. </li>
+  <li>Run <code>ibmcloud ks api-key info --cluster &lt;cluster_name_or_ID&gt;</code> to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio. </li>
   <li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.cloud_notm}} account that you currently use. </li>
   <li>Contact the owner of the {{site.data.keyword.cloud_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure or might be pending to be deleted. </li></ol>
   </br><strong>As the account owner</strong>, follow these steps:
   <ol><li>Review the [required permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-users#infra_access) to perform the action that previously failed. </li>
-  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key-reset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) command. </li>
-  <li>If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [<code>ibmcloud ks credential-unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key reset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) command. </li>
+  <li>If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [<code>ibmcloud ks credential unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
   </tr>
     </tbody>
   </table>
@@ -311,7 +311,7 @@ Review common error messages and learn how to resolve them.
 ## Reviewing master health
 {: #debug_master}
 
-Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 {: shortdesc} 
 
 **Master Health**<br>
@@ -424,6 +424,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

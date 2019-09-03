@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -128,22 +128,22 @@ Start by checking for error messages in the Ingress resource deployment events a
       {: note}
       * Classic clusters:
         ```
-        ibmcloud ks alb-configure-classic --albID <ALB_ID> --disable
+        ibmcloud ks alb configure classic --alb-id <ALB_ID> --disable
         ```
         {: pre}
 
         ```
-        ibmcloud ks alb-configure-classic --albID <ALB_ID> --enable
+        ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
         ```
         {: pre}
       * VPC clusters:
         ```
-        ibmcloud ks alb-configure-vpc-classic --albID <ALB_ID> --disable
+        ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
         ```
         {: pre}
 
         ```
-        ibmcloud ks alb-configure-vpc-classic --albID <ALB_ID> --enable
+        ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
         ```
         {: pre}
 
@@ -170,7 +170,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
 1. Get the IP addresses that your public ALBs are listening on.
     ```
-    ibmcloud ks albs --cluster <cluster_name_or_ID>
+    ibmcloud ks alb ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -215,7 +215,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
 3. Get the IBM-provided Ingress subdomain.
     ```
-    ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
     ```
     {: pre}
 
@@ -279,7 +279,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     1. Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
 
-    2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+    2. Check that the subdomain and TLS certificate are correct. To find the IBM provided Ingress subdomain and TLS certificate, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
     3.  Make sure that your app listens on the same path that is configured in the **path** section of your Ingress. If your app is set up to listen on the root path, use `/` as the path. If incoming traffic to this path must be routed to a different path that your app listens on, use the [rewrite paths](/docs/containers?topic=containers-ingress_annotation#rewrite-path) annotation.
 
@@ -298,7 +298,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 1. Get the name of the ALB with the unreachable IP address.
     ```
-    ibmcloud ks albs --cluster <cluster_name> | grep <ALB_IP>
+    ibmcloud ks alb ls --cluster <cluster_name> | grep <ALB_IP>
     ```
     {: pre}
 
@@ -452,6 +452,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

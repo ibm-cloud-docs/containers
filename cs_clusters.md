@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -36,37 +36,36 @@ Still getting started? Try out the [creating a Kubernetes cluster tutorial](/doc
 Have you created a cluster before and are just looking for quick example commands? Try these examples.
 *  **Free cluster**:
    ```
-   ibmcloud ks cluster-create --name my_cluster
+   ibmcloud ks cluster create classic --name my_cluster
    ```
    {: pre}
 *  **Standard cluster, shared virtual machine**:
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  **Standard cluster, bare metal**:
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  **Standard cluster, virtual machine with public and private service endpoints in a VRF-enabled account**:
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  **Standard cluster that uses private VLANs and the private service endpoint only**:
    ```
-   ibmcloud ks cluster-create --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
    ```
    {: pre}
 *   **For a multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
     ```
-    ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool1_name,pool2_name,...> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
     ```
     {: pre}
 
 <br />
-
 
 
 ## Prepare to create clusters at the account level
@@ -95,7 +94,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups).
   * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.cloud_notm}}. If you do not target a resource group, the default resource group is automatically targeted.
   * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
-  * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster-service-bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
+  * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster service bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
   * For VPC clusters, your cluster must be created in the same resource group as the VPC.
   * If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
   * Free clusters are created in the `default` resource group.
@@ -113,9 +112,9 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 
   * **Classic clusters only, non-VRF and non-service endpoint accounts**: If you do not set up your account to use VRF and service endpoints, you can create only classic clusters that use VLAN spanning to communicate with each other on the public and private network.
     * To use the public service endpoint only (run internet-facing workloads):
-      1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+      1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
     * To use a gateway device (extend your on-premises data center):
-      1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+      1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
       2. Configure a gateway device to connect your cluster to the on-premises network. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow required network traffic and to block unwanted network traffic.
       3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
@@ -250,7 +249,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
 5. Check if you have existing VLANs in the zones that you want to include in your cluster, and note the ID of the VLAN. If you do not have a public or private VLAN in one of the zones that you want to use in your cluster, {{site.data.keyword.containerlong_notm}} automatically creates these VLAN for you when you create the cluster.
    ```
-   ibmcloud ks vlans --zone <zone>
+   ibmcloud ks vlan ls --zone <zone>
    ```
    {: pre}
 
@@ -266,26 +265,26 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    * To create a cluster in which you can run internet-facing workloads, check to see whether a public and private VLAN exist. If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any of the private VLANs can be used with any of public VLANs because the routers all include `02a.dal10`.
    * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later through edge worker nodes, or that extends your on-premises data center and provides limited public access through a gateway device, check to see whether a private VLAN exists. If you have a private VLAN, note the ID.
 
-6. Run the `cluster-create` command. By default, the worker node disks are AES 256-bit encrypted.
+6. Run the `cluster create classic` command. By default, the worker node disks are AES 256-bit encrypted.
    * To create a cluster in which you can run internet-facing workloads:
      ```
-     ibmcloud ks cluster-create --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint] [--public-service-endpoint] [--disable-disk-encrypt]
+     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version <major.minor.patch> [--private-service-endpoint] [--public-service-endpoint] [--disable-disk-encrypt]
      ```
      {: pre}
 
    * To create a cluster that extends your on-premises data center on the private network, with the option of adding limited public access later through edge worker nodes:
      ```
-     ibmcloud ks cluster-create --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --private-service-endpoint [--public-service-endpoint] [--disable-disk-encrypt]
+     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --private-service-endpoint [--public-service-endpoint] [--disable-disk-encrypt]
      ```
      {: pre}
    * To create a cluster that extends your on-premises data center and provides limited public access through a gateway device:
      ```
-     ibmcloud ks cluster-create --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt]
+     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt]
      ```
      {: pre}
 
    <table>
-   <caption>cluster-create components</caption>
+   <caption>cluster create classic components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
    </thead>
@@ -299,7 +298,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID where you want to create your cluster that you chose earlier.</td>
    </tr>
    <tr>
-   <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
+   <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
    <td>Specify the flavor for your worker node that you chose earlier.</td>
    </tr>
    <tr>
@@ -334,11 +333,11 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    </tr>
    <tr>
    <td><code>--private-service-endpoint</code></td>
-   <td>**In [VRF-enabled accounts](/docs/resources?topic=resources-private-network-endpoints#getting-started)**: Enable the private service endpoint so that your Kubernetes master and the worker nodes can communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</td>
+   <td>**In [VRF-enabled accounts](/docs/resources?topic=resources-private-network-endpoints#getting-started)**: Enable the private service endpoint so that your Kubernetes master and the worker nodes can communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
    </tr>
    <tr>
    <td><code>--public-service-endpoint</code></td>
-   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.</td>
+   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
    </tr>
    <tr>
    <td><code>--disable-disk-encrypt</code></td>
@@ -348,14 +347,14 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
 6. Verify that the creation of the cluster was requested. For virtual machines, it can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account. Bare metal physical machines are provisioned by manual interaction with IBM Cloud infrastructure, and can take more than one business day to complete.
    ```
-   ibmcloud ks clusters
+   ibmcloud ks cluster ls
    ```
    {: pre}
 
    When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
-   Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-   my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.14.6      Default
+   Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
+   mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.14.6      Default             classic
    ```
    {: screen}
 
@@ -364,7 +363,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
 7. Check the status of the worker nodes.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -459,14 +458,14 @@ To create a VPC on Classic cluster:
 
 4. [Create a VPC](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-3-create-a-vpc-and-save-the-vpc-id) in the same region where you want to create the cluster.
 5. [Create a subnet for your VPC](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-4-create-a-subnet-and-save-the-subnet-id). If you want to create a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone), repeat this step to create additional subnets in all of the zones that you want to include in your cluster. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
-6.  Create the cluster in your VPC. You can use the `cluster-create-vpc-classic` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
+6.  Create the cluster in your VPC. You can use the `cluster create vpc-classic` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```
-    ibmcloud ks cluster-create-vpc-classic --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--kube-version <major.minor.patch>] --provider vpc-classic [--workers <number_workers_per_zone>] [--disable-public-service-endpoint]
+    ibmcloud ks cluster create vpc-classic --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--kube-version <major.minor.patch>] --provider vpc-classic [--workers <number_workers_per_zone>] [--disable-public-service-endpoint]
     ```
     {: pre}
 
     <table>
-    <caption>cluster-create components</caption>
+    <caption>cluster create classic components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
@@ -482,7 +481,7 @@ To create a VPC on Classic cluster:
     </tr>
     <tr>
     <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>Specify the {{site.data.keyword.cloud_notm}} zone where you want to create your cluster. Make sure that you use a zone that matches the metro city location that you selected when you created your VPC and that you have an existing VPC subnet for that zone. For example, if you created your VPC in the Dallas metro city, your zone must be set to <code>us-south-1</code>, <code>us-south-2</code>, or <code>us-south-3</code>. To list available VPC on Classic cluster zones, run <code>ibmcloud ks zones --provider vpc-classic</code>. Note that when you select a zone outside of your country, you might require legal authorization before data can be physically stored in a foreign country.</td>
+    <td>Specify the {{site.data.keyword.cloud_notm}} zone where you want to create your cluster. Make sure that you use a zone that matches the metro city location that you selected when you created your VPC and that you have an existing VPC subnet for that zone. For example, if you created your VPC in the Dallas metro city, your zone must be set to <code>us-south-1</code>, <code>us-south-2</code>, or <code>us-south-3</code>. To list available VPC on Classic cluster zones, run <code>ibmcloud ks zone ls --provider vpc-classic</code>. Note that when you select a zone outside of your country, you might require legal authorization before data can be physically stored in a foreign country.</td>
     </tr>
     <tr>
     <td><code>--vpc-id <em>&lt;vpc_ID&gt;</em></code></td>
@@ -494,7 +493,7 @@ To create a VPC on Classic cluster:
     </tr>
     <tr>
     <td><code>--flavor <em>&lt;worker_flavor&gt;</em></code></td>
-    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in VPC on Classic clusters can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zones --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt;</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
+    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in VPC on Classic clusters can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt;</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
@@ -516,14 +515,14 @@ To create a VPC on Classic cluster:
     </tbody></table>
 7. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 
     When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After the Kubernetes master is ready, your worker nodes are set up.
     ```
-    Name         ID                                   State      Created          Workers   Zone       Version     Resource Group Name
-    my_cluster   paf97e8843e29941b49c598f516de72101   deployed   20170201162433   1         mil01      1.14.6      Default
+    Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.14.6      Default             classic
     ```
     {: screen}
 
@@ -532,7 +531,7 @@ To create a VPC on Classic cluster:
 
 8. Check the status of the worker nodes.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -573,7 +572,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 2. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
    1. Get the command to set the environment variable and download the Kubernetes configuration files.
       ```
-      ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+      ibmcloud ks cluster config --cluster <cluster_name_or_ID>
       ```
       {: pre}
       When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
@@ -627,7 +626,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 2. Get the private service endpoint URL and port for your cluster.
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -688,7 +687,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   * If you also enabled the public service endpoint, you already have access to the master.
     1. Get the command to set the environment variable and download the Kubernetes configuration files.
         ```
-        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
         When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
@@ -745,7 +744,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 7. Get the command to set the environment variable and download the Kubernetes configuration files.
     ```
-    ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
     {: pre}
     When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
@@ -763,7 +762,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
     ```
     {: pre}
   2. Edit your Kubernetes configuration file to add the word `private` to the service endpoint URL. For example, in the Kubernetes configuration file `kube-config-prod-dal10-mycluster.yml`, the server field might look like `server: https://c1.us-east.containers.cloud.ibm.com:30426`. You can change this URL to the private service endpoint URL by changing the server field to `server: https://c1.private.us-east.containers.cloud.ibm.com:30426`.
-  3. Repeat these steps each time that you run `ibmcloud ks cluster-config`.
+  3. Repeat these steps each time that you run `ibmcloud ks cluster config`.
 
 9. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 

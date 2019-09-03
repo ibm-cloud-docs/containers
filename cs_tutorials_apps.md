@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks
 
@@ -231,14 +231,14 @@ To deploy the app:
     2.  Get the public IP address for the worker node in the cluster.
 
         ```
-        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         Example output:
 
         ```
-        ibmcloud ks workers --cluster pr_firm_cluster
+        ibmcloud ks worker ls --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
@@ -363,7 +363,7 @@ As defined in the configuration script, Kubernetes can use an availability check
 6.  Now that the deployment work is done you can open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
 
   ```
-  ibmcloud ks workers --cluster <cluster_name_or_ID>
+  ibmcloud ks worker ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -682,7 +682,7 @@ Ready to delete what you created? You can use the configuration script to delete
   If you do not want to keep the cluster, you can delete that too.
 
   ```
-  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 

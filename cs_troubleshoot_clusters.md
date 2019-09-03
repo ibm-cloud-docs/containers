@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -41,10 +41,10 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 {: tsSymptoms}
 You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
-* Provision workers: `ibmcloud ks cluster-create`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
-* Reload workers: `ibmcloud ks worker-reload` or `ibmcloud ks worker-update`
-* Reboot workers: `ibmcloud ks worker-reboot`
-* Delete workers: `ibmcloud ks cluster-rm`, `ibmcloud ks worker-rm`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+* Provision workers: `ibmcloud ks cluster create classic`, `ibmcloud ks worker-pool rebalance`, or `ibmcloud ks worker-pool resize`
+* Reload workers: `ibmcloud ks worker reload` or `ibmcloud ks worker update`
+* Reboot workers: `ibmcloud ks worker reboot`
+* Delete workers: `ibmcloud ks cluster rm`, `ibmcloud ks worker rm`, `ibmcloud ks worker-pool rebalance`, or `ibmcloud ks worker-pool resize`
 
 However, you receive an error message similar to one of the following.
 
@@ -96,7 +96,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 1.  Identify what user credentials are used for the region and resource group's infrastructure permissions.
     1.  Check the API key for a region and resource group of the cluster.
         ```
-        ibmcloud ks api-key-info --cluster <cluster_name_or_ID>
+        ibmcloud ks api-key info --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -110,7 +110,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         {: screen}
     2.  Check if the infrastructure account for the region and resource group is manually set to use a different IBM Cloud infrastructure account.
         ```
-        ibmcloud ks credential-get --region <us-south>
+        ibmcloud ks credential get --region <us-south>
         ```
         {: pre}
 
@@ -130,7 +130,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 2.  Validate the infrastructure permissions that the user has.
     1.  List the suggested and required infrastructure permissions for the region and resource group.
         ```
-        ibmcloud ks infra-permissions-get --region <region>
+        ibmcloud ks infra-permissions get --region <region>
         ```
         {: pre}
 
@@ -142,16 +142,16 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster.
     1.  For example, you might try to a delete a worker node.
         ```
-        ibmcloud ks worker-rm --cluster <cluster_name_or_ID> --workers <worker_node_ID>
+        ibmcloud ks worker rm --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
     2.  Check to see if the worker node is removed.
         ```
-        ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
+        ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_node_ID>
         ```
         {: pre}
 
-        Example output if the worker node removal is successful. The `worker-get` operation fails because the worker node is deleted. The infrastructure permissions are correctly set up.
+        Example output if the worker node removal is successful. The `worker get` operation fails because the worker node is deleted. The infrastructure permissions are correctly set up.
         ```
         FAILED
         The specified worker node could not be found. (E0011)
@@ -169,10 +169,10 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 
 {: tsSymptoms}
 You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
-* Provision clusters and workers: `ibmcloud ks cluster-create`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
-* Reload workers: `ibmcloud ks worker-reload` or `ibmcloud ks worker-update`
-* Reboot workers: `ibmcloud ks worker-reboot`
-* Delete clusters and workers: `ibmcloud ks cluster-rm`, `ibmcloud ks worker-rm`, `ibmcloud ks worker-pool-rebalance`, or `ibmcloud ks worker-pool-resize`
+* Provision clusters and workers: `ibmcloud ks cluster create classic`, `ibmcloud ks worker-pool rebalance`, or `ibmcloud ks worker-pool resize`
+* Reload workers: `ibmcloud ks worker reload` or `ibmcloud ks worker update`
+* Reboot workers: `ibmcloud ks worker reboot`
+* Delete clusters and workers: `ibmcloud ks cluster rm`, `ibmcloud ks worker rm`, `ibmcloud ks worker-pool rebalance`, or `ibmcloud ks worker-pool resize`
 
 However, you receive an error message similar to the following.
 ```
@@ -200,19 +200,19 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 2. In the **API Keys** section, find or create a classic infrastructure API key.   
 3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
     ```
-    ibmcloud ks credential-set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
+    ibmcloud ks credential set --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
     ```
     {: pre}
 4. Verify that the correct credentials are set.
     ```
-    ibmcloud ks credential-get --region <region>
+    ibmcloud ks credential get --region <region>
     ```
     Example output:
     ```
     Infrastructure credentials for user name user@email.com set for resource group default.
     ```
     {: screen}
-5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key-reset --region <region>` in each region where you have clusters.
+5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key reset --region <region>` in each region where you have clusters.
 
 <br />
 
@@ -271,7 +271,7 @@ To access resources in the cluster, your worker nodes must be able to communicat
 {: tsResolve}
 1. List the worker nodes in your cluster and verify that your worker nodes are not stuck in a `Reloading` state.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_id>
+   ibmcloud ks worker ls --cluster <cluster_name_or_id>
    ```
    {: pre}
 
@@ -286,8 +286,8 @@ To access resources in the cluster, your worker nodes must be able to communicat
 {: #cs_cluster_access}
 
 {: tsSymptoms}
-* You are not able to find a cluster. When you run `ibmcloud ks clusters`, the cluster is not listed in the output.
-* You are not able to work with a cluster. When you run `ibmcloud ks cluster-config` or other cluster-specific commands, the cluster is not found.
+* You are not able to find a cluster. When you run `ibmcloud ks cluster ls`, the cluster is not listed in the output.
+* You are not able to work with a cluster. When you run `ibmcloud ks cluster config` or other cluster-specific commands, the cluster is not found.
 
 
 {: tsCauses}
@@ -348,7 +348,7 @@ To check your user access permissions:
                      Resource
         ```
         {: screen}
-    2. Look for a policy that has a **Service Name** value of `containers-kubernetes` and a **Service Instance** value of the cluster's ID. You can find a cluster ID by running `ibmcloud ks cluster-get --cluster <cluster_name>`. For example, this policy indicates that a user has access to a specific cluster:
+    2. Look for a policy that has a **Service Name** value of `containers-kubernetes` and a **Service Instance** value of the cluster's ID. You can find a cluster ID by running `ibmcloud ks cluster get --cluster <cluster_name>`. For example, this policy indicates that a user has access to a specific cluster:
         ```
         Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
         Roles:       Administrator
@@ -372,7 +372,7 @@ To check your user access permissions:
 
       2. Target the cluster.
           ```
-          ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+          ibmcloud ks cluster config --cluster <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -385,7 +385,7 @@ To check your user access permissions:
 
       2. Target the cluster.
         ```
-        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -398,7 +398,7 @@ To check your user access permissions:
           {: pre}
         3. Target the cluster.
           ```
-          ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+          ibmcloud ks cluster config --cluster <cluster_name_or_ID>
           ```
           {: pre}
 
@@ -462,7 +462,7 @@ The cluster might be provisioned in an IBM Cloud infrastructure account that is 
 Consider the following scenario to understand how clusters might become orphaned.
 1.  You have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account.
 2.  You create a cluster named `Cluster1`. The worker nodes and other infrastructure resources are provisioned into the infrastructure account that comes with your Pay-As-You-Go account.
-3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure account. You use the `ibmcloud ks credential-set` command to change the IBM Cloud infrastructure credentials to use your team account.
+3.  Later, you find out that your team uses a legacy or shared IBM Cloud infrastructure account. You use the `ibmcloud ks credential set` command to change the IBM Cloud infrastructure credentials to use your team account.
 4.  You create another cluster named `Cluster2`. The worker nodes and other infrastructure resources are provisioned into the team infrastructure account.
 5.  You notice that `Cluster1` needs a worker node update, a worker node reload, or you just want to clean it up by deleting it. However, because `Cluster1` was provisioned into a different infrastructure account, you cannot modify its infrastructure resources. `Cluster1` is orphaned.
 6.  You follow the resolution steps in the following section, but do not set your infrastructure credentials back to your team account. You can delete `Cluster1`, but now `Cluster2` is orphaned.
@@ -483,13 +483,13 @@ Consider the following scenario to understand how clusters might become orphaned
     3.  From the infrastructure navigation pane, click **Devices > Device List**.
     4.  Search for the worker node ID that you previously noted.
     5.  If you do not find the worker node ID, the worker node is not provisioned into this infrastructure account. Switch to a different infrastructure account and try again.
-3.  Use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
+3.  Use the `ibmcloud ks credential set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) to change your infrastructure credentials to the account that the cluster worker nodes are provisioned in, which you found in the previous step.
     If you no longer have access to and cannot get the infrastructure credentials, you must open an {{site.data.keyword.cloud_notm}} support case to remove the orphaned cluster.
     {: note}
 4.  [Delete the cluster](/docs/containers?topic=containers-remove).
 5.  If you want, reset the infrastructure credentials to the previous account. Note that if you created clusters with a different infrastructure account than the account that you switch to, you might orphan those clusters.
-    * To set credentials to a different infrastructure account, use the `ibmcloud ks credential-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
-    * To use the default credentials that come with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential-unset --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset).
+    * To set credentials to a different infrastructure account, use the `ibmcloud ks credential set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
+    * To use the default credentials that come with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, use the `ibmcloud ks credential unset --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset).
 
 <br />
 
@@ -544,7 +544,7 @@ If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `
 The OpenVPN connection between the master node and worker nodes is not functioning properly.
 
 {: tsResolve}
-1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 2. Restart the OpenVPN client pod.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -559,7 +559,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 {: #cs_duplicate_services}
 
 {: tsSymptoms}
-When you run `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
 
 ```
 Multiple services with the same name were found.
@@ -571,7 +571,7 @@ Run 'ibmcloud service list' to view available Bluemix service instances...
 Multiple service instances might have the same name in different regions.
 
 {: tsResolve}
-Use the service GUID instead of the service instance name in the `ibmcloud ks cluster-service-bind` command.
+Use the service GUID instead of the service instance name in the `ibmcloud ks cluster service bind` command.
 
 1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
@@ -589,7 +589,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
   {: screen}
 3. Bind the service to the cluster again.
   ```
-  ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
+  ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
   ```
   {: pre}
 
@@ -600,7 +600,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
 {: #cs_not_found_services}
 
 {: tsSymptoms}
-When you run `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
 
 ```
 Binding service to a namespace...
@@ -650,7 +650,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 5. If this does not resolve the problem, then the {{site.data.keyword.cloud_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-getting-customer-support) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
    1. Retrieve the cluster ID.
       ```
-      ibmcloud ks clusters
+      ibmcloud ks cluster ls
       ```
       {: pre}
 
@@ -668,7 +668,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 {: #cs_service_keys}
 
 {: tsSymptoms}
-When you run `ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
 
 ```
 This service doesn't support creation of keys
@@ -719,7 +719,7 @@ Manually update the reference of the private IP address to point to the correct 
 1.  Confirm that you have two worker nodes with the same **Private IP** address. Note the **Private IP** and **ID** of the deleted worker.
 
   ```
-  ibmcloud ks workers --cluster <cluster_name_or_id>
+  ibmcloud ks worker ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -755,7 +755,7 @@ Manually update the reference of the private IP address to point to the correct 
 5.  Reboot the worker node that was not deleted.
 
   ```
-  ibmcloud ks worker-reboot --cluster <cluster_name_or_id> --worker <worker_id>
+  ibmcloud ks worker reboot --cluster <cluster_name_or_id> --worker <worker_id>
   ```
   {: pre}
 
@@ -792,7 +792,7 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
 2.  Refresh the Kubernetes master to restore it.
 
     ```
-    ibmcloud ks apiserver-refresh
+    ibmcloud ks cluster master refresh
     ```
     {: pre}
 
@@ -814,8 +814,8 @@ If you just created the cluster, the worker nodes might still be configuring. If
 {: tsResolve}
 
 You can try one of the following solutions:
-  - Check the status of your cluster by running `ibmcloud ks clusters`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks workers --cluster <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans) by running `ibmcloud ks vlans --zone <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
+  - Check the status of your cluster by running `ibmcloud ks cluster ls`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks worker ls --cluster <cluster_name>`.
+  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans) by running `ibmcloud ks vlan ls --zone <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
 
@@ -828,7 +828,7 @@ When you created a cluster, you received an error message similar to the followi
 
 
 ```
-Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster-pull-secret-apply'.
+Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster pull-secret apply'.
 ```
 {: screen}
 
@@ -845,7 +845,7 @@ Steps:
     ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
     ```
     {: pre}
-2.  [Use the `ibmcloud ks cluster-pull-secret-apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
+2.  [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
 
 <br />
 
@@ -922,7 +922,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
     ```
     {: screen}
 3.  If no image pull secrets are listed, set up the image pull secret in your namespace.
-    1.  Verify that the `default` namespace has `icr-io` image pull secrets for each regional registry that you want to use. If no `icr-io` secrets are listed in the namespace, [use the `ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) to create the image pull secrets in the `default` namespace.
+    1.  Verify that the `default` namespace has `icr-io` image pull secrets for each regional registry that you want to use. If no `icr-io` secrets are listed in the namespace, [use the `ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) to create the image pull secrets in the `default` namespace.
         ```
         kubectl get secrets -n default | grep "icr-io"
         ```
@@ -1011,7 +1011,7 @@ The following steps assume that the API key stores the credentials of a service 
         {: pre}
         1.  Re-create the cluster service ID, {{site.data.keyword.cloud_notm}} IAM policies, API key, and image pull secrets for containers that run in the `default` Kubernetes namespace.
             ```
-            ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
+            ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
             ```
             {: pre}
         2.  Re-create your deployment in the `default` Kubernetes namespace. If you still see an authorization error message, repeat Steps 1-5 with the new image pull secrets. If you still cannot log in, [contact the IBM team on Slack, or open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
@@ -1119,14 +1119,14 @@ If this cluster is an existing one, check your cluster capacity.
     1.  Review the current sizes and flavors of your worker pools to decide which one to resize.
 
         ```
-        ibmcloud ks worker-pools
+        ibmcloud ks worker-pool ls
         ```
         {: pre}
 
     2.  Resize your worker pools to add more nodes to each zone that the pool spans.
 
         ```
-        ibmcloud ks worker-pool-resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ibmcloud ks worker-pool resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
@@ -1331,6 +1331,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

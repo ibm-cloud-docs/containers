@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -71,9 +71,9 @@ Review the following reasons why your cluster logs are not appearing and the cor
   <tr>
     <td>If you specified a space at cluster creation, the account owner does not have Manager, Developer, or Auditor permissions to that space.</td>
       <td>To change access permissions for the account owner:
-      <ol><li>To find out who the account owner for the cluster is, run <code>ibmcloud ks api-key-info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
+      <ol><li>To find out who the account owner for the cluster is, run <code>ibmcloud ks api-key info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
       <li>To grant that account owner Manager, Developer, or Auditor {{site.data.keyword.containerlong_notm}} access permissions to the space, see <a href="/docs/containers?topic=containers-users">Managing cluster access</a>.</li>
-      <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging-config-refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
+      <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
     </tr>
     <tr>
       <td>You have a logging configuration for your app with a symlink in your app path.</td>
@@ -208,6 +208,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

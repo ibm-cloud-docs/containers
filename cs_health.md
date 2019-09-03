@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -108,7 +108,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
   ```
-  ibmcloud cr region-set global
+  ibmcloud cr region set global
   ```
   {: pre}
 
@@ -374,7 +374,7 @@ The following table shows the different options that you have when you configure
 
 4. Create a log forwarding configuration.
     ```
-    ibmcloud ks logging-config-create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
+    ibmcloud ks logging config create --cluster <cluster_name_or_ID> --logsource <log_source> --namespace <kubernetes_namespace> --hostname <log_server_hostname_or_IP> --port <log_server_port> --type syslog --app-containers <container1,2> --app-paths <paths_to_logs> --syslog-protocol <protocol> --skip-validation
     ```
     {: pre}
 
@@ -406,7 +406,7 @@ The following steps are general instructions. Prior to using the container in a 
 
 6. Create a log forwarding configuration.
     ```
-    ibmcloud ks logging-config-create --cluster <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
+    ibmcloud ks logging config create --cluster <cluster name or id> --logsource <log source> --type syslog --syslog-protocol tls --hostname <ip address of syslog server> --port <port for syslog server, 514 is default> --ca-cert <secret name> --verify-mode <defaults to verify-none>
     ```
     {: pre}
 
@@ -433,7 +433,7 @@ To forward Kubernetes API audit logs:
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
-    ibmcloud ks apiserver-config-set audit-webhook --cluster <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
     ```
     {: pre}
 
@@ -469,7 +469,7 @@ To forward Kubernetes API audit logs:
 2. Verify that log forwarding was enabled by viewing the URL for the remote logging service.
 
     ```
-    ibmcloud ks apiserver-config-get audit-webhook <cluster_name_or_ID>
+    ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -483,7 +483,7 @@ To forward Kubernetes API audit logs:
 3. Apply the configuration update by restarting the Kubernetes master.
 
     ```
-    ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -492,14 +492,14 @@ To forward Kubernetes API audit logs:
     2. Disable the webhook back-end configuration for the cluster's API server.
 
         ```
-        ibmcloud ks apiserver-config-unset audit-webhook <cluster_name_or_ID>
+        ibmcloud ks cluster master audit-webhook unset --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
     3. Apply the configuration update by restarting the Kubernetes master.
 
         ```
-        ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -560,27 +560,27 @@ You can choose which logs to forward to your external server by filtering out sp
 
 1. Create a logging filter.
   ```
-  ibmcloud ks logging-filter-create --cluster <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging filter create --cluster <cluster_name_or_ID> --type <log_type> --logging-configs <configs> --namespace <kubernetes_namespace> --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 2. View the log filter that you created.
 
   ```
-  ibmcloud ks logging-filter-get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
+  ibmcloud ks logging filter get --cluster <cluster_name_or_ID> --id <filter_ID> --show-matching-configs
   ```
   {: pre}
 
 3. Update the log filter that you created.
   ```
-  ibmcloud ks logging-filter-update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
+  ibmcloud ks logging filter update --cluster <cluster_name_or_ID> --id <filter_ID> --type <server_type> --logging-configs <configs> --namespace <kubernetes_namespace --container <container_name> --level <logging_level> --regex-message <message>
   ```
   {: pre}
 
 4. Delete a log filter that you created.
 
   ```
-  ibmcloud ks logging-filter-rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
+  ibmcloud ks logging filter rm --cluster <cluster_name_or_ID> --id <filter_ID> [--all]
   ```
   {: pre}
 
@@ -592,20 +592,20 @@ You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 * To list all of the logging configurations in a cluster:
   ```
-  ibmcloud ks logging-config-get --cluster <cluster_name_or_ID>
+  ibmcloud ks logging config get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 * To list the logging configurations for one type of log source:
   ```
-  ibmcloud ks logging-config-get --cluster <cluster_name_or_ID> --logsource <source>
+  ibmcloud ks logging config get --cluster <cluster_name_or_ID> --logsource <source>
   ```
   {: pre}
 
 **Updating**</br>
 You can update a logging configuration that you already created:
 ```
-ibmcloud ks logging-config-update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
+ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
 ```
 {: pre}
 
@@ -614,13 +614,13 @@ You can stop forwarding logs by deleting one or all of the logging configuration
 
 * To delete one logging configuration:
   ```
-  ibmcloud ks logging-config-rm --cluster <cluster_name_or_ID> --id <log_config_ID>
+  ibmcloud ks logging config rm --cluster <cluster_name_or_ID> --id <log_config_ID>
   ```
   {: pre}
 
 * To delete all of the logging configurations:
   ```
-  ibmcloud ks logging-config-rm --cluster <my_cluster> --all
+  ibmcloud ks logging config rm --cluster <my_cluster> --all
   ```
   {: pre}
 
@@ -652,7 +652,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 3. Through the CLI, make a request for a snapshot of your master logs.
 
   ```
-  ibmcloud ks logging-collect --cluster <cluster name or ID> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key>
+  ibmcloud ks logging collect --cluster <cluster name or ID> --cos-bucket <COS_bucket_name> --cos-endpoint <location_of_COS_bucket> --hmac-key-id <HMAC_access_key_ID> --hmac-key <HMAC_access_key>
   ```
   {: pre}
 
@@ -663,7 +663,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
     </thead>
     <tbody>
       <tr>
-        <td><code>--cluster <em>&lt;cluster_name_or_ID&gt;</em></code></td>
+        <td><code>-c, --cluster <em>&lt;cluster_name_or_ID&gt;</em></code></td>
         <td>The name or ID of the cluster.</td>
       </tr>
       <tr>
@@ -688,25 +688,25 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   Example command and response:
 
   ```
-  ibmcloud ks logging-collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
+  ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endpoint s3-api.us-geo.objectstorage.softlayer.net --hmac-key-id e2e7f5c9fo0144563c418dlhi3545m86 --hmac-key c485b9b9fo4376722f692b63743e65e1705301ab051em96j
   There is no specified log type. The default master will be used.
   Submitting log collection request for master logs for cluster mycluster...
   OK
-  The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging-collect-status mycluster.
+  The log collection request was successfully submitted. To view the status of the request run ibmcloud ks logging collect-status mycluster.
   ```
   {: screen}
 
 4. Check the status of your request. It can take some time for the snapshot to complete, but you can check to see whether your request is successfully being completed or not. You can find the name of the file that contains your master logs in the response and use the {{site.data.keyword.cloud_notm}} console to download the file.
 
   ```
-  ibmcloud ks logging-collect-status --cluster <cluster_name_or_ID>
+  ibmcloud ks logging collect-status --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
   Example output:
 
   ```
-  ibmcloud ks logging-collect-status --cluster mycluster
+  ibmcloud ks logging collect-status --cluster mycluster
   Getting the status of the last log collection request for cluster mycluster...
   OK
   State     Start Time             Error   Log URLs
@@ -771,9 +771,9 @@ To avoid conflicts when using metrics services, be sure that clusters across res
   <dd><p class="deprecated">Previously, you could collect metrics by using {{site.data.keyword.monitoringlong_notm}}. As of 30 June 2019, you cannot provision new {{site.data.keyword.monitoringlong_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 October 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.mon_full_notm}}.</p>
   </dd>
 
-  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.cloud_notm}} console and output of <code>ibmcloud ks cluster-get</code></dt>
+  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.cloud_notm}} console and output of <code>ibmcloud ks cluster get</code></dt>
   <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.cloud_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
-  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.cloud_notm}} console and in the output of `ibmcloud ks cluster-get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
+  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.cloud_notm}} console and in the output of `ibmcloud ks cluster get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
 
 </dl>
 
@@ -786,14 +786,14 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might occur.
 {:shortdesc}
 
-To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get). Include the `--showResources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
+To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get). Include the `--show-resources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
 You can review information about the overall cluster, the IBM-managed master, and your worker nodes. To troubleshoot your cluster and worker nodes, see [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).
 
 ### Cluster states
 {: #states_cluster}
 
-You can view the current cluster state by running the `ibmcloud ks clusters` command and locating the **State** field. 
+You can view the current cluster state by running the `ibmcloud ks cluster ls` command and locating the **State** field. 
 {: shortdesc}
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
@@ -855,7 +855,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
        <td>`Warning`</td>
        <td><ul><li>At least one worker node in the cluster is not available, but other worker nodes are available and can take over the workload. Try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the unavailable worker nodes.</li>
        <li>Your cluster has zero worker nodes, such as if you created a cluster without any worker nodes or manually removed all the worker nodes from the cluster. [Resize your worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to add worker nodes to recover from a `Warning` state.</li>
-       <li>A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` to [check the **Master Status** for further debugging](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
+       <li>A control plane operation for your cluster failed. View the cluster in the console or run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` to [check the **Master Status** for further debugging](/docs/containers?topic=containers-cs_troubleshoot#debug_master).</li></ul></td>
     </tr>
    </tbody>
  </table>
@@ -866,7 +866,7 @@ You can view the current cluster state by running the `ibmcloud ks clusters` com
 ### Master states
 {: #states_master}
 
-Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>`.
+Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 {: shortdesc} 
 
 **Master Health**<br>
@@ -920,7 +920,7 @@ The **Master Status** provides details of what operation from the master state i
 ### Worker node states
 {: #states_workers}
 
-You can view the current worker node state by running the `ibmcloud ks workers --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
+You can view the current worker node state by running the `ibmcloud ks worker ls --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
 {: shortdesc}
 
 <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
@@ -1083,19 +1083,19 @@ To configure Autorecovery:
    </tr>
    <tr>
    <td><code>checknode.json</code></td>
-   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
+   <td>Defines a Kubernetes API node check that checks whether each worker node is in the <code>Ready</code> state. The check for a specific worker node counts as a failure if the worker node is not in the <code>Ready</code> state. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker reload</code>.<br></br>The node check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.</td>
    </tr>
    <tr>
    <td><code>checkpod.json</code></td>
    <td>
-   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker-reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
+   Defines a Kubernetes API pod check that checks the total percentage of <code>NotReady</code> pods on a worker node based on the total pods that are assigned to that worker node. The check for a specific worker node counts as a failure if the total percentage of <code>NotReady</code> pods is greater than the defined <code>PodFailureThresholdPercent</code>. The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is reloaded. This action is equivalent to running <code>ibmcloud ks worker reload</code>. For example, the default <code>PodFailureThresholdPercent</code> is 50%. If the percentage of <code>NotReady</code> pods is greater than 50% three consecutive times, the worker node is reloaded. <br></br>By default, pods in all namespaces are checked. To restrict the check to only pods in a specified namespace, add the <code>Namespace</code> field to the check. The pod check is enabled until you set the <b>Enabled</b> field to <code>false</code> or remove the check.
    </td>
    </tr>
    <tr>
    <td><code>checkhttp.json</code></td>
    <td>Defines an HTTP check that checks if an HTTP server that runs on your worker node is healthy. To use this check, you must deploy an HTTP server on every worker node in your cluster by using a [daemon set ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/). You must implement a health check that is available at the <code>/myhealth</code> path and that can verify whether your HTTP server is healthy. You can define other paths by changing the <code>Route</code> parameter. If the HTTP server is healthy, you must return the HTTP response code that is defined in <code>ExpectedStatus</code>. The HTTP server must be configured to listen on the private IP address of the worker node. You can find the private IP address by running <code>kubectl get nodes</code>.<br></br>
    For example, consider two nodes in a cluster that have the private IP addresses 10.10.10.1 and 10.10.10.2. In this example, two routes are checked for a 200 HTTP response: <code>http://10.10.10.1:80/myhealth</code> and <code>http://10.10.10.2:80/myhealth</code>.
-   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker-reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
+   The check in the example YAML runs every 3 minutes. If it fails three consecutive times, the worker node is rebooted. This action is equivalent to running <code>ibmcloud ks worker reboot</code>.<br></br>The HTTP check is disabled until you set the <b>Enabled</b> field to <code>true</code>.</td>
    </tr>
    </tbody>
    </table>

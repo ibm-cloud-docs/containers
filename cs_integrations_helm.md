@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-08-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -209,9 +209,9 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
 2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
 3. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that you want to install in your cluster. If you do not need a specific version, use the latest one. In the digest image row, click the vertical ellipsis action menu, and then click **Show Pull Command** to copy the pull command.
-4. Pull the Tiller image from the public Google Container Registry to your local machine.
+4. Pull the Tiller image from the public Google Container Registry to your local machine. Include the image tag that you copied in the previous step.
    ```
-   docker pull gcr.io/kubernetes-helm/tiller:v2.11.0
+   docker pull <tiller_image>
    ```
    {: pre}
 

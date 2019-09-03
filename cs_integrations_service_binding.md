@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -37,7 +37,7 @@ When you add {{site.data.keyword.cloud_notm}} services to your cluster, you can 
 To find a list of supported {{site.data.keyword.cloud_notm}} services, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog).
 
 **What is {{site.data.keyword.cloud_notm}} service binding?**</br>
-Service binding is a quick way to create service credentials for an {{site.data.keyword.cloud_notm}} service by using its public service endpoint and storing these credentials in a Kubernetes secret in your cluster. To bind a service to your cluster, you must provision an instance of the service first. Then, you use the `ibmcloud ks cluster-service-bind` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to create the service credentials and the Kubernetes secret. The Kubernetes secret is automatically encrypted in etcd to protect your data.
+Service binding is a quick way to create service credentials for an {{site.data.keyword.cloud_notm}} service by using its public service endpoint and storing these credentials in a Kubernetes secret in your cluster. To bind a service to your cluster, you must provision an instance of the service first. Then, you use the `ibmcloud ks cluster service bind` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to create the service credentials and the Kubernetes secret. The Kubernetes secret is automatically encrypted in etcd to protect your data.
 
 Want to make your secrets even more secured? Ask your cluster admin to [enable {{site.data.keyword.keymanagementservicefull}}](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt new and existing secrets, such as the secret that stores the credentials of your {{site.data.keyword.cloud_notm}} service instances.
 {: tip}
@@ -50,10 +50,10 @@ Yes, you can use services that meet naming requirements and reuse the service cr
   [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
   ```
   {: screen}
-* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster-service-bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials. 
+* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster service bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials. 
 
 **What if I want to use service credentials that use the private service endpoint?**</br>
-By default, the `ibmcloud ks cluster-service-bind` command creates service credentials with the public service endpoint. To use the private service endpoint, you must manually create service credentials for your service that use the private service endpoint, and then use the `--key` option to specify the name of the existing service credentials.  
+By default, the `ibmcloud ks cluster service bind` command creates service credentials with the public service endpoint. To use the private service endpoint, you must manually create service credentials for your service that use the private service endpoint, and then use the `--key` option to specify the name of the existing service credentials.  
 
 Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service. 
 
@@ -127,7 +127,7 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
    {: tip}
    
    ```
-   ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
+   ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
    ```
    {: pre}
 
@@ -135,7 +135,7 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 
    Example output:
    ```
-   ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service cleardb
+   ibmcloud ks cluster service bind --cluster mycluster --namespace mynamespace --service cleardb
    Binding service instance to namespace...
    OK
    Namespace:	     mynamespace
@@ -502,7 +502,7 @@ If you do not want to use an {{site.data.keyword.cloud_notm}} service that you b
 
 1. List the services that are bound to your cluster and note the name of your service and the namespace that the service is bound to. 
    ```
-   ibmcloud ks cluster-services --cluster 
+   ibmcloud ks cluster service ls --cluster 
    ```
    {: pre}
    

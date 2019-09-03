@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, coredns, kubedns
 
@@ -380,7 +380,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
    {: screen}
 4. Reload the worker node. After the worker node reload completes, the DNS caching agent pod handles cluster DNS requests for applicable pods that are running on the worker node. The worker node is also made available for pod scheduling.
    ```
-   ibmcloud ks ks worker-reload --cluster <cluster_name_or_id> --workers <worker_id>
+   ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
    ```
    {: pre}
 5. Repeat the previous steps for each worker node to enable DNS caching.
@@ -426,7 +426,7 @@ You can disable the beta feature for one or more worker nodes.
       {: screen}
 3. Reload the worker node. After the worker node has been reloaded, pods that run on the node won't use the local DNS cache. Instead, the pods revert to the same behavior that they had before you enabled the beta feature. The worker node is also made available for pod scheduling.
    ```
-   ibmcloud ks ks worker-reload --cluster <cluster_name_or_id> --workers <worker_id>
+   ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
    ```
    {: pre}
 4.  Repeat the previous steps for each worker node to disable DNS caching.

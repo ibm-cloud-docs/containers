@@ -280,7 +280,7 @@ template:
   <p>Specify the image that you want to use for your containers, the location of the image, and the image pull policy. If you do not specify an image tag, by default it pulls the image that is tagged `latest`.</p>
   <p>**Attention**: Avoid using the latest tag for production workloads. You might not have tested your workload with the latest image if you are using a public or shared repository, such as Docker Hub or {{site.data.keyword.registryshort_notm}}.</p>
   <p>For example, to list the tags of public IBM images:</p>
-  <ol><li>Switch to the global registry region.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
+  <ol><li>Switch to the global registry region.<pre class="pre"><code>ibmcloud cr region set global</code></pre></li>
   <li>List the IBM images.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
   <p><pre class="codeblock"><code>containers:
@@ -998,13 +998,13 @@ To deploy apps to specific worker nodes:
 
 1.  Get the ID of the worker pool that you want to deploy app pods to.
     ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 2.  List the worker nodes that are in the worker pool, and note one of the **Private IP** addresses.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
 
@@ -1097,7 +1097,7 @@ To deploy apps to specific worker nodes:
     3. List the worker nodes in the worker pool that you designated in your app deployment.
 
         ```
-        ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+        ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
 
@@ -1111,7 +1111,7 @@ To deploy apps to specific worker nodes:
         ```
         {: screen}
 
-        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker node on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud ks worker-get --cluster <cluster_name_or_ID> --worker <worker_ID>`.
+        If you created an app affinity rule based on another factor, get that value instead. For example, to verify that the app pod deployed to a worker node on a specific VLAN, view the VLAN that the worker node is on by running `ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>`.
         {: tip}
 
     4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.

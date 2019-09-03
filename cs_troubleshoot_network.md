@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -58,7 +58,7 @@ To troubleshoot your NLB service:
 1.  Check that you set up a standard cluster that is fully deployed and has at least two worker nodes to ensure high availability for your NLB service.
 
   ```
-  ibmcloud ks workers --cluster <cluster_name_or_ID>
+  ibmcloud ks worker ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -126,8 +126,8 @@ To troubleshoot your NLB service:
     <li><pre class="screen"><code>Requested cloud provider IP <cloud-provider-ip> is not available. The following cloud provider IPs are available: <available-cloud-provider-ips></code></pre></br>You defined a portable public IP address for your load balancer YAML by using the **`loadBalancerIP`** section, but this portable public IP address is not available in your portable public subnet. In the **`loadBalancerIP`** section your configuration script, remove the existing IP address and add one of the available portable public IP addresses. You can also remove the **`loadBalancerIP`** section from your script so that an available portable public IP address can be allocated automatically.</li>
     <li><pre class="screen"><code>No available nodes for NLB services</code></pre>You do not have enough worker nodes to deploy an NLB service. One reason might be that you deployed a standard cluster with more than one worker node, but the provisioning of the worker nodes failed.</li>
     <ol><li>List available worker nodes.</br><pre class="pre"><code>kubectl get nodes</code></pre></li>
-    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker-get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
-    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks worker-get</code> commands match.</li></ol></li></ul>
+    <li>If at least two available worker nodes are found, list the worker node details.</br><pre class="pre"><code>ibmcloud ks worker get --cluster &lt;cluster_name_or_ID&gt; --worker &lt;worker_ID&gt;</code></pre></li>
+    <li>Make sure that the public and private VLAN IDs for the worker nodes that were returned by the <code>kubectl get nodes</code> and the <code>ibmcloud ks worker get</code> commands match.</li></ol></li></ul>
 
 4.  If you use a custom domain to connect to your NLB service, make sure that your custom domain is mapped to the public IP address of your NLB service.
     1.  Find the public IP address of your NLB service.
@@ -150,7 +150,7 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 {: tsResolve}
 First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
 ```
-ibmcloud ks workers --cluster <cluster_name_or_ID>
+ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
@@ -169,7 +169,7 @@ If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/
 {: #cs_albsecret_fails}
 
 {: tsSymptoms}
-After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks alb-cert-deploy` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
+After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks alb cert deploy` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
 
 When you list information about the ALB secret, the status says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
 
@@ -193,11 +193,11 @@ Review the following reasons why the ALB secret might fail and the corresponding
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create is incorrect.</td>
- <td><ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then try to update the secret: <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>If this command results in the <code>update_failed</code> status, then remove the secret: <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Deploy the secret again: <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then try to update the secret: <code>ibmcloud ks alb cert deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>If this command results in the <code>update_failed</code> status, then remove the secret: <code>ibmcloud ks alb cert rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Deploy the secret again: <code>ibmcloud ks alb cert deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of update is incorrect.</td>
- <td><ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then remove the secret: <code>ibmcloud ks alb-cert-rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Deploy the secret again: <code>ibmcloud ks alb-cert-deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Try to update the secret: <code>ibmcloud ks alb-cert-deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
+ <td><ol><li>Check the accuracy of the certificate CRN string you provide.</li><li>If the certificate CRN is found to be accurate, then remove the secret: <code>ibmcloud ks alb cert rm --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt;</code></li><li>Deploy the secret again: <code>ibmcloud ks alb cert deploy --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li><li>Try to update the secret: <code>ibmcloud ks alb cert deploy --update --cluster &lt;cluster_name_or_ID&gt; --secret-name &lt;secret_name&gt; --cert-crn &lt;certificate_CRN&gt;</code></li></ol></td>
  </tr>
  <tr>
  <td>The {{site.data.keyword.cloudcerts_long_notm}} service is experiencing downtime.</td>
@@ -205,7 +205,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
  </tr>
  <tr>
  <td>Your imported secret has the same name as the IBM-provided Ingress secret.</td>
- <td>Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
+ <td>Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
  </tbody></table>
 
@@ -216,8 +216,8 @@ Review the following reasons why the ALB secret might fail and the corresponding
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
-* No Ingress subdomain: When you run `ibmcloud ks cluster-get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
-* An ALB does not deploy in a zone: When you have a multizone cluster and run `ibmcloud ks albs --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
+* No Ingress subdomain: When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** is available.
+* An ALB does not deploy in a zone: When you have a multizone cluster and run `ibmcloud ks alb ls --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
   ```
   ALB ID                                            Enabled    Status     Type      ALB IP           Zone    Build                          ALB VLAN ID
   private-cr96039a75fddb4ad1a09ced6699c88888-alb1   false      disabled   private   -                dal10   ingress:411/ingress-auth:315   2294021
@@ -247,17 +247,17 @@ To view how many subnets a VLAN has:
 {: tsResolve}
 If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/infrastructure/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) that uses this new VLAN.
 
-If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+If you have another VLAN that is available, you can [set up VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
 1. Check that the subnet that you want to use is available.
   <p class="note">The infrastructure account that you use might be shared across multiple {{site.data.keyword.cloud_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.</p>
 
-2. Use the [`ibmcloud ks cluster-subnet-add` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
+2. Use the [`ibmcloud ks cluster subnet add` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) to make an existing subnet available to your cluster.
 
 3. Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **Subnet VLANs** section.
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name_or_ID>
+    ibmcloud ks cluster get --show-resources <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -272,8 +272,8 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
     {: screen}
 
 4. Verify that the portable IP addresses from the subnet that you added are used for the ALBs or load balancers in your cluster. It might take several minutes for the services to use the portable IP addresses from the newly-added subnet.
-  * No Ingress subdomain: Run `ibmcloud ks cluster-get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
-  * An ALB does not deploy in a zone: Run `ibmcloud ks albs --cluster <cluster>` to verify that the missing ALB is deployed.
+  * No Ingress subdomain: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
+  * An ALB does not deploy in a zone: Run `ibmcloud ks alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
   * Cannot deploy a load balancer: Run `kubectl get svc -n kube-system` to verify that the load balancer has an **EXTERNAL-IP**.
 
 <br />
@@ -641,7 +641,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
 
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 
@@ -652,14 +652,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 4.  Note the name of your worker pools.
 
     ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-5.  Use the `zone-network-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) to change the worker pool network metadata.
+5.  Use the `zone network-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) to change the worker pool network metadata.
 
     ```
-    ibmcloud ks zone-network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pools <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
+    ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pool ls <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
     ```
     {: pre}
 
@@ -668,14 +668,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 7.  Rebalance or resize your worker pool to add worker nodes that use the new VLAN IDs. For example:
 
     ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
+    ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
     ```
     {: pre}
 
 8.  Verify that your worker nodes are created.
 
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
     ```
     {: pre}
 
@@ -699,6 +699,6 @@ Still having issues with your cluster?
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix) forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks clusters`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
+When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -124,7 +124,7 @@ Before you get started with Ingress, review the following prerequisites.
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 - In classic clusters, if you restrict network traffic to [edge worker nodes](/docs/containers?topic=containers-edge), at least two edge worker nodes must be enabled in each zone for high availability of Ingress pods. [Create an edge node worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all the zones in your cluster and has at least two worker nodes per zone.
-- In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+- In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 <br />
 
@@ -256,7 +256,7 @@ You can use the IBM-provided domain, such as `mycluster-12345.us-south.container
 
 Get the IBM-provided domain. Replace `<cluster_name_or_ID>` with the name of the cluster where the app is deployed.
 ```
-ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
@@ -270,7 +270,7 @@ Ingress Secret:         <tls_secret>
 **To use a custom domain:**
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster-get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
+2.  Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
 
 ### Step 3: Select TLS termination
 {: #public_inside_3}
@@ -287,7 +287,7 @@ The ALB load balances HTTP network traffic to the apps in your cluster. To also 
 
 Get the IBM-provided TLS secret for your cluster.
 ```
-ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress
+ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
 ```
 {: pre}
 
@@ -304,11 +304,11 @@ Ingress Secret:         <tls_secret>
 If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
 
 ```
-ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+ibmcloud ks alb cert deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
 ```
 {: pre}
 
-Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
 {: note}
 
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
@@ -348,7 +348,7 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl apply -f ssl-my-test
      ```
      {: pre}
-     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID> | grep Ingress`.
+     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
      {: note}
 
 
@@ -427,7 +427,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tr>
     <tr>
     <td><code>tls.secretName</code></td>
-    <td><ul><li>If you use the IBM-provided Ingress domain, replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret.</li><li>If you use a custom domain, replace <em>&lt;tls_secret_name&gt;</em> with the secret that you created earlier that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.</li><ul><td>
+    <td><ul><li>If you use the IBM-provided Ingress domain, replace <em>&lt;tls_secret_name&gt;</em> with the name of the IBM-provided Ingress secret.</li><li>If you use a custom domain, replace <em>&lt;tls_secret_name&gt;</em> with the secret that you created earlier that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb cert get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.</li><ul><td>
     </tr>
     <tr>
     <td><code>host</code></td>
@@ -682,7 +682,7 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
 1. Get the private ALB IDs for your cluster.
     ```
-    ibmcloud ks albs --cluster <cluster_name>
+    ibmcloud ks alb ls --cluster <cluster_name>
     ```
     {: pre}
 
@@ -697,12 +697,12 @@ When you create a standard cluster, a private ALB is created in each zone that y
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
   * Classic clusters: If you want to specify an IP address for the ALB, include the IP address in the `--user-ip` flag.
     ```
-    ibmcloud ks alb-configure-classic --albID <private_ALB_ID> --enable [--user-ip <user_IP>]
+    ibmcloud ks alb configure classic --alb-id <private_ALB_ID> --enable [--user-ip <user_IP>]
     ```
     {: pre}
   * VPC clusters:
     ```
-    ibmcloud ks alb-configure-vpc-classic --albID <private_ALB_ID> --enable
+    ibmcloud ks alb configure vpc-classic --alb-id <private_ALB_ID> --enable
     ```
     {: pre}
     </br>
@@ -717,19 +717,19 @@ When you configure the private ALBs, you must expose your apps by using a custom
 
 1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
-3. Using your private DNS service, define an alias for your custom domain by specifying the VPC load balancer-assigned private host name as a Canonical Name record (CNAME). To find the host name assigned by your cluster's VPC load balancer for your private ALBs, run `ibmcloud ks albs --cluster <cluster_name_or_ID>`. In the output, look for the **Load Balancer Hostname** field of your private ALBs. </br>
+3. Using your private DNS service, define an alias for your custom domain by specifying the VPC load balancer-assigned private host name as a Canonical Name record (CNAME). To find the host name assigned by your cluster's VPC load balancer for your private ALBs, run `ibmcloud ks alb ls --cluster <cluster_name_or_ID>`. In the output, look for the **Load Balancer Hostname** field of your private ALBs. </br>
 
 **Private VLAN-only classic clusters:**
 
 1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
-3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get --albID <private_alb_ID>` for each ALB. </br>
+3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb get --alb-id <private_alb_ID>` for each ALB. </br>
 
 **Private and public VLAN classic clusters:**
 
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 
-2.  Map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb-get --albID  <private_alb_ID>` for each ALB.
+2.  Map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb get --alb-id  <private_alb_ID>` for each ALB.
 </br>
 
 ### Step 4: Select TLS termination
@@ -745,7 +745,7 @@ Because private VLAN-only clusters are not assigned an IBM-provided Ingress doma
 If a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
 
 ```
-ibmcloud ks alb-cert-deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
+ibmcloud ks alb cert deploy --secret-name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn>
 ```
 {: pre}
 
@@ -824,7 +824,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <tbody>
     <tr>
     <td><code>ingress.bluemix.net/ALB-ID</code></td>
-    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. If you have a multizone cluster and enabled multiple private ALBs, include the ID of each ALB. Run <code>ibmcloud ks albs --cluster <my_cluster></code> to find the ALB IDs. For more information about this Ingress annotation, see [Private application load balancer routing](/docs/containers?topic=containers-ingress_annotation#alb-id).</td>
+    <td>Replace <em>&lt;private_ALB_ID&gt;</em> with the ID for your private ALB. If you have a multizone cluster and enabled multiple private ALBs, include the ID of each ALB. Run <code>ibmcloud ks alb ls --cluster <my_cluster></code> to find the ALB IDs. For more information about this Ingress annotation, see [Private application load balancer routing](/docs/containers?topic=containers-ingress_annotation#alb-id).</td>
     </tr>
     <tr>
     <td><code>tls.hosts</code></td>
@@ -832,7 +832,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tr>
     <tr>
     <td><code>tls.secretName</code></td>
-    <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb-cert-get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
+    <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier and that holds your custom TLS certificate and key. If you imported a certificate from {{site.data.keyword.cloudcerts_short}}, you can run <code>ibmcloud ks alb cert get --cluster <cluster_name_or_ID> --cert-crn <certificate_crn></code> to see the secrets that are associated with a TLS certificate.
     </tr>
     <tr>
     <td><code>host</code></td>

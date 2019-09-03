@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-06"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, ingress
 
@@ -519,7 +519,7 @@ spec:
 <tbody>
 <tr>
 <td><code>&lt;private_ALB_ID&gt;</code></td>
-<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud ks albs --cluster &lt;my_cluster&gt;</code>.<p>
+<td>The ID for your private ALB. To find the private ALB ID, run <code>ibmcloud ks alb ls --cluster &lt;my_cluster&gt;</code>.<p>
 If you have a multizone cluster with more than one private ALB enabled, you can provide a list of ALB IDs separated by <code>;</code>. For example: <code>ingress.bluemix.net/ALB-ID: &lt;private_ALB_ID_1&gt;;&lt;private_ALB_ID_2&gt;;&lt;private_ALB_ID_3&gt;</code></p>
 </td>
 </tr>
@@ -2632,12 +2632,12 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials.
   ```
-  ibmcloud ks cluster-service-bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
+  ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>]
   ```
   {: pre}
   When the service is successfully added to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
   ```
-  ibmcloud ks cluster-service-bind --cluster mycluster --namespace mynamespace --service appid1
+  ibmcloud ks cluster service bind --cluster mycluster --namespace mynamespace --service appid1
   Binding service instance to namespace...
   OK
   Namespace:    mynamespace
