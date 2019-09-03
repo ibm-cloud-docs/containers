@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, versions, update
 
@@ -48,6 +48,50 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+### Changelog for worker node fix pack 1.15.3_1516, released 3 September 2019
+{: #1153_1516_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.15.3_1516.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.2_1514">
+<caption>Changes since version 1.15.2_1514</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.7</td>
+<td>v1.2.8</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.15.2</td>
+<td>v1.15.3</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.3). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.15.3_1515, released 28 August 2019
 {: #1153_1515}
@@ -111,7 +155,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019 .
+### Changelog for worker node fix pack 1.15.2_1514, released 19 August 2019
 {: #1152_1514_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.15.2_1514.
@@ -337,6 +381,50 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019
+{: #1146_1532_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.6_1532.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.5_1530">
+<caption>Changes since version 1.14.5_1530</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.7</td>
+<td>v1.2.8</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.5</td>
+<td>v1.14.6</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.6). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.14.6_1531, released 28 August 2019
 {: #1146_1531}
@@ -1040,6 +1128,50 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.10_1535, released 3 September 2019
+{: #11310_1535_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.10_1535.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.9_1533">
+<caption>Changes since version 1.13.9_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.7</td>
+<td>v1.2.8</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.8). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.9</td>
+<td>v1.13.10</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.10). Update resolves [CVE-2019-9512 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9512), [CVE-2019-9514 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9514), and [CVE-2019-14809 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14809).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.13.10_1534, released 28 August 2019
 {: #11310_1534}
@@ -2177,6 +2309,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1566, released 3 September 2019
+{: #11210_1566_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.10_1566.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1564">
+<caption>Changes since version 1.12.10_1564</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated worker node images with package updates for [CVE-2019-10222 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-10222) and [CVE-2019-11922 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11922).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for master fix pack 1.12.10_1565, released 28 August 2019
 {: #11210_1565}
