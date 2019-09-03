@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -112,7 +112,7 @@ To allow access for a specific cluster:
    ```
    {: pre}
 
-2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+2. If the cluster is in a resource group other than `default`, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
    ```
    ibmcloud target -g <resource_group_name>
    ```
@@ -121,7 +121,7 @@ To allow access for a specific cluster:
 4. Get the name of your cluster.
 
    ```
-   ibmcloud ks clusters
+   ibmcloud ks cluster ls
    ```
    {: pre}
 
@@ -131,7 +131,7 @@ To allow access for a specific cluster:
  * If both the **Public Service Endpoint URL** and **Private Service Endpoint URL** are populated, get both URLs. Your authorized cluster users can access the master through the public endpoint on the public network or the private endpoint on the private network.
 
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -242,7 +242,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
 
 1.  Note the public IP address for each worker node in the cluster.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -429,7 +429,7 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
 
 2. Note the private IP address for each worker node in the cluster.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -560,7 +560,7 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
 
    If you must use a Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in version that does not support network communication over the private network, or if you want to use {{site.data.keyword.cos_full_notm}} without HMAC authentication, allow egress access through your firewall to IBM Cloud infrastructure and {{site.data.keyword.cloud_notm}} Identity and Access Management:
    - Allow all egress network traffic on TCP port 443.
-   - Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks clusters`.
+   - Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#frontend-public-network) and [**Back-end (private) Network**](/docs/infrastructure/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#backend-private-network). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
 
 </br>
 
@@ -607,7 +607,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     <p class="note">The **primary public subnets** that {{site.data.keyword.containerlong_notm}} provisions for your cluster come with 14 available IP addresses, and can be shared by other clusters on the same VLAN. When you have more than 14 worker nodes, another subnet is ordered, so the subnets that you need to whitelist can change. To reduce the frequency of change, create worker pools with worker node flavors of higher CPU and memory resources so that you don't need to add worker nodes as often.</p>
     1. List the worker nodes in your cluster.
       ```
-      ibmcloud ks workers --cluster <cluster_name_or_ID>
+      ibmcloud ks worker ls --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
@@ -638,7 +638,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
         *   `169.xx.178.xxx/28`
   * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you want to whitelist only one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 4.  Add the subnet CIDR or IP addresses to your service's firewall for outbound traffic or your on-premises firewall for inbound traffic.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -64,19 +64,19 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 
 1. Get the name of the worker pool that you want to resize.
     ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
 2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. The minimum value is 1.
     ```
-    ibmcloud ks worker-pool-resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
+    ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
     ```
     {: pre}
 
 3. Verify that the worker pool is resized.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
     ```
     {: pre}
 
@@ -100,9 +100,9 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 You can add worker nodes to your VPC cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones --provider vpc-classic`.
+1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-classic`.
    ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -128,27 +128,27 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
     ```
     {: pre}
 
-4. Create a worker pool. Include the `--labels` option to automatically label worker nodes that are in the pool with the label `key=value`.
+4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
    ```
-   ibmcloud ks worker-pool-create-vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--labels <key=value>]
+   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID> [--label <key=value>]
    ```
    {: pre}
 
 5. Verify that the worker pool is created.
    ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+6. By default, adding a worker-pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
    ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_subnet_ID>
+   ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_subnet_ID>
    ```
    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provisioning` to `normal`.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
    ```
    {: pre}
 
@@ -170,9 +170,9 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
 You can add worker nodes to your classic cluster by creating a new worker pool.
 {:shortdesc}
 
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zones`.
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls`.
    ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -185,7 +185,7 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
 
 2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
    ```
-   ibmcloud ks vlans --zone <zone>
+   ibmcloud ks vlan ls --zone <zone>
    ```
    {: pre}
 
@@ -196,27 +196,39 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
     ```
     {: pre}
 
-4. Create a worker pool. Include the `--labels` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
-   ```
-   ibmcloud ks worker-pool-create --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --hardware <dedicated_or_shared> --labels <key=value>
-   ```
-   {: pre}
+4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
+   * Classic clusters:
+     ```
+     ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+     ```
+     {: pre}
+   * VPC clusters:
+     ```
+     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
+     ```
+     {: pre}
 
 5. Verify that the worker pool is created.
    ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-   ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-   ```
-   {: pre}
+6. By default, adding a worker-pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+  * Classic clusters:
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ```
+    {: pre}
+  * VPC clusters:
+    ```
+    ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
+    ```
+    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
    ```
    {: pre}
 
@@ -245,7 +257,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 1. Get the **Location** of your cluster, and note the existing **Worker Zones** and **VPC ID**.
    ```
-   ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -262,7 +274,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 2. List available zones for your cluster's location to see what other zones you can add.
    ```
-   ibmcloud ks zones --provider vpc-classic | grep <location>
+   ibmcloud ks zone ls --provider vpc-classic | grep <location>
    ```
    {: pre}
 
@@ -274,7 +286,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 4. List the worker pools in your cluster and note their names.
    ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
@@ -283,13 +295,13 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
    If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
    {: tip}
    ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> [--worker-pool <pool2_name>] --subnet-id
+   ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name> [-w <pool2_name>] --subnet-id
    ```
    {: pre}
 
 6. Verify that the zone is added to your cluster. Look for the added zone in the **Worker Zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -317,29 +329,29 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
-*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 To add a zone with worker nodes to your worker pool:
 
 1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
    ```
-   ibmcloud ks zones
+   ibmcloud ks zone ls
    ```
    {: pre}
 
 2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
    ```
-   ibmcloud ks vlans --zone <zone>
+   ibmcloud ks vlan ls --zone <zone>
    ```
    {: pre}
 
 3. List the worker pools in your cluster and note their names.
    ```
-   ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones. Replace `<pool1_id_or_name,pool2_id_or_name,...>` with the names of all of your worker pools in a comma-separated list.
+4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
     A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
     {: note}
@@ -347,13 +359,13 @@ To add a zone with worker nodes to your worker pool:
    If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
    {: tip}
    ```
-   ibmcloud ks zone-add --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool1_name,pool2_name,...> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+   ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name> [-w <pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
    ```
    {: pre}
 
 5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
   ```
-  ibmcloud ks cluster-get --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -394,13 +406,13 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 1. List available zones and pick the zone where you want to add worker nodes.
    ```
-   ibmcloud ks zones
+   ibmcloud ks zone ls
    ```
    {: pre}
 
 2. List available VLANs in that zone and note their ID.
    ```
-   ibmcloud ks vlans --zone <zone>
+   ibmcloud ks vlan ls --zone <zone>
    ```
    {: pre}
 
@@ -412,20 +424,20 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 4. Add stand-alone worker nodes to the cluster. For bare metal flavors, specify `dedicated`.
    ```
-   ibmcloud ks worker-add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <flavor> --hardware <shared_or_dedicated>
+   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <flavor> --hardware <shared_or_dedicated>
    ```
    {: pre}
 
 5. Verify that the worker nodes are created.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
 <br />
 
 
-## Adding labels to existing worker pools 
+## Adding labels to existing worker pools
 {: #worker_pool_labels}
 
 You can assign a worker pool a label when you [create the worker pool](#add_pool), or later by following these steps. After a worker pool is labeled, all existing and subsequent worker nodes get this label. You might use labels to deploy specific workloads only to worker nodes in the worker pool, such as [edge nodes for load balancer network traffic](/docs/containers?topic=containers-edge).
@@ -435,7 +447,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1.  List the worker pools in your cluster.
     ```
-    ibmcloud ks worker-pools --cluster <cluster_name_or_ID>
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 2.  To label the worker pool with a `key=value` label, use the [PATCH worker pool API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool). Format the body of the request as in the following JSON example.
@@ -449,13 +461,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 3.  Verify that the worker pool and worker node have the `key=value` label that you assigned.
     *   To check worker pools:
         ```
-        ibmcloud ks worker-pool-get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+        ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
     *   To check worker nodes:
         1.  List the worker nodes in the worker pool and note the **Private IP**.
             ```
-            ibmcloud ks workers --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+            ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
             ```
             {: pre}
         2.  Review the **Labels** field of the output.

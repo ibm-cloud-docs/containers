@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks
 
@@ -105,7 +105,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     {: pre}
 7.  Before you continue to the next step, verify that the deployment of your worker node is complete.
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -119,7 +119,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 8.  Set the context for your Kubernetes cluster in your CLI.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.Bluemix_notm}}.<p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
         ```
-        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -182,13 +182,13 @@ With {{site.data.keyword.Bluemix_notm}} services, you can take advantage of alre
     {: pre}
 2.  Bind the {{site.data.keyword.toneanalyzershort}} instance to the `default` Kubernetes namespace for the cluster. Later, you can create your own namespaces to manage user access to Kubernetes resources, but for now, use the `default` namespace. Kubernetes namespaces are different from the registry namespace you created earlier.
     ```
-    ibmcloud ks cluster-service-bind --cluster <cluster_name> --namespace default --service <service_name>
+    ibmcloud ks cluster service bind --cluster <cluster_name> --namespace default --service <service_name>
     ```
     {: pre}
 
     Example output:
     ```
-    ibmcloud ks cluster-service-bind pr_firm_cluster default mytoneanalyzer
+    ibmcloud ks cluster service bind pr_firm_cluster default mytoneanalyzer
     Binding service instance to namespace...
     OK
     Namespace:	default
@@ -365,13 +365,13 @@ To deploy the app:
         The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the NodePort is 30872.
     2.  Get the public IP address for the worker node in the cluster.
         ```
-        ibmcloud ks workers --cluster <cluster_name_or_ID>
+        ibmcloud ks worker ls --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
         Example output:
         ```
-        ibmcloud ks workers --cluster pr_firm_cluster
+        ibmcloud ks worker ls --cluster pr_firm_cluster
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
@@ -499,7 +499,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     {: screen}
 5.  Now that the deployment work is done, open a browser and check out the app. To form the URL, take the same public IP address that you used in the previous lesson for your worker node and combine it with the NodePort that was specified in the configuration script. To get the public IP address for the worker node:
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -780,7 +780,7 @@ Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyze
   If you do not want to keep the cluster, you can delete that too.
 
   ```
-  ibmcloud ks cluster-rm --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster rm --cluster <cluster_name_or_ID>
   ```
   {: pre}
 

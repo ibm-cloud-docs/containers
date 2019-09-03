@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -27,13 +27,31 @@ subcollection: containers
 # Release notes
 {: #iks-release}
 
-Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month. 
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
 The following icons are used to indicate if a release note applies only to a certain container platform. If no icon is used, the release note applies to both community Kubernetes and OpenShift clusters.<br>
 <img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> Applies to only community Kubernetes clusters.<br>
 <img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters, which released as a beta on 5 June 2019.
 {: note}
+
+## September 2019
+{: #sept19}
+
+<table summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Documentation updates in August 2019</caption>
+<thead>
+<th>Date</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+  <td>03 September 2019</td>
+  <td><strong>New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for multiple changes in the [release of version 0.4.1](/docs/containers?topic=containers-cs_cli_changelog).</td>
+</tr>
+</tbody></table>
+
+{[white-sapce.md]}
 
 ## August 2019
 {: #aug19}
@@ -374,7 +392,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tr>
   <td>16 May 2019</td>
   <td><ul>
-  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) to add COS endpoints for `logging-collect` commands and to clarify that `apiserver-refresh` restarts the Kubernetes master components.</li>
+  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) to add COS endpoints for `logging collect` commands and to clarify that `cluster master refresh` restarts the Kubernetes master components.</li>
   <li><strong>Unsupported: Kubernetes version 1.10</strong>: [Kubernetes version 1.10](/docs/containers?topic=containers-cs_versions#cs_v114) is now unsupported.</li>
   </ul></td>
 </tr>

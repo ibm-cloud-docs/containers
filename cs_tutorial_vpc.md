@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, vpc
 
@@ -95,7 +95,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
     3.  Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
-        *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
+        *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zone ls`.
         *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
         *  **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
         *  **Network traffic control**: Set up [network access control lists](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) (ACLs) to control inbound and outbound network traffic at the subnet level. Each subnet includes a default ACL that permits all inbound and outbound traffic.
@@ -105,21 +105,21 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
 
-3.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster-create-vpc-classic` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic).
+3.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-classic` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic).
     ```
-    ibmcloud ks cluster-create-vpc-classic --name myvpc-cluster --zone us-south-1 --flavor b2.4x16 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
+    ibmcloud ks cluster create vpc-classic --name myvpc-cluster --zone us-south-1 --machine-type b2.4x16 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
 4.  Check the state of your cluster. The cluster might take a few minutes to provision.
     1.  Verify that the cluster **State** is **normal**.
         ```
-        ibmcloud ks clusters --provider vpc-classic
+        ibmcloud ks cluster ls --provider vpc-classic
         ```
         {: pre}
     2.  Download the Kubernetes configuration files.
 
         ```
-        ibmcloud ks cluster-config --cluster myvpc-cluster
+        ibmcloud ks cluster config --cluster myvpc-cluster
         ```
         {: pre}
 
@@ -463,7 +463,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
 
 3.  Verify that the VPC load balancer is created successfully in your VPC. In the output, verify that the VPC load balancer has an **Operating Status** of `online` and a **Provision Status** of `active`.
 
-    The VPC load balancer is named in the format `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. To see your cluster ID, run `ibmcloud ks cluster-get --cluster <cluster_name>`. To see the Kubernetes `LoadBalancer` service UID, run `kubectl get svc hw-lb-svc -o yaml` and look for the **metadata.uid** field in the output.
+    The VPC load balancer is named in the format `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. To see your cluster ID, run `ibmcloud ks cluster get --cluster <cluster_name>`. To see the Kubernetes `LoadBalancer` service UID, run `kubectl get svc hw-lb-svc -o yaml` and look for the **metadata.uid** field in the output.
     {: tip}
     ```
     ibmcloud is load-balancers

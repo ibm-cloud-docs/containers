@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -267,7 +267,7 @@ To add different block storage configurations, add block storage to a subset of 
    </tr>
    <tr>
    <td><code>region</code></td>
-   <td>Enter the {{site.data.keyword.containerlong_notm}} region where you created your cluster. Run <code>[bxcs] cluster-get --cluster &lt;cluster_name_or_ID&gt;</code> to find the region of your cluster.  </td>
+   <td>Enter the {{site.data.keyword.containerlong_notm}} region where you created your cluster. Run <code>[bxcs] cluster get --cluster &lt;cluster_name_or_ID&gt;</code> to find the region of your cluster.  </td>
    </tr>
    <tr>
    <td><code>type</code></td>
@@ -410,7 +410,7 @@ Use this option if you want to add different block storage configurations, add b
 
 1. List the worker nodes in your cluster and note the private IP address and the zone of the non-SDS worker nodes where you want to add a block storage device.
    ```
-   ibmcloud ks workers --cluster <cluster_name_or_ID>
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 

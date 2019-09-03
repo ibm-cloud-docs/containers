@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -142,11 +142,11 @@ To set up an NLB 2.0 in a multizone cluster:
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-zone:</code>
-        <td>Annotation to specify the zone that the load balancer service deploys to. To see zones, run <code>ibmcloud ks zones</code>.</td>
+        <td>Annotation to specify the zone that the load balancer service deploys to. To see zones, run <code>ibmcloud ks zone ls</code>.</td>
       </tr>
       <tr>
         <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan:`
-        <td>Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run <code>ibmcloud ks vlans --zone <zone></code>.</td>
+        <td>Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run <code>ibmcloud ks vlan ls --zone <zone></code>.</td>
       </tr>
       <tr>
         <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"</code>
@@ -305,7 +305,7 @@ To create an NLB 2.0 service in a single-zone cluster:
         </tr>
         <tr>
           <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan:`
-          <td>Optional: Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run <code>ibmcloud ks vlans --zone <zone></code>.</td>
+          <td>Optional: Annotation to specify a VLAN that the load balancer service deploys to. To see VLANs, run <code>ibmcloud ks vlan ls --zone <zone></code>.</td>
         </tr>
         <tr>
           <td><code>service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"</code>

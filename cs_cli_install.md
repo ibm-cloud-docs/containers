@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -198,7 +198,7 @@ To use `kubectl` commands:
 
 2.  Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
 
-3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks clusters`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
+3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
     ```
     ibmcloud target -g <resource_group_name>
     ```
@@ -207,14 +207,14 @@ To use `kubectl` commands:
 4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
 
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 
 5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files. <p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
         ```
-        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -229,7 +229,7 @@ To use `kubectl` commands:
 
     2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
-        **Mac or Linux users**: Instead of running the `ibmcloud ks cluster-config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster-config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster-config --export <cluster-name>)`.
+        **Mac or Linux users**: Instead of running the `ibmcloud ks cluster config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster config --export <cluster-name>)`.
         {: tip}
 
     3.  Verify that the `KUBECONFIG` environment variable is set properly.

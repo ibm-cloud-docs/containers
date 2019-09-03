@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks
 
@@ -239,7 +239,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
     3.  To create or access clusters in the dedicated environment, you must set the region that is associated with that environment. **Note**: You cannot create clusters in resource groups other than `default`.
 
         ```
-        ibmcloud ks region-set
+        ibmcloud ks region set
         ```
         {: pre}
 
@@ -329,12 +329,12 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
   You cannot use the global endpoint, `https://containers.cloud.ibm.com`. You must target a regional endpoint to create or work with clusters in that region.
   {: important}
 
-4.  Create a cluster with the `cluster-create` command. When you create a standard cluster, the hardware of the worker node is billed by hours of usage.
+4.  Create a cluster with the `cluster create classic` command. When you create a standard cluster, the hardware of the worker node is billed by hours of usage.
 
     Example:
 
     ```
-    ibmcloud ks cluster-create --zone <zone> --machine-type <flavor> --name <cluster_name> --workers <number>
+    ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
@@ -353,15 +353,15 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>Enter the {{site.data.keyword.cloud_notm}} zone ID that your Dedicated environment is configured to use.</td>
     </tr>
     <tr>
-    <td><code>--machine-type <em>&lt;machine_type&gt;</em></code></td>
+    <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
     <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
     </tr>
     <tr>
-    <td><code>--public-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td><code>--public-vlan <em>&lt;flavor&gt;</em></code></td>
     <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></td>
     </tr>
     <tr>
-    <td><code>--private-vlan <em>&lt;machine_type&gt;</em></code></td>
+    <td><code>--private-vlan <em>&lt;flavor&gt;</em></code></td>
     <td>Enter the ID of the private VLAN that your Dedicated environment is configured to use.</td>
     </tr>  
     <tr>
@@ -387,7 +387,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 5.  Verify that the creation of the cluster was requested.
 
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 
@@ -408,7 +408,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 6.  Check the status of the worker nodes.
 
     ```
-    ibmcloud ks workers --cluster <cluster_name_or_ID>
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -428,7 +428,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     1.  Get the command to set the environment variable and download the Kubernetes configuration files.
 
         ```
-        ibmcloud ks cluster-config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -516,15 +516,15 @@ Before you begin, follow these steps to configure the routing of network traffic
 2. After {{site.data.keyword.IBM_notm}} provisions the user-managed subnets, make the subnet available to your Kubernetes cluster.
 
     ```
-    ibmcloud ks cluster-user-subnet-add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
+    ibmcloud ks cluster user-subnet add --cluster <cluster_name> --subnet-cidr <subnet_CIDR> --private-vlan <private_VLAN>
     ```
     {: pre}
-    Replace <em>&lt;cluster_name&gt;</em> with the name or ID of your cluster, <em>&lt;subnet_CIDR&gt;</em> with one of the subnet CIDRs that you provided in the support case, and <em>&lt;private_VLAN&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud ks vlans`.
+    Replace <em>&lt;cluster_name&gt;</em> with the name or ID of your cluster, <em>&lt;subnet_CIDR&gt;</em> with one of the subnet CIDRs that you provided in the support case, and <em>&lt;private_VLAN&gt;</em> with an available private VLAN ID. You can find the ID of an available private VLAN by running `ibmcloud ks vlan ls`.
 
 3. Verify that the subnets were added to your cluster. The field **User-managed** for user-provided subnets is _`true`_.
 
     ```
-    ibmcloud ks cluster-get --showResources <cluster_name>
+    ibmcloud ks cluster get --show-resources <cluster_name>
     ```
     {: pre}
 
@@ -537,11 +537,11 @@ Before you begin, follow these steps to configure the routing of network traffic
     ```
     {: screen}
 
-4. **Important**: In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan-spanning-get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+4. **Important**: In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 5. To configure on-premises and internal account connectivity, choose between these options:
   - If you used a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises and internal account connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers?topic=containers-cs_network_planning#external).
-  - If you did not use a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers?topic=containers-cs_network_planning#external). However, you must use an IBM Cloud infrastructure portable private subnet to configure internal account connectivity between your cluster and other Cloud Foundry-based services. You can create a portable private subnet with the [`ibmcloud ks cluster-subnet-add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) command. For this scenario, your cluster has both a user-managed subnet for on-premises connectivity and an IBM Cloud infrastructure portable private subnet for internal account connectivity.
+  - If you did not use a 10.x.x.x private IP address range for the subnet, use valid IPs from that range to configure on-premises connectivity with Ingress and a load balancer. For more information, see [Planning networking with NodePort, load balancer, or Ingress services](/docs/containers?topic=containers-cs_network_planning#external). However, you must use an IBM Cloud infrastructure portable private subnet to configure internal account connectivity between your cluster and other Cloud Foundry-based services. You can create a portable private subnet with the [`ibmcloud ks cluster subnet add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) command. For this scenario, your cluster has both a user-managed subnet for on-premises connectivity and an IBM Cloud infrastructure portable private subnet for internal account connectivity.
 
 ### Other cluster configurations
 {: #dedicated_other}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -371,7 +371,7 @@ VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released 
 * You can have up to 100 worker nodes across all VPC clusters per account.
 * Only certain flavors are available for worker node virtual machines.
 * Bare metal machines are not supported.
-* You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker-replace` command.
+* You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command.
 * Cluster autoscaling is not supported.
 
 **Container platforms**: VPC clusters are available for only community Kubernetes clusters, not OpenShift clusters.
@@ -395,4 +395,4 @@ VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released 
 
 **Virtual Private Cloud**: See [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations).
 
-**v2 API**: VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks clusters`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about).
+**v2 API**: VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about).

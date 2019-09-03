@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-19"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -33,7 +33,7 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 ## What comes with Ingress?
 {: #ingress_components}
 
-Ingress consists of three components: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB)for classic clusters or the VPC load balancer for VPC clusters.
+Ingress consists of three components: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters.
 {: shortdesc}
 
 ### Ingress resource
@@ -54,15 +54,15 @@ For more information, see [Planning networking for single or multiple namespaces
 The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, or TCP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource.
 {: shortdesc}
 
-When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public route which all public ALBs share. You can find the public route for your cluster by running `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and do not use the Ingress subdomain. Note that classic clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.
+When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public route which all public ALBs share. You can find the public route for your cluster by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and do not use the Ingress subdomain. Note that classic clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.
 
 **Classic clusters: ALB IP addresses**
 
-In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks albs --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
+In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
 **VPC clusters: ALB host names**
 
-When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one host name. In VPC clusters, a host name is assigned to the ALBs because the ALB IP addresses are not static and might change over time. You can find the host name that is assigned to your public ALBs and the host name that is assigned to your private ALBs by running `ibmcloud ks albs --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts four private ALBs behind one hostname is created only when you enable your private ALBs.
+When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one host name. In VPC clusters, a host name is assigned to the ALBs because the ALB IP addresses are not static and might change over time. You can find the host name that is assigned to your public ALBs and the host name that is assigned to your private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts four private ALBs behind one hostname is created only when you enable your private ALBs.
 
 ### Multizone load balancer (MZLB) or Load Balancer for VPC
 {: #mzlb}

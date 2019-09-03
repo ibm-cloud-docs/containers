@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -102,7 +102,7 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 <br>
 You can always see which Istio add-ons are enabled in your cluster by running the following command:
 ```
-ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
+ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
@@ -159,7 +159,7 @@ Install Istio managed add-ons in an existing cluster.
 
 3. Verify that the managed Istio add-ons that you installed are enabled in this cluster.
   ```
-  ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -340,13 +340,13 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS host name.
   ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip $INGRESS_IP
+  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip $INGRESS_IP
   ```
   {: pre}
 
 2. Verify that the host name is created.
   ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -772,13 +772,13 @@ In the following steps, you set up a host name through which your users can acce
 
       2. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
         ```
-        ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+        ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
         ```
         {: pre}
 
       3. Verify that the host name is created.
         ```
-        ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+        ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
         ```
         {: pre}
 
@@ -935,13 +935,13 @@ In the following steps, you set up a host name through which your users can acce
 
 6. Register the `istio-ingressgateway` load balancer IP by creating a DNS host name.
   ```
-  ibmcloud ks nlb-dns-create --cluster <cluster_name_or_id> --ip <LB_IP>
+  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
   ```
   {: pre}
 
 7. Verify that the host name is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
   ```
-  ibmcloud ks nlb-dnss --cluster <cluster_name_or_id>
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
@@ -1053,7 +1053,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
 
 1. Check whether your add-ons are at the latest version. Any addons that are denoted with `* (<version> latest)` can be updated.
    ```
-   ibmcloud ks cluster-addons --cluster <mycluster>
+   ibmcloud ks cluster addons --cluster <mycluster>
    ```
    {: pre}
 
@@ -1084,19 +1084,19 @@ During the update, any traffic that is sent to Istio-managed services is interru
 5. If you enabled the `istio-sample-bookinfo` and `istio-extras` add-ons, disable them.
    1. Disable the `istio-sample-bookinfo` add-on.
       ```
-      ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+      ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
    2. Disable the `istio-extras` add-on.
       ```
-      ibmcloud ks cluster-addon-disable istio-extras --cluster <cluster_name_or_ID>
+      ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
       ```
       {: pre}
 
 6. Disable the Istio add-on.
    ```
-   ibmcloud ks cluster-addon-disable istio --cluster <cluster_name_or_ID> -f
+   ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
    ```
    {: pre}
 
@@ -1190,25 +1190,25 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 
 1. Disable the `istio-sample-bookinfo` add-on.
   ```
-  ibmcloud ks cluster-addon-disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 2. Disable the `istio-extras` add-on.
   ```
-  ibmcloud ks cluster-addon-disable istio-extras --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
 3. Disable the `istio` add-on.
   ```
-  ibmcloud ks cluster-addon-disable istio --cluster <cluster_name_or_ID> -f
+  ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
   ```
   {: pre}
 
 4. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
   ```
-  ibmcloud ks cluster-addons --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
   ```
   {: pre}
 

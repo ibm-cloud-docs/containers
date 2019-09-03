@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-09-03"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -189,12 +189,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 **To update your cluster image pull secret in the `default` Kubernetes namespace**:
 1.  Get your cluster ID.
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 2.  Run the following command to create a service ID for the cluster, assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}, create an API key to impersonate the service ID credentials, and store the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
     ```
-    ibmcloud ks cluster-pull-secret-apply --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
