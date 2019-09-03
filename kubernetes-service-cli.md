@@ -5294,7 +5294,7 @@ Find the {{site.data.keyword.containerlong_notm}} region that you are currently 
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region set` command and use the cluster name when you run commands.
 
-<p class="deprecated">Legacy behavior:</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</br>If you [set the <code>IKS_BETA_VERSION</code> environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to <code>0.2</code>](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</p>
+<p class="deprecated">Legacy behavior:</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.2</code> (deprecated), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</p>
 
 ```
 ibmcloud ks region get
@@ -5344,7 +5344,7 @@ Set the region for {{site.data.keyword.containerlong_notm}}.
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region set` command and use the cluster name when you run commands.
 
-If you use the `0.2` beta version (legacy) of the {{site.data.keyword.containerlong_notm}} plug-in, you create and manage clusters specific to the region. For example, you can log in to {{site.data.keyword.cloud_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region set us-south` to return to US South to manage your cluster in that region.
+If you use the `0.2` beta version (deprecated) of the {{site.data.keyword.containerlong_notm}} plug-in, you create and manage clusters specific to the region. For example, you can log in to {{site.data.keyword.cloud_notm}} in the US South region and create a cluster. Next, you can use `ibmcloud ks region set eu-central` to target the EU Central region and create another cluster. Finally, you can use `ibmcloud ks region set us-south` to return to US South to manage your cluster in that region.
 {: deprecated}
 
 ```
