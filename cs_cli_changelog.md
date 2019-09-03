@@ -49,8 +49,8 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.4.1</td>
 <td>03 Sept 2019</td>
 <td>
-<ul><li>Sets the redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in as the default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of `ibmcloud ks help`, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version `0.3` and `0.4`, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
-<li>Adds the [<code>ibmcloud ks script update</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) command to rewrite scripts that call kubernetes-service commands.</li>
+<ul><li>Sets the {{site.data.keyword.containerlong_notm}} plug-in to the redesigned format by default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of `ibmcloud ks help`, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version `0.3` and `0.4`, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
+<li>Adds the [<code>ibmcloud ks script update</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) command to rewrite scripts that call `ibmcloud ks` commands.</li>
 <li>Improves error handling for `ibmcloud ks cluster ls`.</li>
 <li>Updates help text.</li></ul>
 </td>

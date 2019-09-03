@@ -51,7 +51,8 @@ The following icons are used to indicate if a release note applies only to a cer
 </tr>
 </tbody></table>
 
-{[white-sapce.md]}
+<br />
+
 
 ## August 2019
 {: #aug19}
