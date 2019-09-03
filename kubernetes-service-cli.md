@@ -208,12 +208,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
 ## `ibmcloud ks` commands
 {: #map}
 
-<p>
-<figure>
- <img src="images/cs_cli_ref_imagemap.png" alt="Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in">
- <figcaption>Overview of commands in {{site.data.keyword.containerlong_notm}} plug-in</figcaption>
-</figure>
-</p>
+<img src="images/cs_cli_ref_imagemap.png" alt="Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in"/>
 
 ## `cluster` commands
 {: #cluster}
