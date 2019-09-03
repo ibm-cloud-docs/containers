@@ -58,11 +58,11 @@ Check out the following changes between each version of the CLI plug-in:
 
 <table summary="The rows are read from left to right, with the area of comparison in column one, Classic clusters CLI in column two, and VPC clusters CLI in column three.">
 <caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
-<col width="40%">
-<col width="15%">
-<col width="15%">
-<col width="15%">
-<col width="15%">
+<col width="60%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
+<col width="10%">
  <thead>
    <th>Functionality</th>
    <th>`0.2` (deprecated)</th>
@@ -201,7 +201,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
 ## `ibmcloud ks` commands
 {: #map}
 
-![Overview of commands in {{site.data.keyword.containerlong_notm}} plug-in](/images/cs_cli_ref_imagemap.png)
+![Overview of commands in {{site.data.keyword.containerlong_notm}} plug-in](images/cs_cli_ref_imagemap.png)
 
 ## `cluster` commands
 {: #cluster}
