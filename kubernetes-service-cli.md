@@ -65,12 +65,19 @@ Check out the following changes between each version of the CLI plug-in:
 <col width="10%">
  <thead>
    <th>Functionality</th>
-   <th>`0.2` (deprecated)</th>
-   <th>`0.3` (deprecated)</th>
-   <th>`0.4` (default)</th>
+   <th>`0.2`</th>
+   <th>`0.3`</th>
+   <th>`0.4`</th>
    <th>`1.0`</th>
  </thead>
  <tbody>
+  <tr>
+  <td>Supported?</td>
+  <td>Deprecated</td>
+  <td>Deprecated</td>
+  <td>Default</td>
+  <td>Latest</td>
+  </tr>
   <tr>
   <td>`ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul></td>
   <td>Legacy</td>
@@ -90,7 +97,7 @@ Check out the following changes between each version of the CLI plug-in:
   <td>Legacy and beta</td>
   <td>Beta</td>
   </tr>
-  <tr><td>Repeated arguments<ul><li>Legacy: Comma-delineated values (`ibmcloud ks zone-add-classic --worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`ibmcloud ks zone add classic -w pool1 -w pool2 ...`)</li></ul></td>
+  <tr><td>Repeated arguments<ul><li>Legacy: Comma-delineated values (`ibmcloud ks zone-add-classic --worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`ibmcloud ks zone add classic -p pool1 -p pool2 ...`)</li></ul></td>
   <td>Legacy</td>
   <td>Legacy</td>
   <td>Legacy and beta</td>
@@ -3553,8 +3560,8 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 <dt><code>--syslog-protocol</code></dt>
 <dd>The transfer layer protocol that is used when the logging type is <code>syslog</code>. Supported values are <code>tcp</code>, <code>tls</code>, and the default <code>udp</code>. When forwarding to a rsyslog server with the <code>udp</code> protocol, logs that are over 1KB are truncated.</dd>
 
-<dt><code>-c, --app-container</code></dt>
-<dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-c /var/log/myApp1/&ast; -c /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
+<dt><code>-C, --app-container</code></dt>
+<dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
 
 <dt><code>--skip-validation</code></dt>
 <dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
@@ -3713,8 +3720,8 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 <dt><code>-p, --app-path</code></dt>
 <dd>The path on the container that the apps are logging to. To forward logs with source type <code>application</code>, you must provide a path. Wildcards, such as '/var/log/*.log', can be used, but recursive globs, such as '/var/log/**/test.log', cannot be used. To specify more than one path, use multiple flags, such as `-p /var/log/myApp1/&ast; -p /var/log/myApp2/&ast;`. This value is required for log source <code>application</code>.</dd>
 
-<dt><code>-c, --app-container</code></dt>
-<dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-c /var/log/myApp1/&ast; -c /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
+<dt><code>-C, --app-container</code></dt>
+<dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -5130,7 +5137,7 @@ ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--json] [-s]
 
 **Command options**:
 <dl>
-<dt><code>--show-version</code> <em>(KUBERNETES|OPENSHIFT)</em></dt>
+<dt><code>--show-version <em>(KUBERNETES|OPENSHIFT)</em></code></dt>
 <dd>Show only the versions for the specified container platform. Supported values are <code>kubernetes</code> or <code>openshift</code>.</dd>
 
 <dt><code>--json</code></dt>
