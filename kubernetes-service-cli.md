@@ -51,21 +51,71 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     ```
     {: pre}
 
-Check out the following changes between each version of the CLI plug-in:
-
-|Functionality|`0.2` (deprecated)|`0.3` (deprecated)|`0.4` (default)|`1.0`|
-|-------------|------------------|------------------|---------------|-----|
-|`ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul>|Legacy|Legacy|Beta|Beta|
-|Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Beta: Spaced structure (`ibmcloud ks alb cert get`)</li></ul>|Legacy and beta|Legacy and beta|Legacy and beta|Beta|
-|Positional arguments<ul><li>Legacy: Arguments specified by position (`ibmcloud ks cluster-get mycluster`)</li><li>Beta: Arguments specified by flags (`ibmcloud ks cluster get --cluster mycluster`)</li></ul>|Legacy and beta|Legacy and beta|Legacy and beta|Beta|
-|Repeated arguments<ul><li>Legacy: Comma-delineated values (`ibmcloud ks zone-add-classic --worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`ibmcloud ks zone add classic -w pool1 -w pool2 ...`)</li></ul>|Legacy|Legacy|Legacy and beta|Beta|
-|Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Beta: Dashed (`--show-resources`)</li></ul>|Legacy|Legacy|Legacy and beta|Beta|
-|Cluster context<ul><li>Legacy: `ibmcloud ks cluster-config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current KUBECONFIG environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: `ibmcloud ks cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` in `~/.kube/config` or the first file in the KUBECONFIG environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul>|Legacy|Legacy|Legacy|Beta|
-|API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Beta: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul>|Legacy|Beta|Beta|Beta|
-{: caption="Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
-
 Have scripts that you want to update to use the beta formats? Check out the [`ibmcloud ks script update` command](#script_update).
 {: tip}
+
+Check out the following changes between each version of the CLI plug-in:
+
+<table summary="The rows are read from left to right, with the area of comparison in column one, Classic clusters CLI in column two, and VPC clusters CLI in column three.">
+<caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
+<col width="40%">
+<col width="15%">
+<col width="15%">
+<col width="15%">
+<col width="15%">
+ <thead>
+   <th>Functionality</th>
+   <th>`0.2` (deprecated)</th>
+   <th>`0.3` (deprecated)</th>
+   <th>`0.4` (default)</th>
+   <th>`1.0`</th>
+ </thead>
+ <tbody>
+  <tr>
+  <td>`ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul></td>
+  <td>Legacy</td>
+  <td>Legacy</td>
+  <td>Beta</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Beta: Spaced structure (`ibmcloud ks alb cert get`)</li></ul></td>
+  <td>Legacy and beta</td>
+  <td>Legacy and beta</td>
+  <td>Legacy and beta</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>Positional arguments<ul><li>Legacy: Arguments specified by position (`ibmcloud ks cluster-get mycluster`)</li><li>Beta: Arguments specified by flags (`ibmcloud ks cluster get --cluster mycluster`)</li></ul></td>
+  <td>Legacy and beta</td>
+  <td>Legacy and beta</td>
+  <td>Legacy and beta</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>Repeated arguments<ul><li>Legacy: Comma-delineated values (`ibmcloud ks zone-add-classic --worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`ibmcloud ks zone add classic -w pool1 -w pool2 ...`)</li></ul></td>
+  <td>Legacy</td>
+  <td>Legacy</td>
+  <td>Legacy and beta</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Beta: Dashed (`--show-resources`)</li></ul></td>
+  <td>Legacy</td>
+  <td>Legacy</td>
+  <td>Legacy and beta</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>Cluster context<ul><li>Legacy: `ibmcloud ks cluster-config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current KUBECONFIG environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: `ibmcloud ks cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` in `~/.kube/config` or the first file in the KUBECONFIG environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul></td>
+  <td>Legacy</td>
+  <td>Legacy</td>
+  <td>Legacy</td>
+  <td>Beta</td>
+  </tr>
+  <tr><td>API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Beta: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul></td>
+  <td>Legacy</td>
+  <td>Beta</td>
+  <td>Beta</td>
+  <td>Beta</td>
+  </tr>
+ </tbody>
+</table>
 
 <br />
 
@@ -3294,7 +3344,7 @@ ibmcloud ks key-protect-enable --cluster mycluster --key-protect-url keyprotect.
 <br />
 
 
-## Logging commands
+## `logging` commands
 {: #logging_commands}
 
 Forward logs from your cluster to an external server.
