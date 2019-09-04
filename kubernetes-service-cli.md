@@ -1167,7 +1167,7 @@ You might need to change your YAML files for future deployments. Review this [re
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.</p>
 
-The `cluster-refresh` alias for this command is deprecated.
+The `cluster-update` alias for this command is deprecated.
 {: deprecated}
 
 ```

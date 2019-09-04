@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,11 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>04 September 2019</td>
+  <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.3](/docs/containers?topic=containers-cs_cli_changelog).</li>
+  <li><strong>IAM whitelisting</strong>: If you use an IAM whitelist, you must [whitelist the CIDRs of the {{site.data.keyword.containerlong_notm}} control plane](/docs/containers?topic=containers-firewall#iam_whitelist) for the zones in the region where your cluster is located so that {{site.data.keyword.containerlong_notm}} can create Ingress ALBs and `LoadBalancers` in your cluster.</li></ul></td>
+</tr>
 <tr>
   <td>03 September 2019</td>
   <td><ul><li><strong>New! {{site.data.keyword.containerlong_notm}} plug-in version `0.4`</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for multiple changes in the [release of version 0.4.1](/docs/containers?topic=containers-cs_cli_changelog).</li>

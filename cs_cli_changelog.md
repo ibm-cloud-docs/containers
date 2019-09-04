@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-04"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,11 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.3</td>
+<td>04 Sept 2019</td>
+<td>Adds deprecation warnings for legacy commands to error messages that are sent to `stderr`.</td>
+</tr>
 <tr>
 <td>0.4.1</td>
 <td>03 Sept 2019</td>
