@@ -700,7 +700,7 @@ Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.*</code></li></ul></p>
+<li><code>192.168.255.&#42;</code></li></ul></p>
 {: #service-subnet}
 
 **<code>--service-subnet <em>SUBNET</em></code>**</br>
@@ -708,7 +708,7 @@ Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.*</code></li></ul></p>
+<li><code>192.168.255.&#42;</code></li></ul></p>
 
 **<code>-s</code>**</br>
 Do not show the message of the day or update reminders. This value is optional.
@@ -801,14 +801,14 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.*</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
 
 <dt><code>--service-subnet <em>SUBNET</em></code></dt>
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.*</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code></li></ul></p></dd>
 
 <dt><code>-s</code>**</dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
