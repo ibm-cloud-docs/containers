@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-26"
+lastupdated: "2019-09-04"
 
 keywords: kubernetes, iks, containers
 
@@ -92,6 +92,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters</h2>
          <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support, and choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
     </div>
+    </a>
 </div>
   <div class="solutionBox">
    <a href = "#vpc-classic-gs">
@@ -99,6 +100,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic</h2>
          <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Use security groups, and network access control lists to control network traffic.   </p>
      </div>
+    </a>
 </div>
     </div>
    
