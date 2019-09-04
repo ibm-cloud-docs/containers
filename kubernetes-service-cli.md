@@ -3306,7 +3306,7 @@ ibmcloud ks alb update --cluster CLUSTER [--json] [-s]
 <br />
 
 
-### Beta: `key-protect-enable` command
+## Beta: `key-protect-enable` command
 {: #cs_key_protect}
 
 Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. To rotate a key in a cluster with existing key encryption, rerun this command with a new root key ID.
