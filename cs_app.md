@@ -343,7 +343,8 @@ spec:
   - port: 9080
   selector:
     app: wasliberty
-    type: NodePort</pre></code></p></dd>
+    type: NodePort</pre></code></p>
+  <p class="important">If you have a requirement to deploy `hostNetwork` pods to listen on specific ports or to use a `hostPort` to expose your app pods on a specific port on the worker node, use a port in the `11000-11200` range. {{site.data.keyword.containerlong_notm}} designates the `11000-11200` port range on worker nodes for this purpose to avoid conflicts with local ports and other ports that {{site.data.keyword.containerlong_notm}} uses. Because `hostNetwork` pods and `hostPorts` refer to a particular worker node IP address, the pods are limited to run only on that worker node. If something unanticipated happens, such as the worker node being removed or running out of resources, your pod cannot be rescheduled. If you want to expose a pod’s port on the worker node, consider using a [`NodePort` service](/docs/containers?topic=containers-nodeport) instead. For more information, see the [Kubernetes best practices documentation](https://kubernetes.io/docs/concepts/configuration/overview/#services).</p></dd>
 
 <dt id="configmap">Configmaps for container environment variables</dt>
 <dd><p>Configmaps provide non-sensitive configuration information for your deployment workloads. The following example shows how you can reference values from your configmap as environment variables in the container spec section of your deployment YAML. By referencing values from your configmap, you can decouple this configuration information from your deployment to keep your containerized app portable.<ul><li>[Help me decide whether to use a Kubernetes `ConfigMap` or `Secret` object for variables](#variables).</li>

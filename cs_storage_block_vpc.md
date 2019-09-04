@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-04"
 
 keywords: kubernetes, iks, vpc
 
@@ -396,7 +396,7 @@ If you have an existing physical VPC Block Storage device that you want to use i
    <td>Enter a name for your PV. </td>
    </tr>
    <tr>
-   <td><code>spec.capacity.storage</td>
+      <td><code>spec.capacity.storage</code></td>
    <td>Enter the size of your VPC Block Storage volume in gigabytes (Gi) that you retrieved earlier. For example, if the size of your device is 100 GB, enter <code>100Gi</code>.  </td>
    </tr>
    <tr>

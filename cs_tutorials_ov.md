@@ -128,6 +128,7 @@ subcollection: containers
           </div>
       </div>
   </div>
+  </a>
   <a href = "/docs/containers?topic=containers-vpc_ks_tutorial">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
