@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-04"
 
 keywords: kubernetes, iks, versions, update
 
@@ -232,6 +232,7 @@ The following table shows the actions that you must take before you update the K
 <td>Default Calico policy change</td>
 <td>If you created custom Calico HostEndpoints that refer to an `iks.worker.interface == 'private'` label, a new default Calico policy, `allow-all-private-default`, might disrupt network traffic. You must create a Calico policy with the `iks.worker.interface == 'private'` label to override the default policy. For more information, see [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy).</td>
 </tr>
+  </tbody>
 </table>
 
 ### Update after master
@@ -257,6 +258,7 @@ The following table shows the actions that you must take after you update the Ku
 <td>Unsupported: `kubectl scale job`</td>
 <td>The `kubectl scale job` command is removed. If your scripts rely on this command, update them.</td>
 </tr>
+  </tbody>
 </table>
 
 ### Update after worker nodes
@@ -278,6 +280,7 @@ The following table shows the actions that you must take after you update your w
 <td>`kubelet probe metrics` type are now counters rather than gauge</td>
 <td>The previous method of using the gauge type for probe metrics is replaced by the counters type. The gauge type returned `0` for success and `1` for failed operations. Now, the counters type keeps track of the number of times that the metric returns `successful`, `failure`, or `unknown`. If your automation processes rely on a `0` successful or `1` failed gauge response, update the processes to use the counters response statuses. The numerical response value can now indicate the number of times that the counters response statuses are reported.<br><br>Additionally, to reflect this change in functionality, the `prober_probe_result` metric is replaced by the `prober_probe_total` metric.</td>
 </tr>
+</tbody>
 </table>
 
 <br />
