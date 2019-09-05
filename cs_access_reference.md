@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -49,9 +49,9 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 |----|----|----|
 | View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks addon-versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions) | [`GET /v1/addon`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetAddons) |
 | Target or view the API endpoint for {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks api`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api) | - |
-| View a list of supported commands and parameters. | [`ibmcloud ks help`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_help) | - |
+| View a list of supported commands and parameters. | `ibmcloud ks help` | - |
 | Initialize the {{site.data.keyword.containerlong_notm}} plug-in or specify the region where you want to create or access Kubernetes clusters. | [`ibmcloud ks init`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) | - |
-| Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks kube-versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_kube_versions) | [`GET /v1/kube-versions`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions) |
+| Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. | `ibmcloud ks kube-versions`| [`GET /v1/kube-versions`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions) |
 | View a list of available flavors for your worker nodes. | [`ibmcloud ks flavors`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types) | [`GET /v2​/getFlavors`](https://containers.cloud.ibm.com/swagger-api/#/vpc/v2GetFlavors) |
 | View current messages for the IBMid user. | [`ibmcloud ks messages`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages) | [`GET /v1/messages`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages) |
 | Deprecated: Find the {{site.data.keyword.containerlong_notm}} region that you are currently in. | [`ibmcloud ks region`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region) | - |

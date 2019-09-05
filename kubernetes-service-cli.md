@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -3306,7 +3306,7 @@ ibmcloud ks alb update --cluster CLUSTER [--json] [-s]
 <br />
 
 
-### Beta: `key-protect-enable` command
+## Beta: `key-protect-enable` command
 {: #cs_key_protect}
 
 Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservicefull}} ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/services/key-protect?topic=key-protect-getting-started-tutorial#getting-started-tutorial) as a [key management service (KMS) provider ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/) in your cluster. To rotate a key in a cluster with existing key encryption, rerun this command with a new root key ID.
@@ -4133,6 +4133,48 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 {: pre}
 
 </br>
+
+### `ibmcloud ks nlb-dns rm`
+{: #cs_nlb-dns-rm}
+
+Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
+{: shortdesc}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
+
+```
+ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+```
+{: pre}
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>The NLB IP that you want to remove. To see the IPs registered with each subdomain, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
+
+<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
+<dd>The host name that you want to remove an IP from. To see existing host names, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+</br>
+
 ### `ibmcloud ks nlb-dns monitor configure`
 {: #cs_nlb-dns-monitor-configure}
 
@@ -4396,47 +4438,6 @@ ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host HOST_NAME] [--j
 **Example**:
 ```
 ibmcloud ks nlb-dns monitor status --cluster mycluster
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks nlb-dns rm`
-{: #cs_nlb-dns-rm}
-
-Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
-{: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
-
-```
-ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
-```
-{: pre}
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--ip <em>IP</em></code></dt>
-<dd>The NLB IP that you want to remove. To see your NLB IPs, run <code>kubectl get svc</code>.</dd>
-
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to remove an IP from. To see existing host names, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
-
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks nlb-dns rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -4753,7 +4754,7 @@ ibmcloud ks credential unset --region us-south
 Check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.</p>
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command applies to infrastructure permissions for classic resources only.</p>
 
 **What do `required` and `suggested` infrastructure permissions mean?**<br>
 If the infrastructure credentials for the region and resource group are missing any permissions, the output of this command returns a list of `required` and `suggested` permissions.
@@ -5093,7 +5094,7 @@ ibmcloud ks messages
 
 <br />
 
-### `ibmcloud ks supported-locations`
+## supported-locations command
 {: #cs_supported-locations}
 
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
