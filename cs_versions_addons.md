@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -58,6 +58,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>524 / 340</td>
+<td>05 Sept 2019</td>
+<td>Fixes HTTP/2 vulnerabilities for [CVE-2019-9511 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9511) and [CVE-2019-9513 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9513).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>524 / 337</td>
 <td>26 Aug 2019</td>
