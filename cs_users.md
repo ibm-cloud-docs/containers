@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -201,7 +201,7 @@ For VPC clusters, you must have the {{site.data.keyword.cloud_notm}} IAM **Admin
 
 For both [classic and VPC clusters](/docs/containers?topic=containers-infrastructure_providers), these infrastructure credentials are stored in an API key for the region and resource group of the cluster. To create and manage clusters after the infrastructure permissions are set, assign users IAM access roles to the {{site.data.keyword.containerlong_notm}}.
 
-Unlike classic, VPC does not support manually setting infrastructure credentials (`ibmcloud ks credential set`) to use another IBM Cloud infrastructure account to provision worker nodes. You must use you {{site.data.keyword.cloud_notm}} account's linked infrastructure portfolio.
+Unlike classic, VPC does not support manually setting infrastructure credentials (`ibmcloud ks credential set`) to use another IBM Cloud infrastructure account to provision worker nodes. You must use your {{site.data.keyword.cloud_notm}} account's linked infrastructure portfolio.
 {: important}
 
 
