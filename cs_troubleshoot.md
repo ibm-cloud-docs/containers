@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, help, debug
 
@@ -355,6 +355,14 @@ The **Master Status** provides details of what operation from the master state i
        <td>`updating`</td>
        <td>The master is updating its Kubernetes version. The update might be a patch update that is automatically applied, or a minor or major version that you applied by updating the cluster. During the update, your highly available master can continue processing requests, and your app workloads and worker nodes continue to run. After the master update is complete, you can [update your worker nodes](/docs/containers?topic=containers-update#worker_node).<br><br>
        If the update is unsuccessful, the master returns to a `deployed` state and continues running the previous version. IBM Support is notified and works to resolve the issue. You can check if the update failed in the **Master Status** field.</td>
+    </tr>
+    <tr>
+       <td>`update_cancelled`</td>
+       <td>The master update is cancelled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `{[icks}} cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).<p class="note">If you do not want to update the master to the default `major.minor` version during the update, include the `--kube-version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.14.6`. To list available versions, run `ibmcloud ks versions`.</p></td>
+    </tr>
+    <tr>
+       <td>`update_failed`</td>
+       <td>The master update failed. IBM Support is notified and works to resolve the issue. You can continue to monitor the health of the master until the master reaches a normal state. If the master remains in this state for more than 1 day, open an {{site.data.keyword.cloud_notm}} support case. IBM Support might identify other issues in your cluster that you must fix before the master can be updated.</td>
     </tr>
    </tbody>
  </table>
