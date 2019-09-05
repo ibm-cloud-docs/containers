@@ -3543,7 +3543,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the container log source and is optional. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-<dd>When the logging type is <code>syslog</code>, this value is the host name or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, this value is the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+<dd>When the logging type is <code>syslog</code>, this value is the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, this value is the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -3706,7 +3706,7 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
 
 <dt><code>--hostname <em>LOG_SERVER_HOSTNAME</em></code></dt>
-<dd>When the logging type is <code>syslog</code>, this value is the host name or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, this value is the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
+<dd>When the logging type is <code>syslog</code>, this value is the hostname or IP address of the log collector server. This value is required for <code>syslog</code>. When the logging type is <code>ibm</code>, this value is the {{site.data.keyword.loganalysislong_notm}} ingestion URL. You can find the list of available ingestion URLs [here](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region where your cluster was created is used.</dd>
 
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
 <dd>The port of the log collector server. This value is optional when the logging type is <code>syslog</code>. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and <code>9091</code> is used for <code>ibm</code>.</dd>
@@ -4015,7 +4015,7 @@ ibmcloud ks logging refresh --cluster my_cluster
 ## `nlb-dns` commands
 {: #nlb-dns}
 
-Create and manage host names for network load balancer (NLB) IP addresses and health check monitors for host names. For more information, see [Registering a load balancer host name](/docs/containers?topic=containers-loadbalancer_hostname).
+Create and manage subdomains for network load balancer (NLB) IP addresses and health check monitors for subdomains. For more information, see [Registering a load balancer subdomain](/docs/containers?topic=containers-loadbalancer_hostname).
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This group of commands work for classic clusters only.</p>
@@ -4023,15 +4023,15 @@ Create and manage host names for network load balancer (NLB) IP addresses and he
 ### `ibmcloud ks nlb-dns add`
 {: #cs_nlb-dns-add}
 
-Add one or more network load balancer (NLB) IP addresses to an existing host name that you created with the [`ibmcloud ks nlb-dns create` command](#cs_nlb-dns-create).
+Add one or more network load balancer (NLB) IP addresses to an existing subdomain that you created with the [`ibmcloud ks nlb-dns create` command](#cs_nlb-dns-create).
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
-For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register the NLB IPs with a host name by running `ibmcloud ks nlb-dns create`. Later, you add another zone to your cluster and another NLB for that zone. You can use this command to add the new NLB IP to this existing host name. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.
+For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register the NLB IPs with a subdomain by running `ibmcloud ks nlb-dns create`. Later, you add another zone to your cluster and another NLB for that zone. You can use this command to add the new NLB IP to this existing subdomain. When a user accesses your app subdomain, the client accesses one of these IPs at random, and the request is sent to that NLB.
 
 ```
-ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_IP ...] --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_IP ...] --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4043,10 +4043,10 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_I
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--ip <em>NLB_IP</em></code></dt>
-<dd>The NLB IP address(es) that you want to add to the host name. To see your NLB IPs, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
+<dd>The NLB IP address(es) that you want to add to the subdomain. To see your NLB IPs, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to add IPs to. To see existing host names, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that you want to add IPs to. To see existing subdomains, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4065,7 +4065,7 @@ ibmcloud ks nlb-dns add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1
 ### `ibmcloud ks nlb-dns create`
 {: #cs_nlb-dns-create}
 
-Publicly expose your app by creating a DNS host name to register a network load balancer (NLB) IP.
+Publicly expose your app by creating a DNS subdomain to register a network load balancer (NLB) IP.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
@@ -4102,7 +4102,7 @@ ibmcloud ks nlb-dns create --cluster mycluster --ip 1.1.1.1
 ### `ibmcloud ks nlb-dns ls`
 {: #cs_nlb-dns-ls}
 
-List the network load balancer host names and IP addresses that are registered in a cluster.
+List the network load balancer subdomains and IP addresses that are registered in a cluster.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
@@ -4137,13 +4137,13 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 ### `ibmcloud ks nlb-dns rm`
 {: #cs_nlb-dns-rm}
 
-Remove a network load balancer IP address from a host name. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
+Remove a network load balancer IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4157,8 +4157,8 @@ ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host HOST_NAME [--json] [
 <dt><code>--ip <em>IP</em></code></dt>
 <dd>The NLB IP that you want to remove. To see the IPs registered with each subdomain, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that you want to remove an IP from. To see existing host names, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that you want to remove an IP from. To see existing subdomains, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4178,7 +4178,7 @@ ibmcloud ks nlb-dns rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b
 ### `ibmcloud ks nlb-dns monitor configure`
 {: #cs_nlb-dns-monitor-configure}
 
-Configure and optionally enable a health check monitor for an existing NLB host name in a cluster. When you enable a monitor for your host name, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
+Configure and optionally enable a health check monitor for an existing NLB subdomain in a cluster. When you enable a monitor for your subdomain, the monitor health checks the NLB IP in each zone and keeps the DNS lookup results updated based on these health checks.
 {: shortdesc}
 
 You can use this command to create and enable a new health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure. To update an existing monitor, include only the flags for the settings that you want to change.
@@ -4186,7 +4186,7 @@ You can use this command to create and enable a new health check monitor, or to 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST NAME [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
+ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
 ```
 {: pre}
 
@@ -4195,13 +4195,13 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host HOST NAME [--
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where the host name is registered.</dd>
+<dd>The name or ID of the cluster where the subdomain is registered.</dd>
 
-<dt><code>--nlb-host <em>HOST NAME</em></code></dt>
-<dd>The host name to configure a health check monitor for. To list host names, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain to configure a health check monitor for. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--enable</code></dt>
-<dd>Include this flag to create and enable a new health check monitor for a host name.</dd>
+<dd>Include this flag to create and enable a new health check monitor for a subdomain.</dd>
 
 <dt><code>--description <em>DESCRIPTION</em></code></dt>
 <dd>A description of the health monitor.</dd>
@@ -4259,13 +4259,13 @@ ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a
 ### `ibmcloud ks nlb-dns monitor disable`
 {: #cs_nlb-dns-monitor-disable}
 
-Disable an existing health check monitor for a host name in a cluster.
+Disable an existing health check monitor for a subdomain in a cluster.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4276,8 +4276,8 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host HOST_NAME [--js
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4304,7 +4304,7 @@ The first time that you create a health check monitor, you must configure and en
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4315,8 +4315,8 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host HOST_NAME [--jso
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4342,7 +4342,7 @@ View the settings for an existing health check monitor.
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST_NAME [--json] [-s]
+ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4353,8 +4353,8 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host HOST_NAME [--json] 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>The host name that the monitor health checks. To list host names, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -4373,7 +4373,7 @@ ibmcloud ks nlb-dns monitor get --cluster mycluster --nlb-host mycluster-a1b2cde
 ### `ibmcloud ks nlb-dns monitor ls`
 {: #cs_nlb-dns-monitor-ls}
 
-List the health check monitor settings for each NLB host name in a cluster.
+List the health check monitor settings for each NLB subdomain in a cluster.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
@@ -4408,13 +4408,13 @@ ibmcloud ks nlb-dns monitor ls --cluster mycluster
 ### `ibmcloud ks nlb-dns monitor status`
 {: #cs_nlb-dns-monitor-status}
 
-List the health check status for the IPs behind NLB host names in a cluster.
+List the health check status for the IPs behind NLB subdomains in a cluster.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
-ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host HOST_NAME] [--json] [-s]
+ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host SUBDOMAIN] [--json] [-s]
 ```
 {: pre}
 
@@ -4425,8 +4425,8 @@ ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host HOST_NAME] [--j
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--nlb-host <em>HOST_NAME</em></code></dt>
-<dd>Include this flag to view the status for only one host name. To list host names, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>Include this flag to view the status for only one subdomain. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -226,7 +226,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-4. Ensure that the IPs for each public ALB that you got in step 2 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same host name.
+4. Ensure that the IPs for each public ALB that you got in step 2 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same subdomain.
 
     ```
     kubectl get ingress -o wide
@@ -329,7 +329,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         ```
         {: pre}
 
-        Example output that confirms the ALB pod is configured with the correct health check host name, `albhealth.<domain>`:
+        Example output that confirms the ALB pod is configured with the correct health check subdomain, `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

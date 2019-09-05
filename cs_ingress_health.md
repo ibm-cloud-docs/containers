@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks
 
@@ -338,7 +338,7 @@ After you install the [metrics exporter](#metrics-exporter), you can install the
     ```
     {:screen}
 
-6. In a browser, enter the URL for the Prometheus dashboard. This host name has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
+6. In a browser, enter the URL for the Prometheus dashboard. This hostname has the format `prom-dash.mycluster-12345.us-south.containers.appdomain.cloud`. The Prometheus dashboard for your ALB opens.
 
 7. Review more information about the [ALB](#alb_metrics), [server](#server_metrics), and [upstream](#upstream_metrics) metrics listed in the dashboard.
 

@@ -324,7 +324,7 @@ The following table shows the different options that you have when you configure
     <tr>
       <td><code><em>--hostname</em></code></td>
       <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-      <p>For syslog, specify the host name or IP address of the log collector service.</p></td>
+      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
     </tr>
     <tr>
       <td><code><em>--port</em></code></td>

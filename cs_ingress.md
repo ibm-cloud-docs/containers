@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -149,7 +149,7 @@ If the apps in your cluster are all in the same namespace, one Ingress resource 
 If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there.
 {: shortdesc}
 
-However, you can define a host name in only one resource. You cannot define the same host name in multiple resources. To register multiple Ingress resources with the same host name, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+However, you can define a hostname in only one resource. You cannot define the same hostname in multiple resources. To register multiple Ingress resources with the same hostname, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
@@ -717,7 +717,7 @@ When you configure the private ALBs, you must expose your apps by using a custom
 
 1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
-3. Using your private DNS service, define an alias for your custom domain by specifying the VPC load balancer-assigned private host name as a Canonical Name record (CNAME). To find the host name assigned by your cluster's VPC load balancer for your private ALBs, run `ibmcloud ks alb ls --cluster <cluster_name_or_ID>`. In the output, look for the **Load Balancer Hostname** field of your private ALBs. </br>
+3. Using your private DNS service, define an alias for your custom domain by specifying the VPC load balancer-assigned private hostname as a Canonical Name record (CNAME). To find the hostname assigned by your cluster's VPC load balancer for your private ALBs, run `ibmcloud ks alb ls --cluster <cluster_name_or_ID>`. In the output, look for the **Load Balancer Hostname** field of your private ALBs. </br>
 
 **Private VLAN-only classic clusters:**
 

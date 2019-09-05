@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, knative
 
@@ -250,16 +250,16 @@ After you set up Knative in your cluster, you can deploy your serverless app as 
 {: shortdesc}
 
 **What is a Knative service?** </br>
-To deploy an app with Knative, you must specify a Knative `Service` resource. A Knative service is managed by the Knative `Serving` primitive and is responsible to manage the entire lifecycle of the workload. When you create the service, the Knative `Serving` primitive automatically creates a version for your serverless app and adds this version to the revision history of the service. Your serverless app is assigned a public URL from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the internet. In addition, a private host name is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster.
+To deploy an app with Knative, you must specify a Knative `Service` resource. A Knative service is managed by the Knative `Serving` primitive and is responsible to manage the entire lifecycle of the workload. When you create the service, the Knative `Serving` primitive automatically creates a version for your serverless app and adds this version to the revision history of the service. Your serverless app is assigned a public URL from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster.
 
 **What happens behind the scenes when I create the Knative service?**</br>
-When you create a Knative service, your app is automatically deployed as a Kubernetes pod in your cluster and exposed by using a Kubernetes service. To assign the public host name, Knative uses the IBM-provided Ingress subdomain and TLS certificate. Incoming network traffic is routed based on the default IBM-provided Ingress routing rules.
+When you create a Knative service, your app is automatically deployed as a Kubernetes pod in your cluster and exposed by using a Kubernetes service. To assign the public hostname, Knative uses the IBM-provided Ingress subdomain and TLS certificate. Incoming network traffic is routed based on the default IBM-provided Ingress routing rules.
 
 **How can I roll out a new version of my app?**</br>
-When you update your Knative service, a new version of your serverless app is created. This version is assigned the same public and private host names as your previous version. By default, all incoming network traffic is routed to the latest version of your app. However, you can also specify the percentage of incoming network traffic that you want to route to a specific app version so that you can do A-B testing. You can split incoming network traffic between two app versions at a time, the current version of your app and the new version that you want to roll over to.  
+When you update your Knative service, a new version of your serverless app is created. This version is assigned the same public and private hostnames as your previous version. By default, all incoming network traffic is routed to the latest version of your app. However, you can also specify the percentage of incoming network traffic that you want to route to a specific app version so that you can do A-B testing. You can split incoming network traffic between two app versions at a time, the current version of your app and the new version that you want to roll over to.  
 
 **Can I bring my own custom domain and TLS certificate?** </br>
-You can change the configmap of your Istio Ingress gateway and the Ingress routing rules to use your custom domain name and TLS certificate when you assign a host name to your serverless app. For more information, see [Setting up custom domain names and certificates](#knative-custom-domain-tls).
+You can change the configmap of your Istio Ingress gateway and the Ingress routing rules to use your custom domain name and TLS certificate when you assign a hostname to your serverless app. For more information, see [Setting up custom domain names and certificates](#knative-custom-domain-tls).
 
 To deploy your serverless app as a Knative service:
 
@@ -457,10 +457,10 @@ To deploy your serverless app as a Knative service:
 ## Setting up custom domain names and certificates
 {: #knative-custom-domain-tls}
 
-You can configure Knative to assign host names from your own custom domain that you configured with TLS.
+You can configure Knative to assign hostnames from your own custom domain that you configured with TLS.
 {: shortdesc}
 
-By default, every app is assigned a public subdomain from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the Internet. In addition, a private host name is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster. If you want to assign host names from a custom domain that you own, you can change the Knative configmap to use the custom domain instead.
+By default, every app is assigned a public subdomain from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the Internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster. If you want to assign hostnames from a custom domain that you own, you can change the Knative configmap to use the custom domain instead.
 
 1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
@@ -535,7 +535,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
    The `spec.rules.host` and `spec.tls.hosts` sections are lists and can include multiple custom domains and TLS certificates.
    {: tip}
 
-7. Modify the Knative `config-domain` configmap to use your custom domain to assign host names to new Knative services.
+7. Modify the Knative `config-domain` configmap to use your custom domain to assign hostnames to new Knative services.
    1. Open the `config-domain` configmap to start editing it.
       ```
       kubectl edit configmap config-domain -n knative-serving
@@ -543,7 +543,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
       {: pre}
 
    2. Specify your custom domain in the `data` section of your configmap and remove the default domain that is set for your cluster.
-      - **Example to assign a host name from your custom domain for all Knative services**:
+      - **Example to assign a hostname from your custom domain for all Knative services**:
         ```
         apiVersion: v1
         kind: ConfigMap
@@ -555,9 +555,9 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
         ```
         {: codeblock}
 
-        By adding `""` to your custom domain, all Knative services that you create are assigned a host name from your custom domain.  
+        By adding `""` to your custom domain, all Knative services that you create are assigned a hostname from your custom domain.  
 
-      - **Example to assign a host name from your custom domain for select Knative services**:
+      - **Example to assign a hostname from your custom domain for select Knative services**:
         ```
         apiVersion: v1
         kind: ConfigMap
@@ -572,7 +572,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
         ```
         {: codeblock}
 
-        To assign a host name from your custom domain for select Knative services only, add a `data.selector` label key and value to your configmap. In this example, all services with the label `app: sample` are assigned a host name from your custom domain. Make sure to also have a domain name that you want to assign to all other apps that do not have the `app: sample` label. In this example, the default IBM-provided domain `mycluster.us-south.containers.appdomain.cloud` is used.
+        To assign a hostname from your custom domain for select Knative services only, add a `data.selector` label key and value to your configmap. In this example, all services with the label `app: sample` are assigned a hostname from your custom domain. Make sure to also have a domain name that you want to assign to all other apps that do not have the `app: sample` label. In this example, the default IBM-provided domain `mycluster.us-south.containers.appdomain.cloud` is used.
     3. Save your changes.
 
 With your Ingress routing rules and Knative configmaps all set up, you can create Knative services with your custom domain and TLS certificate.
@@ -950,7 +950,7 @@ If you do not want Knative to scale down your service to zero instances, set the
 ### Creating private-only serverless apps
 {: #knative-private-only}
 
-By default, every Knative service is assigned a public route from your Istio Ingress subdomain and a private route in the format `<service_name>.<namespace>.cluster.local`. You can use the public route to access your app from the public network. If you want to keep your service private, you can add the `serving.knative.dev/visibility` label to your Knative service. This label instructs Knative to assign a private host name to your service only.
+By default, every Knative service is assigned a public route from your Istio Ingress subdomain and a private route in the format `<service_name>.<namespace>.cluster.local`. You can use the public route to access your app from the public network. If you want to keep your service private, you can add the `serving.knative.dev/visibility` label to your Knative service. This label instructs Knative to assign a private hostname to your service only.
 {: shortdesc}
 
 ```
@@ -977,7 +977,7 @@ spec:
 <tbody>
 <tr>
 <td><code>serving.knative.dev/visibility</code></td>
-  <td>If you add the <code>serving.knative.dev/visibility: cluster-local</code> label, your service is assigned only a private route in the format <code>&lt;service_name&gt;.&lt;namespace&gt;.cluster.local</code>. You can use the private host name to access your service from within the cluster, but you cannot access your service from the public network.  </td>
+  <td>If you add the <code>serving.knative.dev/visibility: cluster-local</code> label, your service is assigned only a private route in the format <code>&lt;service_name&gt;.&lt;namespace&gt;.cluster.local</code>. You can use the private hostname to access your service from within the cluster, but you cannot access your service from the public network.  </td>
 </tr>
 </tbody>
 </table>

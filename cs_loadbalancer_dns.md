@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
-keywords: kubernetes, iks, lb2.0, nlb, health check, dns, host name
+keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
 subcollection: containers
 
@@ -23,27 +23,27 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Classic: Registering an NLB host name
+# Classic: Registering an NLB subdomain
 {: #loadbalancer_hostname}
 
-After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating host names. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each host name.
+After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
 {: shortdesc}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> DNS entries can be created for network load balancers (NLBs) in classic clusters only, and cannot be created for Kubernetes `LoadBalancers` in VPC on Classic clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> DNS entries can be created for network load balancers (NLBs) in classic clusters only, and cannot be created for Kubernetes `LoadBalancers` in VPC on Classic clusters. In VPC clusters, load balancers are already assigned a hostname instead of an IP address by a VPC load balancer. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
 
 
 <dl>
-<dt>Host name</dt>
-<dd>When you create a public NLB in a single-zone or multizone cluster, you can expose your app to the internet by creating a host name for the NLB IP address. Additionally, {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the host name for you.
-<p>In multizone clusters, you can create a host name and add the NLB IP address in each zone to that host name DNS entry. For example, if you deployed NLBs for your app in three zones in US-South, you can create the host name `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the three NLB IP addresses. When a user accesses your app host name, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
-Note that you currently cannot create host names for private NLBs.</dd>
+<dt>Subdomain</dt>
+<dd>When you create a public NLB in a single-zone or multizone cluster, you can expose your app to the internet by creating a subdomain for the NLB IP address. Additionally, {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you.
+<p>In multizone clusters, you can create a subdomain and add the NLB IP address in each zone to that subdomain DNS entry. For example, if you deployed NLBs for your app in three zones in US-South, you can create the subdomain `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud` for the three NLB IP addresses. When a user accesses your app subdomain, the client accesses one of these IPs at random, and the request is sent to that NLB.</p>
+Note that you currently cannot create subdomains for private NLBs.</dd>
 <dt>Health check monitor</dt>
-<dd>Enable health checks on the NLB IP addresses behind a single host name to determine whether they are available or not. When you enable a monitor for your host name, the monitor health checks each NLB IP and keeps the DNS lookup results updated based on these health checks. For example, if your NLBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your host name returns all 3 IPs, 1 of which the client accesses at random. If the NLB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that IP fails, the monitor removes the failed IP from the host name, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` IPs.</dd>
+<dd>Enable health checks on the NLB IP addresses behind a single subdomain to determine whether they are available or not. When you enable a monitor for your subdomain, the monitor health checks each NLB IP and keeps the DNS lookup results updated based on these health checks. For example, if your NLBs have IP addresses `1.1.1.1`, `2.2.2.2`, and `3.3.3.3`, a normal operation DNS lookup of your subdomain returns all 3 IPs, 1 of which the client accesses at random. If the NLB with IP address `3.3.3.3` becomes unavailable for any reason, such as due to zone failure, then the health check for that IP fails, the monitor removes the failed IP from the subdomain, and the DNS lookup returns only the healthy `1.1.1.1` and `2.2.2.2` IPs.</dd>
 </dl>
 
-You can see all host names that are registered for NLB IPs in your cluster by running the following command.
+You can see all subdomains that are registered for NLB IPs in your cluster by running the following command.
 ```
 ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
 ```
@@ -51,21 +51,21 @@ ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
 
 </br>
 
-## Registering NLB IPs with a DNS host name
+## Registering NLB IPs with a DNS subdomain
 {: #loadbalancer_hostname_dns}
 
-Expose your app to the public internet by creating a host name for the network load balancer (NLB) IP address.
+Expose your app to the public internet by creating a subdomain for the network load balancer (NLB) IP address.
 {: shortdesc}
 
 Before you begin:
 * Review the following considerations and limitations.
-  * You can create host names for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC on Classic clusters
+  * You can create subdomains for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC on Classic clusters
   .
-  * You currently cannot create host names for private NLBs.
-  * You can register up to 128 host names. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
+  * You currently cannot create subdomains for private NLBs.
+  * You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 * [Create an NLB for your app in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config) or [create NLBs in each zone of a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
 
-To create a host name for one or more NLB IP addresses:
+To create a subdomain for one or more NLB IP addresses:
 
 1. Get the **EXTERNAL-IP** address for your NLB. If you have NLBs in each zone of a multizone cluster that expose one app, get the IPs for each NLB.
   ```
@@ -81,13 +81,13 @@ To create a host name for one or more NLB IP addresses:
   ```
   {: screen}
 
-2. Register the IP by creating a DNS host name. To specify multiple IP addresses, use multiple `--ip` flags.
+2. Register the IP by creating a DNS subdomain. To specify multiple IP addresses, use multiple `--ip` flags.
   ```
   ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
   ```
   {: pre}
 
-3. Verify that the host name is created.
+3. Verify that the subdomain is created.
   ```
   ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
@@ -100,7 +100,7 @@ To create a host name for one or more NLB IP addresses:
   ```
   {: screen}
 
-4. Optional: Verify that the IPs are registered with your host name by running a `host` or `ns lookup`.
+4. Optional: Verify that the IPs are registered with your subdomain by running a `host` or `ns lookup`.
   Example command:
   ```
   host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
@@ -114,23 +114,23 @@ To create a host name for one or more NLB IP addresses:
   ```
   {: screen}
 
-5. In a web browser, enter the URL to access your app through the host name that you created.
+5. In a web browser, enter the URL to access your app through the subdomain that you created.
 
-Next, you can [enable health checks on the host name by creating a health monitor](#loadbalancer_hostname_monitor).
+Next, you can [enable health checks on the subdomain by creating a health monitor](#loadbalancer_hostname_monitor).
 
 </br>
 
-## Understanding the host name format
+## Understanding the subdomain format
 {: #loadbalancer_hostname_format}
 
-Host names for NLBs follow the format `<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`.
+Subdomains for NLBs follow the format `<cluster_name>-<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`.
 {: shortdesc}
 
-For example, a host name that you create for an NLB might look like `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. The following table describes each component of the host name.
+For example, a subdomain that you create for an NLB might look like `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`. The following table describes each component of the subdomain.
 
 <table>
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the LB host name format</th>
+<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the NLB subdomain format</th>
 </thead>
 <tbody>
 <tr>
@@ -143,12 +143,12 @@ For example, a host name that you create for an NLB might look like `mycluster-a
 </tr>
 <tr>
 <td><code>&lt;globally_unique_account_HASH&gt;</code></td>
-<td>A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All host names that you create for NLBs in clusters in your account use this globally unique HASH.</td>
+<td>A globally unique HASH is created for your {{site.data.keyword.cloud_notm}} account. All subdomains that you create for NLBs in clusters in your account use this globally unique HASH.</td>
 </tr>
 <tr>
 <td><code>0001</code></td>
 <td>
-The first and second characters, <code>00</code>, indicate a public host name. The third and fourth characters, such as <code>01</code> or another number, act as a counter for each host name that you create.</td>
+The first and second characters, <code>00</code>, indicate a public subdomain. The third and fourth characters, such as <code>01</code> or another number, act as a counter for each subdomain that you create.</td>
 </tr>
 <tr>
 <td><code>&lt;region&gt;</code></td>
@@ -156,22 +156,22 @@ The first and second characters, <code>00</code>, indicate a public host name. T
 </tr>
 <tr>
 <td><code>containers.appdomain.cloud</code></td>
-<td>The subdomain for {{site.data.keyword.containerlong_notm}} host names.</td>
+<td>The subdomain for {{site.data.keyword.containerlong_notm}} subdomains.</td>
 </tr>
 </tbody>
 </table>
 
 </br>
 
-## Enable health checks on a host name by creating a health monitor
+## Enable health checks on a subdomain by creating a health monitor
 {: #loadbalancer_hostname_monitor}
 
-Enable health checks on the NLB IP addresses behind a single host name to determine whether they are available or not.
+Enable health checks on the NLB IP addresses behind a single subdomain to determine whether they are available or not.
 {: shortdesc}
 
-Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname_dns).
+Before you begin, [register NLB IPs with a DNS subdomain](#loadbalancer_hostname_dns).
 
-1. Get the name of your host name. In the output, note that the host has a monitor **Status** of `Unconfigured`.
+1. Get the name of your subdomain. In the output, note that the host has a monitor **Status** of `Unconfigured`.
   ```
   ibmcloud ks nlb-dns monitor ls --cluster <cluster_name_or_id>
   ```
@@ -184,7 +184,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   ```
   {: screen}
 
-2. Create a health check monitor for the host name. If you do not include a configuration parameter, the default value is used.
+2. Create a health check monitor for the subdomain. If you do not include a configuration parameter, the default value is used.
   ```
   ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
   ```
@@ -198,15 +198,15 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   <tbody>
   <tr>
   <td><code>-c, --cluster &lt;cluster_name_or_ID&gt;</code></td>
-  <td>Required: The name or ID of the cluster where the host name is registered.</td>
+  <td>Required: The name or ID of the cluster where the subdomain is registered.</td>
   </tr>
   <tr>
   <td><code>--nlb-host &lt;host_name&gt;</code></td>
-  <td>Required: The host name to enable a health check monitor for.</td>
+  <td>Required: The subdomain to enable a health check monitor for.</td>
   </tr>
   <tr>
   <td><code>--enable</code></td>
-  <td>Required: Enable the health check monitor for the host name.</td>
+  <td>Required: Enable the health check monitor for the subdomain.</td>
   </tr>
   <tr>
   <td><code>--description &lt;description&gt;</code></td>
@@ -277,7 +277,7 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
   ```
   {: screen}
 
-4. View the health check status of the NLB IPs that are behind your host name.
+4. View the health check status of the NLB IPs that are behind your subdomain.
   ```
   ibmcloud ks nlb-dns monitor status --cluster <cluster_name_or_id> --nlb-host <host_name>
   ```
@@ -293,21 +293,21 @@ Before you begin, [register NLB IPs with a DNS host name](#loadbalancer_hostname
 
 </br>
 
-### Updating and removing IPs and monitors from host names
+### Updating and removing IPs and monitors from subdomains
 {: #loadbalancer_hostname_delete}
 
-You can add and remove NLB IP addresses from host names that you have generated. You can also disable and enable health check monitors for host names as needed.
+You can add and remove NLB IP addresses from subdomains that you have generated. You can also disable and enable health check monitors for subdomains as needed.
 {: shortdesc}
 
 **NLB IPs**
 
-If you later add more NLBs in other zones of your cluster to expose the same app, you can add the NLB IPs to the existing host name.
+If you later add more NLBs in other zones of your cluster to expose the same app, you can add the NLB IPs to the existing subdomain.
 ```
 ibmcloud ks nlb-dns add --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ... --nlb-host <host_name>
 ```
 {: pre}
 
-You can also remove IP addresses of NLBs that you no longer want to be registered with a host name. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a host name, the host name still exists but no IPs are associated with it.
+You can also remove IP addresses of NLBs that you no longer want to be registered with a subdomain. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it.
 ```
 ibmcloud ks nlb-dns rm --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
 ```
@@ -323,13 +323,13 @@ ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host 
 ```
 {: pre}
 
-You can disable the health check monitor for a host name at any time by running the following command:
+You can disable the health check monitor for a subdomain at any time by running the following command:
 ```
 ibmcloud ks nlb-dns monitor disable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```
 {: pre}
 
-To re-enable a monitor for a host name, run the following command:
+To re-enable a monitor for a subdomain, run the following command:
 ```
 ibmcloud ks nlb-dns monitor enable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```

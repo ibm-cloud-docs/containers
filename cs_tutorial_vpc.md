@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, vpc
 
@@ -406,7 +406,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     <tbody>
     <tr>
     <td><code>expose</code></td>
-    <td>Expose a resource as a Kubernetes service so that users can access the resource by using the VPC load balancer host name.</td>
+    <td>Expose a resource as a Kubernetes service so that users can access the resource by using the VPC load balancer hostname.</td>
     </tr>
     <tr>
     <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
@@ -430,7 +430,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     </tr>
     </tbody></table>
 
-2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the Kubernetes `LoadBalancer` service is created, the **LoadBalancer Ingress** field is populated with a host name that is assigned by the VPC load balancer that is automatically created.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its host name.</p>
+2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the Kubernetes `LoadBalancer` service is created, the **LoadBalancer Ingress** field is populated with a hostname that is assigned by the VPC load balancer that is automatically created.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 
     ```
     kubectl describe service hw-lb-svc
@@ -477,7 +477,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     ```
     {: screen}
 
-4. Curl the host name and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer. Example:
+4. Curl the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer. Example:
     ```
     curl 1234abcd-us-south.lb.appdomain.cloud:8080
     ```
